@@ -1,4 +1,5 @@
+/** @type {import('lint-staged').Config} */
 module.exports = {
-  '**/*.ts?(x)': () => 'yarn type-check',
-  '**/*.(ts|js)?(x)': (filenames) => `yarn lint . ${filenames.join(' ')}`,
-}
+  '**/*.ts?(x)': () => 'npm run type-check',
+  '**/*.(ts|js)?(x)': (filenames) => `npm run lint . ${filenames.join(' ')}`,
+};

@@ -1,7 +1,8 @@
-import React, { MouseEventHandler, useRef, useState } from "react";
-import styled from "styled-components";
-import { getRelativePosition } from "@/utils/dom";
-import { clamp, random } from "@/utils/math";
+import React, { MouseEventHandler, useRef, useState } from 'react';
+import { styled } from 'styled-components';
+
+import { getRelativePosition } from '@/utils/dom';
+import { clamp, random } from '@/utils/math';
 
 type Props = {
   children: React.ReactNode;
@@ -14,40 +15,41 @@ type Props = {
     right?: number;
     bottom?: number;
     left?: number;
-  }
-}
+  };
+};
 
-const Wrap = styled.div<{left: number, top: number}>`
+const Wrap = styled.div<{ left: number; top: number }>`
   display: inline-block;
-  transform: ${props => `translate(${props.left || 0}px, ${props.top || 0}px)`};
+  transform: ${(props) =>
+    `translate(${props.left || 0}px, ${props.top || 0}px)`};
   transition: transform 0.1s ease-in-out;
 `;
 
 const EscapingElement = ({ children, boundingBox }: Props) => {
-  const [position, setPosition] = useState({left: 0, top: 0});
+  const [position, setPosition] = useState({ left: 0, top: 0 });
   const ref = useRef<HTMLDivElement>(null);
 
-  const updatePaymentButtonPosition = (x: number, y: number) => {
+  const updatePaymentButtonPosition = (_x: number, _y: number) => {
     const width = ref.current?.clientWidth || 0;
     const height = ref.current?.clientHeight || 0;
     setPosition({
       left: clamp(
         random(width / -2, width + width / 2),
         boundingBox?.left || -Infinity,
-        boundingBox?.right || Infinity
+        boundingBox?.right || Infinity,
       ),
       top: clamp(
         random(height / -2, height + height / 2),
         boundingBox?.top || -Infinity,
-        boundingBox?.bottom || Infinity
-      )
+        boundingBox?.bottom || Infinity,
+      ),
     });
-  }
+  };
 
   const onMouseEvent: MouseEventHandler<HTMLDivElement> = (e) => {
     const position = getRelativePosition(document.body, e.currentTarget);
     updatePaymentButtonPosition(e.clientX - position.x, e.clientY - position.y);
-  }
+  };
 
   return (
     <Wrap
@@ -55,11 +57,10 @@ const EscapingElement = ({ children, boundingBox }: Props) => {
       onClick={onMouseEvent}
       left={position.left}
       top={position.top}
-      ref={ref}
-      >
+      ref={ref}>
       {children}
     </Wrap>
   );
-}
+};
 
-export default EscapingElement
+export default EscapingElement;

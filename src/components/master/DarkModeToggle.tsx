@@ -1,11 +1,12 @@
-import styled from "styled-components";
-import { selectDarkMode, setDarkMode } from "@/redux/stores/preference";
-import { useAppDispatch, useAppSelector } from "@/redux/hooks";
-import { cssVars } from "@/styles/theme";
+import { styled } from 'styled-components';
+
+import { selectDarkMode, setDarkMode } from '@/redux/stores/preference';
+import { useAppDispatch, useAppSelector } from '@/redux/hooks';
+import { cssVars } from '@/styles/theme';
 
 type Props = {
   className?: string;
-}
+};
 
 const SelectorOption = styled.span`
   flex-grow: 1;
@@ -15,7 +16,7 @@ const SelectorOption = styled.span`
 `;
 const InDarkMode = styled(SelectorOption)``;
 const InDayMode = styled(SelectorOption)``;
-const Toggler = styled.div<{isDarkMode: boolean}>`
+const Toggler = styled.div<{ isDarkMode: boolean }>`
   position: relative;
   display: flex;
   justify-content: space-between;
@@ -25,19 +26,19 @@ const Toggler = styled.div<{isDarkMode: boolean}>`
   border: 1px solid ${cssVars.color.secondary};
   border-radius: 10px;
   &:before {
-    content: "";
+    content: '';
     position: absolute;
     width: 50%;
     background: ${cssVars.color.secondary};
     height: 100%;
     border-radius: 10px;
     transition: all 0.1s ease-in-out;
-    transform: translateX(${props => (props.isDarkMode ? "0" : "100%")});
+    transform: translateX(${(props) => (props.isDarkMode ? '0' : '100%')});
   }
 `;
 
 const DarkModeToggle = ({ className }: Props) => {
-  const dispatch = useAppDispatch()
+  const dispatch = useAppDispatch();
   const isDarkMode = useAppSelector(selectDarkMode);
 
   const toggleDarkMode = () => {
@@ -48,12 +49,15 @@ const DarkModeToggle = ({ className }: Props) => {
     <Toggler
       className={className}
       onClick={toggleDarkMode}
-      isDarkMode={isDarkMode}
-    >
-      <InDayMode role="img" aria-label="sun">☀️</InDayMode>
-      <InDarkMode role="img" aria-label="moon">🌙</InDarkMode>
+      isDarkMode={isDarkMode}>
+      <InDayMode role="img" aria-label="sun">
+        ☀️
+      </InDayMode>
+      <InDarkMode role="img" aria-label="moon">
+        🌙
+      </InDarkMode>
     </Toggler>
   );
-}
+};
 
 export default DarkModeToggle;

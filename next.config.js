@@ -1,9 +1,4 @@
-/**
- * @type {import('next').NextConfig}
- */
- const nextConfig = {
+/** @type {import('next').NextConfig} **/
+module.exports = {
   poweredByHeader: false,
-  swcMinify: true,
-}
-
-module.exports = nextConfig
+};

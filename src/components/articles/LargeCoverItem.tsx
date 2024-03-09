@@ -1,14 +1,16 @@
-import styled from "styled-components";
-import Link from "next/link";
-import Image from "next/image";
-import { ArticleCore } from "@/types"
-import CoverPlaceholder from "./CoverPlaceholder";
-import { cssVars } from "@/styles/theme";
+import { styled } from 'styled-components';
+import Link from 'next/link';
+import Image from 'next/image';
 
-const AnchorWrap = styled.a`
+import { ArticleCore } from '@/types';
+import { cssVars } from '@/styles/theme';
+
+import CoverPlaceholder from './CoverPlaceholder';
+
+const Anchor = styled(Link)`
   display: block;
   position: relative;
-`
+`;
 const OverlayLabels = styled.div`
   position: absolute;
   display: flex;
@@ -31,32 +33,33 @@ const Intro = styled.p`
   font-size: ${cssVars.fontSize.large};
   background: ${cssVars.color.secondary};
   color: ${cssVars.color.onSecondary};
-`
+`;
 
 type Props = {
-  article: ArticleCore
-}
+  article: ArticleCore;
+};
 
 const LargeCoverItem = ({ article }: Props) => {
-  return <>
-    <Link href={article.url} passHref>
-      <AnchorWrap>
+  return (
+    <>
+      <Anchor href={article.url} passHref>
         {!article.coverImage && <CoverPlaceholder width={1920} height={1200} />}
-        {article.coverImage &&
+        {article.coverImage && (
           <Image
             src={article.coverImage}
+            alt="Cover image"
             layout="responsive"
             width="1920"
             height="1200"
           />
-        }
+        )}
         <OverlayLabels>
           <Title>{article.title}</Title>
           <Intro>{article.intro}</Intro>
         </OverlayLabels>
-      </AnchorWrap>
-    </Link>
-  </>
-}
+      </Anchor>
+    </>
+  );
+};
 
 export default LargeCoverItem;

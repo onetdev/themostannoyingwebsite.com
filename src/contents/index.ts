@@ -1,4 +1,5 @@
 import { Article } from '@/types';
+
 import DummyArticle from './articles/dummy-article';
 import InusLikely from './articles/inus-likely';
 import MonkeyAttack from './articles/monkey-attack';

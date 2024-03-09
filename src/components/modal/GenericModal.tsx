@@ -1,21 +1,22 @@
-import { useEffect } from "react";
-import styled from "styled-components";
-import { cssVars } from "@/styles/theme";
+import { ReactNode, useCallback, useEffect } from 'react';
+import { styled } from 'styled-components';
 
-export type Props = {
-  children: React.ReactChild,
-  show: boolean,
-  handleClose: () => void,
-  closeOnEsc?: boolean,
-  closeOnClickOutside?: boolean,
-}
+import { cssVars } from '@/styles/theme';
+
+export type GenericModalProps = {
+  children: ReactNode;
+  show: boolean;
+  onClose?: () => void;
+  closeOnEsc?: boolean;
+  closeOnClickOutside?: boolean;
+};
 
 const Dimmer = styled.div`
   position: fixed;
   display: flex;
   top: 0;
   left: 0;
-  width:100%;
+  width: 100%;
   height: 100%;
   z-index: 100;
   backdrop-filter: blur(10px);
@@ -23,7 +24,9 @@ const Dimmer = styled.div`
   padding: ${cssVars.spacing.gap2x} ${cssVars.spacing.gap};
   justify-content: center;
   align-items: center;
-  transition: opacity 0.3s, visibility 0.3s;
+  transition:
+    opacity 0.3s,
+    visibility 0.3s;
   &.modal-show {
     opacity: 1;
     visibility: visible;
@@ -42,29 +45,30 @@ const Dimmer = styled.div`
 const GenericModal = ({
   children,
   show,
-  handleClose,
+  onClose,
   closeOnEsc = true,
   closeOnClickOutside = true,
-}: Props) => {
-  const handleKeyDown = (e: KeyboardEvent) => {
-    if (closeOnEsc && e.key === "Escape") {
-      handleClose();
-    }
-  }
+}: GenericModalProps) => {
+  const handleKeyDown = useCallback(
+    (e: KeyboardEvent) => {
+      if (!closeOnEsc || e.key !== 'Escape') return;
+      onClose?.();
+    },
+    [closeOnEsc, onClose],
+  );
 
   useEffect(() => {
-    document.addEventListener("keydown", handleKeyDown);
-    return () => document.removeEventListener("keydown", handleKeyDown);
-  }, [])
+    document.addEventListener('keydown', handleKeyDown);
+    return () => document.removeEventListener('keydown', handleKeyDown);
+  }, [handleKeyDown]);
 
   return (
     <Dimmer
       className={show ? 'modal-show' : 'modal-hide'}
-      onClick={() => closeOnClickOutside ? handleClose() : null}
-      >
+      onClick={() => closeOnClickOutside && onClose?.()}>
       {children}
     </Dimmer>
   );
-}
+};
 
 export default GenericModal;

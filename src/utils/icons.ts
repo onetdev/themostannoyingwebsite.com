@@ -8,11 +8,13 @@ import {
   faTimes,
 } from '@fortawesome/free-solid-svg-icons';
 
-export default function() {
+const generator = function () {
   library.add(faCommentDots);
   library.add(faTimes);
   library.add(faTags);
   library.add(faMapMarkerAlt);
   library.add(faPaperPlane);
-  library.add(faPlayCircle)
-}
+  library.add(faPlayCircle);
+};
+
+export default generator;

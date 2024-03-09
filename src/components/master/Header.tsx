@@ -1,17 +1,20 @@
-import styled from 'styled-components';
+import { styled } from 'styled-components';
 import Link from 'next/link';
-import DarkModeToggle from './DarkModeToggle';
-import Marquee from '../navigation/Marquee';
-import MainNavigation from '../navigation/MainNavigation';
-import UserNavigation from '../navigation/UserNavigation';
+
 import { cssVars } from '@/styles/theme';
+import Marquee from '@/components/navigation/Marquee';
+import MainNavigation from '@/components/navigation/MainNavigation';
+import UserNavigation from '@/components/navigation/UserNavigation';
+
+import DarkModeToggle from './DarkModeToggle';
 
 const StyledHeader = styled.header`
   display: grid;
   padding: ${cssVars.spacing.gap} 0;
-  grid-template: "title    dark-toggle"
-                 "main-nav user-nav"
-                 "marquee  marquee";
+  grid-template:
+    'title    dark-toggle'
+    'main-nav user-nav'
+    'marquee  marquee';
 `;
 const Title = styled.h1`
   margin: 0;
@@ -40,7 +43,7 @@ const Header = () => {
     <StyledHeader>
       <Title>
         <Link href="/">
-          <a>The <i>MAW</i></a>
+          The <i>MAW</i>
         </Link>
       </Title>
       <StyledDarkModeToggle />

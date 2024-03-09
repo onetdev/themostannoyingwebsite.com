@@ -1,9 +1,11 @@
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { useState } from "react";
-import styled, { keyframes } from "styled-components";
-import { cssVars } from "@/styles/theme";
-import GenericModal from "../modal/GenericModal";
-import ModalContent from "./ModalContent";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { useState } from 'react';
+import { styled, keyframes } from 'styled-components';
+
+import { cssVars } from '@/styles/theme';
+import GenericModal from '@/components/modal/GenericModal';
+
+import ModalContent from './ModalContent';
 
 const zIndexBase = 30;
 
@@ -15,7 +17,7 @@ const wiggleAnim = keyframes`
   96% { transform: rotate(8deg); }
   98% { transform: rotate(-8deg); }
   100% { transform: rotate(0deg); }
-`
+`;
 const Wrap = styled.div`
   position: fixed;
   left: 0;
@@ -47,22 +49,18 @@ const ActionButton = () => {
     <Wrap>
       <GenericModal
         show={isOpen}
-        handleClose={() => setIsOpen(false)}
+        onClose={() => setIsOpen(false)}
         closeOnClickOutside={false}
-        closeOnEsc
-      >
-        <div
-          onClick={(e) => e.stopPropagation()}
-          hidden={!isOpen}
-        >
+        closeOnEsc>
+        <div onClick={(e) => e.stopPropagation()} hidden={!isOpen}>
           <ModalContent onClose={() => setIsOpen(false)} />
         </div>
       </GenericModal>
       <Icon onClick={() => setIsOpen(true)}>
-        <FontAwesomeIcon icon={['fas', 'tags']}/>
+        <FontAwesomeIcon icon={['fas', 'tags']} />
       </Icon>
     </Wrap>
-  )
-}
+  );
+};
 
 export default ActionButton;

@@ -1,20 +1,25 @@
-import { useState } from "react";
-import { ThemeProvider } from "styled-components";
-import { selectDarkMode } from "@/redux/stores/preference";
-import { DarkTheme, DarkThemeStyle, LightTheme, LightThemeStyle } from "@/styles/theme";
-import { useBeforeUnload } from "react-use";
-import MatomoProvider from '@/components/analitics/MatomoProvider';
+import { useState } from 'react';
+import { ThemeProvider } from 'styled-components';
+import { useBeforeUnload } from 'react-use';
 import { Provider as ReduxProvider } from 'react-redux';
-import { PersistGate } from 'redux-persist/integration/react';
-import redux from '@/redux/store';
+import { PersistGate } from '@photobot/reduxjs-toolkit-persist/lib/integration/react';
+
+import {
+  DarkTheme,
+  DarkThemeStyle,
+  LightTheme,
+  LightThemeStyle,
+} from '@/styles/theme';
+import { selectDarkMode } from '@/redux/stores/preference';
+import * as redux from '@/redux/store';
 import registerIcons from '@/utils/icons';
 import useFirstInteraction from '@/hooks/useFirstInteraction';
 import useInFocusMeter from '@/hooks/useInFocusMeter';
-import { selectExitPrompt } from "@/redux/stores/experience";
+import { selectExitPrompt } from '@/redux/stores/experience';
 
 type Props = {
-  children: React.ReactNode
-}
+  children: React.ReactNode;
+};
 
 const Provider = ({ children }: Props) => {
   const [isDarkMode, setDarkMode] = useState(false);
@@ -40,22 +45,20 @@ const Provider = ({ children }: Props) => {
 
   useBeforeUnload(
     exitPrompt,
-    `I'd reconsider leaving before some bad things happend to you. Are you sure?`
+    `I'd reconsider leaving before some bad things happend to you. Are you sure?`,
   );
 
   return (
     <ReduxProvider store={redux.store}>
       <PersistGate loading={null} persistor={redux.persistor}>
-        <MatomoProvider>
-          {isDarkMode && <DarkThemeStyle />}
-          {!isDarkMode && <LightThemeStyle />}
-          <ThemeProvider theme={isDarkMode ? DarkTheme : LightTheme}>
-            {children}
-          </ThemeProvider>
-        </MatomoProvider>
+        {isDarkMode && <DarkThemeStyle />}
+        {!isDarkMode && <LightThemeStyle />}
+        <ThemeProvider theme={isDarkMode ? DarkTheme : LightTheme}>
+          {children}
+        </ThemeProvider>
       </PersistGate>
     </ReduxProvider>
-  )
-}
+  );
+};
 
-export default Provider
+export default Provider;

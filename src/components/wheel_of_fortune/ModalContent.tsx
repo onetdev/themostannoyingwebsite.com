@@ -1,17 +1,19 @@
-import { useAppSelector } from '@/redux/hooks';
-import { selectEnableFlashing } from '@/redux/stores/preference';
-import { getWeightedRandom, random } from '@/utils/math';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useState } from 'react';
-import Confetti from 'react-confetti'
-import styled from 'styled-components';
+import Confetti from 'react-confetti';
+import { styled } from 'styled-components';
+
+import { getWeightedRandom } from '@/utils/math';
+import { selectEnableFlashing } from '@/redux/stores/preference';
+import { useAppSelector } from '@/redux/hooks';
 import { cssVars } from '@/styles/theme';
+
 import AnimatedWheel, { AnimatedWheelState } from './AnimatedWheel';
 import { Item } from './Wheel';
 
 type Props = {
   onClose: () => void;
-}
+};
 
 const Wrap = styled.div`
   background: ${cssVars.color.surface};
@@ -34,19 +36,20 @@ const ConfettiWrap = styled.div`
 `;
 const CloseIcon = styled.div`
   position: absolute;
-  top: 0; right: 0;
+  top: 0;
+  right: 0;
   padding: ${cssVars.spacing.gap};
   cursor: pointer;
   z-index: 1;
 `;
 
 const prizeWithWeight = [
-  {value: 'Free lifetime beer*', prob: 10},
-  {value: 'World peace*', prob: 1},
-  {value: 'Absolutelly nothing', prob: 100},
-  {value: 'Complimentary otter*', prob: 2},
-  {value: 'Fake 70% discount', prob: 50},
-]
+  { value: 'Free lifetime beer*', prob: 10 },
+  { value: 'World peace*', prob: 1 },
+  { value: 'Absolutelly nothing', prob: 100 },
+  { value: 'Complimentary otter*', prob: 2 },
+  { value: 'Fake 70% discount', prob: 50 },
+];
 
 const getItems = (hueStart: number, hueEnd: number, numItems: number) => {
   const items: Item[] = [];
@@ -60,7 +63,7 @@ const getItems = (hueStart: number, hueEnd: number, numItems: number) => {
   }
 
   return items;
-}
+};
 
 const ModalContent = ({ onClose }: Props) => {
   const flashing = useAppSelector(selectEnableFlashing);
@@ -74,31 +77,23 @@ const ModalContent = ({ onClose }: Props) => {
       <CloseIcon onClick={() => onClose()}>
         <FontAwesomeIcon icon={['fas', 'times']} />
       </CloseIcon>
-      {state === 'completed' &&
+      {state === 'completed' && (
         <ConfettiWrap>
-          <Confetti
-            numberOfPieces={100}
-            width={500}
-            height={500}
-          />
+          <Confetti numberOfPieces={100} width={500} height={500} />
         </ConfettiWrap>
-      }
+      )}
 
       <AnimatedWheel
         flashing={flashing}
         items={items}
         onStateChange={(newState) => setState(newState)}
         onSpinCompleted={(newPrize) => setPrize(newPrize)}
-        />
+      />
 
-      {state !== 'completed' &&
-        <Label>Let's spin the wheel!!</Label>
-      }
-      {(state === 'completed' && prize) &&
-        <Label>You won! {prize.text}</Label>
-      }
+      {state !== 'completed' && <Label>Let&apos;s spin the wheel!!</Label>}
+      {state === 'completed' && prize && <Label>You won! {prize.text}</Label>}
     </Wrap>
-  )
-}
+  );
+};
 
 export default ModalContent;

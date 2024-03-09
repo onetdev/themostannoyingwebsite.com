@@ -1,6 +1,7 @@
-import { ClearListStyle } from "@/utils/styles";
-import styled from "styled-components";
-import { cssVars } from "@/styles/theme";
+import { styled } from 'styled-components';
+
+import { ClearListStyle } from '@/utils/styles';
+import { cssVars } from '@/styles/theme';
 
 export const Menu = styled.ul`
   ${ClearListStyle}

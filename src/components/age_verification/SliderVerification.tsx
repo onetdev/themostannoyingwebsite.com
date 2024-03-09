@@ -19,7 +19,7 @@ const SliderVerification = () => {
       <input type="range" min="0" max="2200" value="2020" />
       <select>
         {months.map((month) => (
-          <option>{month}</option>
+          <option key={month}>{month}</option>
         ))}
       </select>
       <input type="range" min="1" max="31" value="31" />

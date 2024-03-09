@@ -1,11 +1,13 @@
-import Link from "next/link";
-import { useState } from "react";
-import ShareModal from "../modal/ShareModal";
-import { Menu, MenuItem } from "./GenericMenu";
+import Link from 'next/link';
+import { useState } from 'react';
+
+import ShareModal from '@/components/modal/ShareModal';
+
+import { Menu, MenuItem } from './GenericMenu';
 
 type Props = {
   className?: string;
-}
+};
 
 const UserNavigation = ({ className }: Props) => {
   const [showShareModal, setShowShareModal] = useState(false);
@@ -18,9 +20,7 @@ const UserNavigation = ({ className }: Props) => {
       />
       <Menu>
         <MenuItem>
-          <Link href="/settings">
-            <a>Settings</a>
-          </Link>
+          <Link href="/settings">Settings</Link>
         </MenuItem>
         <MenuItem>
           <span onClick={() => setShowShareModal(true)}>Share</span>

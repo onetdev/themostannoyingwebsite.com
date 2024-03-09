@@ -1,26 +1,28 @@
-import ActionModal from "./ActionModal";
+import ActionModal from './ActionModal';
 
 type Props = {
-  show: boolean,
-  handleClose: () => void,
-}
+  show: boolean;
+  handleClose: () => void;
+};
 
-const ShareModal = ({show, handleClose}: Props) => {
-  const actions = <>
-    <button onClick={() => {}}>Facebook</button>
-    <button onClick={() => {}}>Twitter</button>
-  </>
+const ShareModal = ({ show, handleClose }: Props) => {
+  const actions = (
+    <>
+      <button onClick={() => {}}>Facebook</button>
+      <button onClick={() => {}}>Twitter</button>
+    </>
+  );
 
   return (
     <ActionModal
       title="Share"
       actions={actions}
       show={show}
-      handleClose={handleClose}
-    >
-      Sharing is caring, please show this awefully anoying website to your friends.
+      onClose={handleClose}>
+      Sharing is caring, please show this awefully anoying website to your
+      friends.
     </ActionModal>
-  )
-}
+  );
+};
 
 export default ShareModal;
