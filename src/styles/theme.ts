@@ -21,6 +21,7 @@ const breakpoints = {
 const cssRulePrefix = '@media screen and';
 const cssRuleMinMax = (min: string, max: string) =>
   `(min-width: ${min}) and (max-width: ${max})`;
+
 export const cssRule = {
   // Strictly targeted dimensions
   xs: `${cssRulePrefix} ${cssRuleMinMax(breakpoints.xs, breakpoints.sm)}`,

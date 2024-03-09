@@ -1,7 +1,7 @@
 import { styled } from 'styled-components';
 
 import { cssRule, cssVars } from '@/styles/theme';
-import { ClearListStyle } from '@/utils/styles';
+import { ClearListStyle } from '@/styles/utils';
 import TextListItem from '@/components/articles/TextListItem';
 import SmallCoverListItem from '@/components/articles/SmallCoverListItem';
 import LargeCoverItem from '@/components/articles/LargeCoverItem';
