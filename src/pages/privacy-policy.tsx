@@ -1,3 +1,5 @@
+import config from '@/config';
+
 // Privacy policy inspired by https://matomo.org/privacy-policy/
 export default function PrivacyPolicy() {
   return (
@@ -18,10 +20,7 @@ export default function PrivacyPolicy() {
           https://github.com/onetdev/themostannoyingwebsite.com
         </a>
         . If you have any questions about this privacy policy, please contact us
-        at{' '}
-        <a href="mailto:info@themostannoyingwebsite.com">
-          info@themostannoyingwebsite.com
-        </a>{' '}
+        at <a href={`mailto:${config.contactEmail}`}>{config.contactEmail}</a>{' '}
         email. We don&apos;t sell your personal data to anyone.
       </p>
       <h3>What we collect</h3>
@@ -62,10 +61,8 @@ export default function PrivacyPolicy() {
         site and/or service. To exercise any of the rights mentioned in this
         Privacy Policy and/or in the event of questions or comments relating to
         the use of Personal Data you may contact us:{' '}
-        <a href="mailto:info@themostannoyingwebsite.com">
-          info@themostannoyingwebsite.com
-        </a>
-        . In addition, you have the right to lodge a complaint with the data
+        <a href={`mailto:${config.contactEmail}`}>{config.contactEmail}</a>. In
+        addition, you have the right to lodge a complaint with the data
         protection authority in your jurisdiction.
       </p>
       <h3>Third party services we use</h3>
@@ -120,9 +117,7 @@ export default function PrivacyPolicy() {
       <h3>Contact Us</h3>
       <p>
         E-Mail:{' '}
-        <a href="mailto:info@themostannoyingwebsite.com">
-          info@themostannoyingwebsite.com
-        </a>
+        <a href={`mailto:${config.contactEmail}`}>{config.contactEmail}</a>
       </p>
     </main>
   );
