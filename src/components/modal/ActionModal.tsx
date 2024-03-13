@@ -1,12 +1,16 @@
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import styled from "styled-components";
-import { cssVars } from "@/styles/theme";
-import GenericModal, { Props as GenericProps} from './GenericModal';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { styled } from 'styled-components';
+
+import { cssVars } from '@/styles/theme';
+
+import GenericModal, {
+  GenericModalProps as GenericProps,
+} from './GenericModal';
 
 type Props = GenericProps & {
-  title: string,
-  actions?: React.ReactChild,
-}
+  title: string;
+  actions?: React.ReactChild;
+};
 
 const Wrap = styled.div`
   background: ${cssVars.color.background};
@@ -42,26 +46,24 @@ const Actions = styled.div`
 const ActionModal = ({
   title,
   children,
-  handleClose,
+  onClose: handleClose,
   actions,
   ...proxiedProps
 }: Props) => {
   return (
-    <GenericModal {...proxiedProps} handleClose={handleClose}>
+    <GenericModal {...proxiedProps} onClose={handleClose}>
       <Wrap onClick={(e) => e.stopPropagation()}>
         <Header>
           <Title>{title}</Title>
           <CloseButton onClick={handleClose}>
-            <FontAwesomeIcon icon={["fas", "times"]} />
+            <FontAwesomeIcon icon={['fas', 'times']} />
           </CloseButton>
         </Header>
-        <Content>
-          {children}
-        </Content>
+        <Content>{children}</Content>
         {actions && <Actions>{actions}</Actions>}
       </Wrap>
     </GenericModal>
   );
-}
+};
 
 export default ActionModal;

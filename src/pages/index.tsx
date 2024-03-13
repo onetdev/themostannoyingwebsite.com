@@ -1,17 +1,18 @@
-import { cssRule, cssVars } from "@/styles/theme";
-import styled from "styled-components";
-import { ClearListStyle } from "@/utils/styles";
-import TextListItem from "@/components/articles/TextListItem";
-import SmallCoverListItem from "@/components/articles/SmallCoverListItem";
-import LargeCoverItem from "@/components/articles/LargeCoverItem";
-import ArticleService from "@/services/ArticleService";
+import { styled } from 'styled-components';
+
+import { cssRule, cssVars } from '@/styles/theme';
+import { ClearListStyle } from '@/styles/utils';
+import TextListItem from '@/components/articles/TextListItem';
+import SmallCoverListItem from '@/components/articles/SmallCoverListItem';
+import LargeCoverItem from '@/components/articles/LargeCoverItem';
+import ArticleService from '@/services/ArticleService';
 
 const Grid = styled.main`
   display: grid;
   gap: ${cssVars.spacing.gap};
-  grid-template-areas: "cover" "dense-list" "list";
+  grid-template-areas: 'cover' 'dense-list' 'list';
   ${cssRule.mdUp} {
-    grid-template-areas: "cover dense-list" "list  list";
+    grid-template-areas: 'cover dense-list' 'list  list';
     grid-template-columns: 4fr 1fr;
   }
 `;
@@ -27,7 +28,7 @@ const DenseListItem = styled.li`
   position: relative;
   padding-bottom: ${cssVars.spacing.gap2x};
   &::after {
-    content: "";
+    content: '';
     position: absolute;
     border-bottom: 1px solid ${cssVars.color.secondary};
     left: ${cssVars.spacing.gap};
@@ -56,9 +57,12 @@ const RegularListItem = styled.li`
 `;
 
 export default function Index() {
-  const coverArticle = ArticleService.getAllFiltered({isOnCover: true})[0];
-  const articlePool = ArticleService.getAllFiltered({isOnCover: false}).slice(0,12);
-  const denseList = articlePool.slice(0,3);
+  const coverArticle = ArticleService.getAllFiltered({ isOnCover: true })[0];
+  const articlePool = ArticleService.getAllFiltered({ isOnCover: false }).slice(
+    0,
+    12,
+  );
+  const denseList = articlePool.slice(0, 3);
   const regularList = articlePool.slice(3);
 
   return (
@@ -67,22 +71,18 @@ export default function Index() {
         <LargeCoverItem article={coverArticle} />
       </CoverArticle>
       <DenseList>
-        {
-          denseList.map((article, index) => (
-            <DenseListItem key={index}>
-              <TextListItem article={article} />
-            </DenseListItem>
-          ))
-        }
+        {denseList.map((article, index) => (
+          <DenseListItem key={index}>
+            <TextListItem article={article} />
+          </DenseListItem>
+        ))}
       </DenseList>
       <RegularList>
-        {
-          regularList.map((article, index) => (
-            <RegularListItem key={index}>
-              <SmallCoverListItem article={article} />
-            </RegularListItem>
-          ))
-        }
+        {regularList.map((article, index) => (
+          <RegularListItem key={index}>
+            <SmallCoverListItem article={article} />
+          </RegularListItem>
+        ))}
       </RegularList>
     </Grid>
   );

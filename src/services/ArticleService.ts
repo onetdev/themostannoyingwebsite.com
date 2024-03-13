@@ -1,7 +1,8 @@
-import { articles as articlesRaw } from '@/contents';
-import { Article, ArticleStatic } from '@/types';
 import ReactDOMServer from 'react-dom/server';
 import slugify from 'slugify';
+
+import { articles as articlesRaw } from '@/contents';
+import { Article, ArticleStatic } from '@/types';
 
 interface ArticleFilter {
   isHighlighted?: boolean;
@@ -13,14 +14,20 @@ interface ArticleSort {
   title?: 'asc' | 'desc';
 }
 
-const propFilterBool = (article: Article, prop: keyof Article, value?: boolean) => {
-  return article[prop] === value
-    || typeof value === 'undefined'
-    || (article[prop] === undefined && value !== true)
-}
+const propFilterBool = (
+  article: Article,
+  prop: keyof Article,
+  value?: boolean,
+) => {
+  return (
+    article[prop] === value ||
+    typeof value === 'undefined' ||
+    (article[prop] === undefined && value !== true)
+  );
+};
 
 // Normalize raw article data se we have many optional fields in there.
-const articles = articlesRaw.map(article => ({
+const articles = articlesRaw.map((article) => ({
   ...article,
   slug: slugify(article.title),
   url: `/articles/${slugify(article.title)}`,
@@ -33,22 +40,21 @@ class ArticleService {
     return articles;
   }
 
-  public getAllFiltered(
-    filter: ArticleFilter,
-    sort?: ArticleSort,
-  ): Article[] {
+  public getAllFiltered(filter: ArticleFilter, sort?: ArticleSort): Article[] {
     const results = articles.filter((article) => {
-      return propFilterBool(article, 'isHighlighted', filter.isHighlighted)
-      && propFilterBool(article, 'isOnCover', filter.isOnCover);
+      return (
+        propFilterBool(article, 'isHighlighted', filter.isHighlighted) &&
+        propFilterBool(article, 'isOnCover', filter.isOnCover)
+      );
     });
 
     if (sort) {
       return results.sort((a, b) => {
         const dateCmp = sort.date
-          ? (a.date.getTime() - b.date.getTime() * (sort.date === 'asc' ? 1 : -1))
+          ? a.date.getTime() - b.date.getTime() * (sort.date === 'asc' ? 1 : -1)
           : 0;
         const titleCmp = sort.title
-          ? (a.title.localeCompare(b.title) * (sort.title === 'asc' ? 1 : -1))
+          ? a.title.localeCompare(b.title) * (sort.title === 'asc' ? 1 : -1)
           : 0;
 
         return dateCmp == 0 ? titleCmp : dateCmp;
@@ -71,4 +77,5 @@ class ArticleService {
   }
 }
 
-export default new ArticleService();
+const ArticleServiceSingleton = new ArticleService();
+export default ArticleServiceSingleton;

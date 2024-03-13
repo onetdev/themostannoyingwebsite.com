@@ -1,4 +1,4 @@
-import { createGlobalStyle } from "styled-components";
+import { createGlobalStyle } from 'styled-components';
 
 // Using styled-components provided theme is great and all but I'm losing
 // in-browser variable modifications. It's easy to get the current OS
@@ -10,17 +10,18 @@ import { createGlobalStyle } from "styled-components";
 // https://material.io/design/color/the-color-system.html#color-theme-creation
 
 const breakpoints = {
-  xs: "0",
-  sm: "576px",
-  md: "768px",
-  lg: "992px",
-  xl: "1200px",
-  xxl: "1400px"
-}
+  xs: '0',
+  sm: '576px',
+  md: '768px',
+  lg: '992px',
+  xl: '1200px',
+  xxl: '1400px',
+};
 
 const cssRulePrefix = '@media screen and';
-const cssRuleMinMax =
-  (min: string, max: string) => `(min-width: ${min}) and (max-width: ${max})`;
+const cssRuleMinMax = (min: string, max: string) =>
+  `(min-width: ${min}) and (max-width: ${max})`;
+
 export const cssRule = {
   // Strictly targeted dimensions
   xs: `${cssRulePrefix} ${cssRuleMinMax(breakpoints.xs, breakpoints.sm)}`,
@@ -43,53 +44,52 @@ export const cssRule = {
   lgDown: `${cssRulePrefix} (max-width: ${breakpoints.xl})`,
   xlDown: `${cssRulePrefix} (max-width: ${breakpoints.xxl})`,
   xxlDown: `${cssRulePrefix}`,
-}
-
+};
 
 export const DarkTheme = {
   colors: {
-    background: "#050416",
-    primary: "#00bcd4",
-    primaryAlt: "#00acc1",
-    secondary: "#ffc107",
-    secondaryAlt: "#ffb300",
-    tertiary: "#ff5722",
-    tertiaryAlt: "#ff5722",
-    surface: "#141221",
-    error: "#f44336",
-    onPrimary: "#ffffff",
-    onSecondary: "#000000",
-    onTertiary: "#000000",
-    onBackground: "#fff",
-    onSurface: "#fff",
-    onError: "#fff",
-    dimmer: "#464646b5",
-  }
-}
+    background: '#050416',
+    primary: '#00bcd4',
+    primaryAlt: '#00acc1',
+    secondary: '#ffc107',
+    secondaryAlt: '#ffb300',
+    tertiary: '#ff5722',
+    tertiaryAlt: '#ff5722',
+    surface: '#141221',
+    error: '#f44336',
+    onPrimary: '#ffffff',
+    onSecondary: '#000000',
+    onTertiary: '#000000',
+    onBackground: '#fff',
+    onSurface: '#fff',
+    onError: '#fff',
+    dimmer: '#464646b5',
+  },
+};
 
 export const LightTheme = {
   colors: {
-    background: "#fafafa",
-    primary: "#00b0c0",
-    primaryAlt: "#028aa5",
-    secondary: "#991199",
-    secondaryAlt: "#660159",
-    tertiary: "#ee4917",
-    tertiaryAlt: "#d33d0f",
-    surface: "#f3f5ec",
-    error: "#f44034",
-    onPrimary: "#fff",
-    onSecondary: "#050416",
-    onTertiary: "#050416",
-    onBackground: "#050416",
-    onSurface: "#050416",
-    onError: "#050416",
-    dimmer: "#3a3a3abc",
-  }
-}
+    background: '#fafafa',
+    primary: '#00b0c0',
+    primaryAlt: '#028aa5',
+    secondary: '#991199',
+    secondaryAlt: '#660159',
+    tertiary: '#ee4917',
+    tertiaryAlt: '#d33d0f',
+    surface: '#f3f5ec',
+    error: '#f44034',
+    onPrimary: '#fff',
+    onSecondary: '#050416',
+    onTertiary: '#050416',
+    onBackground: '#050416',
+    onSurface: '#050416',
+    onError: '#050416',
+    dimmer: '#3a3a3abc',
+  },
+};
 
 export interface ThemeProps {
-  colors: Record<string, string>
+  colors: Record<string, string>;
 }
 const createThemeGlobalStyle = ({ colors }: ThemeProps) => {
   return createGlobalStyle`
@@ -112,7 +112,7 @@ const createThemeGlobalStyle = ({ colors }: ThemeProps) => {
       --color-dimmer: ${colors.dimmer};
     }
   `;
-}
+};
 
 export const DarkThemeStyle = createThemeGlobalStyle(DarkTheme);
 export const LightThemeStyle = createThemeGlobalStyle(LightTheme);
@@ -152,6 +152,6 @@ export const cssVars = {
   spacing: {
     gap: 'var(--gap)',
     gap2x: 'calc(var(--gap) * 2)',
-    container: '1200px'
+    container: '1200px',
   },
-}
+};

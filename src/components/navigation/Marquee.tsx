@@ -1,15 +1,16 @@
 import { useState } from 'react';
 import Link from 'next/link';
+import MarqueePlugin from 'react-fast-marquee';
+import { styled, keyframes } from 'styled-components';
+
 import { useAppSelector } from '@/redux/hooks';
 import { selectEnableFlashing } from '@/redux/stores/preference';
 import ArticleService from '@/services/ArticleService';
-import MarqueePlugin from "react-fast-marquee";
-import styled, { keyframes } from "styled-components"
 import { cssVars } from '@/styles/theme';
 
 type Props = {
   className?: string;
-}
+};
 
 const flashingAnim = keyframes`
   0% { background: transparent; }
@@ -27,41 +28,49 @@ const Wrap = styled.div`
   font-size: ${cssVars.fontSize.large};
   z-index: 1;
   overflow: hidden;
-  > * { overflow: hidden; }
+  > * {
+    overflow: hidden;
+  }
 `;
-const LinkText = styled.a<{ highlight: boolean, flashing: boolean }>`
+const Anchor = styled(Link)<{ highlight: boolean; flashing: boolean }>`
   margin: 0 2rem;
   display: inline-block;
   color: ${cssVars.color.background};
   animation-name: ${({ highlight, flashing }) =>
-    highlight ? (flashing ? flashingAnim : highlightAnim) : ''
-  };
+    highlight ? (flashing ? flashingAnim : highlightAnim) : ''};
   animation-duration: 1s;
   animation-iteration-count: infinite;
 `;
 
 const Marquee = ({ className }: Props) => {
   const flashing = useAppSelector(selectEnableFlashing);
-  const [items] = useState(ArticleService.getAllFiltered({isHighlighted: true}));
-  const [speed, setSpeed] = useState(100)
+  const [items] = useState(
+    ArticleService.getAllFiltered({ isHighlighted: true }),
+  );
+  const [speed, setSpeed] = useState(100);
 
-  const onEnter = () => { setSpeed(2000); }
-  const onLeave = () => { setSpeed(100); }
+  const onEnter = () => {
+    setSpeed(2000);
+  };
+  const onLeave = () => {
+    setSpeed(100);
+  };
 
   return (
-    <Wrap
-      className={className}
-      onMouseEnter={onEnter}
-      onMouseLeave={onLeave}
-      >
+    <Wrap className={className} onMouseEnter={onEnter} onMouseLeave={onLeave}>
       <MarqueePlugin gradient={false} speed={speed}>
         {items.map(({ slug, title }, index) => {
           const path = '/articles/' + slug;
-          return <Link href={path} key={index} passHref>
-            <LinkText highlight flashing={flashing}>
+          return (
+            <Anchor
+              href={path}
+              key={index}
+              passHref
+              highlight
+              flashing={flashing}>
               {title}
-            </LinkText>
-          </Link>
+            </Anchor>
+          );
         })}
       </MarqueePlugin>
     </Wrap>

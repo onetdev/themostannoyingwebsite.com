@@ -1,19 +1,20 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit'
-import type { AppState } from '@/redux/store'
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+
+import type { AppState } from '@/redux/store';
 
 export interface RuntimeState {
-  startTime: Date
-  isInFocus: boolean
-  inFocusSeconds: number
-  hasInteracted: boolean
+  startTime: string;
+  isInFocus: boolean;
+  inFocusSeconds: number;
+  hasInteracted: boolean;
 }
 
 const initialState: RuntimeState = {
-  startTime: new Date(),
+  startTime: new Date().toISOString(),
   isInFocus: false,
   inFocusSeconds: 0,
   hasInteracted: false,
-}
+};
 
 /**
  * Runtime stores everyting that won't get persisted. This also includes some
@@ -27,27 +28,23 @@ export const runtime = createSlice({
       state.isInFocus = action.payload;
     },
     setHasInteracted: (state) => {
-      state.hasInteracted = true
+      state.hasInteracted = true;
     },
     setInFocusSeconds: (state, action: PayloadAction<number>) => {
-      state.inFocusSeconds = action.payload
-    }
+      state.inFocusSeconds = action.payload;
+    },
   },
-})
+});
 
-export const {
-  setIsInFocus,
-  setHasInteracted,
-  setInFocusSeconds,
-} = runtime.actions
+export const { setIsInFocus, setHasInteracted, setInFocusSeconds } =
+  runtime.actions;
 
-export const selectStartTime =
-  (state: AppState) => state.runtime.startTime
-export const selectIsInFocus =
-  (state: AppState) => state.runtime.isInFocus
-export const selectHasInteracted =
-  (state: AppState) => state.runtime.hasInteracted
-export const selectInFocusSeconds =
-  (state: AppState) => state.runtime.inFocusSeconds
+export const selectStartTime = (state: AppState) =>
+  new Date(state.runtime.startTime);
+export const selectIsInFocus = (state: AppState) => state.runtime.isInFocus;
+export const selectHasInteracted = (state: AppState) =>
+  state.runtime.hasInteracted;
+export const selectInFocusSeconds = (state: AppState) =>
+  state.runtime.inFocusSeconds;
 
-export default runtime.reducer
+export default runtime.reducer;

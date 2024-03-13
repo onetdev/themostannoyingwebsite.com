@@ -1,4 +1,4 @@
-import { Article } from "@/types";
+import { Article } from '@/types';
 
 export default {
   title: 'Shiba inues are more likely to commit crimes',
@@ -9,49 +9,64 @@ export default {
   body: (
     <>
       <p>
-        Wuff wuff, bark bark. - said the lead officer of the Shiba Inu treaty alliance thingie.
+        Wuff wuff, bark bark. - said the lead officer of the Shiba Inu treaty
+        alliance thingie.
       </p>
       <p>
-        Explicabo, voluptatum debitis aliquam eum quibusdam autem quas error omnis aliquid veritatis culpa provident
-        ratione minima! Quibusdam laboriosam ex eveniet accusantium explicabo, quasi, sequi corporis ducimus,
-        dignissimos recusandae officiis in facilis. Voluptatibus facere eum, corrupti hic quaerat a expedita fugit
-        repellendus! Inventore, perspiciatis. Repellendus, ex minima!
+        Explicabo, voluptatum debitis aliquam eum quibusdam autem quas error
+        omnis aliquid veritatis culpa provident ratione minima! Quibusdam
+        laboriosam ex eveniet accusantium explicabo, quasi, sequi corporis
+        ducimus, dignissimos recusandae officiis in facilis. Voluptatibus facere
+        eum, corrupti hic quaerat a expedita fugit repellendus! Inventore,
+        perspiciatis. Repellendus, ex minima!
       </p>
       <p>
-        Explicabo, voluptatum debitis aliquam eum quibusdam autem quas error omnis aliquid veritatis culpa provident
-        ratione minima! Quibusdam laboriosam ex eveniet accusantium explicabo, quasi, sequi corporis ducimus,
-        dignissimos recusandae officiis in facilis. Voluptatibus facere eum, corrupti hic quaerat a expedita fugit
-        repellendus! Inventore, perspiciatis. Repellendus, ex minima!
+        Explicabo, voluptatum debitis aliquam eum quibusdam autem quas error
+        omnis aliquid veritatis culpa provident ratione minima! Quibusdam
+        laboriosam ex eveniet accusantium explicabo, quasi, sequi corporis
+        ducimus, dignissimos recusandae officiis in facilis. Voluptatibus facere
+        eum, corrupti hic quaerat a expedita fugit repellendus! Inventore,
+        perspiciatis. Repellendus, ex minima!
       </p>
       <p>
-        Explicabo, voluptatum debitis aliquam eum quibusdam autem quas error omnis aliquid veritatis culpa provident
-        ratione minima! Quibusdam laboriosam ex eveniet accusantium explicabo, quasi, sequi corporis ducimus,
-        dignissimos recusandae officiis in facilis. Voluptatibus facere eum, corrupti hic quaerat a expedita fugit
-        repellendus! Inventore, perspiciatis. Repellendus, ex minima!
+        Explicabo, voluptatum debitis aliquam eum quibusdam autem quas error
+        omnis aliquid veritatis culpa provident ratione minima! Quibusdam
+        laboriosam ex eveniet accusantium explicabo, quasi, sequi corporis
+        ducimus, dignissimos recusandae officiis in facilis. Voluptatibus facere
+        eum, corrupti hic quaerat a expedita fugit repellendus! Inventore,
+        perspiciatis. Repellendus, ex minima!
       </p>
       <p>
-        Explicabo, voluptatum debitis aliquam eum quibusdam autem quas error omnis aliquid veritatis culpa provident
-        ratione minima! Quibusdam laboriosam ex eveniet accusantium explicabo, quasi, sequi corporis ducimus,
-        dignissimos recusandae officiis in facilis. Voluptatibus facere eum, corrupti hic quaerat a expedita fugit
-        repellendus! Inventore, perspiciatis. Repellendus, ex minima!
+        Explicabo, voluptatum debitis aliquam eum quibusdam autem quas error
+        omnis aliquid veritatis culpa provident ratione minima! Quibusdam
+        laboriosam ex eveniet accusantium explicabo, quasi, sequi corporis
+        ducimus, dignissimos recusandae officiis in facilis. Voluptatibus facere
+        eum, corrupti hic quaerat a expedita fugit repellendus! Inventore,
+        perspiciatis. Repellendus, ex minima!
       </p>
       <p>
-        Explicabo, voluptatum debitis aliquam eum quibusdam autem quas error omnis aliquid veritatis culpa provident
-        ratione minima! Quibusdam laboriosam ex eveniet accusantium explicabo, quasi, sequi corporis ducimus,
-        dignissimos recusandae officiis in facilis. Voluptatibus facere eum, corrupti hic quaerat a expedita fugit
-        repellendus! Inventore, perspiciatis. Repellendus, ex minima!
+        Explicabo, voluptatum debitis aliquam eum quibusdam autem quas error
+        omnis aliquid veritatis culpa provident ratione minima! Quibusdam
+        laboriosam ex eveniet accusantium explicabo, quasi, sequi corporis
+        ducimus, dignissimos recusandae officiis in facilis. Voluptatibus facere
+        eum, corrupti hic quaerat a expedita fugit repellendus! Inventore,
+        perspiciatis. Repellendus, ex minima!
       </p>
       <p>
-        Explicabo, voluptatum debitis aliquam eum quibusdam autem quas error omnis aliquid veritatis culpa provident
-        ratione minima! Quibusdam laboriosam ex eveniet accusantium explicabo, quasi, sequi corporis ducimus,
-        dignissimos recusandae officiis in facilis. Voluptatibus facere eum, corrupti hic quaerat a expedita fugit
-        repellendus! Inventore, perspiciatis. Repellendus, ex minima!
+        Explicabo, voluptatum debitis aliquam eum quibusdam autem quas error
+        omnis aliquid veritatis culpa provident ratione minima! Quibusdam
+        laboriosam ex eveniet accusantium explicabo, quasi, sequi corporis
+        ducimus, dignissimos recusandae officiis in facilis. Voluptatibus facere
+        eum, corrupti hic quaerat a expedita fugit repellendus! Inventore,
+        perspiciatis. Repellendus, ex minima!
       </p>
       <p>
-        Explicabo, voluptatum debitis aliquam eum quibusdam autem quas error omnis aliquid veritatis culpa provident
-        ratione minima! Quibusdam laboriosam ex eveniet accusantium explicabo, quasi, sequi corporis ducimus,
-        dignissimos recusandae officiis in facilis. Voluptatibus facere eum, corrupti hic quaerat a expedita fugit
-        repellendus! Inventore, perspiciatis. Repellendus, ex minima!
+        Explicabo, voluptatum debitis aliquam eum quibusdam autem quas error
+        omnis aliquid veritatis culpa provident ratione minima! Quibusdam
+        laboriosam ex eveniet accusantium explicabo, quasi, sequi corporis
+        ducimus, dignissimos recusandae officiis in facilis. Voluptatibus facere
+        eum, corrupti hic quaerat a expedita fugit repellendus! Inventore,
+        perspiciatis. Repellendus, ex minima!
       </p>
     </>
   ),

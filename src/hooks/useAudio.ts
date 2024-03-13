@@ -1,4 +1,4 @@
-import {useMemo, useEffect, useState} from "react";
+import { useEffect, useState, useRef } from 'react';
 
 /**
  * Allows to play audio files after the first user interaction has happened
@@ -8,24 +8,26 @@ import {useMemo, useEffect, useState} from "react";
  *   permission.
  */
 const useAudio = (url: string) => {
-  const audio = useMemo(() => new Audio(url), []);
+  const audio = useRef(new Audio(url)).current;
   const [playing, setPlaying] = useState(false);
 
-  const toggle = () => setPlaying(!playing);
+  const toggle = () => setPlaying((prev) => !prev);
   const play = () => setPlaying(true);
 
   useEffect(() => {
     playing ? audio.play() : audio.pause();
-  }, [playing]);
+  }, [audio, playing]);
 
   useEffect(() => {
     audio.addEventListener('ended', () => setPlaying(false));
-    return () => {
-      audio.removeEventListener('ended', () => setPlaying(false));
-    };
-  }, []);
+    return () => audio.removeEventListener('ended', () => setPlaying(false));
+  }, [audio]);
 
-  return {playing, toggle, play};
+  return {
+    playing,
+    toggle,
+    play,
+  };
 };
 
 export default useAudio;

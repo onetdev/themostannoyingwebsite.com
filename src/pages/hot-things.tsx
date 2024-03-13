@@ -1,5 +1,5 @@
 import { MouseEventHandler, useRef, useState } from 'react';
-import styled from 'styled-components';
+import { styled } from 'styled-components';
 import Image from 'next/image';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
@@ -14,7 +14,7 @@ const IconWrap = styled.div`
 const Placeholder = styled.div`
   display: block;
   position: relative;
-`
+`;
 const PlayerWrap = styled.div`
   position: relative;
 `;
@@ -27,9 +27,9 @@ const VideoPlayer = styled.video`
 
 const HotThings = () => {
   const [isCapable] = useState(
-    'mediaDevices' in navigator && 'getUserMedia' in navigator.mediaDevices
+    'mediaDevices' in navigator && 'getUserMedia' in navigator.mediaDevices,
   );
-  const [devices, setDevices] = useState<MediaDeviceInfo[]>([]);
+  const [_devices, setDevices] = useState<MediaDeviceInfo[]>([]);
   const [isStreamStarted, setStreamStarted] = useState(false);
   const playerRef = useRef<HTMLVideoElement>(null);
 
@@ -42,9 +42,9 @@ const HotThings = () => {
     height: {
       min: 720,
       ideal: 1080,
-      max: 1440
+      max: 1440,
     },
-    facingMode: 'user'
+    facingMode: 'user',
   };
 
   const startStream = async (constraints: MediaStreamConstraints) => {
@@ -53,19 +53,23 @@ const HotThings = () => {
   };
 
   const handleStream = (stream: MediaStream) => {
-    if (!playerRef.current) { return; }
+    if (!playerRef.current) {
+      return;
+    }
 
     playerRef.current.srcObject = stream;
     setStreamStarted(true);
   };
 
-  const onIntent: MouseEventHandler<HTMLDivElement> = async (e) => {
-    if (!isCapable) { return; }
+  const onIntent: MouseEventHandler<HTMLDivElement> = async () => {
+    if (!isCapable) {
+      return;
+    }
 
-    await navigator.mediaDevices.getUserMedia({video: true});
-    setDevices(await navigator.mediaDevices.enumerateDevices() || []);
-    startStream({video: videoConstraints});
-  }
+    await navigator.mediaDevices.getUserMedia({ video: true });
+    setDevices((await navigator.mediaDevices.enumerateDevices()) || []);
+    startStream({ video: videoConstraints });
+  };
 
   return (
     <main>
@@ -73,7 +77,7 @@ const HotThings = () => {
       <PlayerWrap>
         <Placeholder hidden={!isStreamStarted}>
           <IconWrap onClick={onIntent} hidden={isStreamStarted}>
-            <FontAwesomeIcon icon={["fas", "play-circle"]} />
+            <FontAwesomeIcon icon={['fas', 'play-circle']} />
           </IconWrap>
           <Image
             src="/assets/images/lava.jpg"
@@ -87,6 +91,6 @@ const HotThings = () => {
       </PlayerWrap>
     </main>
   );
-}
+};
 
 export default HotThings;

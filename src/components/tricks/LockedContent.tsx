@@ -1,24 +1,29 @@
-import React, { useRef, useState } from "react";
-import styled from "styled-components";
-import { cssVars } from "@/styles/theme";
-import EscapingElement from "./EscapingElement";
+import React, { useRef, useState } from 'react';
+import { styled } from 'styled-components';
+
+import { cssVars } from '@/styles/theme';
+
+import EscapingElement from './EscapingElement';
 
 const Wrap = styled.div<{ maxHeight: number | string }>`
   position: relative;
   max-height: ${({ maxHeight }) =>
-    typeof maxHeight === 'string' ? maxHeight : `${maxHeight || 0}px`
-  };
+    typeof maxHeight === 'string' ? maxHeight : `${maxHeight || 0}px`};
   transition: max-height 0.3s ease-in-out;
   overflow: hidden;
-`
+`;
 const Overlay = styled.div<{ isHidden: boolean }>`
   position: absolute;
-  bottom: ${({ isHidden }) => isHidden ? -500 : 0}px;
-  opacity: ${({ isHidden }) => isHidden ? 0 : 1};
+  bottom: ${({ isHidden }) => (isHidden ? -500 : 0)}px;
+  opacity: ${({ isHidden }) => (isHidden ? 0 : 1)};
   left: 0;
   width: 100%;
   background: ${cssVars.color.surface};
-  background: linear-gradient(0deg, ${cssVars.color.background} 50%, transparent 100%);
+  background: linear-gradient(
+    0deg,
+    ${cssVars.color.background} 50%,
+    transparent 100%
+  );
   transition: all 0.3s ease-in-out;
 `;
 const PaymentButton = styled.button`
@@ -40,7 +45,7 @@ type Props = {
   active?: boolean;
   initialMaxHeight: number;
   steps?: number;
-}
+};
 
 const LockedContent = ({
   children,
@@ -59,27 +64,29 @@ const LockedContent = ({
       setIsRevealed(true);
     }
     setMaxHeight(newMaxHeight);
-  }
+  };
 
   return (
     <Wrap maxHeight={active ? maxHeight : 'auto'}>
-      <div ref={contentRef}>
-        {children}
-      </div>
+      <div ref={contentRef}>{children}</div>
       <Overlay isHidden={!active || isRevealed}>
-        <h1>You gott pay a $0.69/hour with 24 months of commitment in order to see the next paragraph.</h1>
+        <h1>
+          You gott pay a $0.69/hour with 24 months of commitment in order to see
+          the next paragraph.
+        </h1>
         <EscapingElement boundingBox={{ left: 0, bottom: 0 }}>
-          <PaymentButton>
-            Pay! 100% legit and secure*
-          </PaymentButton>
+          <PaymentButton>Pay! 100% legit and secure*</PaymentButton>
         </EscapingElement>
         <RevealButton onClick={handleRevealClick}>
-          Naaah, I'm good, give me free stuff
+          Naaah, I&apos;m good, give me free stuff
         </RevealButton>
-        <SmallPrint>* it might not be as secure and legit but that doesn't matter because you can't actually pay on this website.</SmallPrint>
+        <SmallPrint>
+          * it might not be as secure and legit but that doesn&apos;t matter
+          because you can&apos;t actually pay on this website.
+        </SmallPrint>
       </Overlay>
     </Wrap>
   );
-}
+};
 
-export default LockedContent
+export default LockedContent;

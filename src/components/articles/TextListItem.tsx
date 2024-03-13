@@ -1,9 +1,10 @@
-import { cssVars } from "@/styles/theme";
-import { ArticleCore } from "@/types"
-import Link from "next/link";
-import styled from "styled-components";
+import Link from 'next/link';
+import { styled } from 'styled-components';
 
-const AnchorWrap = styled.a`
+import { cssVars } from '@/styles/theme';
+import { ArticleCore } from '@/types';
+
+const Anchor = styled(Link)`
   text-decoration: none;
 `;
 const Title = styled.h3`
@@ -14,18 +15,18 @@ const Intro = styled.p`
 `;
 
 type Props = {
-  article: ArticleCore
-}
+  article: ArticleCore;
+};
 
 const TextListItem = ({ article }: Props) => {
-  return <>
-    <Link href={article.url} passHref>
-      <AnchorWrap>
+  return (
+    <>
+      <Anchor href={article.url} passHref>
         <Title>{article.title}</Title>
         <Intro>{article.intro}</Intro>
-      </AnchorWrap>
-    </Link>
-  </>
-}
+      </Anchor>
+    </>
+  );
+};
 
 export default TextListItem;

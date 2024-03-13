@@ -1,6 +1,7 @@
-import { PersistedStoreType } from "@/redux/store";
-import { setHasInteracted } from "@/redux/stores/runtime";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from 'react';
+
+import { PersistedStoreType } from '@/redux/store';
+import { setHasInteracted } from '@/redux/stores/runtime';
 
 /**
  * Some browsers will limit features until the first user interaction has
@@ -9,11 +10,11 @@ import { useEffect, useState } from "react";
 const useFirstInteraction = (store: PersistedStoreType) => {
   const [completed, setCompleted] = useState(false);
 
-  const handleInteraction = () => {
+  const handleInteraction = useCallback(() => {
     if (completed) return;
     setCompleted(true);
-    store.dispatch(setHasInteracted())
-  };
+    store.dispatch(setHasInteracted());
+  }, [completed, store]);
 
   useEffect(() => {
     document.addEventListener('click', handleInteraction);
@@ -21,8 +22,8 @@ const useFirstInteraction = (store: PersistedStoreType) => {
     return () => {
       document.removeEventListener('click', handleInteraction);
       document.addEventListener('touchend', handleInteraction);
-    }
-  }, []);
-}
+    };
+  }, [handleInteraction]);
+};
 
 export default useFirstInteraction;

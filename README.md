@@ -30,9 +30,7 @@ If you have anything to add, do not hesitate and **start your PR today, it's 100
 First, run the development server:
 
 ```bash
-npm run dev
-# or
-yarn dev
+pnpm run dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.

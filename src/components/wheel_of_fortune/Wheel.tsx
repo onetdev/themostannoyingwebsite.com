@@ -1,14 +1,16 @@
-import { midpoint, radToDeg } from "@/utils/math";
-import Color from "color";
+import Color from 'color';
+import { ReactNode } from 'react';
+
+import { radToDeg } from '@/utils/math';
 
 export type Item = {
-  color: string,
-  text: string
-}
+  color: string;
+  text: string;
+};
 type Props = {
   items: Item[];
   highlightIndex?: number;
-}
+};
 
 const Wheel = ({ items, highlightIndex }: Props) => {
   const width = 500;
@@ -16,8 +18,8 @@ const Wheel = ({ items, highlightIndex }: Props) => {
   const radius = Math.min(width, height) / 2;
   const center = { x: width / 2, y: height / 2 };
   let startAngleRadians = 0;
-  const sweepAngleRadians = Math.PI / items.length * 2;
-  const svgSlices: any = [];
+  const sweepAngleRadians = (Math.PI / items.length) * 2;
+  const svgSlices: ReactNode[] = [];
 
   items.forEach((item, index) => {
     const aPoint = {
@@ -29,15 +31,20 @@ const Wheel = ({ items, highlightIndex }: Props) => {
       y: center.y + radius * Math.sin(startAngleRadians + sweepAngleRadians),
     };
     const abMidpoint = {
-      x: center.x + radius * 0.85 * Math.cos(startAngleRadians + sweepAngleRadians / 2),
-      y: center.y + radius * 0.85 * Math.sin(startAngleRadians + sweepAngleRadians / 2),
+      x:
+        center.x +
+        radius * 0.85 * Math.cos(startAngleRadians + sweepAngleRadians / 2),
+      y:
+        center.y +
+        radius * 0.85 * Math.sin(startAngleRadians + sweepAngleRadians / 2),
     };
 
-    let d = "";
-    d += "M" + center.x + "," + center.y + " ";
-    d += "L" + aPoint.x + "," + aPoint.y + " ";
-    d += "A" + radius + "," + radius + " 0 0,1 " + bPoint.x + "," + bPoint.y + " ";
-    d += "Z";
+    let d = '';
+    d += 'M' + center.x + ',' + center.y + ' ';
+    d += 'L' + aPoint.x + ',' + aPoint.y + ' ';
+    d +=
+      'A' + radius + ',' + radius + ' 0 0,1 ' + bPoint.x + ',' + bPoint.y + ' ';
+    d += 'Z';
 
     // TODO: Slightly move the label toward the middle
     const labelAngle = radToDeg(startAngleRadians + sweepAngleRadians / 2);
@@ -55,21 +62,20 @@ const Wheel = ({ items, highlightIndex }: Props) => {
           x={abMidpoint.x}
           y={abMidpoint.y}
           transform={`rotate(${labelAngle}, ${abMidpoint.x}, ${abMidpoint.y})`}
-          fill={labelColor}
-        >
+          fill={labelColor}>
           {item.text}
         </text>
-      </g>
+      </g>,
     );
 
     startAngleRadians += sweepAngleRadians;
-  })
+  });
 
   return (
     <svg xmlns="http://www.w3.org/2000/svg" viewBox={`0 0 ${width} ${height}`}>
       {svgSlices}
     </svg>
-  )
-}
+  );
+};
 
 export default Wheel;
