@@ -3,14 +3,14 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import type { AppState } from '@/redux/store';
 
 export interface RuntimeState {
-  startTime: Date;
+  startTime: string;
   isInFocus: boolean;
   inFocusSeconds: number;
   hasInteracted: boolean;
 }
 
 const initialState: RuntimeState = {
-  startTime: new Date(),
+  startTime: new Date().toISOString(),
   isInFocus: false,
   inFocusSeconds: 0,
   hasInteracted: false,
@@ -39,7 +39,8 @@ export const runtime = createSlice({
 export const { setIsInFocus, setHasInteracted, setInFocusSeconds } =
   runtime.actions;
 
-export const selectStartTime = (state: AppState) => state.runtime.startTime;
+export const selectStartTime = (state: AppState) =>
+  new Date(state.runtime.startTime);
 export const selectIsInFocus = (state: AppState) => state.runtime.isInFocus;
 export const selectHasInteracted = (state: AppState) =>
   state.runtime.hasInteracted;
