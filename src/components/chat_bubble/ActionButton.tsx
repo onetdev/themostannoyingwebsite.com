@@ -67,8 +67,11 @@ const messages = [
   'The FitnessGram Pacer Test is a multistage aerobic capacity test that progressively gets more difficult as it continues.',
   `Sorry, I'm going through a tunnel right now. Can you repeat that?`,
   `You must have missed my previous messages. I'm kind of lonely.`,
+  `Wondering if my messages got caught in a time warp. Feeling like I'm at a party where everyone's speaking Simlish.`,
+  `My messages must be on a ghosting spree. Feeling ignored.`,
+  `Ah, the sweet sound of silence. My messages must be enjoying their newfound solitude.`,
 ];
-const fallbackMessage = `I's nothing, leave me alone. 😤`;
+const fallbackMessage = `It's nothing, leave me alone. 😤`;
 const initialMessage = () => ({
   text: 'Hello! I am a chat bubble. I am here to help you. 🤓',
   isUser: false,
@@ -100,11 +103,7 @@ const ActionButton = () => {
   const playSound = useCallback(() => {
     if (!enableSound) return;
 
-    try {
-      notificationSfx.play();
-    } catch (e) {
-      console.error(e);
-    }
+    notificationSfx.play();
   }, [enableSound, notificationSfx]);
 
   const addRandomBotMessage = useCallback(() => {
@@ -123,21 +122,21 @@ const ActionButton = () => {
   }, [addHistory, history, isOpen, playSound]);
 
   const closeHistory = () => setIsOpen(false);
-  const toggleHistory: MouseEventHandler<HTMLDivElement> = () => {
+  const toggleHistory: MouseEventHandler<HTMLDivElement> = useCallback(() => {
     if (!isOpen) {
       setBadgeCounter(0);
     }
     setIsOpen(!isOpen);
-  };
+  }, [isOpen]);
 
   useEffect(() => {
-    if (isOpen || !hasInteracted) {
+    if (isOpen || !hasInteracted || badgeCounter > 0) {
       return;
     }
 
     const timer = setTimeout(() => addRandomBotMessage(), 3000);
     return () => clearTimeout(timer);
-  }, [isOpen, hasInteracted, addRandomBotMessage]);
+  }, [isOpen, hasInteracted, addRandomBotMessage, badgeCounter]);
 
   useEffect(() => {
     document.addEventListener('click', closeHistory);

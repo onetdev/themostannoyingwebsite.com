@@ -11,7 +11,7 @@ const useAudio = (url: string) => {
   const audio = useRef(new Audio(url)).current;
   const [playing, setPlaying] = useState(false);
 
-  const toggle = () => setPlaying(!playing);
+  const toggle = () => setPlaying((prev) => !prev);
   const play = () => setPlaying(true);
 
   useEffect(() => {
@@ -20,12 +20,14 @@ const useAudio = (url: string) => {
 
   useEffect(() => {
     audio.addEventListener('ended', () => setPlaying(false));
-    return () => {
-      audio.removeEventListener('ended', () => setPlaying(false));
-    };
+    return () => audio.removeEventListener('ended', () => setPlaying(false));
   }, [audio]);
 
-  return { playing, toggle, play };
+  return {
+    playing,
+    toggle,
+    play,
+  };
 };
 
 export default useAudio;
