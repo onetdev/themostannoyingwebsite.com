@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 
 import { PersistedStoreType } from '@/redux/store';
-import { setInFocusSeconds, setIsInFocus } from '@/redux/slices/runtime';
+import { actions as runtimeActions } from '@/redux/slices/runtime';
 
 /**
  * This will mesaure how long the webpage has been in focus and report it to
@@ -24,7 +24,7 @@ const useInFocusMeter = (store: PersistedStoreType) => {
   }, []);
 
   useEffect(() => {
-    store.dispatch(setIsInFocus(isInFocus));
+    store.dispatch(runtimeActions.setIsInFocus(isInFocus));
   }, [isInFocus, store]);
 
   useEffect(() => {
@@ -36,7 +36,7 @@ const useInFocusMeter = (store: PersistedStoreType) => {
       // TODO: Broadcasting this will force the whole screen to rerender
       // which is unacceptable. Try solve this or even move runtime stuff
       // into a separate store, hook.
-      store.dispatch(setInFocusSeconds(elapsed + 1));
+      store.dispatch(runtimeActions.setInFocusSeconds(elapsed + 1));
       setElapsed(elapsed + 1);
     }, 1000);
     return () => clearInterval(interval);

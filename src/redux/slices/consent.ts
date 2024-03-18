@@ -14,7 +14,7 @@ const initialState: ConsentState = {
   allowNotification: null,
 };
 
-export const consent = createSlice({
+export const consentSlice = createSlice({
   name: 'consent',
   initialState,
   reducers: {
@@ -33,11 +33,5 @@ export const consent = createSlice({
   },
 });
 
-export const {
-  setReviewCompleted,
-  setAllowCookies,
-  setAllowLocation,
-  setAllowNotification,
-} = consent.actions;
-
-export default consent.reducer;
+export const actions = consentSlice.actions;
+export default consentSlice.reducer;

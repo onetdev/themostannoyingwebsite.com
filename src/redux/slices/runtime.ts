@@ -18,7 +18,7 @@ const initialState: RuntimeState = {
  * Runtime stores everyting that won't get persisted. This also includes some
  * non-persional statistics.
  */
-export const runtime = createSlice({
+export const runtimeSlice = createSlice({
   name: 'runtime',
   initialState,
   reducers: {
@@ -34,7 +34,5 @@ export const runtime = createSlice({
   },
 });
 
-export const { setIsInFocus, setHasInteracted, setInFocusSeconds } =
-  runtime.actions;
-
-export default runtime.reducer;
+export const actions = runtimeSlice.actions;
+export default runtimeSlice.reducer;

@@ -14,7 +14,7 @@ const initialState: PreferenceState = {
   adultFilter: true,
 };
 
-export const preference = createSlice({
+export const preferenceSlice = createSlice({
   name: 'preference',
   initialState,
   reducers: {
@@ -33,11 +33,5 @@ export const preference = createSlice({
   },
 });
 
-export const {
-  setDarkMode,
-  setEnableSound,
-  setEnableFlashing,
-  setAdultFilter,
-} = preference.actions;
-
-export default preference.reducer;
+export const actions = preferenceSlice.actions;
+export default preferenceSlice.reducer;

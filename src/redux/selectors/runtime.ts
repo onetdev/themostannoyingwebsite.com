@@ -1,12 +1,12 @@
-import type { AppState } from '@/redux/store';
+import type { AppRootState } from '@/redux/store';
 
-const selectRuntime = (state: AppState) => state.runtime;
-export const selectStartTime = (state: AppState) =>
+const selectRuntime = (state: AppRootState) => state.runtime;
+export const selectStartTime = (state: AppRootState) =>
   new Date(state.runtime.startTime);
-export const selectIsInFocus = (state: AppState) => state.runtime.isInFocus;
-export const selectHasInteracted = (state: AppState) =>
+export const selectIsInFocus = (state: AppRootState) => state.runtime.isInFocus;
+export const selectHasInteracted = (state: AppRootState) =>
   state.runtime.hasInteracted;
-export const selectInFocusSeconds = (state: AppState) =>
+export const selectInFocusSeconds = (state: AppRootState) =>
   state.runtime.inFocusSeconds;
 
 export default selectRuntime;

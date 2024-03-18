@@ -1,12 +1,13 @@
-import type { AppState } from '@/redux/store';
+import type { AppRootState } from '@/redux/store';
 
-const selectExperience = (state: AppState) => state.experience;
-export const selectMockChat = (state: AppState) => state.experience.mockChat;
-export const selectWheelOfFortune = (state: AppState) =>
+const selectExperience = (state: AppRootState) => state.experience;
+export const selectMockChat = (state: AppRootState) =>
+  state.experience.mockChat;
+export const selectWheelOfFortune = (state: AppRootState) =>
   state.experience.wheelOfFortune;
-export const selectExitPrompt = (state: AppState) =>
+export const selectExitPrompt = (state: AppRootState) =>
   state.experience.exitPrompt;
-export const selectContentPaywall = (state: AppState) =>
+export const selectContentPaywall = (state: AppRootState) =>
   state.experience.contentPaywall;
 
 export default selectExperience;

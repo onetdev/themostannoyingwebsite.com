@@ -14,7 +14,7 @@ const initialState: ExperienceState = {
   contentPaywall: true,
 };
 
-export const experience = createSlice({
+export const experienceSlice = createSlice({
   name: 'experience',
   initialState,
   reducers: {
@@ -33,11 +33,5 @@ export const experience = createSlice({
   },
 });
 
-export const {
-  setMockChat,
-  setWheelOfFortune,
-  setExitPrompt,
-  setContentPaywall,
-} = experience.actions;
-
-export default experience.reducer;
+export const actions = experienceSlice.actions;
+export default experienceSlice.reducer;

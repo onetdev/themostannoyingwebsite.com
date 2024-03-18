@@ -1,6 +1,6 @@
 import { styled } from 'styled-components';
 
-import { setDarkMode } from '@/redux/slices/preference';
+import { actions as preferenceActions } from '@/redux/slices/preference';
 import { useAppDispatch, useAppSelector } from '@/redux/hooks';
 import { cssVars } from '@/styles/theme';
 import { selectDarkMode } from '@/redux/selectors/preference';
@@ -43,7 +43,7 @@ const DarkModeToggle = ({ className }: Props) => {
   const isDarkMode = useAppSelector(selectDarkMode);
 
   const toggleDarkMode = () => {
-    dispatch(setDarkMode(!isDarkMode));
+    dispatch(preferenceActions.setDarkMode(!isDarkMode));
   };
 
   return (

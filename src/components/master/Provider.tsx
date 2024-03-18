@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { ThemeProvider } from 'styled-components';
 import { useBeforeUnload } from 'react-use';
 import { Provider as ReduxProvider } from 'react-redux';
-import { PersistGate } from '@photobot/reduxjs-toolkit-persist/lib/integration/react';
+import { PersistGate } from 'reduxjs-toolkit-persist/integration/react';
 
 import {
   DarkTheme,

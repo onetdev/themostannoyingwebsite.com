@@ -4,23 +4,13 @@ import { ChangeEventHandler } from 'react';
 
 import { cssRule, cssVars } from '@/styles/theme';
 import { useAppDispatch, useAppSelector } from '@/redux/hooks';
-import {
-  setDarkMode,
-  setEnableFlashing,
-  setEnableSound,
-  setAdultFilter,
-} from '@/redux/slices/preference';
-import {
-  setAllowLocation,
-  setAllowNotification,
-  setAllowCookies,
-} from '@/redux/slices/consent';
-import {
-  setContentPaywall,
-  setExitPrompt,
-  setMockChat,
-  setWheelOfFortune,
-} from '@/redux/slices/experience';
+import { actions as preferenceActions } from '@/redux/slices/preference';
+import { actions as consentActions } from '@/redux/slices/consent';
+import { actions as experienceActions } from '@/redux/slices/experience';
+import selectPreference from '@/redux/selectors/preference';
+import selectExperience from '@/redux/selectors/experience';
+import selectConsent from '@/redux/selectors/consent';
+import selectRuntime from '@/redux/selectors/runtime';
 
 const Blocks = styled.div`
   display: grid;
@@ -75,34 +65,36 @@ const ToggableRow = ({ label, name, checked, onChange }: ToggableRowProps) => {
 
 export default function PrivacyPolicy() {
   const dispatch = useAppDispatch();
-  const preference = useAppSelector((state) => state.preference);
-  const experience = useAppSelector((state) => state.experience);
-  const consent = useAppSelector((state) => state.consent);
-  const runtime = useAppSelector((state) => state.runtime);
+  const preference = useAppSelector(selectPreference);
+  const experience = useAppSelector(selectExperience);
+  const consent = useAppSelector(selectConsent);
+  const runtime = useAppSelector(selectRuntime);
 
   // Preferences
-  const onDarkModeChange = () => dispatch(setDarkMode(!preference.isDarkMode));
+  const onDarkModeChange = () =>
+    dispatch(preferenceActions.setDarkMode(!preference.isDarkMode));
   const onFlashingContentsChange = () =>
-    dispatch(setEnableFlashing(!preference.enableFlashing));
-  const onSoundChange = () => dispatch(setEnableSound(!preference.enableSound));
+    dispatch(preferenceActions.setEnableFlashing(!preference.enableFlashing));
+  const onSoundChange = () =>
+    dispatch(preferenceActions.setEnableSound(!preference.enableSound));
   const onAdultFilterChange = () =>
-    dispatch(setAdultFilter(!preference.adultFilter));
+    dispatch(preferenceActions.setAdultFilter(!preference.adultFilter));
   // Consent block
   const onAllowCookiesChange = () =>
-    dispatch(setAllowCookies(!consent.allowCookies));
+    dispatch(consentActions.setAllowCookies(!consent.allowCookies));
   const onAlowNotificationChange = () =>
-    dispatch(setAllowNotification(!consent.allowNotification));
+    dispatch(consentActions.setAllowNotification(!consent.allowNotification));
   const onAllowLocationChange = () =>
-    dispatch(setAllowLocation(!consent.allowLocation));
+    dispatch(consentActions.setAllowLocation(!consent.allowLocation));
   // Experience block
   const onAlowMockChatChange = () =>
-    dispatch(setMockChat(!experience.mockChat));
+    dispatch(experienceActions.setMockChat(!experience.mockChat));
   const onWheelOfFortuneChange = () =>
-    dispatch(setWheelOfFortune(!experience.wheelOfFortune));
+    dispatch(experienceActions.setWheelOfFortune(!experience.wheelOfFortune));
   const onExitPromptChange = () =>
-    dispatch(setExitPrompt(!experience.exitPrompt));
+    dispatch(experienceActions.setExitPrompt(!experience.exitPrompt));
   const onContentPaywallChange = () =>
-    dispatch(setContentPaywall(!experience.contentPaywall));
+    dispatch(experienceActions.setContentPaywall(!experience.contentPaywall));
 
   return (
     <main>
