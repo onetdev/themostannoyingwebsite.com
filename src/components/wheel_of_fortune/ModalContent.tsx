@@ -4,9 +4,9 @@ import Confetti from 'react-confetti';
 import { styled } from 'styled-components';
 
 import { getWeightedRandom } from '@/utils/math';
-import { selectEnableFlashing } from '@/redux/stores/preference';
 import { useAppSelector } from '@/redux/hooks';
 import { cssVars } from '@/styles/theme';
+import { selectEnableFlashing } from '@/redux/selectors/preference';
 
 import AnimatedWheel, { AnimatedWheelState } from './AnimatedWheel';
 import { Item } from './Wheel';

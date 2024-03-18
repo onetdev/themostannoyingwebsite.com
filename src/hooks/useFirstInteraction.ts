@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useState } from 'react';
 
 import { PersistedStoreType } from '@/redux/store';
-import { setHasInteracted } from '@/redux/stores/runtime';
+import { actions as runtimeActions } from '@/redux/slices/runtime';
 
 /**
  * Some browsers will limit features until the first user interaction has
@@ -13,7 +13,7 @@ const useFirstInteraction = (store: PersistedStoreType) => {
   const handleInteraction = useCallback(() => {
     if (completed) return;
     setCompleted(true);
-    store.dispatch(setHasInteracted());
+    store.dispatch(runtimeActions.setHasInteracted());
   }, [completed, store]);
 
   useEffect(() => {

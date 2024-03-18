@@ -1,7 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-import type { AppState } from '@/redux/store';
-
 export interface RuntimeState {
   startTime: string;
   isInFocus: boolean;
@@ -20,7 +18,7 @@ const initialState: RuntimeState = {
  * Runtime stores everyting that won't get persisted. This also includes some
  * non-persional statistics.
  */
-export const runtime = createSlice({
+export const runtimeSlice = createSlice({
   name: 'runtime',
   initialState,
   reducers: {
@@ -36,15 +34,5 @@ export const runtime = createSlice({
   },
 });
 
-export const { setIsInFocus, setHasInteracted, setInFocusSeconds } =
-  runtime.actions;
-
-export const selectStartTime = (state: AppState) =>
-  new Date(state.runtime.startTime);
-export const selectIsInFocus = (state: AppState) => state.runtime.isInFocus;
-export const selectHasInteracted = (state: AppState) =>
-  state.runtime.hasInteracted;
-export const selectInFocusSeconds = (state: AppState) =>
-  state.runtime.inFocusSeconds;
-
-export default runtime.reducer;
+export const actions = runtimeSlice.actions;
+export default runtimeSlice.reducer;

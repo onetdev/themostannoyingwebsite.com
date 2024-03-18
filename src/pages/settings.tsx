@@ -4,24 +4,13 @@ import { ChangeEventHandler } from 'react';
 
 import { cssRule, cssVars } from '@/styles/theme';
 import { useAppDispatch, useAppSelector } from '@/redux/hooks';
-import {
-  setDarkMode,
-  setEnableFlashing,
-  setEnableSound,
-  setAdultFilter,
-} from '@/redux/stores/preference';
-import {
-  setAllowLocation,
-  setAllowNotification,
-  setAllowAnalytics,
-  setAllowCookies,
-} from '@/redux/stores/consent';
-import {
-  setContentPaywall,
-  setExitPrompt,
-  setMockChat,
-  setWheelOfFortune,
-} from '@/redux/stores/experience';
+import { actions as preferenceActions } from '@/redux/slices/preference';
+import { actions as consentActions } from '@/redux/slices/consent';
+import { actions as experienceActions } from '@/redux/slices/experience';
+import selectPreference from '@/redux/selectors/preference';
+import selectExperience from '@/redux/selectors/experience';
+import selectConsent from '@/redux/selectors/consent';
+import selectRuntime from '@/redux/selectors/runtime';
 
 const Blocks = styled.div`
   display: grid;
@@ -40,10 +29,10 @@ const BlockTitle = styled.h2`
   margin: 0 0 ${cssVars.spacing.gap2x} 0;
   font-size: ${cssVars.fontSize.headline};
 `;
-const BlockBody = styled.div<{ gap?: boolean }>`
+const BlockBody = styled.div<{ $gap?: boolean }>`
   display: flex;
   flex-direction: column;
-  gap: ${(props) => (props.gap ? cssVars.spacing.gap : 0)};
+  gap: ${(props) => (props.$gap ? cssVars.spacing.gap : 0)};
 `;
 const RowWithLabel = styled.div`
   label {
@@ -76,10 +65,36 @@ const ToggableRow = ({ label, name, checked, onChange }: ToggableRowProps) => {
 
 export default function PrivacyPolicy() {
   const dispatch = useAppDispatch();
-  const preference = useAppSelector((state) => state.preference);
-  const experience = useAppSelector((state) => state.experience);
-  const consent = useAppSelector((state) => state.consent);
-  const runtime = useAppSelector((state) => state.runtime);
+  const preference = useAppSelector(selectPreference);
+  const experience = useAppSelector(selectExperience);
+  const consent = useAppSelector(selectConsent);
+  const runtime = useAppSelector(selectRuntime);
+
+  // Preferences
+  const onDarkModeChange = () =>
+    dispatch(preferenceActions.setDarkMode(!preference.isDarkMode));
+  const onFlashingContentsChange = () =>
+    dispatch(preferenceActions.setEnableFlashing(!preference.enableFlashing));
+  const onSoundChange = () =>
+    dispatch(preferenceActions.setEnableSound(!preference.enableSound));
+  const onAdultFilterChange = () =>
+    dispatch(preferenceActions.setAdultFilter(!preference.adultFilter));
+  // Consent block
+  const onAllowCookiesChange = () =>
+    dispatch(consentActions.setAllowCookies(!consent.allowCookies));
+  const onAlowNotificationChange = () =>
+    dispatch(consentActions.setAllowNotification(!consent.allowNotification));
+  const onAllowLocationChange = () =>
+    dispatch(consentActions.setAllowLocation(!consent.allowLocation));
+  // Experience block
+  const onAlowMockChatChange = () =>
+    dispatch(experienceActions.setMockChat(!experience.mockChat));
+  const onWheelOfFortuneChange = () =>
+    dispatch(experienceActions.setWheelOfFortune(!experience.wheelOfFortune));
+  const onExitPromptChange = () =>
+    dispatch(experienceActions.setExitPrompt(!experience.exitPrompt));
+  const onContentPaywallChange = () =>
+    dispatch(experienceActions.setContentPaywall(!experience.contentPaywall));
 
   return (
     <main>
@@ -88,102 +103,84 @@ export default function PrivacyPolicy() {
       <Blocks>
         <Block>
           <BlockTitle>Preferences</BlockTitle>
-          <BlockBody gap>
+          <BlockBody $gap>
             <ToggableRow
               label="Dark mode"
               name="dark_mode"
               checked={preference.isDarkMode}
-              onChange={() => dispatch(setDarkMode(!preference.isDarkMode))}
+              onChange={onDarkModeChange}
             />
             <ToggableRow
               label="Flashing contents"
               name="enable_flashing"
               checked={preference.enableFlashing}
-              onChange={() =>
-                dispatch(setEnableFlashing(!preference.enableFlashing))
-              }
+              onChange={onFlashingContentsChange}
             />
             <ToggableRow
               label="Sound"
               name="enable_sound"
               checked={preference.enableSound}
-              onChange={() => dispatch(setEnableSound(!preference.enableSound))}
+              onChange={onSoundChange}
             />
             <ToggableRow
               label="Filter adult contents"
-              name="enable_flashing"
+              name="adult_filter"
               checked={preference.adultFilter}
-              onChange={() => dispatch(setAdultFilter(!preference.adultFilter))}
+              onChange={onAdultFilterChange}
             />
           </BlockBody>
         </Block>
 
         <Block>
           <BlockTitle>Consent</BlockTitle>
-          <BlockBody gap>
+          <BlockBody $gap>
             <ToggableRow
               label="Allow non-essential cookies"
               name="allow_cookies"
               checked={consent.allowCookies}
-              onChange={() => dispatch(setAllowCookies(!consent.allowCookies))}
-            />
-            <ToggableRow
-              label="Allow analytics"
-              name="allow_analytics"
-              checked={consent.allowAnalytics}
-              onChange={() =>
-                dispatch(setAllowAnalytics(!consent.allowAnalytics))
-              }
+              onChange={onAllowCookiesChange}
             />
             <ToggableRow
               label="Allow notification"
               name="allow_notification"
               checked={consent.allowNotification || false}
-              onChange={() =>
-                dispatch(setAllowNotification(!consent.allowNotification))
-              }
+              onChange={onAlowNotificationChange}
             />
             <ToggableRow
               label="Allow location"
               name="enable_location"
               checked={consent.allowLocation || false}
-              onChange={() =>
-                dispatch(setAllowLocation(!consent.allowLocation))
-              }
+              onChange={onAllowLocationChange}
             />
           </BlockBody>
         </Block>
 
         <Block>
           <BlockTitle>Experience</BlockTitle>
-          <BlockBody gap>
+          <BlockBody $gap>
             <ToggableRow
               label="Mock chat"
               name="mock_chat"
               checked={experience.mockChat}
-              onChange={() => dispatch(setMockChat(!experience.mockChat))}
+              onChange={onAlowMockChatChange}
             />
             <ToggableRow
               label="Wheel of fortune"
               name="wheel_of_fortune"
               checked={experience.wheelOfFortune}
-              onChange={() =>
-                dispatch(setWheelOfFortune(!experience.wheelOfFortune))
-              }
+              onChange={onWheelOfFortuneChange}
             />
             <ToggableRow
               label="Exit prompt"
               name="exit_prompt"
               checked={experience.exitPrompt}
-              onChange={() => dispatch(setExitPrompt(!experience.exitPrompt))}
+              onChange={onExitPromptChange}
             />
             <ToggableRow
               label="Content paywall"
               name="content_paywall"
               checked={experience.contentPaywall}
-              onChange={() =>
-                dispatch(setContentPaywall(!experience.contentPaywall))
-              }
+              onChange={onContentPaywallChange}
             />
           </BlockBody>
         </Block>

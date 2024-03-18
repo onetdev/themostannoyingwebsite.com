@@ -5,17 +5,17 @@ import { cssVars } from '@/styles/theme';
 
 import EscapingElement from './EscapingElement';
 
-const Wrap = styled.div<{ maxHeight: number | string }>`
+const Wrap = styled.div<{ $maxHeight: number | string }>`
   position: relative;
-  max-height: ${({ maxHeight }) =>
+  max-height: ${({ $maxHeight: maxHeight }) =>
     typeof maxHeight === 'string' ? maxHeight : `${maxHeight || 0}px`};
   transition: max-height 0.3s ease-in-out;
   overflow: hidden;
 `;
-const Overlay = styled.div<{ isHidden: boolean }>`
+const Overlay = styled.div<{ $isHidden: boolean }>`
   position: absolute;
-  bottom: ${({ isHidden }) => (isHidden ? -500 : 0)}px;
-  opacity: ${({ isHidden }) => (isHidden ? 0 : 1)};
+  bottom: ${({ $isHidden: isHidden }) => (isHidden ? -500 : 0)}px;
+  opacity: ${({ $isHidden: isHidden }) => (isHidden ? 0 : 1)};
   left: 0;
   width: 100%;
   background: ${cssVars.color.surface};
@@ -67,9 +67,9 @@ const LockedContent = ({
   };
 
   return (
-    <Wrap maxHeight={active ? maxHeight : 'auto'}>
+    <Wrap $maxHeight={active ? maxHeight : 'auto'}>
       <div ref={contentRef}>{children}</div>
-      <Overlay isHidden={!active || isRevealed}>
+      <Overlay $isHidden={!active || isRevealed}>
         <h1>
           You gott pay a $0.69/hour with 24 months of commitment in order to see
           the next paragraph.

@@ -1,7 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-import type { AppState } from '@/redux/store';
-
 export interface ExperienceState {
   mockChat: boolean;
   wheelOfFortune: boolean;
@@ -16,7 +14,7 @@ const initialState: ExperienceState = {
   contentPaywall: true,
 };
 
-export const experience = createSlice({
+export const experienceSlice = createSlice({
   name: 'experience',
   initialState,
   reducers: {
@@ -35,19 +33,5 @@ export const experience = createSlice({
   },
 });
 
-export const {
-  setMockChat,
-  setWheelOfFortune,
-  setExitPrompt,
-  setContentPaywall,
-} = experience.actions;
-
-export const selectMockChat = (state: AppState) => state.experience.mockChat;
-export const selectWheelOfFortune = (state: AppState) =>
-  state.experience.wheelOfFortune;
-export const selectExitPrompt = (state: AppState) =>
-  state.experience.exitPrompt;
-export const selectContentPaywall = (state: AppState) =>
-  state.experience.contentPaywall;
-
-export default experience.reducer;
+export const actions = experienceSlice.actions;
+export default experienceSlice.reducer;
