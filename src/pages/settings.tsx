@@ -13,7 +13,6 @@ import {
 import {
   setAllowLocation,
   setAllowNotification,
-  setAllowAnalytics,
   setAllowCookies,
 } from '@/redux/slices/consent';
 import {
@@ -81,6 +80,30 @@ export default function PrivacyPolicy() {
   const consent = useAppSelector((state) => state.consent);
   const runtime = useAppSelector((state) => state.runtime);
 
+  // Preferences
+  const onDarkModeChange = () => dispatch(setDarkMode(!preference.isDarkMode));
+  const onFlashingContentsChange = () =>
+    dispatch(setEnableFlashing(!preference.enableFlashing));
+  const onSoundChange = () => dispatch(setEnableSound(!preference.enableSound));
+  const onAdultFilterChange = () =>
+    dispatch(setAdultFilter(!preference.adultFilter));
+  // Consent block
+  const onAllowCookiesChange = () =>
+    dispatch(setAllowCookies(!consent.allowCookies));
+  const onAlowNotificationChange = () =>
+    dispatch(setAllowNotification(!consent.allowNotification));
+  const onAllowLocationChange = () =>
+    dispatch(setAllowLocation(!consent.allowLocation));
+  // Experience block
+  const onAlowMockChatChange = () =>
+    dispatch(setMockChat(!experience.mockChat));
+  const onWheelOfFortuneChange = () =>
+    dispatch(setWheelOfFortune(!experience.wheelOfFortune));
+  const onExitPromptChange = () =>
+    dispatch(setExitPrompt(!experience.exitPrompt));
+  const onContentPaywallChange = () =>
+    dispatch(setContentPaywall(!experience.contentPaywall));
+
   return (
     <main>
       <h1>Settings</h1>
@@ -93,27 +116,25 @@ export default function PrivacyPolicy() {
               label="Dark mode"
               name="dark_mode"
               checked={preference.isDarkMode}
-              onChange={() => dispatch(setDarkMode(!preference.isDarkMode))}
+              onChange={onDarkModeChange}
             />
             <ToggableRow
               label="Flashing contents"
               name="enable_flashing"
               checked={preference.enableFlashing}
-              onChange={() =>
-                dispatch(setEnableFlashing(!preference.enableFlashing))
-              }
+              onChange={onFlashingContentsChange}
             />
             <ToggableRow
               label="Sound"
               name="enable_sound"
               checked={preference.enableSound}
-              onChange={() => dispatch(setEnableSound(!preference.enableSound))}
+              onChange={onSoundChange}
             />
             <ToggableRow
               label="Filter adult contents"
-              name="enable_flashing"
+              name="adult_filter"
               checked={preference.adultFilter}
-              onChange={() => dispatch(setAdultFilter(!preference.adultFilter))}
+              onChange={onAdultFilterChange}
             />
           </BlockBody>
         </Block>
@@ -125,31 +146,19 @@ export default function PrivacyPolicy() {
               label="Allow non-essential cookies"
               name="allow_cookies"
               checked={consent.allowCookies}
-              onChange={() => dispatch(setAllowCookies(!consent.allowCookies))}
-            />
-            <ToggableRow
-              label="Allow analytics"
-              name="allow_analytics"
-              checked={consent.allowAnalytics}
-              onChange={() =>
-                dispatch(setAllowAnalytics(!consent.allowAnalytics))
-              }
+              onChange={onAllowCookiesChange}
             />
             <ToggableRow
               label="Allow notification"
               name="allow_notification"
               checked={consent.allowNotification || false}
-              onChange={() =>
-                dispatch(setAllowNotification(!consent.allowNotification))
-              }
+              onChange={onAlowNotificationChange}
             />
             <ToggableRow
               label="Allow location"
               name="enable_location"
               checked={consent.allowLocation || false}
-              onChange={() =>
-                dispatch(setAllowLocation(!consent.allowLocation))
-              }
+              onChange={onAllowLocationChange}
             />
           </BlockBody>
         </Block>
@@ -161,29 +170,25 @@ export default function PrivacyPolicy() {
               label="Mock chat"
               name="mock_chat"
               checked={experience.mockChat}
-              onChange={() => dispatch(setMockChat(!experience.mockChat))}
+              onChange={onAlowMockChatChange}
             />
             <ToggableRow
               label="Wheel of fortune"
               name="wheel_of_fortune"
               checked={experience.wheelOfFortune}
-              onChange={() =>
-                dispatch(setWheelOfFortune(!experience.wheelOfFortune))
-              }
+              onChange={onWheelOfFortuneChange}
             />
             <ToggableRow
               label="Exit prompt"
               name="exit_prompt"
               checked={experience.exitPrompt}
-              onChange={() => dispatch(setExitPrompt(!experience.exitPrompt))}
+              onChange={onExitPromptChange}
             />
             <ToggableRow
               label="Content paywall"
               name="content_paywall"
               checked={experience.contentPaywall}
-              onChange={() =>
-                dispatch(setContentPaywall(!experience.contentPaywall))
-              }
+              onChange={onContentPaywallChange}
             />
           </BlockBody>
         </Block>

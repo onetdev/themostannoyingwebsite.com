@@ -3,7 +3,6 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 export interface ConsentState {
   reviewCompleted: boolean;
   allowCookies: boolean;
-  allowAnalytics: boolean;
   allowLocation: boolean | null;
   allowNotification: boolean | null;
 }
@@ -11,7 +10,6 @@ export interface ConsentState {
 const initialState: ConsentState = {
   reviewCompleted: false,
   allowCookies: true,
-  allowAnalytics: true,
   allowLocation: null,
   allowNotification: null,
 };
@@ -26,9 +24,6 @@ export const consent = createSlice({
     setAllowCookies: (state, action: PayloadAction<boolean>) => {
       state.allowCookies = action.payload;
     },
-    setAllowAnalytics: (state, action: PayloadAction<boolean>) => {
-      state.allowAnalytics = action.payload;
-    },
     setAllowLocation: (state, action: PayloadAction<boolean>) => {
       state.allowLocation = action.payload;
     },
@@ -41,7 +36,6 @@ export const consent = createSlice({
 export const {
   setReviewCompleted,
   setAllowCookies,
-  setAllowAnalytics,
   setAllowLocation,
   setAllowNotification,
 } = consent.actions;
