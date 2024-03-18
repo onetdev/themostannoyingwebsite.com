@@ -17,7 +17,7 @@ const SelectorOption = styled.span`
 `;
 const InDarkMode = styled(SelectorOption)``;
 const InDayMode = styled(SelectorOption)``;
-const Toggler = styled.div<{ isDarkMode: boolean }>`
+const Toggler = styled.div<{ $isDarkMode: boolean }>`
   position: relative;
   display: flex;
   justify-content: space-between;
@@ -34,7 +34,7 @@ const Toggler = styled.div<{ isDarkMode: boolean }>`
     height: 100%;
     border-radius: 10px;
     transition: all 0.1s ease-in-out;
-    transform: translateX(${(props) => (props.isDarkMode ? '0' : '100%')});
+    transform: translateX(${(props) => (props.$isDarkMode ? '0' : '100%')});
   }
 `;
 
@@ -50,7 +50,7 @@ const DarkModeToggle = ({ className }: Props) => {
     <Toggler
       className={className}
       onClick={toggleDarkMode}
-      isDarkMode={isDarkMode}>
+      $isDarkMode={isDarkMode}>
       <InDayMode role="img" aria-label="sun">
         ☀️
       </InDayMode>

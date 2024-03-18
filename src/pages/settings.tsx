@@ -29,10 +29,10 @@ const BlockTitle = styled.h2`
   margin: 0 0 ${cssVars.spacing.gap2x} 0;
   font-size: ${cssVars.fontSize.headline};
 `;
-const BlockBody = styled.div<{ gap?: boolean }>`
+const BlockBody = styled.div<{ $gap?: boolean }>`
   display: flex;
   flex-direction: column;
-  gap: ${(props) => (props.gap ? cssVars.spacing.gap : 0)};
+  gap: ${(props) => (props.$gap ? cssVars.spacing.gap : 0)};
 `;
 const RowWithLabel = styled.div`
   label {
@@ -103,7 +103,7 @@ export default function PrivacyPolicy() {
       <Blocks>
         <Block>
           <BlockTitle>Preferences</BlockTitle>
-          <BlockBody gap>
+          <BlockBody $gap>
             <ToggableRow
               label="Dark mode"
               name="dark_mode"
@@ -133,7 +133,7 @@ export default function PrivacyPolicy() {
 
         <Block>
           <BlockTitle>Consent</BlockTitle>
-          <BlockBody gap>
+          <BlockBody $gap>
             <ToggableRow
               label="Allow non-essential cookies"
               name="allow_cookies"
@@ -157,7 +157,7 @@ export default function PrivacyPolicy() {
 
         <Block>
           <BlockTitle>Experience</BlockTitle>
-          <BlockBody gap>
+          <BlockBody $gap>
             <ToggableRow
               label="Mock chat"
               name="mock_chat"

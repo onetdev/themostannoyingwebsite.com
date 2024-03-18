@@ -28,27 +28,27 @@ export default function PrivacyPolicy() {
         In order for us to provide you the best possible experience on our
         websites, we need to collect and process certain information. Depending
         on your use of the Services, that may include:
-        <ul>
-          <li>
-            <strong>Usage data</strong> — when you visit our site, we will
-            store: the website from which you visited us from, the parts of our
-            site you visit, the date and duration of your visit, your anonymised
-            IP address, information from the device (device type, operating
-            system, screen resolution, language, country you are located in, and
-            web browser type) you used during your visit, and more. We process
-            this usage data in Matomo Analytics for statistical purposes, to
-            improve our site and to recognize and stop any misuse.
-          </li>
-          <li>
-            <strong>Cookies</strong> — we use cookies (small data files
-            transferred onto computers or devices by sites) for record-keeping
-            purposes and to enhance functionality on our site. You may
-            deactivate or restrict the transmission of cookies by changing the
-            settings of your web browser. Cookies that are already stored may be
-            deleted at any time.
-          </li>
-        </ul>
       </p>
+      <ul>
+        <li>
+          <strong>Usage data</strong> — when you visit our site, we will store:
+          the website from which you visited us from, the parts of our site you
+          visit, the date and duration of your visit, your anonymised IP
+          address, information from the device (device type, operating system,
+          screen resolution, language, country you are located in, and web
+          browser type) you used during your visit, and more. We process this
+          usage data in Matomo Analytics for statistical purposes, to improve
+          our site and to recognize and stop any misuse.
+        </li>
+        <li>
+          <strong>Cookies</strong> — we use cookies (small data files
+          transferred onto computers or devices by sites) for record-keeping
+          purposes and to enhance functionality on our site. You may deactivate
+          or restrict the transmission of cookies by changing the settings of
+          your web browser. Cookies that are already stored may be deleted at
+          any time.
+        </li>
+      </ul>
       <h3>Your Rights</h3>
       <p>
         You have the right to be informed of Personal Data processed by The MAW,

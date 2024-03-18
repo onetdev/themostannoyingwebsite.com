@@ -32,11 +32,11 @@ const Wrap = styled.div`
     overflow: hidden;
   }
 `;
-const Anchor = styled(Link)<{ highlight: boolean; flashing: boolean }>`
+const Anchor = styled(Link)<{ $highlight: boolean; $flashing: boolean }>`
   margin: 0 2rem;
   display: inline-block;
   color: ${cssVars.color.background};
-  animation-name: ${({ highlight, flashing }) =>
+  animation-name: ${({ $highlight: highlight, $flashing: flashing }) =>
     highlight ? (flashing ? flashingAnim : highlightAnim) : ''};
   animation-duration: 1s;
   animation-iteration-count: infinite;
@@ -66,8 +66,8 @@ const Marquee = ({ className }: Props) => {
               href={path}
               key={index}
               passHref
-              highlight
-              flashing={flashing}>
+              $highlight
+              $flashing={flashing}>
               {title}
             </Anchor>
           );

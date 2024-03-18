@@ -12,16 +12,16 @@ type Props = {
 };
 
 const StyledButton = styled.button<{
-  background: string;
-  backgroundAlt: string;
-  textColor: string;
+  $background: string;
+  $backgroundAlt: string;
+  $textColor: string;
 }>`
   cursor: pointer;
-  background: ${(props) => props.background};
-  color: ${(props) => props.textColor};
+  background: ${(props) => props.$background};
+  color: ${(props) => props.$textColor};
   transition: background 0.1s ease-in-out;
   &:hover {
-    background: ${(props) => props.backgroundAlt};
+    background: ${(props) => props.$backgroundAlt};
   }
   &:disabled {
     filter: grayscale(100%);
@@ -58,9 +58,9 @@ const Button = ({ variant, children, onClick, disabled, ...rest }: Props) => {
 
   return (
     <StyledButton
-      background={color.background}
-      backgroundAlt={color.backgroundAlt}
-      textColor={color.textColor}
+      $background={color.background}
+      $backgroundAlt={color.backgroundAlt}
+      $textColor={color.textColor}
       onClick={onClick}
       disabled={disabled}
       {...rest}>

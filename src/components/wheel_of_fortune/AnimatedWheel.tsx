@@ -37,7 +37,7 @@ const Wrap = styled.div`
   max-height: 500px;
   padding: 2rem;
 `;
-const PointerWrap = styled.div<{ wiggle: boolean }>`
+const PointerWrap = styled.div<{ $wiggle: boolean }>`
   position: absolute;
   top: 0;
   right: calc(50% - 15px);
@@ -50,7 +50,7 @@ const PointerWrap = styled.div<{ wiggle: boolean }>`
     top: 13px;
     right: calc(50% - 9px);
   }
-  ${({ wiggle }) =>
+  ${({ $wiggle: wiggle }) =>
     wiggle &&
     css`
       animation: ${PointerWiggle} 0.2s linear infinite;
@@ -79,18 +79,18 @@ const WheelAnimationWrap = styled.div`
   border-radius: 50%;
 `;
 const WheelAnimation = styled.div<{
-  duration: number;
-  rotation: number;
-  allowFlashing: boolean;
+  $duration: number;
+  $rotation: number;
+  $allowFlashing: boolean;
 }>`
-  transform: rotate(${(props) => `${props.rotation}deg`});
-  transition: transform ${(props) => `${props.duration}s`}
+  transform: rotate(${(props) => `${props.$rotation}deg`});
+  transition: transform ${(props) => `${props.$duration}s`}
     cubic-bezier(0.33, 1, 0.68, 1);
   user-select: none;
   .slice-winner {
     animation: ${SliceFlashing} 500ms infinite;
     ${(props) =>
-      !props.allowFlashing &&
+      !props.$allowFlashing &&
       css`
         animation: none;
       `}
@@ -171,7 +171,7 @@ const AnimatedWheel = ({
 
   return (
     <Wrap>
-      <PointerWrap wiggle={state === 'spinning'}>
+      <PointerWrap $wiggle={state === 'spinning'}>
         <FontAwesomeIcon icon={['fas', 'map-marker-alt']} />
       </PointerWrap>
       <CtaButton
@@ -182,9 +182,9 @@ const AnimatedWheel = ({
       </CtaButton>
       <WheelAnimationWrap ref={rotatorRef}>
         <WheelAnimation
-          duration={anim.duration}
-          rotation={anim.rotation}
-          allowFlashing={flashing}>
+          $duration={anim.duration}
+          $rotation={anim.rotation}
+          $allowFlashing={flashing}>
           <Wheel
             items={items}
             highlightIndex={state === 'completed' ? winIndex : undefined}

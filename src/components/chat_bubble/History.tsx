@@ -60,12 +60,12 @@ const UsserMessage = css`
   margin-left: 15px;
 `;
 
-const Message = styled.div<{ isUser: boolean }>`
+const Message = styled.div<{ $isUser: boolean }>`
   position: relative;
   padding: 10px;
   border-radius: 10px;
   margin: 10px 0 25px 0;
-  ${({ isUser }) => (isUser ? UsserMessage : BotMessage)}
+  ${({ $isUser: isUser }) => (isUser ? UsserMessage : BotMessage)}
 `;
 const MessageTime = styled.small`
   position: absolute;
@@ -148,7 +148,7 @@ const History = ({ onUserMessage, history, onClose }: Props) => {
           history
             .sort((a, b) => a.time.getTime() - b.time.getTime())
             .map((item, index) => (
-              <Message key={index} isUser={item.isUser}>
+              <Message key={index} $isUser={item.isUser}>
                 {item.text}
                 <br />
                 <MessageTime>
