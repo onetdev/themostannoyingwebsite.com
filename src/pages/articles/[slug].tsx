@@ -3,9 +3,9 @@ import Error from 'next/error';
 import Head from 'next/head';
 
 import { useAppSelector } from '@/redux/hooks';
-import { selectContentPaywall } from '@/redux/stores/experience';
 import LockedContent from '@/components/tricks/LockedContent';
 import ArticleService from '@/services/ArticleService';
+import { selectContentPaywall } from '@/redux/selectors/experience';
 
 interface Props {
   slug: string;

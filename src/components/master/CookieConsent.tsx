@@ -2,11 +2,9 @@ import Link from 'next/link';
 import { styled } from 'styled-components';
 
 import { useAppDispatch, useAppSelector } from '@/redux/hooks';
-import {
-  selectReviewCompleted,
-  setReviewCompleted,
-} from '@/redux/stores/consent';
+import { setReviewCompleted } from '@/redux/slices/consent';
 import { cssVars, ThemeProps } from '@/styles/theme';
+import { selectReviewCompleted } from '@/redux/selectors/consent';
 
 const Wrap = styled.div<{ theme: ThemeProps }>`
   position: sticky;

@@ -4,9 +4,9 @@ import MarqueePlugin from 'react-fast-marquee';
 import { styled, keyframes } from 'styled-components';
 
 import { useAppSelector } from '@/redux/hooks';
-import { selectEnableFlashing } from '@/redux/stores/preference';
 import ArticleService from '@/services/ArticleService';
 import { cssVars } from '@/styles/theme';
+import { selectEnableFlashing } from '@/redux/selectors/preference';
 
 type Props = {
   className?: string;

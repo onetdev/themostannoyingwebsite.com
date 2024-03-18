@@ -9,19 +9,19 @@ import {
   setEnableFlashing,
   setEnableSound,
   setAdultFilter,
-} from '@/redux/stores/preference';
+} from '@/redux/slices/preference';
 import {
   setAllowLocation,
   setAllowNotification,
   setAllowAnalytics,
   setAllowCookies,
-} from '@/redux/stores/consent';
+} from '@/redux/slices/consent';
 import {
   setContentPaywall,
   setExitPrompt,
   setMockChat,
   setWheelOfFortune,
-} from '@/redux/stores/experience';
+} from '@/redux/slices/experience';
 
 const Blocks = styled.div`
   display: grid;

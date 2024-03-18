@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useState } from 'react';
 
 import { PersistedStoreType } from '@/redux/store';
-import { setHasInteracted } from '@/redux/stores/runtime';
+import { setHasInteracted } from '@/redux/slices/runtime';
 
 /**
  * Some browsers will limit features until the first user interaction has

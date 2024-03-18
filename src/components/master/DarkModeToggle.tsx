@@ -1,8 +1,9 @@
 import { styled } from 'styled-components';
 
-import { selectDarkMode, setDarkMode } from '@/redux/stores/preference';
+import { setDarkMode } from '@/redux/slices/preference';
 import { useAppDispatch, useAppSelector } from '@/redux/hooks';
 import { cssVars } from '@/styles/theme';
+import { selectDarkMode } from '@/redux/selectors/preference';
 
 type Props = {
   className?: string;

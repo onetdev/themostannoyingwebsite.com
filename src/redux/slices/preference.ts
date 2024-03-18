@@ -1,7 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-import type { AppState } from '@/redux/store';
-
 export interface PreferenceState {
   isDarkMode: boolean;
   enableSound: boolean;
@@ -41,13 +39,5 @@ export const {
   setEnableFlashing,
   setAdultFilter,
 } = preference.actions;
-
-export const selectDarkMode = (state: AppState) => state.preference.isDarkMode;
-export const selectEnableSound = (state: AppState) =>
-  state.preference.enableSound;
-export const selectEnableFlashing = (state: AppState) =>
-  state.preference.enableFlashing;
-export const selectAdultFilter = (state: AppState) =>
-  state.preference.adultFilter;
 
 export default preference.reducer;

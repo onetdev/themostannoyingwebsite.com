@@ -10,12 +10,12 @@ import {
   LightTheme,
   LightThemeStyle,
 } from '@/styles/theme';
-import { selectDarkMode } from '@/redux/stores/preference';
 import * as redux from '@/redux/store';
 import registerIcons from '@/utils/icons';
 import useFirstInteraction from '@/hooks/useFirstInteraction';
 import useInFocusMeter from '@/hooks/useInFocusMeter';
-import { selectExitPrompt } from '@/redux/stores/experience';
+import { selectDarkMode } from '@/redux/selectors/preference';
+import { selectExitPrompt } from '@/redux/selectors/experience';
 
 type Props = {
   children: React.ReactNode;

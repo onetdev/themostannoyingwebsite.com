@@ -12,10 +12,10 @@ import {
 import { type PersistConfig } from '@photobot/reduxjs-toolkit-persist/src/types';
 import autoMergeLevel2 from '@photobot/reduxjs-toolkit-persist/lib/stateReconciler/autoMergeLevel2';
 
-import preferenceReducer from '@/redux/stores/preference';
-import consentReducer from '@/redux/stores/consent';
-import experienceReducer from '@/redux/stores/experience';
-import runtimeReducer from '@/redux/stores/runtime';
+import preferenceReducer from '@/redux/slices/preference';
+import consentReducer from '@/redux/slices/consent';
+import experienceReducer from '@/redux/slices/experience';
+import runtimeReducer from '@/redux/slices/runtime';
 
 export const rootReducer = combineReducers({
   preference: preferenceReducer,

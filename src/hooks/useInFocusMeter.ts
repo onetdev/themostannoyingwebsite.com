@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 
 import { PersistedStoreType } from '@/redux/store';
-import { setInFocusSeconds, setIsInFocus } from '@/redux/stores/runtime';
+import { setInFocusSeconds, setIsInFocus } from '@/redux/slices/runtime';
 
 /**
  * This will mesaure how long the webpage has been in focus and report it to
