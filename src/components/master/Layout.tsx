@@ -1,5 +1,6 @@
 import { PropsWithChildren } from 'react';
 import { styled } from 'styled-components';
+import { Analytics } from '@vercel/analytics/react';
 
 import CookieBar from '@/components/master/CookieConsent';
 import { ChatBubble } from '@/components/chat_bubble';
@@ -27,6 +28,7 @@ const Layout = ({ children }: PropsWithChildren) => {
 
   return (
     <>
+      <Analytics />
       <ContainerGiftFlaps />
       <StyledLayout>
         <Header />
