@@ -1,14 +1,17 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
+import { ColorScheme } from '@/hooks/useSystemColorScheme';
+
+export type UserColorScheme = ColorScheme | 'auto';
 export interface PreferenceState {
-  isDarkMode: boolean;
+  colorScheme: UserColorScheme;
   enableSound: boolean;
   enableFlashing: boolean;
   adultFilter: boolean;
 }
 
 const initialState: PreferenceState = {
-  isDarkMode: false,
+  colorScheme: 'auto',
   enableSound: true,
   enableFlashing: false,
   adultFilter: true,
@@ -18,8 +21,8 @@ export const preferenceSlice = createSlice({
   name: 'preference',
   initialState,
   reducers: {
-    setDarkMode: (state, action: PayloadAction<boolean>) => {
-      state.isDarkMode = action.payload;
+    setColorScheme: (state, action: PayloadAction<UserColorScheme>) => {
+      state.colorScheme = action.payload;
     },
     setEnableSound: (state, action: PayloadAction<boolean>) => {
       state.enableSound = action.payload;

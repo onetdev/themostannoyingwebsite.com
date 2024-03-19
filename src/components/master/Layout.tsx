@@ -1,4 +1,4 @@
-import { ReactNode } from 'react';
+import { PropsWithChildren } from 'react';
 import { styled } from 'styled-components';
 
 import CookieBar from '@/components/master/CookieConsent';
@@ -20,11 +20,7 @@ const StyledLayout = styled.div`
   background: ${cssVars.color.surface};
 `;
 
-interface LayoutProps {
-  children: ReactNode;
-}
-
-export default function Layout({ children }: LayoutProps) {
+const Layout = ({ children }: PropsWithChildren) => {
   const { wheelOfFortune, mockChat } = useAppSelector(
     (state) => state.experience,
   );
@@ -43,4 +39,6 @@ export default function Layout({ children }: LayoutProps) {
       </StyledLayout>
     </>
   );
-}
+};
+
+export default Layout;
