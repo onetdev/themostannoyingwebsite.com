@@ -2,7 +2,7 @@ import '@/styles/globals.css';
 import Head from 'next/head';
 
 import Layout from '@/components/master/Layout';
-import Provider from '@/components/master/Provider';
+import ProviderContainer from '@/components/providers/ProviderContainer';
 
 import type { AppProps } from 'next/app';
 
@@ -10,7 +10,7 @@ const TheMostAnnoyingWebsite = ({ Component, pageProps }: AppProps) => {
   const description =
     'Self-proclaimed most annoying website on the web with so many disgusting features of modern websites you might even vomit at some point.';
   return (
-    <Provider>
+    <ProviderContainer>
       <Head>
         <title>The Most Annoying Website</title>
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
@@ -28,7 +28,7 @@ const TheMostAnnoyingWebsite = ({ Component, pageProps }: AppProps) => {
       <Layout>
         <Component {...pageProps} />
       </Layout>
-    </Provider>
+    </ProviderContainer>
   );
 };
 

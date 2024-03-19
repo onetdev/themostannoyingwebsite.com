@@ -1,10 +1,12 @@
 import ReactTimeAgo from 'react-timeago';
 import { styled } from 'styled-components';
-import { ChangeEventHandler } from 'react';
 
 import { cssRule, cssVars } from '@/styles/theme';
 import { useAppDispatch, useAppSelector } from '@/redux/hooks';
-import { actions as preferenceActions } from '@/redux/slices/preference';
+import {
+  UserColorScheme,
+  actions as preferenceActions,
+} from '@/redux/slices/preference';
 import { actions as consentActions } from '@/redux/slices/consent';
 import { actions as experienceActions } from '@/redux/slices/experience';
 import selectPreference from '@/redux/selectors/preference';
@@ -41,27 +43,56 @@ const RowWithLabel = styled.div`
   }
 `;
 
-type ToggableRowProps = {
+type FormElementProps = {
   label: string;
   name: string;
+};
+
+type ToggableRowProps = FormElementProps & {
   checked: boolean;
-  onChange: ChangeEventHandler<HTMLInputElement>;
+  onChange: (value: boolean) => void;
 };
-const ToggableRow = ({ label, name, checked, onChange }: ToggableRowProps) => {
-  return (
-    <RowWithLabel>
-      <label>
-        <span>{label}</span>
-        <input
-          type="checkbox"
-          name={name}
-          checked={checked}
-          onChange={onChange}
-        />
-      </label>
-    </RowWithLabel>
-  );
+const ToggableRow = ({ label, name, checked, onChange }: ToggableRowProps) => (
+  <RowWithLabel>
+    <label>
+      <span>{label}</span>
+      <input
+        type="checkbox"
+        name={name}
+        checked={checked}
+        onChange={(e) => onChange(e.target.checked)}
+      />
+    </label>
+  </RowWithLabel>
+);
+
+type SelectRowProps = FormElementProps & {
+  values: { value: string; label: string }[];
+  selected: string;
+  onChange: (value: string) => void;
 };
+const SelectRow = ({
+  label,
+  name,
+  values,
+  selected,
+  onChange,
+}: SelectRowProps) => (
+  <RowWithLabel>
+    <label>
+      <span>{label}</span>
+      <select
+        name={name}
+        onChange={(e) => onChange(values[e.target.selectedIndex].value)}>
+        {values.map(({ value, label }) => (
+          <option key={value} value="light" selected={selected == value}>
+            {label}
+          </option>
+        ))}
+      </select>
+    </label>
+  </RowWithLabel>
+);
 
 export default function PrivacyPolicy() {
   const dispatch = useAppDispatch();
@@ -71,30 +102,37 @@ export default function PrivacyPolicy() {
   const runtime = useAppSelector(selectRuntime);
 
   // Preferences
-  const onDarkModeChange = () =>
-    dispatch(preferenceActions.setDarkMode(!preference.isDarkMode));
-  const onFlashingContentsChange = () =>
-    dispatch(preferenceActions.setEnableFlashing(!preference.enableFlashing));
-  const onSoundChange = () =>
-    dispatch(preferenceActions.setEnableSound(!preference.enableSound));
-  const onAdultFilterChange = () =>
-    dispatch(preferenceActions.setAdultFilter(!preference.adultFilter));
+  const onColorSchemeChange = (value: string) => {
+    dispatch(preferenceActions.setColorScheme(value as UserColorScheme));
+  };
+  const onFlashingContentsChange = (value: boolean) =>
+    dispatch(preferenceActions.setEnableFlashing(value));
+  const onSoundChange = (value: boolean) =>
+    dispatch(preferenceActions.setEnableSound(value));
+  const onAdultFilterChange = (value: boolean) =>
+    dispatch(preferenceActions.setAdultFilter(value));
   // Consent block
-  const onAllowCookiesChange = () =>
-    dispatch(consentActions.setAllowCookies(!consent.allowCookies));
-  const onAlowNotificationChange = () =>
-    dispatch(consentActions.setAllowNotification(!consent.allowNotification));
-  const onAllowLocationChange = () =>
-    dispatch(consentActions.setAllowLocation(!consent.allowLocation));
+  const onAllowCookiesChange = (value: boolean) =>
+    dispatch(consentActions.setAllowCookies(value));
+  const onAlowNotificationChange = (value: boolean) =>
+    dispatch(consentActions.setAllowNotification(value));
+  const onAllowLocationChange = (value: boolean) =>
+    dispatch(consentActions.setAllowLocation(value));
   // Experience block
-  const onAlowMockChatChange = () =>
-    dispatch(experienceActions.setMockChat(!experience.mockChat));
-  const onWheelOfFortuneChange = () =>
-    dispatch(experienceActions.setWheelOfFortune(!experience.wheelOfFortune));
-  const onExitPromptChange = () =>
-    dispatch(experienceActions.setExitPrompt(!experience.exitPrompt));
-  const onContentPaywallChange = () =>
-    dispatch(experienceActions.setContentPaywall(!experience.contentPaywall));
+  const onAlowMockChatChange = (value: boolean) =>
+    dispatch(experienceActions.setMockChat(value));
+  const onWheelOfFortuneChange = (value: boolean) =>
+    dispatch(experienceActions.setWheelOfFortune(value));
+  const onExitPromptChange = (value: boolean) =>
+    dispatch(experienceActions.setExitPrompt(value));
+  const onContentPaywallChange = (value: boolean) =>
+    dispatch(experienceActions.setContentPaywall(value));
+
+  const colorSchemes: { value: UserColorScheme; label: string }[] = [
+    { value: 'auto', label: 'System default' },
+    { value: 'light', label: 'Light' },
+    { value: 'dark', label: 'Dark' },
+  ];
 
   return (
     <main>
@@ -104,11 +142,12 @@ export default function PrivacyPolicy() {
         <Block>
           <BlockTitle>Preferences</BlockTitle>
           <BlockBody $gap>
-            <ToggableRow
-              label="Dark mode"
-              name="dark_mode"
-              checked={preference.isDarkMode}
-              onChange={onDarkModeChange}
+            <SelectRow
+              label="Theme / Color scheme"
+              name="color_scheme"
+              selected={preference.colorScheme}
+              values={colorSchemes}
+              onChange={onColorSchemeChange}
             />
             <ToggableRow
               label="Flashing contents"
