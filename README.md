@@ -1,31 +1,42 @@
 # The most annoying website 
 
-[![Netlify Status](https://api.netlify.com/api/v1/badges/e13ea0d0-b77d-4307-a5a4-2e413461e3ad/deploy-status)](https://app.netlify.com/sites/themostannoyingwebsite/deploys)
+The main idea is to collect all the disgusting features from today's website in one place. On steroids. We call those pesky features "experiments" here.
 
-The main idea is to collect all the disgusting features from today's website in one place.
+**Currently planned experiment** (_in no particular order_):
 
-At the moment we are (plan to) supporting the following features:
 - [x] Chat bubble with incoming messages and notification sound
 - [x] "Read more" at the bottom of the article.
 - [x] Marquee
 - [x] Wheel of fortune coupon modal
 - [x] Add confirmation when trying to leave the page
+- [ ] Update title while the user is on a different tab
 - [ ] Age verification on some images
-- [ ] Endless toggles for GDPR settings
-- [ ] Randomly appearing newsletter subscription modal
-- [ ] Asking for notification (no worries, the website won't send any notification)
-- [ ] Asking for location permission (no worries, the website won't use your location)
+- [ ] Newsletter modal when the user leaves the screen or scrolls down a bit
+- [ ] Asking for notification: no worries, the website won't send any notification
+- [ ] Asking for location permission: no worries, the website won't use your location
 - [ ] Sticky video player obscuring the page visibility. (+audio)
 - [ ] Randomly loading images while scrolling.
 - [ ] Low Quality images
-- [ ] Funny, silly contents (like Onion news)
-- [ ] Design
+- [ ] Funny, silly contents (inspired Onion news)
 
-In order to avoid adblockers this repo uses "gift" instead of anything that would resemble ad-like content (eg.: promotion, advertisement).
+**Stretch goal experiments**:
 
-If you have anything to add, do not hesitate and **start your PR today, it's 100% off, ACT NOW!**
+- [ ] Design: the page does just fine if it's bad looking.
 
-## Getting Started
+**Important**: In order to avoid adblockers this repo uses "gift" instead of anything that would resemble ad-like content (eg.: promotion, advertisement).
+
+## Contribution
+
+This project is open for contribution! If you have anything to add, do not hesitate and **start your PR today, it's 100% off, ACT NOW!**
+
+### Framework
+
+We are using Next.JS and TypeScript, if you are not familiar with those but still want to add your own experiments and tweaks, you can find great docs on the following sites:
+
+- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
+- [TypeScript Documentation](https://www.typescriptlang.org/docs/)
+
+### Local development
 
 First, run the development server:
 
@@ -33,34 +44,17 @@ First, run the development server:
 pnpm run dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [https://localhost:3000](https://localhost:3000) with your browser to see the result. SSL must be enabled to be able to use some of the browser APIs that won't run on unencrypted connections.
 
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
+## Deployment
 
-## Contribution
+PRs are automatically published to Vercel as previews (you can find preview URLs on PRs) and `main` branch will be promoted to our main domain on every single new commits.
 
-Feel free to open PRs while trying to match the existing structure and formatting.
+## Support
 
-More details to come if the project reaches a certain traction.
+If you are eager to support me, you can throw a few coins into [BuyMeACoffee/onetdev](https://www.buymeacoffee.com/onetdev) and wish something. It might come true!
 
-## Next.js
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation]() - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy
-
-The `main` branch will be automatically deployed to Netlify.
-
-## Support the author
-
-If you are eager to support me, throw a few coins at me on [BuyMeACoffee/onetdev](https://www.buymeacoffee.com/onetdev)
-
-## Credits 
+### 3rd party credits
 
 - Notification sound: https://github.com/akx/Notifications under licence CC0
 - Icons: https://fontawesome.com 
