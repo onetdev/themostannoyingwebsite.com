@@ -1,9 +1,10 @@
 import { styled } from 'styled-components';
 
 import { actions as preferenceActions } from '@/redux/slices/preference';
-import { useAppDispatch, useAppSelector } from '@/redux/hooks';
+import { useAppDispatch } from '@/redux/hooks';
 import { cssVars } from '@/styles/theme';
-import { selectDarkMode } from '@/redux/selectors/preference';
+import { ColorScheme } from '@/hooks/useSystemColorScheme';
+import useColorScheme from '@/hooks/useUserColorScheme';
 
 type Props = {
   className?: string;
@@ -40,17 +41,26 @@ const Toggler = styled.div<{ $isDarkMode: boolean }>`
 
 const DarkModeToggle = ({ className }: Props) => {
   const dispatch = useAppDispatch();
-  const isDarkMode = useAppSelector(selectDarkMode);
+  const colorScheme = useColorScheme();
 
   const toggleDarkMode = () => {
-    dispatch(preferenceActions.setDarkMode(!isDarkMode));
+    let next: ColorScheme;
+    switch (colorScheme) {
+      case 'dark':
+        next = 'light';
+        break;
+      case 'light':
+        next = 'dark';
+        break;
+    }
+    dispatch(preferenceActions.setColorScheme(next));
   };
 
   return (
     <Toggler
       className={className}
       onClick={toggleDarkMode}
-      $isDarkMode={isDarkMode}>
+      $isDarkMode={colorScheme === 'dark'}>
       <InDayMode role="img" aria-label="sun">
         ☀️
       </InDayMode>

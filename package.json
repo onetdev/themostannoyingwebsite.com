@@ -1,6 +1,6 @@
 {
   "name": "themostannoyingwebsite",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "author": {
     "name": "Konrad Koller",
     "email": "info@onet.dev",
@@ -26,6 +26,7 @@
     "@fortawesome/free-solid-svg-icons": "^6.5.1",
     "@fortawesome/react-fontawesome": "^0.2.0",
     "@reduxjs/toolkit": "^2.2.1",
+    "@vercel/analytics": "^1.2.2",
     "color": "^4.2.3",
     "eslint-config-next": "^14",
     "modern-normalize": "^2.0.0",

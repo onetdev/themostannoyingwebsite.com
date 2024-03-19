@@ -1,15 +1,16 @@
 import { useEffect, useState } from 'react';
 
-import { PersistedStoreType } from '@/redux/store';
 import { actions as runtimeActions } from '@/redux/slices/runtime';
+import { useAppDispatch } from '@/redux/hooks';
 
 /**
  * This will mesaure how long the webpage has been in focus and report it to
  * the redux store.
  */
-const useInFocusMeter = (store: PersistedStoreType) => {
+const useInFocusMeter = () => {
   const [isInFocus, setIsInFocusInternal] = useState(true);
   const [elapsed, setElapsed] = useState(0);
+  const dispatch = useAppDispatch();
 
   const handleFocus = () => setIsInFocusInternal(true);
   const handleBlur = () => setIsInFocusInternal(false);
@@ -24,8 +25,8 @@ const useInFocusMeter = (store: PersistedStoreType) => {
   }, []);
 
   useEffect(() => {
-    store.dispatch(runtimeActions.setIsInFocus(isInFocus));
-  }, [isInFocus, store]);
+    dispatch(runtimeActions.setIsInFocus(isInFocus));
+  }, [dispatch, isInFocus]);
 
   useEffect(() => {
     if (!isInFocus) {
@@ -36,11 +37,11 @@ const useInFocusMeter = (store: PersistedStoreType) => {
       // TODO: Broadcasting this will force the whole screen to rerender
       // which is unacceptable. Try solve this or even move runtime stuff
       // into a separate store, hook.
-      store.dispatch(runtimeActions.setInFocusSeconds(elapsed + 1));
+      dispatch(runtimeActions.setInFocusSeconds(elapsed + 1));
       setElapsed(elapsed + 1);
     }, 1000);
     return () => clearInterval(interval);
-  }, [isInFocus, elapsed, store]);
+  }, [isInFocus, elapsed, dispatch]);
 };
 
 export default useInFocusMeter;

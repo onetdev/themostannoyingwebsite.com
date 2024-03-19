@@ -1,20 +1,22 @@
 import { useCallback, useEffect, useState } from 'react';
 
-import { PersistedStoreType } from '@/redux/store';
 import { actions as runtimeActions } from '@/redux/slices/runtime';
+import { useAppDispatch } from '@/redux/hooks';
 
 /**
  * Some browsers will limit features until the first user interaction has
  * occured.
  */
-const useFirstInteraction = (store: PersistedStoreType) => {
+const useFirstInteraction = () => {
   const [completed, setCompleted] = useState(false);
+  const dispatch = useAppDispatch();
 
   const handleInteraction = useCallback(() => {
     if (completed) return;
+
     setCompleted(true);
-    store.dispatch(runtimeActions.setHasInteracted());
-  }, [completed, store]);
+    dispatch(runtimeActions.setHasInteracted());
+  }, [completed, dispatch]);
 
   useEffect(() => {
     document.addEventListener('click', handleInteraction);
