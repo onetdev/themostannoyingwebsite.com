@@ -1,6 +1,7 @@
 {
   "meta": {
-    "description": "Self-proclaimed most annoying website on the web with so many disgusting features of modern websites you might even vomit at some point."
+    "description": "Self-proclaimed most annoying website on the web with so many disgusting features of modern websites you might even vomit at some point.",
+    "recruiting": "The content of this page is absolutely free for everyone. Heck, you can even access the source code on <linkTag>GitHub</linkTag>. And... You know what? You can even contribute your of stuff as well."
   },
   "response": {
     "yes": "Yes",
