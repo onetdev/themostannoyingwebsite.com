@@ -3,19 +3,22 @@ import { useState, useEffect } from 'react';
 export type ColorScheme = 'light' | 'dark';
 
 export type SystemColorSchemeProps = {
-  defaultScheme?: ColorScheme;
+  defaultScheme: ColorScheme;
 };
 
 /**
  * Loads and watches for system color scheme changes.
- * IMPORTANT: This hook is different from the user defined one in the webapp
+ *
+ * IMPORTANT: This hook only works propery in the browser environment and
+ *  should not be directly used for theme switching.
+ *  Use `useUserColorScheme` instead which also takes user preference
+ *  into account.
  */
 const useSystemColorScheme = ({
   defaultScheme,
-}: SystemColorSchemeProps = {}): ColorScheme => {
-  const [preferredColorScheme, setPreferredColorScheme] = useState<ColorScheme>(
-    defaultScheme ?? 'dark',
-  );
+}: SystemColorSchemeProps): ColorScheme => {
+  const [preferredColorScheme, setPreferredColorScheme] =
+    useState<ColorScheme>(defaultScheme);
 
   useEffect(() => {
     if (!window.matchMedia) return;

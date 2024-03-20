@@ -11,10 +11,10 @@ import {
 } from '@/styles/theme';
 import * as redux from '@/redux/store';
 import registerIcons from '@/utils/icons';
-import useColorScheme from '@/hooks/useUserColorScheme';
+import useUserColorScheme from '@/hooks/useUserColorScheme';
 
 const ThemeProvider: FunctionComponent<PropsWithChildren> = ({ children }) => {
-  const colorScheme = useColorScheme();
+  const colorScheme = useUserColorScheme();
   const isDarkMode = colorScheme === 'dark';
 
   registerIcons();
