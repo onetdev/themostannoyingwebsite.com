@@ -1,3 +1,5 @@
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
+
 import config from '@/config';
 
 // Privacy policy inspired by https://matomo.org/privacy-policy/
@@ -122,3 +124,9 @@ export default function PrivacyPolicy() {
     </main>
   );
 }
+
+export const getStaticProps = async ({ locale }: { locale: string }) => ({
+  props: {
+    ...(await serverSideTranslations(locale, ['common'])),
+  },
+});

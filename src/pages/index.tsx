@@ -1,4 +1,5 @@
 import { styled } from 'styled-components';
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 
 import { cssRule, cssVars } from '@/styles/theme';
 import { ClearListStyle } from '@/styles/utils';
@@ -87,3 +88,9 @@ export default function Index() {
     </Grid>
   );
 }
+
+export const getStaticProps = async ({ locale }: { locale: string }) => ({
+  props: {
+    ...(await serverSideTranslations(locale, ['common'])),
+  },
+});

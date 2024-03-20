@@ -1,6 +1,7 @@
 import { GetServerSideProps, NextPage } from 'next';
 import Error from 'next/error';
 import Head from 'next/head';
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 
 import { useAppSelector } from '@/redux/hooks';
 import LockedContent from '@/components/tricks/LockedContent';
@@ -38,10 +39,16 @@ const ArticleItem: NextPage<Props> = ({ slug }: Props) => {
   );
 };
 
-export const getServerSideProps: GetServerSideProps<Props> = async (ctx) => {
-  const slug = ctx.query.slug as string;
+export const getServerSideProps: GetServerSideProps<Props> = async ({
+  query,
+  locale,
+}) => {
+  const slug = query.slug as string;
   return {
-    props: { slug },
+    props: {
+      slug,
+      ...(await serverSideTranslations(locale as string, ['common'])),
+    },
   };
 };
 

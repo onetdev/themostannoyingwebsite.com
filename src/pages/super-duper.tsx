@@ -1,3 +1,4 @@
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import { styled } from 'styled-components';
 
 const Strike = styled.span`
@@ -24,3 +25,9 @@ export default function SuperDuper() {
     </main>
   );
 }
+
+export const getStaticProps = async ({ locale }: { locale: string }) => ({
+  props: {
+    ...(await serverSideTranslations(locale, ['common'])),
+  },
+});

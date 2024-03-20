@@ -2,6 +2,7 @@ import { MouseEventHandler, useRef, useState } from 'react';
 import { styled } from 'styled-components';
 import Image from 'next/image';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 
 const IconWrap = styled.div`
   position: absolute;
@@ -92,5 +93,11 @@ const HotThings = () => {
     </main>
   );
 };
+
+export const getStaticProps = async ({ locale }: { locale: string }) => ({
+  props: {
+    ...(await serverSideTranslations(locale, ['common'])),
+  },
+});
 
 export default HotThings;
