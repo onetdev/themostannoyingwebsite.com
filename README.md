@@ -46,6 +46,12 @@ pnpm run dev
 
 Open [https://localhost:3000](https://localhost:3000) with your browser to see the result. SSL must be enabled to be able to use some of the browser APIs that won't run on unencrypted connections.
 
+## Translation
+
+As for now there's a super basic implementation of translations and there is no short-term aim for having other languages added.
+
+On the other hand we think that having a system implemented for localisation at an early stage is crucial to minimize switching to multilang setup at a later stage.
+
 ## Deployment
 
 PRs are automatically published to Vercel as previews (you can find preview URLs on PRs) and `main` branch will be promoted to our main domain on every single new commits.
