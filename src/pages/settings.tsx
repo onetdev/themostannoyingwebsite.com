@@ -1,5 +1,7 @@
 import ReactTimeAgo from 'react-timeago';
 import { styled } from 'styled-components';
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
+import { useTranslation } from 'next-i18next';
 
 import { cssRule, cssVars } from '@/styles/theme';
 import { useAppDispatch, useAppSelector } from '@/redux/hooks';
@@ -83,9 +85,10 @@ const SelectRow = ({
       <span>{label}</span>
       <select
         name={name}
-        onChange={(e) => onChange(values[e.target.selectedIndex].value)}>
+        onChange={(e) => onChange(values[e.target.selectedIndex].value)}
+        defaultValue={selected}>
         {values.map(({ value, label }) => (
-          <option key={value} value="light" selected={selected == value}>
+          <option key={value} value={value}>
             {label}
           </option>
         ))}
@@ -100,6 +103,8 @@ export default function PrivacyPolicy() {
   const experience = useAppSelector(selectExperience);
   const consent = useAppSelector(selectConsent);
   const runtime = useAppSelector(selectRuntime);
+  const { t } = useTranslation('settings');
+  const { t: tCommon } = useTranslation('common');
 
   // Preferences
   const onColorSchemeChange = (value: string) => {
@@ -136,33 +141,33 @@ export default function PrivacyPolicy() {
 
   return (
     <main>
-      <h1>Settings</h1>
+      <h1>{t('title')}</h1>
 
       <Blocks>
         <Block>
-          <BlockTitle>Preferences</BlockTitle>
+          <BlockTitle>{t('preference_section.title')}</BlockTitle>
           <BlockBody $gap>
             <SelectRow
-              label="Theme / Color scheme"
+              label={t('preference_section.color_scheme')}
               name="color_scheme"
               selected={preference.colorScheme}
               values={colorSchemes}
               onChange={onColorSchemeChange}
             />
             <ToggableRow
-              label="Flashing contents"
+              label={t('preference_section.enable_flashing')}
               name="enable_flashing"
               checked={preference.enableFlashing}
               onChange={onFlashingContentsChange}
             />
             <ToggableRow
-              label="Sound"
+              label={t('preference_section.enable_sound')}
               name="enable_sound"
               checked={preference.enableSound}
               onChange={onSoundChange}
             />
             <ToggableRow
-              label="Filter adult contents"
+              label={t('preference_section.adult_filter')}
               name="adult_filter"
               checked={preference.adultFilter}
               onChange={onAdultFilterChange}
@@ -171,22 +176,22 @@ export default function PrivacyPolicy() {
         </Block>
 
         <Block>
-          <BlockTitle>Consent</BlockTitle>
+          <BlockTitle>{t('consent_section.title')}</BlockTitle>
           <BlockBody $gap>
             <ToggableRow
-              label="Allow non-essential cookies"
+              label={t('consent_section.allow_cookies')}
               name="allow_cookies"
               checked={consent.allowCookies}
               onChange={onAllowCookiesChange}
             />
             <ToggableRow
-              label="Allow notification"
+              label={t('consent_section.allow_notification')}
               name="allow_notification"
               checked={consent.allowNotification || false}
               onChange={onAlowNotificationChange}
             />
             <ToggableRow
-              label="Allow location"
+              label={t('consent_section.enable_location')}
               name="enable_location"
               checked={consent.allowLocation || false}
               onChange={onAllowLocationChange}
@@ -195,28 +200,28 @@ export default function PrivacyPolicy() {
         </Block>
 
         <Block>
-          <BlockTitle>Experience</BlockTitle>
+          <BlockTitle>{t('experience_section.title')}</BlockTitle>
           <BlockBody $gap>
             <ToggableRow
-              label="Mock chat"
+              label={t('experience_section.mock_chat')}
               name="mock_chat"
               checked={experience.mockChat}
               onChange={onAlowMockChatChange}
             />
             <ToggableRow
-              label="Wheel of fortune"
+              label={t('experience_section.wheel_of_fortune')}
               name="wheel_of_fortune"
               checked={experience.wheelOfFortune}
               onChange={onWheelOfFortuneChange}
             />
             <ToggableRow
-              label="Exit prompt"
+              label={t('experience_section.exit_prompt')}
               name="exit_prompt"
               checked={experience.exitPrompt}
               onChange={onExitPromptChange}
             />
             <ToggableRow
-              label="Content paywall"
+              label={t('experience_section.content_paywall')}
               name="content_paywall"
               checked={experience.contentPaywall}
               onChange={onContentPaywallChange}
@@ -225,21 +230,32 @@ export default function PrivacyPolicy() {
         </Block>
 
         <Block>
-          <BlockTitle>About this session</BlockTitle>
+          <BlockTitle>{t('runtime_section.title')}</BlockTitle>
           <BlockBody>
-            <small>These values reset every single visit.</small>
+            <small>{t('runtime_section.disclaimer')}</small>
             <p>
-              Started at <ReactTimeAgo date={runtime.startTime} />
+              {t('runtime_section.started_ago')}{' '}
+              <ReactTimeAgo date={runtime.startTime} />
             </p>
             <p>
-              Elapsed seconds: <span>{runtime.inFocusSeconds}</span>
+              {t('runtime_section.elapsed_seconds')}{' '}
+              <span>{runtime.inFocusSeconds}</span>
             </p>
             <p>
-              Is in focus: <span>{runtime.isInFocus ? 'Yes' : 'No'}</span>
+              {t('runtime_section.is_window_in_focus')}{' '}
+              <span>
+                {runtime.isInFocus
+                  ? tCommon('response.yes')
+                  : tCommon('response.yes')}
+              </span>
             </p>
             <p>
-              Had first interaction:{' '}
-              <span>{runtime.hasInteracted ? 'Yes' : 'No'}</span>
+              {t('runtime_section.is_windows_interacted')}{' '}
+              <span>
+                {runtime.hasInteracted
+                  ? tCommon('response.yes')
+                  : tCommon('response.yes')}
+              </span>
             </p>
           </BlockBody>
         </Block>
@@ -247,3 +263,9 @@ export default function PrivacyPolicy() {
     </main>
   );
 }
+
+export const getStaticProps = async ({ locale }: { locale: string }) => ({
+  props: {
+    ...(await serverSideTranslations(locale, ['common', 'settings'])),
+  },
+});
