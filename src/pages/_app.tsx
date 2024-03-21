@@ -1,14 +1,18 @@
 import '@/styles/globals.css';
 import Head from 'next/head';
+import { appWithTranslation } from 'next-i18next';
 
+import english from '@/public/locales/en/common.json';
 import Layout from '@/components/master/Layout';
 import ProviderContainer from '@/components/providers/ProviderContainer';
 
 import type { AppProps } from 'next/app';
 
 const TheMostAnnoyingWebsite = ({ Component, pageProps }: AppProps) => {
-  const description =
-    'Self-proclaimed most annoying website on the web with so many disgusting features of modern websites you might even vomit at some point.';
+  // Can't use translations here yet, description will be set on page level
+  // https://github.com/i18next/next-i18next?tab=readme-ov-file#serversidetranslations
+  const description = english.meta.description;
+
   return (
     <ProviderContainer>
       <Head>
@@ -32,4 +36,4 @@ const TheMostAnnoyingWebsite = ({ Component, pageProps }: AppProps) => {
   );
 };
 
-export default TheMostAnnoyingWebsite;
+export default appWithTranslation(TheMostAnnoyingWebsite);

@@ -4,7 +4,7 @@ import { actions as preferenceActions } from '@/redux/slices/preference';
 import { useAppDispatch } from '@/redux/hooks';
 import { cssVars } from '@/styles/theme';
 import { ColorScheme } from '@/hooks/useSystemColorScheme';
-import useColorScheme from '@/hooks/useUserColorScheme';
+import useUserColorScheme from '@/hooks/useUserColorScheme';
 
 type Props = {
   className?: string;
@@ -41,7 +41,7 @@ const Toggler = styled.div<{ $isDarkMode: boolean }>`
 
 const DarkModeToggle = ({ className }: Props) => {
   const dispatch = useAppDispatch();
-  const colorScheme = useColorScheme();
+  const colorScheme = useUserColorScheme();
 
   const toggleDarkMode = () => {
     let next: ColorScheme;
