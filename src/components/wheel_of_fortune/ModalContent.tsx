@@ -28,6 +28,8 @@ const Label = styled.div`
   text-align: center;
   font-weight: 600;
   font-size: ${cssVars.fontSize.title};
+  width: 500px;
+  max-width: calc(100vw * 0.8);
 `;
 const ConfettiWrap = styled.div`
   position: absolute;

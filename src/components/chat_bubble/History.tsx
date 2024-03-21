@@ -28,6 +28,7 @@ const Wrap = styled.div`
   background: ${cssVars.color.surface};
   width: min(400px, 70vw);
   border-radius: ${cssVars.spacing.gap};
+  border: 1px solid ${cssVars.color.secondary};
 `;
 const Header = styled.div`
   display: flex;
@@ -93,7 +94,9 @@ const Input = styled.input`
   background: ${cssVars.color.surface};
   color: ${cssVars.color.onSurface};
   border: 1px solid ${cssVars.color.tertiary};
+  padding: ${cssVars.spacing.gap};
   flex-grow: 1;
+  border-radius: 0;
 `;
 const Submit = styled.button`
   background: ${cssVars.color.primary};
