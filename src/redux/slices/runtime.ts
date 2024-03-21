@@ -31,6 +31,9 @@ export const runtimeSlice = createSlice({
     setInFocusSeconds: (state, action: PayloadAction<number>) => {
       state.inFocusSeconds = action.payload;
     },
+    incrementInFocusSeconds: (state) => {
+      state.inFocusSeconds += 1;
+    },
   },
 });
 
