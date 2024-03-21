@@ -34,6 +34,11 @@ const Intro = styled.p`
   background: ${cssVars.color.secondary};
   color: ${cssVars.color.onSecondary};
 `;
+const CoverImage = styled(Image)`
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+`;
 
 type Props = {
   article: ArticleCore;
@@ -45,10 +50,9 @@ const LargeCoverItem = ({ article }: Props) => {
       <Anchor href={article.url} passHref>
         {!article.coverImage && <CoverPlaceholder width={1920} height={1200} />}
         {article.coverImage && (
-          <Image
+          <CoverImage
             src={article.coverImage}
             alt="Cover image"
-            layout="responsive"
             width="1920"
             height="1200"
           />
