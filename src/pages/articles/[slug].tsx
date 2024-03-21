@@ -6,10 +6,11 @@ import { useAppSelector } from '@/redux/hooks';
 import LockedContent from '@/components/tricks/LockedContent';
 import ArticleService from '@/services/ArticleService';
 import { selectContentPaywall } from '@/redux/selectors/experience';
+import { getI18nProps } from '@/lib/i18n';
 
-interface Props {
+type Props = {
   slug: string;
-}
+};
 
 const ArticleItem: NextPage<Props> = ({ slug }: Props) => {
   const showLocker = useAppSelector(selectContentPaywall);
@@ -38,10 +39,15 @@ const ArticleItem: NextPage<Props> = ({ slug }: Props) => {
   );
 };
 
-export const getServerSideProps: GetServerSideProps<Props> = async (ctx) => {
-  const slug = ctx.query.slug as string;
+export const getServerSideProps: GetServerSideProps<Props> = async (
+  context,
+) => {
+  const slug = context.query.slug as string;
   return {
-    props: { slug },
+    props: {
+      slug,
+      ...(await getI18nProps(context, ['common'])),
+    },
   };
 };
 

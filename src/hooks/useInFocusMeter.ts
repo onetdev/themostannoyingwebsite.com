@@ -5,23 +5,24 @@ import { useAppDispatch } from '@/redux/hooks';
 
 /**
  * This will mesaure how long the webpage has been in focus and report it to
- * the redux store.
+ * the redux store. Please note that if you change application but the
+ * browser is still visible it will count as "in focus".
+ * https://developer.mozilla.org/en-US/docs/Web/API/Document/visibilitychange_event
  */
 const useInFocusMeter = () => {
   const [isInFocus, setIsInFocusInternal] = useState(true);
-  const [elapsed, setElapsed] = useState(0);
   const dispatch = useAppDispatch();
 
-  const handleFocus = () => setIsInFocusInternal(true);
-  const handleBlur = () => setIsInFocusInternal(false);
+  const handleVisibilityChange = () => {
+    setIsInFocusInternal(!document.hidden);
+  };
 
   useEffect(() => {
-    document.addEventListener('focus', handleFocus);
-    document.addEventListener('blur', handleBlur);
-    return () => {
-      document.removeEventListener('focus', handleFocus);
-      document.addEventListener('blur', handleBlur);
-    };
+    document.addEventListener('visibilitychange', handleVisibilityChange);
+    handleVisibilityChange();
+
+    return () =>
+      document.removeEventListener('visibilitychange', handleVisibilityChange);
   }, []);
 
   useEffect(() => {
@@ -29,19 +30,14 @@ const useInFocusMeter = () => {
   }, [dispatch, isInFocus]);
 
   useEffect(() => {
-    if (!isInFocus) {
-      return;
-    }
+    if (!isInFocus) return;
 
-    const interval = setInterval(() => {
-      // TODO: Broadcasting this will force the whole screen to rerender
-      // which is unacceptable. Try solve this or even move runtime stuff
-      // into a separate store, hook.
-      dispatch(runtimeActions.setInFocusSeconds(elapsed + 1));
-      setElapsed(elapsed + 1);
-    }, 1000);
+    const interval = setInterval(
+      () => dispatch(runtimeActions.incrementInFocusSeconds()),
+      1000,
+    );
     return () => clearInterval(interval);
-  }, [isInFocus, elapsed, dispatch]);
+  }, [isInFocus, dispatch]);
 };
 
 export default useInFocusMeter;

@@ -1,0 +1,31 @@
+{
+  "title": "Settings",
+  "preference_section": {
+    "title": "Preferences",
+    "color_scheme": "Theme / Color scheme",
+    "enable_flashing": "Flashing contents",
+    "enable_sound": "Sound",
+    "adult_filter": "Filter adult contents"
+  },
+  "consent_section": {
+    "title": "Consent",
+    "allow_cookies": "Allow non-essential cookies",
+    "allow_notification": "Allow notification",
+    "enable_location": "Allow location"
+  },
+  "experience_section": {
+    "title": "Experience",
+    "mock_chat": "Mock chat",
+    "wheel_of_fortune": "Wheel of fortune",
+    "exit_prompt": "Exit prompt",
+    "content_paywall": "Content paywall"
+  },
+  "runtime_section": {
+    "title": "About this session",
+    "disclaimer": "These values reset every single visit and acts as a bit of debug info.",
+    "started_ago": "Started:",
+    "elapsed_seconds": "Elapsed seconds:",
+    "is_window_in_focus": "Is this window in focus?",
+    "is_windows_interacted": "Had first interaction?"
+  }
+}

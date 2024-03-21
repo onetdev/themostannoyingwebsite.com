@@ -40,15 +40,17 @@ const RightText = styled.div`
   transform: rotate(90deg) translateX(50vh);
   transform-origin: right bottom;
 `;
+const IconImage = styled(Image)`
+  object-fit: cover;
+`;
 
 const ContainerGiftFlaps = () => {
   return (
     <ContainerWrap>
       <Gift>
         <Link href="/super-duper" passHref>
-          <Image
+          <IconImage
             src={flapImage}
-            layout="responsive"
             placeholder="blur"
             alt="Super duper car advert"
             width={1920}

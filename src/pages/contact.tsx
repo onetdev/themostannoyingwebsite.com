@@ -1,6 +1,9 @@
-import config from '@/config';
+import { NextPage } from 'next';
 
-export default function Contact() {
+import config from '@/config';
+import { makeI18nStaticProps } from '@/lib/i18n';
+
+const Contact: NextPage = () => {
   return (
     <main>
       <h1>Contact page</h1>
@@ -9,4 +12,7 @@ export default function Contact() {
       </p>
     </main>
   );
-}
+};
+
+export const getStaticProps = makeI18nStaticProps(['common']);
+export default Contact;

@@ -1,0 +1,9 @@
+# Codeowners
+# Reference: https://help.github.com/articles/about-codeowners/
+
+# GitHub Usernames:
+#
+# Konrad Koller - @onetdev
+
+# Global owners
+*   @onetdev

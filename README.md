@@ -46,6 +46,12 @@ pnpm run dev
 
 Open [https://localhost:3000](https://localhost:3000) with your browser to see the result. SSL must be enabled to be able to use some of the browser APIs that won't run on unencrypted connections.
 
+## Translation
+
+Thankfully Next.JS comes with great [i18n support](https://nextjs.org/docs/pages/building-your-application/routing/internationalization) out of the box. We are using simple path based routing for translations, so if you want to add a new language, you just need to create a new folder under `public/locales` with the language code (eg.: `en`, `hu`, `de`, etc.) and create the files you want to translate. Please use `en` as a reference for the keys and values.
+
+Please keep in mind that translations are low on the priority list for now.
+
 ## Deployment
 
 PRs are automatically published to Vercel as previews (you can find preview URLs on PRs) and `main` branch will be promoted to our main domain on every single new commits.

@@ -58,7 +58,7 @@ module.exports = {
     '@typescript-eslint/no-var-requires': [
       'error',
       {
-        allow: ['next/jest'],
+        allow: ['next/jest', './next-i18next.config'],
       },
     ],
   },

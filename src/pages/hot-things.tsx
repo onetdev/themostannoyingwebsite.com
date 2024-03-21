@@ -2,6 +2,9 @@ import { MouseEventHandler, useRef, useState } from 'react';
 import { styled } from 'styled-components';
 import Image from 'next/image';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { NextPage } from 'next';
+
+import { makeI18nStaticProps } from '@/lib/i18n';
 
 const IconWrap = styled.div`
   position: absolute;
@@ -24,8 +27,12 @@ const VideoPlayer = styled.video`
   top: 0;
   z-index: 1;
 `;
+const PlaceholderImage = styled(Image)`
+  width: 100%;
+  height: auto;
+`;
 
-const HotThings = () => {
+const HotThings: NextPage = () => {
   const [isCapable] = useState(
     'mediaDevices' in navigator && 'getUserMedia' in navigator.mediaDevices,
   );
@@ -79,9 +86,8 @@ const HotThings = () => {
           <IconWrap onClick={onIntent} hidden={isStreamStarted}>
             <FontAwesomeIcon icon={['fas', 'play-circle']} />
           </IconWrap>
-          <Image
+          <PlaceholderImage
             src="/assets/images/lava.jpg"
-            layout="responsive"
             alt="Picture of you"
             width={1920}
             height={1080}
@@ -93,4 +99,5 @@ const HotThings = () => {
   );
 };
 
+export const getStaticProps = makeI18nStaticProps(['common']);
 export default HotThings;

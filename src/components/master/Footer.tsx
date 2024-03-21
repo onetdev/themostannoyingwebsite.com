@@ -1,4 +1,6 @@
 import { styled } from 'styled-components';
+import { Trans, useTranslation } from 'next-i18next';
+import Link from 'next/link';
 
 import { cssVars } from '@/styles/theme';
 
@@ -10,12 +12,23 @@ const FooterView = styled.footer`
 `;
 
 const Footer = () => {
+  const { t } = useTranslation(['common']);
+
   return (
     <FooterView>
-      The content of this page is absolutely free for everyone. Heck, you can
-      even access the source code on{' '}
-      <a href="https://github.com/onetdev/themostannoyingwebsite.com">GitHub</a>
-      . And... You know what? You can even contribute your of stuff as well.
+      <Trans
+        i18nKey="meta.recruiting"
+        t={t}
+        components={{
+          linkTag: (
+            <Link
+              href="https://github.com/onetdev/themostannoyingwebsite.com"
+              target="_blank"
+              rel="noopener noreferrer"
+            />
+          ),
+        }}
+      />
     </FooterView>
   );
 };
