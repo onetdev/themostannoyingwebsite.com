@@ -1,4 +1,6 @@
-import Link from 'next/link';
+import { useTranslation } from 'next-i18next';
+
+import Link from '@/components/Link';
 
 import { Menu, MenuItem } from './GenericMenu';
 
@@ -7,11 +9,13 @@ export type MainNavigationProps = {
 };
 
 const MainNavigation = ({ className }: MainNavigationProps) => {
+  const { t } = useTranslation('common');
+
   const links = [
-    { path: '/', text: 'Home' },
-    { path: '/hot-things', text: 'Hot things' },
-    { path: '/contact', text: 'Contact' },
-    { path: '/privacy-policy', text: 'Privacy Policy' },
+    { path: '/', text: t('navigation.home') },
+    { path: '/hot-things', text: t('navigation.hotThings') },
+    { path: '/contact', text: t('navigation.contact') },
+    { path: '/privacy-policy', text: t('navigation.privacyPolicy') },
   ];
 
   return (

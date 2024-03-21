@@ -1,16 +1,16 @@
 import { GetServerSideProps, NextPage } from 'next';
 import Error from 'next/error';
 import Head from 'next/head';
-import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 
 import { useAppSelector } from '@/redux/hooks';
 import LockedContent from '@/components/tricks/LockedContent';
 import ArticleService from '@/services/ArticleService';
 import { selectContentPaywall } from '@/redux/selectors/experience';
+import { getI18nProps } from '@/lib/i18n';
 
-interface Props {
+type Props = {
   slug: string;
-}
+};
 
 const ArticleItem: NextPage<Props> = ({ slug }: Props) => {
   const showLocker = useAppSelector(selectContentPaywall);
@@ -39,15 +39,14 @@ const ArticleItem: NextPage<Props> = ({ slug }: Props) => {
   );
 };
 
-export const getServerSideProps: GetServerSideProps<Props> = async ({
-  query,
-  locale,
-}) => {
-  const slug = query.slug as string;
+export const getServerSideProps: GetServerSideProps<Props> = async (
+  context,
+) => {
+  const slug = context.query.slug as string;
   return {
     props: {
       slug,
-      ...(await serverSideTranslations(locale as string, ['common'])),
+      ...(await getI18nProps(context, ['common'])),
     },
   };
 };

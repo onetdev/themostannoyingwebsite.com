@@ -1,7 +1,7 @@
 import ReactTimeAgo from 'react-timeago';
 import { styled } from 'styled-components';
-import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import { useTranslation } from 'next-i18next';
+import { NextPage } from 'next';
 
 import { cssRule, cssVars } from '@/styles/theme';
 import { useAppDispatch, useAppSelector } from '@/redux/hooks';
@@ -15,6 +15,7 @@ import selectPreference from '@/redux/selectors/preference';
 import selectExperience from '@/redux/selectors/experience';
 import selectConsent from '@/redux/selectors/consent';
 import selectRuntime from '@/redux/selectors/runtime';
+import { makeI18nStaticProps } from '@/lib/i18n';
 
 const Blocks = styled.div`
   display: grid;
@@ -97,7 +98,7 @@ const SelectRow = ({
   </RowWithLabel>
 );
 
-export default function PrivacyPolicy() {
+const PrivacyPolicy: NextPage = () => {
   const dispatch = useAppDispatch();
   const preference = useAppSelector(selectPreference);
   const experience = useAppSelector(selectExperience);
@@ -262,10 +263,7 @@ export default function PrivacyPolicy() {
       </Blocks>
     </main>
   );
-}
+};
 
-export const getStaticProps = async ({ locale }: { locale: string }) => ({
-  props: {
-    ...(await serverSideTranslations(locale, ['common', 'settings'])),
-  },
-});
+export const getStaticProps = makeI18nStaticProps(['common', 'settings']);
+export default PrivacyPolicy;

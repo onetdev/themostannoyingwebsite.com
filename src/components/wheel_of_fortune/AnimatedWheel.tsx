@@ -135,7 +135,6 @@ const AnimatedWheel = ({
     if (state !== 'spinning') return;
     const interval = setTimeout(() => {
       setState('completed');
-      console.log(items[winIndex!]);
       onSpinCompleted(items[winIndex!]);
     }, anim.duration * 1000);
     return () => clearInterval(interval);

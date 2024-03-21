@@ -1,16 +1,15 @@
-import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
+import { NextPage } from 'next';
 
-export default function Error404() {
+import { makeI18nStaticProps } from '@/lib/i18n';
+
+const Error404: NextPage = () => {
   return (
     <main>
       <h1>Error 404</h1>
       <p>The page could not be loaded :((((</p>
     </main>
   );
-}
+};
 
-export const getStaticProps = async ({ locale }: { locale: string }) => ({
-  props: {
-    ...(await serverSideTranslations(locale, ['common'])),
-  },
-});
+export const getStaticProps = makeI18nStaticProps(['common']);
+export default Error404;

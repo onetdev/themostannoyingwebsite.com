@@ -2,7 +2,9 @@ import { MouseEventHandler, useRef, useState } from 'react';
 import { styled } from 'styled-components';
 import Image from 'next/image';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
+import { NextPage } from 'next';
+
+import { makeI18nStaticProps } from '@/lib/i18n';
 
 const IconWrap = styled.div`
   position: absolute;
@@ -26,7 +28,7 @@ const VideoPlayer = styled.video`
   z-index: 1;
 `;
 
-const HotThings = () => {
+const HotThings: NextPage = () => {
   const [isCapable] = useState(
     'mediaDevices' in navigator && 'getUserMedia' in navigator.mediaDevices,
   );
@@ -94,10 +96,5 @@ const HotThings = () => {
   );
 };
 
-export const getStaticProps = async ({ locale }: { locale: string }) => ({
-  props: {
-    ...(await serverSideTranslations(locale, ['common'])),
-  },
-});
-
+export const getStaticProps = makeI18nStaticProps(['common']);
 export default HotThings;

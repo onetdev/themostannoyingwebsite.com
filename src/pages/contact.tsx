@@ -1,8 +1,9 @@
-import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
+import { NextPage } from 'next';
 
 import config from '@/config';
+import { makeI18nStaticProps } from '@/lib/i18n';
 
-export default function Contact() {
+const Contact: NextPage = () => {
   return (
     <main>
       <h1>Contact page</h1>
@@ -11,10 +12,7 @@ export default function Contact() {
       </p>
     </main>
   );
-}
+};
 
-export const getStaticProps = async ({ locale }: { locale: string }) => ({
-  props: {
-    ...(await serverSideTranslations(locale, ['common'])),
-  },
-});
+export const getStaticProps = makeI18nStaticProps(['common']);
+export default Contact;

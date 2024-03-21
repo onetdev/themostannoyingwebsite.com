@@ -6,5 +6,11 @@
   "response": {
     "yes": "Yes",
     "no": "No"
+  },
+  "navigation": {
+    "home": "Home",
+    "hotThings": "Hot things",
+    "contact": "Contact",
+    "privacyPolicy": "Privacy Policy"
   }
 }

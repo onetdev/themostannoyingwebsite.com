@@ -1,5 +1,5 @@
 import { styled } from 'styled-components';
-import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
+import { NextPage } from 'next';
 
 import { cssRule, cssVars } from '@/styles/theme';
 import { ClearListStyle } from '@/styles/utils';
@@ -7,6 +7,7 @@ import TextListItem from '@/components/articles/TextListItem';
 import SmallCoverListItem from '@/components/articles/SmallCoverListItem';
 import LargeCoverItem from '@/components/articles/LargeCoverItem';
 import ArticleService from '@/services/ArticleService';
+import { makeI18nStaticProps } from '@/lib/i18n';
 
 const Grid = styled.main`
   display: grid;
@@ -57,7 +58,7 @@ const RegularListItem = styled.li`
   }
 `;
 
-export default function Index() {
+const Index: NextPage = () => {
   const coverArticle = ArticleService.getAllFiltered({ isOnCover: true })[0];
   const articlePool = ArticleService.getAllFiltered({ isOnCover: false }).slice(
     0,
@@ -87,10 +88,7 @@ export default function Index() {
       </RegularList>
     </Grid>
   );
-}
+};
 
-export const getStaticProps = async ({ locale }: { locale: string }) => ({
-  props: {
-    ...(await serverSideTranslations(locale, ['common'])),
-  },
-});
+export const getStaticProps = makeI18nStaticProps(['common']);
+export default Index;

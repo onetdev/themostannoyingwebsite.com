@@ -1,11 +1,13 @@
-import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import { styled } from 'styled-components';
+import { NextPage } from 'next';
+
+import { makeI18nStaticProps } from '@/lib/i18n';
 
 const Strike = styled.span`
   text-decoration: line-through;
 `;
 
-export default function SuperDuper() {
+const SuperDuper: NextPage = () => {
   return (
     <main>
       <h1>Igors universal super loan</h1>
@@ -24,10 +26,7 @@ export default function SuperDuper() {
       </ul>
     </main>
   );
-}
+};
 
-export const getStaticProps = async ({ locale }: { locale: string }) => ({
-  props: {
-    ...(await serverSideTranslations(locale, ['common'])),
-  },
-});
+export const getStaticProps = makeI18nStaticProps(['common']);
+export default SuperDuper;

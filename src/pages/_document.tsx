@@ -6,6 +6,7 @@ class DocumentOverride extends Document {
   render() {
     const currentLocale =
       this.props.__NEXT_DATA__.query.locale || i18nextConfig.i18n.defaultLocale;
+
     return (
       <Html lang={currentLocale as string}>
         <Head />

@@ -1,9 +1,10 @@
-import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
+import { NextPage } from 'next';
 
 import config from '@/config';
+import { makeI18nStaticProps } from '@/lib/i18n';
 
 // Privacy policy inspired by https://matomo.org/privacy-policy/
-export default function PrivacyPolicy() {
+const PrivacyPolicy: NextPage = () => {
   return (
     <main>
       <h1>Privacy policy</h1>
@@ -123,10 +124,7 @@ export default function PrivacyPolicy() {
       </p>
     </main>
   );
-}
+};
 
-export const getStaticProps = async ({ locale }: { locale: string }) => ({
-  props: {
-    ...(await serverSideTranslations(locale, ['common'])),
-  },
-});
+export const getStaticProps = makeI18nStaticProps(['common']);
+export default PrivacyPolicy;
