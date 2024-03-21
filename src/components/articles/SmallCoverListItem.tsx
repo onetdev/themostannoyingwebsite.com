@@ -14,6 +14,11 @@ const Intro = styled.p`
   margin: 0;
   margin-bottom: ${cssVars.spacing.gap};
 `;
+const CoverImage = styled(Image)`
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+`;
 
 type Props = {
   article: ArticleCore;
@@ -25,10 +30,9 @@ const SmallCoverListItem = ({ article }: Props) => {
       <Link href={article.url} passHref>
         {!article.coverImage && <CoverPlaceholder width={1920} height={1200} />}
         {article.coverImage && (
-          <Image
+          <CoverImage
             src={article.coverImage}
             alt="Cover image"
-            layout="responsive"
             width="1920"
             height="1200"
           />

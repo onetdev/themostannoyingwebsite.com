@@ -27,6 +27,10 @@ const VideoPlayer = styled.video`
   top: 0;
   z-index: 1;
 `;
+const PlaceholderImage = styled(Image)`
+  width: 100%;
+  height: auto;
+`;
 
 const HotThings: NextPage = () => {
   const [isCapable] = useState(
@@ -82,9 +86,8 @@ const HotThings: NextPage = () => {
           <IconWrap onClick={onIntent} hidden={isStreamStarted}>
             <FontAwesomeIcon icon={['fas', 'play-circle']} />
           </IconWrap>
-          <Image
+          <PlaceholderImage
             src="/assets/images/lava.jpg"
-            layout="responsive"
             alt="Picture of you"
             width={1920}
             height={1080}
