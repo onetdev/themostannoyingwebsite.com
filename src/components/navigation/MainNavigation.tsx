@@ -1,6 +1,5 @@
 import { useTranslation } from 'next-i18next';
-
-import Link from '@/components/Link';
+import Link from 'next/link';
 
 import { Menu, MenuItem } from './GenericMenu';
 

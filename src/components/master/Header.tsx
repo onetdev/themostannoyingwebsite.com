@@ -1,10 +1,10 @@
 import { styled } from 'styled-components';
+import Link from 'next/link';
 
 import { cssVars } from '@/styles/theme';
 import Marquee from '@/components/navigation/Marquee';
 import MainNavigation from '@/components/navigation/MainNavigation';
 import UserNavigation from '@/components/navigation/UserNavigation';
-import Link from '@/components/Link';
 
 import DarkModeToggle from './DarkModeToggle';
 

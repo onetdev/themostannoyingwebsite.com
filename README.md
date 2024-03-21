@@ -48,9 +48,9 @@ Open [https://localhost:3000](https://localhost:3000) with your browser to see t
 
 ## Translation
 
-As for now there's a super basic implementation of translations and there is no short-term aim for having other languages added.
+Thankfully Next.JS comes with great [i18n support](https://nextjs.org/docs/pages/building-your-application/routing/internationalization) out of the box. We are using simple path based routing for translations, so if you want to add a new language, you just need to create a new folder under `public/locales` with the language code (eg.: `en`, `hu`, `de`, etc.) and create the files you want to translate. Please use `en` as a reference for the keys and values.
 
-On the other hand we think that having a system implemented for localisation at an early stage is crucial to minimize switching to multilang setup at a later stage.
+Please keep in mind that translations are low on the priority list for now.
 
 ## Deployment
 

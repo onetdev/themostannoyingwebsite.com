@@ -1,20 +1,12 @@
-import { default as languageDetectorSuper } from 'next-language-detector';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 
-import i18nextConfig from '@/../next-i18next.config';
-
 import type { GetStaticProps, GetStaticPropsContext } from 'next';
-
-export const languageDetector = languageDetectorSuper({
-  supportedLngs: i18nextConfig.i18n.locales,
-  fallbackLng: i18nextConfig.i18n.defaultLocale,
-});
 
 export const getI18nProps = async (
   context: GetStaticPropsContext,
   ns = ['common'],
 ) => {
-  const locale = context?.params?.locale || i18nextConfig.i18n.defaultLocale;
+  const locale = context?.locale || context.defaultLocale;
   return await serverSideTranslations(locale as string, ns);
 };
 
