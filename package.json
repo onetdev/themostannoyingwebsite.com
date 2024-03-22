@@ -20,7 +20,7 @@
     "test:once": "jest",
     "test:ci": "jest --ci",
     "prepare": "husky",
-    "gen-assets": "tsx ./scripts/gen-assets.ts"
+    "gen-manifest": "tsx ./scripts/gen-manifest.ts"
   },
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^6.5.1",
