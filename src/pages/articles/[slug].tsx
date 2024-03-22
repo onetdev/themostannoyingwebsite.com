@@ -3,10 +3,10 @@ import Error from 'next/error';
 import Head from 'next/head';
 
 import { useAppSelector } from '@/redux/hooks';
-import LockedContent from '@/components/tricks/LockedContent';
-import ArticleService from '@/services/ArticleService';
+import LockedContent from '@/components/templates/LockedContent';
+import ArticleService from '@/features/articles/services/ArticleService';
 import { selectContentPaywall } from '@/redux/selectors/experience';
-import { getI18nProps } from '@/lib/i18n';
+import { getI18nProps } from '@/utils/i18n';
 
 type Props = {
   slug: string;

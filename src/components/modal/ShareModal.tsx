@@ -1,3 +1,5 @@
+import { FunctionComponent } from 'react';
+
 import ActionModal from './ActionModal';
 
 type Props = {
@@ -5,7 +7,7 @@ type Props = {
   handleClose: () => void;
 };
 
-const ShareModal = ({ show, handleClose }: Props) => {
+const ShareModal: FunctionComponent<Props> = ({ show, handleClose }) => {
   const actions = (
     <>
       <button onClick={() => {}}>Facebook</button>

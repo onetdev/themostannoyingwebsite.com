@@ -1,16 +1,12 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { styled } from 'styled-components';
+import React, { FunctionComponent } from 'react';
 
 import { cssVars } from '@/styles/theme';
 
 import GenericModal, {
   GenericModalProps as GenericProps,
 } from './GenericModal';
-
-type Props = GenericProps & {
-  title: string;
-  actions?: React.ReactChild;
-};
 
 const Wrap = styled.div`
   background: ${cssVars.color.background};
@@ -43,15 +39,20 @@ const Actions = styled.div`
   padding: ${cssVars.spacing.gap} ${cssVars.spacing.gap2x};
 `;
 
-const ActionModal = ({
+type Props = GenericProps & {
+  title: string;
+  actions: React.ReactNode;
+};
+
+const ActionModal: FunctionComponent<Props> = ({
   title,
   children,
   onClose: handleClose,
   actions,
-  ...proxiedProps
-}: Props) => {
+  ...rest
+}) => {
   return (
-    <GenericModal {...proxiedProps} onClose={handleClose}>
+    <GenericModal {...rest} onClose={handleClose}>
       <Wrap onClick={(e) => e.stopPropagation()}>
         <Header>
           <Title>{title}</Title>
