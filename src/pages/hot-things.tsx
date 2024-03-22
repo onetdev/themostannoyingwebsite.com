@@ -4,7 +4,7 @@ import Image from 'next/image';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { NextPage } from 'next';
 
-import { makeI18nStaticProps } from '@/lib/i18n';
+import { makeI18nStaticProps } from '@/utils/i18n';
 
 const IconWrap = styled.div`
   position: absolute;

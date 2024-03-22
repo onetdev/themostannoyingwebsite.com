@@ -1,7 +1,7 @@
 import { NextPage } from 'next';
 
 import config from '@/config';
-import { makeI18nStaticProps } from '@/lib/i18n';
+import { makeI18nStaticProps } from '@/utils/i18n';
 
 // Privacy policy inspired by https://matomo.org/privacy-policy/
 const PrivacyPolicy: NextPage = () => {

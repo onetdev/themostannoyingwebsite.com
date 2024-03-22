@@ -3,11 +3,11 @@ import { NextPage } from 'next';
 
 import { cssRule, cssVars } from '@/styles/theme';
 import { ClearListStyle } from '@/styles/utils';
-import TextListItem from '@/components/articles/TextListItem';
-import SmallCoverListItem from '@/components/articles/SmallCoverListItem';
-import LargeCoverItem from '@/components/articles/LargeCoverItem';
-import ArticleService from '@/services/ArticleService';
-import { makeI18nStaticProps } from '@/lib/i18n';
+import TextListItem from '@/features/articles/components/TextListItem';
+import SmallCoverListItem from '@/features/articles/components/SmallCoverListItem';
+import LargeCoverItem from '@/features/articles/components/LargeCoverItem';
+import ArticleService from '@/features/articles/services/ArticleService';
+import { makeI18nStaticProps } from '@/utils/i18n';
 
 const Grid = styled.main`
   display: grid;

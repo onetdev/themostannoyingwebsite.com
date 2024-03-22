@@ -15,7 +15,7 @@ import selectPreference from '@/redux/selectors/preference';
 import selectExperience from '@/redux/selectors/experience';
 import selectConsent from '@/redux/selectors/consent';
 import selectRuntime from '@/redux/selectors/runtime';
-import { makeI18nStaticProps } from '@/lib/i18n';
+import { makeI18nStaticProps } from '@/utils/i18n';
 
 const Blocks = styled.div`
   display: grid;

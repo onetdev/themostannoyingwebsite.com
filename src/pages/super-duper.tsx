@@ -1,7 +1,7 @@
 import { styled } from 'styled-components';
 import { NextPage } from 'next';
 
-import { makeI18nStaticProps } from '@/lib/i18n';
+import { makeI18nStaticProps } from '@/utils/i18n';
 
 const Strike = styled.span`
   text-decoration: line-through;

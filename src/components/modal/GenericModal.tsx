@@ -1,15 +1,12 @@
-import { ReactNode, useCallback, useEffect } from 'react';
+import {
+  FunctionComponent,
+  PropsWithChildren,
+  useCallback,
+  useEffect,
+} from 'react';
 import { styled } from 'styled-components';
 
 import { cssVars } from '@/styles/theme';
-
-export type GenericModalProps = {
-  children: ReactNode;
-  show: boolean;
-  onClose?: () => void;
-  closeOnEsc?: boolean;
-  closeOnClickOutside?: boolean;
-};
 
 const Dimmer = styled.div`
   position: fixed;
@@ -37,18 +34,25 @@ const Dimmer = styled.div`
   }
 `;
 
+export type GenericModalProps = PropsWithChildren<{
+  show: boolean;
+  onClose?: () => void;
+  closeOnEsc?: boolean;
+  closeOnClickOutside?: boolean;
+}>;
+
 /**
  * Provides a modal window that can be used to display any type of content.
  * Please note that unlike ActionModal, you'll have to prevent click propagation
  * when using clickOutside.
  */
-const GenericModal = ({
+const GenericModal: FunctionComponent<GenericModalProps> = ({
   children,
   show,
   onClose,
   closeOnEsc = true,
   closeOnClickOutside = true,
-}: GenericModalProps) => {
+}) => {
   const handleKeyDown = useCallback(
     (e: KeyboardEvent) => {
       if (!closeOnEsc || e.key !== 'Escape') return;

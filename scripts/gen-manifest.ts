@@ -10,7 +10,7 @@ import eslintRules from '@/../.eslintrc.js';
 const main = async () => {
   const faviconSource = './public/assets/appicon.png';
   const manifestDestPath = path.join('./public/', manifestConfig.path!);
-  const headerDestFile = './src/components/master/GeneratedMetaHead.tsx';
+  const headerDestFile = './src/components/templates/GeneratedMetaHead.tsx';
 
   console.log(`Generating favicons from ${faviconSource}`);
   const response = await favicons(faviconSource, manifestConfig);

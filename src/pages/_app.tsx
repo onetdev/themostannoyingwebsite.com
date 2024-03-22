@@ -3,9 +3,9 @@ import Head from 'next/head';
 import { appWithTranslation } from 'next-i18next';
 
 import english from '@/public/locales/en/common.json';
-import Layout from '@/components/master/Layout';
-import ProviderContainer from '@/components/providers/ProviderContainer';
-import GeneratedMetaHead from '@/components/master/GeneratedMetaHead';
+import MainLayout from '@/components/templates/MainLayout';
+import ProviderContainer from '@/providers/ProviderContainer';
+import GeneratedMetaHead from '@/components/templates/GeneratedMetaHead';
 
 import type { AppProps } from 'next/app';
 
@@ -27,9 +27,9 @@ const TheMostAnnoyingWebsite = ({ Component, pageProps }: AppProps) => {
         <meta name="robots" content="follow" />
       </Head>
       <GeneratedMetaHead />
-      <Layout>
+      <MainLayout>
         <Component {...pageProps} />
-      </Layout>
+      </MainLayout>
     </ProviderContainer>
   );
 };
