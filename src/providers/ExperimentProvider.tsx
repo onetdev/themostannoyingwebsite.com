@@ -1,8 +1,8 @@
 import { FunctionComponent, PropsWithChildren } from 'react';
 import { useBeforeUnload } from 'react-use';
 
-import useFirstInteraction from '@/hooks/useFirstInteraction';
-import useInFocusMeter from '@/hooks/useInFocusMeter';
+import useFirstInteractionListener from '@/hooks/useFirstInteractionListener';
+import useDocumentVisibilityListener from '@/hooks/useDocumentVisibilityListener';
 import { selectExitPrompt } from '@/redux/selectors/experience';
 import { useAppSelector } from '@/redux/hooks';
 
@@ -11,8 +11,8 @@ const ExperimentProvider: FunctionComponent<PropsWithChildren> = ({
 }) => {
   const exitPrompt = useAppSelector(selectExitPrompt);
 
-  useFirstInteraction();
-  useInFocusMeter();
+  useFirstInteractionListener();
+  useDocumentVisibilityListener();
 
   useBeforeUnload(
     exitPrompt,
