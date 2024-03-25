@@ -5,7 +5,7 @@ import {
 } from '@/redux/selectors/runtime';
 
 import GlitchyTitle from './GlitchyTitle';
-import MarqueeTitle from './MarqueeTitle';
+import ArrayPagedTitle from './PagedTitle';
 
 /**
  * Experiments on manipulating the page title. Unfortunatelly the refresh rate
@@ -17,9 +17,14 @@ const PageTitleExperiment = () => {
 
   return (
     <>
-      <MarqueeTitle
+      {/* It works but with the current browser landscape it is super slow. */}
+      {/* <MarqueeTitle
         enabled={hasInteracted && !isVisible}
         text="📣 Come back please 🏃‍♀️🏃 We have candy!! 🚐"
+      /> */}
+      <ArrayPagedTitle
+        enabled={hasInteracted && !isVisible}
+        texts={['⭐️ HEY YOU 🫵', '😜 YES YOU 😱', '📣 COME BACK 🏃']}
       />
       <GlitchyTitle enabled={hasInteracted && isVisible} />
     </>
