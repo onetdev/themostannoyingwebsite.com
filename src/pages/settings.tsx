@@ -236,24 +236,24 @@ const PrivacyPolicy: NextPage = () => {
             <small>{t('runtime_section.disclaimer')}</small>
             <p>
               {t('runtime_section.started_ago')}{' '}
-              <ReactTimeAgo date={runtime.startTime} />
+              <ReactTimeAgo date={runtime.startedAt} />
             </p>
             <p>
-              {t('runtime_section.elapsed_seconds')}{' '}
-              <span>{runtime.inFocusSeconds}</span>
+              {t('runtime_section.visibility_seconds')}{' '}
+              <span>{runtime.document.visibilitySeconds}</span>
             </p>
             <p>
-              {t('runtime_section.is_window_in_focus')}{' '}
+              {t('runtime_section.is_document_visible')}{' '}
               <span>
-                {runtime.isInFocus
+                {runtime.document.isVisible
                   ? tCommon('response.yes')
                   : tCommon('response.yes')}
               </span>
             </p>
             <p>
-              {t('runtime_section.is_windows_interacted')}{' '}
+              {t('runtime_section.interaction_unlocked')}{' '}
               <span>
-                {runtime.hasInteracted
+                {runtime.interactionUnlocked
                   ? tCommon('response.yes')
                   : tCommon('response.yes')}
               </span>

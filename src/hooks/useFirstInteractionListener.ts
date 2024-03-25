@@ -2,7 +2,7 @@ import { useCallback, useEffect } from 'react';
 
 import { actions as runtimeActions } from '@/redux/slices/runtime';
 import { useAppDispatch, useAppSelector } from '@/redux/hooks';
-import { selectHasInteracted } from '@/redux/selectors/runtime';
+import { selectInteractionUnlocked } from '@/redux/selectors/runtime';
 
 /**
  * Some browsers will limit features until the first user interaction has
@@ -10,13 +10,13 @@ import { selectHasInteracted } from '@/redux/selectors/runtime';
  * won't work until the user has interacted with the page (eg audio).
  */
 const useFirstInteractionListener = () => {
-  const completed = useAppSelector(selectHasInteracted);
+  const completed = useAppSelector(selectInteractionUnlocked);
   const dispatch = useAppDispatch();
 
   const handleInteraction = useCallback(() => {
     if (completed) return;
 
-    dispatch(runtimeActions.setHasInteracted());
+    dispatch(runtimeActions.markInteractionUnlocked());
   }, [completed, dispatch]);
 
   useEffect(() => {
