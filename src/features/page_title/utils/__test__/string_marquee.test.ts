@@ -1,7 +1,7 @@
 /**
  * @jest-environment jsdom
  */
-import string_marquee from '@/features/inactive_title/utils/string_marquee';
+import string_marquee from '@/features/page_title/utils/string_marquee';
 
 describe('String Marquee', () => {
   const base = {
@@ -26,5 +26,11 @@ describe('String Marquee', () => {
     expect(string_marquee('Hello', 3, base)).toBe('lo     Hel');
     expect(string_marquee('Hello', 4, base)).toBe('o     Hell');
     expect(string_marquee('Hello', 5, base)).toBe('     Hello');
+  });
+
+  it('should respect multi-byte characters', () => {
+    expect(string_marquee('🏃📣', 0, base)).toBe('🏃📣     🏃📣 ');
+    expect(string_marquee('🏃📣', 1, base)).toBe('📣     🏃📣  ');
+    expect(string_marquee('🏃📣', 2, base)).toBe('     🏃📣   ');
   });
 });
