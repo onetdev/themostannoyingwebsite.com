@@ -1,7 +1,7 @@
 /**
  * @jest-environment jsdom
  */
-import { clamp } from './math';
+import { clamp } from '@/utils/math';
 
 describe('Math clamp', () => {
   test('should return min value if value is less than min', () => {

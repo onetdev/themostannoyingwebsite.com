@@ -13,7 +13,7 @@ import History from '@/features/chat_bubble/components/History';
 import { useAppSelector } from '@/redux/hooks';
 import { cssVars } from '@/styles/theme';
 import { selectEnableSound } from '@/redux/selectors/preference';
-import { selectHasInteracted } from '@/redux/selectors/runtime';
+import { selectInteractionUnlocked } from '@/redux/selectors/runtime';
 
 const zIndexBase = 20;
 
@@ -92,7 +92,7 @@ const initialMessage = () => ({
  */
 const ActionButton: FunctionComponent = () => {
   const enableSound = useAppSelector(selectEnableSound);
-  const hasInteracted = useAppSelector(selectHasInteracted);
+  const hasInteracted = useAppSelector(selectInteractionUnlocked);
   const [history, setHistory] = useState([initialMessage()] as HistoryItem[]);
   const [isOpen, setIsOpen] = useState(false);
   const [badgeCounter, setBadgeCounter] = useState(1);

@@ -1,26 +1,28 @@
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useEffect } from 'react';
 
 import { actions as runtimeActions } from '@/redux/slices/runtime';
-import { useAppDispatch } from '@/redux/hooks';
+import { useAppDispatch, useAppSelector } from '@/redux/hooks';
+import { selectInteractionUnlocked } from '@/redux/selectors/runtime';
 
 /**
  * Some browsers will limit features until the first user interaction has
- * occured.
+ * occured. This is really important because some of the browser features
+ * won't work until the user has interacted with the page (eg audio).
  */
-const useFirstInteraction = () => {
-  const [completed, setCompleted] = useState(false);
+const useFirstInteractionListener = () => {
+  const completed = useAppSelector(selectInteractionUnlocked);
   const dispatch = useAppDispatch();
 
   const handleInteraction = useCallback(() => {
     if (completed) return;
 
-    setCompleted(true);
-    dispatch(runtimeActions.setHasInteracted());
+    dispatch(runtimeActions.markInteractionUnlocked());
   }, [completed, dispatch]);
 
   useEffect(() => {
     document.addEventListener('click', handleInteraction);
     document.addEventListener('touchend', handleInteraction);
+
     return () => {
       document.removeEventListener('click', handleInteraction);
       document.addEventListener('touchend', handleInteraction);
@@ -28,4 +30,4 @@ const useFirstInteraction = () => {
   }, [handleInteraction]);
 };
 
-export default useFirstInteraction;
+export default useFirstInteractionListener;

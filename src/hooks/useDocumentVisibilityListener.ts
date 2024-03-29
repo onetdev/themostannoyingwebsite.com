@@ -1,7 +1,8 @@
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect } from 'react';
 
 import { actions as runtimeActions } from '@/redux/slices/runtime';
-import { useAppDispatch } from '@/redux/hooks';
+import { useAppDispatch, useAppSelector } from '@/redux/hooks';
+import { selectIsDocumentVisible } from '@/redux/selectors/runtime';
 
 /**
  * This will mesaure how long the webpage has been in focus and report it to
@@ -9,13 +10,13 @@ import { useAppDispatch } from '@/redux/hooks';
  * browser is still visible it will count as "in focus".
  * https://developer.mozilla.org/en-US/docs/Web/API/Document/visibilitychange_event
  */
-const useInFocusMeter = () => {
-  const [isInFocus, setIsInFocusInternal] = useState(true);
+const useDocumentVisibilityListener = () => {
+  const isInFocus = useAppSelector(selectIsDocumentVisible);
   const dispatch = useAppDispatch();
 
-  const handleVisibilityChange = () => {
-    setIsInFocusInternal(!document.hidden);
-  };
+  const handleVisibilityChange = useCallback(() => {
+    dispatch(runtimeActions.setIsDocumentVisibile(!document.hidden));
+  }, [dispatch]);
 
   useEffect(() => {
     document.addEventListener('visibilitychange', handleVisibilityChange);
@@ -23,21 +24,17 @@ const useInFocusMeter = () => {
 
     return () =>
       document.removeEventListener('visibilitychange', handleVisibilityChange);
-  }, []);
-
-  useEffect(() => {
-    dispatch(runtimeActions.setIsInFocus(isInFocus));
-  }, [dispatch, isInFocus]);
+  }, [handleVisibilityChange]);
 
   useEffect(() => {
     if (!isInFocus) return;
 
     const interval = setInterval(
-      () => dispatch(runtimeActions.incrementInFocusSeconds()),
+      () => dispatch(runtimeActions.incrementVisibilitySeconds()),
       1000,
     );
     return () => clearInterval(interval);
   }, [isInFocus, dispatch]);
 };
 
-export default useInFocusMeter;
+export default useDocumentVisibilityListener;

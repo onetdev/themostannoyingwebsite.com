@@ -24,8 +24,8 @@
     "title": "About this session",
     "disclaimer": "These values reset every single visit and acts as a bit of debug info.",
     "started_ago": "Started:",
-    "elapsed_seconds": "Elapsed seconds:",
-    "is_window_in_focus": "Is this window in focus?",
-    "is_windows_interacted": "Had first interaction?"
+    "visibility_seconds": "Elapsed seconds:",
+    "is_document_visible": "Is this window in focus?",
+    "interaction_unlocked": "Had first interaction?"
   }
 }
