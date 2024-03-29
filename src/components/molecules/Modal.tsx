@@ -3,10 +3,9 @@ import { styled } from 'styled-components';
 import React, { FunctionComponent } from 'react';
 
 import { cssVars } from '@/styles/theme';
-
-import GenericModal, {
-  GenericModalProps as GenericProps,
-} from './GenericModal';
+import DimmerOverlay, {
+  type DimmerOverlayProps,
+} from '@/components/atoms/DimmerOverlay';
 
 const Wrap = styled.div`
   background: ${cssVars.color.background};
@@ -39,12 +38,12 @@ const Actions = styled.div`
   padding: ${cssVars.spacing.gap} ${cssVars.spacing.gap2x};
 `;
 
-type Props = GenericProps & {
+type ModalProps = DimmerOverlayProps & {
   title: string;
   actions: React.ReactNode;
 };
 
-const ActionModal: FunctionComponent<Props> = ({
+const Modal: FunctionComponent<ModalProps> = ({
   title,
   children,
   onClose: handleClose,
@@ -52,7 +51,7 @@ const ActionModal: FunctionComponent<Props> = ({
   ...rest
 }) => {
   return (
-    <GenericModal {...rest} onClose={handleClose}>
+    <DimmerOverlay {...rest} onClose={handleClose}>
       <Wrap onClick={(e) => e.stopPropagation()}>
         <Header>
           <Title>{title}</Title>
@@ -63,8 +62,8 @@ const ActionModal: FunctionComponent<Props> = ({
         <Content>{children}</Content>
         {actions && <Actions>{actions}</Actions>}
       </Wrap>
-    </GenericModal>
+    </DimmerOverlay>
   );
 };
 
-export default ActionModal;
+export default Modal;
