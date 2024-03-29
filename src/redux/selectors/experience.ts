@@ -9,5 +9,7 @@ export const selectExitPrompt = (state: AppRootState) =>
   state.experience.exitPrompt;
 export const selectContentPaywall = (state: AppRootState) =>
   state.experience.contentPaywall;
+export const selectPageTitle = (state: AppRootState) =>
+  state.experience.pageTitle;
 
 export default selectExperience;

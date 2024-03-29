@@ -9,7 +9,7 @@ The main idea is to collect all the disgusting features from today's website in 
 - [x] Marquee
 - [x] Wheel of fortune coupon modal
 - [x] Add confirmation when trying to leave the page
-- [ ] Update title while the user is on a different tab
+- [x] Update title while the user is on a different tab
 - [ ] Age verification on some images
 - [ ] Newsletter modal when the user leaves the screen or scrolls down a bit
 - [ ] Asking for notification: no worries, the website won't send any notification
