@@ -2,7 +2,7 @@ import { FunctionComponent, PropsWithChildren } from 'react';
 import { styled } from 'styled-components';
 import { Analytics } from '@vercel/analytics/react';
 
-import CookieBar from '@/components/molecules/CookieConsent';
+import CookieBar from '@/components/organisms/CookieConsent';
 import { ChatBubble } from '@/features/chat_bubble';
 import { WheelOfFortune } from '@/features/wheel_of_fortune';
 import { cssVars } from '@/styles/theme';

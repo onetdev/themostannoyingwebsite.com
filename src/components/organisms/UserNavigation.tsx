@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import { FunctionComponent, useState } from 'react';
 
-import ShareModal from '@/components/modal/ShareModal';
+import ShareModal from '@/components/organisms/ShareModal';
 import { Menu, MenuItem } from '@/components/atoms/GenericMenu';
 
 type Props = {

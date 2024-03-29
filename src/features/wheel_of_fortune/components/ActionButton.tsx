@@ -3,7 +3,7 @@ import { FunctionComponent, useState } from 'react';
 import { styled, keyframes } from 'styled-components';
 
 import { cssVars } from '@/styles/theme';
-import GenericModal from '@/components/modal/GenericModal';
+import DimmerOverlay from '@/components/atoms/DimmerOverlay';
 
 import ModalContent from './ModalContent';
 
@@ -47,7 +47,7 @@ const ActionButton: FunctionComponent = () => {
 
   return (
     <Wrap>
-      <GenericModal
+      <DimmerOverlay
         show={isOpen}
         onClose={() => setIsOpen(false)}
         closeOnClickOutside={false}
@@ -55,7 +55,7 @@ const ActionButton: FunctionComponent = () => {
         <div onClick={(e) => e.stopPropagation()} hidden={!isOpen}>
           <ModalContent onClose={() => setIsOpen(false)} />
         </div>
-      </GenericModal>
+      </DimmerOverlay>
       <Icon onClick={() => setIsOpen(true)}>
         <FontAwesomeIcon icon={['fas', 'tags']} />
       </Icon>
