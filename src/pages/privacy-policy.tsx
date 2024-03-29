@@ -1,13 +1,18 @@
 import { NextPage } from 'next';
+import { useTranslation } from 'next-i18next';
 
 import config from '@/config';
 import { makeI18nStaticProps } from '@/utils/i18n';
+import SiteTitle from '@/components/atoms/SiteTitle';
 
 // Privacy policy inspired by https://matomo.org/privacy-policy/
 const PrivacyPolicy: NextPage = () => {
+  const { t } = useTranslation('common');
+
   return (
     <main>
-      <h1>Privacy policy</h1>
+      <SiteTitle>{t('navigation.privacyPolicy')}</SiteTitle>
+      <h1>{t('navigation.privacyPolicy')}</h1>
       <p>
         This Policy describes the information we collect from you, how we use
         that information and our legal basis for doing so. It also covers

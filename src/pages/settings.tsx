@@ -16,6 +16,7 @@ import selectExperience from '@/redux/selectors/experience';
 import selectConsent from '@/redux/selectors/consent';
 import selectRuntime from '@/redux/selectors/runtime';
 import { makeI18nStaticProps } from '@/utils/i18n';
+import SiteTitle from '@/components/atoms/SiteTitle';
 
 const Blocks = styled.div`
   display: grid;
@@ -144,6 +145,7 @@ const PrivacyPolicy: NextPage = () => {
 
   return (
     <main>
+      <SiteTitle>{tCommon('navigation.settings')}</SiteTitle>
       <h1>{t('title')}</h1>
 
       <Blocks>
