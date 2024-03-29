@@ -5,9 +5,9 @@ import useFirstInteractionListener from '@/hooks/useFirstInteractionListener';
 import useDocumentVisibilityListener from '@/hooks/useDocumentVisibilityListener';
 import { selectExitPrompt } from '@/redux/selectors/experience';
 import { useAppSelector } from '@/redux/hooks';
-import PageTitleExperiment from '@/features/page_title/components/PageTitleExperiment';
+import PageTitleExperience from '@/features/page_title/components/PageTitleExperience';
 
-const ExperimentProvider: FunctionComponent<PropsWithChildren> = ({
+const ExperienceProvider: FunctionComponent<PropsWithChildren> = ({
   children,
 }) => {
   const exitPrompt = useAppSelector(selectExitPrompt);
@@ -22,10 +22,10 @@ const ExperimentProvider: FunctionComponent<PropsWithChildren> = ({
 
   return (
     <>
-      <PageTitleExperiment />
+      <PageTitleExperience />
       {children}
     </>
   );
 };
 
-export default ExperimentProvider;
+export default ExperienceProvider;

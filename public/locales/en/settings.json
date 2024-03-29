@@ -18,7 +18,8 @@
     "mock_chat": "Mock chat",
     "wheel_of_fortune": "Wheel of fortune",
     "exit_prompt": "Exit prompt",
-    "content_paywall": "Content paywall"
+    "content_paywall": "Content paywall",
+    "page_title_inactive_array_paged": "Alternative title when tab is inactive"
   },
   "runtime_section": {
     "title": "About this session",

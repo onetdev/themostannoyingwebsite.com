@@ -16,6 +16,7 @@ import selectExperience from '@/redux/selectors/experience';
 import selectConsent from '@/redux/selectors/consent';
 import selectRuntime from '@/redux/selectors/runtime';
 import { makeI18nStaticProps } from '@/utils/i18n';
+import SiteTitle from '@/components/atoms/SiteTitle';
 
 const Blocks = styled.div`
   display: grid;
@@ -133,6 +134,8 @@ const PrivacyPolicy: NextPage = () => {
     dispatch(experienceActions.setExitPrompt(value));
   const onContentPaywallChange = (value: boolean) =>
     dispatch(experienceActions.setContentPaywall(value));
+  const onPageTitleInactiveArrayPagedChange = (value: boolean) =>
+    dispatch(experienceActions.setPageTitle({ inactiveArrayPaged: value }));
 
   const colorSchemes: { value: UserColorScheme; label: string }[] = [
     { value: 'auto', label: 'System default' },
@@ -142,6 +145,7 @@ const PrivacyPolicy: NextPage = () => {
 
   return (
     <main>
+      <SiteTitle>{tCommon('navigation.settings')}</SiteTitle>
       <h1>{t('title')}</h1>
 
       <Blocks>
@@ -226,6 +230,12 @@ const PrivacyPolicy: NextPage = () => {
               name="content_paywall"
               checked={experience.contentPaywall}
               onChange={onContentPaywallChange}
+            />
+            <ToggableRow
+              label={t('experience_section.page_title_inactive_array_paged')}
+              name="page_title_inactive_array_paged"
+              checked={experience.pageTitle.inactiveArrayPaged}
+              onChange={onPageTitleInactiveArrayPagedChange}
             />
           </BlockBody>
         </Block>

@@ -2,16 +2,16 @@ import { FunctionComponent, PropsWithChildren } from 'react';
 
 import ReduxProvider from './ReduxProvider';
 import ThemeProvider from './ThemeProvider';
-import ExperimentProvider from './ExperimentProvider';
+import ExperienceProvider from './ExperienceProvider';
 
 const ProviderContainer: FunctionComponent<PropsWithChildren> = ({
   children,
 }) => {
   return (
     <ReduxProvider>
-      <ExperimentProvider>
+      <ExperienceProvider>
         <ThemeProvider>{children}</ThemeProvider>
-      </ExperimentProvider>
+      </ExperienceProvider>
     </ReduxProvider>
   );
 };

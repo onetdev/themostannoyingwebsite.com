@@ -3,8 +3,10 @@ import { styled } from 'styled-components';
 import Image from 'next/image';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { NextPage } from 'next';
+import { useTranslation } from 'next-i18next';
 
 import { makeI18nStaticProps } from '@/utils/i18n';
+import SiteTitle from '@/components/atoms/SiteTitle';
 
 const IconWrap = styled.div`
   position: absolute;
@@ -36,6 +38,7 @@ const HotThings: NextPage = () => {
   const [isCapable] = useState(
     'mediaDevices' in navigator && 'getUserMedia' in navigator.mediaDevices,
   );
+  const { t } = useTranslation('common');
   const [_devices, setDevices] = useState<MediaDeviceInfo[]>([]);
   const [isStreamStarted, setStreamStarted] = useState(false);
   const playerRef = useRef<HTMLVideoElement>(null);
@@ -80,7 +83,8 @@ const HotThings: NextPage = () => {
 
   return (
     <main>
-      <h1>Hot things</h1>
+      <SiteTitle>{t('navigation.hotThings')}</SiteTitle>
+      <h1>{t('navigation.hotThings')}</h1>
       <PlayerWrap>
         <Placeholder hidden={!isStreamStarted}>
           <IconWrap onClick={onIntent} hidden={isStreamStarted}>
