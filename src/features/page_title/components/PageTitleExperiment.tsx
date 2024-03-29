@@ -4,7 +4,6 @@ import {
   selectIsDocumentVisible,
 } from '@/redux/selectors/runtime';
 
-import GlitchyTitle from './GlitchyTitle';
 import ArrayPagedTitle from './PagedTitle';
 
 /**
@@ -22,11 +21,12 @@ const PageTitleExperiment = () => {
         enabled={hasInteracted && !isVisible}
         text="📣 Come back please 🏃‍♀️🏃 We have candy!! 🚐"
       /> */}
+      {/* It's just not that funny when it show for more than 100ms :( */}
+      {/* <GlitchyTitle enabled={hasInteracted && isVisible} /> */}
       <ArrayPagedTitle
         enabled={hasInteracted && !isVisible}
         texts={['⭐️ HEY YOU 🫵', '😜 YES YOU 😱', '📣 COME BACK 🏃']}
       />
-      <GlitchyTitle enabled={hasInteracted && isVisible} />
     </>
   );
 };
