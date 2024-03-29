@@ -18,14 +18,15 @@
     "mock_chat": "Mock chat",
     "wheel_of_fortune": "Wheel of fortune",
     "exit_prompt": "Exit prompt",
-    "content_paywall": "Content paywall"
+    "content_paywall": "Content paywall",
+    "page_title_inactive_array_paged": "Alternative title when tab is inactive"
   },
   "runtime_section": {
     "title": "About this session",
     "disclaimer": "These values reset every single visit and acts as a bit of debug info.",
     "started_ago": "Started:",
-    "elapsed_seconds": "Elapsed seconds:",
-    "is_window_in_focus": "Is this window in focus?",
-    "is_windows_interacted": "Had first interaction?"
+    "visibility_seconds": "Elapsed seconds:",
+    "is_document_visible": "Is this window in focus?",
+    "interaction_unlocked": "Had first interaction?"
   }
 }

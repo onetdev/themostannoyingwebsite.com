@@ -1,17 +1,21 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 export interface RuntimeState {
-  startTime: string;
-  isInFocus: boolean;
-  inFocusSeconds: number;
-  hasInteracted: boolean;
+  document: {
+    isVisible: boolean;
+    visibilitySeconds: number;
+  };
+  interactionUnlocked: boolean;
+  startedAt: string;
 }
 
 const initialState: RuntimeState = {
-  startTime: new Date().toISOString(),
-  isInFocus: false,
-  inFocusSeconds: 0,
-  hasInteracted: false,
+  document: {
+    isVisible: false,
+    visibilitySeconds: 0,
+  },
+  startedAt: new Date().toISOString(),
+  interactionUnlocked: false,
 };
 
 /**
@@ -22,17 +26,14 @@ export const runtimeSlice = createSlice({
   name: 'runtime',
   initialState,
   reducers: {
-    setIsInFocus: (state, action: PayloadAction<boolean>) => {
-      state.isInFocus = action.payload;
+    setIsDocumentVisibile: (state, action: PayloadAction<boolean>) => {
+      state.document.isVisible = action.payload;
     },
-    setHasInteracted: (state) => {
-      state.hasInteracted = true;
+    markInteractionUnlocked: (state) => {
+      state.interactionUnlocked = true;
     },
-    setInFocusSeconds: (state, action: PayloadAction<number>) => {
-      state.inFocusSeconds = action.payload;
-    },
-    incrementInFocusSeconds: (state) => {
-      state.inFocusSeconds += 1;
+    incrementVisibilitySeconds: (state) => {
+      state.document.visibilitySeconds += 1;
     },
   },
 });

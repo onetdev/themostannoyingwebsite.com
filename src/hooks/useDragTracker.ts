@@ -4,7 +4,7 @@ import { isPointWithin } from '@/utils/dom';
 import { distance, Point } from '@/utils/math';
 
 type TimedPoint = Point & { t: Date };
-type DragTrackerState = {
+export type DragTrackerState = {
   isActive: boolean;
   isWithin: boolean;
   velocity: number | null;

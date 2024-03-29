@@ -15,7 +15,8 @@ import selectPreference from '@/redux/selectors/preference';
 import selectExperience from '@/redux/selectors/experience';
 import selectConsent from '@/redux/selectors/consent';
 import selectRuntime from '@/redux/selectors/runtime';
-import { makeI18nStaticProps } from '@/lib/i18n';
+import { makeI18nStaticProps } from '@/utils/i18n';
+import SiteTitle from '@/components/atoms/SiteTitle';
 
 const Blocks = styled.div`
   display: grid;
@@ -133,6 +134,8 @@ const PrivacyPolicy: NextPage = () => {
     dispatch(experienceActions.setExitPrompt(value));
   const onContentPaywallChange = (value: boolean) =>
     dispatch(experienceActions.setContentPaywall(value));
+  const onPageTitleInactiveArrayPagedChange = (value: boolean) =>
+    dispatch(experienceActions.setPageTitle({ inactiveArrayPaged: value }));
 
   const colorSchemes: { value: UserColorScheme; label: string }[] = [
     { value: 'auto', label: 'System default' },
@@ -142,6 +145,7 @@ const PrivacyPolicy: NextPage = () => {
 
   return (
     <main>
+      <SiteTitle>{tCommon('navigation.settings')}</SiteTitle>
       <h1>{t('title')}</h1>
 
       <Blocks>
@@ -227,6 +231,12 @@ const PrivacyPolicy: NextPage = () => {
               checked={experience.contentPaywall}
               onChange={onContentPaywallChange}
             />
+            <ToggableRow
+              label={t('experience_section.page_title_inactive_array_paged')}
+              name="page_title_inactive_array_paged"
+              checked={experience.pageTitle.inactiveArrayPaged}
+              onChange={onPageTitleInactiveArrayPagedChange}
+            />
           </BlockBody>
         </Block>
 
@@ -236,24 +246,24 @@ const PrivacyPolicy: NextPage = () => {
             <small>{t('runtime_section.disclaimer')}</small>
             <p>
               {t('runtime_section.started_ago')}{' '}
-              <ReactTimeAgo date={runtime.startTime} />
+              <ReactTimeAgo date={runtime.startedAt} />
             </p>
             <p>
-              {t('runtime_section.elapsed_seconds')}{' '}
-              <span>{runtime.inFocusSeconds}</span>
+              {t('runtime_section.visibility_seconds')}{' '}
+              <span>{runtime.document.visibilitySeconds}</span>
             </p>
             <p>
-              {t('runtime_section.is_window_in_focus')}{' '}
+              {t('runtime_section.is_document_visible')}{' '}
               <span>
-                {runtime.isInFocus
+                {runtime.document.isVisible
                   ? tCommon('response.yes')
                   : tCommon('response.yes')}
               </span>
             </p>
             <p>
-              {t('runtime_section.is_windows_interacted')}{' '}
+              {t('runtime_section.interaction_unlocked')}{' '}
               <span>
-                {runtime.hasInteracted
+                {runtime.interactionUnlocked
                   ? tCommon('response.yes')
                   : tCommon('response.yes')}
               </span>
