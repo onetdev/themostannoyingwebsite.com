@@ -8,6 +8,17 @@
     "yes": "Yes",
     "no": "No"
   },
+  "actions": {
+    "dismiss": "Dismiss",
+    "cancel": "Cancel",
+    "accept": "Accept",
+    "close": "Close",
+    "ok": "OK"
+  },
+  "status": {
+    "unknown": "Unknown",
+    "not_set": "Not set"
+  },
   "navigation": {
     "home": "Home",
     "hotThings": "Hot things",
@@ -17,6 +28,10 @@
   },
   "experiences": {
     "marquee_variants": ["📣 Come back please 🏃‍♀️🏃 We have candy!! 🚐"],
-    "array_paged_variants": ["⭐️ HEY YOU 🫵", "😜 YES YOU 😱", "📣 COME BACK 🏃"]
+    "array_paged_variants": ["⭐️ HEY YOU 🫵", "😜 YES YOU 😱", "📣 COME BACK 🏃"],
+    "notification_permission_manual": {
+      "title": "You can manually change the notification permission up here",
+      "description": "We would like to send you notifications sometimes, could you be so kind to allow us to do so? 🙏🥺🙏"
+    }
   }
 }
