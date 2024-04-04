@@ -5,5 +5,5 @@ export const getNotificationPermissionState = () =>
 
 export const getLocationPermissionState = async () =>
   config.isBrowser
-    ? navigator.permissions.query({ name: 'geolocation' })
+    ? (await navigator.permissions.query({ name: 'geolocation' })).state
     : undefined;

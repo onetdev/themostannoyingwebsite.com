@@ -1,49 +1,44 @@
 'use client';
 
-import { FunctionComponent, useEffect, useRef, useState } from 'react';
+import { FunctionComponent, useRef, useState } from 'react';
 
 import { useAppDispatch } from '@/redux/hooks';
-import { syncLocationPermission } from '@/redux/slices/consent';
+import { syncPermissions } from '@/redux/slices/consent';
 import { getNotificationPermissionState } from '@/utils/permission';
+import useScrollDistanceTrigger from '@/hooks/useScrollDistanceTrigger';
 
 import ManualModal from './ManualModal';
 
 export type NotificationPermissionExperienceProps = {
-  // the number of scroll events triggered on a page until notification
-  // permission is requested. 0 makes it instant on pageload.
-  scrollCountTriggerThreshold?: number;
+  scrollDistanceTrigger?: number;
 };
 const NotificationPermissionExperience: FunctionComponent<
   NotificationPermissionExperienceProps
-> = ({ scrollCountTriggerThreshold = 0 }) => {
+> = ({ scrollDistanceTrigger = 200 }) => {
   const initialState = useRef(getNotificationPermissionState()).current;
-  const [scrollCount, setScrollCount] = useState(0);
+  useScrollDistanceTrigger({
+    threshold: scrollDistanceTrigger,
+    onTrigger: () => enterFlow(),
+  });
   const [manualModalVisible, setManualModalVisible] = useState(false);
   const dispatch = useAppDispatch();
-  const shouldEnterFlow =
-    initialState === 'default' && scrollCount >= scrollCountTriggerThreshold;
 
-  const onScroll = () => setScrollCount((prev) => prev + 1);
-  const onManualModalDismiss = () => {
-    setManualModalVisible(false);
-    dispatch(syncLocationPermission());
-  };
   const enterFlow = async () => {
+    if (initialState !== 'default') {
+      return;
+    }
+
     const result = await Notification.requestPermission();
+    dispatch(syncPermissions());
     if (result === 'denied') {
       setManualModalVisible(true);
     }
   };
 
-  useEffect(() => {
-    if (shouldEnterFlow) {
-      enterFlow();
-      return;
-    }
-
-    document.addEventListener('scroll', onScroll);
-    return () => document.removeEventListener('scroll', onScroll);
-  }, [shouldEnterFlow]);
+  const onManualModalDismiss = () => {
+    setManualModalVisible(false);
+    dispatch(syncPermissions());
+  };
 
   return (
     <ManualModal

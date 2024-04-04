@@ -11,7 +11,7 @@ export interface ConsentState {
     essential: boolean;
   };
   permission: {
-    location?: PermissionStatus;
+    location?: PermissionState;
     notification?: NotificationPermission;
   };
 }
