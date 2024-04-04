@@ -4,29 +4,11 @@ import { ButtonHTMLAttributes, FunctionComponent } from 'react';
 import { cssVars } from '@/styles/theme';
 
 type Props = ButtonHTMLAttributes<HTMLButtonElement> & {
-  variant: 'primary' | 'secondary' | 'tertiary';
+  variant?: 'primary' | 'secondary' | 'tertiary';
 };
 
-const StyledButton = styled.button<{
-  $background: string;
-  $backgroundAlt: string;
-  $textColor: string;
-}>`
-  cursor: pointer;
-  background: ${(props) => props.$background};
-  color: ${(props) => props.$textColor};
-  transition: background 0.1s ease-in-out;
-  &:hover {
-    background: ${(props) => props.$backgroundAlt};
-  }
-  &:disabled {
-    filter: grayscale(100%);
-    cursor: default;
-  }
-`;
-
 const Button: FunctionComponent<Props> = ({
-  variant,
+  variant = 'primary',
   children,
   onClick,
   disabled,
@@ -70,5 +52,23 @@ const Button: FunctionComponent<Props> = ({
     </StyledButton>
   );
 };
+
+const StyledButton = styled.button<{
+  $background: string;
+  $backgroundAlt: string;
+  $textColor: string;
+}>`
+  cursor: pointer;
+  background: ${(props) => props.$background};
+  color: ${(props) => props.$textColor};
+  transition: background 0.1s ease-in-out;
+  &:hover {
+    background: ${(props) => props.$backgroundAlt};
+  }
+  &:disabled {
+    filter: grayscale(100%);
+    cursor: default;
+  }
+`;
 
 export default Button;
