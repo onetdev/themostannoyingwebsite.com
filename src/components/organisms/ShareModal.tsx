@@ -36,7 +36,7 @@ const ShareModal: FunctionComponent<Props> = ({ show, handleClose }) => {
           </EmailShareButton>
         </>
       }
-      show={show}
+      visible={show}
       onClose={handleClose}>
       Sharing is caring, please show this awefully anoying website to your
       friends.

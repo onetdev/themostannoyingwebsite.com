@@ -7,7 +7,28 @@ import DimmerOverlay from '@/components/atoms/DimmerOverlay';
 
 import ModalContent from './ModalContent';
 
-const zIndexBase = 30;
+const ActionButton: FunctionComponent = () => {
+  const [isOpen, setOpen] = useState(false);
+
+  return (
+    <Wrap>
+      <DimmerOverlay
+        visible={isOpen}
+        onClose={() => setOpen(false)}
+        closeOnClickOutside={false}
+        closeOnEsc>
+        <div onClick={(e) => e.stopPropagation()} hidden={!isOpen}>
+          <ModalContent onClose={() => setOpen(false)} />
+        </div>
+      </DimmerOverlay>
+      <Icon onClick={() => setOpen(true)}>
+        <FontAwesomeIcon icon={['fas', 'tags']} />
+      </Icon>
+    </Wrap>
+  );
+};
+
+const Z_INDEX_BASE = 30;
 
 const wiggleAnim = keyframes`
   0% { transform: rotate(0deg); }
@@ -22,7 +43,7 @@ const Wrap = styled.div`
   position: fixed;
   left: 0;
   top: 50%;
-  z-index: ${zIndexBase};
+  z-index: ${Z_INDEX_BASE};
 `;
 const Icon = styled.div`
   padding: 1rem 1rem 1rem 3rem;
@@ -41,26 +62,5 @@ const Icon = styled.div`
     opacity: 1;
   }
 `;
-
-const ActionButton: FunctionComponent = () => {
-  const [isOpen, setIsOpen] = useState(false);
-
-  return (
-    <Wrap>
-      <DimmerOverlay
-        show={isOpen}
-        onClose={() => setIsOpen(false)}
-        closeOnClickOutside={false}
-        closeOnEsc>
-        <div onClick={(e) => e.stopPropagation()} hidden={!isOpen}>
-          <ModalContent onClose={() => setIsOpen(false)} />
-        </div>
-      </DimmerOverlay>
-      <Icon onClick={() => setIsOpen(true)}>
-        <FontAwesomeIcon icon={['fas', 'tags']} />
-      </Icon>
-    </Wrap>
-  );
-};
 
 export default ActionButton;
