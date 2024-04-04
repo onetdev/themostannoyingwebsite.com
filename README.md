@@ -10,14 +10,14 @@ The main idea is to collect all the disgusting features from today's website in 
 - [x] Wheel of fortune coupon modal
 - [x] Add confirmation when trying to leave the page
 - [x] Update title while the user is on a different tab
-- [ ] Age verification on some images
+- [x] Asking for notification: no worries, the website won't send any notification
+- [ ] Funny, silly contents (inspired Onion news)
 - [ ] Newsletter modal when the user leaves the screen or scrolls down a bit
-- [ ] Asking for notification: no worries, the website won't send any notification
 - [ ] Asking for location permission: no worries, the website won't use your location
 - [ ] Sticky video player obscuring the page visibility. (+audio)
 - [ ] Randomly loading images while scrolling.
 - [ ] Low Quality images
-- [ ] Funny, silly contents (inspired Onion news)
+- [ ] Age verification on some images
 
 **Stretch goal experiments**:
 

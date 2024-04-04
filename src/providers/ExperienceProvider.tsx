@@ -6,6 +6,7 @@ import useDocumentVisibilityListener from '@/hooks/useDocumentVisibilityListener
 import { selectExitPrompt } from '@/redux/selectors/experience';
 import { useAppSelector } from '@/redux/hooks';
 import PageTitleExperience from '@/features/page_title/components/PageTitleExperience';
+import NotificationPermissionExperience from '@/features/notification/components/NotificationPermissionEperience';
 
 const ExperienceProvider: FunctionComponent<PropsWithChildren> = ({
   children,
@@ -23,6 +24,7 @@ const ExperienceProvider: FunctionComponent<PropsWithChildren> = ({
   return (
     <>
       <PageTitleExperience />
+      <NotificationPermissionExperience />
       {children}
     </>
   );
