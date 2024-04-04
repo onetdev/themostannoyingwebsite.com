@@ -32,6 +32,7 @@
     "notification_permission_manual": {
       "title": "You can manually change the notification permission up here",
       "description": "We would like to send you notifications sometimes, could you be so kind to allow us to do so? 🙏🥺🙏"
-    }
+    },
+    "exit_prompt": "I'd reconsider leaving before some bad things happend to you. Are you sure?"
   }
 }

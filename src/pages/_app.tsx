@@ -1,17 +1,19 @@
 import '@/styles/globals.css';
 import Head from 'next/head';
-import { appWithTranslation } from 'next-i18next';
+import { UserConfig, appWithTranslation } from 'next-i18next';
 
 import english from '@/public/locales/en/common.json';
 import MainLayout from '@/components/templates/MainLayout';
 import ProviderContainer from '@/providers/ProviderContainer';
 import GeneratedMetaHead from '@/components/templates/GeneratedMetaHead';
 
+import nextI18NextConfig from '@/../next-i18next.config.js';
+
 import type { AppProps } from 'next/app';
 
 const TheMostAnnoyingWebsite = ({ Component, pageProps }: AppProps) => {
   // Can't use translations here yet, description will be set on page level
-  // https://github.com/i18next/next-i18next?tab=readme-ov-file#serversidetranslations
+  // https://github.com/i18next/next-i18next/tree/v15.2.0#serversidetranslations
   const description = english.meta.description;
 
   return (
@@ -34,4 +36,17 @@ const TheMostAnnoyingWebsite = ({ Component, pageProps }: AppProps) => {
   );
 };
 
-export default appWithTranslation(TheMostAnnoyingWebsite);
+// This is to avoid the following build error:
+// `react-i18next:: You will need to pass in an i18next instance by using initReactI18next`
+// https://github.com/i18next/next-i18next/tree/v15.2.0#usage-with-fallback-ssg-pages
+const emptyInitialI18NextConfig: UserConfig = {
+  i18n: {
+    defaultLocale: nextI18NextConfig.i18n.defaultLocale,
+    locales: nextI18NextConfig.i18n.locales,
+  },
+};
+
+export default appWithTranslation(
+  TheMostAnnoyingWebsite,
+  emptyInitialI18NextConfig,
+);
