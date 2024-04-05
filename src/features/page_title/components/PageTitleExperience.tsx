@@ -1,3 +1,5 @@
+'use client';
+
 import { useTranslation } from 'next-i18next';
 
 import { useAppSelector } from '@/redux/hooks';

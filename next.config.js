@@ -5,4 +5,7 @@ module.exports = {
   poweredByHeader: false,
   trailingSlash: true,
   i18n,
+  compiler: {
+    styledComponents: true,
+  },
 };

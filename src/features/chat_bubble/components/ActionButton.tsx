@@ -14,6 +14,7 @@ import { useAppSelector } from '@/redux/hooks';
 import { cssVars } from '@/styles/theme';
 import { selectEnableSound } from '@/redux/selectors/preference';
 import { selectInteractionUnlocked } from '@/redux/selectors/runtime';
+import useSendNotification from '@/hooks/useSendNotification';
 
 const zIndexBase = 20;
 
@@ -96,6 +97,7 @@ const ActionButton: FunctionComponent = () => {
   const [history, setHistory] = useState([initialMessage()] as HistoryItem[]);
   const [isOpen, setIsOpen] = useState(false);
   const [badgeCounter, setBadgeCounter] = useState(1);
+  const notification = useSendNotification();
   const notificationSfx = useAudio('/assets/sfx/notification_chord1.wav');
 
   const preventClose: MouseEventHandler = (e) => e.stopPropagation();
@@ -112,6 +114,16 @@ const ActionButton: FunctionComponent = () => {
     notificationSfx.play();
   }, [enableSound, notificationSfx]);
 
+  const sendNotification = useCallback(
+    (message: string) => {
+      notification.send({
+        title: 'New message!',
+        body: message,
+      });
+    },
+    [notification],
+  );
+
   const addRandomBotMessage = useCallback(() => {
     const pool = messages.filter(
       (message) => !history.some((item) => item.text === message),
@@ -124,8 +136,9 @@ const ActionButton: FunctionComponent = () => {
     if (!isOpen) {
       setBadgeCounter((prev) => prev + 1);
       playSound();
+      sendNotification(randomMessage);
     }
-  }, [addHistory, history, isOpen, playSound]);
+  }, [addHistory, history, isOpen, playSound, sendNotification]);
 
   const closeHistory = () => setIsOpen(false);
   const toggleHistory: MouseEventHandler<HTMLDivElement> = useCallback(() => {

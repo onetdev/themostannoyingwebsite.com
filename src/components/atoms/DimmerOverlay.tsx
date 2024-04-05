@@ -9,7 +9,7 @@ import { styled } from 'styled-components';
 import { cssVars } from '@/styles/theme';
 
 export type DimmerOverlayProps = PropsWithChildren<{
-  show: boolean;
+  visible: boolean;
   onClose?: () => void;
   closeOnEsc?: boolean;
   closeOnClickOutside?: boolean;
@@ -22,7 +22,7 @@ export type DimmerOverlayProps = PropsWithChildren<{
  */
 const DimmerOverlay: FunctionComponent<DimmerOverlayProps> = ({
   children,
-  show,
+  visible,
   onClose,
   closeOnEsc = true,
   closeOnClickOutside = true,
@@ -41,15 +41,15 @@ const DimmerOverlay: FunctionComponent<DimmerOverlayProps> = ({
   }, [handleKeyDown]);
 
   return (
-    <Dimmer
-      className={show ? 'modal-show' : 'modal-hide'}
+    <Wrapper
+      className={visible ? 'modal-show' : 'modal-hide'}
       onClick={() => closeOnClickOutside && onClose?.()}>
       {children}
-    </Dimmer>
+    </Wrapper>
   );
 };
 
-const Dimmer = styled.div`
+const Wrapper = styled.div`
   position: fixed;
   display: flex;
   top: 0;

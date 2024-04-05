@@ -2,6 +2,7 @@ import ReactTimeAgo from 'react-timeago';
 import { styled } from 'styled-components';
 import { useTranslation } from 'next-i18next';
 import { NextPage } from 'next';
+import { FunctionComponent, PropsWithChildren } from 'react';
 
 import { cssRule, cssVars } from '@/styles/theme';
 import { useAppDispatch, useAppSelector } from '@/redux/hooks';
@@ -9,7 +10,6 @@ import {
   UserColorScheme,
   actions as preferenceActions,
 } from '@/redux/slices/preference';
-import { actions as consentActions } from '@/redux/slices/consent';
 import { actions as experienceActions } from '@/redux/slices/experience';
 import selectPreference from '@/redux/selectors/preference';
 import selectExperience from '@/redux/selectors/experience';
@@ -17,6 +17,8 @@ import selectConsent from '@/redux/selectors/consent';
 import selectRuntime from '@/redux/selectors/runtime';
 import { makeI18nStaticProps } from '@/utils/i18n';
 import SiteTitle from '@/components/atoms/SiteTitle';
+import FormSelect from '@/components/atoms/FormSelect';
+import FormCheckbox from '@/components/atoms/FormCheckbox';
 
 const Blocks = styled.div`
   display: grid;
@@ -40,64 +42,21 @@ const BlockBody = styled.div<{ $gap?: boolean }>`
   flex-direction: column;
   gap: ${(props) => (props.$gap ? cssVars.spacing.gap : 0)};
 `;
-const RowWithLabel = styled.div`
-  label {
-    display: flex;
-    justify-content: space-between;
-  }
+const LabelRow = styled.label`
+  display: flex;
+  justify-content: space-between;
 `;
 
-type FormElementProps = {
-  label: string;
-  name: string;
-};
-
-type ToggableRowProps = FormElementProps & {
-  checked: boolean;
-  onChange: (value: boolean) => void;
-};
-const ToggableRow = ({ label, name, checked, onChange }: ToggableRowProps) => (
-  <RowWithLabel>
-    <label>
+const SettingsFormRow: FunctionComponent<
+  PropsWithChildren<{ label: string }>
+> = ({ label, children }) => {
+  return (
+    <LabelRow>
       <span>{label}</span>
-      <input
-        type="checkbox"
-        name={name}
-        checked={checked}
-        onChange={(e) => onChange(e.target.checked)}
-      />
-    </label>
-  </RowWithLabel>
-);
-
-type SelectRowProps = FormElementProps & {
-  values: { value: string; label: string }[];
-  selected: string;
-  onChange: (value: string) => void;
+      {children}
+    </LabelRow>
+  );
 };
-const SelectRow = ({
-  label,
-  name,
-  values,
-  selected,
-  onChange,
-}: SelectRowProps) => (
-  <RowWithLabel>
-    <label>
-      <span>{label}</span>
-      <select
-        name={name}
-        onChange={(e) => onChange(values[e.target.selectedIndex].value)}
-        defaultValue={selected}>
-        {values.map(({ value, label }) => (
-          <option key={value} value={value}>
-            {label}
-          </option>
-        ))}
-      </select>
-    </label>
-  </RowWithLabel>
-);
 
 const PrivacyPolicy: NextPage = () => {
   const dispatch = useAppDispatch();
@@ -118,13 +77,7 @@ const PrivacyPolicy: NextPage = () => {
     dispatch(preferenceActions.setEnableSound(value));
   const onAdultFilterChange = (value: boolean) =>
     dispatch(preferenceActions.setAdultFilter(value));
-  // Consent block
-  const onAllowCookiesChange = (value: boolean) =>
-    dispatch(consentActions.setAllowCookies(value));
-  const onAlowNotificationChange = (value: boolean) =>
-    dispatch(consentActions.setAllowNotification(value));
-  const onAllowLocationChange = (value: boolean) =>
-    dispatch(consentActions.setAllowLocation(value));
+
   // Experience block
   const onAlowMockChatChange = (value: boolean) =>
     dispatch(experienceActions.setMockChat(value));
@@ -152,91 +105,99 @@ const PrivacyPolicy: NextPage = () => {
         <Block>
           <BlockTitle>{t('preference_section.title')}</BlockTitle>
           <BlockBody $gap>
-            <SelectRow
-              label={t('preference_section.color_scheme')}
-              name="color_scheme"
-              selected={preference.colorScheme}
-              values={colorSchemes}
-              onChange={onColorSchemeChange}
-            />
-            <ToggableRow
-              label={t('preference_section.enable_flashing')}
-              name="enable_flashing"
-              checked={preference.enableFlashing}
-              onChange={onFlashingContentsChange}
-            />
-            <ToggableRow
-              label={t('preference_section.enable_sound')}
-              name="enable_sound"
-              checked={preference.enableSound}
-              onChange={onSoundChange}
-            />
-            <ToggableRow
-              label={t('preference_section.adult_filter')}
-              name="adult_filter"
-              checked={preference.adultFilter}
-              onChange={onAdultFilterChange}
-            />
+            <SettingsFormRow label={t('preference_section.color_scheme')}>
+              <FormSelect
+                name="color_scheme"
+                selected={preference.colorScheme}
+                values={colorSchemes}
+                onValueChange={onColorSchemeChange}
+              />
+            </SettingsFormRow>
+            <SettingsFormRow label={t('preference_section.enable_flashing')}>
+              <FormCheckbox
+                name="enable_flashing"
+                checked={preference.enableFlashing}
+                onValueChange={onFlashingContentsChange}
+              />
+            </SettingsFormRow>
+            <SettingsFormRow label={t('preference_section.enable_sound')}>
+              <FormCheckbox
+                name="enable_sound"
+                checked={preference.enableSound}
+                onValueChange={onSoundChange}
+              />
+            </SettingsFormRow>
+            <SettingsFormRow label={t('preference_section.adult_filter')}>
+              <FormCheckbox
+                name="adult_filter"
+                checked={preference.adultFilter}
+                onValueChange={onAdultFilterChange}
+              />
+            </SettingsFormRow>
           </BlockBody>
         </Block>
 
         <Block>
           <BlockTitle>{t('consent_section.title')}</BlockTitle>
           <BlockBody $gap>
-            <ToggableRow
-              label={t('consent_section.allow_cookies')}
-              name="allow_cookies"
-              checked={consent.allowCookies}
-              onChange={onAllowCookiesChange}
-            />
-            <ToggableRow
-              label={t('consent_section.allow_notification')}
-              name="allow_notification"
-              checked={consent.allowNotification || false}
-              onChange={onAlowNotificationChange}
-            />
-            <ToggableRow
-              label={t('consent_section.enable_location')}
-              name="enable_location"
-              checked={consent.allowLocation || false}
-              onChange={onAllowLocationChange}
-            />
+            <SettingsFormRow label={t('consent_section.essential_cookies')}>
+              <FormCheckbox
+                name="essential_cookies"
+                checked={consent.cookies.essential}
+                disabled
+              />
+            </SettingsFormRow>
+            <br />
+            <i>{t('consent_section.permission_disclaimer')}</i>
+            <SettingsFormRow
+              label={t('consent_section.notification_permission')}>
+              {`${consent.permission.notification || tCommon('status.not_set')}`}
+            </SettingsFormRow>
+            <SettingsFormRow label={t('consent_section.location_permission')}>
+              {`${consent.permission.location || tCommon('status.not_set')}`}
+            </SettingsFormRow>
           </BlockBody>
         </Block>
 
         <Block>
           <BlockTitle>{t('experience_section.title')}</BlockTitle>
           <BlockBody $gap>
-            <ToggableRow
-              label={t('experience_section.mock_chat')}
-              name="mock_chat"
-              checked={experience.mockChat}
-              onChange={onAlowMockChatChange}
-            />
-            <ToggableRow
-              label={t('experience_section.wheel_of_fortune')}
-              name="wheel_of_fortune"
-              checked={experience.wheelOfFortune}
-              onChange={onWheelOfFortuneChange}
-            />
-            <ToggableRow
-              label={t('experience_section.exit_prompt')}
-              name="exit_prompt"
-              checked={experience.exitPrompt}
-              onChange={onExitPromptChange}
-            />
-            <ToggableRow
-              label={t('experience_section.content_paywall')}
-              name="content_paywall"
-              checked={experience.contentPaywall}
-              onChange={onContentPaywallChange}
-            />
-            <ToggableRow
-              label={t('experience_section.page_title_inactive_array_paged')}
-              name="page_title_inactive_array_paged"
-              checked={experience.pageTitle.inactiveArrayPaged}
-              onChange={onPageTitleInactiveArrayPagedChange}
-            />
+            <SettingsFormRow label={t('experience_section.mock_chat')}>
+              <FormCheckbox
+                name="mock_chat"
+                checked={experience.mockChat}
+                onValueChange={onAlowMockChatChange}
+              />
+            </SettingsFormRow>
+            <SettingsFormRow label={t('experience_section.wheel_of_fortune')}>
+              <FormCheckbox
+                name="wheel_of_fortune"
+                checked={experience.wheelOfFortune}
+                onValueChange={onWheelOfFortuneChange}
+              />
+            </SettingsFormRow>
+            <SettingsFormRow label={t('experience_section.exit_prompt')}>
+              <FormCheckbox
+                name="exit_prompt"
+                checked={experience.exitPrompt}
+                onValueChange={onExitPromptChange}
+              />
+            </SettingsFormRow>
+            <SettingsFormRow label={t('experience_section.content_paywall')}>
+              <FormCheckbox
+                name="content_paywall"
+                checked={experience.contentPaywall}
+                onValueChange={onContentPaywallChange}
+              />
+            </SettingsFormRow>
+            <SettingsFormRow
+              label={t('experience_section.page_title_inactive_array_paged')}>
+              <FormCheckbox
+                name="page_title_inactive_array_paged"
+                checked={experience.pageTitle.inactiveArrayPaged}
+                onValueChange={onPageTitleInactiveArrayPagedChange}
+              />
+            </SettingsFormRow>
           </BlockBody>
         </Block>
 
