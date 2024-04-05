@@ -5,7 +5,7 @@ import { styled, keyframes } from 'styled-components';
 
 import { useAppSelector } from '@/redux/hooks';
 import ArticleService from '@/features/articles/services/ArticleService';
-import { cssVars } from '@/styles/theme';
+import cssVars from '@/styles/css_vars';
 import { selectEnableFlashing } from '@/redux/selectors/preference';
 
 const flashingAnim = keyframes`

@@ -5,7 +5,7 @@ import { styled } from 'styled-components';
 
 import { getWeightedRandom } from '@/utils/math';
 import { useAppSelector } from '@/redux/hooks';
-import { cssVars } from '@/styles/theme';
+import cssVars from '@/styles/css_vars';
 import { selectEnableFlashing } from '@/redux/selectors/preference';
 
 import AnimatedWheel, { AnimatedWheelState } from './AnimatedWheel';

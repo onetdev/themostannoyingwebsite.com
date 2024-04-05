@@ -5,7 +5,7 @@ import { Analytics } from '@vercel/analytics/react';
 import CookieBar from '@/components/organisms/CookieConsent';
 import { ChatBubble } from '@/features/chat_bubble';
 import { WheelOfFortune } from '@/features/wheel_of_fortune';
-import { cssVars } from '@/styles/theme';
+import cssVars from '@/styles/css_vars';
 import { useAppSelector } from '@/redux/hooks';
 import ContainerGiftFlaps from '@/features/gifts/components/ContainerGiftFlaps';
 import Footer from '@/components/organisms/Footer';

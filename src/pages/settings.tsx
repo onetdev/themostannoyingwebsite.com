@@ -4,7 +4,6 @@ import { useTranslation } from 'next-i18next';
 import { NextPage } from 'next';
 import { FunctionComponent, PropsWithChildren } from 'react';
 
-import { cssRule, cssVars } from '@/styles/theme';
 import { useAppDispatch, useAppSelector } from '@/redux/hooks';
 import {
   UserColorScheme,
@@ -19,11 +18,13 @@ import { makeI18nStaticProps } from '@/utils/i18n';
 import SiteTitle from '@/components/atoms/SiteTitle';
 import FormSelect from '@/components/atoms/FormSelect';
 import FormCheckbox from '@/components/atoms/FormCheckbox';
+import cssVars from '@/styles/css_vars';
+import mediaQueries from '@/styles/media_queries';
 
 const Blocks = styled.div`
   display: grid;
   gap: ${cssVars.spacing.gap};
-  ${cssRule.mdUp} {
+  ${mediaQueries.mdUp} {
     grid-template-columns: 1fr 1fr;
   }
 `;

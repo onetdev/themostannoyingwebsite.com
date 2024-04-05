@@ -4,13 +4,14 @@ import { FunctionComponent } from 'react';
 
 import { useAppDispatch, useAppSelector } from '@/redux/hooks';
 import { actions as consentActions } from '@/redux/slices/consent';
-import { cssVars, ThemeProps } from '@/styles/theme';
+import cssVars from '@/styles/css_vars';
 import { selectReviewCompleted } from '@/redux/selectors/consent';
+import type { ThemeColors } from '@/types';
 
-const Wrap = styled.div<{ theme: ThemeProps }>`
+const Wrap = styled.div<{ theme: ThemeColors }>`
   position: sticky;
   bottom: -10px;
-  background: ${({ theme }) => theme.colors.surface};
+  background: ${({ theme }) => theme.surface};
   box-shadow: 0 -2px 5px 2px rgba(0, 0, 0, 0.4);
   border: 1px solid ${cssVars.color.tertiary};
   border-radius: ${cssVars.spacing.gap};

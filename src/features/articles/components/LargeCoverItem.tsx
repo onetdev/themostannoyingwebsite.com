@@ -3,7 +3,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 
 import { ArticleCore } from '@/types';
-import { cssVars } from '@/styles/theme';
+import cssVars from '@/styles/css_vars';
 
 import CoverPlaceholder from './CoverPlaceholder';
 

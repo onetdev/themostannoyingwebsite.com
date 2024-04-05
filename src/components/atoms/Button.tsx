@@ -1,7 +1,7 @@
 import { styled } from 'styled-components';
 import { ButtonHTMLAttributes, FunctionComponent } from 'react';
 
-import { cssVars } from '@/styles/theme';
+import cssVars from '@/styles/css_vars';
 
 type Props = ButtonHTMLAttributes<HTMLButtonElement> & {
   variant?: 'primary' | 'secondary' | 'tertiary';
@@ -61,7 +61,7 @@ const StyledButton = styled.button<{
   cursor: pointer;
   background: ${(props) => props.$background};
   color: ${(props) => props.$textColor};
-  transition: background 0.1s ease-in-out;
+  transition: background-color 0.1s ease-in-out;
   &:hover {
     background: ${(props) => props.$backgroundAlt};
   }

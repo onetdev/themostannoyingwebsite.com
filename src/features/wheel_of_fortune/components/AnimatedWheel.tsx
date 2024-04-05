@@ -10,8 +10,9 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import useDragTracker from '@/hooks/useDragTracker';
 import { distance, random } from '@/utils/math';
-import { cssRule, cssVars } from '@/styles/theme';
+import cssVars from '@/styles/css_vars';
 import Button from '@/components/atoms/Button';
+import mediaQueries from '@/styles/media_queries';
 
 import Wheel, { Item } from './Wheel';
 
@@ -51,7 +52,7 @@ const PointerWrap = styled.div<{ $wiggle: boolean }>`
   font-size: 50px;
   filter: drop-shadow(0 5px 5px rgba(0, 0, 0, 0.4));
   z-index: 1;
-  ${cssRule.mdDown} {
+  ${mediaQueries.mdDown} {
     font-size: 30px;
     top: 13px;
     right: calc(50% - 9px);
@@ -73,7 +74,7 @@ const CtaButton = styled(Button)`
   border: 1px solid ${cssVars.color.secondary};
   box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.4);
   border-radius: 50%;
-  ${cssRule.mdDown} {
+  ${mediaQueries.mdDown} {
     width: 30%;
     border-radius: 5px;
   }

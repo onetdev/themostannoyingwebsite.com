@@ -2,10 +2,8 @@
 @import 'modern-normalize/modern-normalize.css';
 
 /**
- * IMPORTANT!!!
- * You can find the theme related variables within the Theme component.
+ * Colors used for themes could be found in `src/styles/themes/*`
  */
-
 :root {
   --font-size-small: 12px;
   --font-size-normal: 14px;
@@ -24,7 +22,7 @@ body {
   font-size: var(--font-size-normal);
   background: var(--color-background);
   color: var(--color-on-background);
-  transition: background 0.3s ease-in-out;
+  transition: background-color 0.3s ease-in-out;
 }
 
 a, a:visited {

@@ -11,7 +11,7 @@ import { styled } from 'styled-components';
 import useAudio from '@/hooks/useAudio';
 import History from '@/features/chat_bubble/components/History';
 import { useAppSelector } from '@/redux/hooks';
-import { cssVars } from '@/styles/theme';
+import cssVars from '@/styles/css_vars';
 import { selectEnableSound } from '@/redux/selectors/preference';
 import { selectInteractionUnlocked } from '@/redux/selectors/runtime';
 import useSendNotification from '@/hooks/useSendNotification';

@@ -3,7 +3,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { FunctionComponent } from 'react';
 
-import { cssVars } from '@/styles/theme';
+import cssVars from '@/styles/css_vars';
 import flapImage from '@/public/assets/images/car-advert.jpg';
 
 const ContainerWrap = styled.div`

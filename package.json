@@ -87,6 +87,7 @@
     "lint-staged": "^15.2.2",
     "prettier": "^3.2.5",
     "storybook": "^8.0.5",
+    "storybook-theme-css-vars": "^0.0.12",
     "tsx": "^4.7.1",
     "typescript": "^5.3"
   },
