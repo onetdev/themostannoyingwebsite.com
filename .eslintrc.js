@@ -5,6 +5,7 @@ module.exports = {
     'next/core-web-vitals',
     'plugin:@typescript-eslint/recommended',
     'plugin:prettier/recommended',
+    'plugin:storybook/recommended',
   ],
   rules: {
     'import/order': [
