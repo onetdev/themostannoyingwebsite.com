@@ -25,10 +25,10 @@ export const createThemeGlobalStyle = (colors: ThemeColors) => `
 `;
 
 const GlobalThemeStyle = createGlobalStyle`
-:root, :root [data-theme="dark"] {
+[data-theme="dark"] {
   ${createThemeGlobalStyle(darkThemeColors)};
 }
-:root [data-theme="light"] {
+[data-theme="light"] {
   ${createThemeGlobalStyle(lightThemeColors)};
 }
 `;
