@@ -1,6 +1,6 @@
 import { createGlobalStyle } from 'styled-components';
 
-import { createThemeGlobalStyle } from '@/styles/GlobalThemeStyle';
+import { createThemeGlobalStyle } from '@/styles/ScopedThemeStyle';
 
 import lightThemeColors from './light_theme_colors';
 
