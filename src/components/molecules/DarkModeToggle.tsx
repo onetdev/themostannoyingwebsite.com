@@ -3,7 +3,7 @@ import { FunctionComponent } from 'react';
 
 import { actions as preferenceActions } from '@/redux/slices/preference';
 import { useAppDispatch } from '@/redux/hooks';
-import { cssVars } from '@/styles/theme';
+import cssVars from '@/styles/css_vars';
 import { ColorScheme } from '@/hooks/useSystemColorScheme';
 import useUserColorScheme from '@/hooks/useUserColorScheme';
 

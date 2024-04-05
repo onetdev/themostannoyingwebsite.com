@@ -1,19 +1,20 @@
 import { styled } from 'styled-components';
 import { NextPage } from 'next';
 
-import { cssRule, cssVars } from '@/styles/theme';
 import { ClearListStyle } from '@/styles/utils';
 import TextListItem from '@/features/articles/components/TextListItem';
 import SmallCoverListItem from '@/features/articles/components/SmallCoverListItem';
 import LargeCoverItem from '@/features/articles/components/LargeCoverItem';
 import ArticleService from '@/features/articles/services/ArticleService';
 import { makeI18nStaticProps } from '@/utils/i18n';
+import cssVars from '@/styles/css_vars';
+import mediaQueries from '@/styles/media_queries';
 
 const Grid = styled.main`
   display: grid;
   gap: ${cssVars.spacing.gap};
   grid-template-areas: 'cover' 'dense-list' 'list';
-  ${cssRule.mdUp} {
+  ${mediaQueries.mdUp} {
     grid-template-areas: 'cover dense-list' 'list  list';
     grid-template-columns: 4fr 1fr;
   }
@@ -45,7 +46,7 @@ const RegularList = styled.ul`
   display: inline-flex;
   gap: ${cssVars.spacing.gap};
   flex-direction: column;
-  ${cssRule.mdUp} {
+  ${mediaQueries.mdUp} {
     padding-top: ${cssVars.spacing.gap2x};
     flex-direction: row;
     flex-wrap: wrap;
@@ -53,7 +54,7 @@ const RegularList = styled.ul`
 `;
 const RegularListItem = styled.li`
   flex-basis: 100%;
-  ${cssRule.mdUp} {
+  ${mediaQueries.mdUp} {
     flex-basis: calc((100% - (${cssVars.spacing.gap} * 3)) / 4);
   }
 `;

@@ -2,7 +2,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { styled } from 'styled-components';
 import React, { FunctionComponent } from 'react';
 
-import { cssVars } from '@/styles/theme';
+import cssVars from '@/styles/css_vars';
 import DimmerOverlay, {
   type DimmerOverlayProps,
 } from '@/components/atoms/DimmerOverlay';

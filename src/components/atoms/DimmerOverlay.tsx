@@ -6,7 +6,7 @@ import {
 } from 'react';
 import { styled } from 'styled-components';
 
-import { cssVars } from '@/styles/theme';
+import cssVars from '@/styles/css_vars';
 
 export type DimmerOverlayProps = PropsWithChildren<{
   visible: boolean;

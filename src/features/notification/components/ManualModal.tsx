@@ -4,7 +4,7 @@ import { FunctionComponent } from 'react';
 import styled from 'styled-components';
 import { useTranslation } from 'next-i18next';
 
-import { cssVars } from '@/styles/theme';
+import cssVars from '@/styles/css_vars';
 import DimmerOverlay from '@/components/atoms/DimmerOverlay';
 import Button from '@/components/atoms/Button';
 

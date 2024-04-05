@@ -9,7 +9,7 @@ import {
 import ReactTimeAgo from 'react-timeago';
 import { styled, css, keyframes } from 'styled-components';
 
-import { cssVars } from '@/styles/theme';
+import cssVars from '@/styles/css_vars';
 
 export type HistoryItem = {
   text: string;

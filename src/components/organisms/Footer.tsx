@@ -3,7 +3,7 @@ import { Trans, useTranslation } from 'next-i18next';
 import Link from 'next/link';
 import { FunctionComponent } from 'react';
 
-import { cssVars } from '@/styles/theme';
+import cssVars from '@/styles/css_vars';
 
 const FooterView = styled.footer`
   margin-top: calc(${cssVars.spacing.gap2x} * 3);

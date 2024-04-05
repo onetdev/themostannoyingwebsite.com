@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import { styled } from 'styled-components';
 
-import { cssVars } from '@/styles/theme';
+import cssVars from '@/styles/css_vars';
 import { ArticleCore } from '@/types';
 
 const Anchor = styled(Link)`

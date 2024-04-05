@@ -3,7 +3,7 @@ import Image from 'next/image';
 import { styled } from 'styled-components';
 
 import { ArticleCore } from '@/types';
-import { cssVars } from '@/styles/theme';
+import cssVars from '@/styles/css_vars';
 
 import CoverPlaceholder from './CoverPlaceholder';
 
