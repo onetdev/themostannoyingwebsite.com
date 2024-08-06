@@ -20,7 +20,6 @@ const useSendNotification = ({ autoRequest = false }: Props = {}) => {
       const result = new Notification(data.title, {
         body: data.body,
         icon: '/manifest/android-chrome-256x256.png',
-        vibrate: [200, 100, 200],
         data: data.data,
       });
 
