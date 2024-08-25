@@ -1,25 +1,21 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 @import url('https://fonts.googleapis.com/css2?family=Bonheur+Royale&display=swap');
-@import 'modern-normalize/modern-normalize.css';
 
 /**
  * Colors used for themes could be found in `src/styles/themes/*`
  */
 :root {
-  --font-size-small: 12px;
-  --font-size-normal: 14px;
-  --font-size-large: 16px;
-  --font-size-headline: 22px;
-  --font-size-title: 26px;
   --font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
   Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
   --header-font-family: Bonheur Royale, sans-serif;
-  --gap: 10px;
 }
 
 html,
 body {
   font-family: var(--font-family);
-  font-size: var(--font-size-normal);
   background: var(--color-background);
   color: var(--color-on-background);
   transition: background-color 0.3s ease-in-out;

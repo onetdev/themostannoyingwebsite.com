@@ -14,4 +14,16 @@
     "typescript",
     "typescriptreact"
   ],
+  "files.associations": {
+    "*.css": "tailwindcss"
+  },
+  "editor.quickSuggestions": {
+    "strings": "on"
+  },
+  "tailwindCSS.classAttributes": [
+    "className",
+    "class",
+    "cx",
+    "iteratorClassName",
+  ],
 }

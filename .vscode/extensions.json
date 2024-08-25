@@ -4,6 +4,7 @@
         "esbenp.prettier-vscode",
         "rubymaniac.vscode-direnv",
         "styled-components.vscode-styled-components",
-        "unifiedjs.vscode-mdx"
+        "unifiedjs.vscode-mdx",
+        "bradlc.vscode-tailwindcss"
     ]
 }

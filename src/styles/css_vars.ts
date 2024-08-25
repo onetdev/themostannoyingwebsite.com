@@ -30,18 +30,6 @@ const cssVars = {
     primary: 'var(--font-family)',
     secondary: 'var(--header-font-family)',
   },
-  fontSize: {
-    small: 'var(--font-size-small)',
-    normal: 'var(--font-size-normal)',
-    large: 'var(--font-size-large)',
-    headline: 'var(--font-size-headline)',
-    title: 'var(--font-size-title)',
-  },
-  spacing: {
-    gap: 'var(--gap)',
-    gap2x: 'calc(var(--gap) * 2)',
-    container: '1200px',
-  },
 };
 
 export default cssVars;
