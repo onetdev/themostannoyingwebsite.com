@@ -4,46 +4,8 @@ import React, {
   useRef,
   useState,
 } from 'react';
-import { styled } from 'styled-components';
-
-import cssVars from '@/styles/css_vars';
 
 import EscapingElement from './EscapingElement';
-
-const Wrap = styled.div<{ $maxHeight: number | string }>`
-  position: relative;
-  max-height: ${({ $maxHeight: maxHeight }) =>
-    typeof maxHeight === 'string' ? maxHeight : `${maxHeight || 0}px`};
-  transition: max-height 0.3s ease-in-out;
-  overflow: hidden;
-`;
-const Overlay = styled.div<{ $isHidden: boolean }>`
-  position: absolute;
-  bottom: ${({ $isHidden: isHidden }) => (isHidden ? -500 : 0)}px;
-  opacity: ${({ $isHidden: isHidden }) => (isHidden ? 0 : 1)};
-  left: 0;
-  width: 100%;
-  background: ${cssVars.color.surface};
-  background: linear-gradient(
-    0deg,
-    ${cssVars.color.background} 50%,
-    transparent 100%
-  );
-  transition: all 0.3s ease-in-out;
-`;
-const PaymentButton = styled.button`
-  cursor: pointer;
-  background: red;
-`;
-const RevealButton = styled.button`
-  cursor: pointer;
-  font-size: 0.7rem;
-`;
-const SmallPrint = styled.small`
-  display: block;
-  font-size: 0.5rem;
-  font-style: italic;
-`;
 
 type Props = PropsWithChildren<{
   active?: boolean;
@@ -71,25 +33,31 @@ const LockedContent: FunctionComponent<Props> = ({
   };
 
   return (
-    <Wrap $maxHeight={active ? maxHeight : 'auto'}>
+    <div
+      className="relative overflow-hidden transition-all duration-300 ease-in-out"
+      style={{ maxHeight: active ? `${maxHeight}px` : 'auto' }}>
       <div ref={contentRef}>{children}</div>
-      <Overlay $isHidden={!active || isRevealed}>
+      <div
+        data-hidden={!active || isRevealed ? 'true' : 'false'}
+        className="absolute bottom-[-500px] left-0 w-full bg-bottom-fadeout opacity-0 transition-all duration-300 ease-in-out data-[hidden=false]:bottom-0 data-[hidden=false]:opacity-100">
         <h1>
           You gott pay a $0.69/hour with 24 months of commitment in order to see
           the next paragraph.
         </h1>
         <EscapingElement boundingBox={{ left: 0, bottom: 0 }}>
-          <PaymentButton>Pay! 100% legit and secure*</PaymentButton>
+          <div className="cursor-pointer bg-[red]">
+            Pay! 100% legit and secure*
+          </div>
         </EscapingElement>
-        <RevealButton onClick={handleRevealClick}>
+        <div className="cursor-pointer text-xs" onClick={handleRevealClick}>
           Naaah, I&apos;m good, give me free stuff
-        </RevealButton>
-        <SmallPrint>
+        </div>
+        <div className="block text-xs italic">
           * it might not be as secure and legit but that doesn&apos;t matter
           because you can&apos;t actually pay on this website.
-        </SmallPrint>
-      </Overlay>
-    </Wrap>
+        </div>
+      </div>
+    </div>
   );
 };
 

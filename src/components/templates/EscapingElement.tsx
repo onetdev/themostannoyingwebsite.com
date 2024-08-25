@@ -5,7 +5,6 @@ import React, {
   useRef,
   useState,
 } from 'react';
-import { styled } from 'styled-components';
 
 import { getRelativePosition } from '@/utils/dom';
 import { clamp, random } from '@/utils/math';
@@ -22,13 +21,6 @@ type Props = PropsWithChildren<{
     left?: number;
   };
 }>;
-
-const Wrap = styled.div<{ left: number; top: number }>`
-  display: inline-block;
-  transform: ${(props) =>
-    `translate(${props.left || 0}px, ${props.top || 0}px)`};
-  transition: transform 0.1s ease-in-out;
-`;
 
 const EscapingElement: FunctionComponent<Props> = ({
   children,
@@ -60,14 +52,16 @@ const EscapingElement: FunctionComponent<Props> = ({
   };
 
   return (
-    <Wrap
+    <div
+      className={`inline-block transition-transform duration-100`}
+      style={{
+        transform: `translate(${position.left || 0}px, ${position.top || 0}px)`,
+      }}
       onMouseMove={onMouseEvent}
       onClick={onMouseEvent}
-      left={position.left}
-      top={position.top}
       ref={ref}>
       {children}
-    </Wrap>
+    </div>
   );
 };
 
