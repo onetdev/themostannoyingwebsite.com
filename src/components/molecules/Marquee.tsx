@@ -1,42 +1,10 @@
 import { FunctionComponent, useState } from 'react';
 import Link from 'next/link';
 import MarqueePlugin from 'react-fast-marquee';
-import { styled, keyframes } from 'styled-components';
 
 import { useAppSelector } from '@/redux/hooks';
 import ArticleService from '@/features/articles/services/ArticleService';
-import cssVars from '@/styles/css_vars';
 import { selectEnableFlashing } from '@/redux/selectors/preference';
-
-const flashingAnim = keyframes`
-  0% { background: transparent; }
-  25% { background: transparent; }
-  30% { background: ${cssVars.color.error}; }
-  70% { background: ${cssVars.color.error}; }
-  75% { background: transparent; }
-  100% { background: transparent; }
-`;
-const highlightAnim = keyframes`
-  from { background: ${cssVars.color.error}; }
-  to { background: ${cssVars.color.error}; }
-`;
-const Wrap = styled.div`
-  font-size: ${cssVars.fontSize.large};
-  z-index: 1;
-  overflow: hidden;
-  > * {
-    overflow: hidden;
-  }
-`;
-const Anchor = styled(Link)<{ $highlight: boolean; $flashing: boolean }>`
-  margin: 0 2rem;
-  display: inline-block;
-  color: ${cssVars.color.background};
-  animation-name: ${({ $highlight: highlight, $flashing: flashing }) =>
-    highlight ? (flashing ? flashingAnim : highlightAnim) : ''};
-  animation-duration: 1s;
-  animation-iteration-count: infinite;
-`;
 
 type Props = {
   className?: string;
@@ -53,23 +21,26 @@ const Marquee: FunctionComponent<Props> = ({ className }) => {
   const onLeave = () => setSpeed(100);
 
   return (
-    <Wrap className={className} onMouseEnter={onEnter} onMouseLeave={onLeave}>
+    <div
+      className={`${className} z-10 overflow-hidden text-xl`}
+      onMouseEnter={onEnter}
+      onMouseLeave={onLeave}>
       <MarqueePlugin gradient={false} speed={speed}>
         {items.map(({ slug, title }, index) => {
           const path = '/articles/' + slug;
           return (
-            <Anchor
+            <Link
               href={path}
               key={index}
               passHref
-              $highlight
-              $flashing={flashing}>
+              data-anim={flashing ? 'flashing' : 'highlight'}
+              className="mx-8 inline-block text-background data-[anim=flashing]:animate-flashing-error data-[anim=highlight]:animate-highlight ">
               {title}
-            </Anchor>
+            </Link>
           );
         })}
       </MarqueePlugin>
-    </Wrap>
+    </div>
   );
 };
 

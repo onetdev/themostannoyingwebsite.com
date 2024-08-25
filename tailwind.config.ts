@@ -5,6 +5,10 @@ module.exports = {
   content: ['./src/**/*.{js,ts,jsx,tsx,mdx}'],
   theme: {
     extend: {
+      animation: {
+        'flashing-error': 'flashing-error 1s infinite',
+        highlight: 'highlight 1s infinite',
+      },
       backgroundImage: {
         'bottom-fadeout':
           'linear-gradient(0deg, var(--color-background) 50%, transparent 100%)',
@@ -31,8 +35,21 @@ module.exports = {
         primary: 'var(--font-family)',
         secondary: 'var(--header-font-family)',
       },
+      keyframes: {
+        'flashing-error': {
+          '0%, 25%, 75%, 100%,': { background: 'transparent' },
+          '30%, 70%': { background: 'var(--color-error)' },
+        },
+        highlight: {
+          from: { background: 'var(--color-error)' },
+          to: { background: 'var(--color-error)' },
+        },
+      },
       transitionProperty: {
         'visibility-opacity': 'visibility, opacity',
+      },
+      minWidth: {
+        'clamp-400': 'min(400px,100%)',
       },
     },
   },

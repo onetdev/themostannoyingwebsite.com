@@ -1,40 +1,9 @@
-import { styled } from 'styled-components';
 import { FunctionComponent } from 'react';
 
 import { actions as preferenceActions } from '@/redux/slices/preference';
 import { useAppDispatch } from '@/redux/hooks';
-import cssVars from '@/styles/css_vars';
 import { ColorScheme } from '@/hooks/useSystemColorScheme';
 import useUserColorScheme from '@/hooks/useUserColorScheme';
-
-const SelectorOption = styled.span`
-  flex-grow: 1;
-  z-index: 1;
-  cursor: pointer;
-  text-align: center;
-`;
-const InDarkMode = styled(SelectorOption)``;
-const InDayMode = styled(SelectorOption)``;
-const Toggler = styled.div<{ $isDarkMode: boolean }>`
-  position: relative;
-  display: flex;
-  justify-content: space-between;
-  width: 60px;
-  height: 20px;
-  user-select: none;
-  border: 1px solid ${cssVars.color.secondary};
-  border-radius: 10px;
-  &:before {
-    content: '';
-    position: absolute;
-    width: 50%;
-    background: ${cssVars.color.secondary};
-    height: 100%;
-    border-radius: 10px;
-    transition: all 0.1s ease-in-out;
-    transform: translateX(${(props) => (props.$isDarkMode ? '0' : '100%')});
-  }
-`;
 
 type Props = {
   className?: string;
@@ -58,17 +27,28 @@ const DarkModeToggle: FunctionComponent<Props> = ({ className }) => {
   };
 
   return (
-    <Toggler
-      className={className}
-      onClick={toggleDarkMode}
-      $isDarkMode={colorScheme === 'dark'}>
-      <InDayMode role="img" aria-label="sun">
+    <div
+      data-dark={colorScheme === 'dark' ? 'true' : 'false'}
+      className={`relative flex h-5 w-16 translate-x-0 select-none justify-between rounded-lg border border-secondary ${className} before:absolute before:contents before:h-full before:w-1/2 before:rounded-lg before:bg-secondary before:transition-all before:duration-100 before:ease-in-out data-[dark=true]:before:translate-x-full`}
+      onClick={toggleDarkMode}>
+      <SelectOption role="img" aria-label="sun">
         ☀️
-      </InDayMode>
-      <InDarkMode role="img" aria-label="moon">
+      </SelectOption>
+      <SelectOption role="img" aria-label="moon">
         🌙
-      </InDarkMode>
-    </Toggler>
+      </SelectOption>
+    </div>
+  );
+};
+
+const SelectOption: FunctionComponent<JSX.IntrinsicElements['span']> = ({
+  children,
+  ...rest
+}) => {
+  return (
+    <span className="z-10 grow cursor-pointer text-center" {...rest}>
+      {children}
+    </span>
   );
 };
 
