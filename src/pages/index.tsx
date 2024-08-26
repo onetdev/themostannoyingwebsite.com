@@ -1,63 +1,10 @@
-import { styled } from 'styled-components';
 import { NextPage } from 'next';
 
-import { ClearListStyle } from '@/styles/utils';
 import TextListItem from '@/features/articles/components/TextListItem';
 import SmallCoverListItem from '@/features/articles/components/SmallCoverListItem';
 import LargeCoverItem from '@/features/articles/components/LargeCoverItem';
 import ArticleService from '@/features/articles/services/ArticleService';
 import { makeI18nStaticProps } from '@/utils/i18n';
-import cssVars from '@/styles/css_vars';
-import mediaQueries from '@/styles/media_queries';
-
-const Grid = styled.main`
-  display: grid;
-  gap: ${cssVars.spacing.gap};
-  grid-template-areas: 'cover' 'dense-list' 'list';
-  ${mediaQueries.mdUp} {
-    grid-template-areas: 'cover dense-list' 'list  list';
-    grid-template-columns: 4fr 1fr;
-  }
-`;
-const CoverArticle = styled.div`
-  grid-area: cover;
-`;
-const DenseList = styled.ul`
-  ${ClearListStyle}
-  grid-area: dense-list;
-  gap: ${cssVars.spacing.gap2x};
-`;
-const DenseListItem = styled.li`
-  position: relative;
-  padding-bottom: ${cssVars.spacing.gap2x};
-  &::after {
-    content: '';
-    position: absolute;
-    border-bottom: 1px solid ${cssVars.color.secondary};
-    left: ${cssVars.spacing.gap};
-    right: ${cssVars.spacing.gap};
-    bottom: ${cssVars.spacing.gap};
-    opacity: 0.2;
-  }
-`;
-const RegularList = styled.ul`
-  ${ClearListStyle}
-  grid-area: list;
-  display: inline-flex;
-  gap: ${cssVars.spacing.gap};
-  flex-direction: column;
-  ${mediaQueries.mdUp} {
-    padding-top: ${cssVars.spacing.gap2x};
-    flex-direction: row;
-    flex-wrap: wrap;
-  }
-`;
-const RegularListItem = styled.li`
-  flex-basis: 100%;
-  ${mediaQueries.mdUp} {
-    flex-basis: calc((100% - (${cssVars.spacing.gap} * 3)) / 4);
-  }
-`;
 
 const Index: NextPage = () => {
   const coverArticle = ArticleService.getAllFiltered({ isOnCover: true })[0];
@@ -69,25 +16,25 @@ const Index: NextPage = () => {
   const regularList = articlePool.slice(3);
 
   return (
-    <Grid>
-      <CoverArticle>
-        <LargeCoverItem article={coverArticle} />
-      </CoverArticle>
-      <DenseList>
+    <main className="grid columns-1 gap-3 md:columns-2">
+      <LargeCoverItem article={coverArticle} />
+      <ul className="gap-3">
         {denseList.map((article, index) => (
-          <DenseListItem key={index}>
+          <li
+            key={index}
+            className="relative pb-5 after:inset-x-3 after:bottom-3 after:contents after:border after:border-secondary after:opacity-20">
             <TextListItem article={article} />
-          </DenseListItem>
+          </li>
         ))}
-      </DenseList>
-      <RegularList>
+      </ul>
+      <ul className="inline-flex flex-col gap-3 md:flex-row md:flex-wrap md:pt-3">
         {regularList.map((article, index) => (
-          <RegularListItem key={index}>
+          <li key={index} className="basis-full md:basis-1/2">
             <SmallCoverListItem article={article} />
-          </RegularListItem>
+          </li>
         ))}
-      </RegularList>
-    </Grid>
+      </ul>
+    </main>
   );
 };
 

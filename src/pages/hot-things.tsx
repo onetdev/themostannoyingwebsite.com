@@ -1,5 +1,4 @@
 import { MouseEventHandler, useRef, useState } from 'react';
-import { styled } from 'styled-components';
 import Image from 'next/image';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { NextPage } from 'next';
@@ -7,32 +6,6 @@ import { useTranslation } from 'next-i18next';
 
 import { makeI18nStaticProps } from '@/utils/i18n';
 import SiteTitle from '@/components/atoms/SiteTitle';
-
-const IconWrap = styled.div`
-  position: absolute;
-  top: calc(50% - 50px);
-  left: calc(50% - 50px);
-  font-size: 80px;
-  z-index: 2;
-  cursor: pointer;
-`;
-const Placeholder = styled.div`
-  display: block;
-  position: relative;
-`;
-const PlayerWrap = styled.div`
-  position: relative;
-`;
-const VideoPlayer = styled.video`
-  width: 100%;
-  position: absolute;
-  top: 0;
-  z-index: 1;
-`;
-const PlaceholderImage = styled(Image)`
-  width: 100%;
-  height: auto;
-`;
 
 const HotThings: NextPage = () => {
   const [isCapable] = useState(
@@ -85,20 +58,28 @@ const HotThings: NextPage = () => {
     <main>
       <SiteTitle>{t('navigation.hotThings')}</SiteTitle>
       <h1>{t('navigation.hotThings')}</h1>
-      <PlayerWrap>
-        <Placeholder hidden={!isStreamStarted}>
-          <IconWrap onClick={onIntent} hidden={isStreamStarted}>
+      <div className="relative">
+        <div hidden={!isStreamStarted} className="relative">
+          <div
+            className="absolute left-1/2 top-1/2 z-10 -ml-9 -mt-9 cursor-pointer text-7xl"
+            onClick={onIntent}
+            hidden={isStreamStarted}>
             <FontAwesomeIcon icon={['fas', 'play-circle']} />
-          </IconWrap>
-          <PlaceholderImage
+          </div>
+          <Image
+            className="h-auto w-full"
             src="/assets/images/lava.jpg"
             alt="Picture of you"
             width={1920}
             height={1080}
           />
-        </Placeholder>
-        <VideoPlayer ref={playerRef} autoPlay />
-      </PlayerWrap>
+        </div>
+        <video
+          className="absolute top-0 z-10 w-full"
+          ref={playerRef}
+          autoPlay
+        />
+      </div>
     </main>
   );
 };

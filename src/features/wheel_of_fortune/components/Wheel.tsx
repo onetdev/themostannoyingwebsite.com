@@ -7,9 +7,10 @@ export type Item = {
   color: string;
   text: string;
 };
+
 type Props = {
-  items: Item[];
   highlightIndex?: number;
+  items: Item[];
 };
 
 const Wheel: FunctionComponent<Props> = ({ items, highlightIndex }) => {
@@ -55,7 +56,8 @@ const Wheel: FunctionComponent<Props> = ({ items, highlightIndex }) => {
         <path
           d={d}
           fill={item.color}
-          className={highlightIndex == index ? 'slice-winner' : ''}
+          data-highlight-index={(highlightIndex == index).toString()}
+          className="data-[highlight-index=true]:animate-flashing-invert-1/2"
         />
         <text
           textAnchor="end"

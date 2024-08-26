@@ -1,18 +1,6 @@
 import Link from 'next/link';
-import { styled } from 'styled-components';
 
-import cssVars from '@/styles/css_vars';
 import { ArticleCore } from '@/types';
-
-const Anchor = styled(Link)`
-  text-decoration: none;
-`;
-const Title = styled.h3`
-  margin: 0;
-`;
-const Intro = styled.p`
-  margin: ${cssVars.spacing.gap} 0;
-`;
 
 type Props = {
   article: ArticleCore;
@@ -21,10 +9,10 @@ type Props = {
 const TextListItem = ({ article }: Props) => {
   return (
     <>
-      <Anchor href={article.url} passHref>
-        <Title>{article.title}</Title>
-        <Intro>{article.intro}</Intro>
-      </Anchor>
+      <Link className="no-underline" href={article.url} passHref>
+        <h3 className="m-0">{article.title}</h3>
+        <p className="my-3">{article.intro}</p>
+      </Link>
     </>
   );
 };

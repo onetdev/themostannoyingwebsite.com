@@ -1,44 +1,9 @@
-import { styled } from 'styled-components';
 import Link from 'next/link';
 import Image from 'next/image';
 
 import { ArticleCore } from '@/types';
-import cssVars from '@/styles/css_vars';
 
 import CoverPlaceholder from './CoverPlaceholder';
-
-const Anchor = styled(Link)`
-  display: block;
-  position: relative;
-`;
-const OverlayLabels = styled.div`
-  position: absolute;
-  display: flex;
-  flex-direction: column;
-  align-items: end;
-  padding: ${cssVars.spacing.gap};
-  bottom: 0;
-  right: 0;
-  width: 100%;
-`;
-const Title = styled.h2`
-  padding: 0 ${cssVars.spacing.gap};
-  margin: 0 0 ${cssVars.spacing.gap} 0;
-  font-size: ${cssVars.fontSize.title};
-  background: ${cssVars.color.primary};
-  color: ${cssVars.color.onPrimary};
-`;
-const Intro = styled.p`
-  margin: 0;
-  font-size: ${cssVars.fontSize.large};
-  background: ${cssVars.color.secondary};
-  color: ${cssVars.color.onSecondary};
-`;
-const CoverImage = styled(Image)`
-  width: 100%;
-  height: auto;
-  object-fit: cover;
-`;
 
 type Props = {
   article: ArticleCore;
@@ -47,21 +12,26 @@ type Props = {
 const LargeCoverItem = ({ article }: Props) => {
   return (
     <>
-      <Anchor href={article.url} passHref>
+      <Link className="relative block" href={article.url} passHref>
         {!article.coverImage && <CoverPlaceholder width={1920} height={1200} />}
         {article.coverImage && (
-          <CoverImage
+          <Image
+            className="h-auto w-full object-cover"
             src={article.coverImage}
             alt="Cover image"
             width="1920"
             height="1200"
           />
         )}
-        <OverlayLabels>
-          <Title>{article.title}</Title>
-          <Intro>{article.intro}</Intro>
-        </OverlayLabels>
-      </Anchor>
+        <div className="absolute bottom-0 right-0 flex w-full flex-col items-end p-3">
+          <h2 className="mb-3 bg-primary px-3 text-4xl text-on-primary">
+            {article.title}
+          </h2>
+          <p className="m-0 bg-secondary text-xl text-on-secondary">
+            {article.intro}
+          </p>
+        </div>
+      </Link>
     </>
   );
 };

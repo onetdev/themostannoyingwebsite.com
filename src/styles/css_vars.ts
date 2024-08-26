@@ -1,8 +1,5 @@
-// Using styled-components provided theme is great and all but I'm losing
-// in-browser variable modifications. It's easy to get the current OS
-// theme but when it comes down to user defined in-browser dark mode,
-// the story changes quickly.
-// So, even though this is not the perfect solution, it works fine.
+// This is the bridge over css variables and tailwind, you are most likely
+// will be fine by using utility classes, but if you really need it, you can
 
 // For more info:
 // https://material.io/design/color/the-color-system.html#color-theme-creation
