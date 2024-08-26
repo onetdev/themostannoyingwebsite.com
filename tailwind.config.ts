@@ -38,8 +38,20 @@ module.exports = {
         dimmer: 'var(--color-dimmer)',
       },
       fontFamily: {
-        primary: 'var(--font-family)',
-        secondary: 'var(--header-font-family)',
+        primary: [
+          '-apple-system',
+          'BlinkMacSystemFont',
+          '"Segoe UI"',
+          'Roboto',
+          'Oxygen',
+          'Ubuntu',
+          'Cantarell',
+          '"Fira Sans"',
+          '"Droid Sans"',
+          '"Helvetica Neue"',
+          'sans-serif',
+        ],
+        secondary: ['"Bonheur Royale"', 'sans-serif'],
       },
       keyframes: {
         'dot-dot-dot': {
