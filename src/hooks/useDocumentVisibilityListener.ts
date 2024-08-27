@@ -1,8 +1,6 @@
 import { useCallback, useEffect } from 'react';
 
-import { actions as runtimeActions } from '@/redux/slices/runtime';
-import { useAppDispatch, useAppSelector } from '@/redux/hooks';
-import { selectIsDocumentVisible } from '@/redux/selectors/runtime';
+import { useRuntimeStore } from '@/state/runtime';
 
 /**
  * This will mesaure how long the webpage has been in focus and report it to
@@ -11,12 +9,17 @@ import { selectIsDocumentVisible } from '@/redux/selectors/runtime';
  * https://developer.mozilla.org/en-US/docs/Web/API/Document/visibilitychange_event
  */
 const useDocumentVisibilityListener = () => {
-  const isInFocus = useAppSelector(selectIsDocumentVisible);
-  const dispatch = useAppDispatch();
+  const isInFocus = useRuntimeStore((state) => state.document.isVisible);
+  const setIsDocumentVisibile = useRuntimeStore(
+    (state) => state.setIsDocumentVisibile,
+  );
+  const incrementVisibilitySeconds = useRuntimeStore(
+    (state) => state.incrementVisibilitySeconds,
+  );
 
   const handleVisibilityChange = useCallback(() => {
-    dispatch(runtimeActions.setIsDocumentVisibile(!document.hidden));
-  }, [dispatch]);
+    setIsDocumentVisibile(!document.hidden);
+  }, [setIsDocumentVisibile]);
 
   useEffect(() => {
     document.addEventListener('visibilitychange', handleVisibilityChange);
@@ -29,12 +32,9 @@ const useDocumentVisibilityListener = () => {
   useEffect(() => {
     if (!isInFocus) return;
 
-    const interval = setInterval(
-      () => dispatch(runtimeActions.incrementVisibilitySeconds()),
-      1000,
-    );
+    const interval = setInterval(() => incrementVisibilitySeconds(), 1000);
     return () => clearInterval(interval);
-  }, [isInFocus, dispatch]);
+  }, [isInFocus, incrementVisibilitySeconds]);
 };
 
 export default useDocumentVisibilityListener;

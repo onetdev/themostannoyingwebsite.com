@@ -2,16 +2,15 @@ import { FunctionComponent, useState } from 'react';
 import Link from 'next/link';
 import MarqueePlugin from 'react-fast-marquee';
 
-import { useAppSelector } from '@/redux/hooks';
 import { ArticleService } from '@/features/articles';
-import { selectEnableFlashing } from '@/redux/selectors/preference';
+import { usePreferenceStore } from '@/state/preferences';
 
 type Props = {
   className?: string;
 };
 
 const Marquee: FunctionComponent<Props> = ({ className }) => {
-  const flashing = useAppSelector(selectEnableFlashing);
+  const flashing = usePreferenceStore((state) => state.enableFlashing);
   const [items] = useState(
     ArticleService.getAllFiltered({ isHighlighted: true }),
   );

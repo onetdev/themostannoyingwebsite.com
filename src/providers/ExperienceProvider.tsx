@@ -4,15 +4,14 @@ import { useTranslation } from 'next-i18next';
 
 import useFirstInteractionListener from '@/hooks/useFirstInteractionListener';
 import useDocumentVisibilityListener from '@/hooks/useDocumentVisibilityListener';
-import { selectExitPrompt } from '@/redux/selectors/experience';
-import { useAppSelector } from '@/redux/hooks';
 import PageTitleExperience from '@/features/page_title/components/PageTitleExperience';
 import NotificationPermissionExperience from '@/features/notification/components/NotificationPermissionEperience';
+import { useExperienceStore } from '@/state/experience';
 
 const ExperienceProvider: FunctionComponent<PropsWithChildren> = ({
   children,
 }) => {
-  const exitPrompt = useAppSelector(selectExitPrompt);
+  const exitPrompt = useExperienceStore((state) => state.exitPrompt);
   const { t } = useTranslation('common');
 
   useFirstInteractionListener();

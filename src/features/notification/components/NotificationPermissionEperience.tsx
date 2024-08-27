@@ -2,10 +2,9 @@
 
 import { FunctionComponent, useRef, useState } from 'react';
 
-import { useAppDispatch } from '@/redux/hooks';
-import { syncPermissions } from '@/redux/slices/consent';
 import { getNotificationPermissionState } from '@/utils/permission';
 import useScrollDistanceTrigger from '@/hooks/useScrollDistanceTrigger';
+import { useGrantStore } from '@/state/grant';
 
 import ManualModal from './ManualModal';
 
@@ -21,7 +20,7 @@ const NotificationPermissionExperience: FunctionComponent<
     onTrigger: () => enterFlow(),
   });
   const [manualModalVisible, setManualModalVisible] = useState(false);
-  const dispatch = useAppDispatch();
+  const syncPermissions = useGrantStore((state) => state.syncPermissions);
 
   const enterFlow = async () => {
     if (initialState !== 'default') {
@@ -29,7 +28,7 @@ const NotificationPermissionExperience: FunctionComponent<
     }
 
     const result = await Notification.requestPermission();
-    dispatch(syncPermissions());
+    syncPermissions();
     if (result === 'denied') {
       setManualModalVisible(true);
     }
@@ -37,7 +36,7 @@ const NotificationPermissionExperience: FunctionComponent<
 
   const onManualModalDismiss = () => {
     setManualModalVisible(false);
-    dispatch(syncPermissions());
+    syncPermissions();
   };
 
   return (

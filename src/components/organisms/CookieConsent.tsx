@@ -1,17 +1,13 @@
 import Link from 'next/link';
 import { FunctionComponent } from 'react';
 
-import { useAppDispatch, useAppSelector } from '@/redux/hooks';
-import { actions as consentActions } from '@/redux/slices/consent';
-import { selectReviewCompleted } from '@/redux/selectors/consent';
+import { useGrantStore } from '@/state/grant';
 
 const CookieBar: FunctionComponent = () => {
-  const dispatch = useAppDispatch();
-  const completed = useAppSelector(selectReviewCompleted);
+  const completed = useGrantStore((state) => state.reviewCompleted);
+  const setReviewCompleted = useGrantStore((state) => state.setReviewCompleted);
 
-  const close = () => {
-    dispatch(consentActions.setReviewCompleted(true));
-  };
+  const close = () => setReviewCompleted(true);
 
   return (
     !completed && (

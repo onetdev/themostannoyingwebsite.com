@@ -4,15 +4,13 @@ import { Analytics } from '@vercel/analytics/react';
 import CookieBar from '@/components/organisms/CookieConsent';
 import { ChatBubbleHost } from '@/features/chat_bubble';
 import { WheelOfFortune } from '@/features/wheel_of_fortune';
-import { useAppSelector } from '@/redux/hooks';
 import ContainerGiftFlaps from '@/features/gifts/components/ContainerGiftFlaps';
 import Footer from '@/components/organisms/Footer';
 import Header from '@/components/organisms/Header';
+import { useExperienceStore } from '@/state/experience';
 
 const MainLayout: FunctionComponent<PropsWithChildren> = ({ children }) => {
-  const { wheelOfFortune, mockChat } = useAppSelector(
-    (state) => state.experience,
-  );
+  const { wheelOfFortune, mockChat } = useExperienceStore();
 
   return (
     <>

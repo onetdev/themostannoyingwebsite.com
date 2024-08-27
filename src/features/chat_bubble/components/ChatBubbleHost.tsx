@@ -9,10 +9,9 @@ import {
 
 import useAudio from '@/hooks/useAudio';
 import History from '@/features/chat_bubble/components/HistoryOverlay';
-import { useAppSelector } from '@/redux/hooks';
-import { selectEnableSound } from '@/redux/selectors/preference';
-import { selectInteractionUnlocked } from '@/redux/selectors/runtime';
 import useSendNotification from '@/hooks/useSendNotification';
+import { usePreferenceStore } from '@/state/preferences';
+import { useRuntimeStore } from '@/state/runtime';
 
 type HistoryItem = { text: string; isUser: boolean; time: Date };
 const messages = [
@@ -40,8 +39,8 @@ const initialMessage = () => ({
  * to the history now with a notification sound.
  */
 const ChatBubbleHost: FunctionComponent = () => {
-  const enableSound = useAppSelector(selectEnableSound);
-  const hasInteracted = useAppSelector(selectInteractionUnlocked);
+  const enableSound = usePreferenceStore((state) => state.enableSound);
+  const hasInteracted = useRuntimeStore((state) => state.interactionUnlocked);
   const [history, setHistory] = useState([initialMessage()] as HistoryItem[]);
   const [isOpen, setIsOpen] = useState(false);
   const [badgeCounter, setBadgeCounter] = useState(1);

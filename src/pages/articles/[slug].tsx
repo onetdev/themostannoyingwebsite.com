@@ -3,12 +3,11 @@ import Error from 'next/error';
 import Head from 'next/head';
 import { useTranslation } from 'next-i18next';
 
-import { useAppSelector } from '@/redux/hooks';
 import LockedContent from '@/components/templates/LockedContent';
 import { ArticleService } from '@/features/articles';
-import { selectContentPaywall } from '@/redux/selectors/experience';
 import { getI18nProps } from '@/utils/i18n';
 import styles from '@/styles/content.module.css';
+import { useExperienceStore } from '@/state/experience';
 
 type Props = {
   slug: string;
@@ -16,7 +15,7 @@ type Props = {
 
 const ArticleItem: NextPage<Props> = ({ slug }: Props) => {
   const { t } = useTranslation('common');
-  const showLocker = useAppSelector(selectContentPaywall);
+  const showLocker = useExperienceStore((state) => state.contentPaywall);
   const article = ArticleService.getBySlug(slug);
 
   if (!article) {

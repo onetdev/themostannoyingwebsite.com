@@ -4,49 +4,44 @@ import { NextPage } from 'next';
 import { FunctionComponent, PropsWithChildren } from 'react';
 import { useTheme } from 'next-themes';
 
-import { useAppDispatch, useAppSelector } from '@/redux/hooks';
-import { actions as preferenceActions } from '@/redux/slices/preference';
-import { actions as experienceActions } from '@/redux/slices/experience';
-import selectPreference from '@/redux/selectors/preference';
-import selectExperience from '@/redux/selectors/experience';
-import selectConsent from '@/redux/selectors/consent';
-import selectRuntime from '@/redux/selectors/runtime';
 import { makeI18nStaticProps } from '@/utils/i18n';
 import SiteTitle from '@/components/atoms/SiteTitle';
 import FormSelect from '@/components/atoms/FormSelect';
 import FormCheckbox from '@/components/atoms/FormCheckbox';
 import { Theme } from '@/types';
+import { useGrantStore } from '@/state/grant';
+import { useExperienceStore } from '@/state/experience';
+import { usePreferenceStore } from '@/state/preferences';
+import { useRuntimeStore } from '@/state/runtime';
 
 const PrivacyPolicy: NextPage = () => {
-  const dispatch = useAppDispatch();
   const { theme, setTheme } = useTheme();
-  const preference = useAppSelector(selectPreference);
-  const experience = useAppSelector(selectExperience);
-  const consent = useAppSelector(selectConsent);
-  const runtime = useAppSelector(selectRuntime);
+  const experience = useExperienceStore();
+  const grant = useGrantStore();
+  const preference = usePreferenceStore();
+  const runtime = useRuntimeStore();
   const { t } = useTranslation('settings');
   const { t: tCommon } = useTranslation('common');
 
   // Preferences
   const onColorSchemeChange = (value: string) => setTheme(value);
   const onFlashingContentsChange = (value: boolean) =>
-    dispatch(preferenceActions.setEnableFlashing(value));
-  const onSoundChange = (value: boolean) =>
-    dispatch(preferenceActions.setEnableSound(value));
+    preference.setEnableFlashing(value);
+  const onSoundChange = (value: boolean) => preference.setEnableSound(value);
   const onAdultFilterChange = (value: boolean) =>
-    dispatch(preferenceActions.setAdultFilter(value));
+    preference.setAdultFilter(value);
 
   // Experience block
   const onAlowMockChatChange = (value: boolean) =>
-    dispatch(experienceActions.setMockChat(value));
+    experience.setMockChat(value);
   const onWheelOfFortuneChange = (value: boolean) =>
-    dispatch(experienceActions.setWheelOfFortune(value));
+    experience.setWheelOfFortune(value);
   const onExitPromptChange = (value: boolean) =>
-    dispatch(experienceActions.setExitPrompt(value));
+    experience.setExitPrompt(value);
   const onContentPaywallChange = (value: boolean) =>
-    dispatch(experienceActions.setContentPaywall(value));
+    experience.setContentPaywall(value);
   const onPageTitleInactiveArrayPagedChange = (value: boolean) =>
-    dispatch(experienceActions.setPageTitle({ inactiveArrayPaged: value }));
+    experience.setPageTitle({ inactiveArrayPaged: value });
 
   const colorSchemes: { value: Theme; label: string }[] = [
     { value: 'light', label: 'Light' },
@@ -96,17 +91,17 @@ const PrivacyPolicy: NextPage = () => {
           <SettingsFormRow label={t('consent_section.essential_cookies')}>
             <FormCheckbox
               name="essential_cookies"
-              checked={consent.cookies.essential}
+              checked={grant.cookies.essential}
               disabled
             />
           </SettingsFormRow>
           <br />
           <i>{t('consent_section.permission_disclaimer')}</i>
           <SettingsFormRow label={t('consent_section.notification_permission')}>
-            {`${consent.permission.notification || tCommon('status.not_set')}`}
+            {`${grant.permission.notification || tCommon('status.not_set')}`}
           </SettingsFormRow>
           <SettingsFormRow label={t('consent_section.location_permission')}>
-            {`${consent.permission.location || tCommon('status.not_set')}`}
+            {`${grant.permission.location || tCommon('status.not_set')}`}
           </SettingsFormRow>
         </Block>
 
