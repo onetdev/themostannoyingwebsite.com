@@ -6,14 +6,8 @@ import flapImage from '@/public/assets/images/car-advert.jpg';
 
 const ContainerGiftFlaps: FunctionComponent = () => {
   return (
-    <div
-      className="sticky top-0 w-full"
-      style={{
-        // TODO: Use proper tailwind classes instead of inline styles
-        maxWidth: 'calc(${cssVars.spacing.container} + 250px)',
-        left: 'calc(50% - calc(${cssVars.spacing.container} / 2) - 125px)',
-      }}>
-      <div className="absolute inset-x-0 max-h-screen overflow-hidden">
+    <div className="sticky top-0 hidden w-full justify-center md:flex">
+      <div className="absolute max-h-screen overflow-hidden">
         <Link href="/super-duper" passHref>
           <Image
             className="object-cover"
@@ -23,11 +17,11 @@ const ContainerGiftFlaps: FunctionComponent = () => {
             width={1920}
             height={1200}
           />
-          <GiftFlapText className="left-16 top-0 origin-bottom-left -translate-x-screen-h-1/2 -rotate-90">
-            VERY CHEAP LOAN?
+          <GiftFlapText className="bottom-16 left-16 origin-bottom-left -rotate-90">
+            DO YOU LIKE FREE MONEY?
           </GiftFlapText>
-          <GiftFlapText className="right-16 top-0 origin-bottom-right translate-x-screen-h-1/2 rotate-90">
-            NO BACKGROUND CHECK?
+          <GiftFlapText className="bottom-16 right-16 origin-bottom-right rotate-90">
+            DO YOU HATE WORKING?
           </GiftFlapText>
         </Link>
       </div>
