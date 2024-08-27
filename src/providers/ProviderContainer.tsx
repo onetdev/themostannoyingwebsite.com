@@ -1,18 +1,22 @@
 import { FunctionComponent, PropsWithChildren } from 'react';
+import { ThemeProvider } from 'next-themes';
 
-import ReduxProvider from './ReduxProvider';
-import ThemeProvider from './ThemeProvider';
+import registerIcons from '@/utils/icons';
+
+import GlobalStateProvider from './GlobalStateProvider';
 import ExperienceProvider from './ExperienceProvider';
 
 const ProviderContainer: FunctionComponent<PropsWithChildren> = ({
   children,
 }) => {
+  registerIcons();
+
   return (
-    <ReduxProvider>
-      <ExperienceProvider>
-        <ThemeProvider>{children}</ThemeProvider>
-      </ExperienceProvider>
-    </ReduxProvider>
+    <ThemeProvider>
+      <GlobalStateProvider>
+        <ExperienceProvider>{children}</ExperienceProvider>
+      </GlobalStateProvider>
+    </ThemeProvider>
   );
 };
 

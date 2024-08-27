@@ -1,45 +1,88 @@
-@import url('https://fonts.googleapis.com/css2?family=Bonheur+Royale&display=swap');
-@import 'modern-normalize/modern-normalize.css';
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
-/**
- * Colors used for themes could be found in `src/styles/themes/*`
- */
-:root {
-  --font-size-small: 12px;
-  --font-size-normal: 14px;
-  --font-size-large: 16px;
-  --font-size-headline: 22px;
-  --font-size-title: 26px;
-  --font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
-  Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
-  --header-font-family: Bonheur Royale, sans-serif;
-  --gap: 10px;
+@import url('https://fonts.googleapis.com/css2?family=Bonheur+Royale&display=swap');
+
+:root, [data-theme='dark'] {
+  --color-background: #050416;
+  --color-primary: #00bcd4;
+  --color-primary-alt: #00acc1;
+  --color-secondary: #ffc107;
+  --color-secondary-alt: #ffb300;
+  --color-tertiary: #ff5722;
+  --color-tertiary-alt: #ff5722;
+  --color-surface: #141221;
+  --color-error: #f44336;
+  --color-on-primary: #ffffff;
+  --color-on-secondary: #000000;
+  --color-on-tertiary: #000000;
+  --color-on-background: #fff;
+  --color-on-surface: #fff;
+  --color-on-error: #fff;
+  --color-dimmer: #464646b5;
+}
+
+[data-theme='light'] {
+  --color-background: #fafafa;
+  --color-primary: #00b0c0;
+  --color-primary-alt: #028aa5;
+  --color-secondary: #991199;
+  --color-secondary-alt: #660159;
+  --color-tertiary: #ee4917;
+  --color-tertiary-alt: #d33d0f;
+  --color-surface: #f3f5ec;
+  --color-error: #f44034;
+  --color-on-primary: #fff;
+  --color-on-secondary: #050416;
+  --color-on-tertiary: #050416;
+  --color-on-background: #050416;
+  --color-on-surface: #050416;
+  --color-on-error: #050416;
+  --color-dimmer: #3a3a3abc;
 }
 
 html,
 body {
-  font-family: var(--font-family);
-  font-size: var(--font-size-normal);
-  background: var(--color-background);
-  color: var(--color-on-background);
+  @apply bg-background text-on-background;
   transition: background-color 0.3s ease-in-out;
 }
 
 a, a:visited {
-  color: var(--color-secondary);
+  @apply text-secondary no-underline;
   text-decoration: none;
 }
 a:hover {
-  color: var(--color-secondary-alt);
-  text-decoration: underline;
+  @apply text-secondary-alt underline;
+}
+
+h1 {
+  @apply text-4xl font-bold;
+}
+h2 {
+  @apply text-3xl font-bold;
+}
+h3 {
+  @apply text-2xl font-bold;
+}
+h4 {
+  @apply text-xl font-bold;
+}
+h5 {
+  @apply text-lg font-bold;
+}
+h6 {
+  @apply text-base font-bold;
+}
+
+small {
+  @apply text-sm;
 }
 
 ::-moz-selection { /* Code for Firefox */
-  color: var(--color-secondary);
-  background: var(--color-primary);
+  @apply text-on-primary bg-primary;
 }
 
 ::selection {
-  color: var(--color-secondary);
-  background: var(--color-primary);
+  @apply text-on-primary bg-primary;
 }

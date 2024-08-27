@@ -7,14 +7,20 @@ export type Item = {
   color: string;
   text: string;
 };
+
 type Props = {
-  items: Item[];
   highlightIndex?: number;
+  items: Item[];
+  width: number;
+  height: number;
 };
 
-const Wheel: FunctionComponent<Props> = ({ items, highlightIndex }) => {
-  const width = 500;
-  const height = 500;
+const Wheel: FunctionComponent<Props> = ({
+  items,
+  highlightIndex,
+  width,
+  height,
+}) => {
   const radius = Math.min(width, height) / 2;
   const center = { x: width / 2, y: height / 2 };
   let startAngleRadians = 0;
@@ -55,7 +61,8 @@ const Wheel: FunctionComponent<Props> = ({ items, highlightIndex }) => {
         <path
           d={d}
           fill={item.color}
-          className={highlightIndex == index ? 'slice-winner' : ''}
+          data-highlight-index={(highlightIndex == index).toString()}
+          className="data-[highlight-index=true]:animate-flashing-invert-1/2"
         />
         <text
           textAnchor="end"

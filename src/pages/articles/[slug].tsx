@@ -5,9 +5,10 @@ import { useTranslation } from 'next-i18next';
 
 import { useAppSelector } from '@/redux/hooks';
 import LockedContent from '@/components/templates/LockedContent';
-import ArticleService from '@/features/articles/services/ArticleService';
+import { ArticleService } from '@/features/articles';
 import { selectContentPaywall } from '@/redux/selectors/experience';
 import { getI18nProps } from '@/utils/i18n';
+import styles from '@/styles/content.module.css';
 
 type Props = {
   slug: string;
@@ -35,9 +36,11 @@ const ArticleItem: NextPage<Props> = ({ slug }: Props) => {
         )}
       </Head>
       <h1>{article.title}</h1>
-      <span>Published on {article.date.toDateString()}</span>
+      <span className="mb-5 block">
+        Published on {article.date.toDateString()}
+      </span>
       <LockedContent initialMaxHeight={200} active={showLocker}>
-        {article.body}
+        <div className={styles['content']}>{article.body}</div>
       </LockedContent>
     </main>
   );

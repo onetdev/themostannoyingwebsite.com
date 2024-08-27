@@ -4,9 +4,6 @@ import {
   useCallback,
   useEffect,
 } from 'react';
-import { styled } from 'styled-components';
-
-import cssVars from '@/styles/css_vars';
 
 export type DimmerOverlayProps = PropsWithChildren<{
   visible: boolean;
@@ -41,38 +38,13 @@ const DimmerOverlay: FunctionComponent<DimmerOverlayProps> = ({
   }, [handleKeyDown]);
 
   return (
-    <Wrapper
-      className={visible ? 'modal-show' : 'modal-hide'}
+    <div
+      data-visible={visible.toString()}
+      className="invisible fixed left-0 top-0 z-50 flex size-full bg-dimmer px-2 py-1 opacity-0 backdrop-blur-md transition-visibility-opacity duration-300 data-[visible=true]:visible data-[visible=true]:opacity-100"
       onClick={() => closeOnClickOutside && onClose?.()}>
       {children}
-    </Wrapper>
+    </div>
   );
 };
-
-const Wrapper = styled.div`
-  position: fixed;
-  display: flex;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  z-index: 100;
-  backdrop-filter: blur(10px);
-  background: ${cssVars.color.dimmer};
-  padding: ${cssVars.spacing.gap2x} ${cssVars.spacing.gap};
-  justify-content: center;
-  align-items: center;
-  transition:
-    opacity 0.3s,
-    visibility 0.3s;
-  &.modal-show {
-    opacity: 1;
-    visibility: visible;
-  }
-  &.modal-hide {
-    opacity: 0;
-    visibility: hidden;
-  }
-`;
 
 export default DimmerOverlay;

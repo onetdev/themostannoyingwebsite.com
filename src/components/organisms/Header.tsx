@@ -1,56 +1,24 @@
-import { styled } from 'styled-components';
 import Link from 'next/link';
 import { FunctionComponent } from 'react';
 
-import cssVars from '@/styles/css_vars';
 import Marquee from '@/components/molecules/Marquee';
 import MainNavigation from '@/components/organisms/MainNavigation';
 import UserNavigation from '@/components/organisms/UserNavigation';
 import DarkModeToggle from '@/components/molecules/DarkModeToggle';
 
-const StyledHeader = styled.header`
-  display: grid;
-  padding: ${cssVars.spacing.gap} 0;
-  grid-template:
-    'title    dark-toggle'
-    'main-nav user-nav'
-    'marquee  marquee';
-`;
-const Title = styled.h1`
-  margin: 0;
-  grid-area: title;
-`;
-const StyledDarkModeToggle = styled(DarkModeToggle)`
-  grid-area: dark-toggle;
-  align-self: center;
-  justify-self: right;
-`;
-const StyledMainNavigation = styled(MainNavigation)`
-  grid-area: main-nav;
-`;
-const StyledUserNavigation = styled(UserNavigation)`
-  grid-area: user-nav;
-  align-self: center;
-  justify-self: right;
-`;
-const StyledMarquee = styled(Marquee)`
-  grid-area: marquee;
-  background: ${cssVars.color.surface};
-`;
-
 const Header: FunctionComponent = () => {
   return (
-    <StyledHeader>
-      <Title>
+    <header className="grid grid-cols-2 gap-1 px-0 py-2">
+      <h1>
         <Link href="/">
           The <i>MAW</i>
         </Link>
-      </Title>
-      <StyledDarkModeToggle />
-      <StyledMainNavigation />
-      <StyledUserNavigation />
-      <StyledMarquee />
-    </StyledHeader>
+      </h1>
+      <DarkModeToggle className="self-center justify-self-end" />
+      <MainNavigation />
+      <UserNavigation className="self-center justify-self-end" />
+      <Marquee className="col-span-2 w-full bg-surface" />
+    </header>
   );
 };
 

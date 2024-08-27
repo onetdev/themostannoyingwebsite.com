@@ -2,7 +2,7 @@ import { useTranslation } from 'next-i18next';
 import Link from 'next/link';
 import { FunctionComponent } from 'react';
 
-import { Menu, MenuItem } from '@/components/atoms/GenericMenu';
+import { GenericMenu } from '@/components/atoms/GenericMenu';
 
 export type MainNavigationProps = {
   className?: string;
@@ -22,13 +22,13 @@ const MainNavigation: FunctionComponent<MainNavigationProps> = ({
 
   return (
     <nav className={className} id="navigation-main">
-      <Menu>
-        {links.map(({ path, text }, index) => (
-          <MenuItem key={index}>
-            <Link href={path}>{text}</Link>
-          </MenuItem>
+      <GenericMenu>
+        {links.map(({ path, text }) => (
+          <Link key={`${path}${text}`} href={path}>
+            {text}
+          </Link>
         ))}
-      </Menu>
+      </GenericMenu>
     </nav>
   );
 };

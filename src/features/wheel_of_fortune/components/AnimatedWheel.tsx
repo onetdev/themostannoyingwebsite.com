@@ -1,18 +1,17 @@
 import {
+  CSSProperties,
   FunctionComponent,
   useCallback,
   useEffect,
+  useMemo,
   useRef,
   useState,
 } from 'react';
-import { styled, css, keyframes } from 'styled-components';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import useDragTracker from '@/hooks/useDragTracker';
 import { distance, random } from '@/utils/math';
-import cssVars from '@/styles/css_vars';
 import Button from '@/components/atoms/Button';
-import mediaQueries from '@/styles/media_queries';
 
 import Wheel, { Item } from './Wheel';
 
@@ -20,96 +19,15 @@ type Props = {
   items: Item[];
   onSpinCompleted: (result: Item) => void;
   onStateChange: (state: AnimatedWheelState) => void;
-  flashing?: boolean;
   revDuration?: number;
   revRange?: [number, number];
 };
-
-const SliceFlashing = keyframes`
-  0% { filter: invert(0); }
-  50% { filter: invert(0.5); }
-  100% { filter: invert(0); }
-`;
-// TODO: this animation should be getting slower as the wheel itself spins
-// slower and slower, it looks silly now, but at least it moves.
-const PointerWiggle = keyframes`
-  0% { transform: rotate(0deg); }
-  30% { transform: rotate(-15deg); }
-  40% { transform: rotate(0deg); }
-  100% { transform: rotate(0deg); }
-`;
-const Wrap = styled.div`
-  position: relative;
-  max-width: 500px;
-  max-height: 500px;
-  padding: 2rem;
-`;
-const PointerWrap = styled.div<{ $wiggle: boolean }>`
-  position: absolute;
-  top: 0;
-  right: calc(50% - 15px);
-  color: ${cssVars.color.secondary};
-  font-size: 50px;
-  filter: drop-shadow(0 5px 5px rgba(0, 0, 0, 0.4));
-  z-index: 1;
-  ${mediaQueries.mdDown} {
-    font-size: 30px;
-    top: 13px;
-    right: calc(50% - 9px);
-  }
-  ${({ $wiggle: wiggle }) =>
-    wiggle &&
-    css`
-      animation: ${PointerWiggle} 0.2s linear infinite;
-    `}
-`;
-const CtaButton = styled(Button)`
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 10%;
-  height: 10%;
-  z-index: 1;
-  transform: translate(-50%, -50%);
-  border: 1px solid ${cssVars.color.secondary};
-  box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.4);
-  border-radius: 50%;
-  ${mediaQueries.mdDown} {
-    width: 30%;
-    border-radius: 5px;
-  }
-`;
-const WheelAnimationWrap = styled.div`
-  border: 1px solid ${cssVars.color.secondary};
-  box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.4);
-  line-height: 0%;
-  border-radius: 50%;
-`;
-const WheelAnimation = styled.div<{
-  $duration: number;
-  $rotation: number;
-  $allowFlashing: boolean;
-}>`
-  transform: rotate(${(props) => `${props.$rotation}deg`});
-  transition: transform ${(props) => `${props.$duration}s`}
-    cubic-bezier(0.33, 1, 0.68, 1);
-  user-select: none;
-  .slice-winner {
-    animation: ${SliceFlashing} 500ms infinite;
-    ${(props) =>
-      !props.$allowFlashing &&
-      css`
-        animation: none;
-      `}
-  }
-`;
 
 export type AnimatedWheelState = 'ready' | 'spinning' | 'completed';
 const AnimatedWheel: FunctionComponent<Props> = ({
   items,
   onSpinCompleted,
   onStateChange,
-  flashing = false,
   revDuration = 4,
   revRange = [2, 6],
 }) => {
@@ -175,29 +93,42 @@ const AnimatedWheel: FunctionComponent<Props> = ({
     onStateChange(state);
   }, [state, onStateChange]);
 
+  const animStyles = useMemo(() => {
+    if (!anim.duration || !anim.rotation) return undefined;
+    return {
+      transform: `rotate(${anim.rotation}deg)`,
+      transition: `transform ${anim.duration}s cubic-bezier(0.33, 1, 0.68, 1)`,
+    } satisfies CSSProperties;
+  }, [anim]);
+
   return (
-    <Wrap>
-      <PointerWrap $wiggle={state === 'spinning'}>
+    <div className="relative m-auto max-h-[500px] max-w-[500px] p-8">
+      <div
+        className="absolute right-1/2 top-3 z-10 -mr-2 text-2xl text-secondary drop-shadow-md data-[wiggle=true]:animate-wiggle-15deg md:top-0 md:-ml-4 md:text-5xl"
+        data-wiggle={(state === 'spinning').toString()}>
         <FontAwesomeIcon icon={['fas', 'map-marker-alt']} />
-      </PointerWrap>
-      <CtaButton
+      </div>
+      <Button
+        className="absolute left-1/2 top-1/2 z-10 -translate-x-1/2 -translate-y-1/2 rounded-full border border-secondary bg-primary p-5 text-2xl shadow-md md:rounded-full"
         variant="tertiary"
         onClick={() => startSpin()}
         disabled={state !== 'ready'}>
         {state === 'ready' ? '🎲' : '🎉'}
-      </CtaButton>
-      <WheelAnimationWrap ref={rotatorRef}>
-        <WheelAnimation
-          $duration={anim.duration}
-          $rotation={anim.rotation}
-          $allowFlashing={flashing}>
+      </Button>
+      <div
+        className="rounded-full border border-secondary shadow-md"
+        style={{ lineHeight: 0 }}
+        ref={rotatorRef}>
+        <div className="select-none" style={animStyles}>
           <Wheel
+            width={500}
+            height={500}
             items={items}
             highlightIndex={state === 'completed' ? winIndex : undefined}
           />
-        </WheelAnimation>
-      </WheelAnimationWrap>
-    </Wrap>
+        </div>
+      </div>
+    </div>
   );
 };
 

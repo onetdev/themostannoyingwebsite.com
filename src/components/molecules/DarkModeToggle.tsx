@@ -1,74 +1,38 @@
-import { styled } from 'styled-components';
-import { FunctionComponent } from 'react';
-
-import { actions as preferenceActions } from '@/redux/slices/preference';
-import { useAppDispatch } from '@/redux/hooks';
-import cssVars from '@/styles/css_vars';
-import { ColorScheme } from '@/hooks/useSystemColorScheme';
-import useUserColorScheme from '@/hooks/useUserColorScheme';
-
-const SelectorOption = styled.span`
-  flex-grow: 1;
-  z-index: 1;
-  cursor: pointer;
-  text-align: center;
-`;
-const InDarkMode = styled(SelectorOption)``;
-const InDayMode = styled(SelectorOption)``;
-const Toggler = styled.div<{ $isDarkMode: boolean }>`
-  position: relative;
-  display: flex;
-  justify-content: space-between;
-  width: 60px;
-  height: 20px;
-  user-select: none;
-  border: 1px solid ${cssVars.color.secondary};
-  border-radius: 10px;
-  &:before {
-    content: '';
-    position: absolute;
-    width: 50%;
-    background: ${cssVars.color.secondary};
-    height: 100%;
-    border-radius: 10px;
-    transition: all 0.1s ease-in-out;
-    transform: translateX(${(props) => (props.$isDarkMode ? '0' : '100%')});
-  }
-`;
+import { FunctionComponent, PropsWithoutRef } from 'react';
+import { useTheme } from 'next-themes';
 
 type Props = {
   className?: string;
 };
 
 const DarkModeToggle: FunctionComponent<Props> = ({ className }) => {
-  const dispatch = useAppDispatch();
-  const colorScheme = useUserColorScheme();
-
+  const { resolvedTheme, setTheme } = useTheme();
   const toggleDarkMode = () => {
-    let next: ColorScheme;
-    switch (colorScheme) {
-      case 'dark':
-        next = 'light';
-        break;
-      case 'light':
-        next = 'dark';
-        break;
-    }
-    dispatch(preferenceActions.setColorScheme(next));
+    setTheme(resolvedTheme === 'dark' ? 'light' : 'dark');
   };
 
   return (
-    <Toggler
-      className={className}
-      onClick={toggleDarkMode}
-      $isDarkMode={colorScheme === 'dark'}>
-      <InDayMode role="img" aria-label="sun">
+    <div
+      data-dark={resolvedTheme === 'dark'}
+      className={`relative flex h-7 w-16 translate-x-0 select-none justify-between rounded-full border border-secondary before:block ${className} before:absolute before:inset-y-0 before:h-full before:w-1/2 before:rounded-full before:bg-secondary before:duration-100 before:ease-in-out before:data-[dark=true]:translate-x-full`}
+      onClick={toggleDarkMode}>
+      <SelectOption role="img" aria-label="Light mode">
         ☀️
-      </InDayMode>
-      <InDarkMode role="img" aria-label="moon">
+      </SelectOption>
+      <SelectOption role="img" aria-label="Dark mode">
         🌙
-      </InDarkMode>
-    </Toggler>
+      </SelectOption>
+    </div>
+  );
+};
+
+const SelectOption: FunctionComponent<
+  PropsWithoutRef<JSX.IntrinsicElements['span']>
+> = ({ children, ...rest }) => {
+  return (
+    <span className="z-10 grow cursor-pointer text-center text-base" {...rest}>
+      {children}
+    </span>
   );
 };
 

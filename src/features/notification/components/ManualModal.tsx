@@ -1,10 +1,8 @@
 'use client';
 
 import { FunctionComponent } from 'react';
-import styled from 'styled-components';
 import { useTranslation } from 'next-i18next';
 
-import cssVars from '@/styles/css_vars';
 import DimmerOverlay from '@/components/atoms/DimmerOverlay';
 import Button from '@/components/atoms/Button';
 
@@ -20,28 +18,17 @@ const ManualModal: FunctionComponent<ManualModalProps> = ({
 
   return (
     <DimmerOverlay visible={visible}>
-      <Wrapper>
-        <Title>{t('experiences.notification_permission_manual.title')}</Title>
+      <div className="fixed left-20 top-1 max-w-manual-modal rounded-md bg-surface px-8 py-4 text-on-surface">
+        <h3 className="mb-4 text-2xl">
+          {t('experiences.notification_permission_manual.title')}
+        </h3>
         <p>{t('experiences.notification_permission_manual.description')}</p>
-        <Button onClick={onDismiss}>{t('actions.dismiss')}</Button>
-      </Wrapper>
+        <Button onClick={onDismiss} className="mt-3">
+          {t('actions.dismiss')}
+        </Button>
+      </div>
     </DimmerOverlay>
   );
 };
-
-const Wrapper = styled.div`
-  position: fixed;
-  top: 1rem;
-  left: 5rem;
-  padding: 1rem 2rem;
-  max-width: min(calc(100vw - 10rem), 30rem);
-  background: ${cssVars.color.surface};
-  color: ${cssVars.color.onSurface};
-  border-radius: 0.5rem;
-`;
-const Title = styled.h3`
-  font-size: 1.5rem;
-  margin: 0 0 1rem 0;
-`;
 
 export default ManualModal;

@@ -6,65 +6,13 @@ import {
   useEffect,
   useState,
 } from 'react';
-import { styled } from 'styled-components';
 
 import useAudio from '@/hooks/useAudio';
-import History from '@/features/chat_bubble/components/History';
+import History from '@/features/chat_bubble/components/HistoryOverlay';
 import { useAppSelector } from '@/redux/hooks';
-import cssVars from '@/styles/css_vars';
 import { selectEnableSound } from '@/redux/selectors/preference';
 import { selectInteractionUnlocked } from '@/redux/selectors/runtime';
 import useSendNotification from '@/hooks/useSendNotification';
-
-const zIndexBase = 20;
-
-const IconWrap = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 4rem;
-  height: 4rem;
-  z-index: ${zIndexBase};
-  cursor: pointer;
-  background: ${cssVars.color.primary};
-  color: ${cssVars.color.onPrimary};
-  font-size: 2rem;
-  border-radius: 50%;
-`;
-const IconBadge = styled.div`
-  position: absolute;
-  top: -5px;
-  right: -5px;
-  width: calc(${cssVars.fontSize.small} * 2);
-  padding: 5px;
-  z-index: ${zIndexBase + 1};
-  font-size: ${cssVars.fontSize.small};
-  text-align: center;
-  background: ${cssVars.color.error};
-  color: ${cssVars.color.onError};
-  border-radius: 50%;
-`;
-const HistoryWrap = styled.div`
-  position: absolute;
-  bottom: 1rem;
-  left: 3rem;
-  visibility: hidden;
-  z-index: ${zIndexBase + 2};
-  opacity: 0;
-  transition:
-    visibility 0.3s,
-    opacity 0.3s;
-`;
-const Wrap = styled.div`
-  position: fixed;
-  left: 1rem;
-  bottom: 1rem;
-  z-index: ${zIndexBase};
-  &.open ${HistoryWrap} {
-    visibility: visible;
-    opacity: 1;
-  }
-`;
 
 type HistoryItem = { text: string; isUser: boolean; time: Date };
 const messages = [
@@ -91,7 +39,7 @@ const initialMessage = () => ({
  * Every time the user closes the chat bubble, we should add a new message
  * to the history now with a notification sound.
  */
-const ActionButton: FunctionComponent = () => {
+const ChatBubbleHost: FunctionComponent = () => {
   const enableSound = useAppSelector(selectEnableSound);
   const hasInteracted = useAppSelector(selectInteractionUnlocked);
   const [history, setHistory] = useState([initialMessage()] as HistoryItem[]);
@@ -141,12 +89,13 @@ const ActionButton: FunctionComponent = () => {
   }, [addHistory, history, isOpen, playSound, sendNotification]);
 
   const closeHistory = () => setIsOpen(false);
-  const toggleHistory: MouseEventHandler<HTMLDivElement> = useCallback(() => {
-    if (!isOpen) {
-      setBadgeCounter(0);
-    }
-    setIsOpen(!isOpen);
-  }, [isOpen]);
+  const toggleHistory: MouseEventHandler<HTMLButtonElement> =
+    useCallback(() => {
+      if (!isOpen) {
+        setBadgeCounter(0);
+      }
+      setIsOpen(!isOpen);
+    }, [isOpen]);
 
   useEffect(() => {
     if (isOpen || !hasInteracted || badgeCounter > 0) {
@@ -165,20 +114,29 @@ const ActionButton: FunctionComponent = () => {
   }, []);
 
   return (
-    <Wrap className={isOpen ? 'open' : 'closed'} onClick={preventClose}>
-      <IconWrap onClick={toggleHistory}>
+    <div
+      data-state={isOpen ? 'open' : 'closed'}
+      className="group fixed bottom-4 left-4 z-20 flex"
+      onClick={preventClose}>
+      <button
+        className="z-30 flex size-14 cursor-pointer items-center justify-center rounded-full bg-primary text-2xl text-on-primary"
+        onClick={toggleHistory}>
         <FontAwesomeIcon icon={['fas', 'comment-dots']} />
-        {badgeCounter > 0 && <IconBadge>{badgeCounter}</IconBadge>}
-      </IconWrap>
-      <HistoryWrap>
+        {badgeCounter > 0 && (
+          <div className="absolute -right-2 -top-2 z-20 flex size-7 items-center justify-center rounded-full bg-error p-1 text-center text-xs text-on-error">
+            <span>{badgeCounter}</span>
+          </div>
+        )}
+      </button>
+      <div className="absolute bottom-4 left-10 z-20 hidden max-h-screen-3/4 w-96 opacity-0 transition-visibility-opacity duration-300 group-data-[state=open]:block group-data-[state=open]:opacity-100">
         <History
           history={history}
           onUserMessage={(message) => addHistory(message, true)}
           onClose={closeHistory}
         />
-      </HistoryWrap>
-    </Wrap>
+      </div>
+    </div>
   );
 };
 
-export default ActionButton;
+export default ChatBubbleHost;
