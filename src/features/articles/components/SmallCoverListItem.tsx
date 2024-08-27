@@ -3,13 +3,13 @@ import Image from 'next/image';
 
 import { ArticleCore } from '@/types';
 
-import CoverPlaceholder from './CoverPlaceholder';
+import { CoverPlaceholder } from './CoverPlaceholder';
 
 type Props = {
   article: ArticleCore;
 };
 
-const SmallCoverListItem = ({ article }: Props) => {
+export const SmallCoverListItem = ({ article }: Props) => {
   return (
     <>
       <Link href={article.url} passHref>
@@ -23,11 +23,9 @@ const SmallCoverListItem = ({ article }: Props) => {
             height="1200"
           />
         )}
-        <h3 className="my-3">{article.title}</h3>
-        <p className="m-0 mb-3">{article.intro}</p>
+        <h3 className="my-2 font-bold leading-snug">{article.title}</h3>
+        <p className="m-0 mb-1 text-sm leading-snug">{article.intro}</p>
       </Link>
     </>
   );
 };
-
-export default SmallCoverListItem;

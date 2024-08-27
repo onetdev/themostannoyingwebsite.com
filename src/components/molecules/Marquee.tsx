@@ -3,7 +3,7 @@ import Link from 'next/link';
 import MarqueePlugin from 'react-fast-marquee';
 
 import { useAppSelector } from '@/redux/hooks';
-import ArticleService from '@/features/articles/services/ArticleService';
+import { ArticleService } from '@/features/articles';
 import { selectEnableFlashing } from '@/redux/selectors/preference';
 
 type Props = {

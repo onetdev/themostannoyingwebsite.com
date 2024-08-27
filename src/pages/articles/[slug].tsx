@@ -5,7 +5,7 @@ import { useTranslation } from 'next-i18next';
 
 import { useAppSelector } from '@/redux/hooks';
 import LockedContent from '@/components/templates/LockedContent';
-import ArticleService from '@/features/articles/services/ArticleService';
+import { ArticleService } from '@/features/articles';
 import { selectContentPaywall } from '@/redux/selectors/experience';
 import { getI18nProps } from '@/utils/i18n';
 

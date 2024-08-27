@@ -5,7 +5,10 @@ type Props = {
   height: number;
 };
 
-const CoverPlaceholder: FunctionComponent<Props> = ({ width, height }) => {
+export const CoverPlaceholder: FunctionComponent<Props> = ({
+  width,
+  height,
+}) => {
   return (
     <div
       className="relative bg-cover-placeholder bg-repeat after:pointer-events-none after:absolute after:left-0 after:top-0 after:size-full after:bg-radial-primary after:mix-blend-saturation"
@@ -13,5 +16,3 @@ const CoverPlaceholder: FunctionComponent<Props> = ({ width, height }) => {
     />
   );
 };
-
-export default CoverPlaceholder;
