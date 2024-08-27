@@ -2,7 +2,7 @@ import { FunctionComponent, PropsWithChildren } from 'react';
 import { Analytics } from '@vercel/analytics/react';
 
 import CookieBar from '@/components/organisms/CookieConsent';
-import { ChatBubble } from '@/features/chat_bubble';
+import { ChatBubbleHost } from '@/features/chat_bubble';
 import { WheelOfFortune } from '@/features/wheel_of_fortune';
 import { useAppSelector } from '@/redux/hooks';
 import ContainerGiftFlaps from '@/features/gifts/components/ContainerGiftFlaps';
@@ -24,7 +24,7 @@ const MainLayout: FunctionComponent<PropsWithChildren> = ({ children }) => {
         <Footer />
 
         {wheelOfFortune && <WheelOfFortune />}
-        {mockChat && <ChatBubble />}
+        {mockChat && <ChatBubbleHost />}
         <CookieBar />
       </div>
     </>

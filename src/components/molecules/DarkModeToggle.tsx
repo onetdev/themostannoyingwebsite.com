@@ -1,4 +1,4 @@
-import { FunctionComponent } from 'react';
+import { FunctionComponent, PropsWithoutRef } from 'react';
 
 import { actions as preferenceActions } from '@/redux/slices/preference';
 import { useAppDispatch } from '@/redux/hooks';
@@ -28,25 +28,24 @@ const DarkModeToggle: FunctionComponent<Props> = ({ className }) => {
 
   return (
     <div
-      data-dark={colorScheme === 'dark' ? 'true' : 'false'}
-      className={`relative flex h-5 w-16 translate-x-0 select-none justify-between rounded-lg border border-secondary ${className} before:absolute before:contents before:h-full before:w-1/2 before:rounded-lg before:bg-secondary before:transition-all before:duration-100 before:ease-in-out data-[dark=true]:before:translate-x-full`}
+      data-dark={(colorScheme === 'dark').toString()}
+      className={`relative flex h-7 w-16 translate-x-0 select-none justify-between rounded-full border border-secondary before:block ${className} before:absolute before:inset-y-0 before:h-full before:w-1/2 before:rounded-full before:bg-secondary before:duration-100 before:ease-in-out before:data-[dark=true]:translate-x-full`}
       onClick={toggleDarkMode}>
-      <SelectOption role="img" aria-label="sun">
+      <SelectOption role="img" aria-label="Light mode">
         ☀️
       </SelectOption>
-      <SelectOption role="img" aria-label="moon">
+      <SelectOption role="img" aria-label="Dark mode">
         🌙
       </SelectOption>
     </div>
   );
 };
 
-const SelectOption: FunctionComponent<JSX.IntrinsicElements['span']> = ({
-  children,
-  ...rest
-}) => {
+const SelectOption: FunctionComponent<
+  PropsWithoutRef<JSX.IntrinsicElements['span']>
+> = ({ children, ...rest }) => {
   return (
-    <span className="z-10 grow cursor-pointer text-center" {...rest}>
+    <span className="z-10 grow cursor-pointer text-center text-base" {...rest}>
       {children}
     </span>
   );

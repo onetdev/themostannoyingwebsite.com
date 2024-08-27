@@ -1,5 +1,5 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { FunctionComponent, useState } from 'react';
+import { FunctionComponent, PropsWithoutRef, useState } from 'react';
 import Confetti from 'react-confetti';
 
 import { getWeightedRandom } from '@/utils/math';
@@ -29,41 +29,49 @@ const getItems = (hueStart: number, hueEnd: number, numItems: number) => {
   return items;
 };
 
-type Props = {
-  onClose: () => void;
+type Props = PropsWithoutRef<JSX.IntrinsicElements['div']> & {
+  onClose?: () => void;
 };
 
-const ModalContent: FunctionComponent<Props> = ({ onClose }) => {
+const ModalContent: FunctionComponent<Props> = ({
+  className,
+  onClose,
+  ...rest
+}) => {
   const hueStart = 300; // random(0,360);
   const [state, setState] = useState<AnimatedWheelState>('ready');
   const [prize, setPrize] = useState<Item | undefined>();
   const [items] = useState(getItems(hueStart, hueStart + 120, 10));
 
   return (
-    <div className="relative overflow-hidden rounded-lg bg-surface">
-      <button
-        aria-label="Close"
-        className="absolute right-0 top-0 z-10 cursor-pointer p-3"
-        onClick={() => onClose()}>
-        <FontAwesomeIcon icon={['fas', 'times']} />
-      </button>
-      {state === 'completed' && (
-        <div className="absolute size-full">
-          <Confetti numberOfPieces={100} width={500} height={500} />
-        </div>
-      )}
+    <div
+      className={`relative flex flex-col overflow-hidden rounded-lg bg-surface ${className}`}
+      {...rest}>
+      <div className="grow">
+        <button
+          aria-label="Close"
+          className="absolute right-0 top-0 z-10 cursor-pointer p-3"
+          onClick={() => onClose?.()}>
+          <FontAwesomeIcon icon={['fas', 'times']} />
+        </button>
+        {state === 'completed' && (
+          <Confetti
+            className="absolute size-full"
+            numberOfPieces={100}
+            width={600}
+            height={600}
+          />
+        )}
 
-      <AnimatedWheel
-        items={items}
-        onStateChange={(newState) => setState(newState)}
-        onSpinCompleted={(newPrize) => setPrize(newPrize)}
-      />
-
-      <span
-        className="w-full bg-secondary p-5 text-center text-xl font-bold text-on-secondary"
-        style={{ maxWidth: 'calc(100vw * 0.8)' }}>
-        {state !== 'completed' && 'Let&apos;s spin the wheel!!'}
-        {state === 'completed' && prize && 'You won! {prize.text}'}
+        <AnimatedWheel
+          items={items}
+          onStateChange={(newState) => setState(newState)}
+          onSpinCompleted={(newPrize) => setPrize(newPrize)}
+        />
+      </div>
+      <span className="w-full bg-secondary p-5 text-center text-xl font-bold text-on-secondary">
+        {state !== 'completed' && `Let's spin the wheel!!`}
+        {state === 'completed' && prize && `You won! ${prize.text}`}
       </span>
     </div>
   );

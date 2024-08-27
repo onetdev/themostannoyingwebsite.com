@@ -16,7 +16,7 @@ module.exports = {
       backgroundImage: {
         'bottom-fadeout':
           'linear-gradient(0deg, var(--color-background) 50%, transparent 100%)',
-        'cover-placeholder': "url('/assets/assets/cover-placeholder.svg')",
+        'cover-placeholder': "url('/assets/cover-placeholder.svg')",
         'radial-primary': 'radial-gradient(transparent, var(--color-primary))',
       },
       colors: {
@@ -95,10 +95,14 @@ module.exports = {
         'clamp-400-2/3': 'min(400px, 66%)',
       },
       maxWidth: {
+        'screen-dimension-min': 'min(100vw, 100vh)',
         'manual-modal': 'min(calc(100vw - 10rem), 30rem)',
       },
       maxHeight: {
-        'clamp-300-2/1': 'min(300px, 50vh)',
+        'clamp-300-screen-2/1': 'min(300px, 50vh)',
+        'screen-dimension-min': 'min(100vw, 100vh)',
+        'screen-3/4': '75vh',
+        'screen-1/2': '50vh',
       },
       transitionProperty: {
         'visibility-opacity': 'visibility, opacity',

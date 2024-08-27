@@ -22,7 +22,7 @@ const Index: NextPage = () => {
         {denseList.map((article, index) => (
           <li
             key={index}
-            className="relative pb-5 after:inset-x-3 after:bottom-3 after:contents after:border after:border-secondary after:opacity-20">
+            className="relative pb-5 after:inset-x-3 after:bottom-3 after:border after:border-secondary after:opacity-20">
             <TextListItem article={article} />
           </li>
         ))}

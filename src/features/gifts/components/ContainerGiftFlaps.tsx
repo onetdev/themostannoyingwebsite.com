@@ -1,6 +1,6 @@
 import Image from 'next/image';
 import Link from 'next/link';
-import { FunctionComponent } from 'react';
+import { FunctionComponent, PropsWithoutRef } from 'react';
 
 import flapImage from '@/public/assets/images/car-advert.jpg';
 
@@ -35,11 +35,9 @@ const ContainerGiftFlaps: FunctionComponent = () => {
   );
 };
 
-const GiftFlapText: FunctionComponent<JSX.IntrinsicElements['span']> = ({
-  children,
-  className,
-  ...rest
-}) => {
+const GiftFlapText: FunctionComponent<
+  PropsWithoutRef<JSX.IntrinsicElements['span']>
+> = ({ children, className, ...rest }) => {
   return (
     <span
       className={`absolute text-2xl font-bold text-on-primary mix-blend-exclusion ${className}`}

@@ -1,7 +1,9 @@
 import {
+  CSSProperties,
   FunctionComponent,
   useCallback,
   useEffect,
+  useMemo,
   useRef,
   useState,
 } from 'react';
@@ -91,15 +93,23 @@ const AnimatedWheel: FunctionComponent<Props> = ({
     onStateChange(state);
   }, [state, onStateChange]);
 
+  const animStyles = useMemo(() => {
+    if (!anim.duration || !anim.rotation) return undefined;
+    return {
+      transform: `rotate(${anim.rotation}deg)`,
+      transition: `transform ${anim.duration}s cubic-bezier(0.33, 1, 0.68, 1)`,
+    } satisfies CSSProperties;
+  }, [anim]);
+
   return (
-    <div className="relative max-h-[500px] max-w-[500px] p-8">
+    <div className="relative m-auto max-h-[500px] max-w-[500px] p-8">
       <div
         className="absolute right-1/2 top-3 z-10 -mr-2 text-2xl text-secondary drop-shadow-md data-[wiggle=true]:animate-wiggle-15deg md:top-0 md:-ml-4 md:text-5xl"
         data-wiggle={(state === 'spinning').toString()}>
         <FontAwesomeIcon icon={['fas', 'map-marker-alt']} />
       </div>
       <Button
-        className="absolute left-1/2 top-1/2 z-10 h-1/6 w-1/3 -translate-x-1/2 -translate-y-1/2 rounded-md border border-secondary shadow-md md:w-1/12 md:rounded-full"
+        className="absolute left-1/2 top-1/2 z-10 -translate-x-1/2 -translate-y-1/2 rounded-full border border-secondary bg-primary p-5 text-2xl shadow-md md:rounded-full"
         variant="tertiary"
         onClick={() => startSpin()}
         disabled={state !== 'ready'}>
@@ -109,13 +119,10 @@ const AnimatedWheel: FunctionComponent<Props> = ({
         className="rounded-full border border-secondary shadow-md"
         style={{ lineHeight: 0 }}
         ref={rotatorRef}>
-        <div
-          className="select-none"
-          style={{
-            transform: `${anim.rotation}deg`,
-            transition: `transform ${anim.duration}s cubic-bezier(0.33, 1, 0.68, 1)`,
-          }}>
+        <div className="select-none" style={animStyles}>
           <Wheel
+            width={500}
+            height={500}
             items={items}
             highlightIndex={state === 'completed' ? winIndex : undefined}
           />

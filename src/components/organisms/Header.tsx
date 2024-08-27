@@ -9,7 +9,7 @@ import DarkModeToggle from '@/components/molecules/DarkModeToggle';
 const Header: FunctionComponent = () => {
   return (
     <header className="grid grid-cols-2 gap-1 px-0 py-2">
-      <h1>
+      <h1 className=" text-3xl font-bold">
         <Link href="/">
           The <i>MAW</i>
         </Link>

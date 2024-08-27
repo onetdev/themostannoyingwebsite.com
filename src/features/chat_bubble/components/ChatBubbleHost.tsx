@@ -8,7 +8,7 @@ import {
 } from 'react';
 
 import useAudio from '@/hooks/useAudio';
-import History from '@/features/chat_bubble/components/History';
+import History from '@/features/chat_bubble/components/HistoryOverlay';
 import { useAppSelector } from '@/redux/hooks';
 import { selectEnableSound } from '@/redux/selectors/preference';
 import { selectInteractionUnlocked } from '@/redux/selectors/runtime';
@@ -39,7 +39,7 @@ const initialMessage = () => ({
  * Every time the user closes the chat bubble, we should add a new message
  * to the history now with a notification sound.
  */
-const ActionButton: FunctionComponent = () => {
+const ChatBubbleHost: FunctionComponent = () => {
   const enableSound = useAppSelector(selectEnableSound);
   const hasInteracted = useAppSelector(selectInteractionUnlocked);
   const [history, setHistory] = useState([initialMessage()] as HistoryItem[]);
@@ -116,19 +116,19 @@ const ActionButton: FunctionComponent = () => {
   return (
     <div
       data-state={isOpen ? 'open' : 'closed'}
-      className="group bottom-4 left-4 z-20 flex"
+      className="group fixed bottom-4 left-4 z-20 flex"
       onClick={preventClose}>
       <button
-        className="z-20 flex size-14 cursor-pointer items-center justify-center rounded-full bg-primary text-3xl text-on-primary"
+        className="z-30 flex size-14 cursor-pointer items-center justify-center rounded-full bg-primary text-2xl text-on-primary"
         onClick={toggleHistory}>
         <FontAwesomeIcon icon={['fas', 'comment-dots']} />
         {badgeCounter > 0 && (
-          <span className="absolute -right-1 -top-1 z-20 w-3 rounded-full bg-error p-1 text-center text-sm text-on-error">
-            {badgeCounter}
-          </span>
+          <div className="absolute -right-2 -top-2 z-20 flex size-7 items-center justify-center rounded-full bg-error p-1 text-center text-xs text-on-error">
+            <span>{badgeCounter}</span>
+          </div>
         )}
       </button>
-      <div className="absolute bottom-4 right-10 z-20 hidden opacity-0 transition-visibility-opacity duration-300 group-data-[state=open]:visible group-data-[state=open]:opacity-100">
+      <div className="absolute bottom-4 left-10 z-20 hidden max-h-screen-3/4 w-96 opacity-0 transition-visibility-opacity duration-300 group-data-[state=open]:block group-data-[state=open]:opacity-100">
         <History
           history={history}
           onUserMessage={(message) => addHistory(message, true)}
@@ -139,4 +139,4 @@ const ActionButton: FunctionComponent = () => {
   );
 };
 
-export default ActionButton;
+export default ChatBubbleHost;

@@ -20,9 +20,9 @@ const Modal: FunctionComponent<ModalProps> = ({
   return (
     <DimmerOverlay {...rest} onClose={handleClose}>
       <div
-        className="flex max-h-full min-w-clamp-400 max-w-full flex-col rounded-lg bg-background"
+        className="mx-auto flex max-h-full min-w-clamp-400 max-w-full flex-col self-center rounded-lg bg-background"
         onClick={(e) => e.stopPropagation()}>
-        <div className="flex flex-row justify-between border-b border-[red] px-5 py-3 text-2xl">
+        <div className="flex flex-row justify-between border-b border-[red] px-5 py-3 text-xl">
           <h3 className="font-bold">{title}</h3>
           <button className="cursor-pointer" onClick={handleClose}>
             <FontAwesomeIcon icon={['fas', 'times']} />
