@@ -4,7 +4,7 @@ import { useRuntimeStore } from '@/state/runtime';
 
 /**
  * This will mesaure how long the webpage has been in focus and report it to
- * the redux store. Please note that if you change application but the
+ * the its store. Please note that if you change application but the
  * browser is still visible it will count as "in focus".
  * https://developer.mozilla.org/en-US/docs/Web/API/Document/visibilitychange_event
  */

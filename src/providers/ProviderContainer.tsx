@@ -3,7 +3,6 @@ import { ThemeProvider } from 'next-themes';
 
 import registerIcons from '@/utils/icons';
 
-import GlobalStateProvider from './GlobalStateProvider';
 import ExperienceProvider from './ExperienceProvider';
 
 const ProviderContainer: FunctionComponent<PropsWithChildren> = ({
@@ -13,9 +12,7 @@ const ProviderContainer: FunctionComponent<PropsWithChildren> = ({
 
   return (
     <ThemeProvider>
-      <GlobalStateProvider>
-        <ExperienceProvider>{children}</ExperienceProvider>
-      </GlobalStateProvider>
+      <ExperienceProvider>{children}</ExperienceProvider>
     </ThemeProvider>
   );
 };
