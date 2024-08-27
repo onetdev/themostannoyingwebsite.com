@@ -1,0 +1,7 @@
+.content p {
+  @apply py-1
+}
+
+.content ul {
+  @apply list-disc list-inside
+}

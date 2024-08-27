@@ -23,8 +23,8 @@ export const SmallCoverListItem = ({ article }: Props) => {
             height="1200"
           />
         )}
-        <h3 className="my-2 font-bold leading-snug">{article.title}</h3>
-        <p className="m-0 mb-1 text-sm leading-snug">{article.intro}</p>
+        <h4 className="my-2 leading-snug">{article.title}</h4>
+        <small className="m-0 mb-1 block leading-snug">{article.intro}</small>
       </Link>
     </>
   );

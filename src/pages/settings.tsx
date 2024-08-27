@@ -61,7 +61,7 @@ const PrivacyPolicy: NextPage = () => {
       <SiteTitle>{tCommon('navigation.settings')}</SiteTitle>
       <h1>{t('title')}</h1>
 
-      <div className="grid gap-3 md:columns-2">
+      <div className="grid gap-3 md:grid-cols-2">
         <Block title={t('preference_section.title')}>
           <SettingsFormRow label={t('preference_section.color_scheme')}>
             <FormSelect
@@ -94,7 +94,7 @@ const PrivacyPolicy: NextPage = () => {
           </SettingsFormRow>
         </Block>
 
-        <Block title="t('consent_section.title')">
+        <Block title={t('consent_section.title')}>
           <SettingsFormRow label={t('consent_section.essential_cookies')}>
             <FormCheckbox
               name="essential_cookies"
@@ -200,7 +200,7 @@ const Block: FunctionComponent<PropsWithChildren<{ title: string }>> = ({
 }) => {
   return (
     <div className="rounded-md border border-secondary bg-surface p-5">
-      <h2 className="m-0 mb-5 text-2xl">{title}</h2>
+      <h2 className="m-0 mb-5">{title}</h2>
       <div className="flex flex-col">{children}</div>
     </div>
   );

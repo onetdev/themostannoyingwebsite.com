@@ -6,7 +6,7 @@ const Footer: FunctionComponent = () => {
   const { t } = useTranslation(['common']);
 
   return (
-    <footer className="mt-12 border border-tertiary px-5 py-0 text-xs">
+    <footer className="mt-12 border-t border-tertiary px-0 py-5 text-xs">
       <Trans
         i18nKey="meta.recruiting"
         t={t}

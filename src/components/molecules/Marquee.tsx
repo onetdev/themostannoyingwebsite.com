@@ -22,7 +22,7 @@ const Marquee: FunctionComponent<Props> = ({ className }) => {
 
   return (
     <div
-      className={`${className} z-10 overflow-hidden text-xl`}
+      className={`${className} z-10 overflow-hidden`}
       onMouseEnter={onEnter}
       onMouseLeave={onLeave}>
       <MarqueePlugin gradient={false} speed={speed}>

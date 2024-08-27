@@ -25,7 +25,7 @@ export const LargeCoverItem = ({ article, ...rest }: Props) => {
           />
         )}
         <div className="absolute bottom-0 right-0 flex w-full flex-col items-end p-2">
-          <h2 className="mb-3 bg-primary px-3 text-3xl text-on-primary">
+          <h2 className="mb-3 bg-primary px-3 text-on-primary">
             {article.title}
           </h2>
           <p className="m-0 bg-secondary text-on-secondary">{article.intro}</p>

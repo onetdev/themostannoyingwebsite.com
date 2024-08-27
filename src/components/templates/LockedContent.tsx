@@ -1,23 +1,29 @@
 import React, {
   FunctionComponent,
   PropsWithChildren,
+  useMemo,
   useRef,
   useState,
 } from 'react';
 
+import Button from '@/components/atoms/Button';
+
 import EscapingElement from './EscapingElement';
 
-type Props = PropsWithChildren<{
-  active?: boolean;
-  initialMaxHeight: number;
-  steps?: number;
-}>;
+type Props = Omit<JSX.IntrinsicElements['div'], 'ref' | 'styles'> &
+  PropsWithChildren<{
+    active?: boolean;
+    initialMaxHeight: number;
+    steps?: number;
+  }>;
 
 const LockedContent: FunctionComponent<Props> = ({
   children,
   initialMaxHeight,
   steps = 200,
   active = true,
+  className,
+  ...rest
 }) => {
   const [maxHeight, setMaxHeight] = useState(initialMaxHeight);
   const [isRevealed, setIsRevealed] = useState(false);
@@ -32,10 +38,18 @@ const LockedContent: FunctionComponent<Props> = ({
     setMaxHeight(newMaxHeight);
   };
 
+  const wrapperStyles = useMemo(
+    () => ({
+      maxHeight: active ? `${maxHeight}px` : 'auto',
+    }),
+    [active, maxHeight],
+  );
+
   return (
     <div
-      className="relative overflow-hidden transition-all duration-300 ease-in-out"
-      style={{ maxHeight: active ? `${maxHeight}px` : 'auto' }}>
+      className={`relative overflow-hidden transition-all duration-300 ease-in-out ${className}`}
+      style={wrapperStyles}
+      {...rest}>
       <div ref={contentRef}>{children}</div>
       <div
         data-hidden={!active || isRevealed ? 'true' : 'false'}
@@ -44,14 +58,12 @@ const LockedContent: FunctionComponent<Props> = ({
           You gott pay a $0.69/hour with 24 months of commitment in order to see
           the next paragraph.
         </h1>
-        <EscapingElement boundingBox={{ left: 0, bottom: 0 }}>
-          <div className="cursor-pointer bg-[red]">
-            Pay! 100% legit and secure*
-          </div>
+        <EscapingElement boundingBox={{ left: 0, bottom: 0 }} trigger="hover">
+          <Button variant="primary">Pay! 100% legit and secure*</Button>
         </EscapingElement>
-        <div className="cursor-pointer text-xs" onClick={handleRevealClick}>
+        <Button variant="secondary" onClick={handleRevealClick}>
           Naaah, I&apos;m good, give me free stuff
-        </div>
+        </Button>
         <div className="block text-xs italic">
           * it might not be as secure and legit but that doesn&apos;t matter
           because you can&apos;t actually pay on this website.

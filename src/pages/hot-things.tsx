@@ -1,4 +1,4 @@
-import { MouseEventHandler, useRef, useState } from 'react';
+import { useRef, useState } from 'react';
 import Image from 'next/image';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { NextPage } from 'next';
@@ -18,12 +18,10 @@ const HotThings: NextPage = () => {
 
   const videoConstraints = {
     width: {
-      min: 1280,
       ideal: 1920,
       max: 2560,
     },
     height: {
-      min: 720,
       ideal: 1080,
       max: 1440,
     },
@@ -44,7 +42,7 @@ const HotThings: NextPage = () => {
     setStreamStarted(true);
   };
 
-  const onIntent: MouseEventHandler<HTMLDivElement> = async () => {
+  const onIntent = async () => {
     if (!isCapable) {
       return;
     }
@@ -57,28 +55,27 @@ const HotThings: NextPage = () => {
   return (
     <main>
       <SiteTitle>{t('navigation.hotThings')}</SiteTitle>
-      <h1>{t('navigation.hotThings')}</h1>
-      <div className="relative">
-        <div hidden={!isStreamStarted} className="relative">
-          <div
-            className="absolute left-1/2 top-1/2 z-10 -ml-9 -mt-9 cursor-pointer text-7xl"
-            onClick={onIntent}
-            hidden={isStreamStarted}>
-            <FontAwesomeIcon icon={['fas', 'play-circle']} />
-          </div>
-          <Image
-            className="h-auto w-full"
-            src="/assets/images/lava.jpg"
-            alt="Picture of you"
-            width={1920}
-            height={1080}
-          />
-        </div>
+      <h2>{t('navigation.hotThings')}</h2>
+      <div className="relative overflow-hidden pb-16/9">
+        <Image
+          className="absolute h-auto w-full"
+          src="/assets/images/lava.jpg"
+          alt="Picture of you"
+          width={1920}
+          height={1080}
+        />
         <video
-          className="absolute top-0 z-10 w-full"
+          playsInline
+          className="absolute left-1/2 top-1/2 w-full -translate-x-1/2 -translate-y-1/2"
           ref={playerRef}
           autoPlay
         />
+        <button
+          className="absolute left-1/2 top-1/2 -ml-9 -mt-9 text-7xl"
+          onClick={onIntent}
+          hidden={isStreamStarted}>
+          <FontAwesomeIcon icon={['fas', 'play-circle']} />
+        </button>
       </div>
     </main>
   );

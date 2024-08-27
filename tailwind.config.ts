@@ -104,6 +104,9 @@ module.exports = {
         'screen-3/4': '75vh',
         'screen-1/2': '50vh',
       },
+      padding: {
+        '16/9': '56.25%',
+      },
       transitionProperty: {
         'visibility-opacity': 'visibility, opacity',
       },
