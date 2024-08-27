@@ -2,12 +2,10 @@ import ReactTimeAgo from 'react-timeago';
 import { useTranslation } from 'next-i18next';
 import { NextPage } from 'next';
 import { FunctionComponent, PropsWithChildren } from 'react';
+import { useTheme } from 'next-themes';
 
 import { useAppDispatch, useAppSelector } from '@/redux/hooks';
-import {
-  UserColorScheme,
-  actions as preferenceActions,
-} from '@/redux/slices/preference';
+import { actions as preferenceActions } from '@/redux/slices/preference';
 import { actions as experienceActions } from '@/redux/slices/experience';
 import selectPreference from '@/redux/selectors/preference';
 import selectExperience from '@/redux/selectors/experience';
@@ -17,9 +15,11 @@ import { makeI18nStaticProps } from '@/utils/i18n';
 import SiteTitle from '@/components/atoms/SiteTitle';
 import FormSelect from '@/components/atoms/FormSelect';
 import FormCheckbox from '@/components/atoms/FormCheckbox';
+import { Theme } from '@/types';
 
 const PrivacyPolicy: NextPage = () => {
   const dispatch = useAppDispatch();
+  const { theme, setTheme } = useTheme();
   const preference = useAppSelector(selectPreference);
   const experience = useAppSelector(selectExperience);
   const consent = useAppSelector(selectConsent);
@@ -28,9 +28,7 @@ const PrivacyPolicy: NextPage = () => {
   const { t: tCommon } = useTranslation('common');
 
   // Preferences
-  const onColorSchemeChange = (value: string) => {
-    dispatch(preferenceActions.setColorScheme(value as UserColorScheme));
-  };
+  const onColorSchemeChange = (value: string) => setTheme(value);
   const onFlashingContentsChange = (value: boolean) =>
     dispatch(preferenceActions.setEnableFlashing(value));
   const onSoundChange = (value: boolean) =>
@@ -50,8 +48,7 @@ const PrivacyPolicy: NextPage = () => {
   const onPageTitleInactiveArrayPagedChange = (value: boolean) =>
     dispatch(experienceActions.setPageTitle({ inactiveArrayPaged: value }));
 
-  const colorSchemes: { value: UserColorScheme; label: string }[] = [
-    { value: 'auto', label: 'System default' },
+  const colorSchemes: { value: Theme; label: string }[] = [
     { value: 'light', label: 'Light' },
     { value: 'dark', label: 'Dark' },
   ];
@@ -65,8 +62,9 @@ const PrivacyPolicy: NextPage = () => {
         <Block title={t('preference_section.title')}>
           <SettingsFormRow label={t('preference_section.color_scheme')}>
             <FormSelect
+              key={theme}
               name="color_scheme"
-              selected={preference.colorScheme}
+              selected={theme as Theme}
               values={colorSchemes}
               onValueChange={onColorSchemeChange}
             />

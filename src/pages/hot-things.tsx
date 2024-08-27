@@ -1,4 +1,4 @@
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import Image from 'next/image';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { NextPage } from 'next';
@@ -13,7 +13,7 @@ const HotThings: NextPage = () => {
   );
   const { t } = useTranslation('common');
   const [_devices, setDevices] = useState<MediaDeviceInfo[]>([]);
-  const [isStreamStarted, setStreamStarted] = useState(false);
+  const [stream, setStream] = useState<MediaStream>();
   const playerRef = useRef<HTMLVideoElement>(null);
 
   const videoConstraints = {
@@ -39,7 +39,7 @@ const HotThings: NextPage = () => {
     }
 
     playerRef.current.srcObject = stream;
-    setStreamStarted(true);
+    setStream(stream);
   };
 
   const onIntent = async () => {
@@ -51,6 +51,10 @@ const HotThings: NextPage = () => {
     setDevices((await navigator.mediaDevices.enumerateDevices()) || []);
     startStream({ video: videoConstraints });
   };
+
+  useEffect(() => {
+    return () => stream?.getTracks().forEach((track) => track.stop());
+  }, [stream]);
 
   return (
     <main>
@@ -73,7 +77,7 @@ const HotThings: NextPage = () => {
         <button
           className="absolute left-1/2 top-1/2 -ml-9 -mt-9 text-7xl"
           onClick={onIntent}
-          hidden={isStreamStarted}>
+          hidden={Boolean(stream)}>
           <FontAwesomeIcon icon={['fas', 'play-circle']} />
         </button>
       </div>
