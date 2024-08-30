@@ -53,7 +53,7 @@ export const useExperienceStore = create(
     }),
     {
       name: 'zustand-experience-storage',
-      storage: createJSONStorage(() => sessionStorage),
+      storage: createJSONStorage(() => localStorage),
       version: 1,
     },
   ),

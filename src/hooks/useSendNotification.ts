@@ -23,7 +23,7 @@ const useSendNotification = ({ autoRequest = false }: Props = {}) => {
         data: data.data,
       });
 
-      console.log('YO', result);
+      console.log('useSendNotification result:', result);
     },
     [autoRequest],
   );

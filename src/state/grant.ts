@@ -74,7 +74,7 @@ export const useGrantStore = create(
     }),
     {
       name: 'zustand-grant-storage',
-      storage: createJSONStorage(() => sessionStorage),
+      storage: createJSONStorage(() => localStorage),
       version: 1,
     },
   ),

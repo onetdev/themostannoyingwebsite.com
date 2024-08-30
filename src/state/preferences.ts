@@ -29,7 +29,7 @@ export const usePreferenceStore = create(
     }),
     {
       name: 'zustand-preference-storage',
-      storage: createJSONStorage(() => sessionStorage),
+      storage: createJSONStorage(() => localStorage),
       version: 1,
     },
   ),

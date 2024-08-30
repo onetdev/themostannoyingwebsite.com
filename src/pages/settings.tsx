@@ -2,20 +2,17 @@ import ReactTimeAgo from 'react-timeago';
 import { useTranslation } from 'next-i18next';
 import { NextPage } from 'next';
 import { FunctionComponent, PropsWithChildren } from 'react';
-import { useTheme } from 'next-themes';
 
 import { makeI18nStaticProps } from '@/utils/i18n';
 import SiteTitle from '@/components/atoms/SiteTitle';
-import FormSelect from '@/components/atoms/FormSelect';
 import FormCheckbox from '@/components/atoms/FormCheckbox';
-import { Theme } from '@/types';
 import { useGrantStore } from '@/state/grant';
 import { useExperienceStore } from '@/state/experience';
 import { usePreferenceStore } from '@/state/preferences';
 import { useRuntimeStore } from '@/state/runtime';
+import DarkModeToggle from '@/components/molecules/DarkModeToggle';
 
 const PrivacyPolicy: NextPage = () => {
-  const { theme, setTheme } = useTheme();
   const experience = useExperienceStore();
   const grant = useGrantStore();
   const preference = usePreferenceStore();
@@ -24,7 +21,6 @@ const PrivacyPolicy: NextPage = () => {
   const { t: tCommon } = useTranslation('common');
 
   // Preferences
-  const onColorSchemeChange = (value: string) => setTheme(value);
   const onFlashingContentsChange = (value: boolean) =>
     preference.setEnableFlashing(value);
   const onSoundChange = (value: boolean) => preference.setEnableSound(value);
@@ -43,11 +39,6 @@ const PrivacyPolicy: NextPage = () => {
   const onPageTitleInactiveArrayPagedChange = (value: boolean) =>
     experience.setPageTitle({ inactiveArrayPaged: value });
 
-  const colorSchemes: { value: Theme; label: string }[] = [
-    { value: 'light', label: 'Light' },
-    { value: 'dark', label: 'Dark' },
-  ];
-
   return (
     <main>
       <SiteTitle>{tCommon('navigation.settings')}</SiteTitle>
@@ -56,13 +47,7 @@ const PrivacyPolicy: NextPage = () => {
       <div className="grid gap-3 md:grid-cols-2">
         <Block title={t('preference_section.title')}>
           <SettingsFormRow label={t('preference_section.color_scheme')}>
-            <FormSelect
-              key={theme}
-              name="color_scheme"
-              selected={theme as Theme}
-              values={colorSchemes}
-              onValueChange={onColorSchemeChange}
-            />
+            <DarkModeToggle />
           </SettingsFormRow>
           <SettingsFormRow label={t('preference_section.enable_flashing')}>
             <FormCheckbox

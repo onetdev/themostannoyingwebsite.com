@@ -29,7 +29,7 @@ const ActionButton: FunctionComponent = () => {
       <button
         className="-ml-8 animate-wiggle-8deg cursor-pointer bg-error py-3 pl-10 pr-6 text-lg text-on-error opacity-80 transition-all duration-200 ease-in-out hover:-ml-4 hover:opacity-100"
         onClick={() => setOpen(true)}>
-        <Icon icon="faTags" />
+        <Icon icon="faTags" size="2xl" />
       </button>
     </div>
   );

@@ -43,7 +43,7 @@ const HistoryOverlay: FunctionComponent<Props> = ({
           </abbr>
         </h4>
         <button onClick={() => onClose()}>
-          <Icon icon="faTimes" />
+          <Icon icon="faTimes" size="lg" />
         </button>
       </div>
       <div

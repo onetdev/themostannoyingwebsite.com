@@ -21,7 +21,7 @@ const MessageForm: FunctionComponent<{
   return (
     <form className={className} onSubmit={handleFormSubmit} ref={userForm}>
       <input
-        className="grow rounded-none border border-tertiary bg-surface p-3 text-on-surface"
+        className="grow rounded-none border border-r-0 border-tertiary bg-surface p-3 text-on-surface"
         name="message"
         title="Your message"
         placeholder="Type here..."

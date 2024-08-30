@@ -22,7 +22,7 @@ const ShareModal: FunctionComponent<Props> = ({ show, handleClose }) => {
 
   useEffect(() => {
     setUrl(window.location.href);
-  }, []);
+  }, [show]);
 
   return (
     <Modal

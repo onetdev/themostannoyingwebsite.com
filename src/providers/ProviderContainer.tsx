@@ -7,7 +7,7 @@ const ProviderContainer: FunctionComponent<PropsWithChildren> = ({
   children,
 }) => {
   return (
-    <ThemeProvider>
+    <ThemeProvider defaultTheme="dark" enableColorScheme enableSystem>
       <ExperienceProvider>{children}</ExperienceProvider>
     </ThemeProvider>
   );

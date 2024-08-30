@@ -120,7 +120,7 @@ const ChatBubbleHost: FunctionComponent = () => {
       <button
         className="z-30 flex size-14 cursor-pointer items-center justify-center rounded-full bg-primary text-2xl text-on-primary"
         onClick={toggleHistory}>
-        <Icon icon="faCommentDots" />
+        <Icon icon="faCommentDots" size="3xl" />
         {badgeCounter > 0 && (
           <div className="absolute -right-2 -top-2 z-20 flex size-7 items-center justify-center rounded-full bg-error p-1 text-center text-xs text-on-error">
             <span>{badgeCounter}</span>
