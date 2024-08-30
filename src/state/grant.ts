@@ -1,4 +1,5 @@
 import { create } from 'zustand';
+import { createJSONStorage, persist } from 'zustand/middleware';
 
 import {
   getLocationPermissionState,
@@ -32,40 +33,49 @@ const initialState: GrantState = {
   permission: {},
 };
 
-export const useGrantStore = create<GrantState & GrantStateActions>((set) => ({
-  ...initialState,
-  setReviewCompleted: (reviewCompleted) => set({ reviewCompleted }),
-  setCookieConsent: (cookies) =>
-    set((state) => ({
-      cookies: {
-        ...cookies,
-        essential: state.cookies.essential,
+export const useGrantStore = create(
+  persist<GrantState & GrantStateActions>(
+    (set) => ({
+      ...initialState,
+      setReviewCompleted: (reviewCompleted) => set({ reviewCompleted }),
+      setCookieConsent: (cookies) =>
+        set((state) => ({
+          cookies: {
+            ...cookies,
+            essential: state.cookies.essential,
+          },
+        })),
+      syncNotificationPermission: () =>
+        set((state) => ({
+          permission: {
+            ...state.permission,
+            notification: getNotificationPermissionState(),
+          },
+        })),
+      syncLocationPermission: async () => {
+        const location = await getLocationPermissionState();
+        set((state) => ({
+          permission: {
+            ...state.permission,
+            location,
+          },
+        }));
       },
-    })),
-  syncNotificationPermission: () =>
-    set((state) => ({
-      permission: {
-        ...state.permission,
-        notification: getNotificationPermissionState(),
+      syncPermissions: async () => {
+        const location = await getLocationPermissionState();
+        const notification = getNotificationPermissionState();
+        set({
+          permission: {
+            location,
+            notification,
+          },
+        });
       },
-    })),
-  syncLocationPermission: async () => {
-    const location = await getLocationPermissionState();
-    set((state) => ({
-      permission: {
-        ...state.permission,
-        location,
-      },
-    }));
-  },
-  syncPermissions: async () => {
-    const location = await getLocationPermissionState();
-    const notification = getNotificationPermissionState();
-    set({
-      permission: {
-        location,
-        notification,
-      },
-    });
-  },
-}));
+    }),
+    {
+      name: 'zustand-grant-storage',
+      storage: createJSONStorage(() => sessionStorage),
+      version: 1,
+    },
+  ),
+);

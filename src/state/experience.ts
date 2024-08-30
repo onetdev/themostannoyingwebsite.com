@@ -1,4 +1,5 @@
 import { create } from 'zustand';
+import { persist, createJSONStorage } from 'zustand/middleware';
 
 export interface ExperienceState {
   contentPaywall: boolean;
@@ -34,19 +35,26 @@ const initialState: ExperienceState = {
   wheelOfFortune: true,
 };
 
-export const useExperienceStore = create<
-  ExperienceState & ExperienceStateActions
->((set) => ({
-  ...initialState,
-  setMockChat: (mockChat) => set({ mockChat }),
-  setWheelOfFortune: (wheelOfFortune) => set({ wheelOfFortune }),
-  setExitPrompt: (exitPrompt) => set({ exitPrompt }),
-  setContentPaywall: (contentPaywall) => set({ contentPaywall }),
-  setPageTitle: (pageTitle) =>
-    set((state) => ({
-      pageTitle: {
-        ...state.pageTitle,
-        ...pageTitle,
-      },
-    })),
-}));
+export const useExperienceStore = create(
+  persist<ExperienceState & ExperienceStateActions>(
+    (set) => ({
+      ...initialState,
+      setMockChat: (mockChat) => set({ mockChat }),
+      setWheelOfFortune: (wheelOfFortune) => set({ wheelOfFortune }),
+      setExitPrompt: (exitPrompt) => set({ exitPrompt }),
+      setContentPaywall: (contentPaywall) => set({ contentPaywall }),
+      setPageTitle: (pageTitle) =>
+        set((state) => ({
+          pageTitle: {
+            ...state.pageTitle,
+            ...pageTitle,
+          },
+        })),
+    }),
+    {
+      name: 'zustand-experience-storage',
+      storage: createJSONStorage(() => sessionStorage),
+      version: 1,
+    },
+  ),
+);
