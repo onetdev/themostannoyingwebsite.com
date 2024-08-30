@@ -6,7 +6,7 @@ export interface RuntimeState {
     visibilitySeconds: number;
   };
   interactionUnlocked: boolean;
-  startedAt: string;
+  startedAt?: string;
 }
 
 export interface RuntimeStateActions {
@@ -20,7 +20,7 @@ const initialState: RuntimeState = {
     isVisible: false,
     visibilitySeconds: 0,
   },
-  startedAt: new Date().toISOString(),
+  startedAt: undefined,
   interactionUnlocked: false,
 };
 
@@ -33,6 +33,7 @@ export const useRuntimeStore = create<RuntimeState & RuntimeStateActions>(
           ...state.document,
           isVisible,
         },
+        startedAt: state.startedAt ?? new Date().toISOString(),
       })),
     markInteractionUnlocked: () => set({ interactionUnlocked: true }),
     incrementVisibilitySeconds: () =>
@@ -41,6 +42,7 @@ export const useRuntimeStore = create<RuntimeState & RuntimeStateActions>(
           ...state.document,
           visibilitySeconds: state.document.visibilitySeconds + 1,
         },
+        startedAt: state.startedAt ?? new Date().toISOString(),
       })),
   }),
 );

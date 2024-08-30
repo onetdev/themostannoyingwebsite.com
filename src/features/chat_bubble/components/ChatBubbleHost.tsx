@@ -1,4 +1,3 @@
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
   FunctionComponent,
   MouseEventHandler,
@@ -12,6 +11,7 @@ import History from '@/features/chat_bubble/components/HistoryOverlay';
 import useSendNotification from '@/hooks/useSendNotification';
 import { usePreferenceStore } from '@/state/preferences';
 import { useRuntimeStore } from '@/state/runtime';
+import Icon from '@/components/atoms/Icon';
 
 type HistoryItem = { text: string; isUser: boolean; time: Date };
 const messages = [
@@ -120,7 +120,7 @@ const ChatBubbleHost: FunctionComponent = () => {
       <button
         className="z-30 flex size-14 cursor-pointer items-center justify-center rounded-full bg-primary text-2xl text-on-primary"
         onClick={toggleHistory}>
-        <FontAwesomeIcon icon={['fas', 'comment-dots']} />
+        <Icon icon="faCommentDots" />
         {badgeCounter > 0 && (
           <div className="absolute -right-2 -top-2 z-20 flex size-7 items-center justify-center rounded-full bg-error p-1 text-center text-xs text-on-error">
             <span>{badgeCounter}</span>
@@ -128,11 +128,13 @@ const ChatBubbleHost: FunctionComponent = () => {
         )}
       </button>
       <div className="absolute bottom-4 left-10 z-20 hidden max-h-screen-3/4 w-96 opacity-0 transition-visibility-opacity duration-300 group-data-[state=open]:block group-data-[state=open]:opacity-100">
-        <History
-          history={history}
-          onUserMessage={(message) => addHistory(message, true)}
-          onClose={closeHistory}
-        />
+        {isOpen && (
+          <History
+            history={history}
+            onUserMessage={(message) => addHistory(message, true)}
+            onClose={closeHistory}
+          />
+        )}
       </div>
     </div>
   );

@@ -2,8 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-@import url('https://fonts.googleapis.com/css2?family=Bonheur+Royale&display=swap');
-
 :root, [data-theme='dark'] {
   --color-background: #050416;
   --color-primary: #00bcd4;

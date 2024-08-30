@@ -1,8 +1,8 @@
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { FunctionComponent, PropsWithoutRef, useState } from 'react';
 import Confetti from 'react-confetti';
 
 import { getWeightedRandom } from '@/utils/math';
+import Icon from '@/components/atoms/Icon';
 
 import AnimatedWheel, { AnimatedWheelState } from './AnimatedWheel';
 import { Item } from './Wheel';
@@ -52,7 +52,7 @@ const ModalContent: FunctionComponent<Props> = ({
           aria-label="Close"
           className="absolute right-0 top-0 z-10 cursor-pointer p-3"
           onClick={() => onClose?.()}>
-          <FontAwesomeIcon icon={['fas', 'times']} />
+          <Icon icon="faTimes" />
         </button>
         {state === 'completed' && (
           <Confetti

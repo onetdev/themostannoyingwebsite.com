@@ -1,9 +1,9 @@
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React, { FunctionComponent } from 'react';
 
 import DimmerOverlay, {
   type DimmerOverlayProps,
 } from '@/components/atoms/DimmerOverlay';
+import Icon from '@/components/atoms/Icon';
 
 type ModalProps = DimmerOverlayProps & {
   title: string;
@@ -25,7 +25,7 @@ const Modal: FunctionComponent<ModalProps> = ({
         <div className="flex flex-row justify-between border-b border-[red] px-5 py-3 text-xl">
           <h3>{title}</h3>
           <button className="cursor-pointer" onClick={handleClose}>
-            <FontAwesomeIcon icon={['fas', 'times']} />
+            <Icon icon="faTimes" />
           </button>
         </div>
         <div className="px-5 py-3">{children}</div>

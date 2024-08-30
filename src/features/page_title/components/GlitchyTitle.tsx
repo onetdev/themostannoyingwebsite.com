@@ -47,7 +47,15 @@ const GlitchyTitle = ({
     return remove;
   }, [enabled, schedule, runCount]);
 
-  return <Head>{enabled && blink && <title>{text}</title>}</Head>;
+  if (!enabled || !blink) {
+    return null;
+  }
+
+  return (
+    <Head>
+      <title>{text}</title>
+    </Head>
+  );
 };
 
 // This looks soo funky :D

@@ -7,11 +7,11 @@ import {
   useRef,
   useState,
 } from 'react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import useDragTracker from '@/hooks/useDragTracker';
 import { distance, random } from '@/utils/math';
 import Button from '@/components/atoms/Button';
+import Icon from '@/components/atoms/Icon';
 
 import Wheel, { Item } from './Wheel';
 
@@ -106,7 +106,7 @@ const AnimatedWheel: FunctionComponent<Props> = ({
       <div
         className="absolute right-1/2 top-3 z-10 -mr-2 text-2xl text-secondary drop-shadow-md data-[wiggle=true]:animate-wiggle-15deg md:top-0 md:-ml-4 md:text-5xl"
         data-wiggle={(state === 'spinning').toString()}>
-        <FontAwesomeIcon icon={['fas', 'map-marker-alt']} />
+        <Icon icon="faMapMarkerAlt" />
       </div>
       <Button
         className="absolute left-1/2 top-1/2 z-10 -translate-x-1/2 -translate-y-1/2 rounded-full border border-secondary bg-primary p-5 text-2xl shadow-md md:rounded-full"

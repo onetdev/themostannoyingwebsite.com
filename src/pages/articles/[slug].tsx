@@ -22,12 +22,12 @@ const ArticleItem: NextPage<Props> = ({ slug }: Props) => {
     return <Error statusCode={404} />;
   }
 
+  const pageTitle = `${article.title} - ${t('meta.title')}`;
+
   return (
     <main>
       <Head>
-        <title>
-          {article.title} - {t('meta.title')}
-        </title>
+        <title>{pageTitle}</title>
         <meta property="og:type" content="article" />
         <meta name="og:description" content={article.intro || article.title} />
         {article.coverImage && (

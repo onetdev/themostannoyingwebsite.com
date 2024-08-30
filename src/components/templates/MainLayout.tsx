@@ -1,4 +1,4 @@
-import { FunctionComponent, PropsWithChildren } from 'react';
+import { FunctionComponent, PropsWithoutRef } from 'react';
 import { Analytics } from '@vercel/analytics/react';
 
 import CookieBar from '@/components/organisms/CookieConsent';
@@ -9,11 +9,17 @@ import Footer from '@/components/organisms/Footer';
 import Header from '@/components/organisms/Header';
 import { useExperienceStore } from '@/state/experience';
 
-const MainLayout: FunctionComponent<PropsWithChildren> = ({ children }) => {
+type Props = PropsWithoutRef<JSX.IntrinsicElements['div']>;
+
+const MainLayout: FunctionComponent<Props> = ({
+  children,
+  className,
+  ...rest
+}) => {
   const { wheelOfFortune, mockChat } = useExperienceStore();
 
   return (
-    <>
+    <div className={className} {...rest}>
       <Analytics />
       <ContainerGiftFlaps />
       <div className="container relative mx-auto my-0 min-h-screen bg-surface px-2 py-0">
@@ -25,7 +31,7 @@ const MainLayout: FunctionComponent<PropsWithChildren> = ({ children }) => {
         {mockChat && <ChatBubbleHost />}
         <CookieBar />
       </div>
-    </>
+    </div>
   );
 };
 

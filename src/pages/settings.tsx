@@ -148,7 +148,11 @@ const PrivacyPolicy: NextPage = () => {
           <small>{t('runtime_section.disclaimer')}</small>
           <p>
             {t('runtime_section.started_ago')}{' '}
-            <ReactTimeAgo date={runtime.startedAt} />
+            {runtime.startedAt ? (
+              <ReactTimeAgo date={runtime.startedAt} />
+            ) : (
+              'n/a'
+            )}
           </p>
           <p>
             {t('runtime_section.visibility_seconds')}{' '}
