@@ -1,16 +1,14 @@
 import { useEffect, useRef, useState } from 'react';
 import Image from 'next/image';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { NextPage } from 'next';
 import { useTranslation } from 'next-i18next';
 
 import { makeI18nStaticProps } from '@/utils/i18n';
 import SiteTitle from '@/components/atoms/SiteTitle';
+import Icon from '@/components/atoms/Icon';
 
 const HotThings: NextPage = () => {
-  const [isCapable] = useState(
-    'mediaDevices' in navigator && 'getUserMedia' in navigator.mediaDevices,
-  );
+  const [isCapable, setIsCapable] = useState(false);
   const { t } = useTranslation('common');
   const [_devices, setDevices] = useState<MediaDeviceInfo[]>([]);
   const [stream, setStream] = useState<MediaStream>();
@@ -53,6 +51,9 @@ const HotThings: NextPage = () => {
   };
 
   useEffect(() => {
+    setIsCapable(
+      'mediaDevices' in navigator && 'getUserMedia' in navigator.mediaDevices,
+    );
     return () => stream?.getTracks().forEach((track) => track.stop());
   }, [stream]);
 
@@ -74,12 +75,14 @@ const HotThings: NextPage = () => {
           ref={playerRef}
           autoPlay
         />
-        <button
-          className="absolute left-1/2 top-1/2 -ml-9 -mt-9 text-7xl"
-          onClick={onIntent}
-          hidden={Boolean(stream)}>
-          <FontAwesomeIcon icon={['fas', 'play-circle']} />
-        </button>
+        {isCapable && (
+          <button
+            className="absolute left-1/2 top-1/2 -ml-9 -mt-9 text-7xl"
+            onClick={onIntent}
+            hidden={Boolean(stream)}>
+            <Icon icon="faPlayCircle" size="5xl" />
+          </button>
+        )}
       </div>
     </main>
   );

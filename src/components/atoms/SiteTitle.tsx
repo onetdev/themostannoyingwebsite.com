@@ -6,11 +6,11 @@ type Props = PropsWithChildren;
 const SiteTitle: FunctionComponent<Props> = ({ children }) => {
   const { t } = useTranslation('common');
 
+  const pageTitle = `${children} - ${t('meta.title')}`;
+
   return (
     <Head>
-      <title>
-        {children} - {t('meta.title')}
-      </title>
+      <title>{pageTitle}</title>
     </Head>
   );
 };

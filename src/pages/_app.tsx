@@ -1,6 +1,7 @@
 import '@/styles/globals.css';
 import Head from 'next/head';
 import { UserConfig, appWithTranslation } from 'next-i18next';
+import { type AppProps } from 'next/app';
 
 import english from '@/public/locales/en/common.json';
 import MainLayout from '@/components/templates/MainLayout';
@@ -8,8 +9,6 @@ import ProviderContainer from '@/providers/ProviderContainer';
 import GeneratedMetaHead from '@/components/templates/GeneratedMetaHead';
 
 import nextI18NextConfig from '@/../next-i18next.config.js';
-
-import type { AppProps } from 'next/app';
 
 const TheMostAnnoyingWebsite = ({ Component, pageProps }: AppProps) => {
   // Can't use translations here yet, description will be set on page level

@@ -1,8 +1,8 @@
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { FunctionComponent, useEffect, useRef, useState } from 'react';
 
 import DotDotDotText from '@/components/atoms/DotDotDotText';
 import { HistoryItem } from '@/features/chat_bubble/types';
+import Icon from '@/components/atoms/Icon';
 
 import MessageForm from './MessageForm';
 import MessageBubble from './MessageBubble';
@@ -43,7 +43,7 @@ const HistoryOverlay: FunctionComponent<Props> = ({
           </abbr>
         </h4>
         <button onClick={() => onClose()}>
-          <FontAwesomeIcon icon={['fas', 'times']} />
+          <Icon icon="faTimes" size="lg" />
         </button>
       </div>
       <div
