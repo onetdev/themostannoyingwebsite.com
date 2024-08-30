@@ -5,12 +5,12 @@ import React, {
   useRef,
   useState,
 } from 'react';
-import { styled } from 'styled-components';
 
 import { getRelativePosition } from '@/utils/dom';
 import { clamp, random } from '@/utils/math';
 
 type Props = PropsWithChildren<{
+  trigger?: 'hover' | 'activationStart';
   /**
    * Maximum distance the element can move in a certain direction.
    * By default the limit is half of the element's dimension on a given axes.
@@ -23,14 +23,8 @@ type Props = PropsWithChildren<{
   };
 }>;
 
-const Wrap = styled.div<{ left: number; top: number }>`
-  display: inline-block;
-  transform: ${(props) =>
-    `translate(${props.left || 0}px, ${props.top || 0}px)`};
-  transition: transform 0.1s ease-in-out;
-`;
-
 const EscapingElement: FunctionComponent<Props> = ({
+  trigger = 'hover',
   children,
   boundingBox,
 }) => {
@@ -59,15 +53,31 @@ const EscapingElement: FunctionComponent<Props> = ({
     updatePaymentButtonPosition(e.clientX - position.x, e.clientY - position.y);
   };
 
+  const onMouseMove: MouseEventHandler<HTMLDivElement> = (e) => {
+    if (trigger !== 'hover') {
+      return;
+    }
+    onMouseEvent(e);
+  };
+
+  const onActivationStart: MouseEventHandler<HTMLDivElement> = (e) => {
+    if (trigger !== 'activationStart') {
+      return;
+    }
+    onMouseEvent(e);
+  };
+
   return (
-    <Wrap
-      onMouseMove={onMouseEvent}
-      onClick={onMouseEvent}
-      left={position.left}
-      top={position.top}
+    <div
+      className={`inline-block transition-transform duration-100`}
+      style={{
+        transform: `translate(${position.left || 0}px, ${position.top || 0}px)`,
+      }}
+      onMouseMove={onMouseMove}
+      onMouseDown={onActivationStart}
       ref={ref}>
       {children}
-    </Wrap>
+    </div>
   );
 };
 

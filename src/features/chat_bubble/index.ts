@@ -1,1 +1,1 @@
-export { default as ChatBubble } from './components/ActionButton';
+export { default as ChatBubbleHost } from './components/ChatBubbleHost';

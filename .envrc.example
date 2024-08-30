@@ -1,0 +1,2 @@
+# To use nvmrc if asdf is being useg
+ASDF_NODEJS_LEGACY_VERSION_FILE=true

@@ -8,10 +8,11 @@
     "adult_filter": "Filter adult contents"
   },
   "consent_section": {
-    "title": "Consent",
-    "allow_cookies": "Allow non-essential cookies",
-    "allow_notification": "Allow notification",
-    "enable_location": "Allow location"
+    "title": "Consent and permissions",
+    "permission_disclaimer": "Permission settings are managed by the browser, if you want to change theme you can do it from the site settings in your browser.",
+    "essential_cookies": "Allow essential cookies",
+    "notification_permission": "Notification permission",
+    "location_permission": "Location permission"
   },
   "experience_section": {
     "title": "Experience",

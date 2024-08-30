@@ -1,6 +1,4 @@
-import React from 'react';
-
-export interface ArticleCore {
+export type ArticleCore = {
   slug: string;
   url: string;
   title: string;
@@ -8,14 +6,16 @@ export interface ArticleCore {
   isHighlighted?: boolean;
   isOnCover?: boolean;
   coverImage?: string;
-}
+};
 
-export interface Article extends ArticleCore {
+export type Article = ArticleCore & {
   date: Date;
   body: React.ReactNode;
-}
+};
 
-export interface ArticleStatic extends ArticleCore {
+export type ArticleStatic = ArticleCore & {
   date: string;
   body: string;
-}
+};
+
+export type Theme = 'light' | 'dark';

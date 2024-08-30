@@ -30,7 +30,15 @@ const ArrayPagedTitle = ({
     };
   }, [enabled, speedMs]);
 
-  return <Head>{enabled && text && <title>{text}</title>}</Head>;
+  if (!enabled || !text) {
+    return null;
+  }
+
+  return (
+    <Head>
+      <title>{text}</title>
+    </Head>
+  );
 };
 
 export default ArrayPagedTitle;

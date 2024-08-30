@@ -77,5 +77,4 @@ class ArticleService {
   }
 }
 
-const ArticleServiceSingleton = new ArticleService();
-export default ArticleServiceSingleton;
+export const ArticleServiceSingleton = new ArticleService();

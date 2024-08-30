@@ -1,11 +1,9 @@
+'use client';
+
 import { useTranslation } from 'next-i18next';
 
-import { useAppSelector } from '@/redux/hooks';
-import {
-  selectInteractionUnlocked,
-  selectIsDocumentVisible,
-} from '@/redux/selectors/runtime';
-import { selectPageTitle } from '@/redux/selectors/experience';
+import { useExperienceStore } from '@/state/experience';
+import { useRuntimeStore } from '@/state/runtime';
 
 import ArrayPagedTitle from './ArrayPagedTitle';
 import MarqueeTitle from './MarqueeTitle';
@@ -16,9 +14,9 @@ import GlitchyTitle from './GlitchyTitle';
  * is quite low and the title is not updated as frequently as I would like.
  */
 const PageTitleExperience = () => {
-  const pageTitleExperience = useAppSelector(selectPageTitle);
-  const isVisible = useAppSelector(selectIsDocumentVisible);
-  const hasInteracted = useAppSelector(selectInteractionUnlocked);
+  const pageTitleExperience = useExperienceStore((state) => state.pageTitle);
+  const isVisible = useRuntimeStore((state) => state.document.isVisible);
+  const hasInteracted = useRuntimeStore((state) => state.interactionUnlocked);
   const { t } = useTranslation('common');
 
   // Using arrays in language might be stretching how i18n should be used 😰

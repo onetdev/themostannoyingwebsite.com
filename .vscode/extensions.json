@@ -3,6 +3,7 @@
         "dbaeumer.vscode-eslint",
         "esbenp.prettier-vscode",
         "rubymaniac.vscode-direnv",
-        "styled-components.vscode-styled-components"
+        "unifiedjs.vscode-mdx",
+        "bradlc.vscode-tailwindcss"
     ]
 }

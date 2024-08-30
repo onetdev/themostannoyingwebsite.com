@@ -1,6 +1,6 @@
 'use client';
 
-import { FunctionComponent } from 'react';
+import { FunctionComponent, useEffect, useState } from 'react';
 import {
   EmailIcon,
   FacebookIcon,
@@ -18,7 +18,11 @@ type Props = {
 };
 
 const ShareModal: FunctionComponent<Props> = ({ show, handleClose }) => {
-  const url = window.location.href;
+  const [url, setUrl] = useState<string>('');
+
+  useEffect(() => {
+    setUrl(window.location.href);
+  }, [show]);
 
   return (
     <Modal
@@ -36,7 +40,7 @@ const ShareModal: FunctionComponent<Props> = ({ show, handleClose }) => {
           </EmailShareButton>
         </>
       }
-      show={show}
+      visible={show}
       onClose={handleClose}>
       Sharing is caring, please show this awefully anoying website to your
       friends.

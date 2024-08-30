@@ -1,65 +1,37 @@
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { FunctionComponent, useState } from 'react';
-import { styled, keyframes } from 'styled-components';
 
-import { cssVars } from '@/styles/theme';
 import DimmerOverlay from '@/components/atoms/DimmerOverlay';
+import Icon from '@/components/atoms/Icon';
 
 import ModalContent from './ModalContent';
 
-const zIndexBase = 30;
-
-const wiggleAnim = keyframes`
-  0% { transform: rotate(0deg); }
-  90% { transform: rotate(0deg); }
-  92% { transform: rotate(8deg); }
-  94% { transform: rotate(-8deg); }
-  96% { transform: rotate(8deg); }
-  98% { transform: rotate(-8deg); }
-  100% { transform: rotate(0deg); }
-`;
-const Wrap = styled.div`
-  position: fixed;
-  left: 0;
-  top: 50%;
-  z-index: ${zIndexBase};
-`;
-const Icon = styled.div`
-  padding: 1rem 1rem 1rem 3rem;
-  margin-left: -3rem;
-  background: ${cssVars.color.error};
-  color: ${cssVars.color.onError};
-  opacity: 0.8;
-  cursor: pointer;
-  font-size: 1.5rem;
-  transition: all 0.2s ease-in-out;
-  animation-name: ${wiggleAnim};
-  animation-duration: 8s;
-  animation-iteration-count: infinite;
-  &:hover {
-    margin-left: -1rem;
-    opacity: 1;
-  }
-`;
-
 const ActionButton: FunctionComponent = () => {
-  const [isOpen, setIsOpen] = useState(false);
+  const [isOpen, setOpen] = useState(false);
 
   return (
-    <Wrap>
+    <div className="fixed left-0 top-1/2 z-30">
       <DimmerOverlay
-        show={isOpen}
-        onClose={() => setIsOpen(false)}
+        visible={isOpen}
+        onClose={() => setOpen(false)}
         closeOnClickOutside={false}
         closeOnEsc>
-        <div onClick={(e) => e.stopPropagation()} hidden={!isOpen}>
-          <ModalContent onClose={() => setIsOpen(false)} />
-        </div>
+        {isOpen && (
+          <div className="m-auto flex size-full max-h-screen-dimension-min max-w-screen-dimension-min items-center justify-center">
+            <ModalContent
+              className="max-h-[600px] max-w-[600px] grow"
+              hidden={!isOpen}
+              onClick={(e) => e.stopPropagation()}
+              onClose={() => setOpen(false)}
+            />
+          </div>
+        )}
       </DimmerOverlay>
-      <Icon onClick={() => setIsOpen(true)}>
-        <FontAwesomeIcon icon={['fas', 'tags']} />
-      </Icon>
-    </Wrap>
+      <button
+        className="-ml-8 animate-wiggle-8deg cursor-pointer bg-error py-3 pl-10 pr-6 text-lg text-on-error opacity-80 transition-all duration-200 ease-in-out hover:-ml-4 hover:opacity-100"
+        onClick={() => setOpen(true)}>
+        <Icon icon="faTags" size="2xl" />
+      </button>
+    </div>
   );
 };
 

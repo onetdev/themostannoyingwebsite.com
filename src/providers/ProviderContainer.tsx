@@ -1,18 +1,15 @@
 import { FunctionComponent, PropsWithChildren } from 'react';
+import { ThemeProvider } from 'next-themes';
 
-import ReduxProvider from './ReduxProvider';
-import ThemeProvider from './ThemeProvider';
-import ExperienceProvider from './ExperienceProvider';
+import ExperienceProvider from '@/providers/ExperienceProvider';
 
 const ProviderContainer: FunctionComponent<PropsWithChildren> = ({
   children,
 }) => {
   return (
-    <ReduxProvider>
-      <ExperienceProvider>
-        <ThemeProvider>{children}</ThemeProvider>
-      </ExperienceProvider>
-    </ReduxProvider>
+    <ThemeProvider defaultTheme="dark" enableColorScheme enableSystem>
+      <ExperienceProvider>{children}</ExperienceProvider>
+    </ThemeProvider>
   );
 };
 

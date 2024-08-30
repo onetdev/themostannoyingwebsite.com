@@ -1,73 +1,55 @@
-import { styled } from 'styled-components';
-import { ButtonHTMLAttributes, FunctionComponent } from 'react';
+import { FunctionComponent, PropsWithoutRef } from 'react';
 
-import { cssVars } from '@/styles/theme';
-
-type Props = ButtonHTMLAttributes<HTMLButtonElement> & {
-  variant: 'primary' | 'secondary' | 'tertiary';
+type Props = PropsWithoutRef<JSX.IntrinsicElements['button']> & {
+  variant?: 'primary' | 'secondary' | 'tertiary';
 };
 
-const StyledButton = styled.button<{
-  $background: string;
-  $backgroundAlt: string;
-  $textColor: string;
-}>`
-  cursor: pointer;
-  background: ${(props) => props.$background};
-  color: ${(props) => props.$textColor};
-  transition: background 0.1s ease-in-out;
-  &:hover {
-    background: ${(props) => props.$backgroundAlt};
-  }
-  &:disabled {
-    filter: grayscale(100%);
-    cursor: default;
-  }
-`;
-
 const Button: FunctionComponent<Props> = ({
-  variant,
+  variant = 'primary',
   children,
-  onClick,
-  disabled,
+  className,
   ...rest
 }) => {
-  let color;
   switch (variant) {
     case 'secondary':
-      color = {
-        background: cssVars.color.secondary,
-        backgroundAlt: cssVars.color.secondaryAlt,
-        textColor: cssVars.color.onSecondary,
-      };
-      break;
+      return (
+        <ButtonInternal
+          className={`bg-secondary text-on-secondary hover:bg-secondary-alt ${className}`}
+          {...rest}>
+          {children}
+        </ButtonInternal>
+      );
     case 'tertiary':
-      color = {
-        background: cssVars.color.tertiary,
-        backgroundAlt: cssVars.color.tertiaryAlt,
-        textColor: cssVars.color.onTertiary,
-      };
-      break;
+      return (
+        <ButtonInternal
+          className={`bg-tertiary text-on-tertiary hover:bg-tertiary-alt ${className}`}
+          {...rest}>
+          {children}
+        </ButtonInternal>
+      );
     case 'primary':
     default:
-      color = {
-        background: cssVars.color.primary,
-        backgroundAlt: cssVars.color.primaryAlt,
-        textColor: cssVars.color.onPrimary,
-      };
-      break;
+      return (
+        <ButtonInternal
+          className={`bg-primary text-on-primary hover:bg-primary-alt ${className}`}
+          {...rest}>
+          {children}
+        </ButtonInternal>
+      );
   }
+};
 
+const ButtonInternal: FunctionComponent<Props> = ({
+  className,
+  children,
+  ...rest
+}) => {
   return (
-    <StyledButton
-      $background={color.background}
-      $backgroundAlt={color.backgroundAlt}
-      $textColor={color.textColor}
-      onClick={onClick}
-      disabled={disabled}
+    <button
+      className={`cursor-pointer rounded-md px-3 py-1 transition-all duration-100 ease-in-out disabled:cursor-default disabled:grayscale ${className}`}
       {...rest}>
       {children}
-    </StyledButton>
+    </button>
   );
 };
 

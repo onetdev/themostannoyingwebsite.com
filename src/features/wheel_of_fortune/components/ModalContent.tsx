@@ -1,45 +1,11 @@
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { FunctionComponent, useState } from 'react';
+import { FunctionComponent, PropsWithoutRef, useState } from 'react';
 import Confetti from 'react-confetti';
-import { styled } from 'styled-components';
 
 import { getWeightedRandom } from '@/utils/math';
-import { useAppSelector } from '@/redux/hooks';
-import { cssVars } from '@/styles/theme';
-import { selectEnableFlashing } from '@/redux/selectors/preference';
+import Icon from '@/components/atoms/Icon';
 
 import AnimatedWheel, { AnimatedWheelState } from './AnimatedWheel';
 import { Item } from './Wheel';
-
-const Wrap = styled.div`
-  background: ${cssVars.color.surface};
-  position: relative;
-  overflow: hidden;
-  border-radius: 10px;
-`;
-const Label = styled.div`
-  padding: ${cssVars.spacing.gap2x};
-  background: ${cssVars.color.secondary};
-  color: ${cssVars.color.onSecondary};
-  text-align: center;
-  font-weight: 600;
-  font-size: ${cssVars.fontSize.title};
-  width: 500px;
-  max-width: calc(100vw * 0.8);
-`;
-const ConfettiWrap = styled.div`
-  position: absolute;
-  width: 100%;
-  height: 100%;
-`;
-const CloseIcon = styled.div`
-  position: absolute;
-  top: 0;
-  right: 0;
-  padding: ${cssVars.spacing.gap};
-  cursor: pointer;
-  z-index: 1;
-`;
 
 const prizeWithWeight = [
   { value: 'Free lifetime beer*', prob: 10 },
@@ -63,38 +29,51 @@ const getItems = (hueStart: number, hueEnd: number, numItems: number) => {
   return items;
 };
 
-type Props = {
-  onClose: () => void;
+type Props = PropsWithoutRef<JSX.IntrinsicElements['div']> & {
+  onClose?: () => void;
 };
 
-const ModalContent: FunctionComponent<Props> = ({ onClose }) => {
-  const flashing = useAppSelector(selectEnableFlashing);
+const ModalContent: FunctionComponent<Props> = ({
+  className,
+  onClose,
+  ...rest
+}) => {
   const hueStart = 300; // random(0,360);
   const [state, setState] = useState<AnimatedWheelState>('ready');
   const [prize, setPrize] = useState<Item | undefined>();
   const [items] = useState(getItems(hueStart, hueStart + 120, 10));
 
   return (
-    <Wrap>
-      <CloseIcon onClick={() => onClose()}>
-        <FontAwesomeIcon icon={['fas', 'times']} />
-      </CloseIcon>
-      {state === 'completed' && (
-        <ConfettiWrap>
-          <Confetti numberOfPieces={100} width={500} height={500} />
-        </ConfettiWrap>
-      )}
+    <div
+      className={`relative flex flex-col overflow-hidden rounded-lg bg-surface ${className}`}
+      {...rest}>
+      <div className="grow">
+        <button
+          aria-label="Close"
+          className="absolute right-0 top-0 z-10 cursor-pointer p-3"
+          onClick={() => onClose?.()}>
+          <Icon icon="faTimes" size="lg" />
+        </button>
+        {state === 'completed' && (
+          <Confetti
+            className="absolute size-full"
+            numberOfPieces={100}
+            width={600}
+            height={600}
+          />
+        )}
 
-      <AnimatedWheel
-        flashing={flashing}
-        items={items}
-        onStateChange={(newState) => setState(newState)}
-        onSpinCompleted={(newPrize) => setPrize(newPrize)}
-      />
-
-      {state !== 'completed' && <Label>Let&apos;s spin the wheel!!</Label>}
-      {state === 'completed' && prize && <Label>You won! {prize.text}</Label>}
-    </Wrap>
+        <AnimatedWheel
+          items={items}
+          onStateChange={(newState) => setState(newState)}
+          onSpinCompleted={(newPrize) => setPrize(newPrize)}
+        />
+      </div>
+      <span className="w-full bg-secondary p-5 text-center text-xl font-bold text-on-secondary">
+        {state !== 'completed' && `Let's spin the wheel!!`}
+        {state === 'completed' && prize && `You won! ${prize.text}`}
+      </span>
+    </div>
   );
 };
 

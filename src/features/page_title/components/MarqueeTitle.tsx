@@ -23,7 +23,15 @@ const MarqueeTitle = ({ enabled, speedMs = 1000, text }: MarqueeTitleProps) => {
     };
   }, [enabled, speedMs]);
 
-  return <Head>{enabled && <title>{string_marquee(text, time)}</title>}</Head>;
+  if (!enabled) {
+    return null;
+  }
+
+  return (
+    <Head>
+      <title>{string_marquee(text, time)}</title>
+    </Head>
+  );
 };
 
 export default MarqueeTitle;

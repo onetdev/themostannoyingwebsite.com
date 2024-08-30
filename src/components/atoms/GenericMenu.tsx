@@ -1,14 +1,22 @@
-import { styled } from 'styled-components';
+import { FunctionComponent } from 'react';
 
-import { ClearListStyle } from '@/styles/utils';
-import { cssVars } from '@/styles/theme';
-
-export const Menu = styled.ul`
-  ${ClearListStyle}
-  display: flex;
-  flex-wrap: wrap;
-  margin: ${cssVars.spacing.gap} 0;
-  gap: ${cssVars.spacing.gap};
-  font-size: ${cssVars.fontSize.large};
-`;
-export const MenuItem = styled.li``;
+type Props = Omit<JSX.IntrinsicElements['ul'], 'ref' | 'children'> & {
+  children?: JSX.Element[];
+  iteratorClassName?: string;
+};
+export const GenericMenu: FunctionComponent<Props> = ({
+  children,
+  className,
+  iteratorClassName,
+  ...props
+}) => (
+  <ul
+    className={`my-2 flex flex-wrap gap-3 font-primary text-lg ${className}`}
+    {...props}>
+    {children?.map((child, index) => (
+      <li key={index} className={iteratorClassName}>
+        {child}
+      </li>
+    ))}
+  </ul>
+);

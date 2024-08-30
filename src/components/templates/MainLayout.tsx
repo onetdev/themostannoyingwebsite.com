@@ -1,44 +1,37 @@
-import { FunctionComponent, PropsWithChildren } from 'react';
-import { styled } from 'styled-components';
+import { FunctionComponent, PropsWithoutRef } from 'react';
 import { Analytics } from '@vercel/analytics/react';
 
 import CookieBar from '@/components/organisms/CookieConsent';
-import { ChatBubble } from '@/features/chat_bubble';
+import { ChatBubbleHost } from '@/features/chat_bubble';
 import { WheelOfFortune } from '@/features/wheel_of_fortune';
-import { cssVars } from '@/styles/theme';
-import { useAppSelector } from '@/redux/hooks';
 import ContainerGiftFlaps from '@/features/gifts/components/ContainerGiftFlaps';
 import Footer from '@/components/organisms/Footer';
 import Header from '@/components/organisms/Header';
+import { useExperienceStore } from '@/state/experience';
 
-const StyledLayout = styled.div`
-  position: relative;
-  min-height: 100vh;
-  max-width: ${cssVars.spacing.container};
-  padding: 0 ${cssVars.spacing.gap};
-  margin: 0 auto;
-  background: ${cssVars.color.surface};
-`;
+type Props = PropsWithoutRef<JSX.IntrinsicElements['div']>;
 
-const MainLayout: FunctionComponent<PropsWithChildren> = ({ children }) => {
-  const { wheelOfFortune, mockChat } = useAppSelector(
-    (state) => state.experience,
-  );
+const MainLayout: FunctionComponent<Props> = ({
+  children,
+  className,
+  ...rest
+}) => {
+  const { wheelOfFortune, mockChat } = useExperienceStore();
 
   return (
-    <>
+    <div className={className} {...rest}>
       <Analytics />
       <ContainerGiftFlaps />
-      <StyledLayout>
+      <div className="container relative mx-auto my-0 min-h-screen bg-surface px-2 py-0">
         <Header />
         {children}
         <Footer />
 
         {wheelOfFortune && <WheelOfFortune />}
-        {mockChat && <ChatBubble />}
+        {mockChat && <ChatBubbleHost />}
         <CookieBar />
-      </StyledLayout>
-    </>
+      </div>
+    </div>
   );
 };
 

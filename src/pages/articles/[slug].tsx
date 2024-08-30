@@ -3,11 +3,11 @@ import Error from 'next/error';
 import Head from 'next/head';
 import { useTranslation } from 'next-i18next';
 
-import { useAppSelector } from '@/redux/hooks';
 import LockedContent from '@/components/templates/LockedContent';
-import ArticleService from '@/features/articles/services/ArticleService';
-import { selectContentPaywall } from '@/redux/selectors/experience';
+import { ArticleService } from '@/features/articles';
 import { getI18nProps } from '@/utils/i18n';
+import styles from '@/styles/content.module.css';
+import { useExperienceStore } from '@/state/experience';
 
 type Props = {
   slug: string;
@@ -15,19 +15,19 @@ type Props = {
 
 const ArticleItem: NextPage<Props> = ({ slug }: Props) => {
   const { t } = useTranslation('common');
-  const showLocker = useAppSelector(selectContentPaywall);
+  const showLocker = useExperienceStore((state) => state.contentPaywall);
   const article = ArticleService.getBySlug(slug);
 
   if (!article) {
     return <Error statusCode={404} />;
   }
 
+  const pageTitle = `${article.title} - ${t('meta.title')}`;
+
   return (
     <main>
       <Head>
-        <title>
-          {article.title} - {t('meta.title')}
-        </title>
+        <title>{pageTitle}</title>
         <meta property="og:type" content="article" />
         <meta name="og:description" content={article.intro || article.title} />
         {article.coverImage && (
@@ -35,9 +35,11 @@ const ArticleItem: NextPage<Props> = ({ slug }: Props) => {
         )}
       </Head>
       <h1>{article.title}</h1>
-      <span>Published on {article.date.toDateString()}</span>
+      <span className="mb-5 block">
+        Published on {article.date.toDateString()}
+      </span>
       <LockedContent initialMaxHeight={200} active={showLocker}>
-        {article.body}
+        <div className={styles['content']}>{article.body}</div>
       </LockedContent>
     </main>
   );
