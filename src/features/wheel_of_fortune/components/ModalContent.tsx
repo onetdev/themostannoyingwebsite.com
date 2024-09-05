@@ -1,4 +1,4 @@
-import { FunctionComponent, PropsWithoutRef, useState } from 'react';
+import { FunctionComponent, useState } from 'react';
 import Confetti from 'react-confetti';
 
 import { getWeightedRandom } from '@/utils/math';

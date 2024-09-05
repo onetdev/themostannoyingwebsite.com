@@ -57,11 +57,5 @@ module.exports = {
         ignoreRestSiblings: true,
       },
     ],
-    '@typescript-eslint/no-var-requires': [
-      'error',
-      {
-        allow: ['next/jest', './next-i18next.config'],
-      },
-    ],
   },
 };
