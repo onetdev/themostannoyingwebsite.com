@@ -10,7 +10,7 @@ import Button from '@/components/atoms/Button';
 
 import EscapingElement from './EscapingElement';
 
-type Props = Omit<JSX.IntrinsicElements['div'], 'ref' | 'styles'> &
+type Props = Omit<JSXProxyProps<'div'>, 'styles'> &
   PropsWithChildren<{
     active?: boolean;
     initialMaxHeight: number;

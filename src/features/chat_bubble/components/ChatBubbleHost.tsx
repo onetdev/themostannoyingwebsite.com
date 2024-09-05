@@ -9,7 +9,7 @@ import {
 import useAudio from '@/hooks/useAudio';
 import History from '@/features/chat_bubble/components/HistoryOverlay';
 import useSendNotification from '@/hooks/useSendNotification';
-import { usePreferenceStore } from '@/state/preferences';
+import { useUserPreferencesStore } from '@/state/user_preferences';
 import { useRuntimeStore } from '@/state/runtime';
 import Icon from '@/components/atoms/Icon';
 
@@ -39,7 +39,7 @@ const initialMessage = () => ({
  * to the history now with a notification sound.
  */
 const ChatBubbleHost: FunctionComponent = () => {
-  const enableSound = usePreferenceStore((state) => state.enableSound);
+  const enableSound = useUserPreferencesStore((state) => state.enableSound);
   const hasInteracted = useRuntimeStore((state) => state.interactionUnlocked);
   const [history, setHistory] = useState([initialMessage()] as HistoryItem[]);
   const [isOpen, setIsOpen] = useState(false);

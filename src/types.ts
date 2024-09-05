@@ -1,3 +1,5 @@
+import type { PropsWithoutRef, JSX } from 'react';
+
 export type ArticleCore = {
   slug: string;
   url: string;
@@ -18,4 +20,10 @@ export type ArticleStatic = ArticleCore & {
   body: string;
 };
 
-export type Theme = 'light' | 'dark';
+declare global {
+  type JSXProxyProps<T extends keyof JSX.IntrinsicElements> = PropsWithoutRef<
+    JSX.IntrinsicElements[T]
+  >;
+
+  type AppTheme = 'light' | 'dark';
+}

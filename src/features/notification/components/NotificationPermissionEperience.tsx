@@ -4,7 +4,7 @@ import { FunctionComponent, useRef, useState } from 'react';
 
 import { getNotificationPermissionState } from '@/utils/permission';
 import useScrollDistanceTrigger from '@/hooks/useScrollDistanceTrigger';
-import { useGrantStore } from '@/state/grant';
+import { useUserGrantsStore } from '@/state/user_grants';
 
 import ManualModal from './ManualModal';
 
@@ -20,7 +20,7 @@ const NotificationPermissionExperience: FunctionComponent<
     onTrigger: () => enterFlow(),
   });
   const [manualModalVisible, setManualModalVisible] = useState(false);
-  const syncPermissions = useGrantStore((state) => state.syncPermissions);
+  const syncPermissions = useUserGrantsStore((state) => state.syncPermissions);
 
   const enterFlow = async () => {
     if (initialState !== 'default') {

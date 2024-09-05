@@ -1,4 +1,4 @@
-import { FunctionComponent, PropsWithoutRef } from 'react';
+import { FunctionComponent } from 'react';
 import { useTheme } from 'next-themes';
 
 type Props = {
@@ -27,9 +27,10 @@ const DarkModeToggle: FunctionComponent<Props> = ({ className }) => {
   );
 };
 
-const SelectOption: FunctionComponent<
-  PropsWithoutRef<JSX.IntrinsicElements['span']>
-> = ({ children, ...rest }) => {
+const SelectOption: FunctionComponent<JSXProxyProps<'span'>> = ({
+  children,
+  ...rest
+}) => {
   return (
     <span className="z-10 grow cursor-pointer text-center text-base" {...rest}>
       {children}

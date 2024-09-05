@@ -1,4 +1,4 @@
-import { FunctionComponent, PropsWithoutRef } from 'react';
+import { FunctionComponent } from 'react';
 import { Analytics } from '@vercel/analytics/react';
 
 import CookieBar from '@/components/organisms/CookieConsent';
@@ -7,16 +7,16 @@ import { WheelOfFortune } from '@/features/wheel_of_fortune';
 import ContainerGiftFlaps from '@/features/gifts/components/ContainerGiftFlaps';
 import Footer from '@/components/organisms/Footer';
 import Header from '@/components/organisms/Header';
-import { useExperienceStore } from '@/state/experience';
+import { useExperienceFlagsStore } from '@/state/experience_flags';
 
-type Props = PropsWithoutRef<JSX.IntrinsicElements['div']>;
+type Props = JSXProxyProps<'div'>;
 
 const MainLayout: FunctionComponent<Props> = ({
   children,
   className,
   ...rest
 }) => {
-  const { wheelOfFortune, mockChat } = useExperienceStore();
+  const { wheelOfFortune, mockChat } = useExperienceFlagsStore();
 
   return (
     <div className={className} {...rest}>

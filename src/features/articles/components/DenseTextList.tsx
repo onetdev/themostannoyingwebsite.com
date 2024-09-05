@@ -1,9 +1,9 @@
-import { FunctionComponent, PropsWithoutRef } from 'react';
+import { FunctionComponent } from 'react';
 
 import { TextListItem } from '@/features/articles/components/TextListItem';
 import { ArticleCore } from '@/types';
 
-type Props = PropsWithoutRef<JSX.IntrinsicElements['ul']> & {
+type Props = JSXProxyProps<'ul'> & {
   items: ArticleCore[];
 };
 

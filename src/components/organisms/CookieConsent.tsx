@@ -1,11 +1,13 @@
 import Link from 'next/link';
 import { FunctionComponent } from 'react';
 
-import { useGrantStore } from '@/state/grant';
+import { useUserGrantsStore } from '@/state/user_grants';
 
 const CookieBar: FunctionComponent = () => {
-  const completed = useGrantStore((state) => state.reviewCompleted);
-  const setReviewCompleted = useGrantStore((state) => state.setReviewCompleted);
+  const completed = useUserGrantsStore((state) => state.reviewCompleted);
+  const setReviewCompleted = useUserGrantsStore(
+    (state) => state.setReviewCompleted,
+  );
 
   const close = () => setReviewCompleted(true);
 

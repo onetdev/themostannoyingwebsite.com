@@ -2,7 +2,7 @@
 
 import { useTranslation } from 'next-i18next';
 
-import { useExperienceStore } from '@/state/experience';
+import { useExperienceFlagsStore } from '@/state/experience_flags';
 import { useRuntimeStore } from '@/state/runtime';
 
 import ArrayPagedTitle from './ArrayPagedTitle';
@@ -14,7 +14,9 @@ import GlitchyTitle from './GlitchyTitle';
  * is quite low and the title is not updated as frequently as I would like.
  */
 const PageTitleExperience = () => {
-  const pageTitleExperience = useExperienceStore((state) => state.pageTitle);
+  const pageTitleExperience = useExperienceFlagsStore(
+    (state) => state.pageTitle,
+  );
   const isVisible = useRuntimeStore((state) => state.document.isVisible);
   const hasInteracted = useRuntimeStore((state) => state.interactionUnlocked);
   const { t } = useTranslation('common');

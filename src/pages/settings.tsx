@@ -6,28 +6,28 @@ import { FunctionComponent, PropsWithChildren } from 'react';
 import { makeI18nStaticProps } from '@/utils/i18n';
 import SiteTitle from '@/components/atoms/SiteTitle';
 import FormCheckbox from '@/components/atoms/FormCheckbox';
-import { useGrantStore } from '@/state/grant';
-import { useExperienceStore } from '@/state/experience';
-import { usePreferenceStore } from '@/state/preferences';
+import { useUserGrantsStore } from '@/state/user_grants';
+import { useExperienceFlagsStore } from '@/state/experience_flags';
+import { useUserPreferencesStore } from '@/state/user_preferences';
 import { useRuntimeStore } from '@/state/runtime';
 import DarkModeToggle from '@/components/molecules/DarkModeToggle';
 
 const PrivacyPolicy: NextPage = () => {
-  const experience = useExperienceStore();
-  const grant = useGrantStore();
-  const preference = usePreferenceStore();
+  const experience = useExperienceFlagsStore();
+  const grant = useUserGrantsStore();
+  const preference = useUserPreferencesStore();
   const runtime = useRuntimeStore();
   const { t } = useTranslation('settings');
   const { t: tCommon } = useTranslation('common');
 
-  // Preferences
+  // User preferences
   const onFlashingContentsChange = (value: boolean) =>
     preference.setEnableFlashing(value);
   const onSoundChange = (value: boolean) => preference.setEnableSound(value);
   const onAdultFilterChange = (value: boolean) =>
     preference.setAdultFilter(value);
 
-  // Experience block
+  // Experience flags
   const onAlowMockChatChange = (value: boolean) =>
     experience.setMockChat(value);
   const onWheelOfFortuneChange = (value: boolean) =>

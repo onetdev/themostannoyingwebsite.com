@@ -3,7 +3,7 @@ import { ThemeProvider } from 'next-themes';
 
 import ExperienceProvider from '@/providers/ExperienceProvider';
 
-const ProviderContainer: FunctionComponent<PropsWithChildren> = ({
+const RootProviderContainer: FunctionComponent<PropsWithChildren> = ({
   children,
 }) => {
   return (
@@ -13,4 +13,4 @@ const ProviderContainer: FunctionComponent<PropsWithChildren> = ({
   );
 };
 
-export default ProviderContainer;
+export default RootProviderContainer;

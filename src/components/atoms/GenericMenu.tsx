@@ -1,6 +1,6 @@
 import { FunctionComponent } from 'react';
 
-type Props = Omit<JSX.IntrinsicElements['ul'], 'ref' | 'children'> & {
+type Props = Omit<JSXProxyProps<'ul'>, 'children'> & {
   children?: JSX.Element[];
   iteratorClassName?: string;
 };

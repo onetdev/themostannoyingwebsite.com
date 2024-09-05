@@ -3,14 +3,14 @@ import Link from 'next/link';
 import MarqueePlugin from 'react-fast-marquee';
 
 import { ArticleService } from '@/features/articles';
-import { usePreferenceStore } from '@/state/preferences';
+import { useUserPreferencesStore } from '@/state/user_preferences';
 
 type Props = {
   className?: string;
 };
 
 const Marquee: FunctionComponent<Props> = ({ className }) => {
-  const flashing = usePreferenceStore((state) => state.enableFlashing);
+  const flashing = useUserPreferencesStore((state) => state.enableFlashing);
   const [items] = useState(
     ArticleService.getAllFiltered({ isHighlighted: true }),
   );

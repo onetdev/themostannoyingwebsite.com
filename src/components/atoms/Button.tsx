@@ -1,6 +1,6 @@
-import { FunctionComponent, PropsWithoutRef } from 'react';
+import { FunctionComponent } from 'react';
 
-type Props = PropsWithoutRef<JSX.IntrinsicElements['button']> & {
+type Props = JSXProxyProps<'button'> & {
   variant?: 'primary' | 'secondary' | 'tertiary';
 };
 

@@ -1,12 +1,11 @@
 import Link from 'next/link';
 import Image from 'next/image';
-import { PropsWithoutRef } from 'react';
 
 import { ArticleCore } from '@/types';
 
 import { CoverPlaceholder } from './CoverPlaceholder';
 
-type Props = PropsWithoutRef<JSX.IntrinsicElements['div']> & {
+type Props = JSXProxyProps<'div'> & {
   article: ArticleCore;
 };
 

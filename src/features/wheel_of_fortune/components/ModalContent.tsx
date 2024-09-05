@@ -29,7 +29,7 @@ const getItems = (hueStart: number, hueEnd: number, numItems: number) => {
   return items;
 };
 
-type Props = PropsWithoutRef<JSX.IntrinsicElements['div']> & {
+type Props = JSXProxyProps<'div'> & {
   onClose?: () => void;
 };
 

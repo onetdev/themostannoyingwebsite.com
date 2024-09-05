@@ -1,8 +1,6 @@
-import { Theme } from './types';
-
 const config = {
   contactEmail: 'info@themostannoyingwebsite.com',
-  defaultColorScheme: 'dark' as Theme,
+  defaultColorScheme: 'dark' as AppTheme,
   isBrowser: typeof window !== 'undefined',
 };
 

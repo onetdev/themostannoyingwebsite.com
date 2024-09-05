@@ -53,7 +53,12 @@ const HistoryOverlay: FunctionComponent<Props> = ({
           history
             .sort((a, b) => a.time.getTime() - b.time.getTime())
             .map((item, index) => <MessageBubble key={index} item={item} />)}
-        {showTyping && <DotDotDotText className="block text-base italic" />}
+        {showTyping && (
+          <DotDotDotText
+            message="Agen is typing"
+            className="block text-base italic"
+          />
+        )}
       </div>
       <MessageForm
         className="flex justify-between p-3 pl-5 shadow-sm"

@@ -6,7 +6,7 @@ import {
   getNotificationPermissionState,
 } from '@/utils/permission';
 
-export interface GrantState {
+export interface UserGrantsState {
   reviewCompleted: boolean;
   cookies: {
     essential: boolean;
@@ -17,15 +17,17 @@ export interface GrantState {
   };
 }
 
-export interface GrantStateActions {
+export interface UserGrantsStateActions {
   setReviewCompleted: (reviewCompleted: boolean) => void;
-  setCookieConsent: (cookies: Omit<GrantState['cookies'], 'essential'>) => void;
+  setCookieConsent: (
+    cookies: Omit<UserGrantsState['cookies'], 'essential'>,
+  ) => void;
   syncNotificationPermission: () => void;
   syncLocationPermission: () => void;
   syncPermissions: () => void;
 }
 
-const initialState: GrantState = {
+const initialState: UserGrantsState = {
   reviewCompleted: false,
   cookies: {
     essential: true,
@@ -33,8 +35,8 @@ const initialState: GrantState = {
   permission: {},
 };
 
-export const useGrantStore = create(
-  persist<GrantState & GrantStateActions>(
+export const useUserGrantsStore = create(
+  persist<UserGrantsState & UserGrantsStateActions>(
     (set) => ({
       ...initialState,
       setReviewCompleted: (reviewCompleted) => set({ reviewCompleted }),
@@ -73,7 +75,7 @@ export const useGrantStore = create(
       },
     }),
     {
-      name: 'zustand-grant-storage',
+      name: 'zustand-user-grants-storage',
       storage: createJSONStorage(() => localStorage),
       version: 1,
     },

@@ -7,7 +7,7 @@ import LockedContent from '@/components/templates/LockedContent';
 import { ArticleService } from '@/features/articles';
 import { getI18nProps } from '@/utils/i18n';
 import styles from '@/styles/content.module.css';
-import { useExperienceStore } from '@/state/experience';
+import { useExperienceFlagsStore } from '@/state/experience_flags';
 
 type Props = {
   slug: string;
@@ -15,7 +15,7 @@ type Props = {
 
 const ArticleItem: NextPage<Props> = ({ slug }: Props) => {
   const { t } = useTranslation('common');
-  const showLocker = useExperienceStore((state) => state.contentPaywall);
+  const showLocker = useExperienceFlagsStore((state) => state.contentPaywall);
   const article = ArticleService.getBySlug(slug);
 
   if (!article) {

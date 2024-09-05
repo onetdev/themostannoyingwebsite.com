@@ -1,26 +1,26 @@
 import { create } from 'zustand';
 import { createJSONStorage, persist } from 'zustand/middleware';
 
-export interface PreferenceState {
+export interface UserPreferencesState {
   enableSound: boolean;
   enableFlashing: boolean;
   adultFilter: boolean;
 }
 
-export interface PreferenceStateActions {
+export interface UserPreferencesStateActions {
   setEnableSound: (enableSound: boolean) => void;
   setEnableFlashing: (enableFlashing: boolean) => void;
   setAdultFilter: (adultFilter: boolean) => void;
 }
 
-const initialState: PreferenceState = {
+const initialState: UserPreferencesState = {
   enableSound: true,
   enableFlashing: false,
   adultFilter: true,
 };
 
-export const usePreferenceStore = create(
-  persist<PreferenceState & PreferenceStateActions>(
+export const useUserPreferencesStore = create(
+  persist<UserPreferencesState & UserPreferencesStateActions>(
     (set) => ({
       ...initialState,
       setEnableSound: (enableSound) => set({ enableSound }),
@@ -28,7 +28,7 @@ export const usePreferenceStore = create(
       setAdultFilter: (adultFilter) => set({ adultFilter }),
     }),
     {
-      name: 'zustand-preference-storage',
+      name: 'zustand-user-preferences-storage',
       storage: createJSONStorage(() => localStorage),
       version: 1,
     },
