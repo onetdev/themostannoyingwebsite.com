@@ -17,5 +17,3 @@ export type ArticleStatic = ArticleCore & {
   date: string;
   body: string;
 };
-
-export type Theme = 'light' | 'dark';

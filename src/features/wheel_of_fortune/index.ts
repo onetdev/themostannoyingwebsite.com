@@ -1,1 +1,1 @@
-export { default as WheelOfFortune } from './components/ActionButton';
+export { default as WheelOfFortuneHost } from './WheelOfFortuneHost';

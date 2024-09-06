@@ -8,14 +8,14 @@ import {
   useState,
 } from 'react';
 
-import useDragTracker from '@/hooks/useDragTracker';
-import { distance, random } from '@/utils/math';
+import DynamicWheelSvg, { Item } from './DynamicWheelSvg';
+
 import Button from '@/components/atoms/Button';
 import Icon from '@/components/atoms/Icon';
+import useDragTracker from '@/hooks/useDragTracker';
+import { distance, random } from '@/utils/math';
 
-import Wheel, { Item } from './Wheel';
-
-type Props = {
+type AnimatedWheelProps = {
   items: Item[];
   onSpinCompleted: (result: Item) => void;
   onStateChange: (state: AnimatedWheelState) => void;
@@ -24,7 +24,7 @@ type Props = {
 };
 
 export type AnimatedWheelState = 'ready' | 'spinning' | 'completed';
-const AnimatedWheel: FunctionComponent<Props> = ({
+const AnimatedWheel: FunctionComponent<AnimatedWheelProps> = ({
   items,
   onSpinCompleted,
   onStateChange,
@@ -120,7 +120,7 @@ const AnimatedWheel: FunctionComponent<Props> = ({
         style={{ lineHeight: 0 }}
         ref={rotatorRef}>
         <div className="select-none" style={animStyles}>
-          <Wheel
+          <DynamicWheelSvg
             width={500}
             height={500}
             items={items}

@@ -1,22 +1,22 @@
-import { FunctionComponent, PropsWithoutRef } from 'react';
 import { Analytics } from '@vercel/analytics/react';
+import { FunctionComponent } from 'react';
 
 import CookieBar from '@/components/organisms/CookieConsent';
-import { ChatBubbleHost } from '@/features/chat_bubble';
-import { WheelOfFortune } from '@/features/wheel_of_fortune';
-import ContainerGiftFlaps from '@/features/gifts/components/ContainerGiftFlaps';
 import Footer from '@/components/organisms/Footer';
 import Header from '@/components/organisms/Header';
-import { useExperienceStore } from '@/state/experience';
+import { ChatBubbleHost } from '@/features/chat_bubble';
+import ContainerGiftFlaps from '@/features/gifts/components/ContainerGiftFlaps';
+import { WheelOfFortuneHost } from '@/features/wheel_of_fortune';
+import { useExperienceFlagsStore } from '@/state/experience_flags';
 
-type Props = PropsWithoutRef<JSX.IntrinsicElements['div']>;
+type MainLayoutProps = JSXProxyProps<'div'>;
 
-const MainLayout: FunctionComponent<Props> = ({
+const MainLayout: FunctionComponent<MainLayoutProps> = ({
   children,
   className,
   ...rest
 }) => {
-  const { wheelOfFortune, mockChat } = useExperienceStore();
+  const { wheelOfFortune, mockChat } = useExperienceFlagsStore();
 
   return (
     <div className={className} {...rest}>
@@ -27,7 +27,7 @@ const MainLayout: FunctionComponent<Props> = ({
         {children}
         <Footer />
 
-        {wheelOfFortune && <WheelOfFortune />}
+        {wheelOfFortune && <WheelOfFortuneHost />}
         {mockChat && <ChatBubbleHost />}
         <CookieBar />
       </div>

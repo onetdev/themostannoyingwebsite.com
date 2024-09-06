@@ -3,19 +3,21 @@ import Error from 'next/error';
 import Head from 'next/head';
 import { useTranslation } from 'next-i18next';
 
-import LockedContent from '@/components/templates/LockedContent';
 import { ArticleService } from '@/features/articles';
-import { getI18nProps } from '@/utils/i18n';
+import { PartitionalLockedContent } from '@/features/content_limiter';
+import { useExperienceFlagsStore } from '@/state/experience_flags';
 import styles from '@/styles/content.module.css';
-import { useExperienceStore } from '@/state/experience';
+import { getI18nProps } from '@/utils/i18n';
 
-type Props = {
+type ArticleItemProps = {
   slug: string;
 };
 
-const ArticleItem: NextPage<Props> = ({ slug }: Props) => {
+const ArticleItem: NextPage<ArticleItemProps> = ({
+  slug,
+}: ArticleItemProps) => {
   const { t } = useTranslation('common');
-  const showLocker = useExperienceStore((state) => state.contentPaywall);
+  const showLocker = useExperienceFlagsStore((state) => state.contentPaywall);
   const article = ArticleService.getBySlug(slug);
 
   if (!article) {
@@ -38,14 +40,14 @@ const ArticleItem: NextPage<Props> = ({ slug }: Props) => {
       <span className="mb-5 block">
         Published on {article.date.toDateString()}
       </span>
-      <LockedContent initialMaxHeight={200} active={showLocker}>
+      <PartitionalLockedContent initialMaxHeight={200} active={showLocker}>
         <div className={styles['content']}>{article.body}</div>
-      </LockedContent>
+      </PartitionalLockedContent>
     </main>
   );
 };
 
-export const getServerSideProps: GetServerSideProps<Props> = async (
+export const getServerSideProps: GetServerSideProps<ArticleItemProps> = async (
   context,
 ) => {
   const slug = context.query.slug as string;

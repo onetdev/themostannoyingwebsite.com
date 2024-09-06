@@ -1,12 +1,13 @@
 import { DetailedHTMLProps, InputHTMLAttributes } from 'react';
 
-export type FormCheckbox = DetailedHTMLProps<
+export type Checkbox = DetailedHTMLProps<
   InputHTMLAttributes<HTMLInputElement>,
   HTMLInputElement
 > & {
   onValueChange?: (value: boolean) => void;
 };
-const FormCheckbox = ({ onChange, onValueChange, ...rest }: FormCheckbox) => {
+
+const Checkbox = ({ onChange, onValueChange, ...rest }: Checkbox) => {
   const onChangeProxy = (e: React.ChangeEvent<HTMLInputElement>) => {
     onChange?.(e);
     onValueChange?.(e.target.checked);
@@ -15,4 +16,4 @@ const FormCheckbox = ({ onChange, onValueChange, ...rest }: FormCheckbox) => {
   return <input type="checkbox" onChange={onChangeProxy} {...rest} />;
 };
 
-export default FormCheckbox;
+export default Checkbox;

@@ -1,12 +1,15 @@
 import Link from 'next/link';
+import { FunctionComponent } from 'react';
 
-import { ArticleCore } from '@/types';
+import { ArticleCore } from '@/features/articles/types';
 
-type Props = {
+type TextListItemProps = {
   article: ArticleCore;
 };
 
-export const TextListItem = ({ article }: Props) => {
+export const TextListItem: FunctionComponent<TextListItemProps> = ({
+  article,
+}) => {
   return (
     <>
       <Link href={article.url} passHref>

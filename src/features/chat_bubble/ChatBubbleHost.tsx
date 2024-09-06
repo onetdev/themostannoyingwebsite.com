@@ -1,3 +1,4 @@
+import { useTranslation } from 'next-i18next';
 import {
   FunctionComponent,
   MouseEventHandler,
@@ -6,28 +7,17 @@ import {
   useState,
 } from 'react';
 
-import useAudio from '@/hooks/useAudio';
-import History from '@/features/chat_bubble/components/HistoryOverlay';
-import useSendNotification from '@/hooks/useSendNotification';
-import { usePreferenceStore } from '@/state/preferences';
-import { useRuntimeStore } from '@/state/runtime';
-import Icon from '@/components/atoms/Icon';
+import { HistoryItem } from './types';
 
-type HistoryItem = { text: string; isUser: boolean; time: Date };
-const messages = [
-  'Come on, let me help you!',
-  `I can't hear you! Speak louder!`,
-  'Who lives under the sea?',
-  'The FitnessGram Pacer Test is a multistage aerobic capacity test that progressively gets more difficult as it continues.',
-  `Sorry, I'm going through a tunnel right now. Can you repeat that?`,
-  `You must have missed my previous messages. I'm kind of lonely.`,
-  `Wondering if my messages got caught in a time warp. Feeling like I'm at a party where everyone's speaking Simlish.`,
-  `My messages must be on a ghosting spree. Feeling ignored.`,
-  `Ah, the sweet sound of silence. My messages must be enjoying their newfound solitude.`,
-];
-const fallbackMessage = `It's nothing, leave me alone. 😤`;
-const initialMessage = () => ({
-  text: 'Hello! I am a chat bubble. I am here to help you. 🤓',
+import Icon from '@/components/atoms/Icon';
+import History from '@/features/chat_bubble/components/HistoryOverlay';
+import useAudio from '@/hooks/useAudio';
+import useSendNotification from '@/hooks/useSendNotification';
+import { useRuntimeStore } from '@/state/runtime';
+import { useUserPreferencesStore } from '@/state/user_preferences';
+
+const initialMessage = (text: string) => ({
+  text,
   isUser: false,
   time: new Date(),
 });
@@ -39,13 +29,21 @@ const initialMessage = () => ({
  * to the history now with a notification sound.
  */
 const ChatBubbleHost: FunctionComponent = () => {
-  const enableSound = usePreferenceStore((state) => state.enableSound);
+  const { t } = useTranslation('chat_bubble');
+  const enableSound = useUserPreferencesStore((state) => state.enableSound);
   const hasInteracted = useRuntimeStore((state) => state.interactionUnlocked);
-  const [history, setHistory] = useState([initialMessage()] as HistoryItem[]);
+  const [history, setHistory] = useState([
+    initialMessage(t('messageInitial')),
+  ] as HistoryItem[]);
   const [isOpen, setIsOpen] = useState(false);
   const [badgeCounter, setBadgeCounter] = useState(1);
   const notification = useSendNotification();
   const notificationSfx = useAudio('/assets/sfx/notification_chord1.wav');
+
+  const messages = t('messages', {
+    returnObjects: true,
+    defaultValue: [],
+  }) as string[];
 
   const preventClose: MouseEventHandler = (e) => e.stopPropagation();
   const addHistory = useCallback((message: string, isUser: boolean) => {
@@ -64,11 +62,11 @@ const ChatBubbleHost: FunctionComponent = () => {
   const sendNotification = useCallback(
     (message: string) => {
       notification.send({
-        title: 'New message!',
+        title: t('newAlert'),
         body: message,
       });
     },
-    [notification],
+    [notification, t],
   );
 
   const addRandomBotMessage = useCallback(() => {
@@ -76,7 +74,7 @@ const ChatBubbleHost: FunctionComponent = () => {
       (message) => !history.some((item) => item.text === message),
     );
     if (pool.length == 0) {
-      pool.push(fallbackMessage);
+      pool.push(t('messageFallback'));
     }
     const randomMessage = pool[Math.floor(Math.random() * pool.length)];
     addHistory(randomMessage, false);
@@ -85,7 +83,7 @@ const ChatBubbleHost: FunctionComponent = () => {
       playSound();
       sendNotification(randomMessage);
     }
-  }, [addHistory, history, isOpen, playSound, sendNotification]);
+  }, [addHistory, history, isOpen, messages, playSound, sendNotification, t]);
 
   const closeHistory = () => setIsOpen(false);
   const toggleHistory: MouseEventHandler<HTMLButtonElement> =

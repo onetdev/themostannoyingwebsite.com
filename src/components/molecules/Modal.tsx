@@ -5,7 +5,7 @@ import DimmerOverlay, {
 } from '@/components/atoms/DimmerOverlay';
 import Icon from '@/components/atoms/Icon';
 
-type ModalProps = DimmerOverlayProps & {
+export type ModalProps = DimmerOverlayProps & {
   title: string;
   actions: React.ReactNode;
 };
@@ -22,14 +22,16 @@ const Modal: FunctionComponent<ModalProps> = ({
       <div
         className="mx-auto flex max-h-full min-w-clamp-400 max-w-full flex-col self-center rounded-lg bg-background"
         onClick={(e) => e.stopPropagation()}>
-        <div className="flex flex-row justify-between border-b border-[red] px-5 py-3 text-xl">
-          <h3>{title}</h3>
+        <div className="flex flex-row justify-between border-b border-on-primary px-5 py-3 text-xl">
+          <h4>{title}</h4>
           <button className="cursor-pointer" onClick={handleClose}>
             <Icon icon="faTimes" size="lg" />
           </button>
         </div>
-        <div className="px-5 py-3">{children}</div>
-        {actions && <div className="px-5 py-3">{actions}</div>}
+        <div className="p-5">{children}</div>
+        {actions && (
+          <div className="border-t border-on-primary px-5 py-4">{actions}</div>
+        )}
       </div>
     </DimmerOverlay>
   );

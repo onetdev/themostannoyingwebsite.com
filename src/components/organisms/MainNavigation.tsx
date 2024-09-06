@@ -1,8 +1,8 @@
-import { useTranslation } from 'next-i18next';
 import Link from 'next/link';
+import { useTranslation } from 'next-i18next';
 import { FunctionComponent } from 'react';
 
-import { GenericMenu } from '@/components/atoms/GenericMenu';
+import { GenericMenu } from '@/components/molecules/GenericMenu';
 
 export type MainNavigationProps = {
   className?: string;

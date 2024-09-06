@@ -1,7 +1,7 @@
 import { create } from 'zustand';
-import { persist, createJSONStorage } from 'zustand/middleware';
+import { createJSONStorage, persist } from 'zustand/middleware';
 
-export interface ExperienceState {
+export interface ExperienceFlagsState {
   contentPaywall: boolean;
   exitPrompt: boolean;
   mockChat: boolean;
@@ -13,15 +13,15 @@ export interface ExperienceState {
   wheelOfFortune: boolean;
 }
 
-export interface ExperienceStateActions {
+export interface ExperienceFlagsStateActions {
   setMockChat: (mockChat: boolean) => void;
   setWheelOfFortune: (wheelOfFortune: boolean) => void;
   setExitPrompt: (exitPrompt: boolean) => void;
   setContentPaywall: (contentPaywall: boolean) => void;
-  setPageTitle: (pageTitle: Partial<ExperienceState['pageTitle']>) => void;
+  setPageTitle: (pageTitle: Partial<ExperienceFlagsState['pageTitle']>) => void;
 }
 
-const initialState: ExperienceState = {
+const initialState: ExperienceFlagsState = {
   contentPaywall: true,
   exitPrompt: true,
   mockChat: true,
@@ -35,8 +35,8 @@ const initialState: ExperienceState = {
   wheelOfFortune: true,
 };
 
-export const useExperienceStore = create(
-  persist<ExperienceState & ExperienceStateActions>(
+export const useExperienceFlagsStore = create(
+  persist<ExperienceFlagsState & ExperienceFlagsStateActions>(
     (set) => ({
       ...initialState,
       setMockChat: (mockChat) => set({ mockChat }),
@@ -52,7 +52,7 @@ export const useExperienceStore = create(
         })),
     }),
     {
-      name: 'zustand-experience-storage',
+      name: 'zustand-experience-flags-storage',
       storage: createJSONStorage(() => localStorage),
       version: 1,
     },

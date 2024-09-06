@@ -1,4 +1,3 @@
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
   faCommentDots,
   faMapMarkerAlt,
@@ -7,6 +6,7 @@ import {
   faTags,
   faTimes,
 } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { FunctionComponent } from 'react';
 
 const iconMap = {
@@ -17,7 +17,7 @@ const iconMap = {
   faTags: faTags,
   faTimes: faTimes,
 };
-type IconAliaseKey = keyof typeof iconMap;
+export type IconAliaseKey = keyof typeof iconMap;
 
 const iconSizeMap: Record<string, string> = {
   xs: 'size-1',
@@ -29,15 +29,15 @@ const iconSizeMap: Record<string, string> = {
   '4xl': 'size-9',
   '5xl': 'size-12',
 };
-type IconSize = keyof typeof iconSizeMap;
+export type IconSize = keyof typeof iconSizeMap;
 
-type Props = {
+export type IconProps = {
   icon: IconAliaseKey;
   size?: IconSize;
   className?: string;
 };
 
-const Icon: FunctionComponent<Props> = ({
+const Icon: FunctionComponent<IconProps> = ({
   icon,
   size = 'md',
   className,

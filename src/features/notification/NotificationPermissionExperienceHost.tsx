@@ -2,16 +2,16 @@
 
 import { FunctionComponent, useRef, useState } from 'react';
 
-import { getNotificationPermissionState } from '@/utils/permission';
-import useScrollDistanceTrigger from '@/hooks/useScrollDistanceTrigger';
-import { useGrantStore } from '@/state/grant';
+import ManualModal from './components/ManualModal';
 
-import ManualModal from './ManualModal';
+import useScrollDistanceTrigger from '@/hooks/useScrollDistanceTrigger';
+import { useUserGrantsStore } from '@/state/user_grants';
+import { getNotificationPermissionState } from '@/utils/permission';
 
 export type NotificationPermissionExperienceProps = {
   scrollDistanceTrigger?: number;
 };
-const NotificationPermissionExperience: FunctionComponent<
+const NotificationPermissionExperienceHost: FunctionComponent<
   NotificationPermissionExperienceProps
 > = ({ scrollDistanceTrigger = 200 }) => {
   const initialState = useRef(getNotificationPermissionState()).current;
@@ -20,7 +20,7 @@ const NotificationPermissionExperience: FunctionComponent<
     onTrigger: () => enterFlow(),
   });
   const [manualModalVisible, setManualModalVisible] = useState(false);
-  const syncPermissions = useGrantStore((state) => state.syncPermissions);
+  const syncPermissions = useUserGrantsStore((state) => state.syncPermissions);
 
   const enterFlow = async () => {
     if (initialState !== 'default') {
@@ -47,4 +47,4 @@ const NotificationPermissionExperience: FunctionComponent<
   );
 };
 
-export default NotificationPermissionExperience;
+export default NotificationPermissionExperienceHost;

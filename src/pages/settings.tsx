@@ -1,33 +1,32 @@
-import ReactTimeAgo from 'react-timeago';
-import { useTranslation } from 'next-i18next';
 import { NextPage } from 'next';
+import { useTranslation } from 'next-i18next';
 import { FunctionComponent, PropsWithChildren } from 'react';
+import ReactTimeAgo from 'react-timeago';
 
-import { makeI18nStaticProps } from '@/utils/i18n';
+import FormCheckbox from '@/components/atoms/form/Checkbox';
 import SiteTitle from '@/components/atoms/SiteTitle';
-import FormCheckbox from '@/components/atoms/FormCheckbox';
-import { useGrantStore } from '@/state/grant';
-import { useExperienceStore } from '@/state/experience';
-import { usePreferenceStore } from '@/state/preferences';
+import DarkModeToggle from '@/root/src/components/atoms/DarkModeToggle';
+import { useExperienceFlagsStore } from '@/state/experience_flags';
 import { useRuntimeStore } from '@/state/runtime';
-import DarkModeToggle from '@/components/molecules/DarkModeToggle';
+import { useUserGrantsStore } from '@/state/user_grants';
+import { useUserPreferencesStore } from '@/state/user_preferences';
+import { makeI18nStaticProps } from '@/utils/i18n';
 
 const PrivacyPolicy: NextPage = () => {
-  const experience = useExperienceStore();
-  const grant = useGrantStore();
-  const preference = usePreferenceStore();
+  const experience = useExperienceFlagsStore();
+  const grant = useUserGrantsStore();
+  const preference = useUserPreferencesStore();
   const runtime = useRuntimeStore();
-  const { t } = useTranslation('settings');
-  const { t: tCommon } = useTranslation('common');
+  const { t } = useTranslation(['settings', 'common']);
 
-  // Preferences
+  // User preferences
   const onFlashingContentsChange = (value: boolean) =>
     preference.setEnableFlashing(value);
   const onSoundChange = (value: boolean) => preference.setEnableSound(value);
   const onAdultFilterChange = (value: boolean) =>
     preference.setAdultFilter(value);
 
-  // Experience block
+  // Experience flags
   const onAlowMockChatChange = (value: boolean) =>
     experience.setMockChat(value);
   const onWheelOfFortuneChange = (value: boolean) =>
@@ -41,29 +40,33 @@ const PrivacyPolicy: NextPage = () => {
 
   return (
     <main>
-      <SiteTitle>{tCommon('navigation.settings')}</SiteTitle>
-      <h1>{t('title')}</h1>
+      <SiteTitle>{t('common:navigation.settings')}</SiteTitle>
+      <h1>{t('settings:title')}</h1>
 
       <div className="grid gap-3 md:grid-cols-2">
-        <Block title={t('preference_section.title')}>
-          <SettingsFormRow label={t('preference_section.color_scheme')}>
+        <Block title={t('settings:section.userPreferences.title')}>
+          <SettingsFormRow
+            label={t('settings:section.userPreferences.colorScheme')}>
             <DarkModeToggle />
           </SettingsFormRow>
-          <SettingsFormRow label={t('preference_section.enable_flashing')}>
+          <SettingsFormRow
+            label={t('settings:section.userPreferences.enableFlashing')}>
             <FormCheckbox
               name="enable_flashing"
               checked={preference.enableFlashing}
               onValueChange={onFlashingContentsChange}
             />
           </SettingsFormRow>
-          <SettingsFormRow label={t('preference_section.enable_sound')}>
+          <SettingsFormRow
+            label={t('settings:section.userPreferences.enableSound')}>
             <FormCheckbox
               name="enable_sound"
               checked={preference.enableSound}
               onValueChange={onSoundChange}
             />
           </SettingsFormRow>
-          <SettingsFormRow label={t('preference_section.adult_filter')}>
+          <SettingsFormRow
+            label={t('settings:section.userPreferences.adultFilter')}>
             <FormCheckbox
               name="adult_filter"
               checked={preference.adultFilter}
@@ -72,8 +75,9 @@ const PrivacyPolicy: NextPage = () => {
           </SettingsFormRow>
         </Block>
 
-        <Block title={t('consent_section.title')}>
-          <SettingsFormRow label={t('consent_section.essential_cookies')}>
+        <Block title={t('settings:section.userGrants.title')}>
+          <SettingsFormRow
+            label={t('settings:section.userGrants.essentialCookies')}>
             <FormCheckbox
               name="essential_cookies"
               checked={grant.cookies.essential}
@@ -81,38 +85,44 @@ const PrivacyPolicy: NextPage = () => {
             />
           </SettingsFormRow>
           <br />
-          <i>{t('consent_section.permission_disclaimer')}</i>
-          <SettingsFormRow label={t('consent_section.notification_permission')}>
-            {`${grant.permission.notification || tCommon('status.not_set')}`}
+          <i>{t('settings:section.userGrants.permissionDisclaimer')}</i>
+          <SettingsFormRow
+            label={t('settings:section.userGrants.notificationPermission')}>
+            {`${grant.permission.notification || t('common:status.notSet')}`}
           </SettingsFormRow>
-          <SettingsFormRow label={t('consent_section.location_permission')}>
-            {`${grant.permission.location || tCommon('status.not_set')}`}
+          <SettingsFormRow
+            label={t('settings:section.userGrants.locationPermission')}>
+            {`${grant.permission.location || t('common:status.notSet')}`}
           </SettingsFormRow>
         </Block>
 
-        <Block title={t('experience_section.title')}>
-          <SettingsFormRow label={t('experience_section.mock_chat')}>
+        <Block title={t('settings:section.experienceFlags.title')}>
+          <SettingsFormRow
+            label={t('settings:section.experienceFlags.mockChat')}>
             <FormCheckbox
               name="mock_chat"
               checked={experience.mockChat}
               onValueChange={onAlowMockChatChange}
             />
           </SettingsFormRow>
-          <SettingsFormRow label={t('experience_section.wheel_of_fortune')}>
+          <SettingsFormRow
+            label={t('settings:section.experienceFlags.wheelOfFortune')}>
             <FormCheckbox
               name="wheel_of_fortune"
               checked={experience.wheelOfFortune}
               onValueChange={onWheelOfFortuneChange}
             />
           </SettingsFormRow>
-          <SettingsFormRow label={t('experience_section.exit_prompt')}>
+          <SettingsFormRow
+            label={t('settings:section.experienceFlags.exitPrompt')}>
             <FormCheckbox
               name="exit_prompt"
               checked={experience.exitPrompt}
               onValueChange={onExitPromptChange}
             />
           </SettingsFormRow>
-          <SettingsFormRow label={t('experience_section.content_paywall')}>
+          <SettingsFormRow
+            label={t('settings:section.experienceFlags.contentPaywall')}>
             <FormCheckbox
               name="content_paywall"
               checked={experience.contentPaywall}
@@ -120,7 +130,9 @@ const PrivacyPolicy: NextPage = () => {
             />
           </SettingsFormRow>
           <SettingsFormRow
-            label={t('experience_section.page_title_inactive_array_paged')}>
+            label={t(
+              'settings:section.experienceFlags.pageTitleInactiveArrayPaged',
+            )}>
             <FormCheckbox
               name="page_title_inactive_array_paged"
               checked={experience.pageTitle.inactiveArrayPaged}
@@ -129,10 +141,10 @@ const PrivacyPolicy: NextPage = () => {
           </SettingsFormRow>
         </Block>
 
-        <Block title={t('runtime_section.title')}>
-          <small>{t('runtime_section.disclaimer')}</small>
+        <Block title={t('settings:section.runtime.title')}>
+          <small>{t('settings:section.runtime.disclaimer')}</small>
           <p>
-            {t('runtime_section.started_ago')}{' '}
+            {t('settings:section.runtime.startedAgo')}{' '}
             {runtime.startedAt ? (
               <ReactTimeAgo date={runtime.startedAt} />
             ) : (
@@ -140,23 +152,23 @@ const PrivacyPolicy: NextPage = () => {
             )}
           </p>
           <p>
-            {t('runtime_section.visibility_seconds')}{' '}
+            {t('settings:section.runtime.visibilitySeconds')}{' '}
             <span>{runtime.document.visibilitySeconds}</span>
           </p>
           <p>
-            {t('runtime_section.is_document_visible')}{' '}
+            {t('settings:section.runtime.isDocumentVisible')}{' '}
             <span>
               {runtime.document.isVisible
-                ? tCommon('response.yes')
-                : tCommon('response.yes')}
+                ? t('common:response.yes')
+                : t('common:response.yes')}
             </span>
           </p>
           <p>
-            {t('runtime_section.interaction_unlocked')}{' '}
+            {t('settings:section.runtime.interactionUnlocked')}{' '}
             <span>
               {runtime.interactionUnlocked
-                ? tCommon('response.yes')
-                : tCommon('response.yes')}
+                ? t('common:response.yes')
+                : t('common:response.yes')}
             </span>
           </p>
         </Block>
@@ -188,5 +200,5 @@ const Block: FunctionComponent<PropsWithChildren<{ title: string }>> = ({
   );
 };
 
-export const getStaticProps = makeI18nStaticProps(['common', 'settings']);
+export const getStaticProps = makeI18nStaticProps(['settings']);
 export default PrivacyPolicy;

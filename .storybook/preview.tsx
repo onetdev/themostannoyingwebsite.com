@@ -3,7 +3,6 @@ import type { Preview } from '@storybook/react';
 import { withThemeByDataAttribute, withThemeFromJSXProvider } from '@storybook/addon-themes';
 
 import '../src/styles/globals.css';
-import ScopedThemeStyle from '../src/styles/ScopedThemeStyle';
 
 const preview: Preview = {
   parameters: {
@@ -31,7 +30,6 @@ const preview: Preview = {
     }),
     (Story) => (
       <>
-        <ScopedThemeStyle />
         <Story />
       </>
     ),

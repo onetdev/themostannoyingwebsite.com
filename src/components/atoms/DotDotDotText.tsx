@@ -1,9 +1,17 @@
-import { FunctionComponent, PropsWithoutRef, useEffect, useState } from 'react';
+import { FunctionComponent, useEffect, useState } from 'react';
 
-const DotDotDotText: FunctionComponent<
-  PropsWithoutRef<JSX.IntrinsicElements['span']> & { stepDurationMs?: number }
-> = ({ stepDurationMs = 400, ...rest }) => {
+export type DotDotDotTextProps = JSXProxyProps<'span'> & {
+  stepDurationMs?: number;
+  message?: string;
+};
+
+const DotDotDotText: FunctionComponent<DotDotDotTextProps> = ({
+  stepDurationMs = 400,
+  message,
+  ...rest
+}) => {
   const [iteration, setIteration] = useState(0);
+
   useEffect(() => {
     const timer = setInterval(() => {
       setIteration((prev) => (prev + 1) % 4);
@@ -11,7 +19,11 @@ const DotDotDotText: FunctionComponent<
     return () => clearInterval(timer);
   }, [stepDurationMs]);
 
-  return <span {...rest}>Agent is typing {'.'.repeat(iteration)}</span>;
+  return (
+    <span {...rest}>
+      {message} {'.'.repeat(iteration)}
+    </span>
+  );
 };
 
 export default DotDotDotText;

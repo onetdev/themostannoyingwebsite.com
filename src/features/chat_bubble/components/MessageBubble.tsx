@@ -3,12 +3,15 @@ import ReactTimeAgo from 'react-timeago';
 
 import { HistoryItem } from '@/features/chat_bubble/types';
 
-type Props = {
+type MessageBubbleProps = {
   item: HistoryItem;
   showTime?: boolean;
 };
 
-const MessageBubble: FunctionComponent<Props> = ({ item, showTime = true }) => {
+const MessageBubble: FunctionComponent<MessageBubbleProps> = ({
+  item,
+  showTime = true,
+}) => {
   return (
     <div className="group" data-user={item.isUser.toString()}>
       <div className="rounded-lg bg-secondary p-3 text-on-secondary group-data-[user=false]:mr-6 group-data-[user=true]:ml-6 group-data-[user=false]:bg-primary group-data-[user=false]:text-on-primary">
