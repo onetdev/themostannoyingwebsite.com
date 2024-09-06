@@ -1,4 +1,4 @@
-import { Article } from '@/types';
+import { Article } from '@/features/articles/types';
 
 export default {
   title: 'Smelly foot breakout in the new Mars colony',

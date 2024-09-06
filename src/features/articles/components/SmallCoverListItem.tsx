@@ -4,7 +4,7 @@ import { FunctionComponent } from 'react';
 
 import { CoverPlaceholder } from './CoverPlaceholder';
 
-import { ArticleCore } from '@/types';
+import { ArticleCore } from '@/features/articles/types';
 
 type SmallCoverListItemProps = {
   article: ArticleCore;

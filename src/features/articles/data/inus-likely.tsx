@@ -1,4 +1,4 @@
-import { Article } from '@/types';
+import { Article } from '@/features/articles/types';
 
 export default {
   title: 'Shiba inues are more likely to commit crimes',

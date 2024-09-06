@@ -1,3 +1,4 @@
+import { useTranslation } from 'next-i18next';
 import React, {
   FunctionComponent,
   PropsWithChildren,
@@ -6,18 +7,19 @@ import React, {
   useState,
 } from 'react';
 
-import EscapingElement from './EscapingElement';
-
 import Button from '@/components/atoms/Button';
+import EscapingElement from '@/components/templates/EscapingElement';
 
-type LockedContentProps = Omit<JSXProxyProps<'div'>, 'styles'> &
+type PartitionalLockedContentProps = Omit<JSXProxyProps<'div'>, 'styles'> &
   PropsWithChildren<{
     active?: boolean;
     initialMaxHeight: number;
     steps?: number;
   }>;
 
-const LockedContent: FunctionComponent<LockedContentProps> = ({
+const PartitionalLockedContent: FunctionComponent<
+  PartitionalLockedContentProps
+> = ({
   children,
   initialMaxHeight,
   steps = 200,
@@ -25,6 +27,7 @@ const LockedContent: FunctionComponent<LockedContentProps> = ({
   className,
   ...rest
 }) => {
+  const { t } = useTranslation(['contentLimiter']);
   const [maxHeight, setMaxHeight] = useState(initialMaxHeight);
   const [isRevealed, setIsRevealed] = useState(false);
   const contentRef = useRef<HTMLDivElement>(null);
@@ -54,23 +57,21 @@ const LockedContent: FunctionComponent<LockedContentProps> = ({
       <div
         data-hidden={!active || isRevealed ? 'true' : 'false'}
         className="absolute bottom-[-500px] left-0 w-full bg-bottom-fadeout opacity-0 transition-all duration-300 ease-in-out data-[hidden=false]:bottom-0 data-[hidden=false]:opacity-100">
-        <h1>
-          You gott pay a $0.69/hour with 24 months of commitment in order to see
-          the next paragraph.
-        </h1>
+        <h1>{t('partitional.title')}</h1>
         <EscapingElement boundingBox={{ left: 0, bottom: 0 }} trigger="hover">
-          <Button variant="primary">Pay! 100% legit and secure*</Button>
+          <Button variant="primary">
+            {t('contentLimiter:partitional.cta')}*
+          </Button>
         </EscapingElement>
         <Button variant="secondary" onClick={handleRevealClick}>
-          Naaah, I&apos;m good, give me free stuff
+          {t('contentLimiter:partitional.cancel')}
         </Button>
         <div className="block text-xs italic">
-          * it might not be as secure and legit but that doesn&apos;t matter
-          because you can&apos;t actually pay on this website.
+          * {t('contentLimiter:partitional.disclaimer')}
         </div>
       </div>
     </div>
   );
 };
 
-export default LockedContent;
+export default PartitionalLockedContent;

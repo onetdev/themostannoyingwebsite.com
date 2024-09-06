@@ -24,6 +24,8 @@ export const makeI18nStaticProps = (
     (typeof i18nConfig.ns === 'string' ? [i18nConfig.ns] : i18nConfig.ns) || [];
   const ns = skipDefaults ? localeNs : [...defaultLoadedNs, ...localeNs];
 
+  console.log(ns);
+
   const getStatisProps: GetStaticProps = async (context) => ({
     props: await getI18nProps(context, ns),
   });

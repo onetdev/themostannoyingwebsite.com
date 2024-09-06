@@ -1,5 +1,3 @@
-import type { JSX, PropsWithoutRef } from 'react';
-
 export type ArticleCore = {
   slug: string;
   url: string;
@@ -19,11 +17,3 @@ export type ArticleStatic = ArticleCore & {
   date: string;
   body: string;
 };
-
-declare global {
-  type JSXProxyProps<T extends keyof JSX.IntrinsicElements> = PropsWithoutRef<
-    JSX.IntrinsicElements[T]
-  >;
-
-  type AppTheme = 'light' | 'dark';
-}

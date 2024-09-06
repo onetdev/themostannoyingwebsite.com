@@ -30,8 +30,8 @@ const MessageForm: FunctionComponent<MessageFormProps> = ({
       <input
         className="grow rounded-none border border-r-0 border-tertiary bg-surface p-3 text-on-surface"
         name="message"
-        title={t('your_message')}
-        placeholder={t('your_message_placeholder')}
+        title={t('yourMessage')}
+        placeholder={t('yourMessagePlaceholder')}
         ref={userMessage}
       />
       <button

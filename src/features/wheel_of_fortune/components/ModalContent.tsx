@@ -17,7 +17,7 @@ const ModalContent: FunctionComponent<ModalContentProps> = ({
   onClose,
   ...rest
 }) => {
-  const { t } = useTranslation('wheel_of_fortune');
+  const { t } = useTranslation(['wheel_of_fortune', 'common']);
   const hueStart = 300; // random(0,360);
   const [state, setState] = useState<AnimatedWheelState>('ready');
   const [prize, setPrize] = useState<Item | undefined>();
@@ -43,7 +43,7 @@ const ModalContent: FunctionComponent<ModalContentProps> = ({
       {...rest}>
       <div className="grow">
         <button
-          aria-label="Close"
+          aria-label={t('common:actions.close')}
           className="absolute right-0 top-0 z-10 cursor-pointer p-3"
           onClick={() => onClose?.()}>
           <Icon icon="faTimes" size="lg" />

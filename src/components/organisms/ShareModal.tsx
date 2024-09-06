@@ -1,5 +1,6 @@
 'use client';
 
+import { useTranslation } from 'next-i18next';
 import { FunctionComponent, useEffect, useState } from 'react';
 import {
   EmailIcon,
@@ -21,7 +22,10 @@ const ShareModal: FunctionComponent<ShareModalProps> = ({
   show,
   handleClose,
 }) => {
+  const { t } = useTranslation();
   const [url, setUrl] = useState<string>('');
+
+  const buttonStyle = 'overflow-hidden rounded-md hover:brightness-125';
 
   useEffect(() => {
     setUrl(window.location.href);
@@ -29,24 +33,23 @@ const ShareModal: FunctionComponent<ShareModalProps> = ({
 
   return (
     <Modal
-      title="Share"
+      title={t('shareModal.title')}
       actions={
-        <>
-          <FacebookShareButton url={url}>
+        <div className="flex gap-3">
+          <FacebookShareButton url={url} className={buttonStyle}>
             <FacebookIcon size={32} />
           </FacebookShareButton>
-          <TwitterShareButton url={url}>
+          <TwitterShareButton url={url} className={buttonStyle}>
             <XIcon size={32} />
           </TwitterShareButton>
-          <EmailShareButton url={url}>
+          <EmailShareButton url={url} className={buttonStyle}>
             <EmailIcon size={32} />
           </EmailShareButton>
-        </>
+        </div>
       }
       visible={show}
       onClose={handleClose}>
-      Sharing is caring, please show this awefully anoying website to your
-      friends.
+      <div className="max-w-manual-modal">{t('shareModal.description')}</div>
     </Modal>
   );
 };

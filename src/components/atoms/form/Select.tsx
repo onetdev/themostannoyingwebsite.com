@@ -1,6 +1,6 @@
 import { DetailedHTMLProps, SelectHTMLAttributes } from 'react';
 
-export type SelectRowProps = DetailedHTMLProps<
+export type SelectProps = DetailedHTMLProps<
   SelectHTMLAttributes<HTMLSelectElement>,
   HTMLSelectElement
 > & {
@@ -9,12 +9,7 @@ export type SelectRowProps = DetailedHTMLProps<
   onValueChange: (value: string) => void;
 };
 
-const FormSelect = ({
-  values,
-  onChange,
-  onValueChange,
-  ...rest
-}: SelectRowProps) => {
+const Select = ({ values, onChange, onValueChange, ...rest }: SelectProps) => {
   const onChangeProxy = (e: React.ChangeEvent<HTMLSelectElement>) => {
     onChange?.(e);
     onValueChange?.(values[e.target.selectedIndex].value);
@@ -31,4 +26,4 @@ const FormSelect = ({
   );
 };
 
-export default FormSelect;
+export default Select;

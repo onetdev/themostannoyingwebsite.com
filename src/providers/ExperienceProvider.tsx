@@ -17,7 +17,7 @@ const ExperienceProvider: FunctionComponent<PropsWithChildren> = ({
   useFirstInteractionListener();
   useDocumentVisibilityListener();
 
-  useBeforeUnload(exitPrompt, t('experiences.exit_prompt'));
+  useBeforeUnload(exitPrompt, t('experiences.exitPrompt'));
 
   return (
     <>

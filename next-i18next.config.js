@@ -9,5 +9,12 @@ module.exports = {
     locales: ['en', 'hu'],
   },
   defaultNS: 'common',
-  ns: ['common', 'chat_bubble', 'gifts', 'notifications', 'wheel_of_fortune'],
+  ns: [
+    'chat_bubble',
+    'common',
+    'content_limiter',
+    'gifts',
+    'notifications',
+    'wheel_of_fortune',
+  ],
 };

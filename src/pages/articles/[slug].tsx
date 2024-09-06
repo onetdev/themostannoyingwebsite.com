@@ -3,8 +3,8 @@ import Error from 'next/error';
 import Head from 'next/head';
 import { useTranslation } from 'next-i18next';
 
-import LockedContent from '@/components/templates/LockedContent';
 import { ArticleService } from '@/features/articles';
+import { PartitionalLockedContent } from '@/features/content_limiter';
 import { useExperienceFlagsStore } from '@/state/experience_flags';
 import styles from '@/styles/content.module.css';
 import { getI18nProps } from '@/utils/i18n';
@@ -40,9 +40,9 @@ const ArticleItem: NextPage<ArticleItemProps> = ({
       <span className="mb-5 block">
         Published on {article.date.toDateString()}
       </span>
-      <LockedContent initialMaxHeight={200} active={showLocker}>
+      <PartitionalLockedContent initialMaxHeight={200} active={showLocker}>
         <div className={styles['content']}>{article.body}</div>
-      </LockedContent>
+      </PartitionalLockedContent>
     </main>
   );
 };

@@ -2,6 +2,8 @@ import Link from 'next/link';
 import { Trans, useTranslation } from 'next-i18next';
 import { FunctionComponent } from 'react';
 
+import config from '@/config';
+
 const Footer: FunctionComponent = () => {
   const { t } = useTranslation(['common']);
 
@@ -13,7 +15,7 @@ const Footer: FunctionComponent = () => {
         components={{
           linkTag: (
             <Link
-              href="https://github.com/onetdev/themostannoyingwebsite.com"
+              href={config.githubRepo}
               target="_blank"
               rel="noopener noreferrer"
             />

@@ -2,6 +2,7 @@ import 'i18next';
 
 import chatBubble from '@/public/locales/en/chat_bubble.json';
 import common from '@/public/locales/en/common.json';
+import contentLimiter from '@/public/locales/en/content_limiter.json';
 import gifts from '@/public/locales/en/gifts.json';
 import notifications from '@/public/locales/en/notifications.json';
 import settings from '@/public/locales/en/settings.json';
@@ -13,6 +14,7 @@ declare module 'i18next' {
     resources: {
       chat_bubble: typeof chatBubble;
       common: typeof common;
+      contentLimiter: typeof contentLimiter;
       gifts: typeof gifts;
       notifications: typeof notifications;
       settings: typeof settings;

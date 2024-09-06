@@ -11,6 +11,7 @@ const DotDotDotText: FunctionComponent<DotDotDotTextProps> = ({
   ...rest
 }) => {
   const [iteration, setIteration] = useState(0);
+
   useEffect(() => {
     const timer = setInterval(() => {
       setIteration((prev) => (prev + 1) % 4);

@@ -1,7 +1,7 @@
 import { FunctionComponent } from 'react';
 
 import { TextListItem } from '@/features/articles/components/TextListItem';
-import { ArticleCore } from '@/types';
+import { ArticleCore } from '@/features/articles/types';
 
 type DenseTextListProps = JSXProxyProps<'ul'> & {
   items: ArticleCore[];

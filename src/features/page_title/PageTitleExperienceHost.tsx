@@ -26,13 +26,13 @@ const PageTitleExperienceHost: FunctionComponent = () => {
   // Anyways, in case of returnObjects being true we need to first convert
   // the magic object into an array.
   const marqueeVariants = Array.from(
-    t('experiences.marquee_variants', {
+    t('experiences.marqueeVariants', {
       returnObjects: true,
       defaultValue: [],
     }),
   ) as string[];
   const arrayPagedVariants = Array.from(
-    t('experiences.array_paged_variants', {
+    t('experiences.arrayPagedVariants', {
       returnObjects: true,
       defaultValue: [],
     }),

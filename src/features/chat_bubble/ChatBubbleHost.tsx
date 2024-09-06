@@ -33,7 +33,7 @@ const ChatBubbleHost: FunctionComponent = () => {
   const enableSound = useUserPreferencesStore((state) => state.enableSound);
   const hasInteracted = useRuntimeStore((state) => state.interactionUnlocked);
   const [history, setHistory] = useState([
-    initialMessage(t('message_initial')),
+    initialMessage(t('messageInitial')),
   ] as HistoryItem[]);
   const [isOpen, setIsOpen] = useState(false);
   const [badgeCounter, setBadgeCounter] = useState(1);
@@ -62,7 +62,7 @@ const ChatBubbleHost: FunctionComponent = () => {
   const sendNotification = useCallback(
     (message: string) => {
       notification.send({
-        title: t('new_alert'),
+        title: t('newAlert'),
         body: message,
       });
     },
@@ -74,7 +74,7 @@ const ChatBubbleHost: FunctionComponent = () => {
       (message) => !history.some((item) => item.text === message),
     );
     if (pool.length == 0) {
-      pool.push(t('message_fallback'));
+      pool.push(t('messageFallback'));
     }
     const randomMessage = pool[Math.floor(Math.random() * pool.length)];
     addHistory(randomMessage, false);

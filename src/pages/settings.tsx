@@ -3,9 +3,9 @@ import { useTranslation } from 'next-i18next';
 import { FunctionComponent, PropsWithChildren } from 'react';
 import ReactTimeAgo from 'react-timeago';
 
-import FormCheckbox from '@/components/atoms/FormCheckbox';
+import FormCheckbox from '@/components/atoms/form/Checkbox';
 import SiteTitle from '@/components/atoms/SiteTitle';
-import DarkModeToggle from '@/components/molecules/DarkModeToggle';
+import DarkModeToggle from '@/root/src/components/atoms/DarkModeToggle';
 import { useExperienceFlagsStore } from '@/state/experience_flags';
 import { useRuntimeStore } from '@/state/runtime';
 import { useUserGrantsStore } from '@/state/user_grants';
@@ -44,13 +44,13 @@ const PrivacyPolicy: NextPage = () => {
       <h1>{t('settings:title')}</h1>
 
       <div className="grid gap-3 md:grid-cols-2">
-        <Block title={t('settings:section.user_preferences.title')}>
+        <Block title={t('settings:section.userPreferences.title')}>
           <SettingsFormRow
-            label={t('settings:section.user_preferences.color_scheme')}>
+            label={t('settings:section.userPreferences.colorScheme')}>
             <DarkModeToggle />
           </SettingsFormRow>
           <SettingsFormRow
-            label={t('settings:section.user_preferences.enable_flashing')}>
+            label={t('settings:section.userPreferences.enableFlashing')}>
             <FormCheckbox
               name="enable_flashing"
               checked={preference.enableFlashing}
@@ -58,7 +58,7 @@ const PrivacyPolicy: NextPage = () => {
             />
           </SettingsFormRow>
           <SettingsFormRow
-            label={t('settings:section.user_preferences.enable_sound')}>
+            label={t('settings:section.userPreferences.enableSound')}>
             <FormCheckbox
               name="enable_sound"
               checked={preference.enableSound}
@@ -66,7 +66,7 @@ const PrivacyPolicy: NextPage = () => {
             />
           </SettingsFormRow>
           <SettingsFormRow
-            label={t('settings:section.user_preferences.adult_filter')}>
+            label={t('settings:section.userPreferences.adultFilter')}>
             <FormCheckbox
               name="adult_filter"
               checked={preference.adultFilter}
@@ -75,9 +75,9 @@ const PrivacyPolicy: NextPage = () => {
           </SettingsFormRow>
         </Block>
 
-        <Block title={t('settings:section.user_grants.title')}>
+        <Block title={t('settings:section.userGrants.title')}>
           <SettingsFormRow
-            label={t('settings:section.user_grants.essential_cookies')}>
+            label={t('settings:section.userGrants.essentialCookies')}>
             <FormCheckbox
               name="essential_cookies"
               checked={grant.cookies.essential}
@@ -85,20 +85,20 @@ const PrivacyPolicy: NextPage = () => {
             />
           </SettingsFormRow>
           <br />
-          <i>{t('settings:section.user_grants.permission_disclaimer')}</i>
+          <i>{t('settings:section.userGrants.permissionDisclaimer')}</i>
           <SettingsFormRow
-            label={t('settings:section.user_grants.notification_permission')}>
-            {`${grant.permission.notification || t('common:status.not_set')}`}
+            label={t('settings:section.userGrants.notificationPermission')}>
+            {`${grant.permission.notification || t('common:status.notSet')}`}
           </SettingsFormRow>
           <SettingsFormRow
-            label={t('settings:section.user_grants.location_permission')}>
-            {`${grant.permission.location || t('common:status.not_set')}`}
+            label={t('settings:section.userGrants.locationPermission')}>
+            {`${grant.permission.location || t('common:status.notSet')}`}
           </SettingsFormRow>
         </Block>
 
-        <Block title={t('settings:section.experience_flags.title')}>
+        <Block title={t('settings:section.experienceFlags.title')}>
           <SettingsFormRow
-            label={t('settings:section.experience_flags.mock_chat')}>
+            label={t('settings:section.experienceFlags.mockChat')}>
             <FormCheckbox
               name="mock_chat"
               checked={experience.mockChat}
@@ -106,7 +106,7 @@ const PrivacyPolicy: NextPage = () => {
             />
           </SettingsFormRow>
           <SettingsFormRow
-            label={t('settings:section.experience_flags.wheel_of_fortune')}>
+            label={t('settings:section.experienceFlags.wheelOfFortune')}>
             <FormCheckbox
               name="wheel_of_fortune"
               checked={experience.wheelOfFortune}
@@ -114,7 +114,7 @@ const PrivacyPolicy: NextPage = () => {
             />
           </SettingsFormRow>
           <SettingsFormRow
-            label={t('settings:section.experience_flags.exit_prompt')}>
+            label={t('settings:section.experienceFlags.exitPrompt')}>
             <FormCheckbox
               name="exit_prompt"
               checked={experience.exitPrompt}
@@ -122,7 +122,7 @@ const PrivacyPolicy: NextPage = () => {
             />
           </SettingsFormRow>
           <SettingsFormRow
-            label={t('settings:section.experience_flags.content_paywall')}>
+            label={t('settings:section.experienceFlags.contentPaywall')}>
             <FormCheckbox
               name="content_paywall"
               checked={experience.contentPaywall}
@@ -131,7 +131,7 @@ const PrivacyPolicy: NextPage = () => {
           </SettingsFormRow>
           <SettingsFormRow
             label={t(
-              'settings:section.experience_flags.page_title_inactive_array_paged',
+              'settings:section.experienceFlags.pageTitleInactiveArrayPaged',
             )}>
             <FormCheckbox
               name="page_title_inactive_array_paged"
@@ -144,7 +144,7 @@ const PrivacyPolicy: NextPage = () => {
         <Block title={t('settings:section.runtime.title')}>
           <small>{t('settings:section.runtime.disclaimer')}</small>
           <p>
-            {t('settings:section.runtime.started_ago')}{' '}
+            {t('settings:section.runtime.startedAgo')}{' '}
             {runtime.startedAt ? (
               <ReactTimeAgo date={runtime.startedAt} />
             ) : (
@@ -152,11 +152,11 @@ const PrivacyPolicy: NextPage = () => {
             )}
           </p>
           <p>
-            {t('settings:section.runtime.visibility_seconds')}{' '}
+            {t('settings:section.runtime.visibilitySeconds')}{' '}
             <span>{runtime.document.visibilitySeconds}</span>
           </p>
           <p>
-            {t('settings:section.runtime.is_document_visible')}{' '}
+            {t('settings:section.runtime.isDocumentVisible')}{' '}
             <span>
               {runtime.document.isVisible
                 ? t('common:response.yes')
@@ -164,7 +164,7 @@ const PrivacyPolicy: NextPage = () => {
             </span>
           </p>
           <p>
-            {t('settings:section.runtime.interaction_unlocked')}{' '}
+            {t('settings:section.runtime.interactionUnlocked')}{' '}
             <span>
               {runtime.interactionUnlocked
                 ? t('common:response.yes')

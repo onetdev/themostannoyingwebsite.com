@@ -39,7 +39,7 @@ const HistoryOverlay: FunctionComponent<HistoryOverlayProps> = ({
     <div className="rounded-lg border border-secondary bg-surface">
       <div className="flex flex-row justify-between p-3 pl-5 shadow-sm">
         <h4 className="text-lg font-bold">
-          {t('hud_title')} <abbr title={t('hud_title_disclaimer')}>*</abbr>
+          {t('hudTitle')} <abbr title={t('hudTitleDisclaimer')}>*</abbr>
         </h4>
         <button onClick={() => onClose()}>
           <Icon icon="faTimes" size="lg" />
@@ -54,7 +54,7 @@ const HistoryOverlay: FunctionComponent<HistoryOverlayProps> = ({
             .map((item, index) => <MessageBubble key={index} item={item} />)}
         {showTyping && (
           <DotDotDotText
-            message={t('agent_is_typing')}
+            message={t('agentIsTyping')}
             className="block text-base italic"
           />
         )}

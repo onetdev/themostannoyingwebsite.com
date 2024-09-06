@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import { FunctionComponent } from 'react';
 
-import { ArticleCore } from '@/types';
+import { ArticleCore } from '@/features/articles/types';
 
 type TextListItemProps = {
   article: ArticleCore;
