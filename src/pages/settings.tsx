@@ -1,16 +1,16 @@
-import ReactTimeAgo from 'react-timeago';
-import { useTranslation } from 'next-i18next';
 import { NextPage } from 'next';
+import { useTranslation } from 'next-i18next';
 import { FunctionComponent, PropsWithChildren } from 'react';
+import ReactTimeAgo from 'react-timeago';
 
-import { makeI18nStaticProps } from '@/utils/i18n';
-import SiteTitle from '@/components/atoms/SiteTitle';
 import FormCheckbox from '@/components/atoms/FormCheckbox';
-import { useUserGrantsStore } from '@/state/user_grants';
-import { useExperienceFlagsStore } from '@/state/experience_flags';
-import { useUserPreferencesStore } from '@/state/user_preferences';
-import { useRuntimeStore } from '@/state/runtime';
+import SiteTitle from '@/components/atoms/SiteTitle';
 import DarkModeToggle from '@/components/molecules/DarkModeToggle';
+import { useExperienceFlagsStore } from '@/state/experience_flags';
+import { useRuntimeStore } from '@/state/runtime';
+import { useUserGrantsStore } from '@/state/user_grants';
+import { useUserPreferencesStore } from '@/state/user_preferences';
+import { makeI18nStaticProps } from '@/utils/i18n';
 
 const PrivacyPolicy: NextPage = () => {
   const experience = useExperienceFlagsStore();

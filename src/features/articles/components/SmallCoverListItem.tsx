@@ -1,10 +1,10 @@
-import Link from 'next/link';
 import Image from 'next/image';
+import Link from 'next/link';
 import { FunctionComponent } from 'react';
 
-import { ArticleCore } from '@/types';
-
 import { CoverPlaceholder } from './CoverPlaceholder';
+
+import { ArticleCore } from '@/types';
 
 type SmallCoverListItemProps = {
   article: ArticleCore;

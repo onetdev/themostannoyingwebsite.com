@@ -1,3 +1,4 @@
+import { useTranslation } from 'next-i18next';
 import {
   FunctionComponent,
   MouseEventHandler,
@@ -5,16 +6,15 @@ import {
   useEffect,
   useState,
 } from 'react';
-import { useTranslation } from 'next-i18next';
-
-import useAudio from '@/hooks/useAudio';
-import History from '@/features/chat_bubble/components/HistoryOverlay';
-import useSendNotification from '@/hooks/useSendNotification';
-import { useUserPreferencesStore } from '@/state/user_preferences';
-import { useRuntimeStore } from '@/state/runtime';
-import Icon from '@/components/atoms/Icon';
 
 import { HistoryItem } from './types';
+
+import Icon from '@/components/atoms/Icon';
+import History from '@/features/chat_bubble/components/HistoryOverlay';
+import useAudio from '@/hooks/useAudio';
+import useSendNotification from '@/hooks/useSendNotification';
+import { useRuntimeStore } from '@/state/runtime';
+import { useUserPreferencesStore } from '@/state/user_preferences';
 
 const initialMessage = (text: string) => ({
   text,

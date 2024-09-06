@@ -1,12 +1,12 @@
 import '@/styles/globals.css';
-import Head from 'next/head';
-import { UserConfig, appWithTranslation } from 'next-i18next';
 import { type AppProps } from 'next/app';
+import Head from 'next/head';
+import { appWithTranslation, UserConfig } from 'next-i18next';
 
-import english from '@/public/locales/en/common.json';
+import GeneratedMetaHead from '@/components/templates/GeneratedMetaHead';
 import MainLayout from '@/components/templates/MainLayout';
 import RootProviderContainer from '@/providers/RootProviderContainer';
-import GeneratedMetaHead from '@/components/templates/GeneratedMetaHead';
+import english from '@/public/locales/en/common.json';
 import nextI18NextConfig from '@/root/next-i18next.config.js';
 
 const TheMostAnnoyingWebsite = ({ Component, pageProps }: AppProps) => {

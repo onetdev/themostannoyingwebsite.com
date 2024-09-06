@@ -1,8 +1,8 @@
 import Link from 'next/link';
 import { FunctionComponent, useState } from 'react';
 
-import ShareModal from '@/components/organisms/ShareModal';
 import { GenericMenu } from '@/components/atoms/GenericMenu';
+import ShareModal from '@/components/organisms/ShareModal';
 
 type UserNavigationProps = {
   className?: string;

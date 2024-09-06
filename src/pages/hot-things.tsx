@@ -1,11 +1,11 @@
-import { useEffect, useRef, useState } from 'react';
-import Image from 'next/image';
 import { NextPage } from 'next';
+import Image from 'next/image';
 import { useTranslation } from 'next-i18next';
+import { useEffect, useRef, useState } from 'react';
 
-import { makeI18nStaticProps } from '@/utils/i18n';
-import SiteTitle from '@/components/atoms/SiteTitle';
 import Icon from '@/components/atoms/Icon';
+import SiteTitle from '@/components/atoms/SiteTitle';
+import { makeI18nStaticProps } from '@/utils/i18n';
 
 const HotThings: NextPage = () => {
   const [isCapable, setIsCapable] = useState(false);

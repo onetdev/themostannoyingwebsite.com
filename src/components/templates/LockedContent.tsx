@@ -6,9 +6,9 @@ import React, {
   useState,
 } from 'react';
 
-import Button from '@/components/atoms/Button';
-
 import EscapingElement from './EscapingElement';
+
+import Button from '@/components/atoms/Button';
 
 type LockedContentProps = Omit<JSXProxyProps<'div'>, 'styles'> &
   PropsWithChildren<{

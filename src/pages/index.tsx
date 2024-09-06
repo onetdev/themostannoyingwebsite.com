@@ -1,10 +1,10 @@
 import { NextPage } from 'next';
 
 import {
-  SmallCoverListItem,
-  LargeCoverItem,
   ArticleService,
   DenseTextList,
+  LargeCoverItem,
+  SmallCoverListItem,
 } from '@/features/articles';
 import { makeI18nStaticProps } from '@/utils/i18n';
 

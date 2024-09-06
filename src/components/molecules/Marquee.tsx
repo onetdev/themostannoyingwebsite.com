@@ -1,5 +1,5 @@
-import { FunctionComponent, useState } from 'react';
 import Link from 'next/link';
+import { FunctionComponent, useState } from 'react';
 import MarqueePlugin from 'react-fast-marquee';
 
 import { ArticleService } from '@/features/articles';

@@ -1,7 +1,7 @@
 import Image from 'next/image';
 import Link from 'next/link';
-import { FunctionComponent } from 'react';
 import { useTranslation } from 'next-i18next';
+import { FunctionComponent } from 'react';
 
 import flapImage from '@/public/assets/images/car-advert.jpg';
 

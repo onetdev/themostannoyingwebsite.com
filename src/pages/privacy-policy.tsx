@@ -1,10 +1,10 @@
 import { NextPage } from 'next';
 import { useTranslation } from 'next-i18next';
 
-import config from '@/config';
-import { makeI18nStaticProps } from '@/utils/i18n';
 import SiteTitle from '@/components/atoms/SiteTitle';
+import config from '@/config';
 import styles from '@/styles/content.module.css';
+import { makeI18nStaticProps } from '@/utils/i18n';
 
 // Privacy policy inspired by https://matomo.org/privacy-policy/
 const PrivacyPolicy: NextPage = () => {

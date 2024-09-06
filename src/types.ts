@@ -1,4 +1,4 @@
-import type { PropsWithoutRef, JSX } from 'react';
+import type { JSX, PropsWithoutRef } from 'react';
 
 export type ArticleCore = {
   slug: string;

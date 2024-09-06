@@ -3,12 +3,12 @@
 import { useTranslation } from 'next-i18next';
 import { FunctionComponent } from 'react';
 
+import ArrayPagedTitle from './components/ArrayPagedTitle';
+import GlitchyTitle from './components/GlitchyTitle';
+import MarqueeTitle from './components/MarqueeTitle';
+
 import { useExperienceFlagsStore } from '@/state/experience_flags';
 import { useRuntimeStore } from '@/state/runtime';
-
-import ArrayPagedTitle from './components/ArrayPagedTitle';
-import MarqueeTitle from './components/MarqueeTitle';
-import GlitchyTitle from './components/GlitchyTitle';
 
 /**
  * Experiments on manipulating the page title. Unfortunatelly the refresh rate

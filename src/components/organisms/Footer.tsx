@@ -1,5 +1,5 @@
-import { Trans, useTranslation } from 'next-i18next';
 import Link from 'next/link';
+import { Trans, useTranslation } from 'next-i18next';
 import { FunctionComponent } from 'react';
 
 const Footer: FunctionComponent = () => {

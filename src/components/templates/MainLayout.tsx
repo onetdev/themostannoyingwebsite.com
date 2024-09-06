@@ -1,12 +1,12 @@
-import { FunctionComponent } from 'react';
 import { Analytics } from '@vercel/analytics/react';
+import { FunctionComponent } from 'react';
 
 import CookieBar from '@/components/organisms/CookieConsent';
-import { ChatBubbleHost } from '@/features/chat_bubble';
-import { WheelOfFortuneHost } from '@/features/wheel_of_fortune';
-import ContainerGiftFlaps from '@/features/gifts/components/ContainerGiftFlaps';
 import Footer from '@/components/organisms/Footer';
 import Header from '@/components/organisms/Header';
+import { ChatBubbleHost } from '@/features/chat_bubble';
+import ContainerGiftFlaps from '@/features/gifts/components/ContainerGiftFlaps';
+import { WheelOfFortuneHost } from '@/features/wheel_of_fortune';
 import { useExperienceFlagsStore } from '@/state/experience_flags';
 
 type MainLayoutProps = JSXProxyProps<'div'>;

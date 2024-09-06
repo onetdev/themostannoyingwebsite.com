@@ -8,12 +8,12 @@ import {
   useState,
 } from 'react';
 
-import useDragTracker from '@/hooks/useDragTracker';
-import { distance, random } from '@/utils/math';
+import DynamicWheelSvg, { Item } from './DynamicWheelSvg';
+
 import Button from '@/components/atoms/Button';
 import Icon from '@/components/atoms/Icon';
-
-import DynamicWheelSvg, { Item } from './DynamicWheelSvg';
+import useDragTracker from '@/hooks/useDragTracker';
+import { distance, random } from '@/utils/math';
 
 type AnimatedWheelProps = {
   items: Item[];

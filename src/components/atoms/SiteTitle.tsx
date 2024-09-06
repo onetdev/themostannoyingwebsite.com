@@ -1,6 +1,6 @@
-import { FunctionComponent, PropsWithChildren } from 'react';
-import { useTranslation } from 'next-i18next';
 import Head from 'next/head';
+import { useTranslation } from 'next-i18next';
+import { FunctionComponent, PropsWithChildren } from 'react';
 
 export type SiteTitleProps = PropsWithChildren;
 

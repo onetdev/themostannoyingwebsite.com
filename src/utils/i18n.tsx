@@ -1,8 +1,7 @@
+import type { GetStaticProps, GetStaticPropsContext } from 'next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 
 import i18nConfig from '@/root/next-i18next.config';
-
-import type { GetStaticProps, GetStaticPropsContext } from 'next';
 
 export const getI18nProps = async (
   context: GetStaticPropsContext,

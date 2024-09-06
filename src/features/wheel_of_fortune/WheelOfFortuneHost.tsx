@@ -1,9 +1,9 @@
 import { FunctionComponent, useState } from 'react';
 
+import ModalContent from './components/ModalContent';
+
 import DimmerOverlay from '@/components/atoms/DimmerOverlay';
 import Icon from '@/components/atoms/Icon';
-
-import ModalContent from './components/ModalContent';
 
 const WheelOfFortuneHost: FunctionComponent = () => {
   const [isOpen, setOpen] = useState(false);

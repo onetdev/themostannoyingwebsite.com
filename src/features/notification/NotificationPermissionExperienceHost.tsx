@@ -2,11 +2,11 @@
 
 import { FunctionComponent, useRef, useState } from 'react';
 
-import { getNotificationPermissionState } from '@/utils/permission';
+import ManualModal from './components/ManualModal';
+
 import useScrollDistanceTrigger from '@/hooks/useScrollDistanceTrigger';
 import { useUserGrantsStore } from '@/state/user_grants';
-
-import ManualModal from './components/ManualModal';
+import { getNotificationPermissionState } from '@/utils/permission';
 
 export type NotificationPermissionExperienceProps = {
   scrollDistanceTrigger?: number;

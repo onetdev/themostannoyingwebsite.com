@@ -1,5 +1,5 @@
-import { FormEventHandler, FunctionComponent, useRef } from 'react';
 import { useTranslation } from 'next-i18next';
+import { FormEventHandler, FunctionComponent, useRef } from 'react';
 
 import Icon from '@/components/atoms/Icon';
 

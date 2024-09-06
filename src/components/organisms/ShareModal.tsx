@@ -3,11 +3,11 @@
 import { FunctionComponent, useEffect, useState } from 'react';
 import {
   EmailIcon,
+  EmailShareButton,
   FacebookIcon,
   FacebookShareButton,
-  XIcon,
   TwitterShareButton,
-  EmailShareButton,
+  XIcon,
 } from 'react-share';
 
 import Modal from '@/components/molecules/Modal';

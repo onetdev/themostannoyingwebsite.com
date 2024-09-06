@@ -1,5 +1,5 @@
-import { FunctionComponent } from 'react';
 import { useTheme } from 'next-themes';
+import { FunctionComponent } from 'react';
 
 export type DarkModeToggleProps = {
   className?: string;

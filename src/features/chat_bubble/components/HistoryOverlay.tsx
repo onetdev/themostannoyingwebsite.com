@@ -1,12 +1,12 @@
-import { FunctionComponent, useEffect, useRef, useState } from 'react';
 import { useTranslation } from 'next-i18next';
+import { FunctionComponent, useEffect, useRef, useState } from 'react';
+
+import MessageBubble from './MessageBubble';
+import MessageForm from './MessageForm';
 
 import DotDotDotText from '@/components/atoms/DotDotDotText';
-import { HistoryItem } from '@/features/chat_bubble/types';
 import Icon from '@/components/atoms/Icon';
-
-import MessageForm from './MessageForm';
-import MessageBubble from './MessageBubble';
+import { HistoryItem } from '@/features/chat_bubble/types';
 
 type HistoryOverlayProps = {
   history: HistoryItem[];

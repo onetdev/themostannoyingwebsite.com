@@ -1,10 +1,10 @@
 'use client';
 
-import { FunctionComponent } from 'react';
 import { useTranslation } from 'next-i18next';
+import { FunctionComponent } from 'react';
 
-import DimmerOverlay from '@/components/atoms/DimmerOverlay';
 import Button from '@/components/atoms/Button';
+import DimmerOverlay from '@/components/atoms/DimmerOverlay';
 
 type ManualModalProps = {
   visible?: boolean;
