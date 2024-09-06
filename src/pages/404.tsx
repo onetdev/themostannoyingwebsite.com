@@ -11,5 +11,5 @@ const Error404: NextPage = () => {
   );
 };
 
-export const getStaticProps = makeI18nStaticProps(['common']);
+export const getStaticProps = makeI18nStaticProps();
 export default Error404;

@@ -1,33 +1,35 @@
 {
   "title": "Settings",
-  "preference_section": {
-    "title": "Preferences",
-    "color_scheme": "Theme / Color scheme",
-    "enable_flashing": "Flashing contents",
-    "enable_sound": "Sound",
-    "adult_filter": "Filter adult contents"
-  },
-  "consent_section": {
-    "title": "Consent and permissions",
-    "permission_disclaimer": "Permission settings are managed by the browser, if you want to change theme you can do it from the site settings in your browser.",
-    "essential_cookies": "Allow essential cookies",
-    "notification_permission": "Notification permission",
-    "location_permission": "Location permission"
-  },
-  "experience_section": {
-    "title": "Experience",
-    "mock_chat": "Mock chat",
-    "wheel_of_fortune": "Wheel of fortune",
-    "exit_prompt": "Exit prompt",
-    "content_paywall": "Content paywall",
-    "page_title_inactive_array_paged": "Alternative title when tab is inactive"
-  },
-  "runtime_section": {
-    "title": "About this session",
-    "disclaimer": "These values reset every single visit and acts as a bit of debug info.",
-    "started_ago": "Started:",
-    "visibility_seconds": "Elapsed seconds:",
-    "is_document_visible": "Is this window in focus?",
-    "interaction_unlocked": "Had first interaction?"
+  "section": {
+    "user_preferences": {
+      "title": "Preferences",
+      "color_scheme": "Theme / Color scheme",
+      "enable_flashing": "Flashing contents",
+      "enable_sound": "Sound",
+      "adult_filter": "Filter adult contents"
+    },
+    "user_grants": {
+      "title": "Consent and permissions",
+      "permission_disclaimer": "Permission settings are managed by the browser, if you want to change theme you can do it from the site settings in your browser.",
+      "essential_cookies": "Allow essential cookies",
+      "notification_permission": "Notification permission",
+      "location_permission": "Location permission"
+    },
+    "experience_flags": {
+      "title": "Experience",
+      "mock_chat": "Mock chat",
+      "wheel_of_fortune": "Wheel of fortune",
+      "exit_prompt": "Exit prompt",
+      "content_paywall": "Content paywall",
+      "page_title_inactive_array_paged": "Alternative title when tab is inactive"
+    },
+    "runtime": {
+      "title": "About this session",
+      "disclaimer": "These values reset every single visit and acts as a bit of debug info.",
+      "started_ago": "Started:",
+      "visibility_seconds": "Elapsed seconds:",
+      "is_document_visible": "Is this window in focus?",
+      "interaction_unlocked": "Had first interaction?"
+    }
   }
 }

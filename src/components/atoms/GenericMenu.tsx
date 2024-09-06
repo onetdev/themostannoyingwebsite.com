@@ -1,10 +1,11 @@
 import { FunctionComponent } from 'react';
 
-type Props = Omit<JSXProxyProps<'ul'>, 'children'> & {
+export type GenericMenuProps = Omit<JSXProxyProps<'ul'>, 'children'> & {
   children?: JSX.Element[];
   iteratorClassName?: string;
 };
-export const GenericMenu: FunctionComponent<Props> = ({
+
+export const GenericMenu: FunctionComponent<GenericMenuProps> = ({
   children,
   className,
   iteratorClassName,

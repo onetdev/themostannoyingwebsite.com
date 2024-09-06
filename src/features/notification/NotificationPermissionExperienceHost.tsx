@@ -6,12 +6,12 @@ import { getNotificationPermissionState } from '@/utils/permission';
 import useScrollDistanceTrigger from '@/hooks/useScrollDistanceTrigger';
 import { useUserGrantsStore } from '@/state/user_grants';
 
-import ManualModal from './ManualModal';
+import ManualModal from './components/ManualModal';
 
 export type NotificationPermissionExperienceProps = {
   scrollDistanceTrigger?: number;
 };
-const NotificationPermissionExperience: FunctionComponent<
+const NotificationPermissionExperienceHost: FunctionComponent<
   NotificationPermissionExperienceProps
 > = ({ scrollDistanceTrigger = 200 }) => {
   const initialState = useRef(getNotificationPermissionState()).current;
@@ -47,4 +47,4 @@ const NotificationPermissionExperience: FunctionComponent<
   );
 };
 
-export default NotificationPermissionExperience;
+export default NotificationPermissionExperienceHost;

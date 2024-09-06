@@ -1,4 +1,5 @@
 import { FunctionComponent, useEffect, useRef, useState } from 'react';
+import { useTranslation } from 'next-i18next';
 
 import DotDotDotText from '@/components/atoms/DotDotDotText';
 import { HistoryItem } from '@/features/chat_bubble/types';
@@ -20,6 +21,7 @@ const HistoryOverlay: FunctionComponent<Props> = ({
 }) => {
   const [showTyping, setShowTyping] = useState(true);
   const pagerRef = useRef<HTMLDivElement>(null);
+  const { t } = useTranslation('chat_bubble');
 
   useEffect(() => {
     setShowTyping(history[history.length - 1]?.isUser ?? false);
@@ -37,10 +39,7 @@ const HistoryOverlay: FunctionComponent<Props> = ({
     <div className="rounded-lg border border-secondary bg-surface">
       <div className="flex flex-row justify-between p-3 pl-5 shadow-sm">
         <h4 className="text-lg font-bold">
-          Chat with a &quot;100% real huuman&quot;{' '}
-          <abbr title="Disclaimer: Actually, this is a bot that almost feels like a real human (not a smart one) but it's still just a bot">
-            *
-          </abbr>
+          {t('hud_title')} <abbr title={t('hud_title_disclaimer')}>*</abbr>
         </h4>
         <button onClick={() => onClose()}>
           <Icon icon="faTimes" size="lg" />
@@ -55,7 +54,7 @@ const HistoryOverlay: FunctionComponent<Props> = ({
             .map((item, index) => <MessageBubble key={index} item={item} />)}
         {showTyping && (
           <DotDotDotText
-            message="Agen is typing"
+            message={t('agent_is_typing')}
             className="block text-base italic"
           />
         )}

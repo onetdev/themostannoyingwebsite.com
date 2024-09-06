@@ -3,7 +3,7 @@ import { Analytics } from '@vercel/analytics/react';
 
 import CookieBar from '@/components/organisms/CookieConsent';
 import { ChatBubbleHost } from '@/features/chat_bubble';
-import { WheelOfFortune } from '@/features/wheel_of_fortune';
+import { WheelOfFortuneHost } from '@/features/wheel_of_fortune';
 import ContainerGiftFlaps from '@/features/gifts/components/ContainerGiftFlaps';
 import Footer from '@/components/organisms/Footer';
 import Header from '@/components/organisms/Header';
@@ -27,7 +27,7 @@ const MainLayout: FunctionComponent<Props> = ({
         {children}
         <Footer />
 
-        {wheelOfFortune && <WheelOfFortune />}
+        {wheelOfFortune && <WheelOfFortuneHost />}
         {mockChat && <ChatBubbleHost />}
         <CookieBar />
       </div>

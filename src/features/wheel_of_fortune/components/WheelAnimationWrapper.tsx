@@ -13,7 +13,7 @@ import { distance, random } from '@/utils/math';
 import Button from '@/components/atoms/Button';
 import Icon from '@/components/atoms/Icon';
 
-import Wheel, { Item } from './Wheel';
+import DynamicWheelSvg, { Item } from './DynamicWheelSvg';
 
 type Props = {
   items: Item[];
@@ -120,7 +120,7 @@ const AnimatedWheel: FunctionComponent<Props> = ({
         style={{ lineHeight: 0 }}
         ref={rotatorRef}>
         <div className="select-none" style={animStyles}>
-          <Wheel
+          <DynamicWheelSvg
             width={500}
             height={500}
             items={items}

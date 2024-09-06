@@ -1,0 +1,21 @@
+{
+  "message_initial": "Hello! I am a chat bubble. I am here to help you. 🤓",
+  "messages": [
+    "Come on, let me help you!",
+    "I can't hear you! Speak louder!",
+    "Who lives under the sea?",
+    "The FitnessGram Pacer Test is a multistage aerobic capacity test that progressively gets more difficult as it continues.",
+    "Sorry, I'm going through a tunnel right now. Can you repeat that?",
+    "You must have missed my previous messages. I'm kind of lonely.",
+    "Wondering if my messages got caught in a time warp. Feeling like I'm at a party where everyone's speaking Simlish.",
+    "My messages must be on a ghosting spree. Feeling ignored.",
+    "Ah, the sweet sound of silence. My messages must be enjoying their newfound solitude."
+  ],
+  "message_fallback": "It's nothing, leave me alone. 😤",
+  "new_alert": "New message from Chat Bubble! 🎉",
+  "hud_title": "Chat with a \"100% real huuman\"",
+  "hud_title_disclaimer": "Disclaimer: Actually, this is a bot that almost feels like a real human (not a smart one) but it's still just a bot",
+  "agent_is_typing": "Agent is typing",
+  "your_message": "Your message",
+  "your_message_placeholder": "Type here..."
+}

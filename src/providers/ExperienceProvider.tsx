@@ -4,8 +4,8 @@ import { useTranslation } from 'next-i18next';
 
 import useFirstInteractionListener from '@/hooks/useFirstInteractionListener';
 import useDocumentVisibilityListener from '@/hooks/useDocumentVisibilityListener';
-import PageTitleExperience from '@/features/page_title/components/PageTitleExperience';
-import NotificationPermissionExperience from '@/features/notification/components/NotificationPermissionEperience';
+import { PageTitleExperienceHost } from '@/features/page_title';
+import { NotificationPermissionExperienceHost } from '@/features/notification';
 import { useExperienceFlagsStore } from '@/state/experience_flags';
 
 const ExperienceProvider: FunctionComponent<PropsWithChildren> = ({
@@ -21,8 +21,8 @@ const ExperienceProvider: FunctionComponent<PropsWithChildren> = ({
 
   return (
     <>
-      <PageTitleExperience />
-      <NotificationPermissionExperience />
+      <PageTitleExperienceHost />
+      <NotificationPermissionExperienceHost />
       {children}
     </>
   );

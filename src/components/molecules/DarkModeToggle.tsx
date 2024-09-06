@@ -1,11 +1,13 @@
 import { FunctionComponent } from 'react';
 import { useTheme } from 'next-themes';
 
-type Props = {
+export type DarkModeToggleProps = {
   className?: string;
 };
 
-const DarkModeToggle: FunctionComponent<Props> = ({ className }) => {
+const DarkModeToggle: FunctionComponent<DarkModeToggleProps> = ({
+  className,
+}) => {
   const { resolvedTheme, setTheme } = useTheme();
   const toggleDarkMode = () => {
     setTheme(resolvedTheme === 'dark' ? 'light' : 'dark');

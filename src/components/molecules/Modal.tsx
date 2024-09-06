@@ -5,7 +5,7 @@ import DimmerOverlay, {
 } from '@/components/atoms/DimmerOverlay';
 import Icon from '@/components/atoms/Icon';
 
-type ModalProps = DimmerOverlayProps & {
+export type ModalProps = DimmerOverlayProps & {
   title: string;
   actions: React.ReactNode;
 };

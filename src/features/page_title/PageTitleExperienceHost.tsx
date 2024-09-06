@@ -1,19 +1,20 @@
 'use client';
 
 import { useTranslation } from 'next-i18next';
+import { FunctionComponent } from 'react';
 
 import { useExperienceFlagsStore } from '@/state/experience_flags';
 import { useRuntimeStore } from '@/state/runtime';
 
-import ArrayPagedTitle from './ArrayPagedTitle';
-import MarqueeTitle from './MarqueeTitle';
-import GlitchyTitle from './GlitchyTitle';
+import ArrayPagedTitle from './components/ArrayPagedTitle';
+import MarqueeTitle from './components/MarqueeTitle';
+import GlitchyTitle from './components/GlitchyTitle';
 
 /**
  * Experiments on manipulating the page title. Unfortunatelly the refresh rate
  * is quite low and the title is not updated as frequently as I would like.
  */
-const PageTitleExperience = () => {
+const PageTitleExperienceHost: FunctionComponent = () => {
   const pageTitleExperience = useExperienceFlagsStore(
     (state) => state.pageTitle,
   );
@@ -58,4 +59,4 @@ const PageTitleExperience = () => {
   );
 };
 
-export default PageTitleExperience;
+export default PageTitleExperienceHost;

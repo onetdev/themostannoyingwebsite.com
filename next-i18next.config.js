@@ -8,4 +8,6 @@ module.exports = {
     defaultLocale: 'en',
     locales: ['en', 'hu'],
   },
+  defaultNS: 'common',
+  ns: ['common', 'chat_bubble', 'gifts', 'notifications', 'wheel_of_fortune'],
 };

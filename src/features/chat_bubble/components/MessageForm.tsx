@@ -1,11 +1,18 @@
 import { FormEventHandler, FunctionComponent, useRef } from 'react';
+import { useTranslation } from 'next-i18next';
 
 import Icon from '@/components/atoms/Icon';
 
-const MessageForm: FunctionComponent<{
+export type MessageFormProps = {
   className?: string;
   onMessage: (message: string) => void;
-}> = ({ className, onMessage }) => {
+};
+
+const MessageForm: FunctionComponent<MessageFormProps> = ({
+  className,
+  onMessage,
+}) => {
+  const { t } = useTranslation('chat_bubble');
   const userForm = useRef<HTMLFormElement>(null);
   const userMessage = useRef<HTMLInputElement>(null);
 
@@ -23,8 +30,8 @@ const MessageForm: FunctionComponent<{
       <input
         className="grow rounded-none border border-r-0 border-tertiary bg-surface p-3 text-on-surface"
         name="message"
-        title="Your message"
-        placeholder="Type here..."
+        title={t('your_message')}
+        placeholder={t('your_message_placeholder')}
         ref={userMessage}
       />
       <button

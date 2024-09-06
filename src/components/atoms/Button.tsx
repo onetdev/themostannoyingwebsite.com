@@ -1,10 +1,10 @@
 import { FunctionComponent } from 'react';
 
-type Props = JSXProxyProps<'button'> & {
+export type ButtonProps = JSXProxyProps<'button'> & {
   variant?: 'primary' | 'secondary' | 'tertiary';
 };
 
-const Button: FunctionComponent<Props> = ({
+const Button: FunctionComponent<ButtonProps> = ({
   variant = 'primary',
   children,
   className,
@@ -39,7 +39,7 @@ const Button: FunctionComponent<Props> = ({
   }
 };
 
-const ButtonInternal: FunctionComponent<Props> = ({
+const ButtonInternal: FunctionComponent<ButtonProps> = ({
   className,
   children,
   ...rest

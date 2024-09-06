@@ -8,14 +8,14 @@ export type Item = {
   text: string;
 };
 
-type Props = {
+type DynamicWheelSvgProps = {
   highlightIndex?: number;
   items: Item[];
   width: number;
   height: number;
 };
 
-const Wheel: FunctionComponent<Props> = ({
+const DynamicWheelSvg: FunctionComponent<DynamicWheelSvgProps> = ({
   items,
   highlightIndex,
   width,
@@ -85,4 +85,4 @@ const Wheel: FunctionComponent<Props> = ({
   );
 };
 
-export default Wheel;
+export default DynamicWheelSvg;

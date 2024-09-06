@@ -6,6 +6,7 @@ export type FormCheckbox = DetailedHTMLProps<
 > & {
   onValueChange?: (value: boolean) => void;
 };
+
 const FormCheckbox = ({ onChange, onValueChange, ...rest }: FormCheckbox) => {
   const onChangeProxy = (e: React.ChangeEvent<HTMLInputElement>) => {
     onChange?.(e);

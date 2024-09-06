@@ -29,14 +29,15 @@ export const distance = (p1: Point, p2: Point): Point => {
   };
 };
 
+export type WeightedRandomPoolItem<T> = { value: T; weight: number };
 export const getWeightedRandom = <T>(
-  items: { value: T; prob: number }[],
+  items: WeightedRandomPoolItem<T>[],
 ): T | undefined => {
-  const total = items.reduce((carry, curent) => carry + curent.prob, 0);
+  const total = items.reduce((carry, curent) => carry + curent.weight, 0);
   const rand = random(0, total);
   let sum = 0;
   for (let i = 0; i < items.length; i++) {
-    sum += items[i].prob;
+    sum += items[i].weight;
     if (rand < sum) {
       return items[i].value;
     }

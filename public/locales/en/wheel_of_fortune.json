@@ -1,0 +1,11 @@
+{
+  "spin_start": "Let's spin the wheel!!",
+  "spin_win": "You won! {{prize}}",
+  "prizes": {
+    "free_lifetime_beer": "Free lifetime beer",
+    "world_peace": "World peace",
+    "absolutelly_nothing": "Absolutelly nothing",
+    "complimentary_otter": "Complimentary otter",
+    "fake_70_discount": "Fake 70% discount"
+  }
+}

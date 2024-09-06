@@ -1,11 +1,11 @@
 import { FunctionComponent, useEffect, useState } from 'react';
 
-type Props = JSXProxyProps<'span'> & {
+export type DotDotDotTextProps = JSXProxyProps<'span'> & {
   stepDurationMs?: number;
   message?: string;
 };
 
-const DotDotDotText: FunctionComponent<Props> = ({
+const DotDotDotText: FunctionComponent<DotDotDotTextProps> = ({
   stepDurationMs = 400,
   message,
   ...rest
