@@ -15,7 +15,7 @@ import Icon from '@/components/atoms/Icon';
 
 import DynamicWheelSvg, { Item } from './DynamicWheelSvg';
 
-type Props = {
+type AnimatedWheelProps = {
   items: Item[];
   onSpinCompleted: (result: Item) => void;
   onStateChange: (state: AnimatedWheelState) => void;
@@ -24,7 +24,7 @@ type Props = {
 };
 
 export type AnimatedWheelState = 'ready' | 'spinning' | 'completed';
-const AnimatedWheel: FunctionComponent<Props> = ({
+const AnimatedWheel: FunctionComponent<AnimatedWheelProps> = ({
   items,
   onSpinCompleted,
   onStateChange,

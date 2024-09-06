@@ -8,13 +8,13 @@ import Icon from '@/components/atoms/Icon';
 import MessageForm from './MessageForm';
 import MessageBubble from './MessageBubble';
 
-type Props = {
+type HistoryOverlayProps = {
   history: HistoryItem[];
   onUserMessage: (message: string) => void;
   onClose: () => void;
 };
 
-const HistoryOverlay: FunctionComponent<Props> = ({
+const HistoryOverlay: FunctionComponent<HistoryOverlayProps> = ({
   onUserMessage,
   history,
   onClose,

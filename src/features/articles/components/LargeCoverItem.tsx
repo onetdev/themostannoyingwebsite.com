@@ -1,15 +1,19 @@
 import Link from 'next/link';
 import Image from 'next/image';
+import { FunctionComponent } from 'react';
 
 import { ArticleCore } from '@/types';
 
 import { CoverPlaceholder } from './CoverPlaceholder';
 
-type Props = JSXProxyProps<'div'> & {
+type LargeCoverItemProps = JSXProxyProps<'div'> & {
   article: ArticleCore;
 };
 
-export const LargeCoverItem = ({ article, ...rest }: Props) => {
+export const LargeCoverItem: FunctionComponent<LargeCoverItemProps> = ({
+  article,
+  ...rest
+}) => {
   return (
     <div {...rest}>
       <Link className="relative block" href={article.url} passHref>

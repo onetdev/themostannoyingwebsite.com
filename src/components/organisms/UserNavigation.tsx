@@ -4,11 +4,13 @@ import { FunctionComponent, useState } from 'react';
 import ShareModal from '@/components/organisms/ShareModal';
 import { GenericMenu } from '@/components/atoms/GenericMenu';
 
-type Props = {
+type UserNavigationProps = {
   className?: string;
 };
 
-const UserNavigation: FunctionComponent<Props> = ({ className }) => {
+const UserNavigation: FunctionComponent<UserNavigationProps> = ({
+  className,
+}) => {
   const [showShareModal, setShowShareModal] = useState(false);
 
   return (

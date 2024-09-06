@@ -12,12 +12,15 @@ import {
 
 import Modal from '@/components/molecules/Modal';
 
-type Props = {
+type ShareModalProps = {
   show: boolean;
   handleClose: () => void;
 };
 
-const ShareModal: FunctionComponent<Props> = ({ show, handleClose }) => {
+const ShareModal: FunctionComponent<ShareModalProps> = ({
+  show,
+  handleClose,
+}) => {
   const [url, setUrl] = useState<string>('');
 
   useEffect(() => {

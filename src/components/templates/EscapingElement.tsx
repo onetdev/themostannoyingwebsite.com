@@ -9,7 +9,7 @@ import React, {
 import { getRelativePosition } from '@/utils/dom';
 import { clamp, random } from '@/utils/math';
 
-type Props = PropsWithChildren<{
+type EscapingElementProps = PropsWithChildren<{
   trigger?: 'hover' | 'activationStart';
   /**
    * Maximum distance the element can move in a certain direction.
@@ -23,7 +23,7 @@ type Props = PropsWithChildren<{
   };
 }>;
 
-const EscapingElement: FunctionComponent<Props> = ({
+const EscapingElement: FunctionComponent<EscapingElementProps> = ({
   trigger = 'hover',
   children,
   boundingBox,

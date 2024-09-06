@@ -9,9 +9,9 @@ import Footer from '@/components/organisms/Footer';
 import Header from '@/components/organisms/Header';
 import { useExperienceFlagsStore } from '@/state/experience_flags';
 
-type Props = JSXProxyProps<'div'>;
+type MainLayoutProps = JSXProxyProps<'div'>;
 
-const MainLayout: FunctionComponent<Props> = ({
+const MainLayout: FunctionComponent<MainLayoutProps> = ({
   children,
   className,
   ...rest

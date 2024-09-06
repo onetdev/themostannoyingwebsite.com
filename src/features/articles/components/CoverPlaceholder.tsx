@@ -1,11 +1,11 @@
 import { FunctionComponent } from 'react';
 
-type Props = {
+type CoverPlaceholderProps = {
   width: number;
   height: number;
 };
 
-export const CoverPlaceholder: FunctionComponent<Props> = ({
+export const CoverPlaceholder: FunctionComponent<CoverPlaceholderProps> = ({
   width,
   height,
 }) => {

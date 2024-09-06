@@ -9,11 +9,13 @@ import { getI18nProps } from '@/utils/i18n';
 import styles from '@/styles/content.module.css';
 import { useExperienceFlagsStore } from '@/state/experience_flags';
 
-type Props = {
+type ArticleItemProps = {
   slug: string;
 };
 
-const ArticleItem: NextPage<Props> = ({ slug }: Props) => {
+const ArticleItem: NextPage<ArticleItemProps> = ({
+  slug,
+}: ArticleItemProps) => {
   const { t } = useTranslation('common');
   const showLocker = useExperienceFlagsStore((state) => state.contentPaywall);
   const article = ArticleService.getBySlug(slug);
@@ -45,7 +47,7 @@ const ArticleItem: NextPage<Props> = ({ slug }: Props) => {
   );
 };
 
-export const getServerSideProps: GetServerSideProps<Props> = async (
+export const getServerSideProps: GetServerSideProps<ArticleItemProps> = async (
   context,
 ) => {
   const slug = context.query.slug as string;

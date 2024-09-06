@@ -10,14 +10,14 @@ import Button from '@/components/atoms/Button';
 
 import EscapingElement from './EscapingElement';
 
-type Props = Omit<JSXProxyProps<'div'>, 'styles'> &
+type LockedContentProps = Omit<JSXProxyProps<'div'>, 'styles'> &
   PropsWithChildren<{
     active?: boolean;
     initialMaxHeight: number;
     steps?: number;
   }>;
 
-const LockedContent: FunctionComponent<Props> = ({
+const LockedContent: FunctionComponent<LockedContentProps> = ({
   children,
   initialMaxHeight,
   steps = 200,
