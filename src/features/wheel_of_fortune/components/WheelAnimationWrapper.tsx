@@ -13,7 +13,7 @@ import DynamicWheelSvg, { Item } from './DynamicWheelSvg';
 import Button from '@/components/atoms/Button';
 import Icon from '@/components/atoms/Icon';
 import useDragTracker from '@/hooks/useDragTracker';
-import { distance, random } from '@/utils/math';
+import { getPointDistance, random } from '@/utils/math';
 
 type AnimatedWheelProps = {
   items: Item[];
@@ -79,7 +79,7 @@ const AnimatedWheel: FunctionComponent<AnimatedWheelProps> = ({
       return;
     }
 
-    const dir = distance(
+    const dir = getPointDistance(
       dragMeta.history[0],
       dragMeta.history[dragMeta.history.length - 1],
     );

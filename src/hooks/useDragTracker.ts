@@ -1,9 +1,9 @@
 import { RefObject, useCallback, useEffect, useState } from 'react';
 
-import { isPointWithin } from '@/utils/dom';
-import { distance, Point } from '@/utils/math';
+import { isPointWithinElement } from '@/utils/dom';
+import { getPointDistance, Point2d } from '@/utils/math';
 
-type TimedPoint = Point & { t: Date };
+type TimedPoint = Point2d & { t: Date };
 export type DragTrackerState = {
   isActive: boolean;
   isWithin: boolean;
@@ -52,11 +52,11 @@ const useDragTracker = <T extends HTMLElement>(
       const current = timedClientPoint(e);
       const reference = state.history[0] ?? { ...current };
       const interval = current.t.getTime() - reference.t.getTime();
-      const dist = distance(reference, current);
+      const dist = getPointDistance(reference, current);
       const velocity = Math.sqrt(dist.x ^ (2 + dist.y) ^ 2) / interval;
       setState({
         ...state,
-        isWithin: isPointWithin(ref.current!, current),
+        isWithin: isPointWithinElement(ref.current!, current),
         history: [...state.history, current].slice(-limit),
         velocity: velocity > 0 ? velocity : null,
       });
