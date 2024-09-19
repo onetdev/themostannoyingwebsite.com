@@ -8,14 +8,16 @@ import {
 } from 'react';
 
 type RootPortalProps = PropsWithChildren;
-type RootPortalContext = HTMLDivElement | undefined;
+type RootPortalContextValue = { node?: HTMLDivElement | undefined };
 
-const RootPortalContext = createContext<RootPortalContext>(undefined);
+const RootPortalContext = createContext<RootPortalContextValue>({
+  node: undefined,
+});
 
 export const RootPortalProvider: FunctionComponent<RootPortalProps> = ({
   children,
 }) => {
-  const [portalElement, setPortalElement] = useState<HTMLDivElement>();
+  const [node, setPortalElement] = useState<HTMLDivElement>();
 
   useEffect(() => {
     const portalDiv = document.createElement('div');
@@ -28,7 +30,7 @@ export const RootPortalProvider: FunctionComponent<RootPortalProps> = ({
   }, []);
 
   return (
-    <RootPortalContext.Provider value={portalElement}>
+    <RootPortalContext.Provider value={{ node }}>
       {children}
     </RootPortalContext.Provider>
   );

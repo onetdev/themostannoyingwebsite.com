@@ -6,13 +6,13 @@ import { useRootPortalElement } from '@/providers/RootPortalProvider';
 export type RootPortalProps = PropsWithChildren;
 
 const RootPortal: FunctionComponent<RootPortalProps> = ({ children }) => {
-  const portalElement = useRootPortalElement();
+  const rootPortal = useRootPortalElement();
 
-  if (!portalElement) {
+  if (!rootPortal.node) {
     return null;
   }
 
-  return createPortal(children, portalElement);
+  return createPortal(children, rootPortal.node);
 };
 
 export default RootPortal;
