@@ -62,7 +62,7 @@ export const ElementMeasureUtil: FunctionComponent<ElementMeasureUtilProps> = ({
     const measurements = ref.current.children[0].getBoundingClientRect();
 
     onMeasure?.({
-      width: measurements.width,
+      width: Math.ceil(measurements.width),
       height: measurements.height,
     });
   }, [onMeasure, ref]);

@@ -17,7 +17,14 @@ const Header: FunctionComponent = () => {
       <DarkModeToggle className="self-center justify-self-end" />
       <MainNavigation />
       <UserNavigation className="self-center justify-self-end" />
-      <Marquee className="col-span-2 w-full bg-surface" />
+      <Marquee
+        className="col-span-2 w-full bg-surface"
+        items={[
+          <span key="test" className="px-3">
+            This is somewhat of a longer text if you ask me
+          </span>,
+        ]}
+      />
     </header>
   );
 };
