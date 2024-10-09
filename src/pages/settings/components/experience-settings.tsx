@@ -12,32 +12,32 @@ const ExperienceSettings: FunctionComponent = () => {
   const experience = useExperienceFlagsStore();
 
   // Experience flags
-  const onAlowMockChatChange = (value: boolean) =>
-    experience.setMockChat(value);
-  const onWheelOfFortuneChange = (value: boolean) =>
-    experience.setWheelOfFortune(value);
-  const onExitPromptChange = (value: boolean) =>
-    experience.setExitPrompt(value);
   const onContentPaywallChange = (value: boolean) =>
     experience.setContentPaywall(value);
+  const onDeadPixelChange = (value: boolean) => experience.setDeadPixel(value);
+  const onExitPromptChange = (value: boolean) =>
+    experience.setExitPrompt(value);
+  const onMockChatChange = (value: boolean) => experience.setMockChat(value);
+  const onWheelOfFortuneChange = (value: boolean) =>
+    experience.setWheelOfFortune(value);
   const onPageTitleInactiveArrayPagedChange = (value: boolean) =>
     experience.setPageTitle({ inactiveArrayPaged: value });
 
   return (
     <SettingsBlock title={t('settings:section.experienceFlags.title')}>
-      <SettingsBlockRow label={t('settings:section.experienceFlags.mockChat')}>
+      <SettingsBlockRow
+        label={t('settings:section.experienceFlags.contentPaywall')}>
         <FormCheckbox
-          name="mock_chat"
-          checked={experience.mockChat}
-          onValueChange={onAlowMockChatChange}
+          name="content_paywall"
+          checked={experience.contentPaywall}
+          onValueChange={onContentPaywallChange}
         />
       </SettingsBlockRow>
-      <SettingsBlockRow
-        label={t('settings:section.experienceFlags.wheelOfFortune')}>
+      <SettingsBlockRow label={t('settings:section.experienceFlags.deadPixel')}>
         <FormCheckbox
-          name="wheel_of_fortune"
-          checked={experience.wheelOfFortune}
-          onValueChange={onWheelOfFortuneChange}
+          name="dead_pixel"
+          checked={experience.deadPixel}
+          onValueChange={onDeadPixelChange}
         />
       </SettingsBlockRow>
       <SettingsBlockRow
@@ -48,12 +48,11 @@ const ExperienceSettings: FunctionComponent = () => {
           onValueChange={onExitPromptChange}
         />
       </SettingsBlockRow>
-      <SettingsBlockRow
-        label={t('settings:section.experienceFlags.contentPaywall')}>
+      <SettingsBlockRow label={t('settings:section.experienceFlags.mockChat')}>
         <FormCheckbox
-          name="content_paywall"
-          checked={experience.contentPaywall}
-          onValueChange={onContentPaywallChange}
+          name="mock_chat"
+          checked={experience.mockChat}
+          onValueChange={onMockChatChange}
         />
       </SettingsBlockRow>
       <SettingsBlockRow
@@ -64,6 +63,14 @@ const ExperienceSettings: FunctionComponent = () => {
           name="page_title_inactive_array_paged"
           checked={experience.pageTitle.inactiveArrayPaged}
           onValueChange={onPageTitleInactiveArrayPagedChange}
+        />
+      </SettingsBlockRow>
+      <SettingsBlockRow
+        label={t('settings:section.experienceFlags.wheelOfFortune')}>
+        <FormCheckbox
+          name="wheel_of_fortune"
+          checked={experience.wheelOfFortune}
+          onValueChange={onWheelOfFortuneChange}
         />
       </SettingsBlockRow>
     </SettingsBlock>

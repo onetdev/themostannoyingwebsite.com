@@ -3,7 +3,7 @@ import { createJSONStorage, persist } from 'zustand/middleware';
 
 export interface ExperienceFlagsState {
   contentPaywall: boolean;
-  deadPixelDisease: boolean;
+  deadPixel: boolean;
   exitPrompt: boolean;
   mockChat: boolean;
   pageTitle: {
@@ -16,7 +16,7 @@ export interface ExperienceFlagsState {
 
 export interface ExperienceFlagsStateActions {
   setContentPaywall: (contentPaywall: boolean) => void;
-  setDeadPixelDisease: (deadPixelDisease: boolean) => void;
+  setDeadPixel: (deadPixel: boolean) => void;
   setExitPrompt: (exitPrompt: boolean) => void;
   setMockChat: (mockChat: boolean) => void;
   setPageTitle: (pageTitle: Partial<ExperienceFlagsState['pageTitle']>) => void;
@@ -29,7 +29,7 @@ export interface ExperienceFlagsStore
 
 const initialState: ExperienceFlagsState = {
   contentPaywall: true,
-  deadPixelDisease: true,
+  deadPixel: true,
   exitPrompt: true,
   mockChat: true,
   pageTitle: {
@@ -47,7 +47,7 @@ export const useExperienceFlagsStore = create(
     (set) => ({
       ...initialState,
       setContentPaywall: (contentPaywall) => set({ contentPaywall }),
-      setDeadPixelDisease: (deadPixelDisease) => set({ deadPixelDisease }),
+      setDeadPixel: (deadPixel) => set({ deadPixel }),
       setExitPrompt: (exitPrompt) => set({ exitPrompt }),
       setMockChat: (mockChat) => set({ mockChat }),
       setPageTitle: (pageTitle) =>

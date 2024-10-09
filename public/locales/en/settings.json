@@ -17,11 +17,12 @@
     },
     "experienceFlags": {
       "title": "Experience",
-      "mockChat": "Mock chat",
-      "wheelOfFortune": "Wheel of fortune",
-      "exitPrompt": "Exit prompt",
       "contentPaywall": "Content paywall",
-      "pageTitleInactiveArrayPaged": "Alternative title when tab is inactive"
+      "deadPixel": "Dead pixel",
+      "exitPrompt": "Exit prompt",
+      "mockChat": "Mock chat",
+      "pageTitleInactiveArrayPaged": "Alternative title when tab is inactive",
+      "wheelOfFortune": "Wheel of fortune"
     },
     "runtime": {
       "title": "About this session",
