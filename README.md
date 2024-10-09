@@ -13,6 +13,7 @@ The main idea is to collect all the disgusting features from today's website in 
 - [x] Add confirmation when trying to leave the page
 - [x] Update title while the user is on a different tab
 - [x] Asking for notification: no worries, the website won't send any notification
+- [x] Dead pixel
 - [ ] Funny, silly contents (inspired Onion news)
 - [ ] Newsletter modal when the user leaves the screen or scrolls down a bit
 - [ ] Asking for location permission: no worries, the website won't use your location
@@ -20,6 +21,7 @@ The main idea is to collect all the disgusting features from today's website in 
 - [ ] Randomly loading images while scrolling (layout shifting).
 - [ ] Low Quality images
 - [ ] Age verification on some images
+- [ ] Dead pixel patch
 
 ### Stretch goal experiments
 

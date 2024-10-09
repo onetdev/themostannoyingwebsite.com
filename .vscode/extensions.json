@@ -4,6 +4,7 @@
         "esbenp.prettier-vscode",
         "rubymaniac.vscode-direnv",
         "unifiedjs.vscode-mdx",
-        "bradlc.vscode-tailwindcss"
+        "bradlc.vscode-tailwindcss",
+        "yoavbls.pretty-ts-errors"
     ]
 }

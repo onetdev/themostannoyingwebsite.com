@@ -7,6 +7,7 @@ import Header from '@/components/organisms/Header';
 import { ChatBubbleHost } from '@/features/chat_bubble';
 import ContainerGiftFlaps from '@/features/gifts/components/ContainerGiftFlaps';
 import { WheelOfFortuneHost } from '@/features/wheel_of_fortune';
+import { DeadPixelHost } from '@/root/src/features/dead_pixel';
 import { useExperienceFlagsStore } from '@/state/experience_flags';
 
 type MainLayoutProps = JSXProxyProps<'div'>;
@@ -16,7 +17,7 @@ const MainLayout: FunctionComponent<MainLayoutProps> = ({
   className,
   ...rest
 }) => {
-  const { wheelOfFortune, mockChat } = useExperienceFlagsStore();
+  const { deadPixel, mockChat, wheelOfFortune } = useExperienceFlagsStore();
 
   return (
     <div className={className} {...rest}>
@@ -28,6 +29,7 @@ const MainLayout: FunctionComponent<MainLayoutProps> = ({
         <Footer />
 
         {wheelOfFortune && <WheelOfFortuneHost />}
+        {deadPixel && <DeadPixelHost />}
         {mockChat && <ChatBubbleHost />}
         <CookieBar />
       </div>
