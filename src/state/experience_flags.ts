@@ -3,6 +3,7 @@ import { createJSONStorage, persist } from 'zustand/middleware';
 
 export interface ExperienceFlagsState {
   contentPaywall: boolean;
+  deadPixelDisease: boolean;
   exitPrompt: boolean;
   mockChat: boolean;
   pageTitle: {
@@ -14,20 +15,26 @@ export interface ExperienceFlagsState {
 }
 
 export interface ExperienceFlagsStateActions {
-  setMockChat: (mockChat: boolean) => void;
-  setWheelOfFortune: (wheelOfFortune: boolean) => void;
-  setExitPrompt: (exitPrompt: boolean) => void;
   setContentPaywall: (contentPaywall: boolean) => void;
+  setDeadPixelDisease: (deadPixelDisease: boolean) => void;
+  setExitPrompt: (exitPrompt: boolean) => void;
+  setMockChat: (mockChat: boolean) => void;
   setPageTitle: (pageTitle: Partial<ExperienceFlagsState['pageTitle']>) => void;
+  setWheelOfFortune: (wheelOfFortune: boolean) => void;
 }
+
+export interface ExperienceFlagsStore
+  extends ExperienceFlagsState,
+    ExperienceFlagsStateActions {}
 
 const initialState: ExperienceFlagsState = {
   contentPaywall: true,
+  deadPixelDisease: true,
   exitPrompt: true,
   mockChat: true,
-  // `inactiveMarquee` and `randomGlitch` are not enabled because title refresh rate is to low
-  // maybe these can be turned on at a later point.
   pageTitle: {
+    // `inactiveMarquee` and `randomGlitch` are not enabled because title refresh rate is to low
+    // maybe these can be turned on at a later point.
     inactiveMarquee: false,
     randomGlitch: false,
     inactiveArrayPaged: true,
@@ -36,13 +43,13 @@ const initialState: ExperienceFlagsState = {
 };
 
 export const useExperienceFlagsStore = create(
-  persist<ExperienceFlagsState & ExperienceFlagsStateActions>(
+  persist<ExperienceFlagsStore>(
     (set) => ({
       ...initialState,
-      setMockChat: (mockChat) => set({ mockChat }),
-      setWheelOfFortune: (wheelOfFortune) => set({ wheelOfFortune }),
-      setExitPrompt: (exitPrompt) => set({ exitPrompt }),
       setContentPaywall: (contentPaywall) => set({ contentPaywall }),
+      setDeadPixelDisease: (deadPixelDisease) => set({ deadPixelDisease }),
+      setExitPrompt: (exitPrompt) => set({ exitPrompt }),
+      setMockChat: (mockChat) => set({ mockChat }),
       setPageTitle: (pageTitle) =>
         set((state) => ({
           pageTitle: {
@@ -50,11 +57,12 @@ export const useExperienceFlagsStore = create(
             ...pageTitle,
           },
         })),
+      setWheelOfFortune: (wheelOfFortune) => set({ wheelOfFortune }),
     }),
     {
       name: 'zustand-experience-flags-storage',
       storage: createJSONStorage(() => localStorage),
-      version: 1,
+      version: 2,
     },
   ),
 );
