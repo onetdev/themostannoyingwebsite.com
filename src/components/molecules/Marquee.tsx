@@ -1,22 +1,20 @@
 import {
   FunctionComponent,
-  ReactNode,
+  PropsWithChildren,
   useEffect,
-  useMemo,
   useRef,
   useState,
 } from 'react';
 
-import { ElementMeasurements, MeasuredMulti } from '@/utils/elements';
+import { Measured } from '@/utils/elements';
 
-type MarqueeProps = {
+type MarqueeProps = PropsWithChildren<{
   className?: string;
-  items: ReactNode[];
   pixelPerSeconds?: number;
-};
+}>;
 
 const Marquee: FunctionComponent<MarqueeProps> = ({
-  items,
+  children,
   className,
   pixelPerSeconds = 10,
 }) => {
@@ -24,26 +22,12 @@ const Marquee: FunctionComponent<MarqueeProps> = ({
   const [containerWidth, setContainerWidth] = useState(0);
   const [itemsWidth, setItemsWidth] = useState(0);
 
-  const fitMultiplier = useMemo(
-    () =>
-      containerWidth > 0 && itemsWidth > 0
-        ? Math.ceil(containerWidth / itemsWidth)
-        : 0,
-    [containerWidth, itemsWidth],
-  );
+  const fitMultiplier =
+    containerWidth > 0 && itemsWidth > 0
+      ? Math.ceil(containerWidth / itemsWidth)
+      : 0;
 
-  const renderItems = useMemo(
-    () =>
-      Array(fitMultiplier > 0 ? fitMultiplier * 2 : 1)
-        .fill(items)
-        .flat(),
-    [fitMultiplier, items],
-  );
-
-  const durationMs = useMemo(
-    () => (itemsWidth > 0 ? (itemsWidth / pixelPerSeconds) * 1000 : 0),
-    [itemsWidth, pixelPerSeconds],
-  );
+  const durationMs = itemsWidth > 0 ? (itemsWidth / pixelPerSeconds) * 1000 : 0;
 
   useEffect(() => {
     if (!containerRef.current) {
@@ -53,10 +37,6 @@ const Marquee: FunctionComponent<MarqueeProps> = ({
     setContainerWidth(containerRef.current.clientWidth);
   }, []);
 
-  const onMeasured = (itemDims: ElementMeasurements[]) => {
-    setItemsWidth(itemDims.reduce((acc, { width }) => acc + width, 0));
-  };
-
   return (
     <div ref={containerRef} className={`overflow-hidden ${className}`}>
       <div
@@ -65,12 +45,11 @@ const Marquee: FunctionComponent<MarqueeProps> = ({
           width: itemsWidth * fitMultiplier,
           animationDuration: durationMs + 'ms',
         }}>
-        <MeasuredMulti
+        <Measured
           mode={itemsWidth > 0 ? 'render' : 'both'}
-          items={renderItems}
-          onMeasure={onMeasured}
-          measureTrigger="all"
-        />
+          onMeasure={({ width }) => setItemsWidth(width)}>
+          {children}
+        </Measured>
       </div>
     </div>
   );

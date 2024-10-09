@@ -45,10 +45,12 @@ export const StyledNode = <T extends keyof JSX.IntrinsicElements>({
 export type ElementMeasurements = { width: number; height: number };
 type ElementMeasureUtilProps = PropsWithChildren<{
   onMeasure?: (dimensions: ElementMeasurements) => void;
+  measureClasses?: string;
 }>;
 
 export const ElementMeasureUtil: FunctionComponent<ElementMeasureUtilProps> = ({
   children,
+  measureClasses,
   onMeasure,
 }) => {
   const ref = createRef<HTMLDivElement>();
@@ -69,8 +71,10 @@ export const ElementMeasureUtil: FunctionComponent<ElementMeasureUtilProps> = ({
 
   return (
     <RootPortal>
-      <div ref={ref} className="h-0 overflow-hidden">
-        {children}
+      <div className="size-0 overflow-hidden">
+        <div ref={ref} className={`min-w-[100vw] ${measureClasses}`}>
+          {children}
+        </div>
       </div>
     </RootPortal>
   );
@@ -86,8 +90,9 @@ type MeasuredProps = ElementMeasureUtilProps & {
  */
 export const Measured: FunctionComponent<MeasuredProps> = ({
   children,
-  onMeasure,
+  measureClasses,
   mode = 'both',
+  onMeasure,
 }) => {
   const measure = mode === 'both' || mode === 'measure';
   const render = mode === 'both' || mode === 'render';
@@ -95,7 +100,9 @@ export const Measured: FunctionComponent<MeasuredProps> = ({
   return (
     <>
       {measure && (
-        <ElementMeasureUtil onMeasure={onMeasure}>
+        <ElementMeasureUtil
+          measureClasses={measureClasses}
+          onMeasure={onMeasure}>
           {children}
         </ElementMeasureUtil>
       )}
@@ -106,6 +113,7 @@ export const Measured: FunctionComponent<MeasuredProps> = ({
 
 type MeasuredMultiProps = {
   items: ReactNode[];
+  measureClasses?: string;
   measureTrigger?: 'first' | 'all';
   mode?: 'measure' | 'render' | 'both';
   onMeasure: (itemDims: ElementMeasurements[]) => void;
@@ -113,6 +121,7 @@ type MeasuredMultiProps = {
 
 export const MeasuredMulti: FunctionComponent<MeasuredMultiProps> = ({
   items,
+  measureClasses,
   measureTrigger = 'all',
   mode = 'both',
   onMeasure,
@@ -142,6 +151,7 @@ export const MeasuredMulti: FunctionComponent<MeasuredMultiProps> = ({
   return items.map((item, index) => (
     <Measured
       key={index}
+      measureClasses={measureClasses}
       mode={mode}
       onMeasure={(dims) => onMeasureProxy(index, dims)}>
       {item}
