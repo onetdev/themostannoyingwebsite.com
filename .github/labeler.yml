@@ -1,0 +1,26 @@
+dependencies:
+  - changed-files:
+    - any-glob-to-any-file:
+      - package.json
+      - pnpm-lock.yaml
+      - .nvmrc
+
+documentation:
+  - changed-files:
+    - any-glob-to-any-file:
+      - README.md
+      - .github/pull_request_template.md
+
+storybook:
+  - changed-files:
+    - any-glob-to-any-file:
+      - .storybook/**
+      - ./**.stories.ts
+      - ./**.stories.tsx
+
+ci/cd:
+  - changed-files:
+    - any-glob-to-any-file:
+      - .github/workflows/**
+      - .github/labeler.yml
+      - .github/CODEOWNERS
