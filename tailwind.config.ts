@@ -6,7 +6,7 @@ module.exports = {
   theme: {
     extend: {
       animation: {
-        'dot-dot-dot': 'dot-dot-dot 2s infinite',
+        marQueeLeft: 'marqueeLeft 15s linear infinite',
         'flashing-error': 'flashing-error 1s infinite',
         highlight: 'highlight 1s infinite',
         'flashing-invert-1/2': 'flashing-invert-1/2 500ms infinite',
@@ -54,12 +54,9 @@ module.exports = {
         secondary: ['"Bonheur Royale"', 'sans-serif'],
       },
       keyframes: {
-        'dot-dot-dot': {
-          '0%': { content: '.' },
-          '25%': { content: '..' },
-          '50%': { content: '...' },
-          '75%': { content: '' },
-          '100%': { content: '.' },
+        marqueeLeft: {
+          '0%': { transform: 'translateX(0)' },
+          '100%': { transform: 'translateX(-100%)' },
         },
         'flashing-error': {
           '0%, 25%, 75%, 100%,': { background: 'transparent' },
