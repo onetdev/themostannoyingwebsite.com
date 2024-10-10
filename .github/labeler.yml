@@ -24,3 +24,8 @@ ci/cd:
       - .github/workflows/**
       - .github/labeler.yml
       - .github/CODEOWNERS
+
+content:
+  - changed-files:
+    - any-glob-to-any-file:
+      - public/**
