@@ -16,32 +16,34 @@ type ArticleItemProps = {
 const ArticleItem: NextPage<ArticleItemProps> = ({
   slug,
 }: ArticleItemProps) => {
-  const { t } = useTranslation('common');
+  const { t, i18n } = useTranslation('common');
   const showLocker = useExperienceFlagsStore((state) => state.contentPaywall);
-  const article = ArticleService.getBySlug(slug);
+  const lookup = { slug, locale: i18n.language };
+  const meta = ArticleService.getMeta(lookup);
+  const content = ArticleService.getContent(lookup);
 
-  if (!article) {
+  if (!meta || !content) {
     return <Error statusCode={404} />;
   }
 
-  const pageTitle = `${article.title} - ${t('meta.title')}`;
+  const pageTitle = `${meta.title} - ${t('meta.title')}`;
 
   return (
     <main>
       <Head>
         <title>{pageTitle}</title>
         <meta property="og:type" content="article" />
-        <meta name="og:description" content={article.intro || article.title} />
-        {article.coverImage && (
-          <meta property="og:image" content={article.coverImage} />
+        <meta name="og:description" content={meta.intro || meta.title} />
+        {meta.coverImage && (
+          <meta property="og:image" content={meta.coverImage} />
         )}
       </Head>
-      <h1>{article.title}</h1>
+      <h1>{meta.title}</h1>
       <span className="mb-5 block">
-        Published on {article.date.toDateString()}
+        Published on {meta.date.toDateString()}
       </span>
       <PartitionalLockedContent initialMaxHeight={200} active={showLocker}>
-        <div className={styles['content']}>{article.body}</div>
+        <div className={styles['content']}>{content}</div>
       </PartitionalLockedContent>
     </main>
   );
@@ -54,7 +56,7 @@ export const getServerSideProps: GetServerSideProps<ArticleItemProps> = async (
   return {
     props: {
       slug,
-      ...(await getI18nProps(context, ['common'])),
+      ...(await getI18nProps(context, ['common', 'contentLimiter'])),
     },
   };
 };

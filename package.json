@@ -18,8 +18,8 @@
   "license": "MIT",
   "scripts": {
     "dev": "next dev --experimental-https",
-    "build": "next build",
-    "start": "next start",
+    "build": "pnpm run gen-article-index && next build",
+    "start": "pnpm run gen-article-index && next start",
     "lint": "next lint",
     "lint:fix": "next lint --fix",
     "type-check": "tsc --project tsconfig.json --pretty --noEmit",
@@ -29,6 +29,7 @@
     "test:ci": "jest --ci",
     "prepare": "husky",
     "gen-manifest": "tsx ./scripts/gen-manifest.ts",
+    "gen-article-index": "tsx ./scripts/gen-article-index.ts",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build"
   },

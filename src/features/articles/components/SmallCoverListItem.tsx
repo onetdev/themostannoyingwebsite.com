@@ -4,10 +4,10 @@ import { FunctionComponent } from 'react';
 
 import { CoverPlaceholder } from './CoverPlaceholder';
 
-import { ArticleCore } from '@/features/articles/types';
+import { ArticleMeta } from '@/features/articles/types';
 
 type SmallCoverListItemProps = {
-  article: ArticleCore;
+  article: ArticleMeta;
 };
 
 export const SmallCoverListItem: FunctionComponent<SmallCoverListItemProps> = ({

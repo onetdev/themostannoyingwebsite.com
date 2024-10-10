@@ -1,10 +1,10 @@
 import { FunctionComponent } from 'react';
 
 import { TextListItem } from '@/features/articles/components/TextListItem';
-import { ArticleCore } from '@/features/articles/types';
+import { ArticleMeta } from '@/features/articles/types';
 
 type DenseTextListProps = JSXProxyProps<'ul'> & {
-  items: ArticleCore[];
+  items: ArticleMeta[];
 };
 
 export const DenseTextList: FunctionComponent<DenseTextListProps> = ({
