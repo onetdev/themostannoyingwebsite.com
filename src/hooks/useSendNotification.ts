@@ -2,10 +2,13 @@ import { useCallback } from 'react';
 
 import config from '@/config';
 
-type Props = {
+type UseSendNotificationProps = {
   autoRequest?: boolean;
 };
-const useSendNotification = ({ autoRequest = false }: Props = {}) => {
+
+const useSendNotification = ({
+  autoRequest = false,
+}: UseSendNotificationProps = {}) => {
   const send = useCallback(
     async (data: { title: string; body?: string; data?: unknown }) => {
       const permission = Notification.permission;

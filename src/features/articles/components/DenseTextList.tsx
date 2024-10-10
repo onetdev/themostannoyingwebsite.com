@@ -1,13 +1,13 @@
-import { FunctionComponent, PropsWithoutRef } from 'react';
+import { FunctionComponent } from 'react';
 
 import { TextListItem } from '@/features/articles/components/TextListItem';
-import { ArticleCore } from '@/types';
+import { ArticleCore } from '@/features/articles/types';
 
-type Props = PropsWithoutRef<JSX.IntrinsicElements['ul']> & {
+type DenseTextListProps = JSXProxyProps<'ul'> & {
   items: ArticleCore[];
 };
 
-export const DenseTextList: FunctionComponent<Props> = ({
+export const DenseTextList: FunctionComponent<DenseTextListProps> = ({
   items,
   className,
   ...rest

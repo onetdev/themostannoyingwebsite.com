@@ -15,6 +15,8 @@ export interface RuntimeStateActions {
   incrementVisibilitySeconds: () => void;
 }
 
+export interface RuntimeStore extends RuntimeState, RuntimeStateActions {}
+
 const initialState: RuntimeState = {
   document: {
     isVisible: false,
@@ -24,25 +26,23 @@ const initialState: RuntimeState = {
   interactionUnlocked: false,
 };
 
-export const useRuntimeStore = create<RuntimeState & RuntimeStateActions>(
-  (set) => ({
-    ...initialState,
-    setIsDocumentVisibile: (isVisible) =>
-      set((state) => ({
-        document: {
-          ...state.document,
-          isVisible,
-        },
-        startedAt: state.startedAt ?? new Date().toISOString(),
-      })),
-    markInteractionUnlocked: () => set({ interactionUnlocked: true }),
-    incrementVisibilitySeconds: () =>
-      set((state) => ({
-        document: {
-          ...state.document,
-          visibilitySeconds: state.document.visibilitySeconds + 1,
-        },
-        startedAt: state.startedAt ?? new Date().toISOString(),
-      })),
-  }),
-);
+export const useRuntimeStore = create<RuntimeStore>((set) => ({
+  ...initialState,
+  setIsDocumentVisibile: (isVisible) =>
+    set((state) => ({
+      document: {
+        ...state.document,
+        isVisible,
+      },
+      startedAt: state.startedAt ?? new Date().toISOString(),
+    })),
+  markInteractionUnlocked: () => set({ interactionUnlocked: true }),
+  incrementVisibilitySeconds: () =>
+    set((state) => ({
+      document: {
+        ...state.document,
+        visibilitySeconds: state.document.visibilitySeconds + 1,
+      },
+      startedAt: state.startedAt ?? new Date().toISOString(),
+    })),
+}));

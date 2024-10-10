@@ -13,11 +13,13 @@
     "cancel": "Cancel",
     "accept": "Accept",
     "close": "Close",
-    "ok": "OK"
+    "ok": "OK",
+    "send": "Send",
+    "share": "Share"
   },
   "status": {
     "unknown": "Unknown",
-    "not_set": "Not set"
+    "notSet": "Not set"
   },
   "navigation": {
     "home": "Home",
@@ -26,13 +28,18 @@
     "privacyPolicy": "Privacy Policy",
     "settings": "Settings"
   },
+  "shareModal": {
+    "title": "Share this page",
+    "description":"Spread the misery! Be sure to inflict this painfully obnoxious website on your friends too — why suffer alone when you can drag them down with you?"
+  },
+  "themeSwitch": {
+    "label": "Switch theme",
+    "darkMode": "Dark mode",
+    "lightMode": "Light mode"
+  },
   "experiences": {
-    "marquee_variants": ["📣 Come back please 🏃‍♀️🏃 We have candy!! 🚐"],
-    "array_paged_variants": ["⭐️ HEY YOU 🫵", "😜 YES YOU 😱", "📣 COME BACK 🏃"],
-    "notification_permission_manual": {
-      "title": "You can manually change the notification permission up here",
-      "description": "We would like to send you notifications sometimes, could you be so kind to allow us to do so? 🙏🥺🙏"
-    },
-    "exit_prompt": "I'd reconsider leaving before some bad things happend to you. Are you sure?"
+    "marqueeVariants": ["📣 Come back please 🏃‍♀️🏃 We have candy!! 🚐"],
+    "arrayPagedVariants": ["⭐️ HEY YOU 🫵", "😜 YES YOU 😱", "📣 COME BACK 🏃"],
+    "exitPrompt": "I'd reconsider leaving before some bad things happend to you. Are you sure?"
   }
 }

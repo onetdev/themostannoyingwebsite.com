@@ -1,25 +1,27 @@
+import { useTranslation } from 'next-i18next';
 import { FunctionComponent, useEffect, useRef, useState } from 'react';
 
-import DotDotDotText from '@/components/atoms/DotDotDotText';
-import { HistoryItem } from '@/features/chat_bubble/types';
-import Icon from '@/components/atoms/Icon';
-
-import MessageForm from './MessageForm';
 import MessageBubble from './MessageBubble';
+import MessageForm from './MessageForm';
 
-type Props = {
+import DotDotDotText from '@/components/atoms/DotDotDotText';
+import Icon from '@/components/atoms/Icon';
+import { HistoryItem } from '@/features/chat_bubble/types';
+
+type HistoryOverlayProps = {
   history: HistoryItem[];
   onUserMessage: (message: string) => void;
   onClose: () => void;
 };
 
-const HistoryOverlay: FunctionComponent<Props> = ({
+const HistoryOverlay: FunctionComponent<HistoryOverlayProps> = ({
   onUserMessage,
   history,
   onClose,
 }) => {
   const [showTyping, setShowTyping] = useState(true);
   const pagerRef = useRef<HTMLDivElement>(null);
+  const { t } = useTranslation('chat_bubble');
 
   useEffect(() => {
     setShowTyping(history[history.length - 1]?.isUser ?? false);
@@ -37,10 +39,7 @@ const HistoryOverlay: FunctionComponent<Props> = ({
     <div className="rounded-lg border border-secondary bg-surface">
       <div className="flex flex-row justify-between p-3 pl-5 shadow-sm">
         <h4 className="text-lg font-bold">
-          Chat with a &quot;100% real huuman&quot;{' '}
-          <abbr title="Disclaimer: Actually, this is a bot that almost feels like a real human (not a smart one) but it's still just a bot">
-            *
-          </abbr>
+          {t('hudTitle')} <abbr title={t('hudTitleDisclaimer')}>*</abbr>
         </h4>
         <button onClick={() => onClose()}>
           <Icon icon="faTimes" size="lg" />
@@ -53,7 +52,12 @@ const HistoryOverlay: FunctionComponent<Props> = ({
           history
             .sort((a, b) => a.time.getTime() - b.time.getTime())
             .map((item, index) => <MessageBubble key={index} item={item} />)}
-        {showTyping && <DotDotDotText className="block text-base italic" />}
+        {showTyping && (
+          <DotDotDotText
+            message={t('agentIsTyping')}
+            className="block text-base italic"
+          />
+        )}
       </div>
       <MessageForm
         className="flex justify-between p-3 pl-5 shadow-sm"

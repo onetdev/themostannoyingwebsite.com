@@ -1,47 +1,41 @@
-import { FunctionComponent, PropsWithoutRef, useState } from 'react';
+import { useTranslation } from 'next-i18next';
+import { FunctionComponent, useMemo, useState } from 'react';
 import Confetti from 'react-confetti';
 
-import { getWeightedRandom } from '@/utils/math';
+import { Item } from './DynamicWheelSvg';
+import AnimatedWheel, { AnimatedWheelState } from './WheelAnimationWrapper';
+
 import Icon from '@/components/atoms/Icon';
+import { getWeightedRandom, WeightedRandomPoolItem } from '@/utils/math';
 
-import AnimatedWheel, { AnimatedWheelState } from './AnimatedWheel';
-import { Item } from './Wheel';
-
-const prizeWithWeight = [
-  { value: 'Free lifetime beer*', prob: 10 },
-  { value: 'World peace*', prob: 1 },
-  { value: 'Absolutelly nothing', prob: 100 },
-  { value: 'Complimentary otter*', prob: 2 },
-  { value: 'Fake 70% discount', prob: 50 },
-];
-
-const getItems = (hueStart: number, hueEnd: number, numItems: number) => {
-  const items: Item[] = [];
-  const range = [hueStart, hueEnd].sort();
-  const step = (range[1] - range[0]) / numItems;
-  for (let i = 0; i < numItems; i++) {
-    items.push({
-      color: `hsl(${range[0] + i * step}, 100%, 50%)`,
-      text: getWeightedRandom(prizeWithWeight)!,
-    });
-  }
-
-  return items;
-};
-
-type Props = PropsWithoutRef<JSX.IntrinsicElements['div']> & {
+type ModalContentProps = JSXProxyProps<'div'> & {
   onClose?: () => void;
 };
 
-const ModalContent: FunctionComponent<Props> = ({
+const ModalContent: FunctionComponent<ModalContentProps> = ({
   className,
   onClose,
   ...rest
 }) => {
+  const { t } = useTranslation(['wheel_of_fortune', 'common']);
   const hueStart = 300; // random(0,360);
   const [state, setState] = useState<AnimatedWheelState>('ready');
   const [prize, setPrize] = useState<Item | undefined>();
-  const [items] = useState(getItems(hueStart, hueStart + 120, 10));
+
+  const prizeWithWeight = useMemo(
+    () => [
+      { value: `${t('prizes.free_lifetime_beer')}*`, weight: 10 },
+      { value: `${t('prizes.world_peace')}*`, weight: 1 },
+      { value: t('prizes.absolutelly_nothing'), weight: 100 },
+      { value: `${t('prizes.complimentary_otter')}*`, weight: 2 },
+      { value: t('prizes.fake_70_discount'), weight: 50 },
+    ],
+    [t],
+  );
+
+  const [items] = useState(
+    getSlicesItems(prizeWithWeight, hueStart, hueStart + 120, 10),
+  );
 
   return (
     <div
@@ -49,7 +43,7 @@ const ModalContent: FunctionComponent<Props> = ({
       {...rest}>
       <div className="grow">
         <button
-          aria-label="Close"
+          aria-label={t('common:actions.close')}
           className="absolute right-0 top-0 z-10 cursor-pointer p-3"
           onClick={() => onClose?.()}>
           <Icon icon="faTimes" size="lg" />
@@ -70,11 +64,30 @@ const ModalContent: FunctionComponent<Props> = ({
         />
       </div>
       <span className="w-full bg-secondary p-5 text-center text-xl font-bold text-on-secondary">
-        {state !== 'completed' && `Let's spin the wheel!!`}
-        {state === 'completed' && prize && `You won! ${prize.text}`}
+        {state !== 'completed' && t('spin_start')}
+        {state === 'completed' && prize && t('spin_win', { prize: prize.text })}
       </span>
     </div>
   );
+};
+
+const getSlicesItems = (
+  pool: WeightedRandomPoolItem<string>[],
+  hueStart: number,
+  hueEnd: number,
+  numItems: number,
+) => {
+  const items: Item[] = [];
+  const range = [hueStart, hueEnd].sort();
+  const step = (range[1] - range[0]) / numItems;
+  for (let i = 0; i < numItems; i++) {
+    items.push({
+      color: `hsl(${range[0] + i * step}, 100%, 50%)`,
+      text: getWeightedRandom(pool)!,
+    });
+  }
+
+  return items;
 };
 
 export default ModalContent;

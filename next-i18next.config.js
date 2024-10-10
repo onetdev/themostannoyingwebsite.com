@@ -1,4 +1,5 @@
 const isDev = process.env.NODE_ENV === 'development';
+
 /** @type {import('next-i18next').UserConfig} */
 module.exports = {
   reloadOnPrerender: isDev,
@@ -7,4 +8,13 @@ module.exports = {
     defaultLocale: 'en',
     locales: ['en', 'hu'],
   },
+  defaultNS: 'common',
+  ns: [
+    'chat_bubble',
+    'common',
+    'content_limiter',
+    'gifts',
+    'notifications',
+    'wheel_of_fortune',
+  ],
 };

@@ -1,15 +1,18 @@
-import Link from 'next/link';
 import Image from 'next/image';
-
-import { ArticleCore } from '@/types';
+import Link from 'next/link';
+import { FunctionComponent } from 'react';
 
 import { CoverPlaceholder } from './CoverPlaceholder';
 
-type Props = {
+import { ArticleCore } from '@/features/articles/types';
+
+type SmallCoverListItemProps = {
   article: ArticleCore;
 };
 
-export const SmallCoverListItem = ({ article }: Props) => {
+export const SmallCoverListItem: FunctionComponent<SmallCoverListItemProps> = ({
+  article,
+}) => {
   return (
     <>
       <Link href={article.url} passHref>

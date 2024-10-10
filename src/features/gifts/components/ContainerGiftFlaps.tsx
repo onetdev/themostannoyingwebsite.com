@@ -1,10 +1,13 @@
 import Image from 'next/image';
 import Link from 'next/link';
-import { FunctionComponent, PropsWithoutRef } from 'react';
+import { useTranslation } from 'next-i18next';
+import { FunctionComponent } from 'react';
 
 import flapImage from '@/public/assets/images/car-advert.jpg';
 
 const ContainerGiftFlaps: FunctionComponent = () => {
+  const { t } = useTranslation('gifts');
+
   return (
     <div className="sticky top-0 hidden w-full justify-center md:flex">
       <div className="absolute max-h-screen overflow-hidden">
@@ -18,10 +21,10 @@ const ContainerGiftFlaps: FunctionComponent = () => {
             height={1200}
           />
           <GiftFlapText className="bottom-16 left-16 origin-bottom-left -rotate-90">
-            DO YOU LIKE FREE MONEY?
+            {t('flaps.left')}
           </GiftFlapText>
           <GiftFlapText className="bottom-16 right-16 origin-bottom-right rotate-90">
-            DO YOU HATE WORKING?
+            {t('flaps.right')}
           </GiftFlapText>
         </Link>
       </div>
@@ -29,9 +32,11 @@ const ContainerGiftFlaps: FunctionComponent = () => {
   );
 };
 
-const GiftFlapText: FunctionComponent<
-  PropsWithoutRef<JSX.IntrinsicElements['span']>
-> = ({ children, className, ...rest }) => {
+const GiftFlapText: FunctionComponent<JSXProxyProps<'span'>> = ({
+  children,
+  className,
+  ...rest
+}) => {
   return (
     <span
       className={`absolute text-2xl font-bold text-on-primary mix-blend-exclusion ${className}`}

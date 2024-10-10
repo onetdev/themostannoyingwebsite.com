@@ -1,7 +1,7 @@
 /**
  * @jest-environment jsdom
  */
-import { mb_string_to_char_array, mb_string_slice } from '@/utils/string';
+import { mb_string_slice, mb_string_to_char_array } from '@/utils/string';
 
 describe('mb_string_to_char_array', () => {
   test('should properly make an array of characters', () => {

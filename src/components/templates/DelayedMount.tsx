@@ -5,11 +5,14 @@ import {
   useState,
 } from 'react';
 
-type Props = PropsWithChildren<{
+type DelayedMountProps = PropsWithChildren<{
   delay: number;
 }>;
 
-const DelayedMount: FunctionComponent<Props> = ({ children, delay }) => {
+const DelayedMount: FunctionComponent<DelayedMountProps> = ({
+  children,
+  delay,
+}) => {
   const [isMounted, setIsMounted] = useState(false);
 
   useEffect(() => {

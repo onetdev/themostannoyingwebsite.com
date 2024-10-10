@@ -1,20 +1,23 @@
 'use client';
 
 import { useTranslation } from 'next-i18next';
+import { FunctionComponent } from 'react';
 
-import { useExperienceStore } from '@/state/experience';
+import ArrayPagedTitle from './components/ArrayPagedTitle';
+import GlitchyTitle from './components/GlitchyTitle';
+import MarqueeTitle from './components/MarqueeTitle';
+
+import { useExperienceFlagsStore } from '@/state/experience_flags';
 import { useRuntimeStore } from '@/state/runtime';
-
-import ArrayPagedTitle from './ArrayPagedTitle';
-import MarqueeTitle from './MarqueeTitle';
-import GlitchyTitle from './GlitchyTitle';
 
 /**
  * Experiments on manipulating the page title. Unfortunatelly the refresh rate
  * is quite low and the title is not updated as frequently as I would like.
  */
-const PageTitleExperience = () => {
-  const pageTitleExperience = useExperienceStore((state) => state.pageTitle);
+const PageTitleExperienceHost: FunctionComponent = () => {
+  const pageTitleExperience = useExperienceFlagsStore(
+    (state) => state.pageTitle,
+  );
   const isVisible = useRuntimeStore((state) => state.document.isVisible);
   const hasInteracted = useRuntimeStore((state) => state.interactionUnlocked);
   const { t } = useTranslation('common');
@@ -23,13 +26,13 @@ const PageTitleExperience = () => {
   // Anyways, in case of returnObjects being true we need to first convert
   // the magic object into an array.
   const marqueeVariants = Array.from(
-    t('experiences.marquee_variants', {
+    t('experiences.marqueeVariants', {
       returnObjects: true,
       defaultValue: [],
     }),
   ) as string[];
   const arrayPagedVariants = Array.from(
-    t('experiences.array_paged_variants', {
+    t('experiences.arrayPagedVariants', {
       returnObjects: true,
       defaultValue: [],
     }),
@@ -56,4 +59,4 @@ const PageTitleExperience = () => {
   );
 };
 
-export default PageTitleExperience;
+export default PageTitleExperienceHost;

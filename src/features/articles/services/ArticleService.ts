@@ -2,7 +2,7 @@ import ReactDOMServer from 'react-dom/server';
 import slugify from 'slugify';
 
 import { articles as articlesRaw } from '@/features/articles/data';
-import { Article, ArticleStatic } from '@/types';
+import { Article, ArticleStatic } from '@/features/articles/types';
 
 interface ArticleFilter {
   isHighlighted?: boolean;

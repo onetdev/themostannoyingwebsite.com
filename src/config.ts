@@ -1,8 +1,9 @@
-import { Theme } from './types';
+import manifest from '@/root/package.json';
 
 const config = {
   contactEmail: 'info@themostannoyingwebsite.com',
-  defaultColorScheme: 'dark' as Theme,
+  githubRepo: manifest.repository.url,
+  defaultColorScheme: 'dark' as AppTheme,
   isBrowser: typeof window !== 'undefined',
 };
 

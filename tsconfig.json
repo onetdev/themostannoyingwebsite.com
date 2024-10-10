@@ -19,6 +19,7 @@
     ],
     "paths": {
       "@/public/*": ["./public/*"],
+      "@/root/*": ["./*"],
       "@/*": ["./src/*"]
     }
   },
@@ -29,7 +30,6 @@
     ".next/types/**/*.ts",
   ],
   "exclude": [
-    "node_modules",
-    "jest.config.js"
-  ]
+    "node_modules"
+  ],
 }

@@ -4,7 +4,7 @@ import { FunctionComponent } from 'react';
 import Marquee from '@/components/molecules/Marquee';
 import MainNavigation from '@/components/organisms/MainNavigation';
 import UserNavigation from '@/components/organisms/UserNavigation';
-import DarkModeToggle from '@/components/molecules/DarkModeToggle';
+import DarkModeToggle from '@/root/src/components/atoms/DarkModeToggle';
 
 const Header: FunctionComponent = () => {
   return (

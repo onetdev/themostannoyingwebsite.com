@@ -1,8 +1,10 @@
 # The most annoying website 
 
-The main idea is to collect all the disgusting features from today's website in one place. On steroids. We call those pesky features "experiments" here.
+The main idea is to collect all the disgusting features from today's website in one place. On steroids. We call those pesky features "experience" here. The whole thing is just a fake facade, no feature works as it would in a normal world.
 
-**Currently planned experiment** (_in no particular order_):
+## What we have and what's planned (_in no particular order_)
+
+**Important**: In order to avoid adblockers this repo uses the word "gift" instead of anything that would resemble ad-like content (eg.: promotion, advertisement).
 
 - [x] Chat bubble with incoming messages and notification sound
 - [x] "Read more" at the bottom of the article.
@@ -11,30 +13,31 @@ The main idea is to collect all the disgusting features from today's website in 
 - [x] Add confirmation when trying to leave the page
 - [x] Update title while the user is on a different tab
 - [x] Asking for notification: no worries, the website won't send any notification
+- [x] Dead pixel
 - [ ] Funny, silly contents (inspired Onion news)
 - [ ] Newsletter modal when the user leaves the screen or scrolls down a bit
 - [ ] Asking for location permission: no worries, the website won't use your location
 - [ ] Sticky video player obscuring the page visibility. (+audio)
-- [ ] Randomly loading images while scrolling.
+- [ ] Randomly loading images while scrolling (layout shifting).
 - [ ] Low Quality images
 - [ ] Age verification on some images
+- [ ] Dead pixel patch
 
-**Stretch goal experiments**:
+### Stretch goal experiments
 
-- [ ] Design: the page does just fine if it's bad looking.
-
-**Important**: In order to avoid adblockers this repo uses "gift" instead of anything that would resemble ad-like content (eg.: promotion, advertisement).
+- [ ] Design - even though the page does just fine if it's bad looking.
 
 ## Contribution
 
-This project is open for contribution! If you have anything to add, do not hesitate and **start your PR today, it's 100% off, ACT NOW!**
+This project is open for contribution! If you have anything to add, do not hesitate and **start your PR today, the world needs you, ACT NOW!**
 
 ### Framework
 
-We are using Next.JS and TypeScript, if you are not familiar with those but still want to add your own experiments and tweaks, you can find great docs on the following sites:
+The stack is just the usual, Next.JS + TypeScript + TailwindCSS. If you are not familiar with those but still want to add your own experiments and tweaks, you can find great docs on the following sites:
 
 - [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
 - [TypeScript Documentation](https://www.typescriptlang.org/docs/)
+- [TailwindCSS Documentation](https://tailwindcss.com/docs) - learn about TailwindCSS features and API.
 
 ### Local development
 
@@ -63,7 +66,7 @@ If you are eager to support me, you can throw a few coins into [BuyMeACoffee/one
 ### 3rd party credits
 
 - Notification sound: https://github.com/akx/Notifications under licence CC0
-- Icons: https://fontawesome.com 
+- Icons: https://fontawesome.com
 - Lava photo (Tanya Grypachevskaya): https://unsplash.com/photos/80x3QULJDN4
 - Background ad photo (Erik Mclean): https://unsplash.com/photos/ZRns2R5azu0
 - Article cover placeholder (Syed Ahmad): https://unsplash.com/photos/yXTr6XeJDV8

@@ -1,8 +1,7 @@
+import type { Meta, StoryObj } from '@storybook/react';
 import { fn } from '@storybook/test';
 
-import FormSelect from '@/components/atoms/FormSelect';
-
-import type { Meta, StoryObj } from '@storybook/react';
+import FormSelect from '@/components/atoms/form/Select';
 
 const meta = {
   title: 'Example/FormSelect',

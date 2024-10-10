@@ -1,11 +1,11 @@
 import { FunctionComponent, useState } from 'react';
 
+import ModalContent from './components/ModalContent';
+
 import DimmerOverlay from '@/components/atoms/DimmerOverlay';
 import Icon from '@/components/atoms/Icon';
 
-import ModalContent from './ModalContent';
-
-const ActionButton: FunctionComponent = () => {
+const WheelOfFortuneHost: FunctionComponent = () => {
   const [isOpen, setOpen] = useState(false);
 
   return (
@@ -35,4 +35,4 @@ const ActionButton: FunctionComponent = () => {
   );
 };
 
-export default ActionButton;
+export default WheelOfFortuneHost;

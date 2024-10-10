@@ -1,33 +1,36 @@
 {
   "title": "Settings",
-  "preference_section": {
-    "title": "Preferences",
-    "color_scheme": "Theme / Color scheme",
-    "enable_flashing": "Flashing contents",
-    "enable_sound": "Sound",
-    "adult_filter": "Filter adult contents"
-  },
-  "consent_section": {
-    "title": "Consent and permissions",
-    "permission_disclaimer": "Permission settings are managed by the browser, if you want to change theme you can do it from the site settings in your browser.",
-    "essential_cookies": "Allow essential cookies",
-    "notification_permission": "Notification permission",
-    "location_permission": "Location permission"
-  },
-  "experience_section": {
-    "title": "Experience",
-    "mock_chat": "Mock chat",
-    "wheel_of_fortune": "Wheel of fortune",
-    "exit_prompt": "Exit prompt",
-    "content_paywall": "Content paywall",
-    "page_title_inactive_array_paged": "Alternative title when tab is inactive"
-  },
-  "runtime_section": {
-    "title": "About this session",
-    "disclaimer": "These values reset every single visit and acts as a bit of debug info.",
-    "started_ago": "Started:",
-    "visibility_seconds": "Elapsed seconds:",
-    "is_document_visible": "Is this window in focus?",
-    "interaction_unlocked": "Had first interaction?"
+  "section": {
+    "userPreferences": {
+      "title": "Preferences",
+      "colorScheme": "Theme / Color scheme",
+      "enableFlashing": "Flashing contents",
+      "enableSound": "Sound",
+      "adultFilter": "Filter adult contents"
+    },
+    "userGrants": {
+      "title": "Consent and permissions",
+      "permissionDisclaimer": "Permission settings are managed by the browser, if you want to change theme you can do it from the site settings in your browser.",
+      "essentialCookies": "Allow essential cookies",
+      "notificationPermission": "Notification permission",
+      "locationPermission": "Location permission"
+    },
+    "experienceFlags": {
+      "title": "Experience",
+      "contentPaywall": "Content paywall",
+      "deadPixel": "Dead pixel",
+      "exitPrompt": "Exit prompt",
+      "mockChat": "Mock chat",
+      "pageTitleInactiveArrayPaged": "Alternative title when tab is inactive",
+      "wheelOfFortune": "Wheel of fortune"
+    },
+    "runtime": {
+      "title": "About this session",
+      "disclaimer": "These values reset every single visit and acts as a bit of debug info.",
+      "startedAgo": "Started:",
+      "visibilitySeconds": "Elapsed seconds:",
+      "isDocumentVisible": "Is this window in focus?",
+      "interactionUnlocked": "Had first interaction?"
+    }
   }
 }

@@ -1,4 +1,4 @@
-import { Point } from './math';
+import { Point2d } from './math';
 
 export const getRelativePosition = (
   element: HTMLElement,
@@ -11,7 +11,7 @@ export const getRelativePosition = (
   return { x, y };
 };
 
-export const isPointWithin = (element: HTMLElement, point: Point) => {
+export const isPointWithinElement = (element: HTMLElement, point: Point2d) => {
   const rect = element.getBoundingClientRect();
   return (
     point.x >= rect.left &&

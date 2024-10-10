@@ -10,27 +10,34 @@ module.exports = {
   ],
   rules: {
     'import/order': [
-      'WARN',
+      'error',
       {
+        alphabetize: {
+          caseInsensitive: true,
+          order: 'asc',
+        },
+        groups: [
+          ['builtin', 'external', 'object', 'type'],
+          ['internal', 'parent', 'sibling', 'index'],
+        ],
         pathGroups: [
           {
             pattern: '@/**',
-            group: 'external',
+            group: 'internal',
             position: 'after',
           },
         ],
-        groups: [
-          'builtin',
-          'external',
-          'internal',
-          'unknown',
-          'parent',
-          'sibling',
-          'index',
-          'object',
-          'type',
-        ],
         'newlines-between': 'always',
+      },
+    ],
+    'sort-imports': [
+      'error',
+      {
+        allowSeparatedGroups: true,
+        ignoreCase: true,
+        ignoreDeclarationSort: true,
+        ignoreMemberSort: false,
+        memberSyntaxSortOrder: ['none', 'all', 'multiple', 'single'],
       },
     ],
     'no-restricted-imports': [
@@ -55,12 +62,6 @@ module.exports = {
         destructuredArrayIgnorePattern: '^_',
         varsIgnorePattern: '^_',
         ignoreRestSiblings: true,
-      },
-    ],
-    '@typescript-eslint/no-var-requires': [
-      'error',
-      {
-        allow: ['next/jest', './next-i18next.config'],
       },
     ],
   },
