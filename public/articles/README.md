@@ -14,33 +14,38 @@ Create a folder that has the following naming pattern:
 - `article-id` incremental number
 - `title-slug` will be displayed in the URL when user opens an article
 
-Within this folder, you will need to create `meta.yml` which will contain the most important info about certain article.
+Within this folder, you will need to create `meta.json` which will contain the most important info about certain article. Date time format must be in ISO-8601.
 
-```yaml
-title: The title of an article
-language: en
-intro: Simple intro for the article 
-date: 2024-10-10T14:49:00+0 # ISO-8601
+```json
+{
+  "title": "The title of an article",
+  "language": "en",
+  "intro": "Simple intro for the article",
+  "dateTime": "2024-10-10T14:49:00+0",
+}
 ```
 
-You'll also need to create a `data.yml` which will be loaded for the article when opened, should be something like this:
+You'll also need to create a `content.html` which will be loaded for the article when opened, should be something like this:
 
-```yaml
-contents: |
-  <p>
-    Any multiline article
-  </p>
+```html
+<p>
+  Any multiline article
+</p>
 ```
 
 And lastly, you can optionally (but strongly recommended) a `cover.jpg` file that will represent your article.
 
 ## How to manage front page and article highlights
 
-You only need to edit (or create) `{lang-code}-meta.yml` and add folder names to the relevant part.
+You only need to edit (or create) `{lang-code}-meta.json` and add folder names to the relevant part.
 
-```yaml
-on-cover:
-  - en-666-your-article-slug
-highlighted:
-  - en-666-your-article-slug
+```json
+{
+  "on-cover": [
+    "en-666-your-article-slug"
+  ],
+  "highlighted": [
+    "en-666-your-article-slug"
+  ],
+}
 ```

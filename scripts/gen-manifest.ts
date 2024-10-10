@@ -1,12 +1,11 @@
+import { ESLint } from 'eslint';
+import favicons, { type FaviconFile, type FaviconImage } from 'favicons';
 import fs from 'fs/promises';
 import path from 'path';
 
-import { ESLint } from 'eslint';
-import favicons, { type FaviconFile, type FaviconImage } from 'favicons';
+import eslintRules from '@/root/.eslintrc.js';
 
 import manifestConfig from '@/root/manifest.config.js';
-
-import eslintRules from '@/root/.eslintrc.js';
 
 const main = async () => {
   const faviconSource = './public/assets/appicon.png';
