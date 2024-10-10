@@ -1,18 +1,26 @@
 dependencies:
-  - package.json
-  - pnpm-lock.yaml
-  - .nvmrc
+  - changed-files:
+    - any-glob-to-any-file:
+      - package.json
+      - pnpm-lock.yaml
+      - .nvmrc
 
 documentation:
-  - README.md
-  - .github/pull_request_template.md
+  - changed-files:
+    - any-glob-to-any-file:
+      - README.md
+      - .github/pull_request_template.md
 
 storybook:
-  - .storybook/**
-  - ./**.stories.ts
-  - ./**.stories.tsx
+  - changed-files:
+    - any-glob-to-any-file:
+      - .storybook/**
+      - ./**.stories.ts
+      - ./**.stories.tsx
 
 ci/cd:
-  - .github/workflows/**
-  - .github/labeler.yml
-  - .github/CODEOWNERS
+  - changed-files:
+    - any-glob-to-any-file:
+      - .github/workflows/**
+      - .github/labeler.yml
+      - .github/CODEOWNERS
