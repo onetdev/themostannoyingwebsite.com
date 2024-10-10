@@ -27,6 +27,10 @@ export interface UserGrantsStateActions {
   syncPermissions: () => void;
 }
 
+export interface UserGrantsStore
+  extends UserGrantsState,
+    UserGrantsStateActions {}
+
 const initialState: UserGrantsState = {
   reviewCompleted: false,
   cookies: {
@@ -36,7 +40,7 @@ const initialState: UserGrantsState = {
 };
 
 export const useUserGrantsStore = create(
-  persist<UserGrantsState & UserGrantsStateActions>(
+  persist<UserGrantsStore>(
     (set) => ({
       ...initialState,
       setReviewCompleted: (reviewCompleted) => set({ reviewCompleted }),

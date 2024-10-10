@@ -13,6 +13,10 @@ export interface UserPreferencesStateActions {
   setAdultFilter: (adultFilter: boolean) => void;
 }
 
+export interface UserPreferencesStore
+  extends UserPreferencesState,
+    UserPreferencesStateActions {}
+
 const initialState: UserPreferencesState = {
   enableSound: true,
   enableFlashing: false,
@@ -20,7 +24,7 @@ const initialState: UserPreferencesState = {
 };
 
 export const useUserPreferencesStore = create(
-  persist<UserPreferencesState & UserPreferencesStateActions>(
+  persist<UserPreferencesStore>(
     (set) => ({
       ...initialState,
       setEnableSound: (enableSound) => set({ enableSound }),
