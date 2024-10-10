@@ -9,8 +9,8 @@ documentation:
 
 storybook:
   - .storybook/**
-  - */*.stories.ts
-  - */*.stories.tsx
+  - ./**.stories.ts
+  - ./**.stories.tsx
 
 ci/cd:
   - .github/workflows/**

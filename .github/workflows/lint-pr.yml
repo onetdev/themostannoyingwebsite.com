@@ -1,4 +1,4 @@
-name: Lint PR
+name: PR clerk
 
 on:
   merge_group:
