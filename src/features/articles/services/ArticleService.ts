@@ -1,46 +1,61 @@
-import ReactDOMServer from 'react-dom/server';
 import slugify from 'slugify';
 
-import { articles as articlesRaw } from '@/features/articles/data';
-import { Article, ArticleStatic } from '@/features/articles/types';
-
-interface ArticleFilter {
-  isHighlighted?: boolean;
-  isOnCover?: boolean;
-}
-
-interface ArticleSort {
-  date?: 'asc' | 'desc';
-  title?: 'asc' | 'desc';
-}
+import {
+  ArticleContent,
+  ArticleFilter,
+  ArticleLookupFilter,
+  ArticleMeta,
+  ArticleMetaIndex,
+  ArticleSort,
+} from '@/features/articles/types';
+import articlesRaw from '@/public/articles/index.json';
 
 const propFilterBool = (
-  article: Article,
-  prop: keyof Article,
+  article: ArticleMeta,
+  prop: keyof ArticleMeta,
   value?: boolean,
-) => {
-  return (
-    article[prop] === value ||
-    typeof value === 'undefined' ||
-    (article[prop] === undefined && value !== true)
-  );
-};
+) =>
+  article[prop] === value ||
+  typeof value === 'undefined' ||
+  (article[prop] === undefined && value !== true);
 
 // Normalize raw article data se we have many optional fields in there.
-const articles = articlesRaw.map((article) => ({
-  ...article,
-  slug: slugify(article.title),
-  url: `/articles/${slugify(article.title)}`,
-  isHighlighted: article.isHighlighted ?? false,
-  isOnCover: article.isOnCover ?? false,
-}));
+const articles = articlesRaw.map(
+  (article: ArticleMetaIndex) =>
+    ({
+      ...article,
+      date: new Date(article.dateTime),
+      slug: slugify(article.title),
+      url: `/articles/${slugify(article.title)}`,
+      id: article.directory,
+    }) satisfies ArticleMeta,
+);
 
 class ArticleService {
-  public getAll(): Article[] {
-    return articles;
+  public getMeta(filter: ArticleLookupFilter): ArticleMeta | undefined {
+    return articles.find(
+      (article) =>
+        article.slug === filter.slug && article.locale === filter.locale,
+    );
   }
 
-  public getAllFiltered(filter: ArticleFilter, sort?: ArticleSort): Article[] {
+  public async getContent(
+    filter: ArticleLookupFilter,
+  ): Promise<ArticleContent | undefined> {
+    try {
+      const meta = this.getMeta(filter);
+      return (await import(`@/public/articles/${meta?.id}/content.html`))
+        .default;
+    } catch (err) {
+      console.error(err);
+      return undefined;
+    }
+  }
+
+  public getAllFiltered(
+    filter: ArticleFilter,
+    sort?: ArticleSort,
+  ): ArticleMeta[] {
     const results = articles.filter((article) => {
       return (
         propFilterBool(article, 'isHighlighted', filter.isHighlighted) &&
@@ -62,18 +77,6 @@ class ArticleService {
     }
 
     return results;
-  }
-
-  public getBySlug(slug: string): Article | undefined {
-    return articles.find((article) => article.slug === slug);
-  }
-
-  public getStatic(article: Article): ArticleStatic {
-    return {
-      ...article,
-      body: ReactDOMServer.renderToString(article.body as React.ReactElement),
-      date: article.date.toISOString(),
-    };
   }
 }
 
