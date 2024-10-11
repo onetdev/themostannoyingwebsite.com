@@ -13,14 +13,14 @@ type ArticleItemProps = {
   slug: string;
 };
 
-const ArticleItem: NextPage<ArticleItemProps> = ({
+const ArticleItem: NextPage<ArticleItemProps> = async ({
   slug,
 }: ArticleItemProps) => {
   const { t, i18n } = useTranslation('common');
   const showLocker = useExperienceFlagsStore((state) => state.contentPaywall);
   const lookup = { slug, locale: i18n.language };
   const meta = ArticleService.getMeta(lookup);
-  const content = ArticleService.getContent(lookup);
+  const content = await ArticleService.getContent(lookup);
 
   if (!meta || !content) {
     return <Error statusCode={404} />;
@@ -40,7 +40,7 @@ const ArticleItem: NextPage<ArticleItemProps> = ({
       </Head>
       <h1>{meta.title}</h1>
       <span className="mb-5 block">
-        Published on {meta.date.toDateString()}
+        Published on {meta.dateTime.toDateString()}
       </span>
       <PartitionalLockedContent initialMaxHeight={200} active={showLocker}>
         <div className={styles['content']}>{content}</div>

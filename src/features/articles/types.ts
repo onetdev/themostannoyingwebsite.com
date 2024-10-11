@@ -13,12 +13,13 @@ export interface ArticleMetaIndex {
 
 export interface ArticleMeta {
   coverImage?: string;
-  date: Date;
+  dateTime: Date;
   hasCover: boolean;
   id: string;
   intro: string;
   isHighlighted: boolean;
   isOnCover: boolean;
+  locale: string;
   slug: string;
   title: string;
   url: string;

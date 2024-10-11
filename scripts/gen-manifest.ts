@@ -95,6 +95,7 @@ const storeAndFormatHeaders = async (
   fs.writeFile(destination, formatted[0].output || '');
 };
 
+console.log('Generating manifest...');
 main()
-  .then(() => console.log(`Aaaaand it's done.`))
+  .then(() => console.log(`Aaaaand it's done. New manifest created.`))
   .catch((err) => console.error(`Ooopsie, something went wrong: ${err}`));

@@ -91,6 +91,7 @@ const main = async () => {
   await fs.writeFile(indexFile, JSON.stringify(resolved));
 };
 
+console.log('Generating article index...');
 main()
-  .then(() => console.log(`Aaaaand it's done.`))
+  .then(() => console.log(`Aaaaand it's done. New index created.`))
   .catch((err) => console.error(`Ooopsie, something went wrong: ${err}`));
