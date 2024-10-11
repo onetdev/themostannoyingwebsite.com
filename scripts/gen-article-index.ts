@@ -96,5 +96,5 @@ const main = async () => {
 
 console.log('Generating article index...');
 main()
-  .then(() => console.log(`Aaaaand it's done. New index created.`))
+  .then(() => console.log(`Aaaaand it's done. New index created.\n`))
   .catch((err) => console.error(`Ooopsie, something went wrong: ${err}`));
