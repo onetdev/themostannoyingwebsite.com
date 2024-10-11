@@ -2,6 +2,7 @@ import HTMLReactParser from 'html-react-parser';
 import { GetServerSideProps, NextPage } from 'next';
 import Error from 'next/error';
 import Head from 'next/head';
+import Image from 'next/image';
 import { useTranslation } from 'next-i18next';
 
 import { ArticleService } from '@/features/articles';
@@ -42,6 +43,15 @@ const ArticleItem: NextPage<ArticleItemProps> = ({
       <span className="mb-5 block">
         Published at {data.publishedAt.toDateString()}
       </span>
+      {data.coverImagePath && (
+        <Image
+          className="h-auto w-full object-cover"
+          src={data.coverImagePath}
+          alt="Cover image"
+          width="1920"
+          height="1200"
+        />
+      )}
       <PartitionalLockedContent initialMaxHeight={200} active={showLocker}>
         <div className={styles['content']}>{HTMLReactParser(data.content)}</div>
       </PartitionalLockedContent>
