@@ -6,9 +6,14 @@ import i18nConfig from '@/root/next-i18next.config';
 export const getI18nProps = async (
   context: GetStaticPropsContext,
   ns = ['common'],
+  skipDefaults = false,
 ) => {
+  const defaultLoadedNs =
+    (typeof i18nConfig.ns === 'string' ? [i18nConfig.ns] : i18nConfig.ns) || [];
+  const nsWithDefaults = skipDefaults ? ns : [...defaultLoadedNs, ...ns];
+
   const locale = context?.locale || context.defaultLocale;
-  return await serverSideTranslations(locale as string, ns);
+  return await serverSideTranslations(locale as string, nsWithDefaults);
 };
 
 /**
@@ -17,17 +22,11 @@ export const getI18nProps = async (
  * within your custom call.
  */
 export const makeI18nStaticProps = (
-  localeNs: string[] = [],
+  ns: string[] = [],
   skipDefaults = false,
 ) => {
-  const defaultLoadedNs =
-    (typeof i18nConfig.ns === 'string' ? [i18nConfig.ns] : i18nConfig.ns) || [];
-  const ns = skipDefaults ? localeNs : [...defaultLoadedNs, ...localeNs];
-
-  console.log(ns);
-
   const getStatisProps: GetStaticProps = async (context) => ({
-    props: await getI18nProps(context, ns),
+    props: await getI18nProps(context, ns, skipDefaults),
   });
 
   return getStatisProps;

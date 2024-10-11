@@ -1,31 +1,31 @@
 // Coming from generated article index through `pnpm run gen-article-index`
-export interface ArticleMetaIndex {
-  dateTime: string;
+export interface ArticleIndexData {
+  content: string;
   directory: string;
   hasCover: boolean;
   intro: string;
   isHighlighted: boolean;
   isOnCover: boolean;
   locale: string;
+  publishedAt: string;
   slug: string;
   title: string;
 }
 
-export interface ArticleMeta {
+export interface ArticleData {
+  assetGroupId: string;
+  content: string;
   coverImage?: string;
-  dateTime: Date;
   hasCover: boolean;
-  id: string;
   intro: string;
   isHighlighted: boolean;
   isOnCover: boolean;
   locale: string;
+  publishedAt: Date;
   slug: string;
   title: string;
   url: string;
 }
-
-export type ArticleContent = string;
 
 export interface ArticleLookupFilter {
   slug: string;

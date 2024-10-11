@@ -1,8 +1,8 @@
 # Static article store
 
-This folder contains all the assets for the articles - for now, temporarily. Once we have a proper content backend, this will disappear.
+This folder contains all the assets for the articles - for now, temporarily. Once we have so many content that this becomes a bottleneck we will replace it with a proper headless cms solution 🤷.
 
-**IMPORTANT***: Since we need a few index data to be generated, `pnpm run gen-article-index` must be run for dist and dev builds.
+**IMPORTANT***: Since we need index data to be generated, `pnpm run gen-article-index` must be run for dist and dev builds.
 
 ## How to add new article?
 
@@ -14,23 +14,17 @@ Create a folder that has the following naming pattern:
 - `article-id` incremental number
 - `title-slug` will be displayed in the URL when user opens an article
 
-Within this folder, you will need to create `meta.json` which will contain the most important info about certain article. Date time format must be in ISO-8601.
+Within this folder, you will need to create `data.yml` which will contain the most important info about certain article. Date time format must be in ISO-8601.
 
-```json
-{
-  "title": "The title of an article",
-  "language": "en",
-  "intro": "Simple intro for the article",
-  "dateTime": "2024-10-10T14:49:00+0",
-}
-```
-
-You'll also need to create a `content.html` which will be loaded for the article when opened, should be something like this:
-
-```html
-<p>
-  Any multiline article
-</p>
+```yaml
+title: The title of an article
+language: en
+intro: Simple intro for the article
+dateTime: 2024-10-10T14:49:00Z
+content: |
+  <p>
+    Any multiline article
+  </p>
 ```
 
 And lastly, you can optionally (but strongly recommended) a `cover.jpg` file that will represent your article.

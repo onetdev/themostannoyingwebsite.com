@@ -16,7 +16,7 @@
   "private": false,
   "license": "MIT",
   "scripts": {
-    "dev": "next dev --experimental-https",
+    "dev": "pnpm run gen-article-index && next dev --experimental-https",
     "build": "pnpm run gen-article-index && next build",
     "start": "pnpm run gen-article-index && next start",
     "lint": "next lint",
@@ -40,6 +40,7 @@
     "classnames": "^2.5.1",
     "color": "^4.2.3",
     "eslint-config-next": "^14.2.15",
+    "html-react-parser": "^5.1.18",
     "next": "^14.2.15",
     "next-i18next": "^15.3.1",
     "next-themes": "^0.3.0",
@@ -52,6 +53,7 @@
     "react-use": "^17.5.1",
     "sharp": "^0.33.5",
     "slugify": "^1.6.6",
+    "yaml": "^2.5.1",
     "zustand": "^4.5.5"
   },
   "devDependencies": {

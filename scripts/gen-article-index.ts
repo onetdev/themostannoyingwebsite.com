@@ -1,6 +1,7 @@
 import { Dirent } from 'fs';
 import fs from 'fs/promises';
 import path from 'path';
+import { parse } from 'yaml';
 
 import i18nConfig from '@/root/next-i18next.config';
 
@@ -52,8 +53,8 @@ const resolveArticle = async (
   }
 
   const articlePath = path.join(articlesRootPath, entry.name);
-  const metaContent = await fs.readFile(path.join(articlePath, 'meta.json'));
-  const meta = JSON.parse(metaContent.toString());
+  const dataRaw = await fs.readFile(path.join(articlePath, 'data.yml'));
+  const data = parse(dataRaw.toString());
 
   let hasCover = false;
   try {
@@ -63,14 +64,16 @@ const resolveArticle = async (
     hasCover = false;
   }
 
+  // Denormalized data
   return {
-    dateTime: meta.dateTime,
+    publishedAt: data.publishedAt,
     directory: entry.name,
-    intro: meta.intro,
+    intro: data.intro,
     locale: match[1],
     slug: match[3],
-    title: meta.title,
+    title: data.title,
     hasCover,
+    content: data.content,
     isOnCover: localeMeta[match[1]].onCover.includes(entry.name),
     isHighlighted: localeMeta[match[1]].highlighted.includes(entry.name),
   };

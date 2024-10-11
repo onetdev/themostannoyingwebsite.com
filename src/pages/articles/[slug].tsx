@@ -1,3 +1,4 @@
+import HTMLReactParser from 'html-react-parser';
 import { GetServerSideProps, NextPage } from 'next';
 import Error from 'next/error';
 import Head from 'next/head';
@@ -13,37 +14,36 @@ type ArticleItemProps = {
   slug: string;
 };
 
-const ArticleItem: NextPage<ArticleItemProps> = async ({
+const ArticleItem: NextPage<ArticleItemProps> = ({
   slug,
 }: ArticleItemProps) => {
   const { t, i18n } = useTranslation('common');
   const showLocker = useExperienceFlagsStore((state) => state.contentPaywall);
   const lookup = { slug, locale: i18n.language };
-  const meta = ArticleService.getMeta(lookup);
-  const content = await ArticleService.getContent(lookup);
+  const data = ArticleService.getByLookupFilter(lookup);
 
-  if (!meta || !content) {
+  if (!data) {
     return <Error statusCode={404} />;
   }
 
-  const pageTitle = `${meta.title} - ${t('meta.title')}`;
+  const pageTitle = `${data.title} - ${t('meta.title')}`;
 
   return (
     <main>
       <Head>
         <title>{pageTitle}</title>
         <meta property="og:type" content="article" />
-        <meta name="og:description" content={meta.intro || meta.title} />
-        {meta.coverImage && (
-          <meta property="og:image" content={meta.coverImage} />
+        <meta name="og:description" content={data.intro || data.title} />
+        {data.coverImage && (
+          <meta property="og:image" content={data.coverImage} />
         )}
       </Head>
-      <h1>{meta.title}</h1>
+      <h1>{data.title}</h1>
       <span className="mb-5 block">
-        Published on {meta.dateTime.toDateString()}
+        Published at {data.publishedAt.toDateString()}
       </span>
       <PartitionalLockedContent initialMaxHeight={200} active={showLocker}>
-        <div className={styles['content']}>{content}</div>
+        <div className={styles['content']}>{HTMLReactParser(data.content)}</div>
       </PartitionalLockedContent>
     </main>
   );
@@ -56,7 +56,7 @@ export const getServerSideProps: GetServerSideProps<ArticleItemProps> = async (
   return {
     props: {
       slug,
-      ...(await getI18nProps(context, ['common', 'contentLimiter'])),
+      ...(await getI18nProps(context)),
     },
   };
 };

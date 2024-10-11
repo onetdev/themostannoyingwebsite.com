@@ -14,7 +14,7 @@ declare module 'i18next' {
     resources: {
       chat_bubble: typeof chatBubble;
       common: typeof common;
-      contentLimiter: typeof contentLimiter;
+      content_limiter: typeof contentLimiter;
       gifts: typeof gifts;
       notifications: typeof notifications;
       settings: typeof settings;

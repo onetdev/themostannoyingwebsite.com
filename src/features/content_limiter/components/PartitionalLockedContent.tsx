@@ -27,7 +27,7 @@ const PartitionalLockedContent: FunctionComponent<
   className,
   ...rest
 }) => {
-  const { t } = useTranslation(['contentLimiter']);
+  const { t } = useTranslation(['content_limiter']);
   const [maxHeight, setMaxHeight] = useState(initialMaxHeight);
   const [isRevealed, setIsRevealed] = useState(false);
   const contentRef = useRef<HTMLDivElement>(null);
@@ -60,14 +60,14 @@ const PartitionalLockedContent: FunctionComponent<
         <h1>{t('partitional.title')}</h1>
         <EscapingElement boundingBox={{ left: 0, bottom: 0 }} trigger="hover">
           <Button variant="primary">
-            {t('contentLimiter:partitional.cta')}*
+            {t('content_limiter:partitional.cta')}*
           </Button>
         </EscapingElement>
         <Button variant="secondary" onClick={handleRevealClick}>
-          {t('contentLimiter:partitional.cancel')}
+          {t('content_limiter:partitional.cancel')}
         </Button>
         <div className="block text-xs italic">
-          * {t('contentLimiter:partitional.disclaimer')}
+          * {t('content_limiter:partitional.disclaimer')}
         </div>
       </div>
     </div>
