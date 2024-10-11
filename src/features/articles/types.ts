@@ -15,8 +15,7 @@ export interface ArticleIndexData {
 export interface ArticleData {
   assetGroupId: string;
   content: string;
-  coverImage?: string;
-  hasCover: boolean;
+  coverImagePath?: string;
   intro: string;
   isHighlighted: boolean;
   isOnCover: boolean;
@@ -32,7 +31,7 @@ export interface ArticleLookupFilter {
   locale: string;
 }
 
-export interface ArticleFilter {
+export interface ArticlePropFilter {
   isHighlighted?: boolean;
   isOnCover?: boolean;
 }
@@ -40,4 +39,10 @@ export interface ArticleFilter {
 export interface ArticleSort {
   date?: 'asc' | 'desc';
   title?: 'asc' | 'desc';
+}
+
+export interface ArticleFilter {
+  props: ArticlePropFilter;
+  sort?: ArticleSort;
+  paginate?: { take?: number; skip?: number };
 }

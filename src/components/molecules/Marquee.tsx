@@ -12,7 +12,10 @@ export type MarqueeProps = {
 const Marquee: FunctionComponent<MarqueeProps> = ({ className }) => {
   const flashing = useUserPreferencesStore((state) => state.enableFlashing);
   const [items] = useState(
-    ArticleService.getAllFiltered({ isHighlighted: true }),
+    ArticleService.getAllFiltered({
+      props: { isHighlighted: true },
+      paginate: { take: 10 },
+    }),
   );
   const [speed, setSpeed] = useState(100);
 

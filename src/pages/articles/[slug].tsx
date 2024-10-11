@@ -34,8 +34,8 @@ const ArticleItem: NextPage<ArticleItemProps> = ({
         <title>{pageTitle}</title>
         <meta property="og:type" content="article" />
         <meta name="og:description" content={data.intro || data.title} />
-        {data.coverImage && (
-          <meta property="og:image" content={data.coverImage} />
+        {data.coverImagePath && (
+          <meta property="og:image" content={data.coverImagePath} />
         )}
       </Head>
       <h1>{data.title}</h1>

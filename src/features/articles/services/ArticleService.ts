@@ -5,7 +5,6 @@ import {
   ArticleFilter,
   ArticleIndexData,
   ArticleLookupFilter,
-  ArticleSort,
 } from '@/features/articles/types';
 import articlesRaw from '@/public/articles/index.json';
 
@@ -25,11 +24,19 @@ class ArticleService {
     this.articles = articlesRaw.map(
       (article: ArticleIndexData) =>
         ({
-          ...article,
+          assetGroupId: article.directory,
+          content: article.content,
+          coverImagePath: article.hasCover
+            ? `/articles/${article.directory}/cover.jpg`
+            : undefined,
+          intro: article.intro,
+          isHighlighted: article.isHighlighted,
+          isOnCover: article.isOnCover,
+          locale: article.locale,
           publishedAt: new Date(article.publishedAt),
           slug: slugify(article.title),
+          title: article.title,
           url: `/articles/${slugify(article.title)}`,
-          assetGroupId: article.directory,
         }) satisfies ArticleData,
     );
   }
@@ -43,15 +50,15 @@ class ArticleService {
     );
   }
 
-  public getAllFiltered(
-    filter: ArticleFilter,
-    sort?: ArticleSort,
-    pagination: { take: number; skip: number } = { take: 15, skip: 0 },
-  ): ArticleData[] {
+  public getAllFiltered({
+    props,
+    sort,
+    paginate,
+  }: ArticleFilter): ArticleData[] {
     const results = this.articles.filter((article) => {
       return (
-        propFilterBool(article, 'isHighlighted', filter.isHighlighted) &&
-        propFilterBool(article, 'isOnCover', filter.isOnCover)
+        propFilterBool(article, 'isHighlighted', props.isHighlighted) &&
+        propFilterBool(article, 'isOnCover', props.isOnCover)
       );
     });
 
@@ -69,7 +76,11 @@ class ArticleService {
       });
     }
 
-    return results.slice(pagination.skip, pagination.take ?? results.length);
+    return results.slice(paginate?.skip || 0, paginate?.take ?? 10);
+  }
+
+  public getFirstFiltered({ props }: ArticleFilter): ArticleData | undefined {
+    return this.getAllFiltered({ props, paginate: { take: 1, skip: 0 } })[0];
   }
 }
 

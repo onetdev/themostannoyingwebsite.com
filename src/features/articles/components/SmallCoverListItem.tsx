@@ -16,11 +16,13 @@ export const SmallCoverListItem: FunctionComponent<SmallCoverListItemProps> = ({
   return (
     <>
       <Link href={article.url} passHref>
-        {!article.coverImage && <CoverPlaceholder width={1920} height={1200} />}
-        {article.coverImage && (
+        {!article.coverImagePath && (
+          <CoverPlaceholder width={1920} height={1200} />
+        )}
+        {article.coverImagePath && (
           <Image
             className="h-auto w-full object-cover"
-            src={article.coverImage}
+            src={article.coverImagePath}
             alt="Cover image"
             width="1920"
             height="1200"
