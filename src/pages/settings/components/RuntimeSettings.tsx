@@ -2,7 +2,7 @@ import { useTranslation } from 'next-i18next';
 import { FunctionComponent } from 'react';
 import ReactTimeAgo from 'react-timeago';
 
-import SettingsBlock from './settings-block';
+import SettingsBlock from './SettingsBlock';
 
 import { useRuntimeStore } from '@/state/runtime';
 

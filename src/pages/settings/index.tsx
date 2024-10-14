@@ -1,10 +1,10 @@
 import { NextPage } from 'next';
 import { useTranslation } from 'next-i18next';
 
-import ExperienceSettings from './components/experience-settings';
-import PreferencesSettings from './components/preferences-settings';
-import RuntimeSettings from './components/runtime-settings';
-import UserGrantSettings from './components/user-grants-settings';
+import ExperienceSettings from './components/ExperienceSettings';
+import PreferencesSettings from './components/PreferencesSettings';
+import RuntimeSettings from './components/RuntimeSettings';
+import UserGrantSettings from './components/UserGrantSettings';
 
 import SiteTitle from '@/components/atoms/SiteTitle';
 import { makeI18nStaticProps } from '@/utils/i18n';

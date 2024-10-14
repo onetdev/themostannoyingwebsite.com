@@ -28,4 +28,7 @@
     "iteratorClassName",
     "localStyles.*"
   ],
+  "yaml.schemas": {
+    "schemas/article.json": "public/articles/*/data.yml"
+  }
 }

@@ -1,8 +1,8 @@
 import { useTranslation } from 'next-i18next';
 import { FunctionComponent } from 'react';
 
-import SettingsBlock from './settings-block';
-import SettingsBlockRow from './settings-block-row';
+import SettingsBlock from './SettingsBlock';
+import SettingsBlockRow from './SettingsBlockRow';
 
 import FormCheckbox from '@/components/atoms/form/Checkbox';
 import { useUserGrantsStore } from '@/state/user_grants';

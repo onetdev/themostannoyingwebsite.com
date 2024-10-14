@@ -1,57 +1,72 @@
-import ReactDOMServer from 'react-dom/server';
 import slugify from 'slugify';
 
-import { articles as articlesRaw } from '@/features/articles/data';
-import { Article, ArticleStatic } from '@/features/articles/types';
-
-interface ArticleFilter {
-  isHighlighted?: boolean;
-  isOnCover?: boolean;
-}
-
-interface ArticleSort {
-  date?: 'asc' | 'desc';
-  title?: 'asc' | 'desc';
-}
+import {
+  ArticleData,
+  ArticleFilter,
+  ArticleIndexData,
+  ArticleLookupFilter,
+} from '@/features/articles/types';
+import articlesRaw from '@/public/articles/index.json';
 
 const propFilterBool = (
-  article: Article,
-  prop: keyof Article,
+  article: ArticleData,
+  prop: keyof ArticleData,
   value?: boolean,
-) => {
-  return (
-    article[prop] === value ||
-    typeof value === 'undefined' ||
-    (article[prop] === undefined && value !== true)
-  );
-};
-
-// Normalize raw article data se we have many optional fields in there.
-const articles = articlesRaw.map((article) => ({
-  ...article,
-  slug: slugify(article.title),
-  url: `/articles/${slugify(article.title)}`,
-  isHighlighted: article.isHighlighted ?? false,
-  isOnCover: article.isOnCover ?? false,
-}));
+) =>
+  article[prop] === value ||
+  typeof value === 'undefined' ||
+  (article[prop] === undefined && value !== true);
 
 class ArticleService {
-  public getAll(): Article[] {
-    return articles;
+  articles: ArticleData[];
+
+  constructor() {
+    this.articles = articlesRaw.map(
+      (article: ArticleIndexData) =>
+        ({
+          assetGroupId: article.directory,
+          content: article.content,
+          coverImagePath: article.hasCover
+            ? `/articles/${article.directory}/cover.jpg`
+            : undefined,
+          intro: article.intro,
+          isHighlighted: article.isHighlighted,
+          isOnCover: article.isOnCover,
+          locale: article.locale,
+          publishedAt: new Date(article.publishedAt),
+          slug: slugify(article.title),
+          title: article.title,
+          url: `/articles/${slugify(article.title)}`,
+        }) satisfies ArticleData,
+    );
   }
 
-  public getAllFiltered(filter: ArticleFilter, sort?: ArticleSort): Article[] {
-    const results = articles.filter((article) => {
+  public getByLookupFilter(
+    filter: ArticleLookupFilter,
+  ): ArticleData | undefined {
+    return this.articles.find(
+      (article) =>
+        article.slug === filter.slug && article.locale === filter.locale,
+    );
+  }
+
+  public getAllFiltered({
+    props,
+    sort,
+    paginate,
+  }: ArticleFilter): ArticleData[] {
+    const results = this.articles.filter((article) => {
       return (
-        propFilterBool(article, 'isHighlighted', filter.isHighlighted) &&
-        propFilterBool(article, 'isOnCover', filter.isOnCover)
+        propFilterBool(article, 'isHighlighted', props.isHighlighted) &&
+        propFilterBool(article, 'isOnCover', props.isOnCover)
       );
     });
 
     if (sort) {
       return results.sort((a, b) => {
         const dateCmp = sort.date
-          ? a.date.getTime() - b.date.getTime() * (sort.date === 'asc' ? 1 : -1)
+          ? a.publishedAt.getTime() -
+            b.publishedAt.getTime() * (sort.date === 'asc' ? 1 : -1)
           : 0;
         const titleCmp = sort.title
           ? a.title.localeCompare(b.title) * (sort.title === 'asc' ? 1 : -1)
@@ -61,19 +76,11 @@ class ArticleService {
       });
     }
 
-    return results;
+    return results.slice(paginate?.skip || 0, paginate?.take ?? 10);
   }
 
-  public getBySlug(slug: string): Article | undefined {
-    return articles.find((article) => article.slug === slug);
-  }
-
-  public getStatic(article: Article): ArticleStatic {
-    return {
-      ...article,
-      body: ReactDOMServer.renderToString(article.body as React.ReactElement),
-      date: article.date.toISOString(),
-    };
+  public getFirstFiltered({ props }: ArticleFilter): ArticleData | undefined {
+    return this.getAllFiltered({ props, paginate: { take: 1, skip: 0 } })[0];
   }
 }
 
