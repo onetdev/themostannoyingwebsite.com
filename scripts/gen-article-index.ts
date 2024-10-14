@@ -67,7 +67,7 @@ const resolveArticle = async (
   }
 
   let content: string;
-  if ((data.type || 'markdown') === 'markdown') {
+  if ((data.contentFormat || 'markdown') === 'markdown') {
     content = sanitizeHtml(await marked.parse(data.content));
   } else {
     content = sanitizeHtml(data.content);
