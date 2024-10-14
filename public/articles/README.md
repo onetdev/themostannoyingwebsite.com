@@ -21,10 +21,13 @@ title: The title of an article
 language: en
 intro: Simple intro for the article
 dateTime: 2024-10-10T14:49:00Z
+mode: {markdown|html, default = markdown}
 content: |
-  <p>
-    Any multiline article
-  </p>
+  Intro paragraph
+
+  ### A little header
+
+  Another paragraph
 ```
 
 And lastly, you can optionally (but strongly recommended) a `cover.jpg` file that will represent your article.

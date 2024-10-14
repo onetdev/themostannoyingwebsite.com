@@ -1,6 +1,8 @@
 import { Dirent } from 'fs';
 import fs from 'fs/promises';
+import { marked } from 'marked';
 import path from 'path';
+import sanitizeHtml from 'sanitize-html';
 import { parse } from 'yaml';
 
 import i18nConfig from '@/root/next-i18next.config';
@@ -64,6 +66,13 @@ const resolveArticle = async (
     hasCover = false;
   }
 
+  let content: string;
+  if ((data.type || 'markdown') === 'markdown') {
+    content = sanitizeHtml(await marked.parse(data.content));
+  } else {
+    content = sanitizeHtml(data.content);
+  }
+
   // Denormalized data
   return {
     publishedAt: data.publishedAt,
@@ -73,7 +82,7 @@ const resolveArticle = async (
     slug: match[3],
     title: data.title,
     hasCover,
-    content: data.content,
+    content: content,
     isOnCover: localeMeta[match[1]].onCover.includes(entry.name),
     isHighlighted: localeMeta[match[1]].highlighted.includes(entry.name),
   };
