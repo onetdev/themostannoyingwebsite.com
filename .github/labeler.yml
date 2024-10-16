@@ -24,6 +24,7 @@ ci/cd:
       - .github/workflows/**
       - .github/labeler.yml
       - .github/CODEOWNERS
+      - next.config.js
 
 content:
   - changed-files:
