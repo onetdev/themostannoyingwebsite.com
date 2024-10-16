@@ -6,6 +6,9 @@ module.exports = {
   poweredByHeader: false,
   trailingSlash: true,
   i18n,
+  images: {
+    unoptimized: true,
+  },
   async headers() {
     const oneHourCache = {
       key: 'Cache-Control',
