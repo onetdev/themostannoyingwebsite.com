@@ -28,4 +28,13 @@
     "iteratorClassName",
     "localStyles.*"
   ],
+  "yaml.schemas": {
+    "src/schemas/article-entry-simplified.schema.json": "public/articles/*/data.yml"
+  },
+  "json.schemas": [
+    {
+      "fileMatch": ["public/articles/*-meta.json"],
+      "url": "./src/schemas/article-locale-meta.schema.json"
+    }
+  ]
 }

@@ -4,10 +4,10 @@ import { FunctionComponent } from 'react';
 
 import { CoverPlaceholder } from './CoverPlaceholder';
 
-import { ArticleCore } from '@/features/articles/types';
+import { ArticleData } from '@/features/articles/types';
 
 type LargeCoverItemProps = JSXProxyProps<'div'> & {
-  article: ArticleCore;
+  article: ArticleData;
 };
 
 export const LargeCoverItem: FunctionComponent<LargeCoverItemProps> = ({
@@ -17,11 +17,13 @@ export const LargeCoverItem: FunctionComponent<LargeCoverItemProps> = ({
   return (
     <div {...rest}>
       <Link className="relative block" href={article.url} passHref>
-        {!article.coverImage && <CoverPlaceholder width={1920} height={1200} />}
-        {article.coverImage && (
+        {!article.coverImages?.original && (
+          <CoverPlaceholder width={1920} height={1200} />
+        )}
+        {article.coverImages?.original && (
           <Image
             className="h-auto w-full object-cover"
-            src={article.coverImage}
+            src={article.coverImages.original}
             alt="Cover image"
             width="1920"
             height="1200"

@@ -1,6 +1,8 @@
+import HTMLReactParser from 'html-react-parser';
 import { GetServerSideProps, NextPage } from 'next';
 import Error from 'next/error';
 import Head from 'next/head';
+import Image from 'next/image';
 import { useTranslation } from 'next-i18next';
 
 import { ArticleService } from '@/features/articles';
@@ -16,32 +18,42 @@ type ArticleItemProps = {
 const ArticleItem: NextPage<ArticleItemProps> = ({
   slug,
 }: ArticleItemProps) => {
-  const { t } = useTranslation('common');
+  const { t, i18n } = useTranslation('common');
   const showLocker = useExperienceFlagsStore((state) => state.contentPaywall);
-  const article = ArticleService.getBySlug(slug);
+  const lookup = { slug, locale: i18n.language };
+  const data = ArticleService.getByLookupFilter(lookup);
 
-  if (!article) {
+  if (!data) {
     return <Error statusCode={404} />;
   }
 
-  const pageTitle = `${article.title} - ${t('meta.title')}`;
+  const pageTitle = `${data.title} - ${t('meta.title')}`;
 
   return (
     <main>
       <Head>
         <title>{pageTitle}</title>
         <meta property="og:type" content="article" />
-        <meta name="og:description" content={article.intro || article.title} />
-        {article.coverImage && (
-          <meta property="og:image" content={article.coverImage} />
+        <meta name="og:description" content={data.intro || data.title} />
+        {data.coverImages?.original && (
+          <meta property="og:image" content={data.coverImages.original} />
         )}
       </Head>
-      <h1>{article.title}</h1>
-      <span className="mb-5 block">
-        Published on {article.date.toDateString()}
+      <h1 className="mb-2 max-w-[900px]">{data.title}</h1>
+      <span className="mb-5 block italic">
+        Published at {data.publishedAt.toDateString()}
       </span>
+      {data.coverImages?.original && (
+        <Image
+          className="h-auto w-full object-cover"
+          src={data.coverImages?.original}
+          alt="Cover image"
+          width="1920"
+          height="1200"
+        />
+      )}
       <PartitionalLockedContent initialMaxHeight={200} active={showLocker}>
-        <div className={styles['content']}>{article.body}</div>
+        <div className={styles['content']}>{HTMLReactParser(data.content)}</div>
       </PartitionalLockedContent>
     </main>
   );
@@ -54,7 +66,7 @@ export const getServerSideProps: GetServerSideProps<ArticleItemProps> = async (
   return {
     props: {
       slug,
-      ...(await getI18nProps(context, ['common'])),
+      ...(await getI18nProps(context)),
     },
   };
 };

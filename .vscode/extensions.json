@@ -5,6 +5,7 @@
         "rubymaniac.vscode-direnv",
         "unifiedjs.vscode-mdx",
         "bradlc.vscode-tailwindcss",
-        "yoavbls.pretty-ts-errors"
+        "yoavbls.pretty-ts-errors",
+        "redhat.vscode-yaml"
     ]
 }
