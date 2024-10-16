@@ -10,7 +10,7 @@ const Header: FunctionComponent = () => {
   return (
     <header className="grid grid-cols-2 gap-1 px-0 py-2">
       <h1>
-        <Link href="/">
+        <Link href="/" prefetch={false}>
           The <i>MAW</i>
         </Link>
       </h1>

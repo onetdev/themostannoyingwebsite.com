@@ -12,7 +12,7 @@ export const TextListItem: FunctionComponent<TextListItemProps> = ({
 }) => {
   return (
     <>
-      <Link href={article.url} passHref>
+      <Link href={article.url} passHref prefetch={false}>
         <h4 className="leading-tight">{article.title}</h4>
         <small className="my-2 block">{article.intro}</small>
       </Link>

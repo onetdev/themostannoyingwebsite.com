@@ -18,6 +18,7 @@ const Footer: FunctionComponent = () => {
               href={config.githubRepo}
               target="_blank"
               rel="noopener noreferrer"
+              prefetch={false}
             />
           ),
         }}

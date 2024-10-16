@@ -23,7 +23,7 @@ const CookieBar: FunctionComponent = () => {
           and cookie settings in the settings menu.
         </p>
         <div className="flex items-center justify-end gap-3">
-          <Link href="/settings" passHref>
+          <Link href="/settings" passHref prefetch={false}>
             {t('navigation.settings')}
           </Link>
           <button onClick={close}>{t('actions.ok')}</button>

@@ -22,7 +22,9 @@ const UserNavigation: FunctionComponent<UserNavigationProps> = ({
         handleClose={() => setShowShareModal(false)}
       />
       <GenericMenu>
-        <Link href="/settings">{t('navigation.settings')}</Link>
+        <Link href="/settings" prefetch={false}>
+          {t('navigation.settings')}
+        </Link>
         <span onClick={() => setShowShareModal(true)}>
           {t('actions.share')}
         </span>
