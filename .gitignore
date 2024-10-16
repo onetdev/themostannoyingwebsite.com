@@ -14,8 +14,8 @@
 
 # production
 /build
-/public/articles/index.json
-public/articles/*/cover-*.jpg
+/public/assets/articles/index.json
+/public/assets/articles/*/cover-*.jpg
 
 # misc
 .DS_Store

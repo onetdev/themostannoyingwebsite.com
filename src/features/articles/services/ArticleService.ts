@@ -5,8 +5,8 @@ import {
   ArticleFilter,
   ArticleLookupFilter,
 } from '@/features/articles/types';
-import articlesRaw from '@/public/articles/index.json';
-import { ArticleIndexEntrySchema } from '@/root/src/schemas/article-index-entry';
+import articlesRaw from '@/public/assets/articles/index.json';
+import { ArticleIndexEntrySchema } from '@/schemas/article-index-entry';
 
 const propFilterBool = (
   article: ArticleData,
