@@ -28,8 +28,8 @@ class ArticleService {
           content: article.content,
           coverImages: article.hasCoverImage
             ? {
-                original: `/articles/${article.directory}/cover.jpg`,
-                thumbnail: `/articles/${article.directory}/cover-480x270.jpg`,
+                original: `/assets/articles/${article.directory}/cover.jpg`,
+                thumbnail: `/assets/articles/${article.directory}/cover-480x270.jpg`,
               }
             : undefined,
           intro: article.intro,
