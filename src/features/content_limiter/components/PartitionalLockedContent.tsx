@@ -43,9 +43,9 @@ const PartitionalLockedContent: FunctionComponent<
 
   const wrapperStyles = useMemo(
     () => ({
-      maxHeight: active ? `${maxHeight}px` : 'auto',
+      maxHeight: active && !isRevealed ? `${maxHeight}px` : 'auto',
     }),
-    [active, maxHeight],
+    [active, maxHeight, isRevealed],
   );
 
   return (

@@ -35,18 +35,18 @@ const ArticleItem: NextPage<ArticleItemProps> = ({
         <title>{pageTitle}</title>
         <meta property="og:type" content="article" />
         <meta name="og:description" content={data.intro || data.title} />
-        {data.coverImagePath && (
-          <meta property="og:image" content={data.coverImagePath} />
+        {data.coverImages?.original && (
+          <meta property="og:image" content={data.coverImages.original} />
         )}
       </Head>
-      <h1>{data.title}</h1>
-      <span className="mb-5 block">
+      <h1 className="mb-2 max-w-[900px]">{data.title}</h1>
+      <span className="mb-5 block italic">
         Published at {data.publishedAt.toDateString()}
       </span>
-      {data.coverImagePath && (
+      {data.coverImages?.original && (
         <Image
           className="h-auto w-full object-cover"
-          src={data.coverImagePath}
+          src={data.coverImages?.original}
           alt="Cover image"
           width="1920"
           height="1200"

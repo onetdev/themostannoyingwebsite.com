@@ -3,10 +3,10 @@ import slugify from 'slugify';
 import {
   ArticleData,
   ArticleFilter,
-  ArticleIndexData,
   ArticleLookupFilter,
 } from '@/features/articles/types';
 import articlesRaw from '@/public/articles/index.json';
+import { ArticleIndexEntrySchema } from '@/root/src/schemas/article-index-entry';
 
 const propFilterBool = (
   article: ArticleData,
@@ -22,12 +22,15 @@ class ArticleService {
 
   constructor() {
     this.articles = articlesRaw.map(
-      (article: ArticleIndexData) =>
+      (article: ArticleIndexEntrySchema) =>
         ({
           assetGroupId: article.directory,
           content: article.content,
-          coverImagePath: article.hasCover
-            ? `/articles/${article.directory}/cover.jpg`
+          coverImages: article.hasCoverImage
+            ? {
+                original: `/articles/${article.directory}/cover.jpg`,
+                thumbnail: `/articles/${article.directory}/cover-480x270.jpg`,
+              }
             : undefined,
           intro: article.intro,
           isHighlighted: article.isHighlighted,
@@ -52,7 +55,7 @@ class ArticleService {
 
   public getAllFiltered({
     props,
-    sort,
+    sort = { date: 'desc' },
     paginate,
   }: ArticleFilter): ArticleData[] {
     const results = this.articles.filter((article) => {
@@ -62,21 +65,23 @@ class ArticleService {
       );
     });
 
-    if (sort) {
-      return results.sort((a, b) => {
+    if (!sort) {
+      return results.slice(paginate?.skip || 0, paginate?.take ?? 10);
+    }
+
+    return results
+      .sort((a, b) => {
         const dateCmp = sort.date
-          ? a.publishedAt.getTime() -
-            b.publishedAt.getTime() * (sort.date === 'asc' ? 1 : -1)
+          ? (a.publishedAt.getTime() - b.publishedAt.getTime()) *
+            (sort.date === 'asc' ? 1 : -1)
           : 0;
         const titleCmp = sort.title
           ? a.title.localeCompare(b.title) * (sort.title === 'asc' ? 1 : -1)
           : 0;
 
         return dateCmp == 0 ? titleCmp : dateCmp;
-      });
-    }
-
-    return results.slice(paginate?.skip || 0, paginate?.take ?? 10);
+      })
+      .slice(paginate?.skip || 0, paginate?.take ?? 10);
   }
 
   public getFirstFiltered({ props }: ArticleFilter): ArticleData | undefined {

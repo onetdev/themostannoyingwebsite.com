@@ -15,6 +15,7 @@
 # production
 /build
 /public/articles/index.json
+public/articles/*/cover-*.jpg
 
 # misc
 .DS_Store
@@ -36,6 +37,7 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+src/schemas/*.schema.json
 
 certificates
 *storybook.log

@@ -3,9 +3,12 @@ import fs from 'fs/promises';
 import { marked } from 'marked';
 import path from 'path';
 import sanitizeHtml from 'sanitize-html';
+import sharp from 'sharp';
 import { parse } from 'yaml';
 
 import i18nConfig from '@/root/next-i18next.config';
+import articleEntrySimplifiedZod from '@/schemas/article-entry-simplified';
+import { ArticleIndexEntrySchema } from '@/schemas/article-index-entry';
 
 const articlesRootPath = path.join('./public/articles');
 const locales = i18nConfig.i18n.locales;
@@ -16,22 +19,39 @@ const articleDirPattern = new RegExp(
 
 const getLocaleMeta = async () => {
   const queue = locales.map(async (locale) => {
-    const dataRaw = await fs.readFile(
-      path.join(articlesRootPath, `${locale}-meta.json`),
-    );
-    const data = JSON.parse(dataRaw.toString());
+    let onCover: string[] = [];
+    let highlighted: string[] = [];
+    let success: boolean;
+
+    try {
+      const dataRaw = await fs.readFile(
+        path.join(articlesRootPath, `${locale}-meta.json`),
+      );
+      const data = JSON.parse(dataRaw.toString());
+
+      onCover = data['on-cover'];
+      highlighted = data['highlighted'];
+      success = true;
+    } catch (_err) {
+      success = false;
+    }
 
     return {
       locale,
-      onCover: data['on-cover'],
-      highlighted: data['highlighted'],
+      onCover,
+      highlighted,
+      success,
     };
   });
 
   const resultRaw = await Promise.all(queue);
 
-  return resultRaw.reduce(
+  console.log('Loading locale specific indices');
+  console.group();
+
+  const results = resultRaw.reduce(
     (carry, current) => {
+      console.log(`${current.locale} ${current.success ? '✓' : '✗'}`);
       carry[current.locale] = current;
       return carry;
     },
@@ -43,6 +63,10 @@ const getLocaleMeta = async () => {
       }
     >,
   );
+
+  console.groupEnd();
+
+  return results;
 };
 
 const resolveArticle = async (
@@ -55,15 +79,29 @@ const resolveArticle = async (
   }
 
   const articlePath = path.join(articlesRootPath, entry.name);
-  const dataRaw = await fs.readFile(path.join(articlePath, 'data.yml'));
-  const data = parse(dataRaw.toString());
+  const fsData = await fs.readFile(path.join(articlePath, 'data.yml'));
+  const dataUnsafe = parse(fsData.toString());
+  const {
+    data,
+    success: isValid,
+    error,
+  } = articleEntrySimplifiedZod.safeParse(dataUnsafe);
 
-  let hasCover = false;
+  if (isValid === false) {
+    throw Error('Invalid article data: ' + error);
+  }
+
+  let hasCoverImage = false;
   try {
-    await fs.access(path.join(articlePath, 'cover.jpg'));
-    hasCover = true;
+    const coverPath = path.join(articlePath, 'cover.jpg');
+    await fs.access(coverPath);
+    sharp(coverPath)
+      .resize(480, 270)
+      .toFile(path.join(articlePath, 'cover-480x270.jpg'));
+
+    hasCoverImage = true;
   } catch (_err) {
-    hasCover = false;
+    hasCoverImage = false;
   }
 
   let content: string;
@@ -73,6 +111,7 @@ const resolveArticle = async (
     content = sanitizeHtml(data.content);
   }
 
+  console.log(entry.name);
   // Denormalized data
   return {
     publishedAt: data.publishedAt,
@@ -81,23 +120,27 @@ const resolveArticle = async (
     locale: match[1],
     slug: match[3],
     title: data.title,
-    hasCover,
+    hasCoverImage,
     content: content,
     isOnCover: localeMeta[match[1]].onCover.includes(entry.name),
     isHighlighted: localeMeta[match[1]].highlighted.includes(entry.name),
-  };
+  } satisfies ArticleIndexEntrySchema;
 };
 
 const main = async () => {
   const localeMeta = await getLocaleMeta();
   const fsEntries = await fs.readdir(articlesRootPath, { withFileTypes: true });
   const candidates = fsEntries.filter((entry) => entry.isDirectory());
+
+  console.log('Resolving articles:');
+  console.group();
   const resolverQueue = candidates.map((item) =>
     resolveArticle(item, localeMeta),
   );
   const resolved = (await Promise.all(resolverQueue)).filter(
     (entry) => entry !== null,
   );
+  console.groupEnd();
 
   const indexFile = path.join(articlesRootPath, 'index.json');
   await fs.writeFile(indexFile, JSON.stringify(resolved));
