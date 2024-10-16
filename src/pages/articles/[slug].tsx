@@ -39,8 +39,8 @@ const ArticleItem: NextPage<ArticleItemProps> = ({
           <meta property="og:image" content={data.coverImages.original} />
         )}
       </Head>
-      <h1>{data.title}</h1>
-      <span className="mb-5 block">
+      <h1 className="mb-2 max-w-[900px]">{data.title}</h1>
+      <span className="mb-5 block italic">
         Published at {data.publishedAt.toDateString()}
       </span>
       {data.coverImages?.original && (
