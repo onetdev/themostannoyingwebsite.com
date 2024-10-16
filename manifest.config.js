@@ -6,6 +6,7 @@ module.exports = {
   path: '/manifest/',
   appName: 'The Most Annoying Website',
   appShortName: 'The MAW',
+  appDescription: '',
   developerName: appPackage.author.name,
   developerURL: appPackage.author.url,
   lang: 'en-US',
