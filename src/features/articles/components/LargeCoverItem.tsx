@@ -17,13 +17,13 @@ export const LargeCoverItem: FunctionComponent<LargeCoverItemProps> = ({
   return (
     <div {...rest}>
       <Link className="relative block" href={article.url} passHref>
-        {!article.coverImagePath && (
+        {!article.coverImages?.original && (
           <CoverPlaceholder width={1920} height={1200} />
         )}
-        {article.coverImagePath && (
+        {article.coverImages?.original && (
           <Image
             className="h-auto w-full object-cover"
-            src={article.coverImagePath}
+            src={article.coverImages.original}
             alt="Cover image"
             width="1920"
             height="1200"

@@ -3,10 +3,10 @@ import slugify from 'slugify';
 import {
   ArticleData,
   ArticleFilter,
-  ArticleIndexData,
   ArticleLookupFilter,
 } from '@/features/articles/types';
 import articlesRaw from '@/public/articles/index.json';
+import { ArticleIndexEntrySchema } from '@/root/src/schemas/article-index-entry';
 
 const propFilterBool = (
   article: ArticleData,
@@ -22,12 +22,15 @@ class ArticleService {
 
   constructor() {
     this.articles = articlesRaw.map(
-      (article: ArticleIndexData) =>
+      (article: ArticleIndexEntrySchema) =>
         ({
           assetGroupId: article.directory,
           content: article.content,
-          coverImagePath: article.hasCover
-            ? `/articles/${article.directory}/cover.jpg`
+          coverImages: article.hasCoverImage
+            ? {
+                original: `/articles/${article.directory}/cover.jpg`,
+                thumbnail: `/articles/${article.directory}/cover-480x270.jpg`,
+              }
             : undefined,
           intro: article.intro,
           isHighlighted: article.isHighlighted,

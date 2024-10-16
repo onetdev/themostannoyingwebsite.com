@@ -35,6 +35,9 @@ importers:
       i18next:
         specifier: ^23.10.1
         version: 23.12.2
+      json-schema-to-zod:
+        specifier: ^2.4.1
+        version: 2.4.1
       marked:
         specifier: ^14.1.2
         version: 14.1.2
@@ -74,15 +77,18 @@ importers:
       sanitize-html:
         specifier: ^2.13.1
         version: 2.13.1
-      sharp:
-        specifier: ^0.33.5
-        version: 0.33.5
       slugify:
         specifier: ^1.6.6
         version: 1.6.6
       yaml:
         specifier: ^2.5.1
         version: 2.5.1
+      zod:
+        specifier: ^3.23.8
+        version: 3.23.8
+      zod-to-json-schema:
+        specifier: ^3.23.3
+        version: 3.23.3(zod@3.23.8)
       zustand:
         specifier: ^4.5.5
         version: 4.5.5(@types/react@18.3.11)(immer@10.1.1)(react@18.3.1)
@@ -207,6 +213,9 @@ importers:
       prettier:
         specifier: ^3.3.3
         version: 3.3.3
+      sharp:
+        specifier: ^0.33.5
+        version: 0.33.5
       storybook:
         specifier: ^8.3.5
         version: 8.3.5
@@ -4257,6 +4266,10 @@ packages:
   json-parse-even-better-errors@2.3.1:
     resolution: {integrity: sha512-xyFwyhro/JEof6Ghe2iz2NcXoj2sloNsWr/XsERDK/oiPCfaNhl5ONfp+jQdAZRQQ0IJWNzH9zIZF7li91kh2w==}
 
+  json-schema-to-zod@2.4.1:
+    resolution: {integrity: sha512-aMoez9TxgnfLAIZaWTPaQ+j7rOt1K9Ew/TBI85XcnhcFlo/47b1MDgpi4r07XndLSZWOX/KsJiRJvhdzSvo2Dw==}
+    hasBin: true
+
   json-schema-traverse@0.4.1:
     resolution: {integrity: sha512-xbbCH5dCYU5T8LcEhhuh7HJ88HXuW3qsI3Y0zOZFKfZEHcpWiHU/Jxzk629Brsab/mMiHQti9wMP+845RPe3Vg==}
 
@@ -6122,6 +6135,14 @@ packages:
   yocto-queue@1.1.1:
     resolution: {integrity: sha512-b4JR1PFR10y1mKjhHY9LaGo6tmrgjit7hxVIeAmyMw3jegXR4dhYqLaQF5zMXZxY7tLpMyJeLjr1C4rLmkVe8g==}
     engines: {node: '>=12.20'}
+
+  zod-to-json-schema@3.23.3:
+    resolution: {integrity: sha512-TYWChTxKQbRJp5ST22o/Irt9KC5nj7CdBKYB/AosCRdj/wxEMvv4NNaj9XVUHDOIp53ZxArGhnw5HMZziPFjog==}
+    peerDependencies:
+      zod: ^3.23.3
+
+  zod@3.23.8:
+    resolution: {integrity: sha512-XBx9AXhXktjUqnepgTiE5flcKIYWi/rme0Eaj+5Y0lftuGBq+jyRu/md4WnuxqgP1ubdpNCsYEYPxrzVHD8d6g==}
 
   zustand@4.5.5:
     resolution: {integrity: sha512-+0PALYNJNgK6hldkgDq2vLrw5f6g/jCInz52n9RTpropGgeAf/ioFUCdtsjCqu4gNhW9D01rUQBROoRjdzyn2Q==}
@@ -11184,6 +11205,8 @@ snapshots:
 
   json-parse-even-better-errors@2.3.1: {}
 
+  json-schema-to-zod@2.4.1: {}
+
   json-schema-traverse@0.4.1: {}
 
   json-schema-traverse@1.0.0: {}
@@ -13167,6 +13190,12 @@ snapshots:
   yocto-queue@0.1.0: {}
 
   yocto-queue@1.1.1: {}
+
+  zod-to-json-schema@3.23.3(zod@3.23.8):
+    dependencies:
+      zod: 3.23.8
+
+  zod@3.23.8: {}
 
   zustand@4.5.5(@types/react@18.3.11)(immer@10.1.1)(react@18.3.1):
     dependencies:
