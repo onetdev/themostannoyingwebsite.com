@@ -55,7 +55,7 @@ class ArticleService {
 
   public getAllFiltered({
     props,
-    sort,
+    sort = { date: 'desc' },
     paginate,
   }: ArticleFilter): ArticleData[] {
     const results = this.articles.filter((article) => {
@@ -65,21 +65,23 @@ class ArticleService {
       );
     });
 
-    if (sort) {
-      return results.sort((a, b) => {
+    if (!sort) {
+      return results.slice(paginate?.skip || 0, paginate?.take ?? 10);
+    }
+
+    return results
+      .sort((a, b) => {
         const dateCmp = sort.date
-          ? a.publishedAt.getTime() -
-            b.publishedAt.getTime() * (sort.date === 'asc' ? 1 : -1)
+          ? (a.publishedAt.getTime() - b.publishedAt.getTime()) *
+            (sort.date === 'asc' ? 1 : -1)
           : 0;
         const titleCmp = sort.title
           ? a.title.localeCompare(b.title) * (sort.title === 'asc' ? 1 : -1)
           : 0;
 
         return dateCmp == 0 ? titleCmp : dateCmp;
-      });
-    }
-
-    return results.slice(paginate?.skip || 0, paginate?.take ?? 10);
+      })
+      .slice(paginate?.skip || 0, paginate?.take ?? 10);
   }
 
   public getFirstFiltered({ props }: ArticleFilter): ArticleData | undefined {
