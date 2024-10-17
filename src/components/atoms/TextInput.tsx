@@ -1,4 +1,4 @@
-import { DetailedHTMLProps, InputHTMLAttributes } from 'react';
+import { DetailedHTMLProps, forwardRef, InputHTMLAttributes } from 'react';
 
 export type TextInputProps = DetailedHTMLProps<
   InputHTMLAttributes<HTMLInputElement>,
@@ -7,25 +7,25 @@ export type TextInputProps = DetailedHTMLProps<
   onValueChange?: (value: string) => void;
 };
 
-const TextInput = ({
-  onChange,
-  onValueChange,
-  className,
-  ...rest
-}: TextInputProps) => {
-  const onChangeProxy = (e: React.ChangeEvent<HTMLInputElement>) => {
-    onChange?.(e);
-    onValueChange?.(e.target.value);
-  };
+const TextInput = forwardRef<HTMLInputElement, TextInputProps>(
+  ({ onChange, onValueChange, className, ...rest }: TextInputProps, ref) => {
+    const onChangeProxy = (e: React.ChangeEvent<HTMLInputElement>) => {
+      onChange?.(e);
+      onValueChange?.(e.target.value);
+    };
 
-  return (
-    <input
-      type="text"
-      className={`${className} rounded-lg border border-primary bg-surface p-2 text-on-surface`}
-      onChange={onChangeProxy}
-      {...rest}
-    />
-  );
-};
+    return (
+      <input
+        type="text"
+        ref={ref}
+        className={`${className} rounded-lg border border-primary bg-surface p-2 text-on-surface`}
+        onChange={onChangeProxy}
+        {...rest}
+      />
+    );
+  },
+);
+
+TextInput.displayName = 'TextInput';
 
 export default TextInput;
