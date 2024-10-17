@@ -1,12 +1,14 @@
 import { NextPage } from 'next';
 import { useTranslation } from 'next-i18next';
 
-import ExperienceSettings from './components/ExperienceSettings';
-import PreferencesSettings from './components/PreferencesSettings';
-import RuntimeSettings from './components/RuntimeSettings';
-import UserGrantSettings from './components/UserGrantSettings';
-
+import PageHeadline from '@/components/atoms/PageHeadline';
 import SiteTitle from '@/components/atoms/SiteTitle';
+import {
+  ExperienceSettings,
+  PreferencesSettings,
+  RuntimeSettings,
+  UserGrantSettings,
+} from '@/features/settings';
 import { makeI18nStaticProps } from '@/utils/i18n';
 
 const Settings: NextPage = () => {
@@ -15,7 +17,7 @@ const Settings: NextPage = () => {
   return (
     <main>
       <SiteTitle>{t('common:navigation.settings')}</SiteTitle>
-      <h1>{t('settings:title')}</h1>
+      <PageHeadline>{t('settings:title')}</PageHeadline>
 
       <div className="grid gap-3 md:grid-cols-2">
         <PreferencesSettings />

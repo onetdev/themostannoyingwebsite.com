@@ -12,7 +12,7 @@ export const GenericMenu: FunctionComponent<GenericMenuProps> = ({
   ...props
 }) => (
   <ul
-    className={`my-2 flex flex-wrap gap-3 font-primary text-lg ${className}`}
+    className={`flex flex-wrap gap-3 font-primary text-lg ${className}`}
     {...props}>
     {children?.map((child, index) => (
       <li key={index} className={iteratorClassName}>

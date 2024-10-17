@@ -22,10 +22,12 @@
     "notSet": "Not set"
   },
   "navigation": {
+    "contact": "Contact",
     "home": "Home",
     "hotThings": "Hot things",
-    "contact": "Contact",
+    "login": "Login",
     "privacyPolicy": "Privacy Policy",
+    "search": "Search",
     "settings": "Settings"
   },
   "shareModal": {

@@ -1,6 +1,7 @@
 import { NextPage } from 'next';
 import { useTranslation } from 'next-i18next';
 
+import PageHeadline from '@/components/atoms/PageHeadline';
 import SiteTitle from '@/components/atoms/SiteTitle';
 import config from '@/config';
 import styles from '@/styles/content.module.css';
@@ -13,7 +14,9 @@ const PrivacyPolicy: NextPage = () => {
   return (
     <main>
       <SiteTitle>{t('navigation.privacyPolicy')}</SiteTitle>
-      <h1>{t('navigation.privacyPolicy')}</h1>
+      <PageHeadline className="mx-auto w-full max-w-[700px]">
+        {t('navigation.privacyPolicy')}
+      </PageHeadline>
       <div className={styles['content']}>
         <ContentData />
       </div>
