@@ -1,49 +1,62 @@
-# The most annoying website 
+# The Most Annoying Website
 
-The main idea is to collect all the disgusting features from today's website in one place. On steroids. We call those pesky features "experience" here. The whole thing is just a fake facade, no feature works as it would in a normal world.
+The main idea is to gather the most annoying features of modern websites in one place, but on steroids. We refer to these irritating elements as “experiences.” The entire website is a fake facade; no feature functions as it would in a normal scenario.
 
-## What we have and what's planned (_in no particular order_)
+## Plans for project (_in no particular order_)
 
-**Important**: In order to avoid adblockers this repo uses the word "gift" instead of anything that would resemble ad-like content (eg.: promotion, advertisement).
+**Important**: *To avoid ad blockers, this repo uses the word “gift” instead of terms resembling ad-related content (e.g., promotion, advertisement).*
 
-- [x] Chat bubble with incoming messages and notification sound
-- [x] "Read more" at the bottom of the article.
-- [x] Marquee
-- [x] Wheel of fortune coupon modal
-- [x] Add confirmation when trying to leave the page
-- [x] Update title while the user is on a different tab
-- [x] Asking for notification: no worries, the website won't send any notification
-- [x] Dead pixel
-- [x] Funny, silly contents part 1
-- [ ] Fake login with unsolveable captcha
-- [ ] Fake forgotten password that only says something like "LOL, do better next time, can't help you"
-- [ ] Fake registration
-  - [ ] With awful captcha
-  - [ ] Really difficult age selector
-  - [ ] Password validator that only displays one error and has super duper complex rules that contradict eachothers
-- [ ] Fake search page that
-  - [ ] Autocorrect the user to all the wrong things
-  - [ ] Won't actually wotk and find any result
-- [ ] Newsletter modal when the user leaves the screen or scrolls down a bit
-- [ ] Asking for location permission: no worries, the website won't use your location
-- [ ] Sticky video player obscuring the page visibility. (+audio)
-- [ ] Low Quality images
-- [ ] Age verification on some images
+<details>
+  <summary>TODO / Planned</summary>
 
-### Stretch goal experiments
+  - [ ] Fake login with an unsolvable captcha
+  - [ ] Fake “forgot password” page with a message like “LOL, try harder next time, can’t help you”
+  - [ ] Fake registration:
+    - [ ] Includes an awful captcha
+    - [ ] Difficult age selector
+    - [ ] Password validator that shows only one error and has absurdly complex rules that contradict each other
+  - [ ] Fake search page that:
+    - [ ] Autocorrects the user to all the wrong terms
+    - [ ] Doesn’t actually work or return any results
+  - [ ] Newsletter modal that appears when the user leaves the screen or scrolls down a bit
+  - [ ] Request for location permission (don’t worry, the website won’t use your location)
+  - [ ] Sticky video player that obscures page visibility (with audio)
+  - [ ] Low-quality images
+  - [ ] Age verification on certain images
+  - [ ] Move the articles outside of this repo
+</details>
 
-- [ ] Design - even though the page does just fine if it's bad looking.
-- [ ] Funny, silly contents part 2
-- [ ] Dead pixel patch
-- [ ] Randomly loading images while scrolling (layout shifting).
+<details>
+  <summary>Completed</summary>
+
+  - [x] Multilanguage support
+  - [x] Chat bubble with incoming messages and notification sound
+  - [x] “Read more” link at the bottom of articles
+  - [x] Marquee text
+  - [x] Wheel of Fortune-style coupon modal
+  - [x] Exit confirmation when trying to leave the page
+  - [x] Dynamic title update when the user is on another tab
+  - [x] Request for notification permission (don’t worry, the website won’t send any notifications)
+  - [x] Dead pixel effect
+  - [x] Funny, silly content (Part 1)
+</details>
+
+<details>
+  <summary>Bit of a stretch</summary>
+
+  - [ ] Design (even though the site is fine with a bad design)
+  - [ ] Funny, silly content (Part 2)
+  - [ ] Dead pixel patch
+  - [ ] Randomly loading images while scrolling (causing layout shifting)
+</details>
 
 ## Contribution
 
-This project is open for contribution! If you have anything to add, do not hesitate and **start your PR today, the world needs you, ACT NOW!**
+This project is open for contributions! If you have ideas to add, don’t hesitate — **start your PR today, the world needs you, ACT NOW!**
 
 ### Framework
 
-The stack is just the usual, Next.JS + TypeScript + TailwindCSS. If you are not familiar with those but still want to add your own experiments and tweaks, you can find great docs on the following sites:
+The stack is the usual: Next.JS + TypeScript + TailwindCSS. If you’re not familiar with these but still want to add your own experiences or tweaks, you can find excellent documentation here:
 
 - [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
 - [TypeScript Documentation](https://www.typescriptlang.org/docs/)
@@ -57,24 +70,27 @@ First, run the development server:
 pnpm run dev
 ```
 
-Open [https://localhost:3000](https://localhost:3000) with your browser to see the result. SSL must be enabled to be able to use some of the browser APIs that won't run on unencrypted connections.
+Open [https://localhost:3000](https://localhost:3000) in your browser to see the result. SSL must be enabled to use certain browser APIs that won’t run on unencrypted connections.
 
 ## Translation
 
-Thankfully Next.JS comes with great [i18n support](https://nextjs.org/docs/pages/building-your-application/routing/internationalization) out of the box. We are using simple path based routing for translations, so if you want to add a new language, you just need to create a new folder under `public/locales` with the language code (eg.: `en`, `hu`, `de`, etc.) and create the files you want to translate. Please use `en` as a reference for the keys and values.
+Fortunately, Next.JS comes with great [i18n support](https://nextjs.org/docs/pages/building-your-application/routing/internationalization) out of the box. We use simple path-based routing for translations, so if you want to add a new language, just create a folder under `public/locales` with the language code (eg.: `en`, `hu`, `de`, etc.) and add the files you want to translate. Please use `en` as a reference for keys and values.
 
-Please keep in mind that translations are low on the priority list for now.
+Keep in mind that translations are currently low on the priority list, the goal is only to have it prepared for the future.
+
+**For content translation, see `public/assets/articles/README.MD`**
 
 ## Deployment
 
-PRs are automatically published to Vercel as previews (you can find preview URLs on PRs) and `main` branch will be promoted to our main domain on every single new commits.
+PRs are automatically published to Vercel as previews (you can find preview URLs in PRs), and the `main` branch is deployed to our main domain with every new commit.
 
 ## Support
 
-If you are eager to support me, you can throw a few coins into [BuyMeACoffee/onetdev](https://www.buymeacoffee.com/onetdev) and wish something. It might come true!
+Pay a visit to https://onetdev.com, drop me an email.
 
 ### 3rd party credits
 
+- AI disclaimer: Article covers and contents are generated via AI (DALLe, ChatGPT), curated by humans.
 - Notification sound: https://github.com/akx/Notifications under licence CC0
 - Icons: https://fontawesome.com
 - Lava photo (Tanya Grypachevskaya): https://unsplash.com/photos/80x3QULJDN4
