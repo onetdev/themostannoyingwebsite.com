@@ -9,17 +9,19 @@
     "no": "No"
   },
   "actions": {
-    "dismiss": "Dismiss",
-    "cancel": "Cancel",
     "accept": "Accept",
+    "cancel": "Cancel",
     "close": "Close",
+    "dismiss": "Dismiss",
+    "login": "Login",
     "ok": "OK",
+    "register": "Register",
     "send": "Send",
     "share": "Share"
   },
   "status": {
-    "unknown": "Unknown",
-    "notSet": "Not set"
+    "notSet": "Not set",
+    "unknown": "Unknown"
   },
   "navigation": {
     "contact": "Contact",
@@ -38,6 +40,14 @@
     "label": "Switch theme",
     "darkMode": "Dark mode",
     "lightMode": "Light mode"
+  },
+  "userLogin": {
+    "email": "Email",
+    "password": "Password",
+    "rememberMe": "Remember me",
+    "forgotPassword": "Forgot password?",
+    "captcha": "Captcha",
+    "captchaHint": "Count the emojis and identify which one appears the most. Look carefully, as parts of some emojis might be obscured."
   },
   "experiences": {
     "marqueeVariants": ["📣 Come back please 🏃‍♀️🏃 We have candy!! 🚐"],

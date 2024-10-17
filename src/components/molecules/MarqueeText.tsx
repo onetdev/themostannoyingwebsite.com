@@ -5,11 +5,11 @@ import MarqueePlugin from 'react-fast-marquee';
 import { ArticleService } from '@/features/articles';
 import { useUserPreferencesStore } from '@/state/user_preferences';
 
-export type MarqueeProps = {
+export type MarqueeTextProps = {
   className?: string;
 };
 
-const Marquee: FunctionComponent<MarqueeProps> = ({ className }) => {
+const MarqueeText: FunctionComponent<MarqueeTextProps> = ({ className }) => {
   const flashing = useUserPreferencesStore((state) => state.enableFlashing);
   const [items] = useState(
     ArticleService.getAllFiltered({
@@ -47,4 +47,4 @@ const Marquee: FunctionComponent<MarqueeProps> = ({ className }) => {
   );
 };
 
-export default Marquee;
+export default MarqueeText;
