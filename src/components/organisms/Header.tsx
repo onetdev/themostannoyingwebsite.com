@@ -3,7 +3,7 @@ import { useTranslation } from 'next-i18next';
 import { FunctionComponent } from 'react';
 
 import DarkModeToggle from '@/components/atoms/DarkModeToggle';
-import Marquee from '@/components/molecules/Marquee';
+import MarqueeText from '@/components/molecules/MarqueeText';
 import MainNavigation from '@/components/organisms/MainNavigation';
 import UserNavigation from '@/components/organisms/UserNavigation';
 
@@ -25,7 +25,7 @@ const Header: FunctionComponent = () => {
       </div>
       <MainNavigation className="my-1" />
       <UserNavigation className="self-center justify-self-end" />
-      <Marquee className="col-span-2 -mx-5 mb-2 bg-surface" />
+      <MarqueeText className="col-span-2 -mx-5 mb-2 bg-surface" />
     </header>
   );
 };

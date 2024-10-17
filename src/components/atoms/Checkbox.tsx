@@ -1,8 +1,8 @@
 import { DetailedHTMLProps, InputHTMLAttributes } from 'react';
 
-export type Checkbox = DetailedHTMLProps<
-  InputHTMLAttributes<HTMLInputElement>,
-  HTMLInputElement
+export type Checkbox = Omit<
+  DetailedHTMLProps<InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>,
+  'type'
 > & {
   onValueChange?: (value: boolean) => void;
 };
