@@ -112,10 +112,12 @@ const Login: NextPage = () => {
           {t('actions.login')}
         </Button>
         <div className="flex justify-between">
-          <Link href="/user/password-reminder">
+          <Link href="/user/password-reminder" passHref prefetch={false}>
             {t('userLogin.forgotPassword')}
           </Link>
-          <Link href="/user/registration">{t('userLogin.registration')}</Link>
+          <Link href="/user/registration" passHref prefetch={false}>
+            {t('userLogin.registration')}
+          </Link>
         </div>
       </form>
     </main>
