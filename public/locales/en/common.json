@@ -15,7 +15,6 @@
     "dismiss": "Dismiss",
     "login": "Login",
     "ok": "OK",
-    "register": "Register",
     "send": "Send",
     "share": "Share"
   },
@@ -30,7 +29,9 @@
     "login": "Login",
     "privacyPolicy": "Privacy Policy",
     "search": "Search",
-    "settings": "Settings"
+    "settings": "Settings",
+    "passwordReminder": "Password Reminder",
+    "registration": "Registration"
   },
   "shareModal": {
     "title": "Share this page",
@@ -47,11 +48,36 @@
     "rememberMe": "Remember me",
     "forgotPassword": "Forgot password?",
     "captcha": "Captcha",
-    "captchaHint": "Count the emojis and identify which one appears the most. Look carefully, as parts of some emojis might be obscured."
+    "captchaHint": "Count the emojis and identify which one appears the most. Look carefully, as parts of some emojis might be obscured.",
+    "loginError": "Login failed",
+    "forgottenPassword": "Forgot password?",
+    "registration": "Registration"
   },
   "experiences": {
     "marqueeVariants": ["📣 Come back please 🏃‍♀️🏃 We have candy!! 🚐"],
     "arrayPagedVariants": ["⭐️ HEY YOU 🫵", "😜 YES YOU 😱", "📣 COME BACK 🏃"],
     "exitPrompt": "I'd reconsider leaving before some bad things happend to you. Are you sure?"
+  },
+  "validation": {
+    "errors": {
+      "required": "This field is required.",
+      "minLength": "Minimum length is {{count}} characters",
+      "maxLength": "Maximum length is {{count}} characters",
+      "min": "Value must be at least {{count}}",
+      "max": "Value must be no more than {{count}}",
+      "emailInvalid": "Invalid email address",
+      "captchaInvalid": "Invalid captcha",
+      "patternMismatch": "The input does not match the required pattern",
+      "passwordMismatch": "Passwords do not match",
+      "urlInvalid": "Invalid URL format",
+      "numberInvalid": "Please enter a valid number",
+      "dateInvalid": "Invalid date format",
+      "tooShort": "The input is too short",
+      "tooLong": "The input is too long",
+      "checkboxRequired": "You must check this box",
+      "fileTooLarge": "The file size exceeds the limit of {{size}}",
+      "fileTypeInvalid": "Invalid file type",
+      "customError": "Invalid input"
+    }
   }
 }
