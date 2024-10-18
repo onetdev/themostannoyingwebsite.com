@@ -37,10 +37,6 @@ const resolveSize = (size: ButtonSize) => {
     case 'sm':
       className = 'px-2 py-1 text-sm';
       break;
-    case 'md':
-    default:
-      className = 'px-3 py-1 text-md';
-      break;
     case 'lg':
       className = 'px-3 py-2 text-lg';
       break;
@@ -55,6 +51,10 @@ const resolveSize = (size: ButtonSize) => {
       break;
     case '4xl':
       className = 'px-3 py-2 text-4xl';
+      break;
+    case 'md':
+    default:
+      className = 'px-3 py-1 text-md';
       break;
   }
   return className;
