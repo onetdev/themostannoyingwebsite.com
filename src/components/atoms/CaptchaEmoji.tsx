@@ -47,10 +47,11 @@ const CaptchaEmoji: FunctionComponent<CaptchaEmojiProps> = ({
 
     const width = $canvasRef.current.clientWidth;
     const height = $canvasRef.current.clientHeight;
+    const offsetCorrection = itemRenderSize / 2;
 
     items.forEach(({ coords, content }) => {
       const x = coords.x * width;
-      const y = coords.y * height;
+      const y = coords.y * height + offsetCorrection;
       ctx.font = `${itemRenderSize}px Arial`;
       ctx.fillStyle = 'black';
       ctx.textAlign = 'center';
