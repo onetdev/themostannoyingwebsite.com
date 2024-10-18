@@ -108,7 +108,7 @@ const Login: NextPage = () => {
           )}
         </div>
 
-        <Button type="submit" className="mt-10">
+        <Button type="submit" className="mt-10" size="lg">
           {t('actions.login')}
         </Button>
         <div className="flex justify-between">
