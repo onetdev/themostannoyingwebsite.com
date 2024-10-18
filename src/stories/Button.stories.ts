@@ -16,6 +16,9 @@ const meta = {
       description:
         'The content of the button which can be either another component or text',
     },
+    size: {
+      description: 'The size of the button',
+    },
   },
   args: {
     onClick: fn(),

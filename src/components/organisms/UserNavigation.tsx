@@ -25,10 +25,10 @@ const UserNavigation: FunctionComponent<UserNavigationProps> = ({
         <a onClick={() => setShowShareModal(true)} className="cursor-pointer">
           {t('actions.share')}
         </a>
-        <Link href="/settings" prefetch={false}>
+        <Link href="/settings" passHref prefetch={false}>
           {t('navigation.settings')}
         </Link>
-        <Link href="/user/login" prefetch={false}>
+        <Link href="/user/login" passHref prefetch={false}>
           {t('navigation.login')}
         </Link>
       </GenericMenu>

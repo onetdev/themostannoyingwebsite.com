@@ -4,7 +4,7 @@ import { FunctionComponent } from 'react';
 import SettingsBlock from './SettingsBlock';
 import SettingsBlockRow from './SettingsBlockRow';
 
-import FormCheckbox from '@/components/atoms/form/Checkbox';
+import FormCheckbox from '@/components/atoms/Checkbox';
 import { useUserGrantsStore } from '@/state/user_grants';
 
 const UserGrantSettings: FunctionComponent = () => {

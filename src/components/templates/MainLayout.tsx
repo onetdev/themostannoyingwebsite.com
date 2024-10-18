@@ -5,9 +5,9 @@ import CookieBar from '@/components/organisms/CookieConsent';
 import Footer from '@/components/organisms/Footer';
 import Header from '@/components/organisms/Header';
 import { ChatBubbleHost } from '@/features/chat_bubble';
+import { DeadPixelHost } from '@/features/dead_pixel';
 import ContainerGiftFlaps from '@/features/gifts/components/ContainerGiftFlaps';
 import { WheelOfFortuneHost } from '@/features/wheel_of_fortune';
-import { DeadPixelHost } from '@/root/src/features/dead_pixel';
 import { useExperienceFlagsStore } from '@/state/experience_flags';
 
 type MainLayoutProps = JSXProxyProps<'div'>;

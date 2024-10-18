@@ -4,7 +4,7 @@ import { FunctionComponent } from 'react';
 import SettingsBlock from './SettingsBlock';
 import SettingsBlockRow from './SettingsBlockRow';
 
-import FormCheckbox from '@/components/atoms/form/Checkbox';
+import FormCheckbox from '@/components/atoms/Checkbox';
 import { useExperienceFlagsStore } from '@/state/experience_flags';
 
 const ExperienceSettings: FunctionComponent = () => {
