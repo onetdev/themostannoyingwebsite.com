@@ -42,16 +42,19 @@
     "darkMode": "Dark mode",
     "lightMode": "Light mode"
   },
-  "userLogin": {
+  "captcha": {
+    "field": "Captcha",
+    "captchaEmojiHint": "Count the emojis and identify which one appears the most. Look carefully, as parts of some emojis might be obscured.",
+    "captchaTilePuzzleHint": "Slide the tiles into their right position. You can only move the ones directly next to each other."
+  },
+  "user": {
     "email": "Email",
-    "password": "Password",
-    "rememberMe": "Remember me",
     "forgotPassword": "Forgot password?",
-    "captcha": "Captcha",
-    "captchaHint": "Count the emojis and identify which one appears the most. Look carefully, as parts of some emojis might be obscured.",
     "loginError": "Login failed",
-    "forgottenPassword": "Forgot password?",
-    "registration": "Registration"
+    "password": "Password",
+    "registerAccount": "Need an account?",
+    "rememberMe": "Remember me",
+    "sendPasswordReminder": "Send password reminder"
   },
   "experiences": {
     "marqueeVariants": ["📣 Come back please 🏃‍♀️🏃 We have candy!! 🚐"],

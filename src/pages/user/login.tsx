@@ -27,7 +27,7 @@ const Login: NextPage = () => {
   } = useForm<LoginFormInputs>();
 
   const onSubmit: SubmitHandler<LoginFormInputs> = (_data) => {
-    alert(t('userLogin.loginError'));
+    alert(t('user.loginError'));
   };
 
   return (
@@ -37,7 +37,7 @@ const Login: NextPage = () => {
       <form className="flex flex-col gap-5" onSubmit={handleSubmit(onSubmit)}>
         <div>
           <label>
-            <h4 className="mb-1">{t('userLogin.email')}</h4>
+            <h4 className="mb-1">{t('user.email')}</h4>
             <TextInput
               type="email"
               className="w-full"
@@ -54,7 +54,7 @@ const Login: NextPage = () => {
         </div>
         <div>
           <label>
-            <h4 className="mb-1">{t('userLogin.password')}</h4>
+            <h4 className="mb-1">{t('user.password')}</h4>
             <TextInput
               type="password"
               className="w-full"
@@ -72,7 +72,7 @@ const Login: NextPage = () => {
         <div>
           <label className="flex items-center gap-2">
             <Checkbox {...register('remember')} />
-            <h4>{t('userLogin.rememberMe')}</h4>
+            <h4>{t('user.rememberMe')}</h4>
           </label>
           {errors.remember && (
             <small className="mt-1 block text-error">
@@ -82,8 +82,8 @@ const Login: NextPage = () => {
         </div>
         <div className="flex flex-col">
           <label>
-            <h4 className="mb-1">{t('userLogin.captcha')}</h4>
-            <small>{t('userLogin.captchaHint')}</small>
+            <h4 className="mb-1">{t('captcha.field')}</h4>
+            <small>{t('captcha.captchaEmojiHint')}</small>
             <CaptchaEmoji
               className="my-3 rounded-md border border-on-background"
               width={300}
@@ -113,10 +113,10 @@ const Login: NextPage = () => {
         </Button>
         <div className="flex justify-between">
           <Link href="/user/password-reminder" passHref prefetch={false}>
-            {t('userLogin.forgotPassword')}
+            {t('user.forgotPassword')}
           </Link>
           <Link href="/user/registration" passHref prefetch={false}>
-            {t('userLogin.registration')}
+            {t('user.registerAccount')}
           </Link>
         </div>
       </form>
