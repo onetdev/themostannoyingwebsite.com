@@ -9,8 +9,6 @@ The main idea is to gather the most annoying features of modern websites in one 
 <details>
   <summary>TODO / Planned</summary>
 
-  - [ ] Fake login with an unsolvable captcha
-  - [ ] Fake “forgot password” page with a message like “LOL, try harder next time, can’t help you”
   - [ ] Fake registration:
     - [ ] Includes an awful captcha
     - [ ] Difficult age selector
@@ -29,6 +27,8 @@ The main idea is to gather the most annoying features of modern websites in one 
 <details>
   <summary>Completed</summary>
 
+  - [x] Fake login with an unsolvable captcha
+  - [x] Fake “forgot password” page with a message like “LOL, try harder next time, can’t help you”
   - [x] Multilanguage support
   - [x] Chat bubble with incoming messages and notification sound
   - [x] “Read more” link at the bottom of articles
