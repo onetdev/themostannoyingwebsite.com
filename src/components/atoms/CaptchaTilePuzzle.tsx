@@ -3,13 +3,14 @@ import { FunctionComponent, useEffect, useMemo, useState } from 'react';
 import { shuffleArray } from '@/utils/array';
 import { isPoint2d, Point2d } from '@/utils/math';
 
-interface CaptchaSlidingPuzzleProps {
+interface CaptchaTilePuzzleProps {
   className?: string;
   cols?: number;
   imageUrl?: string;
   rows?: number;
   size?: number;
-  tileMode?: 'key' | 'image';
+  imageSrc?: string;
+  onResolved?: () => void;
 }
 
 type TileData = {
@@ -18,18 +19,19 @@ type TileData = {
   isEmpty: boolean;
 };
 
-type TileViewData = TileData & {
+export type TileViewData = TileData & {
   key: string;
   content: string;
   isCorrect: boolean;
 };
 
-const CaptchaSlidingPuzzle: FunctionComponent<CaptchaSlidingPuzzleProps> = ({
+const CaptchaTilePuzzle: FunctionComponent<CaptchaTilePuzzleProps> = ({
   className,
   cols = 8,
   rows = 3,
   size = 50,
-  tileMode = 'key',
+  imageSrc,
+  onResolved,
 }) => {
   const [puzzle, setPuzzle] = useState<TileData[]>([]);
 
@@ -93,7 +95,11 @@ const CaptchaSlidingPuzzle: FunctionComponent<CaptchaSlidingPuzzleProps> = ({
   };
 
   const viewData = useMemo(() => {
-    return puzzle.map(
+    if (puzzle.length === 0) {
+      return [];
+    }
+
+    const mapped = puzzle.map(
       (cell) =>
         ({
           ...cell,
@@ -103,7 +109,14 @@ const CaptchaSlidingPuzzle: FunctionComponent<CaptchaSlidingPuzzleProps> = ({
             cell.resolution && genKey(cell.current) === genKey(cell.resolution),
         }) satisfies TileViewData,
     );
-  }, [puzzle]);
+
+    const hasInvalid = mapped.some((cell) => !cell.isCorrect);
+    if (!hasInvalid) {
+      onResolved?.();
+    }
+
+    return mapped;
+  }, [onResolved, puzzle]);
 
   return (
     <div
@@ -118,7 +131,7 @@ const CaptchaSlidingPuzzle: FunctionComponent<CaptchaSlidingPuzzleProps> = ({
           key={tile.key}
           data-is-empty={tile.isEmpty.toString()}
           data-is-correct={tile.isCorrect.toString()}
-          className="group absolute p-1"
+          className="group absolute p-1 transition-all duration-200 "
           style={{
             left: (tile.current.x - 1) * size,
             top: (tile.current.y - 1) * size,
@@ -126,17 +139,38 @@ const CaptchaSlidingPuzzle: FunctionComponent<CaptchaSlidingPuzzleProps> = ({
             height: size,
           }}
           onClick={() => onCellClick(index)}>
-          {tileMode === 'key' && <CellKeyTile data={tile} />}
+          {<TileView data={tile} imageSrc={imageSrc} size={size} />}
         </div>
       ))}
     </div>
   );
 };
 
-const CellKeyTile: FunctionComponent<{ data: TileViewData }> = ({ data }) => {
+type TileViewProps = {
+  data: TileViewData;
+  imageSrc?: string;
+  size: number;
+};
+
+const TileView: FunctionComponent<TileViewProps> = ({
+  data,
+  imageSrc,
+  size,
+}) => {
+  const style = useMemo(
+    () => ({
+      backgroundImage: `url(${imageSrc})`,
+      backgroundPosition: `-${data.resolution.x * size}px -${data.resolution.y * size}px`,
+    }),
+    [data, imageSrc, size],
+  );
+
   return (
-    <div className="flex size-full select-none items-center justify-center rounded border border-on-surface transition-all duration-200 ease-in-out group-data-[is-empty=true]:hidden group-data-[is-correct=false]:cursor-pointer group-data-[is-correct=true]:bg-success group-data-[is-correct=true]:text-on-success">
-      <span>{data.key}</span>
+    <div
+      style={style}
+      data-has-image={Boolean(imageSrc).toString()}
+      className="flex size-full select-none items-center justify-center rounded border border-on-surface transition-all duration-200 ease-in-out data-[has-image=true]:border-none group-data-[is-empty=true]:hidden group-data-[is-correct=false]:cursor-pointer group-data-[is-correct=true]:bg-success group-data-[is-correct=true]:text-on-success">
+      {!imageSrc && <span>{data.key}</span>}
     </div>
   );
 };
@@ -148,4 +182,4 @@ const genKey: {
   return isPoint2d(arg1) ? `${arg1.x}:${arg1.y}` : `${arg1}:${arg2}`;
 };
 
-export default CaptchaSlidingPuzzle;
+export default CaptchaTilePuzzle;

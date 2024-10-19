@@ -1,10 +1,11 @@
 import { NextPage } from 'next';
 import Link from 'next/link';
 import { useTranslation } from 'next-i18next';
+import { useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 
 import Button from '@/components/atoms/Button';
-import CaptchaSlidingPuzzle from '@/components/atoms/CaptchaSlidingPuzzle';
+import CaptchaTilePuzzle from '@/components/atoms/CaptchaTilePuzzle';
 import PageHeadline from '@/components/atoms/PageHeadline';
 import SiteTitle from '@/components/atoms/SiteTitle';
 import TextInput from '@/components/atoms/TextInput';
@@ -17,6 +18,7 @@ type PasswordReminderFormInputs = {
 
 const PasswordReminder: NextPage = () => {
   const { t } = useTranslation('common');
+  const [isCaptchaValid, setCaptchaValid] = useState(false);
   const {
     register,
     handleSubmit,
@@ -51,11 +53,20 @@ const PasswordReminder: NextPage = () => {
         </div>
         <div className="flex flex-col">
           <h4 className="mb-1">{t('captcha.field')}</h4>
-          <small>{t('captcha.captchaEmojiHint')}</small>
-          <CaptchaSlidingPuzzle
+          <small>{t('captcha.captchaTilePuzzleHint')}</small>
+          <CaptchaTilePuzzle
             className="my-3 rounded-md border border-on-background"
             cols={9}
             rows={3}
+            imageSrc="/assets/images/captcha-tile-abstract.jpg"
+            onResolved={() => setCaptchaValid(true)}
+          />
+          <TextInput
+            type="hidden"
+            value={isCaptchaValid ? 'true' : ''}
+            {...register('captcha', {
+              required: t('validation.errors.captchaInvalid'),
+            })}
           />
           {errors.captcha && (
             <small className="mt-1 block text-error">

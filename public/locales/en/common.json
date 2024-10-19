@@ -45,7 +45,7 @@
   "captcha": {
     "field": "Captcha",
     "captchaEmojiHint": "Count the emojis and identify which one appears the most. Look carefully, as parts of some emojis might be obscured.",
-    "captchaSlidePuzzleHint": "Slide puzzle captcha. You can solve it by dragging the emojis in the correct order."
+    "captchaTilePuzzleHint": "Slide the tiles into their right position. You can only move the ones directly next to each other."
   },
   "user": {
     "email": "Email",
