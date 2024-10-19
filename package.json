@@ -53,6 +53,7 @@
     "react-confetti": "^6.1.0",
     "react-dom": "^18.3.1",
     "react-fast-marquee": "^1.6.5",
+    "react-hook-form": "^7.53.0",
     "react-share": "^5.1.0",
     "react-timeago": "^7.2.0",
     "react-use": "^17.5.1",
@@ -111,8 +112,8 @@
     "typescript": "5.5.4"
   },
   "peerDependencies": {
+    "express": "^4.21.1",
     "i18next": "^23.10.1",
-    "react-i18next": "^15.0.1",
-    "express": "^4.21.1"
+    "react-i18next": "^15.0.1"
   }
 }
