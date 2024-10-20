@@ -15,9 +15,6 @@ const meta = {
       description:
         'Simplified change event retuning only the value of the selected option',
     },
-    selected: {
-      description: 'Any of the values in the `values` prop',
-    },
   },
   args: {
     onChange: fn(),
@@ -34,6 +31,5 @@ export const SampleFormSelect: Story = {
       { value: '1', label: 'One' },
       { value: '2', label: 'Two' },
     ],
-    selected: '1',
   },
 };

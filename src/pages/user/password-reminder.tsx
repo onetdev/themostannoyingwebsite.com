@@ -26,14 +26,17 @@ const PasswordReminder: NextPage = () => {
   } = useForm<PasswordReminderFormInputs>();
 
   const onSubmit: SubmitHandler<PasswordReminderFormInputs> = (_data) => {
-    alert(t('user.loginError'));
+    alert(t('user.passwordReminderError'));
   };
 
   return (
     <main className="mx-auto max-w-[500px] py-14">
       <SiteTitle>{t('navigation.passwordReminder')}</SiteTitle>
       <PageHeadline>{t('navigation.passwordReminder')}</PageHeadline>
-      <form className="flex flex-col gap-5" onSubmit={handleSubmit(onSubmit)}>
+      <form
+        className="flex flex-col gap-5"
+        method="post"
+        onSubmit={handleSubmit(onSubmit)}>
         <div>
           <label>
             <h4 className="mb-1">{t('user.email')}</h4>

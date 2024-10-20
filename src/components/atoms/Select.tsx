@@ -5,8 +5,7 @@ export type SelectProps = DetailedHTMLProps<
   HTMLSelectElement
 > & {
   values: { value: string; label: string }[];
-  selected: string;
-  onValueChange: (value: string) => void;
+  onValueChange?: (value: string) => void;
 };
 
 const Select = ({

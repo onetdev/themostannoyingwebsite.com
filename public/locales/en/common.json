@@ -27,11 +27,11 @@
     "home": "Home",
     "hotThings": "Hot things",
     "login": "Login",
-    "privacyPolicy": "Privacy Policy",
-    "search": "Search",
-    "settings": "Settings",
     "passwordReminder": "Password Reminder",
-    "registration": "Registration"
+    "privacyPolicy": "Privacy Policy",
+    "registration": "Registration",
+    "search": "Search",
+    "settings": "Settings"
   },
   "shareModal": {
     "title": "Share this page",
@@ -48,13 +48,24 @@
     "captchaTilePuzzleHint": "Slide the tiles into their right position. You can only move the ones directly next to each other."
   },
   "user": {
+    "consentNewsletter": "I want to receive newsletter",
+    "consentPrivacyPolicy": "Accept privacy policy",
+    "countryCode": "Country",
+    "createMyAccount": "Create my account",
     "email": "Email",
+    "firstName": "First name",
     "forgotPassword": "Forgot password?",
+    "lastName": "Last name",
     "loginError": "Login failed",
     "password": "Password",
+    "passwordConfirmation": "Password confirmation",
+    "passwordReminderError": "Password reminder failed",
+    "phoneNumber": "Phone number",
     "registerAccount": "Need an account?",
+    "registrationError": "Registration failed",
     "rememberMe": "Remember me",
-    "sendPasswordReminder": "Send password reminder"
+    "sendPasswordReminder": "Send password reminder",
+    "username": "Username"
   },
   "experiences": {
     "marqueeVariants": ["📣 Come back please 🏃‍♀️🏃 We have candy!! 🚐"],
@@ -80,7 +91,16 @@
       "checkboxRequired": "You must check this box",
       "fileTooLarge": "The file size exceeds the limit of {{size}}",
       "fileTypeInvalid": "Invalid file type",
-      "customError": "Invalid input"
-    }
+      "customError": "Invalid input",
+      "missingUppercase": "Must contain at least one uppercase letter",
+      "missingLowercase": "Must contain at least one lowercase letter",
+      "missingNumber": "Must contain at least one number",
+      "missingSpecialCharacter": "Must contain at least one symbol",
+      "sumOfNumbersGte": "Sum of numbers must be at least or equal to {{count}}",
+      "sumOfNumbersMustBeEven": "Sum of numbers must be be even"
+    },
+    "passwordWeak": "Weak",
+    "passwordOkay": "Okay",
+    "passwordVeryStrong": "Strong"
   }
 }

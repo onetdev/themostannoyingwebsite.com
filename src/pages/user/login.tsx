@@ -34,7 +34,10 @@ const Login: NextPage = () => {
     <main className="mx-auto max-w-[500px] py-14">
       <SiteTitle>{t('navigation.login')}</SiteTitle>
       <PageHeadline>{t('navigation.login')}</PageHeadline>
-      <form className="flex flex-col gap-5" onSubmit={handleSubmit(onSubmit)}>
+      <form
+        className="flex flex-col gap-5"
+        method="post"
+        onSubmit={handleSubmit(onSubmit)}>
         <div>
           <label>
             <h4 className="mb-1">{t('user.email')}</h4>
