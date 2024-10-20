@@ -9,10 +9,7 @@ The main idea is to gather the most annoying features of modern websites in one 
 <details>
   <summary>TODO / Planned</summary>
 
-  - [ ] Fake registration:
-    - [ ] Includes an awful captcha
-    - [ ] Difficult age selector
-    - [ ] Password validator that shows only one error and has absurdly complex rules that contradict each other
+  - [ ] Create a captcha where you need to select all the images with a car on it but none of the images have a car on them and captcha fails
   - [ ] Fake search page that:
     - [ ] Autocorrects the user to all the wrong terms
     - [ ] Doesn’t actually work or return any results
@@ -27,6 +24,9 @@ The main idea is to gather the most annoying features of modern websites in one 
 <details>
   <summary>Completed</summary>
 
+  - [x] Fake registration:
+    - [x] Difficult age selector
+    - [x] Password validator that shows only one error and has absurdly complex rules that contradict each other
   - [x] Fake login with an unsolvable captcha
   - [x] Fake “forgot password” page with a message like “LOL, try harder next time, can’t help you”
   - [x] Multilanguage support
