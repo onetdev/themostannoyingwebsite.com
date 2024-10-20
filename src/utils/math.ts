@@ -64,3 +64,18 @@ export const random = (
   const result = Math.random() * (max - min) + min;
   return integerResult ? Math.floor(result) : result;
 };
+
+export const mapToLogScale = (
+  score: number,
+  maxInput: number,
+  maxOutput: number,
+): number => {
+  if (score <= 0) {
+    return 0;
+  }
+
+  const logScore = Math.log(score);
+  const logMaxInput = Math.log(maxInput);
+
+  return (logScore / logMaxInput) * maxOutput;
+};
