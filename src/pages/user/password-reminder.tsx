@@ -6,15 +6,12 @@ import { SubmitHandler, useForm } from 'react-hook-form';
 
 import Button from '@/components/atoms/Button';
 import CaptchaTilePuzzle from '@/components/atoms/CaptchaTilePuzzle';
+import FormFieldError from '@/components/atoms/FormFieldError';
 import PageHeadline from '@/components/atoms/PageHeadline';
 import SiteTitle from '@/components/atoms/SiteTitle';
 import TextInput from '@/components/atoms/TextInput';
+import { PasswordReminderFormInputs } from '@/features/auth';
 import { makeI18nStaticProps } from '@/utils/i18n';
-
-type PasswordReminderFormInputs = {
-  email: string;
-  captcha: string;
-};
 
 const PasswordReminder: NextPage = () => {
   const { t } = useTranslation('common');
@@ -48,11 +45,7 @@ const PasswordReminder: NextPage = () => {
               })}
             />
           </label>
-          {errors.email && (
-            <small className="mt-1 block text-error">
-              {errors.email?.message}
-            </small>
-          )}
+          <FormFieldError error={errors.email} />
         </div>
         <div className="flex flex-col">
           <h4 className="mb-1">{t('captcha.field')}</h4>
@@ -71,11 +64,7 @@ const PasswordReminder: NextPage = () => {
               required: t('validation.errors.captchaInvalid'),
             })}
           />
-          {errors.captcha && (
-            <small className="mt-1 block text-error">
-              {errors.captcha?.message}
-            </small>
-          )}
+          <FormFieldError error={errors.captcha} />
         </div>
 
         <Button type="submit" className="mt-10" size="lg">

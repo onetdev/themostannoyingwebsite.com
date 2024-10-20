@@ -4,7 +4,7 @@ export type SelectProps = DetailedHTMLProps<
   SelectHTMLAttributes<HTMLSelectElement>,
   HTMLSelectElement
 > & {
-  values: { value: string; label: string }[];
+  values: { value: string | number; label: string | number }[];
   onValueChange?: (value: string) => void;
 };
 
@@ -17,7 +17,7 @@ const Select = ({
 }: SelectProps) => {
   const onChangeProxy = (e: React.ChangeEvent<HTMLSelectElement>) => {
     onChange?.(e);
-    onValueChange?.(values[e.target.selectedIndex].value);
+    onValueChange?.(values[e.target.selectedIndex].value.toString());
   };
 
   return (
