@@ -1,5 +1,5 @@
 import { useTranslation } from 'next-i18next';
-import { FunctionComponent, useMemo } from 'react';
+import { FunctionComponent, useEffect, useMemo, useState } from 'react';
 
 import Select from '@/components/atoms/Select';
 import { CommonRegistrationFormFieldProps } from '@/features/auth/types';
@@ -7,14 +7,16 @@ import FormFieldError from '@/root/src/components/atoms/FormFieldError';
 
 type DateOfBirthFieldProps = Pick<
   CommonRegistrationFormFieldProps,
-  'errors' | 'register'
+  'errors' | 'register' | 'setValue'
 >;
 
 const DateOfBirthField: FunctionComponent<DateOfBirthFieldProps> = ({
   errors,
   register,
+  setValue,
 }) => {
   const { t } = useTranslation('common');
+  const [parts, setParts] = useState({ year: '', month: '', day: '' });
 
   const dateOfBirthYear = useMemo(() => {
     const currentYear = new Date().getFullYear();
@@ -42,14 +44,38 @@ const DateOfBirthField: FunctionComponent<DateOfBirthFieldProps> = ({
     }));
   }, []);
 
+  const onYearChange = (value: string) => setParts({ ...parts, year: value });
+  const onMonthChange = (value: string) => setParts({ ...parts, month: value });
+  const onDayChange = (value: string) => setParts({ ...parts, day: value });
+
+  useEffect(() => {
+    const anyEmpty = !parts.year || !parts.month || !parts.day;
+    setValue(
+      'dateOfBirth',
+      anyEmpty ? '' : `${parts.year}-${parts.month}-${parts.day}`,
+    );
+  }, [parts, setValue]);
+
   return (
     <div>
       <label>
         <h5 className="mb-1">{t('user.dateOfBirth')}</h5>
         <div className="flex gap-3">
-          <Select className="w-1/4" values={dateOfBirthYear} />
-          <Select className="w-2/4" values={dateOfBirthMonth} />
-          <Select className="w-1/4" values={dateOfBirthDay} />
+          <Select
+            className="w-1/4"
+            values={dateOfBirthYear}
+            onValueChange={onYearChange}
+          />
+          <Select
+            className="w-2/4"
+            values={dateOfBirthMonth}
+            onValueChange={onMonthChange}
+          />
+          <Select
+            className="w-1/4"
+            values={dateOfBirthDay}
+            onValueChange={onDayChange}
+          />
         </div>
       </label>
       <input

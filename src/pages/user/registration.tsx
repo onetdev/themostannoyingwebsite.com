@@ -135,7 +135,11 @@ const Registration: NextPage = () => {
           <GenderField errors={errors} register={register} />
         </div>
         <div className="flex flex-col gap-5 lg:w-1/2">
-          <DateOfBirthField errors={errors} register={register} />
+          <DateOfBirthField
+            errors={errors}
+            register={register}
+            setValue={setValue}
+          />
           <PhoneNumberField
             errors={errors}
             register={register}
