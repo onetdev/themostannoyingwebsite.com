@@ -16,11 +16,10 @@ export const userGenderList = [
 ] as const;
 export type UserGender = (typeof userGenderList)[number];
 
-export type RegistrationFormInputs = {
+export type RegistrationFormInputs = CaptchaFormInputs & {
   consentNewsletter: boolean;
   consentPrivacyPolicy: boolean;
   dateOfBirth: string;
-  captcha: string;
   gender: UserGender;
   countryCode: string;
   email: string;
@@ -34,16 +33,14 @@ export type RegistrationFormInputs = {
   username: string;
 };
 
-export type LoginFormInputs = {
+export type LoginFormInputs = CaptchaFormInputs & {
   email: string;
   password: string;
   remember: boolean;
-  captcha: string;
 };
 
-export type PasswordReminderFormInputs = {
+export type PasswordReminderFormInputs = CaptchaFormInputs & {
   email: string;
-  captcha: string;
 };
 
 export type CommonRegistrationFormFieldProps = {

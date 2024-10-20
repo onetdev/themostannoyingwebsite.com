@@ -3,6 +3,7 @@ import { FunctionComponent, useMemo } from 'react';
 
 import Select from '@/components/atoms/Select';
 import { CommonRegistrationFormFieldProps } from '@/features/auth/types';
+import FormFieldError from '@/root/src/components/atoms/FormFieldError';
 
 type DateOfBirthFieldProps = Pick<
   CommonRegistrationFormFieldProps,
@@ -42,7 +43,7 @@ const DateOfBirthField: FunctionComponent<DateOfBirthFieldProps> = ({
   }, []);
 
   return (
-    <>
+    <div>
       <label>
         <h5 className="mb-1">{t('user.dateOfBirth')}</h5>
         <div className="flex gap-3">
@@ -57,12 +58,8 @@ const DateOfBirthField: FunctionComponent<DateOfBirthFieldProps> = ({
           required: t('validation.errors.required'),
         })}
       />
-      {errors.dateOfBirth && (
-        <small className="mt-1 block text-error">
-          {errors.dateOfBirth?.message}
-        </small>
-      )}
-    </>
+      <FormFieldError error={errors.dateOfBirth} />
+    </div>
   );
 };
 

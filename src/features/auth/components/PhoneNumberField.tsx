@@ -12,6 +12,7 @@ import Select from '@/components/atoms/Select';
 import TextInput from '@/components/atoms/TextInput';
 import { CommonRegistrationFormFieldProps } from '@/features/auth/types';
 import countryData from '@/public/assets/countries.json';
+import FormFieldError from '@/root/src/components/atoms/FormFieldError';
 
 type PhoneNumberFieldProps = Pick<
   CommonRegistrationFormFieldProps,
@@ -79,14 +80,14 @@ const PhoneNumberField: FunctionComponent<PhoneNumberFieldProps> = ({
   };
 
   return (
-    <>
+    <div>
       <label>
         <h5 className="mb-1">{t('user.phoneNumber')}</h5>
         <div className="flex gap-3">
           <Select
             className="w-1/4"
             values={phoneCountryOptions}
-            {...register('countryCode', {
+            {...register('phoneNumberCountry', {
               required: t('validation.errors.required'),
             })}
           />
@@ -117,12 +118,12 @@ const PhoneNumberField: FunctionComponent<PhoneNumberFieldProps> = ({
           </div>
         </div>
       </label>
-      {errors.phoneNumber && (
-        <small className="mt-1 block text-error">
-          {errors.phoneNumber?.message}
-        </small>
+      {errors.phoneNumberCountry ? (
+        <FormFieldError error={errors.phoneNumberCountry} />
+      ) : (
+        <FormFieldError error={errors.phoneNumber} />
       )}
-    </>
+    </div>
   );
 };
 

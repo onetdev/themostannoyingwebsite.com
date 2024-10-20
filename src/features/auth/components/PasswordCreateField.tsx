@@ -4,6 +4,7 @@ import { FunctionComponent } from 'react';
 import PasswordStrengthBar from '@/components/atoms/PasswordStrengthBar';
 import TextInput from '@/components/atoms/TextInput';
 import { CommonRegistrationFormFieldProps } from '@/features/auth/types';
+import FormFieldError from '@/root/src/components/atoms/FormFieldError';
 
 type PasswordCreateFieldProps = Pick<
   CommonRegistrationFormFieldProps,
@@ -64,11 +65,7 @@ const PasswordCreateField: FunctionComponent<PasswordCreateFieldProps> = ({
         />
         <PasswordStrengthBar className="mt-3" password={password} />
       </label>
-      {errors.password && (
-        <small className="mt-1 block text-error">
-          {errors.password?.message}
-        </small>
-      )}
+      <FormFieldError error={errors.password} />
     </>
   );
 };
