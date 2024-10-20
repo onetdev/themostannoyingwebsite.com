@@ -27,15 +27,15 @@
     "home": "Home",
     "hotThings": "Hot things",
     "login": "Login",
-    "privacyPolicy": "Privacy Policy",
-    "search": "Search",
-    "settings": "Settings",
     "passwordReminder": "Password Reminder",
-    "registration": "Registration"
+    "privacyPolicy": "Privacy Policy",
+    "registration": "Registration",
+    "search": "Search",
+    "settings": "Settings"
   },
   "shareModal": {
     "title": "Share this page",
-    "description":"Spread the misery! Be sure to inflict this painfully obnoxious website on your friends too — why suffer alone when you can drag them down with you?"
+    "description": "Spread the misery! Be sure to inflict this painfully obnoxious website on your friends too — why suffer alone when you can drag them down with you?"
   },
   "themeSwitch": {
     "label": "Switch theme",
@@ -48,17 +48,37 @@
     "captchaTilePuzzleHint": "Slide the tiles into their right position. You can only move the ones directly next to each other."
   },
   "user": {
+    "consentNewsletter": "I want to receive newsletter",
+    "consentPrivacyPolicy": "Accept privacy policy",
+    "countryCode": "Country",
+    "createMyAccount": "Create my account",
+    "dateOfBirth": "Date of birth",
     "email": "Email",
+    "firstName": "First name",
     "forgotPassword": "Forgot password?",
+    "gender": "Gender",
+    "lastName": "Last name",
     "loginError": "Login failed",
+    "nickname": "Nickname",
     "password": "Password",
+    "passwordConfirmation": "Password confirmation",
+    "passwordReminderError": "Password reminder failed",
+    "phoneNumber": "Phone number",
     "registerAccount": "Need an account?",
+    "registrationError": "Registration failed",
     "rememberMe": "Remember me",
-    "sendPasswordReminder": "Send password reminder"
+    "sendPasswordReminder": "Send password reminder",
+    "username": "Username"
   },
   "experiences": {
-    "marqueeVariants": ["📣 Come back please 🏃‍♀️🏃 We have candy!! 🚐"],
-    "arrayPagedVariants": ["⭐️ HEY YOU 🫵", "😜 YES YOU 😱", "📣 COME BACK 🏃"],
+    "marqueeVariants": [
+      "📣 Come back please 🏃‍♀️🏃 We have candy!! 🚐"
+    ],
+    "arrayPagedVariants": [
+      "⭐️ HEY YOU 🫵",
+      "😜 YES YOU 😱",
+      "📣 COME BACK 🏃"
+    ],
     "exitPrompt": "I'd reconsider leaving before some bad things happend to you. Are you sure?"
   },
   "validation": {
@@ -80,7 +100,42 @@
       "checkboxRequired": "You must check this box",
       "fileTooLarge": "The file size exceeds the limit of {{size}}",
       "fileTypeInvalid": "Invalid file type",
-      "customError": "Invalid input"
-    }
+      "customError": "Invalid input",
+      "missingUppercase": "Must contain at least one uppercase letter",
+      "missingLowercase": "Must contain at least one lowercase letter",
+      "missingNumber": "Must contain at least one number",
+      "missingSpecialCharacter": "Must contain at least one symbol",
+      "sumOfNumbersGte": "Sum of numbers must be at least or equal to {{count}}",
+      "sumOfNumbersMustBeEven": "Sum of numbers must be be even",
+      "passwordAlreadyTaken": "The password is already taken by another user"
+    },
+    "passwordWeak": "Weak",
+    "passwordOkay": "Okay",
+    "passwordVeryStrong": "Strong"
+  },
+  "genders": {
+    "alien": "Alien",
+    "chymera": "Chymera",
+    "cyborg": "Cyborg",
+    "female": "Female",
+    "male": "Male",
+    "other": "Other",
+    "robot": "Robot"
+  },
+  "date": {
+    "months": [
+      "January",
+      "February",
+      "March",
+      "April",
+      "May",
+      "June",
+      "July",
+      "August",
+      "September",
+      "October",
+      "November",
+      "December"
+    ]
   }
 }
