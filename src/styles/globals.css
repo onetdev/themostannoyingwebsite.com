@@ -11,12 +11,16 @@
   --color-tertiary: #ff5722;
   --color-tertiary-alt: #ff5722;
   --color-surface: #141221;
+  --color-success: #16a733;
+  --color-warning: #edd629;
   --color-error: #f44336;
-  --color-on-primary: #ffffff;
-  --color-on-secondary: #000000;
-  --color-on-tertiary: #000000;
+  --color-on-primary: #fff;
+  --color-on-secondary: #000;
+  --color-on-tertiary: #000;
   --color-on-background: #fff;
   --color-on-surface: #fff;
+  --color-on-success: #fff;
+  --color-on-warning: #000;
   --color-on-error: #fff;
   --color-dimmer: #464646b5;
 }
@@ -30,12 +34,16 @@
   --color-tertiary: #ee4917;
   --color-tertiary-alt: #d33d0f;
   --color-surface: #f3f5ec;
+  --color-success: #36f45c;
+  --color-warning: #edd629;
   --color-error: #f44034;
   --color-on-primary: #fff;
   --color-on-secondary: #050416;
   --color-on-tertiary: #050416;
   --color-on-background: #050416;
   --color-on-surface: #050416;
+  --color-on-success: #050416;
+  --color-on-warning: #000;
   --color-on-error: #050416;
   --color-dimmer: #3a3a3abc;
 }

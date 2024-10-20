@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { fn } from '@storybook/test';
 
-import FormSelect from '@/components/atoms/form/Select';
+import FormSelect from '@/components/atoms/Select';
 
 const meta = {
   title: 'Example/FormSelect',
@@ -14,9 +14,6 @@ const meta = {
     onValueChange: {
       description:
         'Simplified change event retuning only the value of the selected option',
-    },
-    selected: {
-      description: 'Any of the values in the `values` prop',
     },
   },
   args: {
@@ -34,6 +31,5 @@ export const SampleFormSelect: Story = {
       { value: '1', label: 'One' },
       { value: '2', label: 'Two' },
     ],
-    selected: '1',
   },
 };

@@ -1,7 +1,7 @@
 {
   "name": "The Most Annoying Website",
   "short_name": "The MAW",
-  "description": null,
+  "description": "",
   "dir": "auto",
   "lang": "en-US",
   "display": "standalone",

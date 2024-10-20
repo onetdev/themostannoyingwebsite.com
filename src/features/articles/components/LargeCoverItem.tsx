@@ -16,7 +16,11 @@ export const LargeCoverItem: FunctionComponent<LargeCoverItemProps> = ({
 }) => {
   return (
     <div {...rest}>
-      <Link className="relative block" href={article.url} passHref>
+      <Link
+        className="relative block"
+        href={article.url}
+        passHref
+        prefetch={false}>
         {!article.coverImages?.original && (
           <CoverPlaceholder width={1920} height={1200} />
         )}

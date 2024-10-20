@@ -11,7 +11,7 @@ const ContainerGiftFlaps: FunctionComponent = () => {
   return (
     <div className="sticky top-0 hidden w-full justify-center md:flex">
       <div className="absolute max-h-screen overflow-hidden">
-        <Link href="/super-duper" passHref>
+        <Link href="/super-duper" passHref prefetch={false}>
           <Image
             className="object-cover"
             src={flapImage}

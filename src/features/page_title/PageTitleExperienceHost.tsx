@@ -11,7 +11,7 @@ import { useExperienceFlagsStore } from '@/state/experience_flags';
 import { useRuntimeStore } from '@/state/runtime';
 
 /**
- * Experiments on manipulating the page title. Unfortunatelly the refresh rate
+ * Experience of manipulating the page title. Unfortunatelly the refresh rate
  * is quite low and the title is not updated as frequently as I would like.
  */
 const PageTitleExperienceHost: FunctionComponent = () => {

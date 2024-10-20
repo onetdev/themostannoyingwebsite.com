@@ -1,5 +1,15 @@
 export type Point2d = { x: number; y: number };
 
+export const isPoint2d = (point: TypeNarrowArg): point is Point2d => {
+  return (
+    typeof point === 'object' &&
+    'x' in point &&
+    typeof point.x === 'number' &&
+    'y' in point &&
+    typeof point.y === 'number'
+  );
+};
+
 export const angleRad = (p1: Point2d, p2: Point2d): number => {
   return Math.atan2(p2.y - p1.y, p2.x - p1.x);
 };
@@ -53,4 +63,19 @@ export const random = (
 ): number => {
   const result = Math.random() * (max - min) + min;
   return integerResult ? Math.floor(result) : result;
+};
+
+export const mapToLogScale = (
+  score: number,
+  maxInput: number,
+  maxOutput: number,
+): number => {
+  if (score <= 0) {
+    return 0;
+  }
+
+  const logScore = Math.log(score);
+  const logMaxInput = Math.log(maxInput);
+
+  return (logScore / logMaxInput) * maxOutput;
 };

@@ -4,6 +4,7 @@ import { useTranslation } from 'next-i18next';
 import { useEffect, useRef, useState } from 'react';
 
 import Icon from '@/components/atoms/Icon';
+import PageHeadline from '@/components/atoms/PageHeadline';
 import SiteTitle from '@/components/atoms/SiteTitle';
 import { makeI18nStaticProps } from '@/utils/i18n';
 
@@ -60,7 +61,7 @@ const HotThings: NextPage = () => {
   return (
     <main>
       <SiteTitle>{t('navigation.hotThings')}</SiteTitle>
-      <h2>{t('navigation.hotThings')}</h2>
+      <PageHeadline>{t('navigation.hotThings')}</PageHeadline>
       <div className="relative overflow-hidden pb-16/9">
         <Image
           className="absolute h-auto w-full"

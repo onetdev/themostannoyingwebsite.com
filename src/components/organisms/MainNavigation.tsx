@@ -24,7 +24,7 @@ const MainNavigation: FunctionComponent<MainNavigationProps> = ({
     <nav className={className} id="navigation-main">
       <GenericMenu>
         {links.map(({ path, text }) => (
-          <Link key={`${path}${text}`} href={path}>
+          <Link key={`${path}${text}`} href={path} prefetch={false}>
             {text}
           </Link>
         ))}

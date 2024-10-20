@@ -22,10 +22,15 @@ const UserNavigation: FunctionComponent<UserNavigationProps> = ({
         handleClose={() => setShowShareModal(false)}
       />
       <GenericMenu>
-        <Link href="/settings">{t('navigation.settings')}</Link>
-        <span onClick={() => setShowShareModal(true)}>
+        <a onClick={() => setShowShareModal(true)} className="cursor-pointer">
           {t('actions.share')}
-        </span>
+        </a>
+        <Link href="/settings" passHref prefetch={false}>
+          {t('navigation.settings')}
+        </Link>
+        <Link href="/user/login" passHref prefetch={false}>
+          {t('navigation.login')}
+        </Link>
       </GenericMenu>
     </nav>
   );

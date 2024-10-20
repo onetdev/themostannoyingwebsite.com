@@ -4,8 +4,8 @@ import { FunctionComponent } from 'react';
 import SettingsBlock from './SettingsBlock';
 import SettingsBlockRow from './SettingsBlockRow';
 
-import FormCheckbox from '@/components/atoms/form/Checkbox';
-import DarkModeToggle from '@/root/src/components/atoms/DarkModeToggle';
+import FormCheckbox from '@/components/atoms/Checkbox';
+import DarkModeToggle from '@/components/atoms/DarkModeToggle';
 import { useUserPreferencesStore } from '@/state/user_preferences';
 
 const PreferencesSettings: FunctionComponent = () => {

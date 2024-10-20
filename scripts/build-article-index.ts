@@ -10,7 +10,7 @@ import i18nConfig from '@/root/next-i18next.config';
 import articleEntrySimplifiedZod from '@/schemas/article-entry-simplified';
 import { ArticleIndexEntrySchema } from '@/schemas/article-index-entry';
 
-const articlesRootPath = path.join('./public/articles');
+const articlesRootPath = path.join('./public/assets/articles');
 const locales = i18nConfig.i18n.locales;
 const articleDirPattern = new RegExp(
   `^(${locales.join('|')})-([0-9]*)-(.*)$`,

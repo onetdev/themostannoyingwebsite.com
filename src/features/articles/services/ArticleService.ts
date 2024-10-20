@@ -5,8 +5,8 @@ import {
   ArticleFilter,
   ArticleLookupFilter,
 } from '@/features/articles/types';
-import articlesRaw from '@/public/articles/index.json';
-import { ArticleIndexEntrySchema } from '@/root/src/schemas/article-index-entry';
+import articlesRaw from '@/public/assets/articles/index.json';
+import { ArticleIndexEntrySchema } from '@/schemas/article-index-entry';
 
 const propFilterBool = (
   article: ArticleData,
@@ -28,8 +28,8 @@ class ArticleService {
           content: article.content,
           coverImages: article.hasCoverImage
             ? {
-                original: `/articles/${article.directory}/cover.jpg`,
-                thumbnail: `/articles/${article.directory}/cover-480x270.jpg`,
+                original: `/assets/articles/${article.directory}/cover.jpg`,
+                thumbnail: `/assets/articles/${article.directory}/cover-480x270.jpg`,
               }
             : undefined,
           intro: article.intro,

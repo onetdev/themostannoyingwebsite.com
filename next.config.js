@@ -6,4 +6,32 @@ module.exports = {
   poweredByHeader: false,
   trailingSlash: true,
   i18n,
+  images: {
+    unoptimized: true,
+  },
+  async headers() {
+    const oneHourCache = {
+      key: 'Cache-Control',
+      value: 'public, max-age=3600, immutable',
+    };
+
+    return [
+      {
+        source: '/assets/:all*',
+        headers: [oneHourCache],
+      },
+      {
+        source: '/manifest/:all*',
+        headers: [oneHourCache],
+      },
+      {
+        source: '/locales/:all*',
+        headers: [oneHourCache],
+      },
+      {
+        source: '/favicon.ico',
+        headers: [oneHourCache],
+      },
+    ];
+  },
 };

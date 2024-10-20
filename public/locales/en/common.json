@@ -9,37 +9,133 @@
     "no": "No"
   },
   "actions": {
-    "dismiss": "Dismiss",
-    "cancel": "Cancel",
     "accept": "Accept",
+    "cancel": "Cancel",
     "close": "Close",
+    "dismiss": "Dismiss",
+    "login": "Login",
     "ok": "OK",
     "send": "Send",
     "share": "Share"
   },
   "status": {
-    "unknown": "Unknown",
-    "notSet": "Not set"
+    "notSet": "Not set",
+    "unknown": "Unknown"
   },
   "navigation": {
+    "contact": "Contact",
     "home": "Home",
     "hotThings": "Hot things",
-    "contact": "Contact",
+    "login": "Login",
+    "passwordReminder": "Password Reminder",
     "privacyPolicy": "Privacy Policy",
+    "registration": "Registration",
+    "search": "Search",
     "settings": "Settings"
   },
   "shareModal": {
     "title": "Share this page",
-    "description":"Spread the misery! Be sure to inflict this painfully obnoxious website on your friends too — why suffer alone when you can drag them down with you?"
+    "description": "Spread the misery! Be sure to inflict this painfully obnoxious website on your friends too — why suffer alone when you can drag them down with you?"
   },
   "themeSwitch": {
     "label": "Switch theme",
     "darkMode": "Dark mode",
     "lightMode": "Light mode"
   },
+  "captcha": {
+    "field": "Captcha",
+    "captchaEmojiHint": "Count the emojis and identify which one appears the most. Look carefully, as parts of some emojis might be obscured.",
+    "captchaTilePuzzleHint": "Slide the tiles into their right position. You can only move the ones directly next to each other."
+  },
+  "user": {
+    "consentNewsletter": "I want to receive newsletter",
+    "consentPrivacyPolicy": "Accept privacy policy",
+    "countryCode": "Country",
+    "createMyAccount": "Create my account",
+    "dateOfBirth": "Date of birth",
+    "email": "Email",
+    "firstName": "First name",
+    "forgotPassword": "Forgot password?",
+    "gender": "Gender",
+    "lastName": "Last name",
+    "loginError": "Login failed",
+    "nickname": "Nickname",
+    "password": "Password",
+    "passwordConfirmation": "Password confirmation",
+    "passwordReminderError": "Password reminder failed",
+    "phoneNumber": "Phone number",
+    "registerAccount": "Need an account?",
+    "registrationError": "Registration failed",
+    "rememberMe": "Remember me",
+    "sendPasswordReminder": "Send password reminder",
+    "username": "Username"
+  },
   "experiences": {
-    "marqueeVariants": ["📣 Come back please 🏃‍♀️🏃 We have candy!! 🚐"],
-    "arrayPagedVariants": ["⭐️ HEY YOU 🫵", "😜 YES YOU 😱", "📣 COME BACK 🏃"],
+    "marqueeVariants": [
+      "📣 Come back please 🏃‍♀️🏃 We have candy!! 🚐"
+    ],
+    "arrayPagedVariants": [
+      "⭐️ HEY YOU 🫵",
+      "😜 YES YOU 😱",
+      "📣 COME BACK 🏃"
+    ],
     "exitPrompt": "I'd reconsider leaving before some bad things happend to you. Are you sure?"
+  },
+  "validation": {
+    "errors": {
+      "required": "This field is required.",
+      "minLength": "Minimum length is {{count}} characters",
+      "maxLength": "Maximum length is {{count}} characters",
+      "min": "Value must be at least {{count}}",
+      "max": "Value must be no more than {{count}}",
+      "emailInvalid": "Invalid email address",
+      "captchaInvalid": "Invalid captcha",
+      "patternMismatch": "The input does not match the required pattern",
+      "passwordMismatch": "Passwords do not match",
+      "urlInvalid": "Invalid URL format",
+      "numberInvalid": "Please enter a valid number",
+      "dateInvalid": "Invalid date format",
+      "tooShort": "The input is too short",
+      "tooLong": "The input is too long",
+      "checkboxRequired": "You must check this box",
+      "fileTooLarge": "The file size exceeds the limit of {{size}}",
+      "fileTypeInvalid": "Invalid file type",
+      "customError": "Invalid input",
+      "missingUppercase": "Must contain at least one uppercase letter",
+      "missingLowercase": "Must contain at least one lowercase letter",
+      "missingNumber": "Must contain at least one number",
+      "missingSpecialCharacter": "Must contain at least one symbol",
+      "sumOfNumbersGte": "Sum of numbers must be at least or equal to {{count}}",
+      "sumOfNumbersMustBeEven": "Sum of numbers must be be even",
+      "passwordAlreadyTaken": "The password is already taken by another user"
+    },
+    "passwordWeak": "Weak",
+    "passwordOkay": "Okay",
+    "passwordVeryStrong": "Strong"
+  },
+  "genders": {
+    "alien": "Alien",
+    "chymera": "Chymera",
+    "cyborg": "Cyborg",
+    "female": "Female",
+    "male": "Male",
+    "other": "Other",
+    "robot": "Robot"
+  },
+  "date": {
+    "months": [
+      "January",
+      "February",
+      "March",
+      "April",
+      "May",
+      "June",
+      "July",
+      "August",
+      "September",
+      "October",
+      "November",
+      "December"
+    ]
   }
 }
