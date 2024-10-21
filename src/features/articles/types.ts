@@ -23,6 +23,7 @@ export interface ArticleLookupFilter {
 export interface ArticlePropFilter {
   isHighlighted?: boolean;
   isOnCover?: boolean;
+  locale?: string;
 }
 
 export interface ArticleSort {

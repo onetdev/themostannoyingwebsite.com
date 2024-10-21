@@ -60,6 +60,7 @@ class ArticleService {
   }: ArticleFilter): ArticleData[] {
     const results = this.articles.filter((article) => {
       return (
+        (!props.locale || article.locale === props.locale) &&
         propFilterBool(article, 'isHighlighted', props.isHighlighted) &&
         propFilterBool(article, 'isOnCover', props.isOnCover)
       );
