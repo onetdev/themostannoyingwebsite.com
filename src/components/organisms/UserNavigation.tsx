@@ -37,12 +37,17 @@ const UserNavigation: FunctionComponent<UserNavigationProps> = ({
         show={showShareModal}
         handleClose={() => setShowShareModal(false)}
       />
-      <ul className="flex justify-end gap-2 md:gap-3">
+      <ul className="flex justify-end gap-3">
         <li>
           <a
             onClick={() => setShowShareModal(true)}
             className="flex cursor-pointer items-center gap-2">
-            <Icon icon="share" title={t('actions.share')} titleId="share" />
+            <Icon
+              icon="share"
+              title={t('actions.share')}
+              titleId="share"
+              size="lg"
+            />
             <span className="hidden md:inline-block">{t('actions.share')}</span>
           </a>
         </li>
@@ -53,7 +58,7 @@ const UserNavigation: FunctionComponent<UserNavigationProps> = ({
               passHref
               prefetch={false}
               className="flex items-center gap-2">
-              <Icon icon={icon} title={text} titleId={text} />
+              <Icon icon={icon} title={text} titleId={text} size="lg" />
               <span className="hidden md:inline-block">{text}</span>
             </Link>
           </li>

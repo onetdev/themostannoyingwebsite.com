@@ -25,7 +25,7 @@ const Modal: FunctionComponent<ModalProps> = ({
         <div className="flex flex-row justify-between border-b border-on-primary px-5 py-3 text-xl">
           <h4>{title}</h4>
           <button className="cursor-pointer" onClick={handleClose}>
-            <Icon icon="faTimes" size="lg" />
+            <Icon icon="close" size="lg" />
           </button>
         </div>
         <div className="p-5">{children}</div>

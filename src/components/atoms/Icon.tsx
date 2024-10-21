@@ -5,10 +5,10 @@ import {
   faMapMarkerAlt,
   faPaperPlane,
   faPlayCircle,
-  faRightToBracket,
   faShare,
   faTags,
   faTimes,
+  faUser,
 } from '@fortawesome/free-solid-svg-icons';
 import {
   FontAwesomeIcon,
@@ -17,16 +17,16 @@ import {
 import { FunctionComponent } from 'react';
 
 const iconMap = {
-  faCommentDots: faCommentDots,
-  faMapMarkerAlt: faMapMarkerAlt,
-  faPaperPlane: faPaperPlane,
-  faPlayCircle: faPlayCircle,
-  faTags: faTags,
-  faTimes: faTimes,
-  login: faRightToBracket,
+  close: faTimes,
+  commentDots: faCommentDots,
+  login: faUser,
+  mapMarker: faMapMarkerAlt,
   menu: faBars,
+  play: faPlayCircle,
+  send: faPaperPlane,
   settings: faGear,
   share: faShare,
+  tags: faTags,
 };
 export type IconAliaseKey = keyof typeof iconMap;
 

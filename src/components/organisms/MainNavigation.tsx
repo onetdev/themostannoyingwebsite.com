@@ -26,7 +26,7 @@ const MainNavigation: FunctionComponent<MainNavigationProps> = ({
   return (
     <nav className={`group relative ${className}`} id="navigation-main">
       <span className="block md:hidden">
-        <Icon icon="menu" />
+        <Icon icon="menu" size="lg" />
       </span>
       <ul
         className={`absolute left-0 z-20 hidden flex-col gap-x-3 bg-surface py-2 font-primary text-lg group-hover:flex md:relative md:flex md:flex-row md:flex-wrap md:py-0`}>

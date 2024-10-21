@@ -42,9 +42,9 @@ const AnimatedWheel: FunctionComponent<AnimatedWheelProps> = ({
     if (state != 'ready') return;
 
     const dir = anim.rotation < 0 ? -1 : 1;
-    const revs = random(revRange[0], revRange[1]);
+    const revs = random(revRange[0], revRange[1], true);
     const revDeg = 360 * revs * dir;
-    const winIndex = random(0, items.length - 1);
+    const winIndex = random(0, items.length - 1, true);
     const winDeg =
       (dir > 0 ? 270 : -90) - degPerItem / 2 - degPerItem * winIndex;
 
@@ -106,7 +106,7 @@ const AnimatedWheel: FunctionComponent<AnimatedWheelProps> = ({
       <div
         className="absolute inset-x-0 top-3 z-10 flex justify-center text-2xl text-secondary drop-shadow-md data-[wiggle=true]:animate-wiggle-15deg md:top-0 md:-ml-4 md:text-5xl"
         data-wiggle={(state === 'spinning').toString()}>
-        <Icon icon="faMapMarkerAlt" size="5xl" />
+        <Icon icon="mapMarker" size="5xl" />
       </div>
       <Button
         className="absolute left-1/2 top-1/2 z-10 -translate-x-1/2 -translate-y-1/2 rounded-full border border-secondary bg-primary p-5 text-2xl shadow-md md:rounded-full"

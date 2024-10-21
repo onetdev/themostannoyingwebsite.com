@@ -46,7 +46,7 @@ const ModalContent: FunctionComponent<ModalContentProps> = ({
           aria-label={t('common:actions.close')}
           className="absolute right-0 top-0 z-10 cursor-pointer p-3"
           onClick={() => onClose?.()}>
-          <Icon icon="faTimes" size="lg" />
+          <Icon icon="close" size="lg" />
         </button>
         {state === 'completed' && (
           <Confetti
