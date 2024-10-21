@@ -81,7 +81,7 @@ const HotThings: NextPage = () => {
             className="absolute left-1/2 top-1/2 -ml-9 -mt-9 text-7xl"
             onClick={onIntent}
             hidden={Boolean(stream)}>
-            <Icon icon="faPlayCircle" size="5xl" />
+            <Icon icon="play" size="5xl" />
           </button>
         )}
       </div>

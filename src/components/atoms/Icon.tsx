@@ -1,21 +1,32 @@
 import {
+  faBars,
   faCommentDots,
+  faGear,
   faMapMarkerAlt,
   faPaperPlane,
   faPlayCircle,
+  faShare,
   faTags,
   faTimes,
+  faUser,
 } from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import {
+  FontAwesomeIcon,
+  FontAwesomeIconProps,
+} from '@fortawesome/react-fontawesome';
 import { FunctionComponent } from 'react';
 
 const iconMap = {
-  faCommentDots: faCommentDots,
-  faMapMarkerAlt: faMapMarkerAlt,
-  faPaperPlane: faPaperPlane,
-  faPlayCircle: faPlayCircle,
-  faTags: faTags,
-  faTimes: faTimes,
+  close: faTimes,
+  commentDots: faCommentDots,
+  login: faUser,
+  mapMarker: faMapMarkerAlt,
+  menu: faBars,
+  play: faPlayCircle,
+  send: faPaperPlane,
+  settings: faGear,
+  share: faShare,
+  tags: faTags,
 };
 export type IconAliaseKey = keyof typeof iconMap;
 
@@ -31,7 +42,10 @@ const iconSizeMap: Record<string, string> = {
 };
 export type IconSize = keyof typeof iconSizeMap;
 
-export type IconProps = {
+export type IconProps = Omit<
+  FontAwesomeIconProps,
+  'icon' | 'className' | 'size'
+> & {
   icon: IconAliaseKey;
   size?: IconSize;
   className?: string;
