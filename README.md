@@ -9,9 +9,6 @@ The main idea is to gather the most annoying features of modern websites in one 
 <details>
   <summary>TODO / Planned</summary>
 
-  - [ ] Fake search page that:
-    - [ ] Autocorrects the user to all the wrong terms
-    - [ ] Doesn’t actually work or return any results
   - [ ] Newsletter modal that appears when the user leaves the screen or scrolls down a bit
   - [ ] Request for location permission (don’t worry, the website won’t use your location)
   - [ ] Sticky video player that obscures page visibility (with audio)
@@ -24,6 +21,9 @@ The main idea is to gather the most annoying features of modern websites in one 
 <details>
   <summary>Completed</summary>
 
+  - [x] Fake search page that:
+    - [x] Silly recommended searches
+    - [x] Doesn’t actually work or return any results
   - [x] Fake registration:
     - [x] Difficult age selector
     - [x] Password validator that shows only one error and has absurdly complex rules that contradict each other
