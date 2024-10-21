@@ -137,5 +137,27 @@
       "November",
       "December"
     ]
+  },
+  "search": {
+    "placeholder": "Search...",
+    "noResults": "No results found",
+    "resultMeta": "Search for \"{{query}}\" took {{time}}ms and found {{count}} results",
+    "searching": "Searching",
+    "peopleAlsoSearched": "People also searched for:",
+    "topSearches": [
+      "do fish get thirsty",
+      "pasta lyrics",
+      "do cars run out of honk",
+      "internet not working",
+      "can facebook listen through your phone",
+      "why do i smell like pennies",
+      "can you swim in jello",
+      "how do i politely tell someone they smell like onions",
+      "can't see reflection in mirror",
+      "electricity invention",
+      "rub his bread",
+      "meme and toad",
+      "bog brother"
+    ]
   }
 }
