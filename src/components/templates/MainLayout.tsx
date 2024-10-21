@@ -23,7 +23,7 @@ const MainLayout: FunctionComponent<MainLayoutProps> = ({
     <div className={className} {...rest}>
       <Analytics />
       <ContainerGiftFlaps />
-      <div className="container relative mx-auto my-0 min-h-screen bg-surface px-5 py-2">
+      <div className="container relative mx-auto my-0 min-h-screen bg-surface px-3 py-2 md:px-5">
         <Header />
         {children}
         <Footer />

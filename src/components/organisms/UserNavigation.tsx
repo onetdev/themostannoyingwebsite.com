@@ -1,11 +1,11 @@
 import Link from 'next/link';
 import { useTranslation } from 'next-i18next';
-import { FunctionComponent, useState } from 'react';
+import { FunctionComponent, useMemo, useState } from 'react';
 
-import { GenericMenu } from '@/components/molecules/GenericMenu';
+import Icon from '@/components/atoms/Icon';
 import ShareModal from '@/components/organisms/ShareModal';
 
-type UserNavigationProps = {
+export type UserNavigationProps = {
   className?: string;
 };
 
@@ -15,23 +15,46 @@ const UserNavigation: FunctionComponent<UserNavigationProps> = ({
   const { t } = useTranslation();
   const [showShareModal, setShowShareModal] = useState(false);
 
+  const links = useMemo(
+    () => [
+      {
+        path: '/hot-things',
+        text: t('navigation.settings'),
+        icon: 'settings' as const,
+      },
+      { path: '/contact', text: t('navigation.login'), icon: 'login' as const },
+    ],
+    [t],
+  );
+
   return (
-    <nav className={className} id="navigation-user">
+    <nav className={`group relative ${className}`} id="navigation-user">
       <ShareModal
         show={showShareModal}
         handleClose={() => setShowShareModal(false)}
       />
-      <GenericMenu>
-        <a onClick={() => setShowShareModal(true)} className="cursor-pointer">
-          {t('actions.share')}
-        </a>
-        <Link href="/settings" passHref prefetch={false}>
-          {t('navigation.settings')}
-        </Link>
-        <Link href="/user/login" passHref prefetch={false}>
-          {t('navigation.login')}
-        </Link>
-      </GenericMenu>
+      <ul className="flex justify-end gap-2 md:gap-3">
+        <li>
+          <a
+            onClick={() => setShowShareModal(true)}
+            className="flex cursor-pointer items-center gap-2">
+            <Icon icon="share" title={t('actions.share')} />
+            <span className="hidden md:inline-block">{t('actions.share')}</span>
+          </a>
+        </li>
+        {links.map(({ path, text, icon }) => (
+          <li key={path}>
+            <Link
+              href={path}
+              passHref
+              prefetch={false}
+              className="flex items-center gap-2">
+              <Icon icon={icon} title={text} />
+              <span className="hidden md:inline-block">{text}</span>
+            </Link>
+          </li>
+        ))}
+      </ul>
     </nav>
   );
 };
