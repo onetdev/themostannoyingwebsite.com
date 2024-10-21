@@ -1,4 +1,5 @@
 import { NextPage } from 'next';
+import { useTranslation } from 'next-i18next';
 
 import {
   ArticleService,
@@ -9,8 +10,9 @@ import {
 import { makeI18nStaticProps } from '@/utils/i18n';
 
 const Index: NextPage = () => {
+  const { i18n } = useTranslation();
   const coverArticle = ArticleService.getFirstFiltered({
-    props: { isOnCover: true },
+    props: { isOnCover: true, locale: i18n.language },
     paginate: {
       take: 1,
       skip: 0,
