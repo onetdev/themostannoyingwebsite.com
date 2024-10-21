@@ -22,8 +22,8 @@ const CaptchaTitlePuzzleField: FunctionComponent<
       <small>{t('captcha.captchaTilePuzzleHint')}</small>
       <CaptchaTilePuzzle
         className="my-3 rounded-md border border-on-background"
-        cols={9}
-        rows={3}
+        cols={6}
+        rows={4}
         imageSrc="/assets/images/captcha-tile-abstract.jpg"
         onResolved={() => setValue('captcha', 'true')}
       />

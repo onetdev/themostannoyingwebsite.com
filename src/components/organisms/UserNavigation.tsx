@@ -18,11 +18,15 @@ const UserNavigation: FunctionComponent<UserNavigationProps> = ({
   const links = useMemo(
     () => [
       {
-        path: '/hot-things',
+        path: '/settings',
         text: t('navigation.settings'),
         icon: 'settings' as const,
       },
-      { path: '/contact', text: t('navigation.login'), icon: 'login' as const },
+      {
+        path: '/user/login',
+        text: t('navigation.login'),
+        icon: 'login' as const,
+      },
     ],
     [t],
   );
@@ -38,7 +42,7 @@ const UserNavigation: FunctionComponent<UserNavigationProps> = ({
           <a
             onClick={() => setShowShareModal(true)}
             className="flex cursor-pointer items-center gap-2">
-            <Icon icon="share" title={t('actions.share')} />
+            <Icon icon="share" title={t('actions.share')} titleId="share" />
             <span className="hidden md:inline-block">{t('actions.share')}</span>
           </a>
         </li>
@@ -49,7 +53,7 @@ const UserNavigation: FunctionComponent<UserNavigationProps> = ({
               passHref
               prefetch={false}
               className="flex items-center gap-2">
-              <Icon icon={icon} title={text} />
+              <Icon icon={icon} title={text} titleId={text} />
               <span className="hidden md:inline-block">{text}</span>
             </Link>
           </li>
