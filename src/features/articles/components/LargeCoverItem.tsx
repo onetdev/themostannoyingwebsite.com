@@ -33,11 +33,13 @@ export const LargeCoverItem: FunctionComponent<LargeCoverItemProps> = ({
             height="1200"
           />
         )}
-        <div className="absolute bottom-0 right-0 flex w-full flex-col items-end p-2">
-          <h2 className="mb-3 bg-primary px-3 text-on-primary">
+        <div className="relative bottom-0 right-0 flex w-full flex-col items-end md:absolute md:p-2">
+          <h2 className="bg-primary px-2 text-xl text-on-primary md:mb-3 md:px-3 md:text-3xl">
             {article.title}
           </h2>
-          <p className="m-0 bg-secondary text-on-secondary">{article.intro}</p>
+          <p className="m-0 hidden bg-secondary text-sm text-on-secondary md:block">
+            {article.intro}
+          </p>
         </div>
       </Link>
     </div>
