@@ -16,5 +16,6 @@ module.exports = {
     'gifts',
     'notifications',
     'wheel_of_fortune',
+    'settings',
   ],
 };
