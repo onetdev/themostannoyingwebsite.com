@@ -50,7 +50,7 @@ const ArticleItem: NextPage<ArticleItemProps> = (props: ArticleItemProps) => {
           height="1200"
         />
       )}
-      <PartitionalLockedContent initialMaxHeight={200} active={showLocker}>
+      <PartitionalLockedContent initialMaxHeight={300} active={showLocker}>
         <div className={styles['content']}>{HTMLReactParser(data.content)}</div>
       </PartitionalLockedContent>
     </main>
