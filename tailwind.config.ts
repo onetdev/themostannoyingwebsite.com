@@ -15,7 +15,7 @@ module.exports = {
       },
       backgroundImage: {
         'bottom-fadeout':
-          'linear-gradient(0deg, var(--color-background) 50%, transparent 100%)',
+          'linear-gradient(0deg, var(--color-surface) 60%, transparent 100%)',
         'cover-placeholder': "url('/assets/cover-placeholder.svg')",
         'radial-primary': 'radial-gradient(transparent, var(--color-primary))',
       },

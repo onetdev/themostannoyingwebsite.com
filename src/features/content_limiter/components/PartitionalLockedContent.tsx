@@ -8,7 +8,6 @@ import React, {
 } from 'react';
 
 import Button from '@/components/atoms/Button';
-import EscapingElement from '@/components/templates/EscapingElement';
 
 type PartitionalLockedContentProps = Omit<JSXProxyProps<'div'>, 'styles'> &
   PropsWithChildren<{
@@ -29,24 +28,49 @@ const PartitionalLockedContent: FunctionComponent<
 }) => {
   const { t } = useTranslation(['content_limiter']);
   const [maxHeight, setMaxHeight] = useState(initialMaxHeight);
-  const [isRevealed, setIsRevealed] = useState(false);
+  const [isRevealed, setRevealed] = useState(false);
+  const [isCtaReverse, setCtaReverse] = useState(true);
   const contentRef = useRef<HTMLDivElement>(null);
 
   // Extends the max-height of the content until there's content to reveal
   const handleRevealClick = () => {
     const newMaxHeight = maxHeight + steps;
     if (contentRef.current && newMaxHeight > contentRef.current.clientHeight) {
-      setIsRevealed(true);
+      setRevealed(true);
     }
     setMaxHeight(newMaxHeight);
   };
 
-  const wrapperStyles = useMemo(
-    () => ({
+  const wrapperStyles = useMemo(() => {
+    if (!active || isRevealed) {
+      return {};
+    }
+
+    return {
       maxHeight: active && !isRevealed ? `${maxHeight}px` : 'auto',
-    }),
-    [active, maxHeight, isRevealed],
-  );
+    };
+  }, [active, maxHeight, isRevealed]);
+
+  const renderButtons = () => {
+    const buttons = [
+      <Button
+        variant="primary"
+        key="cta"
+        size="sm"
+        onMouseEnter={() => setCtaReverse((prev) => !prev)}>
+        {t('content_limiter:partitional.cta')}*
+      </Button>,
+      <Button
+        variant="secondary"
+        onClick={handleRevealClick}
+        size="sm"
+        key="cancel">
+        {t('content_limiter:partitional.cancel')}
+      </Button>,
+    ];
+
+    return <>{isCtaReverse ? buttons : buttons.reverse()}</>;
+  };
 
   return (
     <div
@@ -56,18 +80,13 @@ const PartitionalLockedContent: FunctionComponent<
       <div ref={contentRef}>{children}</div>
       <div
         data-hidden={!active || isRevealed ? 'true' : 'false'}
-        className="absolute bottom-[-500px] left-0 w-full bg-bottom-fadeout opacity-0 transition-all duration-300 ease-in-out data-[hidden=false]:bottom-0 data-[hidden=false]:opacity-100">
-        <h1>{t('partitional.title')}</h1>
-        <EscapingElement boundingBox={{ left: 0, bottom: 0 }} trigger="hover">
-          <Button variant="primary">
-            {t('content_limiter:partitional.cta')}*
-          </Button>
-        </EscapingElement>
-        <Button variant="secondary" onClick={handleRevealClick}>
-          {t('content_limiter:partitional.cancel')}
-        </Button>
-        <div className="block text-xs italic">
-          * {t('content_limiter:partitional.disclaimer')}
+        className="absolute left-0 w-full bg-bottom-fadeout opacity-0 transition-all duration-300 ease-in-out data-[hidden=false]:bottom-0 data-[hidden=false]:opacity-100">
+        <div className="mx-auto w-full max-w-[700px]">
+          <h3 className="mb-4 mt-6">{t('partitional.title')}</h3>
+          <div className="my-3 flex gap-2">{renderButtons()}</div>
+          <div className="block text-xs italic">
+            * {t('content_limiter:partitional.disclaimer')}
+          </div>
         </div>
       </div>
     </div>
