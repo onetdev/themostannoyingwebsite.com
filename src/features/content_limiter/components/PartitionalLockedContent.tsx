@@ -81,8 +81,8 @@ const PartitionalLockedContent: FunctionComponent<
       <div
         data-hidden={!active || isRevealed ? 'true' : 'false'}
         className="absolute left-0 w-full bg-bottom-fadeout opacity-0 transition-all duration-300 ease-in-out data-[hidden=false]:bottom-0 data-[hidden=false]:opacity-100">
-        <div className="mx-auto w-full max-w-[700px]">
-          <h3 className="mb-4 mt-6">{t('partitional.title')}</h3>
+        <div className="mx-auto w-full max-w-[700px] pt-16">
+          <h3 className="mb-4">{t('partitional.title')}</h3>
           <div className="my-3 flex gap-2">{renderButtons()}</div>
           <div className="block text-xs italic">
             * {t('content_limiter:partitional.disclaimer')}
