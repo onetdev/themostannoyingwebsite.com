@@ -3,7 +3,7 @@ import favicons, { type FaviconFile, type FaviconImage } from 'favicons';
 import fs from 'fs/promises';
 import path from 'path';
 
-import eslintRules from '@/root/.eslintrc.js';
+import eslintRules from '@/root/eslint.config.mjs';
 
 import manifestConfig from '@/root/manifest.config.js';
 
