@@ -1,3 +1,4 @@
+import HTMLReactParser from 'html-react-parser';
 import { NextPage } from 'next';
 import { useTranslation } from 'next-i18next';
 import { useCallback, useEffect, useMemo, useState } from 'react';
@@ -6,6 +7,7 @@ import DotDotDotText from '@/components/atoms/DotDotDotText';
 import PageHeadline from '@/components/atoms/PageHeadline';
 import SiteTitle from '@/components/atoms/SiteTitle';
 import SearchForm from '@/components/organisms/SearchForm';
+import { ArticleSearchResult, ArticleService } from '@/features/articles';
 import { shuffleArray } from '@/utils/array';
 import { makeI18nStaticProps } from '@/utils/i18n';
 import { random } from '@/utils/math';
@@ -14,11 +16,13 @@ type Result = {
   query: string;
   time: string;
   count: number;
-  recommended: string[];
+  topSearches: string[];
+  items: ArticleSearchResult[];
 };
 
 const Search: NextPage = () => {
   const { t } = useTranslation('common');
+  const { i18n } = useTranslation();
   const [query, setQuery] = useState('');
   const [loading, setLoading] = useState(false);
   const [results, setResults] = useState<Result | undefined>();
@@ -64,19 +68,25 @@ const Search: NextPage = () => {
 
     const time = random(0.001, 5);
     const timer = setTimeout(() => {
-      const recommended = shuffleArray(topSearchesPool).slice(0, 3);
+      const matches = ArticleService.search({
+        query,
+        params: {
+          locale: i18n.language,
+        },
+      });
 
       setResults({
         query,
         time: time.toString().substring(0, 6),
-        count: 0,
-        recommended,
+        count: matches.length,
+        topSearches: shuffleArray(topSearchesPool).slice(0, 3),
+        items: matches,
       });
       setLoading(false);
     }, time * 1000);
 
     return () => clearTimeout(timer);
-  }, [query, topSearchesPool]);
+  }, [i18n.language, query, topSearchesPool]);
 
   return (
     <main>
@@ -97,16 +107,25 @@ const Search: NextPage = () => {
           })}
         </div>
       )}
+      {!loading &&
+        results &&
+        results.items.length > 0 &&
+        results.items.map((item) => (
+          <div key={item.lookup.slug}>
+            <h4>{item.title}</h4>
+            <p>{HTMLReactParser(item.contextHighlight)}</p>
+          </div>
+        ))}
       {!loading && results && results.count < 1 && (
         <>
           <div className="my-10 text-2xl font-bold">
             ❌ {t('search.noResults')}
           </div>
-          {results.recommended.length > 0 && (
+          {results.topSearches.length > 0 && (
             <div className="my-4 text-base">
               <p>{t('search.peopleAlsoSearched')}</p>
               <ul className="list-inside list-disc pl-5">
-                {results.recommended.map((item) => (
+                {results.topSearches.map((item) => (
                   <li key={item}>
                     <span
                       onClick={() => onRecommendedClick(item)}

@@ -1,4 +1,4 @@
-export interface ArticleData {
+export interface ArticleDatum {
   assetGroupId: string;
   content: string;
   coverImages?: {
@@ -15,12 +15,20 @@ export interface ArticleData {
   url: string;
 }
 
-export interface ArticleLookupFilter {
+export type ArticleData = PagedList<ArticleDatum>;
+
+export interface ArticleSearchResult {
+  lookup: ArticleLookupIdentifier;
+  title: string;
+  contextHighlight: string;
+}
+
+export interface ArticleLookupIdentifier {
   slug: string;
   locale: string;
 }
 
-export interface ArticlePropFilter {
+export interface ArticleFilterParams {
   isHighlighted?: boolean;
   isOnCover?: boolean;
   locale?: string;
@@ -32,7 +40,11 @@ export interface ArticleSort {
 }
 
 export interface ArticleFilter {
-  props: ArticlePropFilter;
+  params: ArticleFilterParams;
   sort?: ArticleSort;
   paginate?: { take?: number; skip?: number };
+}
+
+export interface ArticleSearchFilter extends Omit<ArticleFilter, 'sort'> {
+  query: string;
 }

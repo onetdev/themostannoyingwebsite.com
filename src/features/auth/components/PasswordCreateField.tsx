@@ -1,10 +1,10 @@
 import { useTranslation } from 'next-i18next';
 import { FunctionComponent } from 'react';
 
+import FormFieldError from '@/components/atoms/FormFieldError';
 import PasswordStrengthBar from '@/components/atoms/PasswordStrengthBar';
 import TextInput from '@/components/atoms/TextInput';
-import { CommonRegistrationFormFieldProps } from '@/features/auth/types';
-import FormFieldError from '@/root/src/components/atoms/FormFieldError';
+import { type CommonRegistrationFormFieldProps } from '@/features/auth';
 
 type PasswordCreateFieldProps = Pick<
   CommonRegistrationFormFieldProps,

@@ -4,10 +4,10 @@ import { FunctionComponent } from 'react';
 
 import { CoverPlaceholder } from './CoverPlaceholder';
 
-import { ArticleData } from '@/features/articles/types';
+import { type ArticleDatum } from '@/features/articles';
 
 type LargeCoverItemProps = JSXProxyProps<'div'> & {
-  article: ArticleData;
+  article: ArticleDatum;
 };
 
 export const LargeCoverItem: FunctionComponent<LargeCoverItemProps> = ({

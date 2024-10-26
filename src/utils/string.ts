@@ -1,3 +1,5 @@
+import sanitizeHtml from 'sanitize-html';
+
 import { mergeIntervals } from './array';
 
 export const mb_string_to_char_array = (input: string) => {
@@ -87,7 +89,8 @@ export const string_closeness = (s1: string, s2: string): number => {
   return jaroWinklerSimilarity;
 };
 
-const string_cleanup = (string: string) => {
+const string_cleanup = (raw: string) => {
+  const string = sanitizeHtml(raw, { allowedTags: [], allowedAttributes: {} });
   return string
     .trim()
     .replace(/\t|\r|\n/g, ' ')
@@ -100,7 +103,7 @@ export const fuzzy_search = ({
   highlightLength = 240,
   query,
   text,
-  threshold = 0.66,
+  threshold = 0.9,
 }: {
   contextRadiusLimit?: number;
   highlightCount?: number;
@@ -149,13 +152,17 @@ export const fuzzy_search = ({
 
   // We only need to apply scaling if the max value is greater than 1 which
   // might happens if a token has multiple matching query tokens.
-  const maxScore = Math.max(
-    tokens.reduce((acc, { score }) => Math.max(acc, score), 0),
-    1,
+  const stats = tokens.reduce(
+    ({ maxScore, cumScore }, { score }) => ({
+      maxScore: Math.max(maxScore, score),
+      cumScore: cumScore + score,
+    }),
+    { maxScore: 1, cumScore: 0 },
   );
+
   const matches = tokens
     .map((token, index) => {
-      const normalScore = token.score / maxScore;
+      const normalScore = token.score / stats.maxScore;
       return normalScore >= threshold
         ? {
             ...token,
@@ -205,6 +212,7 @@ export const fuzzy_search = ({
   return {
     tokens,
     matches,
-    result: result,
+    result,
+    stats,
   };
 };

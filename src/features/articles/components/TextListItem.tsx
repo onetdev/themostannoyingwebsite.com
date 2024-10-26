@@ -1,10 +1,10 @@
 import Link from 'next/link';
 import { FunctionComponent } from 'react';
 
-import { ArticleData } from '@/features/articles/types';
+import { type ArticleDatum } from '@/features/articles';
 
 type TextListItemProps = {
-  article: ArticleData;
+  article: ArticleDatum;
 };
 
 export const TextListItem: FunctionComponent<TextListItemProps> = ({

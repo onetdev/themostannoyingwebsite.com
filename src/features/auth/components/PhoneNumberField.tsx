@@ -8,11 +8,11 @@ import {
 } from 'react';
 
 import Button from '@/components/atoms/Button';
+import FormFieldError from '@/components/atoms/FormFieldError';
 import Select from '@/components/atoms/Select';
 import TextInput from '@/components/atoms/TextInput';
-import { CommonRegistrationFormFieldProps } from '@/features/auth/types';
+import { type CommonRegistrationFormFieldProps } from '@/features/auth';
 import countryData from '@/public/assets/countries.json';
-import FormFieldError from '@/root/src/components/atoms/FormFieldError';
 
 type PhoneNumberFieldProps = Pick<
   CommonRegistrationFormFieldProps,
