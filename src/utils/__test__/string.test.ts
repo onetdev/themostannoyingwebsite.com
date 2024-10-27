@@ -82,7 +82,7 @@ describe('fuzzy_search', () => {
 
     expect(result).toBeInstanceOf(Object);
     expect(result?.result).toStrictEqual(
-      'Lorem ipsum dolor sit amet, consectetur adipiscing elit. <mark>Pellentesque</mark> in justo a ipsum sollicitudin faucibus. Donec i',
+      'Lorem ipsum dolor sit amet, <mark>consectetur</mark> adipiscing elit. <mark>Pellentesque</mark> in justo a ipsum <mark>sollicitudin</mark> faucibus. Donec in la',
     );
   });
 });

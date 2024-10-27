@@ -99,11 +99,11 @@ const string_cleanup = (raw: string) => {
 
 export const fuzzy_search = ({
   contextRadiusLimit = 60,
-  highlightCount = 5,
+  highlightCount = 3,
   highlightLength = 240,
   query,
   text,
-  threshold = 0.9,
+  threshold = 0.87,
 }: {
   contextRadiusLimit?: number;
   highlightCount?: number;
@@ -204,10 +204,15 @@ export const fuzzy_search = ({
   const resultUnmarked = normalSlices
     .map(([start, end]) => cleanText.slice(start, end))
     .join('[...]');
-  const result = matches.reduce(
-    (carry, { text }) => carry.replace(text, `<mark>${text}</mark>`),
+
+  const resultUnsafeMarked = matches.reduce(
+    (carry, { text }) => carry.replaceAll(text, `<mark>${text}</mark>`),
     resultUnmarked,
   );
+
+  // Cleanup nested <mark>s.
+  // PS: I need to 🤮, but I don't have the luxury of time here :/
+  const result = flattenSameTagNesting(resultUnsafeMarked, 'mark');
 
   return {
     tokens,
@@ -215,4 +220,20 @@ export const fuzzy_search = ({
     result,
     stats,
   };
+};
+
+const flattenSameTagNesting = (raw: string, tag: string) => {
+  let depth = 0;
+  const matcher = new RegExp(`(<${tag}>|</${tag}>)`, 'g');
+  return raw.replaceAll(matcher, (match) => {
+    if (match === `<${tag}>`) {
+      depth++;
+      return depth === 1 ? match : '';
+    } else if (match === `</${tag}>`) {
+      depth--;
+      return depth === 0 ? match : '';
+    }
+
+    return '';
+  });
 };
