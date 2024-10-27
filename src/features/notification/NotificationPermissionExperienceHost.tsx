@@ -8,12 +8,12 @@ import useScrollDistanceTrigger from '@/hooks/useScrollDistanceTrigger';
 import { useUserGrantsStore } from '@/state/user_grants';
 import { getNotificationPermissionState } from '@/utils/permission';
 
-export type NotificationPermissionExperienceProps = {
+export type NotificationPermissionExperienceHostProps = {
   scrollDistanceTrigger?: number;
 };
 const NotificationPermissionExperienceHost: FunctionComponent<
-  NotificationPermissionExperienceProps
-> = ({ scrollDistanceTrigger = 200 }) => {
+  NotificationPermissionExperienceHostProps
+> = ({ scrollDistanceTrigger = 400 }) => {
   const initialState = useRef(getNotificationPermissionState()).current;
   useScrollDistanceTrigger({
     threshold: scrollDistanceTrigger,
