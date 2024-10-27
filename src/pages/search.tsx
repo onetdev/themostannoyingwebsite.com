@@ -1,5 +1,6 @@
 import HTMLReactParser from 'html-react-parser';
 import { NextPage } from 'next';
+import Link from 'next/link';
 import { useTranslation } from 'next-i18next';
 import { useCallback, useEffect, useMemo, useState } from 'react';
 
@@ -90,6 +91,8 @@ const Search: NextPage = () => {
     return () => clearTimeout(timer);
   }, [i18n.language, query, searchDelay, topSearchesPool]);
 
+  const showResultList = !loading && results && results.items.length > 0;
+
   return (
     <main>
       <SiteTitle>{t('navigation.search')}</SiteTitle>
@@ -109,15 +112,25 @@ const Search: NextPage = () => {
           })}
         </div>
       )}
-      {!loading &&
-        results &&
-        results.items.length > 0 &&
-        results.items.map((item) => (
-          <div key={item.lookup.slug}>
-            <h4>{item.title}</h4>
-            <p>{HTMLReactParser(item.contextHighlight)}</p>
-          </div>
-        ))}
+      {showResultList && (
+        <>
+          {results.items.map((item) => (
+            <div className="my-4" key={item.lookup.slug}>
+              <h4>
+                <Link
+                  href={`articles/${item.lookup.slug}`}
+                  passHref
+                  prefetch={false}>
+                  {item.title}
+                </Link>
+              </h4>
+              <p className="max-w-narrow">
+                {HTMLReactParser(item.contextHighlight)}
+              </p>
+            </div>
+          ))}
+        </>
+      )}
       {!loading && results && results.count < 1 && (
         <>
           <div className="my-10 text-2xl font-bold">
