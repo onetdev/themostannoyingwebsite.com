@@ -6,6 +6,7 @@ export interface ExperienceFlagsState {
   deadPixel: boolean;
   exitPrompt: boolean;
   mockChat: boolean;
+  newsletterModal: boolean;
   pageTitle: {
     inactiveArrayPaged: boolean;
     inactiveMarquee: boolean;
@@ -20,6 +21,7 @@ export interface ExperienceFlagsStateActions {
   setDeadPixel: (deadPixel: boolean) => void;
   setExitPrompt: (exitPrompt: boolean) => void;
   setMockChat: (mockChat: boolean) => void;
+  setNewsletterModal: (newsletterModal: boolean) => void;
   setPageTitle: (pageTitle: Partial<ExperienceFlagsState['pageTitle']>) => void;
   setSearchDelay: (searchDelay: boolean) => void;
   setWheelOfFortune: (wheelOfFortune: boolean) => void;
@@ -34,6 +36,7 @@ const initialState: ExperienceFlagsState = {
   deadPixel: true,
   exitPrompt: true,
   mockChat: true,
+  newsletterModal: true,
   pageTitle: {
     // `inactiveMarquee` and `randomGlitch` are not enabled because title refresh rate is to low
     // maybe these can be turned on at a later point.
@@ -53,6 +56,7 @@ export const useExperienceFlagsStore = create(
       setDeadPixel: (deadPixel) => set({ deadPixel }),
       setExitPrompt: (exitPrompt) => set({ exitPrompt }),
       setMockChat: (mockChat) => set({ mockChat }),
+      setNewsletterModal: (newsletterModal) => set({ newsletterModal }),
       setPageTitle: (pageTitle) =>
         set((state) => ({
           pageTitle: {
@@ -66,12 +70,12 @@ export const useExperienceFlagsStore = create(
     {
       name: 'zustand-experience-flags-storage',
       storage: createJSONStorage(() => localStorage),
-      version: 3,
+      version: 4,
       migrate: (persistedState, _version) => {
         // Versions are supersets atm
         return {
           ...(persistedState as ExperienceFlagsStore),
-          version: 3,
+          version: 4,
         };
       },
     },
