@@ -8,6 +8,7 @@ import PageHeadline from '@/components/atoms/PageHeadline';
 import SiteTitle from '@/components/atoms/SiteTitle';
 import SearchForm from '@/components/organisms/SearchForm';
 import { ArticleSearchResult, ArticleService } from '@/features/articles';
+import { useExperienceFlagsStore } from '@/state/experience_flags';
 import { shuffleArray } from '@/utils/array';
 import { makeI18nStaticProps } from '@/utils/i18n';
 import { random } from '@/utils/math';
@@ -23,6 +24,7 @@ type Result = {
 const Search: NextPage = () => {
   const { t } = useTranslation('common');
   const { i18n } = useTranslation();
+  const { searchDelay } = useExperienceFlagsStore();
   const [query, setQuery] = useState('');
   const [loading, setLoading] = useState(false);
   const [results, setResults] = useState<Result | undefined>();
@@ -66,7 +68,7 @@ const Search: NextPage = () => {
     setResults(undefined);
     setLoading(true);
 
-    const time = random(0.001, 5);
+    const time = searchDelay ? random(0.001, 5) : 0;
     const timer = setTimeout(() => {
       const matches = ArticleService.search({
         query,
@@ -86,7 +88,7 @@ const Search: NextPage = () => {
     }, time * 1000);
 
     return () => clearTimeout(timer);
-  }, [i18n.language, query, topSearchesPool]);
+  }, [i18n.language, query, searchDelay, topSearchesPool]);
 
   return (
     <main>

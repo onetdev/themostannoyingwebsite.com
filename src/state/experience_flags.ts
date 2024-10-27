@@ -11,6 +11,7 @@ export interface ExperienceFlagsState {
     inactiveMarquee: boolean;
     randomGlitch: boolean;
   };
+  searchDelay: boolean;
   wheelOfFortune: boolean;
 }
 
@@ -20,6 +21,7 @@ export interface ExperienceFlagsStateActions {
   setExitPrompt: (exitPrompt: boolean) => void;
   setMockChat: (mockChat: boolean) => void;
   setPageTitle: (pageTitle: Partial<ExperienceFlagsState['pageTitle']>) => void;
+  setSearchDelay: (searchDelay: boolean) => void;
   setWheelOfFortune: (wheelOfFortune: boolean) => void;
 }
 
@@ -39,6 +41,7 @@ const initialState: ExperienceFlagsState = {
     randomGlitch: false,
     inactiveArrayPaged: true,
   },
+  searchDelay: true,
   wheelOfFortune: true,
 };
 
@@ -57,12 +60,20 @@ export const useExperienceFlagsStore = create(
             ...pageTitle,
           },
         })),
+      setSearchDelay: (searchDelay) => set({ searchDelay }),
       setWheelOfFortune: (wheelOfFortune) => set({ wheelOfFortune }),
     }),
     {
       name: 'zustand-experience-flags-storage',
       storage: createJSONStorage(() => localStorage),
-      version: 2,
+      version: 3,
+      migrate: (persistedState, _version) => {
+        // Versions are supersets atm
+        return {
+          ...(persistedState as ExperienceFlagsStore),
+          version: 3,
+        };
+      },
     },
   ),
 );

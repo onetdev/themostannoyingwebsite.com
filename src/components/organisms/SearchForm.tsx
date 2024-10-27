@@ -47,7 +47,10 @@ const SearchForm: FunctionComponent<SearchFormProps> = ({
         name="search"
         placeholder={t('search.placeholder')}
       />
-      <Button className="rounded-l-none" type="submit" size={size}>
+      <Button
+        className="flex items-center rounded-l-none"
+        type="submit"
+        size={size}>
         <Icon icon="search" size="sm" />
       </Button>
     </form>
