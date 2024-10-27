@@ -77,6 +77,7 @@ describe('fuzzy_search', () => {
     const result = fuzzy_search({
       text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque in justo a ipsum sollicitudin faucibus. Donec in lacinia tortor. Vivamus.',
       query: 'Pollentesque',
+      threshold: 0.5,
     });
 
     expect(result).toBeInstanceOf(Object);
