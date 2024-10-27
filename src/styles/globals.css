@@ -92,3 +92,7 @@ small {
 ::selection {
   @apply text-on-primary bg-primary;
 }
+
+mark {
+  @apply text-on-primary bg-primary;
+}

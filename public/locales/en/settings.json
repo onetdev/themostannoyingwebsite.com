@@ -22,6 +22,7 @@
       "exitPrompt": "Exit prompt",
       "mockChat": "Mock chat",
       "pageTitleInactiveArrayPaged": "Alternative title when tab is inactive",
+      "searchDelay": "Fake search delay",
       "wheelOfFortune": "Wheel of fortune"
     },
     "runtime": {

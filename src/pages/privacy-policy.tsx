@@ -19,7 +19,7 @@ const PrivacyPolicy: NextPage = () => {
   return (
     <main>
       <SiteTitle>{t('navigation.privacyPolicy')}</SiteTitle>
-      <PageHeadline className="mx-auto w-full max-w-[700px]">
+      <PageHeadline className="mx-auto w-full max-w-narrow">
         {t('navigation.privacyPolicy')}
       </PageHeadline>
       <div className={styles['content']}>{HTMLReactParser(content)}</div>

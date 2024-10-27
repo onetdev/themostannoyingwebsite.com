@@ -22,4 +22,11 @@ declare global {
   interface DocumentEventMap {
     [DOCUMENT_EVENT_SEARCH]: CustomEvent<DocumentEventSearchDetails>;
   }
+
+  export type PagedList<T> = {
+    items: T[];
+    total: number;
+    take: number;
+    skip: number;
+  };
 }

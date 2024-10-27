@@ -1,9 +1,9 @@
 import { useTranslation } from 'next-i18next';
 import { FunctionComponent, useEffect, useMemo, useState } from 'react';
 
+import FormFieldError from '@/components/atoms/FormFieldError';
 import Select from '@/components/atoms/Select';
-import { CommonRegistrationFormFieldProps } from '@/features/auth/types';
-import FormFieldError from '@/root/src/components/atoms/FormFieldError';
+import { type CommonRegistrationFormFieldProps } from '@/features/auth';
 
 type DateOfBirthFieldProps = Pick<
   CommonRegistrationFormFieldProps,

@@ -101,6 +101,7 @@ module.exports = {
       maxWidth: {
         'screen-dimension-min': 'min(100vw, 100vh)',
         'manual-modal': 'min(calc(100vw - 10rem), 30rem)',
+        narrow: '700px',
       },
       maxHeight: {
         'clamp-300-screen-2/1': 'min(300px, 50vh)',

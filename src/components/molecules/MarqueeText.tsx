@@ -12,10 +12,10 @@ export type MarqueeTextProps = {
 const MarqueeText: FunctionComponent<MarqueeTextProps> = ({ className }) => {
   const flashing = useUserPreferencesStore((state) => state.enableFlashing);
   const [items] = useState(
-    ArticleService.getAllFiltered({
-      props: { isHighlighted: true },
+    ArticleService.getMany({
+      params: { isHighlighted: true },
       paginate: { take: 10 },
-    }),
+    }).items,
   );
   const [speed, setSpeed] = useState(100);
 

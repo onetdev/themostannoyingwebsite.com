@@ -66,6 +66,14 @@ const ExperienceSettings: FunctionComponent = () => {
         />
       </SettingsBlockRow>
       <SettingsBlockRow
+        label={t('settings:section.experienceFlags.searchDelay')}>
+        <FormCheckbox
+          name="search_delay"
+          checked={experience.searchDelay}
+          onValueChange={experience.setSearchDelay}
+        />
+      </SettingsBlockRow>
+      <SettingsBlockRow
         label={t('settings:section.experienceFlags.wheelOfFortune')}>
         <FormCheckbox
           name="wheel_of_fortune"

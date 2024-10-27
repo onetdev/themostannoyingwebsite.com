@@ -19,7 +19,7 @@ const ArticleItem: NextPage<ArticleItemProps> = (props: ArticleItemProps) => {
   const { t, i18n } = useTranslation('common');
   const showLocker = useExperienceFlagsStore((state) => state.contentPaywall);
   const lookup = { slug: props.slug, locale: i18n.language };
-  const data = ArticleService.getByLookupFilter(lookup);
+  const data = ArticleService.getByLookup(lookup);
 
   if (!data) {
     return <Error statusCode={404} />;
@@ -61,10 +61,10 @@ export const getStaticPaths: GetStaticPaths = async ({ locales }) => {
   const paths: { params: ArticleItemProps; locale: string }[] = [];
 
   for (const locale of locales || []) {
-    ArticleService.getAllFiltered({
-      props: { locale },
-      paginate: { take: 1000, skip: 0 },
-    }).forEach((article) => {
+    ArticleService.getMany({
+      params: { locale },
+      paginate: { take: -1 },
+    }).items.forEach((article) => {
       paths.push({
         params: { slug: article.slug },
         locale,

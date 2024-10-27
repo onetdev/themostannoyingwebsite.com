@@ -28,7 +28,7 @@ const SearchForm: FunctionComponent<SearchFormProps> = ({
 
     // Sooo, we want to avoid edge requests thus using fragment instead
     // The search doesn't work anyways
-    router.push(`search#query=${event.currentTarget.search.value}`);
+    router.push(`/search#query=${event.currentTarget.search.value}`);
 
     // If we are already on the search page, we will also need to dispatch
     // the search event
@@ -47,7 +47,10 @@ const SearchForm: FunctionComponent<SearchFormProps> = ({
         name="search"
         placeholder={t('search.placeholder')}
       />
-      <Button className="rounded-l-none" type="submit" size={size}>
+      <Button
+        className="flex items-center rounded-l-none"
+        type="submit"
+        size={size}>
         <Icon icon="search" size="sm" />
       </Button>
     </form>
