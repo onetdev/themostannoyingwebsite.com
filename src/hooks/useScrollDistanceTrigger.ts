@@ -2,11 +2,13 @@ import { useCallback, useEffect, useState } from 'react';
 
 export type ConditionalTriggerProps = {
   threshold: number;
+  resetable?: boolean;
   onTrigger?: () => void;
 };
 const useScrollDistanceTrigger = ({
   threshold,
   onTrigger,
+  resetable,
 }: ConditionalTriggerProps) => {
   const [isCompleted, setCompleted] = useState(false);
 
@@ -14,8 +16,10 @@ const useScrollDistanceTrigger = ({
     if (window.scrollY >= threshold) {
       setCompleted(true);
       onTrigger?.();
+    } else if (resetable) {
+      setCompleted(false);
     }
-  }, [onTrigger, threshold]);
+  }, [onTrigger, resetable, threshold]);
 
   useEffect(() => {
     if (isCompleted) {

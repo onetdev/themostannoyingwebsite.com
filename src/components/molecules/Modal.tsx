@@ -7,7 +7,7 @@ import Icon from '@/components/atoms/Icon';
 
 export type ModalProps = DimmerOverlayProps & {
   title: string;
-  actions: React.ReactNode;
+  actions?: React.ReactNode;
 };
 
 const Modal: FunctionComponent<ModalProps> = ({

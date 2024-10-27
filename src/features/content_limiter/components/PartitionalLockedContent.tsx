@@ -29,7 +29,7 @@ const PartitionalLockedContent: FunctionComponent<
   const { t } = useTranslation(['content_limiter']);
   const [maxHeight, setMaxHeight] = useState(initialMaxHeight);
   const [isRevealed, setRevealed] = useState(false);
-  const [isCtaReverse, setCtaReverse] = useState(true);
+  const [flipActions, setFlipActions] = useState(false);
   const contentRef = useRef<HTMLDivElement>(null);
 
   // Extends the max-height of the content until there's content to reveal
@@ -57,7 +57,7 @@ const PartitionalLockedContent: FunctionComponent<
         variant="primary"
         key="cta"
         size="sm"
-        onMouseEnter={() => setCtaReverse((prev) => !prev)}>
+        onMouseEnter={() => setFlipActions((prev) => !prev)}>
         {t('content_limiter:partitional.cta')}*
       </Button>,
       <Button
@@ -69,7 +69,7 @@ const PartitionalLockedContent: FunctionComponent<
       </Button>,
     ];
 
-    return <>{isCtaReverse ? buttons : buttons.reverse()}</>;
+    return <>{flipActions ? buttons : buttons.reverse()}</>;
   };
 
   return (

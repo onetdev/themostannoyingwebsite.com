@@ -11,15 +11,6 @@ const ExperienceSettings: FunctionComponent = () => {
   const { t } = useTranslation(['settings', 'common']);
   const experience = useExperienceFlagsStore();
 
-  // Experience flags
-  const onContentPaywallChange = (value: boolean) =>
-    experience.setContentPaywall(value);
-  const onDeadPixelChange = (value: boolean) => experience.setDeadPixel(value);
-  const onExitPromptChange = (value: boolean) =>
-    experience.setExitPrompt(value);
-  const onMockChatChange = (value: boolean) => experience.setMockChat(value);
-  const onWheelOfFortuneChange = (value: boolean) =>
-    experience.setWheelOfFortune(value);
   const onPageTitleInactiveArrayPagedChange = (value: boolean) =>
     experience.setPageTitle({ inactiveArrayPaged: value });
 
@@ -30,14 +21,14 @@ const ExperienceSettings: FunctionComponent = () => {
         <FormCheckbox
           name="content_paywall"
           checked={experience.contentPaywall}
-          onValueChange={onContentPaywallChange}
+          onValueChange={experience.setContentPaywall}
         />
       </SettingsBlockRow>
       <SettingsBlockRow label={t('settings:section.experienceFlags.deadPixel')}>
         <FormCheckbox
           name="dead_pixel"
           checked={experience.deadPixel}
-          onValueChange={onDeadPixelChange}
+          onValueChange={experience.setDeadPixel}
         />
       </SettingsBlockRow>
       <SettingsBlockRow
@@ -45,14 +36,22 @@ const ExperienceSettings: FunctionComponent = () => {
         <FormCheckbox
           name="exit_prompt"
           checked={experience.exitPrompt}
-          onValueChange={onExitPromptChange}
+          onValueChange={experience.setExitPrompt}
         />
       </SettingsBlockRow>
       <SettingsBlockRow label={t('settings:section.experienceFlags.mockChat')}>
         <FormCheckbox
           name="mock_chat"
           checked={experience.mockChat}
-          onValueChange={onMockChatChange}
+          onValueChange={experience.setMockChat}
+        />
+      </SettingsBlockRow>
+      <SettingsBlockRow
+        label={t('settings:section.experienceFlags.newsletterModal')}>
+        <FormCheckbox
+          name="mock_chat"
+          checked={experience.newsletterModal}
+          onValueChange={experience.setNewsletterModal}
         />
       </SettingsBlockRow>
       <SettingsBlockRow
@@ -78,7 +77,7 @@ const ExperienceSettings: FunctionComponent = () => {
         <FormCheckbox
           name="wheel_of_fortune"
           checked={experience.wheelOfFortune}
-          onValueChange={onWheelOfFortuneChange}
+          onValueChange={experience.setWheelOfFortune}
         />
       </SettingsBlockRow>
     </SettingsBlock>

@@ -19,6 +19,7 @@ import {
   RegistrationFormInputs,
 } from '@/features/auth';
 import { makeI18nStaticProps } from '@/utils/i18n';
+import { EMAIL_PATTERN } from '@/utils/validator';
 
 const Registration: NextPage = () => {
   const { t } = useTranslation('common');
@@ -107,6 +108,10 @@ const Registration: NextPage = () => {
                 className="w-full"
                 {...register('email', {
                   required: t('validation.errors.required'),
+                  pattern: {
+                    value: EMAIL_PATTERN,
+                    message: t('validation.errors.emailInvalid'),
+                  },
                 })}
               />
             </label>
