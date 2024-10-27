@@ -69,7 +69,8 @@ const Search: NextPage = () => {
     setResults(undefined);
     setLoading(true);
 
-    const time = searchDelay ? random(0.001, 5) : 0;
+    const startTime = new Date().getTime();
+    const delayTime = searchDelay ? random(0.001, 5) : 0;
     const timer = setTimeout(() => {
       const matches = ArticleService.search({
         query,
@@ -78,15 +79,16 @@ const Search: NextPage = () => {
         },
       });
 
+      const time = (new Date().getTime() - startTime) / 1000 + delayTime;
       setResults({
         query,
-        time: time.toString().substring(0, 6),
+        time: time.toString().substring(0, time.toString().indexOf('.') + 6),
         count: matches.length,
         topSearches: shuffleArray(topSearchesPool).slice(0, 3),
         items: matches,
       });
       setLoading(false);
-    }, time * 1000);
+    }, delayTime * 1000);
 
     return () => clearTimeout(timer);
   }, [i18n.language, query, searchDelay, topSearchesPool]);
