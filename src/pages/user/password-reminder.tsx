@@ -16,6 +16,7 @@ import TextInput from '@/components/atoms/TextInput';
 import CaptchaTitlePuzzleField from '@/components/molecules/CaptchaTitlePuzzleFied';
 import { PasswordReminderFormInputs } from '@/features/auth';
 import { makeI18nStaticProps } from '@/utils/i18n';
+import { EMAIL_PATTERN } from '@/utils/validator';
 
 const PasswordReminder: NextPage = () => {
   const { t } = useTranslation('common');
@@ -46,6 +47,10 @@ const PasswordReminder: NextPage = () => {
               className="w-full"
               {...register('email', {
                 required: t('validation.errors.required'),
+                pattern: {
+                  value: EMAIL_PATTERN,
+                  message: t('validation.errors.emailInvalid'),
+                },
               })}
             />
           </label>
