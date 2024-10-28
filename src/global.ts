@@ -1,5 +1,10 @@
 import type { JSX, PropsWithoutRef } from 'react';
 
+export const DOCUMENT_EVENT_SEARCH = 'DocumentEventSearch';
+export type DocumentEventSearchDetails = {
+  query: string;
+};
+
 declare global {
   type JSXProxyProps<T extends keyof JSX.IntrinsicElements> = PropsWithoutRef<
     JSX.IntrinsicElements[T]
@@ -12,5 +17,16 @@ declare global {
 
   type CaptchaFormInputs = {
     captcha: string;
+  };
+
+  interface DocumentEventMap {
+    [DOCUMENT_EVENT_SEARCH]: CustomEvent<DocumentEventSearchDetails>;
+  }
+
+  export type PagedList<T> = {
+    items: T[];
+    total: number;
+    take: number;
+    skip: number;
   };
 }

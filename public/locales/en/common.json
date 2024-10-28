@@ -79,7 +79,39 @@
       "😜 YES YOU 😱",
       "📣 COME BACK 🏃"
     ],
-    "exitPrompt": "I'd reconsider leaving before some bad things happend to you. Are you sure?"
+    "exitPrompt": "I'd reconsider leaving before some bad things happend to you. Are you sure?",
+    "newsletter": {
+      "modal": {
+        "title": "Join our newsletter!",
+        "description": "Our premium newsletter brings an insane amount of value right to your inbox. Don't miss out on insights that make a real difference!",
+        "placeholder": "Enter your email",
+        "initial_confirm": "Subscribe",
+        "initial_cancel": "Don't Subscribe",
+        "use_form_actions": "Please use the relevant button instead",
+        "confirmations": [
+          {
+            "text": "We're disappointed to see that you may not have had enough time to fully consider this important and challenging decision.",
+            "confirm": "I thought about it, I still want to",
+            "cancel": "You are right, cancel"
+          },
+          {
+            "text": "We are sorry to see you subscribing, can we treat you with the joys of not being a subscriber at all?",
+            "confirm": "No thanks",
+            "cancel": "I need my treat!"
+          },
+          {
+            "text": "Have you considered skipping this newsletter?",
+            "confirm": "No",
+            "cancel": "Yes"
+          },
+          {
+            "text": "Subscribing to this newsletter might have adverse side effects. Are you still in?",
+            "confirm": "I accept side effects",
+            "cancel": "Get me out of here"
+          }
+        ]
+      }
+    }
   },
   "validation": {
     "errors": {
@@ -136,6 +168,28 @@
       "October",
       "November",
       "December"
+    ]
+  },
+  "search": {
+    "placeholder": "Search...",
+    "noResults": "No results found",
+    "resultMeta": "Search for \"{{query}}\" took {{time}}ms and found {{count}} results",
+    "searching": "Searching",
+    "peopleAlsoSearched": "People also searched for:",
+    "topSearches": [
+      "do fish get thirsty",
+      "pasta lyrics",
+      "do cars run out of honk",
+      "internet not working",
+      "can facebook listen through your phone",
+      "why do i smell like pennies",
+      "can you swim in jello",
+      "how do i politely tell someone they smell like onions",
+      "can't see reflection in mirror",
+      "electricity invention",
+      "rub his bread",
+      "meme and toad",
+      "bog brother"
     ]
   }
 }

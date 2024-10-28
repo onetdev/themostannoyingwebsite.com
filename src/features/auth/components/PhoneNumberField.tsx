@@ -8,11 +8,11 @@ import {
 } from 'react';
 
 import Button from '@/components/atoms/Button';
+import FormFieldError from '@/components/atoms/FormFieldError';
 import Select from '@/components/atoms/Select';
 import TextInput from '@/components/atoms/TextInput';
-import { CommonRegistrationFormFieldProps } from '@/features/auth/types';
+import { type CommonRegistrationFormFieldProps } from '@/features/auth';
 import countryData from '@/public/assets/countries.json';
-import FormFieldError from '@/root/src/components/atoms/FormFieldError';
 
 type PhoneNumberFieldProps = Pick<
   CommonRegistrationFormFieldProps,
@@ -92,29 +92,27 @@ const PhoneNumberField: FunctionComponent<PhoneNumberFieldProps> = ({
             })}
           />
           <div className="flex w-3/4 ">
+            <Button
+              className="rounded-none rounded-l-lg"
+              variant="primary"
+              size="sm"
+              onMouseDown={onPhoneNumberDecrementClick}>
+              -
+            </Button>
             <TextInput
               type="number"
               disabled
-              className="grow rounded-r-none"
+              className="grow rounded-none"
               {...register('phoneNumber', {
                 required: t('validation.errors.required'),
               })}
             />
-            <div className="flex flex-col">
-              <Button
-                className="rounded-none rounded-tr-lg"
-                size="sm"
-                onMouseDown={onPhoneNumberIncrementClick}>
-                +
-              </Button>
-              <Button
-                className="rounded-none rounded-br-lg"
-                variant="secondary"
-                size="sm"
-                onMouseDown={onPhoneNumberDecrementClick}>
-                -
-              </Button>
-            </div>
+            <Button
+              className="rounded-none rounded-r-lg"
+              size="sm"
+              onMouseDown={onPhoneNumberIncrementClick}>
+              +
+            </Button>
           </div>
         </div>
       </label>

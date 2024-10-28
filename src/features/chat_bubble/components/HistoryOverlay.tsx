@@ -42,7 +42,7 @@ const HistoryOverlay: FunctionComponent<HistoryOverlayProps> = ({
           {t('hudTitle')} <abbr title={t('hudTitleDisclaimer')}>*</abbr>
         </h4>
         <button onClick={() => onClose()}>
-          <Icon icon="faTimes" size="lg" />
+          <Icon icon="close" size="lg" />
         </button>
       </div>
       <div

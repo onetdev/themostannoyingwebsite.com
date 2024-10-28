@@ -37,7 +37,7 @@ const MessageForm: FunctionComponent<MessageFormProps> = ({
       <button
         className="rounded-r-lg border-none bg-primary pl-4 pr-5 text-on-primary"
         type="submit">
-        <Icon icon="faPaperPlane" />
+        <Icon icon="send" />
       </button>
     </form>
   );

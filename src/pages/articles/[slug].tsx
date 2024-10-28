@@ -1,5 +1,5 @@
 import HTMLReactParser from 'html-react-parser';
-import { GetServerSideProps, NextPage } from 'next';
+import { GetStaticPaths, GetStaticProps, NextPage } from 'next';
 import Error from 'next/error';
 import Head from 'next/head';
 import Image from 'next/image';
@@ -15,13 +15,11 @@ type ArticleItemProps = {
   slug: string;
 };
 
-const ArticleItem: NextPage<ArticleItemProps> = ({
-  slug,
-}: ArticleItemProps) => {
+const ArticleItem: NextPage<ArticleItemProps> = (props: ArticleItemProps) => {
   const { t, i18n } = useTranslation('common');
   const showLocker = useExperienceFlagsStore((state) => state.contentPaywall);
-  const lookup = { slug, locale: i18n.language };
-  const data = ArticleService.getByLookupFilter(lookup);
+  const lookup = { slug: props.slug, locale: i18n.language };
+  const data = ArticleService.getByLookup(lookup);
 
   if (!data) {
     return <Error statusCode={404} />;
@@ -52,23 +50,40 @@ const ArticleItem: NextPage<ArticleItemProps> = ({
           height="1200"
         />
       )}
-      <PartitionalLockedContent initialMaxHeight={200} active={showLocker}>
+      <PartitionalLockedContent initialMaxHeight={300} active={showLocker}>
         <div className={styles['content']}>{HTMLReactParser(data.content)}</div>
       </PartitionalLockedContent>
     </main>
   );
 };
 
-export const getServerSideProps: GetServerSideProps<ArticleItemProps> = async (
-  context,
-) => {
-  const slug = context.query.slug as string;
+export const getStaticPaths: GetStaticPaths = async ({ locales }) => {
+  const paths: { params: ArticleItemProps; locale: string }[] = [];
+
+  for (const locale of locales || []) {
+    ArticleService.getMany({
+      params: { locale },
+      paginate: { take: -1 },
+    }).items.forEach((article) => {
+      paths.push({
+        params: { slug: article.slug },
+        locale,
+      });
+    });
+  }
+
   return {
-    props: {
-      slug,
-      ...(await getI18nProps(context)),
-    },
+    paths,
+    fallback: 'blocking',
   };
 };
 
+export const getStaticProps: GetStaticProps = async (context) => {
+  return {
+    props: {
+      ...(await getI18nProps(context)),
+      slug: context.params?.slug,
+    },
+  };
+};
 export default ArticleItem;

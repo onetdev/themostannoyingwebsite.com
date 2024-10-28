@@ -9,13 +9,9 @@ The main idea is to gather the most annoying features of modern websites in one 
 <details>
   <summary>TODO / Planned</summary>
 
-  - [ ] Create a captcha where you need to select all the images with a car on it but none of the images have a car on them and captcha fails
-  - [ ] Fake search page that:
-    - [ ] Autocorrects the user to all the wrong terms
-    - [ ] Doesn’t actually work or return any results
-  - [ ] Newsletter modal that appears when the user leaves the screen or scrolls down a bit
   - [ ] Request for location permission (don’t worry, the website won’t use your location)
   - [ ] Sticky video player that obscures page visibility (with audio)
+  - [ ] Create a captcha where you need to select all the images with a car on it but none of the images have a car on them and captcha fails
   - [ ] Low-quality images
   - [ ] Age verification on certain images
   - [ ] Move the articles outside of this repo
@@ -24,6 +20,10 @@ The main idea is to gather the most annoying features of modern websites in one 
 <details>
   <summary>Completed</summary>
 
+  - [x] Newsletter modal that appears when the user leaves the screen or scrolls down a bit
+  - [x] Fake search page that:
+    - [x] Silly recommended searches
+    - [x] Doesn’t actually work or return any results
   - [x] Fake registration:
     - [x] Difficult age selector
     - [x] Password validator that shows only one error and has absurdly complex rules that contradict each other

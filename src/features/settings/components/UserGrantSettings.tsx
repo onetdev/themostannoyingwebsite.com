@@ -22,7 +22,10 @@ const UserGrantSettings: FunctionComponent = () => {
         />
       </SettingsBlockRow>
       <br />
-      <i>{t('settings:section.userGrants.permissionDisclaimer')}</i>
+      <small>
+        <i>{t('settings:section.userGrants.permissionDisclaimer')}</i>
+      </small>
+      <br />
       <SettingsBlockRow
         label={t('settings:section.userGrants.notificationPermission')}>
         {`${grant.permission.notification || t('common:status.notSet')}`}

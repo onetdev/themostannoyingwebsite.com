@@ -1,5 +1,5 @@
 .content {
-  @apply py-5 px-10 flex flex-col items-center
+  @apply py-5 px-3 md:px-10 flex flex-col items-center
 }
 .content p {
   @apply py-2
@@ -22,7 +22,7 @@
 }
 
 .content > p, .content > ul, .content > ol, .content > blockquote, .content > h1, .content > h2, .content > h3, .content > h4, .content > h5, .content > h6 {
-  @apply w-full max-w-[700px]
+  @apply w-full max-w-narrow
 }
 
 .content > h1, .content > h2, .content > h3 {
@@ -33,9 +33,14 @@
   @apply my-2
 }
 
-.content > table {
+.content :global(.table-container) {
+  @apply max-w-full overflow-x-auto
+}
+
+.content :global(.table-container) > table {
   @apply table-auto border-separate border-spacing-2
 }
-.content > table th, .content > table td {
-  @apply border-b-on-background border-b 
+.content :global(.table-container) > table th,
+.content :global(.table-container) > table td {
+  @apply border-b-on-background border-b
 }

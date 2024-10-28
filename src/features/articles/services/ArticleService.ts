@@ -2,23 +2,27 @@ import slugify from 'slugify';
 
 import {
   ArticleData,
+  ArticleDatum,
   ArticleFilter,
-  ArticleLookupFilter,
-} from '@/features/articles/types';
+  ArticleLookupIdentifier,
+  ArticleSearchFilter,
+  ArticleSearchResult,
+} from '@/features/articles';
 import articlesRaw from '@/public/assets/articles/index.json';
 import { ArticleIndexEntrySchema } from '@/schemas/article-index-entry';
+import { fuzzy_search } from '@/utils/string';
 
-const propFilterBool = (
-  article: ArticleData,
-  prop: keyof ArticleData,
-  value?: boolean,
-) =>
-  article[prop] === value ||
-  typeof value === 'undefined' ||
-  (article[prop] === undefined && value !== true);
+export const defaultPageSize = 10;
+
+/**
+ * SUPER DUPER IMPORTANT!!!!
+ * Don't throw stones, the whole article system is tiny and happens on the
+ * frontend so it's not going to be optimized nor particularly fast.
+ * It's going to get refactored.
+ */
 
 class ArticleService {
-  articles: ArticleData[];
+  articles: ArticleDatum[];
 
   constructor() {
     this.articles = articlesRaw.map(
@@ -40,37 +44,73 @@ class ArticleService {
           slug: slugify(article.title),
           title: article.title,
           url: `/articles/${slugify(article.title)}`,
-        }) satisfies ArticleData,
+        }) satisfies ArticleDatum,
     );
   }
 
-  public getByLookupFilter(
-    filter: ArticleLookupFilter,
-  ): ArticleData | undefined {
+  public getByLookup(
+    filter: ArticleLookupIdentifier,
+  ): ArticleDatum | undefined {
     return this.articles.find(
       (article) =>
         article.slug === filter.slug && article.locale === filter.locale,
     );
   }
 
-  public getAllFiltered({
-    props,
+  public search({
+    query,
+    params,
+    paginate,
+  }: ArticleSearchFilter): ArticleSearchResult[] {
+    const pool = this.getMany({
+      params,
+      paginate: { take: -1, skip: 0 },
+    });
+
+    return pool.items
+      .map((article) => {
+        const matchResult = fuzzy_search({
+          text: article.content,
+          query,
+        });
+
+        if (!matchResult) {
+          return null;
+        }
+
+        return {
+          ...matchResult,
+          article,
+        };
+      })
+      .filter((item) => item !== null)
+      .sort((a, b) => b.stats.cumScore - a.stats.cumScore)
+      .slice(paginate?.skip || 0, paginate?.take ?? defaultPageSize)
+      .map((item) => ({
+        lookup: {
+          slug: item.article.slug,
+          locale: item.article.locale,
+        },
+        title: item.article.title,
+        contextHighlight: item.result,
+      }));
+  }
+
+  public getMany({
+    params,
     sort = { date: 'desc' },
     paginate,
-  }: ArticleFilter): ArticleData[] {
-    const results = this.articles.filter((article) => {
+  }: ArticleFilter): ArticleData {
+    let results = this.articles.filter((article) => {
       return (
-        propFilterBool(article, 'isHighlighted', props.isHighlighted) &&
-        propFilterBool(article, 'isOnCover', props.isOnCover)
+        (!params.locale || article.locale === params.locale) &&
+        propFilterBool(article, 'isHighlighted', params.isHighlighted) &&
+        propFilterBool(article, 'isOnCover', params.isOnCover)
       );
     });
 
-    if (!sort) {
-      return results.slice(paginate?.skip || 0, paginate?.take ?? 10);
-    }
-
-    return results
-      .sort((a, b) => {
+    if (sort) {
+      results = results.sort((a, b) => {
         const dateCmp = sort.date
           ? (a.publishedAt.getTime() - b.publishedAt.getTime()) *
             (sort.date === 'asc' ? 1 : -1)
@@ -80,13 +120,32 @@ class ArticleService {
           : 0;
 
         return dateCmp == 0 ? titleCmp : dateCmp;
-      })
-      .slice(paginate?.skip || 0, paginate?.take ?? 10);
+      });
+    }
+
+    return {
+      items: results.slice(
+        paginate?.skip || 0,
+        paginate?.take ?? defaultPageSize,
+      ),
+      total: results.length,
+      take: paginate?.take ?? defaultPageSize,
+      skip: paginate?.skip ?? 0,
+    };
   }
 
-  public getFirstFiltered({ props }: ArticleFilter): ArticleData | undefined {
-    return this.getAllFiltered({ props, paginate: { take: 1, skip: 0 } })[0];
+  public getFirst({ params }: ArticleFilter): ArticleDatum | undefined {
+    return this.getMany({ params, paginate: { take: 1, skip: 0 } })?.items[0];
   }
 }
+
+const propFilterBool = (
+  article: ArticleDatum,
+  prop: keyof ArticleDatum,
+  value?: boolean,
+) =>
+  article[prop] === value ||
+  typeof value === 'undefined' ||
+  (article[prop] === undefined && value !== true);
 
 export const ArticleServiceSingleton = new ArticleService();

@@ -1,6 +1,5 @@
 import { Dirent } from 'fs';
 import fs from 'fs/promises';
-import { marked } from 'marked';
 import path from 'path';
 import sanitizeHtml from 'sanitize-html';
 import sharp from 'sharp';
@@ -9,6 +8,7 @@ import { parse } from 'yaml';
 import i18nConfig from '@/root/next-i18next.config';
 import articleEntrySimplifiedZod from '@/schemas/article-entry-simplified';
 import { ArticleIndexEntrySchema } from '@/schemas/article-index-entry';
+import { parse as parseMd } from '@/utils/markdown';
 
 const articlesRootPath = path.join('./public/assets/articles');
 const locales = i18nConfig.i18n.locales;
@@ -106,7 +106,7 @@ const resolveArticle = async (
 
   let content: string;
   if ((data.contentFormat || 'markdown') === 'markdown') {
-    content = sanitizeHtml(await marked.parse(data.content));
+    content = parseMd(data.content);
   } else {
     content = sanitizeHtml(data.content);
   }

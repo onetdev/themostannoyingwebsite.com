@@ -1,4 +1,5 @@
 import { NextPage } from 'next';
+import { useTranslation } from 'next-i18next';
 
 import {
   ArticleService,
@@ -9,19 +10,20 @@ import {
 import { makeI18nStaticProps } from '@/utils/i18n';
 
 const Index: NextPage = () => {
-  const coverArticle = ArticleService.getFirstFiltered({
-    props: { isOnCover: true },
+  const { i18n } = useTranslation();
+  const coverArticle = ArticleService.getFirst({
+    params: { isOnCover: true, locale: i18n.language },
     paginate: {
       take: 1,
       skip: 0,
     },
   });
-  const articlePool = ArticleService.getAllFiltered({
-    props: { isOnCover: false },
+  const articlePool = ArticleService.getMany({
+    params: { isOnCover: false },
     paginate: { take: 12 },
   });
-  const denseList = articlePool.slice(0, 3);
-  const regularList = articlePool.slice(3);
+  const denseList = articlePool.items.slice(0, 3);
+  const regularList = articlePool.items.slice(3);
 
   return (
     <main className="grid grid-cols-1 gap-3 lg:grid-cols-4">

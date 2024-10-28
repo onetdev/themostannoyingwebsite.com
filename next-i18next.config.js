@@ -15,6 +15,7 @@ module.exports = {
     'content_limiter',
     'gifts',
     'notifications',
+    'settings',
     'wheel_of_fortune',
   ],
 };

@@ -12,7 +12,10 @@ const RuntimeSettings: FunctionComponent = () => {
 
   return (
     <SettingsBlock title={t('settings:section.runtime.title')}>
-      <small>{t('settings:section.runtime.disclaimer')}</small>
+      <small>
+        <i>{t('settings:section.runtime.disclaimer')}</i>
+      </small>
+      <br />
       <p>
         {t('settings:section.runtime.startedAgo')}{' '}
         {runtime.startedAt ? <ReactTimeAgo date={runtime.startedAt} /> : 'n/a'}
