@@ -1,8 +1,10 @@
-// eslint-disable-next-line @typescript-eslint/no-require-imports
+/* eslint-disable @typescript-eslint/no-require-imports */
+const analyzer = require('@next/bundle-analyzer');
+
 const { i18n } = require('./next-i18next.config');
 
 /** @type {import('next').NextConfig} **/
-module.exports = {
+const nextConfig = {
   poweredByHeader: false,
   trailingSlash: true,
   i18n,
@@ -35,3 +37,9 @@ module.exports = {
     ];
   },
 };
+
+const withBundleAnalyzer = analyzer({
+  enabled: process.env.ANALYZE === 'true',
+});
+
+module.exports = withBundleAnalyzer(nextConfig);
