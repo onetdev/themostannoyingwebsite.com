@@ -12,7 +12,8 @@ import { useExperienceFlagsStore } from '@/state/experience_flags';
 const ExperienceProvider: FunctionComponent<PropsWithChildren> = ({
   children,
 }) => {
-  const { exitPrompt, newsletterModal } = useExperienceFlagsStore();
+  const { exitPrompt, newsletterModal, notifications } =
+    useExperienceFlagsStore();
   const { t } = useTranslation('common');
 
   useFirstInteractionListener();
@@ -23,8 +24,8 @@ const ExperienceProvider: FunctionComponent<PropsWithChildren> = ({
   return (
     <>
       <PageTitleExperienceHost />
-      <NotificationPermissionExperienceHost />
       {newsletterModal && <NewsletterModalExperienceHost />}
+      {notifications && <NotificationPermissionExperienceHost />}
       {children}
     </>
   );

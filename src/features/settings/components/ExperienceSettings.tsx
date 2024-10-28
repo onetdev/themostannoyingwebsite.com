@@ -49,9 +49,17 @@ const ExperienceSettings: FunctionComponent = () => {
       <SettingsBlockRow
         label={t('settings:section.experienceFlags.newsletterModal')}>
         <FormCheckbox
-          name="mock_chat"
+          name="newsletter"
           checked={experience.newsletterModal}
           onValueChange={experience.setNewsletterModal}
+        />
+      </SettingsBlockRow>
+      <SettingsBlockRow
+        label={t('settings:section.experienceFlags.notifications')}>
+        <FormCheckbox
+          name="notifications"
+          checked={experience.notifications}
+          onValueChange={experience.setNotifications}
         />
       </SettingsBlockRow>
       <SettingsBlockRow
