@@ -2,6 +2,7 @@ import { create } from 'zustand';
 
 export interface RuntimeState {
   document: {
+    hasEverBeenVisible: boolean;
     isVisible: boolean;
     visibilitySeconds: number;
   };
@@ -19,6 +20,7 @@ export interface RuntimeStore extends RuntimeState, RuntimeStateActions {}
 
 const initialState: RuntimeState = {
   document: {
+    hasEverBeenVisible: false,
     isVisible: false,
     visibilitySeconds: 0,
   },
@@ -32,6 +34,8 @@ export const useRuntimeStore = create<RuntimeStore>((set) => ({
     set((state) => ({
       document: {
         ...state.document,
+        hasEverBeenVisible:
+          state.document.hasEverBeenVisible || isVisible || false,
         isVisible,
       },
       startedAt: state.startedAt ?? new Date().toISOString(),

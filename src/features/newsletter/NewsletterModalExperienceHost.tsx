@@ -22,10 +22,10 @@ const NewsletterModalExperienceHost: FunctionComponent<
   });
 
   useEffect(() => {
-    if (!runtime.document.isVisible) {
+    if (runtime.document.hasEverBeenVisible && !runtime.document.isVisible) {
       setModalVisible(true);
     }
-  }, [runtime.document.isVisible]);
+  }, [runtime.document.hasEverBeenVisible, runtime.document.isVisible]);
 
   const onModalDismiss = () => {
     setModalVisible(false);
