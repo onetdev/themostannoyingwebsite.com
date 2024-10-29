@@ -33,6 +33,8 @@ export interface ExperienceFlagsStateActions {
   setSearchDelay: (searchDelay: boolean) => void;
   setStickyVideo: (stickyVideo: boolean) => void;
   setWheelOfFortune: (wheelOfFortune: boolean) => void;
+  allEnabled: () => void;
+  allDisabled: () => void;
 }
 
 export interface ExperienceFlagsStore
@@ -83,6 +85,27 @@ export const useExperienceFlagsStore = create(
       setSearchDelay: (searchDelay) => set({ searchDelay }),
       setStickyVideo: (stickyVideo) => set({ stickyVideo }),
       setWheelOfFortune: (wheelOfFortune) => set({ wheelOfFortune }),
+      allEnabled: () => set({ ...initialState }),
+      allDisabled: () =>
+        set({
+          gifts: {
+            flaps: false,
+          },
+          contentPaywall: false,
+          deadPixel: false,
+          exitPrompt: false,
+          mockChat: false,
+          newsletterModal: false,
+          notifications: false,
+          pageTitle: {
+            inactiveMarquee: false,
+            randomGlitch: false,
+            inactiveArrayPaged: false,
+          },
+          searchDelay: false,
+          stickyVideo: false,
+          wheelOfFortune: false,
+        }),
     }),
     {
       name: 'zustand-experience-flags-storage',

@@ -12,12 +12,16 @@
     "accept": "Accept",
     "cancel": "Cancel",
     "close": "Close",
+    "disable": "Disable",
+    "disableAll": "Disable all",
     "dismiss": "Dismiss",
+    "enable": "Enable",
+    "enableAll": "Enable all",
     "login": "Login",
     "ok": "OK",
+    "search": "Search",
     "send": "Send",
-    "share": "Share",
-    "search": "Search"
+    "share": "Share"
   },
   "status": {
     "notSet": "Not set",
