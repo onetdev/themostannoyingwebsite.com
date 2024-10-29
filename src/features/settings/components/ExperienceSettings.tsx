@@ -81,6 +81,14 @@ const ExperienceSettings: FunctionComponent = () => {
         />
       </SettingsBlockRow>
       <SettingsBlockRow
+        label={t('settings:section.experienceFlags.stickyVideo')}>
+        <FormCheckbox
+          name="sticky_video"
+          checked={experience.stickyVideo}
+          onValueChange={experience.setStickyVideo}
+        />
+      </SettingsBlockRow>
+      <SettingsBlockRow
         label={t('settings:section.experienceFlags.wheelOfFortune')}>
         <FormCheckbox
           name="wheel_of_fortune"
