@@ -3,7 +3,7 @@ import Link from 'next/link';
 import { useTranslation } from 'next-i18next';
 import { FunctionComponent } from 'react';
 
-import flapImage from '@/public/assets/images/car-advert.jpg';
+import flapImage from '@/public/assets/images/car-advert.webp';
 
 const ContainerGiftFlaps: FunctionComponent = () => {
   const { t } = useTranslation('gifts');
