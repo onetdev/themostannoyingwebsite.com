@@ -1,3 +1,4 @@
+import { useTranslation } from 'next-i18next';
 import { FunctionComponent, useState } from 'react';
 
 import ModalContent from './components/ModalContent';
@@ -7,6 +8,7 @@ import Icon from '@/components/atoms/Icon';
 
 const WheelOfFortuneHost: FunctionComponent = () => {
   const [isOpen, setOpen] = useState(false);
+  const { t } = useTranslation('wheel_of_fortune');
 
   return (
     <div className="fixed left-0 top-1/2 z-30">
@@ -28,7 +30,8 @@ const WheelOfFortuneHost: FunctionComponent = () => {
       </DimmerOverlay>
       <button
         className="-ml-8 animate-wiggle-8deg cursor-pointer bg-error py-3 pl-10 pr-6 text-lg text-on-error opacity-80 transition-all duration-200 ease-in-out hover:-ml-4 hover:opacity-100"
-        onClick={() => setOpen(true)}>
+        onClick={() => setOpen(true)}
+        aria-label={t('title')}>
         <Icon icon="tags" size="2xl" />
       </button>
     </div>

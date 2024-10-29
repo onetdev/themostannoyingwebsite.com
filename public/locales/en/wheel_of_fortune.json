@@ -1,4 +1,5 @@
 {
+  "title": "Wheel of fortune",
   "spin_start": "Let's spin the wheel!!",
   "spin_win": "You won! {{prize}}",
   "prizes": {
