@@ -16,6 +16,9 @@
       "locationPermission": "Location permission"
     },
     "experienceFlags": {
+      "gifts": {
+        "flaps": "Background flaps"
+      },
       "title": "Experience",
       "contentPaywall": "Content paywall",
       "deadPixel": "Dead pixel",
