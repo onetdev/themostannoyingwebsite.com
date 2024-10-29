@@ -8,8 +8,8 @@ import FormCheckbox from '@/components/atoms/Checkbox';
 import { useExperienceFlagsStore } from '@/state/experience_flags';
 
 const ExperienceSettings: FunctionComponent = () => {
-  const { t } = useTranslation(['settings', 'common']);
   const experience = useExperienceFlagsStore();
+  const { t } = useTranslation(['settings', 'common']);
 
   const onPageTitleInactiveArrayPagedChange = (value: boolean) =>
     experience.setPageTitle({ inactiveArrayPaged: value });

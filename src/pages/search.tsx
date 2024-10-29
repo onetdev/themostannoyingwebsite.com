@@ -23,9 +23,9 @@ type Result = {
 };
 
 const Search: NextPage = () => {
+  const enabled = useExperienceFlagsStore((state) => state.searchDelay);
   const { t } = useTranslation('common');
   const { i18n } = useTranslation();
-  const { searchDelay } = useExperienceFlagsStore();
   const [query, setQuery] = useState('');
   const [loading, setLoading] = useState(false);
   const [results, setResults] = useState<Result | undefined>();
@@ -70,7 +70,7 @@ const Search: NextPage = () => {
     setLoading(true);
 
     const startTime = new Date().getTime();
-    const delayTime = searchDelay ? random(0.001, 5) : 0;
+    const delayTime = enabled ? random(0.001, 5) : 0;
     const timer = setTimeout(() => {
       const matches = ArticleService.search({
         query,
@@ -91,7 +91,7 @@ const Search: NextPage = () => {
     }, delayTime * 1000);
 
     return () => clearTimeout(timer);
-  }, [i18n.language, query, searchDelay, topSearchesPool]);
+  }, [i18n.language, query, enabled, topSearchesPool]);
 
   const showResultList = !loading && results && results.items.length > 0;
 

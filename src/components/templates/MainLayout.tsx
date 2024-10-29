@@ -18,7 +18,11 @@ const MainLayout: FunctionComponent<MainLayoutProps> = ({
   className,
   ...rest
 }) => {
-  const { deadPixel, mockChat, wheelOfFortune } = useExperienceFlagsStore();
+  const deadPixel = useExperienceFlagsStore((state) => state.deadPixel);
+  const mockChat = useExperienceFlagsStore((state) => state.mockChat);
+  const wheelOfFortune = useExperienceFlagsStore(
+    (state) => state.wheelOfFortune,
+  );
 
   return (
     <div className={className} {...rest}>
