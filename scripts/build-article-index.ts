@@ -93,11 +93,12 @@ const resolveArticle = async (
 
   let hasCoverImage = false;
   try {
-    const coverPath = path.join(articlePath, 'cover.jpg');
+    const coverPath = path.join(articlePath, 'cover.webp');
     await fs.access(coverPath);
     sharp(coverPath)
       .resize(480, 270)
-      .toFile(path.join(articlePath, 'cover-480x270.jpg'));
+      .webp({ quality: 75 })
+      .toFile(path.join(articlePath, 'cover-480x270.webp'));
 
     hasCoverImage = true;
   } catch (_err) {
