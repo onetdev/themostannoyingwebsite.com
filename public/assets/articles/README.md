@@ -30,7 +30,7 @@ content: |
   Another paragraph
 ```
 
-And lastly, you can optionally (but strongly recommended) a `cover.jpg` file that will represent your article.
+And lastly, you can optionally (but strongly recommended) a `cover.webp` file that will represent your article.
 
 ## How to manage front page and article highlights
 
