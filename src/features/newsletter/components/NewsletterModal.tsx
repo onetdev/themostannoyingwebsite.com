@@ -22,8 +22,8 @@ const NewsletterModal: FunctionComponent<NewsletterModalProps> = ({
   const { t } = useTranslation();
   const [flipActions, setFlipActions] = useState(false);
   const [actions, setActions] = useState({
-    confirm: t('experiences.newsletter.modal.initial_confirm'),
-    cancel: t('experiences.newsletter.modal.initial_cancel'),
+    confirm: t('experiences.newsletter.modal.initialConfirm'),
+    cancel: t('experiences.newsletter.modal.initialCancel'),
   } as ConfirmItem satisfies ConfirmItem);
   const {
     register,
@@ -54,7 +54,7 @@ const NewsletterModal: FunctionComponent<NewsletterModalProps> = ({
   };
 
   const onSubmit: SubmitHandler<NewsletterFormInputs> = (_data) => {
-    alert(t('experiences.newsletter.modal.use_form_actions'));
+    alert(t('experiences.newsletter.modal.useFormActions'));
   };
 
   const randomConfirmation = () => {
