@@ -16,7 +16,8 @@
     "login": "Login",
     "ok": "OK",
     "send": "Send",
-    "share": "Share"
+    "share": "Share",
+    "search": "Search"
   },
   "status": {
     "notSet": "Not set",

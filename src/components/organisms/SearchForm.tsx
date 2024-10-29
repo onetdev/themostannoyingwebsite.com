@@ -49,6 +49,7 @@ const SearchForm: FunctionComponent<SearchFormProps> = ({
       />
       <Button
         className="flex items-center rounded-l-none"
+        aria-label={t('actions.search')}
         type="submit"
         size={size}>
         <Icon icon="search" size="sm" />
