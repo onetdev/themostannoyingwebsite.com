@@ -86,9 +86,9 @@
         "title": "Join our newsletter!",
         "description": "Our premium newsletter brings an insane amount of value right to your inbox. Don't miss out on insights that make a real difference!",
         "placeholder": "Enter your email",
-        "initial_confirm": "Subscribe",
-        "initial_cancel": "Don't Subscribe",
-        "use_form_actions": "Please use the relevant button instead",
+        "initialConfirm": "Subscribe",
+        "initialCancel": "Don't Subscribe",
+        "useFormActions": "Please use the relevant button instead",
         "confirmations": [
           {
             "text": "We're disappointed to see that you may not have had enough time to fully consider this important and challenging decision.",
