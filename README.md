@@ -9,11 +9,10 @@ The main idea is to gather the most annoying features of modern websites in one 
 <details>
   <summary>TODO / Planned</summary>
 
-  - [ ] Request for location permission (don’t worry, the website won’t use your location)
+  - [ ] **Funny, silly content** - can't stop won't stop, ongoing
   - [ ] Create a captcha where you need to select all the images with a car on it but none of the images have a car on them and captcha fails
-  - [ ] Low-quality images
-  - [ ] Age verification on certain images
-  - [ ] Move the articles outside of this repo
+  - [ ] Age verification on certain contents
+  - [ ] Add holiday related (Halloween, Christmass, Easter) small animated images that follow the mouse cursor
 </details>
 
 <details>
@@ -42,10 +41,11 @@ The main idea is to gather the most annoying features of modern websites in one 
 </details>
 
 <details>
-  <summary>Bit of a stretch</summary>
+  <summary>TBD / bit of a stretch</summary>
 
-  - [ ] Design (even though the site is fine with a bad design)
-  - [ ] Funny, silly content (Part 2)
+  - [ ] **Move the articles outside of this repo** - once the size of contents becomes a concern
+  - [ ] **Request for location permission** - not quite sure in this one, even though we don't do anything with this data, asking for it might be over the top. Potentially this could trigger once someone does a search.
+  - [ ] **Design** - even though the site is fine with a bad design
   - [ ] Dead pixel patch
   - [ ] Randomly loading images while scrolling (causing layout shifting)
 </details>
