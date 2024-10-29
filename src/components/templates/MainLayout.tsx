@@ -7,6 +7,7 @@ import Header from '@/components/organisms/Header';
 import { ChatBubbleHost } from '@/features/chat_bubble';
 import { DeadPixelHost } from '@/features/dead_pixel';
 import ContainerGiftFlaps from '@/features/gifts/components/ContainerGiftFlaps';
+import { StickyVideoExperienceHost } from '@/features/sticky_video';
 import { WheelOfFortuneHost } from '@/features/wheel_of_fortune';
 import { useExperienceFlagsStore } from '@/state/experience_flags';
 
@@ -17,7 +18,11 @@ const MainLayout: FunctionComponent<MainLayoutProps> = ({
   className,
   ...rest
 }) => {
-  const { deadPixel, mockChat, wheelOfFortune } = useExperienceFlagsStore();
+  const deadPixel = useExperienceFlagsStore((state) => state.deadPixel);
+  const mockChat = useExperienceFlagsStore((state) => state.mockChat);
+  const wheelOfFortune = useExperienceFlagsStore(
+    (state) => state.wheelOfFortune,
+  );
 
   return (
     <div className={className} {...rest}>
@@ -32,6 +37,7 @@ const MainLayout: FunctionComponent<MainLayoutProps> = ({
         {deadPixel && <DeadPixelHost />}
         {mockChat && <ChatBubbleHost />}
         <CookieBar />
+        <StickyVideoExperienceHost />
       </div>
     </div>
   );

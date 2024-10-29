@@ -25,7 +25,8 @@
       "notifications": "Notifications",
       "pageTitleInactiveArrayPaged": "Alternative title when tab is inactive",
       "searchDelay": "Fake search delay",
-      "wheelOfFortune": "Wheel of fortune"
+      "wheelOfFortune": "Wheel of fortune",
+      "stickyVideo": "Sticky video"
     },
     "runtime": {
       "title": "About this session",

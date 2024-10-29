@@ -14,6 +14,7 @@ export interface ExperienceFlagsState {
     randomGlitch: boolean;
   };
   searchDelay: boolean;
+  stickyVideo: boolean;
   wheelOfFortune: boolean;
 }
 
@@ -26,6 +27,7 @@ export interface ExperienceFlagsStateActions {
   setNotifications: (notifications: boolean) => void;
   setPageTitle: (pageTitle: Partial<ExperienceFlagsState['pageTitle']>) => void;
   setSearchDelay: (searchDelay: boolean) => void;
+  setStickyVideo: (stickyVideo: boolean) => void;
   setWheelOfFortune: (wheelOfFortune: boolean) => void;
 }
 
@@ -48,6 +50,7 @@ const initialState: ExperienceFlagsState = {
     inactiveArrayPaged: true,
   },
   searchDelay: true,
+  stickyVideo: true,
   wheelOfFortune: true,
 };
 
@@ -69,17 +72,18 @@ export const useExperienceFlagsStore = create(
           },
         })),
       setSearchDelay: (searchDelay) => set({ searchDelay }),
+      setStickyVideo: (stickyVideo) => set({ stickyVideo }),
       setWheelOfFortune: (wheelOfFortune) => set({ wheelOfFortune }),
     }),
     {
       name: 'zustand-experience-flags-storage',
       storage: createJSONStorage(() => localStorage),
-      version: 5,
+      version: 6,
       migrate: (persistedState, _version) => {
         // Versions are supersets atm
         return {
           ...(persistedState as ExperienceFlagsStore),
-          version: 5,
+          version: 6,
         };
       },
     },

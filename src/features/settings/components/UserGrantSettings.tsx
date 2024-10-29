@@ -8,8 +8,8 @@ import FormCheckbox from '@/components/atoms/Checkbox';
 import { useUserGrantsStore } from '@/state/user_grants';
 
 const UserGrantSettings: FunctionComponent = () => {
-  const { t } = useTranslation(['settings', 'common']);
   const grant = useUserGrantsStore();
+  const { t } = useTranslation(['settings', 'common']);
 
   return (
     <SettingsBlock title={t('settings:section.userGrants.title')}>

@@ -37,6 +37,7 @@
     "title": "Share this page",
     "description": "Spread the misery! Be sure to inflict this painfully obnoxious website on your friends too — why suffer alone when you can drag them down with you?"
   },
+  "cookieConsent": "This website uses cookies to ensure you get the best experience on our website. It's also a joke so many of the features are buggy or doens't even work on purpose. You can customize your experience and cookie settings in the settings menu.",
   "themeSwitch": {
     "label": "Switch theme",
     "darkMode": "Dark mode",
@@ -85,9 +86,9 @@
         "title": "Join our newsletter!",
         "description": "Our premium newsletter brings an insane amount of value right to your inbox. Don't miss out on insights that make a real difference!",
         "placeholder": "Enter your email",
-        "initial_confirm": "Subscribe",
-        "initial_cancel": "Don't Subscribe",
-        "use_form_actions": "Please use the relevant button instead",
+        "initialConfirm": "Subscribe",
+        "initialCancel": "Don't Subscribe",
+        "useFormActions": "Please use the relevant button instead",
         "confirmations": [
           {
             "text": "We're disappointed to see that you may not have had enough time to fully consider this important and challenging decision.",

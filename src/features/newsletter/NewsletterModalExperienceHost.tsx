@@ -5,6 +5,7 @@ import { FunctionComponent, useEffect, useState } from 'react';
 import NewsletterModal from './components/NewsletterModal';
 
 import useScrollDistanceTrigger from '@/hooks/useScrollDistanceTrigger';
+import { useExperienceFlagsStore } from '@/state/experience_flags';
 import { useRuntimeStore } from '@/state/runtime';
 
 export type NewsletterModalExperienceHostProps = {
@@ -13,7 +14,8 @@ export type NewsletterModalExperienceHostProps = {
 const NewsletterModalExperienceHost: FunctionComponent<
   NewsletterModalExperienceHostProps
 > = ({ scrollDistanceTrigger = 450 }) => {
-  const runtime = useRuntimeStore();
+  const enabled = useExperienceFlagsStore((state) => state.newsletterModal);
+  const document = useRuntimeStore((state) => state.document);
   const [modalVisible, setModalVisible] = useState(false);
 
   useScrollDistanceTrigger({
@@ -22,20 +24,22 @@ const NewsletterModalExperienceHost: FunctionComponent<
   });
 
   useEffect(() => {
-    if (runtime.document.hasEverBeenVisible && !runtime.document.isVisible) {
+    if (document.hasEverBeenVisible && !document.isVisible) {
       setModalVisible(true);
     }
-  }, [runtime.document.hasEverBeenVisible, runtime.document.isVisible]);
+  }, [document.hasEverBeenVisible, document.isVisible]);
 
   const onModalDismiss = () => {
     setModalVisible(false);
   };
 
+  if (!enabled! || !modalVisible) {
+    return null;
+  }
+
   return (
     <>
-      {modalVisible && (
-        <NewsletterModal visible={modalVisible} onDismiss={onModalDismiss} />
-      )}
+      <NewsletterModal visible={modalVisible} onDismiss={onModalDismiss} />
     </>
   );
 };

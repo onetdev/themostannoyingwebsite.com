@@ -8,8 +8,8 @@ import FormCheckbox from '@/components/atoms/Checkbox';
 import { useExperienceFlagsStore } from '@/state/experience_flags';
 
 const ExperienceSettings: FunctionComponent = () => {
-  const { t } = useTranslation(['settings', 'common']);
   const experience = useExperienceFlagsStore();
+  const { t } = useTranslation(['settings', 'common']);
 
   const onPageTitleInactiveArrayPagedChange = (value: boolean) =>
     experience.setPageTitle({ inactiveArrayPaged: value });
@@ -78,6 +78,14 @@ const ExperienceSettings: FunctionComponent = () => {
           name="search_delay"
           checked={experience.searchDelay}
           onValueChange={experience.setSearchDelay}
+        />
+      </SettingsBlockRow>
+      <SettingsBlockRow
+        label={t('settings:section.experienceFlags.stickyVideo')}>
+        <FormCheckbox
+          name="sticky_video"
+          checked={experience.stickyVideo}
+          onValueChange={experience.setStickyVideo}
         />
       </SettingsBlockRow>
       <SettingsBlockRow

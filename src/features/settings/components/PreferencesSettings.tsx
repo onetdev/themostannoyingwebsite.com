@@ -9,14 +9,8 @@ import DarkModeToggle from '@/components/atoms/DarkModeToggle';
 import { useUserPreferencesStore } from '@/state/user_preferences';
 
 const PreferencesSettings: FunctionComponent = () => {
-  const { t } = useTranslation(['settings', 'common']);
   const preference = useUserPreferencesStore();
-
-  const onFlashingContentsChange = (value: boolean) =>
-    preference.setEnableFlashing(value);
-  const onSoundChange = (value: boolean) => preference.setEnableSound(value);
-  const onAdultFilterChange = (value: boolean) =>
-    preference.setAdultFilter(value);
+  const { t } = useTranslation(['settings', 'common']);
 
   return (
     <SettingsBlock title={t('settings:section.userPreferences.title')}>
@@ -29,7 +23,7 @@ const PreferencesSettings: FunctionComponent = () => {
         <FormCheckbox
           name="enable_flashing"
           checked={preference.enableFlashing}
-          onValueChange={onFlashingContentsChange}
+          onValueChange={preference.setEnableFlashing}
         />
       </SettingsBlockRow>
       <SettingsBlockRow
@@ -37,7 +31,7 @@ const PreferencesSettings: FunctionComponent = () => {
         <FormCheckbox
           name="enable_sound"
           checked={preference.enableSound}
-          onValueChange={onSoundChange}
+          onValueChange={preference.setEnableSound}
         />
       </SettingsBlockRow>
       <SettingsBlockRow
@@ -45,7 +39,7 @@ const PreferencesSettings: FunctionComponent = () => {
         <FormCheckbox
           name="adult_filter"
           checked={preference.adultFilter}
-          onValueChange={onAdultFilterChange}
+          onValueChange={preference.setAdultFilter}
         />
       </SettingsBlockRow>
     </SettingsBlock>

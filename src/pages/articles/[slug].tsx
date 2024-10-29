@@ -17,7 +17,7 @@ type ArticleItemProps = {
 
 const ArticleItem: NextPage<ArticleItemProps> = (props: ArticleItemProps) => {
   const { t, i18n } = useTranslation('common');
-  const showLocker = useExperienceFlagsStore((state) => state.contentPaywall);
+  const enabled = useExperienceFlagsStore((state) => state.contentPaywall);
   const lookup = { slug: props.slug, locale: i18n.language };
   const data = ArticleService.getByLookup(lookup);
 
@@ -50,7 +50,7 @@ const ArticleItem: NextPage<ArticleItemProps> = (props: ArticleItemProps) => {
           height="1200"
         />
       )}
-      <PartitionalLockedContent initialMaxHeight={300} active={showLocker}>
+      <PartitionalLockedContent initialMaxHeight={300} active={enabled}>
         <div className={styles['content']}>{HTMLReactParser(data.content)}</div>
       </PartitionalLockedContent>
     </main>

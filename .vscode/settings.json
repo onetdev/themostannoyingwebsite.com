@@ -36,5 +36,11 @@
       "fileMatch": ["public/articles/*-meta.json"],
       "url": "./src/schemas/article-locale-meta.schema.json"
     }
-  ]
+  ],
+  "explorer.fileNesting.enabled": true,
+  "explorer.fileNesting.patterns": {
+    "tsconfig.json": "tsconfig.json, tsconfig.tsbuildinfo",
+    "package.json": "package-lock.json, pnpm*",
+    "README.md": "CODE_OF_CONDUCT.md, CONTRIBUTING.md, LICENSE",
+  },
 }
