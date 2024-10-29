@@ -10,7 +10,6 @@ The main idea is to gather the most annoying features of modern websites in one 
   <summary>TODO / Planned</summary>
 
   - [ ] Request for location permission (don’t worry, the website won’t use your location)
-  - [ ] Sticky video player that obscures page visibility (with audio)
   - [ ] Create a captcha where you need to select all the images with a car on it but none of the images have a car on them and captcha fails
   - [ ] Low-quality images
   - [ ] Age verification on certain images
@@ -20,6 +19,7 @@ The main idea is to gather the most annoying features of modern websites in one 
 <details>
   <summary>Completed</summary>
 
+  - [x] Sticky video player that obscures page visibility
   - [x] Newsletter modal that appears when the user leaves the screen or scrolls down a bit
   - [x] Fake search page that:
     - [x] Silly recommended searches
