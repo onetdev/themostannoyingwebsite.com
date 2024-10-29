@@ -1,11 +1,11 @@
 {
     "recommendations": [
+        "bradlc.vscode-tailwindcss",
         "dbaeumer.vscode-eslint",
         "esbenp.prettier-vscode",
+        "redhat.vscode-yaml",
         "rubymaniac.vscode-direnv",
         "unifiedjs.vscode-mdx",
-        "bradlc.vscode-tailwindcss",
-        "yoavbls.pretty-ts-errors",
-        "redhat.vscode-yaml"
+        "yoavbls.pretty-ts-errors"
     ]
 }
