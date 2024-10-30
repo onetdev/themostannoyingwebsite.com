@@ -1,0 +1,41 @@
+[data-theme='light'] {
+  /* Backgrounds */
+  --color-background: #f4f6f9; /* Light, neutral gray-blue */
+  --color-surface: #ffffff; /* Clean white for contrast */
+  --color-surface-alt: #e9edf2; /* Subtle cool gray for sections */
+
+  /* Primary Colors */
+  --color-primary: #ff8c42; /* Warm amber-orange for primary actions */
+  --color-primary-alt: #cc6b30; /* Richer, darker orange for hover */
+  --color-on-primary: #ffffff; /* White for contrast */
+
+  /* Secondary Colors */
+  --color-secondary: #007a75; /* Bold teal, for secondary actions */
+  --color-secondary-alt: #00615d; /* Darker teal for focus */
+  --color-on-secondary: #ffffff; /* White for contrast */
+
+  /* Tertiary Colors */
+  --color-tertiary: #ff4e50; /* Vibrant coral for highlights or alerts */
+  --color-tertiary-alt: #d64244; /* Slightly darker coral for focus */
+  --color-on-tertiary: #ffffff; /* White for readability */
+
+  /* Success, Warning, and Error */
+  --color-success: #4caf50; /* Fresh green for success */
+  --color-warning: #ffb300; /* Bright amber for warnings */
+  --color-error: #e53935; /* Soft red for errors */
+  --color-on-success: #ffffff; /* White for readability */
+  --color-on-warning: #000000; /* Black for contrast */
+  --color-on-error: #ffffff; /* White for readability */
+
+  /* Text and Dimmer */
+  --color-dimmer: #5a5a5a99; /* Dimmer gray for disabled text */
+  --color-on-background: #333333; /* Dark gray for readability */
+  --color-on-surface: #333333; /* Consistent with on-background */
+
+    /* Borders */
+    --color-hr-primary: #e07b37; /* Muted amber-orange for primary borders */
+    --color-hr-secondary: #006964; /* Darker teal for secondary borders */
+    --color-hr-tertiary: #e24748; /* Muted coral-red for tertiary borders */
+    --color-hr-surface: #cdd2d8; /* Light gray for surface borders */
+    --color-hr-surface-alt: #b4bac0; /* Darker gray for alt surfaces */
+}

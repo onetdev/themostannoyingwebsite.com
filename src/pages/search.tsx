@@ -126,7 +126,7 @@ const Search: NextPage = () => {
                   {item.title}
                 </Link>
               </h4>
-              <p className="max-w-narrow">
+              <p className="max-w-screen-md">
                 {HTMLReactParser(item.contextHighlight)}
               </p>
             </div>

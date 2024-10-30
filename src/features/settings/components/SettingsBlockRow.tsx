@@ -5,7 +5,7 @@ const SettingsBlockRow: FunctionComponent<
 > = ({ label, children }) => {
   return (
     <div>
-      <label className="flex justify-between">
+      <label className="flex items-center justify-between">
         <span>{label}</span>
         {children}
       </label>

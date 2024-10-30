@@ -25,7 +25,7 @@ const ShareModal: FunctionComponent<ShareModalProps> = ({
   const { t } = useTranslation();
   const [url, setUrl] = useState<string>('');
 
-  const buttonStyle = 'overflow-hidden rounded-md hover:brightness-125';
+  const buttonStyle = 'overflow-hidden hover:brightness-125 rounded-md';
 
   useEffect(() => {
     setUrl(window.location.href);

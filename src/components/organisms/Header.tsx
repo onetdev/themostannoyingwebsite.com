@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import { useTranslation } from 'next-i18next';
 import { FunctionComponent } from 'react';
 
 import DarkModeToggle from '@/components/atoms/DarkModeToggle';
@@ -9,23 +10,27 @@ import SearchForm from '@/components/organisms/SearchForm';
 import UserNavigation from '@/components/organisms/UserNavigation';
 
 const Header: FunctionComponent = () => {
+  const { t } = useTranslation('common');
+
   return (
     <header className="grid grid-cols-2 gap-1 py-2">
       <h1>
-        <Link href="/" prefetch={false}>
-          The <i>MAW</i>
+        <Link href="/" prefetch={false} title={t('meta.title')}>
+          <span className="text-on-surface">
+            The <i>MAW</i>
+          </span>
         </Link>
       </h1>
       <div className="flex items-center justify-end gap-3">
-        <SearchForm className="hidden md:flex" />
+        <SearchForm className="hidden md:flex" size="md" />
         <Link href="/search" className="md:hidden">
           <Icon icon="search" />
         </Link>
-        <DarkModeToggle className="self-center justify-self-end" />
+        <DarkModeToggle className="self-center justify-self-end" size="lg" />
       </div>
       <MainNavigation className="col-span-1 my-3 -ml-3 pl-3 md:ml-0 md:pl-0" />
       <UserNavigation className="col-span-1 my-3" />
-      <MarqueeText className="col-span-2 -mx-3 mb-2 bg-surface md:-mx-5" />
+      <MarqueeText className="col-span-2 -mx-3 mb-2 bg-surface-alt py-2 md:-mx-5" />
     </header>
   );
 };

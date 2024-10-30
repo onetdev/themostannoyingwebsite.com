@@ -2,7 +2,9 @@
   "meta": {
     "title": "The Most Annoying Website",
     "description": "Self-proclaimed most annoying website on the web with so many disgusting features of modern websites you might even vomit at some point.",
-    "recruiting": "The content of this page is absolutely free for everyone. Heck, you can even access the source code on <linkTag>GitHub</linkTag>. And... You know what? You can even contribute your of stuff as well."
+    "recruiting": "Want to extend what you see here? Visit our <linkTag>GitHub</linkTag> repo to get started.",
+    "aiDisclose": "AI text and image generation was used to produce contents of this website.",
+    "copyright": "Copyright © {{year}} The Most Annoying Website"
   },
   "response": {
     "yes": "Yes",
@@ -12,12 +14,16 @@
     "accept": "Accept",
     "cancel": "Cancel",
     "close": "Close",
+    "disable": "Disable",
+    "disableAll": "Disable all",
     "dismiss": "Dismiss",
+    "enable": "Enable",
+    "enableAll": "Enable all",
     "login": "Login",
     "ok": "OK",
+    "search": "Search",
     "send": "Send",
-    "share": "Share",
-    "search": "Search"
+    "share": "Share"
   },
   "status": {
     "notSet": "Not set",
@@ -193,5 +199,9 @@
       "meme and toad",
       "bog brother"
     ]
+  },
+  "article": {
+    "coverImage": "Cover image",
+    "published": "Published at {{date}}"
   }
 }

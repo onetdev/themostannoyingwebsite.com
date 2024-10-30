@@ -39,16 +39,18 @@ const ArticleItem: NextPage<ArticleItemProps> = (props: ArticleItemProps) => {
       </Head>
       <h1 className="mb-2 max-w-[900px]">{data.title}</h1>
       <span className="mb-5 block italic">
-        Published at {data.publishedAt.toDateString()}
+        {t('article.published', { date: data.publishedAt.toDateString() })}
       </span>
       {data.coverImages?.original && (
-        <Image
-          className="h-auto w-full object-cover"
-          src={data.coverImages?.original}
-          alt="Cover image"
-          width="1920"
-          height="1200"
-        />
+        <div className="-mx-5">
+          <Image
+            className=" h-auto w-full object-cover"
+            src={data.coverImages?.original}
+            alt={t('article.coverImage')}
+            width="1920"
+            height="1200"
+          />
+        </div>
       )}
       <PartitionalLockedContent initialMaxHeight={300} active={enabled}>
         <div className={styles['content']}>{HTMLReactParser(data.content)}</div>

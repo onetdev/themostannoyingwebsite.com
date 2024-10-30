@@ -116,7 +116,7 @@ const ChatBubbleHost: FunctionComponent = () => {
       className="group fixed bottom-4 left-4 z-20 flex"
       onClick={preventClose}>
       <button
-        className="z-30 flex size-14 cursor-pointer items-center justify-center rounded-full bg-primary text-2xl text-on-primary"
+        className="z-30 flex size-14 cursor-pointer items-center justify-center rounded-full bg-secondary text-2xl text-on-secondary"
         onClick={toggleHistory}>
         <Icon icon="commentDots" size="3xl" />
         {badgeCounter > 0 && (
@@ -125,7 +125,7 @@ const ChatBubbleHost: FunctionComponent = () => {
           </div>
         )}
       </button>
-      <div className="absolute bottom-4 left-10 z-20 hidden max-h-screen-3/4 w-96 opacity-0 transition-visibility-opacity duration-300 group-data-[state=open]:block group-data-[state=open]:opacity-100">
+      <div className="absolute bottom-10 left-0 z-20 hidden max-h-screen-3/4 w-80 opacity-0 transition-visibility-opacity duration-300 group-data-[state=open]:block group-data-[state=open]:opacity-100 md:bottom-4 md:left-10 md:w-96">
         {isOpen && (
           <History
             history={history}

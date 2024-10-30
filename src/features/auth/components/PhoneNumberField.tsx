@@ -46,14 +46,16 @@ const PhoneNumberField: FunctionComponent<PhoneNumberFieldProps> = ({
     }
 
     const timer = setInterval(() => {
+      let newValue: number = getValues('phoneNumber') || 0;
       if (phoneNumberUpdateDirection > 0) {
-        setValue('phoneNumber', (getValues('phoneNumber') || 0) + 1);
+        newValue = (getValues('phoneNumber') || 0) + 1;
       } else if (phoneNumberUpdateDirection < 0) {
-        setValue(
-          'phoneNumber',
-          Math.max((getValues('phoneNumber') || 0) - 1, 1),
-        );
+        newValue = Math.max((getValues('phoneNumber') || 0) - 1, 1);
       }
+
+      setValue('phoneNumber', newValue, {
+        shouldValidate: false,
+      });
     }, 50);
 
     return () => {
@@ -61,20 +63,23 @@ const PhoneNumberField: FunctionComponent<PhoneNumberFieldProps> = ({
     };
   }, [getValues, phoneNumberUpdateDirection, setValue]);
 
-  const onMouseUp = useCallback(() => setPhoneNumberUpdateDirection(0), []);
+  const onGlobalMouseUp = useCallback(
+    () => setPhoneNumberUpdateDirection(0),
+    [],
+  );
 
   useEffect(() => {
-    window.addEventListener('mouseup', onMouseUp);
+    window.addEventListener('mouseup', onGlobalMouseUp);
 
-    return () => window.removeEventListener('mouseup', onMouseUp);
-  }, [onMouseUp]);
+    return () => window.removeEventListener('mouseup', onGlobalMouseUp);
+  }, [onGlobalMouseUp]);
 
-  const onPhoneNumberIncrementClick = (e: React.MouseEvent) => {
+  const onIncrementClick = (e: React.MouseEvent) => {
     e.preventDefault();
     setPhoneNumberUpdateDirection(phoneNumberUpdateDirection + 1);
   };
 
-  const onPhoneNumberDecrementClick = (e: React.MouseEvent) => {
+  const onDecrementClick = (e: React.MouseEvent) => {
     e.preventDefault();
     setPhoneNumberUpdateDirection(phoneNumberUpdateDirection - 1);
   };
@@ -93,10 +98,11 @@ const PhoneNumberField: FunctionComponent<PhoneNumberFieldProps> = ({
           />
           <div className="flex w-3/4 ">
             <Button
-              className="rounded-none rounded-l-lg"
+              type="button"
+              className="rounded-none rounded-l-lg px-4"
               variant="primary"
               size="sm"
-              onMouseDown={onPhoneNumberDecrementClick}>
+              onMouseDown={onDecrementClick}>
               -
             </Button>
             <TextInput
@@ -108,9 +114,10 @@ const PhoneNumberField: FunctionComponent<PhoneNumberFieldProps> = ({
               })}
             />
             <Button
-              className="rounded-none rounded-r-lg"
+              type="button"
+              className="rounded-none rounded-r-lg px-4"
               size="sm"
-              onMouseDown={onPhoneNumberIncrementClick}>
+              onMouseDown={onIncrementClick}>
               +
             </Button>
           </div>

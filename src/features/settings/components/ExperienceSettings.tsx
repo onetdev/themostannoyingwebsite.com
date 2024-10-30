@@ -4,6 +4,7 @@ import { FunctionComponent } from 'react';
 import SettingsBlock from './SettingsBlock';
 import SettingsBlockRow from './SettingsBlockRow';
 
+import Button from '@/components/atoms/Button';
 import FormCheckbox from '@/components/atoms/Checkbox';
 import { useExperienceFlagsStore } from '@/state/experience_flags';
 
@@ -16,6 +17,14 @@ const ExperienceSettings: FunctionComponent = () => {
 
   return (
     <SettingsBlock title={t('settings:section.experienceFlags.title')}>
+      <SettingsBlockRow
+        label={t('settings:section.experienceFlags.gifts.flaps')}>
+        <FormCheckbox
+          name="gift_flaps"
+          checked={experience.gifts.flaps}
+          onValueChange={(flaps) => experience.setGifts({ flaps })}
+        />
+      </SettingsBlockRow>
       <SettingsBlockRow
         label={t('settings:section.experienceFlags.contentPaywall')}>
         <FormCheckbox
@@ -96,6 +105,20 @@ const ExperienceSettings: FunctionComponent = () => {
           onValueChange={experience.setWheelOfFortune}
         />
       </SettingsBlockRow>
+      <div className="flex gap-3">
+        <Button
+          className="mt-6"
+          variant="primary"
+          onClick={experience.allEnabled}>
+          {t('common:actions.enableAll')}
+        </Button>
+        <Button
+          className="mt-6"
+          variant="secondary"
+          onClick={experience.allDisabled}>
+          {t('common:actions.disableAll')}
+        </Button>
+      </div>
     </SettingsBlock>
   );
 };

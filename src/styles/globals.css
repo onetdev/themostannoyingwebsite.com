@@ -2,51 +2,8 @@
 @tailwind components;
 @tailwind utilities;
 
-:root, [data-theme='dark'] {
-  --color-background: #050416;
-  --color-primary: #00bcd4;
-  --color-primary-alt: #00acc1;
-  --color-secondary: #ffc107;
-  --color-secondary-alt: #ffb300;
-  --color-tertiary: #ff5722;
-  --color-tertiary-alt: #ff5722;
-  --color-surface: #141221;
-  --color-success: #16a733;
-  --color-warning: #edd629;
-  --color-error: #f44336;
-  --color-on-primary: #fff;
-  --color-on-secondary: #000;
-  --color-on-tertiary: #000;
-  --color-on-background: #fff;
-  --color-on-surface: #fff;
-  --color-on-success: #fff;
-  --color-on-warning: #000;
-  --color-on-error: #fff;
-  --color-dimmer: #464646b5;
-}
-
-[data-theme='light'] {
-  --color-background: #fafafa;
-  --color-primary: #00b0c0;
-  --color-primary-alt: #028aa5;
-  --color-secondary: #991199;
-  --color-secondary-alt: #660159;
-  --color-tertiary: #ee4917;
-  --color-tertiary-alt: #d33d0f;
-  --color-surface: #f3f5ec;
-  --color-success: #36f45c;
-  --color-warning: #edd629;
-  --color-error: #f44034;
-  --color-on-primary: #fff;
-  --color-on-secondary: #050416;
-  --color-on-tertiary: #050416;
-  --color-on-background: #050416;
-  --color-on-surface: #050416;
-  --color-on-success: #050416;
-  --color-on-warning: #000;
-  --color-on-error: #050416;
-  --color-dimmer: #3a3a3abc;
-}
+@import "themes/dark.css";
+@import "themes/light.css";
 
 html,
 body {
@@ -55,11 +12,11 @@ body {
 }
 
 a, a:visited {
-  @apply text-secondary no-underline;
+  @apply text-primary no-underline;
   text-decoration: none;
 }
 a:hover {
-  @apply text-secondary-alt underline;
+  @apply text-primary-alt;
 }
 
 h1 {

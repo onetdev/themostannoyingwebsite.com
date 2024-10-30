@@ -2,12 +2,30 @@ import { useTranslation } from 'next-i18next';
 import { useTheme } from 'next-themes';
 import { FunctionComponent } from 'react';
 
+export type DarkModeToggleSize = 'md' | 'lg';
 export type DarkModeToggleProps = {
   className?: string;
+  size?: DarkModeToggleSize;
+};
+
+const resolveSize = (size: DarkModeToggleSize) => {
+  let className: string;
+  switch (size) {
+    case 'lg':
+      className = 'h-7 w-16 md:h-10 md:w-20';
+      break;
+    default:
+    case 'md':
+      className = 'h-7 w-16';
+      break;
+  }
+
+  return className;
 };
 
 const DarkModeToggle: FunctionComponent<DarkModeToggleProps> = ({
   className,
+  size = 'md',
 }) => {
   const { t } = useTranslation();
   const { resolvedTheme, setTheme } = useTheme();
@@ -15,11 +33,13 @@ const DarkModeToggle: FunctionComponent<DarkModeToggleProps> = ({
     setTheme(resolvedTheme === 'dark' ? 'light' : 'dark');
   };
 
+  const sizeClass = resolveSize(size);
+
   return (
     <div
       suppressHydrationWarning
       data-dark={(resolvedTheme === 'dark' || !resolvedTheme).toString()}
-      className={`relative flex h-7 w-16 translate-x-0 select-none justify-between rounded-full border border-secondary before:block ${className} before:absolute before:inset-y-0 before:h-full before:w-1/2 before:rounded-full before:bg-secondary before:duration-100 before:ease-in-out before:data-[dark=true]:translate-x-full`}
+      className={`relative flex translate-x-0 select-none justify-between rounded-full border border-secondary before:block ${sizeClass} ${className} before:absolute before:inset-y-0 before:h-full before:w-1/2 before:rounded-full before:bg-secondary before:duration-100 before:ease-in-out before:data-[dark=true]:translate-x-full`}
       onClick={toggleDarkMode}>
       <SelectOption role="img" aria-label={t('themeSwitch.lightMode')}>
         ☀️
@@ -36,9 +56,11 @@ const SelectOption: FunctionComponent<JSXProxyProps<'span'>> = ({
   ...rest
 }) => {
   return (
-    <span className="z-10 grow cursor-pointer text-center text-base" {...rest}>
-      {children}
-    </span>
+    <div
+      className="z-10 flex grow cursor-pointer items-center justify-center text-center text-base"
+      {...rest}>
+      <span>{children}</span>
+    </div>
   );
 };
 

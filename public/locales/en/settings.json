@@ -4,6 +4,7 @@
     "userPreferences": {
       "title": "Preferences",
       "colorScheme": "Theme / Color scheme",
+      "darkMode": "Dark mode",
       "enableFlashing": "Flashing contents",
       "enableSound": "Sound",
       "adultFilter": "Filter adult contents"
@@ -16,6 +17,9 @@
       "locationPermission": "Location permission"
     },
     "experienceFlags": {
+      "gifts": {
+        "flaps": "Background flaps"
+      },
       "title": "Experience",
       "contentPaywall": "Content paywall",
       "deadPixel": "Dead pixel",
@@ -34,6 +38,7 @@
       "startedAgo": "Started:",
       "visibilitySeconds": "Elapsed seconds:",
       "isDocumentVisible": "Is this window in focus?",
+      "navigationCount": "Navigation count:",
       "interactionUnlocked": "Had first interaction?"
     }
   }

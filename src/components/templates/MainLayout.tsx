@@ -20,6 +20,7 @@ const MainLayout: FunctionComponent<MainLayoutProps> = ({
 }) => {
   const deadPixel = useExperienceFlagsStore((state) => state.deadPixel);
   const mockChat = useExperienceFlagsStore((state) => state.mockChat);
+  const giftFlaps = useExperienceFlagsStore((state) => state.gifts.flaps);
   const wheelOfFortune = useExperienceFlagsStore(
     (state) => state.wheelOfFortune,
   );
@@ -27,7 +28,7 @@ const MainLayout: FunctionComponent<MainLayoutProps> = ({
   return (
     <div className={className} {...rest}>
       <Analytics />
-      <ContainerGiftFlaps />
+      {giftFlaps && <ContainerGiftFlaps />}
       <div className="container relative mx-auto my-0 min-h-screen bg-surface px-3 py-2 md:px-5">
         <Header />
         {children}

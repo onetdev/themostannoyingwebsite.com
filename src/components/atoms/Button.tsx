@@ -40,7 +40,7 @@ const Button: FunctionComponent<ButtonProps> = ({
 
   return (
     <button
-      className={`cursor-pointer rounded-md transition-all duration-100 ease-in-out disabled:cursor-default disabled:grayscale ${classNameVariant} ${classNameSize} ${classNameExternal}`}
+      className={`cursor-pointer rounded-md transition-all duration-150 ease-in-out disabled:cursor-default disabled:grayscale ${classNameVariant} ${classNameSize} ${classNameExternal}`}
       {...rest}>
       {children}
     </button>
