@@ -80,11 +80,11 @@ body {
 }
 
 a, a:visited {
-  @apply text-secondary no-underline;
+  @apply text-primary no-underline;
   text-decoration: none;
 }
 a:hover {
-  @apply text-secondary-alt;
+  @apply text-primary-alt;
 }
 
 h1 {
