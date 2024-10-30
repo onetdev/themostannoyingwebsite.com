@@ -41,7 +41,7 @@ const Registration: NextPage = () => {
   };
 
   return (
-    <main className="mx-auto max-w-[900px] py-14">
+    <main className="mx-auto max-w-[900px] py-0 md:py-14">
       <SiteTitle>{t('navigation.registration')}</SiteTitle>
       <PageHeadline>{t('navigation.registration')}</PageHeadline>
       <form

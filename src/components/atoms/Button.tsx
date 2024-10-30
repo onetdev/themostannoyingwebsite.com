@@ -1,4 +1,4 @@
-import { FunctionComponent } from 'react';
+import { forwardRef } from 'react';
 
 import { FormElementSize, resolveFormElementSize } from '@/utils/form';
 
@@ -28,23 +28,31 @@ const resolveVariant = (variant: ButtonVariant) => {
   return className;
 };
 
-const Button: FunctionComponent<ButtonProps> = ({
-  variant = 'primary',
-  size = 'md',
-  className: classNameExternal,
-  children,
-  ...rest
-}) => {
-  const classNameVariant = resolveVariant(variant);
-  const classNameSize = resolveFormElementSize(size);
+const Button = forwardRef<HTMLButtonElement, ButtonProps>(
+  (
+    {
+      variant = 'primary',
+      size = 'md',
+      className: classNameExternal,
+      children,
+      ...rest
+    }: ButtonProps,
+    ref,
+  ) => {
+    const classNameVariant = resolveVariant(variant);
+    const classNameSize = resolveFormElementSize(size);
 
-  return (
-    <button
-      className={`cursor-pointer rounded-md transition-all duration-150 ease-in-out disabled:cursor-default disabled:grayscale ${classNameVariant} ${classNameSize} ${classNameExternal}`}
-      {...rest}>
-      {children}
-    </button>
-  );
-};
+    return (
+      <button
+        ref={ref}
+        className={`cursor-pointer rounded-md transition-all duration-150 ease-in-out disabled:cursor-default disabled:grayscale ${classNameVariant} ${classNameSize} ${classNameExternal}`}
+        {...rest}>
+        {children}
+      </button>
+    );
+  },
+);
+
+Button.displayName = 'Button';
 
 export default Button;

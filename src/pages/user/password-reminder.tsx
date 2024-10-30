@@ -32,7 +32,7 @@ const PasswordReminder: NextPage = () => {
   };
 
   return (
-    <main className="mx-auto max-w-[500px] py-14">
+    <main className="mx-auto max-w-md py-0 md:py-14">
       <SiteTitle>{t('navigation.passwordReminder')}</SiteTitle>
       <PageHeadline>{t('navigation.passwordReminder')}</PageHeadline>
       <form

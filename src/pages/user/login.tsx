@@ -27,7 +27,7 @@ const Login: NextPage = () => {
   };
 
   return (
-    <main className="mx-auto max-w-[500px] py-14">
+    <main className="mx-auto max-w-md py-0 md:py-14">
       <SiteTitle>{t('navigation.login')}</SiteTitle>
       <PageHeadline>{t('navigation.login')}</PageHeadline>
       <form
