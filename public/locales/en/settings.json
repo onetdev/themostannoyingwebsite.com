@@ -4,6 +4,7 @@
     "userPreferences": {
       "title": "Preferences",
       "colorScheme": "Theme / Color scheme",
+      "darkMode": "Dark mode",
       "enableFlashing": "Flashing contents",
       "enableSound": "Sound",
       "adultFilter": "Filter adult contents"
