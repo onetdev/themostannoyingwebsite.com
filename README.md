@@ -14,6 +14,8 @@ The main idea is to gather the most annoying features of modern websites in one 
   - [ ] Age verification on certain contents
   - [ ] Add holiday related (Halloween, Christmass, Easter) small animated images that follow the mouse cursor
   - [ ] Push elements to navigation stack so that when the user tries to navigate back it will stay on the page
+  - [ ] Fake advertisements (won free phone)
+  - [ ] Add disabled experience toggle for Auth related pages
 </details>
 
 <details>
