@@ -26,7 +26,7 @@ const Header: FunctionComponent = () => {
         <Link href="/search" className="md:hidden">
           <Icon icon="search" />
         </Link>
-        <DarkModeToggle className="self-center justify-self-end" />
+        <DarkModeToggle className="self-center justify-self-end" size="lg" />
       </div>
       <MainNavigation className="col-span-1 my-3 -ml-3 pl-3 md:ml-0 md:pl-0" />
       <UserNavigation className="col-span-1 my-3" />
