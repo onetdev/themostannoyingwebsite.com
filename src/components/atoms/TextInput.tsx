@@ -19,15 +19,16 @@ const resolveVariant = (variant: TextInputVariant) => {
   switch (variant) {
     case 'secondary':
       className =
-        'border border-secondary text-on-surface hover:border-secondary-alt';
+        'border border-hr-secondary text-on-surface hover:border-secondary-alt';
       break;
     case 'tertiary':
       className =
-        'border border-tertiary text-on-surface hover:border-tertiary-alt';
+        'border border-hr-tertiary text-on-surface hover:border-tertiary-alt';
       break;
     case 'primary':
     default:
-      className = 'border-primary text-on-surface hover:border-primary-alt';
+      className =
+        'border border-hr-primary text-on-surface hover:border-primary-alt';
       break;
   }
 
@@ -58,7 +59,7 @@ const TextInput = forwardRef<HTMLInputElement, TextInputProps>(
       <input
         type="text"
         ref={ref}
-        className={`${className} ${classNameVariant} ${classNameExternal} rounded-lg border border-primary bg-surface text-on-surface`}
+        className={`${className} ${classNameVariant} rounded-lg bg-surface text-on-surface transition-all duration-150 ease-in-out  ${classNameExternal}`}
         onChange={onChangeProxy}
         {...rest}
       />

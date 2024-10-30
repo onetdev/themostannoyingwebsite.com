@@ -8,7 +8,7 @@ const Footer: FunctionComponent = () => {
   const { t } = useTranslation(['common']);
 
   return (
-    <footer className="mt-12 flex flex-col justify-between gap-4 border-t border-on-surface px-0 py-5 text-xs md:flex-row">
+    <footer className="mt-12 flex flex-col justify-between gap-4 border-t border-hr-surface px-0 py-5 text-xs md:flex-row">
       <span className="mr-2">
         {t('meta.copyright', { year: new Date().getFullYear() })}
       </span>

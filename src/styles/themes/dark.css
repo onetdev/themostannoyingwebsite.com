@@ -35,6 +35,7 @@
   /* Borders */
   --color-hr-primary: #d4951c; /* Muted amber for primary borders */
   --color-hr-secondary: #0277bd; /* Muted blue for secondary borders */
+  --color-hr-tertiary: #e85f37; /* Muted coral for primary tertiary borders */
   --color-hr-surface: #3b3b4e; /* Dark gray-blue for surface borders */
   --color-hr-surface-alt: #353348; /* Darker purple-gray for alt surfaces */
 }

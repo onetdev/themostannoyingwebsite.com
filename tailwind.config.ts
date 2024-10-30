@@ -40,6 +40,11 @@ module.exports = {
         'on-warning': 'var(--color-on-warning)',
         'on-error': 'var(--color-on-error)',
         dimmer: 'var(--color-dimmer)',
+        'hr-surface': 'var(--color-hr-surface)',
+        'hr-surface-alt': 'var(--color-hr-surface-alt)',
+        'hr-primary': 'var(--color-hr-primary)',
+        'hr-secondary': 'var(--color-hr-secondary)',
+        'hr-tertiary': 'var(--color-hr-tertiary)',
       },
       fontFamily: {
         primary: [
