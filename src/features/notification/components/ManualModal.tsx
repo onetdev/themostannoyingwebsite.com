@@ -21,7 +21,7 @@ const ManualModal: FunctionComponent<ManualModalProps> = ({
 
   return (
     <DimmerOverlay visible={visible}>
-      <div className="fixed left-20 top-1 max-w-manual-modal rounded-md bg-surface px-8 py-4 text-on-surface">
+      <div className="fixed inset-x-4 top-4 rounded-md bg-surface px-8 py-4 text-on-surface md:left-10 md:right-auto md:max-w-manual-modal">
         <h3 className="mb-4 text-2xl">
           {t('notifications:enableManualModal.title')}
         </h3>
