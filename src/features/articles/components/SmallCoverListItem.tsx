@@ -1,5 +1,6 @@
 import Image from 'next/image';
 import Link from 'next/link';
+import { useTranslation } from 'next-i18next';
 import { FunctionComponent } from 'react';
 
 import { CoverPlaceholder } from './CoverPlaceholder';
@@ -13,6 +14,8 @@ type SmallCoverListItemProps = {
 export const SmallCoverListItem: FunctionComponent<SmallCoverListItemProps> = ({
   article,
 }) => {
+  const { t } = useTranslation();
+
   return (
     <>
       <Link href={article.url} passHref prefetch={false}>
@@ -23,7 +26,7 @@ export const SmallCoverListItem: FunctionComponent<SmallCoverListItemProps> = ({
           <Image
             className="h-auto w-full object-cover"
             src={article.coverImages.thumbnail}
-            alt="Cover image"
+            alt={t('article.coverImage')}
             width="1920"
             height="1200"
           />

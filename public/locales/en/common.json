@@ -199,5 +199,9 @@
       "meme and toad",
       "bog brother"
     ]
+  },
+  "article": {
+    "coverImage": "Cover image",
+    "published": "Published at {{date}}"
   }
 }
