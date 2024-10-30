@@ -50,7 +50,7 @@ const ModalContent: FunctionComponent<ModalContentProps> = ({
         </button>
         {state === 'completed' && (
           <Confetti
-            className="absolute size-full"
+            className="absolute z-0 size-full"
             numberOfPieces={100}
             width={600}
             height={600}

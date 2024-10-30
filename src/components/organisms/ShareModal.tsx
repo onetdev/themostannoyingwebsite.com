@@ -49,7 +49,7 @@ const ShareModal: FunctionComponent<ShareModalProps> = ({
       }
       visible={show}
       onClose={handleClose}>
-      <div className="max-w-manual-modal">{t('shareModal.description')}</div>
+      <div className="max-w-screen-sm">{t('shareModal.description')}</div>
     </Modal>
   );
 };
