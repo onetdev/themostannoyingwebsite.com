@@ -25,7 +25,7 @@ const Header: FunctionComponent = () => {
       </div>
       <MainNavigation className="col-span-1 my-3 -ml-3 pl-3 md:ml-0 md:pl-0" />
       <UserNavigation className="col-span-1 my-3" />
-      <MarqueeText className="col-span-2 -mx-3 mb-2 bg-surface md:-mx-5" />
+      <MarqueeText className="col-span-2 -mx-3 mb-2 bg-surface-alt py-2 md:-mx-5" />
     </header>
   );
 };

@@ -7,7 +7,6 @@ module.exports = {
     extend: {
       animation: {
         'dot-dot-dot': 'dot-dot-dot 2s infinite',
-        'flashing-error': 'flashing-error 1s infinite',
         highlight: 'highlight 1s infinite',
         'flashing-invert-1/2': 'flashing-invert-1/2 500ms infinite',
         'wiggle-15deg': 'wiggle-15deg 0.2s linear infinite;',
@@ -28,6 +27,7 @@ module.exports = {
         tertiary: 'var(--color-tertiary)',
         'tertiary-alt': 'var(--color-tertiary-alt)',
         surface: 'var(--color-surface)',
+        'surface-alt': 'var(--color-surface-alt)',
         success: 'var(--color-success)',
         warning: 'var(--color-warning)',
         error: 'var(--color-error)',
@@ -65,10 +65,6 @@ module.exports = {
           '75%': { content: '' },
           '100%': { content: '.' },
         },
-        'flashing-error': {
-          '0%, 25%, 75%, 100%,': { background: 'transparent' },
-          '30%, 70%': { background: 'var(--color-error)' },
-        },
         highlight: {
           from: { background: 'var(--color-error)' },
           to: { background: 'var(--color-error)' },
@@ -101,7 +97,6 @@ module.exports = {
       maxWidth: {
         'screen-dimension-min': 'min(100vw, 100vh)',
         'manual-modal': 'min(calc(100vw - 10rem), 30rem)',
-        narrow: '700px',
       },
       maxHeight: {
         'clamp-300-screen-2/1': 'min(300px, 50vh)',

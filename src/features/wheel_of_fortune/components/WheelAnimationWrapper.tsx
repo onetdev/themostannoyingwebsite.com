@@ -104,19 +104,19 @@ const AnimatedWheel: FunctionComponent<AnimatedWheelProps> = ({
   return (
     <div className="relative m-auto max-h-[500px] max-w-[500px] p-8">
       <div
-        className="absolute inset-x-0 top-3 z-10 flex justify-center text-2xl text-secondary drop-shadow-md data-[wiggle=true]:animate-wiggle-15deg md:top-0 md:-ml-4 md:text-5xl"
+        className="absolute inset-x-0 top-3 z-10 flex justify-center text-2xl text-primary drop-shadow-md data-[wiggle=true]:animate-wiggle-15deg md:top-0 md:-ml-4 md:text-5xl"
         data-wiggle={(state === 'spinning').toString()}>
         <Icon icon="mapMarker" size="5xl" />
       </div>
       <Button
-        className="absolute left-1/2 top-1/2 z-10 -translate-x-1/2 -translate-y-1/2 rounded-full border border-secondary bg-primary p-5 text-2xl shadow-md md:rounded-full"
+        className="absolute left-1/2 top-1/2 z-10 -translate-x-1/2 -translate-y-1/2 rounded-full border border-primary bg-primary p-5 text-2xl shadow-md md:rounded-full"
         variant="tertiary"
         onClick={() => startSpin()}
         disabled={state !== 'ready'}>
         {state === 'ready' ? '🎲' : '🎉'}
       </Button>
       <div
-        className="rounded-full border border-secondary shadow-md"
+        className="rounded-full border border-primary shadow-md"
         style={{ lineHeight: 0 }}
         ref={rotatorRef}>
         <div className="select-none" style={animStyles}>

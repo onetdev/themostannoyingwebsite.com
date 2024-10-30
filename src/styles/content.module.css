@@ -22,7 +22,7 @@
 }
 
 .content > p, .content > ul, .content > ol, .content > blockquote, .content > h1, .content > h2, .content > h3, .content > h4, .content > h5, .content > h6 {
-  @apply w-full max-w-narrow
+  @apply w-full max-w-screen-md
 }
 
 .content > h1, .content > h2, .content > h3 {

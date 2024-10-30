@@ -16,7 +16,7 @@ export const DenseTextList: FunctionComponent<DenseTextListProps> = ({
       {items.map((item, index) => (
         <li
           key={index}
-          className="relative after:absolute after:w-full after:border-b after:border-b-secondary after:opacity-20">
+          className="relative after:absolute after:w-full after:border-b after:border-b-on-surface after:opacity-20">
           <TextListItem article={item} />
         </li>
       ))}
