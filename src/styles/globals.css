@@ -2,76 +2,8 @@
 @tailwind components;
 @tailwind utilities;
 
-:root, [data-theme='dark'] {
-    /* Backgrounds */
-  --color-background: #0a0a14; /* Darker, muted */
-  --color-surface: #1a192b; /* Subtle dark surface */
-  --color-surface-alt: #2a283d; /* Dark, muted purple-gray */
-
-  /* Primary Colors */
-  --color-primary: #ffca28; /* Lighter aqua */
-  --color-primary-alt: #ffa000; /* Soft blue */
-  --color-on-primary: #000000; /* White for contrast */
-
-  /* Secondary Colors */
-  --color-secondary: #03a9f4 ; /* Warm yellow */
-  --color-secondary-alt: #0288d1 ; /* Amber */
-  --color-on-secondary: #ffffff; /* Black for contrast */
-
-  /* Tertiary Colors */
-  --color-tertiary: #ff7043; /* Light coral */
-  --color-tertiary-alt: #f4511e; /* Stronger orange-red */
-  --color-on-tertiary: #000000; /* Black for contrast */
-
-  /* Success, Warning, and Error */
-  --color-success: #2e7d32; /* Deep green */
-  --color-warning: #ffeb3b; /* Bright yellow */
-  --color-error: #e53935; /* Muted red */
-  --color-on-success: #ffffff; /* White */
-  --color-on-warning: #000000; /* Black */
-  --color-on-error: #ffffff; /* White */
-
-  /* Text and Dimmer */
-  --color-dimmer: #555555a0; /* Slightly lighter, balanced dimmer */
-  --color-on-background: #f0f0f0; /* Off-white for readability */
-  --color-on-surface: #e0e0e0; /* Light gray */
-}
-
-[data-theme='light'] {
-  /* Backgrounds */
-  --color-background: #f4f6f9; /* Light, neutral gray-blue */
-  --color-surface: #ffffff; /* Clean white for contrast */
-  --color-surface-alt: #e9edf2; /* Subtle cool gray for sections */
-
-  /* Primary Colors */
-  --color-primary: #ff8c42; /* Warm amber-orange for primary actions */
-  --color-primary-alt: #cc6b30; /* Richer, darker orange for hover */
-  --color-on-primary: #ffffff; /* White for contrast */
-
-  /* Secondary Colors */
-  --color-secondary: #007a75; /* Bold teal, for secondary actions */
-  --color-secondary-alt: #00615d; /* Darker teal for focus */
-  --color-on-secondary: #ffffff; /* White for contrast */
-
-  /* Tertiary Colors */
-  --color-tertiary: #ff4e50; /* Vibrant coral for highlights or alerts */
-  --color-tertiary-alt: #d64244; /* Slightly darker coral for focus */
-  --color-on-tertiary: #ffffff; /* White for readability */
-
-  /* Success, Warning, and Error */
-  --color-success: #4caf50; /* Fresh green for success */
-  --color-warning: #ffb300; /* Bright amber for warnings */
-  --color-error: #e53935; /* Soft red for errors */
-  --color-on-success: #ffffff; /* White for readability */
-  --color-on-warning: #000000; /* Black for contrast */
-  --color-on-error: #ffffff; /* White for readability */
-
-  /* Text and Dimmer */
-  --color-on-background: #333333; /* Dark gray for readability */
-  --color-on-surface: #333333; /* Consistent with on-background */
-  --color-on-surface-alt: #4f4f4f; /* Slightly lighter gray */
-  --color-dimmer: #5a5a5a99; /* Dimmer gray for disabled text */
-}
+@import "themes/dark.css";
+@import "themes/light.css";
 
 html,
 body {

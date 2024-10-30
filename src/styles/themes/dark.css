@@ -1,0 +1,40 @@
+:root, [data-theme='dark'] {
+  /* Backgrounds */
+  --color-background: #0a0a14; /* Darker, muted */
+  --color-surface: #1a192b; /* Subtle dark surface */
+  --color-surface-alt: #2a283d; /* Dark, muted purple-gray */
+
+  /* Primary Colors */
+  --color-primary: #ffca28; /* Lighter aqua */
+  --color-primary-alt: #ffa000; /* Soft blue */
+  --color-on-primary: #000000; /* White for contrast */
+
+  /* Secondary Colors */
+  --color-secondary: #03a9f4 ; /* Warm yellow */
+  --color-secondary-alt: #0288d1 ; /* Amber */
+  --color-on-secondary: #ffffff; /* Black for contrast */
+
+  /* Tertiary Colors */
+  --color-tertiary: #ff7043; /* Light coral */
+  --color-tertiary-alt: #f4511e; /* Stronger orange-red */
+  --color-on-tertiary: #000000; /* Black for contrast */
+
+  /* Success, Warning, and Error */
+  --color-success: #2e7d32; /* Deep green */
+  --color-warning: #ffeb3b; /* Bright yellow */
+  --color-error: #e53935; /* Muted red */
+  --color-on-success: #ffffff; /* White */
+  --color-on-warning: #000000; /* Black */
+  --color-on-error: #ffffff; /* White */
+
+  /* Text and Dimmer */
+  --color-dimmer: #555555a0; /* Slightly lighter, balanced dimmer */
+  --color-on-background: #f0f0f0; /* Off-white for readability */
+  --color-on-surface: #e0e0e0; /* Light gray */
+
+  /* Borders */
+  --color-hr-primary: #d4951c; /* Muted amber for primary borders */
+  --color-hr-secondary: #0277bd; /* Muted blue for secondary borders */
+  --color-hr-surface: #3b3b4e; /* Dark gray-blue for surface borders */
+  --color-hr-surface-alt: #353348; /* Darker purple-gray for alt surfaces */
+}
