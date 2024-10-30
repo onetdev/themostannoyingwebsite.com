@@ -18,7 +18,8 @@ const resolveVariant = (size: CheckboxSize) => {
       className = 'size-4';
       break;
     case 'lg':
-      className = 'size-6';
+      className = 'size-7';
+      break;
     case 'md':
     default:
       className = 'size-5';
