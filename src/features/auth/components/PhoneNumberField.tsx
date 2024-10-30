@@ -46,13 +46,11 @@ const PhoneNumberField: FunctionComponent<PhoneNumberFieldProps> = ({
   );
 
   useEffect(() => {
-    console.log('phoneNumberUpdateDirection', phoneNumberUpdateDirection);
     if (phoneNumberUpdateDirection === 0) {
       return;
     }
 
     const timer = setInterval(() => {
-      console.log('phoneNumberUpdateDirection', phoneNumberUpdateDirection);
       let newValue: number = getValues('phoneNumber') || 0;
       if (phoneNumberUpdateDirection > 0) {
         newValue = (getValues('phoneNumber') || 0) + 1;
