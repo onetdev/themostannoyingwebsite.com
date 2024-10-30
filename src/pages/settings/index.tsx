@@ -7,7 +7,7 @@ import {
   ExperienceSettings,
   PreferencesSettings,
   RuntimeSettings,
-  UserGrantSettings,
+  UserGrantsSettings,
 } from '@/features/settings';
 import { makeI18nStaticProps } from '@/utils/i18n';
 
@@ -21,7 +21,7 @@ const Settings: NextPage = () => {
 
       <div className="grid gap-3 md:grid-cols-2">
         <PreferencesSettings />
-        <UserGrantSettings />
+        <UserGrantsSettings />
         <ExperienceSettings />
         <RuntimeSettings />
       </div>

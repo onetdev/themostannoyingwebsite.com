@@ -7,7 +7,7 @@ import SettingsBlockRow from './SettingsBlockRow';
 import FormCheckbox from '@/components/atoms/Checkbox';
 import { useUserGrantsStore } from '@/state/user_grants';
 
-const UserGrantSettings: FunctionComponent = () => {
+const UserGrantsSettings: FunctionComponent = () => {
   const grant = useUserGrantsStore();
   const { t } = useTranslation(['settings', 'common']);
 
@@ -38,4 +38,4 @@ const UserGrantSettings: FunctionComponent = () => {
   );
 };
 
-export default UserGrantSettings;
+export default UserGrantsSettings;
