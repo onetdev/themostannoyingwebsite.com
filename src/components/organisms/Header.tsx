@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import { useTranslation } from 'next-i18next';
 import { FunctionComponent } from 'react';
 
 import DarkModeToggle from '@/components/atoms/DarkModeToggle';
@@ -9,15 +10,19 @@ import SearchForm from '@/components/organisms/SearchForm';
 import UserNavigation from '@/components/organisms/UserNavigation';
 
 const Header: FunctionComponent = () => {
+  const { t } = useTranslation('common');
+
   return (
     <header className="grid grid-cols-2 gap-1 py-2">
       <h1>
-        <Link href="/" prefetch={false}>
-          The <i>MAW</i>
+        <Link href="/" prefetch={false} title={t('meta.title')}>
+          <span className="text-on-surface">
+            The <i>MAW</i>
+          </span>
         </Link>
       </h1>
       <div className="flex items-center justify-end gap-3">
-        <SearchForm className="hidden md:flex" />
+        <SearchForm className="hidden md:flex" size="md" />
         <Link href="/search" className="md:hidden">
           <Icon icon="search" />
         </Link>
