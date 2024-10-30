@@ -1,6 +1,10 @@
 import { useCallback } from 'react';
 
 import config from '@/config';
+import {
+  getNotificationPermissionState,
+  requestNotificationPermission,
+} from '@/utils/permission';
 
 type UseSendNotificationProps = {
   autoRequest?: boolean;
@@ -11,22 +15,34 @@ const useSendNotification = ({
 }: UseSendNotificationProps = {}) => {
   const send = useCallback(
     async (data: { title: string; body?: string; data?: unknown }) => {
-      const permission = Notification.permission;
+      const permission = getNotificationPermissionState();
       if (!config.isBrowser) {
         return false;
       }
 
       if (permission === 'default' && autoRequest) {
-        await Notification.requestPermission();
+        await requestNotificationPermission();
+      } else if (permission === 'denied') {
+        console.warn(
+          `[useSendNotification] Can't send notification because permission is "${permission}"`,
+        );
+        return false;
       }
 
-      const result = new Notification(data.title, {
+      if (getNotificationPermissionState() !== 'granted') {
+        console.warn(
+          `[useSendNotification] Can't send notification because state is "${getNotificationPermissionState()}"`,
+        );
+        return false;
+      }
+
+      const registration = await navigator.serviceWorker.getRegistration();
+      await registration?.showNotification(data.title, {
         body: data.body,
         icon: '/manifest/android-chrome-256x256.png',
         data: data.data,
+        tag: 'push-notification',
       });
-
-      console.log('useSendNotification result:', result);
     },
     [autoRequest],
   );
