@@ -38,6 +38,7 @@
       "startedAgo": "Started:",
       "visibilitySeconds": "Elapsed seconds:",
       "isDocumentVisible": "Is this window in focus?",
+      "navigationCount": "Navigation count:",
       "interactionUnlocked": "Had first interaction?"
     }
   }

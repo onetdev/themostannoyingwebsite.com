@@ -7,6 +7,7 @@ import { NotificationPermissionExperienceHost } from '@/features/notification';
 import { PageTitleExperienceHost } from '@/features/page_title';
 import useDocumentVisibilityListener from '@/hooks/useDocumentVisibilityListener';
 import useFirstInteractionListener from '@/hooks/useFirstInteractionListener';
+import useNavigationStats from '@/hooks/useNavigationStats';
 import { useExperienceFlagsStore } from '@/state/experience_flags';
 
 const ExperienceProvider: FunctionComponent<PropsWithChildren> = ({
@@ -17,6 +18,7 @@ const ExperienceProvider: FunctionComponent<PropsWithChildren> = ({
 
   useFirstInteractionListener();
   useDocumentVisibilityListener();
+  useNavigationStats();
 
   useBeforeUnload(exitPrompt, t('experiences.exitPrompt'));
 

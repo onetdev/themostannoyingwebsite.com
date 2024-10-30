@@ -40,6 +40,10 @@ const RuntimeSettings: FunctionComponent = () => {
             : t('common:response.yes')}
         </span>
       </p>
+      <p>
+        {t('settings:section.runtime.navigationCount')}{' '}
+        <span>{runtime.navigationCount}</span>
+      </p>
     </SettingsBlock>
   );
 };
