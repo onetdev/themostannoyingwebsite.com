@@ -8,7 +8,7 @@ type DenseTextListProps = JSXProxyProps<'ul'> & {
 
 export const DenseTextList: FunctionComponent<DenseTextListProps> = ({
   items,
-  className,
+  className = '',
   ...rest
 }) => {
   return (
