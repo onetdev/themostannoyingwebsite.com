@@ -19,6 +19,7 @@ const MainNavigation: FunctionComponent<MainNavigationProps> = ({
       { path: '/hot-things', text: t('navigation.hotThings') },
       { path: '/contact', text: t('navigation.contact') },
       { path: '/privacy-policy', text: t('navigation.privacyPolicy') },
+      { path: '/donate', text: t('navigation.donate') },
     ],
     [t],
   );
