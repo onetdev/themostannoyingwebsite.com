@@ -18,7 +18,8 @@
     },
     "experienceFlags": {
       "gifts": {
-        "flaps": "Background flaps"
+        "flaps": "Background ad flaps",
+        "oneByOne": "One by one ad blocks"
       },
       "title": "Experience",
       "contentPaywall": "Content paywall",

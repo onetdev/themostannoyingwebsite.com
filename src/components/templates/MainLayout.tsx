@@ -6,7 +6,7 @@ import Footer from '@/components/organisms/Footer';
 import Header from '@/components/organisms/Header';
 import { ChatBubbleHost } from '@/features/chat_bubble';
 import { DeadPixelHost } from '@/features/dead_pixel';
-import ContainerGiftFlaps from '@/features/gifts/components/ContainerGiftFlaps';
+import { ContainerGiftFlaps } from '@/features/gifts';
 import { StickyVideoExperienceHost } from '@/features/sticky_video';
 import { WheelOfFortuneHost } from '@/features/wheel_of_fortune';
 import { useExperienceFlagsStore } from '@/state/experience_flags';

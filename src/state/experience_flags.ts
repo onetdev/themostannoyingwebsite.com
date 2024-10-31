@@ -4,6 +4,7 @@ import { createJSONStorage, persist } from 'zustand/middleware';
 export interface ExperienceFlagsState {
   gifts: {
     flaps: boolean;
+    oneByOne: boolean;
   };
   contentPaywall: boolean;
   deadPixel: boolean;
@@ -44,6 +45,7 @@ export interface ExperienceFlagsStore
 const initialState: ExperienceFlagsState = {
   gifts: {
     flaps: true,
+    oneByOne: true,
   },
   contentPaywall: true,
   deadPixel: true,
@@ -90,6 +92,7 @@ export const useExperienceFlagsStore = create(
         set({
           gifts: {
             flaps: false,
+            oneByOne: false,
           },
           contentPaywall: false,
           deadPixel: false,
@@ -111,10 +114,17 @@ export const useExperienceFlagsStore = create(
       name: 'zustand-experience-flags-storage',
       storage: createJSONStorage(() => localStorage),
       version: 7,
-      migrate: (persistedState, _version) => {
-        // Versions are supersets atm
+      migrate: (_persistedState, _version) => {
+        // Versions are supersets atm, don't need to juggle too much with
+        // type states
+        const persistedState = _persistedState as ExperienceFlagsStore;
+
         return {
-          ...(persistedState as ExperienceFlagsStore),
+          ...persistedState,
+          gifts: {
+            flaps: persistedState.gifts.flaps ?? true,
+            oneByOne: persistedState.gifts.oneByOne ?? true,
+          },
           version: 7,
         };
       },

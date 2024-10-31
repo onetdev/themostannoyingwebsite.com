@@ -6,14 +6,13 @@ module.exports = {
   debug: false, // isDev,
   i18n: {
     defaultLocale: 'en',
-    locales: ['en', 'hu'],
+    locales: ['en'],
   },
   defaultNS: 'common',
   ns: [
     'chat_bubble',
     'common',
     'content_limiter',
-    'gifts',
     'notifications',
     'settings',
     'wheel_of_fortune',

@@ -26,6 +26,14 @@ const ExperienceSettings: FunctionComponent = () => {
         />
       </SettingsBlockRow>
       <SettingsBlockRow
+        label={t('settings:section.experienceFlags.gifts.oneByOne')}>
+        <FormCheckbox
+          name="gift_flaps"
+          checked={experience.gifts.oneByOne}
+          onValueChange={(oneByOne) => experience.setGifts({ oneByOne })}
+        />
+      </SettingsBlockRow>
+      <SettingsBlockRow
         label={t('settings:section.experienceFlags.contentPaywall')}>
         <FormCheckbox
           name="content_paywall"

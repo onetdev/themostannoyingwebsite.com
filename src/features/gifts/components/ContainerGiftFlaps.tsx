@@ -1,30 +1,33 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { useTranslation } from 'next-i18next';
-import { FunctionComponent } from 'react';
-
-import flapImage from '@/public/assets/images/car-advert.webp';
+import { useTheme } from 'next-themes';
+import { FunctionComponent, PropsWithChildren } from 'react';
 
 const ContainerGiftFlaps: FunctionComponent = () => {
-  const { t } = useTranslation('gifts');
+  const { t } = useTranslation();
+  const { resolvedTheme } = useTheme();
 
   return (
     <div className="sticky top-0 hidden w-full justify-center md:flex">
       <div className="absolute max-h-screen overflow-hidden">
-        <Link href="/super-duper" passHref prefetch={false}>
+        <Link href="/dilf" passHref prefetch={false}>
           <Image
-            className="object-cover"
-            src={flapImage}
-            placeholder="blur"
+            className="object-cover opacity-30 mix-blend-lighten"
+            src="/assets/dilf-shaded.webp"
             alt="Super duper car advert"
-            width={1920}
-            height={1200}
+            width={1900}
+            height={1000}
           />
-          <GiftFlapText className="bottom-16 left-16 origin-bottom-left -rotate-90">
-            {t('flaps.left')}
+          <GiftFlapText
+            theme={resolvedTheme as AppTheme}
+            className="bottom-16 left-16 origin-bottom-left -rotate-90">
+            {t('gifts.dilf.flapLeft')}
           </GiftFlapText>
-          <GiftFlapText className="bottom-16 right-16 origin-bottom-right rotate-90">
-            {t('flaps.right')}
+          <GiftFlapText
+            theme={resolvedTheme as AppTheme}
+            className="bottom-16 right-16 origin-bottom-right rotate-90">
+            {t('gifts.dilf.flapRight')}
           </GiftFlapText>
         </Link>
       </div>
@@ -32,15 +35,20 @@ const ContainerGiftFlaps: FunctionComponent = () => {
   );
 };
 
-const GiftFlapText: FunctionComponent<JSXProxyProps<'span'>> = ({
+type GiftFlapText = PropsWithChildren<{
+  className?: string;
+  theme?: AppTheme;
+}>;
+
+const GiftFlapText: FunctionComponent<GiftFlapText> = ({
   children,
-  className,
-  ...rest
+  className = '',
+  theme,
 }) => {
   return (
     <span
-      className={`absolute text-2xl font-bold text-on-primary mix-blend-exclusion ${className}`}
-      {...rest}>
+      data-theme={theme ?? 'dark'}
+      className={`absolute text-2xl font-bold text-gray-600 data-[theme=dark]:text-white ${className}`}>
       {children}
     </span>
   );
