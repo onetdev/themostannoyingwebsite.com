@@ -10,6 +10,7 @@ const FlaimWanPhone: NextPage = () => {
     <main>
       <h1>{t('gifts.wanPhone.title')}</h1>
       {/* TODO: Add simple questioneer with timer */}
+      <p className="my-5 max-w-screen-md">Survey incoming</p>
     </main>
   );
 };
