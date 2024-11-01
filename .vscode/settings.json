@@ -26,6 +26,7 @@
     "class",
     "cx",
     "iteratorClassName",
+    "listClassName",
     "localStyles.*"
   ],
   "yaml.schemas": {
