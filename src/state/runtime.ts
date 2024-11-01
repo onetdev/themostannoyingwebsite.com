@@ -7,12 +7,14 @@ export interface RuntimeState {
     visibilitySeconds: number;
   };
   interactionUnlocked: boolean;
+  navigationCount: number;
   startedAt?: string;
 }
 
 export interface RuntimeStateActions {
   setIsDocumentVisibile: (isVisible: boolean) => void;
   markInteractionUnlocked: () => void;
+  incrementNavigationCount: () => void;
   incrementVisibilitySeconds: () => void;
 }
 
@@ -25,6 +27,7 @@ const initialState: RuntimeState = {
     visibilitySeconds: 0,
   },
   startedAt: undefined,
+  navigationCount: 0,
   interactionUnlocked: false,
 };
 
@@ -41,6 +44,8 @@ export const useRuntimeStore = create<RuntimeStore>((set) => ({
       startedAt: state.startedAt ?? new Date().toISOString(),
     })),
   markInteractionUnlocked: () => set({ interactionUnlocked: true }),
+  incrementNavigationCount: () =>
+    set((state) => ({ navigationCount: state.navigationCount + 1 })),
   incrementVisibilitySeconds: () =>
     set((state) => ({
       document: {

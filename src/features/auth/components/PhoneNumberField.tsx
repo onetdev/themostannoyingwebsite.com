@@ -1,9 +1,12 @@
 import { useTranslation } from 'next-i18next';
 import {
-  FunctionComponent,
+  type FunctionComponent,
+  type MouseEvent,
+  type TouchEvent,
   useCallback,
   useEffect,
   useMemo,
+  useRef,
   useState,
 } from 'react';
 
@@ -26,6 +29,8 @@ const PhoneNumberField: FunctionComponent<PhoneNumberFieldProps> = ({
   getValues,
 }) => {
   const { t } = useTranslation('common');
+  const $decrementBtn = useRef<HTMLButtonElement>(null);
+  const $incrementBtn = useRef<HTMLButtonElement>(null);
   const [phoneNumberUpdateDirection, setPhoneNumberUpdateDirection] =
     useState(0);
 
@@ -46,14 +51,16 @@ const PhoneNumberField: FunctionComponent<PhoneNumberFieldProps> = ({
     }
 
     const timer = setInterval(() => {
+      let newValue: number = getValues('phoneNumber') || 0;
       if (phoneNumberUpdateDirection > 0) {
-        setValue('phoneNumber', (getValues('phoneNumber') || 0) + 1);
+        newValue = (getValues('phoneNumber') || 0) + 1;
       } else if (phoneNumberUpdateDirection < 0) {
-        setValue(
-          'phoneNumber',
-          Math.max((getValues('phoneNumber') || 0) - 1, 1),
-        );
+        newValue = Math.max((getValues('phoneNumber') || 0) - 1, 1);
       }
+
+      setValue('phoneNumber', newValue, {
+        shouldValidate: false,
+      });
     }, 50);
 
     return () => {
@@ -61,22 +68,52 @@ const PhoneNumberField: FunctionComponent<PhoneNumberFieldProps> = ({
     };
   }, [getValues, phoneNumberUpdateDirection, setValue]);
 
-  const onMouseUp = useCallback(() => setPhoneNumberUpdateDirection(0), []);
+  const onStopEvent = useCallback(() => setPhoneNumberUpdateDirection(0), []);
+  const preventLongTapSelection: EventListenerOrEventListenerObject =
+    useCallback((e: Event) => {
+      e.preventDefault();
+    }, []);
 
   useEffect(() => {
-    window.addEventListener('mouseup', onMouseUp);
+    window.addEventListener('mouseup', onStopEvent);
+    window.addEventListener('touchend', onStopEvent);
 
-    return () => window.removeEventListener('mouseup', onMouseUp);
-  }, [onMouseUp]);
+    // There's no onSelectStart on the element so we need to rely on this
+    // oldschool way. This is required to avoid long-tap related selection.
+    // And before you ask, select-none doesn't cover this.
+    $decrementBtn.current?.addEventListener(
+      'selectstart',
+      preventLongTapSelection,
+    );
+    $incrementBtn.current?.addEventListener(
+      'selectstart',
+      preventLongTapSelection,
+    );
 
-  const onPhoneNumberIncrementClick = (e: React.MouseEvent) => {
-    e.preventDefault();
-    setPhoneNumberUpdateDirection(phoneNumberUpdateDirection + 1);
+    return () => {
+      window.removeEventListener('mouseup', onStopEvent);
+      window.removeEventListener('touchend', onStopEvent);
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+      $decrementBtn.current?.removeEventListener(
+        'selectstart',
+        preventLongTapSelection,
+      );
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+      $incrementBtn.current?.removeEventListener(
+        'selectstart',
+        preventLongTapSelection,
+      );
+    };
+  }, [onStopEvent, preventLongTapSelection]);
+
+  const onIncrementClick = (e: MouseEvent | TouchEvent) => {
+    e.stopPropagation();
+    setPhoneNumberUpdateDirection(1);
   };
 
-  const onPhoneNumberDecrementClick = (e: React.MouseEvent) => {
-    e.preventDefault();
-    setPhoneNumberUpdateDirection(phoneNumberUpdateDirection - 1);
+  const onDecrementClick = (e: MouseEvent | TouchEvent) => {
+    e.stopPropagation();
+    setPhoneNumberUpdateDirection(-1);
   };
 
   return (
@@ -91,26 +128,32 @@ const PhoneNumberField: FunctionComponent<PhoneNumberFieldProps> = ({
               required: t('validation.errors.required'),
             })}
           />
-          <div className="flex w-3/4 ">
+          <div className="flex w-3/4">
             <Button
-              className="rounded-none rounded-l-lg"
+              ref={$decrementBtn}
+              type="button"
+              className="select-none rounded-none rounded-l-lg px-3"
               variant="primary"
               size="sm"
-              onMouseDown={onPhoneNumberDecrementClick}>
+              onMouseDown={onDecrementClick}
+              onTouchStart={onDecrementClick}>
               -
             </Button>
             <TextInput
               type="number"
               disabled
-              className="grow rounded-none"
+              className="max-w-44 select-none rounded-none border-x-0"
               {...register('phoneNumber', {
                 required: t('validation.errors.required'),
               })}
             />
             <Button
-              className="rounded-none rounded-r-lg"
+              ref={$incrementBtn}
+              type="button"
+              className="rounded-none rounded-r-lg px-3"
               size="sm"
-              onMouseDown={onPhoneNumberIncrementClick}>
+              onMouseDown={onIncrementClick}
+              onTouchStart={onIncrementClick}>
               +
             </Button>
           </div>

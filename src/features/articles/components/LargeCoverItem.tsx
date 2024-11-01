@@ -1,5 +1,6 @@
 import Image from 'next/image';
 import Link from 'next/link';
+import { useTranslation } from 'next-i18next';
 import { FunctionComponent } from 'react';
 
 import { CoverPlaceholder } from './CoverPlaceholder';
@@ -14,6 +15,8 @@ export const LargeCoverItem: FunctionComponent<LargeCoverItemProps> = ({
   article,
   ...rest
 }) => {
+  const { t } = useTranslation();
+
   return (
     <div {...rest}>
       <Link
@@ -28,7 +31,7 @@ export const LargeCoverItem: FunctionComponent<LargeCoverItemProps> = ({
           <Image
             className="h-auto w-full object-cover"
             src={article.coverImages.original}
-            alt="Cover image"
+            alt={t('article.coverImage')}
             width="1920"
             height="1200"
           />

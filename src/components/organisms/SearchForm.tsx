@@ -44,11 +44,14 @@ const SearchForm: FunctionComponent<SearchFormProps> = ({
         defaultValue={initialValue}
         className="-mr-1 w-full rounded-r-none"
         size={size}
+        variant="primary"
         name="search"
         placeholder={t('search.placeholder')}
       />
       <Button
         className="flex items-center rounded-l-none"
+        aria-label={t('actions.search')}
+        variant="primary"
         type="submit"
         size={size}>
         <Icon icon="search" size="sm" />

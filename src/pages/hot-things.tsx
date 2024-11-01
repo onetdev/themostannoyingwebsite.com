@@ -65,7 +65,7 @@ const HotThings: NextPage = () => {
       <div className="relative overflow-hidden pb-16/9">
         <Image
           className="absolute h-auto w-full"
-          src="/assets/images/lava.jpg"
+          src="/assets/images/lava.webp"
           alt="Picture of you"
           width={1920}
           height={1080}

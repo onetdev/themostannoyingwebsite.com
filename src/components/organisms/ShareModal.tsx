@@ -25,7 +25,7 @@ const ShareModal: FunctionComponent<ShareModalProps> = ({
   const { t } = useTranslation();
   const [url, setUrl] = useState<string>('');
 
-  const buttonStyle = 'overflow-hidden rounded-md hover:brightness-125';
+  const buttonStyle = 'overflow-hidden hover:brightness-125 rounded-md';
 
   useEffect(() => {
     setUrl(window.location.href);
@@ -49,7 +49,7 @@ const ShareModal: FunctionComponent<ShareModalProps> = ({
       }
       visible={show}
       onClose={handleClose}>
-      <div className="max-w-manual-modal">{t('shareModal.description')}</div>
+      <div className="max-w-screen-sm">{t('shareModal.description')}</div>
     </Modal>
   );
 };

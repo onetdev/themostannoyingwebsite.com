@@ -14,7 +14,7 @@ export const TextListItem: FunctionComponent<TextListItemProps> = ({
     <>
       <Link href={article.url} passHref prefetch={false}>
         <h4 className="leading-tight">{article.title}</h4>
-        <small className="my-2 block">{article.intro}</small>
+        <small className="my-2 block text-on-surface">{article.intro}</small>
       </Link>
     </>
   );

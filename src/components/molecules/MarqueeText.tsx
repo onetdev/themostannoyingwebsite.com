@@ -37,7 +37,7 @@ const MarqueeText: FunctionComponent<MarqueeTextProps> = ({ className }) => {
               passHref
               data-anim={flashing ? 'flashing' : 'highlight'}
               prefetch={false}
-              className="mx-8 inline-block px-2 data-[anim=flashing]:animate-flashing-error data-[anim=highlight]:animate-highlight">
+              className="mx-8 inline-block px-2">
               {title}
             </Link>
           );

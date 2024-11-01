@@ -1,7 +1,9 @@
 import { useTranslation } from 'next-i18next';
 import { FormEventHandler, FunctionComponent, useRef } from 'react';
 
+import Button from '@/components/atoms/Button';
 import Icon from '@/components/atoms/Icon';
+import TextInput from '@/components/atoms/TextInput';
 
 export type MessageFormProps = {
   className?: string;
@@ -12,7 +14,7 @@ const MessageForm: FunctionComponent<MessageFormProps> = ({
   className,
   onMessage,
 }) => {
-  const { t } = useTranslation('chat_bubble');
+  const { t } = useTranslation(['chat_bubble', 'common']);
   const userForm = useRef<HTMLFormElement>(null);
   const userMessage = useRef<HTMLInputElement>(null);
 
@@ -26,19 +28,25 @@ const MessageForm: FunctionComponent<MessageFormProps> = ({
   };
 
   return (
-    <form className={className} onSubmit={handleFormSubmit} ref={userForm}>
-      <input
-        className="grow rounded-none border border-r-0 border-tertiary bg-surface p-3 text-on-surface"
+    <form
+      method="post"
+      className={className}
+      onSubmit={handleFormSubmit}
+      ref={userForm}>
+      <TextInput
         name="message"
         title={t('yourMessage')}
         placeholder={t('yourMessagePlaceholder')}
         ref={userMessage}
+        className="-mr-1 w-full rounded-r-none"
       />
-      <button
-        className="rounded-r-lg border-none bg-primary pl-4 pr-5 text-on-primary"
-        type="submit">
+      <Button
+        className="flex items-center rounded-l-none"
+        aria-label={t('common:actions.send')}
+        type="submit"
+        size="md">
         <Icon icon="send" />
-      </button>
+      </Button>
     </form>
   );
 };

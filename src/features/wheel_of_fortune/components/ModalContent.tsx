@@ -50,7 +50,7 @@ const ModalContent: FunctionComponent<ModalContentProps> = ({
         </button>
         {state === 'completed' && (
           <Confetti
-            className="absolute size-full"
+            className="absolute z-0 size-full"
             numberOfPieces={100}
             width={600}
             height={600}
@@ -63,7 +63,7 @@ const ModalContent: FunctionComponent<ModalContentProps> = ({
           onSpinCompleted={(newPrize) => setPrize(newPrize)}
         />
       </div>
-      <span className="w-full bg-secondary p-5 text-center text-xl font-bold text-on-secondary">
+      <span className="w-full bg-primary p-5 text-center text-xl font-bold text-on-primary">
         {state !== 'completed' && t('spin_start')}
         {state === 'completed' && prize && t('spin_win', { prize: prize.text })}
       </span>

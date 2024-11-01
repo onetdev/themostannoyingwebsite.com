@@ -32,8 +32,8 @@ class ArticleService {
           content: article.content,
           coverImages: article.hasCoverImage
             ? {
-                original: `/assets/articles/${article.directory}/cover.jpg`,
-                thumbnail: `/assets/articles/${article.directory}/cover-480x270.jpg`,
+                original: `/assets/articles/${article.directory}/cover.webp`,
+                thumbnail: `/assets/articles/${article.directory}/cover-480x270.webp`,
               }
             : undefined,
           intro: article.intro,

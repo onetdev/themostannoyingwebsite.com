@@ -7,6 +7,7 @@ import {
   LargeCoverItem,
   SmallCoverListItem,
 } from '@/features/articles';
+import { OneByOneGift } from '@/features/gifts';
 import { makeI18nStaticProps } from '@/utils/i18n';
 
 const Index: NextPage = () => {
@@ -22,8 +23,8 @@ const Index: NextPage = () => {
     params: { isOnCover: false },
     paginate: { take: 12 },
   });
-  const denseList = articlePool.items.slice(0, 3);
-  const regularList = articlePool.items.slice(3);
+  const denseList = articlePool.items.slice(0, 2);
+  const regularList = articlePool.items.slice(2);
 
   return (
     <main className="grid grid-cols-1 gap-3 lg:grid-cols-4">
@@ -33,7 +34,10 @@ const Index: NextPage = () => {
           article={coverArticle}
         />
       )}
-      <DenseTextList className="col-span-1" items={denseList} />
+      <div className="col-span-1 flex flex-col justify-between">
+        <DenseTextList items={denseList} />
+        <OneByOneGift />
+      </div>
       <ul className="col-span-1 grid gap-3 md:grid-cols-2 lg:col-span-4 lg:mt-3 lg:grid-cols-3 xl:grid-cols-4">
         {regularList.map((article, index) => (
           <li key={index} className="basis-full md:basis-1/2">

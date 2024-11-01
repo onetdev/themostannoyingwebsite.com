@@ -6,7 +6,7 @@ import Footer from '@/components/organisms/Footer';
 import Header from '@/components/organisms/Header';
 import { ChatBubbleHost } from '@/features/chat_bubble';
 import { DeadPixelHost } from '@/features/dead_pixel';
-import ContainerGiftFlaps from '@/features/gifts/components/ContainerGiftFlaps';
+import { ContainerGiftFlaps } from '@/features/gifts';
 import { StickyVideoExperienceHost } from '@/features/sticky_video';
 import { WheelOfFortuneHost } from '@/features/wheel_of_fortune';
 import { useExperienceFlagsStore } from '@/state/experience_flags';
@@ -20,6 +20,7 @@ const MainLayout: FunctionComponent<MainLayoutProps> = ({
 }) => {
   const deadPixel = useExperienceFlagsStore((state) => state.deadPixel);
   const mockChat = useExperienceFlagsStore((state) => state.mockChat);
+  const giftFlaps = useExperienceFlagsStore((state) => state.gifts.flaps);
   const wheelOfFortune = useExperienceFlagsStore(
     (state) => state.wheelOfFortune,
   );
@@ -27,7 +28,7 @@ const MainLayout: FunctionComponent<MainLayoutProps> = ({
   return (
     <div className={className} {...rest}>
       <Analytics />
-      <ContainerGiftFlaps />
+      {giftFlaps && <ContainerGiftFlaps />}
       <div className="container relative mx-auto my-0 min-h-screen bg-surface px-3 py-2 md:px-5">
         <Header />
         {children}

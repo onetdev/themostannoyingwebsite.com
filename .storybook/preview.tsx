@@ -1,6 +1,9 @@
-import React from 'react';
+import {
+  withThemeByDataAttribute,
+  withThemeFromJSXProvider,
+} from '@storybook/addon-themes';
 import type { Preview } from '@storybook/react';
-import { withThemeByDataAttribute, withThemeFromJSXProvider } from '@storybook/addon-themes';
+import React from 'react';
 
 import '../src/styles/globals.css';
 
@@ -17,9 +20,6 @@ const preview: Preview = {
     // So `withThemeFromJSXProvider` could've handled global vars but then
     // we would not have `[data-theme=*]` attribute that helps us to apply
     // proper var scope to the components.
-    //
-    // Hence we need to manually pull in the `<ScopedThemeStyle />` style
-    // in a second decorator. Works like charm.
     withThemeByDataAttribute({
       themes: {
         light: 'light',

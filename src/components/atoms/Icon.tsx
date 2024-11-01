@@ -1,12 +1,13 @@
 import {
+  faArrowUpRightFromSquare,
   faBars,
+  faCheck,
   faCommentDots,
   faGear,
   faMagnifyingGlass,
   faMapMarkerAlt,
   faPaperPlane,
   faPlayCircle,
-  faShare,
   faTags,
   faTimes,
   faUser,
@@ -18,6 +19,7 @@ import {
 import { FunctionComponent } from 'react';
 
 const iconMap = {
+  check: faCheck,
   close: faTimes,
   commentDots: faCommentDots,
   login: faUser,
@@ -27,7 +29,7 @@ const iconMap = {
   search: faMagnifyingGlass,
   send: faPaperPlane,
   settings: faGear,
-  share: faShare,
+  share: faArrowUpRightFromSquare,
   tags: faTags,
 };
 export type IconAliaseKey = keyof typeof iconMap;

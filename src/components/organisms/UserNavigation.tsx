@@ -37,7 +37,7 @@ const UserNavigation: FunctionComponent<UserNavigationProps> = ({
         show={showShareModal}
         handleClose={() => setShowShareModal(false)}
       />
-      <ul className="flex justify-end gap-3">
+      <ul className="flex justify-end gap-4">
         <li>
           <a
             onClick={() => setShowShareModal(true)}

@@ -7,7 +7,10 @@ import ManualModal from './components/ManualModal';
 import useScrollDistanceTrigger from '@/hooks/useScrollDistanceTrigger';
 import { useExperienceFlagsStore } from '@/state/experience_flags';
 import { useUserGrantsStore } from '@/state/user_grants';
-import { getNotificationPermissionState } from '@/utils/permission';
+import {
+  getNotificationPermissionState,
+  requestNotificationPermission,
+} from '@/utils/permission';
 
 export type NotificationPermissionExperienceHostProps = {
   scrollDistanceTrigger?: number;
@@ -30,7 +33,7 @@ const NotificationPermissionExperienceHost: FunctionComponent<
       return;
     }
 
-    const result = await Notification.requestPermission();
+    const result = await requestNotificationPermission();
     syncPermissions();
     if (result === 'denied') {
       setManualModalVisible(true);

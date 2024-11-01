@@ -7,7 +7,7 @@ import SettingsBlockRow from './SettingsBlockRow';
 import FormCheckbox from '@/components/atoms/Checkbox';
 import { useUserGrantsStore } from '@/state/user_grants';
 
-const UserGrantSettings: FunctionComponent = () => {
+const UserGrantsSettings: FunctionComponent = () => {
   const grant = useUserGrantsStore();
   const { t } = useTranslation(['settings', 'common']);
 
@@ -27,15 +27,17 @@ const UserGrantSettings: FunctionComponent = () => {
       </small>
       <br />
       <SettingsBlockRow
-        label={t('settings:section.userGrants.notificationPermission')}>
+        label={t('settings:section.userGrants.notificationPermission')}
+        reverse>
         {`${grant.permission.notification || t('common:status.notSet')}`}
       </SettingsBlockRow>
       <SettingsBlockRow
-        label={t('settings:section.userGrants.locationPermission')}>
+        label={t('settings:section.userGrants.locationPermission')}
+        reverse>
         {`${grant.permission.location || t('common:status.notSet')}`}
       </SettingsBlockRow>
     </SettingsBlock>
   );
 };
 
-export default UserGrantSettings;
+export default UserGrantsSettings;

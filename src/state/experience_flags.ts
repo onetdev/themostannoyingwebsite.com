@@ -2,6 +2,10 @@ import { create } from 'zustand';
 import { createJSONStorage, persist } from 'zustand/middleware';
 
 export interface ExperienceFlagsState {
+  gifts: {
+    flaps: boolean;
+    oneByOne: boolean;
+  };
   contentPaywall: boolean;
   deadPixel: boolean;
   exitPrompt: boolean;
@@ -19,6 +23,7 @@ export interface ExperienceFlagsState {
 }
 
 export interface ExperienceFlagsStateActions {
+  setGifts: (gifts: Partial<ExperienceFlagsState['gifts']>) => void;
   setContentPaywall: (contentPaywall: boolean) => void;
   setDeadPixel: (deadPixel: boolean) => void;
   setExitPrompt: (exitPrompt: boolean) => void;
@@ -29,6 +34,8 @@ export interface ExperienceFlagsStateActions {
   setSearchDelay: (searchDelay: boolean) => void;
   setStickyVideo: (stickyVideo: boolean) => void;
   setWheelOfFortune: (wheelOfFortune: boolean) => void;
+  allEnabled: () => void;
+  allDisabled: () => void;
 }
 
 export interface ExperienceFlagsStore
@@ -36,6 +43,10 @@ export interface ExperienceFlagsStore
     ExperienceFlagsStateActions {}
 
 const initialState: ExperienceFlagsState = {
+  gifts: {
+    flaps: true,
+    oneByOne: true,
+  },
   contentPaywall: true,
   deadPixel: true,
   exitPrompt: true,
@@ -58,6 +69,8 @@ export const useExperienceFlagsStore = create(
   persist<ExperienceFlagsStore>(
     (set) => ({
       ...initialState,
+      setGifts: (gifts) =>
+        set((state) => ({ gifts: { ...state.gifts, ...gifts } })),
       setContentPaywall: (contentPaywall) => set({ contentPaywall }),
       setDeadPixel: (deadPixel) => set({ deadPixel }),
       setExitPrompt: (exitPrompt) => set({ exitPrompt }),
@@ -74,16 +87,45 @@ export const useExperienceFlagsStore = create(
       setSearchDelay: (searchDelay) => set({ searchDelay }),
       setStickyVideo: (stickyVideo) => set({ stickyVideo }),
       setWheelOfFortune: (wheelOfFortune) => set({ wheelOfFortune }),
+      allEnabled: () => set({ ...initialState }),
+      allDisabled: () =>
+        set({
+          gifts: {
+            flaps: false,
+            oneByOne: false,
+          },
+          contentPaywall: false,
+          deadPixel: false,
+          exitPrompt: false,
+          mockChat: false,
+          newsletterModal: false,
+          notifications: false,
+          pageTitle: {
+            inactiveMarquee: false,
+            randomGlitch: false,
+            inactiveArrayPaged: false,
+          },
+          searchDelay: false,
+          stickyVideo: false,
+          wheelOfFortune: false,
+        }),
     }),
     {
       name: 'zustand-experience-flags-storage',
       storage: createJSONStorage(() => localStorage),
-      version: 6,
-      migrate: (persistedState, _version) => {
-        // Versions are supersets atm
+      version: 7,
+      migrate: (_persistedState, _version) => {
+        // Versions are supersets atm, don't need to juggle too much with
+        // type states
+        const persistedState = _persistedState as ExperienceFlagsStore;
+
         return {
-          ...(persistedState as ExperienceFlagsStore),
-          version: 6,
+          ...persistedState,
+          gifts: {
+            flaps: persistedState.gifts.flaps ?? true,
+            oneByOne: persistedState.gifts.oneByOne ?? true,
+          },
+          version: 7,
         };
       },
     },
