@@ -5,6 +5,7 @@ import PageHeadline from '@/components/atoms/PageHeadline';
 import SiteTitle from '@/components/atoms/SiteTitle';
 import {
   ExperienceSettings,
+  MandatoryExperienceSettings,
   PreferencesSettings,
   RuntimeSettings,
   UserGrantsSettings,
@@ -22,7 +23,11 @@ const Settings: NextPage = () => {
       <div className="grid gap-3 md:grid-cols-2">
         <PreferencesSettings />
         <UserGrantsSettings />
-        <ExperienceSettings />
+        <ExperienceSettings
+          className="md:col-span-2"
+          listClassName="grid gap-3 grid-cols-1 md:gap-x-10 md:grid-cols-2 lg:grid-cols-3"
+        />
+        <MandatoryExperienceSettings />
         <RuntimeSettings />
       </div>
     </main>

@@ -27,11 +27,13 @@ const UserGrantsSettings: FunctionComponent = () => {
       </small>
       <br />
       <SettingsBlockRow
-        label={t('settings:section.userGrants.notificationPermission')}>
+        label={t('settings:section.userGrants.notificationPermission')}
+        reverse>
         {`${grant.permission.notification || t('common:status.notSet')}`}
       </SettingsBlockRow>
       <SettingsBlockRow
-        label={t('settings:section.userGrants.locationPermission')}>
+        label={t('settings:section.userGrants.locationPermission')}
+        reverse>
         {`${grant.permission.location || t('common:status.notSet')}`}
       </SettingsBlockRow>
     </SettingsBlock>

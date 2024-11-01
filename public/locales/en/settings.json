@@ -17,21 +17,28 @@
       "locationPermission": "Location permission"
     },
     "experienceFlags": {
+      "title": "Optional experience",
       "gifts": {
         "flaps": "Background ad flaps",
         "oneByOne": "One by one ad blocks"
       },
-      "title": "Experience",
       "contentPaywall": "Content paywall",
       "deadPixel": "Dead pixel",
       "exitPrompt": "Exit prompt",
-      "mockChat": "Mock chat",
-      "newsletterModal": "Newsletter modal",
+      "mockChat": "Bubble chat",
+      "newsletterModal": "Newsletter popup modal",
       "notifications": "Notifications",
       "pageTitleInactiveArrayPaged": "Alternative title when tab is inactive",
       "searchDelay": "Fake search delay",
       "wheelOfFortune": "Wheel of fortune",
       "stickyVideo": "Sticky video"
+    },
+    "mandatoryExperienceFlags": {
+      "title": "Mandatory experience",
+      "impossibleLogin": "Impossible login",
+      "impossibleRegistration": "Impossible registration",
+      "impossiblePasswordReminder": "Impossible password reminder",
+      "unreasonableContent": "Unreasonable content"
     },
     "runtime": {
       "title": "About this session",

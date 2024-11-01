@@ -8,7 +8,15 @@ import Button from '@/components/atoms/Button';
 import FormCheckbox from '@/components/atoms/Checkbox';
 import { useExperienceFlagsStore } from '@/state/experience_flags';
 
-const ExperienceSettings: FunctionComponent = () => {
+type ExperienceSettingsProps = {
+  className?: string;
+  listClassName?: string;
+};
+
+const ExperienceSettings: FunctionComponent<ExperienceSettingsProps> = ({
+  className = '',
+  listClassName = '',
+}) => {
   const experience = useExperienceFlagsStore();
   const { t } = useTranslation(['settings', 'common']);
 
@@ -16,103 +24,109 @@ const ExperienceSettings: FunctionComponent = () => {
     experience.setPageTitle({ inactiveArrayPaged: value });
 
   return (
-    <SettingsBlock title={t('settings:section.experienceFlags.title')}>
-      <SettingsBlockRow
-        label={t('settings:section.experienceFlags.gifts.flaps')}>
-        <FormCheckbox
-          name="gift_flaps"
-          checked={experience.gifts.flaps}
-          onValueChange={(flaps) => experience.setGifts({ flaps })}
-        />
-      </SettingsBlockRow>
-      <SettingsBlockRow
-        label={t('settings:section.experienceFlags.gifts.oneByOne')}>
-        <FormCheckbox
-          name="gift_flaps"
-          checked={experience.gifts.oneByOne}
-          onValueChange={(oneByOne) => experience.setGifts({ oneByOne })}
-        />
-      </SettingsBlockRow>
-      <SettingsBlockRow
-        label={t('settings:section.experienceFlags.contentPaywall')}>
-        <FormCheckbox
-          name="content_paywall"
-          checked={experience.contentPaywall}
-          onValueChange={experience.setContentPaywall}
-        />
-      </SettingsBlockRow>
-      <SettingsBlockRow label={t('settings:section.experienceFlags.deadPixel')}>
-        <FormCheckbox
-          name="dead_pixel"
-          checked={experience.deadPixel}
-          onValueChange={experience.setDeadPixel}
-        />
-      </SettingsBlockRow>
-      <SettingsBlockRow
-        label={t('settings:section.experienceFlags.exitPrompt')}>
-        <FormCheckbox
-          name="exit_prompt"
-          checked={experience.exitPrompt}
-          onValueChange={experience.setExitPrompt}
-        />
-      </SettingsBlockRow>
-      <SettingsBlockRow label={t('settings:section.experienceFlags.mockChat')}>
-        <FormCheckbox
-          name="mock_chat"
-          checked={experience.mockChat}
-          onValueChange={experience.setMockChat}
-        />
-      </SettingsBlockRow>
-      <SettingsBlockRow
-        label={t('settings:section.experienceFlags.newsletterModal')}>
-        <FormCheckbox
-          name="newsletter"
-          checked={experience.newsletterModal}
-          onValueChange={experience.setNewsletterModal}
-        />
-      </SettingsBlockRow>
-      <SettingsBlockRow
-        label={t('settings:section.experienceFlags.notifications')}>
-        <FormCheckbox
-          name="notifications"
-          checked={experience.notifications}
-          onValueChange={experience.setNotifications}
-        />
-      </SettingsBlockRow>
-      <SettingsBlockRow
-        label={t(
-          'settings:section.experienceFlags.pageTitleInactiveArrayPaged',
-        )}>
-        <FormCheckbox
-          name="page_title_inactive_array_paged"
-          checked={experience.pageTitle.inactiveArrayPaged}
-          onValueChange={onPageTitleInactiveArrayPagedChange}
-        />
-      </SettingsBlockRow>
-      <SettingsBlockRow
-        label={t('settings:section.experienceFlags.searchDelay')}>
-        <FormCheckbox
-          name="search_delay"
-          checked={experience.searchDelay}
-          onValueChange={experience.setSearchDelay}
-        />
-      </SettingsBlockRow>
-      <SettingsBlockRow
-        label={t('settings:section.experienceFlags.stickyVideo')}>
-        <FormCheckbox
-          name="sticky_video"
-          checked={experience.stickyVideo}
-          onValueChange={experience.setStickyVideo}
-        />
-      </SettingsBlockRow>
-      <SettingsBlockRow
-        label={t('settings:section.experienceFlags.wheelOfFortune')}>
-        <FormCheckbox
-          name="wheel_of_fortune"
-          checked={experience.wheelOfFortune}
-          onValueChange={experience.setWheelOfFortune}
-        />
-      </SettingsBlockRow>
+    <SettingsBlock
+      title={t('settings:section.experienceFlags.title')}
+      className={className}>
+      <div className={listClassName}>
+        <SettingsBlockRow
+          label={t('settings:section.experienceFlags.gifts.flaps')}>
+          <FormCheckbox
+            name="gift_flaps"
+            checked={experience.gifts.flaps}
+            onValueChange={(flaps) => experience.setGifts({ flaps })}
+          />
+        </SettingsBlockRow>
+        <SettingsBlockRow
+          label={t('settings:section.experienceFlags.gifts.oneByOne')}>
+          <FormCheckbox
+            name="gift_flaps"
+            checked={experience.gifts.oneByOne}
+            onValueChange={(oneByOne) => experience.setGifts({ oneByOne })}
+          />
+        </SettingsBlockRow>
+        <SettingsBlockRow
+          label={t('settings:section.experienceFlags.contentPaywall')}>
+          <FormCheckbox
+            name="content_paywall"
+            checked={experience.contentPaywall}
+            onValueChange={experience.setContentPaywall}
+          />
+        </SettingsBlockRow>
+        <SettingsBlockRow
+          label={t('settings:section.experienceFlags.deadPixel')}>
+          <FormCheckbox
+            name="dead_pixel"
+            checked={experience.deadPixel}
+            onValueChange={experience.setDeadPixel}
+          />
+        </SettingsBlockRow>
+        <SettingsBlockRow
+          label={t('settings:section.experienceFlags.exitPrompt')}>
+          <FormCheckbox
+            name="exit_prompt"
+            checked={experience.exitPrompt}
+            onValueChange={experience.setExitPrompt}
+          />
+        </SettingsBlockRow>
+        <SettingsBlockRow
+          label={t('settings:section.experienceFlags.mockChat')}>
+          <FormCheckbox
+            name="mock_chat"
+            checked={experience.mockChat}
+            onValueChange={experience.setMockChat}
+          />
+        </SettingsBlockRow>
+        <SettingsBlockRow
+          label={t('settings:section.experienceFlags.newsletterModal')}>
+          <FormCheckbox
+            name="newsletter"
+            checked={experience.newsletterModal}
+            onValueChange={experience.setNewsletterModal}
+          />
+        </SettingsBlockRow>
+        <SettingsBlockRow
+          label={t('settings:section.experienceFlags.notifications')}>
+          <FormCheckbox
+            name="notifications"
+            checked={experience.notifications}
+            onValueChange={experience.setNotifications}
+          />
+        </SettingsBlockRow>
+        <SettingsBlockRow
+          label={t(
+            'settings:section.experienceFlags.pageTitleInactiveArrayPaged',
+          )}>
+          <FormCheckbox
+            name="page_title_inactive_array_paged"
+            checked={experience.pageTitle.inactiveArrayPaged}
+            onValueChange={onPageTitleInactiveArrayPagedChange}
+          />
+        </SettingsBlockRow>
+        <SettingsBlockRow
+          label={t('settings:section.experienceFlags.searchDelay')}>
+          <FormCheckbox
+            name="search_delay"
+            checked={experience.searchDelay}
+            onValueChange={experience.setSearchDelay}
+          />
+        </SettingsBlockRow>
+        <SettingsBlockRow
+          label={t('settings:section.experienceFlags.stickyVideo')}>
+          <FormCheckbox
+            name="sticky_video"
+            checked={experience.stickyVideo}
+            onValueChange={experience.setStickyVideo}
+          />
+        </SettingsBlockRow>
+        <SettingsBlockRow
+          label={t('settings:section.experienceFlags.wheelOfFortune')}>
+          <FormCheckbox
+            name="wheel_of_fortune"
+            checked={experience.wheelOfFortune}
+            onValueChange={experience.setWheelOfFortune}
+          />
+        </SettingsBlockRow>
+      </div>
       <div className="flex gap-3">
         <Button
           className="mt-6"
