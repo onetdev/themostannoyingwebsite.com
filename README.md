@@ -15,12 +15,13 @@ The main idea is to gather the most annoying features of modern websites in one 
   - [ ] Add holiday related (Halloween, Christmass, Easter) small animated images that follow the mouse cursor
   - [ ] Push elements to navigation stack so that when the user tries to navigate back it will stay on the page
   - [ ] Fake advertisements (won free phone)
-  - [ ] Add disabled experience toggle for Auth related pages
 </details>
 
 <details>
   <summary>Completed</summary>
 
+  - [x] Add disabled mandatory experience checkboxes to settings
+  - [x] DILF advertisement and landing page
   - [x] Sticky video player that obscures page visibility
   - [x] Newsletter modal that appears when the user leaves the screen or scrolls down a bit
   - [x] Fake search page that:
