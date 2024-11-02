@@ -6,8 +6,23 @@
     "aiDisclose": "AI text and image generation was used to produce contents of this website.",
     "copyright": "Copyright © {{year}} The Most Annoying Website"
   },
+  "navigation": {
+    "home": "Home",
+    "about": "About",
+    "contact": "Contact",
+    "donate": "Donate",
+    "login": "Login",
+    "logout": "Logout",
+    "register": "Register",
+    "passwordReminder": "Password Reminder",
+    "profile": "Profile",
+    "settings": "Settings",
+    "search": "Search",
+    "privacyPolicy": "Privacy Policy",
+    "hotThings": "Hot things",
+    "dilf": "DILF"
+  },
 
-  
   "response": {
     "yes": "Yes",
     "no": "No"
@@ -30,18 +45,6 @@
   "status": {
     "notSet": "Not set",
     "unknown": "Unknown"
-  },
-  "navigation": {
-    "contact": "Contact",
-    "donate": "Donate",
-    "home": "Home",
-    "hotThings": "Hot things",
-    "login": "Login",
-    "passwordReminder": "Password Reminder",
-    "privacyPolicy": "Privacy Policy",
-    "registration": "Registration",
-    "search": "Search",
-    "settings": "Settings"
   },
   "shareModal": {
     "title": "Share this page",
