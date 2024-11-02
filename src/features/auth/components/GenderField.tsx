@@ -19,7 +19,7 @@ const GenderField: FunctionComponent<GenderFieldProps> = ({
   const { t } = useTranslation('common');
 
   const genderOptions = useMemo(() => {
-    const pool = t('genders', {
+    const pool = t('auth.genders', {
       returnObjects: true,
       defaultValue: [],
     }) as Record<string, string>;

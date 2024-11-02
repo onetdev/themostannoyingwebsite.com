@@ -57,7 +57,7 @@ const Registration: NextPage = () => {
                   type="text"
                   className="w-full"
                   {...register('firstName', {
-                    required: t('validation.errors.required'),
+                    required: t('form.validation.errors.required'),
                   })}
                 />
               </label>
@@ -70,7 +70,7 @@ const Registration: NextPage = () => {
                   type="text"
                   className="w-full"
                   {...register('lastName', {
-                    required: t('validation.errors.required'),
+                    required: t('form.validation.errors.required'),
                   })}
                 />
               </label>
@@ -94,7 +94,7 @@ const Registration: NextPage = () => {
                 type="text"
                 className="w-full"
                 {...register('username', {
-                  required: t('validation.errors.required'),
+                  required: t('form.validation.errors.required'),
                 })}
               />
             </label>
@@ -107,10 +107,10 @@ const Registration: NextPage = () => {
                 type="email"
                 className="w-full"
                 {...register('email', {
-                  required: t('validation.errors.required'),
+                  required: t('form.validation.errors.required'),
                   pattern: {
                     value: EMAIL_PATTERN,
-                    message: t('validation.errors.emailInvalid'),
+                    message: t('form.validation.errors.emailInvalid'),
                   },
                 })}
               />

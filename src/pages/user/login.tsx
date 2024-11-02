@@ -41,10 +41,10 @@ const Login: NextPage = () => {
               type="email"
               className="w-full"
               {...register('email', {
-                required: t('validation.errors.required'),
+                required: t('form.validation.errors.required'),
                 pattern: {
                   value: EMAIL_PATTERN,
-                  message: t('validation.errors.emailInvalid'),
+                  message: t('form.validation.errors.emailInvalid'),
                 },
               })}
             />
@@ -58,7 +58,7 @@ const Login: NextPage = () => {
               type="password"
               className="w-full"
               {...register('password', {
-                required: t('validation.errors.required'),
+                required: t('form.validation.errors.required'),
               })}
             />
           </label>
@@ -73,8 +73,8 @@ const Login: NextPage = () => {
         </div>
         <div className="flex flex-col">
           <label>
-            <h4 className="mb-1">{t('captcha.field')}</h4>
-            <small>{t('captcha.captchaEmojiHint')}</small>
+            <h4 className="mb-1">{t('form.captcha.field')}</h4>
+            <small>{t('form.captcha.captchaEmojiHint')}</small>
             <CaptchaEmoji
               className="my-3 rounded-md border border-on-background"
               width={300}
@@ -84,10 +84,10 @@ const Login: NextPage = () => {
               type="text"
               className="w-[300px]"
               {...register('captcha', {
-                required: t('validation.errors.required'),
+                required: t('form.validation.errors.required'),
                 pattern: {
                   value: /^[XyZ123]{444}$/,
-                  message: t('validation.errors.captchaInvalid'),
+                  message: t('form.validation.errors.captchaInvalid'),
                 },
               })}
             />

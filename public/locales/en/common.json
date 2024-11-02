@@ -5,7 +5,12 @@
     "recruiting": "Want to extend what you see here? Visit our <linkTag>GitHub</linkTag> repo to get started.",
     "aiDisclose": "AI text and image generation was used to produce contents of this website.",
     "copyright": "Copyright © {{year}} The Most Annoying Website",
-    "cookieConsent": "This website uses cookies to ensure you get the best experience on our website. It's also a joke so many of the features are buggy or doens't even work on purpose. You can customize your experience and cookie settings in the settings menu."
+    "cookieConsent": "This website uses cookies to ensure you get the best experience on our website. It's also a joke so many of the features are buggy or doens't even work on purpose. You can customize your experience and cookie settings in the settings menu.",
+    "donate": {
+      "description": "This is one feature that actually supposed to work. If you'd like to help support the project or the authors, you can donate here. Every donation helps. We appreciate your support!",
+      "donateLinkText": "Donation info here"
+    },
+    "exitPrompt": "I'd reconsider leaving before some bad things happend to you. Are you sure?"
   },
   "navigation": {
     "home": "Home",
@@ -57,6 +62,47 @@
       "description": "Spread the misery! Be sure to inflict this painfully obnoxious website on your friends too — why suffer alone when you can drag them down with you?"
     }
   },
+  "form": {
+    "captcha": {
+      "field": "Captcha",
+      "captchaEmojiHint": "Count the emojis and identify which one appears the most. Look carefully, as parts of some emojis might be obscured.",
+      "captchaTilePuzzleHint": "Slide the tiles into their right position. You can only move the ones directly next to each other."
+    },
+    "validation": {
+      "errors": {
+        "required": "This field is required.",
+        "minLength": "Minimum length is {{count}} characters",
+        "maxLength": "Maximum length is {{count}} characters",
+        "min": "Value must be at least {{count}}",
+        "max": "Value must be no more than {{count}}",
+        "emailInvalid": "Invalid email address",
+        "captchaInvalid": "Invalid captcha",
+        "patternMismatch": "The input does not match the required pattern",
+        "passwordMismatch": "Passwords do not match",
+        "urlInvalid": "Invalid URL format",
+        "numberInvalid": "Please enter a valid number",
+        "dateInvalid": "Invalid date format",
+        "tooShort": "The input is too short",
+        "tooLong": "The input is too long",
+        "checkboxRequired": "You must check this box",
+        "fileTooLarge": "The file size exceeds the limit of {{size}}",
+        "fileTypeInvalid": "Invalid file type",
+        "customError": "Invalid input",
+        "missingUppercase": "Must contain at least one uppercase letter",
+        "missingLowercase": "Must contain at least one lowercase letter",
+        "missingNumber": "Must contain at least one number",
+        "missingSpecialCharacter": "Must contain at least one symbol",
+        "sumOfNumbersGte": "Sum of numbers must be at least or equal to {{count}}",
+        "sumOfNumbersMustBeEven": "Sum of numbers must be be even",
+        "passwordAlreadyTaken": "The password is already taken by another user"
+      },
+      "passwordStrength": {
+        "weak": "Weak",
+        "okay": "Okay",
+        "veryStrong": "Strong"
+      }
+    }
+  },
   "auth": {
     "common": {
       "registerAccount": "Need an account?",
@@ -64,7 +110,7 @@
       "Login": "Login",
       "register": "Register"
     },
-    "field":{
+    "field": {
       "consentNewsletter": "I want to receive newsletter",
       "consentPrivacyPolicy": "Accept privacy policy",
       "countryCode": "Country",
@@ -93,6 +139,15 @@
         "genericError": "Password reminder failed",
         "callToAction": "Send password reminder"
       }
+    },
+    "genders": {
+      "alien": "Alien",
+      "chymera": "Chymera",
+      "cyborg": "Cyborg",
+      "female": "Female",
+      "male": "Male",
+      "other": "Other",
+      "robot": "Robot"
     }
   },
   "settings": {
@@ -150,13 +205,43 @@
       "interactionUnlocked": "Had first interaction?"
     }
   },
-
-  "captcha": {
-    "field": "Captcha",
-    "captchaEmojiHint": "Count the emojis and identify which one appears the most. Look carefully, as parts of some emojis might be obscured.",
-    "captchaTilePuzzleHint": "Slide the tiles into their right position. You can only move the ones directly next to each other."
+  "newsletter": {
+    "modal": {
+      "title": "Join our newsletter!",
+      "description": "Our premium newsletter brings an insane amount of value right to your inbox. Don't miss out on insights that make a real difference!",
+      "placeholder": "Enter your email",
+      "initialConfirm": "Subscribe",
+      "initialCancel": "Don't Subscribe",
+      "useFormActions": "Please use the relevant button instead",
+      "confirmations": [
+        {
+          "text": "We're disappointed to see that you may not have had enough time to fully consider this important and challenging decision.",
+          "confirm": "I thought about it, I still want to",
+          "cancel": "You are right, cancel"
+        },
+        {
+          "text": "We are sorry to see you subscribing, can we treat you with the joys of not being a subscriber at all?",
+          "confirm": "No thanks",
+          "cancel": "I need my treat!"
+        },
+        {
+          "text": "Have you considered skipping this newsletter?",
+          "confirm": "No",
+          "cancel": "Yes"
+        },
+        {
+          "text": "Subscribing to this newsletter might have adverse side effects. Are you still in?",
+          "confirm": "I accept side effects",
+          "cancel": "Get me out of here"
+        }
+      ]
+    }
   },
-  "experiences": {
+  "article": {
+    "coverImage": "Cover image",
+    "published": "Published at {{date}}"
+  },
+  "titleExperience": {
     "marqueeVariants": [
       "📣 Come back please 🏃‍♀️🏃 We have candy!! 🚐"
     ],
@@ -164,105 +249,31 @@
       "⭐️ HEY YOU 🫵",
       "😜 YES YOU 😱",
       "📣 COME BACK 🏃"
-    ],
-    "exitPrompt": "I'd reconsider leaving before some bad things happend to you. Are you sure?",
-    "newsletter": {
-      "modal": {
-        "title": "Join our newsletter!",
-        "description": "Our premium newsletter brings an insane amount of value right to your inbox. Don't miss out on insights that make a real difference!",
-        "placeholder": "Enter your email",
-        "initialConfirm": "Subscribe",
-        "initialCancel": "Don't Subscribe",
-        "useFormActions": "Please use the relevant button instead",
-        "confirmations": [
-          {
-            "text": "We're disappointed to see that you may not have had enough time to fully consider this important and challenging decision.",
-            "confirm": "I thought about it, I still want to",
-            "cancel": "You are right, cancel"
-          },
-          {
-            "text": "We are sorry to see you subscribing, can we treat you with the joys of not being a subscriber at all?",
-            "confirm": "No thanks",
-            "cancel": "I need my treat!"
-          },
-          {
-            "text": "Have you considered skipping this newsletter?",
-            "confirm": "No",
-            "cancel": "Yes"
-          },
-          {
-            "text": "Subscribing to this newsletter might have adverse side effects. Are you still in?",
-            "confirm": "I accept side effects",
-            "cancel": "Get me out of here"
-          }
-        ]
-      }
-    }
-  },
-  "validation": {
-    "errors": {
-      "required": "This field is required.",
-      "minLength": "Minimum length is {{count}} characters",
-      "maxLength": "Maximum length is {{count}} characters",
-      "min": "Value must be at least {{count}}",
-      "max": "Value must be no more than {{count}}",
-      "emailInvalid": "Invalid email address",
-      "captchaInvalid": "Invalid captcha",
-      "patternMismatch": "The input does not match the required pattern",
-      "passwordMismatch": "Passwords do not match",
-      "urlInvalid": "Invalid URL format",
-      "numberInvalid": "Please enter a valid number",
-      "dateInvalid": "Invalid date format",
-      "tooShort": "The input is too short",
-      "tooLong": "The input is too long",
-      "checkboxRequired": "You must check this box",
-      "fileTooLarge": "The file size exceeds the limit of {{size}}",
-      "fileTypeInvalid": "Invalid file type",
-      "customError": "Invalid input",
-      "missingUppercase": "Must contain at least one uppercase letter",
-      "missingLowercase": "Must contain at least one lowercase letter",
-      "missingNumber": "Must contain at least one number",
-      "missingSpecialCharacter": "Must contain at least one symbol",
-      "sumOfNumbersGte": "Sum of numbers must be at least or equal to {{count}}",
-      "sumOfNumbersMustBeEven": "Sum of numbers must be be even",
-      "passwordAlreadyTaken": "The password is already taken by another user"
-    },
-    "passwordWeak": "Weak",
-    "passwordOkay": "Okay",
-    "passwordVeryStrong": "Strong"
-  },
-  "genders": {
-    "alien": "Alien",
-    "chymera": "Chymera",
-    "cyborg": "Cyborg",
-    "female": "Female",
-    "male": "Male",
-    "other": "Other",
-    "robot": "Robot"
-  },
-  "date": {
-    "months": [
-      "January",
-      "February",
-      "March",
-      "April",
-      "May",
-      "June",
-      "July",
-      "August",
-      "September",
-      "October",
-      "November",
-      "December"
     ]
   },
+    "date": {
+      "months": [
+        "January",
+        "February",
+        "March",
+        "April",
+        "May",
+        "June",
+        "July",
+        "August",
+        "September",
+        "October",
+        "November",
+        "December"
+      ]
+    },
   "search": {
     "placeholder": "Search...",
     "noResults": "No results found",
     "resultMeta": "Search for \"{{query}}\" took {{time}}ms and found {{count}} results",
     "searching": "Searching",
     "peopleAlsoSearched": "People also searched for:",
-    "topSearches": [
+    "topSearcheVariants": [
       "do fish get thirsty",
       "pasta lyrics",
       "do cars run out of honk",
@@ -278,10 +289,6 @@
       "bog brother"
     ]
   },
-  "article": {
-    "coverImage": "Cover image",
-    "published": "Published at {{date}}"
-  },
   "gifts": {
     "dilf": {
       "title": "DILF",
@@ -293,10 +300,5 @@
     "wanPhone": {
       "title": "Congratulations! You've wan a phone!"
     }
-  },
-  "donate": {
-    "title": "Donations",
-    "description": "This is one feature that actually supposed to work. If you'd like to help support the project or the authors, you can donate here. Every donation helps. We appreciate your support!",
-    "donateLink": "Donation info here"
   }
 }

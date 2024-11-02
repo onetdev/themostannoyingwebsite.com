@@ -35,7 +35,7 @@ const CountryField: FunctionComponent<CountryFieldProps> = ({
           className="w-full"
           values={countryOptions}
           {...register('countryCode', {
-            required: t('validation.errors.required'),
+            required: t('form.validation.errors.required'),
           })}
         />
       </label>

@@ -46,10 +46,10 @@ const PasswordReminder: NextPage = () => {
               type="email"
               className="w-full"
               {...register('email', {
-                required: t('validation.errors.required'),
+                required: t('form.validation.errors.required'),
                 pattern: {
                   value: EMAIL_PATTERN,
-                  message: t('validation.errors.emailInvalid'),
+                  message: t('form.validation.errors.emailInvalid'),
                 },
               })}
             />

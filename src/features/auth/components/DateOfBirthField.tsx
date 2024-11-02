@@ -81,7 +81,7 @@ const DateOfBirthField: FunctionComponent<DateOfBirthFieldProps> = ({
       <input
         type="hidden"
         {...register('dateOfBirth', {
-          required: t('validation.errors.required'),
+          required: t('form.validation.errors.required'),
         })}
       />
       <FormFieldError error={errors.dateOfBirth} />

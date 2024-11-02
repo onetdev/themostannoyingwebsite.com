@@ -31,7 +31,7 @@ const Search: NextPage = () => {
   const [results, setResults] = useState<Result | undefined>();
 
   const topSearchesPool = useMemo(() => {
-    return t('search.topSearches', {
+    return t('search.topSearcheVariants', {
       returnObjects: true,
       defaultValue: [],
     }) as string[];

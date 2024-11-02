@@ -28,21 +28,21 @@ const PasswordCreateField: FunctionComponent<PasswordCreateFieldProps> = ({
           type="password"
           className="w-full"
           {...register('password', {
-            required: t('validation.errors.required'),
+            required: t('form.validation.errors.required'),
             minLength: {
               value: 12,
-              message: t('validation.errors.minLength', { count: 12 }),
+              message: t('form.validation.errors.minLength', { count: 12 }),
             },
             validate: (value) => {
               // Split up in this way to annoy the user the most
               if (!value.match(/[A-Z]/)) {
-                return t('validation.errors.missingUppercase');
+                return t('form.validation.errors.missingUppercase');
               } else if (!value.match(/[a-z]/)) {
-                return t('validation.errors.missingLowercase');
+                return t('form.validation.errors.missingLowercase');
               } else if (!value.match(/[0-9]/)) {
-                return t('validation.errors.missingNumber');
+                return t('form.validation.errors.missingNumber');
               } else if (!value.match(/[^A-Za-z0-9]/)) {
-                return t('validation.errors.missingSpecialCharacter');
+                return t('form.validation.errors.missingSpecialCharacter');
               }
 
               const numbers = value.match(/[0-9]/g) || [];
@@ -50,16 +50,16 @@ const PasswordCreateField: FunctionComponent<PasswordCreateFieldProps> = ({
                 .map(Number)
                 .reduce((a, b) => a + b, 0);
               if (sumOfNumbers < 30) {
-                return t('validation.errors.sumOfNumbersGte', {
+                return t('form.validation.errors.sumOfNumbersGte', {
                   count: 30,
                 });
               }
 
               if (sumOfNumbers % 2) {
-                return t('validation.errors.sumOfNumbersMustBeEven');
+                return t('form.validation.errors.sumOfNumbersMustBeEven');
               }
 
-              return t('validation.errors.passwordAlreadyTaken');
+              return t('form.validation.errors.passwordAlreadyTaken');
             },
           })}
         />

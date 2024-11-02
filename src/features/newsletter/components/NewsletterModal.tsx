@@ -22,8 +22,8 @@ const NewsletterModal: FunctionComponent<NewsletterModalProps> = ({
   const { t } = useTranslation();
   const [flipActions, setFlipActions] = useState(false);
   const [actions, setActions] = useState({
-    confirm: t('experiences.newsletter.modal.initialConfirm'),
-    cancel: t('experiences.newsletter.modal.initialCancel'),
+    confirm: t('newsletter.modal.initialConfirm'),
+    cancel: t('newsletter.modal.initialCancel'),
   } as ConfirmItem satisfies ConfirmItem);
   const {
     register,
@@ -33,7 +33,7 @@ const NewsletterModal: FunctionComponent<NewsletterModalProps> = ({
 
   const confirmPool = useMemo(
     () =>
-      t('experiences.newsletter.modal.confirmations', {
+      t('newsletter.modal.confirmations', {
         returnObjects: true,
         defaultValue: [],
       }) as ConfirmItem[],
@@ -54,7 +54,7 @@ const NewsletterModal: FunctionComponent<NewsletterModalProps> = ({
   };
 
   const onSubmit: SubmitHandler<NewsletterFormInputs> = (_data) => {
-    alert(t('experiences.newsletter.modal.useFormActions'));
+    alert(t('newsletter.modal.useFormActions'));
   };
 
   const randomConfirmation = () => {
@@ -66,7 +66,7 @@ const NewsletterModal: FunctionComponent<NewsletterModalProps> = ({
   return (
     <Modal
       visible={visible}
-      title={t('experiences.newsletter.modal.title')}
+      title={t('newsletter.modal.title')}
       onClose={onDismiss}
       actions={<div className="flex gap-3">{renderActions()}</div>}>
       <form
@@ -76,20 +76,18 @@ const NewsletterModal: FunctionComponent<NewsletterModalProps> = ({
         {actions.text && <p className="mb-4">{actions.text}</p>}
         {!actions.text && (
           <>
-            <p className="mb-4">
-              {t('experiences.newsletter.modal.description')}
-            </p>
+            <p className="mb-4">{t('newsletter.modal.description')}</p>
             <TextInput
-              placeholder={t('experiences.newsletter.modal.placeholder')}
+              placeholder={t('newsletter.modal.placeholder')}
               size="lg"
               type="email"
               className="w-full"
               required
               {...register('email', {
-                required: t('validation.errors.required'),
+                required: t('form.validation.errors.required'),
                 pattern: {
                   value: EMAIL_PATTERN,
-                  message: t('validation.errors.emailInvalid'),
+                  message: t('form.validation.errors.emailInvalid'),
                 },
               })}
             />
