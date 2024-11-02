@@ -23,7 +23,7 @@ const Login: NextPage = () => {
   } = useForm<LoginFormInputs>();
 
   const onSubmit: SubmitHandler<LoginFormInputs> = (_data) => {
-    alert(t('user.loginError'));
+    alert(t('auth.forms.login.genericError'));
   };
 
   return (
@@ -36,7 +36,7 @@ const Login: NextPage = () => {
         onSubmit={handleSubmit(onSubmit)}>
         <div>
           <label>
-            <h4 className="mb-1">{t('user.email')}</h4>
+            <h4 className="mb-1">{t('auth.field.email')}</h4>
             <TextInput
               type="email"
               className="w-full"
@@ -53,7 +53,7 @@ const Login: NextPage = () => {
         </div>
         <div>
           <label>
-            <h4 className="mb-1">{t('user.password')}</h4>
+            <h4 className="mb-1">{t('auth.field.password')}</h4>
             <TextInput
               type="password"
               className="w-full"
@@ -67,7 +67,7 @@ const Login: NextPage = () => {
         <div>
           <label className="flex items-center gap-2">
             <Checkbox {...register('remember')} />
-            <h4>{t('user.rememberMe')}</h4>
+            <h4>{t('auth.field.rememberMe')}</h4>
           </label>
           <FormFieldError error={errors.remember} />
         </div>
@@ -96,14 +96,14 @@ const Login: NextPage = () => {
         </div>
 
         <Button type="submit" className="mt-10" size="lg">
-          {t('actions.login')}
+          {t('auth.forms.login.callToAction')}
         </Button>
         <div className="flex justify-between">
           <Link href="/user/password-reminder" passHref prefetch={false}>
-            {t('user.forgotPassword')}
+            {t('auth.common.forgotPassword')}
           </Link>
           <Link href="/user/registration" passHref prefetch={false}>
-            {t('user.registerAccount')}
+            {t('auth.common.registerAccount')}
           </Link>
         </div>
       </form>

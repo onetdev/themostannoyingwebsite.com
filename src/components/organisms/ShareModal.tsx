@@ -33,7 +33,7 @@ const ShareModal: FunctionComponent<ShareModalProps> = ({
 
   return (
     <Modal
-      title={t('shareModal.title')}
+      title={t('share.modal.title')}
       actions={
         <div className="flex gap-3">
           <FacebookShareButton url={url} className={buttonStyle}>
@@ -49,7 +49,7 @@ const ShareModal: FunctionComponent<ShareModalProps> = ({
       }
       visible={show}
       onClose={handleClose}>
-      <div className="max-w-screen-sm">{t('shareModal.description')}</div>
+      <div className="max-w-screen-sm">{t('share.modal.description')}</div>
     </Modal>
   );
 };

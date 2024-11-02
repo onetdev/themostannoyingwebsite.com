@@ -59,7 +59,7 @@ const DateOfBirthField: FunctionComponent<DateOfBirthFieldProps> = ({
   return (
     <div>
       <label>
-        <h5 className="mb-1">{t('user.dateOfBirth')}</h5>
+        <h5 className="mb-1">{t('auth.field.dateOfBirth')}</h5>
         <div className="flex gap-3">
           <Select
             className="w-1/4"

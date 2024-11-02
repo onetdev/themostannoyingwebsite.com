@@ -28,7 +28,7 @@ const PasswordReminder: NextPage = () => {
   } = useForm<PasswordReminderFormInputs>();
 
   const onSubmit: SubmitHandler<PasswordReminderFormInputs> = (_data) => {
-    alert(t('user.passwordReminderError'));
+    alert(t('auth.forms.passwordReminder.genericError'));
   };
 
   return (
@@ -41,7 +41,7 @@ const PasswordReminder: NextPage = () => {
         onSubmit={handleSubmit(onSubmit)}>
         <div>
           <label>
-            <h4 className="mb-1">{t('user.email')}</h4>
+            <h4 className="mb-1">{t('auth.field.email')}</h4>
             <TextInput
               type="email"
               className="w-full"
@@ -63,14 +63,14 @@ const PasswordReminder: NextPage = () => {
         />
 
         <Button type="submit" className="mt-10" size="lg">
-          {t('user.sendPasswordReminder')}
+          {t('auth.forms.passwordReminder.callToAction')}
         </Button>
         <div className="flex justify-between">
           <Link href="/user/login" passHref prefetch={false}>
-            {t('navigation.login')}
+            {t('auth.common.Login')}
           </Link>
           <Link href="/user/registration" passHref prefetch={false}>
-            {t('user.registerAccount')}
+            {t('auth.common.register')}
           </Link>
         </div>
       </form>

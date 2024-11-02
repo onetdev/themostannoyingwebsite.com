@@ -23,7 +23,7 @@ const PasswordCreateField: FunctionComponent<PasswordCreateFieldProps> = ({
   return (
     <>
       <label>
-        <h4 className="mb-1">{t('user.password')}</h4>
+        <h4 className="mb-1">{t('auth.field.password')}</h4>
         <TextInput
           type="password"
           className="w-full"

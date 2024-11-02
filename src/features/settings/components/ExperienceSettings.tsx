@@ -132,13 +132,13 @@ const ExperienceSettings: FunctionComponent<ExperienceSettingsProps> = ({
           className="mt-6"
           variant="primary"
           onClick={experience.allEnabled}>
-          {t('common:actions.enableAll')}
+          {t('common:common.enableAll')}
         </Button>
         <Button
           className="mt-6"
           variant="secondary"
           onClick={experience.allDisabled}>
-          {t('common:actions.disableAll')}
+          {t('common:common.disableAll')}
         </Button>
       </div>
     </SettingsBlock>

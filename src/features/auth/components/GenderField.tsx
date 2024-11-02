@@ -33,7 +33,7 @@ const GenderField: FunctionComponent<GenderFieldProps> = ({
   return (
     <>
       <label>
-        <h5 className="mb-1">{t('user.gender')}</h5>
+        <h5 className="mb-1">{t('auth.field.gender')}</h5>
         <Select
           values={genderOptions}
           className="w-full"

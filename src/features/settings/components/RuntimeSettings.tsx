@@ -28,16 +28,16 @@ const RuntimeSettings: FunctionComponent = () => {
         {t('settings:section.runtime.isDocumentVisible')}{' '}
         <span>
           {runtime.document.isVisible
-            ? t('common:response.yes')
-            : t('common:response.yes')}
+            ? t('common:common.yes')
+            : t('common:common.no')}
         </span>
       </p>
       <p>
         {t('settings:section.runtime.interactionUnlocked')}{' '}
         <span>
           {runtime.interactionUnlocked
-            ? t('common:response.yes')
-            : t('common:response.yes')}
+            ? t('common:common.yes')
+            : t('common:common.no')}
         </span>
       </p>
       <p>

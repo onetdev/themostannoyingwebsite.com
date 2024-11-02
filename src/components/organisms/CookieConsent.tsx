@@ -21,7 +21,7 @@ const CookieBar: FunctionComponent = () => {
           <Link href="/settings" passHref prefetch={false}>
             {t('navigation.settings')}
           </Link>
-          <button onClick={close}>{t('actions.ok')}</button>
+          <button onClick={close}>{t('common.ok')}</button>
         </div>
       </div>
     )

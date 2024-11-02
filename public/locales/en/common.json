@@ -22,33 +22,77 @@
     "hotThings": "Hot things",
     "dilf": "DILF"
   },
-
-  "response": {
+  "common": {
     "yes": "Yes",
-    "no": "No"
-  },
-  "actions": {
-    "accept": "Accept",
-    "cancel": "Cancel",
-    "close": "Close",
-    "disable": "Disable",
-    "disableAll": "Disable all",
+    "no": "No",
+    "ok": "OK",
     "dismiss": "Dismiss",
+    "cancel": "Cancel",
+    "confirm": "Confirm",
+    "back": "Back",
+    "next": "Next",
+    "accept": "Accept",
+    "decline": "Decline",
+    "submit": "Submit",
+    "save": "Save",
+    "send": "Send",
+    "close": "Close",
     "enable": "Enable",
     "enableAll": "Enable all",
-    "login": "Login",
-    "ok": "OK",
+    "disable": "Disable",
+    "disableAll": "Disable all",
+    "share": "Share",
+    "edit": "Edit",
+    "delete": "Delete",
+    "loading": "Loading...",
     "search": "Search",
-    "send": "Send",
-    "share": "Share"
-  },
-  "status": {
+    "placeholderSearch": "Search...",
     "notSet": "Not set",
     "unknown": "Unknown"
   },
-  "shareModal": {
-    "title": "Share this page",
-    "description": "Spread the misery! Be sure to inflict this painfully obnoxious website on your friends too — why suffer alone when you can drag them down with you?"
+  "share": {
+    "modal": {
+      "title": "Share this page",
+      "description": "Spread the misery! Be sure to inflict this painfully obnoxious website on your friends too — why suffer alone when you can drag them down with you?"
+    }
+  },
+  "auth": {
+    "common": {
+      "registerAccount": "Need an account?",
+      "forgotPassword": "Forgot password?",
+      "Login": "Login",
+      "register": "Register"
+    },
+    "field":{
+      "consentNewsletter": "I want to receive newsletter",
+      "consentPrivacyPolicy": "Accept privacy policy",
+      "countryCode": "Country",
+      "dateOfBirth": "Date of birth",
+      "email": "Email",
+      "firstName": "First name",
+      "gender": "Gender",
+      "lastName": "Last name",
+      "nickname": "Nickname",
+      "password": "Password",
+      "passwordConfirmation": "Password confirmation",
+      "phoneNumber": "Phone number",
+      "rememberMe": "Remember me",
+      "username": "Username"
+    },
+    "forms": {
+      "login": {
+        "genericError": "Login failed",
+        "callToAction": "Login"
+      },
+      "registration": {
+        "genericError": "Registration failed",
+        "callToAction": "Create my account"
+      },
+      "passwordReminder": {
+        "genericError": "Password reminder failed",
+        "callToAction": "Send password reminder"
+      }
+    }
   },
   "cookieConsent": "This website uses cookies to ensure you get the best experience on our website. It's also a joke so many of the features are buggy or doens't even work on purpose. You can customize your experience and cookie settings in the settings menu.",
   "themeSwitch": {
@@ -60,29 +104,6 @@
     "field": "Captcha",
     "captchaEmojiHint": "Count the emojis and identify which one appears the most. Look carefully, as parts of some emojis might be obscured.",
     "captchaTilePuzzleHint": "Slide the tiles into their right position. You can only move the ones directly next to each other."
-  },
-  "user": {
-    "consentNewsletter": "I want to receive newsletter",
-    "consentPrivacyPolicy": "Accept privacy policy",
-    "countryCode": "Country",
-    "createMyAccount": "Create my account",
-    "dateOfBirth": "Date of birth",
-    "email": "Email",
-    "firstName": "First name",
-    "forgotPassword": "Forgot password?",
-    "gender": "Gender",
-    "lastName": "Last name",
-    "loginError": "Login failed",
-    "nickname": "Nickname",
-    "password": "Password",
-    "passwordConfirmation": "Password confirmation",
-    "passwordReminderError": "Password reminder failed",
-    "phoneNumber": "Phone number",
-    "registerAccount": "Need an account?",
-    "registrationError": "Registration failed",
-    "rememberMe": "Remember me",
-    "sendPasswordReminder": "Send password reminder",
-    "username": "Username"
   },
   "experiences": {
     "marqueeVariants": [

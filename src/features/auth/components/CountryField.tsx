@@ -30,7 +30,7 @@ const CountryField: FunctionComponent<CountryFieldProps> = ({
   return (
     <div>
       <label>
-        <h5 className="mb-1">{t('user.countryCode')}</h5>
+        <h5 className="mb-1">{t('auth.field.countryCode')}</h5>
         <Select
           className="w-full"
           values={countryOptions}

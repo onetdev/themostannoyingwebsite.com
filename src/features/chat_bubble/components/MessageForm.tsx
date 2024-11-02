@@ -42,7 +42,7 @@ const MessageForm: FunctionComponent<MessageFormProps> = ({
       />
       <Button
         className="flex items-center rounded-l-none"
-        aria-label={t('common:actions.send')}
+        aria-label={t('common:common.send')}
         type="submit"
         size="md">
         <Icon icon="send" />

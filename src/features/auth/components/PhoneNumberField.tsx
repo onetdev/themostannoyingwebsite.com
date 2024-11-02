@@ -119,7 +119,7 @@ const PhoneNumberField: FunctionComponent<PhoneNumberFieldProps> = ({
   return (
     <div>
       <label>
-        <h5 className="mb-1">{t('user.phoneNumber')}</h5>
+        <h5 className="mb-1">{t('auth.field.phoneNumber')}</h5>
         <div className="flex gap-3">
           <Select
             className="w-1/4"

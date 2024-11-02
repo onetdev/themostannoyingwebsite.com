@@ -25,7 +25,7 @@ const ManualModal: FunctionComponent<ManualModalProps> = ({
         </h3>
         <p>{t('notifications:enableManualModal.description')}</p>
         <Button onClick={onDismiss} className="mt-3">
-          {t('common:actions.dismiss')}
+          {t('common:common.dismiss')}
         </Button>
       </div>
     </DimmerOverlay>
