@@ -13,7 +13,7 @@ import nextI18NextConfig from '@/root/next-i18next.config.js';
 const TheMostAnnoyingWebsite = ({ Component, pageProps }: AppProps) => {
   // Can't use translations here yet, description will be set on page level
   // https://github.com/i18next/next-i18next/tree/v15.2.0#serversidetranslations
-  const description = english.meta.description;
+  const description = english.app.description;
 
   useServiceWorker();
 

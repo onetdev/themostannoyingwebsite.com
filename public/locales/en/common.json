@@ -1,11 +1,13 @@
 {
-  "meta": {
+  "app": {
     "title": "The Most Annoying Website",
     "description": "Self-proclaimed most annoying website on the web with so many disgusting features of modern websites you might even vomit at some point.",
     "recruiting": "Want to extend what you see here? Visit our <linkTag>GitHub</linkTag> repo to get started.",
     "aiDisclose": "AI text and image generation was used to produce contents of this website.",
     "copyright": "Copyright © {{year}} The Most Annoying Website"
   },
+
+  
   "response": {
     "yes": "Yes",
     "no": "No"
