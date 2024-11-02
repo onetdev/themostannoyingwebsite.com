@@ -16,7 +16,7 @@ const CookieBar: FunctionComponent = () => {
   return (
     !completed && (
       <div className="sticky -bottom-3 rounded-md border border-tertiary bg-surface px-5 py-3 shadow-md">
-        <p>{t('cookieConsent')}</p>
+        <p>{t('app.cookieConsent')}</p>
         <div className="my-2 flex items-center justify-end gap-3">
           <Link href="/settings" passHref prefetch={false}>
             {t('navigation.settings')}
