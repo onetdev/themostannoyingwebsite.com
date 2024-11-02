@@ -21,7 +21,7 @@ const HistoryOverlay: FunctionComponent<HistoryOverlayProps> = ({
 }) => {
   const [showTyping, setShowTyping] = useState(true);
   const pagerRef = useRef<HTMLDivElement>(null);
-  const { t } = useTranslation('chat_bubble');
+  const { t } = useTranslation();
 
   useEffect(() => {
     setShowTyping(history[history.length - 1]?.isUser ?? false);
@@ -39,7 +39,8 @@ const HistoryOverlay: FunctionComponent<HistoryOverlayProps> = ({
     <div className="rounded-lg border border-secondary bg-surface">
       <div className="flex flex-row justify-between p-3 pl-5 shadow-sm">
         <h4 className="text-lg font-bold">
-          {t('hudTitle')} <abbr title={t('hudTitleDisclaimer')}>*</abbr>
+          {t('chatBubble.hudTitle')}{' '}
+          <abbr title={t('chatBubble.hudTitleDisclaimer')}>*</abbr>
         </h4>
         <button onClick={() => onClose()}>
           <Icon icon="close" size="lg" />
@@ -54,7 +55,7 @@ const HistoryOverlay: FunctionComponent<HistoryOverlayProps> = ({
             .map((item, index) => <MessageBubble key={index} item={item} />)}
         {showTyping && (
           <DotDotDotText
-            message={t('agentIsTyping')}
+            message={t('chatBubble.agentIsTyping')}
             className="block text-base italic"
           />
         )}

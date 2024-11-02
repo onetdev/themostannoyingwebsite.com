@@ -23,7 +23,7 @@ const Login: NextPage = () => {
   } = useForm<LoginFormInputs>();
 
   const onSubmit: SubmitHandler<LoginFormInputs> = (_data) => {
-    alert(t('auth.forms.login.genericError'));
+    alert(t('user.form.login.genericError'));
   };
 
   return (
@@ -36,15 +36,15 @@ const Login: NextPage = () => {
         onSubmit={handleSubmit(onSubmit)}>
         <div>
           <label>
-            <h4 className="mb-1">{t('auth.field.email')}</h4>
+            <h4 className="mb-1">{t('user.field.email')}</h4>
             <TextInput
               type="email"
               className="w-full"
               {...register('email', {
-                required: t('form.validation.errors.required'),
+                required: t('form.validation.error.required'),
                 pattern: {
                   value: EMAIL_PATTERN,
-                  message: t('form.validation.errors.emailInvalid'),
+                  message: t('form.validation.error.emailInvalid'),
                 },
               })}
             />
@@ -53,12 +53,12 @@ const Login: NextPage = () => {
         </div>
         <div>
           <label>
-            <h4 className="mb-1">{t('auth.field.password')}</h4>
+            <h4 className="mb-1">{t('user.field.password')}</h4>
             <TextInput
               type="password"
               className="w-full"
               {...register('password', {
-                required: t('form.validation.errors.required'),
+                required: t('form.validation.error.required'),
               })}
             />
           </label>
@@ -67,7 +67,7 @@ const Login: NextPage = () => {
         <div>
           <label className="flex items-center gap-2">
             <Checkbox {...register('remember')} />
-            <h4>{t('auth.field.rememberMe')}</h4>
+            <h4>{t('user.field.rememberMe')}</h4>
           </label>
           <FormFieldError error={errors.remember} />
         </div>
@@ -84,10 +84,10 @@ const Login: NextPage = () => {
               type="text"
               className="w-[300px]"
               {...register('captcha', {
-                required: t('form.validation.errors.required'),
+                required: t('form.validation.error.required'),
                 pattern: {
                   value: /^[XyZ123]{444}$/,
-                  message: t('form.validation.errors.captchaInvalid'),
+                  message: t('form.validation.error.captchaInvalid'),
                 },
               })}
             />
@@ -96,14 +96,14 @@ const Login: NextPage = () => {
         </div>
 
         <Button type="submit" className="mt-10" size="lg">
-          {t('auth.forms.login.callToAction')}
+          {t('user.form.login.callToAction')}
         </Button>
         <div className="flex justify-between">
           <Link href="/user/password-reminder" passHref prefetch={false}>
-            {t('auth.common.forgotPassword')}
+            {t('user.common.forgotPassword')}
           </Link>
           <Link href="/user/registration" passHref prefetch={false}>
-            {t('auth.common.registerAccount')}
+            {t('user.common.registerAccount')}
           </Link>
         </div>
       </form>

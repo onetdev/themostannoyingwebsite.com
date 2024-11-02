@@ -29,18 +29,18 @@ const initialMessage = (text: string) => ({
  * to the history now with a notification sound.
  */
 const ChatBubbleHost: FunctionComponent = () => {
-  const { t } = useTranslation('chat_bubble');
+  const { t } = useTranslation();
   const enableSound = useUserPreferencesStore((state) => state.enableSound);
   const hasInteracted = useRuntimeStore((state) => state.interactionUnlocked);
   const [history, setHistory] = useState([
-    initialMessage(t('messageInitial')),
+    initialMessage(t('chatBubble.messageInitial')),
   ] as HistoryItem[]);
   const [isOpen, setIsOpen] = useState(false);
   const [badgeCounter, setBadgeCounter] = useState(1);
   const notification = useSendNotification();
   const notificationSfx = useAudio('/assets/sfx/notification_chord1.wav');
 
-  const messages = t('messages', {
+  const messages = t('chatBubble.messageVariants', {
     returnObjects: true,
     defaultValue: [],
   }) as string[];
@@ -62,7 +62,7 @@ const ChatBubbleHost: FunctionComponent = () => {
   const sendNotification = useCallback(
     (message: string) => {
       notification.send({
-        title: t('newAlert'),
+        title: t('chatBubble.newAlert'),
         body: message,
       });
     },
@@ -74,7 +74,7 @@ const ChatBubbleHost: FunctionComponent = () => {
       (message) => !history.some((item) => item.text === message),
     );
     if (pool.length == 0) {
-      pool.push(t('messageFallback'));
+      pool.push(t('chatBubble.messageFallback'));
     }
     const randomMessage = pool[Math.floor(Math.random() * pool.length)];
     addHistory(randomMessage, false);

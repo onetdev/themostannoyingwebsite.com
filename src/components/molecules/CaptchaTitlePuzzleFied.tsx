@@ -30,7 +30,7 @@ const CaptchaTitlePuzzleField: FunctionComponent<
       <input
         type="hidden"
         {...register('captcha', {
-          required: t('form.validation.errors.captchaInvalid'),
+          required: t('form.validation.error.captchaInvalid'),
         })}
       />
       <FormFieldError error={errors.captcha} />

@@ -84,10 +84,10 @@ const NewsletterModal: FunctionComponent<NewsletterModalProps> = ({
               className="w-full"
               required
               {...register('email', {
-                required: t('form.validation.errors.required'),
+                required: t('form.validation.error.required'),
                 pattern: {
                   value: EMAIL_PATTERN,
-                  message: t('form.validation.errors.emailInvalid'),
+                  message: t('form.validation.error.emailInvalid'),
                 },
               })}
             />

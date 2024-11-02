@@ -31,10 +31,10 @@ const CaptchaEmojiField: FunctionComponent<CaptchaEmojiFieldProps> = ({
           type="text"
           className="w-[300px]"
           {...register('captcha', {
-            required: t('form.validation.errors.required'),
+            required: t('form.validation.error.required'),
             pattern: {
               value: /^[XyZ123]{444}$/,
-              message: t('form.validation.errors.captchaInvalid'),
+              message: t('form.validation.error.captchaInvalid'),
             },
           })}
         />
