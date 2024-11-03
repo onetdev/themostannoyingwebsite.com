@@ -1,11 +1,11 @@
 import { useTranslation } from 'next-i18next';
 import { FunctionComponent } from 'react';
 
-import SettingsBlock from './SettingsBlock';
 import SettingsBlockRow from './SettingsBlockRow';
 
 import Button from '@/components/atoms/Button';
 import FormCheckbox from '@/components/atoms/Checkbox';
+import BorderedBox from '@/components/templates/BorderedBox';
 import { useExperienceFlagsStore } from '@/state/experience_flags';
 
 type ExperienceSettingsProps = {
@@ -24,7 +24,7 @@ const ExperienceSettings: FunctionComponent<ExperienceSettingsProps> = ({
     experience.setPageTitle({ inactiveArrayPaged: value });
 
   return (
-    <SettingsBlock
+    <BorderedBox
       title={t('settings.optionalExperienceFlags.title')}
       className={className}>
       <div className={listClassName}>
@@ -141,7 +141,7 @@ const ExperienceSettings: FunctionComponent<ExperienceSettingsProps> = ({
           {t('common.disableAll')}
         </Button>
       </div>
-    </SettingsBlock>
+    </BorderedBox>
   );
 };
 

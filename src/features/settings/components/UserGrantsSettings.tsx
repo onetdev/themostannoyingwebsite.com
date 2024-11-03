@@ -1,10 +1,10 @@
 import { useTranslation } from 'next-i18next';
 import { FunctionComponent } from 'react';
 
-import SettingsBlock from './SettingsBlock';
 import SettingsBlockRow from './SettingsBlockRow';
 
 import FormCheckbox from '@/components/atoms/Checkbox';
+import BorderedBox from '@/components/templates/BorderedBox';
 import { useUserGrantsStore } from '@/state/user_grants';
 
 const UserGrantsSettings: FunctionComponent = () => {
@@ -12,7 +12,7 @@ const UserGrantsSettings: FunctionComponent = () => {
   const { t } = useTranslation();
 
   return (
-    <SettingsBlock title={t('settings.userGrants.title')}>
+    <BorderedBox title={t('settings.userGrants.title')}>
       <SettingsBlockRow label={t('settings.userGrants.essentialCookies')}>
         <FormCheckbox
           name="essential_cookies"
@@ -35,7 +35,7 @@ const UserGrantsSettings: FunctionComponent = () => {
         reverse>
         {`${grant.permission.location || t('common.notSet')}`}
       </SettingsBlockRow>
-    </SettingsBlock>
+    </BorderedBox>
   );
 };
 

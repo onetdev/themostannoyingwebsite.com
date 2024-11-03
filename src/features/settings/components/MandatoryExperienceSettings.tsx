@@ -1,15 +1,15 @@
 import { useTranslation } from 'next-i18next';
 import { FunctionComponent } from 'react';
 
-import SettingsBlock from './SettingsBlock';
 import SettingsBlockRow from './SettingsBlockRow';
 
 import FormCheckbox from '@/components/atoms/Checkbox';
+import BorderedBox from '@/components/templates/BorderedBox';
 
 const MandatoryExperienceSettings: FunctionComponent = () => {
   const { t } = useTranslation();
   return (
-    <SettingsBlock title={t('settings.mandatoryExperienceFlags.title')}>
+    <BorderedBox title={t('settings.mandatoryExperienceFlags.title')}>
       <SettingsBlockRow
         label={t('settings.mandatoryExperienceFlags.unreasonableContent')}>
         <FormCheckbox name="unreasonable_content" checked={true} disabled />
@@ -32,7 +32,7 @@ const MandatoryExperienceSettings: FunctionComponent = () => {
           disabled
         />
       </SettingsBlockRow>
-    </SettingsBlock>
+    </BorderedBox>
   );
 };
 

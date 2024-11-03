@@ -2,8 +2,7 @@ import { useTranslation } from 'next-i18next';
 import { FunctionComponent } from 'react';
 import ReactTimeAgo from 'react-timeago';
 
-import SettingsBlock from './SettingsBlock';
-
+import BorderedBox from '@/components/templates/BorderedBox';
 import { useRuntimeStore } from '@/state/runtime';
 
 const RuntimeSettings: FunctionComponent = () => {
@@ -11,7 +10,7 @@ const RuntimeSettings: FunctionComponent = () => {
   const { t } = useTranslation();
 
   return (
-    <SettingsBlock title={t('settings.runtime.title')}>
+    <BorderedBox title={t('settings.runtime.title')}>
       <small>
         <i>{t('settings.runtime.disclaimer')}</i>
       </small>
@@ -40,7 +39,7 @@ const RuntimeSettings: FunctionComponent = () => {
         {t('settings.runtime.navigationCount')}{' '}
         <span>{runtime.navigationCount}</span>
       </p>
-    </SettingsBlock>
+    </BorderedBox>
   );
 };
 
