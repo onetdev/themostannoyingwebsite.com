@@ -1,5 +1,5 @@
 import { useTranslation } from 'next-i18next';
-import { FunctionComponent, useEffect, useRef, useState } from 'react';
+import { FunctionComponent, useEffect, useMemo, useRef, useState } from 'react';
 
 import MessageBubble from './MessageBubble';
 import MessageForm from './MessageForm';
@@ -8,23 +8,25 @@ import DotDotDotText from '@/components/atoms/DotDotDotText';
 import Icon from '@/components/atoms/Icon';
 import { HistoryItem } from '@/features/chat_bubble/types';
 
-type HistoryOverlayProps = {
+export type HistoryOverlayProps = {
   history: HistoryItem[];
-  onUserMessage: (message: string) => void;
   onClose: () => void;
+  onUserMessage: (message: string) => void;
+  open?: boolean;
 };
 
 const HistoryOverlay: FunctionComponent<HistoryOverlayProps> = ({
-  onUserMessage,
   history,
   onClose,
+  onUserMessage,
+  open = false,
 }) => {
   const [showTyping, setShowTyping] = useState(true);
   const pagerRef = useRef<HTMLDivElement>(null);
   const { t } = useTranslation();
 
   useEffect(() => {
-    setShowTyping(history[history.length - 1]?.isUser ?? false);
+    setShowTyping(history[history.length - 1]?.owner === 'user');
   }, [history]);
 
   // We don't care about the current scroll position, this will force the user
@@ -33,7 +35,14 @@ const HistoryOverlay: FunctionComponent<HistoryOverlayProps> = ({
     (pagerRef.current?.lastChild as HTMLDivElement | undefined)?.scrollIntoView(
       { behavior: 'smooth' },
     );
-  }, [history, showTyping]);
+  }, [history, showTyping, open]);
+
+  const historyViewData = useMemo(() => {
+    return history.map((item, index) => ({
+      item,
+      showTime: shouldBubbleShowTime(item, history[index + 1]),
+    }));
+  }, [history]);
 
   return (
     <div className="rounded-lg border border-secondary bg-surface">
@@ -47,16 +56,16 @@ const HistoryOverlay: FunctionComponent<HistoryOverlayProps> = ({
         </button>
       </div>
       <div
-        className="flex max-h-clamp-300-screen-2/1 flex-col gap-3 overflow-auto px-5 py-3"
+        className="flex max-h-clamp-300-screen-2/1 flex-col gap-2 overflow-auto px-5 py-3"
         ref={pagerRef}>
         {history.length > 0 &&
-          history
-            .sort((a, b) => a.time.getTime() - b.time.getTime())
-            .map((item, index) => <MessageBubble key={index} item={item} />)}
+          historyViewData.map(({ item, showTime }, index) => (
+            <MessageBubble key={index} item={item} showTime={showTime} />
+          ))}
         {showTyping && (
           <DotDotDotText
             message={t('chatBubble.agentIsTyping')}
-            className="block text-base italic"
+            className="block text-sm italic md:text-base"
           />
         )}
       </div>
@@ -65,6 +74,14 @@ const HistoryOverlay: FunctionComponent<HistoryOverlayProps> = ({
         onMessage={onUserMessage}
       />
     </div>
+  );
+};
+
+const shouldBubbleShowTime = (current: HistoryItem, compareTo: HistoryItem) => {
+  if (!compareTo || current.owner !== compareTo.owner) return true;
+
+  return (
+    Math.abs(current.time.getTime() - compareTo.time.getTime()) > 5 * 60 * 1000
   );
 };
 
