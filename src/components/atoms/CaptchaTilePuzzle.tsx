@@ -1,6 +1,6 @@
 import { FunctionComponent, useEffect, useMemo, useState } from 'react';
 
-import { shuffleArray } from '@/utils/array';
+import { arrayShuffle } from '@/utils/array';
 import { isPoint2d, Point2d } from '@/utils/math';
 
 interface CaptchaTilePuzzleProps {
@@ -47,8 +47,8 @@ const CaptchaTilePuzzle: FunctionComponent<CaptchaTilePuzzleProps> = ({
       }
     }
 
-    const coordShuffle = shuffleArray(coordSeries);
-    const valueShuffle = shuffleArray(resolutionSeries);
+    const coordShuffle = arrayShuffle(coordSeries);
+    const valueShuffle = arrayShuffle(resolutionSeries);
     const empty = valueShuffle[valueShuffle.length - 1];
 
     const puzzle = coordShuffle.map(
