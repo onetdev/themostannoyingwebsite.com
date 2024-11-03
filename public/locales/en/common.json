@@ -478,5 +478,14 @@
     "agentIsTyping": "Agent is typing",
     "yourMessage": "Your message",
     "yourMessagePlaceholder": "Type here..."
+  },
+  "messages": {
+    "errors": {
+      "e404title": "Error 404",
+      "e404description": "Page not found, how could this happen"
+    },
+    "info": {
+      "pictureOfYou": "Picture of you"
+    }
   }
 }

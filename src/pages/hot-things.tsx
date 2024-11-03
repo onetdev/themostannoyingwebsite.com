@@ -66,7 +66,7 @@ const HotThings: NextPage = () => {
         <Image
           className="absolute h-auto w-full"
           src="/assets/images/lava.webp"
-          alt="Picture of you"
+          alt={t('messages.info.pictureOfYou')}
           width={1920}
           height={1080}
         />
