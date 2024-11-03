@@ -216,7 +216,8 @@
       "impossibleLogin": "Impossible login",
       "impossibleRegistration": "Impossible registration",
       "impossiblePasswordReminder": "Impossible password reminder",
-      "unreasonableContent": "Unreasonable content"
+      "unreasonableContent": "Unreasonable content",
+      "flaimYourPhone": "Flaim your phone"
     },
     "runtime": {
       "title": "About this session",
@@ -325,7 +326,124 @@
       "flapRight": "DILF. Tastiest donuts in your proximity"
     },
     "wanPhone": {
-      "title": "Congratulations! You've wan a phone!"
+      "title": "Congratulations! You've wan a phone! Flaim now!",
+      "survey": {
+        "description": "Fill out this quick survey and you might have a chance to flaim your new phone! Be precise and quick but not too quick.",
+        "lost": {
+          "text": "Sorry, looks like you have not finished the survey in time.",
+          "callToAction": "Back to home"
+        },
+        "cheatDetected": {
+          "text": "Cheating detected! You are not allowed to flaim your phone.",
+          "callToAction": "Back to home"
+        },
+        "completed": {
+          "text": "Thank you for participating! Unfortunatelly phone cannot be flaimed at this time.",
+          "callToAction": "Back to home"
+        },
+        "questionVariants": [
+          {
+            "text": "How old are you?",
+            "options": [
+              "<18",
+              "18-24",
+              "25-34",
+              "35-44",
+              "45-54",
+              "55-64",
+              "65+"
+            ]
+          },
+          {
+            "text": "What is the most common favorite color?",
+            "options": [
+              "Red",
+              "Green",
+              "Blue",
+              "Yellow",
+              "Orange",
+              "Purple",
+              "Black",
+              "White"
+            ],
+            "solution": "Blue"
+          },
+          {
+            "text": "It has four legs, it's not a chair but a table",
+            "options": [
+              "Spider",
+              "Horse",
+              "Yes",
+              "Table"
+            ],
+            "solution": "Table"
+          },
+          {
+            "text": "What is the square root of 144?",
+            "options": [
+              "10",
+              "11",
+              "12",
+              "17"
+            ],
+            "solution": "12"
+          },
+          {
+            "text": "How much wood would a woodchuck chuck if a woodchuck could chuck wood?",
+            "options": [
+              "Yes",
+              "700 pounds",
+              "144",
+              "Inf",
+              "Rather not say"
+            ],
+            "solution": "700 pounds"
+          },
+          {
+            "text": "Finish the following: Well, well, well...",
+            "options": [
+              "How the turntables...",
+              "I did not hit her",
+              "It's down there somewhere, let me take another look",
+              "You can't park there"
+            ],
+            "solution": "How the turntables..."
+          },
+          {
+            "text": "What is the following is not a phone brand",
+            "options": [
+              "Nokia",
+              "Samsung",
+              "Apple",
+              "Motorola",
+              "Blablabluba"
+            ],
+            "solution": "Blablabluba"
+          },
+          {
+            "text": "What is the first letter of the alphabet?",
+            "options": [
+              "A",
+              "B",
+              "C",
+              "D",
+              "E",
+              "F",
+              "G",
+              "H"
+            ],
+            "solution": "A"
+          },
+          {
+            "text": "Do you believe in magic?",
+            "options": [
+              "Yes",
+              "No"
+            ],
+            "solution": "Yes"
+          }
+        ]
+      }
     }
   },
   "wheelOfFortune": {

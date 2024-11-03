@@ -10,7 +10,7 @@ import SiteTitle from '@/components/atoms/SiteTitle';
 import SearchForm from '@/components/organisms/SearchForm';
 import { ArticleSearchResult, ArticleService } from '@/features/articles';
 import { useExperienceFlagsStore } from '@/state/experience_flags';
-import { shuffleArray } from '@/utils/array';
+import { arrayShuffle } from '@/utils/array';
 import { makeI18nStaticProps } from '@/utils/i18n';
 import { random } from '@/utils/math';
 
@@ -84,7 +84,7 @@ const Search: NextPage = () => {
         query,
         time: time.toString().substring(0, time.toString().indexOf('.') + 6),
         count: matches.length,
-        topSearches: shuffleArray(topSearchesPool).slice(0, 3),
+        topSearches: arrayShuffle(topSearchesPool).slice(0, 3),
         items: matches,
       });
       setLoading(false);

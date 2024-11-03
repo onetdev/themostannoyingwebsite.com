@@ -2,10 +2,9 @@ import { useTranslation } from 'next-i18next';
 import { useTheme } from 'next-themes';
 import { FunctionComponent } from 'react';
 
-import SettingsBlock from './SettingsBlock';
-import SettingsBlockRow from './SettingsBlockRow';
-
 import FormCheckbox from '@/components/atoms/Checkbox';
+import FormRow from '@/components/molecules/FormRow';
+import BorderedBox from '@/components/templates/BorderedBox';
 import { useUserPreferencesStore } from '@/state/user_preferences';
 
 const PreferencesSettings: FunctionComponent = () => {
@@ -17,36 +16,36 @@ const PreferencesSettings: FunctionComponent = () => {
   };
 
   return (
-    <SettingsBlock title={t('settings.userPreferences.title')}>
-      <SettingsBlockRow label={t('settings.userPreferences.darkMode')}>
+    <BorderedBox title={t('settings.userPreferences.title')}>
+      <FormRow label={t('settings.userPreferences.darkMode')}>
         <FormCheckbox
           name="dark_mode"
           checked={resolvedTheme === 'dark'}
           onValueChange={setDarkMode}
         />
-      </SettingsBlockRow>
-      <SettingsBlockRow label={t('settings.userPreferences.enableFlashing')}>
+      </FormRow>
+      <FormRow label={t('settings.userPreferences.enableFlashing')}>
         <FormCheckbox
           name="enable_flashing"
           checked={preference.enableFlashing}
           onValueChange={preference.setEnableFlashing}
         />
-      </SettingsBlockRow>
-      <SettingsBlockRow label={t('settings.userPreferences.enableSound')}>
+      </FormRow>
+      <FormRow label={t('settings.userPreferences.enableSound')}>
         <FormCheckbox
           name="enable_sound"
           checked={preference.enableSound}
           onValueChange={preference.setEnableSound}
         />
-      </SettingsBlockRow>
-      <SettingsBlockRow label={t('settings.userPreferences.adultFilter')}>
+      </FormRow>
+      <FormRow label={t('settings.userPreferences.adultFilter')}>
         <FormCheckbox
           name="adult_filter"
           checked={preference.adultFilter}
           onValueChange={preference.setAdultFilter}
         />
-      </SettingsBlockRow>
-    </SettingsBlock>
+      </FormRow>
+    </BorderedBox>
   );
 };
 
