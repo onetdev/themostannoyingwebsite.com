@@ -9,6 +9,7 @@ export interface RuntimeState {
   interactionUnlocked: boolean;
   navigationCount: number;
   startedAt?: string;
+  flaimSurveyCompleted?: false | 'won' | 'lost';
 }
 
 export interface RuntimeStateActions {
@@ -16,6 +17,9 @@ export interface RuntimeStateActions {
   markInteractionUnlocked: () => void;
   incrementNavigationCount: () => void;
   incrementVisibilitySeconds: () => void;
+  setFlaimSurveyCompleted: (
+    flaimSurveyCompleted: RuntimeState['flaimSurveyCompleted'],
+  ) => void;
 }
 
 export interface RuntimeStore extends RuntimeState, RuntimeStateActions {}
@@ -29,6 +33,7 @@ const initialState: RuntimeState = {
   startedAt: undefined,
   navigationCount: 0,
   interactionUnlocked: false,
+  flaimSurveyCompleted: undefined,
 };
 
 export const useRuntimeStore = create<RuntimeStore>((set) => ({
@@ -54,4 +59,6 @@ export const useRuntimeStore = create<RuntimeStore>((set) => ({
       },
       startedAt: state.startedAt ?? new Date().toISOString(),
     })),
+  setFlaimSurveyCompleted: (flaimSurveyCompleted) =>
+    set({ flaimSurveyCompleted }),
 }));

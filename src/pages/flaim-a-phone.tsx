@@ -1,6 +1,7 @@
 import { NextPage } from 'next';
 import { useTranslation } from 'next-i18next';
 
+import { FlaimSurvery } from '@/features/gifts';
 import { makeI18nStaticProps } from '@/utils/i18n';
 
 const FlaimWanPhone: NextPage = () => {
@@ -9,8 +10,7 @@ const FlaimWanPhone: NextPage = () => {
   return (
     <main>
       <h1>{t('gifts.wanPhone.title')}</h1>
-      {/* TODO: Add simple questioneer with timer */}
-      <p className="my-5 max-w-screen-md">Survey incoming</p>
+      <FlaimSurvery className="my-5 max-w-screen-md" />
     </main>
   );
 };

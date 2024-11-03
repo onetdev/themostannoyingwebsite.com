@@ -1,10 +1,9 @@
 import { useTranslation } from 'next-i18next';
 import { FunctionComponent } from 'react';
 
-import SettingsBlockRow from './SettingsBlockRow';
-
 import Button from '@/components/atoms/Button';
 import FormCheckbox from '@/components/atoms/Checkbox';
+import FormRow from '@/components/molecules/FormRow';
 import BorderedBox from '@/components/templates/BorderedBox';
 import { useExperienceFlagsStore } from '@/state/experience_flags';
 
@@ -28,71 +27,63 @@ const ExperienceSettings: FunctionComponent<ExperienceSettingsProps> = ({
       title={t('settings.optionalExperienceFlags.title')}
       className={className}>
       <div className={listClassName}>
-        <SettingsBlockRow
-          label={t('settings.optionalExperienceFlags.gifts.flaps')}>
+        <FormRow label={t('settings.optionalExperienceFlags.gifts.flaps')}>
           <FormCheckbox
             name="gift_flaps"
             checked={experience.gifts.flaps}
             onValueChange={(flaps) => experience.setGifts({ flaps })}
           />
-        </SettingsBlockRow>
-        <SettingsBlockRow
-          label={t('settings.optionalExperienceFlags.gifts.oneByOne')}>
+        </FormRow>
+        <FormRow label={t('settings.optionalExperienceFlags.gifts.oneByOne')}>
           <FormCheckbox
             name="gift_flaps"
             checked={experience.gifts.oneByOne}
             onValueChange={(oneByOne) => experience.setGifts({ oneByOne })}
           />
-        </SettingsBlockRow>
-        <SettingsBlockRow
-          label={t('settings.optionalExperienceFlags.contentPaywall')}>
+        </FormRow>
+        <FormRow label={t('settings.optionalExperienceFlags.contentPaywall')}>
           <FormCheckbox
             name="content_paywall"
             checked={experience.contentPaywall}
             onValueChange={experience.setContentPaywall}
           />
-        </SettingsBlockRow>
-        <SettingsBlockRow
-          label={t('settings.optionalExperienceFlags.deadPixel')}>
+        </FormRow>
+        <FormRow label={t('settings.optionalExperienceFlags.deadPixel')}>
           <FormCheckbox
             name="dead_pixel"
             checked={experience.deadPixel}
             onValueChange={experience.setDeadPixel}
           />
-        </SettingsBlockRow>
-        <SettingsBlockRow
-          label={t('settings.optionalExperienceFlags.exitPrompt')}>
+        </FormRow>
+        <FormRow label={t('settings.optionalExperienceFlags.exitPrompt')}>
           <FormCheckbox
             name="exit_prompt"
             checked={experience.exitPrompt}
             onValueChange={experience.setExitPrompt}
           />
-        </SettingsBlockRow>
-        <SettingsBlockRow
-          label={t('settings.optionalExperienceFlags.mockChat')}>
+        </FormRow>
+        <FormRow label={t('settings.optionalExperienceFlags.mockChat')}>
           <FormCheckbox
             name="mock_chat"
             checked={experience.mockChat}
             onValueChange={experience.setMockChat}
           />
-        </SettingsBlockRow>
-        <SettingsBlockRow
-          label={t('settings.optionalExperienceFlags.newsletterModal')}>
+        </FormRow>
+        <FormRow label={t('settings.optionalExperienceFlags.newsletterModal')}>
           <FormCheckbox
             name="newsletter"
             checked={experience.newsletterModal}
             onValueChange={experience.setNewsletterModal}
           />
-        </SettingsBlockRow>
-        <SettingsBlockRow
-          label={t('settings.optionalExperienceFlags.notifications')}>
+        </FormRow>
+        <FormRow label={t('settings.optionalExperienceFlags.notifications')}>
           <FormCheckbox
             name="notifications"
             checked={experience.notifications}
             onValueChange={experience.setNotifications}
           />
-        </SettingsBlockRow>
-        <SettingsBlockRow
+        </FormRow>
+        <FormRow
           label={t(
             'settings.optionalExperienceFlags.pageTitleInactiveArrayPaged',
           )}>
@@ -101,31 +92,28 @@ const ExperienceSettings: FunctionComponent<ExperienceSettingsProps> = ({
             checked={experience.pageTitle.inactiveArrayPaged}
             onValueChange={onPageTitleInactiveArrayPagedChange}
           />
-        </SettingsBlockRow>
-        <SettingsBlockRow
-          label={t('settings.optionalExperienceFlags.searchDelay')}>
+        </FormRow>
+        <FormRow label={t('settings.optionalExperienceFlags.searchDelay')}>
           <FormCheckbox
             name="search_delay"
             checked={experience.searchDelay}
             onValueChange={experience.setSearchDelay}
           />
-        </SettingsBlockRow>
-        <SettingsBlockRow
-          label={t('settings.optionalExperienceFlags.stickyVideo')}>
+        </FormRow>
+        <FormRow label={t('settings.optionalExperienceFlags.stickyVideo')}>
           <FormCheckbox
             name="sticky_video"
             checked={experience.stickyVideo}
             onValueChange={experience.setStickyVideo}
           />
-        </SettingsBlockRow>
-        <SettingsBlockRow
-          label={t('settings.optionalExperienceFlags.wheelOfFortune')}>
+        </FormRow>
+        <FormRow label={t('settings.optionalExperienceFlags.wheelOfFortune')}>
           <FormCheckbox
             name="wheel_of_fortune"
             checked={experience.wheelOfFortune}
             onValueChange={experience.setWheelOfFortune}
           />
-        </SettingsBlockRow>
+        </FormRow>
       </div>
       <div className="flex gap-3">
         <Button
