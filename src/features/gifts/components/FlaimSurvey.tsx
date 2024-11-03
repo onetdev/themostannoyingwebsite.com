@@ -86,7 +86,7 @@ const FlaimSurvery: FunctionComponent<FlaimSurveryProps> = ({
   console.log(progression);
 
   return (
-    <BorderedBox className={`flex max-w-screen-md gap-3 ${className}`}>
+    <BorderedBox className={`flex gap-3 ${className}`}>
       {isCompleted === false && (
         <>
           <p className="mb-2 font-bold">
