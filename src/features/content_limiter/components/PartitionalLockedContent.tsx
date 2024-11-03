@@ -26,7 +26,7 @@ const PartitionalLockedContent: FunctionComponent<
   className,
   ...rest
 }) => {
-  const { t } = useTranslation(['content_limiter']);
+  const { t } = useTranslation();
   const [maxHeight, setMaxHeight] = useState(initialMaxHeight);
   const [isRevealed, setRevealed] = useState(false);
   const [flipActions, setFlipActions] = useState(false);
@@ -58,14 +58,14 @@ const PartitionalLockedContent: FunctionComponent<
         key="cta"
         size="sm"
         onMouseEnter={() => setFlipActions((prev) => !prev)}>
-        {t('content_limiter:partitional.cta')}*
+        {t('paywall.overlay.confirm')}*
       </Button>,
       <Button
         variant="secondary"
         onClick={handleRevealClick}
         size="sm"
         key="cancel">
-        {t('content_limiter:partitional.cancel')}
+        {t('paywall.overlay.cancel')}
       </Button>,
     ];
 
@@ -82,10 +82,10 @@ const PartitionalLockedContent: FunctionComponent<
         data-hidden={!active || isRevealed ? 'true' : 'false'}
         className="absolute left-0 w-full bg-bottom-fadeout opacity-0 transition-all duration-300 ease-in-out data-[hidden=false]:bottom-0 data-[hidden=false]:opacity-100">
         <div className="mx-auto w-full max-w-screen-md pt-16">
-          <h3 className="mb-4">{t('partitional.title')}</h3>
+          <h3 className="mb-4">{t('paywall.overlay.title')}</h3>
           <div className="my-3 flex gap-2">{renderButtons()}</div>
           <div className="block text-xs italic">
-            * {t('content_limiter:partitional.disclaimer')}
+            * {t('paywall.overlay.disclaimer')}
           </div>
         </div>
       </div>

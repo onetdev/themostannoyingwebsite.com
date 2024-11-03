@@ -17,18 +17,27 @@ const ModalContent: FunctionComponent<ModalContentProps> = ({
   onClose,
   ...rest
 }) => {
-  const { t } = useTranslation(['wheel_of_fortune', 'common']);
+  const { t } = useTranslation();
   const hueStart = 300; // random(0,360);
   const [state, setState] = useState<AnimatedWheelState>('ready');
   const [prize, setPrize] = useState<Item | undefined>();
 
   const prizeWithWeight = useMemo(
     () => [
-      { value: `${t('prizes.free_lifetime_beer')}*`, weight: 10 },
-      { value: `${t('prizes.world_peace')}*`, weight: 1 },
-      { value: t('prizes.absolutelly_nothing'), weight: 100 },
-      { value: `${t('prizes.complimentary_otter')}*`, weight: 2 },
-      { value: t('prizes.fake_70_discount'), weight: 50 },
+      {
+        value: `${t('wheelOfFortune.prizeVariants.freeLifetimeBeer')}*`,
+        weight: 10,
+      },
+      { value: `${t('wheelOfFortune.prizeVariants.worldPeace')}*`, weight: 1 },
+      {
+        value: t('wheelOfFortune.prizeVariants.absolutellyNothing'),
+        weight: 100,
+      },
+      {
+        value: `${t('wheelOfFortune.prizeVariants.complimentaryOtter')}*`,
+        weight: 2,
+      },
+      { value: t('wheelOfFortune.prizeVariants.fake70Discount'), weight: 50 },
     ],
     [t],
   );
@@ -43,7 +52,7 @@ const ModalContent: FunctionComponent<ModalContentProps> = ({
       {...rest}>
       <div className="grow">
         <button
-          aria-label={t('common:actions.close')}
+          aria-label={t('common.close')}
           className="absolute right-0 top-0 z-10 cursor-pointer p-3"
           onClick={() => onClose?.()}>
           <Icon icon="close" size="lg" />
@@ -64,8 +73,10 @@ const ModalContent: FunctionComponent<ModalContentProps> = ({
         />
       </div>
       <span className="w-full bg-primary p-5 text-center text-xl font-bold text-on-primary">
-        {state !== 'completed' && t('spin_start')}
-        {state === 'completed' && prize && t('spin_win', { prize: prize.text })}
+        {state !== 'completed' && t('wheelOfFortune.spinStart')}
+        {state === 'completed' &&
+          prize &&
+          t('wheelOfFortune.spinWin', { prize: prize.text })}
       </span>
     </div>
   );

@@ -25,7 +25,7 @@ const ArticleItem: NextPage<ArticleItemProps> = (props: ArticleItemProps) => {
     return <Error statusCode={404} />;
   }
 
-  const pageTitle = `${data.title} - ${t('meta.title')}`;
+  const pageTitle = `${data.title} - ${t('app.title')}`;
 
   return (
     <main>

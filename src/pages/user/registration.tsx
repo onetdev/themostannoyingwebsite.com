@@ -37,13 +37,13 @@ const Registration: NextPage = () => {
   });
 
   const onSubmit: SubmitHandler<RegistrationFormInputs> = (_data) => {
-    alert(t('user.registrationError'));
+    alert(t('user.form.registration.genericError'));
   };
 
   return (
     <main className="mx-auto max-w-[900px] py-0 md:py-14">
-      <SiteTitle>{t('navigation.registration')}</SiteTitle>
-      <PageHeadline>{t('navigation.registration')}</PageHeadline>
+      <SiteTitle>{t('navigation.register')}</SiteTitle>
+      <PageHeadline>{t('navigation.register')}</PageHeadline>
       <form
         className="flex flex-col gap-3 lg:flex-row lg:gap-10"
         method="post"
@@ -52,12 +52,12 @@ const Registration: NextPage = () => {
           <div className="flex flex-row gap-5">
             <div className="grow">
               <label>
-                <h4 className="mb-1">{t('user.firstName')}</h4>
+                <h4 className="mb-1">{t('user.field.firstName')}</h4>
                 <TextInput
                   type="text"
                   className="w-full"
                   {...register('firstName', {
-                    required: t('validation.errors.required'),
+                    required: t('form.validation.error.required'),
                   })}
                 />
               </label>
@@ -65,12 +65,12 @@ const Registration: NextPage = () => {
             </div>
             <div className="grow">
               <label>
-                <h4 className="mb-1">{t('user.lastName')}</h4>
+                <h4 className="mb-1">{t('user.field.lastName')}</h4>
                 <TextInput
                   type="text"
                   className="w-full"
                   {...register('lastName', {
-                    required: t('validation.errors.required'),
+                    required: t('form.validation.error.required'),
                   })}
                 />
               </label>
@@ -79,7 +79,7 @@ const Registration: NextPage = () => {
           </div>
           <div>
             <label>
-              <h4 className="mb-1">{t('user.nickname')}</h4>
+              <h4 className="mb-1">{t('user.field.nickname')}</h4>
               <TextInput
                 type="text"
                 className="w-full"
@@ -89,12 +89,12 @@ const Registration: NextPage = () => {
           </div>
           <div>
             <label>
-              <h4 className="mb-1">{t('user.username')}</h4>
+              <h4 className="mb-1">{t('user.field.username')}</h4>
               <TextInput
                 type="text"
                 className="w-full"
                 {...register('username', {
-                  required: t('validation.errors.required'),
+                  required: t('form.validation.error.required'),
                 })}
               />
             </label>
@@ -102,15 +102,15 @@ const Registration: NextPage = () => {
           </div>
           <div>
             <label>
-              <h4 className="mb-1">{t('user.email')}</h4>
+              <h4 className="mb-1">{t('user.field.email')}</h4>
               <TextInput
                 type="email"
                 className="w-full"
                 {...register('email', {
-                  required: t('validation.errors.required'),
+                  required: t('form.validation.error.required'),
                   pattern: {
                     value: EMAIL_PATTERN,
-                    message: t('validation.errors.emailInvalid'),
+                    message: t('form.validation.error.emailInvalid'),
                   },
                 })}
               />
@@ -126,7 +126,7 @@ const Registration: NextPage = () => {
           </div>
           <div>
             <label>
-              <h5 className="mb-1">{t('user.passwordConfirmation')}</h5>
+              <h5 className="mb-1">{t('user.field.passwordConfirmation')}</h5>
               <TextInput
                 type="password"
                 className="w-full"
@@ -155,14 +155,14 @@ const Registration: NextPage = () => {
           <div>
             <label className="flex items-center gap-2">
               <Checkbox {...register('consentNewsletter')} />
-              <h4>{t('user.consentNewsletter')}</h4>
+              <h4>{t('user.field.consentNewsletter')}</h4>
             </label>
             <FormFieldError error={errors.consentNewsletter} />
           </div>
           <div>
             <label className="flex items-center gap-2">
               <Checkbox {...register('consentPrivacyPolicy')} />
-              <h4>{t('user.consentPrivacyPolicy')}</h4>
+              <h4>{t('user.field.consentPrivacyPolicy')}</h4>
             </label>
             <FormFieldError error={errors.consentPrivacyPolicy} />
           </div>
@@ -172,14 +172,14 @@ const Registration: NextPage = () => {
           />
 
           <Button type="submit" className="mt-10" size="lg">
-            {t('user.createMyAccount')}
+            {t('user.form.registration.callToAction')}
           </Button>
           <div className="flex justify-between">
             <Link href="/user/password-reminder" passHref prefetch={false}>
-              {t('user.forgotPassword')}
+              {t('user.common.forgotPassword')}
             </Link>
             <Link href="/user/login" passHref prefetch={false}>
-              {t('actions.login')}
+              {t('user.common.Login')}
             </Link>
           </div>
         </div>

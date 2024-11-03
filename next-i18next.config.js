@@ -10,11 +10,7 @@ module.exports = {
   },
   defaultNS: 'common',
   ns: [
-    'chat_bubble',
     'common',
-    'content_limiter',
-    'notifications',
-    'settings',
-    'wheel_of_fortune',
+    // You can add additional collections here
   ],
 };

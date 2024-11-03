@@ -8,40 +8,36 @@ import { useRuntimeStore } from '@/state/runtime';
 
 const RuntimeSettings: FunctionComponent = () => {
   const runtime = useRuntimeStore();
-  const { t } = useTranslation(['settings', 'common']);
+  const { t } = useTranslation();
 
   return (
-    <SettingsBlock title={t('settings:section.runtime.title')}>
+    <SettingsBlock title={t('settings.runtime.title')}>
       <small>
-        <i>{t('settings:section.runtime.disclaimer')}</i>
+        <i>{t('settings.runtime.disclaimer')}</i>
       </small>
       <br />
       <p>
-        {t('settings:section.runtime.startedAgo')}{' '}
+        {t('settings.runtime.startedAgo')}{' '}
         {runtime.startedAt ? <ReactTimeAgo date={runtime.startedAt} /> : 'n/a'}
       </p>
       <p>
-        {t('settings:section.runtime.visibilitySeconds')}{' '}
+        {t('settings.runtime.visibilitySeconds')}{' '}
         <span>{runtime.document.visibilitySeconds}</span>
       </p>
       <p>
-        {t('settings:section.runtime.isDocumentVisible')}{' '}
+        {t('settings.runtime.isDocumentVisible')}{' '}
         <span>
-          {runtime.document.isVisible
-            ? t('common:response.yes')
-            : t('common:response.yes')}
+          {runtime.document.isVisible ? t('common.yes') : t('common.no')}
         </span>
       </p>
       <p>
-        {t('settings:section.runtime.interactionUnlocked')}{' '}
+        {t('settings.runtime.interactionUnlocked')}{' '}
         <span>
-          {runtime.interactionUnlocked
-            ? t('common:response.yes')
-            : t('common:response.yes')}
+          {runtime.interactionUnlocked ? t('common.yes') : t('common.no')}
         </span>
       </p>
       <p>
-        {t('settings:section.runtime.navigationCount')}{' '}
+        {t('settings.runtime.navigationCount')}{' '}
         <span>{runtime.navigationCount}</span>
       </p>
     </SettingsBlock>

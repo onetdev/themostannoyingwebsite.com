@@ -18,8 +18,8 @@ const CaptchaTitlePuzzleField: FunctionComponent<
 
   return (
     <div className="flex flex-col">
-      <h4 className="mb-1">{t('captcha.field')}</h4>
-      <small>{t('captcha.captchaTilePuzzleHint')}</small>
+      <h4 className="mb-1">{t('form.captcha.field')}</h4>
+      <small>{t('form.captcha.captchaTilePuzzleHint')}</small>
       <CaptchaTilePuzzle
         className="my-3 rounded-md border border-on-background"
         cols={6}
@@ -30,7 +30,7 @@ const CaptchaTitlePuzzleField: FunctionComponent<
       <input
         type="hidden"
         {...register('captcha', {
-          required: t('validation.errors.captchaInvalid'),
+          required: t('form.validation.error.captchaInvalid'),
         })}
       />
       <FormFieldError error={errors.captcha} />

@@ -28,7 +28,7 @@ const PasswordReminder: NextPage = () => {
   } = useForm<PasswordReminderFormInputs>();
 
   const onSubmit: SubmitHandler<PasswordReminderFormInputs> = (_data) => {
-    alert(t('user.passwordReminderError'));
+    alert(t('user.form.passwordReminder.genericError'));
   };
 
   return (
@@ -41,15 +41,15 @@ const PasswordReminder: NextPage = () => {
         onSubmit={handleSubmit(onSubmit)}>
         <div>
           <label>
-            <h4 className="mb-1">{t('user.email')}</h4>
+            <h4 className="mb-1">{t('user.field.email')}</h4>
             <TextInput
               type="email"
               className="w-full"
               {...register('email', {
-                required: t('validation.errors.required'),
+                required: t('form.validation.error.required'),
                 pattern: {
                   value: EMAIL_PATTERN,
-                  message: t('validation.errors.emailInvalid'),
+                  message: t('form.validation.error.emailInvalid'),
                 },
               })}
             />
@@ -63,14 +63,14 @@ const PasswordReminder: NextPage = () => {
         />
 
         <Button type="submit" className="mt-10" size="lg">
-          {t('user.sendPasswordReminder')}
+          {t('user.form.passwordReminder.callToAction')}
         </Button>
         <div className="flex justify-between">
           <Link href="/user/login" passHref prefetch={false}>
-            {t('navigation.login')}
+            {t('user.common.Login')}
           </Link>
           <Link href="/user/registration" passHref prefetch={false}>
-            {t('user.registerAccount')}
+            {t('user.common.register')}
           </Link>
         </div>
       </form>

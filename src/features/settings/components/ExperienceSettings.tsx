@@ -18,18 +18,18 @@ const ExperienceSettings: FunctionComponent<ExperienceSettingsProps> = ({
   listClassName = '',
 }) => {
   const experience = useExperienceFlagsStore();
-  const { t } = useTranslation(['settings', 'common']);
+  const { t } = useTranslation();
 
   const onPageTitleInactiveArrayPagedChange = (value: boolean) =>
     experience.setPageTitle({ inactiveArrayPaged: value });
 
   return (
     <SettingsBlock
-      title={t('settings:section.experienceFlags.title')}
+      title={t('settings.optionalExperienceFlags.title')}
       className={className}>
       <div className={listClassName}>
         <SettingsBlockRow
-          label={t('settings:section.experienceFlags.gifts.flaps')}>
+          label={t('settings.optionalExperienceFlags.gifts.flaps')}>
           <FormCheckbox
             name="gift_flaps"
             checked={experience.gifts.flaps}
@@ -37,7 +37,7 @@ const ExperienceSettings: FunctionComponent<ExperienceSettingsProps> = ({
           />
         </SettingsBlockRow>
         <SettingsBlockRow
-          label={t('settings:section.experienceFlags.gifts.oneByOne')}>
+          label={t('settings.optionalExperienceFlags.gifts.oneByOne')}>
           <FormCheckbox
             name="gift_flaps"
             checked={experience.gifts.oneByOne}
@@ -45,7 +45,7 @@ const ExperienceSettings: FunctionComponent<ExperienceSettingsProps> = ({
           />
         </SettingsBlockRow>
         <SettingsBlockRow
-          label={t('settings:section.experienceFlags.contentPaywall')}>
+          label={t('settings.optionalExperienceFlags.contentPaywall')}>
           <FormCheckbox
             name="content_paywall"
             checked={experience.contentPaywall}
@@ -53,7 +53,7 @@ const ExperienceSettings: FunctionComponent<ExperienceSettingsProps> = ({
           />
         </SettingsBlockRow>
         <SettingsBlockRow
-          label={t('settings:section.experienceFlags.deadPixel')}>
+          label={t('settings.optionalExperienceFlags.deadPixel')}>
           <FormCheckbox
             name="dead_pixel"
             checked={experience.deadPixel}
@@ -61,7 +61,7 @@ const ExperienceSettings: FunctionComponent<ExperienceSettingsProps> = ({
           />
         </SettingsBlockRow>
         <SettingsBlockRow
-          label={t('settings:section.experienceFlags.exitPrompt')}>
+          label={t('settings.optionalExperienceFlags.exitPrompt')}>
           <FormCheckbox
             name="exit_prompt"
             checked={experience.exitPrompt}
@@ -69,7 +69,7 @@ const ExperienceSettings: FunctionComponent<ExperienceSettingsProps> = ({
           />
         </SettingsBlockRow>
         <SettingsBlockRow
-          label={t('settings:section.experienceFlags.mockChat')}>
+          label={t('settings.optionalExperienceFlags.mockChat')}>
           <FormCheckbox
             name="mock_chat"
             checked={experience.mockChat}
@@ -77,7 +77,7 @@ const ExperienceSettings: FunctionComponent<ExperienceSettingsProps> = ({
           />
         </SettingsBlockRow>
         <SettingsBlockRow
-          label={t('settings:section.experienceFlags.newsletterModal')}>
+          label={t('settings.optionalExperienceFlags.newsletterModal')}>
           <FormCheckbox
             name="newsletter"
             checked={experience.newsletterModal}
@@ -85,7 +85,7 @@ const ExperienceSettings: FunctionComponent<ExperienceSettingsProps> = ({
           />
         </SettingsBlockRow>
         <SettingsBlockRow
-          label={t('settings:section.experienceFlags.notifications')}>
+          label={t('settings.optionalExperienceFlags.notifications')}>
           <FormCheckbox
             name="notifications"
             checked={experience.notifications}
@@ -94,7 +94,7 @@ const ExperienceSettings: FunctionComponent<ExperienceSettingsProps> = ({
         </SettingsBlockRow>
         <SettingsBlockRow
           label={t(
-            'settings:section.experienceFlags.pageTitleInactiveArrayPaged',
+            'settings.optionalExperienceFlags.pageTitleInactiveArrayPaged',
           )}>
           <FormCheckbox
             name="page_title_inactive_array_paged"
@@ -103,7 +103,7 @@ const ExperienceSettings: FunctionComponent<ExperienceSettingsProps> = ({
           />
         </SettingsBlockRow>
         <SettingsBlockRow
-          label={t('settings:section.experienceFlags.searchDelay')}>
+          label={t('settings.optionalExperienceFlags.searchDelay')}>
           <FormCheckbox
             name="search_delay"
             checked={experience.searchDelay}
@@ -111,7 +111,7 @@ const ExperienceSettings: FunctionComponent<ExperienceSettingsProps> = ({
           />
         </SettingsBlockRow>
         <SettingsBlockRow
-          label={t('settings:section.experienceFlags.stickyVideo')}>
+          label={t('settings.optionalExperienceFlags.stickyVideo')}>
           <FormCheckbox
             name="sticky_video"
             checked={experience.stickyVideo}
@@ -119,7 +119,7 @@ const ExperienceSettings: FunctionComponent<ExperienceSettingsProps> = ({
           />
         </SettingsBlockRow>
         <SettingsBlockRow
-          label={t('settings:section.experienceFlags.wheelOfFortune')}>
+          label={t('settings.optionalExperienceFlags.wheelOfFortune')}>
           <FormCheckbox
             name="wheel_of_fortune"
             checked={experience.wheelOfFortune}
@@ -132,13 +132,13 @@ const ExperienceSettings: FunctionComponent<ExperienceSettingsProps> = ({
           className="mt-6"
           variant="primary"
           onClick={experience.allEnabled}>
-          {t('common:actions.enableAll')}
+          {t('common.enableAll')}
         </Button>
         <Button
           className="mt-6"
           variant="secondary"
           onClick={experience.allDisabled}>
-          {t('common:actions.disableAll')}
+          {t('common.disableAll')}
         </Button>
       </div>
     </SettingsBlock>

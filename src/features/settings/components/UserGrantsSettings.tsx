@@ -9,12 +9,11 @@ import { useUserGrantsStore } from '@/state/user_grants';
 
 const UserGrantsSettings: FunctionComponent = () => {
   const grant = useUserGrantsStore();
-  const { t } = useTranslation(['settings', 'common']);
+  const { t } = useTranslation();
 
   return (
-    <SettingsBlock title={t('settings:section.userGrants.title')}>
-      <SettingsBlockRow
-        label={t('settings:section.userGrants.essentialCookies')}>
+    <SettingsBlock title={t('settings.userGrants.title')}>
+      <SettingsBlockRow label={t('settings.userGrants.essentialCookies')}>
         <FormCheckbox
           name="essential_cookies"
           checked={grant.cookies.essential}
@@ -23,18 +22,18 @@ const UserGrantsSettings: FunctionComponent = () => {
       </SettingsBlockRow>
       <br />
       <small>
-        <i>{t('settings:section.userGrants.permissionDisclaimer')}</i>
+        <i>{t('settings.userGrants.permissionDisclaimer')}</i>
       </small>
       <br />
       <SettingsBlockRow
-        label={t('settings:section.userGrants.notificationPermission')}
+        label={t('settings.userGrants.notificationPermission')}
         reverse>
-        {`${grant.permission.notification || t('common:status.notSet')}`}
+        {`${grant.permission.notification || t('common.notSet')}`}
       </SettingsBlockRow>
       <SettingsBlockRow
-        label={t('settings:section.userGrants.locationPermission')}
+        label={t('settings.userGrants.locationPermission')}
         reverse>
-        {`${grant.permission.location || t('common:status.notSet')}`}
+        {`${grant.permission.location || t('common.notSet')}`}
       </SettingsBlockRow>
     </SettingsBlock>
   );

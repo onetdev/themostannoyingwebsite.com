@@ -21,7 +21,7 @@ const ExperienceProvider: FunctionComponent<PropsWithChildren> = ({
   useFirstInteractionListener();
   useDocumentVisibilityListener();
   useNavigationStats();
-  useBeforeUnload(exitPrompt, t('experiences.exitPrompt'));
+  useBeforeUnload(exitPrompt, t('app.exitPrompt'));
 
   useEffect(() => {
     syncPermissions();

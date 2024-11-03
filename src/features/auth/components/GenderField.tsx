@@ -19,7 +19,7 @@ const GenderField: FunctionComponent<GenderFieldProps> = ({
   const { t } = useTranslation('common');
 
   const genderOptions = useMemo(() => {
-    const pool = t('genders', {
+    const pool = t('user.genderVariants', {
       returnObjects: true,
       defaultValue: [],
     }) as Record<string, string>;
@@ -33,7 +33,7 @@ const GenderField: FunctionComponent<GenderFieldProps> = ({
   return (
     <>
       <label>
-        <h5 className="mb-1">{t('user.gender')}</h5>
+        <h5 className="mb-1">{t('user.field.gender')}</h5>
         <Select
           values={genderOptions}
           className="w-full"

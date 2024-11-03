@@ -10,9 +10,9 @@ const Donate: NextPage = () => {
   return (
     <main>
       <h1>{t('navigation.donate')}</h1>
-      <p className="my-5 max-w-screen-md">{t('donate.description')}</p>
+      <p className="my-5 max-w-screen-md">{t('app.donate.description')}</p>
       <Link href="https://onet.dev/donate" target="_blank">
-        {t('donate.donateLink')} 👈
+        {t('app.donate.donateLinkText')} 👈
       </Link>
     </main>
   );

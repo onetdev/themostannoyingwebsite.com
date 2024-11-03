@@ -44,11 +44,11 @@ const UserNavigation: FunctionComponent<UserNavigationProps> = ({
             className="flex cursor-pointer items-center gap-2">
             <Icon
               icon="share"
-              title={t('actions.share')}
+              title={t('common.share')}
               titleId="share"
               size="lg"
             />
-            <span className="hidden md:inline-block">{t('actions.share')}</span>
+            <span className="hidden md:inline-block">{t('common.share')}</span>
           </a>
         </li>
         {links.map(({ path, text, icon }) => (

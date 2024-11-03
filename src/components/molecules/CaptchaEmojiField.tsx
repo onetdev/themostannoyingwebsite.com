@@ -20,8 +20,8 @@ const CaptchaEmojiField: FunctionComponent<CaptchaEmojiFieldProps> = ({
   return (
     <div className="flex flex-col">
       <label>
-        <h4 className="mb-1">{t('captcha.field')}</h4>
-        <small>{t('captcha.captchaEmojiHint')}</small>
+        <h4 className="mb-1">{t('form.captcha.field')}</h4>
+        <small>{t('form.captcha.captchaEmojiHint')}</small>
         <CaptchaEmoji
           className="my-3 rounded-md border border-on-background"
           width={300}
@@ -31,10 +31,10 @@ const CaptchaEmojiField: FunctionComponent<CaptchaEmojiFieldProps> = ({
           type="text"
           className="w-[300px]"
           {...register('captcha', {
-            required: t('validation.errors.required'),
+            required: t('form.validation.error.required'),
             pattern: {
               value: /^[XyZ123]{444}$/,
-              message: t('validation.errors.captchaInvalid'),
+              message: t('form.validation.error.captchaInvalid'),
             },
           })}
         />

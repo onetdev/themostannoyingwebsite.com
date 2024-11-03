@@ -23,7 +23,7 @@ const PasswordStrengthBar: FunctionComponent<PasswordStrengthBarProps> = ({
     <div className={`flex gap-2 text-sm ${className}`}>
       <div className="w-1/3">
         <div className="h-2 w-full max-w-full rounded bg-error" />
-        {score <= 0.33 && t('validation.passwordWeak')}
+        {score <= 0.33 && t('form.validation.passwordStrength.weak')}
       </div>
       <div className="w-1/3">
         {score > 0.33 && (
@@ -32,7 +32,9 @@ const PasswordStrengthBar: FunctionComponent<PasswordStrengthBarProps> = ({
             style={{ width: `${(score - 0.33) * 300}%` }}
           />
         )}
-        {score > 0.33 && score <= 0.66 && t('validation.passwordOkay')}
+        {score > 0.33 &&
+          score <= 0.66 &&
+          t('form.validation.passwordStrength.okay')}
       </div>
       <div className="w-1/3">
         {score > 0.66 && (
@@ -41,7 +43,7 @@ const PasswordStrengthBar: FunctionComponent<PasswordStrengthBarProps> = ({
             style={{ width: `${(score - 0.66) * 300}%` }}
           />
         )}
-        {score > 0.66 && t('validation.passwordVeryStrong')}
+        {score > 0.66 && t('form.validation.passwordStrength.veryStrong')}
       </div>
     </div>
   );
