@@ -2,7 +2,7 @@ import Link from 'next/link';
 import { useTranslation } from 'next-i18next';
 import { FunctionComponent } from 'react';
 
-import { useUserGrantsStore } from '@/state/user_grants';
+import { useUserGrantsStore } from '@/lib/state/user_grants';
 
 const CookieBar: FunctionComponent = () => {
   const { t } = useTranslation();

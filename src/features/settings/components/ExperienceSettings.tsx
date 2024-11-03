@@ -5,7 +5,7 @@ import Button from '@/components/atoms/Button';
 import FormCheckbox from '@/components/atoms/Checkbox';
 import FormRow from '@/components/molecules/FormRow';
 import BorderedBox from '@/components/templates/BorderedBox';
-import { useExperienceFlagsStore } from '@/state/experience_flags';
+import { useExperienceFlagsStore } from '@/lib/state/experience_flags';
 
 type ExperienceSettingsProps = {
   className?: string;

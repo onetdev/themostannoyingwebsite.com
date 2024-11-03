@@ -4,7 +4,7 @@ import { FunctionComponent } from 'react';
 import FormCheckbox from '@/components/atoms/Checkbox';
 import FormRow from '@/components/molecules/FormRow';
 import BorderedBox from '@/components/templates/BorderedBox';
-import { useUserGrantsStore } from '@/state/user_grants';
+import { useUserGrantsStore } from '@/lib/state/user_grants';
 
 const UserGrantsSettings: FunctionComponent = () => {
   const grant = useUserGrantsStore();

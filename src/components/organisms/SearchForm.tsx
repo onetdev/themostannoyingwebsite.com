@@ -6,7 +6,7 @@ import Button from '@/components/atoms/Button';
 import Icon from '@/components/atoms/Icon';
 import TextInput from '@/components/atoms/TextInput';
 import { DOCUMENT_EVENT_SEARCH } from '@/global';
-import { FormElementSize } from '@/utils/form';
+import { FormElementSize } from '@/lib/utils/form';
 
 export type SearchFormSize = FormElementSize;
 export type SearchFormProps = {

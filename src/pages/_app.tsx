@@ -5,8 +5,8 @@ import { appWithTranslation, UserConfig } from 'next-i18next';
 
 import GeneratedMetaHead from '@/components/templates/GeneratedMetaHead';
 import MainLayout from '@/components/templates/MainLayout';
-import useServiceWorker from '@/hooks/useServiceWorker';
-import RootProviderContainer from '@/providers/RootProviderContainer';
+import useServiceWorker from '@/lib/hooks/useServiceWorker';
+import RootProviderContainer from '@/lib/providers/RootProviderContainer';
 import english from '@/public/locales/en/common.json';
 import nextI18NextConfig from '@/root/next-i18next.config.js';
 

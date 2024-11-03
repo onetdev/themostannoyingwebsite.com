@@ -7,8 +7,8 @@ import FormFieldError from '@/components/atoms/FormFieldError';
 import TextInput from '@/components/atoms/TextInput';
 import Modal from '@/components/molecules/Modal';
 import { type NewsletterFormInputs } from '@/features/newsletter';
-import { random } from '@/utils/math';
-import { EMAIL_PATTERN } from '@/utils/validator';
+import { random } from '@/lib/utils/math';
+import { EMAIL_PATTERN } from '@/lib/utils/validator';
 
 type NewsletterModalProps = {
   visible?: boolean;

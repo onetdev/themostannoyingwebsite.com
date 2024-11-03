@@ -6,7 +6,7 @@ import { useEffect, useRef, useState } from 'react';
 import Icon from '@/components/atoms/Icon';
 import PageHeadline from '@/components/atoms/PageHeadline';
 import SiteTitle from '@/components/atoms/SiteTitle';
-import { makeI18nStaticProps } from '@/utils/i18n';
+import { makeI18nStaticProps } from '@/lib/utils/i18n';
 
 const HotThings: NextPage = () => {
   const [isCapable, setIsCapable] = useState(false);

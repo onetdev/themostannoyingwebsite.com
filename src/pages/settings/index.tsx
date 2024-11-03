@@ -10,7 +10,7 @@ import {
   RuntimeSettings,
   UserGrantsSettings,
 } from '@/features/settings';
-import { makeI18nStaticProps } from '@/utils/i18n';
+import { makeI18nStaticProps } from '@/lib/utils/i18n';
 
 const Settings: NextPage = () => {
   const { t } = useTranslation();

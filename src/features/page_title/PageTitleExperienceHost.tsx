@@ -7,8 +7,8 @@ import ArrayPagedTitle from './components/ArrayPagedTitle';
 import GlitchyTitle from './components/GlitchyTitle';
 import MarqueeTitle from './components/MarqueeTitle';
 
-import { useExperienceFlagsStore } from '@/state/experience_flags';
-import { useRuntimeStore } from '@/state/runtime';
+import { useExperienceFlagsStore } from '@/lib/state/experience_flags';
+import { useRuntimeStore } from '@/lib/state/runtime';
 
 /**
  * Experience of manipulating the page title. Unfortunatelly the refresh rate

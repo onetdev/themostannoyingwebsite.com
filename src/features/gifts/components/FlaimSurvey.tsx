@@ -3,12 +3,12 @@ import { useTranslation } from 'next-i18next';
 import { FunctionComponent, useEffect, useMemo, useState } from 'react';
 
 import Button from '@/components/atoms/Button';
+import RadioButton from '@/components/atoms/RadioButton';
+import FormRow from '@/components/molecules/FormRow';
 import BorderedBox from '@/components/templates/BorderedBox';
 import { FlaimSurveyQuestion } from '@/features/gifts';
-import RadioButton from '@/root/src/components/atoms/RadioButton';
-import FormRow from '@/root/src/components/molecules/FormRow';
-import { useRuntimeStore } from '@/state/runtime';
-import { arrayShuffle } from '@/utils/array';
+import { useRuntimeStore } from '@/lib/state/runtime';
+import { arrayShuffle } from '@/lib/utils/array';
 
 export type FlaimSurveryProps = { className?: string; timeInSeconds?: number };
 

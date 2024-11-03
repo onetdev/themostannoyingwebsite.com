@@ -6,7 +6,7 @@ import {
   mb_string_slice,
   mb_string_to_char_array,
   string_closeness,
-} from '@/utils/string';
+} from '@/lib/utils/string';
 
 describe('mb_string_to_char_array', () => {
   test('should properly make an array of characters', () => {
