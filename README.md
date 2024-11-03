@@ -15,6 +15,7 @@ The main idea is to gather the most annoying features of modern websites in one 
   - [ ] Add holiday related (Halloween, Christmass, Easter) small animated images that follow the mouse cursor
   - [ ] Push elements to navigation stack so that when the user tries to navigate back it will stay on the page
   - [ ] Add flashing animation to flaim phone
+  - [ ] Adblocker detection
 
 </details>
 
@@ -54,6 +55,7 @@ The main idea is to gather the most annoying features of modern websites in one 
   - [ ] **Design** - even though the site is fine with a bad design
   - [ ] Dead pixel patch
   - [ ] Randomly loading images while scrolling (causing layout shifting)
+  - [ ] Random dark-light mode switching - we could flashbang night owls
 </details>
 
 ## Contribution

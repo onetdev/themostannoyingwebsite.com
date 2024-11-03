@@ -30,6 +30,8 @@ const Footer: FunctionComponent = () => {
         />
         &nbsp;
         {t('app.aiDisclose')}
+        &nbsp;
+        {t('app.dataStorageDisclaimer')}
       </span>
     </footer>
   );
