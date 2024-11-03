@@ -6,7 +6,7 @@ import { Item } from './DynamicWheelSvg';
 import AnimatedWheel, { AnimatedWheelState } from './WheelAnimationWrapper';
 
 import Icon from '@/components/atoms/Icon';
-import { getWeightedRandom, WeightedRandomPoolItem } from '@/utils/math';
+import { getWeightedRandom, WeightedRandomPoolItem } from '@/lib/utils/math';
 
 type ModalContentProps = JSXProxyProps<'div'> & {
   onClose?: () => void;

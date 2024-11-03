@@ -4,7 +4,7 @@ import config from '@/config';
 import {
   getNotificationPermissionState,
   requestNotificationPermission,
-} from '@/utils/permission';
+} from '@/lib/utils/permission';
 
 type UseSendNotificationProps = {
   autoRequest?: boolean;

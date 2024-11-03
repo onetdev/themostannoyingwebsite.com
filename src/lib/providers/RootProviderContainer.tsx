@@ -1,8 +1,8 @@
 import { ThemeProvider } from 'next-themes';
 import { FunctionComponent, PropsWithChildren } from 'react';
 
-import ExperienceProvider from '@/providers/ExperienceProvider';
-import { RootPortalProvider } from '@/providers/RootPortalProvider';
+import ExperienceProvider from '@/lib/providers/ExperienceProvider';
+import { RootPortalProvider } from '@/lib/providers/RootPortalProvider';
 
 const RootProviderContainer: FunctionComponent<PropsWithChildren> = ({
   children,

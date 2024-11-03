@@ -3,7 +3,7 @@ import { FunctionComponent } from 'react';
 import ReactTimeAgo from 'react-timeago';
 
 import BorderedBox from '@/components/templates/BorderedBox';
-import { useRuntimeStore } from '@/state/runtime';
+import { useRuntimeStore } from '@/lib/state/runtime';
 
 const RuntimeSettings: FunctionComponent = () => {
   const runtime = useRuntimeStore();

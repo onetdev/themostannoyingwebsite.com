@@ -15,8 +15,8 @@ import SiteTitle from '@/components/atoms/SiteTitle';
 import TextInput from '@/components/atoms/TextInput';
 import CaptchaTitlePuzzleField from '@/components/molecules/CaptchaTitlePuzzleFied';
 import { PasswordReminderFormInputs } from '@/features/auth';
-import { makeI18nStaticProps } from '@/utils/i18n';
-import { EMAIL_PATTERN } from '@/utils/validator';
+import { makeI18nStaticProps } from '@/lib/utils/i18n';
+import { EMAIL_PATTERN } from '@/lib/utils/validator';
 
 const PasswordReminder: NextPage = () => {
   const { t } = useTranslation('common');

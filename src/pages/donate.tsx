@@ -2,7 +2,7 @@ import { NextPage } from 'next';
 import Link from 'next/link';
 import { useTranslation } from 'next-i18next';
 
-import { makeI18nStaticProps } from '@/utils/i18n';
+import { makeI18nStaticProps } from '@/lib/utils/i18n';
 
 const Donate: NextPage = () => {
   const { t } = useTranslation();

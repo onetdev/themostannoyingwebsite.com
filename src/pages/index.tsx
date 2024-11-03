@@ -8,7 +8,7 @@ import {
   SmallCoverListItem,
 } from '@/features/articles';
 import { OneByOneGift } from '@/features/gifts';
-import { makeI18nStaticProps } from '@/utils/i18n';
+import { makeI18nStaticProps } from '@/lib/utils/i18n';
 
 const Index: NextPage = () => {
   const { i18n } = useTranslation();

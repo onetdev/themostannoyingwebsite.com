@@ -3,7 +3,7 @@ import Link from 'next/link';
 import { useTranslation } from 'next-i18next';
 import { FunctionComponent } from 'react';
 
-import { useExperienceFlagsStore } from '@/state/experience_flags';
+import { useExperienceFlagsStore } from '@/lib/state/experience_flags';
 
 export type OneByOneGiftProps = {
   size?: number;

@@ -18,8 +18,8 @@ import {
   PhoneNumberField,
   RegistrationFormInputs,
 } from '@/features/auth';
-import { makeI18nStaticProps } from '@/utils/i18n';
-import { EMAIL_PATTERN } from '@/utils/validator';
+import { makeI18nStaticProps } from '@/lib/utils/i18n';
+import { EMAIL_PATTERN } from '@/lib/utils/validator';
 
 const Registration: NextPage = () => {
   const { t } = useTranslation('common');

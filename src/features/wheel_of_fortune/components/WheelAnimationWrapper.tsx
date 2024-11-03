@@ -12,8 +12,8 @@ import DynamicWheelSvg, { Item } from './DynamicWheelSvg';
 
 import Button from '@/components/atoms/Button';
 import Icon from '@/components/atoms/Icon';
-import useDragTracker from '@/hooks/useDragTracker';
-import { getPointDistance, random } from '@/utils/math';
+import useDragTracker from '@/lib/hooks/useDragTracker';
+import { getPointDistance, random } from '@/lib/utils/math';
 
 type AnimatedWheelProps = {
   items: Item[];

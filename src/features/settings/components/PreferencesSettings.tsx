@@ -5,7 +5,7 @@ import { FunctionComponent } from 'react';
 import FormCheckbox from '@/components/atoms/Checkbox';
 import FormRow from '@/components/molecules/FormRow';
 import BorderedBox from '@/components/templates/BorderedBox';
-import { useUserPreferencesStore } from '@/state/user_preferences';
+import { useUserPreferencesStore } from '@/lib/state/user_preferences';
 
 const PreferencesSettings: FunctionComponent = () => {
   const preference = useUserPreferencesStore();

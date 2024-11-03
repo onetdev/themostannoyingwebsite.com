@@ -2,10 +2,10 @@ import { useTranslation } from 'next-i18next';
 import { useCallback, useEffect, useMemo, useState } from 'react';
 
 import { HistoryItem, HistoryItemOwner } from '@/features/chat_bubble';
-import useAudio from '@/hooks/useAudio';
-import useSendNotification from '@/hooks/useSendNotification';
-import { useRuntimeStore } from '@/state/runtime';
-import { useUserPreferencesStore } from '@/state/user_preferences';
+import useAudio from '@/lib/hooks/useAudio';
+import useSendNotification from '@/lib/hooks/useSendNotification';
+import { useRuntimeStore } from '@/lib/state/runtime';
+import { useUserPreferencesStore } from '@/lib/state/user_preferences';
 
 const useChatBubbleHistory = () => {
   const { t } = useTranslation();
@@ -81,6 +81,7 @@ const useChatBubbleHistory = () => {
     }
   }, [isForeground]);
 
+  // eslint-disable-next-line react-hooks/exhaustive-deps -- just a mount effect
   useEffect(() => add(t('chatBubble.messageInitial'), 'bot'), []);
 
   return {

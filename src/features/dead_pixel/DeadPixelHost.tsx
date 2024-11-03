@@ -2,7 +2,7 @@
 
 import { FunctionComponent, useEffect, useState } from 'react';
 
-import { Point2d, random } from '@/utils/math';
+import { Point2d, random } from '@/lib/utils/math';
 
 // TODO: Maybe we could do a horror version like this:
 // https://www.tiktok.com/@jackandaxter/video/7421659495606144262

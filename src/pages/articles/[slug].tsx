@@ -7,9 +7,9 @@ import { useTranslation } from 'next-i18next';
 
 import { ArticleService } from '@/features/articles';
 import { PartitionalLockedContent } from '@/features/content_limiter';
-import { useExperienceFlagsStore } from '@/state/experience_flags';
+import { useExperienceFlagsStore } from '@/lib/state/experience_flags';
+import { getI18nProps } from '@/lib/utils/i18n';
 import styles from '@/styles/content.module.css';
-import { getI18nProps } from '@/utils/i18n';
 
 type ArticleItemProps = {
   slug: string;

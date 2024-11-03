@@ -1,8 +1,8 @@
 import { useTranslation } from 'next-i18next';
 import { FunctionComponent, useMemo } from 'react';
 
-import { mapToLogScale } from '@/utils/math';
-import { mb_string_to_char_array } from '@/utils/string';
+import { mapToLogScale } from '@/lib/utils/math';
+import { mb_string_to_char_array } from '@/lib/utils/string';
 
 export type PasswordStrengthBarProps = {
   password: string;
