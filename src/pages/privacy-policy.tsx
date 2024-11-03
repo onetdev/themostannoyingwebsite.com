@@ -69,7 +69,7 @@ const contentMarkdownEn = `
 
   If you have any questions about this Privacy Policy, please contact us at [${config.contactEmail}](${config.contactEmail}).
 
-  Update 2024-10-29: This update includes the necessary notice about embedded YouTube videos and its data-sharing implications, which should help ensure transparency and compliance with privacy laws.
+  **Update 2024-10-29**: This update includes the necessary notice about embedded YouTube videos and its data-sharing implications, which should help ensure transparency and compliance with privacy laws.
 `;
 
 export const getStaticProps = makeI18nStaticProps();

@@ -5,6 +5,7 @@
     "recruiting": "Want to extend what you see here? Visit our <linkTag>GitHub</linkTag> repo to get started.",
     "aiDisclose": "AI text and image generation was used to produce contents of this website.",
     "copyright": "Copyright © {{year}} The Most Annoying Website",
+    "dataStorageDisclaimer": "We don't store any form data of: newsletter subscriptions, login, registration, password reminder.",
     "cookieConsent": "This website uses cookies to ensure you get the best experience on our website. It's also a joke so many of the features are buggy or doens't even work on purpose. You can customize your experience and cookie settings in the settings menu.",
     "donate": {
       "description": "This is one feature that actually supposed to work. If you'd like to help support the project or the authors, you can donate here. Every donation helps. We appreciate your support!",
@@ -478,5 +479,14 @@
     "agentIsTyping": "Agent is typing",
     "yourMessage": "Your message",
     "yourMessagePlaceholder": "Type here..."
+  },
+  "messages": {
+    "errors": {
+      "e404title": "Error 404",
+      "e404description": "Page not found, how could this happen"
+    },
+    "info": {
+      "pictureOfYou": "Picture of you"
+    }
   }
 }
