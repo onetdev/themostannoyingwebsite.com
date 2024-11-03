@@ -13,12 +13,12 @@ const MessageBubble: FunctionComponent<MessageBubbleProps> = ({
   showTime = true,
 }) => {
   return (
-    <div className="group" data-user={item.isUser.toString()}>
-      <div className="rounded-lg bg-secondary p-3 text-on-secondary group-data-[user=false]:mr-6 group-data-[user=true]:ml-6 group-data-[user=false]:bg-primary group-data-[user=false]:text-on-primary">
+    <div className="group" data-owner={item.owner}>
+      <div className="rounded-lg bg-secondary p-2 text-sm text-on-secondary group-data-[owner=bot]:mr-6 group-data-[owner=user]:ml-6 group-data-[owner=bot]:bg-primary group-data-[owner=bot]:text-on-primary md:p-3 md:text-base">
         {item.text}
       </div>
       {showTime && (
-        <small className="block pt-1 text-sm text-on-background opacity-50 group-data-[user=true]:text-right">
+        <small className="block pt-1 text-xs text-on-background opacity-50 group-data-[owner=user]:text-right md:text-sm">
           <ReactTimeAgo date={item.time} />
         </small>
       )}
