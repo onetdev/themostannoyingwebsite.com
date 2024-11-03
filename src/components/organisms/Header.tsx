@@ -15,7 +15,7 @@ const Header: FunctionComponent = () => {
   return (
     <header className="grid grid-cols-2 gap-1 py-2">
       <h1>
-        <Link href="/" prefetch={false} title={t('meta.title')}>
+        <Link href="/" prefetch={false} title={t('app.title')}>
           <span className="text-on-surface">
             The <i>MAW</i>
           </span>

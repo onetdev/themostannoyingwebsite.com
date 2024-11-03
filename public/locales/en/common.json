@@ -1,167 +1,61 @@
 {
-  "meta": {
+  "app": {
     "title": "The Most Annoying Website",
     "description": "Self-proclaimed most annoying website on the web with so many disgusting features of modern websites you might even vomit at some point.",
     "recruiting": "Want to extend what you see here? Visit our <linkTag>GitHub</linkTag> repo to get started.",
     "aiDisclose": "AI text and image generation was used to produce contents of this website.",
-    "copyright": "Copyright © {{year}} The Most Annoying Website"
-  },
-  "response": {
-    "yes": "Yes",
-    "no": "No"
-  },
-  "actions": {
-    "accept": "Accept",
-    "cancel": "Cancel",
-    "close": "Close",
-    "disable": "Disable",
-    "disableAll": "Disable all",
-    "dismiss": "Dismiss",
-    "enable": "Enable",
-    "enableAll": "Enable all",
-    "login": "Login",
-    "ok": "OK",
-    "search": "Search",
-    "send": "Send",
-    "share": "Share"
-  },
-  "status": {
-    "notSet": "Not set",
-    "unknown": "Unknown"
+    "copyright": "Copyright © {{year}} The Most Annoying Website",
+    "dataStorageDisclaimer": "We don't store any form data of: newsletter subscriptions, login, registration, password reminder.",
+    "cookieConsent": "This website uses cookies to ensure you get the best experience on our website. It's also a joke so many of the features are buggy or doens't even work on purpose. You can customize your experience and cookie settings in the settings menu.",
+    "donate": {
+      "description": "This is one feature that actually supposed to work. If you'd like to help support the project or the authors, you can donate here. Every donation helps. We appreciate your support!",
+      "donateLinkText": "Donation info here"
+    },
+    "exitPrompt": "I'd reconsider leaving before some bad things happend to you. Are you sure?"
   },
   "navigation": {
+    "home": "Home",
+    "about": "About",
     "contact": "Contact",
     "donate": "Donate",
-    "home": "Home",
-    "hotThings": "Hot things",
     "login": "Login",
+    "logout": "Logout",
+    "register": "Register",
     "passwordReminder": "Password Reminder",
-    "privacyPolicy": "Privacy Policy",
-    "registration": "Registration",
+    "profile": "Profile",
+    "settings": "Settings",
     "search": "Search",
-    "settings": "Settings"
+    "privacyPolicy": "Privacy Policy",
+    "hotThings": "Hot things",
+    "dilf": "DILF"
   },
-  "shareModal": {
-    "title": "Share this page",
-    "description": "Spread the misery! Be sure to inflict this painfully obnoxious website on your friends too — why suffer alone when you can drag them down with you?"
-  },
-  "cookieConsent": "This website uses cookies to ensure you get the best experience on our website. It's also a joke so many of the features are buggy or doens't even work on purpose. You can customize your experience and cookie settings in the settings menu.",
-  "themeSwitch": {
-    "label": "Switch theme",
-    "darkMode": "Dark mode",
-    "lightMode": "Light mode"
-  },
-  "captcha": {
-    "field": "Captcha",
-    "captchaEmojiHint": "Count the emojis and identify which one appears the most. Look carefully, as parts of some emojis might be obscured.",
-    "captchaTilePuzzleHint": "Slide the tiles into their right position. You can only move the ones directly next to each other."
-  },
-  "user": {
-    "consentNewsletter": "I want to receive newsletter",
-    "consentPrivacyPolicy": "Accept privacy policy",
-    "countryCode": "Country",
-    "createMyAccount": "Create my account",
-    "dateOfBirth": "Date of birth",
-    "email": "Email",
-    "firstName": "First name",
-    "forgotPassword": "Forgot password?",
-    "gender": "Gender",
-    "lastName": "Last name",
-    "loginError": "Login failed",
-    "nickname": "Nickname",
-    "password": "Password",
-    "passwordConfirmation": "Password confirmation",
-    "passwordReminderError": "Password reminder failed",
-    "phoneNumber": "Phone number",
-    "registerAccount": "Need an account?",
-    "registrationError": "Registration failed",
-    "rememberMe": "Remember me",
-    "sendPasswordReminder": "Send password reminder",
-    "username": "Username"
-  },
-  "experiences": {
-    "marqueeVariants": [
-      "📣 Come back please 🏃‍♀️🏃 We have candy!! 🚐"
-    ],
-    "arrayPagedVariants": [
-      "⭐️ HEY YOU 🫵",
-      "😜 YES YOU 😱",
-      "📣 COME BACK 🏃"
-    ],
-    "exitPrompt": "I'd reconsider leaving before some bad things happend to you. Are you sure?",
-    "newsletter": {
-      "modal": {
-        "title": "Join our newsletter!",
-        "description": "Our premium newsletter brings an insane amount of value right to your inbox. Don't miss out on insights that make a real difference!",
-        "placeholder": "Enter your email",
-        "initialConfirm": "Subscribe",
-        "initialCancel": "Don't Subscribe",
-        "useFormActions": "Please use the relevant button instead",
-        "confirmations": [
-          {
-            "text": "We're disappointed to see that you may not have had enough time to fully consider this important and challenging decision.",
-            "confirm": "I thought about it, I still want to",
-            "cancel": "You are right, cancel"
-          },
-          {
-            "text": "We are sorry to see you subscribing, can we treat you with the joys of not being a subscriber at all?",
-            "confirm": "No thanks",
-            "cancel": "I need my treat!"
-          },
-          {
-            "text": "Have you considered skipping this newsletter?",
-            "confirm": "No",
-            "cancel": "Yes"
-          },
-          {
-            "text": "Subscribing to this newsletter might have adverse side effects. Are you still in?",
-            "confirm": "I accept side effects",
-            "cancel": "Get me out of here"
-          }
-        ]
-      }
-    }
-  },
-  "validation": {
-    "errors": {
-      "required": "This field is required.",
-      "minLength": "Minimum length is {{count}} characters",
-      "maxLength": "Maximum length is {{count}} characters",
-      "min": "Value must be at least {{count}}",
-      "max": "Value must be no more than {{count}}",
-      "emailInvalid": "Invalid email address",
-      "captchaInvalid": "Invalid captcha",
-      "patternMismatch": "The input does not match the required pattern",
-      "passwordMismatch": "Passwords do not match",
-      "urlInvalid": "Invalid URL format",
-      "numberInvalid": "Please enter a valid number",
-      "dateInvalid": "Invalid date format",
-      "tooShort": "The input is too short",
-      "tooLong": "The input is too long",
-      "checkboxRequired": "You must check this box",
-      "fileTooLarge": "The file size exceeds the limit of {{size}}",
-      "fileTypeInvalid": "Invalid file type",
-      "customError": "Invalid input",
-      "missingUppercase": "Must contain at least one uppercase letter",
-      "missingLowercase": "Must contain at least one lowercase letter",
-      "missingNumber": "Must contain at least one number",
-      "missingSpecialCharacter": "Must contain at least one symbol",
-      "sumOfNumbersGte": "Sum of numbers must be at least or equal to {{count}}",
-      "sumOfNumbersMustBeEven": "Sum of numbers must be be even",
-      "passwordAlreadyTaken": "The password is already taken by another user"
-    },
-    "passwordWeak": "Weak",
-    "passwordOkay": "Okay",
-    "passwordVeryStrong": "Strong"
-  },
-  "genders": {
-    "alien": "Alien",
-    "chymera": "Chymera",
-    "cyborg": "Cyborg",
-    "female": "Female",
-    "male": "Male",
-    "other": "Other",
-    "robot": "Robot"
+  "common": {
+    "yes": "Yes",
+    "no": "No",
+    "ok": "OK",
+    "dismiss": "Dismiss",
+    "cancel": "Cancel",
+    "confirm": "Confirm",
+    "back": "Back",
+    "next": "Next",
+    "accept": "Accept",
+    "decline": "Decline",
+    "submit": "Submit",
+    "save": "Save",
+    "send": "Send",
+    "close": "Close",
+    "enable": "Enable",
+    "enableAll": "Enable all",
+    "disable": "Disable",
+    "disableAll": "Disable all",
+    "share": "Share",
+    "edit": "Edit",
+    "delete": "Delete",
+    "loading": "Loading...",
+    "search": "Search",
+    "placeholderSearch": "Search...",
+    "notSet": "Not set",
+    "unknown": "Unknown"
   },
   "date": {
     "months": [
@@ -177,6 +71,229 @@
       "October",
       "November",
       "December"
+    ],
+    "weekdays": [
+      "Sunday",
+      "Monday",
+      "Tuesday",
+      "Wednesday",
+      "Thursday",
+      "Friday",
+      "Saturday"
+    ],
+    "formats": {
+      "long": "MMM D, YYYY",
+      "short": "M/D/YYYY"
+    }
+  },
+  "form": {
+    "captcha": {
+      "field": "Captcha",
+      "captchaEmojiHint": "Count the emojis and identify which one appears the most. Look carefully, as parts of some emojis might be obscured.",
+      "captchaTilePuzzleHint": "Slide the tiles into their right position. You can only move the ones directly next to each other."
+    },
+    "validation": {
+      "error": {
+        "required": "This field is required.",
+        "minLength": "Minimum length is {{count}} characters",
+        "maxLength": "Maximum length is {{count}} characters",
+        "min": "Value must be at least {{count}}",
+        "max": "Value must be no more than {{count}}",
+        "emailInvalid": "Invalid email address",
+        "captchaInvalid": "Invalid captcha",
+        "patternMismatch": "The input does not match the required pattern",
+        "passwordMismatch": "Passwords do not match",
+        "urlInvalid": "Invalid URL format",
+        "numberInvalid": "Please enter a valid number",
+        "dateInvalid": "Invalid date format",
+        "tooShort": "The input is too short",
+        "tooLong": "The input is too long",
+        "checkboxRequired": "You must check this box",
+        "fileTooLarge": "The file size exceeds the limit of {{size}}",
+        "fileTypeInvalid": "Invalid file type",
+        "customError": "Invalid input",
+        "missingUppercase": "Must contain at least one uppercase letter",
+        "missingLowercase": "Must contain at least one lowercase letter",
+        "missingNumber": "Must contain at least one number",
+        "missingSpecialCharacter": "Must contain at least one symbol",
+        "sumOfNumbersGte": "Sum of numbers must be at least or equal to {{count}}",
+        "sumOfNumbersMustBeEven": "Sum of numbers must be be even",
+        "passwordAlreadyTaken": "The password is already taken by another user"
+      },
+      "passwordStrength": {
+        "weak": "Weak",
+        "okay": "Okay",
+        "veryStrong": "Strong"
+      }
+    }
+  },
+  "user": {
+    "common": {
+      "registerAccount": "Need an account?",
+      "forgotPassword": "Forgot password?",
+      "Login": "Login",
+      "register": "Register"
+    },
+    "field": {
+      "consentNewsletter": "I want to receive newsletter",
+      "consentPrivacyPolicy": "Accept privacy policy",
+      "countryCode": "Country",
+      "dateOfBirth": "Date of birth",
+      "email": "Email",
+      "firstName": "First name",
+      "gender": "Gender",
+      "lastName": "Last name",
+      "nickname": "Nickname",
+      "password": "Password",
+      "passwordConfirmation": "Password confirmation",
+      "phoneNumber": "Phone number",
+      "rememberMe": "Remember me",
+      "username": "Username"
+    },
+    "form": {
+      "login": {
+        "genericError": "Login failed",
+        "callToAction": "Login"
+      },
+      "registration": {
+        "genericError": "Registration failed",
+        "callToAction": "Create my account"
+      },
+      "passwordReminder": {
+        "genericError": "Password reminder failed",
+        "callToAction": "Send password reminder"
+      }
+    },
+    "genderVariants": {
+      "alien": "Alien",
+      "chymera": "Chymera",
+      "cyborg": "Cyborg",
+      "female": "Female",
+      "male": "Male",
+      "other": "Other",
+      "robot": "Robot"
+    }
+  },
+  "settings": {
+    "userPreferences": {
+      "title": "Preferences",
+      "colorScheme": "Theme / Color scheme",
+      "darkMode": "Dark mode",
+      "enableFlashing": "Flashing contents",
+      "enableSound": "Sound",
+      "adultFilter": "Filter adult contents",
+      "themeSwitch": {
+        "label": "Switch theme",
+        "darkMode": "Dark mode",
+        "lightMode": "Light mode"
+      }
+    },
+    "userGrants": {
+      "title": "Consent and permissions",
+      "permissionDisclaimer": "Permission settings are managed by the browser, if you want to change theme you can do it from the site settings in your browser.",
+      "essentialCookies": "Allow essential cookies",
+      "notificationPermission": "Notification permission",
+      "locationPermission": "Location permission"
+    },
+    "optionalExperienceFlags": {
+      "title": "Optional experience",
+      "gifts": {
+        "flaps": "Background ad flaps",
+        "oneByOne": "One by one ad blocks"
+      },
+      "contentPaywall": "Content paywall",
+      "deadPixel": "Dead pixel",
+      "exitPrompt": "Exit prompt",
+      "mockChat": "Bubble chat",
+      "newsletterModal": "Newsletter popup modal",
+      "notifications": "Notifications",
+      "pageTitleInactiveArrayPaged": "Alternative title when tab is inactive",
+      "searchDelay": "Fake search delay",
+      "wheelOfFortune": "Wheel of fortune",
+      "stickyVideo": "Sticky video"
+    },
+    "mandatoryExperienceFlags": {
+      "title": "Mandatory experience",
+      "impossibleLogin": "Impossible login",
+      "impossibleRegistration": "Impossible registration",
+      "impossiblePasswordReminder": "Impossible password reminder",
+      "unreasonableContent": "Unreasonable content",
+      "flaimYourPhone": "Flaim your phone"
+    },
+    "runtime": {
+      "title": "About this session",
+      "disclaimer": "These values reset every single visit and acts as a bit of debug info.",
+      "startedAgo": "Started:",
+      "visibilitySeconds": "Elapsed seconds:",
+      "isDocumentVisible": "Is this window in focus?",
+      "navigationCount": "Navigation count:",
+      "interactionUnlocked": "Had first interaction?"
+    }
+  },
+  "share": {
+    "modal": {
+      "title": "Share this page",
+      "description": "Spread the misery! Be sure to inflict this painfully obnoxious website on your friends too — why suffer alone when you can drag them down with you?"
+    }
+  },
+  "notification": {
+    "modal": {
+      "title": "You can manually change the notification permission up here",
+      "description": "We would like to send you notifications sometimes, could you be so kind to allow us to do so? 🙏🥺🙏"
+    }
+  },
+  "newsletter": {
+    "modal": {
+      "title": "Join our newsletter!",
+      "description": "Our premium newsletter brings an insane amount of value right to your inbox. Don't miss out on insights that make a real difference!",
+      "placeholder": "Enter your email",
+      "initialConfirm": "Subscribe",
+      "initialCancel": "Don't Subscribe",
+      "useFormActions": "Please use the relevant button instead",
+      "confirmations": [
+        {
+          "text": "We're disappointed to see that you may not have had enough time to fully consider this important and challenging decision.",
+          "confirm": "I thought about it, I still want to",
+          "cancel": "You are right, cancel"
+        },
+        {
+          "text": "We are sorry to see you subscribing, can we treat you with the joys of not being a subscriber at all?",
+          "confirm": "No thanks",
+          "cancel": "I need my treat!"
+        },
+        {
+          "text": "Have you considered skipping this newsletter?",
+          "confirm": "No",
+          "cancel": "Yes"
+        },
+        {
+          "text": "Subscribing to this newsletter might have adverse side effects. Are you still in?",
+          "confirm": "I accept side effects",
+          "cancel": "Get me out of here"
+        }
+      ]
+    }
+  },
+  "paywall": {
+    "overlay": {
+      "title": "You either gotta pay $0.69/hour with 24 months of commitment in order to see the next paragraph or need to keep clicking the secondary button.",
+      "disclaimer": "it might not be as secure and legit but that doesn't matter because you can't actually pay on this website.",
+      "confirm": "Pay! 100% legit and secure",
+      "cancel": "Give me free stuff for free"
+    }
+  },
+  "article": {
+    "coverImage": "Cover image",
+    "published": "Published at {{date}}"
+  },
+  "titleExperience": {
+    "marqueeVariants": [
+      "📣 Come back please 🏃‍♀️🏃 We have candy!! 🚐"
+    ],
+    "arrayPagedVariants": [
+      "⭐️ HEY YOU 🫵",
+      "😜 YES YOU 😱",
+      "📣 COME BACK 🏃"
     ]
   },
   "search": {
@@ -185,7 +302,7 @@
     "resultMeta": "Search for \"{{query}}\" took {{time}}ms and found {{count}} results",
     "searching": "Searching",
     "peopleAlsoSearched": "People also searched for:",
-    "topSearches": [
+    "topSearcheVariants": [
       "do fish get thirsty",
       "pasta lyrics",
       "do cars run out of honk",
@@ -201,10 +318,6 @@
       "bog brother"
     ]
   },
-  "article": {
-    "coverImage": "Cover image",
-    "published": "Published at {{date}}"
-  },
   "gifts": {
     "dilf": {
       "title": "DILF",
@@ -214,12 +327,166 @@
       "flapRight": "DILF. Tastiest donuts in your proximity"
     },
     "wanPhone": {
-      "title": "Congratulations! You've wan a phone!"
+      "title": "Congratulations! You've wan a phone! Flaim now!",
+      "survey": {
+        "description": "Fill out this quick survey and you might have a chance to flaim your new phone! Be precise and quick but not too quick.",
+        "lost": {
+          "text": "Sorry, looks like you have not finished the survey in time.",
+          "callToAction": "Back to home"
+        },
+        "cheatDetected": {
+          "text": "Cheating detected! You are not allowed to flaim your phone.",
+          "callToAction": "Back to home"
+        },
+        "completed": {
+          "text": "Thank you for participating! Unfortunatelly phone cannot be flaimed at this time.",
+          "callToAction": "Back to home"
+        },
+        "questionVariants": [
+          {
+            "text": "How old are you?",
+            "options": [
+              "<18",
+              "18-24",
+              "25-34",
+              "35-44",
+              "45-54",
+              "55-64",
+              "65+"
+            ]
+          },
+          {
+            "text": "What is the most common favorite color?",
+            "options": [
+              "Red",
+              "Green",
+              "Blue",
+              "Yellow",
+              "Orange",
+              "Purple",
+              "Black",
+              "White"
+            ],
+            "solution": "Blue"
+          },
+          {
+            "text": "It has four legs, it's not a chair but a table",
+            "options": [
+              "Spider",
+              "Horse",
+              "Yes",
+              "Table"
+            ],
+            "solution": "Table"
+          },
+          {
+            "text": "What is the square root of 144?",
+            "options": [
+              "10",
+              "11",
+              "12",
+              "17"
+            ],
+            "solution": "12"
+          },
+          {
+            "text": "How much wood would a woodchuck chuck if a woodchuck could chuck wood?",
+            "options": [
+              "Yes",
+              "700 pounds",
+              "144",
+              "Inf",
+              "Rather not say"
+            ],
+            "solution": "700 pounds"
+          },
+          {
+            "text": "Finish the following: Well, well, well...",
+            "options": [
+              "How the turntables...",
+              "I did not hit her",
+              "It's down there somewhere, let me take another look",
+              "You can't park there"
+            ],
+            "solution": "How the turntables..."
+          },
+          {
+            "text": "What is the following is not a phone brand",
+            "options": [
+              "Nokia",
+              "Samsung",
+              "Apple",
+              "Motorola",
+              "Blablabluba"
+            ],
+            "solution": "Blablabluba"
+          },
+          {
+            "text": "What is the first letter of the alphabet?",
+            "options": [
+              "A",
+              "B",
+              "C",
+              "D",
+              "E",
+              "F",
+              "G",
+              "H"
+            ],
+            "solution": "A"
+          },
+          {
+            "text": "Do you believe in magic?",
+            "options": [
+              "Yes",
+              "No"
+            ],
+            "solution": "Yes"
+          }
+        ]
+      }
     }
   },
-  "donate": {
-    "title": "Donations",
-    "description": "This is one feature that actually supposed to work. If you'd like to help support the project or the authors, you can donate here. Every donation helps. We appreciate your support!",
-    "donateLink": "Donation info here"
+  "wheelOfFortune": {
+    "title": "Wheel of fortune",
+    "spinStart": "Let's spin the wheel!!",
+    "spinWin": "You won! {{prize}}",
+    "prizeVariants": {
+      "freeLifetimeBeer": "Free lifetime beer",
+      "worldPeace": "World peace",
+      "absolutellyNothing": "Absolutelly nothing",
+      "complimentaryOtter": "Complimentary otter",
+      "fake70Discount": "Fake 70% discount"
+    }
+  },
+  "chatBubble": {
+    "messageInitial": "Hello! I am a chat bubble. I am here to help you. 🤓",
+    "messageVariants": [
+      "Come on, let me help you!",
+      "I can't hear you! Speak louder!",
+      "Who lives under the sea?",
+      "The FitnessGram Pacer Test is a multistage aerobic capacity test that progressively gets more difficult as it continues.",
+      "Sorry, I'm going through a tunnel right now. Can you repeat that?",
+      "You must have missed my previous messages. I'm kind of lonely.",
+      "Wondering if my messages got caught in a time warp. Feeling like I'm at a party where everyone's speaking Simlish.",
+      "My messages must be on a ghosting spree. Feeling ignored.",
+      "Ah, the sweet sound of silence. My messages must be enjoying their newfound solitude."
+    ],
+    "messageFallback": "It's nothing, leave me alone. 😤",
+    "newAlert": "New message from Chat Bubble! 🎉",
+    "hudTitle": "Chat with a \"100% real huuman\"",
+    "hudTitleDisclaimer": "Disclaimer: Actually, this is a bot that almost feels like a real human (not a smart one) but it's still just a bot",
+    "agentIsTyping": "Agent is typing",
+    "yourMessage": "Your message",
+    "yourMessagePlaceholder": "Type here..."
+  },
+  "messages": {
+    "errors": {
+      "e404title": "Error 404",
+      "e404description": "Page not found, how could this happen"
+    },
+    "info": {
+      "pictureOfYou": "Picture of you"
+    }
   }
 }

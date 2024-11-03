@@ -1,5 +1,6 @@
+export type HistoryItemOwner = 'user' | 'bot';
 export type HistoryItem = {
   text: string;
-  isUser: boolean;
+  owner: HistoryItemOwner;
   time: Date;
 };

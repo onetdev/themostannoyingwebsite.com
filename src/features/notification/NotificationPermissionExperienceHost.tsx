@@ -4,13 +4,13 @@ import { FunctionComponent, useRef, useState } from 'react';
 
 import ManualModal from './components/ManualModal';
 
-import useScrollDistanceTrigger from '@/hooks/useScrollDistanceTrigger';
-import { useExperienceFlagsStore } from '@/state/experience_flags';
-import { useUserGrantsStore } from '@/state/user_grants';
+import useScrollDistanceTrigger from '@/lib/hooks/useScrollDistanceTrigger';
+import { useExperienceFlagsStore } from '@/lib/state/experience_flags';
+import { useUserGrantsStore } from '@/lib/state/user_grants';
 import {
   getNotificationPermissionState,
   requestNotificationPermission,
-} from '@/utils/permission';
+} from '@/lib/utils/permission';
 
 export type NotificationPermissionExperienceHostProps = {
   scrollDistanceTrigger?: number;

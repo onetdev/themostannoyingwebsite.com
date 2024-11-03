@@ -15,7 +15,7 @@ const ContainerGiftFlaps: FunctionComponent = () => {
           <Image
             className="object-cover opacity-30 mix-blend-lighten"
             src="/assets/dilf-shaded.webp"
-            alt="Super duper car advert"
+            alt={t('gifts.dilf.title')}
             width={1900}
             height={1000}
           />

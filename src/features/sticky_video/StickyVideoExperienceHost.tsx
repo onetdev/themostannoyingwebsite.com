@@ -4,8 +4,8 @@ import { useTranslation } from 'next-i18next';
 import { FunctionComponent, useEffect, useRef, useState } from 'react';
 
 import Icon from '@/components/atoms/Icon';
-import { useExperienceFlagsStore } from '@/state/experience_flags';
-import { useUserGrantsStore } from '@/state/user_grants';
+import { useExperienceFlagsStore } from '@/lib/state/experience_flags';
+import { useUserGrantsStore } from '@/lib/state/user_grants';
 
 const StickyVideoExperienceHost: FunctionComponent = () => {
   const stickyVideo = useExperienceFlagsStore((state) => state.stickyVideo);
@@ -26,7 +26,7 @@ const StickyVideoExperienceHost: FunctionComponent = () => {
       <div className="sticky bottom-2 right-2 flex justify-end md:fixed">
         <button
           className="absolute right-2 top-1"
-          aria-label={t('actions.close')}
+          aria-label={t('common.close')}
           onClick={() => setClosed(true)}>
           <Icon icon="close" />
         </button>

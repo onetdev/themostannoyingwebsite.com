@@ -119,13 +119,13 @@ const PhoneNumberField: FunctionComponent<PhoneNumberFieldProps> = ({
   return (
     <div>
       <label>
-        <h5 className="mb-1">{t('user.phoneNumber')}</h5>
+        <h5 className="mb-1">{t('user.field.phoneNumber')}</h5>
         <div className="flex gap-3">
           <Select
             className="w-1/4"
             values={phoneCountryOptions}
             {...register('phoneNumberCountry', {
-              required: t('validation.errors.required'),
+              required: t('form.validation.error.required'),
             })}
           />
           <div className="flex w-3/4">
@@ -144,7 +144,7 @@ const PhoneNumberField: FunctionComponent<PhoneNumberFieldProps> = ({
               disabled
               className="max-w-44 select-none rounded-none border-x-0"
               {...register('phoneNumber', {
-                required: t('validation.errors.required'),
+                required: t('form.validation.error.required'),
               })}
             />
             <Button

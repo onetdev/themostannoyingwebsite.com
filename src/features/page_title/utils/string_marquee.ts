@@ -1,4 +1,4 @@
-import { mb_string_to_char_array } from '@/utils/string';
+import { mb_string_to_char_array } from '@/lib/utils/string';
 
 type StringMarqueeOpts = {
   width?: number;

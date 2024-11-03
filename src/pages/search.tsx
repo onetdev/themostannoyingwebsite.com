@@ -9,10 +9,10 @@ import PageHeadline from '@/components/atoms/PageHeadline';
 import SiteTitle from '@/components/atoms/SiteTitle';
 import SearchForm from '@/components/organisms/SearchForm';
 import { ArticleSearchResult, ArticleService } from '@/features/articles';
-import { useExperienceFlagsStore } from '@/state/experience_flags';
-import { shuffleArray } from '@/utils/array';
-import { makeI18nStaticProps } from '@/utils/i18n';
-import { random } from '@/utils/math';
+import { useExperienceFlagsStore } from '@/lib/state/experience_flags';
+import { arrayShuffle } from '@/lib/utils/array';
+import { makeI18nStaticProps } from '@/lib/utils/i18n';
+import { random } from '@/lib/utils/math';
 
 type Result = {
   query: string;
@@ -31,7 +31,7 @@ const Search: NextPage = () => {
   const [results, setResults] = useState<Result | undefined>();
 
   const topSearchesPool = useMemo(() => {
-    return t('search.topSearches', {
+    return t('search.topSearcheVariants', {
       returnObjects: true,
       defaultValue: [],
     }) as string[];
@@ -84,7 +84,7 @@ const Search: NextPage = () => {
         query,
         time: time.toString().substring(0, time.toString().indexOf('.') + 6),
         count: matches.length,
-        topSearches: shuffleArray(topSearchesPool).slice(0, 3),
+        topSearches: arrayShuffle(topSearchesPool).slice(0, 3),
         items: matches,
       });
       setLoading(false);

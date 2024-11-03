@@ -9,7 +9,7 @@ import { DeadPixelHost } from '@/features/dead_pixel';
 import { ContainerGiftFlaps } from '@/features/gifts';
 import { StickyVideoExperienceHost } from '@/features/sticky_video';
 import { WheelOfFortuneHost } from '@/features/wheel_of_fortune';
-import { useExperienceFlagsStore } from '@/state/experience_flags';
+import { useExperienceFlagsStore } from '@/lib/state/experience_flags';
 
 type MainLayoutProps = JSXProxyProps<'div'>;
 

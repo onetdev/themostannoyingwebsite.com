@@ -7,8 +7,8 @@ import ArrayPagedTitle from './components/ArrayPagedTitle';
 import GlitchyTitle from './components/GlitchyTitle';
 import MarqueeTitle from './components/MarqueeTitle';
 
-import { useExperienceFlagsStore } from '@/state/experience_flags';
-import { useRuntimeStore } from '@/state/runtime';
+import { useExperienceFlagsStore } from '@/lib/state/experience_flags';
+import { useRuntimeStore } from '@/lib/state/runtime';
 
 /**
  * Experience of manipulating the page title. Unfortunatelly the refresh rate
@@ -26,13 +26,13 @@ const PageTitleExperienceHost: FunctionComponent = () => {
   // Anyways, in case of returnObjects being true we need to first convert
   // the magic object into an array.
   const marqueeVariants = Array.from(
-    t('experiences.marqueeVariants', {
+    t('titleExperience.marqueeVariants', {
       returnObjects: true,
       defaultValue: [],
     }),
   ) as string[];
   const arrayPagedVariants = Array.from(
-    t('experiences.arrayPagedVariants', {
+    t('titleExperience.arrayPagedVariants', {
       returnObjects: true,
       defaultValue: [],
     }),

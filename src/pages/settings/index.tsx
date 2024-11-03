@@ -10,15 +10,15 @@ import {
   RuntimeSettings,
   UserGrantsSettings,
 } from '@/features/settings';
-import { makeI18nStaticProps } from '@/utils/i18n';
+import { makeI18nStaticProps } from '@/lib/utils/i18n';
 
 const Settings: NextPage = () => {
-  const { t } = useTranslation(['settings', 'common']);
+  const { t } = useTranslation();
 
   return (
     <main>
-      <SiteTitle>{t('common:navigation.settings')}</SiteTitle>
-      <PageHeadline>{t('settings:title')}</PageHeadline>
+      <SiteTitle>{t('navigation.settings')}</SiteTitle>
+      <PageHeadline>{t('navigation.settings')}</PageHeadline>
 
       <div className="grid gap-3 md:grid-cols-2">
         <PreferencesSettings />
@@ -34,5 +34,5 @@ const Settings: NextPage = () => {
   );
 };
 
-export const getStaticProps = makeI18nStaticProps(['settings']);
+export const getStaticProps = makeI18nStaticProps();
 export default Settings;

@@ -5,11 +5,11 @@ import { useBeforeUnload } from 'react-use';
 import { NewsletterModalExperienceHost } from '@/features/newsletter';
 import { NotificationPermissionExperienceHost } from '@/features/notification';
 import { PageTitleExperienceHost } from '@/features/page_title';
-import useDocumentVisibilityListener from '@/hooks/useDocumentVisibilityListener';
-import useFirstInteractionListener from '@/hooks/useFirstInteractionListener';
-import useNavigationStats from '@/hooks/useNavigationStats';
-import { useExperienceFlagsStore } from '@/state/experience_flags';
-import { useUserGrantsStore } from '@/state/user_grants';
+import useDocumentVisibilityListener from '@/lib/hooks/useDocumentVisibilityListener';
+import useFirstInteractionListener from '@/lib/hooks/useFirstInteractionListener';
+import useNavigationStats from '@/lib/hooks/useNavigationStats';
+import { useExperienceFlagsStore } from '@/lib/state/experience_flags';
+import { useUserGrantsStore } from '@/lib/state/user_grants';
 
 const ExperienceProvider: FunctionComponent<PropsWithChildren> = ({
   children,
@@ -21,7 +21,7 @@ const ExperienceProvider: FunctionComponent<PropsWithChildren> = ({
   useFirstInteractionListener();
   useDocumentVisibilityListener();
   useNavigationStats();
-  useBeforeUnload(exitPrompt, t('experiences.exitPrompt'));
+  useBeforeUnload(exitPrompt, t('app.exitPrompt'));
 
   useEffect(() => {
     syncPermissions();

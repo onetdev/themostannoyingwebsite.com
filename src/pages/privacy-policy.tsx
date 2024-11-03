@@ -6,9 +6,9 @@ import { useMemo } from 'react';
 import PageHeadline from '@/components/atoms/PageHeadline';
 import SiteTitle from '@/components/atoms/SiteTitle';
 import config from '@/config';
+import { makeI18nStaticProps } from '@/lib/utils/i18n';
+import { parse } from '@/lib/utils/markdown';
 import styles from '@/styles/content.module.css';
-import { makeI18nStaticProps } from '@/utils/i18n';
-import { parse } from '@/utils/markdown';
 
 // Privacy policy inspired by https://matomo.org/privacy-policy/
 const PrivacyPolicy: NextPage = () => {
@@ -69,7 +69,7 @@ const contentMarkdownEn = `
 
   If you have any questions about this Privacy Policy, please contact us at [${config.contactEmail}](${config.contactEmail}).
 
-  Update 2024-10-29: This update includes the necessary notice about embedded YouTube videos and its data-sharing implications, which should help ensure transparency and compliance with privacy laws.
+  **Update 2024-10-29**: This update includes the necessary notice about embedded YouTube videos and its data-sharing implications, which should help ensure transparency and compliance with privacy laws.
 `;
 
 export const getStaticProps = makeI18nStaticProps();

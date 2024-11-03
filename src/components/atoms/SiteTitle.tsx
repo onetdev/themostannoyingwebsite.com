@@ -7,7 +7,7 @@ export type SiteTitleProps = PropsWithChildren;
 const SiteTitle: FunctionComponent<SiteTitleProps> = ({ children }) => {
   const { t } = useTranslation('common');
 
-  const pageTitle = `${children} - ${t('meta.title')}`;
+  const pageTitle = `${children} - ${t('app.title')}`;
 
   return (
     <Head>

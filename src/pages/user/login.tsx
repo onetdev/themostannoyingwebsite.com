@@ -11,8 +11,8 @@ import PageHeadline from '@/components/atoms/PageHeadline';
 import SiteTitle from '@/components/atoms/SiteTitle';
 import TextInput from '@/components/atoms/TextInput';
 import { LoginFormInputs } from '@/features/auth';
-import { makeI18nStaticProps } from '@/utils/i18n';
-import { EMAIL_PATTERN } from '@/utils/validator';
+import { makeI18nStaticProps } from '@/lib/utils/i18n';
+import { EMAIL_PATTERN } from '@/lib/utils/validator';
 
 const Login: NextPage = () => {
   const { t } = useTranslation('common');
@@ -23,7 +23,7 @@ const Login: NextPage = () => {
   } = useForm<LoginFormInputs>();
 
   const onSubmit: SubmitHandler<LoginFormInputs> = (_data) => {
-    alert(t('user.loginError'));
+    alert(t('user.form.login.genericError'));
   };
 
   return (
@@ -36,15 +36,15 @@ const Login: NextPage = () => {
         onSubmit={handleSubmit(onSubmit)}>
         <div>
           <label>
-            <h4 className="mb-1">{t('user.email')}</h4>
+            <h4 className="mb-1">{t('user.field.email')}</h4>
             <TextInput
               type="email"
               className="w-full"
               {...register('email', {
-                required: t('validation.errors.required'),
+                required: t('form.validation.error.required'),
                 pattern: {
                   value: EMAIL_PATTERN,
-                  message: t('validation.errors.emailInvalid'),
+                  message: t('form.validation.error.emailInvalid'),
                 },
               })}
             />
@@ -53,12 +53,12 @@ const Login: NextPage = () => {
         </div>
         <div>
           <label>
-            <h4 className="mb-1">{t('user.password')}</h4>
+            <h4 className="mb-1">{t('user.field.password')}</h4>
             <TextInput
               type="password"
               className="w-full"
               {...register('password', {
-                required: t('validation.errors.required'),
+                required: t('form.validation.error.required'),
               })}
             />
           </label>
@@ -67,14 +67,14 @@ const Login: NextPage = () => {
         <div>
           <label className="flex items-center gap-2">
             <Checkbox {...register('remember')} />
-            <h4>{t('user.rememberMe')}</h4>
+            <h4>{t('user.field.rememberMe')}</h4>
           </label>
           <FormFieldError error={errors.remember} />
         </div>
         <div className="flex flex-col">
           <label>
-            <h4 className="mb-1">{t('captcha.field')}</h4>
-            <small>{t('captcha.captchaEmojiHint')}</small>
+            <h4 className="mb-1">{t('form.captcha.field')}</h4>
+            <small>{t('form.captcha.captchaEmojiHint')}</small>
             <CaptchaEmoji
               className="my-3 rounded-md border border-on-background"
               width={300}
@@ -84,10 +84,10 @@ const Login: NextPage = () => {
               type="text"
               className="w-[300px]"
               {...register('captcha', {
-                required: t('validation.errors.required'),
+                required: t('form.validation.error.required'),
                 pattern: {
                   value: /^[XyZ123]{444}$/,
-                  message: t('validation.errors.captchaInvalid'),
+                  message: t('form.validation.error.captchaInvalid'),
                 },
               })}
             />
@@ -96,14 +96,14 @@ const Login: NextPage = () => {
         </div>
 
         <Button type="submit" className="mt-10" size="lg">
-          {t('actions.login')}
+          {t('user.form.login.callToAction')}
         </Button>
         <div className="flex justify-between">
           <Link href="/user/password-reminder" passHref prefetch={false}>
-            {t('user.forgotPassword')}
+            {t('user.common.forgotPassword')}
           </Link>
           <Link href="/user/registration" passHref prefetch={false}>
-            {t('user.registerAccount')}
+            {t('user.common.registerAccount')}
           </Link>
         </div>
       </form>

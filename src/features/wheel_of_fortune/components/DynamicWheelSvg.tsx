@@ -1,7 +1,7 @@
 import Color from 'color';
 import { FunctionComponent, ReactNode } from 'react';
 
-import { radToDeg } from '@/utils/math';
+import { radToDeg } from '@/lib/utils/math';
 
 export type Item = {
   color: string;

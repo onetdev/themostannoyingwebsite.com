@@ -1,17 +1,17 @@
 import fs from 'fs';
 import { zodToJsonSchema } from 'zod-to-json-schema';
 
-import articleEntrySimplifiedZod from '@/schemas/article-entry-simplified';
-import articleIndexEntryZod from '@/schemas/article-index-entry';
-import articleLocaleMetaZod from '@/schemas/article-locale-meta';
+import articleEntrySimplifiedZod from '@/root/src/lib/schemas/article-entry-simplified';
+import articleIndexEntryZod from '@/root/src/lib/schemas/article-index-entry';
+import articleLocaleMetaZod from '@/root/src/lib/schemas/article-locale-meta';
 
 const writeMap = {
-  './src/schemas/article-entry-simplified.schema.json': zodToJsonSchema(
+  './src/lib/schemas/article-entry-simplified.schema.json': zodToJsonSchema(
     articleEntrySimplifiedZod,
   ),
-  './src/schemas/article-index-entry.schema.json':
+  './src/lib/schemas/article-index-entry.schema.json':
     zodToJsonSchema(articleIndexEntryZod),
-  './src/schemas/article-locale-meta.schema.json':
+  './src/lib/schemas/article-locale-meta.schema.json':
     zodToJsonSchema(articleLocaleMetaZod),
 };
 

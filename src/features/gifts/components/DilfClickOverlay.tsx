@@ -13,7 +13,8 @@ const DilfClickOverlay: FunctionComponent<DilfClickOverlayProps> = ({
     () =>
       dilfImageMappingPaths.map((definition, index) => ({
         path: definition,
-        query: `donut ${listOfMostInfluentialCities[index]}`,
+        // No need for translating this.
+        query: `donut shop in ${listOfMostInfluentialCities[index]}`,
       })),
     [],
   );

@@ -8,9 +8,9 @@ import {
   ArticleSearchFilter,
   ArticleSearchResult,
 } from '@/features/articles';
+import { ArticleIndexEntrySchema } from '@/lib/schemas/article-index-entry';
+import { fuzzy_search } from '@/lib/utils/string';
 import articlesRaw from '@/public/assets/articles/index.json';
-import { ArticleIndexEntrySchema } from '@/schemas/article-index-entry';
-import { fuzzy_search } from '@/utils/string';
 
 export const defaultPageSize = 10;
 

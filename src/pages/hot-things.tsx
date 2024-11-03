@@ -6,7 +6,7 @@ import { useEffect, useRef, useState } from 'react';
 import Icon from '@/components/atoms/Icon';
 import PageHeadline from '@/components/atoms/PageHeadline';
 import SiteTitle from '@/components/atoms/SiteTitle';
-import { makeI18nStaticProps } from '@/utils/i18n';
+import { makeI18nStaticProps } from '@/lib/utils/i18n';
 
 const HotThings: NextPage = () => {
   const [isCapable, setIsCapable] = useState(false);
@@ -66,7 +66,7 @@ const HotThings: NextPage = () => {
         <Image
           className="absolute h-auto w-full"
           src="/assets/images/lava.webp"
-          alt="Picture of you"
+          alt={t('messages.info.pictureOfYou')}
           width={1920}
           height={1080}
         />

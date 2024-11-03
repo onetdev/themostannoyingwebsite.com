@@ -14,7 +14,7 @@ const MessageForm: FunctionComponent<MessageFormProps> = ({
   className,
   onMessage,
 }) => {
-  const { t } = useTranslation(['chat_bubble', 'common']);
+  const { t } = useTranslation();
   const userForm = useRef<HTMLFormElement>(null);
   const userMessage = useRef<HTMLInputElement>(null);
 
@@ -35,14 +35,14 @@ const MessageForm: FunctionComponent<MessageFormProps> = ({
       ref={userForm}>
       <TextInput
         name="message"
-        title={t('yourMessage')}
-        placeholder={t('yourMessagePlaceholder')}
+        title={t('chatBubble.yourMessage')}
+        placeholder={t('chatBubble.yourMessagePlaceholder')}
         ref={userMessage}
         className="-mr-1 w-full rounded-r-none"
       />
       <Button
         className="flex items-center rounded-l-none"
-        aria-label={t('common:actions.send')}
+        aria-label={t('common.send')}
         type="submit"
         size="md">
         <Icon icon="send" />

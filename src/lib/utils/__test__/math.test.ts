@@ -9,7 +9,7 @@ import {
   getWeightedRandom,
   radToDeg,
   random,
-} from '@/utils/math';
+} from '@/lib/utils/math';
 
 describe('Math angleRad', () => {
   test('should return the angle between two points in radians', () => {

@@ -3,7 +3,7 @@ import { FunctionComponent, useState } from 'react';
 import MarqueePlugin from 'react-fast-marquee';
 
 import { ArticleService } from '@/features/articles';
-import { useUserPreferencesStore } from '@/state/user_preferences';
+import { useUserPreferencesStore } from '@/lib/state/user_preferences';
 
 export type MarqueeTextProps = {
   className?: string;

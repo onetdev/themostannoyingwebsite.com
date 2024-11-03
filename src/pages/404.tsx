@@ -1,12 +1,15 @@
 import { NextPage } from 'next';
+import { useTranslation } from 'next-i18next';
 
-import { makeI18nStaticProps } from '@/utils/i18n';
+import { makeI18nStaticProps } from '@/lib/utils/i18n';
 
 const Error404: NextPage = () => {
+  const { t } = useTranslation();
+
   return (
     <main>
-      <h1>Error 404</h1>
-      <p>The page could not be loaded :((((</p>
+      <h1>{t('messages.errors.e404title')}</h1>
+      <p>{t('messages.errors.e404description')}</p>
     </main>
   );
 };

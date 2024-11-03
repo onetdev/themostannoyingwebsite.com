@@ -1,7 +1,7 @@
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 
-import { useRuntimeStore } from '@/state/runtime';
+import { useRuntimeStore } from '@/lib/state/runtime';
 
 const useNavigationStats = () => {
   const incrementNavigationCount = useRuntimeStore(

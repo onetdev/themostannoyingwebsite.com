@@ -1,42 +1,36 @@
 import { useTranslation } from 'next-i18next';
 import { FunctionComponent } from 'react';
 
-import SettingsBlock from './SettingsBlock';
-import SettingsBlockRow from './SettingsBlockRow';
-
 import FormCheckbox from '@/components/atoms/Checkbox';
-import { useUserGrantsStore } from '@/state/user_grants';
+import FormRow from '@/components/molecules/FormRow';
+import BorderedBox from '@/components/templates/BorderedBox';
+import { useUserGrantsStore } from '@/lib/state/user_grants';
 
 const UserGrantsSettings: FunctionComponent = () => {
   const grant = useUserGrantsStore();
-  const { t } = useTranslation(['settings', 'common']);
+  const { t } = useTranslation();
 
   return (
-    <SettingsBlock title={t('settings:section.userGrants.title')}>
-      <SettingsBlockRow
-        label={t('settings:section.userGrants.essentialCookies')}>
+    <BorderedBox title={t('settings.userGrants.title')}>
+      <FormRow label={t('settings.userGrants.essentialCookies')}>
         <FormCheckbox
           name="essential_cookies"
           checked={grant.cookies.essential}
           disabled
         />
-      </SettingsBlockRow>
+      </FormRow>
       <br />
       <small>
-        <i>{t('settings:section.userGrants.permissionDisclaimer')}</i>
+        <i>{t('settings.userGrants.permissionDisclaimer')}</i>
       </small>
       <br />
-      <SettingsBlockRow
-        label={t('settings:section.userGrants.notificationPermission')}
-        reverse>
-        {`${grant.permission.notification || t('common:status.notSet')}`}
-      </SettingsBlockRow>
-      <SettingsBlockRow
-        label={t('settings:section.userGrants.locationPermission')}
-        reverse>
-        {`${grant.permission.location || t('common:status.notSet')}`}
-      </SettingsBlockRow>
-    </SettingsBlock>
+      <FormRow label={t('settings.userGrants.notificationPermission')} reverse>
+        {`${grant.permission.notification || t('common.notSet')}`}
+      </FormRow>
+      <FormRow label={t('settings.userGrants.locationPermission')} reverse>
+        {`${grant.permission.location || t('common.notSet')}`}
+      </FormRow>
+    </BorderedBox>
   );
 };
 

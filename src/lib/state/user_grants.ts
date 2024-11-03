@@ -4,7 +4,7 @@ import { createJSONStorage, persist } from 'zustand/middleware';
 import {
   getLocationPermissionState,
   getNotificationPermissionState,
-} from '@/utils/permission';
+} from '@/lib/utils/permission';
 
 export interface UserGrantsState {
   reviewCompleted: boolean;
