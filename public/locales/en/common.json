@@ -328,9 +328,18 @@
       "title": "Congratulations! You've wan a phone! Flaim now!",
       "survey": {
         "description": "Fill out this quick survey and you might have a chance to flaim your new phone! Be precise and quick but not too quick.",
-        "start": "Start survey",
-        "end": "Thank you for participating!",
-        "remainingTime": "Remaining time: {{time}}",
+        "lost": {
+          "text": "Sorry, looks like you have not finished the survey in time.",
+          "callToAction": "Back to home"
+        },
+        "cheatDetected": {
+          "text": "Cheating detected! You are not allowed to flaim your phone.",
+          "callToAction": "Back to home"
+        },
+        "completed": {
+          "text": "Thank you for participating! Unfortunatelly phone cannot be flaimed at this time.",
+          "callToAction": "Back to home"
+        },
         "questionVariants": [
           {
             "text": "How old are you?",
@@ -374,7 +383,7 @@
               "10",
               "11",
               "12",
-              "12"
+              "17"
             ],
             "solution": "12"
           },
@@ -382,12 +391,12 @@
             "text": "How much wood would a woodchuck chuck if a woodchuck could chuck wood?",
             "options": [
               "Yes",
-              "700 punds",
+              "700 pounds",
               "144",
               "Inf",
               "Rather not say"
             ],
-            "solution": "700 punds"
+            "solution": "700 pounds"
           },
           {
             "text": "Finish the following: Well, well, well...",

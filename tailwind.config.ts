@@ -11,6 +11,8 @@ module.exports = {
         'flashing-invert-1/2': 'flashing-invert-1/2 500ms infinite',
         'wiggle-15deg': 'wiggle-15deg 0.2s linear infinite;',
         'wiggle-8deg': 'wiggle-8deg 8s infinite',
+        'width-0-100': 'width-0/100 2s infinite',
+        'width-100-0': 'width-0/100 2s reverse infinite',
       },
       backgroundImage: {
         'bottom-fadeout':
@@ -93,6 +95,10 @@ module.exports = {
           '96%': { transform: 'rotate(8deg)' },
           '98%': { transform: 'rotate(-8deg)' },
           '100%': { transform: 'rotate(0deg)' },
+        },
+        'width-0/100': {
+          '0%': { width: '0%' },
+          '100%': { width: '100%' },
         },
       },
       minWidth: {
