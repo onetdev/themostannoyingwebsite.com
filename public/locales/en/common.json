@@ -216,7 +216,8 @@
       "impossibleLogin": "Impossible login",
       "impossibleRegistration": "Impossible registration",
       "impossiblePasswordReminder": "Impossible password reminder",
-      "unreasonableContent": "Unreasonable content"
+      "unreasonableContent": "Unreasonable content",
+      "flaimYourPhone": "Flaim your phone"
     },
     "runtime": {
       "title": "About this session",

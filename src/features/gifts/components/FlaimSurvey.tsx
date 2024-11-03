@@ -83,8 +83,6 @@ const FlaimSurvery: FunctionComponent<FlaimSurveryProps> = ({
 
   const onHome = () => router.push('/');
 
-  console.log(progression);
-
   return (
     <BorderedBox className={`flex gap-3 ${className}`}>
       {isCompleted === false && (

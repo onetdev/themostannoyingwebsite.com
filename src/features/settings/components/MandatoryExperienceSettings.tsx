@@ -30,6 +30,9 @@ const MandatoryExperienceSettings: FunctionComponent = () => {
           disabled
         />
       </FormRow>
+      <FormRow label={t('settings.mandatoryExperienceFlags.flaimYourPhone')}>
+        <FormCheckbox name="claim_your_phone" checked={true} disabled />
+      </FormRow>
     </BorderedBox>
   );
 };
