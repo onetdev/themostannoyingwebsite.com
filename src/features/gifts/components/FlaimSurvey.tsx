@@ -4,7 +4,7 @@ import { FunctionComponent, useEffect, useMemo, useState } from 'react';
 
 import Button from '@/components/atoms/Button';
 import RadioButton from '@/components/atoms/RadioButton';
-import FormRow from '@/components/molecules/FormRow';
+import LabeledChild from '@/components/molecules/LabeledChild';
 import BorderedBox from '@/components/templates/BorderedBox';
 import { FlaimSurveyQuestion } from '@/features/gifts';
 import { useRuntimeStore } from '@/lib/state/runtime';
@@ -104,7 +104,7 @@ const FlaimSurvery: FunctionComponent<FlaimSurveryProps> = ({
         <>
           <h3 className="my-3">{viewData.text}</h3>
           {viewData.options.map((option, index) => (
-            <FormRow key={`${index}-${option}`} label={option}>
+            <LabeledChild key={`${index}-${option}`} label={option}>
               <RadioButton
                 value={index}
                 name="flaim-survey"
@@ -112,7 +112,7 @@ const FlaimSurvery: FunctionComponent<FlaimSurveryProps> = ({
                   setProgression((prev) => ({ ...prev, selected: index }))
                 }
               />
-            </FormRow>
+            </LabeledChild>
           ))}
           <Button
             onClick={onNext}
