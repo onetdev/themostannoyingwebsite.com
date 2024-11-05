@@ -1,11 +1,11 @@
 import { FunctionComponent, PropsWithChildren } from 'react';
 
-export type FormRowProps = PropsWithChildren<{
+export type LabeledChildProps = PropsWithChildren<{
   label: string;
   reverse?: boolean;
 }>;
 
-const FormRow: FunctionComponent<FormRowProps> = ({
+const LabeledChild: FunctionComponent<LabeledChildProps> = ({
   label,
   children,
   reverse = false,
@@ -20,4 +20,4 @@ const FormRow: FunctionComponent<FormRowProps> = ({
   );
 };
 
-export default FormRow;
+export default LabeledChild;

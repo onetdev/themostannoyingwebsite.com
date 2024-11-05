@@ -3,6 +3,7 @@ import {
   faBars,
   faCheck,
   faCommentDots,
+  faEyeDropper,
   faGear,
   faMagnifyingGlass,
   faMapMarkerAlt,
@@ -21,6 +22,7 @@ import { FunctionComponent } from 'react';
 const iconMap = {
   check: faCheck,
   close: faTimes,
+  colorPicker: faEyeDropper,
   commentDots: faCommentDots,
   login: faUser,
   mapMarker: faMapMarkerAlt,

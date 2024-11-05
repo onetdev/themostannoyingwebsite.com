@@ -3,7 +3,7 @@ import { FunctionComponent } from 'react';
 
 import Button from '@/components/atoms/Button';
 import FormCheckbox from '@/components/atoms/Checkbox';
-import FormRow from '@/components/molecules/FormRow';
+import LabeledChild from '@/components/molecules/LabeledChild';
 import BorderedBox from '@/components/templates/BorderedBox';
 import { useExperienceFlagsStore } from '@/lib/state/experience_flags';
 
@@ -27,63 +27,67 @@ const ExperienceSettings: FunctionComponent<ExperienceSettingsProps> = ({
       title={t('settings.optionalExperienceFlags.title')}
       className={className}>
       <div className={listClassName}>
-        <FormRow label={t('settings.optionalExperienceFlags.gifts.flaps')}>
+        <LabeledChild label={t('settings.optionalExperienceFlags.gifts.flaps')}>
           <FormCheckbox
             name="gift_flaps"
             checked={experience.gifts.flaps}
             onValueChange={(flaps) => experience.setGifts({ flaps })}
           />
-        </FormRow>
-        <FormRow label={t('settings.optionalExperienceFlags.gifts.oneByOne')}>
+        </LabeledChild>
+        <LabeledChild
+          label={t('settings.optionalExperienceFlags.gifts.oneByOne')}>
           <FormCheckbox
             name="gift_flaps"
             checked={experience.gifts.oneByOne}
             onValueChange={(oneByOne) => experience.setGifts({ oneByOne })}
           />
-        </FormRow>
-        <FormRow label={t('settings.optionalExperienceFlags.contentPaywall')}>
+        </LabeledChild>
+        <LabeledChild
+          label={t('settings.optionalExperienceFlags.contentPaywall')}>
           <FormCheckbox
             name="content_paywall"
             checked={experience.contentPaywall}
             onValueChange={experience.setContentPaywall}
           />
-        </FormRow>
-        <FormRow label={t('settings.optionalExperienceFlags.deadPixel')}>
+        </LabeledChild>
+        <LabeledChild label={t('settings.optionalExperienceFlags.deadPixel')}>
           <FormCheckbox
             name="dead_pixel"
             checked={experience.deadPixel}
             onValueChange={experience.setDeadPixel}
           />
-        </FormRow>
-        <FormRow label={t('settings.optionalExperienceFlags.exitPrompt')}>
+        </LabeledChild>
+        <LabeledChild label={t('settings.optionalExperienceFlags.exitPrompt')}>
           <FormCheckbox
             name="exit_prompt"
             checked={experience.exitPrompt}
             onValueChange={experience.setExitPrompt}
           />
-        </FormRow>
-        <FormRow label={t('settings.optionalExperienceFlags.mockChat')}>
+        </LabeledChild>
+        <LabeledChild label={t('settings.optionalExperienceFlags.mockChat')}>
           <FormCheckbox
             name="mock_chat"
             checked={experience.mockChat}
             onValueChange={experience.setMockChat}
           />
-        </FormRow>
-        <FormRow label={t('settings.optionalExperienceFlags.newsletterModal')}>
+        </LabeledChild>
+        <LabeledChild
+          label={t('settings.optionalExperienceFlags.newsletterModal')}>
           <FormCheckbox
             name="newsletter"
             checked={experience.newsletterModal}
             onValueChange={experience.setNewsletterModal}
           />
-        </FormRow>
-        <FormRow label={t('settings.optionalExperienceFlags.notifications')}>
+        </LabeledChild>
+        <LabeledChild
+          label={t('settings.optionalExperienceFlags.notifications')}>
           <FormCheckbox
             name="notifications"
             checked={experience.notifications}
             onValueChange={experience.setNotifications}
           />
-        </FormRow>
-        <FormRow
+        </LabeledChild>
+        <LabeledChild
           label={t(
             'settings.optionalExperienceFlags.pageTitleInactiveArrayPaged',
           )}>
@@ -92,28 +96,29 @@ const ExperienceSettings: FunctionComponent<ExperienceSettingsProps> = ({
             checked={experience.pageTitle.inactiveArrayPaged}
             onValueChange={onPageTitleInactiveArrayPagedChange}
           />
-        </FormRow>
-        <FormRow label={t('settings.optionalExperienceFlags.searchDelay')}>
+        </LabeledChild>
+        <LabeledChild label={t('settings.optionalExperienceFlags.searchDelay')}>
           <FormCheckbox
             name="search_delay"
             checked={experience.searchDelay}
             onValueChange={experience.setSearchDelay}
           />
-        </FormRow>
-        <FormRow label={t('settings.optionalExperienceFlags.stickyVideo')}>
+        </LabeledChild>
+        <LabeledChild label={t('settings.optionalExperienceFlags.stickyVideo')}>
           <FormCheckbox
             name="sticky_video"
             checked={experience.stickyVideo}
             onValueChange={experience.setStickyVideo}
           />
-        </FormRow>
-        <FormRow label={t('settings.optionalExperienceFlags.wheelOfFortune')}>
+        </LabeledChild>
+        <LabeledChild
+          label={t('settings.optionalExperienceFlags.wheelOfFortune')}>
           <FormCheckbox
             name="wheel_of_fortune"
             checked={experience.wheelOfFortune}
             onValueChange={experience.setWheelOfFortune}
           />
-        </FormRow>
+        </LabeledChild>
       </div>
       <div className="flex gap-3">
         <Button

@@ -116,6 +116,7 @@ module.exports = {
       },
       padding: {
         '16/9': '56.25%',
+        '9/16': '177.78%',
       },
       transitionProperty: {
         'visibility-opacity': 'visibility, opacity',
