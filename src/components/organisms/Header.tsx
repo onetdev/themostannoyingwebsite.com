@@ -14,10 +14,13 @@ const Header: FunctionComponent = () => {
 
   return (
     <header className="grid grid-cols-2 gap-1 py-2">
-      <h1>
+      <h1 className="pb-3 font-bold tracking-tighter">
         <Link href="/" prefetch={false} title={t('app.title')}>
-          <span className="text-on-surface">
-            The <i>MAW</i>
+          <span className="text-on-surface lg:hidden">
+            <i className="font-light">the</i> MAW
+          </span>
+          <span className="hidden text-on-surface lg:inline">
+            <i className="font-light">the</i> <span>Most Annoying Website</span>
           </span>
         </Link>
       </h1>
