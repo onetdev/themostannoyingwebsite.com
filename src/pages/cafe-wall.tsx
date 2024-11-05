@@ -121,7 +121,6 @@ const CafeWall: NextPage = () => {
           ))}
         </div>
         <div className="flex flex-col gap-4">
-          <Button type="submit">{t('common.generate')}</Button>
           <Button type="reset" variant="tertiary">
             {t('common.reset')}
           </Button>
