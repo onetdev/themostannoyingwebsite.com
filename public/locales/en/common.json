@@ -55,7 +55,9 @@
     "search": "Search",
     "placeholderSearch": "Search...",
     "notSet": "Not set",
-    "unknown": "Unknown"
+    "unknown": "Unknown",
+    "reset": "Reset",
+    "generate": "Generate"
   },
   "date": {
     "months": [
@@ -488,5 +490,16 @@
     "info": {
       "pictureOfYou": "Picture of you"
     }
+  },
+  "cafeWall": {
+    "title": "Cafe wall",
+    "description": "You can generate a cafe wall illusion here. Give it a try!",
+    "tileColorA": "Tile Color A",
+    "tileColorB": "Tile Color B",
+    "tileSize": "Tile Size",
+    "diamondColorA": "Diamond Color A",
+    "diamondColorB": "Diamond Color B",
+    "width": "Width",
+    "height": "Height"
   }
 }
