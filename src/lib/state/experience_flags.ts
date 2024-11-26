@@ -8,6 +8,7 @@ export interface ExperienceFlagsState {
   };
   contentPaywall: boolean;
   deadPixel: boolean;
+  disableContextMenu: boolean;
   exitPrompt: boolean;
   mockChat: boolean;
   newsletterModal: boolean;
@@ -26,6 +27,7 @@ export interface ExperienceFlagsStateActions {
   setGifts: (gifts: Partial<ExperienceFlagsState['gifts']>) => void;
   setContentPaywall: (contentPaywall: boolean) => void;
   setDeadPixel: (deadPixel: boolean) => void;
+  setDisableContextMenu: (disableContextMenu: boolean) => void;
   setExitPrompt: (exitPrompt: boolean) => void;
   setMockChat: (mockChat: boolean) => void;
   setNewsletterModal: (newsletterModal: boolean) => void;
@@ -49,6 +51,7 @@ const initialState: ExperienceFlagsState = {
   },
   contentPaywall: true,
   deadPixel: true,
+  disableContextMenu: true,
   exitPrompt: true,
   mockChat: true,
   newsletterModal: true,
@@ -73,6 +76,8 @@ export const useExperienceFlagsStore = create(
         set((state) => ({ gifts: { ...state.gifts, ...gifts } })),
       setContentPaywall: (contentPaywall) => set({ contentPaywall }),
       setDeadPixel: (deadPixel) => set({ deadPixel }),
+      setDisableContextMenu: (disableContextMenu) =>
+        set({ disableContextMenu: disableContextMenu }),
       setExitPrompt: (exitPrompt) => set({ exitPrompt }),
       setMockChat: (mockChat) => set({ mockChat }),
       setNewsletterModal: (newsletterModal) => set({ newsletterModal }),
@@ -96,6 +101,7 @@ export const useExperienceFlagsStore = create(
           },
           contentPaywall: false,
           deadPixel: false,
+          disableContextMenu: false,
           exitPrompt: false,
           mockChat: false,
           newsletterModal: false,
@@ -113,7 +119,7 @@ export const useExperienceFlagsStore = create(
     {
       name: 'zustand-experience-flags-storage',
       storage: createJSONStorage(() => localStorage),
-      version: 7,
+      version: 8,
       migrate: (_persistedState, _version) => {
         // Versions are supersets atm, don't need to juggle too much with
         // type states
@@ -122,10 +128,22 @@ export const useExperienceFlagsStore = create(
         return {
           ...persistedState,
           gifts: {
-            flaps: persistedState.gifts.flaps ?? true,
-            oneByOne: persistedState.gifts.oneByOne ?? true,
+            flaps: persistedState.gifts?.flaps ?? initialState.gifts.flaps,
+            oneByOne:
+              persistedState.gifts?.oneByOne ?? initialState.gifts.oneByOne,
           },
-          version: 7,
+          pageTitle: {
+            inactiveMarquee:
+              persistedState.pageTitle?.inactiveMarquee ??
+              initialState.pageTitle.inactiveMarquee,
+            randomGlitch:
+              persistedState.pageTitle?.randomGlitch ??
+              initialState.pageTitle.randomGlitch,
+            inactiveArrayPaged:
+              persistedState.pageTitle?.inactiveArrayPaged ??
+              initialState.pageTitle.inactiveArrayPaged,
+          },
+          version: 8,
         };
       },
     },

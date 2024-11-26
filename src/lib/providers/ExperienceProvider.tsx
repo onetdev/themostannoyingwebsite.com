@@ -2,6 +2,7 @@ import { useTranslation } from 'next-i18next';
 import { FunctionComponent, PropsWithChildren, useEffect } from 'react';
 import { useBeforeUnload } from 'react-use';
 
+import { useContextMenu } from '@/features/context_menu';
 import { NewsletterModalExperienceHost } from '@/features/newsletter';
 import { NotificationPermissionExperienceHost } from '@/features/notification';
 import { PageTitleExperienceHost } from '@/features/page_title';
@@ -21,6 +22,7 @@ const ExperienceProvider: FunctionComponent<PropsWithChildren> = ({
   useFirstInteractionListener();
   useDocumentVisibilityListener();
   useNavigationStats();
+  useContextMenu();
   useBeforeUnload(exitPrompt, t('app.exitPrompt'));
 
   useEffect(() => {
