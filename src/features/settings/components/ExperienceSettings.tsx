@@ -57,6 +57,14 @@ const ExperienceSettings: FunctionComponent<ExperienceSettingsProps> = ({
             onValueChange={experience.setDeadPixel}
           />
         </LabeledChild>
+        <LabeledChild
+          label={t('settings.optionalExperienceFlags.disableContextMenu')}>
+          <FormCheckbox
+            name="disable_context"
+            checked={experience.disableContextMenu}
+            onValueChange={experience.setDisableContextMenu}
+          />
+        </LabeledChild>
         <LabeledChild label={t('settings.optionalExperienceFlags.exitPrompt')}>
           <FormCheckbox
             name="exit_prompt"

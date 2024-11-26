@@ -16,12 +16,14 @@ The main idea is to gather the most annoying features of modern websites in one 
   - [ ] Push elements to navigation stack so that when the user tries to navigate back it will stay on the page
   - [ ] Add flashing animation to flaim phone
   - [ ] Adblocker detection
+  - [ ] Add advertisement content to clipboard when copying text
 
 </details>
 
 <details>
   <summary>Completed</summary>
 
+  - [x] Prevent rightclick
   - [x] Fake advertisements (free phone)
   - [x] Add disabled mandatory experience checkboxes to settings
   - [x] DILF advertisement and landing page
