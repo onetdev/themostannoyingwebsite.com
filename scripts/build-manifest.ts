@@ -4,7 +4,6 @@ import fs from 'fs/promises';
 import path from 'path';
 
 import eslintRules from '@/root/eslint.config.mjs';
-
 import manifestConfig from '@/root/manifest.config.js';
 
 const main = async () => {
