@@ -31,7 +31,7 @@ export const SmallCoverListItem: FunctionComponent<SmallCoverListItemProps> = ({
             height="1200"
           />
         )}
-        <h4 className="my-2 leading-snug">{article.title}</h4>
+        <h4 className="my-2 leading-tight">{article.title}</h4>
         <small className="m-0 mb-1 block leading-snug text-on-surface hover:no-underline">
           {article.intro}
         </small>
