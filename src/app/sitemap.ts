@@ -36,7 +36,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
     return {
       url: `${prefix}/articles/${article.slug}`,
-      lastModified: new Date(),
+      lastModified: new Date(article.updatedAt || article.publishedAt),
     } satisfies MetadataRoute.Sitemap[0];
   });
 
