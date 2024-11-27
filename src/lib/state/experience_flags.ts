@@ -3,6 +3,7 @@ import { createJSONStorage, persist } from 'zustand/middleware';
 
 export interface ExperienceFlagsState {
   gifts: {
+    detectAdblocker: boolean;
     flaps: boolean;
     oneByOne: boolean;
   };
@@ -46,6 +47,7 @@ export interface ExperienceFlagsStore
 
 const initialState: ExperienceFlagsState = {
   gifts: {
+    detectAdblocker: true,
     flaps: true,
     oneByOne: true,
   },
@@ -96,6 +98,7 @@ export const useExperienceFlagsStore = create(
       allDisabled: () =>
         set({
           gifts: {
+            detectAdblocker: false,
             flaps: false,
             oneByOne: false,
           },
@@ -119,7 +122,7 @@ export const useExperienceFlagsStore = create(
     {
       name: 'zustand-experience-flags-storage',
       storage: createJSONStorage(() => localStorage),
-      version: 8,
+      version: 9,
       migrate: (_persistedState, _version) => {
         // Versions are supersets atm, don't need to juggle too much with
         // type states
@@ -128,6 +131,9 @@ export const useExperienceFlagsStore = create(
         return {
           ...persistedState,
           gifts: {
+            detectAdblocker:
+              persistedState.gifts?.detectAdblocker ??
+              initialState.gifts.detectAdblocker,
             flaps: persistedState.gifts?.flaps ?? initialState.gifts.flaps,
             oneByOne:
               persistedState.gifts?.oneByOne ?? initialState.gifts.oneByOne,
@@ -143,7 +149,7 @@ export const useExperienceFlagsStore = create(
               persistedState.pageTitle?.inactiveArrayPaged ??
               initialState.pageTitle.inactiveArrayPaged,
           },
-          version: 8,
+          version: 9,
         };
       },
     },
