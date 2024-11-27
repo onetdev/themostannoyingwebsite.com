@@ -29,14 +29,13 @@ const useAdblockerDetector = () => {
   const setAdblockerSuspect = useRuntimeStore(
     (state) => state.setAdblockerSuspected,
   );
-  const cookieConsent = useUserGrantsStore((state) => state.cookies.essential);
+  const ppReviewed = useUserGrantsStore((state) => state.reviewCompleted);
   const enabled = useExperienceFlagsStore(
     (state) => state.gifts.detectAdblocker,
   );
 
   useEffect(() => {
-    console.log({ cookieConsent, enabled });
-    if (!cookieConsent || !enabled) {
+    if (!ppReviewed || !enabled) {
       setAdblockerSuspect(null);
       return;
     }
@@ -49,7 +48,7 @@ const useAdblockerDetector = () => {
         setAdblockerSuspect(value);
       });
     }
-  }, [cookieConsent, enabled, cached, setAdblockerSuspect]);
+  }, [ppReviewed, enabled, cached, setAdblockerSuspect]);
 };
 
 export default useAdblockerDetector;
