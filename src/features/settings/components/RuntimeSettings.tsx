@@ -39,6 +39,17 @@ const RuntimeSettings: FunctionComponent = () => {
         {t('settings.runtime.navigationCount')}{' '}
         <span>{runtime.navigationCount}</span>
       </p>
+      <p>
+        {runtime.adblockerSuspected
+          ? t('settings.runtime.adblockerSuspected')
+          : t('settings.runtime.adblockerNotDetected')}
+      </p>
+      <p>
+        {t('settings.runtime.flaimSurveyResult')}{' '}
+        <span>
+          {runtime.flaimSurveyResult ? t('common.done') : t('common.pending')}
+        </span>
+      </p>
     </BorderedBox>
   );
 };

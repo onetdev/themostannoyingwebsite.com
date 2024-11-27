@@ -40,6 +40,8 @@
     "next": "Next",
     "accept": "Accept",
     "decline": "Decline",
+    "done": "Done",
+    "pending": "Pending",
     "submit": "Submit",
     "save": "Save",
     "send": "Send",
@@ -230,7 +232,10 @@
       "visibilitySeconds": "Elapsed seconds:",
       "isDocumentVisible": "Is this window in focus?",
       "navigationCount": "Navigation count:",
-      "interactionUnlocked": "Had first interaction?"
+      "interactionUnlocked": "Had first interaction?",
+      "flaimSurveyResult": "Flaim survey result:",
+      "adblockerSuspected": "Adblocker suspected",
+      "adblockerNotDetected": "Adblocker not detected"
     }
   },
   "share": {
