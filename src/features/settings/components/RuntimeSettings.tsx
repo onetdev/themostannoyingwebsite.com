@@ -3,10 +3,14 @@ import { FunctionComponent } from 'react';
 import ReactTimeAgo from 'react-timeago';
 
 import BorderedBox from '@/components/templates/BorderedBox';
+import { useExperienceFlagsStore } from '@/lib/state/experience_flags';
 import { useRuntimeStore } from '@/lib/state/runtime';
 
 const RuntimeSettings: FunctionComponent = () => {
   const runtime = useRuntimeStore();
+  const detectAdblocker = useExperienceFlagsStore(
+    (state) => state.gifts.detectAdblocker,
+  );
   const { t } = useTranslation();
 
   return (
@@ -39,11 +43,13 @@ const RuntimeSettings: FunctionComponent = () => {
         {t('settings.runtime.navigationCount')}{' '}
         <span>{runtime.navigationCount}</span>
       </p>
-      <p>
-        {runtime.adblockerSuspected
-          ? t('settings.runtime.adblockerSuspected')
-          : t('settings.runtime.adblockerNotDetected')}
-      </p>
+      {detectAdblocker && (
+        <p>
+          {runtime.adblockerSuspected
+            ? t('settings.runtime.adblockerSuspected')
+            : t('settings.runtime.adblockerNotDetected')}
+        </p>
+      )}
       <p>
         {t('settings.runtime.flaimSurveyResult')}{' '}
         <span>

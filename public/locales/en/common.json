@@ -202,6 +202,7 @@
     "optionalExperienceFlags": {
       "title": "Optional experience",
       "gifts": {
+        "detectAdblocker": "Detect adblocker",
         "flaps": "Background ad flaps",
         "oneByOne": "One by one ad blocks"
       },
@@ -453,6 +454,10 @@
           }
         ]
       }
+    },
+    "suspectBar": {
+      "title": "Adblocker suspected!",
+      "description": "It looks like you're using an ad blocker. That's a bit odd, innit? You're missing out big time! Please consider turning it off. Until then, you'll see this huge red banner at the bottom every time you visit this site. And please don't close it using the OK button, either. Cheers!"
     }
   },
   "wheelOfFortune": {

@@ -35,6 +35,16 @@ const ExperienceSettings: FunctionComponent<ExperienceSettingsProps> = ({
           />
         </LabeledChild>
         <LabeledChild
+          label={t('settings.optionalExperienceFlags.gifts.detectAdblocker')}>
+          <FormCheckbox
+            name="detect_adblocker"
+            checked={experience.gifts.detectAdblocker}
+            onValueChange={(detectAdblocker) =>
+              experience.setGifts({ detectAdblocker })
+            }
+          />
+        </LabeledChild>
+        <LabeledChild
           label={t('settings.optionalExperienceFlags.gifts.oneByOne')}>
           <FormCheckbox
             name="gift_flaps"
