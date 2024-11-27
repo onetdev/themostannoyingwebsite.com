@@ -4,15 +4,19 @@ import { useRuntimeStore } from '@/lib/state/runtime';
 import { fetchWithTimeout } from '@/lib/utils/network';
 
 const testFileLoader = async () => {
+  // In head mode without initialisation adsense should not touch cookies
+  // and local storage either
+  const url = ' https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js';
+  // const url = 'ads/ads.js'
+
   try {
-    const result = await fetchWithTimeout('/ads.js', {
+    const result = await fetchWithTimeout(url, {
       method: 'HEAD',
     });
 
     const contentLength = result.headers.get('content-length');
 
-    console.log(contentLength);
-    return contentLength === null || !(parseInt(contentLength) > 166);
+    return contentLength === null || parseInt(contentLength) > 6666;
   } catch {
     return false;
   }
