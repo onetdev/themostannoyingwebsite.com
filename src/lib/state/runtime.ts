@@ -1,7 +1,7 @@
 import { create } from 'zustand';
 
 export interface RuntimeState {
-  adblockerSuspected: boolean;
+  adblockerSuspected: boolean | null;
   document: {
     hasEverBeenVisible: boolean;
     isVisible: boolean;
@@ -14,7 +14,7 @@ export interface RuntimeState {
 }
 
 export interface RuntimeStateActions {
-  setAdblockerSuspected: (adblockerSuspected: boolean) => void;
+  setAdblockerSuspected: (adblockerSuspected: boolean | null) => void;
   setIsDocumentVisibile: (isVisible: boolean) => void;
   markInteractionUnlocked: () => void;
   incrementNavigationCount: () => void;
@@ -27,7 +27,7 @@ export interface RuntimeStateActions {
 export interface RuntimeStore extends RuntimeState, RuntimeStateActions {}
 
 const initialState: RuntimeState = {
-  adblockerSuspected: false,
+  adblockerSuspected: null,
   document: {
     hasEverBeenVisible: false,
     isVisible: false,

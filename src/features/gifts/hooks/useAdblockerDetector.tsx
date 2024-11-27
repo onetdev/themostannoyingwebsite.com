@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 
 import { useExperienceFlagsStore } from '@/lib/state/experience_flags';
 import { useRuntimeStore } from '@/lib/state/runtime';
@@ -25,6 +25,7 @@ const testFileLoader = async () => {
 };
 
 const useAdblockerDetector = () => {
+  const [cached, setSetcached] = useState<boolean>();
   const setAdblockerSuspect = useRuntimeStore(
     (state) => state.setAdblockerSuspected,
   );
@@ -34,10 +35,21 @@ const useAdblockerDetector = () => {
   );
 
   useEffect(() => {
-    if (!cookieConsent || !enabled) return;
+    console.log({ cookieConsent, enabled });
+    if (!cookieConsent || !enabled) {
+      setAdblockerSuspect(null);
+      return;
+    }
 
-    testFileLoader().then(setAdblockerSuspect);
-  }, [cookieConsent, enabled, setAdblockerSuspect]);
+    if (cached !== undefined) {
+      setAdblockerSuspect(cached);
+    } else {
+      testFileLoader().then((value) => {
+        setSetcached(value);
+        setAdblockerSuspect(value);
+      });
+    }
+  }, [cookieConsent, enabled, cached, setAdblockerSuspect]);
 };
 
 export default useAdblockerDetector;
