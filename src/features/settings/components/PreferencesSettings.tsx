@@ -5,10 +5,12 @@ import { FunctionComponent } from 'react';
 import FormCheckbox from '@/components/atoms/Checkbox';
 import LabeledChild from '@/components/molecules/LabeledChild';
 import BorderedBox from '@/components/templates/BorderedBox';
+import { useRuntimeStore } from '@/lib/state/runtime';
 import { useUserPreferencesStore } from '@/lib/state/user_preferences';
 
 const PreferencesSettings: FunctionComponent = () => {
   const preference = useUserPreferencesStore();
+  const runtime = useRuntimeStore();
   const { t } = useTranslation();
   const { resolvedTheme, setTheme } = useTheme();
   const setDarkMode = (value: boolean) => {
@@ -24,11 +26,13 @@ const PreferencesSettings: FunctionComponent = () => {
           onValueChange={setDarkMode}
         />
       </LabeledChild>
-      <LabeledChild label={t('settings.userPreferences.enableFlashing')}>
+      <LabeledChild
+        label={t('settings.userPreferences.reducedMotion')}
+        info={t('settings.userPreferences.reducedMotionHelp')}>
         <FormCheckbox
-          name="enable_flashing"
-          checked={preference.enableFlashing}
-          onValueChange={preference.setEnableFlashing}
+          name="reduced_motion"
+          disabled={true}
+          checked={runtime.reducedMotion}
         />
       </LabeledChild>
       <LabeledChild label={t('settings.userPreferences.enableSound')}>

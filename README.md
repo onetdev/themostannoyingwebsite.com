@@ -14,7 +14,6 @@ The main idea is to gather the most annoying features of modern websites in one 
   - [ ] Age verification on certain contents
   - [ ] Add holiday related (Halloween, Christmass, Easter) small animated images that follow the mouse cursor
   - [ ] Push elements to navigation stack so that when the user tries to navigate back it will stay on the page
-  - [ ] Add flashing animation to flaim phone
   - [ ] Add advertisement content to clipboard when copying text
 
 </details>
@@ -22,6 +21,7 @@ The main idea is to gather the most annoying features of modern websites in one 
 <details>
   <summary>Completed</summary>
 
+  - [x] Add flashing animation to flaim phone
   - [x] Adblocker detection
   - [x] Prevent rightclick
   - [x] Fake advertisements (free phone)

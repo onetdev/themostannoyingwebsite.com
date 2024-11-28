@@ -183,7 +183,8 @@
       "title": "Preferences",
       "colorScheme": "Theme / Color scheme",
       "darkMode": "Dark mode",
-      "enableFlashing": "Flashing contents",
+      "reducedMotion": "Reduced motion",
+      "reducedMotionHelp": "Can be changed in your OS/Browser settings, you might need to reload the page after changing it.",
       "enableSound": "Sound",
       "adultFilter": "Filter adult contents",
       "themeSwitch": {

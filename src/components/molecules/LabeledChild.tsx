@@ -1,13 +1,18 @@
 import { FunctionComponent, PropsWithChildren } from 'react';
 
+import Icon from '@/components/atoms/Icon';
+import Tooltip from '@/components/atoms/Tooltip';
+
 export type LabeledChildProps = PropsWithChildren<{
+  info?: string;
   label: string;
   reverse?: boolean;
 }>;
 
 const LabeledChild: FunctionComponent<LabeledChildProps> = ({
-  label,
   children,
+  info,
+  label,
   reverse = false,
 }) => {
   return (
@@ -15,7 +20,14 @@ const LabeledChild: FunctionComponent<LabeledChildProps> = ({
       data-reverse={reverse.toString()}
       className="flex items-center gap-3 data-[reverse=true]:flex-row-reverse data-[reverse=true]:justify-between">
       {children}
-      <span>{label}</span>
+      <span>
+        {label}{' '}
+        {info && (
+          <Tooltip text={info}>
+            <Icon icon="info" />
+          </Tooltip>
+        )}
+      </span>
     </label>
   );
 };
