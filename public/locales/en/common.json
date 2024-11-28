@@ -11,7 +11,8 @@
       "description": "This is one feature that actually supposed to work. If you'd like to help support the project or the authors, you can donate here. Every donation helps. We appreciate your support!",
       "donateLinkText": "Donation info here"
     },
-    "exitPrompt": "I'd reconsider leaving before some bad things happend to you. Are you sure?"
+    "exitPrompt": "I'd reconsider leaving before some bad things happend to you. Are you sure?",
+    "readMoreAt": "Read more at"
   },
   "navigation": {
     "home": "Home",

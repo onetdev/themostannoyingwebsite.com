@@ -2,6 +2,7 @@ import { useTranslation } from 'next-i18next';
 import { FunctionComponent, PropsWithChildren, useEffect } from 'react';
 import { useBeforeUnload } from 'react-use';
 
+import CopyMarker from '@/components/atoms/CopyMarker';
 import { useContextMenu } from '@/features/context_menu';
 import useAdblockerDetector from '@/features/gifts/hooks/useAdblockerDetector';
 import { NewsletterModalExperienceHost } from '@/features/newsletter';
@@ -30,7 +31,7 @@ const ExperienceProvider: FunctionComponent<PropsWithChildren> = ({
       <PageTitleExperienceHost />
       <NewsletterModalExperienceHost />
       <NotificationPermissionExperienceHost />
-      {children}
+      <CopyMarker enabled>{children}</CopyMarker>
     </>
   );
 };
