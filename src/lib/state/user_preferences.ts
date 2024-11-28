@@ -3,13 +3,11 @@ import { createJSONStorage, persist } from 'zustand/middleware';
 
 export interface UserPreferencesState {
   enableSound: boolean;
-  enableFlashing: boolean;
   adultFilter: boolean;
 }
 
 export interface UserPreferencesStateActions {
   setEnableSound: (enableSound: boolean) => void;
-  setEnableFlashing: (enableFlashing: boolean) => void;
   setAdultFilter: (adultFilter: boolean) => void;
 }
 
@@ -19,7 +17,6 @@ export interface UserPreferencesStore
 
 const initialState: UserPreferencesState = {
   enableSound: true,
-  enableFlashing: false,
   adultFilter: true,
 };
 
@@ -28,7 +25,6 @@ export const useUserPreferencesStore = create(
     (set) => ({
       ...initialState,
       setEnableSound: (enableSound) => set({ enableSound }),
-      setEnableFlashing: (enableFlashing) => set({ enableFlashing }),
       setAdultFilter: (adultFilter) => set({ adultFilter }),
     }),
     {
