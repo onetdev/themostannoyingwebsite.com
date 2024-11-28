@@ -53,6 +53,14 @@ const ExperienceSettings: FunctionComponent<ExperienceSettingsProps> = ({
           />
         </LabeledChild>
         <LabeledChild
+          label={t('settings.optionalExperienceFlags.clipboardMarker')}>
+          <FormCheckbox
+            name="clipboard_marker"
+            checked={experience.clipboardMarker}
+            onValueChange={experience.setClipboardMarker}
+          />
+        </LabeledChild>
+        <LabeledChild
           label={t('settings.optionalExperienceFlags.contentPaywall')}>
           <FormCheckbox
             name="content_paywall"

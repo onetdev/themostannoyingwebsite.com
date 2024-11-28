@@ -15,6 +15,9 @@ const ExperienceProvider: FunctionComponent<PropsWithChildren> = ({
   children,
 }) => {
   const exitPrompt = useExperienceFlagsStore((state) => state.exitPrompt);
+  const clipboardMarker = useExperienceFlagsStore(
+    (state) => state.clipboardMarker,
+  );
   const syncPermissions = useUserGrantsStore((state) => state.syncPermissions);
   const { t } = useTranslation('common');
 
@@ -31,7 +34,7 @@ const ExperienceProvider: FunctionComponent<PropsWithChildren> = ({
       <PageTitleExperienceHost />
       <NewsletterModalExperienceHost />
       <NotificationPermissionExperienceHost />
-      <CopyMarker enabled>{children}</CopyMarker>
+      <CopyMarker enabled={clipboardMarker}>{children}</CopyMarker>
     </>
   );
 };
