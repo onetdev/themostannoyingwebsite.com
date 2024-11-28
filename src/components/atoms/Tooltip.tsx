@@ -13,7 +13,7 @@ export type TooltipProps = PropsWithChildren<{
 }>;
 
 const Tooltip: FunctionComponent<TooltipProps> = ({ text, children }) => {
-  const [visible, setVisible] = useState(true);
+  const [visible, setVisible] = useState(false);
   const [position, setPosition] = useState<TooltipPosition>('top');
   const $container = useRef<HTMLSpanElement>(null);
   const $tooltip = useRef<HTMLSpanElement>(null);
