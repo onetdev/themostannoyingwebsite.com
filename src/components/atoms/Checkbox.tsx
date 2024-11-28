@@ -40,7 +40,7 @@ const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
 
     return (
       <span
-        className={`group relative flex items-center justify-center ${sizeClassName}`}>
+        className={`group relative flex items-center justify-center ${sizeClassName} shrink-0`}>
         <input
           type="checkbox"
           className="peer/checkbox absolute z-20 size-full cursor-pointer opacity-0 disabled:cursor-auto"
