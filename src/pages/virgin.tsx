@@ -8,7 +8,7 @@ import { useExperienceFlagsStore } from '@/lib/state/experience_flags';
 import { makeI18nStaticProps } from '@/lib/utils/i18n';
 import styles from '@/styles/content.module.css';
 
-const PrivacyPolicy: NextPage = () => {
+const Virgin: NextPage = () => {
   const { t } = useTranslation('common');
   const allDisabled = useExperienceFlagsStore((state) => state.allDisabled);
 
@@ -30,4 +30,4 @@ const PrivacyPolicy: NextPage = () => {
 };
 
 export const getStaticProps = makeI18nStaticProps();
-export default PrivacyPolicy;
+export default Virgin;
