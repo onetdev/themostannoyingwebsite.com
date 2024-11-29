@@ -51,6 +51,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     commonPageMeta('privacy-policy'),
     commonPageMeta('search'),
     commonPageMeta('settings'),
+    commonPageMeta('virgin'),
     commonPageMeta('user/login'),
     commonPageMeta('user/password-reminder'),
     commonPageMeta('user/registration'),

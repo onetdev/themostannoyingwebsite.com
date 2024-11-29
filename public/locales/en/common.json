@@ -12,7 +12,11 @@
       "donateLinkText": "Donation info here"
     },
     "exitPrompt": "I'd reconsider leaving before some bad things happend to you. Are you sure?",
-    "readMoreAt": "Read more at"
+    "readMoreAt": "Read more at",
+    "virgin": {
+      "title": "Disable all experiences",
+      "description": "All experiences are disabled now. If you want share this page just for the content just pass this URL around. If you changed your mind, you can re-enable all experiences in the settings menu."
+    }
   },
   "navigation": {
     "home": "Home",
