@@ -5,7 +5,7 @@ import {
   ArticleLookupIdentifier,
   ArticleSearchFilter,
   ArticleSearchResult,
-} from '@/features/articles';
+} from '@/features/content';
 import { ArticleIndexEntrySchema } from '@/lib/schemas/article-index-entry';
 import { fuzzy_search } from '@/lib/utils/string';
 import articlesRaw from '@/public/assets/articles/index.json';

@@ -2,7 +2,7 @@ import Link from 'next/link';
 import { FunctionComponent, useState } from 'react';
 import MarqueePlugin from 'react-fast-marquee';
 
-import { ArticleService } from '@/features/articles';
+import { ArticleService } from '@/features/content';
 import { useRuntimeStore } from '@/lib/state/runtime';
 
 export type MarqueeTextProps = {

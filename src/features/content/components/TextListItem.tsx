@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import { FunctionComponent } from 'react';
 
-import { type ArticleDatum } from '@/features/articles';
+import { type ArticleDatum } from '@/features/content';
 
 type TextListItemProps = {
   article: ArticleDatum;
