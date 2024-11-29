@@ -14,7 +14,6 @@ const CopyMarker: FunctionComponent<CopyWithUrl> = ({
   const { t } = useTranslation();
 
   const handleCopy = (e: ClipboardEvent<HTMLDivElement>) => {
-    console.log(append);
     const selection = window.getSelection()?.toString() || '';
 
     if (append === 'url') {
