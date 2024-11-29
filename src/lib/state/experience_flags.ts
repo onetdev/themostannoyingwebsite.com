@@ -106,6 +106,7 @@ export const useExperienceFlagsStore = create(
             flaps: false,
             oneByOne: false,
           },
+          clipboardMarker: false,
           contentPaywall: false,
           deadPixel: false,
           disableContextMenu: false,
