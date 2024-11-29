@@ -3,7 +3,10 @@ import { FunctionComponent, PropsWithChildren, useEffect } from 'react';
 import { useBeforeUnload } from 'react-use';
 
 import CopyMarker from '@/components/atoms/CopyMarker';
-import { useContextMenu } from '@/features/browser_core';
+import {
+  useDisableContextMenu,
+  useDisableNavigationPop,
+} from '@/features/browser_core';
 import { PageTitleExperienceHost } from '@/features/browser_core';
 import useAdblockerDetector from '@/features/gifts/hooks/useAdblockerDetector';
 import { NewsletterModalExperienceHost } from '@/features/newsletter';
@@ -21,7 +24,8 @@ const ExperienceProvider: FunctionComponent<PropsWithChildren> = ({
   const syncPermissions = useUserGrantsStore((state) => state.syncPermissions);
   const { t } = useTranslation('common');
 
-  useContextMenu();
+  useDisableNavigationPop();
+  useDisableContextMenu();
   useAdblockerDetector();
   useBeforeUnload(exitPrompt, t('app.exitPrompt'));
 

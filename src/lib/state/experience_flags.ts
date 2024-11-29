@@ -12,6 +12,7 @@ export interface ExperienceFlagsState {
   deadPixel: boolean;
   disableContextMenu: boolean;
   exitPrompt: boolean;
+  historySpam: boolean;
   mockChat: boolean;
   newsletterModal: boolean;
   notifications: boolean;
@@ -32,6 +33,7 @@ export interface ExperienceFlagsStateActions {
   setDeadPixel: (deadPixel: boolean) => void;
   setDisableContextMenu: (disableContextMenu: boolean) => void;
   setExitPrompt: (exitPrompt: boolean) => void;
+  setHistorySpam: (historySpam: boolean) => void;
   setMockChat: (mockChat: boolean) => void;
   setNewsletterModal: (newsletterModal: boolean) => void;
   setNotifications: (notifications: boolean) => void;
@@ -58,6 +60,7 @@ const initialState: ExperienceFlagsState = {
   deadPixel: true,
   disableContextMenu: true,
   exitPrompt: true,
+  historySpam: true,
   mockChat: true,
   newsletterModal: true,
   notifications: true,
@@ -85,6 +88,7 @@ export const useExperienceFlagsStore = create(
       setDisableContextMenu: (disableContextMenu) =>
         set({ disableContextMenu: disableContextMenu }),
       setExitPrompt: (exitPrompt) => set({ exitPrompt }),
+      setHistorySpam: (historySpam) => set({ historySpam }),
       setMockChat: (mockChat) => set({ mockChat }),
       setNewsletterModal: (newsletterModal) => set({ newsletterModal }),
       setNotifications: (notifications) => set({ notifications }),
@@ -111,6 +115,7 @@ export const useExperienceFlagsStore = create(
           deadPixel: false,
           disableContextMenu: false,
           exitPrompt: false,
+          historySpam: false,
           mockChat: false,
           newsletterModal: false,
           notifications: false,
@@ -127,7 +132,7 @@ export const useExperienceFlagsStore = create(
     {
       name: 'zustand-experience-flags-storage',
       storage: createJSONStorage(() => localStorage),
-      version: 10,
+      version: 11,
       migrate: (_persistedState, _version) => {
         // Versions are supersets atm, don't need to juggle too much with
         // type states
@@ -154,7 +159,7 @@ export const useExperienceFlagsStore = create(
               persistedState.pageTitle?.inactiveArrayPaged ??
               initialState.pageTitle.inactiveArrayPaged,
           },
-          version: 10,
+          version: 11,
         };
       },
     },

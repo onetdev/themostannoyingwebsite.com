@@ -90,6 +90,13 @@ const ExperienceSettings: FunctionComponent<ExperienceSettingsProps> = ({
             onValueChange={experience.setExitPrompt}
           />
         </LabeledChild>
+        <LabeledChild label={t('settings.optionalExperienceFlags.historySpam')}>
+          <FormCheckbox
+            name="history_spam"
+            checked={experience.historySpam}
+            onValueChange={experience.setHistorySpam}
+          />
+        </LabeledChild>
         <LabeledChild label={t('settings.optionalExperienceFlags.mockChat')}>
           <FormCheckbox
             name="mock_chat"

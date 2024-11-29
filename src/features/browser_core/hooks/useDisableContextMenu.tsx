@@ -3,7 +3,7 @@ import { useCallback, useEffect } from 'react';
 
 import { useExperienceFlagsStore } from '@/lib/state/experience_flags';
 
-const useContextMenu = () => {
+const useDisableContextMenu = () => {
   const { t } = useTranslation('common');
   const isDisabled = useExperienceFlagsStore(
     (state) => state.disableContextMenu,
@@ -25,4 +25,4 @@ const useContextMenu = () => {
   }, [handleContextMenu, isDisabled]);
 };
 
-export default useContextMenu;
+export default useDisableContextMenu;
