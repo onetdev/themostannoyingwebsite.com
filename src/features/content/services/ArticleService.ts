@@ -1,5 +1,3 @@
-import slugify from 'slugify';
-
 import {
   ArticleData,
   ArticleDatum,
@@ -7,7 +5,7 @@ import {
   ArticleLookupIdentifier,
   ArticleSearchFilter,
   ArticleSearchResult,
-} from '@/features/articles';
+} from '@/features/content';
 import { ArticleIndexEntrySchema } from '@/lib/schemas/article-index-entry';
 import { fuzzy_search } from '@/lib/utils/string';
 import articlesRaw from '@/public/assets/articles/index.json';
@@ -41,9 +39,9 @@ class ArticleService {
           isOnCover: article.isOnCover,
           locale: article.locale,
           publishedAt: new Date(article.publishedAt),
-          slug: slugify(article.title),
+          slug: article.slug,
           title: article.title,
-          url: `/articles/${slugify(article.title)}`,
+          url: `/articles/${article.slug}`,
         }) satisfies ArticleDatum,
     );
   }

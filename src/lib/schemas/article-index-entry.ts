@@ -18,6 +18,11 @@ const schema = z
       .string()
       .datetime({ offset: true })
       .describe('Must be in ISO 8601 format'),
+    updatedAt: z
+      .string()
+      .datetime({ offset: true })
+      .optional()
+      .describe('Must be in ISO 8601 format'),
     slug: z.string(),
     title: z
       .string()

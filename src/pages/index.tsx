@@ -6,7 +6,7 @@ import {
   DenseTextList,
   LargeCoverItem,
   SmallCoverListItem,
-} from '@/features/articles';
+} from '@/features/content';
 import { OneByOneGift } from '@/features/gifts';
 import { makeI18nStaticProps } from '@/lib/utils/i18n';
 

@@ -2,15 +2,15 @@ import Link from 'next/link';
 import { FunctionComponent, useState } from 'react';
 import MarqueePlugin from 'react-fast-marquee';
 
-import { ArticleService } from '@/features/articles';
-import { useUserPreferencesStore } from '@/lib/state/user_preferences';
+import { ArticleService } from '@/features/content';
+import { useRuntimeStore } from '@/lib/state/runtime';
 
 export type MarqueeTextProps = {
   className?: string;
 };
 
 const MarqueeText: FunctionComponent<MarqueeTextProps> = ({ className }) => {
-  const flashing = useUserPreferencesStore((state) => state.enableFlashing);
+  const reducedMotion = useRuntimeStore((state) => state.reducedMotion);
   const [items] = useState(
     ArticleService.getMany({
       params: { isHighlighted: true },
@@ -19,7 +19,10 @@ const MarqueeText: FunctionComponent<MarqueeTextProps> = ({ className }) => {
   );
   const [speed, setSpeed] = useState(100);
 
-  const onEnter = () => setSpeed(2000);
+  const onEnter = () => {
+    if (reducedMotion) return;
+    setSpeed(2000);
+  };
   const onLeave = () => setSpeed(100);
 
   return (
@@ -35,7 +38,6 @@ const MarqueeText: FunctionComponent<MarqueeTextProps> = ({ className }) => {
               href={path}
               key={index}
               passHref
-              data-anim={flashing ? 'flashing' : 'highlight'}
               prefetch={false}
               className="mx-8 inline-block px-2">
               {title}

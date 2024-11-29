@@ -5,8 +5,7 @@ import Head from 'next/head';
 import Image from 'next/image';
 import { useTranslation } from 'next-i18next';
 
-import { ArticleService } from '@/features/articles';
-import { PartitionalLockedContent } from '@/features/content_limiter';
+import { ArticleService, PartitionalLockedContent } from '@/features/content';
 import { useExperienceFlagsStore } from '@/lib/state/experience_flags';
 import { getI18nProps } from '@/lib/utils/i18n';
 import styles from '@/styles/content.module.css';

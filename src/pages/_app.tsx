@@ -1,21 +1,24 @@
 import '@/styles/globals.css';
 import { type AppProps } from 'next/app';
+import { Open_Sans } from 'next/font/google';
 import Head from 'next/head';
 import { appWithTranslation, UserConfig } from 'next-i18next';
 
 import GeneratedMetaHead from '@/components/templates/GeneratedMetaHead';
 import MainLayout from '@/components/templates/MainLayout';
-import useServiceWorker from '@/lib/hooks/useServiceWorker';
 import RootProviderContainer from '@/lib/providers/RootProviderContainer';
 import english from '@/public/locales/en/common.json';
 import nextI18NextConfig from '@/root/next-i18next.config.js';
+
+const _openSans = Open_Sans({
+  subsets: ['latin'],
+  weight: ['400', '700'],
+});
 
 const TheMostAnnoyingWebsite = ({ Component, pageProps }: AppProps) => {
   // Can't use translations here yet, description will be set on page level
   // https://github.com/i18next/next-i18next/tree/v15.2.0#serversidetranslations
   const description = english.app.description;
-
-  useServiceWorker();
 
   return (
     <RootProviderContainer>
@@ -30,7 +33,7 @@ const TheMostAnnoyingWebsite = ({ Component, pageProps }: AppProps) => {
         <meta name="robots" content="follow" />
       </Head>
       <GeneratedMetaHead />
-      <MainLayout>
+      <MainLayout className="font-primary">
         <Component {...pageProps} />
       </MainLayout>
     </RootProviderContainer>

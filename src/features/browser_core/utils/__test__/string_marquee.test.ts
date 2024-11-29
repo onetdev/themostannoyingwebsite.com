@@ -1,7 +1,7 @@
 /**
  * @jest-environment jsdom
  */
-import string_marquee from '@/features/page_title/utils/string_marquee';
+import { string_marquee } from '@/features/browser_core';
 
 describe('String Marquee', () => {
   const base = {

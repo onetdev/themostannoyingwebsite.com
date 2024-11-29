@@ -13,6 +13,7 @@ module.exports = {
         'wiggle-8deg': 'wiggle-8deg 8s infinite',
         'width-0-100': 'width-0/100 2s infinite',
         'width-100-0': 'width-0/100 2s reverse infinite',
+        'gift-callout': 'gift-callout 5s infinite',
       },
       backgroundImage: {
         'bottom-fadeout':
@@ -50,19 +51,12 @@ module.exports = {
       },
       fontFamily: {
         primary: [
-          '-apple-system',
-          'BlinkMacSystemFont',
+          'Open Sans',
           '"Segoe UI"',
-          'Roboto',
-          'Oxygen',
           'Ubuntu',
-          'Cantarell',
-          '"Fira Sans"',
-          '"Droid Sans"',
           '"Helvetica Neue"',
           'sans-serif',
         ],
-        secondary: ['"Bonheur Royale"', 'sans-serif'],
       },
       keyframes: {
         'dot-dot-dot': {
@@ -100,6 +94,27 @@ module.exports = {
           '0%': { width: '0%' },
           '100%': { width: '100%' },
         },
+        'gift-callout': {
+          '0%': { filter: 'invert(0.8)', transform: 'scale(1)' },
+          '5%': { filter: 'invert(0.4)', transform: 'scale(1.1)' },
+          '10%': {
+            filter: 'invert(0) hue-rotate(0deg)',
+            transform: 'scale(1)',
+          },
+          '15%': { filter: 'hue-rotate(180deg)', transform: 'scale(1)' },
+          '20%': {
+            filter: 'invert(0) hue-rotate(360deg)',
+            transform: 'scale(1.2) rotate(360deg)',
+          },
+          '25%': {
+            filter: 'invert(0) hue-rotate(180deg)',
+            transform: 'scale(1) rotate(0deg)',
+          },
+          '30%': {
+            filter: 'invert(0) hue-rotate(0deg)',
+            transform: 'scale(1) rotate(0deg)',
+          },
+        },
       },
       minWidth: {
         'clamp-400': 'min(400px,100%)',
@@ -116,6 +131,7 @@ module.exports = {
       },
       padding: {
         '16/9': '56.25%',
+        '9/16': '177.78%',
       },
       transitionProperty: {
         'visibility-opacity': 'visibility, opacity',
