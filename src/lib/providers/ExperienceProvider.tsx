@@ -2,6 +2,7 @@ import { useTranslation } from 'next-i18next';
 import { FunctionComponent, PropsWithChildren, useEffect } from 'react';
 import { useBeforeUnload } from 'react-use';
 
+import CopyMarker from '@/components/atoms/CopyMarker';
 import { useContextMenu } from '@/features/context_menu';
 import useAdblockerDetector from '@/features/gifts/hooks/useAdblockerDetector';
 import { NewsletterModalExperienceHost } from '@/features/newsletter';
@@ -14,6 +15,9 @@ const ExperienceProvider: FunctionComponent<PropsWithChildren> = ({
   children,
 }) => {
   const exitPrompt = useExperienceFlagsStore((state) => state.exitPrompt);
+  const clipboardMarker = useExperienceFlagsStore(
+    (state) => state.clipboardMarker,
+  );
   const syncPermissions = useUserGrantsStore((state) => state.syncPermissions);
   const { t } = useTranslation('common');
 
@@ -30,7 +34,7 @@ const ExperienceProvider: FunctionComponent<PropsWithChildren> = ({
       <PageTitleExperienceHost />
       <NewsletterModalExperienceHost />
       <NotificationPermissionExperienceHost />
-      {children}
+      <CopyMarker enabled={clipboardMarker}>{children}</CopyMarker>
     </>
   );
 };

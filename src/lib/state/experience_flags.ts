@@ -7,6 +7,7 @@ export interface ExperienceFlagsState {
     flaps: boolean;
     oneByOne: boolean;
   };
+  clipboardMarker: boolean;
   contentPaywall: boolean;
   deadPixel: boolean;
   disableContextMenu: boolean;
@@ -26,6 +27,7 @@ export interface ExperienceFlagsState {
 
 export interface ExperienceFlagsStateActions {
   setGifts: (gifts: Partial<ExperienceFlagsState['gifts']>) => void;
+  setClipboardMarker: (clipboardMarker: boolean) => void;
   setContentPaywall: (contentPaywall: boolean) => void;
   setDeadPixel: (deadPixel: boolean) => void;
   setDisableContextMenu: (disableContextMenu: boolean) => void;
@@ -51,6 +53,7 @@ const initialState: ExperienceFlagsState = {
     flaps: true,
     oneByOne: true,
   },
+  clipboardMarker: true,
   contentPaywall: true,
   deadPixel: true,
   disableContextMenu: true,
@@ -76,6 +79,7 @@ export const useExperienceFlagsStore = create(
       ...initialState,
       setGifts: (gifts) =>
         set((state) => ({ gifts: { ...state.gifts, ...gifts } })),
+      setClipboardMarker: (clipboardMarker) => set({ clipboardMarker }),
       setContentPaywall: (contentPaywall) => set({ contentPaywall }),
       setDeadPixel: (deadPixel) => set({ deadPixel }),
       setDisableContextMenu: (disableContextMenu) =>
@@ -122,7 +126,7 @@ export const useExperienceFlagsStore = create(
     {
       name: 'zustand-experience-flags-storage',
       storage: createJSONStorage(() => localStorage),
-      version: 9,
+      version: 10,
       migrate: (_persistedState, _version) => {
         // Versions are supersets atm, don't need to juggle too much with
         // type states
@@ -149,7 +153,7 @@ export const useExperienceFlagsStore = create(
               persistedState.pageTitle?.inactiveArrayPaged ??
               initialState.pageTitle.inactiveArrayPaged,
           },
-          version: 9,
+          version: 10,
         };
       },
     },
