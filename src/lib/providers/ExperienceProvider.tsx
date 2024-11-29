@@ -3,11 +3,11 @@ import { FunctionComponent, PropsWithChildren, useEffect } from 'react';
 import { useBeforeUnload } from 'react-use';
 
 import CopyMarker from '@/components/atoms/CopyMarker';
-import { useContextMenu } from '@/features/context_menu';
+import { useContextMenu } from '@/features/browser_core';
+import { PageTitleExperienceHost } from '@/features/browser_core';
 import useAdblockerDetector from '@/features/gifts/hooks/useAdblockerDetector';
 import { NewsletterModalExperienceHost } from '@/features/newsletter';
 import { NotificationPermissionExperienceHost } from '@/features/notification';
-import { PageTitleExperienceHost } from '@/features/page_title';
 import { useExperienceFlagsStore } from '@/lib/state/experience_flags';
 import { useUserGrantsStore } from '@/lib/state/user_grants';
 

@@ -8,7 +8,7 @@ import DotDotDotText from '@/components/atoms/DotDotDotText';
 import PageHeadline from '@/components/atoms/PageHeadline';
 import SiteTitle from '@/components/atoms/SiteTitle';
 import SearchForm from '@/components/organisms/SearchForm';
-import { ArticleSearchResult, ArticleService } from '@/features/articles';
+import { ArticleSearchResult, ArticleService } from '@/features/content';
 import { useExperienceFlagsStore } from '@/lib/state/experience_flags';
 import { arrayShuffle } from '@/lib/utils/array';
 import { makeI18nStaticProps } from '@/lib/utils/i18n';

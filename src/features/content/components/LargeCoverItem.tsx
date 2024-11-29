@@ -5,7 +5,7 @@ import { FunctionComponent } from 'react';
 
 import { CoverPlaceholder } from './CoverPlaceholder';
 
-import { type ArticleDatum } from '@/features/articles';
+import { type ArticleDatum } from '@/features/content';
 
 type LargeCoverItemProps = JSXProxyProps<'div'> & {
   article: ArticleDatum;
