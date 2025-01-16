@@ -1,9 +1,9 @@
 import fs from 'fs';
 import { zodToJsonSchema } from 'zod-to-json-schema';
 
-import articleEntrySimplifiedZod from '@/root/src/lib/schemas/article-entry-simplified';
-import articleIndexEntryZod from '@/root/src/lib/schemas/article-index-entry';
-import articleLocaleMetaZod from '@/root/src/lib/schemas/article-locale-meta';
+import articleEntrySimplifiedZod from '@/lib/schemas/article-entry-simplified';
+import articleIndexEntryZod from '@/lib/schemas/article-index-entry';
+import articleLocaleMetaZod from '@/lib/schemas/article-locale-meta';
 
 const writeMap = {
   './src/lib/schemas/article-entry-simplified.schema.json': zodToJsonSchema(

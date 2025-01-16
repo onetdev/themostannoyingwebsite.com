@@ -5,10 +5,10 @@ import sanitizeHtml from 'sanitize-html';
 import sharp from 'sharp';
 import { parse } from 'yaml';
 
+import articleEntrySimplifiedZod from '@/lib/schemas/article-entry-simplified';
+import { ArticleIndexEntrySchema } from '@/lib/schemas/article-index-entry';
 import { parse as parseMd } from '@/lib/utils/markdown';
 import i18nConfig from '@/root/next-i18next.config';
-import articleEntrySimplifiedZod from '@/root/src/lib/schemas/article-entry-simplified';
-import { ArticleIndexEntrySchema } from '@/root/src/lib/schemas/article-index-entry';
 
 const articlesRootPath = path.join('./public/assets/articles');
 const locales = i18nConfig.i18n.locales;

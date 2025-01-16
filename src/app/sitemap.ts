@@ -12,14 +12,14 @@ const extraLangs = i18nConfig.i18n.locales.filter(
 const genLangAlternates = (path: string): Languages<string> => {
   const items = extraLangs.map((lang) => [
     lang,
-    `${config.url}/${lang}/${path}`,
+    `${config.publicUrl}/${lang}/${path}`,
   ]);
 
   return Object.fromEntries(items);
 };
 
 const commonPageMeta = (path: string): MetadataRoute.Sitemap[0] => ({
-  url: `${config.url}/${path}`,
+  url: `${config.publicUrl}/${path}`,
   lastModified: new Date(),
   changeFrequency: 'daily',
   alternates: {
@@ -31,8 +31,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const articles = articlesRaw.map((article: ArticleIndexEntrySchema) => {
     const prefix =
       article.locale === i18nConfig.i18n.defaultLocale
-        ? `${config.url}`
-        : `${config.url}/${article.locale}`;
+        ? `${config.publicUrl}`
+        : `${config.publicUrl}/${article.locale}`;
 
     return {
       url: `${prefix}/articles/${article.slug}`,

@@ -16,6 +16,8 @@
 /build
 /public/assets/articles/index.json
 /public/assets/articles/*/cover-*.*
+/public/manifest
+/public/env-manifest.json
 
 # misc
 .DS_Store

@@ -4,15 +4,14 @@
 
 import * as Sentry from '@sentry/nextjs';
 
-import baseConfig from './sentry.config';
+import config from './environment.config';
 
 Sentry.init({
-  ...baseConfig,
   dsn: process.env.NEXT_PUBLIC_SENTRY_CLIENT_DSN,
 
-  // Define how likely traces are sampled. Adjust this value in production, or use tracesSampler for greater control.
+  environment: config.environment,
+  release: config.release,
   tracesSampleRate: 1,
 
-  // Setting this option to true will print useful information to the console while you're setting up Sentry.
   debug: false,
 });

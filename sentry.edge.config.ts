@@ -5,12 +5,14 @@
 
 import * as Sentry from '@sentry/nextjs';
 
-import baseConfig from './sentry.config';
+import config from './environment.config';
 
 Sentry.init({
-  ...baseConfig,
-
   dsn: process.env.SENTRY_EDGE_DSN,
+
+  environment: config.environment,
+  release: config.release,
   tracesSampleRate: 1,
+
   debug: false,
 });
