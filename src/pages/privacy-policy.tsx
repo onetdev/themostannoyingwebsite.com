@@ -73,7 +73,7 @@ const contentMarkdownEn = `
 
   **Update 2024-10-29**: This update includes the necessary notice about embedded YouTube videos and its data-sharing implications, which should help ensure transparency and compliance with privacy laws.
 
-  **Update 2024-12-11**: Update error monitoring related parts due to the introduction of Sentry.
+  **Update 2025-01-16**: Update error monitoring related parts due to the introduction of Sentry.
 `;
 
 export const getStaticProps = makeI18nStaticProps();
