@@ -1,6 +1,8 @@
+import { toBool } from './lib/utils/math';
+
 import manifest from '@/root/package.json';
 
-const isDev = process.env.NEXT_PUBLIC_IS_DEV === 'true';
+const isDev = toBool(process.env.NEXT_PUBLIC_IS_DEV) || false;
 let url =
   process.env.NEXT_PUBLIC_SITE_URL || 'https://www.themostannoyingwebsite.com';
 
@@ -13,7 +15,7 @@ if (isDev) {
 }
 
 const config = {
-  contactEmail: 'info@themostannoyingwebsite.com',
+  contactEmail: manifest.bugs.email,
   githubRepo: manifest.repository.url,
   defaultColorScheme: 'dark' as AppTheme,
   isBrowser: typeof window !== 'undefined',

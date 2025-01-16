@@ -1,7 +1,9 @@
 /* eslint-disable @typescript-eslint/no-require-imports */
 const analyzer = require('@next/bundle-analyzer');
+const { withSentryConfig } = require('@sentry/nextjs');
 
 const { i18n } = require('./next-i18next.config');
+const sentryConfig = require('./sentry.config');
 
 /** @type {import('next').NextConfig} **/
 const nextConfig = {
@@ -42,4 +44,4 @@ const withBundleAnalyzer = analyzer({
   enabled: process.env.ANALYZE === 'true',
 });
 
-module.exports = withBundleAnalyzer(nextConfig);
+module.exports = withSentryConfig(withBundleAnalyzer(nextConfig), sentryConfig);

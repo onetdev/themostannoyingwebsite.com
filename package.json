@@ -1,14 +1,23 @@
 {
   "name": "themostannoyingwebsite",
   "version": "0.8.0",
+  "homepage": "https://themostannoyingwebsite.com",
   "repository": {
     "type": "git",
     "url": "https://github.com/onetdev/themostannoyingwebsite.com"
+  },
+  "bugs": {
+    "url": "https://github.com/onetdev/themostannoyingwebsite.com/issues",
+    "email": "info@themostannoyingwebsite.com"
   },
   "author": {
     "name": "Konrad Koller",
     "email": "info@onet.dev",
     "url": "https://onet.dev"
+  },
+  "funding": {
+    "type": "individual",
+    "url": "https://www.onet.dev/donate"
   },
   "engines": {
     "node": ">=20.0.0"
@@ -40,6 +49,7 @@
     "@fortawesome/free-solid-svg-icons": "^6.7.1",
     "@fortawesome/react-fontawesome": "^0.2.2",
     "@next/bundle-analyzer": "^15.0.3",
+    "@sentry/nextjs": "^8.43.0",
     "@vercel/analytics": "^1.4.1",
     "classnames": "^2.5.1",
     "color": "^4.2.3",

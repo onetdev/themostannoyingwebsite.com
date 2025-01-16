@@ -43,5 +43,6 @@
     "tsconfig.json": "tsconfig.json, tsconfig.tsbuildinfo",
     "package.json": "package-lock.json, pnpm*",
     "README.md": "CODE_OF_CONDUCT.md, CONTRIBUTING.md, LICENSE, CHANGELOG.md",
-  },
+    "sentry.config.js": "sentry.client.config.ts, sentry.server.config.ts, sentry.edge.config.ts"
+  }
 }

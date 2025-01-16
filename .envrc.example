@@ -1,2 +1,6 @@
 # To use nvmrc if asdf is being useg
-ASDF_NODEJS_LEGACY_VERSION_FILE=true
+export ASDF_NODEJS_LEGACY_VERSION_FILE=true
+
+export SENTRY_CLIENT_DNS=https://{ID1}@{ID2}.ingest.de.sentry.io/{ID3}
+export SENTRY_SERVER_DNS=https://{ID1}@{ID2}.ingest.de.sentry.io/{ID3}
+export SENTRY_EDGE_DNS=https://{ID1}@{ID2}.ingest.de.sentry.io/{ID3}
