@@ -62,6 +62,10 @@ export default function Page() {
           Throw error!
         </button>
 
+        <button type="button" onClick={() => Sentry.captureMessage('test')}>
+          Fest FE
+        </button>
+
         <p>
           Next, look for the error on the{' '}
           <a href="https://onetdev.sentry.io/issues/?project=4508448553369680">
