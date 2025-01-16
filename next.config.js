@@ -3,7 +3,7 @@ const analyzer = require('@next/bundle-analyzer');
 const { withSentryConfig } = require('@sentry/nextjs');
 
 const { i18n } = require('./next-i18next.config');
-const sentryConfig = require('./sentry.config');
+const sentryConfig = require('./next-sentry.config');
 
 /** @type {import('next').NextConfig} **/
 const nextConfig = {
