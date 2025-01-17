@@ -8,9 +8,11 @@ const sentryConfig = {
     enabled: true,
   },
   tunnelRoute: '/monitoring',
-  hideSourceMaps: true,
   disableLogger: true,
   automaticVercelMonitors: true,
+  sourcemaps: {
+    deleteSourcemapsAfterUpload: true,
+  },
 };
 
 module.exports = sentryConfig;
