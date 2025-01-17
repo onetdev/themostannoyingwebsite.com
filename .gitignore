@@ -17,7 +17,7 @@
 /public/assets/articles/index.json
 /public/assets/articles/*/cover-*.*
 /public/manifest
-/public/env-manifest.json
+/public/deployment-meta.json
 
 # misc
 .DS_Store

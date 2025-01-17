@@ -1,9 +1,6 @@
-import { loadEnvConfig } from '@next/env';
-
 import { toBool } from '@/lib/utils/math';
 
-// This will also load data from .env.local and similar files from the root
-const { combinedEnv: env } = loadEnvConfig(process.cwd());
+const env = process.env;
 
 const isLocalDevelopment = toBool(env.NEXT_PUBLIC_IS_DEV) || false;
 let publicUrl =
