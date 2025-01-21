@@ -5,7 +5,7 @@
 import * as Sentry from '@sentry/nextjs';
 import getConfig from 'next/config';
 
-const config = getConfig().publicRuntimeConfig?.env || {};
+const config = getConfig().publicRuntimeConfig || {};
 
 Sentry.init({
   dsn: process.env.SENTRY_SERVER_DSN,

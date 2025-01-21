@@ -2,17 +2,14 @@
 const analyzer = require('@next/bundle-analyzer');
 const { withSentryConfig } = require('@sentry/nextjs');
 
-const envConfig = require('./environment.config');
+const deploymentMeta = require('./deployment-meta');
 const { i18n } = require('./next-i18next.config');
 const sentryConfig = require('./next-sentry.config');
-const manifest = require('./package.json');
 
 /** @type {import('next').NextConfig} **/
 const nextConfig = {
   publicRuntimeConfig: {
-    env: { ...envConfig },
-    contactEmail: manifest.bugs.email,
-    githubUrl: manifest.repository.url,
+    ...deploymentMeta,
   },
   trailingSlash: true,
   i18n,

@@ -3,15 +3,14 @@
 // https://docs.sentry.io/platforms/javascript/guides/nextjs/
 
 import * as Sentry from '@sentry/nextjs';
-import getConfig from 'next/config';
 
-const config = getConfig().publicRuntimeConfig?.env || {};
+import deplotmentMeta from '@/public/deployment-meta.json';
 
 Sentry.init({
   dsn: process.env.NEXT_PUBLIC_SENTRY_CLIENT_DSN,
 
-  environment: config.environment,
-  release: config.release,
+  environment: deplotmentMeta.environment,
+  release: deplotmentMeta.release ?? undefined,
   tracesSampleRate: 1,
 
   debug: false,

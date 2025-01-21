@@ -1,20 +1,15 @@
 declare module 'next/config' {
-  type EnvConfig = {
+  type DeploymentMeta = {
     publicUrl: string;
     isLocalDevelopment: boolean;
     environment: 'development' | 'production' | 'preview';
     release?: string;
-  };
-
-  type SharedConfig = {
     contactEmail: string;
     githubUrl: string;
   };
 
   type ConfigTypes = () => {
-    publicRuntimeConfig: SharedConfig & {
-      env: EnvConfig;
-    };
+    publicRuntimeConfig: DeploymentMeta;
   };
 
   declare const getConfig: ConfigTypes;
