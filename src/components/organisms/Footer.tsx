@@ -22,7 +22,7 @@ const Footer: FunctionComponent = () => {
           components={{
             linkTag: (
               <Link
-                href={config.githubRepo}
+                href={config.githubUrl}
                 target="_blank"
                 rel="noopener noreferrer"
                 prefetch={false}

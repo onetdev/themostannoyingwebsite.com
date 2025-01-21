@@ -1,6 +1,8 @@
-import { toBool } from '@/lib/utils/math';
-
 const env = process.env;
+
+const boolMap = { true: ['true', '1'], false: ['false', '0'] };
+const toBool = (value) =>
+  Object.entries(boolMap).find(([, v]) => v.includes(value))?.[0];
 
 const isLocalDevelopment = toBool(env.NEXT_PUBLIC_IS_DEV) || false;
 let publicUrl =
@@ -26,4 +28,4 @@ const environmentConfig = {
     undefined,
 };
 
-export default environmentConfig;
+module.exports = environmentConfig;

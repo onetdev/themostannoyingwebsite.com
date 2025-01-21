@@ -4,8 +4,9 @@
 // https://docs.sentry.io/platforms/javascript/guides/nextjs/
 
 import * as Sentry from '@sentry/nextjs';
+import getConfig from 'next/config';
 
-import config from './environment.config';
+const config = getConfig().publicRuntimeConfig?.env || {};
 
 Sentry.init({
   dsn: process.env.SENTRY_EDGE_DSN,

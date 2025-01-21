@@ -32,7 +32,7 @@ const contentMarkdownEn = `
 
   ### Who we are
 
-  The MAW is an open-source project that is publicly available through our [Git repository](${config.githubRepo}). If you have any questions about this privacy policy, please contact us at [${config.contactEmail}](${config.contactEmail}). We don't sell your personal data to anyone.
+  The MAW is an open-source project that is publicly available through our [Git repository](${config.githubUrl}). If you have any questions about this privacy policy, please contact us at [${config.contactEmail}](${config.contactEmail}). We don't sell your personal data to anyone.
 
   ### What we collect
 

@@ -79,12 +79,3 @@ export const mapToLogScale = (
 
   return (logScore / logMaxInput) * maxOutput;
 };
-
-const boolMap: [boolean, (string | number | boolean)[]][] = [
-  [true, ['true', true, '1', 1]],
-  [false, ['false', false, '0', 0]],
-];
-
-export const toBool = (value: unknown): boolean | undefined =>
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  boolMap.find(([_, values]) => values.includes(value as any))?.[0];
