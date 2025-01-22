@@ -16,7 +16,6 @@
 /build
 /public/assets/articles/index.json
 /public/assets/articles/*/cover-*.*
-/public/manifest
 /public/deployment-meta.json
 
 # misc

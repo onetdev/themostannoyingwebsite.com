@@ -16,7 +16,7 @@ const useSendNotification = ({
   const send = useCallback(
     async (data: { title: string; body?: string; data?: unknown }) => {
       const permission = getNotificationPermissionState();
-      if (!isBrowser) {
+      if (!isBrowser()) {
         return false;
       }
 
