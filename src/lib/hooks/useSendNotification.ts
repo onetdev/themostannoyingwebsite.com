@@ -1,6 +1,6 @@
 import { useCallback } from 'react';
 
-import config from '@/config';
+import { isBrowser } from '@/lib/utils/dom';
 import {
   getNotificationPermissionState,
   requestNotificationPermission,
@@ -16,7 +16,7 @@ const useSendNotification = ({
   const send = useCallback(
     async (data: { title: string; body?: string; data?: unknown }) => {
       const permission = getNotificationPermissionState();
-      if (!config.isBrowser) {
+      if (!isBrowser()) {
         return false;
       }
 

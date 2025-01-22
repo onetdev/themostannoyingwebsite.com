@@ -43,5 +43,5 @@
     "tsconfig.json": "tsconfig.json, tsconfig.tsbuildinfo",
     "package.json": "package-lock.json, pnpm*",
     "README.md": "CODE_OF_CONDUCT.md, CONTRIBUTING.md, LICENSE, CHANGELOG.md",
-  },
+  }
 }

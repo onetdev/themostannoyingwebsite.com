@@ -1,15 +1,16 @@
-import config from '@/config';
+import { isBrowser } from './dom';
 
 export const getNotificationPermissionState = () =>
-  config.isBrowser ? Notification.permission : undefined;
+  isBrowser() && 'Notification' in window ? Notification.permission : undefined;
 
 export const requestNotificationPermission = async () => {
-  if (!('Notification' in window) || !navigator.serviceWorker) return;
+  if (!isBrowser() || !('Notification' in window) || !navigator.serviceWorker)
+    return;
 
   return await Notification.requestPermission();
 };
 
 export const getLocationPermissionState = async () =>
-  config.isBrowser
+  isBrowser()
     ? (await navigator.permissions.query({ name: 'geolocation' })).state
     : undefined;

@@ -16,6 +16,7 @@
 /build
 /public/assets/articles/index.json
 /public/assets/articles/*/cover-*.*
+/public/deployment-meta.json
 
 # misc
 .DS_Store
@@ -41,3 +42,6 @@ src/lib/schemas/*.schema.json
 
 certificates
 *storybook.log
+
+# Sentry Config File
+.env.sentry-build-plugin
