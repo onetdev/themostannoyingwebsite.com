@@ -1,6 +1,6 @@
 import { useTranslation } from 'next-i18next';
 import { FunctionComponent, useMemo } from 'react';
-import ReactTimeAgo from 'react-time-ago';
+import ReactTimeAgo from 'react-timeago';
 
 import BorderedBox from '@/components/templates/BorderedBox';
 import { useRuntimeStore } from '@/lib/state/runtime';
