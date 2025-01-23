@@ -1,5 +1,5 @@
 import { useTranslation } from 'next-i18next';
-import { FunctionComponent } from 'react';
+import { FunctionComponent, useMemo } from 'react';
 import ReactTimeAgo from 'react-timeago';
 
 import BorderedBox from '@/components/templates/BorderedBox';
@@ -9,6 +9,11 @@ const RuntimeSettings: FunctionComponent = () => {
   const runtime = useRuntimeStore();
   const { t } = useTranslation();
 
+  const startedAt = useMemo(
+    () => (runtime.startedAt ? new Date(runtime.startedAt) : undefined),
+    [runtime.startedAt],
+  );
+
   return (
     <BorderedBox title={t('settings.runtime.title')}>
       <small>
@@ -17,7 +22,7 @@ const RuntimeSettings: FunctionComponent = () => {
       <br />
       <p>
         {t('settings.runtime.startedAgo')}{' '}
-        {runtime.startedAt ? <ReactTimeAgo date={runtime.startedAt} /> : 'n/a'}
+        {startedAt ? <ReactTimeAgo date={startedAt} /> : 'n/a'}
       </p>
       <p>
         {t('settings.runtime.visibilitySeconds')}{' '}
