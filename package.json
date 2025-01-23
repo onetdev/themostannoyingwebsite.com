@@ -20,7 +20,7 @@
     "url": "https://www.onet.dev/donate"
   },
   "engines": {
-    "node": ">=20.0.0"
+    "node": ">=22.13.0"
   },
   "private": false,
   "license": "MIT",
