@@ -8,7 +8,7 @@ import { useEffect, useRef, useState } from 'react';
  *   permission.
  */
 const useAudio = (url: string) => {
-  const audio = useRef<HTMLAudioElement>();
+  const audio = useRef<HTMLAudioElement>(null);
   const [playing, setPlaying] = useState(false);
 
   const toggle = () => setPlaying((prev) => !prev);
@@ -30,7 +30,7 @@ const useAudio = (url: string) => {
     return () => {
       audioInstance?.pause();
       audio.current?.removeEventListener('ended', () => setPlaying(false));
-      audio.current = undefined;
+      audio.current = null;
     };
   }, [url]);
 

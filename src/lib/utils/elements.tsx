@@ -1,13 +1,14 @@
 import { memo } from 'react';
+import React from 'react';
 
 import { first_letter_capitalize } from './string';
 
-type PrestyledNode<T extends keyof JSX.IntrinsicElements> = {
+type PrestyledNode<T extends keyof React.JSX.IntrinsicElements> = {
   type: T;
   className: string;
 };
 
-export const StyledNode = <T extends keyof JSX.IntrinsicElements>({
+export const StyledNode = <T extends keyof React.JSX.IntrinsicElements>({
   type,
   className,
 }: PrestyledNode<T>) => {

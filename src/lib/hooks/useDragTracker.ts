@@ -19,7 +19,7 @@ export type DragTrackerState = {
  * around the screen quickly.
  */
 const useDragTracker = <T extends HTMLElement>(
-  ref: RefObject<T>,
+  ref: RefObject<T | null>,
   limit: number = 5,
 ) => {
   const [state, setState] = useState<DragTrackerState>({
@@ -48,7 +48,7 @@ const useDragTracker = <T extends HTMLElement>(
 
   const onMouseMove = useCallback(
     (e: MouseEvent) => {
-      if (!state.isActive || !state.entry) return;
+      if (!state.isActive || !state.entry || ref?.current === null) return;
       const current = timedClientPoint(e);
       const reference = state.history[0] ?? { ...current };
       const interval = current.t.getTime() - reference.t.getTime();
@@ -56,7 +56,7 @@ const useDragTracker = <T extends HTMLElement>(
       const velocity = Math.sqrt(dist.x ^ (2 + dist.y) ^ 2) / interval;
       setState({
         ...state,
-        isWithin: isPointWithinElement(ref.current!, current),
+        isWithin: isPointWithinElement(ref.current, current),
         history: [...state.history, current].slice(-limit),
         velocity: velocity > 0 ? velocity : null,
       });

@@ -1,5 +1,5 @@
 import { FunctionComponent } from 'react';
-import ReactTimeAgo from 'react-timeago';
+import ReactTimeAgo from 'react-time-ago';
 
 import { HistoryItem } from '@/features/chat_bubble/types';
 
