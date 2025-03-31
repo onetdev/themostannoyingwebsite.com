@@ -1,7 +1,12 @@
 import { FlatCompat } from '@eslint/eslintrc';
 import js from '@eslint/js';
+import eslint from '@eslint/js';
+import prettierRecommended from 'eslint-plugin-prettier/recommended';
+import storybook from 'eslint-plugin-storybook';
+import tailwind from 'eslint-plugin-tailwindcss';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
+import tseslint from 'typescript-eslint';
 
 // TODO
 //  Once all the configs/extends are compatible with ESLint 9 (FlatConfig)
@@ -17,32 +22,18 @@ const compat = new FlatCompat({
 // When can we upgrade? List of compatible and incompatible configs
 //  - next/core-web-vitals
 //    - UNSUPPORTED as of 2024-10-25
-//  - plugin:@typescript-eslint/recommended
-//    - https://typescript-eslint.io/getting-started/#step-2-configuration
-//    - import eslint from "@eslint/js";
-//    - import tseslint from "typescript-eslint";
-//  - plugin:prettier/recommended
-//    - https://github.com/prettier/eslint-plugin-prettier?tab=readme-ov-file#configuration-new-eslintconfigjs
-//    - import prettierRecommended from "eslint-plugin-prettier/recommended";
-//  - plugin:tailwindcss/recommended
-//    - https://github.com/francoismassart/eslint-plugin-tailwindcss?tab=readme-ov-file#eslintconfigjs
-//    - import tailwind from "eslint-plugin-tailwindcss";
-//  - plugin:storybook/recommended
-//    - https://github.com/storybookjs/eslint-plugin-storybook?tab=readme-ov-file#configuration-eslintconfigcmjs
-//    - import storybook from "eslint-plugin-storybook";
 
-const rules = [
+export default tseslint.config(
+  ...compat.extends('next/core-web-vitals'),
   {
     ignores: ['**/*.css', '**/*.svg'],
-  },
-  ...compat.extends(
-    'next/core-web-vitals',
-    'plugin:@typescript-eslint/recommended',
-    'plugin:prettier/recommended',
-    'plugin:storybook/recommended',
-    'plugin:tailwindcss/recommended',
-  ),
-  {
+    files: ['**/*.ts'],
+    extends: [
+      eslint.configs.recommended,
+      tseslint.configs.recommended,
+      prettierRecommended,
+      tailwind.configs['flat/recommended'],
+    ],
     rules: {
       'import/order': [
         'error',
@@ -108,6 +99,10 @@ const rules = [
       ],
     },
   },
-];
-
-export default rules;
+  {
+    files: ['**/*.stories.ts'],
+    extends: [
+      storybook.configs['flat/recommended'],
+    ],
+  }
+);

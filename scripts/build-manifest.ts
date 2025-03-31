@@ -1,4 +1,4 @@
-import { ESLint } from 'eslint';
+import { ESLint, Linter } from 'eslint';
 import favicons, { type FaviconFile, type FaviconImage } from 'favicons';
 import fs from 'fs/promises';
 import path from 'path';
@@ -89,7 +89,7 @@ const storeAndFormatHeaders = async (
   // 2. linting and formatting
   const eslint = new ESLint({
     fix: true,
-    overrideConfig: eslintRules,
+    overrideConfig: eslintRules as Linter.Config[],
   });
   const formatted = await eslint.lintText(headerInterpolated, {
     filePath: './src/components/templates/GeneratedMetaHead.tsx',

@@ -3,3 +3,5 @@ export SENTRY_SERVER_DSN=https://{ID1}@{ID2}.ingest.de.sentry.io/{ID3}
 export SENTRY_EDGE_DSN=https://{ID1}@{ID2}.ingest.de.sentry.io/{ID3}
 
 export NEXT_PUBLIC_IS_DEV=true
+
+export ASDF_NODEJS_AUTO_ENABLE_COREPACK=true
