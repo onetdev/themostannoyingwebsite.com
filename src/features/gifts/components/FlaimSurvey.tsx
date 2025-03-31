@@ -1,4 +1,4 @@
-import { useRouter } from 'next/router';
+import { useRouter } from 'next/navigation';
 import { useTranslation } from 'next-i18next';
 import { FunctionComponent, useEffect, useMemo, useState } from 'react';
 

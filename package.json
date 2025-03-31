@@ -124,8 +124,8 @@
     "typescript-eslint": "^8.28.0"
   },
   "peerDependencies": {
-    "express": "^4.21.1",
-    "i18next": "^23.10.1",
-    "react-i18next": "^15.0.1"
+    "express": "^5.1.0",
+    "i18next": "^24.2.3",
+    "react-i18next": "^15.4.1"
   }
 }
