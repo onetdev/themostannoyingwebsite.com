@@ -1,5 +1,5 @@
 import { useRouter } from 'next/navigation';
-import { useTranslation } from 'next-i18next';
+import { useTranslation } from '@/lib/utils/i18n';
 import { FormEventHandler, FunctionComponent } from 'react';
 
 import Button from '@/components/atoms/Button';

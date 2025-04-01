@@ -1,8 +1,7 @@
 import { NextPage } from 'next';
-import { useTranslation } from 'next-i18next';
 
 import { DilfFinder } from '@/features/gifts';
-import { makeI18nStaticProps } from '@/lib/utils/i18n';
+import { useTranslation } from '@/lib/utils/i18n';
 
 const Dilf: NextPage = () => {
   const { t } = useTranslation();
@@ -16,5 +15,4 @@ const Dilf: NextPage = () => {
   );
 };
 
-export const getStaticProps = makeI18nStaticProps();
 export default Dilf;

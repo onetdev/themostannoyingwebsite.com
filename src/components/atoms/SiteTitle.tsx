@@ -1,5 +1,5 @@
 import Head from 'next/head';
-import { useTranslation } from 'next-i18next';
+import { useTranslation } from '@/lib/utils/i18n';
 import { FunctionComponent, PropsWithChildren } from 'react';
 
 export type SiteTitleProps = PropsWithChildren;

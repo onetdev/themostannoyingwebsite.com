@@ -28,7 +28,7 @@ const deploymentMeta = {
   // all non-alphanumeric characters with "-"
   release:
     (process.env.VERCEL_GIT_COMMIT_REF || '').replace(/[^a-z0-9._-]/gi, '-') ||
-    null,
+    'UNKNOWN_RELEASE',
 };
 
 module.exports = deploymentMeta;

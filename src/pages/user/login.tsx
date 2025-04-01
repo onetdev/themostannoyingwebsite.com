@@ -1,6 +1,5 @@
 import { NextPage } from 'next';
 import Link from 'next/link';
-import { useTranslation } from 'next-i18next';
 import { SubmitHandler, useForm } from 'react-hook-form';
 
 import Button from '@/components/atoms/Button';
@@ -11,7 +10,7 @@ import PageHeadline from '@/components/atoms/PageHeadline';
 import SiteTitle from '@/components/atoms/SiteTitle';
 import TextInput from '@/components/atoms/TextInput';
 import { LoginFormInputs } from '@/features/auth';
-import { makeI18nStaticProps } from '@/lib/utils/i18n';
+import { useTranslation } from '@/lib/utils/i18n';
 import { EMAIL_PATTERN } from '@/lib/utils/validator';
 
 const Login: NextPage = () => {
@@ -111,5 +110,4 @@ const Login: NextPage = () => {
   );
 };
 
-export const getStaticProps = makeI18nStaticProps();
 export default Login;

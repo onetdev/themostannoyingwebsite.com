@@ -9,6 +9,7 @@ import MainLayout from '@/components/templates/MainLayout';
 import RootProviderContainer from '@/lib/providers/RootProviderContainer';
 import english from '@/public/locales/en/common.json';
 import nextI18NextConfig from '@/root/next-i18next.config.js';
+import ClientServiceProvider from '@/lib/providers/ClientServiceProvider';
 
 const _openSans = Open_Sans({
   subsets: ['latin'],

@@ -1,4 +1,3 @@
-import { useTranslation } from 'next-i18next';
 import { useTheme } from 'next-themes';
 import { FunctionComponent } from 'react';
 
@@ -7,6 +6,7 @@ import LabeledChild from '@/components/molecules/LabeledChild';
 import BorderedBox from '@/components/templates/BorderedBox';
 import { useRuntimeStore } from '@/lib/state/runtime';
 import { useUserPreferencesStore } from '@/lib/state/user_preferences';
+import { useTranslation } from '@/lib/utils/i18n';
 
 const PreferencesSettings: FunctionComponent = () => {
   const preference = useUserPreferencesStore();

@@ -1,10 +1,10 @@
-import { useTranslation } from 'next-i18next';
 import { FunctionComponent, useState } from 'react';
 
 import ModalContent from './components/ModalContent';
 
 import DimmerOverlay from '@/components/atoms/DimmerOverlay';
 import Icon from '@/components/atoms/Icon';
+import { useTranslation } from '@/lib/utils/i18n';
 
 const WheelOfFortuneHost: FunctionComponent = () => {
   const [isOpen, setOpen] = useState(false);

@@ -1,4 +1,4 @@
-import { useTranslation } from 'next-i18next';
+import { useTranslation } from '@/lib/utils/i18n';
 import { FunctionComponent, useEffect, useMemo, useRef, useState } from 'react';
 
 import MessageBubble from './MessageBubble';

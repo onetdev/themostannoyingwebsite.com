@@ -1,4 +1,4 @@
-import { useTranslation } from 'next-i18next';
+import { useTranslation } from '@/lib/utils/i18n';
 import { FunctionComponent, useMemo } from 'react';
 
 import { mapToLogScale } from '@/lib/utils/math';

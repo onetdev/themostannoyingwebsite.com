@@ -3,6 +3,8 @@ import config from '@/config';
 import { Open_Sans } from 'next/font/google';
 import RootProviderContainer from "@/lib/providers/RootProviderContainer";
 import ClientServiceProvider from "@/lib/providers/ClientServiceProvider";
+import nextI18nextConfig from "@/root/i18n.config";
+import { dir } from "i18next";
 
 const _openSans = Open_Sans({
   subsets: ['latin'],
@@ -43,24 +45,31 @@ export function generateViewport(): Viewport {
   }
 }
 
-async function Layout({
+export function generateStaticParams() {
+  return nextI18nextConfig.locales.map(locale => ({ locale }));
+}
+
+async function RootLayout({
   children,
+  params: { locale }
 }: {
   children: React.ReactNode;
+  params: { locale: string };
 }) {
   return (
     <html
-      lang="en"
+      lang={locale}
+      dir={dir(locale)}
       data-theme={config.defaultColorScheme}
       style={{ colorScheme: config.defaultColorScheme }}>
       <body>
-        <RootProviderContainer>
-          <ClientServiceProvider />
+        {/* <RootProviderContainer>
+          <ClientServiceProvider /> */}
           {children}
-        </RootProviderContainer>
+        {/* </RootProviderContainer> */}
       </body>
     </html >
   );
 }
 
-export default Layout;
+export default RootLayout;

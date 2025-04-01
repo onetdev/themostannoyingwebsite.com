@@ -1,6 +1,5 @@
 'use client';
 
-import { useTranslation } from 'next-i18next';
 import { FunctionComponent, PropsWithChildren, useEffect } from 'react';
 import { useBeforeUnload } from 'react-use';
 
@@ -15,6 +14,7 @@ import { NewsletterModalExperienceHost } from '@/features/newsletter';
 import { NotificationPermissionExperienceHost } from '@/features/notification';
 import { useExperienceFlagsStore } from '@/lib/state/experience_flags';
 import { useUserGrantsStore } from '@/lib/state/user_grants';
+import { useTranslation } from '@/lib/utils/i18n';
 
 const ExperienceProvider: FunctionComponent<PropsWithChildren> = ({
   children,

@@ -1,6 +1,6 @@
 'use client';
 
-import { useTranslation } from 'next-i18next';
+import { useTranslation } from '@/lib/utils/i18n';
 import { FunctionComponent } from 'react';
 
 import ArrayPagedTitle from './components/ArrayPagedTitle';

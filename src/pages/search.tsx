@@ -1,7 +1,7 @@
 import HTMLReactParser from 'html-react-parser';
 import { NextPage } from 'next';
 import Link from 'next/link';
-import { useTranslation } from 'next-i18next';
+import { useTranslation } from '@/lib/utils/i18n';
 import { useCallback, useEffect, useMemo, useState } from 'react';
 
 import DotDotDotText from '@/components/atoms/DotDotDotText';
@@ -11,7 +11,6 @@ import SearchForm from '@/components/organisms/SearchForm';
 import { ArticleSearchResult, ArticleService } from '@/features/content';
 import { useExperienceFlagsStore } from '@/lib/state/experience_flags';
 import { arrayShuffle } from '@/lib/utils/array';
-import { makeI18nStaticProps } from '@/lib/utils/i18n';
 import { random } from '@/lib/utils/math';
 
 type Result = {
@@ -160,5 +159,4 @@ const Search: NextPage = () => {
   );
 };
 
-export const getStaticProps = makeI18nStaticProps();
 export default Search;

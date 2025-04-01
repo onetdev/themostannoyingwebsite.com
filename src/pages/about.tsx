@@ -1,11 +1,10 @@
 import HTMLReactParser from 'html-react-parser';
 import { NextPage } from 'next';
-import { useTranslation } from 'next-i18next';
+import { useTranslation } from '@/lib/utils/i18n';
 import { useMemo } from 'react';
 
 import PageHeadline from '@/components/atoms/PageHeadline';
 import SiteTitle from '@/components/atoms/SiteTitle';
-import { makeI18nStaticProps } from '@/lib/utils/i18n';
 import { parse } from '@/lib/utils/markdown';
 import styles from '@/styles/content.module.css';
 
@@ -65,5 +64,4 @@ const contentMarkdownEn = `
   **If you want to contribute, everything is on GitHub. Check the footer for the link.**
 `;
 
-export const getStaticProps = makeI18nStaticProps();
 export default About;

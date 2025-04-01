@@ -1,4 +1,5 @@
-import { useTranslation } from 'next-i18next';
+'use client';
+
 import React, {
   FunctionComponent,
   PropsWithChildren,
@@ -8,6 +9,7 @@ import React, {
 } from 'react';
 
 import Button from '@/components/atoms/Button';
+import { useTranslation } from '@/lib/utils/i18n';
 
 type PartitionalLockedContentProps = Omit<JSXProxyProps<'div'>, 'styles'> &
   PropsWithChildren<{

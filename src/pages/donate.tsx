@@ -1,10 +1,9 @@
 import { NextPage } from 'next';
 import Link from 'next/link';
-import { useTranslation } from 'next-i18next';
+import { useTranslation } from '@/lib/utils/i18n';
 
 import PageHeadline from '@/components/atoms/PageHeadline';
 import SiteTitle from '@/components/atoms/SiteTitle';
-import { makeI18nStaticProps } from '@/lib/utils/i18n';
 import styles from '@/styles/content.module.css';
 
 const Donate: NextPage = () => {
@@ -30,5 +29,4 @@ const Donate: NextPage = () => {
   );
 };
 
-export const getStaticProps = makeI18nStaticProps();
 export default Donate;

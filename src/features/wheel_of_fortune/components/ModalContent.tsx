@@ -1,4 +1,3 @@
-import { useTranslation } from 'next-i18next';
 import { FunctionComponent, useMemo, useState } from 'react';
 import Confetti from 'react-confetti';
 
@@ -7,6 +6,7 @@ import AnimatedWheel, { AnimatedWheelState } from './WheelAnimationWrapper';
 
 import Icon from '@/components/atoms/Icon';
 import { getWeightedRandom, WeightedRandomPoolItem } from '@/lib/utils/math';
+import { useTranslation } from '@/lib/utils/i18n';
 
 type ModalContentProps = JSXProxyProps<'div'> & {
   onClose?: () => void;

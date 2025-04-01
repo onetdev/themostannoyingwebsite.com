@@ -1,9 +1,9 @@
-import { useTranslation } from 'next-i18next';
 import { FunctionComponent, useMemo } from 'react';
 import ReactTimeAgo from 'react-timeago';
 
 import BorderedBox from '@/components/templates/BorderedBox';
 import { useRuntimeStore } from '@/lib/state/runtime';
+import { useTranslation } from '@/lib/utils/i18n';
 
 const RuntimeSettings: FunctionComponent = () => {
   const runtime = useRuntimeStore();

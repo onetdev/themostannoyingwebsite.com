@@ -1,4 +1,6 @@
-import { useTranslation } from 'next-i18next';
+'use client';
+
+import { useTranslation } from '@/lib/utils/i18n';
 import { FunctionComponent, useState } from 'react';
 
 import { useRuntimeStore } from '@/lib/state/runtime';

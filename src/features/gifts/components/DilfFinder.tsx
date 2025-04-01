@@ -1,5 +1,5 @@
 import Image from 'next/image';
-import { useTranslation } from 'next-i18next';
+import { useTranslation } from '@/lib/utils/i18n';
 
 import DilfClickOverlay from './DilfClickOverlay';
 

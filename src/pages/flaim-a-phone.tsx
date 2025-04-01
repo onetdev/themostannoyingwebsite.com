@@ -1,8 +1,7 @@
 import { NextPage } from 'next';
-import { useTranslation } from 'next-i18next';
+import { useTranslation } from '@/lib/utils/i18n';
 
 import { FlaimSurvery } from '@/features/gifts';
-import { makeI18nStaticProps } from '@/lib/utils/i18n';
 
 const FlaimWanPhone: NextPage = () => {
   const { t } = useTranslation();
@@ -15,5 +14,4 @@ const FlaimWanPhone: NextPage = () => {
   );
 };
 
-export const getStaticProps = makeI18nStaticProps();
 export default FlaimWanPhone;

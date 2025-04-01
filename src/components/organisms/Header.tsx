@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { useTranslation } from 'next-i18next';
+import { useTranslation } from '@/lib/utils/i18n';
 import { FunctionComponent } from 'react';
 
 import DarkModeToggle from '@/components/atoms/DarkModeToggle';

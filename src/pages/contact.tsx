@@ -1,10 +1,9 @@
 import { NextPage } from 'next';
-import { useTranslation } from 'next-i18next';
+import { useTranslation } from '@/lib/utils/i18n';
 
 import PageHeadline from '@/components/atoms/PageHeadline';
 import SiteTitle from '@/components/atoms/SiteTitle';
 import config from '@/config';
-import { makeI18nStaticProps } from '@/lib/utils/i18n';
 
 const Contact: NextPage = () => {
   const { t } = useTranslation('common');
@@ -20,5 +19,4 @@ const Contact: NextPage = () => {
   );
 };
 
-export const getStaticProps = makeI18nStaticProps();
 export default Contact;

@@ -1,4 +1,4 @@
-import { useTranslation } from 'next-i18next';
+import { useTranslation } from '@/lib/utils/i18n';
 import { FunctionComponent, useMemo, useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 

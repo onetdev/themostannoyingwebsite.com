@@ -3,11 +3,10 @@ import { GetStaticPaths, GetStaticProps, NextPage } from 'next';
 import Error from 'next/error';
 import Head from 'next/head';
 import Image from 'next/image';
-import { useTranslation } from 'next-i18next';
+import { useTranslation } from '@/lib/utils/i18n';
 
 import { ArticleService, PartitionalLockedContent } from '@/features/content';
 import { useExperienceFlagsStore } from '@/lib/state/experience_flags';
-import { getI18nProps } from '@/lib/utils/i18n';
 import styles from '@/styles/content.module.css';
 
 type ArticleItemProps = {
@@ -79,12 +78,4 @@ export const getStaticPaths: GetStaticPaths = async ({ locales }) => {
   };
 };
 
-export const getStaticProps: GetStaticProps = async (context) => {
-  return {
-    props: {
-      ...(await getI18nProps(context)),
-      slug: context.params?.slug,
-    },
-  };
-};
 export default ArticleItem;

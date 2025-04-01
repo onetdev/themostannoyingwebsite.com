@@ -1,12 +1,11 @@
 import { NextPage } from 'next';
 import Image from 'next/image';
-import { useTranslation } from 'next-i18next';
 import { useEffect, useRef, useState } from 'react';
 
 import Icon from '@/components/atoms/Icon';
+import { useTranslation } from '@/lib/utils/i18n';
 import PageHeadline from '@/components/atoms/PageHeadline';
 import SiteTitle from '@/components/atoms/SiteTitle';
-import { makeI18nStaticProps } from '@/lib/utils/i18n';
 
 const HotThings: NextPage = () => {
   const [isCapable, setIsCapable] = useState(false);
@@ -89,5 +88,4 @@ const HotThings: NextPage = () => {
   );
 };
 
-export const getStaticProps = makeI18nStaticProps();
 export default HotThings;

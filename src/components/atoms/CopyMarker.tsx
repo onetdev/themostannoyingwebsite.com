@@ -1,4 +1,4 @@
-import { useTranslation } from 'next-i18next';
+import { useTranslation } from '@/lib/utils/i18n';
 import { ClipboardEvent, FunctionComponent, PropsWithChildren } from 'react';
 
 export type CopyWithUrl = PropsWithChildren<{

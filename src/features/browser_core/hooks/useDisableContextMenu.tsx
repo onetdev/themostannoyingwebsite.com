@@ -1,4 +1,4 @@
-import { useTranslation } from 'next-i18next';
+import { useTranslation } from '@/lib/utils/i18n';
 import { useCallback, useEffect } from 'react';
 
 import { useExperienceFlagsStore } from '@/lib/state/experience_flags';

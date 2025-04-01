@@ -1,4 +1,3 @@
-import { useTranslation } from 'next-i18next';
 import { FunctionComponent } from 'react';
 
 import Button from '@/components/atoms/Button';
@@ -6,6 +5,7 @@ import FormCheckbox from '@/components/atoms/Checkbox';
 import LabeledChild from '@/components/molecules/LabeledChild';
 import BorderedBox from '@/components/templates/BorderedBox';
 import { useExperienceFlagsStore } from '@/lib/state/experience_flags';
+import { useTranslation } from '@/lib/utils/i18n';
 
 type ExperienceSettingsProps = {
   className?: string;

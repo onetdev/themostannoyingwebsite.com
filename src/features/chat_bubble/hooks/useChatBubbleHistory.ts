@@ -1,4 +1,3 @@
-import { useTranslation } from 'next-i18next';
 import { useCallback, useEffect, useMemo, useState } from 'react';
 
 import { HistoryItem, HistoryItemOwner } from '@/features/chat_bubble';
@@ -6,6 +5,7 @@ import useAudio from '@/lib/hooks/useAudio';
 import useSendNotification from '@/lib/hooks/useSendNotification';
 import { useRuntimeStore } from '@/lib/state/runtime';
 import { useUserPreferencesStore } from '@/lib/state/user_preferences';
+import { useTranslation } from '@/lib/utils/i18n';
 
 const useChatBubbleHistory = () => {
   const { t } = useTranslation();

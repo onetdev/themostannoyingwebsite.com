@@ -1,6 +1,6 @@
 import Image from 'next/image';
 import Link from 'next/link';
-import { useTranslation } from 'next-i18next';
+import { useTranslation } from '@/lib/utils/i18n';
 import { useTheme } from 'next-themes';
 import { FunctionComponent, PropsWithChildren } from 'react';
 

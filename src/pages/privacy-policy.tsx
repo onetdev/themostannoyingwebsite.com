@@ -1,14 +1,13 @@
 import HTMLReactParser from 'html-react-parser';
 import { NextPage } from 'next';
-import { useTranslation } from 'next-i18next';
 import { useMemo } from 'react';
 
 import PageHeadline from '@/components/atoms/PageHeadline';
 import SiteTitle from '@/components/atoms/SiteTitle';
 import config from '@/config';
-import { makeI18nStaticProps } from '@/lib/utils/i18n';
 import { parse } from '@/lib/utils/markdown';
 import styles from '@/styles/content.module.css';
+import { useTranslation } from '@/lib/utils/i18n';
 
 // Privacy policy inspired by https://matomo.org/privacy-policy/
 const PrivacyPolicy: NextPage = () => {
@@ -76,5 +75,4 @@ const contentMarkdownEn = `
   **Update 2025-01-22**: Update error monitoring related parts due to the introduction of Sentry.
 `;
 
-export const getStaticProps = makeI18nStaticProps();
 export default PrivacyPolicy;

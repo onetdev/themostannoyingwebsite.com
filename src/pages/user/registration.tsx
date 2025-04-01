@@ -1,6 +1,6 @@
 import { NextPage } from 'next';
 import Link from 'next/link';
-import { useTranslation } from 'next-i18next';
+import { useTranslation } from '@/lib/utils/i18n';
 import { SubmitHandler, useForm, UseFormRegister } from 'react-hook-form';
 
 import Button from '@/components/atoms/Button';
@@ -18,7 +18,6 @@ import {
   PhoneNumberField,
   RegistrationFormInputs,
 } from '@/features/auth';
-import { makeI18nStaticProps } from '@/lib/utils/i18n';
 import { EMAIL_PATTERN } from '@/lib/utils/validator';
 
 const Registration: NextPage = () => {
@@ -188,5 +187,4 @@ const Registration: NextPage = () => {
   );
 };
 
-export const getStaticProps = makeI18nStaticProps();
 export default Registration;

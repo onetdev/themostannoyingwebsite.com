@@ -1,11 +1,11 @@
 'use client';
 
-import { useTranslation } from 'next-i18next';
 import { FunctionComponent, useEffect, useRef, useState } from 'react';
 
 import Icon from '@/components/atoms/Icon';
 import { useExperienceFlagsStore } from '@/lib/state/experience_flags';
 import { useUserGrantsStore } from '@/lib/state/user_grants';
+import { useTranslation } from '@/lib/utils/i18n';
 
 const StickyVideoExperienceHost: FunctionComponent = () => {
   const stickyVideo = useExperienceFlagsStore((state) => state.stickyVideo);

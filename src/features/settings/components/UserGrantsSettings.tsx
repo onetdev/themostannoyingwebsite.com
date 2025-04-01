@@ -1,10 +1,10 @@
-import { useTranslation } from 'next-i18next';
 import { FunctionComponent } from 'react';
 
 import FormCheckbox from '@/components/atoms/Checkbox';
 import LabeledChild from '@/components/molecules/LabeledChild';
 import BorderedBox from '@/components/templates/BorderedBox';
 import { useUserGrantsStore } from '@/lib/state/user_grants';
+import { useTranslation } from '@/lib/utils/i18n';
 
 const UserGrantsSettings: FunctionComponent = () => {
   const grant = useUserGrantsStore();

@@ -1,7 +1,6 @@
 import { NextPage } from 'next';
-import { useTranslation } from 'next-i18next';
 
-import { makeI18nStaticProps } from '@/lib/utils/i18n';
+import { useTranslation } from '@/lib/utils/i18n';
 
 const Error404: NextPage = () => {
   const { t } = useTranslation();
@@ -14,5 +13,4 @@ const Error404: NextPage = () => {
   );
 };
 
-export const getStaticProps = makeI18nStaticProps();
 export default Error404;

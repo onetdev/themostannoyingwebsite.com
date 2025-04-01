@@ -1,6 +1,6 @@
 import { NextPage } from 'next';
 import Image from 'next/image';
-import { useTranslation } from 'next-i18next';
+import { useTranslation } from '@/lib/utils/i18n';
 import { useMemo, useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 
@@ -9,7 +9,6 @@ import Checkbox from '@/components/atoms/Checkbox';
 import ColorPickerInput from '@/components/atoms/ColorPickerInput';
 import TextInput from '@/components/atoms/TextInput';
 import LabeledChild from '@/components/molecules/LabeledChild';
-import { makeI18nStaticProps } from '@/lib/utils/i18n';
 
 const defaultValues: CafeWallForm = {
   tileColorA: '#fe9aff',
@@ -203,5 +202,4 @@ type CafeWallForm = {
   pattern: boolean[];
 };
 
-export const getStaticProps = makeI18nStaticProps();
 export default CafeWall;

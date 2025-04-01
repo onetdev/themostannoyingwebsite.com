@@ -1,4 +1,4 @@
-import { useTranslation } from 'next-i18next';
+import { useTranslation } from '@/lib/utils/i18n';
 import { FormEventHandler, FunctionComponent, useRef } from 'react';
 
 import Button from '@/components/atoms/Button';
