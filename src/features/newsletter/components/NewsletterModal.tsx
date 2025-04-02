@@ -8,7 +8,7 @@ import Modal from '@/components/molecules/Modal';
 import { type NewsletterFormInputs } from '@/features/newsletter';
 import { random } from '@/lib/utils/math';
 import { EMAIL_PATTERN } from '@/lib/utils/validator';
-import { useTranslations } from 'next-intl';
+import { useMessages, useTranslations } from 'next-intl';
 
 type NewsletterModalProps = {
   visible?: boolean;
@@ -20,11 +20,12 @@ const NewsletterModal: FunctionComponent<NewsletterModalProps> = ({
   onDismiss,
 }) => {
   const t = useTranslations();
+  const messages = useMessages();
   const [flipActions, setFlipActions] = useState(false);
-  const [actions, setActions] = useState({
+  const [actions, setActions] = useState<ConfirmItem>({
     confirm: t('newsletter.modal.initialConfirm'),
     cancel: t('newsletter.modal.initialCancel'),
-  } as ConfirmItem satisfies ConfirmItem);
+  });
   const {
     register,
     handleSubmit,
@@ -32,12 +33,14 @@ const NewsletterModal: FunctionComponent<NewsletterModalProps> = ({
   } = useForm<NewsletterFormInputs>();
 
   const confirmPool = useMemo(
-    () =>
-      t('newsletter.modal.confirmations', {
-        returnObjects: true,
-        defaultValue: [],
-      }) as ConfirmItem[],
-    [t],
+    () => {
+      const items = Object.keys(messages.newsletter.modal.confirmations).map(
+        (key) => t(`newsletter.modal.confirmations.${key}`) as unknown as ConfirmItem,
+      );
+
+      return items
+    },
+    [messages.newsletter.modal.confirmations, t],
   );
 
   const renderActions = () => {

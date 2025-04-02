@@ -10,7 +10,7 @@ import BorderedBox from '@/components/templates/BorderedBox';
 import { FlaimSurveyQuestion } from '@/features/gifts';
 import { useRuntimeStore } from '@/lib/state/runtime';
 import { arrayShuffle } from '@/lib/utils/array';
-import { useTranslations } from 'next-intl';
+import { useMessages, useTranslations } from 'next-intl';
 
 export type FlaimSurveryProps = { className?: string; timeInSeconds?: number };
 
@@ -28,19 +28,17 @@ const FlaimSurvery: FunctionComponent<FlaimSurveryProps> = ({
     selected: -1,
     answers: [] as boolean[],
   });
+  const messages = useMessages();
 
   const pool = useMemo(() => {
-    const items = Array.from(
-      t('gifts.wanPhone.survey.questionVariants', {
-        returnObjects: true,
-        defaultValue: [],
-      }),
-    ) as FlaimSurveyQuestion[];
+    const items = Object
+      .keys(messages.gifts.wanPhone.survey.questionVariants)
+      .map((key) => t(`gifts.wanPhone.survey.questionVariants.${key}`) as unknown as FlaimSurveyQuestion);
 
     return arrayShuffle(
       items.map((item) => ({ ...item, options: arrayShuffle(item.options) })),
     );
-  }, [t]);
+  }, [messages, t]);
   const viewData = pool[questionIndex];
 
   useEffect(() => {

@@ -16,13 +16,13 @@ const GenderField: FunctionComponent<GenderFieldProps> = ({
   register,
   errors,
 }) => {
-  const t = useTranslations('common');
+  const t = useTranslations();
 
   const genderOptions = useMemo(() => {
-    const pool = t('user.genderVariants', {
-      returnObjects: true,
-      defaultValue: [],
-    }) as Record<string, string>;
+    const pool = userGenderList.reduce((acc, gender) => {
+      acc[gender] = t(`user.genderVariants.${gender}`);
+      return acc;
+    }, {} as Record<string, string>);
 
     return userGenderList.map((gender) => ({
       value: gender,

@@ -24,7 +24,7 @@ const ExperienceProvider: FunctionComponent<PropsWithChildren> = ({
     (state) => state.clipboardMarker,
   );
   const syncPermissions = useUserGrantsStore((state) => state.syncPermissions);
-  const t = useTranslations('common');
+  const t = useTranslations();
 
   useDisableNavigationPop();
   useDisableContextMenu();

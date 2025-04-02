@@ -5,7 +5,7 @@ import config from '@/config';
 import { useTranslations } from 'next-intl';
 
 const Footer: FunctionComponent = () => {
-  const t = useTranslations('common');
+  const t = useTranslations();
 
   return (
     <footer
@@ -16,20 +16,16 @@ const Footer: FunctionComponent = () => {
         <Link href="https://onet.dev">Konrád Koller</Link>
       </span>
       <span>
-        <Trans
-          i18nKey="app.recruiting"
-          t={t}
-          components={{
-            linkTag: (
-              <Link
-                href={config.githubUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                prefetch={false}
-              />
-            ),
-          }}
-        />
+        {t.rich('app.disclaimer', {
+          linkTag: (chunks) => (
+            <Link
+              href={config.githubUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              prefetch={false}
+            >{chunks}</Link>
+          ),
+        })}
         &nbsp;
         {t('app.aiDisclose')}
         &nbsp;

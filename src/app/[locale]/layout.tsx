@@ -6,6 +6,7 @@ import ClientServiceProvider from "@/lib/providers/ClientServiceProvider";
 import { routing } from "@/i18n/routing";
 import { notFound } from "next/navigation";
 import { hasLocale, NextIntlClientProvider } from "next-intl";
+import {getLangDir} from 'rtl-detect';
 
 const _openSans = Open_Sans({
   subsets: ['latin'],
@@ -54,6 +55,7 @@ async function RootLayout({
   params: Promise<{ locale: string }>;
 }) {
   const { locale } = await params;
+  const direction = getLangDir(locale);
   if (!hasLocale(routing.locales, locale)) {
     notFound();
   }
@@ -61,15 +63,15 @@ async function RootLayout({
   return (
     <html
       lang={locale}
-      dir={'ltr'}
+      dir={direction}
       data-theme={config.defaultColorScheme}
       style={{ colorScheme: config.defaultColorScheme }}>
       <body>
         <NextIntlClientProvider>
-          {/* <RootProviderContainer>
-          <ClientServiceProvider /> */}
-          {children}
-          {/* </RootProviderContainer> */}
+          <RootProviderContainer>
+            <ClientServiceProvider />
+            {children}
+          </RootProviderContainer>
         </NextIntlClientProvider>
       </body>
     </html >
