@@ -1,3 +1,5 @@
+'use client';
+
 import { Analytics } from '@vercel/analytics/react';
 import { FunctionComponent } from 'react';
 

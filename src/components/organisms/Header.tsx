@@ -10,7 +10,7 @@ import UserNavigation from '@/components/organisms/UserNavigation';
 import { useTranslations } from 'next-intl';
 
 const Header: FunctionComponent = () => {
-  const t = useTranslations('common');
+  const t = useTranslations();
 
   return (
     <header id="header" className="grid grid-cols-2 gap-1 py-2">

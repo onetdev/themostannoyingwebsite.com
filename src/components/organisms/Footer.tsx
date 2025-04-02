@@ -16,7 +16,7 @@ const Footer: FunctionComponent = () => {
         <Link href="https://onet.dev">Konrád Koller</Link>
       </span>
       <span>
-        {t.rich('app.disclaimer', {
+        {t.rich('app.recruiting', {
           linkTag: (chunks) => (
             <Link
               href={config.githubUrl}

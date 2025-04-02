@@ -11,7 +11,7 @@ export type MainNavigationProps = {
 const MainNavigation: FunctionComponent<MainNavigationProps> = ({
   className,
 }) => {
-  const t = useTranslations('common');
+  const t = useTranslations();
 
   const links = useMemo(
     () => [

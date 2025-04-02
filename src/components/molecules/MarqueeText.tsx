@@ -1,3 +1,5 @@
+'use client';
+
 import Link from 'next/link';
 import { FunctionComponent, useState } from 'react';
 import MarqueePlugin from 'react-fast-marquee';

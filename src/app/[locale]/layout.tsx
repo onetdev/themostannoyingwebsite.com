@@ -6,7 +6,8 @@ import ClientServiceProvider from "@/lib/providers/ClientServiceProvider";
 import { routing } from "@/i18n/routing";
 import { notFound } from "next/navigation";
 import { hasLocale, NextIntlClientProvider } from "next-intl";
-import {getLangDir} from 'rtl-detect';
+import { getLangDir } from 'rtl-detect';
+import MainLayout from "@/components/templates/MainLayout";
 
 const _openSans = Open_Sans({
   subsets: ['latin'],
@@ -70,7 +71,9 @@ async function RootLayout({
         <NextIntlClientProvider>
           <RootProviderContainer>
             <ClientServiceProvider />
-            {children}
+            <MainLayout className="font-primary">
+              {children}
+            </MainLayout>
           </RootProviderContainer>
         </NextIntlClientProvider>
       </body>

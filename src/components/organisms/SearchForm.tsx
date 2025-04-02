@@ -1,3 +1,5 @@
+'use client';
+
 import { useRouter } from 'next/navigation';
 import { FormEventHandler, FunctionComponent } from 'react';
 
@@ -20,7 +22,7 @@ const SearchForm: FunctionComponent<SearchFormProps> = ({
   initialValue = '',
   size = 'sm',
 }) => {
-  const t = useTranslations('common');
+  const t = useTranslations();
   const router = useRouter();
 
   const onSubmit: FormEventHandler<HTMLFormElement> = (event) => {
