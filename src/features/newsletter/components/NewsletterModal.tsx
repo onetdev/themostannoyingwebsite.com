@@ -1,4 +1,3 @@
-import { useTranslation } from '@/lib/utils/i18n';
 import { FunctionComponent, useMemo, useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 
@@ -9,6 +8,7 @@ import Modal from '@/components/molecules/Modal';
 import { type NewsletterFormInputs } from '@/features/newsletter';
 import { random } from '@/lib/utils/math';
 import { EMAIL_PATTERN } from '@/lib/utils/validator';
+import { useTranslations } from 'next-intl';
 
 type NewsletterModalProps = {
   visible?: boolean;
@@ -19,7 +19,7 @@ const NewsletterModal: FunctionComponent<NewsletterModalProps> = ({
   visible = false,
   onDismiss,
 }) => {
-  const { t } = useTranslation();
+  const t = useTranslations();
   const [flipActions, setFlipActions] = useState(false);
   const [actions, setActions] = useState({
     confirm: t('newsletter.modal.initialConfirm'),

@@ -1,10 +1,10 @@
-import { useTranslation } from '@/lib/utils/i18n';
 import { FunctionComponent } from 'react';
 
 import FormFieldError from '@/components/atoms/FormFieldError';
 import PasswordStrengthBar from '@/components/atoms/PasswordStrengthBar';
 import TextInput from '@/components/atoms/TextInput';
 import { type CommonRegistrationFormFieldProps } from '@/features/auth';
+import { useTranslations } from 'next-intl';
 
 type PasswordCreateFieldProps = Pick<
   CommonRegistrationFormFieldProps,
@@ -16,7 +16,7 @@ const PasswordCreateField: FunctionComponent<PasswordCreateFieldProps> = ({
   register,
   watch,
 }) => {
-  const { t } = useTranslation('common');
+  const t = useTranslations('common');
 
   const password = watch('password');
 

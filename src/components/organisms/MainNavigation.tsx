@@ -1,6 +1,6 @@
 import Link from 'next/link';
-import { useTranslation } from '@/lib/utils/i18n';
 import { FunctionComponent, useMemo } from 'react';
+import { useTranslations } from 'next-intl';
 
 import Icon from '@/components/atoms/Icon';
 
@@ -11,7 +11,7 @@ export type MainNavigationProps = {
 const MainNavigation: FunctionComponent<MainNavigationProps> = ({
   className,
 }) => {
-  const { t } = useTranslation('common');
+  const t = useTranslations('common');
 
   const links = useMemo(
     () => [

@@ -1,5 +1,4 @@
 import Link from 'next/link';
-import { useTranslation } from '@/lib/utils/i18n';
 import { FunctionComponent } from 'react';
 
 import DarkModeToggle from '@/components/atoms/DarkModeToggle';
@@ -8,9 +7,10 @@ import MarqueeText from '@/components/molecules/MarqueeText';
 import MainNavigation from '@/components/organisms/MainNavigation';
 import SearchForm from '@/components/organisms/SearchForm';
 import UserNavigation from '@/components/organisms/UserNavigation';
+import { useTranslations } from 'next-intl';
 
 const Header: FunctionComponent = () => {
-  const { t } = useTranslation('common');
+  const t = useTranslations('common');
 
   return (
     <header id="header" className="grid grid-cols-2 gap-1 py-2">

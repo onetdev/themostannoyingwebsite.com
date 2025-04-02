@@ -5,14 +5,14 @@ import { FunctionComponent, useEffect, useRef, useState } from 'react';
 import Icon from '@/components/atoms/Icon';
 import { useExperienceFlagsStore } from '@/lib/state/experience_flags';
 import { useUserGrantsStore } from '@/lib/state/user_grants';
-import { useTranslation } from '@/lib/utils/i18n';
+import { useTranslations } from 'next-intl';
 
 const StickyVideoExperienceHost: FunctionComponent = () => {
   const stickyVideo = useExperienceFlagsStore((state) => state.stickyVideo);
   const allowed = useUserGrantsStore((state) => state.reviewCompleted);
   const [mounted, setMounted] = useState(false);
   const [closed, setClosed] = useState(false);
-  const { t } = useTranslation('common');
+  const t = useTranslations('common');
   const $playerRef = useRef<HTMLIFrameElement | null>(null);
 
   useEffect(() => setMounted(true), []);

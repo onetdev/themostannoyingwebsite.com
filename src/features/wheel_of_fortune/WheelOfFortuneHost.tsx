@@ -4,11 +4,11 @@ import ModalContent from './components/ModalContent';
 
 import DimmerOverlay from '@/components/atoms/DimmerOverlay';
 import Icon from '@/components/atoms/Icon';
-import { useTranslation } from '@/lib/utils/i18n';
+import { useTranslations } from 'next-intl';
 
 const WheelOfFortuneHost: FunctionComponent = () => {
   const [isOpen, setOpen] = useState(false);
-  const { t } = useTranslation();
+  const t = useTranslations();
 
   return (
     <div className="fixed left-0 top-1/2 z-30">

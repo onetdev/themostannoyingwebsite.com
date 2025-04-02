@@ -1,11 +1,11 @@
 import Image from 'next/image';
 import Link from 'next/link';
-import { useTranslation } from '@/lib/utils/i18n';
 import { useTheme } from 'next-themes';
 import { FunctionComponent, PropsWithChildren } from 'react';
+import { useTranslations } from 'next-intl';
 
 const ContainerGiftFlaps: FunctionComponent = () => {
-  const { t } = useTranslation();
+  const t = useTranslations();
   const { resolvedTheme } = useTheme();
 
   return (

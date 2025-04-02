@@ -5,7 +5,7 @@ import FormCheckbox from '@/components/atoms/Checkbox';
 import LabeledChild from '@/components/molecules/LabeledChild';
 import BorderedBox from '@/components/templates/BorderedBox';
 import { useExperienceFlagsStore } from '@/lib/state/experience_flags';
-import { useTranslation } from '@/lib/utils/i18n';
+import { useTranslations } from 'next-intl';
 
 type ExperienceSettingsProps = {
   className?: string;
@@ -17,7 +17,7 @@ const ExperienceSettings: FunctionComponent<ExperienceSettingsProps> = ({
   listClassName = '',
 }) => {
   const experience = useExperienceFlagsStore();
-  const { t } = useTranslation();
+  const t = useTranslations();
 
   const onPageTitleInactiveArrayPagedChange = (value: boolean) =>
     experience.setPageTitle({ inactiveArrayPaged: value });

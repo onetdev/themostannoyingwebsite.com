@@ -1,10 +1,10 @@
-import { useTranslation } from '@/lib/utils/i18n';
 import { FunctionComponent, useMemo } from 'react';
 
 import FormFieldError from '@/components/atoms/FormFieldError';
 import Select from '@/components/atoms/Select';
 import { CommonRegistrationFormFieldProps } from '@/features/auth';
 import countryData from '@/public/assets/countries.json';
+import { useTranslations } from 'next-intl';
 
 type CountryFieldProps = Pick<
   CommonRegistrationFormFieldProps,
@@ -15,7 +15,7 @@ const CountryField: FunctionComponent<CountryFieldProps> = ({
   errors,
   register,
 }) => {
-  const { t } = useTranslation('common');
+  const t = useTranslations('common');
   const countryOptions = useMemo(
     () =>
       countryData.map(({ localName, code }) => ({

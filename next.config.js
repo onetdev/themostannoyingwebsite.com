@@ -1,9 +1,12 @@
 /* eslint-disable @typescript-eslint/no-require-imports */
 const analyzer = require('@next/bundle-analyzer');
 const { withSentryConfig } = require('@sentry/nextjs');
+const createNextIntlPlugin = require('next-intl/plugin');
 
 const deploymentMeta = require('./deployment-meta');
 const sentryConfig = require('./next-sentry.config');
+
+const withNextIntl = createNextIntlPlugin();
 
 /** @type {import('next').NextConfig} **/
 const nextConfig = {
@@ -46,4 +49,4 @@ const withBundleAnalyzer = analyzer({
   enabled: process.env.ANALYZE === 'true',
 });
 
-module.exports = withSentryConfig(withBundleAnalyzer(nextConfig), sentryConfig);
+module.exports = withNextIntl(withSentryConfig(withBundleAnalyzer(nextConfig), sentryConfig));

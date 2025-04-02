@@ -3,8 +3,9 @@ import config from '@/config';
 import { Open_Sans } from 'next/font/google';
 import RootProviderContainer from "@/lib/providers/RootProviderContainer";
 import ClientServiceProvider from "@/lib/providers/ClientServiceProvider";
-import nextI18nextConfig from "@/root/i18n.config";
-import { dir } from "i18next";
+import { routing } from "@/i18n/routing";
+import { notFound } from "next/navigation";
+import { hasLocale, NextIntlClientProvider } from "next-intl";
 
 const _openSans = Open_Sans({
   subsets: ['latin'],
@@ -45,28 +46,31 @@ export function generateViewport(): Viewport {
   }
 }
 
-export function generateStaticParams() {
-  return nextI18nextConfig.locales.map(locale => ({ locale }));
-}
-
 async function RootLayout({
   children,
-  params: { locale }
+  params
 }: {
   children: React.ReactNode;
-  params: { locale: string };
+  params: Promise<{ locale: string }>;
 }) {
+  const { locale } = await params;
+  if (!hasLocale(routing.locales, locale)) {
+    notFound();
+  }
+
   return (
     <html
       lang={locale}
-      dir={dir(locale)}
+      dir={'ltr'}
       data-theme={config.defaultColorScheme}
       style={{ colorScheme: config.defaultColorScheme }}>
       <body>
-        {/* <RootProviderContainer>
+        <NextIntlClientProvider>
+          {/* <RootProviderContainer>
           <ClientServiceProvider /> */}
           {children}
-        {/* </RootProviderContainer> */}
+          {/* </RootProviderContainer> */}
+        </NextIntlClientProvider>
       </body>
     </html >
   );

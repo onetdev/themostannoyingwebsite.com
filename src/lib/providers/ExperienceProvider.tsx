@@ -14,7 +14,7 @@ import { NewsletterModalExperienceHost } from '@/features/newsletter';
 import { NotificationPermissionExperienceHost } from '@/features/notification';
 import { useExperienceFlagsStore } from '@/lib/state/experience_flags';
 import { useUserGrantsStore } from '@/lib/state/user_grants';
-import { useTranslation } from '@/lib/utils/i18n';
+import { useTranslations } from 'next-intl';
 
 const ExperienceProvider: FunctionComponent<PropsWithChildren> = ({
   children,
@@ -24,7 +24,7 @@ const ExperienceProvider: FunctionComponent<PropsWithChildren> = ({
     (state) => state.clipboardMarker,
   );
   const syncPermissions = useUserGrantsStore((state) => state.syncPermissions);
-  const { t } = useTranslation('common');
+  const t = useTranslations('common');
 
   useDisableNavigationPop();
   useDisableContextMenu();

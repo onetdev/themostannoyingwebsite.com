@@ -1,5 +1,5 @@
-import { useTranslation } from '@/lib/utils/i18n';
 import { ClipboardEvent, FunctionComponent, PropsWithChildren } from 'react';
+import { useTranslations } from 'next-intl';
 
 export type CopyWithUrl = PropsWithChildren<{
   append?: { text: string; html: string } | 'url';
@@ -11,7 +11,7 @@ const CopyMarker: FunctionComponent<CopyWithUrl> = ({
   children,
   enabled = false,
 }) => {
-  const { t } = useTranslation();
+  const t = useTranslations();
 
   const handleCopy = (e: ClipboardEvent<HTMLDivElement>) => {
     const selection = window.getSelection()?.toString() || '';

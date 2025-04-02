@@ -5,4 +5,4 @@ export { LargeCoverItem } from './components/LargeCoverItem';
 export { SmallCoverListItem } from './components/SmallCoverListItem';
 export { TextListItem } from './components/TextListItem';
 export { ArticleServiceSingleton as ArticleService } from './services/ArticleService';
-export { ClientPartitionalLockedContent } from './components/PartitionalLockedContent';
+export { PartitionalLockedContent } from './components/PartitionalLockedContent';

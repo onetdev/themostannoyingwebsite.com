@@ -6,7 +6,7 @@ import AnimatedWheel, { AnimatedWheelState } from './WheelAnimationWrapper';
 
 import Icon from '@/components/atoms/Icon';
 import { getWeightedRandom, WeightedRandomPoolItem } from '@/lib/utils/math';
-import { useTranslation } from '@/lib/utils/i18n';
+import { useTranslations } from 'next-intl';
 
 type ModalContentProps = JSXProxyProps<'div'> & {
   onClose?: () => void;
@@ -17,7 +17,7 @@ const ModalContent: FunctionComponent<ModalContentProps> = ({
   onClose,
   ...rest
 }) => {
-  const { t } = useTranslation();
+  const t = useTranslations();
   const hueStart = 300; // random(0,360);
   const [state, setState] = useState<AnimatedWheelState>('ready');
   const [prize, setPrize] = useState<Item | undefined>();

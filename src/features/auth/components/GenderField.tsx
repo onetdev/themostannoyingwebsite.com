@@ -1,4 +1,3 @@
-import { useTranslation } from '@/lib/utils/i18n';
 import { FunctionComponent, useMemo } from 'react';
 
 import FormFieldError from '@/components/atoms/FormFieldError';
@@ -7,6 +6,7 @@ import {
   CommonRegistrationFormFieldProps,
   userGenderList,
 } from '@/features/auth';
+import { useTranslations } from 'next-intl';
 
 type GenderFieldProps = Pick<
   CommonRegistrationFormFieldProps,
@@ -16,7 +16,7 @@ const GenderField: FunctionComponent<GenderFieldProps> = ({
   register,
   errors,
 }) => {
-  const { t } = useTranslation('common');
+  const t = useTranslations('common');
 
   const genderOptions = useMemo(() => {
     const pool = t('user.genderVariants', {

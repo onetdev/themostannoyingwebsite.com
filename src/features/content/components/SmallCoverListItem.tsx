@@ -1,11 +1,11 @@
 import Image from 'next/image';
 import Link from 'next/link';
-import { useTranslation } from '@/lib/utils/i18n';
 import { FunctionComponent } from 'react';
 
 import { CoverPlaceholder } from './CoverPlaceholder';
 
 import { type ArticleDatum } from '@/features/content';
+import { useTranslations } from 'next-intl';
 
 type SmallCoverListItemProps = {
   article: ArticleDatum;
@@ -14,7 +14,7 @@ type SmallCoverListItemProps = {
 export const SmallCoverListItem: FunctionComponent<SmallCoverListItemProps> = ({
   article,
 }) => {
-  const { t } = useTranslation();
+  const t = useTranslations();
 
   return (
     <>

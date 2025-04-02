@@ -3,10 +3,10 @@ import { FunctionComponent } from 'react';
 import FormCheckbox from '@/components/atoms/Checkbox';
 import LabeledChild from '@/components/molecules/LabeledChild';
 import BorderedBox from '@/components/templates/BorderedBox';
-import { useTranslation } from '@/lib/utils/i18n';
+import { useTranslations } from 'next-intl';
 
 const MandatoryExperienceSettings: FunctionComponent = () => {
-  const { t } = useTranslation();
+  const t = useTranslations();
   return (
     <BorderedBox title={t('settings.mandatoryExperienceFlags.title')}>
       <LabeledChild

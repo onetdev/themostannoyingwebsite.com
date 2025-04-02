@@ -1,9 +1,9 @@
-import { useTranslation } from '@/lib/utils/i18n';
 import { FunctionComponent } from 'react';
 import { FieldErrors, UseFormRegister, UseFormSetValue } from 'react-hook-form';
 
 import CaptchaTilePuzzle from '@/components/atoms/CaptchaTilePuzzle';
 import FormFieldError from '@/components/atoms/FormFieldError';
+import { useTranslations } from 'next-intl';
 
 export type CaptchaTitlePuzzleFieldProps = {
   errors: FieldErrors<CaptchaFormInputs>;
@@ -14,7 +14,7 @@ export type CaptchaTitlePuzzleFieldProps = {
 const CaptchaTitlePuzzleField: FunctionComponent<
   CaptchaTitlePuzzleFieldProps
 > = ({ register, errors, setValue }) => {
-  const { t } = useTranslation('common');
+  const t = useTranslations('common');
 
   return (
     <div className="flex flex-col">

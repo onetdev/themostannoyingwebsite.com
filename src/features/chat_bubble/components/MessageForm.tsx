@@ -1,9 +1,9 @@
-import { useTranslation } from '@/lib/utils/i18n';
 import { FormEventHandler, FunctionComponent, useRef } from 'react';
 
 import Button from '@/components/atoms/Button';
 import Icon from '@/components/atoms/Icon';
 import TextInput from '@/components/atoms/TextInput';
+import { useTranslations } from 'next-intl';
 
 export type MessageFormProps = {
   className?: string;
@@ -14,7 +14,7 @@ const MessageForm: FunctionComponent<MessageFormProps> = ({
   className,
   onMessage,
 }) => {
-  const { t } = useTranslation();
+  const t = useTranslations();
   const userForm = useRef<HTMLFormElement>(null);
   const userMessage = useRef<HTMLInputElement>(null);
 

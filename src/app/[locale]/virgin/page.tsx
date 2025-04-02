@@ -1,4 +1,4 @@
-import initTranslations from '@/app/i18n';
+import initTranslations from '@/lib/utils/i18n';
 import PageHeadline from '@/components/atoms/PageHeadline';
 import SiteTitle from '@/components/atoms/SiteTitle';
 import styles from '@/styles/content.module.css';

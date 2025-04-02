@@ -1,11 +1,11 @@
 import Link from 'next/link';
-import { useTranslation } from '@/lib/utils/i18n';
 import { FunctionComponent } from 'react';
 
 import { useUserGrantsStore } from '@/lib/state/user_grants';
+import { useTranslations } from 'next-intl';
 
 const CookieBar: FunctionComponent = () => {
-  const { t } = useTranslation();
+  const t = useTranslations();
   const completed = useUserGrantsStore((state) => state.reviewCompleted);
   const setReviewCompleted = useUserGrantsStore(
     (state) => state.setReviewCompleted,

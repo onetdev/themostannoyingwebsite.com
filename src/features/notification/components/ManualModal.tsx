@@ -4,7 +4,7 @@ import { FunctionComponent } from 'react';
 
 import Button from '@/components/atoms/Button';
 import DimmerOverlay from '@/components/atoms/DimmerOverlay';
-import { useTranslation } from '@/lib/utils/i18n';
+import { useTranslations } from 'next-intl';
 
 type ManualModalProps = {
   visible?: boolean;
@@ -15,7 +15,7 @@ const ManualModal: FunctionComponent<ManualModalProps> = ({
   visible = false,
   onDismiss,
 }) => {
-  const { t } = useTranslation();
+  const t = useTranslations();
 
   return (
     <DimmerOverlay visible={visible}>

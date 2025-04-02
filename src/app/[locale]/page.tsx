@@ -1,5 +1,4 @@
 import { NextPage } from 'next';
-import { useTranslation } from '@/lib/utils/i18n';
 
 import {
   ArticleService,
@@ -10,9 +9,9 @@ import {
 import { OneByOneGift } from '@/features/gifts';
 
 const Index: NextPage = () => {
-  const { i18n } = useTranslation();
+  // const { i18n } = useTranslation();
   const coverArticle = ArticleService.getFirst({
-    params: { isOnCover: true, locale: i18n.language },
+    params: { isOnCover: true, locale: "en" },
     paginate: {
       take: 1,
       skip: 0,

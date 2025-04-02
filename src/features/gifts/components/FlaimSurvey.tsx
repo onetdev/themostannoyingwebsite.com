@@ -1,7 +1,6 @@
 'use client';
 
 import { useRouter } from 'next/navigation';
-import { useTranslation } from '@/lib/utils/i18n';
 import { FunctionComponent, useEffect, useMemo, useState } from 'react';
 
 import Button from '@/components/atoms/Button';
@@ -11,6 +10,7 @@ import BorderedBox from '@/components/templates/BorderedBox';
 import { FlaimSurveyQuestion } from '@/features/gifts';
 import { useRuntimeStore } from '@/lib/state/runtime';
 import { arrayShuffle } from '@/lib/utils/array';
+import { useTranslations } from 'next-intl';
 
 export type FlaimSurveryProps = { className?: string; timeInSeconds?: number };
 
@@ -18,7 +18,7 @@ const FlaimSurvery: FunctionComponent<FlaimSurveryProps> = ({
   className,
   timeInSeconds = 8,
 }) => {
-  const { t } = useTranslation();
+  const t = useTranslations();
   const router = useRouter();
   const isCompleted = useRuntimeStore((state) => state.flaimSurveyResult);
   const complete = useRuntimeStore((state) => state.setFlaimSurveyResult);

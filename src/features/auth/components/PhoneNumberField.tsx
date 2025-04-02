@@ -1,4 +1,3 @@
-import { useTranslation } from '@/lib/utils/i18n';
 import {
   type FunctionComponent,
   type MouseEvent,
@@ -16,6 +15,7 @@ import Select from '@/components/atoms/Select';
 import TextInput from '@/components/atoms/TextInput';
 import { type CommonRegistrationFormFieldProps } from '@/features/auth';
 import countryData from '@/public/assets/countries.json';
+import { useTranslations } from 'next-intl';
 
 type PhoneNumberFieldProps = Pick<
   CommonRegistrationFormFieldProps,
@@ -28,7 +28,7 @@ const PhoneNumberField: FunctionComponent<PhoneNumberFieldProps> = ({
   setValue,
   getValues,
 }) => {
-  const { t } = useTranslation('common');
+  const t = useTranslations('common');
   const $decrementBtn = useRef<HTMLButtonElement>(null);
   const $incrementBtn = useRef<HTMLButtonElement>(null);
   const [phoneNumberUpdateDirection, setPhoneNumberUpdateDirection] =

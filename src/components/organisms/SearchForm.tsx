@@ -1,5 +1,4 @@
 import { useRouter } from 'next/navigation';
-import { useTranslation } from '@/lib/utils/i18n';
 import { FormEventHandler, FunctionComponent } from 'react';
 
 import Button from '@/components/atoms/Button';
@@ -7,6 +6,7 @@ import Icon from '@/components/atoms/Icon';
 import TextInput from '@/components/atoms/TextInput';
 import { DOCUMENT_EVENT_SEARCH } from '@/global';
 import { FormElementSize } from '@/lib/utils/form';
+import { useTranslations } from 'next-intl';
 
 export type SearchFormSize = FormElementSize;
 export type SearchFormProps = {
@@ -20,7 +20,7 @@ const SearchForm: FunctionComponent<SearchFormProps> = ({
   initialValue = '',
   size = 'sm',
 }) => {
-  const { t } = useTranslation('common');
+  const t = useTranslations('common');
   const router = useRouter();
 
   const onSubmit: FormEventHandler<HTMLFormElement> = (event) => {

@@ -1,11 +1,11 @@
 import Link from 'next/link';
-import { Trans, useTranslation } from 'next-i18next';
 import { FunctionComponent } from 'react';
 
 import config from '@/config';
+import { useTranslations } from 'next-intl';
 
 const Footer: FunctionComponent = () => {
-  const { t } = useTranslation(['common']);
+  const t = useTranslations('common');
 
   return (
     <footer

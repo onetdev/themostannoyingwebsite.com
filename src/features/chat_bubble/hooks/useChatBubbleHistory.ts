@@ -1,3 +1,4 @@
+import { useTranslations } from 'next-intl';
 import { useCallback, useEffect, useMemo, useState } from 'react';
 
 import { HistoryItem, HistoryItemOwner } from '@/features/chat_bubble';
@@ -5,10 +6,9 @@ import useAudio from '@/lib/hooks/useAudio';
 import useSendNotification from '@/lib/hooks/useSendNotification';
 import { useRuntimeStore } from '@/lib/state/runtime';
 import { useUserPreferencesStore } from '@/lib/state/user_preferences';
-import { useTranslation } from '@/lib/utils/i18n';
 
 const useChatBubbleHistory = () => {
-  const { t } = useTranslation();
+  const t = useTranslations();
   const enableSound = useUserPreferencesStore((state) => state.enableSound);
   const hasInteracted = useRuntimeStore((state) => state.interactionUnlocked);
   const [history, setHistory] = useState<HistoryItem[]>([]);

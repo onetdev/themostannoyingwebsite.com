@@ -1,11 +1,11 @@
 import Head from 'next/head';
-import { useTranslation } from '@/lib/utils/i18n';
 import { FunctionComponent, PropsWithChildren } from 'react';
+import { useTranslations } from 'next-intl';
 
 export type SiteTitleProps = PropsWithChildren;
 
 const SiteTitle: FunctionComponent<SiteTitleProps> = ({ children }) => {
-  const { t } = useTranslation('common');
+  const t = useTranslations('common');
 
   const pageTitle = `${children} - ${t('app.title')}`;
 

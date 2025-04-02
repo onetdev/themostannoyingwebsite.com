@@ -1,10 +1,10 @@
 import Image from 'next/image';
-import { useTranslation } from '@/lib/utils/i18n';
 
 import DilfClickOverlay from './DilfClickOverlay';
+import { useTranslations } from 'next-intl';
 
 const DilfFinder = () => {
-  const { t } = useTranslation();
+  const t = useTranslations();
 
   return (
     <div className="relative">

@@ -1,9 +1,9 @@
-import { useTranslation } from '@/lib/utils/i18n';
 import { FunctionComponent, useEffect, useMemo, useState } from 'react';
 
 import FormFieldError from '@/components/atoms/FormFieldError';
 import Select from '@/components/atoms/Select';
 import { type CommonRegistrationFormFieldProps } from '@/features/auth';
+import { useTranslations } from 'next-intl';
 
 type DateOfBirthFieldProps = Pick<
   CommonRegistrationFormFieldProps,
@@ -15,7 +15,7 @@ const DateOfBirthField: FunctionComponent<DateOfBirthFieldProps> = ({
   register,
   setValue,
 }) => {
-  const { t } = useTranslation('common');
+  const t = useTranslations('common');
   const [parts, setParts] = useState({ year: '', month: '', day: '' });
 
   const dateOfBirthYear = useMemo(() => {

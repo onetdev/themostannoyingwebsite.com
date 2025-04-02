@@ -1,6 +1,5 @@
 'use client';
 
-import { useTranslation } from '@/lib/utils/i18n';
 import { FunctionComponent, useEffect, useState } from 'react';
 import {
   EmailIcon,
@@ -12,6 +11,7 @@ import {
 } from 'react-share';
 
 import Modal from '@/components/molecules/Modal';
+import { useTranslations } from 'next-intl';
 
 type ShareModalProps = {
   show: boolean;
@@ -22,7 +22,7 @@ const ShareModal: FunctionComponent<ShareModalProps> = ({
   show,
   handleClose,
 }) => {
-  const { t } = useTranslation();
+  const t = useTranslations();
   const [url, setUrl] = useState<string>('');
 
   const buttonStyle = 'overflow-hidden hover:brightness-125 rounded-md';
