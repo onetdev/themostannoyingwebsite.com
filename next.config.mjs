@@ -1,12 +1,11 @@
-/* eslint-disable @typescript-eslint/no-require-imports */
-const analyzer = require('@next/bundle-analyzer');
-const { withSentryConfig } = require('@sentry/nextjs');
-const createNextIntlPlugin = require('next-intl/plugin');
+import analyzer from '@next/bundle-analyzer';
+import { withSentryConfig } from '@sentry/nextjs';
+import createNextIntlPlugin from 'next-intl/plugin';
+import createMDX from '@next/mdx'
+import remakrGfm from 'remark-gfm';
 
-const deploymentMeta = require('./deployment-meta');
-const sentryConfig = require('./next-sentry.config');
-
-const withNextIntl = createNextIntlPlugin();
+import deploymentMeta from './deployment-meta.mjs';
+import sentryConfig from './next-sentry.config.mjs';
 
 /** @type {import('next').NextConfig} **/
 const nextConfig = {
@@ -17,6 +16,7 @@ const nextConfig = {
   images: {
     unoptimized: true,
   },
+  pageExtensions: ['js', 'jsx', 'md', 'mdx', 'ts', 'tsx'],
   async headers() {
     const oneHourCache = {
       key: 'Cache-Control',
@@ -49,4 +49,12 @@ const withBundleAnalyzer = analyzer({
   enabled: process.env.ANALYZE === 'true',
 });
 
-module.exports = withNextIntl(withSentryConfig(withBundleAnalyzer(nextConfig), sentryConfig));
+const withNextIntl = createNextIntlPlugin({});
+
+const withMDX = createMDX({
+  options: {
+    remarkPlugins: [remakrGfm]
+  }
+})
+
+export default withMDX(withSentryConfig(withNextIntl(withBundleAnalyzer(nextConfig)), sentryConfig));

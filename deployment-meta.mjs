@@ -1,5 +1,4 @@
-// eslint-disable-next-line @typescript-eslint/no-require-imports
-const manifest = require('./package.json');
+import manifest from './package.json' assert { type: 'json' };
 
 const boolMap = { true: ['true', '1'], false: ['false', '0'] };
 const toBool = (value) =>
@@ -31,4 +30,4 @@ const deploymentMeta = {
     'UNKNOWN_RELEASE',
 };
 
-module.exports = deploymentMeta;
+export default deploymentMeta;

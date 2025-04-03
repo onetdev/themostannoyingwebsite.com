@@ -14,4 +14,4 @@ const sentryConfig = {
   },
 };
 
-module.exports = sentryConfig;
+export default sentryConfig;
