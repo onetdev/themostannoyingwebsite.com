@@ -11,7 +11,6 @@ import {
 import Button from '@/components/atoms/Button';
 import FormFieldError from '@/components/atoms/FormFieldError';
 import PageHeadline from '@/components/atoms/PageHeadline';
-import SiteTitle from '@/components/atoms/SiteTitle';
 import TextInput from '@/components/atoms/TextInput';
 import CaptchaTitlePuzzleField from '@/components/molecules/CaptchaTitlePuzzleFied';
 import { PasswordReminderFormInputs } from '@/features/auth';

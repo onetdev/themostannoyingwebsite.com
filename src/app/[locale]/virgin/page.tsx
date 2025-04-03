@@ -1,16 +1,19 @@
 import PageHeadline from '@/components/atoms/PageHeadline';
-import SiteTitle from '@/components/atoms/SiteTitle';
 import styles from '@/styles/content.module.css';
 import { Metadata } from 'next';
 import DisableAllOnMount from './disable-all-on-mount';
 import { getTranslations } from 'next-intl/server';
 
-export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
+export { generateStaticParams } from '@/i18n/routing';
+export const revalidate = 1800;
+
+export async function generateMetadata({ params }: NextPageProps): Promise<Metadata> {
   const { locale } = await params;
-  const t = await getTranslations({ locale });
+  const t = await getTranslations({ locale, namespace: 'metadata.virgin' });
 
   return {
-    title: t('app.virgin.title'),
+    title: t('title'),
+    description: t('description'),
   };
 }
 
@@ -20,7 +23,6 @@ async function Page() {
   return (
     <main>
       <DisableAllOnMount />
-      <SiteTitle>{t('app.virgin.title')}</SiteTitle>
       <PageHeadline className="mx-auto w-full max-w-screen-md">
         {t('app.virgin.title')}
       </PageHeadline>

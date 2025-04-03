@@ -2,17 +2,20 @@ import HTMLReactParser from 'html-react-parser';
 import { Metadata } from 'next';
 
 import PageHeadline from '@/components/atoms/PageHeadline';
-import SiteTitle from '@/components/atoms/SiteTitle';
 import { parse } from '@/lib/utils/markdown';
 import styles from '@/styles/content.module.css';
 import { getTranslations } from 'next-intl/server';
 
-export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
+export { generateStaticParams } from '@/i18n/routing';
+export const revalidate = 1800;
+
+export async function generateMetadata({ params }: NextPageProps): Promise<Metadata> {
   const { locale } = await params;
-  const t = await getTranslations({ locale });
+  const t = await getTranslations({ locale, namespace: 'metadata.about' });
 
   return {
-    title: t('navigation.about'),
+    title: t('title'),
+    description: t('description'),
   };
 }
 
@@ -23,7 +26,6 @@ export default async function Page() {
 
   return (
     <main>
-      <SiteTitle>{t('navigation.about')}</SiteTitle>
       <PageHeadline className="mx-auto w-full max-w-screen-md">
         {t('navigation.about')}
       </PageHeadline>

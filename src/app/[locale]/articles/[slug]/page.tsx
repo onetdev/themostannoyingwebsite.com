@@ -1,18 +1,21 @@
 import { Metadata } from 'next';
-import Error from 'next/error';
 
 import { ArticleService } from '@/features/content';
-import { getLocale, getTranslations } from 'next-intl/server';
+import { getTranslations } from 'next-intl/server';
 import { ArticleItemPage } from './article-item-page';
 import i18nConfig from '@/root/i18n.config';
 import { notFound } from 'next/navigation';
 
-type ArticleItemProps = {
+type PageParams = {
   slug: string;
   locale: string;
 };
 
-export async function generateMetadata({ params }: { params: Promise<ArticleItemProps> }): Promise<Metadata> {
+type PageProps = NextPageProps<PageParams>
+
+export const revalidate = 1800;
+
+export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { locale, slug } = await params;
   const t = await getTranslations({ locale });
   const lookup = { slug, locale };
@@ -30,7 +33,7 @@ export async function generateMetadata({ params }: { params: Promise<ArticleItem
 
 export const generateStaticParams = async () => {
   const locales = i18nConfig.locales;
-  const paths: { slug: string; locale: string }[] = [];
+  const paths: PageParams[] = [];
 
   for (const locale of locales) {
     const articles = ArticleService.getMany({
@@ -46,9 +49,9 @@ export const generateStaticParams = async () => {
   return paths;
 };
 
-export default async function Page({ params }: { params: ArticleItemProps }) {
-  const locale = await getLocale()
-  const lookup = { slug: params.slug, locale };
+export default async function Page({ params }: PageProps) {
+  const { slug, locale } = await params;
+  const lookup = { slug, locale };
   const data = ArticleService.getByLookup(lookup);
 
   if (!data) {

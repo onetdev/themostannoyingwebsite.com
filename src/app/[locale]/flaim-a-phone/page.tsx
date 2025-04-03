@@ -3,12 +3,16 @@ import { Metadata, NextPage } from 'next';
 import { FlaimSurvery } from '@/features/gifts';
 import { getTranslations } from 'next-intl/server';
 
-export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
+export { generateStaticParams } from '@/i18n/routing';
+export const revalidate = 1800;
+
+export async function generateMetadata({ params }: NextPageProps): Promise<Metadata> {
   const { locale } = await params;
-  const t = await getTranslations({ locale });
+  const t = await getTranslations({ locale, namespace: 'metadata.wanPhone' });
 
   return {
-    title: t('gifts.wanPhone.title'),
+    title: t('title'),
+    description: t('description'),
   };
 }
 

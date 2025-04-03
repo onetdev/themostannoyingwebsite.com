@@ -8,7 +8,6 @@ import CaptchaEmoji from '@/components/atoms/CaptchaEmoji';
 import Checkbox from '@/components/atoms/Checkbox';
 import FormFieldError from '@/components/atoms/FormFieldError';
 import PageHeadline from '@/components/atoms/PageHeadline';
-import SiteTitle from '@/components/atoms/SiteTitle';
 import TextInput from '@/components/atoms/TextInput';
 import { LoginFormInputs } from '@/features/auth';
 import { EMAIL_PATTERN } from '@/lib/utils/validator';
