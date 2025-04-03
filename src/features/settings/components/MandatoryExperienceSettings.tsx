@@ -1,3 +1,5 @@
+'use client';
+
 import { FunctionComponent } from 'react';
 
 import FormCheckbox from '@/components/atoms/Checkbox';

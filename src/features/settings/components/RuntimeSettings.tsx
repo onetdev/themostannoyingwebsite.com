@@ -1,3 +1,5 @@
+'use client';
+
 import { FunctionComponent, useMemo } from 'react';
 import ReactTimeAgo from 'react-timeago';
 

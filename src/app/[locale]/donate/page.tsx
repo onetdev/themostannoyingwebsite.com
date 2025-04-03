@@ -1,8 +1,9 @@
+import { Metadata, NextPage } from 'next';
+import Link from 'next/link';
+
 import PageHeadline from '@/components/atoms/PageHeadline';
 import SiteTitle from '@/components/atoms/SiteTitle';
 import styles from '@/styles/content.module.css';
-import { Metadata } from 'next';
-import DisableAllOnMount from './disable-all-on-mount';
 import { getTranslations } from 'next-intl/server';
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
@@ -10,24 +11,29 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
   const t = await getTranslations({ locale });
 
   return {
-    title: t('app.virgin.title'),
+    title: t('navigation.donate'),
   };
 }
 
-async function Page() {
+export default async function Page() {
   const t = await getTranslations();
 
   return (
     <main>
-      <DisableAllOnMount />
-      <SiteTitle>{t('app.virgin.title')}</SiteTitle>
       <PageHeadline className="mx-auto w-full max-w-screen-md">
-        {t('app.virgin.title')}
+        {t('navigation.donate')}
       </PageHeadline>
       <div className={styles['content']}>
-        <p>{t('app.virgin.description')}</p>
+        <div className="my-5 max-w-screen-md">
+          {t('app.donate.description')}
+        </div>
+        <p>
+          <Link href="https://onet.dev/donate" target="_blank">
+            {t('app.donate.donateLinkText')} 👈
+          </Link>
+        </p>
       </div>
     </main>
   );
 };
-export default Page;
+

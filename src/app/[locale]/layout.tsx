@@ -20,7 +20,7 @@ export function generateMetadata(): Metadata {
     metadataBase: new URL(config.publicUrl),
     title: {
       default: 'The Most Annoying Website',
-      template: '%title% | The Most Annoying Website'
+      template: '%s | The Most Annoying Website'
     },
     description: 'Endless pop-ups, auto-playing videos, infinite scroll, and a barrage of ads—experience the internet at its worst. Slow load times, misleading buttons, and constant CAPTCHA challenges included!',
     openGraph: {

@@ -1,0 +1,73 @@
+import HTMLReactParser from 'html-react-parser';
+import { Metadata } from 'next';
+
+import PageHeadline from '@/components/atoms/PageHeadline';
+import SiteTitle from '@/components/atoms/SiteTitle';
+import { parse } from '@/lib/utils/markdown';
+import styles from '@/styles/content.module.css';
+import { getTranslations } from 'next-intl/server';
+
+export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
+  const { locale } = await params;
+  const t = await getTranslations({ locale });
+
+  return {
+    title: t('navigation.about'),
+  };
+}
+
+export default async function Page() {
+  const t = getTranslations();
+
+  const content = parse(contentMarkdownEn);
+
+  return (
+    <main>
+      <SiteTitle>{t('navigation.about')}</SiteTitle>
+      <PageHeadline className="mx-auto w-full max-w-screen-md">
+        {t('navigation.about')}
+      </PageHeadline>
+      <div className={styles['content']}>{HTMLReactParser(content)}</div>
+    </main>
+  );
+};
+
+const contentMarkdownEn = `
+  Many of us probably remember the days of browser toolbars, random popups, life before tabs, browser windows playing music that can't be muted, and browsing the WAP on our pre-smartphones without images or color. We’ve come a long way since then; things have become more sophisticated and nuanced. While many of our old issues were resolved, there are still people out there trying to exploit every tiny loophole for an advantage.
+
+  ### Our Mission: To annoy, amuse, and enlighten – safely!
+
+  This project began as a way to showcase the most annoying things on the web in a distilled and exaggerated form, while keeping the end-user safe. It’s not intended to be a fully-fledged website but rather a playful experiment for fun seekers, developers, and maybe even UX professionals. Nothing here is meant to be malicious; we’re just celebrating (and gently roasting) the history of terrible UX in a safe, contained space.
+
+  The ultimate goal is to not only have a few but as much of these experiences here as possible, nut just a one trick pony.
+
+  ### Why Did We Do This?
+
+  Why not? Someone had to! It's great to collect these experiences in one single place.
+
+  ### What You’ll Find Here
+
+  This is not a comprehensive list, but here are some highlights of the features currently in place:
+
+  - Unsolvable captchas
+  - A small, useless chat bubble at the bottom that only responds after you’ve closed it
+  - A “wheel of fortune” that gives no reward — but at least it doesn’t ask for your email
+  - Newsletter popups that appear when you scroll down and every time you switch tabs
+  - Impossible-to-unsubscribe questions reminiscent of sites that make it difficult to unsubscribe
+  - A super lengthy registration form with unexpected constraints and input methods
+  - A confirmation prompt when you try to close the page
+  - “DILF” ads — our version of the usual of the well known "bored middle-aged women" ads
+  - A search page with absurd top searches and random slowdowns
+  - A dead pixel on the screen, just to keep people on edge
+  - A “claim your phone” ad inspired by those fake surveys that steal personal info (which is NOT the case here!)
+  - A content paywall where you can only enable content pixel by pixel
+  - A recipe that begins with a super long backstory
+  - AI-generated weird images
+  - Requests for notification permissions (does anyone even use this feature?)
+  - An updating page title to draw you back when you switch tabs
+  - And many more…
+
+  ### Contributing
+  
+  **If you want to contribute, everything is on GitHub. Check the footer for the link.**
+`;

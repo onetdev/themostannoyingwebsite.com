@@ -1,3 +1,5 @@
+'use client';
+
 import { FunctionComponent } from 'react';
 
 import Button from '@/components/atoms/Button';
