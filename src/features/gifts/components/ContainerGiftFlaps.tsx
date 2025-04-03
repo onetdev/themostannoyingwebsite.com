@@ -18,6 +18,7 @@ const ContainerGiftFlaps: FunctionComponent = () => {
             alt={t('gifts.dilf.title')}
             width={1900}
             height={1000}
+            priority={false}
           />
           <GiftFlapText
             theme={resolvedTheme as AppTheme}
