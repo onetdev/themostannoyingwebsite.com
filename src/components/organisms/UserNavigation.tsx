@@ -1,6 +1,6 @@
 'use client';
 
-import Link from 'next/link';
+import { Link } from '@/i18n/navigation';
 import { FunctionComponent, useMemo, useState } from 'react';
 
 import Icon from '@/components/atoms/Icon';

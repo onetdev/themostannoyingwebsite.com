@@ -1,7 +1,7 @@
 'use client';
 
 import HTMLReactParser from 'html-react-parser';
-import Link from 'next/link';
+import { Link } from '@/i18n/navigation';
 import { useCallback, useEffect, useMemo, useState } from 'react';
 
 import DotDotDotText from '@/components/atoms/DotDotDotText';

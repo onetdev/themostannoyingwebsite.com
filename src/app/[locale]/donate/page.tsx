@@ -1,9 +1,9 @@
 import { Metadata } from 'next';
-import Link from 'next/link';
 
 import PageHeadline from '@/components/atoms/PageHeadline';
 import styles from '@/styles/content.module.css';
 import { getTranslations } from 'next-intl/server';
+import { Link } from '@/i18n/navigation';
 
 export { generateStaticParams } from '@/i18n/routing';
 export const revalidate = 1800;

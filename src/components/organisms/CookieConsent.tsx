@@ -1,4 +1,4 @@
-import Link from 'next/link';
+import { Link } from '@/i18n/navigation';
 import { FunctionComponent } from 'react';
 
 import { useUserGrantsStore } from '@/lib/state/user_grants';
