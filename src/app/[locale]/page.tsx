@@ -8,10 +8,10 @@ import {
 } from '@/features/content';
 import { OneByOneGift } from '@/features/gifts';
 
-const Index: NextPage = () => {
-  // const { i18n } = useTranslation();
+export default async function Page({ params }: NextPageProps) {
+  const { locale } = await params;
   const coverArticle = ArticleService.getFirst({
-    params: { isOnCover: true, locale: "en" },
+    params: { isOnCover: true, locale },
     paginate: {
       take: 1,
       skip: 0,
@@ -46,5 +46,3 @@ const Index: NextPage = () => {
     </main>
   );
 };
-
-export default Index;
