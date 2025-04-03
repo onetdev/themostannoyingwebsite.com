@@ -7,7 +7,6 @@ const sentryConfig = {
   reactComponentAnnotation: {
     enabled: true,
   },
-  tunnelRoute: '/monitoring',
   disableLogger: true,
   automaticVercelMonitors: true,
   sourcemaps: {
