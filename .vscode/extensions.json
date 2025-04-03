@@ -6,6 +6,7 @@
         "redhat.vscode-yaml",
         "rubymaniac.vscode-direnv",
         "unifiedjs.vscode-mdx",
-        "yoavbls.pretty-ts-errors"
+        "yoavbls.pretty-ts-errors",
+        "me-dutour-mathieu.vscode-github-actions"
     ]
 }
