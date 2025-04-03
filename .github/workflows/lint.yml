@@ -1,8 +1,11 @@
 name: Lint and Type Check
 
 on:
-  - push
-  - pull_request
+  push:
+    branches:
+      - main
+      - develop
+  pull_request:
 
 jobs:
   lint:
@@ -13,7 +16,10 @@ jobs:
         with:
           node-version: 20
           cache: 'pnpm'
-      - run: npm run lint
+      - run: corepack enable
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm run lint
+
   type-check:
     runs-on: ubuntu-latest
     steps:
@@ -22,4 +28,6 @@ jobs:
         with:
           node-version: 20
           cache: 'pnpm'
-      - run: npm run type-check
+      - run: corepack enable
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm run type-check
