@@ -1,21 +1,22 @@
-// eslint-disable-next-line @typescript-eslint/no-require-imports
-const appPackage = require('./package.json');
+import deploymentMeta from './deployment-meta.mjs';
 
 /** @type {import('favicons').FaviconOptions} */
-module.exports = {
+const config = {
   path: '/manifest/',
   appName: 'The Most Annoying Website',
   appShortName: 'The MAW',
   appDescription: '',
-  developerName: appPackage.author.name,
-  developerURL: appPackage.author.url,
+  developerName: deploymentMeta.author.name,
+  developerURL: deploymentMeta.author.url,
   lang: 'en-US',
   display: 'standalone',
   start_url: '/',
   background: '#2f0031',
   theme_color: '#2f0031',
   orientation: 'portrait-primary',
-  version: appPackage.version,
+  version: deploymentMeta.version,
   pixel_art: true,
   // shortcuts: [],
 };
+
+export default config;

@@ -4,7 +4,7 @@ import fs from 'fs/promises';
 import path from 'path';
 
 import eslintRules from '@/root/eslint.config.mjs';
-import manifestConfig from '@/root/manifest.config.js';
+import manifestConfig from '@/root/manifest.config.mjs';
 
 const main = async () => {
   const faviconSource = './public/assets/appicon.png';

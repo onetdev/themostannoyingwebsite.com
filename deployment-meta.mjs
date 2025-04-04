@@ -1,4 +1,4 @@
-import manifest from './package.json' assert { type: 'json' };
+import packageJson from './package.json' with { type: 'json' };
 
 const boolMap = { true: ['true', '1'], false: ['false', '0'] };
 const toBool = (value) =>
@@ -17,8 +17,10 @@ if (isLocalDevelopment) {
 }
 
 const deploymentMeta = {
-  githubUrl: manifest.repository.url,
-  contactEmail: manifest.bugs.email,
+  author: packageJson.author,
+  githubUrl: packageJson.repository.url,
+  contactEmail: packageJson.bugs.email,
+  version: packageJson.version,
   publicUrl,
   isLocalDevelopment,
   environment: process.env.VERCEL_ENV || 'development',

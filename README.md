@@ -96,7 +96,7 @@ PRs are automatically published to Vercel as previews (you can find preview URLs
 
 ## Support
 
-Pay a visit to https://onetdev.com, drop me an email.
+Pay a visit to https://onet.dev, drop me an email.
 
 ### 3rd party credits
 
