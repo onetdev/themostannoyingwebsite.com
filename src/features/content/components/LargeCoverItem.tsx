@@ -1,13 +1,13 @@
 import Image from 'next/image';
-import Link from 'next/link';
-import { useTranslation } from 'next-i18next';
+import { Link } from '@/i18n/navigation';
 import { FunctionComponent } from 'react';
 
 import { CoverPlaceholder } from './CoverPlaceholder';
 
 import { type ArticleDatum } from '@/features/content';
+import { useTranslations } from 'next-intl';
 
-type LargeCoverItemProps = JSXProxyProps<'div'> & {
+type LargeCoverItemProps = JSXProxyProps<'article'> & {
   article: ArticleDatum;
 };
 
@@ -15,10 +15,10 @@ export const LargeCoverItem: FunctionComponent<LargeCoverItemProps> = ({
   article,
   ...rest
 }) => {
-  const { t } = useTranslation();
+  const t = useTranslations();
 
   return (
-    <div {...rest}>
+    <article role="article" {...rest}>
       <Link
         className="relative block"
         href={article.url}
@@ -45,6 +45,6 @@ export const LargeCoverItem: FunctionComponent<LargeCoverItemProps> = ({
           </p>
         </div>
       </Link>
-    </div>
+    </article>
   );
 };

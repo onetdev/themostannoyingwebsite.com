@@ -29,4 +29,13 @@ declare global {
     take: number;
     skip: number;
   };
+
+  type NextPageParams = {
+    locale: string;
+  };
+
+  // eslint-disable-next-line @typescript-eslint/no-empty-object-type
+  type NextPageProps<T extends {} = {}> = {
+    params: Promise<T & NextPageParams>;
+  };
 }

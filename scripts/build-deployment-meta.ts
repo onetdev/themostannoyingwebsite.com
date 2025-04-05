@@ -1,6 +1,6 @@
 import fs from 'fs';
 
-import deploymentMeta from '@/root/deployment-meta';
+import deploymentMeta from '@/root/deployment-meta.mjs';
 
 const path = './public/deployment-meta.json';
 

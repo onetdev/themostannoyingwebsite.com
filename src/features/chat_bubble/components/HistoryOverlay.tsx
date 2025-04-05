@@ -1,4 +1,3 @@
-import { useTranslation } from 'next-i18next';
 import { FunctionComponent, useEffect, useMemo, useRef, useState } from 'react';
 
 import MessageBubble from './MessageBubble';
@@ -7,6 +6,7 @@ import MessageForm from './MessageForm';
 import DotDotDotText from '@/components/atoms/DotDotDotText';
 import Icon from '@/components/atoms/Icon';
 import { HistoryItem } from '@/features/chat_bubble/types';
+import { useTranslations } from 'next-intl';
 
 export type HistoryOverlayProps = {
   history: HistoryItem[];
@@ -23,7 +23,7 @@ const HistoryOverlay: FunctionComponent<HistoryOverlayProps> = ({
 }) => {
   const [showTyping, setShowTyping] = useState(true);
   const pagerRef = useRef<HTMLDivElement>(null);
-  const { t } = useTranslation();
+  const t = useTranslations();
 
   useEffect(() => {
     setShowTyping(history[history.length - 1]?.owner === 'user');

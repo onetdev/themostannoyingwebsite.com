@@ -1,6 +1,6 @@
-import Link from 'next/link';
-import { useTranslation } from 'next-i18next';
+import { Link } from '@/i18n/navigation';
 import { FunctionComponent, useMemo } from 'react';
+import { useTranslations } from 'next-intl';
 
 import Icon from '@/components/atoms/Icon';
 
@@ -11,7 +11,7 @@ export type MainNavigationProps = {
 const MainNavigation: FunctionComponent<MainNavigationProps> = ({
   className,
 }) => {
-  const { t } = useTranslation('common');
+  const t = useTranslations();
 
   const links = useMemo(
     () => [
@@ -27,7 +27,7 @@ const MainNavigation: FunctionComponent<MainNavigationProps> = ({
   );
 
   return (
-    <nav className={`group relative ${className}`} id="navigation-main">
+    <nav className={`group relative ${className}`} id="navigation-main" role="navigation">
       <span className="block md:hidden">
         <Icon icon="menu" size="lg" />
       </span>

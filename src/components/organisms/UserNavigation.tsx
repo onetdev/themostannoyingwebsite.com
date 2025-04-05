@@ -1,9 +1,11 @@
-import Link from 'next/link';
-import { useTranslation } from 'next-i18next';
+'use client';
+
+import { Link } from '@/i18n/navigation';
 import { FunctionComponent, useMemo, useState } from 'react';
 
 import Icon from '@/components/atoms/Icon';
 import ShareModal from '@/components/organisms/ShareModal';
+import { useTranslations } from 'next-intl';
 
 export type UserNavigationProps = {
   className?: string;
@@ -12,7 +14,7 @@ export type UserNavigationProps = {
 const UserNavigation: FunctionComponent<UserNavigationProps> = ({
   className,
 }) => {
-  const { t } = useTranslation();
+  const t = useTranslations();
   const [showShareModal, setShowShareModal] = useState(false);
 
   const links = useMemo(

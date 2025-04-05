@@ -1,4 +1,6 @@
-import Link from 'next/link';
+'use client';
+
+import { Link } from '@/i18n/navigation';
 import { FunctionComponent, useState } from 'react';
 import MarqueePlugin from 'react-fast-marquee';
 

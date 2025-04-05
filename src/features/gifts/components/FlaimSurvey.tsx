@@ -1,5 +1,6 @@
-import { useRouter } from 'next/router';
-import { useTranslation } from 'next-i18next';
+'use client';
+
+import { useRouter } from 'next/navigation';
 import { FunctionComponent, useEffect, useMemo, useState } from 'react';
 
 import Button from '@/components/atoms/Button';
@@ -9,6 +10,7 @@ import BorderedBox from '@/components/templates/BorderedBox';
 import { FlaimSurveyQuestion } from '@/features/gifts';
 import { useRuntimeStore } from '@/lib/state/runtime';
 import { arrayShuffle } from '@/lib/utils/array';
+import { useMessages, useTranslations } from 'next-intl';
 
 export type FlaimSurveryProps = { className?: string; timeInSeconds?: number };
 
@@ -16,7 +18,7 @@ const FlaimSurvery: FunctionComponent<FlaimSurveryProps> = ({
   className,
   timeInSeconds = 8,
 }) => {
-  const { t } = useTranslation();
+  const t = useTranslations();
   const router = useRouter();
   const isCompleted = useRuntimeStore((state) => state.flaimSurveyResult);
   const complete = useRuntimeStore((state) => state.setFlaimSurveyResult);
@@ -26,19 +28,27 @@ const FlaimSurvery: FunctionComponent<FlaimSurveryProps> = ({
     selected: -1,
     answers: [] as boolean[],
   });
+  const messages = useMessages();
 
   const pool = useMemo(() => {
-    const items = Array.from(
-      t('gifts.wanPhone.survey.questionVariants', {
-        returnObjects: true,
-        defaultValue: [],
-      }),
-    ) as FlaimSurveyQuestion[];
+    const items = Object
+      .keys(messages.gifts.wanPhone.survey.questionVariants)
+      .map((key) => {
+        const questionKey = `gifts.wanPhone.survey.questionVariants.${key}`
+        const solutionKey = `${questionKey}.solution`
+        return {
+          text: t(`${questionKey}.text`),
+          options: Object
+            .keys(messages.gifts.wanPhone.survey.questionVariants[key].options)
+            .map((optionKey) => t(`${questionKey}.options.${optionKey}`)),
+          solution: t.has(solutionKey) ? t(solutionKey) : undefined,
+        } satisfies FlaimSurveyQuestion;
+      });
 
     return arrayShuffle(
       items.map((item) => ({ ...item, options: arrayShuffle(item.options) })),
     );
-  }, [t]);
+  }, [messages, t]);
   const viewData = pool[questionIndex];
 
   useEffect(() => {

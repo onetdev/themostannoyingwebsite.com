@@ -1,6 +1,6 @@
-import { useTranslation } from 'next-i18next';
 import { useTheme } from 'next-themes';
 import { FunctionComponent } from 'react';
+import { useTranslations } from 'next-intl';
 
 export type DarkModeToggleSize = 'md' | 'lg';
 export type DarkModeToggleProps = {
@@ -27,7 +27,7 @@ const DarkModeToggle: FunctionComponent<DarkModeToggleProps> = ({
   className,
   size = 'md',
 }) => {
-  const { t } = useTranslation();
+  const t = useTranslations();
   const { resolvedTheme, setTheme } = useTheme();
   const toggleDarkMode = () => {
     setTheme(resolvedTheme === 'dark' ? 'light' : 'dark');

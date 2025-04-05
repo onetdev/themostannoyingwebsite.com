@@ -1,4 +1,5 @@
-import { useTranslation } from 'next-i18next';
+'use client';
+
 import { useTheme } from 'next-themes';
 import { FunctionComponent } from 'react';
 
@@ -7,11 +8,12 @@ import LabeledChild from '@/components/molecules/LabeledChild';
 import BorderedBox from '@/components/templates/BorderedBox';
 import { useRuntimeStore } from '@/lib/state/runtime';
 import { useUserPreferencesStore } from '@/lib/state/user_preferences';
+import { useTranslations } from 'next-intl';
 
 const PreferencesSettings: FunctionComponent = () => {
   const preference = useUserPreferencesStore();
   const runtime = useRuntimeStore();
-  const { t } = useTranslation();
+  const t = useTranslations();
   const { resolvedTheme, setTheme } = useTheme();
   const setDarkMode = (value: boolean) => {
     setTheme(value ? 'dark' : 'light');

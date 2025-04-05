@@ -1,11 +1,13 @@
-import Link from 'next/link';
-import { useTranslation } from 'next-i18next';
+'use client';
+
+import { Link } from '@/i18n/navigation';
 import { FunctionComponent } from 'react';
 
 import { useUserGrantsStore } from '@/lib/state/user_grants';
+import { useTranslations } from 'next-intl';
 
-const CookieBar: FunctionComponent = () => {
-  const { t } = useTranslation();
+const CookieConsent: FunctionComponent = () => {
+  const t = useTranslations();
   const completed = useUserGrantsStore((state) => state.reviewCompleted);
   const setReviewCompleted = useUserGrantsStore(
     (state) => state.setReviewCompleted,
@@ -28,4 +30,4 @@ const CookieBar: FunctionComponent = () => {
   );
 };
 
-export default CookieBar;
+export default CookieConsent;

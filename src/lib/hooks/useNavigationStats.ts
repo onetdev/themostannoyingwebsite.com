@@ -1,4 +1,4 @@
-import { useRouter } from 'next/router';
+import { usePathname } from 'next/navigation';
 import { useEffect, useState } from 'react';
 
 import { useRuntimeStore } from '@/lib/state/runtime';
@@ -8,20 +8,12 @@ const useNavigationStats = () => {
     (state) => state.incrementNavigationCount,
   );
   const [navigationCount, setNavigationCount] = useState(0);
-  const router = useRouter();
+  const pathName = usePathname();
 
   useEffect(() => {
-    const handleRouteChange = () => {
-      setNavigationCount((prevCount) => prevCount + 1);
-      incrementNavigationCount();
-    };
-
-    router.events.on('routeChangeComplete', handleRouteChange);
-
-    return () => {
-      router.events.off('routeChangeComplete', handleRouteChange);
-    };
-  }, [incrementNavigationCount, router.events]);
+    setNavigationCount((prevCount) => prevCount + 1);
+    incrementNavigationCount();
+  }, [incrementNavigationCount, pathName]);
 
   return navigationCount;
 };

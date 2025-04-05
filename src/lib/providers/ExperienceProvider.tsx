@@ -1,4 +1,5 @@
-import { useTranslation } from 'next-i18next';
+'use client';
+
 import { FunctionComponent, PropsWithChildren, useEffect } from 'react';
 import { useBeforeUnload } from 'react-use';
 
@@ -13,6 +14,7 @@ import { NewsletterModalExperienceHost } from '@/features/newsletter';
 import { NotificationPermissionExperienceHost } from '@/features/notification';
 import { useExperienceFlagsStore } from '@/lib/state/experience_flags';
 import { useUserGrantsStore } from '@/lib/state/user_grants';
+import { useTranslations } from 'next-intl';
 
 const ExperienceProvider: FunctionComponent<PropsWithChildren> = ({
   children,
@@ -22,7 +24,7 @@ const ExperienceProvider: FunctionComponent<PropsWithChildren> = ({
     (state) => state.clipboardMarker,
   );
   const syncPermissions = useUserGrantsStore((state) => state.syncPermissions);
-  const { t } = useTranslation('common');
+  const t = useTranslations();
 
   useDisableNavigationPop();
   useDisableContextMenu();

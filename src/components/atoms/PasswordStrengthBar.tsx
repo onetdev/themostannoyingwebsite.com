@@ -1,8 +1,8 @@
-import { useTranslation } from 'next-i18next';
 import { FunctionComponent, useMemo } from 'react';
 
 import { mapToLogScale } from '@/lib/utils/math';
 import { mb_string_to_char_array } from '@/lib/utils/string';
+import { useTranslations } from 'next-intl';
 
 export type PasswordStrengthBarProps = {
   password: string;
@@ -13,7 +13,7 @@ const PasswordStrengthBar: FunctionComponent<PasswordStrengthBarProps> = ({
   password,
   className,
 }) => {
-  const { t } = useTranslation();
+  const t = useTranslations();
   const score = useMemo(
     () => mapToLogScale(scorePassword(password || ''), 100, 1),
     [password],

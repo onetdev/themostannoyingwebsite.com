@@ -1,9 +1,9 @@
-import { useTranslation } from 'next-i18next';
 import { FunctionComponent, useEffect, useMemo, useState } from 'react';
 
 import FormFieldError from '@/components/atoms/FormFieldError';
 import Select from '@/components/atoms/Select';
 import { type CommonRegistrationFormFieldProps } from '@/features/auth';
+import { useMessages, useTranslations } from 'next-intl';
 
 type DateOfBirthFieldProps = Pick<
   CommonRegistrationFormFieldProps,
@@ -15,7 +15,8 @@ const DateOfBirthField: FunctionComponent<DateOfBirthFieldProps> = ({
   register,
   setValue,
 }) => {
-  const { t } = useTranslation('common');
+  const t = useTranslations();
+  const messages = useMessages();
   const [parts, setParts] = useState({ year: '', month: '', day: '' });
 
   const dateOfBirthYear = useMemo(() => {
@@ -27,15 +28,15 @@ const DateOfBirthField: FunctionComponent<DateOfBirthFieldProps> = ({
   }, []);
 
   const dateOfBirthMonth = useMemo(() => {
-    const monthLabels = t('date.months', {
-      returnObjects: true,
-      defaultValue: [],
-    }) as string[];
+    const monthLabels = Object
+      .keys(messages.date.months)
+      .map((key) => t(`date.months.${key}`));
+
     return Array.from({ length: 12 }, (_, i) => ({
       value: i + 1,
       label: monthLabels[i],
     })).sort((a, b) => a.label.localeCompare(b.label));
-  }, [t]);
+  }, [t, messages]);
 
   const dateOfBirthDay = useMemo(() => {
     return Array.from({ length: 31 }, (_, i) => ({

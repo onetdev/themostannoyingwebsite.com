@@ -1,5 +1,6 @@
-import { useRouter } from 'next/router';
-import { useTranslation } from 'next-i18next';
+'use client';
+
+import { useRouter } from 'next/navigation';
 import { FormEventHandler, FunctionComponent } from 'react';
 
 import Button from '@/components/atoms/Button';
@@ -7,6 +8,7 @@ import Icon from '@/components/atoms/Icon';
 import TextInput from '@/components/atoms/TextInput';
 import { DOCUMENT_EVENT_SEARCH } from '@/global';
 import { FormElementSize } from '@/lib/utils/form';
+import { useTranslations } from 'next-intl';
 
 export type SearchFormSize = FormElementSize;
 export type SearchFormProps = {
@@ -20,7 +22,7 @@ const SearchForm: FunctionComponent<SearchFormProps> = ({
   initialValue = '',
   size = 'sm',
 }) => {
-  const { t } = useTranslation('common');
+  const t = useTranslations();
   const router = useRouter();
 
   const onSubmit: FormEventHandler<HTMLFormElement> = (event) => {
@@ -39,7 +41,7 @@ const SearchForm: FunctionComponent<SearchFormProps> = ({
   };
 
   return (
-    <form method="post" onSubmit={onSubmit} className={`flex ${className}`}>
+    <form method="post" onSubmit={onSubmit} className={`flex ${className}`} role="search">
       <TextInput
         defaultValue={initialValue}
         className="-mr-1 w-full rounded-r-none"

@@ -1,13 +1,15 @@
-import { useTranslation } from 'next-i18next';
+'use client';
+
 import { FunctionComponent, useMemo } from 'react';
 import ReactTimeAgo from 'react-timeago';
 
 import BorderedBox from '@/components/templates/BorderedBox';
 import { useRuntimeStore } from '@/lib/state/runtime';
+import { useTranslations } from 'next-intl';
 
 const RuntimeSettings: FunctionComponent = () => {
   const runtime = useRuntimeStore();
-  const { t } = useTranslation();
+  const t = useTranslations();
 
   const startedAt = useMemo(
     () => (runtime.startedAt ? new Date(runtime.startedAt) : undefined),

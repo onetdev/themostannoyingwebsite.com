@@ -1,10 +1,10 @@
-import { useTranslation } from 'next-i18next';
 import { FunctionComponent } from 'react';
 import { FieldErrors, UseFormRegister } from 'react-hook-form';
 
 import CaptchaEmoji from '@/components/atoms/CaptchaEmoji';
 import FormFieldError from '@/components/atoms/FormFieldError';
 import TextInput from '@/components/atoms/TextInput';
+import { useTranslations } from 'next-intl';
 
 export type CaptchaEmojiFieldProps = {
   errors: FieldErrors<CaptchaFormInputs>;
@@ -15,7 +15,7 @@ const CaptchaEmojiField: FunctionComponent<CaptchaEmojiFieldProps> = ({
   register,
   errors,
 }) => {
-  const { t } = useTranslation('common');
+  const t = useTranslations();
 
   return (
     <div className="flex flex-col">

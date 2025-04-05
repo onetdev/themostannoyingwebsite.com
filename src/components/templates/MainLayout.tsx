@@ -1,7 +1,9 @@
+'use client';
+
 import { Analytics } from '@vercel/analytics/react';
 import { FunctionComponent } from 'react';
 
-import CookieBar from '@/components/organisms/CookieConsent';
+import CookieConsent from '@/components/organisms/CookieConsent';
 import Footer from '@/components/organisms/Footer';
 import Header from '@/components/organisms/Header';
 import { ChatBubbleHost } from '@/features/chat_bubble';
@@ -40,7 +42,7 @@ const MainLayout: FunctionComponent<MainLayoutProps> = ({
         {wheelOfFortune && <WheelOfFortuneHost />}
         {deadPixel && <DeadPixelHost />}
         {mockChat && <ChatBubbleHost />}
-        <CookieBar />
+        <CookieConsent />
         <AdblockerSuspectBar />
         <StickyVideoExperienceHost />
       </div>

@@ -4,10 +4,10 @@ import { Languages } from 'next/dist/lib/metadata/types/alternative-urls-types';
 import config from '@/config';
 import { ArticleIndexEntrySchema } from '@/lib/schemas/article-index-entry';
 import articlesRaw from '@/public/assets/articles/index.json';
-import i18nConfig from '@/root/next-i18next.config';
+import i18nConfig from '@/root/i18n.config';
 
-const extraLangs = i18nConfig.i18n.locales.filter(
-  (lang) => lang !== i18nConfig.i18n.defaultLocale,
+const extraLangs = i18nConfig.locales.filter(
+  (lang) => lang !== i18nConfig.defaultLocale,
 );
 const genLangAlternates = (path: string): Languages<string> => {
   const items = extraLangs.map((lang) => [
@@ -30,7 +30,7 @@ const commonPageMeta = (path: string): MetadataRoute.Sitemap[0] => ({
 export default function sitemap(): MetadataRoute.Sitemap {
   const articles = articlesRaw.map((article: ArticleIndexEntrySchema) => {
     const prefix =
-      article.locale === i18nConfig.i18n.defaultLocale
+      article.locale === i18nConfig.defaultLocale
         ? `${config.publicUrl}`
         : `${config.publicUrl}/${article.locale}`;
 

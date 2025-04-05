@@ -1,10 +1,10 @@
-import { useTranslation } from 'next-i18next';
 import { useCallback, useEffect } from 'react';
 
 import { useExperienceFlagsStore } from '@/lib/state/experience_flags';
+import { useTranslations } from 'next-intl';
 
 const useDisableContextMenu = () => {
-  const { t } = useTranslation('common');
+  const t = useTranslations();
   const isDisabled = useExperienceFlagsStore(
     (state) => state.disableContextMenu,
   );

@@ -1,4 +1,5 @@
-import { useTranslation } from 'next-i18next';
+'use client';
+
 import React, {
   FunctionComponent,
   PropsWithChildren,
@@ -8,6 +9,7 @@ import React, {
 } from 'react';
 
 import Button from '@/components/atoms/Button';
+import { useTranslations } from 'next-intl';
 
 type PartitionalLockedContentProps = Omit<JSXProxyProps<'div'>, 'styles'> &
   PropsWithChildren<{
@@ -16,7 +18,7 @@ type PartitionalLockedContentProps = Omit<JSXProxyProps<'div'>, 'styles'> &
     steps?: number;
   }>;
 
-const PartitionalLockedContent: FunctionComponent<
+export const PartitionalLockedContent: FunctionComponent<
   PartitionalLockedContentProps
 > = ({
   children,
@@ -26,7 +28,7 @@ const PartitionalLockedContent: FunctionComponent<
   className,
   ...rest
 }) => {
-  const { t } = useTranslation();
+  const t = useTranslations();
   const [maxHeight, setMaxHeight] = useState(initialMaxHeight);
   const [isRevealed, setRevealed] = useState(false);
   const [flipActions, setFlipActions] = useState(false);
@@ -92,5 +94,3 @@ const PartitionalLockedContent: FunctionComponent<
     </div>
   );
 };
-
-export default PartitionalLockedContent;

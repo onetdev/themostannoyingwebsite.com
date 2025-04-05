@@ -1,11 +1,11 @@
 import Image from 'next/image';
-import Link from 'next/link';
-import { useTranslation } from 'next-i18next';
+import { Link } from '@/i18n/navigation';
 import { useTheme } from 'next-themes';
 import { FunctionComponent, PropsWithChildren } from 'react';
+import { useTranslations } from 'next-intl';
 
 const ContainerGiftFlaps: FunctionComponent = () => {
-  const { t } = useTranslation();
+  const t = useTranslations();
   const { resolvedTheme } = useTheme();
 
   return (
@@ -18,6 +18,7 @@ const ContainerGiftFlaps: FunctionComponent = () => {
             alt={t('gifts.dilf.title')}
             width={1900}
             height={1000}
+            priority={false}
           />
           <GiftFlapText
             theme={resolvedTheme as AppTheme}

@@ -1,11 +1,13 @@
-import { useTranslation } from 'next-i18next';
+'use client';
+
 import { FunctionComponent, useState } from 'react';
 
 import { useRuntimeStore } from '@/lib/state/runtime';
 import { useUserGrantsStore } from '@/lib/state/user_grants';
+import { useTranslations } from 'next-intl';
 
 const AdblockerSuspectBar: FunctionComponent = () => {
-  const { t } = useTranslation();
+  const t = useTranslations();
   const [isOpen, setOpen] = useState(true);
   const suspected = useRuntimeStore((state) => state.adblockerSuspected);
   const ppReviewed = useUserGrantsStore((state) => state.reviewCompleted);

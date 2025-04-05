@@ -1,5 +1,4 @@
-import Link from 'next/link';
-import { useTranslation } from 'next-i18next';
+import { Link } from '@/i18n/navigation';
 import { FunctionComponent } from 'react';
 
 import DarkModeToggle from '@/components/atoms/DarkModeToggle';
@@ -8,12 +7,13 @@ import MarqueeText from '@/components/molecules/MarqueeText';
 import MainNavigation from '@/components/organisms/MainNavigation';
 import SearchForm from '@/components/organisms/SearchForm';
 import UserNavigation from '@/components/organisms/UserNavigation';
+import { useTranslations } from 'next-intl';
 
 const Header: FunctionComponent = () => {
-  const { t } = useTranslation('common');
+  const t = useTranslations();
 
   return (
-    <header id="header" className="grid grid-cols-2 gap-1 py-2">
+    <header id="header" className="grid grid-cols-2 gap-1 py-2" role="banner">
       <h1 className="pb-3 font-semibold tracking-tighter">
         <Link href="/" prefetch={false} title={t('app.title')}>
           <span className="text-on-surface lg:hidden">

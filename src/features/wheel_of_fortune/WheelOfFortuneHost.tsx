@@ -1,14 +1,16 @@
-import { useTranslation } from 'next-i18next';
+'use client';
+
 import { FunctionComponent, useState } from 'react';
 
 import ModalContent from './components/ModalContent';
 
 import DimmerOverlay from '@/components/atoms/DimmerOverlay';
 import Icon from '@/components/atoms/Icon';
+import { useTranslations } from 'next-intl';
 
 const WheelOfFortuneHost: FunctionComponent = () => {
   const [isOpen, setOpen] = useState(false);
-  const { t } = useTranslation();
+  const t = useTranslations();
 
   return (
     <div className="fixed left-0 top-1/2 z-30">

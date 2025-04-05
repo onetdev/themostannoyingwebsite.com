@@ -1,4 +1,4 @@
-import { useTranslation } from 'next-i18next';
+import { useMessages, useTranslations } from 'next-intl';
 import { useCallback, useEffect, useMemo, useState } from 'react';
 
 import { HistoryItem, HistoryItemOwner } from '@/features/chat_bubble';
@@ -8,7 +8,8 @@ import { useRuntimeStore } from '@/lib/state/runtime';
 import { useUserPreferencesStore } from '@/lib/state/user_preferences';
 
 const useChatBubbleHistory = () => {
-  const { t } = useTranslation();
+  const t = useTranslations();
+  const messages = useMessages();
   const enableSound = useUserPreferencesStore((state) => state.enableSound);
   const hasInteracted = useRuntimeStore((state) => state.interactionUnlocked);
   const [history, setHistory] = useState<HistoryItem[]>([]);
@@ -18,15 +19,14 @@ const useChatBubbleHistory = () => {
   const notificationSfx = useAudio('/assets/sfx/notification_chord1.wav');
 
   const botMessageVariants = useMemo(() => {
-    const all = t('chatBubble.messageVariants', {
-      returnObjects: true,
-      defaultValue: [],
-    }) as string[];
+    const all = Object.keys(messages.chatBubble.messageVariants).map((key) =>
+      t(`chatBubble.messageVariants.${key}`),
+    );
 
     return all.filter(
       (message) => !history.some((item) => item.text === message),
     );
-  }, [history, t]);
+  }, [history, messages, t]);
 
   const add = useCallback((message: string, owner: HistoryItemOwner) => {
     setHistory((prev) => [...prev, { text: message, owner, time: new Date() }]);

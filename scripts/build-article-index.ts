@@ -8,10 +8,10 @@ import { parse } from 'yaml';
 import articleEntrySimplifiedZod from '@/lib/schemas/article-entry-simplified';
 import { ArticleIndexEntrySchema } from '@/lib/schemas/article-index-entry';
 import { parse as parseMd } from '@/lib/utils/markdown';
-import i18nConfig from '@/root/next-i18next.config';
+import i18nConfig from '@/root/i18n.config';
 
 const articlesRootPath = path.join('./public/assets/articles');
-const locales = i18nConfig.i18n.locales;
+const locales = i18nConfig.locales;
 const articleDirPattern = new RegExp(
   `^(${locales.join('|')})-([0-9]*)-(.*)$`,
   'i',
