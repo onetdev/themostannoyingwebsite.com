@@ -1,6 +1,3 @@
-/**
- * @jest-environment jsdom
- */
 import {
   angleRad,
   clamp,
@@ -9,7 +6,7 @@ import {
   getWeightedRandom,
   radToDeg,
   random,
-} from '@/lib/utils/math';
+} from './math';
 
 describe('Math angleRad', () => {
   test('should return the angle between two points in radians', () => {

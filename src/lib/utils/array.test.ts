@@ -1,7 +1,4 @@
-/**
- * @jest-environment jsdom
- */
-import { mergeIntervals } from '@/lib/utils/array';
+import { mergeIntervals } from './array';
 
 describe('mergeIntervals', () => {
   test('should return an empty array if no intervals are provided', () => {

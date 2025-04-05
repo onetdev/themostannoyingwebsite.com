@@ -43,7 +43,7 @@
     "test:ci": "jest --ci",
     "test:coverage": "jest --coverage",
     "test:once": "jest",
-    "test": "jest --watch",
+    "test": "jest",
     "type-check": "tsc --project tsconfig.json --pretty --noEmit"
   },
   "dependencies": {
@@ -96,6 +96,7 @@
     "@storybook/nextjs": "^8.6.11",
     "@storybook/react": "^8.6.11",
     "@storybook/test": "^8.6.11",
+    "@testing-library/dom": "^10.4.0",
     "@testing-library/jest-dom": "^6.6.3",
     "@testing-library/react": "^16.2.0",
     "@types/eslint": "^9.6.1",
@@ -126,6 +127,7 @@
     "sharp": "^0.33.5",
     "storybook": "^8.6.11",
     "tailwindcss": "^3.4.17",
+    "ts-node": "^10.9.2",
     "tsx": "^4.19.3",
     "typescript": "5.8.2",
     "typescript-eslint": "^8.28.0"
