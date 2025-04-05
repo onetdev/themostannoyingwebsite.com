@@ -2,7 +2,7 @@ import analyzer from '@next/bundle-analyzer';
 import { withSentryConfig } from '@sentry/nextjs';
 import createNextIntlPlugin from 'next-intl/plugin';
 import createMDX from '@next/mdx'
-import remakrGfm from 'remark-gfm';
+import remarkGfm from 'remark-gfm';
 
 import deploymentMeta from './deployment-meta.mjs';
 import sentryConfig from './next-sentry.config.mjs';
@@ -53,7 +53,7 @@ const withNextIntl = createNextIntlPlugin({});
 
 const withMDX = createMDX({
   options: {
-    remarkPlugins: [remakrGfm]
+    remarkPlugins: [remarkGfm]
   }
 })
 

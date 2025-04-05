@@ -16,7 +16,16 @@ const config = {
   orientation: 'portrait-primary',
   version: deploymentMeta.version,
   pixel_art: true,
-  // shortcuts: [],
+  icons: {
+    android: true,
+    appleIcon: true,
+    appleStartup: false,
+    coast: false,
+    favicons: true,
+    firefox: false,
+    windows: false,
+    yandex: false,
+  }
 };
 
 export default config;

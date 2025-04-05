@@ -35,6 +35,10 @@
     "dilf": "DILF"
   },
   "metadata": {
+    "app": {
+      "title": "The Most Annoying Website",
+      "description": "Self-proclaimed most annoying website on the web with so many disgusting features of modern websites you might even vomit at some point."
+    },
     "about": {
       "title": "About us",
       "description": "Discover the story behind this website, its origins, and the passionate creators and contributors who bring it to life."
