@@ -125,29 +125,29 @@
     "generate": "Generate"
   },
   "date": {
-    "months": [
-      "January",
-      "February",
-      "March",
-      "April",
-      "May",
-      "June",
-      "July",
-      "August",
-      "September",
-      "October",
-      "November",
-      "December"
-    ],
-    "weekdays": [
-      "Sunday",
-      "Monday",
-      "Tuesday",
-      "Wednesday",
-      "Thursday",
-      "Friday",
-      "Saturday"
-    ],
+    "months": {
+      "january": "January",
+      "february": "February",
+      "march": "March",
+      "april": "April",
+      "may": "May",
+      "june": "June",
+      "july": "July",
+      "august": "August",
+      "september": "September",
+      "october": "October",
+      "november": "November",
+      "december": "December"
+    },
+    "weekdays": {
+      "sunday": "Sunday",
+      "monday": "Monday",
+      "tuesday": "Tuesday",
+      "wednesday": "Wednesday",
+      "thursday": "Thursday",
+      "friday": "Friday",
+      "saturday": "Saturday"
+    },
     "formats": {
       "long": "MMM D, YYYY",
       "short": "M/D/YYYY"
@@ -162,10 +162,10 @@
     "validation": {
       "error": {
         "required": "This field is required.",
-        "minLength": "Minimum length is {{count}} characters",
-        "maxLength": "Maximum length is {{count}} characters",
-        "min": "Value must be at least {{count}}",
-        "max": "Value must be no more than {{count}}",
+        "minLength": "Minimum length is {count} characters",
+        "maxLength": "Maximum length is {count} characters",
+        "min": "Value must be at least {count}",
+        "max": "Value must be no more than {count}",
         "emailInvalid": "Invalid email address",
         "captchaInvalid": "Invalid captcha",
         "patternMismatch": "The input does not match the required pattern",
@@ -176,14 +176,14 @@
         "tooShort": "The input is too short",
         "tooLong": "The input is too long",
         "checkboxRequired": "You must check this box",
-        "fileTooLarge": "The file size exceeds the limit of {{size}}",
+        "fileTooLarge": "The file size exceeds the limit of {size}",
         "fileTypeInvalid": "Invalid file type",
         "customError": "Invalid input",
         "missingUppercase": "Must contain at least one uppercase letter",
         "missingLowercase": "Must contain at least one lowercase letter",
         "missingNumber": "Must contain at least one number",
         "missingSpecialCharacter": "Must contain at least one symbol",
-        "sumOfNumbersGte": "Sum of numbers must be at least or equal to {{count}}",
+        "sumOfNumbersGte": "Sum of numbers must be at least or equal to {count}",
         "sumOfNumbersMustBeEven": "Sum of numbers must be be even",
         "passwordAlreadyTaken": "The password is already taken by another user"
       },
@@ -325,28 +325,28 @@
       "initialConfirm": "Subscribe",
       "initialCancel": "Don't Subscribe",
       "useFormActions": "Please use the relevant button instead",
-      "confirmations": [
-        {
+      "confirmations": {
+        "confirmation_001": {
           "text": "We're disappointed to see that you may not have had enough time to fully consider this important and challenging decision.",
           "confirm": "I thought about it, I still want to",
           "cancel": "You are right, cancel"
         },
-        {
+        "confirmation_002": {
           "text": "We are sorry to see you subscribing, can we treat you with the joys of not being a subscriber at all?",
           "confirm": "No thanks",
           "cancel": "I need my treat!"
         },
-        {
+        "confirmation_003": {
           "text": "Have you considered skipping this newsletter?",
           "confirm": "No",
           "cancel": "Yes"
         },
-        {
+        "confirmation_004": {
           "text": "Subscribing to this newsletter might have adverse side effects. Are you still in?",
           "confirm": "I accept side effects",
           "cancel": "Get me out of here"
         }
-      ]
+      }
     }
   },
   "paywall": {
@@ -359,39 +359,39 @@
   },
   "article": {
     "coverImage": "Cover image",
-    "published": "Published at {{date}}"
+    "published": "Published at {date}"
   },
   "titleExperience": {
-    "marqueeVariants": [
-      "📣 Come back please 🏃‍♀️🏃 We have candy!! 🚐"
-    ],
-    "arrayPagedVariants": [
-      "⭐️ HEY YOU 🫵",
-      "😜 YES YOU 😱",
-      "📣 COME BACK 🏃"
-    ]
+    "marqueeVariants": {
+      "variant_001": "📣 Come back please 🏃‍♀️🏃 We have candy!! 🚐"
+    },
+    "arrayPagedVariants": {
+      "variant_001": "⭐️ HEY YOU 🫵",
+      "variant_002": "😜 YES YOU 😱",
+      "variant_003": "📣 COME BACK 🏃"
+    }
   },
   "search": {
     "placeholder": "Search...",
     "noResults": "No results found",
-    "resultMeta": "Search for \"{{query}}\" took {{time}}ms and found {{count}} results",
+    "resultMeta": "Search for \"{query}\" took {time}ms and found {count} results",
     "searching": "Searching",
     "peopleAlsoSearched": "People also searched for:",
-    "topSearcheVariants": [
-      "do fish get thirsty",
-      "pasta lyrics",
-      "do cars run out of honk",
-      "internet not working",
-      "can facebook listen through your phone",
-      "why do i smell like pennies",
-      "can you swim in jello",
-      "how do i politely tell someone they smell like onions",
-      "can't see reflection in mirror",
-      "electricity invention",
-      "rub his bread",
-      "meme and toad",
-      "bog brother"
-    ]
+    "topSearcheVariants": {
+      "variant_001": "do fish get thirsty",
+      "variant_002": "pasta lyrics",
+      "variant_003": "do cars run out of honk",
+      "variant_004": "internet not working",
+      "variant_005": "can facebook listen through your phone",
+      "variant_006": "why do i smell like pennies",
+      "variant_007": "can you swim in jello",
+      "variant_008": "how do i politely tell someone they smell like onions",
+      "variant_009": "can't see reflection in mirror",
+      "variant_010": "electricity invention",
+      "variant_011": "rub his bread",
+      "variant_012": "meme and toad",
+      "variant_013": "bog brother"
+    }
   },
   "gifts": {
     "dilf": {
@@ -417,108 +417,108 @@
           "text": "Thank you for participating! Unfortunatelly phone cannot be flaimed at this time.",
           "callToAction": "Back to home"
         },
-        "questionVariants": [
-          {
+        "questionVariants": {
+          "variant_001": {
             "text": "How old are you?",
-            "options": [
-              "<18",
-              "18-24",
-              "25-34",
-              "35-44",
-              "45-54",
-              "55-64",
-              "65+"
-            ]
+            "options": {
+              "option_001": "<18",
+              "option_002": "18-24",
+              "option_003": "25-34",
+              "option_004": "35-44",
+              "option_005": "45-54",
+              "option_006": "55-64",
+              "option_007": "65+"
+            }
           },
-          {
+          "variant_002": {
             "text": "What is the most common favorite color?",
-            "options": [
-              "Red",
-              "Green",
-              "Blue",
-              "Yellow",
-              "Orange",
-              "Purple",
-              "Black",
-              "White"
-            ],
+            "options": {
+              "option_001": "Red",
+              "option_002": "Green",
+              "option_003": "Blue",
+              "option_004": "Yellow",
+              "option_005": "Orange",
+              "option_006": "Purple",
+              "option_007": "Black",
+              "option_008": "White"
+            },
             "solution": "Blue"
           },
-          {
+          "variant_003": {
             "text": "It has four legs, it's not a chair but a table",
-            "options": [
-              "Spider",
-              "Horse",
-              "Yes",
-              "Table"
-            ],
+            "options": {
+              "option_001": "Spider",
+              "option_002": "Horse",
+              "option_003": "Yes",
+              "option_004": "Table"
+            },
             "solution": "Table"
           },
-          {
+          "variant_004": {
             "text": "What is the square root of 144?",
-            "options": [
-              "10",
-              "11",
-              "12",
-              "17"
-            ],
+            "options": {
+              "option_001": "10",
+              "option_002": "11",
+              "option_003": "12",
+              "option_004": "17"
+            },
             "solution": "12"
           },
-          {
+          "variant_005": {
             "text": "How much wood would a woodchuck chuck if a woodchuck could chuck wood?",
-            "options": [
-              "Yes",
-              "700 pounds",
-              "144",
-              "Inf",
-              "Rather not say"
-            ],
+            "options": {
+              "option_001": "Yes",
+              "option_002": "700 pounds",
+              "option_003": "144",
+              "option_004": "Inf",
+              "option_005": "Rather not say"
+            },
             "solution": "700 pounds"
           },
-          {
+          "variant_006": {
             "text": "Finish the following: Well, well, well...",
-            "options": [
-              "How the turntables...",
-              "I did not hit her",
-              "It's down there somewhere, let me take another look",
-              "You can't park there"
-            ],
+            "options": {
+              "option_001": "How the turntables...",
+              "option_002": "I did not hit her",
+              "option_003": "It's down there somewhere, let me take another look",
+              "option_004": "You can't park there"
+            },
             "solution": "How the turntables..."
           },
-          {
+          "variant_007": {
             "text": "What is the following is not a phone brand",
-            "options": [
-              "Nokia",
-              "Samsung",
-              "Apple",
-              "Motorola",
-              "Blablabluba"
-            ],
+            "options": {
+              "option_001": "Nokia",
+              "option_002": "Samsung",
+              "option_003": "Apple",
+              "option_004": "Motorola",
+              "option_005": "Blablabluba"
+            },
             "solution": "Blablabluba"
           },
-          {
+          "variant_008": {
             "text": "What is the first letter of the alphabet?",
-            "options": [
-              "A",
-              "B",
-              "C",
-              "D",
-              "E",
-              "F",
-              "G",
-              "H"
-            ],
+            "options": {
+              "option_001": "A",
+              "option_002": "B",
+              "option_003": "C",
+              "option_004": "D",
+              "option_005": "E",
+              "option_006": "F",
+              "option_007": "G",
+              "option_008": "H"
+            },
             "solution": "A"
           },
-          {
+          "variant_009": {
             "text": "Do you believe in magic?",
-            "options": [
-              "Yes",
-              "No"
-            ],
+            "options": {
+              "option_001": "Yes",
+              "option_002": "No"
+            },
             "solution": "Yes"
           }
-        ]
+        }
       }
     },
     "suspectBar": {
@@ -529,7 +529,7 @@
   "wheelOfFortune": {
     "title": "Wheel of fortune",
     "spinStart": "Let's spin the wheel!!",
-    "spinWin": "You won! {{prize}}",
+    "spinWin": "You won! {prize}",
     "prizeVariants": {
       "freeLifetimeBeer": "Free lifetime beer",
       "worldPeace": "World peace",
@@ -540,17 +540,17 @@
   },
   "chatBubble": {
     "messageInitial": "Hello! I am a chat bubble. I am here to help you. 🤓",
-    "messageVariants": [
-      "Come on, let me help you!",
-      "I can't hear you! Speak louder!",
-      "Who lives under the sea?",
-      "The FitnessGram Pacer Test is a multistage aerobic capacity test that progressively gets more difficult as it continues.",
-      "Sorry, I'm going through a tunnel right now. Can you repeat that?",
-      "You must have missed my previous messages. I'm kind of lonely.",
-      "Wondering if my messages got caught in a time warp. Feeling like I'm at a party where everyone's speaking Simlish.",
-      "My messages must be on a ghosting spree. Feeling ignored.",
-      "Ah, the sweet sound of silence. My messages must be enjoying their newfound solitude."
-    ],
+    "messageVariants": {
+      "variant_001": "Come on, let me help you!",
+      "variant_002": "I can't hear you! Speak louder!",
+      "variant_003": "Who lives under the sea?",
+      "variant_004": "The FitnessGram Pacer Test is a multistage aerobic capacity test that progressively gets more difficult as it continues.",
+      "variant_005": "Sorry, I'm going through a tunnel right now. Can you repeat that?",
+      "variant_006": "You must have missed my previous messages. I'm kind of lonely.",
+      "variant_007": "Wondering if my messages got caught in a time warp. Feeling like I'm at a party where everyone's speaking Simlish.",
+      "variant_008": "My messages must be on a ghosting spree. Feeling ignored.",
+      "variant_009": "Ah, the sweet sound of silence. My messages must be enjoying their newfound solitude."
+    },
     "messageFallback": "It's nothing, leave me alone. 😤",
     "newAlert": "New message from Chat Bubble! 🎉",
     "hudTitle": "Chat with a \"100% real huuman\"",

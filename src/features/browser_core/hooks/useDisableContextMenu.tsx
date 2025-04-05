@@ -4,7 +4,7 @@ import { useExperienceFlagsStore } from '@/lib/state/experience_flags';
 import { useTranslations } from 'next-intl';
 
 const useDisableContextMenu = () => {
-  const t = useTranslations('common');
+  const t = useTranslations();
   const isDisabled = useExperienceFlagsStore(
     (state) => state.disableContextMenu,
   );

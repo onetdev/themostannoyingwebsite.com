@@ -15,7 +15,7 @@ const CountryField: FunctionComponent<CountryFieldProps> = ({
   errors,
   register,
 }) => {
-  const t = useTranslations('common');
+  const t = useTranslations();
   const countryOptions = useMemo(
     () =>
       countryData.map(({ localName, code }) => ({

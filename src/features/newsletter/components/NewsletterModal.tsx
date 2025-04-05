@@ -9,6 +9,7 @@ import { type NewsletterFormInputs } from '@/features/newsletter';
 import { random } from '@/lib/utils/math';
 import { EMAIL_PATTERN } from '@/lib/utils/validator';
 import { useMessages, useTranslations } from 'next-intl';
+import { text } from 'stream/consumers';
 
 type NewsletterModalProps = {
   visible?: boolean;
@@ -35,7 +36,11 @@ const NewsletterModal: FunctionComponent<NewsletterModalProps> = ({
   const confirmPool = useMemo(
     () => {
       const items = Object.keys(messages.newsletter.modal.confirmations).map(
-        (key) => t(`newsletter.modal.confirmations.${key}`) as unknown as ConfirmItem,
+        (key) => ({
+          confirm: t(`newsletter.modal.confirmations.${key}.confirm`),
+          cancel: t(`newsletter.modal.confirmations.${key}.cancel`),
+          text: t(`newsletter.modal.confirmations.${key}.text`),
+        } satisfies ConfirmItem),
       );
 
       return items

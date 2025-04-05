@@ -28,7 +28,7 @@ const PhoneNumberField: FunctionComponent<PhoneNumberFieldProps> = ({
   setValue,
   getValues,
 }) => {
-  const t = useTranslations('common');
+  const t = useTranslations();
   const $decrementBtn = useRef<HTMLButtonElement>(null);
   const $incrementBtn = useRef<HTMLButtonElement>(null);
   const [phoneNumberUpdateDirection, setPhoneNumberUpdateDirection] =

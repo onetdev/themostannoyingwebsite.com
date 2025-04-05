@@ -12,7 +12,7 @@ const StickyVideoExperienceHost: FunctionComponent = () => {
   const allowed = useUserGrantsStore((state) => state.reviewCompleted);
   const [mounted, setMounted] = useState(false);
   const [closed, setClosed] = useState(false);
-  const t = useTranslations('common');
+  const t = useTranslations();
   const $playerRef = useRef<HTMLIFrameElement | null>(null);
 
   useEffect(() => setMounted(true), []);

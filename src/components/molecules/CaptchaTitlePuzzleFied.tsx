@@ -14,7 +14,7 @@ export type CaptchaTitlePuzzleFieldProps = {
 const CaptchaTitlePuzzleField: FunctionComponent<
   CaptchaTitlePuzzleFieldProps
 > = ({ register, errors, setValue }) => {
-  const t = useTranslations('common');
+  const t = useTranslations();
 
   return (
     <div className="flex flex-col">

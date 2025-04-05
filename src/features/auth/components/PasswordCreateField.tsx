@@ -16,7 +16,7 @@ const PasswordCreateField: FunctionComponent<PasswordCreateFieldProps> = ({
   register,
   watch,
 }) => {
-  const t = useTranslations('common');
+  const t = useTranslations();
 
   const password = watch('password');
 

@@ -15,7 +15,7 @@ const CaptchaEmojiField: FunctionComponent<CaptchaEmojiFieldProps> = ({
   register,
   errors,
 }) => {
-  const t = useTranslations('common');
+  const t = useTranslations();
 
   return (
     <div className="flex flex-col">
