@@ -7,7 +7,7 @@ import { CoverPlaceholder } from './CoverPlaceholder';
 import { type ArticleDatum } from '@/features/content';
 import { useTranslations } from 'next-intl';
 
-type LargeCoverItemProps = JSXProxyProps<'div'> & {
+type LargeCoverItemProps = JSXProxyProps<'article'> & {
   article: ArticleDatum;
 };
 
@@ -18,7 +18,7 @@ export const LargeCoverItem: FunctionComponent<LargeCoverItemProps> = ({
   const t = useTranslations();
 
   return (
-    <div {...rest}>
+    <article role="article" {...rest}>
       <Link
         className="relative block"
         href={article.url}
@@ -45,6 +45,6 @@ export const LargeCoverItem: FunctionComponent<LargeCoverItemProps> = ({
           </p>
         </div>
       </Link>
-    </div>
+    </article>
   );
 };

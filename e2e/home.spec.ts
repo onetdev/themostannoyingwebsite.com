@@ -1,23 +1,19 @@
 import { expect, test } from '@playwright/test';
 
-test('when opening domain the user gets redirected to /en', async ({
-  page,
-}) => {
-  await page.goto('http://localhost:3000/');
+test('home has articles', async ({ page }) => {
+  await page.goto('/');
 
-  await expect(page).toHaveURL('http://localhost:3000/en/');
+  await expect(page.getByTestId('cover-article')).toBeVisible();
 
-  await expect(page).toHaveTitle(/The Most Annoying Website/);
+  const denseArticleItemsLength = await page
+    .getByTestId('dense-article-item')
+    .count();
+  expect(denseArticleItemsLength).toBeGreaterThanOrEqual(1);
+  expect(denseArticleItemsLength).toBeLessThanOrEqual(2);
+
+  const smallCoverArticleItemsLength = await page
+    .getByTestId('small-cover-article-item')
+    .count();
+  expect(smallCoverArticleItemsLength).toBeGreaterThanOrEqual(1);
+  expect(smallCoverArticleItemsLength).toBeLessThanOrEqual(8);
 });
-
-// test('get started link', async ({ page }) => {
-//   await page.goto('https://playwright.dev/');
-
-//   // Click the get started link.
-//   await page.getByRole('link', { name: 'Get started' }).click();
-
-//   // Expects page to have a heading with the name of Installation.
-//   await expect(
-//     page.getByRole('heading', { name: 'Installation' }),
-//   ).toBeVisible();
-// });
