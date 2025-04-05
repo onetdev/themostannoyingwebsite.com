@@ -15,5 +15,5 @@ Sentry.init({
   tracesSampleRate: 1,
 
   debug: false,
-  enabled: process.env.NEXT_PUBLIC_SENTRY_ENABLED === 'true',
+  enabled: process.env.NEXT_PUBLIC_SENTRY_ENABLED !== 'false',
 });
