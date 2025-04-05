@@ -27,7 +27,7 @@ const MainNavigation: FunctionComponent<MainNavigationProps> = ({
   );
 
   return (
-    <nav className={`group relative ${className}`} id="navigation-main">
+    <nav className={`group relative ${className}`} id="navigation-main" role="navigation">
       <span className="block md:hidden">
         <Icon icon="menu" size="lg" />
       </span>

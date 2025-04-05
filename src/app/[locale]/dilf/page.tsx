@@ -19,7 +19,7 @@ export default async function Page() {
   const t = await getTranslations();
 
   return (
-    <main>
+    <main role="main">
       <h1>{t('gifts.dilf.fullTitle')}</h1>
       <p className="my-5 max-w-screen-md">{t('gifts.dilf.description')}</p>
       <DilfFinder />

@@ -22,7 +22,7 @@ export default async function Page() {
   const t = await getTranslations();
 
   return (
-    <main>
+    <main role="main">
       <PageHeadline className="mx-auto w-full max-w-screen-md">
         {t('navigation.donate')}
       </PageHeadline>

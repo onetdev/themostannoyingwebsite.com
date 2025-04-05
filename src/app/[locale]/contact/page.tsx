@@ -21,7 +21,7 @@ export default async function Page() {
   const t = await getTranslations();
 
   return (
-    <main>
+    <main role="main">
       <PageHeadline>{t('navigation.contact')}</PageHeadline>
       <p>
         <a href={`mailto:${config.contactEmail}`}>{config.contactEmail}</a>

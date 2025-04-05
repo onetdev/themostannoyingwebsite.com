@@ -21,7 +21,7 @@ async function Page() {
   const t = await getTranslations();
 
   return (
-    <main>
+    <main role="main">
       <DisableAllOnMount />
       <PageHeadline className="mx-auto w-full max-w-screen-md">
         {t('app.virgin.title')}

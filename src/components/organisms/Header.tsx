@@ -13,7 +13,7 @@ const Header: FunctionComponent = () => {
   const t = useTranslations();
 
   return (
-    <header id="header" className="grid grid-cols-2 gap-1 py-2">
+    <header id="header" className="grid grid-cols-2 gap-1 py-2" role="banner">
       <h1 className="pb-3 font-semibold tracking-tighter">
         <Link href="/" prefetch={false} title={t('app.title')}>
           <span className="text-on-surface lg:hidden">

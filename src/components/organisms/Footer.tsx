@@ -10,6 +10,7 @@ const Footer: FunctionComponent = () => {
   return (
     <footer
       id="footer"
+      role="contentinfo"
       className="mt-12 flex flex-col justify-between gap-4 border-t border-hr-surface px-0 py-5 text-xs md:flex-row">
       <span className="mr-2">
         {t('app.copyright', { year: new Date().getFullYear() })}.{' '}

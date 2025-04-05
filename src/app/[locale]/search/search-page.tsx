@@ -97,7 +97,7 @@ export function SearchPage() {
   const showResultList = !loading && results && results.items.length > 0;
 
   return (
-    <main>
+    <main role="main">
       <PageHeadline>{t('navigation.search')}</PageHeadline>
       <SearchForm size="lg" className="max-w-[400px]" initialValue={query} />
       {loading && (

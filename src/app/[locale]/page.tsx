@@ -28,7 +28,7 @@ export default async function Page({ params }: NextPageProps) {
   const regularList = articlePool.items.slice(2);
 
   return (
-    <main className="grid grid-cols-1 gap-3 lg:grid-cols-4">
+    <main className="grid grid-cols-1 gap-3 lg:grid-cols-4" role="main">
       {coverArticle && (
         <LargeCoverItem
           className="col-span-1 lg:col-span-3"

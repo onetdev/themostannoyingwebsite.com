@@ -20,7 +20,7 @@ export default async function Page() {
   const t = await getTranslations();
 
   return (
-    <main className="mx-auto max-w-screen-lg py-0 md:py-14">
+    <main role="main" className="mx-auto max-w-screen-lg py-0 md:py-14">
       <h1>{t('gifts.wanPhone.title')}</h1>
       <FlaimSurvery className="my-5 w-full" />
     </main>

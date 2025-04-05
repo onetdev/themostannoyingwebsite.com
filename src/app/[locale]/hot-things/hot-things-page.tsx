@@ -58,7 +58,7 @@ export default function HotThingsPage() {
   }, [stream]);
 
   return (
-    <main>
+    <main role="main">
       <PageHeadline>{t('navigation.hotThings')}</PageHeadline>
       <div className="relative overflow-hidden pb-16/9">
         <Image

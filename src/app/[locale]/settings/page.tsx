@@ -27,7 +27,7 @@ export default async function Settings() {
   const t = await getTranslations();
 
   return (
-    <main>
+    <main role="main">
       <PageHeadline>{t('navigation.settings')}</PageHeadline>
 
       <div className="grid gap-3 md:grid-cols-2">

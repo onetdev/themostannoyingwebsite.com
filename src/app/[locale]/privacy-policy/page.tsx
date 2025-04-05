@@ -26,7 +26,7 @@ export default async function Page({ params }: NextPageProps) {
   try {
     const Content = (await import(`./${locale}.mdx`)).default;
 
-    return <main>
+    return <main role="main">
       <PageHeadline className="mx-auto w-full max-w-screen-md">
         {t('navigation.privacyPolicy')}
       </PageHeadline>
