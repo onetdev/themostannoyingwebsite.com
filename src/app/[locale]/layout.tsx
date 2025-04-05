@@ -69,7 +69,6 @@ export async function generateMetadata(): Promise<Metadata> {
       'apple-mobile-web-app-title': t('title'),
     },
     manifest: '/manifest/manifest.webmanifest',
-    themeColor: '#2f0031',
   }
 }
 
@@ -77,6 +76,10 @@ export function generateViewport(): Viewport {
   return {
     width: 'device-width',
     initialScale: 1,
+    themeColor: [
+      { media: "(prefers-color-scheme: dark)", color: "#2f0031" },
+      { media: "(prefers-color-scheme: light)", color: "#2f0031" }
+    ]
   }
 }
 

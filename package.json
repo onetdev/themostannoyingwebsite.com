@@ -43,6 +43,7 @@
     "test:ci": "jest --ci",
     "test:coverage": "jest --coverage",
     "test:once": "jest",
+    "test:e2e": "playwright test",
     "test": "jest",
     "type-check": "tsc --project tsconfig.json --pretty --noEmit"
   },
@@ -87,6 +88,7 @@
     "@eslint/eslintrc": "^3.3.1",
     "@eslint/js": "^9.23.0",
     "@next/eslint-plugin-next": "^15.2.4",
+    "@playwright/test": "^1.51.1",
     "@storybook/addon-essentials": "^8.6.11",
     "@storybook/addon-interactions": "^8.6.11",
     "@storybook/addon-links": "^8.6.11",
