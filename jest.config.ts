@@ -33,6 +33,7 @@ const config: Config = {
     '@/(.*)$': '<rootDir>/src/$1',
     '@/root/(.*)$': '<rootDir>/$1',
   },
+  testPathIgnorePatterns: ['<rootDir>/e2e/'],
   setupFilesAfterEnv: ['<rootDir>/jest.setup.ts'],
   verbose: undefined,
   watchman: true,
