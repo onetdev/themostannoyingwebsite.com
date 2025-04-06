@@ -1,13 +1,19 @@
 {
+  "private": true,
   "name": "@maw/utils",
   "version": "1.0.0",
   "type": "module",
-  "private": true,
+  "exports": {
+    "./array": "./src/array.ts",
+    "./color": "./src/color.ts",
+    "./math": "./src/math.ts",
+    "./string": "./src/string.ts"
+  },
   "scripts": {
-    "type-check": "tsc --noEmit",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
-    "test": "jest"
+    "test": "jest",
+    "type-check": "tsc --noEmit"
   },
   "devDependencies": {
     "@jest/globals": "^29.7.0",

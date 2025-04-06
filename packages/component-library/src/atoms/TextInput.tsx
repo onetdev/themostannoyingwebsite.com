@@ -1,6 +1,6 @@
 import { DetailedHTMLProps, forwardRef, InputHTMLAttributes } from 'react';
 
-import { FormElementSize, resolveFormElementSize } from '@/root/apps/web/src/lib/utils/form';
+import { FormElementSize, resolveFormElementSize } from '@/utils/form';
 
 export type TextInputSize = FormElementSize;
 export type TextInputVariant = 'primary' | 'secondary' | 'tertiary';

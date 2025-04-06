@@ -6,7 +6,7 @@ export type SelectProps = DetailedHTMLProps<
 > & {
   appendPlaceholder?: boolean;
   values: { value: string | number; label: string | number }[];
-  onValueChange?: (value: string) => void;
+  onValueChange?: (value?: string) => void;
 };
 
 const Select = forwardRef<HTMLSelectElement, SelectProps>(
@@ -23,7 +23,7 @@ const Select = forwardRef<HTMLSelectElement, SelectProps>(
   ) => {
     const onChangeProxy = (e: React.ChangeEvent<HTMLSelectElement>) => {
       onChange?.(e);
-      onValueChange?.(values[e.target.selectedIndex].value.toString());
+      onValueChange?.(values[e.target.selectedIndex]?.value.toString());
     };
 
     return (

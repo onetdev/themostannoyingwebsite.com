@@ -1,6 +1,9 @@
 {
+  "private": false,
   "name": "themostannoyingwebsite",
   "version": "0.8.0",
+  "license": "MIT",
+  "author": "Konrad Koller <info@onet.dev> (https://onet.dev)",
   "homepage": "https://themostannoyingwebsite.com",
   "repository": {
     "type": "git",
@@ -10,41 +13,26 @@
     "url": "https://github.com/onetdev/themostannoyingwebsite.com/issues",
     "email": "info@themostannoyingwebsite.com"
   },
-  "author": {
-    "name": "Konrad Koller",
-    "email": "info@onet.dev",
-    "url": "https://onet.dev"
-  },
-  "funding": {
-    "type": "individual",
-    "url": "https://www.onet.dev/donate"
-  },
-  "packageManager": "pnpm@10.0.0",
-  "engines": {
-    "node": ">=20.18.0"
-  },
-  "private": false,
   "type": "module",
-  "license": "MIT",
   "scripts": {
+    "build": "pnpm run build:artifacts && next build",
     "build:article-index": "tsx ./scripts/build-article-index.ts",
+    "build:artifacts": "pnpm run build:article-index && pnpm run build:schema && pnpm run build:deployment-meta",
+    "build:deployment-meta": "tsx ./scripts/build-deployment-meta.ts",
     "build:manifest": "tsx ./scripts/build-manifest.ts",
     "build:schema": "tsx ./scripts/build-json-schema.ts",
     "build:storybook": "storybook build",
-    "build:deployment-meta": "tsx ./scripts/build-deployment-meta.ts",
-    "build:artifacts": "pnpm run build:article-index && pnpm run build:schema && pnpm run build:deployment-meta",
-    "build": "pnpm run build:artifacts && next build",
     "dev": "pnpm run build:artifacts && next dev --experimental-https",
-    "lint:fix": "next lint --fix",
     "lint": "next lint",
+    "lint:fix": "next lint --fix",
     "prepare": "husky",
     "start": "pnpm run build:artifacts && next start",
     "storybook:dev": "storybook dev -p 6006",
+    "test": "jest",
     "test:ci": "jest --ci",
     "test:coverage": "jest --coverage",
-    "test:once": "jest",
     "test:e2e": "playwright test",
-    "test": "jest",
+    "test:once": "jest",
     "type-check": "tsc --project tsconfig.json --pretty --noEmit"
   },
   "dependencies": {
@@ -65,9 +53,9 @@
     "next": "^15.2.4",
     "next-intl": "^4.0.2",
     "next-themes": "^0.4.6",
-    "react": "^19.1.0",
+    "react": "catalog:",
     "react-confetti": "^6.4.0",
-    "react-dom": "^19.1.0",
+    "react-dom": "catalog:",
     "react-fast-marquee": "^1.6.5",
     "react-hook-form": "^7.55.0",
     "react-share": "^5.2.2",
@@ -81,12 +69,16 @@
     "zod-to-json-schema": "^3.24.5",
     "zustand": "^5.0.3"
   },
+  "peerDependencies": {
+    "express": "^5.1.0"
+  },
   "devDependencies": {
     "@chromatic-com/storybook": "^3.2.6",
     "@commitlint/cli": "^19.8.0",
     "@commitlint/config-conventional": "^19.8.0",
     "@eslint/eslintrc": "^3.3.1",
     "@eslint/js": "^9.23.0",
+    "@maw/typescript-config": "workspace:",
     "@next/eslint-plugin-next": "^15.2.4",
     "@playwright/test": "^1.51.1",
     "@storybook/addon-essentials": "^8.6.11",
@@ -107,8 +99,8 @@
     "@types/lint-staged": "^13.3.0",
     "@types/mdx": "^2.0.13",
     "@types/node": "^22.13.14",
-    "@types/react": "^19.0.12",
-    "@types/react-dom": "^19.0.4",
+    "@types/react": "catalog:",
+    "@types/react-dom": "catalog:",
     "@types/react-timeago": "^4.1.7",
     "@types/rtl-detect": "^1.0.3",
     "@types/sanitize-html": "^2.15.0",
@@ -134,7 +126,9 @@
     "typescript": "5.8.2",
     "typescript-eslint": "^8.28.0"
   },
-  "peerDependencies": {
-    "express": "^5.1.0"
-  }
+  "funding": {
+    "type": "individual",
+    "url": "https://www.onet.dev/donate"
+  },
+  "packageManager": "pnpm@10.0.0"
 }

@@ -1,8 +1,8 @@
 {
+  "private": true,
   "name": "@maw/eslint-config",
   "version": "1.0.0",
   "type": "module",
-  "private": true,
   "exports": {
     "./base": "./configs/base.mjs",
     "./next-js": "./configs/next.mjs",
@@ -10,8 +10,8 @@
   },
   "devDependencies": {
     "@eslint/js": "^9.23.0",
-    "@next/eslint-plugin-next": "^15.2.1",
     "@maw/typescript-config": "workspace:*",
+    "@next/eslint-plugin-next": "^15.2.1",
     "eslint": "^9.23.0",
     "eslint-config-prettier": "^10.1.1",
     "eslint-plugin-only-warn": "^1.1.0",

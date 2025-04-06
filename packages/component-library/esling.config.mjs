@@ -1,3 +1,3 @@
-import { baseConfig } from '@maw/eslint-config/react-internal';
+import { config } from "@maw/eslint-config/react-internal";
 
-export default baseConfig;
+export default config;

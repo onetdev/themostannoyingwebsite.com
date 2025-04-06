@@ -1,20 +1,10 @@
 {
-  "extends": "@maw/typescript-config/nextjs.json",
-  "compilerOptions": {
-    "plugins": [
-      {
-        "name": "next"
-      }
-    ]
-  },
+  "extends": "@maw/typescript-config/configs/nextjs.json",
   "include": [
     "**/*.ts",
     "**/*.tsx",
     "next-env.d.ts",
     "next.config.js",
     ".next/types/**/*.ts"
-, "eslint.config.js", "../../packages/content-api/src/utils/markdown.tsx", "../../packages/content-api/scripts/build-article-index.ts"  ],
-  "exclude": [
-    "node_modules"
-  ]
+  ],
 }
