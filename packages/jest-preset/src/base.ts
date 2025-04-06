@@ -2,20 +2,15 @@
  * For a detailed explanation regarding each configuration property, visit:
  * https://jestjs.io/docs/configuration
  */
-
-import type { Config } from 'jest';
-import nextJest from 'next/jest.js';
-
-const createJestConfig = nextJest({
-  dir: './',
-});
+import type { Config } from "jest";
 
 const config: Config = {
+  preset: "ts-jest",
   bail: 0,
   clearMocks: true,
   collectCoverage: true,
-  coverageDirectory: 'coverage',
-  coverageProvider: 'v8',
+  coverageDirectory: "coverage",
+  coverageProvider: "v8",
   coverageThreshold: {
     global: {
       branches: 50,
@@ -29,14 +24,15 @@ const config: Config = {
     enableGlobally: false,
   },
   moduleNameMapper: {
-    '@/public/(.*)$': '<rootDir>/public/$1',
-    '@/(.*)$': '<rootDir>/src/$1',
-    '@/root/(.*)$': '<rootDir>/$1',
+    "@/(.*)$": "<rootDir>/src/$1",
+    "@/root/(.*)$": "<rootDir>/$1",
   },
-  testPathIgnorePatterns: ['<rootDir>/e2e/'],
-  setupFilesAfterEnv: ['<rootDir>/jest.setup.ts'],
+  testPathIgnorePatterns: ["<rootDir>/e2e/"],
+  setupFilesAfterEnv: [
+    "<rootDir>/node_modules/@maw/jest-preset/src/setup.ts"
+  ],
   verbose: undefined,
   watchman: true,
 };
 
-export default createJestConfig(config);
+export default config;

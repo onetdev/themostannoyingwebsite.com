@@ -1,6 +1,6 @@
 {
   "extends": "@maw/typescript-config/react-library",
   "compilerOptions": {
-    "baseUrl": ".",
-  },
+    "baseUrl": "."
+  }
 }

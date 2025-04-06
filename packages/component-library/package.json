@@ -1,10 +1,10 @@
 {
   "name": "@maw/component-library",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "type": "module",
   "private": true,
   "scripts": {
-    "type-check": "tsc",
+    "type-check": "tsc --noEmit",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix"
   },

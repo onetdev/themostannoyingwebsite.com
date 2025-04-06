@@ -1,13 +1,13 @@
 {
   "name": "@maw/content-api",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "type": "module",
   "private": true,
   "scripts": {
     "build:index": "tsx ./scripts/build-index.ts",
     "build:schema": "tsx ./scripts/build-json-schema.ts",
     "build": "pnpm build:schema && pnpm build:index",
-    "type-check": "tsc --project tsconfig.json --pretty --noEmit",
+    "type-check": "tsc --noEmit",
     "lint": "eslint . --ext .ts,.tsx",
     "lint:fix": "eslint . --ext .ts,.tsx --fix"
   },

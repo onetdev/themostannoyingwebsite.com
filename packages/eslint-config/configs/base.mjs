@@ -9,7 +9,7 @@ import tseslint from 'typescript-eslint';
  *
  * @type {import("eslint").Linter.Config[]}
  * */
-export const baseConfig = [
+export const config = [
   js.configs.recommended,
   {
     plugins: {

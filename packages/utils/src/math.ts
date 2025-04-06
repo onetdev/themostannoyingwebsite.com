@@ -2,11 +2,11 @@ export type Point2d = { x: number; y: number };
 
 export const isPoint2d = (point: TypeNarrowArg): point is Point2d => {
   return (
-    typeof point === 'object' &&
-    'x' in point &&
-    typeof point.x === 'number' &&
-    'y' in point &&
-    typeof point.y === 'number'
+    typeof point === "object" &&
+    "x" in point &&
+    typeof point.x === "number" &&
+    "y" in point &&
+    typeof point.y === "number"
   );
 };
 
@@ -45,9 +45,9 @@ export const getWeightedRandom = <T>(
   const rand = random(0, total);
   let sum = 0;
   for (let i = 0; i < items.length; i++) {
-    sum += items[i].weight;
+    sum += items[i]?.weight ?? 0;
     if (rand <= sum) {
-      return items[i].value;
+      return items[i]?.value;
     }
   }
 };

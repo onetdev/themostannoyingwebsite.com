@@ -1,0 +1,24 @@
+{
+  "name": "@maw/utils",
+  "version": "1.0.0",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "type-check": "tsc --noEmit",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
+    "test": "jest"
+  },
+  "devDependencies": {
+    "@jest/globals": "^29.7.0",
+    "@maw/eslint-config": "workspace:*",
+    "@maw/jest-preset": "workspace:*",
+    "@maw/typescript-config": "workspace:*",
+    "@testing-library/dom": "^10.4.0",
+    "@testing-library/jest-dom": "^6.6.3",
+    "jest": "^29.7.0",
+    "jest-environment-jsdom": "^29.7.0",
+    "ts-jest": "^29.3.1",
+    "typescript": "catalog:"
+  }
+}
