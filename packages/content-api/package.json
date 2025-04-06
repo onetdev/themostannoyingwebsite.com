@@ -1,0 +1,29 @@
+{
+  "name": "@maw/content-api",
+  "version": "0.0.0",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "build:index": "tsx ./scripts/build-index.ts",
+    "build:schema": "tsx ./scripts/build-json-schema.ts",
+    "build": "pnpm build:schema && pnpm build:index",
+    "type-check": "tsc --project tsconfig.json --pretty --noEmit",
+    "lint": "eslint . --ext .ts,.tsx",
+    "lint:fix": "eslint . --ext .ts,.tsx --fix"
+  },
+  "dependencies": {
+    "marked": "^15.0.7",
+    "sanitize-html": "^2.15.0",
+    "yaml": "^2.7.1",
+    "zod": "^3.24.2",
+    "zod-to-json-schema": "^3.24.5"
+  },
+  "devDependencies": {
+    "@types/sanitize-html": "^2.15.0",
+    "sharp": "^0.33.5",
+    "tsx": "catalog:",
+    "typescript": "catalog:",
+    "@maw/typescript-config": "workspace:*",
+    "@maw/eslint-config": "workspace:*"
+  }
+}

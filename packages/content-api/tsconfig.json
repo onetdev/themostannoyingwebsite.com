@@ -1,0 +1,6 @@
+{
+  "extends": "@maw/typescript-config/base",
+  "compilerOptions": {
+    "baseUrl": ".",
+  },
+}

@@ -1,0 +1,57 @@
+{
+  "type": "object",
+  "properties": {
+    "content": {
+      "type": "string"
+    },
+    "directory": {
+      "type": "string"
+    },
+    "hasCoverImage": {
+      "type": "boolean"
+    },
+    "intro": {
+      "type": "string",
+      "description": "It's recommended to keep the intro below 160 characters or less."
+    },
+    "isHighlighted": {
+      "type": "boolean"
+    },
+    "isOnCover": {
+      "type": "boolean"
+    },
+    "locale": {
+      "type": "string"
+    },
+    "publishedAt": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Must be in ISO 8601 format"
+    },
+    "updatedAt": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Must be in ISO 8601 format"
+    },
+    "slug": {
+      "type": "string"
+    },
+    "title": {
+      "type": "string",
+      "description": "It's recommended to keep the title below 80 characters or less."
+    }
+  },
+  "required": [
+    "content",
+    "directory",
+    "hasCoverImage",
+    "isHighlighted",
+    "isOnCover",
+    "locale",
+    "publishedAt",
+    "slug",
+    "title"
+  ],
+  "additionalProperties": false,
+  "$schema": "http://json-schema.org/draft-07/schema#"
+}

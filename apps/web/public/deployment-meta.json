@@ -1,0 +1,14 @@
+{
+  "author": {
+    "name": "Konrad Koller",
+    "email": "info@onet.dev",
+    "url": "https://onet.dev"
+  },
+  "githubUrl": "https://github.com/onetdev/themostannoyingwebsite.com",
+  "contactEmail": "info@themostannoyingwebsite.com",
+  "version": "0.8.0",
+  "publicUrl": "https://localhost:3000",
+  "isLocalDevelopment": "true",
+  "environment": "development",
+  "release": "UNKNOWN_RELEASE"
+}

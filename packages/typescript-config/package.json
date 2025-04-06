@@ -1,0 +1,14 @@
+{
+  "name": "@maw/typescript-config",
+  "version": "0.0.0",
+  "private": true,
+  "license": "MIT",
+  "publishConfig": {
+    "access": "public"
+  },
+  "exports": {
+    "./base": "./configs/base.json",
+    "./next-js": "./configs/next.json",
+    "./react-library": "./configs/react-internal.json"
+  }
+}

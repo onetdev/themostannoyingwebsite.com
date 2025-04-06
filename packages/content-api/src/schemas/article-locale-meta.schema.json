@@ -1,0 +1,25 @@
+{
+  "type": "object",
+  "properties": {
+    "on-cover": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Folder names (IDs) that will appear on the cover"
+    },
+    "highlighted": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Folder names (IDs) that will appear on the cover and in marquee"
+    }
+  },
+  "required": [
+    "on-cover",
+    "highlighted"
+  ],
+  "additionalProperties": false,
+  "$schema": "http://json-schema.org/draft-07/schema#"
+}
