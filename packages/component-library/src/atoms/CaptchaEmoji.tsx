@@ -1,6 +1,6 @@
 import { FunctionComponent, useEffect, useRef, useState } from 'react';
 
-import { Point2d, random } from '@/root/apps/web/src/lib/utils/math';
+import { Point2d, random } from '@maw/utils/math';
 
 export type CaptchaEmojiProps = {
   className?: string;

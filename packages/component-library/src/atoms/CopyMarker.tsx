@@ -1,17 +1,19 @@
 import { ClipboardEvent, FunctionComponent, PropsWithChildren } from 'react';
-import { useTranslations } from 'next-intl';
 
-export type CopyWithUrl = PropsWithChildren<{
+export type CopyMarkerProps = PropsWithChildren<{
   append?: { text: string; html: string } | 'url';
   enabled?: boolean;
+  text: {
+    readMoreAt: string;
+  };
 }>;
 
-const CopyMarker: FunctionComponent<CopyWithUrl> = ({
+const CopyMarker: FunctionComponent<CopyMarkerProps> = ({
   append = 'url',
   children,
   enabled = false,
+  text,
 }) => {
-  const t = useTranslations();
 
   const handleCopy = (e: ClipboardEvent<HTMLDivElement>) => {
     const selection = window.getSelection()?.toString() || '';
@@ -20,11 +22,11 @@ const CopyMarker: FunctionComponent<CopyWithUrl> = ({
       const pageUrl = window.location.href;
       e.clipboardData.setData(
         'text/plain',
-        `${selection}\n\n${t('app.readMoreAt')} ${pageUrl}`,
+        `${selection}\n\n${text.readMoreAt} ${pageUrl}`,
       );
       e.clipboardData.setData(
         'text/html',
-        `${selection}<br /><br />${t('app.readMoreAt')} <a href="${pageUrl}">${pageUrl}</a>`,
+        `${selection}<br /><br />${text.readMoreAt} <a href="${pageUrl}">${pageUrl}</a>`,
       );
     } else {
       e.clipboardData.setData('text/plain', `${selection}${append?.text}`);

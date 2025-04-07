@@ -1,11 +1,14 @@
 import { useTheme } from 'next-themes';
 import { FunctionComponent } from 'react';
-import { useTranslations } from 'next-intl';
 
 export type DarkModeToggleSize = 'md' | 'lg';
 export type DarkModeToggleProps = {
   className?: string;
   size?: DarkModeToggleSize;
+  text: {
+    lightMode: string;
+    darkMode: string;
+  }
 };
 
 const resolveSize = (size: DarkModeToggleSize) => {
@@ -26,8 +29,8 @@ const resolveSize = (size: DarkModeToggleSize) => {
 const DarkModeToggle: FunctionComponent<DarkModeToggleProps> = ({
   className,
   size = 'md',
+  text,
 }) => {
-  const t = useTranslations();
   const { resolvedTheme, setTheme } = useTheme();
   const toggleDarkMode = () => {
     setTheme(resolvedTheme === 'dark' ? 'light' : 'dark');
@@ -43,12 +46,12 @@ const DarkModeToggle: FunctionComponent<DarkModeToggleProps> = ({
       onClick={toggleDarkMode}>
       <SelectOption
         role="img"
-        aria-label={t('settings.userPreferences.themeSwitch.lightMode')}>
+        aria-label={text.lightMode}>
         ☀️
       </SelectOption>
       <SelectOption
         role="img"
-        aria-label={t('settings.userPreferences.themeSwitch.darkMode')}>
+        aria-label={text.darkMode}>
         🌙
       </SelectOption>
     </div>

@@ -1,4 +1,7 @@
 {
   "extends": "@maw/typescript-config/configs/base.json",
+  "compilerOptions": {
+    "baseUrl": ".",
+  },
   "include": ["src"],
 }

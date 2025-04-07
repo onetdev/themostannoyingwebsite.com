@@ -2,7 +2,7 @@ import { DetailedHTMLProps, forwardRef, InputHTMLAttributes } from 'react';
 
 import Icon from './Icon';
 
-import { getRelativeLuminance } from '@/root/apps/web/src/lib/utils/color';
+import { getRelativeLuminance } from '@maw/utils/color';
 
 export type ColorPickerInputSize = 'sm' | 'md' | 'lg';
 export type ColorPickerInputProps = Omit<

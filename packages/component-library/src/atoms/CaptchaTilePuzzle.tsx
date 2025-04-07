@@ -1,7 +1,7 @@
 import { FunctionComponent, useEffect, useMemo, useState } from 'react';
 
-import { arrayShuffle } from '@/root/apps/web/src/lib/utils/array';
-import { isPoint2d, Point2d } from '@/root/apps/web/src/lib/utils/math';
+import { arrayShuffle } from '@maw/utils/array';
+import { isPoint2d, Point2d } from '@maw/utils/math';
 
 interface CaptchaTilePuzzleProps {
   className?: string;

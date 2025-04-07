@@ -9,6 +9,9 @@
     "type-check": "tsc --noEmit"
   },
   "dependencies": {
+    "@fortawesome/fontawesome-svg-core": "^6.7.2",
+    "@fortawesome/free-solid-svg-icons": "^6.7.2",
+    "@fortawesome/react-fontawesome": "^0.2.2",
     "marked": "^15.0.7",
     "react": "catalog:",
     "react-dom": "catalog:",
@@ -20,6 +23,7 @@
   "devDependencies": {
     "@maw/eslint-config": "workspace:*",
     "@maw/typescript-config": "workspace:*",
+    "@maw/utils": "workspace:*",
     "@types/react": "catalog:",
     "@types/react-dom": "catalog:",
     "@types/sanitize-html": "^2.15.0",

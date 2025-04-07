@@ -2,18 +2,22 @@ import { FunctionComponent, useMemo } from 'react';
 
 import { mapToLogScale } from '@maw/utils/math';
 import { mb_string_to_char_array } from '@maw/utils/string';
-import { useTranslations } from 'next-intl';
 
 export type PasswordStrengthBarProps = {
   password: string;
   className?: string;
+  text: {
+    weak: string;
+    okay: string;
+    veryStrong: string;
+  }
 };
 
 const PasswordStrengthBar: FunctionComponent<PasswordStrengthBarProps> = ({
   password,
   className,
+  text,
 }) => {
-  const t = useTranslations();
   const score = useMemo(
     () => mapToLogScale(scorePassword(password || ''), 100, 1),
     [password],
@@ -23,7 +27,7 @@ const PasswordStrengthBar: FunctionComponent<PasswordStrengthBarProps> = ({
     <div className={`flex gap-2 text-sm ${className}`}>
       <div className="w-1/3">
         <div className="h-2 w-full max-w-full rounded bg-error" />
-        {score <= 0.33 && t('form.validation.passwordStrength.weak')}
+        {score <= 0.33 && text.weak}
       </div>
       <div className="w-1/3">
         {score > 0.33 && (
@@ -34,7 +38,7 @@ const PasswordStrengthBar: FunctionComponent<PasswordStrengthBarProps> = ({
         )}
         {score > 0.33 &&
           score <= 0.66 &&
-          t('form.validation.passwordStrength.okay')}
+          text.okay}
       </div>
       <div className="w-1/3">
         {score > 0.66 && (
@@ -43,7 +47,7 @@ const PasswordStrengthBar: FunctionComponent<PasswordStrengthBarProps> = ({
             style={{ width: `${(score - 0.66) * 300}%` }}
           />
         )}
-        {score > 0.66 && t('form.validation.passwordStrength.veryStrong')}
+        {score > 0.66 && text.veryStrong}
       </div>
     </div>
   );

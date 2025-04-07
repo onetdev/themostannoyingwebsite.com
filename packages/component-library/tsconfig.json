@@ -1,7 +1,10 @@
 {
   "extends": "@maw/typescript-config/configs/react-library.json",
   "compilerOptions": {
-    "baseUrl": "."
+    "baseUrl": ".",
   },
-  "include": ["src"],
+  "include": [
+    "src",
+    "src/global.d.ts",
+  ],
 }

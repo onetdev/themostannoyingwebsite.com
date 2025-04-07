@@ -29,15 +29,6 @@ importers:
 
   .:
     dependencies:
-      '@fortawesome/fontawesome-svg-core':
-        specifier: ^6.7.2
-        version: 6.7.2
-      '@fortawesome/free-solid-svg-icons':
-        specifier: ^6.7.2
-        version: 6.7.2
-      '@fortawesome/react-fontawesome':
-        specifier: ^0.2.2
-        version: 0.2.2(@fortawesome/fontawesome-svg-core@6.7.2)(react@19.1.0)
       '@mdx-js/loader':
         specifier: ^3.1.0
         version: 3.1.0(acorn@8.14.1)(webpack@5.98.0(esbuild@0.25.2))
@@ -544,6 +535,15 @@ importers:
 
   packages/component-library:
     dependencies:
+      '@fortawesome/fontawesome-svg-core':
+        specifier: ^6.7.2
+        version: 6.7.2
+      '@fortawesome/free-solid-svg-icons':
+        specifier: ^6.7.2
+        version: 6.7.2
+      '@fortawesome/react-fontawesome':
+        specifier: ^0.2.2
+        version: 0.2.2(@fortawesome/fontawesome-svg-core@6.7.2)(react@19.1.0)
       marked:
         specifier: ^15.0.7
         version: 15.0.7
@@ -572,6 +572,9 @@ importers:
       '@maw/typescript-config':
         specifier: workspace:*
         version: link:../typescript-config
+      '@maw/utils':
+        specifier: workspace:*
+        version: link:../utils
       '@types/react':
         specifier: 'catalog:'
         version: 19.0.12
