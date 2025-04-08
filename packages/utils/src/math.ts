@@ -1,3 +1,5 @@
+import { TypeNarrowArg } from "./types";
+
 export type Point2d = { x: number; y: number };
 
 export const isPoint2d = (point: TypeNarrowArg): point is Point2d => {

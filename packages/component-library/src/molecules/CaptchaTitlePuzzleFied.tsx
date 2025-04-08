@@ -1,25 +1,27 @@
 import { FunctionComponent } from 'react';
 import { FieldErrors, UseFormRegister, UseFormSetValue } from 'react-hook-form';
 
-import CaptchaTilePuzzle from '@/root/apps/web/src/components/atoms/CaptchaTilePuzzle';
-import FormFieldError from '@/root/apps/web/src/components/atoms/FormFieldError';
-import { useTranslations } from 'next-intl';
+import CaptchaTilePuzzle from '@/atoms/CaptchaTilePuzzle';
+import FormFieldError from '@/atoms/FormFieldError';
 
 export type CaptchaTitlePuzzleFieldProps = {
   errors: FieldErrors<CaptchaFormInputs>;
   register: UseFormRegister<CaptchaFormInputs>;
   setValue: UseFormSetValue<CaptchaFormInputs>;
+  text: {
+    label: string;
+    hint: string;
+    invalid: string;
+  }
 };
 
 const CaptchaTitlePuzzleField: FunctionComponent<
   CaptchaTitlePuzzleFieldProps
-> = ({ register, errors, setValue }) => {
-  const t = useTranslations();
-
+> = ({ register, errors, setValue, text }) => {
   return (
     <div className="flex flex-col">
-      <h4 className="mb-1">{t('form.captcha.field')}</h4>
-      <small>{t('form.captcha.captchaTilePuzzleHint')}</small>
+      <h4 className="mb-1">{text.label}</h4>
+      <small>{text.hint}</small>
       <CaptchaTilePuzzle
         className="my-3 rounded-md border border-on-background"
         cols={6}
@@ -30,7 +32,7 @@ const CaptchaTitlePuzzleField: FunctionComponent<
       <input
         type="hidden"
         {...register('captcha', {
-          required: t('form.validation.error.captchaInvalid'),
+          required: text.invalid,
         })}
       />
       <FormFieldError error={errors.captcha} />

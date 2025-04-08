@@ -28,251 +28,19 @@ catalogs:
 importers:
 
   .:
-    dependencies:
-      '@mdx-js/loader':
-        specifier: ^3.1.0
-        version: 3.1.0(acorn@8.14.1)(webpack@5.98.0(esbuild@0.25.2))
-      '@mdx-js/react':
-        specifier: ^3.1.0
-        version: 3.1.0(@types/react@19.0.12)(react@19.1.0)
-      '@next/bundle-analyzer':
-        specifier: ^15.2.4
-        version: 15.2.4
-      '@next/mdx':
-        specifier: ^15.2.4
-        version: 15.2.4(@mdx-js/loader@3.1.0(acorn@8.14.1)(webpack@5.98.0(esbuild@0.25.2)))(@mdx-js/react@3.1.0(@types/react@19.0.12)(react@19.1.0))
-      '@sentry/nextjs':
-        specifier: ^9.10.1
-        version: 9.10.1(@opentelemetry/context-async-hooks@1.30.1(@opentelemetry/api@1.9.0))(@opentelemetry/core@1.30.1(@opentelemetry/api@1.9.0))(@opentelemetry/instrumentation@0.57.2(@opentelemetry/api@1.9.0))(@opentelemetry/sdk-trace-base@1.30.1(@opentelemetry/api@1.9.0))(next@15.2.4(@babel/core@7.26.10)(@opentelemetry/api@1.9.0)(@playwright/test@1.51.1)(react-dom@19.1.0(react@19.1.0))(react@19.1.0))(react@19.1.0)(webpack@5.98.0(esbuild@0.25.2))
-      '@vercel/analytics':
-        specifier: ^1.5.0
-        version: 1.5.0(next@15.2.4(@babel/core@7.26.10)(@opentelemetry/api@1.9.0)(@playwright/test@1.51.1)(react-dom@19.1.0(react@19.1.0))(react@19.1.0))(react@19.1.0)
-      classnames:
-        specifier: ^2.5.1
-        version: 2.5.1
-      color:
-        specifier: ^5.0.0
-        version: 5.0.0
-      eslint-config-next:
-        specifier: ^15.2.4
-        version: 15.2.4(eslint@9.23.0(jiti@2.4.2))(typescript@5.8.2)
-      express:
-        specifier: ^5.1.0
-        version: 5.1.0
-      html-react-parser:
-        specifier: ^5.2.2
-        version: 5.2.2(@types/react@19.0.12)(react@19.1.0)
-      marked:
-        specifier: ^15.0.7
-        version: 15.0.7
-      next:
-        specifier: ^15.2.4
-        version: 15.2.4(@babel/core@7.26.10)(@opentelemetry/api@1.9.0)(@playwright/test@1.51.1)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
-      next-intl:
-        specifier: ^4.0.2
-        version: 4.0.2(next@15.2.4(@babel/core@7.26.10)(@opentelemetry/api@1.9.0)(@playwright/test@1.51.1)(react-dom@19.1.0(react@19.1.0))(react@19.1.0))(react@19.1.0)(typescript@5.8.2)
-      next-themes:
-        specifier: ^0.4.6
-        version: 0.4.6(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
-      react:
-        specifier: 'catalog:'
-        version: 19.1.0
-      react-confetti:
-        specifier: ^6.4.0
-        version: 6.4.0(react@19.1.0)
-      react-dom:
-        specifier: 'catalog:'
-        version: 19.1.0(react@19.1.0)
-      react-fast-marquee:
-        specifier: ^1.6.5
-        version: 1.6.5(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
-      react-hook-form:
-        specifier: ^7.55.0
-        version: 7.55.0(react@19.1.0)
-      react-share:
-        specifier: ^5.2.2
-        version: 5.2.2(react@19.1.0)
-      react-timeago:
-        specifier: ^8.0.0
-        version: 8.0.0(react@19.1.0)
-      react-use:
-        specifier: ^17.6.0
-        version: 17.6.0(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
-      remark-gfm:
-        specifier: ^4.0.1
-        version: 4.0.1
-      rtl-detect:
-        specifier: ^1.1.2
-        version: 1.1.2
-      sanitize-html:
-        specifier: ^2.15.0
-        version: 2.15.0
-      yaml:
-        specifier: ^2.7.1
-        version: 2.7.1
-      zod:
-        specifier: ^3.24.2
-        version: 3.24.2
-      zod-to-json-schema:
-        specifier: ^3.24.5
-        version: 3.24.5(zod@3.24.2)
-      zustand:
-        specifier: ^5.0.3
-        version: 5.0.3(@types/react@19.0.12)(react@19.1.0)
     devDependencies:
-      '@chromatic-com/storybook':
-        specifier: ^3.2.6
-        version: 3.2.6(react@19.1.0)(storybook@8.6.11(prettier@3.5.3))
-      '@commitlint/cli':
-        specifier: ^19.8.0
-        version: 19.8.0(@types/node@22.13.14)(typescript@5.8.2)
-      '@commitlint/config-conventional':
-        specifier: ^19.8.0
-        version: 19.8.0
-      '@eslint/eslintrc':
-        specifier: ^3.3.1
-        version: 3.3.1
-      '@eslint/js':
-        specifier: ^9.23.0
-        version: 9.23.0
-      '@next/eslint-plugin-next':
-        specifier: ^15.2.4
-        version: 15.2.4
       '@playwright/test':
         specifier: ^1.51.1
         version: 1.51.1
-      '@storybook/addon-essentials':
-        specifier: ^8.6.11
-        version: 8.6.11(@types/react@19.0.12)(storybook@8.6.11(prettier@3.5.3))
-      '@storybook/addon-interactions':
-        specifier: ^8.6.11
-        version: 8.6.11(storybook@8.6.11(prettier@3.5.3))
-      '@storybook/addon-links':
-        specifier: ^8.6.11
-        version: 8.6.11(react@19.1.0)(storybook@8.6.11(prettier@3.5.3))
-      '@storybook/addon-onboarding':
-        specifier: ^8.6.11
-        version: 8.6.11(storybook@8.6.11(prettier@3.5.3))
-      '@storybook/addon-themes':
-        specifier: ^8.6.11
-        version: 8.6.11(storybook@8.6.11(prettier@3.5.3))
-      '@storybook/blocks':
-        specifier: ^8.6.11
-        version: 8.6.11(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(storybook@8.6.11(prettier@3.5.3))
-      '@storybook/nextjs':
-        specifier: ^8.6.11
-        version: 8.6.11(esbuild@0.25.2)(next@15.2.4(@babel/core@7.26.10)(@opentelemetry/api@1.9.0)(@playwright/test@1.51.1)(react-dom@19.1.0(react@19.1.0))(react@19.1.0))(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(storybook@8.6.11(prettier@3.5.3))(type-fest@4.39.1)(typescript@5.8.2)(webpack-hot-middleware@2.26.1)(webpack@5.98.0(esbuild@0.25.2))
-      '@storybook/react':
-        specifier: ^8.6.11
-        version: 8.6.11(@storybook/test@8.6.11(storybook@8.6.11(prettier@3.5.3)))(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(storybook@8.6.11(prettier@3.5.3))(typescript@5.8.2)
-      '@storybook/test':
-        specifier: ^8.6.11
-        version: 8.6.11(storybook@8.6.11(prettier@3.5.3))
-      '@testing-library/dom':
-        specifier: ^10.4.0
-        version: 10.4.0
-      '@testing-library/jest-dom':
-        specifier: ^6.6.3
-        version: 6.6.3
-      '@testing-library/react':
-        specifier: ^16.2.0
-        version: 16.2.0(@testing-library/dom@10.4.0)(@types/react-dom@19.0.4(@types/react@19.0.12))(@types/react@19.0.12)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
-      '@types/eslint':
-        specifier: ^9.6.1
-        version: 9.6.1
-      '@types/eslint-config-prettier':
-        specifier: ^6.11.3
-        version: 6.11.3
-      '@types/jest':
-        specifier: ^29.5.14
-        version: 29.5.14
-      '@types/lint-staged':
-        specifier: ^13.3.0
-        version: 13.3.0
-      '@types/mdx':
-        specifier: ^2.0.13
-        version: 2.0.13
-      '@types/node':
-        specifier: ^22.13.14
-        version: 22.13.14
-      '@types/react':
-        specifier: 'catalog:'
-        version: 19.0.12
-      '@types/react-dom':
-        specifier: 'catalog:'
-        version: 19.0.4(@types/react@19.0.12)
-      '@types/react-timeago':
-        specifier: ^4.1.7
-        version: 4.1.7
-      '@types/rtl-detect':
-        specifier: ^1.0.3
-        version: 1.0.3
-      '@types/sanitize-html':
-        specifier: ^2.15.0
-        version: 2.15.0
-      autoprefixer:
-        specifier: ^10.4.21
-        version: 10.4.21(postcss@8.5.3)
-      chromatic:
-        specifier: ^11.27.0
-        version: 11.27.0
-      eslint:
-        specifier: ^9.23.0
-        version: 9.23.0(jiti@2.4.2)
-      eslint-config-prettier:
-        specifier: ^10.1.1
-        version: 10.1.1(eslint@9.23.0(jiti@2.4.2))
-      eslint-plugin-prettier:
-        specifier: ^5.2.5
-        version: 5.2.5(@types/eslint@9.6.1)(eslint-config-prettier@10.1.1(eslint@9.23.0(jiti@2.4.2)))(eslint@9.23.0(jiti@2.4.2))(prettier@3.5.3)
-      eslint-plugin-storybook:
-        specifier: ^0.12.0
-        version: 0.12.0(eslint@9.23.0(jiti@2.4.2))(typescript@5.8.2)
-      eslint-plugin-tailwindcss:
-        specifier: ^3.18.0
-        version: 3.18.0(tailwindcss@3.4.17(ts-node@10.9.2(@types/node@22.13.14)(typescript@5.8.2)))
-      favicons:
-        specifier: ^7.2.0
-        version: 7.2.0
       husky:
         specifier: ^9.1.7
         version: 9.1.7
-      jest:
-        specifier: ^29.7.0
-        version: 29.7.0(@types/node@22.13.14)(ts-node@10.9.2(@types/node@22.13.14)(typescript@5.8.2))
-      jest-environment-jsdom:
-        specifier: ^29.7.0
-        version: 29.7.0
-      lint-staged:
-        specifier: ^15.5.0
-        version: 15.5.0
-      postcss:
-        specifier: ^8.5.3
-        version: 8.5.3
-      prettier:
-        specifier: ^3.5.3
-        version: 3.5.3
-      sharp:
-        specifier: ^0.33.5
-        version: 0.33.5
-      storybook:
-        specifier: ^8.6.11
-        version: 8.6.11(prettier@3.5.3)
-      tailwindcss:
-        specifier: ^3.4.17
-        version: 3.4.17(ts-node@10.9.2(@types/node@22.13.14)(typescript@5.8.2))
-      ts-node:
-        specifier: ^10.9.2
-        version: 10.9.2(@types/node@22.13.14)(typescript@5.8.2)
-      tsx:
-        specifier: ^4.19.3
-        version: 4.19.3
+      turbo:
+        specifier: 2.5.0
+        version: 2.5.0
       typescript:
-        specifier: 5.8.2
-        version: 5.8.2
-      typescript-eslint:
-        specifier: ^8.28.0
-        version: 8.28.0(eslint@9.23.0(jiti@2.4.2))(typescript@5.8.2)
+        specifier: 'catalog:'
+        version: 5.8.3
 
   apps/web:
     dependencies:
@@ -493,9 +261,6 @@ importers:
       favicons:
         specifier: ^7.2.0
         version: 7.2.0
-      husky:
-        specifier: ^9.1.7
-        version: 9.1.7
       jest:
         specifier: ^29.7.0
         version: 29.7.0(@types/node@22.13.14)(ts-node@10.9.2(@types/node@22.13.14)(typescript@5.8.2))
@@ -553,6 +318,12 @@ importers:
       react-dom:
         specifier: 'catalog:'
         version: 19.1.0(react@19.1.0)
+      react-fast-marquee:
+        specifier: ^1.6.5
+        version: 1.6.5(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
+      react-hook-form:
+        specifier: 7.55.0
+        version: 7.55.0(react@19.1.0)
       sanitize-html:
         specifier: ^2.15.0
         version: 2.15.0
@@ -575,6 +346,9 @@ importers:
       '@maw/utils':
         specifier: workspace:*
         version: link:../utils
+      '@types/node':
+        specifier: ^22.13.14
+        version: 22.13.14
       '@types/react':
         specifier: 'catalog:'
         version: 19.0.12
@@ -621,6 +395,9 @@ importers:
       '@types/sanitize-html':
         specifier: ^2.15.0
         version: 2.15.0
+      eslint:
+        specifier: ^9.23.0
+        version: 9.23.0(jiti@2.4.2)
       sharp:
         specifier: ^0.33.5
         version: 0.33.5
@@ -692,11 +469,15 @@ importers:
         version: 29.7.0
       ts-jest:
         specifier: ^29.3.1
-        version: 29.3.1(@babel/core@7.26.10)(@jest/transform@29.7.0)(@jest/types@29.6.3)(babel-jest@29.7.0(@babel/core@7.26.10))(esbuild@0.25.2)(jest@29.7.0(@types/node@22.13.14)(ts-node@10.9.2(@types/node@22.13.14)(typescript@5.8.2)))(typescript@5.8.3)
+        version: 29.3.1(@babel/core@7.26.10)(@jest/transform@29.7.0)(@jest/types@29.6.3)(babel-jest@29.7.0(@babel/core@7.26.10))(jest@29.7.0)(typescript@5.8.3)
 
   packages/typescript-config: {}
 
   packages/utils:
+    dependencies:
+      sanitize-html:
+        specifier: ^2.15.0
+        version: 2.15.0
     devDependencies:
       '@jest/globals':
         specifier: ^29.7.0
@@ -710,12 +491,15 @@ importers:
       '@maw/typescript-config':
         specifier: workspace:*
         version: link:../typescript-config
-      '@testing-library/dom':
-        specifier: ^10.4.0
-        version: 10.4.0
-      '@testing-library/jest-dom':
-        specifier: ^6.6.3
-        version: 6.6.3
+      '@types/jest':
+        specifier: ^29.5.14
+        version: 29.5.14
+      '@types/sanitize-html':
+        specifier: ^2.15.0
+        version: 2.15.0
+      eslint:
+        specifier: ^9.23.0
+        version: 9.23.0(jiti@2.4.2)
       jest:
         specifier: ^29.7.0
         version: 29.7.0(@types/node@22.13.14)(ts-node@10.9.2(@types/node@22.13.14)(typescript@5.8.2))
@@ -724,7 +508,7 @@ importers:
         version: 29.7.0
       ts-jest:
         specifier: ^29.3.1
-        version: 29.3.1(@babel/core@7.26.10)(@jest/transform@29.7.0)(@jest/types@29.6.3)(babel-jest@29.7.0(@babel/core@7.26.10))(esbuild@0.25.2)(jest@29.7.0(@types/node@22.13.14)(ts-node@10.9.2(@types/node@22.13.14)(typescript@5.8.2)))(typescript@5.8.3)
+        version: 29.3.1(@babel/core@7.26.10)(@jest/transform@29.7.0)(@jest/types@29.6.3)(babel-jest@29.7.0(@babel/core@7.26.10))(jest@29.7.0)(typescript@5.8.3)
       typescript:
         specifier: 'catalog:'
         version: 5.8.3
@@ -7372,13 +7156,6 @@ packages:
   typed-array-length@1.0.7:
     resolution: {integrity: sha512-3KS2b+kL7fsuk/eJZ7EQdnEmQoaho/r6KUef7hxvltNA5DR8NAUM+8wJMbJyZ4G9/7i3v5zPBIMN5aybAh2/Jg==}
     engines: {node: '>= 0.4'}
-
-  typescript-eslint@8.28.0:
-    resolution: {integrity: sha512-jfZtxJoHm59bvoCMYCe2BM0/baMswRhMmYhy+w6VfcyHrjxZ0OJe0tGasydCpIpA+A/WIJhTyZfb3EtwNC/kHQ==}
-    engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
-    peerDependencies:
-      eslint: ^8.57.0 || ^9.0.0
-      typescript: '>=4.8.4 <5.9.0'
 
   typescript-eslint@8.29.0:
     resolution: {integrity: sha512-ep9rVd9B4kQsZ7ZnWCVxUE/xDLUUUsRzE0poAeNu+4CkFErLfuvPt/qtm2EpnSyfvsR0S6QzDFSrPCFBwf64fg==}
@@ -15754,7 +15531,7 @@ snapshots:
 
   ts-interface-checker@0.1.13: {}
 
-  ts-jest@29.3.1(@babel/core@7.26.10)(@jest/transform@29.7.0)(@jest/types@29.6.3)(babel-jest@29.7.0(@babel/core@7.26.10))(esbuild@0.25.2)(jest@29.7.0(@types/node@22.13.14)(ts-node@10.9.2(@types/node@22.13.14)(typescript@5.8.2)))(typescript@5.8.3):
+  ts-jest@29.3.1(@babel/core@7.26.10)(@jest/transform@29.7.0)(@jest/types@29.6.3)(babel-jest@29.7.0(@babel/core@7.26.10))(jest@29.7.0)(typescript@5.8.3):
     dependencies:
       bs-logger: 0.2.6
       ejs: 3.1.10
@@ -15773,7 +15550,6 @@ snapshots:
       '@jest/transform': 29.7.0
       '@jest/types': 29.6.3
       babel-jest: 29.7.0(@babel/core@7.26.10)
-      esbuild: 0.25.2
 
   ts-node@10.9.2(@types/node@22.13.14)(typescript@5.8.2):
     dependencies:
@@ -15909,16 +15685,6 @@ snapshots:
       is-typed-array: 1.1.15
       possible-typed-array-names: 1.1.0
       reflect.getprototypeof: 1.0.10
-
-  typescript-eslint@8.28.0(eslint@9.23.0(jiti@2.4.2))(typescript@5.8.2):
-    dependencies:
-      '@typescript-eslint/eslint-plugin': 8.28.0(@typescript-eslint/parser@8.28.0(eslint@9.23.0(jiti@2.4.2))(typescript@5.8.2))(eslint@9.23.0(jiti@2.4.2))(typescript@5.8.2)
-      '@typescript-eslint/parser': 8.28.0(eslint@9.23.0(jiti@2.4.2))(typescript@5.8.2)
-      '@typescript-eslint/utils': 8.28.0(eslint@9.23.0(jiti@2.4.2))(typescript@5.8.2)
-      eslint: 9.23.0(jiti@2.4.2)
-      typescript: 5.8.2
-    transitivePeerDependencies:
-      - supports-color
 
   typescript-eslint@8.29.0(eslint@9.23.0(jiti@2.4.2))(typescript@5.8.2):
     dependencies:

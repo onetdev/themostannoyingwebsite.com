@@ -6,8 +6,8 @@ import React, {
   useState,
 } from 'react';
 
-import { getRelativePosition } from '@/root/apps/web/src/lib/utils/dom';
-import { clamp, random } from '@/root/apps/web/src/lib/utils/math';
+import { getRelativePosition } from '@/utils/dom';
+import { clamp, random } from '@maw/utils/math';
 
 type EscapingElementProps = PropsWithChildren<{
   trigger?: 'hover' | 'activationStart';

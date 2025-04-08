@@ -2,8 +2,8 @@ import React, { FunctionComponent } from 'react';
 
 import DimmerOverlay, {
   type DimmerOverlayProps,
-} from '@/root/apps/web/src/components/atoms/DimmerOverlay';
-import Icon from '@/root/apps/web/src/components/atoms/Icon';
+} from '@/atoms/DimmerOverlay';
+import Icon from '@/atoms/Icon';
 
 export type ModalProps = DimmerOverlayProps & {
   title: string;

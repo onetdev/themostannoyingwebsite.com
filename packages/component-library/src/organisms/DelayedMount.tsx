@@ -5,7 +5,7 @@ import {
   useState,
 } from 'react';
 
-type DelayedMountProps = PropsWithChildren<{
+export type DelayedMountProps = PropsWithChildren<{
   delay: number;
 }>;
 

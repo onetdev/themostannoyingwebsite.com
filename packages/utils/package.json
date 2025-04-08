@@ -9,19 +9,24 @@
     "./math": "./src/math.ts",
     "./string": "./src/string.ts"
   },
+  "types": "./src/index.d.ts",
   "scripts": {
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
     "test": "jest",
     "type-check": "tsc --noEmit"
   },
+  "dependencies": {
+    "sanitize-html": "^2.15.0"
+  },
   "devDependencies": {
     "@jest/globals": "^29.7.0",
     "@maw/eslint-config": "workspace:*",
     "@maw/jest-preset": "workspace:*",
     "@maw/typescript-config": "workspace:*",
-    "@testing-library/dom": "^10.4.0",
-    "@testing-library/jest-dom": "^6.6.3",
+    "@types/jest": "^29.5.14",
+    "@types/sanitize-html": "^2.15.0",
+    "eslint": "^9.23.0",
     "jest": "^29.7.0",
     "jest-environment-jsdom": "^29.7.0",
     "ts-jest": "^29.3.1",

@@ -1,27 +1,31 @@
 import { FunctionComponent } from 'react';
 import { FieldErrors, UseFormRegister } from 'react-hook-form';
 
-import CaptchaEmoji from '@/root/apps/web/src/components/atoms/CaptchaEmoji';
-import FormFieldError from '@/root/apps/web/src/components/atoms/FormFieldError';
-import TextInput from '@/root/apps/web/src/components/atoms/TextInput';
-import { useTranslations } from 'next-intl';
+import CaptchaEmoji from '@/atoms/CaptchaEmoji';
+import FormFieldError from '@/atoms/FormFieldError';
+import TextInput from '@/atoms/TextInput';
 
 export type CaptchaEmojiFieldProps = {
   errors: FieldErrors<CaptchaFormInputs>;
   register: UseFormRegister<CaptchaFormInputs>;
+  text: {
+    label: string;
+    hint: string;
+    required: string;
+    invalid: string;
+  }
 };
 
 const CaptchaEmojiField: FunctionComponent<CaptchaEmojiFieldProps> = ({
   register,
   errors,
+  text
 }) => {
-  const t = useTranslations();
-
   return (
     <div className="flex flex-col">
       <label>
-        <h4 className="mb-1">{t('form.captcha.field')}</h4>
-        <small>{t('form.captcha.captchaEmojiHint')}</small>
+        <h4 className="mb-1">{text.label}</h4>
+        <small>{text.hint}</small>
         <CaptchaEmoji
           className="my-3 rounded-md border border-on-background"
           width={300}
@@ -31,10 +35,10 @@ const CaptchaEmojiField: FunctionComponent<CaptchaEmojiFieldProps> = ({
           type="text"
           className="w-[300px]"
           {...register('captcha', {
-            required: t('form.validation.error.required'),
+            required: text.required,
             pattern: {
               value: /^[XyZ123]{444}$/,
-              message: t('form.validation.error.captchaInvalid'),
+              message: text.invalid,
             },
           })}
         />

@@ -1,7 +1,7 @@
 import { FunctionComponent, PropsWithChildren } from 'react';
 
-import Icon from '@/root/apps/web/src/components/atoms/Icon';
-import Tooltip from '@/root/apps/web/src/components/atoms/Tooltip';
+import Icon from '@/atoms/Icon';
+import Tooltip from '@/atoms/Tooltip';
 
 export type LabeledChildProps = PropsWithChildren<{
   info?: string;

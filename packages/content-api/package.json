@@ -22,6 +22,7 @@
     "@maw/eslint-config": "workspace:*",
     "@maw/typescript-config": "workspace:*",
     "@types/sanitize-html": "^2.15.0",
+    "eslint": "^9.23.0",
     "sharp": "^0.33.5",
     "tsx": "catalog:",
     "typescript": "catalog:"

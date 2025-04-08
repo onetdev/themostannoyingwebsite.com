@@ -1,5 +1,8 @@
 {
   "extends": "@maw/typescript-config/configs/nextjs.json",
+  "compilerOptions": {
+    "baseUrl": "."
+  },
   "include": [
     "**/*.ts",
     "**/*.tsx",

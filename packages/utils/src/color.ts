@@ -1,5 +1,3 @@
-import { useMemo } from 'react';
-
 export type RgbColor = [r: number, g: number, b: number];
 
 const LOW_GAMMA_ADJUST_COEFFICIENT = 1 / 12.92; // low-gamma adjust coefficient
@@ -62,13 +60,12 @@ export const useRelativeLuminance = (
   hexRgb: string,
   stops: [againstDark: string, againstLight: string],
   fallbackHexRgb?: string,
-): string | undefined =>
-  useMemo(() => {
-    let value = getRelativeLuminance(hexRgb);
+): string | undefined => {
+  let value = getRelativeLuminance(hexRgb);
 
-    if (!value && fallbackHexRgb) {
-      value = getRelativeLuminance(fallbackHexRgb);
-    }
+  if (!value && fallbackHexRgb) {
+    value = getRelativeLuminance(fallbackHexRgb);
+  }
 
-    return (value ?? -1) < 0.5 ? stops[0] : stops[1];
-  }, [fallbackHexRgb, hexRgb, stops]);
+  return (value ?? -1) < 0.5 ? stops[0] : stops[1];
+};

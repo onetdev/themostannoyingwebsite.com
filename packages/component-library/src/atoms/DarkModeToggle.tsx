@@ -1,10 +1,11 @@
-import { useTheme } from 'next-themes';
 import { FunctionComponent } from 'react';
 
 export type DarkModeToggleSize = 'md' | 'lg';
 export type DarkModeToggleProps = {
   className?: string;
   size?: DarkModeToggleSize;
+  resolvedTheme: 'light' | 'dark';
+  setTheme: (theme: 'light' | 'dark') => void;
   text: {
     lightMode: string;
     darkMode: string;
@@ -30,8 +31,9 @@ const DarkModeToggle: FunctionComponent<DarkModeToggleProps> = ({
   className,
   size = 'md',
   text,
+  resolvedTheme,
+  setTheme,
 }) => {
-  const { resolvedTheme, setTheme } = useTheme();
   const toggleDarkMode = () => {
     setTheme(resolvedTheme === 'dark' ? 'light' : 'dark');
   };
