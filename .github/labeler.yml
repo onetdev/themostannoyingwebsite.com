@@ -2,13 +2,17 @@ dependencies:
   - changed-files:
     - any-glob-to-any-file:
       - package.json
+      - ./**/package.json
       - pnpm-lock.yaml
       - .nvmrc
+      - .asdfrc
+      - .tool-versions
 
 documentation:
   - changed-files:
     - any-glob-to-any-file:
       - README.md
+      - ./**/README.md
       - .github/pull_request_template.md
 
 storybook:
@@ -29,10 +33,12 @@ ci/cd:
 content:
   - changed-files:
     - any-glob-to-any-file:
-      - public/**
+      - assets/**
+      - apps/web/public/**
 
 ui:
   - changed-files:
     - any-glob-to-any-file:
-      - src/components/**.tsx
-      - src/features/**/components/**.tsx
+      - packages/component-library/**
+      - apps/web/src/components/**.tsx
+      - apps/web/src/features/**/components/**.tsx
