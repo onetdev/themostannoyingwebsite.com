@@ -32,7 +32,7 @@
     "test:coverage": "jest --coverage",
     "test:e2e": "playwright test",
     "test:once": "jest",
-    "type-check": "tsc --project tsconfig.json --pretty --noEmit"
+    "check-types": "tsc --project tsconfig.json --pretty --noEmit"
   },
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^6.7.2",
@@ -73,10 +73,9 @@
   },
   "devDependencies": {
     "@chromatic-com/storybook": "^3.2.6",
-    "@commitlint/cli": "^19.8.0",
-    "@commitlint/config-conventional": "^19.8.0",
     "@eslint/eslintrc": "^3.3.1",
     "@eslint/js": "^9.23.0",
+    "@maw/eslint-config": "workspace:^",
     "@maw/typescript-config": "workspace:",
     "@next/eslint-plugin-next": "^15.2.4",
     "@playwright/test": "^1.51.1",
@@ -105,7 +104,7 @@
     "@types/sanitize-html": "^2.15.0",
     "autoprefixer": "^10.4.21",
     "chromatic": "^11.27.0",
-    "eslint": "^9.23.0",
+    "eslint": "catalog:",
     "eslint-config-prettier": "^10.1.1",
     "eslint-plugin-prettier": "^5.2.5",
     "eslint-plugin-storybook": "^0.12.0",
@@ -113,7 +112,6 @@
     "favicons": "^7.2.0",
     "jest": "^29.7.0",
     "jest-environment-jsdom": "^29.7.0",
-    "lint-staged": "^15.5.0",
     "postcss": "^8.5.3",
     "prettier": "^3.5.3",
     "sharp": "^0.33.5",

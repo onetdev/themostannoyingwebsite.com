@@ -32,15 +32,19 @@
     "dev": "turbo run dev",
     "format": "prettier --write \"**/*.{ts,tsx,md}\"",
     "lint": "turbo run lint",
+    "lint:fix": "turbo run lint:fix",
     "prepare": "husky",
     "test:e2e": "playwright test",
     "test:watch": "jest --watch",
     "test": "turbo run test"
   },
   "devDependencies": {
-    "typescript": "catalog:",
-    "turbo": "2.5.0",
+    "@commitlint/cli": "^19.8.0",
+    "@commitlint/config-conventional": "^19.8.0",
+    "@playwright/test": "^1.51.1",
     "husky": "^9.1.7",
-    "@playwright/test": "^1.51.1"
+    "lint-staged": "^15.5.0",
+    "turbo": "2.5.0",
+    "typescript": "catalog:"
   }
 }

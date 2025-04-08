@@ -6,7 +6,7 @@
   "scripts": {
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
-    "type-check": "tsc --noEmit"
+    "check-types": "tsc --noEmit"
   },
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^6.7.2",
@@ -30,6 +30,7 @@
     "@types/react": "catalog:",
     "@types/react-dom": "catalog:",
     "@types/sanitize-html": "^2.15.0",
+    "eslint": "catalog:",
     "sharp": "^0.33.5",
     "tsx": "catalog:",
     "typescript": "catalog:"

@@ -1,6 +1,6 @@
 # dependencies
 node_modules/
-/.pnp
+.pnp
 .pnp.js
 
 # next.js
@@ -18,14 +18,21 @@ node_modules/
 *.pem
 .eslintcache
 
+# Turbo
+.turbo
+
 # debug
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 .pnpm-debug.log*
 
-# local env files
-.env*.local
+# Local env files
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
 
 # vercel
 .vercel
