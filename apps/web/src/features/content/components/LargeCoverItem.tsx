@@ -1,10 +1,10 @@
 import Image from 'next/image';
-import { Link } from '@/root/apps/web/src/i18n/navigation';
+import { Link } from '@/i18n/navigation';
 import { FunctionComponent } from 'react';
 
 import { CoverPlaceholder } from './CoverPlaceholder';
 
-import { type ArticleDatum } from '@/root/apps/web/src/features/content';
+import { type ArticleDatum } from '@/features/content';
 import { useTranslations } from 'next-intl';
 
 type LargeCoverItemProps = JSXProxyProps<'article'> & {

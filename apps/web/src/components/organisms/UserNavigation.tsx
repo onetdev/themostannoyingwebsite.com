@@ -1,10 +1,10 @@
 'use client';
 
-import { Link } from '@/root/apps/web/src/i18n/navigation';
+import { Link } from '@/i18n/navigation';
 import { FunctionComponent, useMemo, useState } from 'react';
 
-import Icon from '@/root/apps/web/src/components/atoms/Icon';
-import ShareModal from '@/root/apps/web/src/components/organisms/ShareModal';
+import { Icon } from '@maw/ui';
+import ShareModal from '@/components/organisms/ShareModal';
 import { useTranslations } from 'next-intl';
 
 export type UserNavigationProps = {

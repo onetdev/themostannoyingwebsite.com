@@ -2,11 +2,11 @@
 
 import { FunctionComponent } from 'react';
 
-import useDocumentVisibilityListener from '@/root/apps/web/src/lib/hooks/useDocumentVisibilityListener';
-import useFirstInteractionListener from '@/root/apps/web/src/lib/hooks/useFirstInteractionListener';
-import useNavigationStats from '@/root/apps/web/src/lib/hooks/useNavigationStats';
-import useReducedMotionListener from '@/root/apps/web/src/lib/hooks/useReducedMotionListener';
-import useServiceWorker from '@/root/apps/web/src/lib/hooks/useServiceWorker';
+import useDocumentVisibilityListener from '@/lib/hooks/useDocumentVisibilityListener';
+import useFirstInteractionListener from '@/lib/hooks/useFirstInteractionListener';
+import useNavigationStats from '@/lib/hooks/useNavigationStats';
+import useReducedMotionListener from '@/lib/hooks/useReducedMotionListener';
+import useServiceWorker from '@/lib/hooks/useServiceWorker';
 
 const ClientServiceProvider: FunctionComponent = () => {
   useServiceWorker();

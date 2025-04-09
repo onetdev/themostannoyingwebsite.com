@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { fn } from '@storybook/test';
 
-import TextInput from '@/root/apps/web/src/components/atoms/TextInput';
+import { TextInput } from '@maw/ui';
 
 const meta = {
   title: 'Example/TextInput',

@@ -3,8 +3,8 @@
 import HTMLReactParser from 'html-react-parser';
 import Image from 'next/image';
 
-import { ArticleDatum, PartitionalLockedContent } from '@/root/apps/web/src/features/content';
-import { useExperienceFlagsStore } from '@/root/apps/web/src/lib/state/experience_flags';
+import { ArticleDatum, PartitionalLockedContent } from '@/features/content';
+import { useExperienceFlagsStore } from '@/lib/state/experience_flags';
 import styles from '@/styles/content.module.css';
 import { useTranslations } from 'next-intl';
 

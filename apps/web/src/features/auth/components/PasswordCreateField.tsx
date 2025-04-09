@@ -1,9 +1,7 @@
 import { FunctionComponent } from 'react';
 
-import FormFieldError from '@/root/apps/web/src/components/atoms/FormFieldError';
-import PasswordStrengthBar from '@/root/apps/web/src/components/atoms/PasswordStrengthBar';
-import TextInput from '@/root/apps/web/src/components/atoms/TextInput';
-import { type CommonRegistrationFormFieldProps } from '@/root/apps/web/src/features/auth';
+import { FormFieldError, PasswordStrengthBar, TextInput } from '@maw/ui';
+import { type CommonRegistrationFormFieldProps } from '@/features/auth';
 import { useTranslations } from 'next-intl';
 
 type PasswordCreateFieldProps = Pick<

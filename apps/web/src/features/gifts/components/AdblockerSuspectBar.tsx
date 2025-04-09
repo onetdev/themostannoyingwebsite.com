@@ -2,8 +2,8 @@
 
 import { FunctionComponent, useState } from 'react';
 
-import { useRuntimeStore } from '@/root/apps/web/src/lib/state/runtime';
-import { useUserGrantsStore } from '@/root/apps/web/src/lib/state/user_grants';
+import { useRuntimeStore } from '@/lib/state/runtime';
+import { useUserGrantsStore } from '@/lib/state/user_grants';
 import { useTranslations } from 'next-intl';
 
 const AdblockerSuspectBar: FunctionComponent = () => {

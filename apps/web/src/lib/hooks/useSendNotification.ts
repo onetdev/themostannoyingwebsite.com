@@ -1,10 +1,10 @@
 import { useCallback } from 'react';
 
-import { isBrowser } from '@/root/apps/web/src/lib/utils/dom';
+import { isBrowser } from '@maw/ui/utils';
 import {
   getNotificationPermissionState,
   requestNotificationPermission,
-} from '@/root/apps/web/src/lib/utils/permission';
+} from '@/lib/utils/permission';
 
 type UseSendNotificationProps = {
   autoRequest?: boolean;

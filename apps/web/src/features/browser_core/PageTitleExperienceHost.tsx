@@ -6,8 +6,8 @@ import ArrayPagedTitle from './components/ArrayPagedTitle';
 import GlitchyTitle from './components/GlitchyTitle';
 import MarqueeTitle from './components/MarqueeTitle';
 
-import { useExperienceFlagsStore } from '@/root/apps/web/src/lib/state/experience_flags';
-import { useRuntimeStore } from '@/root/apps/web/src/lib/state/runtime';
+import { useExperienceFlagsStore } from '@/lib/state/experience_flags';
+import { useRuntimeStore } from '@/lib/state/runtime';
 import { useMessages, useTranslations } from 'next-intl';
 
 /**

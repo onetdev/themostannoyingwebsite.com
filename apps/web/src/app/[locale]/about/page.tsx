@@ -1,11 +1,11 @@
 import { Metadata } from 'next';
 
-import PageHeadline from '@/root/apps/web/src/components/atoms/PageHeadline';
+import { PageHeadline } from '@maw/ui';
 import styles from '@/styles/content.module.css';
 import { getTranslations } from 'next-intl/server';
 import { notFound } from 'next/navigation';
 
-export { generateStaticParams } from '@/root/apps/web/src/i18n/routing';
+export { generateStaticParams } from '@/i18n/routing';
 export const revalidate = 1800;
 
 export async function generateMetadata({ params }: NextPageProps): Promise<Metadata> {
@@ -32,7 +32,7 @@ export default async function Page({ params }: NextPageProps) {
         <div className={styles['content']}><Content /></div>
       </main>
     );
-  } catch (error) {
+  } catch (_err) {
     return notFound();
   }
 };

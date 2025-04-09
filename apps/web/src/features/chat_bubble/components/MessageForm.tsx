@@ -1,8 +1,6 @@
 import { FormEventHandler, FunctionComponent, useRef } from 'react';
 
-import Button from '@/root/apps/web/src/components/atoms/Button';
-import Icon from '@/root/apps/web/src/components/atoms/Icon';
-import TextInput from '@/root/apps/web/src/components/atoms/TextInput';
+import { Button, Icon, TextInput } from '@maw/ui';
 import { useTranslations } from 'next-intl';
 
 export type MessageFormProps = {

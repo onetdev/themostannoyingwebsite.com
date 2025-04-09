@@ -1,8 +1,8 @@
 import type { MetadataRoute } from 'next';
 import { Languages } from 'next/dist/lib/metadata/types/alternative-urls-types';
 
-import config from '@/root/apps/web/src/config';
-import { ArticleIndexEntrySchema } from '@/root/packages/content-api/src/schemas/article-index-entry';
+import config from '@/config';
+import { ArticleIndexEntrySchema } from '@maw/content-api/schemas/article-index-entry';
 import articlesRaw from '@/root/apps/web/public/assets/articles/index.json';
 import i18nConfig from '@/root/apps/web/i18n.config';
 

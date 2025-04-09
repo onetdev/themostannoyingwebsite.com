@@ -1,12 +1,10 @@
-import { Link } from '@/root/apps/web/src/i18n/navigation';
+import { Link } from '@/i18n/navigation';
 import { FunctionComponent } from 'react';
 
-import DarkModeToggle from '@/root/apps/web/src/components/atoms/DarkModeToggle';
-import Icon from '@/root/apps/web/src/components/atoms/Icon';
-import MarqueeText from '@/root/apps/web/src/components/molecules/MarqueeText';
-import MainNavigation from '@/root/apps/web/src/components/organisms/MainNavigation';
-import SearchForm from '@/root/apps/web/src/components/organisms/SearchForm';
-import UserNavigation from '@/root/apps/web/src/components/organisms/UserNavigation';
+import { Icon, DarkModeToggle, MarqueeText } from '@maw/ui';
+import MainNavigation from '@/components/organisms/MainNavigation';
+import SearchForm from '@/components/organisms/SearchForm';
+import UserNavigation from '@/components/organisms/UserNavigation';
 import { useTranslations } from 'next-intl';
 
 const Header: FunctionComponent = () => {

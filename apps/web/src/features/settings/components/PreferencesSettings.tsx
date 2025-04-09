@@ -3,11 +3,9 @@
 import { useTheme } from 'next-themes';
 import { FunctionComponent } from 'react';
 
-import FormCheckbox from '@/root/apps/web/src/components/atoms/Checkbox';
-import LabeledChild from '@/root/apps/web/src/components/molecules/LabeledChild';
-import BorderedBox from '@/root/apps/web/src/components/templates/BorderedBox';
-import { useRuntimeStore } from '@/root/apps/web/src/lib/state/runtime';
-import { useUserPreferencesStore } from '@/root/apps/web/src/lib/state/user_preferences';
+import { Checkbox as FormCheckbox, LabeledChild, BorderedBox } from '@maw/ui';
+import { useRuntimeStore } from '@/lib/state/runtime';
+import { useUserPreferencesStore } from '@/lib/state/user_preferences';
 import { useTranslations } from 'next-intl';
 
 const PreferencesSettings: FunctionComponent = () => {

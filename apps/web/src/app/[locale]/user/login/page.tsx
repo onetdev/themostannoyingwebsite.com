@@ -2,7 +2,7 @@ import { getTranslations } from 'next-intl/server';
 import { LoginPage } from './login-page';
 import { Metadata } from 'next';
 
-export { generateStaticParams } from '@/root/apps/web/src/i18n/routing';
+export { generateStaticParams } from '@/i18n/routing';
 export const revalidate = 1800;
 
 export async function generateMetadata({ params }: NextPageProps): Promise<Metadata> {

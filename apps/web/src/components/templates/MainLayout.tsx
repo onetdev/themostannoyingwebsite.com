@@ -3,18 +3,18 @@
 import { Analytics } from '@vercel/analytics/react';
 import { FunctionComponent } from 'react';
 
-import CookieConsent from '@/root/apps/web/src/components/organisms/CookieConsent';
-import Footer from '@/root/apps/web/src/components/organisms/Footer';
-import Header from '@/root/apps/web/src/components/organisms/Header';
-import { ChatBubbleHost } from '@/root/apps/web/src/features/chat_bubble';
-import { ContainerGiftFlaps } from '@/root/apps/web/src/features/gifts';
-import { AdblockerSuspectBar } from '@/root/apps/web/src/features/gifts';
+import CookieConsent from '@/components/organisms/CookieConsent';
+import Footer from '@/components/organisms/Footer';
+import Header from '@/components/organisms/Header';
+import { ChatBubbleHost } from '@/features/chat_bubble';
+import { ContainerGiftFlaps } from '@/features/gifts';
+import { AdblockerSuspectBar } from '@/features/gifts';
 import {
   DeadPixelHost,
   StickyVideoExperienceHost,
-} from '@/root/apps/web/src/features/obstruction_decor';
-import { WheelOfFortuneHost } from '@/root/apps/web/src/features/wheel_of_fortune';
-import { useExperienceFlagsStore } from '@/root/apps/web/src/lib/state/experience_flags';
+} from '@/features/obstruction_decor';
+import { WheelOfFortuneHost } from '@/features/wheel_of_fortune';
+import { useExperienceFlagsStore } from '@/lib/state/experience_flags';
 
 type MainLayoutProps = JSXProxyProps<'div'>;
 

@@ -3,8 +3,7 @@
 import Image from 'next/image';
 import { useEffect, useRef, useState } from 'react';
 
-import Icon from '@/root/apps/web/src/components/atoms/Icon';
-import PageHeadline from '@/root/apps/web/src/components/atoms/PageHeadline';
+import { Icon, PageHeadline } from '@maw/ui';
 import { useTranslations } from 'next-intl';
 
 export default function HotThingsPage() {

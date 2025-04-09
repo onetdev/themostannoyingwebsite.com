@@ -1,11 +1,10 @@
 import { FunctionComponent, useMemo } from 'react';
 
-import FormFieldError from '@/root/apps/web/src/components/atoms/FormFieldError';
-import Select from '@/root/apps/web/src/components/atoms/Select';
+import { FormFieldError, Select } from '@maw/ui';
 import {
   CommonRegistrationFormFieldProps,
   userGenderList,
-} from '@/root/apps/web/src/features/auth';
+} from '@/features/auth';
 import { useTranslations } from 'next-intl';
 
 type GenderFieldProps = Pick<

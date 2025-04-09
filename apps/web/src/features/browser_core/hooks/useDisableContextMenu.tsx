@@ -1,6 +1,6 @@
 import { useCallback, useEffect } from 'react';
 
-import { useExperienceFlagsStore } from '@/root/apps/web/src/lib/state/experience_flags';
+import { useExperienceFlagsStore } from '@/lib/state/experience_flags';
 import { useTranslations } from 'next-intl';
 
 const useDisableContextMenu = () => {

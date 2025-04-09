@@ -2,9 +2,9 @@
 
 import { FunctionComponent, useEffect, useRef, useState } from 'react';
 
-import Icon from '@/root/apps/web/src/components/atoms/Icon';
-import { useExperienceFlagsStore } from '@/root/apps/web/src/lib/state/experience_flags';
-import { useUserGrantsStore } from '@/root/apps/web/src/lib/state/user_grants';
+import { Icon } from '@maw/ui';
+import { useExperienceFlagsStore } from '@/lib/state/experience_flags';
+import { useUserGrantsStore } from '@/lib/state/user_grants';
 import { useTranslations } from 'next-intl';
 
 const StickyVideoExperienceHost: FunctionComponent = () => {

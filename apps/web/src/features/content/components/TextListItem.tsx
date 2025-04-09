@@ -1,7 +1,7 @@
-import { Link } from '@/root/apps/web/src/i18n/navigation';
+import { Link } from '@/i18n/navigation';
 import { FunctionComponent } from 'react';
 
-import { type ArticleDatum } from '@/root/apps/web/src/features/content';
+import { type ArticleDatum } from '@/features/content';
 
 type TextListItemProps = JSXProxyProps<'article'> & {
   article: ArticleDatum;

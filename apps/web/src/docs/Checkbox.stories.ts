@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { fn } from '@storybook/test';
 
-import Checkbox from '@/root/apps/web/src/components/atoms/Checkbox';
+import Checkbox from '@maw/ui/atoms/Checkbox';
 
 const meta = {
   title: 'Example/Checkbox',

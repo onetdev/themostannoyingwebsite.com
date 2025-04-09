@@ -7,9 +7,9 @@ import {
   useEffect,
 } from 'react';
 
-import Icon from '@/root/apps/web/src/components/atoms/Icon';
-import HistoryOverlay from '@/root/apps/web/src/features/chat_bubble/components/HistoryOverlay';
-import useChatBubbleHistory from '@/root/apps/web/src/features/chat_bubble/hooks/useChatBubbleHistory';
+import { Icon } from '@maw/ui';
+import HistoryOverlay from '@/features/chat_bubble/components/HistoryOverlay';
+import useChatBubbleHistory from '@/features/chat_bubble/hooks/useChatBubbleHistory';
 
 /**
  * This component should start off with an initial message so that we

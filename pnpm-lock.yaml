@@ -68,6 +68,15 @@ importers:
       '@fortawesome/react-fontawesome':
         specifier: ^0.2.2
         version: 0.2.2(@fortawesome/fontawesome-svg-core@6.7.2)(react@19.1.0)
+      '@maw/content-api':
+        specifier: workspace:^
+        version: link:../../packages/content-api
+      '@maw/ui':
+        specifier: workspace:^
+        version: link:../../packages/ui
+      '@maw/utils':
+        specifier: workspace:^
+        version: link:../../packages/utils
       '@mdx-js/loader':
         specifier: ^3.1.0
         version: 3.1.0(acorn@8.14.1)(webpack@5.98.0(esbuild@0.25.2))
@@ -171,6 +180,9 @@ importers:
       '@maw/eslint-config':
         specifier: workspace:^
         version: link:../../packages/eslint-config
+      '@maw/jest-preset':
+        specifier: workspace:^
+        version: link:../../packages/jest-preset
       '@maw/typescript-config':
         specifier: 'workspace:'
         version: link:../../packages/typescript-config
@@ -307,79 +319,6 @@ importers:
         specifier: ^8.28.0
         version: 8.29.0(eslint@9.24.0(jiti@2.4.2))(typescript@5.8.2)
 
-  packages/component-library:
-    dependencies:
-      '@fortawesome/fontawesome-svg-core':
-        specifier: ^6.7.2
-        version: 6.7.2
-      '@fortawesome/free-solid-svg-icons':
-        specifier: ^6.7.2
-        version: 6.7.2
-      '@fortawesome/react-fontawesome':
-        specifier: ^0.2.2
-        version: 0.2.2(@fortawesome/fontawesome-svg-core@6.7.2)(react@19.1.0)
-      marked:
-        specifier: ^15.0.7
-        version: 15.0.7
-      react:
-        specifier: 'catalog:'
-        version: 19.1.0
-      react-dom:
-        specifier: 'catalog:'
-        version: 19.1.0(react@19.1.0)
-      react-fast-marquee:
-        specifier: ^1.6.5
-        version: 1.6.5(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
-      react-hook-form:
-        specifier: 7.55.0
-        version: 7.55.0(react@19.1.0)
-      sanitize-html:
-        specifier: ^2.15.0
-        version: 2.15.0
-      yaml:
-        specifier: ^2.7.1
-        version: 2.7.1
-      zod:
-        specifier: ^3.24.2
-        version: 3.24.2
-      zod-to-json-schema:
-        specifier: ^3.24.5
-        version: 3.24.5(zod@3.24.2)
-    devDependencies:
-      '@maw/eslint-config':
-        specifier: workspace:*
-        version: link:../eslint-config
-      '@maw/typescript-config':
-        specifier: workspace:*
-        version: link:../typescript-config
-      '@maw/utils':
-        specifier: workspace:*
-        version: link:../utils
-      '@types/node':
-        specifier: ^22.13.14
-        version: 22.13.14
-      '@types/react':
-        specifier: 'catalog:'
-        version: 19.0.12
-      '@types/react-dom':
-        specifier: 'catalog:'
-        version: 19.0.4(@types/react@19.0.12)
-      '@types/sanitize-html':
-        specifier: ^2.15.0
-        version: 2.15.0
-      eslint:
-        specifier: 'catalog:'
-        version: 9.24.0(jiti@2.4.2)
-      sharp:
-        specifier: ^0.33.5
-        version: 0.33.5
-      tsx:
-        specifier: 'catalog:'
-        version: 4.19.3
-      typescript:
-        specifier: 'catalog:'
-        version: 5.8.3
-
   packages/content-api:
     dependencies:
       marked:
@@ -404,6 +343,9 @@ importers:
       '@maw/typescript-config':
         specifier: workspace:*
         version: link:../typescript-config
+      '@maw/utils':
+        specifier: workspace:*
+        version: link:../utils
       '@types/sanitize-html':
         specifier: ^2.15.0
         version: 2.15.0
@@ -487,6 +429,79 @@ importers:
         version: 29.3.1(@babel/core@7.26.10)(@jest/transform@29.7.0)(@jest/types@29.6.3)(babel-jest@29.7.0(@babel/core@7.26.10))(jest@29.7.0(@types/node@22.13.14))(typescript@5.8.3)
 
   packages/typescript-config: {}
+
+  packages/ui:
+    dependencies:
+      '@fortawesome/fontawesome-svg-core':
+        specifier: ^6.7.2
+        version: 6.7.2
+      '@fortawesome/free-solid-svg-icons':
+        specifier: ^6.7.2
+        version: 6.7.2
+      '@fortawesome/react-fontawesome':
+        specifier: ^0.2.2
+        version: 0.2.2(@fortawesome/fontawesome-svg-core@6.7.2)(react@19.1.0)
+      marked:
+        specifier: ^15.0.7
+        version: 15.0.7
+      react:
+        specifier: 'catalog:'
+        version: 19.1.0
+      react-dom:
+        specifier: 'catalog:'
+        version: 19.1.0(react@19.1.0)
+      react-fast-marquee:
+        specifier: ^1.6.5
+        version: 1.6.5(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
+      react-hook-form:
+        specifier: 7.55.0
+        version: 7.55.0(react@19.1.0)
+      sanitize-html:
+        specifier: ^2.15.0
+        version: 2.15.0
+      yaml:
+        specifier: ^2.7.1
+        version: 2.7.1
+      zod:
+        specifier: ^3.24.2
+        version: 3.24.2
+      zod-to-json-schema:
+        specifier: ^3.24.5
+        version: 3.24.5(zod@3.24.2)
+    devDependencies:
+      '@maw/eslint-config':
+        specifier: workspace:*
+        version: link:../eslint-config
+      '@maw/typescript-config':
+        specifier: workspace:*
+        version: link:../typescript-config
+      '@maw/utils':
+        specifier: workspace:*
+        version: link:../utils
+      '@types/node':
+        specifier: ^22.13.14
+        version: 22.13.14
+      '@types/react':
+        specifier: 'catalog:'
+        version: 19.0.12
+      '@types/react-dom':
+        specifier: 'catalog:'
+        version: 19.0.4(@types/react@19.0.12)
+      '@types/sanitize-html':
+        specifier: ^2.15.0
+        version: 2.15.0
+      eslint:
+        specifier: 'catalog:'
+        version: 9.24.0(jiti@2.4.2)
+      sharp:
+        specifier: ^0.33.5
+        version: 0.33.5
+      tsx:
+        specifier: 'catalog:'
+        version: 4.19.3
+      typescript:
+        specifier: 'catalog:'
+        version: 5.8.3
 
   packages/utils:
     dependencies:

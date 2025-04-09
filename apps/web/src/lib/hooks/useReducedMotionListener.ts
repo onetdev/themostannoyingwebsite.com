@@ -1,6 +1,6 @@
 import { useCallback, useEffect } from 'react';
 
-import { useRuntimeStore } from '@/root/apps/web/src/lib/state/runtime';
+import { useRuntimeStore } from '@/lib/state/runtime';
 
 const useReducedMotionListener = () => {
   const setStoreState = useRuntimeStore((state) => state.setReducedMotion);

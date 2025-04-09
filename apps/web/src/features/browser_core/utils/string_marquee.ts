@@ -1,4 +1,4 @@
-import { mb_string_to_char_array } from '@/root/apps/web/src/lib/utils/string';
+import { mb_string_to_char_array } from '@maw/utils/string';
 
 type StringMarqueeOpts = {
   width?: number;

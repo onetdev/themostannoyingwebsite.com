@@ -1,8 +1,7 @@
 import { FunctionComponent, useEffect, useMemo, useState } from 'react';
 
-import FormFieldError from '@/root/apps/web/src/components/atoms/FormFieldError';
-import Select from '@/root/apps/web/src/components/atoms/Select';
-import { type CommonRegistrationFormFieldProps } from '@/root/apps/web/src/features/auth';
+import { FormFieldError, Select } from '@maw/ui';
+import { type CommonRegistrationFormFieldProps } from '@/features/auth';
 import { useMessages, useTranslations } from 'next-intl';
 
 type DateOfBirthFieldProps = Pick<
@@ -45,9 +44,9 @@ const DateOfBirthField: FunctionComponent<DateOfBirthFieldProps> = ({
     }));
   }, []);
 
-  const onYearChange = (value: string) => setParts({ ...parts, year: value });
-  const onMonthChange = (value: string) => setParts({ ...parts, month: value });
-  const onDayChange = (value: string) => setParts({ ...parts, day: value });
+  const onYearChange = (value?: string) => setParts({ ...parts, year: value ?? '' });
+  const onMonthChange = (value?: string) => setParts({ ...parts, month: value ?? '' });
+  const onDayChange = (value?: string) => setParts({ ...parts, day: value ?? "" });
 
   useEffect(() => {
     const anyEmpty = !parts.year || !parts.month || !parts.day;

@@ -1,14 +1,9 @@
 'use client';
 
-import { Link } from '@/root/apps/web/src/i18n/navigation';
+import { Link } from '@/i18n/navigation';
 import { SubmitHandler, useForm, UseFormRegister } from 'react-hook-form';
 
-import Button from '@/root/apps/web/src/components/atoms/Button';
-import Checkbox from '@/root/apps/web/src/components/atoms/Checkbox';
-import FormFieldError from '@/root/apps/web/src/components/atoms/FormFieldError';
-import PageHeadline from '@/root/apps/web/src/components/atoms/PageHeadline';
-import TextInput from '@/root/apps/web/src/components/atoms/TextInput';
-import CaptchaEmojiField from '@/root/apps/web/src/components/molecules/CaptchaEmojiField';
+import { Button, Checkbox, FormFieldError, TextInput, CaptchaEmojiField, PageHeadline } from '@maw/ui';
 import {
   CountryField,
   DateOfBirthField,
@@ -16,8 +11,8 @@ import {
   PasswordCreateField,
   PhoneNumberField,
   RegistrationFormInputs,
-} from '@/root/apps/web/src/features/auth';
-import { EMAIL_PATTERN } from '@/root/apps/web/src/lib/utils/validator';
+} from '@/features/auth';
+import { EMAIL_PATTERN } from '@/lib/utils/validator';
 import { useTranslations } from 'next-intl';
 
 export function RegistrationPage() {

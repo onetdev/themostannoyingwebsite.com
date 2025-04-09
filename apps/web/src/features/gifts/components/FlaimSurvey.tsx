@@ -3,13 +3,10 @@
 import { useRouter } from 'next/navigation';
 import { FunctionComponent, useEffect, useMemo, useState } from 'react';
 
-import Button from '@/root/apps/web/src/components/atoms/Button';
-import RadioButton from '@/root/apps/web/src/components/atoms/RadioButton';
-import LabeledChild from '@/root/apps/web/src/components/molecules/LabeledChild';
-import BorderedBox from '@/root/apps/web/src/components/templates/BorderedBox';
-import { FlaimSurveyQuestion } from '@/root/apps/web/src/features/gifts';
-import { useRuntimeStore } from '@/root/apps/web/src/lib/state/runtime';
-import { arrayShuffle } from '@/root/apps/web/src/lib/utils/array';
+import { Button, RadioButton, LabeledChild, BorderedBox } from '@maw/ui';
+import { FlaimSurveyQuestion } from '@/features/gifts';
+import { useRuntimeStore } from '@/lib/state/runtime';
+import { arrayShuffle } from '@maw/utils/array';
 import { useMessages, useTranslations } from 'next-intl';
 
 export type FlaimSurveryProps = { className?: string; timeInSeconds?: number };

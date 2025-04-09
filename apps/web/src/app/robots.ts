@@ -1,6 +1,6 @@
 import type { MetadataRoute } from 'next';
 
-import config from '@/root/apps/web/src/config';
+import config from '@/config';
 
 export default function robots(): MetadataRoute.Robots {
   return {

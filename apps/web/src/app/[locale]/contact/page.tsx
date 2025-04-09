@@ -1,10 +1,10 @@
 import { Metadata } from 'next';
 
-import PageHeadline from '@/root/apps/web/src/components/atoms/PageHeadline';
-import config from '@/root/apps/web/src/config';
+import { PageHeadline } from '@maw/ui';
+import config from '@/config';
 import { getTranslations } from 'next-intl/server';
 
-export { generateStaticParams } from '@/root/apps/web/src/i18n/routing';
+export { generateStaticParams } from '@/i18n/routing';
 export const revalidate = 1800;
 
 export async function generateMetadata({ params }: NextPageProps): Promise<Metadata> {

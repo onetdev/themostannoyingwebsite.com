@@ -1,16 +1,16 @@
 'use client';
 
 import HTMLReactParser from 'html-react-parser';
-import { Link } from '@/root/apps/web/src/i18n/navigation';
+import { Link } from '@/i18n/navigation';
 import { useCallback, useEffect, useMemo, useState } from 'react';
 
-import DotDotDotText from '@/root/apps/web/src/components/atoms/DotDotDotText';
-import PageHeadline from '@/root/apps/web/src/components/atoms/PageHeadline';
-import SearchForm from '@/root/apps/web/src/components/organisms/SearchForm';
-import { ArticleSearchResult, ArticleService } from '@/root/apps/web/src/features/content';
-import { useExperienceFlagsStore } from '@/root/apps/web/src/lib/state/experience_flags';
-import { arrayShuffle } from '@/root/apps/web/src/lib/utils/array';
-import { random } from '@/root/apps/web/src/lib/utils/math';
+import { DotDotDotText } from '@maw/ui';
+import { PageHeadline } from '@maw/ui';
+import SearchForm from '@/components/organisms/SearchForm';
+import { ArticleSearchResult, ArticleService } from '@/features/content';
+import { useExperienceFlagsStore } from '@/lib/state/experience_flags';
+import { arrayShuffle } from '@maw/utils/array';
+import { random } from '@maw/utils/math';
 import { useLocale, useMessages, useTranslations } from 'next-intl';
 
 type Result = {

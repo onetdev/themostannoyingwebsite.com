@@ -10,10 +10,9 @@ import {
 
 import DynamicWheelSvg, { Item } from './DynamicWheelSvg';
 
-import Button from '@/root/apps/web/src/components/atoms/Button';
-import Icon from '@/root/apps/web/src/components/atoms/Icon';
-import useDragTracker from '@/root/apps/web/src/lib/hooks/useDragTracker';
-import { getPointDistance, random } from '@/root/apps/web/src/lib/utils/math';
+import { Button, Icon } from '@maw/ui';
+import useDragTracker from '@/lib/hooks/useDragTracker';
+import { getPointDistance, random } from '@maw/utils/math';
 
 type AnimatedWheelProps = {
   items: Item[];

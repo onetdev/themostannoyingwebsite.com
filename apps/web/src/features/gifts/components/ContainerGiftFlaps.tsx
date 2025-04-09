@@ -1,5 +1,5 @@
 import Image from 'next/image';
-import { Link } from '@/root/apps/web/src/i18n/navigation';
+import { Link } from '@/i18n/navigation';
 import { useTheme } from 'next-themes';
 import { FunctionComponent, PropsWithChildren } from 'react';
 import { useTranslations } from 'next-intl';

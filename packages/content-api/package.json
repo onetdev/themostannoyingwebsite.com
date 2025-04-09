@@ -3,6 +3,11 @@
   "name": "@maw/content-api",
   "version": "1.0.0",
   "type": "module",
+  "exports": {
+    ".": "./src/index.ts",
+    "./schemas": "./src/schemas/index.ts",
+    "./utils": "./src/utils/index.ts"
+  },
   "scripts": {
     "build": "pnpm build:schema && pnpm build:index",
     "build:index": "tsx ./scripts/build-index.ts",
@@ -21,6 +26,7 @@
   "devDependencies": {
     "@maw/eslint-config": "workspace:*",
     "@maw/typescript-config": "workspace:*",
+    "@maw/utils": "workspace:*",
     "@types/sanitize-html": "^2.15.0",
     "eslint": "catalog:",
     "sharp": "^0.33.5",

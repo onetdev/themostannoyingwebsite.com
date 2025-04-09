@@ -1,16 +1,11 @@
 'use client';
 
-import { Link } from '@/root/apps/web/src/i18n/navigation';
+import { Link } from '@/i18n/navigation';
 import { SubmitHandler, useForm } from 'react-hook-form';
 
-import Button from '@/root/apps/web/src/components/atoms/Button';
-import CaptchaEmoji from '@/root/apps/web/src/components/atoms/CaptchaEmoji';
-import Checkbox from '@/root/apps/web/src/components/atoms/Checkbox';
-import FormFieldError from '@/root/apps/web/src/components/atoms/FormFieldError';
-import PageHeadline from '@/root/apps/web/src/components/atoms/PageHeadline';
-import TextInput from '@/root/apps/web/src/components/atoms/TextInput';
-import { LoginFormInputs } from '@/root/apps/web/src/features/auth';
-import { EMAIL_PATTERN } from '@/root/apps/web/src/lib/utils/validator';
+import { Button, CaptchaEmoji, Checkbox, FormFieldError, PageHeadline, TextInput } from '@maw/ui';
+import { LoginFormInputs } from '@/features/auth';
+import { EMAIL_PATTERN } from '@/lib/utils/validator';
 import { useTranslations } from 'next-intl';
 
 export function LoginPage() {

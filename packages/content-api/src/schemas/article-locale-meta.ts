@@ -13,5 +13,5 @@ const schema = z
   })
   .strict();
 
-export type ArticleLocaleSchema = z.infer<typeof schema>;
+export type ArticleLocaleMetaSchema = z.infer<typeof schema>;
 export default schema;

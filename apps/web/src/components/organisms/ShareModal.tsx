@@ -10,7 +10,7 @@ import {
   XIcon,
 } from 'react-share';
 
-import Modal from '@/root/apps/web/src/components/molecules/Modal';
+import { Modal } from '@maw/ui';
 import { useTranslations } from 'next-intl';
 
 type ShareModalProps = {

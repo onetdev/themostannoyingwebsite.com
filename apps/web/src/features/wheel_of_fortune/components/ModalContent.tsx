@@ -4,8 +4,8 @@ import Confetti from 'react-confetti';
 import { Item } from './DynamicWheelSvg';
 import AnimatedWheel, { AnimatedWheelState } from './WheelAnimationWrapper';
 
-import Icon from '@/root/apps/web/src/components/atoms/Icon';
-import { getWeightedRandom, WeightedRandomPoolItem } from '@/root/apps/web/src/lib/utils/math';
+import { Icon } from '@maw/ui';
+import { getWeightedRandom, WeightedRandomPoolItem } from '@maw/utils/math';
 import { useTranslations } from 'next-intl';
 
 type ModalContentProps = JSXProxyProps<'div'> & {

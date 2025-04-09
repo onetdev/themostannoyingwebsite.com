@@ -2,9 +2,7 @@
 
 import { FunctionComponent } from 'react';
 
-import FormCheckbox from '@/root/apps/web/src/components/atoms/Checkbox';
-import LabeledChild from '@/root/apps/web/src/components/molecules/LabeledChild';
-import BorderedBox from '@/root/apps/web/src/components/templates/BorderedBox';
+import { Checkbox as FormCheckbox, LabeledChild, BorderedBox } from '@maw/ui';
 import { useTranslations } from 'next-intl';
 
 const MandatoryExperienceSettings: FunctionComponent = () => {

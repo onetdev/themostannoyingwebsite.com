@@ -3,10 +3,10 @@ import {
   LargeCoverItem,
   SmallCoverListItem,
   TextListItem,
-} from '@/root/apps/web/src/features/content';
-import { OneByOneGift } from '@/root/apps/web/src/features/gifts';
+} from '@/features/content';
+import { OneByOneGift } from '@/features/gifts';
 
-export { generateStaticParams } from '@/root/apps/web/src/i18n/routing';
+export { generateStaticParams } from '@/i18n/routing';
 export const revalidate = 1800;
 
 export default async function Page({ params }: NextPageProps) {

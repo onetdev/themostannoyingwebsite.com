@@ -4,8 +4,7 @@ import { FunctionComponent, useState } from 'react';
 
 import ModalContent from './components/ModalContent';
 
-import DimmerOverlay from '@/root/apps/web/src/components/atoms/DimmerOverlay';
-import Icon from '@/root/apps/web/src/components/atoms/Icon';
+import { DimmerOverlay, Icon } from '@maw/ui';
 import { useTranslations } from 'next-intl';
 
 const WheelOfFortuneHost: FunctionComponent = () => {

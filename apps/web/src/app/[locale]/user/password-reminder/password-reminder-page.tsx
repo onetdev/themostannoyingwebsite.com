@@ -1,6 +1,6 @@
 'use client';
 
-import { Link } from '@/root/apps/web/src/i18n/navigation';
+import { Link } from '@/i18n/navigation';
 import {
   SubmitHandler,
   useForm,
@@ -8,13 +8,9 @@ import {
   UseFormSetValue,
 } from 'react-hook-form';
 
-import Button from '@/root/apps/web/src/components/atoms/Button';
-import FormFieldError from '@/root/apps/web/src/components/atoms/FormFieldError';
-import PageHeadline from '@/root/apps/web/src/components/atoms/PageHeadline';
-import TextInput from '@/root/apps/web/src/components/atoms/TextInput';
-import CaptchaTitlePuzzleField from '@/root/apps/web/src/components/molecules/CaptchaTitlePuzzleFied';
-import { PasswordReminderFormInputs } from '@/root/apps/web/src/features/auth';
-import { EMAIL_PATTERN } from '@/root/apps/web/src/lib/utils/validator';
+import { Button, FormFieldError, PageHeadline, TextInput, CaptchaTitlePuzzleField } from '@maw/ui';
+import { PasswordReminderFormInputs } from '@/features/auth';
+import { EMAIL_PATTERN } from '@/lib/utils/validator';
 import { useTranslations } from 'next-intl';
 
 export function PasswordReminderPage() {

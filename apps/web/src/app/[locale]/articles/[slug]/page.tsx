@@ -1,9 +1,8 @@
 import { Metadata } from 'next';
 
-import { ArticleService } from '@/root/apps/web/src/features/content';
-import { getTranslations } from 'next-intl/server';
+import { ArticleService } from '@/features/content';
 import { ArticleItemPage } from './article-item-page';
-import i18nConfig from '@/root/apps/web/i18n.config';
+import i18nConfig from '@/root/i18n.config';
 import { notFound } from 'next/navigation';
 
 type PageParams = {
@@ -17,7 +16,6 @@ export const revalidate = 1800;
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { locale, slug } = await params;
-  const t = await getTranslations({ locale });
   const lookup = { slug, locale };
   const data = ArticleService.getByLookup(lookup);
 

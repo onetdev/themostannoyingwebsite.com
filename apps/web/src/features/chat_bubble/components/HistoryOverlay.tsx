@@ -3,9 +3,8 @@ import { FunctionComponent, useEffect, useMemo, useRef, useState } from 'react';
 import MessageBubble from './MessageBubble';
 import MessageForm from './MessageForm';
 
-import DotDotDotText from '@/root/apps/web/src/components/atoms/DotDotDotText';
-import Icon from '@/root/apps/web/src/components/atoms/Icon';
-import { HistoryItem } from '@/root/apps/web/src/features/chat_bubble/types';
+import { Icon, DotDotDotText } from '@maw/ui';
+import { HistoryItem } from '@/features/chat_bubble/types';
 import { useTranslations } from 'next-intl';
 
 export type HistoryOverlayProps = {

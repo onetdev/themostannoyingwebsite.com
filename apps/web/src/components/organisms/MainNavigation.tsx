@@ -1,8 +1,8 @@
-import { Link } from '@/root/apps/web/src/i18n/navigation';
+import { Link } from '@/i18n/navigation';
 import { FunctionComponent, useMemo } from 'react';
 import { useTranslations } from 'next-intl';
 
-import Icon from '@/root/apps/web/src/components/atoms/Icon';
+import { Icon } from '@maw/ui';
 
 export type MainNavigationProps = {
   className?: string;

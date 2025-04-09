@@ -1,15 +1,11 @@
 import { FunctionComponent, useMemo, useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 
-import Button from '@/root/apps/web/src/components/atoms/Button';
-import FormFieldError from '@/root/apps/web/src/components/atoms/FormFieldError';
-import TextInput from '@/root/apps/web/src/components/atoms/TextInput';
-import Modal from '@/root/apps/web/src/components/molecules/Modal';
-import { type NewsletterFormInputs } from '@/root/apps/web/src/features/newsletter';
-import { random } from '@/root/apps/web/src/lib/utils/math';
-import { EMAIL_PATTERN } from '@/root/apps/web/src/lib/utils/validator';
+import { Button, FormFieldError, TextInput, Modal } from '@maw/ui';
+import { type NewsletterFormInputs } from '@/features/newsletter';
+import { random } from '@maw/utils/math';
+import { EMAIL_PATTERN } from '@/lib/utils/validator';
 import { useMessages, useTranslations } from 'next-intl';
-import { text } from 'stream/consumers';
 
 type NewsletterModalProps = {
   visible?: boolean;

@@ -3,17 +3,17 @@
 import { FunctionComponent, PropsWithChildren, useEffect } from 'react';
 import { useBeforeUnload } from 'react-use';
 
-import CopyMarker from '@/root/apps/web/src/components/atoms/CopyMarker';
+import { CopyMarker } from '@maw/ui';
 import {
   useDisableContextMenu,
   useDisableNavigationPop,
-} from '@/root/apps/web/src/features/browser_core';
-import { PageTitleExperienceHost } from '@/root/apps/web/src/features/browser_core';
-import useAdblockerDetector from '@/root/apps/web/src/features/gifts/hooks/useAdblockerDetector';
-import { NewsletterModalExperienceHost } from '@/root/apps/web/src/features/newsletter';
-import { NotificationPermissionExperienceHost } from '@/root/apps/web/src/features/notification';
-import { useExperienceFlagsStore } from '@/root/apps/web/src/lib/state/experience_flags';
-import { useUserGrantsStore } from '@/root/apps/web/src/lib/state/user_grants';
+} from '@/features/browser_core';
+import { PageTitleExperienceHost } from '@/features/browser_core';
+import useAdblockerDetector from '@/features/gifts/hooks/useAdblockerDetector';
+import { NewsletterModalExperienceHost } from '@/features/newsletter';
+import { NotificationPermissionExperienceHost } from '@/features/notification';
+import { useExperienceFlagsStore } from '@/lib/state/experience_flags';
+import { useUserGrantsStore } from '@/lib/state/user_grants';
 import { useTranslations } from 'next-intl';
 
 const ExperienceProvider: FunctionComponent<PropsWithChildren> = ({

@@ -1,9 +1,8 @@
 import { FunctionComponent, useMemo } from 'react';
 
-import FormFieldError from '@/root/apps/web/src/components/atoms/FormFieldError';
-import Select from '@/root/apps/web/src/components/atoms/Select';
-import { CommonRegistrationFormFieldProps } from '@/root/apps/web/src/features/auth';
-import countryData from '@/root/apps/web/public/assets/countries.json';
+import { FormFieldError, Select } from '@maw/ui';
+import { CommonRegistrationFormFieldProps } from '@/features/auth';
+import countryData from '@/root/public/assets/countries.json';
 import { useTranslations } from 'next-intl';
 
 type CountryFieldProps = Pick<

@@ -1,9 +1,9 @@
 'use client';
 
-import { Link } from '@/root/apps/web/src/i18n/navigation';
+import { Link } from '@/i18n/navigation';
 import { FunctionComponent } from 'react';
 
-import { useUserGrantsStore } from '@/root/apps/web/src/lib/state/user_grants';
+import { useUserGrantsStore } from '@/lib/state/user_grants';
 import { useTranslations } from 'next-intl';
 
 const CookieConsent: FunctionComponent = () => {

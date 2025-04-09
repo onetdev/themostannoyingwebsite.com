@@ -2,10 +2,8 @@
 
 import { FunctionComponent } from 'react';
 
-import FormCheckbox from '@/root/apps/web/src/components/atoms/Checkbox';
-import LabeledChild from '@/root/apps/web/src/components/molecules/LabeledChild';
-import BorderedBox from '@/root/apps/web/src/components/templates/BorderedBox';
-import { useUserGrantsStore } from '@/root/apps/web/src/lib/state/user_grants';
+import { Checkbox as FormCheckbox, LabeledChild, BorderedBox } from '@maw/ui';
+import { useUserGrantsStore } from '@/lib/state/user_grants';
 import { useTranslations } from 'next-intl';
 
 const UserGrantsSettings: FunctionComponent = () => {

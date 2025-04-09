@@ -1,14 +1,14 @@
 import '@/styles/globals.css';
 import { Metadata, Viewport } from "next";
-import config from '@/root/apps/web/src/config';
+import config from '@/config';
 import { Open_Sans } from 'next/font/google';
-import RootProviderContainer from "@/root/apps/web/src/lib/providers/RootProviderContainer";
-import ClientServiceProvider from "@/root/apps/web/src/lib/providers/ClientServiceProvider";
-import { routing } from "@/root/apps/web/src/i18n/routing";
+import RootProviderContainer from "@/lib/providers/RootProviderContainer";
+import ClientServiceProvider from "@/lib/providers/ClientServiceProvider";
+import { routing } from "@/i18n/routing";
 import { notFound } from "next/navigation";
 import { hasLocale, NextIntlClientProvider } from "next-intl";
 import { getLangDir } from 'rtl-detect';
-import MainLayout from "@/root/apps/web/src/components/templates/MainLayout";
+import MainLayout from "@/components/templates/MainLayout";
 import { getTranslations } from 'next-intl/server';
 
 const _openSans = Open_Sans({

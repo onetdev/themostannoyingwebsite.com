@@ -1,7 +1,7 @@
-import { Link } from '@/root/apps/web/src/i18n/navigation';
+import { Link } from '@/i18n/navigation';
 import { FunctionComponent } from 'react';
 
-import config from '@/root/apps/web/src/config';
+import config from '@/config';
 import { useTranslations } from 'next-intl';
 
 const Footer: FunctionComponent = () => {

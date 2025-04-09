@@ -3,8 +3,8 @@
 import { FunctionComponent, useMemo } from 'react';
 import ReactTimeAgo from 'react-timeago';
 
-import BorderedBox from '@/root/apps/web/src/components/templates/BorderedBox';
-import { useRuntimeStore } from '@/root/apps/web/src/lib/state/runtime';
+import { BorderedBox } from '@maw/ui';
+import { useRuntimeStore } from '@/lib/state/runtime';
 import { useTranslations } from 'next-intl';
 
 const RuntimeSettings: FunctionComponent = () => {

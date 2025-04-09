@@ -3,11 +3,9 @@
 import { useRouter } from 'next/navigation';
 import { FormEventHandler, FunctionComponent } from 'react';
 
-import Button from '@/root/apps/web/src/components/atoms/Button';
-import Icon from '@/root/apps/web/src/components/atoms/Icon';
-import TextInput from '@/root/apps/web/src/components/atoms/TextInput';
-import { DOCUMENT_EVENT_SEARCH } from '@/root/apps/web/src/global';
-import { FormElementSize } from '@/root/apps/web/src/lib/utils/form';
+import { Button, Icon, TextInput } from '@maw/ui';
+import { DOCUMENT_EVENT_SEARCH } from '@/global';
+import { FormElementSize } from '@maw/ui/utils';
 import { useTranslations } from 'next-intl';
 
 export type SearchFormSize = FormElementSize;

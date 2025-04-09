@@ -2,11 +2,8 @@
 
 import { FunctionComponent } from 'react';
 
-import Button from '@/root/apps/web/src/components/atoms/Button';
-import FormCheckbox from '@/root/apps/web/src/components/atoms/Checkbox';
-import LabeledChild from '@/root/apps/web/src/components/molecules/LabeledChild';
-import BorderedBox from '@/root/apps/web/src/components/templates/BorderedBox';
-import { useExperienceFlagsStore } from '@/root/apps/web/src/lib/state/experience_flags';
+import { Button, Checkbox as FormCheckbox, LabeledChild, BorderedBox } from '@maw/ui';
+import { useExperienceFlagsStore } from '@/lib/state/experience_flags';
 import { useTranslations } from 'next-intl';
 
 type ExperienceSettingsProps = {

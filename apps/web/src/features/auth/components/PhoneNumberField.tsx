@@ -9,12 +9,9 @@ import {
   useState,
 } from 'react';
 
-import Button from '@/root/apps/web/src/components/atoms/Button';
-import FormFieldError from '@/root/apps/web/src/components/atoms/FormFieldError';
-import Select from '@/root/apps/web/src/components/atoms/Select';
-import TextInput from '@/root/apps/web/src/components/atoms/TextInput';
-import { type CommonRegistrationFormFieldProps } from '@/root/apps/web/src/features/auth';
-import countryData from '@/root/apps/web/public/assets/countries.json';
+import { Button, FormFieldError, Select, TextInput } from '@maw/ui';
+import { type CommonRegistrationFormFieldProps } from '@/features/auth';
+import countryData from '@/root/public/assets/countries.json';
 import { useTranslations } from 'next-intl';
 
 type PhoneNumberFieldProps = Pick<

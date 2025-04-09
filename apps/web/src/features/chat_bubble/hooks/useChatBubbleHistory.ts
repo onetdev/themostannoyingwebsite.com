@@ -1,11 +1,11 @@
 import { useMessages, useTranslations } from 'next-intl';
 import { useCallback, useEffect, useMemo, useState } from 'react';
 
-import { HistoryItem, HistoryItemOwner } from '@/root/apps/web/src/features/chat_bubble';
-import useAudio from '@/root/apps/web/src/lib/hooks/useAudio';
-import useSendNotification from '@/root/apps/web/src/lib/hooks/useSendNotification';
-import { useRuntimeStore } from '@/root/apps/web/src/lib/state/runtime';
-import { useUserPreferencesStore } from '@/root/apps/web/src/lib/state/user_preferences';
+import { HistoryItem, HistoryItemOwner } from '@/features/chat_bubble';
+import useAudio from '@/lib/hooks/useAudio';
+import useSendNotification from '@/lib/hooks/useSendNotification';
+import { useRuntimeStore } from '@/lib/state/runtime';
+import { useUserPreferencesStore } from '@/lib/state/user_preferences';
 
 const useChatBubbleHistory = () => {
   const t = useTranslations();

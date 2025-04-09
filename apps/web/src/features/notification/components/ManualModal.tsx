@@ -2,8 +2,7 @@
 
 import { FunctionComponent } from 'react';
 
-import Button from '@/root/apps/web/src/components/atoms/Button';
-import DimmerOverlay from '@/root/apps/web/src/components/atoms/DimmerOverlay';
+import { Button, DimmerOverlay } from '@maw/ui';
 import { useTranslations } from 'next-intl';
 
 type ManualModalProps = {
