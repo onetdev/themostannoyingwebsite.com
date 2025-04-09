@@ -1,35 +1,32 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { fn } from '@storybook/test';
 
-import FormSelect from '@maw/ui/atoms/Select';
+import { Checkbox } from './Checkbox';
 
 const meta = {
-  title: 'Example/FormSelect',
-  component: FormSelect,
+  title: 'Example/Checkbox',
+  component: Checkbox,
   tags: ['autodocs'],
   argTypes: {
-    onChange: {
-      description: 'The native change event',
-    },
     onValueChange: {
       description:
         'Simplified change event retuning only the value of the selected option',
     },
+    checked: {
+      control: 'boolean',
+      defaultValue: false,
+    },
   },
   args: {
-    onChange: fn(),
     onValueChange: fn(),
   },
-} satisfies Meta<typeof FormSelect>;
+} satisfies Meta<typeof Checkbox>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-export const SampleFormSelect: Story = {
+export const SampleCheckbox: Story = {
   args: {
-    values: [
-      { value: '1', label: 'One' },
-      { value: '2', label: 'Two' },
-    ],
+    checked: false,
   },
 };

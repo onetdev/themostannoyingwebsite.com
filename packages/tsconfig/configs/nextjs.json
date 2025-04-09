@@ -5,7 +5,7 @@
   "compilerOptions": {
     "plugins": [{ "name": "next" }],
     "allowJs": true,
-    "jsx": "react-jsx",
+    "jsx": "preserve",
     "noEmit": true
   }
 }

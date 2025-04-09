@@ -1,15 +1,16 @@
 import { Link } from '@/i18n/navigation';
 import { FunctionComponent } from 'react';
 
-import { Icon, MarqueeText } from '@maw/ui';
+import { Icon } from '@maw/ui';
 import MainNavigation from '@/components/MainNavigation';
 import SearchForm from '@/components/SearchForm';
 import UserNavigation from '@/components/UserNavigation';
 import { AppDarkModeToggle } from './AppDarkModeToggle';
 import { getTranslations } from 'next-intl/server';
 import { ArticleDatum, ArticleService } from '@maw/content-api';
+import { ArticleMarquee } from './ArticleMarquee';
 
-const RenderMarqueeItem = (item: ArticleDatum) => {
+export const RenderMarqueeItem = (item: ArticleDatum) => {
   const path = '/articles/' + item.slug;
   return (
     <Link
@@ -52,7 +53,7 @@ export const AppHeader: FunctionComponent = async () => {
       </div>
       <MainNavigation className="col-span-1 my-3 -ml-3 pl-3 md:ml-0 md:pl-0" />
       <UserNavigation className="col-span-1 my-3" />
-      <MarqueeText items={marqueeItems} className="col-span-2 -mx-3 mb-2 bg-surface-alt py-2 md:-mx-5" ItemComponent={RenderMarqueeItem} />
+      <ArticleMarquee items={marqueeItems} className="col-span-2 -mx-3 mb-2 bg-surface-alt py-2 md:-mx-5" />
     </header>
   );
 };

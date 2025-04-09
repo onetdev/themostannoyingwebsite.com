@@ -1,32 +1,31 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { fn } from '@storybook/test';
 
-import Checkbox from '@maw/ui/atoms/Checkbox';
+import { TextInput } from './TextInput';
 
 const meta = {
-  title: 'Example/Checkbox',
-  component: Checkbox,
+  title: 'Example/TextInput',
+  component: TextInput,
   tags: ['autodocs'],
   argTypes: {
     onValueChange: {
       description:
         'Simplified change event retuning only the value of the selected option',
     },
-    checked: {
-      control: 'boolean',
-      defaultValue: false,
+    value: {
+      description: 'Value of the element',
     },
   },
   args: {
     onValueChange: fn(),
   },
-} satisfies Meta<typeof Checkbox>;
+} satisfies Meta<typeof TextInput>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-export const SampleCheckbox: Story = {
+export const SampleTextInput: Story = {
   args: {
-    checked: false,
+    value: 'Text input',
   },
 };

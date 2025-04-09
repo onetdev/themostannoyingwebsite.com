@@ -1,3 +1,5 @@
+'use client';
+
 import { FunctionComponent, useEffect, useRef, useState } from 'react';
 
 import { Point2d, random } from '@maw/utils/math';

@@ -1,31 +1,35 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { fn } from '@storybook/test';
 
-import { TextInput } from '@maw/ui';
+import { DropdownSelect } from './DropdownSelect';
 
 const meta = {
-  title: 'Example/TextInput',
-  component: TextInput,
+  title: 'Example/DropdownSelect',
+  component: DropdownSelect,
   tags: ['autodocs'],
   argTypes: {
+    onChange: {
+      description: 'The native change event',
+    },
     onValueChange: {
       description:
         'Simplified change event retuning only the value of the selected option',
     },
-    value: {
-      description: 'Value of the element',
-    },
   },
   args: {
+    onChange: fn(),
     onValueChange: fn(),
   },
-} satisfies Meta<typeof TextInput>;
+} satisfies Meta<typeof DropdownSelect>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-export const SampleTextInput: Story = {
+export const SampleFormSelect: Story = {
   args: {
-    value: 'Text input',
+    values: [
+      { value: '1', label: 'One' },
+      { value: '2', label: 'Two' },
+    ],
   },
 };

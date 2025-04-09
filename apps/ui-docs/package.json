@@ -1,0 +1,39 @@
+{
+  "name": "ui-docs",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "storybook dev -p 6006",
+    "build": "storybook build"
+  },
+  "dependencies": {
+    "@maw/ui": "workspace:*",
+    "react": "catalog:",
+    "react-dom": "catalog:"
+  },
+  "devDependencies": {
+    "@eslint/eslintrc": "^3",
+    "@maw/tailwind": "workspace:*",
+    "@storybook/addon-essentials": "^8.6.12",
+    "@storybook/addon-themes": "^8.6.11",
+    "@storybook/blocks": "^8.6.12",
+    "@storybook/experimental-addon-test": "^8.6.12",
+    "@storybook/react": "^8.6.12",
+    "@storybook/test": "^8.6.12",
+    "@tailwindcss/postcss": "^4",
+    "@types/node": "^20",
+    "@types/react": "catalog:",
+    "@types/react-dom": "catalog:",
+    "eslint": "^9",
+    "eslint-plugin-storybook": "^0.12.0",
+    "playwright": "^1.51.1",
+    "storybook": "^8.6.12",
+    "tailwindcss": "catalog:",
+    "typescript": "catalog:"
+  },
+  "eslintConfig": {
+    "extends": [
+      "plugin:storybook/recommended"
+    ]
+  }
+}

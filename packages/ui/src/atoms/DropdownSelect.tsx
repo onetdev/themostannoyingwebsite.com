@@ -1,6 +1,6 @@
 import { DetailedHTMLProps, forwardRef, SelectHTMLAttributes } from 'react';
 
-export type SelectProps = DetailedHTMLProps<
+export type DropdownSelectProps = DetailedHTMLProps<
   SelectHTMLAttributes<HTMLSelectElement>,
   HTMLSelectElement
 > & {
@@ -9,7 +9,7 @@ export type SelectProps = DetailedHTMLProps<
   onValueChange?: (value?: string) => void;
 };
 
-export const Select = forwardRef<HTMLSelectElement, SelectProps>(
+export const DropdownSelect = forwardRef<HTMLSelectElement, DropdownSelectProps>(
   (
     {
       appendPlaceholder = true,
@@ -43,4 +43,4 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
   },
 );
 
-Select.displayName = 'Select';
+DropdownSelect.displayName = 'DropdownSelect';

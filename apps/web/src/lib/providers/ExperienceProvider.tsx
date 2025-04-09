@@ -37,7 +37,7 @@ const ExperienceProvider: FunctionComponent<PropsWithChildren> = ({
   }, [syncPermissions]);
 
   const copyMarkerText = {
-    readMoreAt: t('app.copyMarkerText')
+    readMoreAt: t('app.readMoreAt')
   }
 
   return (

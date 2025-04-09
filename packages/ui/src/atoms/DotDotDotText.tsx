@@ -1,3 +1,4 @@
+'use client';
 import { FunctionComponent, useEffect, useState } from 'react';
 
 export type DotDotDotTextProps = JSXProxyProps<'span'> & {

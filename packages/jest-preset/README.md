@@ -23,4 +23,4 @@ export default config;
 
 ### 3. Add typescript config
 
-Follow the installation steps of `@maw/typescript-config` package to add the typescript config to your package.
+Follow the installation steps of `@maw/tsconfig` package to add the typescript config to your package.

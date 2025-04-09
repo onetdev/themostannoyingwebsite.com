@@ -23,7 +23,7 @@
     "@jest/globals": "^29.7.0",
     "@maw/eslint-config": "workspace:*",
     "@maw/jest-preset": "workspace:*",
-    "@maw/typescript-config": "workspace:*",
+    "@maw/tsconfig": "workspace:*",
     "@types/jest": "^29.5.14",
     "@types/sanitize-html": "^2.15.0",
     "eslint": "^9.23.0",

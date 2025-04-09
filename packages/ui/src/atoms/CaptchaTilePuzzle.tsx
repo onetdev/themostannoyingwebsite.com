@@ -1,3 +1,5 @@
+'use client';
+
 import { FunctionComponent, useEffect, useMemo, useState } from 'react';
 
 import { arrayShuffle } from '@maw/utils/array';

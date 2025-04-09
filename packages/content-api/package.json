@@ -25,7 +25,7 @@
   },
   "devDependencies": {
     "@maw/eslint-config": "workspace:*",
-    "@maw/typescript-config": "workspace:*",
+    "@maw/tsconfig": "workspace:*",
     "@maw/utils": "workspace:*",
     "@types/sanitize-html": "^2.15.0",
     "eslint": "catalog:",

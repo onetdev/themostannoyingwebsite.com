@@ -14,7 +14,7 @@
   },
   "devDependencies": {
     "@maw/eslint-config": "workspace:*",
-    "@maw/typescript-config": "workspace:*",
+    "@maw/tsconfig": "workspace:*",
     "@testing-library/jest-dom": "^6.6.3",
     "@types/jest": "^29.5.14",
     "jest": "^29.7.0",

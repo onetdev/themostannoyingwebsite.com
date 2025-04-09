@@ -6,7 +6,7 @@ This package provides a set of TypeScript configuration files for various enviro
 
 ### 1. Install dependencies
 ```bash
-pnpm i -D @maw/typescript-config typescript
+pnpm i -D @maw/tsconfig typescript
 ```
 
 ### 2. Add `tsconfig`
@@ -15,7 +15,7 @@ Then add `tsconfig.json` to your package or project root.
 
 ```json
 {
-  "extends": "@maw/typescript-config/configs/base.json",
+  "extends": "@maw/tsconfig/configs/base.json",
   "compilerOptions": {
     "baseUrl": "."
   },
