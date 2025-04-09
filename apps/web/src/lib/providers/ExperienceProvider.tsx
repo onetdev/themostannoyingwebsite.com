@@ -19,12 +19,13 @@ import { useTranslations } from 'next-intl';
 const ExperienceProvider: FunctionComponent<PropsWithChildren> = ({
   children,
 }) => {
+  const t = useTranslations();
   const exitPrompt = useExperienceFlagsStore((state) => state.exitPrompt);
   const clipboardMarker = useExperienceFlagsStore(
     (state) => state.clipboardMarker,
   );
+
   const syncPermissions = useUserGrantsStore((state) => state.syncPermissions);
-  const t = useTranslations();
 
   useDisableNavigationPop();
   useDisableContextMenu();
@@ -35,12 +36,16 @@ const ExperienceProvider: FunctionComponent<PropsWithChildren> = ({
     syncPermissions();
   }, [syncPermissions]);
 
+  const copyMarkerText = {
+    readMoreAt: t('app.copyMarkerText')
+  }
+
   return (
     <>
       <PageTitleExperienceHost />
       <NewsletterModalExperienceHost />
       <NotificationPermissionExperienceHost />
-      <CopyMarker enabled={clipboardMarker}>{children}</CopyMarker>
+      <CopyMarker enabled={clipboardMarker} text={copyMarkerText}>{children}</CopyMarker>
     </>
   );
 };

@@ -2,9 +2,8 @@ import type { MetadataRoute } from 'next';
 import { Languages } from 'next/dist/lib/metadata/types/alternative-urls-types';
 
 import config from '@/config';
-import { ArticleIndexEntrySchema } from '@maw/content-api/schemas/article-index-entry';
-import articlesRaw from '@/root/apps/web/public/assets/articles/index.json';
-import i18nConfig from '@/root/apps/web/i18n.config';
+import { ArticleDatum, ArticleService } from '@maw/content-api';
+import i18nConfig from '@/root/i18n.config';
 
 const extraLangs = i18nConfig.locales.filter(
   (lang) => lang !== i18nConfig.defaultLocale,
@@ -27,18 +26,21 @@ const commonPageMeta = (path: string): MetadataRoute.Sitemap[0] => ({
   },
 });
 
-export default function sitemap(): MetadataRoute.Sitemap {
-  const articles = articlesRaw.map((article: ArticleIndexEntrySchema) => {
-    const prefix =
-      article.locale === i18nConfig.defaultLocale
+const mapArticleToSitemapEntry = (item: ArticleDatum) => {
+  const prefix =
+  item.locale === i18nConfig.defaultLocale
         ? `${config.publicUrl}`
-        : `${config.publicUrl}/${article.locale}`;
+        : `${config.publicUrl}/${item.locale}`;
 
     return {
-      url: `${prefix}/articles/${article.slug}`,
-      lastModified: new Date(article.updatedAt || article.publishedAt),
+      url: `${prefix}/articles/${item.slug}`,
+      lastModified: new Date(item.updatedAt || item.publishedAt),
     } satisfies MetadataRoute.Sitemap[0];
-  });
+}
+
+export async function sitemap(): Promise<MetadataRoute.Sitemap> {
+  const articleResults = await ArticleService.getMany({ params: {}, paginate: { take: -1, skip: 0 } });
+  const articles = articleResults.items.map(mapArticleToSitemapEntry);
 
   return [
     commonPageMeta(''),

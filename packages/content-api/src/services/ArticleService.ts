@@ -46,21 +46,21 @@ class ArticleService {
     );
   }
 
-  public getByLookup(
+  public async getByLookup(
     filter: ArticleLookupIdentifier,
-  ): ArticleDatum | undefined {
+  ): Promise<ArticleDatum | undefined> {
     return this.articles.find(
       (article) =>
         article.slug === filter.slug && article.locale === filter.locale,
     );
   }
 
-  public search({
+  public async search({
     query,
     params,
     paginate,
-  }: ArticleSearchFilter): ArticleSearchResult[] {
-    const pool = this.getMany({
+  }: ArticleSearchFilter): Promise<ArticleSearchResult[]> {
+    const pool = await this.getMany({
       params,
       paginate: { take: -1, skip: 0 },
     });
@@ -94,11 +94,11 @@ class ArticleService {
       }));
   }
 
-  public getMany({
+  public async getMany({
     params,
     sort = { date: 'desc' },
     paginate,
-  }: ArticleFilter): ArticleData {
+  }: ArticleFilter): Promise<ArticleData> {
     let results = this.articles.filter((article) => {
       return (
         (!params.locale || article.locale === params.locale) &&
@@ -132,8 +132,9 @@ class ArticleService {
     };
   }
 
-  public getFirst({ params }: ArticleFilter): ArticleDatum | undefined {
-    return this.getMany({ params, paginate: { take: 1, skip: 0 } })?.items[0];
+  public async getFirst({ params }: ArticleFilter): Promise<ArticleDatum | undefined> {
+    const results = await this.getMany({ params, paginate: { take: 1, skip: 0 } })
+    return results?.items[0];
   }
 }
 

@@ -11,14 +11,14 @@ export const revalidate = 1800;
 
 export default async function Page({ params }: NextPageProps) {
   const { locale } = await params;
-  const coverArticle = ArticleService.getFirst({
+  const coverArticle = await ArticleService.getFirst({
     params: { isOnCover: true, locale },
     paginate: {
       take: 1,
       skip: 0,
     },
   });
-  const articlePool = ArticleService.getMany({
+  const articlePool = await ArticleService.getMany({
     params: { isOnCover: false },
     paginate: { take: 12 },
   });

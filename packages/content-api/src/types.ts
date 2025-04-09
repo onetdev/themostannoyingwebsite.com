@@ -17,6 +17,7 @@ export interface ArticleDatum {
   isOnCover: boolean;
   locale: string;
   publishedAt: Date;
+  updatedAt?: Date;
   slug: string;
   title: string;
   url: string;

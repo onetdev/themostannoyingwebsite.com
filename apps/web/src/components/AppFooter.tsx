@@ -4,7 +4,7 @@ import { FunctionComponent } from 'react';
 import config from '@/config';
 import { useTranslations } from 'next-intl';
 
-const Footer: FunctionComponent = () => {
+export const AppFooter: FunctionComponent = () => {
   const t = useTranslations();
 
   return (
@@ -35,5 +35,3 @@ const Footer: FunctionComponent = () => {
     </footer>
   );
 };
-
-export default Footer;

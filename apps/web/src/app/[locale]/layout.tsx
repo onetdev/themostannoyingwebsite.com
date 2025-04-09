@@ -8,8 +8,11 @@ import { routing } from "@/i18n/routing";
 import { notFound } from "next/navigation";
 import { hasLocale, NextIntlClientProvider } from "next-intl";
 import { getLangDir } from 'rtl-detect';
-import MainLayout from "@/components/templates/MainLayout";
+import {ExperienceDecoratorLayout } from "@/components/ExperienceDecoratorLayout";
 import { getTranslations } from 'next-intl/server';
+import { AppHeader } from '@/components/AppHeader';
+import { AppFooter } from '@/components/AppFooter';
+import { Analytics } from '@vercel/analytics/react';
 
 const _openSans = Open_Sans({
   subsets: ['latin'],
@@ -106,9 +109,12 @@ async function RootLayout({
         <NextIntlClientProvider>
           <RootProviderContainer>
             <ClientServiceProvider />
-            <MainLayout className="font-primary">
+            <ExperienceDecoratorLayout className="font-primary">
+              <Analytics />
+              <AppHeader />
               {children}
-            </MainLayout>
+              <AppFooter />
+            </ExperienceDecoratorLayout>
           </RootProviderContainer>
         </NextIntlClientProvider>
       </body>

@@ -10,7 +10,7 @@ type SpeedMinMax = {
 
 export type MarqueeTextProps<T> = {
   className?: string;
-  ItemComponent: (props: { item: T, index: number }) => ReactNode
+  ItemComponent: (item: T, index?: number) => ReactNode
   items: T[]
   speed?: SpeedMinMax | number
 };
@@ -30,7 +30,7 @@ export const MarqueeText = <T,>({ className, items, speed = { base: 100, hover: 
       onMouseEnter={onEnter}
       onMouseLeave={onLeave}>
       <MarqueePlugin gradient={false} speed={internalSpeed}>
-        {items.map((item, index) => ItemComponent({ item, index }))}
+        {items.map((item, index) => ItemComponent(item, index))}
       </MarqueePlugin>
     </div>
   );

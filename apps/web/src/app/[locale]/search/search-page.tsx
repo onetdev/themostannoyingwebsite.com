@@ -6,7 +6,7 @@ import { useCallback, useEffect, useMemo, useState } from 'react';
 
 import { DotDotDotText } from '@maw/ui';
 import { PageHeadline } from '@maw/ui';
-import SearchForm from '@/components/organisms/SearchForm';
+import SearchForm from '@/components/SearchForm';
 import { ArticleSearchResult, ArticleService } from '@/features/content';
 import { useExperienceFlagsStore } from '@/lib/state/experience_flags';
 import { arrayShuffle } from '@maw/utils/array';
@@ -72,8 +72,8 @@ export function SearchPage() {
 
     const startTime = new Date().getTime();
     const delayTime = enabled ? random(0.001, 5) : 0;
-    const timer = setTimeout(() => {
-      const matches = ArticleService.search({
+    const timer = setTimeout(async () => {
+      const matches = await ArticleService.search({
         query,
         params: {
           locale

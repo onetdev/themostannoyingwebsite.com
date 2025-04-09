@@ -26,6 +26,12 @@ export function PasswordReminderPage() {
     alert(t('user.form.passwordReminder.genericError'));
   };
 
+  const captchaText = {
+    label: t('form.captcha.field'),
+    hint: t('form.captcha.captchaTilePuzzleHint'),
+    invalid: t('form.validation.error.captchaInvalid'),
+  }
+
   return (
     <main className="mx-auto max-w-md py-0 md:py-14" role="main">
       <PageHeadline>{t('navigation.passwordReminder')}</PageHeadline>
@@ -54,6 +60,7 @@ export function PasswordReminderPage() {
           errors={errors}
           register={register as unknown as UseFormRegister<CaptchaFormInputs>}
           setValue={setValue as unknown as UseFormSetValue<CaptchaFormInputs>}
+          text={captchaText}
         />
 
         <Button type="submit" className="mt-10" size="lg">

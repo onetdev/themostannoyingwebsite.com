@@ -34,6 +34,13 @@ export function RegistrationPage() {
     alert(t('user.form.registration.genericError'));
   };
 
+  const captchaText = {
+    label: t('form.captcha.field'),
+    hint: t('form.captcha.captchaEmojiHint'),
+    required: t('form.validation.error.required'),
+    invalid: t('form.validation.error.captchaInvalid'),
+  }
+
   return (
     <main className="mx-auto max-w-[900px] py-0 md:py-14" role="main">
       <PageHeadline>{t('navigation.register')}</PageHeadline>
@@ -162,6 +169,7 @@ export function RegistrationPage() {
           <CaptchaEmojiField
             errors={errors}
             register={register as unknown as UseFormRegister<CaptchaFormInputs>}
+            text={captchaText}
           />
 
           <Button type="submit" className="mt-10" size="lg">

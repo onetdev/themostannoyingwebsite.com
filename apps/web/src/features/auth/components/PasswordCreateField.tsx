@@ -18,6 +18,12 @@ const PasswordCreateField: FunctionComponent<PasswordCreateFieldProps> = ({
 
   const password = watch('password');
 
+  const passwordStrenghtText = {
+    weak: t('form.validation.passwordStrength.weak'),
+    okay: t('form.validation.passwordStrength.okay'),
+    veryStrong: t('form.validation.passwordStrength.veryStrong'),
+  }
+
   return (
     <>
       <label>
@@ -61,7 +67,7 @@ const PasswordCreateField: FunctionComponent<PasswordCreateFieldProps> = ({
             },
           })}
         />
-        <PasswordStrengthBar className="mt-3" password={password} />
+        <PasswordStrengthBar className="mt-3" password={password} text={passwordStrenghtText} />
       </label>
       <FormFieldError error={errors.password} />
     </>

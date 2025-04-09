@@ -1,14 +1,34 @@
 import { Link } from '@/i18n/navigation';
 import { FunctionComponent } from 'react';
 
-import { Icon, DarkModeToggle, MarqueeText } from '@maw/ui';
-import MainNavigation from '@/components/organisms/MainNavigation';
-import SearchForm from '@/components/organisms/SearchForm';
-import UserNavigation from '@/components/organisms/UserNavigation';
-import { useTranslations } from 'next-intl';
+import { Icon, MarqueeText } from '@maw/ui';
+import MainNavigation from '@/components/MainNavigation';
+import SearchForm from '@/components/SearchForm';
+import UserNavigation from '@/components/UserNavigation';
+import { AppDarkModeToggle } from './AppDarkModeToggle';
+import { getTranslations } from 'next-intl/server';
+import { ArticleDatum, ArticleService } from '@maw/content-api';
 
-const Header: FunctionComponent = () => {
-  const t = useTranslations();
+const RenderMarqueeItem = (item: ArticleDatum) => {
+  const path = '/articles/' + item.slug;
+  return (
+    <Link
+      href={path}
+      passHref
+      prefetch={false}
+      className="mx-8 inline-block px-2">
+      {item.title}
+    </Link>
+  );
+}
+
+export const AppHeader: FunctionComponent = async () => {
+  const t = await getTranslations();
+
+  const marqueeItems = (await ArticleService.getMany({
+    params: { isHighlighted: true },
+    paginate: { take: 10 },
+  })).items
 
   return (
     <header id="header" className="grid grid-cols-2 gap-1 py-2" role="banner">
@@ -28,13 +48,11 @@ const Header: FunctionComponent = () => {
         <Link href="/search" className="md:hidden">
           <Icon icon="search" />
         </Link>
-        <DarkModeToggle className="self-center justify-self-end" size="lg" />
+        <AppDarkModeToggle />
       </div>
       <MainNavigation className="col-span-1 my-3 -ml-3 pl-3 md:ml-0 md:pl-0" />
       <UserNavigation className="col-span-1 my-3" />
-      <MarqueeText className="col-span-2 -mx-3 mb-2 bg-surface-alt py-2 md:-mx-5" />
+      <MarqueeText items={marqueeItems} className="col-span-2 -mx-3 mb-2 bg-surface-alt py-2 md:-mx-5" ItemComponent={RenderMarqueeItem} />
     </header>
   );
 };
-
-export default Header;

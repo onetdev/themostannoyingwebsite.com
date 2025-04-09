@@ -17,7 +17,7 @@ export const revalidate = 1800;
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { locale, slug } = await params;
   const lookup = { slug, locale };
-  const data = ArticleService.getByLookup(lookup);
+  const data = await ArticleService.getByLookup(lookup);
 
   return {
     title: data?.title,
@@ -34,7 +34,7 @@ export const generateStaticParams = async () => {
   const paths: PageParams[] = [];
 
   for (const locale of locales) {
-    const articles = ArticleService.getMany({
+    const articles = await ArticleService.getMany({
       params: { locale },
       paginate: { take: -1 },
     });
@@ -50,7 +50,7 @@ export const generateStaticParams = async () => {
 export default async function Page({ params }: PageProps) {
   const { slug, locale } = await params;
   const lookup = { slug, locale };
-  const data = ArticleService.getByLookup(lookup);
+  const data = await ArticleService.getByLookup(lookup);
 
   if (!data) {
     return notFound();

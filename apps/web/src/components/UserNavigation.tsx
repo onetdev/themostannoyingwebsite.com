@@ -4,7 +4,7 @@ import { Link } from '@/i18n/navigation';
 import { FunctionComponent, useMemo, useState } from 'react';
 
 import { Icon } from '@maw/ui';
-import ShareModal from '@/components/organisms/ShareModal';
+import ShareModal from '@/components/ShareModal';
 import { useTranslations } from 'next-intl';
 
 export type UserNavigationProps = {
