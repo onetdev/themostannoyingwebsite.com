@@ -3,7 +3,7 @@ import { fn } from '@storybook/test';
 
 import { DropdownSelect } from './DropdownSelect';
 
-const meta = {
+const meta: Meta<typeof DropdownSelect> = {
   title: 'Example/DropdownSelect',
   component: DropdownSelect,
   tags: ['autodocs'],
@@ -20,7 +20,7 @@ const meta = {
     onChange: fn(),
     onValueChange: fn(),
   },
-} satisfies Meta<typeof DropdownSelect>;
+};
 
 export default meta;
 type Story = StoryObj<typeof meta>;

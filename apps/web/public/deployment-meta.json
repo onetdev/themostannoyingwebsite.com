@@ -1,9 +1,5 @@
 {
-  "author": {
-    "name": "Konrad Koller",
-    "email": "info@onet.dev",
-    "url": "https://onet.dev"
-  },
+  "author": "Konrad Koller <info@onet.dev> (https://onet.dev)",
   "githubUrl": "https://github.com/onetdev/themostannoyingwebsite.com",
   "contactEmail": "info@themostannoyingwebsite.com",
   "version": "0.8.0",

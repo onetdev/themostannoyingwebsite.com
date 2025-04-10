@@ -3,15 +3,16 @@
   "name": "@maw/ui",
   "version": "1.0.0",
   "type": "module",
-  "scripts": {
-    "lint": "eslint .",
-    "lint:fix": "eslint . --fix",
-    "check-types": "tsc --noEmit"
-  },
   "exports": {
     ".": "./src/index.ts",
     "./utils": "./src/utils/index.ts",
-    "./globals.css": "./src/styles/globals.css"
+    "./globals.css": "./src/styles/globals.css",
+    "./content.module.css": "./src/styles/content.module.css"
+  },
+  "scripts": {
+    "check-types": "tsc --noEmit",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix"
   },
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^6.7.2",
@@ -31,6 +32,9 @@
     "@maw/eslint-config": "workspace:*",
     "@maw/tsconfig": "workspace:*",
     "@maw/utils": "workspace:*",
+    "@storybook/react": "^8.6.12",
+    "@storybook/test": "^8.6.12",
+    "@storybook/types": "^8.6.12",
     "@types/node": "^22.13.14",
     "@types/react": "catalog:",
     "@types/react-dom": "catalog:",
@@ -38,8 +42,6 @@
     "eslint": "catalog:",
     "sharp": "^0.33.5",
     "tsx": "catalog:",
-    "typescript": "catalog:",
-    "@storybook/react": "^8.6.12",
-    "@storybook/test": "^8.6.12"
+    "typescript": "catalog:"
   }
 }

@@ -1,6 +1,6 @@
 import { FunctionComponent, useMemo } from 'react';
 
-import { FormFieldError, Select } from '@maw/ui';
+import { FormFieldError, DropdownSelect } from '@maw/ui';
 import {
   CommonRegistrationFormFieldProps,
   userGenderList,
@@ -33,7 +33,7 @@ const GenderField: FunctionComponent<GenderFieldProps> = ({
     <>
       <label>
         <h5 className="mb-1">{t('user.field.gender')}</h5>
-        <Select
+        <DropdownSelect
           values={genderOptions}
           className="w-full"
           {...register('gender')}

@@ -1,6 +1,6 @@
 import { forwardRef } from 'react';
 
-import { FormElementSize, resolveFormElementSize } from '../utils/form';
+import { FormElementSize, resolveFormElementSize } from '../../utils/form';
 
 type ButtonVariant = 'primary' | 'secondary' | 'tertiary';
 type ButtonSize = FormElementSize;

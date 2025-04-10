@@ -1,5 +1,5 @@
 import { PageHeadline } from '@maw/ui';
-import styles from '@/styles/content.module.css';
+import styles from '@maw/ui/content.module.css';
 import { Metadata } from 'next';
 import DisableAllOnMount from './disable-all-on-mount';
 import { getTranslations } from 'next-intl/server';

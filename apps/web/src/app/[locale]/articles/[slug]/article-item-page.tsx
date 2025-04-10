@@ -5,7 +5,7 @@ import Image from 'next/image';
 
 import { ArticleDatum, PartitionalLockedContent } from '@/features/content';
 import { useExperienceFlagsStore } from '@/lib/state/experience_flags';
-import styles from '@/styles/content.module.css';
+import styles from '@maw/ui/content.module.css';
 import { useTranslations } from 'next-intl';
 
 export function ArticleItemPage({ data }: { data: ArticleDatum }) {

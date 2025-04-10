@@ -3,7 +3,7 @@ import { fn } from '@storybook/test';
 
 import { Checkbox } from './Checkbox';
 
-const meta = {
+const meta: Meta<typeof Checkbox> = {
   title: 'Example/Checkbox',
   component: Checkbox,
   tags: ['autodocs'],
@@ -20,7 +20,7 @@ const meta = {
   args: {
     onValueChange: fn(),
   },
-} satisfies Meta<typeof Checkbox>;
+};
 
 export default meta;
 type Story = StoryObj<typeof meta>;

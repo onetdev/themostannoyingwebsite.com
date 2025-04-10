@@ -1,6 +1,9 @@
 {
+  "private": false,
   "name": "themostannoyingwebsite",
   "version": "0.8.0",
+  "license": "MIT",
+  "author": "Konrad Koller <info@onet.dev> (https://onet.dev)",
   "homepage": "https://themostannoyingwebsite.com",
   "repository": {
     "type": "git",
@@ -10,22 +13,7 @@
     "url": "https://github.com/onetdev/themostannoyingwebsite.com/issues",
     "email": "info@themostannoyingwebsite.com"
   },
-  "author": {
-    "name": "Konrad Koller",
-    "email": "info@onet.dev",
-    "url": "https://onet.dev"
-  },
-  "funding": {
-    "type": "individual",
-    "url": "https://www.onet.dev/donate"
-  },
-  "packageManager": "pnpm@10.0.0",
-  "engines": {
-    "node": ">=20.18.0"
-  },
-  "private": false,
   "type": "module",
-  "license": "MIT",
   "scripts": {
     "build": "turbo run build",
     "check-types": "turbo run check-types",
@@ -34,9 +22,10 @@
     "lint": "turbo run lint",
     "lint:fix": "turbo run lint:fix",
     "prepare": "husky",
+    "link-assets": "npx symlink-dir ./packages/content-api/data ./apps/web/public/assets/articles",
+    "test": "turbo run test",
     "test:e2e": "playwright test",
-    "test:watch": "jest --watch",
-    "test": "turbo run test"
+    "test:watch": "jest --watch"
   },
   "devDependencies": {
     "@commitlint/cli": "^19.8.0",
@@ -45,6 +34,15 @@
     "husky": "^9.1.7",
     "lint-staged": "^15.5.0",
     "turbo": "2.5.0",
+    "symlink-dir": "6.0.5",
     "typescript": "catalog:"
-  }
+  },
+  "engines": {
+    "node": ">=20.18.0"
+  },
+  "funding": {
+    "type": "individual",
+    "url": "https://www.onet.dev/donate"
+  },
+  "packageManager": "pnpm@10.0.0"
 }

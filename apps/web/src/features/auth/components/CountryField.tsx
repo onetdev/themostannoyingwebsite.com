@@ -1,6 +1,6 @@
 import { FunctionComponent, useMemo } from 'react';
 
-import { FormFieldError, Select } from '@maw/ui';
+import { FormFieldError, DropdownSelect } from '@maw/ui';
 import { CommonRegistrationFormFieldProps } from '@/features/auth';
 import countryData from '@/root/public/assets/countries.json';
 import { useTranslations } from 'next-intl';
@@ -30,7 +30,7 @@ const CountryField: FunctionComponent<CountryFieldProps> = ({
     <div>
       <label>
         <h5 className="mb-1">{t('user.field.countryCode')}</h5>
-        <Select
+        <DropdownSelect
           className="w-full"
           values={countryOptions}
           {...register('countryCode', {

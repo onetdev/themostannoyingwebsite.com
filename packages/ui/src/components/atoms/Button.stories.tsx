@@ -3,7 +3,7 @@ import { fn } from '@storybook/test';
 
 import { Button } from '@maw/ui';
 
-const meta = {
+const meta: Meta<typeof Button> = {
   title: 'Example/Button',
   component: Button,
   parameters: {},
@@ -23,7 +23,7 @@ const meta = {
   args: {
     onClick: fn(),
   },
-} satisfies Meta<typeof Button>;
+};
 
 export default meta;
 type Story = StoryObj<typeof meta>;

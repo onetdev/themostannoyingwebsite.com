@@ -9,13 +9,13 @@
     "./math": "./src/math.ts",
     "./string": "./src/string.ts"
   },
-  "types": "./src/index.d.ts",
   "scripts": {
+    "check-types": "tsc --noEmit",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
-    "test": "jest",
-    "check-types": "tsc --noEmit"
+    "test": "jest"
   },
+  "types": "./src/index.d.ts",
   "dependencies": {
     "sanitize-html": "^2.15.0"
   },

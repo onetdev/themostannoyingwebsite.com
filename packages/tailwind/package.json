@@ -3,18 +3,18 @@
   "name": "@maw/tailwind",
   "version": "1.0.0",
   "license": "MIT",
-  "publishConfig": {
-    "access": "public"
-  },
+  "type": "module",
   "exports": {
     "./tailwind.config.ts": "./tailwind.config.ts"
   },
-  "type": "module",
   "dependencies": {
     "tailwindcss": "catalog:"
   },
   "devDependencies": {
-    "typescript": "catalog:",
-    "@maw/tsconfig": "workspace:^"
+    "@maw/tsconfig": "workspace:^",
+    "typescript": "catalog:"
+  },
+  "publishConfig": {
+    "access": "public"
   }
 }

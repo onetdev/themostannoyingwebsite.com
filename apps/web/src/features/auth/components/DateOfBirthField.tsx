@@ -1,6 +1,6 @@
 import { FunctionComponent, useEffect, useMemo, useState } from 'react';
 
-import { FormFieldError, Select } from '@maw/ui';
+import { FormFieldError, DropdownSelect } from '@maw/ui';
 import { type CommonRegistrationFormFieldProps } from '@/features/auth';
 import { useMessages, useTranslations } from 'next-intl';
 
@@ -61,17 +61,17 @@ const DateOfBirthField: FunctionComponent<DateOfBirthFieldProps> = ({
       <label>
         <h5 className="mb-1">{t('user.field.dateOfBirth')}</h5>
         <div className="flex gap-3">
-          <Select
+          <DropdownSelect
             className="w-1/4"
             values={dateOfBirthYear}
             onValueChange={onYearChange}
           />
-          <Select
+          <DropdownSelect
             className="w-2/4"
             values={dateOfBirthMonth}
             onValueChange={onMonthChange}
           />
-          <Select
+          <DropdownSelect
             className="w-1/4"
             values={dateOfBirthDay}
             onValueChange={onDayChange}

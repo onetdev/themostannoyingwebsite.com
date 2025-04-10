@@ -3,7 +3,7 @@ import { fn } from '@storybook/test';
 
 import { TextInput } from './TextInput';
 
-const meta = {
+const meta: Meta<typeof TextInput> = {
   title: 'Example/TextInput',
   component: TextInput,
   tags: ['autodocs'],
@@ -19,7 +19,7 @@ const meta = {
   args: {
     onValueChange: fn(),
   },
-} satisfies Meta<typeof TextInput>;
+};
 
 export default meta;
 type Story = StoryObj<typeof meta>;

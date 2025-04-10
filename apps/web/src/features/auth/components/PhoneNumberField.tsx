@@ -9,7 +9,7 @@ import {
   useState,
 } from 'react';
 
-import { Button, FormFieldError, Select, TextInput } from '@maw/ui';
+import { Button, FormFieldError, DropdownSelect, TextInput } from '@maw/ui';
 import { type CommonRegistrationFormFieldProps } from '@/features/auth';
 import countryData from '@/root/public/assets/countries.json';
 import { useTranslations } from 'next-intl';
@@ -118,7 +118,7 @@ const PhoneNumberField: FunctionComponent<PhoneNumberFieldProps> = ({
       <label>
         <h5 className="mb-1">{t('user.field.phoneNumber')}</h5>
         <div className="flex gap-3">
-          <Select
+          <DropdownSelect
             className="w-1/4"
             values={phoneCountryOptions}
             {...register('phoneNumberCountry', {
