@@ -1,3 +1,5 @@
+@reference "tailwindcss";
+
 .content {
   @apply py-5 px-3 md:px-10 flex flex-col items-center
 }

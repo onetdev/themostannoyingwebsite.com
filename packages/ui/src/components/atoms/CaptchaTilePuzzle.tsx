@@ -171,7 +171,7 @@ const TileView: FunctionComponent<TileViewProps> = ({
     <div
       style={style}
       data-has-image={Boolean(imageSrc).toString()}
-      className="flex size-full select-none items-center justify-center rounded border border-on-surface transition-all duration-200 ease-in-out data-[has-image=true]:border-none group-data-[is-empty=true]:hidden group-data-[is-correct=false]:cursor-pointer group-data-[is-correct=true]:bg-success group-data-[is-correct=true]:text-on-success">
+      className="flex size-full select-none items-center justify-center rounded-sm border border-on-surface transition-all duration-200 ease-in-out data-[has-image=true]:border-none group-data-[is-empty=true]:hidden group-data-[is-correct=false]:cursor-pointer group-data-[is-correct=true]:bg-success group-data-[is-correct=true]:text-on-success">
       {!imageSrc && <span>{data.key}</span>}
     </div>
   );

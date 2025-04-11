@@ -45,7 +45,7 @@ const HistoryOverlay: FunctionComponent<HistoryOverlayProps> = ({
 
   return (
     <div className="rounded-lg border border-secondary bg-surface">
-      <div className="flex flex-row justify-between p-3 pl-5 shadow-sm">
+      <div className="flex flex-row justify-between p-3 pl-5 shadow-xs">
         <h4 className="text-lg font-bold">
           {t('chatBubble.hudTitle')}{' '}
           <abbr title={t('chatBubble.hudTitleDisclaimer')}>*</abbr>
@@ -69,7 +69,7 @@ const HistoryOverlay: FunctionComponent<HistoryOverlayProps> = ({
         )}
       </div>
       <MessageForm
-        className="flex justify-between p-3 pl-5 shadow-sm"
+        className="flex justify-between p-3 pl-5 shadow-xs"
         onMessage={onUserMessage}
       />
     </div>

@@ -1,4 +1,6 @@
-[data-theme='light'] {
+@reference 'tailwindcss';
+
+@theme light {
   /* Backgrounds */
   --color-background: #f4f6f9; /* Light, neutral gray-blue */
   --color-surface: #ffffff; /* Clean white for contrast */
@@ -32,10 +34,10 @@
   --color-on-background: #333333; /* Dark gray for readability */
   --color-on-surface: #333333; /* Consistent with on-background */
 
-    /* Borders */
-    --color-hr-primary: #e07b37; /* Muted amber-orange for primary borders */
-    --color-hr-secondary: #006964; /* Darker teal for secondary borders */
-    --color-hr-tertiary: #e24748; /* Muted coral-red for tertiary borders */
-    --color-hr-surface: #cdd2d8; /* Light gray for surface borders */
-    --color-hr-surface-alt: #b4bac0; /* Darker gray for alt surfaces */
+  /* Borders */
+  --color-hr-primary: #e07b37; /* Muted amber-orange for primary borders */
+  --color-hr-secondary: #006964; /* Darker teal for secondary borders */
+  --color-hr-tertiary: #e24748; /* Muted coral-red for tertiary borders */
+  --color-hr-surface: #cdd2d8; /* Light gray for surface borders */
+  --color-hr-surface-alt: #b4bac0; /* Darker gray for alt surfaces */
 }
