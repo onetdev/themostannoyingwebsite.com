@@ -11,8 +11,8 @@
   "dependencies": {
     "@maw/ui": "workspace:*",
     "next": "catalog:",
-    "react-dom": "catalog:",
-    "react": "catalog:"
+    "react": "catalog:",
+    "react-dom": "catalog:"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",
@@ -22,6 +22,7 @@
     "@storybook/addon-essentials": "^8.6.12",
     "@storybook/addon-interactions": "^8.6.12",
     "@storybook/addon-links": "^8.6.12",
+    "@storybook/addon-styling-webpack": "^1.0.1",
     "@storybook/addon-themes": "^8.6.12",
     "@storybook/blocks": "^8.6.12",
     "@storybook/nextjs": "^8.6.12",
