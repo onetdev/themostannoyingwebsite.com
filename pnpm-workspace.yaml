@@ -9,6 +9,7 @@ catalog:
   autoprefixer: 10.4.21
   eslint: 9.24.0
   next: 15.2.4
+  playwright: 1.51.1
   postcss: 8.5.3
   react-dom: ^19.1.0
   react: ^19.1.0

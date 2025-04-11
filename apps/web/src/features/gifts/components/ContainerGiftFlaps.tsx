@@ -50,6 +50,7 @@ const GiftFlapText: FunctionComponent<GiftFlapText> = ({
 }) => {
   return (
     <span
+      suppressHydrationWarning
       data-theme={theme ?? 'dark'}
       className={`absolute text-2xl font-bold text-gray-600 data-[theme=dark]:text-white ${className}`}>
       {children}
