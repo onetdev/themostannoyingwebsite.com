@@ -23,10 +23,7 @@
     "react-dom": "catalog:",
     "react-fast-marquee": "^1.6.5",
     "react-hook-form": "7.55.0",
-    "sanitize-html": "^2.15.0",
-    "yaml": "^2.7.1",
-    "zod": "^3.24.2",
-    "zod-to-json-schema": "^3.24.5"
+    "sanitize-html": "^2.15.0"
   },
   "devDependencies": {
     "@maw/eslint-config": "workspace:*",

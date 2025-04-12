@@ -1,9 +1,9 @@
 import {
-  ArticleService,
   LargeCoverItem,
   SmallCoverListItem,
   TextListItem,
 } from '@/features/content';
+import { AppArticleService } from '@/features/content/services/AppArticleService';
 import { OneByOneGift } from '@/features/gifts';
 
 export { generateStaticParams } from '@/i18n/routing';
@@ -11,14 +11,14 @@ export const revalidate = 1800;
 
 export default async function Page({ params }: NextPageProps) {
   const { locale } = await params;
-  const coverArticle = await ArticleService.getFirst({
+  const coverArticle = await AppArticleService.getFirst({
     params: { isOnCover: true, locale },
     paginate: {
       take: 1,
       skip: 0,
     },
   });
-  const articlePool = await ArticleService.getMany({
+  const articlePool = await AppArticleService.getMany({
     params: { isOnCover: false },
     paginate: { take: 12 },
   });

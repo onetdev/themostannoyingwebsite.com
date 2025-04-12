@@ -12,6 +12,11 @@ import articlesRaw from '../../data/index.json';
 
 export const defaultPageSize = 10;
 
+type ArticleServiceProps = {
+  getAssetUrl: (path: string) => string;
+  getUrl: (item: ArticleIndexEntrySchema) => string;
+}
+
 /**
  * SUPER DUPER IMPORTANT!!!!
  * Don't throw stones, the whole article system is tiny and happens on the
@@ -19,10 +24,10 @@ export const defaultPageSize = 10;
  * It's going to get refactored.
  */
 
-class ArticleService {
+export class ArticleService {
   articles: ArticleDatum[];
 
-  constructor() {
+  constructor({ getAssetUrl, getUrl }: ArticleServiceProps) {
     this.articles = articlesRaw.map(
       (article: ArticleIndexEntrySchema) =>
         ({
@@ -30,8 +35,8 @@ class ArticleService {
           content: article.content,
           coverImages: article.hasCoverImage
             ? {
-                original: `/assets/articles/${article.directory}/cover.webp`,
-                thumbnail: `/assets/articles/${article.directory}/cover-480x270.webp`,
+                original: getAssetUrl(`${article.directory}/cover.webp`),
+                thumbnail: getAssetUrl(`${article.directory}/cover-480x270.webp`),
               }
             : undefined,
           intro: article.intro,
@@ -41,7 +46,7 @@ class ArticleService {
           publishedAt: new Date(article.publishedAt),
           slug: article.slug,
           title: article.title,
-          url: `/articles/${article.slug}`,
+          url: getUrl(article),
         }) satisfies ArticleDatum,
     );
   }
@@ -146,5 +151,3 @@ const propFilterBool = (
   article[prop] === value ||
   typeof value === 'undefined' ||
   (article[prop] === undefined && value !== true);
-
-export const ArticleServiceSingleton = new ArticleService();

@@ -7,8 +7,9 @@ import SearchForm from '@/components/SearchForm';
 import UserNavigation from '@/components/UserNavigation';
 import { AppDarkModeToggle } from './AppDarkModeToggle';
 import { getTranslations } from 'next-intl/server';
-import { ArticleDatum, ArticleService } from '@maw/content-api';
+import { ArticleDatum } from '@maw/content-api';
 import { ArticleMarquee } from './ArticleMarquee';
+import { AppArticleService } from '@/features/content/services/AppArticleService';
 
 export const RenderMarqueeItem = (item: ArticleDatum) => {
   const path = '/articles/' + item.slug;
@@ -26,7 +27,7 @@ export const RenderMarqueeItem = (item: ArticleDatum) => {
 export const AppHeader: FunctionComponent = async () => {
   const t = await getTranslations();
 
-  const marqueeItems = (await ArticleService.getMany({
+  const marqueeItems = (await AppArticleService.getMany({
     params: { isHighlighted: true },
     paginate: { take: 10 },
   })).items

@@ -2,8 +2,9 @@ import type { MetadataRoute } from 'next';
 import { Languages } from 'next/dist/lib/metadata/types/alternative-urls-types';
 
 import config from '@/config';
-import { ArticleDatum, ArticleService } from '@maw/content-api';
+import { ArticleDatum } from '@maw/content-api';
 import i18nConfig from '@/root/i18n.config';
+import { AppArticleService } from '@/features/content/services/AppArticleService';
 
 const extraLangs = i18nConfig.locales.filter(
   (lang) => lang !== i18nConfig.defaultLocale,
@@ -39,7 +40,7 @@ const mapArticleToSitemapEntry = (item: ArticleDatum) => {
 }
 
 async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const articleResults = await ArticleService.getMany({ params: {}, paginate: { take: -1, skip: 0 } });
+  const articleResults = await AppArticleService.getMany({ params: {}, paginate: { take: -1, skip: 0 } });
   const articles = articleResults.items.map(mapArticleToSitemapEntry);
 
   return [
