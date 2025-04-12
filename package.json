@@ -23,7 +23,10 @@
     "lint:fix": "turbo run lint:fix",
     "prepare": "husky",
     "link-assets": "npx symlink-dir ./packages/content-api/data ./apps/web/public/assets/articles",
-    "test": "turbo run test"
+    "test": "turbo run test",
+    "clean": "turbo run clean --force",
+    "clean:pnpm": "pnpm store prune",
+    "clean:all": "pnpm recursive exec -- rm -rf node_modules dist .next .turbo storybook-static"
   },
   "devDependencies": {
     "@commitlint/cli": "^19.8.0",
