@@ -1,9 +1,9 @@
 import { Metadata } from 'next';
 
-import { ArticleService } from '@/features/content';
 import { ArticleItemPage } from './article-item-page';
 import i18nConfig from '@/root/i18n.config';
 import { notFound } from 'next/navigation';
+import { AppArticleService } from '@/features/content/services/AppArticleService';
 
 type PageParams = {
   slug: string;
@@ -17,7 +17,7 @@ export const revalidate = 1800;
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { locale, slug } = await params;
   const lookup = { slug, locale };
-  const data = await ArticleService.getByLookup(lookup);
+  const data = await AppArticleService.getByLookup(lookup);
 
   return {
     title: data?.title,
@@ -34,7 +34,7 @@ export const generateStaticParams = async () => {
   const paths: PageParams[] = [];
 
   for (const locale of locales) {
-    const articles = await ArticleService.getMany({
+    const articles = await AppArticleService.getMany({
       params: { locale },
       paginate: { take: -1 },
     });
@@ -50,7 +50,7 @@ export const generateStaticParams = async () => {
 export default async function Page({ params }: PageProps) {
   const { slug, locale } = await params;
   const lookup = { slug, locale };
-  const data = await ArticleService.getByLookup(lookup);
+  const data = await AppArticleService.getByLookup(lookup);
 
   if (!data) {
     return notFound();
