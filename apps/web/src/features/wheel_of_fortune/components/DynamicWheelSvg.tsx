@@ -62,7 +62,7 @@ const DynamicWheelSvg: FunctionComponent<DynamicWheelSvgProps> = ({
           d={d}
           fill={item.color}
           data-highlight-index={(highlightIndex == index).toString()}
-          className="data-[highlight-index=true]:animate-flashing-invert-1/2"
+          className="data-[highlight-index=true]:animate-flashing-invert-half"
         />
         <text
           textAnchor="end"

@@ -104,7 +104,7 @@ async function RootLayout({
       lang={locale}
       dir={direction}
       data-theme={config.defaultColorScheme}
-      style={{ colorScheme: config.defaultColorScheme }}>
+      suppressHydrationWarning>
       <body>
         <NextIntlClientProvider>
           <RootProviderContainer>

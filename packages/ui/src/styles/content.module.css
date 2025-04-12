@@ -1,4 +1,5 @@
 @reference "tailwindcss";
+@reference "./globals.css";
 
 .content {
   @apply py-5 px-3 md:px-10 flex flex-col items-center
@@ -44,5 +45,5 @@
 }
 .content :global(.table-container) > table th,
 .content :global(.table-container) > table td {
-  @apply border-b-on-background border-b
+  @apply border-on-background border-b
 }

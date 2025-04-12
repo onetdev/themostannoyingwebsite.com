@@ -55,7 +55,7 @@ const HistoryOverlay: FunctionComponent<HistoryOverlayProps> = ({
         </button>
       </div>
       <div
-        className="flex max-h-clamp-300-screen-2/1 flex-col gap-2 overflow-auto px-5 py-3"
+        className="flex max-h-clamp-300-screen-half flex-col gap-2 overflow-auto px-5 py-3"
         ref={pagerRef}>
         {history.length > 0 &&
           historyViewData.map(({ item, showTime }, index) => (

@@ -59,7 +59,7 @@ export default function HotThingsPage() {
   return (
     <main role="main">
       <PageHeadline>{t('navigation.hotThings')}</PageHeadline>
-      <div className="relative overflow-hidden pb-16/9">
+      <div className="relative overflow-hidden pb-16per9">
         <Image
           className="absolute h-auto w-full"
           src="/assets/images/lava.webp"

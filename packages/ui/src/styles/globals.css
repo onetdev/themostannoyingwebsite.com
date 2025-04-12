@@ -1,7 +1,5 @@
 @import "tailwindcss";
-
-@import "./themes/dark.css";
-@import "./themes/light.css";
+@import "./themes/index.css";
 
 html,
 body {
