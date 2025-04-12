@@ -1,0 +1,45 @@
+@reference 'tailwindcss';
+
+@layer theme {
+  :root:not([data-theme='light']), [data-theme='dark'] {
+    /* Backgrounds */
+    --theme-color-background: #0a0a14;
+    --theme-color-surface: #1a192b;
+    --theme-color-surface-alt: #2a283d;
+
+    /* Primary Colors */
+    --theme-color-primary: #ffca28;
+    --theme-color-primary-alt: #ffa000;
+    --theme-color-on-primary: #000000;
+
+    /* Secondary Colors */
+    --theme-color-secondary: #03a9f4 ;
+    --theme-color-secondary-alt: #0288d1 ;
+    --theme-color-on-secondary: #ffffff;
+
+    /* Tertiary Colors */
+    --theme-color-tertiary: #ff7043;
+    --theme-color-tertiary-alt: #f4511e;
+    --theme-color-on-tertiary: #000000;
+
+    /* Success, Warning, and Error */
+    --theme-color-success: #2e7d32;
+    --theme-color-warning: #ffeb3b;
+    --theme-color-error: #e53935;
+    --theme-color-on-success: #ffffff;
+    --theme-color-on-warning: #000000;
+    --theme-color-on-error: #ffffff;
+
+    /* Text and Dimmer */
+    --theme-color-dimmer: #555555a0;
+    --theme-color-on-background: #f0f0f0;
+    --theme-color-on-surface: #e0e0e0;
+
+    /* Borders */
+    --theme-color-hr-primary: #d4951c;
+    --theme-color-hr-secondary: #0277bd;
+    --theme-color-hr-tertiary: #e85f37;
+    --theme-color-hr-surface: #3b3b4e;
+    --theme-color-hr-surface-alt: #353348;
+  }
+}

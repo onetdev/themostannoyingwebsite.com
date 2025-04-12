@@ -30,18 +30,17 @@
     "localStyles.*"
   ],
   "yaml.schemas": {
-    "src/lib/schemas/article-entry-simplified.schema.json": "public/articles/*/data.yml"
+    "packages/content-api/src/schemas/article-entry-simplified.schema.json": "./packages/content-api/data/*/data.yml"
   },
   "json.schemas": [
     {
-      "fileMatch": ["public/articles/*-meta.json"],
-      "url": "./src/lib/schemas/article-locale-meta.schema.json"
+      "fileMatch": ["packages/content-api/data/*-meta.json"],
+      "url": "./packages/content-api/src/schemas/article-locale-meta.schema.json"
     }
   ],
   "explorer.fileNesting.enabled": true,
   "explorer.fileNesting.patterns": {
     "tsconfig.json": "tsconfig.json, tsconfig.tsbuildinfo",
-    "package.json": "package-lock.json, pnpm*",
     "README.md": "CODE_OF_CONDUCT.md, CONTRIBUTING.md, LICENSE, CHANGELOG.md",
   }
 }

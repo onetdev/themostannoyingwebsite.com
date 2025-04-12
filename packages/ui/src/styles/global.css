@@ -1,0 +1,51 @@
+@import "tailwindcss" source("../../../../");
+@import "./themes/index.css";
+
+html,
+body {
+  @apply bg-background text-on-background;
+  transition: background-color 0.3s ease-in-out;
+}
+
+a, a:visited {
+  @apply text-primary no-underline;
+  text-decoration: none;
+}
+a:hover {
+  @apply text-primary-alt;
+}
+
+h1 {
+  @apply text-4xl font-semibold;
+}
+h2 {
+  @apply text-3xl font-semibold;
+}
+h3 {
+  @apply text-2xl font-semibold;
+}
+h4 {
+  @apply text-xl font-semibold;
+}
+h5 {
+  @apply text-lg font-semibold;
+}
+h6 {
+  @apply text-base font-semibold;
+}
+
+small {
+  @apply text-sm;
+}
+
+::-moz-selection { /* Code for Firefox */
+  @apply text-on-primary bg-primary;
+}
+
+::selection {
+  @apply text-on-primary bg-primary;
+}
+
+mark {
+  @apply text-on-primary bg-primary;
+}

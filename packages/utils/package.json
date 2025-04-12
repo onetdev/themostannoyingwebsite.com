@@ -1,0 +1,34 @@
+{
+  "private": true,
+  "name": "@maw/utils",
+  "version": "1.0.0",
+  "type": "module",
+  "exports": {
+    "./array": "./src/array.ts",
+    "./color": "./src/color.ts",
+    "./math": "./src/math.ts",
+    "./string": "./src/string.ts"
+  },
+  "scripts": {
+    "check-types": "tsc --noEmit",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
+    "test": "jest"
+  },
+  "dependencies": {
+    "sanitize-html": "^2.15.0"
+  },
+  "devDependencies": {
+    "@jest/globals": "catalog:",
+    "@maw/eslint-config": "workspace:*",
+    "@maw/jest-preset": "workspace:*",
+    "@maw/tsconfig": "workspace:*",
+    "@types/jest": "catalog:",
+    "@types/sanitize-html": "^2.15.0",
+    "eslint": "catalog:",
+    "jest": "catalog:",
+    "jest-environment-jsdom": "catalog:",
+    "ts-jest": "catalog:",
+    "typescript": "catalog:"
+  }
+}

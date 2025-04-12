@@ -1,38 +1,46 @@
 dependencies:
   - changed-files:
     - any-glob-to-any-file:
-      - package.json
-      - pnpm-lock.yaml
+      - ./**/package.json
+      - ./**/package.json
+      - ./**/pnpm-lock.yaml
+      - .asdfrc
       - .nvmrc
+      - .tool-versions
 
 documentation:
   - changed-files:
     - any-glob-to-any-file:
-      - README.md
+      - ./**/README.md
+      - .github/ISSUE_TEMPLATE/*
       - .github/pull_request_template.md
+      - README.md
 
 storybook:
   - changed-files:
     - any-glob-to-any-file:
-      - .storybook/**
+      - apps/ui-docs/.storybook/**
       - ./**.stories.ts
       - ./**.stories.tsx
 
 ci/cd:
   - changed-files:
     - any-glob-to-any-file:
-      - .github/workflows/**
-      - .github/labeler.yml
+      - .github/auto-assign.yml
       - .github/CODEOWNERS
+      - .github/labeler.yml
+      - .github/workflows/**
       - next.config.js
 
 content:
   - changed-files:
     - any-glob-to-any-file:
-      - public/**
+      - apps/web/public/**
+      - assets/**
 
 ui:
   - changed-files:
     - any-glob-to-any-file:
-      - src/components/**.tsx
-      - src/features/**/components/**.tsx
+      - apps/web/src/components/**.tsx
+      - apps/web/src/features/**/components/**.tsx
+      - packages/ui/**
