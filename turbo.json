@@ -11,6 +11,10 @@
         "storybook-static/**"
       ]
     },
+    "lint:fix": {
+      "cache": false,
+      "dependsOn": ["^lint"]
+    },
     "lint": {
       "dependsOn": ["^lint"]
     },
@@ -20,6 +24,12 @@
     "dev": {
       "cache": false,
       "persistent": true
+    },
+    "build:metadata": {
+      "cache": false
+    },
+    "test": {
+      "cache": false
     }
   }
 }
