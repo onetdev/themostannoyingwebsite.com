@@ -1,5 +1,5 @@
 /** @type {import('lint-staged').Config} */
-module.exports = {
-  '**/*.ts?(x)': () => 'pnpm run type-check',
+export default {
+  '**/*.ts?(x)': () => 'pnpm run check-types',
   '**/*.(ts|js)?(x)': (filenames) => `pnpm run lint . ${filenames.join(' ')}`,
 };

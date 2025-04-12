@@ -15,8 +15,7 @@
     "test": "jest",
     "test:ci": "jest --ci",
     "test:coverage": "jest --coverage",
-    "test:e2e": "playwright test",
-    "test:once": "jest"
+    "test:e2e": "playwright test"
   },
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^6.7.2",
@@ -63,7 +62,6 @@
     "@eslint/js": "^9.23.0",
     "@maw/eslint-config": "workspace:^",
     "@maw/jest-preset": "workspace:^",
-    "@maw/tailwind": "workspace:^",
     "@maw/tsconfig": "workspace:^",
     "@next/eslint-plugin-next": "^15.2.4",
     "@playwright/test": "^1.51.1",

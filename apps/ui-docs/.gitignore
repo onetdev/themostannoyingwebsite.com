@@ -24,3 +24,4 @@ npm-debug.log*
 *.tsbuildinfo
 
 *storybook.log
+storybook-static

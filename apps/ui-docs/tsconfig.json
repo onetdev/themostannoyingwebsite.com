@@ -4,7 +4,6 @@
     "baseUrl": ".",
   },
   "include": [
-    "**/*.ts",
-    "**/*.tsx",
+    ".storybook/**/*.ts"
   ],
 }

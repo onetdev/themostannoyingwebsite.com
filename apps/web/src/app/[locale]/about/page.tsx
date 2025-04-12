@@ -1,7 +1,7 @@
 import { Metadata } from 'next';
 
 import { PageHeadline } from '@maw/ui';
-import styles from '@maw/ui/styles/content.module.css';
+import styles from '@maw/ui/content.module.css';
 import { getTranslations } from 'next-intl/server';
 import { notFound } from 'next/navigation';
 

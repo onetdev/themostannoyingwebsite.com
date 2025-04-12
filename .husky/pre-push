@@ -1,4 +1,4 @@
 #!/usr/bin/env sh
 pnpm run build
-pnpm run test:once
+pnpm run test
 pnpm run test:e2e

@@ -23,9 +23,7 @@
     "lint:fix": "turbo run lint:fix",
     "prepare": "husky",
     "link-assets": "npx symlink-dir ./packages/content-api/data ./apps/web/public/assets/articles",
-    "test": "turbo run test",
-    "test:e2e": "playwright test",
-    "test:watch": "jest --watch"
+    "test": "turbo run test"
   },
   "devDependencies": {
     "@commitlint/cli": "^19.8.0",
@@ -34,8 +32,7 @@
     "husky": "^9.1.7",
     "lint-staged": "^15.5.0",
     "turbo": "2.5.0",
-    "symlink-dir": "6.0.5",
-    "typescript": "catalog:"
+    "symlink-dir": "6.0.5"
   },
   "engines": {
     "node": ">=20.18.0"

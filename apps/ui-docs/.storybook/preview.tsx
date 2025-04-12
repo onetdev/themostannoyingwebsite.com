@@ -4,7 +4,7 @@ import {
 } from '@storybook/addon-themes';
 import React from 'react';
 
-import '@maw/ui/globals.css';
+import '@maw/ui/global.css';
 
 const preview: Preview = {
   parameters: {

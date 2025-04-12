@@ -6,7 +6,7 @@
   "exports": {
     ".": "./src/index.ts",
     "./utils": "./src/utils/index.ts",
-    "./globals.css": "./src/styles/globals.css",
+    "./global.css": "./src/styles/global.css",
     "./content.module.css": "./src/styles/content.module.css"
   },
   "scripts": {

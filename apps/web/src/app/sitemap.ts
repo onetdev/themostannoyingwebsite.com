@@ -38,7 +38,7 @@ const mapArticleToSitemapEntry = (item: ArticleDatum) => {
     } satisfies MetadataRoute.Sitemap[0];
 }
 
-export async function sitemap(): Promise<MetadataRoute.Sitemap> {
+async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const articleResults = await ArticleService.getMany({ params: {}, paginate: { take: -1, skip: 0 } });
   const articles = articleResults.items.map(mapArticleToSitemapEntry);
 
@@ -60,3 +60,5 @@ export async function sitemap(): Promise<MetadataRoute.Sitemap> {
     ...articles,
   ];
 }
+
+export default sitemap;

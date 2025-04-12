@@ -18,7 +18,6 @@
   "devDependencies": {
     "@eslint/eslintrc": "^3",
     "@maw/eslint-config": "workspace:^",
-    "@maw/tailwind": "workspace:*",
     "@maw/tsconfig": "workspace:*",
     "@storybook/addon-essentials": "^8.6.12",
     "@storybook/addon-interactions": "^8.6.12",
