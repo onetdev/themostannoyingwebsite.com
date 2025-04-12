@@ -31,5 +31,8 @@
     "test": {
       "cache": false
     }
-  }
+  },
+  "globalEnv": [
+    "GITHUB_TOKEN"
+  ]
 }
