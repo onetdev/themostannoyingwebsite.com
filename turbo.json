@@ -12,8 +12,8 @@
       ]
     },
     "lint:fix": {
-      "cache": false,
-      "dependsOn": ["^lint"]
+      "dependsOn": ["^lint"],
+      "cache": false
     },
     "lint": {
       "dependsOn": ["^lint"]
@@ -33,6 +33,19 @@
     }
   },
   "globalEnv": [
-    "GITHUB_TOKEN"
+    "ANALYZE",
+    "CI",
+    "GITHUB_TOKEN",
+    "NEXT_PUBLIC_IS_DEV",
+    "NEXT_PUBLIC_SENTRY_CLIENT_DSN",
+    "NEXT_PUBLIC_SENTRY_ENABLED",
+    "NEXT_PUBLIC_SITE_URL",
+    "SENTRY_AUTH_TOKEN",
+    "SENTRY_EDGE_DSN",
+    "SENTRY_SERVER_DSN",
+    "VERCEL_BRANCH_URL",
+    "VERCEL_ENV",
+    "VERCEL_GIT_COMMIT_REF",
+    "VERCEL_PROJECT_PRODUCTION_URL"
   ]
 }
