@@ -1,6 +1,6 @@
 {
   "private": true,
-  "name": "ui-docs",
+  "name": "@maw/ui-docs",
   "version": "1.0.0",
   "scripts": {
     "build": "storybook build",

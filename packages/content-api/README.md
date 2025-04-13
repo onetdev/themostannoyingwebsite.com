@@ -2,7 +2,17 @@
 
 This folder contains all the assets for the articles - for now, temporarily. Once we have so many content that this becomes a bottleneck we will replace it with a proper headless cms solution 🤷.
 
-**IMPORTANT***: Since we need index data to be generated, `pnpm run gen-article-index` must be run for dist and dev builds.
+## Usage
+
+Index data to be generated, therefore must be run for dist and dev builds.
+```bash
+pnpm run build:index
+```
+
+As for VSC json schema support you will also need to run:
+```bash
+pnpm run build:schema
+```
 
 ## How to add new article?
 
