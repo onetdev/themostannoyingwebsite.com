@@ -14,7 +14,7 @@
   "devDependencies": {
     "@maw/eslint-config": "workspace:*",
     "@maw/tsconfig": "workspace:*",
-    "@testing-library/jest-dom": "^6.6.3",
+    "@testing-library/jest-dom": "catalog:",
     "@types/jest": "catalog:",
     "eslint": "catalog:",
     "jest": "catalog:",

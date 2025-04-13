@@ -22,8 +22,7 @@
     "react": "catalog:",
     "react-dom": "catalog:",
     "react-fast-marquee": "^1.6.5",
-    "react-hook-form": "7.55.0",
-    "sanitize-html": "^2.15.0"
+    "react-hook-form": "7.55.0"
   },
   "devDependencies": {
     "@maw/eslint-config": "workspace:*",
@@ -35,9 +34,7 @@
     "@types/node": "^22.13.14",
     "@types/react": "catalog:",
     "@types/react-dom": "catalog:",
-    "@types/sanitize-html": "^2.15.0",
     "eslint": "catalog:",
-    "sharp": "^0.33.5",
     "tailwindcss": "catalog:",
     "tsx": "catalog:",
     "typescript": "catalog:"

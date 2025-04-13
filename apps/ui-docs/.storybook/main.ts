@@ -30,7 +30,8 @@ const config: StorybookConfig = {
     "../public"
   ],
   stories: [
-    "../node_modules/@maw/ui/src/**/*.stories.@(js|jsx|mjs|ts|tsx)",
+    "../node_modules/@maw/ui/src/**/*.stories.{js|jsx|mjs|ts|tsx}",
+    "../node_modules/@maw/ui/src/**/*.mdx",
   ],
   webpackFinal: async (config) => {
     if (!config.resolve) {
