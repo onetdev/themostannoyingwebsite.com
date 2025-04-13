@@ -1,12 +1,12 @@
 'use client';
 
+import { BorderedBox, Checkbox as FormCheckbox, LabeledChild } from '@maw/ui';
+import { useTranslations } from 'next-intl';
 import { useTheme } from 'next-themes';
 import { FunctionComponent } from 'react';
 
-import { Checkbox as FormCheckbox, LabeledChild, BorderedBox } from '@maw/ui';
 import { useRuntimeStore } from '@/lib/state/runtime';
 import { useUserPreferencesStore } from '@/lib/state/user_preferences';
-import { useTranslations } from 'next-intl';
 
 const PreferencesSettings: FunctionComponent = () => {
   const preference = useUserPreferencesStore();

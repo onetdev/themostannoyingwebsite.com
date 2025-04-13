@@ -1,5 +1,6 @@
 'use client';
 
+import { useMessages, useTranslations } from 'next-intl';
 import { FunctionComponent } from 'react';
 
 import ArrayPagedTitle from './components/ArrayPagedTitle';
@@ -8,7 +9,6 @@ import MarqueeTitle from './components/MarqueeTitle';
 
 import { useExperienceFlagsStore } from '@/lib/state/experience_flags';
 import { useRuntimeStore } from '@/lib/state/runtime';
-import { useMessages, useTranslations } from 'next-intl';
 
 /**
  * Experience of manipulating the page title. Unfortunatelly the refresh rate

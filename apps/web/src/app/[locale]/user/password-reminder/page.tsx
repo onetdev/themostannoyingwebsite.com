@@ -1,6 +1,6 @@
 import { Metadata } from 'next';
-
 import { getTranslations } from 'next-intl/server';
+
 import { PasswordReminderPage } from './password-reminder-page';
 
 export { generateStaticParams } from '@/i18n/routing';

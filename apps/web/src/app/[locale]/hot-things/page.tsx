@@ -1,5 +1,6 @@
 import { Metadata } from 'next';
 import { getTranslations } from 'next-intl/server';
+
 import HotThingsPage from './hot-things-page';
 
 export { generateStaticParams } from '@/i18n/routing';

@@ -1,8 +1,8 @@
-import { Link } from '@/i18n/navigation';
+import { useTranslations } from 'next-intl';
 import { FunctionComponent } from 'react';
 
 import config from '@/config';
-import { useTranslations } from 'next-intl';
+import { Link } from '@/i18n/navigation';
 
 export const AppFooter: FunctionComponent = () => {
   const t = useTranslations();

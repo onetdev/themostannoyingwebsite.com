@@ -1,11 +1,11 @@
 'use client';
 
+import { Icon } from '@maw/ui';
+import { useTranslations } from 'next-intl';
 import { FunctionComponent, useEffect, useRef, useState } from 'react';
 
-import { Icon } from '@maw/ui';
 import { useExperienceFlagsStore } from '@/lib/state/experience_flags';
 import { useUserGrantsStore } from '@/lib/state/user_grants';
-import { useTranslations } from 'next-intl';
 
 const StickyVideoExperienceHost: FunctionComponent = () => {
   const stickyVideo = useExperienceFlagsStore((state) => state.stickyVideo);

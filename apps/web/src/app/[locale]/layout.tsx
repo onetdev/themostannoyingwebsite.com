@@ -1,18 +1,19 @@
 import '@/global.css';
+import { Analytics } from '@vercel/analytics/react';
 import { Metadata, Viewport } from 'next';
-import config from '@/config';
 import { Open_Sans } from 'next/font/google';
-import RootProviderContainer from '@/lib/providers/RootProviderContainer';
-import ClientServiceProvider from '@/lib/providers/ClientServiceProvider';
-import { routing } from '@/i18n/routing';
 import { notFound } from 'next/navigation';
 import { hasLocale, NextIntlClientProvider } from 'next-intl';
-import { getLangDir } from 'rtl-detect';
-import { ExperienceDecoratorLayout } from '@/components/ExperienceDecoratorLayout';
 import { getTranslations } from 'next-intl/server';
-import { AppHeader } from '@/components/AppHeader';
+import { getLangDir } from 'rtl-detect';
+
 import { AppFooter } from '@/components/AppFooter';
-import { Analytics } from '@vercel/analytics/react';
+import { AppHeader } from '@/components/AppHeader';
+import { ExperienceDecoratorLayout } from '@/components/ExperienceDecoratorLayout';
+import config from '@/config';
+import { routing } from '@/i18n/routing';
+import ClientServiceProvider from '@/lib/providers/ClientServiceProvider';
+import RootProviderContainer from '@/lib/providers/RootProviderContainer';
 
 const _openSans = Open_Sans({
   subsets: ['latin'],

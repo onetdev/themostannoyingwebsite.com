@@ -1,8 +1,8 @@
+import { FormFieldError, PasswordStrengthBar, TextInput } from '@maw/ui';
+import { useTranslations } from 'next-intl';
 import { FunctionComponent } from 'react';
 
-import { FormFieldError, PasswordStrengthBar, TextInput } from '@maw/ui';
 import { type CommonRegistrationFormFieldProps } from '@/features/auth';
-import { useTranslations } from 'next-intl';
 
 type PasswordCreateFieldProps = Pick<
   CommonRegistrationFormFieldProps,

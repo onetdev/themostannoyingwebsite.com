@@ -1,8 +1,9 @@
 'use client';
 
-import { Link } from '@/i18n/navigation';
-import { MarqueeText } from '@maw/ui';
 import { ArticleDatum } from '@maw/content-api';
+import { MarqueeText } from '@maw/ui';
+
+import { Link } from '@/i18n/navigation';
 
 const RenderItem = (item: ArticleDatum) => {
   const path = '/articles/' + item.slug;

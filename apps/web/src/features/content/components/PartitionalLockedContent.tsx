@@ -1,5 +1,7 @@
 'use client';
 
+import { Button } from '@maw/ui';
+import { useTranslations } from 'next-intl';
 import React, {
   FunctionComponent,
   PropsWithChildren,
@@ -7,9 +9,6 @@ import React, {
   useRef,
   useState,
 } from 'react';
-
-import { Button } from '@maw/ui';
-import { useTranslations } from 'next-intl';
 
 type PartitionalLockedContentProps = Omit<JSXProxyProps<'div'>, 'styles'> &
   PropsWithChildren<{

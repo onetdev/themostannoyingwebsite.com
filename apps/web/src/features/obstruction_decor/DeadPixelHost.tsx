@@ -1,8 +1,7 @@
 'use client';
 
-import { FunctionComponent, useEffect, useState } from 'react';
-
 import { Point2d, random } from '@maw/utils/math';
+import { FunctionComponent, useEffect, useState } from 'react';
 
 // TODO: Maybe we could do a horror version like this:
 // https://www.tiktok.com/@jackandaxter/video/7421659495606144262

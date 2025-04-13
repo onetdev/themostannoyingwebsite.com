@@ -1,5 +1,6 @@
 'use client';
 
+import { clamp, random } from '@maw/utils/math';
 import {
   FunctionComponent,
   MouseEventHandler,
@@ -9,7 +10,6 @@ import {
 } from 'react';
 
 import { getRelativePosition } from '../../utils/dom';
-import { clamp, random } from '@maw/utils/math';
 
 type EscapingElementProps = PropsWithChildren<{
   trigger?: 'hover' | 'activationStart';

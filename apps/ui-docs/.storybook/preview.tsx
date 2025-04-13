@@ -1,5 +1,5 @@
-import type { Preview } from "@storybook/react";
 import { withThemeByDataAttribute } from "@storybook/addon-themes";
+import type { Preview } from "@storybook/react";
 import React from "react";
 
 import "./global.css";

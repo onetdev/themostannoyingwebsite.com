@@ -1,11 +1,11 @@
+import { DropdownSelect, FormFieldError } from '@maw/ui';
+import { useTranslations } from 'next-intl';
 import { FunctionComponent, useMemo } from 'react';
 
-import { FormFieldError, DropdownSelect } from '@maw/ui';
 import {
   CommonRegistrationFormFieldProps,
   userGenderList,
 } from '@/features/auth';
-import { useTranslations } from 'next-intl';
 
 type GenderFieldProps = Pick<
   CommonRegistrationFormFieldProps,

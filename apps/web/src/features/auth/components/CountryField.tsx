@@ -1,9 +1,9 @@
+import { DropdownSelect, FormFieldError } from '@maw/ui';
+import { useTranslations } from 'next-intl';
 import { FunctionComponent, useMemo } from 'react';
 
-import { FormFieldError, DropdownSelect } from '@maw/ui';
 import { CommonRegistrationFormFieldProps } from '@/features/auth';
 import countryData from '@/root/public/assets/countries.json';
-import { useTranslations } from 'next-intl';
 
 type CountryFieldProps = Pick<
   CommonRegistrationFormFieldProps,

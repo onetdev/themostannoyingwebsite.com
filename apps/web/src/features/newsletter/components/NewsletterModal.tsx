@@ -1,11 +1,11 @@
+import { Button, FormFieldError, Modal, TextInput } from '@maw/ui';
+import { random } from '@maw/utils/math';
+import { useMessages, useTranslations } from 'next-intl';
 import { FunctionComponent, useMemo, useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 
-import { Button, FormFieldError, TextInput, Modal } from '@maw/ui';
 import { type NewsletterFormInputs } from '@/features/newsletter';
-import { random } from '@maw/utils/math';
 import { EMAIL_PATTERN } from '@/lib/utils/validator';
-import { useMessages, useTranslations } from 'next-intl';
 
 type NewsletterModalProps = {
   visible?: boolean;

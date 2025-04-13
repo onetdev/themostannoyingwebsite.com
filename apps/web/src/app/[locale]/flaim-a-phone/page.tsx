@@ -1,7 +1,7 @@
 import { Metadata } from 'next';
+import { getTranslations } from 'next-intl/server';
 
 import { FlaimSurvery } from '@/features/gifts';
-import { getTranslations } from 'next-intl/server';
 
 export { generateStaticParams } from '@/i18n/routing';
 export const revalidate = 1800;

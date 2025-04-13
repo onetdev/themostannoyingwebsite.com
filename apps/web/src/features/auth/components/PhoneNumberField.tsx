@@ -1,3 +1,5 @@
+import { Button, DropdownSelect, FormFieldError, TextInput } from '@maw/ui';
+import { useTranslations } from 'next-intl';
 import {
   type FunctionComponent,
   type MouseEvent,
@@ -9,10 +11,8 @@ import {
   useState,
 } from 'react';
 
-import { Button, FormFieldError, DropdownSelect, TextInput } from '@maw/ui';
 import { type CommonRegistrationFormFieldProps } from '@/features/auth';
 import countryData from '@/root/public/assets/countries.json';
-import { useTranslations } from 'next-intl';
 
 type PhoneNumberFieldProps = Pick<
   CommonRegistrationFormFieldProps,

@@ -1,11 +1,11 @@
 import Image from 'next/image';
-import { Link } from '@/i18n/navigation';
+import { useTranslations } from 'next-intl';
 import { FunctionComponent } from 'react';
 
 import { CoverPlaceholder } from './CoverPlaceholder';
 
 import { type ArticleDatum } from '@/features/content';
-import { useTranslations } from 'next-intl';
+import { Link } from '@/i18n/navigation';
 
 type SmallCoverListItemProps = JSXProxyProps<'article'> & {
   article: ArticleDatum;

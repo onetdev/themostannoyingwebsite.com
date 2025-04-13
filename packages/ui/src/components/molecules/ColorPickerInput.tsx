@@ -1,8 +1,7 @@
+import { getRelativeLuminance } from '@maw/utils/color';
 import { DetailedHTMLProps, forwardRef, InputHTMLAttributes } from 'react';
 
 import { Icon } from '../atoms/Icon';
-
-import { getRelativeLuminance } from '@maw/utils/color';
 
 export type ColorPickerInputSize = 'sm' | 'md' | 'lg';
 export type ColorPickerInputProps = Omit<

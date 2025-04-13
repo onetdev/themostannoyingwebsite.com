@@ -1,5 +1,7 @@
 'use client';
 
+import { Modal } from '@maw/ui';
+import { useTranslations } from 'next-intl';
 import { FunctionComponent, useEffect, useState } from 'react';
 import {
   EmailIcon,
@@ -9,9 +11,6 @@ import {
   TwitterShareButton,
   XIcon,
 } from 'react-share';
-
-import { Modal } from '@maw/ui';
-import { useTranslations } from 'next-intl';
 
 type ShareModalProps = {
   show: boolean;

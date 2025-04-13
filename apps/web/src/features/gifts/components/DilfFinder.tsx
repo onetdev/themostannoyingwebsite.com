@@ -1,7 +1,7 @@
 import Image from 'next/image';
+import { useTranslations } from 'next-intl';
 
 import DilfClickOverlay from './DilfClickOverlay';
-import { useTranslations } from 'next-intl';
 
 const DilfFinder = () => {
   const t = useTranslations();

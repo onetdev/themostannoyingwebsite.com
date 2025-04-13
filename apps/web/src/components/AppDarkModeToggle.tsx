@@ -1,10 +1,9 @@
 'use client';
 
-import { FunctionComponent } from 'react';
-
 import { DarkModeToggle } from '@maw/ui';
 import { useTranslations } from 'next-intl';
 import { useTheme } from 'next-themes';
+import { FunctionComponent } from 'react';
 
 export const AppDarkModeToggle: FunctionComponent = () => {
   const t = useTranslations();

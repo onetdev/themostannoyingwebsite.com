@@ -4,8 +4,7 @@ import { FunctionComponent } from 'react';
 
 import CookieConsent from '@/components/CookieConsent';
 import { ChatBubbleHost } from '@/features/chat_bubble';
-import { ContainerGiftFlaps } from '@/features/gifts';
-import { AdblockerSuspectBar } from '@/features/gifts';
+import { AdblockerSuspectBar, ContainerGiftFlaps } from '@/features/gifts';
 import {
   DeadPixelHost,
   StickyVideoExperienceHost,

@@ -1,6 +1,7 @@
-import { DilfFinder } from '@/features/gifts';
 import { Metadata } from 'next';
 import { getTranslations } from 'next-intl/server';
+
+import { DilfFinder } from '@/features/gifts';
 
 export { generateStaticParams } from '@/i18n/routing';
 export const revalidate = 1800;

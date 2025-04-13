@@ -1,7 +1,6 @@
+import { random } from '@maw/utils/math';
 import Head from 'next/head';
 import { useCallback, useEffect, useState } from 'react';
-
-import { random } from '@maw/utils/math';
 
 export type RandomBlinkTitleProps = {
   duration?: number;

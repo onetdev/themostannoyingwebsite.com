@@ -1,11 +1,11 @@
+import { DotDotDotText, Icon } from '@maw/ui';
+import { useTranslations } from 'next-intl';
 import { FunctionComponent, useEffect, useMemo, useRef, useState } from 'react';
 
 import MessageBubble from './MessageBubble';
 import MessageForm from './MessageForm';
 
-import { Icon, DotDotDotText } from '@maw/ui';
 import { HistoryItem } from '@/features/chat_bubble/types';
-import { useTranslations } from 'next-intl';
 
 export type HistoryOverlayProps = {
   history: HistoryItem[];

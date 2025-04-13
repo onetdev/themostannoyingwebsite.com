@@ -1,6 +1,7 @@
-import { getTranslations } from 'next-intl/server';
-import { LoginPage } from './login-page';
 import { Metadata } from 'next';
+import { getTranslations } from 'next-intl/server';
+
+import { LoginPage } from './login-page';
 
 export { generateStaticParams } from '@/i18n/routing';
 export const revalidate = 1800;

@@ -1,9 +1,8 @@
 'use client';
 
-import { FunctionComponent } from 'react';
-
 import { Button, DimmerOverlay } from '@maw/ui';
 import { useTranslations } from 'next-intl';
+import { FunctionComponent } from 'react';
 
 type ManualModalProps = {
   visible?: boolean;

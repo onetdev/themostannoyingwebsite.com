@@ -1,5 +1,6 @@
 'use client';
 
+import { Icon } from '@maw/ui';
 import {
   FunctionComponent,
   MouseEventHandler,
@@ -7,7 +8,6 @@ import {
   useEffect,
 } from 'react';
 
-import { Icon } from '@maw/ui';
 import HistoryOverlay from '@/features/chat_bubble/components/HistoryOverlay';
 import useChatBubbleHistory from '@/features/chat_bubble/hooks/useChatBubbleHistory';
 

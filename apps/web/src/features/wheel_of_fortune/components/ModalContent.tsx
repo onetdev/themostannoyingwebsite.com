@@ -1,12 +1,11 @@
+import { Icon } from '@maw/ui';
+import { getWeightedRandom, WeightedRandomPoolItem } from '@maw/utils/math';
+import { useTranslations } from 'next-intl';
 import { FunctionComponent, useMemo, useState } from 'react';
 import Confetti from 'react-confetti';
 
 import { Item } from './DynamicWheelSvg';
 import AnimatedWheel, { AnimatedWheelState } from './WheelAnimationWrapper';
-
-import { Icon } from '@maw/ui';
-import { getWeightedRandom, WeightedRandomPoolItem } from '@maw/utils/math';
-import { useTranslations } from 'next-intl';
 
 type ModalContentProps = JSXProxyProps<'div'> & {
   onClose?: () => void;

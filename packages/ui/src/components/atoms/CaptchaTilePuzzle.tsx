@@ -1,9 +1,8 @@
 'use client';
 
-import { FunctionComponent, useEffect, useMemo, useState } from 'react';
-
 import { arrayShuffle } from '@maw/utils/array';
 import { isPoint2d, Point2d } from '@maw/utils/math';
+import { FunctionComponent, useEffect, useMemo, useState } from 'react';
 
 interface CaptchaTilePuzzleProps {
   className?: string;

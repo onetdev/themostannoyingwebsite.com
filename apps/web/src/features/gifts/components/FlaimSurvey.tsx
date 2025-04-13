@@ -1,13 +1,13 @@
 'use client';
 
+import { BorderedBox, Button, LabeledChild, RadioButton } from '@maw/ui';
+import { arrayShuffle } from '@maw/utils/array';
 import { useRouter } from 'next/navigation';
+import { useMessages, useTranslations } from 'next-intl';
 import { FunctionComponent, useEffect, useMemo, useState } from 'react';
 
-import { Button, RadioButton, LabeledChild, BorderedBox } from '@maw/ui';
 import { FlaimSurveyQuestion } from '@/features/gifts';
 import { useRuntimeStore } from '@/lib/state/runtime';
-import { arrayShuffle } from '@maw/utils/array';
-import { useMessages, useTranslations } from 'next-intl';
 
 export type FlaimSurveryProps = { className?: string; timeInSeconds?: number };
 

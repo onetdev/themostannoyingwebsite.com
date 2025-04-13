@@ -1,8 +1,8 @@
-import { Metadata } from 'next';
-
 import { PageHeadline } from '@maw/ui';
-import config from '@/config';
+import { Metadata } from 'next';
 import { getTranslations } from 'next-intl/server';
+
+import config from '@/config';
 
 export { generateStaticParams } from '@/i18n/routing';
 export const revalidate = 1800;

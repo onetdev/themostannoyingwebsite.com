@@ -1,6 +1,13 @@
 'use client';
 
-import { Link } from '@/i18n/navigation';
+import {
+  Button,
+  CaptchaTitlePuzzleField,
+  FormFieldError,
+  PageHeadline,
+  TextInput,
+} from '@maw/ui';
+import { useTranslations } from 'next-intl';
 import {
   SubmitHandler,
   useForm,
@@ -8,16 +15,9 @@ import {
   UseFormSetValue,
 } from 'react-hook-form';
 
-import {
-  Button,
-  FormFieldError,
-  PageHeadline,
-  TextInput,
-  CaptchaTitlePuzzleField,
-} from '@maw/ui';
 import { PasswordReminderFormInputs } from '@/features/auth';
+import { Link } from '@/i18n/navigation';
 import { EMAIL_PATTERN } from '@/lib/utils/validator';
-import { useTranslations } from 'next-intl';
 
 export function PasswordReminderPage() {
   const t = useTranslations();

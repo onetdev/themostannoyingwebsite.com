@@ -1,16 +1,16 @@
 'use client';
 
-import { Link } from '@/i18n/navigation';
-import { SubmitHandler, useForm, UseFormRegister } from 'react-hook-form';
-
 import {
   Button,
+  CaptchaEmojiField,
   Checkbox,
   FormFieldError,
-  TextInput,
-  CaptchaEmojiField,
   PageHeadline,
+  TextInput,
 } from '@maw/ui';
+import { useTranslations } from 'next-intl';
+import { SubmitHandler, useForm, UseFormRegister } from 'react-hook-form';
+
 import {
   CountryField,
   DateOfBirthField,
@@ -19,8 +19,8 @@ import {
   PhoneNumberField,
   RegistrationFormInputs,
 } from '@/features/auth';
+import { Link } from '@/i18n/navigation';
 import { EMAIL_PATTERN } from '@/lib/utils/validator';
-import { useTranslations } from 'next-intl';
 
 export function RegistrationPage() {
   const t = useTranslations();

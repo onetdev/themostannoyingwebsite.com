@@ -1,10 +1,9 @@
 'use client';
 
-import Image from 'next/image';
-import { useEffect, useRef, useState } from 'react';
-
 import { Icon, PageHeadline } from '@maw/ui';
+import Image from 'next/image';
 import { useTranslations } from 'next-intl';
+import { useEffect, useRef, useState } from 'react';
 
 export default function HotThingsPage() {
   const [isCapable, setIsCapable] = useState(false);

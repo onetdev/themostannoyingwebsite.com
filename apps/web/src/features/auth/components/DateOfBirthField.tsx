@@ -1,8 +1,8 @@
+import { DropdownSelect, FormFieldError } from '@maw/ui';
+import { useMessages, useTranslations } from 'next-intl';
 import { FunctionComponent, useEffect, useMemo, useState } from 'react';
 
-import { FormFieldError, DropdownSelect } from '@maw/ui';
 import { type CommonRegistrationFormFieldProps } from '@/features/auth';
-import { useMessages, useTranslations } from 'next-intl';
 
 type DateOfBirthFieldProps = Pick<
   CommonRegistrationFormFieldProps,

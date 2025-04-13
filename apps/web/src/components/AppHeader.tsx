@@ -1,15 +1,16 @@
-import { Link } from '@/i18n/navigation';
+import { ArticleDatum } from '@maw/content-api';
+import { Icon } from '@maw/ui';
+import { getTranslations } from 'next-intl/server';
 import { FunctionComponent } from 'react';
 
-import { Icon } from '@maw/ui';
+import { AppDarkModeToggle } from './AppDarkModeToggle';
+import { ArticleMarquee } from './ArticleMarquee';
+
 import MainNavigation from '@/components/MainNavigation';
 import SearchForm from '@/components/SearchForm';
 import UserNavigation from '@/components/UserNavigation';
-import { AppDarkModeToggle } from './AppDarkModeToggle';
-import { getTranslations } from 'next-intl/server';
-import { ArticleDatum } from '@maw/content-api';
-import { ArticleMarquee } from './ArticleMarquee';
 import { AppArticleService } from '@/features/content/services/AppArticleService';
+import { Link } from '@/i18n/navigation';
 
 export const RenderMarqueeItem = (item: ArticleDatum) => {
   const path = '/articles/' + item.slug;

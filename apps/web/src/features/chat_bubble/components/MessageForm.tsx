@@ -1,7 +1,6 @@
-import { FormEventHandler, FunctionComponent, useRef } from 'react';
-
 import { Button, Icon, TextInput } from '@maw/ui';
 import { useTranslations } from 'next-intl';
+import { FormEventHandler, FunctionComponent, useRef } from 'react';
 
 export type MessageFormProps = {
   className?: string;

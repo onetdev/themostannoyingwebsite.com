@@ -1,12 +1,12 @@
 'use client';
 
 import Image from 'next/image';
-import { Link } from '@/i18n/navigation';
+import { useTranslations } from 'next-intl';
 import { FunctionComponent } from 'react';
 
+import { Link } from '@/i18n/navigation';
 import { useExperienceFlagsStore } from '@/lib/state/experience_flags';
 import { useRuntimeStore } from '@/lib/state/runtime';
-import { useTranslations } from 'next-intl';
 
 export type OneByOneGiftProps = {
   size?: number;

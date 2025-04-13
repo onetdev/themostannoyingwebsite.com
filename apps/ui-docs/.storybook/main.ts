@@ -1,6 +1,5 @@
 import type { StorybookConfig } from "@storybook/nextjs";
-
-import { join, dirname, resolve } from "path";
+import { dirname, join, resolve } from "path";
 
 /**
  * This function is used to resolve the absolute path of a package.

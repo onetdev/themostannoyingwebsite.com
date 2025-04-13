@@ -1,3 +1,5 @@
+import { Button, Icon } from '@maw/ui';
+import { getPointDistance, random } from '@maw/utils/math';
 import {
   CSSProperties,
   FunctionComponent,
@@ -10,9 +12,7 @@ import {
 
 import DynamicWheelSvg, { Item } from './DynamicWheelSvg';
 
-import { Button, Icon } from '@maw/ui';
 import useDragTracker from '@/lib/hooks/useDragTracker';
-import { getPointDistance, random } from '@maw/utils/math';
 
 type AnimatedWheelProps = {
   items: Item[];

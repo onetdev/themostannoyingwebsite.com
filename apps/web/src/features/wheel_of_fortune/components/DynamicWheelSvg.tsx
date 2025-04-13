@@ -1,7 +1,6 @@
+import { radToDeg } from '@maw/utils/math';
 import Color from 'color';
 import { FunctionComponent, ReactNode } from 'react';
-
-import { radToDeg } from '@maw/utils/math';
 
 export type Item = {
   color: string;

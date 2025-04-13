@@ -1,9 +1,10 @@
 import { Metadata } from 'next';
+import { notFound } from 'next/navigation';
 
 import { ArticleItemPage } from './article-item-page';
-import i18nConfig from '@/root/i18n.config';
-import { notFound } from 'next/navigation';
+
 import { AppArticleService } from '@/features/content/services/AppArticleService';
+import i18nConfig from '@/root/i18n.config';
 
 type PageParams = {
   slug: string;

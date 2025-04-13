@@ -1,3 +1,7 @@
+import { fuzzy_search } from '@maw/utils/string';
+
+import articlesRaw from '../../data/index.json';
+import { ArticleIndexEntrySchema } from '../schemas/article-index-entry';
 import {
   ArticleData,
   ArticleDatum,
@@ -6,9 +10,6 @@ import {
   ArticleSearchFilter,
   ArticleSearchResult,
 } from '../types';
-import { ArticleIndexEntrySchema } from '../schemas/article-index-entry';
-import { fuzzy_search } from '@maw/utils/string';
-import articlesRaw from '../../data/index.json';
 
 export const defaultPageSize = 10;
 

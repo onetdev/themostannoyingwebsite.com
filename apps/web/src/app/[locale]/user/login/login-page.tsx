@@ -1,8 +1,5 @@
 'use client';
 
-import { Link } from '@/i18n/navigation';
-import { SubmitHandler, useForm } from 'react-hook-form';
-
 import {
   Button,
   CaptchaEmoji,
@@ -11,9 +8,12 @@ import {
   PageHeadline,
   TextInput,
 } from '@maw/ui';
-import { LoginFormInputs } from '@/features/auth';
-import { EMAIL_PATTERN } from '@/lib/utils/validator';
 import { useTranslations } from 'next-intl';
+import { SubmitHandler, useForm } from 'react-hook-form';
+
+import { LoginFormInputs } from '@/features/auth';
+import { Link } from '@/i18n/navigation';
+import { EMAIL_PATTERN } from '@/lib/utils/validator';
 
 export function LoginPage() {
   const t = useTranslations();

@@ -1,11 +1,10 @@
 'use client';
 
+import { DimmerOverlay, Icon } from '@maw/ui';
+import { useTranslations } from 'next-intl';
 import { FunctionComponent, useState } from 'react';
 
 import ModalContent from './components/ModalContent';
-
-import { DimmerOverlay, Icon } from '@maw/ui';
-import { useTranslations } from 'next-intl';
 
 const WheelOfFortuneHost: FunctionComponent = () => {
   const [isOpen, setOpen] = useState(false);

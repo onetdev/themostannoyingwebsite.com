@@ -1,6 +1,6 @@
 import { Metadata } from 'next';
-
 import { getTranslations } from 'next-intl/server';
+
 import { RegistrationPage } from './registration-page';
 
 export { generateStaticParams } from '@/i18n/routing';
