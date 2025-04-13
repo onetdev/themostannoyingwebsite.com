@@ -15,7 +15,7 @@ export function ArticleItemPage({ data }: { data: ArticleDatum }) {
   );
 
   return (
-    <>
+    <main role="main" data-testid="article-item">
       <h1 className="mb-2 max-w-[900px]">{data.title}</h1>
       <span className="mb-5 block italic">
         {t('article.published', { date: data.publishedAt.toDateString() })}
@@ -32,10 +32,11 @@ export function ArticleItemPage({ data }: { data: ArticleDatum }) {
         </div>
       )}
       <PartitionalLockedContent
-        initialMaxHeight={300}
-        active={partitionEnabled}>
-        <div className={styles['content']}>{HTMLReactParser(data.content)}</div>
+        active={partitionEnabled}
+        data-testid="article-item-content"
+        wrapperClassName={styles['content']}>
+        {HTMLReactParser(data.content)}
       </PartitionalLockedContent>
-    </>
+    </main>
   );
 }
