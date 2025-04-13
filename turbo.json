@@ -16,7 +16,7 @@
       ]
     },
     "lint:fix": {
-      "dependsOn": ["^lint"],
+      "dependsOn": ["^lint:fix"],
       "cache": false
     },
     "lint": {
