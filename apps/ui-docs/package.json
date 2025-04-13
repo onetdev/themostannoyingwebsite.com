@@ -6,8 +6,8 @@
     "build": "storybook build",
     "check-types": "tsc --noEmit",
     "dev": "storybook dev -p 6006",
-    "lint": "next lint",
-    "lint:fix": "next lint --fix"
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix"
   },
   "dependencies": {
     "@maw/ui": "workspace:*",
