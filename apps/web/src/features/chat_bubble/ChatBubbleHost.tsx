@@ -6,6 +6,7 @@ import {
   MouseEventHandler,
   useCallback,
   useEffect,
+  useRef,
 } from 'react';
 
 import HistoryOverlay from '@/features/chat_bubble/components/HistoryOverlay';
@@ -19,27 +20,42 @@ import useChatBubbleHistory from '@/features/chat_bubble/hooks/useChatBubbleHist
  */
 const ChatBubbleHost: FunctionComponent = () => {
   const state = useChatBubbleHistory();
+  const $ref = useRef<HTMLDivElement>(null);
 
-  const preventClose: MouseEventHandler = (e) => e.stopPropagation();
   const closeHistory = useCallback(() => state.setForeground(false), [state]);
   const toggleHistory: MouseEventHandler<HTMLButtonElement> = () =>
     state.setForeground((prev) => !prev);
+  const handleDocumentInteraction = useCallback(
+    (event: Event) => {
+      if (!$ref.current || $ref.current.contains(event.target as Node)) {
+        return;
+      }
+
+      state.setForeground(false);
+    },
+    [state],
+  );
 
   useEffect(() => {
-    document.addEventListener('click', closeHistory);
-    return () => document.removeEventListener('click', closeHistory);
-  }, [closeHistory]);
+    document.addEventListener('click', handleDocumentInteraction);
+    return () =>
+      document.removeEventListener('click', handleDocumentInteraction);
+  }, [handleDocumentInteraction]);
 
   return (
     <div
       data-state={state.isForeground ? 'open' : 'closed'}
       className="group fixed bottom-2 left-2 z-20 flex md:bottom-4 md:left-4"
-      onClick={preventClose}>
+      ref={$ref}>
       <button
         className="bg-secondary text-on-secondary z-30 flex size-12 cursor-pointer items-center justify-center rounded-full text-2xl md:size-14"
         onClick={toggleHistory}>
-        <Icon icon="commentDots" size="3xl" className="hidden md:block" />
-        <Icon icon="commentDots" size="2xl" className="block md:hidden" />
+        <span className="hidden md:block">
+          <Icon icon="commentDots" size="3xl" />
+        </span>
+        <span className="block md:hidden">
+          <Icon icon="commentDots" size="2xl" />
+        </span>
         {state.badgeCounter > 0 && (
           <div className="bg-error text-on-error absolute -top-2 -right-2 z-20 flex size-6 items-center justify-center rounded-full p-1 text-center text-xs md:size-7">
             <span>{state.badgeCounter}</span>

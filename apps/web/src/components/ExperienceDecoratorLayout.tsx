@@ -1,6 +1,6 @@
 'use client';
 
-import { FunctionComponent } from 'react';
+import { FunctionComponent, useEffect, useState } from 'react';
 
 import CookieConsent from '@/components/CookieConsent';
 import { ChatBubbleHost } from '@/features/chat_bubble';
@@ -24,14 +24,33 @@ export const ExperienceDecoratorLayout: FunctionComponent<
     (state) => state.wheelOfFortune,
   );
 
+  // Important thing to note here:
+  // Tha fact that server side state and client side state are different and
+  // since some of the elements cause huge layout shift we want to perform
+  // them only if neccessary.
+
+  const [runtimeFlags, setRuntimeFlags] = useState(() => ({
+    giftFlaps: false,
+    mockChat: false,
+    wheelOfFortune: false,
+  }));
+
+  useEffect(() => {
+    setRuntimeFlags({
+      giftFlaps,
+      mockChat,
+      wheelOfFortune,
+    });
+  }, [giftFlaps, mockChat, wheelOfFortune]);
+
   return (
     <div className={className} {...rest}>
-      {giftFlaps && <ContainerGiftFlaps />}
+      {runtimeFlags.giftFlaps && <ContainerGiftFlaps />}
       <div className="bg-surface relative container mx-auto my-0 min-h-screen px-3 py-2 md:px-5">
         {children}
-        {wheelOfFortune && <WheelOfFortuneHost />}
+        {runtimeFlags.wheelOfFortune && <WheelOfFortuneHost />}
         {deadPixel && <DeadPixelHost />}
-        {mockChat && <ChatBubbleHost />}
+        {runtimeFlags.mockChat && <ChatBubbleHost />}
         <CookieConsent />
         <AdblockerSuspectBar />
         <StickyVideoExperienceHost />
