@@ -41,7 +41,8 @@ export const DarkModeToggle: FunctionComponent<DarkModeToggleProps> = ({
   const sizeClass = resolveSize(size);
 
   return (
-    <div
+    <button
+      tabIndex={0}
       suppressHydrationWarning
       data-dark={(resolvedTheme === 'dark' || !resolvedTheme).toString()}
       className={`group border-secondary relative flex justify-between rounded-full border select-none ${sizeClass} ${className}`}
@@ -53,7 +54,7 @@ export const DarkModeToggle: FunctionComponent<DarkModeToggleProps> = ({
       <SelectOption role="img" aria-label={text.darkMode}>
         🌙
       </SelectOption>
-    </div>
+    </button>
   );
 };
 

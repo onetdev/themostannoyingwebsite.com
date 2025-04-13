@@ -16,7 +16,8 @@
     "virgin": {
       "title": "Disable all experiences",
       "description": "All experiences are disabled now. If you want share this page just for the content just pass this URL around. If you changed your mind, you can re-enable all experiences in the settings menu."
-    }
+    },
+    "toggleMenu": "Toggle menu"
   },
   "navigation": {
     "home": "Home",

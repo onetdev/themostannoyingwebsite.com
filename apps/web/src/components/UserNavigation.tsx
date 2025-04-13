@@ -41,9 +41,9 @@ const UserNavigation: FunctionComponent<UserNavigationProps> = ({
       />
       <ul className="flex justify-end gap-4">
         <li>
-          <a
+          <button
             onClick={() => setShowShareModal(true)}
-            className="flex cursor-pointer items-center gap-2">
+            className="text-primary flex cursor-pointer items-center gap-2">
             <Icon
               icon="share"
               title={t('common.share')}
@@ -51,7 +51,7 @@ const UserNavigation: FunctionComponent<UserNavigationProps> = ({
               size="lg"
             />
             <span className="hidden md:inline-block">{t('common.share')}</span>
-          </a>
+          </button>
         </li>
         {links.map(({ path, text, icon }) => (
           <li key={path}>
