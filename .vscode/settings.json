@@ -15,6 +15,16 @@
     "typescript",
     "typescriptreact"
   ],
+  "eslint.workingDirectories": [
+    "apps/ui-docs",
+    "apps/web",
+    "packages/content-api",
+    "packages/ui",
+    "packages/eslint-config",
+    "packages/jest-preset",
+    "packages/tsconfig",
+    "packages/utils",
+ ],
   "files.associations": {
     "*.css": "tailwindcss"
   },
@@ -42,5 +52,15 @@
   "explorer.fileNesting.patterns": {
     "tsconfig.json": "tsconfig.json, tsconfig.tsbuildinfo",
     "README.md": "CODE_OF_CONDUCT.md, CONTRIBUTING.md, LICENSE, CHANGELOG.md",
-  }
+  },
+  "files.exclude": {
+    "**/dist": true,
+    "**/.next": true,
+    "**/node_modules": true
+  },
+  "search.exclude": {
+    "**/dist": true,
+    "**/.next": true,
+    "**/node_modules": true
+  },
 }

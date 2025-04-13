@@ -1,12 +1,12 @@
 {
-    "recommendations": [
-        "bradlc.vscode-tailwindcss",
-        "dbaeumer.vscode-eslint",
-        "esbenp.prettier-vscode",
-        "redhat.vscode-yaml",
-        "rubymaniac.vscode-direnv",
-        "unifiedjs.vscode-mdx",
-        "yoavbls.pretty-ts-errors",
-        "me-dutour-mathieu.vscode-github-actions"
-    ]
+  "recommendations": [
+    "bradlc.vscode-tailwindcss",
+    "dbaeumer.vscode-eslint",
+    "esbenp.prettier-vscode",
+    "redhat.vscode-yaml",
+    "rubymaniac.vscode-direnv",
+    "unifiedjs.vscode-mdx",
+    "yoavbls.pretty-ts-errors",
+    "me-dutour-mathieu.vscode-github-actions"
+  ]
 }

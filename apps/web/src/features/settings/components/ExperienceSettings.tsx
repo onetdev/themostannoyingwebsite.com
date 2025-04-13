@@ -9,7 +9,7 @@ import {
 import { useTranslations } from 'next-intl';
 import { FunctionComponent } from 'react';
 
-import { useExperienceFlagsStore } from '@/lib/state/experience_flags';
+import { useExperienceFlagsStore } from '@/state/experience_flags';
 
 type ExperienceSettingsProps = {
   className?: string;

@@ -1,6 +1,6 @@
 import { useCallback, useEffect } from 'react';
 
-import { useRuntimeStore } from '@/lib/state/runtime';
+import { useRuntimeStore } from '@/state/runtime';
 
 /**
  * Some browsers will limit features until the first user interaction has

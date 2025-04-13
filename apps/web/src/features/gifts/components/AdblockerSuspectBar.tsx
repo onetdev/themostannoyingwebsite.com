@@ -3,8 +3,8 @@
 import { useTranslations } from 'next-intl';
 import { FunctionComponent, useState } from 'react';
 
-import { useRuntimeStore } from '@/lib/state/runtime';
-import { useUserGrantsStore } from '@/lib/state/user_grants';
+import { useRuntimeStore } from '@/state/runtime';
+import { useUserGrantsStore } from '@/state/user_grants';
 
 const AdblockerSuspectBar: FunctionComponent = () => {
   const t = useTranslations();

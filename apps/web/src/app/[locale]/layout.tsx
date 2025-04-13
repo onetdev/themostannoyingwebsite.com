@@ -12,8 +12,8 @@ import { AppHeader } from '@/components/AppHeader';
 import { ExperienceDecoratorLayout } from '@/components/ExperienceDecoratorLayout';
 import config from '@/config';
 import { routing } from '@/i18n/routing';
-import ClientServiceProvider from '@/lib/providers/ClientServiceProvider';
-import RootProviderContainer from '@/lib/providers/RootProviderContainer';
+import ClientServiceProvider from '@/providers/ClientServiceProvider';
+import RootProviderContainer from '@/providers/RootProviderContainer';
 
 const _openSans = Open_Sans({
   subsets: ['latin'],

@@ -1,9 +1,9 @@
 import { useEffect, useState } from 'react';
 
-import { useExperienceFlagsStore } from '@/lib/state/experience_flags';
-import { useRuntimeStore } from '@/lib/state/runtime';
-import { useUserGrantsStore } from '@/lib/state/user_grants';
-import { fetchWithTimeout } from '@/lib/utils/network';
+import { useExperienceFlagsStore } from '@/state/experience_flags';
+import { useRuntimeStore } from '@/state/runtime';
+import { useUserGrantsStore } from '@/state/user_grants';
+import { fetchWithTimeout } from '@/utils/network';
 
 const testFileLoader = async () => {
   // In head mode without initialisation adsense should not touch cookies

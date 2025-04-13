@@ -4,7 +4,7 @@ import { BorderedBox, Checkbox as FormCheckbox, LabeledChild } from '@maw/ui';
 import { useTranslations } from 'next-intl';
 import { FunctionComponent } from 'react';
 
-import { useUserGrantsStore } from '@/lib/state/user_grants';
+import { useUserGrantsStore } from '@/state/user_grants';
 
 const UserGrantsSettings: FunctionComponent = () => {
   const grant = useUserGrantsStore();
