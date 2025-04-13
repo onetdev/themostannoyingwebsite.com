@@ -566,6 +566,9 @@ importers:
       eslint:
         specifier: 'catalog:'
         version: 9.24.0(jiti@2.4.2)
+      prettier-plugin-tailwindcss:
+        specifier: ^0.6.11
+        version: 0.6.11(prettier@3.5.3)
       tailwindcss:
         specifier: 'catalog:'
         version: 4.1.3

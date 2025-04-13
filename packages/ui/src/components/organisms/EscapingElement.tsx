@@ -82,4 +82,3 @@ export const EscapingElement: FunctionComponent<EscapingElementProps> = ({
     </div>
   );
 };
-

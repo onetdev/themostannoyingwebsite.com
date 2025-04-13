@@ -15,7 +15,7 @@ export const defaultPageSize = 10;
 type ArticleServiceProps = {
   getAssetUrl: (path: string) => string;
   getUrl: (item: ArticleIndexEntrySchema) => string;
-}
+};
 
 /**
  * SUPER DUPER IMPORTANT!!!!
@@ -36,7 +36,9 @@ export class ArticleService {
           coverImages: article.hasCoverImage
             ? {
                 original: getAssetUrl(`${article.directory}/cover.webp`),
-                thumbnail: getAssetUrl(`${article.directory}/cover-480x270.webp`),
+                thumbnail: getAssetUrl(
+                  `${article.directory}/cover-480x270.webp`,
+                ),
               }
             : undefined,
           intro: article.intro,
@@ -137,8 +139,13 @@ export class ArticleService {
     };
   }
 
-  public async getFirst({ params }: ArticleFilter): Promise<ArticleDatum | undefined> {
-    const results = await this.getMany({ params, paginate: { take: 1, skip: 0 } })
+  public async getFirst({
+    params,
+  }: ArticleFilter): Promise<ArticleDatum | undefined> {
+    const results = await this.getMany({
+      params,
+      paginate: { take: 1, skip: 0 },
+    });
     return results?.items[0];
   }
 }

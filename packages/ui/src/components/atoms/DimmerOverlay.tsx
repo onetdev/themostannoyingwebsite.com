@@ -42,7 +42,7 @@ export const DimmerOverlay: FunctionComponent<DimmerOverlayProps> = ({
   return (
     <div
       data-visible={visible.toString()}
-      className="invisible fixed left-0 top-0 z-50 flex size-full bg-dimmer px-2 py-1 opacity-0 backdrop-blur-md transition-visibility-opacity duration-300 data-[visible=true]:visible data-[visible=true]:opacity-100"
+      className="bg-dimmer transition-visibility-opacity invisible fixed top-0 left-0 z-50 flex size-full px-2 py-1 opacity-0 backdrop-blur-md duration-300 data-[visible=true]:visible data-[visible=true]:opacity-100"
       onClick={() => closeOnClickOutside && onClose?.()}>
       {children}
     </div>

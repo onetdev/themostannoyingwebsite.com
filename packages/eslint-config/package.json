@@ -7,7 +7,8 @@
     "./base": "./configs/base.mjs",
     "./next-js": "./configs/next.mjs",
     "./react-internal": "./configs/react-internal.mjs",
-    "./prettier": "./configs/.prettierrc.cjs"
+    "./prettier-base": "./configs/prettier-base.cjs",
+    "./prettier-tailwind": "./configs/prettier-tailwind.cjs"
   },
   "devDependencies": {
     "@eslint/js": "catalog:",

@@ -32,7 +32,10 @@ const resolveVariant = (size: ColorPickerInputSize) => {
   return className;
 };
 
-export const ColorPickerInput = forwardRef<HTMLInputElement, ColorPickerInputProps>(
+export const ColorPickerInput = forwardRef<
+  HTMLInputElement,
+  ColorPickerInputProps
+>(
   (
     {
       onChange,
@@ -68,7 +71,7 @@ export const ColorPickerInput = forwardRef<HTMLInputElement, ColorPickerInputPro
           style={{ color: contrastingColor }}
         />
         <span
-          className="absolute size-full rounded-md shadow-inner transition-all duration-150 ease-in-out peer-checked/colorpicker:bg-primary peer-disabled/colorpicker:grayscale"
+          className="peer-checked/colorpicker:bg-primary absolute size-full rounded-md shadow-inner transition-all duration-150 ease-in-out peer-disabled/colorpicker:grayscale"
           style={{ backgroundColor: displayValue as string }}></span>
       </span>
     );

@@ -14,7 +14,6 @@ export const CopyMarker: FunctionComponent<CopyMarkerProps> = ({
   enabled = false,
   text,
 }) => {
-
   const handleCopy = (e: ClipboardEvent<HTMLDivElement>) => {
     const selection = window.getSelection()?.toString() || '';
 

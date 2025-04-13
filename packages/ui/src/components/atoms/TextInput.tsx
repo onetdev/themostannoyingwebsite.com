@@ -59,7 +59,7 @@ export const TextInput = forwardRef<HTMLInputElement, TextInputProps>(
       <input
         type="text"
         ref={ref}
-        className={`${className} ${classNameVariant} rounded-lg bg-surface text-on-surface transition-all duration-150 ease-in-out ${classNameExternal}`}
+        className={`${className} ${classNameVariant} bg-surface text-on-surface rounded-lg transition-all duration-150 ease-in-out ${classNameExternal}`}
         onChange={onChangeProxy}
         {...rest}
       />

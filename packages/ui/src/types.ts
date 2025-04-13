@@ -1,4 +1,4 @@
-import { JSX, PropsWithoutRef } from "react";
+import { JSX, PropsWithoutRef } from 'react';
 
 declare global {
   export type JSXProxyProps<T extends keyof JSX.IntrinsicElements> =

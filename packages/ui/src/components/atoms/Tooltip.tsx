@@ -14,7 +14,10 @@ export type TooltipProps = PropsWithChildren<{
   text: string;
 }>;
 
-export const Tooltip: FunctionComponent<TooltipProps> = ({ text, children }) => {
+export const Tooltip: FunctionComponent<TooltipProps> = ({
+  text,
+  children,
+}) => {
   const [visible, setVisible] = useState(false);
   const [position, setPosition] = useState<TooltipPosition>('top');
   const $container = useRef<HTMLSpanElement>(null);
@@ -107,7 +110,7 @@ export const Tooltip: FunctionComponent<TooltipProps> = ({ text, children }) => 
           className="absolute z-50 w-96 group-data-[position=bottom]:pt-2 group-data-[position=left]:pr-2 group-data-[position=right]:pl-2 group-data-[position=top]:pb-2"
           style={style}>
           <span
-            className="inline-block rounded-md bg-surface p-2 text-xs text-on-surface"
+            className="bg-surface text-on-surface inline-block rounded-md p-2 text-xs"
             ref={$tooltip}>
             {text}
           </span>
