@@ -1,6 +1,6 @@
 import js from '@eslint/js';
+import pluginImportX from 'eslint-plugin-import-x';
 import eslintPluginPrettierRecommended from 'eslint-plugin-prettier/recommended';
-import prettier from 'eslint-plugin-prettier';
 import onlyWarn from 'eslint-plugin-only-warn';
 import turbo from 'eslint-plugin-turbo';
 import tseslint from 'typescript-eslint';
@@ -32,5 +32,53 @@ export const config = [
   {
     name: "base/noDist",
     ignores: ['dist/**'],
+  },
+  pluginImportX.flatConfigs.recommended,
+  pluginImportX.flatConfigs.typescript,
+  {
+    name: 'base/importOrder',
+    files: ['**/*.{js,mjs,cjs,jsx,mjsx,ts,tsx,mtsx}'],
+    ignores: ['eslint.config.js'],
+    languageOptions: {
+      parser: tseslint.parser,
+      ecmaVersion: 'latest',
+      sourceType: 'module',
+    },
+    rules: {
+      'import-x/order': [
+        'error',
+        {
+          alphabetize: {
+            caseInsensitive: true,
+            order: 'asc',
+          },
+
+          groups: [
+            ['builtin', 'external', 'object', 'type'],
+            ['internal', 'parent', 'sibling', 'index'],
+          ],
+
+          pathGroups: [
+            {
+              pattern: '@/**',
+              group: 'internal',
+              position: 'after',
+            },
+          ],
+
+          'newlines-between': 'always',
+        },
+      ],
+      'sort-imports': [
+        'error',
+        {
+          allowSeparatedGroups: true,
+          ignoreCase: true,
+          ignoreDeclarationSort: true,
+          ignoreMemberSort: false,
+          memberSyntaxSortOrder: ['none', 'all', 'multiple', 'single'],
+        },
+      ],
+    },
   },
 ];

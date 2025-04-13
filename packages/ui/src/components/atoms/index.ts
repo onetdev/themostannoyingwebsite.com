@@ -2,7 +2,6 @@ export * from './Button';
 export * from './CaptchaEmoji';
 export * from './CaptchaTilePuzzle';
 export * from './Checkbox';
-export * from '../molecules/ColorPickerInput';
 export * from './CopyMarker';
 export * from './DarkModeToggle';
 export * from './DimmerOverlay';
