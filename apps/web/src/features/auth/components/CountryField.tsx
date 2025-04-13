@@ -31,6 +31,7 @@ const CountryField: FunctionComponent<CountryFieldProps> = ({
       <label>
         <h5 className="mb-1">{t('user.field.countryCode')}</h5>
         <DropdownSelect
+          placeholder=""
           className="w-full"
           values={countryOptions}
           {...register('countryCode', {

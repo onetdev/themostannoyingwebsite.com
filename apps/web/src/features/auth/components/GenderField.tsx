@@ -34,6 +34,7 @@ const GenderField: FunctionComponent<GenderFieldProps> = ({
       <label>
         <h5 className="mb-1">{t('user.field.gender')}</h5>
         <DropdownSelect
+          placeholder=""
           values={genderOptions}
           className="w-full"
           {...register('gender')}

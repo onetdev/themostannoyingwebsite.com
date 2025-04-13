@@ -119,6 +119,7 @@ const PhoneNumberField: FunctionComponent<PhoneNumberFieldProps> = ({
         <h5 className="mb-1">{t('user.field.phoneNumber')}</h5>
         <div className="flex gap-3">
           <DropdownSelect
+            placeholder=""
             className="w-1/4"
             values={phoneCountryOptions}
             {...register('phoneNumberCountry', {

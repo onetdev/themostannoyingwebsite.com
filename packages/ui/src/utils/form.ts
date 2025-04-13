@@ -36,7 +36,7 @@ export const resolveFormElementSize = (size: FormElementSize) => {
       break;
     case "md":
     default:
-      className = "px-3 py-2 text-md";
+      className = "px-3 py-2 text-base";
       break;
   }
   return className;

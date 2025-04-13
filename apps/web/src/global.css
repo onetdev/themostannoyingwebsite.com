@@ -1,0 +1,4 @@
+@import "@maw/ui/global.css";
+
+@source "../src";
+@source "../node_modules/@maw/ui/src";

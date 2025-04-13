@@ -1,4 +1,4 @@
-import '@maw/ui/global.css';
+import '@/global.css';
 import { Metadata, Viewport } from "next";
 import config from '@/config';
 import { Open_Sans } from 'next/font/google';

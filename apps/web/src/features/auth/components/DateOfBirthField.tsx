@@ -62,16 +62,19 @@ const DateOfBirthField: FunctionComponent<DateOfBirthFieldProps> = ({
         <h5 className="mb-1">{t('user.field.dateOfBirth')}</h5>
         <div className="flex gap-3">
           <DropdownSelect
+            placeholder=""
             className="w-1/4"
             values={dateOfBirthYear}
             onValueChange={onYearChange}
           />
           <DropdownSelect
+            placeholder=""
             className="w-2/4"
             values={dateOfBirthMonth}
             onValueChange={onMonthChange}
           />
           <DropdownSelect
+            placeholder=""
             className="w-1/4"
             values={dateOfBirthDay}
             onValueChange={onDayChange}
