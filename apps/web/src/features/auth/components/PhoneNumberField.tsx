@@ -1,3 +1,5 @@
+import { Button, DropdownSelect, FormFieldError, TextInput } from '@maw/ui';
+import { useTranslations } from 'next-intl';
 import {
   type FunctionComponent,
   type MouseEvent,
@@ -9,10 +11,8 @@ import {
   useState,
 } from 'react';
 
-import { Button, FormFieldError, DropdownSelect, TextInput } from '@maw/ui';
 import { type CommonRegistrationFormFieldProps } from '@/features/auth';
 import countryData from '@/root/public/assets/countries.json';
-import { useTranslations } from 'next-intl';
 
 type PhoneNumberFieldProps = Pick<
   CommonRegistrationFormFieldProps,
@@ -130,7 +130,7 @@ const PhoneNumberField: FunctionComponent<PhoneNumberFieldProps> = ({
             <Button
               ref={$decrementBtn}
               type="button"
-              className="select-none rounded-none rounded-l-lg px-3"
+              className="rounded-none rounded-l-lg px-3 select-none"
               variant="primary"
               size="sm"
               onMouseDown={onDecrementClick}
@@ -140,7 +140,7 @@ const PhoneNumberField: FunctionComponent<PhoneNumberFieldProps> = ({
             <TextInput
               type="number"
               disabled
-              className="max-w-44 select-none rounded-none border-x-0"
+              className="max-w-44 rounded-none border-x-0 select-none"
               {...register('phoneNumber', {
                 required: t('form.validation.error.required'),
               })}

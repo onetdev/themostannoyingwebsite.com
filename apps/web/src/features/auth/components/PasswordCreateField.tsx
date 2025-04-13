@@ -1,8 +1,8 @@
+import { FormFieldError, PasswordStrengthBar, TextInput } from '@maw/ui';
+import { useTranslations } from 'next-intl';
 import { FunctionComponent } from 'react';
 
-import { FormFieldError, PasswordStrengthBar, TextInput } from '@maw/ui';
 import { type CommonRegistrationFormFieldProps } from '@/features/auth';
-import { useTranslations } from 'next-intl';
 
 type PasswordCreateFieldProps = Pick<
   CommonRegistrationFormFieldProps,
@@ -22,7 +22,7 @@ const PasswordCreateField: FunctionComponent<PasswordCreateFieldProps> = ({
     weak: t('form.validation.passwordStrength.weak'),
     okay: t('form.validation.passwordStrength.okay'),
     veryStrong: t('form.validation.passwordStrength.veryStrong'),
-  }
+  };
 
   return (
     <>
@@ -67,7 +67,11 @@ const PasswordCreateField: FunctionComponent<PasswordCreateFieldProps> = ({
             },
           })}
         />
-        <PasswordStrengthBar className="mt-3" password={password} text={passwordStrenghtText} />
+        <PasswordStrengthBar
+          className="mt-3"
+          password={password}
+          text={passwordStrenghtText}
+        />
       </label>
       <FormFieldError error={errors.password} />
     </>

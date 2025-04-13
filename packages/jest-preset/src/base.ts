@@ -28,9 +28,7 @@ const config: Config = {
     "@/root/(.*)$": "<rootDir>/$1",
   },
   testPathIgnorePatterns: ["<rootDir>/e2e/"],
-  setupFilesAfterEnv: [
-    "<rootDir>/node_modules/@maw/jest-preset/src/setup.ts"
-  ],
+  setupFilesAfterEnv: ["<rootDir>/node_modules/@maw/jest-preset/src/setup.ts"],
   verbose: undefined,
   watchman: true,
 };

@@ -50,14 +50,13 @@ export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
         />
         <Icon
           icon="check"
-          className="z-10 opacity-0 transition-all duration-150 ease-in-out peer-checked/checkbox:text-on-primary peer-checked/checkbox:opacity-100"
+          className="peer-checked/checkbox:text-on-primary z-10 opacity-0 transition-all duration-150 ease-in-out peer-checked/checkbox:opacity-100"
           size={size}
         />
-        <span className="absolute size-full rounded-md border border-primary transition-all duration-150 ease-in-out peer-checked/checkbox:bg-primary peer-disabled/checkbox:grayscale"></span>
+        <span className="border-primary peer-checked/checkbox:bg-primary absolute size-full rounded-md border transition-all duration-150 ease-in-out peer-disabled/checkbox:grayscale"></span>
       </span>
     );
   },
 );
 
 Checkbox.displayName = 'Checkbox';
-

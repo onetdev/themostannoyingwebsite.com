@@ -6,19 +6,23 @@ import MarqueePlugin from 'react-fast-marquee';
 type SpeedMinMax = {
   base: number;
   hover: number;
-}
+};
 
 export type MarqueeTextProps<T> = {
   className?: string;
-  ItemComponent: (item: T, index?: number) => ReactNode
-  items: T[]
-  speed?: SpeedMinMax | number
+  ItemComponent: (item: T, index?: number) => ReactNode;
+  items: T[];
+  speed?: SpeedMinMax | number;
 };
 
-export const MarqueeText = <T,>({ className, items, speed = { base: 100, hover: 2000 }, ItemComponent }: MarqueeTextProps<T>) => {
-  const normalizedSpeed = typeof speed === 'number'
-    ? { base: speed, hover: speed }
-    : speed;
+export const MarqueeText = <T,>({
+  className,
+  items,
+  speed = { base: 100, hover: 2000 },
+  ItemComponent,
+}: MarqueeTextProps<T>) => {
+  const normalizedSpeed =
+    typeof speed === 'number' ? { base: speed, hover: speed } : speed;
 
   const [internalSpeed, setSpeed] = useState(normalizedSpeed.base);
   const onEnter = () => setSpeed(normalizedSpeed.hover);

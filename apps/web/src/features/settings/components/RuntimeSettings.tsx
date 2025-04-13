@@ -1,11 +1,11 @@
 'use client';
 
+import { BorderedBox } from '@maw/ui';
+import { useTranslations } from 'next-intl';
 import { FunctionComponent, useMemo } from 'react';
 import ReactTimeAgo from 'react-timeago';
 
-import { BorderedBox } from '@maw/ui';
 import { useRuntimeStore } from '@/lib/state/runtime';
-import { useTranslations } from 'next-intl';
 
 const RuntimeSettings: FunctionComponent = () => {
   const runtime = useRuntimeStore();

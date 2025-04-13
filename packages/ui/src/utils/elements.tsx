@@ -1,7 +1,5 @@
-import { memo } from 'react';
-import React from 'react';
-
 import { first_letter_capitalize } from '@maw/utils/string';
+import React, { memo } from 'react';
 
 type PrestyledNode<T extends keyof React.JSX.IntrinsicElements> = {
   type: T;

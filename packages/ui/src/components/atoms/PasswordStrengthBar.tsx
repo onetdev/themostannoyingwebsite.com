@@ -1,7 +1,6 @@
-import { FunctionComponent, useMemo } from 'react';
-
 import { mapToLogScale } from '@maw/utils/math';
 import { mb_string_to_char_array } from '@maw/utils/string';
+import { FunctionComponent, useMemo } from 'react';
 
 export type PasswordStrengthBarProps = {
   password: string;
@@ -10,14 +9,12 @@ export type PasswordStrengthBarProps = {
     weak: string;
     okay: string;
     veryStrong: string;
-  }
+  };
 };
 
-export const PasswordStrengthBar: FunctionComponent<PasswordStrengthBarProps> = ({
-  password,
-  className,
-  text,
-}) => {
+export const PasswordStrengthBar: FunctionComponent<
+  PasswordStrengthBarProps
+> = ({ password, className, text }) => {
   const score = useMemo(
     () => mapToLogScale(scorePassword(password || ''), 100, 1),
     [password],
@@ -26,24 +23,22 @@ export const PasswordStrengthBar: FunctionComponent<PasswordStrengthBarProps> = 
   return (
     <div className={`flex gap-2 text-sm ${className}`}>
       <div className="w-1/3">
-        <div className="h-2 w-full max-w-full rounded bg-error" />
+        <div className="bg-error h-2 w-full max-w-full rounded" />
         {score <= 0.33 && text.weak}
       </div>
       <div className="w-1/3">
         {score > 0.33 && (
           <div
-            className="h-2 w-full max-w-full rounded bg-warning"
+            className="bg-warning h-2 w-full max-w-full rounded"
             style={{ width: `${(score - 0.33) * 300}%` }}
           />
         )}
-        {score > 0.33 &&
-          score <= 0.66 &&
-          text.okay}
+        {score > 0.33 && score <= 0.66 && text.okay}
       </div>
       <div className="w-1/3">
         {score > 0.66 && (
           <div
-            className="h-2 w-full max-w-full rounded bg-success"
+            className="bg-success h-2 w-full max-w-full rounded"
             style={{ width: `${(score - 0.66) * 300}%` }}
           />
         )}

@@ -5,11 +5,13 @@ export type FormFieldErrorProps = {
   error?: FieldError;
 };
 
-export const FormFieldError: FunctionComponent<FormFieldErrorProps> = ({ error }) => {
+export const FormFieldError: FunctionComponent<FormFieldErrorProps> = ({
+  error,
+}) => {
   return (
     <>
       {error && (
-        <small className="mt-1 block text-error">{error?.message}</small>
+        <small className="text-error mt-1 block">{error?.message}</small>
       )}
     </>
   );

@@ -1,12 +1,12 @@
 'use client';
 
+import { Button, Icon, TextInput } from '@maw/ui';
+import { FormElementSize } from '@maw/ui/utils';
 import { useRouter } from 'next/navigation';
+import { useTranslations } from 'next-intl';
 import { FormEventHandler, FunctionComponent } from 'react';
 
-import { Button, Icon, TextInput } from '@maw/ui';
 import { DOCUMENT_EVENT_SEARCH } from '@/global';
-import { FormElementSize } from '@maw/ui/utils';
-import { useTranslations } from 'next-intl';
 
 export type SearchFormSize = FormElementSize;
 export type SearchFormProps = {
@@ -39,7 +39,11 @@ const SearchForm: FunctionComponent<SearchFormProps> = ({
   };
 
   return (
-    <form method="post" onSubmit={onSubmit} className={`flex ${className}`} role="search">
+    <form
+      method="post"
+      onSubmit={onSubmit}
+      className={`flex ${className}`}
+      role="search">
       <TextInput
         defaultValue={initialValue}
         className="-mr-1 w-full rounded-r-none"

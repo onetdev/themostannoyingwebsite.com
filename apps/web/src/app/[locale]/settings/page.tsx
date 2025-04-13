@@ -1,6 +1,7 @@
-import { Metadata } from 'next';
-
 import { PageHeadline } from '@maw/ui';
+import { Metadata } from 'next';
+import { getTranslations } from 'next-intl/server';
+
 import {
   ExperienceSettings,
   MandatoryExperienceSettings,
@@ -8,12 +9,13 @@ import {
   RuntimeSettings,
   UserGrantsSettings,
 } from '@/features/settings';
-import { getTranslations } from 'next-intl/server';
 
 export { generateStaticParams } from '@/i18n/routing';
 export const revalidate = 1800;
 
-export async function generateMetadata({ params }: NextPageProps): Promise<Metadata> {
+export async function generateMetadata({
+  params,
+}: NextPageProps): Promise<Metadata> {
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: 'metadata.settings' });
 
@@ -42,4 +44,4 @@ export default async function Settings() {
       </div>
     </main>
   );
-};
+}

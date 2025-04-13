@@ -1,10 +1,9 @@
 'use client';
 
-import Image from 'next/image';
-import { useEffect, useRef, useState } from 'react';
-
 import { Icon, PageHeadline } from '@maw/ui';
+import Image from 'next/image';
 import { useTranslations } from 'next-intl';
+import { useEffect, useRef, useState } from 'react';
 
 export default function HotThingsPage() {
   const [isCapable, setIsCapable] = useState(false);
@@ -59,7 +58,7 @@ export default function HotThingsPage() {
   return (
     <main role="main">
       <PageHeadline>{t('navigation.hotThings')}</PageHeadline>
-      <div className="relative overflow-hidden pb-16per9">
+      <div className="pb-16per9 relative overflow-hidden">
         <Image
           className="absolute h-auto w-full"
           src="/assets/images/lava.webp"
@@ -69,13 +68,13 @@ export default function HotThingsPage() {
         />
         <video
           playsInline
-          className="absolute left-1/2 top-1/2 w-full -translate-x-1/2 -translate-y-1/2"
+          className="absolute top-1/2 left-1/2 w-full -translate-x-1/2 -translate-y-1/2"
           ref={playerRef}
           autoPlay
         />
         {isCapable && (
           <button
-            className="absolute left-1/2 top-1/2 -ml-9 -mt-9 text-7xl"
+            className="absolute top-1/2 left-1/2 -mt-9 -ml-9 text-7xl"
             onClick={onIntent}
             hidden={Boolean(stream)}>
             <Icon icon="play" size="5xl" />
@@ -84,4 +83,4 @@ export default function HotThingsPage() {
       </div>
     </main>
   );
-};
+}

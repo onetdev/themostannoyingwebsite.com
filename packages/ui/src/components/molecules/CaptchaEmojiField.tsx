@@ -13,13 +13,13 @@ export type CaptchaEmojiFieldProps = {
     hint: string;
     required: string;
     invalid: string;
-  }
+  };
 };
 
 export const CaptchaEmojiField: FunctionComponent<CaptchaEmojiFieldProps> = ({
   register,
   errors,
-  text
+  text,
 }) => {
   return (
     <div className="flex flex-col">
@@ -27,7 +27,7 @@ export const CaptchaEmojiField: FunctionComponent<CaptchaEmojiFieldProps> = ({
         <h4 className="mb-1">{text.label}</h4>
         <small>{text.hint}</small>
         <CaptchaEmoji
-          className="my-3 rounded-md border border-on-background"
+          className="border-on-background my-3 rounded-md border"
           width={300}
           height={100}
         />

@@ -1,8 +1,7 @@
 'use client';
 
-import { FunctionComponent, useEffect, useRef, useState } from 'react';
-
 import { Point2d, random } from '@maw/utils/math';
+import { FunctionComponent, useEffect, useRef, useState } from 'react';
 
 export type CaptchaEmojiProps = {
   className?: string;

@@ -12,7 +12,7 @@ export type CaptchaTitlePuzzleFieldProps = {
     label: string;
     hint: string;
     invalid: string;
-  }
+  };
 };
 
 export const CaptchaTitlePuzzleField: FunctionComponent<
@@ -23,7 +23,7 @@ export const CaptchaTitlePuzzleField: FunctionComponent<
       <h4 className="mb-1">{text.label}</h4>
       <small>{text.hint}</small>
       <CaptchaTilePuzzle
-        className="my-3 rounded-md border border-on-background"
+        className="border-on-background my-3 rounded-md border"
         cols={6}
         rows={4}
         imageSrc="/assets/images/captcha-tile-abstract.jpg"

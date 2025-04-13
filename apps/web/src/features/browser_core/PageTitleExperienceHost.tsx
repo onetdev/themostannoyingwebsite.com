@@ -1,5 +1,6 @@
 'use client';
 
+import { useMessages, useTranslations } from 'next-intl';
 import { FunctionComponent } from 'react';
 
 import ArrayPagedTitle from './components/ArrayPagedTitle';
@@ -8,7 +9,6 @@ import MarqueeTitle from './components/MarqueeTitle';
 
 import { useExperienceFlagsStore } from '@/lib/state/experience_flags';
 import { useRuntimeStore } from '@/lib/state/runtime';
-import { useMessages, useTranslations } from 'next-intl';
 
 /**
  * Experience of manipulating the page title. Unfortunatelly the refresh rate
@@ -23,13 +23,13 @@ const PageTitleExperienceHost: FunctionComponent = () => {
   const t = useTranslations();
   const messages = useMessages();
 
-  const marqueeVariants = Object
-    .keys(messages.titleExperience.marqueeVariants)
-    .map((key) => t(`titleExperience.marqueeVariants.${key}`));
+  const marqueeVariants = Object.keys(
+    messages.titleExperience.marqueeVariants,
+  ).map((key) => t(`titleExperience.marqueeVariants.${key}`));
 
-  const arrayPagedVariants = Object
-    .keys(messages.titleExperience.arrayPagedVariants)
-    .map((key) => t(`titleExperience.arrayPagedVariants.${key}`))
+  const arrayPagedVariants = Object.keys(
+    messages.titleExperience.arrayPagedVariants,
+  ).map((key) => t(`titleExperience.arrayPagedVariants.${key}`));
 
   return (
     <>

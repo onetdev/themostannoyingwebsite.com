@@ -1,13 +1,15 @@
-import { Metadata } from 'next';
-
 import { PageHeadline } from '@maw/ui';
-import config from '@/config';
+import { Metadata } from 'next';
 import { getTranslations } from 'next-intl/server';
+
+import config from '@/config';
 
 export { generateStaticParams } from '@/i18n/routing';
 export const revalidate = 1800;
 
-export async function generateMetadata({ params }: NextPageProps): Promise<Metadata> {
+export async function generateMetadata({
+  params,
+}: NextPageProps): Promise<Metadata> {
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: 'metadata.contact' });
 
@@ -28,4 +30,4 @@ export default async function Page() {
       </p>
     </main>
   );
-};
+}

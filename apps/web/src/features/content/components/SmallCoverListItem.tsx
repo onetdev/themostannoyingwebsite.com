@@ -1,11 +1,11 @@
 import Image from 'next/image';
-import { Link } from '@/i18n/navigation';
+import { useTranslations } from 'next-intl';
 import { FunctionComponent } from 'react';
 
 import { CoverPlaceholder } from './CoverPlaceholder';
 
 import { type ArticleDatum } from '@/features/content';
-import { useTranslations } from 'next-intl';
+import { Link } from '@/i18n/navigation';
 
 type SmallCoverListItemProps = JSXProxyProps<'article'> & {
   article: ArticleDatum;
@@ -33,7 +33,7 @@ export const SmallCoverListItem: FunctionComponent<SmallCoverListItemProps> = ({
           />
         )}
         <h4 className="my-2 leading-tight">{article.title}</h4>
-        <small className="m-0 mb-1 block leading-snug text-on-surface hover:no-underline">
+        <small className="text-on-surface m-0 mb-1 block leading-snug hover:no-underline">
           {article.intro}
         </small>
       </Link>

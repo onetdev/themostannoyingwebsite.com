@@ -76,4 +76,3 @@ export const Icon: FunctionComponent<IconProps> = ({
     />
   );
 };
-

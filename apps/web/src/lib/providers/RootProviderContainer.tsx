@@ -9,7 +9,6 @@ import { RootPortalProvider } from '@/lib/providers/RootPortalProvider';
 const RootProviderContainer: FunctionComponent<PropsWithChildren> = ({
   children,
 }) => {
-
   return (
     <RootPortalProvider>
       <ThemeProvider defaultTheme="dark" enableColorScheme enableSystem>

@@ -1,6 +1,6 @@
 import js from '@eslint/js';
 import pluginNext from '@next/eslint-plugin-next';
-import eslintConfigPrettier from 'eslint-config-prettier';
+import eslintConfigPrettier from 'eslint-config-prettier/flat';
 import pluginReact from 'eslint-plugin-react';
 import pluginReactHooks from 'eslint-plugin-react-hooks';
 import globals from 'globals';
@@ -19,6 +19,7 @@ export const nextJsConfig = [
   eslintConfigPrettier,
   ...tseslint.configs.recommended,
   {
+    name: "next/react",
     ...pluginReact.configs.flat.recommended,
     languageOptions: {
       ...pluginReact.configs.flat.recommended.languageOptions,
@@ -28,6 +29,7 @@ export const nextJsConfig = [
     },
   },
   {
+    name: "next/nextjs",
     plugins: {
       '@next/next': pluginNext,
     },
@@ -37,6 +39,7 @@ export const nextJsConfig = [
     },
   },
   {
+    name: "next/react-hooks",
     plugins: {
       'react-hooks': pluginReactHooks,
     },

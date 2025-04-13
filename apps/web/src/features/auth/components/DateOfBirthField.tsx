@@ -1,8 +1,8 @@
+import { DropdownSelect, FormFieldError } from '@maw/ui';
+import { useMessages, useTranslations } from 'next-intl';
 import { FunctionComponent, useEffect, useMemo, useState } from 'react';
 
-import { FormFieldError, DropdownSelect } from '@maw/ui';
 import { type CommonRegistrationFormFieldProps } from '@/features/auth';
-import { useMessages, useTranslations } from 'next-intl';
 
 type DateOfBirthFieldProps = Pick<
   CommonRegistrationFormFieldProps,
@@ -27,9 +27,9 @@ const DateOfBirthField: FunctionComponent<DateOfBirthFieldProps> = ({
   }, []);
 
   const dateOfBirthMonth = useMemo(() => {
-    const monthLabels = Object
-      .keys(messages.date.months)
-      .map((key) => t(`date.months.${key}`));
+    const monthLabels = Object.keys(messages.date.months).map((key) =>
+      t(`date.months.${key}`),
+    );
 
     return Array.from({ length: 12 }, (_, i) => ({
       value: i + 1,
@@ -44,9 +44,12 @@ const DateOfBirthField: FunctionComponent<DateOfBirthFieldProps> = ({
     }));
   }, []);
 
-  const onYearChange = (value?: string) => setParts({ ...parts, year: value ?? '' });
-  const onMonthChange = (value?: string) => setParts({ ...parts, month: value ?? '' });
-  const onDayChange = (value?: string) => setParts({ ...parts, day: value ?? "" });
+  const onYearChange = (value?: string) =>
+    setParts({ ...parts, year: value ?? '' });
+  const onMonthChange = (value?: string) =>
+    setParts({ ...parts, month: value ?? '' });
+  const onDayChange = (value?: string) =>
+    setParts({ ...parts, day: value ?? '' });
 
   useEffect(() => {
     const anyEmpty = !parts.year || !parts.month || !parts.day;

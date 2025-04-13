@@ -1,11 +1,11 @@
+import { DropdownSelect, FormFieldError } from '@maw/ui';
+import { useTranslations } from 'next-intl';
 import { FunctionComponent, useMemo } from 'react';
 
-import { FormFieldError, DropdownSelect } from '@maw/ui';
 import {
   CommonRegistrationFormFieldProps,
   userGenderList,
 } from '@/features/auth';
-import { useTranslations } from 'next-intl';
 
 type GenderFieldProps = Pick<
   CommonRegistrationFormFieldProps,
@@ -18,10 +18,13 @@ const GenderField: FunctionComponent<GenderFieldProps> = ({
   const t = useTranslations();
 
   const genderOptions = useMemo(() => {
-    const pool = userGenderList.reduce((acc, gender) => {
-      acc[gender] = t(`user.genderVariants.${gender}`);
-      return acc;
-    }, {} as Record<string, string>);
+    const pool = userGenderList.reduce(
+      (acc, gender) => {
+        acc[gender] = t(`user.genderVariants.${gender}`);
+        return acc;
+      },
+      {} as Record<string, string>,
+    );
 
     return userGenderList.map((gender) => ({
       value: gender,

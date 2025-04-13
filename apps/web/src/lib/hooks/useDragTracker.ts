@@ -1,7 +1,6 @@
-import { RefObject, useCallback, useEffect, useState } from 'react';
-
 import { isPointWithinElement } from '@maw/ui/utils';
 import { getPointDistance, Point2d } from '@maw/utils/math';
+import { RefObject, useCallback, useEffect, useState } from 'react';
 
 type TimedPoint = Point2d & { t: Date };
 export type DragTrackerState = {

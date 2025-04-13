@@ -1,20 +1,23 @@
 import { Metadata } from 'next';
+import { notFound } from 'next/navigation';
 
 import { ArticleItemPage } from './article-item-page';
-import i18nConfig from '@/root/i18n.config';
-import { notFound } from 'next/navigation';
+
 import { AppArticleService } from '@/features/content/services/AppArticleService';
+import i18nConfig from '@/root/i18n.config';
 
 type PageParams = {
   slug: string;
   locale: string;
 };
 
-type PageProps = NextPageProps<PageParams>
+type PageProps = NextPageProps<PageParams>;
 
 export const revalidate = 1800;
 
-export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
+export async function generateMetadata({
+  params,
+}: PageProps): Promise<Metadata> {
   const { locale, slug } = await params;
   const lookup = { slug, locale };
   const data = await AppArticleService.getByLookup(lookup);
@@ -25,7 +28,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
       title: data?.title,
       description: data?.intro,
       images: data?.coverImages?.original,
-    }
+    },
   };
 }
 
@@ -56,7 +59,5 @@ export default async function Page({ params }: PageProps) {
     return notFound();
   }
 
-  return (
-    <ArticleItemPage data={data} />
-  );
-};
+  return <ArticleItemPage data={data} />;
+}

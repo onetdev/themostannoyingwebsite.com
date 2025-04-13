@@ -9,16 +9,12 @@ export type DropdownSelectProps = DetailedHTMLProps<
   onValueChange?: (value?: string) => void;
 };
 
-export const DropdownSelect = forwardRef<HTMLSelectElement, DropdownSelectProps>(
+export const DropdownSelect = forwardRef<
+  HTMLSelectElement,
+  DropdownSelectProps
+>(
   (
-    {
-      placeholder,
-      className,
-      values,
-      onChange,
-      onValueChange,
-      ...rest
-    },
+    { placeholder, className, values, onChange, onValueChange, ...rest },
     ref,
   ) => {
     const onChangeProxy = (e: React.ChangeEvent<HTMLSelectElement>) => {
@@ -29,10 +25,12 @@ export const DropdownSelect = forwardRef<HTMLSelectElement, DropdownSelectProps>
     return (
       <select
         onChange={onChangeProxy}
-        className={`rounded-lg border border-primary bg-surface p-2 text-on-surface ${className}`}
+        className={`border-primary bg-surface text-on-surface rounded-lg border p-2 ${className}`}
         ref={ref}
         {...rest}>
-        {typeof placeholder !== "undefined" && <option value="">{placeholder}</option>}
+        {typeof placeholder !== 'undefined' && (
+          <option value="">{placeholder}</option>
+        )}
         {values.map(({ value, label }) => (
           <option key={`${value}-${label}`} value={value}>
             {label}

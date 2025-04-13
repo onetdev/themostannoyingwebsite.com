@@ -1,10 +1,11 @@
 'use client';
 
 import Image from 'next/image';
-import { Link } from '@/i18n/navigation';
+import { useTranslations } from 'next-intl';
 import { useTheme } from 'next-themes';
 import { FunctionComponent, PropsWithChildren } from 'react';
-import { useTranslations } from 'next-intl';
+
+import { Link } from '@/i18n/navigation';
 
 const ContainerGiftFlaps: FunctionComponent = () => {
   const t = useTranslations();
@@ -29,7 +30,7 @@ const ContainerGiftFlaps: FunctionComponent = () => {
           </GiftFlapText>
           <GiftFlapText
             theme={resolvedTheme as AppTheme}
-            className="bottom-16 right-16 origin-bottom-right rotate-90">
+            className="right-16 bottom-16 origin-bottom-right rotate-90">
             {t('gifts.dilf.flapRight')}
           </GiftFlapText>
         </Link>

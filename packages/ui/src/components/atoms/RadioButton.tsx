@@ -49,7 +49,7 @@ export const RadioButton = forwardRef<HTMLInputElement, RadioButtonProps>(
           {...rest}
           onChange={onChangeProxy}
         />
-        <span className="absolute size-full rounded-full border border-primary transition-all duration-150 ease-in-out peer-checked/radio:border-[6px] peer-disabled/radio:grayscale"></span>
+        <span className="border-primary absolute size-full rounded-full border transition-all duration-150 ease-in-out peer-checked/radio:border-[6px] peer-disabled/radio:grayscale"></span>
       </span>
     );
   },

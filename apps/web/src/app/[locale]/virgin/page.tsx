@@ -1,13 +1,16 @@
 import { PageHeadline } from '@maw/ui';
 import styles from '@maw/ui/content.module.css';
 import { Metadata } from 'next';
-import DisableAllOnMount from './disable-all-on-mount';
 import { getTranslations } from 'next-intl/server';
+
+import DisableAllOnMount from './disable-all-on-mount';
 
 export { generateStaticParams } from '@/i18n/routing';
 export const revalidate = 1800;
 
-export async function generateMetadata({ params }: NextPageProps): Promise<Metadata> {
+export async function generateMetadata({
+  params,
+}: NextPageProps): Promise<Metadata> {
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: 'metadata.virgin' });
 
@@ -31,5 +34,5 @@ async function Page() {
       </div>
     </main>
   );
-};
+}
 export default Page;

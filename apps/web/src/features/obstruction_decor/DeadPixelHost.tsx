@@ -1,8 +1,7 @@
 'use client';
 
-import { FunctionComponent, useEffect, useState } from 'react';
-
 import { Point2d, random } from '@maw/utils/math';
+import { FunctionComponent, useEffect, useState } from 'react';
 
 // TODO: Maybe we could do a horror version like this:
 // https://www.tiktok.com/@jackandaxter/video/7421659495606144262
@@ -28,7 +27,7 @@ const DeadPixelHost: FunctionComponent = () => {
         <div
           key={`${point.x}-${point.y}`}
           style={{ top: point.y, left: point.x }}
-          className="fixed size-px select-none bg-black dark:bg-white"
+          className="fixed size-px bg-black select-none dark:bg-white"
         />
       ))}
     </>

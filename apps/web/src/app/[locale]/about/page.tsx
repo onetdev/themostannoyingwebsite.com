@@ -1,14 +1,15 @@
-import { Metadata } from 'next';
-
 import { PageHeadline } from '@maw/ui';
 import styles from '@maw/ui/content.module.css';
-import { getTranslations } from 'next-intl/server';
+import { Metadata } from 'next';
 import { notFound } from 'next/navigation';
+import { getTranslations } from 'next-intl/server';
 
 export { generateStaticParams } from '@/i18n/routing';
 export const revalidate = 1800;
 
-export async function generateMetadata({ params }: NextPageProps): Promise<Metadata> {
+export async function generateMetadata({
+  params,
+}: NextPageProps): Promise<Metadata> {
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: 'metadata.about' });
 
@@ -29,10 +30,12 @@ export default async function Page({ params }: NextPageProps) {
         <PageHeadline className="mx-auto w-full max-w-screen-md">
           {t('navigation.about')}
         </PageHeadline>
-        <div className={styles['content']}><Content /></div>
+        <div className={styles['content']}>
+          <Content />
+        </div>
       </main>
     );
   } catch (_err) {
     return notFound();
   }
-};
+}

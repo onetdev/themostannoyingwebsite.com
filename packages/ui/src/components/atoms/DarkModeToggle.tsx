@@ -9,7 +9,7 @@ export type DarkModeToggleProps = {
   text: {
     lightMode: string;
     darkMode: string;
-  }
+  };
 };
 
 const resolveSize = (size: DarkModeToggleSize) => {
@@ -44,17 +44,13 @@ export const DarkModeToggle: FunctionComponent<DarkModeToggleProps> = ({
     <div
       suppressHydrationWarning
       data-dark={(resolvedTheme === 'dark' || !resolvedTheme).toString()}
-      className={`group relative flex select-none justify-between rounded-full border border-secondary ${sizeClass} ${className}`}
+      className={`group border-secondary relative flex justify-between rounded-full border select-none ${sizeClass} ${className}`}
       onClick={toggleDarkMode}>
-      <div className="block absolute inset-y-0 h-full w-1/2 rounded-full bg-secondary duration-100 transition ease-in-out translate-x-0 group-data-[dark=true]:translate-x-full" />
-      <SelectOption
-        role="img"
-        aria-label={text.lightMode}>
+      <div className="bg-secondary absolute inset-y-0 block h-full w-1/2 translate-x-0 rounded-full transition duration-100 ease-in-out group-data-[dark=true]:translate-x-full" />
+      <SelectOption role="img" aria-label={text.lightMode}>
         ☀️
       </SelectOption>
-      <SelectOption
-        role="img"
-        aria-label={text.darkMode}>
+      <SelectOption role="img" aria-label={text.darkMode}>
         🌙
       </SelectOption>
     </div>

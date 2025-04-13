@@ -3,16 +3,6 @@ node_modules/
 .pnp
 .pnp.js
 
-# next.js
-/.next/
-/out/
-
-# production
-/build
-/public/assets/articles/index.json
-/public/assets/articles/*/cover-*.*
-/public/deployment-meta.json
-
 # misc
 .DS_Store
 *.pem
@@ -37,20 +27,8 @@ yarn-error.log*
 # vercel
 .vercel
 
-# typescript
-*.tsbuildinfo
-next-env.d.ts
-src/lib/schemas/*.schema.json
-
-certificates
-*storybook.log
-
 # Sentry Config File
 .env.sentry-build-plugin
 
-# Jest & Playwright
-/coverage
-/test-results/
-/playwright-report/
-/blob-report/
-/playwright/.cache/
+# typescript
+*.tsbuildinfo

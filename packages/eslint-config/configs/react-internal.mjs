@@ -18,6 +18,7 @@ export const config = [
   ...tseslint.configs.recommended,
   pluginReact.configs.flat.recommended,
   {
+    name: "react-internal/react",
     languageOptions: {
       ...pluginReact.configs.flat.recommended.languageOptions,
       globals: {
@@ -27,6 +28,7 @@ export const config = [
     },
   },
   {
+    name: "react-internal/react-hooks",
     plugins: {
       'react-hooks': pluginReactHooks,
     },

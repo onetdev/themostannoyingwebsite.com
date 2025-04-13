@@ -1,9 +1,8 @@
 'use client';
 
-import { FunctionComponent, useEffect, useMemo, useState } from 'react';
-
 import { arrayShuffle } from '@maw/utils/array';
 import { isPoint2d, Point2d } from '@maw/utils/math';
+import { FunctionComponent, useEffect, useMemo, useState } from 'react';
 
 interface CaptchaTilePuzzleProps {
   className?: string;
@@ -133,7 +132,7 @@ export const CaptchaTilePuzzle: FunctionComponent<CaptchaTilePuzzleProps> = ({
           key={tile.key}
           data-is-empty={tile.isEmpty.toString()}
           data-is-correct={tile.isCorrect.toString()}
-          className="group absolute p-1 transition-all duration-200 "
+          className="group absolute p-1 transition-all duration-200"
           style={{
             left: (tile.current.x - 1) * size,
             top: (tile.current.y - 1) * size,
@@ -171,7 +170,7 @@ const TileView: FunctionComponent<TileViewProps> = ({
     <div
       style={style}
       data-has-image={Boolean(imageSrc).toString()}
-      className="flex size-full select-none items-center justify-center rounded-sm border border-on-surface transition-all duration-200 ease-in-out data-[has-image=true]:border-none group-data-[is-empty=true]:hidden group-data-[is-correct=false]:cursor-pointer group-data-[is-correct=true]:bg-success group-data-[is-correct=true]:text-on-success">
+      className="border-on-surface group-data-[is-correct=true]:bg-success group-data-[is-correct=true]:text-on-success flex size-full items-center justify-center rounded-sm border transition-all duration-200 ease-in-out select-none group-data-[is-correct=false]:cursor-pointer group-data-[is-empty=true]:hidden data-[has-image=true]:border-none">
       {!imageSrc && <span>{data.key}</span>}
     </div>
   );

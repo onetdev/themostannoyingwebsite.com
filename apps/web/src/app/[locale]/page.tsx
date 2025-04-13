@@ -34,27 +34,36 @@ export default async function Page({ params }: NextPageProps) {
           data-testid="cover-article"
         />
       )}
-      <section role="region" className="col-span-1 flex flex-col justify-between" data-testid="dense-article-list">
+      <section
+        role="region"
+        className="col-span-1 flex flex-col justify-between"
+        data-testid="dense-article-list">
         <ul className="flex flex-col gap-3">
           {denseArticleList.map((item, index) => (
             <li
               key={index}
-              className="relative after:absolute after:w-full after:border-b after:border-b-hr-surface">
+              className="after:border-b-hr-surface relative after:absolute after:w-full after:border-b">
               <TextListItem article={item} data-testid="dense-article-item" />
             </li>
           ))}
         </ul>
         <OneByOneGift />
       </section>
-      <section role="region" className='col-span-1 lg:col-span-4 lg:mt-3' data-testid="small-cover-article-list">
+      <section
+        role="region"
+        className="col-span-1 lg:col-span-4 lg:mt-3"
+        data-testid="small-cover-article-list">
         <ul className="grid gap-3 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
           {smallCoverArticleList.map((article, index) => (
             <li key={index} className="basis-full md:basis-1/2">
-              <SmallCoverListItem article={article} data-testid="small-cover-article-item" />
+              <SmallCoverListItem
+                article={article}
+                data-testid="small-cover-article-item"
+              />
             </li>
           ))}
         </ul>
       </section>
     </main>
   );
-};
+}

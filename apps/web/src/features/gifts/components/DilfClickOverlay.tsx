@@ -40,7 +40,7 @@ const DilfClickOverlay: FunctionComponent<DilfClickOverlayProps> = ({
           <path
             d={path}
             fill={debug ? `hsl(${(index * 3) % 360}, 100%, 50%)` : '#fff0'}
-            className="mix-blend-screen blur-md transition-all duration-200 ease-in-out hover:fill-orange-700 "
+            className="mix-blend-screen blur-md transition-all duration-200 ease-in-out hover:fill-orange-700"
           />
         </a>
       ))}

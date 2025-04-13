@@ -1,18 +1,19 @@
 import '@/global.css';
-import { Metadata, Viewport } from "next";
-import config from '@/config';
-import { Open_Sans } from 'next/font/google';
-import RootProviderContainer from "@/lib/providers/RootProviderContainer";
-import ClientServiceProvider from "@/lib/providers/ClientServiceProvider";
-import { routing } from "@/i18n/routing";
-import { notFound } from "next/navigation";
-import { hasLocale, NextIntlClientProvider } from "next-intl";
-import { getLangDir } from 'rtl-detect';
-import {ExperienceDecoratorLayout } from "@/components/ExperienceDecoratorLayout";
-import { getTranslations } from 'next-intl/server';
-import { AppHeader } from '@/components/AppHeader';
-import { AppFooter } from '@/components/AppFooter';
 import { Analytics } from '@vercel/analytics/react';
+import { Metadata, Viewport } from 'next';
+import { Open_Sans } from 'next/font/google';
+import { notFound } from 'next/navigation';
+import { hasLocale, NextIntlClientProvider } from 'next-intl';
+import { getTranslations } from 'next-intl/server';
+import { getLangDir } from 'rtl-detect';
+
+import { AppFooter } from '@/components/AppFooter';
+import { AppHeader } from '@/components/AppHeader';
+import { ExperienceDecoratorLayout } from '@/components/ExperienceDecoratorLayout';
+import config from '@/config';
+import { routing } from '@/i18n/routing';
+import ClientServiceProvider from '@/lib/providers/ClientServiceProvider';
+import RootProviderContainer from '@/lib/providers/RootProviderContainer';
 
 const _openSans = Open_Sans({
   subsets: ['latin'],
@@ -20,16 +21,16 @@ const _openSans = Open_Sans({
 });
 
 export async function generateMetadata(): Promise<Metadata> {
-  const t = await getTranslations("metadata.app");
+  const t = await getTranslations('metadata.app');
 
   return {
     robots: {
       index: true,
-      follow: true
+      follow: true,
     },
     title: {
       default: t('title'),
-      template: `%s | ${t('title')}`
+      template: `%s | ${t('title')}`,
     },
     description: t('description'),
     metadataBase: new URL(config.publicUrl),
@@ -72,7 +73,7 @@ export async function generateMetadata(): Promise<Metadata> {
       'apple-mobile-web-app-title': t('title'),
     },
     manifest: '/manifest/manifest.webmanifest',
-  }
+  };
 }
 
 export function generateViewport(): Viewport {
@@ -80,15 +81,15 @@ export function generateViewport(): Viewport {
     width: 'device-width',
     initialScale: 1,
     themeColor: [
-      { media: "(prefers-color-scheme: dark)", color: "#2f0031" },
-      { media: "(prefers-color-scheme: light)", color: "#2f0031" }
-    ]
-  }
+      { media: '(prefers-color-scheme: dark)', color: '#2f0031' },
+      { media: '(prefers-color-scheme: light)', color: '#2f0031' },
+    ],
+  };
 }
 
 async function RootLayout({
   children,
-  params
+  params,
 }: {
   children: React.ReactNode;
   params: Promise<{ locale: string }>;
@@ -118,7 +119,7 @@ async function RootLayout({
           </RootProviderContainer>
         </NextIntlClientProvider>
       </body>
-    </html >
+    </html>
   );
 }
 

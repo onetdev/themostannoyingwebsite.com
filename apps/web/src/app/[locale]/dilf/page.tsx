@@ -1,11 +1,14 @@
-import { DilfFinder } from '@/features/gifts';
 import { Metadata } from 'next';
 import { getTranslations } from 'next-intl/server';
+
+import { DilfFinder } from '@/features/gifts';
 
 export { generateStaticParams } from '@/i18n/routing';
 export const revalidate = 1800;
 
-export async function generateMetadata({ params }: NextPageProps): Promise<Metadata> {
+export async function generateMetadata({
+  params,
+}: NextPageProps): Promise<Metadata> {
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: 'metadata.dilf' });
 
@@ -25,4 +28,4 @@ export default async function Page() {
       <DilfFinder />
     </main>
   );
-};
+}

@@ -1,3 +1,9 @@
 import { config } from "@maw/eslint-config/react-internal";
 
-export default config;
+/** @type {import("eslint").Linter.Config} */
+export default [
+  ...config,
+  {
+    ignores: ["storybook-static"],
+  },
+];
