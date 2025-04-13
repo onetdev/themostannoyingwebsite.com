@@ -5,7 +5,7 @@ import { FunctionComponent, useMemo, useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 
 import { type NewsletterFormInputs } from '@/features/newsletter';
-import { EMAIL_PATTERN } from '@/lib/utils/validator';
+import { EMAIL_PATTERN } from '@/utils/validator';
 
 type NewsletterModalProps = {
   visible?: boolean;

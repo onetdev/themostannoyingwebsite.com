@@ -20,7 +20,7 @@ import {
   RegistrationFormInputs,
 } from '@/features/auth';
 import { Link } from '@/i18n/navigation';
-import { EMAIL_PATTERN } from '@/lib/utils/validator';
+import { EMAIL_PATTERN } from '@/utils/validator';
 
 export function RegistrationPage() {
   const t = useTranslations();

@@ -13,8 +13,8 @@ import {
 import useAdblockerDetector from '@/features/gifts/hooks/useAdblockerDetector';
 import { NewsletterModalExperienceHost } from '@/features/newsletter';
 import { NotificationPermissionExperienceHost } from '@/features/notification';
-import { useExperienceFlagsStore } from '@/lib/state/experience_flags';
-import { useUserGrantsStore } from '@/lib/state/user_grants';
+import { useExperienceFlagsStore } from '@/state/experience_flags';
+import { useUserGrantsStore } from '@/state/user_grants';
 
 const ExperienceProvider: FunctionComponent<PropsWithChildren> = ({
   children,

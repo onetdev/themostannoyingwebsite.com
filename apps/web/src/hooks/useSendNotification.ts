@@ -4,7 +4,7 @@ import { useCallback } from 'react';
 import {
   getNotificationPermissionState,
   requestNotificationPermission,
-} from '@/lib/utils/permission';
+} from '@/utils/permission';
 
 type UseSendNotificationProps = {
   autoRequest?: boolean;

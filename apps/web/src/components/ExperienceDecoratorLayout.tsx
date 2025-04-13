@@ -10,7 +10,7 @@ import {
   StickyVideoExperienceHost,
 } from '@/features/obstruction_decor';
 import { WheelOfFortuneHost } from '@/features/wheel_of_fortune';
-import { useExperienceFlagsStore } from '@/lib/state/experience_flags';
+import { useExperienceFlagsStore } from '@/state/experience_flags';
 
 type ExperienceDecoratorLayoutProps = JSXProxyProps<'div'>;
 

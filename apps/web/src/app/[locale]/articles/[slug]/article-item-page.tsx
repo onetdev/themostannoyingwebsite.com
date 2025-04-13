@@ -6,7 +6,7 @@ import Image from 'next/image';
 import { useTranslations } from 'next-intl';
 
 import { ArticleDatum, PartitionalLockedContent } from '@/features/content';
-import { useExperienceFlagsStore } from '@/lib/state/experience_flags';
+import { useExperienceFlagsStore } from '@/state/experience_flags';
 
 export function ArticleItemPage({ data }: { data: ArticleDatum }) {
   const t = useTranslations();

@@ -5,7 +5,7 @@ import { useTranslations } from 'next-intl';
 import { FunctionComponent, useMemo } from 'react';
 import ReactTimeAgo from 'react-timeago';
 
-import { useRuntimeStore } from '@/lib/state/runtime';
+import { useRuntimeStore } from '@/state/runtime';
 
 const RuntimeSettings: FunctionComponent = () => {
   const runtime = useRuntimeStore();

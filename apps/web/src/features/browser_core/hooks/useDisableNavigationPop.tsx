@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 
-import { useExperienceFlagsStore } from '@/lib/state/experience_flags';
+import { useExperienceFlagsStore } from '@/state/experience_flags';
 
 // This NEEDS user interaction first, otherwise it won't work at all.
 // Also, this can't really have a cleanup function either.

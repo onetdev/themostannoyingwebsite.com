@@ -12,7 +12,7 @@ import {
 
 import DynamicWheelSvg, { Item } from './DynamicWheelSvg';
 
-import useDragTracker from '@/lib/hooks/useDragTracker';
+import useDragTracker from '@/hooks/useDragTracker';
 
 type AnimatedWheelProps = {
   items: Item[];

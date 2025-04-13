@@ -4,8 +4,8 @@ import { Icon } from '@maw/ui';
 import { useTranslations } from 'next-intl';
 import { FunctionComponent, useEffect, useRef, useState } from 'react';
 
-import { useExperienceFlagsStore } from '@/lib/state/experience_flags';
-import { useUserGrantsStore } from '@/lib/state/user_grants';
+import { useExperienceFlagsStore } from '@/state/experience_flags';
+import { useUserGrantsStore } from '@/state/user_grants';
 
 const StickyVideoExperienceHost: FunctionComponent = () => {
   const stickyVideo = useExperienceFlagsStore((state) => state.stickyVideo);
