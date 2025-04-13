@@ -22,7 +22,7 @@ const PasswordCreateField: FunctionComponent<PasswordCreateFieldProps> = ({
     weak: t('form.validation.passwordStrength.weak'),
     okay: t('form.validation.passwordStrength.okay'),
     veryStrong: t('form.validation.passwordStrength.veryStrong'),
-  }
+  };
 
   return (
     <>
@@ -67,7 +67,11 @@ const PasswordCreateField: FunctionComponent<PasswordCreateFieldProps> = ({
             },
           })}
         />
-        <PasswordStrengthBar className="mt-3" password={password} text={passwordStrenghtText} />
+        <PasswordStrengthBar
+          className="mt-3"
+          password={password}
+          text={passwordStrenghtText}
+        />
       </label>
       <FormFieldError error={errors.password} />
     </>

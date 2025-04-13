@@ -36,17 +36,17 @@ const ChatBubbleHost: FunctionComponent = () => {
       className="group fixed bottom-2 left-2 z-20 flex md:bottom-4 md:left-4"
       onClick={preventClose}>
       <button
-        className="z-30 flex size-12 cursor-pointer items-center justify-center rounded-full bg-secondary text-2xl text-on-secondary md:size-14"
+        className="bg-secondary text-on-secondary z-30 flex size-12 cursor-pointer items-center justify-center rounded-full text-2xl md:size-14"
         onClick={toggleHistory}>
         <Icon icon="commentDots" size="3xl" className="hidden md:block" />
         <Icon icon="commentDots" size="2xl" className="block md:hidden" />
         {state.badgeCounter > 0 && (
-          <div className="absolute -right-2 -top-2 z-20 flex size-6 items-center justify-center rounded-full bg-error p-1 text-center text-xs text-on-error md:size-7">
+          <div className="bg-error text-on-error absolute -top-2 -right-2 z-20 flex size-6 items-center justify-center rounded-full p-1 text-center text-xs md:size-7">
             <span>{state.badgeCounter}</span>
           </div>
         )}
       </button>
-      <div className="absolute bottom-10 left-0 z-20 hidden max-h-screen-3per4 w-80 opacity-0 transition-visibility-opacity duration-300 group-data-[state=open]:block group-data-[state=open]:opacity-100 md:bottom-4 md:left-10 md:w-96">
+      <div className="max-h-screen-3per4 transition-visibility-opacity absolute bottom-10 left-0 z-20 hidden w-80 opacity-0 duration-300 group-data-[state=open]:block group-data-[state=open]:opacity-100 md:bottom-4 md:left-10 md:w-96">
         <HistoryOverlay
           history={state.history}
           onUserMessage={(message) => state.add(message, 'user')}

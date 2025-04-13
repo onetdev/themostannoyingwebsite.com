@@ -23,13 +23,13 @@ const PageTitleExperienceHost: FunctionComponent = () => {
   const t = useTranslations();
   const messages = useMessages();
 
-  const marqueeVariants = Object
-    .keys(messages.titleExperience.marqueeVariants)
-    .map((key) => t(`titleExperience.marqueeVariants.${key}`));
+  const marqueeVariants = Object.keys(
+    messages.titleExperience.marqueeVariants,
+  ).map((key) => t(`titleExperience.marqueeVariants.${key}`));
 
-  const arrayPagedVariants = Object
-    .keys(messages.titleExperience.arrayPagedVariants)
-    .map((key) => t(`titleExperience.arrayPagedVariants.${key}`))
+  const arrayPagedVariants = Object.keys(
+    messages.titleExperience.arrayPagedVariants,
+  ).map((key) => t(`titleExperience.arrayPagedVariants.${key}`));
 
   return (
     <>

@@ -29,7 +29,7 @@ const OneByOneGift: FunctionComponent<OneByOneGiftProps> = ({
         height={size}
         alt={t('gifts.wanPhone.title')}
         data-reduced-motion={reducedMotion ? 'true' : 'false'}
-        className="h-auto w-full object-cover data-[reduced-motion=false]:animate-gift-callout"
+        className="data-[reduced-motion=false]:animate-gift-callout h-auto w-full object-cover"
       />
     </Link>
   );

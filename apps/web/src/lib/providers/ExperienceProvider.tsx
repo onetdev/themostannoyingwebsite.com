@@ -37,15 +37,17 @@ const ExperienceProvider: FunctionComponent<PropsWithChildren> = ({
   }, [syncPermissions]);
 
   const copyMarkerText = {
-    readMoreAt: t('app.readMoreAt')
-  }
+    readMoreAt: t('app.readMoreAt'),
+  };
 
   return (
     <>
       <PageTitleExperienceHost />
       <NewsletterModalExperienceHost />
       <NotificationPermissionExperienceHost />
-      <CopyMarker enabled={clipboardMarker} text={copyMarkerText}>{children}</CopyMarker>
+      <CopyMarker enabled={clipboardMarker} text={copyMarkerText}>
+        {children}
+      </CopyMarker>
     </>
   );
 };

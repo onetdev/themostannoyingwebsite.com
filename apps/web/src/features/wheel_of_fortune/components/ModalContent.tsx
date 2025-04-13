@@ -48,12 +48,12 @@ const ModalContent: FunctionComponent<ModalContentProps> = ({
 
   return (
     <div
-      className={`relative flex flex-col overflow-hidden rounded-lg bg-surface ${className}`}
+      className={`bg-surface relative flex flex-col overflow-hidden rounded-lg ${className}`}
       {...rest}>
       <div className="grow">
         <button
           aria-label={t('common.close')}
-          className="absolute right-0 top-0 z-10 cursor-pointer p-3"
+          className="absolute top-0 right-0 z-10 cursor-pointer p-3"
           onClick={() => onClose?.()}>
           <Icon icon="close" size="lg" />
         </button>
@@ -72,7 +72,7 @@ const ModalContent: FunctionComponent<ModalContentProps> = ({
           onSpinCompleted={(newPrize) => setPrize(newPrize)}
         />
       </div>
-      <span className="w-full bg-primary p-5 text-center text-xl font-bold text-on-primary">
+      <span className="bg-primary text-on-primary w-full p-5 text-center text-xl font-bold">
         {state !== 'completed' && t('wheelOfFortune.spinStart')}
         {state === 'completed' &&
           prize &&

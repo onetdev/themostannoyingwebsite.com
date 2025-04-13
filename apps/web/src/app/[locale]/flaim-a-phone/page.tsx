@@ -6,7 +6,9 @@ import { getTranslations } from 'next-intl/server';
 export { generateStaticParams } from '@/i18n/routing';
 export const revalidate = 1800;
 
-export async function generateMetadata({ params }: NextPageProps): Promise<Metadata> {
+export async function generateMetadata({
+  params,
+}: NextPageProps): Promise<Metadata> {
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: 'metadata.wanPhone' });
 
@@ -25,4 +27,4 @@ export default async function Page() {
       <FlaimSurvery className="my-5 w-full" />
     </main>
   );
-};
+}

@@ -29,20 +29,18 @@ const NewsletterModal: FunctionComponent<NewsletterModalProps> = ({
     formState: { errors, isValid },
   } = useForm<NewsletterFormInputs>();
 
-  const confirmPool = useMemo(
-    () => {
-      const items = Object.keys(messages.newsletter.modal.confirmations).map(
-        (key) => ({
+  const confirmPool = useMemo(() => {
+    const items = Object.keys(messages.newsletter.modal.confirmations).map(
+      (key) =>
+        ({
           confirm: t(`newsletter.modal.confirmations.${key}.confirm`),
           cancel: t(`newsletter.modal.confirmations.${key}.cancel`),
           text: t(`newsletter.modal.confirmations.${key}.text`),
-        } satisfies ConfirmItem),
-      );
+        }) satisfies ConfirmItem,
+    );
 
-      return items
-    },
-    [messages.newsletter.modal.confirmations, t],
-  );
+    return items;
+  }, [messages.newsletter.modal.confirmations, t]);
 
   const renderActions = () => {
     const buttons = [

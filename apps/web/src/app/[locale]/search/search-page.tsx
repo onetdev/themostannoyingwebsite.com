@@ -34,9 +34,9 @@ export function SearchPage() {
   const topSearchesPool = useMemo(() => {
     const items = Object.keys(messages.search.topSearcheVariants).map(
       (key) => t(`search.topSearcheVariants.${key}`) as unknown as string,
-    )
+    );
 
-    return items
+    return items;
   }, [messages.search.topSearcheVariants, t]);
 
   const onSearchEvent = useCallback((event: CustomEvent) => {
@@ -77,7 +77,7 @@ export function SearchPage() {
       const matches = await AppArticleService.search({
         query,
         params: {
-          locale
+          locale,
         },
       });
 
@@ -147,7 +147,7 @@ export function SearchPage() {
                   <li key={item}>
                     <span
                       onClick={() => onRecommendedClick(item)}
-                      className="cursor-pointer text-primary">
+                      className="text-primary cursor-pointer">
                       {item}
                     </span>
                   </li>
@@ -159,4 +159,4 @@ export function SearchPage() {
       )}
     </main>
   );
-};
+}

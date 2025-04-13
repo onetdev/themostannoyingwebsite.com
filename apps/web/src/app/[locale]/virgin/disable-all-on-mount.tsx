@@ -1,4 +1,4 @@
-'use client'
+'use client';
 
 import { useExperienceFlagsStore } from '@/lib/state/experience_flags';
 import { useEffect } from 'react';
@@ -10,5 +10,5 @@ export default function DisableAllOnMount() {
     allDisabled();
   }, [allDisabled]);
 
-  return null
-};
+  return null;
+}

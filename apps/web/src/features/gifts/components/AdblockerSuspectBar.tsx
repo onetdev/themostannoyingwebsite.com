@@ -16,7 +16,7 @@ const AdblockerSuspectBar: FunctionComponent = () => {
 
   return (
     show && (
-      <div className="sticky -bottom-3 z-20 rounded-md border border-tertiary bg-error px-5 py-3 text-on-error shadow-md">
+      <div className="border-tertiary bg-error text-on-error sticky -bottom-3 z-20 rounded-md border px-5 py-3 shadow-md">
         <h4>{t('gifts.suspectBar.title')}</h4>
         <p>{t('gifts.suspectBar.description')}</p>
         <div className="my-2 flex items-center justify-end gap-3">

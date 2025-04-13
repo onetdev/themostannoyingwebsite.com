@@ -8,7 +8,9 @@ import { Link } from '@/i18n/navigation';
 export { generateStaticParams } from '@/i18n/routing';
 export const revalidate = 1800;
 
-export async function generateMetadata({ params }: NextPageProps): Promise<Metadata> {
+export async function generateMetadata({
+  params,
+}: NextPageProps): Promise<Metadata> {
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: 'metadata.donate' });
 
@@ -38,5 +40,4 @@ export default async function Page() {
       </div>
     </main>
   );
-};
-
+}

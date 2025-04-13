@@ -8,7 +8,9 @@ import { notFound } from 'next/navigation';
 export { generateStaticParams } from '@/i18n/routing';
 export const revalidate = 1800;
 
-export async function generateMetadata({ params }: NextPageProps): Promise<Metadata> {
+export async function generateMetadata({
+  params,
+}: NextPageProps): Promise<Metadata> {
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: 'metadata.about' });
 
@@ -29,10 +31,12 @@ export default async function Page({ params }: NextPageProps) {
         <PageHeadline className="mx-auto w-full max-w-screen-md">
           {t('navigation.about')}
         </PageHeadline>
-        <div className={styles['content']}><Content /></div>
+        <div className={styles['content']}>
+          <Content />
+        </div>
       </main>
     );
   } catch (_err) {
     return notFound();
   }
-};
+}

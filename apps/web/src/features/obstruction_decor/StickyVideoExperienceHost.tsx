@@ -23,9 +23,9 @@ const StickyVideoExperienceHost: FunctionComponent = () => {
 
   return (
     <>
-      <div className="sticky bottom-2 right-2 flex justify-end md:fixed">
+      <div className="sticky right-2 bottom-2 flex justify-end md:fixed">
         <button
-          className="absolute right-2 top-1"
+          className="absolute top-1 right-2"
           aria-label={t('common.close')}
           onClick={() => setClosed(true)}>
           <Icon icon="close" />

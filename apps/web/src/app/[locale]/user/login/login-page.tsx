@@ -3,7 +3,14 @@
 import { Link } from '@/i18n/navigation';
 import { SubmitHandler, useForm } from 'react-hook-form';
 
-import { Button, CaptchaEmoji, Checkbox, FormFieldError, PageHeadline, TextInput } from '@maw/ui';
+import {
+  Button,
+  CaptchaEmoji,
+  Checkbox,
+  FormFieldError,
+  PageHeadline,
+  TextInput,
+} from '@maw/ui';
 import { LoginFormInputs } from '@/features/auth';
 import { EMAIL_PATTERN } from '@/lib/utils/validator';
 import { useTranslations } from 'next-intl';
@@ -69,7 +76,7 @@ export function LoginPage() {
             <h4 className="mb-1">{t('form.captcha.field')}</h4>
             <small>{t('form.captcha.captchaEmojiHint')}</small>
             <CaptchaEmoji
-              className="my-3 rounded-md border border-on-background"
+              className="border-on-background my-3 rounded-md border"
               width={300}
               height={100}
             />
@@ -102,4 +109,4 @@ export function LoginPage() {
       </form>
     </main>
   );
-};
+}

@@ -28,7 +28,7 @@ const DeadPixelHost: FunctionComponent = () => {
         <div
           key={`${point.x}-${point.y}`}
           style={{ top: point.y, left: point.x }}
-          className="fixed size-px select-none bg-black dark:bg-white"
+          className="fixed size-px bg-black select-none dark:bg-white"
         />
       ))}
     </>

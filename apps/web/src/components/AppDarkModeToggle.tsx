@@ -13,9 +13,15 @@ export const AppDarkModeToggle: FunctionComponent = () => {
   const darkModeToggleText = {
     lightMode: t('settings.userPreferences.themeSwitch.lightMode'),
     darkMode: t('settings.userPreferences.themeSwitch.darkMode'),
-  }
+  };
 
   return (
-    <DarkModeToggle className="self-center justify-self-end" size="lg" resolvedTheme={resolvedTheme as AppTheme} setTheme={setTheme} text={darkModeToggleText} />
+    <DarkModeToggle
+      className="self-center justify-self-end"
+      size="lg"
+      resolvedTheme={resolvedTheme as AppTheme}
+      setTheme={setTheme}
+      text={darkModeToggleText}
+    />
   );
 };

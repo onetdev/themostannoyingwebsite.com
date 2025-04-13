@@ -22,15 +22,17 @@ export const RenderMarqueeItem = (item: ArticleDatum) => {
       {item.title}
     </Link>
   );
-}
+};
 
 export const AppHeader: FunctionComponent = async () => {
   const t = await getTranslations();
 
-  const marqueeItems = (await AppArticleService.getMany({
-    params: { isHighlighted: true },
-    paginate: { take: 10 },
-  })).items
+  const marqueeItems = (
+    await AppArticleService.getMany({
+      params: { isHighlighted: true },
+      paginate: { take: 10 },
+    })
+  ).items;
 
   return (
     <header id="header" className="grid grid-cols-2 gap-1 py-2" role="banner">
@@ -39,7 +41,7 @@ export const AppHeader: FunctionComponent = async () => {
           <span className="text-on-surface lg:hidden">
             <i className="font-light">the</i> MAW
           </span>
-          <span className="hidden text-on-surface lg:inline">
+          <span className="text-on-surface hidden lg:inline">
             <i className="text-3xl font-light opacity-80">the</i>{' '}
             <span>Most Annoying Website</span>
           </span>
@@ -54,7 +56,10 @@ export const AppHeader: FunctionComponent = async () => {
       </div>
       <MainNavigation className="col-span-1 my-3 -ml-3 pl-3 md:ml-0 md:pl-0" />
       <UserNavigation className="col-span-1 my-3" />
-      <ArticleMarquee items={marqueeItems} className="col-span-2 -mx-3 mb-2 bg-surface-alt py-2 md:-mx-5" />
+      <ArticleMarquee
+        items={marqueeItems}
+        className="bg-surface-alt col-span-2 -mx-3 mb-2 py-2 md:-mx-5"
+      />
     </header>
   );
 };

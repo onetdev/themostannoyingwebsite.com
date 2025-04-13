@@ -29,7 +29,7 @@ const ContainerGiftFlaps: FunctionComponent = () => {
           </GiftFlapText>
           <GiftFlapText
             theme={resolvedTheme as AppTheme}
-            className="bottom-16 right-16 origin-bottom-right rotate-90">
+            className="right-16 bottom-16 origin-bottom-right rotate-90">
             {t('gifts.dilf.flapRight')}
           </GiftFlapText>
         </Link>

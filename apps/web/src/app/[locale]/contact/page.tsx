@@ -7,7 +7,9 @@ import { getTranslations } from 'next-intl/server';
 export { generateStaticParams } from '@/i18n/routing';
 export const revalidate = 1800;
 
-export async function generateMetadata({ params }: NextPageProps): Promise<Metadata> {
+export async function generateMetadata({
+  params,
+}: NextPageProps): Promise<Metadata> {
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: 'metadata.contact' });
 
@@ -28,4 +30,4 @@ export default async function Page() {
       </p>
     </main>
   );
-};
+}

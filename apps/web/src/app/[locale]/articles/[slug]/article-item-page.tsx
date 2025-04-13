@@ -10,7 +10,9 @@ import { useTranslations } from 'next-intl';
 
 export function ArticleItemPage({ data }: { data: ArticleDatum }) {
   const t = useTranslations();
-  const partitionEnabled = useExperienceFlagsStore((state) => state.contentPaywall);
+  const partitionEnabled = useExperienceFlagsStore(
+    (state) => state.contentPaywall,
+  );
 
   return (
     <main role="main">
@@ -21,7 +23,7 @@ export function ArticleItemPage({ data }: { data: ArticleDatum }) {
       {data.coverImages?.original && (
         <div className="-mx-5">
           <Image
-            className=" h-auto w-full object-cover"
+            className="h-auto w-full object-cover"
             src={data.coverImages?.original}
             alt={t('article.coverImage')}
             width="1920"
@@ -29,9 +31,11 @@ export function ArticleItemPage({ data }: { data: ArticleDatum }) {
           />
         </div>
       )}
-      <PartitionalLockedContent initialMaxHeight={300} active={partitionEnabled}>
+      <PartitionalLockedContent
+        initialMaxHeight={300}
+        active={partitionEnabled}>
         <div className={styles['content']}>{HTMLReactParser(data.content)}</div>
       </PartitionalLockedContent>
     </main>
   );
-};
+}

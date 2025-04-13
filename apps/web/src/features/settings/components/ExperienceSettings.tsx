@@ -2,7 +2,12 @@
 
 import { FunctionComponent } from 'react';
 
-import { Button, Checkbox as FormCheckbox, LabeledChild, BorderedBox } from '@maw/ui';
+import {
+  Button,
+  Checkbox as FormCheckbox,
+  LabeledChild,
+  BorderedBox,
+} from '@maw/ui';
 import { useExperienceFlagsStore } from '@/lib/state/experience_flags';
 import { useTranslations } from 'next-intl';
 

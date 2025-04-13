@@ -39,7 +39,11 @@ const SearchForm: FunctionComponent<SearchFormProps> = ({
   };
 
   return (
-    <form method="post" onSubmit={onSubmit} className={`flex ${className}`} role="search">
+    <form
+      method="post"
+      onSubmit={onSubmit}
+      className={`flex ${className}`}
+      role="search">
       <TextInput
         defaultValue={initialValue}
         className="-mr-1 w-full rounded-r-none"

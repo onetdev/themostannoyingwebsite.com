@@ -29,18 +29,21 @@ const commonPageMeta = (path: string): MetadataRoute.Sitemap[0] => ({
 
 const mapArticleToSitemapEntry = (item: ArticleDatum) => {
   const prefix =
-  item.locale === i18nConfig.defaultLocale
-        ? `${config.publicUrl}`
-        : `${config.publicUrl}/${item.locale}`;
+    item.locale === i18nConfig.defaultLocale
+      ? `${config.publicUrl}`
+      : `${config.publicUrl}/${item.locale}`;
 
-    return {
-      url: `${prefix}/articles/${item.slug}`,
-      lastModified: new Date(item.updatedAt || item.publishedAt),
-    } satisfies MetadataRoute.Sitemap[0];
-}
+  return {
+    url: `${prefix}/articles/${item.slug}`,
+    lastModified: new Date(item.updatedAt || item.publishedAt),
+  } satisfies MetadataRoute.Sitemap[0];
+};
 
 async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const articleResults = await AppArticleService.getMany({ params: {}, paginate: { take: -1, skip: 0 } });
+  const articleResults = await AppArticleService.getMany({
+    params: {},
+    paginate: { take: -1, skip: 0 },
+  });
   const articles = articleResults.items.map(mapArticleToSitemapEntry);
 
   return [

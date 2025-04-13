@@ -28,19 +28,19 @@ const FlaimSurvery: FunctionComponent<FlaimSurveryProps> = ({
   const messages = useMessages();
 
   const pool = useMemo(() => {
-    const items = Object
-      .keys(messages.gifts.wanPhone.survey.questionVariants)
-      .map((key) => {
-        const questionKey = `gifts.wanPhone.survey.questionVariants.${key}`
-        const solutionKey = `${questionKey}.solution`
-        return {
-          text: t(`${questionKey}.text`),
-          options: Object
-            .keys(messages.gifts.wanPhone.survey.questionVariants[key].options)
-            .map((optionKey) => t(`${questionKey}.options.${optionKey}`)),
-          solution: t.has(solutionKey) ? t(solutionKey) : undefined,
-        } satisfies FlaimSurveyQuestion;
-      });
+    const items = Object.keys(
+      messages.gifts.wanPhone.survey.questionVariants,
+    ).map((key) => {
+      const questionKey = `gifts.wanPhone.survey.questionVariants.${key}`;
+      const solutionKey = `${questionKey}.solution`;
+      return {
+        text: t(`${questionKey}.text`),
+        options: Object.keys(
+          messages.gifts.wanPhone.survey.questionVariants[key].options,
+        ).map((optionKey) => t(`${questionKey}.options.${optionKey}`)),
+        solution: t.has(solutionKey) ? t(solutionKey) : undefined,
+      } satisfies FlaimSurveyQuestion;
+    });
 
     return arrayShuffle(
       items.map((item) => ({ ...item, options: arrayShuffle(item.options) })),
@@ -99,9 +99,9 @@ const FlaimSurvery: FunctionComponent<FlaimSurveryProps> = ({
           </p>
           <div
             data-warning={inWarning.toString()}
-            className="group w-full overflow-hidden rounded-full border border-success data-[warning=true]:border-warning">
+            className="group border-success data-[warning=true]:border-warning w-full overflow-hidden rounded-full border">
             <div
-              className="h-5 animate-width-100-0 bg-success group-data-[warning=true]:bg-warning"
+              className="animate-width-100-0 bg-success group-data-[warning=true]:bg-warning h-5"
               style={{ animationDuration: `${timeInSeconds}s` }}
             />
           </div>

@@ -44,7 +44,7 @@ const HistoryOverlay: FunctionComponent<HistoryOverlayProps> = ({
   }, [history]);
 
   return (
-    <div className="rounded-lg border border-secondary bg-surface">
+    <div className="border-secondary bg-surface rounded-lg border">
       <div className="flex flex-row justify-between p-3 pl-5 shadow-xs">
         <h4 className="text-lg font-bold">
           {t('chatBubble.hudTitle')}{' '}
@@ -55,7 +55,7 @@ const HistoryOverlay: FunctionComponent<HistoryOverlayProps> = ({
         </button>
       </div>
       <div
-        className="flex max-h-clamp-300-screen-half flex-col gap-2 overflow-auto px-5 py-3"
+        className="max-h-clamp-300-screen-half flex flex-col gap-2 overflow-auto px-5 py-3"
         ref={pagerRef}>
         {history.length > 0 &&
           historyViewData.map(({ item, showTime }, index) => (

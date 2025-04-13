@@ -15,11 +15,9 @@ import { useExperienceFlagsStore } from '@/lib/state/experience_flags';
 
 type ExperienceDecoratorLayoutProps = JSXProxyProps<'div'>;
 
-export const ExperienceDecoratorLayout: FunctionComponent<ExperienceDecoratorLayoutProps> = ({
-  children,
-  className,
-  ...rest
-}) => {
+export const ExperienceDecoratorLayout: FunctionComponent<
+  ExperienceDecoratorLayoutProps
+> = ({ children, className, ...rest }) => {
   const deadPixel = useExperienceFlagsStore((state) => state.deadPixel);
   const mockChat = useExperienceFlagsStore((state) => state.mockChat);
   const giftFlaps = useExperienceFlagsStore((state) => state.gifts.flaps);
@@ -29,9 +27,8 @@ export const ExperienceDecoratorLayout: FunctionComponent<ExperienceDecoratorLay
 
   return (
     <div className={className} {...rest}>
-
       {giftFlaps && <ContainerGiftFlaps />}
-      <div className="container relative mx-auto my-0 min-h-screen bg-surface px-3 py-2 md:px-5">
+      <div className="bg-surface relative container mx-auto my-0 min-h-screen px-3 py-2 md:px-5">
         {children}
         {wheelOfFortune && <WheelOfFortuneHost />}
         {deadPixel && <DeadPixelHost />}

@@ -8,7 +8,13 @@ import {
   UseFormSetValue,
 } from 'react-hook-form';
 
-import { Button, FormFieldError, PageHeadline, TextInput, CaptchaTitlePuzzleField } from '@maw/ui';
+import {
+  Button,
+  FormFieldError,
+  PageHeadline,
+  TextInput,
+  CaptchaTitlePuzzleField,
+} from '@maw/ui';
 import { PasswordReminderFormInputs } from '@/features/auth';
 import { EMAIL_PATTERN } from '@/lib/utils/validator';
 import { useTranslations } from 'next-intl';
@@ -30,7 +36,7 @@ export function PasswordReminderPage() {
     label: t('form.captcha.field'),
     hint: t('form.captcha.captchaTilePuzzleHint'),
     invalid: t('form.validation.error.captchaInvalid'),
-  }
+  };
 
   return (
     <main className="mx-auto max-w-md py-0 md:py-14" role="main">
@@ -77,4 +83,4 @@ export function PasswordReminderPage() {
       </form>
     </main>
   );
-};
+}

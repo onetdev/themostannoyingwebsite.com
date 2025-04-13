@@ -15,15 +15,19 @@ const RenderItem = (item: ArticleDatum) => {
       {item.title}
     </Link>
   );
-}
+};
 
 type ArticleMarqueeProps = {
-  items: ArticleDatum[],
-  className?: string,
-}
+  items: ArticleDatum[];
+  className?: string;
+};
 
 export const ArticleMarquee = ({ items, className }: ArticleMarqueeProps) => {
   return (
-    <MarqueeText items={items} className={className} ItemComponent={RenderItem} />
+    <MarqueeText
+      items={items}
+      className={className}
+      ItemComponent={RenderItem}
+    />
   );
 };

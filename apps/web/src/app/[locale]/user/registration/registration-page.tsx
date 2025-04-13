@@ -3,7 +3,14 @@
 import { Link } from '@/i18n/navigation';
 import { SubmitHandler, useForm, UseFormRegister } from 'react-hook-form';
 
-import { Button, Checkbox, FormFieldError, TextInput, CaptchaEmojiField, PageHeadline } from '@maw/ui';
+import {
+  Button,
+  Checkbox,
+  FormFieldError,
+  TextInput,
+  CaptchaEmojiField,
+  PageHeadline,
+} from '@maw/ui';
 import {
   CountryField,
   DateOfBirthField,
@@ -39,7 +46,7 @@ export function RegistrationPage() {
     hint: t('form.captcha.captchaEmojiHint'),
     required: t('form.validation.error.required'),
     invalid: t('form.validation.error.captchaInvalid'),
-  }
+  };
 
   return (
     <main className="mx-auto max-w-[900px] py-0 md:py-14" role="main">
@@ -187,4 +194,4 @@ export function RegistrationPage() {
       </form>
     </main>
   );
-};
+}
