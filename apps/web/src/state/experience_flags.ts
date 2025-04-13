@@ -52,8 +52,8 @@ export interface ExperienceFlagsStore
 const initialState: ExperienceFlagsState = {
   gifts: {
     detectAdblocker: true,
-    flaps: false,
-    oneByOne: false,
+    flaps: true,
+    oneByOne: true,
   },
   clipboardMarker: true,
   contentPaywall: true,
@@ -61,7 +61,7 @@ const initialState: ExperienceFlagsState = {
   disableContextMenu: true,
   exitPrompt: true,
   historySpam: true,
-  mockChat: false,
+  mockChat: true,
   newsletterModal: true,
   notifications: true,
   pageTitle: {
@@ -72,8 +72,8 @@ const initialState: ExperienceFlagsState = {
     inactiveArrayPaged: true,
   },
   searchDelay: true,
-  stickyVideo: false,
-  wheelOfFortune: false,
+  stickyVideo: true,
+  wheelOfFortune: true,
 };
 
 export const useExperienceFlagsStore = create(
