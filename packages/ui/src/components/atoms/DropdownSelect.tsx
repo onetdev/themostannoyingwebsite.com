@@ -4,7 +4,7 @@ export type DropdownSelectProps = DetailedHTMLProps<
   SelectHTMLAttributes<HTMLSelectElement>,
   HTMLSelectElement
 > & {
-  appendPlaceholder?: boolean;
+  placeholder?: string;
   values: { value: string | number; label: string | number }[];
   onValueChange?: (value?: string) => void;
 };
@@ -12,7 +12,7 @@ export type DropdownSelectProps = DetailedHTMLProps<
 export const DropdownSelect = forwardRef<HTMLSelectElement, DropdownSelectProps>(
   (
     {
-      appendPlaceholder = true,
+      placeholder,
       className,
       values,
       onChange,
@@ -32,7 +32,7 @@ export const DropdownSelect = forwardRef<HTMLSelectElement, DropdownSelectProps>
         className={`rounded-lg border border-primary bg-surface p-2 text-on-surface ${className}`}
         ref={ref}
         {...rest}>
-        {appendPlaceholder && <option value=""></option>}
+        {typeof placeholder !== "undefined" && <option value="">{placeholder}</option>}
         {values.map(({ value, label }) => (
           <option key={`${value}-${label}`} value={value}>
             {label}

@@ -5,9 +5,10 @@
   "type": "module",
   "exports": {
     ".": "./src/index.ts",
-    "./utils": "./src/utils/index.ts",
+    "./components/*": "./src/components/*",
+    "./content.module.css": "./src/styles/content.module.css",
     "./global.css": "./src/styles/global.css",
-    "./content.module.css": "./src/styles/content.module.css"
+    "./utils": "./src/utils/index.ts"
   },
   "scripts": {
     "check-types": "tsc --noEmit",
