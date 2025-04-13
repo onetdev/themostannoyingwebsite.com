@@ -6,7 +6,8 @@
   "exports": {
     "./base": "./configs/base.mjs",
     "./next-js": "./configs/next.mjs",
-    "./react-internal": "./configs/react-internal.mjs"
+    "./react-internal": "./configs/react-internal.mjs",
+    "./prettier": "./configs/.prettierrc.cjs"
   },
   "devDependencies": {
     "@eslint/js": "catalog:",
@@ -15,6 +16,7 @@
     "eslint": "catalog:",
     "eslint-config-prettier": "^10.1.1",
     "eslint-plugin-only-warn": "^1.1.0",
+    "eslint-plugin-prettier": "^5.2.5",
     "eslint-plugin-react": "^7.37.4",
     "eslint-plugin-react-hooks": "^5.2.0",
     "eslint-plugin-turbo": "^2.4.4",

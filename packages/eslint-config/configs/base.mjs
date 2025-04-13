@@ -1,7 +1,8 @@
 import js from '@eslint/js';
-import eslintConfigPrettier from 'eslint-config-prettier/flat';
+import eslintPluginPrettierRecommended from 'eslint-plugin-prettier/recommended';
+import prettier from 'eslint-plugin-prettier';
 import onlyWarn from 'eslint-plugin-only-warn';
-import turboPlugin from 'eslint-plugin-turbo';
+import turbo from 'eslint-plugin-turbo';
 import tseslint from 'typescript-eslint';
 
 /**
@@ -11,26 +12,25 @@ import tseslint from 'typescript-eslint';
  * */
 export const config = [
   js.configs.recommended,
-  {
-    plugins: {
-      prettier: eslintConfigPrettier,
-    },
-  },
+  eslintPluginPrettierRecommended,
   ...tseslint.configs.recommended,
   {
+    name: "base/turbo",
     plugins: {
-      turbo: turboPlugin,
+      turbo,
     },
     rules: {
       'turbo/no-undeclared-env-vars': 'warn',
     },
   },
   {
+    name: "base/onlyWarn",
     plugins: {
       onlyWarn,
     },
   },
   {
+    name: "base/noDist",
     ignores: ['dist/**'],
   },
 ];
