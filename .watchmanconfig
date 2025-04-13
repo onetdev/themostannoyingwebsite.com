@@ -1,4 +1,10 @@
 {
-  "ignore_dirs": ["node_modules", ".git"],
-  "ignore_files": [".log", ".tmp"]
+  "ignore_dirs": [
+    "node_modules",
+    ".git"
+  ],
+  "ignore_files": [
+    ".log",
+    ".tmp"
+  ]
 }

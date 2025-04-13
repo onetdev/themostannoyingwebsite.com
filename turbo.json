@@ -1,0 +1,59 @@
+{
+  "$schema": "https://turbo.build/schema.json",
+  "ui": "tui",
+  "tasks": {
+    "build": {
+      "dependsOn": ["^build", "build:metadata"],
+      "inputs": [
+        "$TURBO_DEFAULT$",
+        ".env*"
+      ],
+      "outputs": [
+        ".next/**",
+        "!.next/cache/**",
+        "storybook-static/**",
+        "data/**"
+      ]
+    },
+    "lint:fix": {
+      "dependsOn": ["^lint:fix"],
+      "cache": false
+    },
+    "lint": {
+      "dependsOn": ["^lint"]
+    },
+    "check-types": {
+      "dependsOn": ["^check-types"]
+    },
+    "dev": {
+      "cache": false,
+      "persistent": true
+    },
+    "build:metadata": {
+      "cache": false
+    },
+    "test": {
+      "cache": false
+    },
+    "test:e2e": {
+      "cache": false
+    }
+  },
+  "globalEnv": [
+    "ANALYZE",
+    "CI",
+    "GITHUB_TOKEN",
+    "NEXT_PUBLIC_IS_DEV",
+    "NEXT_PUBLIC_SENTRY_CLIENT_DSN",
+    "NEXT_PUBLIC_SENTRY_ENABLED",
+    "NEXT_PUBLIC_SITE_URL",
+    "NEXT_RUNTIME",
+    "SENTRY_AUTH_TOKEN",
+    "SENTRY_EDGE_DSN",
+    "SENTRY_SERVER_DSN",
+    "VERCEL_BRANCH_URL",
+    "VERCEL_ENV",
+    "VERCEL_GIT_COMMIT_REF",
+    "VERCEL_PROJECT_PRODUCTION_URL"
+  ]
+}

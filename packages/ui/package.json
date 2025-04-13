@@ -1,0 +1,44 @@
+{
+  "private": true,
+  "name": "@maw/ui",
+  "version": "1.0.0",
+  "type": "module",
+  "exports": {
+    ".": "./src/index.ts",
+    "./components/*": "./src/components/*",
+    "./content.module.css": "./src/styles/content.module.css",
+    "./global.css": "./src/styles/global.css",
+    "./utils": "./src/utils/index.ts"
+  },
+  "scripts": {
+    "check-types": "tsc --noEmit",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix"
+  },
+  "dependencies": {
+    "@fortawesome/fontawesome-svg-core": "^6.7.2",
+    "@fortawesome/free-solid-svg-icons": "^6.7.2",
+    "@fortawesome/react-fontawesome": "^0.2.2",
+    "marked": "^15.0.7",
+    "react": "catalog:",
+    "react-dom": "catalog:",
+    "react-fast-marquee": "^1.6.5",
+    "react-hook-form": "7.55.0"
+  },
+  "devDependencies": {
+    "@maw/eslint-config": "workspace:*",
+    "@maw/tsconfig": "workspace:*",
+    "@maw/utils": "workspace:*",
+    "@storybook/react": "^8.6.12",
+    "@storybook/test": "^8.6.12",
+    "@storybook/types": "^8.6.12",
+    "@types/node": "^22.13.14",
+    "@types/react": "catalog:",
+    "@types/react-dom": "catalog:",
+    "eslint": "catalog:",
+    "prettier-plugin-tailwindcss": "^0.6.11",
+    "tailwindcss": "catalog:",
+    "tsx": "catalog:",
+    "typescript": "catalog:"
+  }
+}

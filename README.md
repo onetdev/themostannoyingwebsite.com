@@ -84,11 +84,11 @@ Open [https://localhost:3000](https://localhost:3000) in your browser to see the
 
 ## Translation
 
-Fortunately, Next.JS comes with great [i18n support](https://nextjs.org/docs/pages/building-your-application/routing/internationalization) out of the box. We use simple path-based routing for translations, so if you want to add a new language, just create a folder under `public/locales` with the language code (eg.: `en`, `hu`, `de`, etc.) and add the files you want to translate. Please use `en` as a reference for keys and values.
+Fortunately, Next.JS comes with great [i18n support](https://nextjs.org/docs/pages/building-your-application/routing/internationalization) out of the box. We use simple path-based routing for translations, so if you want to add a new language, just create a folder under `apps/web/src/i81n/messages` with the language code (eg.: `en`, `hu`, `de`, etc.) and add the files you want to translate. Please use `en` as a reference for keys and values.
 
 Keep in mind that translations are currently low on the priority list, the goal is only to have it prepared for the future.
 
-**For content translation, see `public/assets/articles/README.MD`**
+**For content translation, see `packages/content-api/README.MD`**
 
 ## Deployment
 
@@ -96,7 +96,7 @@ PRs are automatically published to Vercel as previews (you can find preview URLs
 
 ## Support
 
-Pay a visit to https://onetdev.com, drop me an email.
+Pay a visit to https://onet.dev, drop me an email.
 
 ### 3rd party credits
 

@@ -1,0 +1,29 @@
+{
+  "$schema": "https://json.schemastore.org/tsconfig",
+  "display": "Base TypeScript Config",
+  "compilerOptions": {
+    "baseUrl": ".",
+    "lib": ["ESNext", "DOM", "DOM.Iterable"],
+    "declaration": true,
+    "declarationMap": true,
+    "esModuleInterop": true,
+    "incremental": false,
+    "isolatedModules": true,
+    "module": "ESNext",
+    "moduleDetection": "force",
+    "moduleResolution": "Bundler",
+    "noUncheckedIndexedAccess": false,
+    "resolveJsonModule": true,
+    "skipLibCheck": true,
+    "strict": true,
+    "target": "ES2022",
+    "paths": {
+      "@/*": [
+        "./src/*"
+      ],
+      "@/root/*": [
+        "./*"
+      ]
+    },
+  }
+}

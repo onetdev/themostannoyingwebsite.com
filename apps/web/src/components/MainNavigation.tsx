@@ -1,0 +1,51 @@
+import { Icon } from '@maw/ui';
+import { useTranslations } from 'next-intl';
+import { FunctionComponent, useMemo } from 'react';
+
+import { Link } from '@/i18n/navigation';
+
+export type MainNavigationProps = {
+  className?: string;
+};
+
+const MainNavigation: FunctionComponent<MainNavigationProps> = ({
+  className,
+}) => {
+  const t = useTranslations();
+
+  const links = useMemo(
+    () => [
+      { path: '/', text: t('navigation.home') },
+      { path: '/hot-things', text: t('navigation.hotThings') },
+      { path: '/contact', text: t('navigation.contact') },
+      { path: '/dilf', text: t('navigation.dilf') },
+      { path: '/privacy-policy', text: t('navigation.privacyPolicy') },
+      { path: '/about', text: t('navigation.about') },
+      { path: '/donate', text: t('navigation.donate') },
+    ],
+    [t],
+  );
+
+  return (
+    <nav
+      className={`group relative ${className}`}
+      id="navigation-main"
+      role="navigation">
+      <input type="checkbox" id="menu-toggle" className="peer hidden" />
+      <label className="block cursor-pointer md:hidden" htmlFor="menu-toggle">
+        <Icon icon="menu" size="lg" aria-label={t('app.toggleMenu')} />
+      </label>
+      <ul className="bg-surface font-primary absolute inset-x-0 z-20 hidden flex-col gap-x-5 py-2 text-lg drop-shadow-md peer-checked:flex md:relative md:right-0 md:flex md:flex-row md:flex-wrap md:py-0 md:drop-shadow-none">
+        {links.map(({ path, text }) => (
+          <li key={`${path}${text}`} className="px-3 md:px-0">
+            <Link href={path} prefetch={false}>
+              {text}
+            </Link>
+          </li>
+        ))}
+      </ul>
+    </nav>
+  );
+};
+
+export default MainNavigation;

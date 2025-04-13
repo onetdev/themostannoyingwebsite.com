@@ -1,0 +1,29 @@
+{
+  "private": true,
+  "name": "@maw/eslint-config",
+  "version": "1.0.0",
+  "type": "module",
+  "exports": {
+    "./base": "./configs/base.mjs",
+    "./next-js": "./configs/next.mjs",
+    "./react-internal": "./configs/react-internal.mjs",
+    "./prettier-base": "./configs/prettier-base.cjs",
+    "./prettier-tailwind": "./configs/prettier-tailwind.cjs"
+  },
+  "devDependencies": {
+    "@eslint/js": "catalog:",
+    "@maw/tsconfig": "workspace:*",
+    "@next/eslint-plugin-next": "^15.2.1",
+    "eslint": "catalog:",
+    "eslint-config-prettier": "^10.1.1",
+    "eslint-plugin-import-x": "catalog:",
+    "eslint-plugin-only-warn": "^1.1.0",
+    "eslint-plugin-prettier": "^5.2.5",
+    "eslint-plugin-react": "^7.37.4",
+    "eslint-plugin-react-hooks": "^5.2.0",
+    "eslint-plugin-turbo": "^2.4.4",
+    "globals": "^16.0.0",
+    "typescript": "catalog:",
+    "typescript-eslint": "^8.29.0"
+  }
+}
