@@ -1,7 +1,7 @@
 {
   "private": true,
   "name": "@maw/jest-preset",
-  "version": "1.0.0",
+  "version": "0.0.0",
   "exports": {
     "./base": "./src/base.ts",
     "./setup": "./src/setup.ts"

@@ -1,7 +1,7 @@
 {
   "private": true,
   "name": "@maw/web",
-  "version": "1.0.0",
+  "version": "0.0.0",
   "type": "module",
   "scripts": {
     "build": "pnpm run build:deployment-meta && pnpm run publish:assets && next build",
@@ -71,7 +71,6 @@
     "@testing-library/react": "^16.2.0",
     "@types/eslint": "^9.6.1",
     "@types/jest": "catalog:",
-    "@types/lint-staged": "^13.3.0",
     "@types/mdx": "^2.0.13",
     "@types/node": "^22.13.14",
     "@types/react": "catalog:",

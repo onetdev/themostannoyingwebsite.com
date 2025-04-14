@@ -1,7 +1,7 @@
 {
   "private": true,
   "name": "@maw/ui-docs",
-  "version": "1.0.0",
+  "version": "0.0.0",
   "scripts": {
     "build": "storybook build",
     "check-types": "tsc --noEmit",

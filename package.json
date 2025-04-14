@@ -33,11 +33,10 @@
   "devDependencies": {
     "@commitlint/cli": "^19.8.0",
     "@commitlint/config-conventional": "^19.8.0",
-    "@playwright/test": "^1.51.1",
     "husky": "^9.1.7",
-    "lint-staged": "^15.5.0",
-    "turbo": "2.5.0",
-    "symlink-dir": "6.0.5"
+    "lint-staged": "^15.5.1",
+    "symlink-dir": "6.0.5",
+    "turbo": "2.5.0"
   },
   "engines": {
     "node": ">=20"
