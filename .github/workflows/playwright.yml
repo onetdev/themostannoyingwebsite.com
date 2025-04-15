@@ -18,13 +18,13 @@ jobs:
     - name: Install dependencies
       run: npm install -g pnpm && pnpm install
     - name: Build the project
-      run: pnpm build --filter='!@maw/ui-docs'
+      run: pnpm run build --filter='!@maw/ui-docs'
     - name: Set working directory
       run: cd apps/web
     - name: Install Playwright Browsers
       run: pnpm exec playwright install --with-deps
-    - name: Run Playwright tests
-      run: pnpm test:e2e
+    - name: Run Playwright tests for Web
+      run: pnpm run test:e2e
     - uses: actions/upload-artifact@v4
       if: ${{ !cancelled() }}
       with:
