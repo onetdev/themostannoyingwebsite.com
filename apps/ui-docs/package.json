@@ -33,7 +33,6 @@
     "@types/react-dom": "catalog:",
     "eslint": "catalog:",
     "eslint-plugin-storybook": "^0.12.0",
-    "playwright": "catalog:",
     "postcss": "catalog:",
     "storybook": "^8.6.12",
     "tailwindcss": "catalog:",
