@@ -29,7 +29,7 @@
     "@maw/utils": "workspace:*",
     "@types/sanitize-html": "^2.15.0",
     "eslint": "catalog:",
-    "sharp": "^0.33.5",
+    "sharp": "catalog:",
     "tsx": "catalog:",
     "typescript": "catalog:"
   }
