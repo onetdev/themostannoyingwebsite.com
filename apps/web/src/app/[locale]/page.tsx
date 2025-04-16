@@ -23,7 +23,7 @@ export default async function Page({ params }: NextPageProps) {
     paginate: { take: 12 },
   });
   const denseArticleList = articlePool.items.slice(0, 2);
-  const smallCoverArticleList = articlePool.items.slice(2, 8);
+  const smallCoverArticleList = articlePool.items.slice(2, 10);
 
   return (
     <main className="grid grid-cols-1 gap-3 lg:grid-cols-4" role="main">
