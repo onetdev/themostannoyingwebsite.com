@@ -120,7 +120,7 @@ This is being done using next-intl, which is a great library for i18n in Next.js
 
 Unfortunately, the library is not perfect and has some limitations. We don't have routes without language prefix and all the app code needs to be in a localisation folder, but since we do static build we are fine.
 
-Feel free to create your own translation in the `apps/web/src/i81n/messages` folder. The translations are in JSON format, so you can easily add your own translations by creating a new file with the language code (e.g., `en.json`, `hu.json`, etc.) and adding the translations there. Don't forget to update configs either.
+Feel free to create your own translation in the `apps/web/src/i18n/messages` folder. The translations are in JSON format, so you can easily add your own translations by creating a new file with the language code (e.g., `en.json`, `hu.json`, etc.) and adding the translations there. Don't forget to update configs either.
 
 Planned UI translation support - probably with some poor translation software so that it adds an extra layer of annoyance:
 
@@ -130,7 +130,7 @@ Planned UI translation support - probably with some poor translation software so
 - [ ] Spanish
 - [ ] Arabic
 - [ ] Hindi
-- [ ] Portugese
+- [ ] Portuguese
 - [ ] Russian
 - [ ] French
 - [ ] German
