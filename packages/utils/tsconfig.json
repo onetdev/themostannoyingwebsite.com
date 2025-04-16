@@ -1,5 +1,5 @@
 {
-  "extends": "@maw/tsconfig/configs/base.json",
+  "extends": "@maw/config-ts/configs/base.json",
   "compilerOptions": {
     "baseUrl": ".",
   },

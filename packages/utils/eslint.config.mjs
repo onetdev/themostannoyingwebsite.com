@@ -1,3 +1,3 @@
-import { config } from '@maw/eslint-config/base';
+import { config } from '@maw/config-eslint/base';
 
 export default config;

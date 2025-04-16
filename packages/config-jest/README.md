@@ -12,7 +12,7 @@ This will need quie a few deps but I guess it is what it is. Please keep the `@c
 
 ```bash
 pnpm i -D \
-  @maw/jest-preset \
+  @maw/config-jest \
   @testing-library/dom \
   @testing-library/jest-dom@catalog: \
   jest@catalog: \
@@ -27,10 +27,10 @@ pnpm i -D \
 Add `jest.config.ts` to the root of your package with the following content:
 
 ```ts
-import { config } from '@maw/eslint-config/base';
+import { config } from '@maw/config-eslint/base';
 export default config;
 ```
 
 ### 3. Add typescript config
 
-Follow the installation steps of `@maw/tsconfig` package to add the typescript config to your package.
+Follow the installation steps of `@maw/config-ts` package to add the typescript config to your package.

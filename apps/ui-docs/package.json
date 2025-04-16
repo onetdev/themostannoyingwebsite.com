@@ -16,8 +16,8 @@
     "react-dom": "catalog:"
   },
   "devDependencies": {
-    "@maw/eslint-config": "workspace:^",
-    "@maw/tsconfig": "workspace:*",
+    "@maw/config-eslint": "workspace:^",
+    "@maw/config-ts": "workspace:*",
     "@storybook/addon-essentials": "catalog:",
     "@storybook/addon-interactions": "catalog:",
     "@storybook/addon-links": "catalog:",

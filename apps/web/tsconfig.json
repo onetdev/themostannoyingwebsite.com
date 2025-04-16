@@ -1,5 +1,5 @@
 {
-  "extends": "@maw/tsconfig/configs/nextjs.json",
+  "extends": "@maw/config-ts/configs/next-js.json",
   "compilerOptions": {
     "baseUrl": "."
   },

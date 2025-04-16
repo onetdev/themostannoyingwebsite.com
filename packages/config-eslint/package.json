@@ -1,18 +1,18 @@
 {
   "private": true,
-  "name": "@maw/eslint-config",
+  "name": "@maw/config-eslint",
   "version": "0.0.0",
   "type": "module",
   "exports": {
-    "./base": "./configs/base.mjs",
-    "./next-js": "./configs/next.mjs",
-    "./react-internal": "./configs/react-internal.mjs",
-    "./prettier-base": "./configs/prettier-base.cjs",
-    "./prettier-tailwind": "./configs/prettier-tailwind.cjs"
+    "./base": "./configs/eslint/base.mjs",
+    "./next-js": "./configs/eslint/next-js.mjs",
+    "./react-internal": "./configs/eslint/react-internal.mjs",
+    "./prettier/base": "./configs/prettier/base.mjs",
+    "./prettier/tailwind": "./configs/prettier/tailwind.mjs"
   },
   "devDependencies": {
     "@eslint/js": "catalog:",
-    "@maw/tsconfig": "workspace:*",
+    "@maw/config-ts": "workspace:*",
     "@next/eslint-plugin-next": "^15.2.1",
     "eslint": "catalog:",
     "eslint-config-prettier": "^10.1.1",

@@ -1,6 +1,6 @@
 {
   "private": true,
-  "name": "@maw/tsconfig",
+  "name": "@maw/config-ts",
   "version": "0.0.0",
   "license": "MIT",
   "publishConfig": {

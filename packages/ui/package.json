@@ -26,8 +26,8 @@
     "react-hook-form": "7.55.0"
   },
   "devDependencies": {
-    "@maw/eslint-config": "workspace:*",
-    "@maw/tsconfig": "workspace:*",
+    "@maw/config-eslint": "workspace:*",
+    "@maw/config-ts": "workspace:*",
     "@maw/utils": "workspace:*",
     "@storybook/react": "catalog:",
     "@storybook/test": "catalog:",

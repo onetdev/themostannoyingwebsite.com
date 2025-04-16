@@ -6,7 +6,7 @@ This package provides a set of TypeScript configuration files for various enviro
 
 ### 1. Install dependencies
 ```bash
-pnpm i -D @maw/tsconfig typescript
+pnpm i -D @maw/config-ts typescript
 ```
 
 ### 2. Add `tsconfig`
@@ -15,7 +15,7 @@ Then add `tsconfig.json` to your package or project root.
 
 ```json
 {
-  "extends": "@maw/tsconfig/configs/base.json",
+  "extends": "@maw/config-ts/base.json",
   "compilerOptions": {
     "baseUrl": "."
   },
@@ -28,5 +28,5 @@ Then add `tsconfig.json` to your package or project root.
 Replace `base.json` in `tsconfig.json` with any of the following:
 
 - `base.json`: Base configuration for TypeScript projects.
-- `nextjs.json`: Configuration for Next.js projects.
+- `next-js.json`: Configuration for Next.js projects.
 - `react-library.json`: Configuration for React projects.

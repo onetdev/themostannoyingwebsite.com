@@ -20,9 +20,9 @@
   },
   "devDependencies": {
     "@jest/globals": "catalog:",
-    "@maw/eslint-config": "workspace:*",
-    "@maw/jest-preset": "workspace:*",
-    "@maw/tsconfig": "workspace:*",
+    "@maw/config-eslint": "workspace:*",
+    "@maw/config-jest": "workspace:*",
+    "@maw/config-ts": "workspace:*",
     "@types/jest": "catalog:",
     "@types/sanitize-html": "^2.15.0",
     "eslint": "catalog:",

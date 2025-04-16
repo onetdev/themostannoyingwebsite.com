@@ -58,9 +58,9 @@
   "devDependencies": {
     "@eslint/js": "catalog:",
     "@jest/globals": "catalog:",
-    "@maw/eslint-config": "workspace:^",
-    "@maw/jest-preset": "workspace:^",
-    "@maw/tsconfig": "workspace:^",
+    "@maw/config-eslint": "workspace:^",
+    "@maw/config-jest": "workspace:^",
+    "@maw/config-ts": "workspace:^",
     "@next/eslint-plugin-next": "^15.2.4",
     "@playwright/test": "^1.51.1",
     "@tailwindcss/postcss": "catalog:",

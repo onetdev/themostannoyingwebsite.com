@@ -1,6 +1,6 @@
 import nextJest from "next/jest.js";
 
-import config from "@maw/jest-preset/base";
+import config from "@maw/config-jest/base";
 
 const createJestConfig = nextJest({
   dir: "./",

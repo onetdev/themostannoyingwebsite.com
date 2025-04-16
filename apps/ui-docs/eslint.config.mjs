@@ -1,4 +1,4 @@
-import { config } from "@maw/eslint-config/react-internal";
+import { config } from "@maw/config-eslint/react-internal";
 
 /** @type {import("eslint").Linter.Config} */
 export default [

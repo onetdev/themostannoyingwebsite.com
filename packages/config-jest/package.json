@@ -1,10 +1,10 @@
 {
   "private": true,
-  "name": "@maw/jest-preset",
+  "name": "@maw/config-jest",
   "version": "0.0.0",
   "exports": {
-    "./base": "./src/base.ts",
-    "./setup": "./src/setup.ts"
+    "./base": "./configs/base.ts",
+    "./setup": "./configs/setup.ts"
   },
   "scripts": {
     "check-types": "tsc --noEmit",
@@ -12,8 +12,8 @@
     "lint:fix": "eslint . --fix"
   },
   "devDependencies": {
-    "@maw/eslint-config": "workspace:*",
-    "@maw/tsconfig": "workspace:*",
+    "@maw/config-eslint": "workspace:*",
+    "@maw/config-ts": "workspace:*",
     "@testing-library/jest-dom": "catalog:",
     "@types/jest": "catalog:",
     "eslint": "catalog:",

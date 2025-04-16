@@ -1,5 +1,5 @@
 {
-  "extends": "@maw/tsconfig/configs/react-library.json",
+  "extends": "@maw/config-ts/configs/react-library.json",
   "compilerOptions": {
     "baseUrl": ".",
   },

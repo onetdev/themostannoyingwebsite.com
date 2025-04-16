@@ -1,7 +1,7 @@
-const config = require("./prettier-base.cjs");
+import config from "./base.mjs";
 
 /** @type {import('prettier').Config} */
-module.exports = {
+export default {
   plugins: [
     "prettier-plugin-tailwindcss"
   ],
