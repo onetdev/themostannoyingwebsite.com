@@ -1,5 +1,5 @@
 import { ArticleDatum } from '@maw/content-api';
-import { Icon } from '@maw/ui';
+import { Icon } from '@maw/ui-lib';
 import { getTranslations } from 'next-intl/server';
 import { FunctionComponent } from 'react';
 

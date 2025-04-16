@@ -1,6 +1,6 @@
 'use client';
 
-import { BorderedBox, Button, LabeledChild, RadioButton } from '@maw/ui';
+import { BorderedBox, Button, LabeledChild, RadioButton } from '@maw/ui-lib';
 import { arrayShuffle } from '@maw/utils/array';
 import { useRouter } from 'next/navigation';
 import { useMessages, useTranslations } from 'next-intl';

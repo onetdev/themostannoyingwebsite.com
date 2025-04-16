@@ -93,11 +93,11 @@ This is a Turborepo monorepo. Here's a quick rundown of the main folders:
 
 - `apps/ui-docs`: Documentation for the UI components.
 - `apps/web`: The main Next.js frontend.
+- `packages/config-eslint`: Shared ESLint config with prettier.
+- `packages/config-jest`: Shared Jest preset.
+- `packages/config-ts`: Shared TypeScript config.
 - `packages/content-api`: Content layer for articles and other dynamic content.
-- `packages/eslint-config`: Shared ESLint config.
-- `packages/jest-preset`: Shared Jest preset.
-- `packages/tsconfig`: Shared TypeScript config.
-- `packages/ui`: Shared UI components.
+- `packages/ui-lib`: Shared UI components.
 - `packages/utils`: Shared utility functions.
 
 ### Local development

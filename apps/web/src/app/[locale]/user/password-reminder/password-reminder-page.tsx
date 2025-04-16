@@ -6,7 +6,7 @@ import {
   FormFieldError,
   PageHeadline,
   TextInput,
-} from '@maw/ui';
+} from '@maw/ui-lib';
 import { useTranslations } from 'next-intl';
 import {
   SubmitHandler,

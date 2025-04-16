@@ -1,6 +1,6 @@
 'use client';
 
-import { Button, DimmerOverlay } from '@maw/ui';
+import { Button, DimmerOverlay } from '@maw/ui-lib';
 import { useTranslations } from 'next-intl';
 import { FunctionComponent } from 'react';
 

@@ -1,4 +1,4 @@
-import { Button, Icon } from '@maw/ui';
+import { Button, Icon } from '@maw/ui-lib';
 import { getPointDistance, random } from '@maw/utils/math';
 import {
   CSSProperties,

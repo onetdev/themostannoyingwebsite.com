@@ -28,8 +28,8 @@ const config: StorybookConfig = {
   staticDirs: ["../public"],
   stories: [
     // "./src/**/*.stories.@(js,ts,jsx,tsx)",
-    "../node_modules/@maw/ui/src/**/*.stories.@(js|jsx|mjs|ts|tsx)",
-    "../node_modules/@maw/ui/src/**/*.mdx",
+    "../node_modules/@maw/ui-lib/src/**/*.stories.@(js|jsx|mjs|ts|tsx)",
+    "../node_modules/@maw/ui-lib/src/**/*.mdx",
   ],
   webpackFinal: async (config) => {
     if (!config.resolve) {

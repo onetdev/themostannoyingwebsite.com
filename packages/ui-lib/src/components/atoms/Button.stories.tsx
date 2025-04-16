@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { fn } from '@storybook/test';
 
-import { Button } from '@maw/ui';
+import { Button } from '@maw/ui-lib';
 
 const meta: Meta<typeof Button> = {
   title: 'Example/Button',

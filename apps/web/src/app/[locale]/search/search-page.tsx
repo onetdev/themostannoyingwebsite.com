@@ -1,6 +1,6 @@
 'use client';
 
-import { DotDotDotText, PageHeadline } from '@maw/ui';
+import { DotDotDotText, PageHeadline } from '@maw/ui-lib';
 import { arrayShuffle } from '@maw/utils/array';
 import { random } from '@maw/utils/math';
 import HTMLReactParser from 'html-react-parser';

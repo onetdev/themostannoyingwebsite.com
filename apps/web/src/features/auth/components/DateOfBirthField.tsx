@@ -1,4 +1,4 @@
-import { DropdownSelect, FormFieldError } from '@maw/ui';
+import { DropdownSelect, FormFieldError } from '@maw/ui-lib';
 import { useMessages, useTranslations } from 'next-intl';
 import { FunctionComponent, useEffect, useMemo, useState } from 'react';
 

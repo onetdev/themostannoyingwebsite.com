@@ -1,4 +1,4 @@
-import { PageHeadline } from '@maw/ui';
+import { PageHeadline } from '@maw/ui-lib';
 import { Metadata } from 'next';
 import { getTranslations } from 'next-intl/server';
 

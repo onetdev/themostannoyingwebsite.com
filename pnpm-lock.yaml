@@ -134,9 +134,9 @@ importers:
 
   apps/ui-docs:
     dependencies:
-      '@maw/ui':
+      '@maw/ui-lib':
         specifier: workspace:*
-        version: link:../../packages/ui
+        version: link:../../packages/ui-lib
       next:
         specifier: 'catalog:'
         version: 15.3.0(@babel/core@7.26.10)(@opentelemetry/api@1.9.0)(@playwright/test@1.51.1)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
@@ -222,9 +222,9 @@ importers:
       '@maw/content-api':
         specifier: workspace:^
         version: link:../../packages/content-api
-      '@maw/ui':
+      '@maw/ui-lib':
         specifier: workspace:^
-        version: link:../../packages/ui
+        version: link:../../packages/ui-lib
       '@maw/utils':
         specifier: workspace:^
         version: link:../../packages/utils
@@ -536,7 +536,7 @@ importers:
         specifier: 'catalog:'
         version: 5.8.3
 
-  packages/ui:
+  packages/ui-lib:
     dependencies:
       '@fortawesome/fontawesome-svg-core':
         specifier: ^6.7.2

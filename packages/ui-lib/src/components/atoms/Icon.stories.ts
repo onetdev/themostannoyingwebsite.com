@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
 
-import { Icon } from '@maw/ui';
+import { Icon } from '@maw/ui-lib';
 
 const meta = {
   title: 'Example/Icon',

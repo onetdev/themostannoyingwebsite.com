@@ -1,7 +1,7 @@
 'use client';
 
-import { Button, Icon, TextInput } from '@maw/ui';
-import { FormElementSize } from '@maw/ui/utils';
+import { Button, Icon, TextInput } from '@maw/ui-lib';
+import { FormElementSize } from '@maw/ui-lib/utils';
 import { useRouter } from 'next/navigation';
 import { useTranslations } from 'next-intl';
 import { FormEventHandler, FunctionComponent } from 'react';

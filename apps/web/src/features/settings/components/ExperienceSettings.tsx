@@ -5,7 +5,7 @@ import {
   Button,
   Checkbox as FormCheckbox,
   LabeledChild,
-} from '@maw/ui';
+} from '@maw/ui-lib';
 import { useTranslations } from 'next-intl';
 import { FunctionComponent } from 'react';
 

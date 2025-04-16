@@ -7,7 +7,7 @@ Contains all the higher level components without caring about Next.js - _it does
 ### 1. Install the package
 
 ```bash
-pnpm i @maw/ui
+pnpm i @maw/ui-lib
 ```
 
 ### 2. Installing tailwind
@@ -21,9 +21,9 @@ Depending on the usage you might also want to configure Tailwind.
 You probably need to mark the source paths for tailwind static analyzer, you might want to add your intermediate global.css file where you import the one from this package and add source lines below the import. Eventually having something like this:
 
 ```css
-@import "@maw/ui/global.css";
+@import "@maw/ui-lib/global.css";
 
-@source "../node_modules/@maw/ui/src";
+@source "../node_modules/@maw/ui-lib/src";
 @source "./";
 ```
 

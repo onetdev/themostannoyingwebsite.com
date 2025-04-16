@@ -1,6 +1,6 @@
 'use client';
 
-import { CopyMarker } from '@maw/ui';
+import { CopyMarker } from '@maw/ui-lib';
 import { useTranslations } from 'next-intl';
 import { FunctionComponent, PropsWithChildren, useEffect } from 'react';
 import { useBeforeUnload } from 'react-use';

@@ -1,6 +1,6 @@
 'use client';
 
-import { Button } from '@maw/ui';
+import { Button } from '@maw/ui-lib';
 import { useTranslations } from 'next-intl';
 import React, {
   FunctionComponent,
