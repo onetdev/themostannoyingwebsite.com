@@ -1,7 +1,7 @@
 import js from '@eslint/js';
 import pluginImportX from 'eslint-plugin-import-x';
-import eslintPluginPrettierRecommended from 'eslint-plugin-prettier/recommended';
 import onlyWarn from 'eslint-plugin-only-warn';
+import eslintPluginPrettierRecommended from 'eslint-plugin-prettier/recommended';
 import turbo from 'eslint-plugin-turbo';
 import tseslint from 'typescript-eslint';
 
@@ -10,12 +10,12 @@ import tseslint from 'typescript-eslint';
  *
  * @type {import("eslint").Linter.Config[]}
  * */
-export const config = [
+export default [
   js.configs.recommended,
   eslintPluginPrettierRecommended,
   ...tseslint.configs.recommended,
   {
-    name: "base/turbo",
+    name: 'base/turbo',
     plugins: {
       turbo,
     },
@@ -24,13 +24,13 @@ export const config = [
     },
   },
   {
-    name: "base/onlyWarn",
+    name: 'base/onlyWarn',
     plugins: {
       onlyWarn,
     },
   },
   {
-    name: "base/noDist",
+    name: 'base/noDist',
     ignores: ['dist/**'],
   },
   pluginImportX.flatConfigs.recommended,

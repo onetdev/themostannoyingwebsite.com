@@ -1,25 +1,19 @@
-import js from '@eslint/js';
 import pluginNext from '@next/eslint-plugin-next';
-import eslintConfigPrettier from 'eslint-config-prettier/flat';
 import pluginReact from 'eslint-plugin-react';
 import pluginReactHooks from 'eslint-plugin-react-hooks';
 import globals from 'globals';
-import tseslint from 'typescript-eslint';
 
-import { config as baseConfig } from './base.mjs';
+import baseConfig from './base.mjs';
 
 /**
  * A custom ESLint configuration for libraries that use Next.js.
  *
  * @type {import("eslint").Linter.Config[]}
  * */
-export const nextJsConfig = [
+export default [
   ...baseConfig,
-  js.configs.recommended,
-  eslintConfigPrettier,
-  ...tseslint.configs.recommended,
   {
-    name: "next/react",
+    name: 'next/react',
     ...pluginReact.configs.flat.recommended,
     languageOptions: {
       ...pluginReact.configs.flat.recommended.languageOptions,
@@ -29,7 +23,7 @@ export const nextJsConfig = [
     },
   },
   {
-    name: "next/nextjs",
+    name: 'next/nextjs',
     plugins: {
       '@next/next': pluginNext,
     },
@@ -39,7 +33,7 @@ export const nextJsConfig = [
     },
   },
   {
-    name: "next/react-hooks",
+    name: 'next/react-hooks',
     plugins: {
       'react-hooks': pluginReactHooks,
     },
@@ -48,6 +42,14 @@ export const nextJsConfig = [
       ...pluginReactHooks.configs.recommended.rules,
       // React scope no longer necessary with new JSX transform.
       'react/react-in-jsx-scope': 'off',
+    },
+  },
+  {
+    name: 'next/make-process-readonly',
+    languageOptions: {
+      globals: {
+        process: 'readonly',
+      },
     },
   },
 ];

@@ -27,7 +27,7 @@ pnpm i -D \
 Add `jest.config.ts` to the root of your package with the following content:
 
 ```ts
-import { config } from '@maw/config-eslint/base';
+import config from '@maw/config-eslint/base';
 export default config;
 ```
 
