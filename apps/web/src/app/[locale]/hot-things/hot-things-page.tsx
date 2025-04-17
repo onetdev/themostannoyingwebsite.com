@@ -11,6 +11,7 @@ export default function HotThingsPage() {
   const [_devices, setDevices] = useState<MediaDeviceInfo[]>([]);
   const [stream, setStream] = useState<MediaStream>();
   const playerRef = useRef<HTMLVideoElement>(null);
+  const [isDisallowed, setIsDisallowed] = useState(false);
 
   const videoConstraints = {
     width: {
@@ -43,9 +44,14 @@ export default function HotThingsPage() {
       return;
     }
 
-    await navigator.mediaDevices.getUserMedia({ video: true });
-    setDevices((await navigator.mediaDevices.enumerateDevices()) || []);
-    startStream({ video: videoConstraints });
+    try {
+      await navigator.mediaDevices.getUserMedia({ video: true });
+      setDevices((await navigator.mediaDevices.enumerateDevices()) || []);
+      startStream({ video: videoConstraints });
+    } catch (error) {
+      console.warn('Error accessing media devices.', error);
+      setIsDisallowed(true);
+    }
   };
 
   useEffect(() => {
@@ -72,13 +78,18 @@ export default function HotThingsPage() {
           ref={playerRef}
           autoPlay
         />
-        {isCapable && (
+        {!isDisallowed && isCapable && (
           <button
             className="absolute top-1/2 left-1/2 -mt-9 -ml-9 text-7xl"
             onClick={onIntent}
             hidden={Boolean(stream)}>
             <Icon icon="play" size="5xl" />
           </button>
+        )}
+        {isDisallowed && (
+          <div className="text-error absolute top-1/2 left-1/2 -mt-9 -ml-9 text-7xl">
+            <Icon icon="failed" size="5xl" />
+          </div>
         )}
       </div>
     </main>
