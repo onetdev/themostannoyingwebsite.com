@@ -1,3 +1,3 @@
-import config from '@maw/eslint-config/prettier-base';
+import config from '@maw/config-eslint/prettier/base';
 
 export default config;

@@ -1,8 +1,8 @@
 # UI Documentation app
 
-This is just a regular [Storybook](https://storybook.js.org/) application that loads stories from `@maw/ui` package and displays them.
+This is just a regular [Storybook](https://storybook.js.org/) application that loads stories from `@maw/ui-lib` package and displays them.
 
-**Please note** that with `@maw/ui` the goal is to keep the documentation close to their definition rather than having them detached in this repo.
+**Please note** that with `@maw/ui-lib` the goal is to keep the documentation close to their definition rather than having them detached in this repo.
 
 ## Running
 

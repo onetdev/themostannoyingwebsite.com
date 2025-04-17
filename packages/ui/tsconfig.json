@@ -1,9 +1,0 @@
-{
-  "extends": "@maw/tsconfig/configs/react-library.json",
-  "compilerOptions": {
-    "baseUrl": ".",
-  },
-  "include": [
-    "src"
-  ],
-}

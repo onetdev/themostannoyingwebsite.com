@@ -1,7 +1,7 @@
 {
   "private": true,
   "name": "@maw/content-api",
-  "version": "1.0.0",
+  "version": "0.0.0",
   "type": "module",
   "exports": {
     ".": "./src/index.ts",
@@ -24,12 +24,12 @@
     "zod-to-json-schema": "^3.24.5"
   },
   "devDependencies": {
-    "@maw/eslint-config": "workspace:*",
-    "@maw/tsconfig": "workspace:*",
+    "@maw/config-eslint": "workspace:*",
+    "@maw/config-ts": "workspace:*",
     "@maw/utils": "workspace:*",
     "@types/sanitize-html": "^2.15.0",
     "eslint": "catalog:",
-    "sharp": "^0.33.5",
+    "sharp": "catalog:",
     "tsx": "catalog:",
     "typescript": "catalog:"
   }

@@ -1,6 +1,6 @@
 'use client';
 
-import { Icon, PageHeadline } from '@maw/ui';
+import { Icon, PageHeadline } from '@maw/ui-lib';
 import Image from 'next/image';
 import { useTranslations } from 'next-intl';
 import { useEffect, useRef, useState } from 'react';

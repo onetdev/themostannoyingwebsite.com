@@ -1,6 +1,6 @@
 'use client';
 
-import styles from '@maw/ui/content.module.css';
+import styles from '@maw/ui-lib/content.module.css';
 import HTMLReactParser from 'html-react-parser';
 import Image from 'next/image';
 import { useTranslations } from 'next-intl';

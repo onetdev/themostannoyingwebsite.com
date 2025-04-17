@@ -1,6 +1,6 @@
 'use client';
 
-import { BorderedBox } from '@maw/ui';
+import { BorderedBox } from '@maw/ui-lib';
 import { useTranslations } from 'next-intl';
 import { FunctionComponent, useMemo } from 'react';
 import ReactTimeAgo from 'react-timeago';

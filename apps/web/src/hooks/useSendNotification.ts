@@ -1,4 +1,4 @@
-import { isBrowser } from '@maw/ui/utils';
+import { isBrowser } from '@maw/ui-lib/utils';
 import { useCallback } from 'react';
 
 import {

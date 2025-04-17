@@ -20,10 +20,10 @@
       "cache": false
     },
     "lint": {
-      "dependsOn": ["^lint"]
+      "dependsOn": ["^lint", "build:metadata"]
     },
     "check-types": {
-      "dependsOn": ["^check-types"]
+      "dependsOn": ["^check-types", "build:metadata"]
     },
     "dev": {
       "cache": false,

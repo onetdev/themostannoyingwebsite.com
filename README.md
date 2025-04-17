@@ -60,17 +60,45 @@ The main idea is to gather the most annoying features of modern websites in one 
   - [ ] Random dark-light mode switching - we could flashbang night owls
 </details>
 
-## Contribution
+## Project tech
 
-This project is open for contributions! If you have ideas to add, don’t hesitate — **start your PR today, the world needs you, ACT NOW!**
-
-### Framework
+### Frameworks
 
 The stack is the usual: Next.JS + TypeScript + TailwindCSS. If you’re not familiar with these but still want to add your own experiences or tweaks, you can find excellent documentation here:
 
 - [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [TypeScript Documentation](https://www.typescriptlang.org/docs/)
+- [TypeScript Documentation](https://www.typescriptlang.org/docs/) - learn about TypeScript features and API.
 - [TailwindCSS Documentation](https://tailwindcss.com/docs) - learn about TailwindCSS features and API.
+- [Turborepo Documentation](https://turbo.build/repo/docs) - learn about Turborepo features and API.
+- [pnpm Documentation](https://pnpm.io/) - learn about pnpm features and API.
+
+### Testing
+
+The project mainly uses [Jest](https://jestjs.io/) for unit testing. To run the tests, use the following command:
+
+```bash
+pnpm test
+```
+
+We also use [Playwright](https://playwright.dev/) for end-to-end testing. To run the tests, use the following command:
+
+```bash
+cd apps/web
+pnpm test:e2e
+```
+
+### Project Structure
+
+This is a Turborepo monorepo. Here's a quick rundown of the main folders:
+
+- `apps/ui-docs`: Documentation for the UI components.
+- `apps/web`: The main Next.js frontend.
+- `packages/config-eslint`: Shared ESLint config with prettier.
+- `packages/config-jest`: Shared Jest preset.
+- `packages/config-ts`: Shared TypeScript config.
+- `packages/content-api`: Content layer for articles and other dynamic content.
+- `packages/ui-lib`: Shared UI components.
+- `packages/utils`: Shared utility functions.
 
 ### Local development
 
@@ -84,15 +112,43 @@ Open [https://localhost:3000](https://localhost:3000) in your browser to see the
 
 ## Translation
 
-Fortunately, Next.JS comes with great [i18n support](https://nextjs.org/docs/pages/building-your-application/routing/internationalization) out of the box. We use simple path-based routing for translations, so if you want to add a new language, just create a folder under `apps/web/src/i81n/messages` with the language code (eg.: `en`, `hu`, `de`, etc.) and add the files you want to translate. Please use `en` as a reference for keys and values.
+Translation in this project has two fronts. Content and UI translation.
 
-Keep in mind that translations are currently low on the priority list, the goal is only to have it prepared for the future.
+### UI translation
 
-**For content translation, see `packages/content-api/README.MD`**
+This is being done using next-intl, which is a great library for i18n in Next.js. It allows you to easily manage translations and provides a simple API for switching between languages.
+
+Unfortunately, the library is not perfect and has some limitations. We don't have routes without language prefix and all the app code needs to be in a localisation folder, but since we do static build we are fine.
+
+Feel free to create your own translation in the `apps/web/src/i18n/messages` folder. The translations are in JSON format, so you can easily add your own translations by creating a new file with the language code (e.g., `en.json`, `hu.json`, etc.) and adding the translations there. Don't forget to update configs either.
+
+Planned UI translation support - probably with some poor translation software so that it adds an extra layer of annoyance:
+
+- [x] English
+- [ ] Hungarian
+- [ ] Mandarin
+- [ ] Spanish
+- [ ] Arabic
+- [ ] Hindi
+- [ ] Portuguese
+- [ ] Russian
+- [ ] French
+- [ ] German
+- [ ] Japanese
+
+### Content translation
+
+The content translation is done using the `packages/content-api` package. The way how content translation is done will change but as for now we have all the content, image and metadata in this package.
+
+**For detailed info please see `packages/content-api/README.MD`**
 
 ## Deployment
 
 PRs are automatically published to Vercel as previews (you can find preview URLs in PRs), and the `main` branch is deployed to our main domain with every new commit.
+
+## Contribution
+
+This project is open for contributions! If you have ideas to add, don’t hesitate — **start your PR today, the world needs you, ACT NOW!**
 
 ## Support
 
@@ -106,3 +162,10 @@ Pay a visit to https://onet.dev, drop me an email.
 - Lava photo (Tanya Grypachevskaya): https://unsplash.com/photos/80x3QULJDN4
 - Background ad photo (Erik Mclean): https://unsplash.com/photos/ZRns2R5azu0
 - Article cover placeholder (Syed Ahmad): https://unsplash.com/photos/yXTr6XeJDV8
+
+---
+
+🧪 May your UX be terrible, and your JS bundles large.
+
+With love,
+— The Most Annoying Website team ❤️‍🔥

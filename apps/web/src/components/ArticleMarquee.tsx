@@ -1,7 +1,7 @@
 'use client';
 
 import { ArticleDatum } from '@maw/content-api';
-import { MarqueeText } from '@maw/ui';
+import { MarqueeText } from '@maw/ui-lib';
 
 import { Link } from '@/i18n/navigation';
 

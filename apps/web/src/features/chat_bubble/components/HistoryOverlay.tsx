@@ -1,4 +1,4 @@
-import { DotDotDotText, Icon } from '@maw/ui';
+import { DotDotDotText, Icon } from '@maw/ui-lib';
 import { useTranslations } from 'next-intl';
 import { FunctionComponent, useEffect, useMemo, useRef, useState } from 'react';
 

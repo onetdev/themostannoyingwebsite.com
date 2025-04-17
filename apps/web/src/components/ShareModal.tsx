@@ -1,6 +1,6 @@
 'use client';
 
-import { Modal } from '@maw/ui';
+import { Modal } from '@maw/ui-lib';
 import { useTranslations } from 'next-intl';
 import { FunctionComponent, useEffect, useState } from 'react';
 import {

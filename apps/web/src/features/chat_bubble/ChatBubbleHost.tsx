@@ -1,6 +1,6 @@
 'use client';
 
-import { Icon } from '@maw/ui';
+import { Icon } from '@maw/ui-lib';
 import {
   FunctionComponent,
   MouseEventHandler,

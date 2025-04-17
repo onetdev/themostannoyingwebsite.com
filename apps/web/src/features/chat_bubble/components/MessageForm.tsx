@@ -1,4 +1,4 @@
-import { Button, Icon, TextInput } from '@maw/ui';
+import { Button, Icon, TextInput } from '@maw/ui-lib';
 import { useTranslations } from 'next-intl';
 import { FormEventHandler, FunctionComponent, useRef } from 'react';
 
