@@ -4,7 +4,6 @@ packages:
 
 catalog:
   "@eslint/js": "9.24.0"
-  "@jest/globals": "^29.7.0"
   "@storybook/addon-essentials": "^8.6.12"
   "@storybook/addon-interactions": "^8.6.12"
   "@storybook/addon-links": "^8.6.12"
@@ -20,9 +19,10 @@ catalog:
   "@types/node": "^22.13.14"
   "@types/react-dom": "^19.1.2"
   "@types/react": "^19.1.2"
+  "eslint": "^9.24.0"
   "eslint-plugin-import-x": "^4.10.5"
   "eslint-plugin-prettier": "^5.2.5"
-  "eslint": "^9.24.0"
+  "eslint-plugin-storybook": "^0.12.0"
   "jest-environment-jsdom": "^29.7.0"
   "jest": "^29.7.0"
   "next": "^15.3.0"

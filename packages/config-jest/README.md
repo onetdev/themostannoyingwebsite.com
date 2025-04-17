@@ -13,13 +13,9 @@ This will need quie a few deps but I guess it is what it is. Please keep the `@c
 ```bash
 pnpm i -D \
   @maw/config-jest \
-  @testing-library/dom \
-  @testing-library/jest-dom@catalog: \
-  jest@catalog: \
-  jest-environment-jsdom@catalog: \
-  ts-jest@catalog: \
-  typescript@catalog: \
   @types/jest@catalog:
+  jest@catalog: \
+  typescript@catalog: \
 ```
 
 ### 2. Add config

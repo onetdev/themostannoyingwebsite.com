@@ -19,7 +19,6 @@
     "sanitize-html": "^2.15.0"
   },
   "devDependencies": {
-    "@jest/globals": "catalog:",
     "@maw/config-eslint": "workspace:*",
     "@maw/config-jest": "workspace:*",
     "@maw/config-ts": "workspace:*",
@@ -27,8 +26,6 @@
     "@types/sanitize-html": "^2.15.0",
     "eslint": "catalog:",
     "jest": "catalog:",
-    "jest-environment-jsdom": "catalog:",
-    "ts-jest": "catalog:",
     "typescript": "catalog:"
   }
 }

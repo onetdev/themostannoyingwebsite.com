@@ -1,9 +1,7 @@
-import config from "./base.mjs";
+import config from './base.mjs';
 
 /** @type {import('prettier').Config} */
 export default {
-  plugins: [
-    "prettier-plugin-tailwindcss"
-  ],
-  ...config
+  plugins: ['prettier-plugin-tailwindcss'],
+  ...config,
 };
