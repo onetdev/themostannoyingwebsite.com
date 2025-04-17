@@ -16,5 +16,3 @@ Sentry.init({
   debug: false,
   enabled: process.env.NEXT_PUBLIC_SENTRY_ENABLED !== 'false',
 });
-
-export const onRouterTransitionStart = Sentry.captureRouterTransitionStart;
