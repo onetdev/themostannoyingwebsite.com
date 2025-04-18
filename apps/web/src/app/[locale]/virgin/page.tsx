@@ -5,6 +5,8 @@ import { getTranslations } from 'next-intl/server';
 
 import DisableAllOnMount from './disable-all-on-mount';
 
+import { PageLayout } from '@/components/PageLayout';
+
 export { generateStaticParams } from '@/i18n/routing';
 export const revalidate = 1800;
 
@@ -24,7 +26,7 @@ async function Page() {
   const t = await getTranslations();
 
   return (
-    <main role="main">
+    <PageLayout activeItem="virgin" role="main">
       <DisableAllOnMount />
       <PageHeadline className="mx-auto w-full max-w-screen-md">
         {t('app.virgin.title')}
@@ -32,7 +34,7 @@ async function Page() {
       <div className={styles['content']}>
         <p>{t('app.virgin.description')}</p>
       </div>
-    </main>
+    </PageLayout>
   );
 }
 export default Page;

@@ -62,7 +62,7 @@ export default function HotThingsPage() {
   }, [stream]);
 
   return (
-    <main role="main">
+    <>
       <PageHeadline>{t('navigation.hotThings')}</PageHeadline>
       <div className="pb-16per9 relative overflow-hidden">
         <Image
@@ -92,6 +92,6 @@ export default function HotThingsPage() {
           </div>
         )}
       </div>
-    </main>
+    </>
   );
 }

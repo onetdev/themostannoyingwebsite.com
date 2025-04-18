@@ -3,14 +3,19 @@ import { getTranslations } from 'next-intl/server';
 
 import { AppDarkModeToggle } from './AppDarkModeToggle';
 import { ArticleMarquee } from './ArticleMarquee';
+import SearchForm from './SearchForm';
 import { SiteNavigation } from './SiteNavigation';
+import { ActiveNavigationItem } from './types';
+import { UserNavigation } from './UserNavigation';
 
-import SearchForm from '@/components/AppHeader/SearchForm';
-import UserNavigation from '@/components/AppHeader/UserNavigation';
 import { AppArticleService } from '@/features/content/services/AppArticleService';
 import { Link } from '@/i18n/navigation';
 
-export async function AppHeader() {
+type AppHeaderProps = {
+  activeItem?: ActiveNavigationItem;
+};
+
+export async function AppHeader({ activeItem }: AppHeaderProps) {
   const t = await getTranslations();
 
   const marqueeItems = (
@@ -40,8 +45,8 @@ export async function AppHeader() {
         </Link>
         <AppDarkModeToggle />
       </div>
-      <SiteNavigation />
-      <UserNavigation className="col-span-1 my-3" />
+      <SiteNavigation activeItem={activeItem} />
+      <UserNavigation activeItem={activeItem} className="col-span-1 my-3" />
       <ArticleMarquee
         items={marqueeItems}
         className="bg-surface-alt col-span-2 -mx-3 mb-2 py-2 md:-mx-5"

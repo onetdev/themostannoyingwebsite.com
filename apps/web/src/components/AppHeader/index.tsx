@@ -1,1 +1,2 @@
-export { AppHeader as default } from './AppHeader';
+export { AppHeader } from './AppHeader';
+export * from './types';

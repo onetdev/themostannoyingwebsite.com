@@ -2,16 +2,19 @@
 
 import { IconAliaseKey, IconCollapsibleMenu, ShareModal } from '@maw/ui-lib';
 import { useTranslations } from 'next-intl';
-import { FunctionComponent, PropsWithChildren, useMemo, useState } from 'react';
+import { PropsWithChildren, useMemo, useState } from 'react';
+
+import { ActiveNavigationItem } from './types';
 
 import { Link } from '@/i18n/navigation';
 
 export type UserNavigationProps = {
   className?: string;
+  activeItem?: ActiveNavigationItem;
 };
 
 type NavItem = {
-  key: string;
+  key: ActiveNavigationItem | 'global-share';
   label: string;
   path: string;
   icon: IconAliaseKey;
@@ -36,32 +39,32 @@ const NavLink = ({ path, onClick, children }: PropsWithChildren<NavItem>) => {
   );
 };
 
-const UserNavigation: FunctionComponent<UserNavigationProps> = ({
-  className,
-}) => {
+export function UserNavigation({ className, activeItem }: UserNavigationProps) {
   const t = useTranslations();
   const [showShareModal, setShowShareModal] = useState(false);
 
   const items: NavItem[] = useMemo(
-    () =>
-      [
-        {
-          path: '#',
-          label: t('common.share'),
-          icon: 'share' as const,
-          onClick: () => setShowShareModal(true),
-        },
-        {
-          path: '/settings',
-          label: t('navigation.settings'),
-          icon: 'settings' as const,
-        },
-        {
-          path: '/user/login',
-          label: t('navigation.login'),
-          icon: 'login' as const,
-        },
-      ].map((item) => ({ ...item, key: item.path })),
+    () => [
+      {
+        icon: 'share' as const,
+        key: 'global-share' as const,
+        label: t('common.share'),
+        onClick: () => setShowShareModal(true),
+        path: '#',
+      },
+      {
+        icon: 'settings' as const,
+        key: 'settings' as const,
+        label: t('navigation.settings'),
+        path: '/settings',
+      },
+      {
+        icon: 'login' as const,
+        key: 'login' as const,
+        label: t('navigation.login'),
+        path: '/user/login',
+      },
+    ],
     [t],
   );
 
@@ -79,12 +82,13 @@ const UserNavigation: FunctionComponent<UserNavigationProps> = ({
       />
       <IconCollapsibleMenu
         className={className}
+        activeItem={activeItem}
         id="navigation-user"
         items={items}
         IteratorComponent={NavLink}
       />
     </>
   );
-};
+}
 
 export default UserNavigation;
