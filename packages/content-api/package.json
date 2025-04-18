@@ -17,6 +17,7 @@
     "lint:fix": "eslint . --ext .ts,.tsx --fix"
   },
   "dependencies": {
+    "@maw/logger": "workspace:^",
     "marked": "^15.0.7",
     "sanitize-html": "^2.15.0",
     "yaml": "^2.7.1",

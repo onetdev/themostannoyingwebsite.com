@@ -1,27 +1,32 @@
-import favicons, { type FaviconFile, type FaviconImage } from 'favicons';
+import { getLogger } from '@maw/logger';
+import { type FaviconFile, type FaviconImage, favicons } from 'favicons';
 import fs from 'fs/promises';
 import path from 'path';
 
 import manifestConfig from '@/root/manifest.config.mjs';
 
+const logger = getLogger().child({
+  script: 'build-web-manifest',
+});
+
 const main = async () => {
   const faviconSource = './public/assets/appicon.png';
   const manifestDestPath = path.join('./public/', manifestConfig.path!);
 
-  console.log(`Generating favicons from ${faviconSource}`);
+  logger.info(`Generating favicons from ${faviconSource}`);
   const response = await favicons(faviconSource, manifestConfig);
 
-  console.log(`Writing images into ${manifestDestPath}`);
+  logger.info(`Writing images into ${manifestDestPath}`);
   await storeFiles(manifestDestPath, response.images);
 
-  console.log(`Moving favicon into public root`);
+  logger.info(`Moving favicon into public root`);
   await fs.copyFile(
     path.join(manifestDestPath, 'favicon.ico'),
     './public/favicon.ico',
   );
   await fs.rm(path.join(manifestDestPath, 'favicon.ico'));
 
-  console.log(`Writing manifest into ${manifestDestPath}`);
+  logger.info(`Writing manifest into ${manifestDestPath}`);
   await storeFiles(manifestDestPath, response.files);
 };
 
@@ -42,7 +47,7 @@ const storeFiles = async (
   );
 };
 
-console.log('Generating manifest...');
+logger.info('🔄 Generating manifest...');
 main()
-  .then(() => console.log(`Aaaaand it's done. New manifest created.\n`))
-  .catch((err) => console.error(`Ooopsie, something went wrong: ${err}`));
+  .then(() => logger.info(`✅ Aaaaand it's done. New manifest created.\n`))
+  .catch((err) => logger.error(err, `Ooopsie, something went wrong.`));

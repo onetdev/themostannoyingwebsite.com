@@ -1,8 +1,12 @@
+import { getLogger } from '@maw/logger';
 import { cp } from 'fs/promises';
 
+const logger = getLogger().child({
+  script: 'publish-assets',
+});
 const src = './node_modules/@maw/content-api/data';
 const dest = './public/assets/articles';
 
-console.log(`Copying article assets from ${src} to ${dest}`);
+logger.info(`🔄 Copying article assets from ${src} to ${dest}...`);
 await cp(src, dest, { recursive: true });
-console.log(`Assets have been published.\n`);
+logger.info(`✅ Assets have been published.\n`);

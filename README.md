@@ -97,6 +97,7 @@ This is a Turborepo monorepo. Here's a quick rundown of the main folders:
 - `packages/config-jest`: Shared Jest preset.
 - `packages/config-ts`: Shared TypeScript config.
 - `packages/content-api`: Content layer for articles and other dynamic content.
+- `packages/logger`: Shared logger.
 - `packages/ui-lib`: Shared UI components.
 - `packages/utils`: Shared utility functions.
 

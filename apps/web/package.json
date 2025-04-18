@@ -24,6 +24,7 @@
     "@fortawesome/free-solid-svg-icons": "^6.7.2",
     "@fortawesome/react-fontawesome": "^0.2.2",
     "@maw/content-api": "workspace:^",
+    "@maw/logger": "workspace:^",
     "@maw/ui-lib": "workspace:^",
     "@maw/utils": "workspace:^",
     "@mdx-js/loader": "^3.1.0",

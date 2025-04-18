@@ -1,9 +1,12 @@
 'use client';
 
+import { getLogger } from '@maw/logger';
 import { Icon, PageHeadline } from '@maw/ui-lib';
 import Image from 'next/image';
 import { useTranslations } from 'next-intl';
 import { useEffect, useRef, useState } from 'react';
+
+const logger = getLogger().child({ page: 'hot-things-page' });
 
 export default function HotThingsPage() {
   const [isCapable, setIsCapable] = useState(false);
@@ -48,8 +51,8 @@ export default function HotThingsPage() {
       await navigator.mediaDevices.getUserMedia({ video: true });
       setDevices((await navigator.mediaDevices.enumerateDevices()) || []);
       startStream({ video: videoConstraints });
-    } catch (error) {
-      console.warn('Error accessing media devices.', error);
+    } catch (err) {
+      logger.warn('Error accessing media devices.', err);
       setIsDisallowed(true);
     }
   };
