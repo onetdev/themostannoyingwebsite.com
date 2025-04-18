@@ -1,14 +1,13 @@
 'use client';
 
-import { getLogger } from '@maw/logger';
+import { useLogger } from '@maw/logger';
 import { Icon, PageHeadline } from '@maw/ui-lib';
 import Image from 'next/image';
 import { useTranslations } from 'next-intl';
 import { useEffect, useRef, useState } from 'react';
 
-const logger = getLogger().child({ page: 'hot-things-page' });
-
 export default function HotThingsPage() {
+  const logger = useLogger().child({ page: 'hot-things-page' });
   const [isCapable, setIsCapable] = useState(false);
   const t = useTranslations();
   const [_devices, setDevices] = useState<MediaDeviceInfo[]>([]);
