@@ -2,6 +2,7 @@ import { PageHeadline } from '@maw/ui-lib';
 import { Metadata } from 'next';
 import { getTranslations } from 'next-intl/server';
 
+import { PageLayout } from '@/components/PageLayout';
 import {
   ExperienceSettings,
   MandatoryExperienceSettings,
@@ -29,7 +30,7 @@ export default async function Settings() {
   const t = await getTranslations();
 
   return (
-    <main role="main">
+    <PageLayout activeItem="settings" role="main">
       <PageHeadline>{t('navigation.settings')}</PageHeadline>
 
       <div className="grid gap-3 md:grid-cols-2">
@@ -42,6 +43,6 @@ export default async function Settings() {
         <MandatoryExperienceSettings />
         <RuntimeSettings />
       </div>
-    </main>
+    </PageLayout>
   );
 }

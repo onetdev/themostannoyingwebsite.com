@@ -4,6 +4,8 @@ import { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import { getTranslations } from 'next-intl/server';
 
+import { PageLayout } from '@/components/PageLayout';
+
 export { generateStaticParams } from '@/i18n/routing';
 export const revalidate = 1800;
 
@@ -31,14 +33,14 @@ export default async function Page({ params }: NextPageProps) {
     const Content = (await import(`./${locale}.mdx`)).default;
 
     return (
-      <main role="main">
+      <PageLayout activeItem="privacy-policy" role="main">
         <PageHeadline className="mx-auto w-full max-w-screen-md">
           {t('navigation.privacyPolicy')}
         </PageHeadline>
         <div className={styles['content']}>
           <Content />
         </div>
-      </main>
+      </PageLayout>
     );
   } catch (error) {
     return notFound();

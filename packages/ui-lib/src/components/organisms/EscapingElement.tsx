@@ -1,13 +1,7 @@
 'use client';
 
 import { clamp, random } from '@maw/utils/math';
-import {
-  FunctionComponent,
-  MouseEventHandler,
-  PropsWithChildren,
-  useRef,
-  useState,
-} from 'react';
+import { MouseEventHandler, PropsWithChildren, useRef, useState } from 'react';
 
 import { getRelativePosition } from '../../utils/dom';
 
@@ -25,11 +19,11 @@ type EscapingElementProps = PropsWithChildren<{
   };
 }>;
 
-export const EscapingElement: FunctionComponent<EscapingElementProps> = ({
+export function EscapingElement({
   trigger = 'hover',
   children,
   boundingBox,
-}) => {
+}: EscapingElementProps) {
   const [position, setPosition] = useState({ left: 0, top: 0 });
   const ref = useRef<HTMLDivElement>(null);
 
@@ -81,4 +75,4 @@ export const EscapingElement: FunctionComponent<EscapingElementProps> = ({
       {children}
     </div>
   );
-};
+}

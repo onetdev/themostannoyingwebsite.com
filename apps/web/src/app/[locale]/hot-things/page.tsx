@@ -3,6 +3,9 @@ import { getTranslations } from 'next-intl/server';
 
 import HotThingsPage from './hot-things-page';
 
+import { AppHeader } from '@/components/AppHeader';
+import { PageLayout } from '@/components/PageLayout';
+
 export { generateStaticParams } from '@/i18n/routing';
 export const revalidate = 1800;
 
@@ -19,5 +22,9 @@ export async function generateMetadata({
 }
 
 export default function Page() {
-  return <HotThingsPage />;
+  return (
+    <PageLayout activeItem="hot-things" role="main">
+      <HotThingsPage />
+    </PageLayout>
+  );
 }

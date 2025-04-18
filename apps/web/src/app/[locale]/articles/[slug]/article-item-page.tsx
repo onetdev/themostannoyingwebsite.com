@@ -15,7 +15,7 @@ export function ArticleItemPage({ data }: { data: ArticleDatum }) {
   );
 
   return (
-    <main role="main">
+    <>
       <h1 className="mb-2 max-w-[900px]">{data.title}</h1>
       <span className="mb-5 block italic">
         {t('article.published', { date: data.publishedAt.toDateString() })}
@@ -36,6 +36,6 @@ export function ArticleItemPage({ data }: { data: ArticleDatum }) {
         active={partitionEnabled}>
         <div className={styles['content']}>{HTMLReactParser(data.content)}</div>
       </PartitionalLockedContent>
-    </main>
+    </>
   );
 }

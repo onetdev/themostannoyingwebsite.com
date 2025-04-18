@@ -1,15 +1,15 @@
-import { FunctionComponent, PropsWithChildren } from 'react';
+import { PropsWithChildren } from 'react';
 
 export type BorderedBoxProps = PropsWithChildren<{
   className?: string;
   title?: string;
 }>;
 
-export const BorderedBox: FunctionComponent<BorderedBoxProps> = ({
+export function BorderedBox({
   children,
   className = '',
   title,
-}) => {
+}: BorderedBoxProps) {
   return (
     <div
       className={`border-on-surface bg-surface-alt rounded-md border p-5 ${className}`}>
@@ -17,4 +17,4 @@ export const BorderedBox: FunctionComponent<BorderedBoxProps> = ({
       <div className="flex w-full flex-col gap-1">{children}</div>
     </div>
   );
-};
+}

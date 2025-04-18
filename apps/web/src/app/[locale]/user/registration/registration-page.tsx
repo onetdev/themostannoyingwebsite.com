@@ -49,7 +49,7 @@ export function RegistrationPage() {
   };
 
   return (
-    <main className="mx-auto max-w-[900px] py-0 md:py-14" role="main">
+    <>
       <PageHeadline>{t('navigation.register')}</PageHeadline>
       <form
         className="flex flex-col gap-3 lg:flex-row lg:gap-10"
@@ -192,6 +192,6 @@ export function RegistrationPage() {
           </div>
         </div>
       </form>
-    </main>
+    </>
   );
 }

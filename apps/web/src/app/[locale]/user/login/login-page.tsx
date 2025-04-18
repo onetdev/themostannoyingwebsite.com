@@ -28,7 +28,7 @@ export function LoginPage() {
   };
 
   return (
-    <main className="mx-auto max-w-md py-0 md:py-14" role="main">
+    <>
       <PageHeadline>{t('navigation.login')}</PageHeadline>
       <form
         className="flex flex-col gap-5"
@@ -107,6 +107,6 @@ export function LoginPage() {
           </Link>
         </div>
       </form>
-    </main>
+    </>
   );
 }

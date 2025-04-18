@@ -1,3 +1,4 @@
+import { PageLayout } from '@/components/PageLayout';
 import {
   LargeCoverItem,
   SmallCoverListItem,
@@ -26,7 +27,10 @@ export default async function Page({ params }: NextPageProps) {
   const smallCoverArticleList = articlePool.items.slice(2, 10);
 
   return (
-    <main className="grid grid-cols-1 gap-3 lg:grid-cols-4" role="main">
+    <PageLayout
+      activeItem="home"
+      className="grid grid-cols-1 gap-3 lg:grid-cols-4"
+      role="main">
       {coverArticle && (
         <LargeCoverItem
           className="col-span-1 lg:col-span-3"
@@ -64,6 +68,6 @@ export default async function Page({ params }: NextPageProps) {
           ))}
         </ul>
       </section>
-    </main>
+    </PageLayout>
   );
 }
