@@ -34,7 +34,9 @@ export function ArticleItemPage({ data }: { data: ArticleDatum }) {
       <PartitionalLockedContent
         initialMaxHeight={300}
         active={partitionEnabled}>
-        <div className={styles['content']}>{HTMLReactParser(data.content)}</div>
+        <div className={styles['content']} data-testid="article-item-content">
+          {HTMLReactParser(data.content)}
+        </div>
       </PartitionalLockedContent>
     </>
   );

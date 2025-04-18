@@ -17,8 +17,8 @@ type NavItem = {
   isActive?: boolean;
 };
 
-const NavLink = ({ path, children }: PropsWithChildren<NavItem>) => (
-  <Link href={path} prefetch={false}>
+const NavLink = ({ path, children, ...rest }: PropsWithChildren<NavItem>) => (
+  <Link href={path} prefetch={false} {...rest}>
     {children}
   </Link>
 );

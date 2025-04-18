@@ -41,7 +41,11 @@ export function AdaptiveNavigation<T extends GenericItemShape>({
             data-active={activeItem === key ? 'true' : 'false'}
             className={`group/nav-item relative px-3 data-[active=true]:font-extrabold md:px-0`}>
             <span className="bg-primary absolute inset-x-0 -bottom-1 h-0.5 opacity-0 transition-all duration-300 group-data-[active=true]/nav-item:opacity-30" />
-            <IteratorComponent {...(rest as T)}>{label}</IteratorComponent>
+            <IteratorComponent
+              {...(rest as T)}
+              aria-current={activeItem === key ? 'page' : undefined}>
+              {label}
+            </IteratorComponent>
           </li>
         ))}
       </ul>

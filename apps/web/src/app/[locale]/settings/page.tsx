@@ -10,8 +10,8 @@ import {
   RuntimeSettings,
   UserGrantsSettings,
 } from '@/features/settings';
-
 export { generateStaticParams } from '@/i18n/routing';
+
 export const revalidate = 1800;
 
 export async function generateMetadata({

@@ -21,7 +21,12 @@ type NavItem = {
   onClick?: () => void;
 };
 
-const NavLink = ({ path, onClick, children }: PropsWithChildren<NavItem>) => {
+const NavLink = ({
+  path,
+  onClick,
+  children,
+  ...rest
+}: PropsWithChildren<NavItem>) => {
   if (path === '#') {
     return (
       <button
@@ -33,7 +38,7 @@ const NavLink = ({ path, onClick, children }: PropsWithChildren<NavItem>) => {
   }
 
   return (
-    <Link href={path} passHref prefetch={false}>
+    <Link href={path} prefetch={false} {...rest}>
       {children}
     </Link>
   );
