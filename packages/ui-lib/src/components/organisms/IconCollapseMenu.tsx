@@ -28,12 +28,17 @@ export function IconCollapsibleMenu<T extends GenericItemShape>({
       <ul className="flex justify-end gap-4">
         {items.map(({ key, label, icon, ...rest }) => (
           <li key={key}>
-            <IteratorComponent {...(rest as T)}>
+            <IteratorComponent
+              {...(rest as T)}
+              aria-current={activeItem === key ? 'page' : undefined}>
               <span
                 className="group/nav-item flex items-center gap-2"
-                data-active={activeItem === key}>
-                <Icon icon={icon} title={label} titleId={label} size="lg" />
-                <span className="hidden group-data-[active=true]/nav-item:font-extrabold md:inline-block">
+                data-active={activeItem === key}
+                aria-label={label}>
+                <Icon icon={icon} size="lg" />
+                <span
+                  className="hidden group-data-[active=true]/nav-item:font-extrabold md:inline-block"
+                  aria-hidden="true">
                   {label}
                 </span>
               </span>

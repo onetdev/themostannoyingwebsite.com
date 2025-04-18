@@ -1,7 +1,10 @@
 import { expect, test } from '@playwright/test';
 
-test('home has articles', async ({ page }) => {
+test('home loads and has articles', async ({ page }) => {
   await page.goto('/');
+
+  const header = page.getByRole('banner');
+  await expect(header.locator('[aria-current="page"]')).toHaveText('Home');
 
   await expect(page.getByTestId('cover-article')).toBeVisible();
 
