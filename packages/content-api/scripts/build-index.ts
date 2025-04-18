@@ -1,3 +1,4 @@
+import { getLogger } from '@maw/logger';
 import { Dirent } from 'fs';
 import fs from 'fs/promises';
 import path from 'path';
@@ -9,6 +10,9 @@ import articleEntrySimplifiedZod from '@/schemas/article-entry-simplified';
 import { ArticleIndexEntrySchema } from '@/schemas/article-index-entry';
 import { parse as parseMd } from '@/utils/markdown';
 
+const logger = getLogger().child({
+  script: 'build-index',
+});
 const locales = ['en'];
 const sourceRootPath = path.join('./data');
 const validArticleDirPattern = new RegExp(
@@ -31,7 +35,8 @@ const getLocaleMeta = async () => {
       onCover = data['on-cover'];
       highlighted = data['highlighted'];
       success = true;
-    } catch (_err) {
+    } catch (err) {
+      logger.warn(err, `Failed to load locale meta for ${locale}`);
       success = false;
     }
 
@@ -45,12 +50,11 @@ const getLocaleMeta = async () => {
 
   const resultRaw = await Promise.all(queue);
 
-  console.log('Loading locale specific indices');
-  console.group();
+  logger.info('🔄 Loading locale specific indices');
 
   const results = resultRaw.reduce(
     (carry, current) => {
-      console.log(`${current.locale} ${current.success ? '✓' : '✗'}`);
+      logger.info(`${current.locale} ${current.success ? '✓' : '✗'}`);
       carry[current.locale] = current;
       return carry;
     },
@@ -63,7 +67,7 @@ const getLocaleMeta = async () => {
     >,
   );
 
-  console.groupEnd();
+  logger.info('✅ Indicies loaded.');
 
   return results;
 };
@@ -100,7 +104,11 @@ const resolveArticle = async (
       .toFile(path.join(articlePath, 'cover-480x270.webp'));
 
     hasCoverImage = true;
-  } catch (_err) {
+  } catch (err) {
+    logger.warn(
+      err,
+      `Failed to load cover image for ${entry.name}. It will be skipped.`,
+    );
     hasCoverImage = false;
   }
 
@@ -111,7 +119,7 @@ const resolveArticle = async (
     content = sanitizeHtml(data.content);
   }
 
-  console.log(entry.name);
+  logger.info(entry.name);
 
   const localeMetaEntry = localeMeta[match[1]!]!;
   // Denormalized data
@@ -134,21 +142,20 @@ const main = async () => {
   const fsEntries = await fs.readdir(sourceRootPath, { withFileTypes: true });
   const candidates = fsEntries.filter((entry) => entry.isDirectory());
 
-  console.log('Resolving articles:');
-  console.group();
+  logger.info('🔄 Resolving articles...');
   const resolverQueue = candidates.map((item) =>
     resolveArticle(item, localeMeta),
   );
   const resolved = (await Promise.all(resolverQueue)).filter(
     (entry) => entry !== null,
   );
-  console.groupEnd();
+  logger.info('✅ Articles resolved.');
 
   const indexFile = path.join(sourceRootPath, 'index.json');
   await fs.writeFile(indexFile, JSON.stringify(resolved));
 };
 
-console.log('Generating article index...');
+logger.info('🔄 Generating article index...');
 main()
-  .then(() => console.log(`Aaaaand it's done. New index created.\n`))
-  .catch((err) => console.error(`Ooopsie, something went wrong: ${err}`));
+  .then(() => logger.info(`✅ Aaaaand it's done. New index created.\n`))
+  .catch((err) => logger.error(err, `Ooopsie, something went wrong`));

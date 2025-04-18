@@ -1,3 +1,4 @@
+import { getLogger } from '@maw/logger';
 import { isBrowser } from '@maw/ui-lib/utils';
 import { useCallback } from 'react';
 
@@ -9,6 +10,10 @@ import {
 type UseSendNotificationProps = {
   autoRequest?: boolean;
 };
+
+const logger = getLogger().child({
+  hook: 'useSendNotification',
+});
 
 const useSendNotification = ({
   autoRequest = false,
@@ -23,14 +28,14 @@ const useSendNotification = ({
       if (permission === 'default' && autoRequest) {
         await requestNotificationPermission();
       } else if (permission === 'denied') {
-        console.warn(
+        logger.warn(
           `[useSendNotification] Can't send notification because permission is "${permission}"`,
         );
         return false;
       }
 
       if (getNotificationPermissionState() !== 'granted') {
-        console.warn(
+        logger.warn(
           `[useSendNotification] Can't send notification because state is "${getNotificationPermissionState()}"`,
         );
         return false;
