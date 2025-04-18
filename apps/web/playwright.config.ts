@@ -29,7 +29,7 @@ export default defineConfig({
     actionTimeout: 8000,
     baseURL: 'http://127.0.0.1:3000',
     ignoreHTTPSErrors: true,
-    headless: false,
+    headless: true,
     trace: 'on-first-retry',
     viewport: {
       width: 1280,
