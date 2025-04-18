@@ -2,12 +2,12 @@ import { PropsWithChildren, ReactNode } from 'react';
 
 import { Icon } from '@maw/ui-lib';
 
-type GenericItmeShape = {
+type GenericItemShape = {
   key: string;
   label: string;
 };
 
-export type ToggableNavigationProps<T extends GenericItmeShape> =
+export type ToggableNavigationProps<T extends GenericItemShape> =
   JSXProxyProps<'nav'> & {
     className?: string;
     items: T[];
@@ -17,7 +17,7 @@ export type ToggableNavigationProps<T extends GenericItmeShape> =
     };
   };
 
-export function ToggableNavigation<T extends GenericItmeShape>({
+export function ToggableNavigation<T extends GenericItemShape>({
   className,
   items,
   IteratorComponent,

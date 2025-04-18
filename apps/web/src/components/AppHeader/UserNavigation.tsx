@@ -23,7 +23,7 @@ const NavLink = ({ path, onClick, children }: PropsWithChildren<NavItem>) => {
     return (
       <button
         onClick={onClick}
-        className="text-primary hover:animate-hue-full-rotate cursor-pointer">
+        className="text-primary animate-hue-full-rotate cursor-pointer">
         {children}
       </button>
     );

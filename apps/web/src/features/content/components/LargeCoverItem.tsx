@@ -36,7 +36,7 @@ export const LargeCoverItem: FunctionComponent<LargeCoverItemProps> = ({
             height="1200"
           />
         )}
-        <div className="relative right-0 bottom-0 flex w-full flex-col items-end md:absolute md:p-2">
+        <div className="relative right-0 bottom-0 flex w-full flex-col items-start md:absolute md:p-2">
           <h2 className="text-xl transition duration-300 group-hover:brightness-125 md:mb-3 md:text-3xl">
             <span className="bg-primary text-on-primary box-decoration-clone px-2 md:px-3">
               {article.title}
