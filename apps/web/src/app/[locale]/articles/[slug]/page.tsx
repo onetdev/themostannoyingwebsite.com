@@ -61,7 +61,10 @@ export default async function Page({ params }: PageProps) {
   }
 
   return (
-    <PageLayout activeItem="article-item" role="main">
+    <PageLayout
+      activeItem="article-item"
+      role="main"
+      data-testid="article-item">
       <ArticleItemPage data={data} />
     </PageLayout>
   );
