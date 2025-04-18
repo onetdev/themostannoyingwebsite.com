@@ -5,8 +5,8 @@ import { getTranslations } from 'next-intl/server';
 
 import { PageLayout } from '@/components/PageLayout';
 import { Link } from '@/i18n/navigation';
-
 export { generateStaticParams } from '@/i18n/routing';
+
 export const revalidate = 1800;
 
 export async function generateMetadata({

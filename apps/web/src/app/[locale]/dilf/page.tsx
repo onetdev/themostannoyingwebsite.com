@@ -3,8 +3,8 @@ import { getTranslations } from 'next-intl/server';
 
 import { PageLayout } from '@/components/PageLayout';
 import { DilfFinder } from '@/features/gifts';
-
 export { generateStaticParams } from '@/i18n/routing';
+
 export const revalidate = 1800;
 
 export async function generateMetadata({

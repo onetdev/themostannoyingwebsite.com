@@ -6,8 +6,8 @@ import {
 } from '@/features/content';
 import { AppArticleService } from '@/features/content/services/AppArticleService';
 import { OneByOneGift } from '@/features/gifts';
-
 export { generateStaticParams } from '@/i18n/routing';
+
 export const revalidate = 1800;
 
 export default async function Page({ params }: NextPageProps) {
