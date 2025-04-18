@@ -9,4 +9,4 @@ const dest = './public/assets/articles';
 
 logger.info(`🔄 Copying article assets from ${src} to ${dest}...`);
 await cp(src, dest, { recursive: true });
-logger.info(`✅ Assets have been published.\n`);
+logger.info(`✅ Assets have been published.`);

@@ -16,6 +16,11 @@ if (isLocalDevelopment) {
   publicUrl = `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}`;
 }
 
+const vercelFigCommitRef = (process.env.VERCEL_GIT_COMMIT_REF || '').replace(
+  /[^a-z0-9._-]/gi,
+  '-',
+);
+
 const deploymentMeta = {
   author: packageJson.author,
   githubUrl: packageJson.repository.url,
@@ -27,9 +32,7 @@ const deploymentMeta = {
 
   // Sentry won't accept branch names with "/" so this line aims to replace
   // all non-alphanumeric characters with "-"
-  release:
-    (process.env.VERCEL_GIT_COMMIT_REF || '').replace(/[^a-z0-9._-]/gi, '-') ||
-    'UNKNOWN_RELEASE',
+  release: `${vercelFigCommitRef || 'UNKNOWN_RELEASE'}@${packageJson.version}`,
 };
 
 export default deploymentMeta;
