@@ -25,7 +25,7 @@ const config = {
     firefox: false,
     windows: false,
     yandex: false,
-  }
+  },
 };
 
 export default config;

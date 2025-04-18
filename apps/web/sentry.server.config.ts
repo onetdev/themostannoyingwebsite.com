@@ -4,7 +4,7 @@
 
 import * as Sentry from '@sentry/nextjs';
 
-import deploymentMeta from './deployment-meta.mjs';
+import deploymentMeta from '@/root/public/deployment-meta.json';
 
 Sentry.init({
   dsn: process.env.SENTRY_SERVER_DSN,

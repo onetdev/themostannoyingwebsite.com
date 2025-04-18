@@ -1,4 +1,4 @@
-import { getLogger } from '@maw/logger';
+import { useLogger } from '@maw/logger';
 import { isBrowser } from '@maw/ui-lib/utils';
 import { useCallback } from 'react';
 
@@ -11,13 +11,13 @@ type UseSendNotificationProps = {
   autoRequest?: boolean;
 };
 
-const logger = getLogger().child({
-  hook: 'useSendNotification',
-});
-
 const useSendNotification = ({
   autoRequest = false,
 }: UseSendNotificationProps = {}) => {
+  const logger = useLogger().child({
+    hook: 'useSendNotification',
+  });
+
   const send = useCallback(
     async (data: { title: string; body?: string; data?: unknown }) => {
       const permission = getNotificationPermissionState();

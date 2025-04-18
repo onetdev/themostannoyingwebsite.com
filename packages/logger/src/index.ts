@@ -14,3 +14,9 @@ export const getLogger = () => {
 
   return logger;
 };
+
+export const useLogger = () => {
+  const logger = pino({});
+
+  return logger;
+};
