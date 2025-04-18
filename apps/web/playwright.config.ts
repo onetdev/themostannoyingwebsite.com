@@ -17,19 +17,31 @@ export default defineConfig({
   forbidOnly: !!process.env.CI,
   retries: process.env.CI ? 2 : 0,
   workers: process.env.CI ? 1 : undefined,
-  /* Reporter to use. See https://playwright.dev/docs/test-reporters */
+  /* See https://playwright.dev/docs/test-reporters */
   reporter: 'html',
-  /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
+  /*
+   * Shared settings for all the projects below.
+   * See https://playwright.dev/docs/api/class-testoptions.
+   */
   use: {
     baseURL: 'http://127.0.0.1:3000',
-
-    /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
+    ignoreHTTPSErrors: true,
+    headless: true,
     trace: 'on-first-retry',
-
-    /* https://playwright.dev/docs/videos */
+    viewport: {
+      width: 1280,
+      height: 720,
+    },
     video: {
-      mode: 'retain-on-failure',
-      size: { width: 640, height: 480 },
+      mode: process.env.CI ? 'retain-on-failure' : 'on',
+      size: {
+        width: 640,
+        height: 360,
+      },
+    },
+    screenshot: {
+      mode: process.env.CI ? 'only-on-failure' : 'on',
+      fullPage: true,
     },
   },
   projects: [
