@@ -1,0 +1,21 @@
+{
+  "private": true,
+  "name": "@maw/config-jest",
+  "version": "0.0.0",
+  "exports": {
+    "./base": "./configs/base.ts",
+    "./setup": "./configs/setup.ts"
+  },
+  "scripts": {
+    "check-types": "tsc --noEmit",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix"
+  },
+  "devDependencies": {
+    "@maw/config-eslint": "workspace:*",
+    "@maw/config-ts": "workspace:*",
+    "@types/jest": "catalog:",
+    "eslint": "catalog:",
+    "jest": "catalog:"
+  }
+}

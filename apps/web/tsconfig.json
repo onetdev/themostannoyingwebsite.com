@@ -1,5 +1,5 @@
 {
-  "extends": "@maw/tsconfig/configs/nextjs.json",
+  "extends": "@maw/config-ts/configs/next-js.json",
   "compilerOptions": {
     "baseUrl": "."
   },
@@ -7,8 +7,7 @@
     "**/*.ts",
     "**/*.tsx",
     "next-env.d.ts",
-    "next.config.js",
-    ".next/types/**/*.ts",
+    ".next/types/**/*.ts"
   ],
   "exclude": [
     "node_modules"

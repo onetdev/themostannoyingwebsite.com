@@ -41,3 +41,4 @@ next-env.d.ts
 
 certificates
 public/assets/articles
+public/deployment-meta.json

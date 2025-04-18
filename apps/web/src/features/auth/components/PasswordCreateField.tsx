@@ -1,4 +1,4 @@
-import { FormFieldError, PasswordStrengthBar, TextInput } from '@maw/ui';
+import { FormFieldError, PasswordStrengthBar, TextInput } from '@maw/ui-lib';
 import { useTranslations } from 'next-intl';
 import { FunctionComponent } from 'react';
 

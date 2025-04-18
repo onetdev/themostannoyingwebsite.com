@@ -1,11 +1,12 @@
-import { PageHeadline } from '@maw/ui';
-import styles from '@maw/ui/content.module.css';
+import { PageHeadline } from '@maw/ui-lib';
+import styles from '@maw/ui-lib/content.module.css';
 import { Metadata } from 'next';
 import { getTranslations } from 'next-intl/server';
 
+import { PageLayout } from '@/components/PageLayout';
 import { Link } from '@/i18n/navigation';
-
 export { generateStaticParams } from '@/i18n/routing';
+
 export const revalidate = 1800;
 
 export async function generateMetadata({
@@ -24,7 +25,7 @@ export default async function Page() {
   const t = await getTranslations();
 
   return (
-    <main role="main">
+    <PageLayout activeItem="donate" role="main">
       <PageHeadline className="mx-auto w-full max-w-screen-md">
         {t('navigation.donate')}
       </PageHeadline>
@@ -38,6 +39,6 @@ export default async function Page() {
           </Link>
         </p>
       </div>
-    </main>
+    </PageLayout>
   );
 }

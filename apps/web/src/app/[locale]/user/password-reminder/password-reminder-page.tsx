@@ -6,7 +6,7 @@ import {
   FormFieldError,
   PageHeadline,
   TextInput,
-} from '@maw/ui';
+} from '@maw/ui-lib';
 import { useTranslations } from 'next-intl';
 import {
   SubmitHandler,
@@ -39,7 +39,7 @@ export function PasswordReminderPage() {
   };
 
   return (
-    <main className="mx-auto max-w-md py-0 md:py-14" role="main">
+    <>
       <PageHeadline>{t('navigation.passwordReminder')}</PageHeadline>
       <form
         className="flex flex-col gap-5"
@@ -81,6 +81,6 @@ export function PasswordReminderPage() {
           </Link>
         </div>
       </form>
-    </main>
+    </>
   );
 }

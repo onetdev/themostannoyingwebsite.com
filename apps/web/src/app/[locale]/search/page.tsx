@@ -3,7 +3,9 @@ import { getTranslations } from 'next-intl/server';
 
 import { SearchPage } from './search-page';
 
+import { PageLayout } from '@/components/PageLayout';
 export { generateStaticParams } from '@/i18n/routing';
+
 export const revalidate = 1800;
 
 export async function generateMetadata({
@@ -19,5 +21,9 @@ export async function generateMetadata({
 }
 
 export default function Page() {
-  return <SearchPage />;
+  return (
+    <PageLayout activeItem="search" role="main">
+      <SearchPage />
+    </PageLayout>
+  );
 }

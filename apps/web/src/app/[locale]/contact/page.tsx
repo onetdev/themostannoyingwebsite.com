@@ -1,10 +1,11 @@
-import { PageHeadline } from '@maw/ui';
+import { PageHeadline } from '@maw/ui-lib';
 import { Metadata } from 'next';
 import { getTranslations } from 'next-intl/server';
 
+import { PageLayout } from '@/components/PageLayout';
 import config from '@/config';
-
 export { generateStaticParams } from '@/i18n/routing';
+
 export const revalidate = 1800;
 
 export async function generateMetadata({
@@ -23,11 +24,11 @@ export default async function Page() {
   const t = await getTranslations();
 
   return (
-    <main role="main">
+    <PageLayout activeItem="contact" role="main">
       <PageHeadline>{t('navigation.contact')}</PageHeadline>
       <p>
         <a href={`mailto:${config.contactEmail}`}>{config.contactEmail}</a>
       </p>
-    </main>
+    </PageLayout>
   );
 }

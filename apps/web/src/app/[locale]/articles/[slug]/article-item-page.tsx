@@ -1,6 +1,6 @@
 'use client';
 
-import styles from '@maw/ui/content.module.css';
+import styles from '@maw/ui-lib/content.module.css';
 import HTMLReactParser from 'html-react-parser';
 import Image from 'next/image';
 import { useTranslations } from 'next-intl';
@@ -15,7 +15,7 @@ export function ArticleItemPage({ data }: { data: ArticleDatum }) {
   );
 
   return (
-    <main role="main">
+    <>
       <h1 className="mb-2 max-w-[900px]">{data.title}</h1>
       <span className="mb-5 block italic">
         {t('article.published', { date: data.publishedAt.toDateString() })}
@@ -34,8 +34,10 @@ export function ArticleItemPage({ data }: { data: ArticleDatum }) {
       <PartitionalLockedContent
         initialMaxHeight={300}
         active={partitionEnabled}>
-        <div className={styles['content']}>{HTMLReactParser(data.content)}</div>
+        <div className={styles['content']} data-testid="article-item-content">
+          {HTMLReactParser(data.content)}
+        </div>
       </PartitionalLockedContent>
-    </main>
+    </>
   );
 }

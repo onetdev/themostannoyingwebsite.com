@@ -1,4 +1,4 @@
-import { Icon } from '@maw/ui';
+import { Icon } from '@maw/ui-lib';
 import { getWeightedRandom, WeightedRandomPoolItem } from '@maw/utils/math';
 import { useTranslations } from 'next-intl';
 import { FunctionComponent, useMemo, useState } from 'react';

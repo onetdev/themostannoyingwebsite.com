@@ -1,16 +1,19 @@
 'use client';
 
-import { Icon, PageHeadline } from '@maw/ui';
+import { useLogger } from '@maw/logger';
+import { Icon, PageHeadline } from '@maw/ui-lib';
 import Image from 'next/image';
 import { useTranslations } from 'next-intl';
 import { useEffect, useRef, useState } from 'react';
 
 export default function HotThingsPage() {
+  const logger = useLogger().child({ page: 'hot-things-page' });
   const [isCapable, setIsCapable] = useState(false);
   const t = useTranslations();
   const [_devices, setDevices] = useState<MediaDeviceInfo[]>([]);
   const [stream, setStream] = useState<MediaStream>();
   const playerRef = useRef<HTMLVideoElement>(null);
+  const [isDisallowed, setIsDisallowed] = useState(false);
 
   const videoConstraints = {
     width: {
@@ -43,9 +46,14 @@ export default function HotThingsPage() {
       return;
     }
 
-    await navigator.mediaDevices.getUserMedia({ video: true });
-    setDevices((await navigator.mediaDevices.enumerateDevices()) || []);
-    startStream({ video: videoConstraints });
+    try {
+      await navigator.mediaDevices.getUserMedia({ video: true });
+      setDevices((await navigator.mediaDevices.enumerateDevices()) || []);
+      startStream({ video: videoConstraints });
+    } catch (err) {
+      logger.warn('Error accessing media devices.', err);
+      setIsDisallowed(true);
+    }
   };
 
   useEffect(() => {
@@ -56,7 +64,7 @@ export default function HotThingsPage() {
   }, [stream]);
 
   return (
-    <main role="main">
+    <>
       <PageHeadline>{t('navigation.hotThings')}</PageHeadline>
       <div className="pb-16per9 relative overflow-hidden">
         <Image
@@ -72,7 +80,7 @@ export default function HotThingsPage() {
           ref={playerRef}
           autoPlay
         />
-        {isCapable && (
+        {!isDisallowed && isCapable && (
           <button
             className="absolute top-1/2 left-1/2 -mt-9 -ml-9 text-7xl"
             onClick={onIntent}
@@ -80,7 +88,12 @@ export default function HotThingsPage() {
             <Icon icon="play" size="5xl" />
           </button>
         )}
+        {isDisallowed && (
+          <div className="text-error absolute top-1/2 left-1/2 -mt-9 -ml-9 text-7xl">
+            <Icon icon="failed" size="5xl" />
+          </div>
+        )}
       </div>
-    </main>
+    </>
   );
 }

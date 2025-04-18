@@ -1,4 +1,4 @@
-import { nextJsConfig } from "@maw/eslint-config/next-js";
+import config from '@maw/config-eslint/next-js';
 
 /** @type {import("eslint").Linter.Config} */
-export default nextJsConfig;
+export default config;

@@ -20,10 +20,10 @@
       "cache": false
     },
     "lint": {
-      "dependsOn": ["^lint"]
+      "dependsOn": ["^lint", "build:metadata"]
     },
     "check-types": {
-      "dependsOn": ["^check-types"]
+      "dependsOn": ["^check-types", "build:metadata"]
     },
     "dev": {
       "cache": false,
@@ -54,6 +54,7 @@
     "VERCEL_BRANCH_URL",
     "VERCEL_ENV",
     "VERCEL_GIT_COMMIT_REF",
+    "VERCEL_GIT_COMMIT_SHA",
     "VERCEL_PROJECT_PRODUCTION_URL"
   ]
 }

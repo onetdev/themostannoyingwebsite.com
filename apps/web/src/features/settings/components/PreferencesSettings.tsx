@@ -1,6 +1,10 @@
 'use client';
 
-import { BorderedBox, Checkbox as FormCheckbox, LabeledChild } from '@maw/ui';
+import {
+  BorderedBox,
+  Checkbox as FormCheckbox,
+  LabeledChild,
+} from '@maw/ui-lib';
 import { useTranslations } from 'next-intl';
 import { useTheme } from 'next-themes';
 import { FunctionComponent } from 'react';

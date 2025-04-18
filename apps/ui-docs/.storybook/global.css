@@ -1,2 +1,2 @@
-@import "@maw/ui/global.css";
-@source "../node_modules/@maw/ui/src"
+@import "@maw/ui-lib/global.css";
+@source "../node_modules/@maw/ui-lib/src"

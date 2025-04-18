@@ -1,4 +1,4 @@
-import { isPointWithinElement } from '@maw/ui/utils';
+import { isPointWithinElement } from '@maw/ui-lib/utils';
 import { getPointDistance, Point2d } from '@maw/utils/math';
 import { RefObject, useCallback, useEffect, useState } from 'react';
 

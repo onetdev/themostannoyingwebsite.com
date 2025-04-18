@@ -7,8 +7,6 @@ import { hasLocale, NextIntlClientProvider } from 'next-intl';
 import { getTranslations } from 'next-intl/server';
 import { getLangDir } from 'rtl-detect';
 
-import { AppFooter } from '@/components/AppFooter';
-import { AppHeader } from '@/components/AppHeader';
 import { ExperienceDecoratorLayout } from '@/components/ExperienceDecoratorLayout';
 import config from '@/config';
 import { routing } from '@/i18n/routing';
@@ -111,10 +109,9 @@ async function RootLayout({
           <RootProviderContainer>
             <ClientServiceProvider />
             <ExperienceDecoratorLayout className="font-primary">
+              {/* Please add AppHeader in your pages to have SSG/ISR/SSG support while also being able to select the active navigation item */}
               <Analytics />
-              <AppHeader />
               {children}
-              <AppFooter />
             </ExperienceDecoratorLayout>
           </RootProviderContainer>
         </NextIntlClientProvider>

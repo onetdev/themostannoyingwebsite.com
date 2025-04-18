@@ -3,6 +3,7 @@ import { notFound } from 'next/navigation';
 
 import { ArticleItemPage } from './article-item-page';
 
+import { PageLayout } from '@/components/PageLayout';
 import { AppArticleService } from '@/features/content/services/AppArticleService';
 import i18nConfig from '@/root/i18n.config';
 
@@ -59,5 +60,12 @@ export default async function Page({ params }: PageProps) {
     return notFound();
   }
 
-  return <ArticleItemPage data={data} />;
+  return (
+    <PageLayout
+      activeItem="article-item"
+      role="main"
+      data-testid="article-item">
+      <ArticleItemPage data={data} />
+    </PageLayout>
+  );
 }

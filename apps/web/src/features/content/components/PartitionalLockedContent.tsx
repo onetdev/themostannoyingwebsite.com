@@ -1,6 +1,6 @@
 'use client';
 
-import { Button } from '@maw/ui';
+import { Button } from '@maw/ui-lib';
 import { useTranslations } from 'next-intl';
 import React, {
   FunctionComponent,
@@ -55,17 +55,21 @@ export const PartitionalLockedContent: FunctionComponent<
   const renderButtons = () => {
     const buttons = [
       <Button
-        variant="primary"
+        className="flex-1"
+        data-testid="paywall-overlay-confirm"
         key="cta"
+        onMouseEnter={() => setFlipActions((prev) => !prev)}
         size="sm"
-        onMouseEnter={() => setFlipActions((prev) => !prev)}>
+        variant="primary">
         {t('paywall.overlay.confirm')}*
       </Button>,
       <Button
-        variant="secondary"
+        className="flex-1"
+        data-testid="paywall-overlay-cancel"
+        key="cancel"
         onClick={handleRevealClick}
-        size="sm"
-        key="cancel">
+        size="md"
+        variant="secondary">
         {t('paywall.overlay.cancel')}
       </Button>,
     ];

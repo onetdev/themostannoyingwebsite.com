@@ -1,3 +1,4 @@
+import { PageLayout } from '@/components/PageLayout';
 import {
   LargeCoverItem,
   SmallCoverListItem,
@@ -5,8 +6,8 @@ import {
 } from '@/features/content';
 import { AppArticleService } from '@/features/content/services/AppArticleService';
 import { OneByOneGift } from '@/features/gifts';
-
 export { generateStaticParams } from '@/i18n/routing';
+
 export const revalidate = 1800;
 
 export default async function Page({ params }: NextPageProps) {
@@ -23,10 +24,13 @@ export default async function Page({ params }: NextPageProps) {
     paginate: { take: 12 },
   });
   const denseArticleList = articlePool.items.slice(0, 2);
-  const smallCoverArticleList = articlePool.items.slice(2, 8);
+  const smallCoverArticleList = articlePool.items.slice(2, 10);
 
   return (
-    <main className="grid grid-cols-1 gap-3 lg:grid-cols-4" role="main">
+    <PageLayout
+      activeItem="home"
+      className="grid grid-cols-1 gap-3 lg:grid-cols-4"
+      role="main">
       {coverArticle && (
         <LargeCoverItem
           className="col-span-1 lg:col-span-3"
@@ -64,6 +68,6 @@ export default async function Page({ params }: NextPageProps) {
           ))}
         </ul>
       </section>
-    </main>
+    </PageLayout>
   );
 }

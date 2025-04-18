@@ -1,4 +1,4 @@
-import { Button, DropdownSelect, FormFieldError, TextInput } from '@maw/ui';
+import { Button, DropdownSelect, FormFieldError, TextInput } from '@maw/ui-lib';
 import { useTranslations } from 'next-intl';
 import {
   type FunctionComponent,
