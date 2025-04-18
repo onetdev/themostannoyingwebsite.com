@@ -23,7 +23,8 @@
     "react": "catalog:",
     "react-dom": "catalog:",
     "react-fast-marquee": "^1.6.5",
-    "react-hook-form": "7.55.0"
+    "react-hook-form": "7.55.0",
+    "react-share": "^5.2.2"
   },
   "devDependencies": {
     "@maw/config-eslint": "workspace:*",

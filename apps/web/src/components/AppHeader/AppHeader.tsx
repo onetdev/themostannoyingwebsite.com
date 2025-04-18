@@ -1,31 +1,16 @@
-import { ArticleDatum } from '@maw/content-api';
 import { Icon } from '@maw/ui-lib';
 import { getTranslations } from 'next-intl/server';
-import { FunctionComponent } from 'react';
 
 import { AppDarkModeToggle } from './AppDarkModeToggle';
 import { ArticleMarquee } from './ArticleMarquee';
+import { SiteNavigation } from './SiteNavigation';
 
-import MainNavigation from '@/components/MainNavigation';
-import SearchForm from '@/components/SearchForm';
-import UserNavigation from '@/components/UserNavigation';
+import SearchForm from '@/components/AppHeader/SearchForm';
+import UserNavigation from '@/components/AppHeader/UserNavigation';
 import { AppArticleService } from '@/features/content/services/AppArticleService';
 import { Link } from '@/i18n/navigation';
 
-export const RenderMarqueeItem = (item: ArticleDatum) => {
-  const path = '/articles/' + item.slug;
-  return (
-    <Link
-      href={path}
-      passHref
-      prefetch={false}
-      className="mx-8 inline-block px-2">
-      {item.title}
-    </Link>
-  );
-};
-
-export const AppHeader: FunctionComponent = async () => {
+export async function AppHeader() {
   const t = await getTranslations();
 
   const marqueeItems = (
@@ -55,7 +40,7 @@ export const AppHeader: FunctionComponent = async () => {
         </Link>
         <AppDarkModeToggle />
       </div>
-      <MainNavigation className="col-span-1 my-3 -ml-3 pl-3 md:ml-0 md:pl-0" />
+      <SiteNavigation />
       <UserNavigation className="col-span-1 my-3" />
       <ArticleMarquee
         items={marqueeItems}
@@ -63,4 +48,4 @@ export const AppHeader: FunctionComponent = async () => {
       />
     </header>
   );
-};
+}

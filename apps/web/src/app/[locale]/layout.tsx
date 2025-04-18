@@ -8,7 +8,7 @@ import { getTranslations } from 'next-intl/server';
 import { getLangDir } from 'rtl-detect';
 
 import { AppFooter } from '@/components/AppFooter';
-import { AppHeader } from '@/components/AppHeader';
+import { AppHeader } from '@/components/AppHeader/AppHeader';
 import { ExperienceDecoratorLayout } from '@/components/ExperienceDecoratorLayout';
 import config from '@/config';
 import { routing } from '@/i18n/routing';

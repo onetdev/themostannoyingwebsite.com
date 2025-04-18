@@ -5,7 +5,7 @@ import { MarqueeText } from '@maw/ui-lib';
 
 import { Link } from '@/i18n/navigation';
 
-const RenderItem = (item: ArticleDatum) => {
+const NavItem = (item: ArticleDatum) => {
   const path = '/articles/' + item.slug;
   return (
     <Link
@@ -25,10 +25,6 @@ type ArticleMarqueeProps = {
 
 export const ArticleMarquee = ({ items, className }: ArticleMarqueeProps) => {
   return (
-    <MarqueeText
-      items={items}
-      className={className}
-      ItemComponent={RenderItem}
-    />
+    <MarqueeText items={items} className={className} ItemComponent={NavItem} />
   );
 };

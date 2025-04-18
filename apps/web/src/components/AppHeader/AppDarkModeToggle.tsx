@@ -3,9 +3,8 @@
 import { DarkModeToggle } from '@maw/ui-lib';
 import { useTranslations } from 'next-intl';
 import { useTheme } from 'next-themes';
-import { FunctionComponent } from 'react';
 
-export const AppDarkModeToggle: FunctionComponent = () => {
+export function AppDarkModeToggle() {
   const t = useTranslations();
 
   const { resolvedTheme, setTheme } = useTheme();
@@ -17,10 +16,10 @@ export const AppDarkModeToggle: FunctionComponent = () => {
   return (
     <DarkModeToggle
       className="self-center justify-self-end"
-      size="lg"
       resolvedTheme={resolvedTheme as AppTheme}
       setTheme={setTheme}
+      size="lg"
       text={darkModeToggleText}
     />
   );
-};
+}

@@ -1,20 +1,12 @@
 'use client';
 
-import {
-  FunctionComponent,
-  PropsWithChildren,
-  useEffect,
-  useState,
-} from 'react';
+import { PropsWithChildren, useEffect, useState } from 'react';
 
 export type DelayedMountProps = PropsWithChildren<{
   delay: number;
 }>;
 
-export const DelayedMount: FunctionComponent<DelayedMountProps> = ({
-  children,
-  delay,
-}) => {
+export function DelayedMount({ children, delay }: DelayedMountProps) {
   const [isMounted, setIsMounted] = useState(false);
 
   useEffect(() => {
@@ -24,4 +16,4 @@ export const DelayedMount: FunctionComponent<DelayedMountProps> = ({
   }, [delay]);
 
   return isMounted && children;
-};
+}
