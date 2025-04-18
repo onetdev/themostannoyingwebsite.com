@@ -21,7 +21,9 @@ type NavItem = {
 const NavLink = ({ path, onClick, children }: PropsWithChildren<NavItem>) => {
   if (path === '#') {
     return (
-      <button onClick={onClick} className="text-primary cursor-pointer">
+      <button
+        onClick={onClick}
+        className="text-primary hover:animate-hue-full-rotate cursor-pointer">
         {children}
       </button>
     );

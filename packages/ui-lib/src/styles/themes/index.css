@@ -48,78 +48,87 @@
   --padding-9per16: 177.78%;
   --transition-property-visibility-opacity: visibility, opacity;
   --translate-screen-h-half: 50vh;
-  --animation-dot-dot-dot: dot-dot-dot 2s infinite;
-  --animation-highlight: highlight 1s infinite;
-  --animation-flashing-invert-half: flashing-invert-half 500ms infinite;
-  --animation-wiggle-15deg: wiggle-15deg 0.2s linear infinite;
-  --animation-wiggle-8deg: wiggle-8deg 8s infinite;
-  --animation-width-0-100: width-0-100 2s infinite;
-  --animation-width-100-0: width-0-100 2s reverse infinite;
-  --animation-gift-callout: gift-callout 5s infinite;
+  --animate-dot-dot-dot: dot-dot-dot 2s infinite;
+  --animate-highlight: highlight 1s infinite;
+  --animate-flashing-invert-half: flashing-invert-half 500ms infinite;
+  --animate-wiggle-15deg: wiggle-15deg 0.2s linear infinite;
+  --animate-wiggle-8deg: wiggle-8deg 8s infinite;
+  --animate-width-0-100: width-0-100 2s infinite;
+  --animate-width-100-0: width-0-100 2s reverse infinite;
+  --animate-gift-callout: gift-callout 5s infinite;
+  --animate-hue-full-rotate: hue-full-rotate 2s infinite;
 
   @keyframes dot-dot-dot {
-    0%: { content: '.' }
-    25%: { content: '..' }
-    50%: { content: '...' }
-    75%: { content: '' }
-    100%: { content: '.' }
+    0% { content: '.' }
+    25% { content: '..' }
+    50% { content: '...' }
+    75% { content: '' }
+    100% { content: '.' }
   }
   @keyframes highlight {
-    from: { background: var(--color-error) }
-    to: { background: var(--color-error) }
+    from { background: var(--color-error) }
+    to { background: var(--color-error) }
   }
   @keyframes flashing-invert-half {
-    0%: { filter: invert(0) }
-    50%: { filter: invert(0.5) }
-    100%: { filter: invert(0) }
+    0% { filter: invert(0) }
+    50% { filter: invert(0.5) }
+    100% { filter: invert(0) }
   }
   @keyframes wiggle-15deg {
-    0%: { transform: rotate(0deg) }
-    30%: { transform: rotate(-15deg) }
-    40%: { transform: rotate(0deg) }
-    100%: { transform: rotate(0deg) }
+    0% { transform: rotate(0deg) }
+    30% { transform: rotate(-15deg) }
+    40% { transform: rotate(0deg) }
+    100% { transform: rotate(0deg) }
   }
   @keyframes wiggle-8deg {
-    0%: { transform: rotate(0deg) }
-    90%: { transform: rotate(0deg) }
-    92%: { transform: rotate(8deg) }
-    94%: { transform: rotate(-8deg) }
-    96%: { transform: rotate(8deg) }
-    98%: { transform: rotate(-8deg) }
-    100%: { transform: rotate(0deg) }
+    0% { transform: rotate(0deg) }
+    90% { transform: rotate(0deg) }
+    92% { transform: rotate(8deg) }
+    94% { transform: rotate(-8deg) }
+    96% { transform: rotate(8deg) }
+    98% { transform: rotate(-8deg) }
+    100% { transform: rotate(0deg) }
   }
   @keyframes width-0-100 {
-    0%: { width: 0% }
-    100%: { width: 100% }
+    0% { width: 0% }
+    100% { width: 100% }
   }
   @keyframes gift-callout {
-    0%: {
+    0% {
       filter: invert(0.8);
       transform: scale(1)
     }
-    5%: {
+    5% {
       filter: invert(0.4);
       transform: scale(1.1)
     }
-    10%: {
+    10% {
       filter: invert(0) hue-rotate(0deg);
       transform: scale(1);
     }
-    15%: {
+    15% {
       filter: hue-rotate(180deg);
       transform: scale(1);
     }
-    20%: {
+    20% {
       filter: invert(0) hue-rotate(360deg);
       transform: scale(1.2) rotate(360deg);
     }
-    25%: {
+    25% {
       filter: invert(0) hue-rotate(180deg);
       transform: scale(1) rotate(0deg);
     }
-    30%: {
+    30% {
       filter: invert(0) hue-rotate(0deg);
       transform: scale(1) rotate(0deg);
+    }
+  }
+  @keyframes hue-full-rotate {
+    0% {
+      filter: hue-rotate(0deg)
+    }
+    100% {
+      filter: hue-rotate(360deg)
     }
   }
 }
