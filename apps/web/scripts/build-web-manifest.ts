@@ -49,5 +49,5 @@ const storeFiles = async (
 
 logger.info('🔄 Generating manifest...');
 main()
-  .then(() => logger.info(`✅ Aaaaand it's done. New manifest created.\n`))
+  .then(() => logger.info(`✅ Aaaaand it's done. New manifest created.`))
   .catch((err) => logger.error(err, `Ooopsie, something went wrong.`));

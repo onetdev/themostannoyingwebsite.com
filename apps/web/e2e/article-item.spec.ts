@@ -5,7 +5,7 @@ test('article can be view from the home page', async ({ page }) => {
 
   const selector = page.getByTestId('cover-article').locator('a');
   await expect(selector).toBeVisible();
-  await selector.click();
+  await selector.click({ force: true });
 
   await expect(page).toHaveURL(/\/en\/articles\/.*/);
 

@@ -26,6 +26,7 @@ export default defineConfig({
    * See https://playwright.dev/docs/api/class-testoptions.
    */
   use: {
+    testIdAttribute: 'data-testid',
     actionTimeout: 8000,
     baseURL: 'http://127.0.0.1:3000',
     ignoreHTTPSErrors: true,
