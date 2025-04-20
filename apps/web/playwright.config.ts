@@ -37,7 +37,7 @@ export default defineConfig({
       height: 720,
     },
     video: {
-      mode: isCI ? 'retain-on-failure' : 'on',
+      mode: 'on', // isCI ? 'retain-on-failure' : 'on',
       size: {
         width: 640,
         height: 360,
