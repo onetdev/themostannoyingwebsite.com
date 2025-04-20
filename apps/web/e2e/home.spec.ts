@@ -1,6 +1,6 @@
 import { expect, test } from '@playwright/test';
 
-test('home loads and has articles', async ({ page }) => {
+test('home loads and has articles', { tag: '@sanity' }, async ({ page }) => {
   await page.goto('/');
 
   const header = page.getByRole('banner');
