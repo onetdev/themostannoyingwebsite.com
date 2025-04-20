@@ -1,13 +1,19 @@
-name: Playwright Tests for Web
+name: Playwright Tests
 on:
   push:
     branches: [ main ]
   pull_request:
     branches: [ main ]
   workflow_dispatch:
+    inputs:
+      testMatch:
+        description: 'Test match pattern with regex support'
+        required: false
+        default: ''
 
 jobs:
-  test:
+  web-test:
+    name: Playwright Tests for Web
     timeout-minutes: 60
     runs-on: ubuntu-latest
     steps:
@@ -22,7 +28,13 @@ jobs:
     - name: Install Playwright Browsers
       run: pnpm --filter '@maw/web' exec playwright install --with-deps
     - name: Run Playwright tests for Web
-      run: pnpm --filter '@maw/web' run test:e2e
+      run: |
+          TEST_MATCH="${{ github.event.inputs.testMatch }}"
+          if [ -n "$TEST_MATCH" ]; then
+            pnpm --filter '@maw/web' run test:e2e -- "$TEST_MATCH"
+          else
+            pnpm --filter '@maw/web' run test:e2e
+          fi
     - uses: actions/upload-artifact@v4
       if: ${{ !cancelled() }}
       with:
