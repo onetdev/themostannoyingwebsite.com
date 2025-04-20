@@ -14,4 +14,4 @@ if (fs.existsSync(path)) {
 }
 
 fs.writeFileSync(path, JSON.stringify(deploymentMeta, null, 2));
-logger.info('✅ Done.');
+logger.info('✅ Done generating deployment meta.');
