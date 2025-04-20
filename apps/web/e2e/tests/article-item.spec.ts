@@ -6,6 +6,8 @@ test(
   async ({ page }) => {
     await page.goto('/');
 
+    await page.waitForSelector('[data-testid="cover-article"]');
+
     await page.getByTestId('cover-article').locator('a').click();
 
     await expect(page).toHaveURL(/\/en\/articles\/.*/);
