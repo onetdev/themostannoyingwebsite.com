@@ -7,14 +7,16 @@ The goal is to separate the concerns of your application into different layers, 
 
 ```mermaid
 flowchart TD
-    Domain["Domain Layer"]
-    Application["Application Layer"]
-    Presentation["Presentation Layer"]
-    Infrastructure["Infrastructure Layer"]
+subgraph s1["Shelled layers"]
+  Presentation
+  Infrastructure
+  subgraph s2["Application"]
+    Domain
+  end
+end
 
-    Domain --> Application
-    Application --> Presentation
-    Application --> Infrastructure
+Presentation --> s2
+Infrastructure --> s2
 ```
 
 ## Sample folder structure
