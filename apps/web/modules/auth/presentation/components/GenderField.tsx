@@ -1,24 +1,19 @@
 import { DropdownSelect, FormFieldError } from '@maw/ui-lib';
 import { useTranslations } from 'next-intl';
-import { FunctionComponent, useMemo } from 'react';
+import { useMemo } from 'react';
+import { useFormContext } from 'react-hook-form';
 
-import {
-  CommonRegistrationFormFieldProps,
-  userGenderList,
-} from '@/features/auth';
+import { GenderList } from '../../domain';
 
-type GenderFieldProps = Pick<
-  CommonRegistrationFormFieldProps,
-  'errors' | 'register'
->;
-const GenderField: FunctionComponent<GenderFieldProps> = ({
-  register,
-  errors,
-}) => {
+export function GenderField() {
   const t = useTranslations();
+  const {
+    formState: { errors },
+    register,
+  } = useFormContext();
 
   const genderOptions = useMemo(() => {
-    const pool = userGenderList.reduce(
+    const pool = GenderList.reduce(
       (acc, gender) => {
         acc[gender] = t(`user.genderVariants.${gender}`);
         return acc;
@@ -26,7 +21,7 @@ const GenderField: FunctionComponent<GenderFieldProps> = ({
       {} as Record<string, string>,
     );
 
-    return userGenderList.map((gender) => ({
+    return GenderList.map((gender) => ({
       value: gender,
       label: pool[gender],
     }));
@@ -46,6 +41,4 @@ const GenderField: FunctionComponent<GenderFieldProps> = ({
       <FormFieldError error={errors.gender} />
     </>
   );
-};
-
-export default GenderField;
+}

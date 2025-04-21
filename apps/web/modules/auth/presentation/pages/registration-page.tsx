@@ -9,7 +9,7 @@ import {
   TextInput,
 } from '@maw/ui-lib';
 import { useTranslations } from 'next-intl';
-import { SubmitHandler, useForm, UseFormRegister } from 'react-hook-form';
+import { FormProvider, UseFormRegister } from 'react-hook-form';
 
 import {
   CountryField,
@@ -17,29 +17,22 @@ import {
   GenderField,
   PasswordCreateField,
   PhoneNumberField,
-  RegistrationFormInputs,
-} from '@/features/auth';
+} from '../components';
+import { useRegistrationForm } from '../forms';
+
 import { Link } from '@/i18n/navigation';
 import { EMAIL_PATTERN } from '@/utils/validator';
 
 export function RegistrationPage() {
   const t = useTranslations();
+  const methods = useRegistrationForm();
   const {
-    register,
-    handleSubmit,
-    getValues,
-    setValue,
-    watch,
     formState: { errors },
-  } = useForm<RegistrationFormInputs>({
-    defaultValues: {
-      phoneNumber: 1,
-    },
-  });
-
-  const onSubmit: SubmitHandler<RegistrationFormInputs> = (_data) => {
-    alert(t('user.form.registration.genericError'));
-  };
+    getValues,
+    handleSubmit,
+    onSubmit,
+    register,
+  } = methods;
 
   const captchaText = {
     label: t('form.captcha.field'),
@@ -49,7 +42,7 @@ export function RegistrationPage() {
   };
 
   return (
-    <>
+    <FormProvider {...methods}>
       <PageHeadline>{t('navigation.register')}</PageHeadline>
       <form
         className="flex flex-col gap-3 lg:flex-row lg:gap-10"
@@ -125,11 +118,7 @@ export function RegistrationPage() {
             <FormFieldError error={errors.email} />
           </div>
           <div>
-            <PasswordCreateField
-              errors={errors}
-              register={register}
-              watch={watch}
-            />
+            <PasswordCreateField />
           </div>
           <div>
             <label>
@@ -144,21 +133,12 @@ export function RegistrationPage() {
             </label>
             <FormFieldError error={errors.passwordConfirmation} />
           </div>
-          <GenderField errors={errors} register={register} />
+          <GenderField />
         </div>
         <div className="flex flex-col gap-5 lg:w-1/2">
-          <DateOfBirthField
-            errors={errors}
-            register={register}
-            setValue={setValue}
-          />
-          <PhoneNumberField
-            errors={errors}
-            register={register}
-            getValues={getValues}
-            setValue={setValue}
-          />
-          <CountryField errors={errors} register={register} />
+          <DateOfBirthField />
+          <PhoneNumberField />
+          <CountryField />
           <div>
             <label className="flex items-center gap-2">
               <Checkbox {...register('consentNewsletter')} />
@@ -192,6 +172,6 @@ export function RegistrationPage() {
           </div>
         </div>
       </form>
-    </>
+    </FormProvider>
   );
 }

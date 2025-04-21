@@ -1,20 +1,17 @@
 import { DropdownSelect, FormFieldError } from '@maw/ui-lib';
 import { useTranslations } from 'next-intl';
-import { FunctionComponent, useMemo } from 'react';
+import { useMemo } from 'react';
+import { useFormContext } from 'react-hook-form';
 
-import { CommonRegistrationFormFieldProps } from '@/features/auth';
 import countryData from '@/root/public/assets/countries.json';
 
-type CountryFieldProps = Pick<
-  CommonRegistrationFormFieldProps,
-  'errors' | 'register'
->;
-
-const CountryField: FunctionComponent<CountryFieldProps> = ({
-  errors,
-  register,
-}) => {
+export function CountryField() {
   const t = useTranslations();
+  const {
+    formState: { errors },
+    register,
+  } = useFormContext();
+
   const countryOptions = useMemo(
     () =>
       countryData.map(({ localName, code }) => ({
@@ -42,6 +39,4 @@ const CountryField: FunctionComponent<CountryFieldProps> = ({
       <FormFieldError error={errors.countryCode} />
     </div>
   );
-};
-
-export default CountryField;
+}

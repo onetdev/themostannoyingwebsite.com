@@ -9,28 +9,26 @@ import {
 } from '@maw/ui-lib';
 import { useTranslations } from 'next-intl';
 import {
-  SubmitHandler,
-  useForm,
+  FormProvider,
   UseFormRegister,
   UseFormSetValue,
 } from 'react-hook-form';
 
-import { PasswordReminderFormInputs } from '@/features/auth';
+import { usePasswordReminderForm } from '../forms';
+
 import { Link } from '@/i18n/navigation';
 import { EMAIL_PATTERN } from '@/utils/validator';
 
 export function PasswordReminderPage() {
   const t = useTranslations();
+  const methods = usePasswordReminderForm();
   const {
-    register,
     handleSubmit,
+    onSubmit,
+    register,
     setValue,
     formState: { errors },
-  } = useForm<PasswordReminderFormInputs>();
-
-  const onSubmit: SubmitHandler<PasswordReminderFormInputs> = (_data) => {
-    alert(t('user.form.passwordReminder.genericError'));
-  };
+  } = methods;
 
   const captchaText = {
     label: t('form.captcha.field'),
@@ -39,7 +37,7 @@ export function PasswordReminderPage() {
   };
 
   return (
-    <>
+    <FormProvider {...methods}>
       <PageHeadline>{t('navigation.passwordReminder')}</PageHeadline>
       <form
         className="flex flex-col gap-5"
@@ -81,6 +79,6 @@ export function PasswordReminderPage() {
           </Link>
         </div>
       </form>
-    </>
+    </FormProvider>
   );
 }

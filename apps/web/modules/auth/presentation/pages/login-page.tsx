@@ -9,26 +9,26 @@ import {
   TextInput,
 } from '@maw/ui-lib';
 import { useTranslations } from 'next-intl';
-import { SubmitHandler, useForm } from 'react-hook-form';
+import { FormProvider } from 'react-hook-form';
 
-import { LoginFormInputs } from '@/features/auth';
-import { Link } from '@/i18n/navigation';
+import { useLoginForm } from '../forms/useLoginForm';
+
+import { useAppViewModel } from '@/modules/core';
 import { EMAIL_PATTERN } from '@/utils/validator';
 
 export function LoginPage() {
   const t = useTranslations();
+  const { LinkComponent } = useAppViewModel();
+  const form = useLoginForm();
   const {
-    register,
     handleSubmit,
+    onSubmit,
+    register,
     formState: { errors },
-  } = useForm<LoginFormInputs>();
-
-  const onSubmit: SubmitHandler<LoginFormInputs> = (_data) => {
-    alert(t('user.form.login.genericError'));
-  };
+  } = form;
 
   return (
-    <>
+    <FormProvider {...form}>
       <PageHeadline>{t('navigation.login')}</PageHeadline>
       <form
         className="flex flex-col gap-5"
@@ -99,14 +99,14 @@ export function LoginPage() {
           {t('user.form.login.callToAction')}
         </Button>
         <div className="flex justify-between">
-          <Link href="/user/password-reminder" passHref prefetch={false}>
+          <LinkComponent href="/user/password-reminder" prefetch={false}>
             {t('user.common.forgotPassword')}
-          </Link>
-          <Link href="/user/registration" passHref prefetch={false}>
+          </LinkComponent>
+          <LinkComponent href="/user/registration" prefetch={false}>
             {t('user.common.registerAccount')}
-          </Link>
+          </LinkComponent>
         </div>
       </form>
-    </>
+    </FormProvider>
   );
 }

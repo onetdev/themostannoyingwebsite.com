@@ -1,5 +1,10 @@
-import { AuthRepository, RegisterUserType } from '../domain';
+import { AuthRepository, UserCreationType } from '../domain';
 
-export async function register(repo: AuthRepository, data: RegisterUserType) {
+export type RegisterDto = UserCreationType & {
+  captcha: string;
+  passwordConfirmation: string;
+};
+
+export async function register(repo: AuthRepository, data: RegisterDto) {
   return repo.register(data);
 }

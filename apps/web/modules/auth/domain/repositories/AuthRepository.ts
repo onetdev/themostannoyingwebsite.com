@@ -1,5 +1,5 @@
-import { RegisterUserType } from '../entities/RegisterUser';
 import { UserType } from '../entities/User';
+import { UserCreationType } from '../entities/UserCreation';
 
 export interface AuthRepository {
   login(data: {
@@ -7,7 +7,7 @@ export interface AuthRepository {
     password: string;
   }): Promise<{ success: boolean; user?: UserType }>;
   register(
-    user: RegisterUserType,
+    user: UserCreationType,
   ): Promise<{ success: boolean; user?: UserType }>;
   passwordReminder(data: { email: string }): Promise<void>;
 }

@@ -1,7 +1,6 @@
 import { Button, DropdownSelect, FormFieldError, TextInput } from '@maw/ui-lib';
 import { useTranslations } from 'next-intl';
 import {
-  type FunctionComponent,
   type MouseEvent,
   type TouchEvent,
   useCallback,
@@ -10,22 +9,19 @@ import {
   useRef,
   useState,
 } from 'react';
+import { useFormContext } from 'react-hook-form';
 
-import { type CommonRegistrationFormFieldProps } from '@/features/auth';
 import countryData from '@/root/public/assets/countries.json';
 
-type PhoneNumberFieldProps = Pick<
-  CommonRegistrationFormFieldProps,
-  'errors' | 'register' | 'setValue' | 'getValues'
->;
-
-const PhoneNumberField: FunctionComponent<PhoneNumberFieldProps> = ({
-  errors,
-  register,
-  setValue,
-  getValues,
-}) => {
+export function PhoneNumberField() {
   const t = useTranslations();
+  const {
+    formState: { errors },
+    register,
+    setValue,
+    getValues,
+  } = useFormContext();
+
   const $decrementBtn = useRef<HTMLButtonElement>(null);
   const $incrementBtn = useRef<HTMLButtonElement>(null);
   const [phoneNumberUpdateDirection, setPhoneNumberUpdateDirection] =
@@ -164,6 +160,4 @@ const PhoneNumberField: FunctionComponent<PhoneNumberFieldProps> = ({
       )}
     </div>
   );
-};
-
-export default PhoneNumberField;
+}

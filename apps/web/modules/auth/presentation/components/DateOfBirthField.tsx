@@ -1,22 +1,17 @@
 import { DropdownSelect, FormFieldError } from '@maw/ui-lib';
 import { useMessages, useTranslations } from 'next-intl';
-import { FunctionComponent, useEffect, useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
+import { useFormContext } from 'react-hook-form';
 
-import { type CommonRegistrationFormFieldProps } from '@/features/auth';
-
-type DateOfBirthFieldProps = Pick<
-  CommonRegistrationFormFieldProps,
-  'errors' | 'register' | 'setValue'
->;
-
-const DateOfBirthField: FunctionComponent<DateOfBirthFieldProps> = ({
-  errors,
-  register,
-  setValue,
-}) => {
+export function DateOfBirthField() {
   const t = useTranslations();
   const messages = useMessages();
   const [parts, setParts] = useState({ year: '', month: '', day: '' });
+  const {
+    formState: { errors },
+    register,
+    setValue,
+  } = useFormContext();
 
   const dateOfBirthYear = useMemo(() => {
     const currentYear = new Date().getFullYear();
@@ -93,6 +88,4 @@ const DateOfBirthField: FunctionComponent<DateOfBirthFieldProps> = ({
       <FormFieldError error={errors.dateOfBirth} />
     </div>
   );
-};
-
-export default DateOfBirthField;
+}

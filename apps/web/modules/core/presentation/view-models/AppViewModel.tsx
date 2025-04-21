@@ -1,9 +1,14 @@
-import React, { createContext, PropsWithChildren } from 'react';
+'use client';
 
-export type LinkComponentType = JSXProxyProps<'a'>;
+import { createContext, PropsWithChildren, ReactElement } from 'react';
+
+export type LinkComponentType = PropsWithChildren<{
+  href: string;
+  prefetch?: boolean;
+}>;
 
 export interface AppViewModelContextType {
-  LinkComponent: LinkComponentType | null;
+  LinkComponent: (props: LinkComponentType) => ReactElement;
 }
 
 export const AppViewModelContext = createContext<

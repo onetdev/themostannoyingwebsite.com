@@ -1,9 +1,9 @@
 import { Metadata } from 'next';
 import { getTranslations } from 'next-intl/server';
 
-import { PasswordReminderPage } from './password-reminder-page';
-
 import { PageLayout } from '@/components/PageLayout';
+import { PasswordReminderPage } from '@/modules/auth';
+
 export { generateStaticParams } from '@/i18n/routing';
 
 export const revalidate = 1800;
