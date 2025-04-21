@@ -5,6 +5,7 @@ The goal is to separate the concerns of your application into different layers, 
 
 ## Layers
 
+```mermaid
 flowchart TD
     Domain["Domain Layer"]
     Application["Application Layer"]
@@ -14,6 +15,7 @@ flowchart TD
     Domain --> Application
     Application --> Presentation
     Application --> Infrastructure
+```
 
 ## Sample folder structure
 
