@@ -1,6 +1,12 @@
+'use client';
+
 import { FormFieldError, PasswordStrengthBar, TextInput } from '@maw/ui-lib';
 import { useTranslations } from 'next-intl';
 import { useFormContext } from 'react-hook-form';
+
+interface PasswordCreateFieldProps {
+  fieldName?: string;
+}
 
 const validate = (value: string, t: ReturnType<typeof useTranslations>) => {
   // Split up in this way to annoy the user the most
@@ -29,7 +35,9 @@ const validate = (value: string, t: ReturnType<typeof useTranslations>) => {
   return t('form.validation.error.passwordAlreadyTaken');
 };
 
-export function PasswordCreateField() {
+export function PasswordCreateField({
+  fieldName = 'password',
+}: PasswordCreateFieldProps) {
   const t = useTranslations();
   const {
     formState: { errors },
@@ -37,7 +45,7 @@ export function PasswordCreateField() {
     watch,
   } = useFormContext();
 
-  const password = watch('password');
+  const password = watch(fieldName);
 
   const passwordStrenghtText = {
     weak: t('form.validation.passwordStrength.weak'),
@@ -52,7 +60,7 @@ export function PasswordCreateField() {
         <TextInput
           type="password"
           className="w-full"
-          {...register('password', {
+          {...register(fieldName, {
             required: t('form.validation.error.required'),
             minLength: {
               value: 12,
@@ -67,7 +75,7 @@ export function PasswordCreateField() {
           text={passwordStrenghtText}
         />
       </label>
-      <FormFieldError error={errors.password} />
+      <FormFieldError error={errors[fieldName]} />
     </>
   );
 }

@@ -1,9 +1,17 @@
+'use client';
+
 import { DropdownSelect, FormFieldError } from '@maw/ui-lib';
 import { useMessages, useTranslations } from 'next-intl';
 import { useEffect, useMemo, useState } from 'react';
 import { useFormContext } from 'react-hook-form';
 
-export function DateOfBirthField() {
+interface DateOfBirthFieldProps {
+  fieldName?: string;
+}
+
+export function DateOfBirthField({
+  fieldName = 'dateOfBirth',
+}: DateOfBirthFieldProps) {
   const t = useTranslations();
   const messages = useMessages();
   const [parts, setParts] = useState({ year: '', month: '', day: '' });
@@ -81,11 +89,11 @@ export function DateOfBirthField() {
       </label>
       <input
         type="hidden"
-        {...register('dateOfBirth', {
+        {...register(fieldName, {
           required: t('form.validation.error.required'),
         })}
       />
-      <FormFieldError error={errors.dateOfBirth} />
+      <FormFieldError error={errors[fieldName]} />
     </div>
   );
 }

@@ -1,3 +1,5 @@
+'use client';
+
 import { Button, DropdownSelect, FormFieldError, TextInput } from '@maw/ui-lib';
 import { useTranslations } from 'next-intl';
 import {
@@ -13,7 +15,15 @@ import { useFormContext } from 'react-hook-form';
 
 import countryData from '@/root/public/assets/countries.json';
 
-export function PhoneNumberField() {
+interface PhoneNumberFieldProps {
+  fieldName?: string;
+  countryCodeFieldName?: string;
+}
+
+export function PhoneNumberField({
+  fieldName = 'phoneNumber',
+  countryCodeFieldName = 'phoneNumberCountry',
+}: PhoneNumberFieldProps) {
   const t = useTranslations();
   const {
     formState: { errors },
@@ -44,14 +54,14 @@ export function PhoneNumberField() {
     }
 
     const timer = setInterval(() => {
-      let newValue: number = getValues('phoneNumber') || 0;
+      let newValue: number = getValues(fieldName) || 0;
       if (phoneNumberUpdateDirection > 0) {
-        newValue = (getValues('phoneNumber') || 0) + 1;
+        newValue = (getValues(fieldName) || 0) + 1;
       } else if (phoneNumberUpdateDirection < 0) {
-        newValue = Math.max((getValues('phoneNumber') || 0) - 1, 1);
+        newValue = Math.max((getValues(fieldName) || 0) - 1, 1);
       }
 
-      setValue('phoneNumber', newValue, {
+      setValue(fieldName, newValue, {
         shouldValidate: false,
       });
     }, 50);
@@ -59,7 +69,7 @@ export function PhoneNumberField() {
     return () => {
       clearInterval(timer);
     };
-  }, [getValues, phoneNumberUpdateDirection, setValue]);
+  }, [fieldName, getValues, phoneNumberUpdateDirection, setValue]);
 
   const onStopEvent = useCallback(() => setPhoneNumberUpdateDirection(0), []);
   const preventLongTapSelection: EventListenerOrEventListenerObject =
@@ -118,7 +128,7 @@ export function PhoneNumberField() {
             placeholder=""
             className="w-1/4"
             values={phoneCountryOptions}
-            {...register('phoneNumberCountry', {
+            {...register(countryCodeFieldName, {
               required: t('form.validation.error.required'),
             })}
           />
@@ -137,7 +147,7 @@ export function PhoneNumberField() {
               type="number"
               disabled
               className="max-w-44 rounded-none border-x-0 select-none"
-              {...register('phoneNumber', {
+              {...register(fieldName, {
                 required: t('form.validation.error.required'),
               })}
             />
@@ -153,10 +163,10 @@ export function PhoneNumberField() {
           </div>
         </div>
       </label>
-      {errors.phoneNumberCountry ? (
-        <FormFieldError error={errors.phoneNumberCountry} />
+      {errors[countryCodeFieldName] ? (
+        <FormFieldError error={errors[countryCodeFieldName]} />
       ) : (
-        <FormFieldError error={errors.phoneNumber} />
+        <FormFieldError error={errors[fieldName]} />
       )}
     </div>
   );
