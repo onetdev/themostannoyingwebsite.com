@@ -19,9 +19,9 @@ documentation:
 storybook:
   - changed-files:
     - any-glob-to-any-file:
-      - apps/ui-docs/.storybook/**
       - ./**.stories.ts
       - ./**.stories.tsx
+      - ./apps/ui-docs/.storybook/**
 
 ci/cd:
   - changed-files:
@@ -37,10 +37,17 @@ content:
     - any-glob-to-any-file:
       - apps/web/public/**
       - assets/**
+      - packages/content-api/data/**
 
 ui:
   - changed-files:
     - any-glob-to-any-file:
+      - apps/web/modules/**/components/**.tsx
       - apps/web/src/components/**.tsx
-      - apps/web/src/features/**/components/**.tsx
-      - packages/ui/**
+      - apps/web/src/features/**/presentation/**.tsx
+      - packages/ui-lib/src/**
+
+feat/auth:
+  - changed-files:
+    - any-glob-to-any-file:
+      - apps/web/modules/**
