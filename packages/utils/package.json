@@ -26,6 +26,7 @@
     "@types/sanitize-html": "^2.15.0",
     "eslint": "catalog:",
     "jest": "catalog:",
+    "ts-jest": "catalog:",
     "typescript": "catalog:"
   }
 }
