@@ -60,12 +60,7 @@ export function PasswordReminderPage() {
           </label>
           <FormFieldError error={errors.email} />
         </div>
-        <CaptchaTitlePuzzleField
-          errors={errors}
-          register={register as unknown as UseFormRegister<CaptchaFormInputs>}
-          setValue={setValue as unknown as UseFormSetValue<CaptchaFormInputs>}
-          text={captchaText}
-        />
+        <CaptchaTitlePuzzleField text={captchaText} />
 
         <Button type="submit" className="mt-10" size="lg">
           {t('user.form.passwordReminder.callToAction')}
