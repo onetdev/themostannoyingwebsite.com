@@ -9,7 +9,7 @@ import {
   TextInput,
 } from '@maw/ui-lib';
 import { useTranslations } from 'next-intl';
-import { FormProvider, UseFormRegister } from 'react-hook-form';
+import { FormProvider } from 'react-hook-form';
 
 import {
   CountryField,
@@ -153,11 +153,7 @@ export function RegistrationPage() {
             </label>
             <FormFieldError error={errors.consentPrivacyPolicy} />
           </div>
-          <CaptchaEmojiField
-            errors={errors}
-            register={register as unknown as UseFormRegister<CaptchaFormInputs>}
-            text={captchaText}
-          />
+          <CaptchaEmojiField text={captchaText} />
 
           <Button type="submit" className="mt-10" size="lg">
             {t('user.form.registration.callToAction')}

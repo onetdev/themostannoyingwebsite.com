@@ -8,11 +8,7 @@ import {
   TextInput,
 } from '@maw/ui-lib';
 import { useTranslations } from 'next-intl';
-import {
-  FormProvider,
-  UseFormRegister,
-  UseFormSetValue,
-} from 'react-hook-form';
+import { FormProvider } from 'react-hook-form';
 
 import { usePasswordReminderForm } from '../forms';
 
@@ -26,7 +22,6 @@ export function PasswordReminderPage() {
     handleSubmit,
     onSubmit,
     register,
-    setValue,
     formState: { errors },
   } = methods;
 
