@@ -44,7 +44,7 @@ export function GenderField({ fieldName = 'gender' }: GenderFieldProps) {
           {...register(fieldName)}
         />
       </label>
-      <FormFieldError error={errors['fieldName']} />
+      <FormFieldError error={errors[fieldName]} />
     </>
   );
 }
