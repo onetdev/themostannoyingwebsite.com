@@ -63,7 +63,7 @@ export function DateOfBirthField({
   }, [parts, setValue]);
 
   return (
-    <div>
+    <>
       <label>
         <h5 className="mb-1">{t('user.field.dateOfBirth')}</h5>
         <div className="flex gap-3">
@@ -94,6 +94,6 @@ export function DateOfBirthField({
         })}
       />
       <FormFieldError error={errors[fieldName]} />
-    </div>
+    </>
   );
 }

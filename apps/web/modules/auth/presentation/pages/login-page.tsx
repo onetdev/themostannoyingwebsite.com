@@ -5,16 +5,17 @@ import {
   CaptchaEmoji,
   Checkbox,
   FormFieldError,
+  LoaderDots,
   PageHeadline,
   TextInput,
 } from '@maw/ui-lib';
 import { useTranslations } from 'next-intl';
 import { FormProvider } from 'react-hook-form';
 
+import { EmailField } from '../components/EmailField';
 import { useLoginForm } from '../forms/useLoginForm';
 
 import { useAppViewModel } from '@/modules/core';
-import { EMAIL_PATTERN } from '@/utils/validator';
 
 export function LoginPage() {
   const t = useTranslations();
@@ -24,8 +25,11 @@ export function LoginPage() {
     handleSubmit,
     onSubmit,
     register,
-    formState: { errors },
+    formState: { errors, isSubmitting },
   } = form;
+
+  const isCtaLoading = isSubmitting;
+  const isCtaDisabled = isSubmitting;
 
   return (
     <FormProvider {...form}>
@@ -35,21 +39,7 @@ export function LoginPage() {
         method="post"
         onSubmit={handleSubmit(onSubmit)}>
         <div>
-          <label>
-            <h4 className="mb-1">{t('user.field.email')}</h4>
-            <TextInput
-              type="email"
-              className="w-full"
-              {...register('email', {
-                required: t('form.validation.error.required'),
-                pattern: {
-                  value: EMAIL_PATTERN,
-                  message: t('form.validation.error.emailInvalid'),
-                },
-              })}
-            />
-          </label>
-          <FormFieldError error={errors.email} />
+          <EmailField />
         </div>
         <div>
           <label>
@@ -95,8 +85,14 @@ export function LoginPage() {
           <FormFieldError error={errors.captcha} />
         </div>
 
-        <Button type="submit" className="mt-10" size="lg">
-          {t('user.form.login.callToAction')}
+        <Button
+          type="submit"
+          className="mt-10"
+          size="lg"
+          variant="primary"
+          disabled={isCtaDisabled}>
+          {isCtaLoading && <LoaderDots />}
+          {!isCtaLoading && t('user.form.login.callToAction')}
         </Button>
         <div className="flex justify-between">
           <LinkComponent href="/user/password-reminder" prefetch={false}>

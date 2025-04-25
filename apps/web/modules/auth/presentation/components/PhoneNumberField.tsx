@@ -120,7 +120,7 @@ export function PhoneNumberField({
   };
 
   return (
-    <div>
+    <>
       <label>
         <h5 className="mb-1">{t('user.field.phoneNumber')}</h5>
         <div className="flex gap-3">
@@ -168,6 +168,6 @@ export function PhoneNumberField({
       ) : (
         <FormFieldError error={errors[fieldName]} />
       )}
-    </div>
+    </>
   );
 }

@@ -30,7 +30,7 @@ export function CountryField({ fieldName = 'countryCode' }: CountryFieldProps) {
   );
 
   return (
-    <div>
+    <>
       <label>
         <h5 className="mb-1">{t('user.field.countryCode')}</h5>
         <DropdownSelect
@@ -43,6 +43,6 @@ export function CountryField({ fieldName = 'countryCode' }: CountryFieldProps) {
         />
       </label>
       <FormFieldError error={errors[fieldName]} />
-    </div>
+    </>
   );
 }
