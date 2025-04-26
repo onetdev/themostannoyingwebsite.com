@@ -49,7 +49,7 @@ const useSendNotification = ({
         tag: 'push-notification',
       });
     },
-    [autoRequest],
+    [autoRequest, logger],
   );
 
   return { send };

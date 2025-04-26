@@ -2,7 +2,7 @@
 
 import {
   Button,
-  CaptchaEmoji,
+  CaptchaEmojiField,
   Checkbox,
   FormFieldError,
   LoaderDots,
@@ -37,6 +37,13 @@ export function LoginPage() {
   const isCtaLoading = isSubmitting;
   const isCtaDisabled = isSubmitting;
 
+  const captchaFieldText = {
+    label: t('form.captcha.field'),
+    hint: t('form.captcha.captchaEmojiHint'),
+    required: t('form.validation.error.required'),
+    invalid: t('form.validation.error.captchaInvalid'),
+  };
+
   return (
     <FormProvider {...form}>
       <PageHeadline>{t('navigation.login')}</PageHeadline>
@@ -69,27 +76,7 @@ export function LoginPage() {
           <FormFieldError error={errors.remember} />
         </div>
         <div className="flex flex-col">
-          <label>
-            <h4 className="mb-1">{t('form.captcha.field')}</h4>
-            <small>{t('form.captcha.captchaEmojiHint')}</small>
-            <CaptchaEmoji
-              className="border-on-background my-3 rounded-md border"
-              width={300}
-              height={100}
-            />
-            <TextInput
-              type="text"
-              className="w-[300px]"
-              {...register('captcha', {
-                required: t('form.validation.error.required'),
-                pattern: {
-                  value: /^[XyZ123]{444}$/,
-                  message: t('form.validation.error.captchaInvalid'),
-                },
-              })}
-            />
-          </label>
-          <FormFieldError error={errors.captcha} />
+          <CaptchaEmojiField text={captchaFieldText} />
         </div>
 
         <Button
@@ -106,7 +93,7 @@ export function LoginPage() {
             {t('user.common.forgotPassword')}
           </Link>
           <Link href={pathFor('user.signup')} prefetch={false}>
-            {t('user.common.registerAccount')}
+            {t('user.common.lookingForSignup')}
           </Link>
         </div>
       </form>

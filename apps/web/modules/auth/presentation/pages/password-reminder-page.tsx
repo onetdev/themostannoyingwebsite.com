@@ -68,7 +68,7 @@ export function PasswordReminderPage() {
             {t('user.common.Login')}
           </Link>
           <Link href={pathFor('user.signup')} prefetch={false}>
-            {t('user.common.register')}
+            {t('user.common.signup')}
           </Link>
         </div>
       </form>

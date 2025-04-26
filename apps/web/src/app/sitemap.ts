@@ -60,7 +60,7 @@ async function sitemap(): Promise<MetadataRoute.Sitemap> {
     commonPageMeta('virgin'),
     commonPageMeta('user/login'),
     commonPageMeta('user/password-reminder'),
-    commonPageMeta('user/registration'),
+    commonPageMeta('user/signup'),
     ...articles,
   ];
 }

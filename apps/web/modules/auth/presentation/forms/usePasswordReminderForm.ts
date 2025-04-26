@@ -21,7 +21,7 @@ export function usePasswordReminderForm({
       await passwordReminder(FakeAuthRepository, data);
       onSuccess?.();
     } catch (err: unknown) {
-      logger.warn(err, 'Registration failed');
+      logger.warn(err, 'Password reminder failed');
       methods.setError('root', { message: (err as Error).message });
     }
   };

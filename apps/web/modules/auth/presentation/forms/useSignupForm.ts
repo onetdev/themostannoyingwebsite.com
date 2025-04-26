@@ -6,18 +6,18 @@ import { useForm } from 'react-hook-form';
 import { useAuthError } from './useAuthError';
 import { UserType } from '../../domain';
 import { FakeAuthRepository } from '../../infrastructure';
-import { register, RegisterDto } from '../../usecases';
+import { register, RegisterUserDto } from '../../usecases';
 
-interface RegistrationFormProps {
+interface SignupFormProps {
   onSuccess?: (user: UserType) => void;
 }
 
-export function useRegistrationForm({ onSuccess }: RegistrationFormProps) {
-  const logger = useLogger().child({ hook: 'useRegistrationForm' });
-  const methods = useForm<RegisterDto>();
+export function useSignupForm({ onSuccess }: SignupFormProps) {
+  const logger = useLogger().child({ hook: 'useSignupForm' });
+  const methods = useForm<RegisterUserDto>();
   const { translate } = useAuthError();
 
-  const onSubmit = async (data: RegisterDto) => {
+  const onSubmit = async (data: RegisterUserDto) => {
     try {
       const result = await register(FakeAuthRepository, data);
       if (result.success && result.user) {
@@ -28,7 +28,7 @@ export function useRegistrationForm({ onSuccess }: RegistrationFormProps) {
         });
       }
     } catch (err: unknown) {
-      logger.warn(err, 'Registration failed');
+      logger.warn(err, 'Signup failed');
       methods.setError('root', { message: (err as Error).message });
     }
   };

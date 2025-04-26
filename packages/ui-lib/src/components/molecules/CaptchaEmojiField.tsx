@@ -17,7 +17,7 @@ export type CaptchaEmojiFieldProps = {
 };
 
 export function CaptchaEmojiField({
-  fieldName = 'captch',
+  fieldName = 'captcha',
   text,
 }: CaptchaEmojiFieldProps) {
   const {

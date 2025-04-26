@@ -32,7 +32,7 @@ The main idea is to gather the most annoying features of modern websites in one 
   - [x] Fake search page that:
     - [x] Silly recommended searches
     - [x] Doesn’t actually work or return any results
-  - [x] Fake registration:
+  - [x] Fake signup:
     - [x] Difficult age selector
     - [x] Password validator that shows only one error and has absurdly complex rules that contradict each other
   - [x] Fake login with an unsolvable captcha

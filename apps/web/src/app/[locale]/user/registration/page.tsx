@@ -2,7 +2,7 @@ import { Metadata } from 'next';
 import { getTranslations } from 'next-intl/server';
 
 import { PageLayout } from '@/components/PageLayout';
-import { RegistrationPage } from '@/modules/auth';
+import { SignupPage } from '@/modules/auth';
 
 export { generateStaticParams } from '@/i18n/routing';
 
@@ -14,7 +14,7 @@ export async function generateMetadata({
   const { locale } = await params;
   const t = await getTranslations({
     locale,
-    namespace: 'metadata.userRegistration',
+    namespace: 'metadata.userSignup',
   });
 
   return {
@@ -29,7 +29,7 @@ export default function Page() {
       activeItem="login"
       className="mx-auto max-w-[900px] py-0 md:py-14"
       role="main">
-      <RegistrationPage />
+      <SignupPage />
     </PageLayout>
   );
 }

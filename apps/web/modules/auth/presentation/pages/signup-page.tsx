@@ -18,15 +18,15 @@ import {
   PasswordCreateField,
   PhoneNumberField,
 } from '../components';
-import { useRegistrationForm } from '../forms';
+import { useSignupForm } from '../forms';
 
 import { EMAIL_PATTERN, useNavigationViewModel } from '@/modules/shared';
 
-export function RegistrationPage() {
+export function SignupPage() {
   const t = useTranslations();
   const { LinkComponent: Link, pathFor } = useNavigationViewModel();
   const { navigateReplace } = useNavigationViewModel();
-  const methods = useRegistrationForm({
+  const methods = useSignupForm({
     onSuccess: () => navigateReplace('user.profile'),
   });
   const {
@@ -46,7 +46,7 @@ export function RegistrationPage() {
 
   return (
     <FormProvider {...methods}>
-      <PageHeadline>{t('navigation.register')}</PageHeadline>
+      <PageHeadline>{t('navigation.signup')}</PageHeadline>
       <form
         className="flex flex-col gap-3 lg:flex-row lg:gap-10"
         method="post"

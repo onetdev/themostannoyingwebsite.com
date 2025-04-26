@@ -8,7 +8,7 @@ import { AppLink } from '@/components/AppLink';
 import { useRouter } from '@/i18n/navigation';
 import ExperienceProvider from '@/providers/ExperienceProvider';
 import { RootPortalProvider } from '@/providers/RootPortalProvider';
-import { AppCoreViewModel, NavigationParams } from '@/root/modules/shared';
+import { NavigationParams, NavigationViewModel } from '@/root/modules/shared';
 import { RouteAliasType } from '@/root/modules/shared/domain';
 
 const routeAliasToPathMap: Record<RouteAliasType, string> = {
@@ -23,10 +23,10 @@ const routeAliasToPathMap: Record<RouteAliasType, string> = {
   'privacy-policy': '/privacy-policy',
   search: '/search',
   settings: '/settings',
-  'user.login': '/login',
-  'user.password-reminder': '/password-reminder',
-  'user.profile': '/profile',
-  'user.signup': '/signup',
+  'user.login': '/user/login',
+  'user.password-reminder': '/user/password-reminder',
+  'user.profile': '/user/profile',
+  'user.signup': '/user/signup',
   virgin: '/virgin',
 };
 
@@ -47,7 +47,7 @@ const RootProviderContainer: FunctionComponent<PropsWithChildren> = ({
   return (
     <RootPortalProvider>
       <ThemeProvider defaultTheme="dark" enableColorScheme enableSystem>
-        <AppCoreViewModel
+        <NavigationViewModel
           value={{
             LinkComponent: AppLink,
             navigateBack: navigation.back,
@@ -61,7 +61,7 @@ const RootProviderContainer: FunctionComponent<PropsWithChildren> = ({
             unsafeNavigateReplace: navigation.replace,
           }}>
           <ExperienceProvider>{children}</ExperienceProvider>
-        </AppCoreViewModel>
+        </NavigationViewModel>
       </ThemeProvider>
     </RootPortalProvider>
   );

@@ -28,7 +28,7 @@ export const NavigationViewModelContext = createContext<
   NavigationViewModelContextType | undefined
 >(undefined);
 
-export function AppCoreViewModel({
+export function NavigationViewModel({
   children,
   value,
 }: PropsWithChildren<{ value: NavigationViewModelContextType }>) {
