@@ -9,6 +9,10 @@ export type LinkComponentType = PropsWithChildren<{
 
 export interface AppViewModelContextType {
   LinkComponent: (props: LinkComponentType) => ReactElement;
+  navigatePush: (url: string) => void;
+  navigateReplace: (url: string) => void;
+  navigateBack: () => void;
+  navigateForward: () => void;
 }
 
 export const AppViewModelContext = createContext<
