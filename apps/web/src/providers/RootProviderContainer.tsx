@@ -6,10 +6,13 @@ import { FunctionComponent, PropsWithChildren } from 'react';
 
 import { AppLink } from '@/components/AppLink';
 import { useRouter } from '@/i18n/navigation';
+import {
+  NavigationParams,
+  NavigationViewModel,
+  RouteAliasType,
+} from '@/modules/shared';
 import ExperienceProvider from '@/providers/ExperienceProvider';
 import { RootPortalProvider } from '@/providers/RootPortalProvider';
-import { NavigationParams, NavigationViewModel } from '@/root/modules/shared';
-import { RouteAliasType } from '@/root/modules/shared/domain';
 
 const routeAliasToPathMap: Record<RouteAliasType, string> = {
   about: '/about',

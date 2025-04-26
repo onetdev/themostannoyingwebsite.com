@@ -50,4 +50,4 @@ ui:
 feat/auth:
   - changed-files:
     - any-glob-to-any-file:
-      - apps/web/modules/**
+      - apps/web/modules/auth/**
