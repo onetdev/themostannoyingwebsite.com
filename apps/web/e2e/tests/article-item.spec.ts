@@ -8,7 +8,7 @@ test(
 
     await page.getByTestId('cover-article').locator('a').click();
 
-    await expect(page).toHaveURL(/\/en\/articles\/.*/);
+    await expect(page).toHaveURL(/\/en\/articles\/.*/, { timeout: 2000 });
 
     await page.getByTestId('article-item').isVisible();
     await page.getByTestId('article-item-content').isVisible();

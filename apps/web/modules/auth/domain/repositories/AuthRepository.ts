@@ -1,6 +1,6 @@
 import { UserType } from '../entities/User';
 import { UserCreationType } from '../entities/UserCreation';
-import { AuthErrorType } from '../value-object/AuthError';
+import { AuthErrorType } from '../../usecases/AuthError';
 
 export interface BaseAuthMethodResponse {
   errorCode?: AuthErrorType;

@@ -81,6 +81,7 @@ export function LoginPage() {
         </div>
 
         <Button
+          role="button"
           type="submit"
           className="mt-10"
           size="lg"
