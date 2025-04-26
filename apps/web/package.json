@@ -40,6 +40,7 @@
     "next": "catalog:",
     "next-intl": "^4.0.2",
     "next-themes": "^0.4.6",
+    "path-to-regexp": "^8.2.0",
     "react": "catalog:",
     "react-confetti": "^6.4.0",
     "react-dom": "catalog:",
@@ -51,6 +52,7 @@
     "remark-gfm": "^4.0.1",
     "rtl-detect": "^1.1.2",
     "sanitize-html": "^2.15.0",
+    "zod": "catalog:",
     "zustand": "^5.0.3"
   },
   "peerDependencies": {

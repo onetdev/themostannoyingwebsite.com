@@ -1,13 +1,12 @@
-import { FunctionComponent } from 'react';
-import { FieldErrors, UseFormRegister, UseFormSetValue } from 'react-hook-form';
+'use client';
+
+import { useFormContext } from 'react-hook-form';
 
 import { CaptchaTilePuzzle } from '../atoms/CaptchaTilePuzzle';
 import { FormFieldError } from '../atoms/FormFieldError';
 
 export type CaptchaTitlePuzzleFieldProps = {
-  errors: FieldErrors<CaptchaFormInputs>;
-  register: UseFormRegister<CaptchaFormInputs>;
-  setValue: UseFormSetValue<CaptchaFormInputs>;
+  fieldName?: string;
   text: {
     label: string;
     hint: string;
@@ -15,9 +14,16 @@ export type CaptchaTitlePuzzleFieldProps = {
   };
 };
 
-export const CaptchaTitlePuzzleField: FunctionComponent<
-  CaptchaTitlePuzzleFieldProps
-> = ({ register, errors, setValue, text }) => {
+export function CaptchaTitlePuzzleField({
+  fieldName = 'captcha',
+  text,
+}: CaptchaTitlePuzzleFieldProps) {
+  const {
+    register,
+    formState: { errors },
+    setValue,
+  } = useFormContext();
+
   return (
     <div className="flex flex-col">
       <h4 className="mb-1">{text.label}</h4>
@@ -27,15 +33,15 @@ export const CaptchaTitlePuzzleField: FunctionComponent<
         cols={6}
         rows={4}
         imageSrc="/assets/images/captcha-tile-abstract.jpg"
-        onResolved={() => setValue('captcha', 'true')}
+        onResolved={() => setValue(fieldName, 'true')}
       />
       <input
         type="hidden"
-        {...register('captcha', {
+        {...register(fieldName, {
           required: text.invalid,
         })}
       />
-      <FormFieldError error={errors.captcha} />
+      <FormFieldError error={errors[fieldName]} />
     </div>
   );
-};
+}

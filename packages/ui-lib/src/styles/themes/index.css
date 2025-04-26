@@ -37,7 +37,6 @@
   --color-hr-secondary: var(--theme-color-hr-secondary);
   --color-hr-tertiary: var(--theme-color-hr-tertiary);
   --background-image-bottom-fadeout: linear-gradient(0deg, var(--color-surface) 60%, transparent 100%);
-  --background-image-cover-placeholder: url('/assets/cover-placeholder.svg');
   --background-image-radial-primary: radial-gradient(transparent, var(--color-primary));
   --min-width-clamp-400: min(400px,100%);
   --max-width-screen-dimension-min: min(100vw, 100vh);
@@ -48,7 +47,6 @@
   --padding-9per16: 177.78%;
   --transition-property-visibility-opacity: visibility, opacity;
   --translate-screen-h-half: 50vh;
-  --animate-dot-dot-dot: dot-dot-dot 2s infinite;
   --animate-highlight: highlight 1s infinite;
   --animate-flashing-invert-half: flashing-invert-half 500ms infinite;
   --animate-wiggle-15deg: wiggle-15deg 0.2s linear infinite;
@@ -58,13 +56,6 @@
   --animate-gift-callout: gift-callout 5s infinite;
   --animate-hue-full-rotate: hue-full-rotate 2s infinite;
 
-  @keyframes dot-dot-dot {
-    0% { content: '.' }
-    25% { content: '..' }
-    50% { content: '...' }
-    75% { content: '' }
-    100% { content: '.' }
-  }
   @keyframes highlight {
     from { background: var(--color-error) }
     to { background: var(--color-error) }

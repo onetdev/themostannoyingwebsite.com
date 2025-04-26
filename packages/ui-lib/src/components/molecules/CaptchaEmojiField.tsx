@@ -1,13 +1,13 @@
-import { FunctionComponent } from 'react';
-import { FieldErrors, UseFormRegister } from 'react-hook-form';
+'use client';
+
+import { useFormContext } from 'react-hook-form';
 
 import { CaptchaEmoji } from '../atoms/CaptchaEmoji';
 import { FormFieldError } from '../atoms/FormFieldError';
 import { TextInput } from '../atoms/TextInput';
 
 export type CaptchaEmojiFieldProps = {
-  errors: FieldErrors<CaptchaFormInputs>;
-  register: UseFormRegister<CaptchaFormInputs>;
+  fieldName?: string;
   text: {
     label: string;
     hint: string;
@@ -16,11 +16,15 @@ export type CaptchaEmojiFieldProps = {
   };
 };
 
-export const CaptchaEmojiField: FunctionComponent<CaptchaEmojiFieldProps> = ({
-  register,
-  errors,
+export function CaptchaEmojiField({
+  fieldName = 'captcha',
   text,
-}) => {
+}: CaptchaEmojiFieldProps) {
+  const {
+    register,
+    formState: { errors },
+  } = useFormContext();
+
   return (
     <div className="flex flex-col">
       <label>
@@ -34,7 +38,7 @@ export const CaptchaEmojiField: FunctionComponent<CaptchaEmojiFieldProps> = ({
         <TextInput
           type="text"
           className="w-[300px]"
-          {...register('captcha', {
+          {...register(fieldName, {
             required: text.required,
             pattern: {
               value: /^[XyZ123]{444}$/,
@@ -43,7 +47,7 @@ export const CaptchaEmojiField: FunctionComponent<CaptchaEmojiFieldProps> = ({
           })}
         />
       </label>
-      <FormFieldError error={errors.captcha} />
+      <FormFieldError error={errors[fieldName]} />
     </div>
   );
-};
+}

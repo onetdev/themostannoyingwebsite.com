@@ -21,8 +21,8 @@ const MandatoryExperienceSettings: FunctionComponent = () => {
         <FormCheckbox name="impossible_login" checked={true} disabled />
       </LabeledChild>
       <LabeledChild
-        label={t('settings.mandatoryExperienceFlags.impossibleRegistration')}>
-        <FormCheckbox name="impossible_registration" checked={true} disabled />
+        label={t('settings.mandatoryExperienceFlags.impossibleSignup')}>
+        <FormCheckbox name="impossible_signup" checked={true} disabled />
       </LabeledChild>
       <LabeledChild
         label={t(

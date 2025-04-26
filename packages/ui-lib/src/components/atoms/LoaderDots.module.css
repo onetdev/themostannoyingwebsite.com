@@ -1,0 +1,22 @@
+@reference "tailwindcss";
+@reference "../../styles/global.css";
+
+.loader-dots {
+  --loader-dots-bg: no-repeat radial-gradient(circle closest-side, currentColor 90%, transparent);
+
+  height: 1em;
+  aspect-ratio: 2;
+  background:
+    var(--loader-dots-bg) 0%   50%,
+    var(--loader-dots-bg) 50%  50%,
+    var(--loader-dots-bg) 100% 50%;
+  background-size: calc(100%/3) 50%;
+  animation: loader-dots-animation 1s infinite linear;
+}
+
+@keyframes loader-dots-animation {
+    20% { background-position: 0%   0%, 50%  50%,100%  50% }
+    40% { background-position: 0% 100%, 50%   0%,100%  50% }
+    60% { background-position: 0%  50%, 50% 100%,100%   0% }
+    80% { background-position: 0%  50%, 50%  50%,100% 100% }
+}
