@@ -5,6 +5,7 @@ import {
   CaptchaTitlePuzzleField,
   FormError,
   FormFieldError,
+  LoaderDots,
   PageHeadline,
   TextInput,
 } from '@maw/ui-lib';
@@ -25,8 +26,11 @@ export function PasswordReminderPage() {
     handleSubmit,
     onSubmit,
     register,
-    formState: { errors },
+    formState: { errors, isSubmitting },
   } = methods;
+
+  const isCtaLoading = isSubmitting;
+  const isCtaDisabled = isSubmitting;
 
   const captchaText = {
     label: t('form.captcha.field'),
@@ -61,8 +65,13 @@ export function PasswordReminderPage() {
         </div>
         <CaptchaTitlePuzzleField text={captchaText} />
 
-        <Button type="submit" className="mt-10" size="lg">
-          {t('user.form.passwordReminder.callToAction')}
+        <Button
+          type="submit"
+          className="mt-10"
+          size="lg"
+          disabled={isCtaDisabled}>
+          {isCtaLoading && <LoaderDots />}
+          {!isCtaLoading && t('user.form.passwordReminder.callToAction')}
         </Button>
         <div className="flex justify-between">
           <Link href={pathFor('user.login')} prefetch={false}>
