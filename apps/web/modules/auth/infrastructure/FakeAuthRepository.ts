@@ -4,7 +4,7 @@ export const FakeAuthRepository: AuthRepository = {
   async login() {
     return new Promise((resolve) => {
       setTimeout(() => {
-        resolve({ success: false });
+        resolve({ success: false, errorCode: 'UNKNOWN_ERROR' });
       }, 2000);
     });
   },
@@ -12,7 +12,7 @@ export const FakeAuthRepository: AuthRepository = {
   async register() {
     return new Promise((resolve) => {
       setTimeout(() => {
-        resolve({ success: false });
+        resolve({ success: false, errorCode: 'UNKNOWN_ERROR' });
       }, 2000);
     });
   },

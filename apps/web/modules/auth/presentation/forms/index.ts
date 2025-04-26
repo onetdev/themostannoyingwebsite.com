@@ -1,3 +1,3 @@
 export * from './useLoginForm';
-export * from './usePasswordReminderFrom';
+export * from './usePasswordReminderForm';
 export * from './useRegistrationForm';

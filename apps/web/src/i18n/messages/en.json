@@ -162,6 +162,8 @@
     },
     "validation": {
       "error": {
+        "unknownError": "An unknown error occurred. Please try again later.",
+        "impossiblePath": "It is impossible to get here, there must be an error. Feel free to try again.",
         "required": "This field is required.",
         "minLength": "Minimum length is {count} characters",
         "maxLength": "Maximum length is {count} characters",
