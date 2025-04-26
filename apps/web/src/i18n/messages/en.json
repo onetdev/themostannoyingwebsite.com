@@ -88,6 +88,10 @@
       "title": "Registration",
       "description": "Join our community today! Register here to unlock a world of exclusive content and personalized experiences."
     },
+    "userProfile": {
+      "title": "Profile",
+      "description": "Manage your account and preferences here. Update your profile information and settings to make it truly yours."
+    },
     "virgin": {
       "title": "Disable all experiences",
       "description": "Looking for a no-frills experience? Disable all personalized features here and enjoy a streamlined, distraction-free version of our site."
