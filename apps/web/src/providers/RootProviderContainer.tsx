@@ -6,10 +6,10 @@ import { FunctionComponent, PropsWithChildren } from 'react';
 
 import { AppLink } from '@/components/AppLink';
 import { useRouter } from '@/i18n/navigation';
-import { AppCoreViewModel, NavigationParams } from '@/modules/core';
-import { RouteAliasType } from '@/modules/core/domain';
 import ExperienceProvider from '@/providers/ExperienceProvider';
 import { RootPortalProvider } from '@/providers/RootPortalProvider';
+import { AppCoreViewModel, NavigationParams } from '@/root/modules/shared';
+import { RouteAliasType } from '@/root/modules/shared/domain';
 
 const routeAliasToPathMap: Record<RouteAliasType, string> = {
   about: '/about',
@@ -52,9 +52,13 @@ const RootProviderContainer: FunctionComponent<PropsWithChildren> = ({
             LinkComponent: AppLink,
             navigateBack: navigation.back,
             navigateForward: navigation.forward,
-            navigatePush: navigation.push,
-            navigateReplace: navigation.replace,
+            navigatePush: (param: NavigationParams) =>
+              navigation.push(resolvePathForRouteAlias(param)),
+            navigateReplace: (param: NavigationParams) =>
+              navigation.replace(resolvePathForRouteAlias(param)),
             pathFor: resolvePathForRouteAlias,
+            unsafeNavigatePush: navigation.push,
+            unsafeNavigateReplace: navigation.replace,
           }}>
           <ExperienceProvider>{children}</ExperienceProvider>
         </AppCoreViewModel>

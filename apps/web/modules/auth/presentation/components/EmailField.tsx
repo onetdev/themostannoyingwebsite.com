@@ -2,7 +2,7 @@ import { FormFieldError, TextInput } from '@maw/ui-lib';
 import { useTranslations } from 'next-intl';
 import { useFormContext } from 'react-hook-form';
 
-import { EMAIL_PATTERN } from '@/utils/validator';
+import { EMAIL_PATTERN } from '@/modules/shared';
 
 interface EmailFieldProps {
   fieldName?: string;

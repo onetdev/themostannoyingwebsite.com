@@ -12,12 +12,14 @@ import { FormProvider } from 'react-hook-form';
 
 import { usePasswordReminderForm } from '../forms';
 
-import { Link } from '@/i18n/navigation';
-import { EMAIL_PATTERN } from '@/utils/validator';
+import { EMAIL_PATTERN, useNavigationViewModel } from '@/modules/shared';
 
 export function PasswordReminderPage() {
   const t = useTranslations();
-  const methods = usePasswordReminderForm();
+  const { LinkComponent: Link, pathFor } = useNavigationViewModel();
+  const methods = usePasswordReminderForm({
+    onSuccess: () => {},
+  });
   const {
     handleSubmit,
     onSubmit,
@@ -38,6 +40,7 @@ export function PasswordReminderPage() {
         className="flex flex-col gap-5"
         method="post"
         onSubmit={handleSubmit(onSubmit)}>
+        {errors.root?.message}
         <div>
           <label>
             <h4 className="mb-1">{t('user.field.email')}</h4>
@@ -61,10 +64,10 @@ export function PasswordReminderPage() {
           {t('user.form.passwordReminder.callToAction')}
         </Button>
         <div className="flex justify-between">
-          <Link href="/user/login" passHref prefetch={false}>
+          <Link href={pathFor('user.login')} prefetch={false}>
             {t('user.common.Login')}
           </Link>
-          <Link href="/user/registration" passHref prefetch={false}>
+          <Link href={pathFor('user.signup')} prefetch={false}>
             {t('user.common.register')}
           </Link>
         </div>

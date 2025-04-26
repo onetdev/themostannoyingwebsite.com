@@ -20,12 +20,15 @@ import {
 } from '../components';
 import { useRegistrationForm } from '../forms';
 
-import { Link } from '@/i18n/navigation';
-import { EMAIL_PATTERN } from '@/utils/validator';
+import { EMAIL_PATTERN, useNavigationViewModel } from '@/modules/shared';
 
 export function RegistrationPage() {
   const t = useTranslations();
-  const methods = useRegistrationForm();
+  const { LinkComponent: Link, pathFor } = useNavigationViewModel();
+  const { navigateReplace } = useNavigationViewModel();
+  const methods = useRegistrationForm({
+    onSuccess: () => navigateReplace('user.profile'),
+  });
   const {
     formState: { errors },
     getValues,
@@ -48,6 +51,7 @@ export function RegistrationPage() {
         className="flex flex-col gap-3 lg:flex-row lg:gap-10"
         method="post"
         onSubmit={handleSubmit(onSubmit)}>
+        {errors.root?.message}
         <div className="flex flex-col gap-5 lg:w-1/2">
           <div className="flex flex-row gap-5">
             <div className="grow">
@@ -159,10 +163,10 @@ export function RegistrationPage() {
             {t('user.form.registration.callToAction')}
           </Button>
           <div className="flex justify-between">
-            <Link href="/user/password-reminder" passHref prefetch={false}>
+            <Link href={pathFor('user.password-reminder')} prefetch={false}>
               {t('user.common.forgotPassword')}
             </Link>
-            <Link href="/user/login" passHref prefetch={false}>
+            <Link href={pathFor('user.login')} prefetch={false}>
               {t('user.common.Login')}
             </Link>
           </div>

@@ -15,12 +15,18 @@ import { FormProvider } from 'react-hook-form';
 import { EmailField } from '../components/EmailField';
 import { useLoginForm } from '../forms/useLoginForm';
 
-import { useAppViewModel } from '@/modules/core';
+import { useNavigationViewModel } from '@/modules/shared';
 
 export function LoginPage() {
   const t = useTranslations();
-  const { LinkComponent } = useAppViewModel();
-  const form = useLoginForm();
+  const {
+    LinkComponent: Link,
+    navigateReplace,
+    pathFor,
+  } = useNavigationViewModel();
+  const form = useLoginForm({
+    onSuccess: () => navigateReplace('user.profile'),
+  });
   const {
     handleSubmit,
     onSubmit,
@@ -38,6 +44,7 @@ export function LoginPage() {
         className="flex flex-col gap-5"
         method="post"
         onSubmit={handleSubmit(onSubmit)}>
+        {errors.root?.message}
         <div>
           <EmailField />
         </div>
@@ -95,12 +102,12 @@ export function LoginPage() {
           {!isCtaLoading && t('user.form.login.callToAction')}
         </Button>
         <div className="flex justify-between">
-          <LinkComponent href="/user/password-reminder" prefetch={false}>
+          <Link href={pathFor('user.password-reminder')} prefetch={false}>
             {t('user.common.forgotPassword')}
-          </LinkComponent>
-          <LinkComponent href="/user/registration" prefetch={false}>
+          </Link>
+          <Link href={pathFor('user.signup')} prefetch={false}>
             {t('user.common.registerAccount')}
-          </LinkComponent>
+          </Link>
         </div>
       </form>
     </FormProvider>

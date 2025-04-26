@@ -13,26 +13,28 @@ export type NavigationParams =
   | Exclude<RouteAliasType, 'article.single'>
   | { alias: 'article.single'; params: { slug: string } };
 
-export interface AppViewModelContextType {
+export interface NavigationViewModelContextType {
   LinkComponent: (props: LinkComponentType) => ReactElement;
   navigateBack: () => void;
   navigateForward: () => void;
-  navigatePush: (url: string) => void;
-  navigateReplace: (url: string) => void;
+  navigatePush: (param: NavigationParams) => void;
+  navigateReplace: (param: NavigationParams) => void;
   pathFor: (param: NavigationParams) => string;
+  unsafeNavigatePush: (url: string) => void;
+  unsafeNavigateReplace: (url: string) => void;
 }
 
-export const AppViewModelContext = createContext<
-  AppViewModelContextType | undefined
+export const NavigationViewModelContext = createContext<
+  NavigationViewModelContextType | undefined
 >(undefined);
 
 export function AppCoreViewModel({
   children,
   value,
-}: PropsWithChildren<{ value: AppViewModelContextType }>) {
+}: PropsWithChildren<{ value: NavigationViewModelContextType }>) {
   return (
-    <AppViewModelContext.Provider value={value}>
+    <NavigationViewModelContext.Provider value={value}>
       {children}
-    </AppViewModelContext.Provider>
+    </NavigationViewModelContext.Provider>
   );
 }
