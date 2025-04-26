@@ -4,6 +4,7 @@ import {
   Button,
   CaptchaEmojiField,
   Checkbox,
+  FormError,
   FormFieldError,
   LoaderDots,
   PageHeadline,
@@ -51,7 +52,7 @@ export function LoginPage() {
         className="flex flex-col gap-5"
         method="post"
         onSubmit={handleSubmit(onSubmit)}>
-        {errors.root?.message}
+        <FormError error={errors.root} />
         <div>
           <EmailField />
         </div>

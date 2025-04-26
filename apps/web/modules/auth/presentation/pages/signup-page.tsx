@@ -4,6 +4,7 @@ import {
   Button,
   CaptchaEmojiField,
   Checkbox,
+  FormError,
   FormFieldError,
   PageHeadline,
   TextInput,
@@ -51,7 +52,7 @@ export function SignupPage() {
         className="flex flex-col gap-3 lg:flex-row lg:gap-10"
         method="post"
         onSubmit={handleSubmit(onSubmit)}>
-        {errors.root?.message}
+        <FormError error={errors.root} />
         <div className="flex flex-col gap-5 lg:w-1/2">
           <div className="flex flex-row gap-5">
             <div className="grow">
@@ -160,7 +161,7 @@ export function SignupPage() {
           <CaptchaEmojiField text={captchaText} />
 
           <Button type="submit" className="mt-10" size="lg">
-            {t('user.form.registration.callToAction')}
+            {t('user.form.signup.callToAction')}
           </Button>
           <div className="flex justify-between">
             <Link href={pathFor('user.password-reminder')} prefetch={false}>

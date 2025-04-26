@@ -3,6 +3,7 @@
 import {
   Button,
   CaptchaTitlePuzzleField,
+  FormError,
   FormFieldError,
   PageHeadline,
   TextInput,
@@ -40,7 +41,7 @@ export function PasswordReminderPage() {
         className="flex flex-col gap-5"
         method="post"
         onSubmit={handleSubmit(onSubmit)}>
-        {errors.root?.message}
+        <FormError error={errors.root} />
         <div>
           <label>
             <h4 className="mb-1">{t('user.field.email')}</h4>

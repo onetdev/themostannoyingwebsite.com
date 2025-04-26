@@ -7,6 +7,7 @@ export * from './DarkModeToggle';
 export * from './DimmerOverlay';
 export * from './DotDotDotText';
 export * from './DropdownSelect';
+export * from './FormError';
 export * from './FormFieldError';
 export * from './Icon';
 export * from './LoaderDots';
