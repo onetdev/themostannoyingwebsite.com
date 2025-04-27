@@ -27,7 +27,7 @@ export function CaptchaEmojiField({
     <div className="flex flex-col">
       <label>
         <LabelText className="mb-1">{text.label}</LabelText>
-        <p>{text.hint}</p>
+        <p className="text-sm">{text.hint}</p>
         <CaptchaEmoji
           className="border-on-background my-3 rounded-md border"
           width={300}
