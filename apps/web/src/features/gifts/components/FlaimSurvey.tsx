@@ -1,6 +1,6 @@
 'use client';
 
-import { BorderedBox, Button, LabeledChild, RadioButton } from '@maw/ui-lib';
+import { BorderedBox, Button, CompactFormRow, RadioButton } from '@maw/ui-lib';
 import { arrayShuffle } from '@maw/utils/array';
 import { useRouter } from 'next/navigation';
 import { useMessages, useTranslations } from 'next-intl';
@@ -111,7 +111,7 @@ const FlaimSurvery: FunctionComponent<FlaimSurveryProps> = ({
         <>
           <h3 className="my-3">{viewData.text}</h3>
           {viewData.options.map((option, index) => (
-            <LabeledChild key={`${index}-${option}`} label={option}>
+            <CompactFormRow key={`${index}-${option}`} label={option}>
               <RadioButton
                 value={index}
                 name="flaim-survey"
@@ -119,7 +119,7 @@ const FlaimSurvery: FunctionComponent<FlaimSurveryProps> = ({
                   setProgression((prev) => ({ ...prev, selected: index }))
                 }
               />
-            </LabeledChild>
+            </CompactFormRow>
           ))}
           <Button
             onClick={onNext}

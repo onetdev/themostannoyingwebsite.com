@@ -2,8 +2,8 @@
 
 import {
   BorderedBox,
+  CompactFormRow,
   Checkbox as FormCheckbox,
-  LabeledChild,
 } from '@maw/ui-lib';
 import { useTranslations } from 'next-intl';
 import { FunctionComponent } from 'react';
@@ -16,26 +16,28 @@ const UserGrantsSettings: FunctionComponent = () => {
 
   return (
     <BorderedBox title={t('settings.userGrants.title')}>
-      <LabeledChild label={t('settings.userGrants.essentialCookies')}>
+      <CompactFormRow label={t('settings.userGrants.essentialCookies')}>
         <FormCheckbox
           name="essential_cookies"
           checked={grant.cookies.essential}
           disabled
         />
-      </LabeledChild>
+      </CompactFormRow>
       <br />
       <small>
         <i>{t('settings.userGrants.permissionDisclaimer')}</i>
       </small>
       <br />
-      <LabeledChild
+      <CompactFormRow
         label={t('settings.userGrants.notificationPermission')}
         reverse>
         {`${grant.permission.notification || t('common.notSet')}`}
-      </LabeledChild>
-      <LabeledChild label={t('settings.userGrants.locationPermission')} reverse>
+      </CompactFormRow>
+      <CompactFormRow
+        label={t('settings.userGrants.locationPermission')}
+        reverse>
         {`${grant.permission.location || t('common.notSet')}`}
-      </LabeledChild>
+      </CompactFormRow>
     </BorderedBox>
   );
 };

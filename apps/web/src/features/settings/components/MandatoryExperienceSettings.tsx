@@ -2,8 +2,8 @@
 
 import {
   BorderedBox,
+  CompactFormRow,
   Checkbox as FormCheckbox,
-  LabeledChild,
 } from '@maw/ui-lib';
 import { useTranslations } from 'next-intl';
 import { FunctionComponent } from 'react';
@@ -12,19 +12,19 @@ const MandatoryExperienceSettings: FunctionComponent = () => {
   const t = useTranslations();
   return (
     <BorderedBox title={t('settings.mandatoryExperienceFlags.title')}>
-      <LabeledChild
+      <CompactFormRow
         label={t('settings.mandatoryExperienceFlags.unreasonableContent')}>
         <FormCheckbox name="unreasonable_content" checked={true} disabled />
-      </LabeledChild>
-      <LabeledChild
+      </CompactFormRow>
+      <CompactFormRow
         label={t('settings.mandatoryExperienceFlags.impossibleLogin')}>
         <FormCheckbox name="impossible_login" checked={true} disabled />
-      </LabeledChild>
-      <LabeledChild
+      </CompactFormRow>
+      <CompactFormRow
         label={t('settings.mandatoryExperienceFlags.impossibleSignup')}>
         <FormCheckbox name="impossible_signup" checked={true} disabled />
-      </LabeledChild>
-      <LabeledChild
+      </CompactFormRow>
+      <CompactFormRow
         label={t(
           'settings.mandatoryExperienceFlags.impossiblePasswordReminder',
         )}>
@@ -33,11 +33,11 @@ const MandatoryExperienceSettings: FunctionComponent = () => {
           checked={true}
           disabled
         />
-      </LabeledChild>
-      <LabeledChild
+      </CompactFormRow>
+      <CompactFormRow
         label={t('settings.mandatoryExperienceFlags.flaimYourPhone')}>
         <FormCheckbox name="claim_your_phone" checked={true} disabled />
-      </LabeledChild>
+      </CompactFormRow>
     </BorderedBox>
   );
 };
