@@ -6,6 +6,7 @@ export type PasswordStrengthBarProps = {
   password: string;
   className?: string;
   text: {
+    label: string;
     weak: string;
     okay: string;
     veryStrong: string;
@@ -21,7 +22,7 @@ export const PasswordStrengthBar: FunctionComponent<
   );
 
   return (
-    <div className={`flex gap-2 text-sm ${className}`}>
+    <div className={`flex gap-2 text-sm ${className}`} aria-label={text.label}>
       <div className="w-1/3">
         <div className="bg-error h-2 w-full max-w-full rounded" />
         {score <= 0.33 && text.weak}

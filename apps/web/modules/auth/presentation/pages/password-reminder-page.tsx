@@ -66,6 +66,7 @@ export function PasswordReminderPage() {
         <CaptchaTitlePuzzleField text={captchaText} />
 
         <Button
+          role="button"
           type="submit"
           className="mt-10"
           size="lg"

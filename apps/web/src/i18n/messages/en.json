@@ -219,6 +219,7 @@
       "lastName": "Last name",
       "nickname": "Nickname",
       "password": "Password",
+      "passwordStrength": "Password strength",
       "passwordConfirmation": "Password confirmation",
       "phoneNumber": "Phone number",
       "rememberMe": "Remember me",

@@ -48,6 +48,7 @@ export function PasswordCreateField({
   const password = watch(fieldName);
 
   const passwordStrengthText = {
+    label: t('user.field.passwordStrength'),
     weak: t('form.validation.passwordStrength.weak'),
     okay: t('form.validation.passwordStrength.okay'),
     veryStrong: t('form.validation.passwordStrength.veryStrong'),
@@ -69,12 +70,12 @@ export function PasswordCreateField({
             validate: (value) => validate(value, t),
           })}
         />
-        <PasswordStrengthBar
-          className="mt-3"
-          password={password}
-          text={passwordStrengthText}
-        />
       </label>
+      <PasswordStrengthBar
+        className="mt-3"
+        password={password}
+        text={passwordStrengthText}
+      />
       <FormFieldError error={errors[fieldName]} />
     </>
   );
