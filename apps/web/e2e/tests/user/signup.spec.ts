@@ -72,3 +72,18 @@ test('signup page field focusability and simple submission check', async ({
   await expect(page.getByText('Sum of numbers must be at')).toHaveCount(1);
   await expect(page.getByText('Invalid captcha')).toHaveCount(1);
 });
+
+test('user signup page links to password reminder and login', async ({
+  page,
+}) => {
+  await page.goto('/en/virgin');
+  await page.goto('/en/user/signup');
+
+  await page.getByRole('main').getByText('Forgot password?').click();
+  await expect(page).toHaveURL(/\/en\/user\/password-reminder\/.*/);
+
+  await page.goBack();
+
+  await page.getByRole('main').getByText('Login').click();
+  await expect(page).toHaveURL(/\/en\/user\/login\/.*/);
+});
