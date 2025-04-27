@@ -1,6 +1,6 @@
 'use client';
 
-import { DropdownSelect, FormFieldError } from '@maw/ui-lib';
+import { DropdownSelect, FormFieldError, LabelText } from '@maw/ui-lib';
 import { useTranslations } from 'next-intl';
 import { useMemo } from 'react';
 import { useFormContext } from 'react-hook-form';
@@ -36,11 +36,12 @@ export function GenderField({ fieldName = 'gender' }: GenderFieldProps) {
   return (
     <>
       <label>
-        <h5 className="mb-1">{t('user.field.gender')}</h5>
+        <LabelText className="mb-1">{t('user.field.gender')}</LabelText>
         <DropdownSelect
           placeholder=""
           values={genderOptions}
           className="w-full"
+          aria-label={t('user.field.gender')}
           {...register(fieldName)}
         />
       </label>

@@ -1,7 +1,6 @@
 import { FunctionComponent, PropsWithChildren } from 'react';
 
-import { Icon } from '../atoms/Icon';
-import { Tooltip } from '../atoms/Tooltip';
+import { Icon, Tooltip } from '../atoms';
 
 export type CompactFormRowProps = PropsWithChildren<{
   info?: string;

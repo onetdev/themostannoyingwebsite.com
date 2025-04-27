@@ -1,6 +1,6 @@
 'use client';
 
-import { DropdownSelect, FormFieldError } from '@maw/ui-lib';
+import { DropdownSelect, FormFieldError, LabelText } from '@maw/ui-lib';
 import { useTranslations } from 'next-intl';
 import { useMemo } from 'react';
 import { useFormContext } from 'react-hook-form';
@@ -31,11 +31,13 @@ export function CountryField({ fieldName = 'countryCode' }: CountryFieldProps) {
 
   return (
     <>
-      <label>
-        <h5 className="mb-1">{t('user.field.countryCode')}</h5>
+      <label htmlFor={fieldName}>
+        <LabelText className="mb-1">{t('user.field.countryCode')}</LabelText>
         <DropdownSelect
           placeholder=""
           className="w-full"
+          id={fieldName}
+          aria-label={t('user.field.countryCode')}
           values={countryOptions}
           {...register(fieldName, {
             required: t('form.validation.error.required'),

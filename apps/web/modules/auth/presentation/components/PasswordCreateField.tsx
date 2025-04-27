@@ -1,6 +1,11 @@
 'use client';
 
-import { FormFieldError, PasswordStrengthBar, TextInput } from '@maw/ui-lib';
+import {
+  FormFieldError,
+  LabelText,
+  PasswordStrengthBar,
+  TextInput,
+} from '@maw/ui-lib';
 import { useTranslations } from 'next-intl';
 import { useFormContext } from 'react-hook-form';
 
@@ -56,11 +61,12 @@ export function PasswordCreateField({
 
   return (
     <>
-      <label>
-        <h4 className="mb-1">{t('user.field.password')}</h4>
+      <label htmlFor={fieldName}>
+        <LabelText className="mb-1">{t('user.field.password')}</LabelText>
         <TextInput
           type="password"
           className="w-full"
+          id={fieldName}
           {...register(fieldName, {
             required: t('form.validation.error.required'),
             minLength: {

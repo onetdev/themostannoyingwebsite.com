@@ -12,6 +12,7 @@ import {
 import { useTranslations } from 'next-intl';
 import { FormProvider } from 'react-hook-form';
 
+import { EmailField } from '../components/EmailField';
 import { usePasswordReminderForm } from '../forms';
 
 import { EMAIL_PATTERN, useNavigationViewModel } from '@/modules/shared';
@@ -47,21 +48,7 @@ export function PasswordReminderPage() {
         onSubmit={handleSubmit(onSubmit)}>
         <FormError error={errors.root} />
         <div>
-          <label>
-            <h4 className="mb-1">{t('user.field.email')}</h4>
-            <TextInput
-              type="email"
-              className="w-full"
-              {...register('email', {
-                required: t('form.validation.error.required'),
-                pattern: {
-                  value: EMAIL_PATTERN,
-                  message: t('form.validation.error.emailInvalid'),
-                },
-              })}
-            />
-          </label>
-          <FormFieldError error={errors.email} />
+          <EmailField />
         </div>
         <CaptchaTitlePuzzleField text={captchaText} />
 

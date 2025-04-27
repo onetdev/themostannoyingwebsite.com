@@ -1,6 +1,6 @@
 'use client';
 
-import { DropdownSelect, FormFieldError } from '@maw/ui-lib';
+import { DropdownSelect, FormFieldError, LabelText } from '@maw/ui-lib';
 import { useMessages, useTranslations } from 'next-intl';
 import { useEffect, useMemo, useState } from 'react';
 import { useFormContext } from 'react-hook-form';
@@ -63,30 +63,31 @@ export function DateOfBirthField({
   }, [parts, setValue]);
 
   return (
-    <>
-      <label>
-        <h5 className="mb-1">{t('user.field.dateOfBirth')}</h5>
-        <div className="flex gap-3">
-          <DropdownSelect
-            placeholder=""
-            className="w-1/4"
-            values={dateOfBirthYear}
-            onValueChange={onYearChange}
-          />
-          <DropdownSelect
-            placeholder=""
-            className="w-2/4"
-            values={dateOfBirthMonth}
-            onValueChange={onMonthChange}
-          />
-          <DropdownSelect
-            placeholder=""
-            className="w-1/4"
-            values={dateOfBirthDay}
-            onValueChange={onDayChange}
-          />
-        </div>
-      </label>
+    <div>
+      <LabelText className="mb-1">{t('user.field.dateOfBirth')}</LabelText>
+      <div className="flex gap-3">
+        <DropdownSelect
+          placeholder=""
+          className="w-1/4"
+          values={dateOfBirthYear}
+          onValueChange={onYearChange}
+          aria-label={t('user.field.dateOfBirthYear')}
+        />
+        <DropdownSelect
+          placeholder=""
+          className="w-2/4"
+          values={dateOfBirthMonth}
+          onValueChange={onMonthChange}
+          aria-label={t('user.field.dateOfBirthMonth')}
+        />
+        <DropdownSelect
+          placeholder=""
+          className="w-1/4"
+          values={dateOfBirthDay}
+          onValueChange={onDayChange}
+          aria-label={t('user.field.dateOfBirthDay')}
+        />
+      </div>
       <input
         type="hidden"
         {...register(fieldName, {
@@ -94,6 +95,6 @@ export function DateOfBirthField({
         })}
       />
       <FormFieldError error={errors[fieldName]} />
-    </>
+    </div>
   );
 }
