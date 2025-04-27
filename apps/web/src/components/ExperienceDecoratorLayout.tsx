@@ -33,7 +33,7 @@ export const ExperienceDecoratorLayout: FunctionComponent<
   // them only if neccessary.
 
   const [runtimeFlags, setRuntimeFlags] = useState(() => ({
-    cookieConsent: false,
+    showCookieConsent: false,
     giftFlaps: false,
     mockChat: false,
     stickyVideo: false,
@@ -42,7 +42,7 @@ export const ExperienceDecoratorLayout: FunctionComponent<
 
   useEffect(() => {
     setRuntimeFlags({
-      cookieConsent,
+      showCookieConsent: !cookieConsent,
       giftFlaps,
       mockChat,
       stickyVideo,
@@ -58,7 +58,7 @@ export const ExperienceDecoratorLayout: FunctionComponent<
         {runtimeFlags.wheelOfFortune && <WheelOfFortuneHost />}
         {deadPixel && <DeadPixelHost />}
         {runtimeFlags.mockChat && <ChatBubbleHost />}
-        {runtimeFlags.cookieConsent && <CookieConsent />}
+        {runtimeFlags.showCookieConsent && <CookieConsent />}
         <AdblockerSuspectBar />
         {runtimeFlags.stickyVideo && <StickyVideoExperienceHost />}
       </div>
