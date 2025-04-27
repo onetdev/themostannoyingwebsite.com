@@ -1,6 +1,12 @@
 'use client';
 
-import { Button, DropdownSelect, FormFieldError, TextInput } from '@maw/ui-lib';
+import {
+  Button,
+  DropdownSelect,
+  FormFieldError,
+  LabelText,
+  TextInput,
+} from '@maw/ui-lib';
 import { useTranslations } from 'next-intl';
 import {
   type MouseEvent,
@@ -120,13 +126,14 @@ export function PhoneNumberField({
   };
 
   return (
-    <>
+    <div>
       <label>
-        <h5 className="mb-1">{t('user.field.phoneNumber')}</h5>
+        <LabelText className="mb-1">{t('user.field.phoneNumber')}</LabelText>
         <div className="flex gap-3">
           <DropdownSelect
             placeholder=""
             className="w-1/4"
+            aria-label={t('user.field.phoneNumberCountryCode')}
             values={phoneCountryOptions}
             {...register(countryCodeFieldName, {
               required: t('form.validation.error.required'),
@@ -139,6 +146,7 @@ export function PhoneNumberField({
               className="rounded-none rounded-l-lg px-3 select-none"
               variant="primary"
               size="sm"
+              aria-label={t('user.field.phoneNumberDecrease')}
               onMouseDown={onDecrementClick}
               onTouchStart={onDecrementClick}>
               -
@@ -146,6 +154,7 @@ export function PhoneNumberField({
             <TextInput
               type="number"
               disabled
+              aria-label={t('user.field.phoneNumberAreaCode')}
               className="max-w-44 rounded-none border-x-0 select-none"
               {...register(fieldName, {
                 required: t('form.validation.error.required'),
@@ -156,6 +165,7 @@ export function PhoneNumberField({
               type="button"
               className="rounded-none rounded-r-lg px-3"
               size="sm"
+              aria-label={t('user.field.phoneNumberIncrease')}
               onMouseDown={onIncrementClick}
               onTouchStart={onIncrementClick}>
               +
@@ -168,6 +178,6 @@ export function PhoneNumberField({
       ) : (
         <FormFieldError error={errors[fieldName]} />
       )}
-    </>
+    </div>
   );
 }

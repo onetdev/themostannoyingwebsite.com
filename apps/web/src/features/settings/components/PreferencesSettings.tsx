@@ -2,8 +2,8 @@
 
 import {
   BorderedBox,
+  CompactFormRow,
   Checkbox as FormCheckbox,
-  LabeledChild,
 } from '@maw/ui-lib';
 import { useTranslations } from 'next-intl';
 import { useTheme } from 'next-themes';
@@ -23,14 +23,14 @@ const PreferencesSettings: FunctionComponent = () => {
 
   return (
     <BorderedBox title={t('settings.userPreferences.title')}>
-      <LabeledChild label={t('settings.userPreferences.darkMode')}>
+      <CompactFormRow label={t('settings.userPreferences.darkMode')}>
         <FormCheckbox
           name="dark_mode"
           checked={resolvedTheme === 'dark'}
           onValueChange={setDarkMode}
         />
-      </LabeledChild>
-      <LabeledChild
+      </CompactFormRow>
+      <CompactFormRow
         label={t('settings.userPreferences.reducedMotion')}
         info={t('settings.userPreferences.reducedMotionHelp')}>
         <FormCheckbox
@@ -38,21 +38,21 @@ const PreferencesSettings: FunctionComponent = () => {
           disabled={true}
           checked={runtime.reducedMotion}
         />
-      </LabeledChild>
-      <LabeledChild label={t('settings.userPreferences.enableSound')}>
+      </CompactFormRow>
+      <CompactFormRow label={t('settings.userPreferences.enableSound')}>
         <FormCheckbox
           name="enable_sound"
           checked={preference.enableSound}
           onValueChange={preference.setEnableSound}
         />
-      </LabeledChild>
-      <LabeledChild label={t('settings.userPreferences.adultFilter')}>
+      </CompactFormRow>
+      <CompactFormRow label={t('settings.userPreferences.adultFilter')}>
         <FormCheckbox
           name="adult_filter"
           checked={preference.adultFilter}
           onValueChange={preference.setAdultFilter}
         />
-      </LabeledChild>
+      </CompactFormRow>
     </BorderedBox>
   );
 };

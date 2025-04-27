@@ -1,4 +1,4 @@
-import { FormFieldError, TextInput } from '@maw/ui-lib';
+import { FormFieldError, LabelText, TextInput } from '@maw/ui-lib';
 import { useTranslations } from 'next-intl';
 import { useFormContext } from 'react-hook-form';
 
@@ -18,7 +18,7 @@ export function EmailField({ fieldName = 'email' }: EmailFieldProps) {
   return (
     <>
       <label>
-        <h4 className="mb-1">{t('user.field.email')}</h4>
+        <LabelText className="mb-1">{t('user.field.email')}</LabelText>
         <TextInput
           type="email"
           className="w-full"

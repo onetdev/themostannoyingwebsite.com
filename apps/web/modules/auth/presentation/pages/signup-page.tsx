@@ -6,6 +6,7 @@ import {
   Checkbox,
   FormError,
   FormFieldError,
+  LabelText,
   LoaderDots,
   PageHeadline,
   TextInput,
@@ -20,9 +21,10 @@ import {
   PasswordCreateField,
   PhoneNumberField,
 } from '../components';
+import { EmailField } from '../components/EmailField';
 import { useSignupForm } from '../forms';
 
-import { EMAIL_PATTERN, useNavigationViewModel } from '@/modules/shared';
+import { useNavigationViewModel } from '@/modules/shared';
 
 export function SignupPage() {
   const t = useTranslations();
@@ -61,7 +63,9 @@ export function SignupPage() {
           <div className="flex flex-row gap-5">
             <div className="grow">
               <label>
-                <h4 className="mb-1">{t('user.field.firstName')}</h4>
+                <LabelText className="mb-1">
+                  {t('user.field.firstName')}
+                </LabelText>
                 <TextInput
                   type="text"
                   className="w-full"
@@ -74,7 +78,9 @@ export function SignupPage() {
             </div>
             <div className="grow">
               <label>
-                <h4 className="mb-1">{t('user.field.lastName')}</h4>
+                <LabelText className="mb-1">
+                  {t('user.field.lastName')}
+                </LabelText>
                 <TextInput
                   type="text"
                   className="w-full"
@@ -88,7 +94,7 @@ export function SignupPage() {
           </div>
           <div>
             <label>
-              <h4 className="mb-1">{t('user.field.nickname')}</h4>
+              <LabelText className="mb-1">{t('user.field.nickname')}</LabelText>
               <TextInput
                 type="text"
                 className="w-full"
@@ -98,7 +104,9 @@ export function SignupPage() {
           </div>
           <div>
             <label>
-              <h4 className="mb-1">{t('user.field.username')}</h4>
+              <span className="mb-1 text-lg font-medium">
+                {t('user.field.username')}
+              </span>
               <TextInput
                 type="text"
                 className="w-full"
@@ -110,28 +118,16 @@ export function SignupPage() {
             <FormFieldError error={errors.username} />
           </div>
           <div>
-            <label>
-              <h4 className="mb-1">{t('user.field.email')}</h4>
-              <TextInput
-                type="email"
-                className="w-full"
-                {...register('email', {
-                  required: t('form.validation.error.required'),
-                  pattern: {
-                    value: EMAIL_PATTERN,
-                    message: t('form.validation.error.emailInvalid'),
-                  },
-                })}
-              />
-            </label>
-            <FormFieldError error={errors.email} />
+            <EmailField />
           </div>
           <div>
             <PasswordCreateField />
           </div>
           <div>
             <label>
-              <h5 className="mb-1">{t('user.field.passwordConfirmation')}</h5>
+              <LabelText className="mb-1">
+                {t('user.field.passwordConfirmation')}
+              </LabelText>
               <TextInput
                 type="password"
                 className="w-full"
@@ -157,7 +153,7 @@ export function SignupPage() {
           </div>
           <div>
             <label className="flex items-center gap-2">
-              <Checkbox {...register('consentPrivacyPolicy')} />
+              <Checkbox {...register('consentPrivacyPolicy')} required />
               <h4>{t('user.field.consentPrivacyPolicy')}</h4>
             </label>
             <FormFieldError error={errors.consentPrivacyPolicy} />
@@ -165,6 +161,7 @@ export function SignupPage() {
           <CaptchaEmojiField text={captchaText} />
 
           <Button
+            role="button"
             type="submit"
             className="mt-10"
             size="lg"

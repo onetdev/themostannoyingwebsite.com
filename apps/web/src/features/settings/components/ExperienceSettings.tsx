@@ -3,8 +3,8 @@
 import {
   BorderedBox,
   Button,
+  CompactFormRow,
   Checkbox as FormCheckbox,
-  LabeledChild,
 } from '@maw/ui-lib';
 import { useTranslations } from 'next-intl';
 import { FunctionComponent } from 'react';
@@ -31,14 +31,15 @@ const ExperienceSettings: FunctionComponent<ExperienceSettingsProps> = ({
       title={t('settings.optionalExperienceFlags.title')}
       className={className}>
       <div className={listClassName}>
-        <LabeledChild label={t('settings.optionalExperienceFlags.gifts.flaps')}>
+        <CompactFormRow
+          label={t('settings.optionalExperienceFlags.gifts.flaps')}>
           <FormCheckbox
             name="gift_flaps"
             checked={experience.gifts.flaps}
             onValueChange={(flaps) => experience.setGifts({ flaps })}
           />
-        </LabeledChild>
-        <LabeledChild
+        </CompactFormRow>
+        <CompactFormRow
           label={t('settings.optionalExperienceFlags.gifts.detectAdblocker')}>
           <FormCheckbox
             name="detect_adblocker"
@@ -47,84 +48,86 @@ const ExperienceSettings: FunctionComponent<ExperienceSettingsProps> = ({
               experience.setGifts({ detectAdblocker })
             }
           />
-        </LabeledChild>
-        <LabeledChild
+        </CompactFormRow>
+        <CompactFormRow
           label={t('settings.optionalExperienceFlags.gifts.oneByOne')}>
           <FormCheckbox
             name="gift_flaps"
             checked={experience.gifts.oneByOne}
             onValueChange={(oneByOne) => experience.setGifts({ oneByOne })}
           />
-        </LabeledChild>
-        <LabeledChild
+        </CompactFormRow>
+        <CompactFormRow
           label={t('settings.optionalExperienceFlags.clipboardMarker')}>
           <FormCheckbox
             name="clipboard_marker"
             checked={experience.clipboardMarker}
             onValueChange={experience.setClipboardMarker}
           />
-        </LabeledChild>
-        <LabeledChild
+        </CompactFormRow>
+        <CompactFormRow
           label={t('settings.optionalExperienceFlags.contentPaywall')}>
           <FormCheckbox
             name="content_paywall"
             checked={experience.contentPaywall}
             onValueChange={experience.setContentPaywall}
           />
-        </LabeledChild>
-        <LabeledChild label={t('settings.optionalExperienceFlags.deadPixel')}>
+        </CompactFormRow>
+        <CompactFormRow label={t('settings.optionalExperienceFlags.deadPixel')}>
           <FormCheckbox
             name="dead_pixel"
             checked={experience.deadPixel}
             onValueChange={experience.setDeadPixel}
           />
-        </LabeledChild>
-        <LabeledChild
+        </CompactFormRow>
+        <CompactFormRow
           label={t('settings.optionalExperienceFlags.disableContextMenu')}>
           <FormCheckbox
             name="disable_context"
             checked={experience.disableContextMenu}
             onValueChange={experience.setDisableContextMenu}
           />
-        </LabeledChild>
-        <LabeledChild label={t('settings.optionalExperienceFlags.exitPrompt')}>
+        </CompactFormRow>
+        <CompactFormRow
+          label={t('settings.optionalExperienceFlags.exitPrompt')}>
           <FormCheckbox
             name="exit_prompt"
             checked={experience.exitPrompt}
             onValueChange={experience.setExitPrompt}
           />
-        </LabeledChild>
-        <LabeledChild label={t('settings.optionalExperienceFlags.historySpam')}>
+        </CompactFormRow>
+        <CompactFormRow
+          label={t('settings.optionalExperienceFlags.historySpam')}>
           <FormCheckbox
             name="history_spam"
             checked={experience.historySpam}
             onValueChange={experience.setHistorySpam}
           />
-        </LabeledChild>
-        <LabeledChild label={t('settings.optionalExperienceFlags.mockChat')}>
+        </CompactFormRow>
+        <CompactFormRow label={t('settings.optionalExperienceFlags.mockChat')}>
           <FormCheckbox
             name="mock_chat"
             checked={experience.mockChat}
             onValueChange={experience.setMockChat}
           />
-        </LabeledChild>
-        <LabeledChild
+        </CompactFormRow>
+        <CompactFormRow
           label={t('settings.optionalExperienceFlags.newsletterModal')}>
           <FormCheckbox
             name="newsletter"
             checked={experience.newsletterModal}
             onValueChange={experience.setNewsletterModal}
           />
-        </LabeledChild>
-        <LabeledChild
+        </CompactFormRow>
+        <CompactFormRow
           label={t('settings.optionalExperienceFlags.notifications')}>
           <FormCheckbox
             name="notifications"
             checked={experience.notifications}
             onValueChange={experience.setNotifications}
           />
-        </LabeledChild>
-        <LabeledChild
+        </CompactFormRow>
+        <CompactFormRow
           label={t(
             'settings.optionalExperienceFlags.pageTitleInactiveArrayPaged',
           )}>
@@ -133,29 +136,31 @@ const ExperienceSettings: FunctionComponent<ExperienceSettingsProps> = ({
             checked={experience.pageTitle.inactiveArrayPaged}
             onValueChange={onPageTitleInactiveArrayPagedChange}
           />
-        </LabeledChild>
-        <LabeledChild label={t('settings.optionalExperienceFlags.searchDelay')}>
+        </CompactFormRow>
+        <CompactFormRow
+          label={t('settings.optionalExperienceFlags.searchDelay')}>
           <FormCheckbox
             name="search_delay"
             checked={experience.searchDelay}
             onValueChange={experience.setSearchDelay}
           />
-        </LabeledChild>
-        <LabeledChild label={t('settings.optionalExperienceFlags.stickyVideo')}>
+        </CompactFormRow>
+        <CompactFormRow
+          label={t('settings.optionalExperienceFlags.stickyVideo')}>
           <FormCheckbox
             name="sticky_video"
             checked={experience.stickyVideo}
             onValueChange={experience.setStickyVideo}
           />
-        </LabeledChild>
-        <LabeledChild
+        </CompactFormRow>
+        <CompactFormRow
           label={t('settings.optionalExperienceFlags.wheelOfFortune')}>
           <FormCheckbox
             name="wheel_of_fortune"
             checked={experience.wheelOfFortune}
             onValueChange={experience.setWheelOfFortune}
           />
-        </LabeledChild>
+        </CompactFormRow>
       </div>
       <div className="flex gap-3">
         <Button

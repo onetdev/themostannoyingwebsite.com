@@ -2,8 +2,7 @@
 
 import { useFormContext } from 'react-hook-form';
 
-import { CaptchaTilePuzzle } from '../atoms/CaptchaTilePuzzle';
-import { FormFieldError } from '../atoms/FormFieldError';
+import { CaptchaTilePuzzle, FormFieldError, LabelText } from '../atoms';
 
 export type CaptchaTitlePuzzleFieldProps = {
   fieldName?: string;
@@ -26,7 +25,7 @@ export function CaptchaTitlePuzzleField({
 
   return (
     <div className="flex flex-col">
-      <h4 className="mb-1">{text.label}</h4>
+      <LabelText className="mb-1">{text.label}</LabelText>
       <small>{text.hint}</small>
       <CaptchaTilePuzzle
         className="border-on-background my-3 rounded-md border"

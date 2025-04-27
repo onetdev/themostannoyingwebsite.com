@@ -2,7 +2,7 @@
 
 import { useTranslations } from 'next-intl';
 
-import { AuthErrorType } from '../../domain';
+import { AuthErrorType } from '../../usecases';
 
 export function useAuthError() {
   const t = useTranslations('form.validation.error');

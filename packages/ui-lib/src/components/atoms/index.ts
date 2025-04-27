@@ -10,6 +10,7 @@ export * from './DropdownSelect';
 export * from './FormError';
 export * from './FormFieldError';
 export * from './Icon';
+export * from './LabelText';
 export * from './LoaderDots';
 export * from './PageHeadline';
 export * from './PasswordStrengthBar';

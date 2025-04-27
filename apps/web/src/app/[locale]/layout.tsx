@@ -15,7 +15,7 @@ import RootProviderContainer from '@/providers/RootProviderContainer';
 
 const _openSans = Open_Sans({
   subsets: ['latin'],
-  weight: ['400', '700'],
+  weight: ['400', '500', '600', '700'],
 });
 
 export async function generateMetadata(): Promise<Metadata> {

@@ -6,6 +6,7 @@ import {
   Checkbox,
   FormError,
   FormFieldError,
+  LabelText,
   LoaderDots,
   PageHeadline,
   TextInput,
@@ -58,7 +59,7 @@ export function LoginPage() {
         </div>
         <div>
           <label>
-            <h4 className="mb-1">{t('user.field.password')}</h4>
+            <LabelText className="mb-1">{t('user.field.password')}</LabelText>
             <TextInput
               type="password"
               className="w-full"
@@ -81,6 +82,7 @@ export function LoginPage() {
         </div>
 
         <Button
+          role="button"
           type="submit"
           className="mt-10"
           size="lg"
