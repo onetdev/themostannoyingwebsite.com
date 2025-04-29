@@ -9,6 +9,8 @@ jobs:
   author-as-assignee:
     name: Author as assignee
     runs-on: ubuntu-latest
+    permissions:
+      pull-requests: write
     if: github.event_name == 'pull_request' && github.event.action == 'opened'
     steps:
       - uses: kentaro-m/auto-assign-action@v2.0.0
