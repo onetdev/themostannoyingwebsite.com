@@ -27,7 +27,7 @@ export default defineConfig({
    */
   use: {
     testIdAttribute: 'data-testid',
-    actionTimeout: 8000,
+    actionTimeout: 5000,
     baseURL: 'http://127.0.0.1:3000',
     ignoreHTTPSErrors: true,
     headless: true,
