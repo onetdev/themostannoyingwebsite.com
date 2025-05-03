@@ -17,7 +17,9 @@ jobs:
     timeout-minutes: 60
     runs-on: ubuntu-latest
     container:
-      image: mcr.microsoft.com/playwright:v1.52.0-noble
+      image: mcr.microsoft.com/playwright:v1.52.0
+      options: --user pwuser
+
     permissions:
       contents: read
       pull-requests: write

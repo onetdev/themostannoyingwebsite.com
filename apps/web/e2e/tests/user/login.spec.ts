@@ -27,8 +27,8 @@ test('user login page show validation error when submitting empty form', async (
 test('user login page links to password reminder and signup', async ({
   page,
 }) => {
-  await page.goto('/en/virgin/');
-  await page.goto('/en/user/login/');
+  await page.goto('/en/virgin');
+  await page.goto('/en/user/login');
 
   await page.getByRole('main').getByText('Forgot password?').click();
   await expect(page).toHaveURL(/\/en\/user\/password-reminder\/.*/);
