@@ -16,9 +16,6 @@ jobs:
     name: Playwright Tests for Web
     timeout-minutes: 60
     runs-on: ubuntu-latest
-    container:
-      image: mcr.microsoft.com/playwright:v1.52.0
-      options: --user pwuser
 
     permissions:
       contents: read

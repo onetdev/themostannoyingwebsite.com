@@ -9,6 +9,10 @@ import { defineConfig, devices } from '@playwright/test';
 // dotenv.config({ path: path.resolve(__dirname, '.env') });
 
 const isCI = !!process.env.CI;
+const htmlReporter = {
+  host: process.env.PLAYWRIGHT_HTML_HOST || '127.0.0.1',
+  port: process.env.PLAYWRIGHT_HTML_PORT || 9232,
+};
 
 /**
  * See https://playwright.dev/docs/test-configuration.
@@ -20,7 +24,7 @@ export default defineConfig({
   retries: isCI ? 2 : 0,
   workers: isCI ? 1 : undefined,
   /* See https://playwright.dev/docs/test-reporters */
-  reporter: 'html',
+  reporter: [['html', { ...htmlReporter }]],
   /*
    * Shared settings for all the projects below.
    * See https://playwright.dev/docs/api/class-testoptions.
