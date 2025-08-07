@@ -63,7 +63,7 @@
     "@maw/config-jest": "workspace:^",
     "@maw/config-ts": "workspace:^",
     "@next/eslint-plugin-next": "^15.2.4",
-    "@playwright/test": "^1.51.1",
+    "@playwright/test": "catalog:",
     "@tailwindcss/postcss": "catalog:",
     "@testing-library/dom": "^10.4.0",
     "@testing-library/jest-dom": "catalog:",
