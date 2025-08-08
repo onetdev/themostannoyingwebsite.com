@@ -16,15 +16,15 @@
     "lint:fix": "eslint . --fix"
   },
   "dependencies": {
-    "@fortawesome/fontawesome-svg-core": "^6.7.2",
-    "@fortawesome/free-solid-svg-icons": "^6.7.2",
-    "@fortawesome/react-fontawesome": "^0.2.2",
-    "marked": "^15.0.7",
+    "@fortawesome/fontawesome-svg-core": "^7.0.0",
+    "@fortawesome/free-solid-svg-icons": "^7.0.0",
+    "@fortawesome/react-fontawesome": "^0.2.3",
+    "marked": "catalog:",
     "react": "catalog:",
     "react-dom": "catalog:",
-    "react-fast-marquee": "^1.6.5",
-    "react-hook-form": "7.55.0",
-    "react-share": "^5.2.2"
+    "react-fast-marquee": "catalog:",
+    "react-hook-form": "catalog:",
+    "react-share": "catalog:"
   },
   "devDependencies": {
     "@maw/config-eslint": "workspace:*",
@@ -38,7 +38,7 @@
     "@types/react-dom": "catalog:",
     "eslint": "catalog:",
     "eslint-plugin-storybook": "catalog:",
-    "prettier-plugin-tailwindcss": "^0.6.11",
+    "prettier-plugin-tailwindcss": "^0.6.14",
     "tailwindcss": "catalog:",
     "tsx": "catalog:",
     "typescript": "catalog:"

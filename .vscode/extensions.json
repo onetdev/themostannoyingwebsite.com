@@ -7,6 +7,7 @@
     "rubymaniac.vscode-direnv",
     "unifiedjs.vscode-mdx",
     "yoavbls.pretty-ts-errors",
-    "me-dutour-mathieu.vscode-github-actions"
+    "me-dutour-mathieu.vscode-github-actions",
+    "antfu.pnpm-catalog-lens"
   ]
 }
