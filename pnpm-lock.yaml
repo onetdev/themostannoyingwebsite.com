@@ -75,6 +75,9 @@ catalogs:
     react-dom:
       specifier: ^19.1.01
       version: 19.1.1
+    react-fast-marquee:
+      specifier: ^1.6.5
+      version: 1.6.5
     react-hook-form:
       specifier: 7.62.0
       version: 7.62.0
@@ -277,8 +280,8 @@ importers:
         specifier: 'catalog:'
         version: 15.4.6(@babel/core@7.26.10)(@opentelemetry/api@1.9.0)(@playwright/test@1.54.2)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)(sass@1.87.0)
       next-intl:
-        specifier: ^4.0.2
-        version: 4.0.2(next@15.4.6(@babel/core@7.26.10)(@opentelemetry/api@1.9.0)(@playwright/test@1.54.2)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)(sass@1.87.0))(react@19.1.1)(typescript@5.8.2)
+        specifier: ^4.3.4
+        version: 4.3.4(next@15.4.6(@babel/core@7.26.10)(@opentelemetry/api@1.9.0)(@playwright/test@1.54.2)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)(sass@1.87.0))(react@19.1.1)(typescript@5.8.2)
       next-themes:
         specifier: ^0.4.6
         version: 0.4.6(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
@@ -295,7 +298,7 @@ importers:
         specifier: 'catalog:'
         version: 19.1.1(react@19.1.1)
       react-fast-marquee:
-        specifier: ^1.6.5
+        specifier: 'catalog:'
         version: 1.6.5(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
       react-hook-form:
         specifier: 'catalog:'
@@ -577,7 +580,7 @@ importers:
         specifier: 'catalog:'
         version: 19.1.1(react@19.1.1)
       react-fast-marquee:
-        specifier: ^1.6.5
+        specifier: 'catalog:'
         version: 1.6.5(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
       react-hook-form:
         specifier: 'catalog:'
@@ -6206,8 +6209,8 @@ packages:
   neo-async@2.6.2:
     resolution: {integrity: sha512-Yd3UES5mWCSqR+qNT93S3UoYUkqAZ9lLg8a7g9rimsWmYGK8cVToA4/sF3RrshdyV3sAGMXVUmpMYOw+dLpOuw==}
 
-  next-intl@4.0.2:
-    resolution: {integrity: sha512-3cKVflwdrqxCOvAL+DtGN68qR802i0PEj0dttkAD5IK5XxOjugQs4yU8aSakvPMbkOrhEJ+89z5lG2EAqi7Gkw==}
+  next-intl@4.3.4:
+    resolution: {integrity: sha512-VWLIDlGbnL/o4LnveJTJD1NOYN8lh3ZAGTWw2krhfgg53as3VsS4jzUVnArJdqvwtlpU/2BIDbWTZ7V4o1jFEw==}
     peerDependencies:
       next: ^12.0.0 || ^13.0.0 || ^14.0.0 || ^15.0.0
       react: ^16.8.0 || ^17.0.0 || ^18.0.0 || >=19.0.0-rc <19.0.0 || ^19.0.0
@@ -7866,8 +7869,8 @@ packages:
     resolution: {integrity: sha512-oCwdVC7mTuWiPyjLUz/COz5TLk6wgp0RCsN+wHZ2Ekneac9w8uuV0njcbbie2ME+Vs+d6duwmYuR3HgQXs1fOg==}
     engines: {node: '>= 0.4'}
 
-  use-intl@4.0.2:
-    resolution: {integrity: sha512-6RAP/5KJMRzLMLS25/BVh2u09cRK8S6HRGc1RnZvqR547qAKZCpjYylOqMPU9eNIirAiKoGmsoUPa7JrlaA/yg==}
+  use-intl@4.3.4:
+    resolution: {integrity: sha512-sHfiU0QeJ1rirNWRxvCyvlSh9+NczcOzRnPyMeo2rtHXhVnBsvMRjE+UG4eh3lRhCxrvcqei/I0lBxsc59on1w==}
     peerDependencies:
       react: ^17.0.0 || ^18.0.0 || >=19.0.0-rc <19.0.0 || ^19.0.0
 
@@ -14790,13 +14793,13 @@ snapshots:
 
   neo-async@2.6.2: {}
 
-  next-intl@4.0.2(next@15.4.6(@babel/core@7.26.10)(@opentelemetry/api@1.9.0)(@playwright/test@1.54.2)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)(sass@1.87.0))(react@19.1.1)(typescript@5.8.2):
+  next-intl@4.3.4(next@15.4.6(@babel/core@7.26.10)(@opentelemetry/api@1.9.0)(@playwright/test@1.54.2)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)(sass@1.87.0))(react@19.1.1)(typescript@5.8.2):
     dependencies:
       '@formatjs/intl-localematcher': 0.5.10
       negotiator: 1.0.0
       next: 15.4.6(@babel/core@7.26.10)(@opentelemetry/api@1.9.0)(@playwright/test@1.54.2)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)(sass@1.87.0)
       react: 19.1.1
-      use-intl: 4.0.2(react@19.1.1)
+      use-intl: 4.3.4(react@19.1.1)
     optionalDependencies:
       typescript: 5.8.2
 
@@ -16722,7 +16725,7 @@ snapshots:
       punycode: 1.4.1
       qs: 6.14.0
 
-  use-intl@4.0.2(react@19.1.1):
+  use-intl@4.3.4(react@19.1.1):
     dependencies:
       '@formatjs/fast-memoize': 2.2.7
       '@schummar/icu-type-parser': 1.21.5
