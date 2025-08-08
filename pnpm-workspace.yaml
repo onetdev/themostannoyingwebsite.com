@@ -25,7 +25,7 @@ catalog:
   "next": "^15.4.6"
   "playwright": "^1.54.2"
   "postcss": "^8.5.6"
-  "react-dom": "^19.1.01"
+  "react-dom": "^19.1.1"
   "react-fast-marquee": "^1.6.5"
   "react-hook-form": "7.62.0"
   "react-share": "^5.2.2"
