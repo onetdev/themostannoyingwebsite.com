@@ -2,17 +2,17 @@
 
 import { useTranslations } from 'next-intl';
 
-import { AuthErrorType } from '../../usecases';
+import { AuthError } from '../../domain';
 
 export function useAuthError() {
   const t = useTranslations('form.validation.error');
 
-  const errorTranslations: Record<AuthErrorType, string> = {
+  const errorTranslations: Record<AuthError, string> = {
     IMPOSSIBLE_PATH: t('impossiblePath'),
     UNKNOWN_ERROR: t('unknownError'),
   };
 
-  function translate(errorCode?: AuthErrorType) {
+  function translate(errorCode?: AuthError) {
     return (
       (errorCode ? errorTranslations[errorCode] : null) || t('unknownError')
     );

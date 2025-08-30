@@ -14,6 +14,7 @@ import {
 import { useTranslations } from 'next-intl';
 import { FormProvider } from 'react-hook-form';
 
+import { useSignupForm } from '../../application/forms';
 import {
   CountryField,
   DateOfBirthField,
@@ -22,7 +23,6 @@ import {
   PhoneNumberField,
 } from '../components';
 import { EmailField } from '../components/EmailField';
-import { useSignupForm } from '../forms';
 
 import { useNavigationViewModel } from '@/modules/shared';
 

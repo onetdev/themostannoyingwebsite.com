@@ -4,18 +4,16 @@ import {
   Button,
   CaptchaTitlePuzzleField,
   FormError,
-  FormFieldError,
   LoaderDots,
   PageHeadline,
-  TextInput,
 } from '@maw/ui-lib';
 import { useTranslations } from 'next-intl';
 import { FormProvider } from 'react-hook-form';
 
+import { usePasswordReminderForm } from '../../application/forms';
 import { EmailField } from '../components/EmailField';
-import { usePasswordReminderForm } from '../forms';
 
-import { EMAIL_PATTERN, useNavigationViewModel } from '@/modules/shared';
+import { useNavigationViewModel } from '@/modules/shared';
 
 export function PasswordReminderPage() {
   const t = useTranslations();
@@ -26,7 +24,6 @@ export function PasswordReminderPage() {
   const {
     handleSubmit,
     onSubmit,
-    register,
     formState: { errors, isSubmitting },
   } = methods;
 

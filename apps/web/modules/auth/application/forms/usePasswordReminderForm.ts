@@ -3,8 +3,8 @@
 import { useLogger } from '@maw/logger';
 import { useForm } from 'react-hook-form';
 
-import { FakeAuthRepository } from '../../infrastructure';
-import { passwordReminder, PasswordReminderDto } from '../../usecases';
+import { PasswordReminderUseCaseParams } from '../use-cases';
+import { useAuthService } from '../useAuthService';
 
 interface PasswordReminderFormProps {
   onSuccess?: () => void;
@@ -14,11 +14,12 @@ export function usePasswordReminderForm({
   onSuccess,
 }: PasswordReminderFormProps) {
   const logger = useLogger().child({ hook: 'usePasswordReminderForm' });
-  const methods = useForm<PasswordReminderDto>();
+  const methods = useForm<PasswordReminderUseCaseParams>();
+  const authService = useAuthService();
 
-  const onSubmit = async (data: PasswordReminderDto) => {
+  const onSubmit = async (data: PasswordReminderUseCaseParams) => {
     try {
-      await passwordReminder(FakeAuthRepository, data);
+      await authService?.passwordReminder(data);
       onSuccess?.();
     } catch (err: unknown) {
       logger.warn(err, 'Password reminder failed');

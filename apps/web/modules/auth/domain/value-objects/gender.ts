@@ -11,4 +11,4 @@ export const GenderList = [
 
 export const GenderSchema = z.enum(GenderList);
 
-export type GenderType = (typeof GenderList)[number];
+export type Gender = (typeof GenderList)[number];

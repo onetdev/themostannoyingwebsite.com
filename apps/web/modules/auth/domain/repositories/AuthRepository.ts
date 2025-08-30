@@ -1,19 +1,25 @@
-import { UserType } from '../entities/User';
-import { UserCreationType } from '../entities/UserCreation';
-import { AuthErrorType } from '../../usecases/AuthError';
+import { User } from '../entities/user';
+import { AuthError } from '../errors';
 
-export interface BaseAuthMethodResponse {
-  errorCode?: AuthErrorType;
-  success: boolean;
-}
+import { PromiseResult } from '@/root/modules/shared';
+
+export type AuthenticationData = {
+  email: string;
+  password: string;
+  remember: boolean;
+};
+
+export type CreateUserData = Omit<User, 'id'> & {
+  password: string;
+  passwordConfirmation: string;
+};
+
+export type PasswordReminderData = {
+  email: string;
+};
 
 export interface AuthRepository {
-  login(data: {
-    email: string;
-    password: string;
-  }): Promise<BaseAuthMethodResponse & { user?: UserType }>;
-  register(
-    user: UserCreationType,
-  ): Promise<BaseAuthMethodResponse & { user?: UserType }>;
-  passwordReminder(data: { email: string }): Promise<void>;
+  authenticate(data: AuthenticationData): PromiseResult<User, AuthError>;
+  createUser(user: CreateUserData): PromiseResult<User, AuthError>;
+  passwordReminder(data: PasswordReminderData): PromiseResult<void, AuthError>;
 }

@@ -21,4 +21,4 @@ const RouteAliasList = [
 
 export const RouteAliasSchema = z.enum(RouteAliasList);
 
-export type RouteAliasType = (typeof RouteAliasList)[number];
+export type RouteAlias = (typeof RouteAliasList)[number];

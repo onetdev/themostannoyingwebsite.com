@@ -1,8 +1,13 @@
 'use client';
 
-import { createContext, PropsWithChildren, ReactElement } from 'react';
+import {
+  createContext,
+  PropsWithChildren,
+  ReactElement,
+  useContext,
+} from 'react';
 
-import { RouteAliasType } from '../../domain';
+import { RouteAlias } from '../../domain';
 
 export type LinkComponentType = PropsWithChildren<{
   href: string;
@@ -10,7 +15,7 @@ export type LinkComponentType = PropsWithChildren<{
 }>;
 
 export type NavigationParams =
-  | Exclude<RouteAliasType, 'article.single'>
+  | Exclude<RouteAlias, 'article.single'>
   | { alias: 'article.single'; params: { slug: string } };
 
 export interface NavigationViewModelContextType {
@@ -38,3 +43,13 @@ export function NavigationViewModel({
     </NavigationViewModelContext.Provider>
   );
 }
+
+export const useNavigationViewModel = (): NavigationViewModelContextType => {
+  const context = useContext(NavigationViewModelContext);
+  if (!context) {
+    throw new Error(
+      'useNavigationViewModel must be used within a NavigationViewModelProvider',
+    );
+  }
+  return context;
+};

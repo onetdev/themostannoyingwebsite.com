@@ -1,6 +1,6 @@
 import { z } from 'zod';
 
-import { GenderSchema } from '../value-object/Gender';
+import { GenderSchema } from '../value-objects';
 
 export const UserSchema = z.object({
   id: z.string().uuid(),
@@ -18,4 +18,4 @@ export const UserSchema = z.object({
   phoneNumber: z.number().optional(),
 });
 
-export type UserType = z.infer<typeof UserSchema>;
+export type User = z.infer<typeof UserSchema>;

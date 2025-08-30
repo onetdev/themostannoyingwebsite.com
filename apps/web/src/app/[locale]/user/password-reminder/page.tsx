@@ -2,7 +2,7 @@ import { Metadata } from 'next';
 import { getTranslations } from 'next-intl/server';
 
 import { PageLayout } from '@/components/PageLayout';
-import { PasswordReminderPage } from '@/modules/auth';
+import { PasswordReminderPage } from '@/root/modules/auth';
 
 export { generateStaticParams } from '@/i18n/routing';
 

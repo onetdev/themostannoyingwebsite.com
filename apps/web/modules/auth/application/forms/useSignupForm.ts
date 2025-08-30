@@ -4,27 +4,28 @@ import { useLogger } from '@maw/logger';
 import { useForm } from 'react-hook-form';
 
 import { useAuthError } from './useAuthError';
-import { UserType } from '../../domain';
-import { FakeAuthRepository } from '../../infrastructure';
-import { register, RegisterUserDto } from '../../usecases';
+import { User } from '../../domain';
+import { RegisterUseCaseParams } from '../use-cases';
+import { useAuthService } from '../useAuthService';
 
 interface SignupFormProps {
-  onSuccess?: (user: UserType) => void;
+  onSuccess?: (user: User) => void;
 }
 
 export function useSignupForm({ onSuccess }: SignupFormProps) {
   const logger = useLogger().child({ hook: 'useSignupForm' });
-  const methods = useForm<RegisterUserDto>();
+  const methods = useForm<RegisterUseCaseParams>();
   const { translate } = useAuthError();
+  const authService = useAuthService();
 
-  const onSubmit = async (data: RegisterUserDto) => {
+  const onSubmit = async (data: RegisterUseCaseParams) => {
     try {
-      const result = await register(FakeAuthRepository, data);
-      if (result.success && result.user) {
-        onSuccess?.(result.user);
+      const result = await authService?.register(data);
+      if (result.success && result.data) {
+        onSuccess?.(result.data);
       } else {
         methods.setError('root', {
-          message: translate(result.errorCode),
+          message: translate(result.error?.code),
         });
       }
     } catch (err: unknown) {

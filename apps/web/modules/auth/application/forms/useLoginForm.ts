@@ -3,28 +3,29 @@
 import { useLogger } from '@maw/logger';
 import { useForm } from 'react-hook-form';
 
+import { User } from '../../domain';
+import { LoginUseCaseParams } from '../use-cases';
 import { useAuthError } from './useAuthError';
-import { UserType } from '../../domain';
-import { FakeAuthRepository } from '../../infrastructure';
-import { login, LoginDto } from '../../usecases';
+import { useAuthService } from '../useAuthService';
 
 interface LoginFormProps {
-  onSuccess?: (user: UserType) => void;
+  onSuccess?: (user: User) => void;
 }
 
 export function useLoginForm({ onSuccess }: LoginFormProps) {
   const logger = useLogger().child({ hook: 'useLoginForm' });
-  const methods = useForm<LoginDto>();
+  const authService = useAuthService();
+  const methods = useForm<LoginUseCaseParams>();
   const { translate } = useAuthError();
 
-  const onSubmit = async (data: LoginDto) => {
+  const onSubmit = async (data: LoginUseCaseParams) => {
     try {
-      const result = await login(FakeAuthRepository, data);
-      if (result.success && result.user) {
-        onSuccess?.(result.user);
+      const result = await authService.login(data);
+      if (result.success && result.data) {
+        onSuccess?.(result.data);
       } else {
         methods.setError('root', {
-          message: translate(result.errorCode),
+          message: translate(result.error?.code),
         });
       }
     } catch (err: unknown) {

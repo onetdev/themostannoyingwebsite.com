@@ -1,1 +1,2 @@
-export * from './value-object/RouteAlias';
+export * from './route-alias';
+export * from './validation';
