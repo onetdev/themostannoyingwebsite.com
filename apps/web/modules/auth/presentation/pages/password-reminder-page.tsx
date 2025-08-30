@@ -13,7 +13,7 @@ import { FormProvider } from 'react-hook-form';
 import { usePasswordReminderForm } from '../../application/forms';
 import { EmailField } from '../components/EmailField';
 
-import { useNavigationProvider } from '@/root/modules/kernel';
+import { useNavigationProvider } from '@/modules/kernel';
 
 export function PasswordReminderPage() {
   const t = useTranslations();

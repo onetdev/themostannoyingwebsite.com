@@ -2,8 +2,8 @@ import { Container } from 'inversify';
 import { FunctionComponent, PropsWithChildren, useMemo } from 'react';
 
 import { init as initAuth } from '@/modules/auth/init';
-import { DependencyContainer } from '@/root/modules/kernel';
-import { init as initShared } from '@/root/modules/kernel/init';
+import { DependencyContainer } from '@/modules/kernel';
+import { init as initShared } from '@/modules/kernel/init';
 
 export const DependencyProvider: FunctionComponent<PropsWithChildren> = ({
   children,

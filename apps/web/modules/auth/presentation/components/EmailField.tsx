@@ -2,7 +2,7 @@ import { FormFieldError, LabelText, TextInput } from '@maw/ui-lib';
 import { useTranslations } from 'next-intl';
 import { useFormContext } from 'react-hook-form';
 
-import { EMAIL_PATTERN } from '@/root/modules/kernel';
+import { EMAIL_PATTERN } from '@/modules/kernel';
 
 interface EmailFieldProps {
   fieldName?: string;

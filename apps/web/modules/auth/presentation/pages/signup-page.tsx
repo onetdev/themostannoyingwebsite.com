@@ -24,7 +24,7 @@ import {
 } from '../components';
 import { EmailField } from '../components/EmailField';
 
-import { useNavigationProvider } from '@/root/modules/kernel';
+import { useNavigationProvider } from '@/modules/kernel';
 
 export function SignupPage() {
   const t = useTranslations();

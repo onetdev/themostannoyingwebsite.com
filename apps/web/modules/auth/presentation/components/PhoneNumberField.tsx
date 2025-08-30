@@ -13,13 +13,12 @@ import {
   type TouchEvent,
   useCallback,
   useEffect,
-  useMemo,
   useRef,
   useState,
 } from 'react';
 import { useFormContext } from 'react-hook-form';
 
-import { useKernelService } from '@/root/modules/kernel';
+import { useKernelService } from '@/modules/kernel';
 
 interface PhoneNumberFieldProps {
   fieldName?: string;

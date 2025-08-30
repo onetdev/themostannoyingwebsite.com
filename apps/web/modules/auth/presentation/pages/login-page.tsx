@@ -17,7 +17,7 @@ import { FormProvider } from 'react-hook-form';
 import { useLoginForm } from '../../application/forms/useLoginForm';
 import { EmailField } from '../components/EmailField';
 
-import { useNavigationProvider } from '@/root/modules/kernel';
+import { useNavigationProvider } from '@/modules/kernel';
 
 export function LoginPage() {
   const t = useTranslations();

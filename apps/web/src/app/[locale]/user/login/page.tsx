@@ -2,7 +2,7 @@ import { Metadata } from 'next';
 import { getTranslations } from 'next-intl/server';
 
 import { PageLayout } from '@/components/PageLayout';
-import { LoginPage } from '@/root/modules/auth';
+import { LoginPage } from '@/modules/auth';
 
 export { generateStaticParams } from '@/i18n/routing';
 

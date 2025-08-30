@@ -11,7 +11,7 @@ import {
   RegisterUseCaseParams,
 } from '../use-cases';
 
-import { PromiseResult } from '@/root/modules/kernel';
+import { PromiseResult } from '@/modules/kernel';
 
 @injectable()
 export class AuthService {

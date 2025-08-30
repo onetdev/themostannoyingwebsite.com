@@ -1,7 +1,7 @@
 import { User } from '../entities';
 import { AuthError } from '../errors';
 
-import { PromiseResult } from '@/root/modules/kernel';
+import { PromiseResult } from '@/modules/kernel';
 
 export type AuthenticationData = {
   email: string;
