@@ -24,12 +24,12 @@ import {
 } from '../components';
 import { EmailField } from '../components/EmailField';
 
-import { useNavigationViewModel } from '@/modules/shared';
+import { useNavigationProvider } from '@/root/modules/kernel';
 
 export function SignupPage() {
   const t = useTranslations();
-  const { LinkComponent: Link, pathFor } = useNavigationViewModel();
-  const { navigateReplace } = useNavigationViewModel();
+  const { LinkComponent: Link, pathFor } = useNavigationProvider();
+  const { navigateReplace } = useNavigationProvider();
   const methods = useSignupForm({
     onSuccess: () => navigateReplace('user.profile'),
   });

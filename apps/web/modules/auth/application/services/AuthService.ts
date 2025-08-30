@@ -1,7 +1,7 @@
 import { inject, injectable } from 'inversify';
 
-import { PromiseResult } from '../../shared';
-import { AuthError, type AuthRepository, User } from '../domain';
+import { AuthError, type AuthRepository, User } from '../../domain';
+import { DI } from '../../types';
 import {
   login as loginUseCase,
   LoginUseCaseParams,
@@ -9,8 +9,9 @@ import {
   PasswordReminderUseCaseParams,
   register as registerUseCase,
   RegisterUseCaseParams,
-} from './use-cases';
-import { DI } from '../types';
+} from '../use-cases';
+
+import { PromiseResult } from '@/root/modules/kernel';
 
 @injectable()
 export class AuthService {

@@ -3,10 +3,10 @@
 import { useLogger } from '@maw/logger';
 import { useForm } from 'react-hook-form';
 
-import { useAuthError } from './useAuthError';
+import { useAuthFormError } from './useAuthFormError';
 import { User } from '../../domain';
+import { useAuthService } from '../services';
 import { RegisterUseCaseParams } from '../use-cases';
-import { useAuthService } from '../useAuthService';
 
 interface SignupFormProps {
   onSuccess?: (user: User) => void;
@@ -15,7 +15,7 @@ interface SignupFormProps {
 export function useSignupForm({ onSuccess }: SignupFormProps) {
   const logger = useLogger().child({ hook: 'useSignupForm' });
   const methods = useForm<RegisterUseCaseParams>();
-  const { translate } = useAuthError();
+  const { translate } = useAuthFormError();
   const authService = useAuthService();
 
   const onSubmit = async (data: RegisterUseCaseParams) => {

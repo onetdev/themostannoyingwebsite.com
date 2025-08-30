@@ -5,8 +5,8 @@ import { useForm } from 'react-hook-form';
 
 import { User } from '../../domain';
 import { LoginUseCaseParams } from '../use-cases';
-import { useAuthError } from './useAuthError';
-import { useAuthService } from '../useAuthService';
+import { useAuthFormError } from './useAuthFormError';
+import { useAuthService } from '../services';
 
 interface LoginFormProps {
   onSuccess?: (user: User) => void;
@@ -16,7 +16,7 @@ export function useLoginForm({ onSuccess }: LoginFormProps) {
   const logger = useLogger().child({ hook: 'useLoginForm' });
   const authService = useAuthService();
   const methods = useForm<LoginUseCaseParams>();
-  const { translate } = useAuthError();
+  const { translate } = useAuthFormError();
 
   const onSubmit = async (data: LoginUseCaseParams) => {
     try {

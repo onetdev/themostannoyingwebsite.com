@@ -2,10 +2,10 @@
 
 import { DropdownSelect, FormFieldError, LabelText } from '@maw/ui-lib';
 import { useTranslations } from 'next-intl';
-import { useMemo } from 'react';
+import { useEffect, useState } from 'react';
 import { useFormContext } from 'react-hook-form';
 
-import countryData from '@/root/public/assets/countries.json';
+import { useKernelService } from '@/root/modules/kernel';
 
 interface CountryFieldProps {
   fieldName?: string;
@@ -13,21 +13,26 @@ interface CountryFieldProps {
 
 export function CountryField({ fieldName = 'countryCode' }: CountryFieldProps) {
   const t = useTranslations();
+  const kernelService = useKernelService();
   const {
     formState: { errors },
     register,
   } = useFormContext();
 
-  const countryOptions = useMemo(
-    () =>
-      countryData.map(({ localName, code }) => ({
-        label: localName,
-        value: code,
-      })),
-    // Maybe a bit more annoying without a sort
-    //.sort((a, b) => a.label.localeCompare(b.label))
-    [],
-  );
+  const [countryOptions, setCountryOptions] = useState<
+    { label: string; value: string }[]
+  >([]);
+
+  useEffect(() => {
+    kernelService.getAllCountries().then((data) => {
+      setCountryOptions(
+        data.map(({ localName, code }) => ({
+          label: localName,
+          value: code,
+        })),
+      );
+    });
+  }, [kernelService]);
 
   return (
     <>

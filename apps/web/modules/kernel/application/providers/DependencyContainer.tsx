@@ -1,3 +1,5 @@
+'use client';
+
 import { Container } from 'inversify';
 import { createContext, PropsWithChildren, useContext } from 'react';
 

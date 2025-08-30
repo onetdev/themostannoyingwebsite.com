@@ -4,7 +4,7 @@ import { useTranslations } from 'next-intl';
 
 import { AuthError } from '../../domain';
 
-export function useAuthError() {
+export function useAuthFormError() {
   const t = useTranslations('form.validation.error');
 
   const errorTranslations: Record<AuthError, string> = {

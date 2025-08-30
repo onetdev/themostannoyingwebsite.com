@@ -18,7 +18,7 @@ export type NavigationParams =
   | Exclude<RouteAlias, 'article.single'>
   | { alias: 'article.single'; params: { slug: string } };
 
-export interface NavigationViewModelContextType {
+export interface NavigationProviderContextType {
   LinkComponent: (props: LinkComponentType) => ReactElement;
   navigateBack: () => void;
   navigateForward: () => void;
@@ -29,26 +29,26 @@ export interface NavigationViewModelContextType {
   unsafeNavigateReplace: (url: string) => void;
 }
 
-export const NavigationViewModelContext = createContext<
-  NavigationViewModelContextType | undefined
+export const NavigationProviderContext = createContext<
+  NavigationProviderContextType | undefined
 >(undefined);
 
-export function NavigationViewModel({
+export function NavigationProvider({
   children,
   value,
-}: PropsWithChildren<{ value: NavigationViewModelContextType }>) {
+}: PropsWithChildren<{ value: NavigationProviderContextType }>) {
   return (
-    <NavigationViewModelContext.Provider value={value}>
+    <NavigationProviderContext.Provider value={value}>
       {children}
-    </NavigationViewModelContext.Provider>
+    </NavigationProviderContext.Provider>
   );
 }
 
-export const useNavigationViewModel = (): NavigationViewModelContextType => {
-  const context = useContext(NavigationViewModelContext);
+export const useNavigationProvider = (): NavigationProviderContextType => {
+  const context = useContext(NavigationProviderContext);
   if (!context) {
     throw new Error(
-      'useNavigationViewModel must be used within a NavigationViewModelProvider',
+      'useNavigationProvider must be used within a NavigationProvider',
     );
   }
   return context;

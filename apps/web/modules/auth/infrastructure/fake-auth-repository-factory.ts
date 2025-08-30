@@ -1,8 +1,12 @@
 import { injectable } from 'inversify';
 
-import { createErrorResult, PromiseResult } from '../../shared';
+import { createErrorResult, PromiseResult } from '../../kernel';
 import { AuthError, AuthRepository, User } from '../domain';
 
+/**
+ * Fake implementation of the AuthRepository interface for testing purposes.
+ * IMPORTANT: This repository never intended to be working.
+ */
 @injectable()
 export class FakeAuthRepositoryFactory implements AuthRepository {
   private fakeResponse = <T>(

@@ -3,8 +3,8 @@
 import { useLogger } from '@maw/logger';
 import { useForm } from 'react-hook-form';
 
+import { useAuthService } from '../services';
 import { PasswordReminderUseCaseParams } from '../use-cases';
-import { useAuthService } from '../useAuthService';
 
 interface PasswordReminderFormProps {
   onSuccess?: () => void;

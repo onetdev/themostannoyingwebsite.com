@@ -1,6 +1,6 @@
 import { Container } from 'inversify';
 
-import { AuthService } from './application/AuthService';
+import { AuthService } from './application';
 import { FakeAuthRepositoryFactory } from './infrastructure';
 import { DI } from './types';
 

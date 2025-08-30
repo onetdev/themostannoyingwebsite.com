@@ -13,11 +13,11 @@ import { FormProvider } from 'react-hook-form';
 import { usePasswordReminderForm } from '../../application/forms';
 import { EmailField } from '../components/EmailField';
 
-import { useNavigationViewModel } from '@/modules/shared';
+import { useNavigationProvider } from '@/root/modules/kernel';
 
 export function PasswordReminderPage() {
   const t = useTranslations();
-  const { LinkComponent: Link, pathFor } = useNavigationViewModel();
+  const { LinkComponent: Link, pathFor } = useNavigationProvider();
   const methods = usePasswordReminderForm({
     onSuccess: () => {},
   });

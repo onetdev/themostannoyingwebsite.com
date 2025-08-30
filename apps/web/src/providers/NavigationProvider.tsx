@@ -7,9 +7,9 @@ import { AppLink } from '@/components/AppLink';
 import { useRouter } from '@/i18n/navigation';
 import {
   NavigationParams,
-  NavigationViewModel,
+  NavigationProvider as NavigationProviderBase,
   RouteAlias,
-} from '@/modules/shared';
+} from '@/root/modules/kernel';
 
 const routeAliasToPathMap: Record<RouteAlias, string> = {
   about: '/about',
@@ -45,7 +45,7 @@ export const NavigationProvider: FunctionComponent<PropsWithChildren> = ({
   };
 
   return (
-    <NavigationViewModel
+    <NavigationProviderBase
       value={{
         LinkComponent: AppLink,
         navigateBack: navigation.back,
@@ -59,6 +59,6 @@ export const NavigationProvider: FunctionComponent<PropsWithChildren> = ({
         unsafeNavigateReplace: navigation.replace,
       }}>
       {children}
-    </NavigationViewModel>
+    </NavigationProviderBase>
   );
 };

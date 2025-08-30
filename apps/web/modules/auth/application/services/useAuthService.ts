@@ -1,6 +1,7 @@
 import { AuthService } from './AuthService';
-import { useDependencyContainer } from '../../shared/presentation/dependency-container';
-import { DI } from '../types';
+import { DI } from '../../types';
+
+import { useDependencyContainer } from '@/root/modules/kernel';
 
 export const useAuthService = () => {
   const container = useDependencyContainer();
