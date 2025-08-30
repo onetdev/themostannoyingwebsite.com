@@ -14,10 +14,10 @@ import {
 import { useTranslations } from 'next-intl';
 import { FormProvider } from 'react-hook-form';
 
+import { useLoginForm } from '../../application/forms/useLoginForm';
 import { EmailField } from '../components/EmailField';
-import { useLoginForm } from '../forms/useLoginForm';
 
-import { useNavigationViewModel } from '@/modules/shared';
+import { useNavigationProvider } from '@/modules/kernel';
 
 export function LoginPage() {
   const t = useTranslations();
@@ -25,7 +25,7 @@ export function LoginPage() {
     LinkComponent: Link,
     navigateReplace,
     pathFor,
-  } = useNavigationViewModel();
+  } = useNavigationProvider();
   const form = useLoginForm({
     onSuccess: () => navigateReplace('user.profile'),
   });

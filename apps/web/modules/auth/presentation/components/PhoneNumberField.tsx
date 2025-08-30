@@ -13,13 +13,12 @@ import {
   type TouchEvent,
   useCallback,
   useEffect,
-  useMemo,
   useRef,
   useState,
 } from 'react';
 import { useFormContext } from 'react-hook-form';
 
-import countryData from '@/root/public/assets/countries.json';
+import { useKernelService } from '@/modules/kernel';
 
 interface PhoneNumberFieldProps {
   fieldName?: string;
@@ -31,6 +30,7 @@ export function PhoneNumberField({
   countryCodeFieldName = 'phoneNumberCountry',
 }: PhoneNumberFieldProps) {
   const t = useTranslations();
+  const kernelService = useKernelService();
   const {
     formState: { errors },
     register,
@@ -43,16 +43,20 @@ export function PhoneNumberField({
   const [phoneNumberUpdateDirection, setPhoneNumberUpdateDirection] =
     useState(0);
 
-  const phoneCountryOptions = useMemo(
-    () =>
-      countryData
-        .filter(({ code }) => code !== 'US')
-        .map(({ localName, phone }) => ({
+  const [phoneCountryOptions, setPhoneCountryOptions] = useState<
+    { label: string; value: string }[]
+  >([]);
+
+  useEffect(() => {
+    kernelService.getAllCountries().then((data) => {
+      setPhoneCountryOptions(
+        data.map(({ localName, phone }) => ({
           label: `${phone} ${localName}`,
           value: phone,
         })),
-    [],
-  );
+      );
+    });
+  }, [kernelService]);
 
   useEffect(() => {
     if (phoneNumberUpdateDirection === 0) {

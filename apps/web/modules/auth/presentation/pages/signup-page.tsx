@@ -14,6 +14,7 @@ import {
 import { useTranslations } from 'next-intl';
 import { FormProvider } from 'react-hook-form';
 
+import { useSignupForm } from '../../application/forms';
 import {
   CountryField,
   DateOfBirthField,
@@ -22,14 +23,13 @@ import {
   PhoneNumberField,
 } from '../components';
 import { EmailField } from '../components/EmailField';
-import { useSignupForm } from '../forms';
 
-import { useNavigationViewModel } from '@/modules/shared';
+import { useNavigationProvider } from '@/modules/kernel';
 
 export function SignupPage() {
   const t = useTranslations();
-  const { LinkComponent: Link, pathFor } = useNavigationViewModel();
-  const { navigateReplace } = useNavigationViewModel();
+  const { LinkComponent: Link, pathFor } = useNavigationProvider();
+  const { navigateReplace } = useNavigationProvider();
   const methods = useSignupForm({
     onSuccess: () => navigateReplace('user.profile'),
   });
