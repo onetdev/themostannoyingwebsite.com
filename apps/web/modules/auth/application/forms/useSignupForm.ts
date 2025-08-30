@@ -20,7 +20,7 @@ export function useSignupForm({ onSuccess }: SignupFormProps) {
 
   const onSubmit = async (data: RegisterUseCaseParams) => {
     try {
-      const result = await authService?.register(data);
+      const result = await authService.register(data);
       if (result.success && result.data) {
         onSuccess?.(result.data);
       } else {

@@ -19,7 +19,7 @@ export function usePasswordReminderForm({
 
   const onSubmit = async (data: PasswordReminderUseCaseParams) => {
     try {
-      await authService?.passwordReminder(data);
+      await authService.passwordReminder(data);
       onSuccess?.();
     } catch (err: unknown) {
       logger.warn(err, 'Password reminder failed');
