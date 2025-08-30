@@ -1,4 +1,4 @@
-import { User } from '../entities/User';
+import { User } from '../entities';
 import { AuthError } from '../errors';
 
 import { PromiseResult } from '@/root/modules/kernel';

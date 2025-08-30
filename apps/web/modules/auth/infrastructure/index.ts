@@ -1,1 +1,1 @@
-export * from './fake-auth-repository-factory';
+export * from './FakeAuthRepository';

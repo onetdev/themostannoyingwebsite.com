@@ -8,7 +8,7 @@ import { AuthError, AuthRepository, User } from '../domain';
  * IMPORTANT: This repository never intended to be working.
  */
 @injectable()
-export class FakeAuthRepositoryFactory implements AuthRepository {
+export class FakeAuthRepository implements AuthRepository {
   private fakeResponse = <T>(
     message: string,
     code: AuthError,
