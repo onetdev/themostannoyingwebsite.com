@@ -6,7 +6,7 @@ import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 
 const newsletterFormSchema = z.object({
-  email: z.string().email(),
+  email: z.email(),
 });
 
 type NewsletterFormData = z.infer<typeof newsletterFormSchema>;

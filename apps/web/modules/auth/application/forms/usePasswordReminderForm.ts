@@ -9,8 +9,10 @@ import { useAuthService } from '../services';
 import { PasswordReminderUseCaseParams } from '../use-cases';
 
 const passwordReminderFormSchema = z.object({
-  email: z.string().email('form.validation.error.emailInvalid'),
-  captcha: z.string().min(1, 'form.validation.error.captchaRequired'),
+  email: z.email({ error: 'form.validation.error.emailInvalid' }),
+  captcha: z
+    .string()
+    .min(1, { error: 'form.validation.error.captchaRequired' }),
 });
 
 type PasswordReminderFormData = z.infer<typeof passwordReminderFormSchema>;

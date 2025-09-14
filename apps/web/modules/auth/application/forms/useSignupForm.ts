@@ -12,31 +12,29 @@ import { RegisterUseCaseParams } from '../use-cases';
 
 const signupFormSchema = z
   .object({
-    firstName: z.string().min(1, 'form.validation.error.required'),
-    lastName: z.string().min(1, 'form.validation.error.required'),
-    email: z
+    firstName: z.string().min(1, { error: 'form.validation.error.required' }),
+    lastName: z.string().min(1, { error: 'form.validation.error.required' }),
+    email: z.email({ error: 'form.validation.error.emailInvalid' }),
+    password: z
       .string()
-      .min(1, 'form.validation.error.required')
-      .email('form.validation.error.emailInvalid'),
-    password: z.string().min(8, 'form.validation.error.passwordMinLength'),
-    passwordConfirmation: z.string().min(1, 'form.validation.error.required'),
+      .min(8, { error: 'form.validation.error.passwordMinLength' }),
+    passwordConfirmation: z
+      .string()
+      .min(1, { error: 'form.validation.error.required' }),
     dateOfBirth: z.date().optional(),
-    username: z.string().min(1, 'form.validation.error.required'),
+    username: z.string().min(1, { error: 'form.validation.error.required' }),
     nickname: z.string().optional(),
     consentNewsletter: z.boolean().optional(),
     consentPrivacyPolicy: z.boolean().refine((val) => val === true, {
-      message: 'form.validation.error.required',
+      error: 'form.validation.error.required',
     }),
     gender: GenderSchema.optional(),
-    countryCode: z.string().min(1, 'form.validation.error.required'),
+    countryCode: z.string().min(1, { error: 'form.validation.error.required' }),
     phoneNumberCountry: z.string().optional(),
-    phoneNumber: z
-      .number()
-      .optional()
-      .transform((val) => (val ? Number(val) : undefined)),
+    phoneNumber: z.number().optional(),
   })
   .refine((data) => data.password === data.passwordConfirmation, {
-    message: 'form.validation.error.passwordsDoNotMatch',
+    error: 'form.validation.error.passwordsDoNotMatch',
   });
 
 export type SignupFormData = z.infer<typeof signupFormSchema>;

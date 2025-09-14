@@ -2,6 +2,7 @@
 
 import { ThemeProvider } from 'next-themes';
 import { FunctionComponent, PropsWithChildren } from 'react';
+import { z } from 'zod';
 
 import { DependencyProvider } from './DependencyProvider';
 import { NavigationProvider } from './NavigationProvider';
@@ -12,6 +13,13 @@ import { RootPortalProvider } from '@/providers/RootPortalProvider';
 const RootProviderContainer: FunctionComponent<PropsWithChildren> = ({
   children,
 }) => {
+  z.config({
+    customError: (issue) => {
+      console.log(issue);
+      return undefined;
+    },
+  });
+
   return (
     <RootPortalProvider>
       <DependencyProvider>
