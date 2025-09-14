@@ -1,10 +1,19 @@
 'use client';
 
+import { zodResolver } from '@hookform/resolvers/zod';
 import { useLogger } from '@maw/logger';
 import { useForm } from 'react-hook-form';
+import { z } from 'zod';
 
 import { useAuthService } from '../services';
 import { PasswordReminderUseCaseParams } from '../use-cases';
+
+const passwordReminderFormSchema = z.object({
+  email: z.string().email('form.validation.error.emailInvalid'),
+  captcha: z.string().min(1, 'form.validation.error.captchaRequired'),
+});
+
+type PasswordReminderFormData = z.infer<typeof passwordReminderFormSchema>;
 
 interface PasswordReminderFormProps {
   onSuccess?: () => void;
@@ -14,12 +23,17 @@ export function usePasswordReminderForm({
   onSuccess,
 }: PasswordReminderFormProps) {
   const logger = useLogger().child({ hook: 'usePasswordReminderForm' });
-  const methods = useForm<PasswordReminderUseCaseParams>();
+  const methods = useForm<PasswordReminderFormData>({
+    resolver: zodResolver(passwordReminderFormSchema),
+  });
   const authService = useAuthService();
 
-  const onSubmit = async (data: PasswordReminderUseCaseParams) => {
+  const onSubmit = async (data: PasswordReminderFormData) => {
     try {
-      await authService.passwordReminder(data);
+      const payload: PasswordReminderUseCaseParams = {
+        ...data,
+      };
+      await authService.passwordReminder(payload);
       onSuccess?.();
     } catch (err: unknown) {
       logger.warn(err, 'Password reminder failed');

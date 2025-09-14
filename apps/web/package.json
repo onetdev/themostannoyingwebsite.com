@@ -23,6 +23,7 @@
     "@fortawesome/fontawesome-svg-core": "^6.7.2",
     "@fortawesome/free-solid-svg-icons": "^6.7.2",
     "@fortawesome/react-fontawesome": "^0.2.2",
+    "@hookform/resolvers": "^5.2.2",
     "@maw/content-api": "workspace:^",
     "@maw/logger": "workspace:^",
     "@maw/ui-lib": "workspace:^",

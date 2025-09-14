@@ -1,16 +1,21 @@
+import { zodResolver } from '@hookform/resolvers/zod';
 import { Button, FormFieldError, Modal, TextInput } from '@maw/ui-lib';
 import { random } from '@maw/utils/math';
 import { useMessages, useTranslations } from 'next-intl';
 import { FunctionComponent, useMemo, useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
-
-import { type NewsletterFormInputs } from '@/features/newsletter';
-import { EMAIL_PATTERN } from '@/modules/kernel';
+import { z } from 'zod';
 
 type NewsletterModalProps = {
   visible?: boolean;
   onDismiss?: () => void;
 };
+
+const newsletterSchema = z.object({
+  email: z.string().email(),
+});
+
+type NewsletterFormInputs = z.infer<typeof newsletterSchema>;
 
 const NewsletterModal: FunctionComponent<NewsletterModalProps> = ({
   visible = false,
@@ -27,7 +32,9 @@ const NewsletterModal: FunctionComponent<NewsletterModalProps> = ({
     register,
     handleSubmit,
     formState: { errors, isValid },
-  } = useForm<NewsletterFormInputs>();
+  } = useForm<NewsletterFormInputs>({
+    resolver: zodResolver(newsletterSchema),
+  });
 
   const confirmPool = useMemo(() => {
     const items = Object.keys(messages.newsletter.modal.confirmations).map(
@@ -55,7 +62,7 @@ const NewsletterModal: FunctionComponent<NewsletterModalProps> = ({
     return <>{flipActions ? buttons : buttons.reverse()}</>;
   };
 
-  const onSubmit: SubmitHandler<NewsletterFormInputs> = (_data) => {
+  const onSubmit: SubmitHandler<NewsletterFormInputs> = () => {
     alert(t('newsletter.modal.useFormActions'));
   };
 
@@ -85,13 +92,7 @@ const NewsletterModal: FunctionComponent<NewsletterModalProps> = ({
               type="email"
               className="w-full"
               required
-              {...register('email', {
-                required: t('form.validation.error.required'),
-                pattern: {
-                  value: EMAIL_PATTERN,
-                  message: t('form.validation.error.emailInvalid'),
-                },
-              })}
+              {...register('email')}
             />
             <FormFieldError error={errors.email} />
           </>

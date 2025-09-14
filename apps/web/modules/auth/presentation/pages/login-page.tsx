@@ -15,9 +15,9 @@ import { useTranslations } from 'next-intl';
 import { FormProvider } from 'react-hook-form';
 
 import { useLoginForm } from '../../application/forms/useLoginForm';
-import { EmailField } from '../components/EmailField';
+import { EmailField } from '../fields/EmailField';
 
-import { useNavigationProvider } from '@/modules/kernel';
+import { useNavigationProvider } from '@/kernel';
 
 export function LoginPage() {
   const t = useTranslations();

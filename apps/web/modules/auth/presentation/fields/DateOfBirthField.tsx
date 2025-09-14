@@ -88,12 +88,7 @@ export function DateOfBirthField({
           aria-label={t('user.field.dateOfBirthDay')}
         />
       </div>
-      <input
-        type="hidden"
-        {...register(fieldName, {
-          required: t('form.validation.error.required'),
-        })}
-      />
+      <input type="hidden" {...register(fieldName)} />
       <FormFieldError error={errors[fieldName]} />
     </div>
   );

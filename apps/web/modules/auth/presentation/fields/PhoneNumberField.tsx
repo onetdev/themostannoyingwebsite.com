@@ -18,7 +18,7 @@ import {
 } from 'react';
 import { useFormContext } from 'react-hook-form';
 
-import { useKernelService } from '@/modules/kernel';
+import { useKernelService } from '@/kernel';
 
 interface PhoneNumberFieldProps {
   fieldName?: string;
@@ -139,9 +139,7 @@ export function PhoneNumberField({
             className="w-1/4"
             aria-label={t('user.field.phoneNumberCountryCode')}
             values={phoneCountryOptions}
-            {...register(countryCodeFieldName, {
-              required: t('form.validation.error.required'),
-            })}
+            {...register(countryCodeFieldName)}
           />
           <div className="flex w-3/4">
             <Button
@@ -160,9 +158,7 @@ export function PhoneNumberField({
               disabled
               aria-label={t('user.field.phoneNumberAreaCode')}
               className="max-w-44 rounded-none border-x-0 select-none"
-              {...register(fieldName, {
-                required: t('form.validation.error.required'),
-              })}
+              {...register(fieldName)}
             />
             <Button
               ref={$incrementBtn}

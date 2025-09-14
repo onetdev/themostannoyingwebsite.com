@@ -5,7 +5,7 @@ import { useTranslations } from 'next-intl';
 import { useEffect, useState } from 'react';
 import { useFormContext } from 'react-hook-form';
 
-import { useKernelService } from '@/modules/kernel';
+import { useKernelService } from '@/kernel';
 
 interface CountryFieldProps {
   fieldName?: string;
@@ -44,9 +44,7 @@ export function CountryField({ fieldName = 'countryCode' }: CountryFieldProps) {
           id={fieldName}
           aria-label={t('user.field.countryCode')}
           values={countryOptions}
-          {...register(fieldName, {
-            required: t('form.validation.error.required'),
-          })}
+          {...register(fieldName)}
         />
       </label>
       <FormFieldError error={errors[fieldName]} />

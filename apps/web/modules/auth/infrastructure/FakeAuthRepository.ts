@@ -1,7 +1,8 @@
 import { injectable } from 'inversify';
 
-import { createErrorResult, PromiseResult } from '../../kernel';
 import { AuthError, AuthRepository, User } from '../domain';
+
+import { createErrorResult, PromiseResult } from '@/kernel';
 
 /**
  * Fake implementation of the AuthRepository interface for testing purposes.
