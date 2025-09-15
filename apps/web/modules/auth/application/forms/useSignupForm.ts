@@ -1,43 +1,15 @@
 'use client';
 
-import { zodResolver } from '@hookform/resolvers/zod';
 import { useLogger } from '@maw/logger';
 import { useForm } from 'react-hook-form';
-import { z } from 'zod';
 
 import { useAuthFormError } from './useAuthFormError';
-import { GenderSchema, User } from '../../domain';
+import { User } from '../../domain';
 import { useAuthService } from '../services';
 import { RegisterUseCaseParams } from '../use-cases';
+import { getSignupFormSchema, SignupFormData } from './signup-form.schema';
 
-const signupFormSchema = z
-  .object({
-    firstName: z.string().min(1, { error: 'form.validation.error.required' }),
-    lastName: z.string().min(1, { error: 'form.validation.error.required' }),
-    email: z.email({ error: 'form.validation.error.emailInvalid' }),
-    password: z
-      .string()
-      .min(8, { error: 'form.validation.error.passwordMinLength' }),
-    passwordConfirmation: z
-      .string()
-      .min(1, { error: 'form.validation.error.required' }),
-    dateOfBirth: z.date().optional(),
-    username: z.string().min(1, { error: 'form.validation.error.required' }),
-    nickname: z.string().optional(),
-    consentNewsletter: z.boolean().optional(),
-    consentPrivacyPolicy: z.boolean().refine((val) => val === true, {
-      error: 'form.validation.error.required',
-    }),
-    gender: GenderSchema.optional(),
-    countryCode: z.string().min(1, { error: 'form.validation.error.required' }),
-    phoneNumberCountry: z.string().optional(),
-    phoneNumber: z.number().optional(),
-  })
-  .refine((data) => data.password === data.passwordConfirmation, {
-    error: 'form.validation.error.passwordsDoNotMatch',
-  });
-
-export type SignupFormData = z.infer<typeof signupFormSchema>;
+import { useZodFormValidator } from '@/root/kernel';
 
 export const signupFormDefaultValues: SignupFormData = {
   firstName: '',
@@ -61,8 +33,9 @@ interface SignupFormProps {
 
 export function useSignupForm({ onSuccess }: SignupFormProps) {
   const logger = useLogger().child({ hook: 'useSignupForm' });
+  const resolver = useZodFormValidator(getSignupFormSchema);
   const methods = useForm<SignupFormData>({
-    resolver: zodResolver(signupFormSchema),
+    resolver,
     defaultValues: signupFormDefaultValues,
   });
   const { translate } = useAuthFormError();

@@ -1,21 +1,16 @@
 'use client';
 
-import { zodResolver } from '@hookform/resolvers/zod';
 import { useLogger } from '@maw/logger';
 import { useForm } from 'react-hook-form';
-import { z } from 'zod';
 
 import { useAuthService } from '../services';
 import { PasswordReminderUseCaseParams } from '../use-cases';
+import {
+  getPasswordReminderFormSchema,
+  PasswordReminderFormData,
+} from './password-reminder-form.schema';
 
-const passwordReminderFormSchema = z.object({
-  email: z.email({ error: 'form.validation.error.emailInvalid' }),
-  captcha: z
-    .string()
-    .min(1, { error: 'form.validation.error.captchaRequired' }),
-});
-
-type PasswordReminderFormData = z.infer<typeof passwordReminderFormSchema>;
+import { useZodFormValidator } from '@/root/kernel';
 
 interface PasswordReminderFormProps {
   onSuccess?: () => void;
@@ -25,8 +20,9 @@ export function usePasswordReminderForm({
   onSuccess,
 }: PasswordReminderFormProps) {
   const logger = useLogger().child({ hook: 'usePasswordReminderForm' });
+  const resolver = useZodFormValidator(getPasswordReminderFormSchema);
   const methods = useForm<PasswordReminderFormData>({
-    resolver: zodResolver(passwordReminderFormSchema),
+    resolver,
   });
   const authService = useAuthService();
 

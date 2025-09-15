@@ -1,25 +1,15 @@
 'use client';
 
-import { zodResolver } from '@hookform/resolvers/zod';
 import { useLogger } from '@maw/logger';
 import { useForm } from 'react-hook-form';
-import { z } from 'zod';
 
 import { useAuthFormError } from './useAuthFormError';
 import { User } from '../../domain';
 import { useAuthService } from '../services';
 import { LoginUseCaseParams } from '../use-cases';
+import { getLoginFormSchema, LoginFormData } from './login-form.schema';
 
-const loginFormSchema = z.object({
-  email: z.email(),
-  password: z.string().min(1, { error: 'form.validation.errors.required' }),
-  captcha: z
-    .string()
-    .min(1, { error: 'form.validation.errors.captchaRequired' }),
-  remember: z.boolean().optional(),
-});
-
-type LoginFormData = z.infer<typeof loginFormSchema>;
+import { useZodFormValidator } from '@/kernel';
 
 interface LoginFormProps {
   onSuccess?: (user: User) => void;
@@ -28,9 +18,8 @@ interface LoginFormProps {
 export function useLoginForm({ onSuccess }: LoginFormProps) {
   const logger = useLogger().child({ hook: 'useLoginForm' });
   const authService = useAuthService();
-  const methods = useForm<LoginFormData>({
-    resolver: zodResolver(loginFormSchema),
-  });
+  const resolver = useZodFormValidator(getLoginFormSchema);
+  const methods = useForm<LoginFormData>({ resolver });
   const { translate } = useAuthFormError();
 
   const onSubmit = async (data: LoginFormData) => {

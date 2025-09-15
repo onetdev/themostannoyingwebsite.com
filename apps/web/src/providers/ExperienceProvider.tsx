@@ -16,7 +16,7 @@ import { NotificationPermissionExperienceHost } from '@/features/notification';
 import { useExperienceFlagsStore } from '@/state/experience_flags';
 import { useUserGrantsStore } from '@/state/user_grants';
 
-const ExperienceProvider: FunctionComponent<PropsWithChildren> = ({
+export const ExperienceProvider: FunctionComponent<PropsWithChildren> = ({
   children,
 }) => {
   const t = useTranslations();
@@ -51,5 +51,3 @@ const ExperienceProvider: FunctionComponent<PropsWithChildren> = ({
     </>
   );
 };
-
-export default ExperienceProvider;

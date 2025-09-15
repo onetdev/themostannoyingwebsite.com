@@ -2,35 +2,28 @@
 
 import { ThemeProvider } from 'next-themes';
 import { FunctionComponent, PropsWithChildren } from 'react';
-import { z } from 'zod';
 
 import { DependencyProvider } from './DependencyProvider';
 import { NavigationProvider } from './NavigationProvider';
+import { ZodTranslationConfig } from './ZodTranslationProvider';
 
-import ExperienceProvider from '@/providers/ExperienceProvider';
+import { ExperienceProvider } from '@/providers/ExperienceProvider';
 import { RootPortalProvider } from '@/providers/RootPortalProvider';
 
-const RootProviderContainer: FunctionComponent<PropsWithChildren> = ({
+export const RootProviderContainer: FunctionComponent<PropsWithChildren> = ({
   children,
 }) => {
-  z.config({
-    customError: (issue) => {
-      console.log(issue);
-      return undefined;
-    },
-  });
-
   return (
-    <RootPortalProvider>
-      <DependencyProvider>
-        <ThemeProvider defaultTheme="dark" enableColorScheme enableSystem>
-          <NavigationProvider>
-            <ExperienceProvider>{children}</ExperienceProvider>
-          </NavigationProvider>
-        </ThemeProvider>
-      </DependencyProvider>
-    </RootPortalProvider>
+    <ZodTranslationConfig>
+      <RootPortalProvider>
+        <DependencyProvider>
+          <ThemeProvider defaultTheme="dark" enableColorScheme enableSystem>
+            <NavigationProvider>
+              <ExperienceProvider>{children}</ExperienceProvider>
+            </NavigationProvider>
+          </ThemeProvider>
+        </DependencyProvider>
+      </RootPortalProvider>
+    </ZodTranslationConfig>
   );
 };
-
-export default RootProviderContainer;

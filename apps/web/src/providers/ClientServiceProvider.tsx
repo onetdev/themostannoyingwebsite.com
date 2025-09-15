@@ -8,7 +8,7 @@ import useNavigationStats from '@/hooks/useNavigationStats';
 import useReducedMotionListener from '@/hooks/useReducedMotionListener';
 import useServiceWorker from '@/hooks/useServiceWorker';
 
-const ClientServiceProvider: FunctionComponent = () => {
+export const ClientServiceProvider: FunctionComponent = () => {
   useServiceWorker();
   useNavigationStats();
   useFirstInteractionListener();
@@ -17,5 +17,3 @@ const ClientServiceProvider: FunctionComponent = () => {
 
   return null;
 };
-
-export default ClientServiceProvider;
