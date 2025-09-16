@@ -2,10 +2,8 @@ import { Button, FormFieldError, Modal, TextInput } from '@maw/ui-lib';
 import { random } from '@maw/utils/math';
 import { useMessages, useTranslations } from 'next-intl';
 import { FunctionComponent, useMemo, useState } from 'react';
-import { SubmitHandler, useForm } from 'react-hook-form';
 
-import { type NewsletterFormInputs } from '@/features/newsletter';
-import { EMAIL_PATTERN } from '@/modules/kernel';
+import { useNewsletterForm } from '../hooks/useNewsletterForm';
 
 type NewsletterModalProps = {
   visible?: boolean;
@@ -27,7 +25,8 @@ const NewsletterModal: FunctionComponent<NewsletterModalProps> = ({
     register,
     handleSubmit,
     formState: { errors, isValid },
-  } = useForm<NewsletterFormInputs>();
+    onSubmit,
+  } = useNewsletterForm();
 
   const confirmPool = useMemo(() => {
     const items = Object.keys(messages.newsletter.modal.confirmations).map(
@@ -53,10 +52,6 @@ const NewsletterModal: FunctionComponent<NewsletterModalProps> = ({
     ];
 
     return <>{flipActions ? buttons : buttons.reverse()}</>;
-  };
-
-  const onSubmit: SubmitHandler<NewsletterFormInputs> = (_data) => {
-    alert(t('newsletter.modal.useFormActions'));
   };
 
   const randomConfirmation = () => {
@@ -85,13 +80,7 @@ const NewsletterModal: FunctionComponent<NewsletterModalProps> = ({
               type="email"
               className="w-full"
               required
-              {...register('email', {
-                required: t('form.validation.error.required'),
-                pattern: {
-                  value: EMAIL_PATTERN,
-                  message: t('form.validation.error.emailInvalid'),
-                },
-              })}
+              {...register('email')}
             />
             <FormFieldError error={errors.email} />
           </>

@@ -11,6 +11,9 @@
       ],
       "@/modules/*": [
         "./modules/*"
+      ],
+      "@/kernel": [
+        "./kernel/index.ts"
       ]
     },
     "experimentalDecorators": true,

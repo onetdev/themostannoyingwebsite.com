@@ -7,6 +7,26 @@ import { useAuthFormError } from './useAuthFormError';
 import { User } from '../../domain';
 import { useAuthService } from '../services';
 import { RegisterUseCaseParams } from '../use-cases';
+import { getSignupFormSchema, SignupFormData } from './signup-form.schema';
+
+import { useZodFormValidator } from '@/kernel';
+
+export const signupFormDefaultValues: SignupFormData = {
+  firstName: '',
+  lastName: '',
+  email: '',
+  password: '',
+  passwordConfirmation: '',
+  dateOfBirth: undefined,
+  username: '',
+  nickname: '',
+  consentNewsletter: false,
+  consentPrivacyPolicy: false,
+  countryCode: '',
+  phoneNumberCountry: undefined,
+  phoneNumber: undefined,
+  captcha: '',
+};
 
 interface SignupFormProps {
   onSuccess?: (user: User) => void;
@@ -14,13 +34,23 @@ interface SignupFormProps {
 
 export function useSignupForm({ onSuccess }: SignupFormProps) {
   const logger = useLogger().child({ hook: 'useSignupForm' });
-  const methods = useForm<RegisterUseCaseParams>();
+  const resolver = useZodFormValidator(getSignupFormSchema);
+  const methods = useForm<SignupFormData>({
+    resolver,
+    defaultValues: signupFormDefaultValues,
+  });
   const { translate } = useAuthFormError();
   const authService = useAuthService();
 
-  const onSubmit = async (data: RegisterUseCaseParams) => {
+  const onSubmit = async (data: SignupFormData) => {
     try {
-      const result = await authService.register(data);
+      const registerData: RegisterUseCaseParams = {
+        ...data,
+        consentNewsletter: Boolean(data.consentNewsletter),
+        consentPrivacyPolicy: Boolean(data.consentPrivacyPolicy),
+      };
+
+      const result = await authService.register(registerData);
       if (result.success && result.data) {
         onSuccess?.(result.data);
       } else {

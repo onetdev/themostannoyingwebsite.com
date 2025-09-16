@@ -174,6 +174,7 @@
         "min": "Value must be at least {count}",
         "max": "Value must be no more than {count}",
         "emailInvalid": "Invalid email address",
+        "captchaRequired": "Captcha is required",
         "captchaInvalid": "Invalid captcha",
         "patternMismatch": "The input does not match the required pattern",
         "passwordMismatch": "Passwords do not match",

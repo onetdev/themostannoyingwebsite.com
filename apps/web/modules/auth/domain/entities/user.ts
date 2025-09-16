@@ -3,8 +3,8 @@ import { z } from 'zod';
 import { GenderSchema } from '../value-objects';
 
 export const UserSchema = z.object({
-  id: z.string().uuid(),
-  email: z.string().email(),
+  id: z.uuid(),
+  email: z.email(),
   firstName: z.string().min(1),
   lastName: z.string().min(1),
   nickname: z.string().min(1).optional(),

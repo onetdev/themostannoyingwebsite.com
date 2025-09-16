@@ -11,9 +11,9 @@ import { useTranslations } from 'next-intl';
 import { FormProvider } from 'react-hook-form';
 
 import { usePasswordReminderForm } from '../../application/forms';
-import { EmailField } from '../components/EmailField';
+import { EmailField } from '../fields/EmailField';
 
-import { useNavigationProvider } from '@/modules/kernel';
+import { useNavigationProvider } from '@/kernel';
 
 export function PasswordReminderPage() {
   const t = useTranslations();

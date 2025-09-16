@@ -1,6 +1,9 @@
-import { Country, CountryRepository } from '../domain';
-import countryList from './static/countries.json';
+import { injectable } from 'inversify';
 
+import { Country, CountryRepository } from '../domain';
+import { countryList } from './data/countries';
+
+@injectable()
 export class StaticCountryRepository implements CountryRepository {
   private countries: Country[];
 

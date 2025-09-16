@@ -5,6 +5,12 @@ import { useForm } from 'react-hook-form';
 
 import { useAuthService } from '../services';
 import { PasswordReminderUseCaseParams } from '../use-cases';
+import {
+  getPasswordReminderFormSchema,
+  PasswordReminderFormData,
+} from './password-reminder-form.schema';
+
+import { useZodFormValidator } from '@/kernel';
 
 interface PasswordReminderFormProps {
   onSuccess?: () => void;
@@ -14,12 +20,18 @@ export function usePasswordReminderForm({
   onSuccess,
 }: PasswordReminderFormProps) {
   const logger = useLogger().child({ hook: 'usePasswordReminderForm' });
-  const methods = useForm<PasswordReminderUseCaseParams>();
+  const resolver = useZodFormValidator(getPasswordReminderFormSchema);
+  const methods = useForm<PasswordReminderFormData>({
+    resolver,
+  });
   const authService = useAuthService();
 
-  const onSubmit = async (data: PasswordReminderUseCaseParams) => {
+  const onSubmit = async (data: PasswordReminderFormData) => {
     try {
-      await authService.passwordReminder(data);
+      const payload: PasswordReminderUseCaseParams = {
+        ...data,
+      };
+      await authService.passwordReminder(payload);
       onSuccess?.();
     } catch (err: unknown) {
       logger.warn(err, 'Password reminder failed');

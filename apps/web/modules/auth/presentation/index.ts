@@ -1,2 +1,3 @@
-export * from './components';
+export * from './LoginPage';
 export * from './pages';
+export * from './SignupPage';

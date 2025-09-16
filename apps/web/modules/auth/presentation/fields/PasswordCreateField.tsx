@@ -13,33 +13,6 @@ interface PasswordCreateFieldProps {
   fieldName?: string;
 }
 
-const validate = (value: string, t: ReturnType<typeof useTranslations>) => {
-  // Split up in this way to annoy the user the most
-  if (!value.match(/[A-Z]/)) {
-    return t('form.validation.error.missingUppercase');
-  } else if (!value.match(/[a-z]/)) {
-    return t('form.validation.error.missingLowercase');
-  } else if (!value.match(/[0-9]/)) {
-    return t('form.validation.error.missingNumber');
-  } else if (!value.match(/[^A-Za-z0-9]/)) {
-    return t('form.validation.error.missingSpecialCharacter');
-  }
-
-  const numbers = value.match(/[0-9]/g) ?? [];
-  const sumOfNumbers = numbers.map(Number).reduce((a, b) => a + b, 0);
-  if (sumOfNumbers < 30) {
-    return t('form.validation.error.sumOfNumbersGte', {
-      count: 30,
-    });
-  }
-
-  if (sumOfNumbers % 2) {
-    return t('form.validation.error.sumOfNumbersMustBeEven');
-  }
-
-  return t('form.validation.error.passwordAlreadyTaken');
-};
-
 export function PasswordCreateField({
   fieldName = 'password',
 }: PasswordCreateFieldProps) {
@@ -67,14 +40,7 @@ export function PasswordCreateField({
           type="password"
           className="w-full"
           id={fieldName}
-          {...register(fieldName, {
-            required: t('form.validation.error.required'),
-            minLength: {
-              value: 12,
-              message: t('form.validation.error.minLength', { count: 12 }),
-            },
-            validate: (value) => validate(value, t),
-          })}
+          {...register(fieldName)}
         />
       </label>
       <PasswordStrengthBar

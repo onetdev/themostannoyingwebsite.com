@@ -14,12 +14,12 @@ import {
 import { useTranslations } from 'next-intl';
 import { FormProvider } from 'react-hook-form';
 
-import { useLoginForm } from '../../application/forms/useLoginForm';
-import { EmailField } from '../components/EmailField';
+import { EmailField } from './fields/EmailField';
+import { useLoginForm } from '../application/forms/useLoginForm';
 
-import { useNavigationProvider } from '@/modules/kernel';
+import { useNavigationProvider } from '@/kernel';
 
-export function LoginPage() {
+export function LoginForm() {
   const t = useTranslations();
   const {
     LinkComponent: Link,
@@ -63,9 +63,7 @@ export function LoginPage() {
             <TextInput
               type="password"
               className="w-full"
-              {...register('password', {
-                required: t('form.validation.error.required'),
-              })}
+              {...register('password')}
             />
           </label>
           <FormFieldError error={errors.password} />

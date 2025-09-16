@@ -9,8 +9,6 @@ export type CaptchaEmojiFieldProps = {
   text: {
     label: string;
     hint: string;
-    required: string;
-    invalid: string;
   };
 };
 
@@ -37,13 +35,7 @@ export function CaptchaEmojiField({
           type="text"
           className="w-[300px]"
           aria-label={text.label}
-          {...register(fieldName, {
-            required: text.required,
-            pattern: {
-              value: /^[XyZ123]{444}$/,
-              message: text.invalid,
-            },
-          })}
+          {...register(fieldName)}
         />
       </label>
       <FormFieldError error={errors[fieldName]} />
