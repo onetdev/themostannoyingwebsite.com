@@ -63,9 +63,7 @@ export function LoginForm() {
             <TextInput
               type="password"
               className="w-full"
-              {...register('password', {
-                required: t('form.validation.error.required'),
-              })}
+              {...register('password')}
             />
           </label>
           <FormFieldError error={errors.password} />

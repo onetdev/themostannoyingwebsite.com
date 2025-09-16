@@ -9,7 +9,7 @@ import { useAuthService } from '../services';
 import { RegisterUseCaseParams } from '../use-cases';
 import { getSignupFormSchema, SignupFormData } from './signup-form.schema';
 
-import { useZodFormValidator } from '@/root/kernel';
+import { useZodFormValidator } from '@/kernel';
 
 export const signupFormDefaultValues: SignupFormData = {
   firstName: '',
@@ -25,6 +25,7 @@ export const signupFormDefaultValues: SignupFormData = {
   countryCode: '',
   phoneNumberCountry: undefined,
   phoneNumber: undefined,
+  captcha: '',
 };
 
 interface SignupFormProps {

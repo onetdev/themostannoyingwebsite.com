@@ -10,7 +10,7 @@ import {
   PasswordReminderFormData,
 } from './password-reminder-form.schema';
 
-import { useZodFormValidator } from '@/root/kernel';
+import { useZodFormValidator } from '@/kernel';
 
 interface PasswordReminderFormProps {
   onSuccess?: () => void;

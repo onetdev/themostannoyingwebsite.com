@@ -1,8 +1,36 @@
 import { z } from 'zod';
 
+import { getCaptchaEmojiSchema } from './captcha-emoji.schema';
 import { GenderSchema } from '../../domain';
 
 import { ZodTranslator } from '@/kernel';
+
+const validate = (value: string, t: ZodTranslator) => {
+  // Split up in this way to annoy the user the most
+  if (!value.match(/[A-Z]/)) {
+    return t('form.validation.error.missingUppercase');
+  } else if (!value.match(/[a-z]/)) {
+    return t('form.validation.error.missingLowercase');
+  } else if (!value.match(/[0-9]/)) {
+    return t('form.validation.error.missingNumber');
+  } else if (!value.match(/[^A-Za-z0-9]/)) {
+    return t('form.validation.error.missingSpecialCharacter');
+  }
+
+  const numbers = value.match(/[0-9]/g) ?? [];
+  const sumOfNumbers = numbers.map(Number).reduce((a, b) => a + b, 0);
+  if (sumOfNumbers < 30) {
+    return t('form.validation.error.sumOfNumbersGte', {
+      count: 30,
+    });
+  }
+
+  if (sumOfNumbers % 2) {
+    return t('form.validation.error.sumOfNumbersMustBeEven');
+  }
+
+  return t('form.validation.error.passwordAlreadyTaken');
+};
 
 export function getSignupFormSchema(t: ZodTranslator) {
   return z
@@ -16,7 +44,10 @@ export function getSignupFormSchema(t: ZodTranslator) {
       email: z.email({ error: t('form.validation.error.emailInvalid') }),
       password: z
         .string()
-        .min(8, { error: t('form.validation.error.passwordMinLength') }),
+        .min(12, {
+          error: t('form.validation.error.minLength', { count: 12 }),
+        })
+        .refine((value) => validate(value, t)),
       passwordConfirmation: z
         .string()
         .min(1, { error: t('form.validation.error.required') }),
@@ -27,7 +58,7 @@ export function getSignupFormSchema(t: ZodTranslator) {
       nickname: z.string().optional(),
       consentNewsletter: z.boolean().optional(),
       consentPrivacyPolicy: z.boolean().refine((val) => val === true, {
-        error: t('form.validation.error.required'),
+        error: t('form.validation.error.checkboxRequired'),
       }),
       gender: GenderSchema.optional(),
       countryCode: z
@@ -35,9 +66,10 @@ export function getSignupFormSchema(t: ZodTranslator) {
         .min(1, { error: t('form.validation.error.required') }),
       phoneNumberCountry: z.string().optional(),
       phoneNumber: z.number().optional(),
+      captcha: getCaptchaEmojiSchema(t),
     })
     .refine((data) => data.password === data.passwordConfirmation, {
-      error: t('form.validation.error.passwordsDoNotMatch'),
+      error: t('form.validation.error.passwordMismatch'),
     });
 }
 
