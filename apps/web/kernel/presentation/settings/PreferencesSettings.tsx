@@ -9,8 +9,7 @@ import { useTranslations } from 'next-intl';
 import { useTheme } from 'next-themes';
 import { FunctionComponent } from 'react';
 
-import { useRuntimeStore } from '@/state/runtime';
-import { useUserPreferencesStore } from '@/state/user_preferences';
+import { useRuntimeStore, useUserPreferencesStore } from '@/kernel';
 
 const PreferencesSettings: FunctionComponent = () => {
   const preference = useUserPreferencesStore();

@@ -7,7 +7,7 @@ import { useMessages, useTranslations } from 'next-intl';
 import { FunctionComponent, useEffect, useMemo, useState } from 'react';
 
 import { FlaimSurveyQuestion } from '@/features/gifts';
-import { useRuntimeStore } from '@/state/runtime';
+import { useRuntimeStore } from '@/kernel';
 
 export type FlaimSurveryProps = { className?: string; timeInSeconds?: number };
 

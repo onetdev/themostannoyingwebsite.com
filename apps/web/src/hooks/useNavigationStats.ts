@@ -1,7 +1,7 @@
 import { usePathname } from 'next/navigation';
 import { useEffect, useState } from 'react';
 
-import { useRuntimeStore } from '@/state/runtime';
+import { useRuntimeStore } from '@/kernel';
 
 const useNavigationStats = () => {
   const incrementNavigationCount = useRuntimeStore(

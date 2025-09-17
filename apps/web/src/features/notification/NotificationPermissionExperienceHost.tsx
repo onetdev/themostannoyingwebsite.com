@@ -5,8 +5,7 @@ import { FunctionComponent, useRef, useState } from 'react';
 import ManualModal from './components/ManualModal';
 
 import useScrollDistanceTrigger from '@/hooks/useScrollDistanceTrigger';
-import { useExperienceFlagsStore } from '@/state/experience_flags';
-import { useUserGrantsStore } from '@/state/user_grants';
+import { useExperienceFlagsStore, useUserGrantsStore } from '@/kernel';
 import {
   getNotificationPermissionState,
   requestNotificationPermission,

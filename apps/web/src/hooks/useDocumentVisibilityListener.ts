@@ -1,6 +1,6 @@
 import { useCallback, useEffect } from 'react';
 
-import { useRuntimeStore } from '@/state/runtime';
+import { useRuntimeStore } from '@/kernel';
 
 /**
  * This will mesaure how long the webpage has been in focus and report it to

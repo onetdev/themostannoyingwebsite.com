@@ -5,8 +5,7 @@ import { FunctionComponent, useEffect, useState } from 'react';
 import NewsletterModal from './components/NewsletterModal';
 
 import useScrollDistanceTrigger from '@/hooks/useScrollDistanceTrigger';
-import { useExperienceFlagsStore } from '@/state/experience_flags';
-import { useRuntimeStore } from '@/state/runtime';
+import { useExperienceFlagsStore, useRuntimeStore } from '@/kernel';
 
 export type NewsletterModalExperienceHostProps = {
   scrollDistanceTrigger?: number;

@@ -9,9 +9,8 @@ import {
   DeadPixelHost,
   StickyVideoExperienceHost,
 } from '@/features/obstruction_decor';
+import { useExperienceFlagsStore, useUserGrantsStore } from '@/kernel';
 import { WheelOfFortuneHost } from '@/modules/wheel-of-fortune';
-import { useExperienceFlagsStore } from '@/state/experience_flags';
-import { useUserGrantsStore } from '@/state/user_grants';
 
 type ExperienceDecoratorLayoutProps = JSXProxyProps<'div'>;
 
