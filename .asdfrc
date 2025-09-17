@@ -1,2 +1,0 @@
-# ASDF nodejs will use `.nvmrc` instead of `.tool-versions`
-legacy_version_file = yes
