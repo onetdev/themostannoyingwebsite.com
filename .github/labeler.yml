@@ -4,8 +4,6 @@ dependencies:
       - ./**/package.json
       - ./**/package.json
       - ./**/pnpm-lock.yaml
-      - .asdfrc
-      - .nvmrc
       - .tool-versions
 
 documentation:
@@ -14,6 +12,10 @@ documentation:
       - ./**/README.md
       - .github/ISSUE_TEMPLATE/*
       - .github/pull_request_template.md
+      - CHANGELOG.md
+      - CODE_OF_CONDUCT.md
+      - CONTRIBUTING.md
+      - LICENSE
       - README.md
 
 storybook:
@@ -30,7 +32,7 @@ ci/cd:
       - .github/CODEOWNERS
       - .github/labeler.yml
       - .github/workflows/**
-      - next.config.js
+      - ./**/next.config.js
 
 content:
   - changed-files:
@@ -42,6 +44,7 @@ content:
 ui:
   - changed-files:
     - any-glob-to-any-file:
+      - apps/web/kernel/**/components/**.tsx
       - apps/web/modules/**/components/**.tsx
       - apps/web/src/components/**.tsx
       - apps/web/src/features/**/presentation/**.tsx
