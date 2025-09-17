@@ -5,8 +5,7 @@ import { useTranslations } from 'next-intl';
 import { FunctionComponent } from 'react';
 
 import { Link } from '@/i18n/navigation';
-import { useExperienceFlagsStore } from '@/state/experience_flags';
-import { useRuntimeStore } from '@/state/runtime';
+import { useExperienceFlagsStore, useRuntimeStore } from '@/kernel';
 
 export type OneByOneGiftProps = {
   size?: number;

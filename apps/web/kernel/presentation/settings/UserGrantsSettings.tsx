@@ -8,7 +8,7 @@ import {
 import { useTranslations } from 'next-intl';
 import { FunctionComponent } from 'react';
 
-import { useUserGrantsStore } from '@/state/user_grants';
+import { useUserGrantsStore } from '@/kernel';
 
 const UserGrantsSettings: FunctionComponent = () => {
   const grant = useUserGrantsStore();

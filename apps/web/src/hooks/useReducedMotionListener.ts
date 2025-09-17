@@ -1,11 +1,11 @@
 import { useCallback, useEffect } from 'react';
 
-import { useRuntimeStore } from '@/state/runtime';
+import { useRuntimeStore } from '@/kernel';
 
 const useReducedMotionListener = () => {
   const setStoreState = useRuntimeStore((state) => state.setReducedMotion);
 
-  const onChangce = useCallback(
+  const onChange = useCallback(
     (e: MediaQueryListEvent) => setStoreState(!e.matches),
     [setStoreState],
   );
@@ -14,9 +14,9 @@ const useReducedMotionListener = () => {
     const watcher = window.matchMedia('(prefers-reduced-motion: reduce)');
     setStoreState(watcher.matches);
 
-    watcher.addEventListener('change', onChangce);
-    return () => watcher.removeEventListener('change', onChangce);
-  }, [onChangce, setStoreState]);
+    watcher.addEventListener('change', onChange);
+    return () => watcher.removeEventListener('change', onChange);
+  }, [onChange, setStoreState]);
 };
 
 export default useReducedMotionListener;

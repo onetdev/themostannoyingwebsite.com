@@ -1,8 +1,10 @@
 import { useEffect, useState } from 'react';
 
-import { useExperienceFlagsStore } from '@/state/experience_flags';
-import { useRuntimeStore } from '@/state/runtime';
-import { useUserGrantsStore } from '@/state/user_grants';
+import {
+  useExperienceFlagsStore,
+  useRuntimeStore,
+  useUserGrantsStore,
+} from '@/kernel';
 import { fetchWithTimeout } from '@/utils/network';
 
 const testFileLoader = async () => {

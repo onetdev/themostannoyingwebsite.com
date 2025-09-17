@@ -11,7 +11,7 @@ import SearchForm from '@/components/AppHeader/SearchForm';
 import { ArticleSearchResult } from '@/features/content';
 import { AppArticleService } from '@/features/content/services/AppArticleService';
 import { Link } from '@/i18n/navigation';
-import { useExperienceFlagsStore } from '@/state/experience_flags';
+import { useExperienceFlagsStore } from '@/kernel';
 
 type Result = {
   query: string;

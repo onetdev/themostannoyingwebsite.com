@@ -4,8 +4,7 @@ import { useCallback, useEffect, useMemo, useState } from 'react';
 import { HistoryItem, HistoryItemOwner } from '@/features/chat_bubble';
 import useAudio from '@/hooks/useAudio';
 import useSendNotification from '@/hooks/useSendNotification';
-import { useRuntimeStore } from '@/state/runtime';
-import { useUserPreferencesStore } from '@/state/user_preferences';
+import { useRuntimeStore, useUserPreferencesStore } from '@/kernel';
 
 const useChatBubbleHistory = () => {
   const t = useTranslations();

@@ -4,7 +4,7 @@ import { Icon } from '@maw/ui-lib';
 import { useTranslations } from 'next-intl';
 import { FunctionComponent, useEffect, useRef, useState } from 'react';
 
-import { useUserGrantsStore } from '@/state/user_grants';
+import { useUserGrantsStore } from '@/kernel';
 
 const StickyVideoExperienceHost: FunctionComponent = () => {
   const allowed = useUserGrantsStore((state) => state.reviewCompleted);
