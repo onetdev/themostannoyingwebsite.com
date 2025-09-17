@@ -9,7 +9,7 @@ import {
   DeadPixelHost,
   StickyVideoExperienceHost,
 } from '@/features/obstruction_decor';
-import { WheelOfFortuneHost } from '@/features/wheel_of_fortune';
+import { WheelOfFortuneHost } from '@/modules/wheel-of-fortune';
 import { useExperienceFlagsStore } from '@/state/experience_flags';
 import { useUserGrantsStore } from '@/state/user_grants';
 
