@@ -3,6 +3,7 @@ import { FunctionComponent, PropsWithChildren, useMemo } from 'react';
 
 import { DependencyContainer, init as initShared } from '@/kernel';
 import { init as initAuth } from '@/modules/auth/init';
+import { init as initWheelOfFortune } from '@/modules/wheel-of-fortune/init';
 
 export const DependencyProvider: FunctionComponent<PropsWithChildren> = ({
   children,
@@ -12,6 +13,7 @@ export const DependencyProvider: FunctionComponent<PropsWithChildren> = ({
 
     initShared(container);
     initAuth(container);
+    initWheelOfFortune(container);
     // Register additional modules here
 
     return container;
