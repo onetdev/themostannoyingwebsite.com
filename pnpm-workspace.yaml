@@ -4,7 +4,7 @@ packages:
 
 catalog:
   "@eslint/js": "9.32.0"
-  "@playwright/test": "1.54.2"
+  "@playwright/test": "1.55.0"
   "@storybook/react": "^8.6.14"
   "@storybook/test": "^8.6.14"
   "@storybook/types": "^8.6.14"
@@ -23,7 +23,7 @@ catalog:
   "jest": "^29.7.0"
   "marked": "^16.1.2"
   "next": "^15.4.6"
-  "playwright": "^1.54.2"
+  "playwright": "^1.55.0"
   "postcss": "^8.5.6"
   "react-dom": "^19.1.1"
   "react-fast-marquee": "^1.6.5"

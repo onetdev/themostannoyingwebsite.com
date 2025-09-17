@@ -120,12 +120,12 @@ Enhancement suggestions are tracked as [GitHub issues](https://github.com/onetde
 
 Things you'll need to work with the project effectively:
 - Aim to follow [git-flow](https://www.atlassian.com/git/tutorials/comparing-workflows/gitflow-workflow) during branching.
-- Node.js, recommended version number can be found in `.nvmrc`. You can use asdf, nvm, or simple node installs too.
+- Node.js, recommended version number can be found in `.tool-versions`. You can use mise, nvm, or simple node installs too.
 - The latest Visual Studio Code, it's also recommended to install all the recommended packages too.
 
 1. Clone the repo on develop branch `git clone -b develop https://github.com/onetdev/themostannoyingwebsite.com.git`
 2. Checkout to your feature branch `git checkout -b feat/your-branch`
-3. Install dependencies `pnpm i`
+3. Install dependencies (see README for detailed installation)
 4. Run `pnpm run dev` which will compile assets and start a development server.
 5. Make your changes
 6. Commit & push your code

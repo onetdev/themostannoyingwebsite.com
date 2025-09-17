@@ -74,18 +74,49 @@ The stack is the usual: Next.JS + TypeScript + TailwindCSS. If you’re not fami
 
 ### Testing
 
+#### Unit Tests
+
 The project mainly uses [Jest](https://jestjs.io/) for unit testing. To run the tests, use the following command:
 
 ```bash
 pnpm test
 ```
 
-We also use [Playwright](https://playwright.dev/) for end-to-end testing. To run the tests, use the following command:
+#### End-to-End Tests
+
+We use [Playwright](https://playwright.dev/) for end-to-end testing. 
+
+**Prerequisites for E2E tests:**
+- Make sure you have a fresh build of the project (`pnpm run build`)
+- You might need to run `pnpm exec playwright install` for the first time to install the necessary browser binaries.
+
+**Running E2E tests:**
 
 ```bash
+# Run all E2E tests
+pnpm test:e2e
+
+# Run E2E tests from the web app directory
 cd apps/web
 pnpm test:e2e
+
+# Run tests in headed mode (see browser)
+cd apps/web
+pnpm test:e2e --headed
+
+# Run tests in UI mode (interactive)
+cd apps/web
+npx playwright test --ui
 ```
+
+**View test results:**
+After running tests, you can view the HTML report:
+```bash
+cd apps/web
+npx playwright show-report
+```
+
+For detailed information about our E2E testing strategy, see `apps/web/e2e/README.md`.
 
 ### Project Structure
 
@@ -101,15 +132,39 @@ This is a Turborepo monorepo. Here's a quick rundown of the main folders:
 - `packages/ui-lib`: Shared UI components.
 - `packages/utils`: Shared utility functions.
 
-### Local development
+### Prerequisites
 
-First, run the development server:
+Before you can run this project locally, make sure you have the following installed:
+
+- **Node.js** - Version specified in `.tool-versions`
+- **pnpm** - Package manager for dependencies
+- **Version manager** (recommended) - Use mise, nvm, or similar
+
+#### Installing Node.js with mise (recommended)
+
+1. Install mise: `curl https://mise.run | sh`
+2. Activate mise in your shell (follow the installation instructions)
+3. Install Node.js: `mise install`
+
+#### Installing pnpm
 
 ```bash
-pnpm run dev
+npm install -g pnpm
 ```
 
-Open [https://localhost:3000](https://localhost:3000) in your browser to see the result. SSL must be enabled to use certain browser APIs that won’t run on unencrypted connections.
+### Local development
+
+1. Clone the repository and navigate to it
+2. Install dependencies:
+   ```bash
+   pnpm install
+   ```
+3. Run the development server:
+   ```bash
+   pnpm run dev
+   ```
+
+Open [https://localhost:3000](https://localhost:3000) in your browser to see the result. SSL must be enabled to use certain browser APIs that won't run on unencrypted connections.
 
 ## Translation
 
