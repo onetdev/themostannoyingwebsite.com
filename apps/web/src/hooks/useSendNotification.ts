@@ -14,8 +14,8 @@ type UseSendNotificationProps = {
 const useSendNotification = ({
   autoRequest = false,
 }: UseSendNotificationProps = {}) => {
-  const logger = useLogger().child({
-    hook: 'useSendNotification',
+  const logger = useLogger().getSubLogger({
+    name: 'useSendNotification',
   });
 
   const send = useCallback(

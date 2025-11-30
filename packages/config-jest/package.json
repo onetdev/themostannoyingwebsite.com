@@ -16,6 +16,7 @@
     "@maw/config-ts": "workspace:*",
     "@types/jest": "catalog:",
     "eslint": "catalog:",
-    "jest": "catalog:"
+    "jest": "catalog:",
+    "typescript": "catalog:"
   }
 }

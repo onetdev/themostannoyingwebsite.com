@@ -1,3 +1,4 @@
+/* eslint-disable import-x/no-named-as-default-member */
 import pluginNext from '@next/eslint-plugin-next';
 import pluginReact from 'eslint-plugin-react';
 import pluginReactHooks from 'eslint-plugin-react-hooks';
@@ -31,6 +32,16 @@ export default [
       ...pluginNext.configs.recommended.rules,
       ...pluginNext.configs['core-web-vitals'].rules,
     },
+  },
+  {
+    name: 'next/noDotNext',
+    ignores: [
+      'node_modules/**',
+      '.next/**',
+      'dist/**',
+      '.turbo/**',
+      'coverage/**',
+    ],
   },
   {
     name: 'next/react-hooks',

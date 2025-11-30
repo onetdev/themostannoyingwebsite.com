@@ -19,7 +19,7 @@ interface PasswordReminderFormProps {
 export function usePasswordReminderForm({
   onSuccess,
 }: PasswordReminderFormProps) {
-  const logger = useLogger().child({ hook: 'usePasswordReminderForm' });
+  const logger = useLogger().getSubLogger({ name: 'usePasswordReminderForm' });
   const resolver = useZodFormValidator(getPasswordReminderFormSchema);
   const methods = useForm<PasswordReminderFormData>({
     resolver,

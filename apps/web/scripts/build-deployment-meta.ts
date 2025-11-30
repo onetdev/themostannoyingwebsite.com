@@ -3,8 +3,8 @@ import fs from 'fs';
 
 import deploymentMeta from '@/root/deployment-meta.mjs';
 
-const logger = getLogger().child({
-  script: 'build-deployment-meta',
+const logger = getLogger().getSubLogger({
+  name: 'build-deployment-meta',
 });
 const path = './public/deployment-meta.json';
 

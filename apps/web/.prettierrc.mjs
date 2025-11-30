@@ -1,3 +1,3 @@
-import config from "@maw/config-eslint/prettier/tailwind";
+import config from '@maw/config-eslint/prettier/tailwind';
 
 export default config;

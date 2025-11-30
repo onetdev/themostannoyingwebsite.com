@@ -33,7 +33,7 @@ interface SignupFormProps {
 }
 
 export function useSignupForm({ onSuccess }: SignupFormProps) {
-  const logger = useLogger().child({ hook: 'useSignupForm' });
+  const logger = useLogger().getSubLogger({ name: 'useSignupForm' });
   const resolver = useZodFormValidator(getSignupFormSchema);
   const methods = useForm<SignupFormData>({
     resolver,

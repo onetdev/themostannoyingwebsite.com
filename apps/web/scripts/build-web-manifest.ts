@@ -5,8 +5,8 @@ import path from 'path';
 
 import manifestConfig from '@/root/manifest.config.mjs';
 
-const logger = getLogger().child({
-  script: 'build-web-manifest',
+const logger = getLogger().getSubLogger({
+  name: 'build-web-manifest',
 });
 
 const main = async () => {

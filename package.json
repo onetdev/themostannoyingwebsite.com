@@ -31,12 +31,12 @@
     "clean:all": "pnpm recursive exec -- rm -rf node_modules dist .next .turbo storybook-static"
   },
   "devDependencies": {
-    "@commitlint/cli": "^19.8.1",
-    "@commitlint/config-conventional": "^19.8.1",
+    "@commitlint/cli": "^20.1.0",
+    "@commitlint/config-conventional": "^20.0.0",
     "husky": "^9.1.7",
-    "lint-staged": "^16.1.4",
-    "symlink-dir": "6.0.5",
-    "turbo": "2.5.6",
+    "lint-staged": "^16.2.7",
+    "symlink-dir": "9.0.0",
+    "turbo": "2.6.1",
     "typescript": "catalog:"
   },
   "engines": {
@@ -46,5 +46,9 @@
     "type": "individual",
     "url": "https://www.onet.dev/donate"
   },
-  "packageManager": "pnpm@10.0.0"
+  "packageManager": "pnpm@10.0.0",
+  "dependencies": {
+    "import-in-the-middle": "^2.0.0",
+    "require-in-the-middle": "^8.0.1"
+  }
 }

@@ -6,18 +6,23 @@ import articleEntrySimplifiedZod from '@/schemas/article-entry-simplified';
 import articleIndexEntryZod from '@/schemas/article-index-entry';
 import articleLocaleMetaZod from '@/schemas/article-locale-meta';
 
-const logger = getLogger().child({
-  script: 'build-json-schema',
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+type TypeConflictBypass = any;
+
+const logger = getLogger().getSubLogger({
+  name: 'build-json-schema',
 });
 
 const writeMap = {
   './src/schemas/article-entry-simplified.schema.json': zodToJsonSchema(
-    articleEntrySimplifiedZod,
+    articleEntrySimplifiedZod as TypeConflictBypass,
   ),
-  './src/schemas/article-index-entry.schema.json':
-    zodToJsonSchema(articleIndexEntryZod),
-  './src/schemas/article-locale-meta.schema.json':
-    zodToJsonSchema(articleLocaleMetaZod),
+  './src/schemas/article-index-entry.schema.json': zodToJsonSchema(
+    articleIndexEntryZod as TypeConflictBypass,
+  ),
+  './src/schemas/article-locale-meta.schema.json': zodToJsonSchema(
+    articleLocaleMetaZod as TypeConflictBypass,
+  ),
 };
 
 logger.info('🔄 Generating JSON schemas...');

@@ -17,8 +17,10 @@ interface CustomRenderOptions extends Omit<RenderOptions, 'wrapper'> {
   messages?: typeof defaultMessages;
 }
 
-interface CustomRenderHookOptions<TProps>
-  extends Omit<RenderHookOptions<TProps>, 'wrapper'> {
+interface CustomRenderHookOptions<TProps> extends Omit<
+  RenderHookOptions<TProps>,
+  'wrapper'
+> {
   locale?: string;
   messages?: typeof defaultMessages;
 }

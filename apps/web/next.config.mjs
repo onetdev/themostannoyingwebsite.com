@@ -2,7 +2,6 @@ import analyzer from '@next/bundle-analyzer';
 import createMDX from '@next/mdx';
 import { withSentryConfig } from '@sentry/nextjs';
 import createNextIntlPlugin from 'next-intl/plugin';
-import remarkGfm from 'remark-gfm';
 
 import sentryConfig from './next-sentry.config.mjs';
 
@@ -47,12 +46,17 @@ const withBundleAnalyzer = analyzer({
 
 const withNextIntl = createNextIntlPlugin({});
 
-const withMDX = createMDX({
+/** @type {import('@next/mdx').NextMDXOptions} **/
+const mdxConfig = {
   options: {
-    remarkPlugins: [remarkGfm],
+    remarkPlugins: ['remark-gfm'],
+    rehypePlugins: [],
   },
-});
+};
 
-export default withMDX(
-  withSentryConfig(withNextIntl(withBundleAnalyzer(nextConfig)), sentryConfig),
+const withMDX = createMDX(mdxConfig);
+
+export default withSentryConfig(
+  withNextIntl(withBundleAnalyzer(withMDX(nextConfig))),
+  sentryConfig,
 );
