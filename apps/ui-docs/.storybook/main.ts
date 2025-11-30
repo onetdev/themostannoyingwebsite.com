@@ -10,6 +10,7 @@ const config: StorybookConfig = {
     "@storybook/addon-links",
     "@storybook/addon-themes",
     "@storybook/addon-styling-webpack",
+    "@storybook/addon-docs",
   ],
   core: {
     disableTelemetry: true,
@@ -23,6 +24,7 @@ const config: StorybookConfig = {
   stories: [
     // "./src/**/*.stories.@(js,ts,jsx,tsx)",
     "../node_modules/@maw/ui-lib/src/**/*.stories.@(js|jsx|mjs|ts|tsx)",
+    "../node_modules/@maw/ui-lib/src/**/*.mdx",
   ],
   webpackFinal: async (config) => {
     if (!config.resolve) {
