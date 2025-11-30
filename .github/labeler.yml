@@ -1,11 +1,34 @@
+ci/cd:
+  - changed-files:
+    - any-glob-to-any-file:
+      - .github/auto-assign.yml
+      - .github/CODEOWNERS
+      - .github/labeler.yml
+      - .github/workflows/**
+config:
+  - changed-files:
+    - any-glob-to-any-file:
+      - ./**/next.config.js
+      - ./**/next.config.mjs
+      - ./**/tsconfig.json
+      - ./**/tailwind.config.*
+      - ./apps/web/i18n.config.ts
+      - ./mise.toml
+      - ./.prettierrc*
+      - ./.eslintrc*
+content:
+  - changed-files:
+    - any-glob-to-any-file:
+      - apps/web/public/**/*.{png,jpg,jpeg,gif,svg,webp,ico}
+      - assets/**/*.{png,jpg,jpeg,gif,svg,webp,ico}
+      - packages/content-api/data/**/*.{json,md,mdx}
 dependencies:
   - changed-files:
     - any-glob-to-any-file:
       - ./**/package.json
-      - ./**/package.json
       - ./**/pnpm-lock.yaml
-      - .tool-versions
-
+      - mise.toml
+      - package.json
 documentation:
   - changed-files:
     - any-glob-to-any-file:
@@ -17,30 +40,30 @@ documentation:
       - CONTRIBUTING.md
       - LICENSE
       - README.md
-
+i18n:
+  - changed-files:
+    - any-glob-to-any-file:
+      - ./apps/web/i18n/**
+      - ./**/*.mdx
+      - ./packages/content-api/data/**
+      - ./apps/web/src/app/[locale]/**
 storybook:
   - changed-files:
     - any-glob-to-any-file:
       - ./**.stories.ts
       - ./**.stories.tsx
       - ./apps/ui-docs/.storybook/**
-
-ci/cd:
+testing:
   - changed-files:
     - any-glob-to-any-file:
-      - .github/auto-assign.yml
-      - .github/CODEOWNERS
-      - .github/labeler.yml
-      - .github/workflows/**
-      - ./**/next.config.js
-
-content:
-  - changed-files:
-    - any-glob-to-any-file:
-      - apps/web/public/**
-      - assets/**
-      - packages/content-api/data/**
-
+      - ./**/*.test.ts
+      - ./**/*.test.tsx
+      - ./**/*.spec.ts
+      - ./**/*.spec.tsx
+      - ./apps/web/e2e/**
+      - ./apps/web/tests/**
+      - ./packages/**/tests/**
+      - ./apps/web/playwright.config.ts
 ui:
   - changed-files:
     - any-glob-to-any-file:
@@ -49,8 +72,35 @@ ui:
       - apps/web/src/components/**.tsx
       - apps/web/src/features/**/presentation/**.tsx
       - packages/ui-lib/src/**
-
-feat/auth:
+pkg/config-eslint:
   - changed-files:
     - any-glob-to-any-file:
-      - apps/web/modules/auth/**
+      - packages/config-eslint/**
+pkg/config-jest:
+  - changed-files:
+    - any-glob-to-any-file:
+      - packages/config-jest/**
+pkg/config-ts:
+  - changed-files:
+    - any-glob-to-any-file:
+      - packages/config-ts/**
+pkg/content-api:
+  - changed-files:
+    - any-glob-to-any-file:
+      - packages/content-api/**
+pkg/jest-preset:
+  - changed-files:
+    - any-glob-to-any-file:
+      - packages/jest-preset/**
+pkg/logger:
+  - changed-files:
+    - any-glob-to-any-file:
+      - packages/logger/**
+pkg/ui-lib:
+  - changed-files:
+    - any-glob-to-any-file:
+      - packages/ui-lib/**
+pkg/utils:
+  - changed-files:
+    - any-glob-to-any-file:
+      - packages/utils/**
