@@ -28,8 +28,7 @@ export interface UserGrantsStateActions {
 }
 
 export interface UserGrantsStore
-  extends UserGrantsState,
-    UserGrantsStateActions {}
+  extends UserGrantsState, UserGrantsStateActions {}
 
 const initialState: UserGrantsState = {
   reviewCompleted: false,

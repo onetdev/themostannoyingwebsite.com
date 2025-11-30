@@ -10,8 +10,8 @@ import articleEntrySimplifiedZod from '@/schemas/article-entry-simplified';
 import { ArticleIndexEntrySchema } from '@/schemas/article-index-entry';
 import { parse as parseMd } from '@/utils/markdown';
 
-const logger = getLogger().child({
-  script: 'build-index',
+const logger = getLogger().getSubLogger({
+  name: 'build-index',
 });
 const locales = ['en'];
 const sourceRootPath = path.join('./data');

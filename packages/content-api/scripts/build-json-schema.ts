@@ -9,8 +9,8 @@ import articleLocaleMetaZod from '@/schemas/article-locale-meta';
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 type TypeConflictBypass = any;
 
-const logger = getLogger().child({
-  script: 'build-json-schema',
+const logger = getLogger().getSubLogger({
+  name: 'build-json-schema',
 });
 
 const writeMap = {

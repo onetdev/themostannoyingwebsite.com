@@ -12,8 +12,7 @@ export interface UserPreferencesStateActions {
 }
 
 export interface UserPreferencesStore
-  extends UserPreferencesState,
-    UserPreferencesStateActions {}
+  extends UserPreferencesState, UserPreferencesStateActions {}
 
 const initialState: UserPreferencesState = {
   enableSound: true,

@@ -46,8 +46,7 @@ export interface ExperienceFlagsStateActions {
 }
 
 export interface ExperienceFlagsStore
-  extends ExperienceFlagsState,
-    ExperienceFlagsStateActions {}
+  extends ExperienceFlagsState, ExperienceFlagsStateActions {}
 
 const initialState: ExperienceFlagsState = {
   gifts: {

@@ -7,7 +7,7 @@ import { useTranslations } from 'next-intl';
 import { useEffect, useRef, useState } from 'react';
 
 export default function HotThingsPage() {
-  const logger = useLogger().child({ page: 'hot-things-page' });
+  const logger = useLogger().getSubLogger({ name: 'hot-things-page' });
   const [isCapable, setIsCapable] = useState(false);
   const t = useTranslations();
   const [_devices, setDevices] = useState<MediaDeviceInfo[]>([]);

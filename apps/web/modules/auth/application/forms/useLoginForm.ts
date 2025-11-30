@@ -16,7 +16,7 @@ interface LoginFormProps {
 }
 
 export function useLoginForm({ onSuccess }: LoginFormProps) {
-  const logger = useLogger().child({ hook: 'useLoginForm' });
+  const logger = useLogger().getSubLogger({ name: 'useLoginForm' });
   const authService = useAuthService();
   const resolver = useZodFormValidator(getLoginFormSchema);
   const methods = useForm<LoginFormData>({ resolver });

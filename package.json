@@ -46,5 +46,9 @@
     "type": "individual",
     "url": "https://www.onet.dev/donate"
   },
-"packageManager": "pnpm@10.0.0"
+  "packageManager": "pnpm@10.0.0",
+  "dependencies": {
+    "import-in-the-middle": "^2.0.0",
+    "require-in-the-middle": "^8.0.1"
+  }
 }
