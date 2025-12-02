@@ -7,7 +7,7 @@ import { FunctionComponent, PropsWithChildren } from 'react';
 
 import { Link } from '@/i18n/navigation';
 
-const ContainerGiftFlaps: FunctionComponent = () => {
+export function ContainerGiftFlaps() {
   const t = useTranslations();
   const { resolvedTheme } = useTheme();
 
@@ -37,7 +37,7 @@ const ContainerGiftFlaps: FunctionComponent = () => {
       </div>
     </div>
   );
-};
+}
 
 type GiftFlapText = PropsWithChildren<{
   className?: string;
@@ -58,5 +58,3 @@ const GiftFlapText: FunctionComponent<GiftFlapText> = ({
     </span>
   );
 };
-
-export default ContainerGiftFlaps;

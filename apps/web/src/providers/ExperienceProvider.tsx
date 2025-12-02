@@ -10,10 +10,10 @@ import {
   useDisableContextMenu,
   useDisableNavigationPop,
 } from '@/features/browser_core';
-import useAdblockerDetector from '@/features/gifts/hooks/useAdblockerDetector';
 import { NewsletterModalExperienceHost } from '@/features/newsletter';
 import { NotificationPermissionExperienceHost } from '@/features/notification';
 import { useExperienceFlagsStore, useUserGrantsStore } from '@/kernel';
+import { useAdblockerDetector } from '@/modules/gift';
 
 export const ExperienceProvider: FunctionComponent<PropsWithChildren> = ({
   children,

@@ -4,12 +4,12 @@ import { FunctionComponent, useEffect, useState } from 'react';
 
 import CookieConsent from '@/components/CookieConsent';
 import { ChatBubbleHost } from '@/features/chat_bubble';
-import { AdblockerSuspectBar, ContainerGiftFlaps } from '@/features/gifts';
 import {
   DeadPixelHost,
   StickyVideoExperienceHost,
 } from '@/features/obstruction_decor';
 import { useExperienceFlagsStore, useUserGrantsStore } from '@/kernel';
+import { AdblockerSuspectBar, ContainerGiftFlaps } from '@/modules/gift';
 import { WheelOfFortuneHost } from '@/modules/wheel-of-fortune';
 
 type ExperienceDecoratorLayoutProps = JSXProxyProps<'div'>;

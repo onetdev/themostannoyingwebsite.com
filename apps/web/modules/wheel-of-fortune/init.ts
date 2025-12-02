@@ -1,5 +1,3 @@
-import { Container } from 'inversify';
-
-export const init = (_di: Container) => {
+export const init = () => {
   // This module doesn't have any dependencies yet
 };

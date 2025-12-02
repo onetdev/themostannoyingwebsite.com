@@ -1,3 +1,5 @@
+'use client';
+
 import { useEffect, useState } from 'react';
 
 import {
@@ -26,7 +28,7 @@ const testFileLoader = async () => {
   }
 };
 
-const useAdblockerDetector = () => {
+export const useAdblockerDetector = () => {
   const [cached, setSetcached] = useState<boolean>();
   const setAdblockerSuspect = useRuntimeStore(
     (state) => state.setAdblockerSuspected,
@@ -52,5 +54,3 @@ const useAdblockerDetector = () => {
     }
   }, [ppReviewed, enabled, cached, setAdblockerSuspect]);
 };
-
-export default useAdblockerDetector;

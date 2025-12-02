@@ -2,7 +2,6 @@
 
 import Image from 'next/image';
 import { useTranslations } from 'next-intl';
-import { FunctionComponent } from 'react';
 
 import { Link } from '@/i18n/navigation';
 import { useExperienceFlagsStore, useRuntimeStore } from '@/kernel';
@@ -11,9 +10,7 @@ export type OneByOneGiftProps = {
   size?: number;
 };
 
-const OneByOneGift: FunctionComponent<OneByOneGiftProps> = ({
-  size = 1024,
-}) => {
+export function OneByOneGift({ size = 1024 }: OneByOneGiftProps) {
   const t = useTranslations();
   const enabled = useExperienceFlagsStore((state) => state.gifts.oneByOne);
   const reducedMotion = useRuntimeStore((state) => state.reducedMotion);
@@ -32,6 +29,4 @@ const OneByOneGift: FunctionComponent<OneByOneGiftProps> = ({
       />
     </Link>
   );
-};
-
-export default OneByOneGift;
+}

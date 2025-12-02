@@ -5,7 +5,7 @@ import {
   TextListItem,
 } from '@/features/content';
 import { AppArticleService } from '@/features/content/services/AppArticleService';
-import { OneByOneGift } from '@/features/gifts';
+import { OneByOneGift } from '@/modules/gift';
 export { generateStaticParams } from '@/i18n/routing';
 
 export const revalidate = 1800;

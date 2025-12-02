@@ -6,15 +6,16 @@ import { useRouter } from 'next/navigation';
 import { useMessages, useTranslations } from 'next-intl';
 import { FunctionComponent, useEffect, useMemo, useState } from 'react';
 
-import { FlaimSurveyQuestion } from '@/features/gifts';
+import { FlaimSurveyQuestion } from '../../domain';
+
 import { useRuntimeStore } from '@/kernel';
 
 export type FlaimSurveryProps = { className?: string; timeInSeconds?: number };
 
-const FlaimSurvery: FunctionComponent<FlaimSurveryProps> = ({
+export function FlaimSurvery({
   className,
   timeInSeconds = 8,
-}) => {
+}: FlaimSurveryProps) {
   const t = useTranslations();
   const router = useRouter();
   const isCompleted = useRuntimeStore((state) => state.flaimSurveyResult);
@@ -152,7 +153,7 @@ const FlaimSurvery: FunctionComponent<FlaimSurveryProps> = ({
       )}
     </BorderedBox>
   );
-};
+}
 
 type SurveyResultProps = {
   text: string;

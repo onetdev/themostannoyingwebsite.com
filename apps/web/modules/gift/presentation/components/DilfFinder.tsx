@@ -1,9 +1,9 @@
 import Image from 'next/image';
 import { useTranslations } from 'next-intl';
 
-import DilfClickOverlay from './DilfClickOverlay';
+import { DilfClickOverlay } from './DilfClickOverlay';
 
-const DilfFinder = () => {
+export function DilfFinder() {
   const t = useTranslations();
 
   return (
@@ -17,6 +17,4 @@ const DilfFinder = () => {
       <DilfClickOverlay className="absolute top-0 w-full" />
     </div>
   );
-};
-
-export default DilfFinder;
+}
