@@ -3,7 +3,7 @@ import { random } from '@maw/utils/math';
 import { useMessages, useTranslations } from 'next-intl';
 import { FunctionComponent, useMemo, useState } from 'react';
 
-import { useNewsletterForm } from '../hooks/useNewsletterForm';
+import { useNewsletterForm } from '../../application/forms/useNewsletterForm';
 
 type NewsletterModalProps = {
   visible?: boolean;

@@ -1,1 +1,1 @@
-export * from './flaim-survey-question';
+export * from './flaim-survey-question.schema';
