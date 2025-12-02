@@ -6,6 +6,7 @@ import { init as initAuth } from '@/modules/auth/init';
 import { init as initChatBubble } from '@/modules/chat-bubble/init';
 import { init as initGift } from '@/modules/gift/init';
 import { init as initNewsletter } from '@/modules/newsletter/init';
+import { init as initNotification } from '@/modules/notification/init';
 import { init as initWheelOfFortune } from '@/modules/wheel-of-fortune/init';
 
 export const DependencyProvider: FunctionComponent<PropsWithChildren> = ({
@@ -19,6 +20,7 @@ export const DependencyProvider: FunctionComponent<PropsWithChildren> = ({
     initChatBubble(container);
     initGift(container);
     initNewsletter(container);
+    initNotification(container);
     initWheelOfFortune();
     // Register additional modules here
 
