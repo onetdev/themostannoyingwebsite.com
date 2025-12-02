@@ -2,11 +2,11 @@
 
 import { DimmerOverlay, Icon } from '@maw/ui-lib';
 import { useTranslations } from 'next-intl';
-import { FunctionComponent, useState } from 'react';
+import { useState } from 'react';
 
-import ModalContent from './components/ModalContent';
+import { ModalContent } from './components/ModalContent';
 
-const WheelOfFortuneHost: FunctionComponent = () => {
+export function WheelOfFortuneHost() {
   const [isOpen, setOpen] = useState(false);
   const t = useTranslations();
 
@@ -36,6 +36,4 @@ const WheelOfFortuneHost: FunctionComponent = () => {
       </button>
     </div>
   );
-};
-
-export default WheelOfFortuneHost;
+}

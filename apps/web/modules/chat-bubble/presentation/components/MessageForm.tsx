@@ -1,16 +1,13 @@
 import { Button, Icon, TextInput } from '@maw/ui-lib';
 import { useTranslations } from 'next-intl';
-import { FormEventHandler, FunctionComponent, useRef } from 'react';
+import { FormEventHandler, useRef } from 'react';
 
 export type MessageFormProps = {
   className?: string;
   onMessage: (message: string) => void;
 };
 
-const MessageForm: FunctionComponent<MessageFormProps> = ({
-  className,
-  onMessage,
-}) => {
+export function MessageForm({ className, onMessage }: MessageFormProps) {
   const t = useTranslations();
   const userForm = useRef<HTMLFormElement>(null);
   const userMessage = useRef<HTMLInputElement>(null);
@@ -46,6 +43,4 @@ const MessageForm: FunctionComponent<MessageFormProps> = ({
       </Button>
     </form>
   );
-};
-
-export default MessageForm;
+}

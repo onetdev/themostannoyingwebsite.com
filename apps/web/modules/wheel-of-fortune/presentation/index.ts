@@ -1,1 +1,1 @@
-export { default as WheelOfFortuneHost } from './WheelOfFortuneHost';
+export * from './WheelOfFortuneHost';

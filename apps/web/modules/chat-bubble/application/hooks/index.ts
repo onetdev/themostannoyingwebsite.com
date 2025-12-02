@@ -1,1 +1,1 @@
-export { default as useChatBubbleHistory } from './useChatBubbleHistory';
+export * from './useChatBubbleHistory';

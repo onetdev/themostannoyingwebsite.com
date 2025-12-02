@@ -2,17 +2,13 @@
 
 import { Button, DimmerOverlay } from '@maw/ui-lib';
 import { useTranslations } from 'next-intl';
-import { FunctionComponent } from 'react';
 
 type ManualModalProps = {
   visible?: boolean;
   onDismiss: () => void;
 };
 
-const ManualModal: FunctionComponent<ManualModalProps> = ({
-  visible = false,
-  onDismiss,
-}) => {
+export function ManualModal({ visible = false, onDismiss }: ManualModalProps) {
   const t = useTranslations();
 
   return (
@@ -26,6 +22,4 @@ const ManualModal: FunctionComponent<ManualModalProps> = ({
       </div>
     </DimmerOverlay>
   );
-};
-
-export default ManualModal;
+}

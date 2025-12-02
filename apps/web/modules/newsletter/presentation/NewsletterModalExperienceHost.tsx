@@ -1,8 +1,8 @@
 'use client';
 
-import { FunctionComponent, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 
-import NewsletterModal from './components/NewsletterModal';
+import { NewsletterModal } from './components/NewsletterModal';
 
 import useScrollDistanceTrigger from '@/hooks/useScrollDistanceTrigger';
 import { useExperienceFlagsStore, useRuntimeStore } from '@/kernel';
@@ -10,9 +10,9 @@ import { useExperienceFlagsStore, useRuntimeStore } from '@/kernel';
 export type NewsletterModalExperienceHostProps = {
   scrollDistanceTrigger?: number;
 };
-const NewsletterModalExperienceHost: FunctionComponent<
-  NewsletterModalExperienceHostProps
-> = ({ scrollDistanceTrigger = 450 }) => {
+export function NewsletterModalExperienceHost({
+  scrollDistanceTrigger = 450,
+}: NewsletterModalExperienceHostProps) {
   const enabled = useExperienceFlagsStore((state) => state.newsletterModal);
   const document = useRuntimeStore((state) => state.document);
   const [modalVisible, setModalVisible] = useState(false);
@@ -41,6 +41,4 @@ const NewsletterModalExperienceHost: FunctionComponent<
       <NewsletterModal visible={modalVisible} onDismiss={onModalDismiss} />
     </>
   );
-};
-
-export default NewsletterModalExperienceHost;
+}

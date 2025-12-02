@@ -1,1 +1,1 @@
-export { default as NewsletterModal } from './NewsletterModal';
+export * from './NewsletterModal';

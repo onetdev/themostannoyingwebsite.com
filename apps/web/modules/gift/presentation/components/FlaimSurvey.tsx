@@ -174,5 +174,3 @@ const SurveyResult: FunctionComponent<SurveyResultProps> = ({
     </div>
   );
 };
-
-export default FlaimSurvery;

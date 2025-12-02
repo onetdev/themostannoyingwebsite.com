@@ -1,8 +1,8 @@
 'use client';
 
-import { FunctionComponent, useRef, useState } from 'react';
+import { useRef, useState } from 'react';
 
-import ManualModal from './components/ManualModal';
+import { ManualModal } from './components';
 
 import useScrollDistanceTrigger from '@/hooks/useScrollDistanceTrigger';
 import { useExperienceFlagsStore, useUserGrantsStore } from '@/kernel';
@@ -14,9 +14,9 @@ import {
 export type NotificationPermissionExperienceHostProps = {
   scrollDistanceTrigger?: number;
 };
-const NotificationPermissionExperienceHost: FunctionComponent<
-  NotificationPermissionExperienceHostProps
-> = ({ scrollDistanceTrigger = 400 }) => {
+export function NotificationPermissionExperienceHost({
+  scrollDistanceTrigger = 400,
+}: NotificationPermissionExperienceHostProps) {
   const initialState = useRef(getNotificationPermissionState()).current;
   const [manualModalVisible, setManualModalVisible] = useState(false);
   const enabled = useExperienceFlagsStore((state) => state.notifications);
@@ -54,6 +54,4 @@ const NotificationPermissionExperienceHost: FunctionComponent<
       onDismiss={onManualModalDismiss}
     />
   );
-};
-
-export default NotificationPermissionExperienceHost;
+}

@@ -5,12 +5,12 @@ import { useTranslations } from 'next-intl';
 import { FunctionComponent, PropsWithChildren, useEffect } from 'react';
 import { useBeforeUnload } from 'react-use';
 
+import { useExperienceFlagsStore, useUserGrantsStore } from '@/kernel';
 import {
   PageTitleExperienceHost,
   useDisableContextMenu,
   useDisableNavigationPop,
-} from '@/features/browser_core';
-import { useExperienceFlagsStore, useUserGrantsStore } from '@/kernel';
+} from '@/modules/browser-core';
 import { useAdblockerDetector } from '@/modules/gift';
 import { NewsletterModalExperienceHost } from '@/modules/newsletter';
 import { NotificationPermissionExperienceHost } from '@/modules/notification';

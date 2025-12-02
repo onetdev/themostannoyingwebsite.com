@@ -1,13 +1,13 @@
 import { useMessages, useTranslations } from 'next-intl';
 import { useCallback, useEffect, useMemo, useState } from 'react';
 
-import { HistoryItem, HistoryItemOwner } from '../../domain/entities/types';
+import { HistoryItem, OwnerType } from '../../domain';
 
 import useAudio from '@/hooks/useAudio';
 import useSendNotification from '@/hooks/useSendNotification';
 import { useRuntimeStore, useUserPreferencesStore } from '@/kernel';
 
-const useChatBubbleHistory = () => {
+export function useChatBubbleHistory() {
   const t = useTranslations();
   const messages = useMessages();
   const enableSound = useUserPreferencesStore((state) => state.enableSound);
@@ -28,7 +28,7 @@ const useChatBubbleHistory = () => {
     );
   }, [history, messages, t]);
 
-  const add = useCallback((message: string, owner: HistoryItemOwner) => {
+  const add = useCallback((message: string, owner: OwnerType) => {
     setHistory((prev) => [...prev, { text: message, owner, time: new Date() }]);
   }, []);
 
@@ -91,6 +91,4 @@ const useChatBubbleHistory = () => {
     isForeground,
     setForeground,
   };
-};
-
-export default useChatBubbleHistory;
+}

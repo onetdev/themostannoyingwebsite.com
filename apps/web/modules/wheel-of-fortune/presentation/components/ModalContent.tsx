@@ -1,21 +1,21 @@
 import { Icon } from '@maw/ui-lib';
 import { getWeightedRandom, WeightedRandomPoolItem } from '@maw/utils/math';
 import { useTranslations } from 'next-intl';
-import { FunctionComponent, useMemo, useState } from 'react';
+import { useMemo, useState } from 'react';
 import Confetti from 'react-confetti';
 
 import { Item } from './DynamicWheelSvg';
-import AnimatedWheel, { AnimatedWheelState } from './WheelAnimationWrapper';
+import { AnimatedWheel, AnimatedWheelState } from './WheelAnimationWrapper';
 
 type ModalContentProps = JSXProxyProps<'div'> & {
   onClose?: () => void;
 };
 
-const ModalContent: FunctionComponent<ModalContentProps> = ({
+export function ModalContent({
   className,
   onClose,
   ...rest
-}) => {
+}: ModalContentProps) {
   const t = useTranslations();
   const hueStart = 300; // random(0,360);
   const [state, setState] = useState<AnimatedWheelState>('ready');
@@ -79,7 +79,7 @@ const ModalContent: FunctionComponent<ModalContentProps> = ({
       </span>
     </div>
   );
-};
+}
 
 const getSlicesItems = (
   pool: WeightedRandomPoolItem<string>[],
@@ -99,5 +99,3 @@ const getSlicesItems = (
 
   return items;
 };
-
-export default ModalContent;

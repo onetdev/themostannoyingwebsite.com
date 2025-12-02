@@ -1,1 +1,1 @@
-export { default as ManualModal } from './ManualModal';
+export * from './ManualModal';

@@ -1,7 +1,7 @@
 import { Button, FormFieldError, Modal, TextInput } from '@maw/ui-lib';
 import { random } from '@maw/utils/math';
 import { useMessages, useTranslations } from 'next-intl';
-import { FunctionComponent, useMemo, useState } from 'react';
+import { useMemo, useState } from 'react';
 
 import { useNewsletterForm } from '../../application/forms/useNewsletterForm';
 
@@ -10,10 +10,10 @@ type NewsletterModalProps = {
   onDismiss?: () => void;
 };
 
-const NewsletterModal: FunctionComponent<NewsletterModalProps> = ({
+export function NewsletterModal({
   visible = false,
   onDismiss,
-}) => {
+}: NewsletterModalProps) {
   const t = useTranslations();
   const messages = useMessages();
   const [flipActions, setFlipActions] = useState(false);
@@ -88,12 +88,10 @@ const NewsletterModal: FunctionComponent<NewsletterModalProps> = ({
       </form>
     </Modal>
   );
-};
+}
 
 type ConfirmItem = {
   text?: string;
   confirm: string;
   cancel: string;
 };
-
-export default NewsletterModal;

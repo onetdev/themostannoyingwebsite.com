@@ -1,10 +1,10 @@
 import { DotDotDotText, Icon } from '@maw/ui-lib';
 import { useTranslations } from 'next-intl';
-import { FunctionComponent, useEffect, useMemo, useRef, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 
-import MessageBubble from './MessageBubble';
-import MessageForm from './MessageForm';
-import { HistoryItem } from '../../domain/entities/types';
+import { MessageBubble } from './MessageBubble';
+import { MessageForm } from './MessageForm';
+import { HistoryItem } from '../../domain/entities/history-item.schema';
 
 export type HistoryOverlayProps = {
   history: HistoryItem[];
@@ -13,12 +13,12 @@ export type HistoryOverlayProps = {
   open?: boolean;
 };
 
-const HistoryOverlay: FunctionComponent<HistoryOverlayProps> = ({
+export function HistoryOverlay({
   history,
   onClose,
   onUserMessage,
   open = false,
-}) => {
+}: HistoryOverlayProps) {
   const [showTyping, setShowTyping] = useState(true);
   const pagerRef = useRef<HTMLDivElement>(null);
   const t = useTranslations();
@@ -73,7 +73,7 @@ const HistoryOverlay: FunctionComponent<HistoryOverlayProps> = ({
       />
     </div>
   );
-};
+}
 
 const shouldBubbleShowTime = (current: HistoryItem, compareTo: HistoryItem) => {
   if (!compareTo || current.owner !== compareTo.owner) return true;
@@ -82,5 +82,3 @@ const shouldBubbleShowTime = (current: HistoryItem, compareTo: HistoryItem) => {
     Math.abs(current.time.getTime() - compareTo.time.getTime()) > 5 * 60 * 1000
   );
 };
-
-export default HistoryOverlay;

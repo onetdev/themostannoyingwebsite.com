@@ -1,17 +1,13 @@
-import { FunctionComponent } from 'react';
 import ReactTimeAgo from 'react-timeago';
 
-import { HistoryItem } from '../../domain/entities/types';
+import { HistoryItem } from '../../domain/entities/history-item.schema';
 
 type MessageBubbleProps = {
   item: HistoryItem;
   showTime?: boolean;
 };
 
-const MessageBubble: FunctionComponent<MessageBubbleProps> = ({
-  item,
-  showTime = true,
-}) => {
+export function MessageBubble({ item, showTime = true }: MessageBubbleProps) {
   return (
     <div className="group" data-owner={item.owner}>
       <div className="bg-secondary text-on-secondary group-data-[owner=bot]:bg-primary group-data-[owner=bot]:text-on-primary rounded-lg p-2 text-sm group-data-[owner=bot]:mr-6 group-data-[owner=user]:ml-6 md:p-3 md:text-base">
@@ -24,6 +20,4 @@ const MessageBubble: FunctionComponent<MessageBubbleProps> = ({
       )}
     </div>
   );
-};
-
-export default MessageBubble;
+}

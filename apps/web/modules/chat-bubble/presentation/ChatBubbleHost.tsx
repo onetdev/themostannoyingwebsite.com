@@ -1,16 +1,10 @@
 'use client';
 
 import { Icon } from '@maw/ui-lib';
-import {
-  FunctionComponent,
-  MouseEventHandler,
-  useCallback,
-  useEffect,
-  useRef,
-} from 'react';
+import { MouseEventHandler, useCallback, useEffect, useRef } from 'react';
 
-import HistoryOverlay from './components/HistoryOverlay';
-import useChatBubbleHistory from '../application/hooks/useChatBubbleHistory';
+import { HistoryOverlay } from './components/HistoryOverlay';
+import { useChatBubbleHistory } from '../application/hooks/useChatBubbleHistory';
 
 /**
  * This component should start off with an initial message so that we
@@ -18,7 +12,7 @@ import useChatBubbleHistory from '../application/hooks/useChatBubbleHistory';
  * Every time the user closes the chat bubble, we should add a new message
  * to the history now with a notification sound.
  */
-const ChatBubbleHost: FunctionComponent = () => {
+export function ChatBubbleHost() {
   const state = useChatBubbleHistory();
   const $ref = useRef<HTMLDivElement>(null);
 
@@ -72,6 +66,4 @@ const ChatBubbleHost: FunctionComponent = () => {
       </div>
     </div>
   );
-};
-
-export default ChatBubbleHost;
+}

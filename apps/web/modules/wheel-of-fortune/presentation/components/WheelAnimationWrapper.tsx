@@ -2,7 +2,6 @@ import { Button, Icon } from '@maw/ui-lib';
 import { getPointDistance, random } from '@maw/utils/math';
 import {
   CSSProperties,
-  FunctionComponent,
   useCallback,
   useEffect,
   useMemo,
@@ -23,13 +22,13 @@ type AnimatedWheelProps = {
 };
 
 export type AnimatedWheelState = 'ready' | 'spinning' | 'completed';
-const AnimatedWheel: FunctionComponent<AnimatedWheelProps> = ({
+export function AnimatedWheel({
   items,
   onSpinCompleted,
   onStateChange,
   revDuration = 4,
   revRange = [2, 6],
-}) => {
+}: AnimatedWheelProps) {
   const [anim, setAnim] = useState({ rotation: 0, duration: 0 });
   const [state, setState] = useState<AnimatedWheelState>('ready');
   const [winIndex, setWinIndex] = useState<number | undefined>(undefined);
@@ -129,6 +128,4 @@ const AnimatedWheel: FunctionComponent<AnimatedWheelProps> = ({
       </div>
     </div>
   );
-};
-
-export default AnimatedWheel;
+}

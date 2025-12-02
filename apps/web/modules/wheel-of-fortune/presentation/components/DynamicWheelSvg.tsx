@@ -1,6 +1,6 @@
 import { radToDeg } from '@maw/utils/math';
 import Color from 'color';
-import { FunctionComponent, ReactNode } from 'react';
+import { ReactNode } from 'react';
 
 export type Item = {
   color: string;
@@ -14,12 +14,12 @@ type DynamicWheelSvgProps = {
   height: number;
 };
 
-const DynamicWheelSvg: FunctionComponent<DynamicWheelSvgProps> = ({
+export default function DynamicWheelSvg({
   items,
   highlightIndex,
   width,
   height,
-}) => {
+}: DynamicWheelSvgProps) {
   const radius = Math.min(width, height) / 2;
   const center = { x: width / 2, y: height / 2 };
   let startAngleRadians = 0;
@@ -82,6 +82,4 @@ const DynamicWheelSvg: FunctionComponent<DynamicWheelSvgProps> = ({
       {svgSlices}
     </svg>
   );
-};
-
-export default DynamicWheelSvg;
+}
