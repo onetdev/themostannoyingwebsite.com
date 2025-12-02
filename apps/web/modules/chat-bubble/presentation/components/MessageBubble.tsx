@@ -1,7 +1,7 @@
 import { FunctionComponent } from 'react';
 import ReactTimeAgo from 'react-timeago';
 
-import { HistoryItem } from '@/features/chat_bubble/types';
+import { HistoryItem } from '../../domain/entities/types';
 
 type MessageBubbleProps = {
   item: HistoryItem;

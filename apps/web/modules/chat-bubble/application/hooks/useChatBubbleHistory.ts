@@ -1,7 +1,8 @@
 import { useMessages, useTranslations } from 'next-intl';
 import { useCallback, useEffect, useMemo, useState } from 'react';
 
-import { HistoryItem, HistoryItemOwner } from '@/features/chat_bubble';
+import { HistoryItem, HistoryItemOwner } from '../../domain/entities/types';
+
 import useAudio from '@/hooks/useAudio';
 import useSendNotification from '@/hooks/useSendNotification';
 import { useRuntimeStore, useUserPreferencesStore } from '@/kernel';

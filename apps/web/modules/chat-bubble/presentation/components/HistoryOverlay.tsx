@@ -4,8 +4,7 @@ import { FunctionComponent, useEffect, useMemo, useRef, useState } from 'react';
 
 import MessageBubble from './MessageBubble';
 import MessageForm from './MessageForm';
-
-import { HistoryItem } from '@/features/chat_bubble/types';
+import { HistoryItem } from '../../domain/entities/types';
 
 export type HistoryOverlayProps = {
   history: HistoryItem[];

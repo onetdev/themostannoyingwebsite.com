@@ -9,8 +9,8 @@ import {
   useRef,
 } from 'react';
 
-import HistoryOverlay from '@/features/chat_bubble/components/HistoryOverlay';
-import useChatBubbleHistory from '@/features/chat_bubble/hooks/useChatBubbleHistory';
+import HistoryOverlay from './components/HistoryOverlay';
+import useChatBubbleHistory from '../application/hooks/useChatBubbleHistory';
 
 /**
  * This component should start off with an initial message so that we
