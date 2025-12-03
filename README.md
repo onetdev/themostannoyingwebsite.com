@@ -136,7 +136,7 @@ This is a Turborepo monorepo. Here's a quick rundown of the main folders:
 
 Before you can run this project locally, make sure you have the following installed:
 
-- **Node.js** - Version specified in `.tool-versions`
+- **Node.js** - Version specified in `mise.toml`
 - **pnpm** - Package manager for dependencies
 - **Version manager** (recommended) - Use mise, nvm, or similar
 

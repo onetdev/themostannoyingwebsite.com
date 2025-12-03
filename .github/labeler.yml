@@ -8,14 +8,14 @@ ci/cd:
 config:
   - changed-files:
     - any-glob-to-any-file:
+      - ./.eslintrc*
+      - ./.prettierrc*
       - ./**/next.config.js
       - ./**/next.config.mjs
-      - ./**/tsconfig.json
       - ./**/tailwind.config.*
+      - ./**/tsconfig.json
       - ./apps/web/i18n.config.ts
       - ./mise.toml
-      - ./.prettierrc*
-      - ./.eslintrc*
 content:
   - changed-files:
     - any-glob-to-any-file:
@@ -43,10 +43,10 @@ documentation:
 i18n:
   - changed-files:
     - any-glob-to-any-file:
-      - ./apps/web/i18n/**
       - ./**/*.mdx
-      - ./packages/content-api/data/**
+      - ./apps/web/i18n/**
       - ./apps/web/src/app/[locale]/**
+      - ./packages/content-api/data/**
 storybook:
   - changed-files:
     - any-glob-to-any-file:
@@ -56,21 +56,20 @@ storybook:
 testing:
   - changed-files:
     - any-glob-to-any-file:
-      - ./**/*.test.ts
-      - ./**/*.test.tsx
       - ./**/*.spec.ts
       - ./**/*.spec.tsx
+      - ./**/*.test.ts
+      - ./**/*.test.tsx
       - ./apps/web/e2e/**
+      - ./apps/web/playwright.config.ts
       - ./apps/web/tests/**
       - ./packages/**/tests/**
-      - ./apps/web/playwright.config.ts
 ui:
   - changed-files:
     - any-glob-to-any-file:
-      - apps/web/kernel/**/components/**.tsx
-      - apps/web/modules/**/components/**.tsx
       - apps/web/src/components/**.tsx
-      - apps/web/src/features/**/presentation/**.tsx
+      - apps/web/src/kernel/**/components/**.tsx
+      - apps/web/src/modules/**/components/**.tsx
       - packages/ui-lib/src/**
 pkg/config-eslint:
   - changed-files:
