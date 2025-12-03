@@ -6,6 +6,7 @@ import { init as initAuth } from '@/modules/auth/init';
 import { init as initBrowserCore } from '@/modules/browser-core/init';
 import { init as initChatBubble } from '@/modules/chat-bubble/init';
 import { init as initContent } from '@/modules/content/init';
+import { init as initDonation } from '@/modules/donation/init';
 import { init as initGift } from '@/modules/gift/init';
 import { init as initNewsletter } from '@/modules/newsletter/init';
 import { init as initNotification } from '@/modules/notification/init';
@@ -18,15 +19,16 @@ export const DependencyProvider: FunctionComponent<PropsWithChildren> = ({
   const container = useMemo(() => {
     const container = new Container();
 
-    initShared(container);
     initAuth(container);
     initBrowserCore(container);
     initChatBubble(container);
     initContent(container);
+    initDonation();
     initGift(container);
     initNewsletter(container);
     initNotification(container);
     initObstructionDecor(container);
+    initShared(container);
     initWheelOfFortune();
     // Register additional modules here
 

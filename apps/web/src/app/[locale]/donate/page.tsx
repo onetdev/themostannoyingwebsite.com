@@ -1,10 +1,9 @@
 import { PageHeadline } from '@maw/ui-lib';
-import styles from '@maw/ui-lib/content.module.css';
 import { Metadata } from 'next';
 import { getTranslations } from 'next-intl/server';
 
 import { PageLayout } from '@/components/PageLayout';
-import { Link } from '@/i18n/navigation';
+import { DonationPage } from '@/modules/donation/presentation/DonationPage';
 export { generateStaticParams } from '@/i18n/routing';
 
 export const revalidate = 1800;
@@ -26,19 +25,10 @@ export default async function Page() {
 
   return (
     <PageLayout activeItem="donate" role="main">
-      <PageHeadline className="mx-auto w-full max-w-screen-md">
+      <PageHeadline className="mx-auto w-full">
         {t('navigation.donate')}
       </PageHeadline>
-      <div className={styles['content']}>
-        <div className="my-5 max-w-screen-md">
-          {t('app.donate.description')}
-        </div>
-        <p>
-          <Link href="https://onet.dev/donate" target="_blank">
-            {t('app.donate.donateLinkText')} 👈
-          </Link>
-        </p>
-      </div>
+      <DonationPage />
     </PageLayout>
   );
 }
