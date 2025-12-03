@@ -1,22 +1,17 @@
-import { pino } from 'pino';
+import { Logger } from 'tslog';
 
 export const getLogger = () => {
-  const logger = pino({
-    transport: {
-      target: 'pino-pretty',
-      options: {
-        colorize: true,
-        translateTime: 'SYS:standard',
-        ignore: 'pid,hostname',
-      },
-    },
+  const logger = new Logger({
+    type: 'pretty',
   });
 
   return logger;
 };
 
 export const useLogger = () => {
-  const logger = pino({});
+  const logger = new Logger({
+    type: 'pretty',
+  });
 
   return logger;
 };

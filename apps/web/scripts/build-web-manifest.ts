@@ -5,8 +5,8 @@ import path from 'path';
 
 import manifestConfig from '@/root/manifest.config.mjs';
 
-const logger = getLogger().child({
-  script: 'build-web-manifest',
+const logger = getLogger().getSubLogger({
+  name: 'build-web-manifest',
 });
 
 const main = async () => {
@@ -49,5 +49,5 @@ const storeFiles = async (
 
 logger.info('🔄 Generating manifest...');
 main()
-  .then(() => logger.info(`✅ Aaaaand it's done. New manifest created.\n`))
+  .then(() => logger.info(`✅ Aaaaand it's done. New manifest created.`))
   .catch((err) => logger.error(err, `Ooopsie, something went wrong.`));

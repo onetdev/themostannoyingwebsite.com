@@ -3,8 +3,8 @@ import fs from 'fs';
 
 import deploymentMeta from '@/root/deployment-meta.mjs';
 
-const logger = getLogger().child({
-  script: 'build-deployment-meta',
+const logger = getLogger().getSubLogger({
+  name: 'build-deployment-meta',
 });
 const path = './public/deployment-meta.json';
 
@@ -14,4 +14,4 @@ if (fs.existsSync(path)) {
 }
 
 fs.writeFileSync(path, JSON.stringify(deploymentMeta, null, 2));
-logger.info('✅ Done.');
+logger.info('✅ Done generating deployment meta.');

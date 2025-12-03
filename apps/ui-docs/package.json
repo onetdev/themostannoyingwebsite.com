@@ -11,6 +11,7 @@
   },
   "dependencies": {
     "@maw/ui-lib": "workspace:*",
+    "@storybook/addon-docs": "^10.1.2",
     "next": "catalog:",
     "react": "catalog:",
     "react-dom": "catalog:"
@@ -18,15 +19,11 @@
   "devDependencies": {
     "@maw/config-eslint": "workspace:^",
     "@maw/config-ts": "workspace:*",
-    "@storybook/addon-essentials": "catalog:",
-    "@storybook/addon-interactions": "catalog:",
-    "@storybook/addon-links": "catalog:",
-    "@storybook/addon-styling-webpack": "^1.0.1",
-    "@storybook/addon-themes": "catalog:",
-    "@storybook/blocks": "catalog:",
-    "@storybook/nextjs": "catalog:",
+    "@storybook/addon-links": "^10.1.2",
+    "@storybook/addon-styling-webpack": "^3.0.0",
+    "@storybook/addon-themes": "^10.1.2",
+    "@storybook/nextjs": "^10.1.2",
     "@storybook/react": "catalog:",
-    "@storybook/test": "catalog:",
     "@types/node": "catalog:",
     "@types/react": "catalog:",
     "@types/react-dom": "catalog:",
@@ -36,6 +33,9 @@
     "storybook": "catalog:",
     "tailwindcss": "catalog:",
     "typescript": "catalog:"
+  },
+  "peerDependencies": {
+    "pbkdf2": "^3.1.5"
   },
   "eslintConfig": {
     "extends": [

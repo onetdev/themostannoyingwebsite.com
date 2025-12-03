@@ -5,8 +5,8 @@ import HTMLReactParser from 'html-react-parser';
 import Image from 'next/image';
 import { useTranslations } from 'next-intl';
 
-import { ArticleDatum, PartitionalLockedContent } from '@/features/content';
-import { useExperienceFlagsStore } from '@/state/experience_flags';
+import { useExperienceFlagsStore } from '@/kernel';
+import { ArticleDatum, PartitionalLockedContent } from '@/modules/content';
 
 export function ArticleItemPage({ data }: { data: ArticleDatum }) {
   const t = useTranslations();

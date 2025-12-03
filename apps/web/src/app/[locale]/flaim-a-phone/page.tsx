@@ -2,7 +2,7 @@ import { Metadata } from 'next';
 import { getTranslations } from 'next-intl/server';
 
 import { PageLayout } from '@/components/PageLayout';
-import { FlaimSurvery } from '@/features/gifts';
+import { FlaimSurvery } from '@/modules/gift';
 export { generateStaticParams } from '@/i18n/routing';
 
 export const revalidate = 1800;

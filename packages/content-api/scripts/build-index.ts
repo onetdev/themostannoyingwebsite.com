@@ -10,8 +10,8 @@ import articleEntrySimplifiedZod from '@/schemas/article-entry-simplified';
 import { ArticleIndexEntrySchema } from '@/schemas/article-index-entry';
 import { parse as parseMd } from '@/utils/markdown';
 
-const logger = getLogger().child({
-  script: 'build-index',
+const logger = getLogger().getSubLogger({
+  name: 'build-index',
 });
 const locales = ['en'];
 const sourceRootPath = path.join('./data');
@@ -35,8 +35,7 @@ const getLocaleMeta = async () => {
       onCover = data['on-cover'];
       highlighted = data['highlighted'];
       success = true;
-    } catch (err) {
-      logger.warn(err, `Failed to load locale meta for ${locale}`);
+    } catch (_err) {
       success = false;
     }
 
@@ -54,7 +53,12 @@ const getLocaleMeta = async () => {
 
   const results = resultRaw.reduce(
     (carry, current) => {
-      logger.info(`${current.locale} ${current.success ? '✓' : '✗'}`);
+      if (current.success === true) {
+        logger.info(`✅ Lang#${current.locale}: loaded!`);
+      } else {
+        logger.warn(`❌ Lang#${current.locale}: Failed to load, skipping...`);
+      }
+
       carry[current.locale] = current;
       return carry;
     },

@@ -10,12 +10,13 @@ import { getLangDir } from 'rtl-detect';
 import { ExperienceDecoratorLayout } from '@/components/ExperienceDecoratorLayout';
 import config from '@/config';
 import { routing } from '@/i18n/routing';
-import ClientServiceProvider from '@/providers/ClientServiceProvider';
-import RootProviderContainer from '@/providers/RootProviderContainer';
+import { ClientServiceProvider } from '@/providers/ClientServiceProvider';
+import { RootProviderContainer } from '@/providers/RootProviderContainer';
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars -- We need the loader even though we are seemingly not using it directly.
 const _openSans = Open_Sans({
   subsets: ['latin'],
-  weight: ['400', '700'],
+  weight: ['400', '500', '600', '700'],
 });
 
 export async function generateMetadata(): Promise<Metadata> {

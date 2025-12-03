@@ -2,7 +2,7 @@
 
 import { useEffect } from 'react';
 
-import { useExperienceFlagsStore } from '@/state/experience_flags';
+import { useExperienceFlagsStore } from '@/kernel';
 
 export default function DisableAllOnMount() {
   const allDisabled = useExperienceFlagsStore((state) => state.allDisabled);

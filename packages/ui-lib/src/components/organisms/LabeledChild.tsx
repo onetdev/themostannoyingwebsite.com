@@ -1,15 +1,14 @@
 import { FunctionComponent, PropsWithChildren } from 'react';
 
-import { Icon } from '../atoms/Icon';
-import { Tooltip } from '../atoms/Tooltip';
+import { Icon, Tooltip } from '../atoms';
 
-export type LabeledChildProps = PropsWithChildren<{
+export type CompactFormRowProps = PropsWithChildren<{
   info?: string;
   label: string;
   reverse?: boolean;
 }>;
 
-export const LabeledChild: FunctionComponent<LabeledChildProps> = ({
+export const CompactFormRow: FunctionComponent<CompactFormRowProps> = ({
   children,
   info,
   label,

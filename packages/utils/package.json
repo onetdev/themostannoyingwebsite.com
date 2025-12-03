@@ -16,16 +16,17 @@
     "test": "jest"
   },
   "dependencies": {
-    "sanitize-html": "^2.15.0"
+    "sanitize-html": "catalog:"
   },
   "devDependencies": {
     "@maw/config-eslint": "workspace:*",
     "@maw/config-jest": "workspace:*",
     "@maw/config-ts": "workspace:*",
     "@types/jest": "catalog:",
-    "@types/sanitize-html": "^2.15.0",
+    "@types/sanitize-html": "catalog:",
     "eslint": "catalog:",
     "jest": "catalog:",
+    "ts-jest": "catalog:",
     "typescript": "catalog:"
   }
 }

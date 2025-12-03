@@ -3,15 +3,14 @@
 import { FunctionComponent, useEffect, useState } from 'react';
 
 import CookieConsent from '@/components/CookieConsent';
-import { ChatBubbleHost } from '@/features/chat_bubble';
-import { AdblockerSuspectBar, ContainerGiftFlaps } from '@/features/gifts';
+import { useExperienceFlagsStore, useUserGrantsStore } from '@/kernel';
+import { ChatBubbleHost } from '@/modules/chat-bubble';
+import { AdblockerSuspectBar, ContainerGiftFlaps } from '@/modules/gift';
 import {
   DeadPixelHost,
   StickyVideoExperienceHost,
-} from '@/features/obstruction_decor';
-import { WheelOfFortuneHost } from '@/features/wheel_of_fortune';
-import { useExperienceFlagsStore } from '@/state/experience_flags';
-import { useUserGrantsStore } from '@/state/user_grants';
+} from '@/modules/obstruction-decor';
+import { WheelOfFortuneHost } from '@/modules/wheel-of-fortune';
 
 type ExperienceDecoratorLayoutProps = JSXProxyProps<'div'>;
 
@@ -33,7 +32,7 @@ export const ExperienceDecoratorLayout: FunctionComponent<
   // them only if neccessary.
 
   const [runtimeFlags, setRuntimeFlags] = useState(() => ({
-    cookieConsent: false,
+    showCookieConsent: false,
     giftFlaps: false,
     mockChat: false,
     stickyVideo: false,
@@ -42,7 +41,7 @@ export const ExperienceDecoratorLayout: FunctionComponent<
 
   useEffect(() => {
     setRuntimeFlags({
-      cookieConsent,
+      showCookieConsent: !cookieConsent,
       giftFlaps,
       mockChat,
       stickyVideo,
@@ -58,7 +57,7 @@ export const ExperienceDecoratorLayout: FunctionComponent<
         {runtimeFlags.wheelOfFortune && <WheelOfFortuneHost />}
         {deadPixel && <DeadPixelHost />}
         {runtimeFlags.mockChat && <ChatBubbleHost />}
-        {runtimeFlags.cookieConsent && <CookieConsent />}
+        {runtimeFlags.showCookieConsent && <CookieConsent />}
         <AdblockerSuspectBar />
         {runtimeFlags.stickyVideo && <StickyVideoExperienceHost />}
       </div>

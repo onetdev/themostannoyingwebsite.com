@@ -18,17 +18,17 @@
   },
   "dependencies": {
     "@maw/logger": "workspace:^",
-    "marked": "^15.0.7",
-    "sanitize-html": "^2.15.0",
-    "yaml": "^2.7.1",
-    "zod": "^3.24.2",
-    "zod-to-json-schema": "^3.24.5"
+    "marked": "catalog:",
+    "sanitize-html": "catalog:",
+    "yaml": "^2.8.1",
+    "zod": "catalog:",
+    "zod-to-json-schema": "^3.25.0"
   },
   "devDependencies": {
     "@maw/config-eslint": "workspace:*",
     "@maw/config-ts": "workspace:*",
     "@maw/utils": "workspace:*",
-    "@types/sanitize-html": "^2.15.0",
+    "@types/sanitize-html": "catalog:",
     "eslint": "catalog:",
     "sharp": "catalog:",
     "tsx": "catalog:",

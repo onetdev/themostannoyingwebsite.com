@@ -8,28 +8,48 @@ import { defineConfig, devices } from '@playwright/test';
 // import path from 'path';
 // dotenv.config({ path: path.resolve(__dirname, '.env') });
 
+const isCI = !!process.env.CI;
+const htmlReporter = {
+  host: process.env.PLAYWRIGHT_HTML_HOST || '127.0.0.1',
+  port: process.env.PLAYWRIGHT_HTML_PORT || 9232,
+};
+
 /**
  * See https://playwright.dev/docs/test-configuration.
  */
 export default defineConfig({
   testDir: './e2e',
   fullyParallel: true,
-  forbidOnly: !!process.env.CI,
-  retries: process.env.CI ? 2 : 0,
-  workers: process.env.CI ? 1 : undefined,
-  /* Reporter to use. See https://playwright.dev/docs/test-reporters */
-  reporter: 'html',
-  /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
+  forbidOnly: isCI,
+  retries: isCI ? 2 : 0,
+  workers: isCI ? 1 : undefined,
+  /* See https://playwright.dev/docs/test-reporters */
+  reporter: [['html', { ...htmlReporter }]],
+  /*
+   * Shared settings for all the projects below.
+   * See https://playwright.dev/docs/api/class-testoptions.
+   */
   use: {
+    testIdAttribute: 'data-testid',
+    actionTimeout: 5000,
     baseURL: 'http://127.0.0.1:3000',
-
-    /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
+    ignoreHTTPSErrors: true,
+    headless: true,
     trace: 'on-first-retry',
-
-    /* https://playwright.dev/docs/videos */
+    viewport: {
+      width: 1280,
+      height: 720,
+    },
     video: {
-      mode: 'retain-on-failure',
-      size: { width: 640, height: 480 },
+      mode: isCI ? 'retain-on-failure' : 'on',
+      size: {
+        width: 640,
+        height: 360,
+      },
+    },
+    screenshot: {
+      mode: isCI ? 'only-on-failure' : 'on',
+      fullPage: true,
     },
   },
   projects: [
@@ -52,6 +72,6 @@ export default defineConfig({
   webServer: {
     command: 'pnpm run start',
     url: 'http://127.0.0.1:3000',
-    reuseExistingServer: !process.env.CI,
+    reuseExistingServer: !isCI,
   },
 });

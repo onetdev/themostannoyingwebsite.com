@@ -1,28 +1,11 @@
-dependencies:
+app/web:
   - changed-files:
     - any-glob-to-any-file:
-      - ./**/package.json
-      - ./**/package.json
-      - ./**/pnpm-lock.yaml
-      - .asdfrc
-      - .nvmrc
-      - .tool-versions
-
-documentation:
+      - apps/web/**
+app/ui-docs:
   - changed-files:
     - any-glob-to-any-file:
-      - ./**/README.md
-      - .github/ISSUE_TEMPLATE/*
-      - .github/pull_request_template.md
-      - README.md
-
-storybook:
-  - changed-files:
-    - any-glob-to-any-file:
-      - apps/ui-docs/.storybook/**
-      - ./**.stories.ts
-      - ./**.stories.tsx
-
+      - apps/ui-docs/**
 ci/cd:
   - changed-files:
     - any-glob-to-any-file:
@@ -30,17 +13,101 @@ ci/cd:
       - .github/CODEOWNERS
       - .github/labeler.yml
       - .github/workflows/**
-      - next.config.js
-
+config:
+  - changed-files:
+    - any-glob-to-any-file:
+      - ./.eslintrc*
+      - ./.prettierrc*
+      - ./**/next.config.js
+      - ./**/next.config.mjs
+      - ./**/tailwind.config.*
+      - ./**/tsconfig.json
+      - ./apps/web/i18n.config.ts
+      - ./mise.toml
 content:
   - changed-files:
     - any-glob-to-any-file:
-      - apps/web/public/**
-      - assets/**
-
+      - apps/web/public/**/*.{png,jpg,jpeg,gif,svg,webp,ico}
+      - assets/**/*.{png,jpg,jpeg,gif,svg,webp,ico}
+      - packages/content-api/data/**/*.{json,md,mdx}
+dependencies:
+  - changed-files:
+    - any-glob-to-any-file:
+      - ./**/package.json
+      - ./**/pnpm-lock.yaml
+      - mise.toml
+      - package.json
+documentation:
+  - changed-files:
+    - any-glob-to-any-file:
+      - ./**/README.md
+      - .github/ISSUE_TEMPLATE/*
+      - .github/pull_request_template.md
+      - CHANGELOG.md
+      - CODE_OF_CONDUCT.md
+      - CONTRIBUTING.md
+      - LICENSE
+      - README.md
+i18n:
+  - changed-files:
+    - any-glob-to-any-file:
+      - ./**/*.mdx
+      - ./apps/web/i18n/**
+      - ./apps/web/src/app/[locale]/**
+      - ./packages/content-api/data/**
+storybook:
+  - changed-files:
+    - any-glob-to-any-file:
+      - ./**.stories.ts
+      - ./**.stories.tsx
+      - ./apps/ui-docs/.storybook/**
+testing:
+  - changed-files:
+    - any-glob-to-any-file:
+      - ./**/*.spec.ts
+      - ./**/*.spec.tsx
+      - ./**/*.test.ts
+      - ./**/*.test.tsx
+      - ./apps/web/e2e/**
+      - ./apps/web/playwright.config.ts
+      - ./apps/web/tests/**
+      - ./packages/**/tests/**
 ui:
   - changed-files:
     - any-glob-to-any-file:
       - apps/web/src/components/**.tsx
-      - apps/web/src/features/**/components/**.tsx
-      - packages/ui/**
+      - apps/web/src/kernel/**/components/**.tsx
+      - apps/web/src/modules/**/components/**.tsx
+      - packages/ui-lib/src/**
+pkg/config-eslint:
+  - changed-files:
+    - any-glob-to-any-file:
+      - packages/config-eslint/**
+pkg/config-jest:
+  - changed-files:
+    - any-glob-to-any-file:
+      - packages/config-jest/**
+pkg/config-ts:
+  - changed-files:
+    - any-glob-to-any-file:
+      - packages/config-ts/**
+pkg/content-api:
+  - changed-files:
+    - any-glob-to-any-file:
+      - packages/content-api/**
+pkg/jest-preset:
+  - changed-files:
+    - any-glob-to-any-file:
+      - packages/jest-preset/**
+pkg/logger:
+  - changed-files:
+    - any-glob-to-any-file:
+      - packages/logger/**
+pkg/ui-lib:
+  - changed-files:
+    - any-glob-to-any-file:
+      - packages/ui-lib/**
+pkg/utils:
+  - changed-files:
+    - any-glob-to-any-file:
+      - packages/utils/**

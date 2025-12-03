@@ -1,7 +1,23 @@
 {
   "extends": "@maw/config-ts/configs/next-js.json",
   "compilerOptions": {
-    "baseUrl": "."
+    "baseUrl": ".",
+    "paths": {
+      "@/*": [
+        "./src/*"
+      ],
+      "@/root/*": [
+        "./*"
+      ],
+      "@/modules/*": [
+        "src/modules/*"
+      ],
+      "@/kernel": [
+        "src/kernel/index.ts"
+      ]
+    },
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true
   },
   "include": [
     "**/*.ts",

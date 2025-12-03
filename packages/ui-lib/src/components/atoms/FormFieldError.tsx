@@ -1,8 +1,9 @@
 import { FunctionComponent } from 'react';
-import { FieldError } from 'react-hook-form';
+import { FieldError, FieldErrorsImpl, Merge } from 'react-hook-form';
 
 export type FormFieldErrorProps = {
-  error?: FieldError;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  error?: FieldError | Merge<FieldError, FieldErrorsImpl<any>>;
 };
 
 export const FormFieldError: FunctionComponent<FormFieldErrorProps> = ({
@@ -11,7 +12,9 @@ export const FormFieldError: FunctionComponent<FormFieldErrorProps> = ({
   return (
     <>
       {error && (
-        <small className="text-error mt-1 block">{error?.message}</small>
+        <small className="text-error mt-1 block">
+          {error?.message?.toString()}
+        </small>
       )}
     </>
   );
