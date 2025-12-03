@@ -1,50 +1,65 @@
 # Gift Module
 
-Interactive gift features and experiences for the application, including various surprise elements, surveys, and detection mechanisms.
+Interactive gift experiences including DILF finder, surveys, adblocker detection, and surprise elements.
 
-## Overview
+## Features
 
-This module implements various gift-based interactions and features:
+### DILF Finder
+- **`DilfPage`** - Main DILF discovery page
+- **`DilfFinder`** - Interactive DILF search interface
+- **`DilfClickOverlay`** - Click interaction overlay with data-driven hotspots
 
-- **Adblocker detection** - Detects and responds to adblocker usage
-- **DILF Finder** - Interactive DILF discovery experience with click overlays
-- **Flaim Survey** - Survey functionality with domain-driven question entities
-- **Container Gift Flaps** - Animated gift container interactions
-- **One By One Gift** - Progressive gift reveal component
+### Surveys & Interactions
+- **`FlaimSurvey`** - Phone survey component with question flow
+- **Flaim Survey Questions** - Domain entity for survey question data
 
-## Structure
+### Gift Components
+- **`OneByOneGift`** - Sequential gift reveal component
+- **`ContainerGiftFlaps`** - Animated gift container with opening flaps
 
-The module follows clean architecture principles with the following layers:
+### Adblocker Detection
+- **`useAdblockerDetector`** - Hook to detect if user has adblocker enabled
+- **`AdblockerSuspectBar`** - Warning bar displayed when adblocker suspected
 
-### Domain Layer (`domain/`)
+## Usage
 
-Core business entities and repository interfaces:
+```typescript
+// Use DILF page
+import { DilfPage } from '@/modules/gift';
 
-- **Entities**
-  - `flaim-survey-question.ts` - Survey question domain entity
+<DilfPage />
 
-### Application Layer (`application/`)
+// Use Flaim survey
+import { FlaimSurvey } from '@/modules/gift';
 
-Business logic, hooks, and use cases:
+<FlaimSurvey className="w-full" />
 
-- **Hooks**
-  - `useAdblockerDetector.tsx` - Hook for detecting adblocker presence
+// Detect adblocker
+import { useAdblockerDetector, AdblockerSuspectBar } from '@/modules/gift';
 
-### Infrastructure Layer (`infrastructure/`)
+function MyComponent() {
+  useAdblockerDetector(); // Starts detection
 
-Implementation details for data access and external services (currently empty, ready for repository implementations).
+  return (
+    <div>
+      <AdblockerSuspectBar /> {/* Shows when detected */}
+      <YourContent />
+    </div>
+  );
+}
 
-### Presentation Layer (`presentation/`)
+// Use gift components
+import { ContainerGiftFlaps, OneByOneGift } from '@/modules/gift';
 
-UI components and pages:
+<ContainerGiftFlaps />
+<OneByOneGift items={giftItems} />
+```
 
-- **Components**
-  - `AdblockerSuspectBar.tsx` - Warning bar for suspected adblocker usage
-  - `ContainerGiftFlaps.tsx` - Animated gift container with flaps
-  - `DilfClickOverlay/` - Click interaction overlay for DILF finder
-  - `DilfFinder.tsx` - DILF discovery interface component
-  - `FlaimSurvey.tsx` - Survey presentation component
-  - `OneByOneGift.tsx` - Sequential gift reveal component
+## Routes
 
-- **Pages**
-  - `DilfPage.tsx` - Main DILF feature page
+- `/dilf` - DILF finder page
+- `/flaim-a-phone` - Phone survey page
+
+## Configuration
+
+Adblocker detection works by attempting to load a fake ad element and checking if it's blocked. The detection respects experience flag settings.

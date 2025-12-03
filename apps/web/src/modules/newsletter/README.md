@@ -1,41 +1,57 @@
 # Newsletter Module
 
-Newsletter subscription functionality with an interactive modal experience.
+Newsletter subscription modal with dynamic confirmation buttons and annoying UX patterns.
 
-## Overview
+## Features
 
-This module implements newsletter subscription features:
+- **Dynamic Confirmations** - Button text randomly changes from a pool of options
+- **Button Order Randomization** - Confirm/cancel buttons randomly swap positions
+- **Scroll-based Trigger** - Modal appears after scrolling a specified distance
+- **Visibility Trigger** - Modal appears when user switches away from the tab
+- **Form Validation** - Email validation with Zod and React Hook Form
 
-- **Newsletter Modal** - Interactive modal with dynamic confirmation buttons
-- **Form Management** - Email validation and form handling
-- **Experience Triggers** - Scroll distance and document visibility triggers
+## Components
 
-## Structure
+- **`NewsletterModalExperienceHost`** - Main experience host that manages triggers
+- **`NewsletterModal`** - The modal component itself with dynamic behavior
 
-The module follows clean architecture principles with the following layers:
+## Usage
 
-### Domain Layer (`domain/`)
+```typescript
+// Use the experience host (recommended)
+import { NewsletterModalExperienceHost } from '@/modules/newsletter';
 
-Core business entities and repository interfaces (ready for future newsletter entities).
+<NewsletterModalExperienceHost scrollDistanceTrigger={450} />
 
-### Application Layer (`application/`)
+// Use modal directly
+import { NewsletterModal } from '@/modules/newsletter';
 
-Business logic, forms, and hooks:
+const [visible, setVisible] = useState(false);
 
-- **Forms**
-  - `newsletter-form.schema.ts` - Zod schema for newsletter form validation
-  - `useNewsletterForm.ts` - React Hook Form integration for newsletter subscription
+<NewsletterModal
+  visible={visible}
+  onDismiss={() => setVisible(false)}
+/>
 
-### Infrastructure Layer (`infrastructure/`)
+// Use the form hook separately
+import { useNewsletterForm, getNewsletterFormSchema } from '@/modules/newsletter';
 
-Implementation details for data access and external services (ready for newsletter API implementations).
+function CustomForm() {
+  const { register, handleSubmit, formState, onSubmit } = useNewsletterForm();
 
-### Presentation Layer (`presentation/`)
+  return (
+    <form onSubmit={handleSubmit(onSubmit)}>
+      <input {...register('email')} />
+      <button type="submit" disabled={!formState.isValid}>Subscribe</button>
+    </form>
+  );
+}
+```
 
-UI components and experience hosts:
+## Configuration
 
-- **Components**
-  - `NewsletterModal.tsx` - Modal component with dynamic confirmations and flip actions
+- **Scroll Distance**: Default 450px, configurable via prop
+- **Confirmation Messages**: Defined in translation files under `newsletter.modal.confirmations`
+- **Experience Flag**: Can be toggled via `newsletterModal` experience flag
 
-- **Experience Hosts**
-  - `NewsletterModalExperienceHost.tsx` - Manages modal visibility based on scroll and visibility triggers
+The modal submission currently shows an alert but can be extended to actually submit to a newsletter service.
