@@ -2,7 +2,7 @@ import { Metadata } from 'next';
 import { getTranslations } from 'next-intl/server';
 
 import { PageLayout } from '@/components/PageLayout';
-import { DilfFinder } from '@/features/gifts';
+import { DilfPage } from '@/modules/gift';
 export { generateStaticParams } from '@/i18n/routing';
 
 export const revalidate = 1800;
@@ -20,13 +20,9 @@ export async function generateMetadata({
 }
 
 export default async function Page() {
-  const t = await getTranslations();
-
   return (
     <PageLayout activeItem="dilf" role="main">
-      <h1>{t('gifts.dilf.fullTitle')}</h1>
-      <p className="my-5 max-w-screen-md">{t('gifts.dilf.description')}</p>
-      <DilfFinder />
+      <DilfPage />
     </PageLayout>
   );
 }

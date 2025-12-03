@@ -3,13 +3,13 @@
 import { FunctionComponent, useEffect, useState } from 'react';
 
 import CookieConsent from '@/components/CookieConsent';
-import { ChatBubbleHost } from '@/features/chat_bubble';
-import { AdblockerSuspectBar, ContainerGiftFlaps } from '@/features/gifts';
+import { useExperienceFlagsStore, useUserGrantsStore } from '@/kernel';
+import { ChatBubbleHost } from '@/modules/chat-bubble';
+import { AdblockerSuspectBar, ContainerGiftFlaps } from '@/modules/gift';
 import {
   DeadPixelHost,
   StickyVideoExperienceHost,
-} from '@/features/obstruction_decor';
-import { useExperienceFlagsStore, useUserGrantsStore } from '@/kernel';
+} from '@/modules/obstruction-decor';
 import { WheelOfFortuneHost } from '@/modules/wheel-of-fortune';
 
 type ExperienceDecoratorLayoutProps = JSXProxyProps<'div'>;

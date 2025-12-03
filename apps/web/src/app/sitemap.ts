@@ -3,7 +3,7 @@ import type { MetadataRoute } from 'next';
 import { Languages } from 'next/dist/lib/metadata/types/alternative-urls-types';
 
 import config from '@/config';
-import { AppArticleService } from '@/features/content/services/AppArticleService';
+import { AppArticleService } from '@/modules/content';
 import i18nConfig from '@/root/i18n.config';
 
 const extraLangs = i18nConfig.locales.filter(

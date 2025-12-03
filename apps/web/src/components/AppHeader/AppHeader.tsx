@@ -8,8 +8,8 @@ import { SiteNavigation } from './SiteNavigation';
 import { ActiveNavigationItem } from './types';
 import { UserNavigation } from './UserNavigation';
 
-import { AppArticleService } from '@/features/content/services/AppArticleService';
 import { Link } from '@/i18n/navigation';
+import { AppArticleService } from '@/modules/content';
 
 type AppHeaderProps = {
   activeItem?: ActiveNavigationItem;

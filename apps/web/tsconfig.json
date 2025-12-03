@@ -10,10 +10,10 @@
         "./*"
       ],
       "@/modules/*": [
-        "./modules/*"
+        "src/modules/*"
       ],
       "@/kernel": [
-        "./kernel/index.ts"
+        "src/kernel/index.ts"
       ]
     },
     "experimentalDecorators": true,

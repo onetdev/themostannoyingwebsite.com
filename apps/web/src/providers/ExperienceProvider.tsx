@@ -5,15 +5,15 @@ import { useTranslations } from 'next-intl';
 import { FunctionComponent, PropsWithChildren, useEffect } from 'react';
 import { useBeforeUnload } from 'react-use';
 
+import { useExperienceFlagsStore, useUserGrantsStore } from '@/kernel';
 import {
   PageTitleExperienceHost,
   useDisableContextMenu,
   useDisableNavigationPop,
-} from '@/features/browser_core';
-import useAdblockerDetector from '@/features/gifts/hooks/useAdblockerDetector';
-import { NewsletterModalExperienceHost } from '@/features/newsletter';
-import { NotificationPermissionExperienceHost } from '@/features/notification';
-import { useExperienceFlagsStore, useUserGrantsStore } from '@/kernel';
+} from '@/modules/browser-core';
+import { useAdblockerDetector } from '@/modules/gift';
+import { NewsletterModalExperienceHost } from '@/modules/newsletter';
+import { NotificationPermissionExperienceHost } from '@/modules/notification';
 
 export const ExperienceProvider: FunctionComponent<PropsWithChildren> = ({
   children,

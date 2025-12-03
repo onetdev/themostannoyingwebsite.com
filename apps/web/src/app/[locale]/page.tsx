@@ -1,11 +1,11 @@
 import { PageLayout } from '@/components/PageLayout';
 import {
+  AppArticleService,
   LargeCoverItem,
   SmallCoverListItem,
   TextListItem,
-} from '@/features/content';
-import { AppArticleService } from '@/features/content/services/AppArticleService';
-import { OneByOneGift } from '@/features/gifts';
+} from '@/modules/content';
+import { OneByOneGift } from '@/modules/gift';
 export { generateStaticParams } from '@/i18n/routing';
 
 export const revalidate = 1800;
