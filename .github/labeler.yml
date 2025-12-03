@@ -1,3 +1,11 @@
+app/web:
+  - changed-files:
+    - any-glob-to-any-file:
+      - apps/web/**
+app/ui-docs:
+  - changed-files:
+    - any-glob-to-any-file:
+      - apps/ui-docs/**
 ci/cd:
   - changed-files:
     - any-glob-to-any-file:
