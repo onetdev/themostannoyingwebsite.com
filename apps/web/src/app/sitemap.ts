@@ -2,9 +2,11 @@ import { ArticleDatum } from '@maw/content-api';
 import type { MetadataRoute } from 'next';
 import { Languages } from 'next/dist/lib/metadata/types/alternative-urls-types';
 
-import config from '@/config';
+import { getAppConfigService } from '@/kernel';
 import { AppArticleService } from '@/modules/content';
 import i18nConfig from '@/root/i18n.config';
+
+const config = getAppConfigService().getDeploymentMeta();
 
 const extraLangs = i18nConfig.locales.filter(
   (lang) => lang !== i18nConfig.defaultLocale,

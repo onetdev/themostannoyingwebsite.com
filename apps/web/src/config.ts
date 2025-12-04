@@ -1,6 +1,7 @@
 import deploymentMeta from '@/root/public/deployment-meta.json';
 
 const config = {
+  defaultColorScheme: 'dark' as AppTheme,
   donation: {
     buyMeACoffeeUrl: 'https://buymeacoffee.com/onetdev',
     paypalUrl: 'https://paypal.me/onetdev',
@@ -27,8 +28,7 @@ const config = {
     // Not a priority at the moment 😅
     totalDonationInEuro: 0,
   },
-  defaultColorScheme: 'dark' as AppTheme,
-  ...deploymentMeta,
+  deploymentMeta: { ...deploymentMeta },
 };
 
 export default config;

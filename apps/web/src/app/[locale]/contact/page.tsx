@@ -3,10 +3,11 @@ import { Metadata } from 'next';
 import { getTranslations } from 'next-intl/server';
 
 import { PageLayout } from '@/components/PageLayout';
-import config from '@/config';
+import { getAppConfigService } from '@/kernel';
 export { generateStaticParams } from '@/i18n/routing';
 
 export const revalidate = 1800;
+const config = getAppConfigService().getDeploymentMeta();
 
 export async function generateMetadata({
   params,

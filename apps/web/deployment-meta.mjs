@@ -1,8 +1,10 @@
 import packageJson from '../../package.json' with { type: 'json' };
 
-const boolMap = { true: ['true', '1'], false: ['false', '0'] };
-const toBool = (value) =>
-  Object.entries(boolMap).find(([, v]) => v.includes(value))?.[0];
+const toBool = (value, defaultValue = false) =>
+  [
+    [true, ['true', '1']],
+    [false, ['false', '0']],
+  ].find(([, data]) => data.includes(value))?.[0] ?? defaultValue;
 
 const isLocalDevelopment = toBool(process.env.NEXT_PUBLIC_IS_DEV) || false;
 let publicUrl =

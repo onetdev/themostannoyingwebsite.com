@@ -1,11 +1,12 @@
-import { useTranslations } from 'next-intl';
+import { getTranslations } from 'next-intl/server';
 import { FunctionComponent } from 'react';
 
-import config from '@/config';
 import { Link } from '@/i18n/navigation';
+import { getAppConfigService } from '@/kernel';
 
-export const AppFooter: FunctionComponent = () => {
-  const t = useTranslations();
+export const AppFooter: FunctionComponent = async () => {
+  const t = await getTranslations();
+  const config = getAppConfigService().getAll();
 
   return (
     <footer
@@ -20,7 +21,7 @@ export const AppFooter: FunctionComponent = () => {
         {t.rich('app.recruiting', {
           linkTag: (chunks) => (
             <Link
-              href={config.githubUrl}
+              href={config.deploymentMeta.githubUrl}
               target="_blank"
               rel="noopener noreferrer"
               prefetch={false}>
