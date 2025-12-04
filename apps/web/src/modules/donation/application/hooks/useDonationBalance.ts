@@ -1,19 +1,13 @@
-export type useDonationBalanceProps = {
-  costStartEpoch: number;
-  costDailyAvgInEuro: number;
-  totalDonationInEuro: number;
-};
+import { useAppConfig } from '@/kernel';
 
-export function useDonationBalance({
-  costStartEpoch,
-  costDailyAvgInEuro,
-  totalDonationInEuro,
-}: useDonationBalanceProps) {
+export function useDonationBalance() {
+  const { donation } = useAppConfig();
+
   const cumulativeCost =
-    ((new Date().getTime() / 1000 - costStartEpoch) / 24 / 60 / 60) *
-    costDailyAvgInEuro *
+    ((new Date().getTime() / 1000 - donation.costStartEpoch) / 24 / 60 / 60) *
+    donation.costDailyAvgInEuro *
     -1;
-  const balance = Math.floor(cumulativeCost) + totalDonationInEuro;
+  const balance = Math.floor(cumulativeCost) + donation.totalDonationInEuro;
 
   return balance;
 }

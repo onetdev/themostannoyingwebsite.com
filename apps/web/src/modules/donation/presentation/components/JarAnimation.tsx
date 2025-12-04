@@ -4,10 +4,8 @@ import { DotLottieReact } from '@lottiefiles/dotlottie-react';
 
 import { useDonationBalance } from '../../application/hooks/useDonationBalance';
 
-import config from '@/config';
-
 export function JarAnimation() {
-  const balance = useDonationBalance(config.donation);
+  const balance = useDonationBalance();
 
   return (
     <DotLottieReact
