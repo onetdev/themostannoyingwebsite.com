@@ -40,10 +40,12 @@ dependencies:
 documentation:
   - changed-files:
     - any-glob-to-any-file:
+      - ./**/CLAUDE.md
       - ./**/README.md
       - .github/ISSUE_TEMPLATE/*
       - .github/pull_request_template.md
       - CHANGELOG.md
+      - CLAUDE.md
       - CODE_OF_CONDUCT.md
       - CONTRIBUTING.md
       - LICENSE
