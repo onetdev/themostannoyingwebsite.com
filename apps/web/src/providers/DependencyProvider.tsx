@@ -23,7 +23,7 @@ export const DependencyProvider: FunctionComponent<PropsWithChildren> = ({
     initBrowserCore(container);
     initChatBubble(container);
     initContent(container);
-    initDonation();
+    initDonation(container);
     initGift(container);
     initNewsletter(container);
     initNotification(container);

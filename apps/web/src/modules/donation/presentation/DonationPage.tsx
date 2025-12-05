@@ -15,41 +15,47 @@ export async function DonationPage() {
     <div className="lg:flex lg:flex-row lg:gap-5">
       <div className="lg:w-1/2">
         <p className="my-5 max-w-screen-md">{t('app.donate.description')}</p>
-        <h2 className="py-5">Let's put money into the jar!</h2>
-        <p className="max-w-screen-md">
-          Don’t you hate it when there are no more cookies left in the jar? Or
-          how difficult it is to buy a house these days? When you step into a
-          puddle in the bathroom and it turns out it’s not water but a secretion
-          from that cat you’ve only been looking after for a few days? Let’s
-          stop this madness. Instead of taking from this jar, we should be
-          putting into it — we’ve done our part.
-        </p>
+        <h2 className="py-5">{t('app.donate.moneyUsageHeading')}</h2>
+        <p>{t('app.donate.moneyUsageDescription')}</p>
         <JarAnimation />
-        <h2 className="py-5">Top donors</h2>
-        <h4>🥇 Kidney</h4>
-        <h5>🥈 Liver</h5>
-        <h6>🥉 Heart</h6>
+        <h2 className="py-5">{t('app.donate.topSupporters')}</h2>
+        <p className="pb-5">{t('app.donate.topSupportersDescription')}</p>
+        <h4>{t('app.donate.topSupporterKidney')}</h4>
+        <h5>{t('app.donate.topSupporterLiver')}</h5>
+        <h6>{t('app.donate.topSupporterHeart')}</h6>
       </div>
       <div className="lg:w-1/2">
-        <h2 className="py-5">Total Donations Received</h2>
+        <h2 className="py-5">{t('app.donate.totalSupportReceived')}</h2>
         <DonationBalance />
 
-        <h2 className="pt-8">Classic methods</h2>
+        <h2 className="pt-8">{t('app.donate.classicMethods')}</h2>
         <div className="my-5 flex w-full max-w-screen-md flex-col justify-center gap-3 md:flex-row">
           <Button size="2xl" variant="primary" className="md:w-1/2">
-            Buy Me A Coffee
+            {t('app.donate.buyMeACoffee')}
           </Button>
           <Button size="2xl" variant="primary" className="md:w-1/2">
-            PayPay
+            {t('app.donate.payPal')}
           </Button>
           {/* TODO: share should be added here */}
         </div>
-        <h2 className="pt-8">Crypto methods</h2>
+        <h2 className="pt-8">{t('app.donate.cryptoMethods')}</h2>
         <CryptoWalletList />
         <p className="text-center">
           <Link href={donation.alternativeOptionsUrl} target="_blank">
-            Click here for other means of supporting 😏
+            {t('app.donate.alternativeOptionsLink')}
           </Link>
+        </p>
+        <h2 className="py-5">{t('app.donate.disclaimer')}</h2>
+        <p>
+          <small>{t('app.donate.disclaimerParagraph1')}</small>
+        </p>
+
+        <p>
+          <small>{t('app.donate.disclaimerParagraph2')}</small>
+        </p>
+
+        <p>
+          <small>{t('app.donate.disclaimerParagraph3')}</small>
         </p>
       </div>
     </div>

@@ -1,13 +1,20 @@
+import { useMemo } from 'react';
+
+import { useDonationService } from '../services';
+
 import { useAppConfig } from '@/kernel';
 
-export function useDonationBalance() {
+export function useDonationBalance(): number {
   const { donation } = useAppConfig();
+  const donationService = useDonationService();
 
-  const cumulativeCost =
-    ((new Date().getTime() / 1000 - donation.costStartEpoch) / 24 / 60 / 60) *
-    donation.costDailyAvgInEuro *
-    -1;
-  const balance = Math.floor(cumulativeCost) + donation.totalDonationInEuro;
+  const balance = useMemo(() => {
+    return donationService.calculateBalance({
+      costStartEpoch: donation.costStartEpoch,
+      costDailyAvgInEuro: donation.costDailyAvgInEuro,
+      totalDonationInEuro: donation.totalDonationInEuro,
+    });
+  }, [donation, donationService]);
 
   return balance;
 }

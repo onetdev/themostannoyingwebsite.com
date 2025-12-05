@@ -10,6 +10,7 @@ import { getLangDir } from 'rtl-detect';
 import { ExperienceDecoratorLayout } from '@/components/ExperienceDecoratorLayout';
 import { routing } from '@/i18n/routing';
 import { getAppConfigService } from '@/kernel';
+import { BeggarBanner } from '@/modules/donation';
 import { ClientServiceProvider } from '@/providers/ClientServiceProvider';
 import { RootProviderContainer } from '@/providers/RootProviderContainer';
 
@@ -111,6 +112,7 @@ async function RootLayout({
         <NextIntlClientProvider>
           <RootProviderContainer appConfig={config}>
             <ClientServiceProvider />
+            <BeggarBanner />
             <ExperienceDecoratorLayout className="font-primary">
               {/* Please add AppHeader in your pages to have SSG/ISR/SSG support while also being able to select the active navigation item */}
               <Analytics />
