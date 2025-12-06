@@ -18,11 +18,12 @@
 @import "./dark.css";
 
 /* Import color token definitions */
-@import "./colors.css";
+@import "../base/colors.css";
 
 /* Import base design tokens */
 @import "../base/typography.css";
 @import "../base/animations.css";
+@import "../base/utilities.css";
 
 @custom-variant light (&:where([data-theme=light], [data-theme=light] *));
 @custom-variant dark (&:where([data-theme=dark], [data-theme=dark] *));

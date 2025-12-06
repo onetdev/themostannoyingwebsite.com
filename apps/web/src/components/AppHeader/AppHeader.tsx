@@ -34,7 +34,9 @@ export async function AppHeader({ activeItem }: AppHeaderProps) {
           </span>
           <span className="text-on-surface hidden lg:inline">
             <i className="text-3xl font-light opacity-80">the</i>{' '}
-            <span>Most Annoying Website</span>
+            <span>
+              <span className="text-primary">Most</span> Annoying Website
+            </span>
           </span>
         </Link>
       </h1>
