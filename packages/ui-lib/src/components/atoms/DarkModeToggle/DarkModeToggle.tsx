@@ -1,5 +1,8 @@
 import { FunctionComponent } from 'react';
 
+import { SelectOption } from './SelectOption';
+import { Icon } from '../Icon';
+
 export type DarkModeToggleSize = 'md' | 'lg';
 export type DarkModeToggleProps = {
   className?: string;
@@ -39,34 +42,22 @@ export const DarkModeToggle: FunctionComponent<DarkModeToggleProps> = ({
   };
 
   const sizeClass = resolveSize(size);
+  const isDark = resolvedTheme === 'dark' || !resolvedTheme;
 
   return (
     <button
       tabIndex={0}
       suppressHydrationWarning
-      data-dark={(resolvedTheme === 'dark' || !resolvedTheme).toString()}
+      data-dark={isDark.toString()}
       className={`group border-border-primary bg-surface-alt relative flex justify-between rounded-full border select-none ${sizeClass} ${className}`}
       onClick={toggleDarkMode}>
       <div className="bg-primary absolute inset-y-0 block h-full w-1/2 translate-x-0 rounded-full transition duration-100 ease-in-out group-data-[dark=true]:translate-x-full" />
-      <SelectOption role="img" aria-label={text.lightMode}>
-        ☀️
+      <SelectOption role="img" aria-label={text.lightMode} isSelected={!isDark}>
+        <Icon icon="sun" />
       </SelectOption>
-      <SelectOption role="img" aria-label={text.darkMode}>
-        🌙
+      <SelectOption role="img" aria-label={text.darkMode} isSelected={isDark}>
+        <Icon icon="moon" />
       </SelectOption>
     </button>
-  );
-};
-
-const SelectOption: FunctionComponent<JSXProxyProps<'span'>> = ({
-  children,
-  ...rest
-}) => {
-  return (
-    <div
-      className="z-10 flex grow cursor-pointer items-center justify-center text-center text-base"
-      {...rest}>
-      <span>{children}</span>
-    </div>
   );
 };
