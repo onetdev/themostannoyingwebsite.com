@@ -1,0 +1,82 @@
+@reference 'tailwindcss';
+
+/**
+ * Animation utilities and keyframes
+ * Used across various interactive components
+ */
+@theme static {
+  --animate-flashing-invert-half: flashing-invert-half 500ms infinite;
+  --animate-wiggle-15deg: wiggle-15deg 0.2s linear infinite;
+  --animate-wiggle-8deg: wiggle-8deg 8s infinite;
+  --animate-width-100-0: width-0-100 2s reverse infinite;
+  --animate-gift-callout: gift-callout 5s infinite;
+  --animate-hue-full-rotate: hue-full-rotate 2s infinite;
+
+  @keyframes flashing-invert-half {
+    0% { filter: invert(0) }
+    50% { filter: invert(0.5) }
+    100% { filter: invert(0) }
+  }
+
+  @keyframes wiggle-15deg {
+    0% { transform: rotate(0deg) }
+    30% { transform: rotate(-15deg) }
+    40% { transform: rotate(0deg) }
+    100% { transform: rotate(0deg) }
+  }
+
+  @keyframes wiggle-8deg {
+    0% { transform: rotate(0deg) }
+    90% { transform: rotate(0deg) }
+    92% { transform: rotate(8deg) }
+    94% { transform: rotate(-8deg) }
+    96% { transform: rotate(8deg) }
+    98% { transform: rotate(-8deg) }
+    100% { transform: rotate(0deg) }
+  }
+
+  @keyframes width-0-100 {
+    0% { width: 0% }
+    100% { width: 100% }
+  }
+
+  @keyframes gift-callout {
+    0% {
+      filter: invert(0.8);
+      transform: scale(1)
+    }
+    5% {
+      filter: invert(0.4);
+      transform: scale(1.1)
+    }
+    10% {
+      filter: invert(0) hue-rotate(0deg);
+      transform: scale(1);
+    }
+    15% {
+      filter: hue-rotate(180deg);
+      transform: scale(1);
+    }
+    20% {
+      filter: invert(0) hue-rotate(360deg);
+      transform: scale(1.2) rotate(360deg);
+    }
+    25% {
+      filter: invert(0) hue-rotate(180deg);
+      transform: scale(1) rotate(0deg);
+    }
+    30% {
+      filter: invert(0) hue-rotate(0deg);
+      transform: scale(1) rotate(0deg);
+    }
+  }
+
+  @keyframes hue-full-rotate {
+    0% {
+      filter: hue-rotate(0deg)
+    }
+    100% {
+      filter: hue-rotate(360deg)
+    }
+  }
+}

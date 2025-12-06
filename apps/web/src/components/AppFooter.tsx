@@ -11,7 +11,7 @@ export const AppFooter: FunctionComponent = () => {
     <footer
       id="footer"
       role="contentinfo"
-      className="border-hr-surface mt-12 flex flex-col justify-between gap-4 border-t px-0 py-5 text-xs md:flex-row">
+      className="border-border-surface mt-12 flex flex-col justify-between gap-4 border-t px-0 py-5 text-xs md:flex-row">
       <span className="mr-2">
         {t('app.copyright', { year: new Date().getFullYear() })}.{' '}
         <Link href="https://onet.dev">Konrád Koller</Link>

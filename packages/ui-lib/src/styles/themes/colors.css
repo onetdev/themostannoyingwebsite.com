@@ -1,0 +1,63 @@
+@reference 'tailwindcss';
+
+/**
+ * Color tokens
+ * References theme-specific color values defined in light.css and dark.css
+ * These variables are available as Tailwind utilities (e.g., bg-primary, text-on-surface)
+ */
+@theme {
+  /* Background colors */
+  --color-background: var(--theme-color-background);
+  --color-surface: var(--theme-color-surface);
+  --color-surface-alt: var(--theme-color-surface-alt);
+
+  /* Primary colors */
+  --color-primary: var(--theme-color-primary);
+  --color-primary-alt: var(--theme-color-primary-alt);
+  --color-on-primary: var(--theme-color-on-primary);
+
+  /* Secondary colors */
+  --color-secondary: var(--theme-color-secondary);
+  --color-secondary-alt: var(--theme-color-secondary-alt);
+  --color-on-secondary: var(--theme-color-on-secondary);
+
+  /* Tertiary colors */
+  --color-tertiary: var(--theme-color-tertiary);
+  --color-tertiary-alt: var(--theme-color-tertiary-alt);
+  --color-on-tertiary: var(--theme-color-on-tertiary);
+
+  /* Status colors */
+  --color-success: var(--theme-color-success);
+  --color-warning: var(--theme-color-warning);
+  --color-error: var(--theme-color-error);
+  --color-on-success: var(--theme-color-on-success);
+  --color-on-warning: var(--theme-color-on-warning);
+  --color-on-error: var(--theme-color-on-error);
+
+  /* Text colors */
+  --color-on-background: var(--theme-color-on-background);
+  --color-on-surface: var(--theme-color-on-surface);
+  --color-muted: var(--theme-color-muted);
+
+  /* UI state colors */
+  --color-dimmer: var(--theme-color-dimmer);
+  --color-disabled: var(--theme-color-disabled);
+  --color-focus: var(--theme-color-focus);
+
+  /* Border colors - semantic (match component variants) */
+  --color-border-primary: var(--theme-color-border-primary);
+  --color-border-secondary: var(--theme-color-border-secondary);
+  --color-border-tertiary: var(--theme-color-border-tertiary);
+
+  /* Border colors - status */
+  --color-border-success: var(--theme-color-border-success);
+  --color-border-warning: var(--theme-color-border-warning);
+  --color-border-error: var(--theme-color-border-error);
+
+  /* Border colors - neutral */
+  --color-border-surface: var(--theme-color-border-surface);
+
+  /* Computed gradients */
+  --background-image-bottom-fadeout: linear-gradient(0deg, var(--color-surface) 60%, transparent 100%);
+  --background-image-radial-primary: radial-gradient(transparent, var(--color-primary));
+}

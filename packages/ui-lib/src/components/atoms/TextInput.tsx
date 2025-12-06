@@ -19,16 +19,16 @@ const resolveVariant = (variant: TextInputVariant) => {
   switch (variant) {
     case 'secondary':
       className =
-        'border border-hr-secondary text-on-surface hover:border-secondary-alt';
+        'border border-border-secondary text-on-surface hover:border-secondary-alt';
       break;
     case 'tertiary':
       className =
-        'border border-hr-tertiary text-on-surface hover:border-tertiary-alt';
+        'border border-border-tertiary text-on-surface hover:border-tertiary-alt';
       break;
     case 'primary':
     default:
       className =
-        'border border-hr-primary text-on-surface hover:border-primary-alt';
+        'border border-border-primary text-on-surface hover:border-primary-alt';
       break;
   }
 

@@ -30,16 +30,25 @@
     --theme-color-on-warning: #000000;
     --theme-color-on-error: #ffffff;
 
-    /* Text and Dimmer */
+    /* Text and UI States */
     --theme-color-dimmer: #555555a0;
     --theme-color-on-background: #f0f0f0;
     --theme-color-on-surface: #e0e0e0;
+    --theme-color-muted: #9e9e9e;
+    --theme-color-disabled: #616161;
+    --theme-color-focus: #42a5f5;
 
-    /* Borders */
-    --theme-color-hr-primary: #d4951c;
-    --theme-color-hr-secondary: #0277bd;
-    --theme-color-hr-tertiary: #e85f37;
-    --theme-color-hr-surface: #3b3b4e;
-    --theme-color-hr-surface-alt: #353348;
+    /* Borders - Semantic */
+    --theme-color-border-primary: #d4951c;
+    --theme-color-border-secondary: #0277bd;
+    --theme-color-border-tertiary: #e85f37;
+
+    /* Borders - Status */
+    --theme-color-border-success: #1b5e20;
+    --theme-color-border-warning: #e65100;
+    --theme-color-border-error: #b71c1c;
+
+    /* Borders - Neutral */
+    --theme-color-border-surface: #3b3b4e;
   }
 }

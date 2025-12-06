@@ -1,128 +1,28 @@
 @reference 'tailwindcss';
-@import "./light.css";
-@import "./dark.css";
 
 /**
+ * Theme System Entry Point
+ *
+ * This file imports and organizes the design system tokens:
+ * - Theme-specific color values (light.css, dark.css)
+ * - Color token definitions (colors.css)
+ * - Typography tokens (../base/typography.css)
+ * - Animation utilities (../base/animations.css)
+ *
  * Resources:
  * https://tailwindcss.com/docs/theme#theme-variable-namespaces
  */
-@theme static {
-  --font-sans: "Open Sans", "Segoe UI", "Ubuntu", "Helvetica Neue", "sans-serif", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
-  --font-serif: ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
-  --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
-  --color-background: var(--theme-color-background);
-  --color-primary: var(--theme-color-primary);
-  --color-primary-alt: var(--theme-color-primary-alt);
-  --color-secondary: var(--theme-color-secondary);
-  --color-secondary-alt: var(--theme-color-secondary-alt);
-  --color-tertiary: var(--theme-color-tertiary);
-  --color-tertiary-alt: var(--theme-color-tertiary-alt);
-  --color-surface: var(--theme-color-surface);
-  --color-surface-alt: var(--theme-color-surface-alt);
-  --color-success: var(--theme-color-success);
-  --color-warning: var(--theme-color-warning);
-  --color-error: var(--theme-color-error);
-  --color-on-primary: var(--theme-color-on-primary);
-  --color-on-secondary: var(--theme-color-on-secondary);
-  --color-on-tertiary: var(--theme-color-on-tertiary);
-  --color-on-background: var(--theme-color-on-background);
-  --color-on-surface: var(--theme-color-on-surface);
-  --color-on-success: var(--theme-color-on-success);
-  --color-on-warning: var(--theme-color-on-warning);
-  --color-on-error: var(--theme-color-on-error);
-  --color-dimmer: var(--theme-color-dimmer);
-  --color-hr-surface: var(--theme-color-hr-surface);
-  --color-hr-surface-alt: var(--theme-color-hr-surface-alt);
-  --color-hr-primary: var(--theme-color-hr-primary);
-  --color-hr-secondary: var(--theme-color-hr-secondary);
-  --color-hr-tertiary: var(--theme-color-hr-tertiary);
-  --background-image-bottom-fadeout: linear-gradient(0deg, var(--color-surface) 60%, transparent 100%);
-  --background-image-radial-primary: radial-gradient(transparent, var(--color-primary));
-  --min-width-clamp-400: min(400px,100%);
-  --max-width-screen-dimension-min: min(100vw, 100vh);
-  --max-height-clamp-300-screen-half: min(300px, 50vh);
-  --max-height-screen-dimension-min: min(100vw, 100vh);
-  --max-height-screen-3per4: 75vh;
-  --padding-16per9: 56.25%;
-  --padding-9per16: 177.78%;
-  --transition-property-visibility-opacity: visibility, opacity;
-  --translate-screen-h-half: 50vh;
-  --animate-highlight: highlight 1s infinite;
-  --animate-flashing-invert-half: flashing-invert-half 500ms infinite;
-  --animate-wiggle-15deg: wiggle-15deg 0.2s linear infinite;
-  --animate-wiggle-8deg: wiggle-8deg 8s infinite;
-  --animate-width-0-100: width-0-100 2s infinite;
-  --animate-width-100-0: width-0-100 2s reverse infinite;
-  --animate-gift-callout: gift-callout 5s infinite;
-  --animate-hue-full-rotate: hue-full-rotate 2s infinite;
 
-  @keyframes highlight {
-    from { background: var(--color-error) }
-    to { background: var(--color-error) }
-  }
-  @keyframes flashing-invert-half {
-    0% { filter: invert(0) }
-    50% { filter: invert(0.5) }
-    100% { filter: invert(0) }
-  }
-  @keyframes wiggle-15deg {
-    0% { transform: rotate(0deg) }
-    30% { transform: rotate(-15deg) }
-    40% { transform: rotate(0deg) }
-    100% { transform: rotate(0deg) }
-  }
-  @keyframes wiggle-8deg {
-    0% { transform: rotate(0deg) }
-    90% { transform: rotate(0deg) }
-    92% { transform: rotate(8deg) }
-    94% { transform: rotate(-8deg) }
-    96% { transform: rotate(8deg) }
-    98% { transform: rotate(-8deg) }
-    100% { transform: rotate(0deg) }
-  }
-  @keyframes width-0-100 {
-    0% { width: 0% }
-    100% { width: 100% }
-  }
-  @keyframes gift-callout {
-    0% {
-      filter: invert(0.8);
-      transform: scale(1)
-    }
-    5% {
-      filter: invert(0.4);
-      transform: scale(1.1)
-    }
-    10% {
-      filter: invert(0) hue-rotate(0deg);
-      transform: scale(1);
-    }
-    15% {
-      filter: hue-rotate(180deg);
-      transform: scale(1);
-    }
-    20% {
-      filter: invert(0) hue-rotate(360deg);
-      transform: scale(1.2) rotate(360deg);
-    }
-    25% {
-      filter: invert(0) hue-rotate(180deg);
-      transform: scale(1) rotate(0deg);
-    }
-    30% {
-      filter: invert(0) hue-rotate(0deg);
-      transform: scale(1) rotate(0deg);
-    }
-  }
-  @keyframes hue-full-rotate {
-    0% {
-      filter: hue-rotate(0deg)
-    }
-    100% {
-      filter: hue-rotate(360deg)
-    }
-  }
-}
+/* Import theme layers (light/dark color values) */
+@import "./light.css";
+@import "./dark.css";
+
+/* Import color token definitions */
+@import "./colors.css";
+
+/* Import base design tokens */
+@import "../base/typography.css";
+@import "../base/animations.css";
 
 @custom-variant light (&:where([data-theme=light], [data-theme=light] *));
 @custom-variant dark (&:where([data-theme=dark], [data-theme=dark] *));
