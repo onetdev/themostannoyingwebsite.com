@@ -43,7 +43,7 @@ export const LargeCoverItem: FunctionComponent<LargeCoverItemProps> = ({
             </span>
           </h2>
           <p className="m-0 mb-2 hidden text-sm md:block">
-            <span className="bg-secondary text-on-secondary box-decoration-clone px-2 py-1">
+            <span className="bg-surface text-on-surface box-decoration-clone px-2 py-1">
               {article.intro}
             </span>
           </p>

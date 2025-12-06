@@ -8,18 +8,18 @@
     --theme-color-surface-alt: #e9edf2;
 
     /* Primary Colors */
-    --theme-color-primary: #ff8c42;
-    --theme-color-primary-alt: #cc6b30;
+    --theme-color-primary: #2563eb;
+    --theme-color-primary-alt: #1d4ed8;
     --theme-color-on-primary: #ffffff;
 
     /* Secondary Colors */
-    --theme-color-secondary: #007a75;
-    --theme-color-secondary-alt: #00615d;
+    --theme-color-secondary: #16a34a;
+    --theme-color-secondary-alt: #15803d;
     --theme-color-on-secondary: #ffffff;
 
     /* Tertiary Colors */
-    --theme-color-tertiary: #ff4e50;
-    --theme-color-tertiary-alt: #d64244;
+    --theme-color-tertiary: #ea580c;
+    --theme-color-tertiary-alt: #c2410c;
     --theme-color-on-tertiary: #ffffff;
 
     /* Success, Warning, and Error */
@@ -32,16 +32,16 @@
 
     /* Text and UI States */
     --theme-color-dimmer: #5a5a5a99;
-    --theme-color-on-background: #333333;
-    --theme-color-on-surface: #333333;
+    --theme-color-on-background: #40464c;
+    --theme-color-on-surface: #40464c;
     --theme-color-muted: #757575;
     --theme-color-disabled: #9e9e9e;
     --theme-color-focus: #2196f3;
 
     /* Borders - Semantic */
-    --theme-color-border-primary: #e07b37;
-    --theme-color-border-secondary: #006964;
-    --theme-color-border-tertiary: #e24748;
+    --theme-color-border-primary: #1d4ed8;
+    --theme-color-border-secondary: #15803d;
+    --theme-color-border-tertiary: #c2410c;
 
     /* Borders - Status */
     --theme-color-border-success: #388e3c;
@@ -49,6 +49,6 @@
     --theme-color-border-error: #c62828;
 
     /* Borders - Neutral */
-    --theme-color-border-surface: #cdd2d8;
+    --theme-color-border-surface: #b8bfc7;
   }
 }

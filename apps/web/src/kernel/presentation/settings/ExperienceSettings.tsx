@@ -171,7 +171,7 @@ const ExperienceSettings: FunctionComponent<ExperienceSettingsProps> = ({
         </Button>
         <Button
           className="mt-6"
-          variant="secondary"
+          variant="tertiary"
           onClick={experience.allDisabled}>
           {t('common.disableAll')}
         </Button>

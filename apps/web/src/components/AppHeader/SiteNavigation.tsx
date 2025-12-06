@@ -18,7 +18,7 @@ type NavItem = {
 };
 
 const NavLink = ({ path, children, ...rest }: PropsWithChildren<NavItem>) => (
-  <Link href={path} prefetch={false} {...rest}>
+  <Link href={path} prefetch={false} className="as-text" {...rest}>
     {children}
   </Link>
 );

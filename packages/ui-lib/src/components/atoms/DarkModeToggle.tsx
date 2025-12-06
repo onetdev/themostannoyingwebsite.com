@@ -45,9 +45,9 @@ export const DarkModeToggle: FunctionComponent<DarkModeToggleProps> = ({
       tabIndex={0}
       suppressHydrationWarning
       data-dark={(resolvedTheme === 'dark' || !resolvedTheme).toString()}
-      className={`group border-secondary relative flex justify-between rounded-full border select-none ${sizeClass} ${className}`}
+      className={`group border-border-primary bg-surface-alt relative flex justify-between rounded-full border select-none ${sizeClass} ${className}`}
       onClick={toggleDarkMode}>
-      <div className="bg-secondary absolute inset-y-0 block h-full w-1/2 translate-x-0 rounded-full transition duration-100 ease-in-out group-data-[dark=true]:translate-x-full" />
+      <div className="bg-primary absolute inset-y-0 block h-full w-1/2 translate-x-0 rounded-full transition duration-100 ease-in-out group-data-[dark=true]:translate-x-full" />
       <SelectOption role="img" aria-label={text.lightMode}>
         ☀️
       </SelectOption>
