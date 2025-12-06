@@ -19,7 +19,7 @@ export const SmallCoverListItem: FunctionComponent<SmallCoverListItemProps> = ({
 
   return (
     <article role="article" {...rest}>
-      <Link href={article.url} passHref prefetch={false}>
+      <Link href={article.url} passHref prefetch={false} className="as-text">
         {!article.coverImages?.thumbnail && (
           <CoverPlaceholder width={1920} height={1200} />
         )}

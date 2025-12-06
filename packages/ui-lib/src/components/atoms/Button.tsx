@@ -15,14 +15,16 @@ const resolveVariant = (variant: ButtonVariant) => {
   switch (variant) {
     case 'secondary':
       className =
-        'bg-secondary text-on-secondary hover:enabled:bg-secondary-alt';
+        'bg-secondary text-on-secondary border-2 border-border-secondary hover:enabled:bg-secondary-alt';
       break;
     case 'tertiary':
-      className = 'bg-tertiary text-on-tertiary hover:enabled:bg-tertiary-alt';
+      className =
+        'bg-tertiary text-on-tertiary border-2 border-border-tertiary hover:enabled:bg-tertiary-alt';
       break;
     case 'primary':
     default:
-      className = 'bg-primary text-on-primary hover:enabled:bg-primary-alt';
+      className =
+        'bg-primary text-on-primary border-2 border-border-primary hover:enabled:bg-primary-alt';
       break;
   }
 

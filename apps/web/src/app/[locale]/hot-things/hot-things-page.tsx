@@ -82,7 +82,7 @@ export default function HotThingsPage() {
         />
         {!isDisallowed && isCapable && (
           <button
-            className="absolute top-1/2 left-1/2 -mt-9 -ml-9 text-7xl"
+            className="absolute top-1/2 left-1/2 -mt-9 -ml-9 cursor-pointer text-7xl"
             onClick={onIntent}
             hidden={Boolean(stream)}>
             <Icon icon="play" size="5xl" />

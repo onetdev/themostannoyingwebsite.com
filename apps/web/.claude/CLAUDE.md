@@ -1208,8 +1208,8 @@ text-on-error        // Text on error background
 #### Other Semantic Colors
 ```typescript
 bg-dimmer            // Dimmer overlay
-bg-hr-surface        // Horizontal rule on surface
-bg-hr-primary        // Horizontal rule primary
+bg-border-surface        // Horizontal rule on surface
+bg-border-primary        // Horizontal rule primary
 ```
 
 **Why prefer semantic tokens?**

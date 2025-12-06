@@ -1,7 +1,7 @@
 import '@/global.css';
 import { Analytics } from '@vercel/analytics/react';
 import { Metadata, Viewport } from 'next';
-import { Open_Sans } from 'next/font/google';
+import { Inter } from 'next/font/google';
 import { notFound } from 'next/navigation';
 import { hasLocale, NextIntlClientProvider } from 'next-intl';
 import { getTranslations } from 'next-intl/server';
@@ -14,7 +14,7 @@ import { ClientServiceProvider } from '@/providers/ClientServiceProvider';
 import { RootProviderContainer } from '@/providers/RootProviderContainer';
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars -- We need the loader even though we are seemingly not using it directly.
-const _openSans = Open_Sans({
+const _inter = Inter({
   subsets: ['latin'],
   weight: ['400', '500', '600', '700'],
 });
