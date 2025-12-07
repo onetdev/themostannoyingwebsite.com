@@ -2,7 +2,7 @@
 
 import { CopyMarker } from '@maw/ui-lib';
 import { useTranslations } from 'next-intl';
-import { FunctionComponent, PropsWithChildren, useEffect } from 'react';
+import { PropsWithChildren, useEffect } from 'react';
 import { useBeforeUnload } from 'react-use';
 
 import { useExperienceFlagsStore, useUserGrantsStore } from '@/kernel';
@@ -15,9 +15,7 @@ import { useAdblockerDetector } from '@/modules/gift';
 import { NewsletterModalExperienceHost } from '@/modules/newsletter';
 import { NotificationPermissionExperienceHost } from '@/modules/notification';
 
-export const ExperienceProvider: FunctionComponent<PropsWithChildren> = ({
-  children,
-}) => {
+export function ClientExperienceContainer({ children }: PropsWithChildren) {
   const t = useTranslations();
   const exitPrompt = useExperienceFlagsStore((state) => state.exitPrompt);
   const clipboardMarker = useExperienceFlagsStore(
@@ -49,4 +47,4 @@ export const ExperienceProvider: FunctionComponent<PropsWithChildren> = ({
       </CopyMarker>
     </>
   );
-};
+}

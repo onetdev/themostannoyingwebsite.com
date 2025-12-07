@@ -1,7 +1,7 @@
 import { FunctionComponent, PropsWithChildren } from 'react';
 import { createPortal } from 'react-dom';
 
-import { useRootPortalElement } from '@/providers/RootPortalProvider';
+import { useRootPortalElement } from '@/providers/ClientRootPortalProvider';
 
 export type RootPortalProps = PropsWithChildren;
 

@@ -1,6 +1,6 @@
 'use client';
 
-import { FunctionComponent } from 'react';
+import { useZodAutoConfigurator } from './useZodAutoConfigurator';
 
 import {
   useDocumentVisibilityListener,
@@ -10,12 +10,13 @@ import {
   useServiceWorker,
 } from '@/kernel/application/hooks';
 
-export const ClientServiceProvider: FunctionComponent = () => {
+export function ClientObservers() {
   useServiceWorker();
   useNavigationStats();
   useFirstInteractionListener();
   useDocumentVisibilityListener();
   useReducedMotionListener();
+  useZodAutoConfigurator();
 
   return null;
-};
+}

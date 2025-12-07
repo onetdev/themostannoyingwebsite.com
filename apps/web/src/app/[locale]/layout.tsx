@@ -11,7 +11,7 @@ import { ExperienceDecoratorLayout } from '@/components/ExperienceDecoratorLayou
 import { routing } from '@/i18n/routing';
 import { getAppConfigService } from '@/kernel';
 import { BeggarBanner } from '@/modules/donation';
-import { ClientServiceProvider } from '@/providers/ClientServiceProvider';
+import { ClientObservers } from '@/providers/ClientObservers';
 import { RootProviderContainer } from '@/providers/RootProviderContainer';
 
 const config = getAppConfigService().getAll();
@@ -111,7 +111,7 @@ async function RootLayout({
       <body>
         <NextIntlClientProvider>
           <RootProviderContainer appConfig={config}>
-            <ClientServiceProvider />
+            <ClientObservers />
             <BeggarBanner />
             <ExperienceDecoratorLayout className="font-primary">
               {/* Please add AppHeader in your pages to have SSG/ISR/SSG support while also being able to select the active navigation item */}

@@ -3,13 +3,12 @@
 import { ThemeProvider } from 'next-themes';
 import { PropsWithChildren } from 'react';
 
+import { ClientNavigationConfigurator } from './ClientNavigationConfigurator';
 import { DependencyProvider } from './DependencyProvider';
-import { NavigationProvider } from './NavigationProvider';
-import { ZodTranslationConfig } from './ZodTranslationProvider';
 
 import { AppConfig, AppConfigProvider } from '@/kernel';
-import { ExperienceProvider } from '@/providers/ExperienceProvider';
-import { RootPortalProvider } from '@/providers/RootPortalProvider';
+import { ClientExperienceContainer } from '@/providers/ClientExperienceContainer';
+import { ClientRootPortalProvider } from '@/providers/ClientRootPortalProvider';
 
 export type RootProviderContainerProps = PropsWithChildren<{
   appConfig: AppConfig;
@@ -21,17 +20,15 @@ export function RootProviderContainer({
 }: RootProviderContainerProps) {
   return (
     <AppConfigProvider config={appConfig}>
-      <ZodTranslationConfig>
-        <RootPortalProvider>
-          <DependencyProvider>
-            <ThemeProvider defaultTheme="dark" enableColorScheme enableSystem>
-              <NavigationProvider>
-                <ExperienceProvider>{children}</ExperienceProvider>
-              </NavigationProvider>
-            </ThemeProvider>
-          </DependencyProvider>
-        </RootPortalProvider>
-      </ZodTranslationConfig>
+      <ClientRootPortalProvider>
+        <DependencyProvider>
+          <ThemeProvider defaultTheme="dark" enableColorScheme enableSystem>
+            <ClientNavigationConfigurator>
+              <ClientExperienceContainer>{children}</ClientExperienceContainer>
+            </ClientNavigationConfigurator>
+          </ThemeProvider>
+        </DependencyProvider>
+      </ClientRootPortalProvider>
     </AppConfigProvider>
   );
 }

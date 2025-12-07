@@ -1,7 +1,7 @@
 'use client';
 
 import { compile } from 'path-to-regexp';
-import { FunctionComponent, PropsWithChildren } from 'react';
+import { PropsWithChildren } from 'react';
 
 import { AppLink } from '@/components/AppLink';
 import { useRouter } from '@/i18n/navigation';
@@ -30,9 +30,7 @@ const routeAliasToPathMap: Record<RouteAlias, string> = {
   virgin: '/virgin',
 };
 
-export const NavigationProvider: FunctionComponent<PropsWithChildren> = ({
-  children,
-}) => {
+export function ClientNavigationConfigurator({ children }: PropsWithChildren) {
   const navigation = useRouter();
 
   const resolvePathForRouteAlias = (param: NavigationParams) => {
@@ -61,4 +59,4 @@ export const NavigationProvider: FunctionComponent<PropsWithChildren> = ({
       {children}
     </NavigationProviderBase>
   );
-};
+}
