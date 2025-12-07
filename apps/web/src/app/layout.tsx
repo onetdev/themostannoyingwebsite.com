@@ -1,9 +1,6 @@
 import '@/reflect-metadata';
+import { PropsWithChildren } from 'react';
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export default function RootLayout({ children }: PropsWithChildren) {
   return children;
 }
