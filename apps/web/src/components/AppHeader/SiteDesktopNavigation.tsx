@@ -1,4 +1,4 @@
-import { AdaptiveNavigation } from '@maw/ui-lib';
+import { AdaptiveNavigation, AdaptiveNavigationProps } from '@maw/ui-lib';
 import { getTranslations } from 'next-intl/server';
 import { PropsWithChildren } from 'react';
 
@@ -6,8 +6,9 @@ import { ActiveNavigationItem } from './types';
 
 import { Link } from '@/i18n/navigation';
 
-type SiteNavigationProps = {
+export type SiteNavigationProps = {
   activeItem?: string;
+  className?: AdaptiveNavigationProps['className'];
 };
 
 type NavItem = {
@@ -18,12 +19,19 @@ type NavItem = {
 };
 
 const NavLink = ({ path, children, ...rest }: PropsWithChildren<NavItem>) => (
-  <Link href={path} prefetch={false} className="as-text" {...rest}>
+  <Link
+    href={path}
+    prefetch={false}
+    className="as-text hover-text-primary"
+    {...rest}>
     {children}
   </Link>
 );
 
-export async function SiteNavigation({ activeItem }: SiteNavigationProps) {
+export async function SiteDesktopNavigation({
+  activeItem,
+  className,
+}: SiteNavigationProps) {
   const t = await getTranslations();
 
   const links: NavItem[] = [
@@ -71,7 +79,7 @@ export async function SiteNavigation({ activeItem }: SiteNavigationProps) {
   return (
     <AdaptiveNavigation
       activeItem={activeItem}
-      className="col-span-1 my-3 -ml-3 pl-3 md:ml-0 md:pl-0"
+      className={`col-span-1 my-3 -ml-3 pl-3 md:ml-0 md:pl-0 ${className}`}
       id="navigation-main"
       IteratorComponent={NavLink}
       items={links}

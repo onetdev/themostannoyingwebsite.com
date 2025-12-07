@@ -77,7 +77,7 @@ export const Icon: FunctionComponent<IconProps> = ({
   return (
     <FontAwesomeIcon
       icon={resolvedIcon}
-      className={`${resolvedSize} ${className}`}
+      className={`${resolvedSize}! ${className ?? ''}`}
       {...rest}
     />
   );

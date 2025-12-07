@@ -19,7 +19,7 @@ const config = getAppConfigService().getAll();
 // eslint-disable-next-line @typescript-eslint/no-unused-vars -- We need the loader even though we are seemingly not using it directly.
 const _inter = Inter({
   subsets: ['latin'],
-  weight: ['400', '500', '600', '700'],
+  weight: ['200', '400', '500', '600', '700'],
 });
 
 export async function generateMetadata(): Promise<Metadata> {

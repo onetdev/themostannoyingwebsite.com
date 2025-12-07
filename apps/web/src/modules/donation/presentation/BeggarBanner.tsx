@@ -1,5 +1,6 @@
 'use client';
 
+import { Icon } from '@maw/ui-lib';
 import { useTranslations } from 'next-intl';
 import { useEffect, useState } from 'react';
 
@@ -40,34 +41,22 @@ export function BeggarBanner() {
   }
 
   return (
-    <div className="bg-error text-on-error z-50 w-full px-4 py-3 shadow-lg">
-      <div className="container mx-auto flex items-center justify-between gap-4">
+    <div className="bg-error text-on-error z-50 w-full shadow-lg">
+      <div className="container mx-auto flex items-center justify-between gap-4 px-5 py-5 xl:px-8">
         <div className="flex-1">
           <p className="text-sm md:text-base">
             <span className="font-bold">{bannerData.prefix}</span>{' '}
             {bannerData.message}{' '}
-            <Link
-              href="/donate"
-              className="underline hover:text-red-200"
-              onClick={handleDismiss}>
+            <Link href="/donate" className="as-text underline">
               {bannerData.linkText}
             </Link>
           </p>
         </div>
         <button
           onClick={handleDismiss}
-          className="shrink-0 text-white hover:text-red-200"
+          className="shrink-0 cursor-pointer"
           aria-label="Dismiss banner">
-          <svg
-            className="h-5 w-5"
-            fill="none"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            strokeWidth="2"
-            viewBox="0 0 24 24"
-            stroke="currentColor">
-            <path d="M6 18L18 6M6 6l12 12"></path>
-          </svg>
+          <Icon icon="close" />
         </button>
       </div>
     </div>

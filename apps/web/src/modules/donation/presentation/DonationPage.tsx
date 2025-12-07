@@ -11,11 +11,18 @@ export async function DonationPage() {
   const { donation } = getAppConfigService().getAll();
   const t = await getTranslations();
 
+  const tRich = (key: string) =>
+    t.rich(key, {
+      br: () => <br />,
+    });
+
   return (
-    <div className="lg:flex lg:flex-row lg:gap-5">
+    <div className="lg:flex lg:flex-row lg:gap-10">
       <div className="lg:w-1/2">
-        <p className="my-5 max-w-screen-md">{t('app.donate.description')}</p>
-        <h2 className="py-5">{t('app.donate.moneyUsageHeading')}</h2>
+        <p className="my-5 max-w-screen-md">
+          {tRich('app.donate.description')}
+        </p>
+        <h2 className="py-5">{tRich('app.donate.moneyUsageHeading')}</h2>
         <p>{t('app.donate.moneyUsageDescription')}</p>
         <JarAnimation />
         <h2 className="py-5">{t('app.donate.topSupporters')}</h2>
@@ -36,7 +43,6 @@ export async function DonationPage() {
           <Button size="2xl" variant="primary" className="md:w-1/2">
             {t('app.donate.payPal')}
           </Button>
-          {/* TODO: share should be added here */}
         </div>
         <h2 className="pt-8">{t('app.donate.cryptoMethods')}</h2>
         <CryptoWalletList />
@@ -47,15 +53,7 @@ export async function DonationPage() {
         </p>
         <h2 className="py-5">{t('app.donate.disclaimer')}</h2>
         <p>
-          <small>{t('app.donate.disclaimerParagraph1')}</small>
-        </p>
-
-        <p>
-          <small>{t('app.donate.disclaimerParagraph2')}</small>
-        </p>
-
-        <p>
-          <small>{t('app.donate.disclaimerParagraph3')}</small>
+          <small>{tRich('app.donate.disclaimerDetails')}</small>
         </p>
       </div>
     </div>

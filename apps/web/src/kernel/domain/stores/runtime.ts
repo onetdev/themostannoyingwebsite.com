@@ -11,6 +11,10 @@ export interface RuntimeState {
   interactionUnlocked: boolean;
   navigationCount: number;
   reducedMotion: boolean;
+  shareModalData: {
+    url?: string;
+    visible: boolean;
+  };
   startedAt?: string;
 }
 
@@ -19,11 +23,11 @@ export interface RuntimeStateActions {
   incrementVisibilitySeconds: () => void;
   markInteractionUnlocked: () => void;
   setAdblockerSuspected: (adblockerSuspected: boolean | null) => void;
-  setFlaimSurveyResult: (
-    flaimSurveyResult: RuntimeState['flaimSurveyResult'],
-  ) => void;
+  setFlaimSurveyResult: (data: RuntimeState['flaimSurveyResult']) => void;
   setIsDocumentVisibile: (isVisible: boolean) => void;
   setReducedMotion: (reducedMotion: boolean) => void;
+  setShareModalData: (param: RuntimeState['shareModalData']) => void;
+  showShareModal: (param?: RuntimeState['shareModalData']['url']) => void;
 }
 
 export interface RuntimeStore extends RuntimeState, RuntimeStateActions {}
@@ -39,6 +43,7 @@ const initialState: RuntimeState = {
   interactionUnlocked: false,
   navigationCount: 0,
   reducedMotion: true,
+  shareModalData: { visible: false },
   startedAt: undefined,
 };
 
@@ -68,4 +73,8 @@ export const useRuntimeStore = create<RuntimeStore>((set) => ({
       startedAt: state.startedAt ?? new Date().toISOString(),
     })),
   setReducedMotion: (reducedMotion) => set({ reducedMotion }),
+  setShareModalData: (shareModalData) => set({ shareModalData }),
+  showShareModal(url) {
+    set({ shareModalData: { visible: true, url } });
+  },
 }));
