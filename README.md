@@ -13,6 +13,10 @@ The main idea is to gather the most annoying features of modern websites in one 
   - [ ] Create a captcha where you need to select all the images with a car on it but none of the images have a car on them and captcha fails
   - [ ] Age verification on certain contents
   - [ ] Add holiday related (Halloween, Christmass, Easter) small animated images that follow the mouse cursor
+  - [ ] Clippy style figure popping up from the corner with obvious hints
+  - [ ] Donation modal poping up
+  - [ ] Red donation bar for "campaign"
+  - [ ] Creating documentation for all the different annoying things
 
 </details>
 
@@ -213,11 +217,10 @@ Pay a visit to https://onet.dev, drop me an email.
 ### 3rd party credits
 
 - AI disclaimer: Article covers and contents are generated via AI (DALLe, ChatGPT), curated by humans.
-- Notification sound: https://github.com/akx/Notifications under licence CC0
+- Notification sound for "live chat": https://github.com/akx/Notifications under licence CC0
+- Cookie jar animation on donation page: https://lottiefiles.com/free-animation/saving-the-money-C9plsMchxQ
 - Icons: https://fontawesome.com
-- Lava photo (Tanya Grypachevskaya): https://unsplash.com/photos/80x3QULJDN4
-- Background ad photo (Erik Mclean): https://unsplash.com/photos/ZRns2R5azu0
-- Article cover placeholder (Syed Ahmad): https://unsplash.com/photos/yXTr6XeJDV8
+- Lava photo on "Hot Things" (Tanya Grypachevskaya): https://unsplash.com/photos/80x3QULJDN4
 
 ---
 

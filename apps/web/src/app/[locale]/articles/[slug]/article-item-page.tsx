@@ -21,7 +21,7 @@ export function ArticleItemPage({ data }: { data: ArticleDatum }) {
         {t('article.published', { date: data.publishedAt.toDateString() })}
       </span>
       {data.coverImages?.original && (
-        <div className="-mx-5">
+        <div className="-mx-5 xl:-mx-8">
           <Image
             className="h-auto w-full object-cover"
             src={data.coverImages?.original}

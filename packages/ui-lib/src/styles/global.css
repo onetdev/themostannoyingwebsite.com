@@ -7,20 +7,19 @@ body {
   transition: background-color 0.3s ease-in-out;
 }
 
-a, a:visited {
+a:not(.as-text), a:not(.as-text):visited {
   @apply text-primary no-underline;
   text-decoration: none;
 }
-a:hover {
+a:not(.as-text):hover {
   @apply text-primary-alt;
 }
 a.as-text, a.as-text:visited {
-  @apply no-underline;
   color: inherit;
-  text-decoration: none;
 }
-a.as-text:hover {
-  @apply text-primary;
+
+a.as-text.hover-text-primary:hover {
+  @apply text-primary
 }
 
 h1 {

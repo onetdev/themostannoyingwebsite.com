@@ -29,7 +29,8 @@ export default async function Page({ params }: NextPageProps) {
   return (
     <PageLayout
       activeItem="home"
-      className="grid grid-cols-1 gap-3 lg:grid-cols-4"
+      className="grid grid-cols-1 gap-x-5 gap-y-5 px-5 lg:grid-cols-4 lg:gap-y-0 xl:px-8"
+      autoPadding={false}
       role="main">
       {coverArticle && (
         <LargeCoverItem
@@ -46,18 +47,21 @@ export default async function Page({ params }: NextPageProps) {
           {denseArticleList.map((item, index) => (
             <li
               key={index}
-              className="after:border-b-border-surface relative after:absolute after:w-full after:border-b">
+              className="after:border-b-border-surface relative pb-2 after:absolute after:bottom-0 after:w-full after:border-b last:pb-0 last:after:border-0">
               <TextListItem article={item} data-testid="dense-article-item" />
             </li>
           ))}
         </ul>
         <OneByOneGift />
       </section>
+      <div className="border-border-surface col-span-1 border-t-5 border-b-5 border-double p-5 text-center text-xl font-light italic lg:col-span-4 lg:my-6">
+        There's more from the past, scroll!
+      </div>
       <section
         role="region"
-        className="col-span-1 lg:col-span-4 lg:mt-3"
+        className="col-span-1 lg:col-span-4"
         data-testid="small-cover-article-list">
-        <ul className="grid gap-3 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+        <ul className="grid gap-5 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
           {smallCoverArticleList.map((article, index) => (
             <li key={index} className="basis-full md:basis-1/2">
               <SmallCoverListItem

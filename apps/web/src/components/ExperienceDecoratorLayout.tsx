@@ -1,9 +1,13 @@
 'use client';
 
-import { FunctionComponent, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import CookieConsent from '@/components/CookieConsent';
-import { useExperienceFlagsStore, useUserGrantsStore } from '@/kernel';
+import {
+  ShareModal,
+  useExperienceFlagsStore,
+  useUserGrantsStore,
+} from '@/kernel';
 import { ChatBubbleHost } from '@/modules/chat-bubble';
 import { AdblockerSuspectBar, ContainerGiftFlaps } from '@/modules/gift';
 import {
@@ -14,9 +18,11 @@ import { WheelOfFortuneHost } from '@/modules/wheel-of-fortune';
 
 type ExperienceDecoratorLayoutProps = JSXProxyProps<'div'>;
 
-export const ExperienceDecoratorLayout: FunctionComponent<
-  ExperienceDecoratorLayoutProps
-> = ({ children, className, ...rest }) => {
+export function ExperienceDecoratorLayout({
+  children,
+  className,
+  ...rest
+}: ExperienceDecoratorLayoutProps) {
   const deadPixel = useExperienceFlagsStore((state) => state.deadPixel);
   const mockChat = useExperienceFlagsStore((state) => state.mockChat);
   const giftFlaps = useExperienceFlagsStore((state) => state.gifts.flaps);
@@ -52,7 +58,7 @@ export const ExperienceDecoratorLayout: FunctionComponent<
   return (
     <div className={className} {...rest}>
       {runtimeFlags.giftFlaps && <ContainerGiftFlaps />}
-      <div className="bg-surface relative container mx-auto my-0 min-h-screen px-3 py-2 md:px-5">
+      <div className="bg-surface relative container mx-auto my-0 min-h-screen">
         {children}
         {runtimeFlags.wheelOfFortune && <WheelOfFortuneHost />}
         {deadPixel && <DeadPixelHost />}
@@ -60,7 +66,8 @@ export const ExperienceDecoratorLayout: FunctionComponent<
         {runtimeFlags.showCookieConsent && <CookieConsent />}
         <AdblockerSuspectBar />
         {runtimeFlags.stickyVideo && <StickyVideoExperienceHost />}
+        <ShareModal />
       </div>
     </div>
   );
-};
+}
