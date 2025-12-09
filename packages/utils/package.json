@@ -7,6 +7,7 @@
     "./array": "./src/array.ts",
     "./color": "./src/color.ts",
     "./math": "./src/math.ts",
+    "./promise": "./src/promise.ts",
     "./string": "./src/string.ts"
   },
   "scripts": {

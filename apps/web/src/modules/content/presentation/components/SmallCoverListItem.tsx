@@ -29,7 +29,7 @@ export const SmallCoverListItem: FunctionComponent<SmallCoverListItemProps> = ({
         )}
         {article.coverImages?.thumbnail && (
           <Image
-            className="h-auto w-full object-cover"
+            className="h-auto w-full rounded-sm object-cover"
             src={article.coverImages.thumbnail}
             alt={t('article.coverImage')}
             width="1920"

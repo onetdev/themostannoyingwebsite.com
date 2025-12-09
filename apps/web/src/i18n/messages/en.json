@@ -123,6 +123,10 @@
     "virgin": {
       "title": "Disable all experiences",
       "description": "Looking for a no-frills experience? Disable all personalized features here and enjoy a streamlined, distraction-free version of our site."
+    },
+    "admin": {
+      "title": "Admin Terminal",
+      "description": "Secure terminal access to the system administration interface."
     }
   },
   "common": {
@@ -625,5 +629,18 @@
   },
   "contextMenu": {
     "disabled": "Hey, you can't right click here!"
+  },
+  "admin": {
+    "terminal": {
+      "systemBoot": "System booting...",
+      "systemReady": "MAW admin secure connection established.",
+      "loginPrompt": "login:",
+      "passwordPrompt": "password:",
+      "invalidCredentials": "Access denied. Invalid credentials.",
+      "accessGranted": "Access granted. Welcome back {username}.",
+      "matrixQuote": "Someone is watching you!!! Follow the white rabbit.",
+      "redirectingGeneric": "Redirecting...",
+      "redirectingSafety": "I'm getting back you to safety..."
+    }
   }
 }
