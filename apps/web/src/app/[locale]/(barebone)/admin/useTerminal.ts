@@ -74,7 +74,7 @@ export function useTerminal(charDelay = 40) {
         setMasked((v) => v + '*');
       }
     },
-    document,
+    typeof window !== 'undefined' ? document : undefined,
   );
 
   // 🖨 Typed output
@@ -113,6 +113,16 @@ export function useTerminal(charDelay = 40) {
     [],
   );
 
+  const reset = useCallback(() => {
+    abortRef.current?.abort();
+    setLines([]);
+    setCurrentLine('');
+    setInput('');
+    setMasked('');
+    setInputMode({ type: 'disabled' });
+    idRef.current = 0;
+  }, []);
+
   const activePrompt =
     inputMode.type === 'disabled'
       ? null
@@ -124,5 +134,6 @@ export function useTerminal(charDelay = 40) {
     activePrompt,
     printLine,
     requestInput,
+    reset,
   };
 }
