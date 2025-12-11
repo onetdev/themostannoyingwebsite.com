@@ -32,50 +32,46 @@ export function useTerminal(charDelay = 40) {
   const modeRef = useLatest(inputMode);
 
   // ⌨️ Document-level keyboard handling
-  useEvent(
-    'keydown',
-    (evt) => {
-      const e = evt as KeyboardEvent;
-      const mode = modeRef.current;
-      if (mode.type === 'disabled') return;
+  useEvent('keydown', (evt) => {
+    const e = evt as KeyboardEvent;
+    const mode = modeRef.current;
+    if (mode.type === 'disabled') return;
 
-      e.preventDefault();
+    e.preventDefault();
 
-      if (e.key === 'Enter') {
-        const value = inputRef.current;
+    if (e.key === 'Enter') {
+      const value = inputRef.current;
 
-        setLines((prev) => [
-          ...prev,
-          {
-            id: ++idRef.current,
-            text:
-              mode.type === 'password'
-                ? mode.prompt + maskedRef.current
-                : mode.prompt + inputRef.current,
-          },
-        ]);
+      setLines((prev) => [
+        ...prev,
+        {
+          id: ++idRef.current,
+          text:
+            mode.type === 'password'
+              ? mode.prompt + maskedRef.current
+              : mode.prompt + inputRef.current,
+        },
+      ]);
 
-        setInput('');
-        setMasked('');
-        setInputMode({ type: 'disabled' });
+      setInput('');
+      setMasked('');
+      setInputMode({ type: 'disabled' });
 
-        resolverRef.current?.(value);
-        return;
-      }
+      resolverRef.current?.(value);
+      return;
+    }
 
-      if (e.key === 'Backspace') {
-        setInput((v) => v.slice(0, -1));
-        setMasked((v) => v.slice(0, -1));
-        return;
-      }
+    if (e.key === 'Backspace') {
+      setInput((v) => v.slice(0, -1));
+      setMasked((v) => v.slice(0, -1));
+      return;
+    }
 
-      if (e.key.length === 1) {
-        setInput((v) => v + e.key);
-        setMasked((v) => v + '*');
-      }
-    },
-    typeof window !== 'undefined' ? document : undefined,
-  );
+    if (e.key.length === 1) {
+      setInput((v) => v + e.key);
+      setMasked((v) => v + '*');
+    }
+  });
 
   // 🖨 Typed output
   const printLine = useCallback(

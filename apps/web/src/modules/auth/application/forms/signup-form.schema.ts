@@ -5,7 +5,7 @@ import { GenderSchema } from '../../domain';
 
 import { ZodTranslator } from '@/kernel';
 
-const validate = (value: string, t: ZodTranslator) => {
+const validatePassword = (value: string, t: ZodTranslator) => {
   // Split up in this way to annoy the user the most
   if (!value.match(/[A-Z]/)) {
     return t('form.validation.error.missingUppercase');
@@ -47,7 +47,7 @@ export function getSignupFormSchema(t: ZodTranslator) {
         .min(12, {
           error: t('form.validation.error.minLength', { count: 12 }),
         })
-        .refine((value) => validate(value, t)),
+        .refine((value) => validatePassword(value, t)),
       passwordConfirmation: z
         .string()
         .min(1, { error: t('form.validation.error.required') }),

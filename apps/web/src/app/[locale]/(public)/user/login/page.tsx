@@ -23,6 +23,7 @@ export async function generateMetadata({
 export default async function Page() {
   return (
     <PageLayout
+      autoPadding={false}
       activeItem="login"
       className="mx-auto max-w-md py-0 md:py-14"
       role="main">
