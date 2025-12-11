@@ -2,7 +2,7 @@ import { Metadata } from 'next';
 import { getTranslations } from 'next-intl/server';
 
 import { PageLayout } from '@/components/PageLayout';
-import { PasswordReminderPage } from '@/modules/auth';
+import { LoginPage } from '@/modules/auth';
 
 export { generateStaticParams } from '@/i18n/routing';
 
@@ -12,10 +12,7 @@ export async function generateMetadata({
   params,
 }: NextPageProps): Promise<Metadata> {
   const { locale } = await params;
-  const t = await getTranslations({
-    locale,
-    namespace: 'metadata.userPasswordReminder',
-  });
+  const t = await getTranslations({ locale, namespace: 'metadata.userLogin' });
 
   return {
     title: t('title'),
@@ -23,13 +20,14 @@ export async function generateMetadata({
   };
 }
 
-export default function Page() {
+export default async function Page() {
   return (
     <PageLayout
+      autoPadding={false}
       activeItem="login"
       className="mx-auto max-w-md py-0 md:py-14"
       role="main">
-      <PasswordReminderPage />
+      <LoginPage />
     </PageLayout>
   );
 }

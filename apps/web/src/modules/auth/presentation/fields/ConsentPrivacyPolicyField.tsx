@@ -20,8 +20,10 @@ export function ConsentPrivacyPolicyField({
   return (
     <>
       <label htmlFor={fieldName} className="flex items-center gap-2">
-        <Checkbox {...register(fieldName)} />
-        <h4>{t('user.field.consentPrivacyPolicy')}</h4>
+        <Checkbox id={fieldName} {...register(fieldName)} />
+        <span className="inline-block text-lg font-semibold">
+          {t('user.field.consentPrivacyPolicy')}KK
+        </span>
       </label>
       <FormFieldError error={errors[fieldName]} />
     </>

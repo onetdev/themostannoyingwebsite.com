@@ -1,6 +1,9 @@
 import { expect, test } from '@playwright/test';
 
+import { setupE2eTestState } from '../utils/setup';
+
 test('home loads and has articles', { tag: '@sanity' }, async ({ page }) => {
+  await setupE2eTestState(page);
   await page.goto('/');
 
   const header = page.getByRole('banner');

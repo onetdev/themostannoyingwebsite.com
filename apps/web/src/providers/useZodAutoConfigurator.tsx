@@ -1,13 +1,11 @@
 'use client';
 
 import { useLocale } from 'next-intl';
-import { FunctionComponent, PropsWithChildren, useEffect } from 'react';
+import { useEffect } from 'react';
 import { z } from 'zod';
 import { en as zodEn, hu as zodHu } from 'zod/locales';
 
-export const ZodTranslationConfig: FunctionComponent<PropsWithChildren> = ({
-  children,
-}) => {
+export function useZodAutoConfigurator() {
   const appLocale = useLocale();
 
   useEffect(() => {
@@ -17,6 +15,4 @@ export const ZodTranslationConfig: FunctionComponent<PropsWithChildren> = ({
       zodLocaleMap['en'];
     z.config(zodLocale());
   }, [appLocale]);
-
-  return <>{children}</>;
-};
+}

@@ -2,21 +2,18 @@
 
 import {
   createContext,
-  FunctionComponent,
   PropsWithChildren,
   useContext,
   useEffect,
   useState,
 } from 'react';
 
-type RootPortalProps = PropsWithChildren;
-type RootPortalContext = HTMLDivElement | undefined;
+type ClientRootPortalContext = HTMLDivElement | undefined;
 
-const RootPortalContext = createContext<RootPortalContext>(undefined);
+const ClientRootPortalContext =
+  createContext<ClientRootPortalContext>(undefined);
 
-export const RootPortalProvider: FunctionComponent<RootPortalProps> = ({
-  children,
-}) => {
+export function ClientRootPortalProvider({ children }: PropsWithChildren) {
   const [portalElement, setPortalElement] = useState<HTMLDivElement>();
 
   useEffect(() => {
@@ -30,14 +27,14 @@ export const RootPortalProvider: FunctionComponent<RootPortalProps> = ({
   }, []);
 
   return (
-    <RootPortalContext.Provider value={portalElement}>
+    <ClientRootPortalContext.Provider value={portalElement}>
       {children}
-    </RootPortalContext.Provider>
+    </ClientRootPortalContext.Provider>
   );
-};
+}
 
 export const useRootPortalElement = () => {
-  const portalElement = useContext(RootPortalContext);
+  const portalElement = useContext(ClientRootPortalContext);
 
   if (!portalElement) {
     throw new Error('useRootPortal must be used within a RootPortalProvider');

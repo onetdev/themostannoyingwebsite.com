@@ -34,7 +34,7 @@ export function GenderField({ fieldName = 'gender' }: GenderFieldProps) {
   }, [t]);
 
   return (
-    <>
+    <div>
       <label>
         <LabelText className="mb-1">{t('user.field.gender')}</LabelText>
         <DropdownSelect
@@ -46,6 +46,6 @@ export function GenderField({ fieldName = 'gender' }: GenderFieldProps) {
         />
       </label>
       <FormFieldError error={errors[fieldName]} />
-    </>
+    </div>
   );
 }

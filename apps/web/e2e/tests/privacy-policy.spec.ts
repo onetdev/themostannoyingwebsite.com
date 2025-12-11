@@ -1,9 +1,12 @@
 import { expect, test } from '@playwright/test';
 
+import { setupE2eTestState } from '../utils/setup';
+
 test(
   'privacy policy page loads and its menu item is active',
   { tag: '@smoke' },
   async ({ page }) => {
+    await setupE2eTestState(page);
     await page.goto('/en/privacy-policy');
 
     const header = page.getByRole('banner');
