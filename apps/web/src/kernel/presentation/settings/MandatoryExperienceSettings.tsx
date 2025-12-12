@@ -11,7 +11,9 @@ import { FunctionComponent } from 'react';
 const MandatoryExperienceSettings: FunctionComponent = () => {
   const t = useTranslations();
   return (
-    <BorderedBox title={t('settings.mandatoryExperienceFlags.title')}>
+    <BorderedBox
+      title={t('settings.mandatoryExperienceFlags.title')}
+      data-testid="mandatory-experience-settings">
       <CompactFormRow
         label={t('settings.mandatoryExperienceFlags.unreasonableContent')}>
         <FormCheckbox name="unreasonable_content" checked={true} disabled />

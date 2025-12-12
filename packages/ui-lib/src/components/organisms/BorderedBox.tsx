@@ -1,20 +1,17 @@
-import { PropsWithChildren } from 'react';
-
-export type BorderedBoxProps = PropsWithChildren<{
-  className?: string;
-  title?: string;
-}>;
+export type BorderedBoxProps = JSXProxyProps<'section'>;
 
 export function BorderedBox({
   children,
   className = '',
   title,
+  ...rest
 }: BorderedBoxProps) {
   return (
-    <div
-      className={`bg-surface-alt border-border-surface rounded-md border p-5 ${className}`}>
+    <section
+      className={`bg-surface-alt border-border-surface rounded-md border p-5 ${className}`}
+      {...rest}>
       {title && <h2 className="m-0 mb-5">{title}</h2>}
       <div className="flex w-full flex-col gap-1">{children}</div>
-    </div>
+    </section>
   );
 }

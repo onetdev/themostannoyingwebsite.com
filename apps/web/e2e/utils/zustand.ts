@@ -29,6 +29,17 @@ export async function setExperienceFlags(
 }
 
 /**
+ * Gets the state for the experience flags store from localStorage.
+ * @param page The Playwright page object.
+ */
+export async function getExperienceFlags(page: Page) {
+  return page.evaluate(() => {
+    const item = localStorage.getItem('zustand-experience-flags-storage');
+    return item ? (JSON.parse(item) as { state: ExperienceFlagsState }) : null;
+  });
+}
+
+/**
  * Sets the state for the user grants store in localStorage.
  * This script runs before the page loads.
  * @param page The Playwright page object.

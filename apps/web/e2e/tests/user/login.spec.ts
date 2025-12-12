@@ -1,6 +1,6 @@
 import { expect, test } from '@playwright/test';
 
-import { getLoginPage } from '../../pages/LoginPage';
+import { getLoginPage } from '../../pages/user/LoginPage';
 import { setupE2eTestState } from '../../utils/setup';
 
 test.beforeEach(async ({ page }) => {

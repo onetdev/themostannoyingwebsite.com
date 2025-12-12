@@ -1,6 +1,6 @@
 import { test } from '@playwright/test';
 
-import { getProfilePage } from '../../pages/ProfilePage';
+import { getProfilePage } from '../../pages/user/ProfilePage';
 import { setupE2eTestState } from '../../utils/setup';
 
 test(

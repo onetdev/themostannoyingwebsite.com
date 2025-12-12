@@ -1,7 +1,7 @@
 import { type Page } from '@playwright/test';
 
-import { getFooter } from './shared/Footer';
-import { getHeader } from './shared/Header';
+import { getFooter } from '../shared/Footer';
+import { getHeader } from '../shared/Header';
 
 export const getProfilePage = (page: Page) => {
   const header = getHeader(page);

@@ -17,7 +17,9 @@ const RuntimeSettings: FunctionComponent = () => {
   );
 
   return (
-    <BorderedBox title={t('settings.runtime.title')}>
+    <BorderedBox
+      title={t('settings.runtime.title')}
+      data-testid="runtime-settings">
       <small>
         <i>{t('settings.runtime.disclaimer')}</i>
       </small>
