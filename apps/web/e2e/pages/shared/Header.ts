@@ -6,6 +6,8 @@ export const getHeader = (page: Page) => {
   return {
     header,
     activeMenuItem: header.locator('[aria-current="page"]'),
+    searchForm: header.getByRole('search'),
+    darkModeToggle: header.locator('button[data-dark]'),
 
     menuItem: {
       // Main menu
