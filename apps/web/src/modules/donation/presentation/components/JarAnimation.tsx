@@ -1,10 +1,18 @@
 'use client';
 
-import { DotLottieReact } from '@lottiefiles/dotlottie-react';
+import {
+  DotLottieReact,
+  DotLottieReactProps,
+} from '@lottiefiles/dotlottie-react';
 
 import { useDonationBalance } from '../../application/hooks/useDonationBalance';
 
-export function JarAnimation() {
+export type JarAnimationProps = Omit<
+  DotLottieReactProps,
+  'src' | 'loop' | 'autoplay' | 'mode' | 'className' | 'renderConfig'
+>;
+
+export function JarAnimation(props: JarAnimationProps) {
   const balance = useDonationBalance();
 
   return (
@@ -15,6 +23,7 @@ export function JarAnimation() {
       mode={balance < 0 ? 'reverse' : 'forward'}
       className="h-64 w-auto md:h-124"
       renderConfig={{ autoResize: true }}
+      {...props}
     />
   );
 }

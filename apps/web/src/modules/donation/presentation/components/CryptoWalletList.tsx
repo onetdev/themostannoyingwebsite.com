@@ -4,13 +4,20 @@ import { CryptoWallet } from './CryptoWallet';
 
 import { useAppConfig } from '@/kernel';
 
-export function CryptoWalletList() {
+export type CryptoWalletListProps = JSXProxyProps<'div'>;
+
+export function CryptoWalletList({
+  className,
+  ...rest
+}: CryptoWalletListProps) {
   const configService = useAppConfig().donation;
   const btcWallet = configService.btcWallet;
   const ethWallet = configService.ethWallet;
 
   return (
-    <div className="my-8 grid w-full grid-cols-1 gap-6 md:w-auto md:grid-cols-2">
+    <div
+      className={`my-8 grid w-full grid-cols-1 gap-6 md:w-auto md:grid-cols-2 ${className ?? ''}`}
+      {...rest}>
       <CryptoWallet
         title="Bitcoin (BTC)"
         address={btcWallet.address}
