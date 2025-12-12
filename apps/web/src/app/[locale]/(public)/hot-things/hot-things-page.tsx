@@ -70,7 +70,7 @@ export default function HotThingsPage() {
         <Image
           className="absolute h-auto w-full"
           src="/assets/images/lava.webp"
-          alt={t('messages.info.pictureOfYou')}
+          alt={t('hotThings.pictureOfYou')}
           width={1920}
           height={1080}
         />
@@ -84,12 +84,15 @@ export default function HotThingsPage() {
           <button
             className="absolute top-1/2 left-1/2 -mt-9 -ml-9 cursor-pointer text-7xl"
             onClick={onIntent}
-            hidden={Boolean(stream)}>
+            hidden={Boolean(stream)}
+            aria-label={t('hotThings.playVideo')}>
             <Icon icon="play" size="5xl" />
           </button>
         )}
         {isDisallowed && (
-          <div className="text-error absolute top-1/2 left-1/2 -mt-9 -ml-9 text-7xl">
+          <div
+            className="text-error absolute top-1/2 left-1/2 -mt-9 -ml-9 text-7xl"
+            aria-label={t('hotThings.videoPlaybackFailed')}>
             <Icon icon="failed" size="5xl" />
           </div>
         )}

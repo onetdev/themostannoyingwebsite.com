@@ -19,16 +19,20 @@ test('experience flags can be toggled and persisted', async ({ page }) => {
   await setupE2eTestState(page);
   const settingsPage = getSettingsPage(page);
   await settingsPage.goto();
+  const checkboxCount =
+    await settingsPage.experienceFlags.checkboxesAll.count();
 
   await settingsPage.experienceFlags.disableAllButton.click();
 
   await expect(settingsPage.experienceFlags.checkboxesUnchecked).toHaveCount(
-    16,
+    checkboxCount,
   );
   await expect(settingsPage.experienceFlags.checkboxesChecked).toHaveCount(0);
 
   await settingsPage.experienceFlags.enableAllButton.click();
 
   await expect(settingsPage.experienceFlags.checkboxesUnchecked).toHaveCount(0);
-  await expect(settingsPage.experienceFlags.checkboxesChecked).toHaveCount(16);
+  await expect(settingsPage.experienceFlags.checkboxesChecked).toHaveCount(
+    checkboxCount,
+  );
 });

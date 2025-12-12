@@ -21,7 +21,7 @@ export const getLoginPage = (page: Page) => {
     signupLink: page
       .getByRole('main')
       .getByText('Need an account? Signup here'),
-    requiredFieldErrors: page.locator('text="This field is required."'),
+    requiredFieldErrors: page.getByText('This field is required.'),
 
     goto: async () => {
       await page.goto('/en/user/login');

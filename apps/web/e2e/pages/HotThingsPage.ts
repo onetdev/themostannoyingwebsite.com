@@ -13,7 +13,7 @@ export const getHotThingsPage = (page: Page) => {
 
     headline: page.getByRole('heading', { name: 'Hot things' }),
     video: page.locator('video'),
-    playButton: page.getByRole('button'),
+    playButton: page.getByRole('button', { name: 'Play video' }),
 
     goto: async () => {
       await page.goto('/en/hot-things');

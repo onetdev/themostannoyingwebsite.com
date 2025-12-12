@@ -90,7 +90,10 @@
     },
     "hotThings": {
       "title": "Hot things",
-      "description": "Discover the hottest trends, ideas, and creations we're passionate about. Explore all the sizzling content here."
+      "description": "Discover the hottest trends, ideas, and creations we're passionate about. Explore all the sizzling content here.",
+      "playVideo": "Play video",
+      "videoPlaybackFailed": "Video playback failed",
+      "pictureOfYou": "Picture of you"
     },
     "privacyPolicy": {
       "title": "Privacy Policy",
@@ -612,9 +615,7 @@
       "e404title": "Error 404",
       "e404description": "Page not found, how could this happen"
     },
-    "info": {
-      "pictureOfYou": "Picture of you"
-    }
+    "info": {}
   },
   "cafeWall": {
     "title": "Cafe wall",
