@@ -1,5 +1,6 @@
 import { expect, test } from '@playwright/test';
 
+import { getHomePage } from '../pages/HomePage';
 import { setupE2eTestState } from '../utils/setup';
 
 test(
@@ -18,12 +19,11 @@ test(
   { tag: '@smoke' },
   async ({ page }) => {
     await setupE2eTestState(page);
-    await page.goto('/');
+    const homePage = getHomePage(page);
+    await homePage.goto();
 
-    await expect(page.getByRole('banner')).toBeVisible();
-    await expect(page.getByRole('search')).toBeVisible();
-
-    const footer = page.getByRole('contentinfo');
-    await expect(footer).toBeVisible();
+    await expect(homePage.header).toBeVisible();
+    await expect(homePage.searchForm).toBeVisible();
+    await expect(homePage.footer).toBeVisible();
   },
 );

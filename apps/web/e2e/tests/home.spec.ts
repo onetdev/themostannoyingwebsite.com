@@ -1,23 +1,24 @@
 import { expect, test } from '@playwright/test';
 
+import { getHomePage } from '../pages/HomePage';
 import { setupE2eTestState } from '../utils/setup';
 
 test('home loads and has articles', { tag: '@sanity' }, async ({ page }) => {
   await setupE2eTestState(page);
-  await page.goto('/');
+  const homePage = getHomePage(page);
+  await homePage.goto();
 
-  const header = page.getByRole('banner');
-  await expect(header.locator('[aria-current="page"]')).toHaveText('Home');
+  await expect(homePage.activeMenuItem).toHaveText('Home');
 
-  await expect(page.getByTestId('cover-article')).toBeVisible();
+  await expect(homePage.coverArticle).toBeVisible();
 
-  const denseArticleItemsLength = await page
+  const denseArticleItemsLength = await homePage.denseArticleList
     .getByTestId('dense-article-item')
     .count();
   expect(denseArticleItemsLength).toBeGreaterThanOrEqual(1);
   expect(denseArticleItemsLength).toBeLessThanOrEqual(2);
 
-  const smallCoverArticleItemsLength = await page
+  const smallCoverArticleItemsLength = await homePage.smallCoverArticleList
     .getByTestId('small-cover-article-item')
     .count();
   expect(smallCoverArticleItemsLength).toBeGreaterThanOrEqual(1);

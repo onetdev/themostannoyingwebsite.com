@@ -1,5 +1,6 @@
 import { expect, test } from '@playwright/test';
 
+import { getSettingsPage } from '../pages/SettingsPage';
 import { setupE2eTestState } from '../utils/setup';
 
 test(
@@ -7,12 +8,10 @@ test(
   { tag: '@smoke' },
   async ({ page }) => {
     await setupE2eTestState(page);
-    await page.goto('/en/settings');
+    const settingsPage = getSettingsPage(page);
+    await settingsPage.goto();
 
-    const header = page.getByRole('banner');
-    await expect(header.locator('[aria-current="page"]')).toHaveText(
-      'Settings',
-    );
+    await expect(settingsPage.activeMenuItem).toHaveText('Settings');
   },
 );
 

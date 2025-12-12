@@ -1,5 +1,6 @@
 import { expect, test } from '@playwright/test';
 
+import { getDonatePage } from '../pages/DonatePage';
 import { setupE2eTestState } from '../utils/setup';
 
 test(
@@ -7,9 +8,9 @@ test(
   { tag: '@smoke' },
   async ({ page }) => {
     await setupE2eTestState(page);
-    await page.goto('/en/donate');
+    const donatePage = getDonatePage(page);
+    await donatePage.goto();
 
-    const header = page.getByRole('banner');
-    await expect(header.locator('[aria-current="page"]')).toHaveText('Donate');
+    await expect(donatePage.activeMenuItem).toHaveText('Donate');
   },
 );

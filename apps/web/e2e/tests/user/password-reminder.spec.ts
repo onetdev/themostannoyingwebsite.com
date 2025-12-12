@@ -1,37 +1,40 @@
 import { expect, test } from '@playwright/test';
 
+import { getPasswordReminderPage } from '../../pages/PasswordReminderPage';
 import { setupE2eTestState } from '../../utils/setup';
 
 test.beforeEach(async ({ page }) => {
   await setupE2eTestState(page);
-  await page.goto('/en/user/password-reminder');
+  const passwordReminderPage = getPasswordReminderPage(page);
+  await passwordReminderPage.goto();
 });
 
 test(
   'password reminder page loads and its menu item is active',
   { tag: '@smoke' },
   async ({ page }) => {
-    const header = page.getByRole('banner');
-    await expect(header.locator('[aria-current="page"]')).toHaveText('Login');
+    const passwordReminderPage = getPasswordReminderPage(page);
+    await expect(passwordReminderPage.activeMenuItem).toHaveText('Login');
   },
 );
 
 test('password reminder shows validation error on submit', async ({ page }) => {
-  const emailInput = page.getByRole('textbox', { name: 'Email' });
-  await emailInput.click();
-  await emailInput.fill('info@onet.dev');
+  const passwordReminderPage = getPasswordReminderPage(page);
+  await passwordReminderPage.emailInput.click();
+  await passwordReminderPage.emailInput.fill('info@onet.dev');
 
-  await page.getByRole('button', { name: 'Send password reminder' }).click();
+  await passwordReminderPage.submitButton.click();
 
-  await expect(page.getByText('Captcha is required')).toHaveCount(1);
+  await expect(passwordReminderPage.captchaError).toHaveCount(1);
 });
 
 test('password reminder page links to login and signup', async ({ page }) => {
-  await page.getByRole('main').getByText('Login').click();
+  const passwordReminderPage = getPasswordReminderPage(page);
+  await passwordReminderPage.loginLink.click();
   await expect(page).toHaveURL(/\/en\/user\/login\/.*/);
 
   await page.goBack();
 
-  await page.getByRole('main').getByText('Signup').click();
+  await passwordReminderPage.signupLink.click();
   await expect(page).toHaveURL(/\/en\/user\/signup\/.*/);
 });

@@ -1,5 +1,7 @@
 import { expect, test } from '@playwright/test';
 
+import { getArticlePage } from '../pages/ArticlePage';
+import { getHomePage } from '../pages/HomePage';
 import { setupE2eTestState } from '../utils/setup';
 
 test(
@@ -7,15 +9,17 @@ test(
   { tag: '@smoke' },
   async ({ page }) => {
     await setupE2eTestState(page);
-    await page.goto('/');
+    const homePage = getHomePage(page);
+    await homePage.goto();
 
-    await page.getByTestId('cover-article').locator('a').click();
+    await homePage.coverArticle.locator('a').click();
 
     await expect(page).toHaveURL(/\/en\/articles\/.*/, { timeout: 2000 });
 
-    await page.getByTestId('article-item').isVisible();
-    await page.getByTestId('article-item-content').isVisible();
-    await page.getByTestId('paywall-overlay-confirm').isVisible();
-    await page.getByTestId('paywall-overlay-cancel').isVisible();
+    const articlePage = getArticlePage(page);
+    await expect(articlePage.articleItem).toBeVisible();
+    await expect(articlePage.articleItemContent).toBeVisible();
+    await expect(articlePage.paywallOverlayConfirm).toBeVisible();
+    await expect(articlePage.paywallOverlayCancel).toBeVisible();
   },
 );
