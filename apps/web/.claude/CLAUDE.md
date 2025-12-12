@@ -594,9 +594,9 @@ Organize translations hierarchically, grouping related keys under common namespa
 
 ### Translation File Structure
 
-**Location:** `/apps/web/src/i18n/messages/{locale}.json`
+**Location:** `/apps/web/src/i18n/messages/{locale}.ts`
 
-**Example:** `/apps/web/src/i18n/messages/en.json`
+**Example:** `/apps/web/src/i18n/messages/en.ts`
 
 **Organize by feature area:**
 
@@ -795,7 +795,7 @@ t('itemCount', { count: 5 })           // "You have 5 items"
 
 ### Reference Files
 
-- **Translation files:** `/apps/web/src/i18n/messages/en.json`
+- **Translation files:** `/apps/web/src/i18n/messages/en.ts`
 - **i18n config:** `/apps/web/src/i18n/`
 - **Usage examples:** `/apps/web/src/modules/donation/presentation/DonationPage.tsx`
 
@@ -1552,7 +1552,7 @@ When creating a new feature:
 - [ ] Follow naming conventions (PascalCase components, kebab-case files, camelCase hooks)
 - [ ] Use Zod for all validation and type definitions
 - [ ] Use semantic color tokens (`bg-primary`, `text-on-surface`) over generic colors (`bg-blue-500`, `text-white`)
-- [ ] Extract all user-facing text to translation files (`/src/i18n/messages/en.json`)
+- [ ] Extract all user-facing text to translation files (`/src/i18n/messages/en.ts`)
 - [ ] Use hierarchical tree structure for related translations (not flat key-value)
 - [ ] Never hardcode English text in components
 

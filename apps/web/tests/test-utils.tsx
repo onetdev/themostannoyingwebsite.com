@@ -8,7 +8,7 @@ import {
 import { NextIntlClientProvider } from 'next-intl';
 import { ReactElement } from 'react';
 
-import en from '@/i18n/messages/en.json';
+import en from '@/i18n/messages/en';
 
 const defaultMessages = en;
 
