@@ -1,0 +1,27 @@
+@reference 'tailwindcss';
+
+/**
+ * Utility tokens
+ * Custom CSS utilities for dimensions, aspect ratios, transitions, and transforms
+ * These are static values that don't change with theme
+ */
+@theme static {
+  /* Width utilities */
+  --min-width-clamp-400: min(400px, 100%);
+  --max-width-screen-dimension-min: min(100vw, 100vh);
+
+  /* Height utilities */
+  --max-height-clamp-300-screen-half: min(300px, 50vh);
+  --max-height-screen-dimension-min: min(100vw, 100vh);
+  --max-height-screen-3per4: 75vh;
+
+  /* Aspect ratio padding utilities (for responsive embed containers) */
+  --padding-16per9: 56.25%;   /* 16:9 aspect ratio */
+  --padding-9per16: 177.78%;  /* 9:16 aspect ratio */
+
+  /* Transition utilities */
+  --transition-property-visibility-opacity: visibility, opacity;
+
+  /* Transform utilities */
+  --translate-screen-h-half: 50vh;
+}

@@ -24,6 +24,10 @@
   @apply pl-5 py-2 italic
 }
 
+.content hr {
+  @apply border-border-surface w-full max-w-screen-md m-5
+}
+
 .content > p, .content > ul, .content > ol, .content > blockquote, .content > h1, .content > h2, .content > h3, .content > h4, .content > h5, .content > h6 {
   @apply w-full max-w-screen-md
 }

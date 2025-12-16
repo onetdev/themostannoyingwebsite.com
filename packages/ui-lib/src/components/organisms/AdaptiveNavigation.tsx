@@ -7,16 +7,16 @@ type GenericItemShape = {
   label: string;
 };
 
-export type AdaptiveNavigationProps<T extends GenericItemShape> =
-  JSXProxyProps<'nav'> & {
-    activeItem?: string;
-    className?: string;
-    items: T[];
-    IteratorComponent: (props: PropsWithChildren<T>) => ReactNode;
-    texts: {
-      toggleMenu: string;
-    };
+export type AdaptiveNavigationProps<
+  T extends GenericItemShape = GenericItemShape,
+> = JSXProxyProps<'nav'> & {
+  activeItem?: string;
+  items: T[];
+  IteratorComponent: (props: PropsWithChildren<T>) => ReactNode;
+  texts: {
+    toggleMenu: string;
   };
+};
 
 export function AdaptiveNavigation<T extends GenericItemShape>({
   activeItem,
@@ -32,9 +32,9 @@ export function AdaptiveNavigation<T extends GenericItemShape>({
       role="navigation">
       <input type="checkbox" id="menu-toggle" className="peer hidden" />
       <label className="block cursor-pointer md:hidden" htmlFor="menu-toggle">
-        <Icon icon="menu" size="lg" aria-label={texts.toggleMenu} />
+        <Icon icon="menu" aria-label={texts.toggleMenu} />
       </label>
-      <ul className="bg-surface font-primary absolute inset-x-0 z-20 hidden flex-col gap-x-5 py-2 text-lg drop-shadow-md peer-checked:flex md:relative md:right-0 md:flex md:flex-row md:flex-wrap md:py-0 md:drop-shadow-none">
+      <ul className="bg-surface font-primary absolute inset-x-0 z-20 hidden flex-col gap-x-5 py-2 text-lg drop-shadow-md peer-checked:flex md:relative md:right-0 md:flex md:flex-row md:flex-wrap md:bg-transparent md:py-0 md:drop-shadow-none">
         {items.map(({ key, label, ...rest }) => (
           <li
             key={key}

@@ -1,14 +1,16 @@
 import { expect, test } from '@playwright/test';
 
+import { getPrivacyPolicyPage } from '../pages/PrivacyPolicyPage';
+import { setupE2eTestState } from '../utils/setup';
+
 test(
   'privacy policy page loads and its menu item is active',
   { tag: '@smoke' },
   async ({ page }) => {
-    await page.goto('/en/privacy-policy');
+    await setupE2eTestState(page);
+    const privacyPolicyPage = getPrivacyPolicyPage(page);
+    await privacyPolicyPage.goto();
 
-    const header = page.getByRole('banner');
-    await expect(header.locator('[aria-current="page"]')).toHaveText(
-      'Privacy Policy',
-    );
+    await expect(privacyPolicyPage.activeMenuItem).toHaveText('Privacy Policy');
   },
 );

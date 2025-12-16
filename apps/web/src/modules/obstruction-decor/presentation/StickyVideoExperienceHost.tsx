@@ -23,7 +23,7 @@ export function StickyVideoExperienceHost() {
     <>
       <div className="sticky right-2 bottom-2 flex justify-end md:fixed">
         <button
-          className="absolute top-1 right-2"
+          className="bg-error text-on-error absolute top-1 right-2 cursor-pointer rounded-full"
           aria-label={t('common.close')}
           onClick={() => setClosed(true)}>
           <Icon icon="close" />

@@ -35,7 +35,7 @@ export function CountryField({ fieldName = 'countryCode' }: CountryFieldProps) {
   }, [kernelService]);
 
   return (
-    <>
+    <div>
       <label htmlFor={fieldName}>
         <LabelText className="mb-1">{t('user.field.countryCode')}</LabelText>
         <DropdownSelect
@@ -48,6 +48,6 @@ export function CountryField({ fieldName = 'countryCode' }: CountryFieldProps) {
         />
       </label>
       <FormFieldError error={errors[fieldName]} />
-    </>
+    </div>
   );
 }

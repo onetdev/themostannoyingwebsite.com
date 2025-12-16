@@ -1,12 +1,13 @@
 'use client';
 
-import { IconAliaseKey, IconCollapsibleMenu, ShareModal } from '@maw/ui-lib';
+import { IconAliaseKey, IconCollapsibleMenu } from '@maw/ui-lib';
 import { useTranslations } from 'next-intl';
-import { PropsWithChildren, useMemo, useState } from 'react';
+import { PropsWithChildren, useMemo } from 'react';
 
 import { ActiveNavigationItem } from './types';
 
 import { Link } from '@/i18n/navigation';
+import { useRuntimeStore } from '@/kernel';
 
 export type UserNavigationProps = {
   className?: string;
@@ -38,7 +39,11 @@ const NavLink = ({
   }
 
   return (
-    <Link href={path} prefetch={false} {...rest}>
+    <Link
+      href={path}
+      prefetch={false}
+      className="as-text hover-text-primary"
+      {...rest}>
       {children}
     </Link>
   );
@@ -46,7 +51,7 @@ const NavLink = ({
 
 export function UserNavigation({ className, activeItem }: UserNavigationProps) {
   const t = useTranslations();
-  const [showShareModal, setShowShareModal] = useState(false);
+  const { showShareModal } = useRuntimeStore();
 
   const items: NavItem[] = useMemo(
     () => [
@@ -54,7 +59,7 @@ export function UserNavigation({ className, activeItem }: UserNavigationProps) {
         icon: 'share' as const,
         key: 'global-share' as const,
         label: t('common.share'),
-        onClick: () => setShowShareModal(true),
+        onClick: () => showShareModal(),
         path: '#',
       },
       {
@@ -70,29 +75,17 @@ export function UserNavigation({ className, activeItem }: UserNavigationProps) {
         path: '/user/login',
       },
     ],
-    [t],
+    [t, showShareModal],
   );
 
-  const shareTexts = {
-    title: t('share.modal.title'),
-    description: t('share.modal.description'),
-  };
-
   return (
-    <>
-      <ShareModal
-        onClose={() => setShowShareModal(false)}
-        show={showShareModal}
-        texts={shareTexts}
-      />
-      <IconCollapsibleMenu
-        className={className}
-        activeItem={activeItem}
-        id="navigation-user"
-        items={items}
-        IteratorComponent={NavLink}
-      />
-    </>
+    <IconCollapsibleMenu
+      className={className}
+      activeItem={activeItem}
+      id="navigation-user"
+      items={items}
+      IteratorComponent={NavLink}
+    />
   );
 }
 

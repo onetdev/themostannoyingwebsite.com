@@ -7,12 +7,19 @@ body {
   transition: background-color 0.3s ease-in-out;
 }
 
-a, a:visited {
+a:not(.as-text), a:not(.as-text):visited {
   @apply text-primary no-underline;
   text-decoration: none;
 }
-a:hover {
+a:not(.as-text):hover {
   @apply text-primary-alt;
+}
+a.as-text, a.as-text:visited {
+  color: inherit;
+}
+
+a.as-text.hover-text-primary:hover {
+  @apply text-primary
 }
 
 h1 {
@@ -39,13 +46,13 @@ small {
 }
 
 ::-moz-selection { /* Code for Firefox */
-  @apply text-on-primary bg-primary;
+  @apply text-on-tertiary bg-tertiary;
 }
 
 ::selection {
-  @apply text-on-primary bg-primary;
+  @apply text-on-tertiary bg-tertiary;
 }
 
 mark {
-  @apply text-on-primary bg-primary;
+  @apply text-on-tertiary bg-tertiary;
 }

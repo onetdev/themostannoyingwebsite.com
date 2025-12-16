@@ -1,23 +1,10 @@
-import '@/global.css';
-import { Analytics } from '@vercel/analytics/react';
 import { Metadata, Viewport } from 'next';
-import { Open_Sans } from 'next/font/google';
-import { notFound } from 'next/navigation';
-import { hasLocale, NextIntlClientProvider } from 'next-intl';
 import { getTranslations } from 'next-intl/server';
-import { getLangDir } from 'rtl-detect';
+import { PropsWithChildren } from 'react';
 
-import { ExperienceDecoratorLayout } from '@/components/ExperienceDecoratorLayout';
-import config from '@/config';
-import { routing } from '@/i18n/routing';
-import { ClientServiceProvider } from '@/providers/ClientServiceProvider';
-import { RootProviderContainer } from '@/providers/RootProviderContainer';
+import { getAppConfigService } from '@/kernel';
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars -- We need the loader even though we are seemingly not using it directly.
-const _openSans = Open_Sans({
-  subsets: ['latin'],
-  weight: ['400', '500', '600', '700'],
-});
+const config = getAppConfigService().getAll();
 
 export async function generateMetadata(): Promise<Metadata> {
   const t = await getTranslations('metadata.app');
@@ -32,7 +19,7 @@ export async function generateMetadata(): Promise<Metadata> {
       template: `%s | ${t('title')}`,
     },
     description: t('description'),
-    metadataBase: new URL(config.publicUrl),
+    metadataBase: new URL(config.deploymentMeta.publicUrl),
     openGraph: {
       siteName: t('title'),
       type: 'website',
@@ -86,39 +73,6 @@ export function generateViewport(): Viewport {
   };
 }
 
-async function RootLayout({
-  children,
-  params,
-}: {
-  children: React.ReactNode;
-  params: Promise<{ locale: string }>;
-}) {
-  const { locale } = await params;
-  const direction = getLangDir(locale);
-  if (!hasLocale(routing.locales, locale)) {
-    notFound();
-  }
-
-  return (
-    <html
-      lang={locale}
-      dir={direction}
-      data-theme={config.defaultColorScheme}
-      suppressHydrationWarning>
-      <body>
-        <NextIntlClientProvider>
-          <RootProviderContainer>
-            <ClientServiceProvider />
-            <ExperienceDecoratorLayout className="font-primary">
-              {/* Please add AppHeader in your pages to have SSG/ISR/SSG support while also being able to select the active navigation item */}
-              <Analytics />
-              {children}
-            </ExperienceDecoratorLayout>
-          </RootProviderContainer>
-        </NextIntlClientProvider>
-      </body>
-    </html>
-  );
+export default function LocaleRootLayout({ children }: PropsWithChildren) {
+  return children;
 }
-
-export default RootLayout;

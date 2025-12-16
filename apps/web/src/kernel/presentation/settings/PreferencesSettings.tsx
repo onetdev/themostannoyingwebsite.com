@@ -21,7 +21,9 @@ const PreferencesSettings: FunctionComponent = () => {
   };
 
   return (
-    <BorderedBox title={t('settings.userPreferences.title')}>
+    <BorderedBox
+      title={t('settings.userPreferences.title')}
+      data-testid="preferences-settings">
       <CompactFormRow label={t('settings.userPreferences.darkMode')}>
         <FormCheckbox
           name="dark_mode"

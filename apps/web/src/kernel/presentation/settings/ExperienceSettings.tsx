@@ -29,7 +29,8 @@ const ExperienceSettings: FunctionComponent<ExperienceSettingsProps> = ({
   return (
     <BorderedBox
       title={t('settings.optionalExperienceFlags.title')}
-      className={className}>
+      className={className}
+      data-testid="experience-settings">
       <div className={listClassName}>
         <CompactFormRow
           label={t('settings.optionalExperienceFlags.gifts.flaps')}>
@@ -171,7 +172,7 @@ const ExperienceSettings: FunctionComponent<ExperienceSettingsProps> = ({
         </Button>
         <Button
           className="mt-6"
-          variant="secondary"
+          variant="tertiary"
           onClick={experience.allDisabled}>
           {t('common.disableAll')}
         </Button>

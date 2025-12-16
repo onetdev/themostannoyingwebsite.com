@@ -1,13 +1,15 @@
 import type { MetadataRoute } from 'next';
 
-import config from '@/config';
+import { getAppConfigService } from '@/kernel';
 
 export default function robots(): MetadataRoute.Robots {
+  const { publicUrl } = getAppConfigService().getDeploymentMeta();
+
   return {
     rules: {
       userAgent: '*',
       crawlDelay: 10,
     },
-    sitemap: `${config.publicUrl}/sitemap.xml`,
+    sitemap: `${publicUrl}/sitemap.xml`,
   };
 }

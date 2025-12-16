@@ -1,7 +1,26 @@
 import { test } from '@playwright/test';
 
-test('flaim a phone page loads', { tag: '@smoke' }, async ({ page }) => {
-  await page.goto('/en/flaim-a-phone');
-});
+import { getFlaimAPhonePage } from '../pages/FlaimAPhonePage';
+import { setupE2eTestState } from '../utils/setup';
 
-// TODO: Add test for testing the quiz
+test(
+  'can get to the flaim a phone survey result screen',
+  { tag: '@smoke' },
+  async ({ page }) => {
+    await setupE2eTestState(page);
+    const flaimAPhonePage = getFlaimAPhonePage(page);
+    await flaimAPhonePage.goto();
+
+    const maxIterations = 5;
+    let iterations = 0;
+
+    while (iterations < maxIterations) {
+      await flaimAPhonePage.getSurveyOption(0).click();
+      await flaimAPhonePage.nextButton.click();
+      await page.waitForTimeout(1000);
+      iterations++;
+    }
+
+    await flaimAPhonePage.backToHomeButton.waitFor();
+  },
+);

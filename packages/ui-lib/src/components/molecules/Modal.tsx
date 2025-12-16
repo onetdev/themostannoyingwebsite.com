@@ -19,7 +19,7 @@ export const Modal: FunctionComponent<ModalProps> = ({
       <div
         className="min-w-clamp-400 bg-background mx-auto flex max-h-full max-w-full flex-col self-center rounded-lg"
         onClick={(e) => e.stopPropagation()}>
-        <div className="border-hr-surface flex flex-row justify-between border-b px-5 py-3 text-xl">
+        <div className="border-border-surface flex flex-row justify-between border-b px-5 py-3 text-xl">
           <h4>{title}</h4>
           <button className="cursor-pointer" onClick={handleClose}>
             <Icon icon="close" size="lg" />
@@ -27,7 +27,9 @@ export const Modal: FunctionComponent<ModalProps> = ({
         </div>
         <div className="p-5">{children}</div>
         {actions && (
-          <div className="border-hr-surface border-t px-5 py-4">{actions}</div>
+          <div className="border-border-surface border-t px-5 py-4">
+            {actions}
+          </div>
         )}
       </div>
     </DimmerOverlay>

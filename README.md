@@ -13,6 +13,10 @@ The main idea is to gather the most annoying features of modern websites in one 
   - [ ] Create a captcha where you need to select all the images with a car on it but none of the images have a car on them and captcha fails
   - [ ] Age verification on certain contents
   - [ ] Add holiday related (Halloween, Christmass, Easter) small animated images that follow the mouse cursor
+  - [ ] Clippy style figure popping up from the corner with obvious hints
+  - [ ] Donation modal poping up
+  - [ ] Red donation bar for "campaign"
+  - [ ] Creating documentation for all the different annoying things
 
 </details>
 
@@ -176,7 +180,7 @@ This is being done using next-intl, which is a great library for i18n in Next.js
 
 Unfortunately, the library is not perfect and has some limitations. We don't have routes without language prefix and all the app code needs to be in a localisation folder, but since we do static build we are fine.
 
-Feel free to create your own translation in the `apps/web/src/i18n/messages` folder. The translations are in JSON format, so you can easily add your own translations by creating a new file with the language code (e.g., `en.json`, `hu.json`, etc.) and adding the translations there. Don't forget to update configs either.
+Feel free to create your own translation in the `apps/web/src/i18n/messages` folder. The translations are in JSON format, so you can easily add your own translations by creating a new file with the language code (e.g., `en.ts`, `hu.ts`, etc.) and adding the translations there. Don't forget to update configs either.
 
 Planned UI translation support - probably with some poor translation software so that it adds an extra layer of annoyance:
 
@@ -213,11 +217,10 @@ Pay a visit to https://onet.dev, drop me an email.
 ### 3rd party credits
 
 - AI disclaimer: Article covers and contents are generated via AI (DALLe, ChatGPT), curated by humans.
-- Notification sound: https://github.com/akx/Notifications under licence CC0
+- Notification sound for "live chat": https://github.com/akx/Notifications under licence CC0
+- Cookie jar animation on donation page: https://lottiefiles.com/free-animation/saving-the-money-C9plsMchxQ
 - Icons: https://fontawesome.com
-- Lava photo (Tanya Grypachevskaya): https://unsplash.com/photos/80x3QULJDN4
-- Background ad photo (Erik Mclean): https://unsplash.com/photos/ZRns2R5azu0
-- Article cover placeholder (Syed Ahmad): https://unsplash.com/photos/yXTr6XeJDV8
+- Lava photo on "Hot Things" (Tanya Grypachevskaya): https://unsplash.com/photos/80x3QULJDN4
 
 ---
 
