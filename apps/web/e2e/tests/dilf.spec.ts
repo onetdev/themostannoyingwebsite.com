@@ -1,5 +1,6 @@
 import { expect, test } from '@playwright/test';
 
+import { getDilfPage } from '../pages/DilfPage';
 import { setupE2eTestState } from '../utils/setup';
 
 test(
@@ -7,10 +8,10 @@ test(
   { tag: '@smoke' },
   async ({ page }) => {
     await setupE2eTestState(page);
-    await page.goto('/en/dilf');
+    const dilfPage = getDilfPage(page);
+    await dilfPage.goto();
 
-    const header = page.getByRole('banner');
-    await expect(header.locator('[aria-current="page"]')).toHaveText('DILF');
+    await expect(dilfPage.activeMenuItem).toHaveText('DILF');
   },
 );
 

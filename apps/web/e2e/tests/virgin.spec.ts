@@ -1,12 +1,14 @@
 import { expect, test } from '@playwright/test';
 
+import { getVirginPage } from '../pages/VirginPage';
 import { setupE2eTestState } from '../utils/setup';
 
 test('visiting virgin page should turn off all experience', async ({
   page,
 }) => {
   await setupE2eTestState(page); // Ensure initial state is clean
-  await page.goto('/en/virgin'); // Go to the page where flags should be off
+  const virginPage = getVirginPage(page);
+  await virginPage.goto(); // Go to the page where flags should be off
 
   const localStorageState = await page.evaluate(() => {
     const key = 'zustand-experience-flags-storage';

@@ -3,16 +3,13 @@
 import { useEffect, useState } from 'react';
 
 import { SlotDigit } from './SlotDigit';
+import { useDonationBalance } from '../../application';
 
-export type DonationCounterProps = {
-  amount: number;
-  currency?: string;
-};
+export type DonationCounterProps = JSXProxyProps<'div'>;
 
-export function DonationCounter({
-  amount,
-  currency = '$',
-}: DonationCounterProps) {
+export function DonationCounter({ className, ...rest }: DonationCounterProps) {
+  const amount = useDonationBalance();
+  const currency = '$';
   const [showNegative, setShowNegative] = useState(false);
 
   const isNegative = amount < 0;
@@ -52,7 +49,8 @@ export function DonationCounter({
   return (
     <div
       aria-label={`${currency}${amount}`}
-      className={`flex items-center justify-center gap-2 p-6 ${bgGradient} rounded-lg border-2 shadow-2xl ${borderColor} transition-all duration-500`}>
+      className={`flex items-center justify-center gap-2 p-6 ${bgGradient} rounded-lg border-2 shadow-2xl ${borderColor} transition-all duration-500 ${className ?? ''}`}
+      {...rest}>
       <span
         aria-hidden
         className={`text-5xl font-bold ${digitColor} transition-all duration-500 ${

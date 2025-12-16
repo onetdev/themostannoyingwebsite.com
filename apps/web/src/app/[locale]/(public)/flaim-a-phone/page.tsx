@@ -2,7 +2,7 @@ import { Metadata } from 'next';
 import { getTranslations } from 'next-intl/server';
 
 import { PageLayout } from '@/components/PageLayout';
-import { FlaimSurvery } from '@/modules/gift';
+import { FlaimSurvey } from '@/modules/gift';
 export { generateStaticParams } from '@/i18n/routing';
 
 export const revalidate = 1800;
@@ -23,9 +23,15 @@ export default async function Page() {
   const t = await getTranslations();
 
   return (
-    <PageLayout role="main" className="mx-auto max-w-screen-lg py-0 md:py-14">
+    <PageLayout
+      role="main"
+      className="mx-auto max-w-screen-lg py-0 md:py-14"
+      autoPadding={false}>
       <h1>{t('gifts.wanPhone.title')}</h1>
-      <FlaimSurvery className="my-5 w-full" />
+      <FlaimSurvey
+        className="my-5 w-full"
+        settings={{ timeLimitInSeconds: 8 }}
+      />
     </PageLayout>
   );
 }

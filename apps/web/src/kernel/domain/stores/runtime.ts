@@ -1,5 +1,7 @@
 import { create } from 'zustand';
 
+import { FlaimSurveyResult } from '../value-object';
+
 export interface RuntimeState {
   adblockerSuspected: boolean | null;
   document: {
@@ -7,7 +9,7 @@ export interface RuntimeState {
     isVisible: boolean;
     visibilitySeconds: number;
   };
-  flaimSurveyResult: false | 'completed' | 'lost' | 'cheatDetected';
+  flaimSurveyResult: false | FlaimSurveyResult;
   interactionUnlocked: boolean;
   navigationCount: number;
   reducedMotion: boolean;

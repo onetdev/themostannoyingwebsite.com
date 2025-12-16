@@ -29,7 +29,8 @@ const ExperienceSettings: FunctionComponent<ExperienceSettingsProps> = ({
   return (
     <BorderedBox
       title={t('settings.optionalExperienceFlags.title')}
-      className={className}>
+      className={className}
+      data-testid="experience-settings">
       <div className={listClassName}>
         <CompactFormRow
           label={t('settings.optionalExperienceFlags.gifts.flaps')}>

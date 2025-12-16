@@ -15,7 +15,9 @@ const UserGrantsSettings: FunctionComponent = () => {
   const t = useTranslations();
 
   return (
-    <BorderedBox title={t('settings.userGrants.title')}>
+    <BorderedBox
+      title={t('settings.userGrants.title')}
+      data-testid="user-grants-settings">
       <CompactFormRow label={t('settings.userGrants.essentialCookies')}>
         <FormCheckbox
           name="essential_cookies"

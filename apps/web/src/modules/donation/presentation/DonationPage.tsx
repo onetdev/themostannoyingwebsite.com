@@ -1,7 +1,7 @@
 import { Button } from '@maw/ui-lib';
 import { getTranslations } from 'next-intl/server';
 
-import { CryptoWalletList, DonationBalance, JarAnimation } from './components';
+import { CryptoWalletList, DonationCounter, JarAnimation } from './components';
 
 import { Link } from '@/i18n/navigation';
 import { getAppConfigService } from '@/kernel';
@@ -24,7 +24,7 @@ export async function DonationPage() {
         </p>
         <h2 className="py-5">{tRich('app.donate.moneyUsageHeading')}</h2>
         <p>{t('app.donate.moneyUsageDescription')}</p>
-        <JarAnimation />
+        <JarAnimation data-testid="jar-animation" />
         <h2 className="py-5">{t('app.donate.topSupporters')}</h2>
         <p className="pb-5">{t('app.donate.topSupportersDescription')}</p>
         <h4>{t('app.donate.topSupporterKidney')}</h4>
@@ -33,7 +33,7 @@ export async function DonationPage() {
       </div>
       <div className="lg:w-1/2">
         <h2 className="py-5">{t('app.donate.totalSupportReceived')}</h2>
-        <DonationBalance />
+        <DonationCounter data-testid="donation-balance" />
 
         <h2 className="pt-8">{t('app.donate.classicMethods')}</h2>
         <div className="my-5 flex w-full max-w-screen-md flex-col justify-center gap-3 md:flex-row">
@@ -45,7 +45,7 @@ export async function DonationPage() {
           </Button>
         </div>
         <h2 className="pt-8">{t('app.donate.cryptoMethods')}</h2>
-        <CryptoWalletList />
+        <CryptoWalletList data-testid="crypto-wallet-list" />
         <p className="text-center">
           <Link href={donation.alternativeOptionsUrl} target="_blank">
             {t('app.donate.alternativeOptionsLink')}

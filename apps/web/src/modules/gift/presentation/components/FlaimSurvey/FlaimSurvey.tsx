@@ -1,0 +1,73 @@
+'use client';
+
+import { BorderedBox, BorderedBoxProps, Button, LoaderDots } from '@maw/ui-lib';
+import { useRouter } from 'next/navigation';
+import { useTranslations } from 'next-intl';
+import { useState } from 'react';
+import { useEffectOnce } from 'react-use';
+
+import { UseSurveryParams, useSurvey } from './hooks/useSurvey';
+import { ProgressBar } from './ProgressBar';
+import { Question } from './Question';
+import { SurveyResult } from './SurveyResult';
+
+import { useRuntimeStore } from '@/kernel';
+
+export type FlaimSurveryProps = BorderedBoxProps & {
+  settings: UseSurveryParams;
+};
+
+export function FlaimSurvey({
+  className,
+  settings,
+  ...rest
+}: FlaimSurveryProps) {
+  const t = useTranslations();
+  const router = useRouter();
+  const [loaded, setLoaded] = useState(false);
+  const isCompleted = useRuntimeStore((state) => state.flaimSurveyResult);
+  const { next, progression, questionData, selectOption } = useSurvey({
+    ...settings,
+  });
+
+  useEffectOnce(() => setLoaded(true));
+
+  const onHome = () => router.push('/');
+
+  const showProgressHeader = loaded && isCompleted === false;
+  const showQuestion = loaded && isCompleted === false && questionData;
+  const showResult = loaded && isCompleted !== false;
+
+  return (
+    <BorderedBox className={`flex gap-3 ${className}`} {...rest}>
+      {!loaded && (
+        <div className="flex h-60 items-center justify-center">
+          <LoaderDots />
+        </div>
+      )}
+      {showProgressHeader && (
+        <>
+          <p className="mb-2 font-bold">
+            {t('gifts.wanPhone.survey.description')}
+          </p>
+          <ProgressBar
+            duration={settings.timeLimitInSeconds}
+            warningDuration={settings.timeLimitInSeconds * 0.85}
+          />
+        </>
+      )}
+      {showQuestion && (
+        <>
+          <Question data={questionData} selectOption={selectOption} />
+          <Button
+            onClick={next}
+            className="mt-5"
+            disabled={typeof progression === 'undefined'}>
+            {t('common.next')}
+          </Button>
+        </>
+      )}
+      {showResult && <SurveyResult result={isCompleted} onClick={onHome} />}
+    </BorderedBox>
+  );
+}
