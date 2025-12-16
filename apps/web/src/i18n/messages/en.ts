@@ -456,6 +456,7 @@ export default {
   article: {
     coverImage: 'Cover image',
     published: 'Published at {date}',
+    moreContentScroll: "There's more from the past, scroll!",
   },
   titleExperience: {
     marqueeVariants: {

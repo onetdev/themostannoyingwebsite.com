@@ -6,11 +6,13 @@ import {
   TextListItem,
 } from '@/modules/content';
 import { OneByOneGift } from '@/modules/gift';
+import { getTranslations } from 'next-intl/server';
 export { generateStaticParams } from '@/i18n/routing';
 
 export const revalidate = 1800;
 
 export default async function Page({ params }: NextPageProps) {
+  const t = await getTranslations();
   const { locale } = await params;
   const coverArticle = await AppArticleService.getFirst({
     params: { isOnCover: true, locale },
@@ -24,7 +26,7 @@ export default async function Page({ params }: NextPageProps) {
     paginate: { take: 12 },
   });
   const denseArticleList = articlePool.items.slice(0, 2);
-  const smallCoverArticleList = articlePool.items.slice(2, 10);
+  const smallCoverArticleList = articlePool.items.slice(2, 16);
 
   return (
     <PageLayout
@@ -55,7 +57,7 @@ export default async function Page({ params }: NextPageProps) {
         <OneByOneGift />
       </section>
       <div className="border-border-surface col-span-1 border-t-5 border-b-5 border-double p-5 text-center text-xl font-light italic lg:col-span-4 lg:my-6">
-        There's more from the past, scroll!
+        {t('article.moreContentScroll')}
       </div>
       <section
         role="region"
