@@ -118,9 +118,6 @@ export default {
       title: 'Hot things',
       description:
         "Discover the hottest trends, ideas, and creations we're passionate about. Explore all the sizzling content here.",
-      playVideo: 'Play video',
-      videoPlaybackFailed: 'Video playback failed',
-      pictureOfYou: 'Picture of you',
     },
     privacyPolicy: {
       title: 'Privacy Policy',
@@ -605,5 +602,10 @@ export default {
       redirectingGeneric: 'Redirecting...',
       redirectingSafety: "I'm getting back you to safety...",
     },
+  },
+  hotThings: {
+    playVideo: 'Play video',
+    videoPlaybackFailed: 'Video playback failed',
+    pictureOfYou: 'Picture of you',
   },
 };

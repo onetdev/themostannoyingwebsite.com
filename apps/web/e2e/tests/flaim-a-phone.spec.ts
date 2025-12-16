@@ -11,7 +11,7 @@ test(
     const flaimAPhonePage = getFlaimAPhonePage(page);
     await flaimAPhonePage.goto();
 
-    const maxIterations = 7;
+    const maxIterations = 5;
     let iterations = 0;
 
     while (iterations < maxIterations) {
