@@ -31,12 +31,12 @@
     "clean:all": "pnpm recursive exec -- rm -rf node_modules dist .next .turbo storybook-static"
   },
   "devDependencies": {
-    "@commitlint/cli": "^20.2.0",
-    "@commitlint/config-conventional": "^20.2.0",
+    "@commitlint/cli": "^20.4.1",
+    "@commitlint/config-conventional": "^20.4.1",
     "husky": "^9.1.7",
     "lint-staged": "^16.2.7",
     "symlink-dir": "9.0.0",
-    "turbo": "2.6.3",
+    "turbo": "2.8.3",
     "typescript": "catalog:"
   },
   "engines": {
@@ -48,7 +48,7 @@
   },
   "packageManager": "pnpm@10.0.0",
   "dependencies": {
-    "import-in-the-middle": "^2.0.0",
+    "import-in-the-middle": "^3.0.0",
     "require-in-the-middle": "^8.0.1"
   }
 }
