@@ -47,7 +47,7 @@ export function BeggarBanner() {
           <p className="text-sm md:text-base">
             <span className="font-bold">{bannerData.prefix}</span>{' '}
             {bannerData.message}{' '}
-            <Link href="/donate" className="as-text underline">
+            <Link href="/donate" className="link-as-inherit underline">
               {bannerData.linkText}
             </Link>
           </p>

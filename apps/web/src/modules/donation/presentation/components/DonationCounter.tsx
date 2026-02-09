@@ -53,7 +53,7 @@ export function DonationCounter({ className, ...rest }: DonationCounterProps) {
       {...rest}>
       <span
         aria-hidden
-        className={`text-5xl font-bold ${digitColor} transition-all duration-500 ${
+        className={`text-3xl font-bold ${digitColor} transition-all duration-500 ${
           isNegative
             ? showNegative
               ? 'opacity-100'
@@ -64,7 +64,7 @@ export function DonationCounter({ className, ...rest }: DonationCounterProps) {
       </span>
       <span
         aria-hidden
-        className={`text-5xl font-bold ${digitColor} transition-colors duration-500`}>
+        className={`text-3xl font-bold ${digitColor} transition-colors duration-500`}>
         {currency}
       </span>
       <div aria-hidden className="flex gap-1">
@@ -72,11 +72,6 @@ export function DonationCounter({ className, ...rest }: DonationCounterProps) {
           <SlotDigit key={idx} value={digit} delay={idx * 100} />
         ))}
       </div>
-      <span
-        aria-hidden
-        className={`text-2xl font-bold ${digitColor} ml-2 transition-colors duration-500`}>
-        .00
-      </span>
     </div>
   );
 }

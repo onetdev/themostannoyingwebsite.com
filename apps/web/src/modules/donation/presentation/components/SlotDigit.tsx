@@ -41,19 +41,19 @@ export function SlotDigit({ value, delay = 0 }: SlotDigitProps) {
   }, [value, delay]);
 
   return (
-    <div className="bg-surface shadow-inner-alt relative h-16 w-12 overflow-hidden rounded">
+    <div className="bg-surface shadow-inner-alt relative h-12 w-8 overflow-hidden rounded text-3xl font-bold">
       <div
         className={`flex flex-col items-center justify-center transition-transform ${
           isSpinning ? 'duration-50' : 'duration-300 ease-out'
         }`}
         style={{
-          transform: `translateY(-${currentValue * 4}rem)`,
+          transform: `translateY(-${currentValue * 3}rem)`,
         }}>
         {[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9].map(
           (num, idx) => (
             <div
               key={idx}
-              className={`text-on-surface flex h-16 w-12 items-center justify-center text-4xl font-bold transition-colors duration-500`}>
+              className="flex h-12 w-8 items-center justify-center transition-colors duration-500">
               {num}
             </div>
           ),

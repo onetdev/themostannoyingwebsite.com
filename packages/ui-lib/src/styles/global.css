@@ -7,18 +7,18 @@ body {
   transition: background-color 0.3s ease-in-out;
 }
 
-a:not(.as-text), a:not(.as-text):visited {
+a:not(.link-customized):not(.link-as-inherit), a:not(.link-customized):not(.link-as-inherit):visited {
   @apply text-primary no-underline;
   text-decoration: none;
 }
-a:not(.as-text):hover {
+a:not(.link-customized):not(.link-as-inherit):hover {
   @apply text-primary-alt;
 }
-a.as-text, a.as-text:visited {
+a.link-as-inherit, a.link-as-inherit:visited {
   color: inherit;
 }
 
-a.as-text.hover-text-primary:hover {
+a.link-as-inherit.hover-text-primary:hover {
   @apply text-primary
 }
 

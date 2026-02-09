@@ -1,9 +1,9 @@
 import type { Meta, StoryObj } from '@storybook/nextjs';
 import { fn } from 'storybook/test';
 
-import { Button } from '@maw/ui-lib';
+import { Button, ButtonProps } from '@maw/ui-lib';
 
-const meta: Meta<typeof Button> = {
+const meta: Meta<ButtonProps> = {
   title: 'Example/Button',
   component: Button,
   parameters: {},
@@ -26,10 +26,11 @@ const meta: Meta<typeof Button> = {
 };
 
 export default meta;
-type Story = StoryObj<typeof meta>;
+type Story = StoryObj<ButtonProps>;
 
 export const Primary: Story = {
   args: {
+    behavior: 'button',
     variant: 'primary',
     children: 'Button',
   },
@@ -37,7 +38,18 @@ export const Primary: Story = {
 
 export const Secondary: Story = {
   args: {
+    behavior: 'button',
     variant: 'secondary',
     children: 'Button',
+  },
+};
+
+export const Link: Story = {
+  args: {
+    behavior: 'link',
+    variant: 'primary',
+    children: 'Anchor Link',
+    href: 'https://google.com',
+    target: '_blank',
   },
 };
