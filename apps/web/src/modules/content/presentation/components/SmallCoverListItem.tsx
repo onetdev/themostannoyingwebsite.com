@@ -23,7 +23,7 @@ export const SmallCoverListItem: FunctionComponent<SmallCoverListItemProps> = ({
         href={article.url}
         passHref
         prefetch={false}
-        className="as-text hover-text-primary">
+        className="link-as-inherit hover-text-primary">
         {!article.coverImages?.thumbnail && (
           <CoverPlaceholder width={1920} height={1200} />
         )}

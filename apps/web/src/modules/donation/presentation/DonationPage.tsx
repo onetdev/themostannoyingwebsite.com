@@ -37,10 +37,20 @@ export async function DonationPage() {
 
         <h2 className="pt-8">{t('app.donate.classicMethods')}</h2>
         <div className="my-5 flex w-full max-w-screen-md flex-col justify-center gap-3 md:flex-row">
-          <Button size="2xl" variant="primary" className="md:w-1/2">
+          <Button
+            behavior="link"
+            size="2xl"
+            variant="primary"
+            href={donation.buyMeACoffeeUrl}
+            className="md:w-1/2">
             {t('app.donate.buyMeACoffee')}
           </Button>
-          <Button size="2xl" variant="primary" className="md:w-1/2">
+          <Button
+            behavior="link"
+            size="2xl"
+            variant="primary"
+            href={donation.paypalUrl}
+            className="md:w-1/2">
             {t('app.donate.payPal')}
           </Button>
         </div>

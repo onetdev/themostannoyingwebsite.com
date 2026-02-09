@@ -8,35 +8,33 @@ import i18nConfig from '@/root/i18n.config';
 
 const config = getAppConfigService().getDeploymentMeta();
 
-const extraLangs = i18nConfig.locales.filter(
-  (lang) => lang !== i18nConfig.defaultLocale,
-);
-const genLangAlternates = (path: string): Languages<string> => {
-  const items = extraLangs.map((lang) => [
-    lang,
-    `${config.publicUrl}/${lang}/${path}`,
-  ]);
+const genLangAlternates = (path: string, currentLocale: string): Languages<string> => {
+  const items = i18nConfig.locales
+    .filter((lang) => lang !== currentLocale)
+    .map((lang) => {
+      const normalizedPath = path ? `/${path}` : '';
+      return [lang, `${config.publicUrl}/${lang}${normalizedPath}/`];
+    });
 
   return Object.fromEntries(items);
 };
 
-const commonPageMeta = (path: string): MetadataRoute.Sitemap[0] => ({
-  url: `${config.publicUrl}/${path}`,
-  lastModified: new Date(),
-  changeFrequency: 'daily',
-  alternates: {
-    languages: genLangAlternates(path),
-  },
-});
-
-const mapArticleToSitemapEntry = (item: ArticleDatum) => {
-  const prefix =
-    item.locale === i18nConfig.defaultLocale
-      ? `${config.publicUrl}`
-      : `${config.publicUrl}/${item.locale}`;
+const commonPageMeta = (path: string, locale: string): MetadataRoute.Sitemap[0] => {
+  const normalizedPath = path ? `/${path}` : '';
 
   return {
-    url: `${prefix}/articles/${item.slug}`,
+    url: `${config.publicUrl}/${locale}${normalizedPath}/`,
+    lastModified: new Date(),
+    changeFrequency: 'daily',
+    alternates: {
+      languages: genLangAlternates(path, locale),
+    },
+  };
+};
+
+const mapArticleToSitemapEntry = (item: ArticleDatum) => {
+  return {
+    url: `${config.publicUrl}/${item.locale}/articles/${item.slug}/`,
     lastModified: new Date(item.updatedAt || item.publishedAt),
   } satisfies MetadataRoute.Sitemap[0];
 };
@@ -48,23 +46,28 @@ async function sitemap(): Promise<MetadataRoute.Sitemap> {
   });
   const articles = articleResults.items.map(mapArticleToSitemapEntry);
 
-  return [
-    commonPageMeta(''),
-    commonPageMeta('about'),
-    commonPageMeta('contact'),
-    commonPageMeta('dilf'),
-    commonPageMeta('donate'),
-    commonPageMeta('flaim-a-phone'),
-    commonPageMeta('hot-things'),
-    commonPageMeta('privacy-policy'),
-    commonPageMeta('search'),
-    commonPageMeta('settings'),
-    commonPageMeta('virgin'),
-    commonPageMeta('user/login'),
-    commonPageMeta('user/password-reminder'),
-    commonPageMeta('user/signup'),
-    ...articles,
+  const commonPages = [
+    '',
+    'about',
+    'contact',
+    'dilf',
+    'donate',
+    'flaim-a-phone',
+    'hot-things',
+    'privacy-policy',
+    'search',
+    'settings',
+    'virgin',
+    'user/login',
+    'user/password-reminder',
+    'user/signup',
   ];
+
+  const commonPagesEntries = i18nConfig.locales.flatMap((locale) =>
+    commonPages.map((path) => commonPageMeta(path, locale))
+  );
+
+  return [...commonPagesEntries, ...articles];
 }
 
 export default sitemap;
