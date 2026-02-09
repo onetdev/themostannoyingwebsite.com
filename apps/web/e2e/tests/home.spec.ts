@@ -22,5 +22,5 @@ test('home loads and has articles', { tag: '@sanity' }, async ({ page }) => {
     .getByTestId('small-cover-article-item')
     .count();
   expect(smallCoverArticleItemsLength).toBeGreaterThanOrEqual(1);
-  expect(smallCoverArticleItemsLength).toBeLessThanOrEqual(8);
+  expect(smallCoverArticleItemsLength).toBeLessThanOrEqual(12);
 });

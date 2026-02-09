@@ -30,7 +30,7 @@
     "@maw/config-eslint": "workspace:*",
     "@maw/config-ts": "workspace:*",
     "@maw/utils": "workspace:*",
-    "@storybook/nextjs": "^10.1.9",
+    "@storybook/nextjs": "^10.2.7",
     "@storybook/react": "catalog:",
     "@types/node": "catalog:",
     "@types/react": "catalog:",
