@@ -55,22 +55,16 @@ export function Button({
   const classNameSize = resolveFormElementSize(size);
   const finalClassName = ` text-center cursor-pointer rounded-md transition-all duration-150 ease-in-out disabled:cursor-default disabled:grayscale link-customized ${classNameVariant} ${classNameSize} ${className ?? ''}`;
 
-  const sharedProps = {
-    variant,
-    size,
-    className: finalClassName,
-  };
-
   if (behavior === 'link') {
     return (
-      <a {...sharedProps} {...(rest as ComponentProps<'a'>)}>
+      <a className={finalClassName} {...(rest as ComponentProps<'a'>)}>
         {children}
       </a>
     );
   }
 
   return (
-    <button {...sharedProps} {...(rest as ComponentProps<'button'>)}>
+    <button className={finalClassName} {...(rest as ComponentProps<'button'>)}>
       {children}
     </button>
   );
