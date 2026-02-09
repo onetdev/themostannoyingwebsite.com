@@ -2,19 +2,25 @@
 name: Feature request
 about: Suggest an idea for this project
 title: ''
-labels: ''
+labels: enhancement
 assignees: ''
 
 ---
 
-**Is your feature request related to a problem? Please describe.**
-A clear and concise description of what the problem is. Ex. I'm always frustrated when [...]
+## Motivation
+<!-- A clear and concise description of the problem or the "why" behind this feature. Ex. "Users currently struggle with..." or "To enhance the annoying aesthetic..." -->
 
-**Describe the solution you'd like**
-A clear and concise description of what you want to happen.
+## Proposed Behavior
+<!-- A detailed description of how the feature should work from a user's perspective.
+- Bullet points are encouraged
+- Describe specific interactions
+- Describe visual changes -->
 
-**Describe alternatives you've considered**
-A clear and concise description of any alternative solutions or features you've considered.
+## Technical Considerations
+<!-- (Optional but recommended)
+- Integration points (e.g., "This integrates with the chat-bubble module")
+- State management requirements (e.g., "Needs to persist to local storage")
+- New libraries or dependencies? -->
 
-**Additional context**
-Add any other context or screenshots about the feature request here.
+## Acceptance Criteria
+- [ ] <!-- Something that must be accomplished -->
