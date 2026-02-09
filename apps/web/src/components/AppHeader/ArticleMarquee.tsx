@@ -12,7 +12,7 @@ const NavItem = (item: ArticleDatum) => {
       href={path}
       passHref
       prefetch={false}
-      className="as-text hover-text-primary mx-8 inline-block px-2 py-2">
+      className="link-as-inherit hover-text-primary mx-8 inline-block px-2 py-2">
       {item.title}
     </Link>
   );

@@ -42,7 +42,7 @@ const NavLink = ({
     <Link
       href={path}
       prefetch={false}
-      className="as-text hover-text-primary"
+      className="link-as-inherit hover-text-primary"
       {...rest}>
       {children}
     </Link>

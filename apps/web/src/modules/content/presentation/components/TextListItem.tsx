@@ -16,7 +16,7 @@ export const TextListItem: FunctionComponent<TextListItemProps> = ({
       <Link
         href={article.url}
         passHref
-        className="as-text hover-text-primary"
+        className="link-as-inherit hover-text-primary"
         prefetch={false}>
         <h4 className="line-clamp-1 leading-tight" title={article.title}>
           {article.title}

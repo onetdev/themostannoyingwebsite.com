@@ -22,7 +22,7 @@ const NavLink = ({ path, children, ...rest }: PropsWithChildren<NavItem>) => (
   <Link
     href={path}
     prefetch={false}
-    className="as-text hover-text-primary"
+    className="link-as-inherit hover-text-primary"
     {...rest}>
     {children}
   </Link>
