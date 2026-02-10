@@ -3,7 +3,10 @@ import { expect, test } from '@playwright/test';
 import { getVirginPage } from '../pages/VirginPage';
 import { setupE2eTestState } from '../utils/setup';
 
-import { PUBLIC_PAIN_POINT_LIST } from '@/kernel';
+import {
+  PAIN_PREFERENCES_STORAGE_KEY,
+  PUBLIC_PAIN_POINT_LIST,
+} from '@/kernel/domain/stores';
 
 test('visiting virgin page should turn off all pain points', async ({
   page,
@@ -12,11 +15,10 @@ test('visiting virgin page should turn off all pain points', async ({
   const virginPage = getVirginPage(page);
   await virginPage.goto(); // Go to the page where flags should be off
 
-  const localStorageState = await page.evaluate(() => {
-    const key = 'zustand-pain-preferences-storage';
+  const localStorageState = await page.evaluate((key) => {
     const item = window.localStorage.getItem(key);
     return item ? JSON.parse(item) : null;
-  });
+  }, PAIN_PREFERENCES_STORAGE_KEY);
 
   expect(localStorageState).not.toBeNull();
   expect(localStorageState.state).toEqual({

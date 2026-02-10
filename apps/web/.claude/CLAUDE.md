@@ -502,7 +502,7 @@ export const useUserPreferencesStore = create(
       setAdultFilter: (adultFilter) => set({ adultFilter }),
     }),
     {
-      name: 'zustand-user-preferences-storage',
+      name: USER_PREFERENCES_STORAGE_KEY,
       storage: createJSONStorage(() => localStorage),
       version: 1,
     }

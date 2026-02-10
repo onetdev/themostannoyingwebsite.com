@@ -6,6 +6,8 @@ import {
   getNotificationPermissionState,
 } from '@/kernel/infrastructure/utils/permission';
 
+export const USER_GRANTS_STORAGE_KEY = 'zustand-user-grants-storage';
+
 export interface UserGrantsState {
   reviewCompleted: boolean;
   cookies: {
@@ -78,7 +80,7 @@ export const useUserGrantsStore = create(
       },
     }),
     {
-      name: 'zustand-user-grants-storage',
+      name: USER_GRANTS_STORAGE_KEY,
       storage: createJSONStorage(() => localStorage),
       version: 1,
     },

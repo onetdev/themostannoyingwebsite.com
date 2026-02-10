@@ -1,6 +1,11 @@
 import { Page } from '@playwright/test';
 
-import type { PainPreferencesState, UserGrantsState } from '@/kernel/domain';
+import {
+  PAIN_PREFERENCES_STORAGE_KEY,
+  type PainPreferencesState,
+  USER_GRANTS_STORAGE_KEY,
+  type UserGrantsState,
+} from '@/kernel/domain';
 
 /**
  * Sets the state for the pain preferences store in localStorage.
@@ -22,7 +27,7 @@ export async function setPainPreferences(
       window.localStorage.setItem(key, value);
     },
     {
-      key: 'zustand-pain-preferences-storage',
+      key: PAIN_PREFERENCES_STORAGE_KEY,
       value: JSON.stringify(valueToStore),
     },
   );
@@ -34,7 +39,7 @@ export async function setPainPreferences(
  */
 export async function getPainPreferences(page: Page) {
   return page.evaluate(() => {
-    const item = localStorage.getItem('zustand-pain-preferences-storage');
+    const item = localStorage.getItem(PAIN_PREFERENCES_STORAGE_KEY);
     return item ? (JSON.parse(item) as { state: PainPreferencesState }) : null;
   });
 }
@@ -59,7 +64,7 @@ export async function setUserGrants(
       window.localStorage.setItem(key, value);
     },
     {
-      key: 'zustand-user-grants-storage',
+      key: USER_GRANTS_STORAGE_KEY,
       value: JSON.stringify(valueToStore),
     },
   );

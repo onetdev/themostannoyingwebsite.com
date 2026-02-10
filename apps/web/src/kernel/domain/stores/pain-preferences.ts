@@ -1,6 +1,7 @@
 import { create } from 'zustand';
 import { createJSONStorage, persist } from 'zustand/middleware';
 
+export const PAIN_PREFERENCES_STORAGE_KEY = 'zustand-pain-preferences-storage';
 export const PRIVATE_PAIN_POINT_LIST = [
   'pageTitle.inactiveMarquee',
   'pageTitle.randomGlitch',
@@ -144,7 +145,7 @@ export const usePainPreferencesStore = create(
         }),
     }),
     {
-      name: 'zustand-pain-preferences-storage',
+      name: PAIN_PREFERENCES_STORAGE_KEY,
       storage: createJSONStorage(() => localStorage),
       version: 1,
     },
