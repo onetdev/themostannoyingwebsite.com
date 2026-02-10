@@ -1,5 +1,5 @@
-export { default as ExperienceSettings } from './ExperienceSettings';
-export { default as PreferencesSettings } from './PreferencesSettings';
-export { default as RuntimeSettings } from './RuntimeSettings';
-export { default as UserGrantsSettings } from './UserGrantsSettings';
-export { default as MandatoryExperienceSettings } from './MandatoryExperienceSettings';
+export { PainPreferences } from './PainPreferences';
+export { UserPreferences } from './UserPreferences';
+export { RuntimeSettings } from './RuntimeSettings';
+export { UserGrantsSettings } from './UserGrantsSettings';
+export { MandatoryExperienceSettings } from './MandatoryExperienceSettings';

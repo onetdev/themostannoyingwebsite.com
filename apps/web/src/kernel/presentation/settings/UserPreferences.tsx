@@ -7,11 +7,10 @@ import {
 } from '@maw/ui-lib';
 import { useTranslations } from 'next-intl';
 import { useTheme } from 'next-themes';
-import { FunctionComponent } from 'react';
 
 import { useRuntimeStore, useUserPreferencesStore } from '@/kernel';
 
-const PreferencesSettings: FunctionComponent = () => {
+export function UserPreferences() {
   const preference = useUserPreferencesStore();
   const runtime = useRuntimeStore();
   const t = useTranslations();
@@ -56,6 +55,4 @@ const PreferencesSettings: FunctionComponent = () => {
       </CompactFormRow>
     </BorderedBox>
   );
-};
-
-export default PreferencesSettings;
+}

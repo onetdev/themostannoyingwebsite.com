@@ -353,8 +353,8 @@ export default {
       notificationPermission: 'Notification permission',
       locationPermission: 'Location permission',
     },
-    optionalExperienceFlags: {
-      title: 'Optional experience',
+    optionalPainPoints: {
+      title: 'Optional pain points',
       gifts: {
         detectAdblocker: 'Detect adblocker',
         flaps: 'Background ad flaps',

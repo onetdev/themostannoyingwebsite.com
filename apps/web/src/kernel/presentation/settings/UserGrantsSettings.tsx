@@ -6,11 +6,10 @@ import {
   Checkbox as FormCheckbox,
 } from '@maw/ui-lib';
 import { useTranslations } from 'next-intl';
-import { FunctionComponent } from 'react';
 
 import { useUserGrantsStore } from '@/kernel';
 
-const UserGrantsSettings: FunctionComponent = () => {
+export function UserGrantsSettings() {
   const grant = useUserGrantsStore();
   const t = useTranslations();
 
@@ -42,6 +41,4 @@ const UserGrantsSettings: FunctionComponent = () => {
       </CompactFormRow>
     </BorderedBox>
   );
-};
-
-export default UserGrantsSettings;
+}

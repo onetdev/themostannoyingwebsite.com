@@ -6,9 +6,8 @@ import {
   Checkbox as FormCheckbox,
 } from '@maw/ui-lib';
 import { useTranslations } from 'next-intl';
-import { FunctionComponent } from 'react';
 
-const MandatoryExperienceSettings: FunctionComponent = () => {
+export function MandatoryExperienceSettings() {
   const t = useTranslations();
   return (
     <BorderedBox
@@ -42,6 +41,4 @@ const MandatoryExperienceSettings: FunctionComponent = () => {
       </CompactFormRow>
     </BorderedBox>
   );
-};
-
-export default MandatoryExperienceSettings;
+}

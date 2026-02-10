@@ -6,7 +6,7 @@ import { getHeader } from './shared/Header';
 export const getSettingsPage = (page: Page) => {
   const header = getHeader(page);
   const footer = getFooter(page);
-  const experienceSection = page.getByTestId('experience-settings');
+  const painPreferencesSection = page.getByTestId('pain-preferences');
 
   return {
     ...header,
@@ -14,67 +14,70 @@ export const getSettingsPage = (page: Page) => {
 
     headline: page.getByRole('heading', { name: 'Settings' }),
 
-    experienceFlags: {
-      section: experienceSection,
-      disableAllButton: experienceSection.getByRole('button', {
+    painPreferenceFlags: {
+      section: painPreferencesSection,
+      disableAllButton: painPreferencesSection.getByRole('button', {
         name: 'Disable all',
       }),
-      enableAllButton: experienceSection.getByRole('button', {
+      enableAllButton: painPreferencesSection.getByRole('button', {
         name: 'Enable all',
       }),
-      checkboxesAll: experienceSection.getByRole('checkbox'),
-      checkboxesChecked: experienceSection.getByRole('checkbox', {
+      checkboxesAll: painPreferencesSection.getByRole('checkbox'),
+      checkboxesChecked: painPreferencesSection.getByRole('checkbox', {
         checked: true,
       }),
-      checkboxesUnchecked: experienceSection.getByRole('checkbox', {
+      checkboxesUnchecked: painPreferencesSection.getByRole('checkbox', {
         checked: false,
       }),
-      detectAdblocker: experienceSection.getByRole('checkbox', {
+      detectAdblocker: painPreferencesSection.getByRole('checkbox', {
         name: 'Detect adblocker',
       }),
-      backgroundAdFlap: experienceSection.getByRole('checkbox', {
+      backgroundAdFlap: painPreferencesSection.getByRole('checkbox', {
         name: 'Background ad flaps',
       }),
-      oneByOne: experienceSection.getByRole('checkbox', {
+      oneByOne: painPreferencesSection.getByRole('checkbox', {
         name: 'One by one ad blocks',
       }),
-      clipboardMarker: experienceSection.getByRole('checkbox', {
+      clipboardMarker: painPreferencesSection.getByRole('checkbox', {
         name: 'Clipboard marker',
       }),
-      contentPaywall: experienceSection.getByRole('checkbox', {
+      contentPaywall: painPreferencesSection.getByRole('checkbox', {
         name: 'Content paywall',
       }),
-      deadPixel: experienceSection.getByRole('checkbox', {
+      deadPixel: painPreferencesSection.getByRole('checkbox', {
         name: 'Dead pixel',
       }),
-      disableContextMenu: experienceSection.getByRole('checkbox', {
+      disableContextMenu: painPreferencesSection.getByRole('checkbox', {
         name: 'Disable context (right click) menu',
       }),
-      exitPrompt: experienceSection.getByRole('checkbox', {
+      exitPrompt: painPreferencesSection.getByRole('checkbox', {
         name: 'Exit prompt',
       }),
-      historySpam: experienceSection.getByRole('checkbox', {
+      historySpam: painPreferencesSection.getByRole('checkbox', {
         name: 'History spam',
       }),
-      mockChat: experienceSection.getByRole('checkbox', {
+      mockChat: painPreferencesSection.getByRole('checkbox', {
         name: 'Bubble chat',
       }),
-      newsletterModal: experienceSection.getByRole('checkbox', {
+      newsletterModal: painPreferencesSection.getByRole('checkbox', {
         name: 'Newsletter popup modal',
       }),
-      notifications: experienceSection.getByRole('checkbox', {
+      notifications: painPreferencesSection.getByRole('checkbox', {
         name: 'Notifications',
       }),
-      pageTitleInactiveArrayPaged: experienceSection.getByRole('checkbox', {
-        name: 'Alternative title when tab is inactive',
-      }),
-      searchDelay: experienceSection.getByRole('checkbox', {
+      pageTitleInactiveArrayPaged: painPreferencesSection.getByRole(
+        'checkbox',
+        {
+          name: 'Alternative title when tab is inactive',
+        },
+      ),
+      searchDelay: painPreferencesSection.getByRole('checkbox', {
         name: 'Fake search delay',
       }),
-      wheelOfFortune: experienceSection.getByRole('checkbox', {
+      wheelOfFortune: painPreferencesSection.getByRole('checkbox', {
         name: 'Wheel of fortune',
       }),
-      stickyVideo: experienceSection.getByRole('checkbox', {
+      stickyVideo: painPreferencesSection.getByRole('checkbox', {
         name: 'Sticky video',
       }),
     },

@@ -1,2 +1,2 @@
 export * from './components';
-export * from './NewsletterModalExperienceHost';
+export * from './NewsletterModalHost';

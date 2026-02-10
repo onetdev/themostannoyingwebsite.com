@@ -4,7 +4,7 @@ import { Button, Icon, TextInput } from '@maw/ui-lib';
 import { FormElementSize } from '@maw/ui-lib/utils';
 import { useRouter } from 'next/navigation';
 import { useTranslations } from 'next-intl';
-import { FormEventHandler, FunctionComponent } from 'react';
+import { SubmitEventHandler } from 'react';
 
 import { DOCUMENT_EVENT_SEARCH } from '@/global';
 
@@ -15,15 +15,15 @@ export type SearchFormProps = {
   size?: SearchFormSize;
 };
 
-const SearchForm: FunctionComponent<SearchFormProps> = ({
+export function SearchForm({
   className,
   initialValue = '',
   size = 'sm',
-}) => {
+}: SearchFormProps) {
   const t = useTranslations();
   const router = useRouter();
 
-  const onSubmit: FormEventHandler<HTMLFormElement> = (event) => {
+  const onSubmit: SubmitEventHandler<HTMLFormElement> = (event) => {
     event.preventDefault();
 
     // Sooo, we want to avoid edge requests thus using fragment instead
@@ -62,6 +62,4 @@ const SearchForm: FunctionComponent<SearchFormProps> = ({
       </Button>
     </form>
   );
-};
-
-export default SearchForm;
+}

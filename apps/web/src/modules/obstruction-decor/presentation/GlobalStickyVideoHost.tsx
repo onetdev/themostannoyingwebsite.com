@@ -6,7 +6,7 @@ import { useEffect, useRef, useState } from 'react';
 
 import { useUserGrantsStore } from '@/kernel';
 
-export function StickyVideoExperienceHost() {
+export function GlobalStickyVideoHost() {
   const allowed = useUserGrantsStore((state) => state.reviewCompleted);
   const [mounted, setMounted] = useState(false);
   const [closed, setClosed] = useState(false);

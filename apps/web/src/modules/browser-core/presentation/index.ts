@@ -1,2 +1,2 @@
 export * from './components';
-export * from './PageTitleExperienceHost';
+export * from './PageTitleHost';

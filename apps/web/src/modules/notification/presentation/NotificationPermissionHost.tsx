@@ -5,7 +5,7 @@ import { useRef, useState } from 'react';
 import { ManualModal } from './components';
 
 import {
-  useExperienceFlagsStore,
+  usePainPreferencesStore,
   useScrollDistanceTrigger,
   useUserGrantsStore,
 } from '@/kernel';
@@ -14,15 +14,15 @@ import {
   requestNotificationPermission,
 } from '@/kernel/infrastructure/utils/permission';
 
-export type NotificationPermissionExperienceHostProps = {
+export type NotificationPermissionHostProps = {
   scrollDistanceTrigger?: number;
 };
-export function NotificationPermissionExperienceHost({
+export function NotificationPermissionHost({
   scrollDistanceTrigger = 400,
-}: NotificationPermissionExperienceHostProps) {
+}: NotificationPermissionHostProps) {
   const initialState = useRef(getNotificationPermissionState()).current;
   const [manualModalVisible, setManualModalVisible] = useState(false);
-  const enabled = useExperienceFlagsStore((state) => state.notifications);
+  const enabled = usePainPreferencesStore((state) => state.flags.notifications);
   const syncPermissions = useUserGrantsStore((state) => state.syncPermissions);
 
   useScrollDistanceTrigger({

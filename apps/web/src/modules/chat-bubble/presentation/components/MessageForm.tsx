@@ -1,6 +1,6 @@
 import { Button, Icon, TextInput } from '@maw/ui-lib';
 import { useTranslations } from 'next-intl';
-import { FormEventHandler, useRef } from 'react';
+import { SubmitEventHandler, useRef } from 'react';
 
 export type MessageFormProps = {
   className?: string;
@@ -12,7 +12,7 @@ export function MessageForm({ className, onMessage }: MessageFormProps) {
   const userForm = useRef<HTMLFormElement>(null);
   const userMessage = useRef<HTMLInputElement>(null);
 
-  const handleFormSubmit: FormEventHandler = (e) => {
+  const handleFormSubmit: SubmitEventHandler = (e) => {
     e.preventDefault();
     const message = userMessage.current?.value;
     if (message) {

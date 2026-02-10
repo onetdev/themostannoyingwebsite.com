@@ -4,11 +4,11 @@ import { getTranslations } from 'next-intl/server';
 
 import { PageLayout } from '@/components/PageLayout';
 import {
-  ExperienceSettings,
   MandatoryExperienceSettings,
-  PreferencesSettings,
+  PainPreferences,
   RuntimeSettings,
   UserGrantsSettings,
+  UserPreferences,
 } from '@/kernel';
 export { generateStaticParams } from '@/i18n/routing';
 
@@ -34,9 +34,9 @@ export default async function Settings() {
       <PageHeadline>{t('navigation.settings')}</PageHeadline>
 
       <div className="grid gap-3 md:grid-cols-2">
-        <PreferencesSettings />
+        <UserPreferences />
         <UserGrantsSettings />
-        <ExperienceSettings
+        <PainPreferences
           className="md:col-span-2"
           listClassName="grid gap-3 grid-cols-1 md:gap-x-10 md:grid-cols-2 lg:grid-cols-3"
         />

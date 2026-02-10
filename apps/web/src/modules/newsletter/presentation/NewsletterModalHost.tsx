@@ -5,18 +5,20 @@ import { useEffect, useState } from 'react';
 import { NewsletterModal } from './components/NewsletterModal';
 
 import {
-  useExperienceFlagsStore,
+  usePainPreferencesStore,
   useRuntimeStore,
   useScrollDistanceTrigger,
 } from '@/kernel';
 
-export type NewsletterModalExperienceHostProps = {
+export type NewsletterModalHostProps = {
   scrollDistanceTrigger?: number;
 };
-export function NewsletterModalExperienceHost({
+export function NewsletterModalHost({
   scrollDistanceTrigger = 450,
-}: NewsletterModalExperienceHostProps) {
-  const enabled = useExperienceFlagsStore((state) => state.newsletterModal);
+}: NewsletterModalHostProps) {
+  const enabled = usePainPreferencesStore(
+    (state) => state.flags.newsletterModal,
+  );
   const document = useRuntimeStore((state) => state.document);
   const [modalVisible, setModalVisible] = useState(false);
 

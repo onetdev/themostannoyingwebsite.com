@@ -3,7 +3,8 @@ import { getTranslations } from 'next-intl/server';
 
 import { AppDarkModeToggle } from './AppDarkModeToggle';
 import { ArticleMarquee } from './ArticleMarquee';
-import SearchForm from './SearchForm';
+import { PainPreferencePanel } from './PainPreferencePanel';
+import { SearchForm } from './SearchForm';
 import { SiteDesktopNavigation } from './SiteDesktopNavigation';
 import { ActiveNavigationItem } from './types';
 import { UserNavigation } from './UserNavigation';
@@ -58,6 +59,7 @@ export async function AppHeader({ activeItem, className }: AppHeaderProps) {
         items={marqueeItems}
         className="bg-surface-alt col-span-2 -mx-5 xl:-mx-8"
       />
+      <PainPreferencePanel />
     </header>
   );
 }

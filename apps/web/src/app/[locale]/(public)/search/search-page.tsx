@@ -7,9 +7,9 @@ import HTMLReactParser from 'html-react-parser';
 import { useLocale, useMessages, useTranslations } from 'next-intl';
 import { useCallback, useEffect, useMemo, useState } from 'react';
 
-import SearchForm from '@/components/AppHeader/SearchForm';
+import { SearchForm } from '@/components/AppHeader/SearchForm';
 import { Link } from '@/i18n/navigation';
-import { useExperienceFlagsStore } from '@/kernel';
+import { usePainPreferencesStore } from '@/kernel';
 import { AppArticleService, ArticleSearchResult } from '@/modules/content';
 
 type Result = {
@@ -23,7 +23,7 @@ type Result = {
 export function SearchPage() {
   const locale = useLocale();
   const messages = useMessages();
-  const enabled = useExperienceFlagsStore((state) => state.searchDelay);
+  const enabled = usePainPreferencesStore((state) => state.flags.searchDelay);
   const t = useTranslations();
   const [query, setQuery] = useState('');
   const [loading, setLoading] = useState(false);

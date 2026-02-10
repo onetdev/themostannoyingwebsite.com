@@ -1,3 +1,5 @@
+import { getTranslations } from 'next-intl/server';
+
 import { PageLayout } from '@/components/PageLayout';
 import {
   AppArticleService,
@@ -6,7 +8,6 @@ import {
   TextListItem,
 } from '@/modules/content';
 import { OneByOneGift } from '@/modules/gift';
-import { getTranslations } from 'next-intl/server';
 export { generateStaticParams } from '@/i18n/routing';
 
 export const revalidate = 1800;
