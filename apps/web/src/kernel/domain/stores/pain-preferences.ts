@@ -119,8 +119,16 @@ export const usePainPreferencesStore = create(
           };
         }),
       allEnable: () => {
-        // Important: we don't neccessarily want to enable all experiments that exists since not everything is public.
-        set({ ...initialState });
+        set((state) => {
+          const nextFlags = { ...state.flags };
+          PUBLIC_PAIN_POINT_LIST.forEach((key) => {
+            nextFlags[key] = true;
+          });
+          return {
+            flags: nextFlags,
+            publicLevel: calculatePublicLevelMeta(nextFlags),
+          };
+        });
       },
       allDisable: () =>
         set((state) => {
@@ -131,7 +139,7 @@ export const usePainPreferencesStore = create(
           return {
             ...state,
             flags: newFlags,
-            painLevel: calculatePublicLevelMeta(newFlags),
+            publicLevel: calculatePublicLevelMeta(newFlags),
           };
         }),
     }),

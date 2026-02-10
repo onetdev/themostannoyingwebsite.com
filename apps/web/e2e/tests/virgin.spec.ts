@@ -3,6 +3,8 @@ import { expect, test } from '@playwright/test';
 import { getVirginPage } from '../pages/VirginPage';
 import { setupE2eTestState } from '../utils/setup';
 
+import { PUBLIC_PAIN_POINT_LIST } from '@/kernel';
+
 test('visiting virgin page should turn off all pain points', async ({
   page,
 }) => {
@@ -40,7 +42,7 @@ test('visiting virgin page should turn off all pain points', async ({
     },
     publicLevel: {
       current: 0,
-      max: 16,
+      max: PUBLIC_PAIN_POINT_LIST.length,
     },
   });
 });

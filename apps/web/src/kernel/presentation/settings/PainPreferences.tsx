@@ -49,7 +49,7 @@ export function PainPreferences({
         </CompactFormRow>
         <CompactFormRow label={t('settings.optionalPainPoints.gifts.oneByOne')}>
           <FormCheckbox
-            name="gift_flaps"
+            name="one_by_one"
             checked={painPreferences.flags['gifts.oneByOne']}
             onValueChange={(value) =>
               painPreferences.setFlag('gifts.oneByOne', value)
