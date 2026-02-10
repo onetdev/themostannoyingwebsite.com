@@ -4,7 +4,11 @@ import { useTranslations } from 'next-intl';
 
 import { usePainPreferencesStore } from '@/kernel';
 
-export function PainPreferencePanel() {
+export interface PainPreferencePanelProps {
+  className?: string;
+}
+
+export function PainPreferencePanel({ className }: PainPreferencePanelProps) {
   const { publicLevel, setLevel } = usePainPreferencesStore();
   const t = useTranslations();
 
@@ -14,7 +18,7 @@ export function PainPreferencePanel() {
   };
 
   return (
-    <div className="flex flex-col gap-2">
+    <div className={`flex flex-col gap-2 px-5 xl:px-8 ${className}`}>
       <div className="text-on-surface flex items-center justify-between text-xs font-bold tracking-wider uppercase opacity-60">
         <span>{t('settings.optionalPainPoints.title')}</span>
         <span>
