@@ -31,9 +31,9 @@ function MyComponent() {
 }
 
 // Use page title animations
-import { PageTitleExperienceHost } from '@/modules/browser-core';
+import { PageTitleHost } from '@/modules/browser-core';
 
-<PageTitleExperienceHost />
+<PageTitleHost />
 
 // Or individual title components
 import { MarqueeTitle, GlitchyTitle } from '@/modules/browser-core';
@@ -53,4 +53,4 @@ const scrollingText = string_marquee("Hello World", timeIndex, {
 
 ## Configuration
 
-Title animations are controlled by experience flags and can be toggled on/off through the settings UI.
+Title animations are controlled by pain point flags and can be toggled on/off through the settings UI.

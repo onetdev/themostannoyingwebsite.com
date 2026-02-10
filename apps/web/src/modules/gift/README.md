@@ -1,6 +1,6 @@
 # Gift Module
 
-Interactive gift experiences including DILF finder, surveys, adblocker detection, and surprise elements.
+Interactive gift pain points including DILF finder, surveys, adblocker detection, and surprise elements.
 
 ## Features
 
@@ -62,4 +62,4 @@ import { ContainerGiftFlaps, OneByOneGift } from '@/modules/gift';
 
 ## Configuration
 
-Adblocker detection works by attempting to load a fake ad element and checking if it's blocked. The detection respects experience flag settings.
+Adblocker detection works by attempting to load a fake ad element and checking if it's blocked. The detection respects pain point flag settings.

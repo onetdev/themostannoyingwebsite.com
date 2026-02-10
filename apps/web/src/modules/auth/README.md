@@ -1,10 +1,10 @@
 # Auth Module
 
-Fake authentication system with intentionally annoying form interactions and user experience patterns.
+Fake authentication system with intentionally annoying form interactions and user pain point patterns.
 
 ## Purpose
 
-This module is **not intended to be functional**. Its goal is to provide weird form interactions, validation quirks, and frustrating auth flows as part of the annoying website experience.
+This module is **not intended to be functional**. Its goal is to provide weird form interactions, validation quirks, and frustrating auth flows as part of the annoying website pain points.
 
 ## Features
 

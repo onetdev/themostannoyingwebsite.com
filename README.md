@@ -1,6 +1,6 @@
 # The Most Annoying Website
 
-The main idea is to gather the most annoying features of modern websites in one place, but on steroids. We refer to these irritating elements as “experiences.” The entire website is a fake facade; no feature functions as it would in a normal scenario.
+The main idea is to gather the most annoying features of modern websites in one place, but on steroids. We refer to these irritating elements as “pain points.” The entire website is a fake facade; no feature functions as it would in a normal scenario.
 
 ## Plans for project (_in no particular order_)
 
@@ -29,7 +29,7 @@ The main idea is to gather the most annoying features of modern websites in one 
   - [x] Adblocker detection
   - [x] Prevent rightclick
   - [x] Fake advertisements (free phone)
-  - [x] Add disabled mandatory experience checkboxes to settings
+  - [x] Add disabled mandatory pain point checkboxes to settings
   - [x] DILF advertisement and landing page
   - [x] Sticky video player that obscures page visibility
   - [x] Newsletter modal that appears when the user leaves the screen or scrolls down a bit
@@ -68,7 +68,7 @@ The main idea is to gather the most annoying features of modern websites in one 
 
 ### Frameworks
 
-The stack is the usual: Next.JS + TypeScript + TailwindCSS. If you’re not familiar with these but still want to add your own experiences or tweaks, you can find excellent documentation here:
+The stack is the usual: Next.JS + TypeScript + TailwindCSS. If you’re not familiar with these but still want to add your own pain points or tweaks, you can find excellent documentation here:
 
 - [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
 - [TypeScript Documentation](https://www.typescriptlang.org/docs/) - learn about TypeScript features and API.

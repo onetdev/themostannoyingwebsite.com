@@ -20,7 +20,7 @@ Core business entities and state management:
 - **Repositories**: Abstract repository interfaces
 - **Value Objects**: Immutable domain value types
 - **Stores**: Zustand state management stores
-  - `experience-flags.ts` - Manages annoying experience toggles
+  - `pain-preferences.ts` - Manages annoying pain point toggles
   - `user-grants.ts` - Handles user permissions and grants
   - `user-preferences.ts` - User preference management
   - `runtime.ts` - Runtime application state
@@ -33,17 +33,17 @@ External dependencies and data access:
 ### **Presentation Layer** (`/presentation`)
 UI components and presentation logic:
 - **Settings**: Complete settings UI system
-  - `ExperienceSettings.tsx` - Toggle annoying experiences
-  - `MandatoryExperienceSettings.tsx` - Non-optional experiences
-  - `PreferencesSettings.tsx` - User preference controls
+  - `MandatoryExperienceSettings.tsx` - Non-optional pain points
+  - `PainPreferences.tsx` - Toggle annoying pain points
   - `RuntimeSettings.tsx` - Runtime configuration UI
   - `UserGrantsSettings.tsx` - Permission management UI
+  - `UserPreferences.tsx` - User preference controls
 
 ## Key Features
 
 ### State Management (Zustand)
 - Centralized state stores for cross-module communication
-- Persistent user preferences and experience flags
+- Persistent user preferences and pain point flags
 - Runtime state management for dynamic behavior
 
 ### Dependency Injection
@@ -53,8 +53,8 @@ UI components and presentation logic:
 
 ### Settings System
 - Complete settings UI for all user preferences
-- Annoying experience toggles (core to the website's purpose)
-- Mandatory experiences that cannot be disabled
+- Annoying pain point toggles (core to the website's purpose)
+- Mandatory pain points that cannot be disabled
 
 ### Form Validation
 - Zod-based form validation with React Hook Form integration
@@ -73,21 +73,21 @@ Other modules import kernel functionality as needed:
 
 ```typescript
 // Import stores
-import { useExperienceFlags } from '@/kernel/domain/stores';
+import { usePainPreferencesStore } from '@/kernel/domain/stores';
 
 // Import services
 import { useKernelService } from '@/kernel/application/services';
 
 // Import settings UI
-import { ExperienceSettings } from '@/kernel/presentation/settings';
+import { PainPreferences } from '@/kernel/presentation/settings';
 ```
 
 ## Design Philosophy
 
-The kernel embodies the application's core principle: **maximum annoyance through configurable experiences**. It provides the infrastructure to:
+The kernel embodies the application's core principle: **maximum annoyance through configurable pain points**. It provides the infrastructure to:
 - Enable/disable various annoying website features
 - Persist user "preferences" (which may be ignored)
-- Manage the overall annoying experience state
+- Manage the overall annoying pain point state
 - Provide consistent UI for fake settings that don't always work
 
 This architecture ensures that annoying features can be systematically managed while maintaining clean, testable code.

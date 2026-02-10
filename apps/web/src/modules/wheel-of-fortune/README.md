@@ -5,8 +5,8 @@ Fake wheel of fortune modal that appears to offer prizes but is designed to be m
 ## Features
 
 - **Fake Prize Wheel** - Animated wheel spinner with fake prize options
-- **Modal Experience** - Full-screen modal takeover
-- **Controlled by Experience Flags** - Can be toggled on/off
+- **Modal Pain Point** - Full-screen modal takeover
+- **Controlled by Pain Point Flags** - Can be toggled on/off
 
 ## Components
 
@@ -18,7 +18,7 @@ Fake wheel of fortune modal that appears to offer prizes but is designed to be m
 import { WheelOfFortuneHost } from '@/modules/wheel-of-fortune';
 
 function Layout() {
-  const wheelOfFortune = useExperienceFlagsStore(
+  const wheelOfFortune = usePainPreferencesStore(
     state => state.wheelOfFortune
   );
 
@@ -33,8 +33,8 @@ function Layout() {
 
 ## Configuration
 
-The wheel is controlled by the `wheelOfFortune` experience flag. When enabled, it appears as a modal overlay offering fake prizes and promotions.
+The wheel is controlled by the `wheelOfFortune` pain point flag. When enabled, it appears as a modal overlay offering fake prizes and promotions.
 
 ## Purpose
 
-Part of the annoying website experience, the wheel of fortune creates an interruption similar to aggressive marketing popups, but with an intentionally frustrating twist.
+Part of the annoying website pain points, the wheel of fortune creates an interruption similar to aggressive marketing popups, but with an intentionally frustrating twist.
