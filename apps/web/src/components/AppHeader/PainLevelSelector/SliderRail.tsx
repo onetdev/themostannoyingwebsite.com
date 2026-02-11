@@ -10,9 +10,13 @@ import {
 
 export interface SliderRailProps {
   className?: string;
+  percentage?: number;
 }
 
-export function SliderRail({ className = '' }: SliderRailProps) {
+export function SliderRail({
+  className = '',
+  percentage = 100,
+}: SliderRailProps) {
   const [particles, setParticles] = useState<FireflyParticleProps[]>([]);
 
   useEffect(() => {
@@ -48,6 +52,7 @@ export function SliderRail({ className = '' }: SliderRailProps) {
           <FireflyParticle
             key={`particle-${particle.createdAt}`}
             {...particle}
+            percentage={percentage}
           />
         ))}
       </div>
@@ -63,8 +68,24 @@ export function SliderRail({ className = '' }: SliderRailProps) {
             <stop offset="75%" stopColor="#f97316" />
             <stop offset="100%" stopColor="#ef4444" />
           </linearGradient>
+          <filter id="grayscale">
+            <feColorMatrix type="saturate" values="0" />
+          </filter>
+          <clipPath id="railClip">
+            <rect x="0" y="0" width={percentage} height="6" />
+          </clipPath>
         </defs>
-        <path d="M 0 4 L 100 6 L 100 0 L 0 2 Z" fill="url(#railGradient)" />
+        <path
+          d="M 0 4 L 100 6 L 100 0 L 0 2 Z"
+          fill="url(#railGradient)"
+          filter="url(#grayscale)"
+          className="opacity-20"
+        />
+        <path
+          d="M 0 4 L 100 6 L 100 0 L 0 2 Z"
+          fill="url(#railGradient)"
+          clipPath="url(#railClip)"
+        />
       </svg>
     </div>
   );

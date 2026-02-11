@@ -16,9 +16,13 @@ export interface FireflyParticleProps {
   size: number;
   duration: number;
   color: string;
+  percentage?: number;
 }
 
 export function FireflyParticle(particle: FireflyParticleProps) {
+  const isGrayscale =
+    particle.percentage !== undefined && particle.x > particle.percentage;
+
   return (
     <motion.div
       initial={{
@@ -48,6 +52,8 @@ export function FireflyParticle(particle: FireflyParticleProps) {
         width: particle.size,
         height: particle.size,
         backgroundColor: particle.color,
+        filter: isGrayscale ? 'grayscale(100%)' : 'none',
+        opacity: isGrayscale ? 0.2 : 1,
       }}
     />
   );
