@@ -2,13 +2,15 @@
 
 import { useTranslations } from 'next-intl';
 
+import { SliderRail } from './SliderRail';
+
 import { usePainPreferencesStore } from '@/kernel';
 
-export interface PainPreferencePanelProps {
+export interface PainLevelSelectorProps {
   className?: string;
 }
 
-export function PainPreferencePanel({ className }: PainPreferencePanelProps) {
+export function PainLevelSelector({ className }: PainLevelSelectorProps) {
   const { publicLevel, setLevel } = usePainPreferencesStore();
   const t = useTranslations();
 
@@ -18,13 +20,15 @@ export function PainPreferencePanel({ className }: PainPreferencePanelProps) {
   };
 
   return (
-    <div className={`flex flex-col gap-2 px-5 xl:px-8 ${className}`}>
+    <div
+      className={`flex flex-col gap-2 overflow-hidden px-5 py-2 xl:px-8 ${className}`}>
       <div className="text-on-surface flex items-center justify-between text-xs font-bold tracking-wider uppercase opacity-60">
-        <span>{t('settings.optionalPainPoints.title')}</span>
+        <span>Pain level</span>
         <span>
           {publicLevel.current} / {publicLevel.max}
         </span>
       </div>
+      <SliderRail />
       <input
         type="range"
         min="0"

@@ -1,8 +1,9 @@
 import { Icon } from '@maw/ui-lib';
 import { getTranslations } from 'next-intl/server';
+import { ComponentProps } from 'react';
 
 import { AppDarkModeToggle } from './AppDarkModeToggle';
-import { PainPreferencePanel } from './PainPreferencePanel';
+import { PainLevelSelector } from './PainLevelSelector';
 import { SearchForm } from './SearchForm';
 import { SiteDesktopNavigation } from './SiteDesktopNavigation';
 import { ActiveNavigationItem } from './types';
@@ -12,7 +13,7 @@ import { Link } from '@/i18n/navigation';
 
 type AppHeaderProps = {
   activeItem?: ActiveNavigationItem;
-  className?: JSXProxyProps<'header'>['className'];
+  className?: ComponentProps<'header'>['className'];
 };
 
 export async function AppHeader({ activeItem, className }: AppHeaderProps) {
@@ -46,7 +47,7 @@ export async function AppHeader({ activeItem, className }: AppHeaderProps) {
       </div>
       <SiteDesktopNavigation activeItem={activeItem} className="" />
       <UserNavigation activeItem={activeItem} className="col-span-1" />
-      <PainPreferencePanel className="bg-surface-alt col-span-2 -mx-5 xl:-mx-8" />
+      <PainLevelSelector className="bg-surface-alt col-span-2 -mx-5 xl:-mx-8" />
     </header>
   );
 }
