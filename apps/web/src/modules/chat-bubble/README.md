@@ -22,7 +22,7 @@ Interactive fake chat bubble with automated bot responses and notification featu
 ## Usage
 
 ```typescript
-// Use the complete chat bubble experience
+// Use the complete chat bubble pain point
 import { ChatBubbleHost } from '@/modules/chat-bubble';
 
 <ChatBubbleHost />

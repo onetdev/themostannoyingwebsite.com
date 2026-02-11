@@ -1,6 +1,7 @@
 import { create } from 'zustand';
 import { createJSONStorage, persist } from 'zustand/middleware';
 
+export const USER_PREFERENCES_STORAGE_KEY = 'zustand-user-preferences-storage';
 export interface UserPreferencesState {
   enableSound: boolean;
   adultFilter: boolean;
@@ -27,7 +28,7 @@ export const useUserPreferencesStore = create(
       setAdultFilter: (adultFilter) => set({ adultFilter }),
     }),
     {
-      name: 'zustand-user-preferences-storage',
+      name: USER_PREFERENCES_STORAGE_KEY,
       storage: createJSONStorage(() => localStorage),
       version: 1,
     },

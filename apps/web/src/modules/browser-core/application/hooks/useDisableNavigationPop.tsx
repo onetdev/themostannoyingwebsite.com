@@ -1,12 +1,12 @@
 import { useEffect, useState } from 'react';
 
-import { useExperienceFlagsStore } from '@/kernel';
+import { usePainPreferencesStore } from '@/kernel';
 
 // This NEEDS user interaction first, otherwise it won't work at all.
 // Also, this can't really have a cleanup function either.
 export function useDisableNavigationPop() {
   const [isInited, setIsInited] = useState(false);
-  const enabled = useExperienceFlagsStore((state) => state.historySpam);
+  const enabled = usePainPreferencesStore((state) => state.flags.historySpam);
 
   // const onPopState = useCallback((event: PopStateEvent) => {
   //   const prevent = event.state && event.state.preventNavigation;

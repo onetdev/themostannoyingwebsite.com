@@ -5,13 +5,13 @@ import HTMLReactParser from 'html-react-parser';
 import Image from 'next/image';
 import { useTranslations } from 'next-intl';
 
-import { useExperienceFlagsStore } from '@/kernel';
+import { usePainPreferencesStore } from '@/kernel';
 import { ArticleDatum, PartitionalLockedContent } from '@/modules/content';
 
 export function ArticleItemPage({ data }: { data: ArticleDatum }) {
   const t = useTranslations();
-  const partitionEnabled = useExperienceFlagsStore(
-    (state) => state.contentPaywall,
+  const partitionEnabled = usePainPreferencesStore(
+    (state) => state.flags.contentPaywall,
   );
 
   return (

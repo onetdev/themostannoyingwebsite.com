@@ -11,16 +11,16 @@ Browser notification permission management with automatic requests and manual gu
 
 ## Components
 
-- **`NotificationPermissionExperienceHost`** - Main host that manages permission flow
+- **`NotificationPermissionHost`** - Main host that manages permission flow
 - **`ManualModal`** - Modal with instructions for manually enabling notifications
 
 ## Usage
 
 ```typescript
-// Use the experience host (recommended)
-import { NotificationPermissionExperienceHost } from '@/modules/notification';
+// Use the pain point host (recommended)
+import { NotificationPermissionHost } from '@/modules/notification';
 
-<NotificationPermissionExperienceHost scrollDistanceTrigger={400} />
+<NotificationPermissionHost scrollDistanceTrigger={400} />
 
 // Use manual modal directly
 import { ManualModal } from '@/modules/notification';
@@ -34,7 +34,7 @@ import { ManualModal } from '@/modules/notification';
 ## Configuration
 
 - **Scroll Distance**: Default 400px, configurable via prop
-- **Experience Flag**: Can be toggled via `notifications` experience flag
+- **Pain Point Flag**: Can be toggled via `notifications` pain point flag
 - **Translation Keys**: Modal content uses `notification.modal.title` and `notification.modal.description`
 
 ## Browser Behavior

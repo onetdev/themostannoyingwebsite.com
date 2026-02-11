@@ -2,12 +2,12 @@
 
 import { BorderedBox } from '@maw/ui-lib';
 import { useTranslations } from 'next-intl';
-import { FunctionComponent, useMemo } from 'react';
+import { useMemo } from 'react';
 import ReactTimeAgo from 'react-timeago';
 
 import { useRuntimeStore } from '@/kernel';
 
-const RuntimeSettings: FunctionComponent = () => {
+export function RuntimeSettings() {
   const runtime = useRuntimeStore();
   const t = useTranslations();
 
@@ -63,6 +63,4 @@ const RuntimeSettings: FunctionComponent = () => {
       </p>
     </BorderedBox>
   );
-};
-
-export default RuntimeSettings;
+}

@@ -353,8 +353,8 @@ export default {
       notificationPermission: 'Notification permission',
       locationPermission: 'Location permission',
     },
-    optionalExperienceFlags: {
-      title: 'Optional experience',
+    optionalPainPoints: {
+      title: 'Optional pain points',
       gifts: {
         detectAdblocker: 'Detect adblocker',
         flaps: 'Background ad flaps',
@@ -608,5 +608,23 @@ export default {
     playVideo: 'Play video',
     videoPlaybackFailed: 'Video playback failed',
     pictureOfYou: 'Picture of you',
+  },
+  painPreferences: {
+    levelSettings: {
+      label: 'Pain level',
+      clamps: {
+        from_0: 'Innocent',
+        from_10: "It's a bit odd, innit?",
+        from_20: 'Mildly annoying',
+        from_30: 'A wee bit cursed',
+        from_40: 'Unsettling in a very specific way',
+        from_50: 'Just the right amount',
+        from_60: 'Higher-than-average tolerance',
+        from_70: 'Stepping in dog excrement barefoot',
+        from_80: 'Borderline masochistic',
+        from_90: 'Nightmares? Subscribed.',
+        from_100: 'Max Pain',
+      },
+    },
   },
 };

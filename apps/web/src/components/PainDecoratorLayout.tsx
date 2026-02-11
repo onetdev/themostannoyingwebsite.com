@@ -5,31 +5,35 @@ import { useEffect, useState } from 'react';
 import CookieConsent from '@/components/CookieConsent';
 import {
   ShareModal,
-  useExperienceFlagsStore,
+  usePainPreferencesStore,
   useUserGrantsStore,
 } from '@/kernel';
 import { ChatBubbleHost } from '@/modules/chat-bubble';
 import { AdblockerSuspectBar, ContainerGiftFlaps } from '@/modules/gift';
 import {
   DeadPixelHost,
-  StickyVideoExperienceHost,
+  GlobalStickyVideoHost,
 } from '@/modules/obstruction-decor';
 import { WheelOfFortuneHost } from '@/modules/wheel-of-fortune';
 
-type ExperienceDecoratorLayoutProps = JSXProxyProps<'div'>;
+type PainDecoratorLayoutProps = JSXProxyProps<'div'>;
 
-export function ExperienceDecoratorLayout({
+export function PainDecoratorLayout({
   children,
   className,
   ...rest
-}: ExperienceDecoratorLayoutProps) {
-  const deadPixel = useExperienceFlagsStore((state) => state.deadPixel);
-  const mockChat = useExperienceFlagsStore((state) => state.mockChat);
-  const giftFlaps = useExperienceFlagsStore((state) => state.gifts.flaps);
-  const stickyVideo = useExperienceFlagsStore((state) => state.stickyVideo);
+}: PainDecoratorLayoutProps) {
   const cookieConsent = useUserGrantsStore((state) => state.reviewCompleted);
-  const wheelOfFortune = useExperienceFlagsStore(
-    (state) => state.wheelOfFortune,
+  const deadPixel = usePainPreferencesStore((state) => state.flags.deadPixel);
+  const mockChat = usePainPreferencesStore((state) => state.flags.mockChat);
+  const giftFlaps = usePainPreferencesStore(
+    (state) => state.flags['gifts.flaps'],
+  );
+  const stickyVideo = usePainPreferencesStore(
+    (state) => state.flags.stickyVideo,
+  );
+  const wheelOfFortune = usePainPreferencesStore(
+    (state) => state.flags.wheelOfFortune,
   );
 
   // Important thing to note here:
@@ -65,7 +69,7 @@ export function ExperienceDecoratorLayout({
         {runtimeFlags.mockChat && <ChatBubbleHost />}
         {runtimeFlags.showCookieConsent && <CookieConsent />}
         <AdblockerSuspectBar />
-        {runtimeFlags.stickyVideo && <StickyVideoExperienceHost />}
+        {runtimeFlags.stickyVideo && <GlobalStickyVideoHost />}
         <ShareModal />
       </div>
     </div>

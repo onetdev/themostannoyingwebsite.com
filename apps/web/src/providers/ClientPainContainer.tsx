@@ -5,21 +5,21 @@ import { useTranslations } from 'next-intl';
 import { PropsWithChildren, useEffect } from 'react';
 import { useBeforeUnload } from 'react-use';
 
-import { useExperienceFlagsStore, useUserGrantsStore } from '@/kernel';
+import { usePainPreferencesStore, useUserGrantsStore } from '@/kernel';
 import {
-  PageTitleExperienceHost,
+  PageTitleHost,
   useDisableContextMenu,
   useDisableNavigationPop,
 } from '@/modules/browser-core';
 import { useAdblockerDetector } from '@/modules/gift';
-import { NewsletterModalExperienceHost } from '@/modules/newsletter';
-import { NotificationPermissionExperienceHost } from '@/modules/notification';
+import { NewsletterModalHost } from '@/modules/newsletter';
+import { NotificationPermissionHost } from '@/modules/notification';
 
-export function ClientExperienceContainer({ children }: PropsWithChildren) {
+export function ClientPainContainer({ children }: PropsWithChildren) {
   const t = useTranslations();
-  const exitPrompt = useExperienceFlagsStore((state) => state.exitPrompt);
-  const clipboardMarker = useExperienceFlagsStore(
-    (state) => state.clipboardMarker,
+  const exitPrompt = usePainPreferencesStore((state) => state.flags.exitPrompt);
+  const clipboardMarker = usePainPreferencesStore(
+    (state) => state.flags.clipboardMarker,
   );
 
   const syncPermissions = useUserGrantsStore((state) => state.syncPermissions);
@@ -39,9 +39,9 @@ export function ClientExperienceContainer({ children }: PropsWithChildren) {
 
   return (
     <>
-      <PageTitleExperienceHost />
-      <NewsletterModalExperienceHost />
-      <NotificationPermissionExperienceHost />
+      <PageTitleHost />
+      <NewsletterModalHost />
+      <NotificationPermissionHost />
       <CopyMarker enabled={clipboardMarker} text={copyMarkerText}>
         {children}
       </CopyMarker>

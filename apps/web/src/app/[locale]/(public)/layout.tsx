@@ -5,7 +5,7 @@ import { notFound } from 'next/navigation';
 import { hasLocale, NextIntlClientProvider } from 'next-intl';
 import { getLangDir } from 'rtl-detect';
 
-import { ExperienceDecoratorLayout } from '@/components/ExperienceDecoratorLayout';
+import { PainDecoratorLayout } from '@/components/PainDecoratorLayout';
 import { routing } from '@/i18n/routing';
 import { getAppConfigService } from '@/kernel';
 import { BeggarBanner } from '@/modules/donation';
@@ -44,11 +44,11 @@ async function LocalePublicRootLayout({
           <RootProviderContainer appConfig={config}>
             <ClientObservers />
             <BeggarBanner />
-            <ExperienceDecoratorLayout className="font-primary">
+            <PainDecoratorLayout className="font-primary">
               {/* Please add AppHeader in your pages to have SSG/ISR/SSG support while also being able to select the active navigation item */}
               <Analytics />
               {children}
-            </ExperienceDecoratorLayout>
+            </PainDecoratorLayout>
           </RootProviderContainer>
         </NextIntlClientProvider>
       </body>

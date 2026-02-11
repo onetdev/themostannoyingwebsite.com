@@ -6,15 +6,21 @@ import { ArrayPagedTitle } from './components/ArrayPagedTitle';
 import { GlitchyTitle } from './components/GlitchyTitle';
 import { MarqueeTitle } from './components/MarqueeTitle';
 
-import { useExperienceFlagsStore, useRuntimeStore } from '@/kernel';
+import { usePainPreferencesStore, useRuntimeStore } from '@/kernel';
 
 /**
- * Experience of manipulating the page title. Unfortunatelly the refresh rate
+ * Pain point of manipulating the page title. Unfortunatelly the refresh rate
  * is quite low and the title is not updated as frequently as I would like.
  */
-export function PageTitleExperienceHost() {
-  const pageTitleExperience = useExperienceFlagsStore(
-    (state) => state.pageTitle,
+export function PageTitleHost() {
+  const inactiveMarquee = usePainPreferencesStore(
+    (state) => state.flags['pageTitle.inactiveMarquee'],
+  );
+  const randomGlitch = usePainPreferencesStore(
+    (state) => state.flags['pageTitle.randomGlitch'],
+  );
+  const inactiveArrayPaged = usePainPreferencesStore(
+    (state) => state.flags['pageTitle.inactiveArrayPaged'],
   );
   const isVisible = useRuntimeStore((state) => state.document.isVisible);
   const hasInteracted = useRuntimeStore((state) => state.interactionUnlocked);
@@ -31,16 +37,14 @@ export function PageTitleExperienceHost() {
 
   return (
     <>
-      {pageTitleExperience.inactiveMarquee && marqueeVariants.length > 0 && (
+      {inactiveMarquee && marqueeVariants.length > 0 && (
         <MarqueeTitle
           enabled={hasInteracted && !isVisible}
           text={marqueeVariants[0]}
         />
       )}
-      {pageTitleExperience.randomGlitch && (
-        <GlitchyTitle enabled={hasInteracted && isVisible} />
-      )}
-      {pageTitleExperience.inactiveArrayPaged && (
+      {randomGlitch && <GlitchyTitle enabled={hasInteracted && isVisible} />}
+      {inactiveArrayPaged && (
         <ArrayPagedTitle
           enabled={hasInteracted && !isVisible}
           texts={arrayPagedVariants}

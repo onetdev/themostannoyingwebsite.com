@@ -8,7 +8,10 @@ import i18nConfig from '@/root/i18n.config';
 
 const config = getAppConfigService().getDeploymentMeta();
 
-const genLangAlternates = (path: string, currentLocale: string): Languages<string> => {
+const genLangAlternates = (
+  path: string,
+  currentLocale: string,
+): Languages<string> => {
   const items = i18nConfig.locales
     .filter((lang) => lang !== currentLocale)
     .map((lang) => {
@@ -19,7 +22,10 @@ const genLangAlternates = (path: string, currentLocale: string): Languages<strin
   return Object.fromEntries(items);
 };
 
-const commonPageMeta = (path: string, locale: string): MetadataRoute.Sitemap[0] => {
+const commonPageMeta = (
+  path: string,
+  locale: string,
+): MetadataRoute.Sitemap[0] => {
   const normalizedPath = path ? `/${path}` : '';
 
   return {
@@ -64,7 +70,7 @@ async function sitemap(): Promise<MetadataRoute.Sitemap> {
   ];
 
   const commonPagesEntries = i18nConfig.locales.flatMap((locale) =>
-    commonPages.map((path) => commonPageMeta(path, locale))
+    commonPages.map((path) => commonPageMeta(path, locale)),
   );
 
   return [...commonPagesEntries, ...articles];

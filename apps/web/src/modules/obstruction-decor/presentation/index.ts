@@ -1,2 +1,2 @@
 export * from './DeadPixelHost';
-export * from './StickyVideoExperienceHost';
+export * from './GlobalStickyVideoHost';

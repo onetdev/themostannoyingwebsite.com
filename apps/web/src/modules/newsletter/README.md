@@ -1,6 +1,6 @@
 # Newsletter Module
 
-Newsletter subscription modal with dynamic confirmation buttons and annoying UX patterns.
+Newsletter subscription modal with dynamic confirmation buttons and annoying pain point patterns.
 
 ## Features
 
@@ -12,16 +12,16 @@ Newsletter subscription modal with dynamic confirmation buttons and annoying UX 
 
 ## Components
 
-- **`NewsletterModalExperienceHost`** - Main experience host that manages triggers
+- **`NewsletterModalHost`** - Main pain point host that manages triggers
 - **`NewsletterModal`** - The modal component itself with dynamic behavior
 
 ## Usage
 
 ```typescript
-// Use the experience host (recommended)
-import { NewsletterModalExperienceHost } from '@/modules/newsletter';
+// Use the pain point host (recommended)
+import { NewsletterModalHost } from '@/modules/newsletter';
 
-<NewsletterModalExperienceHost scrollDistanceTrigger={450} />
+<NewsletterModalHost scrollDistanceTrigger={450} />
 
 // Use modal directly
 import { NewsletterModal } from '@/modules/newsletter';
@@ -52,6 +52,6 @@ function CustomForm() {
 
 - **Scroll Distance**: Default 450px, configurable via prop
 - **Confirmation Messages**: Defined in translation files under `newsletter.modal.confirmations`
-- **Experience Flag**: Can be toggled via `newsletterModal` experience flag
+- **Pain Point Flag**: Can be toggled via `newsletterModal` pain point flag
 
 The modal submission currently shows an alert but can be extended to actually submit to a newsletter service.

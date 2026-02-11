@@ -1,30 +1,23 @@
 import { Icon } from '@maw/ui-lib';
 import { getTranslations } from 'next-intl/server';
+import { ComponentProps } from 'react';
 
 import { AppDarkModeToggle } from './AppDarkModeToggle';
-import { ArticleMarquee } from './ArticleMarquee';
-import SearchForm from './SearchForm';
+import { PainLevelSelector } from './PainLevelSelector';
+import { SearchForm } from './SearchForm';
 import { SiteDesktopNavigation } from './SiteDesktopNavigation';
 import { ActiveNavigationItem } from './types';
 import { UserNavigation } from './UserNavigation';
 
 import { Link } from '@/i18n/navigation';
-import { AppArticleService } from '@/modules/content';
 
 type AppHeaderProps = {
   activeItem?: ActiveNavigationItem;
-  className?: JSXProxyProps<'header'>['className'];
+  className?: ComponentProps<'header'>['className'];
 };
 
 export async function AppHeader({ activeItem, className }: AppHeaderProps) {
   const t = await getTranslations();
-
-  const marqueeItems = (
-    await AppArticleService.getMany({
-      params: { isHighlighted: true },
-      paginate: { take: 10 },
-    })
-  ).items;
 
   return (
     <header
@@ -54,10 +47,7 @@ export async function AppHeader({ activeItem, className }: AppHeaderProps) {
       </div>
       <SiteDesktopNavigation activeItem={activeItem} className="" />
       <UserNavigation activeItem={activeItem} className="col-span-1" />
-      <ArticleMarquee
-        items={marqueeItems}
-        className="bg-surface-alt col-span-2 -mx-5 xl:-mx-8"
-      />
+      <PainLevelSelector className="bg-surface-alt col-span-2 -mx-5 mt-2 xl:-mx-8" />
     </header>
   );
 }

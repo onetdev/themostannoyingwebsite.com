@@ -9,23 +9,23 @@ Visual obstructions and annoying decorative elements that interfere with normal 
 - Appears as a small, permanently visible dot that users might mistake for a monitor issue
 
 ### Sticky Video
-- **`StickyVideoExperienceHost`** - Sticky video element that follows scroll
+- **`GlobalStickyVideoHost`** - Sticky video element that follows scroll
 - Obstructs content while scrolling through the page
 
 ## Usage
 
 ```typescript
-// Use in layout or experience decorator
-import { DeadPixelHost, StickyVideoExperienceHost } from '@/modules/obstruction-decor';
+// Use in layout or pain point decorator
+import { DeadPixelHost, GlobalStickyVideoHost } from '@/modules/obstruction-decor';
 
 function Layout() {
-  const deadPixel = useExperienceFlagsStore(state => state.deadPixel);
-  const stickyVideo = useExperienceFlagsStore(state => state.stickyVideo);
+  const deadPixel = usePainPreferencesStore(state => state.deadPixel);
+  const stickyVideo = usePainPreferencesStore(state => state.stickyVideo);
 
   return (
     <div>
       {deadPixel && <DeadPixelHost />}
-      {stickyVideo && <StickyVideoExperienceHost />}
+      {stickyVideo && <GlobalStickyVideoHost />}
       {children}
     </div>
   );
@@ -34,7 +34,7 @@ function Layout() {
 
 ## Configuration
 
-Both components are controlled by experience flags:
+Both components are controlled by pain point flags:
 - `deadPixel` - Enables/disables the dead pixel
 - `stickyVideo` - Enables/disables the sticky video
 
@@ -42,4 +42,4 @@ These flags can be toggled through the settings UI to control the level of annoy
 
 ## Purpose
 
-These components are intentionally designed to frustrate users as part of "the most annoying website" experience. They provide visual interference without blocking actual functionality.
+These components are intentionally designed to frustrate users as part of "the most annoying website" pain points. They provide visual interference without blocking actual functionality.

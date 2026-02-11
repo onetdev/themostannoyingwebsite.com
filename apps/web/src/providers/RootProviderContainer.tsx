@@ -7,7 +7,7 @@ import { ClientNavigationConfigurator } from './ClientNavigationConfigurator';
 import { DependencyProvider } from './DependencyProvider';
 
 import { AppConfig, AppConfigProvider } from '@/kernel';
-import { ClientExperienceContainer } from '@/providers/ClientExperienceContainer';
+import { ClientPainContainer } from '@/providers/ClientPainContainer';
 import { ClientRootPortalProvider } from '@/providers/ClientRootPortalProvider';
 
 export type RootProviderContainerProps = PropsWithChildren<{
@@ -24,7 +24,7 @@ export function RootProviderContainer({
         <DependencyProvider>
           <ThemeProvider defaultTheme="dark" enableColorScheme enableSystem>
             <ClientNavigationConfigurator>
-              <ClientExperienceContainer>{children}</ClientExperienceContainer>
+              <ClientPainContainer>{children}</ClientPainContainer>
             </ClientNavigationConfigurator>
           </ThemeProvider>
         </DependencyProvider>

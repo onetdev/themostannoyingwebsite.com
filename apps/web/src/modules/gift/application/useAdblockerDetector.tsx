@@ -3,7 +3,7 @@
 import { useEffect, useState } from 'react';
 
 import {
-  useExperienceFlagsStore,
+  usePainPreferencesStore,
   useRuntimeStore,
   useUserGrantsStore,
 } from '@/kernel';
@@ -34,8 +34,8 @@ export const useAdblockerDetector = () => {
     (state) => state.setAdblockerSuspected,
   );
   const ppReviewed = useUserGrantsStore((state) => state.reviewCompleted);
-  const enabled = useExperienceFlagsStore(
-    (state) => state.gifts.detectAdblocker,
+  const enabled = usePainPreferencesStore(
+    (state) => state.flags['gifts.detectAdblocker'],
   );
 
   useEffect(() => {

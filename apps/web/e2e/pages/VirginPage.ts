@@ -11,8 +11,8 @@ export const getVirginPage = (page: Page) => {
     ...header,
     ...footer,
 
-    headline: page.getByRole('heading', { name: 'Disable all experiences' }),
-    description: page.getByText('All experiences are disabled now'),
+    headline: page.getByRole('heading', { name: 'Disable all pain points' }),
+    description: page.getByText('All pain points are disabled now'),
 
     goto: async () => {
       await page.goto('/en/virgin');

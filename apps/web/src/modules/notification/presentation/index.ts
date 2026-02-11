@@ -1,1 +1,1 @@
-export * from './NotificationPermissionExperienceHost';
+export * from './NotificationPermissionHost';
