@@ -47,7 +47,7 @@ export async function AppHeader({ activeItem, className }: AppHeaderProps) {
       </div>
       <SiteDesktopNavigation activeItem={activeItem} className="" />
       <UserNavigation activeItem={activeItem} className="col-span-1" />
-      <PainLevelSelector className="bg-surface-alt col-span-2 -mx-5 xl:-mx-8" />
+      <PainLevelSelector className="bg-surface-alt col-span-2 -mx-5 mt-2 xl:-mx-8" />
     </header>
   );
 }
