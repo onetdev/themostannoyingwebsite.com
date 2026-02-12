@@ -1,12 +1,20 @@
 'use client';
 
-import { IconAliaseKey, IconCollapsibleMenu } from '@maw/ui-lib';
+import {
+  Icon,
+  IconAliaseKey,
+  NavigationMenu,
+  NavigationMenuItem,
+  NavigationMenuLink,
+  NavigationMenuList,
+} from '@maw/ui-lib';
+import { cn } from '@maw/ui-lib/utils';
 import { useTranslations } from 'next-intl';
-import { PropsWithChildren, useMemo } from 'react';
+import { useMemo } from 'react';
 
 import { ActiveNavigationItem } from './types';
 
-import { Link } from '@/i18n/navigation';
+import { Link, usePathname } from '@/i18n/navigation';
 import { useRuntimeStore } from '@/kernel';
 
 export type UserNavigationProps = {
@@ -22,35 +30,9 @@ type NavItem = {
   onClick?: () => void;
 };
 
-const NavLink = ({
-  path,
-  onClick,
-  children,
-  ...rest
-}: PropsWithChildren<NavItem>) => {
-  if (path === '#') {
-    return (
-      <button
-        onClick={onClick}
-        className="text-primary animate-hue-full-rotate cursor-pointer">
-        {children}
-      </button>
-    );
-  }
-
-  return (
-    <Link
-      href={path}
-      prefetch={false}
-      className="link-as-inherit hover-text-primary"
-      {...rest}>
-      {children}
-    </Link>
-  );
-};
-
-export function UserNavigation({ className, activeItem }: UserNavigationProps) {
+export function UserNavigation({ className }: UserNavigationProps) {
   const t = useTranslations();
+  const pathname = usePathname();
   const { showShareModal } = useRuntimeStore();
 
   const items: NavItem[] = useMemo(
@@ -79,14 +61,43 @@ export function UserNavigation({ className, activeItem }: UserNavigationProps) {
   );
 
   return (
-    <IconCollapsibleMenu
-      className={className}
-      activeItem={activeItem}
-      id="navigation-user"
-      items={items}
-      IteratorComponent={NavLink}
-    />
+    <NavigationMenu
+      className={cn('hidden max-w-full justify-end md:flex', className)}
+      id="navigation-user">
+      <NavigationMenuList className="justify-end">
+        {items.map((item) => {
+          const isActive = pathname === item.path;
+
+          if (item.path === '#') {
+            return (
+              <NavigationMenuItem key={item.key}>
+                <NavigationMenuLink
+                  asChild
+                  className="cursor-pointer flex-row items-center gap-2"
+                  onClick={item.onClick}>
+                  <button>
+                    <Icon icon={item.icon} />
+                    <span className="hidden lg:inline">{item.label}</span>
+                  </button>
+                </NavigationMenuLink>
+              </NavigationMenuItem>
+            );
+          }
+
+          return (
+            <NavigationMenuItem key={item.key}>
+              <Link href={item.path} passHref>
+                <NavigationMenuLink
+                  active={isActive}
+                  className="flex-row items-center gap-2">
+                  <Icon icon={item.icon} />
+                  <span className="hidden lg:inline">{item.label}</span>
+                </NavigationMenuLink>
+              </Link>
+            </NavigationMenuItem>
+          );
+        })}
+      </NavigationMenuList>
+    </NavigationMenu>
   );
 }
-
-export default UserNavigation;

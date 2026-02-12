@@ -5,5 +5,7 @@ export * from './Dialog';
 export * from './EscapingElement';
 export * from './Field';
 export * from './IconCollapseMenu';
+export * from './NavigationMenu';
 export * from './RadioGroup';
 export * from './ShareModal';
+export * from './Sheet';
