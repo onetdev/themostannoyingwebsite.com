@@ -1,6 +1,7 @@
 'use client';
 
 import { BorderedBox, Button, TextInput } from '@maw/ui-lib';
+import { useTranslations } from 'next-intl';
 import { QRCodeSVG } from 'qrcode.react';
 import { useState } from 'react';
 
@@ -11,6 +12,7 @@ type CryptoWalletProps = {
 };
 
 export function CryptoWallet({ title, address, network }: CryptoWalletProps) {
+  const t = useTranslations();
   const [copied, setCopied] = useState(false);
 
   const handleCopy = async () => {
@@ -22,7 +24,11 @@ export function CryptoWallet({ title, address, network }: CryptoWalletProps) {
   return (
     <BorderedBox>
       <h3>{title}</h3>
-      {network && <p className="opacity-75">Network: {network}</p>}
+      {network && (
+        <p className="opacity-75">
+          {t('app.donate.crypto.network', { network })}
+        </p>
+      )}
 
       <div className="mb-4 flex justify-center rounded bg-white p-4">
         <QRCodeSVG value={address} size={200} level="H" />
@@ -31,7 +37,9 @@ export function CryptoWallet({ title, address, network }: CryptoWalletProps) {
       <TextInput value={address} readOnly />
 
       <Button onClick={handleCopy} className="w-full">
-        {copied ? 'Copied!' : 'Copy Address'}
+        {copied
+          ? t('app.donate.crypto.copyFeedback')
+          : t('app.donate.crypto.copyAction')}
       </Button>
     </BorderedBox>
   );

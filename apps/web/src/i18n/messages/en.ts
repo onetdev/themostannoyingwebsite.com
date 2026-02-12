@@ -36,6 +36,11 @@ export default {
       disclaimer: 'Disclaimer',
       disclaimerDetails:
         'This project is developed by a private individual based in Hungary. Any financial support or donation— including crypto—is voluntary, final, and does not grant you any rights, services, or special access. Donations are not tax-deductible.<br></br><br></br>No legal, tax, or financial advice is provided. If you have questions about donating or your own tax obligations, please consult a qualified professional in your jurisdiction.<br></br><br></br>All funds received are handled in accordance with applicable Hungarian tax laws.',
+      crypto: {
+        network: 'Network: {network}',
+        copyAction: 'Copy Address',
+        copyFeedback: 'Copied!',
+      },
     },
     exitPrompt:
       "I'd reconsider leaving before some bad things happend to you. Are you sure?",
