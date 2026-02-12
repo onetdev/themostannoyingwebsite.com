@@ -25,7 +25,9 @@ export function PainPreferences({
       className={className}
       data-testid="pain-preferences">
       <div className={listClassName}>
-        <SettingsField label={t('settings.optionalPainPoints.gifts.flaps')}>
+        <SettingsField
+          label={t('settings.optionalPainPoints.gifts.flaps')}
+          info={t('settings.optionalPainPointsHints.gifts.flaps')}>
           <FormCheckbox
             name="gift_flaps"
             checked={painPreferences.flags['gifts.flaps']}
@@ -35,7 +37,8 @@ export function PainPreferences({
           />
         </SettingsField>
         <SettingsField
-          label={t('settings.optionalPainPoints.gifts.detectAdblocker')}>
+          label={t('settings.optionalPainPoints.gifts.detectAdblocker')}
+          info={t('settings.optionalPainPointsHints.gifts.detectAdblocker')}>
           <FormCheckbox
             name="detect_adblocker"
             checked={painPreferences.flags['gifts.detectAdblocker']}
@@ -44,7 +47,9 @@ export function PainPreferences({
             }
           />
         </SettingsField>
-        <SettingsField label={t('settings.optionalPainPoints.gifts.oneByOne')}>
+        <SettingsField
+          label={t('settings.optionalPainPoints.gifts.oneByOne')}
+          info={t('settings.optionalPainPointsHints.gifts.oneByOne')}>
           <FormCheckbox
             name="one_by_one"
             checked={painPreferences.flags['gifts.oneByOne']}
@@ -53,7 +58,9 @@ export function PainPreferences({
             }
           />
         </SettingsField>
-        <SettingsField label={t('settings.optionalPainPoints.clipboardMarker')}>
+        <SettingsField
+          label={t('settings.optionalPainPoints.clipboardMarker')}
+          info={t('settings.optionalPainPointsHints.clipboardMarker')}>
           <FormCheckbox
             name="clipboard_marker"
             checked={painPreferences.flags.clipboardMarker}
@@ -62,7 +69,9 @@ export function PainPreferences({
             }
           />
         </SettingsField>
-        <SettingsField label={t('settings.optionalPainPoints.contentPaywall')}>
+        <SettingsField
+          label={t('settings.optionalPainPoints.contentPaywall')}
+          info={t('settings.optionalPainPointsHints.contentPaywall')}>
           <FormCheckbox
             name="content_paywall"
             checked={painPreferences.flags.contentPaywall}
@@ -71,7 +80,9 @@ export function PainPreferences({
             }
           />
         </SettingsField>
-        <SettingsField label={t('settings.optionalPainPoints.deadPixel')}>
+        <SettingsField
+          label={t('settings.optionalPainPoints.deadPixel')}
+          info={t('settings.optionalPainPointsHints.deadPixel')}>
           <FormCheckbox
             name="dead_pixel"
             checked={painPreferences.flags.deadPixel}
@@ -81,7 +92,8 @@ export function PainPreferences({
           />
         </SettingsField>
         <SettingsField
-          label={t('settings.optionalPainPoints.disableContextMenu')}>
+          label={t('settings.optionalPainPoints.disableContextMenu')}
+          info={t('settings.optionalPainPointsHints.disableContextMenu')}>
           <FormCheckbox
             name="disable_context"
             checked={painPreferences.flags.disableContextMenu}
@@ -90,7 +102,9 @@ export function PainPreferences({
             }
           />
         </SettingsField>
-        <SettingsField label={t('settings.optionalPainPoints.exitPrompt')}>
+        <SettingsField
+          label={t('settings.optionalPainPoints.exitPrompt')}
+          info={t('settings.optionalPainPointsHints.exitPrompt')}>
           <FormCheckbox
             name="exit_prompt"
             checked={painPreferences.flags.exitPrompt}
@@ -99,7 +113,9 @@ export function PainPreferences({
             }
           />
         </SettingsField>
-        <SettingsField label={t('settings.optionalPainPoints.historySpam')}>
+        <SettingsField
+          label={t('settings.optionalPainPoints.historySpam')}
+          info={t('settings.optionalPainPointsHints.historySpam')}>
           <FormCheckbox
             name="history_spam"
             checked={painPreferences.flags.historySpam}
@@ -108,7 +124,9 @@ export function PainPreferences({
             }
           />
         </SettingsField>
-        <SettingsField label={t('settings.optionalPainPoints.mockChat')}>
+        <SettingsField
+          label={t('settings.optionalPainPoints.mockChat')}
+          info={t('settings.optionalPainPointsHints.mockChat')}>
           <FormCheckbox
             name="mock_chat"
             checked={painPreferences.flags.mockChat}
@@ -117,7 +135,9 @@ export function PainPreferences({
             }
           />
         </SettingsField>
-        <SettingsField label={t('settings.optionalPainPoints.newsletterModal')}>
+        <SettingsField
+          label={t('settings.optionalPainPoints.newsletterModal')}
+          info={t('settings.optionalPainPointsHints.newsletterModal')}>
           <FormCheckbox
             name="newsletter"
             checked={painPreferences.flags.newsletterModal}
@@ -126,7 +146,9 @@ export function PainPreferences({
             }
           />
         </SettingsField>
-        <SettingsField label={t('settings.optionalPainPoints.notifications')}>
+        <SettingsField
+          label={t('settings.optionalPainPoints.notifications')}
+          info={t('settings.optionalPainPointsHints.notifications')}>
           <FormCheckbox
             name="notifications"
             checked={painPreferences.flags.notifications}
@@ -136,7 +158,10 @@ export function PainPreferences({
           />
         </SettingsField>
         <SettingsField
-          label={t('settings.optionalPainPoints.pageTitleInactiveArrayPaged')}>
+          label={t('settings.optionalPainPoints.pageTitleInactiveArrayPaged')}
+          info={t(
+            'settings.optionalPainPointsHints.pageTitleInactiveArrayPaged',
+          )}>
           <FormCheckbox
             name="page_title_inactive_array_paged"
             checked={painPreferences.flags['pageTitle.inactiveArrayPaged']}
@@ -145,7 +170,9 @@ export function PainPreferences({
             }
           />
         </SettingsField>
-        <SettingsField label={t('settings.optionalPainPoints.searchDelay')}>
+        <SettingsField
+          label={t('settings.optionalPainPoints.searchDelay')}
+          info={t('settings.optionalPainPointsHints.searchDelay')}>
           <FormCheckbox
             name="search_delay"
             checked={painPreferences.flags.searchDelay}
@@ -154,7 +181,9 @@ export function PainPreferences({
             }
           />
         </SettingsField>
-        <SettingsField label={t('settings.optionalPainPoints.stickyVideo')}>
+        <SettingsField
+          label={t('settings.optionalPainPoints.stickyVideo')}
+          info={t('settings.optionalPainPointsHints.stickyVideo')}>
           <FormCheckbox
             name="sticky_video"
             checked={painPreferences.flags.stickyVideo}
@@ -163,7 +192,9 @@ export function PainPreferences({
             }
           />
         </SettingsField>
-        <SettingsField label={t('settings.optionalPainPoints.wheelOfFortune')}>
+        <SettingsField
+          label={t('settings.optionalPainPoints.wheelOfFortune')}
+          info={t('settings.optionalPainPointsHints.wheelOfFortune')}>
           <FormCheckbox
             name="wheel_of_fortune"
             checked={painPreferences.flags.wheelOfFortune}

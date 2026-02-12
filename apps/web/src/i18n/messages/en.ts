@@ -379,6 +379,39 @@ export default {
       wheelOfFortune: 'Wheel of fortune',
       stickyVideo: 'Sticky video',
     },
+    optionalPainPointsHints: {
+      gifts: {
+        detectAdblocker:
+          'Shows a large red banner if an adblocker is detected.',
+        flaps:
+          'Shows ad flaps on the sides of the page that can be clicked and leads to different pages.',
+        oneByOne: 'Mainly covered an animated advertisement on the home page.',
+      },
+      clipboardMarker:
+        'Adds a "Read more at..." link when you copy text from the website.',
+      contentPaywall:
+        'Shows a fake paywall overlay on some content, you can still reveal the content.',
+      deadPixel: 'Places a few fake "dead" pixels on your screen to annoy you.',
+      disableContextMenu:
+        'Prevents you from using the right-click menu and displays an alert instead.',
+      exitPrompt:
+        'Shows a "Are you sure you want to leave?" prompt when trying to close the tab or navigate away.',
+      historySpam:
+        "Fills your browser history with fake entries so you can't easily go back. This can make it inconvinient to get back to search engine results.",
+      mockChat:
+        'Shows an annoying "human" chat bubble that only messages you when you close it and it constantly displays "agent is writing" in the meantime.',
+      newsletterModal:
+        'Periodically shows a newsletter subscription modal, especially when page comes back from inactivity (switching tabs).',
+      notifications:
+        'Asks for notification permissions and shows fake notifications.',
+      pageTitleInactiveArrayPaged:
+        'Changes the tab title to something attention-grabbing when the tab is inactive.',
+      searchDelay: 'Adds a fake, long loading delay to all searches.',
+      wheelOfFortune:
+        'Shows a fake "Wheel of Fortune" modal that gives you absolute useless prizes.',
+      stickyVideo:
+        'Shows a sticky video player that follows you as you scroll.',
+    },
     mandatoryExperienceFlags: {
       title: 'Mandatory experience',
       impossibleLogin: 'Impossible login',
