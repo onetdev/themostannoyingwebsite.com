@@ -1,4 +1,4 @@
-import { CompactFormRow, RadioButton } from '@maw/ui-lib';
+import { RadioButton } from '@maw/ui-lib';
 
 export type QuestionProps = {
   data: {
@@ -13,14 +13,15 @@ export function Question({ data, selectOption }: QuestionProps) {
     <>
       <h3 className="my-3">{data.text}</h3>
       {data.options.map((option, index) => (
-        <CompactFormRow key={`${index}-${option}`} label={option}>
+        <div key={`${index}-${option}`}>
+          <label>{option}</label>
           <RadioButton
             value={index}
             name="flaim-survey"
             onChange={() => selectOption(index)}
             data-testid={`flaim-survey-option-${index}`}
           />
-        </CompactFormRow>
+        </div>
       ))}
     </>
   );

@@ -76,9 +76,8 @@ export function NewsletterModal({
             <p className="mb-4">{t('newsletter.modal.description')}</p>
             <Input
               placeholder={t('newsletter.modal.placeholder')}
-              size="lg"
               type="email"
-              className="w-full"
+              className="h-14 w-full text-lg!"
               required
               {...register('email')}
             />

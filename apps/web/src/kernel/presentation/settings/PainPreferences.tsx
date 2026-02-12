@@ -1,12 +1,9 @@
 'use client';
 
-import {
-  BorderedBox,
-  Button,
-  CompactFormRow,
-  Checkbox as FormCheckbox,
-} from '@maw/ui-lib';
+import { BorderedBox, Button, Checkbox as FormCheckbox } from '@maw/ui-lib';
 import { useTranslations } from 'next-intl';
+
+import { SettingsField } from './SettingsField';
 
 import { usePainPreferencesStore } from '@/kernel';
 
@@ -28,7 +25,7 @@ export function PainPreferences({
       className={className}
       data-testid="pain-preferences">
       <div className={listClassName}>
-        <CompactFormRow label={t('settings.optionalPainPoints.gifts.flaps')}>
+        <SettingsField label={t('settings.optionalPainPoints.gifts.flaps')}>
           <FormCheckbox
             name="gift_flaps"
             checked={painPreferences.flags['gifts.flaps']}
@@ -36,8 +33,8 @@ export function PainPreferences({
               painPreferences.setFlag('gifts.flaps', value)
             }
           />
-        </CompactFormRow>
-        <CompactFormRow
+        </SettingsField>
+        <SettingsField
           label={t('settings.optionalPainPoints.gifts.detectAdblocker')}>
           <FormCheckbox
             name="detect_adblocker"
@@ -46,8 +43,8 @@ export function PainPreferences({
               painPreferences.setFlag('gifts.detectAdblocker', value)
             }
           />
-        </CompactFormRow>
-        <CompactFormRow label={t('settings.optionalPainPoints.gifts.oneByOne')}>
+        </SettingsField>
+        <SettingsField label={t('settings.optionalPainPoints.gifts.oneByOne')}>
           <FormCheckbox
             name="one_by_one"
             checked={painPreferences.flags['gifts.oneByOne']}
@@ -55,9 +52,8 @@ export function PainPreferences({
               painPreferences.setFlag('gifts.oneByOne', value)
             }
           />
-        </CompactFormRow>
-        <CompactFormRow
-          label={t('settings.optionalPainPoints.clipboardMarker')}>
+        </SettingsField>
+        <SettingsField label={t('settings.optionalPainPoints.clipboardMarker')}>
           <FormCheckbox
             name="clipboard_marker"
             checked={painPreferences.flags.clipboardMarker}
@@ -65,8 +61,8 @@ export function PainPreferences({
               painPreferences.setFlag('clipboardMarker', value)
             }
           />
-        </CompactFormRow>
-        <CompactFormRow label={t('settings.optionalPainPoints.contentPaywall')}>
+        </SettingsField>
+        <SettingsField label={t('settings.optionalPainPoints.contentPaywall')}>
           <FormCheckbox
             name="content_paywall"
             checked={painPreferences.flags.contentPaywall}
@@ -74,8 +70,8 @@ export function PainPreferences({
               painPreferences.setFlag('contentPaywall', value)
             }
           />
-        </CompactFormRow>
-        <CompactFormRow label={t('settings.optionalPainPoints.deadPixel')}>
+        </SettingsField>
+        <SettingsField label={t('settings.optionalPainPoints.deadPixel')}>
           <FormCheckbox
             name="dead_pixel"
             checked={painPreferences.flags.deadPixel}
@@ -83,8 +79,8 @@ export function PainPreferences({
               painPreferences.setFlag('deadPixel', value)
             }
           />
-        </CompactFormRow>
-        <CompactFormRow
+        </SettingsField>
+        <SettingsField
           label={t('settings.optionalPainPoints.disableContextMenu')}>
           <FormCheckbox
             name="disable_context"
@@ -93,8 +89,8 @@ export function PainPreferences({
               painPreferences.setFlag('disableContextMenu', value)
             }
           />
-        </CompactFormRow>
-        <CompactFormRow label={t('settings.optionalPainPoints.exitPrompt')}>
+        </SettingsField>
+        <SettingsField label={t('settings.optionalPainPoints.exitPrompt')}>
           <FormCheckbox
             name="exit_prompt"
             checked={painPreferences.flags.exitPrompt}
@@ -102,8 +98,8 @@ export function PainPreferences({
               painPreferences.setFlag('exitPrompt', value)
             }
           />
-        </CompactFormRow>
-        <CompactFormRow label={t('settings.optionalPainPoints.historySpam')}>
+        </SettingsField>
+        <SettingsField label={t('settings.optionalPainPoints.historySpam')}>
           <FormCheckbox
             name="history_spam"
             checked={painPreferences.flags.historySpam}
@@ -111,8 +107,8 @@ export function PainPreferences({
               painPreferences.setFlag('historySpam', value)
             }
           />
-        </CompactFormRow>
-        <CompactFormRow label={t('settings.optionalPainPoints.mockChat')}>
+        </SettingsField>
+        <SettingsField label={t('settings.optionalPainPoints.mockChat')}>
           <FormCheckbox
             name="mock_chat"
             checked={painPreferences.flags.mockChat}
@@ -120,9 +116,8 @@ export function PainPreferences({
               painPreferences.setFlag('mockChat', value)
             }
           />
-        </CompactFormRow>
-        <CompactFormRow
-          label={t('settings.optionalPainPoints.newsletterModal')}>
+        </SettingsField>
+        <SettingsField label={t('settings.optionalPainPoints.newsletterModal')}>
           <FormCheckbox
             name="newsletter"
             checked={painPreferences.flags.newsletterModal}
@@ -130,8 +125,8 @@ export function PainPreferences({
               painPreferences.setFlag('newsletterModal', value)
             }
           />
-        </CompactFormRow>
-        <CompactFormRow label={t('settings.optionalPainPoints.notifications')}>
+        </SettingsField>
+        <SettingsField label={t('settings.optionalPainPoints.notifications')}>
           <FormCheckbox
             name="notifications"
             checked={painPreferences.flags.notifications}
@@ -139,8 +134,8 @@ export function PainPreferences({
               painPreferences.setFlag('notifications', value)
             }
           />
-        </CompactFormRow>
-        <CompactFormRow
+        </SettingsField>
+        <SettingsField
           label={t('settings.optionalPainPoints.pageTitleInactiveArrayPaged')}>
           <FormCheckbox
             name="page_title_inactive_array_paged"
@@ -149,8 +144,8 @@ export function PainPreferences({
               painPreferences.setFlag('pageTitle.inactiveArrayPaged', value)
             }
           />
-        </CompactFormRow>
-        <CompactFormRow label={t('settings.optionalPainPoints.searchDelay')}>
+        </SettingsField>
+        <SettingsField label={t('settings.optionalPainPoints.searchDelay')}>
           <FormCheckbox
             name="search_delay"
             checked={painPreferences.flags.searchDelay}
@@ -158,8 +153,8 @@ export function PainPreferences({
               painPreferences.setFlag('searchDelay', value)
             }
           />
-        </CompactFormRow>
-        <CompactFormRow label={t('settings.optionalPainPoints.stickyVideo')}>
+        </SettingsField>
+        <SettingsField label={t('settings.optionalPainPoints.stickyVideo')}>
           <FormCheckbox
             name="sticky_video"
             checked={painPreferences.flags.stickyVideo}
@@ -167,8 +162,8 @@ export function PainPreferences({
               painPreferences.setFlag('stickyVideo', value)
             }
           />
-        </CompactFormRow>
-        <CompactFormRow label={t('settings.optionalPainPoints.wheelOfFortune')}>
+        </SettingsField>
+        <SettingsField label={t('settings.optionalPainPoints.wheelOfFortune')}>
           <FormCheckbox
             name="wheel_of_fortune"
             checked={painPreferences.flags.wheelOfFortune}
@@ -176,7 +171,7 @@ export function PainPreferences({
               painPreferences.setFlag('wheelOfFortune', value)
             }
           />
-        </CompactFormRow>
+        </SettingsField>
       </div>
       <div className="flex gap-3">
         <Button className="mt-6" onClick={painPreferences.allEnable}>
