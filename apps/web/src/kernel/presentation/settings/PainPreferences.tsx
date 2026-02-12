@@ -179,15 +179,12 @@ export function PainPreferences({
         </CompactFormRow>
       </div>
       <div className="flex gap-3">
-        <Button
-          className="mt-6"
-          variant="primary"
-          onClick={painPreferences.allEnable}>
+        <Button className="mt-6" onClick={painPreferences.allEnable}>
           {t('common.enableAll')}
         </Button>
         <Button
           className="mt-6"
-          variant="tertiary"
+          variant="secondary"
           onClick={painPreferences.allDisable}>
           {t('common.disableAll')}
         </Button>

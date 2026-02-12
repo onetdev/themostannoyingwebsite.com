@@ -59,8 +59,7 @@ export const PartitionalLockedContent: FunctionComponent<
         data-testid="paywall-overlay-confirm"
         key="cta"
         onMouseEnter={() => setFlipActions((prev) => !prev)}
-        size="sm"
-        variant="primary">
+        size="sm">
         {t('paywall.overlay.confirm')}*
       </Button>,
       <Button
@@ -68,7 +67,7 @@ export const PartitionalLockedContent: FunctionComponent<
         data-testid="paywall-overlay-cancel"
         key="cancel"
         onClick={handleRevealClick}
-        size="md"
+        size="lg"
         variant="secondary">
         {t('paywall.overlay.cancel')}
       </Button>,

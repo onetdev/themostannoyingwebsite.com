@@ -84,7 +84,6 @@ export function LoginForm() {
           type="submit"
           className="mt-10"
           size="lg"
-          variant="primary"
           disabled={isCtaDisabled}>
           {isCtaLoading && <LoaderDots />}
           {!isCtaLoading && t('user.form.login.callToAction')}

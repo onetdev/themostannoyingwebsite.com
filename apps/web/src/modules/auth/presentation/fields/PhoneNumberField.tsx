@@ -146,7 +146,6 @@ export function PhoneNumberField({
               ref={$decrementBtn}
               type="button"
               className="rounded-none rounded-l-lg px-3 select-none"
-              variant="primary"
               size="sm"
               aria-label={t('user.field.phoneNumberDecrease')}
               onMouseDown={onDecrementClick}

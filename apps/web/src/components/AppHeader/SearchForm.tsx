@@ -55,7 +55,6 @@ export function SearchForm({
       <Button
         className="flex items-center rounded-l-none"
         aria-label={t('common.search')}
-        variant="primary"
         type="submit"
         size={size}>
         <Icon icon="search" size="sm" />

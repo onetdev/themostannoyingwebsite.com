@@ -38,7 +38,7 @@ export function MessageForm({ className, onMessage }: MessageFormProps) {
         className="flex items-center rounded-l-none"
         aria-label={t('common.send')}
         type="submit"
-        size="md">
+        size="lg">
         <Icon icon="send" />
       </Button>
     </form>

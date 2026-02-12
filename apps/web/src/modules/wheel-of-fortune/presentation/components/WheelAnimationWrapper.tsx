@@ -107,7 +107,7 @@ export function AnimatedWheel({
       </div>
       <Button
         className="border-primary bg-primary absolute top-1/2 left-1/2 z-10 -translate-x-1/2 -translate-y-1/2 rounded-full border p-5 text-2xl shadow-md md:rounded-full"
-        variant="tertiary"
+        variant="secondary"
         onClick={() => startSpin()}
         disabled={state !== 'ready'}>
         {state === 'ready' ? '🎲' : '🎉'}
