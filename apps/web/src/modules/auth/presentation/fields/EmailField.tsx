@@ -1,4 +1,10 @@
-import { FormFieldError, Input, LabelText } from '@maw/ui-lib';
+import {
+  Field,
+  FieldContent,
+  FieldError,
+  FieldLabel,
+  Input,
+} from '@maw/ui-lib';
 import { useTranslations } from 'next-intl';
 import { useFormContext } from 'react-hook-form';
 
@@ -14,9 +20,9 @@ export function EmailField({ fieldName = 'email' }: EmailFieldProps) {
   } = useFormContext();
 
   return (
-    <>
-      <label htmlFor={fieldName}>
-        <LabelText className="mb-1">{t('user.field.email')}</LabelText>
+    <Field>
+      <FieldLabel htmlFor={fieldName}>{t('user.field.email')}</FieldLabel>
+      <FieldContent>
         <Input
           type="email"
           className="w-full"
@@ -24,8 +30,8 @@ export function EmailField({ fieldName = 'email' }: EmailFieldProps) {
           aria-invalid={!!errors[fieldName]}
           {...register(fieldName)}
         />
-      </label>
-      <FormFieldError error={errors[fieldName]} />
-    </>
+        <FieldError errors={[errors[fieldName]]} />
+      </FieldContent>
+    </Field>
   );
 }

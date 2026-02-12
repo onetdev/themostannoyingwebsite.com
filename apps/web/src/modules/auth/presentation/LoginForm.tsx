@@ -4,10 +4,12 @@ import {
   Button,
   CaptchaEmojiField,
   Checkbox,
+  Field,
+  FieldContent,
+  FieldError,
+  FieldLabel,
   FormError,
-  FormFieldError,
   Input,
-  LabelText,
   LoaderDots,
   PageHeadline,
 } from '@maw/ui-lib';
@@ -54,30 +56,27 @@ export function LoginForm() {
         method="post"
         onSubmit={handleSubmit(onSubmit)}>
         <FormError error={errors.root} />
-        <div>
-          <EmailField />
-        </div>
-        <div>
-          <label>
-            <LabelText className="mb-1">{t('user.field.password')}</LabelText>
+        <EmailField />
+        <Field>
+          <FieldLabel htmlFor="password">{t('user.field.password')}</FieldLabel>
+          <FieldContent>
             <Input
+              id="password"
               type="password"
               className="w-full"
               {...register('password')}
             />
-          </label>
-          <FormFieldError error={errors.password} />
-        </div>
-        <div>
-          <label className="flex items-center gap-2">
-            <Checkbox {...register('remember')} />
-            <h4>{t('user.field.rememberMe')}</h4>
-          </label>
-          <FormFieldError error={errors.remember} />
-        </div>
-        <div className="flex flex-col">
-          <CaptchaEmojiField text={captchaFieldText} />
-        </div>
+            <FieldError errors={[errors.password]} />
+          </FieldContent>
+        </Field>
+        <Field orientation="horizontal" className="items-center gap-2">
+          <Checkbox id="remember" {...register('remember')} />
+          <FieldLabel htmlFor="remember" className="font-normal">
+            {t('user.field.rememberMe')}
+          </FieldLabel>
+          <FieldError errors={[errors.remember]} />
+        </Field>
+        <CaptchaEmojiField text={captchaFieldText} />
 
         <Button
           role="button"

@@ -2,7 +2,7 @@
 
 import { useFormContext } from 'react-hook-form';
 
-import { CaptchaEmoji, Input } from '../atoms';
+import { CaptchaTilePuzzle } from '../atoms';
 import {
   Field,
   FieldContent,
@@ -11,21 +11,23 @@ import {
   FieldLabel,
 } from '../organisms/Field';
 
-export type CaptchaEmojiFieldProps = {
+export type CaptchaTitlePuzzleFieldProps = {
   fieldName?: string;
   text: {
     label: string;
     hint: string;
+    invalid: string;
   };
 };
 
-export function CaptchaEmojiField({
+export function CaptchaTitlePuzzleField({
   fieldName = 'captcha',
   text,
-}: CaptchaEmojiFieldProps) {
+}: CaptchaTitlePuzzleFieldProps) {
   const {
     register,
     formState: { errors },
+    setValue,
   } = useFormContext();
 
   return (
@@ -33,16 +35,18 @@ export function CaptchaEmojiField({
       <FieldLabel>{text.label}</FieldLabel>
       <FieldContent>
         <FieldDescription>{text.hint}</FieldDescription>
-        <CaptchaEmoji
+        <CaptchaTilePuzzle
           className="border-on-background my-3 rounded-md border"
-          width={300}
-          height={100}
+          cols={6}
+          rows={4}
+          imageSrc="/assets/images/captcha-tile-abstract.jpg"
+          onResolved={() => setValue(fieldName, 'true')}
         />
-        <Input
-          type="text"
-          className="w-[300px]"
-          aria-label={text.label}
-          {...register(fieldName)}
+        <input
+          type="hidden"
+          {...register(fieldName, {
+            required: text.invalid,
+          })}
         />
         <FieldError errors={[errors[fieldName]]} />
       </FieldContent>

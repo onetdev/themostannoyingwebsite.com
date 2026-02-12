@@ -1,14 +1,14 @@
 'use client';
 
 import {
-  Button,
-  FormFieldError,
-  Input,
+  Field,
+  FieldContent,
+  FieldError,
+  FieldLabel,
   InputGroup,
   InputGroupAddon,
   InputGroupButton,
   InputGroupInput,
-  LabelText,
   Select,
   SelectContent,
   SelectItem,
@@ -139,9 +139,9 @@ export function PhoneNumberField({
   };
 
   return (
-    <div>
-      <label>
-        <LabelText className="mb-1">{t('user.field.phoneNumber')}</LabelText>
+    <Field>
+      <FieldLabel>{t('user.field.phoneNumber')}</FieldLabel>
+      <FieldContent>
         <div className="flex gap-3">
           <Controller
             control={control}
@@ -195,12 +195,10 @@ export function PhoneNumberField({
             </InputGroupAddon>
           </InputGroup>
         </div>
-      </label>
-      {errors[countryCodeFieldName] ? (
-        <FormFieldError error={errors[countryCodeFieldName]} />
-      ) : (
-        <FormFieldError error={errors[fieldName]} />
-      )}
-    </div>
+        <FieldError
+          errors={[errors[countryCodeFieldName], errors[fieldName]]}
+        />
+      </FieldContent>
+    </Field>
   );
 }

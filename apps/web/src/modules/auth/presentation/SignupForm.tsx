@@ -60,7 +60,7 @@ export function SignupForm() {
         method="post"
         onSubmit={handleSubmit(onSubmit)}>
         <FormError error={errors.root} />
-        <div className="flex flex-col gap-5 lg:w-1/2">
+        <div className="flex flex-col gap-4 lg:w-1/2">
           <div className="flex flex-row gap-5">
             <div className="grow">
               <FirstNameField />
@@ -69,33 +69,19 @@ export function SignupForm() {
               <LastNameField />
             </div>
           </div>
-          <div>
-            <NicknameField />
-          </div>
-          <div>
-            <UsernameField />
-          </div>
-          <div>
-            <EmailField />
-          </div>
-          <div>
-            <PasswordCreateField />
-          </div>
-          <div>
-            <PasswordConfirmationField />
-          </div>
+          <NicknameField />
+          <UsernameField />
+          <EmailField />
+          <PasswordCreateField />
+          <PasswordConfirmationField />
           <GenderField />
         </div>
         <div className="flex flex-col gap-5 lg:w-1/2">
           <DateOfBirthField />
           <PhoneNumberField />
           <CountryField />
-          <div>
-            <ConsentNewsletterField />
-          </div>
-          <div>
-            <ConsentPrivacyPolicyField />
-          </div>
+          <ConsentNewsletterField />
+          <ConsentPrivacyPolicyField />
           <CaptchaEmojiField text={captchaText} />
 
           <Button

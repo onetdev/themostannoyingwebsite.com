@@ -1,8 +1,10 @@
 'use client';
 
 import {
-  FormFieldError,
-  LabelText,
+  Field,
+  FieldContent,
+  FieldError,
+  FieldLabel,
   Select,
   SelectContent,
   SelectItem,
@@ -43,9 +45,9 @@ export function CountryField({ fieldName = 'countryCode' }: CountryFieldProps) {
   }, [kernelService]);
 
   return (
-    <div>
-      <label htmlFor={fieldName}>
-        <LabelText className="mb-1">{t('user.field.countryCode')}</LabelText>
+    <Field>
+      <FieldLabel htmlFor={fieldName}>{t('user.field.countryCode')}</FieldLabel>
+      <FieldContent>
         <Controller
           control={control}
           name={fieldName}
@@ -68,8 +70,8 @@ export function CountryField({ fieldName = 'countryCode' }: CountryFieldProps) {
             </Select>
           )}
         />
-      </label>
-      <FormFieldError error={errors[fieldName]} />
-    </div>
+        <FieldError errors={[errors[fieldName]]} />
+      </FieldContent>
+    </Field>
   );
 }

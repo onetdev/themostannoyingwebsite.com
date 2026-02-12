@@ -1,9 +1,11 @@
 'use client';
 
 import {
-  FormFieldError,
+  Field,
+  FieldContent,
+  FieldError,
+  FieldLabel,
   Input,
-  LabelText,
   PasswordStrengthBar,
 } from '@maw/ui-lib';
 import { useTranslations } from 'next-intl';
@@ -33,9 +35,9 @@ export function PasswordCreateField({
   };
 
   return (
-    <>
-      <label htmlFor={fieldName}>
-        <LabelText className="mb-1">{t('user.field.password')}</LabelText>
+    <Field>
+      <FieldLabel htmlFor={fieldName}>{t('user.field.password')}</FieldLabel>
+      <FieldContent>
         <Input
           type="password"
           className="w-full"
@@ -43,13 +45,13 @@ export function PasswordCreateField({
           aria-invalid={!!errors[fieldName]}
           {...register(fieldName)}
         />
-      </label>
-      <PasswordStrengthBar
-        className="mt-3"
-        password={password}
-        text={passwordStrengthText}
-      />
-      <FormFieldError error={errors[fieldName]} />
-    </>
+        <PasswordStrengthBar
+          className="mt-3"
+          password={password}
+          text={passwordStrengthText}
+        />
+        <FieldError errors={[errors[fieldName]]} />
+      </FieldContent>
+    </Field>
   );
 }

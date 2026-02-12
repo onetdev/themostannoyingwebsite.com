@@ -1,6 +1,12 @@
 'use client';
 
-import { FormFieldError, Input, LabelText } from '@maw/ui-lib';
+import {
+  Field,
+  FieldContent,
+  FieldError,
+  FieldLabel,
+  Input,
+} from '@maw/ui-lib';
 import { useTranslations } from 'next-intl';
 import { useFormContext } from 'react-hook-form';
 
@@ -16,9 +22,9 @@ export function NicknameField({ fieldName = 'nickname' }: NicknameFieldProps) {
   } = useFormContext();
 
   return (
-    <>
-      <label htmlFor={fieldName}>
-        <LabelText className="mb-1">{t('user.field.nickname')}</LabelText>
+    <Field>
+      <FieldLabel htmlFor={fieldName}>{t('user.field.nickname')}</FieldLabel>
+      <FieldContent>
         <Input
           type="text"
           className="w-full"
@@ -26,8 +32,8 @@ export function NicknameField({ fieldName = 'nickname' }: NicknameFieldProps) {
           aria-invalid={!!errors[fieldName]}
           {...register(fieldName)}
         />
-      </label>
-      <FormFieldError error={errors[fieldName]} />
-    </>
+        <FieldError errors={[errors[fieldName]]} />
+      </FieldContent>
+    </Field>
   );
 }

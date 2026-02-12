@@ -1,8 +1,10 @@
 'use client';
 
 import {
-  FormFieldError,
-  LabelText,
+  Field,
+  FieldContent,
+  FieldError,
+  FieldLabel,
   Select,
   SelectContent,
   SelectItem,
@@ -71,57 +73,59 @@ export function DateOfBirthField({
   }, [parts, setValue]);
 
   return (
-    <div>
-      <LabelText className="mb-1">{t('user.field.dateOfBirth')}</LabelText>
-      <div className="flex gap-3">
-        <Select onValueChange={onYearChange}>
-          <SelectTrigger
-            className="w-1/4"
-            aria-label={t('user.field.dateOfBirthYear')}
-            aria-invalid={!!errors[fieldName]}>
-            <SelectValue placeholder="" />
-          </SelectTrigger>
-          <SelectContent>
-            {dateOfBirthYear.map((option) => (
-              <SelectItem key={option.value} value={option.value.toString()}>
-                {option.label}
-              </SelectItem>
-            ))}
-          </SelectContent>
-        </Select>
-        <Select onValueChange={onMonthChange}>
-          <SelectTrigger
-            className="w-2/4"
-            aria-label={t('user.field.dateOfBirthMonth')}
-            aria-invalid={!!errors[fieldName]}>
-            <SelectValue placeholder="" />
-          </SelectTrigger>
-          <SelectContent>
-            {dateOfBirthMonth.map((option) => (
-              <SelectItem key={option.value} value={option.value.toString()}>
-                {option.label}
-              </SelectItem>
-            ))}
-          </SelectContent>
-        </Select>
-        <Select onValueChange={onDayChange}>
-          <SelectTrigger
-            className="w-1/4"
-            aria-label={t('user.field.dateOfBirthDay')}
-            aria-invalid={!!errors[fieldName]}>
-            <SelectValue placeholder="" />
-          </SelectTrigger>
-          <SelectContent>
-            {dateOfBirthDay.map((option) => (
-              <SelectItem key={option.value} value={option.value.toString()}>
-                {option.label}
-              </SelectItem>
-            ))}
-          </SelectContent>
-        </Select>
-      </div>
-      <input type="hidden" {...register(fieldName)} />
-      <FormFieldError error={errors[fieldName]} />
-    </div>
+    <Field>
+      <FieldLabel>{t('user.field.dateOfBirth')}</FieldLabel>
+      <FieldContent>
+        <div className="flex gap-3">
+          <Select onValueChange={onYearChange}>
+            <SelectTrigger
+              className="w-1/4"
+              aria-label={t('user.field.dateOfBirthYear')}
+              aria-invalid={!!errors[fieldName]}>
+              <SelectValue placeholder="" />
+            </SelectTrigger>
+            <SelectContent>
+              {dateOfBirthYear.map((option) => (
+                <SelectItem key={option.value} value={option.value.toString()}>
+                  {option.label}
+                </SelectItem>
+              ))}
+            </SelectContent>
+          </Select>
+          <Select onValueChange={onMonthChange}>
+            <SelectTrigger
+              className="w-2/4"
+              aria-label={t('user.field.dateOfBirthMonth')}
+              aria-invalid={!!errors[fieldName]}>
+              <SelectValue placeholder="" />
+            </SelectTrigger>
+            <SelectContent>
+              {dateOfBirthMonth.map((option) => (
+                <SelectItem key={option.value} value={option.value.toString()}>
+                  {option.label}
+                </SelectItem>
+              ))}
+            </SelectContent>
+          </Select>
+          <Select onValueChange={onDayChange}>
+            <SelectTrigger
+              className="w-1/4"
+              aria-label={t('user.field.dateOfBirthDay')}
+              aria-invalid={!!errors[fieldName]}>
+              <SelectValue placeholder="" />
+            </SelectTrigger>
+            <SelectContent>
+              {dateOfBirthDay.map((option) => (
+                <SelectItem key={option.value} value={option.value.toString()}>
+                  {option.label}
+                </SelectItem>
+              ))}
+            </SelectContent>
+          </Select>
+        </div>
+        <input type="hidden" {...register(fieldName)} />
+        <FieldError errors={[errors[fieldName]]} />
+      </FieldContent>
+    </Field>
   );
 }

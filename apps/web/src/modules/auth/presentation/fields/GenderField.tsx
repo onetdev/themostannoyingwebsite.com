@@ -1,8 +1,10 @@
 'use client';
 
 import {
-  FormFieldError,
-  LabelText,
+  Field,
+  FieldContent,
+  FieldError,
+  FieldLabel,
   Select,
   SelectContent,
   SelectItem,
@@ -42,9 +44,9 @@ export function GenderField({ fieldName = 'gender' }: GenderFieldProps) {
   }, [t]);
 
   return (
-    <div>
-      <label>
-        <LabelText className="mb-1">{t('user.field.gender')}</LabelText>
+    <Field>
+      <FieldLabel>{t('user.field.gender')}</FieldLabel>
+      <FieldContent>
         <Controller
           control={control}
           name={fieldName}
@@ -66,8 +68,8 @@ export function GenderField({ fieldName = 'gender' }: GenderFieldProps) {
             </Select>
           )}
         />
-      </label>
-      <FormFieldError error={errors[fieldName]} />
-    </div>
+        <FieldError errors={[errors[fieldName]]} />
+      </FieldContent>
+    </Field>
   );
 }
