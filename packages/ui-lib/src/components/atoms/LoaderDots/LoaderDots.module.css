@@ -1,5 +1,5 @@
 @reference "tailwindcss";
-@reference "../../styles/global.css";
+@reference "../../../styles/global.css";
 
 .loader-dots {
   --loader-dots-bg: no-repeat radial-gradient(circle closest-side, currentColor 90%, transparent);
