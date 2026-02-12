@@ -1,4 +1,4 @@
-import { Button, Icon, TextInput } from '@maw/ui-lib';
+import { Button, Icon, Input } from '@maw/ui-lib';
 import { useTranslations } from 'next-intl';
 import { SubmitEventHandler, useRef } from 'react';
 
@@ -27,7 +27,7 @@ export function MessageForm({ className, onMessage }: MessageFormProps) {
       className={className}
       onSubmit={handleFormSubmit}
       ref={userForm}>
-      <TextInput
+      <Input
         name="message"
         title={t('chatBubble.yourMessage')}
         placeholder={t('chatBubble.yourMessagePlaceholder')}

@@ -5,7 +5,7 @@ import {
   DropdownSelect,
   FormFieldError,
   LabelText,
-  TextInput,
+  Input,
 } from '@maw/ui-lib';
 import { useTranslations } from 'next-intl';
 import {
@@ -152,7 +152,7 @@ export function PhoneNumberField({
               onTouchStart={onDecrementClick}>
               -
             </Button>
-            <TextInput
+            <Input
               type="number"
               disabled
               aria-label={t('user.field.phoneNumberAreaCode')}

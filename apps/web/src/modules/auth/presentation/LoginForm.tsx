@@ -9,7 +9,7 @@ import {
   LabelText,
   LoaderDots,
   PageHeadline,
-  TextInput,
+  Input,
 } from '@maw/ui-lib';
 import { useTranslations } from 'next-intl';
 import { FormProvider } from 'react-hook-form';
@@ -60,7 +60,7 @@ export function LoginForm() {
         <div>
           <label>
             <LabelText className="mb-1">{t('user.field.password')}</LabelText>
-            <TextInput
+            <Input
               type="password"
               className="w-full"
               {...register('password')}

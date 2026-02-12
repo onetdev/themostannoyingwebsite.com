@@ -1,6 +1,6 @@
 'use client';
 
-import { BorderedBox, Button, TextInput } from '@maw/ui-lib';
+import { BorderedBox, Button, Input } from '@maw/ui-lib';
 import { useTranslations } from 'next-intl';
 import { QRCodeSVG } from 'qrcode.react';
 import { useState } from 'react';
@@ -34,7 +34,7 @@ export function CryptoWallet({ title, address, network }: CryptoWalletProps) {
         <QRCodeSVG value={address} size={200} level="H" />
       </div>
 
-      <TextInput value={address} readOnly />
+      <Input value={address} readOnly />
 
       <Button onClick={handleCopy} className="w-full">
         {copied

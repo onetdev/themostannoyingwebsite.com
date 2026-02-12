@@ -4,7 +4,7 @@ import {
   FormFieldError,
   LabelText,
   PasswordStrengthBar,
-  TextInput,
+  Input,
 } from '@maw/ui-lib';
 import { useTranslations } from 'next-intl';
 import { useFormContext } from 'react-hook-form';
@@ -36,7 +36,7 @@ export function PasswordCreateField({
     <>
       <label htmlFor={fieldName}>
         <LabelText className="mb-1">{t('user.field.password')}</LabelText>
-        <TextInput
+        <Input
           type="password"
           className="w-full"
           id={fieldName}

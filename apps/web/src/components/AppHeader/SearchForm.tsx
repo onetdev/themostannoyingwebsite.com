@@ -1,6 +1,6 @@
 'use client';
 
-import { Button, Icon, TextInput } from '@maw/ui-lib';
+import { Button, Icon, Input } from '@maw/ui-lib';
 import { FormElementSize } from '@maw/ui-lib/utils';
 import { useRouter } from 'next/navigation';
 import { useTranslations } from 'next-intl';
@@ -44,7 +44,7 @@ export function SearchForm({
       onSubmit={onSubmit}
       className={`flex ${className}`}
       role="search">
-      <TextInput
+      <Input
         defaultValue={initialValue}
         className="-mr-1 w-full rounded-r-none"
         size={size}

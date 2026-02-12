@@ -15,5 +15,5 @@ export * from './LoaderDots';
 export * from './PageHeadline';
 export * from './PasswordStrengthBar';
 export * from './RadioButton';
-export * from './TextInput';
+export * from './Input';
 export * from './Tooltip';

@@ -1,4 +1,4 @@
-import { Button, FormFieldError, Modal, TextInput } from '@maw/ui-lib';
+import { Button, FormFieldError, Modal, Input } from '@maw/ui-lib';
 import { random } from '@maw/utils/math';
 import { useMessages, useTranslations } from 'next-intl';
 import { useMemo, useState } from 'react';
@@ -74,7 +74,7 @@ export function NewsletterModal({
         {!actions.text && (
           <>
             <p className="mb-4">{t('newsletter.modal.description')}</p>
-            <TextInput
+            <Input
               placeholder={t('newsletter.modal.placeholder')}
               size="lg"
               type="email"
