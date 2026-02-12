@@ -101,13 +101,13 @@ export function AnimatedWheel({
   return (
     <div className="relative m-auto max-h-[500px] max-w-[500px] p-8">
       <div
-        className="text-primary data-[wiggle=true]:animate-wiggle-15deg absolute inset-x-0 top-3 z-10 flex justify-center text-2xl drop-shadow-md md:top-0 md:-ml-4 md:text-5xl"
+        className="text-primary data-[wiggle=true]:animate-wiggle-15deg absolute inset-x-0 top-3 z-10 flex justify-center text-xl drop-shadow-md md:top-0 md:-ml-4 md:text-3xl"
         data-wiggle={(state === 'spinning').toString()}>
         <Icon icon="mapMarker" size="5xl" />
       </div>
       <Button
-        className="border-primary bg-primary absolute top-1/2 left-1/2 z-10 -translate-x-1/2 -translate-y-1/2 rounded-full border p-5 text-2xl shadow-md md:rounded-full"
-        variant="secondary"
+        className="absolute top-1/2 left-1/2 z-10 -translate-x-1/2 -translate-y-1/2 rounded-full p-2 text-2xl shadow-md md:rounded-full md:p-5"
+        variant="default"
         onClick={() => startSpin()}
         disabled={state !== 'ready'}>
         {state === 'ready' ? '🎲' : '🎉'}

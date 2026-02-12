@@ -1,6 +1,7 @@
 export * from './AdaptiveNavigation';
 export * from './BorderedBox';
 export * from './DelayedMount';
+export * from './Dialog';
 export * from './EscapingElement';
 export * from './Field';
 export * from './IconCollapseMenu';

@@ -4,7 +4,6 @@ export * from './CapthchaTilePuzzle';
 export * from './Checkbox';
 export * from './CopyMarker';
 export * from './DarkModeToggle';
-export * from './DimmerOverlay';
 export * from './DotDotDotText';
 export * from './FormError';
 export * from './FormFieldError';

@@ -1,25 +1,18 @@
-import { Icon } from '@maw/ui-lib';
 import { getWeightedRandom, WeightedRandomPoolItem } from '@maw/utils/math';
 import { useTranslations } from 'next-intl';
-import { useMemo, useState } from 'react';
+import { ComponentProps, useMemo, useState } from 'react';
 import Confetti from 'react-confetti';
 
 import { Item } from './DynamicWheelSvg';
 import { AnimatedWheel, AnimatedWheelState } from './WheelAnimationWrapper';
 
-type ModalContentProps = JSXProxyProps<'div'> & {
-  onClose?: () => void;
-};
+type ModalContentProps = ComponentProps<'div'>;
 
-export function ModalContent({
-  className,
-  onClose,
-  ...rest
-}: ModalContentProps) {
+export function ModalContent({ className, ...rest }: ModalContentProps) {
   const t = useTranslations();
   const hueStart = 300; // random(0,360);
   const [state, setState] = useState<AnimatedWheelState>('ready');
-  const [prize, setPrize] = useState<Item | undefined>();
+  const [_prize, setPrize] = useState<Item | undefined>();
 
   const prizeWithWeight = useMemo(
     () => [
@@ -47,15 +40,9 @@ export function ModalContent({
 
   return (
     <div
-      className={`bg-surface relative flex flex-col overflow-hidden rounded-lg ${className}`}
+      className={`relative flex flex-col overflow-hidden rounded-lg border ${className}`}
       {...rest}>
       <div className="grow">
-        <button
-          aria-label={t('common.close')}
-          className="absolute top-0 right-0 z-10 cursor-pointer p-3"
-          onClick={() => onClose?.()}>
-          <Icon icon="close" size="lg" />
-        </button>
         {state === 'completed' && (
           <Confetti
             className="absolute z-0 size-full"
@@ -71,12 +58,6 @@ export function ModalContent({
           onSpinCompleted={(newPrize) => setPrize(newPrize)}
         />
       </div>
-      <span className="bg-primary text-on-primary w-full p-5 text-center text-xl font-bold">
-        {state !== 'completed' && t('wheelOfFortune.spinStart')}
-        {state === 'completed' &&
-          prize &&
-          t('wheelOfFortune.spinWin', { prize: prize.text })}
-      </span>
     </div>
   );
 }
