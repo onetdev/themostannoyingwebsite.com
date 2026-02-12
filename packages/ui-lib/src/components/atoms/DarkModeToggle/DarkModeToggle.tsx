@@ -55,25 +55,26 @@ export const DarkModeToggle: FunctionComponent<DarkModeToggleProps> = ({
       className={cn(darkModeToggleVariants({ size, className }))}
       onClick={toggleDarkMode}>
       <span
+        suppressHydrationWarning
         className={cn(
           'bg-primary absolute inset-y-0 left-0 block h-full w-1/2 rounded-full transition-transform duration-200 ease-in-out',
           isDark ? 'translate-x-full' : 'translate-x-0',
         )}
       />
       <div
+        suppressHydrationWarning
         className={cn(
           'text-on-surface z-10 flex flex-1 items-center justify-center transition-colors duration-200',
           !isDark && 'text-on-primary',
-        )}
-        suppressHydrationWarning>
+        )}>
         <Icon icon="sun" />
       </div>
       <div
+        suppressHydrationWarning
         className={cn(
           'text-on-surface z-10 flex flex-1 items-center justify-center transition-colors duration-200',
           isDark && 'text-on-primary',
-        )}
-        suppressHydrationWarning>
+        )}>
         <Icon icon="moon" />
       </div>
     </button>

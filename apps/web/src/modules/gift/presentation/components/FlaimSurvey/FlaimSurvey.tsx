@@ -26,7 +26,7 @@ export function FlaimSurvey({
   const router = useRouter();
   const [loaded, setLoaded] = useState(false);
   const isCompleted = useRuntimeStore((state) => state.flaimSurveyResult);
-  const { next, progression, questionData, selectOption } = useSurvey({
+  const { next, progression, questionData, selectOption, index } = useSurvey({
     ...settings,
   });
 
@@ -58,7 +58,11 @@ export function FlaimSurvey({
       )}
       {showQuestion && (
         <>
-          <Question data={questionData} selectOption={selectOption} />
+          <Question
+            key={index}
+            data={questionData}
+            selectOption={selectOption}
+          />
           <Button
             onClick={next}
             className="mt-5"

@@ -14,7 +14,6 @@ export * from './Label';
 export * from './LoaderDots';
 export * from './PageHeadline';
 export * from './PasswordStrengthBar';
-export * from './RadioButton';
 export * from './Select';
 export * from './Separator';
 export * from './Textarea';
