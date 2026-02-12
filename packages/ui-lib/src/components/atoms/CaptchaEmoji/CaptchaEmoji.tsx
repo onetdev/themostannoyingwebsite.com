@@ -3,6 +3,8 @@
 import { Point2d, random } from '@maw/utils/math';
 import { FunctionComponent, useEffect, useRef, useState } from 'react';
 
+import { CAPTCHA_EMOJI_DEFAULT_POOL } from './consts';
+
 export type CaptchaEmojiProps = {
   className?: string;
   count?: number;
@@ -22,7 +24,7 @@ export const CaptchaEmoji: FunctionComponent<CaptchaEmojiProps> = ({
   count = 100,
   height = 100,
   itemRenderSize = 50,
-  pool = defaultEmojiPool,
+  pool = CAPTCHA_EMOJI_DEFAULT_POOL,
   width = 300,
 }) => {
   const $canvasRef = useRef<HTMLCanvasElement>(null);
@@ -69,38 +71,3 @@ export const CaptchaEmoji: FunctionComponent<CaptchaEmojiProps> = ({
     />
   );
 };
-
-const defaultEmojiPool = [
-  '✨',
-  '🌈',
-  '🍆',
-  '🍑',
-  '🍕',
-  '🎀',
-  '🎁',
-  '🎈',
-  '🎉',
-  '🎊',
-  '🐶',
-  '💀',
-  '💕',
-  '💪',
-  '💫',
-  '📸',
-  '🔥',
-  '🤔',
-  '🤣',
-  '🤩',
-  '🤯',
-  '🥰',
-  '🥳',
-  '🥺',
-  '🧠',
-  '🫶',
-  '😂',
-  '😍',
-  '😎',
-  '😭',
-  '🙌',
-  '🙏',
-];

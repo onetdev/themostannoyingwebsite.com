@@ -2,7 +2,9 @@
 
 import { arrayShuffle } from '@maw/utils/array';
 import { isPoint2d, Point2d } from '@maw/utils/math';
-import { FunctionComponent, useEffect, useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
+
+import { TileData, TileView, TileViewData } from './TileView';
 
 interface CaptchaTilePuzzleProps {
   className?: string;
@@ -14,26 +16,14 @@ interface CaptchaTilePuzzleProps {
   onResolved?: () => void;
 }
 
-type TileData = {
-  current: Point2d;
-  resolution: Point2d;
-  isEmpty: boolean;
-};
-
-export type TileViewData = TileData & {
-  key: string;
-  content: string;
-  isCorrect: boolean;
-};
-
-export const CaptchaTilePuzzle: FunctionComponent<CaptchaTilePuzzleProps> = ({
+export function CaptchaTilePuzzle({
   className,
   cols = 8,
   rows = 3,
   size = 50,
   imageSrc,
   onResolved,
-}) => {
+}: CaptchaTilePuzzleProps) {
   const [puzzle, setPuzzle] = useState<TileData[]>([]);
 
   // Generating the puzzle
@@ -145,36 +135,7 @@ export const CaptchaTilePuzzle: FunctionComponent<CaptchaTilePuzzleProps> = ({
       ))}
     </div>
   );
-};
-
-type TileViewProps = {
-  data: TileViewData;
-  imageSrc?: string;
-  size: number;
-};
-
-const TileView: FunctionComponent<TileViewProps> = ({
-  data,
-  imageSrc,
-  size,
-}) => {
-  const style = useMemo(
-    () => ({
-      backgroundImage: `url(${imageSrc})`,
-      backgroundPosition: `-${data.resolution.x * size}px -${data.resolution.y * size}px`,
-    }),
-    [data, imageSrc, size],
-  );
-
-  return (
-    <div
-      style={style}
-      data-has-image={Boolean(imageSrc).toString()}
-      className="border-on-surface group-data-[is-correct=true]:bg-success group-data-[is-correct=true]:text-on-success flex size-full items-center justify-center rounded-sm border transition-all duration-200 ease-in-out select-none group-data-[is-correct=false]:cursor-pointer group-data-[is-empty=true]:hidden data-[has-image=true]:border-none">
-      {!imageSrc && <span>{data.key}</span>}
-    </div>
-  );
-};
+}
 
 const genKey: {
   (x: number, y: number): string;
