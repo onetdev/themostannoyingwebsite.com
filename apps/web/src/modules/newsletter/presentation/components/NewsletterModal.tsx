@@ -1,4 +1,4 @@
-import { Button, FormFieldError, Modal, Input } from '@maw/ui-lib';
+import { Button, FormFieldError, Input, Modal } from '@maw/ui-lib';
 import { random } from '@maw/utils/math';
 import { useMessages, useTranslations } from 'next-intl';
 import { useMemo, useState } from 'react';

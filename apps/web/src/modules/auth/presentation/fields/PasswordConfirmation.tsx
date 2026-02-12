@@ -1,6 +1,6 @@
 'use client';
 
-import { FormFieldError, LabelText, Input } from '@maw/ui-lib';
+import { FormFieldError, Input, LabelText } from '@maw/ui-lib';
 import { useTranslations } from 'next-intl';
 import { useFormContext } from 'react-hook-form';
 
@@ -27,6 +27,7 @@ export function PasswordConfirmationField({
           type="password"
           className="w-full"
           id={fieldName}
+          aria-invalid={!!errors[fieldName]}
           {...register(fieldName)}
         />
       </label>

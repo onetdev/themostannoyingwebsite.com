@@ -6,10 +6,10 @@ import {
   Checkbox,
   FormError,
   FormFieldError,
+  Input,
   LabelText,
   LoaderDots,
   PageHeadline,
-  Input,
 } from '@maw/ui-lib';
 import { useTranslations } from 'next-intl';
 import { FormProvider } from 'react-hook-form';

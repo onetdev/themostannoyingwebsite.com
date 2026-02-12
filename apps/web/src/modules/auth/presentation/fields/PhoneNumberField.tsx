@@ -2,10 +2,14 @@
 
 import {
   Button,
-  DropdownSelect,
   FormFieldError,
-  LabelText,
   Input,
+  LabelText,
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
 } from '@maw/ui-lib';
 import { useTranslations } from 'next-intl';
 import {
@@ -16,7 +20,7 @@ import {
   useRef,
   useState,
 } from 'react';
-import { useFormContext } from 'react-hook-form';
+import { Controller, useFormContext } from 'react-hook-form';
 
 import { useKernelService } from '@/kernel';
 
@@ -36,6 +40,7 @@ export function PhoneNumberField({
     register,
     setValue,
     getValues,
+    control,
   } = useFormContext();
 
   const $decrementBtn = useRef<HTMLButtonElement>(null);
@@ -134,12 +139,26 @@ export function PhoneNumberField({
       <label>
         <LabelText className="mb-1">{t('user.field.phoneNumber')}</LabelText>
         <div className="flex gap-3">
-          <DropdownSelect
-            placeholder=""
-            className="w-1/4"
-            aria-label={t('user.field.phoneNumberCountryCode')}
-            values={phoneCountryOptions}
-            {...register(countryCodeFieldName)}
+          <Controller
+            control={control}
+            name={countryCodeFieldName}
+            render={({ field, fieldState }) => (
+              <Select onValueChange={field.onChange} value={field.value}>
+                <SelectTrigger
+                  className="w-1/4"
+                  aria-label={t('user.field.phoneNumberCountryCode')}
+                  aria-invalid={fieldState.invalid}>
+                  <SelectValue placeholder="" />
+                </SelectTrigger>
+                <SelectContent>
+                  {phoneCountryOptions.map((option) => (
+                    <SelectItem key={option.value} value={option.value}>
+                      {option.label}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+            )}
           />
           <div className="flex w-3/4">
             <Button
@@ -157,6 +176,7 @@ export function PhoneNumberField({
               disabled
               aria-label={t('user.field.phoneNumberAreaCode')}
               className="max-w-44 rounded-none border-x-0 select-none"
+              aria-invalid={!!errors[fieldName]}
               {...register(fieldName)}
             />
             <Button

@@ -1,9 +1,17 @@
 'use client';
 
-import { DropdownSelect, FormFieldError, LabelText } from '@maw/ui-lib';
+import {
+  FormFieldError,
+  LabelText,
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@maw/ui-lib';
 import { useTranslations } from 'next-intl';
 import { useMemo } from 'react';
-import { useFormContext } from 'react-hook-form';
+import { Controller, useFormContext } from 'react-hook-form';
 
 import { GenderList } from '../../domain';
 
@@ -15,7 +23,7 @@ export function GenderField({ fieldName = 'gender' }: GenderFieldProps) {
   const t = useTranslations();
   const {
     formState: { errors },
-    register,
+    control,
   } = useFormContext();
 
   const genderOptions = useMemo(() => {
@@ -37,12 +45,26 @@ export function GenderField({ fieldName = 'gender' }: GenderFieldProps) {
     <div>
       <label>
         <LabelText className="mb-1">{t('user.field.gender')}</LabelText>
-        <DropdownSelect
-          placeholder=""
-          values={genderOptions}
-          className="w-full"
-          aria-label={t('user.field.gender')}
-          {...register(fieldName)}
+        <Controller
+          control={control}
+          name={fieldName}
+          render={({ field, fieldState }) => (
+            <Select onValueChange={field.onChange} value={field.value}>
+              <SelectTrigger
+                className="w-full"
+                aria-label={t('user.field.gender')}
+                aria-invalid={fieldState.invalid}>
+                <SelectValue placeholder="" />
+              </SelectTrigger>
+              <SelectContent>
+                {genderOptions.map((option) => (
+                  <SelectItem key={option.value} value={option.value}>
+                    {option.label}
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
+          )}
         />
       </label>
       <FormFieldError error={errors[fieldName]} />

@@ -1,6 +1,14 @@
 'use client';
 
-import { DropdownSelect, FormFieldError, LabelText } from '@maw/ui-lib';
+import {
+  FormFieldError,
+  LabelText,
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@maw/ui-lib';
 import { useMessages, useTranslations } from 'next-intl';
 import { useEffect, useMemo, useState } from 'react';
 import { useFormContext } from 'react-hook-form';
@@ -66,27 +74,51 @@ export function DateOfBirthField({
     <div>
       <LabelText className="mb-1">{t('user.field.dateOfBirth')}</LabelText>
       <div className="flex gap-3">
-        <DropdownSelect
-          placeholder=""
-          className="w-1/4"
-          values={dateOfBirthYear}
-          onValueChange={onYearChange}
-          aria-label={t('user.field.dateOfBirthYear')}
-        />
-        <DropdownSelect
-          placeholder=""
-          className="w-2/4"
-          values={dateOfBirthMonth}
-          onValueChange={onMonthChange}
-          aria-label={t('user.field.dateOfBirthMonth')}
-        />
-        <DropdownSelect
-          placeholder=""
-          className="w-1/4"
-          values={dateOfBirthDay}
-          onValueChange={onDayChange}
-          aria-label={t('user.field.dateOfBirthDay')}
-        />
+        <Select onValueChange={onYearChange}>
+          <SelectTrigger
+            className="w-1/4"
+            aria-label={t('user.field.dateOfBirthYear')}
+            aria-invalid={!!errors[fieldName]}>
+            <SelectValue placeholder="" />
+          </SelectTrigger>
+          <SelectContent>
+            {dateOfBirthYear.map((option) => (
+              <SelectItem key={option.value} value={option.value.toString()}>
+                {option.label}
+              </SelectItem>
+            ))}
+          </SelectContent>
+        </Select>
+        <Select onValueChange={onMonthChange}>
+          <SelectTrigger
+            className="w-2/4"
+            aria-label={t('user.field.dateOfBirthMonth')}
+            aria-invalid={!!errors[fieldName]}>
+            <SelectValue placeholder="" />
+          </SelectTrigger>
+          <SelectContent>
+            {dateOfBirthMonth.map((option) => (
+              <SelectItem key={option.value} value={option.value.toString()}>
+                {option.label}
+              </SelectItem>
+            ))}
+          </SelectContent>
+        </Select>
+        <Select onValueChange={onDayChange}>
+          <SelectTrigger
+            className="w-1/4"
+            aria-label={t('user.field.dateOfBirthDay')}
+            aria-invalid={!!errors[fieldName]}>
+            <SelectValue placeholder="" />
+          </SelectTrigger>
+          <SelectContent>
+            {dateOfBirthDay.map((option) => (
+              <SelectItem key={option.value} value={option.value.toString()}>
+                {option.label}
+              </SelectItem>
+            ))}
+          </SelectContent>
+        </Select>
       </div>
       <input type="hidden" {...register(fieldName)} />
       <FormFieldError error={errors[fieldName]} />

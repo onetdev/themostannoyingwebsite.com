@@ -2,7 +2,7 @@
 
 import { useFormContext } from 'react-hook-form';
 
-import { CaptchaEmoji, FormFieldError, LabelText, Input } from '../atoms';
+import { CaptchaEmoji, FormFieldError, Input, LabelText } from '../atoms';
 
 export type CaptchaEmojiFieldProps = {
   fieldName?: string;

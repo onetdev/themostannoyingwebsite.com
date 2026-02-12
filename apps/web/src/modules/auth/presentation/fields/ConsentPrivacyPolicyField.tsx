@@ -22,7 +22,7 @@ export function ConsentPrivacyPolicyField({
       <label htmlFor={fieldName} className="flex items-center gap-2">
         <Checkbox id={fieldName} {...register(fieldName)} />
         <span className="inline-block text-lg font-semibold">
-          {t('user.field.consentPrivacyPolicy')}KK
+          {t('user.field.consentPrivacyPolicy')}
         </span>
       </label>
       <FormFieldError error={errors[fieldName]} />

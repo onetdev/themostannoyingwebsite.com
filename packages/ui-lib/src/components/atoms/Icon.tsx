@@ -2,6 +2,8 @@ import {
   faArrowUpRightFromSquare,
   faBars,
   faCheck,
+  faChevronCircleDown,
+  faChevronCircleUp,
   faCircleExclamation,
   faCircleInfo,
   faCommentDots,
@@ -25,6 +27,8 @@ import { FunctionComponent } from 'react';
 
 const iconMap = {
   check: faCheck,
+  chevronDown: faChevronCircleDown,
+  chevronUp: faChevronCircleUp,
   close: faTimes,
   colorPicker: faEyeDropper,
   commentDots: faCommentDots,

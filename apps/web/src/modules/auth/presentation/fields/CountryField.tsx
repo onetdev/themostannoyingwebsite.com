@@ -1,9 +1,17 @@
 'use client';
 
-import { DropdownSelect, FormFieldError, LabelText } from '@maw/ui-lib';
+import {
+  FormFieldError,
+  LabelText,
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@maw/ui-lib';
 import { useTranslations } from 'next-intl';
 import { useEffect, useState } from 'react';
-import { useFormContext } from 'react-hook-form';
+import { Controller, useFormContext } from 'react-hook-form';
 
 import { useKernelService } from '@/kernel';
 
@@ -16,7 +24,7 @@ export function CountryField({ fieldName = 'countryCode' }: CountryFieldProps) {
   const kernelService = useKernelService();
   const {
     formState: { errors },
-    register,
+    control,
   } = useFormContext();
 
   const [countryOptions, setCountryOptions] = useState<
@@ -38,13 +46,27 @@ export function CountryField({ fieldName = 'countryCode' }: CountryFieldProps) {
     <div>
       <label htmlFor={fieldName}>
         <LabelText className="mb-1">{t('user.field.countryCode')}</LabelText>
-        <DropdownSelect
-          placeholder=""
-          className="w-full"
-          id={fieldName}
-          aria-label={t('user.field.countryCode')}
-          values={countryOptions}
-          {...register(fieldName)}
+        <Controller
+          control={control}
+          name={fieldName}
+          render={({ field, fieldState }) => (
+            <Select onValueChange={field.onChange} value={field.value}>
+              <SelectTrigger
+                className="w-full"
+                id={fieldName}
+                aria-label={t('user.field.countryCode')}
+                aria-invalid={fieldState.invalid}>
+                <SelectValue placeholder="" />
+              </SelectTrigger>
+              <SelectContent>
+                {countryOptions.map((option) => (
+                  <SelectItem key={option.value} value={option.value}>
+                    {option.label}
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
+          )}
         />
       </label>
       <FormFieldError error={errors[fieldName]} />

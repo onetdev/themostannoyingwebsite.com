@@ -2,9 +2,9 @@
 
 import {
   FormFieldError,
+  Input,
   LabelText,
   PasswordStrengthBar,
-  Input,
 } from '@maw/ui-lib';
 import { useTranslations } from 'next-intl';
 import { useFormContext } from 'react-hook-form';
@@ -40,6 +40,7 @@ export function PasswordCreateField({
           type="password"
           className="w-full"
           id={fieldName}
+          aria-invalid={!!errors[fieldName]}
           {...register(fieldName)}
         />
       </label>
