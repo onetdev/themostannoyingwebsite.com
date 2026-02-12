@@ -42,7 +42,7 @@ export async function DonationPage() {
               {t('app.donate.buyMeACoffee')}
             </Link>
           </Button>
-          <Button asChild className="md:w-1/2">
+          <Button size="lg" asChild className="md:w-1/2">
             <Link href={donation.paypalUrl}>{t('app.donate.payPal')}</Link>
           </Button>
         </div>

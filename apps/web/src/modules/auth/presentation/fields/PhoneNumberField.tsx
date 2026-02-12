@@ -4,6 +4,10 @@ import {
   Button,
   FormFieldError,
   Input,
+  InputGroup,
+  InputGroupAddon,
+  InputGroupButton,
+  InputGroupInput,
   LabelText,
   Select,
   SelectContent,
@@ -55,9 +59,9 @@ export function PhoneNumberField({
   useEffect(() => {
     kernelService.getAllCountries().then((data) => {
       setPhoneCountryOptions(
-        data.map(({ localName, phone }) => ({
+        data.map(({ localName, phone, code }) => ({
           label: `${phone} ${localName}`,
-          value: phone,
+          value: `${code} ${phone}`,
         })),
       );
     });
@@ -160,36 +164,36 @@ export function PhoneNumberField({
               </Select>
             )}
           />
-          <div className="flex w-3/4">
-            <Button
-              ref={$decrementBtn}
-              type="button"
-              className="rounded-none rounded-l-lg px-3 select-none"
-              size="sm"
-              aria-label={t('user.field.phoneNumberDecrease')}
-              onMouseDown={onDecrementClick}
-              onTouchStart={onDecrementClick}>
-              -
-            </Button>
-            <Input
+          <InputGroup className="w-3/4">
+            <InputGroupAddon align="inline-start">
+              <InputGroupButton
+                ref={$decrementBtn}
+                variant="outline"
+                aria-label={t('user.field.phoneNumberDecrease')}
+                onMouseDown={onDecrementClick}
+                onTouchStart={onDecrementClick}>
+                -
+              </InputGroupButton>
+            </InputGroupAddon>
+            <InputGroupInput
               type="number"
               disabled
               aria-label={t('user.field.phoneNumberAreaCode')}
-              className="max-w-44 rounded-none border-x-0 select-none"
+              className="select-none"
               aria-invalid={!!errors[fieldName]}
               {...register(fieldName)}
             />
-            <Button
-              ref={$incrementBtn}
-              type="button"
-              className="rounded-none rounded-r-lg px-3"
-              size="sm"
-              aria-label={t('user.field.phoneNumberIncrease')}
-              onMouseDown={onIncrementClick}
-              onTouchStart={onIncrementClick}>
-              +
-            </Button>
-          </div>
+            <InputGroupAddon align="inline-end">
+              <InputGroupButton
+                ref={$incrementBtn}
+                variant="outline"
+                aria-label={t('user.field.phoneNumberIncrease')}
+                onMouseDown={onIncrementClick}
+                onTouchStart={onIncrementClick}>
+                +
+              </InputGroupButton>
+            </InputGroupAddon>
+          </InputGroup>
         </div>
       </label>
       {errors[countryCodeFieldName] ? (

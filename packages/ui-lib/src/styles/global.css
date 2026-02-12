@@ -7,11 +7,11 @@ body {
   transition: background-color 0.3s ease-in-out;
 }
 
-a:not(.link-customized):not(.link-as-inherit), a:not(.link-customized):not(.link-as-inherit):visited {
+a:not([data-slot="button"]):not(.link-as-inherit), a:not([data-slot="button"]):not(.link-as-inherit):visited {
   @apply text-primary no-underline;
   text-decoration: none;
 }
-a:not(.link-customized):not(.link-as-inherit):hover {
+a:not([data-slot="button"]):not(.link-as-inherit):hover {
   @apply text-primary-alt;
 }
 a.link-as-inherit, a.link-as-inherit:visited {
