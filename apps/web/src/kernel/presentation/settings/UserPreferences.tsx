@@ -27,7 +27,7 @@ export function UserPreferences() {
         <FormCheckbox
           name="dark_mode"
           checked={resolvedTheme === 'dark'}
-          onValueChange={setDarkMode}
+          onCheckedChange={setDarkMode}
         />
       </CompactFormRow>
       <CompactFormRow
@@ -43,14 +43,14 @@ export function UserPreferences() {
         <FormCheckbox
           name="enable_sound"
           checked={preference.enableSound}
-          onValueChange={preference.setEnableSound}
+          onCheckedChange={preference.setEnableSound}
         />
       </CompactFormRow>
       <CompactFormRow label={t('settings.userPreferences.adultFilter')}>
         <FormCheckbox
           name="adult_filter"
           checked={preference.adultFilter}
-          onValueChange={preference.setAdultFilter}
+          onCheckedChange={preference.setAdultFilter}
         />
       </CompactFormRow>
     </BorderedBox>

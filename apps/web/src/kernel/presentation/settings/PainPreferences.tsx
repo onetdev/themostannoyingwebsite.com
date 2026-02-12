@@ -32,7 +32,7 @@ export function PainPreferences({
           <FormCheckbox
             name="gift_flaps"
             checked={painPreferences.flags['gifts.flaps']}
-            onValueChange={(value) =>
+            onCheckedChange={(value) =>
               painPreferences.setFlag('gifts.flaps', value)
             }
           />
@@ -42,7 +42,7 @@ export function PainPreferences({
           <FormCheckbox
             name="detect_adblocker"
             checked={painPreferences.flags['gifts.detectAdblocker']}
-            onValueChange={(value) =>
+            onCheckedChange={(value) =>
               painPreferences.setFlag('gifts.detectAdblocker', value)
             }
           />
@@ -51,7 +51,7 @@ export function PainPreferences({
           <FormCheckbox
             name="one_by_one"
             checked={painPreferences.flags['gifts.oneByOne']}
-            onValueChange={(value) =>
+            onCheckedChange={(value) =>
               painPreferences.setFlag('gifts.oneByOne', value)
             }
           />
@@ -61,7 +61,7 @@ export function PainPreferences({
           <FormCheckbox
             name="clipboard_marker"
             checked={painPreferences.flags.clipboardMarker}
-            onValueChange={(value) =>
+            onCheckedChange={(value) =>
               painPreferences.setFlag('clipboardMarker', value)
             }
           />
@@ -70,7 +70,7 @@ export function PainPreferences({
           <FormCheckbox
             name="content_paywall"
             checked={painPreferences.flags.contentPaywall}
-            onValueChange={(value) =>
+            onCheckedChange={(value) =>
               painPreferences.setFlag('contentPaywall', value)
             }
           />
@@ -79,7 +79,7 @@ export function PainPreferences({
           <FormCheckbox
             name="dead_pixel"
             checked={painPreferences.flags.deadPixel}
-            onValueChange={(value) =>
+            onCheckedChange={(value) =>
               painPreferences.setFlag('deadPixel', value)
             }
           />
@@ -89,7 +89,7 @@ export function PainPreferences({
           <FormCheckbox
             name="disable_context"
             checked={painPreferences.flags.disableContextMenu}
-            onValueChange={(value) =>
+            onCheckedChange={(value) =>
               painPreferences.setFlag('disableContextMenu', value)
             }
           />
@@ -98,7 +98,7 @@ export function PainPreferences({
           <FormCheckbox
             name="exit_prompt"
             checked={painPreferences.flags.exitPrompt}
-            onValueChange={(value) =>
+            onCheckedChange={(value) =>
               painPreferences.setFlag('exitPrompt', value)
             }
           />
@@ -107,7 +107,7 @@ export function PainPreferences({
           <FormCheckbox
             name="history_spam"
             checked={painPreferences.flags.historySpam}
-            onValueChange={(value) =>
+            onCheckedChange={(value) =>
               painPreferences.setFlag('historySpam', value)
             }
           />
@@ -116,7 +116,7 @@ export function PainPreferences({
           <FormCheckbox
             name="mock_chat"
             checked={painPreferences.flags.mockChat}
-            onValueChange={(value) =>
+            onCheckedChange={(value) =>
               painPreferences.setFlag('mockChat', value)
             }
           />
@@ -126,7 +126,7 @@ export function PainPreferences({
           <FormCheckbox
             name="newsletter"
             checked={painPreferences.flags.newsletterModal}
-            onValueChange={(value) =>
+            onCheckedChange={(value) =>
               painPreferences.setFlag('newsletterModal', value)
             }
           />
@@ -135,7 +135,7 @@ export function PainPreferences({
           <FormCheckbox
             name="notifications"
             checked={painPreferences.flags.notifications}
-            onValueChange={(value) =>
+            onCheckedChange={(value) =>
               painPreferences.setFlag('notifications', value)
             }
           />
@@ -145,7 +145,7 @@ export function PainPreferences({
           <FormCheckbox
             name="page_title_inactive_array_paged"
             checked={painPreferences.flags['pageTitle.inactiveArrayPaged']}
-            onValueChange={(value) =>
+            onCheckedChange={(value) =>
               painPreferences.setFlag('pageTitle.inactiveArrayPaged', value)
             }
           />
@@ -154,7 +154,7 @@ export function PainPreferences({
           <FormCheckbox
             name="search_delay"
             checked={painPreferences.flags.searchDelay}
-            onValueChange={(value) =>
+            onCheckedChange={(value) =>
               painPreferences.setFlag('searchDelay', value)
             }
           />
@@ -163,7 +163,7 @@ export function PainPreferences({
           <FormCheckbox
             name="sticky_video"
             checked={painPreferences.flags.stickyVideo}
-            onValueChange={(value) =>
+            onCheckedChange={(value) =>
               painPreferences.setFlag('stickyVideo', value)
             }
           />
@@ -172,7 +172,7 @@ export function PainPreferences({
           <FormCheckbox
             name="wheel_of_fortune"
             checked={painPreferences.flags.wheelOfFortune}
-            onValueChange={(value) =>
+            onCheckedChange={(value) =>
               painPreferences.setFlag('wheelOfFortune', value)
             }
           />

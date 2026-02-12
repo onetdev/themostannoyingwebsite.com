@@ -44,6 +44,23 @@
   --color-disabled: var(--theme-color-disabled);
   --color-focus: var(--theme-color-focus);
 
+  /* Shadcn-ui compatibility */
+  --color-foreground: var(--theme-color-on-background);
+  --color-card: var(--theme-color-surface);
+  --color-card-foreground: var(--theme-color-on-surface);
+  --color-popover: var(--theme-color-surface);
+  --color-popover-foreground: var(--theme-color-on-surface);
+  --color-primary-foreground: var(--theme-color-on-primary);
+  --color-secondary-foreground: var(--theme-color-on-secondary);
+  --color-muted-foreground: var(--theme-color-muted);
+  --color-accent: var(--theme-color-surface-alt);
+  --color-accent-foreground: var(--theme-color-on-surface);
+  --color-destructive: var(--theme-color-error);
+  --color-destructive-foreground: var(--theme-color-on-error);
+  --color-border: var(--theme-color-border-surface);
+  --color-input: var(--theme-color-border-surface);
+  --color-ring: var(--theme-color-focus);
+
   /* Border colors - semantic (match component variants) */
   --color-border-primary: var(--theme-color-border-primary);
   --color-border-secondary: var(--theme-color-border-secondary);
