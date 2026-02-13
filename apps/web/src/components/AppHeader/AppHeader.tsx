@@ -1,5 +1,4 @@
 import { Icon } from '@maw/ui-lib';
-import { getTranslations } from 'next-intl/server';
 import { ComponentProps } from 'react';
 
 import { AppDarkModeToggle } from './AppDarkModeToggle';
@@ -19,8 +18,6 @@ type AppHeaderProps = {
 };
 
 export async function AppHeader({ activeItem, className }: AppHeaderProps) {
-  const t = await getTranslations();
-
   return (
     <header
       id="header"

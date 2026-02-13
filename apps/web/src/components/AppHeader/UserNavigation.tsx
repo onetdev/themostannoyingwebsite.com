@@ -86,14 +86,15 @@ export function UserNavigation({ className }: UserNavigationProps) {
 
           return (
             <NavigationMenuItem key={item.key}>
-              <Link href={item.path} passHref>
-                <NavigationMenuLink
-                  active={isActive}
-                  className="flex-row items-center gap-2">
+              <NavigationMenuLink
+                asChild
+                active={isActive}
+                className="flex-row items-center gap-2">
+                <Link href={item.path} passHref>
                   <Icon icon={item.icon} />
                   <span className="hidden lg:inline">{item.label}</span>
-                </NavigationMenuLink>
-              </Link>
+                </Link>
+              </NavigationMenuLink>
             </NavigationMenuItem>
           );
         })}

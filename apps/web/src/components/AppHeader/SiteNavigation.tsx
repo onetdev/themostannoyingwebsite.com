@@ -37,11 +37,11 @@ export function SiteNavigation({ className }: SiteNavigationProps) {
         <NavigationMenuList>
           {links.map((link) => (
             <NavigationMenuItem key={link.href}>
-              <Link href={link.href} passHref>
-                <NavigationMenuLink active={pathname === link.href}>
+              <NavigationMenuLink asChild active={pathname === link.href}>
+                <Link href={link.href} passHref>
                   {link.label}
-                </NavigationMenuLink>
-              </Link>
+                </Link>
+              </NavigationMenuLink>
             </NavigationMenuItem>
           ))}
         </NavigationMenuList>

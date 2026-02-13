@@ -19,25 +19,25 @@ a.link-as-inherit, a.link-as-inherit:visited {
 }
 
 a.link-as-inherit.hover-text-primary:hover {
-  @apply text-primary
+  @apply text-primary;
 }
 
-h1 {
+h1:not([class*="text-"]) {
   @apply text-4xl font-semibold;
 }
-h2 {
+h2:not([class*="text-"]) {
   @apply text-3xl font-semibold;
 }
-h3 {
+h3:not([class*="text-"]) {
   @apply text-2xl font-semibold;
 }
-h4 {
+h4:not([class*="text-"]) {
   @apply text-xl font-semibold;
 }
-h5 {
+h5:not([class*="text-"]) {
   @apply text-lg font-semibold;
 }
-h6 {
+h6:not([class*="text-"]) {
   @apply text-base font-semibold;
 }
 

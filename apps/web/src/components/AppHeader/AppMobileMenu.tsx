@@ -5,6 +5,7 @@ import {
   Separator,
   Sheet,
   SheetContent,
+  SheetFooter,
   SheetHeader,
   SheetTitle,
   SheetTrigger,
@@ -62,10 +63,10 @@ export function AppMobileMenu() {
         aria-label={t('app.toggleMenu')}>
         <Icon icon="menu" />
       </SheetTrigger>
-      <SheetContent side="left" className="w-[280px] p-0">
+      <SheetContent side="left" className="w-[280px] gap-0 overflow-y-auto">
         <SheetHeader className="text-left">
-          <SheetTitle className="text-xl font-bold tracking-tighter">
-            <i className="font-light opacity-80">the</i>{' '}
+          <SheetTitle className="text-lg font-bold tracking-tighter">
+            <i className="font-light">the</i>{' '}
             <span className="text-primary">MAW</span>
           </SheetTitle>
         </SheetHeader>
@@ -129,12 +130,12 @@ export function AppMobileMenu() {
             );
           })}
         </div>
-        <div className="mt-auto p-4">
-          <Separator className="mb-4" />
+        <Separator className="mb-4" />
+        <SheetFooter>
           <p className="text-muted-foreground px-3 text-xs italic">
             {t('app.description')}
           </p>
-        </div>
+        </SheetFooter>
       </SheetContent>
     </Sheet>
   );
