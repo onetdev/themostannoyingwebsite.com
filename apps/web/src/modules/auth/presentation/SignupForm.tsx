@@ -11,6 +11,7 @@ import { useTranslations } from 'next-intl';
 import { FormProvider } from 'react-hook-form';
 
 import {
+  ConsentChildSoulField,
   ConsentNewsletterField,
   ConsentPrivacyPolicyField,
   CountryField,
@@ -82,6 +83,7 @@ export function SignupForm() {
           <CountryField />
           <ConsentNewsletterField />
           <ConsentPrivacyPolicyField />
+          <ConsentChildSoulField />
           <CaptchaEmojiField text={captchaText} />
 
           <Button

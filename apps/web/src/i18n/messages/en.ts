@@ -289,6 +289,7 @@ export default {
     field: {
       consentNewsletter: 'I want to receive newsletter',
       consentPrivacyPolicy: 'Accept privacy policy',
+      consentChildSoul: "My first born child's soul",
       countryCode: 'Country',
       dateOfBirth: 'Date of birth',
       dateOfBirthYear: 'Year',

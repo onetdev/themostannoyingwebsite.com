@@ -18,32 +18,42 @@ export function SiteNavigation({ className }: SiteNavigationProps) {
   const t = useTranslations();
   const pathname = usePathname();
 
-  const links = [
+  const isActive = (href: string) => {
+    if (href === '/') return pathname === '/';
+    return pathname === href || pathname.startsWith(`${href}/`);
+  };
+
+  const topLevelLinks = [
     { href: '/', label: t('navigation.home') },
     { href: '/hot-things', label: t('navigation.hotThings') },
-    { href: '/contact', label: t('navigation.contact') },
     { href: '/dilf', label: t('navigation.dilf') },
-    { href: '/privacy-policy', label: t('navigation.privacyPolicy') },
-    { href: '/about', label: t('navigation.about') },
     { href: '/donate', label: t('navigation.donate') },
+    { href: '/about', label: t('navigation.about') },
+    { href: '/contact', label: t('navigation.contact') },
   ];
 
   return (
     <nav
-      className={`hidden items-center gap-2 md:flex ${className}`}
+      className={`flex items-center gap-2 ${className}`}
       id="navigation-main"
       role="navigation">
-      <NavigationMenu>
+      <NavigationMenu viewport={false}>
         <NavigationMenuList>
-          {links.map((link) => (
-            <NavigationMenuItem key={link.href}>
-              <NavigationMenuLink asChild active={pathname === link.href}>
-                <Link href={link.href} passHref>
-                  {link.label}
-                </Link>
-              </NavigationMenuLink>
-            </NavigationMenuItem>
-          ))}
+          {topLevelLinks.map((link) => {
+            const active = isActive(link.href);
+            return (
+              <NavigationMenuItem key={link.href}>
+                <NavigationMenuLink
+                  asChild
+                  active={active}
+                  className={active ? 'text-primary font-bold' : ''}>
+                  <Link href={link.href} passHref>
+                    {link.label}
+                  </Link>
+                </NavigationMenuLink>
+              </NavigationMenuItem>
+            );
+          })}
         </NavigationMenuList>
       </NavigationMenu>
     </nav>

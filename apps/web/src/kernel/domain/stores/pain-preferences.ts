@@ -58,7 +58,7 @@ function calculatePublicLevelMeta(
 }
 
 export interface PainPreferencesStateActions {
-  setFlag: (key: PainPointKey, value: boolean | 'indeterminate') => void;
+  setFlag: (key: PainPointKey, value: boolean) => void;
   setLevel: (level: number) => void;
   allEnable: () => void;
   allDisable: () => void;

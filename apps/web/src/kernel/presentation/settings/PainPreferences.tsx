@@ -5,7 +5,7 @@ import { useTranslations } from 'next-intl';
 
 import { SettingsField } from './SettingsField';
 
-import { usePainPreferencesStore } from '@/kernel';
+import { PainPointKey, usePainPreferencesStore } from '@/kernel';
 
 type PainPreferencesProps = {
   className?: string;
@@ -19,6 +19,10 @@ export function PainPreferences({
   const painPreferences = usePainPreferencesStore();
   const t = useTranslations();
 
+  const setFlag = (name: PainPointKey, value: boolean | 'indeterminate') => {
+    painPreferences.setFlag(name, value === 'indeterminate' ? false : value);
+  };
+
   return (
     <BorderedBox
       title={t('settings.optionalPainPoints.title')}
@@ -31,9 +35,7 @@ export function PainPreferences({
           <FormCheckbox
             name="gift_flaps"
             checked={painPreferences.flags['gifts.flaps']}
-            onCheckedChange={(value) =>
-              painPreferences.setFlag('gifts.flaps', value)
-            }
+            onCheckedChange={(value) => setFlag('gifts.flaps', value)}
           />
         </SettingsField>
         <SettingsField
@@ -42,9 +44,7 @@ export function PainPreferences({
           <FormCheckbox
             name="detect_adblocker"
             checked={painPreferences.flags['gifts.detectAdblocker']}
-            onCheckedChange={(value) =>
-              painPreferences.setFlag('gifts.detectAdblocker', value)
-            }
+            onCheckedChange={(value) => setFlag('gifts.detectAdblocker', value)}
           />
         </SettingsField>
         <SettingsField
@@ -53,9 +53,7 @@ export function PainPreferences({
           <FormCheckbox
             name="one_by_one"
             checked={painPreferences.flags['gifts.oneByOne']}
-            onCheckedChange={(value) =>
-              painPreferences.setFlag('gifts.oneByOne', value)
-            }
+            onCheckedChange={(value) => setFlag('gifts.oneByOne', value)}
           />
         </SettingsField>
         <SettingsField
@@ -64,9 +62,7 @@ export function PainPreferences({
           <FormCheckbox
             name="clipboard_marker"
             checked={painPreferences.flags.clipboardMarker}
-            onCheckedChange={(value) =>
-              painPreferences.setFlag('clipboardMarker', value)
-            }
+            onCheckedChange={(value) => setFlag('clipboardMarker', value)}
           />
         </SettingsField>
         <SettingsField
@@ -75,9 +71,7 @@ export function PainPreferences({
           <FormCheckbox
             name="content_paywall"
             checked={painPreferences.flags.contentPaywall}
-            onCheckedChange={(value) =>
-              painPreferences.setFlag('contentPaywall', value)
-            }
+            onCheckedChange={(value) => setFlag('contentPaywall', value)}
           />
         </SettingsField>
         <SettingsField
@@ -86,9 +80,7 @@ export function PainPreferences({
           <FormCheckbox
             name="dead_pixel"
             checked={painPreferences.flags.deadPixel}
-            onCheckedChange={(value) =>
-              painPreferences.setFlag('deadPixel', value)
-            }
+            onCheckedChange={(value) => setFlag('deadPixel', value)}
           />
         </SettingsField>
         <SettingsField
@@ -97,9 +89,7 @@ export function PainPreferences({
           <FormCheckbox
             name="disable_context"
             checked={painPreferences.flags.disableContextMenu}
-            onCheckedChange={(value) =>
-              painPreferences.setFlag('disableContextMenu', value)
-            }
+            onCheckedChange={(value) => setFlag('disableContextMenu', value)}
           />
         </SettingsField>
         <SettingsField
@@ -108,9 +98,7 @@ export function PainPreferences({
           <FormCheckbox
             name="exit_prompt"
             checked={painPreferences.flags.exitPrompt}
-            onCheckedChange={(value) =>
-              painPreferences.setFlag('exitPrompt', value)
-            }
+            onCheckedChange={(value) => setFlag('exitPrompt', value)}
           />
         </SettingsField>
         <SettingsField
@@ -119,9 +107,7 @@ export function PainPreferences({
           <FormCheckbox
             name="history_spam"
             checked={painPreferences.flags.historySpam}
-            onCheckedChange={(value) =>
-              painPreferences.setFlag('historySpam', value)
-            }
+            onCheckedChange={(value) => setFlag('historySpam', value)}
           />
         </SettingsField>
         <SettingsField
@@ -130,9 +116,7 @@ export function PainPreferences({
           <FormCheckbox
             name="mock_chat"
             checked={painPreferences.flags.mockChat}
-            onCheckedChange={(value) =>
-              painPreferences.setFlag('mockChat', value)
-            }
+            onCheckedChange={(value) => setFlag('mockChat', value)}
           />
         </SettingsField>
         <SettingsField
@@ -141,9 +125,7 @@ export function PainPreferences({
           <FormCheckbox
             name="newsletter"
             checked={painPreferences.flags.newsletterModal}
-            onCheckedChange={(value) =>
-              painPreferences.setFlag('newsletterModal', value)
-            }
+            onCheckedChange={(value) => setFlag('newsletterModal', value)}
           />
         </SettingsField>
         <SettingsField
@@ -152,9 +134,7 @@ export function PainPreferences({
           <FormCheckbox
             name="notifications"
             checked={painPreferences.flags.notifications}
-            onCheckedChange={(value) =>
-              painPreferences.setFlag('notifications', value)
-            }
+            onCheckedChange={(value) => setFlag('notifications', value)}
           />
         </SettingsField>
         <SettingsField
@@ -166,7 +146,7 @@ export function PainPreferences({
             name="page_title_inactive_array_paged"
             checked={painPreferences.flags['pageTitle.inactiveArrayPaged']}
             onCheckedChange={(value) =>
-              painPreferences.setFlag('pageTitle.inactiveArrayPaged', value)
+              setFlag('pageTitle.inactiveArrayPaged', value)
             }
           />
         </SettingsField>
@@ -176,9 +156,7 @@ export function PainPreferences({
           <FormCheckbox
             name="search_delay"
             checked={painPreferences.flags.searchDelay}
-            onCheckedChange={(value) =>
-              painPreferences.setFlag('searchDelay', value)
-            }
+            onCheckedChange={(value) => setFlag('searchDelay', value)}
           />
         </SettingsField>
         <SettingsField
@@ -187,9 +165,7 @@ export function PainPreferences({
           <FormCheckbox
             name="sticky_video"
             checked={painPreferences.flags.stickyVideo}
-            onCheckedChange={(value) =>
-              painPreferences.setFlag('stickyVideo', value)
-            }
+            onCheckedChange={(value) => setFlag('stickyVideo', value)}
           />
         </SettingsField>
         <SettingsField
@@ -198,9 +174,7 @@ export function PainPreferences({
           <FormCheckbox
             name="wheel_of_fortune"
             checked={painPreferences.flags.wheelOfFortune}
-            onCheckedChange={(value) =>
-              painPreferences.setFlag('wheelOfFortune', value)
-            }
+            onCheckedChange={(value) => setFlag('wheelOfFortune', value)}
           />
         </SettingsField>
       </div>

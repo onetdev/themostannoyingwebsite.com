@@ -60,6 +60,9 @@ export function getSignupFormSchema(t: ZodTranslator) {
       consentPrivacyPolicy: z.boolean().refine((val) => val === true, {
         error: t('form.validation.error.checkboxRequired'),
       }),
+      consentChildSoul: z.boolean().refine((val) => val === true, {
+        error: t('form.validation.error.checkboxRequired'),
+      }),
       gender: GenderSchema.optional(),
       countryCode: z
         .string()

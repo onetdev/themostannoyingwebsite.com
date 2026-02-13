@@ -8,6 +8,7 @@ import {
   DialogTitle,
   FormFieldError,
   Input,
+  Separator,
 } from '@maw/ui-lib';
 import { random } from '@maw/utils/math';
 import { useMessages, useTranslations } from 'next-intl';
@@ -80,6 +81,7 @@ export function NewsletterModal({
           </DialogDescription>
         </DialogHeader>
 
+        <Separator />
         <form
           className="max-w-screen-sm"
           method="post"
@@ -91,7 +93,7 @@ export function NewsletterModal({
               <Input
                 placeholder={t('newsletter.modal.placeholder')}
                 type="email"
-                className="h-14 w-full text-lg!"
+                inputSize="large"
                 required
                 {...register('email')}
               />

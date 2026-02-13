@@ -13,8 +13,8 @@ export function UserPreferences() {
   const runtime = useRuntimeStore();
   const t = useTranslations();
   const { resolvedTheme, setTheme } = useTheme();
-  const setDarkMode = (value: boolean) => {
-    setTheme(value ? 'dark' : 'light');
+  const setDarkMode = (value: boolean | 'indeterminate') => {
+    setTheme(value !== false ? 'dark' : 'light');
   };
 
   return (
@@ -42,14 +42,18 @@ export function UserPreferences() {
           <FormCheckbox
             name="enable_sound"
             checked={preference.enableSound}
-            onCheckedChange={preference.setEnableSound}
+            onCheckedChange={(value) =>
+              preference.setEnableSound(value !== false)
+            }
           />
         </SettingsField>
         <SettingsField label={t('settings.userPreferences.adultFilter')}>
           <FormCheckbox
             name="adult_filter"
             checked={preference.adultFilter}
-            onCheckedChange={preference.setAdultFilter}
+            onCheckedChange={(value) =>
+              preference.setAdultFilter(value === true)
+            }
           />
         </SettingsField>
       </div>

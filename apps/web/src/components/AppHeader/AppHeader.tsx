@@ -21,7 +21,7 @@ export async function AppHeader({ activeItem, className }: AppHeaderProps) {
   return (
     <header
       id="header"
-      className={`grid grid-cols-2 items-center gap-x-2 px-5 py-3 md:py-5 xl:px-8 ${className ?? ''}`}
+      className={`grid grid-cols-2 items-center gap-x-2 px-5 py-3 xl:px-8 ${className ?? ''}`}
       role="banner">
       <div className="flex items-center gap-2">
         <AppMobileMenu />
@@ -34,11 +34,10 @@ export async function AppHeader({ activeItem, className }: AppHeaderProps) {
         </Link>
         <AppDarkModeToggle />
       </div>
-      <SiteNavigation className="col-span-1 my-2 -ml-3 pl-3 md:ml-0 md:pl-0" />
-      <UserNavigation
-        activeItem={activeItem}
-        className="col-span-1 my-2 hidden md:block"
-      />
+      <div className="col-span-2 my-2 hidden items-center justify-between md:flex">
+        <SiteNavigation className="-ml-3 pl-3 md:ml-0 md:pl-0" />
+        <UserNavigation activeItem={activeItem} />
+      </div>
       <PainLevelSelector className="bg-surface-alt col-span-2 -mx-5 mt-2 md:mt-0 xl:-mx-8" />
     </header>
   );

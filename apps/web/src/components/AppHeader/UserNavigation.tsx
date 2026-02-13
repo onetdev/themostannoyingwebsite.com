@@ -62,7 +62,7 @@ export function UserNavigation({ className }: UserNavigationProps) {
 
   return (
     <NavigationMenu
-      className={cn('hidden max-w-full justify-end md:flex', className)}
+      className={cn('flex max-w-full justify-end', className)}
       id="navigation-user">
       <NavigationMenuList className="justify-end">
         {items.map((item) => {

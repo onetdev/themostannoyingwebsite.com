@@ -22,11 +22,9 @@ export function UserGrantsSettings() {
           disabled
         />
       </SettingsField>
-      <br />
-      <small>
+      <p className="py-5 text-sm">
         <i>{t('settings.userGrants.permissionDisclaimer')}</i>
-      </small>
-      <br />
+      </p>
       <SettingsField
         label={t('settings.userGrants.notificationPermission')}
         reverse>
