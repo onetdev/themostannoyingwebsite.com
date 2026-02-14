@@ -51,7 +51,10 @@ export function getSignupFormSchema(t: ZodTranslator) {
       passwordConfirmation: z
         .string()
         .min(1, { error: t('form.validation.error.required') }),
-      dateOfBirth: z.date().optional(),
+      dateOfBirth: z.preprocess(
+        (val) => (!val ? undefined : val),
+        z.coerce.date().optional(),
+      ),
       username: z
         .string()
         .min(1, { error: t('form.validation.error.required') }),

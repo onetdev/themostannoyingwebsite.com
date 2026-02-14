@@ -140,6 +140,8 @@ export function PhoneNumberField({
     setPhoneNumberUpdateDirection(-1);
   };
 
+  const fieldError = [errors[countryCodeFieldName] ?? errors[fieldName]];
+
   return (
     <Field>
       <FieldLabel required={required}>{t('user.field.phoneNumber')}</FieldLabel>
@@ -148,13 +150,13 @@ export function PhoneNumberField({
           <Controller
             control={control}
             name={countryCodeFieldName}
-            render={({ field, fieldState }) => (
+            render={({ field }) => (
               <Select onValueChange={field.onChange} value={field.value}>
                 <SelectTrigger
                   className="w-1/4"
                   aria-label={t('user.field.phoneNumberCountryCode')}
-                  aria-invalid={fieldState.invalid}>
-                  <SelectValue placeholder="" />
+                  aria-invalid={fieldError.length > 0}>
+                  <SelectValue />
                 </SelectTrigger>
                 <SelectContent>
                   {phoneCountryOptions.map((option) => (
@@ -182,7 +184,7 @@ export function PhoneNumberField({
               disabled
               aria-label={t('user.field.phoneNumberAreaCode')}
               className="select-none"
-              aria-invalid={!!errors[fieldName]}
+              aria-invalid={fieldError.length > 0}
               {...register(fieldName)}
             />
             <InputGroupAddon align="inline-end">
@@ -198,7 +200,7 @@ export function PhoneNumberField({
           </InputGroup>
         </div>
         <FieldError
-          errors={[errors[countryCodeFieldName], errors[fieldName]]}
+          errors={[errors[countryCodeFieldName] ?? errors[fieldName]]}
         />
       </FieldContent>
     </Field>

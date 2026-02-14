@@ -69,10 +69,11 @@ export function DateOfBirthField({
   useEffect(() => {
     const anyEmpty = !parts.year || !parts.month || !parts.day;
     setValue(
-      'dateOfBirth',
+      fieldName,
       anyEmpty ? '' : `${parts.year}-${parts.month}-${parts.day}`,
+      { shouldValidate: true },
     );
-  }, [parts, setValue]);
+  }, [parts, setValue, fieldName]);
 
   return (
     <Field>
