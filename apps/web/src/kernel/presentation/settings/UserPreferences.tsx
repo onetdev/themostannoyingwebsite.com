@@ -1,6 +1,12 @@
 'use client';
 
-import { BorderedBox, Checkbox as FormCheckbox } from '@maw/ui-lib';
+import {
+  Card,
+  CardContent,
+  CardHeader,
+  CardTitle,
+  Checkbox as FormCheckbox,
+} from '@maw/ui-lib';
 import { useTranslations } from 'next-intl';
 import { useTheme } from 'next-themes';
 
@@ -18,10 +24,11 @@ export function UserPreferences() {
   };
 
   return (
-    <BorderedBox
-      title={t('settings.userPreferences.title')}
-      data-testid="preferences-settings">
-      <div className="flex flex-col justify-between gap-3">
+    <Card data-testid="preferences-settings">
+      <CardHeader>
+        <CardTitle>{t('settings.userPreferences.title')}</CardTitle>
+      </CardHeader>
+      <CardContent className="flex flex-col justify-between gap-3">
         <SettingsField label={t('settings.userPreferences.darkMode')}>
           <FormCheckbox
             name="dark_mode"
@@ -56,7 +63,7 @@ export function UserPreferences() {
             }
           />
         </SettingsField>
-      </div>
-    </BorderedBox>
+      </CardContent>
+    </Card>
   );
 }

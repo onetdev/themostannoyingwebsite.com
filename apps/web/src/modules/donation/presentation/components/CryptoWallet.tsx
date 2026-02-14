@@ -1,6 +1,6 @@
 'use client';
 
-import { BorderedBox, Button, Input } from '@maw/ui-lib';
+import { Card, CardContent, CardHeader, CardTitle, Button, Input } from '@maw/ui-lib';
 import { useTranslations } from 'next-intl';
 import { QRCodeSVG } from 'qrcode.react';
 import { useState } from 'react';
@@ -22,25 +22,28 @@ export function CryptoWallet({ title, address, network }: CryptoWalletProps) {
   };
 
   return (
-    <BorderedBox>
-      <h3>{title}</h3>
-      {network && (
-        <p className="opacity-75">
-          {t('app.donate.crypto.network', { network })}
-        </p>
-      )}
+    <Card>
+      <CardHeader>
+        <CardTitle>{title}</CardTitle>
+        {network && (
+          <p className="text-muted-foreground text-sm">
+            {t('app.donate.crypto.network', { network })}
+          </p>
+        )}
+      </CardHeader>
+      <CardContent className="flex flex-col gap-4">
+        <div className="flex justify-center rounded bg-white p-4">
+          <QRCodeSVG value={address} size={200} level="H" />
+        </div>
 
-      <div className="mb-4 flex justify-center rounded bg-white p-4">
-        <QRCodeSVG value={address} size={200} level="H" />
-      </div>
+        <Input value={address} readOnly />
 
-      <Input value={address} readOnly />
-
-      <Button onClick={handleCopy} className="w-full">
-        {copied
-          ? t('app.donate.crypto.copyFeedback')
-          : t('app.donate.crypto.copyAction')}
-      </Button>
-    </BorderedBox>
+        <Button onClick={handleCopy} className="w-full">
+          {copied
+            ? t('app.donate.crypto.copyFeedback')
+            : t('app.donate.crypto.copyAction')}
+        </Button>
+      </CardContent>
+    </Card>
   );
 }
