@@ -34,7 +34,7 @@ export function AdaptiveNavigation<T extends GenericItemShape>({
       <label className="block cursor-pointer md:hidden" htmlFor="menu-toggle">
         <Icon icon="menu" aria-label={texts.toggleMenu} />
       </label>
-      <ul className="bg-surface font-primary absolute inset-x-0 z-20 hidden flex-col gap-x-5 py-2 text-lg drop-shadow-md peer-checked:flex md:relative md:right-0 md:flex md:flex-row md:flex-wrap md:bg-transparent md:py-0 md:drop-shadow-none">
+      <ul className="bg-card font-primary absolute inset-x-0 z-20 hidden flex-col gap-x-5 py-2 text-lg drop-shadow-md peer-checked:flex md:relative md:right-0 md:flex md:flex-row md:flex-wrap md:bg-transparent md:py-0 md:drop-shadow-none">
         {items.map(({ key, label, ...rest }) => (
           <li
             key={key}

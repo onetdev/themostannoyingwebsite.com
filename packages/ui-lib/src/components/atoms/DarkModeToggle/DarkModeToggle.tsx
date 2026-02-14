@@ -5,7 +5,7 @@ import { cn } from '../../../utils';
 import { Icon } from '../Icon';
 
 const darkModeToggleVariants = cva(
-  'group border-border-input bg-surface-alt relative flex justify-between rounded-full border transition-all select-none outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2',
+  'group border-input bg-muted relative flex justify-between rounded-full border transition-all select-none outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2',
   {
     variants: {
       size: {
@@ -64,16 +64,16 @@ export const DarkModeToggle: FunctionComponent<DarkModeToggleProps> = ({
       <div
         suppressHydrationWarning
         className={cn(
-          'text-on-surface z-10 flex flex-1 items-center justify-center transition-colors duration-200',
-          !isDark && 'text-on-primary',
+          'text-card-foreground z-10 flex flex-1 items-center justify-center transition-colors duration-200',
+          !isDark && 'text-primary-foreground',
         )}>
         <Icon icon="sun" />
       </div>
       <div
         suppressHydrationWarning
         className={cn(
-          'text-on-surface z-10 flex flex-1 items-center justify-center transition-colors duration-200',
-          isDark && 'text-on-primary',
+          'text-card-foreground z-10 flex flex-1 items-center justify-center transition-colors duration-200',
+          isDark && 'text-primary-foreground',
         )}>
         <Icon icon="moon" />
       </div>

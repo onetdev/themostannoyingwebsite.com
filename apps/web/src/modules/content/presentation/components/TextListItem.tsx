@@ -22,7 +22,7 @@ export const TextListItem: FunctionComponent<TextListItemProps> = ({
           {article.title}
         </h4>
         <small
-          className="text-on-surface my-2 line-clamp-2"
+          className="text-card-foreground my-2 line-clamp-2"
           title={article.intro}>
           {article.intro}
         </small>

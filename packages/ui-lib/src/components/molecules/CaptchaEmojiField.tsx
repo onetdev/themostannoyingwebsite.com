@@ -34,7 +34,7 @@ export function CaptchaEmojiField({
       <FieldContent>
         <FieldDescription>{text.hint}</FieldDescription>
         <CaptchaEmoji
-          className="border-on-background my-3 rounded-md border"
+          className="border-foreground my-3 rounded-md border"
           width={300}
           height={100}
         />

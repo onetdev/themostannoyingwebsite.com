@@ -32,8 +32,8 @@ export async function AppFooter({ className }: AppFooterProps) {
     <footer
       id="footer"
       role="contentinfo"
-      className={`border-border-surface border-t px-5 py-10 xl:px-8 ${className}`}>
-      <div className="flex flex-wrap justify-center gap-x-5 gap-y-2">
+      className={`border-border border-t ${className}`}>
+      <div className="flex flex-wrap justify-center gap-x-5 gap-y-2 px-5 py-5">
         {links.map((link) => (
           <Link
             key={link.href}
@@ -44,31 +44,34 @@ export async function AppFooter({ className }: AppFooterProps) {
         ))}
       </div>
 
-      <div className="border-border-surface mt-10 flex flex-col items-center justify-center gap-4 border-t pt-8 text-center text-xs">
-        <span className="mr-2">
-          {t('app.copyright', { year: new Date().getFullYear() })}.{' '}
+      <div className="text-muted-foreground border-border border-t px-5 py-5 text-center text-xs">
+        <span>
+          {t('app.copyright', { year: new Date().getFullYear() })}{' '}
           <Link href="https://onet.dev" className="hover:underline">
             Konrád Koller
           </Link>
         </span>
-        <span className="flex flex-wrap justify-center gap-x-4 gap-y-2">
-          <span>
-            {t.rich('app.recruiting', {
-              linkTag: (chunks) => (
-                <Link
-                  href={config.deploymentMeta.githubUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  prefetch={false}
-                  className="hover:underline">
-                  {chunks}
-                </Link>
-              ),
-            })}
-          </span>
-          <span>{t('app.aiDisclose')}</span>
-          <span>{t('app.dataStorageDisclaimer')}</span>
+        {' — '}
+        <span>
+          {t.rich('app.recruiting', {
+            linkTag: (chunks) => (
+              <Link
+                href={config.deploymentMeta.githubUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                prefetch={false}
+                className="hover:underline">
+                {chunks}
+              </Link>
+            ),
+          })}
         </span>
+        {' — '}
+        <span>{t('app.aiDisclose')}</span>
+        {' — '}
+        <span>{t('app.dataStorageDisclaimer')}</span>
+        {' — '}
+        <span>{t('app.noWarranties')}</span>
       </div>
     </footer>
   );

@@ -1,1 +1,0 @@
-export { CaptchaTilePuzzle } from './CaptchaTilePuzzle';

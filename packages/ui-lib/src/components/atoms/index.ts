@@ -1,6 +1,6 @@
 export * from './Button';
 export * from './CaptchaEmoji';
-export * from './CapthchaTilePuzzle';
+export * from './CaptchaTilePuzzle';
 export * from './Checkbox';
 export * from './CopyMarker';
 export * from './DarkModeToggle';

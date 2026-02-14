@@ -25,7 +25,7 @@
 }
 
 .content hr {
-  @apply border-border-surface w-full max-w-screen-md m-5
+  @apply border-border w-full max-w-screen-md m-5
 }
 
 .content > p, .content > ul, .content > ol, .content > blockquote, .content > h1, .content > h2, .content > h3, .content > h4, .content > h5, .content > h6 {
@@ -49,5 +49,5 @@
 }
 .content :global(.table-container) > table th,
 .content :global(.table-container) > table td {
-  @apply border-on-background border-b
+  @apply border-foreground border-b
 }

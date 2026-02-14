@@ -8,10 +8,12 @@ export default {
     recruiting:
       'Want to extend what you see here? Visit our <linkTag>GitHub</linkTag> repo to get started.',
     aiDisclose:
-      'AI text and image generation was used to produce contents of this website.',
-    copyright: 'Copyright © {year} The Most Annoying Website',
+      'This website utilizes generative AI for creative content and media. Any resemblance to helpful information is purely coincidental.',
+    copyright: '© {year} The Most Annoying Website. All rights reserved.',
     dataStorageDisclaimer:
-      "We don't store any form data of: newsletter subscriptions, login, signup, password reminder.",
+      'Privacy First: We do not persist sensitive form inputs or user credentials.',
+    noWarranties:
+      'Provided "as is" without warranty. We are not responsible for your lost time or frustration.',
     cookieConsent:
       "This website uses cookies to ensure you get the best experience on our website. It's also a joke so many of the features are buggy or doens't even work on purpose. You can customize your experience and cookie settings in the settings menu.",
     donate: {

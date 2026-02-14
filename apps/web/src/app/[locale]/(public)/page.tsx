@@ -57,7 +57,7 @@ export default async function Page({ params }: NextPageProps) {
         </ul>
         <OneByOneGift />
       </section>
-      <div className="border-border-surface col-span-1 border-t-5 border-b-5 border-double p-5 text-center text-xl font-light italic lg:col-span-4 lg:my-6">
+      <div className="border-border col-span-1 border-t-5 border-b-5 border-double p-5 text-center text-xl font-light italic lg:col-span-4 lg:my-6">
         {t('article.moreContentScroll')}
       </div>
       <section

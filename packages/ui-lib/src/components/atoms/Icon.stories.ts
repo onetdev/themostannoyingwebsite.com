@@ -15,6 +15,6 @@ export const SampleIcon: Story = {
   args: {
     icon: 'search',
     size: 'md',
-    className: 'text-on-surface',
+    className: 'text-card-foreground',
   },
 };

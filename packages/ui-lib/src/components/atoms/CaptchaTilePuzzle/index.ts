@@ -1,0 +1,1 @@
+export { CaptchaTilePuzzle } from './CaptcaTilePuzzle';

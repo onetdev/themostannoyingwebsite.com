@@ -3,7 +3,7 @@
 
 html,
 body {
-  @apply bg-background text-on-background;
+  @apply bg-background text-foreground;
   transition: background-color 0.3s ease-in-out;
 }
 
@@ -46,13 +46,13 @@ small {
 }
 
 ::-moz-selection { /* Code for Firefox */
-  @apply text-on-tertiary bg-tertiary;
+  @apply text-tertiary-foreground bg-tertiary;
 }
 
 ::selection {
-  @apply text-on-tertiary bg-tertiary;
+  @apply text-tertiary-foreground bg-tertiary;
 }
 
 mark {
-  @apply text-on-tertiary bg-tertiary;
+  @apply text-tertiary-foreground bg-tertiary;
 }

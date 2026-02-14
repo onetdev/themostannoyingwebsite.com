@@ -1,4 +1,4 @@
-import { Icon } from '@maw/ui-lib';
+import { Button, Icon } from '@maw/ui-lib';
 import { ComponentProps } from 'react';
 
 import { AppDarkModeToggle } from './AppDarkModeToggle';
@@ -29,16 +29,18 @@ export async function AppHeader({ activeItem, className }: AppHeaderProps) {
       </div>
       <div className="flex items-center justify-end gap-4">
         <SearchForm className="hidden md:flex" size="md" />
-        <Link href="/search" className="md:hidden">
-          <Icon icon="search" />
-        </Link>
+        <Button asChild className="md:hidden" variant="ghost">
+          <Link href="/search">
+            <Icon icon="search" />
+          </Link>
+        </Button>
         <AppDarkModeToggle />
       </div>
       <div className="col-span-2 my-2 hidden items-center justify-between md:flex">
         <SiteNavigation className="-ml-3 pl-3 md:ml-0 md:pl-0" />
         <UserNavigation activeItem={activeItem} />
       </div>
-      <PainLevelSelector className="bg-surface-alt col-span-2 -mx-5 mt-2 md:mt-0 xl:-mx-8" />
+      <PainLevelSelector className="bg-muted col-span-2 -mx-5 mt-2 md:mt-0 xl:-mx-8" />
     </header>
   );
 }

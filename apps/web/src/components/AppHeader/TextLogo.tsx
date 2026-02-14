@@ -9,13 +9,13 @@ export function TextLogo() {
     <div className="font-semibold tracking-tighter">
       <Link href="/" prefetch={false} title={t('app.title')}>
         {/* Mobile */}
-        <span className="text-on-surface text-2xl lg:hidden">
+        <span className="text-card-foreground text-2xl lg:hidden">
           <i className="font-light">the</i>{' '}
           <span className="text-primary">MAW</span>
         </span>
         {/* Desktop logo */}
         <span className="hidden text-3xl lg:inline-block">
-          <span className="text-on-surface">
+          <span className="text-card-foreground">
             <i className="text-3xl font-light opacity-80">the</i>{' '}
             <span>
               <span className="text-primary">Most</span> Annoying Website

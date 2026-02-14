@@ -43,7 +43,7 @@ export function HistoryOverlay({
   }, [history]);
 
   return (
-    <div className="border-secondary bg-surface rounded-lg border">
+    <div className="border-secondary bg-card rounded-lg border">
       <div className="flex flex-row justify-between p-3 pl-5 shadow-xs">
         <h4 className="text-lg font-bold">
           {t('chatBubble.hudTitle')}{' '}

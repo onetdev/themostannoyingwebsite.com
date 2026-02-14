@@ -36,7 +36,7 @@ export function CaptchaTitlePuzzleField({
       <FieldContent>
         <FieldDescription>{text.hint}</FieldDescription>
         <CaptchaTilePuzzle
-          className="border-on-background my-3 rounded-md border"
+          className="border-foreground my-3 rounded-md border"
           cols={6}
           rows={4}
           imageSrc="/assets/images/captcha-tile-abstract.jpg"

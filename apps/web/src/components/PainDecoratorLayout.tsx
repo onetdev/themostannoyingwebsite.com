@@ -62,7 +62,7 @@ export function PainDecoratorLayout({
   return (
     <div className={className} {...rest}>
       {runtimeFlags.giftFlaps && <ContainerGiftFlaps />}
-      <div className="bg-surface relative container mx-auto my-0 min-h-screen">
+      <div className="bg-card relative container mx-auto my-0 min-h-screen">
         {children}
         {runtimeFlags.wheelOfFortune && <WheelOfFortuneHost />}
         {deadPixel && <DeadPixelHost />}
