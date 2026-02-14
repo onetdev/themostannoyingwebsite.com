@@ -1,4 +1,4 @@
-import type { Meta, StoryObj } from '@storybook/react';
+import type { Meta, StoryObj } from '@storybook/nextjs';
 
 import { Button } from '../atoms';
 import {
@@ -18,7 +18,8 @@ const meta = {
   parameters: {
     docs: {
       description: {
-        component: 'Core Shadcn Dialog component. See [official documentation](https://ui.shadcn.com/docs/components/dialog).',
+        component:
+          'Core Shadcn Dialog component. See [official documentation](https://ui.shadcn.com/docs/components/dialog).',
       },
     },
   },

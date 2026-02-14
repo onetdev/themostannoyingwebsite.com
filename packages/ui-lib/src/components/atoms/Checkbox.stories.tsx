@@ -1,4 +1,4 @@
-import type { Meta, StoryObj } from '@storybook/react';
+import type { Meta, StoryObj } from '@storybook/nextjs';
 
 import { Checkbox } from './Checkbox';
 
@@ -9,7 +9,8 @@ const meta = {
   parameters: {
     docs: {
       description: {
-        component: 'Core Shadcn Checkbox component. See [official documentation](https://ui.shadcn.com/docs/components/checkbox).',
+        component:
+          'Core Shadcn Checkbox component. See [official documentation](https://ui.shadcn.com/docs/components/checkbox).',
       },
     },
   },

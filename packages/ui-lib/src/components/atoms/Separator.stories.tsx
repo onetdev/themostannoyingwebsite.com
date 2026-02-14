@@ -1,4 +1,4 @@
-import type { Meta, StoryObj } from '@storybook/react';
+import type { Meta, StoryObj } from '@storybook/nextjs';
 
 import { Separator } from './Separator';
 
@@ -9,7 +9,8 @@ const meta = {
   parameters: {
     docs: {
       description: {
-        component: 'Core Shadcn Separator component. See [official documentation](https://ui.shadcn.com/docs/components/separator).',
+        component:
+          'Core Shadcn Separator component. See [official documentation](https://ui.shadcn.com/docs/components/separator).',
       },
     },
   },
@@ -22,7 +23,7 @@ export const Horizontal: Story = {
   render: () => (
     <div>
       <div className="space-y-1">
-        <h4 className="text-sm font-medium leading-none">Radix Primitives</h4>
+        <h4 className="text-sm leading-none font-medium">Radix Primitives</h4>
         <p className="text-muted-foreground text-sm">
           An open-source UI component library.
         </p>

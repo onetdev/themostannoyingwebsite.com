@@ -1,4 +1,4 @@
-import type { Meta, StoryObj } from '@storybook/react';
+import type { Meta, StoryObj } from '@storybook/nextjs';
 
 import { CopyMarker } from './CopyMarker';
 
@@ -13,7 +13,8 @@ type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
   args: {
-    children: 'Copy this text and paste it somewhere to see the "Read more at" link appended.',
+    children:
+      'Copy this text and paste it somewhere to see the "Read more at" link appended.',
     enabled: true,
     text: {
       readMoreAt: 'Read more at',

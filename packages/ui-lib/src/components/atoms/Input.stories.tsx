@@ -1,4 +1,4 @@
-import type { Meta, StoryObj } from '@storybook/react';
+import type { Meta, StoryObj } from '@storybook/nextjs';
 
 import { Input } from './Input';
 
@@ -9,7 +9,8 @@ const meta = {
   parameters: {
     docs: {
       description: {
-        component: 'Core Shadcn Input component. See [official documentation](https://ui.shadcn.com/docs/components/input).',
+        component:
+          'Core Shadcn Input component. See [official documentation](https://ui.shadcn.com/docs/components/input).',
       },
     },
   },

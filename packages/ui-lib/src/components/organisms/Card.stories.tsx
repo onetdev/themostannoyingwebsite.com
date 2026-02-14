@@ -1,4 +1,4 @@
-import type { Meta, StoryObj } from '@storybook/react';
+import type { Meta, StoryObj } from '@storybook/nextjs';
 
 import {
   Card,
@@ -16,7 +16,8 @@ const meta = {
   parameters: {
     docs: {
       description: {
-        component: 'Core Shadcn Card component. See [official documentation](https://ui.shadcn.com/docs/components/card).',
+        component:
+          'Core Shadcn Card component. See [official documentation](https://ui.shadcn.com/docs/components/card).',
       },
     },
   },

@@ -1,4 +1,4 @@
-import type { Meta, StoryObj } from '@storybook/react';
+import type { Meta, StoryObj } from '@storybook/nextjs';
 
 import { Button } from '../atoms';
 import {
@@ -17,7 +17,8 @@ const meta = {
   parameters: {
     docs: {
       description: {
-        component: 'Core Shadcn Sheet component. See [official documentation](https://ui.shadcn.com/docs/components/sheet).',
+        component:
+          'Core Shadcn Sheet component. See [official documentation](https://ui.shadcn.com/docs/components/sheet).',
       },
     },
   },
@@ -39,7 +40,7 @@ export const Default: Story = {
             Make changes to your profile here. Click save when you're done.
           </SheetDescription>
         </SheetHeader>
-        <div className="grid gap-4 py-4 px-4">
+        <div className="grid gap-4 px-4 py-4">
           <p>Sheet Content</p>
         </div>
       </SheetContent>

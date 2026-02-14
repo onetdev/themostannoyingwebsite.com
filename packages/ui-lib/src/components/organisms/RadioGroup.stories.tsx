@@ -1,4 +1,4 @@
-import type { Meta, StoryObj } from '@storybook/react';
+import type { Meta, StoryObj } from '@storybook/nextjs';
 
 import { Label } from '../atoms';
 import { RadioGroup, RadioGroupItem } from './RadioGroup';
@@ -10,7 +10,8 @@ const meta = {
   parameters: {
     docs: {
       description: {
-        component: 'Core Shadcn RadioGroup component. See [official documentation](https://ui.shadcn.com/docs/components/radio-group).',
+        component:
+          'Core Shadcn RadioGroup component. See [official documentation](https://ui.shadcn.com/docs/components/radio-group).',
       },
     },
   },

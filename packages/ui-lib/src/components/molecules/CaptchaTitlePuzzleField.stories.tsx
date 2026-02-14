@@ -1,5 +1,5 @@
-import type { Meta, StoryObj } from '@storybook/react';
-import { useForm, FormProvider } from 'react-hook-form';
+import type { Meta, StoryObj } from '@storybook/nextjs';
+import { FormProvider, useForm } from 'react-hook-form';
 
 import { CaptchaTitlePuzzleField } from './CaptchaTitlePuzzleField';
 
