@@ -13,6 +13,7 @@ import {
 
 export type CaptchaEmojiFieldProps = {
   fieldName?: string;
+  required?: boolean;
   text: {
     label: string;
     hint: string;
@@ -21,6 +22,7 @@ export type CaptchaEmojiFieldProps = {
 
 export function CaptchaEmojiField({
   fieldName = 'captcha',
+  required,
   text,
 }: CaptchaEmojiFieldProps) {
   const {
@@ -30,7 +32,7 @@ export function CaptchaEmojiField({
 
   return (
     <Field>
-      <FieldLabel>{text.label}</FieldLabel>
+      <FieldLabel required={required}>{text.label}</FieldLabel>
       <FieldContent>
         <FieldDescription>{text.hint}</FieldDescription>
         <CaptchaEmoji

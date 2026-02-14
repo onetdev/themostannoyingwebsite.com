@@ -1,11 +1,11 @@
 'use client';
 
 import {
+  Button,
   Card,
   CardContent,
   CardHeader,
   CardTitle,
-  Button,
   Checkbox as FormCheckbox,
 } from '@maw/ui-lib';
 import { useTranslations } from 'next-intl';
@@ -31,9 +31,7 @@ export function PainPreferences({
   };
 
   return (
-    <Card
-      className={className}
-      data-testid="pain-preferences">
+    <Card className={className} data-testid="pain-preferences">
       <CardHeader>
         <CardTitle>{t('settings.optionalPainPoints.title')}</CardTitle>
       </CardHeader>
@@ -54,7 +52,9 @@ export function PainPreferences({
             <FormCheckbox
               name="detect_adblocker"
               checked={painPreferences.flags['gifts.detectAdblocker']}
-              onCheckedChange={(value) => setFlag('gifts.detectAdblocker', value)}
+              onCheckedChange={(value) =>
+                setFlag('gifts.detectAdblocker', value)
+              }
             />
           </SettingsField>
           <SettingsField

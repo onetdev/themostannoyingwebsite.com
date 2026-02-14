@@ -19,9 +19,13 @@ import { GenderList } from '../../domain';
 
 interface GenderFieldProps {
   fieldName?: string;
+  required?: boolean;
 }
 
-export function GenderField({ fieldName = 'gender' }: GenderFieldProps) {
+export function GenderField({
+  fieldName = 'gender',
+  required,
+}: GenderFieldProps) {
   const t = useTranslations();
   const {
     formState: { errors },
@@ -45,7 +49,7 @@ export function GenderField({ fieldName = 'gender' }: GenderFieldProps) {
 
   return (
     <Field>
-      <FieldLabel>{t('user.field.gender')}</FieldLabel>
+      <FieldLabel required={required}>{t('user.field.gender')}</FieldLabel>
       <FieldContent>
         <Controller
           control={control}

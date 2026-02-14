@@ -31,11 +31,13 @@ import { useKernelService } from '@/kernel';
 interface PhoneNumberFieldProps {
   fieldName?: string;
   countryCodeFieldName?: string;
+  required?: boolean;
 }
 
 export function PhoneNumberField({
   fieldName = 'phoneNumber',
   countryCodeFieldName = 'phoneNumberCountry',
+  required,
 }: PhoneNumberFieldProps) {
   const t = useTranslations();
   const kernelService = useKernelService();
@@ -140,7 +142,7 @@ export function PhoneNumberField({
 
   return (
     <Field>
-      <FieldLabel>{t('user.field.phoneNumber')}</FieldLabel>
+      <FieldLabel required={required}>{t('user.field.phoneNumber')}</FieldLabel>
       <FieldContent>
         <div className="flex gap-3">
           <Controller

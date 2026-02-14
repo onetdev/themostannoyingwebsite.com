@@ -64,27 +64,27 @@ export function SignupForm() {
         <div className="flex flex-col gap-4 lg:w-1/2">
           <div className="flex flex-row gap-5">
             <div className="grow">
-              <FirstNameField />
+              <FirstNameField required />
             </div>
             <div className="grow">
-              <LastNameField />
+              <LastNameField required />
             </div>
           </div>
           <NicknameField />
-          <UsernameField />
-          <EmailField />
-          <PasswordCreateField />
-          <PasswordConfirmationField />
+          <UsernameField required />
+          <EmailField required />
+          <PasswordCreateField required />
+          <PasswordConfirmationField required />
+          <DateOfBirthField />
           <GenderField />
         </div>
         <div className="flex flex-col gap-5 lg:w-1/2">
-          <DateOfBirthField />
           <PhoneNumberField />
-          <CountryField />
+          <CountryField required />
           <ConsentNewsletterField />
-          <ConsentPrivacyPolicyField />
-          <ConsentChildSoulField />
-          <CaptchaEmojiField text={captchaText} />
+          <ConsentPrivacyPolicyField required />
+          <ConsentChildSoulField required />
+          <CaptchaEmojiField text={captchaText} required />
 
           <Button
             role="button"

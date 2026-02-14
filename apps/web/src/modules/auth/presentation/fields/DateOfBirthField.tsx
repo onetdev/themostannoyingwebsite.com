@@ -17,10 +17,12 @@ import { useFormContext } from 'react-hook-form';
 
 interface DateOfBirthFieldProps {
   fieldName?: string;
+  required?: boolean;
 }
 
 export function DateOfBirthField({
   fieldName = 'dateOfBirth',
+  required,
 }: DateOfBirthFieldProps) {
   const t = useTranslations();
   const messages = useMessages();
@@ -74,7 +76,7 @@ export function DateOfBirthField({
 
   return (
     <Field>
-      <FieldLabel>{t('user.field.dateOfBirth')}</FieldLabel>
+      <FieldLabel required={required}>{t('user.field.dateOfBirth')}</FieldLabel>
       <FieldContent>
         <div className="flex gap-3">
           <Select onValueChange={onYearChange}>

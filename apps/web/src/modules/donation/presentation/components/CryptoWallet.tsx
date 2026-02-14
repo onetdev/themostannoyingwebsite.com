@@ -1,6 +1,13 @@
 'use client';
 
-import { Card, CardContent, CardHeader, CardTitle, Button, Input } from '@maw/ui-lib';
+import {
+  Button,
+  Card,
+  CardContent,
+  CardHeader,
+  CardTitle,
+  Input,
+} from '@maw/ui-lib';
 import { useTranslations } from 'next-intl';
 import { QRCodeSVG } from 'qrcode.react';
 import { useState } from 'react';

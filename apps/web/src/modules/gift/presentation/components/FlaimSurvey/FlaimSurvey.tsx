@@ -1,6 +1,6 @@
 'use client';
 
-import { Card, Button, LoaderDots } from '@maw/ui-lib';
+import { Button, Card, LoaderDots } from '@maw/ui-lib';
 import { useRouter } from 'next/navigation';
 import { useTranslations } from 'next-intl';
 import { ComponentProps, useState } from 'react';

@@ -107,8 +107,10 @@ export function FieldContent({ className, ...props }: ComponentProps<'div'>) {
 
 export function FieldLabel({
   className,
+  required,
+  children,
   ...props
-}: ComponentProps<typeof Label>) {
+}: ComponentProps<typeof Label> & { required?: boolean }) {
   return (
     <Label
       data-slot="field-label"
@@ -117,9 +119,10 @@ export function FieldLabel({
         'has-[>[data-slot=field]]:w-full has-[>[data-slot=field]]:flex-col has-[>[data-slot=field]]:rounded-md has-[>[data-slot=field]]:border [&>*]:data-[slot=field]:p-4',
         'has-data-[state=checked]:bg-primary/5 has-data-[state=checked]:border-primary dark:has-data-[state=checked]:bg-primary/10',
         className,
-      )}
-      {...props}
-    />
+      )}>
+      {children}
+      {required && <span className="text-destructive">*</span>}
+    </Label>
   );
 }
 

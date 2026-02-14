@@ -19,9 +19,13 @@ import { useKernelService } from '@/kernel';
 
 interface CountryFieldProps {
   fieldName?: string;
+  required?: boolean;
 }
 
-export function CountryField({ fieldName = 'countryCode' }: CountryFieldProps) {
+export function CountryField({
+  fieldName = 'countryCode',
+  required,
+}: CountryFieldProps) {
   const t = useTranslations();
   const kernelService = useKernelService();
   const {
@@ -46,7 +50,9 @@ export function CountryField({ fieldName = 'countryCode' }: CountryFieldProps) {
 
   return (
     <Field>
-      <FieldLabel htmlFor={fieldName}>{t('user.field.countryCode')}</FieldLabel>
+      <FieldLabel htmlFor={fieldName} required={required}>
+        {t('user.field.countryCode')}
+      </FieldLabel>
       <FieldContent>
         <Controller
           control={control}

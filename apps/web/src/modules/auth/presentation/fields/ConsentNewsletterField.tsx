@@ -6,10 +6,12 @@ import { useFormContext } from 'react-hook-form';
 
 interface ConsentNewsletterFieldProps {
   fieldName?: string;
+  required?: boolean;
 }
 
 export function ConsentNewsletterField({
   fieldName = 'consentNewsletter',
+  required,
 }: ConsentNewsletterFieldProps) {
   const t = useTranslations();
   const {
@@ -20,10 +22,13 @@ export function ConsentNewsletterField({
   return (
     <Field orientation="horizontal" className="items-center gap-2">
       <Checkbox id={fieldName} {...register(fieldName)} />
-      <FieldLabel htmlFor={fieldName} className="text-lg font-semibold">
+      <FieldLabel
+        htmlFor={fieldName}
+        className="font-semibold"
+        required={required}
+        aria-invalid={!!errors[fieldName]}>
         {t('user.field.consentNewsletter')}
       </FieldLabel>
-      <FieldError errors={[errors[fieldName]]} />
     </Field>
   );
 }

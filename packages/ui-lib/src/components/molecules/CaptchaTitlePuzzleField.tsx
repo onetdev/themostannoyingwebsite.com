@@ -13,6 +13,7 @@ import {
 
 export type CaptchaTitlePuzzleFieldProps = {
   fieldName?: string;
+  required?: boolean;
   text: {
     label: string;
     hint: string;
@@ -22,6 +23,7 @@ export type CaptchaTitlePuzzleFieldProps = {
 
 export function CaptchaTitlePuzzleField({
   fieldName = 'captcha',
+  required,
   text,
 }: CaptchaTitlePuzzleFieldProps) {
   const {
@@ -32,7 +34,7 @@ export function CaptchaTitlePuzzleField({
 
   return (
     <Field>
-      <FieldLabel>{text.label}</FieldLabel>
+      <FieldLabel required={required}>{text.label}</FieldLabel>
       <FieldContent>
         <FieldDescription>{text.hint}</FieldDescription>
         <CaptchaTilePuzzle

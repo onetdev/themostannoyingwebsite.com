@@ -72,7 +72,8 @@ export function getSignupFormSchema(t: ZodTranslator) {
       captcha: getCaptchaEmojiSchema(t),
     })
     .refine((data) => data.password === data.passwordConfirmation, {
-      error: t('form.validation.error.passwordMismatch'),
+      message: t('form.validation.error.passwordMismatch'),
+      path: ['passwordConfirmation'],
     });
 }
 

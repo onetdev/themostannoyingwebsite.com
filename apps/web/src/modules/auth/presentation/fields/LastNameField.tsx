@@ -12,9 +12,13 @@ import { useFormContext } from 'react-hook-form';
 
 interface LastNameFieldProps {
   fieldName?: string;
+  required?: boolean;
 }
 
-export function LastNameField({ fieldName = 'lastName' }: LastNameFieldProps) {
+export function LastNameField({
+  fieldName = 'lastName',
+  required,
+}: LastNameFieldProps) {
   const t = useTranslations();
   const {
     formState: { errors },
@@ -23,7 +27,9 @@ export function LastNameField({ fieldName = 'lastName' }: LastNameFieldProps) {
 
   return (
     <Field>
-      <FieldLabel htmlFor={fieldName}>{t('user.field.lastName')}</FieldLabel>
+      <FieldLabel htmlFor={fieldName} required={required}>
+        {t('user.field.lastName')}
+      </FieldLabel>
       <FieldContent>
         <Input
           type="text"

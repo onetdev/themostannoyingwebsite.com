@@ -10,9 +10,10 @@ import { useFormContext } from 'react-hook-form';
 
 interface EmailFieldProps {
   fieldName?: string;
+  required?: boolean;
 }
 
-export function EmailField({ fieldName = 'email' }: EmailFieldProps) {
+export function EmailField({ fieldName = 'email', required }: EmailFieldProps) {
   const t = useTranslations();
   const {
     formState: { errors },
@@ -21,7 +22,9 @@ export function EmailField({ fieldName = 'email' }: EmailFieldProps) {
 
   return (
     <Field>
-      <FieldLabel htmlFor={fieldName}>{t('user.field.email')}</FieldLabel>
+      <FieldLabel htmlFor={fieldName} required={required}>
+        {t('user.field.email')}
+      </FieldLabel>
       <FieldContent>
         <Input
           type="email"

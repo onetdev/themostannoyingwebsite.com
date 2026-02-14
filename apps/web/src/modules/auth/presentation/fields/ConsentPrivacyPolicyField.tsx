@@ -6,10 +6,12 @@ import { useFormContext } from 'react-hook-form';
 
 interface ConsentPrivacyPolicyFieldProps {
   fieldName?: string;
+  required?: boolean;
 }
 
 export function ConsentPrivacyPolicyField({
   fieldName = 'consentPrivacyPolicy',
+  required,
 }: ConsentPrivacyPolicyFieldProps) {
   const t = useTranslations();
   const {
@@ -19,11 +21,17 @@ export function ConsentPrivacyPolicyField({
 
   return (
     <Field orientation="horizontal" className="items-center gap-2">
-      <Checkbox id={fieldName} {...register(fieldName)} />
-      <FieldLabel htmlFor={fieldName} className="text-lg font-semibold">
+      <Checkbox
+        id={fieldName}
+        {...register(fieldName)}
+        aria-invalid={!!errors[fieldName]}
+      />
+      <FieldLabel
+        htmlFor={fieldName}
+        className="font-semibold"
+        required={required}>
         {t('user.field.consentPrivacyPolicy')}
       </FieldLabel>
-      <FieldError errors={[errors[fieldName]]} />
     </Field>
   );
 }

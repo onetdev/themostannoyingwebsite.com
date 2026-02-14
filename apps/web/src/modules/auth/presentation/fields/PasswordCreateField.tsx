@@ -13,10 +13,12 @@ import { useFormContext } from 'react-hook-form';
 
 interface PasswordCreateFieldProps {
   fieldName?: string;
+  required?: boolean;
 }
 
 export function PasswordCreateField({
   fieldName = 'password',
+  required,
 }: PasswordCreateFieldProps) {
   const t = useTranslations();
   const {
@@ -36,7 +38,9 @@ export function PasswordCreateField({
 
   return (
     <Field>
-      <FieldLabel htmlFor={fieldName}>{t('user.field.password')}</FieldLabel>
+      <FieldLabel htmlFor={fieldName} required={required}>
+        {t('user.field.password')}
+      </FieldLabel>
       <FieldContent>
         <Input
           type="password"

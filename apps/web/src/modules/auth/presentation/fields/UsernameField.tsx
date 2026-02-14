@@ -12,9 +12,13 @@ import { useFormContext } from 'react-hook-form';
 
 interface UsernameFieldProps {
   fieldName?: string;
+  required?: boolean;
 }
 
-export function UsernameField({ fieldName = 'username' }: UsernameFieldProps) {
+export function UsernameField({
+  fieldName = 'username',
+  required,
+}: UsernameFieldProps) {
   const t = useTranslations();
   const {
     formState: { errors },
@@ -23,7 +27,9 @@ export function UsernameField({ fieldName = 'username' }: UsernameFieldProps) {
 
   return (
     <Field>
-      <FieldLabel htmlFor={fieldName}>{t('user.field.username')}</FieldLabel>
+      <FieldLabel htmlFor={fieldName} required={required}>
+        {t('user.field.username')}
+      </FieldLabel>
       <FieldContent>
         <Input
           type="text"

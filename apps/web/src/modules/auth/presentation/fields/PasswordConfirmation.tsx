@@ -12,10 +12,12 @@ import { useFormContext } from 'react-hook-form';
 
 interface PasswordConfirmationFieldProps {
   fieldName?: string;
+  required?: boolean;
 }
 
 export function PasswordConfirmationField({
   fieldName = 'passwordConfirmation',
+  required,
 }: PasswordConfirmationFieldProps) {
   const t = useTranslations();
   const {
@@ -25,7 +27,7 @@ export function PasswordConfirmationField({
 
   return (
     <Field>
-      <FieldLabel htmlFor={fieldName}>
+      <FieldLabel htmlFor={fieldName} required={required}>
         {t('user.field.passwordConfirmation')}
       </FieldLabel>
       <FieldContent>
