@@ -4,10 +4,10 @@ import { ZodTranslator } from '@/kernel';
 
 export function getPasswordReminderFormSchema(t: ZodTranslator) {
   return z.object({
-    email: z.email({ error: t('form.validation.error.emailInvalid') }),
+    email: z.email({ message: t('form.validation.error.emailInvalid') }),
     captcha: z
       .string()
-      .min(1, { error: t('form.validation.error.captchaRequired') }),
+      .min(1, { message: t('form.validation.error.captchaRequired') }),
   });
 }
 

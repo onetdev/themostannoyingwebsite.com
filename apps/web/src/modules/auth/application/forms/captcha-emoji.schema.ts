@@ -5,7 +5,7 @@ import { ZodTranslator } from '@/kernel';
 export function getCaptchaEmojiSchema(t: ZodTranslator) {
   return z
     .string()
-    .min(1, { error: t('form.validation.error.captchaRequired') })
+    .min(1, { message: t('form.validation.error.captchaRequired') })
     .regex(/^[XyZ123]{444}$/, {
       message: t('form.validation.error.captchaInvalid'),
     });

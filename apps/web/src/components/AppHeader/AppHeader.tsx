@@ -3,12 +3,11 @@ import { ComponentProps } from 'react';
 
 import { AppDarkModeToggle } from './AppDarkModeToggle';
 import { AppMobileMenu } from './AppMobileMenu';
+import { AppNavigation } from './AppNavigation';
 import { PainLevelSelector } from './PainLevelSelector';
 import { SearchForm } from './SearchForm';
-import { SiteNavigation } from './SiteNavigation';
 import { TextLogo } from './TextLogo';
 import { ActiveNavigationItem } from './types';
-import { UserNavigation } from './UserNavigation';
 
 import { Link } from '@/i18n/navigation';
 
@@ -36,9 +35,8 @@ export async function AppHeader({ activeItem, className }: AppHeaderProps) {
         </Button>
         <AppDarkModeToggle />
       </div>
-      <div className="col-span-2 my-2 hidden items-center justify-between md:flex">
-        <SiteNavigation className="-ml-3 pl-3 md:ml-0 md:pl-0" />
-        <UserNavigation activeItem={activeItem} />
+      <div className="col-span-2 my-2 hidden items-center md:flex">
+        <AppNavigation activeItem={activeItem} />
       </div>
       <PainLevelSelector className="bg-muted col-span-2 -mx-5 mt-2 md:mt-0 xl:-mx-8" />
     </header>

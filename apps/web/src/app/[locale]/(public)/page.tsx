@@ -50,7 +50,7 @@ export default async function Page({ params }: NextPageProps) {
           {denseArticleList.map((item, index) => (
             <li
               key={index}
-              className="after:border-b-border-surface relative pb-2 after:absolute after:bottom-0 after:w-full after:border-b last:pb-0 last:after:border-0">
+              className="after:border-b-border relative pb-2 after:absolute after:bottom-0 after:w-full after:border-b last:pb-0 last:after:border-0">
               <TextListItem article={item} data-testid="dense-article-item" />
             </li>
           ))}
