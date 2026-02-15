@@ -19,7 +19,7 @@ import { WheelOfFortuneHost } from '@/modules/wheel-of-fortune';
 
 function Layout() {
   const wheelOfFortune = usePainPreferencesStore(
-    state => state.wheelOfFortune
+    state => state.flags.wheelOfFortune
   );
 
   return (

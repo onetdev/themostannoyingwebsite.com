@@ -71,7 +71,10 @@ export function getSignupFormSchema(t: ZodTranslator) {
         .string()
         .min(1, { message: t('form.validation.error.required') }),
       phoneNumberCountry: z.string().optional(),
-      phoneNumber: z.number().optional(),
+      phoneNumber: z.preprocess(
+        (val) => (!val ? undefined : val),
+        z.coerce.number().optional(),
+      ),
       captcha: getCaptchaEmojiSchema(t),
     })
     .refine((data) => data.password === data.passwordConfirmation, {
