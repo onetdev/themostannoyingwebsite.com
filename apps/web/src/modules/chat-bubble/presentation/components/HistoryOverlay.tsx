@@ -1,4 +1,10 @@
-import { DotDotDotText, Icon } from '@maw/ui-lib';
+import {
+  DotDotDotText,
+  Icon,
+  Tooltip,
+  TooltipContent,
+  TooltipTrigger,
+} from '@maw/ui-lib';
 import { useTranslations } from 'next-intl';
 import { useEffect, useMemo, useRef, useState } from 'react';
 
@@ -45,12 +51,19 @@ export function HistoryOverlay({
   return (
     <div className="border-secondary bg-card rounded-lg border">
       <div className="flex flex-row justify-between p-3 pl-5 shadow-xs">
-        <h4 className="text-lg font-bold">
-          {t('chatBubble.hudTitle')}{' '}
-          <abbr title={t('chatBubble.hudTitleDisclaimer')}>*</abbr>
+        <h4 className="flex items-center gap-1 text-lg font-bold">
+          {t('chatBubble.hudTitle')}
+          <Tooltip>
+            <TooltipTrigger asChild>
+              <span className="cursor-help font-normal">*</span>
+            </TooltipTrigger>
+            <TooltipContent side="top">
+              {t('chatBubble.hudTitleDisclaimer')}
+            </TooltipContent>
+          </Tooltip>
         </h4>
         <button onClick={() => onClose()}>
-          <Icon icon="close" size="lg" />
+          <Icon icon="close" />
         </button>
       </div>
       <div

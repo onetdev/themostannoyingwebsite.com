@@ -447,9 +447,9 @@ export default {
   },
   notification: {
     modal: {
-      title: 'You can manually change the notification permission up here',
+      title: 'Oh no, where is the notification permission!?!',
       description:
-        'We would like to send you notifications sometimes, could you be so kind to allow us to do so? 🙏🥺🙏',
+        "We would like to send you notifications sometimes. You can give notification permission to this website from your browser's settings. Could you? 🙏🥺🙏",
     },
   },
   newsletter: {
@@ -575,7 +575,7 @@ export default {
   },
   wheelOfFortune: {
     title: 'Wheel of fortune',
-    spinStart: "Let's spin the wheel!!",
+    spinStart: 'Click or Tap here!',
     spinWin: 'You won! {prize}',
     prizeVariants: {
       freeLifetimeBeer: 'Free lifetime beer',

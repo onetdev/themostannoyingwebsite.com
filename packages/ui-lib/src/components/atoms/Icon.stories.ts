@@ -14,7 +14,6 @@ type Story = StoryObj<typeof meta>;
 export const SampleIcon: Story = {
   args: {
     icon: 'search',
-    size: 'md',
     className: 'text-card-foreground',
   },
 };

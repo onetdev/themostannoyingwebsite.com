@@ -31,7 +31,7 @@ export function SettingsField({
         {info && (
           <Tooltip>
             <TooltipTrigger asChild>
-              <Icon icon="info" size="sm" className="text-muted-foreground" />
+              <Icon icon="info" className="text-muted-foreground" />
             </TooltipTrigger>
             <TooltipContent>{info}</TooltipContent>
           </Tooltip>

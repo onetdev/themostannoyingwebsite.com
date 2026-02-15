@@ -1,82 +1,63 @@
-import { getWeightedRandom, WeightedRandomPoolItem } from '@maw/utils/math';
+'use client';
+
+import { Button, Icon } from '@maw/ui-lib';
 import { useTranslations } from 'next-intl';
-import { ComponentProps, useMemo, useState } from 'react';
+import { ComponentProps } from 'react';
 import Confetti from 'react-confetti';
 
-import { Item } from './DynamicWheelSvg';
-import { AnimatedWheel, AnimatedWheelState } from './WheelAnimationWrapper';
+import { AnimatedWheel } from './WheelAnimationWrapper';
+import { useWheelOfFortune } from '../../application/hooks/useWheelOfFortune';
 
 type ModalContentProps = ComponentProps<'div'>;
 
 export function ModalContent({ className, ...rest }: ModalContentProps) {
   const t = useTranslations();
-  const hueStart = 300; // random(0,360);
-  const [state, setState] = useState<AnimatedWheelState>('ready');
-  const [_prize, setPrize] = useState<Item | undefined>();
+  const wof = useWheelOfFortune();
 
-  const prizeWithWeight = useMemo(
-    () => [
-      {
-        value: `${t('wheelOfFortune.prizeVariants.freeLifetimeBeer')}*`,
-        weight: 10,
-      },
-      { value: `${t('wheelOfFortune.prizeVariants.worldPeace')}*`, weight: 1 },
-      {
-        value: t('wheelOfFortune.prizeVariants.absolutellyNothing'),
-        weight: 100,
-      },
-      {
-        value: `${t('wheelOfFortune.prizeVariants.complimentaryOtter')}*`,
-        weight: 2,
-      },
-      { value: t('wheelOfFortune.prizeVariants.fake70Discount'), weight: 50 },
-    ],
-    [t],
-  );
-
-  const [items] = useState(
-    getSlicesItems(prizeWithWeight, hueStart, hueStart + 120, 10),
-  );
+  const resultDisplay =
+    wof.state === 'completed' && wof.prize
+      ? t('wheelOfFortune.spinWin', { prize: wof.prize.text })
+      : null;
 
   return (
     <div
-      className={`relative flex flex-col overflow-hidden rounded-lg border ${className}`}
+      className={`relative flex flex-col overflow-hidden border-t pt-5 ${className}`}
       {...rest}>
       <div className="grow">
-        {state === 'completed' && (
+        {wof.state === 'completed' && (
           <Confetti
             className="absolute z-0 size-full"
+            height={600}
             numberOfPieces={100}
             width={600}
-            height={600}
           />
         )}
 
         <AnimatedWheel
-          items={items}
-          onStateChange={(newState) => setState(newState)}
-          onSpinCompleted={(newPrize) => setPrize(newPrize)}
+          highlightIndex={wof.prize?.index}
+          items={wof.items}
+          onAnimationComplete={wof.complete}
+          state={wof.state}
         />
+        <div className="bg-muted animate-in fade-in slide-in-from-bottom-4 p-5 text-center duration-500">
+          {!!resultDisplay && (
+            <span className="text-xl font-bold">{resultDisplay}</span>
+          )}
+          {!resultDisplay && wof.state === 'ready' && (
+            <Button
+              variant="ghost"
+              className="text-xl"
+              onClick={() => wof.spin()}>
+              <Icon icon="chevronRight" className="text-sm" />{' '}
+              {t('wheelOfFortune.spinStart')}
+              <Icon icon="chevronLeft" className="text-sm" />
+            </Button>
+          )}
+          {!resultDisplay && wof.state === 'spinning' && (
+            <span className="text-xl font-bold">🚨😱⋆˚꩜｡😱🚨</span>
+          )}
+        </div>
       </div>
     </div>
   );
 }
-
-const getSlicesItems = (
-  pool: WeightedRandomPoolItem<string>[],
-  hueStart: number,
-  hueEnd: number,
-  numItems: number,
-) => {
-  const items: Item[] = [];
-  const range = [hueStart, hueEnd].sort();
-  const step = (range[1] - range[0]) / numItems;
-  for (let i = 0; i < numItems; i++) {
-    items.push({
-      color: `hsl(${range[0] + i * step}, 100%, 50%)`,
-      text: getWeightedRandom(pool)!,
-    });
-  }
-
-  return items;
-};

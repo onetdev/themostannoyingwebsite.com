@@ -20,7 +20,7 @@ export function ManualModal({ visible = false, onDismiss }: ManualModalProps) {
 
   return (
     <Dialog open={visible} onOpenChange={(open) => !open && onDismiss()}>
-      <DialogContent showCloseButton={false}>
+      <DialogContent showCloseButton={false} className="top-5 translate-y-0">
         <DialogHeader>
           <DialogTitle>{t('notification.modal.title')}</DialogTitle>
           <DialogDescription>
