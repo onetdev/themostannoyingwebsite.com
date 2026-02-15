@@ -1,5 +1,6 @@
 import { getTranslations } from 'next-intl/server';
 
+import { FOOTER_NAVIGATION_LINKS } from '@/app/navigation';
 import { Link } from '@/i18n/navigation';
 import { getAppConfigService } from '@/kernel';
 
@@ -11,22 +12,10 @@ export async function AppFooter({ className }: AppFooterProps) {
   const t = await getTranslations();
   const config = getAppConfigService().getAll();
 
-  const links = [
-    { href: '/', label: t('navigation.home') },
-    { href: '/hot-things', label: t('navigation.hotThings') },
-    { href: '/dilf', label: t('navigation.dilf') },
-    { href: '/about', label: t('navigation.about') },
-    { href: '/contact', label: t('navigation.contact') },
-    { href: '/donate', label: t('navigation.donate') },
-    { href: '/user/login', label: t('navigation.login') },
-    { href: '/user/signup', label: t('navigation.signup') },
-    {
-      href: '/user/password-reminder',
-      label: t('navigation.passwordReminder'),
-    },
-    { href: '/settings', label: t('navigation.settings') },
-    { href: '/privacy-policy', label: t('navigation.privacyPolicy') },
-  ];
+  const links = FOOTER_NAVIGATION_LINKS.map((link) => ({
+    href: link.path,
+    label: t(link.labelKey),
+  }));
 
   return (
     <footer

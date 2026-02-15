@@ -89,6 +89,7 @@ export default {
     privacyPolicy: 'Privacy Policy',
     hotThings: 'Hot things',
     dilf: 'DILF',
+    personal: 'Personal',
   },
   metadata: {
     app: {

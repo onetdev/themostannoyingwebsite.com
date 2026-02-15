@@ -2,13 +2,13 @@ import { Button, Icon } from '@maw/ui-lib';
 import { ComponentProps } from 'react';
 
 import { AppDarkModeToggle } from './AppDarkModeToggle';
-import { AppMobileMenu } from './AppMobileMenu';
-import { AppNavigation } from './AppNavigation';
+import { AppNavigationDesktop } from './AppNavigationDesktop';
+import { AppNavigationMobile } from './AppNavigationMobile';
 import { PainLevelSelector } from './PainLevelSelector';
 import { SearchForm } from './SearchForm';
 import { TextLogo } from './TextLogo';
-import { ActiveNavigationItem } from './types';
 
+import { ActiveNavigationItem } from '@/app/navigation';
 import { Link } from '@/i18n/navigation';
 
 type AppHeaderProps = {
@@ -23,7 +23,7 @@ export async function AppHeader({ activeItem, className }: AppHeaderProps) {
       className={`grid grid-cols-2 items-center gap-x-2 px-5 py-3 xl:px-8 ${className ?? ''}`}
       role="banner">
       <div className="flex items-center gap-2">
-        <AppMobileMenu />
+        <AppNavigationMobile />
         <TextLogo />
       </div>
       <div className="flex items-center justify-end gap-4">
@@ -36,7 +36,7 @@ export async function AppHeader({ activeItem, className }: AppHeaderProps) {
         <AppDarkModeToggle />
       </div>
       <div className="col-span-2 my-2 hidden items-center md:flex">
-        <AppNavigation activeItem={activeItem} />
+        <AppNavigationDesktop activeItem={activeItem} />
       </div>
       <PainLevelSelector className="bg-muted col-span-2 -mx-5 mt-2 md:mt-0 xl:-mx-8" />
     </header>
