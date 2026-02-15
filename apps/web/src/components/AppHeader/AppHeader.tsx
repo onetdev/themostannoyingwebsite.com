@@ -23,7 +23,7 @@ export async function AppHeader({ activeItem, className }: AppHeaderProps) {
       className={`grid grid-cols-2 items-center gap-x-2 px-5 py-3 xl:px-8 ${className ?? ''}`}
       role="banner">
       <div className="flex items-center gap-2">
-        <AppNavigationMobile />
+        <AppNavigationMobile activeItem={activeItem} />
         <TextLogo />
       </div>
       <div className="flex items-center justify-end gap-4">

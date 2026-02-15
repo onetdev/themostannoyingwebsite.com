@@ -12,9 +12,9 @@ export const getLoginPage = (page: Page) => {
     ...footer,
 
     headline: page.getByRole('heading', { name: 'Login' }),
-    emailInput: page.getByRole('textbox', { name: 'Email' }),
-    passwordInput: page.getByLabel('Password'),
-    rememberMeCheckbox: page.getByRole('checkbox', { name: 'Remember me' }),
+    emailInput: page.getByRole('textbox', { name: /^Email/ }),
+    passwordInput: page.getByLabel(/^Password/),
+    rememberMeCheckbox: page.getByRole('checkbox', { name: /^Remember me/ }),
     submitButton: page.getByRole('button', { name: 'Login' }),
 
     forgotPasswordLink: page.getByRole('main').getByText('Forgot password?'),

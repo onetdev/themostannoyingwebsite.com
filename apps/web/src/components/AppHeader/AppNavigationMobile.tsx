@@ -77,17 +77,15 @@ export function AppNavigationMobile({ activeItem }: AppNavigationMobileProps) {
               </div>
               {items.map((item) => {
                 const active = isNavigationItemActive(item, activeItem);
+
                 return (
                   <Link
                     key={item.path}
                     href={item.path}
                     onClick={() => onClick(item)}
                     data-active={active}
-                    className={`hover:bg-accent hover:text-accent-foreground flex items-center rounded-md px-3 py-2 text-sm font-medium transition-colors ${
-                      active
-                        ? 'bg-accent text-primary font-semibold'
-                        : 'text-muted-foreground'
-                    }`}>
+                    aria-current={active ? 'page' : undefined}
+                    className="hover:bg-accent hover:text-accent-foreground data-[active=true]:bg-accent data-[active=true]:text-primary text-muted-foreground flex items-center rounded-md px-3 py-2 text-sm font-medium transition-colors data-[active=true]:font-semibold">
                     {item.icon && (
                       <Icon icon={item.icon} className="text-primary mr-2" />
                     )}

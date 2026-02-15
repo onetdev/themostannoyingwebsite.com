@@ -46,11 +46,9 @@ export function AppNavigationDesktop({
       <NavigationMenuItem key={item.key}>
         <NavigationMenuLink
           asChild
-          active={active}
-          className={cn(
-            'flex-row items-center gap-2',
-            !item.icon && active && 'text-primary font-bold',
-          )}>
+          data-active={active}
+          aria-current={active ? 'page' : undefined}
+          className="flex-row items-center gap-2 data-[active=true]:font-bold">
           <Link href={item.path} onClick={() => onClick(item)} passHref>
             {item.icon && <Icon icon={item.icon} className="text-primary" />}
             <span
