@@ -1,22 +1,36 @@
 'use client';
 
-import { DropdownSelect, FormFieldError, LabelText } from '@maw/ui-lib';
+import {
+  Field,
+  FieldContent,
+  FieldError,
+  FieldLabel,
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@maw/ui-lib';
 import { useTranslations } from 'next-intl';
 import { useEffect, useState } from 'react';
-import { useFormContext } from 'react-hook-form';
+import { Controller, useFormContext } from 'react-hook-form';
 
 import { useKernelService } from '@/kernel';
 
 interface CountryFieldProps {
   fieldName?: string;
+  required?: boolean;
 }
 
-export function CountryField({ fieldName = 'countryCode' }: CountryFieldProps) {
+export function CountryField({
+  fieldName = 'countryCode',
+  required,
+}: CountryFieldProps) {
   const t = useTranslations();
   const kernelService = useKernelService();
   const {
     formState: { errors },
-    register,
+    control,
   } = useFormContext();
 
   const [countryOptions, setCountryOptions] = useState<
@@ -35,19 +49,35 @@ export function CountryField({ fieldName = 'countryCode' }: CountryFieldProps) {
   }, [kernelService]);
 
   return (
-    <div>
-      <label htmlFor={fieldName}>
-        <LabelText className="mb-1">{t('user.field.countryCode')}</LabelText>
-        <DropdownSelect
-          placeholder=""
-          className="w-full"
-          id={fieldName}
-          aria-label={t('user.field.countryCode')}
-          values={countryOptions}
-          {...register(fieldName)}
+    <Field>
+      <FieldLabel htmlFor={fieldName} required={required}>
+        {t('user.field.countryCode')}
+      </FieldLabel>
+      <FieldContent>
+        <Controller
+          control={control}
+          name={fieldName}
+          render={({ field, fieldState }) => (
+            <Select onValueChange={field.onChange} value={field.value}>
+              <SelectTrigger
+                className="w-full"
+                id={fieldName}
+                aria-label={t('user.field.countryCode')}
+                aria-invalid={fieldState.invalid}>
+                <SelectValue placeholder="" />
+              </SelectTrigger>
+              <SelectContent>
+                {countryOptions.map((option) => (
+                  <SelectItem key={option.value} value={option.value}>
+                    {option.label}
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
+          )}
         />
-      </label>
-      <FormFieldError error={errors[fieldName]} />
-    </div>
+        <FieldError errors={[errors[fieldName]]} />
+      </FieldContent>
+    </Field>
   );
 }

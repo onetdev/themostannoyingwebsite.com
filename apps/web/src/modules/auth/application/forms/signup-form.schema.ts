@@ -37,39 +37,49 @@ export function getSignupFormSchema(t: ZodTranslator) {
     .object({
       firstName: z
         .string()
-        .min(1, { error: t('form.validation.error.required') }),
+        .min(1, { message: t('form.validation.error.required') }),
       lastName: z
         .string()
-        .min(1, { error: t('form.validation.error.required') }),
-      email: z.email({ error: t('form.validation.error.emailInvalid') }),
+        .min(1, { message: t('form.validation.error.required') }),
+      email: z.email({ message: t('form.validation.error.emailInvalid') }),
       password: z
         .string()
         .min(12, {
-          error: t('form.validation.error.minLength', { count: 12 }),
+          message: t('form.validation.error.minLength', { count: 12 }),
         })
         .refine((value) => validatePassword(value, t)),
       passwordConfirmation: z
         .string()
-        .min(1, { error: t('form.validation.error.required') }),
-      dateOfBirth: z.date().optional(),
+        .min(1, { message: t('form.validation.error.required') }),
+      dateOfBirth: z.preprocess(
+        (val) => (!val ? undefined : val),
+        z.coerce.date().optional(),
+      ),
       username: z
         .string()
-        .min(1, { error: t('form.validation.error.required') }),
+        .min(1, { message: t('form.validation.error.required') }),
       nickname: z.string().optional(),
       consentNewsletter: z.boolean().optional(),
       consentPrivacyPolicy: z.boolean().refine((val) => val === true, {
-        error: t('form.validation.error.checkboxRequired'),
+        message: t('form.validation.error.checkboxRequired'),
+      }),
+      consentChildSoul: z.boolean().refine((val) => val === true, {
+        message: t('form.validation.error.checkboxRequired'),
       }),
       gender: GenderSchema.optional(),
       countryCode: z
         .string()
-        .min(1, { error: t('form.validation.error.required') }),
+        .min(1, { message: t('form.validation.error.required') }),
       phoneNumberCountry: z.string().optional(),
-      phoneNumber: z.number().optional(),
+      phoneNumber: z.preprocess(
+        (val) => (!val ? undefined : val),
+        z.coerce.number().optional(),
+      ),
       captcha: getCaptchaEmojiSchema(t),
     })
     .refine((data) => data.password === data.passwordConfirmation, {
-      error: t('form.validation.error.passwordMismatch'),
+      message: t('form.validation.error.passwordMismatch'),
+      path: ['passwordConfirmation'],
     });
 }
 

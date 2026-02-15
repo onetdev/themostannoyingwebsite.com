@@ -19,33 +19,33 @@
   <h1>Text colors</h1>
   <p>Text color usually pairs with a background color, this way proper contract can be predefined.</p>
   <ul className="!list-none !p-0">
-    <li><div className="bg-primary text-on-primary">.bg-primary .on-primary</div></li>
-    <li><div className="bg-secondary text-on-secondary">.bg-secondary .on-secondary</div></li>
-    <li><div className="bg-tertiary text-on-tertiary">.bg-tertiary .on-tertiary</div></li>
-    <li><div className="bg-background text-on-background">.bg-background .on-background</div></li>
-    <li><div className="bg-surface text-on-surface">.bg-surface .on-surface</div></li>
-    <li><div className="bg-success text-on-success">.bg-success .on-success</div></li>
-    <li><div className="bg-warning text-on-warning">.bg-warning .on-warning</div></li>
-    <li><div className="bg-error text-on-error">.bg-error .on-error</div></li>
+    <li><div className="bg-primary text-primary-foreground">.bg-primary .text-primary-foreground</div></li>
+    <li><div className="bg-secondary text-secondary-foreground">.bg-secondary .text-secondary-foreground</div></li>
+    <li><div className="bg-tertiary text-tertiary-foreground">.bg-tertiary .text-tertiary-foreground</div></li>
+    <li><div className="bg-background text-foreground">.bg-background .text-foreground</div></li>
+    <li><div className="bg-card text-card-foreground">.bg-card .text-card-foreground</div></li>
+    <li><div className="bg-success text-success-foreground">.bg-success .text-success-foreground</div></li>
+    <li><div className="bg-warning text-warning-foreground">.bg-warning .text-warning-foreground</div></li>
+    <li><div className="bg-destructive text-destructive-foreground">.bg-destructive .text-destructive-foreground</div></li>
   </ul>
 
   <h1>Borders</h1>
   <p>There are a few border colors defined based on what background they are on.</p>
   <ul className="!list-none !p-0">
-    <li className="p-5 bg-surface">
-      <div className="border-b border-border-surface text-on-surface">.border-border-surface</div>
+    <li className="p-5 bg-card">
+      <div className="border-b border-border text-card-foreground">.border-border (on card)</div>
     </li>
-    <li className="p-5 bg-surface-alt">
-      <div className="border-b border-border-surface-alt text-on-surface">.border-border-surface-alt</div>
+    <li className="p-5 bg-muted">
+      <div className="border-b border-border text-card-foreground">.border-border (on muted)</div>
     </li>
     <li className="p-5 bg-primary">
-      <div className="border-b border-border-primary text-on-primary">.border-border-primary</div>
+      <div className="border-b border-border-primary text-primary-foreground">.border-border-primary</div>
     </li>
     <li className="p-5 bg-secondary">
-      <div className="border-b border-border-secondary text-on-secondary">.border-border-secondary</div>
+      <div className="border-b border-border-secondary text-secondary-foreground">.border-border-secondary</div>
     </li>
     <li className="p-5 bg-tertiary">
-      <div className="border-b border-border-tertiary text-on-tertiary">.border-border-tertiary</div>
+      <div className="border-b border-border-tertiary text-tertiary-foreground">.border-border-tertiary</div>
     </li>
   </ul>
 </div>

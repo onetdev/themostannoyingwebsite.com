@@ -1,14 +1,24 @@
 'use client';
 
-import { FormFieldError, LabelText, TextInput } from '@maw/ui-lib';
+import {
+  Field,
+  FieldContent,
+  FieldError,
+  FieldLabel,
+  Input,
+} from '@maw/ui-lib';
 import { useTranslations } from 'next-intl';
 import { useFormContext } from 'react-hook-form';
 
 interface UsernameFieldProps {
   fieldName?: string;
+  required?: boolean;
 }
 
-export function UsernameField({ fieldName = 'username' }: UsernameFieldProps) {
+export function UsernameField({
+  fieldName = 'username',
+  required,
+}: UsernameFieldProps) {
   const t = useTranslations();
   const {
     formState: { errors },
@@ -16,17 +26,20 @@ export function UsernameField({ fieldName = 'username' }: UsernameFieldProps) {
   } = useFormContext();
 
   return (
-    <>
-      <label htmlFor={fieldName}>
-        <LabelText className="mb-1">{t('user.field.username')}</LabelText>
-        <TextInput
+    <Field>
+      <FieldLabel htmlFor={fieldName} required={required}>
+        {t('user.field.username')}
+      </FieldLabel>
+      <FieldContent>
+        <Input
           type="text"
           className="w-full"
           id={fieldName}
+          aria-invalid={!!errors[fieldName]}
           {...register(fieldName)}
         />
-      </label>
-      <FormFieldError error={errors[fieldName]} />
-    </>
+        <FieldError errors={[errors[fieldName]]} />
+      </FieldContent>
+    </Field>
   );
 }

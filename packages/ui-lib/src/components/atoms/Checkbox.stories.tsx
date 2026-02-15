@@ -1,32 +1,40 @@
 import type { Meta, StoryObj } from '@storybook/nextjs';
-import { fn } from 'storybook/test';
 
 import { Checkbox } from './Checkbox';
 
-const meta: Meta<typeof Checkbox> = {
-  title: 'Example/Checkbox',
+const meta = {
+  title: 'Atoms/Checkbox',
   component: Checkbox,
   tags: ['autodocs'],
-  argTypes: {
-    onValueChange: {
-      description:
-        'Simplified change event retuning only the value of the selected option',
-    },
-    checked: {
-      control: 'boolean',
-      defaultValue: false,
+  parameters: {
+    docs: {
+      description: {
+        component:
+          'Core Shadcn Checkbox component. See [official documentation](https://ui.shadcn.com/docs/components/checkbox).',
+      },
     },
   },
-  args: {
-    onValueChange: fn(),
-  },
-};
+} satisfies Meta<typeof Checkbox>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-export const SampleCheckbox: Story = {
+export const Default: Story = {
   args: {
-    checked: false,
+    id: 'terms',
+  },
+};
+
+export const Checked: Story = {
+  args: {
+    id: 'terms-checked',
+    checked: true,
+  },
+};
+
+export const Disabled: Story = {
+  args: {
+    id: 'terms-disabled',
+    disabled: true,
   },
 };

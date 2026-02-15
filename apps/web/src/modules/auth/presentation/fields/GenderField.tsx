@@ -1,21 +1,35 @@
 'use client';
 
-import { DropdownSelect, FormFieldError, LabelText } from '@maw/ui-lib';
+import {
+  Field,
+  FieldContent,
+  FieldError,
+  FieldLabel,
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@maw/ui-lib';
 import { useTranslations } from 'next-intl';
 import { useMemo } from 'react';
-import { useFormContext } from 'react-hook-form';
+import { Controller, useFormContext } from 'react-hook-form';
 
 import { GenderList } from '../../domain';
 
 interface GenderFieldProps {
   fieldName?: string;
+  required?: boolean;
 }
 
-export function GenderField({ fieldName = 'gender' }: GenderFieldProps) {
+export function GenderField({
+  fieldName = 'gender',
+  required,
+}: GenderFieldProps) {
   const t = useTranslations();
   const {
     formState: { errors },
-    register,
+    control,
   } = useFormContext();
 
   const genderOptions = useMemo(() => {
@@ -34,18 +48,32 @@ export function GenderField({ fieldName = 'gender' }: GenderFieldProps) {
   }, [t]);
 
   return (
-    <div>
-      <label>
-        <LabelText className="mb-1">{t('user.field.gender')}</LabelText>
-        <DropdownSelect
-          placeholder=""
-          values={genderOptions}
-          className="w-full"
-          aria-label={t('user.field.gender')}
-          {...register(fieldName)}
+    <Field>
+      <FieldLabel required={required}>{t('user.field.gender')}</FieldLabel>
+      <FieldContent>
+        <Controller
+          control={control}
+          name={fieldName}
+          render={({ field, fieldState }) => (
+            <Select onValueChange={field.onChange} value={field.value}>
+              <SelectTrigger
+                className="w-full"
+                aria-label={t('user.field.gender')}
+                aria-invalid={fieldState.invalid}>
+                <SelectValue placeholder="" />
+              </SelectTrigger>
+              <SelectContent>
+                {genderOptions.map((option) => (
+                  <SelectItem key={option.value} value={option.value}>
+                    {option.label}
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
+          )}
         />
-      </label>
-      <FormFieldError error={errors[fieldName]} />
-    </div>
+        <FieldError errors={[errors[fieldName]]} />
+      </FieldContent>
+    </Field>
   );
 }

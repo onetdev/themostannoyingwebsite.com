@@ -1,4 +1,4 @@
-import type { Meta, StoryObj } from '@storybook/react';
+import type { Meta, StoryObj } from '@storybook/nextjs';
 
 import { Icon } from '@maw/ui-lib';
 
@@ -14,7 +14,6 @@ type Story = StoryObj<typeof meta>;
 export const SampleIcon: Story = {
   args: {
     icon: 'search',
-    size: 'md',
-    className: 'text-on-surface',
+    className: 'text-card-foreground',
   },
 };

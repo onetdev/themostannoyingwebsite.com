@@ -1,12 +1,19 @@
-import { FormFieldError, LabelText, TextInput } from '@maw/ui-lib';
+import {
+  Field,
+  FieldContent,
+  FieldError,
+  FieldLabel,
+  Input,
+} from '@maw/ui-lib';
 import { useTranslations } from 'next-intl';
 import { useFormContext } from 'react-hook-form';
 
 interface EmailFieldProps {
   fieldName?: string;
+  required?: boolean;
 }
 
-export function EmailField({ fieldName = 'email' }: EmailFieldProps) {
+export function EmailField({ fieldName = 'email', required }: EmailFieldProps) {
   const t = useTranslations();
   const {
     formState: { errors },
@@ -14,17 +21,20 @@ export function EmailField({ fieldName = 'email' }: EmailFieldProps) {
   } = useFormContext();
 
   return (
-    <>
-      <label htmlFor={fieldName}>
-        <LabelText className="mb-1">{t('user.field.email')}</LabelText>
-        <TextInput
+    <Field>
+      <FieldLabel htmlFor={fieldName} required={required}>
+        {t('user.field.email')}
+      </FieldLabel>
+      <FieldContent>
+        <Input
           type="email"
           className="w-full"
           id={fieldName}
+          aria-invalid={!!errors[fieldName]}
           {...register(fieldName)}
         />
-      </label>
-      <FormFieldError error={errors[fieldName]} />
-    </>
+        <FieldError errors={[errors[fieldName]]} />
+      </FieldContent>
+    </Field>
   );
 }

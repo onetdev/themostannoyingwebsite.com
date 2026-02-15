@@ -40,7 +40,7 @@ export const SmallCoverListItem: FunctionComponent<SmallCoverListItemProps> = ({
           {article.title}
         </h5>
         <small
-          className="text-on-surface m-0 mb-1 line-clamp-2 leading-snug hover:no-underline"
+          className="text-card-foreground m-0 mb-1 line-clamp-2 leading-snug hover:no-underline"
           title={article.intro}>
           {article.intro}
         </small>

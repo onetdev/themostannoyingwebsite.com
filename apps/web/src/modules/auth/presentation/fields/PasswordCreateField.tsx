@@ -1,20 +1,24 @@
 'use client';
 
 import {
-  FormFieldError,
-  LabelText,
+  Field,
+  FieldContent,
+  FieldError,
+  FieldLabel,
+  Input,
   PasswordStrengthBar,
-  TextInput,
 } from '@maw/ui-lib';
 import { useTranslations } from 'next-intl';
 import { useFormContext } from 'react-hook-form';
 
 interface PasswordCreateFieldProps {
   fieldName?: string;
+  required?: boolean;
 }
 
 export function PasswordCreateField({
   fieldName = 'password',
+  required,
 }: PasswordCreateFieldProps) {
   const t = useTranslations();
   const {
@@ -33,22 +37,25 @@ export function PasswordCreateField({
   };
 
   return (
-    <>
-      <label htmlFor={fieldName}>
-        <LabelText className="mb-1">{t('user.field.password')}</LabelText>
-        <TextInput
+    <Field>
+      <FieldLabel htmlFor={fieldName} required={required}>
+        {t('user.field.password')}
+      </FieldLabel>
+      <FieldContent>
+        <Input
           type="password"
           className="w-full"
           id={fieldName}
+          aria-invalid={!!errors[fieldName]}
           {...register(fieldName)}
         />
-      </label>
-      <PasswordStrengthBar
-        className="mt-3"
-        password={password}
-        text={passwordStrengthText}
-      />
-      <FormFieldError error={errors[fieldName]} />
-    </>
+        <PasswordStrengthBar
+          className="mt-3"
+          password={password}
+          text={passwordStrengthText}
+        />
+        <FieldError errors={[errors[fieldName]]} />
+      </FieldContent>
+    </Field>
   );
 }

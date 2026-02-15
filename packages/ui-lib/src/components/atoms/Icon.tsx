@@ -2,6 +2,11 @@ import {
   faArrowUpRightFromSquare,
   faBars,
   faCheck,
+  faChevronDown,
+  faChevronLeft,
+  faChevronRight,
+  faChevronUp,
+  faCircle,
   faCircleExclamation,
   faCircleInfo,
   faCommentDots,
@@ -25,6 +30,11 @@ import { FunctionComponent } from 'react';
 
 const iconMap = {
   check: faCheck,
+  chevronDown: faChevronDown,
+  chevronLeft: faChevronLeft,
+  chevronRight: faChevronRight,
+  chevronUp: faChevronUp,
+  circle: faCircle,
   close: faTimes,
   colorPicker: faEyeDropper,
   commentDots: faCommentDots,
@@ -44,41 +54,22 @@ const iconMap = {
 };
 export type IconAliaseKey = keyof typeof iconMap;
 
-const iconSizeMap: Record<string, string> = {
-  xs: 'size-1',
-  sm: 'size-3',
-  md: 'size-4',
-  lg: 'size-5',
-  '2xl': 'size-6',
-  '3xl': 'size-8',
-  '4xl': 'size-9',
-  '5xl': 'size-12',
-};
-export type IconSize = keyof typeof iconSizeMap;
-
 export type IconProps = Omit<
   FontAwesomeIconProps,
   'icon' | 'className' | 'size'
 > & {
   icon: IconAliaseKey;
-  size?: IconSize;
   className?: string;
 };
 
-export const Icon: FunctionComponent<IconProps> = ({
-  icon,
-  size = 'md',
-  className,
-  ...rest
-}) => {
+export function Icon({ icon, className, ...rest }: IconProps) {
   const resolvedIcon = iconMap[icon];
-  const resolvedSize = iconSizeMap[size] || iconSizeMap.md;
 
   return (
     <FontAwesomeIcon
       icon={resolvedIcon}
-      className={`${resolvedSize}! ${className ?? ''}`}
+      className={`${className ?? ''}`}
       {...rest}
     />
   );
-};
+}

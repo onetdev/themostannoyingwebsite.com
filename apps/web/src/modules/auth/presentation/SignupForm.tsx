@@ -11,6 +11,7 @@ import { useTranslations } from 'next-intl';
 import { FormProvider } from 'react-hook-form';
 
 import {
+  ConsentChildSoulField,
   ConsentNewsletterField,
   ConsentPrivacyPolicyField,
   CountryField,
@@ -60,43 +61,30 @@ export function SignupForm() {
         method="post"
         onSubmit={handleSubmit(onSubmit)}>
         <FormError error={errors.root} />
-        <div className="flex flex-col gap-5 lg:w-1/2">
+        <div className="flex flex-col gap-4 lg:w-1/2">
           <div className="flex flex-row gap-5">
             <div className="grow">
-              <FirstNameField />
+              <FirstNameField required />
             </div>
             <div className="grow">
-              <LastNameField />
+              <LastNameField required />
             </div>
           </div>
-          <div>
-            <NicknameField />
-          </div>
-          <div>
-            <UsernameField />
-          </div>
-          <div>
-            <EmailField />
-          </div>
-          <div>
-            <PasswordCreateField />
-          </div>
-          <div>
-            <PasswordConfirmationField />
-          </div>
+          <NicknameField />
+          <UsernameField required />
+          <EmailField required />
+          <PasswordCreateField required />
+          <PasswordConfirmationField required />
+          <DateOfBirthField />
           <GenderField />
         </div>
         <div className="flex flex-col gap-5 lg:w-1/2">
-          <DateOfBirthField />
           <PhoneNumberField />
-          <CountryField />
-          <div>
-            <ConsentNewsletterField />
-          </div>
-          <div>
-            <ConsentPrivacyPolicyField />
-          </div>
-          <CaptchaEmojiField text={captchaText} />
+          <CountryField required />
+          <ConsentNewsletterField />
+          <ConsentPrivacyPolicyField required />
+          <ConsentChildSoulField required />
+          <CaptchaEmojiField text={captchaText} required />
 
           <Button
             role="button"

@@ -68,5 +68,6 @@ export function useSurvey({ timeLimitInSeconds }: UseSurveryParams) {
     selectOption,
     progression,
     questionData,
+    index: questionIndex,
   };
 }

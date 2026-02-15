@@ -1,11 +1,19 @@
 'use client';
 
 import {
-  Button,
-  DropdownSelect,
-  FormFieldError,
-  LabelText,
-  TextInput,
+  Field,
+  FieldContent,
+  FieldError,
+  FieldLabel,
+  InputGroup,
+  InputGroupAddon,
+  InputGroupButton,
+  InputGroupInput,
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
 } from '@maw/ui-lib';
 import { useTranslations } from 'next-intl';
 import {
@@ -16,18 +24,20 @@ import {
   useRef,
   useState,
 } from 'react';
-import { useFormContext } from 'react-hook-form';
+import { Controller, useFormContext } from 'react-hook-form';
 
 import { useKernelService } from '@/kernel';
 
 interface PhoneNumberFieldProps {
   fieldName?: string;
   countryCodeFieldName?: string;
+  required?: boolean;
 }
 
 export function PhoneNumberField({
   fieldName = 'phoneNumber',
   countryCodeFieldName = 'phoneNumberCountry',
+  required,
 }: PhoneNumberFieldProps) {
   const t = useTranslations();
   const kernelService = useKernelService();
@@ -36,6 +46,7 @@ export function PhoneNumberField({
     register,
     setValue,
     getValues,
+    control,
   } = useFormContext();
 
   const $decrementBtn = useRef<HTMLButtonElement>(null);
@@ -50,9 +61,9 @@ export function PhoneNumberField({
   useEffect(() => {
     kernelService.getAllCountries().then((data) => {
       setPhoneCountryOptions(
-        data.map(({ localName, phone }) => ({
+        data.map(({ localName, phone, code }) => ({
           label: `${phone} ${localName}`,
-          value: phone,
+          value: `${code} ${phone}`,
         })),
       );
     });
@@ -130,54 +141,66 @@ export function PhoneNumberField({
   };
 
   return (
-    <div>
-      <label>
-        <LabelText className="mb-1">{t('user.field.phoneNumber')}</LabelText>
+    <Field>
+      <FieldLabel required={required}>{t('user.field.phoneNumber')}</FieldLabel>
+      <FieldContent>
         <div className="flex gap-3">
-          <DropdownSelect
-            placeholder=""
-            className="w-1/4"
-            aria-label={t('user.field.phoneNumberCountryCode')}
-            values={phoneCountryOptions}
-            {...register(countryCodeFieldName)}
+          <Controller
+            control={control}
+            name={countryCodeFieldName}
+            render={({ field, fieldState: { invalid } }) => (
+              <Select onValueChange={field.onChange} value={field.value}>
+                <SelectTrigger
+                  className="w-1/4"
+                  aria-label={t('user.field.phoneNumberCountryCode')}
+                  aria-invalid={invalid}>
+                  <SelectValue />
+                </SelectTrigger>
+                <SelectContent>
+                  {phoneCountryOptions.map((option) => (
+                    <SelectItem key={option.value} value={option.value}>
+                      {option.label}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+            )}
           />
-          <div className="flex w-3/4">
-            <Button
-              ref={$decrementBtn}
-              type="button"
-              className="rounded-none rounded-l-lg px-3 select-none"
-              variant="primary"
-              size="sm"
-              aria-label={t('user.field.phoneNumberDecrease')}
-              onMouseDown={onDecrementClick}
-              onTouchStart={onDecrementClick}>
-              -
-            </Button>
-            <TextInput
+          <InputGroup className="w-3/4">
+            <InputGroupAddon align="inline-start">
+              <InputGroupButton
+                ref={$decrementBtn}
+                variant="outline"
+                aria-label={t('user.field.phoneNumberDecrease')}
+                onMouseDown={onDecrementClick}
+                onTouchStart={onDecrementClick}>
+                -
+              </InputGroupButton>
+            </InputGroupAddon>
+            <InputGroupInput
               type="number"
               disabled
               aria-label={t('user.field.phoneNumberAreaCode')}
-              className="max-w-44 rounded-none border-x-0 select-none"
+              className="select-none"
+              aria-invalid={!!errors[fieldName]}
               {...register(fieldName)}
             />
-            <Button
-              ref={$incrementBtn}
-              type="button"
-              className="rounded-none rounded-r-lg px-3"
-              size="sm"
-              aria-label={t('user.field.phoneNumberIncrease')}
-              onMouseDown={onIncrementClick}
-              onTouchStart={onIncrementClick}>
-              +
-            </Button>
-          </div>
+            <InputGroupAddon align="inline-end">
+              <InputGroupButton
+                ref={$incrementBtn}
+                variant="outline"
+                aria-label={t('user.field.phoneNumberIncrease')}
+                onMouseDown={onIncrementClick}
+                onTouchStart={onIncrementClick}>
+                +
+              </InputGroupButton>
+            </InputGroupAddon>
+          </InputGroup>
         </div>
-      </label>
-      {errors[countryCodeFieldName] ? (
-        <FormFieldError error={errors[countryCodeFieldName]} />
-      ) : (
-        <FormFieldError error={errors[fieldName]} />
-      )}
-    </div>
+        <FieldError
+          errors={[errors[countryCodeFieldName], errors[fieldName]]}
+        />
+      </FieldContent>
+    </Field>
   );
 }

@@ -1,7 +1,9 @@
 import { PropsWithChildren } from 'react';
 
 import { AppFooter } from './AppFooter';
-import { ActiveNavigationItem, AppHeader } from './AppHeader';
+import { AppHeader } from './AppHeader';
+
+import { ActiveNavigationItem } from '@/app/navigation';
 
 type PageLayoutProps = PropsWithChildren<
   { activeItem?: ActiveNavigationItem; autoPadding?: boolean } & Pick<

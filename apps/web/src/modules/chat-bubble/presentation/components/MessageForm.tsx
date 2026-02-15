@@ -1,4 +1,10 @@
-import { Button, Icon, TextInput } from '@maw/ui-lib';
+import {
+  Icon,
+  InputGroup,
+  InputGroupAddon,
+  InputGroupButton,
+  InputGroupInput,
+} from '@maw/ui-lib';
 import { useTranslations } from 'next-intl';
 import { SubmitEventHandler, useRef } from 'react';
 
@@ -27,20 +33,22 @@ export function MessageForm({ className, onMessage }: MessageFormProps) {
       className={className}
       onSubmit={handleFormSubmit}
       ref={userForm}>
-      <TextInput
-        name="message"
-        title={t('chatBubble.yourMessage')}
-        placeholder={t('chatBubble.yourMessagePlaceholder')}
-        ref={userMessage}
-        className="-mr-1 w-full rounded-r-none"
-      />
-      <Button
-        className="flex items-center rounded-l-none"
-        aria-label={t('common.send')}
-        type="submit"
-        size="md">
-        <Icon icon="send" />
-      </Button>
+      <InputGroup>
+        <InputGroupInput
+          name="message"
+          title={t('chatBubble.yourMessage')}
+          placeholder={t('chatBubble.yourMessagePlaceholder')}
+          ref={userMessage}
+        />
+        <InputGroupAddon align="inline-end">
+          <InputGroupButton
+            aria-label={t('common.send')}
+            type="submit"
+            size="sm">
+            <Icon icon="send" />
+          </InputGroupButton>
+        </InputGroupAddon>
+      </InputGroup>
     </form>
   );
 }

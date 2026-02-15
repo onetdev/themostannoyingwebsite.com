@@ -28,7 +28,7 @@ export default function Page() {
     <PageLayout
       autoPadding={false}
       activeItem="login"
-      className="mx-auto max-w-[900px] py-0 md:py-14"
+      className="mx-auto max-w-[900px] px-5 py-0 md:py-14"
       role="main">
       <SignupPage />
     </PageLayout>

@@ -8,10 +8,12 @@ export default {
     recruiting:
       'Want to extend what you see here? Visit our <linkTag>GitHub</linkTag> repo to get started.',
     aiDisclose:
-      'AI text and image generation was used to produce contents of this website.',
-    copyright: 'Copyright © {year} The Most Annoying Website',
+      'This website utilizes generative AI for creative content and media. Any resemblance to helpful information is purely coincidental.',
+    copyright: '© {year} The Most Annoying Website. All rights reserved.',
     dataStorageDisclaimer:
-      "We don't store any form data of: newsletter subscriptions, login, signup, password reminder.",
+      'Privacy First: We do not persist sensitive form inputs or user credentials.',
+    noWarranties:
+      'Provided "as is" without warranty. We are not responsible for your lost time or frustration.',
     cookieConsent:
       "This website uses cookies to ensure you get the best experience on our website. It's also a joke so many of the features are buggy or doens't even work on purpose. You can customize your experience and cookie settings in the settings menu.",
     donate: {
@@ -36,6 +38,11 @@ export default {
       disclaimer: 'Disclaimer',
       disclaimerDetails:
         'This project is developed by a private individual based in Hungary. Any financial support or donation— including crypto—is voluntary, final, and does not grant you any rights, services, or special access. Donations are not tax-deductible.<br></br><br></br>No legal, tax, or financial advice is provided. If you have questions about donating or your own tax obligations, please consult a qualified professional in your jurisdiction.<br></br><br></br>All funds received are handled in accordance with applicable Hungarian tax laws.',
+      crypto: {
+        network: 'Network: {network}',
+        copyAction: 'Copy Address',
+        copyFeedback: 'Copied!',
+      },
     },
     exitPrompt:
       "I'd reconsider leaving before some bad things happend to you. Are you sure?",
@@ -82,6 +89,7 @@ export default {
     privacyPolicy: 'Privacy Policy',
     hotThings: 'Hot things',
     dilf: 'DILF',
+    personal: 'Personal',
   },
   metadata: {
     app: {
@@ -284,6 +292,7 @@ export default {
     field: {
       consentNewsletter: 'I want to receive newsletter',
       consentPrivacyPolicy: 'Accept privacy policy',
+      consentChildSoul: "My first born child's soul",
       countryCode: 'Country',
       dateOfBirth: 'Date of birth',
       dateOfBirthYear: 'Year',
@@ -374,6 +383,39 @@ export default {
       wheelOfFortune: 'Wheel of fortune',
       stickyVideo: 'Sticky video',
     },
+    optionalPainPointsHints: {
+      gifts: {
+        detectAdblocker:
+          'Shows a large red banner if an adblocker is detected.',
+        flaps:
+          'Shows ad flaps on the sides of the page that can be clicked and leads to different pages.',
+        oneByOne: 'Mainly covered an animated advertisement on the home page.',
+      },
+      clipboardMarker:
+        'Adds a "Read more at..." link when you copy text from the website.',
+      contentPaywall:
+        'Shows a fake paywall overlay on some content, you can still reveal the content.',
+      deadPixel: 'Places a few fake "dead" pixels on your screen to annoy you.',
+      disableContextMenu:
+        'Prevents you from using the right-click menu and displays an alert instead.',
+      exitPrompt:
+        'Shows a "Are you sure you want to leave?" prompt when trying to close the tab or navigate away.',
+      historySpam:
+        "Fills your browser history with fake entries so you can't easily go back. This can make it inconvinient to get back to search engine results.",
+      mockChat:
+        'Shows an annoying "human" chat bubble that only messages you when you close it and it constantly displays "agent is writing" in the meantime.',
+      newsletterModal:
+        'Periodically shows a newsletter subscription modal, especially when page comes back from inactivity (switching tabs).',
+      notifications:
+        'Asks for notification permissions and shows fake notifications.',
+      pageTitleInactiveArrayPaged:
+        'Changes the tab title to something attention-grabbing when the tab is inactive.',
+      searchDelay: 'Adds a fake, long loading delay to all searches.',
+      wheelOfFortune:
+        'Shows a fake "Wheel of Fortune" modal that gives you absolute useless prizes.',
+      stickyVideo:
+        'Shows a sticky video player that follows you as you scroll.',
+    },
     mandatoryExperienceFlags: {
       title: 'Mandatory experience',
       impossibleLogin: 'Impossible login',
@@ -405,9 +447,9 @@ export default {
   },
   notification: {
     modal: {
-      title: 'You can manually change the notification permission up here',
+      title: 'Oh no, where is the notification permission!?!',
       description:
-        'We would like to send you notifications sometimes, could you be so kind to allow us to do so? 🙏🥺🙏',
+        "We would like to send you notifications sometimes. You can give notification permission to this website from your browser's settings. Could you? 🙏🥺🙏",
     },
   },
   newsletter: {
@@ -533,7 +575,7 @@ export default {
   },
   wheelOfFortune: {
     title: 'Wheel of fortune',
-    spinStart: "Let's spin the wheel!!",
+    spinStart: 'Click or Tap here!',
     spinWin: 'You won! {prize}',
     prizeVariants: {
       freeLifetimeBeer: 'Free lifetime beer',

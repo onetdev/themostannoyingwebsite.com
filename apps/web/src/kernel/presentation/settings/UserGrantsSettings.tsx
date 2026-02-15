@@ -1,11 +1,15 @@
 'use client';
 
 import {
-  BorderedBox,
-  CompactFormRow,
+  Card,
+  CardContent,
+  CardHeader,
+  CardTitle,
   Checkbox as FormCheckbox,
 } from '@maw/ui-lib';
 import { useTranslations } from 'next-intl';
+
+import { SettingsField } from './SettingsField';
 
 import { useUserGrantsStore } from '@/kernel';
 
@@ -14,31 +18,32 @@ export function UserGrantsSettings() {
   const t = useTranslations();
 
   return (
-    <BorderedBox
-      title={t('settings.userGrants.title')}
-      data-testid="user-grants-settings">
-      <CompactFormRow label={t('settings.userGrants.essentialCookies')}>
-        <FormCheckbox
-          name="essential_cookies"
-          checked={grant.cookies.essential}
-          disabled
-        />
-      </CompactFormRow>
-      <br />
-      <small>
-        <i>{t('settings.userGrants.permissionDisclaimer')}</i>
-      </small>
-      <br />
-      <CompactFormRow
-        label={t('settings.userGrants.notificationPermission')}
-        reverse>
-        {`${grant.permission.notification || t('common.notSet')}`}
-      </CompactFormRow>
-      <CompactFormRow
-        label={t('settings.userGrants.locationPermission')}
-        reverse>
-        {`${grant.permission.location || t('common.notSet')}`}
-      </CompactFormRow>
-    </BorderedBox>
+    <Card data-testid="user-grants-settings">
+      <CardHeader>
+        <CardTitle>{t('settings.userGrants.title')}</CardTitle>
+      </CardHeader>
+      <CardContent className="flex flex-col gap-1">
+        <SettingsField label={t('settings.userGrants.essentialCookies')}>
+          <FormCheckbox
+            name="essential_cookies"
+            checked={grant.cookies.essential}
+            disabled
+          />
+        </SettingsField>
+        <p className="py-5 text-sm">
+          <i>{t('settings.userGrants.permissionDisclaimer')}</i>
+        </p>
+        <SettingsField
+          label={t('settings.userGrants.notificationPermission')}
+          reverse>
+          {`${grant.permission.notification || t('common.notSet')}`}
+        </SettingsField>
+        <SettingsField
+          label={t('settings.userGrants.locationPermission')}
+          reverse>
+          {`${grant.permission.location || t('common.notSet')}`}
+        </SettingsField>
+      </CardContent>
+    </Card>
   );
 }

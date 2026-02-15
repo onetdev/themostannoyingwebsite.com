@@ -24,4 +24,13 @@
 
   /* Transform utilities */
   --translate-screen-h-half: 50vh;
+
+  /* Shadcn-ui compatibility */
+  --radius-lg: var(--radius);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-sm: calc(var(--radius) - 4px);
+}
+
+:root {
+  --radius: 0.5rem;
 }

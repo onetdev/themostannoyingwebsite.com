@@ -1,24 +1,40 @@
 'use client';
 
-import { Button, Icon, TextInput } from '@maw/ui-lib';
-import { FormElementSize } from '@maw/ui-lib/utils';
+import {
+  Icon,
+  InputGroup,
+  InputGroupAddon,
+  InputGroupButton,
+  InputGroupInput,
+} from '@maw/ui-lib';
+import { cn, cva, VariantProps } from '@maw/ui-lib/utils';
 import { useRouter } from 'next/navigation';
 import { useTranslations } from 'next-intl';
 import { SubmitEventHandler } from 'react';
 
 import { DOCUMENT_EVENT_SEARCH } from '@/global';
 
-export type SearchFormSize = FormElementSize;
-export type SearchFormProps = {
+const searchFormVariants = cva('', {
+  variants: {
+    size: {
+      md: '',
+      lg: 'md:h-12 md:text-lg',
+    },
+  },
+  defaultVariants: {
+    size: 'md',
+  },
+});
+
+export type SearchFormProps = VariantProps<typeof searchFormVariants> & {
   className?: string;
   initialValue?: string;
-  size?: SearchFormSize;
 };
 
 export function SearchForm({
   className,
   initialValue = '',
-  size = 'sm',
+  size = 'md',
 }: SearchFormProps) {
   const t = useTranslations();
   const router = useRouter();
@@ -26,40 +42,41 @@ export function SearchForm({
   const onSubmit: SubmitEventHandler<HTMLFormElement> = (event) => {
     event.preventDefault();
 
+    const form = event.currentTarget;
+    const searchInput = form.elements.namedItem('search') as HTMLInputElement;
+    const query = searchInput.value;
+
     // Sooo, we want to avoid edge requests thus using fragment instead
     // The search doesn't work anyways
-    router.push(`/search#query=${event.currentTarget.search.value}`);
+    router.push(`/search#query=${query}`);
 
     // If we are already on the search page, we will also need to dispatch
     // the search event
     const searchEvent = new CustomEvent(DOCUMENT_EVENT_SEARCH, {
-      detail: { query: event.currentTarget.search.value },
+      detail: { query },
     });
     document.dispatchEvent(searchEvent);
   };
 
   return (
-    <form
-      method="post"
-      onSubmit={onSubmit}
-      className={`flex ${className}`}
-      role="search">
-      <TextInput
-        defaultValue={initialValue}
-        className="-mr-1 w-full rounded-r-none"
-        size={size}
-        variant="primary"
-        name="search"
-        placeholder={t('search.placeholder')}
-      />
-      <Button
-        className="flex items-center rounded-l-none"
-        aria-label={t('common.search')}
-        variant="primary"
-        type="submit"
-        size={size}>
-        <Icon icon="search" size="sm" />
-      </Button>
+    <form method="post" onSubmit={onSubmit} className={className} role="search">
+      <InputGroup className={cn(searchFormVariants({ size }))}>
+        <InputGroupInput
+          defaultValue={initialValue}
+          name="search"
+          placeholder={t('search.placeholder')}
+          autoComplete="off"
+          className={cn(searchFormVariants({ size }))}
+        />
+        <InputGroupAddon align="inline-end">
+          <InputGroupButton
+            aria-label={t('common.search')}
+            type="submit"
+            className={cn(searchFormVariants({ size }))}>
+            <Icon icon="search" />
+          </InputGroupButton>
+        </InputGroupAddon>
+      </InputGroup>
     </form>
   );
 }

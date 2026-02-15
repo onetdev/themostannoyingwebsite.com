@@ -41,7 +41,7 @@ export function SlotDigit({ value, delay = 0 }: SlotDigitProps) {
   }, [value, delay]);
 
   return (
-    <div className="bg-surface shadow-inner-alt relative h-12 w-8 overflow-hidden rounded text-3xl font-bold">
+    <div className="bg-card shadow-inner-alt relative h-12 w-8 overflow-hidden rounded text-3xl font-bold">
       <div
         className={`flex flex-col items-center justify-center transition-transform ${
           isSpinning ? 'duration-50' : 'duration-300 ease-out'

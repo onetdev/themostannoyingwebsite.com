@@ -44,9 +44,7 @@ export function PasswordReminderPage() {
         method="post"
         onSubmit={handleSubmit(onSubmit)}>
         <FormError error={errors.root} />
-        <div>
-          <EmailField />
-        </div>
+        <EmailField />
         <CaptchaTitlePuzzleField text={captchaText} />
 
         <Button

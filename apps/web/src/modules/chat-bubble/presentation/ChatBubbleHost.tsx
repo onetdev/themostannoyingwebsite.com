@@ -44,12 +44,7 @@ export function ChatBubbleHost() {
       <button
         className="bg-secondary text-on-secondary z-30 flex size-12 cursor-pointer items-center justify-center rounded-full text-2xl md:size-14"
         onClick={toggleHistory}>
-        <span className="hidden md:block">
-          <Icon icon="commentDots" size="3xl" />
-        </span>
-        <span className="block md:hidden">
-          <Icon icon="commentDots" size="2xl" />
-        </span>
+        <Icon icon="commentDots" className="text-md block md:text-2xl" />
         {state.badgeCounter > 0 && (
           <div className="bg-error text-on-error absolute -top-2 -right-2 z-20 flex size-6 items-center justify-center rounded-full p-1 text-center text-xs md:size-7">
             <span>{state.badgeCounter}</span>

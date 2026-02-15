@@ -2,10 +2,18 @@
 
 import { useFormContext } from 'react-hook-form';
 
-import { CaptchaEmoji, FormFieldError, LabelText, TextInput } from '../atoms';
+import { CaptchaEmoji, Input } from '../atoms';
+import {
+  Field,
+  FieldContent,
+  FieldDescription,
+  FieldError,
+  FieldLabel,
+} from '../organisms/Field';
 
 export type CaptchaEmojiFieldProps = {
   fieldName?: string;
+  required?: boolean;
   text: {
     label: string;
     hint: string;
@@ -14,6 +22,7 @@ export type CaptchaEmojiFieldProps = {
 
 export function CaptchaEmojiField({
   fieldName = 'captcha',
+  required,
   text,
 }: CaptchaEmojiFieldProps) {
   const {
@@ -22,23 +31,23 @@ export function CaptchaEmojiField({
   } = useFormContext();
 
   return (
-    <div className="flex flex-col">
-      <label>
-        <LabelText className="mb-1">{text.label}</LabelText>
-        <p className="text-sm">{text.hint}</p>
+    <Field>
+      <FieldLabel required={required}>{text.label}</FieldLabel>
+      <FieldContent>
+        <FieldDescription>{text.hint}</FieldDescription>
         <CaptchaEmoji
-          className="border-on-background my-3 rounded-md border"
+          className="border-foreground my-3 rounded-md border"
           width={300}
           height={100}
         />
-        <TextInput
+        <Input
           type="text"
           className="w-[300px]"
           aria-label={text.label}
           {...register(fieldName)}
         />
-      </label>
-      <FormFieldError error={errors[fieldName]} />
-    </div>
+        <FieldError errors={[errors[fieldName]]} />
+      </FieldContent>
+    </Field>
   );
 }

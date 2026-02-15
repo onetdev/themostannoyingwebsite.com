@@ -13,11 +13,10 @@ export const getHeader = (page: Page) => {
       // Main menu
       home: header.getByRole('link', { name: 'Home' }),
       hotThings: header.getByRole('link', { name: 'Hot things' }),
-      contact: header.getByRole('link', { name: 'Contact' }),
       dilf: header.getByRole('link', { name: 'DILF' }),
-      privacyPolicy: header.getByRole('link', { name: 'Privacy Policy' }),
-      about: header.getByRole('link', { name: 'About' }),
       donate: header.getByRole('link', { name: 'Donate' }),
+      about: header.getByRole('link', { name: 'About' }),
+      contact: header.getByRole('link', { name: 'Contact' }),
 
       // Account menu
       settings: header.getByRole('link', { name: 'Settings' }),

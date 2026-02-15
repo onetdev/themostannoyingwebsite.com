@@ -1,4 +1,15 @@
-import { Button, FormFieldError, Modal, TextInput } from '@maw/ui-lib';
+import {
+  Button,
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+  FormFieldError,
+  Input,
+  Separator,
+} from '@maw/ui-lib';
 import { random } from '@maw/utils/math';
 import { useMessages, useTranslations } from 'next-intl';
 import { useMemo, useState } from 'react';
@@ -61,32 +72,41 @@ export function NewsletterModal({
   };
 
   return (
-    <Modal
-      visible={visible}
-      title={t('newsletter.modal.title')}
-      onClose={onDismiss}
-      actions={<div className="flex gap-3">{renderActions()}</div>}>
-      <form
-        className="max-w-screen-sm"
-        method="post"
-        onSubmit={handleSubmit(onSubmit)}>
-        {actions.text && <p className="mb-4">{actions.text}</p>}
-        {!actions.text && (
-          <>
-            <p className="mb-4">{t('newsletter.modal.description')}</p>
-            <TextInput
-              placeholder={t('newsletter.modal.placeholder')}
-              size="lg"
-              type="email"
-              className="w-full"
-              required
-              {...register('email')}
-            />
-            <FormFieldError error={errors.email} />
-          </>
-        )}
-      </form>
-    </Modal>
+    <Dialog open={visible} onOpenChange={(open) => !open && onDismiss?.()}>
+      <DialogContent>
+        <DialogHeader>
+          <DialogTitle>{t('newsletter.modal.title')}</DialogTitle>
+          <DialogDescription className="sr-only">
+            {t('newsletter.modal.description')}
+          </DialogDescription>
+        </DialogHeader>
+
+        <Separator />
+        <form
+          className="max-w-screen-sm"
+          method="post"
+          onSubmit={handleSubmit(onSubmit)}>
+          {actions.text && <p className="mb-4">{actions.text}</p>}
+          {!actions.text && (
+            <>
+              <p className="mb-4">{t('newsletter.modal.description')}</p>
+              <Input
+                placeholder={t('newsletter.modal.placeholder')}
+                type="email"
+                inputSize="large"
+                required
+                {...register('email')}
+              />
+              <FormFieldError error={errors.email} />
+            </>
+          )}
+        </form>
+
+        <DialogFooter>
+          <div className="flex w-full gap-3">{renderActions()}</div>
+        </DialogFooter>
+      </DialogContent>
+    </Dialog>
   );
 }
 

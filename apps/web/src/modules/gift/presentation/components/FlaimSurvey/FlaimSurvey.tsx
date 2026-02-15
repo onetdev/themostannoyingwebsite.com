@@ -1,9 +1,9 @@
 'use client';
 
-import { BorderedBox, BorderedBoxProps, Button, LoaderDots } from '@maw/ui-lib';
+import { Button, Card, LoaderDots } from '@maw/ui-lib';
 import { useRouter } from 'next/navigation';
 import { useTranslations } from 'next-intl';
-import { useState } from 'react';
+import { ComponentProps, useState } from 'react';
 import { useEffectOnce } from 'react-use';
 
 import { UseSurveryParams, useSurvey } from './hooks/useSurvey';
@@ -13,7 +13,7 @@ import { SurveyResult } from './SurveyResult';
 
 import { useRuntimeStore } from '@/kernel';
 
-export type FlaimSurveryProps = BorderedBoxProps & {
+export type FlaimSurveryProps = ComponentProps<typeof Card> & {
   settings: UseSurveryParams;
 };
 
@@ -26,7 +26,7 @@ export function FlaimSurvey({
   const router = useRouter();
   const [loaded, setLoaded] = useState(false);
   const isCompleted = useRuntimeStore((state) => state.flaimSurveyResult);
-  const { next, progression, questionData, selectOption } = useSurvey({
+  const { next, progression, questionData, selectOption, index } = useSurvey({
     ...settings,
   });
 
@@ -39,7 +39,7 @@ export function FlaimSurvey({
   const showResult = loaded && isCompleted !== false;
 
   return (
-    <BorderedBox className={`flex gap-3 ${className}`} {...rest}>
+    <Card className={`flex gap-3 p-5 ${className}`} {...rest}>
       {!loaded && (
         <div className="flex h-60 items-center justify-center">
           <LoaderDots />
@@ -58,7 +58,11 @@ export function FlaimSurvey({
       )}
       {showQuestion && (
         <>
-          <Question data={questionData} selectOption={selectOption} />
+          <Question
+            key={index}
+            data={questionData}
+            selectOption={selectOption}
+          />
           <Button
             onClick={next}
             className="mt-5"
@@ -68,6 +72,6 @@ export function FlaimSurvey({
         </>
       )}
       {showResult && <SurveyResult result={isCompleted} onClick={onHome} />}
-    </BorderedBox>
+    </Card>
   );
 }

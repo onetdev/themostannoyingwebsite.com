@@ -2,6 +2,7 @@ import { expect, test } from '@playwright/test';
 
 import { getSignupPage } from '../../pages/user/SignupPage';
 import { setupE2eTestState } from '../../utils/setup';
+import { selectOption } from '../../utils/shadcn';
 
 test.beforeEach(async ({ page }) => {
   const signupPage = getSignupPage(page);
@@ -23,7 +24,7 @@ test('signup page has 5 required field errors when submitting an empty form', as
   page,
 }) => {
   const signupPage = getSignupPage(page);
-  await signupPage.privacyPolicyCheckbox.check();
+  await signupPage.consentPivacyPolicyCheckbox.check();
 
   await signupPage.createAccountButton.click();
 
@@ -49,18 +50,18 @@ test('signup page field focusability and simple submission check', async ({
   await signupPage.emailInput.fill('info@onet.dev');
   await signupPage.passwordInput.fill('Password!666');
   await signupPage.passwordConfirmationInput.fill('Password!666');
-  await signupPage.genderSelect.selectOption('alien');
-  await signupPage.yearSelect.selectOption('1978');
-  await signupPage.monthSelect.selectOption('1');
-  await signupPage.daySelect.selectOption('1');
-  await signupPage.countryCodeSelect.selectOption('+36');
+  await selectOption(page, signupPage.genderSelect, 'Alien');
+  await selectOption(page, signupPage.dobYearSelect, '1978');
+  await selectOption(page, signupPage.dobMonthSelect, 'January');
+  await selectOption(page, signupPage.dobDaySelect, '1');
+  await selectOption(page, signupPage.countryCodeSelect, '+36 Magyarország');
   await signupPage.decreasePhoneButton.click();
   await signupPage.increasePhoneButton.click();
 
-  await signupPage.countrySelect.selectOption('HU');
+  await selectOption(page, signupPage.countrySelect, 'Magyarország');
 
-  await signupPage.newsletterCheckbox.check();
-  await signupPage.privacyPolicyCheckbox.check();
+  await signupPage.consentNewsletterCheckbox.check();
+  await signupPage.consentPivacyPolicyCheckbox.check();
 
   await signupPage.captchaInput.click();
   await signupPage.captchaInput.fill('invalid');

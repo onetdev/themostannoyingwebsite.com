@@ -52,7 +52,7 @@ function MyComponent() {
 import { ContainerGiftFlaps, OneByOneGift } from '@/modules/gift';
 
 <ContainerGiftFlaps />
-<OneByOneGift items={giftItems} />
+<OneByOneGift />
 ```
 
 ## Routes

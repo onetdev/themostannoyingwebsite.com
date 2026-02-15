@@ -1,15 +1,23 @@
 'use client';
 
-import { FormFieldError, LabelText, TextInput } from '@maw/ui-lib';
+import {
+  Field,
+  FieldContent,
+  FieldError,
+  FieldLabel,
+  Input,
+} from '@maw/ui-lib';
 import { useTranslations } from 'next-intl';
 import { useFormContext } from 'react-hook-form';
 
 interface PasswordConfirmationFieldProps {
   fieldName?: string;
+  required?: boolean;
 }
 
 export function PasswordConfirmationField({
   fieldName = 'passwordConfirmation',
+  required,
 }: PasswordConfirmationFieldProps) {
   const t = useTranslations();
   const {
@@ -18,19 +26,20 @@ export function PasswordConfirmationField({
   } = useFormContext();
 
   return (
-    <>
-      <label htmlFor={fieldName}>
-        <LabelText className="mb-1">
-          {t('user.field.passwordConfirmation')}
-        </LabelText>
-        <TextInput
+    <Field>
+      <FieldLabel htmlFor={fieldName} required={required}>
+        {t('user.field.passwordConfirmation')}
+      </FieldLabel>
+      <FieldContent>
+        <Input
           type="password"
           className="w-full"
           id={fieldName}
+          aria-invalid={!!errors[fieldName]}
           {...register(fieldName)}
         />
-      </label>
-      <FormFieldError error={errors[fieldName]} />
-    </>
+        <FieldError errors={[errors[fieldName]]} />
+      </FieldContent>
+    </Field>
   );
 }

@@ -9,7 +9,7 @@ export const FormError: FunctionComponent<FormErrorProps> = ({ error }) => {
   return (
     <>
       {error && (
-        <div className="bg-error text-on-error block rounded-md px-3 py-2">
+        <div className="bg-error text-error-foreground block rounded-md px-3 py-2">
           {error?.message?.toString()}
         </div>
       )}

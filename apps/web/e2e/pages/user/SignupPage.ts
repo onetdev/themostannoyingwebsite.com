@@ -20,20 +20,21 @@ export const getSignupPage = (page: Page) => {
     passwordConfirmationInput: page.getByRole('textbox', {
       name: 'Password confirmation',
     }),
-    captchaInput: page.getByRole('textbox', { name: 'Captcha' }),
+    genderSelect: page.getByRole('combobox', { name: 'Gender' }),
+    dobYearSelect: page.getByRole('combobox', { name: 'Year' }),
+    dobMonthSelect: page.getByRole('combobox', { name: 'Month' }),
+    dobDaySelect: page.getByRole('combobox', { name: 'Day' }),
+    countryCodeSelect: page.getByRole('combobox', { name: 'Country code' }),
+    countrySelect: page.getByRole('combobox', { name: 'Country', exact: true }),
 
-    genderSelect: page.getByLabel('Gender'),
-    yearSelect: page.getByLabel('Year'),
-    monthSelect: page.getByLabel('Month'),
-    daySelect: page.getByLabel('Day'),
-    countryCodeSelect: page.getByLabel('Country code'),
-    countrySelect: page.getByLabel('Country', { exact: true }),
-
-    privacyPolicyCheckbox: page.getByRole('checkbox', {
+    consentPivacyPolicyCheckbox: page.getByRole('checkbox', {
       name: 'Accept privacy policy',
     }),
-    newsletterCheckbox: page.getByRole('checkbox', {
+    consentNewsletterCheckbox: page.getByRole('checkbox', {
       name: 'I want to receive newsletter',
+    }),
+    consentFirstBornChild: page.getByRole('checkbox', {
+      name: "My first born child's soul",
     }),
 
     createAccountButton: page.getByRole('button', {
@@ -46,6 +47,7 @@ export const getSignupPage = (page: Page) => {
       name: 'Increase phone number',
     }),
 
+    captchaInput: page.getByRole('textbox', { name: 'Captcha' }),
     forgotPasswordLink: page.getByRole('main').getByText('Forgot password?'),
     loginLink: page.getByRole('main').getByText('Login'),
 

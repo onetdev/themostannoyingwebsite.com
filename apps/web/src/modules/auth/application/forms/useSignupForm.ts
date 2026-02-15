@@ -22,6 +22,7 @@ export const signupFormDefaultValues: SignupFormData = {
   nickname: '',
   consentNewsletter: false,
   consentPrivacyPolicy: false,
+  consentChildSoul: false,
   countryCode: '',
   phoneNumberCountry: undefined,
   phoneNumber: undefined,

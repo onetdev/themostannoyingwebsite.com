@@ -403,7 +403,7 @@ export function useLoginForm({ onSuccess }: { onSuccess?: () => void }) {
 'use client';
 
 import { FormProvider } from 'react-hook-form';
-import { Button, TextInput, FormError } from '@maw/ui-lib';
+import { Button, Input, FormError } from '@maw/ui-lib';
 import { useLoginForm } from '../application/forms/useLoginForm';
 
 export function LoginForm() {
@@ -414,8 +414,8 @@ export function LoginForm() {
     <FormProvider {...form}>
       <form onSubmit={handleSubmit(onSubmit)}>
         <FormError error={errors.root} />
-        <TextInput type="email" {...register('email')} />
-        <TextInput type="password" {...register('password')} />
+        <Input type="email" {...register('email')} />
+        <Input type="password" {...register('password')} />
         <Button type="submit">Login</Button>
       </form>
     </FormProvider>
@@ -1243,9 +1243,8 @@ animate-hue-full-rotate      // Full hue rotation
 ```typescript
 import {
   Button,
-  TextInput,
+  Input,
   Checkbox,
-  DropdownSelect,
   FormError,
   FormFieldError,
   PageHeadline,
