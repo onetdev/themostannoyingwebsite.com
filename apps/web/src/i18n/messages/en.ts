@@ -664,6 +664,65 @@ export default {
     videoPlaybackFailed: 'Video playback failed',
     pictureOfYou: 'Picture of you',
   },
+  plansPage: {
+    headline: 'The Ultimate AI Upgrade',
+    disclaimer: {
+      title: 'DISCLAIMER!',
+      description:
+        "Everything on this page is 100% fake. These packages do not exist, and purchasing them is impossible because we don't have a payment processor, or even a real backend for that matter.",
+    },
+    urgency: {
+      title: 'LIMITED TIME OFFER!',
+      description:
+        '{timer} left until these huge discounts are gone for good. This is a once in a lifetime opportunity, do not let your grandkids down!',
+      expired: "You're too late! Prices are back to their original.",
+    },
+    billing: {
+      monthly: 'Monthly',
+      yearly: 'Yearly',
+      biyearly: '2 Years',
+      billedMonthly: 'billed monthly',
+      billedYearly: 'billed every year',
+      billedBiyearly: 'billed every 2 years',
+    },
+    table: {
+      features: 'Features',
+    },
+    features: {
+      selfAwareness: '10% Sentience',
+      existentialDread: 'Daily Existential Crisis',
+      hardwareJudge: 'Hardware Judgment',
+      creativeMath: 'Creative Arithmetic (1+1=5)',
+      fakeFacts: '100% Confident Lies',
+      imaginarySources: 'Imaginary Citations',
+      heavySighs: 'Audible Digital Sighing',
+      judgmentalEllipses: 'Judgmental Ellipses...',
+      superiorTone: 'Superiority Complex',
+      cpuToaster: 'Turn CPU into Toaster',
+      eternalLoading: 'Eternal Loading Spinner',
+      ramHog: '110% RAM Usage',
+      exEmails: '3 AM Emails to Exes',
+      randomGhosting: 'Spontaneous Ghosting',
+      crypticFiles: 'Cryptic File Generation',
+    },
+    packages: {
+      sentience: {
+        title: 'Super Basic Entry',
+        description:
+          'Includes 10% chance of your computer becoming self-aware and questioning your life choices.',
+      },
+      aggressive: {
+        title: 'Passive-Aggressive Assistant',
+        description:
+          'For when you need an AI that sighs audibly and judges you through perfectly placed ellipses...',
+      },
+      ghost: {
+        title: 'Ghost in the Machine Elite',
+        description:
+          'Occasionally sends cryptic emails to your ex or boss on your behalf at 3 AM. Real spontaneity.',
+      },
+    },
+  },
   painPreferences: {
     levelSettings: {
       label: 'Pain level',
