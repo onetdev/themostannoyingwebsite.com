@@ -682,6 +682,7 @@ export default {
       title: 'LIMITED TIME OFFER!',
       description:
         '{timer} left until these huge discounts are gone for good. This is a once in a lifetime opportunity, do not let your grandkids down!',
+      compact: 'LIMITED OFFER! {timer}',
       expired: "You're too late! Prices are back to their original.",
     },
     billing: {

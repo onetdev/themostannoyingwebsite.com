@@ -35,19 +35,20 @@ export function PlansPage({ plans, features }: PlansPageProps) {
 
   return (
     <div className="mx-auto max-w-screen-xl px-5">
-      <PageHeadline className="mb-4">{t('plansPage.headline')}</PageHeadline>
+      <div className="mb-6 flex flex-col items-center justify-between gap-4 sm:flex-row">
+        <PageHeadline className="mb-0">{t('plansPage.headline')}</PageHeadline>
+        <UrgencyCountdown
+          onTick={(timeLeft) => setIsDiscountActive(timeLeft > 0)}
+        />
+      </div>
 
-      <Alert variant="destructive" className="mb-6">
+      <Alert variant="default" className="border-border mb-8">
         <Icon icon="failed" />
         <AlertTitle>{t('plansPage.disclaimer.title')}</AlertTitle>
         <AlertDescription>
           {t('plansPage.disclaimer.description')}
         </AlertDescription>
       </Alert>
-
-      <UrgencyCountdown
-        onTick={(timeLeft) => setIsDiscountActive(timeLeft > 0)}
-      />
 
       <div className="mb-8 flex justify-center">
         <BillingCycleSelector

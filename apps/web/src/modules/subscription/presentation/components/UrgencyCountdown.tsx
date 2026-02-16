@@ -1,6 +1,6 @@
 'use client';
 
-import { Alert, AlertDescription, AlertTitle, Icon } from '@maw/ui-lib';
+import { cn } from '@maw/ui-lib/utils';
 import { useTranslations } from 'next-intl';
 import { useEffect, useState } from 'react';
 
@@ -9,11 +9,13 @@ import { useRuntimeStore } from '@/kernel';
 interface UrgencyCountdownProps {
   timerSeconds?: number;
   onTick?: (timeLeft: number) => void;
+  className?: string;
 }
 
 export function UrgencyCountdown({
   timerSeconds = 600,
   onTick,
+  className,
 }: UrgencyCountdownProps) {
   const t = useTranslations();
   const { startedAt } = useRuntimeStore();
@@ -45,24 +47,17 @@ export function UrgencyCountdown({
     return `${minutes}:${seconds.toString().padStart(2, '0')}`;
   };
 
-  if (timeLeft === null) return null;
+  if (timeLeft === null || timeLeft <= 0) return null;
 
   return (
-    <Alert variant={timeLeft > 0 ? 'info' : 'destructive'} className="mb-10">
-      <Icon
-        icon={timeLeft > 0 ? 'info' : 'failed'}
-        className={timeLeft > 0 ? 'animate-pulse' : ''}
-      />
-      <AlertTitle className="font-bold">
-        {t('plansPage.urgency.title')}
-      </AlertTitle>
-      <AlertDescription className="text-lg">
-        {timeLeft > 0
-          ? t('plansPage.urgency.description', {
-              timer: formatTime(timeLeft),
-            })
-          : t('plansPage.urgency.expired')}
-      </AlertDescription>
-    </Alert>
+    <div
+      className={cn(
+        'bg-destructive text-destructive-foreground animate-pulse rounded-full px-4 py-1.5 text-sm font-bold shadow-lg',
+        className,
+      )}>
+      {t('plansPage.urgency.compact', {
+        timer: formatTime(timeLeft),
+      })}
+    </div>
   );
 }
