@@ -14,8 +14,7 @@ import { getAppConfigService } from '@/kernel';
 
 export async function ContactPage() {
   const t = await getTranslations();
-  const config = getAppConfigService().getDeploymentMeta();
-  const githubUrl = getAppConfigService().getDeploymentMeta().githubUrl;
+  const { contactEmail, githubUrl } = getAppConfigService().getDeploymentMeta();
 
   return (
     <>
@@ -45,10 +44,10 @@ export async function ContactPage() {
             <Separator className="my-4" />
             <p className="text-muted-foreground text-sm italic">
               {t.rich('app.contactForm.alternative', {
-                email: config.contactEmail,
+                email: contactEmail,
                 linkTag: (chunks) => (
                   <a
-                    href={`mailto:${config.contactEmail}`}
+                    href={`mailto:${contactEmail}`}
                     className="text-primary hover:underline">
                     {chunks}
                   </a>
@@ -64,18 +63,17 @@ export async function ContactPage() {
               <CardTitle>{t('app.contactForm.title')}</CardTitle>
             </CardHeader>
             <CardContent>
-              <ContactForm contactEmail={config.contactEmail} />
+              <ContactForm contactEmail={contactEmail} />
             </CardContent>
           </Card>
 
           <div className="lg:hidden">
-            <Separator className="my-4" />
             <p className="text-muted-foreground text-center text-sm italic">
               {t.rich('app.contactForm.alternative', {
-                email: config.contactEmail,
+                email: contactEmail,
                 linkTag: (chunks) => (
                   <a
-                    href={`mailto:${config.contactEmail}`}
+                    href={`mailto:${contactEmail}`}
                     className="text-primary hover:underline">
                     {chunks}
                   </a>

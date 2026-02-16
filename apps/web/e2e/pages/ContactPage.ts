@@ -18,7 +18,7 @@ export const getContactPage = (page: Page) => {
     messageInput: pageLocator.getByRole('textbox', { name: 'Message' }),
     sendLink: pageLocator.getByRole('link', { name: 'Send' }),
     emailLink: pageLocator.getByRole('link', {
-      name: 'info@themostannoyingwebsite.',
+      name: 'info@themostannoyingwebsite.com',
     }),
 
     goto: async () => {
