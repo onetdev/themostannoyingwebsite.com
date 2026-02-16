@@ -102,6 +102,7 @@ export default {
     privacyPolicy: 'Privacy Policy',
     hotThings: 'Hot things',
     dilf: 'DILF',
+    plans: 'AI plans',
     personal: 'Personal',
   },
   metadata: {
@@ -180,6 +181,11 @@ export default {
       description:
         'Looking for a no-frills experience? Disable all personalized features here and enjoy a streamlined, distraction-free version of our site.',
     },
+    plans: {
+      title: 'AI Packages & Plans',
+      description:
+        'Choose from our selection of premium, 100% fake AI packages. Experience the future of annoyance today!',
+    },
     admin: {
       title: 'Admin Terminal',
       description:
@@ -213,6 +219,7 @@ export default {
     reset: 'Reset',
     save: 'Save',
     search: 'Search',
+    select: 'Select',
     send: 'Send',
     share: 'Share',
     submit: 'Submit',
@@ -685,6 +692,7 @@ export default {
       billedYearly: 'billed every year',
       billedBiyearly: 'billed every 2 years',
     },
+    mostPopular: 'Most Popular',
     table: {
       features: 'Features',
     },

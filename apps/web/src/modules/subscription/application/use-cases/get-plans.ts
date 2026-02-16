@@ -20,6 +20,7 @@ export async function getPlans(): Promise<
           biyearly: 67.69,
         },
         featureIds: ['selfAwareness', 'existentialDread', 'hardwareJudge'],
+        isPopular: false,
       },
       {
         key: 'aggressive',
@@ -40,6 +41,7 @@ export async function getPlans(): Promise<
           'heavySighs',
           'judgmentalEllipses',
         ],
+        isPopular: true,
       },
       {
         key: 'ghost',
@@ -68,6 +70,7 @@ export async function getPlans(): Promise<
           'randomGhosting',
           'crypticFiles',
         ],
+        isPopular: false,
       },
     ],
   };
