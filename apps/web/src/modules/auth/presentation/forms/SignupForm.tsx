@@ -10,6 +10,7 @@ import {
 import { useTranslations } from 'next-intl';
 import { FormProvider } from 'react-hook-form';
 
+import { useSignupForm } from '../../application/forms';
 import {
   ConsentChildSoulField,
   ConsentNewsletterField,
@@ -25,8 +26,7 @@ import {
   PasswordCreateField,
   PhoneNumberField,
   UsernameField,
-} from './fields';
-import { useSignupForm } from '../application/forms';
+} from '../fields';
 
 import { useNavigationProvider } from '@/kernel';
 

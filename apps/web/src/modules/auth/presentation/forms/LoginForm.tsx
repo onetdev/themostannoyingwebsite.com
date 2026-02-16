@@ -16,8 +16,8 @@ import {
 import { useTranslations } from 'next-intl';
 import { FormProvider } from 'react-hook-form';
 
-import { EmailField } from './fields/EmailField';
-import { useLoginForm } from '../application/forms/useLoginForm';
+import { useLoginForm } from '../../application/forms/useLoginForm';
+import { EmailField } from '../fields/EmailField';
 
 import { useNavigationProvider } from '@/kernel';
 

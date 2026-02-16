@@ -15,7 +15,7 @@ import { EmailField } from '../fields/EmailField';
 
 import { useNavigationProvider } from '@/kernel';
 
-export function PasswordReminderPage() {
+export function PasswordReminderForm() {
   const t = useTranslations();
   const { LinkComponent: Link, pathFor } = useNavigationProvider();
   const methods = usePasswordReminderForm({
