@@ -53,6 +53,19 @@ export default {
         'All experiences are disabled now. If you want share this page just for the content just pass this URL around. If you changed your mind, you can re-enable all experiences in the settings menu.',
     },
     toggleMenu: 'Toggle menu',
+    contactForm: {
+      title: 'Official contact form',
+      subject: 'Subject',
+      message: 'Message',
+      send: 'Send',
+      placeholderSubject: 'What is this about?',
+      placeholderMessage: 'Type your message here...',
+      alternative:
+        'Alternatively, you can reach us directly at <linkTag>{email}</linkTag>',
+      intro: 'Feel free to contact us if you have any questions or feedback.',
+      reportIssues:
+        'If you encounter any technical issues or want to suggest new pain points, please <linkTag>report them on GitHub</linkTag>.',
+    },
   },
   beggingBanner: {
     prefix: '🚨 Support Needed:',
