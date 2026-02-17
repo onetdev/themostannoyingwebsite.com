@@ -2,7 +2,7 @@
 
 import { PageHeadline } from '@maw/ui-lib';
 import { useTranslations } from 'next-intl';
-import { useState } from 'react';
+import { useCallback, useState } from 'react';
 
 import {
   BillingCycle,
@@ -22,10 +22,7 @@ import {
 interface PlansPageProps {
   plans: SubscriptionPackage[];
   features: SubscriptionFeature[];
-  socialProofConfig: Pick<
-    SocialProofProps,
-    'initialDelayMs' | 'minDelayMs' | 'maxDelayMs'
-  >;
+  socialProofConfig: Pick<SocialProofProps, 'minDelayMs' | 'maxDelayMs'>;
   urgencyConfig?: Pick<
     UrgencyCountdownProps,
     'discountPercentage' | 'timeoutSeconds'
@@ -45,6 +42,11 @@ export function PlansPage({
     plans.find((plan) => plan.isPopular)?.key ?? '',
   );
 
+  const onUrgencyTick = useCallback(
+    (timeLeft: number) => setIsDiscountActive(timeLeft > 0),
+    [],
+  );
+
   return (
     <>
       <SocialProof plans={plans} {...socialProofConfig} />
@@ -55,10 +57,7 @@ export function PlansPage({
       <div className="mb-8 flex flex-col items-center gap-5 md:flex-row md:items-baseline md:justify-between">
         <div>
           {urgencyConfig && (
-            <UrgencyCountdown
-              onTick={(timeLeft) => setIsDiscountActive(timeLeft > 0)}
-              {...urgencyConfig}
-            />
+            <UrgencyCountdown onTick={onUrgencyTick} {...urgencyConfig} />
           )}
         </div>
         <BillingCycleSelector

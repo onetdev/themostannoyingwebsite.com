@@ -34,9 +34,8 @@ const config = {
       timeoutSeconds: 600,
     },
     socialProof: {
-      initialDelayMs: 3000,
-      minDelayMs: 10000,
-      maxDelayMs: 20000,
+      minDelayMs: 5000,
+      maxDelayMs: 15000,
     },
   },
   deploymentMeta: { ...deploymentMeta },

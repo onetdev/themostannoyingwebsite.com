@@ -3,64 +3,61 @@
 import { toast } from '@maw/ui-lib';
 import { random } from '@maw/utils/math';
 import { useTranslations } from 'next-intl';
-import { useEffect } from 'react';
+import { useCallback, useEffect, useMemo, useState } from 'react';
 
 import { SubscriptionPackage } from '../../domain';
 
 export interface SocialProofProps {
   plans: SubscriptionPackage[];
-  initialDelayMs: number;
   minDelayMs: number;
   maxDelayMs: number;
 }
 
 export function SocialProof({
   plans,
-  initialDelayMs,
   minDelayMs,
   maxDelayMs,
 }: SocialProofProps) {
   const t = useTranslations();
+  const [iterator, setIterator] = useState(0);
+
+  const pool = useMemo(() => {
+    return {
+      names: t.raw('plansPage.socialProof.names') as string[],
+      locations: (t.raw('plansPage.socialProof.locations') ?? []) as string[],
+      planNames: plans.map((p) => t(p.titleKey)),
+    };
+  }, [plans, t]);
+
+  const showRandomNotification = useCallback(() => {
+    const name = pool.names[Math.floor(random(0, pool.names.length))];
+    const location =
+      pool.locations[Math.floor(random(0, pool.locations.length))];
+    const plan = pool.planNames[Math.floor(random(0, pool.planNames.length))];
+
+    toast(
+      t('plansPage.socialProof.justSubscribed', {
+        name,
+        location,
+        plan,
+      }),
+      {
+        icon: '🚀',
+      },
+    );
+    setIterator((i) => i + 1);
+  }, [pool, t]);
 
   useEffect(() => {
-    const names = t.raw('plansPage.socialProof.names') as string[];
-    const locations = (t.raw('plansPage.socialProof.locations') ??
-      []) as string[];
-    const planNames = plans.map((p) => t(p.titleKey));
-
-    const showRandomNotification = () => {
-      const name = names[Math.floor(random(0, names.length))];
-      const location = locations[Math.floor(random(0, locations.length))];
-      const plan = planNames[Math.floor(random(0, planNames.length))];
-
-      toast(
-        t('plansPage.socialProof.justSubscribed', {
-          name,
-          location,
-          plan,
-        }),
-        {
-          icon: '🚀',
-        },
-      );
-    };
-
-    // First one after initial delay
-    const initialTimeout = setTimeout(showRandomNotification, initialDelayMs);
-
-    // Then every min-max delay
-    const interval = setInterval(
-      () => {
-        showRandomNotification();
-      },
+    const timer = setTimeout(
+      showRandomNotification,
       random(minDelayMs, maxDelayMs),
     );
 
     return () => {
-      clearTimeout(initialTimeout);
-      clearInterval(interval);
+      clearTimeout(timer);
     };
-  }, [initialDelayMs, maxDelayMs, minDelayMs, plans, t]);
+  }, [maxDelayMs, minDelayMs, showRandomNotification, iterator]);
 
   return null;
 }
