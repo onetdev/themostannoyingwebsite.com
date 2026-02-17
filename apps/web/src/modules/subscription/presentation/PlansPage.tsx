@@ -1,12 +1,6 @@
 'use client';
 
-import {
-  Alert,
-  AlertDescription,
-  AlertTitle,
-  Icon,
-  PageHeadline,
-} from '@maw/ui-lib';
+import { PageHeadline } from '@maw/ui-lib';
 import { useTranslations } from 'next-intl';
 import { useState } from 'react';
 
@@ -16,6 +10,7 @@ import {
   SubscriptionPackage,
 } from '../domain';
 import { BillingCycleSelector } from './components/BillingCycleSelector';
+import { Disclaimer } from './components/Disclaimer';
 import { PlanCard } from './components/PlanCard';
 import { PlanComparison } from './components/PlanComparison';
 import { UrgencyCountdown } from './components/UrgencyCountdown';
@@ -31,33 +26,30 @@ export function PlansPage({ plans, features }: PlansPageProps) {
   const t = useTranslations();
   const [isDiscountActive, setIsDiscountActive] = useState(false);
   const [billingCycle, setBillingCycle] = useState<BillingCycle>('monthly');
-  const [selectedPlanKey, setSelectedPlanKey] = useState<string | null>(null);
+  const [selectedPlanKey, setSelectedPlanKey] = useState<string>(
+    plans.find((plan) => plan.isPopular)?.key ?? '',
+  );
 
   return (
-    <div className="mx-auto max-w-screen-xl px-5">
+    <>
       <div className="mb-6 flex flex-col items-center justify-between gap-4 sm:flex-row">
         <PageHeadline className="mb-0">{t('plansPage.headline')}</PageHeadline>
-        <UrgencyCountdown
-          onTick={(timeLeft) => setIsDiscountActive(timeLeft > 0)}
-        />
       </div>
 
-      <Alert variant="default" className="border-border mb-8">
-        <Icon icon="failed" />
-        <AlertTitle>{t('plansPage.disclaimer.title')}</AlertTitle>
-        <AlertDescription>
-          {t('plansPage.disclaimer.description')}
-        </AlertDescription>
-      </Alert>
-
-      <div className="mb-8 flex justify-center">
+      <div className="mb-8 flex flex-col items-center gap-5 md:flex-row md:items-baseline md:justify-between">
+        <div>
+          <UrgencyCountdown
+            discount={Math.round(URGENCY_DISCOUNT * 100)}
+            onTick={(timeLeft) => setIsDiscountActive(timeLeft > 0)}
+          />
+        </div>
         <BillingCycleSelector
           billingCycle={billingCycle}
           setBillingCycle={setBillingCycle}
         />
       </div>
 
-      <div className="mb-12 flex flex-nowrap justify-center gap-6 overflow-x-auto pb-6">
+      <div className="mb-12 flex flex-wrap justify-center gap-6 pb-6">
         {plans.map((plan) => {
           return (
             <PlanCard
@@ -75,6 +67,8 @@ export function PlansPage({ plans, features }: PlansPageProps) {
       <div className="mb-20 overflow-x-auto">
         <PlanComparison features={features} plans={plans} />
       </div>
-    </div>
+
+      <Disclaimer />
+    </>
   );
 }

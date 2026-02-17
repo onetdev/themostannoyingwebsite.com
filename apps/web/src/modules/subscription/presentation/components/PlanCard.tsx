@@ -32,13 +32,15 @@ export function PlanCard({
 
   const priceBase = plan.monthlyPriceByCycle[billingCycle];
   const priceDiscountCorrected = extraDiscount
-    ? priceBase * (1 - extraDiscount / 100)
+    ? priceBase * (1 - extraDiscount)
     : priceBase;
+  const cumulativeDiscountPercentage =
+    1 - priceDiscountCorrected / plan.monthlyPriceByCycle['monthly'];
 
   return (
     <Card
       className={cn(
-        'hover:border-primary relative flex max-w-[350px] min-w-[300px] shrink-0 flex-col overflow-hidden border-2 transition-colors md:min-w-[350px]',
+        'hover:border-primary relative flex w-full max-w-sm shrink-0 flex-col overflow-hidden border-2 transition-colors',
         isSelected ? 'border-primary' : 'border-border',
       )}>
       {plan.isPopular && (
@@ -61,19 +63,31 @@ export function PlanCard({
       </CardHeader>
       <CardContent className="grow">
         <div className="mb-5 flex flex-col">
-          {extraDiscount ? (
+          {cumulativeDiscountPercentage ? (
             <>
               <div className="text-muted-foreground text-sm line-through">
-                ${priceBase.toFixed(2)}/mo
+                {t('plansPage.pricePerMonth', {
+                  price: priceBase.toFixed(2),
+                })}
               </div>
               <div className="text-primary flex items-center text-2xl font-bold">
-                <span>${priceDiscountCorrected.toFixed(2)}/mo</span>
-                <Badge className="ml-2">-{extraDiscount * 100}%</Badge>
+                <span>
+                  {t('plansPage.pricePerMonth', {
+                    price: priceDiscountCorrected.toFixed(2),
+                  })}
+                </span>
+                <Badge className="ml-2">
+                  {t('plansPage.discount', {
+                    amount: Math.round(cumulativeDiscountPercentage * 100),
+                  })}
+                </Badge>
               </div>
             </>
           ) : (
             <div className="text-primary text-2xl font-bold">
-              ${priceBase.toFixed(2)}/mo
+              {t('plansPage.pricePerMonth', {
+                price: priceBase.toFixed(2),
+              })}
             </div>
           )}
           <div className="text-muted-foreground text-xs">

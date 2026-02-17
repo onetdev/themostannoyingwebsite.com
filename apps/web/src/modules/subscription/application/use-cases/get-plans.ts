@@ -15,9 +15,9 @@ export async function getPlans(): Promise<
         titleKey: 'plansPage.packages.sentience.title',
         descriptionKey: 'plansPage.packages.sentience.description',
         monthlyPriceByCycle: {
-          monthly: 99.9,
-          yearly: 79.9,
-          biyearly: 67.69,
+          monthly: 99,
+          yearly: 89,
+          biyearly: 67,
         },
         featureIds: ['selfAwareness', 'existentialDread', 'hardwareJudge'],
         isPopular: false,
@@ -28,9 +28,9 @@ export async function getPlans(): Promise<
         titleKey: 'plansPage.packages.aggressive.title',
         descriptionKey: 'plansPage.packages.aggressive.description',
         monthlyPriceByCycle: {
-          monthly: 299.9,
-          yearly: 239.92,
-          biyearly: 209.93,
+          monthly: 299,
+          yearly: 249,
+          biyearly: 189,
         },
         featureIds: [
           'selfAwareness',
@@ -49,9 +49,9 @@ export async function getPlans(): Promise<
         titleKey: 'plansPage.packages.ghost.title',
         descriptionKey: 'plansPage.packages.ghost.description',
         monthlyPriceByCycle: {
-          monthly: 999.9,
-          yearly: 799.92,
-          biyearly: 699.93,
+          monthly: 999,
+          yearly: 749,
+          biyearly: 599,
         },
         featureIds: [
           'selfAwareness',

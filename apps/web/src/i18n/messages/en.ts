@@ -672,9 +672,9 @@ export default {
     pictureOfYou: 'Picture of you',
   },
   plansPage: {
-    headline: 'The Ultimate AI Upgrade',
+    headline: 'The Ultimate AI Upgrade *',
     disclaimer: {
-      title: 'DISCLAIMER!',
+      title: '* DISCLAIMER!',
       description:
         "Everything on this page is 100% fake. These packages do not exist, and purchasing them is impossible because we don't have a payment processor, or even a real backend for that matter.",
     },
@@ -682,7 +682,7 @@ export default {
       title: 'LIMITED TIME OFFER!',
       description:
         '{timer} left until these huge discounts are gone for good. This is a once in a lifetime opportunity, do not let your grandkids down!',
-      compact: 'LIMITED OFFER! {timer}',
+      compact: 'LIMITED OFFER! -{discount}% {timer}',
       expired: "You're too late! Prices are back to their original.",
     },
     billing: {
@@ -694,6 +694,8 @@ export default {
       billedBiyearly: 'billed every 2 years',
     },
     mostPopular: 'Most Popular',
+    pricePerMonth: '${price}/mo',
+    discount: '-{amount}%',
     table: {
       features: 'Features',
     },

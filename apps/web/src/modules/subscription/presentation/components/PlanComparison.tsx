@@ -14,15 +14,16 @@ import { useTranslations } from 'next-intl';
 import { SubscriptionFeature, SubscriptionPackage } from '../../domain';
 
 interface PlansPageProps {
-  plans: SubscriptionPackage[];
+  className?: string;
   features: SubscriptionFeature[];
+  plans: SubscriptionPackage[];
 }
 
-export function PlanComparison({ plans, features }: PlansPageProps) {
+export function PlanComparison({ className, features, plans }: PlansPageProps) {
   const t = useTranslations();
 
   return (
-    <Table className="w-full">
+    <Table className={`w-full ${className}`}>
       <TableHeader>
         <TableRow>
           <TableHead className="py-4 pr-4 font-bold">

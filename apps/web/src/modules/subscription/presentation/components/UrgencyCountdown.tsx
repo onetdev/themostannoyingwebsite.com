@@ -8,12 +8,14 @@ import { useRuntimeStore } from '@/kernel';
 
 interface UrgencyCountdownProps {
   timerSeconds?: number;
+  discount?: number;
   onTick?: (timeLeft: number) => void;
   className?: string;
 }
 
 export function UrgencyCountdown({
   timerSeconds = 600,
+  discount,
   onTick,
   className,
 }: UrgencyCountdownProps) {
@@ -57,6 +59,7 @@ export function UrgencyCountdown({
       )}>
       {t('plansPage.urgency.compact', {
         timer: formatTime(timeLeft),
+        discount: discount ?? 0,
       })}
     </div>
   );
