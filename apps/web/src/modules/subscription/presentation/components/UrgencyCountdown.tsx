@@ -55,6 +55,7 @@ export function UrgencyCountdown({
 
   return (
     <div
+      data-testid="urgency-countdown"
       className={cn(
         'bg-destructive text-destructive-foreground rounded-full px-4 py-1.5 text-sm font-bold shadow-lg',
         !isExpired && 'animate-pulse',

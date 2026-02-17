@@ -47,6 +47,7 @@ export function PlanCard({
 
   return (
     <Card
+      data-testid={`plan-card-${plan.key}`}
       className={cn(
         'hover:border-primary relative flex w-full max-w-sm shrink-0 flex-col overflow-hidden border-2 transition-colors',
         isSelected ? 'border-primary' : 'border-border',
@@ -73,12 +74,16 @@ export function PlanCard({
         <div className="mb-5 flex flex-col">
           {cumulativeDiscountPercentage ? (
             <>
-              <div className="text-muted-foreground text-sm line-through">
+              <div
+                className="text-muted-foreground text-sm line-through"
+                data-testid="original-price">
                 {t('plansPage.pricePerMonth', {
                   price: formatCurrency(priceBase),
                 })}
               </div>
-              <div className="text-primary flex items-center text-2xl font-bold">
+              <div
+                className="text-primary flex items-center text-2xl font-bold"
+                data-testid="discounted-price">
                 <span>
                   {t('plansPage.pricePerMonth', {
                     price: formatCurrency(priceDiscountCorrected),
@@ -92,7 +97,9 @@ export function PlanCard({
               </div>
             </>
           ) : (
-            <div className="text-primary text-2xl font-bold">
+            <div
+              className="text-primary text-2xl font-bold"
+              data-testid="original-price">
               {t('plansPage.pricePerMonth', {
                 price: formatCurrency(priceBase),
               })}
@@ -101,11 +108,13 @@ export function PlanCard({
         </div>
         <p className="mb-4">{t(plan.descriptionKey)}</p>
         <Separator />
-        <div className="text-muted-foreground mt-2 text-xs leading-tight italic">
+        <div
+          className="text-muted-foreground mt-2 text-xs leading-tight italic"
+          data-testid="charge-disclaimer">
           {t('plansPage.billing.chargeDisclaimer', {
             amount: formatCurrency(totalCharge),
-          })}
-          , {t(`plansPage.billing.cycle.${billingCycle}`)} *
+          })}{' '}
+          &mdash; {t(`plansPage.billing.cycle.${billingCycle}`)}*
         </div>
       </CardContent>
       <CardFooter>

@@ -19,6 +19,7 @@ export function BillingCycleSelector({
       {BillingCycleList.map((cycle) => (
         <Button
           key={cycle}
+          data-testid={`billing-cycle-${cycle}`}
           variant={billingCycle === cycle ? 'default' : 'ghost'}
           size="sm"
           onClick={() => setBillingCycle(cycle)}>
