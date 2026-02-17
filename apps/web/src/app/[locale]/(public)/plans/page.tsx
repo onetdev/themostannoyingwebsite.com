@@ -3,6 +3,7 @@ import { getTranslations } from 'next-intl/server';
 
 import { PageLayout } from '@/components/PageLayout';
 export { generateStaticParams } from '@/i18n/routing';
+import config from '@/config';
 import {
   createSubscriptionPlansService,
   PlansPage,
@@ -34,6 +35,8 @@ export default async function Page() {
       <PlansPage
         plans={plansResult.data ?? []}
         features={featuresResult.data ?? []}
+        urgencyConfig={config.subscription.urgency}
+        socialProofConfig={config.subscription.socialProof}
       />
     </PageLayout>
   );

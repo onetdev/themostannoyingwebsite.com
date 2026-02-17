@@ -7,16 +7,25 @@ import { useEffect } from 'react';
 
 import { SubscriptionPackage } from '../../domain';
 
-interface SocialProofProps {
+export interface SocialProofProps {
   plans: SubscriptionPackage[];
+  initialDelayMs: number;
+  minDelayMs: number;
+  maxDelayMs: number;
 }
 
-export function SocialProof({ plans }: SocialProofProps) {
+export function SocialProof({
+  plans,
+  initialDelayMs,
+  minDelayMs,
+  maxDelayMs,
+}: SocialProofProps) {
   const t = useTranslations();
 
   useEffect(() => {
     const names = t.raw('plansPage.socialProof.names') as string[];
-    const locations = t.raw('plansPage.socialProof.locations') as string[];
+    const locations = (t.raw('plansPage.socialProof.locations') ??
+      []) as string[];
     const planNames = plans.map((p) => t(p.titleKey));
 
     const showRandomNotification = () => {
@@ -36,22 +45,22 @@ export function SocialProof({ plans }: SocialProofProps) {
       );
     };
 
-    // First one after 3 seconds
-    const initialTimeout = setTimeout(showRandomNotification, 3000);
+    // First one after initial delay
+    const initialTimeout = setTimeout(showRandomNotification, initialDelayMs);
 
-    // Then every 10-20 seconds
+    // Then every min-max delay
     const interval = setInterval(
       () => {
         showRandomNotification();
       },
-      random(10000, 20000),
+      random(minDelayMs, maxDelayMs),
     );
 
     return () => {
       clearTimeout(initialTimeout);
       clearInterval(interval);
     };
-  }, [plans, t]);
+  }, [initialDelayMs, maxDelayMs, minDelayMs, plans, t]);
 
   return null;
 }

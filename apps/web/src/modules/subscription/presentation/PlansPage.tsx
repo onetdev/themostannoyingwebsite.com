@@ -13,17 +13,31 @@ import { BillingCycleSelector } from './components/BillingCycleSelector';
 import { Disclaimer } from './components/Disclaimer';
 import { PlanCard } from './components/PlanCard';
 import { PlanComparison } from './components/PlanComparison';
-import { SocialProof } from './components/SocialProof';
-import { UrgencyCountdown } from './components/UrgencyCountdown';
+import { SocialProof, SocialProofProps } from './components/SocialProof';
+import {
+  UrgencyCountdown,
+  UrgencyCountdownProps,
+} from './components/UrgencyCountdown';
 
 interface PlansPageProps {
   plans: SubscriptionPackage[];
   features: SubscriptionFeature[];
+  socialProofConfig: Pick<
+    SocialProofProps,
+    'initialDelayMs' | 'minDelayMs' | 'maxDelayMs'
+  >;
+  urgencyConfig?: Pick<
+    UrgencyCountdownProps,
+    'discountPercentage' | 'timeoutSeconds'
+  >;
 }
 
-const URGENCY_DISCOUNT = 0.2;
-
-export function PlansPage({ plans, features }: PlansPageProps) {
+export function PlansPage({
+  plans,
+  features,
+  urgencyConfig,
+  socialProofConfig,
+}: PlansPageProps) {
   const t = useTranslations();
   const [isDiscountActive, setIsDiscountActive] = useState(false);
   const [billingCycle, setBillingCycle] = useState<BillingCycle>('monthly');
@@ -33,17 +47,19 @@ export function PlansPage({ plans, features }: PlansPageProps) {
 
   return (
     <>
-      <SocialProof plans={plans} />
+      <SocialProof plans={plans} {...socialProofConfig} />
       <div className="mb-6 flex flex-col items-center justify-between gap-4 sm:flex-row">
         <PageHeadline className="mb-0">{t('plansPage.headline')}</PageHeadline>
       </div>
 
       <div className="mb-8 flex flex-col items-center gap-5 md:flex-row md:items-baseline md:justify-between">
         <div>
-          <UrgencyCountdown
-            discount={Math.round(URGENCY_DISCOUNT * 100)}
-            onTick={(timeLeft) => setIsDiscountActive(timeLeft > 0)}
-          />
+          {urgencyConfig && (
+            <UrgencyCountdown
+              onTick={(timeLeft) => setIsDiscountActive(timeLeft > 0)}
+              {...urgencyConfig}
+            />
+          )}
         </div>
         <BillingCycleSelector
           billingCycle={billingCycle}
@@ -58,7 +74,11 @@ export function PlansPage({ plans, features }: PlansPageProps) {
               key={plan.key}
               plan={plan}
               billingCycle={billingCycle}
-              extraDiscount={isDiscountActive ? URGENCY_DISCOUNT : undefined}
+              extraDiscountPercentage={
+                isDiscountActive
+                  ? (urgencyConfig?.discountPercentage ?? 0)
+                  : undefined
+              }
               isSelected={selectedPlanKey === plan.key}
               onSelect={() => setSelectedPlanKey(plan.key)}
             />

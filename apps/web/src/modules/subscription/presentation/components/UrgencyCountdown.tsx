@@ -6,28 +6,29 @@ import { useEffect, useState } from 'react';
 
 import { useRuntimeStore } from '@/kernel';
 
-interface UrgencyCountdownProps {
-  timerSeconds?: number;
-  discount?: number;
-  onTick?: (timeLeft: number) => void;
+export interface UrgencyCountdownProps {
   className?: string;
+  discountPercentage: number;
+  onTick?: (timeLeft: number) => void;
+  timeoutSeconds: number;
 }
 
 export function UrgencyCountdown({
-  timerSeconds = 600,
-  discount,
-  onTick,
   className,
+  discountPercentage,
+  onTick,
+  timeoutSeconds,
 }: UrgencyCountdownProps) {
   const t = useTranslations();
   const { startedAt } = useRuntimeStore();
   const [timeLeft, setTimeLeft] = useState<number | null>(null);
+  const discount = Math.round(discountPercentage * 100);
 
   useEffect(() => {
     if (!startedAt) return;
 
     const startTime = new Date(startedAt).getTime();
-    const duration = timerSeconds * 1000;
+    const duration = timeoutSeconds * 1000;
     const endTime = startTime + duration;
 
     const updateTimer = () => {
@@ -41,7 +42,7 @@ export function UrgencyCountdown({
     const interval = setInterval(updateTimer, 1000);
 
     return () => clearInterval(interval);
-  }, [startedAt, timerSeconds, onTick]);
+  }, [startedAt, timeoutSeconds, onTick]);
 
   const formatTime = (ms: number) => {
     const minutes = Math.floor(ms / 60000);

@@ -21,7 +21,7 @@ import {
 export interface PlanCardProps {
   plan: SubscriptionPackage;
   billingCycle: BillingCycle;
-  extraDiscount?: number;
+  extraDiscountPercentage?: number;
   isSelected?: boolean;
   onSelect?: () => void;
 }
@@ -29,7 +29,7 @@ export interface PlanCardProps {
 export function PlanCard({
   plan,
   billingCycle,
-  extraDiscount,
+  extraDiscountPercentage: extraDiscount,
   isSelected,
   onSelect,
 }: PlanCardProps) {
