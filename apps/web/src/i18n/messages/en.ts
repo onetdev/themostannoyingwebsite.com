@@ -736,6 +736,33 @@ export default {
           'Occasionally sends cryptic emails to your ex or boss on your behalf at 3 AM. Real spontaneity.',
       },
     },
+    socialProof: {
+      justSubscribed: '{name} from {location} just subscribed to {plan}!',
+      names: [
+        'John D.',
+        'Sarah K.',
+        'Karen L.',
+        'Chad M.',
+        'Anonymous Hippo',
+        'Your Ex',
+        'A Literal Bot',
+        'Someone better than you',
+        'Disappointed Parent',
+        'Satoshi N.',
+      ],
+      locations: [
+        'the Metaverse',
+        'a dark basement',
+        'their parents house',
+        'Mars (soon™)',
+        'the Cloud',
+        'Limbo',
+        'Incognito Mode',
+        'the future',
+        'debt',
+        'Hungary',
+      ],
+    },
   },
   painPreferences: {
     levelSettings: {

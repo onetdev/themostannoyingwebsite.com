@@ -13,6 +13,7 @@ import { BillingCycleSelector } from './components/BillingCycleSelector';
 import { Disclaimer } from './components/Disclaimer';
 import { PlanCard } from './components/PlanCard';
 import { PlanComparison } from './components/PlanComparison';
+import { SocialProof } from './components/SocialProof';
 import { UrgencyCountdown } from './components/UrgencyCountdown';
 
 interface PlansPageProps {
@@ -32,6 +33,7 @@ export function PlansPage({ plans, features }: PlansPageProps) {
 
   return (
     <>
+      <SocialProof plans={plans} />
       <div className="mb-6 flex flex-col items-center justify-between gap-4 sm:flex-row">
         <PageHeadline className="mb-0">{t('plansPage.headline')}</PageHeadline>
       </div>

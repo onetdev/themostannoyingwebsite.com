@@ -1,6 +1,6 @@
 'use client';
 
-import { TooltipProvider } from '@maw/ui-lib';
+import { Toaster, TooltipProvider } from '@maw/ui-lib';
 import { ThemeProvider } from 'next-themes';
 import { PropsWithChildren } from 'react';
 
@@ -26,6 +26,7 @@ export function RootProviderContainer({
           <DependencyProvider>
             <ThemeProvider defaultTheme="dark" enableColorScheme enableSystem>
               <ClientNavigationConfigurator>
+                <Toaster />
                 <ClientPainContainer>{children}</ClientPainContainer>
               </ClientNavigationConfigurator>
             </ThemeProvider>

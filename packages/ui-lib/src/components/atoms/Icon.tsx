@@ -2,6 +2,7 @@ import {
   faArrowUpRightFromSquare,
   faBars,
   faCheck,
+  faCheckCircle,
   faChevronDown,
   faChevronLeft,
   faChevronRight,
@@ -12,24 +13,29 @@ import {
   faCommentDots,
   faEyeDropper,
   faGear,
+  faInfoCircle,
   faMagnifyingGlass,
   faMapMarkerAlt,
   faMoon,
   faPaperPlane,
   faPlayCircle,
+  faSpinner,
   faSun,
   faTags,
   faTimes,
+  faTriangleExclamation,
   faUser,
+  faXmarkCircle,
 } from '@fortawesome/free-solid-svg-icons';
 import {
   FontAwesomeIcon,
   FontAwesomeIconProps,
 } from '@fortawesome/react-fontawesome';
-import { FunctionComponent } from 'react';
 
 const iconMap = {
+  alertTriangle: faTriangleExclamation,
   check: faCheck,
+  checkCircle: faCheckCircle,
   chevronDown: faChevronDown,
   chevronLeft: faChevronLeft,
   chevronRight: faChevronRight,
@@ -40,6 +46,7 @@ const iconMap = {
   commentDots: faCommentDots,
   failed: faCircleExclamation,
   info: faCircleInfo,
+  infoCircle: faInfoCircle,
   login: faUser,
   mapMarker: faMapMarkerAlt,
   menu: faBars,
@@ -49,8 +56,10 @@ const iconMap = {
   send: faPaperPlane,
   settings: faGear,
   share: faArrowUpRightFromSquare,
+  spinner: faSpinner,
   sun: faSun,
   tags: faTags,
+  xmarkCircle: faXmarkCircle,
 };
 export type IconAliaseKey = keyof typeof iconMap;
 
