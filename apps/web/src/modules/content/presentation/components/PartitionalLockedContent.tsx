@@ -1,6 +1,7 @@
 'use client';
 
 import { Button } from '@maw/ui-lib';
+import { formatCurrency } from '@maw/utils/currency';
 import { useTranslations } from 'next-intl';
 import React, {
   FunctionComponent,
@@ -86,7 +87,11 @@ export const PartitionalLockedContent: FunctionComponent<
         data-hidden={!active || isRevealed ? 'true' : 'false'}
         className="bg-bottom-fadeout absolute left-0 w-full opacity-0 transition-all duration-300 ease-in-out data-[hidden=false]:bottom-0 data-[hidden=false]:opacity-100">
         <div className="mx-auto w-full max-w-screen-md pt-16">
-          <h3 className="mb-4">{t('paywall.overlay.title')}</h3>
+          <h3 className="mb-4">
+            {t('paywall.overlay.title', {
+              price: formatCurrency(0.69),
+            })}
+          </h3>
           <div className="my-3 flex gap-2">{renderButtons()}</div>
           <div className="block text-xs italic">
             * {t('paywall.overlay.disclaimer')}

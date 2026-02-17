@@ -49,18 +49,23 @@ export function UrgencyCountdown({
     return `${minutes}:${seconds.toString().padStart(2, '0')}`;
   };
 
-  if (timeLeft === null || timeLeft <= 0) return null;
+  if (timeLeft === null) return null;
+
+  const isExpired = timeLeft <= 0;
 
   return (
     <div
       className={cn(
-        'bg-destructive text-destructive-foreground animate-pulse rounded-full px-4 py-1.5 text-sm font-bold shadow-lg',
+        'bg-destructive text-destructive-foreground rounded-full px-4 py-1.5 text-sm font-bold shadow-lg',
+        !isExpired && 'animate-pulse',
         className,
       )}>
-      {t('plansPage.urgency.compact', {
-        timer: formatTime(timeLeft),
-        discount: discount ?? 0,
-      })}
+      {isExpired
+        ? t('plansPage.urgency.expired')
+        : t('plansPage.urgency.compact', {
+            timer: formatTime(timeLeft),
+            discount: discount ?? 0,
+          })}
     </div>
   );
 }

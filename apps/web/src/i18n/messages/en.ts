@@ -508,7 +508,7 @@ export default {
   paywall: {
     overlay: {
       title:
-        'You either gotta pay $0.69/hour with 24 months of commitment in order to see the next paragraph or need to keep clicking the secondary button.',
+        'You either gotta pay {price}/hour with 24 months of commitment in order to see the next paragraph or need to keep clicking the secondary button.',
       disclaimer:
         "it might not be as secure and legit but that doesn't matter because you can't actually pay on this website.",
       confirm: 'Pay! 100% legit and secure',
@@ -683,18 +683,21 @@ export default {
       description:
         '{timer} left until these huge discounts are gone for good. This is a once in a lifetime opportunity, do not let your grandkids down!',
       compact: 'LIMITED OFFER! -{discount}% {timer}',
-      expired: "You're too late! Prices are back to their original.",
+      expired: 'SORRY! You just missed the sale!',
     },
     billing: {
       monthly: 'Monthly',
       yearly: 'Yearly',
       biyearly: '2 Years',
-      billedMonthly: 'billed monthly',
-      billedYearly: 'billed every year',
-      billedBiyearly: 'billed every 2 years',
+      cycle: {
+        monthly: 'billed monthly',
+        yearly: 'billed every year',
+        biyearly: 'billed every 2 years',
+      },
+      chargeDisclaimer: 'You will be charged {amount} today',
     },
     mostPopular: 'Most Popular',
-    pricePerMonth: '${price}/mo',
+    pricePerMonth: '{price}/mo',
     discount: '-{amount}%',
     table: {
       features: 'Features',

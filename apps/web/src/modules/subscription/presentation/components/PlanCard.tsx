@@ -9,9 +9,14 @@ import {
   Separator,
 } from '@maw/ui-lib';
 import { cn } from '@maw/ui-lib/utils';
+import { formatCurrency } from '@maw/utils/currency';
 import { useTranslations } from 'next-intl';
 
-import { BillingCycle, SubscriptionPackage } from '../../domain';
+import {
+  BILLING_CYCLE_MONTH_MAP,
+  BillingCycle,
+  SubscriptionPackage,
+} from '../../domain';
 
 export interface PlanCardProps {
   plan: SubscriptionPackage;
@@ -36,6 +41,9 @@ export function PlanCard({
     : priceBase;
   const cumulativeDiscountPercentage =
     1 - priceDiscountCorrected / plan.monthlyPriceByCycle['monthly'];
+
+  const totalCharge =
+    priceDiscountCorrected * BILLING_CYCLE_MONTH_MAP[billingCycle];
 
   return (
     <Card
@@ -67,13 +75,13 @@ export function PlanCard({
             <>
               <div className="text-muted-foreground text-sm line-through">
                 {t('plansPage.pricePerMonth', {
-                  price: priceBase.toFixed(2),
+                  price: formatCurrency(priceBase),
                 })}
               </div>
               <div className="text-primary flex items-center text-2xl font-bold">
                 <span>
                   {t('plansPage.pricePerMonth', {
-                    price: priceDiscountCorrected.toFixed(2),
+                    price: formatCurrency(priceDiscountCorrected),
                   })}
                 </span>
                 <Badge className="ml-2">
@@ -86,17 +94,19 @@ export function PlanCard({
           ) : (
             <div className="text-primary text-2xl font-bold">
               {t('plansPage.pricePerMonth', {
-                price: priceBase.toFixed(2),
+                price: formatCurrency(priceBase),
               })}
             </div>
           )}
-          <div className="text-muted-foreground text-xs">
-            {t(
-              `plansPage.billing.billed${billingCycle.charAt(0).toUpperCase() + billingCycle.slice(1)}`,
-            )}
-          </div>
         </div>
         <p className="mb-4">{t(plan.descriptionKey)}</p>
+        <Separator />
+        <div className="text-muted-foreground mt-2 text-xs leading-tight italic">
+          {t('plansPage.billing.chargeDisclaimer', {
+            amount: formatCurrency(totalCharge),
+          })}
+          , {t(`plansPage.billing.cycle.${billingCycle}`)} *
+        </div>
       </CardContent>
       <CardFooter>
         <Button

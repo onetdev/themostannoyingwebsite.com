@@ -6,6 +6,7 @@
   "exports": {
     "./array": "./src/array.ts",
     "./color": "./src/color.ts",
+    "./currency": "./src/currency.ts",
     "./math": "./src/math.ts",
     "./promise": "./src/promise.ts",
     "./string": "./src/string.ts"
