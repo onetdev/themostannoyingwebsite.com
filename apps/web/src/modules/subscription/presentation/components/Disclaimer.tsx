@@ -1,4 +1,5 @@
 import { Alert, AlertDescription, AlertTitle, Icon } from '@maw/ui-lib';
+import { cn } from '@maw/ui-lib/utils';
 import { useTranslations } from 'next-intl';
 import { ComponentProps } from 'react';
 
@@ -11,7 +12,7 @@ export function Disclaimer({
   return (
     <Alert
       variant="default"
-      className={`border-border ${className}`}
+      className={cn('border-border', className)}
       {...props}>
       <Icon icon="failed" />
       <AlertTitle>{t('plansPage.disclaimer.title')}</AlertTitle>

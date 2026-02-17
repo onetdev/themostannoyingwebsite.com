@@ -9,6 +9,7 @@ import {
   TableHeader,
   TableRow,
 } from '@maw/ui-lib';
+import { cn } from '@maw/ui-lib/utils';
 import { useTranslations } from 'next-intl';
 
 import { SubscriptionFeature, SubscriptionPackage } from '../../domain';
@@ -23,7 +24,7 @@ export function PlanComparison({ className, features, plans }: PlansPageProps) {
   const t = useTranslations();
 
   return (
-    <Table className={`w-full ${className}`}>
+    <Table className={cn('w-full', className)}>
       <TableHeader>
         <TableRow>
           <TableHead className="py-4 pr-4 font-bold">
