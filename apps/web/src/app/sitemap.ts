@@ -60,6 +60,7 @@ async function sitemap(): Promise<MetadataRoute.Sitemap> {
     'donate',
     'flaim-a-phone',
     'hot-things',
+    'plans',
     'privacy-policy',
     'search',
     'settings',

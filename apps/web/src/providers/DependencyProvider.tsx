@@ -11,6 +11,7 @@ import { init as initGift } from '@/modules/gift/init';
 import { init as initNewsletter } from '@/modules/newsletter/init';
 import { init as initNotification } from '@/modules/notification/init';
 import { init as initObstructionDecor } from '@/modules/obstruction-decor/init';
+import { init as initSubscription } from '@/modules/subscription/init';
 import { init as initWheelOfFortune } from '@/modules/wheel-of-fortune/init';
 
 export const DependencyProvider: FunctionComponent<PropsWithChildren> = ({
@@ -29,6 +30,7 @@ export const DependencyProvider: FunctionComponent<PropsWithChildren> = ({
     initNotification(container);
     initObstructionDecor(container);
     initShared(container);
+    initSubscription(container);
     initWheelOfFortune();
     // Register additional modules here
 
