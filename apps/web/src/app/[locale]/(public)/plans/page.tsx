@@ -8,6 +8,8 @@ import {
   PlansPage,
 } from '@/modules/subscription';
 
+export const revalidate = 1800;
+
 export async function generateMetadata({
   params,
 }: NextPageProps): Promise<Metadata> {

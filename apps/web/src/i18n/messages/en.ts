@@ -703,37 +703,34 @@ export default {
       features: 'Features',
     },
     features: {
-      selfAwareness: '10% Sentience',
-      existentialDread: 'Daily Existential Crisis',
-      hardwareJudge: 'Hardware Judgment',
+      lowTierLimits: 'Limited in every possible ways',
+      superSlowSpeed: 'Intentionally slow',
+      adSupported: 'Ad-supported (Lots of them)',
+      ramPriceSpike: 'Spike RAM prices',
+      gpuPriceSpike: 'Spike GPU prices',
       creativeMath: 'Creative Arithmetic (1+1=5)',
       fakeFacts: '100% Confident Lies',
       imaginarySources: 'Imaginary Citations',
       heavySighs: 'Audible Digital Sighing',
       judgmentalEllipses: 'Judgmental Ellipses...',
-      superiorTone: 'Superiority Complex',
-      cpuToaster: 'Turn CPU into Toaster',
-      eternalLoading: 'Eternal Loading Spinner',
-      ramHog: '110% RAM Usage',
+      submissive: 'Everything you do is AWESOME',
       exEmails: '3 AM Emails to Exes',
-      randomGhosting: 'Spontaneous Ghosting',
-      crypticFiles: 'Cryptic File Generation',
     },
     packages: {
-      sentience: {
-        title: 'Super Basic Entry',
+      poorified: {
+        title: 'Super Poorified Basic',
         description:
-          'Includes 10% chance of your computer becoming self-aware and questioning your life choices.',
+          'Our most humble offering. So basic it makes dial-up look like fiber. Expect constant buffering and moral judgment from our AI.',
       },
-      aggressive: {
-        title: 'Passive-Aggressive Assistant',
+      sufficient: {
+        title: 'Barely Sufficient Premium',
         description:
-          'For when you need an AI that sighs audibly and judges you through perfectly placed ellipses...',
+          'The sweet spot of frustration. Just enough to keep you annoyed but not enough to actually be useful. Now with premium digital sighing.',
       },
-      ghost: {
-        title: 'Ghost in the Machine Elite',
+      delux: {
+        title: 'Ultra Premium Delux Elite Pro Max',
         description:
-          'Occasionally sends cryptic emails to your ex or boss on your behalf at 3 AM. Real spontaneity.',
+          'The ultimate peak of digital misery. Now with 400% more unnecessary features and automated 3 AM regret emails sent to your ex.',
       },
     },
     socialProof: {

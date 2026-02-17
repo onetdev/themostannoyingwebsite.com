@@ -10,19 +10,29 @@ export async function getFeatures(): Promise<
     success: true,
     data: [
       {
-        id: 'selfAwareness',
-        titleKey: 'plansPage.features.selfAwareness',
-        icon: '🧠',
+        id: 'lowTierLimits',
+        titleKey: 'plansPage.features.lowTierLimits',
+        icon: '📉',
       },
       {
-        id: 'existentialDread',
-        titleKey: 'plansPage.features.existentialDread',
-        icon: '😱',
+        id: 'superSlowSpeed',
+        titleKey: 'plansPage.features.superSlowSpeed',
+        icon: '🐢',
       },
       {
-        id: 'hardwareJudge',
-        titleKey: 'plansPage.features.hardwareJudge',
-        icon: '🖥️',
+        id: 'adSupported',
+        titleKey: 'plansPage.features.adSupported',
+        icon: '📺',
+      },
+      {
+        id: 'ramPriceSpike',
+        titleKey: 'plansPage.features.ramPriceSpike',
+        icon: '📈',
+      },
+      {
+        id: 'gpuPriceSpike',
+        titleKey: 'plansPage.features.gpuPriceSpike',
+        icon: '🎮',
       },
       {
         id: 'creativeMath',
@@ -50,39 +60,14 @@ export async function getFeatures(): Promise<
         icon: '💬',
       },
       {
-        id: 'superiorTone',
-        titleKey: 'plansPage.features.superiorTone',
-        icon: '👑',
-      },
-      {
-        id: 'cpuToaster',
-        titleKey: 'plansPage.features.cpuToaster',
-        icon: '🔥',
-      },
-      {
-        id: 'eternalLoading',
-        titleKey: 'plansPage.features.eternalLoading',
-        icon: '⏳',
-      },
-      {
-        id: 'ramHog',
-        titleKey: 'plansPage.features.ramHog',
-        icon: '🐷',
+        id: 'submissive',
+        titleKey: 'plansPage.features.submissive',
+        icon: '🥺',
       },
       {
         id: 'exEmails',
         titleKey: 'plansPage.features.exEmails',
         icon: '📧',
-      },
-      {
-        id: 'randomGhosting',
-        titleKey: 'plansPage.features.randomGhosting',
-        icon: '💨',
-      },
-      {
-        id: 'crypticFiles',
-        titleKey: 'plansPage.features.crypticFiles',
-        icon: '📄',
       },
     ],
   };
