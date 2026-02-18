@@ -462,6 +462,7 @@ export default {
       impossiblePasswordReminder: 'Impossible password reminder',
       unreasonableContent: 'Unreasonable content',
       flaimYourPhone: 'Flaim your phone',
+      fakeAiSubscription: 'Fake AI subscription plans',
     },
     runtime: {
       title: 'About this session',

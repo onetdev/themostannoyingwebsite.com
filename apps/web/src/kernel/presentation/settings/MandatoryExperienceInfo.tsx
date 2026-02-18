@@ -45,6 +45,10 @@ export function MandatoryExperienceInfo() {
           label={t('settings.mandatoryExperienceFlags.flaimYourPhone')}>
           <FormCheckbox name="claim_your_phone" checked={true} disabled />
         </SettingsField>
+        <SettingsField
+          label={t('settings.mandatoryExperienceFlags.fakeAiSubscription')}>
+          <FormCheckbox name="fake_ai_subscription" checked={true} disabled />
+        </SettingsField>
       </CardContent>
     </Card>
   );
