@@ -12,14 +12,9 @@ import { useRuntimeStore } from '@/kernel';
 export const useUserActivationListener = () => {
   const storeState = useRuntimeStore((state) => state.userActivation);
   const setUserActivation = useRuntimeStore((state) => state.setUserActivation);
-  const [, setState] = useState(storeState);
+  const [state, setState] = useState(storeState);
 
-  useDebounce((isUnlockEvent: boolean) => {
-    setUserActivation({
-      unlocked: isUnlockEvent,
-      lastEventAt: new Date().getTime(),
-    });
-  }, 50);
+  useDebounce(() => setUserActivation(state), 50, [state]);
 
   useEffect(() => {
     // See: https://developer.mozilla.org/en-US/docs/Web/Security/Defenses/User_activation
