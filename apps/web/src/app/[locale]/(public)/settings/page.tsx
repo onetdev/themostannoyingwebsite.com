@@ -6,7 +6,7 @@ import { PageLayout } from '@/components/PageLayout';
 import {
   MandatoryExperienceSettings,
   PainPreferences,
-  RuntimeSettings,
+  RuntimeInfo,
   UserGrantsSettings,
   UserPreferences,
 } from '@/kernel';
@@ -41,7 +41,7 @@ export default async function Settings() {
           listClassName="grid gap-3 grid-cols-1 md:gap-x-10 md:grid-cols-2 lg:grid-cols-3"
         />
         <MandatoryExperienceSettings />
-        <RuntimeSettings />
+        <RuntimeInfo />
       </div>
     </PageLayout>
   );

@@ -7,7 +7,7 @@ import ReactTimeAgo from 'react-timeago';
 
 import { useRuntimeStore } from '@/kernel';
 
-export function RuntimeSettings() {
+export function RuntimeInfo() {
   const runtime = useRuntimeStore();
   const t = useTranslations();
 
@@ -41,9 +41,20 @@ export function RuntimeSettings() {
           </span>
         </p>
         <p>
-          {t('settings.runtime.interactionUnlocked')}{' '}
+          {t('settings.runtime.userActivation')}{' '}
           <span>
-            {runtime.interactionUnlocked ? t('common.yes') : t('common.no')}
+            {runtime.userActivation.unlocked ? t('common.yes') : t('common.no')}
+          </span>
+        </p>
+
+        <p>
+          {t('settings.runtime.lastActivation')}{' '}
+          <span>
+            {runtime.userActivation.lastEventAt ? (
+              <ReactTimeAgo date={runtime.userActivation.lastEventAt} />
+            ) : (
+              'n/a'
+            )}
           </span>
         </p>
         <p>

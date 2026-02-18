@@ -14,7 +14,9 @@ export function useChatBubbleHistory() {
   const t = useTranslations();
   const messages = useMessages();
   const enableSound = useUserPreferencesStore((state) => state.enableSound);
-  const hasInteracted = useRuntimeStore((state) => state.interactionUnlocked);
+  const hasInteracted = useRuntimeStore(
+    (state) => state.userActivation.unlocked,
+  );
   const [history, setHistory] = useState<HistoryItem[]>([]);
   const [isForeground, setForeground] = useState(false);
   const [badgeCounter, setBadgeCounter] = useState(1);

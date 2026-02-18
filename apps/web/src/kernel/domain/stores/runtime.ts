@@ -10,25 +10,28 @@ export interface RuntimeState {
     visibilitySeconds: number;
   };
   flaimSurveyResult: false | FlaimSurveyResult;
-  interactionUnlocked: boolean;
   navigationCount: number;
-  reducedMotion: boolean;
+  userActivation: {
+    lastEventAt: number | null;
+    unlocked: boolean;
+  };
   shareModalData: {
     url?: string;
     visible: boolean;
   };
   startedAt?: string;
+  systemReducedMotion: boolean;
 }
 
 export interface RuntimeStateActions {
   incrementNavigationCount: () => void;
   incrementVisibilitySeconds: () => void;
-  markInteractionUnlocked: () => void;
   setAdblockerSuspected: (adblockerSuspected: boolean | null) => void;
   setFlaimSurveyResult: (data: RuntimeState['flaimSurveyResult']) => void;
   setIsDocumentVisibile: (isVisible: boolean) => void;
-  setReducedMotion: (reducedMotion: boolean) => void;
   setShareModalData: (param: RuntimeState['shareModalData']) => void;
+  setUserActivation: (param: RuntimeState['userActivation']) => void;
+  setReducedMotion: (param: RuntimeState['systemReducedMotion']) => void;
   showShareModal: (param?: RuntimeState['shareModalData']['url']) => void;
 }
 
@@ -42,11 +45,14 @@ const initialState: RuntimeState = {
     visibilitySeconds: 0,
   },
   flaimSurveyResult: false,
-  interactionUnlocked: false,
+  userActivation: {
+    lastEventAt: null,
+    unlocked: false,
+  },
   navigationCount: 0,
-  reducedMotion: true,
   shareModalData: { visible: false },
   startedAt: undefined,
+  systemReducedMotion: false,
 };
 
 export const useRuntimeStore = create<RuntimeStore>((set) => ({
@@ -61,7 +67,6 @@ export const useRuntimeStore = create<RuntimeStore>((set) => ({
       },
       startedAt: state.startedAt ?? new Date().toISOString(),
     })),
-  markInteractionUnlocked: () => set({ interactionUnlocked: true }),
   setAdblockerSuspected: (adblockerSuspected) => set({ adblockerSuspected }),
   setFlaimSurveyResult: (flaimSurveyResult) => set({ flaimSurveyResult }),
   setIsDocumentVisibile: (isVisible) =>
@@ -74,8 +79,17 @@ export const useRuntimeStore = create<RuntimeStore>((set) => ({
       },
       startedAt: state.startedAt ?? new Date().toISOString(),
     })),
-  setReducedMotion: (reducedMotion) => set({ reducedMotion }),
+  setUserActivation: ({ lastEventAt, unlocked }) =>
+    set((prev) => ({
+      userActivation: {
+        lastEventAt:
+          Math.max(prev.userActivation.lastEventAt ?? 0, lastEventAt ?? 0) ??
+          null,
+        unlocked: prev.userActivation.unlocked || unlocked,
+      },
+    })),
   setShareModalData: (shareModalData) => set({ shareModalData }),
+  setReducedMotion: (systemReducedMotion) => set({ systemReducedMotion }),
   showShareModal(url) {
     set({ shareModalData: { visible: true, url } });
   },

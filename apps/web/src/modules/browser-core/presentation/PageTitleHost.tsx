@@ -23,7 +23,9 @@ export function PageTitleHost() {
     (state) => state.flags['pageTitle.inactiveArrayPaged'],
   );
   const isVisible = useRuntimeStore((state) => state.document.isVisible);
-  const hasInteracted = useRuntimeStore((state) => state.interactionUnlocked);
+  const hasInteracted = useRuntimeStore(
+    (state) => state.userActivation.unlocked,
+  );
   const t = useTranslations();
   const messages = useMessages();
 

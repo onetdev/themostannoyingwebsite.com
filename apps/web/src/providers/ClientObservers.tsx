@@ -4,7 +4,7 @@ import { useZodAutoConfigurator } from './useZodAutoConfigurator';
 
 import {
   useDocumentVisibilityListener,
-  useFirstInteractionListener,
+  useUserActivationListener,
   useNavigationStats,
   useReducedMotionListener,
   useServiceWorker,
@@ -13,7 +13,7 @@ import {
 export function ClientObservers() {
   useServiceWorker();
   useNavigationStats();
-  useFirstInteractionListener();
+  useUserActivationListener();
   useDocumentVisibilityListener();
   useReducedMotionListener();
   useZodAutoConfigurator();
