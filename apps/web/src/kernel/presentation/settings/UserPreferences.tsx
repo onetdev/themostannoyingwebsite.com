@@ -42,7 +42,7 @@ export function UserPreferences() {
           <FormCheckbox
             name="reduced_motion"
             disabled={true}
-            checked={runtime.reducedMotion}
+            checked={runtime.systemReducedMotion}
           />
         </SettingsField>
         <SettingsField label={t('settings.userPreferences.enableSound')}>

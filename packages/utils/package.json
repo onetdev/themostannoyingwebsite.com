@@ -9,7 +9,8 @@
     "./currency": "./src/currency.ts",
     "./math": "./src/math.ts",
     "./promise": "./src/promise.ts",
-    "./string": "./src/string.ts"
+    "./string": "./src/string.ts",
+    "./time": "./src/time.ts"
   },
   "scripts": {
     "check-types": "tsc --noEmit",
