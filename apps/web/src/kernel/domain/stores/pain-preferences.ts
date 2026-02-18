@@ -66,7 +66,7 @@ export interface PainPreferencesStateActions {
   setLevel: (level: number) => void;
   allEnable: () => void;
   allDisable: () => void;
-  setScreensaverTimeoutMs: (timeoutMs: number) => void;
+  setScreensaverTimeoutSeconds: (timeoutSeconds: number) => void;
 }
 
 export interface PainPreferencesStore
@@ -150,8 +150,8 @@ export const usePainPreferencesStore = create<PainPreferencesStore>()(
             publicLevel: calculatePublicLevelMeta(newFlags),
           };
         }),
-      setScreensaverTimeoutMs: (timeoutMs) =>
-        set(() => ({ screensaverTimeoutSeconds: timeoutMs })),
+      setScreensaverTimeoutSeconds: (timeoutSeconds) =>
+        set(() => ({ screensaverTimeoutSeconds: timeoutSeconds })),
     }),
     {
       name: PAIN_PREFERENCES_STORAGE_KEY,

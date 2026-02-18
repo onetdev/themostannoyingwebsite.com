@@ -95,11 +95,12 @@ export function RuntimeInfo() {
             </TableRow>
             {runtime.adblockerSuspected !== null && (
               <TableRow>
-                <TableCell colSpan={2} className="font-medium">
+                <TableCell className="w-3/5 font-medium">
                   {runtime.adblockerSuspected
                     ? t('settings.runtime.adblockerSuspected')
                     : t('settings.runtime.adblockerNotDetected')}
                 </TableCell>
+                <TableCell>✅</TableCell>
               </TableRow>
             )}
             <TableRow>

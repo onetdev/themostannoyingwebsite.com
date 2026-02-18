@@ -31,5 +31,5 @@ export const allDisabledPainPreferencesState: PainPreferencesState = {
     current: 0,
     max: PUBLIC_PAIN_POINT_LIST.length,
   },
-  screensaverTimeoutSeconds: 15,
+  screensaverTimeoutSeconds: 30,
 };

@@ -39,7 +39,7 @@ const config = {
     },
   },
   screensaver: {
-    defaultTimeoutSeconds: 15,
+    defaultTimeoutSeconds: 30,
   },
   deploymentMeta: { ...deploymentMeta },
 };

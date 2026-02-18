@@ -386,7 +386,20 @@ export default {
     },
     optionalPainPoints: {
       title: 'Optional pain points',
-      screensaverTimeout: 'Screensaver Timeout (ms)',
+      categories: {
+        browser: 'Browser & Tab',
+        visual: 'Visual Obstructions',
+        ads: 'Advertising & Monetization',
+        interactivity: 'Popups & Interactivity',
+      },
+      screensaverTimeout: 'Timeout',
+      screensaverTimeoutOptions: {
+        '15': '15 seconds',
+        '30': '30 seconds',
+        '60': '1 minute',
+        '300': '5 minutes',
+        '900': '15 minutes',
+      },
       gifts: {
         detectAdblocker: 'Detect adblocker',
         flaps: 'Background ad flaps',
@@ -401,13 +414,15 @@ export default {
       mockChat: 'Bubble chat',
       newsletterModal: 'Newsletter popup modal',
       notifications: 'Notifications',
-      screensaver: 'Screensaver (DVD bounce)',
+      screensaver: 'Screensaver',
       pageTitleInactiveArrayPaged: 'Alternative title when tab is inactive',
       searchDelay: 'Fake search delay',
       wheelOfFortune: 'Wheel of fortune',
       stickyVideo: 'Sticky video',
     },
     optionalPainPointsHints: {
+      screensaver:
+        'Triggers an old-school "DVD-style" screensaver after the specified period of total inactivity.',
       gifts: {
         detectAdblocker:
           'Shows a large red banner if an adblocker is detected.',

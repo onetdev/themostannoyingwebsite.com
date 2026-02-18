@@ -11,7 +11,7 @@ import { useTranslations } from 'next-intl';
 
 import { SettingsField } from './SettingsField';
 
-export function MandatoryExperienceSettings() {
+export function MandatoryExperienceInfo() {
   const t = useTranslations();
   return (
     <Card data-testid="mandatory-experience-settings">
