@@ -30,9 +30,9 @@ export function UserGrantsSettings() {
             disabled
           />
         </SettingsField>
-        <p className="py-5 text-sm">
+        <small className="text-muted-foreground py-5">
           <i>{t('settings.userGrants.permissionDisclaimer')}</i>
-        </p>
+        </small>
         <SettingsField
           label={t('settings.userGrants.notificationPermission')}
           reverse>

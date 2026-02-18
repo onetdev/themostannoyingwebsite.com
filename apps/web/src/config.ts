@@ -38,6 +38,9 @@ const config = {
       maxDelayMs: 15000,
     },
   },
+  screensaver: {
+    defaultTimeoutSeconds: 15,
+  },
   deploymentMeta: { ...deploymentMeta },
 };
 

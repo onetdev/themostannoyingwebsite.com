@@ -386,6 +386,7 @@ export default {
     },
     optionalPainPoints: {
       title: 'Optional pain points',
+      screensaverTimeout: 'Screensaver Timeout (ms)',
       gifts: {
         detectAdblocker: 'Detect adblocker',
         flaps: 'Background ad flaps',
@@ -400,6 +401,7 @@ export default {
       mockChat: 'Bubble chat',
       newsletterModal: 'Newsletter popup modal',
       notifications: 'Notifications',
+      screensaver: 'Screensaver (DVD bounce)',
       pageTitleInactiveArrayPaged: 'Alternative title when tab is inactive',
       searchDelay: 'Fake search delay',
       wheelOfFortune: 'Wheel of fortune',
@@ -459,6 +461,10 @@ export default {
       flaimSurveyResult: 'Flaim survey result',
       adblockerSuspected: 'Adblocker suspected',
       adblockerNotDetected: 'Adblocker not detected',
+    },
+    screensaver: {
+      exitClick: 'Click anywhere to exit screensaver',
+      exitTap: 'Tap anywhere to exit screensaver',
     },
   },
   share: {

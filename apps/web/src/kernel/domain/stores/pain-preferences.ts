@@ -1,6 +1,8 @@
 import { create } from 'zustand';
 import { createJSONStorage, persist } from 'zustand/middleware';
 
+import config from '@/config';
+
 export const PAIN_PREFERENCES_STORAGE_KEY = 'zustand-pain-preferences-storage';
 export const PRIVATE_PAIN_POINT_LIST = [
   'pageTitle.inactiveMarquee',
@@ -26,6 +28,7 @@ export const PUBLIC_PAIN_POINT_LIST = [
   'historySpam',
   'notifications',
   'stickyVideo',
+  'screensaver',
 ] as const;
 
 export const PAIN_POINT_LIST = [
@@ -41,6 +44,7 @@ export type PainPreferencesState = {
     current: number;
     max: number;
   };
+  screensaverTimeoutSeconds: number;
 };
 
 function calculatePublicLevelMeta(
@@ -62,6 +66,7 @@ export interface PainPreferencesStateActions {
   setLevel: (level: number) => void;
   allEnable: () => void;
   allDisable: () => void;
+  setScreensaverTimeoutMs: (timeoutMs: number) => void;
 }
 
 export interface PainPreferencesStore
@@ -83,6 +88,7 @@ const initialStateFlags: PainPreferencesState['flags'] = {
   mockChat: true,
   newsletterModal: true,
   notifications: false,
+  screensaver: true,
   searchDelay: true,
   stickyVideo: false,
   wheelOfFortune: true,
@@ -91,10 +97,11 @@ const initialStateFlags: PainPreferencesState['flags'] = {
 const initialState: PainPreferencesState = {
   flags: initialStateFlags,
   publicLevel: calculatePublicLevelMeta(initialStateFlags),
+  screensaverTimeoutSeconds: config.screensaver.defaultTimeoutSeconds,
 };
 
-export const usePainPreferencesStore = create(
-  persist<PainPreferencesStore>(
+export const usePainPreferencesStore = create<PainPreferencesStore>()(
+  persist(
     (set) => ({
       ...initialState,
       setFlag: (key, value) =>
@@ -143,6 +150,8 @@ export const usePainPreferencesStore = create(
             publicLevel: calculatePublicLevelMeta(newFlags),
           };
         }),
+      setScreensaverTimeoutMs: (timeoutMs) =>
+        set(() => ({ screensaverTimeoutSeconds: timeoutMs })),
     }),
     {
       name: PAIN_PREFERENCES_STORAGE_KEY,

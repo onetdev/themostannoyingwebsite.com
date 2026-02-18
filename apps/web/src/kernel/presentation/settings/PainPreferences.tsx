@@ -7,6 +7,7 @@ import {
   CardHeader,
   CardTitle,
   Checkbox as FormCheckbox,
+  Input,
 } from '@maw/ui-lib';
 import { useTranslations } from 'next-intl';
 
@@ -37,6 +38,27 @@ export function PainPreferences({
       </CardHeader>
       <CardContent>
         <div className={listClassName}>
+          <SettingsField label={t('settings.optionalPainPoints.screensaver')}>
+            <FormCheckbox
+              name="screensaver"
+              checked={painPreferences.flags.screensaver}
+              onCheckedChange={(value) => setFlag('screensaver', value)}
+            />
+          </SettingsField>
+          <SettingsField
+            label={t('settings.optionalPainPoints.screensaverTimeout')}>
+            <Input
+              name="screensaver_timeout"
+              type="number"
+              value={painPreferences.screensaverTimeoutSeconds}
+              onChange={(e) => {
+                const value = parseInt(e.target.value, 10);
+                if (!isNaN(value)) {
+                  painPreferences.setScreensaverTimeoutMs(Math.max(5, value));
+                }
+              }}
+            />
+          </SettingsField>
           <SettingsField
             label={t('settings.optionalPainPoints.gifts.flaps')}
             info={t('settings.optionalPainPointsHints.gifts.flaps')}>
