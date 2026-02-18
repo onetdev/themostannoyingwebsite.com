@@ -15,7 +15,7 @@ export function OneByOneGift({ size = 1024 }: OneByOneGiftProps) {
   const enabled = usePainPreferencesStore(
     (state) => state.flags['gifts.oneByOne'],
   );
-  const reducedMotion = useRuntimeStore((state) => state.reducedMotion);
+  const reducedMotion = useRuntimeStore((state) => state.systemReducedMotion);
 
   if (!enabled) return null;
 
