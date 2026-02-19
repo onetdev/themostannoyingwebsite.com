@@ -17,13 +17,9 @@ export function Screensaver() {
   const lastEventAt = useRuntimeStore(
     (state) => state.userActivation.lastEventAt,
   );
+  const isTouch = useRuntimeStore((state) => state.isTouch);
   const t = useTranslations();
   const [isActive, setActive] = useState(false);
-  const [isTouch, setIsTouch] = useState(false);
-
-  useEffect(() => {
-    setIsTouch(window.matchMedia('(pointer: coarse)').matches);
-  }, []);
 
   useEffect(() => {
     if (!isEnabled || lastEventAt === null) {

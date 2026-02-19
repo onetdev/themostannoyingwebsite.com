@@ -4,16 +4,18 @@ import { useZodAutoConfigurator } from './useZodAutoConfigurator';
 
 import {
   useDocumentVisibilityListener,
-  useUserActivationListener,
   useNavigationStats,
   useReducedMotionListener,
   useServiceWorker,
+  useTouchScreenListener,
+  useUserActivationListener,
 } from '@/kernel/application/hooks';
 
 export function ClientObservers() {
   useServiceWorker();
   useNavigationStats();
   useUserActivationListener();
+  useTouchScreenListener();
   useDocumentVisibilityListener();
   useReducedMotionListener();
   useZodAutoConfigurator();

@@ -10,6 +10,7 @@ export interface RuntimeState {
     visibilitySeconds: number;
   };
   flaimSurveyResult: false | FlaimSurveyResult;
+  isTouch: boolean;
   navigationCount: number;
   userActivation: {
     lastEventAt: number | null;
@@ -29,6 +30,7 @@ export interface RuntimeStateActions {
   setAdblockerSuspected: (adblockerSuspected: boolean | null) => void;
   setFlaimSurveyResult: (data: RuntimeState['flaimSurveyResult']) => void;
   setIsDocumentVisibile: (isVisible: boolean) => void;
+  setIsTouch: (isTouch: boolean) => void;
   setShareModalData: (param: RuntimeState['shareModalData']) => void;
   setUserActivation: (param: RuntimeState['userActivation']) => void;
   setReducedMotion: (param: RuntimeState['systemReducedMotion']) => void;
@@ -45,6 +47,7 @@ const initialState: RuntimeState = {
     visibilitySeconds: 0,
   },
   flaimSurveyResult: false,
+  isTouch: false,
   userActivation: {
     lastEventAt: null,
     unlocked: false,
@@ -79,6 +82,7 @@ export const useRuntimeStore = create<RuntimeStore>((set) => ({
       },
       startedAt: state.startedAt ?? new Date().toISOString(),
     })),
+  setIsTouch: (isTouch) => set({ isTouch }),
   setUserActivation: ({ lastEventAt, unlocked }) =>
     set((prev) => ({
       userActivation: {
