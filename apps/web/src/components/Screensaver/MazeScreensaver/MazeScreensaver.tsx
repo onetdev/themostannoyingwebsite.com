@@ -11,8 +11,9 @@ import {
 } from 'ogl';
 import { useEffect, useRef } from 'react';
 
-import { MAZE_24 } from './Maze/data';
-import { getTextures } from './Maze/textures';
+import { MAZE_24 } from './data';
+import { texturedFragment, texturedVertex } from './shaders';
+import { getTextures } from './textures';
 
 const ROTATION_DURATION = 500;
 const MOVE_DURATION = 1000;
@@ -20,6 +21,7 @@ const STEP_BOB_HEIGHT = 0.04;
 const TURN_CHANCE = 0.2;
 
 type Direction = 'N' | 'S' | 'E' | 'W';
+
 // Windows 95 3D Maze inspired raycasting screensaver
 export function MazeScreensaver() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -54,32 +56,6 @@ export function MazeScreensaver() {
       width: 1,
       height: 1,
     });
-
-    const texturedVertex = `
-      attribute vec3 position;
-      attribute vec2 uv;
-
-      uniform mat4 modelViewMatrix;
-      uniform mat4 projectionMatrix;
-
-      varying vec2 vUv;
-
-      void main() {
-        vUv = uv;
-        gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
-      }
-    `;
-
-    const texturedFragment = `
-      precision highp float;
-
-      uniform sampler2D tMap;
-      varying vec2 vUv;
-
-      void main() {
-        gl_FragColor = texture2D(tMap, vUv);
-      }
-    `;
 
     function createTextureProgram(texture: Texture) {
       return new Program(gl, {
@@ -352,10 +328,5 @@ export function MazeScreensaver() {
     };
   }, [canvasRef]);
 
-  return (
-    <canvas
-      ref={canvasRef}
-      className="border-border fixed inset-0 z-9999 cursor-none overflow-hidden"
-    />
-  );
+  return <canvas ref={canvasRef} />;
 }

@@ -52,14 +52,14 @@ export function Screensaver() {
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
           transition={{ duration: 0.2 }}
-          className="fixed inset-0 z-9999 cursor-none overflow-hidden bg-black">
+          className="fixed inset-0 z-1000 cursor-none overflow-hidden bg-black">
           {variant === 'maze' ? (
             <MazeScreensaver />
           ) : (
             <BouncingLogoScreensaver />
           )}
 
-          <div className="absolute bottom-10 left-0 z-10 w-full text-center">
+          <div className="absolute bottom-10 left-0 z-1010 w-full text-center">
             <span className="pointer-events-none text-xs tracking-widest text-white/50 uppercase select-none">
               {isTouch
                 ? t('settings.screensaver.exitTap')
