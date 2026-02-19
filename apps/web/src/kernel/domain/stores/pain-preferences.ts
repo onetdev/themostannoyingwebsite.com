@@ -38,13 +38,18 @@ export const PAIN_POINT_LIST = [
 
 export type PainPointKey = (typeof PAIN_POINT_LIST)[number];
 
+export type ScreensaverVariant = 'bouncingLogo' | 'maze';
+
 export type PainPreferencesState = {
   flags: Record<PainPointKey, boolean>;
   publicLevel: {
     current: number;
     max: number;
   };
-  screensaverTimeoutSeconds: number;
+  screensaver: {
+    timeoutSeconds: number;
+    variant: ScreensaverVariant;
+  };
 };
 
 function calculatePublicLevelMeta(
@@ -62,11 +67,16 @@ function calculatePublicLevelMeta(
 }
 
 export interface PainPreferencesStateActions {
-  setFlag: (key: PainPointKey, value: boolean) => void;
-  setLevel: (level: number) => void;
-  allEnable: () => void;
   allDisable: () => void;
+  allEnable: () => void;
+  setFlag: (key: PainPointKey, value: boolean) => void;
+  setFlagIndeterminate: (
+    key: PainPointKey,
+    value: boolean | 'indeterminate',
+  ) => void;
+  setLevel: (level: number) => void;
   setScreensaverTimeoutSeconds: (timeoutSeconds: number) => void;
+  setScreensaverVariant: (variant: ScreensaverVariant) => void;
 }
 
 export interface PainPreferencesStore
@@ -97,16 +107,56 @@ const initialStateFlags: PainPreferencesState['flags'] = {
 const initialState: PainPreferencesState = {
   flags: initialStateFlags,
   publicLevel: calculatePublicLevelMeta(initialStateFlags),
-  screensaverTimeoutSeconds: config.screensaver.defaultTimeoutSeconds,
+  screensaver: {
+    timeoutSeconds: config.screensaver.defaultTimeoutSeconds,
+    variant: 'bouncingLogo',
+  },
 };
 
 export const usePainPreferencesStore = create<PainPreferencesStore>()(
   persist(
     (set) => ({
       ...initialState,
+      allDisable: () =>
+        set((state) => {
+          const newFlags = { ...state.flags };
+          (Object.keys(initialStateFlags) as PainPointKey[]).forEach((key) => {
+            newFlags[key] = false;
+          });
+          return {
+            ...state,
+            flags: newFlags,
+            publicLevel: calculatePublicLevelMeta(newFlags),
+          };
+        }),
+      allEnable: () => {
+        set((state) => {
+          const nextFlags = { ...state.flags };
+          PUBLIC_PAIN_POINT_LIST.forEach((key) => {
+            nextFlags[key] = true;
+          });
+          return {
+            flags: nextFlags,
+            publicLevel: calculatePublicLevelMeta(nextFlags),
+          };
+        });
+      },
       setFlag: (key, value) =>
         set((state) => {
           const nextFlags = { ...state.flags, [key]: value };
+          return {
+            flags: nextFlags,
+            publicLevel: calculatePublicLevelMeta(nextFlags),
+          };
+        }),
+      setFlagIndeterminate: (
+        key: PainPointKey,
+        value: boolean | 'indeterminate',
+      ) =>
+        set((state) => {
+          const nextValue =
+            value === 'indeterminate' ? initialStateFlags[key] : value;
+          const nextFlags = { ...state.flags, [key]: nextValue };
           return {
             flags: nextFlags,
             publicLevel: calculatePublicLevelMeta(nextFlags),
@@ -126,32 +176,14 @@ export const usePainPreferencesStore = create<PainPreferencesStore>()(
             publicLevel: calculatePublicLevelMeta(nextFlags),
           };
         }),
-      allEnable: () => {
-        set((state) => {
-          const nextFlags = { ...state.flags };
-          PUBLIC_PAIN_POINT_LIST.forEach((key) => {
-            nextFlags[key] = true;
-          });
-          return {
-            flags: nextFlags,
-            publicLevel: calculatePublicLevelMeta(nextFlags),
-          };
-        });
-      },
-      allDisable: () =>
-        set((state) => {
-          const newFlags = { ...state.flags };
-          (Object.keys(initialStateFlags) as PainPointKey[]).forEach((key) => {
-            newFlags[key] = false;
-          });
-          return {
-            ...state,
-            flags: newFlags,
-            publicLevel: calculatePublicLevelMeta(newFlags),
-          };
-        }),
       setScreensaverTimeoutSeconds: (timeoutSeconds) =>
-        set(() => ({ screensaverTimeoutSeconds: timeoutSeconds })),
+        set(({ screensaver }) => ({
+          screensaver: { ...screensaver, timeoutSeconds },
+        })),
+      setScreensaverVariant: (variant) =>
+        set(({ screensaver }) => ({
+          screensaver: { ...screensaver, variant },
+        })),
     }),
     {
       name: PAIN_PREFERENCES_STORAGE_KEY,

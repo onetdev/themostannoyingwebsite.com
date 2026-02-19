@@ -40,6 +40,7 @@ const config = {
   },
   screensaver: {
     defaultTimeoutSeconds: 30,
+    defaultVariant: 'bouncingLogo',
   },
   deploymentMeta: { ...deploymentMeta },
 };

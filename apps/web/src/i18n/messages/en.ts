@@ -393,6 +393,11 @@ export default {
         interactivity: 'Popups & Interactivity',
       },
       screensaverTimeout: 'Timeout',
+      screensaverVariant: 'Variant',
+      screensaverVariantOptions: {
+        bouncingLogo: 'Bouncing Logo',
+        maze: '3D Maze 95',
+      },
       screensaverTimeoutOptions: {
         '15': '15 seconds',
         '30': '30 seconds',
@@ -422,7 +427,7 @@ export default {
     },
     optionalPainPointsHints: {
       screensaver:
-        'Triggers an old-school "DVD-style" screensaver after the specified period of total inactivity.',
+        'Triggers a user selected screensaver after the specified period of total inactivity.',
       gifts: {
         detectAdblocker:
           'Shows a large red banner if an adblocker is detected.',
