@@ -32,7 +32,7 @@ export function UrgencyCountdown({
     const endTime = startTime + duration;
 
     const updateTimer = () => {
-      const now = new Date().getTime();
+      const now = Date.now();
       const diff = Math.max(0, endTime - now);
       setTimeLeft(diff);
       onTick?.(diff);

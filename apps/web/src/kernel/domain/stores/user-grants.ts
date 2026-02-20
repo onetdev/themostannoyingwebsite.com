@@ -40,8 +40,8 @@ const initialState: UserGrantsState = {
   permission: {},
 };
 
-export const useUserGrantsStore = create(
-  persist<UserGrantsStore>(
+export const useUserGrantsStore = create<UserGrantsStore>()(
+  persist(
     (set) => ({
       ...initialState,
       setReviewCompleted: (reviewCompleted) => set({ reviewCompleted }),

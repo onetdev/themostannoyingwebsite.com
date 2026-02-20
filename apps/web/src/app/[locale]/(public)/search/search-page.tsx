@@ -69,7 +69,7 @@ export function SearchPage() {
     setResults(undefined);
     setLoading(true);
 
-    const startTime = new Date().getTime();
+    const startTime = Date.now();
     const delayTime = enabled ? random(0.001, 5) : 0;
     const timer = setTimeout(async () => {
       const matches = await AppArticleService.search({
@@ -79,7 +79,7 @@ export function SearchPage() {
         },
       });
 
-      const time = (new Date().getTime() - startTime) / 1000 + delayTime;
+      const time = (Date.now() - startTime) / 1000 + delayTime;
       setResults({
         query,
         time: time.toString().substring(0, time.toString().indexOf('.') + 6),

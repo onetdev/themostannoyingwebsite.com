@@ -67,6 +67,10 @@ export const random = (
   return integerResult ? Math.floor(result) : result;
 };
 
+export const randomInt = (min: number, max: number): number => {
+  return Math.floor(random(min, max, true));
+};
+
 export const mapToLogScale = (
   score: number,
   maxInput: number,

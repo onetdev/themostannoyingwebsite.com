@@ -2,7 +2,8 @@
 
 export * from './useAudio';
 export * from './useDocumentVisibilityListener';
-export * from './useFirstInteractionListener';
+export * from './useUserActivationListener';
+export * from './useTouchScreenListener';
 export * from './useNavigationStats';
 export * from './useReducedMotionListener';
 export * from './useScrollDistanceTrigger';

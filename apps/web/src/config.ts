@@ -38,6 +38,10 @@ const config = {
       maxDelayMs: 15000,
     },
   },
+  screensaver: {
+    defaultTimeoutSeconds: 30,
+    defaultVariant: 'bouncingLogo',
+  },
   deploymentMeta: { ...deploymentMeta },
 };
 

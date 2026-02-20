@@ -1,7 +1,7 @@
 'use client';
 
 import { toast } from '@maw/ui-lib';
-import { random } from '@maw/utils/math';
+import { random, randomInt } from '@maw/utils/math';
 import { useTranslations } from 'next-intl';
 import { useCallback, useEffect, useMemo, useState } from 'react';
 
@@ -30,10 +30,9 @@ export function SocialProof({
   }, [plans, t]);
 
   const showRandomNotification = useCallback(() => {
-    const name = pool.names[Math.floor(random(0, pool.names.length))];
-    const location =
-      pool.locations[Math.floor(random(0, pool.locations.length))];
-    const plan = pool.planNames[Math.floor(random(0, pool.planNames.length))];
+    const name = pool.names[randomInt(0, pool.names.length)];
+    const location = pool.locations[randomInt(0, pool.locations.length)];
+    const plan = pool.planNames[randomInt(0, pool.planNames.length)];
 
     toast(
       t('plansPage.socialProof.justSubscribed', {

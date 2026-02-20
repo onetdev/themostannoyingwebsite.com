@@ -1,5 +1,5 @@
 import { Icon } from '@maw/ui-lib';
-import { random } from '@maw/utils/math';
+import { randomInt } from '@maw/utils/math';
 import { CSSProperties, useEffect, useMemo, useState } from 'react';
 
 import DynamicWheelSvg, { Item } from './DynamicWheelSvg';
@@ -29,7 +29,7 @@ export function AnimatedWheel({
     if (state !== 'spinning' || !highlightIndex) return;
 
     const dir = anim.rotation < 0 ? -1 : 1;
-    const revs = random(revRange[0], revRange[1], true);
+    const revs = randomInt(revRange[0], revRange[1]);
     const revDeg = 360 * revs * dir;
     const winDeg =
       (dir > 0 ? 270 : -90) - degPerItem / 2 - degPerItem * highlightIndex;

@@ -3,6 +3,7 @@
 import { useEffect, useState } from 'react';
 
 import CookieConsent from '@/components/CookieConsent';
+import { Screensaver } from '@/components/Screensaver';
 import {
   ShareModal,
   usePainPreferencesStore,
@@ -71,6 +72,7 @@ export function PainDecoratorLayout({
         <AdblockerSuspectBar />
         {runtimeFlags.stickyVideo && <GlobalStickyVideoHost />}
         <ShareModal />
+        <Screensaver />
       </div>
     </div>
   );

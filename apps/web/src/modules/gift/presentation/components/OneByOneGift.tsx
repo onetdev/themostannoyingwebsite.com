@@ -15,14 +15,14 @@ export function OneByOneGift({ size = 1024 }: OneByOneGiftProps) {
   const enabled = usePainPreferencesStore(
     (state) => state.flags['gifts.oneByOne'],
   );
-  const reducedMotion = useRuntimeStore((state) => state.reducedMotion);
+  const reducedMotion = useRuntimeStore((state) => state.systemReducedMotion);
 
   if (!enabled) return null;
 
   return (
     <Link href="/flaim-a-phone" className="overflow-hidden">
       <Image
-        src="/assets/wan-a-phone.webp"
+        src="/ads/ad-wan-a-phone.webp"
         width={size}
         height={size}
         alt={t('gifts.wanPhone.title')}

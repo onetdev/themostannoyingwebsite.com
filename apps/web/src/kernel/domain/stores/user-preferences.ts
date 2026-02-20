@@ -20,8 +20,8 @@ const initialState: UserPreferencesState = {
   adultFilter: true,
 };
 
-export const useUserPreferencesStore = create(
-  persist<UserPreferencesStore>(
+export const useUserPreferencesStore = create<UserPreferencesStore>()(
+  persist(
     (set) => ({
       ...initialState,
       setEnableSound: (enableSound) => set({ enableSound }),
@@ -31,6 +31,9 @@ export const useUserPreferencesStore = create(
       name: USER_PREFERENCES_STORAGE_KEY,
       storage: createJSONStorage(() => localStorage),
       version: 1,
+      migrate: (persistedState) => {
+        return persistedState;
+      },
     },
   ),
 );

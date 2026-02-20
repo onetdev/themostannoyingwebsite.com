@@ -1,0 +1,1 @@
+export { BouncingLogoScreensaver } from './BouncingLogoScreensaver';

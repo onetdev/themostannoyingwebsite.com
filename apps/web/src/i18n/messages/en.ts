@@ -198,6 +198,7 @@ export default {
     backHome: 'Back to home',
     cancel: 'Cancel',
     close: 'Close',
+    completed: 'Completed',
     confirm: 'Confirm',
     decline: 'Decline',
     delete: 'Delete',
@@ -212,6 +213,7 @@ export default {
     loading: 'Loading...',
     next: 'Next',
     no: 'No',
+    notAvailable: 'n/a',
     notSet: 'Not set',
     ok: 'OK',
     pending: 'Pending',
@@ -384,6 +386,25 @@ export default {
     },
     optionalPainPoints: {
       title: 'Optional pain points',
+      categories: {
+        browser: 'Browser & Tab',
+        visual: 'Visual Obstructions',
+        ads: 'Advertising & Monetization',
+        interactivity: 'Popups & Interactivity',
+      },
+      screensaverTimeout: 'Timeout',
+      screensaverVariant: 'Variant',
+      screensaverVariantOptions: {
+        bouncingLogo: 'Bouncing Logo',
+        maze: '3D Maze 95',
+      },
+      screensaverTimeoutOptions: {
+        '15': '15 seconds',
+        '30': '30 seconds',
+        '60': '1 minute',
+        '300': '5 minutes',
+        '900': '15 minutes',
+      },
       gifts: {
         detectAdblocker: 'Detect adblocker',
         flaps: 'Background ad flaps',
@@ -398,12 +419,15 @@ export default {
       mockChat: 'Bubble chat',
       newsletterModal: 'Newsletter popup modal',
       notifications: 'Notifications',
+      screensaver: 'Screensaver',
       pageTitleInactiveArrayPaged: 'Alternative title when tab is inactive',
       searchDelay: 'Fake search delay',
       wheelOfFortune: 'Wheel of fortune',
       stickyVideo: 'Sticky video',
     },
     optionalPainPointsHints: {
+      screensaver:
+        'Triggers a user selected screensaver after the specified period of total inactivity.',
       gifts: {
         detectAdblocker:
           'Shows a large red banner if an adblocker is detected.',
@@ -443,19 +467,25 @@ export default {
       impossiblePasswordReminder: 'Impossible password reminder',
       unreasonableContent: 'Unreasonable content',
       flaimYourPhone: 'Flaim your phone',
+      fakeAiSubscription: 'Fake AI subscription plans',
     },
     runtime: {
       title: 'About this session',
       disclaimer:
-        'These values reset every single visit and acts as a bit of debug info.',
-      startedAgo: 'Started:',
-      visibilitySeconds: 'Elapsed seconds:',
-      isDocumentVisible: 'Is this window in focus?',
-      navigationCount: 'Navigation count:',
-      interactionUnlocked: 'Had first interaction?',
-      flaimSurveyResult: 'Flaim survey result:',
+        'Information listed below serves as debug information for the current browser session (if you refresh the page, everything will reset). Behind the scenes these valeus also have huge impact on what and how happens.',
+      startedAgo: 'Session started',
+      visibilitySeconds: 'Time spent in focus',
+      isDocumentVisible: 'Currently in focus',
+      navigationCount: 'Navigation count',
+      userActivation: 'Initial user action',
+      lastActivation: 'Last user activity',
+      flaimSurveyResult: 'Flaim survey result',
       adblockerSuspected: 'Adblocker suspected',
       adblockerNotDetected: 'Adblocker not detected',
+    },
+    screensaver: {
+      exitClick: 'Click anywhere to exit screensaver',
+      exitTap: 'Tap anywhere to exit screensaver',
     },
   },
   share: {

@@ -1,6 +1,6 @@
 'use client';
 
-import { Point2d, random } from '@maw/utils/math';
+import { Point2d, random, randomInt } from '@maw/utils/math';
 import { useEffect, useState } from 'react';
 
 // TODO: Maybe we could do a horror version like this:
@@ -10,7 +10,7 @@ export function DeadPixelHost() {
 
   useEffect(() => {
     const newPoints = [];
-    const pixels = random(1, 3, true);
+    const pixels = randomInt(1, 3);
 
     for (let i = 0; i < pixels; i++) {
       newPoints.push({

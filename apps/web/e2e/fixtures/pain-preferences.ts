@@ -19,6 +19,7 @@ const flags: PainPreferencesState['flags'] = {
   mockChat: false,
   newsletterModal: false,
   notifications: false,
+  screensaver: false,
   searchDelay: false,
   stickyVideo: false,
   wheelOfFortune: false,
@@ -28,6 +29,10 @@ export const allDisabledPainPreferencesState: PainPreferencesState = {
   flags,
   publicLevel: {
     current: 0,
-    max: Object.keys(PUBLIC_PAIN_POINT_LIST).length,
+    max: PUBLIC_PAIN_POINT_LIST.length,
+  },
+  screensaver: {
+    timeoutSeconds: 30,
+    variant: 'bouncingLogo',
   },
 };

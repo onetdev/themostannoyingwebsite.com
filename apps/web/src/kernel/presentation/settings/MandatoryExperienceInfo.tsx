@@ -11,7 +11,7 @@ import { useTranslations } from 'next-intl';
 
 import { SettingsField } from './SettingsField';
 
-export function MandatoryExperienceSettings() {
+export function MandatoryExperienceInfo() {
   const t = useTranslations();
   return (
     <Card data-testid="mandatory-experience-settings">
@@ -44,6 +44,10 @@ export function MandatoryExperienceSettings() {
         <SettingsField
           label={t('settings.mandatoryExperienceFlags.flaimYourPhone')}>
           <FormCheckbox name="claim_your_phone" checked={true} disabled />
+        </SettingsField>
+        <SettingsField
+          label={t('settings.mandatoryExperienceFlags.fakeAiSubscription')}>
+          <FormCheckbox name="fake_ai_subscription" checked={true} disabled />
         </SettingsField>
       </CardContent>
     </Card>
