@@ -22,7 +22,7 @@ export function Screensaver() {
   const [isActive, setActive] = useState(false);
 
   useEffect(() => {
-    if (!isEnabled || lastEventAt === null) {
+    if (!isEnabled || lastEventAt <= 0) {
       setActive(false);
       return;
     }

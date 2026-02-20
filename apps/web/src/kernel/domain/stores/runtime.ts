@@ -13,7 +13,7 @@ export interface RuntimeState {
   isTouch: boolean;
   navigationCount: number;
   userActivation: {
-    lastEventAt: number | null;
+    lastEventAt: number;
     unlocked: boolean;
   };
   shareModalData: {
@@ -49,7 +49,7 @@ const initialState: RuntimeState = {
   flaimSurveyResult: false,
   isTouch: false,
   userActivation: {
-    lastEventAt: null,
+    lastEventAt: -1,
     unlocked: false,
   },
   navigationCount: 0,
@@ -86,9 +86,7 @@ export const useRuntimeStore = create<RuntimeStore>((set) => ({
   setUserActivation: ({ lastEventAt, unlocked }) =>
     set((prev) => ({
       userActivation: {
-        lastEventAt:
-          Math.max(prev.userActivation.lastEventAt ?? 0, lastEventAt ?? 0) ??
-          null,
+        lastEventAt: Math.max(prev.userActivation.lastEventAt, lastEventAt),
         unlocked: prev.userActivation.unlocked || unlocked,
       },
     })),
