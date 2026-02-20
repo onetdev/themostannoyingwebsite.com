@@ -22,5 +22,6 @@ export function getTextures(gl: OGLRenderingContext) {
     floor: setupNetworkTexture('/assets/images/maze_floor.webp'),
     ceiling: setupNetworkTexture('/assets/images/maze_ceiling.webp'),
     wall: setupNetworkTexture('/assets/images/maze_wall.webp'),
+    overay42: setupNetworkTexture('/assets/images/maze_overlay_42.webp'),
   };
 }

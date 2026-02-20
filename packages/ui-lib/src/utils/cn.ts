@@ -6,4 +6,4 @@ function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
 }
 
-export { cn, cva, type VariantProps };
+export { clsx, cn, cva, type VariantProps };

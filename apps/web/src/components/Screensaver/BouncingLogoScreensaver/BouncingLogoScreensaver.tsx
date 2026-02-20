@@ -1,28 +1,58 @@
 'use client';
 
+import { clsx } from '@maw/ui-lib/utils';
+import { random } from '@maw/utils/math';
 import React, { useEffect, useRef, useState } from 'react';
 
+import { BouncyLogo } from './BouncyLogo';
+
+const HUE_ROTATION_CHANCE = 0.1;
+const VELOCITY = 3;
 const COLORS = [
-  '#ff0000',
-  '#00ff00',
-  '#0000ff',
-  '#ffff00',
-  '#ff00ff',
-  '#00ffff',
-  '#ffffff',
+  '#ff0000', // Red
+  '#00ff00', // Lime
+  '#0000ff', // Blue
+  '#ffff00', // Yellow
+  '#ff00ff', // Magenta
+  '#00ffff', // Cyan
+  '#ffffff', // White
+  '#ffa500', // Orange
+  '#ffc0cb', // Pink
+  '#800080', // Purple
+  '#008000', // Green
+  '#800000', // Maroon
+  '#008080', // Teal
+  '#000080', // Navy
+  '#ffd700', // Gold
+  '#ff4500', // OrangeRed
+  '#da70d6', // Orchid
+  '#adff2f', // GreenYellow
+  '#ff69b4', // HotPink
+  '#00ced1', // DarkTurquoise
 ];
 
 export function BouncingLogoScreensaver() {
   const [position, setPosition] = useState({ x: 0, y: 0 });
-  const [color, setColor] = useState(COLORS[0]);
+  const [isHueRotating, setIsHueRotating] = useState(false);
+  const [colors, setColorsColors] = useState(() => {
+    const logoIndex = random(0, COLORS.length, true);
+    let arrowIndex = random(0, COLORS.length, true);
+    while (arrowIndex === logoIndex) {
+      arrowIndex = random(0, COLORS.length, true);
+    }
+    return {
+      arrow: COLORS[arrowIndex],
+      logo: COLORS[logoIndex],
+    };
+  });
   const logoRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     let animationFrameId: number;
     let currentX = Math.random() * (window.innerWidth - 200);
     let currentY = Math.random() * (window.innerHeight - 100);
-    let velX = 3;
-    let velY = 3;
+    let velX = VELOCITY;
+    let velY = VELOCITY;
 
     const animate = () => {
       const logoWidth = logoRef.current?.offsetWidth || 150;
@@ -46,10 +76,14 @@ export function BouncingLogoScreensaver() {
       }
 
       if (hit) {
-        setColor((prev) => {
-          const nextIndex = (COLORS.indexOf(prev) + 1) % COLORS.length;
-          return COLORS[nextIndex];
+        setColorsColors((prev) => {
+          const nextIndex = random(0, COLORS.length, true);
+          return {
+            arrow: prev.logo,
+            logo: COLORS[nextIndex],
+          };
         });
+        setIsHueRotating(Math.random() < HUE_ROTATION_CHANCE);
       }
 
       setPosition({ x: currentX, y: currentY });
@@ -71,12 +105,12 @@ export function BouncingLogoScreensaver() {
         position: 'absolute',
         top: 0,
         left: 0,
-        color: color,
       }}
-      className="pointer-events-none transition-colors duration-200 select-none">
-      <div className="text-5xl font-bold tracking-tighter whitespace-nowrap">
-        <span style={{ color: color }}>MAW</span>
-      </div>
+      className={clsx(
+        'pointer-events-none transition-colors select-none',
+        isHueRotating && 'animate-hue-full-rotate duration-100',
+      )}>
+      <BouncyLogo fill={colors.logo} arrowFill={colors.arrow} />
     </div>
   );
 }

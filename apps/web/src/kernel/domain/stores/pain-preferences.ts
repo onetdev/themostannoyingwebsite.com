@@ -17,6 +17,7 @@ export const PUBLIC_PAIN_POINT_LIST = [
   'contentPaywall',
   'mockChat',
   'wheelOfFortune',
+  'screensaver',
   'exitPrompt',
   'clipboardMarker',
   'gifts.detectAdblocker',
@@ -28,7 +29,6 @@ export const PUBLIC_PAIN_POINT_LIST = [
   'historySpam',
   'notifications',
   'stickyVideo',
-  'screensaver',
 ] as const;
 
 export const PAIN_POINT_LIST = [
@@ -136,6 +136,7 @@ export const usePainPreferencesStore = create<PainPreferencesStore>()(
             nextFlags[key] = true;
           });
           return {
+            ...state,
             flags: nextFlags,
             publicLevel: calculatePublicLevelMeta(nextFlags),
           };
@@ -145,6 +146,7 @@ export const usePainPreferencesStore = create<PainPreferencesStore>()(
         set((state) => {
           const nextFlags = { ...state.flags, [key]: value };
           return {
+            ...state,
             flags: nextFlags,
             publicLevel: calculatePublicLevelMeta(nextFlags),
           };
@@ -158,6 +160,7 @@ export const usePainPreferencesStore = create<PainPreferencesStore>()(
             value === 'indeterminate' ? initialStateFlags[key] : value;
           const nextFlags = { ...state.flags, [key]: nextValue };
           return {
+            ...state,
             flags: nextFlags,
             publicLevel: calculatePublicLevelMeta(nextFlags),
           };
@@ -172,16 +175,19 @@ export const usePainPreferencesStore = create<PainPreferencesStore>()(
           });
 
           return {
+            ...state,
             flags: nextFlags,
             publicLevel: calculatePublicLevelMeta(nextFlags),
           };
         }),
       setScreensaverTimeoutSeconds: (timeoutSeconds) =>
-        set(({ screensaver }) => ({
+        set(({ screensaver, ...state }) => ({
+          ...state,
           screensaver: { ...screensaver, timeoutSeconds },
         })),
       setScreensaverVariant: (variant) =>
-        set(({ screensaver }) => ({
+        set(({ screensaver, ...state }) => ({
+          ...state,
           screensaver: { ...screensaver, variant },
         })),
     }),

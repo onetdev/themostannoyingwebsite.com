@@ -36,10 +36,11 @@ export const useUserActivationListener = () => {
     const events = [...unlockEvents, ...interactivityEvents];
 
     const handleInteraction = (e: Event) => {
-      setState({
-        unlocked: unlockEvents.includes(e.type),
+      setState((previousState) => ({
+        ...previousState,
+        unlocked: previousState.unlocked || unlockEvents.includes(e.type),
         lastEventAt: new Date().getTime(),
-      });
+      }));
     };
 
     events.forEach((event) => {

@@ -57,17 +57,25 @@ export function MazeScreensaver() {
       height: 1,
     });
 
-    function createTextureProgram(texture: Texture) {
+    function createTextureProgram(texture: Texture, overlayTexture?: Texture) {
       return new Program(gl, {
         vertex: texturedVertex,
         fragment: texturedFragment,
         uniforms: {
           tMap: { value: texture },
+          tOverlay: { value: overlayTexture },
+
+          uOverlayEnabled: { value: overlayTexture ? 1 : 0 },
+          uOverlayOpacity: { value: 1.0 },
+          uOverlayScale: { value: 1.0 },
         },
       });
     }
 
-    const wallProgram = createTextureProgram(textures.wall);
+    const wallProgram = {
+      1: createTextureProgram(textures.wall),
+      2: createTextureProgram(textures.wall, textures.overay42),
+    };
     const floorProgram = createTextureProgram(textures.floor);
     const ceilingProgram = createTextureProgram(textures.ceiling);
 
@@ -75,10 +83,11 @@ export function MazeScreensaver() {
       cellX: number,
       cellZ: number,
       direction: Direction,
+      program: Program,
     ) {
       const mesh = new Mesh(gl, {
         geometry,
-        program: wallProgram,
+        program,
         frustumCulled: true,
       });
 
@@ -194,16 +203,17 @@ export function MazeScreensaver() {
         if (cell === 0) {
           createFloorTile(worldX, worldZ);
           createCeilingTile(worldX, worldZ);
-        } else if (cell === 1) {
+        } else if (cell === 1 || cell === 2) {
+          const program = wallProgram[cell];
           const north = MAZE_24[z - 1]?.[x];
           const south = MAZE_24[z + 1]?.[x];
           const east = MAZE_24[z]?.[x + 1];
           const west = MAZE_24[z]?.[x - 1];
 
-          if (north === 0) createWallTile(worldX, worldZ, 'N');
-          if (south === 0) createWallTile(worldX, worldZ, 'S');
-          if (east === 0) createWallTile(worldX, worldZ, 'E');
-          if (west === 0) createWallTile(worldX, worldZ, 'W');
+          if (north === 0) createWallTile(worldX, worldZ, 'N', program);
+          if (south === 0) createWallTile(worldX, worldZ, 'S', program);
+          if (east === 0) createWallTile(worldX, worldZ, 'E', program);
+          if (west === 0) createWallTile(worldX, worldZ, 'W', program);
         }
       });
     });
