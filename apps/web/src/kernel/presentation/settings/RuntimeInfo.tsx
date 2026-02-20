@@ -80,7 +80,7 @@ export function RuntimeInfo() {
                 {t('settings.runtime.lastActivation')}
               </TableCell>
               <TableCell>
-                {runtime.userActivation.lastEventAt ? (
+                {runtime.userActivation.lastEventAt > 0 ? (
                   <ReactTimeAgo date={runtime.userActivation.lastEventAt} />
                 ) : (
                   t('common.notAvailable')

@@ -19,9 +19,11 @@ export function getTextures(gl: OGLRenderingContext) {
   }
 
   return {
-    floor: setupNetworkTexture('/assets/images/maze_floor.webp'),
-    ceiling: setupNetworkTexture('/assets/images/maze_ceiling.webp'),
-    wall: setupNetworkTexture('/assets/images/maze_wall.webp'),
-    overay42: setupNetworkTexture('/assets/images/maze_overlay_42.webp'),
+    floor: setupNetworkTexture('/assets/maze-screensaver/maze-floor.webp'),
+    ceiling: setupNetworkTexture('/assets/maze-screensaver/maze-ceiling.webp'),
+    wall: setupNetworkTexture('/assets/maze-screensaver/maze-wall.webp'),
+    overay42: setupNetworkTexture(
+      '/assets/maze-screensaver/maze-overlay-42.webp',
+    ),
   };
 }

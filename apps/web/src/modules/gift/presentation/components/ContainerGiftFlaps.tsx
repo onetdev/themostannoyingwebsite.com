@@ -17,7 +17,7 @@ export function ContainerGiftFlaps() {
         <Link href="/dilf" passHref prefetch={false}>
           <Image
             className="object-cover opacity-30 mix-blend-lighten"
-            src="/assets/dilf-shaded.webp"
+            src="/ads/ad-dilf-flaps.webp"
             alt={t('gifts.dilf.title')}
             width={1900}
             height={1000}

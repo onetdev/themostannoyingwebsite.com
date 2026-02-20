@@ -22,7 +22,7 @@ export function OneByOneGift({ size = 1024 }: OneByOneGiftProps) {
   return (
     <Link href="/flaim-a-phone" className="overflow-hidden">
       <Image
-        src="/assets/wan-a-phone.webp"
+        src="/ads/ad-wan-a-phone.webp"
         width={size}
         height={size}
         alt={t('gifts.wanPhone.title')}

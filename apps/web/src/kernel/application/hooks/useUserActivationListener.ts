@@ -39,7 +39,7 @@ export const useUserActivationListener = () => {
       setState((previousState) => ({
         ...previousState,
         unlocked: previousState.unlocked || unlockEvents.includes(e.type),
-        lastEventAt: new Date().getTime(),
+        lastEventAt: Date.now(),
       }));
     };
 

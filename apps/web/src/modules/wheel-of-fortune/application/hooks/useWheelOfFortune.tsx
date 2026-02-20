@@ -2,7 +2,7 @@
 
 import {
   getWeightedRandom,
-  random,
+  randomInt,
   WeightedRandomPoolItem,
 } from '@maw/utils/math';
 import { useTranslations } from 'next-intl';
@@ -46,7 +46,7 @@ export function useWheelOfFortune() {
   const spin = useCallback(() => {
     if (state != 'ready') return;
 
-    const resultIndex = random(0, items.length - 1, true);
+    const resultIndex = randomInt(0, items.length - 1);
     setState('spinning');
     setPrize({ index: resultIndex, ...items[resultIndex!] });
   }, [items, state]);

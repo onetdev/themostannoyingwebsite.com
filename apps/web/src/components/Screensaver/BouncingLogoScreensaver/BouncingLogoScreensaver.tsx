@@ -1,7 +1,7 @@
 'use client';
 
 import { clsx } from '@maw/ui-lib/utils';
-import { random } from '@maw/utils/math';
+import { randomInt } from '@maw/utils/math';
 import React, { useEffect, useRef, useState } from 'react';
 
 import { BouncyLogo } from './BouncyLogo';
@@ -34,11 +34,11 @@ const COLORS = [
 export function BouncingLogoScreensaver() {
   const [position, setPosition] = useState({ x: 0, y: 0 });
   const [isHueRotating, setIsHueRotating] = useState(false);
-  const [colors, setColorsColors] = useState(() => {
-    const logoIndex = random(0, COLORS.length, true);
-    let arrowIndex = random(0, COLORS.length, true);
+  const [colors, setColors] = useState(() => {
+    const logoIndex = randomInt(0, COLORS.length);
+    let arrowIndex = randomInt(0, COLORS.length);
     while (arrowIndex === logoIndex) {
-      arrowIndex = random(0, COLORS.length, true);
+      arrowIndex = randomInt(0, COLORS.length);
     }
     return {
       arrow: COLORS[arrowIndex],
@@ -76,8 +76,8 @@ export function BouncingLogoScreensaver() {
       }
 
       if (hit) {
-        setColorsColors((prev) => {
-          const nextIndex = random(0, COLORS.length, true);
+        setColors((prev) => {
+          const nextIndex = randomInt(0, COLORS.length);
           return {
             arrow: prev.logo,
             logo: COLORS[nextIndex],
@@ -110,7 +110,11 @@ export function BouncingLogoScreensaver() {
         'pointer-events-none transition-colors select-none',
         isHueRotating && 'animate-hue-full-rotate duration-100',
       )}>
-      <BouncyLogo fill={colors.logo} arrowFill={colors.arrow} />
+      <BouncyLogo
+        fill={colors.logo}
+        arrowFill={colors.arrow}
+        className="w-50 lg:w-75"
+      />
     </div>
   );
 }

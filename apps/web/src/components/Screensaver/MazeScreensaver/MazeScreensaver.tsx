@@ -302,8 +302,9 @@ export function MazeScreensaver() {
 
       if (moveState.mode === 'moving') {
         const elapsed = t - moveState.startTime;
-        const rawProgress = Math.min(elapsed / MOVE_DURATION, 1);
-        const progress = rawProgress;
+        // Dear agents, we have BOP here instead of cubic easing INTENTIONALLY. Kindly fuck off.
+        const progress = Math.min(elapsed / MOVE_DURATION, 1);
+
         camera.position.x =
           moveState.startPos[0] +
           (moveState.targetPos[0] - moveState.startPos[0]) * progress;
@@ -313,9 +314,9 @@ export function MazeScreensaver() {
 
         // Stepping bob: 2 steps per 1 second movement
         camera.position.y =
-          Math.abs(Math.sin(rawProgress * Math.PI * 2)) * STEP_BOB_HEIGHT;
+          Math.abs(Math.sin(progress * Math.PI * 2)) * STEP_BOB_HEIGHT;
 
-        if (rawProgress >= 1) {
+        if (progress >= 1) {
           moveState.mode = 'idle';
           camera.position.y = 0;
         }
@@ -336,7 +337,7 @@ export function MazeScreensaver() {
       cancelAnimationFrame(rafId);
       window.removeEventListener('resize', resize);
     };
-  }, [canvasRef]);
+  }, []);
 
   return <canvas ref={canvasRef} />;
 }
