@@ -4,6 +4,7 @@ import { notFound } from 'next/navigation';
 import { ArticleItemPage } from './article-item-page';
 
 import { PageLayout } from '@/components/PageLayout';
+import { CommentService } from '@/modules/comments';
 import { AppArticleService } from '@/modules/content';
 import i18nConfig from '@/root/i18n.config';
 
@@ -54,18 +55,20 @@ export const generateStaticParams = async () => {
 export default async function Page({ params }: PageProps) {
   const { slug, locale } = await params;
   const lookup = { slug, locale };
-  const data = await AppArticleService.getByLookup(lookup);
+  const datum = await AppArticleService.getByLookup(lookup);
 
-  if (!data) {
+  if (!datum) {
     return notFound();
   }
+
+  const comments = await new CommentService().getByArticle(datum);
 
   return (
     <PageLayout
       activeItem="article-item"
       role="main"
       data-testid="article-item">
-      <ArticleItemPage data={data} />
+      <ArticleItemPage article={datum} comments={comments} />
     </PageLayout>
   );
 }

@@ -1,6 +1,8 @@
+import commentVariants from './en/commentVariants';
 import wanPhoneQuestionVariants from './en/wanPhoneQuestionVariants';
 
 export default {
+  commentVariants,
   app: {
     title: 'The Most Annoying Website',
     description:
