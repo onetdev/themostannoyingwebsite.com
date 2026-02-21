@@ -220,6 +220,7 @@ export default {
     ok: 'OK',
     pending: 'Pending',
     placeholderSearch: 'Search...',
+    reply: 'Reply',
     reset: 'Reset',
     save: 'Save',
     search: 'Search',
@@ -360,6 +361,24 @@ export default {
       male: 'Male',
       other: 'Other',
       robot: 'Robot',
+    },
+  },
+  comments: {
+    sectionTitle: 'Comments',
+    formTitle: 'Add your comment',
+    reply: 'Reply',
+    disclaimer: 'All comments are generated for entertainment purposes and are not real.',
+    loginRequired: {
+      title: 'Login Required',
+      description:
+        'You need to be logged in to perform this action. Please log in or create an account to continue.',
+      login: 'Login',
+      cancel: 'Cancel',
+    },
+    form: {
+      name: 'Name',
+      comment: 'Comment',
+      submit: 'Submit comment',
     },
   },
   settings: {

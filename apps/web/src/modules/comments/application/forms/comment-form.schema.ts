@@ -1,0 +1,22 @@
+import { z } from 'zod';
+
+import { ZodTranslator } from '@/kernel';
+
+export function getCommentFormSchema(t: ZodTranslator) {
+  return z.object({
+    name: z
+      .string()
+      .min(1, { message: t('form.validation.error.required') }),
+    content: z
+      .string()
+      .min(1, { message: t('form.validation.error.required') }),
+    captcha: z
+      .string()
+      .min(1, { message: t('form.validation.error.captchaRequired') })
+      .regex(/^[XyZ123]{444}$/, {
+        message: t('form.validation.error.captchaInvalid'),
+      }),
+  });
+}
+
+export type CommentFormData = z.infer<ReturnType<typeof getCommentFormSchema>>;

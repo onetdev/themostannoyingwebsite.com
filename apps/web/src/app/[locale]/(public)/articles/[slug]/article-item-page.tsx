@@ -45,7 +45,7 @@ export function ArticleItemPage({ article, comments }: ArticleItemPageProps) {
           {HTMLReactParser(article.content)}
         </div>
       </PartitionalLockedContent>
-      <CommentSection items={comments} />
+      <CommentSection className="mt-10" items={comments} />
     </>
   );
 }

@@ -1,9 +1,18 @@
 import { Avatar, AvatarFallback, Button } from '@maw/ui-lib';
+import { useTranslations } from 'next-intl';
 import TimeAgo from 'react-timeago';
 
 import { Comment } from '../domain/entities/comment';
 
-export function CommentItem({ comment }: { comment: Comment }) {
+interface CommentItemProps {
+  comment: Comment;
+  onReply: (comment: Comment) => void;
+  onLike: (comment: Comment) => void;
+}
+
+export function CommentItem({ comment, onReply, onLike }: CommentItemProps) {
+  const t = useTranslations();
+
   return (
     <div className="space-y-3">
       <div className="flex gap-3">
@@ -24,11 +33,11 @@ export function CommentItem({ comment }: { comment: Comment }) {
           <p className="mt-1 text-sm">{comment.content}</p>
 
           <div className="mt-2 flex items-center gap-2">
-            <Button variant="ghost" size="sm">
+            <Button variant="ghost" size="sm" onClick={() => onLike(comment)}>
               👍 {comment.likes}
             </Button>
-            <Button variant="ghost" size="sm">
-              Reply
+            <Button variant="ghost" size="sm" onClick={() => onReply(comment)}>
+              {t('comments.reply')}
             </Button>
           </div>
         </div>
@@ -37,7 +46,12 @@ export function CommentItem({ comment }: { comment: Comment }) {
       {comment.replies && (
         <div className="border-border ml-11 space-y-3 border-l pl-4">
           {comment.replies.map((reply) => (
-            <CommentItem key={reply.id} comment={reply} />
+            <CommentItem
+              key={reply.id}
+              comment={reply}
+              onReply={onReply}
+              onLike={onLike}
+            />
           ))}
         </div>
       )}

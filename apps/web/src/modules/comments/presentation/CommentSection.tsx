@@ -1,33 +1,69 @@
+'use client';
 import {
+  Button,
   Card,
+  CardAction,
   CardContent,
+  CardFooter,
   CardHeader,
   CardTitle,
   Separator,
 } from '@maw/ui-lib';
+import { clsx } from '@maw/ui-lib/utils';
+import { useTranslations } from 'next-intl';
+import { useState } from 'react';
 
+import { CommentForm } from './CommentForm';
 import { CommentItem } from './CommentItem';
+import { LoginRequiredModal } from './LoginRequiredModal';
 import { Comment } from '../domain/entities/comment';
 
 export interface CommentSectionProps {
+  className?: string;
   items: Comment[];
 }
 
-export function CommentSection({ items }: CommentSectionProps) {
+export function CommentSection({ className, items }: CommentSectionProps) {
+  const t = useTranslations();
+  const [loginModalVisible, setLoginModalVisible] = useState(false);
+
+  const onReply = () => {
+    setLoginModalVisible(true);
+  };
+  const onLike = () => {
+    setLoginModalVisible(true);
+  };
+
   return (
-    <Card className="mx-auto w-full max-w-2xl">
+    <Card className={clsx(`mx-auto w-full max-w-3xl`, className)}>
       <CardHeader>
-        <CardTitle>Comments</CardTitle>
+        <CardTitle>{t('comments.sectionTitle')}</CardTitle>
+        <CardAction>
+          <Button asChild>
+            <a href="#create-comment">{t('common.reply')}</a>
+          </Button>
+        </CardAction>
       </CardHeader>
 
       <CardContent className="space-y-6">
+        <div className="text-muted-foreground text-xs">
+          {t('comments.disclaimer')}
+        </div>
         {items.map((comment, i) => (
           <div key={comment.id}>
-            <CommentItem comment={comment} />
+            <CommentItem comment={comment} onLike={onLike} onReply={onReply} />
             {i !== items.length - 1 && <Separator className="mt-6" />}
           </div>
         ))}
+        <Separator />
+        <h5 className="font-semibold">{t('comments.formTitle')}</h5>
+        <CommentForm />
       </CardContent>
+
+      <LoginRequiredModal
+        show={loginModalVisible}
+        onClose={() => setLoginModalVisible(false)}
+      />
     </Card>
   );
 }
