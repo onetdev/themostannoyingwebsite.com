@@ -4,7 +4,6 @@ import {
   Card,
   CardAction,
   CardContent,
-  CardFooter,
   CardHeader,
   CardTitle,
   Separator,
@@ -35,8 +34,12 @@ export function CommentSection({ className, items }: CommentSectionProps) {
   };
 
   return (
-    <Card className={clsx(`mx-auto w-full max-w-3xl`, className)}>
-      <CardHeader>
+    <Card
+      className={clsx(
+        'md:bg-card mx-auto w-full max-w-3xl rounded-none border-0 bg-transparent shadow-none md:rounded-xl md:border md:shadow-sm',
+        className,
+      )}>
+      <CardHeader className="px-0 sm:px-6">
         <CardTitle>{t('comments.sectionTitle')}</CardTitle>
         <CardAction>
           <Button asChild>
@@ -45,7 +48,7 @@ export function CommentSection({ className, items }: CommentSectionProps) {
         </CardAction>
       </CardHeader>
 
-      <CardContent className="space-y-6">
+      <CardContent className="space-y-6 px-0 sm:px-6">
         <div className="text-muted-foreground text-xs">
           {t('comments.disclaimer')}
         </div>

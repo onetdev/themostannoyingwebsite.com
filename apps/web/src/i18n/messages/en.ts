@@ -367,7 +367,10 @@ export default {
     sectionTitle: 'Comments',
     formTitle: 'Add your comment',
     reply: 'Reply',
-    disclaimer: 'All comments are generated for entertainment purposes and are not real.',
+    showReplies: 'Show {count} replies',
+    hideReplies: 'Hide replies',
+    disclaimer:
+      "All comments are generated for entertainment purposes and are not real. You won't be able actually post any comment.",
     loginRequired: {
       title: 'Login Required',
       description:

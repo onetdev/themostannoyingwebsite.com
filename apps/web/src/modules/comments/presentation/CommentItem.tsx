@@ -1,5 +1,8 @@
+'use client';
+
 import { Avatar, AvatarFallback, Button } from '@maw/ui-lib';
 import { useTranslations } from 'next-intl';
+import { useState } from 'react';
 import TimeAgo from 'react-timeago';
 
 import { Comment } from '../domain/entities/comment';
@@ -12,6 +15,9 @@ interface CommentItemProps {
 
 export function CommentItem({ comment, onReply, onLike }: CommentItemProps) {
   const t = useTranslations();
+  const [showReplies, setShowReplies] = useState(false);
+
+  const hasReplies = comment.replies && comment.replies.length > 0;
 
   return (
     <div className="space-y-3">
@@ -39,13 +45,26 @@ export function CommentItem({ comment, onReply, onLike }: CommentItemProps) {
             <Button variant="ghost" size="sm" onClick={() => onReply(comment)}>
               {t('comments.reply')}
             </Button>
+            {hasReplies && (
+              <Button
+                variant="ghost"
+                size="sm"
+                className="text-primary font-medium"
+                onClick={() => setShowReplies(!showReplies)}>
+                {showReplies
+                  ? t('comments.hideReplies')
+                  : t('comments.showReplies', {
+                      count: comment.replies?.length ?? 0,
+                    })}
+              </Button>
+            )}
           </div>
         </div>
       </div>
 
-      {comment.replies && (
-        <div className="border-border ml-11 space-y-3 border-l pl-4">
-          {comment.replies.map((reply) => (
+      {hasReplies && showReplies && (
+        <div className="border-border ml-4 space-y-3 border-l pl-4 sm:ml-11">
+          {comment.replies!.map((reply) => (
             <CommentItem
               key={reply.id}
               comment={reply}
