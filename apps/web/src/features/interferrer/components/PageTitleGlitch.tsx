@@ -2,9 +2,7 @@
 
 import { useMessages, useTranslations } from 'next-intl';
 
-import { ArrayPagedTitle } from './components/ArrayPagedTitle';
-import { GlitchyTitle } from './components/GlitchyTitle';
-import { MarqueeTitle } from './components/MarqueeTitle';
+import { ArrayPagedTitle, GlitchyTitle, MarqueeTitle } from './title-glitch';
 
 import { usePainPreferencesStore, useRuntimeStore } from '@/stores';
 
@@ -12,7 +10,7 @@ import { usePainPreferencesStore, useRuntimeStore } from '@/stores';
  * Pain point of manipulating the page title. Unfortunatelly the refresh rate
  * is quite low and the title is not updated as frequently as I would like.
  */
-export function PageTitleHost() {
+export function PageTitleGlitch() {
   const inactiveMarquee = usePainPreferencesStore(
     (state) => state.flags['pageTitle.inactiveMarquee'],
   );

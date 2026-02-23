@@ -5,14 +5,14 @@ import { useTranslations } from 'next-intl';
 import { PropsWithChildren, useEffect } from 'react';
 import { useBeforeUnload } from 'react-use';
 
+import { PageTitleGlitch } from '@/features/interferrer/components';
 import {
-  PageTitleHost,
   useDisableContextMenu,
   useDisableNavigationPop,
-} from '@/features/browser-core';
+} from '@/features/interferrer/hooks';
 import { NewsletterModalTrigger } from '@/features/newsletter/components';
 import { useAdblockerDetector } from '@/features/promotion/hooks';
-import { NotificationRequestTrigger } from '@/features/user/components/NotificationRequesterTigger';
+import { NotificationRequestTrigger } from '@/features/user/components';
 import { usePainPreferencesStore, useUserGrantsStore } from '@/stores';
 
 export function ClientPainContainer({ children }: PropsWithChildren) {
@@ -39,7 +39,7 @@ export function ClientPainContainer({ children }: PropsWithChildren) {
 
   return (
     <>
-      <PageTitleHost />
+      <PageTitleGlitch />
       <NewsletterModalTrigger />
       <NotificationRequestTrigger />
       <CopyMarker enabled={clipboardMarker} text={copyMarkerText}>

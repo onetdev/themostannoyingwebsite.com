@@ -1,7 +1,7 @@
 import Head from 'next/head';
 import { useEffect, useState } from 'react';
 
-import { string_marquee } from '@/features/browser-core';
+import { string_marquee } from '../../utils';
 
 type MarqueeTitleProps = {
   enabled: boolean;
