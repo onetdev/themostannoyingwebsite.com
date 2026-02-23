@@ -2,7 +2,7 @@ import { z } from 'zod';
 
 import { getCaptchaEmojiSchema } from './captcha-emoji.schema';
 
-import { ZodTranslator } from '@/core';
+import { ZodTranslator } from '@/core/types';
 
 export function getLoginFormSchema(t: ZodTranslator) {
   return z.object({

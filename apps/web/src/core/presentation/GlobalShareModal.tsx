@@ -5,7 +5,7 @@ import { useTranslations } from 'next-intl';
 
 import { useRuntimeStore } from '@/stores';
 
-export function ShareModal() {
+export function GlobalShareModal() {
   const { shareModalData, setShareModalData } = useRuntimeStore();
   const t = useTranslations();
 

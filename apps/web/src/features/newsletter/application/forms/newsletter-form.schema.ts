@@ -1,6 +1,6 @@
 import { z } from 'zod';
 
-import { ZodTranslator } from '@/core';
+import { ZodTranslator } from '@/core/types';
 
 export function getNewsletterFormSchema(t: ZodTranslator) {
   return z.object({

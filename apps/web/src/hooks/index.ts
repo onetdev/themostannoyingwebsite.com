@@ -1,5 +1,3 @@
-'use client';
-
 export * from './useAudio';
 export * from './useDocumentVisibilityListener';
 export * from './useUserActivationListener';

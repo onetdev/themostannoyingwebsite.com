@@ -1,12 +1,10 @@
 import { z } from 'zod';
 
-import { ZodTranslator } from '@/core';
+import { ZodTranslator } from '@/core/types';
 
 export function getCommentFormSchema(t: ZodTranslator) {
   return z.object({
-    name: z
-      .string()
-      .min(1, { message: t('form.validation.error.required') }),
+    name: z.string().min(1, { message: t('form.validation.error.required') }),
     content: z
       .string()
       .min(1, { message: t('form.validation.error.required') }),

@@ -10,7 +10,7 @@ import {
   useDisableContextMenu,
   useDisableNavigationPop,
 } from '@/features/browser-core';
-import { useAdblockerDetector } from '@/features/gift';
+import { useAdblockerDetector } from '@/features/promotions';
 import { NewsletterModalHost } from '@/features/newsletter';
 import { NotificationPermissionHost } from '@/features/notification';
 import { usePainPreferencesStore, useUserGrantsStore } from '@/stores';

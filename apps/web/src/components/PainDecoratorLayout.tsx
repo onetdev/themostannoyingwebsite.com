@@ -3,14 +3,14 @@
 import { useEffect, useState } from 'react';
 
 import CookieConsent from '@/components/CookieConsent';
-import { Screensaver } from '@/components/Screensaver';
-import { ShareModal } from '@/core';
+import { GlobalShareModal } from '@/core';
 import { ChatBubbleHost } from '@/features/chat-bubble';
-import { AdblockerSuspectBar, ContainerGiftFlaps } from '@/features/gift';
+import { AdblockerSuspectBar, ContainerGiftFlaps } from '@/features/promotions';
 import {
   DeadPixelHost,
   GlobalStickyVideoHost,
-} from '@/features/obstruction-decor';
+  Screensaver,
+} from '@/features/obstructors/components';
 import { WheelOfFortuneHost } from '@/features/wheel-of-fortune';
 import { usePainPreferencesStore, useUserGrantsStore } from '@/stores';
 
@@ -68,7 +68,7 @@ export function PainDecoratorLayout({
         {runtimeFlags.showCookieConsent && <CookieConsent />}
         <AdblockerSuspectBar />
         {runtimeFlags.stickyVideo && <GlobalStickyVideoHost />}
-        <ShareModal />
+        <GlobalShareModal />
         <Screensaver />
       </div>
     </div>

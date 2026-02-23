@@ -1,4 +1,4 @@
-export * from './hooks';
+export * from '../../hooks';
 export * from './providers';
 export * from './result';
 export * from './services';

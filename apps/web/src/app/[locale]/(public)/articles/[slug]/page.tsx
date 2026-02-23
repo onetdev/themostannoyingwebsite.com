@@ -4,7 +4,7 @@ import { notFound } from 'next/navigation';
 import { PageLayout } from '@/components/PageLayout';
 import { CommentService } from '@/features/comments';
 import { AppArticleService } from '@/features/content';
-import { ArticleItemPage } from '@/pages/AticleItemPage';
+import { ArticleItemPage } from '@/features/content/pages/ArticleItemPage';
 import i18nConfig from '@/root/i18n.config';
 
 type PageParams = {

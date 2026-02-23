@@ -7,10 +7,9 @@ import { init as initBrowserCore } from '@/features/browser-core/init';
 import { init as initChatBubble } from '@/features/chat-bubble/init';
 import { init as initContent } from '@/features/content/init';
 import { init as initDonation } from '@/features/donation/init';
-import { init as initGift } from '@/features/gift/init';
+import { init as initGift } from '@/features/promotions/init';
 import { init as initNewsletter } from '@/features/newsletter/init';
 import { init as initNotification } from '@/features/notification/init';
-import { init as initObstructionDecor } from '@/features/obstruction-decor/init';
 import { init as initSubscription } from '@/features/subscription/init';
 
 export const DependencyProvider: FunctionComponent<PropsWithChildren> = ({
@@ -27,7 +26,6 @@ export const DependencyProvider: FunctionComponent<PropsWithChildren> = ({
     initGift(container);
     initNewsletter(container);
     initNotification(container);
-    initObstructionDecor(container);
     initShared(container);
     initSubscription(container);
     // Register additional modules here
