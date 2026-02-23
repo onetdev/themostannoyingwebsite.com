@@ -10,7 +10,7 @@ import {
   useDisableContextMenu,
   useDisableNavigationPop,
 } from '@/features/browser-core';
-import { NewsletterModalHost } from '@/features/newsletter';
+import { NewsletterModalTrigger } from '@/features/newsletter/components';
 import { useAdblockerDetector } from '@/features/promotion/hooks';
 import { NotificationRequestTrigger } from '@/features/user/components/NotificationRequesterTigger';
 import { usePainPreferencesStore, useUserGrantsStore } from '@/stores';
@@ -40,7 +40,7 @@ export function ClientPainContainer({ children }: PropsWithChildren) {
   return (
     <>
       <PageTitleHost />
-      <NewsletterModalHost />
+      <NewsletterModalTrigger />
       <NotificationRequestTrigger />
       <CopyMarker enabled={clipboardMarker} text={copyMarkerText}>
         {children}

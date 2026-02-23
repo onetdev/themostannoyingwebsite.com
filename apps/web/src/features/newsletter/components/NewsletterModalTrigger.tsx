@@ -2,17 +2,17 @@
 
 import { useEffect, useState } from 'react';
 
-import { NewsletterModal } from './components/NewsletterModal';
+import { NewsletterModal } from './NewsletterModal';
 
 import { useScrollDistanceTrigger } from '@/hooks';
 import { usePainPreferencesStore, useRuntimeStore } from '@/stores';
 
-export type NewsletterModalHostProps = {
+export type NewsletterModalTriggerProps = {
   scrollDistanceTrigger?: number;
 };
-export function NewsletterModalHost({
+export function NewsletterModalTrigger({
   scrollDistanceTrigger = 450,
-}: NewsletterModalHostProps) {
+}: NewsletterModalTriggerProps) {
   const enabled = usePainPreferencesStore(
     (state) => state.flags.newsletterModal,
   );

@@ -5,7 +5,6 @@ import { DependencyContainer } from '@/contexts/DependencyContainer';
 import { init as initAuth } from '@/features/auth/init';
 import { init as initBrowserCore } from '@/features/browser-core/init';
 import { init as initDonation } from '@/features/donation/init';
-import { init as initNewsletter } from '@/features/newsletter/init';
 import { init as initSubscription } from '@/features/subscription/init';
 import { StaticCountryRepository } from '@/repositories';
 import { KernelService } from '@/services';
@@ -24,7 +23,6 @@ export function AppDependencyContainer({ children }: PropsWithChildren) {
     initAuth(container);
     initBrowserCore(container);
     initDonation(container);
-    initNewsletter(container);
     initSubscription(container);
     // Register additional modules here
 
