@@ -1,7 +1,7 @@
 import { Button } from '@maw/ui-lib';
 import { useTranslations } from 'next-intl';
 
-import { BillingCycle, BillingCycleList } from '../../domain';
+import { BillingCycle, BillingCycleList } from '../../schemas';
 
 export interface BillingCycleSelectorProps {
   billingCycle: BillingCycle;

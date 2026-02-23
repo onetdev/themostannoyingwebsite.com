@@ -3,4 +3,4 @@ export { UserPreferences } from './UserPreferences';
 export { RuntimeInfo } from './RuntimeInfo';
 export { SettingsField } from './SettingsField';
 export { UserGrantsSettings } from './UserGrantsSettings';
-export { MandatoryExperienceInfo as MandatoryExperienceSettings } from './MandatoryExperienceInfo';
+export { MandatoryExperienceInfo } from './MandatoryExperienceInfo';

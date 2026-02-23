@@ -4,20 +4,15 @@ import { PageHeadline } from '@maw/ui-lib';
 import { useTranslations } from 'next-intl';
 import { useCallback, useState } from 'react';
 
-import {
-  BillingCycle,
-  SubscriptionFeature,
-  SubscriptionPackage,
-} from '../domain';
-import { BillingCycleSelector } from './components/BillingCycleSelector';
-import { Disclaimer } from './components/Disclaimer';
-import { PlanCard } from './components/PlanCard';
-import { PlanComparison } from './components/PlanComparison';
-import { SocialProof, SocialProofProps } from './components/SocialProof';
-import {
-  UrgencyCountdown,
-  UrgencyCountdownProps,
-} from './components/UrgencyCountdown';
+import { BillingCycleSelector } from './BillingCycleSelector';
+import { Disclaimer } from './Disclaimer';
+import { PlanCard } from './PlanCard';
+import { PlanComparison } from './PlanComparison';
+import { SocialProof, SocialProofProps } from './SocialProof';
+import { UrgencyCountdown, UrgencyCountdownProps } from './UrgencyCountdown';
+import { BillingCycle } from '../../schemas/billing-cycle';
+import { SubscriptionFeature } from '../../schemas/subscription-feature';
+import { SubscriptionPackage } from '../../schemas/subscription-package';
 
 interface PlansPageProps {
   plans: SubscriptionPackage[];

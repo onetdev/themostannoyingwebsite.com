@@ -4,7 +4,7 @@ import { getTranslations } from 'next-intl/server';
 
 import { PageLayout } from '@/app/_components/PageLayout';
 import {
-  MandatoryExperienceSettings,
+  MandatoryExperienceInfo,
   PainPreferences,
   RuntimeInfo,
   UserGrantsSettings,
@@ -41,7 +41,7 @@ export default async function Settings() {
           className="md:col-span-2"
           listClassName="grid gap-3 grid-cols-1 md:gap-x-10 md:grid-cols-2 lg:grid-cols-3"
         />
-        <MandatoryExperienceSettings />
+        <MandatoryExperienceInfo />
         <RuntimeInfo />
       </div>
     </PageLayout>

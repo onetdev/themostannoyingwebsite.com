@@ -12,7 +12,7 @@ import {
 import { cn } from '@maw/ui-lib/utils';
 import { useTranslations } from 'next-intl';
 
-import { SubscriptionFeature, SubscriptionPackage } from '../../domain';
+import { SubscriptionFeature, SubscriptionPackage } from '../../schemas';
 
 interface PlansPageProps {
   className?: string;

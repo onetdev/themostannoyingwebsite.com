@@ -4,10 +4,8 @@ import { getTranslations } from 'next-intl/server';
 export { generateStaticParams } from '@/i18n/routing';
 import { PageLayout } from '@/app/_components/PageLayout';
 import config from '@/config';
-import {
-  createSubscriptionPlansService,
-  PlansPage,
-} from '@/features/subscription';
+import { PlansPage } from '@/features/subscription/components';
+import { createSubscriptionPlansService } from '@/features/subscription/services';
 
 export const revalidate = 1800;
 

@@ -12,7 +12,7 @@ import {
 } from '@/features/browser-core';
 import { NewsletterModalHost } from '@/features/newsletter';
 import { useAdblockerDetector } from '@/features/promotion/hooks';
-import { NotificationPermissionHost } from '@/features/user/components/NotificationPermissionHost';
+import { NotificationRequestTrigger } from '@/features/user/components/NotificationRequesterTigger';
 import { usePainPreferencesStore, useUserGrantsStore } from '@/stores';
 
 export function ClientPainContainer({ children }: PropsWithChildren) {
@@ -41,7 +41,7 @@ export function ClientPainContainer({ children }: PropsWithChildren) {
     <>
       <PageTitleHost />
       <NewsletterModalHost />
-      <NotificationPermissionHost />
+      <NotificationRequestTrigger />
       <CopyMarker enabled={clipboardMarker} text={copyMarkerText}>
         {children}
       </CopyMarker>

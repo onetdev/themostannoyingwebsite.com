@@ -1,6 +1,6 @@
 import { Container } from 'inversify';
 
-import { SubscriptionPlansService } from './application';
+import { SubscriptionPlansService } from './services';
 import { DI } from './types';
 
 export const init = (di: Container) => {

@@ -1,7 +1,6 @@
 import { Result } from '@maw/utils/result';
 
-import { SubscriptionPackage } from '../../domain';
-import { SubscriptionError } from '../../domain/errors';
+import { SubscriptionError, SubscriptionPackage } from '../../schemas';
 
 export async function getPlans(): Promise<
   Result<SubscriptionPackage[], SubscriptionError>

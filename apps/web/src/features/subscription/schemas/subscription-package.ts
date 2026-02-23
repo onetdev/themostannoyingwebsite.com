@@ -1,6 +1,6 @@
 import { z } from 'zod';
 
-import { BillingCycleSchema } from '../value-objects/billing-cycle';
+import { BillingCycleSchema } from './billing-cycle';
 
 export const SubscriptionPackageSchema = z.object({
   key: z.string(),

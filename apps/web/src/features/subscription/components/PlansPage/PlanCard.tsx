@@ -16,7 +16,7 @@ import {
   BILLING_CYCLE_MONTH_MAP,
   BillingCycle,
   SubscriptionPackage,
-} from '../../domain';
+} from '../../schemas';
 
 export interface PlanCardProps {
   plan: SubscriptionPackage;

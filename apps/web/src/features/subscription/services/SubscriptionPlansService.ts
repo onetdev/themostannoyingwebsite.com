@@ -1,6 +1,7 @@
 import { injectable } from 'inversify';
 
-import { getFeatures, getPlans } from '../use-cases';
+import { getFeatures } from './use-cases/get-features';
+import { getPlans } from './use-cases/get-plans';
 
 @injectable()
 export class SubscriptionPlansService {
