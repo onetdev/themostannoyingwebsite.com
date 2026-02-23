@@ -1,6 +1,6 @@
 import { idFromRand, mulberry32, stringToSeed } from '@maw/utils/seed';
 
-import { type Comment, CommentSchema } from '../../domain/entities/comment';
+import { type Comment, CommentSchema } from '../schemas';
 
 export interface SeededCommentsOptions {
   pool: {

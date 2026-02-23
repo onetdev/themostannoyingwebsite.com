@@ -15,7 +15,7 @@ import { useState } from 'react';
 import { CommentForm } from './CommentForm';
 import { CommentItem } from './CommentItem';
 import { LoginRequiredModal } from './LoginRequiredModal';
-import { Comment } from '../domain/entities/comment';
+import { Comment } from '../schemas';
 
 export interface CommentSectionProps {
   className?: string;

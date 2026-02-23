@@ -3,7 +3,7 @@
 import { useLogger } from '@maw/logger';
 import { useForm } from 'react-hook-form';
 
-import { CommentFormData, getCommentFormSchema } from './comment-form.schema';
+import { CommentFormData, getCommentFormSchema } from '../schemas';
 
 import { useZodFormValidator } from '@/hooks';
 

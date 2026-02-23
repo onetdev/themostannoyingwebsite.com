@@ -5,7 +5,7 @@ import { useTranslations } from 'next-intl';
 import { useState } from 'react';
 import TimeAgo from 'react-timeago';
 
-import { Comment } from '../domain/entities/comment';
+import { Comment } from '../schemas';
 
 interface CommentItemProps {
   comment: Comment;

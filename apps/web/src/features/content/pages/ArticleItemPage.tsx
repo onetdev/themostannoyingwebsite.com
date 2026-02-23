@@ -5,8 +5,8 @@ import HTMLReactParser from 'html-react-parser';
 import Image from 'next/image';
 import { useTranslations } from 'next-intl';
 
-import { Comment } from '@/features/comments/domain/entities/comment';
-import { CommentSection } from '@/features/comments/presentation/CommentSection';
+import { Comment } from '@/features/comments/schemas/comment';
+import { CommentSection } from '@/features/comments/components/CommentSection';
 import { ArticleDatum, PartitionalLockedContent } from '@/features/content';
 import { usePainPreferencesStore } from '@/stores';
 
