@@ -1,18 +1,17 @@
 import { Container } from 'inversify';
 import { FunctionComponent, PropsWithChildren, useMemo } from 'react';
 
-import { DependencyContainer, init as initShared } from '@/kernel';
-import { init as initAuth } from '@/modules/auth/init';
-import { init as initBrowserCore } from '@/modules/browser-core/init';
-import { init as initChatBubble } from '@/modules/chat-bubble/init';
-import { init as initContent } from '@/modules/content/init';
-import { init as initDonation } from '@/modules/donation/init';
-import { init as initGift } from '@/modules/gift/init';
-import { init as initNewsletter } from '@/modules/newsletter/init';
-import { init as initNotification } from '@/modules/notification/init';
-import { init as initObstructionDecor } from '@/modules/obstruction-decor/init';
-import { init as initSubscription } from '@/modules/subscription/init';
-import { init as initWheelOfFortune } from '@/modules/wheel-of-fortune/init';
+import { DependencyContainer, init as initShared } from '@/core';
+import { init as initAuth } from '@/features/auth/init';
+import { init as initBrowserCore } from '@/features/browser-core/init';
+import { init as initChatBubble } from '@/features/chat-bubble/init';
+import { init as initContent } from '@/features/content/init';
+import { init as initDonation } from '@/features/donation/init';
+import { init as initGift } from '@/features/gift/init';
+import { init as initNewsletter } from '@/features/newsletter/init';
+import { init as initNotification } from '@/features/notification/init';
+import { init as initObstructionDecor } from '@/features/obstruction-decor/init';
+import { init as initSubscription } from '@/features/subscription/init';
 
 export const DependencyProvider: FunctionComponent<PropsWithChildren> = ({
   children,
@@ -31,7 +30,6 @@ export const DependencyProvider: FunctionComponent<PropsWithChildren> = ({
     initObstructionDecor(container);
     initShared(container);
     initSubscription(container);
-    initWheelOfFortune();
     // Register additional modules here
 
     return container;

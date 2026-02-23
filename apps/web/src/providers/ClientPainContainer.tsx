@@ -5,15 +5,15 @@ import { useTranslations } from 'next-intl';
 import { PropsWithChildren, useEffect } from 'react';
 import { useBeforeUnload } from 'react-use';
 
-import { usePainPreferencesStore, useUserGrantsStore } from '@/kernel';
 import {
   PageTitleHost,
   useDisableContextMenu,
   useDisableNavigationPop,
-} from '@/modules/browser-core';
-import { useAdblockerDetector } from '@/modules/gift';
-import { NewsletterModalHost } from '@/modules/newsletter';
-import { NotificationPermissionHost } from '@/modules/notification';
+} from '@/features/browser-core';
+import { useAdblockerDetector } from '@/features/gift';
+import { NewsletterModalHost } from '@/features/newsletter';
+import { NotificationPermissionHost } from '@/features/notification';
+import { usePainPreferencesStore, useUserGrantsStore } from '@/stores';
 
 export function ClientPainContainer({ children }: PropsWithChildren) {
   const t = useTranslations();

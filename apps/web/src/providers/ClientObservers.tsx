@@ -9,7 +9,7 @@ import {
   useServiceWorker,
   useTouchScreenListener,
   useUserActivationListener,
-} from '@/kernel/application/hooks';
+} from '@/core/application/hooks';
 
 export function ClientObservers() {
   useServiceWorker();

@@ -7,7 +7,7 @@ import config from '@/config';
 import {
   createSubscriptionPlansService,
   PlansPage,
-} from '@/modules/subscription';
+} from '@/features/subscription';
 
 export const revalidate = 1800;
 

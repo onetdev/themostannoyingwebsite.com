@@ -7,8 +7,8 @@ import { getLangDir } from 'rtl-detect';
 
 import { PainDecoratorLayout } from '@/components/PainDecoratorLayout';
 import { routing } from '@/i18n/routing';
-import { getAppConfigService } from '@/kernel';
-import { BeggarBanner } from '@/modules/donation';
+import { getAppConfigService } from '@/core';
+import { BeggarBanner } from '@/features/donation';
 import { ClientObservers } from '@/providers/ClientObservers';
 import { RootProviderContainer } from '@/providers/RootProviderContainer';
 

@@ -1,7 +1,7 @@
 import { Metadata } from 'next';
 import { getTranslations } from 'next-intl/server';
 
-import HotThingsPage from './hot-things-page';
+import HotThingsPage from '../../../../pages/HotThingsPage';
 
 import { PageLayout } from '@/components/PageLayout';
 export { generateStaticParams } from '@/i18n/routing';

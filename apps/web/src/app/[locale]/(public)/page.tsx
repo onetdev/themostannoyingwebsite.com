@@ -6,8 +6,8 @@ import {
   LargeCoverItem,
   SmallCoverListItem,
   TextListItem,
-} from '@/modules/content';
-import { OneByOneGift } from '@/modules/gift';
+} from '@/features/content';
+import { OneByOneGift } from '@/features/gift';
 export { generateStaticParams } from '@/i18n/routing';
 
 export const revalidate = 1800;

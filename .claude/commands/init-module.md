@@ -43,7 +43,7 @@ Before creating any files, perform thorough analysis:
    - Read `apps/web/src/providers/DependencyProvider.tsx`
    - Identify where new module init should be added
    - Check `apps/web/tsconfig.json` for path aliases
-   - Verify `@/modules/*` path mapping exists
+   - Verify `@/features/*` path mapping exists
 
 5. **Create Todo List**
    - Use TodoWrite tool to create comprehensive task list
@@ -192,13 +192,13 @@ This module implements:
 
 1. **Update DependencyProvider**
    - Read current `DependencyProvider.tsx`
-   - Add import: `import { init as init{PascalCase} } from '@/modules/{module-name}/init';`
+   - Add import: `import { init as init{PascalCase} } from '@/features/{module-name}/init';`
    - Add init call in container creation: `init{PascalCase}(container);`
    - Add comment if needed to guide where new modules should be registered
    - Display: "✓ Updated DependencyProvider.tsx"
 
 2. **Verify Path Aliases**
-   - Confirm `@/modules/*` mapping exists
+   - Confirm `@/features/*` mapping exists
    - If missing, warn user to update tsconfig.json
    - Display: "✓ Path aliases verified"
 
@@ -243,12 +243,12 @@ Next steps:
 6. Import and use module components in your pages/layouts
 
 Useful commands:
-- Add this module to a page: import { ComponentName } from '@/modules/{module-name}';
+- Add this module to a page: import { ComponentName } from '@/features/{module-name}';
 - Run type check: pnpm run check-types
 - Run tests: pnpm run test
 
 Example usage in a page:
-import { ComponentName } from '@/modules/{module-name}';
+import { ComponentName } from '@/features/{module-name}';
 
 export default function Page() {
   return <ComponentName />;

@@ -2,8 +2,8 @@ import { ArticleDatum } from '@maw/content-api';
 import type { MetadataRoute } from 'next';
 import { Languages } from 'next/dist/lib/metadata/types/alternative-urls-types';
 
-import { getAppConfigService } from '@/kernel';
-import { AppArticleService } from '@/modules/content';
+import { getAppConfigService } from '@/core';
+import { AppArticleService } from '@/features/content';
 import i18nConfig from '@/root/i18n.config';
 
 const config = getAppConfigService().getDeploymentMeta();

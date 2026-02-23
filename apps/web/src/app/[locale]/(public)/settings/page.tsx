@@ -9,7 +9,7 @@ import {
   RuntimeInfo,
   UserGrantsSettings,
   UserPreferences,
-} from '@/kernel';
+} from '@/core';
 export { generateStaticParams } from '@/i18n/routing';
 
 export const revalidate = 1800;

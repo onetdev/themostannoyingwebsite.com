@@ -1,11 +1,10 @@
 import { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 
-import { ArticleItemPage } from './article-item-page';
-
 import { PageLayout } from '@/components/PageLayout';
-import { CommentService } from '@/modules/comments';
-import { AppArticleService } from '@/modules/content';
+import { CommentService } from '@/features/comments';
+import { AppArticleService } from '@/features/content';
+import { ArticleItemPage } from '@/pages/AticleItemPage';
 import i18nConfig from '@/root/i18n.config';
 
 type PageParams = {

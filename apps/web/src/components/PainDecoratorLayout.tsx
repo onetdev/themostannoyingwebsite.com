@@ -4,18 +4,15 @@ import { useEffect, useState } from 'react';
 
 import CookieConsent from '@/components/CookieConsent';
 import { Screensaver } from '@/components/Screensaver';
-import {
-  ShareModal,
-  usePainPreferencesStore,
-  useUserGrantsStore,
-} from '@/kernel';
-import { ChatBubbleHost } from '@/modules/chat-bubble';
-import { AdblockerSuspectBar, ContainerGiftFlaps } from '@/modules/gift';
+import { ShareModal } from '@/core';
+import { ChatBubbleHost } from '@/features/chat-bubble';
+import { AdblockerSuspectBar, ContainerGiftFlaps } from '@/features/gift';
 import {
   DeadPixelHost,
   GlobalStickyVideoHost,
-} from '@/modules/obstruction-decor';
-import { WheelOfFortuneHost } from '@/modules/wheel-of-fortune';
+} from '@/features/obstruction-decor';
+import { WheelOfFortuneHost } from '@/features/wheel-of-fortune';
+import { usePainPreferencesStore, useUserGrantsStore } from '@/stores';
 
 type PainDecoratorLayoutProps = JSXProxyProps<'div'>;
 

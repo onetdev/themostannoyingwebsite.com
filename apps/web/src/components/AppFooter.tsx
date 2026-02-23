@@ -2,7 +2,7 @@ import { getTranslations } from 'next-intl/server';
 
 import { FOOTER_NAVIGATION_LINKS } from '@/app/navigation';
 import { Link } from '@/i18n/navigation';
-import { getAppConfigService } from '@/kernel';
+import { getAppConfigService } from '@/core';
 
 export type AppFooterProps = {
   className: JSXProxyProps<'footer'>['className'];

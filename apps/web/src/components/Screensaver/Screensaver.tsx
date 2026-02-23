@@ -7,7 +7,7 @@ import React, { useEffect, useState } from 'react';
 import { BouncingLogoScreensaver } from './BouncingLogoScreensaver';
 import { MazeScreensaver } from './MazeScreensaver';
 
-import { usePainPreferencesStore, useRuntimeStore } from '@/kernel';
+import { usePainPreferencesStore, useRuntimeStore } from '@/stores';
 
 export function Screensaver() {
   const isEnabled = usePainPreferencesStore((state) => state.flags.screensaver);

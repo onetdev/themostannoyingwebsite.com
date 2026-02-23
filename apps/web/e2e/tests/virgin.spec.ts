@@ -3,10 +3,7 @@ import { expect, test } from '@playwright/test';
 import { getVirginPage } from '../pages/VirginPage';
 import { setupE2eTestState } from '../utils/setup';
 
-import {
-  PAIN_PREFERENCES_STORAGE_KEY,
-  PUBLIC_PAIN_POINT_LIST,
-} from '@/kernel/domain/stores';
+import { PAIN_PREFERENCES_STORAGE_KEY, PUBLIC_PAIN_POINT_LIST } from '@/stores';
 
 test('visiting virgin page should turn off all pain points', async ({
   page,

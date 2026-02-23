@@ -9,7 +9,7 @@ import {
   NavigationParams,
   NavigationProvider as NavigationProviderBase,
   RouteAlias,
-} from '@/kernel';
+} from '@/core';
 
 const routeAliasToPathMap: Record<RouteAlias, string> = {
   about: '/about',

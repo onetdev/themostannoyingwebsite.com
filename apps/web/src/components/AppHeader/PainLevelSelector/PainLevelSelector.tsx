@@ -5,7 +5,7 @@ import { useMemo } from 'react';
 
 import { SliderRail } from './SliderRail';
 
-import { usePainPreferencesStore } from '@/kernel';
+import { usePainPreferencesStore } from '@/stores';
 
 export interface PainLevelSelectorProps {
   className?: string;

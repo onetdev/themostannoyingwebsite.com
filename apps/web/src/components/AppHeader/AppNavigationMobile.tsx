@@ -21,7 +21,7 @@ import {
   SITE_NAVIGATION_LINKS,
 } from '@/app/navigation';
 import { Link } from '@/i18n/navigation';
-import { useRuntimeStore } from '@/kernel';
+import { useRuntimeStore } from '@/stores';
 
 export type AppNavigationMobileProps = {
   activeItem?: ActiveNavigationItem;

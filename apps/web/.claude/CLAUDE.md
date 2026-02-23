@@ -106,7 +106,7 @@ Every module must be registered in the DI container:
 **File:** `/src/providers/DependencyProvider.tsx`
 
 ```typescript
-import { init as initMyFeature } from '@/modules/my-feature/init';
+import { init as initMyFeature } from '@/features/my-feature/init';
 
 const container = useMemo(() => {
   const container = new Container();
@@ -131,7 +131,7 @@ export * from './presentation';
 ```
 
 **Benefits:**
-- Clean import paths: `import { User } from '@/modules/auth'`
+- Clean import paths: `import { User } from '@/features/auth'`
 - Explicit public API surface
 - Easy refactoring
 
@@ -139,10 +139,10 @@ export * from './presentation';
 
 ```typescript
 // ✅ Good
-import { User, useAuthService } from '@/modules/auth';
+import { User, useAuthService } from '@/features/auth';
 
 // ❌ Bad
-import { User } from '@/modules/auth/domain/entities/user';
+import { User } from '@/features/auth/domain/entities/user';
 ```
 
 ---
@@ -261,7 +261,7 @@ export interface NavigationProviderContextType {
 ```typescript
 // app/[locale]/donate/page.tsx
 import { getTranslations } from 'next-intl/server';
-import { DonationPage } from '@/modules/donation/presentation/DonationPage';
+import { DonationPage } from '@/features/donation/presentation/DonationPage';
 
 export const revalidate = 1800; // ISR
 
@@ -325,7 +325,7 @@ export function DonationCalculator() {
 // application/hooks/useDonationBalance.ts
 import { useMemo } from 'react';
 import { useDonationService } from '../services';
-import { useAppConfig } from '@/kernel';
+import { useAppConfig } from '@/core';
 
 export function useDonationBalance(): number {
   const { donation } = useAppConfig();
@@ -354,7 +354,7 @@ export function useDonationBalance(): number {
 ```typescript
 // application/forms/login-form.schema.ts
 import { z } from 'zod';
-import { ZodTranslator } from '@/kernel';
+import { ZodTranslator } from '@/core';
 
 export function getLoginFormSchema(t: ZodTranslator) {
   return z.object({
@@ -376,7 +376,7 @@ export type LoginFormData = z.infer<ReturnType<typeof getLoginFormSchema>>;
 import { useForm } from 'react-hook-form';
 import { useAuthService } from '../services';
 import { getLoginFormSchema, LoginFormData } from './login-form.schema';
-import { useZodFormValidator } from '@/kernel';
+import { useZodFormValidator } from '@/core';
 
 export function useLoginForm({ onSuccess }: { onSuccess?: () => void }) {
   const authService = useAuthService();
@@ -1002,7 +1002,7 @@ export class MyRepositoryImpl implements MyRepository {
     "paths": {
       "@/*": ["./src/*"],
       "@/root/*": ["./*"],
-      "@/modules/*": ["src/modules/*"],
+      "@/features/*": ["src/modules/*"],
       "@/kernel": ["src/kernel/index.ts"]
     }
   }
@@ -1023,19 +1023,19 @@ export class MyRepositoryImpl implements MyRepository {
 ```typescript
 import { useForm } from 'react-hook-form';                  // External
 import { Button } from '@maw/ui-lib';                       // Workspace
-import { useZodFormValidator } from '@/kernel';             // App
+import { useZodFormValidator } from '@/core';             // App
 import { User } from '../../domain';                        // Relative
 ```
 
 ### Import Rules
 
 **✅ Do:**
-- Use barrel exports: `import { User } from '@/modules/auth'`
-- Use path aliases: `import { Config } from '@/kernel'`
+- Use barrel exports: `import { User } from '@/features/auth'`
+- Use path aliases: `import { Config } from '@/core'`
 - Keep relative imports within the same module
 
 **❌ Don't:**
-- Deep import from other modules: `import { User } from '@/modules/auth/domain/entities/user'`
+- Deep import from other modules: `import { User } from '@/features/auth/domain/entities/user'`
 - Long relative paths: `import { X } from '../../../../domain'`
 
 ---
@@ -1336,13 +1336,13 @@ export class MyService {
 
 ```typescript
 // ❌ Bad
-import { User } from '@/modules/auth/domain/entities/user';
-import { getLoginFormSchema } from '@/modules/auth/application/forms/login-form.schema';
+import { User } from '@/features/auth/domain/entities/user';
+import { getLoginFormSchema } from '@/features/auth/application/forms/login-form.schema';
 ```
 
 ```typescript
 // ✅ Good
-import { User, getLoginFormSchema } from '@/modules/auth';
+import { User, getLoginFormSchema } from '@/features/auth';
 ```
 
 ### ❌ Avoid: Hardcoded English Text

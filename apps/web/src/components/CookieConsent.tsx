@@ -4,7 +4,7 @@ import { useTranslations } from 'next-intl';
 import { FunctionComponent } from 'react';
 
 import { Link } from '@/i18n/navigation';
-import { useUserGrantsStore } from '@/kernel';
+import { useUserGrantsStore } from '@/stores';
 
 const CookieConsent: FunctionComponent = () => {
   const t = useTranslations();
