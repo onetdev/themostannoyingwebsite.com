@@ -1,8 +1,8 @@
 import { Metadata } from 'next';
 import { getTranslations } from 'next-intl/server';
 
-import { PageLayout } from '@/components/PageLayout';
 export { generateStaticParams } from '@/i18n/routing';
+import { PageLayout } from '@/app/_components/PageLayout';
 import config from '@/config';
 import {
   createSubscriptionPlansService,

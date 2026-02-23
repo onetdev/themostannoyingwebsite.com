@@ -2,7 +2,7 @@ import { PageHeadline } from '@maw/ui-lib';
 import { Metadata } from 'next';
 import { getTranslations } from 'next-intl/server';
 
-import { PageLayout } from '@/components/PageLayout';
+import { PageLayout } from '@/app/_components/PageLayout';
 import { DonationPage } from '@/features/donation/presentation/DonationPage';
 export { generateStaticParams } from '@/i18n/routing';
 

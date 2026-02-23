@@ -15,7 +15,10 @@ type ManualModalProps = {
   onDismiss: () => void;
 };
 
-export function ManualModal({ visible = false, onDismiss }: ManualModalProps) {
+export function NotificationManualModal({
+  visible = false,
+  onDismiss,
+}: ManualModalProps) {
   const t = useTranslations();
 
   return (

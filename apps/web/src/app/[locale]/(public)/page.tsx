@@ -1,6 +1,6 @@
 import { getTranslations } from 'next-intl/server';
 
-import { PageLayout } from '@/components/PageLayout';
+import { PageLayout } from '@/app/_components/PageLayout';
 import {
   AppArticleService,
   LargeCoverItem,

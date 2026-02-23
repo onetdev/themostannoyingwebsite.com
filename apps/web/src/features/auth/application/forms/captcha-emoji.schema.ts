@@ -1,6 +1,6 @@
 import { z } from 'zod';
 
-import { ZodTranslator } from '@/core/types';
+import { ZodTranslator } from '@/types';
 
 export function getCaptchaEmojiSchema(t: ZodTranslator) {
   return z

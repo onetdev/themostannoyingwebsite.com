@@ -1,12 +1,11 @@
 'use client';
 
 import { useTranslations } from 'next-intl';
-import { FunctionComponent } from 'react';
 
 import { Link } from '@/i18n/navigation';
 import { useUserGrantsStore } from '@/stores';
 
-const CookieConsent: FunctionComponent = () => {
+export function CookieConsent() {
   const t = useTranslations();
   const completed = useUserGrantsStore((state) => state.reviewCompleted);
   const setReviewCompleted = useUserGrantsStore(
@@ -28,6 +27,6 @@ const CookieConsent: FunctionComponent = () => {
       </div>
     )
   );
-};
+}
 
 export default CookieConsent;

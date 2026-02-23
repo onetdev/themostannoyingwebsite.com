@@ -7,7 +7,7 @@ import HTMLReactParser from 'html-react-parser';
 import { useLocale, useMessages, useTranslations } from 'next-intl';
 import { useCallback, useEffect, useMemo, useState } from 'react';
 
-import { SearchForm } from '@/components/AppHeader/SearchForm';
+import { SearchForm } from '@/app/_components/AppHeader/SearchForm';
 import { AppArticleService, ArticleSearchResult } from '@/features/content';
 import { Link } from '@/i18n/navigation';
 import { usePainPreferencesStore } from '@/stores';

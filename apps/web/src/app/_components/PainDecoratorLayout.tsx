@@ -2,9 +2,9 @@
 
 import { useEffect, useState } from 'react';
 
+import CookieConsent from './CookieConsent';
 import { GlobalShareModal } from './GlobalShareModal';
 
-import CookieConsent from '@/components/CookieConsent';
 import { ChatBubbleHost } from '@/features/chat-bubble';
 import {
   DeadPixelHost,

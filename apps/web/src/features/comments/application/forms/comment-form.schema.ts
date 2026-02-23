@@ -1,6 +1,6 @@
 import { z } from 'zod';
 
-import { ZodTranslator } from '@/core/types';
+import { ZodTranslator } from '@/types';
 
 export function getCommentFormSchema(t: ZodTranslator) {
   return z.object({

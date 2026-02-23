@@ -3,7 +3,7 @@ import { z } from 'zod';
 import { getCaptchaEmojiSchema } from './captcha-emoji.schema';
 import { GenderSchema } from '../../domain';
 
-import { ZodTranslator } from '@/core/types';
+import { ZodTranslator } from '@/types';
 
 const validatePassword = (value: string, t: ZodTranslator) => {
   // Split up in this way to annoy the user the most

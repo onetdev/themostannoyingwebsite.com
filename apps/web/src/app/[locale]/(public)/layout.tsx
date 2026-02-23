@@ -5,12 +5,12 @@ import { notFound } from 'next/navigation';
 import { hasLocale, NextIntlClientProvider } from 'next-intl';
 import { getLangDir } from 'rtl-detect';
 
-import { PainDecoratorLayout } from '@/components/PainDecoratorLayout';
 import { routing } from '@/i18n/routing';
 import { getAppConfigService } from '@/core';
 import { BeggarBanner } from '@/features/donation';
 import { ClientObservers } from '@/providers/ClientObservers';
 import { RootProviderContainer } from '@/providers/RootProviderContainer';
+import { PainDecoratorLayout } from '@/app/_components/PainDecoratorLayout';
 
 const config = getAppConfigService().getAll();
 

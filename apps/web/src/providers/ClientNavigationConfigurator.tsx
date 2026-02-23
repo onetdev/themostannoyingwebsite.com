@@ -3,7 +3,7 @@
 import { compile } from 'path-to-regexp';
 import { PropsWithChildren } from 'react';
 
-import { AppLink } from '@/components/AppLink';
+import { AppLink } from '@/app/_components/AppLink';
 import { useRouter } from '@/i18n/navigation';
 import {
   NavigationParams,

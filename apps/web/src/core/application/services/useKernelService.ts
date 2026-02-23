@@ -1,7 +1,7 @@
 import { KernelService } from './KernelService';
-import { DI } from '../../types';
 
 import { useDependencyContainer } from '@/providers/DependencyContainer';
+import { DI } from '@/types';
 
 export const useKernelService = () => {
   const container = useDependencyContainer();

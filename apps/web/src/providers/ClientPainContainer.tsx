@@ -10,9 +10,9 @@ import {
   useDisableContextMenu,
   useDisableNavigationPop,
 } from '@/features/browser-core';
-import { useAdblockerDetector } from '@/features/promotions';
 import { NewsletterModalHost } from '@/features/newsletter';
-import { NotificationPermissionHost } from '@/features/notification';
+import { useAdblockerDetector } from '@/features/promotions';
+import { NotificationPermissionHost } from '@/features/user/components/NotificationPermissionHost';
 import { usePainPreferencesStore, useUserGrantsStore } from '@/stores';
 
 export function ClientPainContainer({ children }: PropsWithChildren) {

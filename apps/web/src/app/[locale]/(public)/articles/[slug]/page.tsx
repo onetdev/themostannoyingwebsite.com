@@ -1,7 +1,7 @@
 import { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 
-import { PageLayout } from '@/components/PageLayout';
+import { PageLayout } from '@/app/_components/PageLayout';
 import { CommentService } from '@/features/comments';
 import { AppArticleService } from '@/features/content';
 import { ArticleItemPage } from '@/features/content/pages/ArticleItemPage';

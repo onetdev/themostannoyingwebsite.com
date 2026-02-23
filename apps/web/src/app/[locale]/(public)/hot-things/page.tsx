@@ -3,7 +3,8 @@ import { getTranslations } from 'next-intl/server';
 
 import HotThingsPage from '../../../../features/content/pages/HotThingsPage';
 
-import { PageLayout } from '@/components/PageLayout';
+import { PageLayout } from '@/app/_components/PageLayout';
+
 export { generateStaticParams } from '@/i18n/routing';
 
 export const revalidate = 1800;

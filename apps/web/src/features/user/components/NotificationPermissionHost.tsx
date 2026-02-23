@@ -2,7 +2,7 @@
 
 import { useRef, useState } from 'react';
 
-import { ManualModal } from './components';
+import { NotificationManualModal } from './NotificationManualModal';
 
 import { useScrollDistanceTrigger } from '@/core';
 import {
@@ -49,7 +49,7 @@ export function NotificationPermissionHost({
   }
 
   return (
-    <ManualModal
+    <NotificationManualModal
       visible={manualModalVisible}
       onDismiss={onManualModalDismiss}
     />

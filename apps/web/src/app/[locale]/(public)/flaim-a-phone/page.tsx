@@ -1,7 +1,7 @@
 import { Metadata } from 'next';
 import { getTranslations } from 'next-intl/server';
 
-import { PageLayout } from '@/components/PageLayout';
+import { PageLayout } from '@/app/_components/PageLayout';
 import { FlaimSurvey } from '@/features/promotions';
 export { generateStaticParams } from '@/i18n/routing';
 
