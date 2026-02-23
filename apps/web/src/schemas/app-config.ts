@@ -1,8 +1,9 @@
 import { z } from 'zod';
 
+import { AppThemeSchema } from './app-theme';
 import { DeploymentMetaSchema } from './deployment-meta';
-import { DonationConfigSchema } from './donation-config';
-import { AppThemeSchema } from '../value-object/app-theme';
+
+import { DonationConfigSchema } from '@/features/donation/schemas';
 
 export const AppConfigSchema = z.object({
   defaultColorScheme: AppThemeSchema,

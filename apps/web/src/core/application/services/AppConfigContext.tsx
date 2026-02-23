@@ -7,7 +7,7 @@ import {
   useContext,
 } from 'react';
 
-import { AppConfig } from '@/core/domain';
+import { AppConfig } from '@/schemas/app-config';
 
 export const AppConfigContext = createContext<AppConfig | null>(null);
 

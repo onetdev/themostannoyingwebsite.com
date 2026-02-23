@@ -2,15 +2,16 @@
 
 import { useEffect, useState } from 'react';
 
+import { GlobalShareModal } from './GlobalShareModal';
+
 import CookieConsent from '@/components/CookieConsent';
-import { GlobalShareModal } from '@/core';
 import { ChatBubbleHost } from '@/features/chat-bubble';
-import { AdblockerSuspectBar, ContainerGiftFlaps } from '@/features/promotions';
 import {
   DeadPixelHost,
   GlobalStickyVideoHost,
   Screensaver,
 } from '@/features/obstructors/components';
+import { AdblockerSuspectBar, ContainerGiftFlaps } from '@/features/promotions';
 import { WheelOfFortuneHost } from '@/features/wheel-of-fortune';
 import { usePainPreferencesStore, useUserGrantsStore } from '@/stores';
 

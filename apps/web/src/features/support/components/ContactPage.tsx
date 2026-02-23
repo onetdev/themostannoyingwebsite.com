@@ -8,7 +8,7 @@ import {
 } from '@maw/ui-lib';
 import { getTranslations } from 'next-intl/server';
 
-import { ContactForm } from './forms';
+import { ContactForm } from './ContactForm';
 
 import { getAppConfigService } from '@/core';
 

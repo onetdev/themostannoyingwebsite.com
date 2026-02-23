@@ -1,7 +1,7 @@
 import { Button } from '@maw/ui-lib';
 import { useTranslations } from 'next-intl';
 
-import { FlaimSurveyResult as TFlaimSurveyResult } from '@/core';
+import { FlaimSurveyResult as TFlaimSurveyResult } from '@/features/promotions/schemas';
 
 type SurveyResultProps = {
   result: TFlaimSurveyResult;

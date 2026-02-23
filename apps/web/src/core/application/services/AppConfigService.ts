@@ -1,5 +1,5 @@
 import config from '@/config';
-import { AppConfig, AppConfigSchema } from '@/core/domain';
+import { AppConfig, AppConfigSchema } from '@/schemas/app-config';
 
 // TODO: Rather than importing config in here, we should configure singleton
 //       during app start.

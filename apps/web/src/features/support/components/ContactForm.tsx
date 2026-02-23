@@ -15,7 +15,7 @@ import { useForm, useWatch } from 'react-hook-form';
 import {
   ContactFormData,
   getContactFormSchema,
-} from '../../application/contact-form.schema';
+} from '../schemas/contact-form.schema';
 
 import { useZodFormValidator } from '@/core';
 

@@ -1,7 +1,8 @@
 import { inject } from 'inversify';
 
-import { type CountryRepository } from '../..';
 import { DI } from '../../types';
+
+import { type CountryRepository } from '@/repositories';
 
 export class KernelService {
   @inject(DI.CountryRepository)

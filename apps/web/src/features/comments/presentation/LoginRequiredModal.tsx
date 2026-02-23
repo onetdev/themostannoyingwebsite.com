@@ -11,7 +11,7 @@ import {
 } from '@maw/ui-lib';
 import { useTranslations } from 'next-intl';
 
-import { useNavigationProvider } from '@/core';
+import { useNavigationProvider } from '@/providers/NavigationProvider';
 
 interface LoginRequiredModalProps {
   show: boolean;

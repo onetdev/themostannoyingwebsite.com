@@ -8,8 +8,8 @@ import { useRouter } from '@/i18n/navigation';
 import {
   NavigationParams,
   NavigationProvider as NavigationProviderBase,
-  RouteAlias,
-} from '@/core';
+} from '@/providers/NavigationProvider';
+import { RouteAlias } from '@/schemas';
 
 const routeAliasToPathMap: Record<RouteAlias, string> = {
   about: '/about',

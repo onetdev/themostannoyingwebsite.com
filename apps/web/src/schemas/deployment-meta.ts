@@ -1,6 +1,6 @@
 import { z } from 'zod';
 
-import { EnvironmentSchema } from '../value-object/environment';
+import { EnvironmentSchema } from './environment';
 
 export const DeploymentMetaSchema = z.object({
   author: z.string(),

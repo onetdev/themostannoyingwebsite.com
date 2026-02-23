@@ -7,7 +7,7 @@ import {
   useContext,
 } from 'react';
 
-import { RouteAlias } from '../../domain';
+import { RouteAlias } from '@/schemas';
 
 export type LinkComponentType = PropsWithChildren<{
   href: string;

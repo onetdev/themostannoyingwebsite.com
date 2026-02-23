@@ -1,7 +1,7 @@
 import { Container } from 'inversify';
 import { FunctionComponent, PropsWithChildren, useMemo } from 'react';
 
-import { DependencyContainer, init as initShared } from '@/core';
+import { init as initShared } from '@/core';
 import { init as initAuth } from '@/features/auth/init';
 import { init as initBrowserCore } from '@/features/browser-core/init';
 import { init as initChatBubble } from '@/features/chat-bubble/init';
@@ -11,6 +11,7 @@ import { init as initGift } from '@/features/promotions/init';
 import { init as initNewsletter } from '@/features/newsletter/init';
 import { init as initNotification } from '@/features/notification/init';
 import { init as initSubscription } from '@/features/subscription/init';
+import { DependencyContainer } from './DependencyContainer';
 
 export const DependencyProvider: FunctionComponent<PropsWithChildren> = ({
   children,

@@ -7,9 +7,10 @@ import { PropsWithChildren } from 'react';
 import { ClientNavigationConfigurator } from './ClientNavigationConfigurator';
 import { DependencyProvider } from './DependencyProvider';
 
-import { AppConfig, AppConfigProvider } from '@/core';
+import { AppConfigProvider } from '@/core';
 import { ClientPainContainer } from '@/providers/ClientPainContainer';
 import { ClientRootPortalProvider } from '@/providers/ClientRootPortalProvider';
+import { AppConfig } from '@/schemas/app-config';
 
 export type RootProviderContainerProps = PropsWithChildren<{
   appConfig: AppConfig;

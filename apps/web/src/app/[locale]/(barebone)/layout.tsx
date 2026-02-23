@@ -5,8 +5,8 @@ import { notFound } from 'next/navigation';
 import { hasLocale, NextIntlClientProvider } from 'next-intl';
 import { getLangDir } from 'rtl-detect';
 
-import { routing } from '@/i18n/routing';
 import { getAppConfigService } from '@/core';
+import { routing } from '@/i18n/routing';
 import { RootProviderContainer } from '@/providers/RootProviderContainer';
 
 const config = getAppConfigService().getAll();
