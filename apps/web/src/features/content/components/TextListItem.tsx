@@ -1,16 +1,12 @@
-import { FunctionComponent } from 'react';
+import { ArticleDatum } from '../schemas';
 
 import { Link } from '@/i18n/navigation';
-import { type ArticleDatum } from '@/features/content';
 
-type TextListItemProps = JSXProxyProps<'article'> & {
+export type TextListItemProps = JSXProxyProps<'article'> & {
   article: ArticleDatum;
 };
 
-export const TextListItem: FunctionComponent<TextListItemProps> = ({
-  article,
-  ...rest
-}) => {
+export function TextListItem({ article, ...rest }: TextListItemProps) {
   return (
     <article role="article" {...rest}>
       <Link
@@ -29,4 +25,4 @@ export const TextListItem: FunctionComponent<TextListItemProps> = ({
       </Link>
     </article>
   );
-};
+}

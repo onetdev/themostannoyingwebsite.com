@@ -14,7 +14,7 @@ type DynamicWheelSvgProps = {
   height: number;
 };
 
-export default function DynamicWheelSvg({
+export function DynamicWheelSvg({
   items,
   highlightIndex,
   width,

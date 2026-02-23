@@ -6,7 +6,7 @@ import Image from 'next/image';
 import { useTranslations } from 'next-intl';
 import { useEffect, useRef, useState } from 'react';
 
-export default function HotThingsPage() {
+export function HotThingsPage() {
   const logger = useLogger().getSubLogger({ name: 'hot-things-page' });
   const [isCapable, setIsCapable] = useState(false);
   const t = useTranslations();

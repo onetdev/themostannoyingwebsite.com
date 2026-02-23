@@ -1,20 +1,19 @@
 import Image from 'next/image';
 import { useTranslations } from 'next-intl';
-import { FunctionComponent } from 'react';
 
 import { CoverPlaceholder } from './CoverPlaceholder';
+import { ArticleDatum } from '../schemas';
 
 import { Link } from '@/i18n/navigation';
-import { type ArticleDatum } from '@/features/content';
 
-type SmallCoverListItemProps = JSXProxyProps<'article'> & {
+export type SmallCoverListItemProps = JSXProxyProps<'article'> & {
   article: ArticleDatum;
 };
 
-export const SmallCoverListItem: FunctionComponent<SmallCoverListItemProps> = ({
+export function SmallCoverListItem({
   article,
   ...rest
-}) => {
+}: SmallCoverListItemProps) {
   const t = useTranslations();
 
   return (
@@ -47,4 +46,4 @@ export const SmallCoverListItem: FunctionComponent<SmallCoverListItemProps> = ({
       </Link>
     </article>
   );
-};
+}

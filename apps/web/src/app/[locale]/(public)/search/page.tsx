@@ -1,7 +1,7 @@
 import { Metadata } from 'next';
 import { getTranslations } from 'next-intl/server';
 
-import { SearchPage } from '../../../../features/content/pages/SearchPage';
+import { SearchPage } from '../../../../features/content/components/SearchPage';
 
 import { PageLayout } from '@/app/_components/PageLayout';
 

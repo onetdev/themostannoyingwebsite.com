@@ -1,11 +1,9 @@
-import { FunctionComponent, PropsWithChildren } from 'react';
+import { PropsWithChildren } from 'react';
 import { createPortal } from 'react-dom';
 
 import { useRootPortalElement } from '@/providers/ClientRootPortalProvider';
 
-export type RootPortalProps = PropsWithChildren;
-
-const RootPortal: FunctionComponent<RootPortalProps> = ({ children }) => {
+export function RootPortal({ children }: PropsWithChildren) {
   const portalElement = useRootPortalElement();
 
   if (!portalElement) {
@@ -13,6 +11,4 @@ const RootPortal: FunctionComponent<RootPortalProps> = ({ children }) => {
   }
 
   return createPortal(children, portalElement);
-};
-
-export default RootPortal;
+}

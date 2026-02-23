@@ -3,8 +3,8 @@ import { notFound } from 'next/navigation';
 
 import { PageLayout } from '@/app/_components/PageLayout';
 import { CommentService } from '@/features/comments/services';
-import { AppArticleService } from '@/features/content';
-import { ArticleItemPage } from '@/features/content/pages/ArticleItemPage';
+import { ArticleItemPage } from '@/features/content/components';
+import { AppArticleService } from '@/features/content/services';
 import i18nConfig from '@/root/i18n.config';
 
 type PageParams = {

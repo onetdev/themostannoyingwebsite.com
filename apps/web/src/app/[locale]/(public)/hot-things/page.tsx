@@ -1,9 +1,8 @@
 import { Metadata } from 'next';
 import { getTranslations } from 'next-intl/server';
 
-import HotThingsPage from '../../../../features/content/pages/HotThingsPage';
-
 import { PageLayout } from '@/app/_components/PageLayout';
+import { HotThingsPage } from '@/features/content/components';
 
 export { generateStaticParams } from '@/i18n/routing';
 

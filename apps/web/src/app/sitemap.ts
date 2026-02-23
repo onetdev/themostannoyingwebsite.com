@@ -2,7 +2,7 @@ import { ArticleDatum } from '@maw/content-api';
 import type { MetadataRoute } from 'next';
 import { Languages } from 'next/dist/lib/metadata/types/alternative-urls-types';
 
-import { AppArticleService } from '@/features/content';
+import { AppArticleService } from '@/features/content/services';
 import i18nConfig from '@/root/i18n.config';
 import { getAppConfigService } from '@/services';
 

@@ -3,31 +3,26 @@
 import { Button } from '@maw/ui-lib';
 import { formatCurrency } from '@maw/utils/formatter';
 import { useTranslations } from 'next-intl';
-import React, {
-  FunctionComponent,
-  PropsWithChildren,
-  useMemo,
-  useRef,
-  useState,
-} from 'react';
+import React, { PropsWithChildren, useMemo, useRef, useState } from 'react';
 
-type PartitionalLockedContentProps = Omit<JSXProxyProps<'div'>, 'styles'> &
+export type PartitionalLockedContentProps = Omit<
+  JSXProxyProps<'div'>,
+  'styles'
+> &
   PropsWithChildren<{
     active?: boolean;
     initialMaxHeight: number;
     steps?: number;
   }>;
 
-export const PartitionalLockedContent: FunctionComponent<
-  PartitionalLockedContentProps
-> = ({
+export function PartitionalLockedContent({
   children,
   initialMaxHeight,
   steps = 200,
   active = true,
   className,
   ...rest
-}) => {
+}: PartitionalLockedContentProps) {
   const t = useTranslations();
   const [maxHeight, setMaxHeight] = useState(initialMaxHeight);
   const [isRevealed, setRevealed] = useState(false);
@@ -100,4 +95,4 @@ export const PartitionalLockedContent: FunctionComponent<
       </div>
     </div>
   );
-};
+}

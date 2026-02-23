@@ -2,7 +2,7 @@ import { Icon } from '@maw/ui-lib';
 import { randomInt } from '@maw/utils/math';
 import { CSSProperties, useEffect, useMemo, useState } from 'react';
 
-import DynamicWheelSvg, { Item } from './DynamicWheelSvg';
+import { DynamicWheelSvg, Item } from './DynamicWheelSvg';
 import { AnimatedWheelState } from '../../hooks/useWheelOfFortune';
 
 type AnimatedWheelProps = {

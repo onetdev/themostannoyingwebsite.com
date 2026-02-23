@@ -2,11 +2,11 @@ import { getTranslations } from 'next-intl/server';
 
 import { PageLayout } from '@/app/_components/PageLayout';
 import {
-  AppArticleService,
   LargeCoverItem,
   SmallCoverListItem,
   TextListItem,
-} from '@/features/content';
+} from '@/features/content/components';
+import { AppArticleService } from '@/features/content/services';
 import { OneByOnePromotion } from '@/features/promotion/components';
 export { generateStaticParams } from '@/i18n/routing';
 

@@ -5,12 +5,14 @@ import HTMLReactParser from 'html-react-parser';
 import Image from 'next/image';
 import { useTranslations } from 'next-intl';
 
-import { Comment } from '@/features/comments/schemas/comment';
+import { PartitionalLockedContent } from './PartitionalLockedContent';
+import { ArticleDatum } from '../schemas';
+
 import { CommentSection } from '@/features/comments/components/CommentSection';
-import { ArticleDatum, PartitionalLockedContent } from '@/features/content';
+import { Comment } from '@/features/comments/schemas/comment';
 import { usePainPreferencesStore } from '@/stores';
 
-interface ArticleItemPageProps {
+export interface ArticleItemPageProps {
   article: ArticleDatum;
   comments: Comment[];
 }

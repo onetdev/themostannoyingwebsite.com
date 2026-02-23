@@ -7,12 +7,14 @@ import HTMLReactParser from 'html-react-parser';
 import { useLocale, useMessages, useTranslations } from 'next-intl';
 import { useCallback, useEffect, useMemo, useState } from 'react';
 
+import { ArticleSearchResult } from '../schemas';
+import { AppArticleService } from '../services';
+
 import { SearchForm } from '@/app/_components/AppHeader/SearchForm';
-import { AppArticleService, ArticleSearchResult } from '@/features/content';
 import { Link } from '@/i18n/navigation';
 import { usePainPreferencesStore } from '@/stores';
 
-type Result = {
+export type Result = {
   query: string;
   time: string;
   count: number;
