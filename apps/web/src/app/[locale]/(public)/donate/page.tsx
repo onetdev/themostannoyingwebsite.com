@@ -3,7 +3,7 @@ import { Metadata } from 'next';
 import { getTranslations } from 'next-intl/server';
 
 import { PageLayout } from '@/app/_components/PageLayout';
-import { DonationPage } from '@/features/donation/presentation/DonationPage';
+import { DonationPage } from '@/features/donation/components/DonationPage';
 export { generateStaticParams } from '@/i18n/routing';
 
 export const revalidate = 1800;

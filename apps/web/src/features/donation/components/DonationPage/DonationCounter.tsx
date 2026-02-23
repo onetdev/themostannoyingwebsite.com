@@ -3,7 +3,7 @@
 import { useEffect, useState } from 'react';
 
 import { SlotDigit } from './SlotDigit';
-import { useDonationBalance } from '../../application';
+import { useDonationBalance } from '../../hooks';
 
 export type DonationCounterProps = JSXProxyProps<'div'>;
 

@@ -2,7 +2,7 @@
 
 import { useMemo } from 'react';
 
-import { createDonationService, DonationService } from './DonationService';
+import { createDonationService, DonationService } from '../services';
 
 /**
  * Hook to get DonationService instance

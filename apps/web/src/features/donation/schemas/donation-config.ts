@@ -1,6 +1,5 @@
 import { z } from 'zod';
 
-// TODO: Move this under Donation module
 export const DonationConfigSchema = z.object({
   buyMeACoffeeUrl: z.string(),
   paypalUrl: z.string(),

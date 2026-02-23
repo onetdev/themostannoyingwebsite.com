@@ -4,7 +4,7 @@ import { Icon } from '@maw/ui-lib';
 import { useTranslations } from 'next-intl';
 import { useEffect, useState } from 'react';
 
-import { useDonationService } from '../application';
+import { useDonationService } from '../hooks';
 
 import { Link } from '@/i18n/navigation';
 

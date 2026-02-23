@@ -6,7 +6,7 @@ import { hasLocale, NextIntlClientProvider } from 'next-intl';
 import { getLangDir } from 'rtl-detect';
 
 import { PainDecoratorLayout } from '@/app/_components/PainDecoratorLayout';
-import { BeggarBanner } from '@/features/donation';
+import { BeggarBanner } from '@/features/donation/components';
 import { routing } from '@/i18n/routing';
 import { ClientObserverProvider } from '@/providers/ClientObserverProvider';
 import { RootProviderContainer } from '@/providers/RootProviderContainer';

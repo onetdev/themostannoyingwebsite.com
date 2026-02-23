@@ -1,6 +1,6 @@
 import { useMemo } from 'react';
 
-import { useDonationService } from '../services';
+import { useDonationService } from './';
 
 import { useAppConfig } from '@/contexts/AppConfig';
 

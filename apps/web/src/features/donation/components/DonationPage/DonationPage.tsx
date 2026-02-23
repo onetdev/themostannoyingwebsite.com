@@ -1,7 +1,9 @@
 import { Button } from '@maw/ui-lib';
 import { getTranslations } from 'next-intl/server';
 
-import { CryptoWalletList, DonationCounter, JarAnimation } from './components';
+import { CryptoWalletList } from './CryptoWalletList';
+import { DonationCounter } from './DonationCounter';
+import { JarAnimation } from './JarAnimation';
 
 import { Link } from '@/i18n/navigation';
 import { getAppConfigService } from '@/services';
