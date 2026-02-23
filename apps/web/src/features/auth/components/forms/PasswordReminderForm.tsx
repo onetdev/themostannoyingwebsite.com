@@ -10,7 +10,7 @@ import {
 import { useTranslations } from 'next-intl';
 import { FormProvider } from 'react-hook-form';
 
-import { usePasswordReminderForm } from '../../application/forms';
+import { usePasswordReminderForm } from '../../hooks/usePasswordReminderForm';
 import { EmailField } from '../fields/EmailField';
 
 import { useNavigationProvider } from '@/contexts/NavigationContext';

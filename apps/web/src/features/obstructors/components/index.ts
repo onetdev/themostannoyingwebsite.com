@@ -1,3 +1,3 @@
-export * from './DeadPixelHost';
-export * from './GlobalStickyVideoHost';
+export * from './DeadPixel';
+export * from './GlobalStickyVideo';
 export * from './Screensaver';

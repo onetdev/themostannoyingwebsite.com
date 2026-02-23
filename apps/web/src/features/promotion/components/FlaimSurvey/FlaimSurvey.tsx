@@ -6,7 +6,7 @@ import { useTranslations } from 'next-intl';
 import { ComponentProps, useState } from 'react';
 import { useEffectOnce } from 'react-use';
 
-import { UseSurveryParams, useSurvey } from './hooks/useSurvey';
+import { UseSurveryParams, useSurvey } from '../../hooks/useSurvey';
 import { ProgressBar } from './ProgressBar';
 import { Question } from './Question';
 import { SurveyResult } from './SurveyResult';

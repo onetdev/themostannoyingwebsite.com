@@ -1,7 +1,7 @@
 import { Container } from 'inversify';
 
 import { AuthService } from './application';
-import { FakeAuthRepository } from './infrastructure';
+import { FakeAuthRepository } from './repositories';
 import { DI } from './types';
 
 export const init = (di: Container) => {

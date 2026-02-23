@@ -10,7 +10,7 @@ import {
 import { useTranslations } from 'next-intl';
 import { FormProvider } from 'react-hook-form';
 
-import { useSignupForm } from '../../application/forms';
+import { useSignupForm } from '../../hooks/useSignupForm';
 import {
   ConsentChildSoulField,
   ConsentNewsletterField,

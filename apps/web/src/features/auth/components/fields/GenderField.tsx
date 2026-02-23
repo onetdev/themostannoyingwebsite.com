@@ -15,7 +15,7 @@ import { useTranslations } from 'next-intl';
 import { useMemo } from 'react';
 import { Controller, useFormContext } from 'react-hook-form';
 
-import { GenderList } from '../../domain';
+import { GenderList } from '../../schemas';
 
 interface GenderFieldProps {
   fieldName?: string;

@@ -6,15 +6,15 @@ import { CookieConsent } from './CookieConsent';
 import { GlobalShareModal } from './GlobalShareModal';
 
 import {
-  DeadPixelHost,
-  GlobalStickyVideoHost,
+  DeadPixel,
+  GlobalStickyVideo,
   Screensaver,
 } from '@/features/obstructors/components';
 import {
   AdblockerSuspectBar,
   ContainerPromotionFlaps,
 } from '@/features/promotion/components';
-import { WheelOfFortuneHost } from '@/features/promotion/components/WheelOfFortuneHost';
+import { WheelOfFortune } from '@/features/promotion/components/WheelOfFortune';
 import { ChatBubble } from '@/features/support/components/ChatBubble';
 import { usePainPreferencesStore, useUserGrantsStore } from '@/stores';
 
@@ -66,12 +66,12 @@ export function PainDecoratorLayout({
       {runtimeFlags.giftFlaps && <ContainerPromotionFlaps />}
       <div className="bg-card relative container mx-auto my-0 min-h-screen">
         {children}
-        {runtimeFlags.wheelOfFortune && <WheelOfFortuneHost />}
-        {deadPixel && <DeadPixelHost />}
+        {runtimeFlags.wheelOfFortune && <WheelOfFortune />}
+        {deadPixel && <DeadPixel />}
         {runtimeFlags.mockChat && <ChatBubble />}
         {runtimeFlags.showCookieConsent && <CookieConsent />}
         <AdblockerSuspectBar />
-        {runtimeFlags.stickyVideo && <GlobalStickyVideoHost />}
+        {runtimeFlags.stickyVideo && <GlobalStickyVideo />}
         <GlobalShareModal />
         <Screensaver />
       </div>
