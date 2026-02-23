@@ -1,6 +1,6 @@
 import ReactTimeAgo from 'react-timeago';
 
-import { HistoryItem } from '../../domain/entities/history-item.schema';
+import { HistoryItem } from '@/features/support/schemas/history-item.schema';
 
 type MessageBubbleProps = {
   item: HistoryItem;

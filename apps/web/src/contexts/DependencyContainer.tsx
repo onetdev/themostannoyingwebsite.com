@@ -24,7 +24,9 @@ export function DependencyContainer({
 export const useDependencyContainer = (): DependencyContainerContextType => {
   const context = useContext(DependencyContainerContext);
   if (!context) {
-    throw new Error('useDependency must be used within a DependencyProvider');
+    throw new Error(
+      'useDependencyContainer must be used within a DependencyContainer',
+    );
   }
   return context;
 };

@@ -4,11 +4,11 @@ import { compile } from 'path-to-regexp';
 import { PropsWithChildren } from 'react';
 
 import { AppLink } from '@/app/_components/AppLink';
-import { useRouter } from '@/i18n/navigation';
 import {
   NavigationParams,
   NavigationProvider as NavigationProviderBase,
-} from '@/providers/NavigationProvider';
+} from '@/contexts/NavigationContext';
+import { useRouter } from '@/i18n/navigation';
 import { RouteAlias } from '@/schemas';
 
 const routeAliasToPathMap: Record<RouteAlias, string> = {

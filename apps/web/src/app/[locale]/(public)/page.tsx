@@ -7,7 +7,7 @@ import {
   SmallCoverListItem,
   TextListItem,
 } from '@/features/content';
-import { OneByOneGift } from '@/features/promotions';
+import { OneByOneGift } from '@/features/promotion';
 export { generateStaticParams } from '@/i18n/routing';
 
 export const revalidate = 1800;

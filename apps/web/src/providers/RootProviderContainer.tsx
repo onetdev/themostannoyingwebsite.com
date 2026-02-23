@@ -4,11 +4,11 @@ import { Toaster, TooltipProvider } from '@maw/ui-lib';
 import { ThemeProvider } from 'next-themes';
 import { PropsWithChildren } from 'react';
 
+import { AppDependencyContainer } from './AppDependencyRegistry';
 import { ClientNavigationConfigurator } from './ClientNavigationConfigurator';
-import { DependencyProvider } from './DependencyProvider';
 
 import { AppConfigProvider } from '@/core';
-import { ClientPainContainer } from '@/providers/ClientPainContainer';
+import { ClientPainContainer } from '@/providers/ClientPainProvider';
 import { ClientRootPortalProvider } from '@/providers/ClientRootPortalProvider';
 import { AppConfig } from '@/schemas/app-config';
 
@@ -24,14 +24,14 @@ export function RootProviderContainer({
     <AppConfigProvider config={appConfig}>
       <ClientRootPortalProvider>
         <TooltipProvider>
-          <DependencyProvider>
+          <AppDependencyContainer>
             <ThemeProvider defaultTheme="dark" enableColorScheme enableSystem>
               <ClientNavigationConfigurator>
                 <Toaster />
                 <ClientPainContainer>{children}</ClientPainContainer>
               </ClientNavigationConfigurator>
             </ThemeProvider>
-          </DependencyProvider>
+          </AppDependencyContainer>
         </TooltipProvider>
       </ClientRootPortalProvider>
     </AppConfigProvider>

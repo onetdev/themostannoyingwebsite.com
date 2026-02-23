@@ -1,6 +1,6 @@
 'use client';
 
-import { useZodAutoConfigurator } from './useZodAutoConfigurator';
+import { useZodAutoConfigurator } from '../hooks/useZodAutoConfigurator';
 
 import {
   useDocumentVisibilityListener,
@@ -11,7 +11,7 @@ import {
   useUserActivationListener,
 } from '@/hooks';
 
-export function ClientObservers() {
+export function ClientObserverProvider() {
   useServiceWorker();
   useNavigationStats();
   useUserActivationListener();

@@ -2,16 +2,16 @@
 
 import { useEffect, useState } from 'react';
 
-import CookieConsent from './CookieConsent';
+import { CookieConsent } from './CookieConsent';
 import { GlobalShareModal } from './GlobalShareModal';
 
-import { ChatBubbleHost } from '@/features/chat-bubble';
 import {
   DeadPixelHost,
   GlobalStickyVideoHost,
   Screensaver,
 } from '@/features/obstructors/components';
-import { AdblockerSuspectBar, ContainerGiftFlaps } from '@/features/promotions';
+import { AdblockerSuspectBar, ContainerGiftFlaps } from '@/features/promotion';
+import { ChatBubbleHost } from '@/features/support/components/ChatBubbleHost';
 import { WheelOfFortuneHost } from '@/features/wheel-of-fortune';
 import { usePainPreferencesStore, useUserGrantsStore } from '@/stores';
 

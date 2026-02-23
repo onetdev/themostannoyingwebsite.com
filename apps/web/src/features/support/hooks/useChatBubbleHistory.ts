@@ -1,7 +1,8 @@
 import { useMessages, useTranslations } from 'next-intl';
 import { useCallback, useEffect, useMemo, useState } from 'react';
 
-import { HistoryItem, OwnerType } from '../../domain';
+import { HistoryItem } from '../schemas';
+import { OwnerType } from '../schemas/owner-type.schema';
 
 import { useAudio, useSendNotification } from '@/core';
 import { useRuntimeStore, useUserPreferencesStore } from '@/stores';

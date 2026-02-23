@@ -10,7 +10,7 @@ import { useEffect, useMemo, useRef, useState } from 'react';
 
 import { MessageBubble } from './MessageBubble';
 import { MessageForm } from './MessageForm';
-import { HistoryItem } from '../../domain/entities/history-item.schema';
+import { HistoryItem } from '../../schemas';
 
 export type HistoryOverlayProps = {
   history: HistoryItem[];

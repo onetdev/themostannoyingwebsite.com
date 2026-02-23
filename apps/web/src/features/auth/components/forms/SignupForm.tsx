@@ -28,7 +28,7 @@ import {
   UsernameField,
 } from '../fields';
 
-import { useNavigationProvider } from '@/providers/NavigationProvider';
+import { useNavigationProvider } from '@/contexts/NavigationContext';
 
 export function SignupForm() {
   const t = useTranslations();

@@ -3,8 +3,8 @@
 import { Icon } from '@maw/ui-lib';
 import { MouseEventHandler, useCallback, useEffect, useRef } from 'react';
 
-import { HistoryOverlay } from './components/HistoryOverlay';
-import { useChatBubbleHistory } from '../application/hooks/useChatBubbleHistory';
+import { HistoryOverlay } from './HistoryOverlay';
+import { useChatBubbleHistory } from '../../hooks';
 
 /**
  * This component should start off with an initial message so that we

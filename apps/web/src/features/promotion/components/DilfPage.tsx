@@ -1,6 +1,6 @@
 import { getTranslations } from 'next-intl/server';
 
-import { DilfFinder } from '@/features/promotions';
+import { DilfFinder } from '@/features/promotion';
 
 export async function DilfPage() {
   const t = await getTranslations();

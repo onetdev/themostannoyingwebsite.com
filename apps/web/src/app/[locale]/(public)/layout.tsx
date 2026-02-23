@@ -5,12 +5,12 @@ import { notFound } from 'next/navigation';
 import { hasLocale, NextIntlClientProvider } from 'next-intl';
 import { getLangDir } from 'rtl-detect';
 
-import { routing } from '@/i18n/routing';
+import { PainDecoratorLayout } from '@/app/_components/PainDecoratorLayout';
 import { getAppConfigService } from '@/core';
 import { BeggarBanner } from '@/features/donation';
-import { ClientObservers } from '@/providers/ClientObservers';
+import { routing } from '@/i18n/routing';
+import { ClientObserverProvider } from '@/providers/ClientObserverProvider';
 import { RootProviderContainer } from '@/providers/RootProviderContainer';
-import { PainDecoratorLayout } from '@/app/_components/PainDecoratorLayout';
 
 const config = getAppConfigService().getAll();
 
@@ -42,7 +42,7 @@ async function LocalePublicRootLayout({
       <body>
         <NextIntlClientProvider>
           <RootProviderContainer appConfig={config}>
-            <ClientObservers />
+            <ClientObserverProvider />
             <BeggarBanner />
             <PainDecoratorLayout className="font-primary">
               {/* Please add AppHeader in your pages to have SSG/ISR/SSG support while also being able to select the active navigation item */}

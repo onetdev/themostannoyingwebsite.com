@@ -1,7 +1,7 @@
 import { AuthService } from './AuthService';
 import { DI } from '../../types';
 
-import { useDependencyContainer } from '@/providers/DependencyContainer';
+import { useDependencyContainer } from '@/contexts/DependencyContainer';
 
 export const useAuthService = () => {
   const container = useDependencyContainer();
