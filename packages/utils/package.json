@@ -5,13 +5,15 @@
   "type": "module",
   "exports": {
     "./array": "./src/array.ts",
+    "./browser": "./src/browser.ts",
     "./color": "./src/color.ts",
-    "./currency": "./src/currency.ts",
+    "./formatter": "./src/formatter.ts",
     "./math": "./src/math.ts",
+    "./network" : "./src/network.ts",
     "./promise": "./src/promise.ts",
+    "./result": "./src/result.ts",
     "./seed": "./src/seed.ts",
-    "./string": "./src/string.ts",
-    "./time": "./src/time.ts"
+    "./string": "./src/string.ts"
   },
   "scripts": {
     "check-types": "tsc --noEmit",

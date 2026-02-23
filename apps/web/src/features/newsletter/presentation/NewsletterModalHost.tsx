@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react';
 
 import { NewsletterModal } from './components/NewsletterModal';
 
-import { useScrollDistanceTrigger } from '@/core';
+import { useScrollDistanceTrigger } from '@/hooks';
 import { usePainPreferencesStore, useRuntimeStore } from '@/stores';
 
 export type NewsletterModalHostProps = {

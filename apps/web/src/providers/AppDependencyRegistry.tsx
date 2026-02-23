@@ -2,7 +2,7 @@ import { Container } from 'inversify';
 import { PropsWithChildren, useMemo } from 'react';
 
 import { DependencyContainer } from '@/contexts/DependencyContainer';
-import { init as initShared } from '@/core';
+import { init as initShared } from '@/core/init';
 import { init as initAuth } from '@/features/auth/init';
 import { init as initBrowserCore } from '@/features/browser-core/init';
 import { init as initContent } from '@/features/content/init';

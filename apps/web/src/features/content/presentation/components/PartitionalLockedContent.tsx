@@ -1,7 +1,7 @@
 'use client';
 
 import { Button } from '@maw/ui-lib';
-import { formatCurrency } from '@maw/utils/currency';
+import { formatCurrency } from '@maw/utils/formatter';
 import { useTranslations } from 'next-intl';
 import React, {
   FunctionComponent,

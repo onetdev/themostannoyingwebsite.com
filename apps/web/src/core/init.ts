@@ -1,8 +1,7 @@
 import { Container } from 'inversify';
 
-import { KernelService } from './application';
-
 import { StaticCountryRepository } from '@/repositories';
+import { KernelService } from '@/services';
 import { DI } from '@/types';
 
 export const init = (di: Container) => {

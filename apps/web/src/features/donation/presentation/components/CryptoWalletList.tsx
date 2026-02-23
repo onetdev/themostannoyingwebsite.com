@@ -2,7 +2,7 @@
 
 import { CryptoWallet } from './CryptoWallet';
 
-import { useAppConfig } from '@/core';
+import { useAppConfig } from '@/contexts/AppConfig';
 
 export type CryptoWalletListProps = JSXProxyProps<'div'>;
 

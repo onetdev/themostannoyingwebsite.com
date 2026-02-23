@@ -1,8 +1,7 @@
+import { createErrorResult, PromiseResult } from '@maw/utils/result';
 import { injectable } from 'inversify';
 
 import { AuthError, AuthRepository, User } from '../domain';
-
-import { createErrorResult, PromiseResult } from '@/core';
 
 /**
  * Fake implementation of the AuthRepository interface for testing purposes.

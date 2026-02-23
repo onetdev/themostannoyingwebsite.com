@@ -1,5 +1,6 @@
 'use client';
 
+import { useKernelService } from '@/services';
 import {
   Field,
   FieldContent,
@@ -25,8 +26,6 @@ import {
   useState,
 } from 'react';
 import { Controller, useFormContext } from 'react-hook-form';
-
-import { useKernelService } from '@/core';
 
 interface PhoneNumberFieldProps {
   fieldName?: string;

@@ -4,7 +4,7 @@ import { useCallback, useEffect, useMemo, useState } from 'react';
 import { HistoryItem } from '../schemas';
 import { OwnerType } from '../schemas/owner-type.schema';
 
-import { useAudio, useSendNotification } from '@/core';
+import { useAudio, useSendNotification } from '@/hooks';
 import { useRuntimeStore, useUserPreferencesStore } from '@/stores';
 
 export function useChatBubbleHistory() {

@@ -1,14 +1,14 @@
 'use client';
 
+import {
+  getNotificationPermissionState,
+  requestNotificationPermission,
+} from '@maw/utils/browser';
 import { useRef, useState } from 'react';
 
 import { NotificationManualModal } from './NotificationManualModal';
 
-import { useScrollDistanceTrigger } from '@/core';
-import {
-  getNotificationPermissionState,
-  requestNotificationPermission,
-} from '@/core/infrastructure/utils/permission';
+import { useScrollDistanceTrigger } from '@/hooks';
 import { usePainPreferencesStore, useUserGrantsStore } from '@/stores';
 
 export type NotificationPermissionHostProps = {

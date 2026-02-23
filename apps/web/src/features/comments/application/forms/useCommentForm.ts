@@ -3,9 +3,9 @@
 import { useLogger } from '@maw/logger';
 import { useForm } from 'react-hook-form';
 
-import { getCommentFormSchema, CommentFormData } from './comment-form.schema';
+import { CommentFormData, getCommentFormSchema } from './comment-form.schema';
 
-import { useZodFormValidator } from '@/core';
+import { useZodFormValidator } from '@/hooks';
 
 interface UseCommentFormProps {
   onSuccess?: (data: CommentFormData) => void;
@@ -14,13 +14,13 @@ interface UseCommentFormProps {
 export function useCommentForm({ onSuccess }: UseCommentFormProps) {
   const logger = useLogger().getSubLogger({ name: 'useCommentForm' });
   const resolver = useZodFormValidator(getCommentFormSchema);
-  const methods = useForm<CommentFormData>({ 
+  const methods = useForm<CommentFormData>({
     resolver,
     defaultValues: {
       name: '',
       content: '',
       captcha: '',
-    }
+    },
   });
 
   const onSubmit = async (data: CommentFormData) => {

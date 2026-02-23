@@ -10,7 +10,7 @@ import { getTranslations } from 'next-intl/server';
 
 import { ContactForm } from './ContactForm';
 
-import { getAppConfigService } from '@/core';
+import { getAppConfigService } from '@/services';
 
 export async function ContactPage() {
   const t = await getTranslations();

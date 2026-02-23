@@ -9,7 +9,7 @@ import { useAuthService } from '../services';
 import { RegisterUseCaseParams } from '../use-cases';
 import { getSignupFormSchema, SignupFormData } from './signup-form.schema';
 
-import { useZodFormValidator } from '@/core';
+import { useZodFormValidator } from '@/hooks';
 
 export const signupFormDefaultValues: SignupFormData = {
   firstName: '',

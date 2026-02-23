@@ -3,8 +3,8 @@ import { getTranslations } from 'next-intl/server';
 
 import { CryptoWalletList, DonationCounter, JarAnimation } from './components';
 
-import { getAppConfigService } from '@/core';
 import { Link } from '@/i18n/navigation';
+import { getAppConfigService } from '@/services';
 export { generateStaticParams } from '@/i18n/routing';
 
 export async function DonationPage() {

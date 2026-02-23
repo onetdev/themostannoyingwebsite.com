@@ -17,7 +17,7 @@ import {
   getContactFormSchema,
 } from '../schemas/contact-form.schema';
 
-import { useZodFormValidator } from '@/core';
+import { useZodFormValidator } from '@/hooks';
 
 export type ContactFormProps = {
   contactEmail: string;

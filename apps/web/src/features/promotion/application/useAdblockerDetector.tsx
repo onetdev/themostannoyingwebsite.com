@@ -1,8 +1,8 @@
 'use client';
 
+import { fetchWithTimeout } from '@maw/utils/network';
 import { useEffect, useState } from 'react';
 
-import { fetchWithTimeout } from '@/core/infrastructure/utils/network';
 import {
   usePainPreferencesStore,
   useRuntimeStore,

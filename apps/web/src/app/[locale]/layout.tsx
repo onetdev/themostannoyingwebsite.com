@@ -2,7 +2,7 @@ import { Metadata, Viewport } from 'next';
 import { getTranslations } from 'next-intl/server';
 import { PropsWithChildren } from 'react';
 
-import { getAppConfigService } from '@/core';
+import { getAppConfigService } from '@/services';
 
 const config = getAppConfigService().getAll();
 

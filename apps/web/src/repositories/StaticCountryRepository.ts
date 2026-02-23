@@ -1,8 +1,8 @@
 import { injectable } from 'inversify';
 
+import { countryList } from './data/countries';
 import { CountryRepository } from './types';
 
-import { countryList } from '@/core/infrastructure/data/countries';
 import { Country } from '@/schemas/country';
 
 @injectable()

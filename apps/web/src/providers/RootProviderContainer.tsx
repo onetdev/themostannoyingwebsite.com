@@ -7,7 +7,7 @@ import { PropsWithChildren } from 'react';
 import { AppDependencyContainer } from './AppDependencyRegistry';
 import { ClientNavigationConfigurator } from './ClientNavigationConfigurator';
 
-import { AppConfigProvider } from '@/core';
+import { AppConfigProvider } from '@/contexts/AppConfig';
 import { ClientPainContainer } from '@/providers/ClientPainProvider';
 import { ClientRootPortalProvider } from '@/providers/ClientRootPortalProvider';
 import { AppConfig } from '@/schemas/app-config';

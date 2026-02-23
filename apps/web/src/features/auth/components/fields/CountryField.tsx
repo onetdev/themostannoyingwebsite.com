@@ -15,7 +15,7 @@ import { useTranslations } from 'next-intl';
 import { useEffect, useState } from 'react';
 import { Controller, useFormContext } from 'react-hook-form';
 
-import { useKernelService } from '@/core';
+import { useKernelService } from '@/services';
 
 interface CountryFieldProps {
   fieldName?: string;

@@ -2,12 +2,11 @@
 
 import { useLogger } from '@maw/logger';
 import { isBrowser } from '@maw/ui-lib/utils';
-import { useCallback } from 'react';
-
 import {
   getNotificationPermissionState,
   requestNotificationPermission,
-} from '@/core/infrastructure/utils/permission';
+} from '@maw/utils/browser';
+import { useCallback } from 'react';
 
 export type UseSendNotificationProps = {
   autoRequest?: boolean;

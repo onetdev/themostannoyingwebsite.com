@@ -1,7 +1,7 @@
+import { PromiseResult } from '@maw/utils/result';
+
 import { User } from '../entities';
 import { AuthError } from '../errors';
-
-import { PromiseResult } from '@/core';
 
 export type AuthenticationData = {
   email: string;

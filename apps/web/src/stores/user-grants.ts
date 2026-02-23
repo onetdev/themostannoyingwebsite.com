@@ -1,10 +1,9 @@
-import { create } from 'zustand';
-import { createJSONStorage, persist } from 'zustand/middleware';
-
 import {
   getLocationPermissionState,
   getNotificationPermissionState,
-} from '@/core/infrastructure/utils/permission';
+} from '@maw/utils/browser';
+import { create } from 'zustand';
+import { createJSONStorage, persist } from 'zustand/middleware';
 
 export const USER_GRANTS_STORAGE_KEY = 'zustand-user-grants-storage';
 

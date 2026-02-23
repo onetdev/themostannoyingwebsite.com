@@ -9,7 +9,7 @@ import { useAuthService } from '../services';
 import { LoginUseCaseParams } from '../use-cases';
 import { getLoginFormSchema, LoginFormData } from './login-form.schema';
 
-import { useZodFormValidator } from '@/core';
+import { useZodFormValidator } from '@/hooks';
 
 interface LoginFormProps {
   onSuccess?: (user: User) => void;

@@ -1,4 +1,4 @@
-import { isBrowser } from '@maw/ui-lib/utils';
+export const isBrowser = () => typeof window !== 'undefined';
 
 export const getNotificationPermissionState = () =>
   isBrowser() && 'Notification' in window ? Notification.permission : undefined;

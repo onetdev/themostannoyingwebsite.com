@@ -2,7 +2,7 @@ import { useMemo } from 'react';
 
 import { useDonationService } from '../services';
 
-import { useAppConfig } from '@/core';
+import { useAppConfig } from '@/contexts/AppConfig';
 
 export function useDonationBalance(): number {
   const { donation } = useAppConfig();

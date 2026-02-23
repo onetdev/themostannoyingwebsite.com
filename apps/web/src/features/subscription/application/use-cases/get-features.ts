@@ -1,7 +1,7 @@
+import { Result } from '@maw/utils/result';
+
 import { SubscriptionFeature } from '../../domain';
 import { SubscriptionError } from '../../domain/errors';
-
-import { Result } from '@/core';
 
 export async function getFeatures(): Promise<
   Result<SubscriptionFeature[], SubscriptionError>

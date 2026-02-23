@@ -1,3 +1,4 @@
+import { PromiseResult } from '@maw/utils/result';
 import { inject, injectable } from 'inversify';
 
 import { AuthError, type AuthRepository, User } from '../../domain';
@@ -10,8 +11,6 @@ import {
   register as registerUseCase,
   RegisterUseCaseParams,
 } from '../use-cases';
-
-import { PromiseResult } from '@/core';
 
 @injectable()
 export class AuthService {

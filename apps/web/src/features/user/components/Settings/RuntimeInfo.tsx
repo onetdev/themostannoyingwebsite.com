@@ -10,7 +10,7 @@ import {
   TableCell,
   TableRow,
 } from '@maw/ui-lib';
-import { formatSecondsToHHMMSS } from '@maw/utils/time';
+import { formatSecondsToHHMMSS } from '@maw/utils/formatter';
 import { useTranslations } from 'next-intl';
 import { useMemo } from 'react';
 import ReactTimeAgo from 'react-timeago';
