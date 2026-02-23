@@ -10,10 +10,10 @@ import { useEffect, useMemo, useRef, useState } from 'react';
 
 import { MessageBubble } from './MessageBubble';
 import { MessageForm } from './MessageForm';
-import { HistoryItem } from '../../schemas';
+import { ChatMessage } from '../../schemas';
 
 export type HistoryOverlayProps = {
-  history: HistoryItem[];
+  history: ChatMessage[];
   onClose: () => void;
   onUserMessage: (message: string) => void;
   open?: boolean;
@@ -88,7 +88,7 @@ export function HistoryOverlay({
   );
 }
 
-const shouldBubbleShowTime = (current: HistoryItem, compareTo: HistoryItem) => {
+const shouldBubbleShowTime = (current: ChatMessage, compareTo: ChatMessage) => {
   if (!compareTo || current.owner !== compareTo.owner) return true;
 
   return (

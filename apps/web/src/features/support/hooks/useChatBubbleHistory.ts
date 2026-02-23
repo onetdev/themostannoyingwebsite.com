@@ -1,8 +1,7 @@
 import { useMessages, useTranslations } from 'next-intl';
 import { useCallback, useEffect, useMemo, useState } from 'react';
 
-import { HistoryItem } from '../schemas';
-import { OwnerType } from '../schemas/owner-type.schema';
+import { ChatMessage, ChatMessageType } from '../schemas';
 
 import { useAudio, useSendNotification } from '@/hooks';
 import { useRuntimeStore, useUserPreferencesStore } from '@/stores';
@@ -14,7 +13,7 @@ export function useChatBubbleHistory() {
   const hasInteracted = useRuntimeStore(
     (state) => state.userActivation.unlocked,
   );
-  const [history, setHistory] = useState<HistoryItem[]>([]);
+  const [history, setHistory] = useState<ChatMessage[]>([]);
   const [isForeground, setForeground] = useState(false);
   const [badgeCounter, setBadgeCounter] = useState(1);
   const notification = useSendNotification();
@@ -30,7 +29,7 @@ export function useChatBubbleHistory() {
     );
   }, [history, messages, t]);
 
-  const add = useCallback((message: string, owner: OwnerType) => {
+  const add = useCallback((message: string, owner: ChatMessageType) => {
     setHistory((prev) => [...prev, { text: message, owner, time: new Date() }]);
   }, []);
 

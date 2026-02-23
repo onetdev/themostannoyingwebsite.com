@@ -12,7 +12,7 @@ import { useChatBubbleHistory } from '../../hooks';
  * Every time the user closes the chat bubble, we should add a new message
  * to the history now with a notification sound.
  */
-export function ChatBubbleHost() {
+export function ChatBubble() {
   const state = useChatBubbleHistory();
   const $ref = useRef<HTMLDivElement>(null);
 

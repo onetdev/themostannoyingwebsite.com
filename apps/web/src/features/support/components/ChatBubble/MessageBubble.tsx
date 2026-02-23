@@ -1,9 +1,9 @@
 import ReactTimeAgo from 'react-timeago';
 
-import { HistoryItem } from '@/features/support/schemas/history-item.schema';
+import { ChatMessage } from '../../schemas';
 
 type MessageBubbleProps = {
-  item: HistoryItem;
+  item: ChatMessage;
   showTime?: boolean;
 };
 

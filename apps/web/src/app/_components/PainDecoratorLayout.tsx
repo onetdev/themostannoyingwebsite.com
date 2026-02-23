@@ -15,7 +15,7 @@ import {
   ContainerPromotionFlaps,
 } from '@/features/promotion/components';
 import { WheelOfFortuneHost } from '@/features/promotion/components/WheelOfFortuneHost';
-import { ChatBubbleHost } from '@/features/support/components/ChatBubbleHost';
+import { ChatBubble } from '@/features/support/components/ChatBubble';
 import { usePainPreferencesStore, useUserGrantsStore } from '@/stores';
 
 type PainDecoratorLayoutProps = JSXProxyProps<'div'>;
@@ -68,7 +68,7 @@ export function PainDecoratorLayout({
         {children}
         {runtimeFlags.wheelOfFortune && <WheelOfFortuneHost />}
         {deadPixel && <DeadPixelHost />}
-        {runtimeFlags.mockChat && <ChatBubbleHost />}
+        {runtimeFlags.mockChat && <ChatBubble />}
         {runtimeFlags.showCookieConsent && <CookieConsent />}
         <AdblockerSuspectBar />
         {runtimeFlags.stickyVideo && <GlobalStickyVideoHost />}

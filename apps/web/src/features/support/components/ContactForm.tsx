@@ -14,8 +14,8 @@ import { useForm, useWatch } from 'react-hook-form';
 
 import {
   ContactFormData,
-  getContactFormSchema,
-} from '../schemas/contact-form.schema';
+  getContactFormDataSchema,
+} from '../schemas/contact-form-data';
 
 import { useZodFormValidator } from '@/hooks';
 
@@ -26,7 +26,7 @@ export type ContactFormProps = {
 
 export function ContactForm({ contactEmail, className }: ContactFormProps) {
   const t = useTranslations();
-  const resolver = useZodFormValidator(getContactFormSchema);
+  const resolver = useZodFormValidator(getContactFormDataSchema);
   const {
     register,
     control,

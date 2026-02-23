@@ -2,7 +2,7 @@ import { z } from 'zod';
 
 import { ZodTranslator } from '@/types';
 
-export function getContactFormSchema(t: ZodTranslator) {
+export function getContactFormDataSchema(t: ZodTranslator) {
   return z.object({
     subject: z
       .string()
@@ -13,4 +13,6 @@ export function getContactFormSchema(t: ZodTranslator) {
   });
 }
 
-export type ContactFormData = z.infer<ReturnType<typeof getContactFormSchema>>;
+export type ContactFormData = z.infer<
+  ReturnType<typeof getContactFormDataSchema>
+>;
