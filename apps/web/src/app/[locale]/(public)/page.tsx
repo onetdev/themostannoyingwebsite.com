@@ -7,7 +7,7 @@ import {
   SmallCoverListItem,
   TextListItem,
 } from '@/features/content';
-import { OneByOneGift } from '@/features/promotion';
+import { OneByOnePromotion } from '@/features/promotion/components';
 export { generateStaticParams } from '@/i18n/routing';
 
 export const revalidate = 1800;
@@ -55,7 +55,7 @@ export default async function Page({ params }: NextPageProps) {
             </li>
           ))}
         </ul>
-        <OneByOneGift />
+        <OneByOnePromotion />
       </section>
       <div className="border-border col-span-1 border-t-5 border-b-5 border-double p-5 text-center text-xl font-light italic lg:col-span-4 lg:my-6">
         {t('article.moreContentScroll')}

@@ -8,7 +8,6 @@ import { init as initBrowserCore } from '@/features/browser-core/init';
 import { init as initContent } from '@/features/content/init';
 import { init as initDonation } from '@/features/donation/init';
 import { init as initNewsletter } from '@/features/newsletter/init';
-import { init as initGift } from '@/features/promotion/init';
 import { init as initSubscription } from '@/features/subscription/init';
 
 export function AppDependencyContainer({ children }: PropsWithChildren) {
@@ -19,7 +18,6 @@ export function AppDependencyContainer({ children }: PropsWithChildren) {
     initBrowserCore(container);
     initContent(container);
     initDonation(container);
-    initGift(container);
     initNewsletter(container);
     initShared(container);
     initSubscription(container);

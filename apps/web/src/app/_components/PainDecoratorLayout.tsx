@@ -10,9 +10,12 @@ import {
   GlobalStickyVideoHost,
   Screensaver,
 } from '@/features/obstructors/components';
-import { AdblockerSuspectBar, ContainerGiftFlaps } from '@/features/promotion';
+import {
+  AdblockerSuspectBar,
+  ContainerPromotionFlaps,
+} from '@/features/promotion/components';
+import { WheelOfFortuneHost } from '@/features/promotion/components/WheelOfFortuneHost';
 import { ChatBubbleHost } from '@/features/support/components/ChatBubbleHost';
-import { WheelOfFortuneHost } from '@/features/wheel-of-fortune';
 import { usePainPreferencesStore, useUserGrantsStore } from '@/stores';
 
 type PainDecoratorLayoutProps = JSXProxyProps<'div'>;
@@ -60,7 +63,7 @@ export function PainDecoratorLayout({
 
   return (
     <div className={className} {...rest}>
-      {runtimeFlags.giftFlaps && <ContainerGiftFlaps />}
+      {runtimeFlags.giftFlaps && <ContainerPromotionFlaps />}
       <div className="bg-card relative container mx-auto my-0 min-h-screen">
         {children}
         {runtimeFlags.wheelOfFortune && <WheelOfFortuneHost />}

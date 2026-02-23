@@ -4,7 +4,7 @@ import { arrayShuffle } from '@maw/utils/array';
 import { useMessages, useTranslations } from 'next-intl';
 import { useMemo } from 'react';
 
-import { FlaimSurveyQuestion } from '../../../../domain';
+import { FlaimSurveyQuestion } from '@/features/promotion/schemas';
 
 export function useSurveyQuestions() {
   const messages = useMessages();

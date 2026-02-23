@@ -6,11 +6,11 @@ import { useTranslations } from 'next-intl';
 import { Link } from '@/i18n/navigation';
 import { usePainPreferencesStore, useRuntimeStore } from '@/stores';
 
-export type OneByOneGiftProps = {
+export type OneByOnePromotionProps = {
   size?: number;
 };
 
-export function OneByOneGift({ size = 1024 }: OneByOneGiftProps) {
+export function OneByOnePromotion({ size = 1024 }: OneByOnePromotionProps) {
   const t = useTranslations();
   const enabled = usePainPreferencesStore(
     (state) => state.flags['gifts.oneByOne'],

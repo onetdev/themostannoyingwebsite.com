@@ -3,11 +3,11 @@
 import Image from 'next/image';
 import { useTranslations } from 'next-intl';
 import { useTheme } from 'next-themes';
-import { FunctionComponent, PropsWithChildren } from 'react';
+import { PropsWithChildren } from 'react';
 
 import { Link } from '@/i18n/navigation';
 
-export function ContainerGiftFlaps() {
+export function ContainerPromotionFlaps() {
   const t = useTranslations();
   const { resolvedTheme } = useTheme();
 
@@ -23,32 +23,32 @@ export function ContainerGiftFlaps() {
             height={1000}
             priority={false}
           />
-          <GiftFlapText
+          <PromotionFlapText
             theme={resolvedTheme as AppTheme}
             className="bottom-16 left-16 origin-bottom-left -rotate-90">
             {t('gifts.dilf.flapLeft')}
-          </GiftFlapText>
-          <GiftFlapText
+          </PromotionFlapText>
+          <PromotionFlapText
             theme={resolvedTheme as AppTheme}
             className="right-16 bottom-16 origin-bottom-right rotate-90">
             {t('gifts.dilf.flapRight')}
-          </GiftFlapText>
+          </PromotionFlapText>
         </Link>
       </div>
     </div>
   );
 }
 
-type GiftFlapText = PropsWithChildren<{
+type PromotionFlapText = PropsWithChildren<{
   className?: string;
   theme?: AppTheme;
 }>;
 
-const GiftFlapText: FunctionComponent<GiftFlapText> = ({
+function PromotionFlapText({
   children,
   className = '',
   theme,
-}) => {
+}: PromotionFlapText) {
   return (
     <span
       suppressHydrationWarning
@@ -57,4 +57,4 @@ const GiftFlapText: FunctionComponent<GiftFlapText> = ({
       {children}
     </span>
   );
-};
+}

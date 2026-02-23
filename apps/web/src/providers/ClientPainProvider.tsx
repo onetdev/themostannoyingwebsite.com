@@ -11,7 +11,7 @@ import {
   useDisableNavigationPop,
 } from '@/features/browser-core';
 import { NewsletterModalHost } from '@/features/newsletter';
-import { useAdblockerDetector } from '@/features/promotion';
+import { useAdblockerDetector } from '@/features/promotion/hooks';
 import { NotificationPermissionHost } from '@/features/user/components/NotificationPermissionHost';
 import { usePainPreferencesStore, useUserGrantsStore } from '@/stores';
 

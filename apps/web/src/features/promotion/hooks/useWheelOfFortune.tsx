@@ -8,7 +8,7 @@ import {
 import { useTranslations } from 'next-intl';
 import { useCallback, useMemo, useState } from 'react';
 
-import { Item } from '../components/components/DynamicWheelSvg';
+import { Item } from '../components/WheelOfFortune/DynamicWheelSvg';
 
 export type AnimatedWheelState = 'ready' | 'spinning' | 'completed';
 
