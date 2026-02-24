@@ -4,7 +4,7 @@ import { usePainPreferencesStore } from '@/stores';
 
 // This NEEDS user interaction first, otherwise it won't work at all.
 // Also, this can't really have a cleanup function either.
-export function useDisableNavigationPop() {
+export function useNavigationHistoryClutter() {
   const [isInited, setIsInited] = useState(false);
   const enabled = usePainPreferencesStore((state) => state.flags.historySpam);
 

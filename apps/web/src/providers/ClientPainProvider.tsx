@@ -8,7 +8,7 @@ import { useBeforeUnload } from 'react-use';
 import { PageTitleGlitch } from '@/features/interferrer/components';
 import {
   useDisableContextMenu,
-  useDisableNavigationPop,
+  useNavigationHistoryClutter,
 } from '@/features/interferrer/hooks';
 import { NewsletterModalTrigger } from '@/features/newsletter/components';
 import { useAdblockerDetector } from '@/features/promotion/hooks';
@@ -24,7 +24,7 @@ export function ClientPainContainer({ children }: PropsWithChildren) {
 
   const syncPermissions = useUserGrantsStore((state) => state.syncPermissions);
 
-  useDisableNavigationPop();
+  useNavigationHistoryClutter();
   useDisableContextMenu();
   useAdblockerDetector();
   useBeforeUnload(exitPrompt, t('app.exitPrompt'));
