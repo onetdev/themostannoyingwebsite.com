@@ -22,128 +22,75 @@ This document describes coding patterns, architectural decisions, and convention
 
 ## Architecture Overview
 
-### Clean Architecture with 4 Layers
+### Modular Feature-Based Architecture
 
-This project follows **Clean Architecture** with explicit layer separation:
+The project follows a modular architecture where logic is grouped by feature rather than technical layer. This minimizes coupling and makes it easier to navigate the codebase.
 
 ```
-module/
-├── domain/           # Business rules, entities, value objects, interfaces
-├── application/      # Use cases, services, hooks, forms
-├── infrastructure/   # Implementations, API clients, repositories
-└── presentation/     # React components, pages, UI
+src/
+├── app/              # Next.js App Router (pages and layouts)
+├── features/         # Domain-specific features (e.g., auth, donation)
+├── services/         # Global business logic and Kernel services
+├── repositories/     # Global data access (repositories)
+├── providers/        # React Context providers and DI registry
+└── contexts/         # Context definitions and custom hooks
 ```
 
-**Dependency Rule:** Inner layers (domain) never depend on outer layers (presentation).
+### Feature Modules (`/src/features/`)
 
-**Reference:** `/apps/web/src/modules/README.md` contains architecture diagrams
+Features are self-contained modules that encapsulate their own UI, logic, and data validation. A typical feature consists of:
 
-### Two Module Types
-
-1. **Kernel Module** (`/src/kernel/`)
-   - Core shared functionality
-   - Cross-cutting concerns
-   - Example: navigation, app config, shared providers
-
-2. **Feature Modules** (`/src/modules/*/`)
-   - Self-contained features
-   - Each follows the 4-layer structure
-   - Examples: `auth`, `donation`, `content`, `chat-bubble`
+- `components/`: UI components specific to the feature.
+- `hooks/`: Custom React hooks for local state or logic.
+- `services/`: Business logic and use cases.
+- `schemas/`: Zod validation schemas and types.
+- `repositories/`: Data access implementations (if specific to the feature).
+- `init.ts`: Dependency Injection registration for the feature.
+- `types.ts`: DI symbols and feature-specific type definitions.
 
 ---
 
-## Module Organization
+## Feature Organization
 
-### Standard Module Structure
+### Standard Feature Structure
 
 ```
-modules/my-feature/
-├── domain/
-│   ├── entities/
-│   │   ├── my-entity.ts         # Zod schema + type
-│   │   └── index.ts             # Barrel export
-│   ├── repositories/
-│   │   ├── MyRepository.ts      # Interface definition
-│   │   └── index.ts
-│   ├── value-objects/
-│   │   ├── my-enum.ts           # Value object with Zod
-│   │   └── index.ts
-│   └── index.ts
-├── application/
-│   ├── services/
-│   │   ├── MyService.ts         # Business logic service
-│   │   ├── MyService.test.ts    # Co-located tests
-│   │   ├── useMyService.ts      # Hook to access service
-│   │   └── index.ts
-│   ├── hooks/
-│   │   ├── useMyData.ts         # Business logic hooks
-│   │   └── index.ts
-│   ├── forms/
-│   │   ├── my-form.schema.ts    # Zod validation schema
-│   │   ├── useMyForm.ts         # Form hook
-│   │   └── index.ts
-│   └── index.ts
-├── infrastructure/
-│   ├── repositories/
-│   │   └── MyRepositoryImpl.ts  # Concrete implementation
-│   └── index.ts
-├── presentation/
-│   ├── MyPage.tsx               # Main page component
-│   ├── MyForm.tsx               # Form component
-│   ├── components/              # Page-specific components
-│   │   ├── MyWidget.tsx
-│   │   └── index.ts
-│   └── index.ts
-├── init.ts                      # DI container registration
-├── types.ts                     # DI symbols
-└── index.ts                     # Module barrel export
+features/my-feature/
+├── components/          # Feature-specific components
+├── hooks/               # Feature-specific hooks
+├── services/            # Business logic (often injectable)
+├── schemas/             # Zod schemas (single source of truth for types)
+├── repositories/        # (Optional) Feature-specific repositories
+├── types.ts             # DI symbols
+└── README.md            # Concise overview of the feature
 ```
 
-### Module Registration
+### Feature Registration
 
-Every module must be registered in the DI container:
+Every feature with injectable services must be registered in the global dependency container:
 
-**File:** `/src/providers/DependencyProvider.tsx`
+**File:** `/src/providers/AppDependencyRegistry.tsx`
 
 ```typescript
-import { init as initMyFeature } from '@/features/my-feature/init';
+import { DI } from '@/features/my-feature/types';
 
-const container = useMemo(() => {
-  const container = new Container();
-  initMyFeature(container);
-  // ... other modules
-  return container;
-}, []);
+export function AppDependencyContainer({ children }: PropsWithChildren) {
+  const container = useMemo(() => {
+    const container = new Container();
+    // Register global services
+    container.bind(DI.YourService).to(YourServiceImplementation).inSingletonScope();
+    
+    return container;
+  }, []);
+  // ...
+}
 ```
 
-Important: Just for visibility, module init must be defined even if it's just an empty function.
+### Import Rules
 
-### Barrel Exports
-
-**Every folder must have an `index.ts` that re-exports public APIs.**
-
-```typescript
-// modules/auth/index.ts
-export * from './application';
-export * from './domain';
-export * from './infrastructure';
-export * from './presentation';
-```
-
-**Benefits:**
-- Clean import paths: `import { User } from '@/features/auth'`
-- Explicit public API surface
-- Easy refactoring
-
-**Rule:** Never deep-import from other modules. Use barrel exports.
-
-```typescript
-// ✅ Good
-import { User, useAuthService } from '@/features/auth';
-
-// ❌ Bad
-import { User } from '@/features/auth/domain/entities/user';
-```
+- **Prefer Feature-Level Imports**: Features should ideally expose their public API via their internal folders.
+- **Path Aliases**: Use `@/features/my-feature` for clean imports.
+- **Encapsulation**: Avoid deep imports between features where possible. Use the `services` layer for cross-feature logic.
 
 ---
 
@@ -156,26 +103,32 @@ import { User } from '@/features/auth/domain/entities/user';
 #### Entity Pattern
 
 ```typescript
-// domain/entities/user.ts
+// features/auth/schemas/user.ts
 import { z } from 'zod';
+import { GenderSchema } from './gender';
 
 export const UserSchema = z.object({
-  id: z.string().uuid(),
-  email: z.string().email(),
+  id: z.uuid(),
+  email: z.email(),
   firstName: z.string().min(1),
   lastName: z.string().min(1),
+  nickname: z.string().min(1).optional(),
   username: z.string().min(8),
+  consentNewsletter: z.boolean(),
+  consentPrivacyPolicy: z.boolean(),
+  gender: GenderSchema.optional(),
+  // ...
 });
 
 export type User = z.infer<typeof UserSchema>;
 ```
 
-**Reference:** `/src/modules/auth/domain/entities/user.ts`
+**Reference:** `/src/features/auth/schemas/user.ts`
 
 #### Value Object Pattern
 
 ```typescript
-// domain/value-objects/gender.ts
+// features/auth/schemas/gender.ts
 import { z } from 'zod';
 
 export const GenderList = [
@@ -192,18 +145,15 @@ export const GenderSchema = z.enum(GenderList);
 export type Gender = (typeof GenderList)[number];
 ```
 
-**Reference:** `/src/modules/auth/domain/value-objects/gender.ts`
+**Reference:** `/src/features/auth/schemas/gender.ts`
 
 #### Config Pattern
 
 ```typescript
-// domain/entities/app-config.ts
+// schemas/app-config.ts
 import { z } from 'zod';
-
-const AppThemeList = ['light', 'dark'] as const;
-
-export const AppThemeSchema = z.enum(AppThemeList);
-export type AppTheme = (typeof AppThemeList)[number];
+import { AppThemeSchema } from './app-theme';
+import { DonationConfigSchema } from '@/features/donation/schemas';
 
 export const AppConfigSchema = z.object({
   defaultColorScheme: AppThemeSchema,
@@ -213,6 +163,8 @@ export const AppConfigSchema = z.object({
 
 export type AppConfig = z.infer<typeof AppConfigSchema>;
 ```
+
+**Reference:** `/src/schemas/app-config.ts`
 
 **Benefits:**
 - Runtime validation
@@ -259,9 +211,9 @@ export interface NavigationProviderContextType {
 **Server Component Example:**
 
 ```typescript
-// app/[locale]/donate/page.tsx
+// app/[locale]/(public)/donate/page.tsx
 import { getTranslations } from 'next-intl/server';
-import { DonationPage } from '@/features/donation/presentation/DonationPage';
+import { DonationPage } from '@/features/donation/components/DonationPage';
 
 export const revalidate = 1800; // ISR
 
@@ -281,12 +233,12 @@ export default async function Page() {
 }
 ```
 
-**Reference:** `/src/app/[locale]/donate/page.tsx`
+**Reference:** `/src/app/[locale]/(public)/donate/page.tsx`
 
 **Client Component Example:**
 
 ```typescript
-// presentation/components/DonationCalculator.tsx
+// features/donation/components/DonationCalculator.tsx
 'use client';
 
 import { useState } from 'react';
@@ -313,19 +265,18 @@ export function DonationCalculator() {
 ### Custom Hooks
 
 **Location:**
-- Business logic hooks: `module/application/hooks/`
-- UI hooks: `module/presentation/hooks/` or inline
-- Shared hooks: `kernel/application/hooks/`
+- Feature hooks: `features/[feature-name]/hooks/`
+- Shared hooks: `hooks/`
 
 **Naming:** Always start with `use`
 
 **Application Hook Example:**
 
 ```typescript
-// application/hooks/useDonationBalance.ts
+// features/donation/hooks/useDonationBalance.ts
 import { useMemo } from 'react';
 import { useDonationService } from '../services';
-import { useAppConfig } from '@/core';
+import { useAppConfig } from '@/contexts/AppConfig';
 
 export function useDonationBalance(): number {
   const { donation } = useAppConfig();
@@ -343,7 +294,7 @@ export function useDonationBalance(): number {
 }
 ```
 
-**Reference:** `/src/modules/donation/application/hooks/useDonationBalance.ts`
+**Reference:** `/src/features/donation/hooks/useDonationBalance.ts`
 
 ### Form Patterns
 
@@ -352,41 +303,42 @@ export function useDonationBalance(): number {
 **Schema Factory:**
 
 ```typescript
-// application/forms/login-form.schema.ts
+// features/auth/schemas/login-form.ts
 import { z } from 'zod';
-import { ZodTranslator } from '@/core';
+import { ZodTranslator } from '@/types';
 
-export function getLoginFormSchema(t: ZodTranslator) {
+export function getLoginFormDataSchema(t: ZodTranslator) {
   return z.object({
-    email: z.string().email({ message: t('form.validation.error.emailInvalid') }),
+    email: z.email({ message: t('form.validation.error.emailInvalid') }),
     password: z.string().min(1, { message: t('form.validation.error.required') }),
+    captcha: getCaptchaEmojiDataSchema(t),
     remember: z.boolean().optional(),
   });
 }
 
-export type LoginFormData = z.infer<ReturnType<typeof getLoginFormSchema>>;
+export type LoginFormData = z.infer<ReturnType<typeof getLoginFormDataSchema>>;
 ```
 
 **Form Hook:**
 
 ```typescript
-// application/forms/useLoginForm.ts
+// features/auth/hooks/useLoginForm.ts
 'use client';
 
 import { useForm } from 'react-hook-form';
-import { useAuthService } from '../services';
-import { getLoginFormSchema, LoginFormData } from './login-form.schema';
-import { useZodFormValidator } from '@/core';
+import { useAuthService } from './useAuthService';
+import { getLoginFormDataSchema, LoginFormData } from '../schemas';
+import { useZodFormValidator } from '@/hooks';
 
-export function useLoginForm({ onSuccess }: { onSuccess?: () => void }) {
+export function useLoginForm({ onSuccess }: { onSuccess?: (user: User) => void }) {
   const authService = useAuthService();
-  const resolver = useZodFormValidator(getLoginFormSchema);
+  const resolver = useZodFormValidator(getLoginFormDataSchema);
   const methods = useForm<LoginFormData>({ resolver });
 
   const onSubmit = async (data: LoginFormData) => {
     const result = await authService.login(data);
-    if (result.success) {
-      onSuccess?.();
+    if (result.success && result.data) {
+      onSuccess?.(result.data);
     } else {
       methods.setError('root', { message: result.error?.message });
     }
@@ -399,12 +351,12 @@ export function useLoginForm({ onSuccess }: { onSuccess?: () => void }) {
 **Form Component:**
 
 ```typescript
-// presentation/LoginForm.tsx
+// features/auth/components/LoginForm/LoginForm.tsx
 'use client';
 
 import { FormProvider } from 'react-hook-form';
 import { Button, Input, FormError } from '@maw/ui-lib';
-import { useLoginForm } from '../application/forms/useLoginForm';
+import { useLoginForm } from '../../hooks/useLoginForm';
 
 export function LoginForm() {
   const form = useLoginForm({ onSuccess: () => console.log('Success!') });
@@ -423,18 +375,18 @@ export function LoginForm() {
 }
 ```
 
-**Reference:** `/src/modules/auth/application/forms/` and `/src/modules/auth/presentation/LoginForm.tsx`
+**Reference:** `/src/features/auth/schemas/login-form.ts` and `/src/features/auth/hooks/useLoginForm.ts`
 
 ### Context Providers
 
 **Standard Context Pattern:**
 
 ```typescript
-// kernel/application/services/AppConfigContext.tsx
+// contexts/AppConfig.tsx
 'use client';
 
 import { createContext, useContext, PropsWithChildren } from 'react';
-import { AppConfig } from '@/kernel/domain';
+import { AppConfig } from '@/schemas/app-config';
 
 export const AppConfigContext = createContext<AppConfig | null>(null);
 
@@ -464,14 +416,14 @@ export function useAppConfig() {
 - Provider component
 - Hook with error checking
 
-**Reference:** `/src/kernel/application/services/AppConfigContext.tsx`
+**Reference:** `/src/contexts/AppConfig.tsx`
 
 ### State Management with Zustand
 
 **Store Pattern:**
 
 ```typescript
-// kernel/domain/stores/user-preferences.ts
+// stores/user-preferences.ts
 import { create } from 'zustand';
 import { persist, createJSONStorage } from 'zustand/middleware';
 
@@ -480,22 +432,22 @@ export interface UserPreferencesState {
   adultFilter: boolean;
 }
 
-export interface UserPreferencesActions {
+export interface UserPreferencesStateActions {
   setEnableSound: (enableSound: boolean) => void;
   setAdultFilter: (adultFilter: boolean) => void;
 }
 
 export interface UserPreferencesStore
   extends UserPreferencesState,
-          UserPreferencesActions {}
+          UserPreferencesStateActions {}
 
 const initialState: UserPreferencesState = {
   enableSound: true,
   adultFilter: true,
 };
 
-export const useUserPreferencesStore = create(
-  persist<UserPreferencesStore>(
+export const useUserPreferencesStore = create<UserPreferencesStore>()(
+  persist(
     (set) => ({
       ...initialState,
       setEnableSound: (enableSound) => set({ enableSound }),
@@ -516,7 +468,7 @@ export const useUserPreferencesStore = create(
 const { enableSound, setEnableSound } = useUserPreferencesStore();
 ```
 
-**Reference:** `/src/kernel/domain/stores/user-preferences.ts`
+**Reference:** `/src/stores/user-preferences.ts`
 
 ---
 
@@ -556,32 +508,28 @@ export function DonationPage() {
 }
 ```
 
-**2. Tree Structure Over Flat Key-Value**
+**2. Semantic Grouping Over Flat Key-Value**
 
-Organize translations hierarchically, grouping related keys under common namespaces.
+Organize translations logically, grouping related keys under common namespaces.
 
-**❌ Bad - Flat structure:**
+**❌ Bad - Flat structure with repetitive prefixes:**
 
 ```json
 {
-  "topSupporters": "Top supporters",
-  "topSupportersDescription": "Once this project actually starts...",
-  "topSupporterKidney": "🥇 Kidney",
-  "topSupporterLiver": "🥈 Liver",
-  "topSupporterHeart": "🥉 Heart"
+  "donateMoneyUsageHeading": "What happens with the money?",
+  "donateMoneyUsageDescription": "Your support helps...",
+  "donateDisclaimerHeading": "Disclaimer"
 }
 ```
 
-**✅ Good - Tree structure:**
+**✅ Good - Semantic grouping:**
 
 ```json
 {
-  "topSupporters": {
-    "heading": "Top supporters",
-    "description": "Once this project actually starts...",
-    "kidney": "🥇 Kidney",
-    "liver": "🥈 Liver",
-    "heart": "🥉 Heart"
+  "donate": {
+    "moneyUsageHeading": "What happens with the money?",
+    "moneyUsageDescription": "Your support helps...",
+    "disclaimer": "Disclaimer"
   }
 }
 ```
@@ -598,43 +546,24 @@ Organize translations hierarchically, grouping related keys under common namespa
 
 **Example:** `/apps/web/src/i18n/messages/en.ts`
 
-**Organize by feature area:**
+**Organize by feature area or logical group:**
 
-```json
-{
-  "app": {
-    "title": "The Most Annoying Website",
-    "description": "...",
-    "donate": {
-      "description": "...",
-      "moneyUsage": {
-        "heading": "What happens with the money?",
-        "description": "Your support helps..."
-      },
-      "topSupporters": {
-        "heading": "Top supporters",
-        "description": "Once this project...",
-        "kidney": "🥇 Kidney",
-        "liver": "🥈 Liver",
-        "heart": "🥉 Heart"
-      },
-      "disclaimer": {
-        "heading": "Disclaimer",
-        "paragraph1": "This project is developed...",
-        "paragraph2": "No legal, tax...",
-        "paragraph3": "I comply with..."
-      }
+```typescript
+export default {
+  app: {
+    title: 'The Most Annoying Website',
+    donate: {
+      moneyUsageHeading: 'What happens with the money?',
+      // ...
     }
   },
-  "navigation": {
-    "home": "Home",
-    "about": "About",
-    "donate": "Donate"
+  navigation: {
+    home: 'Home',
+    // ...
   },
-  "common": {
-    "yes": "Yes",
-    "no": "No",
-    "submit": "Submit"
+  common: {
+    yes: 'Yes',
+    // ...
   }
 }
 ```
@@ -647,12 +576,12 @@ Organize translations hierarchically, grouping related keys under common namespa
 import { getTranslations } from 'next-intl/server';
 
 export async function DonationPage() {
-  const t = await getTranslations();
+  const t = await getTranslations('app.donate');
 
   return (
     <div>
-      <h2>{t('app.donate.moneyUsage.heading')}</h2>
-      <p>{t('app.donate.moneyUsage.description')}</p>
+      <h2>{t('moneyUsageHeading')}</h2>
+      <p>{t('moneyUsageDescription')}</p>
     </div>
   );
 }
@@ -666,26 +595,14 @@ export async function DonationPage() {
 import { useTranslations } from 'next-intl';
 
 export function DonationForm() {
-  const t = useTranslations();
+  const t = useTranslations('common');
 
   return (
     <form>
-      <button type="submit">{t('common.submit')}</button>
+      <button type="submit">{t('submit')}</button>
     </form>
   );
 }
-```
-
-**With Namespaces:**
-
-```typescript
-// Server
-const t = await getTranslations('app.donate');
-return <h2>{t('moneyUsage.heading')}</h2>;
-
-// Client
-const t = useTranslations('app.donate');
-return <h2>{t('moneyUsage.heading')}</h2>;
 ```
 
 **With Interpolation:**
@@ -713,14 +630,11 @@ t('itemCount', { count: 5 })           // "You have 5 items"
 **Example transformation:**
 
 ```json
-// ❌ Before - flat structure with repetitive prefixes
+// ❌ Before - flat structure
 {
   "donateMoneyUsageHeading": "What happens with the money?",
   "donateMoneyUsageDescription": "Your support helps...",
-  "donateDisclaimerHeading": "Disclaimer",
-  "donateDisclaimerParagraph1": "This project is...",
-  "donateDisclaimerParagraph2": "No legal advice...",
-  "donateDisclaimerParagraph3": "I comply with..."
+  "donateDisclaimerHeading": "Disclaimer"
 }
 ```
 
@@ -728,16 +642,9 @@ t('itemCount', { count: 5 })           // "You have 5 items"
 // ✅ After - hierarchical structure
 {
   "donate": {
-    "moneyUsage": {
-      "heading": "What happens with the money?",
-      "description": "Your support helps..."
-    },
-    "disclaimer": {
-      "heading": "Disclaimer",
-      "paragraph1": "This project is...",
-      "paragraph2": "No legal advice...",
-      "paragraph3": "I comply with..."
-    }
+    "moneyUsageHeading": "What happens with the money?",
+    "moneyUsageDescription": "Your support helps...",
+    "disclaimer": "Disclaimer"
   }
 }
 ```
@@ -797,7 +704,7 @@ t('itemCount', { count: 5 })           // "You have 5 items"
 
 - **Translation files:** `/apps/web/src/i18n/messages/en.ts`
 - **i18n config:** `/apps/web/src/i18n/`
-- **Usage examples:** `/apps/web/src/modules/donation/presentation/DonationPage.tsx`
+- **Usage examples:** `/apps/web/src/features/donation/presentation/DonationPage.tsx`
 
 ---
 
@@ -818,142 +725,127 @@ t('itemCount', { count: 5 })           // "You have 5 items"
 
 ### DI Symbols
 
-**Every module defines DI symbols:**
+**Global and feature-specific DI symbols:**
 
 ```typescript
-// modules/my-feature/types.ts
+// features/auth/types.ts
 export const DI = {
-  MyRepository: Symbol.for('MyRepository'),
-  MyService: Symbol.for('MyService'),
+  AuthService: Symbol.for('AuthService'),
+  AuthRepository: Symbol.for('AuthRepository'),
+};
+
+// src/types.ts (Global)
+export const DI = {
+  CountryRepository: Symbol.for('CountryRepository'),
+  KernelService: Symbol.for('KernelService'),
 };
 ```
 
-**Reference:** `/src/kernel/types.ts`, `/src/modules/auth/types.ts`
+**Reference:** `/src/types.ts`, `/src/features/auth/types.ts`
 
-### Module Registration
+### Feature Registration
 
-**Each module has an `init.ts` file:**
+**Each feature with services has an `init.ts` file:**
 
 ```typescript
-// modules/my-feature/init.ts
+// features/auth/init.ts
 import { Container } from 'inversify';
+import { FakeAuthRepository } from './repositories';
+import { AuthService } from './services';
 import { DI } from './types';
-import { MyService } from './application/services/MyService';
-import { MyRepositoryImpl } from './infrastructure/MyRepositoryImpl';
 
 export const init = (di: Container) => {
-  di.bind(DI.MyRepository).to(MyRepositoryImpl).inSingletonScope();
-  di.bind(DI.MyService).to(MyService).inSingletonScope();
+  di.bind(DI.AuthRepository).to(FakeAuthRepository).inSingletonScope();
+  di.bind(DI.AuthService).to(AuthService).inSingletonScope();
 };
 ```
 
-**No DI needed? Still export init:**
-
-```typescript
-// modules/my-feature/init.ts
-import { Container } from 'inversify';
-
-export const init = (_di: Container) => {
-  // No DI bindings needed - utility class pattern
-};
-```
-
-**Reference:** `/src/modules/donation/init.ts` (no DI), `/src/kernel/init.ts` (with DI)
+**Reference:** `/src/features/auth/init.ts`, `/src/providers/AppDependencyRegistry.tsx`
 
 ### Injectable Service Pattern
 
 **Service with DI:**
 
 ```typescript
-// application/services/AuthService.ts
+// features/auth/services/AuthService.ts
 import { injectable, inject } from 'inversify';
-import { DI } from '../../types';
-import { AuthRepository } from '../../domain';
+import { DI, type AuthRepository } from '../types';
 
 @injectable()
 export class AuthService {
   @inject(DI.AuthRepository)
-  private authRepository!: AuthRepository;
+  private authRepo!: AuthRepository;
 
-  async login(credentials: LoginCredentials) {
-    return this.authRepository.authenticate(credentials);
+  login(data: LoginUseCaseParams) {
+    return loginUseCase(this.authRepo, data);
   }
 }
+```
 
-// Hook to access service
+**Hook to access service:**
+
+```typescript
+// features/auth/hooks/useAuthService.ts
+import { useDependencyContainer } from '@/contexts/DependencyContainer';
+
 export const useAuthService = () => {
   const container = useDependencyContainer();
   return container.container.get(DI.AuthService) as AuthService;
 };
 ```
 
-**Reference:** `/src/kernel/application/services/KernelService.ts`
+**Reference:** `/src/features/auth/services/AuthService.ts`
 
 ### Utility Service Pattern (No DI)
 
 **Simple service without dependencies:**
 
 ```typescript
-// application/services/DonationService.ts
+// features/donation/services/DonationService.ts
 export class DonationService {
   calculateBalance(config: DonationBalanceConfig): number {
     // Pure logic, no dependencies
   }
 }
 
-export const createDonationService = (): DonationService => {
-  return new DonationService();
-};
-
 // Hook wrapper
 export const useDonationService = (): DonationService => {
-  return useMemo(() => createDonationService(), []);
+  return useMemo(() => new DonationService(), []);
 };
 ```
 
-**Reference:** `/src/modules/donation/application/services/DonationService.ts`
+**Reference:** `/src/features/donation/services/DonationService.ts`
 
-**Rule:** Only use DI when service has dependencies. For utility classes, use factory functions.
+**Rule:** Only use DI when a service has dependencies. For utility classes, use simple instantiation or factory functions.
 
 ### Repository Pattern
 
-**Interface in domain:**
+**Interface in types:**
 
 ```typescript
-// domain/repositories/MyRepository.ts
-import { MyEntity } from '../entities/my-entity';
-
-export interface MyRepository {
-  findAll: () => Promise<MyEntity[]>;
-  findById: (id: string) => Promise<MyEntity | null>;
-  save: (entity: MyEntity) => Promise<void>;
+// features/auth/types.ts
+export interface AuthRepository {
+  authenticate(data: AuthenticationData): PromiseResult<User, AuthError>;
+  // ...
 }
 ```
 
-**Implementation in infrastructure:**
+**Implementation in repositories:**
 
 ```typescript
-// infrastructure/repositories/MyRepositoryImpl.ts
+// features/auth/repositories/FakeAuthRepository.ts
 import { injectable } from 'inversify';
-import { MyRepository, MyEntity } from '../../domain';
+import { type AuthRepository } from '../types';
 
 @injectable()
-export class MyRepositoryImpl implements MyRepository {
-  async findAll(): Promise<MyEntity[]> {
-    // Implementation
-  }
-
-  async findById(id: string): Promise<MyEntity | null> {
-    // Implementation
-  }
-
-  async save(entity: MyEntity): Promise<void> {
+export class FakeAuthRepository implements AuthRepository {
+  async authenticate() {
     // Implementation
   }
 }
 ```
 
-**Reference:** `/src/kernel/infrastructure/StaticCountryRepository.ts`
+**Reference:** `/src/features/auth/repositories/FakeAuthRepository.ts`, `/src/repositories/StaticCountryRepository.ts`
 
 ---
 
@@ -1002,8 +894,6 @@ export class MyRepositoryImpl implements MyRepository {
     "paths": {
       "@/*": ["./src/*"],
       "@/root/*": ["./*"],
-      "@/features/*": ["src/modules/*"],
-      "@/kernel": ["src/kernel/index.ts"]
     }
   }
 }
@@ -1023,20 +913,21 @@ export class MyRepositoryImpl implements MyRepository {
 ```typescript
 import { useForm } from 'react-hook-form';                  // External
 import { Button } from '@maw/ui-lib';                       // Workspace
-import { useZodFormValidator } from '@/core';             // App
-import { User } from '../../domain';                        // Relative
+import { useZodFormValidator } from '@/hooks';              // App
+import { User } from '../schemas';                          // Relative
 ```
 
 ### Import Rules
 
 **✅ Do:**
-- Use barrel exports: `import { User } from '@/features/auth'`
-- Use path aliases: `import { Config } from '@/core'`
-- Keep relative imports within the same module
+- Use path aliases for global directories: `import { DI } from '@/types'`
+- Keep relative imports within the same feature or directory.
+- Use clean feature imports: `import { useAuthService } from '@/features/auth/hooks/useAuthService'`
 
 **❌ Don't:**
-- Deep import from other modules: `import { User } from '@/features/auth/domain/entities/user'`
-- Long relative paths: `import { X } from '../../../../domain'`
+- Use deep relative paths to jump between features: `import { X } from '../../auth/services/X'`
+- Use long relative paths: `import { X } from '../../../../types'`
+
 
 ---
 
@@ -1052,15 +943,13 @@ import { User } from '../../domain';                        // Relative
 
 ```typescript
 // DonationService.test.ts
-import { createDonationService, DonationService } from './DonationService';
+import { DonationService } from './DonationService';
 
 describe('DonationService', () => {
   let service: DonationService;
-  let mockTranslate: jest.Mock;
 
   beforeEach(() => {
-    service = createDonationService();
-    mockTranslate = jest.fn((key: string) => translations[key] || key);
+    service = new DonationService();
   });
 
   describe('calculateBalance', () => {
@@ -1077,7 +966,7 @@ describe('DonationService', () => {
 });
 ```
 
-**Reference:** `/src/modules/donation/application/services/DonationService.test.ts`
+**Reference:** `/src/features/donation/services/DonationService.test.ts`
 
 **Commands:**
 
@@ -1151,65 +1040,39 @@ Below is a summary of key semantic color tokens (full list in `/packages/ui-lib/
 ```typescript
 // ✅ Preferred - Semantic tokens
 bg-background         // Main background color
-bg-surface           // Surface/card background
-bg-surface-alt       // Alternative surface color
-text-on-background   // Text on background
-text-on-surface      // Text on surface
+text-foreground       // Main foreground color
+bg-card               // Card background
+text-card-foreground  // Text on card
+bg-popover            // Popover background
 ```
 
-```typescript
-// ❌ Avoid - Generic Tailwind colors
-bg-white
-bg-gray-100
-text-gray-900
-```
-
-#### Primary Colors
+#### Brand Colors
 ```typescript
 // ✅ Preferred
 bg-primary           // Primary brand color
-text-primary         // Primary text/links
-text-primary-alt     // Primary hover state
-text-on-primary      // Text on primary background
-```
+bg-primary-alt       // Primary hover state
+text-primary-foreground // Text on primary background
 
-```typescript
-// ❌ Avoid
-bg-blue-500
-text-blue-600
-text-white
-```
-
-#### Secondary & Tertiary
-```typescript
-// ✅ Preferred
 bg-secondary         // Secondary color
-text-secondary       // Secondary text
-text-on-secondary    // Text on secondary background
-
 bg-tertiary          // Tertiary color
-text-tertiary        // Tertiary text
-text-on-tertiary     // Text on tertiary background
 ```
 
 #### Status Colors
 ```typescript
 // ✅ Preferred
 bg-success           // Success state
-text-on-success      // Text on success background
+text-success-foreground // Text on success background
 
 bg-warning           // Warning state
-text-on-warning      // Text on warning background
-
 bg-error             // Error state
-text-on-error        // Text on error background
+text-error-foreground // Text on error background
 ```
 
 #### Other Semantic Colors
 ```typescript
 bg-dimmer            // Dimmer overlay
-bg-border-surface        // Horizontal rule on surface
 bg-border-primary        // Horizontal rule primary
+bg-border-secondary      // Horizontal rule secondary
 ```
 
 **Why prefer semantic tokens?**
@@ -1224,17 +1087,15 @@ bg-border-primary        // Horizontal rule primary
 
 ```typescript
 // ✅ Use custom animations
-animate-highlight            // Highlight animation
 animate-flashing-invert-half // Flashing invert effect
 animate-wiggle-15deg         // Wiggle animation (15deg)
 animate-wiggle-8deg          // Wiggle animation (8deg)
-animate-width-0-100          // Width transition 0→100%
-animate-width-100-0          // Width transition 100→0%
+animate-width-100-0          // Width transition 100→0% (reverse)
 animate-gift-callout         // Gift callout animation
 animate-hue-full-rotate      // Full hue rotation
 ```
 
-**Reference:** `/packages/ui-lib/src/styles/themes/index.css` lines 50-124
+**Reference:** `/packages/ui-lib/src/styles/base/animations.css`
 
 ### UI Component Library
 
@@ -1263,10 +1124,10 @@ import {
 // ✅ Good - Use semantic tokens
 export function MyComponent() {
   return (
-    <div className="bg-surface text-on-surface rounded-lg p-4">
+    <div className="bg-card text-card-foreground rounded-lg p-4">
       <h2 className="text-primary text-2xl font-semibold">Title</h2>
-      <p className="text-on-surface">Content</p>
-      <Button className="bg-primary text-on-primary">Submit</Button>
+      <p className="text-card-foreground">Content</p>
+      <Button className="bg-primary text-primary-foreground">Submit</Button>
     </div>
   );
 }
@@ -1336,13 +1197,12 @@ export class MyService {
 
 ```typescript
 // ❌ Bad
-import { User } from '@/features/auth/domain/entities/user';
-import { getLoginFormSchema } from '@/features/auth/application/forms/login-form.schema';
+import { User } from '@/features/auth/schemas/user';
 ```
 
 ```typescript
 // ✅ Good
-import { User, getLoginFormSchema } from '@/features/auth';
+import { User } from '@/features/auth/schemas';
 ```
 
 ### ❌ Avoid: Hardcoded English Text
@@ -1365,13 +1225,13 @@ export function DonationPage() {
 ```typescript
 // ✅ Good - using translations
 export async function DonationPage() {
-  const t = await getTranslations();
+  const t = await getTranslations('app.donate');
 
   return (
     <div>
-      <h2>{t('app.donate.moneyUsage.heading')}</h2>
-      <p>{t('app.donate.moneyUsage.description')}</p>
-      <button>{t('app.donate.callToAction')}</button>
+      <h2>{t('moneyUsageHeading')}</h2>
+      <p>{t('moneyUsageDescription')}</p>
+      <button>{t('callToAction')}</button>
     </div>
   );
 }
@@ -1386,10 +1246,7 @@ export async function DonationPage() {
 {
   "donateMoneyUsageHeading": "What happens with the money?",
   "donateMoneyUsageDescription": "Your support helps...",
-  "donateTopSupportersHeading": "Top supporters",
-  "donateTopSupportersDescription": "Once this project...",
-  "donateTopSupportersFirst": "🥇 Gold",
-  "donateTopSupportersSecond": "🥈 Silver"
+  "donateDisclaimer": "Disclaimer"
 }
 ```
 
@@ -1397,16 +1254,9 @@ export async function DonationPage() {
 // ✅ Good - hierarchical grouping
 {
   "donate": {
-    "moneyUsage": {
-      "heading": "What happens with the money?",
-      "description": "Your support helps..."
-    },
-    "topSupporters": {
-      "heading": "Top supporters",
-      "description": "Once this project...",
-      "first": "🥇 Gold",
-      "second": "🥈 Silver"
-    }
+    "moneyUsageHeading": "What happens with the money?",
+    "moneyUsageDescription": "Your support helps...",
+    "disclaimer": "Disclaimer"
   }
 }
 ```
@@ -1463,21 +1313,19 @@ const handleData = (data: User) => {
 
 ```typescript
 // ❌ Bad - no index.ts in folder
-modules/my-feature/
-├── domain/
-│   └── entities/
-│       ├── user.ts
-│       └── country.ts
+features/my-feature/
+├── components/
+│   ├── UserProfile.tsx
+│   └── UserList.tsx
 ```
 
 ```typescript
 // ✅ Good - barrel export present
-modules/my-feature/
-├── domain/
-│   └── entities/
-│       ├── user.ts
-│       ├── country.ts
-│       └── index.ts    # export * from './user'; export * from './country';
+features/my-feature/
+├── components/
+│   ├── UserProfile.tsx
+│   ├── UserList.tsx
+│   └── index.ts    # export * from './UserProfile'; export * from './UserList';
 ```
 
 ### ❌ Avoid: Generic Color Classes Instead of Semantic Tokens
@@ -1498,9 +1346,9 @@ export function Banner() {
 // ✅ Good - Semantic tokens
 export function Banner() {
   return (
-    <div className="bg-surface text-on-surface">
+    <div className="bg-card text-card-foreground">
       <h1 className="text-primary">Welcome</h1>
-      <p className="text-on-surface">Description</p>
+      <p className="text-card-foreground">Description</p>
     </div>
   );
 }
@@ -1522,8 +1370,8 @@ git commit -m "fix: something"
 
 ```bash
 # ✅ Good
-git add src/modules/auth/domain/entities/user.ts
-git add src/modules/auth/application/services/AuthService.ts
+git add src/features/auth/schemas/user.ts
+git add src/features/auth/services/AuthService.ts
 git commit -m "fix(auth): resolve user entity validation issue"
 ```
 
@@ -1533,21 +1381,17 @@ git commit -m "fix(auth): resolve user entity validation issue"
 
 When creating a new feature:
 
-- [ ] Create module under `/src/modules/my-feature/`
-- [ ] Follow 4-layer structure: `domain/`, `application/`, `infrastructure/`, `presentation/`
-- [ ] Define entities with Zod schemas in `domain/entities/`
-- [ ] Define repository interfaces in `domain/repositories/`
-- [ ] Implement services in `application/services/`
-- [ ] Implement repository in `infrastructure/repositories/`
-- [ ] Create React components in `presentation/`
-- [ ] Add `index.ts` barrel exports in every folder
+- [ ] Create directory under `/src/features/my-feature/`
+- [ ] Implement UI components in `components/`
+- [ ] Implement custom hooks in `hooks/`
+- [ ] Define Zod schemas and types in `schemas/`
+- [ ] Implement business logic in `services/`
 - [ ] Create `init.ts` for DI registration (even if empty)
 - [ ] Create `types.ts` for DI symbols (if using DI)
-- [ ] Register module in `/src/providers/DependencyProvider.tsx`
+- [ ] Register feature in `/src/providers/AppDependencyRegistry.tsx`
 - [ ] Write unit tests for services (co-located `.test.ts`)
 - [ ] Use `'use client'` only when necessary
 - [ ] Use Server Components by default
-- [ ] Import from barrel exports, not deep paths
 - [ ] Follow naming conventions (PascalCase components, kebab-case files, camelCase hooks)
 - [ ] Use Zod for all validation and type definitions
 - [ ] Use semantic color tokens (`bg-primary`, `text-on-surface`) over generic colors (`bg-blue-500`, `text-white`)
@@ -1560,7 +1404,7 @@ When creating a new feature:
 ## Additional Resources
 
 **Documentation:**
-- `/apps/web/src/modules/README.md` - Architecture guide with diagrams
+- `/apps/web/src/features/README.md` - Architecture guide with diagrams
 - `/apps/web/e2e/README.md` - E2E testing guide
 - `/README.md` - Project overview
 - `/CONTRIBUTING.md` - Contribution guidelines
