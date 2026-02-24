@@ -12,7 +12,7 @@ import {
 } from '@/features/interferrer/hooks';
 import { NewsletterModalTrigger } from '@/features/newsletter/components';
 import { useAdblockerDetector } from '@/features/promotion/hooks';
-import { NotificationRequestTrigger } from '@/features/user/components';
+import { NotificationPromptTrigger } from '@/features/user/components';
 import { usePainPreferencesStore, useUserGrantsStore } from '@/stores';
 
 export function ClientPainContainer({ children }: PropsWithChildren) {
@@ -41,7 +41,7 @@ export function ClientPainContainer({ children }: PropsWithChildren) {
     <>
       <PageTitleGlitch />
       <NewsletterModalTrigger />
-      <NotificationRequestTrigger />
+      <NotificationPromptTrigger />
       <CopyMarker enabled={clipboardMarker} text={copyMarkerText}>
         {children}
       </CopyMarker>

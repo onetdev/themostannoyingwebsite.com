@@ -2,7 +2,7 @@ import { z } from 'zod';
 
 import { ZodTranslator } from '@/types';
 
-export function getCommentFormSchema(t: ZodTranslator) {
+export function getCommentFormDataSchema(t: ZodTranslator) {
   return z.object({
     name: z.string().min(1, { message: t('form.validation.error.required') }),
     content: z
@@ -17,4 +17,6 @@ export function getCommentFormSchema(t: ZodTranslator) {
   });
 }
 
-export type CommentFormData = z.infer<ReturnType<typeof getCommentFormSchema>>;
+export type CommentFormData = z.infer<
+  ReturnType<typeof getCommentFormDataSchema>
+>;

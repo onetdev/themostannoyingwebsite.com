@@ -2,7 +2,9 @@
 
 import { useMessages, useTranslations } from 'next-intl';
 
-import { ArrayPagedTitle, GlitchyTitle, MarqueeTitle } from './title-glitch';
+import { ArrayPagedTitle } from './ArrayPagedTitle';
+import { GlitchyTitle } from './GlitchyTitle';
+import { MarqueeTitle } from './MarqueeTitle';
 
 import { usePainPreferencesStore, useRuntimeStore } from '@/stores';
 

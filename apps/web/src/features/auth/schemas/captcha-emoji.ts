@@ -2,7 +2,7 @@ import { z } from 'zod';
 
 import { ZodTranslator } from '@/types';
 
-export function getCaptchaEmojiSchema(t: ZodTranslator) {
+export function getCaptchaEmojiDataSchema(t: ZodTranslator) {
   return z
     .string()
     .min(1, { message: t('form.validation.error.captchaRequired') })
@@ -12,5 +12,5 @@ export function getCaptchaEmojiSchema(t: ZodTranslator) {
 }
 
 export type CaptchaEmojiData = z.infer<
-  ReturnType<typeof getCaptchaEmojiSchema>
+  ReturnType<typeof getCaptchaEmojiDataSchema>
 >;

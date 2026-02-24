@@ -1,9 +1,6 @@
-import {
-  filterFutureComments,
-  generateCommentTree,
-} from './commentTreeGenerator';
+import { generateTree } from './generateTree';
 
-describe('commentTreeGenerator', () => {
+describe('generateTree', () => {
   const pool = {
     names: ['Alice', 'Bob', 'Charlie'],
     comments: ['Nice post!', 'I disagree.', 'Interesting perspective.'],
@@ -13,7 +10,7 @@ describe('commentTreeGenerator', () => {
 
   it('generates a tree with the specified root count', () => {
     const rootCount = 5;
-    const tree = generateCommentTree('test-seed', publishedAt, {
+    const tree = generateTree('test-seed', publishedAt, {
       pool,
       rootCount,
       maxDepth: 0,
@@ -24,15 +21,15 @@ describe('commentTreeGenerator', () => {
 
   it('is deterministic for the same seed', () => {
     const seed = 'deterministic-seed';
-    const tree1 = generateCommentTree(seed, publishedAt, { pool });
-    const tree2 = generateCommentTree(seed, publishedAt, { pool });
+    const tree1 = generateTree(seed, publishedAt, { pool });
+    const tree2 = generateTree(seed, publishedAt, { pool });
 
     expect(tree1).toEqual(tree2);
   });
 
   it('produces different results for different seeds', () => {
-    const tree1 = generateCommentTree('seed-1', publishedAt, { pool });
-    const tree2 = generateCommentTree('seed-2', publishedAt, { pool });
+    const tree1 = generateTree('seed-1', publishedAt, { pool });
+    const tree2 = generateTree('seed-2', publishedAt, { pool });
 
     expect(tree1).not.toEqual(tree2);
   });
@@ -51,7 +48,7 @@ describe('commentTreeGenerator', () => {
     // generateNode(1) -> depth(1) < 1 is false -> no more replies.
     // So maxDepth = 1 means 1 level of replies (total 2 levels: root and its replies).
 
-    const tree = generateCommentTree('depth-seed', publishedAt, {
+    const tree = generateTree('depth-seed', publishedAt, {
       pool,
       maxDepth: 1,
       rootCount: 5,
@@ -74,7 +71,7 @@ describe('commentTreeGenerator', () => {
     const maxReplies = 10;
     const maxDepth = 2;
 
-    const tree = generateCommentTree('total-nodes-precision', publishedAt, {
+    const tree = generateTree('total-nodes-precision', publishedAt, {
       pool,
       maxTotalNodes,
       rootCount,
@@ -109,7 +106,7 @@ describe('commentTreeGenerator', () => {
   });
 
   it('calculates time correctly for roots and replies', () => {
-    const tree = generateCommentTree('time-seed', publishedAt, {
+    const tree = generateTree('time-seed', publishedAt, {
       pool,
       rootCount: 1,
       maxDepth: 1,
@@ -132,7 +129,7 @@ describe('commentTreeGenerator', () => {
   });
 
   it('generates valid IDs and non-negative likes/time', () => {
-    const tree = generateCommentTree('validity-seed', publishedAt, { pool });
+    const tree = generateTree('validity-seed', publishedAt, { pool });
 
     tree.forEach((node) => {
       expect(node.id).toBeDefined();
@@ -140,84 +137,5 @@ describe('commentTreeGenerator', () => {
       expect(node.time).toBeGreaterThanOrEqual(publishedAt.getTime());
       expect(node.likes).toBeGreaterThanOrEqual(0);
     });
-  });
-});
-
-describe('filterFutureComments', () => {
-  it('removes future comments from the root', () => {
-    const now = 1000;
-    const tree = [
-      { id: '1', name: 'A', content: 'C', time: 500, likes: 0, replies: [] },
-      { id: '2', name: 'B', content: 'C', time: 1500, likes: 0, replies: [] },
-    ];
-
-    const filtered = filterFutureComments(tree, now);
-    expect(filtered).toHaveLength(1);
-    expect(filtered[0].id).toBe('1');
-  });
-
-  it('removes future comments from nested replies', () => {
-    const now = 1000;
-    const tree = [
-      {
-        id: '1',
-        name: 'A',
-        content: 'C',
-        time: 500,
-        likes: 0,
-        replies: [
-          {
-            id: '1-1',
-            name: 'A',
-            content: 'C',
-            time: 800,
-            likes: 0,
-            replies: [],
-          },
-          {
-            id: '1-2',
-            name: 'A',
-            content: 'C',
-            time: 1200,
-            likes: 0,
-            replies: [],
-          },
-        ],
-      },
-    ];
-
-    const filtered = filterFutureComments(tree, now);
-    expect(filtered).toHaveLength(1);
-    expect(filtered[0].replies).toHaveLength(1);
-    expect(filtered[0].replies![0].id).toBe('1-1');
-  });
-
-  it('returns an empty array if all comments are in the future', () => {
-    const now = 1000;
-    const tree = [
-      { id: '1', name: 'A', content: 'C', time: 1500, likes: 0, replies: [] },
-    ];
-
-    const filtered = filterFutureComments(tree, now);
-    expect(filtered).toBeDefined();
-    expect(filtered).toHaveLength(0);
-  });
-
-  it('handles comments with undefined replies', () => {
-    const now = 1000;
-    const tree = [
-      {
-        id: '1',
-        name: 'A',
-        content: 'C',
-        time: 500,
-        likes: 0,
-        replies: undefined,
-      } as any,
-    ];
-
-    const filtered = filterFutureComments(tree, now);
-    expect(filtered).toHaveLength(1);
-    expect(filtered[0].replies).toEqual([]);
   });
 });

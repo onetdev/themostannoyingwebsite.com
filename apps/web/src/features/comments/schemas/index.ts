@@ -1,2 +1,2 @@
-export * from './comment-form';
+export * from './comment-form-data';
 export * from './comment';

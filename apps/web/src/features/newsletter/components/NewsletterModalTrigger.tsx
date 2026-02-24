@@ -7,9 +7,10 @@ import { NewsletterModal } from './NewsletterModal';
 import { useScrollDistanceTrigger } from '@/hooks';
 import { usePainPreferencesStore, useRuntimeStore } from '@/stores';
 
-export type NewsletterModalTriggerProps = {
+export interface NewsletterModalTriggerProps {
   scrollDistanceTrigger?: number;
-};
+}
+
 export function NewsletterModalTrigger({
   scrollDistanceTrigger = 450,
 }: NewsletterModalTriggerProps) {

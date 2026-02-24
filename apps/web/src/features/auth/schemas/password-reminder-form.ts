@@ -2,7 +2,7 @@ import { z } from 'zod';
 
 import { ZodTranslator } from '@/types';
 
-export function getPasswordReminderFormSchema(t: ZodTranslator) {
+export function getPasswordReminderFormDataSchema(t: ZodTranslator) {
   return z.object({
     email: z.email({ message: t('form.validation.error.emailInvalid') }),
     captcha: z
@@ -12,5 +12,5 @@ export function getPasswordReminderFormSchema(t: ZodTranslator) {
 }
 
 export type PasswordReminderFormData = z.infer<
-  ReturnType<typeof getPasswordReminderFormSchema>
+  ReturnType<typeof getPasswordReminderFormDataSchema>
 >;

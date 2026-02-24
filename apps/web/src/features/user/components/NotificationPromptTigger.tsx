@@ -11,12 +11,12 @@ import { NotificationManualModal } from './NotificationManualModal';
 import { useScrollDistanceTrigger } from '@/hooks';
 import { usePainPreferencesStore, useUserGrantsStore } from '@/stores';
 
-export type NotificationRequestTriggerProps = {
+export type NotificationPromptTriggerProps = {
   scrollDistanceTrigger?: number;
 };
-export function NotificationRequestTrigger({
+export function NotificationPromptTrigger({
   scrollDistanceTrigger = 400,
-}: NotificationRequestTriggerProps) {
+}: NotificationPromptTriggerProps) {
   const initialState = useRef(getNotificationPermissionState()).current;
   const [manualModalVisible, setManualModalVisible] = useState(false);
   const enabled = usePainPreferencesStore((state) => state.flags.notifications);

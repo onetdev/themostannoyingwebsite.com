@@ -4,10 +4,9 @@ import { useLogger } from '@maw/logger';
 import { useForm } from 'react-hook-form';
 
 import { useAuthFormError } from './useAuthFormError';
-import { User } from '../schemas';
-import { LoginUseCaseParams } from '../services/use-cases';
-import { getLoginFormSchema, LoginFormData } from '../schemas/forms';
+import { getLoginFormDataSchema, LoginFormData, User } from '../schemas';
 import { useAuthService } from '../services';
+import { LoginUseCaseParams } from '../services/use-cases';
 
 import { useZodFormValidator } from '@/hooks';
 
@@ -18,7 +17,7 @@ interface LoginFormProps {
 export function useLoginForm({ onSuccess }: LoginFormProps) {
   const logger = useLogger().getSubLogger({ name: 'useLoginForm' });
   const authService = useAuthService();
-  const resolver = useZodFormValidator(getLoginFormSchema);
+  const resolver = useZodFormValidator(getLoginFormDataSchema);
   const methods = useForm<LoginFormData>({ resolver });
   const { translate } = useAuthFormError();
 

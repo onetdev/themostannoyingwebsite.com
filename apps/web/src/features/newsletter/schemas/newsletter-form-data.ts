@@ -2,7 +2,7 @@ import { z } from 'zod';
 
 import { ZodTranslator } from '@/types';
 
-export function getNewsletterFormSchema(t: ZodTranslator) {
+export function getNewsletterFormDataSchema(t: ZodTranslator) {
   return z.object({
     email: z
       .email({ error: t('form.validation.error.emailInvalid') })
@@ -10,4 +10,6 @@ export function getNewsletterFormSchema(t: ZodTranslator) {
   });
 }
 
-export type NewsletterFormData = z.infer<typeof getNewsletterFormSchema>;
+export type NewsletterFormData = z.infer<
+  ReturnType<typeof getNewsletterFormDataSchema>
+>;

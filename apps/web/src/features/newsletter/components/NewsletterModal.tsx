@@ -16,10 +16,10 @@ import { useMemo, useState } from 'react';
 
 import { useNewsletterForm } from '../hooks/useNewsletterForm';
 
-type NewsletterModalProps = {
+export interface NewsletterModalProps {
   visible?: boolean;
   onDismiss?: () => void;
-};
+}
 
 export function NewsletterModal({
   visible = false,

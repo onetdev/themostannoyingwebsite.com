@@ -7,7 +7,7 @@ import TimeAgo from 'react-timeago';
 
 import { Comment } from '../schemas';
 
-interface CommentItemProps {
+export interface CommentItemProps {
   comment: Comment;
   onReply: (comment: Comment) => void;
   onLike: (comment: Comment) => void;

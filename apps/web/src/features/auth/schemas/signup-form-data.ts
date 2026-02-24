@@ -1,7 +1,7 @@
 import { z } from 'zod';
 
-import { getCaptchaEmojiSchema } from './captcha-emoji';
-import { GenderSchema } from '../';
+import { GenderSchema } from '.';
+import { getCaptchaEmojiDataSchema } from './captcha-emoji';
 
 import { ZodTranslator } from '@/types';
 
@@ -32,7 +32,7 @@ const validatePassword = (value: string, t: ZodTranslator) => {
   return t('form.validation.error.passwordAlreadyTaken');
 };
 
-export function getSignupFormSchema(t: ZodTranslator) {
+export function getSignupFormDataSchema(t: ZodTranslator) {
   return z
     .object({
       firstName: z
@@ -75,7 +75,7 @@ export function getSignupFormSchema(t: ZodTranslator) {
         (val) => (!val ? undefined : val),
         z.coerce.number().optional(),
       ),
-      captcha: getCaptchaEmojiSchema(t),
+      captcha: getCaptchaEmojiDataSchema(t),
     })
     .refine((data) => data.password === data.passwordConfirmation, {
       message: t('form.validation.error.passwordMismatch'),
@@ -83,4 +83,6 @@ export function getSignupFormSchema(t: ZodTranslator) {
     });
 }
 
-export type SignupFormData = z.infer<ReturnType<typeof getSignupFormSchema>>;
+export type SignupFormData = z.infer<
+  ReturnType<typeof getSignupFormDataSchema>
+>;

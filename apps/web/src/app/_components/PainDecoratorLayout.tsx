@@ -9,7 +9,7 @@ import {
   DeadPixel,
   GlobalStickyVideo,
   Screensaver,
-} from '@/features/obstructors/components';
+} from '@/features/obstructor/components';
 import {
   AdblockerSuspectBar,
   ContainerPromotionFlaps,

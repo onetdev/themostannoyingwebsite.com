@@ -1,6 +1,6 @@
 import { idFromRand, mulberry32, stringToSeed } from '@maw/utils/seed';
 
-import { type Comment, CommentSchema } from '../schemas';
+import { type Comment, CommentSchema } from '../../schemas';
 
 export interface SeededCommentsOptions {
   pool: {
@@ -13,7 +13,7 @@ export interface SeededCommentsOptions {
   maxTotalNodes?: number;
 }
 
-export function generateCommentTree(
+export function generateTree(
   identifier: string,
   publishedAt: Date,
   {
@@ -86,15 +86,4 @@ export function generateCommentTree(
   const tree = Array.from({ length: rootCount }, () => generateNode(0));
 
   return CommentSchema.array().parse(tree);
-}
-
-export function filterFutureComments(tree: Comment[], now: number): Comment[] {
-  return tree
-    .filter((comment) => comment.time <= now)
-    .map((comment) => ({
-      ...comment,
-      replies: comment.replies
-        ? filterFutureComments(comment.replies, now)
-        : [],
-    }));
 }

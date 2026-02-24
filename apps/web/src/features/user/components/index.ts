@@ -1,3 +1,3 @@
 export * from './NotificationManualModal';
-export * from './NotificationRequesterTigger';
+export * from './NotificationPromptTigger';
 export * from './Settings';

@@ -1,1 +1,1 @@
-export * from './newsletter-form';
+export * from './newsletter-form-data';

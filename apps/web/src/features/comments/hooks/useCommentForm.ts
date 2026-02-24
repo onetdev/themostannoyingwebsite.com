@@ -3,7 +3,7 @@
 import { useLogger } from '@maw/logger';
 import { useForm } from 'react-hook-form';
 
-import { CommentFormData, getCommentFormSchema } from '../schemas';
+import { CommentFormData, getCommentFormDataSchema } from '../schemas';
 
 import { useZodFormValidator } from '@/hooks';
 
@@ -13,7 +13,7 @@ interface UseCommentFormProps {
 
 export function useCommentForm({ onSuccess }: UseCommentFormProps) {
   const logger = useLogger().getSubLogger({ name: 'useCommentForm' });
-  const resolver = useZodFormValidator(getCommentFormSchema);
+  const resolver = useZodFormValidator(getCommentFormDataSchema);
   const methods = useForm<CommentFormData>({
     resolver,
     defaultValues: {
