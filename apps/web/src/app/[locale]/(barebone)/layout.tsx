@@ -6,7 +6,7 @@ import { hasLocale, NextIntlClientProvider } from 'next-intl';
 import { getLangDir } from 'rtl-detect';
 
 import { routing } from '@/i18n/routing';
-import { RootProviderContainer } from '@/providers/RootProviderContainer';
+import { ClientRootProviderContainer } from '@/providers/ClientRootProviderContainer';
 import { getAppConfigService } from '@/services';
 
 const config = getAppConfigService().getAll();
@@ -38,10 +38,10 @@ async function LocaleBareboneRootLayout({
       suppressHydrationWarning>
       <body>
         <NextIntlClientProvider>
-          <RootProviderContainer appConfig={config}>
+          <ClientRootProviderContainer appConfig={config}>
             <Analytics />
             {children}
-          </RootProviderContainer>
+          </ClientRootProviderContainer>
         </NextIntlClientProvider>
       </body>
     </html>

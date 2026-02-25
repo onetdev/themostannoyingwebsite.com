@@ -9,7 +9,7 @@ import { PainDecoratorLayout } from '@/app/_components/PainDecoratorLayout';
 import { BeggarBanner } from '@/features/donation/components';
 import { routing } from '@/i18n/routing';
 import { ClientObserverProvider } from '@/providers/ClientObserverProvider';
-import { RootProviderContainer } from '@/providers/RootProviderContainer';
+import { ClientRootProviderContainer } from '@/providers/ClientRootProviderContainer';
 import { getAppConfigService } from '@/services';
 
 const config = getAppConfigService().getAll();
@@ -41,7 +41,7 @@ async function LocalePublicRootLayout({
       suppressHydrationWarning>
       <body>
         <NextIntlClientProvider>
-          <RootProviderContainer appConfig={config}>
+          <ClientRootProviderContainer appConfig={config}>
             <ClientObserverProvider />
             <BeggarBanner />
             <PainDecoratorLayout className="font-primary">
@@ -49,7 +49,7 @@ async function LocalePublicRootLayout({
               <Analytics />
               {children}
             </PainDecoratorLayout>
-          </RootProviderContainer>
+          </ClientRootProviderContainer>
         </NextIntlClientProvider>
       </body>
     </html>

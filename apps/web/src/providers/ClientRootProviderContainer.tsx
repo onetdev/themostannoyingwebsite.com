@@ -7,25 +7,25 @@ import { PropsWithChildren } from 'react';
 import { ClientNavigationConfigurator } from './ClientNavigationConfigurator';
 
 import { AppConfigProvider } from '@/contexts/AppConfig';
+import { RootPortalProvider } from '@/contexts/ClientRootPortalProvider';
 import { DependencyContainer } from '@/contexts/DependencyContainer';
 import { getDependencyContainer } from '@/dependency-container';
 import { ClientPainContainer } from '@/providers/ClientPainProvider';
-import { ClientRootPortalProvider } from '@/providers/ClientRootPortalProvider';
 import { AppConfig } from '@/schemas/app-config';
 
-export type RootProviderContainerProps = PropsWithChildren<{
+export type ClientRootProviderContainerProps = PropsWithChildren<{
   appConfig: AppConfig;
 }>;
 
-export function RootProviderContainer({
+export function ClientRootProviderContainer({
   appConfig,
   children,
-}: RootProviderContainerProps) {
+}: ClientRootProviderContainerProps) {
   const DiContainer = getDependencyContainer();
 
   return (
     <AppConfigProvider config={appConfig}>
-      <ClientRootPortalProvider>
+      <RootPortalProvider>
         <TooltipProvider>
           <DependencyContainer value={{ container: DiContainer }}>
             <ThemeProvider defaultTheme="dark" enableColorScheme enableSystem>
@@ -36,7 +36,7 @@ export function RootProviderContainer({
             </ThemeProvider>
           </DependencyContainer>
         </TooltipProvider>
-      </ClientRootPortalProvider>
+      </RootPortalProvider>
     </AppConfigProvider>
   );
 }
