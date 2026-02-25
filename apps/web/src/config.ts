@@ -28,6 +28,20 @@ const config = {
     // Not a priority at the moment 😅
     totalDonationInEuro: 0,
   },
+  subscription: {
+    urgency: {
+      discountPercentage: 0.2,
+      timeoutSeconds: 600,
+    },
+    socialProof: {
+      minDelayMs: 5000,
+      maxDelayMs: 15000,
+    },
+  },
+  screensaver: {
+    defaultTimeoutSeconds: 30,
+    defaultVariant: 'bouncingLogo',
+  },
   deploymentMeta: { ...deploymentMeta },
 };
 

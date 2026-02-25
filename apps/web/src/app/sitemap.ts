@@ -2,13 +2,17 @@ import { ArticleDatum } from '@maw/content-api';
 import type { MetadataRoute } from 'next';
 import { Languages } from 'next/dist/lib/metadata/types/alternative-urls-types';
 
-import { getAppConfigService } from '@/kernel';
-import { AppArticleService } from '@/modules/content';
+import { getDependencyContainer } from '@/dependency-container';
+import { getAppArticleService } from '@/features/content/services';
 import i18nConfig from '@/root/i18n.config';
+import { getAppConfigService } from '@/services';
 
 const config = getAppConfigService().getDeploymentMeta();
 
-const genLangAlternates = (path: string, currentLocale: string): Languages<string> => {
+const genLangAlternates = (
+  path: string,
+  currentLocale: string,
+): Languages<string> => {
   const items = i18nConfig.locales
     .filter((lang) => lang !== currentLocale)
     .map((lang) => {
@@ -19,7 +23,10 @@ const genLangAlternates = (path: string, currentLocale: string): Languages<strin
   return Object.fromEntries(items);
 };
 
-const commonPageMeta = (path: string, locale: string): MetadataRoute.Sitemap[0] => {
+const commonPageMeta = (
+  path: string,
+  locale: string,
+): MetadataRoute.Sitemap[0] => {
   const normalizedPath = path ? `/${path}` : '';
 
   return {
@@ -40,7 +47,8 @@ const mapArticleToSitemapEntry = (item: ArticleDatum) => {
 };
 
 async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const articleResults = await AppArticleService.getMany({
+  const di = getDependencyContainer();
+  const articleResults = await getAppArticleService(di).getMany({
     params: {},
     paginate: { take: -1, skip: 0 },
   });
@@ -54,6 +62,7 @@ async function sitemap(): Promise<MetadataRoute.Sitemap> {
     'donate',
     'flaim-a-phone',
     'hot-things',
+    'plans',
     'privacy-policy',
     'search',
     'settings',
@@ -64,7 +73,7 @@ async function sitemap(): Promise<MetadataRoute.Sitemap> {
   ];
 
   const commonPagesEntries = i18nConfig.locales.flatMap((locale) =>
-    commonPages.map((path) => commonPageMeta(path, locale))
+    commonPages.map((path) => commonPageMeta(path, locale)),
   );
 
   return [...commonPagesEntries, ...articles];

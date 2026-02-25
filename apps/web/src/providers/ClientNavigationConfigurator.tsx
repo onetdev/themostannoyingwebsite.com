@@ -1,15 +1,14 @@
 'use client';
 
 import { compile } from 'path-to-regexp';
-import { PropsWithChildren } from 'react';
+import { ComponentProps, PropsWithChildren } from 'react';
 
-import { AppLink } from '@/components/AppLink';
-import { useRouter } from '@/i18n/navigation';
 import {
   NavigationParams,
   NavigationProvider as NavigationProviderBase,
-  RouteAlias,
-} from '@/kernel';
+} from '@/contexts/NavigationContext';
+import { Link, useRouter } from '@/i18n/navigation';
+import { RouteAlias } from '@/schemas';
 
 const routeAliasToPathMap: Record<RouteAlias, string> = {
   about: '/about',
@@ -29,6 +28,12 @@ const routeAliasToPathMap: Record<RouteAlias, string> = {
   'user.signup': '/user/signup',
   virgin: '/virgin',
 };
+
+export type AppLinkProps = PropsWithChildren<ComponentProps<typeof Link>>;
+
+export function AppLink({ children, ...rest }: AppLinkProps) {
+  return <Link {...rest}>{children}</Link>;
+}
 
 export function ClientNavigationConfigurator({ children }: PropsWithChildren) {
   const navigation = useRouter();

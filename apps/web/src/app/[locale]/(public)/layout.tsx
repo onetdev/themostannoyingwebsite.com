@@ -5,12 +5,13 @@ import { notFound } from 'next/navigation';
 import { hasLocale, NextIntlClientProvider } from 'next-intl';
 import { getLangDir } from 'rtl-detect';
 
-import { ExperienceDecoratorLayout } from '@/components/ExperienceDecoratorLayout';
+import { PainDecoratorLayout } from './_components/PainDecoratorLayout';
+
+import { BeggarBanner } from '@/features/donation/components';
 import { routing } from '@/i18n/routing';
-import { getAppConfigService } from '@/kernel';
-import { BeggarBanner } from '@/modules/donation';
-import { ClientObservers } from '@/providers/ClientObservers';
-import { RootProviderContainer } from '@/providers/RootProviderContainer';
+import { ClientObserverProvider } from '@/providers/ClientObserverProvider';
+import { ClientRootProviderContainer } from '@/providers/ClientRootProviderContainer';
+import { getAppConfigService } from '@/services';
 
 const config = getAppConfigService().getAll();
 
@@ -41,15 +42,15 @@ async function LocalePublicRootLayout({
       suppressHydrationWarning>
       <body>
         <NextIntlClientProvider>
-          <RootProviderContainer appConfig={config}>
-            <ClientObservers />
+          <ClientRootProviderContainer appConfig={config}>
+            <ClientObserverProvider />
             <BeggarBanner />
-            <ExperienceDecoratorLayout className="font-primary">
+            <PainDecoratorLayout className="font-primary">
               {/* Please add AppHeader in your pages to have SSG/ISR/SSG support while also being able to select the active navigation item */}
               <Analytics />
               {children}
-            </ExperienceDecoratorLayout>
-          </RootProviderContainer>
+            </PainDecoratorLayout>
+          </ClientRootProviderContainer>
         </NextIntlClientProvider>
       </body>
     </html>

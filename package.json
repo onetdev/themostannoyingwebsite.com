@@ -1,7 +1,7 @@
 {
   "private": false,
   "name": "themostannoyingwebsite",
-  "version": "0.13.0",
+  "version": "0.14.0",
   "license": "MIT",
   "author": "Konrad Koller <info@onet.dev> (https://onet.dev)",
   "homepage": "https://themostannoyingwebsite.com",
@@ -31,8 +31,8 @@
     "clean:all": "pnpm recursive exec -- rm -rf node_modules dist .next .turbo storybook-static"
   },
   "devDependencies": {
-    "@commitlint/cli": "^20.4.1",
-    "@commitlint/config-conventional": "^20.4.1",
+    "@commitlint/cli": "^20.4.2",
+    "@commitlint/config-conventional": "^20.4.2",
     "husky": "^9.1.7",
     "lint-staged": "^16.2.7",
     "symlink-dir": "9.0.0",

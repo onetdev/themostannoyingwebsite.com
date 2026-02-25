@@ -1,20 +1,25 @@
 import { Page } from '@playwright/test';
 
-import type { ExperienceFlagsState, UserGrantsState } from '@/kernel/domain';
+import {
+  PAIN_PREFERENCES_STORAGE_KEY,
+  PainPreferencesState,
+  USER_GRANTS_STORAGE_KEY,
+  UserGrantsState,
+} from '@/stores';
 
 /**
- * Sets the state for the experience flags store in localStorage.
+ * Sets the state for the pain preferences store in localStorage.
  * This script runs before the page loads.
  * @param page The Playwright page object.
- * @param partialState A partial state to merge with the initial state.
+ * @param state A partial state to merge with the initial state.
  */
-export async function setExperienceFlags(
+export async function setPainPreferences(
   page: Page,
-  partialState: Partial<ExperienceFlagsState>,
+  state: PainPreferencesState,
 ) {
   const valueToStore = {
-    state: partialState,
-    version: 11, // This version must match the one in the store config
+    state,
+    version: 1, // This version must match the one in the store config
   };
 
   await page.addInitScript(
@@ -22,20 +27,20 @@ export async function setExperienceFlags(
       window.localStorage.setItem(key, value);
     },
     {
-      key: 'zustand-experience-flags-storage',
+      key: PAIN_PREFERENCES_STORAGE_KEY,
       value: JSON.stringify(valueToStore),
     },
   );
 }
 
 /**
- * Gets the state for the experience flags store from localStorage.
+ * Gets the state for the pain preferences store from localStorage.
  * @param page The Playwright page object.
  */
-export async function getExperienceFlags(page: Page) {
+export async function getPainPreferences(page: Page) {
   return page.evaluate(() => {
-    const item = localStorage.getItem('zustand-experience-flags-storage');
-    return item ? (JSON.parse(item) as { state: ExperienceFlagsState }) : null;
+    const item = localStorage.getItem(PAIN_PREFERENCES_STORAGE_KEY);
+    return item ? (JSON.parse(item) as { state: PainPreferencesState }) : null;
   });
 }
 
@@ -59,7 +64,7 @@ export async function setUserGrants(
       window.localStorage.setItem(key, value);
     },
     {
-      key: 'zustand-user-grants-storage',
+      key: USER_GRANTS_STORAGE_KEY,
       value: JSON.stringify(valueToStore),
     },
   );

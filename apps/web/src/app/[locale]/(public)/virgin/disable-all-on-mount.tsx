@@ -2,10 +2,10 @@
 
 import { useEffect } from 'react';
 
-import { useExperienceFlagsStore } from '@/kernel';
+import { usePainPreferencesStore } from '@/stores';
 
 export default function DisableAllOnMount() {
-  const allDisabled = useExperienceFlagsStore((state) => state.allDisabled);
+  const allDisabled = usePainPreferencesStore((state) => state.allDisable);
 
   useEffect(() => {
     allDisabled();

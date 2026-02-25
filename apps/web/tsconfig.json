@@ -9,12 +9,6 @@
       "@/root/*": [
         "./*"
       ],
-      "@/modules/*": [
-        "src/modules/*"
-      ],
-      "@/kernel": [
-        "src/kernel/index.ts"
-      ]
     },
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true

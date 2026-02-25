@@ -1,10 +1,12 @@
 import { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 
-import { ArticleItemPage } from './article-item-page';
+import { PageLayout } from '../../_components/PageLayout';
 
-import { PageLayout } from '@/components/PageLayout';
-import { AppArticleService } from '@/modules/content';
+import { getDependencyContainer } from '@/dependency-container';
+import { CommentService } from '@/features/comments/services';
+import { ArticleItemPage } from '@/features/content/components';
+import { getAppArticleService } from '@/features/content/services';
 import i18nConfig from '@/root/i18n.config';
 
 type PageParams = {
@@ -21,7 +23,8 @@ export async function generateMetadata({
 }: PageProps): Promise<Metadata> {
   const { locale, slug } = await params;
   const lookup = { slug, locale };
-  const data = await AppArticleService.getByLookup(lookup);
+  const container = getDependencyContainer();
+  const data = await getAppArticleService(container).getByLookup(lookup);
 
   return {
     title: data?.title,
@@ -37,8 +40,9 @@ export const generateStaticParams = async () => {
   const locales = i18nConfig.locales;
   const paths: PageParams[] = [];
 
+  const container = getDependencyContainer();
   for (const locale of locales) {
-    const articles = await AppArticleService.getMany({
+    const articles = await getAppArticleService(container).getMany({
       params: { locale },
       paginate: { take: -1 },
     });
@@ -54,18 +58,22 @@ export const generateStaticParams = async () => {
 export default async function Page({ params }: PageProps) {
   const { slug, locale } = await params;
   const lookup = { slug, locale };
-  const data = await AppArticleService.getByLookup(lookup);
 
-  if (!data) {
+  const container = getDependencyContainer();
+  const datum = await getAppArticleService(container).getByLookup(lookup);
+
+  if (!datum) {
     return notFound();
   }
+
+  const comments = await new CommentService().getByArticle(datum);
 
   return (
     <PageLayout
       activeItem="article-item"
       role="main"
       data-testid="article-item">
-      <ArticleItemPage data={data} />
+      <ArticleItemPage article={datum} comments={comments} />
     </PageLayout>
   );
 }

@@ -2,53 +2,60 @@
 
 @layer theme {
   :root:not([data-theme='light']), [data-theme='dark'] {
-    /* Backgrounds */
-    --theme-color-background: #0a0a14;
-    --theme-color-surface: #1a192b;
-    --theme-color-surface-alt: #2a283d;
+    /* Main Layout */
+    --background: #0a0a14;
+    --foreground: #ebebeb;
 
-    /* Primary Colors */
-    --theme-color-primary: #3b82f6;
-    --theme-color-primary-alt: #2563eb;
-    --theme-color-on-primary: #ffffff;
+    /* Surfaces */
+    --card: #1a192b;
+    --card-foreground: #ebebeb;
+    --popover: #1a192b;
+    --popover-foreground: #ebebeb;
 
-    /* Secondary Colors */
-    --theme-color-secondary: #22c55e;
-    --theme-color-secondary-alt: #16a34a;
-    --theme-color-on-secondary: #ffffff;
+    /* Brand Colors */
+    --primary: #3b82f6;
+    --primary-alt: #2563eb;
+    --primary-foreground: #ffffff;
 
-    /* Tertiary Colors */
-    --theme-color-tertiary: #f97316;
-    --theme-color-tertiary-alt: #ea580c;
-    --theme-color-on-tertiary: #ffffff;
+    --secondary: #22c55e;
+    --secondary-alt: #16a34a;
+    --secondary-foreground: #ffffff;
 
-    /* Success, Warning, and Error */
-    --theme-color-success: #2e7d32;
-    --theme-color-warning: #ffeb3b;
-    --theme-color-error: #e53935;
-    --theme-color-on-success: #ffffff;
-    --theme-color-on-warning: #000000;
-    --theme-color-on-error: #ffffff;
+    --tertiary: #f97316;
+    --tertiary-alt: #ea580c;
+    --tertiary-foreground: #ffffff;
 
-    /* Text and UI States */
-    --theme-color-dimmer: #555555a0;
-    --theme-color-on-background: #ebebeb;
-    --theme-color-on-surface: #ebebeb;
-    --theme-color-muted: #9e9e9e;
-    --theme-color-disabled: #616161;
-    --theme-color-focus: #42a5f5;
+    /* UI States & Action */
+    --muted: #2a283d;
+    --muted-foreground: #9e9e9e;
+    --accent: #2a283d;
+    --accent-foreground: #ebebeb;
+    --destructive: #e53935;
+    --destructive-foreground: #ffffff;
 
-    /* Borders - Semantic */
-    --theme-color-border-primary: #2563eb;
-    --theme-color-border-secondary: #16a34a;
-    --theme-color-border-tertiary: #ea580c;
+    /* Status Colors */
+    --success: #2e7d32;
+    --success-foreground: #ffffff;
+    --warning: #ffeb3b;
+    --warning-foreground: #000000;
+    --error: #e53935;
+    --error-foreground: #ffffff;
 
-    /* Borders - Status */
-    --theme-color-border-success: #1b5e20;
-    --theme-color-border-warning: #e65100;
-    --theme-color-border-error: #b71c1c;
+    /* Borders & Inputs */
+    --border: #4e4c66;
+    --input: #4e4c66;
+    --ring: #42a5f5;
 
-    /* Borders - Neutral */
-    --theme-color-border-surface: #4e4c66;
+    /* Semantic Borders */
+    --border-primary: #2563eb;
+    --border-secondary: #16a34a;
+    --border-tertiary: #ea580c;
+    --border-success: #1b5e20;
+    --border-warning: #e65100;
+    --border-error: #b71c1c;
+
+    /* Other Tokens */
+    --disabled: #616161;
+    --dimmer: #555555a0;
   }
 }

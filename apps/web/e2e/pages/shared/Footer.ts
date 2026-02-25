@@ -5,6 +5,7 @@ export const getFooter = (page: Page) => {
 
   return {
     footer,
+    privacyPolicy: footer.getByRole('link', { name: 'Privacy Policy' }),
     copyrightLink: footer.getByRole('link', { name: 'Konrád Koller' }),
     githubLink: footer.getByRole('link', { name: 'GitHub' }),
   };

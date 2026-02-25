@@ -3,61 +3,66 @@
 /**
  * Color tokens
  * References theme-specific color values defined in light.css and dark.css
- * These variables are available as Tailwind utilities (e.g., bg-primary, text-on-surface)
+ * These variables are available as Tailwind utilities (e.g., bg-primary, text-foreground)
  */
 @theme {
-  /* Background colors */
-  --color-background: var(--theme-color-background);
-  --color-surface: var(--theme-color-surface);
-  --color-surface-alt: var(--theme-color-surface-alt);
+  /* Main Layout */
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
 
-  /* Primary colors */
-  --color-primary: var(--theme-color-primary);
-  --color-primary-alt: var(--theme-color-primary-alt);
-  --color-on-primary: var(--theme-color-on-primary);
+  /* Surfaces */
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
 
-  /* Secondary colors */
-  --color-secondary: var(--theme-color-secondary);
-  --color-secondary-alt: var(--theme-color-secondary-alt);
-  --color-on-secondary: var(--theme-color-on-secondary);
+  /* Brand Colors */
+  --color-primary: var(--primary);
+  --color-primary-alt: var(--primary-alt);
+  --color-primary-foreground: var(--primary-foreground);
 
-  /* Tertiary colors */
-  --color-tertiary: var(--theme-color-tertiary);
-  --color-tertiary-alt: var(--theme-color-tertiary-alt);
-  --color-on-tertiary: var(--theme-color-on-tertiary);
+  --color-secondary: var(--secondary);
+  --color-secondary-alt: var(--secondary-alt);
+  --color-secondary-foreground: var(--secondary-foreground);
 
-  /* Status colors */
-  --color-success: var(--theme-color-success);
-  --color-warning: var(--theme-color-warning);
-  --color-error: var(--theme-color-error);
-  --color-on-success: var(--theme-color-on-success);
-  --color-on-warning: var(--theme-color-on-warning);
-  --color-on-error: var(--theme-color-on-error);
+  --color-tertiary: var(--tertiary);
+  --color-tertiary-alt: var(--tertiary-alt);
+  --color-tertiary-foreground: var(--tertiary-foreground);
 
-  /* Text colors */
-  --color-on-background: var(--theme-color-on-background);
-  --color-on-surface: var(--theme-color-on-surface);
-  --color-muted: var(--theme-color-muted);
+  /* UI States & Action */
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
 
-  /* UI state colors */
-  --color-dimmer: var(--theme-color-dimmer);
-  --color-disabled: var(--theme-color-disabled);
-  --color-focus: var(--theme-color-focus);
+  /* Status Colors */
+  --color-success: var(--success);
+  --color-success-foreground: var(--success-foreground);
+  --color-warning: var(--warning);
+  --color-warning-foreground: var(--warning-foreground);
+  --color-error: var(--error);
+  --color-error-foreground: var(--error-foreground);
 
-  /* Border colors - semantic (match component variants) */
-  --color-border-primary: var(--theme-color-border-primary);
-  --color-border-secondary: var(--theme-color-border-secondary);
-  --color-border-tertiary: var(--theme-color-border-tertiary);
+  /* Borders & Inputs */
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
 
-  /* Border colors - status */
-  --color-border-success: var(--theme-color-border-success);
-  --color-border-warning: var(--theme-color-border-warning);
-  --color-border-error: var(--theme-color-border-error);
+  /* Semantic Borders */
+  --color-border-primary: var(--border-primary);
+  --color-border-secondary: var(--border-secondary);
+  --color-border-tertiary: var(--border-tertiary);
+  --color-border-success: var(--border-success);
+  --color-border-warning: var(--border-warning);
+  --color-border-error: var(--border-error);
 
-  /* Border colors - neutral */
-  --color-border-surface: var(--theme-color-border-surface);
+  /* Other Tokens */
+  --color-disabled: var(--disabled);
+  --color-dimmer: var(--dimmer);
 
   /* Computed gradients */
-  --background-image-bottom-fadeout: linear-gradient(0deg, var(--color-surface) 60%, transparent 100%);
-  --background-image-radial-primary: radial-gradient(transparent, var(--color-primary));
+  --background-image-bottom-fadeout: linear-gradient(0deg, var(--card) 60%, transparent 100%);
+  --background-image-radial-primary: radial-gradient(transparent, var(--primary));
 }

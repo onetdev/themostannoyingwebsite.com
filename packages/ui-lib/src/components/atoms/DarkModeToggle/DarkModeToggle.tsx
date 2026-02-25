@@ -1,33 +1,34 @@
+import { cva, type VariantProps } from 'class-variance-authority';
 import { FunctionComponent } from 'react';
 
-import { SelectOption } from './SelectOption';
+import { cn } from '../../../utils';
 import { Icon } from '../Icon';
 
-export type DarkModeToggleSize = 'md' | 'lg';
-export type DarkModeToggleProps = {
+const darkModeToggleVariants = cva(
+  'group border-input bg-muted relative flex justify-between rounded-full border transition-all select-none outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2',
+  {
+    variants: {
+      size: {
+        md: 'h-7 w-16',
+        lg: 'h-7 w-16 md:h-9 md:w-20',
+      },
+    },
+    defaultVariants: {
+      size: 'md',
+    },
+  },
+);
+
+export type DarkModeToggleProps = VariantProps<
+  typeof darkModeToggleVariants
+> & {
   className?: string;
-  size?: DarkModeToggleSize;
-  resolvedTheme: 'light' | 'dark';
-  setTheme: (theme: 'light' | 'dark') => void;
+  resolvedTheme?: 'light' | 'dark' | string;
+  setTheme: (theme: string) => void;
   text: {
     lightMode: string;
     darkMode: string;
   };
-};
-
-const resolveSize = (size: DarkModeToggleSize) => {
-  let className: string;
-  switch (size) {
-    case 'lg':
-      className = 'h-7 w-16 md:h-10 md:w-20';
-      break;
-    default:
-    case 'md':
-      className = 'h-7 w-16';
-      break;
-  }
-
-  return className;
 };
 
 export const DarkModeToggle: FunctionComponent<DarkModeToggleProps> = ({
@@ -37,27 +38,45 @@ export const DarkModeToggle: FunctionComponent<DarkModeToggleProps> = ({
   resolvedTheme,
   setTheme,
 }) => {
-  const toggleDarkMode = () => {
-    setTheme(resolvedTheme === 'dark' ? 'light' : 'dark');
-  };
+  const isDark = resolvedTheme === 'dark';
 
-  const sizeClass = resolveSize(size);
-  const isDark = resolvedTheme === 'dark' || !resolvedTheme;
+  const toggleDarkMode = () => {
+    setTheme(isDark ? 'light' : 'dark');
+  };
 
   return (
     <button
-      tabIndex={0}
+      type="button"
+      role="switch"
+      aria-checked={isDark}
+      aria-label={isDark ? text.darkMode : text.lightMode}
       suppressHydrationWarning
       data-dark={isDark.toString()}
-      className={`group border-border-primary bg-surface-alt relative flex justify-between rounded-full border select-none ${sizeClass} ${className}`}
+      className={cn(darkModeToggleVariants({ size, className }))}
       onClick={toggleDarkMode}>
-      <div className="bg-primary absolute inset-y-0 block h-full w-1/2 translate-x-0 rounded-full transition duration-100 ease-in-out group-data-[dark=true]:translate-x-full" />
-      <SelectOption role="img" aria-label={text.lightMode} isSelected={!isDark}>
+      <span
+        suppressHydrationWarning
+        className={cn(
+          'bg-primary absolute inset-y-0 left-0 block h-full w-1/2 rounded-full transition-transform duration-200 ease-in-out',
+          isDark ? 'translate-x-full' : 'translate-x-0',
+        )}
+      />
+      <div
+        suppressHydrationWarning
+        className={cn(
+          'text-card-foreground z-10 flex flex-1 items-center justify-center transition-colors duration-200',
+          !isDark && 'text-primary-foreground',
+        )}>
         <Icon icon="sun" />
-      </SelectOption>
-      <SelectOption role="img" aria-label={text.darkMode} isSelected={isDark}>
+      </div>
+      <div
+        suppressHydrationWarning
+        className={cn(
+          'text-card-foreground z-10 flex flex-1 items-center justify-center transition-colors duration-200',
+          isDark && 'text-primary-foreground',
+        )}>
         <Icon icon="moon" />
-      </SelectOption>
+      </div>
     </button>
   );
 };

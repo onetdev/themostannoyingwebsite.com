@@ -1,121 +1,52 @@
-'use client';
+import { Tooltip as TooltipPrimitive } from 'radix-ui';
+import { ComponentProps } from 'react';
 
-import {
-  FunctionComponent,
-  PropsWithChildren,
-  useEffect,
-  useMemo,
-  useRef,
-  useState,
-} from 'react';
+import { cn } from '../../utils';
 
-type TooltipPosition = 'left' | 'right' | 'top' | 'bottom';
-export type TooltipProps = PropsWithChildren<{
-  text: string;
-}>;
-
-export const Tooltip: FunctionComponent<TooltipProps> = ({
-  text,
-  children,
-}) => {
-  const [visible, setVisible] = useState(false);
-  const [position, setPosition] = useState<TooltipPosition>('top');
-  const $container = useRef<HTMLSpanElement>(null);
-  const $tooltip = useRef<HTMLSpanElement>(null);
-
-  const getSpaceAround = (): Record<TooltipPosition, number> => {
-    if (!$container.current) {
-      return { top: 0, right: 0, bottom: 0, left: 0 };
-    }
-
-    const containerRect = $container.current.getBoundingClientRect();
-    const { innerWidth: viewportWidth, innerHeight: viewportHeight } = window;
-
-    return {
-      top: containerRect.top,
-      right: viewportWidth - containerRect.right,
-      bottom: viewportHeight - containerRect.bottom,
-      left: containerRect.left,
-    };
-  };
-
-  useEffect(() => {
-    if (!visible || !$container.current || !$tooltip.current) {
-      return;
-    }
-
-    const containerRect = $container.current.getBoundingClientRect();
-    const tooltipRect = $tooltip.current.getBoundingClientRect();
-    const space = getSpaceAround();
-
-    const bestPosition = Object.entries(space)
-      .sort(([, a], [, b]) => b - a)
-      .find(([key]) => {
-        if (key === 'top') return containerRect.top > tooltipRect.height;
-        if (key === 'right') return space.right > tooltipRect.width;
-        if (key === 'bottom') return space.bottom > tooltipRect.height;
-        if (key === 'left') return containerRect.left > tooltipRect.width;
-        return false;
-      })?.[0];
-
-    setPosition((bestPosition as TooltipPosition) || 'top');
-  }, [visible]);
-
-  const style = useMemo(() => {
-    if (!$container.current || !$tooltip.current) return {};
-
-    const containerRect = $container.current.getBoundingClientRect();
-    const tooltipRect = $tooltip.current.getBoundingClientRect();
-
-    switch (position) {
-      case 'top':
-        return {
-          left: (tooltipRect.width / 2) * -1,
-          bottom: containerRect.height,
-          paddingBottom: 8,
-        };
-      case 'right':
-        return {
-          left: containerRect.width,
-          top: ((tooltipRect.height - containerRect.height) / 2) * -1,
-        };
-      case 'bottom':
-        return {
-          left: (tooltipRect.width / 2) * -1,
-          top: containerRect.height,
-        };
-      case 'left':
-        return {
-          right: containerRect.width,
-          top: ((tooltipRect.height - containerRect.height) / 2) * -1,
-        };
-      default:
-        return {};
-    }
-  }, [position]);
-
+function TooltipProvider({
+  delayDuration = 0,
+  ...props
+}: ComponentProps<typeof TooltipPrimitive.Provider>) {
   return (
-    <span
-      data-position={position}
-      data-visible={visible}
-      className="group relative inline-block"
-      tabIndex={0}
-      onMouseEnter={() => setVisible(true)}
-      onMouseLeave={() => setVisible(false)}>
-      <span className="cursor-pointer" ref={$container}>
-        {children}
-      </span>
-      {visible && (
-        <span
-          className="absolute z-50 w-96 group-data-[position=bottom]:pt-2 group-data-[position=left]:pr-2 group-data-[position=right]:pl-2 group-data-[position=top]:pb-2"
-          style={style}>
-          <span
-            className="bg-surface text-on-surface inline-block rounded-md p-2 text-xs"
-            ref={$tooltip}>
-            {text}
-          </span>
-        </span>
-      )}
-    </span>
+    <TooltipPrimitive.Provider
+      data-slot="tooltip-provider"
+      delayDuration={delayDuration}
+      {...props}
+    />
   );
-};
+}
+
+function Tooltip({ ...props }: ComponentProps<typeof TooltipPrimitive.Root>) {
+  return <TooltipPrimitive.Root data-slot="tooltip" {...props} />;
+}
+
+function TooltipTrigger({
+  ...props
+}: ComponentProps<typeof TooltipPrimitive.Trigger>) {
+  return <TooltipPrimitive.Trigger data-slot="tooltip-trigger" {...props} />;
+}
+
+function TooltipContent({
+  className,
+  sideOffset = 0,
+  children,
+  ...props
+}: ComponentProps<typeof TooltipPrimitive.Content>) {
+  return (
+    <TooltipPrimitive.Portal>
+      <TooltipPrimitive.Content
+        data-slot="tooltip-content"
+        sideOffset={sideOffset}
+        className={cn(
+          'bg-foreground text-background animate-in fade-in-0 zoom-in-95 data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=closed]:zoom-out-95 data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2 z-50 w-fit origin-(--radix-tooltip-content-transform-origin) rounded-md px-3 py-1.5 text-xs text-balance',
+          className,
+        )}
+        {...props}>
+        {children}
+        <TooltipPrimitive.Arrow className="bg-foreground fill-foreground z-50 size-2.5 translate-y-[calc(-50%_-_2px)] rotate-45 rounded-[2px]" />
+      </TooltipPrimitive.Content>
+    </TooltipPrimitive.Portal>
+  );
+}
+
+export { Tooltip, TooltipTrigger, TooltipContent, TooltipProvider };

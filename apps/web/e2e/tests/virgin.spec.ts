@@ -3,42 +3,45 @@ import { expect, test } from '@playwright/test';
 import { getVirginPage } from '../pages/VirginPage';
 import { setupE2eTestState } from '../utils/setup';
 
-test('visiting virgin page should turn off all experience', async ({
+import { PAIN_PREFERENCES_STORAGE_KEY, PUBLIC_PAIN_POINT_LIST } from '@/stores';
+
+test('visiting virgin page should turn off all pain points', async ({
   page,
 }) => {
   await setupE2eTestState(page); // Ensure initial state is clean
   const virginPage = getVirginPage(page);
   await virginPage.goto(); // Go to the page where flags should be off
 
-  const localStorageState = await page.evaluate(() => {
-    const key = 'zustand-experience-flags-storage';
+  const localStorageState = await page.evaluate((key) => {
     const item = window.localStorage.getItem(key);
     return item ? JSON.parse(item) : null;
-  });
+  }, PAIN_PREFERENCES_STORAGE_KEY);
 
   expect(localStorageState).not.toBeNull();
   expect(localStorageState.state).toEqual({
-    gifts: {
-      detectAdblocker: false,
-      flaps: false,
-      oneByOne: false,
+    flags: {
+      'gifts.detectAdblocker': false,
+      'gifts.flaps': false,
+      'gifts.oneByOne': false,
+      'pageTitle.inactiveArrayPaged': false,
+      'pageTitle.inactiveMarquee': false,
+      'pageTitle.randomGlitch': false,
+      clipboardMarker: false,
+      contentPaywall: false,
+      deadPixel: false,
+      disableContextMenu: false,
+      exitPrompt: false,
+      historySpam: false,
+      mockChat: false,
+      newsletterModal: false,
+      notifications: false,
+      searchDelay: false,
+      stickyVideo: false,
+      wheelOfFortune: false,
     },
-    clipboardMarker: false,
-    contentPaywall: false,
-    deadPixel: false,
-    disableContextMenu: false,
-    exitPrompt: false,
-    historySpam: false,
-    mockChat: false,
-    newsletterModal: false,
-    notifications: false,
-    pageTitle: {
-      inactiveMarquee: false,
-      randomGlitch: false,
-      inactiveArrayPaged: false,
+    publicLevel: {
+      current: 0,
+      max: PUBLIC_PAIN_POINT_LIST.length,
     },
-    searchDelay: false,
-    stickyVideo: false,
-    wheelOfFortune: false,
   });
 });

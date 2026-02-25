@@ -1,7 +1,7 @@
 import { Page } from '@playwright/test';
 
-import { setExperienceFlags, setUserGrants } from './zustand';
-import { allDisabledExperienceFlagsState } from '../fixtures/experience-flags';
+import { setPainPreferences, setUserGrants } from './zustand';
+import { allDisabledPainPreferencesState } from '../fixtures/pain-preferences';
 import { acceptedUserGrantsState } from '../fixtures/user-grants';
 
 /**
@@ -9,6 +9,6 @@ import { acceptedUserGrantsState } from '../fixtures/user-grants';
  * @param page The Playwright page object.
  */
 export async function setupE2eTestState(page: Page) {
-  await setExperienceFlags(page, allDisabledExperienceFlagsState);
+  await setPainPreferences(page, allDisabledPainPreferencesState);
   await setUserGrants(page, acceptedUserGrantsState);
 }

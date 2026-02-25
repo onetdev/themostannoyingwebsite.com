@@ -1,55 +1,89 @@
 import type { Meta, StoryObj } from '@storybook/nextjs';
-import { fn } from 'storybook/test';
 
-import { Button, ButtonProps } from '@maw/ui-lib';
+import { Button } from './Button';
 
-const meta: Meta<ButtonProps> = {
-  title: 'Example/Button',
+const meta = {
+  title: 'Atoms/Button',
   component: Button,
-  parameters: {},
   tags: ['autodocs'],
-  argTypes: {
-    variant: {
-      description: 'The variant of the button',
-    },
-    children: {
-      description:
-        'The content of the button which can be either another component or text',
-    },
-    size: {
-      description: 'The size of the button',
+  parameters: {
+    docs: {
+      description: {
+        component:
+          'Core Shadcn Button component. See [official documentation](https://ui.shadcn.com/docs/components/button).',
+      },
     },
   },
+  argTypes: {
+    variant: {
+      control: 'select',
+      options: [
+        'default',
+        'destructive',
+        'outline',
+        'secondary',
+        'ghost',
+        'link',
+      ],
+    },
+    size: {
+      control: 'select',
+      options: [
+        'default',
+        'xs',
+        'sm',
+        'lg',
+        'icon',
+        'icon-xs',
+        'icon-sm',
+        'icon-lg',
+      ],
+    },
+  },
+} satisfies Meta<typeof Button>;
+
+export default meta;
+type Story = StoryObj<typeof meta>;
+
+export const Default: Story = {
   args: {
-    onClick: fn(),
+    children: 'Button',
+    variant: 'default',
+    size: 'default',
   },
 };
 
-export default meta;
-type Story = StoryObj<ButtonProps>;
-
-export const Primary: Story = {
+export const Destructive: Story = {
   args: {
-    behavior: 'button',
-    variant: 'primary',
-    children: 'Button',
+    children: 'Destructive',
+    variant: 'destructive',
+  },
+};
+
+export const Outline: Story = {
+  args: {
+    children: 'Outline',
+    variant: 'outline',
   },
 };
 
 export const Secondary: Story = {
   args: {
-    behavior: 'button',
+    children: 'Secondary',
     variant: 'secondary',
-    children: 'Button',
+  },
+};
+
+export const Ghost: Story = {
+  args: {
+    children: 'Ghost',
+    variant: 'ghost',
   },
 };
 
 export const Link: Story = {
   args: {
-    behavior: 'link',
-    variant: 'primary',
-    children: 'Anchor Link',
-    href: 'https://google.com',
-    target: '_blank',
+    children: 'Link',
+    variant: 'link',
   },
 };

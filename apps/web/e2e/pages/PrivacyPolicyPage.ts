@@ -11,7 +11,10 @@ export const getPrivacyPolicyPage = (page: Page) => {
     ...header,
     ...footer,
 
-    headline: page.getByRole('heading', { name: 'Privacy Policy' }),
+    headline: page.getByRole('heading', {
+      name: 'Privacy Policy',
+      exact: true,
+    }),
 
     goto: async () => {
       await page.goto('/en/privacy-policy');

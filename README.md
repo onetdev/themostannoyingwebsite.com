@@ -1,80 +1,39 @@
 # The Most Annoying Website
 
-The main idea is to gather the most annoying features of modern websites in one place, but on steroids. We refer to these irritating elements as “experiences.” The entire website is a fake facade; no feature functions as it would in a normal scenario.
+Gathering and concentrating the most annoying features of modern websites in one place, on steroids. The entire website is a fake facade filled with fun little Easter eggs; no feature functions as it would in a normal scenario.
 
-## Plans for project (_in no particular order_)
+## Mission
 
-**Important**: *To avoid ad blockers, this repo uses the word “gift” instead of terms resembling ad-related content (e.g., promotion, advertisement).*
+- Collecting the most annoying practices from the web and mobile.
+- No personal data is transmitted or stored.
+- Accessibility in focus — despite being annoying.
+- Focus on static builds rather than dynamic server-side capabilities.
 
-<details>
-  <summary>TODO / Planned</summary>
+## Development cycle
 
-  - [ ] **Funny, silly content** - can't stop won't stop, ongoing
-  - [ ] Create a captcha where you need to select all the images with a car on it but none of the images have a car on them and captcha fails
-  - [ ] Age verification on certain contents
-  - [ ] Add holiday related (Halloween, Christmass, Easter) small animated images that follow the mouse cursor
-  - [ ] Clippy style figure popping up from the corner with obvious hints
-  - [ ] Donation modal poping up
-  - [ ] Red donation bar for "campaign"
-  - [ ] Creating documentation for all the different annoying things
+Upcoming roadmap items on the [MAW GitHub project board](https://github.com/users/onetdev/projects/2)
 
-</details>
-
-<details>
-  <summary>Completed</summary>
-
-  - [x] Push elements to navigation stack so that when the user tries to navigate back it will stay on the page
-  - [x] Add advertisement content to clipboard when copying text
-  - [x] Add flashing animation to flaim phone
-  - [x] Adblocker detection
-  - [x] Prevent rightclick
-  - [x] Fake advertisements (free phone)
-  - [x] Add disabled mandatory experience checkboxes to settings
-  - [x] DILF advertisement and landing page
-  - [x] Sticky video player that obscures page visibility
-  - [x] Newsletter modal that appears when the user leaves the screen or scrolls down a bit
-  - [x] Fake search page that:
-    - [x] Silly recommended searches
-    - [x] Doesn’t actually work or return any results
-  - [x] Fake signup:
-    - [x] Difficult age selector
-    - [x] Password validator that shows only one error and has absurdly complex rules that contradict each other
-  - [x] Fake login with an unsolvable captcha
-  - [x] Fake “forgot password” page with a message like “LOL, try harder next time, can’t help you”
-  - [x] Multilanguage support
-  - [x] Chat bubble with incoming messages and notification sound
-  - [x] “Read more” link at the bottom of articles
-  - [x] Marquee text
-  - [x] Wheel of Fortune-style coupon modal
-  - [x] Exit confirmation when trying to leave the page
-  - [x] Dynamic title update when the user is on another tab
-  - [x] Request for notification permission (don’t worry, the website won’t send any notifications)
-  - [x] Dead pixel effect
-  - [x] Funny, silly content (Part 1)
-</details>
-
-<details>
-  <summary>TBD / bit of a stretch</summary>
-
-  - [ ] **Move the articles outside of this repo** - once the size of contents becomes a concern
-  - [ ] **Request for location permission** - not quite sure in this one, even though we don't do anything with this data, asking for it might be over the top. Potentially this could trigger once someone does a search.
-  - [ ] **Design** - even though the site is fine with a bad design
-  - [ ] Dead pixel patch
-  - [ ] Randomly loading images while scrolling (causing layout shifting)
-  - [ ] Random dark-light mode switching - we could flashbang night owls
-</details>
+Past releases and changelog items under [MAW releases](https://github.com/onetdev/themostannoyingwebsite.com/releases)
 
 ## Project tech
 
-### Frameworks
+### Tooling
 
-The stack is the usual: Next.JS + TypeScript + TailwindCSS. If you’re not familiar with these but still want to add your own experiences or tweaks, you can find excellent documentation here:
+- [pnpm](https://pnpm.io/) - Node.js package manager
+- [TypeScript](https://www.typescriptlang.org/docs/) - JavaScript typed superset language.
+- [Turborepo](https://turbo.build/repo/docs) - Monorepo tooling
+- [Playwright](https://playwright.dev/) - E2E testing framework
+- [Jest](https://jestjs.io/) - Unit testing framework
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [TypeScript Documentation](https://www.typescriptlang.org/docs/) - learn about TypeScript features and API.
-- [TailwindCSS Documentation](https://tailwindcss.com/docs) - learn about TailwindCSS features and API.
-- [Turborepo Documentation](https://turbo.build/repo/docs) - learn about Turborepo features and API.
-- [pnpm Documentation](https://pnpm.io/) - learn about pnpm features and API.
+### Framework and libraries
+
+- [Next.js](https://nextjs.org/) - Web application framework
+- [Storybook](https://storybook.js.org/) - Interactive showcase for components
+- [TailwindCSS](https://tailwindcss.com/docs) - Utility-first styling
+- [Shadcn](https://ui.shadcn.com/) + [Radix](https://www.radix-ui.com/) - UI framework
+- [Zustand](https://github.com/pmndrs/zustand) - Multi-store state management
+- [Zod](https://github.com/colinhacks/zod) - Validation & data structure description
+- [Sentry](https://docs.sentry.io/platforms/javascript/guides/nextjs/) + [Vercel Analytics](https://vercel.com/docs/analytics/package) - Monitoring
 
 ### Testing
 
@@ -172,17 +131,17 @@ Open [https://localhost:3000](https://localhost:3000) in your browser to see the
 
 ## Translation
 
-Translation in this project has two fronts. Content and UI translation.
+Translation in this project happens on two fronts: content and UI.
 
 ### UI translation
 
-This is being done using next-intl, which is a great library for i18n in Next.js. It allows you to easily manage translations and provides a simple API for switching between languages.
+This is handled using `next-intl`. It allows you to manage translations and provides a simple API for switching between languages.
 
-Unfortunately, the library is not perfect and has some limitations. We don't have routes without language prefix and all the app code needs to be in a localisation folder, but since we do static build we are fine.
+Note that the app currently uses a language prefix for all routes, and all application code resides within a localization folder. This approach is compatible with our static build strategy.
 
-Feel free to create your own translation in the `apps/web/src/i18n/messages` folder. The translations are in JSON format, so you can easily add your own translations by creating a new file with the language code (e.g., `en.ts`, `hu.ts`, etc.) and adding the translations there. Don't forget to update configs either.
+Feel free to contribute translations in the `apps/web/src/i18n/messages` folder. Translations are in JSON format; simply create a new file with the language code (e.g., `en.json`, `hu.json`, etc.) and add the keys. Remember to update the relevant configurations.
 
-Planned UI translation support - probably with some poor translation software so that it adds an extra layer of annoyance:
+Planned UI translation support (potentially using low-quality translation software for added annoyance):
 
 - [x] English
 - [ ] Hungarian
@@ -198,29 +157,29 @@ Planned UI translation support - probably with some poor translation software so
 
 ### Content translation
 
-The content translation is done using the `packages/content-api` package. The way how content translation is done will change but as for now we have all the content, image and metadata in this package.
+Content translation is managed via the `packages/content-api` package. Currently, all content, images, and metadata are bundled within this package.
 
-**For detailed info please see `packages/content-api/README.MD`**
+**For detailed information, please see `packages/content-api/README.md`**
 
 ## Deployment
 
-PRs are automatically published to Vercel as previews (you can find preview URLs in PRs), and the `main` branch is deployed to our main domain with every new commit.
+Pull Requests are automatically published to Vercel as previews, and the `main` branch is deployed to our primary domain with every new commit.
 
 ## Contribution
 
-This project is open for contributions! If you have ideas to add, don’t hesitate — **start your PR today, the world needs you, ACT NOW!**
+This project is open for contributions! If you have ideas, don’t hesitate — **start your PR today! The world needs you, ACT NOW!**
 
 ## Support
 
-Pay a visit to https://onet.dev, drop me an email.
+Visit [onet.dev](https://onet.dev) or drop me an email.
 
 ### 3rd party credits
 
-- AI disclaimer: Article covers and contents are generated via AI (DALLe, ChatGPT), curated by humans.
-- Notification sound for "live chat": https://github.com/akx/Notifications under licence CC0
-- Cookie jar animation on donation page: https://lottiefiles.com/free-animation/saving-the-money-C9plsMchxQ
-- Icons: https://fontawesome.com
-- Lava photo on "Hot Things" (Tanya Grypachevskaya): https://unsplash.com/photos/80x3QULJDN4
+- **AI disclaimer**: Article covers and content are generated via AI (DALL-E, ChatGPT) and curated by humans.
+- **Notification sound for "live chat"**: [akx/Notifications](https://github.com/akx/Notifications) under license CC0.
+- **Cookie jar animation on donation page**: [Saving the Money](https://lottiefiles.com/free-animation/saving-the-money-C9plsMchxQ) on LottieFiles.
+- **Icons**: [FontAwesome](https://fontawesome.com).
+- **Lava photo on "Hot Things"** (by Tanya Grypachevskaya): [Unsplash](https://unsplash.com/photos/80x3QULJDN4).
 
 ---
 

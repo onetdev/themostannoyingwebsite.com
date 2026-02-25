@@ -1,50 +1,50 @@
-# Static article store
+# Static Article Store
 
-This folder contains all the assets for the articles - for now, temporarily. Once we have so many content that this becomes a bottleneck we will replace it with a proper headless cms solution 🤷.
+This package currently acts as a temporary asset store for articles. Once the volume of content becomes a bottleneck, it will be replaced by a proper headless CMS solution.
 
 ## Usage
 
-Index data to be generated, therefore must be run for dist and dev builds.
+Indexes must be generated for both production and development builds:
 ```bash
 pnpm run build:index
 ```
 
-As for VSC json schema support you will also need to run:
+To enable JSON schema support in VS Code, run:
 ```bash
 pnpm run build:schema
 ```
 
-## How to add new article?
+## How to add a new article
 
-Create a folder that has the following naming pattern:
+Create a folder following this naming pattern:
 
 `{lang-code}-{article-id}-{title-slug}`
 
-- `lang-code` should be a supported locale code, 2 chars long
-- `article-id` incremental number
-- `title-slug` will be displayed in the URL when user opens an article
+- `lang-code`: A supported 2-character locale code.
+- `article-id`: An incremental numeric ID.
+- `title-slug`: The URL-friendly version of the title.
 
-Within this folder, you will need to create `data.yml` which will contain the most important info about certain article. Date time format must be in ISO-8601.
+Inside this folder, create a `data.yml` file containing the article's metadata. Date/time must follow the ISO 8601 format.
 
 ```yaml
 title: The title of an article
 language: en
-intro: Simple intro for the article
+intro: A brief introduction for the article.
 dateTime: 2024-10-10T14:49:00Z
-mode: {markdown|html, default = markdown}
+mode: markdown # options: markdown | html (default is markdown)
 content: |
-  Intro paragraph
+  Intro paragraph.
 
   ### A little header
 
-  Another paragraph
+  Another paragraph.
 ```
 
-And lastly, you can optionally (but strongly recommended) a `cover.webp` file that will represent your article.
+Adding a `cover.webp` file for each article is strongly recommended.
 
-## How to manage front page and article highlights
+## Managing front page and highlights
 
-You only need to edit (or create) `{lang-code}-meta.json` and add folder names to the relevant part.
+To manage featured content, edit (or create) `{lang-code}-meta.json` and add the corresponding folder names:
 
 ```json
 {
@@ -53,6 +53,6 @@ You only need to edit (or create) `{lang-code}-meta.json` and add folder names t
   ],
   "highlighted": [
     "en-666-your-article-slug"
-  ],
+  ]
 }
 ```

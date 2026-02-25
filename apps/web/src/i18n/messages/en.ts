@@ -1,6 +1,8 @@
+import commentVariants from './en/commentVariants';
 import wanPhoneQuestionVariants from './en/wanPhoneQuestionVariants';
 
 export default {
+  commentVariants,
   app: {
     title: 'The Most Annoying Website',
     description:
@@ -8,10 +10,12 @@ export default {
     recruiting:
       'Want to extend what you see here? Visit our <linkTag>GitHub</linkTag> repo to get started.',
     aiDisclose:
-      'AI text and image generation was used to produce contents of this website.',
-    copyright: 'Copyright © {year} The Most Annoying Website',
+      'This website utilizes generative AI for creative content and media. Any resemblance to helpful information is purely coincidental.',
+    copyright: '© {year} The Most Annoying Website. All rights reserved.',
     dataStorageDisclaimer:
-      "We don't store any form data of: newsletter subscriptions, login, signup, password reminder.",
+      'Privacy First: We do not persist sensitive form inputs or user credentials.',
+    noWarranties:
+      'Provided "as is" without warranty. We are not responsible for your lost time or frustration.',
     cookieConsent:
       "This website uses cookies to ensure you get the best experience on our website. It's also a joke so many of the features are buggy or doens't even work on purpose. You can customize your experience and cookie settings in the settings menu.",
     donate: {
@@ -36,6 +40,11 @@ export default {
       disclaimer: 'Disclaimer',
       disclaimerDetails:
         'This project is developed by a private individual based in Hungary. Any financial support or donation— including crypto—is voluntary, final, and does not grant you any rights, services, or special access. Donations are not tax-deductible.<br></br><br></br>No legal, tax, or financial advice is provided. If you have questions about donating or your own tax obligations, please consult a qualified professional in your jurisdiction.<br></br><br></br>All funds received are handled in accordance with applicable Hungarian tax laws.',
+      crypto: {
+        network: 'Network: {network}',
+        copyAction: 'Copy Address',
+        copyFeedback: 'Copied!',
+      },
     },
     exitPrompt:
       "I'd reconsider leaving before some bad things happend to you. Are you sure?",
@@ -46,6 +55,19 @@ export default {
         'All experiences are disabled now. If you want share this page just for the content just pass this URL around. If you changed your mind, you can re-enable all experiences in the settings menu.',
     },
     toggleMenu: 'Toggle menu',
+    contactForm: {
+      title: 'Official contact form',
+      subject: 'Subject',
+      message: 'Message',
+      send: 'Send',
+      placeholderSubject: 'What is this about?',
+      placeholderMessage: 'Type your message here...',
+      alternative:
+        'Alternatively, you can reach us directly at <linkTag>{email}</linkTag>',
+      intro: 'Feel free to contact us if you have any questions or feedback.',
+      reportIssues:
+        'If you encounter any technical issues or want to suggest new pain points, please <linkTag>report them on GitHub</linkTag>.',
+    },
   },
   beggingBanner: {
     prefix: '🚨 Support Needed:',
@@ -82,6 +104,8 @@ export default {
     privacyPolicy: 'Privacy Policy',
     hotThings: 'Hot things',
     dilf: 'DILF',
+    plans: 'AI plans',
+    personal: 'Personal',
   },
   metadata: {
     app: {
@@ -159,6 +183,11 @@ export default {
       description:
         'Looking for a no-frills experience? Disable all personalized features here and enjoy a streamlined, distraction-free version of our site.',
     },
+    plans: {
+      title: 'AI Packages & Plans',
+      description:
+        'Choose from our selection of premium, 100% fake AI packages. Experience the future of annoyance today!',
+    },
     admin: {
       title: 'Admin Terminal',
       description:
@@ -171,6 +200,7 @@ export default {
     backHome: 'Back to home',
     cancel: 'Cancel',
     close: 'Close',
+    completed: 'Completed',
     confirm: 'Confirm',
     decline: 'Decline',
     delete: 'Delete',
@@ -185,13 +215,16 @@ export default {
     loading: 'Loading...',
     next: 'Next',
     no: 'No',
+    notAvailable: 'n/a',
     notSet: 'Not set',
     ok: 'OK',
     pending: 'Pending',
     placeholderSearch: 'Search...',
+    reply: 'Reply',
     reset: 'Reset',
     save: 'Save',
     search: 'Search',
+    select: 'Select',
     send: 'Send',
     share: 'Share',
     submit: 'Submit',
@@ -284,6 +317,7 @@ export default {
     field: {
       consentNewsletter: 'I want to receive newsletter',
       consentPrivacyPolicy: 'Accept privacy policy',
+      consentChildSoul: "My first born child's soul",
       countryCode: 'Country',
       dateOfBirth: 'Date of birth',
       dateOfBirthYear: 'Year',
@@ -329,6 +363,27 @@ export default {
       robot: 'Robot',
     },
   },
+  comments: {
+    sectionTitle: 'Comments',
+    formTitle: 'Add your comment',
+    reply: 'Reply',
+    showReplies: 'Show {count} replies',
+    hideReplies: 'Hide replies',
+    disclaimer:
+      "All comments are generated for entertainment purposes and are not real. You won't be able actually post any comment.",
+    loginRequired: {
+      title: 'Login Required',
+      description:
+        'You need to be logged in to perform this action. Please log in or create an account to continue.',
+      login: 'Login',
+      cancel: 'Cancel',
+    },
+    form: {
+      name: 'Name',
+      comment: 'Comment',
+      submit: 'Submit comment',
+    },
+  },
   settings: {
     userPreferences: {
       title: 'Preferences',
@@ -353,8 +408,27 @@ export default {
       notificationPermission: 'Notification permission',
       locationPermission: 'Location permission',
     },
-    optionalExperienceFlags: {
-      title: 'Optional experience',
+    optionalPainPoints: {
+      title: 'Optional pain points',
+      categories: {
+        browser: 'Browser & Tab',
+        visual: 'Visual Obstructions',
+        ads: 'Advertising & Monetization',
+        interactivity: 'Popups & Interactivity',
+      },
+      screensaverTimeout: 'Timeout',
+      screensaverVariant: 'Variant',
+      screensaverVariantOptions: {
+        bouncingLogo: 'Bouncing Logo',
+        maze: '3D Maze 95',
+      },
+      screensaverTimeoutOptions: {
+        '15': '15 seconds',
+        '30': '30 seconds',
+        '60': '1 minute',
+        '300': '5 minutes',
+        '900': '15 minutes',
+      },
       gifts: {
         detectAdblocker: 'Detect adblocker',
         flaps: 'Background ad flaps',
@@ -369,10 +443,46 @@ export default {
       mockChat: 'Bubble chat',
       newsletterModal: 'Newsletter popup modal',
       notifications: 'Notifications',
+      screensaver: 'Screensaver',
       pageTitleInactiveArrayPaged: 'Alternative title when tab is inactive',
       searchDelay: 'Fake search delay',
       wheelOfFortune: 'Wheel of fortune',
       stickyVideo: 'Sticky video',
+    },
+    optionalPainPointsHints: {
+      screensaver:
+        'Triggers a user selected screensaver after the specified period of total inactivity.',
+      gifts: {
+        detectAdblocker:
+          'Shows a large red banner if an adblocker is detected.',
+        flaps:
+          'Shows ad flaps on the sides of the page that can be clicked and leads to different pages.',
+        oneByOne: 'Mainly covered an animated advertisement on the home page.',
+      },
+      clipboardMarker:
+        'Adds a "Read more at..." link when you copy text from the website.',
+      contentPaywall:
+        'Shows a fake paywall overlay on some content, you can still reveal the content.',
+      deadPixel: 'Places a few fake "dead" pixels on your screen to annoy you.',
+      disableContextMenu:
+        'Prevents you from using the right-click menu and displays an alert instead.',
+      exitPrompt:
+        'Shows a "Are you sure you want to leave?" prompt when trying to close the tab or navigate away.',
+      historySpam:
+        "Fills your browser history with fake entries so you can't easily go back. This can make it inconvinient to get back to search engine results.",
+      mockChat:
+        'Shows an annoying "human" chat bubble that only messages you when you close it and it constantly displays "agent is writing" in the meantime.',
+      newsletterModal:
+        'Periodically shows a newsletter subscription modal, especially when page comes back from inactivity (switching tabs).',
+      notifications:
+        'Asks for notification permissions and shows fake notifications.',
+      pageTitleInactiveArrayPaged:
+        'Changes the tab title to something attention-grabbing when the tab is inactive.',
+      searchDelay: 'Adds a fake, long loading delay to all searches.',
+      wheelOfFortune:
+        'Shows a fake "Wheel of Fortune" modal that gives you absolute useless prizes.',
+      stickyVideo:
+        'Shows a sticky video player that follows you as you scroll.',
     },
     mandatoryExperienceFlags: {
       title: 'Mandatory experience',
@@ -381,19 +491,25 @@ export default {
       impossiblePasswordReminder: 'Impossible password reminder',
       unreasonableContent: 'Unreasonable content',
       flaimYourPhone: 'Flaim your phone',
+      fakeAiSubscription: 'Fake AI subscription plans',
     },
     runtime: {
       title: 'About this session',
       disclaimer:
-        'These values reset every single visit and acts as a bit of debug info.',
-      startedAgo: 'Started:',
-      visibilitySeconds: 'Elapsed seconds:',
-      isDocumentVisible: 'Is this window in focus?',
-      navigationCount: 'Navigation count:',
-      interactionUnlocked: 'Had first interaction?',
-      flaimSurveyResult: 'Flaim survey result:',
+        'Information listed below serves as debug information for the current browser session (if you refresh the page, everything will reset). Behind the scenes these valeus also have huge impact on what and how happens.',
+      startedAgo: 'Session started',
+      visibilitySeconds: 'Time spent in focus',
+      isDocumentVisible: 'Currently in focus',
+      navigationCount: 'Navigation count',
+      userActivation: 'Initial user action',
+      lastActivation: 'Last user activity',
+      flaimSurveyResult: 'Flaim survey result',
       adblockerSuspected: 'Adblocker suspected',
       adblockerNotDetected: 'Adblocker not detected',
+    },
+    screensaver: {
+      exitClick: 'Click anywhere to exit screensaver',
+      exitTap: 'Tap anywhere to exit screensaver',
     },
   },
   share: {
@@ -405,9 +521,9 @@ export default {
   },
   notification: {
     modal: {
-      title: 'You can manually change the notification permission up here',
+      title: 'Oh no, where is the notification permission!?!',
       description:
-        'We would like to send you notifications sometimes, could you be so kind to allow us to do so? 🙏🥺🙏',
+        "We would like to send you notifications sometimes. You can give notification permission to this website from your browser's settings. Could you? 🙏🥺🙏",
     },
   },
   newsletter: {
@@ -446,7 +562,7 @@ export default {
   paywall: {
     overlay: {
       title:
-        'You either gotta pay $0.69/hour with 24 months of commitment in order to see the next paragraph or need to keep clicking the secondary button.',
+        'You either gotta pay {price}/hour with 24 months of commitment in order to see the next paragraph or need to keep clicking the secondary button.',
       disclaimer:
         "it might not be as secure and legit but that doesn't matter because you can't actually pay on this website.",
       confirm: 'Pay! 100% legit and secure',
@@ -533,7 +649,7 @@ export default {
   },
   wheelOfFortune: {
     title: 'Wheel of fortune',
-    spinStart: "Let's spin the wheel!!",
+    spinStart: 'Click or Tap here!',
     spinWin: 'You won! {prize}',
     prizeVariants: {
       freeLifetimeBeer: 'Free lifetime beer',
@@ -608,5 +724,113 @@ export default {
     playVideo: 'Play video',
     videoPlaybackFailed: 'Video playback failed',
     pictureOfYou: 'Picture of you',
+  },
+  plansPage: {
+    headline: 'The Ultimate AI Upgrade *',
+    disclaimer: {
+      title: '* DISCLAIMER!',
+      description:
+        "Everything on this page is 100% fake. These packages do not exist, and purchasing them is impossible because we don't have a payment processor, or even a real backend for that matter.",
+    },
+    urgency: {
+      title: 'LIMITED TIME OFFER!',
+      description:
+        '{timer} left until these huge discounts are gone for good. This is a once in a lifetime opportunity, do not let your grandkids down!',
+      compact: 'LIMITED OFFER! -{discount}% {timer}',
+      expired: 'SORRY! You just missed the sale!',
+    },
+    billing: {
+      monthly: 'Monthly',
+      yearly: 'Yearly',
+      biyearly: '2 Years',
+      cycle: {
+        monthly: 'billed monthly',
+        yearly: 'billed every year',
+        biyearly: 'billed every 2 years',
+      },
+      chargeDisclaimer: 'You will be charged {amount} today',
+    },
+    mostPopular: 'Most Popular',
+    pricePerMonth: '{price}/mo',
+    discount: '-{amount}%',
+    table: {
+      features: 'Features',
+    },
+    features: {
+      lowTierLimits: 'Limited in every possible ways',
+      superSlowSpeed: 'Intentionally slow',
+      adSupported: 'Ad-supported (Lots of them)',
+      ramPriceSpike: 'Spike RAM prices',
+      gpuPriceSpike: 'Spike GPU prices',
+      creativeMath: 'Creative Arithmetic (1+1=5)',
+      fakeFacts: '100% Confident Lies',
+      imaginarySources: 'Imaginary Citations',
+      heavySighs: 'Audible Digital Sighing',
+      judgmentalEllipses: 'Judgmental Ellipses...',
+      submissive: 'Everything you do is AWESOME',
+      exEmails: '3 AM Emails to Exes',
+    },
+    packages: {
+      poorified: {
+        title: 'Super Poorified Basic',
+        description:
+          'Our most humble offering. So basic it makes dial-up look like fiber. Expect constant buffering and moral judgment from our AI.',
+      },
+      sufficient: {
+        title: 'Barely Sufficient Premium',
+        description:
+          'The sweet spot of frustration. Just enough to keep you annoyed but not enough to actually be useful. Now with premium digital sighing.',
+      },
+      delux: {
+        title: 'Ultra Premium Delux Elite Pro Max',
+        description:
+          'The ultimate peak of digital misery. Now with 400% more unnecessary features and automated 3 AM regret emails sent to your ex.',
+      },
+    },
+    socialProof: {
+      justSubscribed: '{name} from {location} just subscribed to {plan}!',
+      names: [
+        'John D.',
+        'Sarah K.',
+        'Karen L.',
+        'Chad M.',
+        'Anonymous Hippo',
+        'Your Ex',
+        'A Literal Bot',
+        'Someone better than you',
+        'Disappointed Parent',
+        'Satoshi N.',
+      ],
+      locations: [
+        'the Metaverse',
+        'a dark basement',
+        'their parents house',
+        'Mars (soon™)',
+        'the Cloud',
+        'Limbo',
+        'Incognito Mode',
+        'the future',
+        'debt',
+        'Hungary',
+      ],
+    },
+  },
+  painPreferences: {
+    levelSettings: {
+      label: 'Pain level',
+      clamps: {
+        from_0: 'Innocent',
+        from_10: "It's a bit odd, innit?",
+        from_20: 'Mildly annoying',
+        from_30: 'A wee bit cursed',
+        from_40: 'Unsettling in a very specific way',
+        from_50: 'Just the right amount',
+        from_60: 'Higher-than-average tolerance',
+        from_70: 'Stepping in dog excrement barefoot',
+        from_80: 'Borderline masochistic',
+        from_90: 'Nightmares? Subscribed.',
+        from_100: 'Max Pain',
+      },
+    },
   },
 };
