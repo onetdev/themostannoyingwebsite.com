@@ -5,6 +5,7 @@ import { ChatMessage, ChatMessageType } from '../schemas';
 
 import { useAudio, useSendNotification } from '@/hooks';
 import { useRuntimeStore, useUserPreferencesStore } from '@/stores';
+import { useMount } from 'react-use';
 
 export function useChatBubbleHistory() {
   const t = useTranslations();
@@ -82,8 +83,21 @@ export function useChatBubbleHistory() {
     }
   }, [isForeground]);
 
-  // eslint-disable-next-line react-hooks/exhaustive-deps -- just a mount effect
-  useEffect(() => add(t('chatBubble.messageInitial'), 'bot'), []);
+  useMount(() => {
+    setHistory((prev) => {
+      if (prev.length > 0) {
+        return prev;
+      }
+
+      return [
+        {
+          text: t('chatBubble.messageInitial'),
+          owner: 'bot',
+          time: new Date(),
+        },
+      ];
+    });
+  });
 
   return {
     add,
