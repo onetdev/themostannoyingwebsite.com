@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { ComponentProps, useEffect, useState } from 'react';
 
 import { CookieConsent } from './CookieConsent';
 import { GlobalShareModal } from './GlobalShareModal';
@@ -18,7 +18,7 @@ import { WheelOfFortune } from '@/features/promotion/components/WheelOfFortune';
 import { ChatBubble } from '@/features/support/components/ChatBubble';
 import { usePainPreferencesStore, useUserGrantsStore } from '@/stores';
 
-type PainDecoratorLayoutProps = JSXProxyProps<'div'>;
+type PainDecoratorLayoutProps = ComponentProps<'div'>;
 
 export function PainDecoratorLayout({
   children,

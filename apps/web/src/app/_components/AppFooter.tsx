@@ -1,11 +1,12 @@
 import { getTranslations } from 'next-intl/server';
+import { ComponentProps } from 'react';
 
 import { FOOTER_NAVIGATION_LINKS } from '@/app/navigation';
 import { Link } from '@/i18n/navigation';
 import { getAppConfigService } from '@/services';
 
 export type AppFooterProps = {
-  className: JSXProxyProps<'footer'>['className'];
+  className: ComponentProps<'footer'>['className'];
 };
 
 export async function AppFooter({ className }: AppFooterProps) {

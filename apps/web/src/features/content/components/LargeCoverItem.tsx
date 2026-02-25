@@ -1,12 +1,13 @@
 import Image from 'next/image';
 import { useTranslations } from 'next-intl';
+import { ComponentProps } from 'react';
 
 import { CoverPlaceholder } from './CoverPlaceholder';
 import { ArticleDatum } from '../schemas';
 
 import { Link } from '@/i18n/navigation';
 
-export type LargeCoverItemProps = JSXProxyProps<'article'> & {
+export type LargeCoverItemProps = ComponentProps<'article'> & {
   article: ArticleDatum;
 };
 

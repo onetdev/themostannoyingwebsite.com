@@ -1,8 +1,10 @@
+import { ComponentProps } from 'react';
+
 import { ArticleDatum } from '../schemas';
 
 import { Link } from '@/i18n/navigation';
 
-export type TextListItemProps = JSXProxyProps<'article'> & {
+export type TextListItemProps = ComponentProps<'article'> & {
   article: ArticleDatum;
 };
 

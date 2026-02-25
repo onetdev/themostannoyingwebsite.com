@@ -1,4 +1,4 @@
-import { PropsWithChildren } from 'react';
+import { ComponentProps, PropsWithChildren } from 'react';
 
 import { AppFooter } from './AppFooter';
 import { AppHeader } from './AppHeader';
@@ -7,7 +7,7 @@ import { ActiveNavigationItem } from '@/app/navigation';
 
 type PageLayoutProps = PropsWithChildren<
   { activeItem?: ActiveNavigationItem; autoPadding?: boolean } & Pick<
-    JSXProxyProps<'main'>,
+    ComponentProps<'main'>,
     'role' | 'className'
   >
 >;

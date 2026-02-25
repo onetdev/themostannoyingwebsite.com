@@ -1,16 +1,17 @@
 'use client';
-import { FunctionComponent, useEffect, useState } from 'react';
 
-export type DotDotDotTextProps = JSXProxyProps<'span'> & {
+import { ComponentProps, useEffect, useState } from 'react';
+
+export type DotDotDotTextProps = ComponentProps<'span'> & {
   stepDurationMs?: number;
   message?: string;
 };
 
-export const DotDotDotText: FunctionComponent<DotDotDotTextProps> = ({
+export function DotDotDotText({
   stepDurationMs = 400,
   message,
   ...rest
-}) => {
+}: DotDotDotTextProps) {
   const [iteration, setIteration] = useState(0);
 
   useEffect(() => {
@@ -25,4 +26,4 @@ export const DotDotDotText: FunctionComponent<DotDotDotTextProps> = ({
       {message} {'.'.repeat(iteration)}
     </span>
   );
-};
+}

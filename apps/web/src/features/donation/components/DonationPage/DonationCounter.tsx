@@ -1,11 +1,11 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { ComponentProps, useEffect, useState } from 'react';
 
 import { SlotDigit } from './SlotDigit';
 import { useDonationBalance } from '../../hooks';
 
-export type DonationCounterProps = JSXProxyProps<'div'>;
+export type DonationCounterProps = ComponentProps<'div'>;
 
 export function DonationCounter({ className, ...rest }: DonationCounterProps) {
   const amount = useDonationBalance();

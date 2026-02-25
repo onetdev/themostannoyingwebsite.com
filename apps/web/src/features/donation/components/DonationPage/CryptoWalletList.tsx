@@ -1,10 +1,12 @@
 'use client';
 
+import { ComponentProps } from 'react';
+
 import { CryptoWallet } from './CryptoWallet';
 
 import { useAppConfig } from '@/contexts/AppConfig';
 
-export type CryptoWalletListProps = JSXProxyProps<'div'>;
+export type CryptoWalletListProps = ComponentProps<'div'>;
 
 export function CryptoWalletList({
   className,

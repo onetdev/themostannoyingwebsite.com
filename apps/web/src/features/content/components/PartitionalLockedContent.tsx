@@ -3,10 +3,16 @@
 import { Button } from '@maw/ui-lib';
 import { formatCurrency } from '@maw/utils/formatter';
 import { useTranslations } from 'next-intl';
-import React, { PropsWithChildren, useMemo, useRef, useState } from 'react';
+import React, {
+  ComponentProps,
+  PropsWithChildren,
+  useMemo,
+  useRef,
+  useState,
+} from 'react';
 
 export type PartitionalLockedContentProps = Omit<
-  JSXProxyProps<'div'>,
+  ComponentProps<'div'>,
   'styles'
 > &
   PropsWithChildren<{
