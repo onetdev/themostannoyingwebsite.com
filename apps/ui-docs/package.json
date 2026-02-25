@@ -11,7 +11,7 @@
   },
   "dependencies": {
     "@maw/ui-lib": "workspace:*",
-    "@storybook/addon-docs": "^10.2.7",
+    "@storybook/addon-docs": "^10.2.12",
     "next": "catalog:",
     "react": "catalog:",
     "react-dom": "catalog:"
@@ -19,10 +19,10 @@
   "devDependencies": {
     "@maw/config-eslint": "workspace:^",
     "@maw/config-ts": "workspace:*",
-    "@storybook/addon-links": "^10.2.7",
+    "@storybook/addon-links": "^10.2.12",
     "@storybook/addon-styling-webpack": "^3.0.0",
-    "@storybook/addon-themes": "^10.2.7",
-    "@storybook/nextjs": "^10.2.7",
+    "@storybook/addon-themes": "^10.2.12",
+    "@storybook/nextjs": "^10.2.12",
     "@storybook/react": "catalog:",
     "@types/node": "catalog:",
     "@types/react": "catalog:",
