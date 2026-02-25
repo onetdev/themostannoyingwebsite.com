@@ -10,7 +10,7 @@ import {
 import { useTranslations } from 'next-intl';
 import { useState } from 'react';
 
-import { ModalContent } from './WheelOfFortune/ModalContent';
+import { ModalContent } from './ModalContent';
 
 export function WheelOfFortune() {
   const [isOpen, setOpen] = useState(false);

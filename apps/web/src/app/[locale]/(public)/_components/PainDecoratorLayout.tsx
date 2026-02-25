@@ -13,9 +13,9 @@ import {
 import {
   AdblockerSuspectBar,
   ContainerPromotionFlaps,
+  WheelOfFortune,
 } from '@/features/promotion/components';
-import { WheelOfFortune } from '@/features/promotion/components/WheelOfFortune';
-import { ChatBubble } from '@/features/support/components/ChatBubble';
+import { ChatBubble } from '@/features/support/components';
 import { usePainPreferencesStore, useUserGrantsStore } from '@/stores';
 
 type PainDecoratorLayoutProps = ComponentProps<'div'>;

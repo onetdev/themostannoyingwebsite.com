@@ -1,7 +1,8 @@
 import { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 
-import { PageLayout } from '@/app/_components/PageLayout';
+import { PageLayout } from '../../_components/PageLayout';
+
 import { getDependencyContainer } from '@/dependency-container';
 import { CommentService } from '@/features/comments/services';
 import { ArticleItemPage } from '@/features/content/components';

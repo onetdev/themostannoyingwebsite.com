@@ -8,7 +8,7 @@ import { useTranslations } from 'next-intl';
 import { PartitionalLockedContent } from './PartitionalLockedContent';
 import { ArticleDatum } from '../schemas';
 
-import { CommentSection } from '@/features/comments/components/CommentSection';
+import { CommentSection } from '@/features/comments/components';
 import { Comment } from '@/features/comments/schemas/comment';
 import { usePainPreferencesStore } from '@/stores';
 

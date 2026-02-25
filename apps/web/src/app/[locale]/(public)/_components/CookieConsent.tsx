@@ -28,5 +28,3 @@ export function CookieConsent() {
     )
   );
 }
-
-export default CookieConsent;

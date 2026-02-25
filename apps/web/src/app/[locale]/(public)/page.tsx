@@ -1,8 +1,8 @@
-import { PageLayout } from '@/app/_components/PageLayout';
+import { HomePage } from './_components/HomePage';
+import { PageLayout } from './_components/PageLayout';
+
 import { getDependencyContainer } from '@/dependency-container';
 import { getAppArticleService } from '@/features/content/services';
-
-import { HomePage } from './_components/HomePage';
 
 export { generateStaticParams } from '@/i18n/routing';
 

@@ -2,7 +2,8 @@ import { Metadata } from 'next';
 import { getTranslations } from 'next-intl/server';
 
 export { generateStaticParams } from '@/i18n/routing';
-import { PageLayout } from '@/app/_components/PageLayout';
+import { PageLayout } from '../_components/PageLayout';
+
 import config from '@/config';
 import { getDependencyContainer } from '@/dependency-container';
 import { PlansPage } from '@/features/subscription/components';

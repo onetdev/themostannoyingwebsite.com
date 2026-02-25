@@ -7,10 +7,10 @@ import HTMLReactParser from 'html-react-parser';
 import { useLocale, useMessages, useTranslations } from 'next-intl';
 import { useCallback, useEffect, useMemo, useState } from 'react';
 
-import { useAppArticleService } from '../hooks/useAppArticleService';
+import { useAppArticleService } from '../hooks';
 import { ArticleSearchResult } from '../schemas';
 
-import { SearchForm } from '@/app/_components/AppHeader/SearchForm';
+import { SearchForm } from '@/features/content/components';
 import { Link } from '@/i18n/navigation';
 import { usePainPreferencesStore } from '@/stores';
 

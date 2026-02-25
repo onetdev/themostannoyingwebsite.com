@@ -1,4 +1,4 @@
 export * from './NotificationManualModal';
 export * from './NotificationPromptTigger';
-export * from './Settings';
-export * from './Admin';
+export * from './SettingsPage';
+export * from './AdminPage';

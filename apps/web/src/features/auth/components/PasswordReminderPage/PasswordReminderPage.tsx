@@ -1,6 +1,6 @@
 'use client';
 
-import { PasswordReminderForm } from './forms';
+import { PasswordReminderForm } from './PasswordReminderForm';
 
 export function PasswordReminderPage() {
   return <PasswordReminderForm />;

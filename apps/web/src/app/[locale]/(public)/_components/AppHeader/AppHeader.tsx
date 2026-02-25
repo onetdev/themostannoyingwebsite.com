@@ -5,10 +5,10 @@ import { AppDarkModeToggle } from './AppDarkModeToggle';
 import { AppNavigationDesktop } from './AppNavigationDesktop';
 import { AppNavigationMobile } from './AppNavigationMobile';
 import { PainLevelSelector } from './PainLevelSelector';
-import { SearchForm } from './SearchForm';
 import { TextLogo } from './TextLogo';
 
 import { ActiveNavigationItem } from '@/app/navigation';
+import { SearchForm } from '@/features/content/components';
 import { Link } from '@/i18n/navigation';
 
 type AppHeaderProps = {

@@ -1,7 +1,8 @@
 import { Metadata } from 'next';
 import { getTranslations } from 'next-intl/server';
 
-import { PageLayout } from '@/app/_components/PageLayout';
+import { PageLayout } from '../../_components/PageLayout';
+
 import { PasswordReminderPage } from '@/features/auth/components';
 
 export { generateStaticParams } from '@/i18n/routing';

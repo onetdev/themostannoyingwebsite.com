@@ -1,6 +1,6 @@
 import { useTranslations } from 'next-intl';
 
-import { PageLayout } from '@/app/_components/PageLayout';
+import { PageLayout } from './_components/PageLayout';
 
 export const generateMetadata = () => {
   return {

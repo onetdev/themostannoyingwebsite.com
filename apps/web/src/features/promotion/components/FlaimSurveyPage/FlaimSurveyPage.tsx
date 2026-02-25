@@ -6,22 +6,22 @@ import { useTranslations } from 'next-intl';
 import { ComponentProps, useState } from 'react';
 import { useEffectOnce } from 'react-use';
 
-import { UseSurveryParams, useSurvey } from '../../hooks/useSurvey';
 import { ProgressBar } from './ProgressBar';
 import { Question } from './Question';
 import { SurveyResult } from './SurveyResult';
+import { UseSurveryParams, useSurvey } from '../../hooks/useSurvey';
 
 import { useRuntimeStore } from '@/stores';
 
-export type FlaimSurveryProps = ComponentProps<typeof Card> & {
+export type FlaimSurveryPageProps = ComponentProps<typeof Card> & {
   settings: UseSurveryParams;
 };
 
-export function FlaimSurvey({
+export function FlaimSurveyPage({
   className,
   settings,
   ...rest
-}: FlaimSurveryProps) {
+}: FlaimSurveryPageProps) {
   const t = useTranslations();
   const router = useRouter();
   const [loaded, setLoaded] = useState(false);

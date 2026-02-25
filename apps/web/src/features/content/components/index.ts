@@ -3,6 +3,7 @@ export * from './CoverPlaceholder';
 export * from './HotThingsPage';
 export * from './LargeCoverItem';
 export * from './PartitionalLockedContent';
+export * from './SearchForm';
 export * from './SearchPage';
 export * from './SmallCoverListItem';
 export * from './TextListItem';

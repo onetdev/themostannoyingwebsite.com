@@ -15,7 +15,7 @@ import {
 import { useTranslations } from 'next-intl';
 import { FormProvider } from 'react-hook-form';
 
-import { useCommentForm } from '../hooks';
+import { useCommentForm } from '../../hooks';
 
 export function CommentForm() {
   const t = useTranslations();

@@ -1,5 +1,6 @@
 export * from './AdblockerSuspectBar';
 export * from './ContainerPromotionFlaps';
-export * from './Dilf/DilfPage';
+export * from './DilfPage';
+export * from './FlaimSurveyPage';
 export * from './OneByOnePromotion';
 export * from './WheelOfFortune';

@@ -4,8 +4,7 @@ import { Metadata } from 'next';
 import { getTranslations } from 'next-intl/server';
 
 import DisableAllOnMount from './disable-all-on-mount';
-
-import { PageLayout } from '@/app/_components/PageLayout';
+import { PageLayout } from '../_components/PageLayout';
 
 export { generateStaticParams } from '@/i18n/routing';
 
