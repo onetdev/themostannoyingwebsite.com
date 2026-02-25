@@ -16,7 +16,7 @@ import {
 import { useTranslations } from 'next-intl';
 import { FormProvider } from 'react-hook-form';
 
-import { useLoginForm } from '../../hooks/useLoginForm';
+import { useLoginForm } from '../../hooks';
 import { EmailField } from '../fields/EmailField';
 
 import { useNavigationProvider } from '@/contexts/NavigationContext';

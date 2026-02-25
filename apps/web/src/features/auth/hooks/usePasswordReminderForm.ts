@@ -3,11 +3,11 @@
 import { useLogger } from '@maw/logger';
 import { useForm } from 'react-hook-form';
 
+import { useAuthService } from '../hooks';
 import {
   getPasswordReminderFormDataSchema,
   PasswordReminderFormData,
 } from '../schemas';
-import { useAuthService } from '../services';
 import { PasswordReminderUseCaseParams } from '../types';
 
 import { useZodFormValidator } from '@/hooks';

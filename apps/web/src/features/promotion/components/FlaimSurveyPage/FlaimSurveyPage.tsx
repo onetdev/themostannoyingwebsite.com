@@ -9,7 +9,7 @@ import { useEffectOnce } from 'react-use';
 import { ProgressBar } from './ProgressBar';
 import { Question } from './Question';
 import { SurveyResult } from './SurveyResult';
-import { UseSurveryParams, useSurvey } from '../../hooks/useSurvey';
+import { UseSurveryParams, useSurvey } from '../../hooks';
 
 import { useRuntimeStore } from '@/stores';
 

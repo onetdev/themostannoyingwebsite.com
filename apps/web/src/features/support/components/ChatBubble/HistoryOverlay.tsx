@@ -51,7 +51,7 @@ export function HistoryOverlay({
   return (
     <div className="border-secondary bg-card rounded-lg border">
       <div className="flex flex-row justify-between p-3 pl-5 shadow-xs">
-        <h4 className="flex items-center gap-1 text-lg font-bold">
+        <h4 className="flex items-center gap-1 text-base font-bold">
           {t('chatBubble.hudTitle')}
           <Tooltip>
             <TooltipTrigger asChild>

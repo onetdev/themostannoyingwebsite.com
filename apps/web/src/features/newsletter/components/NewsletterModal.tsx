@@ -16,7 +16,7 @@ import { random } from '@maw/utils/math';
 import { useMessages, useTranslations } from 'next-intl';
 import { useMemo, useState } from 'react';
 
-import { useNewsletterForm } from '../hooks/useNewsletterForm';
+import { useNewsletterForm } from '../hooks';
 
 export interface NewsletterModalProps {
   visible?: boolean;

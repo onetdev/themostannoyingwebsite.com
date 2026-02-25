@@ -8,4 +8,5 @@ export * from './useSendNotification';
 export * from './useServiceWorker';
 export * from './useTouchScreenListener';
 export * from './useUserActivationListener';
+export * from './useZodAutoConfigurator';
 export * from './useZodFormValidator';

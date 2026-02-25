@@ -1,7 +1,5 @@
 'use client';
 
-import { useZodAutoConfigurator } from '../hooks/useZodAutoConfigurator';
-
 import {
   useDocumentVisibilityListener,
   useNavigationStats,
@@ -9,7 +7,8 @@ import {
   useServiceWorker,
   useTouchScreenListener,
   useUserActivationListener,
-} from '@/hooks';
+  useZodAutoConfigurator,
+} from '../hooks';
 
 export function ClientObserverProvider() {
   useServiceWorker();
