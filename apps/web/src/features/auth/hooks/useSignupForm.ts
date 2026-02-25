@@ -4,8 +4,8 @@ import { useLogger } from '@maw/logger';
 import { useForm } from 'react-hook-form';
 
 import { useAuthFormError } from './useAuthFormError';
+import { useAuthService } from '../hooks';
 import { getSignupFormDataSchema, SignupFormData, User } from '../schemas';
-import { useAuthService } from '../services';
 import { RegisterUseCaseParams } from '../types';
 
 import { useZodFormValidator } from '@/hooks';

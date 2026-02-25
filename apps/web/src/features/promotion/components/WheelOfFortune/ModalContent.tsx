@@ -5,8 +5,8 @@ import { useTranslations } from 'next-intl';
 import { ComponentProps } from 'react';
 import Confetti from 'react-confetti';
 
-import { AnimatedWheel } from './WheelAnimationWrapper';
-import { useWheelOfFortune } from '../../hooks/useWheelOfFortune';
+import { WheelAnimationWrapper } from './WheelAnimationWrapper';
+import { useWheelOfFortune } from '../../hooks';
 
 type ModalContentProps = ComponentProps<'div'>;
 
@@ -33,7 +33,7 @@ export function ModalContent({ className, ...rest }: ModalContentProps) {
           />
         )}
 
-        <AnimatedWheel
+        <WheelAnimationWrapper
           highlightIndex={wof.prize?.index}
           items={wof.items}
           onAnimationComplete={wof.complete}
