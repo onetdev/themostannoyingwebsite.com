@@ -1,3 +1,12 @@
+import { Container, injectable } from 'inversify';
+
+import {
+  type BeggingBannerData,
+  DI,
+  type DonationBalanceConfig,
+  type DonationService as IDonationService,
+} from '../types';
+
 /**
  * Donation Service
  * Handles begging banner logic, message selection, and balance calculation
@@ -13,25 +22,11 @@ const MESSAGE_KEYS = [
   'ramenUpgrade',
 ] as const;
 
-type MessageKey = (typeof MESSAGE_KEYS)[number];
-
-export interface BeggingBannerData {
-  message: string;
-  prefix: string;
-  linkText: string;
-}
-
-export interface DonationBalanceConfig {
-  costStartEpoch: number;
-  costDailyAvgInEuro: number;
-  totalDonationInEuro: number;
-}
-
 /**
  * DonationService - Utility class for donation-related operations
- * Not a singleton - can be instantiated with different translation functions
  */
-export class DonationService {
+@injectable()
+export class DonationService implements IDonationService {
   /**
    * Get message for the current month
    * Uses month (0-11) as seed for deterministic selection
@@ -83,10 +78,6 @@ export class DonationService {
   }
 }
 
-/**
- * Create a new instance of DonationService
- * Can be used without dependency injection
- */
-export const createDonationService = (): DonationService => {
-  return new DonationService();
-};
+export function getDonationService(container: Container) {
+  return container.get<IDonationService>(DI.DonationService);
+}

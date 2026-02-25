@@ -1,6 +1,5 @@
 'use client';
 
-import { useKernelService } from '@/services';
 import {
   Field,
   FieldContent,
@@ -27,6 +26,8 @@ import {
 } from 'react';
 import { Controller, useFormContext } from 'react-hook-form';
 
+import { useAppService } from '@/hooks';
+
 interface PhoneNumberFieldProps {
   fieldName?: string;
   countryCodeFieldName?: string;
@@ -39,7 +40,7 @@ export function PhoneNumberField({
   required,
 }: PhoneNumberFieldProps) {
   const t = useTranslations();
-  const kernelService = useKernelService();
+  const appService = useAppService();
   const {
     formState: { errors },
     register,
@@ -58,7 +59,7 @@ export function PhoneNumberField({
   >([]);
 
   useEffect(() => {
-    kernelService.getAllCountries().then((data) => {
+    appService.getAllCountries().then((data) => {
       setPhoneCountryOptions(
         data.map(({ localName, phone, code }) => ({
           label: `${phone} ${localName}`,
@@ -66,7 +67,7 @@ export function PhoneNumberField({
         })),
       );
     });
-  }, [kernelService]);
+  }, [appService]);
 
   useEffect(() => {
     if (phoneNumberUpdateDirection === 0) {

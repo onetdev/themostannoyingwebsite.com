@@ -1,15 +1,15 @@
-import {
-  createDonationService,
-  type DonationBalanceConfig,
-  DonationService,
-} from './DonationService';
+import { DonationBalanceConfig } from '../types';
+import { DonationService, getDonationService } from './DonationService';
+
+import { getDependencyContainer } from '@/dependency-container';
 
 describe('DonationService', () => {
+  const container = getDependencyContainer();
   let service: DonationService;
   let mockTranslate: jest.Mock;
 
   beforeEach(() => {
-    service = createDonationService();
+    service = getDonationService(container);
     mockTranslate = jest.fn((key: string) => {
       // Mock translation function
       const translations: Record<string, string> = {
@@ -232,21 +232,6 @@ describe('DonationService', () => {
 
       // 1000 - 10 = 990
       expect(balance).toBe(990);
-    });
-  });
-
-  describe('createDonationService', () => {
-    it('should create a new instance of DonationService', () => {
-      const instance = createDonationService();
-
-      expect(instance).toBeInstanceOf(DonationService);
-    });
-
-    it('should create independent instances', () => {
-      const instance1 = createDonationService();
-      const instance2 = createDonationService();
-
-      expect(instance1).not.toBe(instance2);
     });
   });
 });

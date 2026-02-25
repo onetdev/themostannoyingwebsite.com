@@ -20,3 +20,7 @@ export class AppConfigService {
     return config.deploymentMeta;
   }
 }
+
+export function getAppConfigService() {
+  return new AppConfigService();
+}

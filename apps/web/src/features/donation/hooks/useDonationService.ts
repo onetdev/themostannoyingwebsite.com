@@ -1,13 +1,10 @@
 'use client';
 
-import { useMemo } from 'react';
+import { DI, type DonationService } from '../types';
 
-import { createDonationService, DonationService } from '../services';
+import { useDependencyContainer } from '@/contexts/DependencyContainer';
 
-/**
- * Hook to get DonationService instance
- * Creates a new instance per component (not singleton)
- */
 export const useDonationService = (): DonationService => {
-  return useMemo(() => createDonationService(), []);
+  const { container } = useDependencyContainer();
+  return container.get<DonationService>(DI.DonationService);
 };

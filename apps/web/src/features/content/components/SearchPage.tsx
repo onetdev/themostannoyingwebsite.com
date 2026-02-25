@@ -7,8 +7,8 @@ import HTMLReactParser from 'html-react-parser';
 import { useLocale, useMessages, useTranslations } from 'next-intl';
 import { useCallback, useEffect, useMemo, useState } from 'react';
 
+import { useAppArticleService } from '../hooks/useAppArticleService';
 import { ArticleSearchResult } from '../schemas';
-import { AppArticleService } from '../services';
 
 import { SearchForm } from '@/app/_components/AppHeader/SearchForm';
 import { Link } from '@/i18n/navigation';
@@ -27,6 +27,7 @@ export function SearchPage() {
   const messages = useMessages();
   const enabled = usePainPreferencesStore((state) => state.flags.searchDelay);
   const t = useTranslations();
+  const appArticleService = useAppArticleService();
   const [query, setQuery] = useState('');
   const [loading, setLoading] = useState(false);
   const [results, setResults] = useState<Result | undefined>();
@@ -74,7 +75,7 @@ export function SearchPage() {
     const startTime = Date.now();
     const delayTime = enabled ? random(0.001, 5) : 0;
     const timer = setTimeout(async () => {
-      const matches = await AppArticleService.search({
+      const matches = await appArticleService.search({
         query,
         params: {
           locale,
@@ -93,7 +94,7 @@ export function SearchPage() {
     }, delayTime * 1000);
 
     return () => clearTimeout(timer);
-  }, [query, enabled, topSearchesPool, locale]);
+  }, [query, enabled, topSearchesPool, locale, appArticleService]);
 
   const showResultList = !loading && results && results.items.length > 0;
 

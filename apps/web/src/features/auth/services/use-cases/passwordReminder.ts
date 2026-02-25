@@ -1,8 +1,7 @@
-import { AuthRepository, PasswordReminderData } from '../../types';
-
-export type PasswordReminderUseCaseParams = PasswordReminderData & {
-  captcha: string;
-};
+import {
+  type AuthRepository,
+  type PasswordReminderUseCaseParams,
+} from '../../types';
 
 export async function passwordReminder(
   repo: AuthRepository,

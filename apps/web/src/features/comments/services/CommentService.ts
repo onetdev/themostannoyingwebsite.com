@@ -1,11 +1,17 @@
 import { ArticleDatum } from '@maw/content-api';
+import { injectable } from 'inversify';
 
+import { type CommentService as ICommentService } from '../types';
 import { filterByDate } from './use-cases/filterByDate';
-import { generateTree, SeededCommentsOptions } from './use-cases/generateTree';
+import {
+  generateTree,
+  type SeededCommentsOptions,
+} from './use-cases/generateTree';
 
 import pool from '@/i18n/messages/en/commentVariants';
 
-export class CommentService {
+@injectable()
+export class CommentService implements ICommentService {
   async getByArticle(item: ArticleDatum, options?: SeededCommentsOptions) {
     const data = generateTree(item.slug, item.publishedAt, {
       pool,

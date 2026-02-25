@@ -1,12 +1,13 @@
 import { getTranslations } from 'next-intl/server';
 
 import { PageLayout } from '@/app/_components/PageLayout';
+import { getDependencyContainer } from '@/dependency-container';
 import {
   LargeCoverItem,
   SmallCoverListItem,
   TextListItem,
 } from '@/features/content/components';
-import { AppArticleService } from '@/features/content/services';
+import { getAppArticleService } from '@/features/content/services';
 import { OneByOnePromotion } from '@/features/promotion/components';
 export { generateStaticParams } from '@/i18n/routing';
 
@@ -15,14 +16,16 @@ export const revalidate = 1800;
 export default async function Page({ params }: NextPageProps) {
   const t = await getTranslations();
   const { locale } = await params;
-  const coverArticle = await AppArticleService.getFirst({
+  const container = getDependencyContainer();
+  const articleService = getAppArticleService(container);
+  const coverArticle = await articleService.getFirst({
     params: { isOnCover: true, locale },
     paginate: {
       take: 1,
       skip: 0,
     },
   });
-  const articlePool = await AppArticleService.getMany({
+  const articlePool = await articleService.getMany({
     params: { isOnCover: false },
     paginate: { take: 12 },
   });

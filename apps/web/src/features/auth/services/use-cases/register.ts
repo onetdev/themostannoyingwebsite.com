@@ -1,6 +1,4 @@
-import { AuthRepository, CreateUserData } from '../../types';
-
-export type RegisterUseCaseParams = CreateUserData;
+import { type AuthRepository, type RegisterUseCaseParams } from '../../types';
 
 export async function register(
   repo: AuthRepository,

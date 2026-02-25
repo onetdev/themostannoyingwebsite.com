@@ -1,4 +1,2 @@
 export * from './AppConfigService';
-export * from './getAppConfig';
-export * from './KernelService';
-export * from './useKernelService';
+export * from './AppService';

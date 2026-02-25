@@ -1,1 +1,1 @@
-export { AppArticleService } from './AppArticleService';
+export * from './AppArticleService';

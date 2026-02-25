@@ -15,7 +15,7 @@ import { useTranslations } from 'next-intl';
 import { useEffect, useState } from 'react';
 import { Controller, useFormContext } from 'react-hook-form';
 
-import { useKernelService } from '@/services';
+import { useAppService } from '@/hooks';
 
 interface CountryFieldProps {
   fieldName?: string;
@@ -27,7 +27,7 @@ export function CountryField({
   required,
 }: CountryFieldProps) {
   const t = useTranslations();
-  const kernelService = useKernelService();
+  const appService = useAppService();
   const {
     formState: { errors },
     control,
@@ -38,7 +38,7 @@ export function CountryField({
   >([]);
 
   useEffect(() => {
-    kernelService.getAllCountries().then((data) => {
+    appService.getAllCountries().then((data) => {
       setCountryOptions(
         data.map(({ localName, code }) => ({
           label: localName,
@@ -46,7 +46,7 @@ export function CountryField({
         })),
       );
     });
-  }, [kernelService]);
+  }, [appService]);
 
   return (
     <Field>

@@ -4,8 +4,9 @@ import { getTranslations } from 'next-intl/server';
 export { generateStaticParams } from '@/i18n/routing';
 import { PageLayout } from '@/app/_components/PageLayout';
 import config from '@/config';
+import { getDependencyContainer } from '@/dependency-container';
 import { PlansPage } from '@/features/subscription/components';
-import { createSubscriptionPlansService } from '@/features/subscription/services';
+import { getSubscriptionPlansService } from '@/features/subscription/services';
 
 export const revalidate = 1800;
 
@@ -22,7 +23,8 @@ export async function generateMetadata({
 }
 
 export default async function Page() {
-  const subscriptionPlansService = createSubscriptionPlansService();
+  const container = getDependencyContainer();
+  const subscriptionPlansService = getSubscriptionPlansService(container);
   const [plansResult, featuresResult] = await Promise.all([
     subscriptionPlansService.getPlans(),
     subscriptionPlansService.getFeatures(),

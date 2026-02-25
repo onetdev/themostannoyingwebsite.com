@@ -6,7 +6,7 @@ import { useForm } from 'react-hook-form';
 import { useAuthFormError } from './useAuthFormError';
 import { getSignupFormDataSchema, SignupFormData, User } from '../schemas';
 import { useAuthService } from '../services';
-import { RegisterUseCaseParams } from '../services/use-cases';
+import { RegisterUseCaseParams } from '../types';
 
 import { useZodFormValidator } from '@/hooks';
 

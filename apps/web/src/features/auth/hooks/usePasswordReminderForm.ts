@@ -8,7 +8,7 @@ import {
   PasswordReminderFormData,
 } from '../schemas';
 import { useAuthService } from '../services';
-import { PasswordReminderUseCaseParams } from '../services/use-cases';
+import { PasswordReminderUseCaseParams } from '../types';
 
 import { useZodFormValidator } from '@/hooks';
 

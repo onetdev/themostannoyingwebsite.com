@@ -3,17 +3,21 @@ import { inject, injectable } from 'inversify';
 
 import {
   login as loginUseCase,
-  LoginUseCaseParams,
   passwordReminder as passwordReminderUseCase,
-  PasswordReminderUseCaseParams,
   register as registerUseCase,
-  RegisterUseCaseParams,
 } from './use-cases';
 import { AuthError, User } from '../schemas';
-import { type AuthRepository, DI } from '../types';
+import {
+  type AuthRepository,
+  DI,
+  type AuthService as IAuthService,
+  LoginUseCaseParams,
+  PasswordReminderUseCaseParams,
+  RegisterUseCaseParams,
+} from '../types';
 
 @injectable()
-export class AuthService {
+export class AuthService implements IAuthService {
   @inject(DI.AuthRepository)
   private authRepo!: AuthRepository;
 
