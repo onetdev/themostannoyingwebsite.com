@@ -4,10 +4,9 @@ Provides functionality and UI for user registration, login, and password reset. 
 
 ## Key highlights
 
-- **Login page**, form, schema
-- **Register page**, form, schema
-- **Forgot password page**, form, schema
-- Partial auth service covering only support for pages and forms listed above; no real session is being managed here.
+- **LoginPage**, **SignupPage**, **PasswordReminderPage**, and **ProfilePage** components for App Router integration.
+- Form schemas and validation using Zod.
+- Partial auth service covering support for pages and forms listed above; no real session is being managed here.
 
 ## Out of scope
 

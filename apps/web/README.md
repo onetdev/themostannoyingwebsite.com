@@ -6,8 +6,8 @@ For project details, please see the [`README.md`](https://github.com/onetdev/the
 
 The application is organized into several distinct layers to ensure maintainability and testability:
 
-- `src/app/`: Next.js App Router structure, handling global layouts, routing, and server-side metadata generation. Avoid placing full-page UI components directly in this folder.
-- `src/features/`: Domain-specific modules (e.g., `auth`, `donation`, `interferrer`). Each feature encapsulates its own components, hooks, and utility logic. _See feature-specific READMEs for details on their responsibilities._
+- `src/app/`: Next.js App Router structure, handling global layouts, routing, and server-side metadata generation. **Lean Page Pattern**: Keep `page.tsx` files minimal; they should fetch data and define metadata, then delegate UI to dedicated "Page" components located in `src/features/*/components/` or a local `_components/` folder.
+- `src/features/`: Domain-specific modules (e.g., `auth`, `donation`, `interferrer`). Each feature encapsulates its own components (including full-page UI), hooks, and utility logic. _See feature-specific READMEs for details on their responsibilities._
 - `src/services/`: Business logic layer. Includes `KernelService`, which acts as a central hub for application logic, managed via Dependency Injection.
 - `src/repositories/`: Data access layer, abstracting data fetching and persistence (e.g., `StaticCountryRepository`).
 - `src/providers/` & `src/contexts/`: Global React providers for themes, i18n, and dependency injection containers.

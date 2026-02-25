@@ -4,7 +4,8 @@ Acts as the internal bridge for managing and displaying dynamic site content.
 
 ## Key highlights
 
-- **Article item page**:
+- **ArticleItemPage**, **SearchPage**, and **HotThingsPage** components for App Router integration.
+- **Article item rendering**:
   - Displaying MDX content and applying local formatting
   - Configuring and displaying comments section.
 - **Integrates** and proxies requests to the **`@maw/content-api`** package.

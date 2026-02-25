@@ -21,7 +21,7 @@ export function useAdminTerminalAuthFlow(
     await term.printLine(t('systemBoot'));
     await sleep(2500);
     await term.printLine(t('systemReady'));
-    await term.printLine(' ');
+    await term.printLine('\n');
 
     // USERNAME
     const username = await term.requestInput({
@@ -35,7 +35,7 @@ export function useAdminTerminalAuthFlow(
       prompt: `${t('passwordPrompt')} `,
     });
 
-    await term.printLine(' ');
+    await term.printLine('\n');
     // LOGIN VERIFICATION
     const userMatch = validLogin.find(
       (user) => user.login === username && user.password === password,

@@ -4,6 +4,7 @@ Displays intrusive advertisements, promotional content and fake rewards.
 
 ## Key highlights
 
+- **DilfPage** and **FlaimSurvey** components for App Router integration.
 - **DILF promotion** on both sides of the content leading to donut finder
 - **Fake quiz with animated promotion banner**.
 - **Detecting adblocker** presence and warning user through a banner at the bottom of the page

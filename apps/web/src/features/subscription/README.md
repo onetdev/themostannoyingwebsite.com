@@ -4,7 +4,7 @@ A special version of a content that seemingly provided packages and features for
 
 ## Key highlights
 
-- **Plans page** to provide a well known 3-step package comparison page with fun content details
+- **PlansPage component** to provide a well known 3-step package comparison page with fun content details
 - **Plans service** allows access to packages and features across the whole application.
 
 ## Out of scope

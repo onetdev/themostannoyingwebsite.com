@@ -4,6 +4,7 @@ Implements intentionally difficult and high-friction "help" and support systems.
 
 ## Key highlights
 
+- **ContactPage component** for App Router integration.
 - **Contact form** that opens a new tab using `mailto:*` protocol (skipping backend integration)
 - **Chat bubble**
   - When you load the page it always has a new message for you

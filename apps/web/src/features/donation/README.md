@@ -4,7 +4,7 @@ Manages the site's donation information details and funneling user traffic towar
 
 ## Key highlights
 
-- **Donation page**
+- **DonationPage component**
   - Goal and donation overview
   - QR codes for crypto donation
   - Donation service links
