@@ -1,15 +1,8 @@
-import { PageHeadline } from '@maw/ui-lib';
 import { Metadata } from 'next';
 import { getTranslations } from 'next-intl/server';
 
 import { PageLayout } from '@/app/_components/PageLayout';
-import {
-  MandatoryExperienceInfo,
-  PainPreferences,
-  RuntimeInfo,
-  UserGrantsSettings,
-  UserPreferences,
-} from '@/features/user/components/Settings';
+import { SettingsPage } from '@/features/user/components/Settings';
 
 export { generateStaticParams } from '@/i18n/routing';
 
@@ -28,22 +21,9 @@ export async function generateMetadata({
 }
 
 export default async function Settings() {
-  const t = await getTranslations();
-
   return (
     <PageLayout activeItem="settings" role="main">
-      <PageHeadline>{t('navigation.settings')}</PageHeadline>
-
-      <div className="grid gap-3 md:grid-cols-2">
-        <UserPreferences />
-        <UserGrantsSettings />
-        <PainPreferences
-          className="md:col-span-2"
-          listClassName="grid gap-3 grid-cols-1 md:gap-x-10 md:grid-cols-2 lg:grid-cols-3"
-        />
-        <MandatoryExperienceInfo />
-        <RuntimeInfo />
-      </div>
+      <SettingsPage />
     </PageLayout>
   );
 }

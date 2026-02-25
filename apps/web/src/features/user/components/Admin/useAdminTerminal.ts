@@ -16,7 +16,7 @@ type InputMode =
   | { type: 'text'; prompt: string }
   | { type: 'password'; prompt: string };
 
-export function useTerminal(charDelay = 40) {
+export function useAdminTerminal(charDelay = 40) {
   const [lines, setLines] = useState<TerminalLine[]>([]);
   const [currentLine, setCurrentLine] = useState('');
   const [input, setInput] = useState('');

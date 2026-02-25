@@ -1,6 +1,6 @@
 # User feature
 
-Handles user personalization (or depersonalization) settings. All the functionality is available for guest users.
+Handles user personalization (or depersonalization) settings and admin access. All the functionality is available for guest users.
 
 ## Key highlights
 
@@ -10,6 +10,7 @@ Handles user personalization (or depersonalization) settings. All the functional
   - Review mandatory experience
   - Tweak audio and some content settings.
   - Review browser settings state
+- **Admin page** provides a terminal-style interface for administrative access.
 - **Native browser notification prompt** incl. post denial web modal for asking it one more time.
 
 Looking for login, registration and forgotten password? See `auth` feature.

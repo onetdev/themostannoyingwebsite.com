@@ -4,14 +4,14 @@ import { sleep } from '@maw/utils/promise';
 import { useTranslations } from 'next-intl';
 import { useAsync } from 'react-use';
 
-import { useTerminal } from './useTerminal';
+import { useAdminTerminal } from './useAdminTerminal';
 
 // I know this is just a gag, but having this here is feels wrong on
 // multiple levels. Hi Mark!
 const validLogin = [{ login: 'admin', password: 'admin' }];
 
-export function useTerminalAuthFlow(
-  term: ReturnType<typeof useTerminal>,
+export function useAdminTerminalAuthFlow(
+  term: ReturnType<typeof useAdminTerminal>,
   onEnd: (authed: boolean) => void,
 ) {
   const t = useTranslations('admin.terminal');
@@ -21,7 +21,7 @@ export function useTerminalAuthFlow(
     await term.printLine(t('systemBoot'));
     await sleep(2500);
     await term.printLine(t('systemReady'));
-    await term.printLine('\n');
+    await term.printLine(' ');
 
     // USERNAME
     const username = await term.requestInput({
@@ -35,7 +35,7 @@ export function useTerminalAuthFlow(
       prompt: `${t('passwordPrompt')} `,
     });
 
-    await term.printLine('\n');
+    await term.printLine(' ');
     // LOGIN VERIFICATION
     const userMatch = validLogin.find(
       (user) => user.login === username && user.password === password,
