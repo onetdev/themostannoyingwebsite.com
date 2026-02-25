@@ -1,9 +1,10 @@
 import { Metadata } from 'next';
 import { getTranslations } from 'next-intl/server';
 
-import { SearchPage } from './search-page';
+import { PageLayout } from '../_components/PageLayout';
 
-import { PageLayout } from '@/components/PageLayout';
+import { SearchPage } from '@/features/content/components';
+
 export { generateStaticParams } from '@/i18n/routing';
 
 export const revalidate = 1800;

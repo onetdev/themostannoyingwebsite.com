@@ -1,6 +1,6 @@
 import type { MetadataRoute } from 'next';
 
-import { getAppConfigService } from '@/kernel';
+import { getAppConfigService } from '@/services';
 
 export default function robots(): MetadataRoute.Robots {
   const { publicUrl } = getAppConfigService().getDeploymentMeta();

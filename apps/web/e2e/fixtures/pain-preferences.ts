@@ -1,7 +1,7 @@
 import {
   type PainPreferencesState,
   PUBLIC_PAIN_POINT_LIST,
-} from '../../src/kernel/domain/stores/pain-preferences';
+} from '@/stores/pain-preferences';
 
 const flags: PainPreferencesState['flags'] = {
   'gifts.detectAdblocker': false,

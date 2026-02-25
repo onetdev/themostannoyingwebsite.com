@@ -2,10 +2,10 @@ import { Page } from '@playwright/test';
 
 import {
   PAIN_PREFERENCES_STORAGE_KEY,
-  type PainPreferencesState,
+  PainPreferencesState,
   USER_GRANTS_STORAGE_KEY,
-  type UserGrantsState,
-} from '@/kernel/domain';
+  UserGrantsState,
+} from '@/stores';
 
 /**
  * Sets the state for the pain preferences store in localStorage.

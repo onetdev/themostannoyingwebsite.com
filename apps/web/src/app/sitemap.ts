@@ -2,9 +2,10 @@ import { ArticleDatum } from '@maw/content-api';
 import type { MetadataRoute } from 'next';
 import { Languages } from 'next/dist/lib/metadata/types/alternative-urls-types';
 
-import { getAppConfigService } from '@/kernel';
-import { AppArticleService } from '@/modules/content';
+import { getDependencyContainer } from '@/dependency-container';
+import { getAppArticleService } from '@/features/content/services';
 import i18nConfig from '@/root/i18n.config';
+import { getAppConfigService } from '@/services';
 
 const config = getAppConfigService().getDeploymentMeta();
 
@@ -46,7 +47,8 @@ const mapArticleToSitemapEntry = (item: ArticleDatum) => {
 };
 
 async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const articleResults = await AppArticleService.getMany({
+  const di = getDependencyContainer();
+  const articleResults = await getAppArticleService(di).getMany({
     params: {},
     paginate: { take: -1, skip: 0 },
   });
