@@ -22,12 +22,14 @@ export const AchievementToastManager = () => {
 
     play();
 
-    toast(
+    toast.info(
       t('achievements.unlocked', {
         name: t(definition.nameKey),
       }),
       {
         icon: '🏆',
+        position: 'top-center',
+
       },
     );
   });

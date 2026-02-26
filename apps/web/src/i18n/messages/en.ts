@@ -527,6 +527,14 @@ export default {
     title: 'Achievements',
     description:
       'The journey of a thousand miles begins with a single, highly annoying step. Track your "achievements" and showcase your questionable persistence in navigating this digital nightmare.',
+    reset: {
+      button: 'Reset All Achievements',
+      confirmTitle: 'Are you absolutely sure?',
+      confirmDescription:
+        'This will permanently delete all your hard-earned (and mostly meaningless) progress. This action cannot be undone, much like your decision to visit this website.',
+      confirmAction: 'Yes, delete my progress',
+      cancelAction: 'No, I want to keep my suffering',
+    },
     registry: {
       firstVisit: {
         name: 'Welcome to Hell',
