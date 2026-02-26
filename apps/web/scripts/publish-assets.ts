@@ -1,5 +1,5 @@
+import { cp } from 'node:fs/promises';
 import { getLogger } from '@maw/logger';
-import { cp } from 'fs/promises';
 
 const logger = getLogger().getSubLogger({
   name: 'publish-assets',

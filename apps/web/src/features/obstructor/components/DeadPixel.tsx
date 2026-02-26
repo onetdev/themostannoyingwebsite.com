@@ -1,6 +1,6 @@
 'use client';
 
-import { Point2d, random, randomInt } from '@maw/utils/math';
+import { type Point2d, random, randomInt } from '@maw/utils/math';
 import { useEffect, useState } from 'react';
 
 // TODO: Maybe we could do a horror version like this:

@@ -1,9 +1,7 @@
-import { Metadata } from 'next';
+import type { Metadata } from 'next';
 import { getTranslations } from 'next-intl/server';
-
-import { PageLayout } from '../../_components/PageLayout';
-
 import { PasswordReminderPage } from '@/features/auth/components';
+import { PageLayout } from '../../_components/PageLayout';
 
 export { generateStaticParams } from '@/i18n/routing';
 
@@ -30,7 +28,8 @@ export default function Page() {
       autoPadding={false}
       activeItem="login"
       className="mx-auto max-w-md p-0 px-5 md:py-14"
-      role="main">
+      role="main"
+    >
       <PasswordReminderPage />
     </PageLayout>
   );

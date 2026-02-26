@@ -7,10 +7,8 @@ import {
   Separator,
 } from '@maw/ui-lib';
 import { getTranslations } from 'next-intl/server';
-
-import { ContactForm } from './ContactForm';
-
 import { getAppConfigService } from '@/services';
+import { ContactForm } from './ContactForm';
 
 export async function ContactPage() {
   const t = await getTranslations();
@@ -34,7 +32,8 @@ export async function ContactPage() {
                   href={`${githubUrl}/issues`}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-primary hover:underline">
+                  className="text-primary hover:underline"
+                >
                   {chunks}
                 </a>
               ),
@@ -48,7 +47,8 @@ export async function ContactPage() {
                 linkTag: (chunks) => (
                   <a
                     href={`mailto:${contactEmail}`}
-                    className="text-primary hover:underline">
+                    className="text-primary hover:underline"
+                  >
                     {chunks}
                   </a>
                 ),
@@ -74,7 +74,8 @@ export async function ContactPage() {
                 linkTag: (chunks) => (
                   <a
                     href={`mailto:${contactEmail}`}
-                    className="text-primary hover:underline">
+                    className="text-primary hover:underline"
+                  >
                     {chunks}
                   </a>
                 ),

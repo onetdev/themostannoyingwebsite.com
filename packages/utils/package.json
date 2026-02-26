@@ -9,7 +9,7 @@
     "./color": "./src/color.ts",
     "./formatter": "./src/formatter.ts",
     "./math": "./src/math.ts",
-    "./network" : "./src/network.ts",
+    "./network": "./src/network.ts",
     "./promise": "./src/promise.ts",
     "./result": "./src/result.ts",
     "./seed": "./src/seed.ts",
@@ -17,21 +17,23 @@
   },
   "scripts": {
     "check-types": "tsc --noEmit",
-    "lint": "eslint .",
-    "lint:fix": "eslint . --fix",
+    "lint": "biome check .",
+    "format": "biome format --write .",
+    "lint:fix": "biome check --write .",
     "test": "jest"
   },
   "dependencies": {
     "sanitize-html": "catalog:"
   },
   "devDependencies": {
-    "@maw/config-eslint": "workspace:*",
+    "@biomejs/biome": "catalog:",
     "@maw/config-jest": "workspace:*",
     "@maw/config-ts": "workspace:*",
     "@types/jest": "catalog:",
+    "@types/node": "catalog:",
     "@types/sanitize-html": "catalog:",
-    "eslint": "catalog:",
     "jest": "catalog:",
+    "jest-environment-jsdom": "catalog:",
     "ts-jest": "catalog:",
     "typescript": "catalog:"
   }

@@ -1,10 +1,9 @@
 import { PageHeadline } from '@maw/ui-lib';
 import styles from '@maw/ui-lib/content.module.css';
-import { Metadata } from 'next';
+import type { Metadata } from 'next';
 import { getTranslations } from 'next-intl/server';
-
-import DisableAllOnMount from './disable-all-on-mount';
 import { PageLayout } from '../_components/PageLayout';
+import DisableAllOnMount from './disable-all-on-mount';
 
 export { generateStaticParams } from '@/i18n/routing';
 
@@ -31,7 +30,7 @@ async function Page() {
       <PageHeadline className="mx-auto w-full max-w-screen-md">
         {t('app.virgin.title')}
       </PageHeadline>
-      <div className={styles['content']}>
+      <div className={styles.content}>
         <p>{t('app.virgin.description')}</p>
       </div>
     </PageLayout>

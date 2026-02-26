@@ -14,12 +14,10 @@ const schema = z
     isHighlighted: z.boolean(),
     isOnCover: z.boolean(),
     locale: z.string(),
-    publishedAt: z
-      .string()
+    publishedAt: z.iso
       .datetime({ offset: true })
       .describe('Must be in ISO 8601 format'),
-    updatedAt: z
-      .string()
+    updatedAt: z.iso
       .datetime({ offset: true })
       .optional()
       .describe('Must be in ISO 8601 format'),

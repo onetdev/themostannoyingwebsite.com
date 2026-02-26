@@ -1,6 +1,6 @@
 'use client';
 
-import { Point2d } from '@maw/utils/math';
+import type { Point2d } from '@maw/utils/math';
 import { useMemo } from 'react';
 
 export type TileData = {
@@ -34,7 +34,8 @@ export function TileView({ data, imageSrc, size }: TileViewProps) {
     <div
       style={style}
       data-has-image={Boolean(imageSrc).toString()}
-      className="border-border group-data-[is-correct=true]:bg-success group-data-[is-correct=true]:text-success-foreground flex size-full items-center justify-center rounded-sm border transition-all duration-200 ease-in-out select-none group-data-[is-correct=false]:cursor-pointer group-data-[is-empty=true]:hidden data-[has-image=true]:border-none">
+      className="border-border group-data-[is-correct=true]:bg-success group-data-[is-correct=true]:text-success-foreground flex size-full items-center justify-center rounded-sm border transition-all duration-200 ease-in-out select-none group-data-[is-correct=false]:cursor-pointer group-data-[is-empty=true]:hidden data-[has-image=true]:border-none"
+    >
       {!imageSrc && <span>{data.key}</span>}
     </div>
   );

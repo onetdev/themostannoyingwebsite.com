@@ -1,6 +1,6 @@
 import { inject } from 'inversify';
 
-import { type CountryRepository } from '@/repositories';
+import type { CountryRepository } from '@/repositories';
 import { DI } from '@/types';
 
 export class AppService {

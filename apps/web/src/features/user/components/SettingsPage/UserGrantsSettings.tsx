@@ -8,10 +8,8 @@ import {
   Checkbox as FormCheckbox,
 } from '@maw/ui-lib';
 import { useTranslations } from 'next-intl';
-
-import { SettingsField } from './SettingsField';
-
 import { useUserGrantsStore } from '@/stores';
+import { SettingsField } from './SettingsField';
 
 export function UserGrantsSettings() {
   const grant = useUserGrantsStore();
@@ -35,12 +33,14 @@ export function UserGrantsSettings() {
         </small>
         <SettingsField
           label={t('settings.userGrants.notificationPermission')}
-          reverse>
+          reverse
+        >
           {`${grant.permission.notification || t('common.notSet')}`}
         </SettingsField>
         <SettingsField
           label={t('settings.userGrants.locationPermission')}
-          reverse>
+          reverse
+        >
           {`${grant.permission.location || t('common.notSet')}`}
         </SettingsField>
       </CardContent>

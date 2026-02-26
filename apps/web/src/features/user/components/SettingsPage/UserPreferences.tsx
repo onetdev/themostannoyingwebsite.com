@@ -9,10 +9,8 @@ import {
 } from '@maw/ui-lib';
 import { useTranslations } from 'next-intl';
 import { useTheme } from 'next-themes';
-
-import { SettingsField } from './SettingsField';
-
 import { useRuntimeStore, useUserPreferencesStore } from '@/stores';
+import { SettingsField } from './SettingsField';
 
 export function UserPreferences() {
   const preference = useUserPreferencesStore();
@@ -38,7 +36,8 @@ export function UserPreferences() {
         </SettingsField>
         <SettingsField
           label={t('settings.userPreferences.reducedMotion')}
-          info={t('settings.userPreferences.reducedMotionHelp')}>
+          info={t('settings.userPreferences.reducedMotionHelp')}
+        >
           <FormCheckbox
             name="reduced_motion"
             disabled={true}

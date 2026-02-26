@@ -1,7 +1,7 @@
 'use client';
 
-import { Container } from 'inversify';
-import { createContext, PropsWithChildren, useContext } from 'react';
+import type { Container } from 'inversify';
+import { createContext, type PropsWithChildren, useContext } from 'react';
 
 export interface DependencyContainerContextType {
   container: Container;

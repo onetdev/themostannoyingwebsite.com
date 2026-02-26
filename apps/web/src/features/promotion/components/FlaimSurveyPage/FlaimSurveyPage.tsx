@@ -1,17 +1,15 @@
 'use client';
 
 import { Button, Card, LoaderDots } from '@maw/ui-lib';
-import { useRouter } from 'next/navigation';
 import { useTranslations } from 'next-intl';
-import { ComponentProps, useState } from 'react';
+import { type ComponentProps, useState } from 'react';
 import { useEffectOnce } from 'react-use';
-
+import { useRouter } from '@/i18n/navigation';
+import { useRuntimeStore } from '@/stores';
+import { type UseSurveryParams, useSurvey } from '../../hooks';
 import { ProgressBar } from './ProgressBar';
 import { Question } from './Question';
 import { SurveyResult } from './SurveyResult';
-import { UseSurveryParams, useSurvey } from '../../hooks';
-
-import { useRuntimeStore } from '@/stores';
 
 export type FlaimSurveryPageProps = ComponentProps<typeof Card> & {
   settings: UseSurveryParams;
@@ -66,7 +64,8 @@ export function FlaimSurveyPage({
           <Button
             onClick={next}
             className="mt-5"
-            disabled={typeof progression === 'undefined'}>
+            disabled={typeof progression === 'undefined'}
+          >
             {t('common.next')}
           </Button>
         </>

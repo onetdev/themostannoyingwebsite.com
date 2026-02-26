@@ -1,10 +1,8 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-
-import { useSurveyQuestions } from './useSurveyQuestions';
-
 import { useRuntimeStore } from '@/stores';
+import { useSurveyQuestions } from './useSurveyQuestions';
 
 export type UseSurveryParams = {
   timeLimitInSeconds: number;

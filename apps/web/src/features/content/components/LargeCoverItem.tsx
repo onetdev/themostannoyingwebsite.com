@@ -1,11 +1,9 @@
 import Image from 'next/image';
 import { useTranslations } from 'next-intl';
-import { ComponentProps } from 'react';
-
-import { CoverPlaceholder } from './CoverPlaceholder';
-import { ArticleDatum } from '../schemas';
-
+import type { ComponentProps } from 'react';
 import { Link } from '@/i18n/navigation';
+import type { ArticleDatum } from '../schemas';
+import { CoverPlaceholder } from './CoverPlaceholder';
 
 export type LargeCoverItemProps = ComponentProps<'article'> & {
   article: ArticleDatum;
@@ -15,12 +13,13 @@ export function LargeCoverItem({ article, ...rest }: LargeCoverItemProps) {
   const t = useTranslations();
 
   return (
-    <article role="article" {...rest}>
+    <article {...rest}>
       <Link
         className="group relative block"
         href={article.url}
         passHref
-        prefetch={false}>
+        prefetch={false}
+      >
         {!article.coverImages?.original && (
           <CoverPlaceholder width={1920} height={1200} />
         )}

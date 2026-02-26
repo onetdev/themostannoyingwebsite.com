@@ -1,11 +1,9 @@
 import Image from 'next/image';
 import { useTranslations } from 'next-intl';
-import { ComponentProps } from 'react';
-
-import { CoverPlaceholder } from './CoverPlaceholder';
-import { ArticleDatum } from '../schemas';
-
+import type { ComponentProps } from 'react';
 import { Link } from '@/i18n/navigation';
+import type { ArticleDatum } from '../schemas';
+import { CoverPlaceholder } from './CoverPlaceholder';
 
 export type SmallCoverListItemProps = ComponentProps<'article'> & {
   article: ArticleDatum;
@@ -18,12 +16,13 @@ export function SmallCoverListItem({
   const t = useTranslations();
 
   return (
-    <article role="article" {...rest}>
+    <article {...rest}>
       <Link
         href={article.url}
         passHref
         prefetch={false}
-        className="link-as-inherit hover-text-primary">
+        className="link-as-inherit hover-text-primary"
+      >
         {!article.coverImages?.thumbnail && (
           <CoverPlaceholder width={1920} height={1200} />
         )}
@@ -41,7 +40,8 @@ export function SmallCoverListItem({
         </h5>
         <small
           className="text-card-foreground m-0 mb-1 line-clamp-2 leading-snug hover:no-underline"
-          title={article.intro}>
+          title={article.intro}
+        >
           {article.intro}
         </small>
       </Link>

@@ -1,8 +1,8 @@
 import { fuzzy_search } from '@maw/utils/string';
 
 import articlesRaw from '../../data/index.json';
-import { ArticleIndexEntrySchema } from '../schemas/article-index-entry';
-import {
+import type { ArticleIndexEntrySchema } from '../schemas/article-index-entry';
+import type {
   ArticleData,
   ArticleDatum,
   ArticleFilter,
@@ -125,7 +125,7 @@ export class ArticleService {
           ? a.title.localeCompare(b.title) * (sort.title === 'asc' ? 1 : -1)
           : 0;
 
-        return dateCmp == 0 ? titleCmp : dateCmp;
+        return dateCmp === 0 ? titleCmp : dateCmp;
       });
     }
 

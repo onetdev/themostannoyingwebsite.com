@@ -1,6 +1,6 @@
 import ReactTimeAgo from 'react-timeago';
 
-import { ChatMessage } from '../../schemas';
+import type { ChatMessage } from '../../schemas';
 
 type MessageBubbleProps = {
   item: ChatMessage;

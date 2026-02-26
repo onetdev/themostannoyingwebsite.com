@@ -3,12 +3,12 @@
 import {
   getWeightedRandom,
   randomInt,
-  WeightedRandomPoolItem,
+  type WeightedRandomPoolItem,
 } from '@maw/utils/math';
 import { useTranslations } from 'next-intl';
 import { useCallback, useMemo, useState } from 'react';
 
-import { Item } from '../components/WheelOfFortune/DynamicWheelSvg';
+import type { Item } from '../components/WheelOfFortune/DynamicWheelSvg';
 
 export type AnimatedWheelState = 'ready' | 'spinning' | 'completed';
 
@@ -44,11 +44,11 @@ export function useWheelOfFortune() {
   );
 
   const spin = useCallback(() => {
-    if (state != 'ready') return;
+    if (state !== 'ready') return;
 
     const resultIndex = randomInt(0, items.length - 1);
     setState('spinning');
-    setPrize({ index: resultIndex, ...items[resultIndex!] });
+    setPrize({ index: resultIndex, ...items[resultIndex] });
   }, [items, state]);
 
   const complete = useCallback(() => {

@@ -3,7 +3,7 @@
 import Image from 'next/image';
 import { useTranslations } from 'next-intl';
 import { useTheme } from 'next-themes';
-import { PropsWithChildren } from 'react';
+import type { PropsWithChildren } from 'react';
 
 import { Link } from '@/i18n/navigation';
 
@@ -25,12 +25,14 @@ export function ContainerPromotionFlaps() {
           />
           <PromotionFlapText
             theme={resolvedTheme as AppTheme}
-            className="bottom-16 left-16 origin-bottom-left -rotate-90">
+            className="bottom-16 left-16 origin-bottom-left -rotate-90"
+          >
             {t('gifts.dilf.flapLeft')}
           </PromotionFlapText>
           <PromotionFlapText
             theme={resolvedTheme as AppTheme}
-            className="right-16 bottom-16 origin-bottom-right rotate-90">
+            className="right-16 bottom-16 origin-bottom-right rotate-90"
+          >
             {t('gifts.dilf.flapRight')}
           </PromotionFlapText>
         </Link>
@@ -53,7 +55,8 @@ function PromotionFlapText({
     <span
       suppressHydrationWarning
       data-theme={theme ?? 'dark'}
-      className={`absolute text-2xl font-bold text-gray-600 data-[theme=dark]:text-white ${className}`}>
+      className={`absolute text-2xl font-bold text-gray-600 data-[theme=dark]:text-white ${className}`}
+    >
       {children}
     </span>
   );

@@ -1,4 +1,4 @@
-import { Locator, Page } from '@playwright/test';
+import type { Locator, Page } from '@playwright/test';
 
 // Since Shadcn uses custom HTML elements for select dropdowns, we can't use
 // build in combobox selector :( Thus we need this alrenative wrapper.

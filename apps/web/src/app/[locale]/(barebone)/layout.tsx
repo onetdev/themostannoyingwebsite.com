@@ -11,7 +11,7 @@ import { getAppConfigService } from '@/services';
 
 const config = getAppConfigService().getAll();
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars -- We need the loader even though we are seemingly not using it directly.
+// We need the loader even though we are seemingly not using it directly.
 const _inter = Inter({
   subsets: ['latin'],
   weight: ['200', '400', '500', '600', '700'],
@@ -35,7 +35,8 @@ async function LocaleBareboneRootLayout({
       lang={locale}
       dir={direction}
       data-theme={config.defaultColorScheme}
-      suppressHydrationWarning>
+      suppressHydrationWarning
+    >
       <body>
         <NextIntlClientProvider>
           <ClientRootProviderContainer appConfig={config}>

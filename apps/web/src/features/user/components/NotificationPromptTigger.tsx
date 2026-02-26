@@ -5,11 +5,9 @@ import {
   requestNotificationPermission,
 } from '@maw/utils/browser';
 import { useRef, useState } from 'react';
-
-import { NotificationManualModal } from './NotificationManualModal';
-
 import { useScrollDistanceTrigger } from '@/hooks';
 import { usePainPreferencesStore, useUserGrantsStore } from '@/stores';
+import { NotificationManualModal } from './NotificationManualModal';
 
 export type NotificationPromptTriggerProps = {
   scrollDistanceTrigger?: number;

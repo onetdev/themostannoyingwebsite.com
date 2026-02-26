@@ -11,11 +11,10 @@ import {
 import { clsx } from '@maw/ui-lib/utils';
 import { useTranslations } from 'next-intl';
 import { useState } from 'react';
-
+import type { Comment } from '../../schemas';
 import { CommentForm } from './CommentForm';
 import { CommentItem } from './CommentItem';
 import { LoginRequiredModal } from './LoginRequiredModal';
-import { Comment } from '../../schemas';
 
 export interface CommentSectionProps {
   className?: string;
@@ -38,7 +37,8 @@ export function CommentSection({ className, items }: CommentSectionProps) {
       className={clsx(
         'md:bg-card mx-auto w-full max-w-3xl rounded-none border-0 bg-transparent shadow-none md:rounded-xl md:border md:shadow-sm',
         className,
-      )}>
+      )}
+    >
       <CardHeader className="px-0 sm:px-6">
         <CardTitle>{t('comments.sectionTitle')}</CardTitle>
         <CardAction>

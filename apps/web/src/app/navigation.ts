@@ -1,4 +1,4 @@
-import { IconAliaseKey } from '@maw/ui-lib';
+import type { IconAliaseKey } from '@maw/ui-lib';
 
 export const ActiveNavigationItems = [
   'about',

@@ -1,10 +1,8 @@
 'use client';
 
-import { ComponentProps } from 'react';
-
-import { CryptoWallet } from './CryptoWallet';
-
+import type { ComponentProps } from 'react';
 import { useAppConfig } from '@/contexts/AppConfig';
+import { CryptoWallet } from './CryptoWallet';
 
 export type CryptoWalletListProps = ComponentProps<'div'>;
 
@@ -19,7 +17,8 @@ export function CryptoWalletList({
   return (
     <div
       className={`my-8 grid w-full grid-cols-1 gap-6 md:w-auto md:grid-cols-2 ${className ?? ''}`}
-      {...rest}>
+      {...rest}
+    >
       <CryptoWallet
         title="Bitcoin (BTC)"
         address={btcWallet.address}

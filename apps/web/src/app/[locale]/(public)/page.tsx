@@ -1,8 +1,7 @@
-import { HomePage } from './_components/HomePage';
-import { PageLayout } from './_components/PageLayout';
-
 import { getDependencyContainer } from '@/dependency-container';
 import { getAppArticleService } from '@/features/content/services';
+import { HomePage } from './_components/HomePage';
+import { PageLayout } from './_components/PageLayout';
 
 export { generateStaticParams } from '@/i18n/routing';
 
@@ -31,7 +30,8 @@ export default async function Page({ params }: NextPageProps) {
       activeItem="home"
       className="grid grid-cols-1 gap-x-5 gap-y-5 px-5 lg:grid-cols-4 lg:gap-y-0 xl:px-8"
       autoPadding={false}
-      role="main">
+      role="main"
+    >
       <HomePage
         coverArticle={coverArticle}
         denseArticleList={denseArticleList}

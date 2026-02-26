@@ -84,7 +84,8 @@ export function DateOfBirthField({
             <SelectTrigger
               className="w-1/4"
               aria-label={t('user.field.dateOfBirthYear')}
-              aria-invalid={!!errors[fieldName]}>
+              aria-invalid={!!errors[fieldName]}
+            >
               <SelectValue placeholder="" />
             </SelectTrigger>
             <SelectContent>
@@ -99,7 +100,8 @@ export function DateOfBirthField({
             <SelectTrigger
               className="w-2/4"
               aria-label={t('user.field.dateOfBirthMonth')}
-              aria-invalid={!!errors[fieldName]}>
+              aria-invalid={!!errors[fieldName]}
+            >
               <SelectValue placeholder="" />
             </SelectTrigger>
             <SelectContent>
@@ -114,7 +116,8 @@ export function DateOfBirthField({
             <SelectTrigger
               className="w-1/4"
               aria-label={t('user.field.dateOfBirthDay')}
-              aria-invalid={!!errors[fieldName]}>
+              aria-invalid={!!errors[fieldName]}
+            >
               <SelectValue placeholder="" />
             </SelectTrigger>
             <SelectContent>

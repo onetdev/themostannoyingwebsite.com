@@ -4,13 +4,11 @@ import styles from '@maw/ui-lib/content.module.css';
 import HTMLReactParser from 'html-react-parser';
 import Image from 'next/image';
 import { useTranslations } from 'next-intl';
-
-import { PartitionalLockedContent } from './PartitionalLockedContent';
-import { ArticleDatum } from '../schemas';
-
 import { CommentSection } from '@/features/comments/components';
-import { Comment } from '@/features/comments/schemas/comment';
+import type { Comment } from '@/features/comments/schemas/comment';
 import { usePainPreferencesStore } from '@/stores';
+import type { ArticleDatum } from '../schemas';
+import { PartitionalLockedContent } from './PartitionalLockedContent';
 
 export interface ArticleItemPageProps {
   article: ArticleDatum;
@@ -42,8 +40,9 @@ export function ArticleItemPage({ article, comments }: ArticleItemPageProps) {
       )}
       <PartitionalLockedContent
         initialMaxHeight={300}
-        active={partitionEnabled}>
-        <div className={styles['content']} data-testid="article-item-content">
+        active={partitionEnabled}
+      >
+        <div className={styles.content} data-testid="article-item-content">
           {HTMLReactParser(article.content)}
         </div>
       </PartitionalLockedContent>

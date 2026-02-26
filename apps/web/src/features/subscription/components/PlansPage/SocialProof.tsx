@@ -5,7 +5,7 @@ import { random, randomInt } from '@maw/utils/math';
 import { useTranslations } from 'next-intl';
 import { useCallback, useEffect, useMemo, useState } from 'react';
 
-import { SubscriptionPackage } from '../../schemas';
+import type { SubscriptionPackage } from '../../schemas';
 
 export interface SocialProofProps {
   plans: SubscriptionPackage[];

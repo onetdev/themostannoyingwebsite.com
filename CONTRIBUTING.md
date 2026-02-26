@@ -138,7 +138,7 @@ Similarly follow a similar path to what's in "Your first code contribution", sin
 ## Styleguides
 
 - Please follow the established coding style.
-- We use ESLint for linting TypeScript, check automatically happens in git hooks and on Github Actions.
+- We use [Biome](https://biomejs.dev/) for linting and formatting, check automatically happens in git hooks and on Github Actions.
 - Consistent and clean code is easier to maintain and review.
 
 ### Commit Messages

@@ -1,4 +1,8 @@
-import { ClipboardEvent, FunctionComponent, PropsWithChildren } from 'react';
+import type {
+  ClipboardEvent,
+  FunctionComponent,
+  PropsWithChildren,
+} from 'react';
 
 export type CopyMarkerProps = PropsWithChildren<{
   append?: { text: string; html: string } | 'url';

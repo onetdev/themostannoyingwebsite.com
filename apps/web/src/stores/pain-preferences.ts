@@ -80,7 +80,8 @@ export interface PainPreferencesStateActions {
 }
 
 export interface PainPreferencesStore
-  extends PainPreferencesState, PainPreferencesStateActions {}
+  extends PainPreferencesState,
+    PainPreferencesStateActions {}
 
 const initialStateFlags: PainPreferencesState['flags'] = {
   'gifts.detectAdblocker': true,

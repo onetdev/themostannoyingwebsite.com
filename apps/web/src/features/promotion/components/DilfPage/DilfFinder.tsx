@@ -14,7 +14,10 @@ export function DilfFinder() {
         height={1000}
         alt={t('gifts.dilf.title')}
       />
-      <DilfClickOverlay className="absolute top-0 w-full" />
+      <DilfClickOverlay
+        className="absolute top-0 w-full"
+        title={t('gifts.dilf.finderOverlayTitle')}
+      />
     </div>
   );
 }

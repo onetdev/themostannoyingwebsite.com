@@ -1,11 +1,10 @@
 import { useMessages, useTranslations } from 'next-intl';
 import { useCallback, useEffect, useMemo, useState } from 'react';
-
-import { ChatMessage, ChatMessageType } from '../schemas';
+import { useMount } from 'react-use';
 
 import { useAudio, useSendNotification } from '@/hooks';
 import { useRuntimeStore, useUserPreferencesStore } from '@/stores';
-import { useMount } from 'react-use';
+import type { ChatMessage, ChatMessageType } from '../schemas';
 
 export function useChatBubbleHistory() {
   const t = useTranslations();
@@ -51,7 +50,7 @@ export function useChatBubbleHistory() {
   );
 
   const addRandomBotItem = useCallback(() => {
-    if (botMessageVariants.length == 0) {
+    if (botMessageVariants.length === 0) {
       botMessageVariants.push(t('chatBubble.messageFallback'));
     }
     const randomMessage =

@@ -1,8 +1,8 @@
 'use client';
 
+import { Button } from '@maw/ui-lib';
 import { useTranslations } from 'next-intl';
 import { useState } from 'react';
-
 import { useRuntimeStore, useUserGrantsStore } from '@/stores';
 
 export function AdblockerSuspectBar() {
@@ -22,7 +22,9 @@ export function AdblockerSuspectBar() {
       <h4>{t('gifts.suspectBar.title')}</h4>
       <p>{t('gifts.suspectBar.description')}</p>
       <div className="my-2 flex items-center justify-end gap-3">
-        <button onClick={() => setOpen(false)}>{t('common.ok')}</button>
+        <Button variant="outline" onClick={() => setOpen(false)}>
+          {t('common.ok')}
+        </Button>
       </div>
     </div>
   );

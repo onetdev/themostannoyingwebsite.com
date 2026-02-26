@@ -6,7 +6,7 @@ import {
   Plane,
   Program,
   Renderer,
-  Texture,
+  type Texture,
   Transform,
 } from 'ogl';
 import { useEffect, useRef } from 'react';
@@ -226,7 +226,7 @@ export function MazeScreensaver() {
     }
 
     const easeInOutCubic = (t: number) =>
-      t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
+      t < 0.5 ? 4 * t * t * t : 1 - (-2 * t + 2) ** 3 / 2;
 
     let rafId: number;
     function update(t: number) {
@@ -248,7 +248,7 @@ export function MazeScreensaver() {
         if (canGo(leftDir)) sideOptions.push(leftDir);
         if (canGo(rightDir)) sideOptions.push(rightDir);
 
-        let nextDir;
+        let nextDir: number;
         if (canGo(forwardDir)) {
           if (sideOptions.length > 0 && Math.random() < TURN_CHANCE) {
             nextDir =

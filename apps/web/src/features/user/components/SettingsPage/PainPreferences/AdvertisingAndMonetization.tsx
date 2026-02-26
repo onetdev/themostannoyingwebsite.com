@@ -2,10 +2,8 @@
 
 import { Checkbox as FormCheckbox } from '@maw/ui-lib';
 import { useTranslations } from 'next-intl';
-
-import { SettingsField } from '../SettingsField';
-
 import { usePainPreferencesStore } from '@/stores';
+import { SettingsField } from '../SettingsField';
 
 export function AdvertisingAndMonetization() {
   const painPreferences = usePainPreferencesStore();
@@ -18,7 +16,8 @@ export function AdvertisingAndMonetization() {
       </h3>
       <SettingsField
         label={t('settings.optionalPainPoints.gifts.flaps')}
-        info={t('settings.optionalPainPointsHints.gifts.flaps')}>
+        info={t('settings.optionalPainPointsHints.gifts.flaps')}
+      >
         <FormCheckbox
           name="gift_flaps"
           checked={painPreferences.flags['gifts.flaps']}
@@ -29,7 +28,8 @@ export function AdvertisingAndMonetization() {
       </SettingsField>
       <SettingsField
         label={t('settings.optionalPainPoints.gifts.detectAdblocker')}
-        info={t('settings.optionalPainPointsHints.gifts.detectAdblocker')}>
+        info={t('settings.optionalPainPointsHints.gifts.detectAdblocker')}
+      >
         <FormCheckbox
           name="detect_adblocker"
           checked={painPreferences.flags['gifts.detectAdblocker']}
@@ -40,7 +40,8 @@ export function AdvertisingAndMonetization() {
       </SettingsField>
       <SettingsField
         label={t('settings.optionalPainPoints.gifts.oneByOne')}
-        info={t('settings.optionalPainPointsHints.gifts.oneByOne')}>
+        info={t('settings.optionalPainPointsHints.gifts.oneByOne')}
+      >
         <FormCheckbox
           name="one_by_one"
           checked={painPreferences.flags['gifts.oneByOne']}
@@ -51,7 +52,8 @@ export function AdvertisingAndMonetization() {
       </SettingsField>
       <SettingsField
         label={t('settings.optionalPainPoints.contentPaywall')}
-        info={t('settings.optionalPainPointsHints.contentPaywall')}>
+        info={t('settings.optionalPainPointsHints.contentPaywall')}
+      >
         <FormCheckbox
           name="content_paywall"
           checked={painPreferences.flags.contentPaywall}

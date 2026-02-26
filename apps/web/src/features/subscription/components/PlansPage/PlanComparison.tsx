@@ -12,7 +12,7 @@ import {
 import { cn } from '@maw/ui-lib/utils';
 import { useTranslations } from 'next-intl';
 
-import { SubscriptionFeature, SubscriptionPackage } from '../../schemas';
+import type { SubscriptionFeature, SubscriptionPackage } from '../../schemas';
 
 interface PlansPageProps {
   className?: string;
@@ -33,7 +33,8 @@ export function PlanComparison({ className, features, plans }: PlansPageProps) {
           {plans.map((pkg) => (
             <TableHead
               key={pkg.key}
-              className="px-4 py-4 text-center font-bold">
+              className="px-4 py-4 text-center font-bold"
+            >
               {t(pkg.titleKey)}
             </TableHead>
           ))}

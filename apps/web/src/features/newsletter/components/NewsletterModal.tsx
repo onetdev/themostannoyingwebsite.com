@@ -87,7 +87,8 @@ export function NewsletterModal({
         <form
           className="max-w-screen-sm"
           method="post"
-          onSubmit={handleSubmit(onSubmit)}>
+          onSubmit={handleSubmit(onSubmit)}
+        >
           {actions.text && <p className="mb-4">{actions.text}</p>}
           {!actions.text && (
             <>

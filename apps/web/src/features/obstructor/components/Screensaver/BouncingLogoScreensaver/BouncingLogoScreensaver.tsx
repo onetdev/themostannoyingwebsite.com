@@ -2,8 +2,8 @@
 
 import { clsx } from '@maw/ui-lib/utils';
 import { randomInt } from '@maw/utils/math';
-import React, { useEffect, useRef, useState } from 'react';
-
+import { useTranslations } from 'next-intl';
+import { useEffect, useRef, useState } from 'react';
 import { BouncyLogo } from './BouncyLogo';
 
 const HUE_ROTATION_CHANCE = 0.1;
@@ -32,6 +32,7 @@ const COLORS = [
 ];
 
 export function BouncingLogoScreensaver() {
+  const t = useTranslations('app');
   const [position, setPosition] = useState({ x: 0, y: 0 });
   const [isHueRotating, setIsHueRotating] = useState(false);
   const [colors, setColors] = useState(() => {
@@ -109,11 +110,13 @@ export function BouncingLogoScreensaver() {
       className={clsx(
         'pointer-events-none transition-colors select-none',
         isHueRotating && 'animate-hue-full-rotate duration-100',
-      )}>
+      )}
+    >
       <BouncyLogo
         fill={colors.logo}
         arrowFill={colors.arrow}
         className="w-50 lg:w-75"
+        title={t('logo')}
       />
     </div>
   );

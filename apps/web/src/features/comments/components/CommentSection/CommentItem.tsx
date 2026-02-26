@@ -5,7 +5,7 @@ import { useTranslations } from 'next-intl';
 import { useState } from 'react';
 import TimeAgo from 'react-timeago';
 
-import { Comment } from '../../schemas';
+import type { Comment } from '../../schemas';
 
 export interface CommentItemProps {
   comment: Comment;
@@ -50,7 +50,8 @@ export function CommentItem({ comment, onReply, onLike }: CommentItemProps) {
                 variant="ghost"
                 size="sm"
                 className="text-primary font-medium"
-                onClick={() => setShowReplies(!showReplies)}>
+                onClick={() => setShowReplies(!showReplies)}
+              >
                 {showReplies
                   ? t('comments.hideReplies')
                   : t('comments.showReplies', {
@@ -64,7 +65,7 @@ export function CommentItem({ comment, onReply, onLike }: CommentItemProps) {
 
       {hasReplies && showReplies && (
         <div className="border-border ml-4 space-y-3 border-l pl-4 sm:ml-11">
-          {comment.replies!.map((reply) => (
+          {comment.replies?.map((reply) => (
             <CommentItem
               key={reply.id}
               comment={reply}

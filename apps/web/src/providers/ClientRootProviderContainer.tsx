@@ -2,15 +2,13 @@
 
 import { Toaster, TooltipProvider } from '@maw/ui-lib';
 import { ThemeProvider } from 'next-themes';
-import { PropsWithChildren } from 'react';
-
-import { ClientNavigationConfigurator } from './ClientNavigationConfigurator';
-
+import type { PropsWithChildren } from 'react';
 import { AppConfigProvider } from '@/contexts/AppConfig';
 import { DependencyContainer } from '@/contexts/DependencyContainer';
 import { getDependencyContainer } from '@/dependency-container';
 import { ClientPainContainer } from '@/providers/ClientPainProvider';
-import { AppConfig } from '@/schemas/app-config';
+import type { AppConfig } from '@/schemas/app-config';
+import { ClientNavigationConfigurator } from './ClientNavigationConfigurator';
 
 export type ClientRootProviderContainerProps = PropsWithChildren<{
   appConfig: AppConfig;

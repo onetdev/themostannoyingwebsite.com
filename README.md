@@ -22,6 +22,7 @@ Past releases and changelog items under [MAW releases](https://github.com/onetde
 - [pnpm](https://pnpm.io/) - Node.js package manager
 - [TypeScript](https://www.typescriptlang.org/docs/) - JavaScript typed superset language.
 - [Turborepo](https://turbo.build/repo/docs) - Monorepo tooling
+- [Biome](https://biomejs.dev/) - Toolchain for web projects (linting, formatting)
 - [Playwright](https://playwright.dev/) - E2E testing framework
 - [Jest](https://jestjs.io/) - Unit testing framework
 
@@ -69,14 +70,14 @@ pnpm test:e2e --headed
 
 # Run tests in UI mode (interactive)
 cd apps/web
-npx playwright test --ui
+pnpx playwright test --ui
 ```
 
 **View test results:**
 After running tests, you can view the HTML report:
 ```bash
 cd apps/web
-npx playwright show-report
+pnpx playwright show-report
 ```
 
 For detailed information about our E2E testing strategy, see `apps/web/e2e/README.md`.
@@ -87,7 +88,6 @@ This is a Turborepo monorepo. Here's a quick rundown of the main folders:
 
 - `apps/ui-docs`: Documentation for the UI components.
 - `apps/web`: The main Next.js frontend.
-- `packages/config-eslint`: Shared ESLint config with prettier.
 - `packages/config-jest`: Shared Jest preset.
 - `packages/config-ts`: Shared TypeScript config.
 - `packages/content-api`: Content layer for articles and other dynamic content.

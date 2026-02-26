@@ -20,21 +20,25 @@ export function MandatoryExperienceInfo() {
       </CardHeader>
       <CardContent className="flex flex-col justify-between gap-3">
         <SettingsField
-          label={t('settings.mandatoryExperienceFlags.unreasonableContent')}>
+          label={t('settings.mandatoryExperienceFlags.unreasonableContent')}
+        >
           <FormCheckbox name="unreasonable_content" checked={true} disabled />
         </SettingsField>
         <SettingsField
-          label={t('settings.mandatoryExperienceFlags.impossibleLogin')}>
+          label={t('settings.mandatoryExperienceFlags.impossibleLogin')}
+        >
           <FormCheckbox name="impossible_login" checked={true} disabled />
         </SettingsField>
         <SettingsField
-          label={t('settings.mandatoryExperienceFlags.impossibleSignup')}>
+          label={t('settings.mandatoryExperienceFlags.impossibleSignup')}
+        >
           <FormCheckbox name="impossible_signup" checked={true} disabled />
         </SettingsField>
         <SettingsField
           label={t(
             'settings.mandatoryExperienceFlags.impossiblePasswordReminder',
-          )}>
+          )}
+        >
           <FormCheckbox
             name="impossible_password_reminder"
             checked={true}
@@ -42,11 +46,13 @@ export function MandatoryExperienceInfo() {
           />
         </SettingsField>
         <SettingsField
-          label={t('settings.mandatoryExperienceFlags.flaimYourPhone')}>
+          label={t('settings.mandatoryExperienceFlags.flaimYourPhone')}
+        >
           <FormCheckbox name="claim_your_phone" checked={true} disabled />
         </SettingsField>
         <SettingsField
-          label={t('settings.mandatoryExperienceFlags.fakeAiSubscription')}>
+          label={t('settings.mandatoryExperienceFlags.fakeAiSubscription')}
+        >
           <FormCheckbox name="fake_ai_subscription" checked={true} disabled />
         </SettingsField>
       </CardContent>

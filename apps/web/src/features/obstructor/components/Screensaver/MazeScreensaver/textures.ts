@@ -1,4 +1,4 @@
-import { OGLRenderingContext, Texture } from 'ogl';
+import { type OGLRenderingContext, Texture } from 'ogl';
 
 export function getTextures(gl: OGLRenderingContext) {
   function setupNetworkTexture(url: string) {

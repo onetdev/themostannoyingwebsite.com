@@ -14,9 +14,9 @@ import { useTranslations } from 'next-intl';
 import { useMemo } from 'react';
 
 import {
-  ActiveNavigationItem,
+  type ActiveNavigationItem,
   isNavigationItemActive,
-  NavItem,
+  type NavItem,
   PERSONAL_NAVIGATION_LINKS,
   SITE_NAVIGATION_LINKS,
 } from '@/app/navigation';
@@ -58,7 +58,8 @@ export function AppNavigationMobile({ activeItem }: AppNavigationMobileProps) {
     <Sheet>
       <SheetTrigger
         className="hover:bg-accent flex size-9 items-center justify-center rounded-md transition-colors md:hidden"
-        aria-label={t('app.toggleMenu')}>
+        aria-label={t('app.toggleMenu')}
+      >
         <Icon icon="menu" />
       </SheetTrigger>
       <SheetContent side="left" className="w-[280px] gap-0 overflow-y-auto">
@@ -85,7 +86,8 @@ export function AppNavigationMobile({ activeItem }: AppNavigationMobileProps) {
                     onClick={() => onClick(item)}
                     data-active={active}
                     aria-current={active ? 'page' : undefined}
-                    className="hover:bg-accent hover:text-accent-foreground data-[active=true]:bg-accent data-[active=true]:text-primary text-muted-foreground flex items-center rounded-md px-3 py-2 text-sm font-medium transition-colors data-[active=true]:font-semibold">
+                    className="hover:bg-accent hover:text-accent-foreground data-[active=true]:bg-accent data-[active=true]:text-primary text-muted-foreground flex items-center rounded-md px-3 py-2 text-sm font-medium transition-colors data-[active=true]:font-semibold"
+                  >
                     {item.icon && (
                       <Icon icon={item.icon} className="text-primary mr-2" />
                     )}

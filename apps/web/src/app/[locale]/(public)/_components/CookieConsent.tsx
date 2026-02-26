@@ -22,7 +22,9 @@ export function CookieConsent() {
           <Link href="/settings" passHref prefetch={false}>
             {t('navigation.settings')}
           </Link>
-          <button onClick={close}>{t('common.ok')}</button>
+          <button type="button" onClick={close}>
+            {t('common.ok')}
+          </button>
         </div>
       </div>
     )

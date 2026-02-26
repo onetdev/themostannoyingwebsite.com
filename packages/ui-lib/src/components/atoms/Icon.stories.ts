@@ -1,6 +1,5 @@
-import type { Meta, StoryObj } from '@storybook/nextjs';
-
 import { Icon } from '@maw/ui-lib';
+import type { Meta, StoryObj } from '@storybook/nextjs';
 
 const meta = {
   title: 'Example/Icon',

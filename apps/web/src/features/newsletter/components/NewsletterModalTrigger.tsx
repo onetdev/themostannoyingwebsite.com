@@ -1,11 +1,9 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-
-import { NewsletterModal } from './NewsletterModal';
-
 import { useScrollDistanceTrigger } from '@/hooks';
 import { usePainPreferencesStore, useRuntimeStore } from '@/stores';
+import { NewsletterModal } from './NewsletterModal';
 
 export interface NewsletterModalTriggerProps {
   scrollDistanceTrigger?: number;
@@ -35,13 +33,9 @@ export function NewsletterModalTrigger({
     setModalVisible(false);
   };
 
-  if (!enabled! || !modalVisible) {
+  if (!enabled || !modalVisible) {
     return null;
   }
 
-  return (
-    <>
-      <NewsletterModal visible={modalVisible} onDismiss={onModalDismiss} />
-    </>
-  );
+  return <NewsletterModal visible={modalVisible} onDismiss={onModalDismiss} />;
 }

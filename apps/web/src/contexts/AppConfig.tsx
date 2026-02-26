@@ -2,12 +2,12 @@
 
 import {
   createContext,
-  FunctionComponent,
-  PropsWithChildren,
+  type FunctionComponent,
+  type PropsWithChildren,
   useContext,
 } from 'react';
 
-import { AppConfig } from '@/schemas/app-config';
+import type { AppConfig } from '@/schemas/app-config';
 
 export const AppConfigContext = createContext<AppConfig | null>(null);
 

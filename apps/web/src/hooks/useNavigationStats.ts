@@ -1,8 +1,7 @@
 'use client';
 
-import { usePathname } from 'next/navigation';
 import { useEffect, useState } from 'react';
-
+import { usePathname } from '@/i18n/navigation';
 import { useRuntimeStore } from '@/stores';
 
 export const useNavigationStats = () => {

@@ -61,7 +61,8 @@ export function UrgencyCountdown({
         'bg-destructive text-destructive-foreground rounded-full px-4 py-1.5 text-sm font-bold shadow-lg',
         !isExpired && 'animate-pulse',
         className,
-      )}>
+      )}
+    >
       {isExpired
         ? t('plansPage.urgency.expired')
         : t('plansPage.urgency.compact', {

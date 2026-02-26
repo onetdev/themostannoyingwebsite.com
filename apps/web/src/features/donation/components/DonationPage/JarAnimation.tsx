@@ -2,7 +2,7 @@
 
 import {
   DotLottieReact,
-  DotLottieReactProps,
+  type DotLottieReactProps,
 } from '@lottiefiles/dotlottie-react';
 
 import { useDonationBalance } from '../../hooks';
