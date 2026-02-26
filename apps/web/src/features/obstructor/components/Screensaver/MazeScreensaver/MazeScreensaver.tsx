@@ -10,7 +10,7 @@ import {
   Transform,
 } from 'ogl';
 import { useEffect, useRef } from 'react';
-
+import { useAppConfig } from '@/contexts/AppConfig';
 import { MAZE_24 } from './data';
 import { texturedFragment, texturedVertex } from './shaders';
 import { getTextures } from './textures';
@@ -24,6 +24,7 @@ type Direction = 'N' | 'S' | 'E' | 'W';
 
 // Windows 95 3D Maze inspired raycasting screensaver
 export function MazeScreensaver() {
+  const config = useAppConfig();
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
   useEffect(() => {
@@ -49,7 +50,7 @@ export function MazeScreensaver() {
     });
     const scene = new Transform();
 
-    const textures = getTextures(gl);
+    const textures = getTextures(gl, config.obstructor.assets);
 
     // Geometry
     const geometry = new Plane(gl, {
@@ -74,7 +75,7 @@ export function MazeScreensaver() {
 
     const wallProgram = {
       1: createTextureProgram(textures.wall),
-      2: createTextureProgram(textures.wall, textures.overay42),
+      2: createTextureProgram(textures.wall, textures.overlayEasteregg),
     };
     const floorProgram = createTextureProgram(textures.floor);
     const ceilingProgram = createTextureProgram(textures.ceiling);
@@ -337,7 +338,7 @@ export function MazeScreensaver() {
       cancelAnimationFrame(rafId);
       window.removeEventListener('resize', resize);
     };
-  }, []);
+  }, [config.obstructor.assets]);
 
   return <canvas ref={canvasRef} />;
 }

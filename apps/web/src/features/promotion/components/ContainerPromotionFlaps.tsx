@@ -4,10 +4,11 @@ import Image from 'next/image';
 import { useTranslations } from 'next-intl';
 import { useTheme } from 'next-themes';
 import type { PropsWithChildren } from 'react';
-
+import { useAppConfig } from '@/contexts/AppConfig';
 import { Link } from '@/i18n/navigation';
 
 export function ContainerPromotionFlaps() {
+  const config = useAppConfig();
   const t = useTranslations();
   const { resolvedTheme } = useTheme();
 
@@ -17,7 +18,7 @@ export function ContainerPromotionFlaps() {
         <Link href="/dilf" passHref prefetch={false}>
           <Image
             className="object-cover opacity-30 mix-blend-lighten"
-            src="/ads/ad-dilf-flaps.webp"
+            src={config.promotion.assets.dilfFlapsAd}
             alt={t('gifts.dilf.title')}
             width={1900}
             height={1000}

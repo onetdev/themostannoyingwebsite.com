@@ -1,1 +1,1 @@
-export { BouncingLogoScreensaver } from './BouncingLogoScreensaver';
+export * from './BouncingLogoScreensaver';

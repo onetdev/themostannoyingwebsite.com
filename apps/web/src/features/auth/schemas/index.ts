@@ -1,3 +1,4 @@
+export * from './auth-config';
 export * from './auth-errors';
 export * from './gender';
 export * from './login-form';

@@ -2,6 +2,7 @@ import { create } from 'zustand';
 import { createJSONStorage, persist } from 'zustand/middleware';
 
 import config from '@/config';
+import type { ScreensaverVariant } from '@/features/obstructor/schemas';
 
 export const PAIN_PREFERENCES_STORAGE_KEY = 'zustand-pain-preferences-storage';
 export const PRIVATE_PAIN_POINT_LIST = [
@@ -38,8 +39,6 @@ export const PAIN_POINT_LIST = [
 ] as const;
 
 export type PainPointKey = (typeof PAIN_POINT_LIST)[number];
-
-export type ScreensaverVariant = 'bouncingLogo' | 'maze';
 
 export type PainPreferencesState = {
   flags: Record<PainPointKey, boolean>;
@@ -111,8 +110,8 @@ const initialState: PainPreferencesState = {
   flags: initialStateFlags,
   publicLevel: calculatePublicLevelMeta(initialStateFlags),
   screensaver: {
-    timeoutSeconds: config.screensaver.defaultTimeoutSeconds,
-    variant: 'bouncingLogo',
+    timeoutSeconds: config.obstructor.screensaver.defaultTimeoutSeconds,
+    variant: config.obstructor.screensaver.defaultVariant as ScreensaverVariant,
   },
 };
 

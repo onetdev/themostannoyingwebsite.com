@@ -1,6 +1,9 @@
 import { z } from 'zod';
 
 export const DonationConfigSchema = z.object({
+  assets: z.object({
+    moneyJarAnimation: z.string(),
+  }),
   buyMeACoffeeUrl: z.string(),
   paypalUrl: z.string(),
   ethWallet: z.object({

@@ -13,6 +13,7 @@ import {
 
 export type CaptchaTitlePuzzleFieldProps = {
   fieldName?: string;
+  imageSrc?: string;
   required?: boolean;
   text: {
     label: string;
@@ -23,6 +24,7 @@ export type CaptchaTitlePuzzleFieldProps = {
 
 export function CaptchaTitlePuzzleField({
   fieldName = 'captcha',
+  imageSrc,
   required,
   text,
 }: CaptchaTitlePuzzleFieldProps) {
@@ -41,7 +43,7 @@ export function CaptchaTitlePuzzleField({
           className="border-foreground my-3 rounded-md border"
           cols={6}
           rows={4}
-          imageSrc="/assets/images/captcha-tile-abstract.jpg"
+          imageSrc={imageSrc}
           onResolved={() => setValue(fieldName, 'true')}
         />
         <input
