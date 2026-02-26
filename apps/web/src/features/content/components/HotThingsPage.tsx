@@ -104,13 +104,15 @@ export function HotThingsPage() {
           </button>
         )}
         {isDisallowed && (
-          <button
-            type="button"
+          <div
+            role="alert"
             className="text-error absolute top-1/2 left-1/2 translate-[-50%] text-7xl"
-            aria-label={t('hotThings.videoPlaybackFailed')}
           >
-            <Icon icon="failed" />
-          </button>
+            <Icon
+              icon="failed"
+              aria-label={t('hotThings.videoPlaybackFailed')}
+            />
+          </div>
         )}
       </div>
     </>
