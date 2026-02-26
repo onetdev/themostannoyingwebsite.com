@@ -33,6 +33,7 @@
     "@types/node": "catalog:",
     "@types/sanitize-html": "catalog:",
     "jest": "catalog:",
+    "jest-environment-jsdom": "catalog:",
     "ts-jest": "catalog:",
     "typescript": "catalog:"
   }

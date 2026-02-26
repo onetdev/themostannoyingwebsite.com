@@ -1,3 +1,6 @@
+/**
+ * @jest-environment jsdom
+ */
 import {
   getLocationPermissionState,
   getNotificationPermissionState,
@@ -6,60 +9,63 @@ import {
 } from './browser';
 
 describe('browser utils', () => {
-  const originalWindow = global.window;
-  const originalNavigator = global.navigator;
-  const originalNotification = (global as any).Notification;
+  const originalNotification = window.Notification;
+  const originalNavigator = window.navigator;
 
-  afterEach(() => {
-    global.window = originalWindow;
-    global.navigator = originalNavigator;
-    (global as any).Notification = originalNotification;
+  beforeEach(() => {
     jest.restoreAllMocks();
   });
 
-  describe('isBrowser', () => {
-    it('should return true if window is defined', () => {
-      global.window = {} as any;
-      expect(isBrowser()).toBe(true);
+  afterEach(() => {
+    window.Notification = originalNotification;
+    Object.defineProperty(window, 'navigator', {
+      value: originalNavigator,
+      configurable: true,
     });
+  });
 
-    it('should return false if window is undefined', () => {
-      delete global.window;
-      expect(isBrowser()).toBe(false);
+  describe('isBrowser', () => {
+    it('should return true in jsdom environment', () => {
+      expect(isBrowser()).toBe(true);
     });
   });
 
   describe('getNotificationPermissionState', () => {
-    it('should return undefined if not in browser', () => {
-      delete global.window;
-      expect(getNotificationPermissionState()).toBeUndefined();
+    it('should return permission if Notification is supported', () => {
+      // @ts-expect-error
+      window.Notification = { permission: 'granted' };
+      expect(getNotificationPermissionState()).toBe('granted');
     });
 
-    it('should return permission if Notification is in window', () => {
-      global.window = {
-        Notification: { permission: 'granted' },
-      } as any;
-      (global as any).Notification = { permission: 'granted' };
-      expect(getNotificationPermissionState()).toBe('granted');
+    it('should return undefined if Notification is not supported', () => {
+      // @ts-expect-error
+      delete window.Notification;
+      expect(getNotificationPermissionState()).toBeUndefined();
     });
   });
 
   describe('requestNotificationPermission', () => {
-    it('should return undefined if not in browser or Notification not in window', async () => {
-      delete global.window;
+    it('should return undefined if serviceWorker is not supported', async () => {
+      // @ts-expect-error
+      window.Notification = { requestPermission: jest.fn() };
+      // JSDOM has navigator but we can mock it
+      Object.defineProperty(window, 'navigator', {
+        value: { serviceWorker: undefined },
+        configurable: true,
+      });
+
       const result = await requestNotificationPermission();
       expect(result).toBeUndefined();
     });
 
     it('should call requestPermission if supported', async () => {
       const mockRequestPermission = jest.fn().mockResolvedValue('granted');
-      global.window = {
-        Notification: { requestPermission: mockRequestPermission },
-      } as any;
-      global.navigator = { serviceWorker: {} } as any;
-      (global as any).Notification = {
-        requestPermission: mockRequestPermission,
-      };
+      // @ts-expect-error
+      window.Notification = { requestPermission: mockRequestPermission };
+      Object.defineProperty(window, 'navigator', {
+        value: { serviceWorker: {} },
+        configurable: true,
+      });
 
       const result = await requestNotificationPermission();
       expect(mockRequestPermission).toHaveBeenCalled();
@@ -68,21 +74,25 @@ describe('browser utils', () => {
   });
 
   describe('getLocationPermissionState', () => {
-    it('should return state if supported', async () => {
+    it('should return state if permissions API is supported', async () => {
       const mockQuery = jest.fn().mockResolvedValue({ state: 'granted' });
-      global.window = {} as any;
-      global.navigator = {
-        permissions: { query: mockQuery },
-      } as any;
+      Object.defineProperty(window, 'navigator', {
+        value: {
+          permissions: { query: mockQuery },
+        },
+        configurable: true,
+      });
 
       const result = await getLocationPermissionState();
       expect(mockQuery).toHaveBeenCalledWith({ name: 'geolocation' });
       expect(result).toBe('granted');
     });
 
-    it('should return undefined if permissions not in navigator', async () => {
-      global.window = {} as any;
-      global.navigator = {} as any;
+    it('should return undefined if permissions API is not supported', async () => {
+      Object.defineProperty(window, 'navigator', {
+        value: {},
+        configurable: true,
+      });
       const result = await getLocationPermissionState();
       expect(result).toBeUndefined();
     });

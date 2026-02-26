@@ -52,12 +52,13 @@ describe('AuthService', () => {
         passwordConfirmation: 'password',
         firstName: 'John',
         lastName: 'Doe',
+        username: 'johndoe123',
         nickname: 'johndoe',
         gender: 'male' as const,
-        dateOfBirth: { year: 1990, month: 1, day: 1 },
+        dateOfBirth: new Date(1990, 0, 1),
+        countryCode: 'US',
         consentPrivacyPolicy: true,
         consentNewsletter: true,
-        consentChildSoul: true,
       };
       await authService.register(data);
       expect(useCases.register).toHaveBeenCalledWith(mockRepo, data);

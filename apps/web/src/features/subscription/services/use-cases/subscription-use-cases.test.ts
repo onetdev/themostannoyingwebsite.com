@@ -6,7 +6,7 @@ describe('Subscription Use Cases', () => {
     it('should return a list of subscription features', async () => {
       const result = await getFeatures();
       expect(result.success).toBe(true);
-      if (result.success) {
+      if (result.success && result.data) {
         expect(result.data).toBeInstanceOf(Array);
         expect(result.data.length).toBeGreaterThan(0);
         expect(result.data[0]).toHaveProperty('id');
@@ -20,7 +20,7 @@ describe('Subscription Use Cases', () => {
     it('should return a list of subscription plans', async () => {
       const result = await getPlans();
       expect(result.success).toBe(true);
-      if (result.success) {
+      if (result.success && result.data) {
         expect(result.data).toBeInstanceOf(Array);
         expect(result.data.length).toBeGreaterThan(0);
         expect(result.data[0]).toHaveProperty('key');

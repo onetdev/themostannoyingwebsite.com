@@ -56,5 +56,8 @@
     "onlyBuiltDependencies": [
       "@sentry/cli"
     ]
+  },
+  "lint-staged": {
+    "*.{js,ts,tsx,jsx,json,css,md}": "biome check --write"
   }
 }

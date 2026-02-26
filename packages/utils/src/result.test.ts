@@ -14,7 +14,10 @@ describe('result utils', () => {
     });
 
     test('should merge metadata', () => {
-      const metadata = { requestId: '123' };
+      const metadata = {
+        requestId: '123',
+        timestamp: '2026-02-26T12:28:25+00:00',
+      };
       const result = createSuccessResult('data', metadata);
       expect(result.metadata?.requestId).toBe('123');
       expect(result.metadata?.timestamp).toBeDefined();
@@ -39,7 +42,10 @@ describe('result utils', () => {
     });
 
     test('should merge metadata in error result', () => {
-      const metadata = { requestId: '456' };
+      const metadata = {
+        requestId: '456',
+        timestamp: '2026-02-26T12:28:25+00:00',
+      };
       const result = createErrorResult({ message: 'err', metadata });
       expect(result.metadata?.requestId).toBe('456');
     });

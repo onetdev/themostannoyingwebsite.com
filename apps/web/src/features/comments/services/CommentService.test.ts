@@ -18,16 +18,14 @@ describe('CommentService', () => {
     it('should call generateTree and filterByDate with correct arguments', async () => {
       const mockArticle: ArticleDatum = {
         slug: 'test-article',
-        publishedAt: '2023-01-01',
+        publishedAt: new Date('2023-01-01'),
         title: 'Test Article',
-        contextHighlight: '',
-        content: '',
-        excerpt: '',
-        coverImage: {
-          src: '',
-          width: 0,
-          height: 0,
-        },
+        assetGroupId: 'test-group',
+        content: 'test content',
+        isHighlighted: false,
+        isOnCover: false,
+        locale: 'en',
+        url: '/articles/test-article',
       };
 
       const mockTree = [

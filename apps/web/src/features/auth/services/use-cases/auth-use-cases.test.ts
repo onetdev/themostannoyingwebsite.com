@@ -39,12 +39,13 @@ describe('Auth Use Cases', () => {
         passwordConfirmation: 'password',
         firstName: 'John',
         lastName: 'Doe',
+        username: 'johndoe123',
         nickname: 'johndoe',
         gender: 'male' as const,
-        dateOfBirth: { year: 1990, month: 1, day: 1 },
+        dateOfBirth: new Date(1990, 0, 1),
+        countryCode: 'US',
         consentPrivacyPolicy: true,
         consentNewsletter: true,
-        consentChildSoul: true,
       };
       await register(mockRepo, data);
       expect(mockRepo.createUser).toHaveBeenCalledWith(data);
