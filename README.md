@@ -175,8 +175,9 @@ Visit [onet.dev](https://onet.dev) or drop me an email.
 
 ### 3rd party credits
 
-- **AI disclaimer**: Article covers and content are generated via AI (DALL-E, ChatGPT) and curated by humans.
-- **Notification sound for "live chat"**: [akx/Notifications](https://github.com/akx/Notifications) under license CC0.
+- **AI disclaimer**: Article covers and content are generated via AI (DALL-E, ChatGPT, Gemini) and curated by humans.
+- **New message notification sound**: [Universfield/New Notification 014](https://pixabay.com/sound-effects/film-special-effects-new-notification-014-363678/) under Pixabay Content license.
+- **Achivement sound**: [DenielCZ/Achievement Unlocked](https://pixabay.com/sound-effects/technology-achievement-unlocked-463070/) under Pixabay Content license.
 - **Cookie jar animation on donation page**: [Saving the Money](https://lottiefiles.com/free-animation/saving-the-money-C9plsMchxQ) on LottieFiles.
 - **Icons**: [FontAwesome](https://fontawesome.com).
 - **Lava photo on "Hot Things"** (by Tanya Grypachevskaya): [Unsplash](https://unsplash.com/photos/80x3QULJDN4).

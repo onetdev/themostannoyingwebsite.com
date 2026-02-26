@@ -17,7 +17,7 @@ export function useChatBubbleHistory() {
   const [isForeground, setForeground] = useState(false);
   const [badgeCounter, setBadgeCounter] = useState(1);
   const notification = useSendNotification();
-  const notificationSfx = useAudio('/assets/sfx/notification_chord1.wav');
+  const notificationSfx = useAudio('/assets/sfx/new_message.mp3');
 
   const botMessageVariants = useMemo(() => {
     const all = Object.keys(messages.chatBubble.messageVariants).map((key) =>
