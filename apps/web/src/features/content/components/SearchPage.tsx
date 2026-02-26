@@ -116,22 +116,21 @@ export function SearchPage() {
       )}
       {showResultList &&
         results.items.map((item) => (
-            <div className="my-4" key={item.lookup.slug}>
-              <h4>
-                <Link
-                  href={`articles/${item.lookup.slug}`}
-                  passHref
+          <div className="my-4" key={item.lookup.slug}>
+            <h4>
+              <Link
+                href={`articles/${item.lookup.slug}`}
+                passHref
                 prefetch={false}
               >
-                  {item.title}
-                </Link>
-              </h4>
-              <p className="max-w-screen-md">
-                {HTMLReactParser(item.contextHighlight)}
-              </p>
-            </div>
-        ))
-      }
+                {item.title}
+              </Link>
+            </h4>
+            <p className="max-w-screen-md">
+              {HTMLReactParser(item.contextHighlight)}
+            </p>
+          </div>
+        ))}
       {!loading && results && results.count < 1 && (
         <>
           <div className="my-10 text-2xl font-bold">

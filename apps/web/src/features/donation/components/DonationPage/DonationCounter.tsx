@@ -59,7 +59,7 @@ export function DonationCounter({ className, ...rest }: DonationCounterProps) {
               ? 'opacity-100'
               : 'opacity-0'
             : 'w-0 opacity-0'
-          }`}
+        }`}
       >
         -
       </span>

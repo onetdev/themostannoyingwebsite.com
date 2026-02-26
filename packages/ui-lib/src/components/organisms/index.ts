@@ -1,7 +1,6 @@
 export * from './Card';
 export * from './DelayedMount';
 export * from './Dialog';
-export * from './EscapingElement';
 export * from './Field';
 export * from './NavigationMenu';
 export * from './RadioGroup';
