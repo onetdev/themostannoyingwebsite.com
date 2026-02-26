@@ -8,13 +8,6 @@ export const ACHIEVEMENT_REGISTRY: AchievementDefinition[] = [
     type: 'boolean',
   },
   {
-    id: 'click-annoying-button',
-    nameKey: 'achievements.registry.clickAnnoyingButton.name',
-    descriptionKey: 'achievements.registry.clickAnnoyingButton.description',
-    type: 'progression',
-    targetProgress: 10,
-  },
-  {
     id: 'first-package-selection',
     nameKey: 'achievements.registry.firstPackageSelection.name',
     descriptionKey: 'achievements.registry.firstPackageSelection.description',
@@ -24,6 +17,32 @@ export const ACHIEVEMENT_REGISTRY: AchievementDefinition[] = [
     id: 'first-search',
     nameKey: 'achievements.registry.firstSearch.name',
     descriptionKey: 'achievements.registry.firstSearch.description',
+    type: 'boolean',
+  },
+  {
+    id: 'right-click-rebel',
+    nameKey: 'achievements.registry.rightClickRebel.name',
+    descriptionKey: 'achievements.registry.rightClickRebel.description',
+    type: 'progression',
+    targetProgress: 20,
+  },
+  {
+    id: 'copy-paste-criminal',
+    nameKey: 'achievements.registry.copyPasteCriminal.name',
+    descriptionKey: 'achievements.registry.copyPasteCriminal.description',
+    type: 'progression',
+    targetProgress: 5,
+  },
+  {
+    id: 'escape-artist',
+    nameKey: 'achievements.registry.escapeArtist.name',
+    descriptionKey: 'achievements.registry.escapeArtist.description',
+    type: 'boolean',
+  },
+  {
+    id: 'dead-pixel-hunter',
+    nameKey: 'achievements.registry.deadPixelHunter.name',
+    descriptionKey: 'achievements.registry.deadPixelHunter.description',
     type: 'boolean',
   },
 ];

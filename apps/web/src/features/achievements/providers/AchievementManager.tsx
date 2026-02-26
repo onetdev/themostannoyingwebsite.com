@@ -65,5 +65,25 @@ export const AchievementManager = () => {
     handleUnlock('first-search', newlyAchieved);
   });
 
+  useEventBusListener('CONTEXT_MENU_ATTEMPT', () => {
+    const newlyAchieved = incrementAchievementProgress('right-click-rebel', 1, 20);
+    handleUnlock('right-click-rebel', newlyAchieved);
+  });
+
+  useEventBusListener('TEXT_COPIED', () => {
+    const newlyAchieved = incrementAchievementProgress('copy-paste-criminal', 1, 5);
+    handleUnlock('copy-paste-criminal', newlyAchieved);
+  });
+
+  useEventBusListener('EXIT_PROMPT_TRIGGERED', () => {
+    const newlyAchieved = completeAchievement('escape-artist');
+    handleUnlock('escape-artist', newlyAchieved);
+  });
+
+  useEventBusListener('DEAD_PIXEL_CLICK_ATTEMPT', () => {
+    const newlyAchieved = completeAchievement('dead-pixel-hunter');
+    handleUnlock('dead-pixel-hunter', newlyAchieved);
+  });
+
   return <AchievementToastManager />;
 };

@@ -552,6 +552,22 @@ export default {
         name: 'The Seeker',
         description: 'Try searching for something on this website.',
       },
+      rightClickRebel: {
+        name: 'Right-Click Rebel',
+        description: 'Try to open the context menu 20 times (even though it is disabled).',
+      },
+      copyPasteCriminal: {
+        name: 'Copy-Paste Criminal',
+        description: 'Copy text from the site 5 times.',
+      },
+      escapeArtist: {
+        name: 'Escape Artist',
+        description: 'Successfully trigger the exit prompt.',
+      },
+      deadPixelHunter: {
+        name: 'Dead Pixel Hunter',
+        description: 'Try to click on a dead pixel.',
+      },
     },
   },
   share: {
