@@ -1,9 +1,8 @@
-import { Metadata } from 'next';
+import type { Metadata } from 'next';
 import { getTranslations } from 'next-intl/server';
-
+import { FlaimSurveyPage } from '@/features/promotion/components';
 import { PageLayout } from '../_components/PageLayout';
 
-import { FlaimSurveyPage } from '@/features/promotion/components';
 export { generateStaticParams } from '@/i18n/routing';
 
 export const revalidate = 1800;
@@ -27,7 +26,8 @@ export default async function Page() {
     <PageLayout
       role="main"
       className="mx-auto max-w-screen-lg py-0 md:py-14"
-      autoPadding={false}>
+      autoPadding={false}
+    >
       <h1>{t('gifts.wanPhone.title')}</h1>
       <FlaimSurveyPage
         className="my-5 w-full"

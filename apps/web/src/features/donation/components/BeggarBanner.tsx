@@ -3,10 +3,8 @@
 import { Icon } from '@maw/ui-lib';
 import { useTranslations } from 'next-intl';
 import { useEffect, useState } from 'react';
-
-import { useDonationService } from '../hooks';
-
 import { Link } from '@/i18n/navigation';
+import { useDonationService } from '../hooks';
 
 export function BeggarBanner() {
   const t = useTranslations();
@@ -53,9 +51,11 @@ export function BeggarBanner() {
           </p>
         </div>
         <button
+          type="button"
           onClick={handleDismiss}
           className="shrink-0 cursor-pointer"
-          aria-label="Dismiss banner">
+          aria-label="Dismiss banner"
+        >
           <Icon icon="close" />
         </button>
       </div>

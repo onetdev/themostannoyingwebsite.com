@@ -1,4 +1,4 @@
-import { type useTranslations } from 'next-intl';
+import type { useTranslations } from 'next-intl';
 
 import { DI as DIAuth } from '@/features/auth/types';
 import { DI as DIComments } from '@/features/comments/types';

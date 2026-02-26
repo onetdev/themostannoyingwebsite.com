@@ -1,6 +1,6 @@
 import { PageHeadline } from '@maw/ui-lib';
 import styles from '@maw/ui-lib/content.module.css';
-import { Metadata } from 'next';
+import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import { getTranslations } from 'next-intl/server';
 

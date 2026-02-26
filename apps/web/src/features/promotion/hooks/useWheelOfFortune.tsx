@@ -3,12 +3,12 @@
 import {
   getWeightedRandom,
   randomInt,
-  WeightedRandomPoolItem,
+  type WeightedRandomPoolItem,
 } from '@maw/utils/math';
 import { useTranslations } from 'next-intl';
 import { useCallback, useMemo, useState } from 'react';
 
-import { Item } from '../components/WheelOfFortune/DynamicWheelSvg';
+import type { Item } from '../components/WheelOfFortune/DynamicWheelSvg';
 
 export type AnimatedWheelState = 'ready' | 'spinning' | 'completed';
 

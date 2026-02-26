@@ -2,7 +2,7 @@
 
 import { CopyMarker } from '@maw/ui-lib';
 import { useTranslations } from 'next-intl';
-import { PropsWithChildren, useEffect } from 'react';
+import { type PropsWithChildren, useEffect } from 'react';
 import { useBeforeUnload } from 'react-use';
 
 import { PageTitleGlitch } from '@/features/interferrer/components';

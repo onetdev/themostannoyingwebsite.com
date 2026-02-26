@@ -1,9 +1,8 @@
 'use client';
 
-import { ComponentProps, useEffect, useState } from 'react';
-
-import { SlotDigit } from './SlotDigit';
+import { type ComponentProps, useEffect, useState } from 'react';
 import { useDonationBalance } from '../../hooks';
+import { SlotDigit } from './SlotDigit';
 
 export type DonationCounterProps = ComponentProps<'div'>;
 
@@ -50,7 +49,8 @@ export function DonationCounter({ className, ...rest }: DonationCounterProps) {
     <div
       aria-label={`${currency}${amount}`}
       className={`flex items-center justify-center gap-2 p-6 ${bgGradient} rounded-lg border-2 shadow-2xl ${borderColor} transition-all duration-500 ${className ?? ''}`}
-      {...rest}>
+      {...rest}
+    >
       <span
         aria-hidden
         className={`text-3xl font-bold ${digitColor} transition-all duration-500 ${
@@ -59,12 +59,14 @@ export function DonationCounter({ className, ...rest }: DonationCounterProps) {
               ? 'opacity-100'
               : 'opacity-0'
             : 'w-0 opacity-0'
-        }`}>
+          }`}
+      >
         -
       </span>
       <span
         aria-hidden
-        className={`text-3xl font-bold ${digitColor} transition-colors duration-500`}>
+        className={`text-3xl font-bold ${digitColor} transition-colors duration-500`}
+      >
         {currency}
       </span>
       <div aria-hidden className="flex gap-1">

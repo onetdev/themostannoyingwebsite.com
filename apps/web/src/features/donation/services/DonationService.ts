@@ -1,4 +1,4 @@
-import { Container, injectable } from 'inversify';
+import { type Container, injectable } from 'inversify';
 
 import {
   type BeggingBannerData,

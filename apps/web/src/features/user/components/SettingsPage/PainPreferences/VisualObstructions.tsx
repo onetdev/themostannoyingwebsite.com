@@ -12,10 +12,8 @@ import {
   SelectValue,
 } from '@maw/ui-lib';
 import { useTranslations } from 'next-intl';
-
+import { type ScreensaverVariant, usePainPreferencesStore } from '@/stores';
 import { SettingsField } from '../SettingsField';
-
-import { ScreensaverVariant, usePainPreferencesStore } from '@/stores';
 
 export function VisualObstructions() {
   const painPreferences = usePainPreferencesStore();
@@ -31,7 +29,8 @@ export function VisualObstructions() {
       </h3>
       <SettingsField
         label={t('settings.optionalPainPoints.screensaver')}
-        info={t('settings.optionalPainPointsHints.screensaver')}>
+        info={t('settings.optionalPainPointsHints.screensaver')}
+      >
         <FormCheckbox
           name="screensaver"
           checked={painPreferences.flags.screensaver}
@@ -54,7 +53,8 @@ export function VisualObstructions() {
                   painPreferences.setScreensaverVariant(
                     value as ScreensaverVariant,
                   );
-                }}>
+                }}
+              >
                 <SelectTrigger className="w-full">
                   <SelectValue />
                 </SelectTrigger>
@@ -83,7 +83,8 @@ export function VisualObstructions() {
                   painPreferences.setScreensaverTimeoutSeconds(
                     parseInt(value, 10),
                   );
-                }}>
+                }}
+              >
                 <SelectTrigger className="w-full">
                   <SelectValue />
                 </SelectTrigger>
@@ -103,7 +104,8 @@ export function VisualObstructions() {
       )}
       <SettingsField
         label={t('settings.optionalPainPoints.deadPixel')}
-        info={t('settings.optionalPainPointsHints.deadPixel')}>
+        info={t('settings.optionalPainPointsHints.deadPixel')}
+      >
         <FormCheckbox
           name="dead_pixel"
           checked={painPreferences.flags.deadPixel}
@@ -114,7 +116,8 @@ export function VisualObstructions() {
       </SettingsField>
       <SettingsField
         label={t('settings.optionalPainPoints.stickyVideo')}
-        info={t('settings.optionalPainPointsHints.stickyVideo')}>
+        info={t('settings.optionalPainPointsHints.stickyVideo')}
+      >
         <FormCheckbox
           name="sticky_video"
           checked={painPreferences.flags.stickyVideo}

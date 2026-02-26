@@ -14,14 +14,16 @@ export function Question({ data, selectOption }: QuestionProps) {
       <h3 className="my-3">{data.text}</h3>
       <RadioGroup
         onValueChange={(value) => selectOption(parseInt(value, 10))}
-        className="gap-4">
+        className="gap-4"
+      >
         {data.options.map((option, index) => {
           const id = `flaim-survey-option-${index}`;
           return (
             <Field
               key={`${index}-${option}`}
               orientation="horizontal"
-              className="items-center gap-2">
+              className="items-center gap-2"
+            >
               <RadioGroupItem
                 value={index.toString()}
                 id={id}

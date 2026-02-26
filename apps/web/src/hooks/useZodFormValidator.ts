@@ -2,10 +2,10 @@
 
 import { zodResolver } from '@hookform/resolvers/zod/dist/zod.js';
 import { useTranslations } from 'next-intl';
-import { FieldValues } from 'react-hook-form';
-import { z } from 'zod';
+import type { FieldValues } from 'react-hook-form';
+import type { z } from 'zod';
 
-import { ZodTranslator } from '@/types';
+import type { ZodTranslator } from '@/types';
 
 export function useZodFormValidator<
   TFieldValues extends FieldValues = FieldValues,

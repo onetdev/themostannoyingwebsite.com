@@ -4,7 +4,10 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { useTranslations } from 'next-intl';
 import { useForm } from 'react-hook-form';
 
-import { getNewsletterFormDataSchema, NewsletterFormData } from '../schemas';
+import {
+  getNewsletterFormDataSchema,
+  type NewsletterFormData,
+} from '../schemas';
 
 export function useNewsletterForm() {
   const t = useTranslations();

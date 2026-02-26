@@ -3,16 +3,18 @@
 import { PageHeadline } from '@maw/ui-lib';
 import { useTranslations } from 'next-intl';
 import { useCallback, useState } from 'react';
-
+import type { BillingCycle } from '../../schemas/billing-cycle';
+import type { SubscriptionFeature } from '../../schemas/subscription-feature';
+import type { SubscriptionPackage } from '../../schemas/subscription-package';
 import { BillingCycleSelector } from './BillingCycleSelector';
 import { Disclaimer } from './Disclaimer';
 import { PlanCard } from './PlanCard';
 import { PlanComparison } from './PlanComparison';
-import { SocialProof, SocialProofProps } from './SocialProof';
-import { UrgencyCountdown, UrgencyCountdownProps } from './UrgencyCountdown';
-import { BillingCycle } from '../../schemas/billing-cycle';
-import { SubscriptionFeature } from '../../schemas/subscription-feature';
-import { SubscriptionPackage } from '../../schemas/subscription-package';
+import { SocialProof, type SocialProofProps } from './SocialProof';
+import {
+  UrgencyCountdown,
+  type UrgencyCountdownProps,
+} from './UrgencyCountdown';
 
 interface PlansPageProps {
   plans: SubscriptionPackage[];

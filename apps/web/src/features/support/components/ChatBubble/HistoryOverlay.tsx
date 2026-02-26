@@ -7,10 +7,9 @@ import {
 } from '@maw/ui-lib';
 import { useTranslations } from 'next-intl';
 import { useEffect, useMemo, useRef, useState } from 'react';
-
+import type { ChatMessage } from '../../schemas';
 import { MessageBubble } from './MessageBubble';
 import { MessageForm } from './MessageForm';
-import { ChatMessage } from '../../schemas';
 
 export type HistoryOverlayProps = {
   history: ChatMessage[];
@@ -62,13 +61,14 @@ export function HistoryOverlay({
             </TooltipContent>
           </Tooltip>
         </h4>
-        <button onClick={() => onClose()}>
+        <button type="button" onClick={() => onClose()}>
           <Icon icon="close" />
         </button>
       </div>
       <div
         className="max-h-clamp-300-screen-half flex flex-col gap-2 overflow-auto px-5 py-3"
-        ref={pagerRef}>
+        ref={pagerRef}
+      >
         {history.length > 0 &&
           historyViewData.map(({ item, showTime }, index) => (
             <MessageBubble key={index} item={item} showTime={showTime} />

@@ -7,7 +7,7 @@ import {
   TooltipTrigger,
 } from '@maw/ui-lib';
 import { cn } from '@maw/ui-lib/utils';
-import { PropsWithChildren } from 'react';
+import type { PropsWithChildren } from 'react';
 
 export type SettingsFieldProps = PropsWithChildren<{
   info?: string;
@@ -24,7 +24,8 @@ export function SettingsField({
   return (
     <Field
       orientation="horizontal"
-      className={cn(reverse && 'flex-row-reverse justify-between', 'gap-3')}>
+      className={cn(reverse && 'flex-row-reverse justify-between', 'gap-3')}
+    >
       {children}
       <FieldLabel className="flex items-center gap-2">
         {label}

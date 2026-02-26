@@ -20,12 +20,14 @@ export function GlobalStickyVideo() {
   }
 
   return (
-    <>
+
       <div className="sticky right-2 bottom-2 flex justify-end md:fixed">
         <button
+        type="button"
           className="bg-error text-on-error absolute top-1 right-2 cursor-pointer rounded-full"
           aria-label={t('common.close')}
-          onClick={() => setClosed(true)}>
+        onClick={() => setClosed(true)}
+      >
           <Icon icon="close" />
         </button>
         <iframe
@@ -33,7 +35,6 @@ export function GlobalStickyVideo() {
           ref={$playerRef}
           src="https://www.youtube.com/embed/M7lc1UVf-VE?autoplay=1&controls=2&loop=1&mute=1"
         />
-      </div>
-    </>
+    </div>
   );
 }

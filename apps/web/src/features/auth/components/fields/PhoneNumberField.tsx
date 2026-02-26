@@ -151,7 +151,8 @@ export function PhoneNumberField({
                 <SelectTrigger
                   className="w-1/4"
                   aria-label={t('user.field.phoneNumberCountryCode')}
-                  aria-invalid={invalid}>
+                  aria-invalid={invalid}
+                >
                   <SelectValue />
                 </SelectTrigger>
                 <SelectContent>
@@ -171,7 +172,8 @@ export function PhoneNumberField({
                 variant="outline"
                 aria-label={t('user.field.phoneNumberDecrease')}
                 onMouseDown={onDecrementClick}
-                onTouchStart={onDecrementClick}>
+                onTouchStart={onDecrementClick}
+              >
                 -
               </InputGroupButton>
             </InputGroupAddon>
@@ -189,7 +191,8 @@ export function PhoneNumberField({
                 variant="outline"
                 aria-label={t('user.field.phoneNumberIncrease')}
                 onMouseDown={onIncrementClick}
-                onTouchStart={onIncrementClick}>
+                onTouchStart={onIncrementClick}
+              >
                 +
               </InputGroupButton>
             </InputGroupAddon>

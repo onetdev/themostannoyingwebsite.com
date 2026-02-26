@@ -48,12 +48,14 @@ export function SlotDigit({ value, delay = 0 }: SlotDigitProps) {
         }`}
         style={{
           transform: `translateY(-${currentValue * 3}rem)`,
-        }}>
+        }}
+      >
         {[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9].map(
           (num, idx) => (
             <div
               key={idx}
-              className="flex h-12 w-8 items-center justify-center transition-colors duration-500">
+              className="flex h-12 w-8 items-center justify-center transition-colors duration-500"
+            >
               {num}
             </div>
           ),

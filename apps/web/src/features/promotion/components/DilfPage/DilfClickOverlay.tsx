@@ -33,13 +33,15 @@ export function DilfClickOverlay({
       fillRule="evenodd"
       clipRule="evenodd"
       strokeLinejoin="round"
-      strokeMiterlimit="2">
+      strokeMiterlimit="2"
+    >
       {renderData.map(({ path, query }, index) => (
         <a
           href={`//maps.google.com/?q=${query}`}
           target="_blank"
           key={query}
-          rel="noopener noreferrer">
+          rel="noopener noreferrer"
+        >
           <path
             d={path}
             fill={debug ? `hsl(${(index * 3) % 360}, 100%, 50%)` : '#fff0'}

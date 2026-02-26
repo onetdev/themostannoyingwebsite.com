@@ -1,6 +1,6 @@
-import { ArticleDatum } from '@maw/content-api';
+import type { ArticleDatum } from '@maw/content-api';
 import type { MetadataRoute } from 'next';
-import { Languages } from 'next/dist/lib/metadata/types/alternative-urls-types';
+import type { Languages } from 'next/dist/lib/metadata/types/alternative-urls-types';
 
 import { getDependencyContainer } from '@/dependency-container';
 import { getAppArticleService } from '@/features/content/services';

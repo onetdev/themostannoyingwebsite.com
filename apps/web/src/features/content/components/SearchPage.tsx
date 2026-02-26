@@ -6,13 +6,11 @@ import { random } from '@maw/utils/math';
 import HTMLReactParser from 'html-react-parser';
 import { useLocale, useMessages, useTranslations } from 'next-intl';
 import { useCallback, useEffect, useMemo, useState } from 'react';
-
-import { useAppArticleService } from '../hooks';
-import { ArticleSearchResult } from '../schemas';
-
 import { SearchForm } from '@/features/content/components';
 import { Link } from '@/i18n/navigation';
 import { usePainPreferencesStore } from '@/stores';
+import { useAppArticleService } from '../hooks';
+import type { ArticleSearchResult } from '../schemas';
 
 export type Result = {
   query: string;
@@ -116,15 +114,15 @@ export function SearchPage() {
           })}
         </div>
       )}
-      {showResultList && (
-        <>
-          {results.items.map((item) => (
+      {showResultList &&
+        results.items.map((item) => (
             <div className="my-4" key={item.lookup.slug}>
               <h4>
                 <Link
                   href={`articles/${item.lookup.slug}`}
                   passHref
-                  prefetch={false}>
+                prefetch={false}
+              >
                   {item.title}
                 </Link>
               </h4>
@@ -132,9 +130,8 @@ export function SearchPage() {
                 {HTMLReactParser(item.contextHighlight)}
               </p>
             </div>
-          ))}
-        </>
-      )}
+        ))
+      }
       {!loading && results && results.count < 1 && (
         <>
           <div className="my-10 text-2xl font-bold">
@@ -148,7 +145,8 @@ export function SearchPage() {
                   <li key={item}>
                     <span
                       onClick={() => onRecommendedClick(item)}
-                      className="text-primary cursor-pointer">
+                      className="text-primary cursor-pointer"
+                    >
                       {item}
                     </span>
                   </li>

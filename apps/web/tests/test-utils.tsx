@@ -1,12 +1,12 @@
 import {
+  type RenderHookOptions,
+  type RenderOptions,
+  type RenderResult,
   render,
   renderHook,
-  RenderHookOptions,
-  RenderOptions,
-  RenderResult,
 } from '@testing-library/react';
 import { NextIntlClientProvider } from 'next-intl';
-import { ReactElement } from 'react';
+import type { ReactElement } from 'react';
 
 import en from '@/i18n/messages/en';
 
@@ -17,10 +17,8 @@ interface CustomRenderOptions extends Omit<RenderOptions, 'wrapper'> {
   messages?: typeof defaultMessages;
 }
 
-interface CustomRenderHookOptions<TProps> extends Omit<
-  RenderHookOptions<TProps>,
-  'wrapper'
-> {
+interface CustomRenderHookOptions<TProps>
+  extends Omit<RenderHookOptions<TProps>, 'wrapper'> {
   locale?: string;
   messages?: typeof defaultMessages;
 }

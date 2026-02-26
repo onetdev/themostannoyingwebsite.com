@@ -5,7 +5,7 @@ import { useEffect, useState } from 'react';
 import {
   FIREFLY_PARTICLE_COLORS,
   FireflyParticle,
-  FireflyParticleProps,
+  type FireflyParticleProps,
 } from './FireFlyParticle';
 
 export interface SliderRailProps {
@@ -24,7 +24,7 @@ export function SliderRail({
       const newParticle: FireflyParticleProps = {
         createdAt: Date.now(),
         // Skew distribution to the right
-        x: Math.pow(Math.random(), 0.5) * 100,
+        x: Math.random() ** 0.5 * 100,
         size: Math.random() * 3 + 1,
         duration: Math.random() * 2 + 1.5,
         color:
@@ -59,7 +59,8 @@ export function SliderRail({
       <svg
         viewBox="0 0 100 6"
         preserveAspectRatio="none"
-        className={`relative z-10 h-1 w-full ${className}`}>
+        className={`relative z-10 h-1 w-full ${className}`}
+      >
         <defs>
           <linearGradient id="railGradient" x1="0%" y1="0%" x2="100%" y2="0%">
             <stop offset="0%" stopColor="#3b82f6" />

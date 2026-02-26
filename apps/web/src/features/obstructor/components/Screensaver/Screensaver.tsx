@@ -2,12 +2,10 @@
 
 import { AnimatePresence, motion } from 'framer-motion';
 import { useTranslations } from 'next-intl';
-import React, { useEffect, useState } from 'react';
-
+import { useEffect, useState } from 'react';
+import { usePainPreferencesStore, useRuntimeStore } from '@/stores';
 import { BouncingLogoScreensaver } from './BouncingLogoScreensaver';
 import { MazeScreensaver } from './MazeScreensaver';
-
-import { usePainPreferencesStore, useRuntimeStore } from '@/stores';
 
 export function Screensaver() {
   const isEnabled = usePainPreferencesStore((state) => state.flags.screensaver);
@@ -48,7 +46,8 @@ export function Screensaver() {
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
           transition={{ duration: 0.2 }}
-          className="fixed inset-0 z-1000 cursor-none overflow-hidden bg-black">
+          className="fixed inset-0 z-1000 cursor-none overflow-hidden bg-black"
+        >
           {variant === 'maze' ? (
             <MazeScreensaver />
           ) : (

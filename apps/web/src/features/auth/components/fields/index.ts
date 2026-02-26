@@ -1,6 +1,6 @@
+export * from './ConsentChildSoulField';
 export * from './ConsentNewsletterField';
 export * from './ConsentPrivacyPolicyField';
-export * from './ConsentChildSoulField';
 export * from './CountryField';
 export * from './DateOfBirthField';
 export * from './EmailField';

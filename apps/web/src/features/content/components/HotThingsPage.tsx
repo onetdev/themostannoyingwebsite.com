@@ -82,19 +82,23 @@ export function HotThingsPage() {
         />
         {!isDisallowed && isCapable && (
           <button
+            type="button"
             className="absolute top-1/2 left-1/2 translate-[-50%] cursor-pointer text-7xl"
             onClick={onIntent}
             hidden={Boolean(stream)}
-            aria-label={t('hotThings.playVideo')}>
+            aria-label={t('hotThings.playVideo')}
+          >
             <Icon icon="play" />
           </button>
         )}
         {isDisallowed && (
-          <div
+          <button
+            type="button"
             className="text-error absolute top-1/2 left-1/2 translate-[-50%] text-7xl"
-            aria-label={t('hotThings.videoPlaybackFailed')}>
+            aria-label={t('hotThings.videoPlaybackFailed')}
+          >
             <Icon icon="failed" />
-          </div>
+          </button>
         )}
       </div>
     </>

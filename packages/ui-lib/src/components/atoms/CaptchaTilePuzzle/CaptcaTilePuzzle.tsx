@@ -119,7 +119,8 @@ export function CaptchaTilePuzzle({
       }}
     >
       {viewData.map((tile, index) => (
-        <div
+        <button
+          type="button"
           key={tile.key}
           data-is-empty={tile.isEmpty.toString()}
           data-is-correct={tile.isCorrect.toString()}
@@ -133,7 +134,7 @@ export function CaptchaTilePuzzle({
           onClick={() => onCellClick(index)}
         >
           {<TileView data={tile} imageSrc={imageSrc} size={size} />}
-        </div>
+        </button>
       ))}
     </div>
   );

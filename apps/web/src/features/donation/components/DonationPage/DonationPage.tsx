@@ -1,12 +1,11 @@
 import { Button } from '@maw/ui-lib';
 import { getTranslations } from 'next-intl/server';
-
+import { Link } from '@/i18n/navigation';
+import { getAppConfigService } from '@/services';
 import { CryptoWalletList } from './CryptoWalletList';
 import { DonationCounter } from './DonationCounter';
 import { JarAnimation } from './JarAnimation';
 
-import { Link } from '@/i18n/navigation';
-import { getAppConfigService } from '@/services';
 export { generateStaticParams } from '@/i18n/routing';
 
 export async function DonationPage() {

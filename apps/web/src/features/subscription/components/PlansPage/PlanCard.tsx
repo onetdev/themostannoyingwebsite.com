@@ -14,8 +14,8 @@ import { useTranslations } from 'next-intl';
 
 import {
   BILLING_CYCLE_MONTH_MAP,
-  BillingCycle,
-  SubscriptionPackage,
+  type BillingCycle,
+  type SubscriptionPackage,
 } from '../../schemas';
 
 export interface PlanCardProps {
@@ -51,7 +51,8 @@ export function PlanCard({
       className={cn(
         'hover:border-primary relative flex w-full max-w-sm shrink-0 flex-col overflow-hidden border-2 transition-colors',
         isSelected ? 'border-primary' : 'border-border',
-      )}>
+      )}
+    >
       {plan.isPopular && (
         <>
           <div
@@ -60,7 +61,8 @@ export function PlanCard({
               isSelected
                 ? 'bg-primary text-primary-foreground'
                 : 'bg-muted text-muted-foreground',
-            )}>
+            )}
+          >
             {t('plansPage.mostPopular')}
           </div>
           <Separator />
@@ -76,14 +78,16 @@ export function PlanCard({
             <>
               <div
                 className="text-muted-foreground text-sm line-through"
-                data-testid="original-price">
+                data-testid="original-price"
+              >
                 {t('plansPage.pricePerMonth', {
                   price: formatCurrency(priceBase),
                 })}
               </div>
               <div
                 className="text-primary flex items-center text-2xl font-bold"
-                data-testid="discounted-price">
+                data-testid="discounted-price"
+              >
                 <span>
                   {t('plansPage.pricePerMonth', {
                     price: formatCurrency(priceDiscountCorrected),
@@ -99,7 +103,8 @@ export function PlanCard({
           ) : (
             <div
               className="text-primary text-2xl font-bold"
-              data-testid="original-price">
+              data-testid="original-price"
+            >
               {t('plansPage.pricePerMonth', {
                 price: formatCurrency(priceBase),
               })}
@@ -110,7 +115,8 @@ export function PlanCard({
         <Separator />
         <div
           className="text-muted-foreground mt-2 text-xs leading-tight italic"
-          data-testid="charge-disclaimer">
+          data-testid="charge-disclaimer"
+        >
           {t('plansPage.billing.chargeDisclaimer', {
             amount: formatCurrency(totalCharge),
           })}{' '}
@@ -121,7 +127,8 @@ export function PlanCard({
         <Button
           className="w-full"
           variant={isSelected ? 'default' : 'outline'}
-          onClick={onSelect}>
+          onClick={onSelect}
+        >
           {isSelected ? t('common.done') : t('common.select')}
         </Button>
       </CardFooter>

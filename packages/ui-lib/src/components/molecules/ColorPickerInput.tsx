@@ -26,7 +26,6 @@ const resolveVariant = (size: ColorPickerInputSize) => {
     case 'lg':
       className = 'h-7 w-11';
       break;
-    case 'md':
     default:
       className = 'h-5 w-8';
       break;

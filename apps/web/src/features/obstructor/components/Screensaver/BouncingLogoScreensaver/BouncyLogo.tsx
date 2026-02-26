@@ -1,4 +1,4 @@
-import { SVGProps } from 'react';
+import type { SVGProps } from 'react';
 
 type BouncyLogoProps = SVGProps<SVGSVGElement> & { arrowFill?: string };
 
@@ -19,7 +19,8 @@ export const BouncyLogo = ({
       clipRule: 'evenodd',
       strokeMiterlimit: 10,
     }}
-    {...props}>
+    {...props}
+  >
     <g id="Arrow" transform="matrix(1,0,0,1,-96,-333)">
       <g transform="matrix(1,-0,-0,1,96,333)">
         <path

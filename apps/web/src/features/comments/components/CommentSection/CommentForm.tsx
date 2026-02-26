@@ -43,7 +43,8 @@ export function CommentForm() {
         id="create-comment"
         className="flex flex-col gap-5"
         method="post"
-        onSubmit={handleSubmit(onSubmit)}>
+        onSubmit={handleSubmit(onSubmit)}
+      >
         <FormError error={errors.root} />
 
         <Field>
@@ -85,7 +86,8 @@ export function CommentForm() {
           role="button"
           type="submit"
           className="mt-4"
-          disabled={isSubmitting}>
+          disabled={isSubmitting}
+        >
           {isSubmitting && <LoaderDots />}
           {!isSubmitting && t('comments.form.submit')}
         </Button>

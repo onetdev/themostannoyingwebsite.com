@@ -7,10 +7,10 @@ import {
   InputGroupButton,
   InputGroupInput,
 } from '@maw/ui-lib';
-import { cn, cva, VariantProps } from '@maw/ui-lib/utils';
+import { cn, cva, type VariantProps } from '@maw/ui-lib/utils';
 import { useRouter } from 'next/navigation';
 import { useTranslations } from 'next-intl';
-import { SubmitEventHandler } from 'react';
+import type { SubmitEventHandler } from 'react';
 
 import { DOCUMENT_EVENT_SEARCH } from '@/global';
 
@@ -72,7 +72,8 @@ export function SearchForm({
           <InputGroupButton
             aria-label={t('common.search')}
             type="submit"
-            className={cn(searchFormVariants({ size }))}>
+            className={cn(searchFormVariants({ size }))}
+          >
             <Icon icon="search" />
           </InputGroupButton>
         </InputGroupAddon>

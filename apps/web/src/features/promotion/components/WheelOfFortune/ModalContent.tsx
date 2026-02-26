@@ -2,11 +2,10 @@
 
 import { Button, Icon } from '@maw/ui-lib';
 import { useTranslations } from 'next-intl';
-import { ComponentProps } from 'react';
+import type { ComponentProps } from 'react';
 import Confetti from 'react-confetti';
-
-import { WheelAnimationWrapper } from './WheelAnimationWrapper';
 import { useWheelOfFortune } from '../../hooks';
+import { WheelAnimationWrapper } from './WheelAnimationWrapper';
 
 type ModalContentProps = ComponentProps<'div'>;
 
@@ -22,7 +21,8 @@ export function ModalContent({ className, ...rest }: ModalContentProps) {
   return (
     <div
       className={`relative flex flex-col overflow-hidden border-t pt-5 ${className}`}
-      {...rest}>
+      {...rest}
+    >
       <div className="grow">
         {wof.state === 'completed' && (
           <Confetti
@@ -47,7 +47,8 @@ export function ModalContent({ className, ...rest }: ModalContentProps) {
             <Button
               variant="ghost"
               className="text-xl"
-              onClick={() => wof.spin()}>
+              onClick={() => wof.spin()}
+            >
               <Icon icon="chevronRight" className="text-sm" />{' '}
               {t('wheelOfFortune.spinStart')}
               <Icon icon="chevronLeft" className="text-sm" />

@@ -9,7 +9,7 @@ import {
 } from '@maw/ui-lib';
 import { useTranslations } from 'next-intl';
 import { FormProvider } from 'react-hook-form';
-
+import { useNavigationProvider } from '@/contexts/NavigationContext';
 import { useSignupForm } from '../../hooks';
 import {
   ConsentChildSoulField,
@@ -27,8 +27,6 @@ import {
   PhoneNumberField,
   UsernameField,
 } from '../fields';
-
-import { useNavigationProvider } from '@/contexts/NavigationContext';
 
 export function SignupForm() {
   const t = useTranslations();
@@ -59,7 +57,8 @@ export function SignupForm() {
       <form
         className="flex flex-col gap-3 lg:flex-row lg:gap-10"
         method="post"
-        onSubmit={handleSubmit(onSubmit)}>
+        onSubmit={handleSubmit(onSubmit)}
+      >
         <FormError error={errors.root} />
         <div className="flex flex-col gap-4 lg:w-1/2">
           <div className="flex flex-row gap-5">
@@ -91,7 +90,8 @@ export function SignupForm() {
             type="submit"
             className="mt-10"
             size="lg"
-            disabled={isCtaDisabled}>
+            disabled={isCtaDisabled}
+          >
             {isCtaLoading && <LoaderDots />}
             {!isCtaLoading && t('user.form.signup.callToAction')}
           </Button>

@@ -2,7 +2,7 @@
 
 import { clsx } from '@maw/ui-lib/utils';
 import { randomInt } from '@maw/utils/math';
-import React, { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 import { BouncyLogo } from './BouncyLogo';
 
@@ -109,7 +109,8 @@ export function BouncingLogoScreensaver() {
       className={clsx(
         'pointer-events-none transition-colors select-none',
         isHueRotating && 'animate-hue-full-rotate duration-100',
-      )}>
+      )}
+    >
       <BouncyLogo
         fill={colors.logo}
         arrowFill={colors.arrow}

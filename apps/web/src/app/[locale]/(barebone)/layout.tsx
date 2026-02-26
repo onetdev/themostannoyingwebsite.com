@@ -35,7 +35,8 @@ async function LocaleBareboneRootLayout({
       lang={locale}
       dir={direction}
       data-theme={config.defaultColorScheme}
-      suppressHydrationWarning>
+      suppressHydrationWarning
+    >
       <body>
         <NextIntlClientProvider>
           <ClientRootProviderContainer appConfig={config}>

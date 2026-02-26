@@ -2,9 +2,8 @@ import { Icon } from '@maw/ui-lib';
 import { randomInt } from '@maw/utils/math';
 import { motion } from 'framer-motion';
 import { useEffect, useState } from 'react';
-
-import { DynamicWheelSvg, Item } from './DynamicWheelSvg';
-import { AnimatedWheelState } from '../../hooks';
+import type { AnimatedWheelState } from '../../hooks';
+import { DynamicWheelSvg, type Item } from './DynamicWheelSvg';
 
 type WheelAnimationWrapperProps = {
   highlightIndex?: number;

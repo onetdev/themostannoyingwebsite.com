@@ -29,7 +29,8 @@ export function ConsentPrivacyPolicyField({
       <FieldLabel
         htmlFor={fieldName}
         className="font-semibold"
-        required={required}>
+        required={required}
+      >
         {t('user.field.consentPrivacyPolicy')}
       </FieldLabel>
     </Field>

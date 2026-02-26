@@ -1,12 +1,10 @@
 'use client';
 
 import { useMessages, useTranslations } from 'next-intl';
-
+import { usePainPreferencesStore, useRuntimeStore } from '@/stores';
 import { ArrayPagedTitle } from './ArrayPagedTitle';
 import { GlitchyTitle } from './GlitchyTitle';
 import { MarqueeTitle } from './MarqueeTitle';
-
-import { usePainPreferencesStore, useRuntimeStore } from '@/stores';
 
 /**
  * Pain point of manipulating the page title. Unfortunatelly the refresh rate

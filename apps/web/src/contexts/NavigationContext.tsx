@@ -2,12 +2,12 @@
 
 import {
   createContext,
-  PropsWithChildren,
-  ReactElement,
+  type PropsWithChildren,
+  type ReactElement,
   useContext,
 } from 'react';
 
-import { RouteAlias } from '@/schemas';
+import type { RouteAlias } from '@/schemas';
 
 export type LinkComponentType = PropsWithChildren<{
   href: string;

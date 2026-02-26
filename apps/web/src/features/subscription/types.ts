@@ -1,6 +1,6 @@
-import { Result } from '@maw/utils/result';
+import type { Result } from '@maw/utils/result';
 
-import {
+import type {
   SubscriptionError,
   SubscriptionFeature,
   SubscriptionPackage,

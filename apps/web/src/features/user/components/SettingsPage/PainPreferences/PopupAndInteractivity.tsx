@@ -2,10 +2,8 @@
 
 import { Checkbox as FormCheckbox } from '@maw/ui-lib';
 import { useTranslations } from 'next-intl';
-
-import { SettingsField } from '../SettingsField';
-
 import { usePainPreferencesStore } from '@/stores';
+import { SettingsField } from '../SettingsField';
 
 export function PopupAndInteractivity() {
   const painPreferences = usePainPreferencesStore();
@@ -18,7 +16,8 @@ export function PopupAndInteractivity() {
       </h3>
       <SettingsField
         label={t('settings.optionalPainPoints.newsletterModal')}
-        info={t('settings.optionalPainPointsHints.newsletterModal')}>
+        info={t('settings.optionalPainPointsHints.newsletterModal')}
+      >
         <FormCheckbox
           name="newsletter"
           checked={painPreferences.flags.newsletterModal}
@@ -29,7 +28,8 @@ export function PopupAndInteractivity() {
       </SettingsField>
       <SettingsField
         label={t('settings.optionalPainPoints.mockChat')}
-        info={t('settings.optionalPainPointsHints.mockChat')}>
+        info={t('settings.optionalPainPointsHints.mockChat')}
+      >
         <FormCheckbox
           name="mock_chat"
           checked={painPreferences.flags.mockChat}
@@ -40,7 +40,8 @@ export function PopupAndInteractivity() {
       </SettingsField>
       <SettingsField
         label={t('settings.optionalPainPoints.wheelOfFortune')}
-        info={t('settings.optionalPainPointsHints.wheelOfFortune')}>
+        info={t('settings.optionalPainPointsHints.wheelOfFortune')}
+      >
         <FormCheckbox
           name="wheel_of_fortune"
           checked={painPreferences.flags.wheelOfFortune}
@@ -51,7 +52,8 @@ export function PopupAndInteractivity() {
       </SettingsField>
       <SettingsField
         label={t('settings.optionalPainPoints.notifications')}
-        info={t('settings.optionalPainPointsHints.notifications')}>
+        info={t('settings.optionalPainPointsHints.notifications')}
+      >
         <FormCheckbox
           name="notifications"
           checked={painPreferences.flags.notifications}
@@ -62,7 +64,8 @@ export function PopupAndInteractivity() {
       </SettingsField>
       <SettingsField
         label={t('settings.optionalPainPoints.exitPrompt')}
-        info={t('settings.optionalPainPointsHints.exitPrompt')}>
+        info={t('settings.optionalPainPointsHints.exitPrompt')}
+      >
         <FormCheckbox
           name="exit_prompt"
           checked={painPreferences.flags.exitPrompt}
@@ -73,7 +76,8 @@ export function PopupAndInteractivity() {
       </SettingsField>
       <SettingsField
         label={t('settings.optionalPainPoints.clipboardMarker')}
-        info={t('settings.optionalPainPointsHints.clipboardMarker')}>
+        info={t('settings.optionalPainPointsHints.clipboardMarker')}
+      >
         <FormCheckbox
           name="clipboard_marker"
           checked={painPreferences.flags.clipboardMarker}

@@ -4,7 +4,7 @@ import { sleep } from '@maw/utils/promise';
 import { useTranslations } from 'next-intl';
 import { useAsync } from 'react-use';
 
-import { useAdminTerminal } from './useAdminTerminal';
+import type { useAdminTerminal } from './useAdminTerminal';
 
 // I know this is just a gag, but having this here is feels wrong on
 // multiple levels. Hi Mark!

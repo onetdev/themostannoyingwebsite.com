@@ -4,14 +4,12 @@ import { Inter } from 'next/font/google';
 import { notFound } from 'next/navigation';
 import { hasLocale, NextIntlClientProvider } from 'next-intl';
 import { getLangDir } from 'rtl-detect';
-
-import { PainDecoratorLayout } from './_components/PainDecoratorLayout';
-
 import { BeggarBanner } from '@/features/donation/components';
 import { routing } from '@/i18n/routing';
 import { ClientObserverProvider } from '@/providers/ClientObserverProvider';
 import { ClientRootProviderContainer } from '@/providers/ClientRootProviderContainer';
 import { getAppConfigService } from '@/services';
+import { PainDecoratorLayout } from './_components/PainDecoratorLayout';
 
 const config = getAppConfigService().getAll();
 
@@ -39,7 +37,8 @@ async function LocalePublicRootLayout({
       lang={locale}
       dir={direction}
       data-theme={config.defaultColorScheme}
-      suppressHydrationWarning>
+      suppressHydrationWarning
+    >
       <body>
         <NextIntlClientProvider>
           <ClientRootProviderContainer appConfig={config}>

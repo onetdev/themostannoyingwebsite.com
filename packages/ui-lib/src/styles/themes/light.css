@@ -1,4 +1,4 @@
-@reference 'tailwindcss';
+@reference "tailwindcss";
 
 @layer theme {
   :root:not([data-theme="dark"]),

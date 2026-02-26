@@ -59,7 +59,8 @@ export function GenderField({
               <SelectTrigger
                 className="w-full"
                 aria-label={t('user.field.gender')}
-                aria-invalid={fieldState.invalid}>
+                aria-invalid={fieldState.invalid}
+              >
                 <SelectValue placeholder="" />
               </SelectTrigger>
               <SelectContent>

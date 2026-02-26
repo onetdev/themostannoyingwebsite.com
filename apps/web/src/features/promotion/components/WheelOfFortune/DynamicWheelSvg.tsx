@@ -1,6 +1,6 @@
 import { radToDeg } from '@maw/utils/math';
 import Color from 'color';
-import { ReactNode } from 'react';
+import type { ReactNode } from 'react';
 
 export type Item = {
   color: string;
@@ -68,7 +68,8 @@ export function DynamicWheelSvg({
           x={abMidpoint.x}
           y={abMidpoint.y}
           transform={`rotate(${labelAngle}, ${abMidpoint.x}, ${abMidpoint.y})`}
-          fill={labelColor}>
+          fill={labelColor}
+        >
           {item.text}
         </text>
       </g>,

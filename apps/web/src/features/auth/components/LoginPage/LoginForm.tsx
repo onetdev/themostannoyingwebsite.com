@@ -15,11 +15,9 @@ import {
 } from '@maw/ui-lib';
 import { useTranslations } from 'next-intl';
 import { FormProvider } from 'react-hook-form';
-
+import { useNavigationProvider } from '@/contexts/NavigationContext';
 import { useLoginForm } from '../../hooks';
 import { EmailField } from '../fields/EmailField';
-
-import { useNavigationProvider } from '@/contexts/NavigationContext';
 
 export function LoginForm() {
   const t = useTranslations();
@@ -54,7 +52,8 @@ export function LoginForm() {
       <form
         className="flex flex-col gap-5"
         method="post"
-        onSubmit={handleSubmit(onSubmit)}>
+        onSubmit={handleSubmit(onSubmit)}
+      >
         <FormError error={errors.root} />
         <EmailField />
         <Field>
@@ -83,7 +82,8 @@ export function LoginForm() {
           type="submit"
           className="mt-10"
           size="lg"
-          disabled={isCtaDisabled}>
+          disabled={isCtaDisabled}
+        >
           {isCtaLoading && <LoaderDots />}
           {!isCtaLoading && t('user.form.login.callToAction')}
         </Button>

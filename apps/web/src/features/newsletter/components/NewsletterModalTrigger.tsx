@@ -1,11 +1,9 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-
-import { NewsletterModal } from './NewsletterModal';
-
 import { useScrollDistanceTrigger } from '@/hooks';
 import { usePainPreferencesStore, useRuntimeStore } from '@/stores';
+import { NewsletterModal } from './NewsletterModal';
 
 export interface NewsletterModalTriggerProps {
   scrollDistanceTrigger?: number;

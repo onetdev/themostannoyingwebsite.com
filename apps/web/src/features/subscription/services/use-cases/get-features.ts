@@ -1,6 +1,6 @@
-import { Result } from '@maw/utils/result';
+import type { Result } from '@maw/utils/result';
 
-import { SubscriptionError, SubscriptionFeature } from '../../schemas';
+import type { SubscriptionError, SubscriptionFeature } from '../../schemas';
 
 export async function getFeatures(): Promise<
   Result<SubscriptionFeature[], SubscriptionError>

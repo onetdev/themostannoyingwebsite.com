@@ -26,7 +26,8 @@ export function ConsentNewsletterField({
         htmlFor={fieldName}
         className="font-semibold"
         required={required}
-        aria-invalid={!!errors[fieldName]}>
+        aria-invalid={!!errors[fieldName]}
+      >
         {t('user.field.consentNewsletter')}
       </FieldLabel>
     </Field>

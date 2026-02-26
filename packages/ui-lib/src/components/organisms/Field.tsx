@@ -82,13 +82,16 @@ export function Field({
   ...props
 }: ComponentProps<'div'> & VariantProps<typeof fieldVariants>) {
   return (
-    <div
-      role="group"
-      data-slot="field"
-      data-orientation={orientation}
-      className={cn(fieldVariants({ orientation }), className)}
-      {...props}
-    />
+    <>
+      {/* biome-ignore lint/a11y/useSemanticElements: Radix relies on role=group */}
+      <div
+        role="group"
+        data-slot="field"
+        data-orientation={orientation}
+        className={cn(fieldVariants({ orientation }), className)}
+        {...props}
+      />
+    </>
   );
 }
 
@@ -211,7 +214,7 @@ export function FieldError({
       ...new Map(errors.map((error) => [error?.message, error])).values(),
     ];
 
-    if (uniqueErrors?.length == 1) {
+    if (uniqueErrors?.length === 1) {
       return uniqueErrors[0]?.message;
     }
 

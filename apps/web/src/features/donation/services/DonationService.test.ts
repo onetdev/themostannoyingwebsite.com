@@ -1,7 +1,6 @@
-import { DonationBalanceConfig } from '../types';
-import { DonationService, getDonationService } from './DonationService';
-
 import { getDependencyContainer } from '@/dependency-container';
+import type { DonationBalanceConfig } from '../types';
+import { type DonationService, getDonationService } from './DonationService';
 
 describe('DonationService', () => {
   const container = getDependencyContainer();

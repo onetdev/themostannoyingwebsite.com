@@ -1,10 +1,10 @@
-import { Page } from '@playwright/test';
+import type { Page } from '@playwright/test';
 
 import {
   PAIN_PREFERENCES_STORAGE_KEY,
-  PainPreferencesState,
+  type PainPreferencesState,
   USER_GRANTS_STORAGE_KEY,
-  UserGrantsState,
+  type UserGrantsState,
 } from '@/stores';
 
 /**

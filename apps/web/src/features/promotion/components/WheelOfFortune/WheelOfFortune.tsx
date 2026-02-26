@@ -28,9 +28,11 @@ export function WheelOfFortune() {
       </Dialog>
       <div className="fixed top-1/2 left-0 z-30">
         <button
+          type="button"
           className="animate-wiggle-8deg bg-error text-on-error -ml-8 cursor-pointer py-3 pr-6 pl-10 text-2xl opacity-80 transition-all duration-200 ease-in-out hover:-ml-4 hover:opacity-100"
           onClick={() => setOpen(true)}
-          aria-label={t('wheelOfFortune.title')}>
+          aria-label={t('wheelOfFortune.title')}
+        >
           <Icon icon="tags" />
         </button>
       </div>

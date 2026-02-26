@@ -1,13 +1,11 @@
-import { Metadata } from 'next';
+import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
-
-import { PageLayout } from '../../_components/PageLayout';
-
 import { getDependencyContainer } from '@/dependency-container';
 import { CommentService } from '@/features/comments/services';
 import { ArticleItemPage } from '@/features/content/components';
 import { getAppArticleService } from '@/features/content/services';
 import i18nConfig from '@/root/i18n.config';
+import { PageLayout } from '../../_components/PageLayout';
 
 type PageParams = {
   slug: string;
@@ -72,7 +70,8 @@ export default async function Page({ params }: PageProps) {
     <PageLayout
       activeItem="article-item"
       role="main"
-      data-testid="article-item">
+      data-testid="article-item"
+    >
       <ArticleItemPage article={datum} comments={comments} />
     </PageLayout>
   );
