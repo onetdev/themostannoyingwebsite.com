@@ -22,6 +22,7 @@ Past releases and changelog items under [MAW releases](https://github.com/onetde
 - [pnpm](https://pnpm.io/) - Node.js package manager
 - [TypeScript](https://www.typescriptlang.org/docs/) - JavaScript typed superset language.
 - [Turborepo](https://turbo.build/repo/docs) - Monorepo tooling
+- [Biome](https://biomejs.dev/) - Toolchain for web projects (linting, formatting)
 - [Playwright](https://playwright.dev/) - E2E testing framework
 - [Jest](https://jestjs.io/) - Unit testing framework
 
