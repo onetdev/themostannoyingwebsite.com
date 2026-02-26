@@ -9,7 +9,7 @@
     "./color": "./src/color.ts",
     "./formatter": "./src/formatter.ts",
     "./math": "./src/math.ts",
-    "./network" : "./src/network.ts",
+    "./network": "./src/network.ts",
     "./promise": "./src/promise.ts",
     "./result": "./src/result.ts",
     "./seed": "./src/seed.ts",

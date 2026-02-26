@@ -1,5 +1,5 @@
 import { cva, type VariantProps } from 'class-variance-authority';
-import { ComponentProps, useMemo } from 'react';
+import { type ComponentProps, useMemo } from 'react';
 
 import { cn } from '../../utils';
 import { Label } from '../atoms/Label';
@@ -120,7 +120,8 @@ export function FieldLabel({
         'has-data-[state=checked]:bg-primary/5 has-data-[state=checked]:border-primary dark:has-data-[state=checked]:bg-primary/10',
         className,
       )}
-      {...props}>
+      {...props}
+    >
       {children}
       {required && (
         <span aria-hidden="true" className="text-destructive">
@@ -174,12 +175,14 @@ export function FieldSeparator({
         'relative -my-2 h-5 text-sm group-data-[variant=outline]/field-group:-mb-2',
         className,
       )}
-      {...props}>
+      {...props}
+    >
       <Separator className="absolute inset-0 top-1/2" />
       {children && (
         <span
           className="bg-background text-muted-foreground relative mx-auto block w-fit px-2"
-          data-slot="field-separator-content">
+          data-slot="field-separator-content"
+        >
           {children}
         </span>
       )}
@@ -231,7 +234,8 @@ export function FieldError({
       role="alert"
       data-slot="field-error"
       className={cn('text-destructive text-sm font-normal', className)}
-      {...props}>
+      {...props}
+    >
       {content}
     </div>
   );

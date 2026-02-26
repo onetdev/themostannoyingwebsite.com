@@ -1,6 +1,6 @@
 import { useTheme } from 'next-themes';
-import { CSSProperties } from 'react';
-import { Toaster as Sonner, toast, type ToasterProps } from 'sonner';
+import type { CSSProperties } from 'react';
+import { Toaster as Sonner, type ToasterProps, toast } from 'sonner';
 
 import { Icon } from '../atoms';
 

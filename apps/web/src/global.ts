@@ -6,7 +6,6 @@ export type DocumentEventSearchDetails = {
 declare global {
   type AppTheme = 'light' | 'dark';
 
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   type TypeNarrowArg = any;
 
   type CaptchaFormInputs = {
@@ -28,7 +27,6 @@ declare global {
     locale: string;
   };
 
-  // eslint-disable-next-line @typescript-eslint/no-empty-object-type
   type NextPageProps<T extends {} = {}> = {
     params: Promise<T & NextPageParams>;
   };

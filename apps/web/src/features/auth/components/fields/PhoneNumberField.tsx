@@ -117,12 +117,10 @@ export function PhoneNumberField({
     return () => {
       window.removeEventListener('mouseup', onStopEvent);
       window.removeEventListener('touchend', onStopEvent);
-      // eslint-disable-next-line react-hooks/exhaustive-deps
       $decrementBtn.current?.removeEventListener(
         'selectstart',
         preventLongTapSelection,
       );
-      // eslint-disable-next-line react-hooks/exhaustive-deps
       $incrementBtn.current?.removeEventListener(
         'selectstart',
         preventLongTapSelection,

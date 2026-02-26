@@ -1,6 +1,6 @@
 'use client';
 
-import { ComponentProps, useEffect, useState } from 'react';
+import { type ComponentProps, useEffect, useState } from 'react';
 
 export type DotDotDotTextProps = ComponentProps<'span'> & {
   stepDurationMs?: number;

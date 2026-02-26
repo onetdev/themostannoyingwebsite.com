@@ -1,4 +1,4 @@
-import { Point2d } from '@maw/utils/math';
+import type { Point2d } from '@maw/utils/math';
 
 export const getRelativePosition = (
   element: HTMLElement,

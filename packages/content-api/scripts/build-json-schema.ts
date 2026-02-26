@@ -6,7 +6,6 @@ import articleEntrySimplifiedZod from '@/schemas/article-entry-simplified';
 import articleIndexEntryZod from '@/schemas/article-index-entry';
 import articleLocaleMetaZod from '@/schemas/article-locale-meta';
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
 type TypeConflictBypass = any;
 
 const logger = getLogger().getSubLogger({
@@ -26,7 +25,7 @@ const writeMap = {
 };
 
 logger.info('🔄 Generating JSON schemas...');
-Object.entries(writeMap).map(([path, schema]) => {
+Object.entries(writeMap).forEach(([path, schema]) => {
   if (fs.existsSync(path)) {
     fs.unlinkSync(path);
   }

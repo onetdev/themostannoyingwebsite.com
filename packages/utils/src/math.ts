@@ -1,4 +1,4 @@
-import { TypeNarrowArg } from './types';
+import type { TypeNarrowArg } from './types';
 
 export type Point2d = { x: number; y: number };
 

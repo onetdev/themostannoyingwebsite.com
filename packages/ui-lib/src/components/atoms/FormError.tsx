@@ -1,5 +1,5 @@
-import { FunctionComponent } from 'react';
-import { GlobalError } from 'react-hook-form';
+import type { FunctionComponent } from 'react';
+import type { GlobalError } from 'react-hook-form';
 
 export type FormErrorProps = {
   error?: GlobalError;

@@ -9,12 +9,10 @@ const schema = z
         "It's recommended to keep the intro below 160 characters or less.",
       )
       .optional(),
-    publishedAt: z
-      .string()
+    publishedAt: z.iso
       .datetime({ offset: true })
       .describe('Must be in ISO 8601 format'),
-    updatedAt: z
-      .string()
+    updatedAt: z.iso
       .datetime({ offset: true })
       .optional()
       .describe('Must be in ISO 8601 format'),

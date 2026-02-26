@@ -1,6 +1,6 @@
 import { mapToLogScale } from '@maw/utils/math';
 import { mb_string_to_char_array } from '@maw/utils/string';
-import { FunctionComponent, useMemo } from 'react';
+import { type FunctionComponent, useMemo } from 'react';
 
 export type PasswordStrengthBarProps = {
   password: string;

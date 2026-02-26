@@ -1,7 +1,12 @@
 'use client';
 
 import { clamp, random } from '@maw/utils/math';
-import { MouseEventHandler, PropsWithChildren, useRef, useState } from 'react';
+import {
+  type MouseEventHandler,
+  type PropsWithChildren,
+  useRef,
+  useState,
+} from 'react';
 
 import { getRelativePosition } from '../../utils/dom';
 
@@ -71,7 +76,8 @@ export function EscapingElement({
       }}
       onMouseMove={onMouseMove}
       onMouseDown={onActivationStart}
-      ref={ref}>
+      ref={ref}
+    >
       {children}
     </div>
   );

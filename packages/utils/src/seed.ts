@@ -19,7 +19,8 @@ export function stringToSeed(str: string): number {
  * the same seed.
  */
 export function mulberry32(seed: number) {
-  return function () {
+  return () => {
+    // biome-ignore lint: Biome might say confusing but it is an INTENTIONAL logic of the algo.
     let t = (seed += 0x6d2b79f5);
     t = Math.imul(t ^ (t >>> 15), t | 1);
     t ^= t + Math.imul(t ^ (t >>> 7), t | 61);

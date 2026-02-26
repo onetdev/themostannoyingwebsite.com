@@ -1,10 +1,10 @@
 'use client';
 
 import { arrayShuffle } from '@maw/utils/array';
-import { isPoint2d, Point2d } from '@maw/utils/math';
+import { isPoint2d, type Point2d } from '@maw/utils/math';
 import { useEffect, useMemo, useState } from 'react';
 
-import { TileData, TileView, TileViewData } from './TileView';
+import { type TileData, TileView, type TileViewData } from './TileView';
 
 interface CaptchaTilePuzzleProps {
   className?: string;
@@ -116,7 +116,8 @@ export function CaptchaTilePuzzle({
         width: cols * size,
         height: rows * size,
         perspective: cols * size,
-      }}>
+      }}
+    >
       {viewData.map((tile, index) => (
         <div
           key={tile.key}
@@ -129,7 +130,8 @@ export function CaptchaTilePuzzle({
             width: size,
             height: size,
           }}
-          onClick={() => onCellClick(index)}>
+          onClick={() => onCellClick(index)}
+        >
           {<TileView data={tile} imageSrc={imageSrc} size={size} />}
         </div>
       ))}
