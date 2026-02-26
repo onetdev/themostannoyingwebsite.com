@@ -32,7 +32,7 @@ export function AchievementCard({ definition, state }: AchievementCardProps) {
     <Card
       key={definition.id}
       className={cn(
-        'relative overflow-hidden transition-all gap-2',
+        'relative h-full overflow-hidden transition-all gap-0',
         state.achieved ? 'border-primary bg-primary/5' : 'opacity-70 grayscale',
       )}
     >
@@ -51,13 +51,13 @@ export function AchievementCard({ definition, state }: AchievementCardProps) {
           )}
         </div>
       </CardHeader>
-      <CardContent>
-        <p className="text-muted-foreground mb-4 text-sm">
+      <CardContent className="flex flex-1 flex-col">
+        <p className="text-muted-foreground flex-1 mb-4 text-sm">
           {t(definition.descriptionKey)}
         </p>
 
         {isProgression && (
-          <div className="space-y-2">
+          <div className="mt-auto space-y-2">
             <div className="flex justify-between text-xs">
               <span>
                 {state.progress} / {definition.targetProgress}
