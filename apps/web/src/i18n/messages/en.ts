@@ -107,12 +107,18 @@ export default {
     dilf: 'DILF',
     plans: 'AI plans',
     personal: 'Personal',
+    achievements: 'Achievements',
   },
   metadata: {
     app: {
       title: 'The Most Annoying Website',
       description:
         'Self-proclaimed most annoying website on the web with so many disgusting features of modern websites you might even vomit at some point.',
+    },
+    achievements: {
+      title: 'Achievements',
+      description:
+        'Track your progress and showcase your persistence. See all the milestones you have reached on this annoying journey.',
     },
     about: {
       title: 'About us',
@@ -518,6 +524,9 @@ export default {
   },
   achievements: {
     unlocked: 'Achievement Unlocked: {name}',
+    title: 'Achievements',
+    description:
+      'The journey of a thousand miles begins with a single, highly annoying step. Track your "achievements" and showcase your questionable persistence in navigating this digital nightmare.',
     registry: {
       firstVisit: {
         name: 'Welcome to Hell',

@@ -24,6 +24,7 @@ import {
   faTags,
   faTimes,
   faTriangleExclamation,
+  faTrophy,
   faUser,
   faXmarkCircle,
 } from '@fortawesome/free-solid-svg-icons';
@@ -59,6 +60,7 @@ const iconMap = {
   spinner: faSpinner,
   sun: faSun,
   tags: faTags,
+  trophy: faTrophy,
   xmarkCircle: faXmarkCircle,
 };
 export type IconAliaseKey = keyof typeof iconMap;
