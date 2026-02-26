@@ -29,6 +29,7 @@ export const PUBLIC_PAIN_POINT_LIST = [
   'historySpam',
   'notifications',
   'stickyVideo',
+  'achievements',
 ] as const;
 
 export const PAIN_POINT_LIST = [
@@ -103,6 +104,7 @@ const initialStateFlags: PainPreferencesState['flags'] = {
   searchDelay: true,
   stickyVideo: false,
   wheelOfFortune: true,
+  achievements: true,
 };
 
 const initialState: PainPreferencesState = {
@@ -195,7 +197,21 @@ export const usePainPreferencesStore = create<PainPreferencesStore>()(
     {
       name: PAIN_PREFERENCES_STORAGE_KEY,
       storage: createJSONStorage(() => localStorage),
-      version: 1,
+      version: 2,
+      migrate: (persistedState, version) => {
+        if (version === 1) {
+          const state = persistedState as PainPreferencesState;
+          return {
+            ...state,
+            flags: {
+              ...state.flags,
+              achievements: initialStateFlags.achievements,
+            },
+          };
+        }
+
+        return persistedState;
+      },
     },
   ),
 );

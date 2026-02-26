@@ -86,6 +86,18 @@ export function PopupAndInteractivity() {
           }
         />
       </SettingsField>
+      <SettingsField
+        label={t('settings.optionalPainPoints.achievements')}
+        info={t('settings.optionalPainPointsHints.achievements')}
+      >
+        <FormCheckbox
+          name="achievements"
+          checked={painPreferences.flags.achievements}
+          onCheckedChange={(value) =>
+            painPreferences.setFlagIndeterminate('achievements', value)
+          }
+        />
+      </SettingsField>
     </section>
   );
 }
