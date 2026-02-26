@@ -5,6 +5,7 @@ import { useTranslations } from 'next-intl';
 import config from '@/config';
 import { useEventBusListener } from '@/contexts/EventBusContext';
 import { useAudio } from '@/hooks';
+import { usePainPreferencesStore } from '@/stores';
 import { getAchievementById } from '../providers/data/registry';
 
 export const AchievementToastManager = () => {
@@ -12,10 +13,13 @@ export const AchievementToastManager = () => {
   const { play, audio } = useAudio(
     config.achievements.assets.achievementUnlockedSfx,
   );
+  const notificationsEnabled = usePainPreferencesStore(
+    (state) => state.flags.achievementNotifications,
+  );
 
   useEventBusListener('ACHIEVEMENT_UNLOCKED', (event) => {
     const { achievementId } = event.payload || {};
-    if (!achievementId) return;
+    if (!achievementId || !notificationsEnabled) return;
 
     const definition = getAchievementById(achievementId);
     if (!definition) return;
@@ -29,7 +33,6 @@ export const AchievementToastManager = () => {
       {
         icon: '🏆',
         position: 'top-center',
-
       },
     );
   });

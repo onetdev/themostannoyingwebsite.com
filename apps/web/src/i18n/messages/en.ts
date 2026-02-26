@@ -441,7 +441,7 @@ export default {
         flaps: 'Background ad flaps',
         oneByOne: 'One by one ad blocks',
       },
-      achievements: 'Achievements',
+      achievementNotifications: 'Achievement notifications',
       clipboardMarker: 'Clipboard marker',
       contentPaywall: 'Content paywall',
       deadPixel: 'Dead pixel',
@@ -467,8 +467,8 @@ export default {
           'Shows ad flaps on the sides of the page that can be clicked and leads to different pages.',
         oneByOne: 'Mainly covered an animated advertisement on the home page.',
       },
-      achievements:
-        'Enables a global achievement system that tracks your "progress" and rewards you for being persistent.',
+      achievementNotifications:
+        'Displays a notification whenever you unlock a new achievement. Progress is always tracked in the background.',
       clipboardMarker:
         'Adds a "Read more at..." link when you copy text from the website.',
       contentPaywall:

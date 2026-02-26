@@ -30,7 +30,7 @@ export const PUBLIC_PAIN_POINT_LIST = [
   'historySpam',
   'notifications',
   'stickyVideo',
-  'achievements',
+  'achievementNotifications',
 ] as const;
 
 export const PAIN_POINT_LIST = [
@@ -103,7 +103,7 @@ const initialStateFlags: PainPreferencesState['flags'] = {
   searchDelay: true,
   stickyVideo: false,
   wheelOfFortune: true,
-  achievements: true,
+  achievementNotifications: true,
 };
 
 const initialState: PainPreferencesState = {
@@ -198,18 +198,23 @@ export const usePainPreferencesStore = create<PainPreferencesStore>()(
       storage: createJSONStorage(() => localStorage),
       version: 2,
       migrate: (persistedState, version) => {
+        // biome-ignore lint/suspicious/noExplicitAny: We kinda need it because it can be any version.
+        const state = persistedState as any;
+
         if (version === 1) {
-          const state = persistedState as PainPreferencesState;
+          const achievementVal =
+            state.flags?.achievements ?? initialStateFlags.achievementNotifications;
+
           return {
             ...state,
             flags: {
               ...state.flags,
-              achievements: initialStateFlags.achievements,
+              achievementNotifications: achievementVal,
             },
           };
         }
 
-        return persistedState;
+        return state;
       },
     },
   ),
