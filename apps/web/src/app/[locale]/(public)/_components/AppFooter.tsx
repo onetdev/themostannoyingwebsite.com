@@ -19,11 +19,7 @@ export async function AppFooter({ className }: AppFooterProps) {
   }));
 
   return (
-    <footer
-      id="footer"
-      role="contentinfo"
-      className={`border-border border-t ${className}`}
-    >
+    <footer id="footer" className={`border-border border-t ${className}`}>
       <div className="flex flex-wrap justify-center gap-x-5 gap-y-2 px-5 py-5">
         {links.map((link) => (
           <Link

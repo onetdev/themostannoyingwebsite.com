@@ -19,7 +19,6 @@ export async function AppHeader({ activeItem, className }: AppHeaderProps) {
     <header
       id="header"
       className={`grid grid-cols-2 items-center gap-x-2 px-5 py-3 xl:px-8 ${className ?? ''}`}
-      role="banner"
     >
       <div className="flex items-center gap-2">
         <AppNavigationMobile activeItem={activeItem} />

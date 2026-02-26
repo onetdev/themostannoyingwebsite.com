@@ -1,6 +1,6 @@
 'use client';
 
-import { Checkbox, Field, FieldError, FieldLabel } from '@maw/ui-lib';
+import { Checkbox, Field, FieldLabel } from '@maw/ui-lib';
 import { useTranslations } from 'next-intl';
 import { useFormContext } from 'react-hook-form';
 

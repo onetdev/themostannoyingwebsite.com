@@ -33,6 +33,7 @@ export function GlobalStickyVideo() {
         className="aspect-video max-h-56 w-full overflow-hidden rounded-lg md:max-h-96"
         ref={$playerRef}
         src="https://www.youtube.com/embed/M7lc1UVf-VE?autoplay=1&controls=2&loop=1&mute=1"
+        title={t('stickyVideoPlayer.videoTitle')}
       />
     </div>
   );

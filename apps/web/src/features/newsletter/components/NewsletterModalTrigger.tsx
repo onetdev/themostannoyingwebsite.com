@@ -33,13 +33,9 @@ export function NewsletterModalTrigger({
     setModalVisible(false);
   };
 
-  if (!enabled! || !modalVisible) {
+  if (!enabled || !modalVisible) {
     return null;
   }
 
-  return (
-    <>
-      <NewsletterModal visible={modalVisible} onDismiss={onModalDismiss} />
-    </>
-  );
+  return <NewsletterModal visible={modalVisible} onDismiss={onModalDismiss} />;
 }

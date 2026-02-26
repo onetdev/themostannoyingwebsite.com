@@ -38,7 +38,7 @@ export default async function Page({ params }: NextPageProps) {
         <PageHeadline className="mx-auto w-full max-w-screen-md">
           {t('navigation.privacyPolicy')}
         </PageHeadline>
-        <div className={styles['content']}>
+        <div className={styles.content}>
           <Content />
         </div>
       </PageLayout>

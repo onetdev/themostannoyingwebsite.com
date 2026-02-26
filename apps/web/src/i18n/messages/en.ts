@@ -55,6 +55,7 @@ export default {
         'All experiences are disabled now. If you want share this page just for the content just pass this URL around. If you changed your mind, you can re-enable all experiences in the settings menu.',
     },
     toggleMenu: 'Toggle menu',
+    logo: 'MAW Logo',
     contactForm: {
       title: 'Official contact form',
       subject: 'Subject',
@@ -614,6 +615,7 @@ export default {
         "If you're searching for the tastiest, hottest, singlest and most irresistible donuts in your area, you're in the perfect place. Are you ready to take on the challenge of finding your true love? Click on any of the donuts here to discover which one is meant for you.",
       flapLeft: 'DILF. Hot single donuts in your area',
       flapRight: 'DILF. Tastiest donuts in your proximity',
+      finderOverlayTitle: 'Find you donut',
     },
     wanPhone: {
       title: "Congratulations! You've wan a phone! Flaim now!",
@@ -658,6 +660,7 @@ export default {
       complimentaryOtter: 'Complimentary otter',
       fake70Discount: 'Fake 70% discount',
     },
+    wheelTitle: 'Wheel of fortune',
   },
   chatBubble: {
     messageInitial: 'Hello! I am a chat bubble. I am here to help you. 🤓',
@@ -724,6 +727,10 @@ export default {
     playVideo: 'Play video',
     videoPlaybackFailed: 'Video playback failed',
     pictureOfYou: 'Picture of you',
+    hotThingsVtt: 'English',
+  },
+  stickyVideoPlayer: {
+    videoTitle: 'Sticky video player',
   },
   plansPage: {
     headline: 'The Ultimate AI Upgrade *',
@@ -818,6 +825,7 @@ export default {
   painPreferences: {
     levelSettings: {
       label: 'Pain level',
+      railTitle: 'Pain level slider rail',
       clamps: {
         from_0: 'Innocent',
         from_10: "It's a bit odd, innit?",

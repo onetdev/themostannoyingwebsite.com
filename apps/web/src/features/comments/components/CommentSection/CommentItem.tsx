@@ -65,7 +65,7 @@ export function CommentItem({ comment, onReply, onLike }: CommentItemProps) {
 
       {hasReplies && showReplies && (
         <div className="border-border ml-4 space-y-3 border-l pl-4 sm:ml-11">
-          {comment.replies!.map((reply) => (
+          {comment.replies?.map((reply) => (
             <CommentItem
               key={reply.id}
               comment={reply}

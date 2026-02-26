@@ -8,11 +8,11 @@ import {
   InputGroupInput,
 } from '@maw/ui-lib';
 import { cn, cva, type VariantProps } from '@maw/ui-lib/utils';
-import { useRouter } from 'next/navigation';
 import { useTranslations } from 'next-intl';
 import type { SubmitEventHandler } from 'react';
 
 import { DOCUMENT_EVENT_SEARCH } from '@/global';
+import { useRouter } from '@/i18n/navigation';
 
 const searchFormVariants = cva('', {
   variants: {
@@ -59,25 +59,27 @@ export function SearchForm({
   };
 
   return (
-    <form method="post" onSubmit={onSubmit} className={className} role="search">
-      <InputGroup className={cn(searchFormVariants({ size }))}>
-        <InputGroupInput
-          defaultValue={initialValue}
-          name="search"
-          placeholder={t('search.placeholder')}
-          autoComplete="off"
-          className={cn(searchFormVariants({ size }))}
-        />
-        <InputGroupAddon align="inline-end">
-          <InputGroupButton
-            aria-label={t('common.search')}
-            type="submit"
+    <search className={className}>
+      <form method="post" onSubmit={onSubmit}>
+        <InputGroup className={cn(searchFormVariants({ size }))}>
+          <InputGroupInput
+            defaultValue={initialValue}
+            name="search"
+            placeholder={t('search.placeholder')}
+            autoComplete="off"
             className={cn(searchFormVariants({ size }))}
-          >
-            <Icon icon="search" />
-          </InputGroupButton>
-        </InputGroupAddon>
-      </InputGroup>
-    </form>
+          />
+          <InputGroupAddon align="inline-end">
+            <InputGroupButton
+              aria-label={t('common.search')}
+              type="submit"
+              className={cn(searchFormVariants({ size }))}
+            >
+              <Icon icon="search" />
+            </InputGroupButton>
+          </InputGroupAddon>
+        </InputGroup>
+      </form>
+    </search>
   );
 }

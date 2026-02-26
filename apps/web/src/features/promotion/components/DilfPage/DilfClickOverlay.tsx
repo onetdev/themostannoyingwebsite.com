@@ -6,11 +6,13 @@ import { dilfImageMappingPaths } from './data/dilf-image-mapping-paths';
 export type DilfClickOverlayProps = {
   className?: string;
   debug?: boolean;
+  title: string;
 };
 
 export function DilfClickOverlay({
   className = '',
   debug = false,
+  title,
 }: DilfClickOverlayProps) {
   const renderData = useMemo(
     () =>
@@ -35,6 +37,7 @@ export function DilfClickOverlay({
       strokeLinejoin="round"
       strokeMiterlimit="2"
     >
+      <title>{title}</title>
       {renderData.map(({ path, query }, index) => (
         <a
           href={`//maps.google.com/?q=${query}`}

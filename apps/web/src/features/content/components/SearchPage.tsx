@@ -1,6 +1,6 @@
 'use client';
 
-import { DotDotDotText, PageHeadline } from '@maw/ui-lib';
+import { Button, DotDotDotText, PageHeadline } from '@maw/ui-lib';
 import { arrayShuffle } from '@maw/utils/array';
 import { random } from '@maw/utils/math';
 import HTMLReactParser from 'html-react-parser';
@@ -142,12 +142,13 @@ export function SearchPage() {
               <ul className="list-inside list-disc pl-5">
                 {results.topSearches.map((item) => (
                   <li key={item}>
-                    <span
+                    <Button
+                      variant="ghost"
                       onClick={() => onRecommendedClick(item)}
                       className="text-primary cursor-pointer"
                     >
                       {item}
-                    </span>
+                    </Button>
                   </li>
                 ))}
               </ul>

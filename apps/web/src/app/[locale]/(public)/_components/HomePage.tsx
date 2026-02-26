@@ -31,7 +31,6 @@ export async function HomePage({
         />
       )}
       <section
-        role="region"
         className="col-span-1 flex flex-col justify-between"
         data-testid="dense-article-list"
       >
@@ -51,7 +50,6 @@ export async function HomePage({
         {t('article.moreContentScroll')}
       </div>
       <section
-        role="region"
         className="col-span-1 lg:col-span-4"
         data-testid="small-cover-article-list"
       >

@@ -1,5 +1,6 @@
 'use client';
 
+import { useTranslations } from 'next-intl';
 import { useEffect, useState } from 'react';
 
 import {
@@ -18,6 +19,7 @@ export function SliderRail({
   percentage = 100,
 }: SliderRailProps) {
   const [particles, setParticles] = useState<FireflyParticleProps[]>([]);
+  const t = useTranslations('painPreferences.levelSettings');
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -60,7 +62,9 @@ export function SliderRail({
         viewBox="0 0 100 6"
         preserveAspectRatio="none"
         className={`relative z-10 h-1 w-full ${className}`}
+        role="img"
       >
+        <title>{t('railTitle')}</title>
         <defs>
           <linearGradient id="railGradient" x1="0%" y1="0%" x2="100%" y2="0%">
             <stop offset="0%" stopColor="#3b82f6" />

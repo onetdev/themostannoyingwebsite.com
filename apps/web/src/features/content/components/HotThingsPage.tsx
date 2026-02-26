@@ -3,13 +3,14 @@
 import { useLogger } from '@maw/logger';
 import { Icon, PageHeadline } from '@maw/ui-lib';
 import Image from 'next/image';
-import { useTranslations } from 'next-intl';
+import { useLocale, useTranslations } from 'next-intl';
 import { useEffect, useRef, useState } from 'react';
 
 export function HotThingsPage() {
   const logger = useLogger().getSubLogger({ name: 'hot-things-page' });
   const [isCapable, setIsCapable] = useState(false);
   const t = useTranslations();
+  const locale = useLocale();
   const [_devices, setDevices] = useState<MediaDeviceInfo[]>([]);
   const [stream, setStream] = useState<MediaStream>();
   const playerRef = useRef<HTMLVideoElement>(null);
@@ -60,7 +61,10 @@ export function HotThingsPage() {
     setIsCapable(
       'mediaDevices' in navigator && 'getUserMedia' in navigator.mediaDevices,
     );
-    return () => stream?.getTracks().forEach((track) => track.stop());
+    return () =>
+      stream?.getTracks().forEach((track) => {
+        track.stop();
+      });
   }, [stream]);
 
   return (
@@ -79,7 +83,15 @@ export function HotThingsPage() {
           className="absolute top-1/2 left-1/2 w-full -translate-x-1/2 -translate-y-1/2"
           ref={playerRef}
           autoPlay
-        />
+        >
+          <track
+            default
+            kind="captions"
+            srcLang={locale}
+            src={`/assets/vtt/hot-things-${locale}.vtt`}
+            label={t('hotThings.hotThingsVtt')}
+          />
+        </video>
         {!isDisallowed && isCapable && (
           <button
             type="button"

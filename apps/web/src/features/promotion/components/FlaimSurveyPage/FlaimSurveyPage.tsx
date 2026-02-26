@@ -1,10 +1,10 @@
 'use client';
 
 import { Button, Card, LoaderDots } from '@maw/ui-lib';
-import { useRouter } from 'next/navigation';
 import { useTranslations } from 'next-intl';
 import { type ComponentProps, useState } from 'react';
 import { useEffectOnce } from 'react-use';
+import { useRouter } from '@/i18n/navigation';
 import { useRuntimeStore } from '@/stores';
 import { type UseSurveryParams, useSurvey } from '../../hooks';
 import { ProgressBar } from './ProgressBar';

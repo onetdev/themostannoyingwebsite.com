@@ -44,11 +44,11 @@ export function useWheelOfFortune() {
   );
 
   const spin = useCallback(() => {
-    if (state != 'ready') return;
+    if (state !== 'ready') return;
 
     const resultIndex = randomInt(0, items.length - 1);
     setState('spinning');
-    setPrize({ index: resultIndex, ...items[resultIndex!] });
+    setPrize({ index: resultIndex, ...items[resultIndex] });
   }, [items, state]);
 
   const complete = useCallback(() => {

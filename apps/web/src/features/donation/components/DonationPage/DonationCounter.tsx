@@ -47,6 +47,7 @@ export function DonationCounter({ className, ...rest }: DonationCounterProps) {
 
   return (
     <div
+      role="img"
       aria-label={`${currency}${amount}`}
       className={`flex items-center justify-center gap-2 p-6 ${bgGradient} rounded-lg border-2 shadow-2xl ${borderColor} transition-all duration-500 ${className ?? ''}`}
       {...rest}

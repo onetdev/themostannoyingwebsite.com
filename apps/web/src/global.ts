@@ -6,6 +6,7 @@ export type DocumentEventSearchDetails = {
 declare global {
   type AppTheme = 'light' | 'dark';
 
+  // biome-ignore lint/suspicious/noExplicitAny: Just to avoid any in other places, we use this explicit alias.
   type TypeNarrowArg = any;
 
   type CaptchaFormInputs = {
@@ -27,7 +28,7 @@ declare global {
     locale: string;
   };
 
-  type NextPageProps<T extends {} = {}> = {
+  type NextPageProps<T extends {} = object> = {
     params: Promise<T & NextPageParams>;
   };
 }

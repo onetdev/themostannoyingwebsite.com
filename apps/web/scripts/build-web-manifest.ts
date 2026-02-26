@@ -1,7 +1,7 @@
+import fs from 'node:fs/promises';
+import path from 'node:path';
 import { getLogger } from '@maw/logger';
 import { type FaviconFile, type FaviconImage, favicons } from 'favicons';
-import fs from 'fs/promises';
-import path from 'path';
 
 import manifestConfig from '@/root/manifest.config.mjs';
 
