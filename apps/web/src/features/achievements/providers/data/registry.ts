@@ -3,14 +3,14 @@ import type { AchievementDefinition } from '../../types';
 export const ACHIEVEMENT_REGISTRY: AchievementDefinition[] = [
   {
     id: 'first-visit',
-    name: 'Welcome to Hell',
-    description: 'Visit the website for the first time.',
+    nameKey: 'achievements.registry.firstVisit.name',
+    descriptionKey: 'achievements.registry.firstVisit.description',
     type: 'boolean',
   },
   {
     id: 'click-annoying-button',
-    name: 'Persistent Clicker',
-    description: 'Click an annoying button 10 times.',
+    nameKey: 'achievements.registry.clickAnnoyingButton.name',
+    descriptionKey: 'achievements.registry.clickAnnoyingButton.description',
     type: 'progression',
     targetProgress: 10,
   },

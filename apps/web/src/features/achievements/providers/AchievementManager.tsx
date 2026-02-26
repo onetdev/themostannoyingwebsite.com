@@ -1,7 +1,10 @@
 'use client';
 
-import { useEventBridgeListener } from '@/contexts/EventBridgeContext';
-import { useAchievementsStore } from '@/stores/achievements';
+import {
+  useEventBridge,
+  useEventBridgeListener,
+} from '@/contexts/EventBridgeContext';
+import { useAchievementsStore, usePainPreferencesStore } from '@/stores';
 import { getAchievementById } from './data/registry';
 
 export const AchievementManager = () => {
@@ -10,12 +13,23 @@ export const AchievementManager = () => {
     incrementAchievementProgress,
     completeAchievement,
   } = useAchievementsStore();
+  const { dispatch } = useEventBridge();
+  const painPreferences = usePainPreferencesStore();
+
+  const handleUnlock = (achievementId: string, newlyAchieved: boolean) => {
+    if (newlyAchieved) {
+      dispatch('ACHIEVEMENT_UNLOCKED', { achievementId });
+    }
+  };
 
   // This is where we will listen to events and update achievements
   // For now, we'll just have a placeholder for how it will look in phase 2
 
   // Example listener for a generic event
   useEventBridgeListener('ACHIEVEMENT_TRIGGERED', (event) => {
+    // If achievements are disabled in settings, we don't process triggers
+    if (!painPreferences.flags.achievements) return;
+
     const { achievementId, progress, increment } = event.payload || {};
     if (!achievementId) return;
 
@@ -25,12 +39,23 @@ export const AchievementManager = () => {
     if (definition.type === 'progression') {
       const target = definition.targetProgress || 1;
       if (typeof increment === 'number') {
-        incrementAchievementProgress(achievementId, increment, target);
+        const newlyAchieved = incrementAchievementProgress(
+          achievementId,
+          increment,
+          target,
+        );
+        handleUnlock(achievementId, newlyAchieved);
       } else if (typeof progress === 'number') {
-        setAchievementProgress(achievementId, progress, target);
+        const newlyAchieved = setAchievementProgress(
+          achievementId,
+          progress,
+          target,
+        );
+        handleUnlock(achievementId, newlyAchieved);
       }
     } else {
-      completeAchievement(achievementId);
+      const newlyAchieved = completeAchievement(achievementId);
+      handleUnlock(achievementId, newlyAchieved);
     }
   });
 

@@ -516,6 +516,19 @@ export default {
       exitTap: 'Tap anywhere to exit screensaver',
     },
   },
+  achievements: {
+    unlocked: 'Achievement Unlocked: {name}',
+    registry: {
+      firstVisit: {
+        name: 'Welcome to Hell',
+        description: 'Visit the website for the first time.',
+      },
+      clickAnnoyingButton: {
+        name: 'Persistent Clicker',
+        description: 'Click an annoying button 10 times.',
+      },
+    },
+  },
   share: {
     modal: {
       title: 'Share this page',

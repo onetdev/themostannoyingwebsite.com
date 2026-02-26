@@ -19,13 +19,13 @@ export interface AchievementsActions {
     id: string,
     progress: number,
     targetProgress: number,
-  ) => void;
+  ) => boolean;
   incrementAchievementProgress: (
     id: string,
     amount: number,
     targetProgress: number,
-  ) => void;
-  completeAchievement: (id: string) => void;
+  ) => boolean;
+  completeAchievement: (id: string) => boolean;
   resetAchievements: () => void;
 }
 
@@ -49,7 +49,7 @@ export const useAchievementsStore = create<AchievementsStore>()(
           progress: 0,
         };
 
-        if (current.achieved) return;
+        if (current.achieved) return false;
 
         const newProgress = Math.min(progress, targetProgress);
         const newlyAchieved = newProgress >= targetProgress;
@@ -66,6 +66,8 @@ export const useAchievementsStore = create<AchievementsStore>()(
             },
           },
         }));
+
+        return newlyAchieved;
       },
 
       incrementAchievementProgress: (id, amount, targetProgress) => {
@@ -75,7 +77,7 @@ export const useAchievementsStore = create<AchievementsStore>()(
           progress: 0,
         };
 
-        if (current.achieved) return;
+        if (current.achieved) return false;
 
         const newProgress = Math.min(current.progress + amount, targetProgress);
         const newlyAchieved = newProgress >= targetProgress;
@@ -92,11 +94,13 @@ export const useAchievementsStore = create<AchievementsStore>()(
             },
           },
         }));
+
+        return newlyAchieved;
       },
 
       completeAchievement: (id) => {
         const current = get().achievements[id];
-        if (current?.achieved) return;
+        if (current?.achieved) return false;
 
         set((state) => ({
           achievements: {
@@ -109,6 +113,8 @@ export const useAchievementsStore = create<AchievementsStore>()(
             },
           },
         }));
+
+        return true;
       },
 
       resetAchievements: () => set(initialState),
