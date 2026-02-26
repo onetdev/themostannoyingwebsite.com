@@ -5,6 +5,7 @@ import {
   useEventBridgeListener,
 } from '@/contexts/EventBridgeContext';
 import { useAchievementsStore, usePainPreferencesStore } from '@/stores';
+import { AchievementToastManager } from '../components/AchievementToastManager';
 import { getAchievementById } from './data/registry';
 
 export const AchievementManager = () => {
@@ -59,5 +60,9 @@ export const AchievementManager = () => {
     }
   });
 
-  return null;
+  return (
+    <>
+      <AchievementToastManager />
+    </>
+  );
 };
