@@ -30,6 +30,7 @@
     "@maw/config-jest": "workspace:*",
     "@maw/config-ts": "workspace:*",
     "@types/jest": "catalog:",
+    "@types/node": "catalog:",
     "@types/sanitize-html": "catalog:",
     "jest": "catalog:",
     "ts-jest": "catalog:",

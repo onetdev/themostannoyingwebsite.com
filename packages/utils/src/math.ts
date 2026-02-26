@@ -4,6 +4,7 @@ export type Point2d = { x: number; y: number };
 
 export const isPoint2d = (point: TypeNarrowArg): point is Point2d => {
   return (
+    point !== null &&
     typeof point === 'object' &&
     'x' in point &&
     typeof point.x === 'number' &&
