@@ -3,7 +3,7 @@
 import { PageHeadline } from '@maw/ui-lib';
 import { useTranslations } from 'next-intl';
 import { useCallback, useState } from 'react';
-import { useEventBridge } from '@/contexts/EventBridgeContext';
+import { useEventBus } from '@/contexts/EventBusContext';
 import type {
   BillingCycle,
   SubscriptionFeature,
@@ -37,7 +37,7 @@ export function PlansPage({
   socialProofConfig,
 }: PlansPageProps) {
   const t = useTranslations();
-  const { dispatch } = useEventBridge();
+  const { dispatch } = useEventBus();
   const [isDiscountActive, setIsDiscountActive] = useState(false);
   const [billingCycle, setBillingCycle] = useState<BillingCycle>('monthly');
   const [selectedPlanKey, setSelectedPlanKey] = useState<string>(

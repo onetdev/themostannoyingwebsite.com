@@ -11,9 +11,9 @@ import { cn, cva, type VariantProps } from '@maw/ui-lib/utils';
 import { useTranslations } from 'next-intl';
 import type { SubmitEventHandler } from 'react';
 
-import { useEventBridge } from '@/contexts/EventBridgeContext';
+import { useEventBus } from '@/contexts/EventBusContext';
 import { useRouter } from '@/i18n/navigation';
-import type { SearchEvent } from '../../types';
+import type { SearchEvent } from '../types';
 
 const searchFormVariants = cva('', {
   variants: {
@@ -39,7 +39,7 @@ export function SearchForm({
 }: SearchFormProps) {
   const t = useTranslations();
   const router = useRouter();
-  const { dispatch } = useEventBridge();
+  const { dispatch } = useEventBus();
 
   const onSubmit: SubmitEventHandler<HTMLFormElement> = (event) => {
     event.preventDefault();

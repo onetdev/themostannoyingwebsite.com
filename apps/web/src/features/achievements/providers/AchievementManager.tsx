@@ -1,12 +1,37 @@
 'use client';
 
+import { useCallback } from 'react';
 import {
-  useEventBridge,
-  useEventBridgeListener,
-} from '@/contexts/EventBridgeContext';
+  type EventBusListener,
+  type EventPayload,
+  useEventBus,
+  useEventBusListener,
+} from '@/contexts/EventBusContext';
 import { useAchievementsStore, usePainPreferencesStore } from '@/stores';
 import { AchievementToastManager } from '../components/AchievementToastManager';
 import { getAchievementById } from './data/registry';
+
+/**
+ * Custom hook to listen to events specifically for achievements.
+ * It automatically checks if achievements are enabled and provides
+ * a stale-free listener environment.
+ */
+function useAchievementListener<T = EventPayload>(
+  type: string,
+  listener: EventBusListener<T>,
+) {
+  const painPreferences = usePainPreferencesStore();
+
+  const wrappedListener: EventBusListener<T> = useCallback(
+    (event) => {
+      if (!painPreferences.flags.achievements) return;
+      listener(event);
+    },
+    [listener, painPreferences.flags.achievements],
+  );
+
+  useEventBusListener(type, wrappedListener);
+}
 
 export const AchievementManager = () => {
   const {
@@ -14,23 +39,19 @@ export const AchievementManager = () => {
     incrementAchievementProgress,
     completeAchievement,
   } = useAchievementsStore();
-  const { dispatch } = useEventBridge();
-  const painPreferences = usePainPreferencesStore();
+  const { dispatch } = useEventBus();
 
-  const handleUnlock = (achievementId: string, newlyAchieved: boolean) => {
-    if (newlyAchieved) {
-      dispatch('ACHIEVEMENT_UNLOCKED', { achievementId });
-    }
-  };
+  const handleUnlock = useCallback(
+    (achievementId: string, newlyAchieved: boolean) => {
+      if (newlyAchieved) {
+        dispatch('ACHIEVEMENT_UNLOCKED', { achievementId });
+      }
+    },
+    [dispatch],
+  );
 
-  // This is where we will listen to events and update achievements
-  // For now, we'll just have a placeholder for how it will look in phase 2
-
-  // Example listener for a generic event
-  useEventBridgeListener('ACHIEVEMENT_TRIGGERED', (event) => {
-    // If achievements are disabled in settings, we don't process triggers
-    if (!painPreferences.flags.achievements) return;
-
+  // Generic achievement trigger
+  useAchievementListener('ACHIEVEMENT_TRIGGERED', (event) => {
     const { achievementId, progress, increment } = event.payload || {};
     if (!achievementId) return;
 
@@ -60,16 +81,13 @@ export const AchievementManager = () => {
     }
   });
 
-  useEventBridgeListener('SUBSCRIPTION_PACKAGE_SELECTED', () => {
-    if (!painPreferences.flags.achievements) return;
-
+  // Specific achievement triggers
+  useAchievementListener('SUBSCRIPTION_PACKAGE_SELECTED', () => {
     const newlyAchieved = completeAchievement('first-package-selection');
     handleUnlock('first-package-selection', newlyAchieved);
   });
 
-  useEventBridgeListener('SEARCH', () => {
-    if (!painPreferences.flags.achievements) return;
-
+  useAchievementListener('SEARCH', () => {
     const newlyAchieved = completeAchievement('first-search');
     handleUnlock('first-search', newlyAchieved);
   });

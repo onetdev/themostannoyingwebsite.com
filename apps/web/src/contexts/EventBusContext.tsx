@@ -12,27 +12,27 @@ import {
 // biome-ignore lint/suspicious/noExplicitAny: TODO: Add proper type
 export type EventPayload = any;
 
-export type EventBridgeEvent<T = EventPayload> = {
+export type EventBusEvent<T = EventPayload> = {
   type: string;
   payload?: T;
   timestamp: number;
 };
 
-export type EventBridgeListener<T = EventPayload> = (
-  event: EventBridgeEvent<T>,
+export type EventBusListener<T = EventPayload> = (
+  event: EventBusEvent<T>,
 ) => void;
 
-interface EventBridgeContextValue {
+interface EventBusContextValue {
   dispatch: <T = EventPayload>(type: string, payload?: T) => void;
   subscribe: <T = EventPayload>(
     type: string,
-    listener: EventBridgeListener<T>,
+    listener: EventBusListener<T>,
   ) => () => void;
 }
 
-const EventBridgeContext = createContext<EventBridgeContextValue | null>(null);
+const EventBusContext = createContext<EventBusContextValue | null>(null);
 
-export function EventBridgeProvider({ children }: PropsWithChildren) {
+export function EventBusProvider({ children }: PropsWithChildren) {
   const eventTarget = useRef<EventTarget>(null);
 
   if (!eventTarget.current && typeof window !== 'undefined') {
@@ -53,10 +53,10 @@ export function EventBridgeProvider({ children }: PropsWithChildren) {
       },
       subscribe: <T = EventPayload>(
         type: string,
-        listener: EventBridgeListener<T>,
+        listener: EventBusListener<T>,
       ) => {
         const wrappedListener = (e: Event) => {
-          const customEvent = e as CustomEvent<EventBridgeEvent<T>>;
+          const customEvent = e as CustomEvent<EventBusEvent<T>>;
           listener(customEvent.detail);
         };
         eventTarget.current?.addEventListener(type, wrappedListener);
@@ -69,18 +69,16 @@ export function EventBridgeProvider({ children }: PropsWithChildren) {
   );
 
   return (
-    <EventBridgeContext.Provider value={value}>
+    <EventBusContext.Provider value={value}>
       {children}
-    </EventBridgeContext.Provider>
+    </EventBusContext.Provider>
   );
 }
 
-export function useEventBridge() {
-  const context = useContext(EventBridgeContext);
+export function useEventBus() {
+  const context = useContext(EventBusContext);
   if (!context) {
-    throw new Error(
-      'useEventBridge must be used within an EventBridgeProvider',
-    );
+    throw new Error('useEventBus must be used within an EventBusProvider');
   }
   return context;
 }
@@ -88,11 +86,11 @@ export function useEventBridge() {
 /**
  * Hook to subscribe to an event from the event bridge.
  */
-export function useEventBridgeListener<T = EventPayload>(
+export function useEventBusListener<T = EventPayload>(
   type: string,
-  listener: EventBridgeListener<T>,
+  listener: EventBusListener<T>,
 ) {
-  const { subscribe } = useEventBridge();
+  const { subscribe } = useEventBus();
   const savedListener = useRef(listener);
 
   useEffect(() => {

@@ -6,7 +6,7 @@ import { random } from '@maw/utils/math';
 import HTMLReactParser from 'html-react-parser';
 import { useLocale, useMessages, useTranslations } from 'next-intl';
 import { useEffect, useMemo, useState } from 'react';
-import { useEventBridgeListener } from '@/contexts/EventBridgeContext';
+import { useEventBusListener } from '@/contexts/EventBusContext';
 import { SearchForm } from '@/features/content/components';
 import { Link } from '@/i18n/navigation';
 import { usePainPreferencesStore } from '@/stores';
@@ -40,8 +40,8 @@ export function SearchPage() {
     return items;
   }, [messages.search.topSearcheVariants, t]);
 
-  useEventBridgeListener<SearchEvent['payload']>('SEARCH', (event) => {
-    setQuery(event.payload.query);
+  useEventBusListener<SearchEvent['payload']>('SEARCH', (event) => {
+    setQuery(event.payload?.query ?? '');
   });
 
   const onRecommendedClick = (query: string) => {
