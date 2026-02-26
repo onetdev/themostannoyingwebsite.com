@@ -25,9 +25,7 @@
         "noUnknownPseudoClass": {
           "level": "error",
           "options": {
-            "ignore": [
-              "global"
-            ]
+            "ignore": ["global"]
           }
         }
       }

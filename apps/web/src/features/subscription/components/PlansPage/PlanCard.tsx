@@ -40,7 +40,7 @@ export function PlanCard({
     ? priceBase * (1 - extraDiscount)
     : priceBase;
   const cumulativeDiscountPercentage =
-    1 - priceDiscountCorrected / plan.monthlyPriceByCycle['monthly'];
+    1 - priceDiscountCorrected / plan.monthlyPriceByCycle.monthly;
 
   const totalCharge =
     priceDiscountCorrected * BILLING_CYCLE_MONTH_MAP[billingCycle];

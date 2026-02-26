@@ -1,7 +1,7 @@
+import type { Dirent } from 'node:fs';
+import fs from 'node:fs/promises';
+import path from 'node:path';
 import { getLogger } from '@maw/logger';
-import type { Dirent } from 'fs';
-import fs from 'fs/promises';
-import path from 'path';
 import sanitizeHtml from 'sanitize-html';
 import sharp from 'sharp';
 import { parse } from 'yaml';
@@ -33,7 +33,7 @@ const getLocaleMeta = async () => {
       const data = JSON.parse(dataRaw.toString());
 
       onCover = data['on-cover'];
-      highlighted = data['highlighted'];
+      highlighted = data.highlighted;
       success = true;
     } catch (_err) {
       success = false;
@@ -95,7 +95,7 @@ const resolveArticle = async (
   } = articleEntrySimplifiedZod.safeParse(dataUnsafe);
 
   if (isValid === false) {
-    throw Error('Invalid article data: ' + error);
+    throw Error(`Invalid article data: ${error}`);
   }
 
   let hasCoverImage = false;

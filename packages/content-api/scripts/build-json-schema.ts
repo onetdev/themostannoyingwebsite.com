@@ -1,5 +1,5 @@
+import fs from 'node:fs';
 import { getLogger } from '@maw/logger';
-import fs from 'fs';
 import { zodToJsonSchema } from 'zod-to-json-schema';
 
 import articleEntrySimplifiedZod from '@/schemas/article-entry-simplified';

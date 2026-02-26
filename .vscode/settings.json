@@ -35,7 +35,7 @@
   "explorer.fileNesting.enabled": true,
   "explorer.fileNesting.patterns": {
     "tsconfig.json": "tsconfig.json, tsconfig.tsbuildinfo",
-    "README.md": "CODE_OF_CONDUCT.md, CONTRIBUTING.md, LICENSE, CHANGELOG.md",
+    "README.md": "CODE_OF_CONDUCT.md, CONTRIBUTING.md, LICENSE, CHANGELOG.md"
   },
   "files.exclude": {
     "**/dist": true,
@@ -46,5 +46,5 @@
     "**/dist": true,
     "**/.next": true,
     "**/node_modules": true
-  },
+  }
 }
