@@ -10,7 +10,7 @@ You can run `pnpm dev` for development version and `pnpm build` for creating a p
 
 ## Maintenance
 
-You can upgrade Storybook by running `npx storybook@latest upgrade`
+You can upgrade Storybook by running `pnpx storybook@latest upgrade`
 
 ### Want to add new story sources?
 

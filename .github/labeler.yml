@@ -16,8 +16,6 @@ ci/cd:
 config:
   - changed-files:
     - any-glob-to-any-file:
-      - ./.eslintrc*
-      - ./.prettierrc*
       - ./**/next.config.js
       - ./**/next.config.mjs
       - ./**/tailwind.config.*
@@ -81,10 +79,6 @@ ui:
       - apps/web/src/kernel/**/components/**.tsx
       - apps/web/src/modules/**/components/**.tsx
       - packages/ui-lib/src/**
-pkg/config-eslint:
-  - changed-files:
-    - any-glob-to-any-file:
-      - packages/config-eslint/**
 pkg/config-jest:
   - changed-files:
     - any-glob-to-any-file:
