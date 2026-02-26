@@ -67,5 +67,12 @@ export const AchievementManager = () => {
     handleUnlock('first-package-selection', newlyAchieved);
   });
 
+  useEventBridgeListener('SEARCH', () => {
+    if (!painPreferences.flags.achievements) return;
+
+    const newlyAchieved = completeAchievement('first-search');
+    handleUnlock('first-search', newlyAchieved);
+  });
+
   return <AchievementToastManager />;
 };

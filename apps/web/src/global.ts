@@ -1,8 +1,3 @@
-export const DOCUMENT_EVENT_SEARCH = 'DocumentEventSearch';
-export type DocumentEventSearchDetails = {
-  query: string;
-};
-
 declare global {
   type AppTheme = 'light' | 'dark';
 
@@ -12,10 +7,6 @@ declare global {
   type CaptchaFormInputs = {
     captcha: string;
   };
-
-  interface DocumentEventMap {
-    [DOCUMENT_EVENT_SEARCH]: CustomEvent<DocumentEventSearchDetails>;
-  }
 
   export type PagedList<T> = {
     items: T[];

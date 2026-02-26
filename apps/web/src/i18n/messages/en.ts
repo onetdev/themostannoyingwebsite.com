@@ -531,6 +531,10 @@ export default {
         name: 'Financial Commitment',
         description: 'Select your first (fake) subscription package.',
       },
+      firstSearch: {
+        name: 'The Seeker',
+        description: 'Try searching for something on this website.',
+      },
     },
   },
   share: {

@@ -20,6 +20,12 @@ export const ACHIEVEMENT_REGISTRY: AchievementDefinition[] = [
     descriptionKey: 'achievements.registry.firstPackageSelection.description',
     type: 'boolean',
   },
+  {
+    id: 'first-search',
+    nameKey: 'achievements.registry.firstSearch.name',
+    descriptionKey: 'achievements.registry.firstSearch.description',
+    type: 'boolean',
+  },
 ];
 
 export const getAchievementById = (id: string) =>
