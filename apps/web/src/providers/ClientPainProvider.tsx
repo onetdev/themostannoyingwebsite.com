@@ -43,7 +43,11 @@ export function ClientPainContainer({ children }: PropsWithChildren) {
       <PageTitleGlitch />
       <NewsletterModalTrigger />
       <NotificationPromptTrigger />
-      <CopyMarker enabled={clipboardMarker} text={copyMarkerText} onCopy={handleCopy}>
+      <CopyMarker
+        enabled={clipboardMarker}
+        text={copyMarkerText}
+        onCopy={handleCopy}
+      >
         {children}
       </CopyMarker>
     </>

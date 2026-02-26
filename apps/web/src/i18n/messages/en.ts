@@ -554,7 +554,8 @@ export default {
       },
       rightClickRebel: {
         name: 'Right-Click Rebel',
-        description: 'Try to open the context menu 20 times (even though it is disabled).',
+        description:
+          'Try to open the context menu 20 times (even though it is disabled).',
       },
       copyPasteCriminal: {
         name: 'Copy-Paste Criminal',

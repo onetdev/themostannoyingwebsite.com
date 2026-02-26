@@ -203,7 +203,8 @@ export const usePainPreferencesStore = create<PainPreferencesStore>()(
 
         if (version === 1) {
           const achievementVal =
-            state.flags?.achievements ?? initialStateFlags.achievementNotifications;
+            state.flags?.achievements ??
+            initialStateFlags.achievementNotifications;
 
           return {
             ...state,

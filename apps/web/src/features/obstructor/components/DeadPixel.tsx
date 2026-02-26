@@ -27,14 +27,11 @@ export function DeadPixel() {
   return (
     <>
       {points?.map((point) => (
-        <div
+        <button
+          type="button"
+          aria-hidden
           key={`${point.x}-${point.y}`}
           onClick={() => dispatch('DEAD_PIXEL_CLICK_ATTEMPT')}
-          onKeyDown={(e) => {
-            if (e.key === 'Enter' || e.key === ' ') {
-              dispatch('DEAD_PIXEL_CLICK_ATTEMPT');
-            }
-          }}
           style={{ top: point.y, left: point.x }}
           className="fixed size-px bg-black select-none dark:bg-white"
         />
