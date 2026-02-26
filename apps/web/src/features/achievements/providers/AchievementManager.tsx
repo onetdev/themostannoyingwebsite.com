@@ -60,9 +60,12 @@ export const AchievementManager = () => {
     }
   });
 
-  return (
-    <>
-      <AchievementToastManager />
-    </>
-  );
+  useEventBridgeListener('SUBSCRIPTION_PACKAGE_SELECTED', () => {
+    if (!painPreferences.flags.achievements) return;
+
+    const newlyAchieved = completeAchievement('first-package-selection');
+    handleUnlock('first-package-selection', newlyAchieved);
+  });
+
+  return <AchievementToastManager />;
 };

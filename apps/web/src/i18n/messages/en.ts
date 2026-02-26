@@ -527,6 +527,10 @@ export default {
         name: 'Persistent Clicker',
         description: 'Click an annoying button 10 times.',
       },
+      firstPackageSelection: {
+        name: 'Financial Commitment',
+        description: 'Select your first (fake) subscription package.',
+      },
     },
   },
   share: {

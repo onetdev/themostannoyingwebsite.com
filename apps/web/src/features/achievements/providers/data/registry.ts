@@ -14,6 +14,12 @@ export const ACHIEVEMENT_REGISTRY: AchievementDefinition[] = [
     type: 'progression',
     targetProgress: 10,
   },
+  {
+    id: 'first-package-selection',
+    nameKey: 'achievements.registry.firstPackageSelection.name',
+    descriptionKey: 'achievements.registry.firstPackageSelection.description',
+    type: 'boolean',
+  },
 ];
 
 export const getAchievementById = (id: string) =>

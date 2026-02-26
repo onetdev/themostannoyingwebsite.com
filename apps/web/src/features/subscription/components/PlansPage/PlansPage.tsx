@@ -3,9 +3,13 @@
 import { PageHeadline } from '@maw/ui-lib';
 import { useTranslations } from 'next-intl';
 import { useCallback, useState } from 'react';
-import type { BillingCycle } from '../../schemas/billing-cycle';
-import type { SubscriptionFeature } from '../../schemas/subscription-feature';
-import type { SubscriptionPackage } from '../../schemas/subscription-package';
+import { useEventBridge } from '@/contexts/EventBridgeContext';
+import type {
+  BillingCycle,
+  SubscriptionFeature,
+  SubscriptionPackage,
+} from '../../schemas';
+import type { SubscriptionEvent } from '../../types';
 import { BillingCycleSelector } from './BillingCycleSelector';
 import { Disclaimer } from './Disclaimer';
 import { PlanCard } from './PlanCard';
@@ -33,6 +37,7 @@ export function PlansPage({
   socialProofConfig,
 }: PlansPageProps) {
   const t = useTranslations();
+  const { dispatch } = useEventBridge();
   const [isDiscountActive, setIsDiscountActive] = useState(false);
   const [billingCycle, setBillingCycle] = useState<BillingCycle>('monthly');
   const [selectedPlanKey, setSelectedPlanKey] = useState<string>(
@@ -42,6 +47,16 @@ export function PlansPage({
   const onUrgencyTick = useCallback(
     (timeLeft: number) => setIsDiscountActive(timeLeft > 0),
     [],
+  );
+
+  const handleSelectPlan = useCallback(
+    (key: string) => {
+      setSelectedPlanKey(key);
+      dispatch<SubscriptionEvent['payload']>('SUBSCRIPTION_PACKAGE_SELECTED', {
+        packageId: key,
+      });
+    },
+    [dispatch],
   );
 
   return (
@@ -76,7 +91,7 @@ export function PlansPage({
                   : undefined
               }
               isSelected={selectedPlanKey === plan.key}
-              onSelect={() => setSelectedPlanKey(plan.key)}
+              onSelect={() => handleSelectPlan(plan.key)}
             />
           );
         })}
