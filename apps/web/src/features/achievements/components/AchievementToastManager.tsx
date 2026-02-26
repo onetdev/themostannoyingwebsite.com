@@ -8,7 +8,7 @@ import { getAchievementById } from '../providers/data/registry';
 
 export const AchievementToastManager = () => {
   const t = useTranslations();
-  const { play, audio } = useAudio('/assets/sfx/achivement.mp3');
+  const { play, audio } = useAudio('/assets/sfx/achievement.mp3');
 
   useEventBridgeListener('ACHIEVEMENT_UNLOCKED', (event) => {
     const { achievementId } = event.payload || {};
