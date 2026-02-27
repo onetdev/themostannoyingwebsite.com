@@ -3,54 +3,14 @@ import { createJSONStorage, persist } from 'zustand/middleware';
 
 import config from '@/config';
 import type { ScreensaverVariant } from '@/features/obstructor/schemas';
+import {
+  type PainPointKey,
+  type PainPreferencesState,
+  PainPreferencesStateSchema,
+  PUBLIC_PAIN_POINT_LIST,
+} from './pain-preferences-schema';
 
 export const PAIN_PREFERENCES_STORAGE_KEY = 'zustand-pain-preferences-storage';
-export const PRIVATE_PAIN_POINT_LIST = [
-  'pageTitle.inactiveMarquee',
-  'pageTitle.randomGlitch',
-] as const;
-
-// The sort of the pain points is important, it might get refactore into
-// a weighted struct but it is what it is for now.
-export const PUBLIC_PAIN_POINT_LIST = [
-  'gifts.oneByOne',
-  'gifts.flaps',
-  'contentPaywall',
-  'mockChat',
-  'wheelOfFortune',
-  'screensaver',
-  'exitPrompt',
-  'clipboardMarker',
-  'gifts.detectAdblocker',
-  'searchDelay',
-  'pageTitle.inactiveArrayPaged',
-  'deadPixel',
-  'disableContextMenu',
-  'newsletterModal',
-  'historySpam',
-  'notifications',
-  'stickyVideo',
-  'achievementNotifications',
-] as const;
-
-export const PAIN_POINT_LIST = [
-  ...PRIVATE_PAIN_POINT_LIST,
-  ...PUBLIC_PAIN_POINT_LIST,
-] as const;
-
-export type PainPointKey = (typeof PAIN_POINT_LIST)[number];
-
-export type PainPreferencesState = {
-  flags: Record<PainPointKey, boolean>;
-  publicLevel: {
-    current: number;
-    max: number;
-  };
-  screensaver: {
-    timeoutSeconds: number;
-    variant: ScreensaverVariant;
-  };
-};
 
 function calculatePublicLevelMeta(
   painPointFlags: PainPreferencesState['flags'],
@@ -183,39 +143,36 @@ export const usePainPreferencesStore = create<PainPreferencesStore>()(
           };
         }),
       setScreensaverTimeoutSeconds: (timeoutSeconds) =>
-        set(({ screensaver, ...state }) => ({
-          ...state,
+        set(({ screensaver, ...stateRest }) => ({
+          ...stateRest,
           screensaver: { ...screensaver, timeoutSeconds },
         })),
       setScreensaverVariant: (variant) =>
-        set(({ screensaver, ...state }) => ({
-          ...state,
+        set(({ screensaver, ...stateRest }) => ({
+          ...stateRest,
           screensaver: { ...screensaver, variant },
         })),
     }),
     {
       name: PAIN_PREFERENCES_STORAGE_KEY,
       storage: createJSONStorage(() => localStorage),
-      version: 2,
-      migrate: (persistedState, version) => {
-        // biome-ignore lint/suspicious/noExplicitAny: We kinda need it because it can be any version.
-        const state = persistedState as any;
+      version: 3,
+      migrate: (persistedState, _version) => {
+        const sanitizedSchema = PainPreferencesStateSchema.strip().parse(persistedState);
 
-        if (version === 1) {
-          const achievementVal =
-            state.flags?.achievements ??
-            initialStateFlags.achievementNotifications;
-
-          return {
-            ...state,
-            flags: {
-              ...state.flags,
-              achievementNotifications: achievementVal,
-            },
-          };
+        const flags = {
+          ...initialStateFlags,
+          ...sanitizedSchema.flags,
         }
 
-        return state;
+        return {
+          flags,
+          publicLevel: calculatePublicLevelMeta(flags),
+          screensaver: {
+            ...initialState.screensaver,
+            ...sanitizedSchema.screensaver,
+          },
+        } satisfies PainPreferencesState;
       },
     },
   ),
