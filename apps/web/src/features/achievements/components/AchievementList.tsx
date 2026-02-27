@@ -1,7 +1,7 @@
 'use client';
 
-import { useAchievementsStore } from '@/stores';
 import { ACHIEVEMENT_REGISTRY } from '../providers/data/registry';
+import { useAchievementsStore } from '../stores';
 import { AchievementCard } from './AchievementCard';
 import { ResetAchievementsButton } from './ResetAchievementsButton';
 

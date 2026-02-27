@@ -10,7 +10,7 @@ import {
 } from '@maw/ui-lib';
 import { cn } from '@maw/ui-lib/utils';
 import { useTranslations } from 'next-intl';
-import type { AchievementState } from '@/stores/achievements';
+import type { AchievementState } from '../stores';
 import type { AchievementDefinition } from '../types';
 
 export type AchievementCardProps = {

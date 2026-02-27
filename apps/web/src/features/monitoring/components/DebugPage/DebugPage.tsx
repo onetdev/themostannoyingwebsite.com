@@ -9,8 +9,8 @@ import {
   TabsTrigger,
 } from '@maw/ui-lib';
 import config from '@/config';
+import { useAchievementsStore } from '@/features/achievements/stores';
 import {
-  useAchievementsStore,
   usePainPreferencesStore,
   useRuntimeStore,
   useUserGrantsStore,

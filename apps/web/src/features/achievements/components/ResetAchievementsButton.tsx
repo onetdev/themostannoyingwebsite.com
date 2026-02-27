@@ -13,7 +13,7 @@ import {
 } from '@maw/ui-lib';
 import { useTranslations } from 'next-intl';
 import { useCallback, useState } from 'react';
-import { useAchievementsStore } from '@/stores';
+import { useAchievementsStore } from '../stores';
 
 export function ResetAchievementsButton() {
   const t = useTranslations();

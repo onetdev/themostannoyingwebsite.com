@@ -5,8 +5,10 @@ import { useTranslations } from 'next-intl';
 import config from '@/config';
 import { useEventBusListener } from '@/contexts/EventBusContext';
 import { useAudio } from '@/hooks';
-import { useAchievementsStore, usePainPreferencesStore } from '@/stores';
+import { usePainPreferencesStore } from '@/stores';
 import { getAchievementMetaById } from '../providers/data/registry';
+import { useAchievementsStore } from '../stores';
+import { AchievementToast } from './AchievementToast';
 
 export const AchievementToastManager = () => {
   const t = useTranslations();
@@ -27,12 +29,9 @@ export const AchievementToastManager = () => {
 
     play();
 
-    toast.info(
-      t('achievements.unlocked', {
-        name: t(definition.nameKey),
-      }),
+    toast.custom(
+      () => <AchievementToast name={t(definition.nameKey)} type="unlocked" />,
       {
-        icon: '🏆',
         position: 'top-center',
       },
     );
@@ -55,14 +54,16 @@ export const AchievementToastManager = () => {
 
     notifyAchievementProgress(achievementId);
 
-    toast.info(
-      t('achievements.progress', {
-        name: t(definition.nameKey),
-        progress,
-        target: definition.targetProgress ?? 0,
-      }),
+    toast.custom(
+      () => (
+        <AchievementToast
+          name={t(definition.nameKey)}
+          type="progress"
+          progress={progress}
+          target={definition.targetProgress}
+        />
+      ),
       {
-        icon: '📈',
         position: 'top-center',
       },
     );

@@ -2,16 +2,16 @@
 
 import { useCallback } from 'react';
 import { useEventBus, useEventBusListener } from '@/contexts/EventBusContext';
+
 import type { ContentEvent } from '@/features/content/types';
 import type { InterferrerEvent } from '@/features/interferrer/types';
 import type { ObstructorEvent } from '@/features/obstructor/types';
 import type { PromotionEvent } from '@/features/promotion/types';
 import type { SubscriptionEvent } from '@/features/subscription/types';
 import type { UserEvent } from '@/features/user/types';
-import { useAchievementsStore } from '@/stores';
-import type { AchievementUpdateResult } from '@/stores/achievements';
 import type { AppEvent } from '@/types';
 import { AchievementToastManager } from '../components/AchievementToastManager';
+import { type AchievementUpdateResult, useAchievementsStore } from '../stores';
 import { getAchievementMetaById } from './data/registry';
 
 type EventPayload<

@@ -525,6 +525,9 @@ export default {
   achievements: {
     unlocked: 'Achievement Unlocked: {name}',
     progress: 'Progress: {name} ({progress}/{target})',
+    unlockedTitle: 'Achievement Unlocked!',
+    progressTitle: 'Achievement Progress',
+    progressBarLabel: 'Progress',
     title: 'Achievements',
     description:
       'The journey of a thousand miles begins with a single, highly annoying step. Track your "achievements" and showcase your questionable persistence in navigating this digital nightmare.',
