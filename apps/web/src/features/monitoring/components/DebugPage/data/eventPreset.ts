@@ -9,4 +9,9 @@ export const eventPresets = [
   { type: 'TEXT_COPIED', payload: {} },
   { type: 'DEAD_PIXEL_CLICK_ATTEMPT', payload: {} },
   { type: 'EXIT_PROMPT_TRIGGERED', payload: {} },
+  {
+    type: 'WHEEL_OF_FORTUNE_SPIN_COMPLETE',
+    payload: { prize: 'Absolutely Nothing' },
+  },
+  { type: 'ADMIN_LOGIN_SUCCESS', payload: { username: 'admin' } },
 ];

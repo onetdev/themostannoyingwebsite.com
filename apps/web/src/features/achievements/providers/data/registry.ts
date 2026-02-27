@@ -45,6 +45,18 @@ export const ACHIEVEMENT_REGISTRY: AchievementDefinition[] = [
     descriptionKey: 'achievements.registry.deadPixelHunter.description',
     type: 'boolean',
   },
+  {
+    id: 'wheel-of-fortune-spin',
+    nameKey: 'achievements.registry.wheelOfFortuneSpin.name',
+    descriptionKey: 'achievements.registry.wheelOfFortuneSpin.description',
+    type: 'boolean',
+  },
+  {
+    id: 'admin-login',
+    nameKey: 'achievements.registry.adminLogin.name',
+    descriptionKey: 'achievements.registry.adminLogin.description',
+    type: 'boolean',
+  },
 ];
 
 export const getAchievementById = (id: string) =>

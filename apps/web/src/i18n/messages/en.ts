@@ -569,6 +569,15 @@ export default {
         name: 'Dead Pixel Hunter',
         description: 'Try to click on a dead pixel.',
       },
+      wheelOfFortuneSpin: {
+        name: 'Optimistic Gambler',
+        description:
+          'Spin the "Wheel of Fortune" and win an absolutely useless prize.',
+      },
+      adminLogin: {
+        name: 'The System Admin',
+        description: 'Gain access to the highly restricted admin area.',
+      },
     },
   },
   share: {
