@@ -13,7 +13,7 @@ import type { SubmitEventHandler } from 'react';
 
 import { useEventBus } from '@/contexts/EventBusContext';
 import { useRouter } from '@/i18n/navigation';
-import type { SearchEvent } from '../types';
+import type { ContentEvent } from '../types';
 
 const searchFormVariants = cva('', {
   variants: {
@@ -54,7 +54,7 @@ export function SearchForm({
 
     // If we are already on the search page, we will also need to dispatch
     // the search event
-    dispatch<SearchEvent['payload']>('SEARCH', { query });
+    dispatch<ContentEvent['payload']>('SEARCH', { query });
   };
 
   return (

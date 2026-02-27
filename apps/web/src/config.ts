@@ -8,6 +8,7 @@ const config: AppConfig = {
     assets: {
       achievementUnlockedSfx: '/assets/sfx/achievement.mp3',
     },
+    progressiveAchievementToastThrottlingSeconds: 10,
   },
   auth: {
     assets: {

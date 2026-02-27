@@ -87,5 +87,5 @@ export const ACHIEVEMENT_REGISTRY: AchievementDefinition[] = [
   },
 ];
 
-export const getAchievementById = (id: string) =>
+export const getAchievementMetaById = (id: string) =>
   ACHIEVEMENT_REGISTRY.find((a) => a.id === id);

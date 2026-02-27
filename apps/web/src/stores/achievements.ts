@@ -8,6 +8,14 @@ export interface AchievementState {
   achieved: boolean;
   progress: number;
   completedAt?: number;
+  updatedAt?: number;
+  lastNotifiedAt?: number;
+}
+
+export interface AchievementUpdateResult {
+  newlyAchieved: boolean;
+  progress: number;
+  lastNotifiedAt?: number;
 }
 
 export interface AchievementsState {
@@ -19,13 +27,14 @@ export interface AchievementsActions {
     id: string,
     progress: number,
     targetProgress: number,
-  ) => boolean;
+  ) => AchievementUpdateResult;
   incrementAchievementProgress: (
     id: string,
     amount: number,
     targetProgress: number,
-  ) => boolean;
+  ) => AchievementUpdateResult;
   completeAchievement: (id: string) => boolean;
+  notifyAchievementProgress: (id: string) => void;
   resetAchievements: () => void;
 }
 
@@ -49,10 +58,18 @@ export const useAchievementsStore = create<AchievementsStore>()(
           progress: 0,
         };
 
-        if (current.achieved) return false;
+        if (current.achieved)
+          return {
+            newlyAchieved: false,
+            progress: current.progress,
+            lastNotifiedAt: current.lastNotifiedAt,
+          };
 
         const newProgress = Math.min(progress, targetProgress);
         const newlyAchieved = newProgress >= targetProgress;
+
+        const now = Date.now();
+        const lastNotifiedAt = current.lastNotifiedAt;
 
         set((state) => ({
           achievements: {
@@ -62,12 +79,17 @@ export const useAchievementsStore = create<AchievementsStore>()(
               id,
               progress: newProgress,
               achieved: newlyAchieved,
-              completedAt: newlyAchieved ? Date.now() : undefined,
+              completedAt: newlyAchieved ? now : current.completedAt,
+              updatedAt: now,
             },
           },
         }));
 
-        return newlyAchieved;
+        return {
+          newlyAchieved,
+          progress: newProgress,
+          lastNotifiedAt,
+        };
       },
 
       incrementAchievementProgress: (id, amount, targetProgress) => {
@@ -77,10 +99,18 @@ export const useAchievementsStore = create<AchievementsStore>()(
           progress: 0,
         };
 
-        if (current.achieved) return false;
+        if (current.achieved)
+          return {
+            newlyAchieved: false,
+            progress: current.progress,
+            lastNotifiedAt: current.lastNotifiedAt,
+          };
 
         const newProgress = Math.min(current.progress + amount, targetProgress);
         const newlyAchieved = newProgress >= targetProgress;
+
+        const now = Date.now();
+        const lastNotifiedAt = current.lastNotifiedAt;
 
         set((state) => ({
           achievements: {
@@ -90,18 +120,24 @@ export const useAchievementsStore = create<AchievementsStore>()(
               id,
               progress: newProgress,
               achieved: newlyAchieved,
-              completedAt: newlyAchieved ? Date.now() : undefined,
+              completedAt: newlyAchieved ? now : current.completedAt,
+              updatedAt: now,
             },
           },
         }));
 
-        return newlyAchieved;
+        return {
+          newlyAchieved,
+          progress: newProgress,
+          lastNotifiedAt: lastNotifiedAt,
+        };
       },
 
       completeAchievement: (id) => {
         const current = get().achievements[id];
         if (current?.achieved) return false;
 
+        const now = Date.now();
         set((state) => ({
           achievements: {
             ...state.achievements,
@@ -109,12 +145,29 @@ export const useAchievementsStore = create<AchievementsStore>()(
               id,
               progress: 1, // Treat as 1 for boolean achievements
               achieved: true,
-              completedAt: Date.now(),
+              completedAt: now,
+              updatedAt: now,
+              lastNotifiedAt: now,
             },
           },
         }));
 
         return true;
+      },
+
+      notifyAchievementProgress: (id) => {
+        const current = get().achievements[id];
+        if (!current) return;
+
+        set((state) => ({
+          achievements: {
+            ...state.achievements,
+            [id]: {
+              ...current,
+              lastNotifiedAt: Date.now(),
+            },
+          },
+        }));
       },
 
       resetAchievements: () => set(initialState),

@@ -9,9 +9,18 @@ export interface AchievementDefinition {
   secret?: boolean;
 }
 
-export type AchievementsEvent = {
-  type: 'ACHIEVEMENT_UNLOCKED';
-  payload: {
-    achievementId: string;
-  };
-};
+export type AchievementsEvent =
+  | {
+      type: 'ACHIEVEMENT_UNLOCKED';
+      payload: {
+        achievementId: string;
+      };
+    }
+  | {
+      type: 'ACHIEVEMENT_PROGRESS_UPDATED';
+      payload: {
+        achievementId: string;
+        progress: number;
+        lastNotifiedAt?: number;
+      };
+    };

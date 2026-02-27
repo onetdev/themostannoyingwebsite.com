@@ -12,7 +12,7 @@ import { Link } from '@/i18n/navigation';
 import { usePainPreferencesStore } from '@/stores';
 import { useAppArticleService } from '../hooks';
 import type { ArticleSearchResult } from '../schemas';
-import type { SearchEvent } from '../types';
+import type { ContentEvent } from '../types';
 
 export type Result = {
   query: string;
@@ -40,7 +40,7 @@ export function SearchPage() {
     return items;
   }, [messages.search.topSearcheVariants, t]);
 
-  useEventBusListener<SearchEvent['payload']>('SEARCH', (event) => {
+  useEventBusListener<ContentEvent['payload']>('SEARCH', (event) => {
     setQuery(event.payload?.query ?? '');
   });
 

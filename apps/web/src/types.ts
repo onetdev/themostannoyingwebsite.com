@@ -18,7 +18,7 @@ export const DI = {
   ...DISubscription,
 };
 
-export type GlobalEvent =
+export type AppEvent =
   | {
       type: 'NAVIGATION';
       payload: {

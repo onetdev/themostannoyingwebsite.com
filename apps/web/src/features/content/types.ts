@@ -4,7 +4,7 @@ export const DI = {
   AppArticleService: Symbol.for('AppArticleService'),
 };
 
-export type SearchEvent = {
+export type ContentEvent = {
   type: 'SEARCH';
   payload: {
     query: string;
