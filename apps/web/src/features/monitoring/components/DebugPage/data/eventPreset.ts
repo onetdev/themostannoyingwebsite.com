@@ -14,4 +14,6 @@ export const eventPresets = [
     payload: { prize: 'Absolutely Nothing' },
   },
   { type: 'ADMIN_LOGIN_SUCCESS', payload: { username: 'admin' } },
+  { type: 'MAZE_STEP', payload: { passedSpecialCell: false } },
+  { type: 'MAZE_STEP', payload: { passedSpecialCell: true } },
 ];

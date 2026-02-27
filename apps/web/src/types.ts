@@ -17,3 +17,19 @@ export const DI = {
   ...DIDonation,
   ...DISubscription,
 };
+
+export type GlobalEvent =
+  | {
+      type: 'NAVIGATION';
+      payload: {
+        path: string;
+      };
+    }
+  | {
+      type: 'TEXT_COPIED';
+      payload?: never;
+    }
+  | {
+      type: 'EXIT_PROMPT_TRIGGERED';
+      payload?: never;
+    };

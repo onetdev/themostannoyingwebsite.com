@@ -2,6 +2,7 @@
 
 import { useCallback } from 'react';
 import { useEventBus, useEventBusListener } from '@/contexts/EventBusContext';
+import type { ObstructorEvent } from '@/features/obstructor/types';
 import { useAchievementsStore } from '@/stores';
 import { AchievementToastManager } from '../components/AchievementToastManager';
 
@@ -20,6 +21,20 @@ export const AchievementManager = () => {
   );
 
   // Specific achievement triggers
+  useEventBusListener<ObstructorEvent['payload']>('MAZE_STEP', (event) => {
+    if (event.payload?.passedSpecialCell) {
+      const newlyAchieved = completeAchievement('maze-special-cell');
+      handleUnlock('maze-special-cell', newlyAchieved);
+    }
+
+    const newlyAchievedProgress = incrementAchievementProgress(
+      'maze-explorer',
+      1,
+      500,
+    );
+    handleUnlock('maze-explorer', newlyAchievedProgress);
+  });
+
   useEventBusListener('SUBSCRIPTION_PACKAGE_SELECTED', () => {
     const newlyAchieved = completeAchievement('first-package-selection');
     handleUnlock('first-package-selection', newlyAchieved);

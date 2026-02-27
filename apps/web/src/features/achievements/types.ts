@@ -6,4 +6,12 @@ export interface AchievementDefinition {
   descriptionKey: string;
   type: AchievementType;
   targetProgress?: number;
+  secret?: boolean;
 }
+
+export type AchievementsEvent = {
+  type: 'ACHIEVEMENT_UNLOCKED';
+  payload: {
+    achievementId: string;
+  };
+};

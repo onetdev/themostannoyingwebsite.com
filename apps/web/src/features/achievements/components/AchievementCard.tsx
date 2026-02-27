@@ -28,6 +28,8 @@ export function AchievementCard({ definition, state }: AchievementCardProps) {
       ? 100
       : 0;
 
+  const showDescription = !definition.secret || state.achieved;
+
   return (
     <Card
       key={definition.id}
@@ -53,7 +55,9 @@ export function AchievementCard({ definition, state }: AchievementCardProps) {
       </CardHeader>
       <CardContent className="flex flex-1 flex-col">
         <p className="text-muted-foreground flex-1 mb-4 text-sm">
-          {t(definition.descriptionKey)}
+          {showDescription
+            ? t(definition.descriptionKey)
+            : t('achievements.lockedDescription')}
         </p>
 
         {isProgression && (

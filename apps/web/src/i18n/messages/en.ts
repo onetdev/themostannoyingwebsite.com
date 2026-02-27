@@ -527,6 +527,7 @@ export default {
     title: 'Achievements',
     description:
       'The journey of a thousand miles begins with a single, highly annoying step. Track your "achievements" and showcase your questionable persistence in navigating this digital nightmare.',
+    lockedDescription: 'You will only see the description of this achievement once you unlocked it.',
     reset: {
       button: 'Reset All Achievements',
       confirmTitle: 'Are you absolutely sure?',
@@ -577,6 +578,14 @@ export default {
       adminLogin: {
         name: 'The System Admin',
         description: 'Gain access to the highly restricted admin area.',
+      },
+      mazeSpecialCell: {
+        name: 'The answer of life',
+        description: 'Find the meaning of life while searching through the maze of existence.',
+      },
+      mazeExplorer: {
+        name: 'Lost Forever',
+        description: 'Take 500 steps inside the digital maze.',
       },
     },
   },

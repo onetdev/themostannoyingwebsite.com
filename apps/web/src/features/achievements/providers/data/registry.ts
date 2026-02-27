@@ -56,6 +56,21 @@ export const ACHIEVEMENT_REGISTRY: AchievementDefinition[] = [
     nameKey: 'achievements.registry.adminLogin.name',
     descriptionKey: 'achievements.registry.adminLogin.description',
     type: 'boolean',
+    secret: true,
+  },
+  {
+    id: 'maze-special-cell',
+    nameKey: 'achievements.registry.mazeSpecialCell.name',
+    descriptionKey: 'achievements.registry.mazeSpecialCell.description',
+    type: 'boolean',
+    secret: true,
+  },
+  {
+    id: 'maze-explorer',
+    nameKey: 'achievements.registry.mazeExplorer.name',
+    descriptionKey: 'achievements.registry.mazeExplorer.description',
+    type: 'progression',
+    targetProgress: 500,
   },
 ];
 
