@@ -3,6 +3,7 @@ import { createJSONStorage, persist } from 'zustand/middleware';
 
 import config from '@/config';
 import type { ScreensaverVariant } from '@/features/obstructor/schemas';
+import { broadcastChannelSync } from '@/stores/utils/sync';
 import {
   type PainPointKey,
   type PainPreferencesState,
@@ -77,82 +78,86 @@ const initialState: PainPreferencesState = {
 
 export const usePainPreferencesStore = create<PainPreferencesStore>()(
   persist(
-    (set) => ({
-      ...initialState,
-      allDisable: () =>
-        set((state) => {
-          const newFlags = { ...state.flags };
-          (Object.keys(initialStateFlags) as PainPointKey[]).forEach((key) => {
-            newFlags[key] = false;
+    broadcastChannelSync<PainPreferencesStore>(PAIN_PREFERENCES_STORAGE_KEY)(
+      (set) => ({
+        ...initialState,
+        allDisable: () =>
+          set((state) => {
+            const newFlags = { ...state.flags };
+            (Object.keys(initialStateFlags) as PainPointKey[]).forEach(
+              (key) => {
+                newFlags[key] = false;
+              },
+            );
+            return {
+              ...state,
+              flags: newFlags,
+              publicLevel: calculatePublicLevelMeta(newFlags),
+            };
+          }),
+        allEnable: () => {
+          set((state) => {
+            const nextFlags = { ...state.flags };
+            PUBLIC_PAIN_POINT_LIST.forEach((key) => {
+              nextFlags[key] = true;
+            });
+            return {
+              ...state,
+              flags: nextFlags,
+              publicLevel: calculatePublicLevelMeta(nextFlags),
+            };
           });
-          return {
-            ...state,
-            flags: newFlags,
-            publicLevel: calculatePublicLevelMeta(newFlags),
-          };
-        }),
-      allEnable: () => {
-        set((state) => {
-          const nextFlags = { ...state.flags };
-          PUBLIC_PAIN_POINT_LIST.forEach((key) => {
-            nextFlags[key] = true;
-          });
-          return {
-            ...state,
-            flags: nextFlags,
-            publicLevel: calculatePublicLevelMeta(nextFlags),
-          };
-        });
-      },
-      setFlag: (key, value) =>
-        set((state) => {
-          const nextFlags = { ...state.flags, [key]: value };
-          return {
-            ...state,
-            flags: nextFlags,
-            publicLevel: calculatePublicLevelMeta(nextFlags),
-          };
-        }),
-      setFlagIndeterminate: (
-        key: PainPointKey,
-        value: boolean | 'indeterminate',
-      ) =>
-        set((state) => {
-          const nextValue =
-            value === 'indeterminate' ? initialStateFlags[key] : value;
-          const nextFlags = { ...state.flags, [key]: nextValue };
-          return {
-            ...state,
-            flags: nextFlags,
-            publicLevel: calculatePublicLevelMeta(nextFlags),
-          };
-        }),
-      setLevel: (level) =>
-        set((state) => {
-          const nextFlags = { ...state.flags };
+        },
+        setFlag: (key, value) =>
+          set((state) => {
+            const nextFlags = { ...state.flags, [key]: value };
+            return {
+              ...state,
+              flags: nextFlags,
+              publicLevel: calculatePublicLevelMeta(nextFlags),
+            };
+          }),
+        setFlagIndeterminate: (
+          key: PainPointKey,
+          value: boolean | 'indeterminate',
+        ) =>
+          set((state) => {
+            const nextValue =
+              value === 'indeterminate' ? initialStateFlags[key] : value;
+            const nextFlags = { ...state.flags, [key]: nextValue };
+            return {
+              ...state,
+              flags: nextFlags,
+              publicLevel: calculatePublicLevelMeta(nextFlags),
+            };
+          }),
+        setLevel: (level) =>
+          set((state) => {
+            const nextFlags = { ...state.flags };
 
-          PUBLIC_PAIN_POINT_LIST.forEach((exp, index) => {
-            const shouldEnable = index < level;
-            nextFlags[exp] = shouldEnable;
-          });
+            PUBLIC_PAIN_POINT_LIST.forEach((exp, index) => {
+              const shouldEnable = index < level;
+              nextFlags[exp] = shouldEnable;
+            });
 
-          return {
-            ...state,
-            flags: nextFlags,
-            publicLevel: calculatePublicLevelMeta(nextFlags),
-          };
-        }),
-      setScreensaverTimeoutSeconds: (timeoutSeconds) =>
-        set(({ screensaver, ...stateRest }) => ({
-          ...stateRest,
-          screensaver: { ...screensaver, timeoutSeconds },
-        })),
-      setScreensaverVariant: (variant) =>
-        set(({ screensaver, ...stateRest }) => ({
-          ...stateRest,
-          screensaver: { ...screensaver, variant },
-        })),
-    }),
+            return {
+              ...state,
+              flags: nextFlags,
+              publicLevel: calculatePublicLevelMeta(nextFlags),
+            };
+          }),
+        setScreensaverTimeoutSeconds: (timeoutSeconds) =>
+          set(({ screensaver, ...stateRest }) => ({
+            ...stateRest,
+            screensaver: { ...screensaver, timeoutSeconds },
+          })),
+        setScreensaverVariant: (variant) =>
+          set(({ screensaver, ...stateRest }) => ({
+            ...stateRest,
+            screensaver: { ...screensaver, variant },
+          })),
+      }),
+    ),
     {
       name: PAIN_PREFERENCES_STORAGE_KEY,
       storage: createJSONStorage(() => localStorage),
