@@ -2,10 +2,8 @@
 
 import { Checkbox as FormCheckbox } from '@maw/ui-lib';
 import { useTranslations } from 'next-intl';
-
-import { SettingsField } from '../SettingsField';
-
 import { usePainPreferencesStore } from '@/stores';
+import { SettingsField } from '../SettingsField';
 
 export function BrowserAndTab() {
   const painPreferences = usePainPreferencesStore();
@@ -18,9 +16,8 @@ export function BrowserAndTab() {
       </h3>
       <SettingsField
         label={t('settings.optionalPainPoints.pageTitleInactiveArrayPaged')}
-        info={t(
-          'settings.optionalPainPointsHints.pageTitleInactiveArrayPaged',
-        )}>
+        info={t('settings.optionalPainPointsHints.pageTitleInactiveArrayPaged')}
+      >
         <FormCheckbox
           name="page_title_inactive_array_paged"
           checked={painPreferences.flags['pageTitle.inactiveArrayPaged']}
@@ -34,7 +31,8 @@ export function BrowserAndTab() {
       </SettingsField>
       <SettingsField
         label={t('settings.optionalPainPoints.historySpam')}
-        info={t('settings.optionalPainPointsHints.historySpam')}>
+        info={t('settings.optionalPainPointsHints.historySpam')}
+      >
         <FormCheckbox
           name="history_spam"
           checked={painPreferences.flags.historySpam}
@@ -45,7 +43,8 @@ export function BrowserAndTab() {
       </SettingsField>
       <SettingsField
         label={t('settings.optionalPainPoints.disableContextMenu')}
-        info={t('settings.optionalPainPointsHints.disableContextMenu')}>
+        info={t('settings.optionalPainPointsHints.disableContextMenu')}
+      >
         <FormCheckbox
           name="disable_context"
           checked={painPreferences.flags.disableContextMenu}
@@ -56,7 +55,8 @@ export function BrowserAndTab() {
       </SettingsField>
       <SettingsField
         label={t('settings.optionalPainPoints.searchDelay')}
-        info={t('settings.optionalPainPointsHints.searchDelay')}>
+        info={t('settings.optionalPainPointsHints.searchDelay')}
+      >
         <FormCheckbox
           name="search_delay"
           checked={painPreferences.flags.searchDelay}

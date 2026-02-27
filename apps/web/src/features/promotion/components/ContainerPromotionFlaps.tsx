@@ -3,11 +3,12 @@
 import Image from 'next/image';
 import { useTranslations } from 'next-intl';
 import { useTheme } from 'next-themes';
-import { PropsWithChildren } from 'react';
-
+import type { PropsWithChildren } from 'react';
+import { useAppConfig } from '@/contexts/AppConfig';
 import { Link } from '@/i18n/navigation';
 
 export function ContainerPromotionFlaps() {
+  const config = useAppConfig();
   const t = useTranslations();
   const { resolvedTheme } = useTheme();
 
@@ -17,7 +18,7 @@ export function ContainerPromotionFlaps() {
         <Link href="/dilf" passHref prefetch={false}>
           <Image
             className="object-cover opacity-30 mix-blend-lighten"
-            src="/ads/ad-dilf-flaps.webp"
+            src={config.promotion.assets.dilfFlapsAd}
             alt={t('gifts.dilf.title')}
             width={1900}
             height={1000}
@@ -25,12 +26,14 @@ export function ContainerPromotionFlaps() {
           />
           <PromotionFlapText
             theme={resolvedTheme as AppTheme}
-            className="bottom-16 left-16 origin-bottom-left -rotate-90">
+            className="bottom-16 left-16 origin-bottom-left -rotate-90"
+          >
             {t('gifts.dilf.flapLeft')}
           </PromotionFlapText>
           <PromotionFlapText
             theme={resolvedTheme as AppTheme}
-            className="right-16 bottom-16 origin-bottom-right rotate-90">
+            className="right-16 bottom-16 origin-bottom-right rotate-90"
+          >
             {t('gifts.dilf.flapRight')}
           </PromotionFlapText>
         </Link>
@@ -53,7 +56,8 @@ function PromotionFlapText({
     <span
       suppressHydrationWarning
       data-theme={theme ?? 'dark'}
-      className={`absolute text-2xl font-bold text-gray-600 data-[theme=dark]:text-white ${className}`}>
+      className={`absolute text-2xl font-bold text-gray-600 data-[theme=dark]:text-white ${className}`}
+    >
       {children}
     </span>
   );

@@ -1,12 +1,12 @@
 export {
-  default as ArticleSimplified,
   type ArticleSimplifiedSchema,
+  default as ArticleSimplified,
 } from './article-entry-simplified';
 export {
-  default as ArticleIndex,
   type ArticleIndexEntrySchema,
+  default as ArticleIndex,
 } from './article-index-entry';
 export {
-  default as ArticleLocaleMeta,
   type ArticleLocaleMetaSchema,
+  default as ArticleLocaleMeta,
 } from './article-locale-meta';

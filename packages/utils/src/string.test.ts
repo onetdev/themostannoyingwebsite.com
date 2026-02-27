@@ -1,4 +1,5 @@
 import {
+  first_letter_capitalize,
   fuzzy_search,
   mb_string_slice,
   mb_string_to_char_array,
@@ -15,6 +16,31 @@ describe('mb_string_to_char_array', () => {
       '🏃',
       '📣',
     ]);
+  });
+
+  test('should return an empty array for an empty string', () => {
+    expect(mb_string_to_char_array('')).toStrictEqual([]);
+  });
+});
+
+describe('first_letter_capitalize', () => {
+  test('should capitalize the first letter of a string', () => {
+    expect(first_letter_capitalize('hello')).toBe('Hello');
+  });
+
+  test('should return an empty string for an empty string', () => {
+    expect(first_letter_capitalize('')).toBe('');
+  });
+
+  test('should capitalize multi-byte characters if possible', () => {
+    // lowercase 'a' with accent to uppercase 'A' with accent
+    expect(first_letter_capitalize('árvíztűrőtükörfúrógép')).toBe(
+      'Árvíztűrőtükörfúrógép',
+    );
+  });
+
+  test('should return the same string if the first character cannot be capitalized', () => {
+    expect(first_letter_capitalize('🏃📣')).toBe('🏃📣');
   });
 });
 

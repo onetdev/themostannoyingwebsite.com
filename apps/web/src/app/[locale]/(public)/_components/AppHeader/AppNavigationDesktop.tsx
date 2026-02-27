@@ -11,9 +11,9 @@ import { cn } from '@maw/ui-lib/utils';
 import { useTranslations } from 'next-intl';
 
 import {
-  ActiveNavigationItem,
+  type ActiveNavigationItem,
   isNavigationItemActive,
-  NavItem,
+  type NavItem,
   PERSONAL_NAVIGATION_LINKS,
   SITE_NAVIGATION_LINKS,
 } from '@/app/navigation';
@@ -48,14 +48,16 @@ export function AppNavigationDesktop({
           asChild
           data-active={active}
           aria-current={active ? 'page' : undefined}
-          className="flex-row items-center gap-2 data-[active=true]:font-bold">
+          className="flex-row items-center gap-2 data-[active=true]:font-bold"
+        >
           <Link href={item.path} onClick={() => onClick(item)} passHref>
             {item.icon && <Icon icon={item.icon} className="text-primary" />}
             <span
               className={cn(
                 !item.icon && 'lg:inline',
                 item.icon && 'hidden lg:inline',
-              )}>
+              )}
+            >
               {t(item.labelKey)}
             </span>
           </Link>
@@ -71,7 +73,8 @@ export function AppNavigationDesktop({
         className,
       )}
       id="navigation-desktop"
-      viewport={false}>
+      viewport={false}
+    >
       <NavigationMenuList className="justify-start gap-1">
         {SITE_NAVIGATION_LINKS.map(renderItem)}
       </NavigationMenuList>

@@ -19,7 +19,8 @@ export function ProgressBar({ duration, warningDuration }: ProgressBarProps) {
   return (
     <div
       data-warning={warning.toString()}
-      className="group border-success data-[warning=true]:border-warning w-full overflow-hidden rounded-full border">
+      className="group border-success data-[warning=true]:border-warning w-full overflow-hidden rounded-full border"
+    >
       <div
         className="animate-width-100-0 bg-success group-data-[warning=true]:bg-warning h-5"
         style={{ animationDuration: `${duration}s` }}

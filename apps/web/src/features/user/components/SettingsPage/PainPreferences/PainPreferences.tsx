@@ -10,13 +10,11 @@ import {
 } from '@maw/ui-lib';
 import { cn } from '@maw/ui-lib/utils';
 import { useTranslations } from 'next-intl';
-
+import { usePainPreferencesStore } from '@/stores';
 import { AdvertisingAndMonetization } from './AdvertisingAndMonetization';
 import { BrowserAndTab } from './BrowserAndTab';
 import { PopupAndInteractivity } from './PopupAndInteractivity';
 import { VisualObstructions } from './VisualObstructions';
-
-import { usePainPreferencesStore } from '@/stores';
 
 type PainPreferencesProps = {
   className?: string;

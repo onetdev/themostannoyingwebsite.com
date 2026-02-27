@@ -6,7 +6,7 @@ import {
   InputGroupInput,
 } from '@maw/ui-lib';
 import { useTranslations } from 'next-intl';
-import { SubmitEventHandler, useRef } from 'react';
+import { type SubmitEventHandler, useRef } from 'react';
 
 export type MessageFormProps = {
   className?: string;
@@ -32,7 +32,8 @@ export function MessageForm({ className, onMessage }: MessageFormProps) {
       method="post"
       className={className}
       onSubmit={handleFormSubmit}
-      ref={userForm}>
+      ref={userForm}
+    >
       <InputGroup>
         <InputGroupInput
           name="message"
@@ -44,7 +45,8 @@ export function MessageForm({ className, onMessage }: MessageFormProps) {
           <InputGroupButton
             aria-label={t('common.send')}
             type="submit"
-            size="sm">
+            size="sm"
+          >
             <Icon icon="send" />
           </InputGroupButton>
         </InputGroupAddon>

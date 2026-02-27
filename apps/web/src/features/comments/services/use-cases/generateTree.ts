@@ -40,14 +40,13 @@ export function generateTree(
   function randomLikes(commentTime: number) {
     const age = commentTime - publishedAt.getTime();
     const factor = Math.max(0, 1 - age / ONE_YEAR_MS);
-    return Math.floor(300 * factor * Math.pow(rand(), 2));
+    return Math.floor(300 * factor * rand() ** 2);
   }
 
   function generateNode(depth: number, parentTime?: number): Comment {
     const time =
       parentTime === undefined
-        ? publishedAt.getTime() +
-          Math.floor(TWO_MONTHS_MS * Math.pow(rand(), 2))
+        ? publishedAt.getTime() + Math.floor(TWO_MONTHS_MS * rand() ** 2)
         : parentTime + ONE_MONTH_MS;
 
     if (nodeCount >= maxTotalNodes) {

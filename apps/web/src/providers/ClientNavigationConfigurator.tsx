@@ -1,17 +1,18 @@
 'use client';
 
 import { compile } from 'path-to-regexp';
-import { ComponentProps, PropsWithChildren } from 'react';
+import type { ComponentProps, PropsWithChildren } from 'react';
 
 import {
-  NavigationParams,
+  type NavigationParams,
   NavigationProvider as NavigationProviderBase,
 } from '@/contexts/NavigationContext';
 import { Link, useRouter } from '@/i18n/navigation';
-import { RouteAlias } from '@/schemas';
+import type { RouteAlias } from '@/schemas';
 
 const routeAliasToPathMap: Record<RouteAlias, string> = {
   about: '/about',
+  achievements: '/achievements',
   'article.single': '/articles/:slug',
   contact: '/contact',
   dilf: '/dilf',
@@ -60,7 +61,8 @@ export function ClientNavigationConfigurator({ children }: PropsWithChildren) {
         pathFor: resolvePathForRouteAlias,
         unsafeNavigatePush: navigation.push,
         unsafeNavigateReplace: navigation.replace,
-      }}>
+      }}
+    >
       {children}
     </NavigationProviderBase>
   );

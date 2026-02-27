@@ -1,5 +1,5 @@
 import { getTranslations } from 'next-intl/server';
-import { ComponentProps } from 'react';
+import type { ComponentProps } from 'react';
 
 import { FOOTER_NAVIGATION_LINKS } from '@/app/navigation';
 import { Link } from '@/i18n/navigation';
@@ -19,16 +19,14 @@ export async function AppFooter({ className }: AppFooterProps) {
   }));
 
   return (
-    <footer
-      id="footer"
-      role="contentinfo"
-      className={`border-border border-t ${className}`}>
+    <footer id="footer" className={`border-border border-t ${className}`}>
       <div className="flex flex-wrap justify-center gap-x-5 gap-y-2 px-5 py-5">
         {links.map((link) => (
           <Link
             key={link.href}
             href={link.href}
-            className="text-xs hover:underline">
+            className="text-xs hover:underline"
+          >
             {link.label}
           </Link>
         ))}
@@ -50,7 +48,8 @@ export async function AppFooter({ className }: AppFooterProps) {
                 target="_blank"
                 rel="noopener noreferrer"
                 prefetch={false}
-                className="hover:underline">
+                className="hover:underline"
+              >
                 {chunks}
               </Link>
             ),

@@ -1,6 +1,6 @@
 'use client';
 
-import { Checkbox, Field, FieldError, FieldLabel } from '@maw/ui-lib';
+import { Checkbox, Field, FieldLabel } from '@maw/ui-lib';
 import { useTranslations } from 'next-intl';
 import { useFormContext } from 'react-hook-form';
 
@@ -26,7 +26,8 @@ export function ConsentNewsletterField({
         htmlFor={fieldName}
         className="font-semibold"
         required={required}
-        aria-invalid={!!errors[fieldName]}>
+        aria-invalid={!!errors[fieldName]}
+      >
         {t('user.field.consentNewsletter')}
       </FieldLabel>
     </Field>

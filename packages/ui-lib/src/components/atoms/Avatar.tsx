@@ -1,5 +1,5 @@
 import { Avatar as AvatarPrimitive } from 'radix-ui';
-import { ComponentProps } from 'react';
+import type { ComponentProps } from 'react';
 
 import { cn } from '../../utils';
 

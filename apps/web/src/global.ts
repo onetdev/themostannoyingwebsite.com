@@ -1,21 +1,12 @@
-export const DOCUMENT_EVENT_SEARCH = 'DocumentEventSearch';
-export type DocumentEventSearchDetails = {
-  query: string;
-};
-
 declare global {
   type AppTheme = 'light' | 'dark';
 
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  // biome-ignore lint/suspicious/noExplicitAny: Just to avoid any in other places, we use this explicit alias.
   type TypeNarrowArg = any;
 
   type CaptchaFormInputs = {
     captcha: string;
   };
-
-  interface DocumentEventMap {
-    [DOCUMENT_EVENT_SEARCH]: CustomEvent<DocumentEventSearchDetails>;
-  }
 
   export type PagedList<T> = {
     items: T[];
@@ -28,8 +19,7 @@ declare global {
     locale: string;
   };
 
-  // eslint-disable-next-line @typescript-eslint/no-empty-object-type
-  type NextPageProps<T extends {} = {}> = {
+  type NextPageProps<T extends {} = object> = {
     params: Promise<T & NextPageParams>;
   };
 }

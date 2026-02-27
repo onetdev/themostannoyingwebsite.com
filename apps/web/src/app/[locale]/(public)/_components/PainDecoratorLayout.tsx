@@ -1,10 +1,6 @@
 'use client';
 
-import { ComponentProps, useEffect, useState } from 'react';
-
-import { CookieConsent } from './CookieConsent';
-import { GlobalShareModal } from './GlobalShareModal';
-
+import { type ComponentProps, useEffect, useState } from 'react';
 import {
   DeadPixel,
   GlobalStickyVideo,
@@ -17,6 +13,8 @@ import {
 } from '@/features/promotion/components';
 import { ChatBubble } from '@/features/support/components';
 import { usePainPreferencesStore, useUserGrantsStore } from '@/stores';
+import { CookieConsent } from './CookieConsent';
+import { GlobalShareModal } from './GlobalShareModal';
 
 type PainDecoratorLayoutProps = ComponentProps<'div'>;
 

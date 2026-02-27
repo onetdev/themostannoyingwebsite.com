@@ -1,9 +1,7 @@
 import { injectable } from 'inversify';
-
+import type { Country } from '@/schemas/country';
 import { countryList } from './data/countries';
-import { CountryRepository } from './types';
-
-import { Country } from '@/schemas/country';
+import type { CountryRepository } from './types';
 
 @injectable()
 export class StaticCountryRepository implements CountryRepository {

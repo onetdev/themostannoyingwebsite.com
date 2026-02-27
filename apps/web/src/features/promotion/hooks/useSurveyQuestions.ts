@@ -3,7 +3,7 @@
 import { arrayShuffle } from '@maw/utils/array';
 import { useMessages, useTranslations } from 'next-intl';
 import { useMemo } from 'react';
-import { FlaimSurveyQuestion } from '../schemas';
+import type { FlaimSurveyQuestion } from '../schemas';
 
 export function useSurveyQuestions() {
   const messages = useMessages();

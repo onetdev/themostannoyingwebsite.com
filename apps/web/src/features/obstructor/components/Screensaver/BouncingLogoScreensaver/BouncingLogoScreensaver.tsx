@@ -2,8 +2,10 @@
 
 import { clsx } from '@maw/ui-lib/utils';
 import { randomInt } from '@maw/utils/math';
-import React, { useEffect, useRef, useState } from 'react';
-
+import { useTranslations } from 'next-intl';
+import { useEffect, useRef, useState } from 'react';
+import { useEventBus } from '@/contexts/EventBusContext';
+import type { ObstructorEvent } from '../../../types';
 import { BouncyLogo } from './BouncyLogo';
 
 const HUE_ROTATION_CHANCE = 0.1;
@@ -32,6 +34,8 @@ const COLORS = [
 ];
 
 export function BouncingLogoScreensaver() {
+  const t = useTranslations('app');
+  const { dispatch } = useEventBus();
   const [position, setPosition] = useState({ x: 0, y: 0 });
   const [isHueRotating, setIsHueRotating] = useState(false);
   const [colors, setColors] = useState(() => {
@@ -63,19 +67,24 @@ export function BouncingLogoScreensaver() {
       currentX += velX;
       currentY += velY;
 
-      let hit = false;
+      let hitX = false;
+      let hitY = false;
       if (currentX <= 0 || currentX + logoWidth >= screenWidth) {
         velX = -velX;
         currentX = Math.max(0, Math.min(currentX, screenWidth - logoWidth));
-        hit = true;
+        hitX = true;
       }
       if (currentY <= 0 || currentY + logoHeight >= screenHeight) {
         velY = -velY;
         currentY = Math.max(0, Math.min(currentY, screenHeight - logoHeight));
-        hit = true;
+        hitY = true;
       }
 
-      if (hit) {
+      if (hitX || hitY) {
+        dispatch<ObstructorEvent['payload']>('BOUNCY_LOGO_BOUNCE', {
+          isPerfectCorner: hitX && hitY,
+        });
+
         setColors((prev) => {
           const nextIndex = randomInt(0, COLORS.length);
           return {
@@ -95,7 +104,7 @@ export function BouncingLogoScreensaver() {
     return () => {
       cancelAnimationFrame(animationFrameId);
     };
-  }, []);
+  }, [dispatch]);
 
   return (
     <div
@@ -109,11 +118,13 @@ export function BouncingLogoScreensaver() {
       className={clsx(
         'pointer-events-none transition-colors select-none',
         isHueRotating && 'animate-hue-full-rotate duration-100',
-      )}>
+      )}
+    >
       <BouncyLogo
         fill={colors.logo}
         arrowFill={colors.arrow}
         className="w-50 lg:w-75"
+        title={t('logo')}
       />
     </div>
   );

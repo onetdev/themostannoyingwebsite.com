@@ -29,7 +29,8 @@ export function ConsentChildSoulField({
       <FieldLabel
         htmlFor={fieldName}
         className="font-semibold"
-        required={required}>
+        required={required}
+      >
         {t('user.field.consentChildSoul')}
       </FieldLabel>
     </Field>

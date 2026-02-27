@@ -1,16 +1,17 @@
+'use client';
+
 import { useMessages, useTranslations } from 'next-intl';
 import { useCallback, useEffect, useMemo, useState } from 'react';
-
-import { ChatMessage, ChatMessageType } from '../schemas';
-
-import { useAudio, useSendNotification } from '@/hooks';
-import { useRuntimeStore, useUserPreferencesStore } from '@/stores';
 import { useMount } from 'react-use';
+import { useAppConfig } from '@/contexts/AppConfig';
+import { useAudio, useSendNotification } from '@/hooks';
+import { useRuntimeStore } from '@/stores';
+import type { ChatMessage, ChatMessageType } from '../schemas';
 
 export function useChatBubbleHistory() {
   const t = useTranslations();
+  const config = useAppConfig();
   const messages = useMessages();
-  const enableSound = useUserPreferencesStore((state) => state.enableSound);
   const hasInteracted = useRuntimeStore(
     (state) => state.userActivation.unlocked,
   );
@@ -18,7 +19,9 @@ export function useChatBubbleHistory() {
   const [isForeground, setForeground] = useState(false);
   const [badgeCounter, setBadgeCounter] = useState(1);
   const notification = useSendNotification();
-  const notificationSfx = useAudio('/assets/sfx/notification_chord1.wav');
+  const { play: playSound, audio } = useAudio(
+    config.support.assets.newMessageSfx,
+  );
 
   const botMessageVariants = useMemo(() => {
     const all = Object.keys(messages.chatBubble.messageVariants).map((key) =>
@@ -34,12 +37,6 @@ export function useChatBubbleHistory() {
     setHistory((prev) => [...prev, { text: message, owner, time: new Date() }]);
   }, []);
 
-  const playSound = useCallback(() => {
-    if (!enableSound) return;
-
-    notificationSfx.play();
-  }, [enableSound, notificationSfx]);
-
   const sendNotification = useCallback(
     (message: string) => {
       notification.send({
@@ -51,7 +48,7 @@ export function useChatBubbleHistory() {
   );
 
   const addRandomBotItem = useCallback(() => {
-    if (botMessageVariants.length == 0) {
+    if (botMessageVariants.length === 0) {
       botMessageVariants.push(t('chatBubble.messageFallback'));
     }
     const randomMessage =
@@ -105,5 +102,6 @@ export function useChatBubbleHistory() {
     history,
     isForeground,
     setForeground,
+    audio,
   };
 }

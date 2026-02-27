@@ -1,10 +1,12 @@
+'use client';
+
 import { Icon } from '@maw/ui-lib';
 import { randomInt } from '@maw/utils/math';
 import { motion } from 'framer-motion';
+import { useTranslations } from 'next-intl';
 import { useEffect, useState } from 'react';
-
-import { DynamicWheelSvg, Item } from './DynamicWheelSvg';
-import { AnimatedWheelState } from '../../hooks';
+import type { AnimatedWheelState } from '../../hooks';
+import { DynamicWheelSvg, type Item } from './DynamicWheelSvg';
 
 type WheelAnimationWrapperProps = {
   highlightIndex?: number;
@@ -23,6 +25,7 @@ export function WheelAnimationWrapper({
   revRange = [2, 6],
   state,
 }: WheelAnimationWrapperProps) {
+  const t = useTranslations();
   const [rotation, setRotation] = useState(0);
   const degPerItem = 360 / items.length;
 
@@ -74,6 +77,7 @@ export function WheelAnimationWrapper({
             height={500}
             items={items}
             highlightIndex={state === 'completed' ? highlightIndex : undefined}
+            title={t('wheelOfFortune.wheelTitle')}
           />
         </motion.div>
       </div>

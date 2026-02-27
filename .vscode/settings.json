@@ -1,30 +1,14 @@
 {
-  "editor.formatOnSave": false, // to avoid conflicts with prettier and eslint keep this off
-  "prettier.enable": false, // Avoid using prettier plugin since that is being handled by eslint
+  "editor.defaultFormatter": "biomejs.biome",
+  "editor.formatOnSave": true,
   "editor.wordWrap": "on",
   "editor.formatOnSaveMode": "modifications",
   "editor.codeActionsOnSave": {
-    "source.fixAll.eslint": "explicit",
-    "source.addMissingImports": "explicit"
+    "source.fixAll.biome": "explicit",
+    "source.organizeImports.biome": "explicit"
   },
   "typescript.tsdk": "node_modules/typescript/lib",
   "typescript.enablePromptUseWorkspaceTsdk": true,
-  "eslint.validate": [
-    "javascript",
-    "javascriptreact",
-    "typescript",
-    "typescriptreact"
-  ],
-  "eslint.workingDirectories": [
-    "apps/ui-docs",
-    "apps/web",
-    "packages/content-api",
-    "packages/ui",
-    "packages/eslint-config",
-    "packages/jest-preset",
-    "packages/tsconfig",
-    "packages/utils",
- ],
   "files.associations": {
     "*.css": "tailwindcss"
   },
@@ -51,7 +35,7 @@
   "explorer.fileNesting.enabled": true,
   "explorer.fileNesting.patterns": {
     "tsconfig.json": "tsconfig.json, tsconfig.tsbuildinfo",
-    "README.md": "CODE_OF_CONDUCT.md, CONTRIBUTING.md, LICENSE, CHANGELOG.md",
+    "README.md": "CODE_OF_CONDUCT.md, CONTRIBUTING.md, LICENSE, CHANGELOG.md"
   },
   "files.exclude": {
     "**/dist": true,
@@ -62,5 +46,5 @@
     "**/dist": true,
     "**/.next": true,
     "**/node_modules": true
-  },
+  }
 }

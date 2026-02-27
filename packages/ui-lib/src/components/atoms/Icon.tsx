@@ -24,12 +24,13 @@ import {
   faTags,
   faTimes,
   faTriangleExclamation,
+  faTrophy,
   faUser,
   faXmarkCircle,
 } from '@fortawesome/free-solid-svg-icons';
 import {
   FontAwesomeIcon,
-  FontAwesomeIconProps,
+  type FontAwesomeIconProps,
 } from '@fortawesome/react-fontawesome';
 
 const iconMap = {
@@ -59,6 +60,7 @@ const iconMap = {
   spinner: faSpinner,
   sun: faSun,
   tags: faTags,
+  trophy: faTrophy,
   xmarkCircle: faXmarkCircle,
 };
 export type IconAliaseKey = keyof typeof iconMap;

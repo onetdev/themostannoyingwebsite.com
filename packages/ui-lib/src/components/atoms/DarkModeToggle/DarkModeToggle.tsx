@@ -1,5 +1,5 @@
 import { cva, type VariantProps } from 'class-variance-authority';
-import { FunctionComponent } from 'react';
+import type { FunctionComponent } from 'react';
 
 import { cn } from '../../../utils';
 import { Icon } from '../Icon';
@@ -53,7 +53,8 @@ export const DarkModeToggle: FunctionComponent<DarkModeToggleProps> = ({
       suppressHydrationWarning
       data-dark={isDark.toString()}
       className={cn(darkModeToggleVariants({ size, className }))}
-      onClick={toggleDarkMode}>
+      onClick={toggleDarkMode}
+    >
       <span
         suppressHydrationWarning
         className={cn(
@@ -66,7 +67,8 @@ export const DarkModeToggle: FunctionComponent<DarkModeToggleProps> = ({
         className={cn(
           'text-card-foreground z-10 flex flex-1 items-center justify-center transition-colors duration-200',
           !isDark && 'text-primary-foreground',
-        )}>
+        )}
+      >
         <Icon icon="sun" />
       </div>
       <div
@@ -74,7 +76,8 @@ export const DarkModeToggle: FunctionComponent<DarkModeToggleProps> = ({
         className={cn(
           'text-card-foreground z-10 flex flex-1 items-center justify-center transition-colors duration-200',
           isDark && 'text-primary-foreground',
-        )}>
+        )}
+      >
         <Icon icon="moon" />
       </div>
     </button>

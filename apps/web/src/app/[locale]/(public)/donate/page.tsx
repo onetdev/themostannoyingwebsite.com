@@ -1,10 +1,9 @@
 import { PageHeadline } from '@maw/ui-lib';
-import { Metadata } from 'next';
+import type { Metadata } from 'next';
 import { getTranslations } from 'next-intl/server';
-
+import { DonationPage } from '@/features/donation/components';
 import { PageLayout } from '../_components/PageLayout';
 
-import { DonationPage } from '@/features/donation/components';
 export { generateStaticParams } from '@/i18n/routing';
 
 export const revalidate = 1800;

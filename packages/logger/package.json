@@ -8,16 +8,16 @@
   },
   "scripts": {
     "check-types": "tsc --noEmit",
-    "lint": "eslint .",
-    "lint:fix": "eslint . --fix"
+    "lint": "biome check .",
+    "format": "biome format --write .",
+    "lint:fix": "biome check --write ."
   },
   "dependencies": {
     "tslog": "^4.10.2"
   },
   "devDependencies": {
-    "@maw/config-eslint": "workspace:*",
+    "@biomejs/biome": "catalog:",
     "@maw/config-ts": "workspace:*",
-    "eslint": "catalog:",
     "typescript": "catalog:"
   }
 }

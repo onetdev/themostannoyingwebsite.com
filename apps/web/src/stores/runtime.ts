@@ -1,6 +1,6 @@
 import { create } from 'zustand';
 
-import { FlaimSurveyResult } from '@/features/promotion/schemas';
+import type { FlaimSurveyResult } from '@/features/promotion/schemas';
 
 export interface RuntimeState {
   adblockerSuspected: boolean | null;

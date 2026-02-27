@@ -2,15 +2,15 @@
 
 import { Toaster, TooltipProvider } from '@maw/ui-lib';
 import { ThemeProvider } from 'next-themes';
-import { PropsWithChildren } from 'react';
-
-import { ClientNavigationConfigurator } from './ClientNavigationConfigurator';
-
+import type { PropsWithChildren } from 'react';
 import { AppConfigProvider } from '@/contexts/AppConfig';
 import { DependencyContainer } from '@/contexts/DependencyContainer';
+import { EventBusProvider } from '@/contexts/EventBusContext';
 import { getDependencyContainer } from '@/dependency-container';
+import { AchievementManager } from '@/features/achievements/providers';
 import { ClientPainContainer } from '@/providers/ClientPainProvider';
-import { AppConfig } from '@/schemas/app-config';
+import type { AppConfig } from '@/schemas/app-config';
+import { ClientNavigationConfigurator } from './ClientNavigationConfigurator';
 
 export type ClientRootProviderContainerProps = PropsWithChildren<{
   appConfig: AppConfig;
@@ -26,12 +26,15 @@ export function ClientRootProviderContainer({
     <AppConfigProvider config={appConfig}>
       <TooltipProvider>
         <DependencyContainer value={{ container: DiContainer }}>
-          <ThemeProvider defaultTheme="dark" enableColorScheme enableSystem>
-            <ClientNavigationConfigurator>
-              <Toaster />
-              <ClientPainContainer>{children}</ClientPainContainer>
-            </ClientNavigationConfigurator>
-          </ThemeProvider>
+          <EventBusProvider>
+            <ThemeProvider defaultTheme="dark" enableColorScheme enableSystem>
+              <ClientNavigationConfigurator>
+                <Toaster />
+                <AchievementManager />
+                <ClientPainContainer>{children}</ClientPainContainer>
+              </ClientNavigationConfigurator>
+            </ThemeProvider>
+          </EventBusProvider>
         </DependencyContainer>
       </TooltipProvider>
     </AppConfigProvider>

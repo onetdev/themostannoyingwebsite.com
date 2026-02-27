@@ -1,6 +1,6 @@
-import { Result } from '@maw/utils/result';
+import type { Result } from '@maw/utils/result';
 
-import {
+import type {
   SubscriptionError,
   SubscriptionFeature,
   SubscriptionPackage,
@@ -14,3 +14,10 @@ export interface SubscriptionPlansService {
   getFeatures(): Promise<Result<SubscriptionFeature[], SubscriptionError>>;
   getPlans(): Promise<Result<SubscriptionPackage[], SubscriptionError>>;
 }
+
+export type SubscriptionEvent = {
+  type: 'SUBSCRIPTION_PACKAGE_SELECTED';
+  payload: {
+    packageId: string;
+  };
+};

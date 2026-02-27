@@ -2,10 +2,9 @@
 
 import * as CheckboxPrimitive from '@radix-ui/react-checkbox';
 import { cva, type VariantProps } from 'class-variance-authority';
-import { ComponentProps } from 'react';
-
-import { Icon } from './Icon';
+import type { ComponentProps } from 'react';
 import { cn } from '../../utils';
+import { Icon } from './Icon';
 
 const checkboxVariants = cva(
   'peer border-input dark:bg-input/30 data-[state=checked]:bg-primary data-[state=checked]:text-primary-foreground dark:data-[state=checked]:bg-primary data-[state=checked]:border-primary focus-visible:border-ring focus-visible:ring-ring/50 aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive size-4 shrink-0 rounded-[4px] border shadow-xs transition-shadow outline-none focus-visible:ring-[3px] disabled:cursor-not-allowed disabled:opacity-50',
@@ -24,8 +23,7 @@ const checkboxVariants = cva(
 );
 
 export interface CheckboxProps
-  extends
-    ComponentProps<typeof CheckboxPrimitive.Root>,
+  extends ComponentProps<typeof CheckboxPrimitive.Root>,
     VariantProps<typeof checkboxVariants> {}
 
 export function Checkbox({ className, ref, size, ...props }: CheckboxProps) {
@@ -33,9 +31,11 @@ export function Checkbox({ className, ref, size, ...props }: CheckboxProps) {
     <CheckboxPrimitive.Root
       ref={ref}
       className={cn(checkboxVariants({ size, className }))}
-      {...props}>
+      {...props}
+    >
       <CheckboxPrimitive.Indicator
-        className={cn('flex items-center justify-center text-current')}>
+        className={cn('flex items-center justify-center text-current')}
+      >
         <Icon icon="check" />
       </CheckboxPrimitive.Indicator>
     </CheckboxPrimitive.Root>

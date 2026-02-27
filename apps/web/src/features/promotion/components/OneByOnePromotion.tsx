@@ -2,7 +2,7 @@
 
 import Image from 'next/image';
 import { useTranslations } from 'next-intl';
-
+import { useAppConfig } from '@/contexts/AppConfig';
 import { Link } from '@/i18n/navigation';
 import { usePainPreferencesStore, useRuntimeStore } from '@/stores';
 
@@ -11,6 +11,7 @@ export type OneByOnePromotionProps = {
 };
 
 export function OneByOnePromotion({ size = 1024 }: OneByOnePromotionProps) {
+  const config = useAppConfig();
   const t = useTranslations();
   const enabled = usePainPreferencesStore(
     (state) => state.flags['gifts.oneByOne'],
@@ -22,7 +23,7 @@ export function OneByOnePromotion({ size = 1024 }: OneByOnePromotionProps) {
   return (
     <Link href="/flaim-a-phone" className="overflow-hidden">
       <Image
-        src="/ads/ad-wan-a-phone.webp"
+        src={config.promotion.assets.wanAPhoneAd}
         width={size}
         height={size}
         alt={t('gifts.wanPhone.title')}

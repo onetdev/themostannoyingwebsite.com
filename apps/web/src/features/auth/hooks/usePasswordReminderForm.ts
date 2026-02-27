@@ -2,15 +2,13 @@
 
 import { useLogger } from '@maw/logger';
 import { useForm } from 'react-hook-form';
-
+import { useZodFormValidator } from '@/hooks';
 import { useAuthService } from '../hooks';
 import {
   getPasswordReminderFormDataSchema,
-  PasswordReminderFormData,
+  type PasswordReminderFormData,
 } from '../schemas';
-import { PasswordReminderUseCaseParams } from '../types';
-
-import { useZodFormValidator } from '@/hooks';
+import type { PasswordReminderUseCaseParams } from '../types';
 
 interface PasswordReminderFormProps {
   onSuccess?: () => void;

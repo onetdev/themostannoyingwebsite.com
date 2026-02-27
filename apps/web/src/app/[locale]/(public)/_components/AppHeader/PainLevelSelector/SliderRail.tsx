@@ -1,11 +1,12 @@
 'use client';
 
+import { useTranslations } from 'next-intl';
 import { useEffect, useState } from 'react';
 
 import {
   FIREFLY_PARTICLE_COLORS,
   FireflyParticle,
-  FireflyParticleProps,
+  type FireflyParticleProps,
 } from './FireFlyParticle';
 
 export interface SliderRailProps {
@@ -18,13 +19,14 @@ export function SliderRail({
   percentage = 100,
 }: SliderRailProps) {
   const [particles, setParticles] = useState<FireflyParticleProps[]>([]);
+  const t = useTranslations('painPreferences.levelSettings');
 
   useEffect(() => {
     const interval = setInterval(() => {
       const newParticle: FireflyParticleProps = {
         createdAt: Date.now(),
         // Skew distribution to the right
-        x: Math.pow(Math.random(), 0.5) * 100,
+        x: Math.random() ** 0.5 * 100,
         size: Math.random() * 3 + 1,
         duration: Math.random() * 2 + 1.5,
         color:
@@ -59,7 +61,10 @@ export function SliderRail({
       <svg
         viewBox="0 0 100 6"
         preserveAspectRatio="none"
-        className={`relative z-10 h-1 w-full ${className}`}>
+        className={`relative z-10 h-1 w-full ${className}`}
+        role="img"
+      >
+        <title>{t('railTitle')}</title>
         <defs>
           <linearGradient id="railGradient" x1="0%" y1="0%" x2="100%" y2="0%">
             <stop offset="0%" stopColor="#3b82f6" />

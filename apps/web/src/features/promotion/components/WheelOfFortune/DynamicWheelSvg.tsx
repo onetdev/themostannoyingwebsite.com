@@ -1,6 +1,6 @@
 import { radToDeg } from '@maw/utils/math';
 import Color from 'color';
-import { ReactNode } from 'react';
+import type { ReactNode } from 'react';
 
 export type Item = {
   color: string;
@@ -8,17 +8,19 @@ export type Item = {
 };
 
 type DynamicWheelSvgProps = {
+  height: number;
   highlightIndex?: number;
   items: Item[];
+  title: string;
   width: number;
-  height: number;
 };
 
 export function DynamicWheelSvg({
-  items,
-  highlightIndex,
-  width,
   height,
+  highlightIndex,
+  items,
+  title,
+  width,
 }: DynamicWheelSvgProps) {
   const radius = Math.min(width, height) / 2;
   const center = { x: width / 2, y: height / 2 };
@@ -45,10 +47,9 @@ export function DynamicWheelSvg({
     };
 
     let d = '';
-    d += 'M' + center.x + ',' + center.y + ' ';
-    d += 'L' + aPoint.x + ',' + aPoint.y + ' ';
-    d +=
-      'A' + radius + ',' + radius + ' 0 0,1 ' + bPoint.x + ',' + bPoint.y + ' ';
+    d += `M${center.x},${center.y} `;
+    d += `L${aPoint.x},${aPoint.y} `;
+    d += `A${radius},${radius} 0 0,1 ${bPoint.x},${bPoint.y} `;
     d += 'Z';
 
     // TODO: Slightly move the label toward the middle
@@ -60,7 +61,7 @@ export function DynamicWheelSvg({
         <path
           d={d}
           fill={item.color}
-          data-highlight-index={(highlightIndex == index).toString()}
+          data-highlight-index={(highlightIndex === index).toString()}
           className="data-[highlight-index=true]:animate-flashing-invert-half"
         />
         <text
@@ -68,7 +69,8 @@ export function DynamicWheelSvg({
           x={abMidpoint.x}
           y={abMidpoint.y}
           transform={`rotate(${labelAngle}, ${abMidpoint.x}, ${abMidpoint.y})`}
-          fill={labelColor}>
+          fill={labelColor}
+        >
           {item.text}
         </text>
       </g>,
@@ -79,6 +81,7 @@ export function DynamicWheelSvg({
 
   return (
     <svg xmlns="http://www.w3.org/2000/svg" viewBox={`0 0 ${width} ${height}`}>
+      <title>{title}</title>
       {svgSlices}
     </svg>
   );

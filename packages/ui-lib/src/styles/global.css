@@ -7,14 +7,16 @@ body {
   transition: background-color 0.3s ease-in-out;
 }
 
-a:not([data-slot="button"]):not(.link-as-inherit), a:not([data-slot="button"]):not(.link-as-inherit):visited {
+a:not([data-slot="button"]):not(.link-as-inherit),
+a:not([data-slot="button"]):not(.link-as-inherit):visited {
   @apply text-primary no-underline;
   text-decoration: none;
 }
 a:not([data-slot="button"]):not(.link-as-inherit):hover {
   @apply text-primary-alt;
 }
-a.link-as-inherit, a.link-as-inherit:visited {
+a.link-as-inherit,
+a.link-as-inherit:visited {
   color: inherit;
 }
 
@@ -45,7 +47,8 @@ small {
   @apply text-sm;
 }
 
-::-moz-selection { /* Code for Firefox */
+::-moz-selection {
+  /* Code for Firefox */
   @apply text-tertiary-foreground bg-tertiary;
 }
 

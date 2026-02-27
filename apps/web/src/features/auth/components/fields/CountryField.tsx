@@ -63,7 +63,8 @@ export function CountryField({
                 className="w-full"
                 id={fieldName}
                 aria-label={t('user.field.countryCode')}
-                aria-invalid={fieldState.invalid}>
+                aria-invalid={fieldState.invalid}
+              >
                 <SelectValue placeholder="" />
               </SelectTrigger>
               <SelectContent>

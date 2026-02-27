@@ -1,4 +1,4 @@
-import { type Page } from '@playwright/test';
+import type { Page } from '@playwright/test';
 
 import { getFooter } from '../shared/Footer';
 import { getHeader } from '../shared/Header';

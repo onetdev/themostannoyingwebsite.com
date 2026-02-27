@@ -9,11 +9,10 @@ import {
 } from '@maw/ui-lib';
 import { useTranslations } from 'next-intl';
 import { FormProvider } from 'react-hook-form';
-
+import config from '@/config';
+import { useNavigationProvider } from '@/contexts/NavigationContext';
 import { usePasswordReminderForm } from '../../hooks';
 import { EmailField } from '../fields/EmailField';
-
-import { useNavigationProvider } from '@/contexts/NavigationContext';
 
 export function PasswordReminderForm() {
   const t = useTranslations();
@@ -42,17 +41,22 @@ export function PasswordReminderForm() {
       <form
         className="flex flex-col gap-5"
         method="post"
-        onSubmit={handleSubmit(onSubmit)}>
+        onSubmit={handleSubmit(onSubmit)}
+      >
         <FormError error={errors.root} />
         <EmailField />
-        <CaptchaTitlePuzzleField text={captchaText} />
+        <CaptchaTitlePuzzleField
+          text={captchaText}
+          imageSrc={config.auth.assets.captchaTile}
+        />
 
         <Button
           role="button"
           type="submit"
           className="mt-10"
           size="lg"
-          disabled={isCtaDisabled}>
+          disabled={isCtaDisabled}
+        >
           {isCtaLoading && <LoaderDots />}
           {!isCtaLoading && t('user.form.passwordReminder.callToAction')}
         </Button>

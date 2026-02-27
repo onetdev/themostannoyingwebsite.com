@@ -1,7 +1,7 @@
 'use client';
 
-import { Point2d, random } from '@maw/utils/math';
-import { FunctionComponent, useEffect, useRef, useState } from 'react';
+import { type Point2d, random } from '@maw/utils/math';
+import { type FunctionComponent, useEffect, useRef, useState } from 'react';
 
 import { CAPTCHA_EMOJI_DEFAULT_POOL } from './consts';
 

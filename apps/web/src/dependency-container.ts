@@ -1,5 +1,5 @@
 import { Container } from 'inversify';
-
+import { AchievementBankService } from '@/features/achievements/services';
 import { FakeAuthRepository } from '@/features/auth/repositories';
 import { AuthService } from '@/features/auth/services';
 import { CommentService } from '@/features/comments/services';
@@ -23,6 +23,10 @@ container
   .inSingletonScope();
 container.bind(DI.AuthRepository).to(FakeAuthRepository).inSingletonScope();
 container.bind(DI.AuthService).to(AuthService).inSingletonScope();
+container
+  .bind(DI.AchievementBankService)
+  .to(AchievementBankService)
+  .inSingletonScope();
 container.bind(DI.DonationService).to(DonationService).inSingletonScope();
 container.bind(DI.CommentService).to(CommentService).inSingletonScope();
 container.bind(DI.AppArticleService).to(AppArticleService).inSingletonScope();

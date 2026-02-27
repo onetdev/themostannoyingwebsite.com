@@ -1,13 +1,13 @@
-import { Metadata } from 'next';
+import type { Metadata } from 'next';
 import { getTranslations } from 'next-intl/server';
 
 export { generateStaticParams } from '@/i18n/routing';
-import { PageLayout } from '../_components/PageLayout';
 
 import config from '@/config';
 import { getDependencyContainer } from '@/dependency-container';
 import { PlansPage } from '@/features/subscription/components';
 import { getSubscriptionPlansService } from '@/features/subscription/services';
+import { PageLayout } from '../_components/PageLayout';
 
 export const revalidate = 1800;
 

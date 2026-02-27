@@ -22,7 +22,7 @@ const testFileLoader = async () => {
 
     const contentLength = result.headers.get('content-length');
 
-    return contentLength === null || parseInt(contentLength) < 6666;
+    return contentLength === null || parseInt(contentLength, 10) < 6666;
   } catch {
     return false;
   }

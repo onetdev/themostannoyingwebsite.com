@@ -1,18 +1,18 @@
 'use client';
 
-import { DotDotDotText, PageHeadline } from '@maw/ui-lib';
+import { Button, DotDotDotText, PageHeadline } from '@maw/ui-lib';
 import { arrayShuffle } from '@maw/utils/array';
 import { random } from '@maw/utils/math';
 import HTMLReactParser from 'html-react-parser';
 import { useLocale, useMessages, useTranslations } from 'next-intl';
-import { useCallback, useEffect, useMemo, useState } from 'react';
-
-import { useAppArticleService } from '../hooks';
-import { ArticleSearchResult } from '../schemas';
-
+import { useEffect, useMemo, useState } from 'react';
+import { useEventBusListener } from '@/contexts/EventBusContext';
 import { SearchForm } from '@/features/content/components';
 import { Link } from '@/i18n/navigation';
 import { usePainPreferencesStore } from '@/stores';
+import { useAppArticleService } from '../hooks';
+import type { ArticleSearchResult } from '../schemas';
+import type { ContentEvent } from '../types';
 
 export type Result = {
   query: string;
@@ -40,9 +40,9 @@ export function SearchPage() {
     return items;
   }, [messages.search.topSearcheVariants, t]);
 
-  const onSearchEvent = useCallback((event: CustomEvent) => {
-    setQuery(event.detail.query);
-  }, []);
+  useEventBusListener<ContentEvent['payload']>('SEARCH', (event) => {
+    setQuery(event.payload?.query ?? '');
+  });
 
   const onRecommendedClick = (query: string) => {
     document.location.hash = `query=${query}`;
@@ -56,13 +56,7 @@ export function SearchPage() {
       );
       setQuery(query.get('query') ?? '');
     }
-
-    document.addEventListener('DocumentEventSearch', onSearchEvent);
-
-    return () => {
-      document.removeEventListener('DocumentEventSearch', onSearchEvent);
-    };
-  }, [onSearchEvent]);
+  }, []);
 
   useEffect(() => {
     if (!query) {
@@ -116,25 +110,23 @@ export function SearchPage() {
           })}
         </div>
       )}
-      {showResultList && (
-        <>
-          {results.items.map((item) => (
-            <div className="my-4" key={item.lookup.slug}>
-              <h4>
-                <Link
-                  href={`articles/${item.lookup.slug}`}
-                  passHref
-                  prefetch={false}>
-                  {item.title}
-                </Link>
-              </h4>
-              <p className="max-w-screen-md">
-                {HTMLReactParser(item.contextHighlight)}
-              </p>
-            </div>
-          ))}
-        </>
-      )}
+      {showResultList &&
+        results.items.map((item) => (
+          <div className="my-4" key={item.lookup.slug}>
+            <h4>
+              <Link
+                href={`articles/${item.lookup.slug}`}
+                passHref
+                prefetch={false}
+              >
+                {item.title}
+              </Link>
+            </h4>
+            <p className="max-w-screen-md">
+              {HTMLReactParser(item.contextHighlight)}
+            </p>
+          </div>
+        ))}
       {!loading && results && results.count < 1 && (
         <>
           <div className="my-10 text-2xl font-bold">
@@ -146,11 +138,13 @@ export function SearchPage() {
               <ul className="list-inside list-disc pl-5">
                 {results.topSearches.map((item) => (
                   <li key={item}>
-                    <span
+                    <Button
+                      variant="ghost"
                       onClick={() => onRecommendedClick(item)}
-                      className="text-primary cursor-pointer">
+                      className="text-primary cursor-pointer"
+                    >
                       {item}
-                    </span>
+                    </Button>
                   </li>
                 ))}
               </ul>

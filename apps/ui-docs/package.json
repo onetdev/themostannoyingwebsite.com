@@ -6,8 +6,9 @@
     "build": "storybook build",
     "check-types": "tsc --noEmit",
     "dev": "storybook dev -p 6006",
-    "lint": "eslint .",
-    "lint:fix": "eslint . --fix"
+    "lint": "biome check .",
+    "format": "biome format --write .",
+    "lint:fix": "biome check --write ."
   },
   "dependencies": {
     "@maw/ui-lib": "workspace:*",
@@ -17,7 +18,7 @@
     "react-dom": "catalog:"
   },
   "devDependencies": {
-    "@maw/config-eslint": "workspace:^",
+    "@biomejs/biome": "catalog:",
     "@maw/config-ts": "workspace:*",
     "@storybook/addon-links": "^10.2.12",
     "@storybook/addon-styling-webpack": "^3.0.0",
@@ -27,8 +28,6 @@
     "@types/node": "catalog:",
     "@types/react": "catalog:",
     "@types/react-dom": "catalog:",
-    "eslint": "catalog:",
-    "eslint-plugin-storybook": "catalog:",
     "postcss": "catalog:",
     "storybook": "catalog:",
     "tailwindcss": "catalog:",
@@ -36,10 +35,5 @@
   },
   "peerDependencies": {
     "pbkdf2": "^3.1.5"
-  },
-  "eslintConfig": {
-    "extends": [
-      "plugin:storybook/recommended"
-    ]
   }
 }

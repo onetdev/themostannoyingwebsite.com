@@ -1,5 +1,9 @@
 import { getRelativeLuminance } from '@maw/utils/color';
-import { DetailedHTMLProps, forwardRef, InputHTMLAttributes } from 'react';
+import {
+  type DetailedHTMLProps,
+  forwardRef,
+  type InputHTMLAttributes,
+} from 'react';
 
 import { Icon } from '../atoms';
 
@@ -22,7 +26,6 @@ const resolveVariant = (size: ColorPickerInputSize) => {
     case 'lg':
       className = 'h-7 w-11';
       break;
-    case 'md':
     default:
       className = 'h-5 w-8';
       break;
@@ -56,7 +59,8 @@ export const ColorPickerInput = forwardRef<
 
     return (
       <span
-        className={`group relative flex items-center justify-center ${sizeClassName}`}>
+        className={`group relative flex items-center justify-center ${sizeClassName}`}
+      >
         <input
           type="color"
           className="peer/colorpicker absolute z-20 size-full cursor-pointer opacity-0 disabled:cursor-auto"
@@ -71,7 +75,8 @@ export const ColorPickerInput = forwardRef<
         />
         <span
           className="peer-checked/colorpicker:bg-primary absolute size-full rounded-md shadow-inner transition-all duration-150 ease-in-out peer-disabled/colorpicker:grayscale"
-          style={{ backgroundColor: displayValue as string }}></span>
+          style={{ backgroundColor: displayValue as string }}
+        ></span>
       </span>
     );
   },

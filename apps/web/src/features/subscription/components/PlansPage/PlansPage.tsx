@@ -3,16 +3,22 @@
 import { PageHeadline } from '@maw/ui-lib';
 import { useTranslations } from 'next-intl';
 import { useCallback, useState } from 'react';
-
+import { useEventBus } from '@/contexts/EventBusContext';
+import type {
+  BillingCycle,
+  SubscriptionFeature,
+  SubscriptionPackage,
+} from '../../schemas';
+import type { SubscriptionEvent } from '../../types';
 import { BillingCycleSelector } from './BillingCycleSelector';
 import { Disclaimer } from './Disclaimer';
 import { PlanCard } from './PlanCard';
 import { PlanComparison } from './PlanComparison';
-import { SocialProof, SocialProofProps } from './SocialProof';
-import { UrgencyCountdown, UrgencyCountdownProps } from './UrgencyCountdown';
-import { BillingCycle } from '../../schemas/billing-cycle';
-import { SubscriptionFeature } from '../../schemas/subscription-feature';
-import { SubscriptionPackage } from '../../schemas/subscription-package';
+import { SocialProof, type SocialProofProps } from './SocialProof';
+import {
+  UrgencyCountdown,
+  type UrgencyCountdownProps,
+} from './UrgencyCountdown';
 
 interface PlansPageProps {
   plans: SubscriptionPackage[];
@@ -31,6 +37,7 @@ export function PlansPage({
   socialProofConfig,
 }: PlansPageProps) {
   const t = useTranslations();
+  const { dispatch } = useEventBus();
   const [isDiscountActive, setIsDiscountActive] = useState(false);
   const [billingCycle, setBillingCycle] = useState<BillingCycle>('monthly');
   const [selectedPlanKey, setSelectedPlanKey] = useState<string>(
@@ -40,6 +47,16 @@ export function PlansPage({
   const onUrgencyTick = useCallback(
     (timeLeft: number) => setIsDiscountActive(timeLeft > 0),
     [],
+  );
+
+  const handleSelectPlan = useCallback(
+    (key: string) => {
+      setSelectedPlanKey(key);
+      dispatch<SubscriptionEvent['payload']>('SUBSCRIPTION_PACKAGE_SELECTED', {
+        packageId: key,
+      });
+    },
+    [dispatch],
   );
 
   return (
@@ -74,7 +91,7 @@ export function PlansPage({
                   : undefined
               }
               isSelected={selectedPlanKey === plan.key}
-              onSelect={() => setSelectedPlanKey(plan.key)}
+              onSelect={() => handleSelectPlan(plan.key)}
             />
           );
         })}

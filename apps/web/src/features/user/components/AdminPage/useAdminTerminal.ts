@@ -69,7 +69,7 @@ export function useAdminTerminal(charDelay = 40) {
 
     if (e.key.length === 1) {
       setInput((v) => v + e.key);
-      setMasked((v) => v + '*');
+      setMasked((v) => `${v}*`);
     }
   });
 
