@@ -158,12 +158,13 @@ export const usePainPreferencesStore = create<PainPreferencesStore>()(
       storage: createJSONStorage(() => localStorage),
       version: 3,
       migrate: (persistedState, _version) => {
-        const sanitizedSchema = PainPreferencesStateSchema.strip().parse(persistedState);
+        const sanitizedSchema =
+          PainPreferencesStateSchema.strip().parse(persistedState);
 
         const flags = {
           ...initialStateFlags,
           ...sanitizedSchema.flags,
-        }
+        };
 
         return {
           flags,
