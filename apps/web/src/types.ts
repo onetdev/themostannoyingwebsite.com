@@ -1,5 +1,5 @@
 import type { useTranslations } from 'next-intl';
-
+import { DI as DIAchievements } from '@/features/achievements/types';
 import { DI as DIAuth } from '@/features/auth/types';
 import { DI as DIComments } from '@/features/comments/types';
 import { DI as DIContent } from '@/features/content/types';
@@ -12,6 +12,7 @@ export const DI = {
   CountryRepository: Symbol.for('CountryRepository'),
   KernelService: Symbol.for('KernelService'),
   ...DIAuth,
+  ...DIAchievements,
   ...DIComments,
   ...DIContent,
   ...DIDonation,

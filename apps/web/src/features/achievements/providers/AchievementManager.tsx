@@ -11,17 +11,18 @@ import type { SubscriptionEvent } from '@/features/subscription/types';
 import type { UserEvent } from '@/features/user/types';
 import type { AppEvent, EventPayload } from '@/types';
 import { AchievementToastManager } from '../components/AchievementToastManager';
+import { useAchievementBankService } from '../hooks';
 import { useAchievementsStore } from '../stores';
-import { getAchievementMetaById } from './data/registry';
 
 export const AchievementManager = () => {
   const { incrementAchievementProgress, completeAchievement } =
     useAchievementsStore();
   const { dispatch } = useEventBus();
+  const achievementBank = useAchievementBankService();
 
   const handleProgression = useCallback(
     (achievementId: string, amount = 1) => {
-      const definition = getAchievementMetaById(achievementId);
+      const definition = achievementBank.getAchievementById(achievementId);
       if (!definition?.targetProgress) {
         return;
       }
@@ -42,7 +43,7 @@ export const AchievementManager = () => {
         });
       }
     },
-    [dispatch, incrementAchievementProgress],
+    [dispatch, incrementAchievementProgress, achievementBank],
   );
 
   const handleSingleUnlock = useCallback(

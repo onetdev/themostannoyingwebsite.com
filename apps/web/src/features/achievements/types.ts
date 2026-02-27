@@ -9,6 +9,15 @@ export interface AchievementDefinition {
   secret?: boolean;
 }
 
+export const DI = {
+  AchievementBankService: Symbol.for('AchievementBankService'),
+};
+
+export interface AchievementBankService {
+  getAchievements(): AchievementDefinition[];
+  getAchievementById(id: string): AchievementDefinition | undefined;
+}
+
 export type AchievementsEvent =
   | {
       type: 'ACHIEVEMENT_UNLOCKED';

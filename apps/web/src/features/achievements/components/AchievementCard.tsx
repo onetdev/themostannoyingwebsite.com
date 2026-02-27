@@ -9,7 +9,7 @@ import {
   Progress,
 } from '@maw/ui-lib';
 import { cn } from '@maw/ui-lib/utils';
-import { useTranslations } from 'next-intl';
+import { useLocale, useTranslations } from 'next-intl';
 import type { AchievementState } from '../stores';
 import type { AchievementDefinition } from '../types';
 
@@ -20,6 +20,7 @@ export type AchievementCardProps = {
 
 export function AchievementCard({ definition, state }: AchievementCardProps) {
   const t = useTranslations();
+  const locale = useLocale();
 
   const isProgression = definition.type === 'progression';
   const progressValue = isProgression
@@ -75,7 +76,7 @@ export function AchievementCard({ definition, state }: AchievementCardProps) {
         {state.completedAt && (
           <div className="mt-4 text-[10px] text-muted-foreground opacity-50">
             {t('common.done')}:{' '}
-            {new Date(state.completedAt).toLocaleDateString()}
+            {new Date(state.completedAt).toLocaleDateString(locale)}
           </div>
         )}
       </CardContent>

@@ -7,13 +7,14 @@ import { useEventBusListener } from '@/contexts/EventBusContext';
 import { useAudio } from '@/hooks';
 import { usePainPreferencesStore } from '@/stores';
 import type { EventPayload } from '@/types';
-import { getAchievementMetaById } from '../providers/data/registry';
+import { useAchievementBankService } from '../hooks';
 import { useAchievementsStore } from '../stores';
 import type { AchievementsEvent } from '../types';
 import { AchievementToast } from './AchievementToast';
 
 export const AchievementToastManager = () => {
   const t = useTranslations();
+  const achievementBank = useAchievementBankService();
   const { notifyAchievementProgress } = useAchievementsStore();
   const { play, audio } = useAudio(
     config.achievements.assets.achievementUnlockedSfx,
@@ -28,7 +29,7 @@ export const AchievementToastManager = () => {
       const { achievementId } = payload || {};
       if (!achievementId || !notificationsEnabled) return;
 
-      const definition = getAchievementMetaById(achievementId);
+      const definition = achievementBank.getAchievementById(achievementId);
       if (!definition) return;
 
       play();
@@ -56,7 +57,7 @@ export const AchievementToastManager = () => {
 
     if (!shouldShowToast) return;
 
-    const definition = getAchievementMetaById(achievementId);
+    const definition = achievementBank.getAchievementById(achievementId);
     if (!definition) return;
 
     notifyAchievementProgress(achievementId);

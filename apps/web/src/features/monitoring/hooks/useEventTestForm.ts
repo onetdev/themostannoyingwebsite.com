@@ -22,12 +22,12 @@ export function useEventTestForm() {
 
   const onSubmit = async (data: EventTestFormData) => {
     try {
-      const parsedPayload = JSON.parse(data.payload);
+      const parsedPayload = data.payload ? JSON.parse(data.payload) : undefined;
       dispatch(data.eventType, parsedPayload);
     } catch (err: unknown) {
-      logger.warn(err, 'JSON payload event error');
+      logger.warn(err, 'JSON payload send error, trying empty send');
       // If it's not valid JSON, just send it as a string or empty
-      dispatch(data.eventType, data.payload);
+      dispatch(data.eventType);
     }
   };
 

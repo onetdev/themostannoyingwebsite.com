@@ -1,6 +1,6 @@
 import type { AchievementDefinition } from '../../types';
 
-export const ACHIEVEMENT_REGISTRY: AchievementDefinition[] = [
+const ACHIEVEMENT_REGISTRY: AchievementDefinition[] = [
   {
     id: 'first-visit',
     nameKey: 'achievements.registry.firstVisit.name',
@@ -87,5 +87,6 @@ export const ACHIEVEMENT_REGISTRY: AchievementDefinition[] = [
   },
 ];
 
-export const getAchievementMetaById = (id: string) =>
-  ACHIEVEMENT_REGISTRY.find((a) => a.id === id);
+export function getAchievementsRegistry() {
+  return ACHIEVEMENT_REGISTRY;
+}
