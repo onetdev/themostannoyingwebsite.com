@@ -107,12 +107,18 @@ export default {
     dilf: 'DILF',
     plans: 'AI plans',
     personal: 'Personal',
+    achievements: 'Achievements',
   },
   metadata: {
     app: {
       title: 'The Most Annoying Website',
       description:
         'Self-proclaimed most annoying website on the web with so many disgusting features of modern websites you might even vomit at some point.',
+    },
+    achievements: {
+      title: 'Achievements',
+      description:
+        'Track your progress and showcase your persistence. See all the milestones you have reached on this annoying journey.',
     },
     about: {
       title: 'About us',
@@ -435,6 +441,7 @@ export default {
         flaps: 'Background ad flaps',
         oneByOne: 'One by one ad blocks',
       },
+      achievementNotifications: 'Achievement notifications',
       clipboardMarker: 'Clipboard marker',
       contentPaywall: 'Content paywall',
       deadPixel: 'Dead pixel',
@@ -460,6 +467,8 @@ export default {
           'Shows ad flaps on the sides of the page that can be clicked and leads to different pages.',
         oneByOne: 'Mainly covered an animated advertisement on the home page.',
       },
+      achievementNotifications:
+        'Displays a notification whenever you unlock a new achievement. Progress is always tracked in the background.',
       clipboardMarker:
         'Adds a "Read more at..." link when you copy text from the website.',
       contentPaywall:
@@ -511,6 +520,87 @@ export default {
     screensaver: {
       exitClick: 'Click anywhere to exit screensaver',
       exitTap: 'Tap anywhere to exit screensaver',
+    },
+  },
+  achievements: {
+    unlocked: 'Achievement Unlocked: {name}',
+    progress: 'Progress: {name} ({progress}/{target})',
+    unlockedTitle: 'Achievement Unlocked!',
+    progressTitle: 'Achievement Progress',
+    progressBarLabel: 'Progress',
+    title: 'Achievements',
+    description:
+      'The journey of a thousand miles begins with a single, highly annoying step. Track your "achievements" and showcase your questionable persistence in navigating this digital nightmare.',
+    lockedDescription:
+      'You will only see the description of this achievement once you unlocked it.',
+    reset: {
+      button: 'Reset All Achievements',
+      confirmTitle: 'Are you absolutely sure?',
+      confirmDescription:
+        'This will permanently delete all your hard-earned (and mostly meaningless) progress. This action cannot be undone, much like your decision to visit this website.',
+      confirmAction: 'Yes, delete my progress',
+      cancelAction: 'No, I want to keep my suffering',
+    },
+    registry: {
+      firstVisit: {
+        name: 'Welcome to Hell',
+        description: 'Visit the website for the first time.',
+      },
+      clickAnnoyingButton: {
+        name: 'Persistent Clicker',
+        description: 'Click an annoying button 10 times.',
+      },
+      firstPackageSelection: {
+        name: 'Financial Commitment',
+        description: 'Select your first (fake) subscription package.',
+      },
+      firstSearch: {
+        name: 'The Seeker',
+        description: 'Try searching for something on this website.',
+      },
+      rightClickRebel: {
+        name: 'Right-Click Rebel',
+        description:
+          'Try to open the context menu 20 times (even though it is disabled).',
+      },
+      copyPasteCriminal: {
+        name: 'Copy-Paste Criminal',
+        description: 'Copy text from the site 5 times.',
+      },
+      escapeArtist: {
+        name: 'Escape Artist',
+        description: 'Successfully trigger the exit prompt.',
+      },
+      deadPixelHunter: {
+        name: 'Dead Pixel Hunter',
+        description: 'Try to click on a dead pixel.',
+      },
+      wheelOfFortuneSpin: {
+        name: 'Optimistic Gambler',
+        description:
+          'Spin the "Wheel of Fortune" and win an absolutely useless prize.',
+      },
+      adminLogin: {
+        name: 'The System Admin',
+        description: 'Gain access to the highly restricted admin area.',
+      },
+      mazeSpecialCell: {
+        name: 'The answer of life',
+        description:
+          'Find the meaning of life while searching through the maze of existence.',
+      },
+      mazeExplorer: {
+        name: 'Lost Forever',
+        description: 'Take 500 steps inside the digital maze.',
+      },
+      bouncingLogoCornerHit: {
+        name: 'The Perfect Bounce',
+        description: 'Witness the logo hitting the corner perfectly.',
+      },
+      bouncingLogoFanatic: {
+        name: 'Bouncing Logo Fanatic',
+        description: 'Witness the logo bounce 420 times.',
+      },
     },
   },
   share: {

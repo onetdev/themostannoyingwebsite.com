@@ -15,6 +15,7 @@ export const ActiveNavigationItems = [
   'settings',
   'virgin',
   'search',
+  'achievements',
 ] as const;
 export type ActiveNavigationItem = (typeof ActiveNavigationItems)[number];
 
@@ -36,6 +37,12 @@ export const SITE_NAVIGATION_LINKS = [
 ];
 
 export const PERSONAL_NAVIGATION_LINKS = [
+  {
+    icon: 'trophy' as const,
+    key: 'achievements',
+    labelKey: 'navigation.achievements',
+    path: '/achievements',
+  },
   {
     icon: 'share' as const,
     key: 'global-share',
@@ -63,6 +70,11 @@ export const FOOTER_NAVIGATION_LINKS = [
     key: 'password-reminder',
     labelKey: 'navigation.passwordReminder',
     path: '/user/password-reminder',
+  },
+  {
+    key: 'achievements',
+    labelKey: 'navigation.achievements',
+    path: '/achievements',
   },
   { key: 'settings', labelKey: 'navigation.settings', path: '/settings' },
   {

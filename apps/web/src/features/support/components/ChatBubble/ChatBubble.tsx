@@ -41,6 +41,7 @@ export function ChatBubble() {
       className="fixed bottom-2 left-2 z-20 flex md:bottom-4 md:left-4"
       ref={$ref}
     >
+      {state.audio}
       <button
         type="button"
         className="bg-secondary text-on-secondary z-30 flex size-12 cursor-pointer items-center justify-center rounded-full text-2xl shadow-lg md:size-14"

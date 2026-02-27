@@ -1,6 +1,13 @@
 import { type OGLRenderingContext, Texture } from 'ogl';
 
-export function getTextures(gl: OGLRenderingContext) {
+type AssetPaths = {
+  mazeFloor: string;
+  mazeCeiling: string;
+  mazeWall: string;
+  mazeOverlayEasteregg: string;
+};
+
+export function getTextures(gl: OGLRenderingContext, assets: AssetPaths) {
   function setupNetworkTexture(url: string) {
     const texture = new Texture(gl);
     texture.wrapS = gl.REPEAT;
@@ -19,11 +26,9 @@ export function getTextures(gl: OGLRenderingContext) {
   }
 
   return {
-    floor: setupNetworkTexture('/assets/maze-screensaver/maze-floor.webp'),
-    ceiling: setupNetworkTexture('/assets/maze-screensaver/maze-ceiling.webp'),
-    wall: setupNetworkTexture('/assets/maze-screensaver/maze-wall.webp'),
-    overay42: setupNetworkTexture(
-      '/assets/maze-screensaver/maze-overlay-42.webp',
-    ),
+    floor: setupNetworkTexture(assets.mazeFloor),
+    ceiling: setupNetworkTexture(assets.mazeCeiling),
+    wall: setupNetworkTexture(assets.mazeWall),
+    overlayEasteregg: setupNetworkTexture(assets.mazeOverlayEasteregg),
   };
 }

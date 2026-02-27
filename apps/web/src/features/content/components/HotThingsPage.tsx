@@ -5,8 +5,10 @@ import { Icon, PageHeadline } from '@maw/ui-lib';
 import Image from 'next/image';
 import { useLocale, useTranslations } from 'next-intl';
 import { useEffect, useRef, useState } from 'react';
+import { useAppConfig } from '@/contexts/AppConfig';
 
 export function HotThingsPage() {
+  const config = useAppConfig();
   const logger = useLogger().getSubLogger({ name: 'hot-things-page' });
   const [isCapable, setIsCapable] = useState(false);
   const t = useTranslations();
@@ -73,7 +75,7 @@ export function HotThingsPage() {
       <div className="pb-16per9 relative overflow-hidden">
         <Image
           className="absolute h-auto w-full"
-          src="/assets/images/lava.webp"
+          src={config.content.assets.lavaImage}
           alt={t('hotThings.pictureOfYou')}
           width={1920}
           height={1080}
@@ -88,7 +90,10 @@ export function HotThingsPage() {
             default
             kind="captions"
             srcLang={locale}
-            src={`/assets/vtt/hot-things-${locale}.vtt`}
+            src={
+              config.content.assets.hotThingsVtt[locale] ??
+              config.content.assets.hotThingsVtt.en
+            }
             label={t('hotThings.hotThingsVtt')}
           />
         </video>

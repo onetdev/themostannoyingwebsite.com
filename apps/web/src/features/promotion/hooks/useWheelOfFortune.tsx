@@ -8,12 +8,15 @@ import {
 import { useTranslations } from 'next-intl';
 import { useCallback, useMemo, useState } from 'react';
 
+import { useEventBus } from '@/contexts/EventBusContext';
 import type { Item } from '../components/WheelOfFortune/DynamicWheelSvg';
+import type { PromotionEvent } from '../types';
 
 export type AnimatedWheelState = 'ready' | 'spinning' | 'completed';
 
 export function useWheelOfFortune() {
   const t = useTranslations();
+  const { dispatch } = useEventBus();
   const hueStart = 300; // random(0,360);
   const [state, setState] = useState<AnimatedWheelState>('ready');
   const [prize, setPrize] = useState<(Item & { index: number }) | undefined>();
@@ -54,7 +57,13 @@ export function useWheelOfFortune() {
   const complete = useCallback(() => {
     if (state !== 'spinning') return;
     setState('completed');
-  }, [setState, state]);
+
+    if (prize) {
+      dispatch<PromotionEvent['payload']>('WHEEL_OF_FORTUNE_SPIN_COMPLETE', {
+        prize: prize.text,
+      });
+    }
+  }, [setState, state, prize, dispatch]);
 
   return {
     items,

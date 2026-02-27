@@ -10,7 +10,9 @@ import {
   Transform,
 } from 'ogl';
 import { useEffect, useRef } from 'react';
-
+import { useAppConfig } from '@/contexts/AppConfig';
+import { useEventBus } from '@/contexts/EventBusContext';
+import type { ObstructorEvent } from '../../../types';
 import { MAZE_24 } from './data';
 import { texturedFragment, texturedVertex } from './shaders';
 import { getTextures } from './textures';
@@ -24,6 +26,8 @@ type Direction = 'N' | 'S' | 'E' | 'W';
 
 // Windows 95 3D Maze inspired raycasting screensaver
 export function MazeScreensaver() {
+  const config = useAppConfig();
+  const { dispatch } = useEventBus();
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
   useEffect(() => {
@@ -49,7 +53,7 @@ export function MazeScreensaver() {
     });
     const scene = new Transform();
 
-    const textures = getTextures(gl);
+    const textures = getTextures(gl, config.obstructor.assets);
 
     // Geometry
     const geometry = new Plane(gl, {
@@ -74,7 +78,7 @@ export function MazeScreensaver() {
 
     const wallProgram = {
       1: createTextureProgram(textures.wall),
-      2: createTextureProgram(textures.wall, textures.overay42),
+      2: createTextureProgram(textures.wall, textures.overlayEasteregg),
     };
     const floorProgram = createTextureProgram(textures.floor);
     const ceilingProgram = createTextureProgram(textures.ceiling);
@@ -319,6 +323,16 @@ export function MazeScreensaver() {
         if (progress >= 1) {
           moveState.mode = 'idle';
           camera.position.y = 0;
+
+          const isSpecial =
+            MAZE_24[moveState.cz - 1]?.[moveState.cx] === 2 ||
+            MAZE_24[moveState.cz + 1]?.[moveState.cx] === 2 ||
+            MAZE_24[moveState.cz]?.[moveState.cx - 1] === 2 ||
+            MAZE_24[moveState.cz]?.[moveState.cx + 1] === 2;
+
+          dispatch<ObstructorEvent['payload']>('MAZE_STEP', {
+            passedSpecialCell: isSpecial,
+          });
         }
       }
 
@@ -337,7 +351,7 @@ export function MazeScreensaver() {
       cancelAnimationFrame(rafId);
       window.removeEventListener('resize', resize);
     };
-  }, []);
+  }, [config.obstructor.assets, dispatch]);
 
   return <canvas ref={canvasRef} />;
 }

@@ -57,6 +57,7 @@ async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const commonPages = [
     '',
     'about',
+    'achievements',
     'contact',
     'dilf',
     'donate',

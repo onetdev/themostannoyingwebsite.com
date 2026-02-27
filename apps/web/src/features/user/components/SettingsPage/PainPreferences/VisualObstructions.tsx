@@ -12,7 +12,8 @@ import {
   SelectValue,
 } from '@maw/ui-lib';
 import { useTranslations } from 'next-intl';
-import { type ScreensaverVariant, usePainPreferencesStore } from '@/stores';
+import type { ScreensaverVariant } from '@/features/obstructor/schemas';
+import { usePainPreferencesStore } from '@/stores';
 import { SettingsField } from '../SettingsField';
 
 export function VisualObstructions() {

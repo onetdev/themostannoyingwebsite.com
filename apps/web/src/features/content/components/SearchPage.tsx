@@ -5,12 +5,14 @@ import { arrayShuffle } from '@maw/utils/array';
 import { random } from '@maw/utils/math';
 import HTMLReactParser from 'html-react-parser';
 import { useLocale, useMessages, useTranslations } from 'next-intl';
-import { useCallback, useEffect, useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
+import { useEventBusListener } from '@/contexts/EventBusContext';
 import { SearchForm } from '@/features/content/components';
 import { Link } from '@/i18n/navigation';
 import { usePainPreferencesStore } from '@/stores';
 import { useAppArticleService } from '../hooks';
 import type { ArticleSearchResult } from '../schemas';
+import type { ContentEvent } from '../types';
 
 export type Result = {
   query: string;
@@ -38,9 +40,9 @@ export function SearchPage() {
     return items;
   }, [messages.search.topSearcheVariants, t]);
 
-  const onSearchEvent = useCallback((event: CustomEvent) => {
-    setQuery(event.detail.query);
-  }, []);
+  useEventBusListener<ContentEvent['payload']>('SEARCH', (event) => {
+    setQuery(event.payload?.query ?? '');
+  });
 
   const onRecommendedClick = (query: string) => {
     document.location.hash = `query=${query}`;
@@ -54,13 +56,7 @@ export function SearchPage() {
       );
       setQuery(query.get('query') ?? '');
     }
-
-    document.addEventListener('DocumentEventSearch', onSearchEvent);
-
-    return () => {
-      document.removeEventListener('DocumentEventSearch', onSearchEvent);
-    };
-  }, [onSearchEvent]);
+  }, []);
 
   useEffect(() => {
     if (!query) {

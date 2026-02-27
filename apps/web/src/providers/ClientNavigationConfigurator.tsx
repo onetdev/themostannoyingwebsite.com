@@ -12,6 +12,7 @@ import type { RouteAlias } from '@/schemas';
 
 const routeAliasToPathMap: Record<RouteAlias, string> = {
   about: '/about',
+  achievements: '/achievements',
   'article.single': '/articles/:slug',
   contact: '/contact',
   dilf: '/dilf',

@@ -9,6 +9,7 @@ import {
 } from '@maw/ui-lib';
 import { useTranslations } from 'next-intl';
 import { FormProvider } from 'react-hook-form';
+import config from '@/config';
 import { useNavigationProvider } from '@/contexts/NavigationContext';
 import { usePasswordReminderForm } from '../../hooks';
 import { EmailField } from '../fields/EmailField';
@@ -44,7 +45,10 @@ export function PasswordReminderForm() {
       >
         <FormError error={errors.root} />
         <EmailField />
-        <CaptchaTitlePuzzleField text={captchaText} />
+        <CaptchaTitlePuzzleField
+          text={captchaText}
+          imageSrc={config.auth.assets.captchaTile}
+        />
 
         <Button
           role="button"

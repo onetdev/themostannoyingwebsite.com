@@ -1,0 +1,85 @@
+'use client';
+
+import {
+  Badge,
+  Card,
+  CardContent,
+  CardHeader,
+  CardTitle,
+  Progress,
+} from '@maw/ui-lib';
+import { cn } from '@maw/ui-lib/utils';
+import { useLocale, useTranslations } from 'next-intl';
+import type { AchievementState } from '../stores';
+import type { AchievementDefinition } from '../types';
+
+export type AchievementCardProps = {
+  definition: AchievementDefinition;
+  state: AchievementState;
+};
+
+export function AchievementCard({ definition, state }: AchievementCardProps) {
+  const t = useTranslations();
+  const locale = useLocale();
+
+  const isProgression = definition.type === 'progression';
+  const progressValue = isProgression
+    ? (state.progress / (definition.targetProgress || 1)) * 100
+    : state.achieved
+      ? 100
+      : 0;
+
+  const showDescription = !definition.secret || state.achieved;
+
+  return (
+    <Card
+      key={definition.id}
+      className={cn(
+        'relative h-full overflow-hidden transition-all gap-0',
+        state.achieved ? 'border-primary bg-primary/5' : 'opacity-70 grayscale',
+      )}
+    >
+      <CardHeader className="pb-2">
+        <div className="flex items-center justify-between">
+          <CardTitle className="text-lg">{t(definition.nameKey)}</CardTitle>
+          {state.achieved ? (
+            <Badge
+              variant="default"
+              className="bg-primary text-primary-foreground"
+            >
+              {t('common.completed')}
+            </Badge>
+          ) : (
+            <Badge variant="outline">{t('common.pending')}</Badge>
+          )}
+        </div>
+      </CardHeader>
+      <CardContent className="flex flex-1 flex-col">
+        <p className="text-muted-foreground flex-1 mb-4 text-sm">
+          {showDescription
+            ? t(definition.descriptionKey)
+            : t('achievements.lockedDescription')}
+        </p>
+
+        {isProgression && (
+          <div className="mt-auto space-y-2">
+            <div className="flex justify-between text-xs">
+              <span>
+                {state.progress} / {definition.targetProgress}
+              </span>
+              <span>{Math.round(progressValue)}%</span>
+            </div>
+            <Progress value={progressValue} className="h-2" />
+          </div>
+        )}
+
+        {state.completedAt && (
+          <div className="mt-4 text-[10px] text-muted-foreground opacity-50">
+            {t('common.done')}:{' '}
+            {new Date(state.completedAt).toLocaleDateString(locale)}
+          </div>
+        )}
+      </CardContent>
+    </Card>
+  );
+}

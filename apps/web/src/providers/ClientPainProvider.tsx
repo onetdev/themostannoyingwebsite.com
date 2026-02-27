@@ -3,12 +3,13 @@
 import { CopyMarker } from '@maw/ui-lib';
 import { useTranslations } from 'next-intl';
 import { type PropsWithChildren, useEffect } from 'react';
-import { useBeforeUnload } from 'react-use';
 
+import { useEventBus } from '@/contexts/EventBusContext';
 import { PageTitleGlitch } from '@/features/interferrer/components';
 import {
   useDisableContextMenu,
   useNavigationHistoryClutter,
+  usePreventLeaving,
 } from '@/features/interferrer/hooks';
 import { NewsletterModalTrigger } from '@/features/newsletter/components';
 import { useAdblockerDetector } from '@/features/promotion/hooks';
@@ -17,22 +18,22 @@ import { usePainPreferencesStore, useUserGrantsStore } from '@/stores';
 
 export function ClientPainContainer({ children }: PropsWithChildren) {
   const t = useTranslations();
-  const exitPrompt = usePainPreferencesStore((state) => state.flags.exitPrompt);
+  const { dispatch } = useEventBus();
   const clipboardMarker = usePainPreferencesStore(
     (state) => state.flags.clipboardMarker,
   );
 
-  const syncPermissions = useUserGrantsStore((state) => state.syncPermissions);
-
   useNavigationHistoryClutter();
   useDisableContextMenu();
   useAdblockerDetector();
-  useBeforeUnload(exitPrompt, t('app.exitPrompt'));
+  usePreventLeaving();
 
+  const syncPermissions = useUserGrantsStore((state) => state.syncPermissions);
   useEffect(() => {
     syncPermissions();
   }, [syncPermissions]);
 
+  const handleCopy = () => dispatch('TEXT_COPIED');
   const copyMarkerText = {
     readMoreAt: t('app.readMoreAt'),
   };
@@ -42,7 +43,11 @@ export function ClientPainContainer({ children }: PropsWithChildren) {
       <PageTitleGlitch />
       <NewsletterModalTrigger />
       <NotificationPromptTrigger />
-      <CopyMarker enabled={clipboardMarker} text={copyMarkerText}>
+      <CopyMarker
+        enabled={clipboardMarker}
+        text={copyMarkerText}
+        onCopy={handleCopy}
+      >
         {children}
       </CopyMarker>
     </>

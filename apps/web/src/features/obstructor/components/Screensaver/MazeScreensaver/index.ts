@@ -1,1 +1,1 @@
-export { MazeScreensaver } from './MazeScreensaver';
+export * from './MazeScreensaver';

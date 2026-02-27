@@ -1,8 +1,33 @@
 import deploymentMeta from '@/root/public/deployment-meta.json';
+import type { Environment } from './schemas';
+import type { AppConfig } from './schemas/app-config';
 
-const config = {
+const config: AppConfig = {
   defaultColorScheme: 'dark' as AppTheme,
+  achievements: {
+    assets: {
+      achievementUnlockedSfx: '/assets/sfx/achievement.mp3',
+    },
+    progressiveAchievementToastThrottlingSeconds: 10,
+  },
+  auth: {
+    assets: {
+      captchaTile: '/assets/images/captcha-tile-abstract.jpg',
+    },
+  },
+  content: {
+    assets: {
+      lavaImage: '/assets/images/lava.webp',
+      coverPlaceholder: '/assets/cover-placeholder.svg',
+      hotThingsVtt: {
+        en: '/assets/vtt/hot-things-en.vtt',
+      },
+    },
+  },
   donation: {
+    assets: {
+      moneyJarAnimation: '/assets/animations/money-jar.lottie',
+    },
     buyMeACoffeeUrl: 'https://buymeacoffee.com/onetdev',
     paypalUrl: 'https://paypal.me/onetdev',
     ethWallet: {
@@ -28,6 +53,30 @@ const config = {
     // Not a priority at the moment 😅
     totalDonationInEuro: 0,
   },
+  obstructor: {
+    assets: {
+      mazeCeiling: '/assets/maze-screensaver/maze-ceiling.webp',
+      mazeFloor: '/assets/maze-screensaver/maze-floor.webp',
+      mazeWall: '/assets/maze-screensaver/maze-wall.webp',
+      mazeOverlayEasteregg: '/assets/maze-screensaver/maze-overlay-42.webp',
+    },
+    screensaver: {
+      defaultTimeoutSeconds: 30,
+      defaultVariant: 'bouncingLogo',
+    },
+  },
+  promotion: {
+    assets: {
+      dilfFlapsAd: '/ads/ad-dilf-flaps.webp',
+      wanAPhoneAd: '/ads/ad-wan-a-phone.webp',
+      dilfFullImage: '/assets/dilf-full.webp',
+    },
+  },
+  support: {
+    assets: {
+      newMessageSfx: '/assets/sfx/new_message.mp3',
+    },
+  },
   subscription: {
     urgency: {
       discountPercentage: 0.2,
@@ -38,11 +87,20 @@ const config = {
       maxDelayMs: 15000,
     },
   },
-  screensaver: {
-    defaultTimeoutSeconds: 30,
-    defaultVariant: 'bouncingLogo',
+  common: {
+    assets: {
+      adStandard: '/ads/ad-458x80.jpg',
+      adScript: '/ads/ads.js',
+      appIcon: '/assets/appicon.png',
+      bannerDefault: '/assets/banner-default.png',
+      bannerGithub: '/assets/banner-github.png',
+      socialImage: '/assets/social.png',
+    },
   },
-  deploymentMeta: { ...deploymentMeta },
+  deploymentMeta: {
+    ...deploymentMeta,
+    environment: deploymentMeta.environment as Environment,
+  },
 };
 
 export default config;

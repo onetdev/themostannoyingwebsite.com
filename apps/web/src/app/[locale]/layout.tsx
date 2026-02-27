@@ -25,7 +25,7 @@ export async function generateMetadata(): Promise<Metadata> {
       type: 'website',
       images: [
         {
-          url: '/assets/social.png',
+          url: config.common.assets.socialImage,
           width: 1200,
           height: 630,
         },

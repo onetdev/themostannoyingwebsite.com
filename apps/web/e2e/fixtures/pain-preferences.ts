@@ -23,6 +23,7 @@ const flags: PainPreferencesState['flags'] = {
   searchDelay: false,
   stickyVideo: false,
   wheelOfFortune: false,
+  achievementNotifications: false,
 };
 
 export const allDisabledPainPreferencesState: PainPreferencesState = {

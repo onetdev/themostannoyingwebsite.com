@@ -4,7 +4,7 @@ import {
   DotLottieReact,
   type DotLottieReactProps,
 } from '@lottiefiles/dotlottie-react';
-
+import { useAppConfig } from '@/contexts/AppConfig';
 import { useDonationBalance } from '../../hooks';
 
 export type JarAnimationProps = Omit<
@@ -13,11 +13,12 @@ export type JarAnimationProps = Omit<
 >;
 
 export function JarAnimation(props: JarAnimationProps) {
+  const config = useAppConfig();
   const balance = useDonationBalance();
 
   return (
     <DotLottieReact
-      src="/assets/animations/money-jar.lottie"
+      src={config.donation.assets.moneyJarAnimation}
       loop
       autoplay
       mode={balance < 0 ? 'reverse' : 'forward'}

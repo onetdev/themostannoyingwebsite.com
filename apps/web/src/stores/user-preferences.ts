@@ -1,5 +1,6 @@
 import { create } from 'zustand';
 import { createJSONStorage, persist } from 'zustand/middleware';
+import { broadcastChannelSync } from '@/stores/utils/sync';
 
 export const USER_PREFERENCES_STORAGE_KEY = 'zustand-user-preferences-storage';
 export interface UserPreferencesState {
@@ -23,11 +24,13 @@ const initialState: UserPreferencesState = {
 
 export const useUserPreferencesStore = create<UserPreferencesStore>()(
   persist(
-    (set) => ({
-      ...initialState,
-      setEnableSound: (enableSound) => set({ enableSound }),
-      setAdultFilter: (adultFilter) => set({ adultFilter }),
-    }),
+    broadcastChannelSync<UserPreferencesStore>(USER_PREFERENCES_STORAGE_KEY)(
+      (set) => ({
+        ...initialState,
+        setEnableSound: (enableSound) => set({ enableSound }),
+        setAdultFilter: (adultFilter) => set({ adultFilter }),
+      }),
+    ),
     {
       name: USER_PREFERENCES_STORAGE_KEY,
       storage: createJSONStorage(() => localStorage),
