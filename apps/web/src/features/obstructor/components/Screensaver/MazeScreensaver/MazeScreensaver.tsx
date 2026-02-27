@@ -351,7 +351,7 @@ export function MazeScreensaver() {
       cancelAnimationFrame(rafId);
       window.removeEventListener('resize', resize);
     };
-  }, [config.obstructor.assets]);
+  }, [config.obstructor.assets, dispatch]);
 
   return <canvas ref={canvasRef} />;
 }

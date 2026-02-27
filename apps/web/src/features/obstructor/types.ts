@@ -8,4 +8,10 @@ export type ObstructorEvent =
       payload: {
         passedSpecialCell: boolean;
       };
+    }
+  | {
+      type: 'BOUNCY_LOGO_BOUNCE';
+      payload: {
+        isPerfectCorner: boolean;
+      };
     };

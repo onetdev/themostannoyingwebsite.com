@@ -21,7 +21,9 @@ export const AchievementManager = () => {
   );
 
   // Specific achievement triggers
-  useEventBusListener<ObstructorEvent['payload']>('MAZE_STEP', (event) => {
+  useEventBusListener<
+    Extract<ObstructorEvent, { type: 'MAZE_STEP' }>['payload']
+  >('MAZE_STEP', (event) => {
     if (event.payload?.passedSpecialCell) {
       const newlyAchieved = completeAchievement('maze-special-cell');
       handleUnlock('maze-special-cell', newlyAchieved);
@@ -33,6 +35,22 @@ export const AchievementManager = () => {
       500,
     );
     handleUnlock('maze-explorer', newlyAchievedProgress);
+  });
+
+  useEventBusListener<
+    Extract<ObstructorEvent, { type: 'BOUNCY_LOGO_BOUNCE' }>['payload']
+  >('BOUNCY_LOGO_BOUNCE', (event) => {
+    if (event.payload?.isPerfectCorner) {
+      const newlyAchieved = completeAchievement('bouncing-logo-corner-hit');
+      handleUnlock('bouncing-logo-corner-hit', newlyAchieved);
+    }
+
+    const newlyAchievedProgress = incrementAchievementProgress(
+      'bouncing-logo-fanatic',
+      1,
+      420,
+    );
+    handleUnlock('bouncing-logo-fanatic', newlyAchievedProgress);
   });
 
   useEventBusListener('SUBSCRIPTION_PACKAGE_SELECTED', () => {

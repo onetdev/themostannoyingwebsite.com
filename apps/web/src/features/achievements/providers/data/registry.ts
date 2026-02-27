@@ -72,6 +72,19 @@ export const ACHIEVEMENT_REGISTRY: AchievementDefinition[] = [
     type: 'progression',
     targetProgress: 500,
   },
+  {
+    id: 'bouncing-logo-corner-hit',
+    nameKey: 'achievements.registry.bouncingLogoCornerHit.name',
+    descriptionKey: 'achievements.registry.bouncingLogoCornerHit.description',
+    type: 'boolean',
+  },
+  {
+    id: 'bouncing-logo-fanatic',
+    nameKey: 'achievements.registry.bouncingLogoFanatic.name',
+    descriptionKey: 'achievements.registry.bouncingLogoFanatic.description',
+    type: 'progression',
+    targetProgress: 420,
+  },
 ];
 
 export const getAchievementById = (id: string) =>
