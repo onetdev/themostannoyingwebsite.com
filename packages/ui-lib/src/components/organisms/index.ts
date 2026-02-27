@@ -8,3 +8,4 @@ export * from './ShareModal';
 export * from './Sheet';
 export * from './Sonner';
 export * from './Table';
+export * from './Tabs';
