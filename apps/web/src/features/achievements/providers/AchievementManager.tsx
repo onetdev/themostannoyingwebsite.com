@@ -9,23 +9,29 @@ import type { ObstructorEvent } from '@/features/obstructor/types';
 import type { PromotionEvent } from '@/features/promotion/types';
 import type { SubscriptionEvent } from '@/features/subscription/types';
 import type { UserEvent } from '@/features/user/types';
-import type { AppEvent } from '@/types';
+import type { AppEvent, EventPayload } from '@/types';
 import { AchievementToastManager } from '../components/AchievementToastManager';
-import { type AchievementUpdateResult, useAchievementsStore } from '../stores';
+import { useAchievementsStore } from '../stores';
 import { getAchievementMetaById } from './data/registry';
-
-type EventPayload<
-  T1 extends { type: string; payload?: unknown },
-  T2 extends string,
-> = Extract<T1, { type: T2 }>['payload'];
 
 export const AchievementManager = () => {
   const { incrementAchievementProgress, completeAchievement } =
     useAchievementsStore();
   const { dispatch } = useEventBus();
 
-  const handleProgressiveUpdate = useCallback(
-    (achievementId: string, result: AchievementUpdateResult) => {
+  const handleProgression = useCallback(
+    (achievementId: string, amount = 1) => {
+      const definition = getAchievementMetaById(achievementId);
+      if (!definition?.targetProgress) {
+        return;
+      }
+
+      const result = incrementAchievementProgress(
+        achievementId,
+        amount,
+        definition.targetProgress,
+      );
+
       if (result.newlyAchieved) {
         dispatch('ACHIEVEMENT_UNLOCKED', { achievementId });
       } else {
@@ -36,7 +42,19 @@ export const AchievementManager = () => {
         });
       }
     },
-    [dispatch],
+    [dispatch, incrementAchievementProgress],
+  );
+
+  const handleSingleUnlock = useCallback(
+    (achievementId: string) => {
+      const newlyAchieved = completeAchievement(achievementId);
+      if (!newlyAchieved) {
+        return;
+      }
+
+      dispatch('ACHIEVEMENT_UNLOCKED', { achievementId });
+    },
+    [completeAchievement, dispatch],
   );
 
   useEventBusListener<EventPayload<ObstructorEvent, 'MAZE_STEP'>>(
@@ -50,15 +68,7 @@ export const AchievementManager = () => {
           });
       }
 
-      const definition = getAchievementMetaById('maze-explorer');
-      if (definition?.targetProgress) {
-        const result = incrementAchievementProgress(
-          'maze-explorer',
-          1,
-          definition.targetProgress,
-        );
-        handleProgressiveUpdate('maze-explorer', result);
-      }
+      handleProgression('maze-explorer');
     },
   );
 
@@ -73,107 +83,56 @@ export const AchievementManager = () => {
           });
       }
 
-      const definition = getAchievementMetaById('bouncing-logo-fanatic');
-      if (definition?.targetProgress) {
-        const result = incrementAchievementProgress(
-          'bouncing-logo-fanatic',
-          1,
-          definition.targetProgress,
-        );
-        handleProgressiveUpdate('bouncing-logo-fanatic', result);
-      }
+      handleProgression('bouncing-logo-fanatic');
     },
   );
 
   useEventBusListener<
     EventPayload<SubscriptionEvent, 'SUBSCRIPTION_PACKAGE_SELECTED'>
-  >('SUBSCRIPTION_PACKAGE_SELECTED', () => {
-    const newlyAchieved = completeAchievement('first-package-selection');
-    if (newlyAchieved)
-      dispatch('ACHIEVEMENT_UNLOCKED', {
-        achievementId: 'first-package-selection',
-      });
-  });
+  >('SUBSCRIPTION_PACKAGE_SELECTED', () =>
+    handleSingleUnlock('first-package-selection'),
+  );
 
-  useEventBusListener<EventPayload<ContentEvent, 'SEARCH'>>('SEARCH', () => {
-    const newlyAchieved = completeAchievement('first-search');
-    if (newlyAchieved)
-      dispatch('ACHIEVEMENT_UNLOCKED', { achievementId: 'first-search' });
-  });
+  useEventBusListener<EventPayload<ContentEvent, 'SEARCH'>>('SEARCH', () =>
+    handleSingleUnlock('first-search'),
+  );
 
   useEventBusListener<EventPayload<InterferrerEvent, 'CONTEXT_MENU_ATTEMPT'>>(
     'CONTEXT_MENU_ATTEMPT',
     () => {
-      const definition = getAchievementMetaById('right-click-rebel');
-      if (definition?.targetProgress) {
-        const result = incrementAchievementProgress(
-          'right-click-rebel',
-          1,
-          definition.targetProgress,
-        );
-        handleProgressiveUpdate('right-click-rebel', result);
-      }
+      handleProgression('right-click-rebel');
     },
   );
 
   useEventBusListener<EventPayload<AppEvent, 'TEXT_COPIED'>>(
     'TEXT_COPIED',
     () => {
-      const definition = getAchievementMetaById('copy-paste-criminal');
-      if (definition?.targetProgress) {
-        const result = incrementAchievementProgress(
-          'copy-paste-criminal',
-          1,
-          definition.targetProgress,
-        );
-        handleProgressiveUpdate('copy-paste-criminal', result);
-      }
+      handleProgression('copy-paste-criminal');
     },
   );
 
   useEventBusListener<EventPayload<AppEvent, 'EXIT_PROMPT_TRIGGERED'>>(
     'EXIT_PROMPT_TRIGGERED',
-    () => {
-      const newlyAchieved = completeAchievement('escape-artist');
-      if (newlyAchieved)
-        dispatch('ACHIEVEMENT_UNLOCKED', { achievementId: 'escape-artist' });
-    },
+    () => handleSingleUnlock('escape-artist'),
   );
 
   useEventBusListener<
     EventPayload<ObstructorEvent, 'DEAD_PIXEL_CLICK_ATTEMPT'>
-  >('DEAD_PIXEL_CLICK_ATTEMPT', () => {
-    const newlyAchieved = completeAchievement('dead-pixel-hunter');
-    if (newlyAchieved)
-      dispatch('ACHIEVEMENT_UNLOCKED', { achievementId: 'dead-pixel-hunter' });
-  });
+  >('DEAD_PIXEL_CLICK_ATTEMPT', () => handleSingleUnlock('dead-pixel-hunter'));
 
-  useEventBusListener<EventPayload<AppEvent, 'NAVIGATION'>>(
-    'NAVIGATION',
-    () => {
-      const newlyAchieved = completeAchievement('first-visit');
-      if (newlyAchieved)
-        dispatch('ACHIEVEMENT_UNLOCKED', { achievementId: 'first-visit' });
-    },
+  useEventBusListener<EventPayload<AppEvent, 'NAVIGATION'>>('NAVIGATION', () =>
+    handleSingleUnlock('first-visit'),
   );
 
   useEventBusListener<
     EventPayload<PromotionEvent, 'WHEEL_OF_FORTUNE_SPIN_COMPLETE'>
-  >('WHEEL_OF_FORTUNE_SPIN_COMPLETE', () => {
-    const newlyAchieved = completeAchievement('wheel-of-fortune-spin');
-    if (newlyAchieved)
-      dispatch('ACHIEVEMENT_UNLOCKED', {
-        achievementId: 'wheel-of-fortune-spin',
-      });
-  });
+  >('WHEEL_OF_FORTUNE_SPIN_COMPLETE', () =>
+    handleSingleUnlock('wheel-of-fortune-spin'),
+  );
 
   useEventBusListener<EventPayload<UserEvent, 'ADMIN_LOGIN_SUCCESS'>>(
     'ADMIN_LOGIN_SUCCESS',
-    () => {
-      const newlyAchieved = completeAchievement('admin-login');
-      if (newlyAchieved)
-        dispatch('ACHIEVEMENT_UNLOCKED', { achievementId: 'admin-login' });
-    },
+    () => handleSingleUnlock('admin-login'),
   );
 
   return <AchievementToastManager />;

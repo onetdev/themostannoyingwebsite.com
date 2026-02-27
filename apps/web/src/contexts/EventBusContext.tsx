@@ -9,8 +9,7 @@ import {
   useRef,
 } from 'react';
 
-// biome-ignore lint/suspicious/noExplicitAny: TODO: Add proper type
-export type EventPayload = any;
+export type EventPayload = unknown;
 
 export type EventBusEvent<T = EventPayload> = {
   type: string;
@@ -39,8 +38,8 @@ export function EventBusProvider({ children }: PropsWithChildren) {
     eventTarget.current = new EventTarget();
   }
 
-  const value = useMemo(
-    () => ({
+  const value = useMemo(() => {
+    return {
       dispatch: <T = EventPayload>(type: string, payload?: T) => {
         const event = new CustomEvent(type, {
           detail: {
@@ -64,9 +63,8 @@ export function EventBusProvider({ children }: PropsWithChildren) {
           eventTarget.current?.removeEventListener(type, wrappedListener);
         };
       },
-    }),
-    [],
-  );
+    };
+  }, []);
 
   return (
     <EventBusContext.Provider value={value}>
@@ -98,6 +96,6 @@ export function useEventBusListener<T = EventPayload>(
   }, [listener]);
 
   useEffect(() => {
-    return subscribe(type, (event) => savedListener.current(event));
+    return subscribe<T>(type, (event) => savedListener.current(event));
   }, [type, subscribe]);
 }

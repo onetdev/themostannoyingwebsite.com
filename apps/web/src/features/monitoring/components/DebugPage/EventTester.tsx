@@ -26,6 +26,10 @@ export function EventTester() {
     onSubmit,
   } = useEventTestForm();
 
+  const testEvents = eventPresets.sort((a, b) =>
+    (a.name ?? a.type).localeCompare(b.name ?? b.type),
+  );
+
   return (
     <Card>
       <CardHeader>
@@ -37,9 +41,9 @@ export function EventTester() {
             Common Events
           </div>
           <div className="flex flex-wrap gap-2">
-            {eventPresets.map((evt) => (
+            {testEvents.map((evt) => (
               <Button
-                key={evt.type}
+                key={evt.name ?? evt.type}
                 variant="outline"
                 size="sm"
                 onClick={() => {
@@ -47,7 +51,7 @@ export function EventTester() {
                   setValue('payload', JSON.stringify(evt.payload));
                 }}
               >
-                {evt.type}
+                {evt.name ?? evt.type}
               </Button>
             ))}
           </div>

@@ -30,7 +30,7 @@ export function AchievementToast({
       onClick={() => navigatePush('achievements')}
       className="w-full bg-background p-3 rounded-lg border border-border cursor-pointer sm:w-[364px]"
     >
-      <div className="flex items-center gap-4 f-full">
+      <div className="flex items-center gap-4 w-full">
         <div className="flex size-10 shrink-0 items-center justify-center rounded-lg bg-linear-to-br from-primary to-primary-foreground/20 text-primary-foreground shadow-2xl border-white/10">
           <Icon icon="trophy" className="text-2xl drop-shadow-md" />
         </div>

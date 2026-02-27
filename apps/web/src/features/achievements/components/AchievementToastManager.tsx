@@ -6,8 +6,10 @@ import config from '@/config';
 import { useEventBusListener } from '@/contexts/EventBusContext';
 import { useAudio } from '@/hooks';
 import { usePainPreferencesStore } from '@/stores';
+import type { EventPayload } from '@/types';
 import { getAchievementMetaById } from '../providers/data/registry';
 import { useAchievementsStore } from '../stores';
+import type { AchievementsEvent } from '../types';
 import { AchievementToast } from './AchievementToast';
 
 export const AchievementToastManager = () => {
@@ -20,25 +22,30 @@ export const AchievementToastManager = () => {
     (state) => state.flags.achievementNotifications,
   );
 
-  useEventBusListener('ACHIEVEMENT_UNLOCKED', (event) => {
-    const { achievementId } = event.payload || {};
-    if (!achievementId || !notificationsEnabled) return;
+  useEventBusListener<EventPayload<AchievementsEvent, 'ACHIEVEMENT_UNLOCKED'>>(
+    'ACHIEVEMENT_UNLOCKED',
+    ({ payload }) => {
+      const { achievementId } = payload || {};
+      if (!achievementId || !notificationsEnabled) return;
 
-    const definition = getAchievementMetaById(achievementId);
-    if (!definition) return;
+      const definition = getAchievementMetaById(achievementId);
+      if (!definition) return;
 
-    play();
+      play();
 
-    toast.custom(
-      () => <AchievementToast name={t(definition.nameKey)} type="unlocked" />,
-      {
-        position: 'top-center',
-      },
-    );
-  });
+      toast.custom(
+        () => <AchievementToast name={t(definition.nameKey)} type="unlocked" />,
+        {
+          position: 'top-center',
+        },
+      );
+    },
+  );
 
-  useEventBusListener('ACHIEVEMENT_PROGRESS_UPDATED', (event) => {
-    const { achievementId, progress, lastNotifiedAt } = event.payload || {};
+  useEventBusListener<
+    EventPayload<AchievementsEvent, 'ACHIEVEMENT_PROGRESS_UPDATED'>
+  >('ACHIEVEMENT_PROGRESS_UPDATED', ({ payload }) => {
+    const { achievementId, progress, lastNotifiedAt } = payload || {};
     if (!achievementId || !notificationsEnabled) return;
 
     const now = Date.now();

@@ -1,4 +1,10 @@
-export const eventPresets = [
+type EventPreset = {
+  type: string;
+  name?: string;
+  payload: unknown;
+};
+
+export const eventPresets: EventPreset[] = [
   { type: 'NAVIGATION', payload: { path: '/debug' } },
   { type: 'SEARCH', payload: { query: 'annoying' } },
   {
@@ -14,6 +20,14 @@ export const eventPresets = [
     payload: { prize: 'Absolutely Nothing' },
   },
   { type: 'ADMIN_LOGIN_SUCCESS', payload: { username: 'admin' } },
-  { type: 'MAZE_STEP', payload: { passedSpecialCell: false } },
-  { type: 'MAZE_STEP', payload: { passedSpecialCell: true } },
+  {
+    type: 'MAZE_STEP',
+    name: 'MAZE_STEP (normal)',
+    payload: { passedSpecialCell: false },
+  },
+  {
+    type: 'MAZE_STEP',
+    name: 'MAZE_STEP (special cell)',
+    payload: { passedSpecialCell: true },
+  },
 ];

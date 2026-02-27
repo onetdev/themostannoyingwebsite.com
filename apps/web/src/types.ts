@@ -18,6 +18,11 @@ export const DI = {
   ...DISubscription,
 };
 
+export type EventPayload<
+  T1 extends { type: string; payload?: unknown },
+  T2 extends string,
+> = Extract<T1, { type: T2 }>['payload'];
+
 export type AppEvent =
   | {
       type: 'NAVIGATION';
