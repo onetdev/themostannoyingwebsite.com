@@ -60,30 +60,22 @@ export const AchievementManager = () => {
   useEventBusListener<EventPayload<ObstructorEvent, 'MAZE_STEP'>>(
     'MAZE_STEP',
     (event) => {
-      if (event.payload?.passedSpecialCell) {
-        const newlyAchieved = completeAchievement('maze-special-cell');
-        if (newlyAchieved)
-          dispatch('ACHIEVEMENT_UNLOCKED', {
-            achievementId: 'maze-special-cell',
-          });
-      }
-
       handleProgression('maze-explorer');
+
+      if (event.payload?.passedSpecialCell) {
+        handleSingleUnlock('maze-special-cell');
+      }
     },
   );
 
   useEventBusListener<EventPayload<ObstructorEvent, 'BOUNCY_LOGO_BOUNCE'>>(
     'BOUNCY_LOGO_BOUNCE',
     (event) => {
-      if (event.payload?.isPerfectCorner) {
-        const newlyAchieved = completeAchievement('bouncing-logo-corner-hit');
-        if (newlyAchieved)
-          dispatch('ACHIEVEMENT_UNLOCKED', {
-            achievementId: 'bouncing-logo-corner-hit',
-          });
-      }
-
       handleProgression('bouncing-logo-fanatic');
+
+      if (event.payload?.isPerfectCorner) {
+        handleSingleUnlock('bouncing-logo-corner-hit');
+      }
     },
   );
 

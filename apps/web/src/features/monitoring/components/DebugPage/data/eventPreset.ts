@@ -30,4 +30,22 @@ export const eventPresets: EventPreset[] = [
     name: 'MAZE_STEP (special cell)',
     payload: { passedSpecialCell: true },
   },
+  {
+    type: 'BOUNCY_LOGO_BOUNCE',
+    name: 'BOUNCY_LOGO_BOUNCE (normal)',
+    payload: { isPerfectCorner: false },
+  },
+  {
+    type: 'BOUNCY_LOGO_BOUNCE',
+    name: 'BOUNCY_LOGO_BOUNCE (perfect corner)',
+    payload: { isPerfectCorner: true },
+  },
+  {
+    type: 'ACHIEVEMENT_UNLOCKED',
+    payload: { achievementId: 'first-visit' },
+  },
+  {
+    type: 'ACHIEVEMENT_PROGRESS_UPDATED',
+    payload: { achievementId: 'maze-explorer', progress: 5 },
+  },
 ];
