@@ -30,10 +30,11 @@ export function DeadPixel() {
         <button
           type="button"
           aria-hidden
+          data-testid="dead-pixel"
           key={`${point.x}-${point.y}`}
           onClick={() => dispatch('DEAD_PIXEL_CLICK_ATTEMPT')}
           style={{ top: point.y, left: point.x }}
-          className="fixed size-px bg-black select-none dark:bg-white"
+          className="fixed z-50 size-px bg-black select-none dark:bg-white"
         />
       ))}
     </>

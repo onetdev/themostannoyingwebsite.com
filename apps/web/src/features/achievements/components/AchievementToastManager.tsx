@@ -6,7 +6,7 @@ import config from '@/config';
 import { useEventBusListener } from '@/contexts/EventBusContext';
 import { useAudio } from '@/hooks';
 import { usePainPreferencesStore } from '@/stores';
-import type { EventPayload } from '@/types';
+import type { PickEventPayload } from '@/types';
 import { useAchievementBankService } from '../hooks';
 import { useAchievementsStore } from '../stores';
 import type { AchievementsEvent } from '../types';
@@ -23,28 +23,27 @@ export const AchievementToastManager = () => {
     (state) => state.flags.achievementNotifications,
   );
 
-  useEventBusListener<EventPayload<AchievementsEvent, 'ACHIEVEMENT_UNLOCKED'>>(
-    'ACHIEVEMENT_UNLOCKED',
-    ({ payload }) => {
-      const { achievementId } = payload || {};
-      if (!achievementId || !notificationsEnabled) return;
+  useEventBusListener<
+    PickEventPayload<AchievementsEvent, 'ACHIEVEMENT_UNLOCKED'>
+  >('ACHIEVEMENT_UNLOCKED', ({ payload }) => {
+    const { achievementId } = payload || {};
+    if (!achievementId || !notificationsEnabled) return;
 
-      const definition = achievementBank.getAchievementById(achievementId);
-      if (!definition) return;
+    const definition = achievementBank.getAchievementById(achievementId);
+    if (!definition) return;
 
-      play();
+    play();
 
-      toast.custom(
-        () => <AchievementToast name={t(definition.nameKey)} type="unlocked" />,
-        {
-          position: 'top-center',
-        },
-      );
-    },
-  );
+    toast.custom(
+      () => <AchievementToast name={t(definition.nameKey)} type="unlocked" />,
+      {
+        position: 'top-center',
+      },
+    );
+  });
 
   useEventBusListener<
-    EventPayload<AchievementsEvent, 'ACHIEVEMENT_PROGRESS_UPDATED'>
+    PickEventPayload<AchievementsEvent, 'ACHIEVEMENT_PROGRESS_UPDATED'>
   >('ACHIEVEMENT_PROGRESS_UPDATED', ({ payload }) => {
     const { achievementId, progress, lastNotifiedAt } = payload || {};
     if (!achievementId || !notificationsEnabled) return;

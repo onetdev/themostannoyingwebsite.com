@@ -9,7 +9,7 @@ import type { ObstructorEvent } from '@/features/obstructor/types';
 import type { PromotionEvent } from '@/features/promotion/types';
 import type { SubscriptionEvent } from '@/features/subscription/types';
 import type { UserEvent } from '@/features/user/types';
-import type { AppEvent, EventPayload } from '@/types';
+import type { AppEvent, PickEventPayload } from '@/types';
 import { AchievementToastManager } from '../components/AchievementToastManager';
 import { useAchievementBankService } from '../hooks';
 import { useAchievementsStore } from '../stores';
@@ -58,7 +58,7 @@ export const AchievementManager = () => {
     [completeAchievement, dispatch],
   );
 
-  useEventBusListener<EventPayload<ObstructorEvent, 'MAZE_STEP'>>(
+  useEventBusListener<PickEventPayload<ObstructorEvent, 'MAZE_STEP'>>(
     'MAZE_STEP',
     (event) => {
       handleProgression('maze-explorer');
@@ -69,7 +69,7 @@ export const AchievementManager = () => {
     },
   );
 
-  useEventBusListener<EventPayload<ObstructorEvent, 'BOUNCY_LOGO_BOUNCE'>>(
+  useEventBusListener<PickEventPayload<ObstructorEvent, 'BOUNCY_LOGO_BOUNCE'>>(
     'BOUNCY_LOGO_BOUNCE',
     (event) => {
       handleProgression('bouncing-logo-fanatic');
@@ -81,49 +81,49 @@ export const AchievementManager = () => {
   );
 
   useEventBusListener<
-    EventPayload<SubscriptionEvent, 'SUBSCRIPTION_PACKAGE_SELECTED'>
+    PickEventPayload<SubscriptionEvent, 'SUBSCRIPTION_PACKAGE_SELECTED'>
   >('SUBSCRIPTION_PACKAGE_SELECTED', () =>
     handleSingleUnlock('first-package-selection'),
   );
 
-  useEventBusListener<EventPayload<ContentEvent, 'SEARCH'>>('SEARCH', () =>
+  useEventBusListener<PickEventPayload<ContentEvent, 'SEARCH'>>('SEARCH', () =>
     handleSingleUnlock('first-search'),
   );
 
-  useEventBusListener<EventPayload<InterferrerEvent, 'CONTEXT_MENU_ATTEMPT'>>(
-    'CONTEXT_MENU_ATTEMPT',
-    () => {
-      handleProgression('right-click-rebel');
-    },
-  );
+  useEventBusListener<
+    PickEventPayload<InterferrerEvent, 'CONTEXT_MENU_ATTEMPT'>
+  >('CONTEXT_MENU_ATTEMPT', () => {
+    handleProgression('right-click-rebel');
+  });
 
-  useEventBusListener<EventPayload<AppEvent, 'TEXT_COPIED'>>(
+  useEventBusListener<PickEventPayload<AppEvent, 'TEXT_COPIED'>>(
     'TEXT_COPIED',
     () => {
       handleProgression('copy-paste-criminal');
     },
   );
 
-  useEventBusListener<EventPayload<AppEvent, 'EXIT_PROMPT_TRIGGERED'>>(
+  useEventBusListener<PickEventPayload<AppEvent, 'EXIT_PROMPT_TRIGGERED'>>(
     'EXIT_PROMPT_TRIGGERED',
     () => handleSingleUnlock('escape-artist'),
   );
 
   useEventBusListener<
-    EventPayload<ObstructorEvent, 'DEAD_PIXEL_CLICK_ATTEMPT'>
+    PickEventPayload<ObstructorEvent, 'DEAD_PIXEL_CLICK_ATTEMPT'>
   >('DEAD_PIXEL_CLICK_ATTEMPT', () => handleSingleUnlock('dead-pixel-hunter'));
 
-  useEventBusListener<EventPayload<AppEvent, 'NAVIGATION'>>('NAVIGATION', () =>
-    handleSingleUnlock('first-visit'),
+  useEventBusListener<PickEventPayload<AppEvent, 'NAVIGATION'>>(
+    'NAVIGATION',
+    () => handleSingleUnlock('first-visit'),
   );
 
   useEventBusListener<
-    EventPayload<PromotionEvent, 'WHEEL_OF_FORTUNE_SPIN_COMPLETE'>
+    PickEventPayload<PromotionEvent, 'WHEEL_OF_FORTUNE_SPIN_COMPLETE'>
   >('WHEEL_OF_FORTUNE_SPIN_COMPLETE', () =>
     handleSingleUnlock('wheel-of-fortune-spin'),
   );
 
-  useEventBusListener<EventPayload<UserEvent, 'ADMIN_LOGIN_SUCCESS'>>(
+  useEventBusListener<PickEventPayload<UserEvent, 'ADMIN_LOGIN_SUCCESS'>>(
     'ADMIN_LOGIN_SUCCESS',
     () => handleSingleUnlock('admin-login'),
   );

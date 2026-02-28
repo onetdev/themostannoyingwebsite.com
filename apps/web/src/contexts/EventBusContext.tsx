@@ -9,21 +9,9 @@ import {
   useRef,
 } from 'react';
 
-export type EventPayload = unknown;
-
-export type EventBusEvent<T = EventPayload> = {
-  type: string;
-  payload?: T;
-  timestamp: number;
-};
-
-export type EventBusListener<T = EventPayload> = (
-  event: EventBusEvent<T>,
-) => void;
-
 interface EventBusContextValue {
-  dispatch: <T = EventPayload>(type: string, payload?: T) => void;
-  subscribe: <T = EventPayload>(
+  dispatch: <T = UnknownEventPayload>(type: string, payload?: T) => void;
+  subscribe: <T = UnknownEventPayload>(
     type: string,
     listener: EventBusListener<T>,
   ) => () => void;
@@ -39,31 +27,39 @@ export function EventBusProvider({ children }: PropsWithChildren) {
   }
 
   const value = useMemo(() => {
-    return {
-      dispatch: <T = EventPayload>(type: string, payload?: T) => {
-        const event = new CustomEvent(type, {
-          detail: {
-            type,
-            payload,
-            timestamp: Date.now(),
-          },
-        });
-        eventTarget.current?.dispatchEvent(event);
-      },
-      subscribe: <T = EventPayload>(
-        type: string,
-        listener: EventBusListener<T>,
-      ) => {
-        const wrappedListener = (e: Event) => {
-          const customEvent = e as CustomEvent<EventBusEvent<T>>;
-          listener(customEvent.detail);
-        };
-        eventTarget.current?.addEventListener(type, wrappedListener);
-        return () => {
-          eventTarget.current?.removeEventListener(type, wrappedListener);
-        };
-      },
-    };
+    function dispatch<T = UnknownEventPayload>(type: string, payload?: T) {
+      const event = new CustomEvent(type, {
+        detail: {
+          type,
+          payload,
+          timestamp: Date.now(),
+        },
+      });
+      eventTarget.current?.dispatchEvent(event);
+    }
+
+    function subscribe<T = UnknownEventPayload>(
+      type: string,
+      listener: EventBusListener<T>,
+    ) {
+      const wrappedListener = (e: Event) => {
+        const customEvent = e as CustomEvent<EventBusEvent<T>>;
+        listener(customEvent.detail);
+      };
+      eventTarget.current?.addEventListener(type, wrappedListener);
+      return () => {
+        eventTarget.current?.removeEventListener(type, wrappedListener);
+      };
+    }
+
+    const bus = { dispatch, subscribe };
+
+    if (typeof window !== 'undefined') {
+      if (window.maw === undefined) window.maw = {};
+      window.maw.eventBust = bus;
+    }
+
+    return bus;
   }, []);
 
   return (
@@ -84,7 +80,7 @@ export function useEventBus() {
 /**
  * Hook to subscribe to an event from the event bridge.
  */
-export function useEventBusListener<T = EventPayload>(
+export function useEventBusListener<T = UnknownEventPayload>(
   type: string,
   listener: EventBusListener<T>,
 ) {

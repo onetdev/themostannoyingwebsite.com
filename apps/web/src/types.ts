@@ -19,7 +19,7 @@ export const DI = {
   ...DISubscription,
 };
 
-export type EventPayload<
+export type PickEventPayload<
   T1 extends { type: string; payload?: unknown },
   T2 extends string,
 > = Extract<T1, { type: T2 }>['payload'];
