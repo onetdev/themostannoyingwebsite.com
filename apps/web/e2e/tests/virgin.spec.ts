@@ -33,13 +33,19 @@ test('visiting virgin page should turn off all pain points', async ({
       mockChat: false,
       newsletterModal: false,
       notifications: false,
+      screensaver: false,
       searchDelay: false,
       stickyVideo: false,
       wheelOfFortune: false,
+      achievementNotifications: false,
     },
     publicLevel: {
       current: 0,
       max: PUBLIC_PAIN_POINT_LIST.length,
+    },
+    screensaver: {
+      timeoutSeconds: expect.any(Number),
+      variant: expect.any(String),
     },
   });
 });
