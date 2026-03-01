@@ -10,6 +10,7 @@ import {
 } from '@maw/ui-lib';
 import config from '@/config';
 import { useAchievementsStore } from '@/features/achievements/stores';
+import { useMonitoringStore } from '@/features/monitoring/stores';
 import {
   usePainPreferencesStore,
   useRuntimeStore,
@@ -23,6 +24,7 @@ import { StoreInspector } from './StoreInspector';
 
 export function DebugPage() {
   const runtime = useRuntimeStore();
+  const monitoring = useMonitoringStore();
   const painPreferences = usePainPreferencesStore();
   const achievements = useAchievementsStore();
   const userPreferences = useUserPreferencesStore();
@@ -74,6 +76,7 @@ export function DebugPage() {
           <TabsContent value="stores">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
               <StoreInspector title="Runtime Store" data={runtime} />
+              <StoreInspector title="Monitoring Store" data={monitoring} />
               <StoreInspector
                 title="Pain Preferences Store"
                 data={painPreferences}
@@ -88,7 +91,7 @@ export function DebugPage() {
           </TabsContent>
 
           <TabsContent value="events">
-            <div className="max-w-2xl mx-auto">
+            <div className="max-w-4xl mx-auto">
               <EventTester />
             </div>
           </TabsContent>

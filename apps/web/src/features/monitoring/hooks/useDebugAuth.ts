@@ -1,9 +1,10 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { useZodFormValidator } from '@/hooks';
 import { useRouter } from '@/i18n/navigation';
+import { useMonitoringStore } from '../stores';
 import { type DebugAuthFormData, getDebugAuthFormDataSchema } from '../schemas';
 
 const DEBUG_PASSWORD = 'idontwanttobug';
@@ -15,7 +16,7 @@ export const debugAuthFormDefaultValues: DebugAuthFormData = {
 
 export function useDebugAuth() {
   const router = useRouter();
-  const [isAuthorized, setIsAuthorized] = useState(false);
+  const { isAuthorized, setIsAuthorized } = useMonitoringStore();
   const resolver = useZodFormValidator(getDebugAuthFormDataSchema);
   const methods = useForm<DebugAuthFormData>({
     resolver,
@@ -27,7 +28,7 @@ export function useDebugAuth() {
     if (authorized) {
       setIsAuthorized(true);
     }
-  }, []);
+  }, [setIsAuthorized]);
 
   const onLogin = async (data: DebugAuthFormData) => {
     if (data.password === DEBUG_PASSWORD) {
