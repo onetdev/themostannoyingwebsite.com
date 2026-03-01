@@ -1,5 +1,5 @@
 import { useEffect, useRef } from 'react';
-import { eventBus } from '../eventBus';
+import { eventBus } from '../event-bus';
 
 export function useEvent<K extends keyof AppEvents>(
   type: K,

@@ -11,7 +11,7 @@ import {
 } from 'ogl';
 import { useEffect, useRef } from 'react';
 import { useAppConfig } from '@/contexts/AppConfig';
-import { emit } from '@/eventBus';
+import { emit } from '@/event-bus';
 import { MAZE_24 } from './data';
 import { texturedFragment, texturedVertex } from './shaders';
 import { getTextures } from './textures';

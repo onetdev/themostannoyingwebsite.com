@@ -1,5 +1,7 @@
-export type UserEvents = {
-  'admin-auth:login': {
-    username: string;
-  };
-};
+declare global {
+  interface AppEvents {
+    'admin-auth:login': {
+      username: string;
+    };
+  }
+}

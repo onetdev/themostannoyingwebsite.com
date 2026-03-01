@@ -2,7 +2,7 @@
 
 import { type Point2d, random, randomInt } from '@maw/utils/math';
 import { useEffect, useState } from 'react';
-import { emit } from '@/eventBus';
+import { emit } from '@/event-bus';
 
 // TODO: Maybe we could do a horror version like this:
 // https://www.tiktok.com/@jackandaxter/video/7421659495606144262

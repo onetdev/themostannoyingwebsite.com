@@ -3,7 +3,7 @@
 import { useTranslations } from 'next-intl';
 import { useEffect } from 'react';
 import { useBeforeUnload } from 'react-use';
-import { emit } from '@/eventBus';
+import { emit } from '@/event-bus';
 import { usePainPreferencesStore } from '@/stores';
 
 export function usePreventLeaving() {

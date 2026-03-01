@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { emit } from '@/eventBus';
+import { emit } from '@/event-bus';
 import { usePathname } from '@/i18n/navigation';
 import { useRuntimeStore } from '@/stores';
 

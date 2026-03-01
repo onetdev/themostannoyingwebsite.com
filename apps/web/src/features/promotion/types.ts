@@ -1,5 +1,7 @@
-export type PromotionEvent = {
-  'wof:spin-completed': {
-    prize: string;
-  };
-};
+declare global {
+  interface AppEvents {
+    'wof:spin-completed': {
+      prize: string;
+    };
+  }
+}

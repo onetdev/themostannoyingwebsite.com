@@ -3,7 +3,7 @@
 import { PageHeadline } from '@maw/ui-lib';
 import { useTranslations } from 'next-intl';
 import { useCallback, useState } from 'react';
-import { emit } from '@/eventBus';
+import { emit } from '@/event-bus';
 import type {
   BillingCycle,
   SubscriptionFeature,
