@@ -10,10 +10,10 @@ import {
   useNavigationHistoryClutter,
   usePreventLeaving,
 } from '@/features/interferrer/hooks';
+import { useEventHistoryListener } from '@/features/monitoring/hooks';
 import { NewsletterModalTrigger } from '@/features/newsletter/components';
 import { useAdblockerDetector } from '@/features/promotion/hooks';
 import { NotificationPromptTrigger } from '@/features/user/components';
-import { useEventHistoryListener } from '@/hooks';
 import { usePainPreferencesStore, useUserGrantsStore } from '@/stores';
 
 export function ClientPainContainer({ children }: PropsWithChildren) {

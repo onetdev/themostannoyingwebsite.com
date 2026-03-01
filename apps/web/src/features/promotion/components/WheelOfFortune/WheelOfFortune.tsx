@@ -10,11 +10,14 @@ import {
 import { useTranslations } from 'next-intl';
 import { useState } from 'react';
 
+import { useEvent } from '@/hooks';
 import { ModalContent } from './ModalContent';
 
 export function WheelOfFortune() {
   const [isOpen, setOpen] = useState(false);
   const t = useTranslations();
+
+  useEvent('ui:modal:dismiss-signaled', () => setOpen(false), isOpen);
 
   return (
     <>

@@ -13,12 +13,16 @@ import {
 } from '@maw/ui-lib';
 import { useTranslations } from 'next-intl';
 import { useCallback, useState } from 'react';
+
+import { useEvent } from '@/hooks';
 import { useAchievementsStore } from '../stores';
 
 export function ResetAchievementsButton() {
   const t = useTranslations();
   const { achievements, resetAchievements } = useAchievementsStore();
   const [isOpen, setIsOpen] = useState(false);
+
+  useEvent('ui:modal:dismiss-signaled', () => setIsOpen(false), isOpen);
 
   const onConfirm = useCallback(() => {
     resetAchievements();

@@ -16,6 +16,7 @@ import { random } from '@maw/utils/math';
 import { useMessages, useTranslations } from 'next-intl';
 import { useMemo, useState } from 'react';
 
+import { useEvent } from '@/hooks/useEvent';
 import { useNewsletterForm } from '../hooks';
 
 export interface NewsletterModalProps {
@@ -40,6 +41,8 @@ export function NewsletterModal({
     formState: { errors, isValid },
     onSubmit,
   } = useNewsletterForm();
+
+  useEvent('ui:modal:dismiss-signaled', () => onDismiss?.(), visible);
 
   const confirmPool = useMemo(() => {
     const items = Object.keys(messages.newsletter.modal.confirmations).map(

@@ -10,6 +10,8 @@ import {
 } from '@maw/ui-lib';
 import { useTranslations } from 'next-intl';
 
+import { useEvent } from '@/hooks';
+
 type ManualModalProps = {
   visible?: boolean;
   onDismiss: () => void;
@@ -20,6 +22,8 @@ export function NotificationManualModal({
   onDismiss,
 }: ManualModalProps) {
   const t = useTranslations();
+
+  useEvent('ui:modal:dismiss-signaled', onDismiss, visible);
 
   return (
     <Dialog open={visible} onOpenChange={(open) => !open && onDismiss()}>

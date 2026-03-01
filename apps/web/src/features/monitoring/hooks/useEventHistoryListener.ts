@@ -1,7 +1,7 @@
 'use client';
 
 import { useMonitoringStore } from '@/features/monitoring/stores';
-import { useAllEvents } from './useAllEvents';
+import { useAllEvents } from '@/hooks';
 
 export function useEventHistoryListener() {
   const isHistoryEnabled = useMonitoringStore(

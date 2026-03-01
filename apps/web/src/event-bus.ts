@@ -10,11 +10,11 @@ if (typeof window !== 'undefined') {
     window.maw = {};
   }
 
-  if (window.maw._emit !== undefined) {
+  if (window.maw._emit === undefined) {
     window.maw._emit = emit;
   }
 
-  if (window.maw._on !== undefined) {
+  if (window.maw._on === undefined) {
     window.maw._on = on;
   }
 }

@@ -7,7 +7,7 @@ import HTMLReactParser from 'html-react-parser';
 import { useLocale, useMessages, useTranslations } from 'next-intl';
 import { useEffect, useMemo, useState } from 'react';
 import { SearchForm } from '@/features/content/components';
-import { useEvent } from '@/hooks/useEvent';
+import { useEvent } from '@/hooks';
 import { Link } from '@/i18n/navigation';
 import { usePainPreferencesStore } from '@/stores';
 import { useAppArticleService } from '../hooks';

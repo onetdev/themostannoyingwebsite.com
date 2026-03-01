@@ -2,7 +2,7 @@
 
 import { useCallback } from 'react';
 import { emit } from '@/event-bus';
-import { useEvent } from '@/hooks/useEvent';
+import { useEvent } from '@/hooks';
 import { AchievementToastManager } from '../components/AchievementToastManager';
 import { useAchievementBankService } from '../hooks';
 import { useAchievementsStore } from '../stores';
