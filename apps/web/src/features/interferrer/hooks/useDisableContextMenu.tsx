@@ -11,7 +11,7 @@ export function useDisableContextMenu() {
   const handleContextMenu = useCallback(
     (e: MouseEvent) => {
       e.preventDefault();
-      emit('CONTEXT_MENU_ATTEMPT');
+      emit('context-menu:triggered');
       alert(t('contextMenu.disabled'));
     },
     [t],

@@ -15,7 +15,7 @@ export function usePreventLeaving() {
   useEffect(() => {
     if (exitPrompt) {
       const handleBeforeUnload = () => {
-        emit('EXIT_PROMPT_TRIGGERED');
+        emit('exit-prompt:shown');
       };
       window.addEventListener('beforeunload', handleBeforeUnload);
       return () =>

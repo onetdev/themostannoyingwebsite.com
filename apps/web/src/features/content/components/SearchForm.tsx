@@ -51,7 +51,7 @@ export function SearchForm({
 
     // If we are already on the search page, we will also need to dispatch
     // the search event
-    emit('SEARCH', { query });
+    emit('global-search:query', { query });
   };
 
   return (

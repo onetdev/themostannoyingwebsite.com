@@ -21,7 +21,7 @@ export const AchievementToastManager = () => {
     (state) => state.flags.achievementNotifications,
   );
 
-  useEvent('ACHIEVEMENT_UNLOCKED', (payload) => {
+  useEvent('achievement:unlocked', (payload) => {
     const { achievementId } = payload || {};
     if (!achievementId || !notificationsEnabled) return;
 
@@ -38,7 +38,7 @@ export const AchievementToastManager = () => {
     );
   });
 
-  useEvent('ACHIEVEMENT_PROGRESS_UPDATED', (payload) => {
+  useEvent('achievement:progress-updated', (payload) => {
     const { achievementId, progress, lastNotifiedAt } = payload || {};
     if (!achievementId || !notificationsEnabled) return;
 

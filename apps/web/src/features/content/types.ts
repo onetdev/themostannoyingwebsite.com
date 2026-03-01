@@ -5,7 +5,7 @@ export const DI = {
 };
 
 export type ContentEvent = {
-  SEARCH: {
+  'global-search:query': {
     query: string;
   };
 };

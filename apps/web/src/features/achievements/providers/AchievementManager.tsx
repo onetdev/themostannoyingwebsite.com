@@ -26,9 +26,9 @@ export const AchievementManager = () => {
       );
 
       if (result.newlyAchieved) {
-        emit('ACHIEVEMENT_UNLOCKED', { achievementId });
+        emit('achievement:unlocked', { achievementId });
       } else {
-        emit('ACHIEVEMENT_PROGRESS_UPDATED', {
+        emit('achievement:progress-updated', {
           achievementId,
           progress: result.progress,
           lastNotifiedAt: result.lastNotifiedAt,
@@ -45,12 +45,12 @@ export const AchievementManager = () => {
         return;
       }
 
-      emit('ACHIEVEMENT_UNLOCKED', { achievementId });
+      emit('achievement:unlocked', { achievementId });
     },
     [completeAchievement],
   );
 
-  useEvent('MAZE_STEP', (event) => {
+  useEvent('screensaver:maze:stepped', (event) => {
     handleProgression('maze-explorer');
 
     if (event.passedSpecialCell) {
@@ -58,7 +58,7 @@ export const AchievementManager = () => {
     }
   });
 
-  useEvent('BOUNCY_LOGO_BOUNCE', (event) => {
+  useEvent('screensaver:bouncy-logo:bounced', (event) => {
     handleProgression('bouncing-logo-fanatic');
 
     if (event.isPerfectCorner) {
@@ -66,33 +66,31 @@ export const AchievementManager = () => {
     }
   });
 
-  useEvent('SUBSCRIPTION_PACKAGE_SELECTED', () =>
+  useEvent('subscription:package-selected', () =>
     handleSingleUnlock('first-package-selection'),
   );
 
-  useEvent('SEARCH', () => handleSingleUnlock('first-search'));
+  useEvent('global-search:query', () => handleSingleUnlock('first-search'));
 
-  useEvent('CONTEXT_MENU_ATTEMPT', () => {
+  useEvent('context-menu:triggered', () => {
     handleProgression('right-click-rebel');
   });
 
-  useEvent('TEXT_COPIED', () => {
+  useEvent('global-text:copied', () => {
     handleProgression('copy-paste-criminal');
   });
 
-  useEvent('EXIT_PROMPT_TRIGGERED', () => handleSingleUnlock('escape-artist'));
+  useEvent('exit-prompt:shown', () => handleSingleUnlock('escape-artist'));
 
-  useEvent('DEAD_PIXEL_CLICK_ATTEMPT', () =>
-    handleSingleUnlock('dead-pixel-hunter'),
-  );
+  useEvent('dead-pixel:clicked', () => handleSingleUnlock('dead-pixel-hunter'));
 
-  useEvent('NAVIGATION', () => handleSingleUnlock('first-visit'));
+  useEvent('navigation:changed', () => handleSingleUnlock('first-visit'));
 
-  useEvent('WHEEL_OF_FORTUNE_SPIN_COMPLETE', () =>
+  useEvent('wof:spin-completed', () =>
     handleSingleUnlock('wheel-of-fortune-spin'),
   );
 
-  useEvent('ADMIN_LOGIN_SUCCESS', () => handleSingleUnlock('admin-login'));
+  useEvent('admin-auth:login', () => handleSingleUnlock('admin-login'));
 
   return <AchievementToastManager />;
 };

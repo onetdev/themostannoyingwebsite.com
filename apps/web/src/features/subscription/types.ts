@@ -16,7 +16,7 @@ export interface SubscriptionPlansService {
 }
 
 export type SubscriptionEvent = {
-  SUBSCRIPTION_PACKAGE_SELECTED: {
+  'subscription:package-selected': {
     packageId: string;
   };
 };

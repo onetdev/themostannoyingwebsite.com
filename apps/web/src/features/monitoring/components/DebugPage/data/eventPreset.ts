@@ -1,51 +1,51 @@
 type EventPreset = {
-  type: string;
+  type: keyof AppEvents;
   name?: string;
   payload: unknown;
 };
 
 export const eventPresets: EventPreset[] = [
-  { type: 'NAVIGATION', payload: { path: '/debug' } },
-  { type: 'SEARCH', payload: { query: 'annoying' } },
+  { type: 'navigation:changed', payload: { path: '/debug' } },
+  { type: 'global-search:query', payload: { query: 'annoying' } },
   {
-    type: 'SUBSCRIPTION_PACKAGE_SELECTED',
+    type: 'subscription:package-selected',
     payload: { packageId: 'premium' },
   },
-  { type: 'CONTEXT_MENU_ATTEMPT', payload: {} },
-  { type: 'TEXT_COPIED', payload: {} },
-  { type: 'DEAD_PIXEL_CLICK_ATTEMPT', payload: {} },
-  { type: 'EXIT_PROMPT_TRIGGERED', payload: {} },
+  { type: 'context-menu:triggered', payload: {} },
+  { type: 'global-text:copied', payload: {} },
+  { type: 'dead-pixel:clicked', payload: {} },
+  { type: 'exit-prompt:shown', payload: {} },
   {
-    type: 'WHEEL_OF_FORTUNE_SPIN_COMPLETE',
+    type: 'wof:spin-completed',
     payload: { prize: 'Absolutely Nothing' },
   },
-  { type: 'ADMIN_LOGIN_SUCCESS', payload: { username: 'admin' } },
+  { type: 'admin-auth:login', payload: { username: 'admin' } },
   {
-    type: 'MAZE_STEP',
-    name: 'MAZE_STEP (normal)',
+    type: 'screensaver:maze:stepped',
+    name: 'screensaver:maze:stepped (normal)',
     payload: { passedSpecialCell: false },
   },
   {
-    type: 'MAZE_STEP',
-    name: 'MAZE_STEP (special cell)',
+    type: 'screensaver:maze:stepped',
+    name: 'screensaver:maze:stepped (special cell)',
     payload: { passedSpecialCell: true },
   },
   {
-    type: 'BOUNCY_LOGO_BOUNCE',
-    name: 'BOUNCY_LOGO_BOUNCE (normal)',
+    type: 'screensaver:bouncy-logo:bounced',
+    name: 'screensaver:bouncy-logo:bounced (normal)',
     payload: { isPerfectCorner: false },
   },
   {
-    type: 'BOUNCY_LOGO_BOUNCE',
-    name: 'BOUNCY_LOGO_BOUNCE (perfect corner)',
+    type: 'screensaver:bouncy-logo:bounced',
+    name: 'screensaver:bouncy-logo:bounced (perfect corner)',
     payload: { isPerfectCorner: true },
   },
   {
-    type: 'ACHIEVEMENT_UNLOCKED',
+    type: 'achievement:unlocked',
     payload: { achievementId: 'first-visit' },
   },
   {
-    type: 'ACHIEVEMENT_PROGRESS_UPDATED',
+    type: 'achievement:progress-updated',
     payload: { achievementId: 'maze-explorer', progress: 5 },
   },
 ];

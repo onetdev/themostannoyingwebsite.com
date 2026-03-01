@@ -15,7 +15,7 @@ export const useNavigationStats = () => {
   useEffect(() => {
     setNavigationCount((prevCount) => prevCount + 1);
     incrementNavigationCount();
-    emit('NAVIGATION', { path: pathName });
+    emit('navigation:changed', { path: pathName });
   }, [incrementNavigationCount, pathName]);
 
   return navigationCount;

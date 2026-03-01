@@ -56,7 +56,7 @@ export function useWheelOfFortune() {
     setState('completed');
 
     if (prize) {
-      emit('WHEEL_OF_FORTUNE_SPIN_COMPLETE', {
+      emit('wof:spin-completed', {
         prize: prize.text,
       });
     }

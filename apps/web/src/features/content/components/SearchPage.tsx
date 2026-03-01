@@ -39,7 +39,7 @@ export function SearchPage() {
     return items;
   }, [messages.search.topSearcheVariants, t]);
 
-  useEvent('SEARCH', (event) => {
+  useEvent('global-search:query', (event) => {
     setQuery(event.query ?? '');
   });
 

@@ -19,10 +19,10 @@ export interface AchievementBankService {
 }
 
 export type AchievementsEvent = {
-  ACHIEVEMENT_UNLOCKED: {
+  'achievement:unlocked': {
     achievementId: string;
   };
-  ACHIEVEMENT_PROGRESS_UPDATED: {
+  'achievement:progress-updated': {
     achievementId: string;
     progress: number;
     lastNotifiedAt?: number;

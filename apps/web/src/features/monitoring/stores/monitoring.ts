@@ -1,5 +1,4 @@
 import { create } from 'zustand';
-import type { AppEvents } from '@/eventBus';
 
 export interface MonitoringState {
   eventHistory: {

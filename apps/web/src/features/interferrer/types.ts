@@ -1,3 +1,3 @@
 export type InterferrerEvent = {
-  CONTEXT_MENU_ATTEMPT: never;
+  'context-menu:triggered': never;
 };

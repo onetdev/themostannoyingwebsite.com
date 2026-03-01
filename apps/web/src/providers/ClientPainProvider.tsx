@@ -33,7 +33,7 @@ export function ClientPainContainer({ children }: PropsWithChildren) {
     syncPermissions();
   }, [syncPermissions]);
 
-  const handleCopy = () => emit('TEXT_COPIED');
+  const handleCopy = () => emit('global-text:copied');
   const copyMarkerText = {
     readMoreAt: t('app.readMoreAt'),
   };

@@ -2,7 +2,7 @@
 
 import { useLogger } from '@maw/logger';
 import { useForm } from 'react-hook-form';
-import { type AppEvents, emit } from '@/eventBus';
+import { emit } from '@/eventBus';
 import { useZodFormValidator } from '@/hooks';
 import { type EventTestFormData, getEventTestFormDataSchema } from '../schemas';
 

@@ -18,24 +18,3 @@ export const DI = {
   ...DIDonation,
   ...DISubscription,
 };
-
-export type PickEventPayload<
-  T1 extends { type: string; payload?: unknown },
-  T2 extends string,
-> = Extract<T1, { type: T2 }>['payload'];
-
-export type AppEvent =
-  | {
-      type: 'NAVIGATION';
-      payload: {
-        path: string;
-      };
-    }
-  | {
-      type: 'TEXT_COPIED';
-      payload?: never;
-    }
-  | {
-      type: 'EXIT_PROMPT_TRIGGERED';
-      payload?: never;
-    };

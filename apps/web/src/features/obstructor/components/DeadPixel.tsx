@@ -30,7 +30,7 @@ export function DeadPixel() {
           aria-hidden
           data-testid="dead-pixel"
           key={`${point.x}-${point.y}`}
-          onClick={() => emit('DEAD_PIXEL_CLICK_ATTEMPT')}
+          onClick={() => emit('dead-pixel:clicked')}
           style={{ top: point.y, left: point.x }}
           className="fixed z-50 size-px bg-black select-none dark:bg-white"
         />

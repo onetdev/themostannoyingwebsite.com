@@ -328,7 +328,7 @@ export function MazeScreensaver() {
             MAZE_24[moveState.cz]?.[moveState.cx - 1] === 2 ||
             MAZE_24[moveState.cz]?.[moveState.cx + 1] === 2;
 
-          emit('MAZE_STEP', {
+          emit('screensaver:maze:stepped', {
             passedSpecialCell: isSpecial,
           });
         }

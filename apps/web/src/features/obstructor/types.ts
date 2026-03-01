@@ -1,9 +1,9 @@
 export type ObstructorEvent = {
-  DEAD_PIXEL_CLICK_ATTEMPT: never;
-  MAZE_STEP: {
+  'dead-pixel:clicked': never;
+  'screensaver:maze:stepped': {
     passedSpecialCell: boolean;
   };
-  BOUNCY_LOGO_BOUNCE: {
+  'screensaver:bouncy-logo:bounced': {
     isPerfectCorner: boolean;
   };
 };

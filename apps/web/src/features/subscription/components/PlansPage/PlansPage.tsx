@@ -49,7 +49,7 @@ export function PlansPage({
 
   const handleSelectPlan = (key: string) => {
     setSelectedPlanKey(key);
-    emit('SUBSCRIPTION_PACKAGE_SELECTED', {
+    emit('subscription:package-selected', {
       packageId: key,
     });
   };

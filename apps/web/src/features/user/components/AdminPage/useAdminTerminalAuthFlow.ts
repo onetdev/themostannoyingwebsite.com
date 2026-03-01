@@ -48,7 +48,7 @@ export function useAdminTerminalAuthFlow(
       return;
     }
 
-    emit('ADMIN_LOGIN_SUCCESS', {
+    emit('admin-auth:login', {
       username: userMatch.login,
     });
 

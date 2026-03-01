@@ -1,5 +1,5 @@
 export type UserEvents = {
-  ADMIN_LOGIN_SUCCESS: {
+  'admin-auth:login': {
     username: string;
   };
 };

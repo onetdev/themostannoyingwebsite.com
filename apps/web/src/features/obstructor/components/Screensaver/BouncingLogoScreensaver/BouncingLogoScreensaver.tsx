@@ -79,7 +79,7 @@ export function BouncingLogoScreensaver() {
       }
 
       if (hitX || hitY) {
-        emit('BOUNCY_LOGO_BOUNCE', {
+        emit('screensaver:bouncy-logo:bounced', {
           isPerfectCorner: hitX && hitY,
         });
 
