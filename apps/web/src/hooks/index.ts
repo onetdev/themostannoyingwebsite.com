@@ -1,6 +1,7 @@
 export * from './useAppService';
 export * from './useAudio';
 export * from './useDocumentVisibilityListener';
+export * from './useEventHistoryListener';
 export * from './useNavigationStats';
 export * from './useReducedMotionListener';
 export * from './useScrollDistanceTrigger';

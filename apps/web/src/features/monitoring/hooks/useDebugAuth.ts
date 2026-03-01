@@ -4,8 +4,8 @@ import { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { useZodFormValidator } from '@/hooks';
 import { useRouter } from '@/i18n/navigation';
-import { useMonitoringStore } from '../stores';
 import { type DebugAuthFormData, getDebugAuthFormDataSchema } from '../schemas';
+import { useMonitoringStore } from '../stores';
 
 const DEBUG_PASSWORD = 'idontwanttobug';
 const STORAGE_KEY = 'maw-debug-authorized';

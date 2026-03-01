@@ -2,7 +2,7 @@
 
 import { useLogger } from '@maw/logger';
 import { useForm } from 'react-hook-form';
-import { useEventBus } from '@/contexts/EventBusContext';
+import { type AppEvents, emit } from '@/eventBus';
 import { useZodFormValidator } from '@/hooks';
 import { type EventTestFormData, getEventTestFormDataSchema } from '../schemas';
 
@@ -13,7 +13,6 @@ export const signupFormDefaultValues: EventTestFormData = {
 
 export function useEventTestForm() {
   const logger = useLogger().getSubLogger({ name: 'useEventTesterForm' });
-  const { dispatch } = useEventBus();
   const resolver = useZodFormValidator(getEventTestFormDataSchema);
   const methods = useForm<EventTestFormData>({
     resolver,
@@ -23,11 +22,9 @@ export function useEventTestForm() {
   const onSubmit = async (data: EventTestFormData) => {
     try {
       const parsedPayload = data.payload ? JSON.parse(data.payload) : undefined;
-      dispatch(data.eventType, parsedPayload);
+      emit(data.eventType as keyof AppEvents, parsedPayload);
     } catch (err: unknown) {
-      logger.warn(err, 'JSON payload send error, trying empty send');
-      // If it's not valid JSON, just send it as a string or empty
-      dispatch(data.eventType);
+      logger.error(err, 'Failed to emit message');
     }
   };
 

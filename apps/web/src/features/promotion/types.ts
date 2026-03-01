@@ -1,6 +1,5 @@
 export type PromotionEvent = {
-  type: 'WHEEL_OF_FORTUNE_SPIN_COMPLETE';
-  payload: {
+  WHEEL_OF_FORTUNE_SPIN_COMPLETE: {
     prize: string;
   };
 };

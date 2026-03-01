@@ -3,13 +3,11 @@
 import { toast } from '@maw/ui-lib';
 import { useTranslations } from 'next-intl';
 import config from '@/config';
-import { useEventBusListener } from '@/contexts/EventBusContext';
 import { useAudio } from '@/hooks';
+import { useEvent } from '@/hooks/useEvent';
 import { usePainPreferencesStore } from '@/stores';
-import type { PickEventPayload } from '@/types';
 import { useAchievementBankService } from '../hooks';
 import { useAchievementsStore } from '../stores';
-import type { AchievementsEvent } from '../types';
 import { AchievementToast } from './AchievementToast';
 
 export const AchievementToastManager = () => {
@@ -23,9 +21,7 @@ export const AchievementToastManager = () => {
     (state) => state.flags.achievementNotifications,
   );
 
-  useEventBusListener<
-    PickEventPayload<AchievementsEvent, 'ACHIEVEMENT_UNLOCKED'>
-  >('ACHIEVEMENT_UNLOCKED', ({ payload }) => {
+  useEvent('ACHIEVEMENT_UNLOCKED', (payload) => {
     const { achievementId } = payload || {};
     if (!achievementId || !notificationsEnabled) return;
 
@@ -42,9 +38,7 @@ export const AchievementToastManager = () => {
     );
   });
 
-  useEventBusListener<
-    PickEventPayload<AchievementsEvent, 'ACHIEVEMENT_PROGRESS_UPDATED'>
-  >('ACHIEVEMENT_PROGRESS_UPDATED', ({ payload }) => {
+  useEvent('ACHIEVEMENT_PROGRESS_UPDATED', (payload) => {
     const { achievementId, progress, lastNotifiedAt } = payload || {};
     if (!achievementId || !notificationsEnabled) return;
 

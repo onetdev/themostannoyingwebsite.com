@@ -7,7 +7,5 @@ const createJestConfig = nextJest({
 
 export default createJestConfig({
   ...config,
-  transformIgnorePatterns: [
-    '/node_modules/(?!emittery)/',
-  ],
+  transformIgnorePatterns: ['/node_modules/(?!emittery)/'],
 });

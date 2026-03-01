@@ -5,7 +5,6 @@ import { ThemeProvider } from 'next-themes';
 import type { PropsWithChildren } from 'react';
 import { AppConfigProvider } from '@/contexts/AppConfig';
 import { DependencyContainer } from '@/contexts/DependencyContainer';
-import { EventBusProvider } from '@/contexts/EventBusContext';
 import { getDependencyContainer } from '@/dependency-container';
 import { AchievementManager } from '@/features/achievements/providers';
 import { ClientPainContainer } from '@/providers/ClientPainProvider';
@@ -26,15 +25,13 @@ export function ClientRootProviderContainer({
     <AppConfigProvider config={appConfig}>
       <TooltipProvider>
         <DependencyContainer value={{ container: DiContainer }}>
-          <EventBusProvider>
-            <ThemeProvider defaultTheme="dark" enableColorScheme enableSystem>
-              <ClientNavigationConfigurator>
-                <Toaster />
-                <AchievementManager />
-                <ClientPainContainer>{children}</ClientPainContainer>
-              </ClientNavigationConfigurator>
-            </ThemeProvider>
-          </EventBusProvider>
+          <ThemeProvider defaultTheme="dark" enableColorScheme enableSystem>
+            <ClientNavigationConfigurator>
+              <Toaster />
+              <AchievementManager />
+              <ClientPainContainer>{children}</ClientPainContainer>
+            </ClientNavigationConfigurator>
+          </ThemeProvider>
         </DependencyContainer>
       </TooltipProvider>
     </AppConfigProvider>

@@ -18,18 +18,13 @@ export interface AchievementBankService {
   getAchievementById(id: string): AchievementDefinition | undefined;
 }
 
-export type AchievementsEvent =
-  | {
-      type: 'ACHIEVEMENT_UNLOCKED';
-      payload: {
-        achievementId: string;
-      };
-    }
-  | {
-      type: 'ACHIEVEMENT_PROGRESS_UPDATED';
-      payload: {
-        achievementId: string;
-        progress: number;
-        lastNotifiedAt?: number;
-      };
-    };
+export type AchievementsEvent = {
+  ACHIEVEMENT_UNLOCKED: {
+    achievementId: string;
+  };
+  ACHIEVEMENT_PROGRESS_UPDATED: {
+    achievementId: string;
+    progress: number;
+    lastNotifiedAt?: number;
+  };
+};

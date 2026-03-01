@@ -1,22 +1,20 @@
 import { useTranslations } from 'next-intl';
 import { useCallback, useEffect } from 'react';
-
-import { useEventBus } from '@/contexts/EventBusContext';
+import { emit } from '@/eventBus';
 import { usePainPreferencesStore } from '@/stores';
 
 export function useDisableContextMenu() {
   const t = useTranslations();
-  const { dispatch } = useEventBus();
   const isDisabled = usePainPreferencesStore(
     (state) => state.flags.disableContextMenu,
   );
   const handleContextMenu = useCallback(
     (e: MouseEvent) => {
       e.preventDefault();
-      dispatch('CONTEXT_MENU_ATTEMPT');
+      emit('CONTEXT_MENU_ATTEMPT');
       alert(t('contextMenu.disabled'));
     },
-    [dispatch, t],
+    [t],
   );
 
   useEffect(() => {

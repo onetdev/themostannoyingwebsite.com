@@ -1,19 +1,29 @@
 import { create } from 'zustand';
+import type { AppEvents } from '@/eventBus';
 
 export interface MonitoringState {
-  eventHistory: EventBusEvent<unknown>[];
+  eventHistory: {
+    timestamp: number;
+    type: keyof AppEvents;
+    payload: AppEvents[keyof AppEvents];
+  }[];
   isEventHistoryEnabled: boolean;
   isAuthorized: boolean;
 }
 
 export interface MonitoringStateActions {
-  pushEventToHistory: (event: EventBusEvent<unknown>) => void;
+  pushEventToHistory: (
+    type: keyof AppEvents,
+    payload: AppEvents[keyof AppEvents],
+  ) => void;
   setIsEventHistoryEnabled: (isHistoryEnabled: boolean) => void;
   clearEventHistory: () => void;
   setIsAuthorized: (isAuthorized: boolean) => void;
 }
 
-export interface MonitoringStore extends MonitoringState, MonitoringStateActions {}
+export interface MonitoringStore
+  extends MonitoringState,
+    MonitoringStateActions {}
 
 const initialState: MonitoringState = {
   eventHistory: [],
@@ -23,11 +33,15 @@ const initialState: MonitoringState = {
 
 export const useMonitoringStore = create<MonitoringStore>((set) => ({
   ...initialState,
-  pushEventToHistory: (event) =>
+  pushEventToHistory: (type, payload) =>
     set((state) => ({
-      eventHistory: [event, ...state.eventHistory].slice(0, 100),
+      eventHistory: [
+        { type, payload, timestamp: Date.now() },
+        ...state.eventHistory,
+      ].slice(0, 100),
     })),
-  setIsEventHistoryEnabled: (isHistoryEnabled) => set({ isEventHistoryEnabled: isHistoryEnabled }),
+  setIsEventHistoryEnabled: (isHistoryEnabled) =>
+    set({ isEventHistoryEnabled: isHistoryEnabled }),
   clearEventHistory: () => set({ eventHistory: [] }),
   setIsAuthorized: (isAuthorized) => set({ isAuthorized }),
 }));

@@ -5,8 +5,7 @@ export const DI = {
 };
 
 export type ContentEvent = {
-  type: 'SEARCH';
-  payload: {
+  SEARCH: {
     query: string;
   };
 };

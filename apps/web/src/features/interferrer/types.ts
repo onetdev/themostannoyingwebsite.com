@@ -1,4 +1,3 @@
 export type InterferrerEvent = {
-  type: 'CONTEXT_MENU_ATTEMPT';
-  payload?: never;
+  CONTEXT_MENU_ATTEMPT: never;
 };

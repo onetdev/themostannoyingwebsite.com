@@ -7,16 +7,13 @@ import {
 } from '@maw/utils/math';
 import { useTranslations } from 'next-intl';
 import { useCallback, useMemo, useState } from 'react';
-
-import { useEventBus } from '@/contexts/EventBusContext';
+import { emit } from '@/eventBus';
 import type { Item } from '../components/WheelOfFortune/DynamicWheelSvg';
-import type { PromotionEvent } from '../types';
 
 export type AnimatedWheelState = 'ready' | 'spinning' | 'completed';
 
 export function useWheelOfFortune() {
   const t = useTranslations();
-  const { dispatch } = useEventBus();
   const hueStart = 300; // random(0,360);
   const [state, setState] = useState<AnimatedWheelState>('ready');
   const [prize, setPrize] = useState<(Item & { index: number }) | undefined>();
@@ -59,11 +56,11 @@ export function useWheelOfFortune() {
     setState('completed');
 
     if (prize) {
-      dispatch<PromotionEvent['payload']>('WHEEL_OF_FORTUNE_SPIN_COMPLETE', {
+      emit('WHEEL_OF_FORTUNE_SPIN_COMPLETE', {
         prize: prize.text,
       });
     }
-  }, [setState, state, prize, dispatch]);
+  }, [state, prize]);
 
   return {
     items,

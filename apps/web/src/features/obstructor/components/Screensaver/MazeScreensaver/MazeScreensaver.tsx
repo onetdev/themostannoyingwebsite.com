@@ -11,8 +11,7 @@ import {
 } from 'ogl';
 import { useEffect, useRef } from 'react';
 import { useAppConfig } from '@/contexts/AppConfig';
-import { useEventBus } from '@/contexts/EventBusContext';
-import type { ObstructorEvent } from '../../../types';
+import { emit } from '@/eventBus';
 import { MAZE_24 } from './data';
 import { texturedFragment, texturedVertex } from './shaders';
 import { getTextures } from './textures';
@@ -27,7 +26,6 @@ type Direction = 'N' | 'S' | 'E' | 'W';
 // Windows 95 3D Maze inspired raycasting screensaver
 export function MazeScreensaver() {
   const config = useAppConfig();
-  const { dispatch } = useEventBus();
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
   useEffect(() => {
@@ -330,7 +328,7 @@ export function MazeScreensaver() {
             MAZE_24[moveState.cz]?.[moveState.cx - 1] === 2 ||
             MAZE_24[moveState.cz]?.[moveState.cx + 1] === 2;
 
-          dispatch<ObstructorEvent['payload']>('MAZE_STEP', {
+          emit('MAZE_STEP', {
             passedSpecialCell: isSpecial,
           });
         }
@@ -351,7 +349,7 @@ export function MazeScreensaver() {
       cancelAnimationFrame(rafId);
       window.removeEventListener('resize', resize);
     };
-  }, [config.obstructor.assets, dispatch]);
+  }, [config.obstructor.assets]);
 
   return <canvas ref={canvasRef} />;
 }

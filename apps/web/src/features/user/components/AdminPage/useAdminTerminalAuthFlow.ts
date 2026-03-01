@@ -3,9 +3,7 @@
 import { sleep } from '@maw/utils/promise';
 import { useTranslations } from 'next-intl';
 import { useAsync } from 'react-use';
-
-import { useEventBus } from '@/contexts/EventBusContext';
-import type { UserEvent } from '../../types';
+import { emit } from '@/eventBus';
 import type { useAdminTerminal } from './useAdminTerminal';
 
 // I know this is just a gag, but having this here is feels wrong on
@@ -17,7 +15,6 @@ export function useAdminTerminalAuthFlow(
   onEnd: (authed: boolean) => void,
 ) {
   const t = useTranslations('admin.terminal');
-  const { dispatch } = useEventBus();
 
   useAsync(async () => {
     term.reset();
@@ -51,7 +48,7 @@ export function useAdminTerminalAuthFlow(
       return;
     }
 
-    dispatch<UserEvent['payload']>('ADMIN_LOGIN_SUCCESS', {
+    emit('ADMIN_LOGIN_SUCCESS', {
       username: userMatch.login,
     });
 
