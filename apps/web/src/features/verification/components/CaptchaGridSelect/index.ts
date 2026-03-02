@@ -1,1 +1,1 @@
-export { CaptchaGridSelect } from './CaptchaGridSelect';
+export * from './CaptchaGridSelect';

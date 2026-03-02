@@ -9,7 +9,7 @@ import {
   Input,
 } from '@maw/ui-lib';
 import { useFormContext } from 'react-hook-form';
-import { CaptchaEmoji } from './CaptchaEmoji/CaptchaEmoji';
+import { CaptchaEmoji } from './CaptchaEmoji';
 
 export type CaptchaEmojiFieldProps = {
   className?: string;

@@ -8,13 +8,12 @@ import {
   FieldLabel,
 } from '@maw/ui-lib';
 import { useFormContext } from 'react-hook-form';
-import { CaptchaGridSelect } from './CaptchaGridSelect/CaptchaGridSelect';
+import { CaptchaTilePuzzle } from '.';
 
-export type CaptchaGridSelectFieldProps = {
+export type CaptchaTitlePuzzleFieldProps = {
   fieldName?: string;
-  imageSrc: string;
+  imageSrc?: string;
   required?: boolean;
-  prompt: string;
   text: {
     label: string;
     hint: string;
@@ -22,13 +21,12 @@ export type CaptchaGridSelectFieldProps = {
   };
 };
 
-export function CaptchaGridSelectField({
+export function CaptchaTitlePuzzleField({
   fieldName = 'captcha',
   imageSrc,
   required,
-  prompt,
   text,
-}: CaptchaGridSelectFieldProps) {
+}: CaptchaTitlePuzzleFieldProps) {
   const {
     register,
     formState: { errors },
@@ -40,13 +38,13 @@ export function CaptchaGridSelectField({
       <FieldLabel required={required}>{text.label}</FieldLabel>
       <FieldContent>
         <FieldDescription>{text.hint}</FieldDescription>
-        <div className="my-3 flex justify-center">
-          <CaptchaGridSelect
-            imageSrc={imageSrc}
-            prompt={prompt}
-            onResolved={() => setValue(fieldName, 'true')}
-          />
-        </div>
+        <CaptchaTilePuzzle
+          className="border-foreground my-3 rounded-md border"
+          cols={6}
+          rows={4}
+          imageSrc={imageSrc}
+          onResolved={() => setValue(fieldName, 'true')}
+        />
         <input
           type="hidden"
           {...register(fieldName, {

@@ -1,1 +1,1 @@
-export { CaptchaEmoji } from './CaptchaEmoji';
+export * from './CaptchaEmoji';

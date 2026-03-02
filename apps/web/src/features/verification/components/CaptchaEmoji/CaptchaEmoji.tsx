@@ -3,7 +3,7 @@
 import { type Point2d, random } from '@maw/utils/math';
 import { useEffect, useRef, useState } from 'react';
 
-import { CAPTCHA_EMOJI_DEFAULT_POOL } from './consts';
+import { CAPTCHA_EMOJI_DEFAULT_POOL } from './data';
 
 export type CaptchaEmojiProps = {
   className?: string;
