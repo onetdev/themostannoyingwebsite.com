@@ -7,7 +7,6 @@ import {
   FieldContent,
   FieldError,
   FieldLabel,
-  FormError,
   Input,
   LoaderDots,
   Textarea,
@@ -45,7 +44,7 @@ export function CommentForm() {
         method="post"
         onSubmit={handleSubmit(onSubmit)}
       >
-        <FormError error={errors.root} />
+        <FieldError errors={[errors.root]} />
 
         <Field>
           <FieldLabel htmlFor="name">{t('comments.form.name')}</FieldLabel>

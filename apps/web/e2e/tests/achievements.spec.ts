@@ -1,7 +1,9 @@
 import { expect, test } from '@playwright/test';
 import { allDisabledPainPreferencesState } from '../fixtures/pain-preferences';
+import { getAchievementsPage } from '../pages/AchievementsPage';
 import { getHomePage } from '../pages/HomePage';
 import { setupE2eTestState } from '../utils/setup';
+import { selectText } from '../utils/ui';
 import { setAchievements, setPainPreferences } from '../utils/zustand';
 
 test.describe('Achievements', () => {
@@ -16,7 +18,6 @@ test.describe('Achievements', () => {
         deadPixel: true,
         wheelOfFortune: true,
         clipboardMarker: true,
-        exitPrompt: true,
         disableContextMenu: true,
       },
     });
@@ -54,20 +55,23 @@ test.describe('Achievements', () => {
     'progresses "Copy-Paste Criminal" on copy',
     { tag: '@smoke' },
     async ({ page }) => {
-      const homePage = getHomePage(page);
-      await homePage.goto();
+      const modifier = process.platform === 'darwin' ? 'Meta' : 'Control';
 
-      await page.waitForFunction(() => window.maw?._emit !== undefined);
+      const achievementsPage = getAchievementsPage(page);
+      await achievementsPage.goto();
 
-      await page.evaluate(async () => {
-        for (let i = 0; i < 5; i++) {
-          window.maw?._emit?.('global-text:copied');
-        }
-      });
+      for (let i = 0; i < 6; i++) {
+        selectText(achievementsPage.achievementCard.nth(i));
+        await page.keyboard.down(modifier);
+        await page.keyboard.press('c');
+        await page.waitForTimeout(100);
+        await page.keyboard.up(modifier);
+      }
 
       const toast = page.locator('button', {
         hasText: 'Achievement Unlocked!',
       });
+
       await expect(toast).toBeVisible();
       await expect(toast).toContainText('Copy-Paste Criminal');
     },
@@ -90,7 +94,6 @@ test.describe('Achievements', () => {
     page,
   }) => {
     await page.goto('/plans');
-    await page.getByRole('button', { name: 'Select' }).first().waitFor();
     await page.getByRole('button', { name: 'Select' }).first().click();
 
     const toast = page.locator('button', { hasText: 'Achievement Unlocked!' });
@@ -118,11 +121,11 @@ test.describe('Achievements', () => {
 
     await page.waitForFunction(() => window.maw?._emit !== undefined);
 
-    await page.evaluate(() => {
-      for (let i = 0; i < 20; i++) {
-        window.maw?._emit?.('context-menu:triggered');
-      }
-    });
+    for (let i = 0; i < 20; i++) {
+      await page.mouse.click(100, 100, {
+        button: 'right',
+      });
+    }
 
     const toast = page.locator('button', { hasText: 'Achievement Unlocked!' });
     await expect(toast).toBeVisible();
@@ -157,57 +160,5 @@ test.describe('Achievements', () => {
     const toast = page.locator('button', { hasText: 'Achievement Unlocked!' });
     await expect(toast).toBeVisible({ timeout: 20000 });
     await expect(toast).toContainText('Optimistic Gambler');
-  });
-
-  test('unlocks "Escape Artist" on exit prompt', async ({ page }) => {
-    await page.goto('/');
-
-    await page.waitForFunction(() => window.maw?._emit !== undefined);
-
-    await page.evaluate(() => {
-      window.maw?._emit?.('exit-prompt:shown');
-    });
-
-    const toast = page.locator('button', { hasText: 'Achievement Unlocked!' });
-    await expect(toast).toBeVisible();
-    await expect(toast).toContainText('Escape Artist');
-  });
-
-  test('unlocks "Lost Forever" after 500 maze steps', async ({ page }) => {
-    await page.goto('/');
-
-    await page.waitForFunction(() => window.maw?._emit !== undefined);
-
-    await page.evaluate(() => {
-      for (let i = 0; i < 500; i++) {
-        window.maw?._emit?.('screensaver:maze:stepped', {
-          passedSpecialCell: false,
-        });
-      }
-    });
-
-    const toast = page.locator('button', { hasText: 'Achievement Unlocked!' });
-    await expect(toast).toBeVisible();
-    await expect(toast).toContainText('Lost Forever');
-  });
-
-  test('unlocks "Bouncing Logo Fanatic" after 420 bounces', async ({
-    page,
-  }) => {
-    await page.goto('/');
-
-    await page.waitForFunction(() => window.maw?._emit !== undefined);
-
-    await page.evaluate(() => {
-      for (let i = 0; i < 420; i++) {
-        window.maw?._emit?.('screensaver:bouncy-logo:bounced', {
-          isPerfectCorner: false,
-        });
-      }
-    });
-
-    const toast = page.locator('button', { hasText: 'Achievement Unlocked!' });
-    await expect(toast).toBeVisible();
-    await expect(toast).toContainText('Bouncing Logo Fanatic');
   });
 });

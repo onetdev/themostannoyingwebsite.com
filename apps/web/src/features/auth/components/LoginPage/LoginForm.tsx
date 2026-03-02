@@ -8,7 +8,6 @@ import {
   FieldContent,
   FieldError,
   FieldLabel,
-  FormError,
   Input,
   LoaderDots,
   PageHeadline,
@@ -54,7 +53,7 @@ export function LoginForm() {
         method="post"
         onSubmit={handleSubmit(onSubmit)}
       >
-        <FormError error={errors.root} />
+        <FieldError errors={[errors.root]} />
         <EmailField />
         <Field>
           <FieldLabel htmlFor="password">{t('user.field.password')}</FieldLabel>

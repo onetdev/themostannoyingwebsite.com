@@ -3,7 +3,7 @@
 import {
   Button,
   CaptchaEmojiField,
-  FormError,
+  FieldError,
   LoaderDots,
   PageHeadline,
 } from '@maw/ui-lib';
@@ -59,7 +59,7 @@ export function SignupForm() {
         method="post"
         onSubmit={handleSubmit(onSubmit)}
       >
-        <FormError error={errors.root} />
+        <FieldError errors={[errors.root]} />
         <div className="flex flex-col gap-4 lg:w-1/2">
           <div className="flex flex-row gap-5">
             <div className="grow">

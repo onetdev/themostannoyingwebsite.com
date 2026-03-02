@@ -8,7 +8,7 @@ import {
   DialogFooter,
   DialogHeader,
   DialogTitle,
-  FormFieldError,
+  FieldError,
   Input,
   Separator,
 } from '@maw/ui-lib';
@@ -103,7 +103,7 @@ export function NewsletterModal({
                 required
                 {...register('email')}
               />
-              <FormFieldError error={errors.email} />
+              <FieldError errors={[errors.email]} />
             </>
           )}
         </form>

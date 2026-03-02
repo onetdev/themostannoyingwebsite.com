@@ -38,6 +38,7 @@ export function AchievementCard({ definition, state }: AchievementCardProps) {
         'relative h-full overflow-hidden transition-all gap-0',
         state.achieved ? 'border-primary bg-primary/5' : 'opacity-70 grayscale',
       )}
+      data-testid="achievement-card"
     >
       <CardHeader className="pb-2">
         <div className="flex items-center justify-between">

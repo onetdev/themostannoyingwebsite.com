@@ -1,4 +1,4 @@
-import type { Page } from '@playwright/test';
+import type { Locator, Page } from '@playwright/test';
 
 /**
  * Dismisses the currently open modal by emitting the 'ui:modal:dismiss-signaled' event.
@@ -11,5 +11,20 @@ export async function signalDismissDialog(page: Page) {
     if (window.maw?._emit) {
       window.maw._emit('ui:modal:dismiss-signaled');
     }
+  });
+}
+
+/**
+ * Selected the content of a specific locator element
+ * @param locator The Playwright page object.
+ */
+export async function selectText(locator: Locator) {
+  await locator.evaluate((el) => {
+    const range = document.createRange();
+    range.selectNodeContents(el);
+
+    const sel = window.getSelection();
+    sel?.removeAllRanges();
+    sel?.addRange(range);
   });
 }

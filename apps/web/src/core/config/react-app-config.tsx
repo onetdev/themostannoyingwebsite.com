@@ -1,11 +1,6 @@
 'use client';
 
-import {
-  createContext,
-  type FunctionComponent,
-  type PropsWithChildren,
-  useContext,
-} from 'react';
+import { createContext, type PropsWithChildren, useContext } from 'react';
 
 import type { AppConfig } from '@/schemas';
 
@@ -15,10 +10,10 @@ type AppConfigProviderProps = PropsWithChildren<{
   config?: AppConfig;
 }>;
 
-export const AppConfigProvider: FunctionComponent<AppConfigProviderProps> = ({
+export function AppConfigProvider({
   children,
   config: configProp,
-}) => {
+}: AppConfigProviderProps) {
   const configValue = configProp ?? null;
 
   return (
@@ -26,7 +21,7 @@ export const AppConfigProvider: FunctionComponent<AppConfigProviderProps> = ({
       {children}
     </AppConfigContext.Provider>
   );
-};
+}
 
 export const useAppConfigContext = () => {
   const context = useContext(AppConfigContext);

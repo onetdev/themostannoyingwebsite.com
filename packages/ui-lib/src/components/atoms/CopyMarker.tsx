@@ -1,8 +1,4 @@
-import type {
-  ClipboardEvent,
-  FunctionComponent,
-  PropsWithChildren,
-} from 'react';
+import type { ClipboardEvent, PropsWithChildren } from 'react';
 
 export type CopyMarkerProps = PropsWithChildren<{
   append?: { text: string; html: string } | 'url';
@@ -13,13 +9,13 @@ export type CopyMarkerProps = PropsWithChildren<{
   onCopy?: (e: ClipboardEvent<HTMLDivElement>) => void;
 }>;
 
-export const CopyMarker: FunctionComponent<CopyMarkerProps> = ({
+export function CopyMarker({
   append = 'url',
   children,
   enabled = false,
   text,
   onCopy,
-}) => {
+}: CopyMarkerProps) {
   const handleCopy = (e: ClipboardEvent<HTMLDivElement>) => {
     const selection = window.getSelection()?.toString() || '';
 
@@ -43,5 +39,9 @@ export const CopyMarker: FunctionComponent<CopyMarkerProps> = ({
     onCopy?.(e);
   };
 
-  return <div onCopy={enabled ? handleCopy : undefined}>{children}</div>;
-};
+  return (
+    <div data-testid="copy-marker" onCopy={enabled ? handleCopy : undefined}>
+      {children}
+    </div>
+  );
+}

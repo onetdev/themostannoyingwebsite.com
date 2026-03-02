@@ -3,7 +3,7 @@
 import {
   Button,
   CaptchaTitlePuzzleField,
-  FormError,
+  FieldError,
   LoaderDots,
   PageHeadline,
 } from '@maw/ui-lib';
@@ -43,7 +43,7 @@ export function PasswordReminderForm() {
         method="post"
         onSubmit={handleSubmit(onSubmit)}
       >
-        <FormError error={errors.root} />
+        <FieldError errors={[errors.root]} />
         <EmailField />
         <CaptchaTitlePuzzleField
           text={captchaText}
