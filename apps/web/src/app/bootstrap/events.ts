@@ -11,10 +11,10 @@ export function configureEvents(eventBus: Emittery<AppEvents>) {
   }
 
   if (window.maw._emit === undefined) {
-    window.maw._emit = eventBus.emit;
+    window.maw._emit = eventBus.emit.bind(eventBus);
   }
 
   if (window.maw._on === undefined) {
-    window.maw._on = eventBus.on;
+    window.maw._on = eventBus.on.bind(eventBus);
   }
 }
