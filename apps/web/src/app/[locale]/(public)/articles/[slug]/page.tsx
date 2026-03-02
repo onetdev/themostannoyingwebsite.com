@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
-import { getDependencyContainer } from '@/dependency-container';
+import { getDependencyContainer } from '@/core/di';
 import { CommentService } from '@/features/comments/services';
 import { ArticleItemPage } from '@/features/content/components';
 import { getAppArticleService } from '@/features/content/services';

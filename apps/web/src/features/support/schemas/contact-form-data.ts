@@ -1,7 +1,5 @@
 import { z } from 'zod';
 
-import type { ZodTranslator } from '@/types';
-
 export function getContactFormDataSchema(t: ZodTranslator) {
   return z.object({
     subject: z

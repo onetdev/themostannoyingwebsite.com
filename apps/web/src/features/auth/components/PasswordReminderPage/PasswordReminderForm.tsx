@@ -3,14 +3,14 @@
 import {
   Button,
   CaptchaTitlePuzzleField,
-  FormError,
+  FieldError,
   LoaderDots,
   PageHeadline,
 } from '@maw/ui-lib';
 import { useTranslations } from 'next-intl';
 import { FormProvider } from 'react-hook-form';
-import config from '@/config';
-import { useNavigationProvider } from '@/contexts/NavigationContext';
+import config from '@/core/config';
+import { useNavigationProvider } from '@/navigation/NavigationContext';
 import { usePasswordReminderForm } from '../../hooks';
 import { EmailField } from '../fields/EmailField';
 
@@ -43,7 +43,7 @@ export function PasswordReminderForm() {
         method="post"
         onSubmit={handleSubmit(onSubmit)}
       >
-        <FormError error={errors.root} />
+        <FieldError errors={[errors.root]} />
         <EmailField />
         <CaptchaTitlePuzzleField
           text={captchaText}

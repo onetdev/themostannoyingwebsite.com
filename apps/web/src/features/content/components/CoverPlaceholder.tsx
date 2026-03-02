@@ -1,4 +1,4 @@
-import config from '@/config';
+import config from '@/core/config';
 
 export type CoverPlaceholderProps = {
   width: number;

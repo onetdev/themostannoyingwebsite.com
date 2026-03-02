@@ -2,13 +2,11 @@
 
 import { type Point2d, random, randomInt } from '@maw/utils/math';
 import { useEffect, useState } from 'react';
-
-import { useEventBus } from '@/contexts/EventBusContext';
+import { emit } from '@/core/events/event-bus';
 
 // TODO: Maybe we could do a horror version like this:
 // https://www.tiktok.com/@jackandaxter/video/7421659495606144262
 export function DeadPixel() {
-  const { dispatch } = useEventBus();
   const [points, setPosition] = useState<Point2d[]>();
 
   useEffect(() => {
@@ -30,10 +28,11 @@ export function DeadPixel() {
         <button
           type="button"
           aria-hidden
+          data-testid="dead-pixel"
           key={`${point.x}-${point.y}`}
-          onClick={() => dispatch('DEAD_PIXEL_CLICK_ATTEMPT')}
+          onClick={() => emit('dead-pixel:clicked')}
           style={{ top: point.y, left: point.x }}
-          className="fixed size-px bg-black select-none dark:bg-white"
+          className="fixed z-50 size-px bg-black select-none dark:bg-white"
         />
       ))}
     </>

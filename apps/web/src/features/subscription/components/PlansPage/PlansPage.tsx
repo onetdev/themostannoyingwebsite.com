@@ -3,13 +3,12 @@
 import { PageHeadline } from '@maw/ui-lib';
 import { useTranslations } from 'next-intl';
 import { useCallback, useState } from 'react';
-import { useEventBus } from '@/contexts/EventBusContext';
+import { emit } from '@/core/events/event-bus';
 import type {
   BillingCycle,
   SubscriptionFeature,
   SubscriptionPackage,
 } from '../../schemas';
-import type { SubscriptionEvent } from '../../types';
 import { BillingCycleSelector } from './BillingCycleSelector';
 import { Disclaimer } from './Disclaimer';
 import { PlanCard } from './PlanCard';
@@ -37,7 +36,6 @@ export function PlansPage({
   socialProofConfig,
 }: PlansPageProps) {
   const t = useTranslations();
-  const { dispatch } = useEventBus();
   const [isDiscountActive, setIsDiscountActive] = useState(false);
   const [billingCycle, setBillingCycle] = useState<BillingCycle>('monthly');
   const [selectedPlanKey, setSelectedPlanKey] = useState<string>(
@@ -49,15 +47,12 @@ export function PlansPage({
     [],
   );
 
-  const handleSelectPlan = useCallback(
-    (key: string) => {
-      setSelectedPlanKey(key);
-      dispatch<SubscriptionEvent['payload']>('SUBSCRIPTION_PACKAGE_SELECTED', {
-        packageId: key,
-      });
-    },
-    [dispatch],
-  );
+  const handleSelectPlan = useCallback((key: string) => {
+    setSelectedPlanKey(key);
+    emit('subscription:package-selected', {
+      packageId: key,
+    });
+  }, []);
 
   return (
     <>

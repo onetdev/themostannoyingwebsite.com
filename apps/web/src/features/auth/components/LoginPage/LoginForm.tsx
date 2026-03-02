@@ -8,14 +8,13 @@ import {
   FieldContent,
   FieldError,
   FieldLabel,
-  FormError,
   Input,
   LoaderDots,
   PageHeadline,
 } from '@maw/ui-lib';
 import { useTranslations } from 'next-intl';
 import { FormProvider } from 'react-hook-form';
-import { useNavigationProvider } from '@/contexts/NavigationContext';
+import { useNavigationProvider } from '@/navigation/NavigationContext';
 import { useLoginForm } from '../../hooks';
 import { EmailField } from '../fields/EmailField';
 
@@ -54,7 +53,7 @@ export function LoginForm() {
         method="post"
         onSubmit={handleSubmit(onSubmit)}
       >
-        <FormError error={errors.root} />
+        <FieldError errors={[errors.root]} />
         <EmailField />
         <Field>
           <FieldLabel htmlFor="password">{t('user.field.password')}</FieldLabel>

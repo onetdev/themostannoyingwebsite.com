@@ -5,5 +5,7 @@ const createJestConfig = nextJest({
   dir: './',
 });
 
-// biome-ignore lint/suspicious/noExplicitAny: TODO: Meh, I don't have the patience to fix this yet.
-export default createJestConfig(config) as unknown as any;
+export default createJestConfig({
+  ...config,
+  transformIgnorePatterns: ['/node_modules/(?!emittery)/'],
+});

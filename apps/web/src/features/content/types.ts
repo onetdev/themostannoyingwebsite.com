@@ -4,9 +4,10 @@ export const DI = {
   AppArticleService: Symbol.for('AppArticleService'),
 };
 
-export type ContentEvent = {
-  type: 'SEARCH';
-  payload: {
-    query: string;
-  };
-};
+declare global {
+  interface AppEvents {
+    'global-search:query': {
+      query: string;
+    };
+  }
+}

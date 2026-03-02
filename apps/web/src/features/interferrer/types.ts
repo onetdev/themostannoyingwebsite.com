@@ -1,4 +1,5 @@
-export type InterferrerEvent = {
-  type: 'CONTEXT_MENU_ATTEMPT';
-  payload?: never;
-};
+declare global {
+  interface AppEvents {
+    'context-menu:triggered': never;
+  }
+}

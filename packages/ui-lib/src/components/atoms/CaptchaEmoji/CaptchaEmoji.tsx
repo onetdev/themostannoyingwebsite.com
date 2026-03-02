@@ -1,7 +1,7 @@
 'use client';
 
 import { type Point2d, random } from '@maw/utils/math';
-import { type FunctionComponent, useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 import { CAPTCHA_EMOJI_DEFAULT_POOL } from './consts';
 
@@ -19,14 +19,14 @@ type RandomItem = {
   coords: Point2d;
 };
 
-export const CaptchaEmoji: FunctionComponent<CaptchaEmojiProps> = ({
+export function CaptchaEmoji({
   className,
   count = 100,
   height = 100,
   itemRenderSize = 50,
   pool = CAPTCHA_EMOJI_DEFAULT_POOL,
   width = 300,
-}) => {
+}: CaptchaEmojiProps) {
   const $canvasRef = useRef<HTMLCanvasElement>(null);
   const [items, setItems] = useState<RandomItem[]>([]);
 
@@ -70,4 +70,4 @@ export const CaptchaEmoji: FunctionComponent<CaptchaEmojiProps> = ({
       height={height}
     />
   );
-};
+}

@@ -1,13 +1,8 @@
 'use client';
 
-import {
-  createContext,
-  type FunctionComponent,
-  type PropsWithChildren,
-  useContext,
-} from 'react';
+import { createContext, type PropsWithChildren, useContext } from 'react';
 
-import type { AppConfig } from '@/schemas/app-config';
+import type { AppConfig } from '@/schemas';
 
 export const AppConfigContext = createContext<AppConfig | null>(null);
 
@@ -15,10 +10,10 @@ type AppConfigProviderProps = PropsWithChildren<{
   config?: AppConfig;
 }>;
 
-export const AppConfigProvider: FunctionComponent<AppConfigProviderProps> = ({
+export function AppConfigProvider({
   children,
   config: configProp,
-}) => {
+}: AppConfigProviderProps) {
   const configValue = configProp ?? null;
 
   return (
@@ -26,13 +21,15 @@ export const AppConfigProvider: FunctionComponent<AppConfigProviderProps> = ({
       {children}
     </AppConfigContext.Provider>
   );
-};
+}
 
-export const useAppConfig = () => {
+export const useAppConfigContext = () => {
   const context = useContext(AppConfigContext);
 
   if (!context) {
-    throw new Error('useAppConfig must be used within an AppConfigProvider');
+    throw new Error(
+      'useAppConfigContext must be used within an AppConfigProvider',
+    );
   }
 
   return context;

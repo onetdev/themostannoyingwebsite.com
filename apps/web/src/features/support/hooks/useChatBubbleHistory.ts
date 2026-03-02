@@ -3,14 +3,14 @@
 import { useMessages, useTranslations } from 'next-intl';
 import { useCallback, useEffect, useMemo, useState } from 'react';
 import { useMount } from 'react-use';
-import { useAppConfig } from '@/contexts/AppConfig';
+import { useAppConfigContext } from '@/core/config/react-app-config';
 import { useAudio, useSendNotification } from '@/hooks';
 import { useRuntimeStore } from '@/stores';
 import type { ChatMessage, ChatMessageType } from '../schemas';
 
 export function useChatBubbleHistory() {
   const t = useTranslations();
-  const config = useAppConfig();
+  const config = useAppConfigContext();
   const messages = useMessages();
   const hasInteracted = useRuntimeStore(
     (state) => state.userActivation.unlocked,

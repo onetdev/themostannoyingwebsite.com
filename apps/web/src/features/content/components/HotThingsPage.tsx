@@ -5,10 +5,10 @@ import { Icon, PageHeadline } from '@maw/ui-lib';
 import Image from 'next/image';
 import { useLocale, useTranslations } from 'next-intl';
 import { useEffect, useRef, useState } from 'react';
-import { useAppConfig } from '@/contexts/AppConfig';
+import { useAppConfigContext } from '@/core/config/react-app-config';
 
 export function HotThingsPage() {
-  const config = useAppConfig();
+  const config = useAppConfigContext();
   const logger = useLogger().getSubLogger({ name: 'hot-things-page' });
   const [isCapable, setIsCapable] = useState(false);
   const t = useTranslations();

@@ -1,5 +1,4 @@
 import { cva, type VariantProps } from 'class-variance-authority';
-import type { FunctionComponent } from 'react';
 
 import { cn } from '../../../utils';
 import { Icon } from '../Icon';
@@ -31,13 +30,13 @@ export type DarkModeToggleProps = VariantProps<
   };
 };
 
-export const DarkModeToggle: FunctionComponent<DarkModeToggleProps> = ({
+export function DarkModeToggle({
   className,
   size = 'md',
   text,
   resolvedTheme,
   setTheme,
-}) => {
+}: DarkModeToggleProps) {
   const isDark = resolvedTheme === 'dark';
 
   const toggleDarkMode = () => {
@@ -82,4 +81,4 @@ export const DarkModeToggle: FunctionComponent<DarkModeToggleProps> = ({
       </div>
     </button>
   );
-};
+}

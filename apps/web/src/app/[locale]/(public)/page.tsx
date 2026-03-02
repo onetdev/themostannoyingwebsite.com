@@ -1,4 +1,4 @@
-import { getDependencyContainer } from '@/dependency-container';
+import { getDependencyContainer } from '@/core/di';
 import { getAppArticleService } from '@/features/content/services';
 import { HomePage } from './_components/HomePage';
 import { PageLayout } from './_components/PageLayout';

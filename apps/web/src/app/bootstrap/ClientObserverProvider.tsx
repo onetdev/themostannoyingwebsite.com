@@ -8,7 +8,7 @@ import {
   useTouchScreenListener,
   useUserActivationListener,
   useZodAutoConfigurator,
-} from '../hooks';
+} from '../../hooks';
 
 export function ClientObserverProvider() {
   useServiceWorker();

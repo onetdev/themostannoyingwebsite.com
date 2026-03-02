@@ -15,9 +15,10 @@ export interface SubscriptionPlansService {
   getPlans(): Promise<Result<SubscriptionPackage[], SubscriptionError>>;
 }
 
-export type SubscriptionEvent = {
-  type: 'SUBSCRIPTION_PACKAGE_SELECTED';
-  payload: {
-    packageId: string;
-  };
-};
+declare global {
+  interface AppEvents {
+    'subscription:package-selected': {
+      packageId: string;
+    };
+  }
+}

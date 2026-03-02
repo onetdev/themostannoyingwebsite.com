@@ -1,15 +1,12 @@
 import type { Page } from '@playwright/test';
 
-import { getFooter } from './shared/Footer';
-import { getHeader } from './shared/Header';
+import { getSharedLocators } from './shared/Shared';
 
 export const getAdminPage = (page: Page) => {
-  const header = getHeader(page);
-  const footer = getFooter(page);
+  const shared = getSharedLocators(page);
 
   return {
-    ...header,
-    ...footer,
+    ...shared,
 
     loginPrompt: page.getByText('login: '),
     passwordPrompt: page.getByText('password: '),

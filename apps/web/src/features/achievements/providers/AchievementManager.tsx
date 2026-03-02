@@ -1,15 +1,8 @@
 'use client';
 
 import { useCallback } from 'react';
-import { useEventBus, useEventBusListener } from '@/contexts/EventBusContext';
-
-import type { ContentEvent } from '@/features/content/types';
-import type { InterferrerEvent } from '@/features/interferrer/types';
-import type { ObstructorEvent } from '@/features/obstructor/types';
-import type { PromotionEvent } from '@/features/promotion/types';
-import type { SubscriptionEvent } from '@/features/subscription/types';
-import type { UserEvent } from '@/features/user/types';
-import type { AppEvent, EventPayload } from '@/types';
+import { emit } from '@/core/events/event-bus';
+import { useEvent } from '@/hooks';
 import { AchievementToastManager } from '../components/AchievementToastManager';
 import { useAchievementBankService } from '../hooks';
 import { useAchievementsStore } from '../stores';
@@ -17,7 +10,6 @@ import { useAchievementsStore } from '../stores';
 export const AchievementManager = () => {
   const { incrementAchievementProgress, completeAchievement } =
     useAchievementsStore();
-  const { dispatch } = useEventBus();
   const achievementBank = useAchievementBankService();
 
   const handleProgression = useCallback(
@@ -34,16 +26,16 @@ export const AchievementManager = () => {
       );
 
       if (result.newlyAchieved) {
-        dispatch('ACHIEVEMENT_UNLOCKED', { achievementId });
+        emit('achievement:unlocked', { achievementId });
       } else {
-        dispatch('ACHIEVEMENT_PROGRESS_UPDATED', {
+        emit('achievement:progress-updated', {
           achievementId,
           progress: result.progress,
           lastNotifiedAt: result.lastNotifiedAt,
         });
       }
     },
-    [dispatch, incrementAchievementProgress, achievementBank],
+    [incrementAchievementProgress, achievementBank],
   );
 
   const handleSingleUnlock = useCallback(
@@ -53,80 +45,52 @@ export const AchievementManager = () => {
         return;
       }
 
-      dispatch('ACHIEVEMENT_UNLOCKED', { achievementId });
+      emit('achievement:unlocked', { achievementId });
     },
-    [completeAchievement, dispatch],
+    [completeAchievement],
   );
 
-  useEventBusListener<EventPayload<ObstructorEvent, 'MAZE_STEP'>>(
-    'MAZE_STEP',
-    (event) => {
-      handleProgression('maze-explorer');
+  useEvent('screensaver:maze:stepped', (event) => {
+    handleProgression('maze-explorer');
 
-      if (event.payload?.passedSpecialCell) {
-        handleSingleUnlock('maze-special-cell');
-      }
-    },
-  );
+    if (event.passedSpecialCell) {
+      handleSingleUnlock('maze-special-cell');
+    }
+  });
 
-  useEventBusListener<EventPayload<ObstructorEvent, 'BOUNCY_LOGO_BOUNCE'>>(
-    'BOUNCY_LOGO_BOUNCE',
-    (event) => {
-      handleProgression('bouncing-logo-fanatic');
+  useEvent('screensaver:bouncy-logo:bounced', (event) => {
+    handleProgression('bouncing-logo-fanatic');
 
-      if (event.payload?.isPerfectCorner) {
-        handleSingleUnlock('bouncing-logo-corner-hit');
-      }
-    },
-  );
+    if (event.isPerfectCorner) {
+      handleSingleUnlock('bouncing-logo-corner-hit');
+    }
+  });
 
-  useEventBusListener<
-    EventPayload<SubscriptionEvent, 'SUBSCRIPTION_PACKAGE_SELECTED'>
-  >('SUBSCRIPTION_PACKAGE_SELECTED', () =>
+  useEvent('subscription:package-selected', () =>
     handleSingleUnlock('first-package-selection'),
   );
 
-  useEventBusListener<EventPayload<ContentEvent, 'SEARCH'>>('SEARCH', () =>
-    handleSingleUnlock('first-search'),
-  );
+  useEvent('global-search:query', () => handleSingleUnlock('first-search'));
 
-  useEventBusListener<EventPayload<InterferrerEvent, 'CONTEXT_MENU_ATTEMPT'>>(
-    'CONTEXT_MENU_ATTEMPT',
-    () => {
-      handleProgression('right-click-rebel');
-    },
-  );
+  useEvent('context-menu:triggered', () => {
+    handleProgression('right-click-rebel');
+  });
 
-  useEventBusListener<EventPayload<AppEvent, 'TEXT_COPIED'>>(
-    'TEXT_COPIED',
-    () => {
-      handleProgression('copy-paste-criminal');
-    },
-  );
+  useEvent('global-text:copied', () => {
+    handleProgression('copy-paste-criminal');
+  });
 
-  useEventBusListener<EventPayload<AppEvent, 'EXIT_PROMPT_TRIGGERED'>>(
-    'EXIT_PROMPT_TRIGGERED',
-    () => handleSingleUnlock('escape-artist'),
-  );
+  useEvent('exit-prompt:shown', () => handleSingleUnlock('escape-artist'));
 
-  useEventBusListener<
-    EventPayload<ObstructorEvent, 'DEAD_PIXEL_CLICK_ATTEMPT'>
-  >('DEAD_PIXEL_CLICK_ATTEMPT', () => handleSingleUnlock('dead-pixel-hunter'));
+  useEvent('dead-pixel:clicked', () => handleSingleUnlock('dead-pixel-hunter'));
 
-  useEventBusListener<EventPayload<AppEvent, 'NAVIGATION'>>('NAVIGATION', () =>
-    handleSingleUnlock('first-visit'),
-  );
+  useEvent('navigation:changed', () => handleSingleUnlock('first-visit'));
 
-  useEventBusListener<
-    EventPayload<PromotionEvent, 'WHEEL_OF_FORTUNE_SPIN_COMPLETE'>
-  >('WHEEL_OF_FORTUNE_SPIN_COMPLETE', () =>
+  useEvent('wof:spin-completed', () =>
     handleSingleUnlock('wheel-of-fortune-spin'),
   );
 
-  useEventBusListener<EventPayload<UserEvent, 'ADMIN_LOGIN_SUCCESS'>>(
-    'ADMIN_LOGIN_SUCCESS',
-    () => handleSingleUnlock('admin-login'),
-  );
+  useEvent('admin-auth:login', () => handleSingleUnlock('admin-login'));
 
   return <AchievementToastManager />;
 };

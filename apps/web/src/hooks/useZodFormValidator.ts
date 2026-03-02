@@ -5,8 +5,6 @@ import { useTranslations } from 'next-intl';
 import type { FieldValues } from 'react-hook-form';
 import type { z } from 'zod';
 
-import type { ZodTranslator } from '@/types';
-
 export function useZodFormValidator<
   TFieldValues extends FieldValues = FieldValues,
 >(factory: (t: ZodTranslator) => z.ZodSchema<TFieldValues>) {

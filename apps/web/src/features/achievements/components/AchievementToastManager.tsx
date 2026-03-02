@@ -2,14 +2,11 @@
 
 import { toast } from '@maw/ui-lib';
 import { useTranslations } from 'next-intl';
-import config from '@/config';
-import { useEventBusListener } from '@/contexts/EventBusContext';
-import { useAudio } from '@/hooks';
+import config from '@/core/config';
+import { useAudio, useEvent } from '@/hooks';
 import { usePainPreferencesStore } from '@/stores';
-import type { EventPayload } from '@/types';
 import { useAchievementBankService } from '../hooks';
 import { useAchievementsStore } from '../stores';
-import type { AchievementsEvent } from '../types';
 import { AchievementToast } from './AchievementToast';
 
 export const AchievementToastManager = () => {
@@ -23,29 +20,24 @@ export const AchievementToastManager = () => {
     (state) => state.flags.achievementNotifications,
   );
 
-  useEventBusListener<EventPayload<AchievementsEvent, 'ACHIEVEMENT_UNLOCKED'>>(
-    'ACHIEVEMENT_UNLOCKED',
-    ({ payload }) => {
-      const { achievementId } = payload || {};
-      if (!achievementId || !notificationsEnabled) return;
+  useEvent('achievement:unlocked', (payload) => {
+    const { achievementId } = payload || {};
+    if (!achievementId || !notificationsEnabled) return;
 
-      const definition = achievementBank.getAchievementById(achievementId);
-      if (!definition) return;
+    const definition = achievementBank.getAchievementById(achievementId);
+    if (!definition) return;
 
-      play();
+    play();
 
-      toast.custom(
-        () => <AchievementToast name={t(definition.nameKey)} type="unlocked" />,
-        {
-          position: 'top-center',
-        },
-      );
-    },
-  );
+    toast.custom(
+      () => <AchievementToast name={t(definition.nameKey)} type="unlocked" />,
+      {
+        position: 'top-center',
+      },
+    );
+  });
 
-  useEventBusListener<
-    EventPayload<AchievementsEvent, 'ACHIEVEMENT_PROGRESS_UPDATED'>
-  >('ACHIEVEMENT_PROGRESS_UPDATED', ({ payload }) => {
+  useEvent('achievement:progress-updated', (payload) => {
     const { achievementId, progress, lastNotifiedAt } = payload || {};
     if (!achievementId || !notificationsEnabled) return;
 

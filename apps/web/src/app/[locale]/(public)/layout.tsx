@@ -1,13 +1,13 @@
-import '@/global.css';
+import '@/app/global.css';
 import { Analytics } from '@vercel/analytics/react';
 import { Inter } from 'next/font/google';
 import { notFound } from 'next/navigation';
 import { hasLocale, NextIntlClientProvider } from 'next-intl';
 import { getLangDir } from 'rtl-detect';
+import { ClientObserverProvider } from '@/app/bootstrap/ClientObserverProvider';
+import { ClientRootProviderContainer } from '@/app/bootstrap/ClientRootProviderContainer';
 import { BeggarBanner } from '@/features/donation/components';
 import { routing } from '@/i18n/routing';
-import { ClientObserverProvider } from '@/providers/ClientObserverProvider';
-import { ClientRootProviderContainer } from '@/providers/ClientRootProviderContainer';
 import { getAppConfigService } from '@/services';
 import { PainDecoratorLayout } from './_components/PainDecoratorLayout';
 

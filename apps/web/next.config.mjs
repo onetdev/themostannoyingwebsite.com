@@ -7,6 +7,7 @@ import sentryConfig from './next-sentry.config.mjs';
 
 /** @type {import('next').NextConfig} **/
 const nextConfig = {
+  transpilePackages: ['emittery'],
   trailingSlash: true,
   images: {
     unoptimized: true,

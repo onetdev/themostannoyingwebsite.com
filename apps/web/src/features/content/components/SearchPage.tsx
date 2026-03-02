@@ -6,13 +6,12 @@ import { random } from '@maw/utils/math';
 import HTMLReactParser from 'html-react-parser';
 import { useLocale, useMessages, useTranslations } from 'next-intl';
 import { useEffect, useMemo, useState } from 'react';
-import { useEventBusListener } from '@/contexts/EventBusContext';
 import { SearchForm } from '@/features/content/components';
+import { useEvent } from '@/hooks';
 import { Link } from '@/i18n/navigation';
 import { usePainPreferencesStore } from '@/stores';
 import { useAppArticleService } from '../hooks';
 import type { ArticleSearchResult } from '../schemas';
-import type { ContentEvent } from '../types';
 
 export type Result = {
   query: string;
@@ -40,8 +39,8 @@ export function SearchPage() {
     return items;
   }, [messages.search.topSearcheVariants, t]);
 
-  useEventBusListener<ContentEvent['payload']>('SEARCH', (event) => {
-    setQuery(event.payload?.query ?? '');
+  useEvent('global-search:query', (event) => {
+    setQuery(event.query ?? '');
   });
 
   const onRecommendedClick = (query: string) => {

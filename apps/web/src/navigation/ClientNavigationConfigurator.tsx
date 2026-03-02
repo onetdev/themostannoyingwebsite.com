@@ -2,12 +2,11 @@
 
 import { compile } from 'path-to-regexp';
 import type { ComponentProps, PropsWithChildren } from 'react';
-
+import { Link, useRouter } from '@/i18n/navigation';
 import {
   type NavigationParams,
   NavigationProvider as NavigationProviderBase,
-} from '@/contexts/NavigationContext';
-import { Link, useRouter } from '@/i18n/navigation';
+} from '@/navigation/NavigationContext';
 import type { RouteAlias } from '@/schemas';
 
 const routeAliasToPathMap: Record<RouteAlias, string> = {

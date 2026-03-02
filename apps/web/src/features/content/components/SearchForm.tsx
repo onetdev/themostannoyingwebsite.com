@@ -10,10 +10,8 @@ import {
 import { cn, cva, type VariantProps } from '@maw/ui-lib/utils';
 import { useTranslations } from 'next-intl';
 import type { SubmitEventHandler } from 'react';
-
-import { useEventBus } from '@/contexts/EventBusContext';
+import { emit } from '@/core/events/event-bus';
 import { useRouter } from '@/i18n/navigation';
-import type { ContentEvent } from '../types';
 
 const searchFormVariants = cva('', {
   variants: {
@@ -39,7 +37,6 @@ export function SearchForm({
 }: SearchFormProps) {
   const t = useTranslations();
   const router = useRouter();
-  const { dispatch } = useEventBus();
 
   const onSubmit: SubmitEventHandler<HTMLFormElement> = (event) => {
     event.preventDefault();
@@ -54,7 +51,7 @@ export function SearchForm({
 
     // If we are already on the search page, we will also need to dispatch
     // the search event
-    dispatch<ContentEvent['payload']>('SEARCH', { query });
+    emit('global-search:query', { query });
   };
 
   return (

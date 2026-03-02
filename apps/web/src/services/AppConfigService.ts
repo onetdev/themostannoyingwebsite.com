@@ -1,4 +1,4 @@
-import config from '@/config';
+import config from '@/core/config';
 import { type AppConfig, AppConfigSchema } from '@/schemas/app-config';
 
 // TODO: Rather than importing config in here, we should configure singleton

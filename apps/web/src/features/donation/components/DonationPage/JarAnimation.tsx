@@ -4,7 +4,7 @@ import {
   DotLottieReact,
   type DotLottieReactProps,
 } from '@lottiefiles/dotlottie-react';
-import { useAppConfig } from '@/contexts/AppConfig';
+import { useAppConfigContext } from '@/core/config/react-app-config';
 import { useDonationBalance } from '../../hooks';
 
 export type JarAnimationProps = Omit<
@@ -13,7 +13,7 @@ export type JarAnimationProps = Omit<
 >;
 
 export function JarAnimation(props: JarAnimationProps) {
-  const config = useAppConfig();
+  const config = useAppConfigContext();
   const balance = useDonationBalance();
 
   return (

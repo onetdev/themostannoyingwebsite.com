@@ -1,5 +1,5 @@
 import 'reflect-metadata';
-import config from '@/config';
+import config from '@/core/config';
 import { AppConfigService } from './AppConfigService';
 
 describe('AppConfigService', () => {

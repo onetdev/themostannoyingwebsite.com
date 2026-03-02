@@ -7,8 +7,6 @@ export * from './Checkbox';
 export * from './CopyMarker';
 export * from './DarkModeToggle';
 export * from './DotDotDotText';
-export * from './FormError';
-export * from './FormFieldError';
 export * from './Icon';
 export * from './Input';
 export * from './Label';

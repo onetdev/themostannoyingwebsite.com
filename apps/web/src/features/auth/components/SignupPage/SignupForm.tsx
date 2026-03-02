@@ -3,13 +3,13 @@
 import {
   Button,
   CaptchaEmojiField,
-  FormError,
+  FieldError,
   LoaderDots,
   PageHeadline,
 } from '@maw/ui-lib';
 import { useTranslations } from 'next-intl';
 import { FormProvider } from 'react-hook-form';
-import { useNavigationProvider } from '@/contexts/NavigationContext';
+import { useNavigationProvider } from '@/navigation/NavigationContext';
 import { useSignupForm } from '../../hooks';
 import {
   ConsentChildSoulField,
@@ -59,7 +59,7 @@ export function SignupForm() {
         method="post"
         onSubmit={handleSubmit(onSubmit)}
       >
-        <FormError error={errors.root} />
+        <FieldError errors={[errors.root]} />
         <div className="flex flex-col gap-4 lg:w-1/2">
           <div className="flex flex-row gap-5">
             <div className="grow">

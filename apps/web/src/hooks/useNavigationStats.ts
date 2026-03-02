@@ -1,12 +1,11 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { useEventBus } from '@/contexts/EventBusContext';
+import { emit } from '@/core/events/event-bus';
 import { usePathname } from '@/i18n/navigation';
 import { useRuntimeStore } from '@/stores';
 
 export const useNavigationStats = () => {
-  const { dispatch } = useEventBus();
   const incrementNavigationCount = useRuntimeStore(
     (state) => state.incrementNavigationCount,
   );
@@ -16,8 +15,8 @@ export const useNavigationStats = () => {
   useEffect(() => {
     setNavigationCount((prevCount) => prevCount + 1);
     incrementNavigationCount();
-    dispatch('NAVIGATION', { path: pathName });
-  }, [incrementNavigationCount, pathName, dispatch]);
+    emit('navigation:changed', { path: pathName });
+  }, [incrementNavigationCount, pathName]);
 
   return navigationCount;
 };
