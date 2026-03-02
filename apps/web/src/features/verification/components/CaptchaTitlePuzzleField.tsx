@@ -1,52 +1,55 @@
 'use client';
 
-import { useFormContext } from 'react-hook-form';
-
-import { CaptchaEmoji, Input } from '../atoms';
 import {
   Field,
   FieldContent,
   FieldDescription,
   FieldError,
   FieldLabel,
-} from '../organisms/Field';
+} from '@maw/ui-lib';
+import { useFormContext } from 'react-hook-form';
+import { CaptchaTilePuzzle } from './CaptchaTilePuzzle';
 
-export type CaptchaEmojiFieldProps = {
-  className?: string;
+export type CaptchaTitlePuzzleFieldProps = {
   fieldName?: string;
+  imageSrc?: string;
   required?: boolean;
   text: {
     label: string;
     hint: string;
+    invalid: string;
   };
 };
 
-export function CaptchaEmojiField({
-  className,
+export function CaptchaTitlePuzzleField({
   fieldName = 'captcha',
+  imageSrc,
   required,
   text,
-}: CaptchaEmojiFieldProps) {
+}: CaptchaTitlePuzzleFieldProps) {
   const {
     register,
     formState: { errors },
+    setValue,
   } = useFormContext();
 
   return (
-    <Field className={className}>
+    <Field>
       <FieldLabel required={required}>{text.label}</FieldLabel>
       <FieldContent>
         <FieldDescription>{text.hint}</FieldDescription>
-        <CaptchaEmoji
+        <CaptchaTilePuzzle
           className="border-foreground my-3 rounded-md border"
-          width={300}
-          height={100}
+          cols={6}
+          rows={4}
+          imageSrc={imageSrc}
+          onResolved={() => setValue(fieldName, 'true')}
         />
-        <Input
-          type="text"
-          className="w-[300px]"
-          aria-label={text.label}
-          {...register(fieldName)}
+        <input
+          type="hidden"
+          {...register(fieldName, {
+            required: text.invalid,
+          })}
         />
         <FieldError errors={[errors[fieldName]]} />
       </FieldContent>

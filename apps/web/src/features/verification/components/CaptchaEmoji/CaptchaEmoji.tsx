@@ -12,6 +12,7 @@ export type CaptchaEmojiProps = {
   itemRenderSize?: number;
   pool?: string[];
   width?: number;
+  onResolved?: () => void;
 };
 
 type RandomItem = {
@@ -26,6 +27,7 @@ export function CaptchaEmoji({
   itemRenderSize = 50,
   pool = CAPTCHA_EMOJI_DEFAULT_POOL,
   width = 300,
+  onResolved,
 }: CaptchaEmojiProps) {
   const $canvasRef = useRef<HTMLCanvasElement>(null);
   const [items, setItems] = useState<RandomItem[]>([]);
@@ -68,6 +70,7 @@ export function CaptchaEmoji({
       ref={$canvasRef}
       width={width}
       height={height}
+      onClick={onResolved}
     />
   );
 }

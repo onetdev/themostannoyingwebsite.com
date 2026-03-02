@@ -270,10 +270,27 @@ export default {
   form: {
     captcha: {
       field: 'Captcha',
+      proveYouAreRobot: 'Prove that you are a robot!',
       captchaEmojiHint:
         'Count the emojis and identify which one appears the most. Look carefully, as parts of some emojis might be obscured.',
       captchaTilePuzzleHint:
         'Slide the tiles into their right position. You can only move the ones directly next to each other.',
+      captchaGridSelectHint:
+        'Select all images that match the prompt. If new images appear, check them as well.',
+      captchaGridSelectPrompts: [
+        'bicycles',
+        'motorcycles',
+        'traffic lights',
+        'crosswalks',
+        'fire hydrants',
+        'stairs',
+        'tractors',
+        'buses',
+        'mountains or hills',
+        'palm trees',
+        'chimneys',
+        'bridges',
+      ],
     },
     validation: {
       error: {
