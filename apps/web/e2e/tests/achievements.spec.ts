@@ -1,7 +1,9 @@
 import { expect, test } from '@playwright/test';
 import { allDisabledPainPreferencesState } from '../fixtures/pain-preferences';
 import { getAchievementsPage } from '../pages/AchievementsPage';
+import { getAdminPage } from '../pages/AdminPage';
 import { getHomePage } from '../pages/HomePage';
+import { getPlansPage } from '../pages/PlansPage';
 import { setupE2eTestState } from '../utils/setup';
 import { selectText } from '../utils/ui';
 import { setAchievements, setPainPreferences } from '../utils/zustand';
@@ -43,9 +45,7 @@ test.describe('Achievements', () => {
       const homePage = getHomePage(page);
       await homePage.goto();
 
-      const toast = page.locator('button', {
-        hasText: 'Achievement Unlocked!',
-      });
+      const toast = homePage.toast.achievementUnlocked;
       await expect(toast).toBeVisible();
       await expect(toast).toContainText('Welcome to Hell');
     },
@@ -68,9 +68,7 @@ test.describe('Achievements', () => {
         await page.keyboard.up(modifier);
       }
 
-      const toast = page.locator('button', {
-        hasText: 'Achievement Unlocked!',
-      });
+      const toast = achievementsPage.toast.achievementUnlocked;
 
       await expect(toast).toBeVisible();
       await expect(toast).toContainText('Copy-Paste Criminal');
@@ -78,14 +76,14 @@ test.describe('Achievements', () => {
   );
 
   test('unlocks "The Seeker" on search', async ({ page }) => {
-    const homePage = getHomePage(page);
-    await homePage.goto();
+    const achievementsPage = getAchievementsPage(page);
+    await achievementsPage.goto();
 
     const searchInput = page.getByPlaceholder('Search');
     await searchInput.fill('something');
     await searchInput.press('Enter');
 
-    const toast = page.locator('button', { hasText: 'Achievement Unlocked!' });
+    const toast = achievementsPage.toast.achievementUnlocked;
     await expect(toast).toBeVisible();
     await expect(toast).toContainText('The Seeker');
   });
@@ -93,23 +91,27 @@ test.describe('Achievements', () => {
   test('unlocks "Financial Commitment" on package selection', async ({
     page,
   }) => {
+    const plansPage = getPlansPage(page);
+    await plansPage.goto();
+
     await page.goto('/plans');
     await page.getByRole('button', { name: 'Select' }).first().click();
 
-    const toast = page.locator('button', { hasText: 'Achievement Unlocked!' });
+    const toast = plansPage.toast.achievementUnlocked;
     await expect(toast).toBeVisible();
     await expect(toast).toContainText('Financial Commitment');
   });
 
   test('unlocks "Dead Pixel Hunter" on dead pixel click', async ({ page }) => {
-    await page.goto('/');
+    const achievementPage = getAchievementsPage(page);
+    await achievementPage.goto();
 
     const deadPixel = page.locator('[data-testid="dead-pixel"]').first();
     // It might take a bit to appear due to useEffect and hydration
     await expect(deadPixel).toBeVisible({ timeout: 15000 });
     await deadPixel.click({ force: true });
 
-    const toast = page.locator('button', { hasText: 'Achievement Unlocked!' });
+    const toast = achievementPage.toast.achievementUnlocked;
     await expect(toast).toBeVisible();
     await expect(toast).toContainText('Dead Pixel Hunter');
   });
@@ -117,7 +119,8 @@ test.describe('Achievements', () => {
   test('unlocks "Right-Click Rebel" after 20 right clicks', async ({
     page,
   }) => {
-    await page.goto('/');
+    const achievementPage = getAchievementsPage(page);
+    await achievementPage.goto();
 
     await page.waitForFunction(() => window.maw?._emit !== undefined);
 
@@ -127,13 +130,15 @@ test.describe('Achievements', () => {
       });
     }
 
-    const toast = page.locator('button', { hasText: 'Achievement Unlocked!' });
+    const toast = achievementPage.toast.achievementUnlocked;
     await expect(toast).toBeVisible();
     await expect(toast).toContainText('Right-Click Rebel');
   });
 
   test('unlocks "The System Admin" on admin login', async ({ page }) => {
-    await page.goto('/admin');
+    const adminPage = getAdminPage(page);
+    await adminPage.goto();
+
     await expect(page.locator('text=login:')).toBeVisible({ timeout: 15000 });
     await page.keyboard.type('admin', { delay: 50 });
     await page.keyboard.press('Enter');
@@ -141,13 +146,14 @@ test.describe('Achievements', () => {
     await page.keyboard.type('admin', { delay: 50 });
     await page.keyboard.press('Enter');
 
-    const toast = page.locator('button', { hasText: 'Achievement Unlocked!' });
+    const toast = adminPage.toast.achievementUnlocked;
     await expect(toast).toBeVisible();
     await expect(toast).toContainText('The System Admin');
   });
 
   test('unlocks "Optimistic Gambler" on wheel spin', async ({ page }) => {
-    await page.goto('/');
+    const achievementPage = getAchievementsPage(page);
+    await achievementPage.goto();
 
     const wheelTrigger = page.getByLabel('Wheel of fortune');
     await expect(wheelTrigger).toBeVisible({ timeout: 10000 });
@@ -157,7 +163,7 @@ test.describe('Achievements', () => {
     await expect(spinButton).toBeVisible();
     await spinButton.click();
 
-    const toast = page.locator('button', { hasText: 'Achievement Unlocked!' });
+    const toast = achievementPage.toast.achievementUnlocked;
     await expect(toast).toBeVisible({ timeout: 20000 });
     await expect(toast).toContainText('Optimistic Gambler');
   });

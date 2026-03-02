@@ -1,15 +1,12 @@
 import type { Page } from '@playwright/test';
 
-import { getFooter } from './shared/Footer';
-import { getHeader } from './shared/Header';
+import { getSharedLocators } from './shared/Shared';
 
 export const getAchievementsPage = (page: Page) => {
-  const header = getHeader(page);
-  const footer = getFooter(page);
+  const shared = getSharedLocators(page);
 
   return {
-    ...header,
-    ...footer,
+    ...shared,
 
     achievementCard: page.getByTestId('achievement-card'),
 

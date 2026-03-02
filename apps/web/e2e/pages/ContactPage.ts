@@ -1,17 +1,13 @@
 import type { Page } from '@playwright/test';
 
-import { getFooter } from './shared/Footer';
-import { getHeader } from './shared/Header';
+import { getSharedLocators } from './shared/Shared';
 
 export const getContactPage = (page: Page) => {
-  const header = getHeader(page);
-  const footer = getFooter(page);
-
+  const shared = getSharedLocators(page);
   const pageLocator = page.locator('main');
 
   return {
-    ...header,
-    ...footer,
+    ...shared,
 
     headline: pageLocator.getByRole('heading', { name: 'Contact' }),
     subjectInput: pageLocator.getByRole('textbox', { name: 'Subject' }),
