@@ -1,16 +1,20 @@
-import * as EventBus from '@/core/events/event-bus';
+import type Emittery from 'emittery';
 
-// Setting up global window context, mainly used for e2e. Avoid other usecases.
-if (typeof window !== 'undefined') {
+export function configureEvents(eventBus: Emittery<AppEvents>) {
+  // Setting up global window context, mainly used for e2e. Avoid other usecases.
+  if (typeof window === 'undefined') {
+    return;
+  }
+
   if (window.maw === undefined) {
     window.maw = {};
   }
 
   if (window.maw._emit === undefined) {
-    window.maw._emit = EventBus.emit;
+    window.maw._emit = eventBus.emit;
   }
 
   if (window.maw._on === undefined) {
-    window.maw._on = EventBus.on;
+    window.maw._on = eventBus.on;
   }
 }

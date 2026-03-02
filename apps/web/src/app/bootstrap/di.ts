@@ -1,4 +1,4 @@
-import { getDependencyContainer } from '@/core/di';
+import type { Container } from 'inversify';
 import { AchievementBankService } from '@/features/achievements/services';
 import { DI as DIAchievements } from '@/features/achievements/types';
 import { FakeAuthRepository } from '@/features/auth/repositories';
@@ -15,8 +15,6 @@ import { DI as DISubscription } from '@/features/subscription/types';
 import { StaticCountryRepository } from '@/repositories';
 import { AppService } from '@/services';
 
-const container = getDependencyContainer();
-
 export const Symbols = {
   CountryRepository: Symbol.for('CountryRepository'),
   KernelService: Symbol.for('KernelService'),
@@ -28,28 +26,33 @@ export const Symbols = {
   ...DISubscription,
 };
 
-// Bing dependencies
-container
-  .bind(Symbols.CountryRepository)
-  .to(StaticCountryRepository)
-  .inSingletonScope();
-container.bind(Symbols.KernelService).to(AppService).inSingletonScope();
-container
-  .bind(Symbols.SubscriptionPlansService)
-  .to(SubscriptionPlansService)
-  .inSingletonScope();
-container
-  .bind(Symbols.AuthRepository)
-  .to(FakeAuthRepository)
-  .inSingletonScope();
-container.bind(Symbols.AuthService).to(AuthService).inSingletonScope();
-container
-  .bind(Symbols.AchievementBankService)
-  .to(AchievementBankService)
-  .inSingletonScope();
-container.bind(Symbols.DonationService).to(DonationService).inSingletonScope();
-container.bind(Symbols.CommentService).to(CommentService).inSingletonScope();
-container
-  .bind(Symbols.AppArticleService)
-  .to(AppArticleService)
-  .inSingletonScope();
+export function configureContainer(container: Container) {
+  // Bing dependencies
+  container
+    .bind(Symbols.CountryRepository)
+    .to(StaticCountryRepository)
+    .inSingletonScope();
+  container.bind(Symbols.KernelService).to(AppService).inSingletonScope();
+  container
+    .bind(Symbols.SubscriptionPlansService)
+    .to(SubscriptionPlansService)
+    .inSingletonScope();
+  container
+    .bind(Symbols.AuthRepository)
+    .to(FakeAuthRepository)
+    .inSingletonScope();
+  container.bind(Symbols.AuthService).to(AuthService).inSingletonScope();
+  container
+    .bind(Symbols.AchievementBankService)
+    .to(AchievementBankService)
+    .inSingletonScope();
+  container
+    .bind(Symbols.DonationService)
+    .to(DonationService)
+    .inSingletonScope();
+  container.bind(Symbols.CommentService).to(CommentService).inSingletonScope();
+  container
+    .bind(Symbols.AppArticleService)
+    .to(AppArticleService)
+    .inSingletonScope();
+}

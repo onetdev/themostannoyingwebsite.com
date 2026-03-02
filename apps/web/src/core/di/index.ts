@@ -1,7 +1,13 @@
 import { Container } from 'inversify';
+import { configureContainer } from '@/app/bootstrap/di';
 
-const container = new Container();
+let container: Container;
 
 export function getDependencyContainer() {
+  if (!container) {
+    container = new Container();
+    configureContainer(container);
+  }
+
   return container;
 }

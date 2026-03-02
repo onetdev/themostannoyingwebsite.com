@@ -1,3 +1,5 @@
+'use client';
+
 import { useMemo } from 'react';
 import { useAppConfigContext } from '@/core/config/react-app-config';
 import { useDonationService } from './';

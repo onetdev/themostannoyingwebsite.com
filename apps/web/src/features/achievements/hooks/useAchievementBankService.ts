@@ -1,3 +1,5 @@
+'use client';
+
 import { useDiContext } from '@/core/di/react-di';
 import type { AchievementBankService } from '../services';
 import { DI } from '../types';
