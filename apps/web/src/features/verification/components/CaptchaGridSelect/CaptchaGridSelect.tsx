@@ -8,7 +8,9 @@ interface CaptchaGridSelectProps {
   className?: string;
   imageSrc: string;
   onResolved?: () => void;
+  onSelectionChange?: (selectedCount: number) => void;
   prompt: string;
+  showFooter?: boolean;
 }
 
 interface TileState {
@@ -22,9 +24,15 @@ export function CaptchaGridSelect({
   className = '',
   imageSrc,
   onResolved,
+  onSelectionChange,
   prompt,
+  showFooter = true,
 }: CaptchaGridSelectProps) {
   const [tiles, setTiles] = useState<TileState[]>([]);
+
+  useEffect(() => {
+    onSelectionChange?.(tiles.filter((t) => t.selected).length);
+  }, [tiles, onSelectionChange]);
 
   useEffect(() => {
     const initialTiles: TileState[] = [];
@@ -111,35 +119,22 @@ export function CaptchaGridSelect({
         ))}
       </div>
 
-      <div className="mt-2 flex items-center justify-between border-t pt-2">
-        <div className="flex gap-2">
-          {/* Icons placeholder for reload, audio, help */}
-          <button
-            type="button"
-            className="text-muted-foreground hover:text-foreground"
-          >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="20"
-              height="20"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
+      {showFooter && (
+        <div className="mt-2 flex items-center justify-between border-t pt-2">
+          <div className="flex gap-2">
+            {/* Icons placeholder for reload, audio, help */}
+            <button
+              type="button"
+              className="text-muted-foreground hover:text-foreground"
             >
-              <path d="M3 12a9 9 0 0 1 9-9 9.75 9.75 0 0 1 6.74 2.74L21 8" />
-              <path d="M21 3v5h-5" />
-              <path d="M21 12a9 9 0 0 1-9 9 9.75 9.75 0 0 1-6.74-2.74L3 16" />
-              <path d="M3 21v-5h5" />
-            </svg>
-          </button>
+              <Icon icon="check" />
+            </button>
+          </div>
+          <Button onClick={onResolved} size="sm" className="px-6 uppercase">
+            Next
+          </Button>
         </div>
-        <Button onClick={onResolved} size="sm" className="px-6 uppercase">
-          Next
-        </Button>
-      </div>
+      )}
     </div>
   );
 }
