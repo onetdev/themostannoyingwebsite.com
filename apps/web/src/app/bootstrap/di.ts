@@ -1,4 +1,5 @@
 import type { Container } from 'inversify';
+import { CoreSymbols } from '@/core/di/symbols';
 import { AchievementBankService } from '@/features/achievements/services';
 import { DI as DIAchievements } from '@/features/achievements/types';
 import { FakeAuthRepository } from '@/features/auth/repositories';
@@ -16,8 +17,7 @@ import { StaticCountryRepository } from '@/repositories';
 import { AppService } from '@/services';
 
 export const Symbols = {
-  CountryRepository: Symbol.for('CountryRepository'),
-  KernelService: Symbol.for('KernelService'),
+  ...CoreSymbols,
   ...DIAuth,
   ...DIAchievements,
   ...DIComments,

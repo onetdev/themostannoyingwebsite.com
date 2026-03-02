@@ -47,12 +47,12 @@ export function PlansPage({
     [],
   );
 
-  const handleSelectPlan = (key: string) => {
+  const handleSelectPlan = useCallback((key: string) => {
     setSelectedPlanKey(key);
     emit('subscription:package-selected', {
       packageId: key,
     });
-  };
+  }, []);
 
   return (
     <>

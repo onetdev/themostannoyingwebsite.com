@@ -1,6 +1,6 @@
 import 'reflect-metadata';
 import { Container } from 'inversify';
-import { Symbols } from '@/core/di/symbols';
+import { CoreSymbols } from '@/core/di/symbols';
 import type { CountryRepository } from '@/repositories';
 import { AppService } from './AppService';
 
@@ -15,7 +15,7 @@ describe('AppService', () => {
       findAll: jest.fn(),
     };
     container
-      .bind<CountryRepository>(Symbols.CountryRepository)
+      .bind<CountryRepository>(CoreSymbols.CountryRepository)
       .toConstantValue(mockCountryRepository);
     container.bind<AppService>(AppService).toSelf();
     appService = container.get<AppService>(AppService);

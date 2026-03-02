@@ -1,9 +1,9 @@
 import { inject } from 'inversify';
-import { Symbols } from '@/core/di/symbols';
+import { CoreSymbols } from '@/core/di/symbols';
 import type { CountryRepository } from '@/repositories';
 
 export class AppService {
-  @inject(Symbols.CountryRepository)
+  @inject(CoreSymbols.CountryRepository)
   private countryRepository!: CountryRepository;
 
   getAllCountries() {
