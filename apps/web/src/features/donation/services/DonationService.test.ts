@@ -1,13 +1,17 @@
-import { getDependencyContainer } from '@/core/di';
+import 'reflect-metadata';
+import { Container } from 'inversify';
 import type { DonationBalanceConfig } from '../types';
-import { type DonationService, getDonationService } from './DonationService';
+import { DI } from '../types';
+import { DonationService, getDonationService } from './DonationService';
 
 describe('DonationService', () => {
-  const container = getDependencyContainer();
+  let container: Container;
   let service: DonationService;
   let mockTranslate: jest.Mock;
 
   beforeEach(() => {
+    container = new Container();
+    container.bind<DonationService>(DI.DonationService).to(DonationService);
     service = getDonationService(container);
     mockTranslate = jest.fn((key: string) => {
       // Mock translation function
