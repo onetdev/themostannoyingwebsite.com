@@ -14,14 +14,20 @@ const config: AppConfig = {
   auth: {
     assets: {
       captchaTile: '/assets/images/captcha-tile-abstract.jpg',
+      captchaRandom: [
+        '/assets/images/captcha-random-8x8-a.jpg',
+        '/assets/images/captcha-random-8x8-b.jpg',
+      ],
     },
   },
   content: {
     assets: {
-      lavaImage: '/assets/images/lava.webp',
-      coverPlaceholder: '/assets/cover-placeholder.svg',
-      hotThingsVtt: {
-        en: '/assets/vtt/hot-things-en.vtt',
+      articleCoverPlaceholder: '/assets/cover-placeholder.svg',
+      hotThings: {
+        placeholder: '/assets/images/hot-things.webp',
+        vtt: {
+          en: '/assets/vtt/hot-things-en.vtt',
+        },
       },
     },
   },
