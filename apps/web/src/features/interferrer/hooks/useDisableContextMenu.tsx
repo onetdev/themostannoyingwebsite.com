@@ -1,6 +1,6 @@
 import { useTranslations } from 'next-intl';
 import { useCallback, useEffect } from 'react';
-import { emit } from '@/event-bus';
+import { emit } from '@/core/events/event-bus';
 import { usePainPreferencesStore } from '@/stores';
 
 export function useDisableContextMenu() {

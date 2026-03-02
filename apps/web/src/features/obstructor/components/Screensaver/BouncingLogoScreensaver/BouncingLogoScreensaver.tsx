@@ -4,7 +4,7 @@ import { clsx } from '@maw/ui-lib/utils';
 import { randomInt } from '@maw/utils/math';
 import { useTranslations } from 'next-intl';
 import { useEffect, useRef, useState } from 'react';
-import { emit } from '@/event-bus';
+import { emit } from '@/core/events/event-bus';
 import { BouncyLogo } from './BouncyLogo';
 
 const HUE_ROTATION_CHANCE = 0.1;

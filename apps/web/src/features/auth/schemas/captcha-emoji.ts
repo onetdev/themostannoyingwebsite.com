@@ -1,7 +1,5 @@
 import { z } from 'zod';
 
-import type { ZodTranslator } from '@/types';
-
 export function getCaptchaEmojiDataSchema(t: ZodTranslator) {
   return z
     .string()

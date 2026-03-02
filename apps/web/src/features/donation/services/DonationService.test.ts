@@ -1,4 +1,4 @@
-import { getDependencyContainer } from '@/dependency-container';
+import { getDependencyContainer } from '@/core/di';
 import type { DonationBalanceConfig } from '../types';
 import { type DonationService, getDonationService } from './DonationService';
 

@@ -3,8 +3,8 @@ import { getTranslations } from 'next-intl/server';
 
 export { generateStaticParams } from '@/i18n/routing';
 
-import config from '@/config';
-import { getDependencyContainer } from '@/dependency-container';
+import config from '@/core/config';
+import { getDependencyContainer } from '@/core/di';
 import { PlansPage } from '@/features/subscription/components';
 import { getSubscriptionPlansService } from '@/features/subscription/services';
 import { PageLayout } from '../_components/PageLayout';

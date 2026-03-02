@@ -1,8 +1,7 @@
 import deploymentMeta from '@/root/public/deployment-meta.json' with {
   type: 'json',
 };
-import type { Environment } from './schemas';
-import type { AppConfig } from './schemas/app-config';
+import type { AppConfig, Environment } from '@/schemas';
 
 const config: AppConfig = {
   defaultColorScheme: 'dark' as AppTheme,

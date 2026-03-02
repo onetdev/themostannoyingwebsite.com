@@ -1,12 +1,11 @@
-import '@/global.css';
+import '@/app/global.css';
 import { Analytics } from '@vercel/analytics/react';
 import { Inter } from 'next/font/google';
 import { notFound } from 'next/navigation';
 import { hasLocale, NextIntlClientProvider } from 'next-intl';
 import { getLangDir } from 'rtl-detect';
-
+import { ClientRootProviderContainer } from '@/app/bootstrap/ClientRootProviderContainer';
 import { routing } from '@/i18n/routing';
-import { ClientRootProviderContainer } from '@/providers/ClientRootProviderContainer';
 import { getAppConfigService } from '@/services';
 
 const config = getAppConfigService().getAll();

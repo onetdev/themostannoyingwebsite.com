@@ -10,7 +10,7 @@ import {
 import { cn, cva, type VariantProps } from '@maw/ui-lib/utils';
 import { useTranslations } from 'next-intl';
 import type { SubmitEventHandler } from 'react';
-import { emit } from '@/event-bus';
+import { emit } from '@/core/events/event-bus';
 import { useRouter } from '@/i18n/navigation';
 
 const searchFormVariants = cva('', {

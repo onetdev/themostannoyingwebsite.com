@@ -1,7 +1,5 @@
 import { z } from 'zod';
 
-import type { ZodTranslator } from '@/types';
-
 export function getPasswordReminderFormDataSchema(t: ZodTranslator) {
   return z.object({
     email: z.email({ message: t('form.validation.error.emailInvalid') }),

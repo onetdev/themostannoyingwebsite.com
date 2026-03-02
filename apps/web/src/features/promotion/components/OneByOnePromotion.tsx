@@ -2,7 +2,7 @@
 
 import Image from 'next/image';
 import { useTranslations } from 'next-intl';
-import { useAppConfig } from '@/contexts/AppConfig';
+import { useAppConfigContext } from '@/core/config/react-app-config';
 import { Link } from '@/i18n/navigation';
 import { usePainPreferencesStore, useRuntimeStore } from '@/stores';
 
@@ -11,7 +11,7 @@ export type OneByOnePromotionProps = {
 };
 
 export function OneByOnePromotion({ size = 1024 }: OneByOnePromotionProps) {
-  const config = useAppConfig();
+  const config = useAppConfigContext();
   const t = useTranslations();
   const enabled = usePainPreferencesStore(
     (state) => state.flags['gifts.oneByOne'],

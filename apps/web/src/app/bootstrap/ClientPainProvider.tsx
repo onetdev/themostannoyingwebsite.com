@@ -3,7 +3,7 @@
 import { CopyMarker } from '@maw/ui-lib';
 import { useTranslations } from 'next-intl';
 import { type PropsWithChildren, useEffect } from 'react';
-import { emit } from '@/event-bus';
+import { emit } from '@/core/events/event-bus';
 import { PageTitleGlitch } from '@/features/interferrer/components';
 import {
   useDisableContextMenu,

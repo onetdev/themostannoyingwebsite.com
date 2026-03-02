@@ -1,9 +1,9 @@
 import { useMemo } from 'react';
-import { useAppConfig } from '@/contexts/AppConfig';
+import { useAppConfigContext } from '@/core/config/react-app-config';
 import { useDonationService } from './';
 
 export function useDonationBalance(): number {
-  const { donation } = useAppConfig();
+  const { donation } = useAppConfigContext();
   const donationService = useDonationService();
 
   const balance = useMemo(() => {

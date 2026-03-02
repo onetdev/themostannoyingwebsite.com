@@ -1,8 +1,4 @@
-import Emittery from 'emittery';
-
-export const eventBus = new Emittery<AppEvents>();
-export const emit = eventBus.emit.bind(eventBus);
-export const on = eventBus.on.bind(eventBus);
+import * as EventBus from '@/core/events/event-bus';
 
 // Setting up global window context, mainly used for e2e. Avoid other usecases.
 if (typeof window !== 'undefined') {
@@ -11,10 +7,10 @@ if (typeof window !== 'undefined') {
   }
 
   if (window.maw._emit === undefined) {
-    window.maw._emit = emit;
+    window.maw._emit = EventBus.emit;
   }
 
   if (window.maw._on === undefined) {
-    window.maw._on = on;
+    window.maw._on = EventBus.on;
   }
 }

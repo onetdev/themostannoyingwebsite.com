@@ -3,13 +3,13 @@
 import { Toaster, TooltipProvider } from '@maw/ui-lib';
 import { ThemeProvider } from 'next-themes';
 import type { PropsWithChildren } from 'react';
-import { AppConfigProvider } from '@/contexts/AppConfig';
-import { DependencyContainer } from '@/contexts/DependencyContainer';
-import { getDependencyContainer } from '@/dependency-container';
+import { AppConfigProvider } from '@/core/config/react-app-config';
+import { getDependencyContainer } from '@/core/di';
+import { DiContextProvider } from '@/core/di/react-di';
 import { AchievementManager } from '@/features/achievements/providers';
-import { ClientPainContainer } from '@/providers/ClientPainProvider';
 import type { AppConfig } from '@/schemas/app-config';
-import { ClientNavigationConfigurator } from './ClientNavigationConfigurator';
+import { ClientNavigationConfigurator } from '../../navigation/ClientNavigationConfigurator';
+import { ClientPainContainer } from './ClientPainProvider';
 
 export type ClientRootProviderContainerProps = PropsWithChildren<{
   appConfig: AppConfig;
@@ -24,7 +24,7 @@ export function ClientRootProviderContainer({
   return (
     <AppConfigProvider config={appConfig}>
       <TooltipProvider>
-        <DependencyContainer value={{ container: DiContainer }}>
+        <DiContextProvider value={{ container: DiContainer }}>
           <ThemeProvider defaultTheme="dark" enableColorScheme enableSystem>
             <ClientNavigationConfigurator>
               <Toaster />
@@ -32,7 +32,7 @@ export function ClientRootProviderContainer({
               <ClientPainContainer>{children}</ClientPainContainer>
             </ClientNavigationConfigurator>
           </ThemeProvider>
-        </DependencyContainer>
+        </DiContextProvider>
       </TooltipProvider>
     </AppConfigProvider>
   );

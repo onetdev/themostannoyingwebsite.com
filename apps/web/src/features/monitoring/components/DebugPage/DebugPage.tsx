@@ -8,7 +8,7 @@ import {
   TabsList,
   TabsTrigger,
 } from '@maw/ui-lib';
-import config from '@/config';
+import config from '@/core/config';
 import { useAchievementsStore } from '@/features/achievements/stores';
 import { useMonitoringStore } from '@/features/monitoring/stores';
 import {

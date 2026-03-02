@@ -1,7 +1,7 @@
 import { create } from 'zustand';
 import { createJSONStorage, persist } from 'zustand/middleware';
 
-import config from '@/config';
+import config from '@/core/config';
 import type { ScreensaverVariant } from '@/features/obstructor/schemas';
 import { broadcastChannelSync } from '@/stores/utils/sync';
 import {

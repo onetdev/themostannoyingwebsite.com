@@ -9,8 +9,8 @@ import {
 } from '@maw/ui-lib';
 import { useTranslations } from 'next-intl';
 import { FormProvider } from 'react-hook-form';
-import config from '@/config';
-import { useNavigationProvider } from '@/contexts/NavigationContext';
+import config from '@/core/config';
+import { useNavigationProvider } from '@/navigation/NavigationContext';
 import { usePasswordReminderForm } from '../../hooks';
 import { EmailField } from '../fields/EmailField';
 

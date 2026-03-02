@@ -1,7 +1,7 @@
 'use client';
 
 import { useCallback } from 'react';
-import { emit } from '@/event-bus';
+import { emit } from '@/core/events/event-bus';
 import { useEvent } from '@/hooks';
 import { AchievementToastManager } from '../components/AchievementToastManager';
 import { useAchievementBankService } from '../hooks';

@@ -1,8 +1,8 @@
-import { useDependencyContainer } from '@/contexts/DependencyContainer';
-import { DI } from '@/types';
+import { useDiContext } from '@/core/di/react-di';
+import { Symbols } from '@/core/di/symbols';
 import type { AppService } from '../services/AppService';
 
 export const useAppService = () => {
-  const { container } = useDependencyContainer();
-  return container.get<AppService>(DI.KernelService);
+  const { container } = useDiContext();
+  return container.get<AppService>(Symbols.KernelService);
 };

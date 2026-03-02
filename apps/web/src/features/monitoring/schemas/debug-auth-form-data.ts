@@ -1,5 +1,4 @@
 import { z } from 'zod';
-import type { ZodTranslator } from '@/types';
 
 export function getDebugAuthFormDataSchema(t: ZodTranslator) {
   return z.object({

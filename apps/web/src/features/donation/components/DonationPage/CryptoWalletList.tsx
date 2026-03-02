@@ -1,7 +1,7 @@
 'use client';
 
 import type { ComponentProps } from 'react';
-import { useAppConfig } from '@/contexts/AppConfig';
+import { useAppConfigContext } from '@/core/config/react-app-config';
 import { CryptoWallet } from './CryptoWallet';
 
 export type CryptoWalletListProps = ComponentProps<'div'>;
@@ -10,7 +10,7 @@ export function CryptoWalletList({
   className,
   ...rest
 }: CryptoWalletListProps) {
-  const configService = useAppConfig().donation;
+  const configService = useAppConfigContext().donation;
   const btcWallet = configService.btcWallet;
   const ethWallet = configService.ethWallet;
 

@@ -2,11 +2,11 @@
 
 import Image from 'next/image';
 import { useTranslations } from 'next-intl';
-import { useAppConfig } from '@/contexts/AppConfig';
+import { useAppConfigContext } from '@/core/config/react-app-config';
 import { DilfClickOverlay } from './DilfClickOverlay';
 
 export function DilfFinder() {
-  const config = useAppConfig();
+  const config = useAppConfigContext();
   const t = useTranslations();
 
   return (

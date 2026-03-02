@@ -10,8 +10,8 @@ import {
   Transform,
 } from 'ogl';
 import { useEffect, useRef } from 'react';
-import { useAppConfig } from '@/contexts/AppConfig';
-import { emit } from '@/event-bus';
+import { useAppConfigContext } from '@/core/config/react-app-config';
+import { emit } from '@/core/events/event-bus';
 import { MAZE_24 } from './data';
 import { texturedFragment, texturedVertex } from './shaders';
 import { getTextures } from './textures';
@@ -25,7 +25,7 @@ type Direction = 'N' | 'S' | 'E' | 'W';
 
 // Windows 95 3D Maze inspired raycasting screensaver
 export function MazeScreensaver() {
-  const config = useAppConfig();
+  const config = useAppConfigContext();
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
   useEffect(() => {

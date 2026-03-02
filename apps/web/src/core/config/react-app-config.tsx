@@ -7,7 +7,7 @@ import {
   useContext,
 } from 'react';
 
-import type { AppConfig } from '@/schemas/app-config';
+import type { AppConfig } from '@/schemas';
 
 export const AppConfigContext = createContext<AppConfig | null>(null);
 
@@ -28,11 +28,13 @@ export const AppConfigProvider: FunctionComponent<AppConfigProviderProps> = ({
   );
 };
 
-export const useAppConfig = () => {
+export const useAppConfigContext = () => {
   const context = useContext(AppConfigContext);
 
   if (!context) {
-    throw new Error('useAppConfig must be used within an AppConfigProvider');
+    throw new Error(
+      'useAppConfigContext must be used within an AppConfigProvider',
+    );
   }
 
   return context;

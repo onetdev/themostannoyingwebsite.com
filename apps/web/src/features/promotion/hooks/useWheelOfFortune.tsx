@@ -7,7 +7,7 @@ import {
 } from '@maw/utils/math';
 import { useTranslations } from 'next-intl';
 import { useCallback, useMemo, useState } from 'react';
-import { emit } from '@/event-bus';
+import { emit } from '@/core/events/event-bus';
 import type { Item } from '../components/WheelOfFortune/DynamicWheelSvg';
 
 export type AnimatedWheelState = 'ready' | 'spinning' | 'completed';
