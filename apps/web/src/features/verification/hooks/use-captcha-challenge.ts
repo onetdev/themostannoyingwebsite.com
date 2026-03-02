@@ -4,16 +4,18 @@ import { useCallback, useState } from 'react';
 
 export type ChallengeType = 'emoji' | 'tile' | 'grid';
 
-export type CaptchaStatus = 'idle' | 'loading' | 'challenge';
+export type CaptchaStatus = 'idle' | 'loading' | 'challenge' | 'failed';
 
 export interface UseCaptchaChallengeProps {
   onResolved?: () => void;
+  onFailed?: () => void;
   gridSelectPrompts: string[];
   captchaRandom: string[];
 }
 
 export function useCaptchaChallenge({
   onResolved,
+  onFailed,
   gridSelectPrompts,
   captchaRandom,
 }: UseCaptchaChallengeProps) {
@@ -25,13 +27,6 @@ export function useCaptchaChallenge({
   const [progress, setProgress] = useState(0);
 
   const calculateProgress = useCallback((clicks: number) => {
-    // 100 - (100 / (clicks + 1)) will never reach 100
-    // 0: 0%
-    // 1: 50%
-    // 2: 66.6%
-    // 3: 75%
-    // 10: 90.9%
-    // 100: 99.01%
     return 100 - 100 / (clicks + 1);
   }, []);
 
@@ -60,7 +55,7 @@ export function useCaptchaChallenge({
   );
 
   const handleCheckboxClick = useCallback(() => {
-    if (status !== 'idle') {
+    if (status === 'challenge' || status === 'loading') {
       return;
     }
 
@@ -79,7 +74,6 @@ export function useCaptchaChallenge({
   }, [clickCount, challengeType, pickRandomChallenge, calculateProgress]);
 
   const handleChallengeResolved = useCallback(() => {
-    // In this annoying website, resolving a challenge just gives you another one
     handleNext();
     onResolved?.();
   }, [handleNext, onResolved]);
@@ -87,6 +81,11 @@ export function useCaptchaChallenge({
   const handleReset = useCallback(() => {
     handleNext();
   }, [handleNext]);
+
+  const handleDismiss = useCallback(() => {
+    setStatus('failed');
+    onFailed?.();
+  }, [onFailed]);
 
   return {
     status,
@@ -97,5 +96,6 @@ export function useCaptchaChallenge({
     handleCheckboxClick,
     handleChallengeResolved,
     handleReset,
+    handleDismiss,
   };
 }

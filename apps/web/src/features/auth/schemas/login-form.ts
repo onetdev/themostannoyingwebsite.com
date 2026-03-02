@@ -1,5 +1,5 @@
 import { z } from 'zod';
-import { getCaptchaEmojiDataSchema } from './captcha-emoji';
+import { getCaptchaEmojiDataSchema } from '@/features/verification/schemas';
 
 export function getLoginFormDataSchema(t: ZodTranslator) {
   return z.object({

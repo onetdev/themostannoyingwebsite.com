@@ -11,7 +11,7 @@ const config: AppConfig = {
     },
     progressiveAchievementToastThrottlingSeconds: 10,
   },
-  auth: {
+  verification: {
     assets: {
       captchaTile: '/assets/images/captcha-tile-abstract.jpg',
       captchaRandom: [

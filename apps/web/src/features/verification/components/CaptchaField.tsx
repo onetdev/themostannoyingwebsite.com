@@ -35,7 +35,7 @@ export function CaptchaField({
     invalid: t('form.validation.error.captchaInvalid'),
   };
 
-  const assets = config.auth.assets;
+  const assets = config.verification.assets;
 
   const {
     status,
@@ -46,8 +46,10 @@ export function CaptchaField({
     handleCheckboxClick,
     handleChallengeResolved,
     handleReset,
+    handleDismiss,
   } = useCaptchaChallenge({
     onResolved: () => setValue(fieldName, 'true'),
+    onFailed: () => setValue(fieldName, ''),
     gridSelectPrompts: captchaText.gridSelectPrompts,
     captchaRandom: assets.captchaRandom,
   });
@@ -68,6 +70,7 @@ export function CaptchaField({
             type={challengeType}
             onResolved={handleChallengeResolved}
             onReset={handleReset}
+            onDismiss={handleDismiss}
             gridPrompt={gridPrompt}
             gridImage={gridImage}
             progress={progress}

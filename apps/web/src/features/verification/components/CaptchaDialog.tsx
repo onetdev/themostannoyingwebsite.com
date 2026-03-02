@@ -9,6 +9,7 @@ import {
   Progress,
 } from '@maw/ui-lib';
 import { useState } from 'react';
+import { useEvent } from '@/core/events/react/useEvent';
 import type { ChallengeType } from '../hooks/use-captcha-challenge';
 import { CaptchaEmoji } from './CaptchaEmoji';
 import { CaptchaGridSelect } from './CaptchaGridSelect';
@@ -19,6 +20,7 @@ export interface CaptchaDialogProps {
   type: ChallengeType;
   onResolved: () => void;
   onReset: () => void;
+  onDismiss: () => void;
   gridPrompt: string;
   gridImage: string;
   progress: number;
@@ -37,6 +39,7 @@ export function CaptchaDialog({
   type,
   onResolved,
   onReset,
+  onDismiss,
   gridPrompt,
   gridImage,
   progress,
@@ -45,9 +48,17 @@ export function CaptchaDialog({
 }: CaptchaDialogProps) {
   const [selectedCount, setSelectedCount] = useState(0);
 
+  useEvent('ui:modal:dismiss-signaled', () => onDismiss(), isOpen);
+
   const handleReset = () => {
     setSelectedCount(0);
     onReset();
+  };
+
+  const handleOpenChange = (open: boolean) => {
+    if (!open) {
+      onDismiss();
+    }
   };
 
   const buttonLabel = (() => {
@@ -58,11 +69,8 @@ export function CaptchaDialog({
   })();
 
   return (
-    <Dialog open={isOpen}>
-      <DialogContent
-        className="max-w-fit p-0 overflow-hidden border-none bg-transparent shadow-none"
-        showCloseButton={false}
-      >
+    <Dialog open={isOpen} onOpenChange={handleOpenChange}>
+      <DialogContent className="max-w-fit p-0 overflow-hidden border-none bg-transparent shadow-none">
         <DialogTitle className="sr-only">Captcha Challenge</DialogTitle>
         <div className="bg-background border shadow-xl flex flex-col">
           <div className="p-4">
