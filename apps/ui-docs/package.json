@@ -12,7 +12,7 @@
   },
   "dependencies": {
     "@maw/ui-lib": "workspace:*",
-    "@storybook/addon-docs": "^10.2.14",
+    "@storybook/addon-docs": "catalog:",
     "next": "catalog:",
     "react": "catalog:",
     "react-dom": "catalog:"
@@ -20,10 +20,10 @@
   "devDependencies": {
     "@biomejs/biome": "catalog:",
     "@maw/config-ts": "workspace:*",
-    "@storybook/addon-links": "^10.2.14",
+    "@storybook/addon-links": "catalog:",
     "@storybook/addon-styling-webpack": "^3.0.0",
-    "@storybook/addon-themes": "^10.2.14",
-    "@storybook/nextjs": "^10.2.14",
+    "@storybook/addon-themes": "catalog:",
+    "@storybook/nextjs": "catalog:",
     "@storybook/react": "catalog:",
     "@types/node": "catalog:",
     "@types/react": "catalog:",
