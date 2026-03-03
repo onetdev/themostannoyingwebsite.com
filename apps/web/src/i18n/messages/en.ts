@@ -234,8 +234,10 @@ export default {
     select: 'Select',
     send: 'Send',
     share: 'Share',
+    skip: 'Skip',
     submit: 'Submit',
     unknown: 'Unknown',
+    verify: 'Verify',
     yes: 'Yes',
   },
   date: {
@@ -267,17 +269,17 @@ export default {
       short: 'M/D/YYYY',
     },
   },
-  form: {
+  verification: {
     captcha: {
       field: 'Captcha',
       proveYouAreRobot: 'Prove that you are a robot!',
-      captchaEmojiHint:
+      emojiHint:
         'Count the emojis and identify which one appears the most. Look carefully, as parts of some emojis might be obscured.',
-      captchaTilePuzzleHint:
+      tilePuzzleHint:
         'Slide the tiles into their right position. You can only move the ones directly next to each other.',
-      captchaGridSelectHint:
+      gridSelectHint:
         'Select all images that match the prompt. If new images appear, check them as well.',
-      captchaGridSelectPrompts: [
+      gridSelectPrompts: [
         'bicycles',
         'motorcycles',
         'traffic lights',
@@ -291,7 +293,18 @@ export default {
         'chimneys',
         'bridges',
       ],
+      challengeTitle: 'Captcha Challenge',
+      verificationProgress: 'Verification Progress',
+      resetChallenge: 'Reset challenge',
+      taxonomyChallengePrompt:
+        'Select all squares with <spanTag>{target}</spanTag>',
+
+      taxonomyChallengeSkipHint: 'If there are none, click skip',
+      tilePuzzleChallengeHint:
+        'Move the pieces by clicking on nearby tiles next to empty space',
     },
+  },
+  form: {
     validation: {
       error: {
         unknownError: 'An unknown error occurred. Please try again later.',

@@ -10,12 +10,13 @@ import {
   Icon,
   Progress,
 } from '@maw/ui-lib';
+import { useTranslations } from 'next-intl';
 import { useState } from 'react';
 import { useEvent } from '@/core/events/react/useEvent';
 import type { ChallengeType } from '../hooks/use-captcha-challenge';
 import { EmojiCountChallenge } from './EmojiCountChallenge';
 import { TaxonomyChallenge } from './TaxonomyChallenge';
-import { TitlePuzzleChallenge } from './TilePuzzleChallenge';
+import { TilePuzzleChallenge } from './TilePuzzleChallenge';
 
 export interface CaptchaDialogProps {
   isOpen: boolean;
@@ -34,6 +35,7 @@ export function CaptchaDialog({
   onDismiss,
   progress,
 }: CaptchaDialogProps) {
+  const t = useTranslations();
   const [selectedCount, setSelectedCount] = useState(0);
 
   useEvent('ui:modal:dismiss-signaled', () => onDismiss(), isOpen);
@@ -51,9 +53,9 @@ export function CaptchaDialog({
 
   const buttonLabel = (() => {
     if (type === 'grid') {
-      return selectedCount > 0 ? 'Verify' : 'Skip';
+      return selectedCount > 0 ? t('common.verify') : t('common.skip');
     }
-    return 'Next';
+    return t('common.next');
   })();
 
   return (
@@ -63,18 +65,18 @@ export function CaptchaDialog({
         showCloseButton={true}
       >
         <DialogHeader className="border-b border-border p-4">
-          <DialogTitle>Captcha Challenge</DialogTitle>
+          <DialogTitle>{t('verification.captcha.challengeTitle')}</DialogTitle>
         </DialogHeader>
         <div className="py-2 px-5">
           <div className="flex justify-between text-[10px] font-bold uppercase text-muted-foreground">
-            <span>Verification Progress</span>
+            <span>{t('verification.captcha.verificationProgress')}</span>
             <span>{progress.toFixed(2)}%</span>
           </div>
           <Progress value={progress} className="h-1" />
         </div>
         <div className="p-4">
           {type === 'emoji' && <EmojiCountChallenge onResolved={onResolved} />}
-          {type === 'tile' && <TitlePuzzleChallenge onResolved={onResolved} />}
+          {type === 'tile' && <TilePuzzleChallenge onResolved={onResolved} />}
           {type === 'grid' && (
             <TaxonomyChallenge onResolved={onResolved} className="mx-auto" />
           )}
@@ -85,7 +87,7 @@ export function CaptchaDialog({
             <Button
               type="button"
               onClick={handleReset}
-              title="Reset challenge"
+              title={t('verification.captcha.resetChallenge')}
               variant="ghost"
             >
               <Icon icon="rotate" className="size-5" />

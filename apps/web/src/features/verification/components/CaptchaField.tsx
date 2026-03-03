@@ -25,12 +25,12 @@ export function CaptchaField({
   } = useFormContext();
 
   const captchaText = {
-    label: t('form.captcha.field'),
-    proveYouAreRobot: t('form.captcha.proveYouAreRobot'),
-    emojiHint: t('form.captcha.captchaEmojiHint'),
-    tilePuzzleHint: t('form.captcha.captchaTilePuzzleHint'),
-    gridSelectHint: t('form.captcha.captchaGridSelectHint'),
-    gridSelectPrompts: t.raw('form.captcha.captchaGridSelectPrompts'),
+    label: t('verification.captcha.field'),
+    proveYouAreRobot: t('verification.captcha.proveYouAreRobot'),
+    emojiHint: t('verification.captcha.emojiHint'),
+    tilePuzzleHint: t('verification.captcha.tilePuzzleHint'),
+    gridSelectHint: t('verification.captcha.gridSelectHint'),
+    gridSelectPrompts: t.raw('verification.captcha.gridSelectPrompts'),
     invalid: t('form.validation.error.captchaInvalid'),
   };
 

@@ -10,7 +10,7 @@ export function EmojiCountChallenge({ onResolved }: EmojiCountChallengeProps) {
 
   return (
     <>
-      <p className="mb-2 text-sm">{t('form.captcha.captchaEmojiHint')}</p>
+      <p className="mb-2 text-sm">{t('verification.captcha.emojiHint')}</p>
       <EmojiCanvas width={300} height={150} onResolved={onResolved} />
     </>
   );

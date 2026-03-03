@@ -1,6 +1,7 @@
 'use client';
 
 import { randomInt } from '@maw/utils/math';
+import { useTranslations } from 'next-intl';
 import { useState } from 'react';
 import { useAppConfigContext } from '@/core/config/react-app-config';
 import { TilePuzzle } from './TilePuzzle';
@@ -9,7 +10,8 @@ interface TilePuzzleChallengeProps {
   onResolved?: () => void;
 }
 
-export function TitlePuzzleChallenge({ onResolved }: TilePuzzleChallengeProps) {
+export function TilePuzzleChallenge({ onResolved }: TilePuzzleChallengeProps) {
+  const t = useTranslations();
   const {
     verification: { assets },
   } = useAppConfigContext();
@@ -21,7 +23,7 @@ export function TitlePuzzleChallenge({ onResolved }: TilePuzzleChallengeProps) {
 
   return (
     <>
-      <div>Move the pieces by clicking on nearby tiles next to empty space</div>
+      <div>{t('verification.captcha.tilePuzzleChallengeHint')}</div>
       <TilePuzzle
         imageSrc={imageSrc}
         onResolved={onResolved}

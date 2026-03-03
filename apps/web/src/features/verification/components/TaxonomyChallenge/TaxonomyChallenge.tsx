@@ -1,5 +1,6 @@
 'use client';
 
+import { useTranslations } from 'next-intl';
 import { useAppConfigContext } from '@/core/config/react-app-config';
 import { TaxonomySelectorSelect } from './TaxonomySelector';
 
@@ -12,6 +13,7 @@ export function TaxonomyChallenge({
   className,
   onResolved,
 }: TaxonomyChallengeProps) {
+  const t = useTranslations();
   const {
     verification: { assets },
   } = useAppConfigContext();
@@ -26,11 +28,15 @@ export function TaxonomyChallenge({
     <div className={`w-full max-w-[350px] ${className}`}>
       <div className="bg-primary text-primary-foreground mb-2 p-4">
         <div className="opacity-90">
-          Select all squares with{' '}
-          <span className="font-bold leading-tight">pamparam</span>
+          {t.rich('verification.captcha.taxonomyChallengePrompt', {
+            target: 'pamparam',
+            spanTag: (chunks) => (
+              <span className="font-bold leading-tight">{chunks}</span>
+            ),
+          })}
         </div>
         <div className="mt-1 text-xs opacity-75">
-          If there are none, click skip
+          {t('verification.captcha.taxonomyChallengeSkipHint')}
         </div>
       </div>
 
