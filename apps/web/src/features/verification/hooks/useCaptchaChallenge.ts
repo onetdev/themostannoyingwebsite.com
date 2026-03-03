@@ -39,6 +39,8 @@ export function useCaptchaChallenge({
       return;
     }
 
+    setClickCount(0);
+    setProgress(0);
     setStatus('loading');
     setTimeout(() => {
       pickRandomChallenge();
@@ -59,8 +61,10 @@ export function useCaptchaChallenge({
   }, [handleNext, onResolved]);
 
   const handleReset = useCallback(() => {
-    handleNext();
-  }, [handleNext]);
+    setClickCount(0);
+    setProgress(0);
+    pickRandomChallenge();
+  }, [pickRandomChallenge]);
 
   const handleDismiss = useCallback(() => {
     setStatus('failed');

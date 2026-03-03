@@ -1,47 +1,24 @@
 'use client';
 
-import { type Point2d, random } from '@maw/utils/math';
-import { useEffect, useRef, useState } from 'react';
-import { CAPTCHA_EMOJI_DEFAULT_POOL } from './data';
+import { useEffect, useRef } from 'react';
+import type { EmojiCountChallengeEntryMeta } from '../../types';
 
 export interface EmojiCanvasProps {
   className?: string;
-  count?: number;
   height?: number;
   itemRenderSize?: number;
-  pool?: string[];
+  items: EmojiCountChallengeEntryMeta[];
   width?: number;
-  onResolved?: () => void;
-}
-
-interface RandomItem {
-  content: string;
-  coords: Point2d;
 }
 
 export function EmojiCanvas({
   className,
-  count = 100,
   height = 100,
   itemRenderSize = 50,
-  pool = CAPTCHA_EMOJI_DEFAULT_POOL,
+  items,
   width = 300,
-  onResolved,
 }: EmojiCanvasProps) {
   const $canvasRef = useRef<HTMLCanvasElement>(null);
-  const [items, setItems] = useState<RandomItem[]>([]);
-
-  useEffect(() => {
-    const items: RandomItem[] = [];
-    for (let i = 0; i < count; i++) {
-      const x = random(0, 1);
-      const y = random(0, 1);
-      const content = pool[Math.floor(Math.random() * pool.length)];
-      items.push({ content, coords: { x, y } });
-    }
-
-    setItems(items);
-  }, [count, pool]);
 
   useEffect(() => {
     const ctx = $canvasRef.current?.getContext('2d');
@@ -69,7 +46,6 @@ export function EmojiCanvas({
       ref={$canvasRef}
       width={width}
       height={height}
-      onClick={onResolved}
     />
   );
 }

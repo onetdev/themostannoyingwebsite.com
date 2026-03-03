@@ -13,7 +13,7 @@ import {
 import { useTranslations } from 'next-intl';
 import { useState } from 'react';
 import { useEvent } from '@/core/events/react/useEvent';
-import type { ChallengeType } from '../hooks/use-captcha-challenge';
+import type { ChallengeType } from '../hooks/useCaptchaChallenge';
 import { EmojiCountChallenge } from './EmojiCountChallenge';
 import { TaxonomyChallenge } from './TaxonomyChallenge';
 import { TilePuzzleChallenge } from './TilePuzzleChallenge';
@@ -75,8 +75,12 @@ export function CaptchaDialog({
           <Progress value={progress} className="h-1" />
         </div>
         <div className="p-4">
-          {type === 'emoji' && <EmojiCountChallenge onResolved={onResolved} />}
-          {type === 'tile' && <TilePuzzleChallenge onResolved={onResolved} />}
+          {type === 'emoji' && (
+            <EmojiCountChallenge onResolved={onResolved} className="mx-auto" />
+          )}
+          {type === 'tile' && (
+            <TilePuzzleChallenge onResolved={onResolved} className="mx-auto" />
+          )}
           {type === 'grid' && (
             <TaxonomyChallenge onResolved={onResolved} className="mx-auto" />
           )}
