@@ -27,7 +27,7 @@ export function EmojiCountChallenge({
   return (
     <div className={`w-full max-w-[350px] flex flex-col gap-3 ${className}`}>
       <p className="text-sm">{t('verification.captcha.emojiHint')}</p>
-      <EmojiCanvas width={350} height={200} items={items} />
+      <EmojiCanvas width={350} height={250} items={items} />
       <Input
         type="text"
         className="w-full"

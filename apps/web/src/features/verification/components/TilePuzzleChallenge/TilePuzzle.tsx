@@ -1,112 +1,44 @@
 'use client';
 
-import { arrayShuffle } from '@maw/utils/array';
 import { isPoint2d, type Point2d } from '@maw/utils/math';
-import { useEffect, useMemo, useState } from 'react';
-
-import { type TileData, TileView, type TileViewData } from './TileView';
+import { useMemo } from 'react';
+import type { TilePuzzleEntryMeta } from '../../types';
+import { TileView, type TileViewData } from './TileView';
 
 interface TilePuzzleProps {
   className?: string;
-  cols?: number;
-  rows?: number;
-  size?: number;
+  cols: number;
   imageSrc: string;
-  onResolved?: () => void;
+  items: TilePuzzleEntryMeta[];
+  rows: number;
+  size?: number;
+  onMove: (coords: Point2d) => void;
 }
 
 export function TilePuzzle({
   className,
-  cols = 8,
-  rows = 3,
-  size = 50,
+  cols,
   imageSrc,
-  onResolved,
+  items,
+  rows,
+  size = 50,
+  onMove,
 }: TilePuzzleProps) {
-  const [puzzle, setPuzzle] = useState<TileData[]>([]);
-
-  // Generating the puzzle
-  useEffect(() => {
-    const coordSeries: Point2d[] = [];
-    const resolutionSeries: Point2d[] = [];
-
-    for (let x = 1; x <= cols; x++) {
-      for (let y = 1; y <= rows; y++) {
-        coordSeries.push({ x, y });
-        resolutionSeries.push({ x, y });
-      }
-    }
-
-    const coordShuffle = arrayShuffle(coordSeries);
-    const valueShuffle = arrayShuffle(resolutionSeries);
-    const empty = valueShuffle[valueShuffle.length - 1];
-
-    const puzzle = coordShuffle.map(
-      (coord, index) => {
-        const resolution = valueShuffle[index];
-        return {
-          current: coord,
-          resolution: resolution,
-          isEmpty: resolution === empty,
-        } satisfies TileData;
-      },
-      {} as Record<string, TileData>,
-    );
-
-    setPuzzle(puzzle);
-  }, [cols, rows]);
-
-  // Handling slides
-  const onCellClick = (cellIndex: number) => {
-    const emptyCellIndex = puzzle.findIndex((cell) => cell.isEmpty);
-    if (!emptyCellIndex) {
-      return;
-    }
-
-    const cell = puzzle[cellIndex];
-    const emptyCell = puzzle[emptyCellIndex];
-    const diffX = Math.abs(cell.current.x - emptyCell.current.x);
-    const diffY = Math.abs(cell.current.y - emptyCell.current.y);
-    if (diffX > 1 || diffY > 1 || diffX + diffY > 1) {
-      return;
-    }
-
-    const updated = [...puzzle];
-    updated[cellIndex] = {
-      ...cell,
-      current: emptyCell.current,
-    };
-    updated[emptyCellIndex] = {
-      ...emptyCell,
-      current: cell.current,
-    };
-
-    setPuzzle(updated);
-  };
-
   const viewData = useMemo(() => {
-    if (puzzle.length === 0) {
+    if (items.length === 0) {
       return [];
     }
 
-    const mapped = puzzle.map(
+    const mapped = items.map(
       (cell) =>
         ({
           ...cell,
           key: genKey(cell.resolution),
           content: cell.resolution ? genKey(cell.resolution) : 'empty',
-          isCorrect:
-            cell.resolution && genKey(cell.current) === genKey(cell.resolution),
         }) satisfies TileViewData,
     );
-
-    const hasInvalid = mapped.some((cell) => !cell.isCorrect);
-    if (!hasInvalid) {
-      onResolved?.();
-    }
-
     return mapped;
-  }, [onResolved, puzzle]);
+  }, [items]);
 
   return (
     <div
@@ -117,7 +49,7 @@ export function TilePuzzle({
         perspective: cols * size,
       }}
     >
-      {viewData.map((tile, index) => (
+      {viewData.map((tile) => (
         <button
           type="button"
           key={tile.key}
@@ -130,7 +62,7 @@ export function TilePuzzle({
             width: size,
             height: size,
           }}
-          onClick={() => onCellClick(index)}
+          onClick={() => onMove(tile.current)}
         >
           {<TileView data={tile} imageSrc={imageSrc} size={size} />}
         </button>
