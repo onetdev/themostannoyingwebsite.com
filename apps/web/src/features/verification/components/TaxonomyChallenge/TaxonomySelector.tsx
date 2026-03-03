@@ -1,122 +1,83 @@
 'use client';
 
 import { Icon } from '@maw/ui-lib';
-import { random } from '@maw/utils/math';
-import { useEffect, useState } from 'react';
-import type { SpriteConfig } from '../../schemas';
+import { clsx } from '@maw/ui-lib/utils';
+import type { ComponentProps } from 'react';
+import type { TaxonomyEntryMeta } from '../../types';
 
 interface TaxonomySelectorProps {
-  onSelectionChange?: (count: number) => void;
-  sprites: SpriteConfig[];
   className?: string;
+  cols: number;
+  rows: number;
+  items: TaxonomyEntryMeta[];
+  onSelect: (index: number) => void;
 }
 
-interface TileState {
-  poolIndex: number;
-  x: number;
-  y: number;
-  selected: boolean;
-  replacing: boolean;
-}
-
-export function TaxonomySelectorSelect({
-  onSelectionChange,
-  sprites,
+export function TaxonomySelector({
+  items,
+  cols,
   className,
+  onSelect,
 }: TaxonomySelectorProps) {
-  const [tiles, setTiles] = useState<TileState[]>([]);
+  return (
+    <div
+      className={clsx('grid gap-1', className)}
+      style={{
+        gridTemplateColumns: `repeat(${cols}, minmax(0, 1fr))`,
+      }}
+    >
+      {items.map((tile, index) => (
+        <TaxonomySelectorCell
+          key={index}
+          data={tile}
+          onSelect={() => onSelect(index)}
+        />
+      ))}
+    </div>
+  );
+}
 
-  useEffect(() => {
-    onSelectionChange?.(tiles.filter((t) => t.selected).length);
-  }, [tiles, onSelectionChange]);
+interface TaxonomySelectorCell
+  extends Pick<ComponentProps<'button'>, 'className'> {
+  data: TaxonomyEntryMeta;
+  onSelect: () => void;
+}
 
-  useEffect(() => {
-    if (sprites.length === 0) {
-      return;
-    }
-
-    const initialTiles: TileState[] = [];
-    for (let i = 0; i < 9; i++) {
-      const poolIndex = Math.floor(Math.random() * sprites.length);
-      const pool = sprites[poolIndex];
-      initialTiles.push({
-        poolIndex,
-        x: random(0, pool.width, true),
-        y: random(0, pool.height, true),
-        selected: false,
-        replacing: false,
-      });
-    }
-    setTiles(initialTiles);
-  }, [sprites]);
-
-  const handleTileClick = (index: number) => {
-    const tile = tiles[index];
-    if (tile.replacing) {
-      return;
-    }
-
-    const newSelected = !tile.selected;
-
-    if (newSelected && Math.random() < 0.5) {
-      // Start replacing
-      const newTiles = [...tiles];
-      newTiles[index] = { ...tile, replacing: true, selected: false };
-      setTiles(newTiles);
-
-      setTimeout(() => {
-        setTiles((prev) => {
-          const updated = [...prev];
-          const poolIndex = Math.floor(Math.random() * sprites.length);
-          const pool = sprites[poolIndex];
-          updated[index] = {
-            poolIndex,
-            x: random(0, pool.width, true),
-            y: random(0, pool.height, true),
-            selected: false,
-            replacing: false,
-          };
-          return updated;
-        });
-      }, 500); // 500ms for fade out/in
-    } else {
-      const newTiles = [...tiles];
-      newTiles[index] = { ...tile, selected: newSelected };
-      setTiles(newTiles);
-    }
-  };
+function TaxonomySelectorCell({
+  className,
+  data,
+  onSelect,
+}: TaxonomySelectorCell) {
+  const colFrag = 100 / (data.asset.columns - 1);
+  const rowFrag = 100 / (data.asset.rows - 1);
+  const backgroundSize = `${data.asset.columns * 100}% ${data.asset.rows * 100}%`;
+  const backgroundPosition = `${colFrag * data.col}% ${rowFrag * data.row}%`;
 
   return (
-    <div className={`grid grid-cols-3 gap-1 ${className || ''}`}>
-      {tiles.map((tile, index) => {
-        const pool = sprites[tile.poolIndex];
-        return (
-          <button
-            key={index}
-            type="button"
-            className="relative aspect-square overflow-hidden bg-muted transition-opacity duration-300"
-            style={{ opacity: tile.replacing ? 0.3 : 1 }}
-            onClick={() => handleTileClick(index)}
-          >
-            <div
-              className="absolute inset-0 bg-no-repeat transition-transform duration-500"
-              style={{
-                backgroundImage: `url(${pool.uri})`,
-                backgroundSize: `${pool.width * 100}% ${pool.height * 100}%`,
-                backgroundPosition: `${
-                  pool.width > 1 ? (tile.x / (pool.width - 1)) * 100 : 0
-                }% ${pool.height > 1 ? (tile.y / (pool.height - 1)) * 100 : 0}%`,
-                transform: tile.selected ? 'scale(0.9)' : 'scale(1)',
-              }}
-            />
-            {tile.selected && (
-              <div className="absolute top-1 left-1 flex size-5 items-center justify-center rounded-full bg-blue-500 text-white">
-                <Icon icon="check" className="text-[10px]" />
-              </div>
-            )}
-          </button>
-        );
-      })}
-    </div>
+    <button
+      type="button"
+      onClick={onSelect}
+      className={clsx(
+        'relative aspect-square overflow-hidden rounded-md bg-muted transition-transform duration-200',
+        data.isSelected && 'ring-2 ring-blue-500',
+        className,
+      )}
+    >
+      <div
+        className="absolute inset-0 bg-no-repeat transition-transform duration-300"
+        style={{
+          backgroundImage: `url(${data.asset.uri})`,
+          backgroundSize,
+          backgroundPosition,
+          transform: data.isSelected ? 'scale(0.9)' : 'scale(1)',
+        }}
+      />
+
+      {data.isSelected && (
+        <div className="absolute top-1 left-1 flex size-5 items-center justify-center rounded-full bg-blue-500 text-white shadow">
+          <Icon icon="check" className="text-[10px]" />
+        </div>
+      )}
+    </button>
   );
 }

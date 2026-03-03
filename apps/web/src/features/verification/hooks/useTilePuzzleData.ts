@@ -53,7 +53,7 @@ export function useTilePuzzleData({
   }, [cols, rows]);
 
   // Handling slides
-  const moveCell = (coords: Point2d) => {
+  const handleMove = (coords: Point2d) => {
     const emptyCellIndex = items.findIndex((cell) => cell.isEmpty);
     const cellIndex = items.findIndex(
       (cell) => cell.current.x === coords.x && cell.current.y === coords.y,
@@ -98,6 +98,6 @@ export function useTilePuzzleData({
   return {
     items,
     hasInvalid,
-    moveCell,
+    handleMove,
   };
 }

@@ -1,4 +1,5 @@
 import type { Point2d } from '@maw/utils/math';
+import type { SpriteConfig } from './schemas';
 
 export interface EmojiCountChallengeEntryMeta {
   content: string;
@@ -10,4 +11,12 @@ export interface TilePuzzleEntryMeta {
   resolution: Point2d;
   isEmpty: boolean;
   isCorrect: boolean;
+}
+
+export interface TaxonomyEntryMeta {
+  asset: SpriteConfig;
+  col: number;
+  isValid: boolean;
+  isSelected: boolean;
+  row: number;
 }

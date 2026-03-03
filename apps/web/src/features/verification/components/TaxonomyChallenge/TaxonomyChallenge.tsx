@@ -1,8 +1,9 @@
 'use client';
 
 import { useTranslations } from 'next-intl';
-import { useAppConfigContext } from '@/core/config/react-app-config';
-import { TaxonomySelectorSelect } from './TaxonomySelector';
+import { useEffect } from 'react';
+import { useTaxonomyData } from '../../hooks/useTaxonomyData';
+import { TaxonomySelector } from './TaxonomySelector';
 
 interface TaxonomyChallengeProps {
   className?: string;
@@ -14,15 +15,14 @@ export function TaxonomyChallenge({
   onResolved,
 }: TaxonomyChallengeProps) {
   const t = useTranslations();
-  const {
-    verification: { assets },
-  } = useAppConfigContext();
+  const data = useTaxonomyData({ cols: 3, rows: 3 });
 
-  const onCountChange = (count: number) => {
-    if (count === 9) {
-      onResolved?.();
+  useEffect(() => {
+    if (data.validCount < 9) {
+      return;
     }
-  };
+    onResolved?.();
+  }, [data.validCount, onResolved]);
 
   return (
     <div className={`w-full max-w-[350px] ${className}`}>
@@ -40,9 +40,11 @@ export function TaxonomyChallenge({
         </div>
       </div>
 
-      <TaxonomySelectorSelect
-        onSelectionChange={onCountChange}
-        sprites={assets.taxonomyChallengeSprites}
+      <TaxonomySelector
+        items={data.items}
+        cols={data.cols}
+        rows={data.rows}
+        onSelect={data.handleSelect}
       />
     </div>
   );

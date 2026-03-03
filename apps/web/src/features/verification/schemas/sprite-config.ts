@@ -1,6 +1,6 @@
 import { z } from 'zod';
 
-export const SpriteConfig = z.object({
+export const SpriteConfigSchema = z.object({
   width: z.number(),
   height: z.number(),
   rows: z.number(),
@@ -8,4 +8,4 @@ export const SpriteConfig = z.object({
   uri: z.string(),
 });
 
-export type SpriteConfig = z.infer<typeof SpriteConfig>;
+export type SpriteConfig = z.infer<typeof SpriteConfigSchema>;

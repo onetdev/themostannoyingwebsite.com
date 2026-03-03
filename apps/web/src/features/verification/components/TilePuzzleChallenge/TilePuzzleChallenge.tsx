@@ -41,7 +41,7 @@ export function TilePuzzleChallenge({
         cols={cols}
         imageSrc={imageSrc}
         items={data.items}
-        onMove={data.moveCell}
+        onMove={data.handleMove}
         rows={rows}
       />
     </div>

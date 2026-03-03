@@ -1,10 +1,10 @@
 import { z } from 'zod';
-import { SpriteConfig } from './sprite-config';
+import { SpriteConfigSchema } from './sprite-config';
 
 export const VerificationConfigSchema = z.object({
   assets: z.object({
     tileChallenge: z.array(z.string()),
-    taxonomyChallengeSprites: z.array(SpriteConfig),
+    taxonomyChallengeSprites: z.array(SpriteConfigSchema),
   }),
 });
 
