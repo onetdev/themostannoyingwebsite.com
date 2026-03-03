@@ -6,24 +6,23 @@ import { useEffect, useMemo, useState } from 'react';
 
 import { type TileData, TileView, type TileViewData } from './TileView';
 
-interface CaptchaTilePuzzleProps {
+interface TilePuzzleProps {
   className?: string;
   cols?: number;
-  imageUrl?: string;
   rows?: number;
   size?: number;
-  imageSrc?: string;
+  imageSrc: string;
   onResolved?: () => void;
 }
 
-export function CaptchaTilePuzzle({
+export function TilePuzzle({
   className,
   cols = 8,
   rows = 3,
   size = 50,
   imageSrc,
   onResolved,
-}: CaptchaTilePuzzleProps) {
+}: TilePuzzleProps) {
   const [puzzle, setPuzzle] = useState<TileData[]>([]);
 
   // Generating the puzzle

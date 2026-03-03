@@ -13,10 +13,22 @@ const config: AppConfig = {
   },
   verification: {
     assets: {
-      captchaTile: '/assets/images/captcha-tile-abstract.jpg',
-      captchaRandom: [
-        '/assets/images/captcha-random-8x8-a.jpg',
-        '/assets/images/captcha-random-8x8-b.jpg',
+      tileChallenge: ['/assets/images/captcha-tile-abstract.jpg'],
+      taxonomyChallengeSprites: [
+        {
+          width: 300,
+          height: 300,
+          rows: 8,
+          columns: 8,
+          uri: '/assets/images/captcha-random-8x8-a.jpg',
+        },
+        {
+          width: 300,
+          height: 300,
+          rows: 8,
+          columns: 8,
+          uri: '/assets/images/captcha-random-8x8-b.jpg',
+        },
       ],
     },
   },

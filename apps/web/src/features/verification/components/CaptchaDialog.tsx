@@ -4,6 +4,8 @@ import {
   Button,
   Dialog,
   DialogContent,
+  DialogFooter,
+  DialogHeader,
   DialogTitle,
   Icon,
   Progress,
@@ -11,9 +13,9 @@ import {
 import { useState } from 'react';
 import { useEvent } from '@/core/events/react/useEvent';
 import type { ChallengeType } from '../hooks/use-captcha-challenge';
-import { CaptchaEmoji } from './CaptchaEmoji';
-import { CaptchaGridSelect } from './CaptchaGridSelect';
-import { CaptchaTilePuzzle } from './CaptchaTilePuzzle';
+import { EmojiCountChallenge } from './EmojiCountChallenge';
+import { TaxonomyChallenge } from './TaxonomyChallenge';
+import { TitlePuzzleChallenge } from './TilePuzzleChallenge';
 
 export interface CaptchaDialogProps {
   isOpen: boolean;
@@ -21,17 +23,7 @@ export interface CaptchaDialogProps {
   onResolved: () => void;
   onReset: () => void;
   onDismiss: () => void;
-  gridPrompt: string;
-  gridImage: string;
   progress: number;
-  text: {
-    emojiHint: string;
-    tilePuzzleHint: string;
-    gridSelectHint: string;
-  };
-  assets: {
-    captchaTile: string;
-  };
 }
 
 export function CaptchaDialog({
@@ -40,11 +32,7 @@ export function CaptchaDialog({
   onResolved,
   onReset,
   onDismiss,
-  gridPrompt,
-  gridImage,
   progress,
-  text,
-  assets,
 }: CaptchaDialogProps) {
   const [selectedCount, setSelectedCount] = useState(0);
 
@@ -70,65 +58,43 @@ export function CaptchaDialog({
 
   return (
     <Dialog open={isOpen} onOpenChange={handleOpenChange}>
-      <DialogContent className="max-w-fit p-0 overflow-hidden border-none bg-transparent shadow-none">
-        <DialogTitle className="sr-only">Captcha Challenge</DialogTitle>
-        <div className="bg-background border shadow-xl flex flex-col">
-          <div className="p-4">
-            <div className="mb-4 space-y-1">
-              <div className="flex justify-between text-[10px] font-bold uppercase text-muted-foreground">
-                <span>Verification Progress</span>
-                <span>{progress.toFixed(2)}%</span>
-              </div>
-              <Progress value={progress} className="h-1" />
-            </div>
-            {type === 'emoji' && (
-              <>
-                <p className="mb-2 text-sm">{text.emojiHint}</p>
-                <CaptchaEmoji
-                  width={300}
-                  height={150}
-                  onResolved={onResolved}
-                />
-              </>
-            )}
-            {type === 'tile' && (
-              <>
-                <p className="mb-2 text-sm">{text.tilePuzzleHint}</p>
-                <CaptchaTilePuzzle
-                  imageSrc={assets.captchaTile}
-                  onResolved={onResolved}
-                  cols={6}
-                  rows={4}
-                />
-              </>
-            )}
-            {type === 'grid' && (
-              <CaptchaGridSelect
-                imageSrc={gridImage}
-                prompt={gridPrompt}
-                onResolved={onResolved}
-                onSelectionChange={setSelectedCount}
-                showFooter={false}
-              />
-            )}
+      <DialogContent
+        className="max-w-fit gap-0 overflow-hidden p-0 border-border"
+        showCloseButton={true}
+      >
+        <DialogHeader className="border-b border-border p-4">
+          <DialogTitle>Captcha Challenge</DialogTitle>
+        </DialogHeader>
+        <div className="py-2 px-5">
+          <div className="flex justify-between text-[10px] font-bold uppercase text-muted-foreground">
+            <span>Verification Progress</span>
+            <span>{progress.toFixed(2)}%</span>
           </div>
+          <Progress value={progress} className="h-1" />
+        </div>
+        <div className="p-4">
+          {type === 'emoji' && <EmojiCountChallenge onResolved={onResolved} />}
+          {type === 'tile' && <TitlePuzzleChallenge onResolved={onResolved} />}
+          {type === 'grid' && (
+            <TaxonomyChallenge onResolved={onResolved} className="mx-auto" />
+          )}
+        </div>
 
-          <div className="flex items-center justify-between border-t p-2">
-            <div className="flex gap-2">
-              <button
-                type="button"
-                onClick={handleReset}
-                className="text-muted-foreground hover:text-foreground p-2"
-                title="Reset challenge"
-              >
-                <Icon icon="rotate" className="size-5" />
-              </button>
-            </div>
-            <Button onClick={onResolved} size="sm" className="px-6 uppercase">
-              {buttonLabel}
+        <DialogFooter className="flex-row items-center justify-between border-t border-border p-2">
+          <div className="grow">
+            <Button
+              type="button"
+              onClick={handleReset}
+              title="Reset challenge"
+              variant="ghost"
+            >
+              <Icon icon="rotate" className="size-5" />
             </Button>
           </div>
-        </div>
+          <Button onClick={onResolved} size="sm" className="px-6 uppercase">
+            {buttonLabel}
+          </Button>
+        </DialogFooter>
       </DialogContent>
     </Dialog>
   );

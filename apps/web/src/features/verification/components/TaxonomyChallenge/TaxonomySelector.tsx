@@ -1,33 +1,29 @@
 'use client';
 
-import { Button, Icon } from '@maw/ui-lib';
+import { Icon } from '@maw/ui-lib';
 import { random } from '@maw/utils/math';
 import { useEffect, useState } from 'react';
+import type { SpriteConfig } from '../../schemas';
 
-interface CaptchaGridSelectProps {
+interface TaxonomySelectorProps {
+  onSelectionChange?: (count: number) => void;
+  sprites: SpriteConfig[];
   className?: string;
-  imageSrc: string;
-  onResolved?: () => void;
-  onSelectionChange?: (selectedCount: number) => void;
-  prompt: string;
-  showFooter?: boolean;
 }
 
 interface TileState {
+  poolIndex: number;
   x: number;
   y: number;
   selected: boolean;
   replacing: boolean;
 }
 
-export function CaptchaGridSelect({
-  className = '',
-  imageSrc,
-  onResolved,
+export function TaxonomySelectorSelect({
   onSelectionChange,
-  prompt,
-  showFooter = true,
-}: CaptchaGridSelectProps) {
+  sprites,
+  className,
+}: TaxonomySelectorProps) {
   const [tiles, setTiles] = useState<TileState[]>([]);
 
   useEffect(() => {
@@ -35,17 +31,24 @@ export function CaptchaGridSelect({
   }, [tiles, onSelectionChange]);
 
   useEffect(() => {
+    if (sprites.length === 0) {
+      return;
+    }
+
     const initialTiles: TileState[] = [];
     for (let i = 0; i < 9; i++) {
+      const poolIndex = Math.floor(Math.random() * sprites.length);
+      const pool = sprites[poolIndex];
       initialTiles.push({
-        x: random(0, 7),
-        y: random(0, 7),
+        poolIndex,
+        x: random(0, pool.width, true),
+        y: random(0, pool.height, true),
         selected: false,
         replacing: false,
       });
     }
     setTiles(initialTiles);
-  }, []);
+  }, [sprites]);
 
   const handleTileClick = (index: number) => {
     const tile = tiles[index];
@@ -64,9 +67,12 @@ export function CaptchaGridSelect({
       setTimeout(() => {
         setTiles((prev) => {
           const updated = [...prev];
+          const poolIndex = Math.floor(Math.random() * sprites.length);
+          const pool = sprites[poolIndex];
           updated[index] = {
-            x: random(0, 7),
-            y: random(0, 7),
+            poolIndex,
+            x: random(0, pool.width, true),
+            y: random(0, pool.height, true),
             selected: false,
             replacing: false,
           };
@@ -81,19 +87,10 @@ export function CaptchaGridSelect({
   };
 
   return (
-    <div
-      className={`bg-background w-full max-w-[350px] border p-2 shadow-sm ${className}`}
-    >
-      <div className="bg-primary text-primary-foreground mb-2 p-4">
-        <div className="text-sm opacity-90">Select all squares with</div>
-        <div className="text-xl font-bold leading-tight">{prompt}</div>
-        <div className="mt-1 text-xs opacity-75">
-          If there are none, click skip
-        </div>
-      </div>
-
-      <div className="grid grid-cols-3 gap-1">
-        {tiles.map((tile, index) => (
+    <div className={`grid grid-cols-3 gap-1 ${className || ''}`}>
+      {tiles.map((tile, index) => {
+        const pool = sprites[tile.poolIndex];
+        return (
           <button
             key={index}
             type="button"
@@ -104,9 +101,11 @@ export function CaptchaGridSelect({
             <div
               className="absolute inset-0 bg-no-repeat transition-transform duration-500"
               style={{
-                backgroundImage: `url(${imageSrc})`,
-                backgroundSize: '800% 800%',
-                backgroundPosition: `${(tile.x / 7) * 100}% ${(tile.y / 7) * 100}%`,
+                backgroundImage: `url(${pool.uri})`,
+                backgroundSize: `${pool.width * 100}% ${pool.height * 100}%`,
+                backgroundPosition: `${
+                  pool.width > 1 ? (tile.x / (pool.width - 1)) * 100 : 0
+                }% ${pool.height > 1 ? (tile.y / (pool.height - 1)) * 100 : 0}%`,
                 transform: tile.selected ? 'scale(0.9)' : 'scale(1)',
               }}
             />
@@ -116,25 +115,8 @@ export function CaptchaGridSelect({
               </div>
             )}
           </button>
-        ))}
-      </div>
-
-      {showFooter && (
-        <div className="mt-2 flex items-center justify-between border-t pt-2">
-          <div className="flex gap-2">
-            {/* Icons placeholder for reload, audio, help */}
-            <button
-              type="button"
-              className="text-muted-foreground hover:text-foreground"
-            >
-              <Icon icon="check" />
-            </button>
-          </div>
-          <Button onClick={onResolved} size="sm" className="px-6 uppercase">
-            Next
-          </Button>
-        </div>
-      )}
+        );
+      })}
     </div>
   );
 }

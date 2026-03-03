@@ -16,7 +16,7 @@ export function CaptchaTrigger({
 }: CaptchaTriggerProps) {
   return (
     <Button
-      type='button'
+      type="button"
       variant="outline"
       className="flex h-20 w-full max-w-[300px] items-center justify-between p-3 shadow-sm select-none cursor-pointer"
       onClick={onClick}

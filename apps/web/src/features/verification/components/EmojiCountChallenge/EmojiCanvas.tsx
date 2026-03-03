@@ -2,10 +2,9 @@
 
 import { type Point2d, random } from '@maw/utils/math';
 import { useEffect, useRef, useState } from 'react';
-
 import { CAPTCHA_EMOJI_DEFAULT_POOL } from './data';
 
-export type CaptchaEmojiProps = {
+export interface EmojiCanvasProps {
   className?: string;
   count?: number;
   height?: number;
@@ -13,14 +12,14 @@ export type CaptchaEmojiProps = {
   pool?: string[];
   width?: number;
   onResolved?: () => void;
-};
+}
 
-type RandomItem = {
+interface RandomItem {
   content: string;
   coords: Point2d;
-};
+}
 
-export function CaptchaEmoji({
+export function EmojiCanvas({
   className,
   count = 100,
   height = 100,
@@ -28,7 +27,7 @@ export function CaptchaEmoji({
   pool = CAPTCHA_EMOJI_DEFAULT_POOL,
   width = 300,
   onResolved,
-}: CaptchaEmojiProps) {
+}: EmojiCanvasProps) {
   const $canvasRef = useRef<HTMLCanvasElement>(null);
   const [items, setItems] = useState<RandomItem[]>([]);
 
@@ -62,7 +61,7 @@ export function CaptchaEmoji({
       ctx.textAlign = 'center';
       ctx.fillText(content, x, y);
     });
-  }, [pool, itemRenderSize, items]);
+  }, [itemRenderSize, items]);
 
   return (
     <canvas

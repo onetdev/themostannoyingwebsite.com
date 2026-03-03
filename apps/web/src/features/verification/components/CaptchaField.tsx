@@ -4,7 +4,6 @@ import { Field, FieldContent, FieldError, FieldLabel } from '@maw/ui-lib';
 import { useTranslations } from 'next-intl';
 import { useFormContext } from 'react-hook-form';
 
-import config from '@/core/config';
 import { useCaptchaChallenge } from '../hooks/use-captcha-challenge';
 import { CaptchaDialog } from './CaptchaDialog';
 import { CaptchaTrigger } from './CaptchaTrigger';
@@ -35,13 +34,9 @@ export function CaptchaField({
     invalid: t('form.validation.error.captchaInvalid'),
   };
 
-  const assets = config.verification.assets;
-
   const {
     status,
     challengeType,
-    gridPrompt,
-    gridImage,
     progress,
     handleCheckboxClick,
     handleChallengeResolved,
@@ -50,8 +45,6 @@ export function CaptchaField({
   } = useCaptchaChallenge({
     onResolved: () => setValue(fieldName, 'true'),
     onFailed: () => setValue(fieldName, ''),
-    gridSelectPrompts: captchaText.gridSelectPrompts,
-    captchaRandom: assets.captchaRandom,
   });
 
   return (
@@ -71,11 +64,7 @@ export function CaptchaField({
             onResolved={handleChallengeResolved}
             onReset={handleReset}
             onDismiss={handleDismiss}
-            gridPrompt={gridPrompt}
-            gridImage={gridImage}
             progress={progress}
-            text={captchaText}
-            assets={assets}
           />
         </div>
         <input
