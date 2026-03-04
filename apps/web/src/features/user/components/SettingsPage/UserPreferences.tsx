@@ -18,6 +18,7 @@ import {
 } from '@maw/ui-lib';
 import { useLocale, useTranslations } from 'next-intl';
 import { useTheme } from 'next-themes';
+import { useAppService } from '@/hooks';
 import { usePathname, useRouter } from '@/i18n/navigation';
 import { useRuntimeStore, useUserPreferencesStore } from '@/stores';
 import { SettingsField } from './SettingsField';
@@ -25,10 +26,12 @@ import { SettingsField } from './SettingsField';
 export function UserPreferences() {
   const preference = useUserPreferencesStore();
   const runtime = useRuntimeStore();
+  const appService = useAppService();
   const t = useTranslations();
   const locale = useLocale();
   const router = useRouter();
   const pathname = usePathname();
+  const languages = appService.getSupportedLanguages();
 
   const { resolvedTheme, setTheme } = useTheme();
   const setDarkMode = (value: boolean | 'indeterminate') => {
@@ -55,12 +58,11 @@ export function UserPreferences() {
                 <SelectValue />
               </SelectTrigger>
               <SelectContent>
-                <SelectItem value="en">
-                  {t('settings.userPreferences.languages.en')}
-                </SelectItem>
-                <SelectItem value="hu">
-                  {t('settings.userPreferences.languages.hu')}
-                </SelectItem>
+                {languages.map((lang) => (
+                  <SelectItem key={lang.locale} value={lang.locale}>
+                    {t(lang.labelKey)} &nbsp; {lang.flag}
+                  </SelectItem>
+                ))}
               </SelectContent>
             </Select>
           </FieldContent>
