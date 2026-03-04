@@ -1,6 +1,6 @@
 'use client';
 
-import { randomInt } from '@maw/utils/math';
+import { mapToLogScale, randomInt } from '@maw/utils/math';
 import { useCallback, useEffect, useReducer, useRef } from 'react';
 import { useAppConfigContext } from '@/core/config/react-app-config';
 import type { ChallengeType } from '../schemas';
@@ -38,7 +38,8 @@ const getRandomChallenge = (
   const availableTypes = currentType
     ? allowedChallenges.filter((t) => t !== currentType)
     : allowedChallenges;
-  return availableTypes[randomInt(0, availableTypes.length - 1)];
+  const randomIndex = randomInt(0, availableTypes.length - 1);
+  return availableTypes[randomIndex];
 };
 
 const initialState: State = {
@@ -80,12 +81,6 @@ function reducer(state: State, action: Action): State {
     default:
       return state;
   }
-}
-
-export function skewProgress(input: number): number {
-  const t = input / 100;
-  const value = Math.log10(1 + 9 * t); // log curve
-  return value * 100;
 }
 
 /**
@@ -168,7 +163,9 @@ export function useCaptchaChallenge({
 
   return {
     challengeType: state.challengeType,
-    completion: state.totalVerified ? skewProgress(state.totalVerified) : 0,
+    completion: state.totalVerified
+      ? mapToLogScale(state.totalVerified, requiredCompletedChallanges, 1)
+      : 0,
     currentChallengeScore: state.currentChallengeScore ?? 0,
     handleChallengeScoreUpdate,
     handleDismiss,

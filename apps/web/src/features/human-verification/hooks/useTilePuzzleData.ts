@@ -43,7 +43,7 @@ export function useTilePuzzleChallengeData({
           isEmpty: resolution.x === empty.x && resolution.y === empty.y,
           isCorrect:
             (resolution.x === empty.y && resolution.y === empty.x) ||
-            (coord.x === resolution.y && coord.y === resolution.x),
+            (coord.x === resolution.x && coord.y === resolution.y),
         } satisfies TilePuzzleEntryMeta;
       },
       {} as Record<string, TilePuzzleEntryMeta>,
@@ -60,7 +60,7 @@ export function useTilePuzzleChallengeData({
     );
     const cell = items[cellIndex];
 
-    if (!emptyCellIndex || !cell) {
+    if (emptyCellIndex === -1 || !cell) {
       return;
     }
 
@@ -84,15 +84,18 @@ export function useTilePuzzleChallengeData({
     setItems(updated);
   };
 
-  const hasInvalid = useMemo(() => {
+  const invalidCount = useMemo(() => {
     return items.filter((cell) => !cell.isCorrect).length;
   }, [items]);
 
-  useEffect(() => onProgress(hasInvalid ? 1 : 0), [hasInvalid, onProgress]);
+  useEffect(
+    () => onProgress(invalidCount === 0 ? 1 : 0),
+    [invalidCount, onProgress],
+  );
 
   return {
     items,
-    hasInvalid,
+    invalidCount,
     handleMove,
   };
 }

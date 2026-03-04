@@ -14,6 +14,9 @@ export const VerificationConfigSchema = z.object({
       'Timeout ms for showing challenge dialog once the user clickcs on the trigger',
     ),
   requiredCompletedChallanges: z.number(),
+  tilePuzzleCols: z.number(),
+  tilePuzzleRows: z.number(),
+  emojiChallengeCount: z.number(),
 });
 
 export type VerificationConfig = z.infer<typeof VerificationConfigSchema>;

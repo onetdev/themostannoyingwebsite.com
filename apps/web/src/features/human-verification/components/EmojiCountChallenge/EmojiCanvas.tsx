@@ -16,7 +16,7 @@ export function EmojiCanvas({
   height = 100,
   itemRenderSize = 50,
   items,
-  width = 300,
+  width = 250,
 }: EmojiCanvasProps) {
   const $canvasRef = useRef<HTMLCanvasElement>(null);
 

@@ -2,6 +2,7 @@ import { Input } from '@maw/ui-lib';
 import { clsx } from '@maw/ui-lib/utils';
 import { useTranslations } from 'next-intl';
 import type { ChangeEvent } from 'react';
+import { useAppConfigContext } from '@/core/config/react-app-config';
 import { useEmojiCountChallengeData } from '../../hooks';
 import { EmojiCanvas } from './EmojiCanvas';
 
@@ -15,7 +16,12 @@ export function EmojiCountChallenge({
   onProgress,
 }: EmojiCountChallengeProps) {
   const t = useTranslations();
-  const { items, solutions } = useEmojiCountChallengeData({ count: 100 });
+  const {
+    verification: { emojiChallengeCount },
+  } = useAppConfigContext();
+  const { items, solutions } = useEmojiCountChallengeData({
+    count: emojiChallengeCount,
+  });
   const fieldId = 'emojiCountChallengeField';
 
   const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {

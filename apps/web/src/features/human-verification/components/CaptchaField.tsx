@@ -25,7 +25,7 @@ export function CaptchaField({
     setValue,
   } = useFormContext();
   const [state, setState] = useState<ChallengeStatus>('idle');
-  const timerRef = useRef<NodeJS.Timeout>(null);
+  const timerRef = useRef<ReturnType<typeof setTimeout>>(null);
   const {
     verification: { challengeTriggerTimeoutMs },
   } = useAppConfigContext();

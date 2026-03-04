@@ -1,6 +1,6 @@
 'use client';
 
-import { randomInt } from '@maw/utils/math';
+import { randomBool, randomInt } from '@maw/utils/math';
 import { useCallback, useEffect, useMemo, useState } from 'react';
 import { useAppConfigContext } from '@/core/config/react-app-config';
 import type { SpriteConfig } from '../schemas';
@@ -39,7 +39,7 @@ export function useTaxonomyChallengeData({
     return {
       asset: taxonomyChallengeSprites[details.assetIndex],
       col: details.col,
-      isValid: false,
+      isValid: randomBool(),
       row: details.row,
       isSelected: false,
     };

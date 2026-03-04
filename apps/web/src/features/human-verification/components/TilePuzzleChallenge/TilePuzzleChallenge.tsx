@@ -19,11 +19,8 @@ export function TilePuzzleChallenge({
 }: TilePuzzleChallengeProps) {
   const t = useTranslations();
   const {
-    verification: { assets },
+    verification: { assets, tilePuzzleCols: cols, tilePuzzleRows: rows },
   } = useAppConfigContext();
-
-  const cols = 6;
-  const rows = 5;
 
   const data = useTilePuzzleChallengeData({
     cols,

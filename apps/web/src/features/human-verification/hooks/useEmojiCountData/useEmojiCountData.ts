@@ -26,9 +26,9 @@ export function useEmojiCountChallengeData({
       counts.set(content, (counts.get(content) ?? 0) + 1);
     }
 
-    const maxOccurance = Math.max(...counts.values());
+    const maxOccurrence = Math.max(...counts.values());
     const solutions = Object.entries(Object.fromEntries(counts))
-      .filter(([, count]) => count === maxOccurance)
+      .filter(([, count]) => count === maxOccurrence)
       .map(([content]) => content);
 
     return { items, solutions };
