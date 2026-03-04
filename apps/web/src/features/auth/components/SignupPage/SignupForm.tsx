@@ -1,14 +1,9 @@
 'use client';
 
-import {
-  Button,
-  CaptchaEmojiField,
-  FieldError,
-  LoaderDots,
-  PageHeadline,
-} from '@maw/ui-lib';
+import { Button, FieldError, LoaderDots, PageHeadline } from '@maw/ui-lib';
 import { useTranslations } from 'next-intl';
 import { FormProvider } from 'react-hook-form';
+import { CaptchaField } from '@/features/human-verification/components';
 import { useNavigationProvider } from '@/navigation/NavigationContext';
 import { useSignupForm } from '../../hooks';
 import {
@@ -44,13 +39,6 @@ export function SignupForm() {
   const isCtaLoading = isSubmitting;
   const isCtaDisabled = isSubmitting;
 
-  const captchaText = {
-    label: t('form.captcha.field'),
-    hint: t('form.captcha.captchaEmojiHint'),
-    required: t('form.validation.error.required'),
-    invalid: t('form.validation.error.captchaInvalid'),
-  };
-
   return (
     <FormProvider {...methods}>
       <PageHeadline>{t('navigation.signup')}</PageHeadline>
@@ -83,7 +71,7 @@ export function SignupForm() {
           <ConsentNewsletterField />
           <ConsentPrivacyPolicyField required />
           <ConsentChildSoulField required />
-          <CaptchaEmojiField text={captchaText} required />
+          <CaptchaField />
 
           <Button
             role="button"

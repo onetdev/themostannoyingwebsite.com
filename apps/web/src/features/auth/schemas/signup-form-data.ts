@@ -1,6 +1,5 @@
 import { z } from 'zod';
 import { GenderSchema } from '.';
-import { getCaptchaEmojiDataSchema } from './captcha-emoji';
 
 const validatePassword = (value: string, t: ZodTranslator) => {
   // Split up in this way to annoy the user the most
@@ -72,7 +71,9 @@ export function getSignupFormDataSchema(t: ZodTranslator) {
         (val) => (!val ? undefined : val),
         z.coerce.number().optional(),
       ),
-      captcha: getCaptchaEmojiDataSchema(t),
+      captcha: z
+        .string()
+        .min(1, { message: t('form.validation.error.captchaRequired') }),
     })
     .refine((data) => data.password === data.passwordConfirmation, {
       message: t('form.validation.error.passwordMismatch'),

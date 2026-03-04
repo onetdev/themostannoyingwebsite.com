@@ -1,22 +1,12 @@
 'use client';
 
-import {
-  Button,
-  CaptchaEmojiField,
-  Checkbox,
-  Field,
-  FieldContent,
-  FieldError,
-  FieldLabel,
-  Input,
-  LoaderDots,
-  PageHeadline,
-} from '@maw/ui-lib';
+import { Button, FieldError, LoaderDots, PageHeadline } from '@maw/ui-lib';
 import { useTranslations } from 'next-intl';
 import { FormProvider } from 'react-hook-form';
+import { CaptchaField } from '@/features/human-verification/components';
 import { useNavigationProvider } from '@/navigation/NavigationContext';
 import { useLoginForm } from '../../hooks';
-import { EmailField } from '../fields/EmailField';
+import { EmailField, PasswordField, RememberMeField } from '../fields';
 
 export function LoginForm() {
   const t = useTranslations();
@@ -31,19 +21,11 @@ export function LoginForm() {
   const {
     handleSubmit,
     onSubmit,
-    register,
     formState: { errors, isSubmitting },
   } = form;
 
   const isCtaLoading = isSubmitting;
   const isCtaDisabled = isSubmitting;
-
-  const captchaFieldText = {
-    label: t('form.captcha.field'),
-    hint: t('form.captcha.captchaEmojiHint'),
-    required: t('form.validation.error.required'),
-    invalid: t('form.validation.error.captchaInvalid'),
-  };
 
   return (
     <FormProvider {...form}>
@@ -55,26 +37,9 @@ export function LoginForm() {
       >
         <FieldError errors={[errors.root]} />
         <EmailField />
-        <Field>
-          <FieldLabel htmlFor="password">{t('user.field.password')}</FieldLabel>
-          <FieldContent>
-            <Input
-              id="password"
-              type="password"
-              className="w-full"
-              {...register('password')}
-            />
-            <FieldError errors={[errors.password]} />
-          </FieldContent>
-        </Field>
-        <Field orientation="horizontal" className="items-center gap-2">
-          <Checkbox id="remember" {...register('remember')} />
-          <FieldLabel htmlFor="remember" className="font-normal">
-            {t('user.field.rememberMe')}
-          </FieldLabel>
-          <FieldError errors={[errors.remember]} />
-        </Field>
-        <CaptchaEmojiField text={captchaFieldText} />
+        <PasswordField />
+        <RememberMeField />
+        <CaptchaField />
 
         <Button
           role="button"

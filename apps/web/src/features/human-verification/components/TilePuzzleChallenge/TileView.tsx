@@ -1,18 +1,11 @@
 'use client';
 
-import type { Point2d } from '@maw/utils/math';
 import { useMemo } from 'react';
+import type { TilePuzzleEntryMeta } from '../../types';
 
-export type TileData = {
-  current: Point2d;
-  resolution: Point2d;
-  isEmpty: boolean;
-};
-
-export type TileViewData = TileData & {
+export type TileViewData = TilePuzzleEntryMeta & {
   key: string;
   content: string;
-  isCorrect: boolean;
 };
 
 export type TileViewProps = {

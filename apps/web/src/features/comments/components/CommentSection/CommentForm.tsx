@@ -2,7 +2,6 @@
 
 import {
   Button,
-  CaptchaEmojiField,
   Field,
   FieldContent,
   FieldError,
@@ -13,7 +12,7 @@ import {
 } from '@maw/ui-lib';
 import { useTranslations } from 'next-intl';
 import { FormProvider } from 'react-hook-form';
-
+import { CaptchaField } from '@/features/human-verification/components';
 import { useCommentForm } from '../../hooks';
 
 export function CommentForm() {
@@ -30,11 +29,6 @@ export function CommentForm() {
     register,
     formState: { errors, isSubmitting },
   } = form;
-
-  const captchaFieldText = {
-    label: t('form.captcha.field'),
-    hint: t('form.captcha.captchaEmojiHint'),
-  };
 
   return (
     <FormProvider {...form}>
@@ -75,11 +69,9 @@ export function CommentForm() {
           </FieldContent>
         </Field>
 
-        <CaptchaEmojiField
-          text={captchaFieldText}
-          required
-          className="max-w-96"
-        />
+        <div className="max-w-96">
+          <CaptchaField />
+        </div>
 
         <Button
           role="button"

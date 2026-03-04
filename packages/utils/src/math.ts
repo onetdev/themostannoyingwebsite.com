@@ -65,11 +65,15 @@ export const random = (
   integerResult = false,
 ): number => {
   const result = Math.random() * (max - min) + min;
-  return integerResult ? Math.floor(result) : result;
+  return integerResult ? Math.round(result) : result;
 };
 
 export const randomInt = (min: number, max: number): number => {
-  return Math.floor(random(min, max, true));
+  return random(min, max, true);
+};
+
+export const randomBool = (): boolean => {
+  return Math.random() >= 0.5;
 };
 
 export const mapToLogScale = (

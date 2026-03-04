@@ -1,1 +1,0 @@
-export { CaptchaEmoji } from './CaptchaEmoji';

@@ -1,5 +1,4 @@
 import { z } from 'zod';
-import { getCaptchaEmojiDataSchema } from './captcha-emoji';
 
 export function getLoginFormDataSchema(t: ZodTranslator) {
   return z.object({
@@ -7,8 +6,15 @@ export function getLoginFormDataSchema(t: ZodTranslator) {
     password: z
       .string()
       .min(1, { message: t('form.validation.error.required') }),
-    captcha: getCaptchaEmojiDataSchema(t),
-    remember: z.boolean().optional(),
+    remember: z
+      .boolean()
+      .optional()
+      .refine((val) => val !== undefined, {
+        message: t('form.validation.error.checkboxRequired'),
+      }),
+    captcha: z
+      .string()
+      .min(1, { message: t('form.validation.error.captchaRequired') }),
   });
 }
 

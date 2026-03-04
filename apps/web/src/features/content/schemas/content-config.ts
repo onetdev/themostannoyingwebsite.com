@@ -2,9 +2,11 @@ import { z } from 'zod';
 
 export const ContentConfigSchema = z.object({
   assets: z.object({
-    lavaImage: z.string(),
-    coverPlaceholder: z.string(),
-    hotThingsVtt: z.record(z.string(), z.string()),
+    articleCoverPlaceholder: z.string(),
+    hotThings: z.object({
+      placeholder: z.string(),
+      vtt: z.record(z.string(), z.string()),
+    }),
   }),
 });
 

@@ -13,6 +13,7 @@ import type { RegisterUseCaseParams } from '../types';
 import { useAuthFormError } from './useAuthFormError';
 
 export const signupFormDefaultValues: SignupFormData = {
+  captcha: '',
   firstName: '',
   lastName: '',
   email: '',
@@ -27,7 +28,6 @@ export const signupFormDefaultValues: SignupFormData = {
   countryCode: '',
   phoneNumberCountry: undefined,
   phoneNumber: undefined,
-  captcha: '',
 };
 
 interface SignupFormProps {

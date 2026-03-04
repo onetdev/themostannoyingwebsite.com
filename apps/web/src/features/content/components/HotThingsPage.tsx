@@ -75,7 +75,7 @@ export function HotThingsPage() {
       <div className="pb-16per9 relative overflow-hidden">
         <Image
           className="absolute h-auto w-full"
-          src={config.content.assets.lavaImage}
+          src={config.content.assets.hotThings.placeholder}
           alt={t('hotThings.pictureOfYou')}
           width={1920}
           height={1080}
@@ -91,8 +91,8 @@ export function HotThingsPage() {
             kind="captions"
             srcLang={locale}
             src={
-              config.content.assets.hotThingsVtt[locale] ??
-              config.content.assets.hotThingsVtt.en
+              config.content.assets.hotThings.vtt[locale] ??
+              config.content.assets.hotThings.vtt.en
             }
             label={t('hotThings.hotThingsVtt')}
           />

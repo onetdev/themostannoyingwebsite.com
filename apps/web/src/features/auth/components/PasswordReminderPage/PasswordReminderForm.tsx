@@ -1,18 +1,12 @@
 'use client';
 
-import {
-  Button,
-  CaptchaTitlePuzzleField,
-  FieldError,
-  LoaderDots,
-  PageHeadline,
-} from '@maw/ui-lib';
+import { Button, FieldError, LoaderDots, PageHeadline } from '@maw/ui-lib';
 import { useTranslations } from 'next-intl';
 import { FormProvider } from 'react-hook-form';
-import config from '@/core/config';
+import { CaptchaField } from '@/features/human-verification/components';
 import { useNavigationProvider } from '@/navigation/NavigationContext';
 import { usePasswordReminderForm } from '../../hooks';
-import { EmailField } from '../fields/EmailField';
+import { EmailField } from '../fields';
 
 export function PasswordReminderForm() {
   const t = useTranslations();
@@ -29,12 +23,6 @@ export function PasswordReminderForm() {
   const isCtaLoading = isSubmitting;
   const isCtaDisabled = isSubmitting;
 
-  const captchaText = {
-    label: t('form.captcha.field'),
-    hint: t('form.captcha.captchaTilePuzzleHint'),
-    invalid: t('form.validation.error.captchaInvalid'),
-  };
-
   return (
     <FormProvider {...methods}>
       <PageHeadline>{t('navigation.passwordReminder')}</PageHeadline>
@@ -45,10 +33,7 @@ export function PasswordReminderForm() {
       >
         <FieldError errors={[errors.root]} />
         <EmailField />
-        <CaptchaTitlePuzzleField
-          text={captchaText}
-          imageSrc={config.auth.assets.captchaTile}
-        />
+        <CaptchaField />
 
         <Button
           role="button"

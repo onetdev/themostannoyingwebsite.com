@@ -10,5 +10,7 @@ export * from './LastNameField';
 export * from './NickNameField';
 export * from './PasswordConfirmation';
 export * from './PasswordCreateField';
+export * from './PasswordField';
 export * from './PhoneNumberField';
+export * from './RememberMeField';
 export * from './UsernameField';

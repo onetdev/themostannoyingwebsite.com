@@ -13,9 +13,7 @@ export type AuthenticationData = {
   remember: boolean;
 };
 
-export type LoginUseCaseParams = AuthenticationData & {
-  captcha: string;
-};
+export type LoginUseCaseParams = AuthenticationData;
 
 export type CreateUserData = Omit<User, 'id'> & {
   password: string;

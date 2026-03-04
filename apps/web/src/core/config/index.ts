@@ -11,17 +11,41 @@ const config: AppConfig = {
     },
     progressiveAchievementToastThrottlingSeconds: 10,
   },
-  auth: {
+  verification: {
     assets: {
-      captchaTile: '/assets/images/captcha-tile-abstract.jpg',
+      tileChallenge: ['/assets/images/captcha-tile-abstract.jpg'],
+      taxonomyChallengeSprites: [
+        {
+          width: 300,
+          height: 300,
+          rows: 8,
+          columns: 8,
+          uri: '/assets/images/captcha-random-8x8-a.jpg',
+        },
+        {
+          width: 300,
+          height: 300,
+          rows: 8,
+          columns: 8,
+          uri: '/assets/images/captcha-random-8x8-b.jpg',
+        },
+      ],
     },
+    allowedChallenges: ['emoji', 'tile', 'grid'],
+    challengeTriggerTimeoutMs: 2000,
+    requiredCompletedChallenges: 20,
+    tilePuzzleCols: 6,
+    tilePuzzleRows: 5,
+    emojiChallengeCount: 100,
   },
   content: {
     assets: {
-      lavaImage: '/assets/images/lava.webp',
-      coverPlaceholder: '/assets/cover-placeholder.svg',
-      hotThingsVtt: {
-        en: '/assets/vtt/hot-things-en.vtt',
+      articleCoverPlaceholder: '/assets/cover-placeholder.svg',
+      hotThings: {
+        placeholder: '/assets/images/hot-things.webp',
+        vtt: {
+          en: '/assets/vtt/hot-things-en.vtt',
+        },
       },
     },
   },
