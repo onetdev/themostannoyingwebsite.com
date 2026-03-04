@@ -1,2 +1,2 @@
+export * from '../AppLanguageSwitcher';
 export * from './AppHeader';
-export * from './AppLanguageSwitcher';

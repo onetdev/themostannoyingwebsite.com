@@ -116,7 +116,7 @@ export default {
     'Pazar! 😍✨',
     'Teljesen egyetértek.',
     'Gyönyörűen megfogalmazva. 💖',
-    'LOL!',
+    'Köszönöm a befógadâst! Üdv és környéke',
     'Ámen! 🙌',
     'Szép munka!',
     'Lélegzetelállító. 🌟',
@@ -202,5 +202,6 @@ export default {
     'Töltsd ki ezt a 30 másodperces kérdőívet és kapj egy 100 dolláros általános ajándékkártyát! [link eltávolítva]',
     'Egy felhasználó jelentette a gaming fiókodat illegális tevékenység miatt. Vedd fel a kapcsolatot a támogatással a kitiltás elkerülése érdekében: [link eltávolítva]',
     'GRATULA! Te vagy a mega nyereményjátékunk nyertese! Kattints ide a nyereményed igényléséhez: [link eltávolítva]',
+    'Bojler eladó!!!',
   ],
 };

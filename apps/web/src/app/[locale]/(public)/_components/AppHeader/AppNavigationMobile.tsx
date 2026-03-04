@@ -22,7 +22,7 @@ import {
 } from '@/app/navigation';
 import { Link } from '@/i18n/navigation';
 import { useRuntimeStore } from '@/stores';
-import { AppLanguageSwitcher } from './AppLanguageSwitcher';
+import { AppLanguageSwitcher } from '../AppLanguageSwitcher';
 
 export type AppNavigationMobileProps = {
   activeItem?: ActiveNavigationItem;
