@@ -98,22 +98,29 @@ const resolveArticle = async (
     throw Error(`Invalid article data: ${error}`);
   }
 
-  let hasCoverImage = false;
-  try {
-    const coverPath = path.join(articlePath, 'cover.webp');
-    await fs.access(coverPath);
-    sharp(coverPath)
-      .resize(480, 270)
-      .webp({ quality: 75 })
-      .toFile(path.join(articlePath, 'cover-480x270.webp'));
+  let finalCoverImage: string | undefined;
+  if (data.coverImage) {
+    try {
+      const assetsPath = path.join(sourceRootPath, 'assets');
+      const coverPath = path.join(assetsPath, data.coverImage);
+      await fs.access(coverPath);
 
-    hasCoverImage = true;
-  } catch (err) {
-    logger.warn(
-      err,
-      `Failed to load cover image for ${entry.name}. It will be skipped.`,
-    );
-    hasCoverImage = false;
+      const filenameWithoutExt = data.coverImage.replace(/\.[^/.]+$/, '');
+      const thumbnailFilename = `${filenameWithoutExt}-480x270.gen.webp`;
+      const thumbnailPath = path.join(assetsPath, thumbnailFilename);
+
+      await sharp(coverPath)
+        .resize(480, 270)
+        .webp({ quality: 75 })
+        .toFile(thumbnailPath);
+
+      finalCoverImage = data.coverImage;
+    } catch (err) {
+      logger.warn(
+        err,
+        `Failed to load cover image "${data.coverImage}" for ${entry.name}. It will be skipped.`,
+      );
+    }
   }
 
   let content: string;
@@ -134,7 +141,7 @@ const resolveArticle = async (
     locale: match[1]!,
     slug: match[3]!,
     title: data.title,
-    hasCoverImage,
+    coverImage: finalCoverImage,
     content: content,
     isOnCover: localeMetaEntry.onCover.includes(entry.name),
     isHighlighted: localeMetaEntry.highlighted.includes(entry.name),

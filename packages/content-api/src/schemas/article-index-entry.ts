@@ -4,7 +4,7 @@ const schema = z
   .object({
     content: z.string(),
     directory: z.string(),
-    hasCoverImage: z.boolean(),
+    coverImage: z.string().optional(),
     intro: z
       .string()
       .describe(

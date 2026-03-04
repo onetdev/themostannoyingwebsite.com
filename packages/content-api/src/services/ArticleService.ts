@@ -29,28 +29,8 @@ export class ArticleService {
   articles: ArticleDatum[];
 
   constructor({ getAssetUrl, getUrl }: ArticleServiceProps) {
-    this.articles = articlesRaw.map(
-      (article: ArticleIndexEntrySchema) =>
-        ({
-          assetGroupId: article.directory,
-          content: article.content,
-          coverImages: article.hasCoverImage
-            ? {
-                original: getAssetUrl(`${article.directory}/cover.webp`),
-                thumbnail: getAssetUrl(
-                  `${article.directory}/cover-480x270.webp`,
-                ),
-              }
-            : undefined,
-          intro: article.intro,
-          isHighlighted: article.isHighlighted,
-          isOnCover: article.isOnCover,
-          locale: article.locale,
-          publishedAt: new Date(article.publishedAt),
-          slug: article.slug,
-          title: article.title,
-          url: getUrl(article),
-        }) satisfies ArticleDatum,
+    this.articles = articlesRaw.map((article: ArticleIndexEntrySchema) =>
+      mapEntryToContent(article, getAssetUrl, getUrl),
     );
   }
 
@@ -159,3 +139,34 @@ const propFilterBool = (
   article[prop] === value ||
   typeof value === 'undefined' ||
   (article[prop] === undefined && value !== true);
+
+const mapEntryToContent = (
+  article: ArticleIndexEntrySchema,
+  getAssetUrl: (path: string) => string,
+  getUrl: (item: ArticleIndexEntrySchema) => string,
+) => {
+  let coverImages: ArticleDatum['coverImages'];
+  if (article.coverImage) {
+    const thumbnail = getAssetUrl(
+      `${article.coverImage.replace(/\.[^/.]+$/, '')}-480x270.gen.webp`,
+    );
+    coverImages = {
+      original: getAssetUrl(article.coverImage),
+      thumbnail,
+    };
+  }
+
+  return {
+    assetGroupId: article.directory,
+    content: article.content,
+    coverImages,
+    intro: article.intro,
+    isHighlighted: article.isHighlighted,
+    isOnCover: article.isOnCover,
+    locale: article.locale,
+    publishedAt: new Date(article.publishedAt),
+    slug: article.slug,
+    title: article.title,
+    url: getUrl(article),
+  } satisfies ArticleDatum;
+};

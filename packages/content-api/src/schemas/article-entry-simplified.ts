@@ -27,6 +27,12 @@ const schema = z
         'Processing for indexing will be decided based on this value, both html and markdown are supported.\n\nDefaults to markdown.',
       )
       .default('markdown'),
+    coverImage: z
+      .string()
+      .optional()
+      .describe(
+        'The name of the cover image file in the assets directory (e.g. "gary.webp").',
+      ),
   })
   .strict();
 
