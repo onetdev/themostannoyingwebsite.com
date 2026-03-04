@@ -1,8 +1,10 @@
 import type Emittery from 'emittery';
 import type { useTranslations } from 'next-intl';
+import type i18nConfig from '@/root/i18n.config';
 
 declare global {
   type AppTheme = 'light' | 'dark';
+  type AppLocale = (typeof i18nConfig)['locales'][number];
 
   type ZodTranslator = ReturnType<typeof useTranslations>;
 

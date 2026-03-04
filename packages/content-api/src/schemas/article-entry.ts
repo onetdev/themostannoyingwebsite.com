@@ -2,7 +2,7 @@ import { z } from 'zod';
 
 export const ArticleSharedSchema = z
   .object({
-    id: z.number(),
+    id: z.coerce.string(),
     publishedAt: z.iso
       .datetime({ offset: true })
       .describe('Must be in ISO 8601 format'),

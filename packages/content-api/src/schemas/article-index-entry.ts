@@ -13,6 +13,7 @@ const schema = z
       .optional(),
     isHighlighted: z.boolean(),
     isOnCover: z.boolean(),
+    id: z.coerce.string(),
     locale: z.string(),
     publishedAt: z.iso
       .datetime({ offset: true })

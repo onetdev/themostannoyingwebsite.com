@@ -148,17 +148,18 @@ const resolveArticleLocales = async (
     const localeMetaEntry = localeMeta[locale]!;
 
     results.push({
-      publishedAt: sharedDataParsed.publishedAt,
-      updatedAt: sharedDataParsed.updatedAt,
+      content: content,
+      coverImage: finalCoverImage,
       directory: entry.name,
+      id: sharedDataParsed.id,
       intro: langData.intro,
+      isHighlighted: localeMetaEntry.highlighted.includes(entry.name),
+      isOnCover: localeMetaEntry.onCover.includes(entry.name),
       locale: locale,
+      publishedAt: sharedDataParsed.publishedAt,
       slug: langData.slug,
       title: langData.title,
-      coverImage: finalCoverImage,
-      content: content,
-      isOnCover: localeMetaEntry.onCover.includes(entry.name),
-      isHighlighted: localeMetaEntry.highlighted.includes(entry.name),
+      updatedAt: sharedDataParsed.updatedAt,
     });
   }
 

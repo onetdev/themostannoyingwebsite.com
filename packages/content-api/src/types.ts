@@ -15,6 +15,7 @@ export interface ArticleDatum {
   intro?: string;
   isHighlighted: boolean;
   isOnCover: boolean;
+  id: string;
   locale: string;
   publishedAt: Date;
   updatedAt?: Date;
@@ -26,20 +27,17 @@ export interface ArticleDatum {
 export type ArticleData = PagedList<ArticleDatum>;
 
 export interface ArticleSearchResult {
-  lookup: ArticleLookupIdentifier;
+  lookup: ArticleLookupFilter;
   title: string;
   contextHighlight: string;
 }
 
-export interface ArticleLookupIdentifier {
-  slug: string;
-  locale: string;
-}
-
-export interface ArticleFilterParams {
+export interface ArticleLookupFilter {
+  id?: string;
   isHighlighted?: boolean;
   isOnCover?: boolean;
   locale?: string;
+  slug?: string;
 }
 
 export interface ArticleSort {
@@ -48,7 +46,7 @@ export interface ArticleSort {
 }
 
 export interface ArticleFilter {
-  params: ArticleFilterParams;
+  params: ArticleLookupFilter;
   sort?: ArticleSort;
   paginate?: { take?: number; skip?: number };
 }

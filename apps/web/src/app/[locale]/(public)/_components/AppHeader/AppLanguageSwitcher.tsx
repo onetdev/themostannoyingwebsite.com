@@ -28,7 +28,23 @@ export function AppLanguageSwitcher({
   const pathname = usePathname();
 
   const onLanguageChange = (value: string) => {
-    router.replace(pathname, { locale: value });
+    // Might not look sexy, modern BUT it is what we need. And it works,
+    // and it doesn't need a shitload of boilerplace throughout server and
+    // client side components.
+    const alternateLink = document.querySelector(
+      `link[rel="alternate"][hreflang="${value}"]`,
+    ) as HTMLLinkElement | null;
+
+    if (alternateLink?.href) {
+      // We need only the path from the fully qualified URL and then we
+      // also need to offset path as well since language must be passed down
+      // through the second arg of `push`.
+      const url = new URL(alternateLink.href);
+      router.push(url.pathname.substring(3), { locale: value });
+      return;
+    }
+
+    router.push(pathname, { locale: value });
   };
 
   const languages = appService.getSupportedLanguages();
