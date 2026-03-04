@@ -6,7 +6,10 @@ import sanitizeHtml from 'sanitize-html';
 import sharp from 'sharp';
 import { parse } from 'yaml';
 
-import articleEntrySimplifiedZod from '@/schemas/article-entry-simplified';
+import {
+  ArticleLanguageSchema,
+  ArticleSharedSchema,
+} from '@/schemas/article-entry';
 import type { ArticleIndexEntrySchema } from '@/schemas/article-index-entry';
 import { parse as parseMd } from '@/utils/markdown';
 
@@ -15,10 +18,8 @@ const logger = getLogger().getSubLogger({
 });
 const locales = ['en', 'hu'];
 const sourceRootPath = path.join('./data');
-const validArticleDirPattern = new RegExp(
-  `^(${locales.join('|')})-([0-9]*)-(.*)$`,
-  'i',
-);
+// Pattern for folder: {id}-{slug}
+const validArticleDirPattern = /^([0-9]*)-(.*)$/i;
 
 const getLocaleMeta = async () => {
   const queue = locales.map(async (locale) => {
@@ -76,90 +77,107 @@ const getLocaleMeta = async () => {
   return results;
 };
 
-const resolveArticle = async (
+const resolveArticleLocales = async (
   entry: Dirent,
   localeMeta: Awaited<ReturnType<typeof getLocaleMeta>>,
-) => {
+): Promise<ArticleIndexEntrySchema[]> => {
   const match = entry.name.match(validArticleDirPattern);
   if (!match) {
-    return null;
+    return [];
   }
 
   const articlePath = path.join(sourceRootPath, entry.name);
-  const fsData = await fs.readFile(path.join(articlePath, 'data.yml'));
-  const dataUnsafe = parse(fsData.toString());
-  const {
-    data,
-    success: isValid,
-    error,
-  } = articleEntrySimplifiedZod.safeParse(dataUnsafe);
 
-  if (isValid === false) {
-    throw Error(`Invalid article data: ${error}`);
-  }
+  // 1. Read shared data
+  const sharedDataRaw = await fs.readFile(path.join(articlePath, 'data.yml'));
+  const sharedDataParsed = ArticleSharedSchema.parse(
+    parse(sharedDataRaw.toString()),
+  );
 
-  let finalCoverImage: string | undefined;
-  if (data.coverImage) {
+  const results: ArticleIndexEntrySchema[] = [];
+
+  // 2. Read each locale data
+  for (const locale of locales) {
+    const langFilePath = path.join(articlePath, `${locale}.yml`);
     try {
-      const assetsPath = path.join(sourceRootPath, 'assets');
-      const coverPath = path.join(assetsPath, data.coverImage);
-      await fs.access(coverPath);
-
-      const filenameWithoutExt = data.coverImage.replace(/\.[^/.]+$/, '');
-      const thumbnailFilename = `${filenameWithoutExt}-480x270.gen.webp`;
-      const thumbnailPath = path.join(assetsPath, thumbnailFilename);
-
-      await sharp(coverPath)
-        .resize(480, 270)
-        .webp({ quality: 75 })
-        .toFile(thumbnailPath);
-
-      finalCoverImage = data.coverImage;
-    } catch (err) {
+      await fs.access(langFilePath);
+    } catch {
       logger.warn(
-        err,
-        `Failed to load cover image "${data.coverImage}" for ${entry.name}. It will be skipped.`,
+        `⚠️ Locale "${locale}" not found for ${entry.name}, skipping.`,
       );
+      continue;
     }
-  }
 
-  let content: string;
-  if ((data.contentFormat || 'markdown') === 'markdown') {
-    content = parseMd(data.content);
-  } else {
-    content = sanitizeHtml(data.content);
+    const langDataRaw = await fs.readFile(langFilePath);
+    const langData = ArticleLanguageSchema.parse(parse(langDataRaw.toString()));
+
+    const coverImage = langData.coverImage || sharedDataParsed.coverImage;
+    let finalCoverImage: string | undefined;
+
+    if (coverImage) {
+      try {
+        const assetsPath = path.join(sourceRootPath, 'assets');
+        const coverPath = path.join(assetsPath, coverImage);
+        await fs.access(coverPath);
+
+        const filenameWithoutExt = coverImage.replace(/\.[^/.]+$/, '');
+        const thumbnailFilename = `${filenameWithoutExt}-480x270.gen.webp`;
+        const thumbnailPath = path.join(assetsPath, thumbnailFilename);
+
+        await sharp(coverPath)
+          .resize(480, 270)
+          .webp({ quality: 75 })
+          .toFile(thumbnailPath);
+
+        finalCoverImage = coverImage;
+      } catch (err) {
+        logger.warn(
+          err,
+          `Failed to load cover image "${coverImage}" for ${entry.name} [${locale}]. It will be skipped.`,
+        );
+      }
+    }
+
+    let content: string;
+    if ((langData.contentFormat || 'markdown') === 'markdown') {
+      content = parseMd(langData.content);
+    } else {
+      content = sanitizeHtml(langData.content);
+    }
+
+    const localeMetaEntry = localeMeta[locale]!;
+
+    results.push({
+      publishedAt: sharedDataParsed.publishedAt,
+      updatedAt: sharedDataParsed.updatedAt,
+      directory: entry.name,
+      intro: langData.intro,
+      locale: locale,
+      slug: langData.slug,
+      title: langData.title,
+      coverImage: finalCoverImage,
+      content: content,
+      isOnCover: localeMetaEntry.onCover.includes(entry.name),
+      isHighlighted: localeMetaEntry.highlighted.includes(entry.name),
+    });
   }
 
   logger.info(entry.name);
-
-  const localeMetaEntry = localeMeta[match[1]!]!;
-  // Denormalized data
-  return {
-    publishedAt: data.publishedAt,
-    directory: entry.name,
-    intro: data.intro,
-    locale: match[1]!,
-    slug: match[3]!,
-    title: data.title,
-    coverImage: finalCoverImage,
-    content: content,
-    isOnCover: localeMetaEntry.onCover.includes(entry.name),
-    isHighlighted: localeMetaEntry.highlighted.includes(entry.name),
-  } satisfies ArticleIndexEntrySchema;
+  return results;
 };
 
 const main = async () => {
   const localeMeta = await getLocaleMeta();
   const fsEntries = await fs.readdir(sourceRootPath, { withFileTypes: true });
-  const candidates = fsEntries.filter((entry) => entry.isDirectory());
+  const candidates = fsEntries.filter(
+    (entry) => entry.isDirectory() && entry.name !== 'assets',
+  );
 
   logger.info('🔄 Resolving articles...');
   const resolverQueue = candidates.map((item) =>
-    resolveArticle(item, localeMeta),
+    resolveArticleLocales(item, localeMeta),
   );
-  const resolved = (await Promise.all(resolverQueue)).filter(
-    (entry) => entry !== null,
-  );
+  const resolved = (await Promise.all(resolverQueue)).flat();
   logger.info('✅ Articles resolved.');
 
   const indexFile = path.join(sourceRootPath, 'index.json');
