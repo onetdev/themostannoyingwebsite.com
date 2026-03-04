@@ -1,5 +1,4 @@
 import { z } from 'zod';
-import { getCaptchaEmojiDataSchema } from '@/features/verification/schemas';
 import { GenderSchema } from '.';
 
 const validatePassword = (value: string, t: ZodTranslator) => {
@@ -72,7 +71,6 @@ export function getSignupFormDataSchema(t: ZodTranslator) {
         (val) => (!val ? undefined : val),
         z.coerce.number().optional(),
       ),
-      captcha: getCaptchaEmojiDataSchema(t),
     })
     .refine((data) => data.password === data.passwordConfirmation, {
       message: t('form.validation.error.passwordMismatch'),

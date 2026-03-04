@@ -5,17 +5,17 @@ import type { Point2d } from '@maw/utils/math';
 import { useEffect, useMemo, useState } from 'react';
 import type { TilePuzzleEntryMeta } from '../types';
 
-interface UseTilePuzzleDataProps {
+interface UseTilePuzzleChallengeDataProps {
   cols: number;
   rows: number;
-  onResolved: () => void;
+  onProgress: (score: number) => void;
 }
 
-export function useTilePuzzleData({
+export function useTilePuzzleChallengeData({
   cols,
   rows,
-  onResolved,
-}: UseTilePuzzleDataProps) {
+  onProgress,
+}: UseTilePuzzleChallengeDataProps) {
   const [items, setItems] = useState<TilePuzzleEntryMeta[]>([]);
 
   // Generating the puzzle
@@ -88,12 +88,7 @@ export function useTilePuzzleData({
     return items.filter((cell) => !cell.isCorrect).length;
   }, [items]);
 
-  useEffect(() => {
-    if (hasInvalid) {
-      return;
-    }
-    onResolved();
-  }, [hasInvalid, onResolved]);
+  useEffect(() => onProgress(hasInvalid ? 1 : 0), [hasInvalid, onProgress]);
 
   return {
     items,

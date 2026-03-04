@@ -11,52 +11,53 @@ import {
   Progress,
 } from '@maw/ui-lib';
 import { useTranslations } from 'next-intl';
-import { useState } from 'react';
+import { useEffect } from 'react';
 import { useEvent } from '@/core/events/react/useEvent';
-import type { ChallengeType } from '../hooks/useCaptchaChallenge';
+import { useCaptchaChallenge } from '../hooks';
 import { EmojiCountChallenge } from './EmojiCountChallenge';
 import { TaxonomyChallenge } from './TaxonomyChallenge';
 import { TilePuzzleChallenge } from './TilePuzzleChallenge';
 
 export interface CaptchaDialogProps {
   isOpen: boolean;
-  type: ChallengeType;
+  onFailed: () => void;
   onResolved: () => void;
-  onReset: () => void;
-  onDismiss: () => void;
-  progress: number;
 }
 
 export function CaptchaDialog({
   isOpen,
-  type,
+  onFailed,
   onResolved,
-  onReset,
-  onDismiss,
-  progress,
 }: CaptchaDialogProps) {
+  const {
+    challengeType,
+    completion,
+    currentChallengeScore,
+    handleChallengeScoreUpdate,
+    handleDismiss,
+    handleReset,
+    handleSkip,
+    handleStart,
+    handleVerify,
+  } = useCaptchaChallenge({
+    onFailed,
+    onResolved,
+  });
   const t = useTranslations();
-  const [selectedCount, setSelectedCount] = useState(0);
 
-  useEvent('ui:modal:dismiss-signaled', () => onDismiss(), isOpen);
-
-  const handleReset = () => {
-    setSelectedCount(0);
-    onReset();
-  };
+  useEvent('ui:modal:dismiss-signaled', () => handleDismiss(), isOpen);
 
   const handleOpenChange = (open: boolean) => {
     if (!open) {
-      onDismiss();
+      onFailed();
     }
   };
 
-  const buttonLabel = (() => {
-    if (type === 'grid') {
-      return selectedCount > 0 ? t('common.verify') : t('common.skip');
+  useEffect(() => {
+    if (isOpen) {
+      handleStart();
     }
-    return t('common.next');
-  })();
+  }, [isOpen, handleStart]);
 
   return (
     <Dialog open={isOpen} onOpenChange={handleOpenChange}>
@@ -70,19 +71,28 @@ export function CaptchaDialog({
         <div className="py-2 px-5">
           <div className="flex justify-between text-[10px] font-bold uppercase text-muted-foreground">
             <span>{t('verification.captcha.verificationProgress')}</span>
-            <span>{progress.toFixed(2)}%</span>
+            <span>{completion.toFixed(2)}%</span>
           </div>
-          <Progress value={progress} className="h-1" />
+          <Progress value={completion} className="h-1" />
         </div>
         <div className="p-4">
-          {type === 'emoji' && (
-            <EmojiCountChallenge onResolved={onResolved} className="mx-auto" />
+          {challengeType === 'emoji' && (
+            <EmojiCountChallenge
+              onProgress={handleChallengeScoreUpdate}
+              className="mx-auto"
+            />
           )}
-          {type === 'tile' && (
-            <TilePuzzleChallenge onResolved={onResolved} className="mx-auto" />
+          {challengeType === 'tile' && (
+            <TilePuzzleChallenge
+              onProgress={handleChallengeScoreUpdate}
+              className="mx-auto"
+            />
           )}
-          {type === 'grid' && (
-            <TaxonomyChallenge onResolved={onResolved} className="mx-auto" />
+          {challengeType === 'grid' && (
+            <TaxonomyChallenge
+              onProgress={handleChallengeScoreUpdate}
+              className="mx-auto"
+            />
           )}
         </div>
 
@@ -97,9 +107,16 @@ export function CaptchaDialog({
               <Icon icon="rotate" className="size-5" />
             </Button>
           </div>
-          <Button onClick={onResolved} size="sm" className="px-6 uppercase">
-            {buttonLabel}
-          </Button>
+          {currentChallengeScore < 1 && (
+            <Button onClick={handleSkip} size="sm" className="px-6 uppercase">
+              {t('common.skip')}
+            </Button>
+          )}
+          {currentChallengeScore >= 1 && (
+            <Button onClick={handleVerify} size="sm" className="px-6 uppercase">
+              {t('common.verify')}
+            </Button>
+          )}
         </DialogFooter>
       </DialogContent>
     </Dialog>

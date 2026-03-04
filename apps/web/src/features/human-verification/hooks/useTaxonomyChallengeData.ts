@@ -6,12 +6,15 @@ import { useAppConfigContext } from '@/core/config/react-app-config';
 import type { SpriteConfig } from '../schemas';
 import type { TaxonomyEntryMeta } from '../types';
 
-export interface TaxonomySelectorProps {
+export interface TaxonomyChallengeProps {
   cols: number;
   rows: number;
 }
 
-export function useTaxonomyData({ cols, rows }: TaxonomySelectorProps) {
+export function useTaxonomyChallengeData({
+  cols,
+  rows,
+}: TaxonomyChallengeProps) {
   const [validCount, setValidCount] = useState(0);
   const [items, setItems] = useState<TaxonomyEntryMeta[]>([]);
   const {

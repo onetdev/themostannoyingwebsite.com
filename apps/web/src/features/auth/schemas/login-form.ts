@@ -1,5 +1,4 @@
 import { z } from 'zod';
-import { getCaptchaEmojiDataSchema } from '@/features/verification/schemas';
 
 export function getLoginFormDataSchema(t: ZodTranslator) {
   return z.object({
@@ -7,7 +6,6 @@ export function getLoginFormDataSchema(t: ZodTranslator) {
     password: z
       .string()
       .min(1, { message: t('form.validation.error.required') }),
-    captcha: getCaptchaEmojiDataSchema(t),
     remember: z.boolean().optional(),
   });
 }

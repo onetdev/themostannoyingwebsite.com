@@ -5,15 +5,15 @@ import { useMemo } from 'react';
 import type { EmojiCountChallengeEntryMeta } from '../../types';
 import { CAPTCHA_EMOJI_DEFAULT_POOL } from './data';
 
-export interface UseEmojiEmojiDataProps {
+export interface UseEmojiEmojiChallengeDataProps {
   count?: number;
   pool?: string[];
 }
 
-export function useEmojiCountData({
+export function useEmojiCountChallengeData({
   count = 100,
   pool = CAPTCHA_EMOJI_DEFAULT_POOL,
-}: UseEmojiEmojiDataProps) {
+}: UseEmojiEmojiChallengeDataProps) {
   const data = useMemo(() => {
     const counts = new Map<string, number>();
     const items: EmojiCountChallengeEntryMeta[] = [];

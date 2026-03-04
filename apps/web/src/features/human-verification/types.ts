@@ -1,6 +1,13 @@
 import type { Point2d } from '@maw/utils/math';
 import type { SpriteConfig } from './schemas';
 
+export type ChallengeStatus =
+  | 'idle'
+  | 'loading'
+  | 'challenge'
+  | 'failed'
+  | 'resolved';
+
 export interface EmojiCountChallengeEntryMeta {
   content: string;
   coords: Point2d;

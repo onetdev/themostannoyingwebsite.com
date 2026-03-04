@@ -31,6 +31,9 @@ const config: AppConfig = {
         },
       ],
     },
+    allowedChallenges: ['emoji', 'tile', 'grid'],
+    challengeTriggerTimeoutMs: 2000,
+    requiredCompletedChallanges: 20,
   },
   content: {
     assets: {

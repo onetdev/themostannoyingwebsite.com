@@ -27,7 +27,6 @@ export const signupFormDefaultValues: SignupFormData = {
   countryCode: '',
   phoneNumberCountry: undefined,
   phoneNumber: undefined,
-  captcha: '',
 };
 
 interface SignupFormProps {

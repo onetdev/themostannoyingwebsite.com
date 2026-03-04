@@ -302,6 +302,9 @@ export default {
       taxonomyChallengeSkipHint: 'If there are none, click skip',
       tilePuzzleChallengeHint:
         'Move the pieces by clicking on nearby tiles next to empty space',
+      roboCop: 'roboCOP',
+      protected: 'protected',
+      emojiChallengePlaceholder: 'Emoji with the highest occurance count',
     },
   },
   form: {

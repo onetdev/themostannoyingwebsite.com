@@ -1,10 +1,11 @@
 'use client';
 
 import { Button, Icon } from '@maw/ui-lib';
-import type { CaptchaStatus } from '../hooks';
+import { useTranslations } from 'next-intl';
+import type { ChallengeStatus } from '../types';
 
 export interface CaptchaTriggerProps {
-  status: CaptchaStatus;
+  status: ChallengeStatus;
   onClick: () => void;
   label: string;
 }
@@ -14,6 +15,8 @@ export function CaptchaTrigger({
   onClick,
   label,
 }: CaptchaTriggerProps) {
+  const t = useTranslations();
+
   return (
     <Button
       type="button"
@@ -23,6 +26,9 @@ export function CaptchaTrigger({
     >
       <div className="flex items-center gap-3 shrink">
         <div className="border-input flex size-7 items-center justify-center rounded-sm border shrink-0">
+          {status === 'resolved' && (
+            <Icon icon="checkCircle" className="text-success" />
+          )}
           {(status === 'loading' || status === 'challenge') && (
             <Icon icon="spinner" className="text-primary animate-spin" />
           )}
@@ -35,8 +41,8 @@ export function CaptchaTrigger({
       <div className="flex flex-col gap-1 items-center opacity-50">
         <Icon icon="lock" className="text-2xl" />
         <span className="text-[8px]">
-          <div>roboCOP</div>
-          <div>protected</div>
+          <div>{t('verification.captcha.roboCop')}</div>
+          <div>{t('verification.captcha.protected')}</div>
         </span>
       </div>
     </Button>

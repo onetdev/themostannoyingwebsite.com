@@ -1,6 +1,5 @@
 'use client';
 
-import { Icon } from '@maw/ui-lib';
 import { clsx } from '@maw/ui-lib/utils';
 import type { ComponentProps } from 'react';
 import type { TaxonomyEntryMeta } from '../../types';
@@ -59,9 +58,12 @@ function TaxonomySelectorCell({
       onClick={onSelect}
       className={clsx(
         'relative aspect-square overflow-hidden rounded-md bg-muted transition-transform duration-200',
-        data.isSelected && 'ring-2 ring-blue-500',
+        data.isSelected && 'ring-3 ring-primary',
         className,
       )}
+      style={{
+        transform: data.isSelected ? 'scale(0.9)' : 'scale(1)',
+      }}
     >
       <div
         className="absolute inset-0 bg-no-repeat transition-transform duration-300"
@@ -69,15 +71,8 @@ function TaxonomySelectorCell({
           backgroundImage: `url(${data.asset.uri})`,
           backgroundSize,
           backgroundPosition,
-          transform: data.isSelected ? 'scale(0.9)' : 'scale(1)',
         }}
       />
-
-      {data.isSelected && (
-        <div className="absolute top-1 left-1 flex size-5 items-center justify-center rounded-full bg-blue-500 text-white shadow">
-          <Icon icon="check" className="text-[10px]" />
-        </div>
-      )}
     </button>
   );
 }
