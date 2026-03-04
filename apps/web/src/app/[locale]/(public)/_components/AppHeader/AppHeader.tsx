@@ -4,6 +4,7 @@ import type { ActiveNavigationItem } from '@/app/navigation';
 import { SearchForm } from '@/features/content/components';
 import { Link } from '@/i18n/navigation';
 import { AppDarkModeToggle } from './AppDarkModeToggle';
+import { AppLanguageSwitcher } from './AppLanguageSwitcher';
 import { AppNavigationDesktop } from './AppNavigationDesktop';
 import { AppNavigationMobile } from './AppNavigationMobile';
 import { PainLevelSelector } from './PainLevelSelector';
@@ -26,11 +27,18 @@ export async function AppHeader({ activeItem, className }: AppHeaderProps) {
       </div>
       <div className="flex items-center justify-end gap-4">
         <SearchForm className="hidden md:flex" size="md" />
-        <Button asChild className="md:hidden" variant="ghost">
+        <Button
+          asChild
+          className="md:hidden rounded-full p-0"
+          variant="outline"
+        >
           <Link href="/search">
             <Icon icon="search" />
           </Link>
         </Button>
+        <div className="hidden md:block">
+          <AppLanguageSwitcher />
+        </div>
         <AppDarkModeToggle />
       </div>
       <div className="col-span-2 my-2 hidden items-center md:flex">

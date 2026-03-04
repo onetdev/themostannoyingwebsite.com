@@ -9,7 +9,7 @@ const darkModeToggleVariants = cva(
     variants: {
       size: {
         md: 'h-7 w-16',
-        lg: 'h-7 w-16 md:h-9 md:w-20',
+        lg: 'h-9 w-20',
       },
     },
     defaultVariants: {

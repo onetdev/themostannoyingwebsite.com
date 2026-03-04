@@ -22,6 +22,7 @@ import {
 } from '@/app/navigation';
 import { Link } from '@/i18n/navigation';
 import { useRuntimeStore } from '@/stores';
+import { AppLanguageSwitcher } from './AppLanguageSwitcher';
 
 export type AppNavigationMobileProps = {
   activeItem?: ActiveNavigationItem;
@@ -63,12 +64,16 @@ export function AppNavigationMobile({ activeItem }: AppNavigationMobileProps) {
         <Icon icon="menu" />
       </SheetTrigger>
       <SheetContent side="left" className="w-[280px] gap-0 overflow-y-auto">
-        <SheetHeader className="text-left">
+        <SheetHeader className="flex flex-row items-center justify-between pr-4 text-left">
           <SheetTitle className="pl-3 text-lg font-bold tracking-tighter">
             <i className="font-light">the</i>{' '}
             <span className="text-primary">MAW</span>
           </SheetTitle>
         </SheetHeader>
+        <Separator />
+        <div className="px-5 py-2">
+          <AppLanguageSwitcher className="w-full" />
+        </div>
         {navigationTree.map(({ titleKey, items }) => (
           <>
             <Separator />
@@ -86,7 +91,7 @@ export function AppNavigationMobile({ activeItem }: AppNavigationMobileProps) {
                     onClick={() => onClick(item)}
                     data-active={active}
                     aria-current={active ? 'page' : undefined}
-                    className="hover:bg-accent hover:text-accent-foreground data-[active=true]:bg-accent data-[active=true]:text-primary text-muted-foreground flex items-center rounded-md px-3 py-2 text-sm font-medium transition-colors data-[active=true]:font-semibold"
+                    className="flex items-center px-3 py-2 text-sm transition-colors data-[active=true]:font-semibold"
                   >
                     {item.icon && (
                       <Icon icon={item.icon} className="text-primary mr-2" />
