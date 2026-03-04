@@ -71,6 +71,9 @@ export function getSignupFormDataSchema(t: ZodTranslator) {
         (val) => (!val ? undefined : val),
         z.coerce.number().optional(),
       ),
+      captcha: z
+        .string()
+        .min(1, { message: t('form.validation.error.captchaRequired') }),
     })
     .refine((data) => data.password === data.passwordConfirmation, {
       message: t('form.validation.error.passwordMismatch'),

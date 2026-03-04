@@ -93,7 +93,7 @@ export function useCaptchaChallenge({
   onFailed,
 }: UseCaptchaChallengeProps) {
   const {
-    verification: { allowedChallenges, requiredCompletedChallanges },
+    verification: { allowedChallenges, requiredCompletedChallenges },
   } = useAppConfigContext();
   const [state, dispatch] = useReducer(reducer, initialState);
   const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
@@ -156,15 +156,15 @@ export function useCaptchaChallenge({
   }, [state.challengeType, allowedChallenges]);
 
   useEffect(() => {
-    if (state.totalVerified >= requiredCompletedChallanges) {
+    if (state.totalVerified >= requiredCompletedChallenges) {
       onResolved?.();
     }
-  }, [onResolved, requiredCompletedChallanges, state.totalVerified]);
+  }, [onResolved, requiredCompletedChallenges, state.totalVerified]);
 
   return {
     challengeType: state.challengeType,
     completion: state.totalVerified
-      ? mapToLogScale(state.totalVerified, requiredCompletedChallanges, 1)
+      ? mapToLogScale(state.totalVerified, requiredCompletedChallenges, 1)
       : 0,
     currentChallengeScore: state.currentChallengeScore ?? 0,
     handleChallengeScoreUpdate,

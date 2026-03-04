@@ -8,10 +8,7 @@ export function getCommentFormDataSchema(t: ZodTranslator) {
       .min(1, { message: t('form.validation.error.required') }),
     captcha: z
       .string()
-      .min(1, { message: t('form.validation.error.captchaRequired') })
-      .regex(/^[XyZ123]{444}$/, {
-        message: t('form.validation.error.captchaInvalid'),
-      }),
+      .min(1, { message: t('form.validation.error.captchaRequired') }),
   });
 }
 

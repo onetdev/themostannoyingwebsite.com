@@ -16,7 +16,7 @@ export type CaptchaFieldProps = {
 
 export function CaptchaField({
   fieldName = 'captcha',
-  required = false,
+  required = true,
 }: CaptchaFieldProps) {
   const t = useTranslations();
   const {
@@ -24,32 +24,32 @@ export function CaptchaField({
     formState: { errors },
     setValue,
   } = useFormContext();
-  const [state, setState] = useState<ChallengeStatus>('idle');
+  const [status, setStatus] = useState<ChallengeStatus>('idle');
   const timerRef = useRef<ReturnType<typeof setTimeout>>(null);
   const {
     verification: { challengeTriggerTimeoutMs },
   } = useAppConfigContext();
 
   const onResolved = () => {
-    setState('resolved');
+    setStatus('resolved');
     setValue(fieldName, 'true');
   };
   const onFailed = () => {
-    setState('failed');
+    setStatus('failed');
     setValue(fieldName, '');
   };
 
   const handleTriggerClick = useCallback(() => {
-    if (state === 'challenge' || state === 'loading') {
+    if (status === 'challenge' || status === 'loading') {
       return;
     }
 
-    setState('loading');
+    setStatus('loading');
     if (timerRef.current) clearTimeout(timerRef.current);
     timerRef.current = setTimeout(() => {
-      setState('challenge');
+      setStatus('challenge');
     }, challengeTriggerTimeoutMs);
-  }, [state, challengeTriggerTimeoutMs]);
+  }, [status, challengeTriggerTimeoutMs]);
 
   return (
     <Field>
@@ -59,12 +59,12 @@ export function CaptchaField({
       <FieldContent>
         <div className="my-3 flex items-center">
           <CaptchaTrigger
-            status={state}
+            status={status}
             onClick={handleTriggerClick}
             label={t('verification.captcha.proveYouAreRobot')}
           />
           <CaptchaDialog
-            isOpen={state === 'challenge'}
+            isOpen={status === 'challenge'}
             onResolved={onResolved}
             onFailed={onFailed}
           />
