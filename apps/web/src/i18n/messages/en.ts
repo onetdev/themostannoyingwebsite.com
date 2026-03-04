@@ -427,6 +427,11 @@ export default {
   settings: {
     userPreferences: {
       title: 'Preferences',
+      language: 'Language',
+      languages: {
+        en: 'English',
+        hu: 'Hungarian',
+      },
       colorScheme: 'Theme / Color scheme',
       darkMode: 'Dark mode',
       reducedMotion: 'Reduced motion',

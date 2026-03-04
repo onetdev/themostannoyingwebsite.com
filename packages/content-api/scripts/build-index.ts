@@ -13,7 +13,7 @@ import { parse as parseMd } from '@/utils/markdown';
 const logger = getLogger().getSubLogger({
   name: 'build-index',
 });
-const locales = ['en'];
+const locales = ['en', 'hu'];
 const sourceRootPath = path.join('./data');
 const validArticleDirPattern = new RegExp(
   `^(${locales.join('|')})-([0-9]*)-(.*)$`,
