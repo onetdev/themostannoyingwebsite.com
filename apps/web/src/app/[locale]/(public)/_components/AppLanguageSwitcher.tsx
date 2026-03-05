@@ -40,7 +40,7 @@ export function AppLanguageSwitcher({
       // also need to offset path as well since language must be passed down
       // through the second arg of `push`.
       const url = new URL(alternateLink.href);
-      router.push(url.pathname.substring(3), { locale: value });
+      router.push(url.pathname.substring(value.length + 1), { locale: value });
       return;
     }
 

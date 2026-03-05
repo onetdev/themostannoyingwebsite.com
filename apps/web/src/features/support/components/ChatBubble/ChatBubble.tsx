@@ -44,7 +44,7 @@ export function ChatBubble() {
       {state.audio}
       <button
         type="button"
-        className="bg-secondary text-on-secondary z-30 flex size-12 cursor-pointer items-center justify-center rounded-full text-2xl shadow-lg md:size-14"
+        className="bg-secondary text-on-secondary relative z-30 flex size-12 cursor-pointer items-center justify-center rounded-full text-2xl shadow-lg md:size-14"
         onClick={toggleHistory}
       >
         <Icon icon="commentDots" className="text-md block md:text-2xl" />

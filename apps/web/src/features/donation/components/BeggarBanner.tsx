@@ -39,7 +39,7 @@ export function BeggarBanner() {
   }
 
   return (
-    <div className="bg-error text-on-error z-50 w-full shadow-lg">
+    <div className="bg-error text-on-error relative z-50 w-full shadow-lg">
       <div className="container mx-auto flex items-center justify-between gap-4 px-5 py-5 xl:px-8">
         <div className="flex-1">
           <p className="text-sm md:text-base">

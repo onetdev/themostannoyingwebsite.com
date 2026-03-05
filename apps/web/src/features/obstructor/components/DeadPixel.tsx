@@ -32,7 +32,7 @@ export function DeadPixel() {
           key={`${point.x}-${point.y}`}
           onClick={() => emit('dead-pixel:clicked')}
           style={{ top: point.y, left: point.x }}
-          className="fixed z-50 size-px bg-black select-none dark:bg-white"
+          className="fixed z-9999 size-px bg-black select-none dark:bg-white"
         />
       ))}
     </>
