@@ -42,11 +42,11 @@ export function DebugPage() {
               DEBUG_MODE
             </PageHeadline>
             <span className="font-mono text-xs opacity-50 uppercase tracking-widest hidden sm:inline">
-              {t('debug.internalOnly')}
+              {t('monitoring.internalOnly')}
             </span>
           </div>
           <Button variant="outline" size="sm" onClick={logout}>
-            {t('debug.logout')}
+            {t('monitoring.logout')}
           </Button>
         </div>
 
@@ -59,46 +59,46 @@ export function DebugPage() {
               value="stores"
               className="px-6 py-3 font-medium transition-colors"
             >
-              {t('debug.tabs.stores')}
+              {t('monitoring.tabs.stores')}
             </TabsTrigger>
             <TabsTrigger
               value="events"
               className="px-6 py-3 font-medium transition-colors"
             >
-              {t('debug.tabs.events')}
+              {t('monitoring.tabs.events')}
             </TabsTrigger>
             <TabsTrigger
               value="config"
               className="px-6 py-3 font-medium transition-colors"
             >
-              {t('debug.tabs.config')}
+              {t('monitoring.tabs.config')}
             </TabsTrigger>
           </TabsList>
 
           <TabsContent value="stores">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
               <StoreInspector
-                title={t('debug.storeInspector.runtime')}
+                title={t('monitoring.storeInspector.runtime')}
                 data={runtime}
               />
               <StoreInspector
-                title={t('debug.storeInspector.monitoring')}
+                title={t('monitoring.storeInspector.monitoring')}
                 data={monitoring}
               />
               <StoreInspector
-                title={t('debug.storeInspector.painPreferences')}
+                title={t('monitoring.storeInspector.painPreferences')}
                 data={painPreferences}
               />
               <StoreInspector
-                title={t('debug.storeInspector.achievements')}
+                title={t('monitoring.storeInspector.achievements')}
                 data={achievements}
               />
               <StoreInspector
-                title={t('debug.storeInspector.userPreferences')}
+                title={t('monitoring.storeInspector.userPreferences')}
                 data={userPreferences}
               />
               <StoreInspector
-                title={t('debug.storeInspector.userGrants')}
+                title={t('monitoring.storeInspector.userGrants')}
                 data={userGrants}
               />
             </div>
@@ -113,7 +113,7 @@ export function DebugPage() {
           <TabsContent value="config">
             <div className="space-y-6">
               <StoreInspector
-                title={t('debug.storeInspector.appConfig')}
+                title={t('monitoring.storeInspector.appConfig')}
                 data={config}
               />
             </div>

@@ -40,7 +40,7 @@ export function EventHistory() {
             htmlFor="enable-history"
             className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 cursor-pointer"
           >
-            {t('debug.eventHistory.enable')}
+            {t('monitoring.eventHistory.enable')}
           </Label>
         </div>
         <Button
@@ -49,14 +49,14 @@ export function EventHistory() {
           onClick={clearEventHistory}
           disabled={eventHistory.length === 0}
         >
-          {t('debug.eventHistory.clear')}
+          {t('monitoring.eventHistory.clear')}
         </Button>
       </div>
 
       <Card>
         <CardHeader className="pb-0">
           <CardTitle className="text-lg">
-            {t('debug.eventHistory.title')}
+            {t('monitoring.eventHistory.title')}
           </CardTitle>
         </CardHeader>
         <CardContent className="p-0 pt-4">
@@ -64,13 +64,13 @@ export function EventHistory() {
             <TableHeader>
               <TableRow>
                 <TableHead className="w-[120px] font-mono text-xs uppercase">
-                  {t('debug.eventHistory.table.timestamp')}
+                  {t('monitoring.eventHistory.table.timestamp')}
                 </TableHead>
                 <TableHead className="w-[200px] font-mono text-xs uppercase">
-                  {t('debug.eventHistory.table.type')}
+                  {t('monitoring.eventHistory.table.type')}
                 </TableHead>
                 <TableHead className="font-mono text-xs uppercase">
-                  {t('debug.eventHistory.table.payload')}
+                  {t('monitoring.eventHistory.table.payload')}
                 </TableHead>
               </TableRow>
             </TableHeader>
@@ -82,8 +82,8 @@ export function EventHistory() {
                     className="h-32 text-center text-muted-foreground italic"
                   >
                     {isHistoryEnabled
-                      ? t('debug.eventHistory.empty')
-                      : t('debug.eventHistory.disabled')}
+                      ? t('monitoring.eventHistory.empty')
+                      : t('monitoring.eventHistory.disabled')}
                   </TableCell>
                 </TableRow>
               ) : (

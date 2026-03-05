@@ -3,6 +3,7 @@ import comments from '@/features/comments/i18n/en';
 import commentVariants from '@/features/comments/i18n/generator/en';
 import donate from '@/features/donation/i18n/en';
 import humanVerification from '@/features/human-verification/i18n/en';
+import monitoring from '@/features/monitoring/i18n/en';
 import newsletter from '@/features/newsletter/i18n/en';
 import promotions from '@/features/promotion/i18n/en';
 import plansPage from '@/features/subscription/i18n/en';
@@ -578,50 +579,7 @@ export default {
     },
     info: {},
   },
-  debug: {
-    auth: {
-      title: 'Restricted Access',
-      description: 'Enter the password to access the debug dashboard.',
-      passwordLabel: 'Password',
-      passwordPlaceholder: '••••••••',
-      submit: 'Unlock Debug Mode',
-    },
-    logout: 'Logout',
-    internalOnly: 'Internal Use Only',
-    tabs: {
-      stores: 'Store Inspector',
-      events: 'Event Tester',
-      config: 'Static Config',
-    },
-    eventTester: {
-      title: 'Event Bus Tester',
-      commonEvents: 'Common Events',
-      eventTypeLabel: 'Event type',
-      payloadLabel: 'Payload (JSON)',
-      dispatch: 'Dispatch Event',
-    },
-    eventHistory: {
-      title: 'Event History',
-      enable: 'Enable Event History Recording',
-      clear: 'Clear History',
-      table: {
-        timestamp: 'Timestamp',
-        type: 'Type',
-        payload: 'Payload',
-      },
-      empty: 'No events captured yet...',
-      disabled: 'Event history recording is disabled.',
-    },
-    storeInspector: {
-      runtime: 'Runtime Store',
-      monitoring: 'Monitoring Store',
-      painPreferences: 'Pain Preferences Store',
-      achievements: 'Achievements Store',
-      userPreferences: 'User Preferences Store',
-      userGrants: 'User Grants Store',
-      appConfig: 'App Configuration',
-    },
-  },
+  monitoring,
   contextMenu: {
     disabled: "Hey, you can't right click here!",
   },

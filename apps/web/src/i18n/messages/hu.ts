@@ -3,6 +3,7 @@ import commentVariants from '@/features/comments/i18n/generator/hu';
 import comments from '@/features/comments/i18n/hu';
 import donate from '@/features/donation/i18n/hu';
 import humanVerification from '@/features/human-verification/i18n/hu';
+import monitoring from '@/features/monitoring/i18n/hu';
 import newsletter from '@/features/newsletter/i18n/hu';
 import promotions from '@/features/promotion/i18n/hu';
 import plansPage from '@/features/subscription/i18n/hu';
@@ -585,50 +586,7 @@ export default {
     },
     info: {},
   },
-  debug: {
-    auth: {
-      title: 'Korlátozott hozzáférés',
-      description: 'Add meg a jelszót a debug felület eléréséhez.',
-      passwordLabel: 'Jelszó',
-      passwordPlaceholder: '••••••••',
-      submit: 'Debug mód feloldása',
-    },
-    logout: 'Kijelentkezés',
-    internalOnly: 'Csak belső használatra',
-    tabs: {
-      stores: 'Store ellenőrző',
-      events: 'Esemény tesztelő',
-      config: 'Statikus konfiguráció',
-    },
-    eventTester: {
-      title: 'Eseménybusz tesztelő',
-      commonEvents: 'Gyakori események',
-      eventTypeLabel: 'Esemény típusa',
-      payloadLabel: 'Payload (JSON)',
-      dispatch: 'Esemény küldése',
-    },
-    eventHistory: {
-      title: 'Eseménytörténet',
-      enable: 'Eseménytörténet rögzítése',
-      clear: 'Történet törlése',
-      table: {
-        timestamp: 'Időbélyeg',
-        type: 'Típus',
-        payload: 'Payload',
-      },
-      empty: 'Még nincsenek rögzített események...',
-      disabled: 'Az eseménytörténet rögzítése ki van kapcsolva.',
-    },
-    storeInspector: {
-      runtime: 'Runtime Store',
-      monitoring: 'Monitoring Store',
-      painPreferences: 'Fájdalom-beállítások Store',
-      achievements: 'Eredmények Store',
-      userPreferences: 'Felhasználói beállítások Store',
-      userGrants: 'Hozzájárulások Store',
-      appConfig: 'App konfiguráció',
-    },
-  },
+  monitoring,
   contextMenu: {
     disabled: 'Hé, itt nem lehet jobb klikkelni!',
   },

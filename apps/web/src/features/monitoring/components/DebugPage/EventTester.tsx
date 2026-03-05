@@ -38,13 +38,13 @@ export function EventTester() {
       <Card>
         <CardHeader>
           <CardTitle className="text-lg">
-            {t('debug.eventTester.title')}
+            {t('monitoring.eventTester.title')}
           </CardTitle>
         </CardHeader>
         <CardContent className="space-y-4">
           <div className="flex flex-col gap-2">
             <div className="text-sm font-medium text-muted-foreground">
-              {t('debug.eventTester.commonEvents')}
+              {t('monitoring.eventTester.commonEvents')}
             </div>
             <div className="flex flex-wrap gap-2">
               {testEvents.map((evt) => (
@@ -65,7 +65,7 @@ export function EventTester() {
 
           <Field>
             <FieldLabel htmlFor="eventType" required>
-              {t('debug.eventTester.eventTypeLabel')}
+              {t('monitoring.eventTester.eventTypeLabel')}
             </FieldLabel>
             <FieldContent>
               <Input
@@ -81,7 +81,7 @@ export function EventTester() {
 
           <Field>
             <FieldLabel htmlFor="payload">
-              {t('debug.eventTester.payloadLabel')}
+              {t('monitoring.eventTester.payloadLabel')}
             </FieldLabel>
             <FieldContent>
               <Textarea
@@ -96,7 +96,7 @@ export function EventTester() {
           </Field>
 
           <Button className="w-full" onClick={handleSubmit(onSubmit)}>
-            {t('debug.eventTester.dispatch')}
+            {t('monitoring.eventTester.dispatch')}
           </Button>
         </CardContent>
       </Card>
