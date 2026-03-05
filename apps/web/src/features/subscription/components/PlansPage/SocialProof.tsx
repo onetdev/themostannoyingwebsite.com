@@ -23,8 +23,9 @@ export function SocialProof({
 
   const pool = useMemo(() => {
     return {
-      names: t.raw('plansPage.socialProof.names') as string[],
-      locations: (t.raw('plansPage.socialProof.locations') ?? []) as string[],
+      names: t.raw('subscription.landing.socialProof.names') as string[],
+      locations: (t.raw('subscription.landing.socialProof.locations') ??
+        []) as string[],
       planNames: plans.map((p) => t(p.titleKey as AppTranslationKey)),
     };
   }, [plans, t]);
@@ -35,7 +36,7 @@ export function SocialProof({
     const plan = pool.planNames[randomInt(0, pool.planNames.length)];
 
     toast(
-      t('plansPage.socialProof.justSubscribed', {
+      t('subscription.landing.socialProof.justSubscribed', {
         name,
         location,
         plan,

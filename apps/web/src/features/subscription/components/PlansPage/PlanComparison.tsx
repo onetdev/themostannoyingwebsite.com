@@ -28,7 +28,7 @@ export function PlanComparison({ className, features, plans }: PlansPageProps) {
       <TableHeader>
         <TableRow>
           <TableHead className="py-4 pr-4 font-bold">
-            {t('plansPage.table.features')}
+            {t('subscription.landing.table.features')}
           </TableHead>
           {plans.map((pkg) => (
             <TableHead

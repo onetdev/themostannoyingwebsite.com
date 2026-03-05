@@ -24,7 +24,7 @@ export function BillingCycleSelector({
           size="sm"
           onClick={() => setBillingCycle(cycle)}
         >
-          {t(`plansPage.billing.${cycle}`)}
+          {t(`subscription.landing.billing.${cycle}`)}
         </Button>
       ))}
     </div>

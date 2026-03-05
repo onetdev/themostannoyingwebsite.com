@@ -24,8 +24,9 @@ export function useChatBubbleHistory() {
   );
 
   const botMessageVariants = useMemo(() => {
-    const all = Object.keys(messages.chatBubble.messageVariants).map((key) =>
-      t(`chatBubble.messageVariants.${key}` as AppTranslationKey),
+    const all = Object.keys(messages.support.chatBubble.messageVariants).map(
+      (key) =>
+        t(`support.chatBubble.messageVariants.${key}` as AppTranslationKey),
     );
 
     return all.filter(
@@ -40,7 +41,7 @@ export function useChatBubbleHistory() {
   const sendNotification = useCallback(
     (message: string) => {
       notification.send({
-        title: t('chatBubble.newAlert'),
+        title: t('support.chatBubble.newAlert'),
         body: message,
       });
     },
@@ -49,7 +50,7 @@ export function useChatBubbleHistory() {
 
   const addRandomBotItem = useCallback(() => {
     if (botMessageVariants.length === 0) {
-      botMessageVariants.push(t('chatBubble.messageFallback'));
+      botMessageVariants.push(t('support.chatBubble.messageFallback'));
     }
     const randomMessage =
       botMessageVariants[Math.floor(Math.random() * botMessageVariants.length)];
@@ -88,8 +89,8 @@ export function useChatBubbleHistory() {
 
       return [
         {
-          text: t('chatBubble.messageInitial'),
-          owner: 'bot',
+          text: t('support.chatBubble.messageInitial'),
+          owner: 'bot' as const,
           time: new Date(),
         },
       ];

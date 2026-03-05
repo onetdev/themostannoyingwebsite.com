@@ -11,8 +11,8 @@ export async function getPlans(): Promise<
       {
         key: 'poorified',
         icon: '🏚️',
-        titleKey: 'plansPage.packages.poorified.title',
-        descriptionKey: 'plansPage.packages.poorified.description',
+        titleKey: 'subscription.landing.packages.poorified.title',
+        descriptionKey: 'subscription.landing.packages.poorified.description',
         monthlyPriceByCycle: {
           monthly: 99,
           yearly: 89,
@@ -30,8 +30,8 @@ export async function getPlans(): Promise<
       {
         key: 'sufficient',
         icon: '🥪',
-        titleKey: 'plansPage.packages.sufficient.title',
-        descriptionKey: 'plansPage.packages.sufficient.description',
+        titleKey: 'subscription.landing.packages.sufficient.title',
+        descriptionKey: 'subscription.landing.packages.sufficient.description',
         monthlyPriceByCycle: {
           monthly: 299,
           yearly: 249,
@@ -51,8 +51,8 @@ export async function getPlans(): Promise<
       {
         key: 'delux',
         icon: '💎',
-        titleKey: 'plansPage.packages.delux.title',
-        descriptionKey: 'plansPage.packages.delux.description',
+        titleKey: 'subscription.landing.packages.delux.title',
+        descriptionKey: 'subscription.landing.packages.delux.description',
         monthlyPriceByCycle: {
           monthly: 999,
           yearly: 749,

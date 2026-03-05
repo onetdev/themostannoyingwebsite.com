@@ -58,7 +58,9 @@ export function PlansPage({
     <>
       <SocialProof plans={plans} {...socialProofConfig} />
       <div className="mb-6 flex flex-col items-center justify-between gap-4 sm:flex-row">
-        <PageHeadline className="mb-0">{t('plansPage.headline')}</PageHeadline>
+        <PageHeadline className="mb-0">
+          {t('subscription.landing.headline')}
+        </PageHeadline>
       </div>
 
       <div className="mb-8 flex flex-col items-center gap-5 md:flex-row md:items-baseline md:justify-between">
