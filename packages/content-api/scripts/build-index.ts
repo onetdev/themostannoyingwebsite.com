@@ -24,7 +24,6 @@ const validArticleDirPattern = /^([0-9]*)-(.*)$/i;
 const getLocaleMeta = async () => {
   const queue = locales.map(async (locale) => {
     let onCover: string[] = [];
-    let highlighted: string[] = [];
     let success: boolean;
 
     try {
@@ -34,7 +33,6 @@ const getLocaleMeta = async () => {
       const data = JSON.parse(dataRaw.toString());
 
       onCover = data['on-cover'];
-      highlighted = data.highlighted;
       success = true;
     } catch (_err) {
       success = false;
@@ -43,7 +41,6 @@ const getLocaleMeta = async () => {
     return {
       locale,
       onCover,
-      highlighted,
       success,
     };
   });
@@ -67,7 +64,6 @@ const getLocaleMeta = async () => {
       string,
       {
         onCover: string[];
-        highlighted: string[];
       }
     >,
   );
@@ -153,7 +149,6 @@ const resolveArticleLocales = async (
       directory: entry.name,
       id: sharedDataParsed.id,
       intro: langData.intro,
-      isHighlighted: localeMetaEntry.highlighted.includes(entry.name),
       isOnCover: localeMetaEntry.onCover.includes(entry.name),
       locale: locale,
       publishedAt: sharedDataParsed.publishedAt,

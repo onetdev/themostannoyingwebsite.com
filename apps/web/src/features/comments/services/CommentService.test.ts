@@ -20,7 +20,6 @@ describe('CommentService', () => {
         assetGroupId: 'test-group',
         content: 'test content',
         id: '1',
-        isHighlighted: false,
         isOnCover: false,
         locale: 'en',
         publishedAt: new Date('2023-01-01'),

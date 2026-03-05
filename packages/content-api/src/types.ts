@@ -13,7 +13,6 @@ export interface ArticleDatum {
     thumbnail: string;
   };
   intro?: string;
-  isHighlighted: boolean;
   isOnCover: boolean;
   id: string;
   locale: string;
@@ -34,7 +33,6 @@ export interface ArticleSearchResult {
 
 export interface ArticleLookupFilter {
   id?: string;
-  isHighlighted?: boolean;
   isOnCover?: boolean;
   locale?: string;
   slug?: string;

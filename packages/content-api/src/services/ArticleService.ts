@@ -164,7 +164,6 @@ const mapIndexEntryToContent = (
     coverImages,
     id: article.id,
     intro: article.intro,
-    isHighlighted: article.isHighlighted,
     isOnCover: article.isOnCover,
     locale: article.locale,
     publishedAt: new Date(article.publishedAt),
@@ -182,7 +181,6 @@ const isArticleMatching = (
     (!filter.locale || article.locale === filter.locale) &&
     (!filter.id || article.id === filter.id) &&
     (!filter.slug || article.slug === filter.slug) &&
-    propBoolCheck(article, 'isHighlighted', filter.isHighlighted) &&
     propBoolCheck(article, 'isOnCover', filter.isOnCover)
   );
 };
