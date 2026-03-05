@@ -106,7 +106,7 @@ export default {
     privacyPolicy: 'Adatvédelmi irányelvek',
     hotThings: 'Forró cuccok',
     dilf: 'DILF',
-    plans: 'MI tervek',
+    plans: 'MI csomagok',
     personal: 'Személyes',
     achievements: 'Eredmények',
   },

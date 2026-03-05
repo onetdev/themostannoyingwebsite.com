@@ -3,6 +3,7 @@ import { Analytics } from '@vercel/analytics/react';
 import { Inter } from 'next/font/google';
 import { notFound } from 'next/navigation';
 import { hasLocale, NextIntlClientProvider } from 'next-intl';
+import type { PropsWithChildren } from 'react';
 import { getLangDir } from 'rtl-detect';
 import { ClientRootProviderContainer } from '@/app/bootstrap/ClientRootProviderContainer';
 import { routing } from '@/i18n/routing';
@@ -19,10 +20,9 @@ const _inter = Inter({
 async function LocaleBareboneRootLayout({
   children,
   params,
-}: {
-  children: React.ReactNode;
+}: PropsWithChildren<{
   params: Promise<{ locale: string }>;
-}) {
+}>) {
   const { locale } = await params;
   const direction = getLangDir(locale);
   if (!hasLocale(routing.locales, locale)) {

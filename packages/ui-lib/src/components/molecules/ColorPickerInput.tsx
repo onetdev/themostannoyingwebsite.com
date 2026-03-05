@@ -1,5 +1,6 @@
 import { getRelativeLuminance } from '@maw/utils/color';
 import {
+  type ChangeEvent,
   type DetailedHTMLProps,
   forwardRef,
   type InputHTMLAttributes,
@@ -52,7 +53,7 @@ export const ColorPickerInput = forwardRef<
     const contrastingColor =
       (getRelativeLuminance(displayValue) || 0) < 0.5 ? '#eeeeee' : '#333333';
 
-    const onChangeProxy = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const onChangeProxy = (e: ChangeEvent<HTMLInputElement>) => {
       onChange?.(e);
       onValueChange?.(e.target.checked);
     };

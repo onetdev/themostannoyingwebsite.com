@@ -6,7 +6,7 @@ import {
   renderHook,
 } from '@testing-library/react';
 import { NextIntlClientProvider } from 'next-intl';
-import type { ReactElement } from 'react';
+import type { PropsWithChildren, ReactElement } from 'react';
 
 import en from '@/i18n/messages/en';
 
@@ -34,7 +34,7 @@ export function renderWithProviders(
     ...renderOptions
   }: CustomRenderOptions = {},
 ): RenderResult {
-  function Wrapper({ children }: { children: React.ReactNode }) {
+  function Wrapper({ children }: PropsWithChildren) {
     return (
       <NextIntlClientProvider locale={locale} messages={messages}>
         {children}
@@ -56,7 +56,7 @@ export function renderHookWithProviders<TResult, TProps>(
     ...renderOptions
   }: CustomRenderHookOptions<TProps> = {},
 ) {
-  function Wrapper({ children }: { children: React.ReactNode }) {
+  function Wrapper({ children }: PropsWithChildren) {
     return (
       <NextIntlClientProvider locale={locale} messages={messages}>
         {children}

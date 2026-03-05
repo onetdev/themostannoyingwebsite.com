@@ -24,7 +24,7 @@ export default async function Page() {
     <PageLayout
       autoPadding={false}
       activeItem="login"
-      className="mx-auto max-w-md p-0 px-5 md:py-14"
+      className="mx-auto max-w-lg p-0 px-5 md:py-14"
       role="main"
     >
       <LoginPage />

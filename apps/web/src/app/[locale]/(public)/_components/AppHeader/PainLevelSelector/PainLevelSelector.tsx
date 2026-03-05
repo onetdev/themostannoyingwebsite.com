@@ -1,7 +1,14 @@
 'use client';
 
+import {
+  Icon,
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from '@maw/ui-lib';
 import { useTranslations } from 'next-intl';
-import { useMemo } from 'react';
+import { type ChangeEvent, useMemo } from 'react';
 import { usePainPreferencesStore } from '@/stores';
 import { SliderRail } from './SliderRail';
 
@@ -34,7 +41,7 @@ export function PainLevelSelector({ className }: PainLevelSelectorProps) {
     percentageClampMap.find((label) => label.value <= Math.floor(percentage)) ??
     percentageClampMap[percentageClampMap.length - 1];
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     const value = parseInt(e.target.value, 10);
     setLevel(value);
   };
@@ -45,9 +52,26 @@ export function PainLevelSelector({ className }: PainLevelSelectorProps) {
     >
       <div className="text-card-foreground flex items-center justify-between text-xs font-bold tracking-wider uppercase opacity-60">
         <span>{t('painPreferences.levelSettings.label')}</span>
-        <span>
-          {percentageClamp.label} / {Math.floor(percentage)}%
-        </span>
+
+        <div className="flex items-center gap-1.5">
+          <TooltipProvider>
+            <Tooltip>
+              <TooltipTrigger asChild>
+                <button type="button" className="md:hidden">
+                  <Icon icon="infoCircle" className="size-3.5" />
+                </button>
+              </TooltipTrigger>
+              <TooltipContent side="bottom" align="start">
+                {t('painPreferences.levelSettings.label')}
+              </TooltipContent>
+            </Tooltip>
+          </TooltipProvider>
+          <span className="hidden md:inline">
+            {percentageClamp.label} / {Math.floor(percentage)}%
+          </span><span className="md:hidden">
+            {Math.floor(percentage)}%
+          </span>
+        </div>
       </div>
       <div className="relative">
         <SliderRail percentage={percentage} />
