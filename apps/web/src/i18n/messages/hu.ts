@@ -260,7 +260,7 @@ export default {
       november: 'November',
       december: 'December',
     },
-    days: {
+    weekdays: {
       monday: 'Hétfő',
       tuesday: 'Kedd',
       wednesday: 'Szerda',
@@ -1019,4 +1019,4 @@ export default {
       },
     },
   },
-};
+} satisfies AppTranslationShape;
