@@ -36,7 +36,7 @@ export function TilePuzzleChallenge({
     <div
       className={clsx(`w-full max-w-[350px] flex flex-col gap-3`, className)}
     >
-      <div>{t('verification.captcha.tilePuzzleChallengeHint')}</div>
+      <div>{t('humanVerification.captcha.tilePuzzleChallengeHint')}</div>
       <TilePuzzle
         cols={cols}
         imageSrc={imageSrc}

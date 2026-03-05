@@ -54,14 +54,14 @@ export function CaptchaField({
   return (
     <Field>
       <FieldLabel required={required}>
-        {t('verification.captcha.field')}
+        {t('humanVerification.captcha.field')}
       </FieldLabel>
       <FieldContent>
         <div className="my-3 flex items-center">
           <CaptchaTrigger
             status={status}
             onClick={handleTriggerClick}
-            label={t('verification.captcha.proveYouAreRobot')}
+            label={t('humanVerification.captcha.proveYouAreRobot')}
           />
           <CaptchaDialog
             isOpen={status === 'challenge'}

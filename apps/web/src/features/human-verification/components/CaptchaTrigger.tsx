@@ -57,8 +57,8 @@ export function CaptchaTrigger({
       <div className="flex flex-col gap-1 items-center opacity-50">
         <Icon icon="lock" className="text-2xl" />
         <span className="text-[8px]">
-          <div>{t('verification.captcha.roboCop')}</div>
-          <div>{t('verification.captcha.protected')}</div>
+          <div>{t('humanVerification.captcha.roboCop')}</div>
+          <div>{t('humanVerification.captcha.protected')}</div>
         </span>
       </div>
     </Button>

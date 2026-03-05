@@ -33,13 +33,13 @@ export function EmojiCountChallenge({
     <div
       className={clsx(`w-full max-w-[350px] flex flex-col gap-3`, className)}
     >
-      <p className="text-sm">{t('verification.captcha.emojiHint')}</p>
+      <p className="text-sm">{t('humanVerification.captcha.emojiHint')}</p>
       <EmojiCanvas width={350} height={250} items={items} />
       <Input
         type="text"
         className="w-full"
         id={fieldId}
-        placeholder={t('verification.captcha.emojiChallengePlaceholder')}
+        placeholder={t('humanVerification.captcha.emojiChallengePlaceholder')}
         onChange={handleInputChange}
       />
     </div>

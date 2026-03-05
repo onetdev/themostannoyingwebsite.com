@@ -66,11 +66,13 @@ export function CaptchaDialog({
         showCloseButton={true}
       >
         <DialogHeader className="border-b border-border p-4">
-          <DialogTitle>{t('verification.captcha.challengeTitle')}</DialogTitle>
+          <DialogTitle>
+            {t('humanVerification.captcha.challengeTitle')}
+          </DialogTitle>
         </DialogHeader>
         <div className="py-2 px-5">
           <div className="flex justify-between text-[10px] font-bold uppercase text-muted-foreground">
-            <span>{t('verification.captcha.verificationProgress')}</span>
+            <span>{t('humanVerification.captcha.verificationProgress')}</span>
             <span>{completion.toFixed(2)}%</span>
           </div>
           <Progress value={completion} className="h-1" />
@@ -101,7 +103,7 @@ export function CaptchaDialog({
             <Button
               type="button"
               onClick={handleReset}
-              title={t('verification.captcha.resetChallenge')}
+              title={t('humanVerification.captcha.resetChallenge')}
               variant="ghost"
             >
               <Icon icon="rotate" className="size-5" />

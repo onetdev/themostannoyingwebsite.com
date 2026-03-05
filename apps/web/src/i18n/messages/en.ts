@@ -2,6 +2,7 @@ import achievements from '@/features/achievements/i18n/en';
 import comments from '@/features/comments/i18n/en';
 import commentVariants from '@/features/comments/i18n/generator/en';
 import donate from '@/features/donation/i18n/en';
+import humanVerification from '@/features/human-verification/i18n/en';
 import newsletter from '@/features/newsletter/i18n/en';
 import promotions from '@/features/promotion/i18n/en';
 import plansPage from '@/features/subscription/i18n/en';
@@ -228,44 +229,7 @@ export default {
       short: 'M/D/YYYY',
     },
   },
-  verification: {
-    captcha: {
-      field: 'Captcha',
-      proveYouAreRobot: 'Prove that you are a robot!',
-      emojiHint:
-        'Count the emojis and identify which one appears the most. Look carefully, as parts of some emojis might be obscured.',
-      tilePuzzleHint:
-        'Slide the tiles into their right position. You can only move the ones directly next to each other.',
-      gridSelectHint:
-        'Select all images that match the prompt. If new images appear, check them as well.',
-      gridSelectPrompts: [
-        'bicycles',
-        'motorcycles',
-        'traffic lights',
-        'crosswalks',
-        'fire hydrants',
-        'stairs',
-        'tractors',
-        'buses',
-        'mountains or hills',
-        'palm trees',
-        'chimneys',
-        'bridges',
-      ],
-      challengeTitle: 'Captcha Challenge',
-      verificationProgress: 'Verification Progress',
-      resetChallenge: 'Reset challenge',
-      taxonomyChallengePrompt:
-        'Select all squares with <spanTag>{target}</spanTag>',
-
-      taxonomyChallengeSkipHint: 'If there are none, click skip',
-      tilePuzzleChallengeHint:
-        'Move the pieces by clicking on nearby tiles next to empty space',
-      roboCop: 'roboCOP',
-      protected: 'protected',
-      emojiChallengePlaceholder: 'Emoji with the highest occurrence count',
-    },
-  },
+  humanVerification,
   form: {
     validation: {
       error: {

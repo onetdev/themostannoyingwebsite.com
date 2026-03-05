@@ -18,7 +18,9 @@ export function TaxonomyChallenge({
 }: TaxonomyChallengeProps) {
   const t = useTranslations();
   const data = useTaxonomyChallengeData({ cols: 3, rows: 3 });
-  const prompts = t.raw('verification.captcha.gridSelectPrompts') as string[];
+  const prompts = t.raw(
+    'humanVerification.captcha.gridSelectPrompts',
+  ) as string[];
   const [target] = useState(() => prompts[randomInt(0, prompts.length - 1)]);
 
   useEffect(() => {
@@ -30,7 +32,7 @@ export function TaxonomyChallenge({
       className={clsx(`w-full max-w-[350px] flex flex-col gap-3`, className)}
     >
       <div>
-        {t.rich('verification.captcha.taxonomyChallengePrompt', {
+        {t.rich('humanVerification.captcha.taxonomyChallengePrompt', {
           target,
           spanTag: (chunks) => (
             <span className="font-bold leading-tight">{chunks}</span>
