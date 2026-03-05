@@ -48,9 +48,15 @@ export function NewsletterModal({
     const items = Object.keys(messages.newsletter.modal.confirmations).map(
       (key) =>
         ({
-          confirm: t(`newsletter.modal.confirmations.${key}.confirm`),
-          cancel: t(`newsletter.modal.confirmations.${key}.cancel`),
-          text: t(`newsletter.modal.confirmations.${key}.text`),
+          confirm: t(
+            `newsletter.modal.confirmations.${key}.confirm` as AppTranslationKey,
+          ),
+          cancel: t(
+            `newsletter.modal.confirmations.${key}.cancel` as AppTranslationKey,
+          ),
+          text: t(
+            `newsletter.modal.confirmations.${key}.text` as AppTranslationKey,
+          ),
         }) satisfies ConfirmItem,
     );
 

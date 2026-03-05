@@ -29,11 +29,15 @@ export function PageTitleGlitch() {
 
   const marqueeVariants = Object.keys(
     messages.titleExperience.marqueeVariants,
-  ).map((key) => t(`titleExperience.marqueeVariants.${key}`));
+  ).map((key) =>
+    t(`titleExperience.marqueeVariants.${key}` as AppTranslationKey),
+  );
 
   const arrayPagedVariants = Object.keys(
     messages.titleExperience.arrayPagedVariants,
-  ).map((key) => t(`titleExperience.arrayPagedVariants.${key}`));
+  ).map((key) =>
+    t(`titleExperience.arrayPagedVariants.${key}` as AppTranslationKey),
+  );
 
   return (
     <>

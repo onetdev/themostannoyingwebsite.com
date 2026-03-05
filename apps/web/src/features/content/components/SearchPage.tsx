@@ -32,8 +32,8 @@ export function SearchPage() {
   const [results, setResults] = useState<Result | undefined>();
 
   const topSearchesPool = useMemo(() => {
-    const items = Object.keys(messages.search.topSearcheVariants).map(
-      (key) => t(`search.topSearcheVariants.${key}`) as unknown as string,
+    const items = Object.keys(messages.search.topSearcheVariants).map((key) =>
+      t(`search.topSearcheVariants.${key}` as AppTranslationKey),
     );
 
     return items;

@@ -7,6 +7,7 @@ import promotions from '@/features/promotion/i18n/en';
 import plansPage from '@/features/subscription/i18n/en';
 
 export default {
+  donate,
   app: {
     title: 'The Most Annoying Website',
     description:
@@ -22,7 +23,6 @@ export default {
       'Provided "as is" without warranty. We are not responsible for your lost time or frustration.',
     cookieConsent:
       "This website uses cookies to ensure you get the best experience on our website. It's also a joke so many of the features are buggy or doens't even work on purpose. You can customize your experience and cookie settings in the settings menu.",
-    donate,
     exitPrompt:
       "I'd reconsider leaving before some bad things happend to you. Are you sure?",
     readMoreAt: 'Read more at',
@@ -47,26 +47,6 @@ export default {
       intro: 'Feel free to contact us if you have any questions or feedback.',
       reportIssues:
         'If you encounter any technical issues or want to suggest new pain points, please <linkTag>report them on GitHub</linkTag>.',
-    },
-  },
-  beggingBanner: {
-    prefix: '🚨 Support Needed:',
-    linkText: 'Help us survive →',
-    messages: {
-      catJudging:
-        "My imaginary cat is judging me. She knows I can't afford the fancy treats anymore. Help me restore my dignity (and her opinion of me).",
-      rentDue:
-        'The rent is due. My landlord thinks I\'m "creative" with payment schedules. Last month I paid in interpretive dance. I need actual money now.',
-      codeTherapy:
-        "My code needs therapy. It's held together by duct tape, prayers, and Stack Overflow answers from 2012. Help me pay for AI agents.",
-      futureSelf:
-        "Past me made commitments that current me can't afford. Future me is going to be very disappointed. Help me lie to myself more convincingly.",
-      pretendSuccessful:
-        'Just for one day, I want to buy something without checking my bank balance first. Your donation makes dreams come true. Sad, materialistic dreams.',
-      validationNeeded:
-        "My therapist says I seek external validation too much. But what does she know? She's not the one staring at zero donations. Prove her wrong.",
-      ramenUpgrade:
-        'I want to upgrade my ramen. From "3 for €5" to "fancy instant with vegetable packet included." It\'s a modest dream. A noodle-based dream.',
     },
   },
   navigation: {

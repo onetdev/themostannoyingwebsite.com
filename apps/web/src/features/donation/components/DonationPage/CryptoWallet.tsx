@@ -34,7 +34,7 @@ export function CryptoWallet({ title, address, network }: CryptoWalletProps) {
         <CardTitle>{title}</CardTitle>
         {network && (
           <p className="text-muted-foreground text-sm">
-            {t('app.donate.crypto.network', { network })}
+            {t('donate.crypto.network', { network })}
           </p>
         )}
       </CardHeader>
@@ -47,8 +47,8 @@ export function CryptoWallet({ title, address, network }: CryptoWalletProps) {
 
         <Button onClick={handleCopy} className="w-full">
           {copied
-            ? t('app.donate.crypto.copyFeedback')
-            : t('app.donate.crypto.copyAction')}
+            ? t('donate.crypto.copyFeedback')
+            : t('donate.crypto.copyAction')}
         </Button>
       </CardContent>
     </Card>

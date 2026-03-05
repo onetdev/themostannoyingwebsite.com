@@ -32,18 +32,16 @@ export class DonationService implements IDonationService {
    * Uses month (0-11) as seed for deterministic selection
    * Same month = same message across all page loads
    */
-  getBeggingBannerData(
-    t: (key: string) => string,
-    month?: number,
-  ): BeggingBannerData {
+  getBeggingBannerData(month?: number): BeggingBannerData {
     const currentMonth = month ?? new Date().getMonth();
     const messageIndex = currentMonth % MESSAGE_KEYS.length;
     const messageKey = MESSAGE_KEYS[messageIndex];
 
     return {
-      message: t(`beggingBanner.messages.${messageKey}`),
-      prefix: t('beggingBanner.prefix'),
-      linkText: t('beggingBanner.linkText'),
+      messageKey:
+        `donate.beggingBanner.messages.${messageKey}` as AppTranslationKey,
+      prefixKey: 'donate.beggingBanner.prefix',
+      linkTextKey: 'donate.beggingBanner.linkText',
     };
   }
 

@@ -22,12 +22,12 @@ export function CryptoWalletList({
       {...rest}
     >
       <CryptoWallet
-        title={t('app.donate.crypto.bitcoin')}
+        title={t('donate.crypto.bitcoin')}
         address={btcWallet.address}
         network={btcWallet.network}
       />
       <CryptoWallet
-        title={t('app.donate.crypto.ethereum')}
+        title={t('donate.crypto.ethereum')}
         address={ethWallet.address}
         network="Mainnet"
       />

@@ -3,9 +3,9 @@ export const DI = {
 };
 
 export interface BeggingBannerData {
-  message: string;
-  prefix: string;
-  linkText: string;
+  messageKey: AppTranslationKey;
+  prefixKey: AppTranslationKey;
+  linkTextKey: AppTranslationKey;
 }
 
 export interface DonationBalanceConfig {
@@ -15,10 +15,7 @@ export interface DonationBalanceConfig {
 }
 
 export interface DonationService {
-  getBeggingBannerData(
-    t: (key: string) => string,
-    month?: number,
-  ): BeggingBannerData;
+  getBeggingBannerData(month?: number): BeggingBannerData;
   shouldShowBeggingBanner(currentDate?: Date): boolean;
   calculateBalance(config: DonationBalanceConfig, currentTime?: number): number;
 }

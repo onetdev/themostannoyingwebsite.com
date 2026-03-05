@@ -10,16 +10,19 @@ export function useSurveyQuestions() {
   const t = useTranslations();
 
   const pool = useMemo(() => {
-    const items = Object.keys(
-      messages.gifts.wanPhone.survey.questionVariants,
-    ).map((key) => {
-      const questionKey = `gifts.wanPhone.survey.questionVariants.${key}`;
-      const solutionKey = `${questionKey}.solution`;
+    const questionVariants = messages.gifts.wanPhone.survey.questionVariants;
+    const items = Object.keys(questionVariants).map((key) => {
+      const variantKey = key as keyof typeof questionVariants;
+      const questionKey =
+        `gifts.wanPhone.survey.questionVariants.${key}` as AppTranslationKey;
+      const solutionKey = `${questionKey}.solution` as AppTranslationKey;
+
       return {
-        text: t(`${questionKey}.text`),
-        options: Object.keys(
-          messages.gifts.wanPhone.survey.questionVariants[key].options,
-        ).map((optionKey) => t(`${questionKey}.options.${optionKey}`)),
+        text: t(`${questionKey}.text` as AppTranslationKey),
+        options: Object.keys(questionVariants[variantKey].options).map(
+          (optionKey) =>
+            t(`${questionKey}.options.${optionKey}` as AppTranslationKey),
+        ),
         solution: t.has(solutionKey) ? t(solutionKey) : undefined,
       } satisfies FlaimSurveyQuestion;
     });

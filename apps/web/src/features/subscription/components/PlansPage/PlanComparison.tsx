@@ -35,7 +35,7 @@ export function PlanComparison({ className, features, plans }: PlansPageProps) {
               key={pkg.key}
               className="px-4 py-4 text-center font-bold"
             >
-              {t(pkg.titleKey)}
+              {t(pkg.titleKey as AppTranslationKey)}
             </TableHead>
           ))}
         </TableRow>
@@ -46,7 +46,7 @@ export function PlanComparison({ className, features, plans }: PlansPageProps) {
             <TableCell className="py-4 pr-4">
               <div className="flex items-center gap-2">
                 {feature.icon && <span>{feature.icon}</span>}
-                <span>{t(feature.titleKey)}</span>
+                <span>{t(feature.titleKey as AppTranslationKey)}</span>
               </div>
             </TableCell>
             {plans.map((plan) => {

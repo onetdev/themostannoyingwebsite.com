@@ -6,7 +6,7 @@ import i18nConfig from '@/root/i18n.config';
 export type LanguageInfo = {
   locale: string;
   flag: string;
-  labelKey: string;
+  labelKey: AppTranslationKey;
 };
 
 const LANGUAGE_MAP: Record<string, Omit<LanguageInfo, 'locale'>> = {

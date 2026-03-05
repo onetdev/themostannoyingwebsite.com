@@ -43,7 +43,7 @@ export function DateOfBirthField({
 
   const dateOfBirthMonth = useMemo(() => {
     const monthLabels = Object.keys(messages.date.months).map((key) =>
-      t(`date.months.${key}`),
+      t(`date.months.${key}` as AppTranslationKey),
     );
 
     return Array.from({ length: 12 }, (_, i) => ({

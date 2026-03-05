@@ -25,7 +25,7 @@ export function useChatBubbleHistory() {
 
   const botMessageVariants = useMemo(() => {
     const all = Object.keys(messages.chatBubble.messageVariants).map((key) =>
-      t(`chatBubble.messageVariants.${key}`),
+      t(`chatBubble.messageVariants.${key}` as AppTranslationKey),
     );
 
     return all.filter(

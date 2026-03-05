@@ -27,4 +27,24 @@ export default {
     bitcoin: 'Bitcoin (BTC)',
     ethereum: 'Ethereum (ETH)',
   },
+  beggingBanner: {
+    prefix: '🚨 Támogatásra van szükségünk:',
+    linkText: 'Segíts a túlélésben →',
+    messages: {
+      catJudging:
+        'A képzeletbeli macskám elítélően néz rám. Tudja, hogy már nem engedhetem meg magamnak a prémium jutalomfalatokat. Segíts visszaállítani a méltóságomat (és az ő véleményét rólam).',
+      rentDue:
+        'Itt a lakbér ideje. A főbérlőm szerint "kreatív" vagyok a fizetési ütemezéssel. Múlt hónapban improvizatív tánccal fizettem. Most valódi pénzre van szükségem.',
+      codeTherapy:
+        'A kódomnak terápiára van szüksége. Szigetelőszalag, imák és 2012-es Stack Overflow válaszok tartják össze. Segíts kifizetni az MI ágenseket.',
+      futureSelf:
+        'A múltbeli énem olyan kötelezettségeket vállalt, amiket a jelenlegi énem nem tud kifizetni. A jövőbeli énem nagyon csalódott lesz. Segíts meggyőzőbben hazudni magamnak.',
+      pretendSuccessful:
+        'Csak egyetlen napig szeretnék venni valamit anélkül, hogy először leellenőrizném a bankszámlámat. A támogatásod valóra váltja az álmokat. Szomorú, materialista álmokat.',
+      validationNeeded:
+        'A terapeutám szerint túl sokat keresem a külső elismerést. De mit tud ő? Nem ő az, aki a nulla adományt bámulja. Bizonyítsd be, hogy téved.',
+      ramenUpgrade:
+        'Szeretném fejleszteni a ramenemet. A "5 euróért 3 darab" típusról a "luxus instantra, amiben zöldségcsomag is van". Ez egy szerény álom. Tésztaalapú álom.',
+    },
+  },
 };

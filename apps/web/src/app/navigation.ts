@@ -23,11 +23,11 @@ export type NavItem = {
   hideLabel?: boolean;
   icon?: IconAliaseKey;
   key: string;
-  labelKey: string;
+  labelKey: AppTranslationKey;
   path: string;
 };
 
-export const SITE_NAVIGATION_LINKS = [
+export const SITE_NAVIGATION_LINKS: NavItem[] = [
   { key: 'home', labelKey: 'navigation.home', path: '/' },
   { key: 'hot-things', labelKey: 'navigation.hotThings', path: '/hot-things' },
   { key: 'dilf', labelKey: 'navigation.dilf', path: '/dilf' },
@@ -37,7 +37,7 @@ export const SITE_NAVIGATION_LINKS = [
   { key: 'contact', labelKey: 'navigation.contact', path: '/contact' },
 ];
 
-export const PERSONAL_NAVIGATION_LINKS = [
+export const PERSONAL_NAVIGATION_LINKS: NavItem[] = [
   {
     hideLabel: true,
     icon: 'trophy' as const,
@@ -67,7 +67,7 @@ export const PERSONAL_NAVIGATION_LINKS = [
   },
 ];
 
-export const FOOTER_NAVIGATION_LINKS = [
+export const FOOTER_NAVIGATION_LINKS: NavItem[] = [
   ...SITE_NAVIGATION_LINKS,
   { key: 'signup', labelKey: 'navigation.signup', path: '/user/signup' },
   {

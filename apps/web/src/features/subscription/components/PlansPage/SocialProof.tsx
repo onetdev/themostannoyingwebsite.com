@@ -25,7 +25,7 @@ export function SocialProof({
     return {
       names: t.raw('plansPage.socialProof.names') as string[],
       locations: (t.raw('plansPage.socialProof.locations') ?? []) as string[],
-      planNames: plans.map((p) => t(p.titleKey)),
+      planNames: plans.map((p) => t(p.titleKey as AppTranslationKey)),
     };
   }, [plans, t]);
 

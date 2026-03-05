@@ -32,7 +32,7 @@ export function AppNavigationMobile({ activeItem }: AppNavigationMobileProps) {
   const t = useTranslations();
   const { showShareModal } = useRuntimeStore();
 
-  const navigationTree: { titleKey: string; items: NavItem[] }[] =
+  const navigationTree: { titleKey: AppTranslationKey; items: NavItem[] }[] =
     useMemo(() => {
       return [
         {

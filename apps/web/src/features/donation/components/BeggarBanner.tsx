@@ -11,9 +11,9 @@ export function BeggarBanner() {
   const donationService = useDonationService();
   const [isVisible, setIsVisible] = useState(false);
   const [bannerData, setBannerData] = useState<{
-    message: string;
-    prefix: string;
-    linkText: string;
+    messageKey: AppTranslationKey;
+    prefixKey: AppTranslationKey;
+    linkTextKey: AppTranslationKey;
   } | null>(null);
   const [isDismissed, setIsDismissed] = useState(false);
 
@@ -24,10 +24,10 @@ export function BeggarBanner() {
 
     // Get message for current month (deterministic based on month)
     if (shouldShow) {
-      const data = donationService.getBeggingBannerData(t);
+      const data = donationService.getBeggingBannerData();
       setBannerData(data);
     }
-  }, [donationService, t]);
+  }, [donationService]);
 
   const handleDismiss = () => {
     // Dismiss only for current session (no localStorage)
@@ -43,10 +43,10 @@ export function BeggarBanner() {
       <div className="container mx-auto flex items-center justify-between gap-4 px-5 py-5 xl:px-8">
         <div className="flex-1">
           <p className="text-sm md:text-base">
-            <span className="font-bold">{bannerData.prefix}</span>{' '}
-            {bannerData.message}{' '}
+            <span className="font-bold">{t(bannerData.prefixKey)}</span>{' '}
+            {t(bannerData.messageKey)}{' '}
             <Link href="/donate" className="link-as-inherit underline">
-              {bannerData.linkText}
+              {t(bannerData.linkTextKey)}
             </Link>
           </p>
         </div>

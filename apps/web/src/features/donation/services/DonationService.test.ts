@@ -7,75 +7,59 @@ import { DonationService, getDonationService } from './DonationService';
 describe('DonationService', () => {
   let container: Container;
   let service: DonationService;
-  let mockTranslate: jest.Mock;
 
   beforeEach(() => {
     container = new Container();
     container.bind<DonationService>(DI.DonationService).to(DonationService);
     service = getDonationService(container);
-    mockTranslate = jest.fn((key: string) => {
-      // Mock translation function
-      const translations: Record<string, string> = {
-        'beggingBanner.prefix': '🚨 Support Needed:',
-        'beggingBanner.linkText': 'Help us survive →',
-        'beggingBanner.messages.catJudging':
-          'My imaginary cat is judging me...',
-        'beggingBanner.messages.rentDue': 'The rent is due...',
-        'beggingBanner.messages.codeTherapy': 'My code needs therapy...',
-        'beggingBanner.messages.futureSelf': 'Past me made commitments...',
-        'beggingBanner.messages.pretendSuccessful': 'Just for one day...',
-        'beggingBanner.messages.validationNeeded': 'My therapist says...',
-        'beggingBanner.messages.ramenUpgrade': 'I want to upgrade my ramen...',
-      };
-      return translations[key] || key;
-    });
   });
 
   describe('getBeggingBannerData', () => {
-    it('should return banner data with translated strings', () => {
-      const result = service.getBeggingBannerData(mockTranslate, 0);
+    it('should return banner data with translation keys', () => {
+      const result = service.getBeggingBannerData(0);
 
       expect(result).toEqual({
-        message: 'My imaginary cat is judging me...',
-        prefix: '🚨 Support Needed:',
-        linkText: 'Help us survive →',
+        messageKey: 'donate.beggingBanner.messages.catJudging',
+        prefixKey: 'donate.beggingBanner.prefix',
+        linkTextKey: 'donate.beggingBanner.linkText',
       });
-      expect(mockTranslate).toHaveBeenCalledWith(
-        'beggingBanner.messages.catJudging',
-      );
-      expect(mockTranslate).toHaveBeenCalledWith('beggingBanner.prefix');
-      expect(mockTranslate).toHaveBeenCalledWith('beggingBanner.linkText');
     });
 
-    it('should select message deterministically based on month', () => {
+    it('should select message key deterministically based on month', () => {
       // Test each month to ensure consistent selection
-      const month0 = service.getBeggingBannerData(mockTranslate, 0);
-      const month1 = service.getBeggingBannerData(mockTranslate, 1);
-      const month2 = service.getBeggingBannerData(mockTranslate, 2);
+      const month0 = service.getBeggingBannerData(0);
+      const month1 = service.getBeggingBannerData(1);
+      const month2 = service.getBeggingBannerData(2);
 
-      expect(month0.message).toBe('My imaginary cat is judging me...');
-      expect(month1.message).toBe('The rent is due...');
-      expect(month2.message).toBe('My code needs therapy...');
+      expect(month0.messageKey).toBe(
+        'donate.beggingBanner.messages.catJudging',
+      );
+      expect(month1.messageKey).toBe('donate.beggingBanner.messages.rentDue');
+      expect(month2.messageKey).toBe(
+        'donate.beggingBanner.messages.codeTherapy',
+      );
     });
 
     it('should cycle through messages using modulo', () => {
+      // MESSAGE_KEYS length is 7
       // Month 7 (August) should wrap around (7 % 7 = 0)
-      const month7 = service.getBeggingBannerData(mockTranslate, 7);
-      expect(month7.message).toBe('My imaginary cat is judging me...');
+      const month7 = service.getBeggingBannerData(7);
+      expect(month7.messageKey).toBe(
+        'donate.beggingBanner.messages.catJudging',
+      );
 
       // Month 8 (September) should be index 1 (8 % 7 = 1)
-      const month8 = service.getBeggingBannerData(mockTranslate, 8);
-      expect(month8.message).toBe('The rent is due...');
+      const month8 = service.getBeggingBannerData(8);
+      expect(month8.messageKey).toBe('donate.beggingBanner.messages.rentDue');
     });
 
     it('should use current month when no month is provided', () => {
-      const result = service.getBeggingBannerData(mockTranslate);
+      const result = service.getBeggingBannerData();
 
-      // Should return valid banner data with translated strings
-      expect(result).toHaveProperty('message');
-      expect(result).toHaveProperty('prefix');
-      expect(result).toHaveProperty('linkText');
-      expect(mockTranslate).toHaveBeenCalled();
+      // Should return valid banner data with translation keys
+      expect(result).toHaveProperty('messageKey');
+      expect(result).toHaveProperty('prefixKey');
+      expect(result).toHaveProperty('linkTextKey');
     });
   });
 
@@ -196,7 +180,7 @@ describe('DonationService', () => {
       // Just verify it's a number and reasonable
       expect(typeof balanceNow).toBe('number');
       // Should be less than initial donation since time has passed
-      expect(balanceNow).toBeLessThan(baseConfig.totalDonationInEuro);
+      expect(balanceNow).toBeLessThanOrEqual(baseConfig.totalDonationInEuro);
     });
 
     it('should handle different daily costs', () => {

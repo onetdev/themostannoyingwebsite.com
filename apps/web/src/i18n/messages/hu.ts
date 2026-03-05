@@ -7,6 +7,7 @@ import promotions from '@/features/promotion/i18n/hu';
 import plansPage from '@/features/subscription/i18n/hu';
 
 export default {
+  donate,
   app: {
     title: 'The Most Annoying Website',
     description:
@@ -22,7 +23,7 @@ export default {
       'Úgy adjuk, "ahogy van", garancia nélkül. Nem vállalunk felelősséget az elvesztegetett idődért vagy a frusztrációdért.',
     cookieConsent:
       'Ez a weboldal sütiket használ, hogy a lehető legjobb élményt nyújtsa. Emellett ez egy vicc is, sok funkció szándékosan hibás vagy nem is működik. A beállítások menüben személyre szabhatod az élményt és a süti beállításokat.',
-    donate,
+
     exitPrompt:
       'Átgondolnám a távozást, mielőtt valami rossz történne veled. Biztos vagy benne?',
     readMoreAt: 'Olvass tovább itt:',
@@ -48,26 +49,6 @@ export default {
         'Nyugodtan keress minket, ha bármilyen kérdésed vagy visszajelzésed van.',
       reportIssues:
         'Ha technikai problémába ütközöl, vagy új fájópontokat javasolnál, kérlek <linkTag>jelentsd őket GitHubon</linkTag>.',
-    },
-  },
-  beggingBanner: {
-    prefix: '🚨 Támogatásra van szükségünk:',
-    linkText: 'Segíts a túlélésben →',
-    messages: {
-      catJudging:
-        'A képzeletbeli macskám elítélően néz rám. Tudja, hogy már nem engedhetem meg magamnak a prémium jutalomfalatokat. Segíts visszaállítani a méltóságomat (és az ő véleményét rólam).',
-      rentDue:
-        'Itt a lakbér ideje. A főbérlőm szerint "kreatív" vagyok a fizetési ütemezéssel. Múlt hónapban improvizatív tánccal fizettem. Most valódi pénzre van szükségem.',
-      codeTherapy:
-        'A kódomnak terápiára van szüksége. Szigetelőszalag, imák és 2012-es Stack Overflow válaszok tartják össze. Segíts kifizetni az MI ágenseket.',
-      futureSelf:
-        'A múltbeli énem olyan kötelezettségeket vállalt, amiket a jelenlegi énem nem tud kifizetni. A jövőbeli énem nagyon csalódott lesz. Segíts meggyőzőbben hazudni magamnak.',
-      pretendSuccessful:
-        'Csak egyetlen napig szeretnék venni valamit anélkül, hogy először leellenőrizném a bankszámlámat. A támogatásod valóra váltja az álmokat. Szomorú, materialista álmokat.',
-      validationNeeded:
-        'A terapeutám szerint túl sokat keresem a külső elismerést. De mit tud ő? Nem ő az, aki a nulla adományt bámulja. Bizonyítsd be, hogy téved.',
-      ramenUpgrade:
-        'Szeretném fejleszteni a ramenemet. A "5 euróért 3 darab" típusról a "luxus instantra, amiben zöldségcsomag is van". Ez egy szerény álom. Tésztaalapú álom.',
     },
   },
   navigation: {

@@ -70,7 +70,7 @@ export function PlanCard({
       )}
       <CardHeader>
         <div className="mb-2 text-4xl">{plan.icon}</div>
-        <CardTitle>{t(plan.titleKey)}</CardTitle>
+        <CardTitle>{t(plan.titleKey as AppTranslationKey)}</CardTitle>
       </CardHeader>
       <CardContent className="grow">
         <div className="mb-5 flex flex-col">
@@ -111,7 +111,7 @@ export function PlanCard({
             </div>
           )}
         </div>
-        <p className="mb-4">{t(plan.descriptionKey)}</p>
+        <p className="mb-4">{t(plan.descriptionKey as AppTranslationKey)}</p>
         <Separator />
         <div
           className="text-muted-foreground mt-2 text-xs leading-tight italic"

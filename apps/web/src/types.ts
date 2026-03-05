@@ -1,5 +1,5 @@
 import type Emittery from 'emittery';
-import type { useTranslations } from 'next-intl';
+import type { MessageKeys, NestedKeyOf } from 'next-intl';
 import type englishShape from '@/i18n/messages/en.ts';
 import type i18nConfig from '@/root/i18n.config';
 
@@ -7,8 +7,13 @@ declare global {
   type AppTheme = 'light' | 'dark';
   type AppLocale = (typeof i18nConfig)['locales'][number];
   type AppTranslationShape = typeof englishShape;
+  type AppTranslationKey = MessageKeys<
+    AppTranslationShape,
+    NestedKeyOf<AppTranslationShape>
+  >;
 
-  type ZodTranslator = ReturnType<typeof useTranslations>;
+  // biome-ignore lint/suspicious/noExplicitAny: Inferring useTranslations() return type is not enough :(
+  type ZodTranslator = (key: AppTranslationKey, values?: any) => string;
 
   // biome-ignore lint/suspicious/noExplicitAny: Just to avoid any in other places, we use this explicit alias.
   type TypeNarrowArg = any;
@@ -46,5 +51,11 @@ declare global {
       _emit?: Emittery<AppEvents>['emit'];
       _on?: Emittery<AppEvents>['on'];
     };
+  }
+}
+
+declare module 'next-intl' {
+  interface AppConfig {
+    Messages: typeof englishShape;
   }
 }
