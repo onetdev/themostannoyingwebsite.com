@@ -15,11 +15,11 @@ export function DilfFinder() {
         src={config.promotion.assets.dilfFullImage}
         width={1900}
         height={1000}
-        alt={t('gifts.dilf.title')}
+        alt={t('promotions.dilf.title')}
       />
       <DilfClickOverlay
         className="absolute top-0 w-full"
-        title={t('gifts.dilf.finderOverlayTitle')}
+        title={t('promotions.dilf.finderOverlayTitle')}
       />
     </div>
   );

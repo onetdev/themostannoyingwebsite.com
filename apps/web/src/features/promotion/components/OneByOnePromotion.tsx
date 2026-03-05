@@ -14,7 +14,7 @@ export function OneByOnePromotion({ size = 1024 }: OneByOnePromotionProps) {
   const config = useAppConfigContext();
   const t = useTranslations();
   const enabled = usePainPreferencesStore(
-    (state) => state.flags['gifts.oneByOne'],
+    (state) => state.flags['promotions.oneByOne'],
   );
   const reducedMotion = useRuntimeStore((state) => state.systemReducedMotion);
 
@@ -26,7 +26,7 @@ export function OneByOnePromotion({ size = 1024 }: OneByOnePromotionProps) {
         src={config.promotion.assets.wanAPhoneAd}
         width={size}
         height={size}
-        alt={t('gifts.wanPhone.title')}
+        alt={t('promotions.wanPhone.title')}
         data-reduced-motion={reducedMotion ? 'true' : 'false'}
         className="data-[reduced-motion=false]:animate-gift-callout h-auto w-full object-cover"
       />

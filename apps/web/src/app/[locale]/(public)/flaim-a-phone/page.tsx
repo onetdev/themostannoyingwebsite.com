@@ -28,7 +28,7 @@ export default async function Page() {
       className="mx-auto max-w-screen-lg py-0 md:py-14"
       autoPadding={false}
     >
-      <h1>{t('gifts.wanPhone.title')}</h1>
+      <h1>{t('promotions.wanPhone.title')}</h1>
       <FlaimSurveyPage
         className="my-5 w-full"
         settings={{ timeLimitInSeconds: 8 }}

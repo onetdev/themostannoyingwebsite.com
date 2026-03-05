@@ -35,7 +35,7 @@ export const useAdblockerDetector = () => {
   );
   const ppReviewed = useUserGrantsStore((state) => state.reviewCompleted);
   const enabled = usePainPreferencesStore(
-    (state) => state.flags['gifts.detectAdblocker'],
+    (state) => state.flags['promotions.detectAdblocker'],
   );
 
   useEffect(() => {

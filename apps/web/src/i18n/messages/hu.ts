@@ -12,7 +12,20 @@ import settings from '@/features/user/i18n/hu';
 import metadata from './metadata/hu';
 
 export default {
+  // Feature or externals
+  achievements,
+  comments,
+  commentVariants,
   donate,
+  promotions,
+  humanVerification,
+  metadata,
+  monitoring,
+  settings,
+  subscription,
+  support,
+
+  // App level, shared translations
   app: {
     title: 'The Most Annoying Website',
     description:
@@ -75,7 +88,6 @@ export default {
     personal: 'Személyes',
     achievements: 'Eredmények',
   },
-  metadata,
   common: {
     accept: 'Elfogadom',
     back: 'Vissza',
@@ -144,7 +156,6 @@ export default {
       short: 'M/D/YYYY',
     },
   },
-  humanVerification,
   form: {
     validation: {
       error: {
@@ -245,10 +256,6 @@ export default {
       notSupposedToBeHere: 'Hmm, nem kellene itt lenned 😡',
     },
   },
-  commentVariants,
-  comments,
-  settings,
-  achievements,
   share: {
     modal: {
       title: 'Oldal megosztása',
@@ -313,7 +320,6 @@ export default {
       variant_013: 'mocsári tesó',
     },
   },
-  gifts: promotions,
   wheelOfFortune: {
     title: 'Szerencsekerék',
     spinStart: 'Kattints vagy koppints ide!',
@@ -327,7 +333,6 @@ export default {
     },
     wheelTitle: 'Szerencsekerék',
   },
-  support,
   messages: {
     errors: {
       e404title: 'Hiba 404',
@@ -335,7 +340,6 @@ export default {
     },
     info: {},
   },
-  monitoring,
   contextMenu: {
     disabled: 'Hé, itt nem lehet jobb klikkelni!',
   },
@@ -362,7 +366,6 @@ export default {
   stickyVideoPlayer: {
     videoTitle: 'Tapadós videólejátszó',
   },
-  subscription,
   painPreferences: {
     levelSettings: {
       label: 'Fájdalomküszöb',

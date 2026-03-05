@@ -19,8 +19,8 @@ export function AdblockerSuspectBar() {
 
   return (
     <div className="border-tertiary bg-error text-on-error sticky -bottom-3 z-20 rounded-md border px-5 py-3 shadow-md">
-      <h4>{t('gifts.suspectBar.title')}</h4>
-      <p>{t('gifts.suspectBar.description')}</p>
+      <h4>{t('promotions.suspectBar.title')}</h4>
+      <p>{t('promotions.suspectBar.description')}</p>
       <div className="my-2 flex items-center justify-end gap-3">
         <Button variant="outline" onClick={() => setOpen(false)}>
           {t('common.ok')}

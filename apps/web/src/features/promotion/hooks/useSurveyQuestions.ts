@@ -10,7 +10,8 @@ export function useSurveyQuestions() {
   const t = useTranslations();
 
   const pool = useMemo(() => {
-    const questionVariants = messages.gifts.wanPhone.survey.questionVariants;
+    const questionVariants =
+      messages.promotions.wanPhone.survey.questionVariants;
     const items = Object.keys(questionVariants).map((key) => {
       const variantKey = key as keyof typeof questionVariants;
       const questionKey =

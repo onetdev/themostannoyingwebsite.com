@@ -16,16 +16,16 @@ export function SurveyResult({ result, onClick }: SurveyResultProps) {
     { title: string; ctaLabel?: string }
   > = {
     completed: {
-      title: t('gifts.wanPhone.survey.result.completed.text'),
+      title: t('promotions.wanPhone.survey.result.completed.text'),
     },
     cheatDetected: {
-      title: t('gifts.wanPhone.survey.result.cheatDetected.text'),
+      title: t('promotions.wanPhone.survey.result.cheatDetected.text'),
     },
     lost: {
-      title: t('gifts.wanPhone.survey.result.lost.text'),
+      title: t('promotions.wanPhone.survey.result.lost.text'),
     },
     timeout: {
-      title: t('gifts.wanPhone.survey.result.timeout.text'),
+      title: t('promotions.wanPhone.survey.result.timeout.text'),
     },
   };
 

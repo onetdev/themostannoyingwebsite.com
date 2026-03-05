@@ -19,10 +19,10 @@ export function AdvertisingAndMonetization() {
         info={t('settings.optionalPainPointsHints.gifts.flaps')}
       >
         <FormCheckbox
-          name="gift_flaps"
-          checked={painPreferences.flags['gifts.flaps']}
+          name="promotions_flaps"
+          checked={painPreferences.flags['promotions.flaps']}
           onCheckedChange={(value) =>
-            painPreferences.setFlagIndeterminate('gifts.flaps', value)
+            painPreferences.setFlagIndeterminate('promotions.flaps', value)
           }
         />
       </SettingsField>
@@ -32,9 +32,12 @@ export function AdvertisingAndMonetization() {
       >
         <FormCheckbox
           name="detect_adblocker"
-          checked={painPreferences.flags['gifts.detectAdblocker']}
+          checked={painPreferences.flags['promotions.detectAdblocker']}
           onCheckedChange={(value) =>
-            painPreferences.setFlagIndeterminate('gifts.detectAdblocker', value)
+            painPreferences.setFlagIndeterminate(
+              'promotions.detectAdblocker',
+              value,
+            )
           }
         />
       </SettingsField>
@@ -44,9 +47,9 @@ export function AdvertisingAndMonetization() {
       >
         <FormCheckbox
           name="one_by_one"
-          checked={painPreferences.flags['gifts.oneByOne']}
+          checked={painPreferences.flags['promotions.oneByOne']}
           onCheckedChange={(value) =>
-            painPreferences.setFlagIndeterminate('gifts.oneByOne', value)
+            painPreferences.setFlagIndeterminate('promotions.oneByOne', value)
           }
         />
       </SettingsField>

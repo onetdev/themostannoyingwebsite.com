@@ -45,12 +45,13 @@ export interface PainPreferencesStore
     PainPreferencesStateActions {}
 
 const initialStateFlags: PainPreferencesState['flags'] = {
-  'gifts.detectAdblocker': true,
-  'gifts.flaps': true,
-  'gifts.oneByOne': true,
   'pageTitle.inactiveArrayPaged': true,
   'pageTitle.inactiveMarquee': false,
   'pageTitle.randomGlitch': false,
+  'promotions.detectAdblocker': true,
+  'promotions.flaps': true,
+  'promotions.oneByOne': true,
+  achievementNotifications: true,
   clipboardMarker: true,
   contentPaywall: true,
   deadPixel: true,
@@ -64,7 +65,6 @@ const initialStateFlags: PainPreferencesState['flags'] = {
   searchDelay: true,
   stickyVideo: false,
   wheelOfFortune: true,
-  achievementNotifications: true,
 };
 
 const initialState: PainPreferencesState = {

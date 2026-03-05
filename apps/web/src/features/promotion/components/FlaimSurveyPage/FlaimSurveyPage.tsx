@@ -46,7 +46,7 @@ export function FlaimSurveyPage({
       {showProgressHeader && (
         <>
           <p className="mb-2 font-bold">
-            {t('gifts.wanPhone.survey.description')}
+            {t('promotions.wanPhone.survey.description')}
           </p>
           <ProgressBar
             duration={settings.timeLimitInSeconds}

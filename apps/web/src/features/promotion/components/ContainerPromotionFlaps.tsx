@@ -19,7 +19,7 @@ export function ContainerPromotionFlaps() {
           <Image
             className="object-cover opacity-30 mix-blend-lighten"
             src={config.promotion.assets.dilfFlapsAd}
-            alt={t('gifts.dilf.title')}
+            alt={t('promotions.dilf.title')}
             width={1900}
             height={1000}
             priority={false}
@@ -28,13 +28,13 @@ export function ContainerPromotionFlaps() {
             theme={resolvedTheme as AppTheme}
             className="bottom-16 left-16 origin-bottom-left -rotate-90"
           >
-            {t('gifts.dilf.flapLeft')}
+            {t('promotions.dilf.flapLeft')}
           </PromotionFlapText>
           <PromotionFlapText
             theme={resolvedTheme as AppTheme}
             className="right-16 bottom-16 origin-bottom-right rotate-90"
           >
-            {t('gifts.dilf.flapRight')}
+            {t('promotions.dilf.flapRight')}
           </PromotionFlapText>
         </Link>
       </div>

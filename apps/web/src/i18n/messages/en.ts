@@ -12,7 +12,20 @@ import settings from '@/features/user/i18n/en';
 import metadata from './metadata/en';
 
 export default {
+  // Feature or externals
+  achievements,
+  comments,
+  commentVariants,
   donate,
+  promotions,
+  humanVerification,
+  metadata,
+  monitoring,
+  settings,
+  subscription,
+  support,
+
+  // App level, shared translations
   app: {
     title: 'The Most Annoying Website',
     description:
@@ -73,7 +86,6 @@ export default {
     personal: 'Personal',
     achievements: 'Achievements',
   },
-  metadata,
   common: {
     accept: 'Accept',
     back: 'Back',
@@ -142,7 +154,6 @@ export default {
       short: 'M/D/YYYY',
     },
   },
-  humanVerification,
   form: {
     validation: {
       error: {
@@ -242,10 +253,6 @@ export default {
       notSupposedToBeHere: 'Hmm, you are not supposed to be here 😡',
     },
   },
-  commentVariants,
-  comments,
-  settings,
-  achievements,
   share: {
     modal: {
       title: 'Share this page',
@@ -308,7 +315,6 @@ export default {
       variant_013: 'bog brother',
     },
   },
-  gifts: promotions,
   wheelOfFortune: {
     title: 'Wheel of fortune',
     spinStart: 'Click or Tap here!',
@@ -322,7 +328,6 @@ export default {
     },
     wheelTitle: 'Wheel of fortune',
   },
-  support,
   messages: {
     errors: {
       e404title: 'Error 404',
@@ -330,7 +335,6 @@ export default {
     },
     info: {},
   },
-  monitoring,
   contextMenu: {
     disabled: "Hey, you can't right click here!",
   },
@@ -356,7 +360,6 @@ export default {
   stickyVideoPlayer: {
     videoTitle: 'Sticky video player',
   },
-  subscription,
   painPreferences: {
     levelSettings: {
       label: 'Pain level',

@@ -7,8 +7,8 @@ export async function DilfPage() {
 
   return (
     <>
-      <h1>{t('gifts.dilf.fullTitle')}</h1>
-      <p className="my-5 max-w-screen-md">{t('gifts.dilf.description')}</p>
+      <h1>{t('promotions.dilf.fullTitle')}</h1>
+      <p className="my-5 max-w-screen-md">{t('promotions.dilf.description')}</p>
       <DilfFinder />
     </>
   );
