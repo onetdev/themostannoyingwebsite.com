@@ -177,7 +177,11 @@ const isArticleMatching = (
   article: ArticleDatum,
   filter: ArticleLookupFilter,
 ) => {
+  const isFuture = article.publishedAt > new Date();
+  const shouldIncludeFuture = filter.includeFuture ?? false;
+
   return (
+    (!isFuture || shouldIncludeFuture) &&
     (!filter.locale || article.locale === filter.locale) &&
     (!filter.id || article.id === filter.id) &&
     (!filter.slug || article.slug === filter.slug) &&

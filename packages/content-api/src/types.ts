@@ -36,6 +36,7 @@ export interface ArticleLookupFilter {
   isOnCover?: boolean;
   locale?: string;
   slug?: string;
+  includeFuture?: boolean;
 }
 
 export interface ArticleSort {
