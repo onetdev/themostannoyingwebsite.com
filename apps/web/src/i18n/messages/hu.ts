@@ -1,10 +1,12 @@
 import achievements from '@/features/achievements/i18n/hu';
+import commentVariants from '@/features/comments/i18n/generator/hu';
+import comments from '@/features/comments/i18n/hu';
+import donate from '@/features/donation/i18n/hu';
+import newsletter from '@/features/newsletter/i18n/hu';
 import promotions from '@/features/promotion/i18n/hu';
 import plansPage from '@/features/subscription/i18n/hu';
-import commentVariants from './hu/commentVariants';
 
 export default {
-  commentVariants,
   app: {
     title: 'The Most Annoying Website',
     description:
@@ -20,36 +22,7 @@ export default {
       'Úgy adjuk, "ahogy van", garancia nélkül. Nem vállalunk felelősséget az elvesztegetett idődért vagy a frusztrációdért.',
     cookieConsent:
       'Ez a weboldal sütiket használ, hogy a lehető legjobb élményt nyújtsa. Emellett ez egy vicc is, sok funkció szándékosan hibás vagy nem is működik. A beállítások menüben személyre szabhatod az élményt és a süti beállításokat.',
-    donate: {
-      description:
-        'Ennek a projektnek nincs szponzora, kitartója, kripto-bálna befektetője, unatkozó milliomosa vagy titokzatos ballonkabátos emberbarátja. Tisztán önkéntes munkán, szerverszámlákon és egy folyamatos kebab + kávé költségvetésen fut — amik mind csak mélyítik a pénzügyi szakadékot. Ennek ellenére ez az alkalmazás továbbra is egy szerelemprojekt.<br></br><br></br>Ha szeretnéd támogatni az ügyünket, és segítenél még rosszabbá tenni ezt a weboldalt, bármilyen összeget NAGYON szépen köszönünk. Ha nincs felesleges pénzed — őszintén, kinek van ebben a gazdaságban? — még mindig segíthetsz az alkalmazás megosztásával és a bosszúság további terjesztésével.',
-      donateLinkText: 'Adományozási infók itt',
-      moneyUsageHeading: 'Mi történik a pénzzel?',
-      moneyUsageDescription:
-        'A támogatásod segít kompenzálni a fejlesztésbe fektetett időmet és energiámat, valamint hozzájárul az infrastruktúra és az eszközök költségeinek fedezéséhez (például tárhely, szolgáltatások és fejlesztőeszközök). Az adományok egyszerűen segítenek életben és fenntarthatóan tartani a projektet. Dobjunk pénzt a befőttesüvegbe!',
-      topSupporters: 'Legfőbb támogatók',
-      topSupportersDescription:
-        'Amint ez a projekt ténylegesen elkezd adományokat kapni, valódi emberek fognak itt megjelenni. Szóval ha szeretnél ezen a listán szerepelni, kérlek vedd fel velem a kapcsolatot, hogy manuálisan frissíthessem ezt az oldalt, vagy kitalálhassak valamilyen mechanizmust erre.',
-      topSupporterKidney: '🥇 Vese',
-      topSupporterLiver: '🥈 Máj',
-      topSupporterHeart: '🥉 Szív',
-      totalSupportReceived: 'Összes kapott támogatás',
-      classicMethods: 'Hagyományos módszerek',
-      buyMeACoffee: 'Buy Me A Coffee',
-      payPal: 'PayPal',
-      cryptoMethods: 'Kripto módszerek',
-      alternativeOptionsLink: 'Kattints ide a támogatás egyéb módjaiért 😏',
-      disclaimer: 'Jogi nyilatkozat',
-      disclaimerDetails:
-        'Ezt a projektet egy Magyarországon élő magánszemély fejleszti. Bármilyen pénzügyi támogatás vagy adomány — beleértve a kriptót is — önkéntes, végleges, és nem jogosít fel semmilyen jogra, szolgáltatásra vagy különleges hozzáférésre. Az adományok nem vonhatók le az adóból.<br></br><br></br>Nem nyújtunk jogi, adóügyi vagy pénzügyi tanácsadást. Ha kérdésed van az adományozással vagy a saját adókötelezettségeiddel kapcsolatban, kérlek fordulj szakképzett szakemberhez a saját joghatóságodban.<br></br><br></br>Minden kapott összeget a hatályos magyar adótörvényeknek megfelelően kezelünk.',
-      crypto: {
-        network: 'Hálózat: {network}',
-        copyAction: 'Cím másolása',
-        copyFeedback: 'Másolva!',
-        bitcoin: 'Bitcoin (BTC)',
-        ethereum: 'Ethereum (ETH)',
-      },
-    },
+    donate,
     exitPrompt:
       'Átgondolnám a távozást, mielőtt valami rossz történne veled. Biztos vagy benne?',
     readMoreAt: 'Olvass tovább itt:',
@@ -414,27 +387,8 @@ export default {
       notSupposedToBeHere: 'Hmm, nem kellene itt lenned 😡',
     },
   },
-  comments: {
-    sectionTitle: 'Hozzászólások',
-    formTitle: 'Szólj hozzá te is!',
-    reply: 'Válasz',
-    showReplies: '{count} válasz megjelenítése',
-    hideReplies: 'Válaszok elrejtése',
-    disclaimer:
-      'Minden hozzászólás szórakoztatási céllal jött létre, nem valódiak. Te sem fogsz tudni ténylegesen hozzászólni semmihez.',
-    loginRequired: {
-      title: 'Bejelentkezés szükséges',
-      description:
-        'A művelet elvégzéséhez be kell jelentkezned. Kérlek, lépj be vagy regisztrálj a folytatáshoz.',
-      login: 'Belépés',
-      cancel: 'Mégse',
-    },
-    form: {
-      name: 'Név',
-      comment: 'Hozzászólás',
-      submit: 'Hozzászólás beküldése',
-    },
-  },
+  commentVariants,
+  comments,
   settings: {
     userPreferences: {
       title: 'Beállítások',
@@ -588,39 +542,7 @@ export default {
         'Szeretnénk néha értesítéseket küldeni neked. A böngésződ beállításaiban adhatsz értesítési engedélyt ennek a weboldalnak. Megtennéd? 🙏🥺🙏',
     },
   },
-  newsletter: {
-    modal: {
-      title: 'Csatlakozz a hírlevelünkhöz!',
-      description:
-        'Prémium hírlevelünk őrült mennyiségű értéket visz egyenesen a postaládádba. Ne maradj le a felismerésekről, amik valódi változást hoznak!',
-      placeholder: 'Add meg az e-mail címed',
-      initialConfirm: 'Feliratkozás',
-      initialCancel: 'Mégse iratkozom fel',
-      useFormActions: 'Kérlek, használd helyette a megfelelő gombot',
-      confirmations: {
-        confirmation_001: {
-          text: 'Sajnálattal látjuk, hogy talán nem volt elég időd teljes mértékben átgondolni ezt a fontos és kihívást jelentő döntést.',
-          confirm: 'Átgondoltam, még mindig akarom',
-          cancel: 'Igazad van, mégse',
-        },
-        confirmation_002: {
-          text: 'Sajnáljuk, hogy feliratkozol, megajándékozhatunk-e azzal az örömmel, hogy egyáltalán nem vagy feliratkozó?',
-          confirm: 'Nem, köszi',
-          cancel: 'Kérem az ajándékomat!',
-        },
-        confirmation_003: {
-          text: 'Fontolóra vetted már, hogy kihagyod ezt a hírlevelet?',
-          confirm: 'Nem',
-          cancel: 'Igen',
-        },
-        confirmation_004: {
-          text: 'A hírlevélre való feliratkozásnak káros mellékhatásai lehetnek. Még mindig benne vagy?',
-          confirm: 'Elfogadom a mellékhatásokat',
-          cancel: 'Vigyél innen el',
-        },
-      },
-    },
-  },
+  newsletter,
   paywall: {
     overlay: {
       title:

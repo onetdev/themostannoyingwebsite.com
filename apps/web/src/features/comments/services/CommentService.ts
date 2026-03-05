@@ -1,7 +1,7 @@
 import type { ArticleDatum } from '@maw/content-api';
 import { injectable } from 'inversify';
-import poolEn from '@/i18n/messages/en/commentVariants';
-import poolHu from '@/i18n/messages/hu/commentVariants';
+import poolEn from '@/features/comments/i18n/generator/en';
+import poolHu from '@/features/comments/i18n/generator/hu';
 import i18nConfig from '@/root/i18n.config';
 import type { CommentService as ICommentService } from '../types';
 import { filterByDate } from './use-cases/filterByDate';
