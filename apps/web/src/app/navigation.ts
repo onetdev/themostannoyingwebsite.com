@@ -20,10 +20,11 @@ export const ActiveNavigationItems = [
 export type ActiveNavigationItem = (typeof ActiveNavigationItems)[number];
 
 export type NavItem = {
+  hideLabel?: boolean;
+  icon?: IconAliaseKey;
   key: string;
   labelKey: string;
   path: string;
-  icon?: IconAliaseKey;
 };
 
 export const SITE_NAVIGATION_LINKS = [
@@ -38,18 +39,21 @@ export const SITE_NAVIGATION_LINKS = [
 
 export const PERSONAL_NAVIGATION_LINKS = [
   {
+    hideLabel: true,
     icon: 'trophy' as const,
     key: 'achievements',
     labelKey: 'navigation.achievements',
     path: '/achievements',
   },
   {
+    hideLabel: true,
     icon: 'share' as const,
     key: 'global-share',
     labelKey: 'common.share',
     path: '#share',
   },
   {
+    hideLabel: true,
     icon: 'settings' as const,
     key: 'settings',
     labelKey: 'navigation.settings',

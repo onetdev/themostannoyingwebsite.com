@@ -61,7 +61,7 @@ export function CommentForm() {
           <FieldContent>
             <Textarea
               id="content"
-              className="w-full"
+              className="w-full h-32"
               placeholder={t('comments.form.comment')}
               {...register('content')}
             />

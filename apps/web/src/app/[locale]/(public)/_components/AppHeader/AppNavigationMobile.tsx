@@ -72,7 +72,10 @@ export function AppNavigationMobile({ activeItem }: AppNavigationMobileProps) {
         </SheetHeader>
         <Separator />
         <div className="px-5 py-2">
-          <AppLanguageSwitcher className="w-full" />
+          <AppLanguageSwitcher
+            className="w-full"
+            key="language-switcher-mobile"
+          />
         </div>
         {navigationTree.map(({ titleKey, items }) => (
           <>

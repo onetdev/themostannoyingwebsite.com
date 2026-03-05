@@ -1,6 +1,6 @@
-import { formatSecondsToHHMMSS } from './time';
+import { formatSecondsToHHMMSS } from './datetime';
 
-describe('time utils', () => {
+describe('datetime utils', () => {
   describe('formatSecondsToHHMMSS', () => {
     it('should format 0 seconds correctly', () => {
       expect(formatSecondsToHHMMSS(0)).toBe('00:00:00');

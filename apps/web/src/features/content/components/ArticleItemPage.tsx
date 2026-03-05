@@ -3,7 +3,7 @@
 import styles from '@maw/ui-lib/content.module.css';
 import HTMLReactParser from 'html-react-parser';
 import Image from 'next/image';
-import { useTranslations } from 'next-intl';
+import { useFormatter, useTranslations } from 'next-intl';
 import { CommentSection } from '@/features/comments/components';
 import type { Comment } from '@/features/comments/schemas/comment';
 import { usePainPreferencesStore } from '@/stores';
@@ -17,6 +17,14 @@ export interface ArticleItemPageProps {
 
 export function ArticleItemPage({ article, comments }: ArticleItemPageProps) {
   const t = useTranslations();
+  const formatter = useFormatter();
+  const formatterPublishedAt = formatter.dateTime(article.publishedAt, {
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric',
+    hour: 'numeric',
+    minute: 'numeric',
+  });
   const partitionEnabled = usePainPreferencesStore(
     (state) => state.flags.contentPaywall,
   );
@@ -25,7 +33,7 @@ export function ArticleItemPage({ article, comments }: ArticleItemPageProps) {
     <>
       <h1 className="mb-2 max-w-[900px]">{article.title}</h1>
       <span className="mb-5 block italic">
-        {t('article.published', { date: article.publishedAt.toDateString() })}
+        {t('article.published', { date: formatterPublishedAt })}
       </span>
       {article.coverImages?.original && (
         <div className="-mx-5 xl:-mx-8">

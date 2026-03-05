@@ -48,18 +48,22 @@ export function AppNavigationDesktop({
           asChild
           data-active={active}
           aria-current={active ? 'page' : undefined}
+          aria-label={t(item.labelKey)}
+          title={t(item.labelKey)}
           className="flex-row items-center gap-2 data-[active=true]:font-bold"
         >
           <Link href={item.path} onClick={() => onClick(item)} passHref>
             {item.icon && <Icon icon={item.icon} className="text-primary" />}
-            <span
-              className={cn(
-                !item.icon && 'lg:inline',
-                item.icon && 'hidden lg:inline',
-              )}
-            >
-              {t(item.labelKey)}
-            </span>
+            {item.hideLabel !== true && (
+              <span
+                className={cn(
+                  !item.icon && 'lg:inline',
+                  item.icon && 'hidden lg:inline',
+                )}
+              >
+                {t(item.labelKey)}
+              </span>
+            )}
           </Link>
         </NavigationMenuLink>
       </NavigationMenuItem>

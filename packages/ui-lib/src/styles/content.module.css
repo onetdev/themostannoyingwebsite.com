@@ -2,7 +2,7 @@
 @reference "./global.css";
 
 .content {
-  @apply py-5 px-3 md:px-10 flex flex-col items-center;
+  @apply py-5 px-0 md:px-10 flex flex-col items-center;
 }
 .content p {
   @apply py-2;
