@@ -44,6 +44,8 @@ export default {
         network: 'Hálózat: {network}',
         copyAction: 'Cím másolása',
         copyFeedback: 'Másolva!',
+        bitcoin: 'Bitcoin (BTC)',
+        ethereum: 'Ethereum (ETH)',
       },
     },
     exitPrompt:
@@ -56,6 +58,8 @@ export default {
     },
     toggleMenu: 'Menü váltása',
     logo: 'MAW Logó',
+    logoAlt: '<the>the</the> <most>Most</most> Annoying Website',
+    dismissBanner: 'Banner elrejtése',
     contactForm: {
       title: 'Hivatalos kapcsolatfelvételi űrlap',
       subject: 'Tárgy',
@@ -403,6 +407,9 @@ export default {
       male: 'Férfi',
       other: 'Egyéb',
       robot: 'Robot',
+    },
+    profile: {
+      notSupposedToBeHere: 'Hmm, nem kellene itt lenned 😡',
     },
   },
   comments: {
@@ -832,16 +839,49 @@ export default {
     },
     info: {},
   },
-  cafeWall: {
-    title: 'Kávéházi fal',
-    description: 'Itt generálhatsz egy kávéházi fal illúziót. Próbáld ki!',
-    tileColorA: 'Csempe színe A',
-    tileColorB: 'Csempe színe B',
-    tileSize: 'Csempe mérete',
-    diamondColorA: 'Gyémánt színe A',
-    diamondColorB: 'Gyémánt színe B',
-    width: 'Szélesség',
-    height: 'Magasság',
+  debug: {
+    auth: {
+      title: 'Korlátozott hozzáférés',
+      description: 'Add meg a jelszót a debug felület eléréséhez.',
+      passwordLabel: 'Jelszó',
+      passwordPlaceholder: '••••••••',
+      submit: 'Debug mód feloldása',
+    },
+    logout: 'Kijelentkezés',
+    internalOnly: 'Csak belső használatra',
+    tabs: {
+      stores: 'Store ellenőrző',
+      events: 'Esemény tesztelő',
+      config: 'Statikus konfiguráció',
+    },
+    eventTester: {
+      title: 'Eseménybusz tesztelő',
+      commonEvents: 'Gyakori események',
+      eventTypeLabel: 'Esemény típusa',
+      payloadLabel: 'Payload (JSON)',
+      dispatch: 'Esemény küldése',
+    },
+    eventHistory: {
+      title: 'Eseménytörténet',
+      enable: 'Eseménytörténet rögzítése',
+      clear: 'Történet törlése',
+      table: {
+        timestamp: 'Időbélyeg',
+        type: 'Típus',
+        payload: 'Payload',
+      },
+      empty: 'Még nincsenek rögzített események...',
+      disabled: 'Az eseménytörténet rögzítése ki van kapcsolva.',
+    },
+    storeInspector: {
+      runtime: 'Runtime Store',
+      monitoring: 'Monitoring Store',
+      painPreferences: 'Fájdalom-beállítások Store',
+      achievements: 'Eredmények Store',
+      userPreferences: 'Felhasználói beállítások Store',
+      userGrants: 'Hozzájárulások Store',
+      appConfig: 'App konfiguráció',
+    },
   },
   contextMenu: {
     disabled: 'Hé, itt nem lehet jobb klikkelni!',

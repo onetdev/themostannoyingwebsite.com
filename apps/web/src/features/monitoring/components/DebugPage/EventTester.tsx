@@ -13,12 +13,14 @@ import {
   Input,
   Textarea,
 } from '@maw/ui-lib';
+import { useTranslations } from 'next-intl';
 
 import { useEventTestForm } from '../../hooks';
 import { eventPresets } from './data/eventPreset';
 import { EventHistory } from './EventHistory';
 
 export function EventTester() {
+  const t = useTranslations();
   const {
     setValue,
     formState: { errors },
@@ -35,12 +37,14 @@ export function EventTester() {
     <div className="space-y-6">
       <Card>
         <CardHeader>
-          <CardTitle className="text-lg">Event Bus Tester</CardTitle>
+          <CardTitle className="text-lg">
+            {t('debug.eventTester.title')}
+          </CardTitle>
         </CardHeader>
         <CardContent className="space-y-4">
           <div className="flex flex-col gap-2">
             <div className="text-sm font-medium text-muted-foreground">
-              Common Events
+              {t('debug.eventTester.commonEvents')}
             </div>
             <div className="flex flex-wrap gap-2">
               {testEvents.map((evt) => (
@@ -61,7 +65,7 @@ export function EventTester() {
 
           <Field>
             <FieldLabel htmlFor="eventType" required>
-              Event type
+              {t('debug.eventTester.eventTypeLabel')}
             </FieldLabel>
             <FieldContent>
               <Input
@@ -76,7 +80,9 @@ export function EventTester() {
           </Field>
 
           <Field>
-            <FieldLabel htmlFor="payload">Payload (JSON)</FieldLabel>
+            <FieldLabel htmlFor="payload">
+              {t('debug.eventTester.payloadLabel')}
+            </FieldLabel>
             <FieldContent>
               <Textarea
                 className="w-full"
@@ -90,7 +96,7 @@ export function EventTester() {
           </Field>
 
           <Button className="w-full" onClick={handleSubmit(onSubmit)}>
-            Dispatch Event
+            {t('debug.eventTester.dispatch')}
           </Button>
         </CardContent>
       </Card>

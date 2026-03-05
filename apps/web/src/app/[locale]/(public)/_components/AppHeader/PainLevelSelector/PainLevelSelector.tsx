@@ -68,9 +68,8 @@ export function PainLevelSelector({ className }: PainLevelSelectorProps) {
           </TooltipProvider>
           <span className="hidden md:inline">
             {percentageClamp.label} / {Math.floor(percentage)}%
-          </span><span className="md:hidden">
-            {Math.floor(percentage)}%
           </span>
+          <span className="md:hidden">{Math.floor(percentage)}%</span>
         </div>
       </div>
       <div className="relative">

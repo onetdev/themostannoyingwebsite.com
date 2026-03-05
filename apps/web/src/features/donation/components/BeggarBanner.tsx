@@ -54,7 +54,7 @@ export function BeggarBanner() {
           type="button"
           onClick={handleDismiss}
           className="shrink-0 cursor-pointer"
-          aria-label="Dismiss banner"
+          aria-label={t('app.dismissBanner')}
         >
           <Icon icon="close" />
         </button>

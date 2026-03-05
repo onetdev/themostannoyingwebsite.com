@@ -1,5 +1,6 @@
 'use client';
 
+import { useTranslations } from 'next-intl';
 import type { ComponentProps } from 'react';
 import { useAppConfigContext } from '@/core/config/react-app-config';
 import { CryptoWallet } from './CryptoWallet';
@@ -10,6 +11,7 @@ export function CryptoWalletList({
   className,
   ...rest
 }: CryptoWalletListProps) {
+  const t = useTranslations();
   const configService = useAppConfigContext().donation;
   const btcWallet = configService.btcWallet;
   const ethWallet = configService.ethWallet;
@@ -20,12 +22,12 @@ export function CryptoWalletList({
       {...rest}
     >
       <CryptoWallet
-        title="Bitcoin (BTC)"
+        title={t('app.donate.crypto.bitcoin')}
         address={btcWallet.address}
         network={btcWallet.network}
       />
       <CryptoWallet
-        title="Ethereum (ETH)"
+        title={t('app.donate.crypto.ethereum')}
         address={ethWallet.address}
         network="Mainnet"
       />

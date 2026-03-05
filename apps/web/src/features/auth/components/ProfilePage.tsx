@@ -9,7 +9,7 @@ export function ProfilePage() {
   return (
     <>
       <PageHeadline>{t('navigation.profile')}</PageHeadline>
-      <p>Hmm, you are not supposed to be here 😡</p>
+      <p>{t('user.profile.notSupposedToBeHere')}</p>
     </>
   );
 }

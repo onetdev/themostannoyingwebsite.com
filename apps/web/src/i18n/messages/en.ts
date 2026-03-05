@@ -44,6 +44,8 @@ export default {
         network: 'Network: {network}',
         copyAction: 'Copy Address',
         copyFeedback: 'Copied!',
+        bitcoin: 'Bitcoin (BTC)',
+        ethereum: 'Ethereum (ETH)',
       },
     },
     exitPrompt:
@@ -56,6 +58,8 @@ export default {
     },
     toggleMenu: 'Toggle menu',
     logo: 'MAW Logo',
+    logoAlt: '<the>the</the> <most>Most</most> Annoying Website',
+    dismissBanner: 'Dismiss banner',
     contactForm: {
       title: 'Official contact form',
       subject: 'Subject',
@@ -401,6 +405,9 @@ export default {
       male: 'Male',
       other: 'Other',
       robot: 'Robot',
+    },
+    profile: {
+      notSupposedToBeHere: 'Hmm, you are not supposed to be here 😡',
     },
   },
   comments: {
@@ -824,16 +831,49 @@ export default {
     },
     info: {},
   },
-  cafeWall: {
-    title: 'Cafe wall',
-    description: 'You can generate a cafe wall illusion here. Give it a try!',
-    tileColorA: 'Tile Color A',
-    tileColorB: 'Tile Color B',
-    tileSize: 'Tile Size',
-    diamondColorA: 'Diamond Color A',
-    diamondColorB: 'Diamond Color B',
-    width: 'Width',
-    height: 'Height',
+  debug: {
+    auth: {
+      title: 'Restricted Access',
+      description: 'Enter the password to access the debug dashboard.',
+      passwordLabel: 'Password',
+      passwordPlaceholder: '••••••••',
+      submit: 'Unlock Debug Mode',
+    },
+    logout: 'Logout',
+    internalOnly: 'Internal Use Only',
+    tabs: {
+      stores: 'Store Inspector',
+      events: 'Event Tester',
+      config: 'Static Config',
+    },
+    eventTester: {
+      title: 'Event Bus Tester',
+      commonEvents: 'Common Events',
+      eventTypeLabel: 'Event type',
+      payloadLabel: 'Payload (JSON)',
+      dispatch: 'Dispatch Event',
+    },
+    eventHistory: {
+      title: 'Event History',
+      enable: 'Enable Event History Recording',
+      clear: 'Clear History',
+      table: {
+        timestamp: 'Timestamp',
+        type: 'Type',
+        payload: 'Payload',
+      },
+      empty: 'No events captured yet...',
+      disabled: 'Event history recording is disabled.',
+    },
+    storeInspector: {
+      runtime: 'Runtime Store',
+      monitoring: 'Monitoring Store',
+      painPreferences: 'Pain Preferences Store',
+      achievements: 'Achievements Store',
+      userPreferences: 'User Preferences Store',
+      userGrants: 'User Grants Store',
+      appConfig: 'App Configuration',
+    },
   },
   contextMenu: {
     disabled: "Hey, you can't right click here!",

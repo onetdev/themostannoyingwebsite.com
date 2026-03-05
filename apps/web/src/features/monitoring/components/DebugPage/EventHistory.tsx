@@ -15,10 +15,11 @@ import {
   TableHeader,
   TableRow,
 } from '@maw/ui-lib';
-
+import { useTranslations } from 'next-intl';
 import { useMonitoringStore } from '@/features/monitoring/stores';
 
 export function EventHistory() {
+  const t = useTranslations();
   const {
     eventHistory,
     isEventHistoryEnabled: isHistoryEnabled,
@@ -39,7 +40,7 @@ export function EventHistory() {
             htmlFor="enable-history"
             className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 cursor-pointer"
           >
-            Enable Event History Recording
+            {t('debug.eventHistory.enable')}
           </Label>
         </div>
         <Button
@@ -48,26 +49,28 @@ export function EventHistory() {
           onClick={clearEventHistory}
           disabled={eventHistory.length === 0}
         >
-          Clear History
+          {t('debug.eventHistory.clear')}
         </Button>
       </div>
 
       <Card>
         <CardHeader className="pb-0">
-          <CardTitle className="text-lg">Event History</CardTitle>
+          <CardTitle className="text-lg">
+            {t('debug.eventHistory.title')}
+          </CardTitle>
         </CardHeader>
         <CardContent className="p-0 pt-4">
           <Table>
             <TableHeader>
               <TableRow>
                 <TableHead className="w-[120px] font-mono text-xs uppercase">
-                  Timestamp
+                  {t('debug.eventHistory.table.timestamp')}
                 </TableHead>
                 <TableHead className="w-[200px] font-mono text-xs uppercase">
-                  Type
+                  {t('debug.eventHistory.table.type')}
                 </TableHead>
                 <TableHead className="font-mono text-xs uppercase">
-                  Payload
+                  {t('debug.eventHistory.table.payload')}
                 </TableHead>
               </TableRow>
             </TableHeader>
@@ -79,8 +82,8 @@ export function EventHistory() {
                     className="h-32 text-center text-muted-foreground italic"
                   >
                     {isHistoryEnabled
-                      ? 'No events captured yet...'
-                      : 'Event history recording is disabled.'}
+                      ? t('debug.eventHistory.empty')
+                      : t('debug.eventHistory.disabled')}
                   </TableCell>
                 </TableRow>
               ) : (
