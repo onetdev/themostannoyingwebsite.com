@@ -2,6 +2,7 @@ import { z } from 'zod';
 
 const RouteAliasList = [
   'about',
+  'achievements',
   'article.single',
   'contact',
   'dilf',

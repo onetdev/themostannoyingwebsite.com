@@ -2,15 +2,18 @@
 
 import { useLogger } from '@maw/logger';
 import { useForm } from 'react-hook-form';
-
-import { useAuthFormError } from './useAuthFormError';
-import { useAuthService } from '../hooks';
-import { getSignupFormDataSchema, SignupFormData, User } from '../schemas';
-import { RegisterUseCaseParams } from '../types';
-
 import { useZodFormValidator } from '@/hooks';
+import { useAuthService } from '../hooks';
+import {
+  getSignupFormDataSchema,
+  type SignupFormData,
+  type User,
+} from '../schemas';
+import type { RegisterUseCaseParams } from '../types';
+import { useAuthFormError } from './useAuthFormError';
 
 export const signupFormDefaultValues: SignupFormData = {
+  captcha: '',
   firstName: '',
   lastName: '',
   email: '',
@@ -25,7 +28,6 @@ export const signupFormDefaultValues: SignupFormData = {
   countryCode: '',
   phoneNumberCountry: undefined,
   phoneNumber: undefined,
-  captcha: '',
 };
 
 interface SignupFormProps {

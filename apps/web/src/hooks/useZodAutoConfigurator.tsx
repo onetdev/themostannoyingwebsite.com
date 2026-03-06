@@ -11,8 +11,7 @@ export function useZodAutoConfigurator() {
   useEffect(() => {
     const zodLocaleMap = { en: zodEn, hu: zodHu };
     const zodLocale =
-      zodLocaleMap[appLocale as keyof typeof zodLocaleMap] ??
-      zodLocaleMap['en'];
+      zodLocaleMap[appLocale as keyof typeof zodLocaleMap] ?? zodLocaleMap.en;
     z.config(zodLocale());
   }, [appLocale]);
 }

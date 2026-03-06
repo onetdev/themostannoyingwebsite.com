@@ -2,23 +2,22 @@
 
 import { Checkbox as FormCheckbox } from '@maw/ui-lib';
 import { useTranslations } from 'next-intl';
-
-import { SettingsField } from '../SettingsField';
-
 import { usePainPreferencesStore } from '@/stores';
+import { SettingsField } from '../SettingsField';
 
 export function PopupAndInteractivity() {
   const painPreferences = usePainPreferencesStore();
-  const t = useTranslations();
+  const t = useTranslations('user');
 
   return (
     <section className="flex flex-col gap-3">
       <h3 className="text-muted-foreground text-xs font-bold tracking-wider uppercase">
-        {t('settings.optionalPainPoints.categories.interactivity')}
+        {t('optionalPainPoints.categories.interactivity')}
       </h3>
       <SettingsField
-        label={t('settings.optionalPainPoints.newsletterModal')}
-        info={t('settings.optionalPainPointsHints.newsletterModal')}>
+        label={t('optionalPainPoints.newsletterModal')}
+        info={t('optionalPainPointsHints.newsletterModal')}
+      >
         <FormCheckbox
           name="newsletter"
           checked={painPreferences.flags.newsletterModal}
@@ -28,8 +27,9 @@ export function PopupAndInteractivity() {
         />
       </SettingsField>
       <SettingsField
-        label={t('settings.optionalPainPoints.mockChat')}
-        info={t('settings.optionalPainPointsHints.mockChat')}>
+        label={t('optionalPainPoints.mockChat')}
+        info={t('optionalPainPointsHints.mockChat')}
+      >
         <FormCheckbox
           name="mock_chat"
           checked={painPreferences.flags.mockChat}
@@ -39,8 +39,9 @@ export function PopupAndInteractivity() {
         />
       </SettingsField>
       <SettingsField
-        label={t('settings.optionalPainPoints.wheelOfFortune')}
-        info={t('settings.optionalPainPointsHints.wheelOfFortune')}>
+        label={t('optionalPainPoints.wheelOfFortune')}
+        info={t('optionalPainPointsHints.wheelOfFortune')}
+      >
         <FormCheckbox
           name="wheel_of_fortune"
           checked={painPreferences.flags.wheelOfFortune}
@@ -50,8 +51,9 @@ export function PopupAndInteractivity() {
         />
       </SettingsField>
       <SettingsField
-        label={t('settings.optionalPainPoints.notifications')}
-        info={t('settings.optionalPainPointsHints.notifications')}>
+        label={t('optionalPainPoints.notifications')}
+        info={t('optionalPainPointsHints.notifications')}
+      >
         <FormCheckbox
           name="notifications"
           checked={painPreferences.flags.notifications}
@@ -61,8 +63,9 @@ export function PopupAndInteractivity() {
         />
       </SettingsField>
       <SettingsField
-        label={t('settings.optionalPainPoints.exitPrompt')}
-        info={t('settings.optionalPainPointsHints.exitPrompt')}>
+        label={t('optionalPainPoints.exitPrompt')}
+        info={t('optionalPainPointsHints.exitPrompt')}
+      >
         <FormCheckbox
           name="exit_prompt"
           checked={painPreferences.flags.exitPrompt}
@@ -72,13 +75,29 @@ export function PopupAndInteractivity() {
         />
       </SettingsField>
       <SettingsField
-        label={t('settings.optionalPainPoints.clipboardMarker')}
-        info={t('settings.optionalPainPointsHints.clipboardMarker')}>
+        label={t('optionalPainPoints.clipboardMarker')}
+        info={t('optionalPainPointsHints.clipboardMarker')}
+      >
         <FormCheckbox
           name="clipboard_marker"
           checked={painPreferences.flags.clipboardMarker}
           onCheckedChange={(value) =>
             painPreferences.setFlagIndeterminate('clipboardMarker', value)
+          }
+        />
+      </SettingsField>
+      <SettingsField
+        label={t('optionalPainPoints.achievementNotifications')}
+        info={t('optionalPainPointsHints.achievementNotifications')}
+      >
+        <FormCheckbox
+          name="achievementNotifications"
+          checked={painPreferences.flags.achievementNotifications}
+          onCheckedChange={(value) =>
+            painPreferences.setFlagIndeterminate(
+              'achievementNotifications',
+              value,
+            )
           }
         />
       </SettingsField>

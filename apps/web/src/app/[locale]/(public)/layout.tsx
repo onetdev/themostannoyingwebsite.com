@@ -1,21 +1,20 @@
-import '@/global.css';
+import '@/app/global.css';
 import { Analytics } from '@vercel/analytics/react';
 import { Inter } from 'next/font/google';
 import { notFound } from 'next/navigation';
 import { hasLocale, NextIntlClientProvider } from 'next-intl';
+import type { PropsWithChildren } from 'react';
 import { getLangDir } from 'rtl-detect';
-
-import { PainDecoratorLayout } from './_components/PainDecoratorLayout';
-
-import { BeggarBanner } from '@/features/donation/components';
+import { ClientObserverProvider } from '@/app/bootstrap/ClientObserverProvider';
+import { ClientRootProviderContainer } from '@/app/bootstrap/ClientRootProviderContainer';
+import { BeggarBanner } from '@/features/funding/components';
 import { routing } from '@/i18n/routing';
-import { ClientObserverProvider } from '@/providers/ClientObserverProvider';
-import { ClientRootProviderContainer } from '@/providers/ClientRootProviderContainer';
 import { getAppConfigService } from '@/services';
+import { PainDecoratorLayout } from './_components/PainDecoratorLayout';
 
 const config = getAppConfigService().getAll();
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars -- We need the loader even though we are seemingly not using it directly.
+// We need the loader even though we are seemingly not using it directly.
 const _inter = Inter({
   subsets: ['latin'],
   weight: ['200', '400', '500', '600', '700'],
@@ -24,10 +23,9 @@ const _inter = Inter({
 async function LocalePublicRootLayout({
   children,
   params,
-}: {
-  children: React.ReactNode;
+}: PropsWithChildren<{
   params: Promise<{ locale: string }>;
-}) {
+}>) {
   const { locale } = await params;
   const direction = getLangDir(locale);
   if (!hasLocale(routing.locales, locale)) {
@@ -39,7 +37,8 @@ async function LocalePublicRootLayout({
       lang={locale}
       dir={direction}
       data-theme={config.defaultColorScheme}
-      suppressHydrationWarning>
+      suppressHydrationWarning
+    >
       <body>
         <NextIntlClientProvider>
           <ClientRootProviderContainer appConfig={config}>

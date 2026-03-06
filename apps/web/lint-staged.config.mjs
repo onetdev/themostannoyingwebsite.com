@@ -1,4 +1,5 @@
 export default {
   '**/*.ts?(x)': () => 'pnpm run check-types',
-  '**/*.(ts|js)?(x)': (filenames) => `pnpm run lint . ${filenames.join(' ')}`,
+  '**/*.{js,ts,tsx,jsx,json,css,md}': (filenames) =>
+    `biome check --write . ${filenames.join(' ')}`,
 };

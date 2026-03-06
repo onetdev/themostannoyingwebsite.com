@@ -1,6 +1,6 @@
-import { Result } from '@maw/utils/result';
+import type { Result } from '@maw/utils/result';
 
-import {
+import type {
   SubscriptionError,
   SubscriptionFeature,
   SubscriptionPackage,
@@ -13,4 +13,17 @@ export const DI = {
 export interface SubscriptionPlansService {
   getFeatures(): Promise<Result<SubscriptionFeature[], SubscriptionError>>;
   getPlans(): Promise<Result<SubscriptionPackage[], SubscriptionError>>;
+}
+
+export interface PurchaseProofVariants {
+  names: string[];
+  locations: string[];
+}
+
+declare global {
+  interface AppEvents {
+    'subscription:package-selected': {
+      packageId: string;
+    };
+  }
 }

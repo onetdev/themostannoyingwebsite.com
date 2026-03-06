@@ -1,4 +1,4 @@
-@reference 'tailwindcss';
+@reference "tailwindcss";
 
 /**
  * Utility tokens
@@ -16,8 +16,8 @@
   --max-height-screen-3per4: 75vh;
 
   /* Aspect ratio padding utilities (for responsive embed containers) */
-  --padding-16per9: 56.25%;   /* 16:9 aspect ratio */
-  --padding-9per16: 177.78%;  /* 9:16 aspect ratio */
+  --padding-16per9: 56.25%; /* 16:9 aspect ratio */
+  --padding-9per16: 177.78%; /* 9:16 aspect ratio */
 
   /* Transition utilities */
   --transition-property-visibility-opacity: visibility, opacity;

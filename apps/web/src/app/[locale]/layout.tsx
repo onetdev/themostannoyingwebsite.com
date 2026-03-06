@@ -1,6 +1,6 @@
-import { Metadata, Viewport } from 'next';
+import type { Metadata, Viewport } from 'next';
 import { getTranslations } from 'next-intl/server';
-import { PropsWithChildren } from 'react';
+import type { PropsWithChildren } from 'react';
 
 import { getAppConfigService } from '@/services';
 
@@ -25,7 +25,7 @@ export async function generateMetadata(): Promise<Metadata> {
       type: 'website',
       images: [
         {
-          url: '/assets/social.png',
+          url: config.common.assets.socialImage,
           width: 1200,
           height: 630,
         },

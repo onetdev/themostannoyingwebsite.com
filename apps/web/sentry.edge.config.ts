@@ -5,7 +5,9 @@
 
 import * as Sentry from '@sentry/nextjs';
 
-import deploymentMeta from '@/root/public/deployment-meta.json';
+import deploymentMeta from '@/root/public/deployment-meta.json' with {
+  type: 'json',
+};
 
 Sentry.init({
   dsn: process.env.SENTRY_EDGE_DSN,

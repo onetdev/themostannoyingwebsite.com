@@ -1,20 +1,19 @@
-import { PromiseResult } from '@maw/utils/result';
+import type { PromiseResult } from '@maw/utils/result';
 import { inject, injectable } from 'inversify';
-
+import type { AuthError, User } from '../schemas';
+import {
+  type AuthRepository,
+  DI,
+  type AuthService as IAuthService,
+  type LoginUseCaseParams,
+  type PasswordReminderUseCaseParams,
+  type RegisterUseCaseParams,
+} from '../types';
 import {
   login as loginUseCase,
   passwordReminder as passwordReminderUseCase,
   register as registerUseCase,
 } from './use-cases';
-import { AuthError, User } from '../schemas';
-import {
-  type AuthRepository,
-  DI,
-  type AuthService as IAuthService,
-  LoginUseCaseParams,
-  PasswordReminderUseCaseParams,
-  RegisterUseCaseParams,
-} from '../types';
 
 @injectable()
 export class AuthService implements IAuthService {

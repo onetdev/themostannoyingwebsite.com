@@ -17,7 +17,7 @@ export const first_letter_capitalize = (input: string) => {
     return '';
   }
 
-  return letters[0]!.toUpperCase() + letters.slice(1).join('');
+  return letters[0]?.toUpperCase() + letters.slice(1).join('');
 };
 
 /**

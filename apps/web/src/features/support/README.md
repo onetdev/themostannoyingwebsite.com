@@ -1,17 +1,24 @@
 # Support Feature
 
-Implements intentionally difficult and high-friction "help" and support systems.
+Implements intentionally difficult, high-friction, and misleading "help" and support systems.
 
-## Key highlights
+## Key Highlights
 
-- **ContactPage component** for App Router integration.
-- **Contact form** that opens a new tab using `mailto:*` protocol (skipping backend integration)
-- **Chat bubble**
-  - When you load the page it always has a new message for you
-  - It will only append new messages if it is closed
-  - Once sound is enabled it will also display sound
+- **ContactPage**: A specialized layout that displays fake contact details and funnels users toward a frustrating contact form.
+- **ContactForm**: A form that, instead of submitting data to a backend, opens a new browser tab with a `mailto:*` link. The form fields are designed to be confusing and the submission process to be prone to simulated errors.
+- **ChatBubble**: A persistent UI element that mimics a customer support chat interface with "Dark UX" behaviors:
+  - Automatically appends "new" bot messages after a short delay.
+  - Generates notifications and sounds to distract the user.
+  - Deterministically generates chat history based on current session parameters.
+- **useChatBubbleHistory**: Custom hook that manages the simulated chat state, including history, unread badge counters, and automated bot responses.
 
-## Out of scope
+## Interaction Patterns
 
-- Real customer support integration
-- Real AI chatbot
+- **Notification Spams**: The chat bubble will generate browser notifications and sound effects to disrupt the user's experience.
+- **Tab Hijacking**: Opening the contact form might redirect the user or open multiple tabs.
+
+## Out of Scope
+
+- **Real Customer Support Integration**: Does not connect to Zendesk, Intercom, or any other support platform.
+- **Real AI Chatbot**: The "AI" chatbot uses pre-defined or randomized templates and is not capable of understanding or answering real questions.
+- **Support Ticketing**: No tickets are actually created or tracked.

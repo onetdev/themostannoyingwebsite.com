@@ -10,8 +10,8 @@ import {
   DialogTitle,
 } from '@maw/ui-lib';
 import { useTranslations } from 'next-intl';
-
-import { useNavigationProvider } from '@/contexts/NavigationContext';
+import { useEvent } from '@/hooks';
+import { useNavigationProvider } from '@/navigation/NavigationContext';
 
 interface LoginRequiredModalProps {
   show: boolean;
@@ -21,6 +21,8 @@ interface LoginRequiredModalProps {
 export function LoginRequiredModal({ show, onClose }: LoginRequiredModalProps) {
   const t = useTranslations();
   const { navigatePush } = useNavigationProvider();
+
+  useEvent('ui:modal:dismiss-signaled', onClose, show);
 
   const handleLogin = () => {
     onClose();

@@ -2,5 +2,5 @@
   "extends": "@maw/config-ts/configs/base.json",
   "compilerOptions": {
     "baseUrl": "."
-  },
+  }
 }

@@ -4,12 +4,13 @@ import {
 } from '@/stores/pain-preferences';
 
 const flags: PainPreferencesState['flags'] = {
-  'gifts.detectAdblocker': false,
-  'gifts.flaps': false,
-  'gifts.oneByOne': false,
   'pageTitle.inactiveArrayPaged': false,
   'pageTitle.inactiveMarquee': false,
   'pageTitle.randomGlitch': false,
+  'promotions.detectAdblocker': false,
+  'promotions.flaps': false,
+  'promotions.oneByOne': false,
+  achievementNotifications: false,
   clipboardMarker: false,
   contentPaywall: false,
   deadPixel: false,

@@ -46,7 +46,7 @@ export const getRelativeLuminance = (hexRgb: string): number | undefined => {
     const adjusted =
       channelFloat <= 0.03928
         ? channelFloat / LOW_GAMMA_ADJUST_COEFFICIENT
-        : Math.pow((channelFloat + 0.055) / 1.055, 2.4);
+        : ((channelFloat + 0.055) / 1.055) ** 2.4;
 
     return adjusted;
   });

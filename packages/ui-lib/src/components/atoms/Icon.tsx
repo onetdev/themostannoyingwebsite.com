@@ -14,22 +14,25 @@ import {
   faEyeDropper,
   faGear,
   faInfoCircle,
+  faLock,
   faMagnifyingGlass,
   faMapMarkerAlt,
   faMoon,
   faPaperPlane,
   faPlayCircle,
+  faRotateRight,
   faSpinner,
   faSun,
   faTags,
   faTimes,
   faTriangleExclamation,
+  faTrophy,
   faUser,
   faXmarkCircle,
 } from '@fortawesome/free-solid-svg-icons';
 import {
   FontAwesomeIcon,
-  FontAwesomeIconProps,
+  type FontAwesomeIconProps,
 } from '@fortawesome/react-fontawesome';
 
 const iconMap = {
@@ -47,11 +50,13 @@ const iconMap = {
   failed: faCircleExclamation,
   info: faCircleInfo,
   infoCircle: faInfoCircle,
+  lock: faLock,
   login: faUser,
   mapMarker: faMapMarkerAlt,
   menu: faBars,
   moon: faMoon,
   play: faPlayCircle,
+  rotate: faRotateRight,
   search: faMagnifyingGlass,
   send: faPaperPlane,
   settings: faGear,
@@ -59,6 +64,7 @@ const iconMap = {
   spinner: faSpinner,
   sun: faSun,
   tags: faTags,
+  trophy: faTrophy,
   xmarkCircle: faXmarkCircle,
 };
 export type IconAliaseKey = keyof typeof iconMap;

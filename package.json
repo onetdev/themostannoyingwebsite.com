@@ -23,7 +23,7 @@
     "lint": "turbo run lint",
     "lint:fix": "turbo run lint:fix",
     "prepare": "husky",
-    "link-assets": "npx symlink-dir ./packages/content-api/data ./apps/web/public/assets/articles",
+    "link-assets": "pnpx symlink-dir ./packages/content-api/data ./apps/web/public/assets/articles",
     "test": "turbo run test",
     "test:e2e": "turbo run test:e2e",
     "clean": "turbo run clean --force",
@@ -31,6 +31,7 @@
     "clean:all": "pnpm recursive exec -- rm -rf node_modules dist .next .turbo storybook-static"
   },
   "devDependencies": {
+    "@biomejs/biome": "catalog:",
     "@commitlint/cli": "^20.4.2",
     "@commitlint/config-conventional": "^20.4.2",
     "husky": "^9.1.7",
@@ -50,5 +51,13 @@
   "dependencies": {
     "import-in-the-middle": "^3.0.0",
     "require-in-the-middle": "^8.0.1"
+  },
+  "pnpm": {
+    "onlyBuiltDependencies": [
+      "@sentry/cli"
+    ]
+  },
+  "lint-staged": {
+    "*.{js,ts,tsx,jsx,json,css,md}": "biome check --write"
   }
 }

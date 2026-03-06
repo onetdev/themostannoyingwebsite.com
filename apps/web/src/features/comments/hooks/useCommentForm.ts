@@ -2,10 +2,8 @@
 
 import { useLogger } from '@maw/logger';
 import { useForm } from 'react-hook-form';
-
-import { CommentFormData, getCommentFormDataSchema } from '../schemas';
-
 import { useZodFormValidator } from '@/hooks';
+import { type CommentFormData, getCommentFormDataSchema } from '../schemas';
 
 interface UseCommentFormProps {
   onSuccess?: (data: CommentFormData) => void;

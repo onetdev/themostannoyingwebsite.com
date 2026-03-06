@@ -2,6 +2,7 @@ import { expect, test } from '@playwright/test';
 
 import { getSettingsPage } from '../pages/SettingsPage';
 import { setupE2eTestState } from '../utils/setup';
+import { signalDismissDialog } from '../utils/ui';
 
 test(
   'settings page loads and its menu item is active',
@@ -32,6 +33,10 @@ test('pain point flags can be toggled and persisted', async ({ page }) => {
   );
 
   await settingsPage.painPreferenceFlags.enableAllButton.click();
+
+  // Enabling all pain points will likely result in multiple dialogs opening
+  // which can block selector visibility.
+  signalDismissDialog(page);
 
   await expect(
     settingsPage.painPreferenceFlags.checkboxesUnchecked,

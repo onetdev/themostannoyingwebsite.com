@@ -1,6 +1,6 @@
-import { PromiseResult } from '@maw/utils/result';
+import type { PromiseResult } from '@maw/utils/result';
 
-import { AuthError, User } from './schemas';
+import type { AuthError, User } from './schemas';
 
 export const DI = {
   AuthService: Symbol.for('AuthService'),
@@ -13,9 +13,7 @@ export type AuthenticationData = {
   remember: boolean;
 };
 
-export type LoginUseCaseParams = AuthenticationData & {
-  captcha: string;
-};
+export type LoginUseCaseParams = AuthenticationData;
 
 export type CreateUserData = Omit<User, 'id'> & {
   password: string;

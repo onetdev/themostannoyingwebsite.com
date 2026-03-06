@@ -12,10 +12,8 @@ export interface Result<T1 = unknown, T2 = string> {
   };
 }
 
-// eslint-disable-next-line @typescript-eslint/no-empty-object-type
-export interface PromiseResult<T1 = unknown, T2 = string> extends Promise<
-  Result<T1, T2>
-> {}
+export interface PromiseResult<T1 = unknown, T2 = string>
+  extends Promise<Result<T1, T2>> {}
 
 export const createSuccessResult = <T1, T2 = string>(
   data: T1,

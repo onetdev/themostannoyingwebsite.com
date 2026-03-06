@@ -3,13 +3,16 @@
 import { useLogger } from '@maw/logger';
 import { Icon, PageHeadline } from '@maw/ui-lib';
 import Image from 'next/image';
-import { useTranslations } from 'next-intl';
+import { useLocale, useTranslations } from 'next-intl';
 import { useEffect, useRef, useState } from 'react';
+import { useAppConfigContext } from '@/core/config/react-app-config';
 
 export function HotThingsPage() {
+  const config = useAppConfigContext();
   const logger = useLogger().getSubLogger({ name: 'hot-things-page' });
   const [isCapable, setIsCapable] = useState(false);
   const t = useTranslations();
+  const locale = useLocale();
   const [_devices, setDevices] = useState<MediaDeviceInfo[]>([]);
   const [stream, setStream] = useState<MediaStream>();
   const playerRef = useRef<HTMLVideoElement>(null);
@@ -60,7 +63,10 @@ export function HotThingsPage() {
     setIsCapable(
       'mediaDevices' in navigator && 'getUserMedia' in navigator.mediaDevices,
     );
-    return () => stream?.getTracks().forEach((track) => track.stop());
+    return () =>
+      stream?.getTracks().forEach((track) => {
+        track.stop();
+      });
   }, [stream]);
 
   return (
@@ -69,8 +75,8 @@ export function HotThingsPage() {
       <div className="pb-16per9 relative overflow-hidden">
         <Image
           className="absolute h-auto w-full"
-          src="/assets/images/lava.webp"
-          alt={t('hotThings.pictureOfYou')}
+          src={config.content.assets.hotThings.placeholder}
+          alt={t('content.hotThings.pictureOfYou')}
           width={1920}
           height={1080}
         />
@@ -79,21 +85,38 @@ export function HotThingsPage() {
           className="absolute top-1/2 left-1/2 w-full -translate-x-1/2 -translate-y-1/2"
           ref={playerRef}
           autoPlay
-        />
+        >
+          <track
+            default
+            kind="captions"
+            srcLang={locale}
+            src={
+              config.content.assets.hotThings.vtt[locale] ??
+              config.content.assets.hotThings.vtt.en
+            }
+            label={t('content.hotThings.hotThingsVtt')}
+          />
+        </video>
         {!isDisallowed && isCapable && (
           <button
+            type="button"
             className="absolute top-1/2 left-1/2 translate-[-50%] cursor-pointer text-7xl"
             onClick={onIntent}
             hidden={Boolean(stream)}
-            aria-label={t('hotThings.playVideo')}>
+            aria-label={t('content.hotThings.playVideo')}
+          >
             <Icon icon="play" />
           </button>
         )}
         {isDisallowed && (
           <div
+            role="alert"
             className="text-error absolute top-1/2 left-1/2 translate-[-50%] text-7xl"
-            aria-label={t('hotThings.videoPlaybackFailed')}>
-            <Icon icon="failed" />
+          >
+            <Icon
+              icon="failed"
+              aria-label={t('content.hotThings.videoPlaybackFailed')}
+            />
           </div>
         )}
       </div>

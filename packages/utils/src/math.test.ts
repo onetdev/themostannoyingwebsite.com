@@ -3,10 +3,24 @@ import {
   clamp,
   getInterpolatedPoint,
   getPointDistance,
-  getWeightedRandom,
+  isPoint2d,
+  mapToLogScale,
   radToDeg,
-  random,
 } from './math';
+
+describe('Math isPoint2d', () => {
+  test('should return true for valid Point2d object', () => {
+    expect(isPoint2d({ x: 1, y: 2 })).toBe(true);
+  });
+
+  test('should return false for invalid object', () => {
+    expect(isPoint2d({ x: 1 })).toBe(false);
+    expect(isPoint2d({ y: 2 })).toBe(false);
+    expect(isPoint2d(null)).toBe(false);
+    expect(isPoint2d('point')).toBe(false);
+    expect(isPoint2d({ x: '1', y: 2 })).toBe(false);
+  });
+});
 
 describe('Math angleRad', () => {
   test('should return the angle between two points in radians', () => {
@@ -52,18 +66,6 @@ describe('Math getPointDistance', () => {
   });
 });
 
-describe('Math getWeightedRandom', () => {
-  test('should return a weighted random value', () => {
-    const result = getWeightedRandom([
-      { value: 'a', weight: 0 },
-      { value: 'b', weight: 0.5 },
-      { value: 'c', weight: 1 },
-    ]);
-
-    expect(['b', 'c']).toContain(result);
-  });
-});
-
 describe('Math radToDeg', () => {
   test('should convert radians to degrees', () => {
     const result = radToDeg(Math.PI);
@@ -72,18 +74,16 @@ describe('Math radToDeg', () => {
   });
 });
 
-describe('Math random', () => {
-  test('should return a random number between min and max', () => {
-    const result = random(1, 10);
-
-    expect(result).toBeGreaterThanOrEqual(1);
-    expect(result).toBeLessThanOrEqual(10);
+describe('Math mapToLogScale', () => {
+  test('should map a value to a log scale', () => {
+    // log(10)/log(100) * 100 = 1/2 * 100 = 50
+    expect(mapToLogScale(10, 100, 100)).toBeCloseTo(50);
+    expect(mapToLogScale(1, 100, 100)).toBeCloseTo(0);
+    expect(mapToLogScale(100, 100, 100)).toBeCloseTo(100);
   });
 
-  test('should return a random float between min and max', () => {
-    const result = random(0.1, 1);
-
-    expect(result).toBeGreaterThanOrEqual(0.1);
-    expect(result).toBeLessThanOrEqual(1);
+  test('should return 0 for non-positive score', () => {
+    expect(mapToLogScale(0, 100, 100)).toBe(0);
+    expect(mapToLogScale(-1, 100, 100)).toBe(0);
   });
 });

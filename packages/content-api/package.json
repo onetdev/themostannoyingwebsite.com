@@ -13,8 +13,9 @@
     "build:index": "tsx ./scripts/build-index.ts",
     "build:schema": "tsx ./scripts/build-json-schema.ts",
     "check-types": "tsc --noEmit",
-    "lint": "eslint . --ext .ts,.tsx",
-    "lint:fix": "eslint . --ext .ts,.tsx --fix"
+    "lint": "biome check .",
+    "format": "biome format --write .",
+    "lint:fix": "biome check --write ."
   },
   "dependencies": {
     "@maw/logger": "workspace:^",
@@ -25,11 +26,10 @@
     "zod-to-json-schema": "^3.25.1"
   },
   "devDependencies": {
-    "@maw/config-eslint": "workspace:*",
+    "@biomejs/biome": "catalog:",
     "@maw/config-ts": "workspace:*",
     "@maw/utils": "workspace:*",
     "@types/sanitize-html": "catalog:",
-    "eslint": "catalog:",
     "sharp": "catalog:",
     "tsx": "catalog:",
     "typescript": "catalog:"

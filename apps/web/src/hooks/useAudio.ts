@@ -1,44 +1,37 @@
 'use client';
 
-import { useEffect, useRef, useState } from 'react';
+import { useAudio as useAudioReactUse } from 'react-use';
+import { useUserPreferencesStore } from '@/stores';
 
 /**
- * Allows to play audio files after the first user interaction has happened
- * othwerwise the audio will not be played and an exception will be thrown.
- *   NotAllowedError: The play method is not allowed by the user agent or
- *   the platform in the current context, possibly because the user denied
- *   permission.
+ * Wrapper for react-use useAudio that handles checking if sound is enabled
+ * in user preferences before playing.
  */
 export const useAudio = (url: string) => {
-  const audio = useRef<HTMLAudioElement>(null);
-  const [playing, setPlaying] = useState(false);
+  const enableSound = useUserPreferencesStore((state) => state.enableSound);
+  const [audio, state, controls] = useAudioReactUse({ src: url });
 
-  const toggle = () => setPlaying((prev) => !prev);
-  const play = () => setPlaying(true);
-
-  useEffect(() => {
-    if (playing) {
-      audio.current?.play();
-    } else {
-      audio.current?.pause();
+  const play = () => {
+    if (enableSound) {
+      controls.play();
     }
-  }, [audio, playing]);
+  };
 
-  useEffect(() => {
-    const audioInstance = new Audio(url);
-    audio.current = audioInstance;
-    audio.current?.addEventListener('ended', () => setPlaying(false));
-
-    return () => {
-      audioInstance?.pause();
-      audio.current?.removeEventListener('ended', () => setPlaying(false));
-      audio.current = null;
-    };
-  }, [url]);
+  const toggle = () => {
+    if (state.playing) {
+      controls.pause();
+    } else if (enableSound) {
+      controls.play();
+    }
+  };
 
   return {
-    playing,
-    toggle,
+    audio,
+    state,
+    controls,
+    // Helper shortcuts
     play,
+    toggle,
+    playing: state.playing,
   };
 };

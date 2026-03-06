@@ -4,6 +4,7 @@ import {
 } from '@maw/utils/browser';
 import { create } from 'zustand';
 import { createJSONStorage, persist } from 'zustand/middleware';
+import { broadcastChannelSync } from '@/stores/utils/sync';
 
 export const USER_GRANTS_STORAGE_KEY = 'zustand-user-grants-storage';
 
@@ -29,7 +30,8 @@ export interface UserGrantsStateActions {
 }
 
 export interface UserGrantsStore
-  extends UserGrantsState, UserGrantsStateActions {}
+  extends UserGrantsState,
+    UserGrantsStateActions {}
 
 const initialState: UserGrantsState = {
   reviewCompleted: false,
@@ -41,7 +43,7 @@ const initialState: UserGrantsState = {
 
 export const useUserGrantsStore = create<UserGrantsStore>()(
   persist(
-    (set) => ({
+    broadcastChannelSync<UserGrantsStore>(USER_GRANTS_STORAGE_KEY)((set) => ({
       ...initialState,
       setReviewCompleted: (reviewCompleted) => set({ reviewCompleted }),
       setCookieConsent: (cookies) =>
@@ -77,7 +79,7 @@ export const useUserGrantsStore = create<UserGrantsStore>()(
           },
         });
       },
-    }),
+    })),
     {
       name: USER_GRANTS_STORAGE_KEY,
       storage: createJSONStorage(() => localStorage),

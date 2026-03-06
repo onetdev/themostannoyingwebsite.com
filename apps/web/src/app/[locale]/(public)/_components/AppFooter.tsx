@@ -1,9 +1,10 @@
 import { getTranslations } from 'next-intl/server';
-import { ComponentProps } from 'react';
+import type { ComponentProps } from 'react';
 
 import { FOOTER_NAVIGATION_LINKS } from '@/app/navigation';
 import { Link } from '@/i18n/navigation';
 import { getAppConfigService } from '@/services';
+import { AppLanguageSwitcher } from './AppLanguageSwitcher';
 
 export type AppFooterProps = {
   className: ComponentProps<'footer'>['className'];
@@ -19,19 +20,20 @@ export async function AppFooter({ className }: AppFooterProps) {
   }));
 
   return (
-    <footer
-      id="footer"
-      role="contentinfo"
-      className={`border-border border-t ${className}`}>
-      <div className="flex flex-wrap justify-center gap-x-5 gap-y-2 px-5 py-5">
+    <footer id="footer" className={`border-border border-t ${className}`}>
+      <div className="flex flex-wrap items-center justify-center gap-x-5 gap-y-2 px-5 py-5">
         {links.map((link) => (
           <Link
             key={link.href}
             href={link.href}
-            className="text-xs hover:underline">
+            className="text-xs hover:underline"
+          >
             {link.label}
           </Link>
         ))}
+        <div className="w-full sm:w-auto">
+          <AppLanguageSwitcher className="h-8 w-full sm:w-40" />
+        </div>
       </div>
 
       <div className="text-muted-foreground border-border border-t px-5 py-5 text-center text-xs">
@@ -50,7 +52,8 @@ export async function AppFooter({ className }: AppFooterProps) {
                 target="_blank"
                 rel="noopener noreferrer"
                 prefetch={false}
-                className="hover:underline">
+                className="hover:underline"
+              >
                 {chunks}
               </Link>
             ),

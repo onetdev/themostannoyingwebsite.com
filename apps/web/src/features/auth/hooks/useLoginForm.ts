@@ -2,13 +2,15 @@
 
 import { useLogger } from '@maw/logger';
 import { useForm } from 'react-hook-form';
-
-import { useAuthFormError } from './useAuthFormError';
-import { useAuthService } from '../hooks';
-import { getLoginFormDataSchema, LoginFormData, User } from '../schemas';
-import { LoginUseCaseParams } from '../types';
-
 import { useZodFormValidator } from '@/hooks';
+import { useAuthService } from '../hooks';
+import {
+  getLoginFormDataSchema,
+  type LoginFormData,
+  type User,
+} from '../schemas';
+import type { LoginUseCaseParams } from '../types';
+import { useAuthFormError } from './useAuthFormError';
 
 interface LoginFormProps {
   onSuccess?: (user: User) => void;

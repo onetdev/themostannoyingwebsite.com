@@ -1,16 +1,13 @@
-import { type Page } from '@playwright/test';
+import type { Page } from '@playwright/test';
 
-import { getFooter } from './shared/Footer';
-import { getHeader } from './shared/Header';
+import { getSharedLocators } from './shared/Shared';
 
 export const getSettingsPage = (page: Page) => {
-  const header = getHeader(page);
-  const footer = getFooter(page);
+  const shared = getSharedLocators(page);
   const painPreferencesSection = page.getByTestId('pain-preferences');
 
   return {
-    ...header,
-    ...footer,
+    ...shared,
 
     headline: page.getByRole('heading', { name: 'Settings' }),
 

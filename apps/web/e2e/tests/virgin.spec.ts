@@ -1,9 +1,7 @@
 import { expect, test } from '@playwright/test';
-
+import { PAIN_PREFERENCES_STORAGE_KEY, PUBLIC_PAIN_POINT_LIST } from '@/stores';
 import { getVirginPage } from '../pages/VirginPage';
 import { setupE2eTestState } from '../utils/setup';
-
-import { PAIN_PREFERENCES_STORAGE_KEY, PUBLIC_PAIN_POINT_LIST } from '@/stores';
 
 test('visiting virgin page should turn off all pain points', async ({
   page,
@@ -20,12 +18,13 @@ test('visiting virgin page should turn off all pain points', async ({
   expect(localStorageState).not.toBeNull();
   expect(localStorageState.state).toEqual({
     flags: {
-      'gifts.detectAdblocker': false,
-      'gifts.flaps': false,
-      'gifts.oneByOne': false,
       'pageTitle.inactiveArrayPaged': false,
       'pageTitle.inactiveMarquee': false,
       'pageTitle.randomGlitch': false,
+      'promotions.detectAdblocker': false,
+      'promotions.flaps': false,
+      'promotions.oneByOne': false,
+      achievementNotifications: false,
       clipboardMarker: false,
       contentPaywall: false,
       deadPixel: false,
@@ -35,6 +34,7 @@ test('visiting virgin page should turn off all pain points', async ({
       mockChat: false,
       newsletterModal: false,
       notifications: false,
+      screensaver: false,
       searchDelay: false,
       stickyVideo: false,
       wheelOfFortune: false,
@@ -42,6 +42,10 @@ test('visiting virgin page should turn off all pain points', async ({
     publicLevel: {
       current: 0,
       max: PUBLIC_PAIN_POINT_LIST.length,
+    },
+    screensaver: {
+      timeoutSeconds: expect.any(Number),
+      variant: expect.any(String),
     },
   });
 });

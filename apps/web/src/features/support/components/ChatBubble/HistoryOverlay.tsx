@@ -7,10 +7,9 @@ import {
 } from '@maw/ui-lib';
 import { useTranslations } from 'next-intl';
 import { useEffect, useMemo, useRef, useState } from 'react';
-
+import type { ChatMessage } from '../../schemas';
 import { MessageBubble } from './MessageBubble';
 import { MessageForm } from './MessageForm';
-import { ChatMessage } from '../../schemas';
 
 export type HistoryOverlayProps = {
   history: ChatMessage[];
@@ -52,30 +51,31 @@ export function HistoryOverlay({
     <div className="border-secondary bg-card rounded-lg border">
       <div className="flex flex-row justify-between p-3 pl-5 shadow-xs">
         <h4 className="flex items-center gap-1 text-base font-bold">
-          {t('chatBubble.hudTitle')}
+          {t('support.chatBubble.hudTitle')}
           <Tooltip>
             <TooltipTrigger asChild>
               <span className="cursor-help font-normal">*</span>
             </TooltipTrigger>
             <TooltipContent side="top">
-              {t('chatBubble.hudTitleDisclaimer')}
+              {t('support.chatBubble.hudTitleDisclaimer')}
             </TooltipContent>
           </Tooltip>
         </h4>
-        <button onClick={() => onClose()}>
+        <button type="button" onClick={() => onClose()}>
           <Icon icon="close" />
         </button>
       </div>
       <div
         className="max-h-clamp-300-screen-half flex flex-col gap-2 overflow-auto px-5 py-3"
-        ref={pagerRef}>
+        ref={pagerRef}
+      >
         {history.length > 0 &&
           historyViewData.map(({ item, showTime }, index) => (
             <MessageBubble key={index} item={item} showTime={showTime} />
           ))}
         {showTyping && (
           <DotDotDotText
-            message={t('chatBubble.agentIsTyping')}
+            message={t('support.chatBubble.agentIsTyping')}
             className="block text-sm italic md:text-base"
           />
         )}

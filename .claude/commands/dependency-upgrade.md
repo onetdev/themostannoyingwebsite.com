@@ -28,12 +28,12 @@ Upgrade dependency version numbers across the monorepo and verify the repo still
    - `catalog` section in `pnpm-workspace.yaml`
 
    Create logical groupings:
-   - **Group 1: Next.js Ecosystem** (next, react, react-dom, @next/*, eslint-config-next, etc.)
-   - **Group 2: TypeScript & Build Tools** (typescript, typescript-eslint, @types/*, tsx, ts-node, ts-jest)
+   - **Group 1: Next.js Ecosystem** (next, react, react-dom, @next/*, etc.)
+   - **Group 2: TypeScript & Tooling** (typescript, @types/*, tsx, ts-node, ts-jest, @biomejs/biome, turbo)
    - **Group 3: Storybook** (@storybook/*, storybook)
    - **Group 4: Testing** (jest, @jest/*, @testing-library/*, playwright, @playwright/test)
    - **Group 5: UI & Styling** (tailwindcss, @tailwindcss/*, postcss)
-   - **Group 6: Linting & Formatting** (eslint, eslint-plugin-*, prettier, prettier-plugin-*)
+   - **Group 6: Git & Workflow Tools** (husky, lint-staged, @commitlint/*)
    - **Group 7: Other Dependencies** (group remaining packages logically)
 
    Display each group with:

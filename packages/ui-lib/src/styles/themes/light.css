@@ -1,7 +1,8 @@
-@reference 'tailwindcss';
+@reference "tailwindcss";
 
 @layer theme {
-  :root:not([data-theme='dark']), [data-theme='light'] {
+  :root:not([data-theme="dark"]),
+  [data-theme="light"] {
     /* Main Layout */
     --background: #f4f6f9;
     --foreground: #40464c;
