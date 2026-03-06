@@ -43,7 +43,7 @@ export function CommentSection({ className, items }: CommentSectionProps) {
         <CardTitle>{t('comments.sectionTitle')}</CardTitle>
         <CardAction>
           <Button asChild>
-            <a href="#create-comment">{t('common.reply')}</a>
+            <a href="#create-comment">{t('common.action.reply')}</a>
           </Button>
         </CardAction>
       </CardHeader>

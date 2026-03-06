@@ -20,13 +20,14 @@ export const ActiveNavigationItems = [
 export type ActiveNavigationItem = (typeof ActiveNavigationItems)[number];
 
 export type NavItem = {
-  key: string;
-  labelKey: string;
-  path: string;
+  hideLabel?: boolean;
   icon?: IconAliaseKey;
+  key: string;
+  labelKey: AppTranslationKey;
+  path: string;
 };
 
-export const SITE_NAVIGATION_LINKS = [
+export const SITE_NAVIGATION_LINKS: NavItem[] = [
   { key: 'home', labelKey: 'navigation.home', path: '/' },
   { key: 'hot-things', labelKey: 'navigation.hotThings', path: '/hot-things' },
   { key: 'dilf', labelKey: 'navigation.dilf', path: '/dilf' },
@@ -36,20 +37,23 @@ export const SITE_NAVIGATION_LINKS = [
   { key: 'contact', labelKey: 'navigation.contact', path: '/contact' },
 ];
 
-export const PERSONAL_NAVIGATION_LINKS = [
+export const PERSONAL_NAVIGATION_LINKS: NavItem[] = [
   {
+    hideLabel: true,
     icon: 'trophy' as const,
     key: 'achievements',
     labelKey: 'navigation.achievements',
     path: '/achievements',
   },
   {
+    hideLabel: true,
     icon: 'share' as const,
     key: 'global-share',
-    labelKey: 'common.share',
+    labelKey: 'common.action.share',
     path: '#share',
   },
   {
+    hideLabel: true,
     icon: 'settings' as const,
     key: 'settings',
     labelKey: 'navigation.settings',
@@ -63,7 +67,7 @@ export const PERSONAL_NAVIGATION_LINKS = [
   },
 ];
 
-export const FOOTER_NAVIGATION_LINKS = [
+export const FOOTER_NAVIGATION_LINKS: NavItem[] = [
   ...SITE_NAVIGATION_LINKS,
   { key: 'signup', labelKey: 'navigation.signup', path: '/user/signup' },
   {

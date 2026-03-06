@@ -3,7 +3,7 @@
 import { Button, FieldError, LoaderDots, PageHeadline } from '@maw/ui-lib';
 import { useTranslations } from 'next-intl';
 import { FormProvider } from 'react-hook-form';
-import { CaptchaField } from '@/features/human-verification/components';
+import { CaptchaField } from '@/features/captcha/components';
 import { useNavigationProvider } from '@/navigation/NavigationContext';
 import { useSignupForm } from '../../hooks';
 import {
@@ -21,7 +21,7 @@ import {
   PasswordCreateField,
   PhoneNumberField,
   UsernameField,
-} from '../fields';
+} from '../_fields';
 
 export function SignupForm() {
   const t = useTranslations();
@@ -81,14 +81,14 @@ export function SignupForm() {
             disabled={isCtaDisabled}
           >
             {isCtaLoading && <LoaderDots />}
-            {!isCtaLoading && t('user.form.signup.callToAction')}
+            {!isCtaLoading && t('auth.form.signup.callToAction')}
           </Button>
           <div className="flex justify-between">
             <Link href={pathFor('user.password-reminder')} prefetch={false}>
-              {t('user.common.forgotPassword')}
+              {t('auth.common.forgotPassword')}
             </Link>
             <Link href={pathFor('user.login')} prefetch={false}>
-              {t('user.common.Login')}
+              {t('auth.common.Login')}
             </Link>
           </div>
         </div>

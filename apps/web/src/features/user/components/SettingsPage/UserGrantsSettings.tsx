@@ -18,10 +18,10 @@ export function UserGrantsSettings() {
   return (
     <Card data-testid="user-grants-settings">
       <CardHeader>
-        <CardTitle>{t('settings.userGrants.title')}</CardTitle>
+        <CardTitle>{t('user.userGrants.title')}</CardTitle>
       </CardHeader>
       <CardContent className="flex flex-col gap-1">
-        <SettingsField label={t('settings.userGrants.essentialCookies')}>
+        <SettingsField label={t('user.userGrants.essentialCookies')}>
           <FormCheckbox
             name="essential_cookies"
             checked={grant.cookies.essential}
@@ -29,19 +29,16 @@ export function UserGrantsSettings() {
           />
         </SettingsField>
         <small className="text-muted-foreground py-5">
-          <i>{t('settings.userGrants.permissionDisclaimer')}</i>
+          <i>{t('user.userGrants.permissionDisclaimer')}</i>
         </small>
         <SettingsField
-          label={t('settings.userGrants.notificationPermission')}
+          label={t('user.userGrants.notificationPermission')}
           reverse
         >
-          {`${grant.permission.notification || t('common.notSet')}`}
+          {`${grant.permission.notification || t('common.state.notSet')}`}
         </SettingsField>
-        <SettingsField
-          label={t('settings.userGrants.locationPermission')}
-          reverse
-        >
-          {`${grant.permission.location || t('common.notSet')}`}
+        <SettingsField label={t('user.userGrants.locationPermission')} reverse>
+          {`${grant.permission.location || t('common.state.notSet')}`}
         </SettingsField>
       </CardContent>
     </Card>

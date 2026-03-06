@@ -6,7 +6,7 @@ import type {
   ArticleData,
   ArticleDatum,
   ArticleFilter,
-  ArticleLookupIdentifier,
+  ArticleLookupFilter,
   ArticleSearchFilter,
   ArticleSearchResult,
 } from '../types';
@@ -29,38 +29,22 @@ export class ArticleService {
   articles: ArticleDatum[];
 
   constructor({ getAssetUrl, getUrl }: ArticleServiceProps) {
-    this.articles = articlesRaw.map(
-      (article: ArticleIndexEntrySchema) =>
-        ({
-          assetGroupId: article.directory,
-          content: article.content,
-          coverImages: article.hasCoverImage
-            ? {
-                original: getAssetUrl(`${article.directory}/cover.webp`),
-                thumbnail: getAssetUrl(
-                  `${article.directory}/cover-480x270.webp`,
-                ),
-              }
-            : undefined,
-          intro: article.intro,
-          isHighlighted: article.isHighlighted,
-          isOnCover: article.isOnCover,
-          locale: article.locale,
-          publishedAt: new Date(article.publishedAt),
-          slug: article.slug,
-          title: article.title,
-          url: getUrl(article),
-        }) satisfies ArticleDatum,
+    this.articles = articlesRaw.map((article: ArticleIndexEntrySchema) =>
+      mapIndexEntryToContent(article, getAssetUrl, getUrl),
     );
   }
 
   public async getByLookup(
-    filter: ArticleLookupIdentifier,
+    filter: ArticleLookupFilter,
   ): Promise<ArticleDatum | undefined> {
-    return this.articles.find(
-      (article) =>
-        article.slug === filter.slug && article.locale === filter.locale,
-    );
+    return this.articles.find((article) => isArticleMatching(article, filter));
+  }
+
+  public async getById(
+    id: string | number,
+    locale?: string,
+  ): Promise<ArticleDatum | undefined> {
+    return this.getByLookup({ id: id.toString(), locale });
   }
 
   public async search({
@@ -68,6 +52,9 @@ export class ArticleService {
     params,
     paginate,
   }: ArticleSearchFilter): Promise<ArticleSearchResult[]> {
+    const take = paginate?.take ?? defaultPageSize;
+    const skip = paginate?.skip || 0;
+
     const pool = await this.getMany({
       params,
       paginate: { take: -1, skip: 0 },
@@ -91,7 +78,7 @@ export class ArticleService {
       })
       .filter((item) => item !== null)
       .sort((a, b) => b.stats.cumScore - a.stats.cumScore)
-      .slice(paginate?.skip || 0, paginate?.take ?? defaultPageSize)
+      .slice(skip, take === -1 ? undefined : skip + take)
       .map((item) => ({
         lookup: {
           slug: item.article.slug,
@@ -107,13 +94,11 @@ export class ArticleService {
     sort = { date: 'desc' },
     paginate,
   }: ArticleFilter): Promise<ArticleData> {
-    let results = this.articles.filter((article) => {
-      return (
-        (!params.locale || article.locale === params.locale) &&
-        propFilterBool(article, 'isHighlighted', params.isHighlighted) &&
-        propFilterBool(article, 'isOnCover', params.isOnCover)
-      );
-    });
+    const take = paginate?.take ?? defaultPageSize;
+    const skip = paginate?.skip || 0;
+    let results = this.articles.filter((article) =>
+      isArticleMatching(article, params),
+    );
 
     if (sort) {
       results = results.sort((a, b) => {
@@ -130,13 +115,10 @@ export class ArticleService {
     }
 
     return {
-      items: results.slice(
-        paginate?.skip || 0,
-        paginate?.take ?? defaultPageSize,
-      ),
+      items: results.slice(skip, take === -1 ? undefined : skip + take),
       total: results.length,
-      take: paginate?.take ?? defaultPageSize,
-      skip: paginate?.skip ?? 0,
+      take,
+      skip,
     };
   }
 
@@ -151,11 +133,58 @@ export class ArticleService {
   }
 }
 
-const propFilterBool = (
+const propBoolCheck = (
   article: ArticleDatum,
   prop: keyof ArticleDatum,
   value?: boolean,
 ) =>
-  article[prop] === value ||
   typeof value === 'undefined' ||
+  article[prop] === value ||
   (article[prop] === undefined && value !== true);
+
+const mapIndexEntryToContent = (
+  article: ArticleIndexEntrySchema,
+  getAssetUrl: (path: string) => string,
+  getUrl: (item: ArticleIndexEntrySchema) => string,
+) => {
+  let coverImages: ArticleDatum['coverImages'];
+  if (article.coverImage) {
+    const thumbnail = getAssetUrl(
+      `${article.coverImage.replace(/\.[^/.]+$/, '')}-480x270.gen.webp`,
+    );
+    coverImages = {
+      original: getAssetUrl(article.coverImage),
+      thumbnail,
+    };
+  }
+
+  return {
+    assetGroupId: article.directory,
+    content: article.content,
+    coverImages,
+    id: article.id,
+    intro: article.intro,
+    isOnCover: article.isOnCover,
+    locale: article.locale,
+    publishedAt: new Date(article.publishedAt),
+    slug: article.slug,
+    title: article.title,
+    url: getUrl(article),
+  } satisfies ArticleDatum;
+};
+
+const isArticleMatching = (
+  article: ArticleDatum,
+  filter: ArticleLookupFilter,
+) => {
+  const isFuture = article.publishedAt > new Date();
+  const shouldIncludeFuture = filter.includeFuture ?? false;
+
+  return (
+    (!isFuture || shouldIncludeFuture) &&
+    (!filter.locale || article.locale === filter.locale) &&
+    (!filter.id || article.id === filter.id) &&
+    (!filter.slug || article.slug === filter.slug) &&
+    propBoolCheck(article, 'isOnCover', filter.isOnCover)
+  );
+};

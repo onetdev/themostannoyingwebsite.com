@@ -5,7 +5,7 @@ import { useTranslations } from 'next-intl';
 import type { AuthError } from '../schemas';
 
 export function useAuthFormError() {
-  const t = useTranslations('form.validation.error');
+  const t = useTranslations('common.validation.error');
 
   const errorTranslations: Record<AuthError, string> = {
     IMPOSSIBLE_PATH: t('impossiblePath'),

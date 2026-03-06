@@ -9,9 +9,9 @@ import { useRuntimeStore } from '@/stores';
 import type { ChatMessage, ChatMessageType } from '../schemas';
 
 export function useChatBubbleHistory() {
-  const t = useTranslations();
+  const t = useTranslations('support.chatBubble');
   const config = useAppConfigContext();
-  const messages = useMessages();
+  const messages = useMessages() as AppTranslationShape;
   const hasInteracted = useRuntimeStore(
     (state) => state.userActivation.unlocked,
   );
@@ -24,14 +24,10 @@ export function useChatBubbleHistory() {
   );
 
   const botMessageVariants = useMemo(() => {
-    const all = Object.keys(messages.chatBubble.messageVariants).map((key) =>
-      t(`chatBubble.messageVariants.${key}`),
-    );
-
-    return all.filter(
+    return Object.values(messages.support.chatBubble.messageVariants).filter(
       (message) => !history.some((item) => item.text === message),
     );
-  }, [history, messages, t]);
+  }, [history, messages]);
 
   const add = useCallback((message: string, owner: ChatMessageType) => {
     setHistory((prev) => [...prev, { text: message, owner, time: new Date() }]);
@@ -40,7 +36,7 @@ export function useChatBubbleHistory() {
   const sendNotification = useCallback(
     (message: string) => {
       notification.send({
-        title: t('chatBubble.newAlert'),
+        title: t('newAlert'),
         body: message,
       });
     },
@@ -49,7 +45,7 @@ export function useChatBubbleHistory() {
 
   const addRandomBotItem = useCallback(() => {
     if (botMessageVariants.length === 0) {
-      botMessageVariants.push(t('chatBubble.messageFallback'));
+      botMessageVariants.push(t('messageFallback'));
     }
     const randomMessage =
       botMessageVariants[Math.floor(Math.random() * botMessageVariants.length)];
@@ -88,8 +84,8 @@ export function useChatBubbleHistory() {
 
       return [
         {
-          text: t('chatBubble.messageInitial'),
-          owner: 'bot',
+          text: t('messageInitial'),
+          owner: 'bot' as const,
           time: new Date(),
         },
       ];

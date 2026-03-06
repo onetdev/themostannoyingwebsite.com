@@ -4,6 +4,7 @@ import type { ComponentProps } from 'react';
 import { FOOTER_NAVIGATION_LINKS } from '@/app/navigation';
 import { Link } from '@/i18n/navigation';
 import { getAppConfigService } from '@/services';
+import { AppLanguageSwitcher } from './AppLanguageSwitcher';
 
 export type AppFooterProps = {
   className: ComponentProps<'footer'>['className'];
@@ -20,7 +21,7 @@ export async function AppFooter({ className }: AppFooterProps) {
 
   return (
     <footer id="footer" className={`border-border border-t ${className}`}>
-      <div className="flex flex-wrap justify-center gap-x-5 gap-y-2 px-5 py-5">
+      <div className="flex flex-wrap items-center justify-center gap-x-5 gap-y-2 px-5 py-5">
         {links.map((link) => (
           <Link
             key={link.href}
@@ -30,6 +31,9 @@ export async function AppFooter({ className }: AppFooterProps) {
             {link.label}
           </Link>
         ))}
+        <div className="w-full sm:w-auto">
+          <AppLanguageSwitcher className="h-8 w-full sm:w-40" />
+        </div>
       </div>
 
       <div className="text-muted-foreground border-border border-t px-5 py-5 text-center text-xs">

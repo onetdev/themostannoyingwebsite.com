@@ -1,7 +1,7 @@
 import { PageHeadline } from '@maw/ui-lib';
 import type { Metadata } from 'next';
 import { getTranslations } from 'next-intl/server';
-import { DonationPage } from '@/features/donation/components';
+import { DonationPage } from '@/features/funding/components';
 import { PageLayout } from '../_components/PageLayout';
 
 export { generateStaticParams } from '@/i18n/routing';

@@ -8,6 +8,7 @@ import {
   TabsList,
   TabsTrigger,
 } from '@maw/ui-lib';
+import { useTranslations } from 'next-intl';
 import config from '@/core/config';
 import { useAchievementsStore } from '@/features/achievements/stores';
 import { useMonitoringStore } from '@/features/monitoring/stores';
@@ -23,6 +24,7 @@ import { EventTester } from './EventTester';
 import { StoreInspector } from './StoreInspector';
 
 export function DebugPage() {
+  const t = useTranslations();
   const runtime = useRuntimeStore();
   const monitoring = useMonitoringStore();
   const painPreferences = usePainPreferencesStore();
@@ -40,11 +42,11 @@ export function DebugPage() {
               DEBUG_MODE
             </PageHeadline>
             <span className="font-mono text-xs opacity-50 uppercase tracking-widest hidden sm:inline">
-              Internal Use Only
+              {t('monitoring.internalOnly')}
             </span>
           </div>
           <Button variant="outline" size="sm" onClick={logout}>
-            Logout
+            {t('monitoring.logout')}
           </Button>
         </div>
 
@@ -57,36 +59,48 @@ export function DebugPage() {
               value="stores"
               className="px-6 py-3 font-medium transition-colors"
             >
-              Store Inspector
+              {t('monitoring.tabs.stores')}
             </TabsTrigger>
             <TabsTrigger
               value="events"
               className="px-6 py-3 font-medium transition-colors"
             >
-              Event Tester
+              {t('monitoring.tabs.events')}
             </TabsTrigger>
             <TabsTrigger
               value="config"
               className="px-6 py-3 font-medium transition-colors"
             >
-              Static Config
+              {t('monitoring.tabs.config')}
             </TabsTrigger>
           </TabsList>
 
           <TabsContent value="stores">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-              <StoreInspector title="Runtime Store" data={runtime} />
-              <StoreInspector title="Monitoring Store" data={monitoring} />
               <StoreInspector
-                title="Pain Preferences Store"
+                title={t('monitoring.storeInspector.runtime')}
+                data={runtime}
+              />
+              <StoreInspector
+                title={t('monitoring.storeInspector.monitoring')}
+                data={monitoring}
+              />
+              <StoreInspector
+                title={t('monitoring.storeInspector.painPreferences')}
                 data={painPreferences}
               />
-              <StoreInspector title="Achievements Store" data={achievements} />
               <StoreInspector
-                title="User Preferences Store"
+                title={t('monitoring.storeInspector.achievements')}
+                data={achievements}
+              />
+              <StoreInspector
+                title={t('monitoring.storeInspector.userPreferences')}
                 data={userPreferences}
               />
-              <StoreInspector title="User Grants Store" data={userGrants} />
+              <StoreInspector
+                title={t('monitoring.storeInspector.userGrants')}
+                data={userGrants}
+              />
             </div>
           </TabsContent>
 
@@ -98,7 +112,10 @@ export function DebugPage() {
 
           <TabsContent value="config">
             <div className="space-y-6">
-              <StoreInspector title="App Configuration" data={config} />
+              <StoreInspector
+                title={t('monitoring.storeInspector.appConfig')}
+                data={config}
+              />
             </div>
           </TabsContent>
         </Tabs>

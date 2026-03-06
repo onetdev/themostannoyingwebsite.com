@@ -2,8 +2,8 @@ export type AchievementType = 'boolean' | 'progression';
 
 export interface AchievementDefinition {
   id: string;
-  nameKey: string;
-  descriptionKey: string;
+  nameKey: AppTranslationKey;
+  descriptionKey: AppTranslationKey;
   type: AchievementType;
   targetProgress?: number;
   secret?: boolean;

@@ -48,10 +48,10 @@ export function AchievementCard({ definition, state }: AchievementCardProps) {
               variant="default"
               className="bg-primary text-primary-foreground"
             >
-              {t('common.completed')}
+              {t('common.state.completed')}
             </Badge>
           ) : (
-            <Badge variant="outline">{t('common.pending')}</Badge>
+            <Badge variant="outline">{t('common.state.pending')}</Badge>
           )}
         </div>
       </CardHeader>
@@ -76,7 +76,7 @@ export function AchievementCard({ definition, state }: AchievementCardProps) {
 
         {state.completedAt && (
           <div className="mt-4 text-[10px] text-muted-foreground opacity-50">
-            {t('common.done')}:{' '}
+            {t('common.state.done')}:{' '}
             {new Date(state.completedAt).toLocaleDateString(locale)}
           </div>
         )}

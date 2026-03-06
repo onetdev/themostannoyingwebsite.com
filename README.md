@@ -70,14 +70,14 @@ pnpm test:e2e --headed
 
 # Run tests in UI mode (interactive)
 cd apps/web
-pnpx playwright test --ui
+pnpm exec playwright test --ui
 ```
 
 **View test results:**
 After running tests, you can view the HTML report:
 ```bash
 cd apps/web
-pnpx playwright show-report
+pnpm exec playwright show-report
 ```
 
 For detailed information about our E2E testing strategy, see `apps/web/e2e/README.md`.

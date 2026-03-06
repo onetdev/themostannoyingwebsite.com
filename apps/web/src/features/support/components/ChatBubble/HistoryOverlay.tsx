@@ -51,13 +51,13 @@ export function HistoryOverlay({
     <div className="border-secondary bg-card rounded-lg border">
       <div className="flex flex-row justify-between p-3 pl-5 shadow-xs">
         <h4 className="flex items-center gap-1 text-base font-bold">
-          {t('chatBubble.hudTitle')}
+          {t('support.chatBubble.hudTitle')}
           <Tooltip>
             <TooltipTrigger asChild>
               <span className="cursor-help font-normal">*</span>
             </TooltipTrigger>
             <TooltipContent side="top">
-              {t('chatBubble.hudTitleDisclaimer')}
+              {t('support.chatBubble.hudTitleDisclaimer')}
             </TooltipContent>
           </Tooltip>
         </h4>
@@ -75,7 +75,7 @@ export function HistoryOverlay({
           ))}
         {showTyping && (
           <DotDotDotText
-            message={t('chatBubble.agentIsTyping')}
+            message={t('support.chatBubble.agentIsTyping')}
             className="block text-sm italic md:text-base"
           />
         )}

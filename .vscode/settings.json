@@ -24,7 +24,11 @@
     "localStyles.*"
   ],
   "yaml.schemas": {
-    "packages/content-api/src/schemas/article-entry-simplified.schema.json": "./packages/content-api/data/*/data.yml"
+    "packages/content-api/src/schemas/article-shared.schema.json": "./packages/content-api/data/*/data.yml",
+    "packages/content-api/src/schemas/article-language.schema.json": [
+      "./packages/content-api/data/*/en.yml",
+      "./packages/content-api/data/*/hu.yml"
+    ]
   },
   "json.schemas": [
     {

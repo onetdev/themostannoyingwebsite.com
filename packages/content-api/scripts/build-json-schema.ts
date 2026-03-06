@@ -1,7 +1,10 @@
 import fs from 'node:fs';
 import { getLogger } from '@maw/logger';
 import { zodToJsonSchema } from 'zod-to-json-schema';
-
+import {
+  ArticleLanguageSchema,
+  ArticleSharedSchema,
+} from '@/schemas/article-entry';
 import articleEntrySimplifiedZod from '@/schemas/article-entry-simplified';
 import articleIndexEntryZod from '@/schemas/article-index-entry';
 import articleLocaleMetaZod from '@/schemas/article-locale-meta';
@@ -15,6 +18,12 @@ const logger = getLogger().getSubLogger({
 const writeMap = {
   './src/schemas/article-entry-simplified.schema.json': zodToJsonSchema(
     articleEntrySimplifiedZod as TypeConflictBypass,
+  ),
+  './src/schemas/article-shared.schema.json': zodToJsonSchema(
+    ArticleSharedSchema as TypeConflictBypass,
+  ),
+  './src/schemas/article-language.schema.json': zodToJsonSchema(
+    ArticleLanguageSchema as TypeConflictBypass,
   ),
   './src/schemas/article-index-entry.schema.json': zodToJsonSchema(
     articleIndexEntryZod as TypeConflictBypass,

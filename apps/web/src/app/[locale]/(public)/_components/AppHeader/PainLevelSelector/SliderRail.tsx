@@ -19,7 +19,7 @@ export function SliderRail({
   percentage = 100,
 }: SliderRailProps) {
   const [particles, setParticles] = useState<FireflyParticleProps[]>([]);
-  const t = useTranslations('painPreferences.levelSettings');
+  const t = useTranslations('user.painPreferences.levelSettings');
 
   useEffect(() => {
     const interval = setInterval(() => {

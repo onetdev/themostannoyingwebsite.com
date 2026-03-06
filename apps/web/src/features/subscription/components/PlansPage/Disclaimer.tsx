@@ -16,9 +16,9 @@ export function Disclaimer({
       {...props}
     >
       <Icon icon="failed" />
-      <AlertTitle>{t('plansPage.disclaimer.title')}</AlertTitle>
+      <AlertTitle>{t('subscription.landing.disclaimer.title')}</AlertTitle>
       <AlertDescription>
-        {t('plansPage.disclaimer.description')}
+        {t('subscription.landing.disclaimer.description')}
       </AlertDescription>
     </Alert>
   );

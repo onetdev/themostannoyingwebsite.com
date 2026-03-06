@@ -11,8 +11,8 @@
     "./math": "./src/math.ts",
     "./network": "./src/network.ts",
     "./promise": "./src/promise.ts",
+    "./random": "./src/random.ts",
     "./result": "./src/result.ts",
-    "./seed": "./src/seed.ts",
     "./string": "./src/string.ts"
   },
   "scripts": {

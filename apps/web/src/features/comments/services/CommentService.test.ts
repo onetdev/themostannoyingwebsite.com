@@ -17,14 +17,14 @@ describe('CommentService', () => {
   describe('getByArticle', () => {
     it('should call generateTree and filterByDate with correct arguments', async () => {
       const mockArticle: ArticleDatum = {
-        slug: 'test-article',
-        publishedAt: new Date('2023-01-01'),
-        title: 'Test Article',
         assetGroupId: 'test-group',
         content: 'test content',
-        isHighlighted: false,
+        id: '1',
         isOnCover: false,
         locale: 'en',
+        publishedAt: new Date('2023-01-01'),
+        slug: 'test-article',
+        title: 'Test Article',
         url: '/articles/test-article',
       };
 

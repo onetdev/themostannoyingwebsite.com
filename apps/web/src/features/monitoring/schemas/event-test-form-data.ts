@@ -4,7 +4,7 @@ export function getEventTestFormDataSchema(t: ZodTranslator) {
   return z.object({
     eventType: z
       .string()
-      .min(1, { message: t('form.validation.error.required') }),
+      .min(1, { message: t('common.validation.error.required') }),
     payload: z.string(),
   });
 }

@@ -28,10 +28,10 @@ Inside this folder, create a `data.yml` file containing the article's metadata. 
 
 ```yaml
 title: The title of an article
-language: en
 intro: A brief introduction for the article.
-dateTime: 2024-10-10T14:49:00Z
-mode: markdown # options: markdown | html (default is markdown)
+publishedAt: 2024-10-10T14:49:00Z
+contentFormat: markdown # options: markdown | html (default is markdown)
+coverImage: my-article-cover.webp
 content: |
   Intro paragraph.
 
@@ -40,7 +40,7 @@ content: |
   Another paragraph.
 ```
 
-Adding a `cover.webp` file for each article is strongly recommended.
+If you specify a `coverImage`, the file must exist in the `data/assets` directory. Thumbnails will be automatically generated during the index build process.
 
 ## Managing front page and highlights
 

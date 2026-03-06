@@ -13,7 +13,10 @@ import { BillingCycleSelector } from './BillingCycleSelector';
 import { Disclaimer } from './Disclaimer';
 import { PlanCard } from './PlanCard';
 import { PlanComparison } from './PlanComparison';
-import { SocialProof, type SocialProofProps } from './SocialProof';
+import {
+  PurchaseProofToast,
+  type PurchaseProofToastProps,
+} from './PurchaseProofToast';
 import {
   UrgencyCountdown,
   type UrgencyCountdownProps,
@@ -22,7 +25,7 @@ import {
 interface PlansPageProps {
   plans: SubscriptionPackage[];
   features: SubscriptionFeature[];
-  socialProofConfig: Pick<SocialProofProps, 'minDelayMs' | 'maxDelayMs'>;
+  socialProofConfig: Pick<PurchaseProofToastProps, 'minDelayMs' | 'maxDelayMs'>;
   urgencyConfig?: Pick<
     UrgencyCountdownProps,
     'discountPercentage' | 'timeoutSeconds'
@@ -56,9 +59,11 @@ export function PlansPage({
 
   return (
     <>
-      <SocialProof plans={plans} {...socialProofConfig} />
+      <PurchaseProofToast plans={plans} {...socialProofConfig} />
       <div className="mb-6 flex flex-col items-center justify-between gap-4 sm:flex-row">
-        <PageHeadline className="mb-0">{t('plansPage.headline')}</PageHeadline>
+        <PageHeadline className="mb-0">
+          {t('subscription.landing.headline')}
+        </PageHeadline>
       </div>
 
       <div className="mb-8 flex flex-col items-center gap-5 md:flex-row md:items-baseline md:justify-between">

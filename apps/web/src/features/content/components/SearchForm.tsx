@@ -61,13 +61,13 @@ export function SearchForm({
           <InputGroupInput
             defaultValue={initialValue}
             name="search"
-            placeholder={t('search.placeholder')}
+            placeholder={t('content.search.placeholder')}
             autoComplete="off"
             className={cn(searchFormVariants({ size }))}
           />
           <InputGroupAddon align="inline-end">
             <InputGroupButton
-              aria-label={t('common.search')}
+              aria-label={t('common.action.search')}
               type="submit"
               className={cn(searchFormVariants({ size }))}
             >

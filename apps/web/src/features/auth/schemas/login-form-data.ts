@@ -2,19 +2,19 @@ import { z } from 'zod';
 
 export function getLoginFormDataSchema(t: ZodTranslator) {
   return z.object({
-    email: z.email({ message: t('form.validation.error.emailInvalid') }),
+    email: z.email({ message: t('common.validation.error.emailInvalid') }),
     password: z
       .string()
-      .min(1, { message: t('form.validation.error.required') }),
+      .min(1, { message: t('common.validation.error.required') }),
     remember: z
       .boolean()
       .optional()
       .refine((val) => val !== undefined, {
-        message: t('form.validation.error.checkboxRequired'),
+        message: t('common.validation.error.checkboxRequired'),
       }),
     captcha: z
       .string()
-      .min(1, { message: t('form.validation.error.captchaRequired') }),
+      .min(1, { message: t('common.validation.error.captchaRequired') }),
   });
 }
 

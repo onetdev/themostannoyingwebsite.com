@@ -27,7 +27,7 @@ export function LargeCoverItem({ article, ...rest }: LargeCoverItemProps) {
           <Image
             className="h-auto w-full object-cover"
             src={article.coverImages.original}
-            alt={t('article.coverImage')}
+            alt={t('content.article.coverImage')}
             width="1920"
             height="1200"
           />

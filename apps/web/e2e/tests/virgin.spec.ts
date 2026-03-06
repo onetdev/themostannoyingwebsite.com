@@ -18,12 +18,13 @@ test('visiting virgin page should turn off all pain points', async ({
   expect(localStorageState).not.toBeNull();
   expect(localStorageState.state).toEqual({
     flags: {
-      'gifts.detectAdblocker': false,
-      'gifts.flaps': false,
-      'gifts.oneByOne': false,
       'pageTitle.inactiveArrayPaged': false,
       'pageTitle.inactiveMarquee': false,
       'pageTitle.randomGlitch': false,
+      'promotions.detectAdblocker': false,
+      'promotions.flaps': false,
+      'promotions.oneByOne': false,
+      achievementNotifications: false,
       clipboardMarker: false,
       contentPaywall: false,
       deadPixel: false,
@@ -37,7 +38,6 @@ test('visiting virgin page should turn off all pain points', async ({
       searchDelay: false,
       stickyVideo: false,
       wheelOfFortune: false,
-      achievementNotifications: false,
     },
     publicLevel: {
       current: 0,

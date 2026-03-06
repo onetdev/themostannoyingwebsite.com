@@ -30,7 +30,7 @@ export function SmallCoverListItem({
           <Image
             className="h-auto w-full rounded-sm object-cover"
             src={article.coverImages.thumbnail}
-            alt={t('article.coverImage')}
+            alt={t('content.article.coverImage')}
             width="1920"
             height="1200"
           />

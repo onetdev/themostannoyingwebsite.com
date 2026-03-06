@@ -19,17 +19,41 @@ export const revalidate = 1800;
 export async function generateMetadata({
   params,
 }: PageProps): Promise<Metadata> {
-  const { locale, slug } = await params;
+  const { slug, locale } = await params;
   const lookup = { slug, locale };
   const container = getDependencyContainer();
-  const data = await getAppArticleService(container).getByLookup(lookup);
+  const articleService = getAppArticleService(container);
+  const data = await articleService.getByLookup(lookup);
+
+  if (!data) {
+    return {};
+  }
+
+  const allTranslations = (
+    await articleService.getMany({
+      params: { id: data.id },
+      paginate: { take: -1 },
+    })
+  ).items;
+
+  const canonicalTranslation =
+    allTranslations.find((t) => t.locale === i18nConfig.defaultLocale) ||
+    allTranslations[0];
+
+  const languages = Object.fromEntries(
+    allTranslations.map((t) => [t.locale, `/${t.locale}/articles/${t.slug}`]),
+  );
 
   return {
-    title: data?.title,
+    title: data.title,
+    alternates: {
+      canonical: `/${canonicalTranslation.locale}/articles/${canonicalTranslation.slug}`,
+      languages,
+    },
     openGraph: {
-      title: data?.title,
-      description: data?.intro,
-      images: data?.coverImages?.original,
+      title: data.title,
+      description: data.intro,
+      images: data.coverImages?.original,
     },
   };
 }
@@ -39,8 +63,9 @@ export const generateStaticParams = async () => {
   const paths: PageParams[] = [];
 
   const container = getDependencyContainer();
+  const articleService = getAppArticleService(container);
   for (const locale of locales) {
-    const articles = await getAppArticleService(container).getMany({
+    const articles = await articleService.getMany({
       params: { locale },
       paginate: { take: -1 },
     });
@@ -58,7 +83,8 @@ export default async function Page({ params }: PageProps) {
   const lookup = { slug, locale };
 
   const container = getDependencyContainer();
-  const datum = await getAppArticleService(container).getByLookup(lookup);
+  const articleService = getAppArticleService(container);
+  const datum = await articleService.getByLookup(lookup);
 
   if (!datum) {
     return notFound();

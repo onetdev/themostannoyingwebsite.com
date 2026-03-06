@@ -13,10 +13,12 @@ import {
   FieldLabel,
   Input,
 } from '@maw/ui-lib';
+import { useTranslations } from 'next-intl';
 import type { PropsWithChildren } from 'react';
 import { useDebugAuth } from '../../hooks';
 
 export function DebugAuthGate({ children }: PropsWithChildren) {
+  const t = useTranslations();
   const {
     loginForm: {
       register,
@@ -35,22 +37,20 @@ export function DebugAuthGate({ children }: PropsWithChildren) {
     <div className="flex min-h-screen items-center justify-center p-4">
       <Card className="w-full max-w-md">
         <CardHeader>
-          <CardTitle>Restricted Access</CardTitle>
-          <CardDescription>
-            Enter the password to access the debug dashboard.
-          </CardDescription>
+          <CardTitle>{t('monitoring.auth.title')}</CardTitle>
+          <CardDescription>{t('monitoring.auth.description')}</CardDescription>
         </CardHeader>
         <CardContent>
           <form onSubmit={handleSubmit(onLogin)} className="space-y-4">
             <Field>
               <FieldLabel htmlFor="password" required>
-                Password
+                {t('monitoring.auth.passwordLabel')}
               </FieldLabel>
               <FieldContent>
                 <Input
                   id="password"
                   type="password"
-                  placeholder="••••••••"
+                  placeholder={t('monitoring.auth.passwordPlaceholder')}
                   autoFocus
                   aria-invalid={!!errors.password}
                   {...register('password')}
@@ -59,7 +59,7 @@ export function DebugAuthGate({ children }: PropsWithChildren) {
               </FieldContent>
             </Field>
             <Button type="submit" className="w-full">
-              Unlock Debug Mode
+              {t('monitoring.auth.submit')}
             </Button>
           </form>
         </CardContent>

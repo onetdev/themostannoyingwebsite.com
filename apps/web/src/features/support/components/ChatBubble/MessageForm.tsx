@@ -37,13 +37,13 @@ export function MessageForm({ className, onMessage }: MessageFormProps) {
       <InputGroup>
         <InputGroupInput
           name="message"
-          title={t('chatBubble.yourMessage')}
-          placeholder={t('chatBubble.yourMessagePlaceholder')}
+          title={t('support.chatBubble.yourMessage')}
+          placeholder={t('support.chatBubble.yourMessagePlaceholder')}
           ref={userMessage}
         />
         <InputGroupAddon align="inline-end">
           <InputGroupButton
-            aria-label={t('common.send')}
+            aria-label={t('common.action.send')}
             type="submit"
             size="sm"
           >

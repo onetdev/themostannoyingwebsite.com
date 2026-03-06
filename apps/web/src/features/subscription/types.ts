@@ -15,6 +15,11 @@ export interface SubscriptionPlansService {
   getPlans(): Promise<Result<SubscriptionPackage[], SubscriptionError>>;
 }
 
+export interface PurchaseProofVariants {
+  names: string[];
+  locations: string[];
+}
+
 declare global {
   interface AppEvents {
     'subscription:package-selected': {

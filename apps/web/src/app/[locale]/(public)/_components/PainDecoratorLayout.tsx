@@ -5,12 +5,12 @@ import {
   DeadPixel,
   GlobalStickyVideo,
   Screensaver,
-} from '@/features/obstructor/components';
+} from '@/features/disruptions/components';
 import {
   AdblockerSuspectBar,
   ContainerPromotionFlaps,
   WheelOfFortune,
-} from '@/features/promotion/components';
+} from '@/features/marketing/components';
 import { ChatBubble } from '@/features/support/components';
 import { usePainPreferencesStore, useUserGrantsStore } from '@/stores';
 import { CookieConsent } from './CookieConsent';
@@ -27,7 +27,7 @@ export function PainDecoratorLayout({
   const deadPixel = usePainPreferencesStore((state) => state.flags.deadPixel);
   const mockChat = usePainPreferencesStore((state) => state.flags.mockChat);
   const giftFlaps = usePainPreferencesStore(
-    (state) => state.flags['gifts.flaps'],
+    (state) => state.flags['promotions.flaps'],
   );
   const stickyVideo = usePainPreferencesStore(
     (state) => state.flags.stickyVideo,

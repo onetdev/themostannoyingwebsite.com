@@ -4,15 +4,15 @@ import { CopyMarker } from '@maw/ui-lib';
 import { useTranslations } from 'next-intl';
 import { type PropsWithChildren, useEffect } from 'react';
 import { emit } from '@/core/events/event-bus';
-import { PageTitleGlitch } from '@/features/interferrer/components';
+import { PageTitleGlitch } from '@/features/disruptions/components';
 import {
   useDisableContextMenu,
   useNavigationHistoryClutter,
   usePreventLeaving,
-} from '@/features/interferrer/hooks';
+} from '@/features/disruptions/hooks';
+import { NewsletterModalTrigger } from '@/features/marketing/components';
+import { useAdblockerDetector } from '@/features/marketing/hooks';
 import { useEventHistoryListener } from '@/features/monitoring/hooks';
-import { NewsletterModalTrigger } from '@/features/newsletter/components';
-import { useAdblockerDetector } from '@/features/promotion/hooks';
 import { NotificationPromptTrigger } from '@/features/user/components';
 import { usePainPreferencesStore, useUserGrantsStore } from '@/stores';
 

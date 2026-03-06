@@ -64,8 +64,8 @@ export function UrgencyCountdown({
       )}
     >
       {isExpired
-        ? t('plansPage.urgency.expired')
-        : t('plansPage.urgency.compact', {
+        ? t('subscription.landing.urgency.expired')
+        : t('subscription.landing.urgency.compact', {
             timer: formatTime(timeLeft),
             discount: discount ?? 0,
           })}

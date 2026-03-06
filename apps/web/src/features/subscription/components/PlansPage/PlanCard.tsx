@@ -63,7 +63,7 @@ export function PlanCard({
                 : 'bg-muted text-muted-foreground',
             )}
           >
-            {t('plansPage.mostPopular')}
+            {t('subscription.landing.mostPopular')}
           </div>
           <Separator />
         </>
@@ -80,7 +80,7 @@ export function PlanCard({
                 className="text-muted-foreground text-sm line-through"
                 data-testid="original-price"
               >
-                {t('plansPage.pricePerMonth', {
+                {t('subscription.landing.pricePerMonth', {
                   price: formatCurrency(priceBase),
                 })}
               </div>
@@ -89,12 +89,12 @@ export function PlanCard({
                 data-testid="discounted-price"
               >
                 <span>
-                  {t('plansPage.pricePerMonth', {
+                  {t('subscription.landing.pricePerMonth', {
                     price: formatCurrency(priceDiscountCorrected),
                   })}
                 </span>
                 <Badge className="ml-2">
-                  {t('plansPage.discount', {
+                  {t('subscription.landing.discount', {
                     amount: Math.round(cumulativeDiscountPercentage * 100),
                   })}
                 </Badge>
@@ -105,7 +105,7 @@ export function PlanCard({
               className="text-primary text-2xl font-bold"
               data-testid="original-price"
             >
-              {t('plansPage.pricePerMonth', {
+              {t('subscription.landing.pricePerMonth', {
                 price: formatCurrency(priceBase),
               })}
             </div>
@@ -117,10 +117,10 @@ export function PlanCard({
           className="text-muted-foreground mt-2 text-xs leading-tight italic"
           data-testid="charge-disclaimer"
         >
-          {t('plansPage.billing.chargeDisclaimer', {
+          {t('subscription.landing.billing.chargeDisclaimer', {
             amount: formatCurrency(totalCharge),
           })}{' '}
-          &mdash; {t(`plansPage.billing.cycle.${billingCycle}`)}*
+          &mdash; {t(`subscription.landing.billing.cycle.${billingCycle}`)}*
         </div>
       </CardContent>
       <CardFooter>
@@ -129,7 +129,7 @@ export function PlanCard({
           variant={isSelected ? 'default' : 'outline'}
           onClick={onSelect}
         >
-          {isSelected ? t('common.done') : t('common.select')}
+          {isSelected ? t('common.action.done') : t('common.action.select')}
         </Button>
       </CardFooter>
     </Card>

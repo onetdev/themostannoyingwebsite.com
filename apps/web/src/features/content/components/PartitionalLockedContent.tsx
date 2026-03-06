@@ -63,7 +63,7 @@ export function PartitionalLockedContent({
         onMouseEnter={() => setFlipActions((prev) => !prev)}
         size="sm"
       >
-        {t('paywall.overlay.confirm')}*
+        {t('content.paywall.overlay.confirm')}*
       </Button>,
       <Button
         className="flex-1"
@@ -73,7 +73,7 @@ export function PartitionalLockedContent({
         size="lg"
         variant="secondary"
       >
-        {t('paywall.overlay.cancel')}
+        {t('content.paywall.overlay.cancel')}
       </Button>,
     ];
 
@@ -93,13 +93,13 @@ export function PartitionalLockedContent({
       >
         <div className="mx-auto w-full max-w-screen-md pt-16">
           <h3 className="mb-4">
-            {t('paywall.overlay.title', {
+            {t('content.paywall.overlay.title', {
               price: formatCurrency(0.69),
             })}
           </h3>
           <div className="my-3 flex gap-2">{renderButtons()}</div>
           <div className="block text-xs italic">
-            * {t('paywall.overlay.disclaimer')}
+            * {t('content.paywall.overlay.disclaimer')}
           </div>
         </div>
       </div>

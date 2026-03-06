@@ -11,6 +11,7 @@ export default async function Page({ params }: NextPageProps) {
   const { locale } = await params;
   const container = getDependencyContainer();
   const articleService = getAppArticleService(container);
+
   const coverArticle = await articleService.getFirst({
     params: { isOnCover: true, locale },
     paginate: {
@@ -19,7 +20,7 @@ export default async function Page({ params }: NextPageProps) {
     },
   });
   const articlePool = await articleService.getMany({
-    params: { isOnCover: false },
+    params: { isOnCover: false, locale },
     paginate: { take: 12 },
   });
   const denseArticleList = articlePool.items.slice(0, 2);
