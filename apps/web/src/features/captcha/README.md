@@ -1,4 +1,4 @@
-# Human Verification Feature
+# Captcha Feature
 
 This feature provides the "Proof of Humanity" mechanisms for the website. In keeping with the site's theme, these challenges are designed to be intentionally frustrating, annoying, and practically impossible to complete efficiently.
 
@@ -37,7 +37,7 @@ The internal state machine for the verification process within the dialog.
 ## Usage
 
 ```tsx
-import { CaptchaField } from '@/features/human-verification/components/CaptchaField';
+import { CaptchaField } from '@/features/captcha/components/CaptchaField';
 
 // Inside a form
 <CaptchaField fieldName="captcha" required />

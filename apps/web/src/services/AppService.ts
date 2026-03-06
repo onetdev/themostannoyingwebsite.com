@@ -24,9 +24,17 @@ export class AppService {
   }
 
   getSupportedLanguages(): LanguageInfo[] {
-    return i18nConfig.locales.map((locale) => ({
-      locale,
-      ...LANGUAGE_MAP[locale],
-    }));
+    return i18nConfig.locales.map((locale) => {
+      const langInfo = LANGUAGE_MAP[locale];
+      if (!langInfo) {
+        throw new Error(
+          `Language configuration is missing for locale: "${locale}"`,
+        );
+      }
+      return {
+        locale,
+        ...langInfo,
+      };
+    });
   }
 }

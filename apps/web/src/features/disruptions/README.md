@@ -1,24 +1,31 @@
-# Interferrer feature
+# Disruptions Feature
 
-Collection of glitches and other miscellaneous behavior browser behavior altering experiences.
+A core collection of intrusive glitches and browser-behavior-altering experiences designed to test the user's patience.
 
-## Key highlights
+## Key Highlights
 
-_Important: Changing page title is heavily rate limited by the browser_
+### Page Title Manipulation
+- **Glitched Titles**: Randomly replaces parts of the page title with nonsensical characters or text that can cause slight vertical overflow.
+- **Marquee Title**: Causes the page title to scroll horizontally across the browser tab.
+- **Inactive State Glitch**: Alternates the page title between different messages when the browser tab is not focused, trying to lure the user back.
 
-- **Page title glitches**:
-  - Alternating title while the page itself is inactive
-  - Marquee title
-  - Randomly changing the title of the page with a glitched text that can cause slight text overflow vertically.
-- **Disable page context menu** and displaying an alert instead
-- **Navigation history clutter** pushed additional navigation items into your navigation history so that when you try to go back you actually stay on the current webpage.
-- **Dead pixel** on the screen
-- **Global sticky video** on top of the page that autoplays and hard to close
-- **Screensaver**
-  - Maze style from the 90s
-  - Bouncing logo also from the disc era
+### Navigation and Interaction
+- **Navigation History Clutter**: Custom hook `useNavigationHistoryClutter` that pushes duplicate navigation items to the browser history, making it difficult for users to use the "Back" button to leave the site.
+- **Context Menu Disable**: Hook `useDisableContextMenu` intercepts right-click events and displays a frustrating alert instead of the standard menu.
+- **Prevent Leaving**: Intercepts tab-close attempts and displays a persistent "Are you sure?" prompt.
 
+### UI Glitches
+- **Dead Pixel**: A single, interactive pixel on the screen that looks like hardware failure. Clicking it triggers an achievement.
+- **Global Sticky Video**: A non-dismissible, autoplaying video player that follows the user throughout the site.
+- **Screensaver**: A full-screen overlay that triggers after inactivity, featuring two variants:
+  - **Maze**: A procedurally generated 90s-style maze.
+  - **Bouncing Logo**: A DVD-style logo that bounces off screen edges.
 
-## Out of scope
+## Important Note
 
-- n/a
+Browser security and rate limits (especially for page title changes) might cause some of these features to behave inconsistently across different environments.
+
+## Out of Scope
+
+- **Actually Malicious Behavior**: All disruptions are cosmetic and easily cleared by closing the browser tab or reloading the page.
+- **Persistent Malware**: No permanent changes are made to the user's system or browser settings.

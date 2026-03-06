@@ -44,7 +44,7 @@ export function DateOfBirthField({
   const dateOfBirthMonth = useMemo(() => {
     return Object.entries(messages.common.date.months)
       .map(([key, value]) => ({
-        value: key + 1,
+        value: key,
         label: value,
       }))
       .sort((a, b) => a.label.localeCompare(b.label));

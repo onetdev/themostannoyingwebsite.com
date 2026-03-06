@@ -44,7 +44,7 @@ export async function AppHeader({ activeItem, className }: AppHeaderProps) {
       <div className="col-span-2 my-2 hidden items-center md:flex">
         <AppNavigationDesktop activeItem={activeItem} />
       </div>
-      <PainLevelSelector className="bg-muted col-span-2 -mx-3 md:-md-5 mt-2 md:mt-0 xl:-mx-8" />
+      <PainLevelSelector className="bg-muted col-span-2 -mx-3 md:-mx-5 mt-2 md:mt-0 xl:-mx-8" />
     </header>
   );
 }

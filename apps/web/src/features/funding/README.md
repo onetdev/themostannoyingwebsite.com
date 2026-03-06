@@ -1,19 +1,21 @@
-# Donation feature
+# Funding Feature
 
-Manages the site's donation information details and funneling user traffic towards donations.
+Manages the site's donation information and funneling user traffic towards various support mechanisms.
 
-## Key highlights
+## Key Highlights
 
-- **DonationPage component**
-  - Goal and donation overview
-  - QR codes for crypto donation
-  - Donation service links
-- **Beggar banner** is an alert banner that tries to funnel users towards making a donation.
-- **Donation service**
-  - Estimating project donation and cost balance
-  - Whether to display banner at top or not (basically should happen for the first 10 days of each month)
+- **DonationPage**: A centralized layout that displays current project goals, cost/donation balance, and links to various crypto and donation platforms.
+- **BeggarBanner**: A prominent, non-dismissible alert at the top of the site that encourages users to donate. Its visibility is often linked to the first 10 days of each month to simulate "real-world" funding urgency.
+- **DonationService**: An injectable service that provides calculated estimates for the project's financial status and determines if the `BeggarBanner` should be displayed.
+- **QR Code Generation**: Displays dynamically generated QR codes for multiple cryptocurrency addresses to facilitate easy (simulated) contributions.
+- **Crypto Donation Hooks**: Manages the copy-to-clipboard functionality for crypto addresses, often triggering global events for achievements.
 
-## Out of scope
+## Service Details
 
-- Any payment provider integration
-- Realtime donation display
+- `isBannerActive()`: Returns a boolean indicating if the beggar banner should currently be shown.
+- `getCostEstimation()`: Provides the estimated monthly hosting and maintenance costs of the platform.
+
+## Out of Scope
+
+- **Real-Time Payment Integration**: Clicking "Donate" might redirect to third-party sites but does not handle payments directly within the application.
+- **Live Transaction Tracking**: All financial data shown is estimated or manually updated, not pulled from a live blockchain or payment processor API.

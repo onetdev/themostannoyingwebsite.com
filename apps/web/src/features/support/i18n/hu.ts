@@ -12,18 +12,19 @@ export default {
       variant_006:
         'Biztosan lemaradtál az előző üzeneteimről. Kicsit magányos vagyok.',
       variant_007:
-        "Wondering if my messages got caught in a time warp. Feeling like I'm at a party where everyone's speaking Simlish.",
-      variant_008: 'My messages must be on a ghosting spree. Feeling ignored.',
+        'Azon tűnődöm, vajon az üzeneteim beszorultak-e egy időhurokba. Úgy érzem magam, mint egy buliban, ahol mindenki sim-nyelven beszél.',
+      variant_008:
+        'Az üzeneteim biztosan ghosting-túrán vannak. Úgy érzem, levegőnek nézel.',
       variant_009:
-        'Ah, the sweet sound of silence. My messages must be enjoying their newfound solitude.',
+        'Ah, a csend édes hangja. Az üzeneteim biztosan élvezik a frissen megtalált magányukat.',
     },
-    messageFallback: "It's nothing, leave me alone. 😤",
-    newAlert: 'New message from Chat Bubble! 🎉',
-    hudTitle: 'Chat with a "100% real huuman"',
+    messageFallback: 'Semmi különös, hagyj békén. 😤',
+    newAlert: 'Új üzeneted érkezett a Chat Buboréktól! 🎉',
+    hudTitle: 'Csevegés egy "100%-ban igazi emberrel"',
     hudTitleDisclaimer:
-      "Disclaimer: Actually, this is a bot that almost feels like a real human (not a smart one) but it's still just a bot",
-    agentIsTyping: 'Agent is typing',
-    yourMessage: 'Your message',
-    yourMessagePlaceholder: 'Type here...',
+      'Jogi nyilatkozat: Igazából ez egy bot, ami majdnem olyan, mint egy igazi ember (nem a legokosabb), de akkor is csak egy bot',
+    agentIsTyping: 'Az ügynök éppen gépel',
+    yourMessage: 'Az üzeneted',
+    yourMessagePlaceholder: 'Írj ide...',
   },
 };
