@@ -1,4 +1,5 @@
 import achievements from '@/features/achievements/i18n/en';
+import auth from '@/features/auth/i18n/en';
 import humanVerification from '@/features/captcha/i18n/en';
 import comments from '@/features/comments/i18n/en';
 import commentVariants from '@/features/comments/i18n/generator/en';
@@ -8,11 +9,12 @@ import marketing from '@/features/marketing/i18n/en';
 import monitoring from '@/features/monitoring/i18n/en';
 import subscription from '@/features/subscription/i18n/en';
 import support from '@/features/support/i18n/en';
-import settings from '@/features/user/i18n/en';
+import user from '@/features/user/i18n/en';
 import metadata from './metadata/en';
 
 export default {
   // Feature or externals
+  auth,
   achievements,
   content,
   comments,
@@ -22,7 +24,7 @@ export default {
   marketing,
   metadata,
   monitoring,
-  settings,
+  user,
   subscription,
   support,
 
@@ -195,64 +197,39 @@ export default {
       },
     },
   },
-  user: {
-    common: {
-      lookingForSignup: 'Need an account? Signup here',
-      forgotPassword: 'Forgot password?',
-      Login: 'Login',
-      signup: 'Signup',
-    },
-    field: {
-      consentNewsletter: 'I want to receive newsletter',
-      consentPrivacyPolicy: 'Accept privacy policy',
-      consentChildSoul: "My first born child's soul",
-      countryCode: 'Country',
-      dateOfBirth: 'Date of birth',
-      dateOfBirthYear: 'Year',
-      dateOfBirthMonth: 'Month',
-      dateOfBirthDay: 'Day',
-      email: 'Email',
-      firstName: 'First name',
-      gender: 'Gender',
-      lastName: 'Last name',
-      nickname: 'Nickname',
-      password: 'Password',
-      passwordStrength: 'Password strength',
-      passwordConfirmation: 'Password confirmation',
-      phoneNumber: 'Phone number',
-      phoneNumberCountryCode: 'Country code',
-      phoneNumberAreaCode: 'Area code',
-      phoneNumberDecrease: 'Decrease phone number',
-      phoneNumberIncrease: 'Increase phone number',
-      rememberMe: 'Remember me',
-      username: 'Username',
-    },
-    form: {
-      login: {
-        genericError: 'Login failed',
-        callToAction: 'Login',
-      },
-      signup: {
-        genericError: 'Signup failed',
-        callToAction: 'Create my account',
-      },
-      passwordReminder: {
-        genericError: 'Password reminder failed',
-        callToAction: 'Send password reminder',
-      },
-    },
-    genderVariants: {
-      alien: 'Alien',
-      chymera: 'Chymera',
-      cyborg: 'Cyborg',
-      female: 'Female',
-      male: 'Male',
-      other: 'Other',
-      robot: 'Robot',
-    },
-    profile: {
-      notSupposedToBeHere: 'Hmm, you are not supposed to be here 😡',
-    },
+  userField: {
+    consentNewsletter: 'I want to receive newsletter',
+    consentPrivacyPolicy: 'Accept privacy policy',
+    consentChildSoul: "My first born child's soul",
+    countryCode: 'Country',
+    dateOfBirth: 'Date of birth',
+    dateOfBirthYear: 'Year',
+    dateOfBirthMonth: 'Month',
+    dateOfBirthDay: 'Day',
+    email: 'Email',
+    firstName: 'First name',
+    gender: 'Gender',
+    lastName: 'Last name',
+    nickname: 'Nickname',
+    password: 'Password',
+    passwordStrength: 'Password strength',
+    passwordConfirmation: 'Password confirmation',
+    phoneNumber: 'Phone number',
+    phoneNumberCountryCode: 'Country code',
+    phoneNumberAreaCode: 'Area code',
+    phoneNumberDecrease: 'Decrease phone number',
+    phoneNumberIncrease: 'Increase phone number',
+    rememberMe: 'Remember me',
+    username: 'Username',
+  },
+  gender: {
+    alien: 'Alien',
+    chymera: 'Chymera',
+    cyborg: 'Cyborg',
+    female: 'Female',
+    male: 'Male',
+    other: 'Other',
+    robot: 'Robot',
   },
   share: {
     modal: {
@@ -301,19 +278,6 @@ export default {
   contextMenu: {
     disabled: "Hey, you can't right click here!",
   },
-  admin: {
-    terminal: {
-      systemBoot: 'System booting...',
-      systemReady: 'MAW admin secure connection established.',
-      loginPrompt: 'login:',
-      passwordPrompt: 'password:',
-      invalidCredentials: 'Access denied. Invalid credentials.',
-      accessGranted: 'Access granted. Welcome back {username}.',
-      matrixQuote: 'Someone is watching you!!! Follow the white rabbit.',
-      redirectingGeneric: 'Redirecting...',
-      redirectingSafety: "I'm getting back you to safety...",
-    },
-  },
   stickyVideoPlayer: {
     videoTitle: 'Sticky video player',
   },
@@ -335,5 +299,17 @@ export default {
         from_100: 'Max Pain',
       },
     },
+  },
+  language: {
+    label: 'Language',
+    option: {
+      en: 'English',
+      hu: 'Hungarian',
+    },
+  },
+  themeSwitch: {
+    label: 'Switch theme',
+    darkMode: 'Dark mode',
+    lightMode: 'Light mode',
   },
 };

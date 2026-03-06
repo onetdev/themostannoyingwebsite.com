@@ -12,11 +12,11 @@ export function AdvertisingAndMonetization() {
   return (
     <section className="flex flex-col gap-3">
       <h3 className="text-muted-foreground text-xs font-bold tracking-wider uppercase">
-        {t('settings.optionalPainPoints.categories.ads')}
+        {t('user.optionalPainPoints.categories.ads')}
       </h3>
       <SettingsField
-        label={t('settings.optionalPainPoints.gifts.flaps')}
-        info={t('settings.optionalPainPointsHints.gifts.flaps')}
+        label={t('user.optionalPainPoints.gifts.flaps')}
+        info={t('user.optionalPainPointsHints.gifts.flaps')}
       >
         <FormCheckbox
           name="promotions_flaps"
@@ -27,8 +27,8 @@ export function AdvertisingAndMonetization() {
         />
       </SettingsField>
       <SettingsField
-        label={t('settings.optionalPainPoints.gifts.detectAdblocker')}
-        info={t('settings.optionalPainPointsHints.gifts.detectAdblocker')}
+        label={t('user.optionalPainPoints.gifts.detectAdblocker')}
+        info={t('user.optionalPainPointsHints.gifts.detectAdblocker')}
       >
         <FormCheckbox
           name="detect_adblocker"
@@ -42,8 +42,8 @@ export function AdvertisingAndMonetization() {
         />
       </SettingsField>
       <SettingsField
-        label={t('settings.optionalPainPoints.gifts.oneByOne')}
-        info={t('settings.optionalPainPointsHints.gifts.oneByOne')}
+        label={t('user.optionalPainPoints.gifts.oneByOne')}
+        info={t('user.optionalPainPointsHints.gifts.oneByOne')}
       >
         <FormCheckbox
           name="one_by_one"
@@ -54,8 +54,8 @@ export function AdvertisingAndMonetization() {
         />
       </SettingsField>
       <SettingsField
-        label={t('settings.optionalPainPoints.contentPaywall')}
-        info={t('settings.optionalPainPointsHints.contentPaywall')}
+        label={t('user.optionalPainPoints.contentPaywall')}
+        info={t('user.optionalPainPointsHints.contentPaywall')}
       >
         <FormCheckbox
           name="content_paywall"

@@ -4,15 +4,15 @@ import { Checkbox, Field, FieldLabel } from '@maw/ui-lib';
 import { useTranslations } from 'next-intl';
 import { useFormContext } from 'react-hook-form';
 
-interface ConsentNewsletterFieldProps {
+interface ConsentChildSoulFieldProps {
   fieldName?: string;
   required?: boolean;
 }
 
-export function ConsentNewsletterField({
-  fieldName = 'consentNewsletter',
+export function ConsentChildSoulField({
+  fieldName = 'consentChildSoul',
   required,
-}: ConsentNewsletterFieldProps) {
+}: ConsentChildSoulFieldProps) {
   const t = useTranslations();
   const {
     formState: { errors },
@@ -21,14 +21,17 @@ export function ConsentNewsletterField({
 
   return (
     <Field orientation="horizontal" className="items-center gap-2">
-      <Checkbox id={fieldName} {...register(fieldName)} />
+      <Checkbox
+        id={fieldName}
+        {...register(fieldName)}
+        aria-invalid={!!errors[fieldName]}
+      />
       <FieldLabel
         htmlFor={fieldName}
         className="font-semibold"
         required={required}
-        aria-invalid={!!errors[fieldName]}
       >
-        {t('user.field.consentNewsletter')}
+        {t('userField.consentChildSoul')}
       </FieldLabel>
     </Field>
   );

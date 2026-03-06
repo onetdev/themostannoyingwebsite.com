@@ -10,15 +10,15 @@ import {
 import { useTranslations } from 'next-intl';
 import { useFormContext } from 'react-hook-form';
 
-interface NicknameFieldProps {
+interface UsernameFieldProps {
   fieldName?: string;
   required?: boolean;
 }
 
-export function NicknameField({
-  fieldName = 'nickname',
+export function UsernameField({
+  fieldName = 'username',
   required,
-}: NicknameFieldProps) {
+}: UsernameFieldProps) {
   const t = useTranslations();
   const {
     formState: { errors },
@@ -28,7 +28,7 @@ export function NicknameField({
   return (
     <Field>
       <FieldLabel htmlFor={fieldName} required={required}>
-        {t('user.field.nickname')}
+        {t('userField.username')}
       </FieldLabel>
       <FieldContent>
         <Input

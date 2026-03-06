@@ -26,11 +26,11 @@ export function VisualObstructions() {
   return (
     <section className="flex flex-col gap-3">
       <h3 className="text-muted-foreground text-xs font-bold tracking-wider uppercase">
-        {t('settings.optionalPainPoints.categories.visual')}
+        {t('user.optionalPainPoints.categories.visual')}
       </h3>
       <SettingsField
-        label={t('settings.optionalPainPoints.screensaver')}
-        info={t('settings.optionalPainPointsHints.screensaver')}
+        label={t('user.optionalPainPoints.screensaver')}
+        info={t('user.optionalPainPointsHints.screensaver')}
       >
         <FormCheckbox
           name="screensaver"
@@ -44,7 +44,7 @@ export function VisualObstructions() {
         <div className="ml-8 flex flex-col gap-4">
           <Field orientation="vertical" className="gap-2">
             <FieldLabel className="text-sm font-normal">
-              {t('settings.optionalPainPoints.screensaverVariant')}
+              {t('user.optionalPainPoints.screensaverVariant')}
             </FieldLabel>
             <FieldContent>
               <Select
@@ -63,7 +63,7 @@ export function VisualObstructions() {
                   {variantOptions.map((value) => (
                     <SelectItem key={value} value={value}>
                       {t(
-                        `settings.optionalPainPoints.screensaverVariantOptions.${value}`,
+                        `user.optionalPainPoints.screensaverVariantOptions.${value}`,
                       )}
                     </SelectItem>
                   ))}
@@ -74,7 +74,7 @@ export function VisualObstructions() {
 
           <Field orientation="vertical" className="gap-2">
             <FieldLabel className="text-sm font-normal">
-              {t('settings.optionalPainPoints.screensaverTimeout')}
+              {t('user.optionalPainPoints.screensaverTimeout')}
             </FieldLabel>
             <FieldContent>
               <Select
@@ -93,7 +93,7 @@ export function VisualObstructions() {
                   {timeoutOptions.map((value) => (
                     <SelectItem key={value} value={value}>
                       {t(
-                        `settings.optionalPainPoints.screensaverTimeoutOptions.${value}`,
+                        `user.optionalPainPoints.screensaverTimeoutOptions.${value}`,
                       )}
                     </SelectItem>
                   ))}
@@ -104,8 +104,8 @@ export function VisualObstructions() {
         </div>
       )}
       <SettingsField
-        label={t('settings.optionalPainPoints.deadPixel')}
-        info={t('settings.optionalPainPointsHints.deadPixel')}
+        label={t('user.optionalPainPoints.deadPixel')}
+        info={t('user.optionalPainPointsHints.deadPixel')}
       >
         <FormCheckbox
           name="dead_pixel"
@@ -116,8 +116,8 @@ export function VisualObstructions() {
         />
       </SettingsField>
       <SettingsField
-        label={t('settings.optionalPainPoints.stickyVideo')}
-        info={t('settings.optionalPainPointsHints.stickyVideo')}
+        label={t('user.optionalPainPoints.stickyVideo')}
+        info={t('user.optionalPainPointsHints.stickyVideo')}
       >
         <FormCheckbox
           name="sticky_video"

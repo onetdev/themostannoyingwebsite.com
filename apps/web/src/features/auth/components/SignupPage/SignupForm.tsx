@@ -21,7 +21,7 @@ import {
   PasswordCreateField,
   PhoneNumberField,
   UsernameField,
-} from '../fields';
+} from '../_fields';
 
 export function SignupForm() {
   const t = useTranslations();
@@ -81,14 +81,14 @@ export function SignupForm() {
             disabled={isCtaDisabled}
           >
             {isCtaLoading && <LoaderDots />}
-            {!isCtaLoading && t('user.form.signup.callToAction')}
+            {!isCtaLoading && t('auth.form.signup.callToAction')}
           </Button>
           <div className="flex justify-between">
             <Link href={pathFor('user.password-reminder')} prefetch={false}>
-              {t('user.common.forgotPassword')}
+              {t('auth.common.forgotPassword')}
             </Link>
             <Link href={pathFor('user.login')} prefetch={false}>
-              {t('user.common.Login')}
+              {t('auth.common.Login')}
             </Link>
           </div>
         </div>

@@ -9,8 +9,8 @@ export function AppDarkModeToggle() {
 
   const { resolvedTheme, setTheme } = useTheme();
   const darkModeToggleText = {
-    lightMode: t('settings.userPreferences.themeSwitch.lightMode'),
-    darkMode: t('settings.userPreferences.themeSwitch.darkMode'),
+    lightMode: t('themeSwitch.lightMode'),
+    darkMode: t('themeSwitch.darkMode'),
   };
 
   return (

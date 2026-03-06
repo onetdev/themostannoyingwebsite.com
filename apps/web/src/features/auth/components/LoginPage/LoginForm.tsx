@@ -6,7 +6,7 @@ import { FormProvider } from 'react-hook-form';
 import { CaptchaField } from '@/features/captcha/components';
 import { useNavigationProvider } from '@/navigation/NavigationContext';
 import { useLoginForm } from '../../hooks';
-import { EmailField, PasswordField, RememberMeField } from '../fields';
+import { EmailField, PasswordField, RememberMeField } from '../_fields';
 
 export function LoginForm() {
   const t = useTranslations();
@@ -49,14 +49,14 @@ export function LoginForm() {
           disabled={isCtaDisabled}
         >
           {isCtaLoading && <LoaderDots />}
-          {!isCtaLoading && t('user.form.login.callToAction')}
+          {!isCtaLoading && t('auth.form.login.callToAction')}
         </Button>
         <div className="flex justify-between">
           <Link href={pathFor('user.password-reminder')} prefetch={false}>
-            {t('user.common.forgotPassword')}
+            {t('auth.common.forgotPassword')}
           </Link>
           <Link href={pathFor('user.signup')} prefetch={false}>
-            {t('user.common.lookingForSignup')}
+            {t('auth.common.lookingForSignup')}
           </Link>
         </div>
       </form>

@@ -1,5 +1,5 @@
-import { AdminPage } from '@/features/user/components';
+import { AdminAuthPage } from '@/features/auth/components';
 
 export default function Page() {
-  return <AdminPage />;
+  return <AdminAuthPage />;
 }

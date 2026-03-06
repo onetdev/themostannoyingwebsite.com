@@ -7,16 +7,16 @@ import { SettingsField } from '../SettingsField';
 
 export function PopupAndInteractivity() {
   const painPreferences = usePainPreferencesStore();
-  const t = useTranslations();
+  const t = useTranslations('user');
 
   return (
     <section className="flex flex-col gap-3">
       <h3 className="text-muted-foreground text-xs font-bold tracking-wider uppercase">
-        {t('settings.optionalPainPoints.categories.interactivity')}
+        {t('optionalPainPoints.categories.interactivity')}
       </h3>
       <SettingsField
-        label={t('settings.optionalPainPoints.newsletterModal')}
-        info={t('settings.optionalPainPointsHints.newsletterModal')}
+        label={t('optionalPainPoints.newsletterModal')}
+        info={t('optionalPainPointsHints.newsletterModal')}
       >
         <FormCheckbox
           name="newsletter"
@@ -27,8 +27,8 @@ export function PopupAndInteractivity() {
         />
       </SettingsField>
       <SettingsField
-        label={t('settings.optionalPainPoints.mockChat')}
-        info={t('settings.optionalPainPointsHints.mockChat')}
+        label={t('optionalPainPoints.mockChat')}
+        info={t('optionalPainPointsHints.mockChat')}
       >
         <FormCheckbox
           name="mock_chat"
@@ -39,8 +39,8 @@ export function PopupAndInteractivity() {
         />
       </SettingsField>
       <SettingsField
-        label={t('settings.optionalPainPoints.wheelOfFortune')}
-        info={t('settings.optionalPainPointsHints.wheelOfFortune')}
+        label={t('optionalPainPoints.wheelOfFortune')}
+        info={t('optionalPainPointsHints.wheelOfFortune')}
       >
         <FormCheckbox
           name="wheel_of_fortune"
@@ -51,8 +51,8 @@ export function PopupAndInteractivity() {
         />
       </SettingsField>
       <SettingsField
-        label={t('settings.optionalPainPoints.notifications')}
-        info={t('settings.optionalPainPointsHints.notifications')}
+        label={t('optionalPainPoints.notifications')}
+        info={t('optionalPainPointsHints.notifications')}
       >
         <FormCheckbox
           name="notifications"
@@ -63,8 +63,8 @@ export function PopupAndInteractivity() {
         />
       </SettingsField>
       <SettingsField
-        label={t('settings.optionalPainPoints.exitPrompt')}
-        info={t('settings.optionalPainPointsHints.exitPrompt')}
+        label={t('optionalPainPoints.exitPrompt')}
+        info={t('optionalPainPointsHints.exitPrompt')}
       >
         <FormCheckbox
           name="exit_prompt"
@@ -75,8 +75,8 @@ export function PopupAndInteractivity() {
         />
       </SettingsField>
       <SettingsField
-        label={t('settings.optionalPainPoints.clipboardMarker')}
-        info={t('settings.optionalPainPointsHints.clipboardMarker')}
+        label={t('optionalPainPoints.clipboardMarker')}
+        info={t('optionalPainPointsHints.clipboardMarker')}
       >
         <FormCheckbox
           name="clipboard_marker"
@@ -87,8 +87,8 @@ export function PopupAndInteractivity() {
         />
       </SettingsField>
       <SettingsField
-        label={t('settings.optionalPainPoints.achievementNotifications')}
-        info={t('settings.optionalPainPointsHints.achievementNotifications')}
+        label={t('optionalPainPoints.achievementNotifications')}
+        info={t('optionalPainPointsHints.achievementNotifications')}
       >
         <FormCheckbox
           name="achievementNotifications"

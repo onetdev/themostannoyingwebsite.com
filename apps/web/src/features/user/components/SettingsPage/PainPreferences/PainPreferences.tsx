@@ -31,7 +31,7 @@ export function PainPreferences({
   return (
     <Card className={className} data-testid="pain-preferences">
       <CardHeader>
-        <CardTitle>{t('settings.optionalPainPoints.title')}</CardTitle>
+        <CardTitle>{t('user.optionalPainPoints.title')}</CardTitle>
       </CardHeader>
       <CardContent className="flex flex-col gap-8">
         <div className={cn('flex flex-col gap-4', listClassName)}>

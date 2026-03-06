@@ -16,28 +16,26 @@ export function MandatoryExperienceInfo() {
   return (
     <Card data-testid="mandatory-experience-settings">
       <CardHeader>
-        <CardTitle>{t('settings.mandatoryExperienceFlags.title')}</CardTitle>
+        <CardTitle>{t('user.mandatoryExperienceFlags.title')}</CardTitle>
       </CardHeader>
       <CardContent className="flex flex-col justify-between gap-3">
         <SettingsField
-          label={t('settings.mandatoryExperienceFlags.unreasonableContent')}
+          label={t('user.mandatoryExperienceFlags.unreasonableContent')}
         >
           <FormCheckbox name="unreasonable_content" checked={true} disabled />
         </SettingsField>
         <SettingsField
-          label={t('settings.mandatoryExperienceFlags.impossibleLogin')}
+          label={t('user.mandatoryExperienceFlags.impossibleLogin')}
         >
           <FormCheckbox name="impossible_login" checked={true} disabled />
         </SettingsField>
         <SettingsField
-          label={t('settings.mandatoryExperienceFlags.impossibleSignup')}
+          label={t('user.mandatoryExperienceFlags.impossibleSignup')}
         >
           <FormCheckbox name="impossible_signup" checked={true} disabled />
         </SettingsField>
         <SettingsField
-          label={t(
-            'settings.mandatoryExperienceFlags.impossiblePasswordReminder',
-          )}
+          label={t('user.mandatoryExperienceFlags.impossiblePasswordReminder')}
         >
           <FormCheckbox
             name="impossible_password_reminder"
@@ -46,12 +44,12 @@ export function MandatoryExperienceInfo() {
           />
         </SettingsField>
         <SettingsField
-          label={t('settings.mandatoryExperienceFlags.flaimYourPhone')}
+          label={t('user.mandatoryExperienceFlags.flaimYourPhone')}
         >
           <FormCheckbox name="claim_your_phone" checked={true} disabled />
         </SettingsField>
         <SettingsField
-          label={t('settings.mandatoryExperienceFlags.fakeAiSubscription')}
+          label={t('user.mandatoryExperienceFlags.fakeAiSubscription')}
         >
           <FormCheckbox name="fake_ai_subscription" checked={true} disabled />
         </SettingsField>

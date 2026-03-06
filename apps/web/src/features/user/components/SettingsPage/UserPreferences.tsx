@@ -45,12 +45,12 @@ export function UserPreferences() {
   return (
     <Card data-testid="preferences-settings">
       <CardHeader>
-        <CardTitle>{t('settings.userPreferences.title')}</CardTitle>
+        <CardTitle>{t('user.userPreferences.title')}</CardTitle>
       </CardHeader>
       <CardContent className="flex flex-col justify-between gap-3">
         <Field orientation="vertical" className="gap-2 pb-2">
           <FieldLabel className="text-sm font-normal">
-            {t('settings.userPreferences.language')}
+            {t('language.label')}
           </FieldLabel>
           <FieldContent>
             <Select value={locale} onValueChange={onLanguageChange}>
@@ -70,7 +70,7 @@ export function UserPreferences() {
 
         <Separator className="mb-2" />
 
-        <SettingsField label={t('settings.userPreferences.darkMode')}>
+        <SettingsField label={t('user.userPreferences.darkMode')}>
           <FormCheckbox
             name="dark_mode"
             checked={resolvedTheme === 'dark'}
@@ -78,8 +78,8 @@ export function UserPreferences() {
           />
         </SettingsField>
         <SettingsField
-          label={t('settings.userPreferences.reducedMotion')}
-          info={t('settings.userPreferences.reducedMotionHelp')}
+          label={t('user.userPreferences.reducedMotion')}
+          info={t('user.userPreferences.reducedMotionHelp')}
         >
           <FormCheckbox
             name="reduced_motion"
@@ -87,7 +87,7 @@ export function UserPreferences() {
             checked={runtime.systemReducedMotion}
           />
         </SettingsField>
-        <SettingsField label={t('settings.userPreferences.enableSound')}>
+        <SettingsField label={t('user.userPreferences.enableSound')}>
           <FormCheckbox
             name="enable_sound"
             checked={preference.enableSound}
@@ -96,7 +96,7 @@ export function UserPreferences() {
             }
           />
         </SettingsField>
-        <SettingsField label={t('settings.userPreferences.adultFilter')}>
+        <SettingsField label={t('user.userPreferences.adultFilter')}>
           <FormCheckbox
             name="adult_filter"
             checked={preference.adultFilter}

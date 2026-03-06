@@ -1,11 +1,6 @@
 export default {
   userPreferences: {
     title: 'Beállítások',
-    language: 'Nyelv',
-    languages: {
-      en: 'Angol',
-      hu: 'Magyar',
-    },
     colorScheme: 'Téma / Színséma',
     darkMode: 'Sötét mód',
     reducedMotion: 'Csökkentett mozgás',
@@ -13,11 +8,6 @@ export default {
       'Az operációs rendszered vagy a böngésződ beállításaiban módosítható, a változtatás után szükség lehet az oldal újratöltésére.',
     enableSound: 'Hangok bekapcsolása',
     adultFilter: 'Felnőtt tartalom szűrése',
-    themeSwitch: {
-      label: 'Téma váltása',
-      darkMode: 'Sötét mód',
-      lightMode: 'Világos mód',
-    },
   },
   userGrants: {
     title: 'Beleegyezések és engedélyek',
@@ -117,7 +107,7 @@ export default {
     flaimYourPhone: 'Flaim your phone',
     fakeAiSubscription: 'Hamis MI előfizetési tervek',
   },
-  runtime: {
+  runtimeInfo: {
     title: 'A munkamenetről',
     disclaimer:
       'Az alább felsorolt információk hibakeresési célt szolgálnak a jelenlegi böngészőmunkamenethez (ha frissíted az oldalt, minden alaphelyzetbe áll). A színfalak mögött ezeknek az értékeknek hatalmas hatásuk van arra, hogy mi és hogyan történik.',
@@ -134,5 +124,8 @@ export default {
   screensaver: {
     exitClick: 'Kattints bárhova a kilépéshez',
     exitTap: 'Koppints bárhova a kilépéshez',
+  },
+  myProfile: {
+    notSupposedToBeHere: 'Hmm, nem kellene itt lenned 😡',
   },
 };

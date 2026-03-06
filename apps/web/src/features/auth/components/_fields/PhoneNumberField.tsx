@@ -140,7 +140,7 @@ export function PhoneNumberField({
 
   return (
     <Field>
-      <FieldLabel required={required}>{t('user.field.phoneNumber')}</FieldLabel>
+      <FieldLabel required={required}>{t('userField.phoneNumber')}</FieldLabel>
       <FieldContent>
         <div className="flex gap-3">
           <Controller
@@ -150,7 +150,7 @@ export function PhoneNumberField({
               <Select onValueChange={field.onChange} value={field.value}>
                 <SelectTrigger
                   className="w-1/4"
-                  aria-label={t('user.field.phoneNumberCountryCode')}
+                  aria-label={t('userField.phoneNumberCountryCode')}
                   aria-invalid={invalid}
                 >
                   <SelectValue />
@@ -170,7 +170,7 @@ export function PhoneNumberField({
               <InputGroupButton
                 ref={$decrementBtn}
                 variant="outline"
-                aria-label={t('user.field.phoneNumberDecrease')}
+                aria-label={t('userField.phoneNumberDecrease')}
                 onMouseDown={onDecrementClick}
                 onTouchStart={onDecrementClick}
               >
@@ -180,7 +180,7 @@ export function PhoneNumberField({
             <InputGroupInput
               type="number"
               disabled
-              aria-label={t('user.field.phoneNumberAreaCode')}
+              aria-label={t('userField.phoneNumberAreaCode')}
               className="select-none"
               aria-invalid={!!errors[fieldName]}
               {...register(fieldName)}
@@ -189,7 +189,7 @@ export function PhoneNumberField({
               <InputGroupButton
                 ref={$incrementBtn}
                 variant="outline"
-                aria-label={t('user.field.phoneNumberIncrease')}
+                aria-label={t('userField.phoneNumberIncrease')}
                 onMouseDown={onIncrementClick}
                 onTouchStart={onIncrementClick}
               >

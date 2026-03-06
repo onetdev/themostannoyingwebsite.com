@@ -1,3 +1,5 @@
+'use client';
+
 import {
   Field,
   FieldContent,
@@ -8,12 +10,15 @@ import {
 import { useTranslations } from 'next-intl';
 import { useFormContext } from 'react-hook-form';
 
-interface EmailFieldProps {
+interface NicknameFieldProps {
   fieldName?: string;
   required?: boolean;
 }
 
-export function EmailField({ fieldName = 'email', required }: EmailFieldProps) {
+export function NicknameField({
+  fieldName = 'nickname',
+  required,
+}: NicknameFieldProps) {
   const t = useTranslations();
   const {
     formState: { errors },
@@ -23,11 +28,11 @@ export function EmailField({ fieldName = 'email', required }: EmailFieldProps) {
   return (
     <Field>
       <FieldLabel htmlFor={fieldName} required={required}>
-        {t('user.field.email')}
+        {t('userField.nickname')}
       </FieldLabel>
       <FieldContent>
         <Input
-          type="email"
+          type="text"
           className="w-full"
           id={fieldName}
           aria-invalid={!!errors[fieldName]}

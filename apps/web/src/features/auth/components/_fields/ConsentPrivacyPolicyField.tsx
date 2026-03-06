@@ -4,15 +4,15 @@ import { Checkbox, Field, FieldLabel } from '@maw/ui-lib';
 import { useTranslations } from 'next-intl';
 import { useFormContext } from 'react-hook-form';
 
-interface ConsentChildSoulFieldProps {
+interface ConsentPrivacyPolicyFieldProps {
   fieldName?: string;
   required?: boolean;
 }
 
-export function ConsentChildSoulField({
-  fieldName = 'consentChildSoul',
+export function ConsentPrivacyPolicyField({
+  fieldName = 'consentPrivacyPolicy',
   required,
-}: ConsentChildSoulFieldProps) {
+}: ConsentPrivacyPolicyFieldProps) {
   const t = useTranslations();
   const {
     formState: { errors },
@@ -31,7 +31,7 @@ export function ConsentChildSoulField({
         className="font-semibold"
         required={required}
       >
-        {t('user.field.consentChildSoul')}
+        {t('userField.consentPrivacyPolicy')}
       </FieldLabel>
     </Field>
   );

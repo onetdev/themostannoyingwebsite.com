@@ -1,11 +1,6 @@
 export default {
   userPreferences: {
     title: 'Preferences',
-    language: 'Language',
-    languages: {
-      en: 'English',
-      hu: 'Hungarian',
-    },
     colorScheme: 'Theme / Color scheme',
     darkMode: 'Dark mode',
     reducedMotion: 'Reduced motion',
@@ -13,11 +8,6 @@ export default {
       'Can be changed in your OS/Browser settings, you might need to reload the page after changing it.',
     enableSound: 'Sound',
     adultFilter: 'Filter adult contents',
-    themeSwitch: {
-      label: 'Switch theme',
-      darkMode: 'Dark mode',
-      lightMode: 'Light mode',
-    },
   },
   userGrants: {
     title: 'Consent and permissions',
@@ -113,7 +103,7 @@ export default {
     flaimYourPhone: 'Flaim your phone',
     fakeAiSubscription: 'Fake AI subscription plans',
   },
-  runtime: {
+  runtimeInfo: {
     title: 'About this session',
     disclaimer:
       'Information listed below serves as debug information for the current browser session (if you refresh the page, everything will reset). Behind the scenes these valeus also have huge impact on what and how happens.',
@@ -130,5 +120,8 @@ export default {
   screensaver: {
     exitClick: 'Click anywhere to exit screensaver',
     exitTap: 'Tap anywhere to exit screensaver',
+  },
+  myProfile: {
+    notSupposedToBeHere: 'Hmm, you are not supposed to be here 😡',
   },
 };

@@ -12,47 +12,44 @@ import {
   SelectValue,
 } from '@maw/ui-lib';
 import { useTranslations } from 'next-intl';
-import { useEffect, useState } from 'react';
+import { useMemo } from 'react';
 import { Controller, useFormContext } from 'react-hook-form';
 
-import { useAppService } from '@/hooks';
+import { GenderList } from '../../schemas';
 
-interface CountryFieldProps {
+interface GenderFieldProps {
   fieldName?: string;
   required?: boolean;
 }
 
-export function CountryField({
-  fieldName = 'countryCode',
+export function GenderField({
+  fieldName = 'gender',
   required,
-}: CountryFieldProps) {
+}: GenderFieldProps) {
   const t = useTranslations();
-  const appService = useAppService();
   const {
     formState: { errors },
     control,
   } = useFormContext();
 
-  const [countryOptions, setCountryOptions] = useState<
-    { label: string; value: string }[]
-  >([]);
+  const genderOptions = useMemo(() => {
+    const pool = GenderList.reduce(
+      (acc, gender) => {
+        acc[gender] = t(`gender.${gender}`);
+        return acc;
+      },
+      {} as Record<string, string>,
+    );
 
-  useEffect(() => {
-    appService.getAllCountries().then((data) => {
-      setCountryOptions(
-        data.map(({ localName, code }) => ({
-          label: localName,
-          value: code,
-        })),
-      );
-    });
-  }, [appService]);
+    return GenderList.map((gender) => ({
+      value: gender,
+      label: pool[gender],
+    }));
+  }, [t]);
 
   return (
     <Field>
-      <FieldLabel htmlFor={fieldName} required={required}>
-        {t('user.field.countryCode')}
-      </FieldLabel>
+      <FieldLabel required={required}>{t('userField.gender')}</FieldLabel>
       <FieldContent>
         <Controller
           control={control}
@@ -61,14 +58,13 @@ export function CountryField({
             <Select onValueChange={field.onChange} value={field.value}>
               <SelectTrigger
                 className="w-full"
-                id={fieldName}
-                aria-label={t('user.field.countryCode')}
+                aria-label={t('userField.gender')}
                 aria-invalid={fieldState.invalid}
               >
                 <SelectValue placeholder="" />
               </SelectTrigger>
               <SelectContent>
-                {countryOptions.map((option) => (
+                {genderOptions.map((option) => (
                   <SelectItem key={option.value} value={option.value}>
                     {option.label}
                   </SelectItem>

@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 import { getTranslations } from 'next-intl/server';
-import { ProfilePage } from '@/features/auth/components';
+import { MyProfilePage } from '@/features/user/components';
 import { PageLayout } from '../../_components/PageLayout';
 
 export { generateStaticParams } from '@/i18n/routing';
@@ -28,7 +28,7 @@ export default async function Page() {
       className="mx-auto max-w-md px-5 py-0 md:py-14"
       role="main"
     >
-      <ProfilePage />
+      <MyProfilePage />
     </PageLayout>
   );
 }

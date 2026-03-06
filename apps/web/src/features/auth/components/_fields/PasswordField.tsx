@@ -10,15 +10,15 @@ import {
 import { useTranslations } from 'next-intl';
 import { useFormContext } from 'react-hook-form';
 
-interface PasswordConfirmationFieldProps {
+interface PasswordFieldProps {
   fieldName?: string;
   required?: boolean;
 }
 
-export function PasswordConfirmationField({
-  fieldName = 'passwordConfirmation',
+export function PasswordField({
+  fieldName = 'password',
   required,
-}: PasswordConfirmationFieldProps) {
+}: PasswordFieldProps) {
   const t = useTranslations();
   const {
     formState: { errors },
@@ -28,7 +28,7 @@ export function PasswordConfirmationField({
   return (
     <Field>
       <FieldLabel htmlFor={fieldName} required={required}>
-        {t('user.field.passwordConfirmation')}
+        {t('userField.password')}
       </FieldLabel>
       <FieldContent>
         <Input

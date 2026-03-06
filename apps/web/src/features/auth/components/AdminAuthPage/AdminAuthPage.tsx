@@ -6,7 +6,7 @@ import styles from './AdminPage.module.css';
 import { useAdminTerminal } from './useAdminTerminal';
 import { useAdminTerminalAuthFlow } from './useAdminTerminalAuthFlow';
 
-export function AdminPage() {
+export function AdminAuthPage() {
   const [cursorBlink, setCursorBlink] = useState(false);
   const router = useRouter();
   const term = useAdminTerminal();

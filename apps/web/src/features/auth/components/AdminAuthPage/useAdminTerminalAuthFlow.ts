@@ -14,7 +14,7 @@ export function useAdminTerminalAuthFlow(
   term: ReturnType<typeof useAdminTerminal>,
   onEnd: (authed: boolean) => void,
 ) {
-  const t = useTranslations('admin.terminal');
+  const t = useTranslations('auth.admin.terminal');
 
   useAsync(async () => {
     term.reset();

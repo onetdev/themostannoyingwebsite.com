@@ -1,4 +1,5 @@
 import achievements from '@/features/achievements/i18n/hu';
+import auth from '@/features/auth/i18n/hu';
 import humanVerification from '@/features/captcha/i18n/hu';
 import commentVariants from '@/features/comments/i18n/generator/hu';
 import comments from '@/features/comments/i18n/hu';
@@ -8,11 +9,12 @@ import marketing from '@/features/marketing/i18n/hu';
 import monitoring from '@/features/monitoring/i18n/hu';
 import subscription from '@/features/subscription/i18n/hu';
 import support from '@/features/support/i18n/hu';
-import settings from '@/features/user/i18n/hu';
+import user from '@/features/user/i18n/hu';
 import metadata from './metadata/hu';
 
 export default {
   // Feature or externals
+  auth,
   achievements,
   content,
   comments,
@@ -22,7 +24,7 @@ export default {
   marketing,
   metadata,
   monitoring,
-  settings,
+  user,
   subscription,
   support,
 
@@ -198,64 +200,39 @@ export default {
       },
     },
   },
-  user: {
-    common: {
-      lookingForSignup: 'Nincs még fiókod? Regisztrálj itt',
-      forgotPassword: 'Elfelejtetted a jelszavad?',
-      Login: 'Belépés',
-      signup: 'Regisztráció',
-    },
-    field: {
-      consentNewsletter: 'Szeretnék hírlevelet kapni',
-      consentPrivacyPolicy: 'Elfogadom az adatvédelmi irányelveket',
-      consentChildSoul: 'Az elsőszülött gyermekem lelke',
-      countryCode: 'Ország',
-      dateOfBirth: 'Születési dátum',
-      dateOfBirthYear: 'Év',
-      dateOfBirthMonth: 'Hónap',
-      dateOfBirthDay: 'Nap',
-      email: 'E-mail',
-      firstName: 'Keresztnév',
-      gender: 'Nem',
-      lastName: 'Vezetéknév',
-      nickname: 'Becenév',
-      password: 'Jelszó',
-      passwordStrength: 'Jelszó erőssége',
-      passwordConfirmation: 'Jelszó megerősítése',
-      phoneNumber: 'Telefonszám',
-      phoneNumberCountryCode: 'Országhívó',
-      phoneNumberAreaCode: 'Körzetszám',
-      phoneNumberDecrease: 'Telefonszám csökkentése',
-      phoneNumberIncrease: 'Telefonszám növelése',
-      rememberMe: 'Emlékezz rám',
-      username: 'Felhasználónév',
-    },
-    form: {
-      login: {
-        genericError: 'A belépés sikertelen',
-        callToAction: 'Belépés',
-      },
-      signup: {
-        genericError: 'A regisztráció sikertelen',
-        callToAction: 'Fiók létrehozása',
-      },
-      passwordReminder: {
-        genericError: 'A jelszó emlékeztető sikertelen',
-        callToAction: 'Jelszó emlékeztető küldése',
-      },
-    },
-    genderVariants: {
-      alien: 'Idegen',
-      chymera: 'Kiméra',
-      cyborg: 'Kiborg',
-      female: 'Nő',
-      male: 'Férfi',
-      other: 'Egyéb',
-      robot: 'Robot',
-    },
-    profile: {
-      notSupposedToBeHere: 'Hmm, nem kellene itt lenned 😡',
-    },
+  userField: {
+    consentNewsletter: 'Szeretnék hírlevelet kapni',
+    consentPrivacyPolicy: 'Elfogadom az adatvédelmi irányelveket',
+    consentChildSoul: 'Az elsőszülött gyermekem lelke',
+    countryCode: 'Ország',
+    dateOfBirth: 'Születési dátum',
+    dateOfBirthYear: 'Év',
+    dateOfBirthMonth: 'Hónap',
+    dateOfBirthDay: 'Nap',
+    email: 'E-mail',
+    firstName: 'Keresztnév',
+    gender: 'Nem',
+    lastName: 'Vezetéknév',
+    nickname: 'Becenév',
+    password: 'Jelszó',
+    passwordStrength: 'Jelszó erőssége',
+    passwordConfirmation: 'Jelszó megerősítése',
+    phoneNumber: 'Telefonszám',
+    phoneNumberCountryCode: 'Országhívó',
+    phoneNumberAreaCode: 'Körzetszám',
+    phoneNumberDecrease: 'Telefonszám csökkentése',
+    phoneNumberIncrease: 'Telefonszám növelése',
+    rememberMe: 'Emlékezz rám',
+    username: 'Felhasználónév',
+  },
+  gender: {
+    alien: 'Idegen',
+    chymera: 'Kiméra',
+    cyborg: 'Kiborg',
+    female: 'Nő',
+    male: 'Férfi',
+    other: 'Egyéb',
+    robot: 'Robot',
   },
   share: {
     modal: {
@@ -304,20 +281,6 @@ export default {
   contextMenu: {
     disabled: 'Hé, itt nem lehet jobb klikkelni!',
   },
-  admin: {
-    terminal: {
-      systemBoot: 'Rendszer betöltése...',
-      systemReady: 'MAW admin biztonságos kapcsolat létrejött.',
-      loginPrompt: 'belépés:',
-      passwordPrompt: 'jelszó:',
-      invalidCredentials:
-        'Hozzáférés megtagadva. Érvénytelen hitelesítő adatok.',
-      accessGranted: 'Hozzáférés megadva. Üdvözöljük újra, {username}.',
-      matrixQuote: 'Valaki figyel téged!!! Kövesd a fehér nyulat.',
-      redirectingGeneric: 'Átirányítás...',
-      redirectingSafety: 'Visszaviszlek a biztonságba...',
-    },
-  },
   stickyVideoPlayer: {
     videoTitle: 'Tapadós videólejátszó',
   },
@@ -339,5 +302,17 @@ export default {
         from_100: 'Maximális fájdalom',
       },
     },
+  },
+  language: {
+    label: 'Nyelv',
+    option: {
+      en: 'Angol',
+      hu: 'Magyar',
+    },
+  },
+  themeSwitch: {
+    label: 'Téma váltása',
+    darkMode: 'Sötét mód',
+    lightMode: 'Világos mód',
   },
 } satisfies AppTranslationShape;

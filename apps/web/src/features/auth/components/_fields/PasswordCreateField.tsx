@@ -6,37 +6,53 @@ import {
   FieldError,
   FieldLabel,
   Input,
+  PasswordStrengthBar,
 } from '@maw/ui-lib';
 import { useTranslations } from 'next-intl';
 import { useFormContext } from 'react-hook-form';
 
-interface UsernameFieldProps {
+interface PasswordCreateFieldProps {
   fieldName?: string;
   required?: boolean;
 }
 
-export function UsernameField({
-  fieldName = 'username',
+export function PasswordCreateField({
+  fieldName = 'password',
   required,
-}: UsernameFieldProps) {
+}: PasswordCreateFieldProps) {
   const t = useTranslations();
   const {
     formState: { errors },
     register,
+    watch,
   } = useFormContext();
+
+  const password = watch(fieldName);
+
+  const passwordStrengthText = {
+    label: t('userField.passwordStrength'),
+    weak: t('form.validation.passwordStrength.weak'),
+    okay: t('form.validation.passwordStrength.okay'),
+    veryStrong: t('form.validation.passwordStrength.veryStrong'),
+  };
 
   return (
     <Field>
       <FieldLabel htmlFor={fieldName} required={required}>
-        {t('user.field.username')}
+        {t('userField.password')}
       </FieldLabel>
       <FieldContent>
         <Input
-          type="text"
+          type="password"
           className="w-full"
           id={fieldName}
           aria-invalid={!!errors[fieldName]}
           {...register(fieldName)}
+        />
+        <PasswordStrengthBar
+          className="mt-3"
+          password={password}
+          text={passwordStrengthText}
         />
         <FieldError errors={[errors[fieldName]]} />
       </FieldContent>

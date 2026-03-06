@@ -29,17 +29,17 @@ export function RuntimeInfo() {
   return (
     <Card data-testid="runtime-settings">
       <CardHeader>
-        <CardTitle>{t('settings.runtime.title')}</CardTitle>
+        <CardTitle>{t('user.runtimeInfo.title')}</CardTitle>
       </CardHeader>
       <CardContent className="flex flex-col gap-1">
         <small className="text-muted-foreground">
-          <i>{t('settings.runtime.disclaimer')}</i>
+          <i>{t('user.runtimeInfo.disclaimer')}</i>
         </small>
         <Table>
           <TableBody>
             <TableRow>
               <TableCell className="w-3/5 font-medium">
-                {t('settings.runtime.startedAgo')}
+                {t('user.runtimeInfo.startedAgo')}
               </TableCell>
               <TableCell>
                 {startedAt ? (
@@ -51,7 +51,7 @@ export function RuntimeInfo() {
             </TableRow>
             <TableRow>
               <TableCell className="w-3/5 font-medium">
-                {t('settings.runtime.visibilitySeconds')}
+                {t('user.runtimeInfo.visibilitySeconds')}
               </TableCell>
               <TableCell>
                 {formatSecondsToHHMMSS(runtime.document.visibilitySeconds)}
@@ -59,7 +59,7 @@ export function RuntimeInfo() {
             </TableRow>
             <TableRow>
               <TableCell className="w-3/5 font-medium">
-                {t('settings.runtime.isDocumentVisible')}
+                {t('user.runtimeInfo.isDocumentVisible')}
               </TableCell>
               <TableCell>
                 {runtime.document.isVisible ? t('common.yes') : t('common.no')}
@@ -67,7 +67,7 @@ export function RuntimeInfo() {
             </TableRow>
             <TableRow>
               <TableCell className="w-3/5 font-medium">
-                {t('settings.runtime.userActivation')}
+                {t('user.runtimeInfo.userActivation')}
               </TableCell>
               <TableCell>
                 {runtime.userActivation.unlocked
@@ -77,7 +77,7 @@ export function RuntimeInfo() {
             </TableRow>
             <TableRow>
               <TableCell className="w-3/5 font-medium">
-                {t('settings.runtime.lastActivation')}
+                {t('user.runtimeInfo.lastActivation')}
               </TableCell>
               <TableCell>
                 {runtime.userActivation.lastEventAt > 0 ? (
@@ -89,7 +89,7 @@ export function RuntimeInfo() {
             </TableRow>
             <TableRow>
               <TableCell className="w-3/5 font-medium">
-                {t('settings.runtime.navigationCount')}
+                {t('user.runtimeInfo.navigationCount')}
               </TableCell>
               <TableCell>{runtime.navigationCount}</TableCell>
             </TableRow>
@@ -97,15 +97,15 @@ export function RuntimeInfo() {
               <TableRow>
                 <TableCell className="w-3/5 font-medium">
                   {runtime.adblockerSuspected
-                    ? t('settings.runtime.adblockerSuspected')
-                    : t('settings.runtime.adblockerNotDetected')}
+                    ? t('user.runtimeInfo.adblockerSuspected')
+                    : t('user.runtimeInfo.adblockerNotDetected')}
                 </TableCell>
                 <TableCell>✅</TableCell>
               </TableRow>
             )}
             <TableRow>
               <TableCell className="w-3/5 font-medium">
-                {t('settings.runtime.flaimSurveyResult')}
+                {t('user.runtimeInfo.flaimSurveyResult')}
               </TableCell>
               <TableCell>
                 {runtime.flaimSurveyResult
