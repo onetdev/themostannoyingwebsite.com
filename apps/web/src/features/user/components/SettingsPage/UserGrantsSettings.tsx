@@ -35,10 +35,10 @@ export function UserGrantsSettings() {
           label={t('user.userGrants.notificationPermission')}
           reverse
         >
-          {`${grant.permission.notification || t('common.notSet')}`}
+          {`${grant.permission.notification || t('common.state.notSet')}`}
         </SettingsField>
         <SettingsField label={t('user.userGrants.locationPermission')} reverse>
-          {`${grant.permission.location || t('common.notSet')}`}
+          {`${grant.permission.location || t('common.state.notSet')}`}
         </SettingsField>
       </CardContent>
     </Card>

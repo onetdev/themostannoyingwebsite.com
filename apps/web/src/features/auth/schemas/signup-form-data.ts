@@ -4,28 +4,28 @@ import { GenderSchema } from '.';
 const validatePassword = (value: string, t: ZodTranslator) => {
   // Split up in this way to annoy the user the most
   if (!value.match(/[A-Z]/)) {
-    return t('form.validation.error.missingUppercase');
+    return t('common.validation.error.missingUppercase');
   } else if (!value.match(/[a-z]/)) {
-    return t('form.validation.error.missingLowercase');
+    return t('common.validation.error.missingLowercase');
   } else if (!value.match(/[0-9]/)) {
-    return t('form.validation.error.missingNumber');
+    return t('common.validation.error.missingNumber');
   } else if (!value.match(/[^A-Za-z0-9]/)) {
-    return t('form.validation.error.missingSpecialCharacter');
+    return t('common.validation.error.missingSpecialCharacter');
   }
 
   const numbers = value.match(/[0-9]/g) ?? [];
   const sumOfNumbers = numbers.map(Number).reduce((a, b) => a + b, 0);
   if (sumOfNumbers < 30) {
-    return t('form.validation.error.sumOfNumbersGte', {
+    return t('common.validation.error.sumOfNumbersGte', {
       count: 30,
     });
   }
 
   if (sumOfNumbers % 2) {
-    return t('form.validation.error.sumOfNumbersMustBeEven');
+    return t('common.validation.error.sumOfNumbersMustBeEven');
   }
 
-  return t('form.validation.error.passwordAlreadyTaken');
+  return t('common.validation.error.passwordAlreadyTaken');
 };
 
 export function getSignupFormDataSchema(t: ZodTranslator) {
@@ -33,39 +33,39 @@ export function getSignupFormDataSchema(t: ZodTranslator) {
     .object({
       firstName: z
         .string()
-        .min(1, { message: t('form.validation.error.required') }),
+        .min(1, { message: t('common.validation.error.required') }),
       lastName: z
         .string()
-        .min(1, { message: t('form.validation.error.required') }),
-      email: z.email({ message: t('form.validation.error.emailInvalid') }),
+        .min(1, { message: t('common.validation.error.required') }),
+      email: z.email({ message: t('common.validation.error.emailInvalid') }),
       password: z
         .string()
         .min(12, {
-          message: t('form.validation.error.minLength', { count: 12 }),
+          message: t('common.validation.error.minLength', { count: 12 }),
         })
         .refine((value) => validatePassword(value, t)),
       passwordConfirmation: z
         .string()
-        .min(1, { message: t('form.validation.error.required') }),
+        .min(1, { message: t('common.validation.error.required') }),
       dateOfBirth: z.preprocess(
         (val) => (!val ? undefined : val),
         z.coerce.date().optional(),
       ),
       username: z
         .string()
-        .min(1, { message: t('form.validation.error.required') }),
+        .min(1, { message: t('common.validation.error.required') }),
       nickname: z.string().optional(),
       consentNewsletter: z.boolean().optional(),
       consentPrivacyPolicy: z.boolean().refine((val) => val === true, {
-        message: t('form.validation.error.checkboxRequired'),
+        message: t('common.validation.error.checkboxRequired'),
       }),
       consentChildSoul: z.boolean().refine((val) => val === true, {
-        message: t('form.validation.error.checkboxRequired'),
+        message: t('common.validation.error.checkboxRequired'),
       }),
       gender: GenderSchema.optional(),
       countryCode: z
         .string()
-        .min(1, { message: t('form.validation.error.required') }),
+        .min(1, { message: t('common.validation.error.required') }),
       phoneNumberCountry: z.string().optional(),
       phoneNumber: z.preprocess(
         (val) => (!val ? undefined : val),
@@ -73,10 +73,10 @@ export function getSignupFormDataSchema(t: ZodTranslator) {
       ),
       captcha: z
         .string()
-        .min(1, { message: t('form.validation.error.captchaRequired') }),
+        .min(1, { message: t('common.validation.error.captchaRequired') }),
     })
     .refine((data) => data.password === data.passwordConfirmation, {
-      message: t('form.validation.error.passwordMismatch'),
+      message: t('common.validation.error.passwordMismatch'),
       path: ['passwordConfirmation'],
     });
 }

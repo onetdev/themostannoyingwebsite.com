@@ -45,7 +45,7 @@ export function RuntimeInfo() {
                 {startedAt ? (
                   <ReactTimeAgo date={startedAt} />
                 ) : (
-                  t('common.notAvailable')
+                  t('common.state.notAvailable')
                 )}
               </TableCell>
             </TableRow>
@@ -62,7 +62,9 @@ export function RuntimeInfo() {
                 {t('user.runtimeInfo.isDocumentVisible')}
               </TableCell>
               <TableCell>
-                {runtime.document.isVisible ? t('common.yes') : t('common.no')}
+                {runtime.document.isVisible
+                  ? t('common.action.yes')
+                  : t('common.action.no')}
               </TableCell>
             </TableRow>
             <TableRow>
@@ -71,8 +73,8 @@ export function RuntimeInfo() {
               </TableCell>
               <TableCell>
                 {runtime.userActivation.unlocked
-                  ? t('common.completed')
-                  : t('common.pending')}
+                  ? t('common.state.completed')
+                  : t('common.state.pending')}
               </TableCell>
             </TableRow>
             <TableRow>
@@ -83,7 +85,7 @@ export function RuntimeInfo() {
                 {runtime.userActivation.lastEventAt > 0 ? (
                   <ReactTimeAgo date={runtime.userActivation.lastEventAt} />
                 ) : (
-                  t('common.notAvailable')
+                  t('common.state.notAvailable')
                 )}
               </TableCell>
             </TableRow>
@@ -109,8 +111,8 @@ export function RuntimeInfo() {
               </TableCell>
               <TableCell>
                 {runtime.flaimSurveyResult
-                  ? t('common.done')
-                  : t('common.pending')}
+                  ? t('common.state.done')
+                  : t('common.state.pending')}
               </TableCell>
             </TableRow>
           </TableBody>

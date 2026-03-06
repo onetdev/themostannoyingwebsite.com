@@ -28,13 +28,13 @@ export function PageTitleGlitch() {
   const messages = useMessages();
 
   const marqueeVariants = Object.keys(
-    messages.titleExperience.marqueeVariants,
+    messages.disruptions.titleExperience.marqueeVariants,
   ).map((key) =>
     t(`titleExperience.marqueeVariants.${key}` as AppTranslationKey),
   );
 
   const arrayPagedVariants = Object.keys(
-    messages.titleExperience.arrayPagedVariants,
+    messages.disruptions.titleExperience.arrayPagedVariants,
   ).map((key) =>
     t(`titleExperience.arrayPagedVariants.${key}` as AppTranslationKey),
   );

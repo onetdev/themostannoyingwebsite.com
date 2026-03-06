@@ -31,9 +31,9 @@ export function PasswordCreateField({
 
   const passwordStrengthText = {
     label: t('userField.passwordStrength'),
-    weak: t('form.validation.passwordStrength.weak'),
-    okay: t('form.validation.passwordStrength.okay'),
-    veryStrong: t('form.validation.passwordStrength.veryStrong'),
+    weak: t('common.validation.passwordStrength.weak'),
+    okay: t('common.validation.passwordStrength.okay'),
+    veryStrong: t('common.validation.passwordStrength.veryStrong'),
   };
 
   return (

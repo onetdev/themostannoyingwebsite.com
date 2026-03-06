@@ -72,7 +72,7 @@ export function CaptchaField({
         <input
           type="hidden"
           {...register(fieldName, {
-            required: t('form.validation.error.captchaInvalid'),
+            required: t('common.validation.error.captchaInvalid'),
           })}
         />
         <FieldError errors={[errors[fieldName]]} />

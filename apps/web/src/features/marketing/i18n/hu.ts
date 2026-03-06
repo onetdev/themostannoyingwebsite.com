@@ -72,4 +72,17 @@ export default {
       },
     },
   },
+  wheelOfFortune: {
+    title: 'Szerencsekerék',
+    spinStart: 'Kattints vagy koppints ide!',
+    spinWin: 'Nyertél! {prize}',
+    prizeVariants: {
+      freeLifetimeBeer: 'Ingyen sör örökre',
+      worldPeace: 'Világbéke',
+      absolutellyNothing: 'A nagy büdös semmi',
+      complimentaryOtter: 'Ingyen vidra',
+      fake70Discount: 'Kamuzott 70%-os kedvezmény',
+    },
+    wheelTitle: 'Szerencsekerék',
+  },
 };

@@ -72,4 +72,17 @@ export default {
       },
     },
   },
+  wheelOfFortune: {
+    title: 'Wheel of fortune',
+    spinStart: 'Click or Tap here!',
+    spinWin: 'You won! {prize}',
+    prizeVariants: {
+      freeLifetimeBeer: 'Free lifetime beer',
+      worldPeace: 'World peace',
+      absolutellyNothing: 'Absolutelly nothing',
+      complimentaryOtter: 'Complimentary otter',
+      fake70Discount: 'Fake 70% discount',
+    },
+    wheelTitle: 'Wheel of fortune',
+  },
 };

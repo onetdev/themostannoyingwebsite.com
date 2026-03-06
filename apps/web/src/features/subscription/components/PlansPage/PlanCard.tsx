@@ -129,7 +129,7 @@ export function PlanCard({
           variant={isSelected ? 'default' : 'outline'}
           onClick={onSelect}
         >
-          {isSelected ? t('common.done') : t('common.select')}
+          {isSelected ? t('common.action.done') : t('common.action.select')}
         </Button>
       </CardFooter>
     </Card>

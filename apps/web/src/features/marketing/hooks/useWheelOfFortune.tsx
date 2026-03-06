@@ -21,19 +21,25 @@ export function useWheelOfFortune() {
   const prizeWithWeight = useMemo(
     () => [
       {
-        value: `${t('wheelOfFortune.prizeVariants.freeLifetimeBeer')}*`,
+        value: `${t('marketing.wheelOfFortune.prizeVariants.freeLifetimeBeer')}*`,
         weight: 10,
       },
-      { value: `${t('wheelOfFortune.prizeVariants.worldPeace')}*`, weight: 1 },
       {
-        value: t('wheelOfFortune.prizeVariants.absolutellyNothing'),
+        value: `${t('marketing.wheelOfFortune.prizeVariants.worldPeace')}*`,
+        weight: 1,
+      },
+      {
+        value: t('marketing.wheelOfFortune.prizeVariants.absolutellyNothing'),
         weight: 100,
       },
       {
-        value: `${t('wheelOfFortune.prizeVariants.complimentaryOtter')}*`,
+        value: `${t('marketing.wheelOfFortune.prizeVariants.complimentaryOtter')}*`,
         weight: 2,
       },
-      { value: t('wheelOfFortune.prizeVariants.fake70Discount'), weight: 50 },
+      {
+        value: t('marketing.wheelOfFortune.prizeVariants.fake70Discount'),
+        weight: 50,
+      },
     ],
     [t],
   );

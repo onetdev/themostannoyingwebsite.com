@@ -117,11 +117,33 @@ export default {
     adblockerSuspected: 'Adblocker suspected',
     adblockerNotDetected: 'Adblocker not detected',
   },
-  screensaver: {
-    exitClick: 'Click anywhere to exit screensaver',
-    exitTap: 'Tap anywhere to exit screensaver',
-  },
   myProfile: {
     notSupposedToBeHere: 'Hmm, you are not supposed to be here 😡',
+  },
+  notification: {
+    modal: {
+      title: 'Oh no, where is the notification permission!?!',
+      description:
+        "We would like to send you notifications sometimes. You can give notification permission to this website from your browser's settings. Could you? 🙏🥺🙏",
+    },
+  },
+  painPreferences: {
+    levelSettings: {
+      label: 'Pain level',
+      railTitle: 'Pain level slider rail',
+      clamps: {
+        from_0: 'Innocent',
+        from_10: "It's a bit odd, innit?",
+        from_20: 'Mildly annoying',
+        from_30: 'A wee bit cursed',
+        from_40: 'Unsettling in a very specific way',
+        from_50: 'Just the right amount',
+        from_60: 'Higher-than-average tolerance',
+        from_70: 'Stepping in dog excrement barefoot',
+        from_80: 'Borderline masochistic',
+        from_90: 'Nightmares? Subscribed.',
+        from_100: 'Max Pain',
+      },
+    },
   },
 };

@@ -43,7 +43,7 @@ export function MessageForm({ className, onMessage }: MessageFormProps) {
         />
         <InputGroupAddon align="inline-end">
           <InputGroupButton
-            aria-label={t('common.send')}
+            aria-label={t('common.action.send')}
             type="submit"
             size="sm"
           >

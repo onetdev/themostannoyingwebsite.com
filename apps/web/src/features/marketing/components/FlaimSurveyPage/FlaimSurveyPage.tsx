@@ -66,7 +66,7 @@ export function FlaimSurveyPage({
             className="mt-5"
             disabled={typeof progression === 'undefined'}
           >
-            {t('common.next')}
+            {t('common.action.next')}
           </Button>
         </>
       )}

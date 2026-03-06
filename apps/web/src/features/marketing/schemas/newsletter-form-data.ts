@@ -3,8 +3,8 @@ import { z } from 'zod';
 export function getNewsletterFormDataSchema(t: ZodTranslator) {
   return z.object({
     email: z
-      .email({ error: t('form.validation.error.emailInvalid') })
-      .min(1, { error: t('form.validation.error.required') }),
+      .email({ error: t('common.validation.error.emailInvalid') })
+      .min(1, { error: t('common.validation.error.required') }),
   });
 }
 

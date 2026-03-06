@@ -57,8 +57,8 @@ export function Screensaver() {
           <div className="absolute bottom-10 left-0 z-1010 w-full text-center">
             <span className="pointer-events-none text-xs tracking-widest text-white/50 uppercase select-none">
               {isTouch
-                ? t('user.screensaver.exitTap')
-                : t('user.screensaver.exitClick')}
+                ? t('disruptions.screensaver.exitTap')
+                : t('disruptions.screensaver.exitClick')}
             </span>
           </div>
         </motion.div>

@@ -42,10 +42,10 @@ export function PainPreferences({
         </div>
         <CardFooter className="flex gap-3">
           <Button onClick={painPreferences.allEnable}>
-            {t('common.enableAll')}
+            {t('common.action.enableAll')}
           </Button>
           <Button variant="secondary" onClick={painPreferences.allDisable}>
-            {t('common.disableAll')}
+            {t('common.action.disableAll')}
           </Button>
         </CardFooter>
       </CardContent>

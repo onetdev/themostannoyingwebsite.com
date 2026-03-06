@@ -121,11 +121,33 @@ export default {
     adblockerSuspected: 'Reklámblokkoló gyanúja',
     adblockerNotDetected: 'Reklámblokkoló nem észlelhető',
   },
-  screensaver: {
-    exitClick: 'Kattints bárhova a kilépéshez',
-    exitTap: 'Koppints bárhova a kilépéshez',
-  },
   myProfile: {
     notSupposedToBeHere: 'Hmm, nem kellene itt lenned 😡',
+  },
+  notification: {
+    modal: {
+      title: 'Ó ne, hol van az értesítési engedély!?!',
+      description:
+        'Szeretnénk néha értesítéseket küldeni neked. A böngésződ beállításaiban adhatsz értesítési engedélyt ennek a weboldalnak. Megtennéd? 🙏🥺🙏',
+    },
+  },
+  painPreferences: {
+    levelSettings: {
+      label: 'Fájdalomküszöb',
+      railTitle: 'Fájdalomküszöb csúszka sínje',
+      clamps: {
+        from_0: 'Ártatlan',
+        from_10: 'Kicsit fura, nem?',
+        from_20: 'Enyhén bosszantó',
+        from_30: 'Egy kicsit elátkozott',
+        from_40: 'Nagyon specifikus módon nyugtalanító',
+        from_50: 'Pont a megfelelő mennyiség',
+        from_60: 'Átlag feletti tolerancia',
+        from_70: 'Mezítláb kutyagumiba lépni',
+        from_80: 'Határeset mazochizmus',
+        from_90: 'Rémálmok? Feliratkozva.',
+        from_100: 'Maximális fájdalom',
+      },
+    },
   },
 };

@@ -111,12 +111,12 @@ export function CaptchaDialog({
           </div>
           {currentChallengeScore < 1 && (
             <Button onClick={handleSkip} size="sm" className="px-6 uppercase">
-              {t('common.skip')}
+              {t('common.action.skip')}
             </Button>
           )}
           {currentChallengeScore >= 1 && (
             <Button onClick={handleVerify} size="sm" className="px-6 uppercase">
-              {t('common.verify')}
+              {t('common.action.verify')}
             </Button>
           )}
         </DialogFooter>

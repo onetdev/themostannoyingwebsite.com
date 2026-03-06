@@ -77,7 +77,7 @@ export function WheelAnimationWrapper({
             height={500}
             items={items}
             highlightIndex={state === 'completed' ? highlightIndex : undefined}
-            title={t('wheelOfFortune.wheelTitle')}
+            title={t('marketing.wheelOfFortune.wheelTitle')}
           />
         </motion.div>
       </div>

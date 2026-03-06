@@ -23,7 +23,7 @@ export function AdblockerSuspectBar() {
       <p>{t('marketing.suspectBar.description')}</p>
       <div className="my-2 flex items-center justify-end gap-3">
         <Button variant="outline" onClick={() => setOpen(false)}>
-          {t('common.ok')}
+          {t('common.action.ok')}
         </Button>
       </div>
     </div>

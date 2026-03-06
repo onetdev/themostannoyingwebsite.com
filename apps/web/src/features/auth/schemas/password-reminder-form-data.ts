@@ -2,10 +2,10 @@ import { z } from 'zod';
 
 export function getPasswordReminderFormDataSchema(t: ZodTranslator) {
   return z.object({
-    email: z.email({ message: t('form.validation.error.emailInvalid') }),
+    email: z.email({ message: t('common.validation.error.emailInvalid') }),
     captcha: z
       .string()
-      .min(1, { message: t('form.validation.error.captchaRequired') }),
+      .min(1, { message: t('common.validation.error.captchaRequired') }),
   });
 }
 

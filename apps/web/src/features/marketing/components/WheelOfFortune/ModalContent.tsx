@@ -15,7 +15,7 @@ export function ModalContent({ className, ...rest }: ModalContentProps) {
 
   const resultDisplay =
     wof.state === 'completed' && wof.prize
-      ? t('wheelOfFortune.spinWin', { prize: wof.prize.text })
+      ? t('marketing.wheelOfFortune.spinWin', { prize: wof.prize.text })
       : null;
 
   return (
@@ -50,7 +50,7 @@ export function ModalContent({ className, ...rest }: ModalContentProps) {
               onClick={() => wof.spin()}
             >
               <Icon icon="chevronRight" className="text-sm" />{' '}
-              {t('wheelOfFortune.spinStart')}
+              {t('marketing.wheelOfFortune.spinStart')}
               <Icon icon="chevronLeft" className="text-sm" />
             </Button>
           )}

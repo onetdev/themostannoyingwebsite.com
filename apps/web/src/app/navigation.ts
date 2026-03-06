@@ -49,7 +49,7 @@ export const PERSONAL_NAVIGATION_LINKS: NavItem[] = [
     hideLabel: true,
     icon: 'share' as const,
     key: 'global-share',
-    labelKey: 'common.share',
+    labelKey: 'common.action.share',
     path: '#share',
   },
   {

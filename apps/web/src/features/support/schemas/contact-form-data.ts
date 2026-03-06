@@ -4,10 +4,10 @@ export function getContactFormDataSchema(t: ZodTranslator) {
   return z.object({
     subject: z
       .string()
-      .min(1, { message: t('form.validation.error.required') }),
+      .min(1, { message: t('common.validation.error.required') }),
     message: z
       .string()
-      .min(1, { message: t('form.validation.error.required') }),
+      .min(1, { message: t('common.validation.error.required') }),
   });
 }
 

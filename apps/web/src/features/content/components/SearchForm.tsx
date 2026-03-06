@@ -67,7 +67,7 @@ export function SearchForm({
           />
           <InputGroupAddon align="inline-end">
             <InputGroupButton
-              aria-label={t('common.search')}
+              aria-label={t('common.action.search')}
               type="submit"
               className={cn(searchFormVariants({ size }))}
             >

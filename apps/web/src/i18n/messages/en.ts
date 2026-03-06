@@ -4,29 +4,33 @@ import humanVerification from '@/features/captcha/i18n/en';
 import comments from '@/features/comments/i18n/en';
 import commentVariants from '@/features/comments/i18n/generator/en';
 import content from '@/features/content/i18n/en';
+import disruptions from '@/features/disruptions/i18n/en';
 import funding from '@/features/funding/i18n/en';
 import marketing from '@/features/marketing/i18n/en';
 import monitoring from '@/features/monitoring/i18n/en';
 import subscription from '@/features/subscription/i18n/en';
 import support from '@/features/support/i18n/en';
 import user from '@/features/user/i18n/en';
+import common from './common/en';
 import metadata from './metadata/en';
 
 export default {
   // Feature or externals
-  auth,
   achievements,
-  content,
+  auth,
   comments,
   commentVariants,
+  common,
+  content,
+  disruptions,
   funding,
   humanVerification,
   marketing,
   metadata,
   monitoring,
-  user,
   subscription,
   support,
+  user,
 
   // App level, shared translations
   app: {
@@ -89,114 +93,6 @@ export default {
     personal: 'Personal',
     achievements: 'Achievements',
   },
-  common: {
-    accept: 'Accept',
-    back: 'Back',
-    backHome: 'Back to home',
-    cancel: 'Cancel',
-    close: 'Close',
-    completed: 'Completed',
-    confirm: 'Confirm',
-    decline: 'Decline',
-    delete: 'Delete',
-    disable: 'Disable',
-    disableAll: 'Disable all',
-    dismiss: 'Dismiss',
-    done: 'Done',
-    edit: 'Edit',
-    enable: 'Enable',
-    enableAll: 'Enable all',
-    generate: 'Generate',
-    loading: 'Loading...',
-    next: 'Next',
-    no: 'No',
-    notAvailable: 'n/a',
-    notSet: 'Not set',
-    ok: 'OK',
-    pending: 'Pending',
-    placeholderSearch: 'Search...',
-    reply: 'Reply',
-    reset: 'Reset',
-    save: 'Save',
-    search: 'Search',
-    select: 'Select',
-    send: 'Send',
-    share: 'Share',
-    skip: 'Skip',
-    submit: 'Submit',
-    unknown: 'Unknown',
-    verify: 'Verify',
-    yes: 'Yes',
-  },
-  date: {
-    months: {
-      january: 'January',
-      february: 'February',
-      march: 'March',
-      april: 'April',
-      may: 'May',
-      june: 'June',
-      july: 'July',
-      august: 'August',
-      september: 'September',
-      october: 'October',
-      november: 'November',
-      december: 'December',
-    },
-    weekdays: {
-      sunday: 'Sunday',
-      monday: 'Monday',
-      tuesday: 'Tuesday',
-      wednesday: 'Wednesday',
-      thursday: 'Thursday',
-      friday: 'Friday',
-      saturday: 'Saturday',
-    },
-    formats: {
-      long: 'MMM D, YYYY',
-      short: 'M/D/YYYY',
-    },
-  },
-  form: {
-    validation: {
-      error: {
-        unknownError: 'An unknown error occurred. Please try again later.',
-        impossiblePath:
-          'It is impossible to get here, there must be an error. Feel free to try again.',
-        required: 'This field is required.',
-        minLength: 'Minimum length is {count} characters',
-        maxLength: 'Maximum length is {count} characters',
-        min: 'Value must be at least {count}',
-        max: 'Value must be no more than {count}',
-        emailInvalid: 'Valid email address is required',
-        captchaRequired: 'Captcha is required',
-        captchaInvalid: 'Invalid captcha',
-        patternMismatch: 'The input does not match the required pattern',
-        passwordMismatch: 'Passwords do not match',
-        urlInvalid: 'Invalid URL format',
-        numberInvalid: 'Please enter a valid number',
-        dateInvalid: 'Invalid date format',
-        tooShort: 'The input is too short',
-        tooLong: 'The input is too long',
-        checkboxRequired: 'You must check this box',
-        fileTooLarge: 'The file size exceeds the limit of {size}',
-        fileTypeInvalid: 'Invalid file type',
-        customError: 'Invalid input',
-        missingUppercase: 'Must contain at least one uppercase letter',
-        missingLowercase: 'Must contain at least one lowercase letter',
-        missingNumber: 'Must contain at least one number',
-        missingSpecialCharacter: 'Must contain at least one symbol',
-        sumOfNumbersGte: 'Sum of numbers must be at least or equal to {count}',
-        sumOfNumbersMustBeEven: 'Sum of numbers must be be even',
-        passwordAlreadyTaken: 'The password is already taken by another user',
-      },
-      passwordStrength: {
-        weak: 'Weak',
-        okay: 'Okay',
-        veryStrong: 'Strong',
-      },
-    },
-  },
   userField: {
     consentNewsletter: 'I want to receive newsletter',
     consentPrivacyPolicy: 'Accept privacy policy',
@@ -238,36 +134,6 @@ export default {
         'Spread the misery! Be sure to inflict this painfully obnoxious website on your friends too — why suffer alone when you can drag them down with you?',
     },
   },
-  notification: {
-    modal: {
-      title: 'Oh no, where is the notification permission!?!',
-      description:
-        "We would like to send you notifications sometimes. You can give notification permission to this website from your browser's settings. Could you? 🙏🥺🙏",
-    },
-  },
-  titleExperience: {
-    marqueeVariants: {
-      variant_001: '📣 Come back please 🏃‍♀️🏃 We have candy!! 🚐',
-    },
-    arrayPagedVariants: {
-      variant_001: '⭐️ HEY YOU 🫵',
-      variant_002: '😜 YES YOU 😱',
-      variant_003: '📣 COME BACK 🏃',
-    },
-  },
-  wheelOfFortune: {
-    title: 'Wheel of fortune',
-    spinStart: 'Click or Tap here!',
-    spinWin: 'You won! {prize}',
-    prizeVariants: {
-      freeLifetimeBeer: 'Free lifetime beer',
-      worldPeace: 'World peace',
-      absolutellyNothing: 'Absolutelly nothing',
-      complimentaryOtter: 'Complimentary otter',
-      fake70Discount: 'Fake 70% discount',
-    },
-    wheelTitle: 'Wheel of fortune',
-  },
   messages: {
     errors: {
       e404title: 'Error 404',
@@ -277,28 +143,6 @@ export default {
   },
   contextMenu: {
     disabled: "Hey, you can't right click here!",
-  },
-  stickyVideoPlayer: {
-    videoTitle: 'Sticky video player',
-  },
-  painPreferences: {
-    levelSettings: {
-      label: 'Pain level',
-      railTitle: 'Pain level slider rail',
-      clamps: {
-        from_0: 'Innocent',
-        from_10: "It's a bit odd, innit?",
-        from_20: 'Mildly annoying',
-        from_30: 'A wee bit cursed',
-        from_40: 'Unsettling in a very specific way',
-        from_50: 'Just the right amount',
-        from_60: 'Higher-than-average tolerance',
-        from_70: 'Stepping in dog excrement barefoot',
-        from_80: 'Borderline masochistic',
-        from_90: 'Nightmares? Subscribed.',
-        from_100: 'Max Pain',
-      },
-    },
   },
   language: {
     label: 'Language',

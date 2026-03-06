@@ -24,7 +24,7 @@ export function GlobalStickyVideo() {
       <button
         type="button"
         className="bg-error text-on-error absolute top-1 right-2 cursor-pointer rounded-full"
-        aria-label={t('common.close')}
+        aria-label={t('common.action.close')}
         onClick={() => setClosed(true)}
       >
         <Icon icon="close" />
@@ -33,7 +33,7 @@ export function GlobalStickyVideo() {
         className="aspect-video max-h-56 w-full overflow-hidden rounded-lg md:max-h-96"
         ref={$playerRef}
         src="https://www.youtube.com/embed/M7lc1UVf-VE?autoplay=1&controls=2&loop=1&mute=1"
-        title={t('stickyVideoPlayer.videoTitle')}
+        title={t('disruptions.stickyVideoPlayer.videoTitle')}
       />
     </div>
   );

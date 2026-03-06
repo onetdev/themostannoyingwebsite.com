@@ -24,7 +24,7 @@ export function WheelOfFortune() {
       <Dialog open={isOpen} onOpenChange={setOpen}>
         <DialogContent showCloseButton={true} className="overflow-hidden p-0">
           <DialogHeader className="p-5 pb-2">
-            <DialogTitle>{t('wheelOfFortune.title')}</DialogTitle>
+            <DialogTitle>{t('marketing.wheelOfFortune.title')}</DialogTitle>
           </DialogHeader>
           <ModalContent className="max-h-[600px] max-w-[600px] grow" />
         </DialogContent>
@@ -34,7 +34,7 @@ export function WheelOfFortune() {
           type="button"
           className="animate-wiggle-8deg bg-error text-on-error -ml-8 cursor-pointer py-3 pr-6 pl-10 text-2xl opacity-80 transition-all duration-200 ease-in-out hover:-ml-4 hover:opacity-100"
           onClick={() => setOpen(true)}
-          aria-label={t('wheelOfFortune.title')}
+          aria-label={t('marketing.wheelOfFortune.title')}
         >
           <Icon icon="tags" />
         </button>

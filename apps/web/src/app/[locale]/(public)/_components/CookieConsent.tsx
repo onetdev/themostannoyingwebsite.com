@@ -23,7 +23,7 @@ export function CookieConsent() {
             {t('navigation.settings')}
           </Link>
           <button type="button" onClick={close}>
-            {t('common.ok')}
+            {t('common.action.ok')}
           </button>
         </div>
       </div>

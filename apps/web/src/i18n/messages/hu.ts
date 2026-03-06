@@ -4,29 +4,33 @@ import humanVerification from '@/features/captcha/i18n/hu';
 import commentVariants from '@/features/comments/i18n/generator/hu';
 import comments from '@/features/comments/i18n/hu';
 import content from '@/features/content/i18n/hu';
+import disruptions from '@/features/disruptions/i18n/hu';
 import funding from '@/features/funding/i18n/hu';
 import marketing from '@/features/marketing/i18n/hu';
 import monitoring from '@/features/monitoring/i18n/hu';
 import subscription from '@/features/subscription/i18n/hu';
 import support from '@/features/support/i18n/hu';
 import user from '@/features/user/i18n/hu';
+import common from './common/hu';
 import metadata from './metadata/hu';
 
 export default {
   // Feature or externals
-  auth,
   achievements,
-  content,
+  auth,
   comments,
   commentVariants,
+  common,
+  content,
+  disruptions,
   funding,
   humanVerification,
   marketing,
   metadata,
   monitoring,
-  user,
   subscription,
   support,
+  user,
 
   // App level, shared translations
   app: {
@@ -91,115 +95,6 @@ export default {
     personal: 'Személyes',
     achievements: 'Eredmények',
   },
-  common: {
-    accept: 'Elfogadom',
-    back: 'Vissza',
-    backHome: 'Vissza a főoldalra',
-    cancel: 'Mégse',
-    close: 'Bezárás',
-    completed: 'Befejezve',
-    confirm: 'Megerősítés',
-    decline: 'Elutasítás',
-    delete: 'Törlés',
-    disable: 'Kikapcsolás',
-    disableAll: 'Összes kikapcsolása',
-    dismiss: 'Elvetés',
-    done: 'Kész',
-    edit: 'Szerkesztés',
-    enable: 'Bekapcsolás',
-    enableAll: 'Összes bekapcsolása',
-    generate: 'Generálás',
-    loading: 'Betöltés...',
-    next: 'Tovább',
-    no: 'Nem',
-    notAvailable: 'n/a',
-    notSet: 'Nincs beállítva',
-    ok: 'OK',
-    pending: 'Folyamatban',
-    placeholderSearch: 'Keresés...',
-    reply: 'Válasz',
-    reset: 'Alaphelyzet',
-    save: 'Mentés',
-    search: 'Keresés',
-    select: 'Kiválasztás',
-    send: 'Küldés',
-    share: 'Megosztás',
-    skip: 'Kihagyás',
-    submit: 'Beküldés',
-    unknown: 'Ismeretlen',
-    verify: 'Ellenőrzés',
-    yes: 'Igen',
-  },
-  date: {
-    months: {
-      january: 'Január',
-      february: 'Február',
-      march: 'Március',
-      april: 'Április',
-      may: 'Május',
-      june: 'Június',
-      july: 'Július',
-      august: 'Augusztus',
-      september: 'Szeptember',
-      october: 'Október',
-      november: 'November',
-      december: 'December',
-    },
-    weekdays: {
-      monday: 'Hétfő',
-      tuesday: 'Kedd',
-      wednesday: 'Szerda',
-      thursday: 'Csütörtök',
-      friday: 'Péntek',
-      saturday: 'Szombat',
-      sunday: 'Vasárnap',
-    },
-    formats: {
-      long: 'MMM D, YYYY',
-      short: 'M/D/YYYY',
-    },
-  },
-  form: {
-    validation: {
-      error: {
-        unknownError: 'Ismeretlen hiba történt. Kérlek, próbáld újra később.',
-        impossiblePath:
-          'Lehetetlen idejutni, hiba történt. Nyugodtan próbáld meg újra.',
-        required: 'Ezt a mezőt kötelező kitölteni.',
-        minLength: 'A minimális hossz {count} karakter',
-        maxLength: 'A maximális hossz {count} karakter',
-        min: 'Az értéknek legalább {count}-nak kell lennie',
-        max: 'Az érték nem lehet több {count}-nál',
-        emailInvalid: 'Érvényes e-mail cím szükséges',
-        captchaRequired: 'A Captcha kitöltése kötelező',
-        captchaInvalid: 'Érvénytelen Captcha',
-        patternMismatch: 'A bemenet nem felel meg a kért mintának',
-        passwordMismatch: 'A jelszavak nem egyeznek',
-        urlInvalid: 'Érvénytelen URL formátum',
-        numberInvalid: 'Kérlek, adj meg egy érvényes számot',
-        dateInvalid: 'Érvénytelen dátumformátum',
-        tooShort: 'A bemenet túl rövid',
-        tooLong: 'A bemenet túl hosszú',
-        checkboxRequired: 'Ezt a négyzetet be kell jelölnöd',
-        fileTooLarge: 'A fájlméret meghaladja a {size} korlátot',
-        fileTypeInvalid: 'Érvénytelen fájltípus',
-        customError: 'Érvénytelen bemenet',
-        missingUppercase: 'Legalább egy nagybetűt tartalmaznia kell',
-        missingLowercase: 'Legalább egy kisbetűt tartalmaznia kell',
-        missingNumber: 'Legalább egy számot tartalmaznia kell',
-        missingSpecialCharacter: 'Legalább egy szimbólumot tartalmaznia kell',
-        sumOfNumbersGte: 'A számok összegének legalább {count}-nak kell lennie',
-        sumOfNumbersMustBeEven: 'A számok összegének párosnak kell lennie',
-        passwordAlreadyTaken:
-          'Ezt a jelszót már egy másik felhasználó lefoglalta',
-      },
-      passwordStrength: {
-        weak: 'Gyenge',
-        okay: 'Elmegy',
-        veryStrong: 'Erős',
-      },
-    },
-  },
   userField: {
     consentNewsletter: 'Szeretnék hírlevelet kapni',
     consentPrivacyPolicy: 'Elfogadom az adatvédelmi irányelveket',
@@ -241,36 +136,6 @@ export default {
         'Terjeszd a nyomorúságot! Mindenképpen kényszerítsd rá ezt a fájdalmasan ellenszenves weboldalt a barátaidra is — miért szenvednél egyedül, ha magaddal rántod őket is?',
     },
   },
-  notification: {
-    modal: {
-      title: 'Ó ne, hol van az értesítési engedély!?!',
-      description:
-        'Szeretnénk néha értesítéseket küldeni neked. A böngésződ beállításaiban adhatsz értesítési engedélyt ennek a weboldalnak. Megtennéd? 🙏🥺🙏',
-    },
-  },
-  titleExperience: {
-    marqueeVariants: {
-      variant_001: '📣 Gyere vissza kérlek 🏃‍♀️🏃 Van nálunk cukorka!! 🚐',
-    },
-    arrayPagedVariants: {
-      variant_001: '⭐️ HÉ TE 🫵',
-      variant_002: '😜 IGEN TE 😱',
-      variant_003: '📣 GYERE VISSZA 🏃',
-    },
-  },
-  wheelOfFortune: {
-    title: 'Szerencsekerék',
-    spinStart: 'Kattints vagy koppints ide!',
-    spinWin: 'Nyertél! {prize}',
-    prizeVariants: {
-      freeLifetimeBeer: 'Ingyen sör örökre',
-      worldPeace: 'Világbéke',
-      absolutellyNothing: 'A nagy büdös semmi',
-      complimentaryOtter: 'Ingyen vidra',
-      fake70Discount: 'Kamuzott 70%-os kedvezmény',
-    },
-    wheelTitle: 'Szerencsekerék',
-  },
   messages: {
     errors: {
       e404title: 'Hiba 404',
@@ -280,28 +145,6 @@ export default {
   },
   contextMenu: {
     disabled: 'Hé, itt nem lehet jobb klikkelni!',
-  },
-  stickyVideoPlayer: {
-    videoTitle: 'Tapadós videólejátszó',
-  },
-  painPreferences: {
-    levelSettings: {
-      label: 'Fájdalomküszöb',
-      railTitle: 'Fájdalomküszöb csúszka sínje',
-      clamps: {
-        from_0: 'Ártatlan',
-        from_10: 'Kicsit fura, nem?',
-        from_20: 'Enyhén bosszantó',
-        from_30: 'Egy kicsit elátkozott',
-        from_40: 'Nagyon specifikus módon nyugtalanító',
-        from_50: 'Pont a megfelelő mennyiség',
-        from_60: 'Átlag feletti tolerancia',
-        from_70: 'Mezítláb kutyagumiba lépni',
-        from_80: 'Határeset mazochizmus',
-        from_90: 'Rémálmok? Feliratkozva.',
-        from_100: 'Maximális fájdalom',
-      },
-    },
   },
   language: {
     label: 'Nyelv',
