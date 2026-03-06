@@ -2,7 +2,7 @@
 
 import { Button, DotDotDotText, PageHeadline } from '@maw/ui-lib';
 import { arrayShuffle } from '@maw/utils/array';
-import { random } from '@maw/utils/math';
+import { randomNumber } from '@maw/utils/random';
 import HTMLReactParser from 'html-react-parser';
 import { useLocale, useMessages, useTranslations } from 'next-intl';
 import { useEffect, useMemo, useState } from 'react';
@@ -66,7 +66,7 @@ export function SearchPage() {
     setLoading(true);
 
     const startTime = Date.now();
-    const delayTime = enabled ? random(0.001, 5) : 0;
+    const delayTime = enabled ? randomNumber(0.001, 5) : 0;
     const timer = setTimeout(async () => {
       const matches = await appArticleService.search({
         params: { locale },

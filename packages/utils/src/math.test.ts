@@ -3,12 +3,9 @@ import {
   clamp,
   getInterpolatedPoint,
   getPointDistance,
-  getWeightedRandom,
   isPoint2d,
   mapToLogScale,
   radToDeg,
-  random,
-  randomInt,
 } from './math';
 
 describe('Math isPoint2d', () => {
@@ -69,58 +66,11 @@ describe('Math getPointDistance', () => {
   });
 });
 
-describe('Math getWeightedRandom', () => {
-  test('should return a weighted random value', () => {
-    const result = getWeightedRandom([
-      { value: 'a', weight: 0 },
-      { value: 'b', weight: 0.5 },
-      { value: 'c', weight: 1 },
-    ]);
-
-    expect(['b', 'c']).toContain(result);
-  });
-
-  test('should return undefined if pool is empty after filtering', () => {
-    const result = getWeightedRandom([{ value: 'a', weight: 0 }]);
-    expect(result).toBeUndefined();
-  });
-});
-
 describe('Math radToDeg', () => {
   test('should convert radians to degrees', () => {
     const result = radToDeg(Math.PI);
 
     expect(result).toBe(180);
-  });
-});
-
-describe('Math random', () => {
-  test('should return a random number between min and max', () => {
-    const result = random(1, 10);
-
-    expect(result).toBeGreaterThanOrEqual(1);
-    expect(result).toBeLessThanOrEqual(10);
-  });
-
-  test('should return a random float between min and max', () => {
-    const result = random(0.1, 1);
-
-    expect(result).toBeGreaterThanOrEqual(0.1);
-    expect(result).toBeLessThanOrEqual(1);
-  });
-
-  test('should return an integer if requested', () => {
-    const result = random(1, 10, true);
-    expect(Number.isInteger(result)).toBe(true);
-  });
-});
-
-describe('Math randomInt', () => {
-  test('should return a random integer between min and max', () => {
-    const result = randomInt(1, 10);
-    expect(Number.isInteger(result)).toBe(true);
-    expect(result).toBeGreaterThanOrEqual(1);
-    expect(result).toBeLessThanOrEqual(10);
   });
 });
 

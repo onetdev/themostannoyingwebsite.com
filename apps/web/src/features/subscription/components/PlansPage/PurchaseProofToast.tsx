@@ -1,45 +1,45 @@
 'use client';
 
 import { toast } from '@maw/ui-lib';
-import { random, randomInt } from '@maw/utils/math';
+import { randomArrayEntry, randomNumber } from '@maw/utils/random';
 import { useTranslations } from 'next-intl';
 import { useCallback, useEffect, useMemo, useState } from 'react';
-
 import type { SubscriptionPackage } from '../../schemas';
+import type { PurchaseProofVariants as PurchaseProofToastVariants } from '../../types';
 
-export interface SocialProofProps {
+export interface PurchaseProofToastProps {
   plans: SubscriptionPackage[];
   minDelayMs: number;
   maxDelayMs: number;
 }
 
-export function SocialProof({
+export function PurchaseProofToast({
   plans,
   minDelayMs,
   maxDelayMs,
-}: SocialProofProps) {
+}: PurchaseProofToastProps) {
   const t = useTranslations();
   const [iterator, setIterator] = useState(0);
 
   const pool = useMemo(() => {
+    const variants: PurchaseProofToastVariants = {
+      names: t.raw('subscription.purchaseProofToast.variants.names'),
+      locations:
+        t.raw('subscription.purchaseProofToast.variants.locations') ?? [],
+    };
+
     return {
-      names: t.raw('subscription.landing.socialProof.names') as string[],
-      locations: (t.raw('subscription.landing.socialProof.locations') ??
-        []) as string[],
+      ...variants,
       planNames: plans.map((p) => t(p.titleKey as AppTranslationKey)),
     };
   }, [plans, t]);
 
   const showRandomNotification = useCallback(() => {
-    const name = pool.names[randomInt(0, pool.names.length)];
-    const location = pool.locations[randomInt(0, pool.locations.length)];
-    const plan = pool.planNames[randomInt(0, pool.planNames.length)];
-
     toast(
-      t('subscription.landing.socialProof.justSubscribed', {
-        name,
-        location,
-        plan,
+      t('subscription.purchaseProofToast.justSubscribed', {
+        name: randomArrayEntry(pool.names),
+        location: randomArrayEntry(pool.locations),
+        plan: randomArrayEntry(pool.planNames),
       }),
       {
         icon: '🚀',
@@ -51,7 +51,7 @@ export function SocialProof({
   useEffect(() => {
     const timer = setTimeout(
       showRandomNotification,
-      random(minDelayMs, maxDelayMs),
+      randomNumber(minDelayMs, maxDelayMs),
     );
 
     return () => {

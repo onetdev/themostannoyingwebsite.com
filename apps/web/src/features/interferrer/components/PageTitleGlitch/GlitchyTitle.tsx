@@ -1,4 +1,4 @@
-import { random } from '@maw/utils/math';
+import { randomNumber } from '@maw/utils/random';
 import Head from 'next/head';
 import { useCallback, useEffect, useState } from 'react';
 
@@ -21,7 +21,10 @@ export function GlitchyTitle({
 
   const schedule = useCallback(
     (onComplete: () => void) => {
-      const rnd = random(Math.min(...randomRange), Math.max(...randomRange));
+      const rnd = randomNumber(
+        Math.min(...randomRange),
+        Math.max(...randomRange),
+      );
       const inTimer = setTimeout(() => setBlink(true), rnd);
       const outTimer = setTimeout(() => {
         setBlink(false);

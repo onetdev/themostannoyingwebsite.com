@@ -1,7 +1,7 @@
 'use client';
 
 import { Icon } from '@maw/ui-lib';
-import { randomInt } from '@maw/utils/math';
+import { randomInt } from '@maw/utils/random';
 import { motion } from 'framer-motion';
 import { useTranslations } from 'next-intl';
 import { useEffect, useState } from 'react';

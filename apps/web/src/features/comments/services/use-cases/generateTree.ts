@@ -1,4 +1,4 @@
-import { idFromRand, mulberry32, stringToSeed } from '@maw/utils/seed';
+import { idFromRand, mulberry32, stringToSeed } from '@maw/utils/random';
 
 import { type Comment, CommentSchema } from '../../schemas';
 

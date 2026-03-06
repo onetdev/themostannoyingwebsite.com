@@ -1,6 +1,7 @@
 'use client';
 
-import { type Point2d, random, randomInt } from '@maw/utils/math';
+import type { Point2d } from '@maw/utils/math';
+import { randomInt, randomNumber } from '@maw/utils/random';
 import { useEffect, useState } from 'react';
 import { emit } from '@/core/events/event-bus';
 
@@ -15,8 +16,8 @@ export function DeadPixel() {
 
     for (let i = 0; i < pixels; i++) {
       newPoints.push({
-        x: random(0, window.innerWidth),
-        y: random(0, window.innerHeight),
+        x: randomNumber(0, window.innerWidth),
+        y: randomNumber(0, window.innerHeight),
       });
     }
     setPosition(newPoints);

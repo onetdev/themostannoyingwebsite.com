@@ -1,7 +1,7 @@
 'use client';
 
 import { clsx } from '@maw/ui-lib/utils';
-import { randomInt } from '@maw/utils/math';
+import { randomInt } from '@maw/utils/random';
 import { useTranslations } from 'next-intl';
 import { useEffect, useState } from 'react';
 import { useTaxonomyChallengeData } from '../../hooks/useTaxonomyChallengeData';

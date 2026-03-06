@@ -4,7 +4,7 @@ import {
   getWeightedRandom,
   randomInt,
   type WeightedRandomPoolItem,
-} from '@maw/utils/math';
+} from '@maw/utils/random';
 import { useTranslations } from 'next-intl';
 import { useCallback, useMemo, useState } from 'react';
 import { emit } from '@/core/events/event-bus';

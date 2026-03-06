@@ -1,6 +1,6 @@
 'use client';
 
-import { random } from '@maw/utils/math';
+import { randomNumber } from '@maw/utils/random';
 import { useMemo } from 'react';
 import type { EmojiCountChallengeEntryMeta } from '../../types';
 import { CAPTCHA_EMOJI_DEFAULT_POOL } from './data';
@@ -18,8 +18,8 @@ export function useEmojiCountChallengeData({
     const counts = new Map<string, number>();
     const items: EmojiCountChallengeEntryMeta[] = [];
     for (let i = 0; i < count; i++) {
-      const x = random(0, 1);
-      const y = random(0, 1);
+      const x = randomNumber(0, 1);
+      const y = randomNumber(0, 1);
       const content = pool[Math.floor(Math.random() * pool.length)];
 
       items.push({ content, coords: { x, y } });

@@ -1,3 +1,5 @@
+import socialProofVariants from './purchase-proof-variants/en';
+
 export default {
   landing: {
     headline: 'A Végső MI Frissítés *',
@@ -61,33 +63,10 @@ export default {
           'A digitális nyomorúság végső csúcsa. Most 400%-kal több felesleges funkcióval és automatizált hajnali 3-as bűnbánó e-mailekkel az exednek.',
       },
     },
-    socialProof: {
-      justSubscribed:
-        '{name} innen: {location} épp most fizetett elő erre: {plan}!',
-      names: [
-        'Kovács J.',
-        'Szalai S.',
-        'Nagy K.',
-        'Mészáros C.',
-        'Névtelen Víziló',
-        'Az Exed',
-        'Egy szó szoros értelmében vett Bot',
-        'Valaki, aki jobb nálad',
-        'Csalódott Szülő',
-        'Satoshi N.',
-      ],
-      locations: [
-        'a Metaverzum',
-        'egy sötét pince',
-        'a szülei háza',
-        'a Mars (hamarosan™)',
-        'a Felhő',
-        'a Limbo',
-        'Inkognitó mód',
-        'a jövő',
-        'az adósságcsapda',
-        'Magyarország',
-      ],
-    },
+  },
+  purchaseProofToast: {
+    justSubscribed:
+      '{name} innen: {location} épp most fizetett elő erre: {plan}!',
+    variants: socialProofVariants,
   },
 };

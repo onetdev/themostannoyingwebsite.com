@@ -1,4 +1,11 @@
-import { idFromRand, mulberry32, stringToSeed } from './seed';
+import {
+  getWeightedRandom,
+  idFromRand,
+  mulberry32,
+  randomInt,
+  randomNumber,
+  stringToSeed,
+} from './random';
 
 describe('seed utils', () => {
   describe('stringToSeed', () => {
@@ -50,5 +57,52 @@ describe('seed utils', () => {
       const id2 = idFromRand(mulberry32(123));
       expect(id1).toBe(id2);
     });
+  });
+});
+
+describe('Math getWeightedRandom', () => {
+  test('should return a weighted random value', () => {
+    const result = getWeightedRandom([
+      { value: 'a', weight: 0 },
+      { value: 'b', weight: 0.5 },
+      { value: 'c', weight: 1 },
+    ]);
+
+    expect(['b', 'c']).toContain(result);
+  });
+
+  test('should return undefined if pool is empty after filtering', () => {
+    const result = getWeightedRandom([{ value: 'a', weight: 0 }]);
+    expect(result).toBeUndefined();
+  });
+});
+
+describe('Math random', () => {
+  test('should return a random number between min and max', () => {
+    const result = randomNumber(1, 10);
+
+    expect(result).toBeGreaterThanOrEqual(1);
+    expect(result).toBeLessThanOrEqual(10);
+  });
+
+  test('should return a random float between min and max', () => {
+    const result = randomNumber(0.1, 1);
+
+    expect(result).toBeGreaterThanOrEqual(0.1);
+    expect(result).toBeLessThanOrEqual(1);
+  });
+
+  test('should return an integer if requested', () => {
+    const result = randomNumber(1, 10, true);
+    expect(Number.isInteger(result)).toBe(true);
+  });
+});
+
+describe('Math randomInt', () => {
+  test('should return a random integer between min and max', () => {
+    const result = randomInt(1, 10);
+    expect(Number.isInteger(result)).toBe(true);
+    expect(result).toBeGreaterThanOrEqual(1);
+    expect(result).toBeLessThanOrEqual(10);
   });
 });

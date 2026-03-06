@@ -39,41 +39,8 @@ export const getPointDistance = (p1: Point2d, p2: Point2d): Point2d => {
   };
 };
 
-export type WeightedRandomPoolItem<T> = { value: T; weight: number };
-export const getWeightedRandom = <T>(
-  itemsRaw: WeightedRandomPoolItem<T>[],
-): T | undefined => {
-  const items = itemsRaw.filter((item) => item.weight > 0);
-  const total = items.reduce((carry, curent) => carry + curent.weight, 0);
-  const rand = random(0, total);
-  let sum = 0;
-  for (let i = 0; i < items.length; i++) {
-    sum += items[i]?.weight ?? 0;
-    if (rand <= sum) {
-      return items[i]?.value;
-    }
-  }
-};
-
 export const radToDeg = (rad: number): number => {
   return (rad * 180) / Math.PI;
-};
-
-export const random = (
-  min: number,
-  max: number,
-  integerResult = false,
-): number => {
-  const result = Math.random() * (max - min) + min;
-  return integerResult ? Math.round(result) : result;
-};
-
-export const randomInt = (min: number, max: number): number => {
-  return random(min, max, true);
-};
-
-export const randomBool = (): boolean => {
-  return Math.random() >= 0.5;
 };
 
 export const mapToLogScale = (

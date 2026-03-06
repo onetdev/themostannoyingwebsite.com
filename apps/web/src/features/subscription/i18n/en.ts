@@ -1,3 +1,5 @@
+import socialProofVariants from './purchase-proof-variants/en';
+
 export default {
   landing: {
     headline: 'The Ultimate AI Upgrade *',
@@ -61,32 +63,9 @@ export default {
           'The ultimate peak of digital misery. Now with 400% more unnecessary features and automated 3 AM regret emails sent to your ex.',
       },
     },
-    socialProof: {
-      justSubscribed: '{name} from {location} just subscribed to {plan}!',
-      names: [
-        'John D.',
-        'Sarah K.',
-        'Karen L.',
-        'Chad M.',
-        'Anonymous Hippo',
-        'Your Ex',
-        'A Literal Bot',
-        'Someone better than you',
-        'Disappointed Parent',
-        'Satoshi N.',
-      ],
-      locations: [
-        'the Metaverse',
-        'a dark basement',
-        'their parents house',
-        'Mars (soon™)',
-        'the Cloud',
-        'Limbo',
-        'Incognito Mode',
-        'the future',
-        'debt',
-        'Hungary',
-      ],
-    },
+  },
+  purchaseProofToast: {
+    justSubscribed: '{name} from {location} just subscribed to {plan}!',
+    variants: socialProofVariants,
   },
 };

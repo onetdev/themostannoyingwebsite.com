@@ -1,4 +1,4 @@
-import questionVariants from './quizQuestions/en';
+import questionVariants from './quiz-variants/en';
 
 export default {
   dilf: {

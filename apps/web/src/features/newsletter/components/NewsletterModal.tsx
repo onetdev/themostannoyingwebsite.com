@@ -12,7 +12,7 @@ import {
   Input,
   Separator,
 } from '@maw/ui-lib';
-import { random } from '@maw/utils/math';
+import { randomNumber } from '@maw/utils/random';
 import { useMessages, useTranslations } from 'next-intl';
 import { useMemo, useState } from 'react';
 
@@ -79,7 +79,7 @@ export function NewsletterModal({
   const randomConfirmation = () => {
     const rnd = Math.floor(Math.random() * confirmPool.length);
     setActions(confirmPool[rnd]);
-    setFlipActions(random(0, 1) === 0);
+    setFlipActions(randomNumber(0, 1) === 0);
   };
 
   return (

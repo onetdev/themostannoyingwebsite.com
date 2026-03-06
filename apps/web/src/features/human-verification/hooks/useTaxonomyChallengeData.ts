@@ -1,6 +1,6 @@
 'use client';
 
-import { randomBool, randomInt } from '@maw/utils/math';
+import { randomBool, randomInt } from '@maw/utils/random';
 import { useCallback, useEffect, useMemo, useState } from 'react';
 import { useAppConfigContext } from '@/core/config/react-app-config';
 import type { SpriteConfig } from '../schemas';
