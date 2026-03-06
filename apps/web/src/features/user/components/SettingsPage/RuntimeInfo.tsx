@@ -14,10 +14,11 @@ import { formatSecondsToHHMMSS } from '@maw/utils/formatter';
 import { useTranslations } from 'next-intl';
 import { useMemo } from 'react';
 import ReactTimeAgo from 'react-timeago';
-
+import { useTimeagoFormatter } from '@/hooks';
 import { useRuntimeStore } from '@/stores';
 
 export function RuntimeInfo() {
+  const intlFormatter = useTimeagoFormatter();
   const runtime = useRuntimeStore();
   const t = useTranslations();
 
@@ -43,7 +44,7 @@ export function RuntimeInfo() {
               </TableCell>
               <TableCell>
                 {startedAt ? (
-                  <ReactTimeAgo date={startedAt} />
+                  <ReactTimeAgo date={startedAt} formatter={intlFormatter} />
                 ) : (
                   t('common.state.notAvailable')
                 )}
@@ -83,7 +84,10 @@ export function RuntimeInfo() {
               </TableCell>
               <TableCell>
                 {runtime.userActivation.lastEventAt > 0 ? (
-                  <ReactTimeAgo date={runtime.userActivation.lastEventAt} />
+                  <ReactTimeAgo
+                    date={runtime.userActivation.lastEventAt}
+                    formatter={intlFormatter}
+                  />
                 ) : (
                   t('common.state.notAvailable')
                 )}

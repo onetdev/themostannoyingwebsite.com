@@ -3,7 +3,7 @@
 import { Avatar, AvatarFallback, Button } from '@maw/ui-lib';
 import { useTranslations } from 'next-intl';
 import { useState } from 'react';
-import TimeAgo from 'react-timeago';
+import ReactTimeAgo from 'react-timeago';
 import { useTimeagoFormatter } from '@/hooks';
 import type { Comment } from '../../schemas';
 
@@ -31,7 +31,7 @@ export function CommentItem({ comment, onReply, onLike }: CommentItemProps) {
           </Avatar>
           <span className="text-sm font-medium">{comment.name}</span>
           <span className="text-muted-foreground text-sm">
-            <TimeAgo date={comment.time} formatter={intlFormatter} />
+            <ReactTimeAgo date={comment.time} formatter={intlFormatter} />
           </span>
         </div>
 
