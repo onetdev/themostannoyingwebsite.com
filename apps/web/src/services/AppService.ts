@@ -12,6 +12,7 @@ export type LanguageInfo = {
 const LANGUAGE_MAP: Record<string, Omit<LanguageInfo, 'locale'>> = {
   en: { flag: '🇺🇸', labelKey: 'language.option.en' },
   hu: { flag: '🇭🇺', labelKey: 'language.option.hu' },
+  zh: { flag: '🇨🇳', labelKey: 'language.option.zh' },
 };
 
 @injectable()

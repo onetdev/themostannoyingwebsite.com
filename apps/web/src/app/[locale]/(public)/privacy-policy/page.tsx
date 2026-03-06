@@ -1,9 +1,9 @@
+import { getLogger } from '@maw/logger';
 import { PageHeadline } from '@maw/ui-lib';
 import styles from '@maw/ui-lib/content.module.css';
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import { getTranslations } from 'next-intl/server';
-
 import { Link } from '@/i18n/navigation';
 import { PageLayout } from '../_components/PageLayout';
 
@@ -30,6 +30,7 @@ export async function generateMetadata({
 export default async function Page({ params }: NextPageProps) {
   const { locale } = await params;
   const t = await getTranslations();
+  const logger = getLogger();
 
   try {
     const Content = (await import(`./${locale}.mdx`)).default;
@@ -60,6 +61,7 @@ export default async function Page({ params }: NextPageProps) {
       </PageLayout>
     );
   } catch (_err) {
-    return notFound();
+    logger.debug(_err, 'Privacy policy not found, redirecting to 404');
+    notFound();
   }
 }
