@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import { useRouter } from '@/i18n/navigation';
-import styles from './AdminPage.module.css';
+import styles from './AdminAuthPage.module.css';
 import { useAdminTerminal } from './useAdminTerminal';
 import { useAdminTerminalAuthFlow } from './useAdminTerminalAuthFlow';
 
