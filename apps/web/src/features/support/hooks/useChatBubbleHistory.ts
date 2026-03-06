@@ -9,9 +9,9 @@ import { useRuntimeStore } from '@/stores';
 import type { ChatMessage, ChatMessageType } from '../schemas';
 
 export function useChatBubbleHistory() {
-  const t = useTranslations();
+  const t = useTranslations('support.chatBubble');
   const config = useAppConfigContext();
-  const messages = useMessages();
+  const messages = useMessages() as AppTranslationShape;
   const hasInteracted = useRuntimeStore(
     (state) => state.userActivation.unlocked,
   );
@@ -24,15 +24,10 @@ export function useChatBubbleHistory() {
   );
 
   const botMessageVariants = useMemo(() => {
-    const all = Object.keys(messages.support.chatBubble.messageVariants).map(
-      (key) =>
-        t(`support.chatBubble.messageVariants.${key}` as AppTranslationKey),
-    );
-
-    return all.filter(
+    return Object.values(messages.support.chatBubble.messageVariants).filter(
       (message) => !history.some((item) => item.text === message),
     );
-  }, [history, messages, t]);
+  }, [history, messages]);
 
   const add = useCallback((message: string, owner: ChatMessageType) => {
     setHistory((prev) => [...prev, { text: message, owner, time: new Date() }]);
@@ -41,7 +36,7 @@ export function useChatBubbleHistory() {
   const sendNotification = useCallback(
     (message: string) => {
       notification.send({
-        title: t('support.chatBubble.newAlert'),
+        title: t('newAlert'),
         body: message,
       });
     },
@@ -50,7 +45,7 @@ export function useChatBubbleHistory() {
 
   const addRandomBotItem = useCallback(() => {
     if (botMessageVariants.length === 0) {
-      botMessageVariants.push(t('support.chatBubble.messageFallback'));
+      botMessageVariants.push(t('messageFallback'));
     }
     const randomMessage =
       botMessageVariants[Math.floor(Math.random() * botMessageVariants.length)];
@@ -89,7 +84,7 @@ export function useChatBubbleHistory() {
 
       return [
         {
-          text: t('support.chatBubble.messageInitial'),
+          text: t('messageInitial'),
           owner: 'bot' as const,
           time: new Date(),
         },

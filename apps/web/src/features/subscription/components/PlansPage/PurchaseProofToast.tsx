@@ -2,10 +2,9 @@
 
 import { toast } from '@maw/ui-lib';
 import { randomArrayEntry, randomNumber } from '@maw/utils/random';
-import { useTranslations } from 'next-intl';
+import { useMessages, useTranslations } from 'next-intl';
 import { useCallback, useEffect, useMemo, useState } from 'react';
 import type { SubscriptionPackage } from '../../schemas';
-import type { PurchaseProofVariants as PurchaseProofToastVariants } from '../../types';
 
 export interface PurchaseProofToastProps {
   plans: SubscriptionPackage[];
@@ -18,25 +17,26 @@ export function PurchaseProofToast({
   minDelayMs,
   maxDelayMs,
 }: PurchaseProofToastProps) {
-  const t = useTranslations();
+  const t = useTranslations('subscription.purchaseProofToast');
+  const messages = useMessages() as AppTranslationShape;
   const [iterator, setIterator] = useState(0);
 
   const pool = useMemo(() => {
-    const variants: PurchaseProofToastVariants = {
-      names: t.raw('subscription.purchaseProofToast.variants.names'),
-      locations:
-        t.raw('subscription.purchaseProofToast.variants.locations') ?? [],
-    };
-
     return {
-      ...variants,
-      planNames: plans.map((p) => t(p.titleKey as AppTranslationKey)),
+      names: messages.subscription.purchaseProofToast.variants.names,
+      locations: messages.subscription.purchaseProofToast.variants.locations,
+      planNames: plans.map((p) => t(p.titleKey as any)),
     };
-  }, [plans, t]);
+  }, [
+    plans,
+    t,
+    messages.subscription.purchaseProofToast.variants.locations,
+    messages.subscription.purchaseProofToast.variants.names,
+  ]);
 
   const showRandomNotification = useCallback(() => {
     toast(
-      t('subscription.purchaseProofToast.justSubscribed', {
+      t('justSubscribed', {
         name: randomArrayEntry(pool.names),
         location: randomArrayEntry(pool.locations),
         plan: randomArrayEntry(pool.planNames),

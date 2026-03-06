@@ -38,8 +38,7 @@ export class DonationService implements IDonationService {
     const messageKey = MESSAGE_KEYS[messageIndex];
 
     return {
-      messageKey:
-        `donate.beggingBanner.messages.${messageKey}` as AppTranslationKey,
+      messageKey: `funding.beggingBanner.messages.${messageKey}`,
       prefixKey: 'funding.beggingBanner.prefix',
       linkTextKey: 'funding.beggingBanner.linkText',
     };

@@ -28,12 +28,12 @@ export function NewsletterModal({
   visible = false,
   onDismiss,
 }: NewsletterModalProps) {
-  const t = useTranslations();
-  const messages = useMessages();
+  const t = useTranslations('marketing.newsletterModal');
+  const messages = useMessages() as AppTranslationShape;
   const [flipActions, setFlipActions] = useState(false);
   const [actions, setActions] = useState<ConfirmItem>({
-    confirm: t('marketing.newsletterModal.initialConfirm'),
-    cancel: t('marketing.newsletterModal.initialCancel'),
+    confirm: t('initialConfirm'),
+    cancel: t('initialCancel'),
   });
   const {
     register,
@@ -45,25 +45,14 @@ export function NewsletterModal({
   useEvent('ui:modal:dismiss-signaled', () => onDismiss?.(), visible);
 
   const confirmPool = useMemo(() => {
-    const items = Object.keys(
-      messages.marketing.newsletterModal.confirmations,
-    ).map(
-      (key) =>
-        ({
-          confirm: t(
-            `newsletter.modal.confirmations.${key}.confirm` as AppTranslationKey,
-          ),
-          cancel: t(
-            `newsletter.modal.confirmations.${key}.cancel` as AppTranslationKey,
-          ),
-          text: t(
-            `newsletter.modal.confirmations.${key}.text` as AppTranslationKey,
-          ),
-        }) satisfies ConfirmItem,
+    return Object.entries(messages.marketing.newsletterModal.confirmations).map(
+      ([, value]) => ({
+        confirm: value.confirm,
+        cancel: value.cancel,
+        text: value.text,
+      }),
     );
-
-    return items;
-  }, [messages.marketing.newsletterModal.confirmations, t]);
+  }, [messages.marketing.newsletterModal.confirmations]);
 
   const renderActions = () => {
     const buttons = [
@@ -88,9 +77,9 @@ export function NewsletterModal({
     <Dialog open={visible} onOpenChange={(open) => !open && onDismiss?.()}>
       <DialogContent>
         <DialogHeader>
-          <DialogTitle>{t('marketing.newsletterModal.title')}</DialogTitle>
+          <DialogTitle>{t('title')}</DialogTitle>
           <DialogDescription className="sr-only">
-            {t('marketing.newsletterModal.description')}
+            {t('description')}
           </DialogDescription>
         </DialogHeader>
 
@@ -103,11 +92,9 @@ export function NewsletterModal({
           {actions.text && <p className="mb-4">{actions.text}</p>}
           {!actions.text && (
             <>
-              <p className="mb-4">
-                {t('marketing.newsletterModal.description')}
-              </p>
+              <p className="mb-4">{t('description')}</p>
               <Input
-                placeholder={t('marketing.newsletterModal.placeholder')}
+                placeholder={t('placeholder')}
                 type="email"
                 inputSize="large"
                 required

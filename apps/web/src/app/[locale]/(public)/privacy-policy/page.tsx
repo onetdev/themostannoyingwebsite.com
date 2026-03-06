@@ -4,6 +4,7 @@ import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import { getTranslations } from 'next-intl/server';
 
+import { Link } from '@/i18n/navigation';
 import { PageLayout } from '../_components/PageLayout';
 
 export { generateStaticParams } from '@/i18n/routing';
@@ -39,6 +40,21 @@ export default async function Page({ params }: NextPageProps) {
           {t('navigation.privacyPolicy')}
         </PageHeadline>
         <div className={styles.content}>
+          {locale !== 'en' && (
+            <p className="border-border bg-muted/30 mb-8 border-l-4 py-4 pl-4 text-sm italic">
+              {t.rich('app.privacyPolicyDisclaimer', {
+                linkTag: (chunks) => (
+                  <Link
+                    href="/privacy-policy"
+                    locale="en"
+                    className="hover:underline font-bold"
+                  >
+                    {chunks}
+                  </Link>
+                ),
+              })}
+            </p>
+          )}
           <Content />
         </div>
       </PageLayout>

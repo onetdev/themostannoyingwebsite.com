@@ -25,7 +25,7 @@ export function DateOfBirthField({
   required,
 }: DateOfBirthFieldProps) {
   const t = useTranslations();
-  const messages = useMessages();
+  const messages = useMessages() as AppTranslationShape;
   const [parts, setParts] = useState({ year: '', month: '', day: '' });
   const {
     formState: { errors },
@@ -42,15 +42,13 @@ export function DateOfBirthField({
   }, []);
 
   const dateOfBirthMonth = useMemo(() => {
-    const monthLabels = Object.keys(messages.common.date.months).map((key) =>
-      t(`date.months.${key}` as AppTranslationKey),
-    );
-
-    return Array.from({ length: 12 }, (_, i) => ({
-      value: i + 1,
-      label: monthLabels[i],
-    })).sort((a, b) => a.label.localeCompare(b.label));
-  }, [t, messages]);
+    return Object.entries(messages.common.date.months)
+      .map(([key, value]) => ({
+        value: key + 1,
+        label: value,
+      }))
+      .sort((a, b) => a.label.localeCompare(b.label));
+  }, [messages]);
 
   const dateOfBirthDay = useMemo(() => {
     return Array.from({ length: 31 }, (_, i) => ({

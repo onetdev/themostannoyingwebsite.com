@@ -46,6 +46,8 @@ export default {
       'Adatvédelem mindenekelőtt: Nem tárolunk el érzékeny űrlapadatokat vagy felhasználói hitelesítő adatokat.',
     noWarranties:
       'Úgy adjuk, "ahogy van", garancia nélkül. Nem vállalunk felelősséget az elvesztegetett idődért vagy a frusztrációdért.',
+    privacyPolicyDisclaimer:
+      'Ez a dokumentum a hivatalos angol nyelvű változat fordítása. Bármilyen eltérés esetén az angol változat az irányadó. A hivatalos változatot <linkTag>itt találod</linkTag>.',
     cookieConsent:
       'Ez a weboldal sütiket használ, hogy a lehető legjobb élményt nyújtsa. Emellett ez egy vicc is, sok funkció szándékosan hibás vagy nem is működik. A beállítások menüben személyre szabhatod az élményt és a süti beállításokat.',
 

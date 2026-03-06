@@ -46,6 +46,8 @@ export default {
       'Privacy First: We do not persist sensitive form inputs or user credentials.',
     noWarranties:
       'Provided "as is" without warranty. We are not responsible for your lost time or frustration.',
+    privacyPolicyDisclaimer:
+      'This document is a translation of the official English version. In case of any discrepancy, the English version shall prevail. You can find the official version <linkTag>here</linkTag>.',
     cookieConsent:
       "This website uses cookies to ensure you get the best experience on our website. It's also a joke so many of the features are buggy or doens't even work on purpose. You can customize your experience and cookie settings in the settings menu.",
     exitPrompt:

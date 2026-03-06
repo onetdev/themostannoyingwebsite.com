@@ -10,6 +10,7 @@ export default {
       option_006: '55-64',
       option_007: '65+',
     },
+    solution: undefined,
   },
   variant_002: {
     text: 'Melyik a leggyakoribb kedvenc szín?',

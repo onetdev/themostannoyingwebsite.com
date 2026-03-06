@@ -23,21 +23,19 @@ export type Result = {
 
 export function SearchPage() {
   const locale = useLocale();
-  const messages = useMessages();
+  const messages = useMessages() as AppTranslationShape;
   const enabled = usePainPreferencesStore((state) => state.flags.searchDelay);
-  const t = useTranslations();
+  const t = useTranslations('content.search');
+  const tNavigation = useTranslations('navigation');
   const appArticleService = useAppArticleService();
   const [query, setQuery] = useState('');
   const [loading, setLoading] = useState(false);
   const [results, setResults] = useState<Result | undefined>();
 
-  const topSearchesPool = useMemo(() => {
-    const items = Object.keys(messages.content.search.topSearcheVariants).map(
-      (key) => t(`search.topSearcheVariants.${key}` as AppTranslationKey),
-    );
-
-    return items;
-  }, [messages.content.search.topSearcheVariants, t]);
+  const topSearchesPool = useMemo(
+    () => Object.values(messages.content.search.topSearcheVariants),
+    [messages.content.search.topSearcheVariants],
+  );
 
   useEvent('global-search:query', (event) => {
     setQuery(event.query ?? '');
@@ -91,16 +89,16 @@ export function SearchPage() {
 
   return (
     <>
-      <PageHeadline>{t('navigation.search')}</PageHeadline>
+      <PageHeadline>{tNavigation('search')}</PageHeadline>
       <SearchForm size="lg" className="max-w-[400px]" initialValue={query} />
       {loading && (
         <h4 className="my-10 text-2xl">
-          {t('content.search.searching')} <DotDotDotText />
+          {t('searching')} <DotDotDotText />
         </h4>
       )}
       {results && (
         <div className="my-4 text-sm">
-          {t('content.search.resultMeta', {
+          {t('resultMeta', {
             query: results.query,
             count: results.count,
             time: results.time.toString().substring(0, 6),
@@ -126,12 +124,10 @@ export function SearchPage() {
         ))}
       {!loading && results && results.count < 1 && (
         <>
-          <div className="my-10 text-2xl font-bold">
-            ❌ {t('content.search.noResults')}
-          </div>
+          <div className="my-10 text-2xl font-bold">❌ {t('noResults')}</div>
           {results.topSearches.length > 0 && (
             <div className="my-4 text-base">
-              <p>{t('content.search.peopleAlsoSearched')}</p>
+              <p>{t('peopleAlsoSearched')}</p>
               <ul className="list-inside list-disc pl-5">
                 {results.topSearches.map((item) => (
                   <li key={item}>

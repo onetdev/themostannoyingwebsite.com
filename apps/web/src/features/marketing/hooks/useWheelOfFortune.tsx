@@ -13,7 +13,7 @@ import type { Item } from '../components/WheelOfFortune/DynamicWheelSvg';
 export type AnimatedWheelState = 'ready' | 'spinning' | 'completed';
 
 export function useWheelOfFortune() {
-  const t = useTranslations();
+  const t = useTranslations('marketing.wheelOfFortune');
   const hueStart = 300; // random(0,360);
   const [state, setState] = useState<AnimatedWheelState>('ready');
   const [prize, setPrize] = useState<(Item & { index: number }) | undefined>();
@@ -21,23 +21,23 @@ export function useWheelOfFortune() {
   const prizeWithWeight = useMemo(
     () => [
       {
-        value: `${t('marketing.wheelOfFortune.prizeVariants.freeLifetimeBeer')}*`,
+        value: `${t('prizeVariants.freeLifetimeBeer')}*`,
         weight: 10,
       },
       {
-        value: `${t('marketing.wheelOfFortune.prizeVariants.worldPeace')}*`,
+        value: `${t('prizeVariants.worldPeace')}*`,
         weight: 1,
       },
       {
-        value: t('marketing.wheelOfFortune.prizeVariants.absolutellyNothing'),
+        value: t('prizeVariants.absolutellyNothing'),
         weight: 100,
       },
       {
-        value: `${t('marketing.wheelOfFortune.prizeVariants.complimentaryOtter')}*`,
+        value: `${t('prizeVariants.complimentaryOtter')}*`,
         weight: 2,
       },
       {
-        value: t('marketing.wheelOfFortune.prizeVariants.fake70Discount'),
+        value: t('prizeVariants.fake70Discount'),
         weight: 50,
       },
     ],
