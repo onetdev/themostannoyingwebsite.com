@@ -151,6 +151,7 @@ export default {
     option: {
       en: 'English',
       hu: 'Hungarian',
+      zh: 'Mandarin Chinese',
     },
   },
   themeSwitch: {

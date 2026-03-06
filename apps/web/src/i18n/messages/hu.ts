@@ -153,6 +153,7 @@ export default {
     option: {
       en: 'Angol',
       hu: 'Magyar',
+      zh: 'Mandarin kínai',
     },
   },
   themeSwitch: {
