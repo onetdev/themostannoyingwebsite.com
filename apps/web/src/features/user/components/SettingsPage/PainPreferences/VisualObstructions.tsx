@@ -12,7 +12,7 @@ import {
   SelectValue,
 } from '@maw/ui-lib';
 import { useTranslations } from 'next-intl';
-import type { ScreensaverVariant } from '@/features/obstructor/schemas';
+import type { ScreensaverVariant } from '@/features/disruptions/schemas';
 import { usePainPreferencesStore } from '@/stores';
 import { SettingsField } from '../SettingsField';
 

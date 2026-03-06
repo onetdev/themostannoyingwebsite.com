@@ -1,10 +1,10 @@
 import { z } from 'zod';
 import { AchievementsConfigSchema } from '@/features/achievements/schemas';
+import { CaptchaConfigSchema } from '@/features/captcha/schemas';
 import { ContentConfigSchema } from '@/features/content/schemas';
-import { DonationConfigSchema } from '@/features/donation/schemas';
-import { VerificationConfigSchema } from '@/features/human-verification/schemas';
-import { ObstructorConfigSchema } from '@/features/obstructor/schemas';
-import { PromotionConfigSchema } from '@/features/promotion/schemas';
+import { ObstructorConfigSchema } from '@/features/disruptions/schemas';
+import { DonationConfigSchema } from '@/features/funding/schemas';
+import { PromotionConfigSchema } from '@/features/marketing/schemas';
 import { SubscriptionConfigSchema } from '@/features/subscription/schemas';
 import { SupportConfigSchema } from '@/features/support/schemas';
 import { AppThemeSchema } from './app-theme';
@@ -22,7 +22,7 @@ export const AppConfigSchema = z.object({
   promotion: PromotionConfigSchema,
   subscription: SubscriptionConfigSchema,
   support: SupportConfigSchema,
-  verification: VerificationConfigSchema,
+  verification: CaptchaConfigSchema,
 });
 
 export type AppConfig = z.infer<typeof AppConfigSchema>;

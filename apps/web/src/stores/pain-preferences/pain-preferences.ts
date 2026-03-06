@@ -2,7 +2,7 @@ import { create } from 'zustand';
 import { createJSONStorage, persist } from 'zustand/middleware';
 
 import config from '@/core/config';
-import type { ScreensaverVariant } from '@/features/obstructor/schemas';
+import type { ScreensaverVariant } from '@/features/disruptions/schemas';
 import { broadcastChannelSync } from '@/stores/utils/sync';
 import {
   type PainPointKey,

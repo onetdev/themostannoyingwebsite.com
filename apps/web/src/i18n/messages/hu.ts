@@ -1,11 +1,10 @@
 import achievements from '@/features/achievements/i18n/hu';
+import humanVerification from '@/features/captcha/i18n/hu';
 import commentVariants from '@/features/comments/i18n/generator/hu';
 import comments from '@/features/comments/i18n/hu';
-import donate from '@/features/donation/i18n/hu';
-import humanVerification from '@/features/human-verification/i18n/hu';
+import funding from '@/features/funding/i18n/hu';
+import marketing from '@/features/marketing/i18n/hu';
 import monitoring from '@/features/monitoring/i18n/hu';
-import newsletter from '@/features/newsletter/i18n/hu';
-import promotions from '@/features/promotion/i18n/hu';
 import subscription from '@/features/subscription/i18n/hu';
 import support from '@/features/support/i18n/hu';
 import settings from '@/features/user/i18n/hu';
@@ -16,9 +15,9 @@ export default {
   achievements,
   comments,
   commentVariants,
-  donate,
-  promotions,
+  funding,
   humanVerification,
+  marketing,
   metadata,
   monitoring,
   settings,
@@ -270,7 +269,6 @@ export default {
         'Szeretnénk néha értesítéseket küldeni neked. A böngésződ beállításaiban adhatsz értesítési engedélyt ennek a weboldalnak. Megtennéd? 🙏🥺🙏',
     },
   },
-  newsletter,
   paywall: {
     overlay: {
       title:

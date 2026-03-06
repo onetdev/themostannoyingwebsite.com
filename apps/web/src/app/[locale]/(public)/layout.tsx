@@ -7,7 +7,7 @@ import type { PropsWithChildren } from 'react';
 import { getLangDir } from 'rtl-detect';
 import { ClientObserverProvider } from '@/app/bootstrap/ClientObserverProvider';
 import { ClientRootProviderContainer } from '@/app/bootstrap/ClientRootProviderContainer';
-import { BeggarBanner } from '@/features/donation/components';
+import { BeggarBanner } from '@/features/funding/components';
 import { routing } from '@/i18n/routing';
 import { getAppConfigService } from '@/services';
 import { PainDecoratorLayout } from './_components/PainDecoratorLayout';

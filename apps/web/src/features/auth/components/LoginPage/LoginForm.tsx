@@ -3,7 +3,7 @@
 import { Button, FieldError, LoaderDots, PageHeadline } from '@maw/ui-lib';
 import { useTranslations } from 'next-intl';
 import { FormProvider } from 'react-hook-form';
-import { CaptchaField } from '@/features/human-verification/components';
+import { CaptchaField } from '@/features/captcha/components';
 import { useNavigationProvider } from '@/navigation/NavigationContext';
 import { useLoginForm } from '../../hooks';
 import { EmailField, PasswordField, RememberMeField } from '../fields';

@@ -6,7 +6,7 @@ import {
   TextListItem,
 } from '@/features/content/components';
 import type { ArticleDatum } from '@/features/content/types';
-import { OneByOnePromotion } from '@/features/promotion/components';
+import { OneByOnePromotion } from '@/features/marketing/components';
 
 type HomePageProps = {
   coverArticle?: ArticleDatum;

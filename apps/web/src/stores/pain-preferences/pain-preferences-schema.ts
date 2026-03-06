@@ -1,5 +1,5 @@
 import { z } from 'zod';
-import { ScreensaverVariantSchema } from '@/features/obstructor/schemas';
+import { ScreensaverVariantSchema } from '@/features/disruptions/schemas';
 
 export const PRIVATE_PAIN_POINT_LIST = [
   'pageTitle.inactiveMarquee',

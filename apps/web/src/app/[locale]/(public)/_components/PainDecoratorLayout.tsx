@@ -5,12 +5,12 @@ import {
   DeadPixel,
   GlobalStickyVideo,
   Screensaver,
-} from '@/features/obstructor/components';
+} from '@/features/disruptions/components';
 import {
   AdblockerSuspectBar,
   ContainerPromotionFlaps,
   WheelOfFortune,
-} from '@/features/promotion/components';
+} from '@/features/marketing/components';
 import { ChatBubble } from '@/features/support/components';
 import { usePainPreferencesStore, useUserGrantsStore } from '@/stores';
 import { CookieConsent } from './CookieConsent';
