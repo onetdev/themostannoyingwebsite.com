@@ -16,7 +16,7 @@ import { parse as parseMd } from '@/utils/markdown';
 const logger = getLogger().getSubLogger({
   name: 'build-index',
 });
-const locales = ['en', 'hu'];
+const locales = ['en', 'hu', 'zh'];
 const sourceRootPath = path.join('./data');
 // Pattern for folder: {id}-{slug}
 const validArticleDirPattern = /^([0-9]*)-(.*)$/i;
@@ -93,13 +93,15 @@ const resolveArticleLocales = async (
   const results: ArticleIndexEntrySchema[] = [];
 
   // 2. Read each locale data
+  const localesProcessed: string[] = [];
   for (const locale of locales) {
     const langFilePath = path.join(articlePath, `${locale}.yml`);
     try {
       await fs.access(langFilePath);
+      localesProcessed.push(locale);
     } catch {
       logger.warn(
-        `⚠️ Locale "${locale}" not found for ${entry.name}, skipping.`,
+        `⚠️ Locale "${locale}" not found for ${entry.name}, skipping only this language.`,
       );
       continue;
     }
@@ -158,7 +160,7 @@ const resolveArticleLocales = async (
     });
   }
 
-  logger.info(entry.name);
+  logger.info(`${entry.name} [${localesProcessed.join(',')}]`);
   return results;
 };
 
