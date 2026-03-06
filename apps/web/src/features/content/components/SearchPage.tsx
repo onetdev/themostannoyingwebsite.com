@@ -32,12 +32,12 @@ export function SearchPage() {
   const [results, setResults] = useState<Result | undefined>();
 
   const topSearchesPool = useMemo(() => {
-    const items = Object.keys(messages.search.topSearcheVariants).map((key) =>
-      t(`search.topSearcheVariants.${key}` as AppTranslationKey),
+    const items = Object.keys(messages.content.search.topSearcheVariants).map(
+      (key) => t(`search.topSearcheVariants.${key}` as AppTranslationKey),
     );
 
     return items;
-  }, [messages.search.topSearcheVariants, t]);
+  }, [messages.content.search.topSearcheVariants, t]);
 
   useEvent('global-search:query', (event) => {
     setQuery(event.query ?? '');
@@ -95,12 +95,12 @@ export function SearchPage() {
       <SearchForm size="lg" className="max-w-[400px]" initialValue={query} />
       {loading && (
         <h4 className="my-10 text-2xl">
-          {t('search.searching')} <DotDotDotText />
+          {t('content.search.searching')} <DotDotDotText />
         </h4>
       )}
       {results && (
         <div className="my-4 text-sm">
-          {t('search.resultMeta', {
+          {t('content.search.resultMeta', {
             query: results.query,
             count: results.count,
             time: results.time.toString().substring(0, 6),
@@ -127,11 +127,11 @@ export function SearchPage() {
       {!loading && results && results.count < 1 && (
         <>
           <div className="my-10 text-2xl font-bold">
-            ❌ {t('search.noResults')}
+            ❌ {t('content.search.noResults')}
           </div>
           {results.topSearches.length > 0 && (
             <div className="my-4 text-base">
-              <p>{t('search.peopleAlsoSearched')}</p>
+              <p>{t('content.search.peopleAlsoSearched')}</p>
               <ul className="list-inside list-disc pl-5">
                 {results.topSearches.map((item) => (
                   <li key={item}>

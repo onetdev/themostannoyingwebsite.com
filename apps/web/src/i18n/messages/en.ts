@@ -2,6 +2,7 @@ import achievements from '@/features/achievements/i18n/en';
 import humanVerification from '@/features/captcha/i18n/en';
 import comments from '@/features/comments/i18n/en';
 import commentVariants from '@/features/comments/i18n/generator/en';
+import content from '@/features/content/i18n/en';
 import funding from '@/features/funding/i18n/en';
 import marketing from '@/features/marketing/i18n/en';
 import monitoring from '@/features/monitoring/i18n/en';
@@ -13,6 +14,7 @@ import metadata from './metadata/en';
 export default {
   // Feature or externals
   achievements,
+  content,
   comments,
   commentVariants,
   funding,
@@ -266,21 +268,6 @@ export default {
         "We would like to send you notifications sometimes. You can give notification permission to this website from your browser's settings. Could you? 🙏🥺🙏",
     },
   },
-  paywall: {
-    overlay: {
-      title:
-        'You either gotta pay {price}/hour with 24 months of commitment in order to see the next paragraph or need to keep clicking the secondary button.',
-      disclaimer:
-        "it might not be as secure and legit but that doesn't matter because you can't actually pay on this website.",
-      confirm: 'Pay! 100% legit and secure',
-      cancel: 'Give me free stuff for free',
-    },
-  },
-  article: {
-    coverImage: 'Cover image',
-    published: 'Published at {date}',
-    moreContentScroll: "There's more from the past, scroll!",
-  },
   titleExperience: {
     marqueeVariants: {
       variant_001: '📣 Come back please 🏃‍♀️🏃 We have candy!! 🚐',
@@ -289,28 +276,6 @@ export default {
       variant_001: '⭐️ HEY YOU 🫵',
       variant_002: '😜 YES YOU 😱',
       variant_003: '📣 COME BACK 🏃',
-    },
-  },
-  search: {
-    placeholder: 'Search...',
-    noResults: 'No results found',
-    resultMeta: 'Search for "{query}" took {time}ms and found {count} results',
-    searching: 'Searching',
-    peopleAlsoSearched: 'People also searched for:',
-    topSearcheVariants: {
-      variant_001: 'do fish get thirsty',
-      variant_002: 'pasta lyrics',
-      variant_003: 'do cars run out of honk',
-      variant_004: 'internet not working',
-      variant_005: 'can facebook listen through your phone',
-      variant_006: 'why do i smell like pennies',
-      variant_007: 'can you swim in jello',
-      variant_008: 'how do i politely tell someone they smell like onions',
-      variant_009: "can't see reflection in mirror",
-      variant_010: 'electricity invention',
-      variant_011: 'rub his bread',
-      variant_012: 'meme and toad',
-      variant_013: 'bog brother',
     },
   },
   wheelOfFortune: {
@@ -348,12 +313,6 @@ export default {
       redirectingGeneric: 'Redirecting...',
       redirectingSafety: "I'm getting back you to safety...",
     },
-  },
-  hotThings: {
-    playVideo: 'Play video',
-    videoPlaybackFailed: 'Video playback failed',
-    pictureOfYou: 'Picture of you',
-    hotThingsVtt: 'English',
   },
   stickyVideoPlayer: {
     videoTitle: 'Sticky video player',

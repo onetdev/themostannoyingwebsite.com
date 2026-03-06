@@ -2,6 +2,7 @@ import achievements from '@/features/achievements/i18n/hu';
 import humanVerification from '@/features/captcha/i18n/hu';
 import commentVariants from '@/features/comments/i18n/generator/hu';
 import comments from '@/features/comments/i18n/hu';
+import content from '@/features/content/i18n/hu';
 import funding from '@/features/funding/i18n/hu';
 import marketing from '@/features/marketing/i18n/hu';
 import monitoring from '@/features/monitoring/i18n/hu';
@@ -13,6 +14,7 @@ import metadata from './metadata/hu';
 export default {
   // Feature or externals
   achievements,
+  content,
   comments,
   commentVariants,
   funding,
@@ -269,21 +271,6 @@ export default {
         'Szeretnénk néha értesítéseket küldeni neked. A böngésződ beállításaiban adhatsz értesítési engedélyt ennek a weboldalnak. Megtennéd? 🙏🥺🙏',
     },
   },
-  paywall: {
-    overlay: {
-      title:
-        'Vagy fizetned kell {price}/órát 24 hónapos hűségidővel a következő bekezdés megtekintéséhez, vagy folyamatosan a másodlagos gombra kell kattintanod.',
-      disclaimer:
-        'lehet, hogy nem annyira biztonságos és legális, de ez nem számít, mert ezen a weboldalon valójában nem tudsz fizetni.',
-      confirm: 'Fizetés! 100% legális és biztonságos',
-      cancel: 'Add oda ingyen az ingyenes cuccot',
-    },
-  },
-  article: {
-    coverImage: 'Borítókép',
-    published: 'Közzétéve: {date}',
-    moreContentScroll: 'Van még itt tartalom a múltból, görgess!',
-  },
   titleExperience: {
     marqueeVariants: {
       variant_001: '📣 Gyere vissza kérlek 🏃‍♀️🏃 Van nálunk cukorka!! 🚐',
@@ -292,30 +279,6 @@ export default {
       variant_001: '⭐️ HÉ TE 🫵',
       variant_002: '😜 IGEN TE 😱',
       variant_003: '📣 GYERE VISSZA 🏃',
-    },
-  },
-  search: {
-    placeholder: 'Keresés...',
-    noResults: 'Nincs találat',
-    resultMeta:
-      'A(z) "{query}" kifejezésre történő keresés {time}ms-ig tartott és {count} találatot hozott',
-    searching: 'Keresés',
-    peopleAlsoSearched: 'Mások ezekre kerestek még:',
-    topSearcheVariants: {
-      variant_001: 'szomjasak-e a halak',
-      variant_002: 'tészta dalszöveg',
-      variant_003: 'elfogy-e az autóból a duda',
-      variant_004: 'nem működik az internet',
-      variant_005: 'hallgatózik-e a facebook a telefonon keresztül',
-      variant_006: 'miért van pénz szagom',
-      variant_007: 'lehet-e zselében úszni',
-      variant_008:
-        'hogyan mondjam meg udvariasan valakinek hogy hagyma szaga van',
-      variant_009: 'nem látom a tükörképem a tükörben',
-      variant_010: 'áram feltalálása',
-      variant_011: 'megkenni a kenyerét',
-      variant_012: 'mém és varangy',
-      variant_013: 'mocsári tesó',
     },
   },
   wheelOfFortune: {
@@ -354,12 +317,6 @@ export default {
       redirectingGeneric: 'Átirányítás...',
       redirectingSafety: 'Visszaviszlek a biztonságba...',
     },
-  },
-  hotThings: {
-    playVideo: 'Videó lejátszása',
-    videoPlaybackFailed: 'A videó lejátszása sikertelen',
-    pictureOfYou: 'Kép rólad',
-    hotThingsVtt: 'Magyar',
   },
   stickyVideoPlayer: {
     videoTitle: 'Tapadós videólejátszó',

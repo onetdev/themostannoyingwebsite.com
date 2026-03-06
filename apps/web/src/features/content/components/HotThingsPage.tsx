@@ -76,7 +76,7 @@ export function HotThingsPage() {
         <Image
           className="absolute h-auto w-full"
           src={config.content.assets.hotThings.placeholder}
-          alt={t('hotThings.pictureOfYou')}
+          alt={t('content.hotThings.pictureOfYou')}
           width={1920}
           height={1080}
         />
@@ -94,7 +94,7 @@ export function HotThingsPage() {
               config.content.assets.hotThings.vtt[locale] ??
               config.content.assets.hotThings.vtt.en
             }
-            label={t('hotThings.hotThingsVtt')}
+            label={t('content.hotThings.hotThingsVtt')}
           />
         </video>
         {!isDisallowed && isCapable && (
@@ -103,7 +103,7 @@ export function HotThingsPage() {
             className="absolute top-1/2 left-1/2 translate-[-50%] cursor-pointer text-7xl"
             onClick={onIntent}
             hidden={Boolean(stream)}
-            aria-label={t('hotThings.playVideo')}
+            aria-label={t('content.hotThings.playVideo')}
           >
             <Icon icon="play" />
           </button>
@@ -115,7 +115,7 @@ export function HotThingsPage() {
           >
             <Icon
               icon="failed"
-              aria-label={t('hotThings.videoPlaybackFailed')}
+              aria-label={t('content.hotThings.videoPlaybackFailed')}
             />
           </div>
         )}

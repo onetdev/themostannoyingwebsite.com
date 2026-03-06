@@ -47,7 +47,7 @@ export async function HomePage({
         <OneByOnePromotion />
       </section>
       <div className="border-border col-span-1 border-t-5 border-b-5 border-double p-5 text-center text-xl font-light italic lg:col-span-4 lg:my-6">
-        {t('article.moreContentScroll')}
+        {t('content.article.moreContentScroll')}
       </div>
       <section
         className="col-span-1 lg:col-span-4"

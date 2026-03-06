@@ -61,7 +61,7 @@ export function SearchForm({
           <InputGroupInput
             defaultValue={initialValue}
             name="search"
-            placeholder={t('search.placeholder')}
+            placeholder={t('content.search.placeholder')}
             autoComplete="off"
             className={cn(searchFormVariants({ size }))}
           />

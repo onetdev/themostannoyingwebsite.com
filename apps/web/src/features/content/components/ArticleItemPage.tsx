@@ -33,14 +33,14 @@ export function ArticleItemPage({ article, comments }: ArticleItemPageProps) {
     <>
       <h1 className="mb-2 max-w-[900px]">{article.title}</h1>
       <span className="mb-5 block italic">
-        {t('article.published', { date: formatterPublishedAt })}
+        {t('content.article.published', { date: formatterPublishedAt })}
       </span>
       {article.coverImages?.original && (
         <div className="-mx-5 xl:-mx-8">
           <Image
             className="h-auto w-full object-cover"
             src={article.coverImages?.original}
-            alt={t('article.coverImage')}
+            alt={t('content.article.coverImage')}
             width="1920"
             height="1200"
           />
