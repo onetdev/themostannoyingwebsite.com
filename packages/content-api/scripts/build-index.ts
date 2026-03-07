@@ -175,7 +175,9 @@ const resolveArticleLocales = async (
     });
   }
 
-  logger.info(`${entry.name} - Processed locales: ${localesProcessed.join(',')}`);
+  logger.info(
+    `${entry.name} - Processed locales: ${localesProcessed.join(',')}`,
+  );
   if (localesMissed.length > 0) {
     logger.warn(`${entry.name} -Missing locales: ${localesMissed.join(',')}`);
   }

@@ -11,7 +11,7 @@ const config: AppConfig = {
     },
     progressiveAchievementToastThrottlingSeconds: 10,
   },
-  verification: {
+  captcha: {
     assets: {
       tileChallenge: ['/assets/images/captcha-tile-abstract.jpg'],
       taxonomyChallengeSprites: [
@@ -49,7 +49,7 @@ const config: AppConfig = {
       },
     },
   },
-  donation: {
+  funding: {
     assets: {
       moneyJarAnimation: '/assets/animations/money-jar.lottie',
     },
@@ -78,7 +78,7 @@ const config: AppConfig = {
     // Not a priority at the moment 😅
     totalDonationInEuro: 0,
   },
-  obstructor: {
+  disruptions: {
     assets: {
       mazeCeiling: '/assets/maze-screensaver/maze-ceiling.webp',
       mazeFloor: '/assets/maze-screensaver/maze-floor.webp',
@@ -90,7 +90,7 @@ const config: AppConfig = {
       defaultVariant: 'bouncingLogo',
     },
   },
-  promotion: {
+  marketing: {
     assets: {
       dilfFlapsAd: '/ads/ad-dilf-flaps.webp',
       wanAPhoneAd: '/ads/ad-wan-a-phone.webp',

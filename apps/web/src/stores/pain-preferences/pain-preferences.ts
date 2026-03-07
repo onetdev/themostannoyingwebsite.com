@@ -71,8 +71,9 @@ const initialState: PainPreferencesState = {
   flags: initialStateFlags,
   publicLevel: calculatePublicLevelMeta(initialStateFlags),
   screensaver: {
-    timeoutSeconds: config.obstructor.screensaver.defaultTimeoutSeconds,
-    variant: config.obstructor.screensaver.defaultVariant as ScreensaverVariant,
+    timeoutSeconds: config.disruptions.screensaver.defaultTimeoutSeconds,
+    variant: config.disruptions.screensaver
+      .defaultVariant as ScreensaverVariant,
   },
 };
 

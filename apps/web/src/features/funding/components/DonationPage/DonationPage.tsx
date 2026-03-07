@@ -9,7 +9,7 @@ import { JarAnimation } from './JarAnimation';
 export { generateStaticParams } from '@/i18n/routing';
 
 export async function DonationPage() {
-  const { donation } = getAppConfigService().getAll();
+  const { funding } = getAppConfigService().getAll();
   const t = await getTranslations();
 
   const tRich = (key: AppTranslationKey) =>
@@ -37,18 +37,18 @@ export async function DonationPage() {
         <h2 className="pt-8">{t('funding.classicMethods')}</h2>
         <div className="my-5 flex w-full max-w-screen-md flex-col justify-center gap-3 md:flex-row">
           <Button asChild size="lg" className="md:w-1/2">
-            <Link href={donation.buyMeACoffeeUrl}>
+            <Link href={funding.buyMeACoffeeUrl}>
               {t('funding.buyMeACoffee')}
             </Link>
           </Button>
           <Button size="lg" asChild className="md:w-1/2">
-            <Link href={donation.paypalUrl}>{t('funding.payPal')}</Link>
+            <Link href={funding.paypalUrl}>{t('funding.payPal')}</Link>
           </Button>
         </div>
         <h2 className="pt-8">{t('funding.cryptoMethods')}</h2>
         <CryptoWalletList data-testid="crypto-wallet-list" />
         <p className="text-center">
-          <Link href={donation.alternativeOptionsUrl} target="_blank">
+          <Link href={funding.alternativeOptionsUrl} target="_blank">
             {t('funding.alternativeOptionsLink')}
           </Link>
         </p>

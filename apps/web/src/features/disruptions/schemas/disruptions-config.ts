@@ -2,7 +2,7 @@ import { z } from 'zod';
 
 import { ScreensaverVariantSchema } from './screensaver-variant';
 
-export const ObstructorConfigSchema = z.object({
+export const DisruptionsConfigSchema = z.object({
   assets: z.object({
     mazeCeiling: z.string(),
     mazeFloor: z.string(),
@@ -15,4 +15,4 @@ export const ObstructorConfigSchema = z.object({
   }),
 });
 
-export type ObstructorConfig = z.infer<typeof ObstructorConfigSchema>;
+export type DisruptionsConfig = z.infer<typeof DisruptionsConfigSchema>;

@@ -19,7 +19,7 @@ export function TilePuzzleChallenge({
 }: TilePuzzleChallengeProps) {
   const t = useTranslations();
   const {
-    verification: { assets, tilePuzzleCols: cols, tilePuzzleRows: rows },
+    captcha: { assets, tilePuzzleCols: cols, tilePuzzleRows: rows },
   } = useAppConfigContext();
 
   const data = useTilePuzzleChallengeData({

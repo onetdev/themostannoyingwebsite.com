@@ -1,6 +1,6 @@
 import { z } from 'zod';
 
-export const PromotionConfigSchema = z.object({
+export const MarketingConfigSchema = z.object({
   assets: z.object({
     dilfFlapsAd: z.string(),
     wanAPhoneAd: z.string(),
@@ -8,4 +8,4 @@ export const PromotionConfigSchema = z.object({
   }),
 });
 
-export type PromotionConfig = z.infer<typeof PromotionConfigSchema>;
+export type MarketingConfig = z.infer<typeof MarketingConfigSchema>;

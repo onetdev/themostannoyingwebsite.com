@@ -1,6 +1,6 @@
 import { z } from 'zod';
 
-export const DonationConfigSchema = z.object({
+export const FundingConfigSchema = z.object({
   assets: z.object({
     moneyJarAnimation: z.string(),
   }),
@@ -19,4 +19,4 @@ export const DonationConfigSchema = z.object({
   totalDonationInEuro: z.number(),
 });
 
-export type DonationConfig = z.infer<typeof DonationConfigSchema>;
+export type FundingConfig = z.infer<typeof FundingConfigSchema>;

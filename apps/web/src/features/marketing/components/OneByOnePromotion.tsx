@@ -23,7 +23,7 @@ export function OneByOnePromotion({ size = 1024 }: OneByOnePromotionProps) {
   return (
     <Link href="/flaim-a-phone" className="overflow-hidden">
       <Image
-        src={config.promotion.assets.wanAPhoneAd}
+        src={config.marketing.assets.wanAPhoneAd}
         width={size}
         height={size}
         alt={t('marketing.wanPhone.title')}

@@ -18,7 +18,7 @@ export function useTaxonomyChallengeData({
   const [validCount, setValidCount] = useState(0);
   const [items, setItems] = useState<TaxonomyEntryMeta[]>([]);
   const {
-    verification: {
+    captcha: {
       assets: { taxonomyChallengeSprites },
     },
   } = useAppConfigContext();

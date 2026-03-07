@@ -12,7 +12,7 @@ export function DilfFinder() {
   return (
     <div className="relative">
       <Image
-        src={config.promotion.assets.dilfFullImage}
+        src={config.marketing.assets.dilfFullImage}
         width={1900}
         height={1000}
         alt={t('marketing.dilf.title')}
