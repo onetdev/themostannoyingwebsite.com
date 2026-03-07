@@ -141,19 +141,7 @@ Note that the app currently uses a language prefix for all routes, and all appli
 
 Feel free to contribute translations in the `apps/web/src/i18n/messages` folder. Translations are in JSON format; simply create a new file with the language code (e.g., `en.json`, `hu.json`, etc.) and add the keys. Remember to update the relevant configurations.
 
-Planned UI translation support (potentially using low-quality translation software for added annoyance):
-
-- [x] English
-- [ ] Hungarian
-- [ ] Mandarin
-- [ ] Spanish
-- [ ] Arabic
-- [ ] Hindi
-- [ ] Portuguese
-- [ ] Russian
-- [ ] French
-- [ ] German
-- [ ] Japanese
+See `apps/web/i18n.config.ts` for the list of planned and active translations.
 
 ### Content translation
 

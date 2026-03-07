@@ -16,7 +16,23 @@ import { parse as parseMd } from '@/utils/markdown';
 const logger = getLogger().getSubLogger({
   name: 'build-index',
 });
-const locales = ['en', 'hu', 'zh'];
+const locales = [
+  'en', // English
+  'hu', // Hungarian
+  'zh', // Mandaring Chinese
+  'ar', // Arabic
+  'de', // German
+  'es', // Spanish
+  'fr', // French
+  'hi', // Hindi
+  'it', // Italian
+  'ja', // Japanese
+  'ko', // Korean
+  'pl', // Polish
+  'pt', // Portugese
+  'ru', // Russian
+  'tr', // Turkish
+];
 const sourceRootPath = path.join('./data');
 // Pattern for folder: {id}-{slug}
 const validArticleDirPattern = /^([0-9]*)-(.*)$/i;
@@ -28,7 +44,7 @@ const getLocaleMeta = async () => {
 
     try {
       const dataRaw = await fs.readFile(
-        path.join(sourceRootPath, `${locale}-meta.json`),
+        path.join(sourceRootPath, 'metas', `${locale}-meta.json`),
       );
       const data = JSON.parse(dataRaw.toString());
 
@@ -94,15 +110,14 @@ const resolveArticleLocales = async (
 
   // 2. Read each locale data
   const localesProcessed: string[] = [];
+  const localesMissed: string[] = [];
   for (const locale of locales) {
     const langFilePath = path.join(articlePath, `${locale}.yml`);
     try {
       await fs.access(langFilePath);
       localesProcessed.push(locale);
     } catch {
-      logger.warn(
-        `⚠️ Locale "${locale}" not found for ${entry.name}, skipping only this language.`,
-      );
+      localesMissed.push(locale);
       continue;
     }
 
@@ -160,7 +175,12 @@ const resolveArticleLocales = async (
     });
   }
 
-  logger.info(`${entry.name} [${localesProcessed.join(',')}]`);
+  logger.info(
+    `${entry.name} - Processed locales: ${localesProcessed.join(',')}`,
+  );
+  if (localesMissed.length > 0) {
+    logger.warn(`${entry.name} -Missing locales: ${localesMissed.join(',')}`);
+  }
   return results;
 };
 

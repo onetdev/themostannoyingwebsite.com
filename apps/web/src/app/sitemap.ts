@@ -53,7 +53,11 @@ async function sitemap(): Promise<MetadataRoute.Sitemap> {
     params: {},
     paginate: { take: -1, skip: 0 },
   });
-  const articles = articleResults.items.map(mapArticleToSitemapEntry);
+  const articles = articleResults.items
+    .filter((item) =>
+      (i18nConfig.locales as readonly string[]).includes(item.locale),
+    )
+    .map(mapArticleToSitemapEntry);
 
   const commonPages = [
     '',

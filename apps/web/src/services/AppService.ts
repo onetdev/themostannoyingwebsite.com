@@ -10,8 +10,20 @@ export type LanguageInfo = {
 };
 
 const LANGUAGE_MAP: Record<string, Omit<LanguageInfo, 'locale'>> = {
+  ar: { flag: '🇸🇦', labelKey: 'language.option.ar' },
+  de: { flag: '🇩🇪', labelKey: 'language.option.de' },
   en: { flag: '🇺🇸', labelKey: 'language.option.en' },
+  es: { flag: '🇪🇸', labelKey: 'language.option.es' },
+  fr: { flag: '🇫🇷', labelKey: 'language.option.fr' },
+  hi: { flag: '🇮🇳', labelKey: 'language.option.hi' },
   hu: { flag: '🇭🇺', labelKey: 'language.option.hu' },
+  it: { flag: '🇮🇹', labelKey: 'language.option.it' },
+  ja: { flag: '🇯🇵', labelKey: 'language.option.ja' },
+  ko: { flag: '🇰🇷', labelKey: 'language.option.ko' },
+  pl: { flag: '🇵🇱', labelKey: 'language.option.pl' },
+  pt: { flag: '🇵🇹', labelKey: 'language.option.pt' },
+  ru: { flag: '🇷🇺', labelKey: 'language.option.ru' },
+  tr: { flag: '🇹🇷', labelKey: 'language.option.tr' },
   zh: { flag: '🇨🇳', labelKey: 'language.option.zh' },
 };
 

@@ -94,7 +94,7 @@ export function useCaptchaChallenge({
   onFailed,
 }: UseCaptchaChallengeProps) {
   const {
-    verification: { allowedChallenges, requiredCompletedChallenges },
+    captcha: { allowedChallenges, requiredCompletedChallenges },
   } = useAppConfigContext();
   const [state, dispatch] = useReducer(reducer, initialState);
   const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null);

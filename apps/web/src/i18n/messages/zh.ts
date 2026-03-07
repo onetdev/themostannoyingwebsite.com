@@ -147,9 +147,21 @@ export default {
   language: {
     label: '语言',
     option: {
+      ar: '阿拉伯语',
+      de: '德语',
       en: '英语',
+      es: '西班牙语',
+      fr: '法语',
+      hi: '印地语',
       hu: '匈牙利语',
-      zh: '简体中文',
+      it: '意大利语',
+      ja: '日语',
+      ko: '韩语',
+      pl: '波兰语',
+      pt: '葡萄牙语',
+      ru: '俄语',
+      tr: '土耳其语',
+      zh: '中文',
     },
   },
   themeSwitch: {
