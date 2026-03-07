@@ -149,9 +149,21 @@ export default {
   language: {
     label: 'Language',
     option: {
+      ar: 'Arabic',
+      de: 'German',
       en: 'English',
+      es: 'Spanish',
+      fr: 'French',
+      hi: 'Hindi',
       hu: 'Hungarian',
-      zh: 'Mandarin Chinese',
+      it: 'Italian',
+      ja: 'Japanese',
+      ko: 'Korean',
+      pl: 'Polish',
+      pt: 'Portuguese',
+      ru: 'Russian',
+      tr: 'Turkish',
+      zh: 'Chinese',
     },
   },
   themeSwitch: {

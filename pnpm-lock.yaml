@@ -268,6 +268,9 @@ importers:
       color:
         specifier: ^5.0.3
         version: 5.0.3
+      countries-and-timezones:
+        specifier: ^3.8.0
+        version: 3.8.0
       emittery:
         specifier: ^1.2.1
         version: 1.2.1
@@ -4727,6 +4730,10 @@ packages:
     peerDependenciesMeta:
       typescript:
         optional: true
+
+  countries-and-timezones@3.8.0:
+    resolution: {integrity: sha512-+Ze9h5f4dQpUwbzTm0DEkiPiZyim9VHV4/mSnT4zNYJnrnfwsKjAZPtnp7J5VzejCDgySs+2SSc6MDdCnD43GA==}
+    engines: {node: '>=8.x', npm: '>=5.x'}
 
   create-ecdh@4.0.4:
     resolution: {integrity: sha512-mf+TCx8wWc9VpuxfP2ht0iSISLZnt0JgWlrOKZiNqyUZWnjIaCIVNQArMHnCZKfEYRg6IM7A+NeJoN8gf/Ws0A==}
@@ -12813,6 +12820,8 @@ snapshots:
       parse-json: 5.2.0
     optionalDependencies:
       typescript: 5.9.3
+
+  countries-and-timezones@3.8.0: {}
 
   create-ecdh@4.0.4:
     dependencies:

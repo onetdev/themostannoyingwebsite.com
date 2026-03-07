@@ -5,4 +5,5 @@ export * from './common-config';
 export * from './country';
 export * from './deployment-meta';
 export * from './environment';
+export * from './locale-resource';
 export * from './route-alias';

@@ -1,2 +1,2 @@
-export * from './obstructor-config';
+export * from './disruptions-config';
 export * from './screensaver-variant';

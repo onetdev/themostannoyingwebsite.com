@@ -5,16 +5,16 @@ import { useAppConfigContext } from '@/core/config/react-app-config';
 import { useDonationService } from './';
 
 export function useDonationBalance(): number {
-  const { donation } = useAppConfigContext();
+  const { funding } = useAppConfigContext();
   const donationService = useDonationService();
 
   const balance = useMemo(() => {
     return donationService.calculateBalance({
-      costStartEpoch: donation.costStartEpoch,
-      costDailyAvgInEuro: donation.costDailyAvgInEuro,
-      totalDonationInEuro: donation.totalDonationInEuro,
+      costStartEpoch: funding.costStartEpoch,
+      costDailyAvgInEuro: funding.costDailyAvgInEuro,
+      totalDonationInEuro: funding.totalDonationInEuro,
     });
-  }, [donation, donationService]);
+  }, [funding, donationService]);
 
   return balance;
 }

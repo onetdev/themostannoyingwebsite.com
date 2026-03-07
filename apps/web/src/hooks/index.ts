@@ -4,6 +4,8 @@ export * from './useAppService';
 export * from './useAudio';
 export * from './useDocumentVisibilityListener';
 export * from './useLanguageSwitcher';
+export * from './useLocaleResource';
+export * from './useLocaleSuggestion';
 export * from './useNavigationStats';
 export * from './useReducedMotionListener';
 export * from './useScrollDistanceTrigger';

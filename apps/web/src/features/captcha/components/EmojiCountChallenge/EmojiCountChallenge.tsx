@@ -17,7 +17,7 @@ export function EmojiCountChallenge({
 }: EmojiCountChallengeProps) {
   const t = useTranslations();
   const {
-    verification: { emojiChallengeCount },
+    captcha: { emojiChallengeCount },
   } = useAppConfigContext();
   const { items, solutions } = useEmojiCountChallengeData({
     count: emojiChallengeCount,

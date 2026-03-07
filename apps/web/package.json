@@ -38,6 +38,7 @@
     "@vercel/analytics": "^1.6.1",
     "classnames": "^2.5.1",
     "color": "^5.0.3",
+    "countries-and-timezones": "^3.8.0",
     "emittery": "^1.2.1",
     "framer-motion": "^12.34.3",
     "html-react-parser": "^5.2.17",

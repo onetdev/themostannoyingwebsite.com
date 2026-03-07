@@ -10,6 +10,7 @@ import { ClientRootProviderContainer } from '@/app/bootstrap/ClientRootProviderC
 import { BeggarBanner } from '@/features/funding/components';
 import { routing } from '@/i18n/routing';
 import { getAppConfigService } from '@/services';
+import { LocaleSuggestion } from './_components/LocaleSuggestion';
 import { PainDecoratorLayout } from './_components/PainDecoratorLayout';
 
 const config = getAppConfigService().getAll();
@@ -43,6 +44,7 @@ async function LocalePublicRootLayout({
         <NextIntlClientProvider>
           <ClientRootProviderContainer appConfig={config}>
             <ClientObserverProvider />
+            <LocaleSuggestion />
             <BeggarBanner />
             <PainDecoratorLayout className="font-primary">
               {/* Please add AppHeader in your pages to have SSG/ISR/SSG support while also being able to select the active navigation item */}

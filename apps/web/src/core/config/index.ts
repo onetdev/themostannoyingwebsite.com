@@ -11,7 +11,7 @@ const config: AppConfig = {
     },
     progressiveAchievementToastThrottlingSeconds: 10,
   },
-  verification: {
+  captcha: {
     assets: {
       tileChallenge: ['/assets/images/captcha-tile-abstract.jpg'],
       taxonomyChallengeSprites: [
@@ -49,7 +49,7 @@ const config: AppConfig = {
       },
     },
   },
-  donation: {
+  funding: {
     assets: {
       moneyJarAnimation: '/assets/animations/money-jar.lottie',
     },
@@ -78,7 +78,7 @@ const config: AppConfig = {
     // Not a priority at the moment 😅
     totalDonationInEuro: 0,
   },
-  obstructor: {
+  disruptions: {
     assets: {
       mazeCeiling: '/assets/maze-screensaver/maze-ceiling.webp',
       mazeFloor: '/assets/maze-screensaver/maze-floor.webp',
@@ -90,10 +90,26 @@ const config: AppConfig = {
       defaultVariant: 'bouncingLogo',
     },
   },
-  promotion: {
+  marketing: {
     assets: {
       dilfFlapsAd: '/ads/ad-dilf-flaps.webp',
-      wanAPhoneAd: '/ads/ad-wan-a-phone.webp',
+      wanAPhoneAd: {
+        en: '/ads/wan-a-fone/ad-wan-a-fone-en.webp',
+        hu: '/ads/wan-a-fone/ad-wan-a-fone-hu.webp',
+        zh: '/ads/wan-a-fone/ad-wan-a-fone-zh.webp',
+        ar: '/ads/wan-a-fone/ad-wan-a-fone-ar.webp',
+        de: '/ads/wan-a-fone/ad-wan-a-fone-de.webp',
+        es: '/ads/wan-a-fone/ad-wan-a-fone-es.webp',
+        fr: '/ads/wan-a-fone/ad-wan-a-fone-fr.webp',
+        hi: '/ads/wan-a-fone/ad-wan-a-fone-hi.webp',
+        it: '/ads/wan-a-fone/ad-wan-a-fone-it.webp',
+        ja: '/ads/wan-a-fone/ad-wan-a-fone-ja.webp',
+        ko: '/ads/wan-a-fone/ad-wan-a-fone-ko.webp',
+        pl: '/ads/wan-a-fone/ad-wan-a-fone-pl.webp',
+        pt: '/ads/wan-a-fone/ad-wan-a-fone-pt.webp',
+        ru: '/ads/wan-a-fone/ad-wan-a-fone-ru.webp',
+        tr: '/ads/wan-a-fone/ad-wan-a-fone-tr.webp',
+      },
       dilfFullImage: '/assets/dilf-full.webp',
     },
   },

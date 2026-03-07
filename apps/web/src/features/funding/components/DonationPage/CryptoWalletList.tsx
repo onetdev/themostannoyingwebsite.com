@@ -12,7 +12,7 @@ export function CryptoWalletList({
   ...rest
 }: CryptoWalletListProps) {
   const t = useTranslations();
-  const configService = useAppConfigContext().donation;
+  const configService = useAppConfigContext().funding;
   const btcWallet = configService.btcWallet;
   const ethWallet = configService.ethWallet;
 

@@ -51,7 +51,7 @@ export function MazeScreensaver() {
     });
     const scene = new Transform();
 
-    const textures = getTextures(gl, config.obstructor.assets);
+    const textures = getTextures(gl, config.disruptions.assets);
 
     // Geometry
     const geometry = new Plane(gl, {
@@ -349,7 +349,7 @@ export function MazeScreensaver() {
       cancelAnimationFrame(rafId);
       window.removeEventListener('resize', resize);
     };
-  }, [config.obstructor.assets]);
+  }, [config.disruptions.assets]);
 
   return <canvas ref={canvasRef} />;
 }

@@ -18,7 +18,7 @@ export function ContainerPromotionFlaps() {
         <Link href="/dilf" passHref prefetch={false}>
           <Image
             className="object-cover opacity-30 mix-blend-lighten"
-            src={config.promotion.assets.dilfFlapsAd}
+            src={config.marketing.assets.dilfFlapsAd}
             alt={t('marketing.dilf.title')}
             width={1900}
             height={1000}

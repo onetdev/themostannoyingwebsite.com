@@ -6,9 +6,11 @@ import Image from 'next/image';
 import { useLocale, useTranslations } from 'next-intl';
 import { useEffect, useRef, useState } from 'react';
 import { useAppConfigContext } from '@/core/config/react-app-config';
+import { useLocaleResource } from '@/hooks';
 
 export function HotThingsPage() {
   const config = useAppConfigContext();
+  const { resolve } = useLocaleResource();
   const logger = useLogger().getSubLogger({ name: 'hot-things-page' });
   const [isCapable, setIsCapable] = useState(false);
   const t = useTranslations();
@@ -90,10 +92,7 @@ export function HotThingsPage() {
             default
             kind="captions"
             srcLang={locale}
-            src={
-              config.content.assets.hotThings.vtt[locale] ??
-              config.content.assets.hotThings.vtt.en
-            }
+            src={resolve(config.content.assets.hotThings.vtt)}
             label={t('content.hotThings.hotThingsVtt')}
           />
         </video>

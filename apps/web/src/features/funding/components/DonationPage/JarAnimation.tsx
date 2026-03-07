@@ -18,7 +18,7 @@ export function JarAnimation(props: JarAnimationProps) {
 
   return (
     <DotLottieReact
-      src={config.donation.assets.moneyJarAnimation}
+      src={config.funding.assets.moneyJarAnimation}
       loop
       autoplay
       mode={balance < 0 ? 'reverse' : 'forward'}
