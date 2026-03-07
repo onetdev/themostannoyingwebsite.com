@@ -6,6 +6,7 @@ import type i18nConfig from '@/root/i18n.config';
 declare global {
   type AppTheme = 'light' | 'dark';
   type AppLocale = (typeof i18nConfig)['locales'][number];
+  type AppSupportedLocale = (typeof i18nConfig)['allLocales'][number];
   type AppTranslationShape = typeof englishShape;
   type AppTranslationKey = MessageKeys<
     AppTranslationShape,
