@@ -93,7 +93,11 @@ const config: AppConfig = {
   marketing: {
     assets: {
       dilfFlapsAd: '/ads/ad-dilf-flaps.webp',
-      wanAPhoneAd: '/ads/ad-wan-a-phone.webp',
+      wanAPhoneAd: {
+        en: '/ads/wan-a-fone/ad-wan-a-fone-en.webp',
+        hu: '/ads/wan-a-fone/ad-wan-a-fone-hu.webp',
+        zh: '/ads/wan-a-fone/ad-wan-a-fone-zh.webp',
+      },
       dilfFullImage: '/assets/dilf-full.webp',
     },
   },
