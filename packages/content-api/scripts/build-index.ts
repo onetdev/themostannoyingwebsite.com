@@ -19,7 +19,7 @@ const logger = getLogger().getSubLogger({
 const locales = [
   'en', // English
   'hu', // Hungarian
-  'zh', // Mandaring Chinese
+  'zh', // Mandarin Chinese
   'ar', // Arabic
   'de', // German
   'es', // Spanish
@@ -29,7 +29,7 @@ const locales = [
   'ja', // Japanese
   'ko', // Korean
   'pl', // Polish
-  'pt', // Portugese
+  'pt', // Portuguese
   'ru', // Russian
   'tr', // Turkish
 ];
