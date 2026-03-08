@@ -17,6 +17,7 @@ import {
   PERSONAL_NAVIGATION_LINKS,
   SITE_NAVIGATION_LINKS,
 } from '@/app/navigation';
+import { useLangDir } from '@/hooks';
 import { Link } from '@/i18n/navigation';
 import { useRuntimeStore } from '@/stores';
 
@@ -31,6 +32,7 @@ export function AppNavigationDesktop({
 }: AppNavigationDesktopProps) {
   const t = useTranslations();
   const { showShareModal } = useRuntimeStore();
+  const direction = useLangDir();
 
   const onClick = (item: NavItem) => {
     if (item.key === 'global-share') {
@@ -78,6 +80,7 @@ export function AppNavigationDesktop({
       )}
       id="navigation-desktop"
       viewport={false}
+      dir={direction}
     >
       <NavigationMenuList className="justify-start gap-1">
         {SITE_NAVIGATION_LINKS.map(renderItem)}

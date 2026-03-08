@@ -3,6 +3,7 @@ export * from '../core/events/react/useEvent';
 export * from './useAppService';
 export * from './useAudio';
 export * from './useDocumentVisibilityListener';
+export * from './useLangDir';
 export * from './useLanguageSwitcher';
 export * from './useLocaleResource';
 export * from './useLocaleSuggestion';
