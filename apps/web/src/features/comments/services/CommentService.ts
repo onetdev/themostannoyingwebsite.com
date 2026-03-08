@@ -4,6 +4,7 @@ import poolAr from '@/features/comments/i18n/generator/ar';
 import poolDe from '@/features/comments/i18n/generator/de';
 import poolEn from '@/features/comments/i18n/generator/en';
 import poolFr from '@/features/comments/i18n/generator/fr';
+import poolHi from '@/features/comments/i18n/generator/hi';
 import poolHu from '@/features/comments/i18n/generator/hu';
 import poolJa from '@/features/comments/i18n/generator/ja';
 import poolPt from '@/features/comments/i18n/generator/pt';
@@ -22,6 +23,7 @@ const pools: Record<AppLocale, typeof poolEn> = {
   de: poolDe,
   en: poolEn,
   fr: poolFr,
+  hi: poolHi,
   hu: poolHu,
   ja: poolJa,
   pt: poolPt,
