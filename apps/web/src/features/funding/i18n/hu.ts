@@ -1,3 +1,5 @@
+import type { FundingI18nShape } from '../types';
+
 export default {
   description:
     'Ennek a projektnek nincs szponzora, kitartója, kripto-bálna befektetője, unatkozó milliomosa vagy titokzatos ballonkabátos emberbarátja. Tisztán önkéntes munkán, szerverszámlákon és egy folyamatos kebab + kávé költségvetésen fut — amik mind csak mélyítik a pénzügyi szakadékot. Ennek ellenére ez az alkalmazás továbbra is egy szerelemprojekt.<br></br><br></br>Ha szeretnéd támogatni az ügyünket, és segítenél még rosszabbá tenni ezt a weboldalt, bármilyen összeget NAGYON szépen köszönünk. Ha nincs felesleges pénzed — őszintén, kinek van ebben a gazdaságban? — még mindig segíthetsz az alkalmazás megosztásával és a bosszúság további terjesztésével.',
@@ -47,4 +49,4 @@ export default {
         'Szeretném fejleszteni a ramenemet. A "5 euróért 3 darab" típusról a "luxus instantra, amiben zöldségcsomag is van". Ez egy szerény álom. Tésztaalapú álom.',
     },
   },
-};
+} satisfies FundingI18nShape;

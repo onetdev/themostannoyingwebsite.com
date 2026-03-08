@@ -1,3 +1,5 @@
+import type { CommentsI18nShape } from '../types';
+
 export default {
   sectionTitle: '评论',
   formTitle: '添加评论',
@@ -17,4 +19,4 @@ export default {
     comment: '评论',
     submit: '提交评论',
   },
-};
+} satisfies CommentsI18nShape;

@@ -1,4 +1,5 @@
 import type { Point2d } from '@maw/utils/math';
+import type captchaEnLocale from './i18n/en';
 import type { SpriteConfig } from './schemas';
 
 export type ChallengeStatus =
@@ -7,6 +8,8 @@ export type ChallengeStatus =
   | 'challenge'
   | 'failed'
   | 'resolved';
+
+export type CaptchaI18nShape = typeof captchaEnLocale;
 
 export interface EmojiCountChallengeEntryMeta {
   content: string;

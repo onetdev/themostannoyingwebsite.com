@@ -61,18 +61,23 @@ export function PainDecoratorLayout({
 
   return (
     <div className={className} {...rest}>
+      {/* Elements appearing underneath content container */}
       {runtimeFlags.giftFlaps && <ContainerPromotionFlaps />}
+
+      {/* Main container and container relative sticky elements */}
       <div className="bg-card relative container mx-auto my-0 min-h-screen">
         {children}
         {runtimeFlags.wheelOfFortune && <WheelOfFortune />}
-        {deadPixel && <DeadPixel />}
-        {runtimeFlags.mockChat && <ChatBubble />}
+        {runtimeFlags.stickyVideo && <GlobalStickyVideo />}
         {runtimeFlags.showCookieConsent && <CookieConsent />}
         <AdblockerSuspectBar />
-        {runtimeFlags.stickyVideo && <GlobalStickyVideo />}
-        <GlobalShareModal />
-        <Screensaver />
       </div>
+
+      {/* Global viewport elements */}
+      {deadPixel && <DeadPixel />}
+      {runtimeFlags.mockChat && <ChatBubble />}
+      <GlobalShareModal />
+      <Screensaver />
     </div>
   );
 }

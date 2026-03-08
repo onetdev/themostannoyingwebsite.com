@@ -1,3 +1,5 @@
+import type { ContentI18nShape } from '../types';
+
 export default {
   paywall: {
     overlay: {
@@ -42,4 +44,4 @@ export default {
     pictureOfYou: '你的照片',
     hotThingsVtt: '中文',
   },
-};
+} satisfies ContentI18nShape;

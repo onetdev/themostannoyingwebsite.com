@@ -1,6 +1,7 @@
 import { radToDeg } from '@maw/utils/math';
 import Color from 'color';
 import type { ReactNode } from 'react';
+import { useLangDir } from '@/hooks';
 
 export type Item = {
   color: string;
@@ -22,6 +23,7 @@ export function DynamicWheelSvg({
   title,
   width,
 }: DynamicWheelSvgProps) {
+  const dir = useLangDir();
   const radius = Math.min(width, height) / 2;
   const center = { x: width / 2, y: height / 2 };
   let startAngleRadians = 0;
@@ -65,11 +67,13 @@ export function DynamicWheelSvg({
           className="data-[highlight-index=true]:animate-flashing-invert-half"
         />
         <text
-          textAnchor="end"
+          textAnchor={dir === 'ltr' ? 'end' : 'start'}
           x={abMidpoint.x}
           y={abMidpoint.y}
           transform={`rotate(${labelAngle}, ${abMidpoint.x}, ${abMidpoint.y})`}
           fill={labelColor}
+          textLength="120"
+          lengthAdjust="spacingAndGlyphs"
         >
           {item.text}
         </text>

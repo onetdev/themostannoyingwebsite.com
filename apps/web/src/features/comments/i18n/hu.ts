@@ -1,3 +1,5 @@
+import type { CommentsI18nShape } from '../types';
+
 export default {
   sectionTitle: 'Hozzászólások',
   formTitle: 'Szólj hozzá te is!',
@@ -18,4 +20,4 @@ export default {
     comment: 'Hozzászólás',
     submit: 'Hozzászólás beküldése',
   },
-};
+} satisfies CommentsI18nShape;

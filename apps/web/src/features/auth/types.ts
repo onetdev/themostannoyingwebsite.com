@@ -1,4 +1,5 @@
 import type { PromiseResult } from '@maw/utils/result';
+import type authEnLocale from './i18n/en';
 
 import type { AuthError, User } from './schemas';
 
@@ -6,6 +7,8 @@ export const DI = {
   AuthService: Symbol.for('AuthService'),
   AuthRepository: Symbol.for('AuthRepository'),
 };
+
+export type AuthI18nShape = typeof authEnLocale;
 
 export type AuthenticationData = {
   email: string;

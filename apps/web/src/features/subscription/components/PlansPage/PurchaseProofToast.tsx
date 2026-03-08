@@ -17,7 +17,7 @@ export function PurchaseProofToast({
   minDelayMs,
   maxDelayMs,
 }: PurchaseProofToastProps) {
-  const t = useTranslations('subscription.purchaseProofToast');
+  const t = useTranslations();
   const messages = useMessages() as AppTranslationShape;
   const [iterator, setIterator] = useState(0);
 
@@ -25,7 +25,7 @@ export function PurchaseProofToast({
     return {
       names: messages.subscription.purchaseProofToast.variants.names,
       locations: messages.subscription.purchaseProofToast.variants.locations,
-      planNames: plans.map((p) => t(p.titleKey as any)),
+      planNames: plans.map((p) => t(p.titleKey)),
     };
   }, [
     plans,
@@ -36,7 +36,7 @@ export function PurchaseProofToast({
 
   const showRandomNotification = useCallback(() => {
     toast(
-      t('justSubscribed', {
+      t('subscription.purchaseProofToast.justSubscribed', {
         name: randomArrayEntry(pool.names),
         location: randomArrayEntry(pool.locations),
         plan: randomArrayEntry(pool.planNames),

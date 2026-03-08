@@ -1,5 +1,6 @@
 import type { Result } from '@maw/utils/result';
 
+import type subscriptionEnLocale from './i18n/en';
 import type {
   SubscriptionError,
   SubscriptionFeature,
@@ -9,6 +10,8 @@ import type {
 export const DI = {
   SubscriptionPlansService: Symbol.for('SubscriptionPlansService'),
 };
+
+export type SubscriptionI18nShape = typeof subscriptionEnLocale;
 
 export interface SubscriptionPlansService {
   getFeatures(): Promise<Result<SubscriptionFeature[], SubscriptionError>>;

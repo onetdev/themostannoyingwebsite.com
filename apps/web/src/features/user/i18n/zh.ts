@@ -1,3 +1,5 @@
+import type { UserI18nShape } from '../types';
+
 export default {
   userPreferences: {
     title: '偏好设置',
@@ -138,4 +140,4 @@ export default {
       },
     },
   },
-};
+} satisfies UserI18nShape;

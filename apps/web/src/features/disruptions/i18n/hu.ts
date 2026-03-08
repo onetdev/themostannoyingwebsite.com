@@ -1,3 +1,5 @@
+import type { DisruptionsI18nShape } from '../types';
+
 export default {
   screensaver: {
     exitClick: 'Kattints bárhova a kilépéshez',
@@ -16,4 +18,4 @@ export default {
   stickyVideoPlayer: {
     videoTitle: 'Tapadós videólejátszó',
   },
-};
+} satisfies DisruptionsI18nShape;

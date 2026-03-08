@@ -33,11 +33,15 @@ export default {
   },
   state: {
     completed: 'Completed',
+    default: 'Default',
+    denied: 'Denied',
     done: 'Done',
+    granted: 'Granted',
     loading: 'Loading...',
     notAvailable: 'n/a',
     notSet: 'Not set',
     pending: 'Pending',
+    prompt: 'Prompt',
   },
   unknown: 'Unknown',
   date: {

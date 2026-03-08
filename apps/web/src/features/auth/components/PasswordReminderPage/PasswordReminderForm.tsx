@@ -47,7 +47,7 @@ export function PasswordReminderForm() {
         </Button>
         <div className="flex justify-between">
           <Link href={pathFor('user.login')} prefetch={false}>
-            {t('auth.common.Login')}
+            {t('auth.common.login')}
           </Link>
           <Link href={pathFor('user.signup')} prefetch={false}>
             {t('auth.common.signup')}

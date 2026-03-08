@@ -33,11 +33,15 @@ export default {
   },
   state: {
     completed: 'Befejezve',
+    default: 'Alapértelmezett',
+    denied: 'Elutasítva',
     done: 'Kész',
+    granted: 'Megadva',
     loading: 'Betöltés...',
     notAvailable: 'n/a',
     notSet: 'Nincs beállítva',
     pending: 'Folyamatban',
+    prompt: 'Rákérdezés',
   },
   unknown: 'Ismeretlen',
   date: {

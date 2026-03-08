@@ -48,8 +48,8 @@ export function HistoryOverlay({
   }, [history]);
 
   return (
-    <div className="border-secondary bg-card rounded-lg border">
-      <div className="flex flex-row justify-between p-3 pl-5 shadow-xs">
+    <div className="border-secondary bg-card rounded-lg border text-start">
+      <div className="flex flex-row justify-between p-3 ps-5 shadow-xs">
         <h4 className="flex items-center gap-1 text-base font-bold">
           {t('support.chatBubble.hudTitle')}
           <Tooltip>
@@ -81,7 +81,7 @@ export function HistoryOverlay({
         )}
       </div>
       <MessageForm
-        className="flex justify-between p-3 pl-5 shadow-xs"
+        className="flex justify-between p-3 ps-5 shadow-xs"
         onMessage={onUserMessage}
       />
     </div>
