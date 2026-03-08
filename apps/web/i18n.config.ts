@@ -1,6 +1,6 @@
 const config = {
   // Live translations - used for routing, sitemap, and UI language selectors.
-  locales: ['en', 'hu', 'zh', 'ar', 'de', 'pt', 'ja', 'fr', 'ru', 'hi'],
+  locales: ['en', 'hu', 'zh', 'ar', 'de', 'pt', 'ja', 'fr', 'ru', 'hi', 'ko'],
   // All possible languages in the system.
   allLocales: [
     'en', // English
