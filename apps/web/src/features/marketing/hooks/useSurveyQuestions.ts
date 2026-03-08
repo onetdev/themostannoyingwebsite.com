@@ -14,8 +14,7 @@ export function useSurveyQuestions() {
     ).map(([, value]) => {
       return {
         text: value.text,
-        // `options` prop is polymorph hence casting it to string[]
-        options: value.options as unknown as string[],
+        options: Object.values(value.options),
         solution: value.solution,
       } satisfies FlaimSurveyQuestion;
     });
