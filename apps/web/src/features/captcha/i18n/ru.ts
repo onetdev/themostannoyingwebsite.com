@@ -30,9 +30,9 @@ export default {
 
     taxonomyChallengeSkipHint: 'Если их нет, нажмите "пропустить"',
     tilePuzzleChallengeHint:
-      'Move the pieces by clicking on nearby tiles next to empty space',
+      'Перемещайте кусочки, кликая на соседние плитки рядом с пустым местом',
     roboCop: 'робоКОП',
-    protected: 'protected',
-    emojiChallengePlaceholder: 'Emoji with the highest occurrence count',
+    protected: 'защищено',
+    emojiChallengePlaceholder: 'Эмодзи с наибольшим количеством вхождений',
   },
 };

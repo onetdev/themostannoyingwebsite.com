@@ -40,6 +40,6 @@ export default {
     playVideo: 'Воспроизвести видео',
     videoPlaybackFailed: 'Ошибка воспроизведения видео',
     pictureOfYou: 'Ваше фото',
-    hotThingsVtt: 'Russian',
+    hotThingsVtt: 'Русский',
   },
 };
