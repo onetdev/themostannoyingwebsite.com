@@ -46,6 +46,7 @@ const config: AppConfig = {
         vtt: {
           en: '/assets/vtt/hot-things-en.vtt',
           ko: '/assets/vtt/hot-things-ko.vtt',
+          pl: '/assets/vtt/hot-things-pl.vtt',
           tr: '/assets/vtt/hot-things-tr.vtt',
         },
       },
