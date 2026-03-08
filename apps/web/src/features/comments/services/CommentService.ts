@@ -7,6 +7,7 @@ import poolFr from '@/features/comments/i18n/generator/fr';
 import poolHu from '@/features/comments/i18n/generator/hu';
 import poolJa from '@/features/comments/i18n/generator/ja';
 import poolPt from '@/features/comments/i18n/generator/pt';
+import poolRu from '@/features/comments/i18n/generator/ru';
 import poolZh from '@/features/comments/i18n/generator/zh';
 import i18nConfig from '@/root/i18n.config';
 import type { CommentService as ICommentService } from '../types';
@@ -20,11 +21,12 @@ const pools: Record<AppLocale, typeof poolEn> = {
   ar: poolAr,
   de: poolDe,
   en: poolEn,
+  fr: poolFr,
   hu: poolHu,
   ja: poolJa,
   pt: poolPt,
+  ru: poolRu,
   zh: poolZh,
-  fr: poolFr,
 };
 
 @injectable()
