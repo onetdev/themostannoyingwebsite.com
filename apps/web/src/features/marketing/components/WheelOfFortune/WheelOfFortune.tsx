@@ -1,17 +1,12 @@
 'use client';
 
-import {
-  Dialog,
-  DialogContent,
-  DialogHeader,
-  DialogTitle,
-  Icon,
-} from '@maw/ui-lib';
+import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@maw/ui-lib';
 import { useTranslations } from 'next-intl';
 import { useState } from 'react';
 
 import { useEvent } from '@/hooks';
 import { ModalContent } from './ModalContent';
+import { WheelOfFortuneTrigger } from './WheelOfFortuneTrigger';
 
 export function WheelOfFortune() {
   const [isOpen, setOpen] = useState(false);
@@ -29,15 +24,8 @@ export function WheelOfFortune() {
           <ModalContent className="max-h-[600px] max-w-[600px] grow" />
         </DialogContent>
       </Dialog>
-      <div className="fixed top-1/2 left-0 z-30">
-        <button
-          type="button"
-          className="animate-wiggle-8deg bg-error text-on-error -ml-8 cursor-pointer py-3 pr-6 pl-10 text-2xl opacity-80 transition-all duration-200 ease-in-out hover:-ml-4 hover:opacity-100"
-          onClick={() => setOpen(true)}
-          aria-label={t('marketing.wheelOfFortune.title')}
-        >
-          <Icon icon="tags" />
-        </button>
+      <div className="fixed top-1/2 ltr:left-0 z-30 rtl:right-0 rtl:-scale-x-100">
+        <WheelOfFortuneTrigger onClick={() => setOpen(true)} />
       </div>
     </>
   );

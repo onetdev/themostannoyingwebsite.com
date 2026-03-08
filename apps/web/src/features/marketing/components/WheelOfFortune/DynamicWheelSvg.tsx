@@ -1,6 +1,7 @@
 import { radToDeg } from '@maw/utils/math';
 import Color from 'color';
 import type { ReactNode } from 'react';
+import { useLangDir } from '@/hooks';
 
 export type Item = {
   color: string;
@@ -22,7 +23,9 @@ export function DynamicWheelSvg({
   title,
   width,
 }: DynamicWheelSvgProps) {
+  const dir = useLangDir();
   const radius = Math.min(width, height) / 2;
+  const radiusMultiplier = dir === 'rtl' ? 0.25 : 0.85;
   const center = { x: width / 2, y: height / 2 };
   let startAngleRadians = 0;
   const sweepAngleRadians = (Math.PI / items.length) * 2;
@@ -40,10 +43,14 @@ export function DynamicWheelSvg({
     const abMidpoint = {
       x:
         center.x +
-        radius * 0.85 * Math.cos(startAngleRadians + sweepAngleRadians / 2),
+        radius *
+          radiusMultiplier *
+          Math.cos(startAngleRadians + sweepAngleRadians / 2),
       y:
         center.y +
-        radius * 0.85 * Math.sin(startAngleRadians + sweepAngleRadians / 2),
+        radius *
+          radiusMultiplier *
+          Math.sin(startAngleRadians + sweepAngleRadians / 2),
     };
 
     let d = '';
@@ -70,6 +77,8 @@ export function DynamicWheelSvg({
           y={abMidpoint.y}
           transform={`rotate(${labelAngle}, ${abMidpoint.x}, ${abMidpoint.y})`}
           fill={labelColor}
+          textLength="120"
+          lengthAdjust="spacingAndGlyphs"
         >
           {item.text}
         </text>
