@@ -33,11 +33,15 @@ export default {
   },
   state: {
     completed: '已完成',
+    default: '默认',
+    denied: '已拒绝',
     done: '完成',
+    granted: '已授权',
     loading: '加载中...',
     notAvailable: '不适用',
     notSet: '未设置',
     pending: '待处理',
+    prompt: '询问',
   },
   unknown: '未知',
   date: {

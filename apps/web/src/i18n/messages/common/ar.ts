@@ -33,11 +33,15 @@ export default {
   },
   state: {
     completed: 'مكتمل',
+    default: 'افتراضي',
+    denied: 'تم الرفض',
     done: 'تم',
+    granted: 'تم المنح',
     loading: 'جاري التحميل...',
     notAvailable: 'غير متاح',
     notSet: 'غير محدد',
     pending: 'قيد الانتظار',
+    prompt: 'طلب',
   },
   unknown: 'غير معروف',
   date: {
