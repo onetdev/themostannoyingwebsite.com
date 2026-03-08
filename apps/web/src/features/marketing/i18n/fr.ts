@@ -81,7 +81,7 @@ export default {
     prizeVariants: {
       freeLifetimeBeer: 'Bière gratuite à vie',
       worldPeace: 'La paix dans le monde',
-      absolutellyNothing: 'Absolument rien',
+      absolutelyNothing: 'Absolument rien',
       complimentaryOtter: 'Une loutre offerte',
       fake70Discount: 'Fausse remise de 70 %',
     },

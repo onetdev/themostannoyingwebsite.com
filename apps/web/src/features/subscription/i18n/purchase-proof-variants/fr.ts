@@ -19,7 +19,7 @@ export default {
     'la maison de leurs parents',
     'Mars (bientôt™)',
     'le Cloud',
-    'le Limbes',
+    'les Limbes',
     'le Mode Incognito',
     'le futur',
     'les dettes',

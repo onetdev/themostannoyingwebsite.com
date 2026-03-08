@@ -21,7 +21,7 @@ export default {
       '"{query}" の検索には {time}ミリ秒かかり、{count}件の結果が見つかりました',
     searching: '検索中',
     peopleAlsoSearched: '他の人はこんな検索もしています:',
-    topSearcheVariants: {
+    topSearchVariants: {
       variant_001: '魚は喉が乾くの？',
       variant_002: 'パスタの歌詞',
       variant_003: '車のクラクションはガス欠になる？',

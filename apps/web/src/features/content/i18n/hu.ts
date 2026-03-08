@@ -23,7 +23,7 @@ export default {
       'A(z) "{query}" kifejezésre történő keresés {time}ms-ig tartott és {count} találatot hozott',
     searching: 'Keresés',
     peopleAlsoSearched: 'Mások ezekre kerestek még:',
-    topSearcheVariants: {
+    topSearchVariants: {
       variant_001: 'szomjasak-e a halak',
       variant_002: 'tészta dalszöveg',
       variant_003: 'elfogy-e az autóból a duda',

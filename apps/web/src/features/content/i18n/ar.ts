@@ -23,7 +23,7 @@ export default {
       'البحث عن "{query}" استغرق {time} مللي ثانية ووجد {count} من النتائج',
     searching: 'جاري البحث',
     peopleAlsoSearched: 'بحث الناس أيضاً عن:',
-    topSearcheVariants: {
+    topSearchVariants: {
       variant_001: 'هل تعطش الأسماك',
       variant_002: 'كلمات أغنية الباستا',
       variant_003: 'هل ينفد بوق السيارات',

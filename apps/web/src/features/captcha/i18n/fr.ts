@@ -3,7 +3,7 @@ export default {
     field: 'Captcha',
     proveYouAreRobot: 'Prouvez que vous êtes un robot !',
     emojiHint:
-      'Comptez les emojis et identifiez celui qui apparaît le plus souvent. Regardez attentively, car certaines parties des emojis peuvent être masquées.',
+      'Comptez les emojis et identifiez celui qui apparaît le plus souvent. Regardez attentivement, car certaines parties des emojis peuvent être masquées.',
     tilePuzzleHint:
       'Faites glisser les tuiles dans leur bonne position. Vous ne pouvez déplacer que celles qui sont directement adjacentes.',
     gridSelectHint:

@@ -21,7 +21,7 @@ export default {
       'La recherche pour "{query}" a pris {time} ms et a trouvé {count} résultats',
     searching: 'Recherche en cours',
     peopleAlsoSearched: 'Les gens ont aussi cherché :',
-    topSearcheVariants: {
+    topSearchVariants: {
       variant_001: 'les poissons ont-ils soif',
       variant_002: 'paroles de pasta',
       variant_003: 'est-ce que les voitures tombent en panne de klaxon',

@@ -21,7 +21,7 @@ export default {
       'A pesquisa por "{query}" demorou {time}ms e encontrou {count} resultados',
     searching: 'A pesquisar',
     peopleAlsoSearched: 'As pessoas também pesquisaram por:',
-    topSearcheVariants: {
+    topSearchVariants: {
       variant_001: 'os peixes têm sede',
       variant_002: 'letra de massa',
       variant_003: 'os carros ficam sem buzina',

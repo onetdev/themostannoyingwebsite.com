@@ -33,8 +33,8 @@ export function SearchPage() {
   const [results, setResults] = useState<Result | undefined>();
 
   const topSearchesPool = useMemo(
-    () => Object.values(messages.content.search.topSearcheVariants),
-    [messages.content.search.topSearcheVariants],
+    () => Object.values(messages.content.search.topSearchVariants),
+    [messages.content.search.topSearchVariants],
   );
 
   useEvent('global-search:query', (event) => {
