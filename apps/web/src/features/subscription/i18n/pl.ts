@@ -26,7 +26,7 @@ export default {
       },
       chargeDisclaimer: 'Dzisiaj zostaniesz obciążony kwotą {amount}',
     },
-    mostPopular: 'Most Popular',
+    mostPopular: 'Najpopularniejszy',
     pricePerMonth: '{price}/mies.',
     discount: '-{amount}%',
     table: {
