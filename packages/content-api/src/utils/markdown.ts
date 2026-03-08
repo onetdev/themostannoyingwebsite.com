@@ -11,7 +11,7 @@ export const parse = (raw: string, opts?: { sanitize: boolean }) => {
     // header
     let cell = '';
     for (let j = 0; j < token.header.length; j++) {
-      cell += renderer.tablecell(token.header[j]!);
+      cell += renderer.tablecell(token.header[j]);
     }
     header += renderer.tablerow({ text: cell });
 
@@ -26,7 +26,7 @@ export const parse = (raw: string, opts?: { sanitize: boolean }) => {
 
       cell = '';
       for (let k = 0; k < row.length; k++) {
-        cell += renderer.tablecell(row[k]!);
+        cell += renderer.tablecell(row[k]);
       }
 
       body += renderer.tablerow({ text: cell });

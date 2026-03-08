@@ -8,8 +8,8 @@ describe('result utils', () => {
       expect(result.success).toBe(true);
       expect(result.data).toEqual(data);
       expect(result.metadata?.timestamp).toBeDefined();
-      expect(new Date(result.metadata!.timestamp).toISOString()).toBe(
-        result.metadata!.timestamp,
+      expect(new Date(result.metadata?.timestamp ?? 0).toISOString()).toBe(
+        result.metadata?.timestamp,
       );
     });
 

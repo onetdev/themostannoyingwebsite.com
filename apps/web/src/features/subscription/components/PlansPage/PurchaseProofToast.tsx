@@ -48,6 +48,7 @@ export function PurchaseProofToast({
     setIterator((i) => i + 1);
   }, [pool, t]);
 
+  // biome-ignore lint/correctness/useExhaustiveDependencies: We need the iterator for the scheduler and cleanup.
   useEffect(() => {
     const timer = setTimeout(
       showRandomNotification,

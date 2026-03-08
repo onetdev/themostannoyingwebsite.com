@@ -23,12 +23,12 @@
     "localStyles.*"
   ],
   "yaml.schemas": {
-    "packages/content-api/src/schemas/article-shared.schema.json": "./packages/content-api/data/*/data.yml",
+    "packages/content-api/src/schemas/article-shared.schema.json": "packages/content-api/data/*/data.yml",
     "packages/content-api/src/schemas/article-language.schema.json": [
-      "./packages/content-api/data/*/ar.yml",
-      "./packages/content-api/data/*/en.yml",
-      "./packages/content-api/data/*/hu.yml",
-      "./packages/content-api/data/*/zh.yml"
+      "packages/content-api/data/*/ar.yml",
+      "packages/content-api/data/*/en.yml",
+      "packages/content-api/data/*/hu.yml",
+      "packages/content-api/data/*/zh.yml"
     ]
   },
   "json.schemas": [

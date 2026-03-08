@@ -35,14 +35,16 @@ export function ShareModal({
   onClose,
   texts,
 }: ShareModalProps) {
-  const [currentUrl, setCurrentUrl] = useState<string>('');
+  const [currentUrl, setCurrentUrl] = useState<string>();
 
   useEffect(() => {
-    setCurrentUrl(window.location.href);
+    setCurrentUrl(
+      controlledShow ? window.location.href : window.location.origin,
+    );
   }, [controlledShow]);
 
   const buttonStyle = 'overflow-hidden hover:brightness-125 rounded-md outline';
-  const url = controlledUrl || currentUrl;
+  const url = controlledUrl ?? currentUrl;
 
   return (
     <Dialog open={controlledShow} onOpenChange={(open) => !open && onClose()}>
@@ -53,19 +55,21 @@ export function ShareModal({
         <div className="max-w-screen-sm">
           <DialogDescription>{texts.description}</DialogDescription>
         </div>
-        <DialogFooter>
-          <div className="flex w-full gap-3">
-            <FacebookShareButton url={url} className={buttonStyle}>
-              <FacebookIcon size={32} />
-            </FacebookShareButton>
-            <TwitterShareButton url={url} className={buttonStyle}>
-              <XIcon size={32} />
-            </TwitterShareButton>
-            <EmailShareButton url={url} className={buttonStyle}>
-              <EmailIcon size={32} />
-            </EmailShareButton>
-          </div>
-        </DialogFooter>
+        {url && (
+          <DialogFooter>
+            <div className="flex w-full gap-3">
+              <FacebookShareButton url={url} className={buttonStyle}>
+                <FacebookIcon size={32} />
+              </FacebookShareButton>
+              <TwitterShareButton url={url} className={buttonStyle}>
+                <XIcon size={32} />
+              </TwitterShareButton>
+              <EmailShareButton url={url} className={buttonStyle}>
+                <EmailIcon size={32} />
+              </EmailShareButton>
+            </div>
+          </DialogFooter>
+        )}
       </DialogContent>
     </Dialog>
   );

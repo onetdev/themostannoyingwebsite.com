@@ -10,7 +10,7 @@ import {
   ArticleLanguageSchema,
   ArticleSharedSchema,
 } from '@/schemas/article-entry';
-import type { ArticleIndexEntrySchema } from '@/schemas/article-index-entry';
+import type { ArticleIndexEntry } from '@/schemas/article-index-entry';
 import { parse as parseMd } from '@/utils/markdown';
 
 const logger = getLogger().getSubLogger({
@@ -92,7 +92,7 @@ const getLocaleMeta = async () => {
 const resolveArticleLocales = async (
   entry: Dirent,
   localeMeta: Awaited<ReturnType<typeof getLocaleMeta>>,
-): Promise<ArticleIndexEntrySchema[]> => {
+): Promise<ArticleIndexEntry[]> => {
   const match = entry.name.match(validArticleDirPattern);
   if (!match) {
     return [];
@@ -106,7 +106,7 @@ const resolveArticleLocales = async (
     parse(sharedDataRaw.toString()),
   );
 
-  const results: ArticleIndexEntrySchema[] = [];
+  const results: ArticleIndexEntry[] = [];
 
   // 2. Read each locale data
   const localesProcessed: string[] = [];
@@ -158,7 +158,7 @@ const resolveArticleLocales = async (
       content = sanitizeHtml(langData.content);
     }
 
-    const localeMetaEntry = localeMeta[locale]!;
+    const localeMetaEntry = localeMeta[locale];
 
     results.push({
       content: content,
