@@ -9,14 +9,12 @@ test.beforeEach(async ({ page }) => {
   await loginPage.goto();
 });
 
-test(
-  'user login page loads and its menu item is active',
-  { tag: '@smoke' },
-  async ({ page }) => {
-    const loginPage = getLoginPage(page);
-    await expect(loginPage.activeMenuItem).toHaveText('Login');
-  },
-);
+test('user login page loads and its menu item is active', {
+  tag: '@smoke',
+}, async ({ page }) => {
+  const loginPage = getLoginPage(page);
+  await expect(loginPage.activeMenuItem).toHaveText('Login');
+});
 
 test('user login page show validation error when submitting empty form', async ({
   page,

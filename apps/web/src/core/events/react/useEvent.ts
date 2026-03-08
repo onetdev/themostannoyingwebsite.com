@@ -14,6 +14,6 @@ export function useEvent<K extends keyof AppEvents>(
 
   useEffect(() => {
     if (!enabled) return;
-    return eventBus.on(type, (v) => ref.current(v));
+    return eventBus.on(type, (v) => ref.current(v.data as AppEvents[K]));
   }, [type, enabled]);
 }

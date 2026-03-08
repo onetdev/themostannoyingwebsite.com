@@ -4,17 +4,15 @@ import { getSettingsPage } from '../pages/SettingsPage';
 import { setupE2eTestState } from '../utils/setup';
 import { signalDismissDialog } from '../utils/ui';
 
-test(
-  'settings page loads and its menu item is active',
-  { tag: '@smoke' },
-  async ({ page }) => {
-    await setupE2eTestState(page);
-    const settingsPage = getSettingsPage(page);
-    await settingsPage.goto();
+test('settings page loads and its menu item is active', {
+  tag: '@smoke',
+}, async ({ page }) => {
+  await setupE2eTestState(page);
+  const settingsPage = getSettingsPage(page);
+  await settingsPage.goto();
 
-    await expect(settingsPage.activeMenuItem).toHaveText('Settings');
-  },
-);
+  await expect(settingsPage.activeMenuItem).toHaveText('Settings');
+});
 
 test('pain point flags can be toggled and persisted', async ({ page }) => {
   await setupE2eTestState(page);

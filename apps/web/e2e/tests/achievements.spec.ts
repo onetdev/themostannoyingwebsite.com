@@ -37,43 +37,39 @@ test.describe('Achievements', () => {
     });
   });
 
-  test(
-    'unlocks "Welcome to Hell" on first visit',
-    { tag: '@smoke' },
-    async ({ page }) => {
-      await setAchievements(page, { achievements: {} });
-      const homePage = getHomePage(page);
-      await homePage.goto();
+  test('unlocks "Welcome to Hell" on first visit', { tag: '@smoke' }, async ({
+    page,
+  }) => {
+    await setAchievements(page, { achievements: {} });
+    const homePage = getHomePage(page);
+    await homePage.goto();
 
-      const toast = homePage.toast.achievementUnlocked;
-      await expect(toast).toBeVisible();
-      await expect(toast).toContainText('Welcome to Hell');
-    },
-  );
+    const toast = homePage.toast.achievementUnlocked;
+    await expect(toast).toBeVisible();
+    await expect(toast).toContainText('Welcome to Hell');
+  });
 
-  test(
-    'progresses "Copy-Paste Criminal" on copy',
-    { tag: '@smoke' },
-    async ({ page }) => {
-      const modifier = process.platform === 'darwin' ? 'Meta' : 'Control';
+  test('progresses "Copy-Paste Criminal" on copy', { tag: '@smoke' }, async ({
+    page,
+  }) => {
+    const modifier = process.platform === 'darwin' ? 'Meta' : 'Control';
 
-      const achievementsPage = getAchievementsPage(page);
-      await achievementsPage.goto();
+    const achievementsPage = getAchievementsPage(page);
+    await achievementsPage.goto();
 
-      for (let i = 0; i < 6; i++) {
-        selectText(achievementsPage.achievementCard.nth(i));
-        await page.keyboard.down(modifier);
-        await page.keyboard.press('c');
-        await page.waitForTimeout(100);
-        await page.keyboard.up(modifier);
-      }
+    for (let i = 0; i < 6; i++) {
+      selectText(achievementsPage.achievementCard.nth(i));
+      await page.keyboard.down(modifier);
+      await page.keyboard.press('c');
+      await page.waitForTimeout(100);
+      await page.keyboard.up(modifier);
+    }
 
-      const toast = achievementsPage.toast.achievementUnlocked;
+    const toast = achievementsPage.toast.achievementUnlocked;
 
-      await expect(toast).toBeVisible();
-      await expect(toast).toContainText('Copy-Paste Criminal');
-    },
-  );
+    await expect(toast).toBeVisible();
+    await expect(toast).toContainText('Copy-Paste Criminal');
+  });
 
   test('unlocks "The Seeker" on search', async ({ page }) => {
     const achievementsPage = getAchievementsPage(page);

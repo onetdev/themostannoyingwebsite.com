@@ -9,14 +9,12 @@ test.beforeEach(async ({ page }) => {
   await passwordReminderPage.goto();
 });
 
-test(
-  'password reminder page loads and its menu item is active',
-  { tag: '@smoke' },
-  async ({ page }) => {
-    const passwordReminderPage = getPasswordReminderPage(page);
-    await expect(passwordReminderPage.activeMenuItem).toHaveText('Login');
-  },
-);
+test('password reminder page loads and its menu item is active', {
+  tag: '@smoke',
+}, async ({ page }) => {
+  const passwordReminderPage = getPasswordReminderPage(page);
+  await expect(passwordReminderPage.activeMenuItem).toHaveText('Login');
+});
 
 test('password reminder shows validation error on submit', async ({ page }) => {
   const passwordReminderPage = getPasswordReminderPage(page);
