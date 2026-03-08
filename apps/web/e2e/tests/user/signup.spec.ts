@@ -10,14 +10,12 @@ test.beforeEach(async ({ page }) => {
   await signupPage.goto();
 });
 
-test(
-  'signup page loads and its menu item is active',
-  { tag: '@smoke' },
-  async ({ page }) => {
-    const signupPage = getSignupPage(page);
-    await expect(signupPage.activeMenuItem).toHaveText('Login');
-  },
-);
+test('signup page loads and its menu item is active', {
+  tag: '@smoke',
+}, async ({ page }) => {
+  const signupPage = getSignupPage(page);
+  await expect(signupPage.activeMenuItem).toHaveText('Login');
+});
 
 // TODO: Checking for validation error messages will require a lot of attention.
 test('signup page has 5 required field errors when submitting an empty form', async ({

@@ -32,12 +32,12 @@
   },
   "devDependencies": {
     "@biomejs/biome": "catalog:",
-    "@commitlint/cli": "^20.4.2",
-    "@commitlint/config-conventional": "^20.4.2",
+    "@commitlint/cli": "^20.4.3",
+    "@commitlint/config-conventional": "^20.4.3",
     "husky": "^9.1.7",
-    "lint-staged": "^16.2.7",
+    "lint-staged": "^16.3.2",
     "symlink-dir": "9.0.0",
-    "turbo": "2.8.3",
+    "turbo": "^2.8.14",
     "typescript": "catalog:"
   },
   "engines": {

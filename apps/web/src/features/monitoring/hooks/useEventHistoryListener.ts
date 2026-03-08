@@ -11,10 +11,10 @@ export function useEventHistoryListener() {
     (state) => state.pushEventToHistory,
   );
 
-  useAllEvents((type, payload) => {
+  useAllEvents(({ name, data }) => {
     if (!isHistoryEnabled) {
       return;
     }
-    pushEventToHistory(type, payload);
+    pushEventToHistory(name, data as AppEvents[keyof AppEvents]);
   });
 }
