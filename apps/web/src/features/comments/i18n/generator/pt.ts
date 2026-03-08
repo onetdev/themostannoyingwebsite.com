@@ -186,7 +186,7 @@ export default {
     'Um famoso bilionário tecnológico está a oferecer 50.000 BTC! Envia 0,1 BTC para este endereço para receber 1 BTC!',
     'Recebe um cartão oferta de 500€ para jogos agora! Oferta limitada, não percas: [link removido]',
     'Pessoas solteiras na tua área querem conhecer-te! Clica aqui para ver os seus perfis privados: [link removido]',
-    'A tua conta bancária foi comprometida. Por favor, inicia sessão aqui para proteger os teus fundos: [link removed]',
+    'A tua conta bancária foi comprometida. Por favor, inicia sessão aqui para proteger os teus fundos: [link removido]',
     'A tua subscrição de streaming expirou. Atualiza o teu método de pagamento para continuar a ver: [link removido]',
     'Recebe 10k seguidores GRÁTIS em 5 minutos! Sem palavra-passe, basta clicar aqui: [link removido]',
     'Tens um bónus pendente de 5000€ no SuperWin Casino! Reclama antes que expire: [link removido]',

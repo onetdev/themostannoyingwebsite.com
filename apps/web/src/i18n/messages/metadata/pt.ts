@@ -20,7 +20,7 @@ export default {
       'Tem uma pergunta, sugestão ou apenas quer dizer olá? Contacte-nos aqui e teremos todo o gosto em ligar-nos a si.',
   },
   dilf: {
-    title: "DILF - Donut I'd Like to Feast On",
+    title: 'DILF - Donut que Gostaria de Devorar',
     description:
       'Um conceito irresistivelmente doce que combina indulgência com diversão. Saiba mais aqui.',
   },
