@@ -10,6 +10,7 @@ import poolJa from '@/features/comments/i18n/generator/ja';
 import poolKo from '@/features/comments/i18n/generator/ko';
 import poolPt from '@/features/comments/i18n/generator/pt';
 import poolRu from '@/features/comments/i18n/generator/ru';
+import poolTr from '@/features/comments/i18n/generator/tr';
 import poolZh from '@/features/comments/i18n/generator/zh';
 import i18nConfig from '@/root/i18n.config';
 import type { CommentService as ICommentService } from '../types';
@@ -30,6 +31,7 @@ const pools: Record<AppLocale, typeof poolEn> = {
   ko: poolKo,
   pt: poolPt,
   ru: poolRu,
+  tr: poolTr,
   zh: poolZh,
 };
 
