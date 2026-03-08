@@ -1,3 +1,5 @@
+import type { CommentsI18nShape } from '../types';
+
 export default {
   sectionTitle: 'التعليقات',
   formTitle: 'أضف تعليقك',
@@ -18,4 +20,4 @@ export default {
     comment: 'التعليق',
     submit: 'إرسال التعليق',
   },
-};
+} satisfies CommentsI18nShape;

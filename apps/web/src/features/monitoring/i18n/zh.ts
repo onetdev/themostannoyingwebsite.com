@@ -1,3 +1,5 @@
+import type { MonitoringI18nShape } from '../types';
+
 export default {
   auth: {
     title: '受限访问',
@@ -41,4 +43,4 @@ export default {
     userGrants: '用户授权 Store',
     appConfig: '应用配置',
   },
-};
+} satisfies MonitoringI18nShape;

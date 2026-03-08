@@ -1,8 +1,10 @@
+import type { AuthI18nShape } from '../types';
+
 export default {
   common: {
     lookingForSignup: 'Nincs még fiókod? Regisztrálj itt',
     forgotPassword: 'Elfelejtetted a jelszavad?',
-    Login: 'Belépés',
+    login: 'Belépés',
     signup: 'Regisztráció',
   },
   form: {
@@ -33,4 +35,4 @@ export default {
       redirectingSafety: 'Visszaviszlek a biztonságba...',
     },
   },
-};
+} satisfies AuthI18nShape;

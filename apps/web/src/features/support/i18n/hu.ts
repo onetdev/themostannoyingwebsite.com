@@ -1,3 +1,5 @@
+import type { SupportI18nShape } from '../types';
+
 export default {
   chatBubble: {
     messageInitial:
@@ -27,4 +29,4 @@ export default {
     yourMessage: 'Az üzeneted',
     yourMessagePlaceholder: 'Írj ide...',
   },
-};
+} satisfies SupportI18nShape;

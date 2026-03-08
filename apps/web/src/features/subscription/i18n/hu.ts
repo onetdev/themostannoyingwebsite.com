@@ -1,3 +1,4 @@
+import type { SubscriptionI18nShape } from '../types';
 import socialProofVariants from './purchase-proof-variants/en';
 
 export default {
@@ -69,4 +70,4 @@ export default {
       '{name} innen: {location} épp most fizetett elő erre: {plan}!',
     variants: socialProofVariants,
   },
-};
+} satisfies SubscriptionI18nShape;

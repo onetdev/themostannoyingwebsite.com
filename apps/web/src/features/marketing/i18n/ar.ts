@@ -1,3 +1,4 @@
+import type { MarketingI18nShape } from '../types';
 import questionVariants from './quiz-variants/ar';
 
 export default {
@@ -85,4 +86,4 @@ export default {
     },
     wheelTitle: 'عجلة الحظ',
   },
-};
+} satisfies MarketingI18nShape;

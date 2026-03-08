@@ -1,8 +1,10 @@
+import type { AuthI18nShape } from '../types';
+
 export default {
   common: {
     lookingForSignup: '需要账户？在这里注册',
     forgotPassword: '忘记密码了？',
-    Login: '登录',
+    login: '登录',
     signup: '注册',
   },
   form: {
@@ -32,4 +34,4 @@ export default {
       redirectingSafety: '正在带你回到安全地带...',
     },
   },
-};
+} satisfies AuthI18nShape;

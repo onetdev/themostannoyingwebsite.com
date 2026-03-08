@@ -1,6 +1,10 @@
+import type fundingEnLocale from './i18n/en';
+
 export const DI = {
   DonationService: Symbol.for('DonationService'),
 };
+
+export type FundingI18nShape = typeof fundingEnLocale;
 
 export interface BeggingBannerData {
   messageKey: AppTranslationKey;

@@ -1,3 +1,5 @@
+import type { MonitoringI18nShape } from '../types';
+
 export default {
   auth: {
     title: 'وصول مقيد',
@@ -41,4 +43,4 @@ export default {
     userGrants: 'مخزن منح المستخدم',
     appConfig: 'تكوين التطبيق',
   },
-};
+} satisfies MonitoringI18nShape;

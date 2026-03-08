@@ -1,3 +1,5 @@
+import type { MonitoringI18nShape } from '../types';
+
 export default {
   auth: {
     title: 'Korlátozott hozzáférés',
@@ -41,4 +43,4 @@ export default {
     userGrants: 'Hozzájárulások Store',
     appConfig: 'App konfiguráció',
   },
-};
+} satisfies MonitoringI18nShape;

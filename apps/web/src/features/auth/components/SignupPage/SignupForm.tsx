@@ -88,7 +88,7 @@ export function SignupForm() {
               {t('auth.common.forgotPassword')}
             </Link>
             <Link href={pathFor('user.login')} prefetch={false}>
-              {t('auth.common.Login')}
+              {t('auth.common.login')}
             </Link>
           </div>
         </div>

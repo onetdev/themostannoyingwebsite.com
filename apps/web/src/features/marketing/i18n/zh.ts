@@ -1,3 +1,4 @@
+import type { MarketingI18nShape } from '../types';
 import questionVariants from './quiz-variants/zh';
 
 export default {
@@ -85,4 +86,4 @@ export default {
     },
     wheelTitle: '幸运大转盘',
   },
-};
+} satisfies MarketingI18nShape;

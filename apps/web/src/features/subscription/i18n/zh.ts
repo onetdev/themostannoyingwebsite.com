@@ -1,3 +1,4 @@
+import type { SubscriptionI18nShape } from '../types';
 import socialProofVariants from './purchase-proof-variants/zh';
 
 export default {
@@ -68,4 +69,4 @@ export default {
     justSubscribed: '来自 {location} 的 {name} 刚刚订阅了 {plan}！',
     variants: socialProofVariants,
   },
-};
+} satisfies SubscriptionI18nShape;

@@ -2,7 +2,7 @@ export default {
   common: {
     lookingForSignup: 'Need an account? Signup here',
     forgotPassword: 'Forgot password?',
-    Login: 'Login',
+    login: 'Login',
     signup: 'Signup',
   },
   form: {

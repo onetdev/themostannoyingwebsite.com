@@ -1,3 +1,5 @@
+import type { SupportI18nShape } from '../types';
+
 export default {
   chatBubble: {
     messageInitial: '你好！我是聊天气泡。我是来帮助你的。🤓',
@@ -23,4 +25,4 @@ export default {
     yourMessage: '你的消息',
     yourMessagePlaceholder: '在这里输入...',
   },
-};
+} satisfies SupportI18nShape;

@@ -1,5 +1,7 @@
 export type AchievementType = 'boolean' | 'progression';
 
+import type achievementsEnLocale from './i18n/en';
+
 export interface AchievementDefinition {
   id: string;
   nameKey: AppTranslationKey;
@@ -12,6 +14,8 @@ export interface AchievementDefinition {
 export const DI = {
   AchievementBankService: Symbol.for('AchievementBankService'),
 };
+
+export type ArhievementsI18nShape = typeof achievementsEnLocale;
 
 export interface AchievementBankService {
   getAchievements(): AchievementDefinition[];

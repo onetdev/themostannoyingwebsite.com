@@ -1,3 +1,5 @@
+import type { SupportI18nShape } from '../types';
+
 export default {
   chatBubble: {
     messageInitial: 'مرحباً! أنا فقاعة دردشة. أنا هنا لمساعدتك. 🤓',
@@ -24,4 +26,4 @@ export default {
     yourMessage: 'رسالتك',
     yourMessagePlaceholder: 'اكتب هنا...',
   },
-};
+} satisfies SupportI18nShape;

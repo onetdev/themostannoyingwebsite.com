@@ -1,3 +1,5 @@
+import type { CaptchaI18nShape } from '../types';
+
 export default {
   captcha: {
     field: 'كابتشا',
@@ -35,4 +37,4 @@ export default {
     protected: 'محمي',
     emojiChallengePlaceholder: 'الرمز التعبيري الأكثر تكراراً',
   },
-};
+} satisfies CaptchaI18nShape;

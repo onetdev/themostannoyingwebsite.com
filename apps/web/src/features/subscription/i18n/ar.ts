@@ -1,3 +1,4 @@
+import type { SubscriptionI18nShape } from '../types';
 import socialProofVariants from './purchase-proof-variants/ar';
 
 export default {
@@ -68,4 +69,4 @@ export default {
     justSubscribed: '{name} من {location} اشترك للتو في {plan}!',
     variants: socialProofVariants,
   },
-};
+} satisfies SubscriptionI18nShape;

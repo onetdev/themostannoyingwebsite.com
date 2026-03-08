@@ -1,3 +1,5 @@
+import type { CaptchaI18nShape } from '../types';
+
 export default {
   captcha: {
     field: '验证码',
@@ -31,4 +33,4 @@ export default {
     protected: '已保护',
     emojiChallengePlaceholder: '出现次数最多的表情符号',
   },
-};
+} satisfies CaptchaI18nShape;

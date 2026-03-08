@@ -1,3 +1,5 @@
+import type { CaptchaI18nShape } from '../types';
+
 export default {
   captcha: {
     field: 'Captcha',
@@ -35,4 +37,4 @@ export default {
     protected: 'védett',
     emojiChallengePlaceholder: 'A legtöbbször előforduló emoji',
   },
-};
+} satisfies CaptchaI18nShape;
