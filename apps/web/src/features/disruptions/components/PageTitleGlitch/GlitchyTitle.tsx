@@ -39,6 +39,7 @@ export function GlitchyTitle({
     [duration, randomRange],
   );
 
+  // biome-ignore lint/correctness/useExhaustiveDependencies: runCount is required for scheduling
   useEffect(() => {
     if (!enabled) {
       setBlink(false);

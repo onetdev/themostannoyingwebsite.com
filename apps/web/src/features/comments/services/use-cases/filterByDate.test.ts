@@ -70,7 +70,7 @@ describe('filterByDate', () => {
         time: 500,
         likes: 0,
         replies: undefined,
-      } as any,
+      },
     ];
 
     const filtered = filterByDate(tree, now);

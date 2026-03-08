@@ -22,8 +22,15 @@ describe('AppService', () => {
   });
 
   it('should get all countries', async () => {
-    const mockCountries = [{ name: 'Test Country', code: 'TC' }];
-    mockCountryRepository.findAll.mockResolvedValue(mockCountries as any);
+    const mockCountries = [
+      {
+        name: 'Test Country',
+        code: 'TC',
+        localName: 'Test Country',
+        phone: '+12',
+      },
+    ];
+    mockCountryRepository.findAll.mockResolvedValue(mockCountries);
 
     const countries = await appService.getAllCountries();
     expect(countries).toEqual(mockCountries);

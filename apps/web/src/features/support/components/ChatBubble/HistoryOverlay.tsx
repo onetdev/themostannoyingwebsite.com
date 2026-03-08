@@ -32,8 +32,7 @@ export function HistoryOverlay({
     setShowTyping(history[history.length - 1]?.owner === 'user');
   }, [history]);
 
-  // We don't care about the current scroll position, this will force the user
-  // to always see the most recent messages.
+  // biome-ignore lint/correctness/useExhaustiveDependencies: We don't care about the current scroll position, this will force the user to always see the most recent messages.
   useEffect(() => {
     (pagerRef.current?.lastChild as HTMLDivElement | undefined)?.scrollIntoView(
       { behavior: 'smooth' },

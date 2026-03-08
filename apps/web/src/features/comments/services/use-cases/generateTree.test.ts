@@ -1,3 +1,4 @@
+import type { Comment } from '../../schemas';
 import { generateTree } from './generateTree';
 
 describe('generateTree', () => {
@@ -89,7 +90,7 @@ describe('generateTree', () => {
     // However, nodeCount starts at 0 and is incremented AFTER the check.
     // So if maxTotalNodes is 5, nodes with index 0, 1, 2, 3, 4 (in order of generation) are counted.
 
-    const countNodes = (nodes: any[]) => {
+    const countNodes = (nodes: Comment[]) => {
       nodes.forEach((node) => {
         if (node.replies && node.replies.length > 0) {
           countedNodes++;

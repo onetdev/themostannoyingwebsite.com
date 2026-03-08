@@ -1,6 +1,6 @@
-import { z } from 'zod';
+import { z } from 'zod/v3';
 
-const schema = z
+export const ArticleSimplifiedSchema = z
   .object({
     content: z.string(),
     intro: z
@@ -9,10 +9,12 @@ const schema = z
         "It's recommended to keep the intro below 160 characters or less.",
       )
       .optional(),
-    publishedAt: z.iso
+    publishedAt: z
+      .string()
       .datetime({ offset: true })
       .describe('Must be in ISO 8601 format'),
-    updatedAt: z.iso
+    updatedAt: z
+      .string()
       .datetime({ offset: true })
       .optional()
       .describe('Must be in ISO 8601 format'),
@@ -36,5 +38,4 @@ const schema = z
   })
   .strict();
 
-export type ArticleSimplifiedSchema = z.infer<typeof schema>;
-export default schema;
+export type ArticleSimplified = z.infer<typeof ArticleSimplifiedSchema>;

@@ -90,7 +90,7 @@ const getSlicesItems = (
   for (let i = 0; i < numItems; i++) {
     items.push({
       color: `hsl(${range[0] + i * step}, 100%, 50%)`,
-      text: getWeightedRandom(pool)!,
+      text: getWeightedRandom(pool) ?? '~',
     });
   }
 

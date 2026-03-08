@@ -5,11 +5,9 @@ import {
   ArticleLanguageSchema,
   ArticleSharedSchema,
 } from '@/schemas/article-entry';
-import articleEntrySimplifiedZod from '@/schemas/article-entry-simplified';
-import articleIndexEntryZod from '@/schemas/article-index-entry';
-import articleLocaleMetaZod from '@/schemas/article-locale-meta';
-
-type TypeConflictBypass = any;
+import { ArticleSimplifiedSchema } from '@/schemas/article-entry-simplified';
+import { ArticleIndexEntrySchema } from '@/schemas/article-index-entry';
+import { ArticleLocaleMetaSchema } from '@/schemas/article-locale-meta';
 
 const logger = getLogger().getSubLogger({
   name: 'build-json-schema',
@@ -17,19 +15,24 @@ const logger = getLogger().getSubLogger({
 
 const writeMap = {
   './src/schemas/article-entry-simplified.schema.json': zodToJsonSchema(
-    articleEntrySimplifiedZod as TypeConflictBypass,
+    ArticleSimplifiedSchema,
+    'articleSimplifiedSchema',
   ),
   './src/schemas/article-shared.schema.json': zodToJsonSchema(
-    ArticleSharedSchema as TypeConflictBypass,
+    ArticleSharedSchema,
+    'articleSharedSchema',
   ),
   './src/schemas/article-language.schema.json': zodToJsonSchema(
-    ArticleLanguageSchema as TypeConflictBypass,
+    ArticleLanguageSchema,
+    'articleLanguageSchema',
   ),
   './src/schemas/article-index-entry.schema.json': zodToJsonSchema(
-    articleIndexEntryZod as TypeConflictBypass,
+    ArticleIndexEntrySchema,
+    'articleIndexEntrySchema',
   ),
   './src/schemas/article-locale-meta.schema.json': zodToJsonSchema(
-    articleLocaleMetaZod as TypeConflictBypass,
+    ArticleLocaleMetaSchema,
+    'articleLocaleMetaSchema',
   ),
 };
 

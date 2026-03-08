@@ -1,6 +1,6 @@
-import { z } from 'zod';
+import { z } from 'zod/v3';
 
-const schema = z
+export const ArticleIndexEntrySchema = z
   .object({
     content: z.string(),
     directory: z.string(),
@@ -14,10 +14,12 @@ const schema = z
     isOnCover: z.boolean(),
     id: z.coerce.string(),
     locale: z.string(),
-    publishedAt: z.iso
+    publishedAt: z
+      .string()
       .datetime({ offset: true })
       .describe('Must be in ISO 8601 format'),
-    updatedAt: z.iso
+    updatedAt: z
+      .string()
       .datetime({ offset: true })
       .optional()
       .describe('Must be in ISO 8601 format'),
@@ -30,5 +32,4 @@ const schema = z
   })
   .strict();
 
-export type ArticleIndexEntrySchema = z.infer<typeof schema>;
-export default schema;
+export type ArticleIndexEntry = z.infer<typeof ArticleIndexEntrySchema>;
