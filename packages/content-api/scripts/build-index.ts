@@ -205,4 +205,7 @@ const main = async () => {
 logger.info('🔄 Generating article index...');
 main()
   .then(() => logger.info(`✅ Aaaaand it's done. New index created.\n`))
-  .catch((err) => logger.error(err, `Ooopsie, something went wrong`));
+  .catch((err) => {
+    logger.error(err, `Ooopsie, something went wrong`);
+    process.exit(1);
+  });
