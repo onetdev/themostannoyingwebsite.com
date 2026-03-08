@@ -4,6 +4,7 @@ import poolAr from '@/features/comments/i18n/generator/ar';
 import poolDe from '@/features/comments/i18n/generator/de';
 import poolEn from '@/features/comments/i18n/generator/en';
 import poolHu from '@/features/comments/i18n/generator/hu';
+import poolJa from '@/features/comments/i18n/generator/ja';
 import poolPt from '@/features/comments/i18n/generator/pt';
 import poolZh from '@/features/comments/i18n/generator/zh';
 import i18nConfig from '@/root/i18n.config';
@@ -19,6 +20,7 @@ const pools: Record<AppLocale, typeof poolEn> = {
   de: poolDe,
   en: poolEn,
   hu: poolHu,
+  ja: poolJa,
   pt: poolPt,
   zh: poolZh,
 };
