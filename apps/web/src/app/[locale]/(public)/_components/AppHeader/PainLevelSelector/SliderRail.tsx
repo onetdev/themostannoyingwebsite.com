@@ -48,7 +48,7 @@ export function SliderRail({
   }, []);
 
   return (
-    <div className="relative w-full">
+    <div className="relative w-full rtl:-scale-x-100">
       <div className="pointer-events-none absolute inset-x-0 bottom-0 h-0 overflow-visible">
         {particles.map((particle) => (
           <FireflyParticle

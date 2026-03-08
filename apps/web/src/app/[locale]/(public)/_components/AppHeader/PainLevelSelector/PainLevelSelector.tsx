@@ -80,7 +80,7 @@ export function PainLevelSelector({ className }: PainLevelSelectorProps) {
           max={publicLevel.max}
           value={publicLevel.current}
           onChange={handleChange}
-          className="accent-primary absolute top-1/2 left-0 z-20 w-full -translate-y-1/2 cursor-pointer appearance-none bg-transparent"
+          className="accent-primary absolute top-1/2 inset-inline-start-0 z-20 w-full -translate-y-1/2 cursor-pointer appearance-none bg-transparent"
         />
       </div>
     </div>
