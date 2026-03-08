@@ -18,7 +18,7 @@ export function AdblockerSuspectBar() {
   }
 
   return (
-    <div className="border-tertiary bg-error text-on-error sticky -bottom-3 z-20 rounded-md border px-5 py-3 shadow-md">
+    <div className="border-tertiary bg-error text-on-error sticky -bottom-3 z-20 rounded-t-md border px-5 py-3 shadow-md">
       <h4>{t('marketing.suspectBar.title')}</h4>
       <p>{t('marketing.suspectBar.description')}</p>
       <div className="my-2 flex items-center justify-end gap-3">

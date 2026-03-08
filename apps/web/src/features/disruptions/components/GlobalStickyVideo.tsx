@@ -22,7 +22,7 @@ export function GlobalStickyVideo() {
   }
 
   return (
-    <div className="sticky inset-inline-end-2 bottom-2 flex justify-end md:fixed">
+    <div className="sticky inset-inline-end-2 bottom-2 flex justify-end md:fixed mx-3 my-1">
       <Button
         type="button"
         variant="destructive"
