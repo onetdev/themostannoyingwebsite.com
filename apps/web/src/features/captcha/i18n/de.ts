@@ -28,7 +28,8 @@ export default {
     taxonomyChallengePrompt:
       'Wählen Sie alle Quadrate mit <spanTag>{target}</spanTag> aus',
 
-    taxonomyChallengeSkipHint: 'Falls keine vorhanden sind, klicken Sie auf Überspringen',
+    taxonomyChallengeSkipHint:
+      'Falls keine vorhanden sind, klicken Sie auf Überspringen',
     tilePuzzleChallengeHint:
       'Bewegen Sie die Teile, indem Sie auf benachbarte Kacheln neben dem leeren Platz klicken',
     roboCop: 'roboCOP',

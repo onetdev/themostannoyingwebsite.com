@@ -1,7 +1,8 @@
 export default {
   auth: {
     title: 'Eingeschränkter Zugriff',
-    description: 'Geben Sie das Passwort ein, um auf das Debug-Dashboard zuzugreifen.',
+    description:
+      'Geben Sie das Passwort ein, um auf das Debug-Dashboard zuzugreifen.',
     passwordLabel: 'Passwort',
     passwordPlaceholder: '••••••••',
     submit: 'Debug-Modus entsperren',

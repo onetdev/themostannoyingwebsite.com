@@ -63,10 +63,12 @@ export default {
     screensaver:
       'Löst nach dem angegebenen Zeitraum totaler Inaktivität einen vom Benutzer ausgewählten Bildschirmschoner aus.',
     gifts: {
-      detectAdblocker: 'Zeigt ein großes rotes Banner an, wenn ein Adblocker erkannt wird.',
+      detectAdblocker:
+        'Zeigt ein großes rotes Banner an, wenn ein Adblocker erkannt wird.',
       flaps:
         'Zeigt Werbeflaps an den Seiten der Seite an, die angeklickt werden können und zu verschiedenen Seiten führen.',
-      oneByOne: 'Hauptsächlich eine animierte Anzeige auf der Startseite abgedeckt.',
+      oneByOne:
+        'Hauptsächlich eine animierte Anzeige auf der Startseite abgedeckt.',
     },
     achievementNotifications:
       'Zeigt eine Benachrichtigung an, wenn Sie einen neuen Erfolg freischalten. Der Fortschritt wird im Hintergrund immer mitverfolgt.',
@@ -74,7 +76,8 @@ export default {
       'Fügt einen Link „Mehr lesen unter...“ hinzu, wenn Sie Text von der Website kopieren.',
     contentPaywall:
       'Zeigt eine gefälschte Paywall-Überlagerung für einige Inhalte an, Sie können den Inhalt jedoch weiterhin enthüllen.',
-    deadPixel: 'Platziert ein paar gefälschte „tote“ Pixel auf Ihrem Bildschirm, um Sie zu ärgern.',
+    deadPixel:
+      'Platziert ein paar gefälschte „tote“ Pixel auf Ihrem Bildschirm, um Sie zu ärgern.',
     disableContextMenu:
       'Verhindert, dass Sie das Rechtsklick-Menü verwenden, und zeigt stattdessen eine Warnung an.',
     exitPrompt:
@@ -89,10 +92,12 @@ export default {
       'Fragt nach Benachrichtigungsberechtigungen und zeigt gefälschte Benachrichtigungen an.',
     pageTitleInactiveArrayPaged:
       'Ändert den Tab-Titel in etwas Aufmerksamkeitsstarkes, wenn der Tab inaktiv ist.',
-    searchDelay: 'Fügt allen Suchvorgängen eine gefälschte, lange Ladeverzögerung hinzu.',
+    searchDelay:
+      'Fügt allen Suchvorgängen eine gefälschte, lange Ladeverzögerung hinzu.',
     wheelOfFortune:
       'Zeigt ein gefälschtes „Glücksrad“-Modal an, das Ihnen absolut nutzlose Preise gibt.',
-    stickyVideo: 'Zeigt einen Sticky-Videoplayer an, der Ihnen beim Scrollen folgt.',
+    stickyVideo:
+      'Zeigt einen Sticky-Videoplayer an, der Ihnen beim Scrollen folgt.',
   },
   mandatoryExperienceFlags: {
     title: 'Zwingende Erfahrung',

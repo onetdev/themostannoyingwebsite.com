@@ -49,9 +49,9 @@ export default {
     privacyPolicyDisclaimer:
       'Dieses Dokument ist eine Übersetzung der offiziellen englischen Version. Im Falle von Unstimmigkeiten ist die englische Version maßgebend. Die offizielle Version finden Sie <linkTag>hier</linkTag>.',
     cookieConsent:
-      "Diese Website verwendet Cookies, um sicherzustellen, dass Sie das beste Erlebnis auf unserer Website haben. Es ist auch ein Witz, daher sind viele Funktionen fehlerhaft oder funktionieren absichtlich nicht. Sie können Ihr Erlebnis und Ihre Cookie-Einstellungen im Einstellungsmenü anpassen.",
+      'Diese Website verwendet Cookies, um sicherzustellen, dass Sie das beste Erlebnis auf unserer Website haben. Es ist auch ein Witz, daher sind viele Funktionen fehlerhaft oder funktionieren absichtlich nicht. Sie können Ihr Erlebnis und Ihre Cookie-Einstellungen im Einstellungsmenü anpassen.',
     exitPrompt:
-      "Ich würde es mir noch einmal überlegen, bevor Ihnen etwas Schlimmes passiert. Sind Sie sicher?",
+      'Ich würde es mir noch einmal überlegen, bevor Ihnen etwas Schlimmes passiert. Sind Sie sicher?',
     readMoreAt: 'Mehr lesen bei',
     virgin: {
       title: 'Alle Erlebnisse deaktivieren',
@@ -98,7 +98,7 @@ export default {
   userField: {
     consentNewsletter: 'Ich möchte den Newsletter erhalten',
     consentPrivacyPolicy: 'Datenschutzerklärung akzeptieren',
-    consentChildSoul: "Die Seele meines erstgeborenen Kindes",
+    consentChildSoul: 'Die Seele meines erstgeborenen Kindes',
     countryCode: 'Land',
     dateOfBirth: 'Geburtsdatum',
     dateOfBirthYear: 'Jahr',
@@ -144,7 +144,7 @@ export default {
     info: {},
   },
   contextMenu: {
-    disabled: "Hey, hier kannst du nicht rechtsklicken!",
+    disabled: 'Hey, hier kannst du nicht rechtsklicken!',
   },
   language: {
     label: 'Sprache',

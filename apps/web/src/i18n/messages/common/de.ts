@@ -75,7 +75,8 @@ export default {
   },
   validation: {
     error: {
-      unknownError: 'Ein unbekannter Fehler ist aufgetreten. Bitte versuchen Sie es später erneut.',
+      unknownError:
+        'Ein unbekannter Fehler ist aufgetreten. Bitte versuchen Sie es später erneut.',
       impossiblePath:
         'Es ist unmöglich, hierher zu gelangen, es muss ein Fehler vorliegen. Versuchen Sie es gerne erneut.',
       required: 'Dieses Feld ist ein Pflichtfeld.',
@@ -101,9 +102,11 @@ export default {
       missingLowercase: 'Muss mindestens einen Kleinbuchstaben enthalten',
       missingNumber: 'Muss mindestens eine Zahl enthalten',
       missingSpecialCharacter: 'Muss mindestens ein Symbol enthalten',
-      sumOfNumbersGte: 'Die Summe der Zahlen muss mindestens oder gleich {count} sein',
+      sumOfNumbersGte:
+        'Die Summe der Zahlen muss mindestens oder gleich {count} sein',
       sumOfNumbersMustBeEven: 'Die Summe der Zahlen muss gerade sein',
-      passwordAlreadyTaken: 'Das Passwort wird bereits von einem anderen Benutzer verwendet',
+      passwordAlreadyTaken:
+        'Das Passwort wird bereits von einem anderen Benutzer verwendet',
     },
     passwordStrength: {
       weak: 'Schwach',

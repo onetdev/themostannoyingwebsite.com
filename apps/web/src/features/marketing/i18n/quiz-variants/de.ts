@@ -62,7 +62,8 @@ export default {
     options: {
       option_001: 'Wie sich das Blatt gewendet hat...',
       option_002: 'Ich habe sie nicht geschlagen',
-      option_003: 'Es ist irgendwo da unten, lassen Sie mich noch einmal nachsehen',
+      option_003:
+        'Es ist irgendwo da unten, lassen Sie mich noch einmal nachsehen',
       option_004: 'Sie können dort nicht parken',
     },
     solution: 'Wie sich das Blatt gewendet hat...',

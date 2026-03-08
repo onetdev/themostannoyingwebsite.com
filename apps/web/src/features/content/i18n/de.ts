@@ -17,7 +17,8 @@ export default {
   search: {
     placeholder: 'Suchen...',
     noResults: 'Keine Ergebnisse gefunden',
-    resultMeta: 'Suche nach "{query}" dauerte {time} ms und lieferte {count} Ergebnisse',
+    resultMeta:
+      'Suche nach "{query}" dauerte {time} ms und lieferte {count} Ergebnisse',
     searching: 'Suche läuft',
     peopleAlsoSearched: 'Andere suchten auch nach:',
     topSearcheVariants: {

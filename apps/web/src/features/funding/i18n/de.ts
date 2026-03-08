@@ -16,7 +16,8 @@ export default {
   buyMeACoffee: 'Buy Me A Coffee',
   payPal: 'PayPal',
   cryptoMethods: 'Krypto-Methoden',
-  alternativeOptionsLink: 'Klicken Sie hier für andere Möglichkeiten der Unterstützung 😏',
+  alternativeOptionsLink:
+    'Klicken Sie hier für andere Möglichkeiten der Unterstützung 😏',
   disclaimer: 'Haftungsausschluss',
   disclaimerDetails:
     'Dieses Projekt wird von einer Privatperson mit Sitz in Ungarn entwickelt. Jede finanzielle Unterstützung oder Spende – einschließlich Krypto – ist freiwillig, endgültig und gewährt Ihnen keine Rechte, Dienste oder besonderen Zugang. Spenden sind nicht steuerlich absetzbar.<br></br><br></br>Es wird keine Rechts-, Steuer- oder Finanzberatung angeboten. Wenn Sie Fragen zum Spenden oder zu Ihren eigenen Steuerpflichten haben, wenden Sie sich bitte an einen qualifizierten Fachmann in Ihrer Gerichtsbarkeit.<br></br><br></br>Alle erhaltenen Gelder werden in Übereinstimmung mit den geltenden ungarischen Steuergesetzen behandelt.',

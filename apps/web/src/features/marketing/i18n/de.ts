@@ -3,7 +3,8 @@ import questionVariants from './quiz-variants/de';
 export default {
   dilf: {
     title: 'DILF',
-    fullTitle: 'DILF - Donut I\'d Like to Feast On (Donut, den ich gerne verspeisen würde)',
+    fullTitle:
+      "DILF - Donut I'd Like to Feast On (Donut, den ich gerne verspeisen würde)",
     description:
       'Wenn Sie nach den leckersten, heißesten, einzelnsten und unwiderstehlichsten Donuts in Ihrer Nähe suchen, sind Sie hier genau richtig. Sind Sie bereit für die Herausforderung, Ihre wahre Liebe zu finden? Klicken Sie auf einen der Donuts hier, um zu entdecken, welcher für Sie bestimmt ist.',
     flapLeft: 'DILF. Heiße Single-Donuts in Ihrer Nähe',
