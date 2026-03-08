@@ -79,7 +79,7 @@ export default {
     prizeVariants: {
       freeLifetimeBeer: '一生分のビール無料券',
       worldPeace: '世界平和',
-      absolutellyNothing: '完全に無',
+      absolutelyNothing: '完全に無',
       complimentaryOtter: 'おまけのカワウソ',
       fake70Discount: '偽の70%割引',
     },

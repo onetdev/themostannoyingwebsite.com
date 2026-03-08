@@ -21,7 +21,7 @@ export default {
       'Suche nach "{query}" dauerte {time} ms und lieferte {count} Ergebnisse',
     searching: 'Suche läuft',
     peopleAlsoSearched: 'Andere suchten auch nach:',
-    topSearcheVariants: {
+    topSearchVariants: {
       variant_001: 'haben fische durst',
       variant_002: 'nudel songtext',
       variant_003: 'geht autos die hupe aus',

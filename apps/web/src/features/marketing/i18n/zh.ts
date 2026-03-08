@@ -80,7 +80,7 @@ export default {
     prizeVariants: {
       freeLifetimeBeer: '终身免费啤酒',
       worldPeace: '世界和平',
-      absolutellyNothing: '绝对什么都没有',
+      absolutelyNothing: '绝对什么都没有',
       complimentaryOtter: '赠送的水獭',
       fake70Discount: '虚假的 7 成折扣',
     },

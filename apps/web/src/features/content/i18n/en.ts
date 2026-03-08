@@ -20,7 +20,7 @@ export default {
     resultMeta: 'Search for "{query}" took {time}ms and found {count} results',
     searching: 'Searching',
     peopleAlsoSearched: 'People also searched for:',
-    topSearcheVariants: {
+    topSearchVariants: {
       variant_001: 'do fish get thirsty',
       variant_002: 'pasta lyrics',
       variant_003: 'do cars run out of honk',
