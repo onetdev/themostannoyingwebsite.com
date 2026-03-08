@@ -52,7 +52,7 @@ export function UserPreferences() {
               <SelectContent>
                 {languages.map((lang) => (
                   <SelectItem key={lang.locale} value={lang.locale}>
-                    {t(lang.labelKey)} &nbsp; {lang.flag}
+                    {lang.label} &nbsp; {lang.flag}
                   </SelectItem>
                 ))}
               </SelectContent>

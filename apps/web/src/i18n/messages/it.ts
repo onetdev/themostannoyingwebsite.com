@@ -148,27 +148,10 @@ export default {
   },
   language: {
     label: 'Lingua',
-    option: {
-      ar: 'Arabo',
-      de: 'Tedesco',
-      en: 'Inglese',
-      es: 'Spagnolo',
-      fr: 'Francese',
-      hi: 'Hindi',
-      hu: 'Ungherese',
-      it: 'Italiano',
-      ja: 'Giapponese',
-      ko: 'Coreano',
-      pl: 'Polacco',
-      pt: 'Portoghese',
-      ru: 'Russo',
-      tr: 'Turco',
-      zh: 'Cinese',
-    },
   },
   themeSwitch: {
     label: 'Cambia tema',
     darkMode: 'Modalità scura',
     lightMode: 'Modalità chiara',
   },
-};
+} satisfies AppTranslationShape;

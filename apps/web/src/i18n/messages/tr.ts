@@ -149,27 +149,10 @@ export default {
   },
   language: {
     label: 'Dil',
-    option: {
-      ar: 'Arapça',
-      de: 'Almanca',
-      en: 'İngilizce',
-      es: 'İspanyolca',
-      fr: 'Fransızca',
-      hi: 'Hintçe',
-      hu: 'Macarca',
-      it: 'İtalyanca',
-      ja: 'Japonca',
-      ko: 'Korece',
-      pl: 'Lehçe',
-      pt: 'Portekizce',
-      ru: 'Rusça',
-      tr: 'Türkçe',
-      zh: 'Çince',
-    },
   },
   themeSwitch: {
     label: 'Temayı değiştir',
     darkMode: 'Karanlık mod',
     lightMode: 'Aydınlık mod',
   },
-};
+} satisfies AppTranslationShape;

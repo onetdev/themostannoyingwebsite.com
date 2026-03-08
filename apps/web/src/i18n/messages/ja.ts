@@ -149,27 +149,10 @@ export default {
   },
   language: {
     label: '言語',
-    option: {
-      ar: 'アラビア語',
-      de: 'ドイツ語',
-      en: '英語',
-      es: 'スペイン語',
-      fr: 'フランス語',
-      hi: 'ヒンディー語',
-      hu: 'ハンガリー語',
-      it: 'イタリア語',
-      ja: '日本語',
-      ko: '韓国語',
-      pl: 'ポーランド語',
-      pt: 'ポルトガル語',
-      ru: 'ロシア語',
-      tr: 'トルコ語',
-      zh: '中国語',
-    },
   },
   themeSwitch: {
     label: 'テーマを切り替える',
     darkMode: 'ダークモード',
     lightMode: 'ライトモード',
   },
-};
+} satisfies AppTranslationShape;

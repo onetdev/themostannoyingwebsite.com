@@ -150,23 +150,6 @@ export default {
   },
   language: {
     label: 'Nyelv',
-    option: {
-      ar: 'Arab',
-      de: 'Német',
-      en: 'Angol',
-      es: 'Spanyol',
-      fr: 'Francia',
-      hi: 'Hindi',
-      hu: 'Magyar',
-      it: 'Olasz',
-      ja: 'Japán',
-      ko: 'Koreai',
-      pl: 'Lengyel',
-      pt: 'Portugál',
-      ru: 'Orosz',
-      tr: 'Török',
-      zh: 'Kínai',
-    },
   },
   themeSwitch: {
     label: 'Téma váltása',

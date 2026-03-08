@@ -148,27 +148,10 @@ export default {
   },
   language: {
     label: 'भाषा',
-    option: {
-      ar: 'अरबी',
-      de: 'जर्मन',
-      en: 'अंग्रेजी',
-      es: 'स्पेनिश',
-      fr: 'फ्रेंच',
-      hi: 'हिंदी',
-      hu: 'हंगेरियन',
-      it: 'इतालवी',
-      ja: 'जापानी',
-      ko: 'कोरियाई',
-      pl: 'पोलिश',
-      pt: 'पुर्तगाली',
-      ru: 'रूसी',
-      tr: 'तुर्की',
-      zh: 'चीनी',
-    },
   },
   themeSwitch: {
     label: 'थीम बदलें',
     darkMode: 'डार्क मोड',
     lightMode: 'लाइट मोड',
   },
-};
+} satisfies AppTranslationShape;
