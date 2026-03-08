@@ -14,14 +14,12 @@ export function useSurveyQuestions() {
     ).map(([, value]) => {
       return {
         text: value.text,
-        options: Object.values(value.options),
+        options: arrayShuffle(Object.values(value.options)),
         solution: value.solution,
       } satisfies FlaimSurveyQuestion;
     });
 
-    return arrayShuffle(
-      items.map((item) => ({ ...item, options: arrayShuffle(item.options) })),
-    );
+    return arrayShuffle(items);
   }, [messages]);
 
   return pool;
