@@ -7,6 +7,7 @@ const config = {
     'fr',
     'hi',
     'hu',
+    'it',
     'ja',
     'ko',
     'pl',
