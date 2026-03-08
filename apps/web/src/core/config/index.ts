@@ -45,6 +45,7 @@ const config: AppConfig = {
         placeholder: '/assets/images/hot-things.webp',
         vtt: {
           en: '/assets/vtt/hot-things-en.vtt',
+          it: '/assets/vtt/hot-things-it.vtt',
           ko: '/assets/vtt/hot-things-ko.vtt',
           pl: '/assets/vtt/hot-things-pl.vtt',
           tr: '/assets/vtt/hot-things-tr.vtt',
