@@ -15,7 +15,7 @@ export const getDonatePage = (page: Page) => {
     }),
     donationBalance: page.getByTestId('donation-balance'),
     buyMeACoffeeButton: page.getByRole('link', { name: 'Buy Me A Coffee' }),
-    payPalButton: page.getByRole('link', { name: 'PayPay' }),
+    payPalButton: page.getByRole('link', { name: 'PayPal' }),
     cryptoWalletList: page.getByTestId('crypto-wallet-list'),
     alternativeOptionsLink: page.getByRole('link', {
       name: 'Click here for other means of supporting 😏',

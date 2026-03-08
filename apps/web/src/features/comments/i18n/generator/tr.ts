@@ -166,7 +166,7 @@ export default {
     'Bu o kadar "cringe" ki can yakıyor. Bunu yazarken beyin hücrelerimin öldüğünü hissedebiliyorum.',
     'Eğer biraz daha sıkıcı olsaydın, bej bir duvar olurdun. Lütfen git buradan.',
     'Senden daha kişilikli bitkiler tanıdım. Bu paylaşım sadece bir hiçlik boşluğu.',
-    'Stop trying to make "fetch" happen. It is not going to happen, just like your career.',
+    '"Fetch"i popüler yapmaya çalışma. Olmayacak, tıpkı kariyerin gibi.',
     'Seninle değil, SANA gülüyorum. Arada çok büyük bir fark var, seni palyaço.',
     'Bu bir başarısızlık müzesine ait. Var olmamanın bir başyapıtı.',
     'Fikirlerin üç liralık banknot kadar geçerli. Okula geri dön ve bir şeyler öğren.',

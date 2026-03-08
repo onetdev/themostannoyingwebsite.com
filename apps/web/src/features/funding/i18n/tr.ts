@@ -14,7 +14,7 @@ export default {
   totalSupportReceived: 'Alınan Toplam Destek',
   classicMethods: 'Klasik yöntemler',
   buyMeACoffee: 'Buy Me A Coffee',
-  payPal: 'PayPay',
+  payPal: 'PayPal',
   cryptoMethods: 'Kripto yöntemleri',
   alternativeOptionsLink: 'Diğer destekleme yolları için buraya tıklayın 😏',
   disclaimer: 'Feragatname',

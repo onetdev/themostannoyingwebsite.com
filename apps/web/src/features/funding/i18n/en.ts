@@ -14,7 +14,7 @@ export default {
   totalSupportReceived: 'Total Support Received',
   classicMethods: 'Classic methods',
   buyMeACoffee: 'Buy Me A Coffee',
-  payPal: 'PayPay',
+  payPal: 'PayPal',
   cryptoMethods: 'Crypto methods',
   alternativeOptionsLink: 'Click here for other means of supporting 😏',
   disclaimer: 'Disclaimer',

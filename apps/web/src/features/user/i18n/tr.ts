@@ -114,7 +114,7 @@ export default {
     isDocumentVisible: 'Şu anda odakta',
     navigationCount: 'Gezinme sayısı',
     userActivation: 'İlk kullanıcı işlemi',
-    lastActivation: 'Last user activity',
+    lastActivation: 'Son kullanıcı etkinliği',
     flaimSurveyResult: 'Flaim anket sonucu',
     adblockerSuspected: 'Reklam engelleyiciden şüpheleniliyor',
     adblockerNotDetected: 'Reklam engelleyici algılanmadı',
