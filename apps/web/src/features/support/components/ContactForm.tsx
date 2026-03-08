@@ -11,13 +11,11 @@ import {
 } from '@maw/ui-lib';
 import { useTranslations } from 'next-intl';
 import { useForm, useWatch } from 'react-hook-form';
-
+import { useZodFormValidator } from '@/hooks';
 import {
-  ContactFormData,
+  type ContactFormData,
   getContactFormDataSchema,
 } from '../schemas/contact-form-data';
-
-import { useZodFormValidator } from '@/hooks';
 
 export type ContactFormProps = {
   contactEmail: string;
@@ -84,12 +82,14 @@ export function ContactForm({ contactEmail, className }: ContactFormProps) {
         asChild
         className="mt-2"
         variant={isValid ? 'default' : 'outline'}
-        disabled={!isValid}>
+        disabled={!isValid}
+      >
         <a
           href={isValid ? mailtoUrl : undefined}
           target="_blank"
           rel="noopener noreferrer"
-          onClick={(e) => !isValid && e.preventDefault()}>
+          onClick={(e) => !isValid && e.preventDefault()}
+        >
           {t('app.contactForm.send')}
         </a>
       </Button>

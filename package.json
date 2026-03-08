@@ -1,7 +1,7 @@
 {
   "private": false,
   "name": "themostannoyingwebsite",
-  "version": "0.14.0",
+  "version": "0.15.0",
   "license": "MIT",
   "author": "Konrad Koller <info@onet.dev> (https://onet.dev)",
   "homepage": "https://themostannoyingwebsite.com",
@@ -23,7 +23,7 @@
     "lint": "turbo run lint",
     "lint:fix": "turbo run lint:fix",
     "prepare": "husky",
-    "link-assets": "npx symlink-dir ./packages/content-api/data ./apps/web/public/assets/articles",
+    "link-assets": "pnpx symlink-dir ./packages/content-api/data ./apps/web/public/assets/articles",
     "test": "turbo run test",
     "test:e2e": "turbo run test:e2e",
     "clean": "turbo run clean --force",
@@ -31,12 +31,13 @@
     "clean:all": "pnpm recursive exec -- rm -rf node_modules dist .next .turbo storybook-static"
   },
   "devDependencies": {
-    "@commitlint/cli": "^20.4.2",
-    "@commitlint/config-conventional": "^20.4.2",
+    "@biomejs/biome": "catalog:",
+    "@commitlint/cli": "^20.4.3",
+    "@commitlint/config-conventional": "^20.4.3",
     "husky": "^9.1.7",
-    "lint-staged": "^16.2.7",
+    "lint-staged": "^16.3.2",
     "symlink-dir": "9.0.0",
-    "turbo": "2.8.3",
+    "turbo": "^2.8.14",
     "typescript": "catalog:"
   },
   "engines": {
@@ -50,5 +51,13 @@
   "dependencies": {
     "import-in-the-middle": "^3.0.0",
     "require-in-the-middle": "^8.0.1"
+  },
+  "pnpm": {
+    "onlyBuiltDependencies": [
+      "@sentry/cli"
+    ]
+  },
+  "lint-staged": {
+    "*.{js,ts,tsx,jsx,json,css,md}": "biome check --write"
   }
 }

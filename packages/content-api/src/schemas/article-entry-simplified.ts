@@ -9,12 +9,10 @@ const schema = z
         "It's recommended to keep the intro below 160 characters or less.",
       )
       .optional(),
-    publishedAt: z
-      .string()
+    publishedAt: z.iso
       .datetime({ offset: true })
       .describe('Must be in ISO 8601 format'),
-    updatedAt: z
-      .string()
+    updatedAt: z.iso
       .datetime({ offset: true })
       .optional()
       .describe('Must be in ISO 8601 format'),
@@ -29,6 +27,12 @@ const schema = z
         'Processing for indexing will be decided based on this value, both html and markdown are supported.\n\nDefaults to markdown.',
       )
       .default('markdown'),
+    coverImage: z
+      .string()
+      .optional()
+      .describe(
+        'The name of the cover image file in the assets directory (e.g. "gary.webp").',
+      ),
   })
   .strict();
 

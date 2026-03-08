@@ -3,9 +3,9 @@
 import { Button } from '@maw/ui-lib';
 import { formatCurrency } from '@maw/utils/formatter';
 import { useTranslations } from 'next-intl';
-import React, {
-  ComponentProps,
-  PropsWithChildren,
+import {
+  type ComponentProps,
+  type PropsWithChildren,
   useMemo,
   useRef,
   useState,
@@ -61,8 +61,9 @@ export function PartitionalLockedContent({
         data-testid="paywall-overlay-confirm"
         key="cta"
         onMouseEnter={() => setFlipActions((prev) => !prev)}
-        size="sm">
-        {t('paywall.overlay.confirm')}*
+        size="sm"
+      >
+        {t('content.paywall.overlay.confirm')}*
       </Button>,
       <Button
         className="flex-1"
@@ -70,8 +71,9 @@ export function PartitionalLockedContent({
         key="cancel"
         onClick={handleRevealClick}
         size="lg"
-        variant="secondary">
-        {t('paywall.overlay.cancel')}
+        variant="secondary"
+      >
+        {t('content.paywall.overlay.cancel')}
       </Button>,
     ];
 
@@ -82,20 +84,22 @@ export function PartitionalLockedContent({
     <div
       className={`relative overflow-hidden transition-all duration-300 ease-in-out ${className}`}
       style={wrapperStyles}
-      {...rest}>
+      {...rest}
+    >
       <div ref={contentRef}>{children}</div>
       <div
         data-hidden={!active || isRevealed ? 'true' : 'false'}
-        className="bg-bottom-fadeout absolute left-0 w-full opacity-0 transition-all duration-300 ease-in-out data-[hidden=false]:bottom-0 data-[hidden=false]:opacity-100">
+        className="bg-bottom-fadeout absolute left-0 w-full opacity-0 transition-all duration-300 ease-in-out data-[hidden=false]:bottom-0 data-[hidden=false]:opacity-100"
+      >
         <div className="mx-auto w-full max-w-screen-md pt-16">
           <h3 className="mb-4">
-            {t('paywall.overlay.title', {
+            {t('content.paywall.overlay.title', {
               price: formatCurrency(0.69),
             })}
           </h3>
           <div className="my-3 flex gap-2">{renderButtons()}</div>
           <div className="block text-xs italic">
-            * {t('paywall.overlay.disclaimer')}
+            * {t('content.paywall.overlay.disclaimer')}
           </div>
         </div>
       </div>

@@ -1,9 +1,8 @@
-import { Metadata } from 'next';
+import type { Metadata } from 'next';
 import { getTranslations } from 'next-intl/server';
-
+import { ContactPage } from '@/features/support/components';
 import { PageLayout } from '../_components/PageLayout';
 
-import { ContactPage } from '@/features/support/components';
 export { generateStaticParams } from '@/i18n/routing';
 
 export const revalidate = 1800;

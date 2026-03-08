@@ -83,7 +83,6 @@ describe('generateTree', () => {
     });
 
     let countedNodes = 0;
-    let totalNodes = 0;
 
     // In our implementation, a node is "counted" if it's NOT a fallback node.
     // Fallback nodes are returned when nodeCount >= maxTotalNodes.
@@ -92,7 +91,6 @@ describe('generateTree', () => {
 
     const countNodes = (nodes: any[]) => {
       nodes.forEach((node) => {
-        totalNodes++;
         if (node.replies && node.replies.length > 0) {
           countedNodes++;
           countNodes(node.replies);

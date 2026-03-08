@@ -1,9 +1,7 @@
 {
   "extends": "@maw/config-ts/configs/react-library.json",
   "compilerOptions": {
-    "baseUrl": ".",
+    "baseUrl": "."
   },
-  "include": [
-    "src"
-  ],
+  "include": ["src"]
 }

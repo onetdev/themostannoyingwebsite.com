@@ -1,5 +1,5 @@
 import { ArticleService as ArticleServiceBase } from '@maw/content-api';
-import { Container, injectable } from 'inversify';
+import { type Container, injectable } from 'inversify';
 
 import { DI, type ArticleService as IArticleService } from '../types';
 

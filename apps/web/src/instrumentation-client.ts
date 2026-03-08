@@ -4,13 +4,15 @@
 
 import * as Sentry from '@sentry/nextjs';
 
-import deplotmentMeta from '@/root/public/deployment-meta.json';
+import deploymentMeta from '@/root/public/deployment-meta.json' with {
+  type: 'json',
+};
 
 Sentry.init({
   dsn: process.env.NEXT_PUBLIC_SENTRY_CLIENT_DSN,
 
-  environment: deplotmentMeta.environment,
-  release: deplotmentMeta.release ?? undefined,
+  environment: deploymentMeta.environment,
+  release: deploymentMeta.release ?? undefined,
   tracesSampleRate: 1,
 
   debug: false,

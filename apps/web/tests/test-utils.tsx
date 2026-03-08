@@ -1,12 +1,12 @@
 import {
+  type RenderHookOptions,
+  type RenderOptions,
+  type RenderResult,
   render,
   renderHook,
-  RenderHookOptions,
-  RenderOptions,
-  RenderResult,
 } from '@testing-library/react';
 import { NextIntlClientProvider } from 'next-intl';
-import { ReactElement } from 'react';
+import type { PropsWithChildren, ReactElement } from 'react';
 
 import en from '@/i18n/messages/en';
 
@@ -17,10 +17,8 @@ interface CustomRenderOptions extends Omit<RenderOptions, 'wrapper'> {
   messages?: typeof defaultMessages;
 }
 
-interface CustomRenderHookOptions<TProps> extends Omit<
-  RenderHookOptions<TProps>,
-  'wrapper'
-> {
+interface CustomRenderHookOptions<TProps>
+  extends Omit<RenderHookOptions<TProps>, 'wrapper'> {
   locale?: string;
   messages?: typeof defaultMessages;
 }
@@ -36,7 +34,7 @@ export function renderWithProviders(
     ...renderOptions
   }: CustomRenderOptions = {},
 ): RenderResult {
-  function Wrapper({ children }: { children: React.ReactNode }) {
+  function Wrapper({ children }: PropsWithChildren) {
     return (
       <NextIntlClientProvider locale={locale} messages={messages}>
         {children}
@@ -58,7 +56,7 @@ export function renderHookWithProviders<TResult, TProps>(
     ...renderOptions
   }: CustomRenderHookOptions<TProps> = {},
 ) {
-  function Wrapper({ children }: { children: React.ReactNode }) {
+  function Wrapper({ children }: PropsWithChildren) {
     return (
       <NextIntlClientProvider locale={locale} messages={messages}>
         {children}

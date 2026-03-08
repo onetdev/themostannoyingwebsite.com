@@ -1,8 +1,7 @@
-import { withThemeByDataAttribute } from "@storybook/addon-themes";
-import type { Preview } from "@storybook/react";
-import React from "react";
+import { withThemeByDataAttribute } from '@storybook/addon-themes';
+import type { Preview } from '@storybook/react';
 
-import "./global.css";
+import './global.css';
 
 const preview: Preview = {
   parameters: {
@@ -19,11 +18,11 @@ const preview: Preview = {
     // proper var scope to the components.
     withThemeByDataAttribute({
       themes: {
-        light: "light",
-        dark: "dark",
+        light: 'light',
+        dark: 'dark',
       },
-      defaultTheme: "dark",
-      attributeName: "data-theme",
+      defaultTheme: 'dark',
+      attributeName: 'data-theme',
     }),
     (Story) => (
       <>

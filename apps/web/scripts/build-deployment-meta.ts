@@ -1,5 +1,5 @@
+import fs from 'node:fs';
 import { getLogger } from '@maw/logger';
-import fs from 'fs';
 
 import deploymentMeta from '@/root/deployment-meta.mjs';
 

@@ -14,10 +14,11 @@ import { formatSecondsToHHMMSS } from '@maw/utils/formatter';
 import { useTranslations } from 'next-intl';
 import { useMemo } from 'react';
 import ReactTimeAgo from 'react-timeago';
-
+import { useTimeagoFormatter } from '@/hooks';
 import { useRuntimeStore } from '@/stores';
 
 export function RuntimeInfo() {
+  const intlFormatter = useTimeagoFormatter();
   const runtime = useRuntimeStore();
   const t = useTranslations();
 
@@ -29,29 +30,29 @@ export function RuntimeInfo() {
   return (
     <Card data-testid="runtime-settings">
       <CardHeader>
-        <CardTitle>{t('settings.runtime.title')}</CardTitle>
+        <CardTitle>{t('user.runtimeInfo.title')}</CardTitle>
       </CardHeader>
       <CardContent className="flex flex-col gap-1">
         <small className="text-muted-foreground">
-          <i>{t('settings.runtime.disclaimer')}</i>
+          <i>{t('user.runtimeInfo.disclaimer')}</i>
         </small>
         <Table>
           <TableBody>
             <TableRow>
               <TableCell className="w-3/5 font-medium">
-                {t('settings.runtime.startedAgo')}
+                {t('user.runtimeInfo.startedAgo')}
               </TableCell>
               <TableCell>
                 {startedAt ? (
-                  <ReactTimeAgo date={startedAt} />
+                  <ReactTimeAgo date={startedAt} formatter={intlFormatter} />
                 ) : (
-                  t('common.notAvailable')
+                  t('common.state.notAvailable')
                 )}
               </TableCell>
             </TableRow>
             <TableRow>
               <TableCell className="w-3/5 font-medium">
-                {t('settings.runtime.visibilitySeconds')}
+                {t('user.runtimeInfo.visibilitySeconds')}
               </TableCell>
               <TableCell>
                 {formatSecondsToHHMMSS(runtime.document.visibilitySeconds)}
@@ -59,37 +60,42 @@ export function RuntimeInfo() {
             </TableRow>
             <TableRow>
               <TableCell className="w-3/5 font-medium">
-                {t('settings.runtime.isDocumentVisible')}
+                {t('user.runtimeInfo.isDocumentVisible')}
               </TableCell>
               <TableCell>
-                {runtime.document.isVisible ? t('common.yes') : t('common.no')}
+                {runtime.document.isVisible
+                  ? t('common.action.yes')
+                  : t('common.action.no')}
               </TableCell>
             </TableRow>
             <TableRow>
               <TableCell className="w-3/5 font-medium">
-                {t('settings.runtime.userActivation')}
+                {t('user.runtimeInfo.userActivation')}
               </TableCell>
               <TableCell>
                 {runtime.userActivation.unlocked
-                  ? t('common.completed')
-                  : t('common.pending')}
+                  ? t('common.state.completed')
+                  : t('common.state.pending')}
               </TableCell>
             </TableRow>
             <TableRow>
               <TableCell className="w-3/5 font-medium">
-                {t('settings.runtime.lastActivation')}
+                {t('user.runtimeInfo.lastActivation')}
               </TableCell>
               <TableCell>
                 {runtime.userActivation.lastEventAt > 0 ? (
-                  <ReactTimeAgo date={runtime.userActivation.lastEventAt} />
+                  <ReactTimeAgo
+                    date={runtime.userActivation.lastEventAt}
+                    formatter={intlFormatter}
+                  />
                 ) : (
-                  t('common.notAvailable')
+                  t('common.state.notAvailable')
                 )}
               </TableCell>
             </TableRow>
             <TableRow>
               <TableCell className="w-3/5 font-medium">
-                {t('settings.runtime.navigationCount')}
+                {t('user.runtimeInfo.navigationCount')}
               </TableCell>
               <TableCell>{runtime.navigationCount}</TableCell>
             </TableRow>
@@ -97,20 +103,20 @@ export function RuntimeInfo() {
               <TableRow>
                 <TableCell className="w-3/5 font-medium">
                   {runtime.adblockerSuspected
-                    ? t('settings.runtime.adblockerSuspected')
-                    : t('settings.runtime.adblockerNotDetected')}
+                    ? t('user.runtimeInfo.adblockerSuspected')
+                    : t('user.runtimeInfo.adblockerNotDetected')}
                 </TableCell>
                 <TableCell>✅</TableCell>
               </TableRow>
             )}
             <TableRow>
               <TableCell className="w-3/5 font-medium">
-                {t('settings.runtime.flaimSurveyResult')}
+                {t('user.runtimeInfo.flaimSurveyResult')}
               </TableCell>
               <TableCell>
                 {runtime.flaimSurveyResult
-                  ? t('common.done')
-                  : t('common.pending')}
+                  ? t('common.state.done')
+                  : t('common.state.pending')}
               </TableCell>
             </TableRow>
           </TableBody>

@@ -1,12 +1,14 @@
+import fs from 'node:fs';
 import { getLogger } from '@maw/logger';
-import fs from 'fs';
 import { zodToJsonSchema } from 'zod-to-json-schema';
-
+import {
+  ArticleLanguageSchema,
+  ArticleSharedSchema,
+} from '@/schemas/article-entry';
 import articleEntrySimplifiedZod from '@/schemas/article-entry-simplified';
 import articleIndexEntryZod from '@/schemas/article-index-entry';
 import articleLocaleMetaZod from '@/schemas/article-locale-meta';
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
 type TypeConflictBypass = any;
 
 const logger = getLogger().getSubLogger({
@@ -17,6 +19,12 @@ const writeMap = {
   './src/schemas/article-entry-simplified.schema.json': zodToJsonSchema(
     articleEntrySimplifiedZod as TypeConflictBypass,
   ),
+  './src/schemas/article-shared.schema.json': zodToJsonSchema(
+    ArticleSharedSchema as TypeConflictBypass,
+  ),
+  './src/schemas/article-language.schema.json': zodToJsonSchema(
+    ArticleLanguageSchema as TypeConflictBypass,
+  ),
   './src/schemas/article-index-entry.schema.json': zodToJsonSchema(
     articleIndexEntryZod as TypeConflictBypass,
   ),
@@ -26,7 +34,7 @@ const writeMap = {
 };
 
 logger.info('🔄 Generating JSON schemas...');
-Object.entries(writeMap).map(([path, schema]) => {
+Object.entries(writeMap).forEach(([path, schema]) => {
   if (fs.existsSync(path)) {
     fs.unlinkSync(path);
   }

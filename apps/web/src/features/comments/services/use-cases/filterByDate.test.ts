@@ -46,7 +46,7 @@ describe('filterByDate', () => {
     const filtered = filterByDate(tree, now);
     expect(filtered).toHaveLength(1);
     expect(filtered[0].replies).toHaveLength(1);
-    expect(filtered[0].replies![0].id).toBe('1-1');
+    expect(filtered[0].replies?.[0].id).toBe('1-1');
   });
 
   it('returns an empty array if all comments are in the future', () => {

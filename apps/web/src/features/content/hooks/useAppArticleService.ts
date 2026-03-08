@@ -1,10 +1,9 @@
 'use client';
 
+import { useDiContext } from '@/core/di/react-di';
 import { type ArticleService, DI } from '../types';
 
-import { useDependencyContainer } from '@/contexts/DependencyContainer';
-
 export const useAppArticleService = (): ArticleService => {
-  const { container } = useDependencyContainer();
+  const { container } = useDiContext();
   return container.get<ArticleService>(DI.AppArticleService);
 };

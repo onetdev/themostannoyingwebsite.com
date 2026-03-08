@@ -3,14 +3,12 @@
 import styles from '@maw/ui-lib/content.module.css';
 import HTMLReactParser from 'html-react-parser';
 import Image from 'next/image';
-import { useTranslations } from 'next-intl';
-
-import { PartitionalLockedContent } from './PartitionalLockedContent';
-import { ArticleDatum } from '../schemas';
-
+import { useFormatter, useTranslations } from 'next-intl';
 import { CommentSection } from '@/features/comments/components';
-import { Comment } from '@/features/comments/schemas/comment';
+import type { Comment } from '@/features/comments/schemas/comment';
 import { usePainPreferencesStore } from '@/stores';
+import type { ArticleDatum } from '../schemas';
+import { PartitionalLockedContent } from './PartitionalLockedContent';
 
 export interface ArticleItemPageProps {
   article: ArticleDatum;
@@ -19,6 +17,14 @@ export interface ArticleItemPageProps {
 
 export function ArticleItemPage({ article, comments }: ArticleItemPageProps) {
   const t = useTranslations();
+  const formatter = useFormatter();
+  const formatterPublishedAt = formatter.dateTime(article.publishedAt, {
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric',
+    hour: 'numeric',
+    minute: 'numeric',
+  });
   const partitionEnabled = usePainPreferencesStore(
     (state) => state.flags.contentPaywall,
   );
@@ -27,14 +33,14 @@ export function ArticleItemPage({ article, comments }: ArticleItemPageProps) {
     <>
       <h1 className="mb-2 max-w-[900px]">{article.title}</h1>
       <span className="mb-5 block italic">
-        {t('article.published', { date: article.publishedAt.toDateString() })}
+        {t('content.article.published', { date: formatterPublishedAt })}
       </span>
       {article.coverImages?.original && (
         <div className="-mx-5 xl:-mx-8">
           <Image
             className="h-auto w-full object-cover"
             src={article.coverImages?.original}
-            alt={t('article.coverImage')}
+            alt={t('content.article.coverImage')}
             width="1920"
             height="1200"
           />
@@ -42,8 +48,9 @@ export function ArticleItemPage({ article, comments }: ArticleItemPageProps) {
       )}
       <PartitionalLockedContent
         initialMaxHeight={300}
-        active={partitionEnabled}>
-        <div className={styles['content']} data-testid="article-item-content">
+        active={partitionEnabled}
+      >
+        <div className={styles.content} data-testid="article-item-content">
           {HTMLReactParser(article.content)}
         </div>
       </PartitionalLockedContent>

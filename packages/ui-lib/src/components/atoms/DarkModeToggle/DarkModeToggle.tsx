@@ -1,5 +1,4 @@
 import { cva, type VariantProps } from 'class-variance-authority';
-import { FunctionComponent } from 'react';
 
 import { cn } from '../../../utils';
 import { Icon } from '../Icon';
@@ -10,7 +9,7 @@ const darkModeToggleVariants = cva(
     variants: {
       size: {
         md: 'h-7 w-16',
-        lg: 'h-7 w-16 md:h-9 md:w-20',
+        lg: 'h-9 w-20',
       },
     },
     defaultVariants: {
@@ -31,13 +30,13 @@ export type DarkModeToggleProps = VariantProps<
   };
 };
 
-export const DarkModeToggle: FunctionComponent<DarkModeToggleProps> = ({
+export function DarkModeToggle({
   className,
   size = 'md',
   text,
   resolvedTheme,
   setTheme,
-}) => {
+}: DarkModeToggleProps) {
   const isDark = resolvedTheme === 'dark';
 
   const toggleDarkMode = () => {
@@ -53,7 +52,8 @@ export const DarkModeToggle: FunctionComponent<DarkModeToggleProps> = ({
       suppressHydrationWarning
       data-dark={isDark.toString()}
       className={cn(darkModeToggleVariants({ size, className }))}
-      onClick={toggleDarkMode}>
+      onClick={toggleDarkMode}
+    >
       <span
         suppressHydrationWarning
         className={cn(
@@ -66,7 +66,8 @@ export const DarkModeToggle: FunctionComponent<DarkModeToggleProps> = ({
         className={cn(
           'text-card-foreground z-10 flex flex-1 items-center justify-center transition-colors duration-200',
           !isDark && 'text-primary-foreground',
-        )}>
+        )}
+      >
         <Icon icon="sun" />
       </div>
       <div
@@ -74,9 +75,10 @@ export const DarkModeToggle: FunctionComponent<DarkModeToggleProps> = ({
         className={cn(
           'text-card-foreground z-10 flex flex-1 items-center justify-center transition-colors duration-200',
           isDark && 'text-primary-foreground',
-        )}>
+        )}
+      >
         <Icon icon="moon" />
       </div>
     </button>
   );
-};
+}

@@ -1,8 +1,6 @@
-import { ComponentProps } from 'react';
-
-import { ArticleDatum } from '../schemas';
-
+import type { ComponentProps } from 'react';
 import { Link } from '@/i18n/navigation';
+import type { ArticleDatum } from '../schemas';
 
 export type TextListItemProps = ComponentProps<'article'> & {
   article: ArticleDatum;
@@ -10,18 +8,20 @@ export type TextListItemProps = ComponentProps<'article'> & {
 
 export function TextListItem({ article, ...rest }: TextListItemProps) {
   return (
-    <article role="article" {...rest}>
+    <article {...rest}>
       <Link
         href={article.url}
         passHref
         className="link-as-inherit hover-text-primary"
-        prefetch={false}>
+        prefetch={false}
+      >
         <h4 className="line-clamp-1 leading-tight" title={article.title}>
           {article.title}
         </h4>
         <small
           className="text-card-foreground my-2 line-clamp-2"
-          title={article.intro}>
+          title={article.intro}
+        >
           {article.intro}
         </small>
       </Link>

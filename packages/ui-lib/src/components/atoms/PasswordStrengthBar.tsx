@@ -1,6 +1,6 @@
 import { mapToLogScale } from '@maw/utils/math';
 import { mb_string_to_char_array } from '@maw/utils/string';
-import { FunctionComponent, useMemo } from 'react';
+import { useMemo } from 'react';
 
 export type PasswordStrengthBarProps = {
   password: string;
@@ -13,16 +13,22 @@ export type PasswordStrengthBarProps = {
   };
 };
 
-export const PasswordStrengthBar: FunctionComponent<
-  PasswordStrengthBarProps
-> = ({ password, className, text }) => {
+export function PasswordStrengthBar({
+  password,
+  className,
+  text,
+}: PasswordStrengthBarProps) {
   const score = useMemo(
     () => mapToLogScale(scorePassword(password || ''), 100, 1),
     [password],
   );
 
   return (
-    <div className={`flex gap-2 text-sm ${className}`} aria-label={text.label}>
+    <div
+      role="progressbar"
+      className={`flex gap-2 text-sm ${className}`}
+      aria-label={text.label}
+    >
       <div className="w-1/3">
         <div className="bg-error h-2 w-full max-w-full rounded" />
         {score <= 0.33 && <p className="py-1 pl-1">{text.weak}</p>}
@@ -49,7 +55,7 @@ export const PasswordStrengthBar: FunctionComponent<
       </div>
     </div>
   );
-};
+}
 
 export const scorePassword = (password: string) => {
   const charArray = mb_string_to_char_array(password);

@@ -1,15 +1,14 @@
 import { Button, Icon } from '@maw/ui-lib';
-import { ComponentProps } from 'react';
-
+import type { ComponentProps } from 'react';
+import type { ActiveNavigationItem } from '@/app/navigation';
+import { SearchForm } from '@/features/content/components';
+import { Link } from '@/i18n/navigation';
+import { AppLanguageSwitcher } from '../AppLanguageSwitcher';
 import { AppDarkModeToggle } from './AppDarkModeToggle';
 import { AppNavigationDesktop } from './AppNavigationDesktop';
 import { AppNavigationMobile } from './AppNavigationMobile';
 import { PainLevelSelector } from './PainLevelSelector';
 import { TextLogo } from './TextLogo';
-
-import { ActiveNavigationItem } from '@/app/navigation';
-import { SearchForm } from '@/features/content/components';
-import { Link } from '@/i18n/navigation';
 
 type AppHeaderProps = {
   activeItem?: ActiveNavigationItem;
@@ -20,25 +19,32 @@ export async function AppHeader({ activeItem, className }: AppHeaderProps) {
   return (
     <header
       id="header"
-      className={`grid grid-cols-2 items-center gap-x-2 px-5 py-3 xl:px-8 ${className ?? ''}`}
-      role="banner">
+      className={`grid grid-cols-2 items-center gap-x-2 px-3 md:px-5 py-3 xl:px-8 ${className ?? ''}`}
+    >
       <div className="flex items-center gap-2">
         <AppNavigationMobile activeItem={activeItem} />
         <TextLogo />
       </div>
-      <div className="flex items-center justify-end gap-4">
+      <div className="flex items-center justify-end gap-3 md:gap-4">
         <SearchForm className="hidden md:flex" size="md" />
-        <Button asChild className="md:hidden" variant="ghost">
+        <Button
+          asChild
+          className="md:hidden rounded-full p-0"
+          variant="outline"
+        >
           <Link href="/search">
             <Icon icon="search" />
           </Link>
         </Button>
+        <div className="hidden md:block">
+          <AppLanguageSwitcher />
+        </div>
         <AppDarkModeToggle />
       </div>
       <div className="col-span-2 my-2 hidden items-center md:flex">
         <AppNavigationDesktop activeItem={activeItem} />
       </div>
-      <PainLevelSelector className="bg-muted col-span-2 -mx-5 mt-2 md:mt-0 xl:-mx-8" />
+      <PainLevelSelector className="bg-muted col-span-2 -mx-3 md:-mx-5 mt-2 md:mt-0 xl:-mx-8" />
     </header>
   );
 }

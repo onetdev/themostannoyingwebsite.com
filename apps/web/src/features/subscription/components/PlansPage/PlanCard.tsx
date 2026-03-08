@@ -14,8 +14,8 @@ import { useTranslations } from 'next-intl';
 
 import {
   BILLING_CYCLE_MONTH_MAP,
-  BillingCycle,
-  SubscriptionPackage,
+  type BillingCycle,
+  type SubscriptionPackage,
 } from '../../schemas';
 
 export interface PlanCardProps {
@@ -40,7 +40,7 @@ export function PlanCard({
     ? priceBase * (1 - extraDiscount)
     : priceBase;
   const cumulativeDiscountPercentage =
-    1 - priceDiscountCorrected / plan.monthlyPriceByCycle['monthly'];
+    1 - priceDiscountCorrected / plan.monthlyPriceByCycle.monthly;
 
   const totalCharge =
     priceDiscountCorrected * BILLING_CYCLE_MONTH_MAP[billingCycle];
@@ -51,7 +51,8 @@ export function PlanCard({
       className={cn(
         'hover:border-primary relative flex w-full max-w-sm shrink-0 flex-col overflow-hidden border-2 transition-colors',
         isSelected ? 'border-primary' : 'border-border',
-      )}>
+      )}
+    >
       {plan.isPopular && (
         <>
           <div
@@ -60,8 +61,9 @@ export function PlanCard({
               isSelected
                 ? 'bg-primary text-primary-foreground'
                 : 'bg-muted text-muted-foreground',
-            )}>
-            {t('plansPage.mostPopular')}
+            )}
+          >
+            {t('subscription.landing.mostPopular')}
           </div>
           <Separator />
         </>
@@ -76,21 +78,23 @@ export function PlanCard({
             <>
               <div
                 className="text-muted-foreground text-sm line-through"
-                data-testid="original-price">
-                {t('plansPage.pricePerMonth', {
+                data-testid="original-price"
+              >
+                {t('subscription.landing.pricePerMonth', {
                   price: formatCurrency(priceBase),
                 })}
               </div>
               <div
                 className="text-primary flex items-center text-2xl font-bold"
-                data-testid="discounted-price">
+                data-testid="discounted-price"
+              >
                 <span>
-                  {t('plansPage.pricePerMonth', {
+                  {t('subscription.landing.pricePerMonth', {
                     price: formatCurrency(priceDiscountCorrected),
                   })}
                 </span>
                 <Badge className="ml-2">
-                  {t('plansPage.discount', {
+                  {t('subscription.landing.discount', {
                     amount: Math.round(cumulativeDiscountPercentage * 100),
                   })}
                 </Badge>
@@ -99,8 +103,9 @@ export function PlanCard({
           ) : (
             <div
               className="text-primary text-2xl font-bold"
-              data-testid="original-price">
-              {t('plansPage.pricePerMonth', {
+              data-testid="original-price"
+            >
+              {t('subscription.landing.pricePerMonth', {
                 price: formatCurrency(priceBase),
               })}
             </div>
@@ -110,19 +115,21 @@ export function PlanCard({
         <Separator />
         <div
           className="text-muted-foreground mt-2 text-xs leading-tight italic"
-          data-testid="charge-disclaimer">
-          {t('plansPage.billing.chargeDisclaimer', {
+          data-testid="charge-disclaimer"
+        >
+          {t('subscription.landing.billing.chargeDisclaimer', {
             amount: formatCurrency(totalCharge),
           })}{' '}
-          &mdash; {t(`plansPage.billing.cycle.${billingCycle}`)}*
+          &mdash; {t(`subscription.landing.billing.cycle.${billingCycle}`)}*
         </div>
       </CardContent>
       <CardFooter>
         <Button
           className="w-full"
           variant={isSelected ? 'default' : 'outline'}
-          onClick={onSelect}>
-          {isSelected ? t('common.done') : t('common.select')}
+          onClick={onSelect}
+        >
+          {isSelected ? t('common.action.done') : t('common.action.select')}
         </Button>
       </CardFooter>
     </Card>

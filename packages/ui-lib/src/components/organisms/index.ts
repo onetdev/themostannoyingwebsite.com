@@ -1,7 +1,6 @@
 export * from './Card';
 export * from './DelayedMount';
 export * from './Dialog';
-export * from './EscapingElement';
 export * from './Field';
 export * from './NavigationMenu';
 export * from './RadioGroup';
@@ -9,3 +8,4 @@ export * from './ShareModal';
 export * from './Sheet';
 export * from './Sonner';
 export * from './Table';
+export * from './Tabs';

@@ -1,7 +1,7 @@
 import { Button } from '@maw/ui-lib';
 import { useTranslations } from 'next-intl';
 
-import { BillingCycle, BillingCycleList } from '../../schemas';
+import { type BillingCycle, BillingCycleList } from '../../schemas';
 
 export interface BillingCycleSelectorProps {
   billingCycle: BillingCycle;
@@ -22,8 +22,9 @@ export function BillingCycleSelector({
           data-testid={`billing-cycle-${cycle}`}
           variant={billingCycle === cycle ? 'default' : 'ghost'}
           size="sm"
-          onClick={() => setBillingCycle(cycle)}>
-          {t(`plansPage.billing.${cycle}`)}
+          onClick={() => setBillingCycle(cycle)}
+        >
+          {t(`subscription.landing.billing.${cycle}`)}
         </Button>
       ))}
     </div>

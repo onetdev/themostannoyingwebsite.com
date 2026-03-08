@@ -3,21 +3,29 @@
 import { PageHeadline } from '@maw/ui-lib';
 import { useTranslations } from 'next-intl';
 import { useCallback, useState } from 'react';
-
+import { emit } from '@/core/events/event-bus';
+import type {
+  BillingCycle,
+  SubscriptionFeature,
+  SubscriptionPackage,
+} from '../../schemas';
 import { BillingCycleSelector } from './BillingCycleSelector';
 import { Disclaimer } from './Disclaimer';
 import { PlanCard } from './PlanCard';
 import { PlanComparison } from './PlanComparison';
-import { SocialProof, SocialProofProps } from './SocialProof';
-import { UrgencyCountdown, UrgencyCountdownProps } from './UrgencyCountdown';
-import { BillingCycle } from '../../schemas/billing-cycle';
-import { SubscriptionFeature } from '../../schemas/subscription-feature';
-import { SubscriptionPackage } from '../../schemas/subscription-package';
+import {
+  PurchaseProofToast,
+  type PurchaseProofToastProps,
+} from './PurchaseProofToast';
+import {
+  UrgencyCountdown,
+  type UrgencyCountdownProps,
+} from './UrgencyCountdown';
 
 interface PlansPageProps {
   plans: SubscriptionPackage[];
   features: SubscriptionFeature[];
-  socialProofConfig: Pick<SocialProofProps, 'minDelayMs' | 'maxDelayMs'>;
+  socialProofConfig: Pick<PurchaseProofToastProps, 'minDelayMs' | 'maxDelayMs'>;
   urgencyConfig?: Pick<
     UrgencyCountdownProps,
     'discountPercentage' | 'timeoutSeconds'
@@ -42,11 +50,20 @@ export function PlansPage({
     [],
   );
 
+  const handleSelectPlan = useCallback((key: string) => {
+    setSelectedPlanKey(key);
+    emit('subscription:package-selected', {
+      packageId: key,
+    });
+  }, []);
+
   return (
     <>
-      <SocialProof plans={plans} {...socialProofConfig} />
+      <PurchaseProofToast plans={plans} {...socialProofConfig} />
       <div className="mb-6 flex flex-col items-center justify-between gap-4 sm:flex-row">
-        <PageHeadline className="mb-0">{t('plansPage.headline')}</PageHeadline>
+        <PageHeadline className="mb-0">
+          {t('subscription.landing.headline')}
+        </PageHeadline>
       </div>
 
       <div className="mb-8 flex flex-col items-center gap-5 md:flex-row md:items-baseline md:justify-between">
@@ -74,7 +91,7 @@ export function PlansPage({
                   : undefined
               }
               isSelected={selectedPlanKey === plan.key}
-              onSelect={() => setSelectedPlanKey(plan.key)}
+              onSelect={() => handleSelectPlan(plan.key)}
             />
           );
         })}

@@ -1,22 +1,20 @@
 'use client';
 
-import { ComponentProps, useEffect, useState } from 'react';
-
-import { CookieConsent } from './CookieConsent';
-import { GlobalShareModal } from './GlobalShareModal';
-
+import { type ComponentProps, useEffect, useState } from 'react';
 import {
   DeadPixel,
   GlobalStickyVideo,
   Screensaver,
-} from '@/features/obstructor/components';
+} from '@/features/disruptions/components';
 import {
   AdblockerSuspectBar,
   ContainerPromotionFlaps,
   WheelOfFortune,
-} from '@/features/promotion/components';
+} from '@/features/marketing/components';
 import { ChatBubble } from '@/features/support/components';
 import { usePainPreferencesStore, useUserGrantsStore } from '@/stores';
+import { CookieConsent } from './CookieConsent';
+import { GlobalShareModal } from './GlobalShareModal';
 
 type PainDecoratorLayoutProps = ComponentProps<'div'>;
 
@@ -29,7 +27,7 @@ export function PainDecoratorLayout({
   const deadPixel = usePainPreferencesStore((state) => state.flags.deadPixel);
   const mockChat = usePainPreferencesStore((state) => state.flags.mockChat);
   const giftFlaps = usePainPreferencesStore(
-    (state) => state.flags['gifts.flaps'],
+    (state) => state.flags['promotions.flaps'],
   );
   const stickyVideo = usePainPreferencesStore(
     (state) => state.flags.stickyVideo,
@@ -63,18 +61,23 @@ export function PainDecoratorLayout({
 
   return (
     <div className={className} {...rest}>
+      {/* Elements appearing underneath content container */}
       {runtimeFlags.giftFlaps && <ContainerPromotionFlaps />}
+
+      {/* Main container and container relative sticky elements */}
       <div className="bg-card relative container mx-auto my-0 min-h-screen">
         {children}
         {runtimeFlags.wheelOfFortune && <WheelOfFortune />}
-        {deadPixel && <DeadPixel />}
-        {runtimeFlags.mockChat && <ChatBubble />}
+        {runtimeFlags.stickyVideo && <GlobalStickyVideo />}
         {runtimeFlags.showCookieConsent && <CookieConsent />}
         <AdblockerSuspectBar />
-        {runtimeFlags.stickyVideo && <GlobalStickyVideo />}
-        <GlobalShareModal />
-        <Screensaver />
       </div>
+
+      {/* Global viewport elements */}
+      {deadPixel && <DeadPixel />}
+      {runtimeFlags.mockChat && <ChatBubble />}
+      <GlobalShareModal />
+      <Screensaver />
     </div>
   );
 }

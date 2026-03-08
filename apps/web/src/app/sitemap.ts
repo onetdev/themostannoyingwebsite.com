@@ -1,8 +1,9 @@
-import { ArticleDatum } from '@maw/content-api';
+import type { ArticleDatum } from '@maw/content-api';
 import type { MetadataRoute } from 'next';
-import { Languages } from 'next/dist/lib/metadata/types/alternative-urls-types';
+import type { Languages } from 'next/dist/lib/metadata/types/alternative-urls-types';
 
-import { getDependencyContainer } from '@/dependency-container';
+import './bootstrap/di';
+import { getDependencyContainer } from '@/core/di';
 import { getAppArticleService } from '@/features/content/services';
 import i18nConfig from '@/root/i18n.config';
 import { getAppConfigService } from '@/services';
@@ -52,11 +53,16 @@ async function sitemap(): Promise<MetadataRoute.Sitemap> {
     params: {},
     paginate: { take: -1, skip: 0 },
   });
-  const articles = articleResults.items.map(mapArticleToSitemapEntry);
+  const articles = articleResults.items
+    .filter((item) =>
+      (i18nConfig.locales as readonly string[]).includes(item.locale),
+    )
+    .map(mapArticleToSitemapEntry);
 
   const commonPages = [
     '',
     'about',
+    'achievements',
     'contact',
     'dilf',
     'donate',

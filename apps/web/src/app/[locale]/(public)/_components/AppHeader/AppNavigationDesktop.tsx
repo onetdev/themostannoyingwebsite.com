@@ -11,12 +11,13 @@ import { cn } from '@maw/ui-lib/utils';
 import { useTranslations } from 'next-intl';
 
 import {
-  ActiveNavigationItem,
+  type ActiveNavigationItem,
   isNavigationItemActive,
-  NavItem,
+  type NavItem,
   PERSONAL_NAVIGATION_LINKS,
   SITE_NAVIGATION_LINKS,
 } from '@/app/navigation';
+import { useLangDir } from '@/hooks';
 import { Link } from '@/i18n/navigation';
 import { useRuntimeStore } from '@/stores';
 
@@ -31,6 +32,7 @@ export function AppNavigationDesktop({
 }: AppNavigationDesktopProps) {
   const t = useTranslations();
   const { showShareModal } = useRuntimeStore();
+  const direction = useLangDir();
 
   const onClick = (item: NavItem) => {
     if (item.key === 'global-share') {
@@ -48,16 +50,22 @@ export function AppNavigationDesktop({
           asChild
           data-active={active}
           aria-current={active ? 'page' : undefined}
-          className="flex-row items-center gap-2 data-[active=true]:font-bold">
+          aria-label={t(item.labelKey)}
+          title={t(item.labelKey)}
+          className="flex-row items-center gap-2 data-[active=true]:font-bold"
+        >
           <Link href={item.path} onClick={() => onClick(item)} passHref>
             {item.icon && <Icon icon={item.icon} className="text-primary" />}
-            <span
-              className={cn(
-                !item.icon && 'lg:inline',
-                item.icon && 'hidden lg:inline',
-              )}>
-              {t(item.labelKey)}
-            </span>
+            {item.hideLabel !== true && (
+              <span
+                className={cn(
+                  !item.icon && 'lg:inline',
+                  item.icon && 'hidden lg:inline',
+                )}
+              >
+                {t(item.labelKey)}
+              </span>
+            )}
           </Link>
         </NavigationMenuLink>
       </NavigationMenuItem>
@@ -71,7 +79,9 @@ export function AppNavigationDesktop({
         className,
       )}
       id="navigation-desktop"
-      viewport={false}>
+      viewport={false}
+      dir={direction}
+    >
       <NavigationMenuList className="justify-start gap-1">
         {SITE_NAVIGATION_LINKS.map(renderItem)}
       </NavigationMenuList>

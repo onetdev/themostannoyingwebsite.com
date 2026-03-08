@@ -1,10 +1,13 @@
-import { Page } from '@playwright/test';
-
+import type { Page } from '@playwright/test';
+import {
+  ACHIEVEMENTS_STORAGE_KEY,
+  type AchievementsState,
+} from '@/features/achievements/stores';
 import {
   PAIN_PREFERENCES_STORAGE_KEY,
-  PainPreferencesState,
+  type PainPreferencesState,
   USER_GRANTS_STORAGE_KEY,
-  UserGrantsState,
+  type UserGrantsState,
 } from '@/stores';
 
 /**
@@ -68,4 +71,41 @@ export async function setUserGrants(
       value: JSON.stringify(valueToStore),
     },
   );
+}
+
+/**
+ * Sets the state for the achievements store in localStorage.
+ * This script runs before the page loads.
+ * @param page The Playwright page object.
+ * @param state A full or partial state to set.
+ */
+export async function setAchievements(
+  page: Page,
+  state: Partial<AchievementsState>,
+) {
+  const valueToStore = {
+    state,
+    version: 1, // This version must match the one in the store config
+  };
+
+  await page.addInitScript(
+    ({ key, value }) => {
+      window.localStorage.setItem(key, value);
+    },
+    {
+      key: ACHIEVEMENTS_STORAGE_KEY,
+      value: JSON.stringify(valueToStore),
+    },
+  );
+}
+
+/**
+ * Gets the state for the achievements store from localStorage.
+ * @param page The Playwright page object.
+ */
+export async function getAchievements(page: Page) {
+  return page.evaluate((key) => {
+    const item = localStorage.getItem(key);
+    return item ? (JSON.parse(item) as { state: AchievementsState }) : null;
+  }, ACHIEVEMENTS_STORAGE_KEY);
 }

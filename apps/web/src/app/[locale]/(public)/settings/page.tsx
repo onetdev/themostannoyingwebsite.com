@@ -1,9 +1,7 @@
-import { Metadata } from 'next';
+import type { Metadata } from 'next';
 import { getTranslations } from 'next-intl/server';
-
-import { PageLayout } from '../_components/PageLayout';
-
 import { SettingsPage } from '@/features/user/components';
+import { PageLayout } from '../_components/PageLayout';
 
 export { generateStaticParams } from '@/i18n/routing';
 

@@ -1,4 +1,4 @@
-import { type Comment } from '../../schemas';
+import type { Comment } from '../../schemas';
 
 export function filterByDate(tree: Comment[], timestamp: number): Comment[] {
   return tree

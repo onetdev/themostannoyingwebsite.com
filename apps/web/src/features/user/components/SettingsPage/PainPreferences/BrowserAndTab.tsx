@@ -2,10 +2,8 @@
 
 import { Checkbox as FormCheckbox } from '@maw/ui-lib';
 import { useTranslations } from 'next-intl';
-
-import { SettingsField } from '../SettingsField';
-
 import { usePainPreferencesStore } from '@/stores';
+import { SettingsField } from '../SettingsField';
 
 export function BrowserAndTab() {
   const painPreferences = usePainPreferencesStore();
@@ -14,13 +12,12 @@ export function BrowserAndTab() {
   return (
     <section className="flex flex-col gap-3">
       <h3 className="text-muted-foreground text-xs font-bold tracking-wider uppercase">
-        {t('settings.optionalPainPoints.categories.browser')}
+        {t('user.optionalPainPoints.categories.browser')}
       </h3>
       <SettingsField
-        label={t('settings.optionalPainPoints.pageTitleInactiveArrayPaged')}
-        info={t(
-          'settings.optionalPainPointsHints.pageTitleInactiveArrayPaged',
-        )}>
+        label={t('user.optionalPainPoints.pageTitleInactiveArrayPaged')}
+        info={t('user.optionalPainPointsHints.pageTitleInactiveArrayPaged')}
+      >
         <FormCheckbox
           name="page_title_inactive_array_paged"
           checked={painPreferences.flags['pageTitle.inactiveArrayPaged']}
@@ -33,8 +30,9 @@ export function BrowserAndTab() {
         />
       </SettingsField>
       <SettingsField
-        label={t('settings.optionalPainPoints.historySpam')}
-        info={t('settings.optionalPainPointsHints.historySpam')}>
+        label={t('user.optionalPainPoints.historySpam')}
+        info={t('user.optionalPainPointsHints.historySpam')}
+      >
         <FormCheckbox
           name="history_spam"
           checked={painPreferences.flags.historySpam}
@@ -44,8 +42,9 @@ export function BrowserAndTab() {
         />
       </SettingsField>
       <SettingsField
-        label={t('settings.optionalPainPoints.disableContextMenu')}
-        info={t('settings.optionalPainPointsHints.disableContextMenu')}>
+        label={t('user.optionalPainPoints.disableContextMenu')}
+        info={t('user.optionalPainPointsHints.disableContextMenu')}
+      >
         <FormCheckbox
           name="disable_context"
           checked={painPreferences.flags.disableContextMenu}
@@ -55,8 +54,9 @@ export function BrowserAndTab() {
         />
       </SettingsField>
       <SettingsField
-        label={t('settings.optionalPainPoints.searchDelay')}
-        info={t('settings.optionalPainPointsHints.searchDelay')}>
+        label={t('user.optionalPainPoints.searchDelay')}
+        info={t('user.optionalPainPointsHints.searchDelay')}
+      >
         <FormCheckbox
           name="search_delay"
           checked={painPreferences.flags.searchDelay}

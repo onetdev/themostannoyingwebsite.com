@@ -1,6 +1,6 @@
-import {
-  type AuthRepository,
-  type PasswordReminderUseCaseParams,
+import type {
+  AuthRepository,
+  PasswordReminderUseCaseParams,
 } from '../../types';
 
 export async function passwordReminder(

@@ -1,19 +1,12 @@
 'use client';
 
-import {
-  Button,
-  CaptchaTitlePuzzleField,
-  FormError,
-  LoaderDots,
-  PageHeadline,
-} from '@maw/ui-lib';
+import { Button, FieldError, LoaderDots, PageHeadline } from '@maw/ui-lib';
 import { useTranslations } from 'next-intl';
 import { FormProvider } from 'react-hook-form';
-
+import { CaptchaField } from '@/features/captcha/components';
+import { useNavigationProvider } from '@/navigation/NavigationContext';
 import { usePasswordReminderForm } from '../../hooks';
-import { EmailField } from '../fields/EmailField';
-
-import { useNavigationProvider } from '@/contexts/NavigationContext';
+import { EmailField } from '../_fields';
 
 export function PasswordReminderForm() {
   const t = useTranslations();
@@ -30,38 +23,34 @@ export function PasswordReminderForm() {
   const isCtaLoading = isSubmitting;
   const isCtaDisabled = isSubmitting;
 
-  const captchaText = {
-    label: t('form.captcha.field'),
-    hint: t('form.captcha.captchaTilePuzzleHint'),
-    invalid: t('form.validation.error.captchaInvalid'),
-  };
-
   return (
     <FormProvider {...methods}>
       <PageHeadline>{t('navigation.passwordReminder')}</PageHeadline>
       <form
         className="flex flex-col gap-5"
         method="post"
-        onSubmit={handleSubmit(onSubmit)}>
-        <FormError error={errors.root} />
+        onSubmit={handleSubmit(onSubmit)}
+      >
+        <FieldError errors={[errors.root]} />
         <EmailField />
-        <CaptchaTitlePuzzleField text={captchaText} />
+        <CaptchaField />
 
         <Button
           role="button"
           type="submit"
           className="mt-10"
           size="lg"
-          disabled={isCtaDisabled}>
+          disabled={isCtaDisabled}
+        >
           {isCtaLoading && <LoaderDots />}
-          {!isCtaLoading && t('user.form.passwordReminder.callToAction')}
+          {!isCtaLoading && t('auth.form.passwordReminder.callToAction')}
         </Button>
         <div className="flex justify-between">
           <Link href={pathFor('user.login')} prefetch={false}>
-            {t('user.common.Login')}
+            {t('auth.common.login')}
           </Link>
           <Link href={pathFor('user.signup')} prefetch={false}>
-            {t('user.common.signup')}
+            {t('auth.common.signup')}
           </Link>
         </div>
       </form>

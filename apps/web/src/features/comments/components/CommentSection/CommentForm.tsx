@@ -2,19 +2,17 @@
 
 import {
   Button,
-  CaptchaEmojiField,
   Field,
   FieldContent,
   FieldError,
   FieldLabel,
-  FormError,
   Input,
   LoaderDots,
   Textarea,
 } from '@maw/ui-lib';
 import { useTranslations } from 'next-intl';
 import { FormProvider } from 'react-hook-form';
-
+import { CaptchaField } from '@/features/captcha/components';
 import { useCommentForm } from '../../hooks';
 
 export function CommentForm() {
@@ -32,19 +30,15 @@ export function CommentForm() {
     formState: { errors, isSubmitting },
   } = form;
 
-  const captchaFieldText = {
-    label: t('form.captcha.field'),
-    hint: t('form.captcha.captchaEmojiHint'),
-  };
-
   return (
     <FormProvider {...form}>
       <form
         id="create-comment"
         className="flex flex-col gap-5"
         method="post"
-        onSubmit={handleSubmit(onSubmit)}>
-        <FormError error={errors.root} />
+        onSubmit={handleSubmit(onSubmit)}
+      >
+        <FieldError errors={[errors.root]} />
 
         <Field>
           <FieldLabel htmlFor="name">{t('comments.form.name')}</FieldLabel>
@@ -67,7 +61,7 @@ export function CommentForm() {
           <FieldContent>
             <Textarea
               id="content"
-              className="w-full"
+              className="w-full h-32"
               placeholder={t('comments.form.comment')}
               {...register('content')}
             />
@@ -75,17 +69,16 @@ export function CommentForm() {
           </FieldContent>
         </Field>
 
-        <CaptchaEmojiField
-          text={captchaFieldText}
-          required
-          className="max-w-96"
-        />
+        <div className="max-w-96">
+          <CaptchaField />
+        </div>
 
         <Button
           role="button"
           type="submit"
           className="mt-4"
-          disabled={isSubmitting}>
+          disabled={isSubmitting}
+        >
           {isSubmitting && <LoaderDots />}
           {!isSubmitting && t('comments.form.submit')}
         </Button>

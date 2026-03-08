@@ -5,19 +5,30 @@ import {
   CardContent,
   CardHeader,
   CardTitle,
+  Field,
+  FieldContent,
+  FieldLabel,
   Checkbox as FormCheckbox,
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+  Separator,
 } from '@maw/ui-lib';
-import { useTranslations } from 'next-intl';
+import { useLocale, useTranslations } from 'next-intl';
 import { useTheme } from 'next-themes';
-
-import { SettingsField } from './SettingsField';
-
+import { useLanguageSwitcher } from '@/hooks';
 import { useRuntimeStore, useUserPreferencesStore } from '@/stores';
+import { SettingsField } from './SettingsField';
 
 export function UserPreferences() {
   const preference = useUserPreferencesStore();
+  const { onLanguageChange, languages } = useLanguageSwitcher();
   const runtime = useRuntimeStore();
   const t = useTranslations();
+  const locale = useLocale();
+
   const { resolvedTheme, setTheme } = useTheme();
   const setDarkMode = (value: boolean | 'indeterminate') => {
     setTheme(value !== false ? 'dark' : 'light');
@@ -26,10 +37,32 @@ export function UserPreferences() {
   return (
     <Card data-testid="preferences-settings">
       <CardHeader>
-        <CardTitle>{t('settings.userPreferences.title')}</CardTitle>
+        <CardTitle>{t('user.userPreferences.title')}</CardTitle>
       </CardHeader>
       <CardContent className="flex flex-col justify-between gap-3">
-        <SettingsField label={t('settings.userPreferences.darkMode')}>
+        <Field orientation="vertical" className="gap-2 pb-2">
+          <FieldLabel className="text-sm font-normal">
+            {t('language.label')}
+          </FieldLabel>
+          <FieldContent>
+            <Select value={locale} onValueChange={onLanguageChange}>
+              <SelectTrigger className="w-full">
+                <SelectValue />
+              </SelectTrigger>
+              <SelectContent>
+                {languages.map((lang) => (
+                  <SelectItem key={lang.locale} value={lang.locale}>
+                    {t(lang.labelKey)} &nbsp; {lang.flag}
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
+          </FieldContent>
+        </Field>
+
+        <Separator className="mb-2" />
+
+        <SettingsField label={t('user.userPreferences.darkMode')}>
           <FormCheckbox
             name="dark_mode"
             checked={resolvedTheme === 'dark'}
@@ -37,15 +70,16 @@ export function UserPreferences() {
           />
         </SettingsField>
         <SettingsField
-          label={t('settings.userPreferences.reducedMotion')}
-          info={t('settings.userPreferences.reducedMotionHelp')}>
+          label={t('user.userPreferences.reducedMotion')}
+          info={t('user.userPreferences.reducedMotionHelp')}
+        >
           <FormCheckbox
             name="reduced_motion"
             disabled={true}
             checked={runtime.systemReducedMotion}
           />
         </SettingsField>
-        <SettingsField label={t('settings.userPreferences.enableSound')}>
+        <SettingsField label={t('user.userPreferences.enableSound')}>
           <FormCheckbox
             name="enable_sound"
             checked={preference.enableSound}
@@ -54,7 +88,7 @@ export function UserPreferences() {
             }
           />
         </SettingsField>
-        <SettingsField label={t('settings.userPreferences.adultFilter')}>
+        <SettingsField label={t('user.userPreferences.adultFilter')}>
           <FormCheckbox
             name="adult_filter"
             checked={preference.adultFilter}

@@ -7,17 +7,15 @@ test.beforeEach(async ({ page }) => {
   await setupE2eTestState(page);
 });
 
-test(
-  'contact page loads and its menu item is active',
-  { tag: '@smoke' },
-  async ({ page }) => {
-    const contactPage = getContactPage(page);
-    await contactPage.goto();
+test('contact page loads and its menu item is active', {
+  tag: '@smoke',
+}, async ({ page }) => {
+  const contactPage = getContactPage(page);
+  await contactPage.goto();
 
-    await expect(contactPage.activeMenuItem).toHaveText('Contact');
-    await expect(contactPage.headline).toBeVisible();
-  },
-);
+  await expect(contactPage.activeMenuItem).toHaveText('Contact');
+  await expect(contactPage.headline).toBeVisible();
+});
 
 test('contact form generates correct mailto link', async ({ page }) => {
   const contactPage = getContactPage(page);
