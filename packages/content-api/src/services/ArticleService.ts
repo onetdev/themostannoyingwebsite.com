@@ -1,7 +1,7 @@
 import { fuzzy_search } from '@maw/utils/string';
 
 import articlesRaw from '../../data/index.json';
-import type { ArticleIndexEntrySchema } from '../schemas/article-index-entry';
+import type { ArticleIndexEntry } from '../schemas/article-index-entry';
 import type {
   ArticleData,
   ArticleDatum,
@@ -15,7 +15,7 @@ export const defaultPageSize = 10;
 
 type ArticleServiceProps = {
   getAssetUrl: (path: string) => string;
-  getUrl: (item: ArticleIndexEntrySchema) => string;
+  getUrl: (item: ArticleIndexEntry) => string;
 };
 
 /**
@@ -29,7 +29,7 @@ export class ArticleService {
   articles: ArticleDatum[];
 
   constructor({ getAssetUrl, getUrl }: ArticleServiceProps) {
-    this.articles = articlesRaw.map((article: ArticleIndexEntrySchema) =>
+    this.articles = articlesRaw.map((article: ArticleIndexEntry) =>
       mapIndexEntryToContent(article, getAssetUrl, getUrl),
     );
   }
@@ -143,9 +143,9 @@ const propBoolCheck = (
   (article[prop] === undefined && value !== true);
 
 const mapIndexEntryToContent = (
-  article: ArticleIndexEntrySchema,
+  article: ArticleIndexEntry,
   getAssetUrl: (path: string) => string,
-  getUrl: (item: ArticleIndexEntrySchema) => string,
+  getUrl: (item: ArticleIndexEntry) => string,
 ) => {
   let coverImages: ArticleDatum['coverImages'];
   if (article.coverImage) {

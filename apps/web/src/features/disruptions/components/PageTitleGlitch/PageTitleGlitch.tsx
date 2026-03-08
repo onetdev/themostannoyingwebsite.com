@@ -1,6 +1,6 @@
 'use client';
 
-import { useMessages, useTranslations } from 'next-intl';
+import { useMessages } from 'next-intl';
 import { useMemo } from 'react';
 import { usePainPreferencesStore, useRuntimeStore } from '@/stores';
 import { ArrayPagedTitle } from './ArrayPagedTitle';

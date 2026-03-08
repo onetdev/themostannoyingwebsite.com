@@ -1,6 +1,6 @@
-import { z } from 'zod';
+import { z } from 'zod/v3';
 
-const schema = z
+export const ArticleLocaleMetaSchema = z
   .object({
     'on-cover': z
       .array(z.string())
@@ -8,5 +8,4 @@ const schema = z
   })
   .strict();
 
-export type ArticleLocaleMetaSchema = z.infer<typeof schema>;
-export default schema;
+export type ArticleLocaleMeta = z.infer<typeof ArticleLocaleMetaSchema>;
