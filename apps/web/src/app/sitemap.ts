@@ -4,7 +4,7 @@ import type { Languages } from 'next/dist/lib/metadata/types/alternative-urls-ty
 
 import './bootstrap/di';
 import { getDependencyContainer } from '@/core/di';
-import { getAppArticleService } from '@/features/content/services';
+import { getArticleService } from '@/features/content/services';
 import i18nConfig from '@/root/i18n.config';
 import { getAppConfigService } from '@/services';
 
@@ -49,7 +49,8 @@ const mapArticleToSitemapEntry = (item: ArticleDatum) => {
 
 async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const di = getDependencyContainer();
-  const articleResults = await getAppArticleService(di).getMany({
+  const service = await getArticleService(di);
+  const articleResults = await service.getMany({
     params: {},
     paginate: { take: -1, skip: 0 },
   });

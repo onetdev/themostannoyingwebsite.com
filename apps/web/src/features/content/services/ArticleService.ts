@@ -16,6 +16,6 @@ export class ArticleService
   }
 }
 
-export function getAppArticleService(container: Container) {
+export async function getArticleService(container: Container) {
   return container.get<IArticleApiService>(DI.ArticleService);
 }

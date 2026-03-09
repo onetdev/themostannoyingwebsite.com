@@ -1,7 +1,7 @@
 import type { ArticleSearchQuery } from '@maw/content-api/schemas';
 import { NextResponse } from 'next/server';
 import { getDependencyContainer } from '@/core/di';
-import { getAppArticleService } from '@/features/content/services';
+import { getArticleService } from '@/features/content/services';
 
 export async function GET(request: Request) {
   const { searchParams } = new URL(request.url);
@@ -23,7 +23,7 @@ export async function GET(request: Request) {
   };
 
   const container = getDependencyContainer();
-  const articleService = getAppArticleService(container);
+  const articleService = await getArticleService(container);
 
   const results = await articleService.search(params);
 
