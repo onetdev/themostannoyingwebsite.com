@@ -46,7 +46,7 @@ export default {
       'Önce Gizlilik: Hassas form girişlerini veya kullanıcı kimlik bilgilerini kalıcı olarak saklamıyoruz.',
     noWarranties:
       'Garanti verilmeksizin "olduğu gibi" sunulmaktadır. Kayıp zamanınızdan veya hayal kırıklığınızdan sorumlu değiliz.',
-    privacyPolicyDisclaimer:
+    translationDisclaimer:
       'Bu belge, resmi İngilizce versiyonun bir çevirisidir. Herhangi bir tutarsızlık durumunda İngilizce versiyon geçerli olacaktır. Resmi versiyonu <linkTag>burada</linkTag> bulabilirsiniz.',
     cookieConsent:
       'Bu web sitesi, web sitemizde en iyi deneyimi yaşamanızı sağlamak için çerezleri kullanır. Ayrıca bu bir şakadır, bu yüzden özelliklerin çoğu hatalıdır veya bilerek çalışmaz. Deneyiminizi ve çerez ayarlarınızı ayarlar menüsünden özelleştirebilirsiniz.',

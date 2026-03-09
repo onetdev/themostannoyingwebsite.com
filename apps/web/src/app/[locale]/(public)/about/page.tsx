@@ -4,8 +4,8 @@ import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import { getTranslations } from 'next-intl/server';
 import { loadLocaleMdx } from '@/i18n/load-locale-mdx';
-
 import { PageLayout } from '../_components/PageLayout';
+import { TranslationDisclaimer } from '../_components/TranslationDisclaimer';
 
 export { generateStaticParams } from '@/i18n/routing';
 
@@ -38,6 +38,7 @@ export default async function Page({ params }: NextPageProps) {
           {t('navigation.about')}
         </PageHeadline>
         <div className={styles.content}>
+          <TranslationDisclaimer currentLocale={locale} href="/about" />
           <Content />
         </div>
       </PageLayout>

@@ -46,7 +46,7 @@ export default {
       '隐私第一：我们不会持久化存储敏感的表单输入或用户凭据。',
     noWarranties:
       '按“原样”提供，不作任何保证。我们不对你损失的时间或感到的挫败负责。',
-    privacyPolicyDisclaimer:
+    translationDisclaimer:
       '本文件是官方英文版本的翻译。如有任何差异，以英文版本为准。你可以在 <linkTag>这里</linkTag> 找到官方版本。',
     cookieConsent:
       '本网站使用 Cookie 以确保你在我们的网站上获得最佳体验。这同时也是个玩笑，许多功能都是故意出错或根本无法运行的。你可以在设置菜单中自定义你的体验和 Cookie 设置。',

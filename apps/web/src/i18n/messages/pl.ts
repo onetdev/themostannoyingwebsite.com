@@ -47,7 +47,7 @@ export default {
       'Prywatność przede wszystkim: Nie przechowujemy wrażliwych danych z formularzy ani danych logowania użytkowników.',
     noWarranties:
       'Dostarczane „tak jak jest”, bez gwarancji. Nie ponosimy odpowiedzialności za Twój stracony czas ani frustrację.',
-    privacyPolicyDisclaimer:
+    translationDisclaimer:
       'Ten dokument jest tłumaczeniem oficjalnej angielskiej wersji. W przypadku jakichkolwiek rozbieżności, wersja angielska jest rozstrzygająca. Oficjalną wersję znajdziesz <linkTag>tutaj</linkTag>.',
     cookieConsent:
       'Ta strona używa ciasteczek, aby zapewnić Ci jak najlepsze wrażenia. To także żart, więc wiele funkcji celowo zawiera błędy lub w ogóle nie działa. Możesz dostosować swoje wrażenia i ustawienia ciasteczek w menu ustawień.',
