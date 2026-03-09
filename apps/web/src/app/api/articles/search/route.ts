@@ -1,26 +1,45 @@
-import type { ArticleSearchQuery } from '@maw/content-api/schemas';
+import {
+  type ArticleSearchQuery,
+  ArticleSearchQuerySchema,
+} from '@maw/content-api/schemas';
+import { deepmerge } from 'deepmerge-ts';
 import { NextResponse } from 'next/server';
 import { getDependencyContainer } from '@/core/di';
 import { getArticleService } from '@/features/content/services';
 
+const defaultParams: ArticleSearchQuery = {
+  params: {
+    query: '',
+    locale: 'en',
+  },
+  paginate: {
+    take: 20,
+    skip: 0,
+  },
+};
+
 export async function GET(request: Request) {
   const { searchParams } = new URL(request.url);
 
-  const query = searchParams.get('query') || '';
-  const locale = searchParams.get('locale') || 'en';
-  const take = parseInt(searchParams.get('take') || '10', 10);
-  const skip = parseInt(searchParams.get('skip') || '0', 10);
-
-  const params: ArticleSearchQuery = {
+  const parsedParams = ArticleSearchQuerySchema.safeParse({
     params: {
-      query,
-      locale,
+      query: searchParams.get('query') || undefined,
+      locale: searchParams.get('locale') || undefined,
     },
     paginate: {
-      take,
-      skip,
-    },
-  };
+      take: searchParams.get('take') || undefined,
+      skip: searchParams.get('skip') || undefined,
+    }
+  })
+
+  if (!parsedParams.success) {
+    NextResponse.json(parsedParams.error, { status: 400 });
+  }
+
+  const params = deepmerge(
+    defaultParams,
+    parsedParams.success ? parsedParams.data : {},
+  );
 
   const container = getDependencyContainer();
   const articleService = await getArticleService(container);

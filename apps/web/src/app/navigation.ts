@@ -16,7 +16,7 @@ export const ActiveNavigationItems = [
   'privacy-policy',
   'search',
   'settings',
-  'termsOfUse',
+  'terms-of-use',
   'virgin',
 ] as const;
 export type ActiveNavigationItem = (typeof ActiveNavigationItems)[number];

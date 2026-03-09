@@ -6,7 +6,13 @@ export const ArticleSearchQuerySchema = z.object({
   ...ArticleQuerySchema.shape,
   params: z.object({
     ...ArticleLookupQuerySchema.shape,
-    query: z.string().min(2),
+    query: z
+      .string()
+      .trim()
+      .min(1)
+      .max(100)
+      .transform((q) => q.normalize("NFKC"))
+      .transform((q) => q.replace(/\s+/g, " ")),
   }),
 });
 
