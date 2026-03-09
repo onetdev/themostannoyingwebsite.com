@@ -29,8 +29,8 @@ export async function GET(request: Request) {
     paginate: {
       take: searchParams.get('take') || undefined,
       skip: searchParams.get('skip') || undefined,
-    }
-  })
+    },
+  });
 
   if (!parsedParams.success) {
     NextResponse.json(parsedParams.error, { status: 400 });

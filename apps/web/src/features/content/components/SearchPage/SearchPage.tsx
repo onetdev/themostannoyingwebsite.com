@@ -12,7 +12,9 @@ export function SearchPage() {
   const tNavigation = useTranslations('navigation');
   const { onRecommendedClick, query, data, isLoading, isReady } = useSearch();
 
-  const hasResults = data?.items && data?.items.length > 0;
+  const hasResults = data?.data && data?.data.length > 0;
+
+  console.log(data);
 
   return (
     <>
@@ -27,13 +29,13 @@ export function SearchPage() {
         <div className="my-4 text-sm">
           {t('resultMeta', {
             query,
-            count: data.items.length,
+            count: data.data.length,
             time: data.duration?.toFixed(0) ?? '0',
           })}
         </div>
       )}
       {hasResults &&
-        data.items.map((item) => (
+        data.data.map((item) => (
           <SearchResultItem key={item.lookup.slug} item={item} />
         ))}
       {!hasResults && isReady && (

@@ -7,7 +7,7 @@ import { useAppConfigContext } from '@/core/config/react-app-config';
 import { usePainPreferencesStore } from '@/stores';
 
 type SearchResult = {
-  items: ArticleSearchResult[];
+  data: ArticleSearchResult[];
   duration: number;
 };
 
@@ -52,7 +52,7 @@ export function useSearchQuery(query: ArticleSearchQuery) {
       }
 
       const duration = performance.now() - start;
-      return response.json().then((items) => ({ items, duration }));
+      return response.json().then((data) => ({ data, duration }));
     },
     enabled: !!query.params.query,
   });

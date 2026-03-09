@@ -11,6 +11,7 @@ import { AchievementManager } from '@/features/achievements/providers';
 import type { AppConfig } from '@/schemas/app-config';
 import { ClientNavigationConfigurator } from '../../navigation/ClientNavigationConfigurator';
 import { ClientPainContainer } from './ClientPainProvider';
+import { SentryLocaleConfigurator } from './SentryLocaleConfigurator';
 
 export type ClientRootProviderContainerProps = PropsWithChildren<{
   appConfig: AppConfig;
@@ -29,6 +30,7 @@ export function ClientRootProviderContainer({
         <TooltipProvider>
           <DiContextProvider value={{ container: DiContainer }}>
             <ThemeProvider defaultTheme="dark" enableColorScheme enableSystem>
+              <SentryLocaleConfigurator />
               <ClientNavigationConfigurator>
                 <Toaster />
                 <AchievementManager />
