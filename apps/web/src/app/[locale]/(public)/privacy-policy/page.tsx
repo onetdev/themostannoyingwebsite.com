@@ -33,7 +33,7 @@ export default async function Page({ params }: NextPageProps) {
   const logger = getLogger();
 
   try {
-    const Content = (await import(`./${locale}.mdx`)).default;
+    const Content = (await import(`./i18n/${locale}.mdx`)).default;
 
     return (
       <PageLayout activeItem="privacy-policy" role="main">

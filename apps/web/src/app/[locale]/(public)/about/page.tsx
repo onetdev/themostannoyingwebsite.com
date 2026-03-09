@@ -27,7 +27,7 @@ export default async function Page({ params }: NextPageProps) {
   const t = await getTranslations();
 
   try {
-    const Content = (await import(`./${locale}.mdx`)).default;
+    const Content = (await import(`./_i18n/${locale}.mdx`)).default;
     return (
       <PageLayout activeItem="about" role="main">
         <PageHeadline className="mx-auto w-full max-w-screen-md">
