@@ -20,9 +20,7 @@ const skipLocales = ['es'];
 
 const config = {
   // Live translations - used for routing, sitemap, and UI language selectors.
-  locales: allLocales.filter(
-    (locale) => skipLocales.includes(locale) === false,
-  ),
+  locales: allLocales.filter((locale) => !skipLocales.includes(locale)),
   allLocales,
   defaultLocale: 'en',
 } as const;

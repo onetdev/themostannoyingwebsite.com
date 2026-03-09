@@ -4,6 +4,7 @@ import styles from '@maw/ui-lib/content.module.css';
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import { getTranslations } from 'next-intl/server';
+import { loadLocaleMdx } from '@/i18n/load-locale-mdx';
 import { Link } from '@/i18n/navigation';
 import { PageLayout } from '../_components/PageLayout';
 
@@ -33,7 +34,10 @@ export default async function Page({ params }: NextPageProps) {
   const logger = getLogger();
 
   try {
-    const Content = (await import(`./_i18n/${locale}.mdx`)).default;
+    const Content = await loadLocaleMdx(
+      locale,
+      (l) => import(`./_i18n/${l}.mdx`),
+    );
 
     return (
       <PageLayout activeItem="privacy-policy" role="main">
