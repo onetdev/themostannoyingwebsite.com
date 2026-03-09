@@ -12,7 +12,7 @@ export function SearchResultItem({ item }: SearchResultItemProps) {
   return (
     <div className="my-4" key={item.lookup.slug}>
       <h4>
-        <Link href={`articles/${item.lookup.slug}`} passHref prefetch={false}>
+        <Link href={`/articles/${item.lookup.slug}`} passHref prefetch={false}>
           {item.title}
         </Link>
       </h4>
