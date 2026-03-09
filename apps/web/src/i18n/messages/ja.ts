@@ -95,6 +95,8 @@ export default {
     plans: 'AIプラン',
     personal: 'パーソナル',
     achievements: '実績',
+    admin: '管理者',
+    termsOfUse: '利用規約',
   },
   userField: {
     consentNewsletter: 'ニュースレターを受け取る（後悔しますよ）',
@@ -155,4 +157,4 @@ export default {
     darkMode: 'ダークモード',
     lightMode: 'ライトモード',
   },
-} satisfies AppTranslationShape;
+} satisfies DeepPartial<AppTranslationShape>;

@@ -85,8 +85,13 @@ export default {
       'Escolha entre a nossa seleção de pacotes de IA premium, 100% falsos. Experimente o futuro da irritação hoje!',
   },
   admin: {
-    title: 'Terminal de Administração',
+    title: 'Terminal Admin',
     description:
-      'Acesso seguro por terminal à interface de administração do sistema.',
+      'Acesso seguro ao terminal da interface de administração do sistema.',
+  },
+  termsOfUse: {
+    title: 'Termos de Uso',
+    description:
+      'Termos de Uso para The Most Annoying Website explicando que todos os recursos, contas, comentários e interações são fictícios e existem apenas para fins de paródia e entretenimento.',
   },
 };

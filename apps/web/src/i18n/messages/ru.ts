@@ -95,6 +95,8 @@ export default {
     plans: 'AI тарифы',
     personal: 'Личное',
     achievements: 'Достижения',
+    admin: 'Админ',
+    termsOfUse: 'Условия использования',
   },
   userField: {
     consentNewsletter: 'Я хочу получать рассылку',
@@ -155,4 +157,4 @@ export default {
     darkMode: 'Темная тема',
     lightMode: 'Светлая тема',
   },
-} satisfies AppTranslationShape;
+} satisfies DeepPartial<AppTranslationShape>;

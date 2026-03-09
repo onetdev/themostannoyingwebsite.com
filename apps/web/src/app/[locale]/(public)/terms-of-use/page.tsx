@@ -4,7 +4,6 @@ import styles from '@maw/ui-lib/content.module.css';
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import { getTranslations } from 'next-intl/server';
-import { Link } from '@/i18n/navigation';
 import { PageLayout } from '../_components/PageLayout';
 
 export { generateStaticParams } from '@/i18n/routing';
@@ -17,7 +16,7 @@ export async function generateMetadata({
   const { locale } = await params;
   const t = await getTranslations({
     locale,
-    namespace: 'metadata.privacyPolicy',
+    namespace: 'metadata.termsOfUse',
   });
 
   return {
@@ -26,7 +25,6 @@ export async function generateMetadata({
   };
 }
 
-// Privacy policy inspired by https://matomo.org/privacy-policy/
 export default async function Page({ params }: NextPageProps) {
   const { locale } = await params;
   const t = await getTranslations();
@@ -38,30 +36,15 @@ export default async function Page({ params }: NextPageProps) {
     return (
       <PageLayout activeItem="privacy-policy" role="main">
         <PageHeadline className="mx-auto w-full max-w-screen-md">
-          {t('navigation.privacyPolicy')}
+          {t('navigation.termsOfUse')}
         </PageHeadline>
         <div className={styles.content}>
-          {locale !== 'en' && (
-            <p className="border-border bg-muted/30 mb-8 border-l-4 py-4 pl-4 text-sm italic">
-              {t.rich('app.privacyPolicyDisclaimer', {
-                linkTag: (chunks) => (
-                  <Link
-                    href="/privacy-policy"
-                    locale="en"
-                    className="hover:underline font-bold"
-                  >
-                    {chunks}
-                  </Link>
-                ),
-              })}
-            </p>
-          )}
           <Content />
         </div>
       </PageLayout>
     );
   } catch (_err) {
-    logger.debug(_err, 'Privacy policy not found, redirecting to 404');
+    logger.debug(_err, 'Terms of use, redirecting to 404');
     notFound();
   }
 }

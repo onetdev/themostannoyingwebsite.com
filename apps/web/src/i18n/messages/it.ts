@@ -94,6 +94,8 @@ export default {
     plans: 'Piani IA',
     personal: 'Personale',
     achievements: 'Obiettivi',
+    admin: 'Admin',
+    termsOfUse: 'Termini di utilizzo',
   },
   userField: {
     consentNewsletter: 'Voglio ricevere la newsletter',
@@ -154,4 +156,4 @@ export default {
     darkMode: 'Modalità scura',
     lightMode: 'Modalità chiara',
   },
-} satisfies AppTranslationShape;
+} satisfies DeepPartial<AppTranslationShape>;

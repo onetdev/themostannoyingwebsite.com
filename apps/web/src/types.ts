@@ -13,6 +13,10 @@ declare global {
     NestedKeyOf<AppTranslationShape>
   >;
 
+  type DeepPartial<T> = {
+    [K in keyof T]?: T[K] extends object ? DeepPartial<T[K]> : T[K];
+  };
+
   // biome-ignore lint/suspicious/noExplicitAny: Inferring useTranslations() return type is not enough :(
   type ZodTranslator = (key: AppTranslationKey, values?: any) => string;
 

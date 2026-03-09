@@ -94,6 +94,8 @@ export default {
     plans: 'AI plans',
     personal: 'Personal',
     achievements: 'Achievements',
+    admin: 'Admin',
+    termsOfUse: 'Terms of Use',
   },
   userField: {
     consentNewsletter: 'I want to receive newsletter',

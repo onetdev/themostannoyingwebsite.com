@@ -89,4 +89,9 @@ export default {
     description:
       'Bezpieczny dostęp terminalowy do interfejsu administracyjnego systemu.',
   },
+  termsOfUse: {
+    title: 'Regulamin',
+    description:
+      'Regulamin The Most Annoying Website wyjaśniający, że wszystkie funkcje, konta, komentarze i interakcje są fikcyjne i istnieją wyłącznie w celach parodii i rozrywki.',
+  },
 };

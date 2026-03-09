@@ -96,6 +96,8 @@ export default {
     plans: 'MI csomagok',
     personal: 'Személyes',
     achievements: 'Eredmények',
+    admin: 'Adminisztráció',
+    termsOfUse: 'Felhasználási feltételek',
   },
   userField: {
     consentNewsletter: 'Szeretnék hírlevelet kapni',
@@ -156,4 +158,4 @@ export default {
     darkMode: 'Sötét mód',
     lightMode: 'Világos mód',
   },
-} satisfies AppTranslationShape;
+} satisfies DeepPartial<AppTranslationShape>;

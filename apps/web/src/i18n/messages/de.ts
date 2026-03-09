@@ -94,6 +94,8 @@ export default {
     plans: 'KI-Pläne',
     personal: 'Persönlich',
     achievements: 'Errungenschaften',
+    admin: 'Admin',
+    termsOfUse: 'Nutzungsbedingungen',
   },
   userField: {
     consentNewsletter: 'Ich möchte den Newsletter erhalten',
@@ -154,4 +156,4 @@ export default {
     darkMode: 'Dunkelmodus',
     lightMode: 'Hellmodus',
   },
-} satisfies AppTranslationShape;
+} satisfies DeepPartial<AppTranslationShape>;

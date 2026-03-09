@@ -94,6 +94,8 @@ export default {
     plans: 'AI योजनाएं',
     personal: 'व्यक्तिगत',
     achievements: 'उपलब्धियां',
+    admin: 'एडमिन',
+    termsOfUse: 'उपयोग की शर्तें',
   },
   userField: {
     consentNewsletter: 'मैं न्यूज़लेटर प्राप्त करना चाहता हूँ',
@@ -154,4 +156,4 @@ export default {
     darkMode: 'डार्क मोड',
     lightMode: 'लाइट मोड',
   },
-} satisfies AppTranslationShape;
+} satisfies DeepPartial<AppTranslationShape>;

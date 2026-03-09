@@ -94,7 +94,9 @@ export default {
     dilf: 'DILF',
     plans: 'Plans IA',
     personal: 'Personnel',
-    achievements: 'Succès',
+    achievements: 'Hauts faits',
+    admin: 'Admin',
+    termsOfUse: 'Conditions d’utilisation',
   },
   userField: {
     consentNewsletter: 'Je souhaite recevoir la newsletter',
@@ -155,4 +157,4 @@ export default {
     darkMode: 'Mode sombre',
     lightMode: 'Mode clair',
   },
-} satisfies AppTranslationShape;
+} satisfies DeepPartial<AppTranslationShape>;

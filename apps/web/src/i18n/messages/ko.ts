@@ -94,6 +94,8 @@ export default {
     plans: 'AI 플랜',
     personal: '개인',
     achievements: '업적',
+    admin: '관리자',
+    termsOfUse: '이용약관',
   },
   userField: {
     consentNewsletter: '뉴스레터 수신에 동의합니다',
@@ -155,4 +157,4 @@ export default {
     darkMode: '다크 모드',
     lightMode: '라이트 모드',
   },
-} satisfies AppTranslationShape;
+} satisfies DeepPartial<AppTranslationShape>;

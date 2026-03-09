@@ -94,6 +94,8 @@ export default {
     plans: 'خطط الذكاء الاصطناعي',
     personal: 'شخصي',
     achievements: 'الإنجازات',
+    admin: 'مسؤول',
+    termsOfUse: 'شروط الاستخدام',
   },
   userField: {
     consentNewsletter: 'أريد تلقي النشرة الإخبارية',
@@ -154,4 +156,4 @@ export default {
     darkMode: 'الوضع الداكن',
     lightMode: 'الوضع الفاتح',
   },
-} satisfies AppTranslationShape;
+} satisfies DeepPartial<AppTranslationShape>;

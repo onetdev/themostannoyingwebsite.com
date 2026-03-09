@@ -88,4 +88,9 @@ export default {
     title: 'Admin Terminali',
     description: 'Sistem yönetimi arayüzüne güvenli terminal erişimi.',
   },
+  termsOfUse: {
+    title: 'Kullanım Koşulları',
+    description:
+      'En Sinir Bozucu Web Sitesi için tüm özelliklerin, hesapların, yorumların ve etkileşimlerin kurgusal olduğunu ve yalnızca parodi ve eğlence amaçlı var olduğunu açıklayan Kullanım Koşulları.',
+  },
 };

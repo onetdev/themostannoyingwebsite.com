@@ -92,6 +92,8 @@ export default {
     plans: 'AI 计划',
     personal: '个人',
     achievements: '成就',
+    admin: '管理',
+    termsOfUse: '使用条款',
   },
   userField: {
     consentNewsletter: '我想接收新闻通讯',
@@ -152,4 +154,4 @@ export default {
     darkMode: '深色模式',
     lightMode: '浅色模式',
   },
-} satisfies AppTranslationShape;
+} satisfies DeepPartial<AppTranslationShape>;

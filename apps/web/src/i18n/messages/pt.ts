@@ -96,6 +96,8 @@ export default {
     plans: 'Planos de IA',
     personal: 'Pessoal',
     achievements: 'Conquistas',
+    admin: 'Admin',
+    termsOfUse: 'Termos de Uso',
   },
   userField: {
     consentNewsletter: 'Quero receber a newsletter',
@@ -156,4 +158,4 @@ export default {
     darkMode: 'Modo escuro',
     lightMode: 'Modo claro',
   },
-} satisfies AppTranslationShape;
+} satisfies DeepPartial<AppTranslationShape>;

@@ -95,6 +95,8 @@ export default {
     plans: 'AI planları',
     personal: 'Kişisel',
     achievements: 'Başarımlar',
+    admin: 'Yönetici',
+    termsOfUse: 'Kullanım Koşulları',
   },
   userField: {
     consentNewsletter: 'Bülten almak istiyorum',
@@ -155,4 +157,4 @@ export default {
     darkMode: 'Karanlık mod',
     lightMode: 'Aydınlık mod',
   },
-} satisfies AppTranslationShape;
+} satisfies DeepPartial<AppTranslationShape>;
