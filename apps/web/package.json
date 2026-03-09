@@ -39,6 +39,7 @@
     "classnames": "^2.5.1",
     "color": "^5.0.3",
     "countries-and-timezones": "^3.8.0",
+    "deepmerge-ts": "^7.1.5",
     "emittery": "^2.0.0",
     "framer-motion": "^12.35.1",
     "html-react-parser": "^5.2.17",

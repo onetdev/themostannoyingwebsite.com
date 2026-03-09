@@ -7,7 +7,7 @@ import { AuthService } from '@/features/auth/services';
 import { DI as DIAuth } from '@/features/auth/types';
 import { CommentService } from '@/features/comments/services';
 import { DI as DIComments } from '@/features/comments/types';
-import { AppArticleService } from '@/features/content/services';
+import { ArticleService } from '@/features/content/services';
 import { DI as DIContent } from '@/features/content/types';
 import { DonationService } from '@/features/funding/services';
 import { DI as DIDonation } from '@/features/funding/types';
@@ -18,8 +18,8 @@ import { AppService } from '@/services';
 
 export const Symbols = {
   ...CoreSymbols,
-  ...DIAuth,
   ...DIAchievements,
+  ...DIAuth,
   ...DIComments,
   ...DIContent,
   ...DIDonation,
@@ -51,8 +51,5 @@ export function configureContainer(container: Container) {
     .to(DonationService)
     .inSingletonScope();
   container.bind(Symbols.CommentService).to(CommentService).inSingletonScope();
-  container
-    .bind(Symbols.AppArticleService)
-    .to(AppArticleService)
-    .inSingletonScope();
+  container.bind(Symbols.ArticleService).to(ArticleService).inSingletonScope();
 }

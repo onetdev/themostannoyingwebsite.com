@@ -6,6 +6,6 @@ export const ArticleLookupQuerySchema = z.object({
   locale: z.string().optional(),
   slug: z.string().optional(),
   includeFuture: z.boolean().optional(),
-})
+});
 
-export type ArticleLookupQuery = z.infer<typeof ArticleLookupQuerySchema>
+export type ArticleLookupQuery = z.infer<typeof ArticleLookupQuerySchema>;

@@ -1,6 +1,6 @@
-import z from "zod";
-import { ArticleLookupQuerySchema } from "./article-lookup-query-schema";
-import { ArticleSortSchema } from "./article-sort-schema";
+import z from 'zod';
+import { ArticleLookupQuerySchema } from './article-lookup-query-schema';
+import { ArticleSortSchema } from './article-sort-schema';
 
 export const ArticleQuerySchema = z.object({
   params: ArticleLookupQuerySchema,

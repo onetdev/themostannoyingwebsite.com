@@ -5,5 +5,5 @@ import { type ArticleService, DI } from '../types';
 
 export const useAppArticleService = (): ArticleService => {
   const { container } = useDiContext();
-  return container.get<ArticleService>(DI.AppArticleService);
+  return container.get<ArticleService>(DI.ArticleService);
 };

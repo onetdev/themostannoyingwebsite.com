@@ -1,3 +1,5 @@
+import type { ArticleLookupQuery } from './schemas/article-lookup-query-schema';
+
 export type PagedList<T> = {
   items: T[];
   total: number;
@@ -26,30 +28,7 @@ export interface ArticleDatum {
 export type ArticleData = PagedList<ArticleDatum>;
 
 export interface ArticleSearchResult {
-  lookup: ArticleLookupFilter;
+  lookup: ArticleLookupQuery;
   title: string;
   contextHighlight: string;
-}
-
-export interface ArticleLookupFilter {
-  id?: string;
-  isOnCover?: boolean;
-  locale?: string;
-  slug?: string;
-  includeFuture?: boolean;
-}
-
-export interface ArticleSort {
-  date?: 'asc' | 'desc';
-  title?: 'asc' | 'desc';
-}
-
-export interface ArticleFilter {
-  params: ArticleLookupFilter;
-  sort?: ArticleSort;
-  paginate?: { take?: number; skip?: number };
-}
-
-export interface ArticleSearchFilter extends Omit<ArticleFilter, 'sort'> {
-  query: string;
 }

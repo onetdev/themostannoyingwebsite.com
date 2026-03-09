@@ -1,12 +1,12 @@
-import { ArticleService as ArticleServiceBase } from '@maw/content-api';
+import { ArticleApiService } from '@maw/content-api';
 import { type Container, injectable } from 'inversify';
 
-import { DI, type ArticleService as IArticleService } from '../types';
+import { DI, type ArticleApiService as IArticleApiService } from '../types';
 
 @injectable()
-export class AppArticleService
-  extends ArticleServiceBase
-  implements IArticleService
+export class ArticleService
+  extends ArticleApiService
+  implements IArticleApiService
 {
   constructor() {
     super({
@@ -17,5 +17,5 @@ export class AppArticleService
 }
 
 export function getAppArticleService(container: Container) {
-  return container.get<IArticleService>(DI.AppArticleService);
+  return container.get<IArticleApiService>(DI.ArticleService);
 }

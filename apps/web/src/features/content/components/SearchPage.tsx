@@ -67,8 +67,10 @@ export function SearchPage() {
     const delayTime = enabled ? randomNumber(0.001, 5) : 0;
     const timer = setTimeout(async () => {
       const matches = await appArticleService.search({
-        params: { locale },
-        query,
+        params: {
+          query,
+          locale,
+        },
       });
 
       const time = (Date.now() - startTime) / 1000 + delayTime;
