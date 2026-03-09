@@ -3,6 +3,7 @@ import { injectable } from 'inversify';
 import poolAr from '@/features/comments/i18n/generator/ar';
 import poolDe from '@/features/comments/i18n/generator/de';
 import poolEn from '@/features/comments/i18n/generator/en';
+import poolEs from '@/features/comments/i18n/generator/es';
 import poolFr from '@/features/comments/i18n/generator/fr';
 import poolHi from '@/features/comments/i18n/generator/hi';
 import poolHu from '@/features/comments/i18n/generator/hu';
@@ -26,6 +27,7 @@ const pools: Record<AppLocale, typeof poolEn> = {
   ar: poolAr,
   de: poolDe,
   en: poolEn,
+  es: poolEs,
   fr: poolFr,
   hi: poolHi,
   hu: poolHu,

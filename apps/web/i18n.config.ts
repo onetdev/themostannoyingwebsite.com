@@ -4,6 +4,7 @@ const config = {
     'ar',
     'de',
     'en',
+    'es',
     'fr',
     'hi',
     'hu',
