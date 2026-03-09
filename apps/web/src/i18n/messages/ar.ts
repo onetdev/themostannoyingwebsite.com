@@ -100,6 +100,7 @@ export default {
   userField: {
     consentNewsletter: 'أريد تلقي النشرة الإخبارية',
     consentPrivacyPolicy: 'أوافق على سياسة الخصوصية',
+    consentTermsOfUse: 'أوافق على شروط الاستخدام',
     consentChildSoul: 'روح طفلي البكر',
     countryCode: 'البلد',
     dateOfBirth: 'تاريخ الميلاد',

@@ -100,6 +100,7 @@ export default {
   userField: {
     consentNewsletter: 'मैं न्यूज़लेटर प्राप्त करना चाहता हूँ',
     consentPrivacyPolicy: 'गोपनीयता नीति स्वीकार करें',
+    consentTermsOfUse: 'उपयोग की शर्तें स्वीकार करें',
     consentChildSoul: 'मेरे पहले बच्चे की आत्मा',
     countryCode: 'देश',
     dateOfBirth: 'जन्म तिथि',

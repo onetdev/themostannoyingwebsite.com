@@ -101,6 +101,7 @@ export default {
   userField: {
     consentNewsletter: 'ニュースレターを受け取る（後悔しますよ）',
     consentPrivacyPolicy: 'プライバシーポリシーに同意する',
+    consentTermsOfUse: '利用規約に同意する',
     consentChildSoul: '第一子の魂を捧げる',
     countryCode: '国',
     dateOfBirth: '生年月日',

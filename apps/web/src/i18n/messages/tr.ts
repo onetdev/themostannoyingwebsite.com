@@ -101,6 +101,7 @@ export default {
   userField: {
     consentNewsletter: 'Bülten almak istiyorum',
     consentPrivacyPolicy: 'Gizlilik politikasını kabul ediyorum',
+    consentTermsOfUse: 'Kullanım koşullarını kabul ediyorum',
     consentChildSoul: 'İlk doğan çocuğumun ruhu',
     countryCode: 'Ülke',
     dateOfBirth: 'Doğum tarihi',

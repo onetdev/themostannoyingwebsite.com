@@ -102,6 +102,7 @@ export default {
   userField: {
     consentNewsletter: 'Szeretnék hírlevelet kapni',
     consentPrivacyPolicy: 'Elfogadom az adatvédelmi irányelveket',
+    consentTermsOfUse: 'Elfogadom a felhasználási feltételeket',
     consentChildSoul: 'Az elsőszülött gyermekem lelke',
     countryCode: 'Ország',
     dateOfBirth: 'Születési dátum',

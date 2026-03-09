@@ -102,6 +102,7 @@ export default {
   userField: {
     consentNewsletter: 'Quero receber a newsletter',
     consentPrivacyPolicy: 'Aceito a política de privacidade',
+    consentTermsOfUse: 'Aceito os termos de uso',
     consentChildSoul: 'A alma do meu primeiro filho',
     countryCode: 'País',
     dateOfBirth: 'Data de nascimento',

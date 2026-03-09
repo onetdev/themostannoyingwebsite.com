@@ -24,6 +24,7 @@ export const signupFormDefaultValues: SignupFormData = {
   nickname: '',
   consentNewsletter: false,
   consentPrivacyPolicy: false,
+  consentTermsOfUse: false,
   consentChildSoul: false,
   countryCode: '',
   phoneNumberCountry: undefined,
@@ -50,6 +51,7 @@ export function useSignupForm({ onSuccess }: SignupFormProps) {
         ...data,
         consentNewsletter: Boolean(data.consentNewsletter),
         consentPrivacyPolicy: Boolean(data.consentPrivacyPolicy),
+        consentTermsOfUse: Boolean(data.consentTermsOfUse),
       };
 
       const result = await authService.register(registerData);

@@ -101,6 +101,7 @@ export default {
   userField: {
     consentNewsletter: 'Я хочу получать рассылку',
     consentPrivacyPolicy: 'Принимаю политику конфиденциальности',
+    consentTermsOfUse: 'Принимаю условия использования',
     consentChildSoul: 'Душа моего первенца',
     countryCode: 'Страна',
     dateOfBirth: 'Дата рождения',

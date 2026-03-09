@@ -98,6 +98,7 @@ export default {
   userField: {
     consentNewsletter: '我想接收新闻通讯',
     consentPrivacyPolicy: '接受隐私政策',
+    consentTermsOfUse: '接受使用条款',
     consentChildSoul: '我第一个孩子的灵魂',
     countryCode: '国家',
     dateOfBirth: '出生日期',

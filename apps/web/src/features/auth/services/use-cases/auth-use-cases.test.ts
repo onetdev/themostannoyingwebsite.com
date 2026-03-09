@@ -46,6 +46,7 @@ describe('Auth Use Cases', () => {
         countryCode: 'US',
         consentPrivacyPolicy: true,
         consentNewsletter: true,
+        consentTermsOfUse: true,
       };
       await register(mockRepo, data);
       expect(mockRepo.createUser).toHaveBeenCalledWith(data);

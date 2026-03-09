@@ -11,6 +11,7 @@ export const UserSchema = z.object({
   username: z.string().min(8),
   consentNewsletter: z.boolean(),
   consentPrivacyPolicy: z.boolean(),
+  consentTermsOfUse: z.boolean(),
   gender: GenderSchema.optional(),
   dateOfBirth: z.date().optional(),
   countryCode: z.string(),

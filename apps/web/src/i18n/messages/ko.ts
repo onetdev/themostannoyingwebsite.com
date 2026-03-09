@@ -100,6 +100,7 @@ export default {
   userField: {
     consentNewsletter: '뉴스레터 수신에 동의합니다',
     consentPrivacyPolicy: '개인정보 처리방침에 동의합니다',
+    consentTermsOfUse: '이용약관에 동의합니다',
     consentChildSoul: '첫째 아이의 영혼을 바칩니다',
     countryCode: '국가',
     dateOfBirth: '생년월일',
