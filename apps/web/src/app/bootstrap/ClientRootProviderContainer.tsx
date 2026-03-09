@@ -1,8 +1,9 @@
 'use client';
 
 import { Toaster, TooltipProvider } from '@maw/ui-lib';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { ThemeProvider } from 'next-themes';
-import type { PropsWithChildren } from 'react';
+import { type PropsWithChildren, useState } from 'react';
 import { AppConfigProvider } from '@/core/config/react-app-config';
 import { getDependencyContainer } from '@/core/di';
 import { DiContextProvider } from '@/core/di/react-di';
@@ -20,20 +21,23 @@ export function ClientRootProviderContainer({
   children,
 }: ClientRootProviderContainerProps) {
   const DiContainer = getDependencyContainer();
+  const [queryClient] = useState(() => new QueryClient());
 
   return (
     <AppConfigProvider config={appConfig}>
-      <TooltipProvider>
-        <DiContextProvider value={{ container: DiContainer }}>
-          <ThemeProvider defaultTheme="dark" enableColorScheme enableSystem>
-            <ClientNavigationConfigurator>
-              <Toaster />
-              <AchievementManager />
-              <ClientPainContainer>{children}</ClientPainContainer>
-            </ClientNavigationConfigurator>
-          </ThemeProvider>
-        </DiContextProvider>
-      </TooltipProvider>
+      <QueryClientProvider client={queryClient}>
+        <TooltipProvider>
+          <DiContextProvider value={{ container: DiContainer }}>
+            <ThemeProvider defaultTheme="dark" enableColorScheme enableSystem>
+              <ClientNavigationConfigurator>
+                <Toaster />
+                <AchievementManager />
+                <ClientPainContainer>{children}</ClientPainContainer>
+              </ClientNavigationConfigurator>
+            </ThemeProvider>
+          </DiContextProvider>
+        </TooltipProvider>
+      </QueryClientProvider>
     </AppConfigProvider>
   );
 }

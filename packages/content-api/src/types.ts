@@ -1,5 +1,7 @@
 import type { ArticleLookupQuery } from './schemas/article-lookup-query-schema';
 
+export type { ArticleSearchQuery } from './schemas';
+
 export type PagedList<T> = {
   items: T[];
   total: number;

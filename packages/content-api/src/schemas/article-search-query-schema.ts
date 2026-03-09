@@ -2,7 +2,7 @@ import { z } from 'zod';
 import { ArticleLookupQuerySchema } from './article-lookup-query-schema';
 import { ArticleQuerySchema } from './article-query-schema';
 
-export const ArticleSearchQeurySchema = z.object({
+export const ArticleSearchQuerySchema = z.object({
   ...ArticleQuerySchema.shape,
   params: z.object({
     ...ArticleLookupQuerySchema.shape,
@@ -10,4 +10,4 @@ export const ArticleSearchQeurySchema = z.object({
   }),
 });
 
-export type ArticleSearchQuery = z.infer<typeof ArticleSearchQeurySchema>;
+export type ArticleSearchQuery = z.infer<typeof ArticleSearchQuerySchema>;

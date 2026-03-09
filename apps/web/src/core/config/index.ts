@@ -62,6 +62,9 @@ const config: AppConfig = {
         },
       },
     },
+    api: {
+      searchEndpoint: '/api/articles/search/',
+    },
   },
   funding: {
     assets: {
