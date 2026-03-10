@@ -4,6 +4,7 @@ import { fileURLToPath } from 'node:url';
 import { getLogger } from '@maw/logger';
 
 const logger = getLogger().getSubLogger({
+  prettyLogTemplate: '{{dateIsoStr}} {{logLevelName}} ',
   name: 'compare-translations',
 });
 
