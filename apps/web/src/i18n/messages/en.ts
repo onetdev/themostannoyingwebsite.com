@@ -96,6 +96,7 @@ export default {
     achievements: 'Achievements',
     admin: 'Admin',
     termsOfUse: 'Terms of Use',
+    onlySpams: 'OnlySpams™',
   },
   userField: {
     consentNewsletter: 'I want to receive newsletter',

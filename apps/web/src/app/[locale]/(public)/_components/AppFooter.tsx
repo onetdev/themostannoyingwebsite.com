@@ -14,7 +14,9 @@ export async function AppFooter({ className }: AppFooterProps) {
   const t = await getTranslations();
   const config = getAppConfigService().getAll();
 
-  const links = FOOTER_NAVIGATION_LINKS.map((link) => ({
+  const links = FOOTER_NAVIGATION_LINKS.sort((a, b) =>
+    a.path.localeCompare(b.path),
+  ).map((link) => ({
     href: link.path,
     label: t(link.labelKey),
   }));

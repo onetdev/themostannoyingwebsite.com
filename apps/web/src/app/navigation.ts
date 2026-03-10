@@ -12,6 +12,7 @@ export const ActiveNavigationItems = [
   'home',
   'hot-things',
   'login',
+  'only-spams',
   'plans',
   'privacy-policy',
   'search',
@@ -31,8 +32,8 @@ export type NavItem = {
 
 export const SITE_NAVIGATION_LINKS: NavItem[] = [
   { key: 'home', labelKey: 'navigation.home', path: '/' },
-  { key: 'hot-things', labelKey: 'navigation.hotThings', path: '/hot-things' },
   { key: 'dilf', labelKey: 'navigation.dilf', path: '/dilf' },
+  { key: 'only-spams', labelKey: 'navigation.onlySpams', path: '/only-spams' },
   { key: 'plans', labelKey: 'navigation.plans', path: '/plans' },
   { key: 'donate', labelKey: 'navigation.donate', path: '/donate' },
   { key: 'about', labelKey: 'navigation.about', path: '/about' },
