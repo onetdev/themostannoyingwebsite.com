@@ -20,6 +20,7 @@ export default {
     resultMeta:
       '"{query}" の検索には {time}ミリ秒かかり、{count}件の結果が見つかりました',
     searching: '検索中',
+    error: '検索に失敗しました。後でもう一度やり直してください',
     peopleAlsoSearched: '他の人はこんな検索もしています:',
     topSearchVariants: {
       variant_001: '魚は喉が乾くの？',

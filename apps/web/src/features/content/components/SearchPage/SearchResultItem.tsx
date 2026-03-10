@@ -2,6 +2,7 @@
 
 import type { ArticleSearchResult } from '@maw/content-api';
 import HTMLReactParser from 'html-react-parser';
+import DOMPurify from 'isomorphic-dompurify';
 import { Link } from '@/i18n/navigation';
 
 export interface SearchResultItemProps {
@@ -17,7 +18,7 @@ export function SearchResultItem({ item }: SearchResultItemProps) {
         </Link>
       </h4>
       <p className="max-w-screen-md">
-        {HTMLReactParser(item.contextHighlight)}
+        {HTMLReactParser(DOMPurify.sanitize(item.contextHighlight))}
       </p>
     </div>
   );

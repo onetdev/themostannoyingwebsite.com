@@ -1,4 +1,4 @@
-import type { PromiseResult } from '@maw/utils/result';
+import type { Result } from '@maw/utils/result';
 import type authEnLocale from './i18n/en';
 
 import type { AuthError, User } from './schemas';
@@ -34,15 +34,17 @@ export type PasswordReminderUseCaseParams = PasswordReminderData & {
 };
 
 export interface AuthRepository {
-  authenticate(data: AuthenticationData): PromiseResult<User, AuthError>;
-  createUser(user: CreateUserData): PromiseResult<User, AuthError>;
-  passwordReminder(data: PasswordReminderData): PromiseResult<void, AuthError>;
+  authenticate(data: AuthenticationData): Promise<Result<User, AuthError>>;
+  createUser(user: CreateUserData): Promise<Result<User, AuthError>>;
+  passwordReminder(
+    data: PasswordReminderData,
+  ): Promise<Result<void, AuthError>>;
 }
 
 export interface AuthService {
-  login(data: LoginUseCaseParams): PromiseResult<User, AuthError>;
+  login(data: LoginUseCaseParams): Promise<Result<User, AuthError>>;
   passwordReminder(
     data: PasswordReminderUseCaseParams,
-  ): PromiseResult<void, AuthError>;
-  register(data: RegisterUseCaseParams): PromiseResult<User, AuthError>;
+  ): Promise<Result<void, AuthError>>;
+  register(data: RegisterUseCaseParams): Promise<Result<User, AuthError>>;
 }

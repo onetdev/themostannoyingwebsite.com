@@ -12,6 +12,8 @@ export function useSearch() {
   const {
     data,
     isLoading,
+    isError,
+    error,
     isFetched: isReady,
   } = useSearchQuery({
     params: {
@@ -44,6 +46,8 @@ export function useSearch() {
     query,
     data,
     isLoading,
+    isError,
+    error,
     isReady,
     onRecommendedClick,
   };

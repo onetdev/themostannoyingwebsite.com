@@ -19,6 +19,7 @@ export default {
     noResults: 'Sonuç bulunamadı',
     resultMeta: '"{query}" araması {time}ms sürdü ve {count} sonuç bulundu',
     searching: 'Aranıyor',
+    error: 'Arama başarısız oldu, lütfen daha sonra tekrar deneyin',
     peopleAlsoSearched: 'İnsanlar şunları da aradı:',
     topSearchVariants: {
       variant_001: 'balıklar susar mı',

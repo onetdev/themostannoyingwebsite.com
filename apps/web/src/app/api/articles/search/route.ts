@@ -2,8 +2,10 @@ import {
   type ArticleSearchQuery,
   ArticleSearchQuerySchema,
 } from '@maw/content-api/schemas';
+import { err, ok } from '@maw/utils/result';
 import { deepmerge } from 'deepmerge-ts';
 import { NextResponse } from 'next/server';
+import z from 'zod';
 import { getDependencyContainer } from '@/core/di';
 import { getArticleService } from '@/features/content/services';
 
@@ -33,7 +35,17 @@ export async function GET(request: Request) {
   });
 
   if (!parsedParams.success) {
-    NextResponse.json(parsedParams.error, { status: 400 });
+    return NextResponse.json(
+      err({
+        message: 'Invalid query parameters',
+        details: {
+          error: z.flattenError(parsedParams.error),
+        },
+      }),
+      {
+        status: 422,
+      },
+    );
   }
 
   const params = deepmerge(
@@ -46,5 +58,5 @@ export async function GET(request: Request) {
 
   const results = await articleService.search(params);
 
-  return NextResponse.json(results);
+  return NextResponse.json(ok(results));
 }

@@ -19,6 +19,7 @@ export default {
     noResults: 'Результатов не найдено',
     resultMeta: 'Поиск "{query}" занял {time}мс и нашел {count} результатов',
     searching: 'Поиск',
+    error: 'Поиск не удался, пожалуйста, попробуйте еще раз позже',
     peopleAlsoSearched: 'Люди также искали:',
     topSearchVariants: {
       variant_001: 'испытывают ли рыбы жажду',

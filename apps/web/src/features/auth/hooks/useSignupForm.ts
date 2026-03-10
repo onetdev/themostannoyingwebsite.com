@@ -55,7 +55,7 @@ export function useSignupForm({ onSuccess }: SignupFormProps) {
       };
 
       const result = await authService.register(registerData);
-      if (result.success && result.data) {
+      if (result.success) {
         onSuccess?.(result.data);
       } else {
         methods.setError('root', {

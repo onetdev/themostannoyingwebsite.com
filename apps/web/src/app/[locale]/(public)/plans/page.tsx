@@ -34,8 +34,8 @@ export default async function Page() {
   return (
     <PageLayout activeItem="plans" role="main">
       <PlansPage
-        plans={plansResult.data ?? []}
-        features={featuresResult.data ?? []}
+        plans={plansResult.success ? plansResult.data : []}
+        features={featuresResult.success ? featuresResult.data : []}
         urgencyConfig={config.subscription.urgency}
         socialProofConfig={config.subscription.socialProof}
       />

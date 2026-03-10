@@ -9,10 +9,10 @@ export const ArticleSearchQuerySchema = z.object({
     query: z
       .string()
       .trim()
-      .min(1)
+      .min(3)
       .max(100)
-      .transform((q) => q.normalize("NFKC"))
-      .transform((q) => q.replace(/\s+/g, " ")),
+      .transform((q) => q.normalize('NFKC'))
+      .transform((q) => q.replace(/\s+/g, ' ')),
   }),
 });
 

@@ -22,6 +22,7 @@ export default {
     resultMeta:
       'البحث عن "{query}" استغرق {time} مللي ثانية ووجد {count} من النتائج',
     searching: 'جاري البحث',
+    error: 'فشل البحث، يرجى المحاولة مرة أخرى لاحقاً',
     peopleAlsoSearched: 'بحث الناس أيضاً عن:',
     topSearchVariants: {
       variant_001: 'هل تعطش الأسماك',

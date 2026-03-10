@@ -1,5 +1,6 @@
 import type { Container } from 'inversify';
 import { CoreSymbols } from '@/core/di/symbols';
+import { HttpClient } from '@/core/http/HttpClient';
 import { AchievementBankService } from '@/features/achievements/services';
 import { DI as DIAchievements } from '@/features/achievements/types';
 import { FakeAuthRepository } from '@/features/auth/repositories';
@@ -14,7 +15,7 @@ import { DI as DIDonation } from '@/features/funding/types';
 import { SubscriptionPlansService } from '@/features/subscription/services';
 import { DI as DISubscription } from '@/features/subscription/types';
 import { StaticCountryRepository } from '@/repositories';
-import { AppService } from '@/services';
+import { AppConfigService, AppService } from '@/services';
 
 export const Symbols = {
   ...CoreSymbols,
@@ -28,6 +29,11 @@ export const Symbols = {
 
 export function configureContainer(container: Container) {
   // Bing dependencies
+  container
+    .bind(Symbols.AppConfigService)
+    .to(AppConfigService)
+    .inSingletonScope();
+  container.bind(Symbols.HttpClient).to(HttpClient).inSingletonScope();
   container
     .bind(Symbols.CountryRepository)
     .to(StaticCountryRepository)
