@@ -44,14 +44,26 @@ const config: AppConfig = {
       hotThings: {
         placeholder: '/assets/images/hot-things.webp',
         vtt: {
+          ar: '/assets/vtt/hot-things-ar.vtt',
+          de: '/assets/vtt/hot-things-de.vtt',
           en: '/assets/vtt/hot-things-en.vtt',
           es: '/assets/vtt/hot-things-es.vtt',
+          fr: '/assets/vtt/hot-things-fr.vtt',
+          hi: '/assets/vtt/hot-things-hi.vtt',
+          hu: '/assets/vtt/hot-things-hu.vtt',
           it: '/assets/vtt/hot-things-it.vtt',
+          ja: '/assets/vtt/hot-things-ja.vtt',
           ko: '/assets/vtt/hot-things-ko.vtt',
           pl: '/assets/vtt/hot-things-pl.vtt',
+          pt: '/assets/vtt/hot-things-pt.vtt',
+          ru: '/assets/vtt/hot-things-ru.vtt',
           tr: '/assets/vtt/hot-things-tr.vtt',
+          zh: '/assets/vtt/hot-things-zh.vtt',
         },
       },
+    },
+    api: {
+      searchEndpoint: '/api/articles/search/',
     },
   },
   funding: {

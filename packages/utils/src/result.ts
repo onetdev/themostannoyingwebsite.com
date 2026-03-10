@@ -1,51 +1,100 @@
-export interface Result<T1 = unknown, T2 = string> {
-  success: boolean;
-  data?: T1;
-  error?: {
-    message: string;
-    code?: T2;
-    details?: Record<string, unknown>;
-  };
-  metadata?: {
-    timestamp: string;
-    requestId?: string;
+export interface ResultMetadata {
+  timestamp: string;
+  requestId?: string;
+}
+
+export interface ResultError<TCode = string> {
+  message: string;
+  code?: TCode;
+  details?: Record<string, unknown>;
+}
+
+export type Result<TData = unknown, TCode = string> =
+  | {
+      success: true;
+      data: TData;
+      metadata: ResultMetadata;
+    }
+  | {
+      success: false;
+      error: ResultError<TCode>;
+      metadata: ResultMetadata;
+    };
+
+export type ResultOk<TData = unknown, TError = string> = Extract<
+  Result<TData, TError>,
+  { success: true }
+>;
+export type ResultErr<TData = unknown, TError = string> = Extract<
+  Result<TData, TError>,
+  { success: false }
+>;
+
+function createMetadata(metadata?: Partial<ResultMetadata>): ResultMetadata {
+  return {
+    timestamp: new Date().toISOString(),
+    ...metadata,
   };
 }
 
-export interface PromiseResult<T1 = unknown, T2 = string>
-  extends Promise<Result<T1, T2>> {}
+export function ok<TData, TCode = string>(
+  data: TData,
+  metadata?: Partial<ResultMetadata>,
+): Result<TData, TCode> {
+  return {
+    success: true,
+    data,
+    metadata: createMetadata(metadata),
+  };
+}
 
-export const createSuccessResult = <T1, T2 = string>(
-  data: T1,
-  metadata?: Result<T1, T2>['metadata'],
-): Result<T1, T2> => ({
-  success: true,
-  data,
-  metadata: {
-    timestamp: new Date().toISOString(),
-    ...metadata,
+export function err<TData, TCode = string>(
+  params: {
+    message: string;
+    code?: TCode;
+    details?: Record<string, unknown>;
   },
-});
+  metadata?: Partial<ResultMetadata>,
+): Result<TData, TCode> {
+  return {
+    success: false,
+    error: {
+      message: params.message,
+      code: params.code,
+      details: params.details,
+    },
+    metadata: createMetadata(metadata),
+  };
+}
 
-export const createErrorResult = <T1, T2 = string>({
-  message,
-  code,
-  details,
-  metadata,
-}: {
-  message: string;
-  code?: T2;
-  details?: Record<string, unknown>;
-  metadata?: Result<T1, T2>['metadata'];
-}): Result<T1, T2> => ({
-  success: false,
-  error: {
-    message,
-    code,
-    details,
-  },
-  metadata: {
-    timestamp: new Date().toISOString(),
-    ...metadata,
-  },
-});
+/**
+ * Runtime check and type narrow function for unknown objects of Result
+ */
+export function isOk<TData, TError>(
+  result: Result<TData, TError> | unknown,
+): result is ResultOk<TData, TError> {
+  return (
+    typeof result === 'object' &&
+    result !== null &&
+    'success' in result &&
+    result.success === true &&
+    'data' in result &&
+    'metadata' in result
+  );
+}
+
+/**
+ * Runtime check and type narrow function for unknown objects of Result
+ */
+export function isErr<TData, TError>(
+  result: Result<TData, TError> | unknown,
+): result is ResultErr<TData, TError> {
+  return (
+    typeof result === 'object' &&
+    result !== null &&
+    'success' in result &&
+    result.success === false &&
+    'error' in result &&
+    'metadata' in result
+  );
+}

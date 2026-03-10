@@ -20,6 +20,7 @@ export default {
     resultMeta:
       'A pesquisa por "{query}" demorou {time}ms e encontrou {count} resultados',
     searching: 'A pesquisar',
+    error: 'A pesquisa falhou, por favor tente novamente mais tarde',
     peopleAlsoSearched: 'As pessoas também pesquisaram por:',
     topSearchVariants: {
       variant_001: 'os peixes têm sede',

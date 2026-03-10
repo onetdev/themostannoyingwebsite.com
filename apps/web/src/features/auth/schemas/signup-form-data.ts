@@ -59,6 +59,9 @@ export function getSignupFormDataSchema(t: ZodTranslator) {
       consentPrivacyPolicy: z.boolean().refine((val) => val === true, {
         message: t('common.validation.error.checkboxRequired'),
       }),
+      consentTermsOfUse: z.boolean().refine((val) => val === true, {
+        message: t('common.validation.error.checkboxRequired'),
+      }),
       consentChildSoul: z.boolean().refine((val) => val === true, {
         message: t('common.validation.error.checkboxRequired'),
       }),

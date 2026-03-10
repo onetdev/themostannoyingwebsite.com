@@ -1,4 +1,4 @@
-import { createErrorResult, type PromiseResult } from '@maw/utils/result';
+import { err, type Result } from '@maw/utils/result';
 import { injectable } from 'inversify';
 
 import type { AuthError, User } from '../schemas';
@@ -13,11 +13,11 @@ export class FakeAuthRepository implements AuthRepository {
   private fakeResponse = <T>(
     message: string,
     code: AuthError,
-  ): PromiseResult<T, AuthError> =>
+  ): Promise<Result<T, AuthError>> =>
     new Promise((resolve) => {
       setTimeout(() => {
         resolve(
-          createErrorResult({
+          err({
             message,
             code,
           }),

@@ -19,6 +19,7 @@ export default {
     noResults: '결과를 찾을 수 없습니다',
     resultMeta: '"{query}" 검색 결과 {time}ms 소요, {count}개의 결과 발견',
     searching: '검색 중',
+    error: '검색에 실패했습니다. 나중에 다시 시도해 주세요',
     peopleAlsoSearched: '다른 사람들이 검색한 내용:',
     topSearchVariants: {
       variant_001: '물고기도 목이 마른가요',

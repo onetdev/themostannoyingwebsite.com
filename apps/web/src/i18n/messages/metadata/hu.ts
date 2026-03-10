@@ -89,4 +89,9 @@ export default {
     description:
       'Biztonságos terminál hozzáférés a rendszeradminisztrációs felülethez.',
   },
+  termsOfUse: {
+    title: 'Felhasználási feltételek',
+    description:
+      'A The Most Annoying Website felhasználási feltételei, amelyek elmagyarázzák, hogy minden funkció, fiók, hozzászólás és interakció fiktív, és kizárólag paródia és szórakoztató célokat szolgál.',
+  },
 };

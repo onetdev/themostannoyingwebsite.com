@@ -19,6 +19,7 @@ export default {
     noResults: 'कोई परिणाम नहीं मिला',
     resultMeta: '"{query}" की खोज में {time}ms लगे और {count} परिणाम मिले',
     searching: 'खोज रहे हैं',
+    error: 'खोज विफल रही, कृपया बाद में पुन: प्रयास करें',
     peopleAlsoSearched: 'लोगों ने यह भी खोजा:',
     topSearchVariants: {
       variant_001: 'क्या मछलियों को प्यास लगती है',

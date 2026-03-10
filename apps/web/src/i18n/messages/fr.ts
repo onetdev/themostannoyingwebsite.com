@@ -46,7 +46,7 @@ export default {
       "La confidentialité d'abord : nous ne conservons pas les entrées de formulaires sensibles ou les identifiants des utilisateurs.",
     noWarranties:
       'Fourni "en l\'état" sans garantie. Nous ne sommes pas responsables de votre temps perdu ou de votre frustration.',
-    privacyPolicyDisclaimer:
+    translationDisclaimer:
       'Ce document est une traduction de la version officielle en anglais. En cas de divergence, la version anglaise prévaudra. Vous pouvez trouver la version officielle <linkTag>ici</linkTag>.',
     cookieConsent:
       "Ce site utilise des cookies pour vous garantir la meilleure expérience possible. C'est aussi une blague, donc beaucoup de fonctionnalités sont buggées ou ne fonctionnent pas exprès. Vous pouvez personnaliser votre expérience et vos paramètres de cookies dans le menu des paramètres.",
@@ -94,11 +94,14 @@ export default {
     dilf: 'DILF',
     plans: 'Plans IA',
     personal: 'Personnel',
-    achievements: 'Succès',
+    achievements: 'Hauts faits',
+    admin: 'Admin',
+    termsOfUse: 'Conditions d’utilisation',
   },
   userField: {
     consentNewsletter: 'Je souhaite recevoir la newsletter',
     consentPrivacyPolicy: 'Accepter la politique de confidentialité',
+    consentTermsOfUse: 'Accepter les conditions d’utilisation',
     consentChildSoul: "L'âme de mon premier-né",
     countryCode: 'Pays',
     dateOfBirth: 'Date de naissance',
@@ -149,27 +152,10 @@ export default {
   },
   language: {
     label: 'Langue',
-    option: {
-      ar: 'Arabe',
-      de: 'Allemand',
-      en: 'Anglais',
-      es: 'Espagnol',
-      fr: 'Français',
-      hi: 'Hindi',
-      hu: 'Hongrois',
-      it: 'Italien',
-      ja: 'Japonais',
-      ko: 'Coréen',
-      pl: 'Polonais',
-      pt: 'Portugais',
-      ru: 'Russe',
-      tr: 'Turc',
-      zh: 'Chinois',
-    },
   },
   themeSwitch: {
     label: 'Changer de thème',
     darkMode: 'Mode sombre',
     lightMode: 'Mode clair',
   },
-};
+} satisfies DeepPartial<AppTranslationShape>;

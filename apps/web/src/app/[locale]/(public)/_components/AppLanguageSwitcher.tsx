@@ -8,7 +8,7 @@ import {
   SelectValue,
 } from '@maw/ui-lib';
 import { clsx } from '@maw/ui-lib/utils';
-import { useLocale, useTranslations } from 'next-intl';
+import { useLocale } from 'next-intl';
 import { useLanguageSwitcher } from '@/hooks';
 
 interface AppLanguageSwitcherProps {
@@ -22,7 +22,6 @@ export function AppLanguageSwitcher({
 }: AppLanguageSwitcherProps) {
   const { onLanguageChange, languages, currentLanguage } =
     useLanguageSwitcher();
-  const t = useTranslations();
   const locale = useLocale();
 
   return (
@@ -32,14 +31,14 @@ export function AppLanguageSwitcher({
           {currentLanguage?.flag}{' '}
           {currentLanguage !== undefined &&
             !displayOnlyFlag &&
-            t(currentLanguage?.labelKey)}
+            currentLanguage?.label}
         </SelectValue>
       </SelectTrigger>
       <SelectContent align="end">
         {languages.map((lang) => (
           <SelectItem key={lang.locale} value={lang.locale}>
             <span className="mr-2">{lang.flag}</span>
-            {t(lang.labelKey)}
+            {lang.label}
           </SelectItem>
         ))}
       </SelectContent>

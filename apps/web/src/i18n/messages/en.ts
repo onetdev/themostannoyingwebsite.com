@@ -46,7 +46,7 @@ export default {
       'Privacy First: We do not persist sensitive form inputs or user credentials.',
     noWarranties:
       'Provided "as is" without warranty. We are not responsible for your lost time or frustration.',
-    privacyPolicyDisclaimer:
+    translationDisclaimer:
       'This document is a translation of the official English version. In case of any discrepancy, the English version shall prevail. You can find the official version <linkTag>here</linkTag>.',
     cookieConsent:
       "This website uses cookies to ensure you get the best experience on our website. It's also a joke so many of the features are buggy or doens't even work on purpose. You can customize your experience and cookie settings in the settings menu.",
@@ -94,10 +94,13 @@ export default {
     plans: 'AI plans',
     personal: 'Personal',
     achievements: 'Achievements',
+    admin: 'Admin',
+    termsOfUse: 'Terms of Use',
   },
   userField: {
     consentNewsletter: 'I want to receive newsletter',
     consentPrivacyPolicy: 'Accept privacy policy',
+    consentTermsOfUse: 'Accept Terms of Use',
     consentChildSoul: "My first born child's soul",
     countryCode: 'Country',
     dateOfBirth: 'Date of birth',
@@ -148,23 +151,6 @@ export default {
   },
   language: {
     label: 'Language',
-    option: {
-      ar: 'Arabic',
-      de: 'German',
-      en: 'English',
-      es: 'Spanish',
-      fr: 'French',
-      hi: 'Hindi',
-      hu: 'Hungarian',
-      it: 'Italian',
-      ja: 'Japanese',
-      ko: 'Korean',
-      pl: 'Polish',
-      pt: 'Portuguese',
-      ru: 'Russian',
-      tr: 'Turkish',
-      zh: 'Chinese',
-    },
   },
   themeSwitch: {
     label: 'Switch theme',

@@ -2,6 +2,8 @@ import type { IconAliaseKey } from '@maw/ui-lib';
 
 export const ActiveNavigationItems = [
   'about',
+  'achievements',
+  'admin',
   'article-item',
   'contact',
   'dilf',
@@ -12,10 +14,10 @@ export const ActiveNavigationItems = [
   'login',
   'plans',
   'privacy-policy',
-  'settings',
-  'virgin',
   'search',
-  'achievements',
+  'settings',
+  'terms-of-use',
+  'virgin',
 ] as const;
 export type ActiveNavigationItem = (typeof ActiveNavigationItems)[number];
 
@@ -85,6 +87,11 @@ export const FOOTER_NAVIGATION_LINKS: NavItem[] = [
     key: 'privacy-policy',
     labelKey: 'navigation.privacyPolicy',
     path: '/privacy-policy',
+  },
+  {
+    key: 'terms-of-use',
+    labelKey: 'navigation.termsOfUse',
+    path: '/terms-of-use',
   },
 ];
 

@@ -1,30 +1,31 @@
 import { inject, injectable } from 'inversify';
 import { CoreSymbols } from '@/core/di/symbols';
+import { LANGUAGES_IN_OWN_LANGUAGE } from '@/i18n/selector';
 import type { CountryRepository } from '@/repositories';
 import i18nConfig from '@/root/i18n.config';
 
 export type LanguageInfo = {
   locale: string;
   flag: string;
-  labelKey: AppTranslationKey;
+  label: string;
 };
 
 const LANGUAGE_MAP: Record<string, Omit<LanguageInfo, 'locale'>> = {
-  ar: { flag: '🇸🇦', labelKey: 'language.option.ar' },
-  de: { flag: '🇩🇪', labelKey: 'language.option.de' },
-  en: { flag: '🇺🇸', labelKey: 'language.option.en' },
-  es: { flag: '🇪🇸', labelKey: 'language.option.es' },
-  fr: { flag: '🇫🇷', labelKey: 'language.option.fr' },
-  hi: { flag: '🇮🇳', labelKey: 'language.option.hi' },
-  hu: { flag: '🇭🇺', labelKey: 'language.option.hu' },
-  it: { flag: '🇮🇹', labelKey: 'language.option.it' },
-  ja: { flag: '🇯🇵', labelKey: 'language.option.ja' },
-  ko: { flag: '🇰🇷', labelKey: 'language.option.ko' },
-  pl: { flag: '🇵🇱', labelKey: 'language.option.pl' },
-  pt: { flag: '🇵🇹', labelKey: 'language.option.pt' },
-  ru: { flag: '🇷🇺', labelKey: 'language.option.ru' },
-  tr: { flag: '🇹🇷', labelKey: 'language.option.tr' },
-  zh: { flag: '🇨🇳', labelKey: 'language.option.zh' },
+  ar: { flag: '🇸🇦', label: LANGUAGES_IN_OWN_LANGUAGE.ar },
+  de: { flag: '🇩🇪', label: LANGUAGES_IN_OWN_LANGUAGE.de },
+  en: { flag: '🇺🇸', label: LANGUAGES_IN_OWN_LANGUAGE.en },
+  es: { flag: '🇪🇸', label: LANGUAGES_IN_OWN_LANGUAGE.es },
+  fr: { flag: '🇫🇷', label: LANGUAGES_IN_OWN_LANGUAGE.fr },
+  hi: { flag: '🇮🇳', label: LANGUAGES_IN_OWN_LANGUAGE.hi },
+  hu: { flag: '🇭🇺', label: LANGUAGES_IN_OWN_LANGUAGE.hu },
+  it: { flag: '🇮🇹', label: LANGUAGES_IN_OWN_LANGUAGE.it },
+  ja: { flag: '🇯🇵', label: LANGUAGES_IN_OWN_LANGUAGE.ja },
+  ko: { flag: '🇰🇷', label: LANGUAGES_IN_OWN_LANGUAGE.ko },
+  pl: { flag: '🇵🇱', label: LANGUAGES_IN_OWN_LANGUAGE.pl },
+  pt: { flag: '🇵🇹', label: LANGUAGES_IN_OWN_LANGUAGE.pt },
+  ru: { flag: '🇷🇺', label: LANGUAGES_IN_OWN_LANGUAGE.ru },
+  tr: { flag: '🇹🇷', label: LANGUAGES_IN_OWN_LANGUAGE.tr },
+  zh: { flag: '🇨🇳', label: LANGUAGES_IN_OWN_LANGUAGE.zh },
 };
 
 @injectable()

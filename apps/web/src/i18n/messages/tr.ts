@@ -46,7 +46,7 @@ export default {
       'Önce Gizlilik: Hassas form girişlerini veya kullanıcı kimlik bilgilerini kalıcı olarak saklamıyoruz.',
     noWarranties:
       'Garanti verilmeksizin "olduğu gibi" sunulmaktadır. Kayıp zamanınızdan veya hayal kırıklığınızdan sorumlu değiliz.',
-    privacyPolicyDisclaimer:
+    translationDisclaimer:
       'Bu belge, resmi İngilizce versiyonun bir çevirisidir. Herhangi bir tutarsızlık durumunda İngilizce versiyon geçerli olacaktır. Resmi versiyonu <linkTag>burada</linkTag> bulabilirsiniz.',
     cookieConsent:
       'Bu web sitesi, web sitemizde en iyi deneyimi yaşamanızı sağlamak için çerezleri kullanır. Ayrıca bu bir şakadır, bu yüzden özelliklerin çoğu hatalıdır veya bilerek çalışmaz. Deneyiminizi ve çerez ayarlarınızı ayarlar menüsünden özelleştirebilirsiniz.',
@@ -95,10 +95,13 @@ export default {
     plans: 'AI planları',
     personal: 'Kişisel',
     achievements: 'Başarımlar',
+    admin: 'Yönetici',
+    termsOfUse: 'Kullanım Koşulları',
   },
   userField: {
     consentNewsletter: 'Bülten almak istiyorum',
     consentPrivacyPolicy: 'Gizlilik politikasını kabul ediyorum',
+    consentTermsOfUse: 'Kullanım koşullarını kabul ediyorum',
     consentChildSoul: 'İlk doğan çocuğumun ruhu',
     countryCode: 'Ülke',
     dateOfBirth: 'Doğum tarihi',
@@ -149,27 +152,10 @@ export default {
   },
   language: {
     label: 'Dil',
-    option: {
-      ar: 'Arapça',
-      de: 'Almanca',
-      en: 'İngilizce',
-      es: 'İspanyolca',
-      fr: 'Fransızca',
-      hi: 'Hintçe',
-      hu: 'Macarca',
-      it: 'İtalyanca',
-      ja: 'Japonca',
-      ko: 'Korece',
-      pl: 'Lehçe',
-      pt: 'Portekizce',
-      ru: 'Rusça',
-      tr: 'Türkçe',
-      zh: 'Çince',
-    },
   },
   themeSwitch: {
     label: 'Temayı değiştir',
     darkMode: 'Karanlık mod',
     lightMode: 'Aydınlık mod',
   },
-};
+} satisfies DeepPartial<AppTranslationShape>;

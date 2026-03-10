@@ -85,4 +85,9 @@ export default {
     title: '管理员终端',
     description: '安全访问系统管理界面的终端。',
   },
+  termsOfUse: {
+    title: '使用条款',
+    description:
+      '史上最烦人网站的使用条款，说明所有功能、帐户、评论和交互均为虚构，仅为讽刺和娱乐目的而存在。',
+  },
 };

@@ -89,4 +89,9 @@ export default {
     description:
       'Sicherer Terminal-Zugriff auf die Systemadministrations-Schnittstelle.',
   },
+  termsOfUse: {
+    title: 'Nutzungsbedingungen',
+    description:
+      'Nutzungsbedingungen für Die nervigste Website, die erklären, dass alle Funktionen, Konten, Kommentare und Interaktionen fiktiv sind und ausschließlich zu Parodie- und Unterhaltungszwecken existieren.',
+  },
 };

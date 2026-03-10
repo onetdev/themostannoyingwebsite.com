@@ -1,1 +1,1 @@
-export * from './AppArticleService';
+export * from './ArticleService';

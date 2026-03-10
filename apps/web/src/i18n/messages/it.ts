@@ -46,7 +46,7 @@ export default {
       'Privacy First: non conserviamo input di moduli sensibili o credenziali utente.',
     noWarranties:
       'Fornito "così com\'è" senza garanzia. Non siamo responsabili per il tuo tempo perso o la tua frustrazione.',
-    privacyPolicyDisclaimer:
+    translationDisclaimer:
       'Questo documento è una traduzione della versione ufficiale in inglese. In caso di discrepanza, prevarrà la versione inglese. Puoi trovare la versione ufficiale <linkTag>qui</linkTag>.',
     cookieConsent:
       'Questo sito utilizza i cookie per garantirti la migliore esperienza. È anche uno scherzo, quindi molte funzionalità sono buggate o non funzionano di proposito. Puoi personalizzare la tua esperienza e le impostazioni dei cookie nel menu delle impostazioni.',
@@ -94,10 +94,13 @@ export default {
     plans: 'Piani IA',
     personal: 'Personale',
     achievements: 'Obiettivi',
+    admin: 'Admin',
+    termsOfUse: 'Termini di utilizzo',
   },
   userField: {
     consentNewsletter: 'Voglio ricevere la newsletter',
     consentPrivacyPolicy: "Accetto l'informativa sulla privacy",
+    consentTermsOfUse: 'Accetto i termini di utilizzo',
     consentChildSoul: "L'anima del mio primogenito",
     countryCode: 'Paese',
     dateOfBirth: 'Data di nascita',
@@ -148,27 +151,10 @@ export default {
   },
   language: {
     label: 'Lingua',
-    option: {
-      ar: 'Arabo',
-      de: 'Tedesco',
-      en: 'Inglese',
-      es: 'Spagnolo',
-      fr: 'Francese',
-      hi: 'Hindi',
-      hu: 'Ungherese',
-      it: 'Italiano',
-      ja: 'Giapponese',
-      ko: 'Coreano',
-      pl: 'Polacco',
-      pt: 'Portoghese',
-      ru: 'Russo',
-      tr: 'Turco',
-      zh: 'Cinese',
-    },
   },
   themeSwitch: {
     label: 'Cambia tema',
     darkMode: 'Modalità scura',
     lightMode: 'Modalità chiara',
   },
-};
+} satisfies DeepPartial<AppTranslationShape>;

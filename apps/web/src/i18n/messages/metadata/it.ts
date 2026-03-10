@@ -87,6 +87,11 @@ export default {
   admin: {
     title: 'Terminale Admin',
     description:
-      "Accesso sicuro da terminale all'interfaccia di amministrazione del sistema.",
+      'Accesso protetto al terminale dell’interfaccia di amministrazione del sistema.',
+  },
+  termsOfUse: {
+    title: 'Termini di utilizzo',
+    description:
+      'Termini di utilizzo per The Most Annoying Website, che spiegano che tutte le funzionalità, gli account, i commenti e le interazioni sono fittizi ed esistono esclusivamente a scopo di parodia e intrattenimento.',
   },
 };

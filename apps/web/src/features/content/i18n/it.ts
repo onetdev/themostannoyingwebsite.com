@@ -20,6 +20,7 @@ export default {
     resultMeta:
       'La ricerca per "{query}" ha richiesto {time}ms e ha trovato {count} risultati',
     searching: 'Ricerca in corso',
+    error: 'Ricerca fallita, riprova più tardi',
     peopleAlsoSearched: 'Le persone hanno cercato anche:',
     topSearchVariants: {
       variant_001: 'i pesci hanno sete',

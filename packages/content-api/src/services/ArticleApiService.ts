@@ -1,15 +1,13 @@
 import { fuzzy_search } from '@maw/utils/string';
 
 import articlesRaw from '../../data/index.json';
-import type { ArticleIndexEntry } from '../schemas/article-index-entry';
 import type {
-  ArticleData,
-  ArticleDatum,
-  ArticleFilter,
-  ArticleLookupFilter,
-  ArticleSearchFilter,
-  ArticleSearchResult,
-} from '../types';
+  ArticleIndexEntry,
+  ArticleLookupQuery,
+  ArticleQuery,
+  ArticleSearchQuery,
+} from '../schemas';
+import type { ArticleData, ArticleDatum, ArticleSearchResult } from '../types';
 
 export const defaultPageSize = 10;
 
@@ -25,7 +23,7 @@ type ArticleServiceProps = {
  * It's going to get refactored.
  */
 
-export class ArticleService {
+export class ArticleApiService {
   articles: ArticleDatum[];
 
   constructor({ getAssetUrl, getUrl }: ArticleServiceProps) {
@@ -35,7 +33,7 @@ export class ArticleService {
   }
 
   public async getByLookup(
-    filter: ArticleLookupFilter,
+    filter: ArticleLookupQuery,
   ): Promise<ArticleDatum | undefined> {
     return this.articles.find((article) => isArticleMatching(article, filter));
   }
@@ -48,10 +46,9 @@ export class ArticleService {
   }
 
   public async search({
-    query,
     params,
     paginate,
-  }: ArticleSearchFilter): Promise<ArticleSearchResult[]> {
+  }: ArticleSearchQuery): Promise<ArticleSearchResult[]> {
     const take = paginate?.take ?? defaultPageSize;
     const skip = paginate?.skip || 0;
 
@@ -64,7 +61,7 @@ export class ArticleService {
       .map((article) => {
         const matchResult = fuzzy_search({
           text: article.content,
-          query,
+          query: params?.query,
         });
 
         if (!matchResult) {
@@ -93,7 +90,7 @@ export class ArticleService {
     params,
     sort = { date: 'desc' },
     paginate,
-  }: ArticleFilter): Promise<ArticleData> {
+  }: ArticleQuery): Promise<ArticleData> {
     const take = paginate?.take ?? defaultPageSize;
     const skip = paginate?.skip || 0;
     let results = this.articles.filter((article) =>
@@ -124,7 +121,7 @@ export class ArticleService {
 
   public async getFirst({
     params,
-  }: ArticleFilter): Promise<ArticleDatum | undefined> {
+  }: ArticleQuery): Promise<ArticleDatum | undefined> {
     const results = await this.getMany({
       params,
       paginate: { take: 1, skip: 0 },
@@ -175,7 +172,7 @@ const mapIndexEntryToContent = (
 
 const isArticleMatching = (
   article: ArticleDatum,
-  filter: ArticleLookupFilter,
+  filter: ArticleLookupQuery,
 ) => {
   const isFuture = article.publishedAt > new Date();
   const shouldIncludeFuture = filter.includeFuture ?? false;
