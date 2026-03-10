@@ -31,7 +31,7 @@ export function useLoginForm({ onSuccess }: LoginFormProps) {
       };
 
       const result = await authService.login(loginPayload);
-      if (result.success && result.data) {
+      if (result.success) {
         onSuccess?.(result.data);
       } else {
         methods.setError('root', {

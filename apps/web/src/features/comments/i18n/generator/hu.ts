@@ -81,7 +81,7 @@ export default {
     'Sugar Daddy Misi',
     'Nyeremény Értesítés',
     'Smith Ügynök',
-    'BitCoin Király',
+    'Bitcoin Király',
     'Ajándékkártya Generátor',
     'Társkereső App',
     'Banki Riasztás',

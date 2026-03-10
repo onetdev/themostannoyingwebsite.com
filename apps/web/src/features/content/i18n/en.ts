@@ -19,8 +19,9 @@ export default {
     noResults: 'No results found',
     resultMeta: 'Search for "{query}" took {time}ms and found {count} results',
     searching: 'Searching',
+    error: 'Search failed, please try again later',
     peopleAlsoSearched: 'People also searched for:',
-    topSearcheVariants: {
+    topSearchVariants: {
       variant_001: 'do fish get thirsty',
       variant_002: 'pasta lyrics',
       variant_003: 'do cars run out of honk',
@@ -40,6 +41,5 @@ export default {
     playVideo: 'Play video',
     videoPlaybackFailed: 'Video playback failed',
     pictureOfYou: 'Picture of you',
-    hotThingsVtt: 'English',
   },
 };

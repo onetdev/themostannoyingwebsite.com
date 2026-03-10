@@ -34,6 +34,7 @@ const locales = [
   'tr', // Turkish
 ];
 const sourceRootPath = path.join('./data');
+const articlesRootPath = path.join(sourceRootPath, 'articles');
 // Pattern for folder: {id}-{slug}
 const validArticleDirPattern = /^([0-9]*)-(.*)$/i;
 
@@ -98,7 +99,7 @@ const resolveArticleLocales = async (
     return [];
   }
 
-  const articlePath = path.join(sourceRootPath, entry.name);
+  const articlePath = path.join(articlesRootPath, entry.name);
 
   // 1. Read shared data
   const sharedDataRaw = await fs.readFile(path.join(articlePath, 'data.yml'));
@@ -186,10 +187,10 @@ const resolveArticleLocales = async (
 
 const main = async () => {
   const localeMeta = await getLocaleMeta();
-  const fsEntries = await fs.readdir(sourceRootPath, { withFileTypes: true });
-  const candidates = fsEntries.filter(
-    (entry) => entry.isDirectory() && entry.name !== 'assets',
-  );
+  const fsEntries = await fs.readdir(articlesRootPath, {
+    withFileTypes: true,
+  });
+  const candidates = fsEntries.filter((entry) => entry.isDirectory());
 
   logger.info('🔄 Resolving articles...');
   const resolverQueue = candidates.map((item) =>
@@ -205,4 +206,7 @@ const main = async () => {
 logger.info('🔄 Generating article index...');
 main()
   .then(() => logger.info(`✅ Aaaaand it's done. New index created.\n`))
-  .catch((err) => logger.error(err, `Ooopsie, something went wrong`));
+  .catch((err) => {
+    logger.error(err, `Ooopsie, something went wrong`);
+    process.exit(1);
+  });

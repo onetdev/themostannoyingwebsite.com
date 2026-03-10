@@ -21,8 +21,9 @@ export default {
     noResults: '未找到结果',
     resultMeta: '搜索 “{query}” 耗时 {time}ms，找到 {count} 个结果',
     searching: '搜索中',
+    error: '搜索失败，请稍后再试',
     peopleAlsoSearched: '大家还在搜：',
-    topSearcheVariants: {
+    topSearchVariants: {
       variant_001: '鱼会口渴吗',
       variant_002: '意面歌词',
       variant_003: '汽车的喇叭声会用完吗',
@@ -42,6 +43,5 @@ export default {
     playVideo: '播放视频',
     videoPlaybackFailed: '视频播放失败',
     pictureOfYou: '你的照片',
-    hotThingsVtt: '中文',
   },
 } satisfies ContentI18nShape;

@@ -46,7 +46,7 @@ export default {
       'Adatvédelem mindenekelőtt: Nem tárolunk el érzékeny űrlapadatokat vagy felhasználói hitelesítő adatokat.',
     noWarranties:
       'Úgy adjuk, "ahogy van", garancia nélkül. Nem vállalunk felelősséget az elvesztegetett idődért vagy a frusztrációdért.',
-    privacyPolicyDisclaimer:
+    translationDisclaimer:
       'Ez a dokumentum a hivatalos angol nyelvű változat fordítása. Bármilyen eltérés esetén az angol változat az irányadó. A hivatalos változatot <linkTag>itt találod</linkTag>.',
     cookieConsent:
       'Ez a weboldal sütiket használ, hogy a lehető legjobb élményt nyújtsa. Emellett ez egy vicc is, sok funkció szándékosan hibás vagy nem is működik. A beállítások menüben személyre szabhatod az élményt és a süti beállításokat.',
@@ -96,10 +96,13 @@ export default {
     plans: 'MI csomagok',
     personal: 'Személyes',
     achievements: 'Eredmények',
+    admin: 'Adminisztráció',
+    termsOfUse: 'Felhasználási feltételek',
   },
   userField: {
     consentNewsletter: 'Szeretnék hírlevelet kapni',
     consentPrivacyPolicy: 'Elfogadom az adatvédelmi irányelveket',
+    consentTermsOfUse: 'Elfogadom a felhasználási feltételeket',
     consentChildSoul: 'Az elsőszülött gyermekem lelke',
     countryCode: 'Ország',
     dateOfBirth: 'Születési dátum',
@@ -150,27 +153,10 @@ export default {
   },
   language: {
     label: 'Nyelv',
-    option: {
-      ar: 'Arab',
-      de: 'Német',
-      en: 'Angol',
-      es: 'Spanyol',
-      fr: 'Francia',
-      hi: 'Hindi',
-      hu: 'Magyar',
-      it: 'Olasz',
-      ja: 'Japán',
-      ko: 'Koreai',
-      pl: 'Lengyel',
-      pt: 'Portugál',
-      ru: 'Orosz',
-      tr: 'Török',
-      zh: 'Kínai',
-    },
   },
   themeSwitch: {
     label: 'Téma váltása',
     darkMode: 'Sötét mód',
     lightMode: 'Világos mód',
   },
-} satisfies AppTranslationShape;
+} satisfies DeepPartial<AppTranslationShape>;

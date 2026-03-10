@@ -29,7 +29,7 @@ export function useWheelOfFortune() {
         weight: 1,
       },
       {
-        value: t('prizeVariants.absolutellyNothing'),
+        value: t('prizeVariants.absolutelyNothing'),
         weight: 100,
       },
       {

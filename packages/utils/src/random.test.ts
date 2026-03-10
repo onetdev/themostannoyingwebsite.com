@@ -2,6 +2,8 @@ import {
   getWeightedRandom,
   idFromRand,
   mulberry32,
+  randomArrayEntry,
+  randomBool,
   randomInt,
   randomNumber,
   stringToSeed,
@@ -75,6 +77,31 @@ describe('Math getWeightedRandom', () => {
     const result = getWeightedRandom([{ value: 'a', weight: 0 }]);
     expect(result).toBeUndefined();
   });
+
+  test('should return correct item based on weight', () => {
+    // Total weight = 1 + 2 = 3
+    // We mock random to return something that targets the second item
+    // randomNumber(0, 3) with Math.random() = 0.5 returns 1.5
+    const mockRandom = jest.spyOn(Math, 'random').mockReturnValue(0.5);
+    const result = getWeightedRandom([
+      { value: 'a', weight: 1 },
+      { value: 'b', weight: 2 },
+    ]);
+    // rand = 1.5. sum = 1 (a), sum = 3 (b). 1.5 <= 3 is true.
+    expect(result).toBe('b');
+    mockRandom.mockRestore();
+  });
+
+  test('should handle items with missing weight safely', () => {
+    // Testing lines 48-49: items[i]?.weight ?? 0
+    const mockRandom = jest.spyOn(Math, 'random').mockReturnValue(0.99);
+    const result = getWeightedRandom([
+      { value: 'a', weight: 1 },
+      { value: 'b' } as any, // Missing weight
+    ]);
+    expect(result).toBe('a');
+    mockRandom.mockRestore();
+  });
 });
 
 describe('Math random', () => {
@@ -104,5 +131,35 @@ describe('Math randomInt', () => {
     expect(Number.isInteger(result)).toBe(true);
     expect(result).toBeGreaterThanOrEqual(1);
     expect(result).toBeLessThanOrEqual(10);
+  });
+});
+
+describe('randomBool', () => {
+  test('should return a boolean', () => {
+    expect(typeof randomBool()).toBe('boolean');
+  });
+
+  test('should return true when Math.random is >= 0.5', () => {
+    const mockRandom = jest.spyOn(Math, 'random').mockReturnValue(0.5);
+    expect(randomBool()).toBe(true);
+    mockRandom.mockRestore();
+  });
+
+  test('should return false when Math.random is < 0.5', () => {
+    const mockRandom = jest.spyOn(Math, 'random').mockReturnValue(0.49);
+    expect(randomBool()).toBe(false);
+    mockRandom.mockRestore();
+  });
+});
+
+describe('randomArrayEntry', () => {
+  test('should return an entry from the array', () => {
+    const arr = ['a', 'b', 'c'];
+    const result = randomArrayEntry(arr);
+    expect(arr).toContain(result);
+  });
+
+  test('should return undefined for empty array', () => {
+    expect(randomArrayEntry([])).toBeUndefined();
   });
 });

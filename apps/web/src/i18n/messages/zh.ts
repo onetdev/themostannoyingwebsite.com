@@ -46,7 +46,7 @@ export default {
       '隐私第一：我们不会持久化存储敏感的表单输入或用户凭据。',
     noWarranties:
       '按“原样”提供，不作任何保证。我们不对你损失的时间或感到的挫败负责。',
-    privacyPolicyDisclaimer:
+    translationDisclaimer:
       '本文件是官方英文版本的翻译。如有任何差异，以英文版本为准。你可以在 <linkTag>这里</linkTag> 找到官方版本。',
     cookieConsent:
       '本网站使用 Cookie 以确保你在我们的网站上获得最佳体验。这同时也是个玩笑，许多功能都是故意出错或根本无法运行的。你可以在设置菜单中自定义你的体验和 Cookie 设置。',
@@ -92,10 +92,13 @@ export default {
     plans: 'AI 计划',
     personal: '个人',
     achievements: '成就',
+    admin: '管理',
+    termsOfUse: '使用条款',
   },
   userField: {
     consentNewsletter: '我想接收新闻通讯',
     consentPrivacyPolicy: '接受隐私政策',
+    consentTermsOfUse: '接受使用条款',
     consentChildSoul: '我第一个孩子的灵魂',
     countryCode: '国家',
     dateOfBirth: '出生日期',
@@ -146,27 +149,10 @@ export default {
   },
   language: {
     label: '语言',
-    option: {
-      ar: '阿拉伯语',
-      de: '德语',
-      en: '英语',
-      es: '西班牙语',
-      fr: '法语',
-      hi: '印地语',
-      hu: '匈牙利语',
-      it: '意大利语',
-      ja: '日语',
-      ko: '韩语',
-      pl: '波兰语',
-      pt: '葡萄牙语',
-      ru: '俄语',
-      tr: '土耳其语',
-      zh: '中文',
-    },
   },
   themeSwitch: {
     label: '切换主题',
     darkMode: '深色模式',
     lightMode: '浅色模式',
   },
-};
+} satisfies DeepPartial<AppTranslationShape>;

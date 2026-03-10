@@ -9,6 +9,9 @@ export const ContentConfigSchema = z.object({
       vtt: z.union([z.string(), LocaleResourceSchema]),
     }),
   }),
+  api: z.object({
+    searchEndpoint: z.string(),
+  }),
 });
 
 export type ContentConfig = z.infer<typeof ContentConfigSchema>;

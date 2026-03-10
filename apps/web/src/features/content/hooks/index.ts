@@ -1,1 +1,3 @@
-export * from './useAppArticleService';
+export * from './useRecommendedSearches';
+export * from './useSearch';
+export * from './useSearchQuery';

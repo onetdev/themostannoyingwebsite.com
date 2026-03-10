@@ -89,4 +89,9 @@ export default {
     description:
       'Secure terminal access to the system administration interface.',
   },
+  termsOfUse: {
+    title: 'Terms of Use',
+    description:
+      'Terms of Use for The Most Annoying Website explaining that all features, accounts, comments, and interactions are fictional and exist solely for parody and entertainment purposes.',
+  },
 };

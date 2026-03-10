@@ -1,5 +1,6 @@
 import type { Container } from 'inversify';
 import { CoreSymbols } from '@/core/di/symbols';
+import { HttpClient } from '@/core/http/HttpClient';
 import { AchievementBankService } from '@/features/achievements/services';
 import { DI as DIAchievements } from '@/features/achievements/types';
 import { FakeAuthRepository } from '@/features/auth/repositories';
@@ -7,19 +8,19 @@ import { AuthService } from '@/features/auth/services';
 import { DI as DIAuth } from '@/features/auth/types';
 import { CommentService } from '@/features/comments/services';
 import { DI as DIComments } from '@/features/comments/types';
-import { AppArticleService } from '@/features/content/services';
+import { ArticleService } from '@/features/content/services';
 import { DI as DIContent } from '@/features/content/types';
 import { DonationService } from '@/features/funding/services';
 import { DI as DIDonation } from '@/features/funding/types';
 import { SubscriptionPlansService } from '@/features/subscription/services';
 import { DI as DISubscription } from '@/features/subscription/types';
 import { StaticCountryRepository } from '@/repositories';
-import { AppService } from '@/services';
+import { AppConfigService, AppService } from '@/services';
 
 export const Symbols = {
   ...CoreSymbols,
-  ...DIAuth,
   ...DIAchievements,
+  ...DIAuth,
   ...DIComments,
   ...DIContent,
   ...DIDonation,
@@ -28,6 +29,11 @@ export const Symbols = {
 
 export function configureContainer(container: Container) {
   // Bing dependencies
+  container
+    .bind(Symbols.AppConfigService)
+    .to(AppConfigService)
+    .inSingletonScope();
+  container.bind(Symbols.HttpClient).to(HttpClient).inSingletonScope();
   container
     .bind(Symbols.CountryRepository)
     .to(StaticCountryRepository)
@@ -51,8 +57,5 @@ export function configureContainer(container: Container) {
     .to(DonationService)
     .inSingletonScope();
   container.bind(Symbols.CommentService).to(CommentService).inSingletonScope();
-  container
-    .bind(Symbols.AppArticleService)
-    .to(AppArticleService)
-    .inSingletonScope();
+  container.bind(Symbols.ArticleService).to(ArticleService).inSingletonScope();
 }

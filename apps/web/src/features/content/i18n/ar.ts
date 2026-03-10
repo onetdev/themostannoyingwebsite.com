@@ -22,8 +22,9 @@ export default {
     resultMeta:
       'البحث عن "{query}" استغرق {time} مللي ثانية ووجد {count} من النتائج',
     searching: 'جاري البحث',
+    error: 'فشل البحث، يرجى المحاولة مرة أخرى لاحقاً',
     peopleAlsoSearched: 'بحث الناس أيضاً عن:',
-    topSearcheVariants: {
+    topSearchVariants: {
       variant_001: 'هل تعطش الأسماك',
       variant_002: 'كلمات أغنية الباستا',
       variant_003: 'هل ينفد بوق السيارات',
@@ -43,6 +44,5 @@ export default {
     playVideo: 'تشغيل الفيديو',
     videoPlaybackFailed: 'فشل تشغيل الفيديو',
     pictureOfYou: 'صورة لك',
-    hotThingsVtt: 'العربية',
   },
 } satisfies ContentI18nShape;

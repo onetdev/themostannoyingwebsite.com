@@ -3,7 +3,7 @@ import { notFound } from 'next/navigation';
 import { getDependencyContainer } from '@/core/di';
 import { CommentService } from '@/features/comments/services';
 import { ArticleItemPage } from '@/features/content/components';
-import { getAppArticleService } from '@/features/content/services';
+import { getArticleService } from '@/features/content/services';
 import i18nConfig from '@/root/i18n.config';
 import { PageLayout } from '../../_components/PageLayout';
 
@@ -22,7 +22,7 @@ export async function generateMetadata({
   const { slug, locale } = await params;
   const lookup = { slug, locale };
   const container = getDependencyContainer();
-  const articleService = getAppArticleService(container);
+  const articleService = await getArticleService(container);
   const data = await articleService.getByLookup(lookup);
 
   if (!data) {
@@ -63,7 +63,7 @@ export const generateStaticParams = async () => {
   const paths: PageParams[] = [];
 
   const container = getDependencyContainer();
-  const articleService = getAppArticleService(container);
+  const articleService = await getArticleService(container);
   for (const locale of locales) {
     const articles = await articleService.getMany({
       params: { locale },
@@ -83,7 +83,7 @@ export default async function Page({ params }: PageProps) {
   const lookup = { slug, locale };
 
   const container = getDependencyContainer();
-  const articleService = getAppArticleService(container);
+  const articleService = await getArticleService(container);
   const datum = await articleService.getByLookup(lookup);
 
   if (!datum) {

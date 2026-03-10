@@ -1,24 +1,29 @@
+const allLocales = [
+  'ar', // Arabic
+  'de', // German
+  'en', // English
+  'es', // Spanish
+  'fr', // French
+  'hi', // Hindi
+  'hu', // Hungarian
+  'it', // Italian
+  'ja', // Japanese
+  'ko', // Korean
+  'pl', // Polish
+  'pt', // Portuguese
+  'ru', // Russian
+  'tr', // Turkish
+  'zh', // Mandarin Chinese
+] as const;
+
+const skipLocales: string[] = [
+  // If you want to disable locale on the ui and sitemap, list it here.
+];
+
 const config = {
   // Live translations - used for routing, sitemap, and UI language selectors.
-  locales: ['en', 'hu', 'zh', 'ar'],
-  // All possible languages in the system.
-  allLocales: [
-    'en', // English
-    'hu', // Hungarian
-    'zh', // Mandarin Chinese
-    'ar', // Arabic
-    'de', // German
-    'es', // Spanish
-    'fr', // French
-    'hi', // Hindi
-    'it', // Italian
-    'ja', // Japanese
-    'ko', // Korean
-    'pl', // Polish
-    'pt', // Portuguese
-    'ru', // Russian
-    'tr', // Turkish
-  ],
+  locales: allLocales.filter((locale) => !skipLocales.includes(locale)),
+  allLocales,
   defaultLocale: 'en',
 } as const;
 

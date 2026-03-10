@@ -22,8 +22,9 @@ export default {
     resultMeta:
       'A(z) "{query}" kifejezésre történő keresés {time}ms-ig tartott és {count} találatot hozott',
     searching: 'Keresés',
+    error: 'A keresés nem sikerült, kérjük, próbálja meg később',
     peopleAlsoSearched: 'Mások ezekre kerestek még:',
-    topSearcheVariants: {
+    topSearchVariants: {
       variant_001: 'szomjasak-e a halak',
       variant_002: 'tészta dalszöveg',
       variant_003: 'elfogy-e az autóból a duda',
@@ -44,6 +45,5 @@ export default {
     playVideo: 'Videó lejátszása',
     videoPlaybackFailed: 'A videó lejátszása sikertelen',
     pictureOfYou: 'Kép rólad',
-    hotThingsVtt: 'Magyar',
   },
 } satisfies ContentI18nShape;

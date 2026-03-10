@@ -6,7 +6,7 @@ LEVEL=${1:-"cache"}
 echo "🧹 Cleaning project (level: $LEVEL)..."
 
 # 1. Always clean caches
-rm -rf .turbo **/ .turbo apps/web/.next/cache
+rm -rf .turbo .turbo apps/web/.next/cache
 [[ -x "$(command -v pnpm)" ]] && pnpm store prune
 
 # 2. Build artifacts
