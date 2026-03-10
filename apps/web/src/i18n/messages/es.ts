@@ -47,7 +47,7 @@ export default {
       'Privacidad Primero: No persistimos entradas de formulario sensibles o credenciales de usuario.',
     noWarranties:
       'Proporcionado "tal cual" sin garantía. No somos responsables de tu tiempo perdido o frustración.',
-    privacyPolicyDisclaimer:
+    translationDisclaimer:
       'Este documento es una traducción de la versión oficial en inglés. En caso de cualquier discrepancia, la versión en inglés prevalecerá. Puedes encontrar la versión oficial <linkTag>aquí</linkTag>.',
     cookieConsent:
       'Este sitio web utiliza cookies para asegurar que obtengas la mejor experiencia en nuestro sitio web. También es una broma, así que muchas de las características tienen errores o ni siquiera funcionan a propósito. Puedes personalizar tu experiencia y configuración de cookies en el menú de configuración.',
@@ -96,10 +96,13 @@ export default {
     plans: 'Planes de IA',
     personal: 'Personal',
     achievements: 'Logros',
+    admin: 'Administración',
+    termsOfUse: 'Términos de uso',
   },
   userField: {
     consentNewsletter: 'Quiero recibir boletín',
     consentPrivacyPolicy: 'Aceptar política de privacidad',
+    consentTermsOfUse: 'Aceptar términos de uso',
     consentChildSoul: 'El alma de mi primer hijo',
     countryCode: 'País',
     dateOfBirth: 'Fecha de nacimiento',
@@ -141,7 +144,7 @@ export default {
   messages: {
     errors: {
       e404title: 'Error 404',
-      e404description: 'Página no encontrada, cómo pudo pasar esto',
+      e404description: 'Página no encontrada, ¿cómo pudo pasar esto?',
     },
     info: {},
   },

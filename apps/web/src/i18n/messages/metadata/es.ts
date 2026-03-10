@@ -89,4 +89,9 @@ export default {
     description:
       'Acceso seguro a la terminal a la interfaz de administración del sistema.',
   },
+  termsOfUse: {
+    title: 'Términos de Uso',
+    description:
+      'Términos de Uso de El Sitio Web Más Molesto explicando que todas las funciones, cuentas, comentarios e interacciones son ficticias y existen únicamente con fines de parodia y entretenimiento.',
+  },
 };
