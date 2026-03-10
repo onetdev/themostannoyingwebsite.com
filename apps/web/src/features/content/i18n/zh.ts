@@ -43,6 +43,5 @@ export default {
     playVideo: '播放视频',
     videoPlaybackFailed: '视频播放失败',
     pictureOfYou: '你的照片',
-    hotThingsVtt: '中文',
   },
 } satisfies ContentI18nShape;

@@ -14,9 +14,11 @@ const allLocales = [
   'ru', // Russian
   'tr', // Turkish
   'zh', // Mandarin Chinese
-];
+] as const;
 
-const skipLocales = ['es'];
+const skipLocales: string[] = [
+  // If you want to disable locale on the ui and sitemap, list it here.
+];
 
 const config = {
   // Live translations - used for routing, sitemap, and UI language selectors.

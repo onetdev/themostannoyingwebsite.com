@@ -81,7 +81,7 @@ export default {
     'Sugar Daddy Mike',
     'Gewinnbenachrichtigung',
     'Agent Smith',
-    'BitCoin-König',
+    'Bitcoin-König',
     'Geschenkkarten-Gen',
     'Dating-App',
     'Bank-Alarm',

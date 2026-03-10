@@ -1,3 +1,5 @@
+import type { ContentI18nShape } from '../types';
+
 export default {
   paywall: {
     overlay: {
@@ -41,6 +43,5 @@ export default {
     playVideo: 'वीडियो चलाएं',
     videoPlaybackFailed: 'वीडियो प्लेबैक विफल रहा',
     pictureOfYou: 'आपकी तस्वीर',
-    hotThingsVtt: 'हिंदी',
   },
-};
+} satisfies ContentI18nShape;

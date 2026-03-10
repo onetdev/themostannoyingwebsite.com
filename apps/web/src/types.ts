@@ -35,7 +35,7 @@ declare global {
   };
 
   type NextPageParams = {
-    locale: string;
+    locale: AppLocale;
   };
 
   type NextPageProps<T extends {} = object> = {

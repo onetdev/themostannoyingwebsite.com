@@ -45,6 +45,5 @@ export default {
     playVideo: 'Videó lejátszása',
     videoPlaybackFailed: 'A videó lejátszása sikertelen',
     pictureOfYou: 'Kép rólad',
-    hotThingsVtt: 'Magyar',
   },
 } satisfies ContentI18nShape;
