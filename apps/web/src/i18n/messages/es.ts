@@ -153,23 +153,6 @@ export default {
   },
   language: {
     label: 'Idioma',
-    option: {
-      ar: 'Árabe',
-      de: 'Alemán',
-      en: 'Inglés',
-      es: 'Español',
-      fr: 'Francés',
-      hi: 'Hindi',
-      hu: 'Húngaro',
-      it: 'Italiano',
-      ja: 'Japonés',
-      ko: 'Coreano',
-      pl: 'Polaco',
-      pt: 'Portugués',
-      ru: 'Ruso',
-      tr: 'Turco',
-      zh: 'Chino',
-    },
   },
   themeSwitch: {
     label: 'Cambiar tema',
