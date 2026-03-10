@@ -7,6 +7,7 @@ import { useLocale, useTranslations } from 'next-intl';
 import { useEffect, useRef, useState } from 'react';
 import { useAppConfigContext } from '@/core/config/react-app-config';
 import { useLocaleResource } from '@/hooks';
+import { LANGUAGES_IN_OWN_LANGUAGE } from '@/i18n/selector';
 
 export function HotThingsPage() {
   const config = useAppConfigContext();
@@ -14,7 +15,7 @@ export function HotThingsPage() {
   const logger = useLogger().getSubLogger({ name: 'hot-things-page' });
   const [isCapable, setIsCapable] = useState(false);
   const t = useTranslations();
-  const locale = useLocale();
+  const locale = useLocale() as AppSupportedLocale;
   const [_devices, setDevices] = useState<MediaDeviceInfo[]>([]);
   const [stream, setStream] = useState<MediaStream>();
   const playerRef = useRef<HTMLVideoElement>(null);
@@ -93,7 +94,7 @@ export function HotThingsPage() {
             kind="captions"
             srcLang={locale}
             src={resolve(config.content.assets.hotThings.vtt)}
-            label={t('content.hotThings.hotThingsVtt')}
+            label={LANGUAGES_IN_OWN_LANGUAGE[locale]}
           />
         </video>
         {!isDisallowed && isCapable && (

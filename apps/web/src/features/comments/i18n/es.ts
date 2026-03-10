@@ -5,7 +5,7 @@ export default {
   showReplies: 'Mostrar {count} respuestas',
   hideReplies: 'Ocultar respuestas',
   disclaimer:
-    'Todos los comentarios son generados con fines de entretenimiento y no son reales. No podrás publicar ningún comentario realmente.',
+    'Todos los comentarios son generados con fines de entretenimiento y no son reales. En realidad, no podrás publicar ningún comentario.',
   loginRequired: {
     title: 'Inicio de sesión requerido',
     description:

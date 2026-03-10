@@ -81,7 +81,7 @@ export default {
     'Sugar Daddy Miguel',
     'Notificación de Premio',
     'Agente Smith',
-    'Rey del BitCoin',
+    'Rey del Bitcoin',
     'Gen Tarjeta Regalo',
     'App de Citas',
     'Alerta Bancaria',

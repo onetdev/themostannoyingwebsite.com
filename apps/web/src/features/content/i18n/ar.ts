@@ -44,6 +44,5 @@ export default {
     playVideo: 'تشغيل الفيديو',
     videoPlaybackFailed: 'فشل تشغيل الفيديو',
     pictureOfYou: 'صورة لك',
-    hotThingsVtt: 'العربية',
   },
 } satisfies ContentI18nShape;

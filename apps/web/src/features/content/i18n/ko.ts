@@ -1,3 +1,5 @@
+import type { ContentI18nShape } from '../types';
+
 export default {
   paywall: {
     overlay: {
@@ -41,6 +43,5 @@ export default {
     playVideo: '비디오 재생',
     videoPlaybackFailed: '비디오 재생 실패',
     pictureOfYou: '당신의 사진',
-    hotThingsVtt: '한국어',
   },
-};
+} satisfies ContentI18nShape;

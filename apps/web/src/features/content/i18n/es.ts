@@ -1,3 +1,5 @@
+import type { ContentI18nShape } from '../types';
+
 export default {
   paywall: {
     overlay: {
@@ -20,6 +22,7 @@ export default {
     resultMeta:
       'La búsqueda de "{query}" tomó {time}ms y encontró {count} resultados',
     searching: 'Buscando',
+    error: 'La búsqueda falló, por favor inténtalo de nuevo más tarde',
     peopleAlsoSearched: 'La gente también buscó:',
     topSearchVariants: {
       variant_001: 'los peces tienen sed',
@@ -41,6 +44,5 @@ export default {
     playVideo: 'Reproducir video',
     videoPlaybackFailed: 'Fallo en la reproducción del video',
     pictureOfYou: 'Foto tuya',
-    hotThingsVtt: 'Spanish',
   },
-};
+} satisfies ContentI18nShape;

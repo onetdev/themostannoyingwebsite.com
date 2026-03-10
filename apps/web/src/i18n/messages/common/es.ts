@@ -110,7 +110,7 @@ export default {
     passwordStrength: {
       weak: 'Débil',
       okay: 'Bien',
-      veryStrong: 'Fuerte',
+      veryStrong: 'Muy Fuerte',
     },
   },
 };

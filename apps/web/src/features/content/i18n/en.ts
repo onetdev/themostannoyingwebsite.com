@@ -41,6 +41,5 @@ export default {
     playVideo: 'Play video',
     videoPlaybackFailed: 'Video playback failed',
     pictureOfYou: 'Picture of you',
-    hotThingsVtt: 'English',
   },
 };
