@@ -87,6 +87,7 @@
     "@types/react-dom": "catalog:",
     "@types/rtl-detect": "^1.0.3",
     "@types/sanitize-html": "catalog:",
+    "commander": "^14.0.3",
     "favicons": "^7.2.0",
     "jest": "catalog:",
     "playwright": "catalog:",

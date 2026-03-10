@@ -2,6 +2,8 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { getLogger } from '@maw/logger';
+import { flatten } from '@maw/utils/flatten';
+import { Command } from 'commander';
 
 const logger = getLogger().getSubLogger({
   prettyLogTemplate: '{{dateIsoStr}} {{logLevelName}} ',
@@ -9,31 +11,27 @@ const logger = getLogger().getSubLogger({
 });
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
-const MESSAGES_DIR = path.resolve(__dirname, '../src/i18n/messages');
-const APP_DIR = path.resolve(__dirname, '../src/app');
+const DEFAULT_MESSAGES_DIR = path.resolve(__dirname, '../src/i18n/messages');
+const DEFAULT_APP_DIR = path.resolve(__dirname, '../src/app');
 
-/**
- * Flattens a nested object into a dot-notation KV object.
- */
-function flatten(
-  obj: Record<string, unknown>,
-  prefix = '',
-): Record<string, unknown> {
-  return Object.entries(obj).reduce(
-    (acc, [k, v]) => {
-      const key = prefix ? `${prefix}.${k}` : k;
+const program = new Command();
 
-      if (v && typeof v === 'object' && !Array.isArray(v)) {
-        Object.assign(acc, flatten(v as Record<string, unknown>, key));
-      } else {
-        acc[key] = v;
-      }
+program
+  .name('compare-translations')
+  .description('Compare translation messages and MDX pages across locales')
+  .option(
+    '-m, --messages-dir <path>',
+    'Messages directory',
+    DEFAULT_MESSAGES_DIR,
+  )
+  .option(
+    '-a, --app-dir <path>',
+    'App directory for MDX pages',
+    DEFAULT_APP_DIR,
+  )
+  .parse(process.argv);
 
-      return acc;
-    },
-    {} as Record<string, unknown>,
-  );
-}
+const options = program.opts();
 
 /**
  * Finds all directories in the app folder that have an _i18n subfolder with MDX files.
@@ -54,7 +52,10 @@ function findMdxPages(dir: string, results: string[] = []) {
   return results;
 }
 
-async function run() {
+async function main() {
+  const MESSAGES_DIR = options.messagesDir;
+  const APP_DIR = options.appDir;
+
   const files = fs.readdirSync(MESSAGES_DIR).filter((f) => f.endsWith('.ts'));
   const locales = files.map((f) => f.replace('.ts', ''));
 
@@ -133,7 +134,9 @@ async function run() {
       .filter((f) => f.endsWith('.mdx'))
       .map((f) => f.replace('.mdx', ''));
 
-    const existingMdxLocales = [...new Set([...mdxFilesFromI18n, ...mdxFilesFromPageDir])];
+    const existingMdxLocales = [
+      ...new Set([...mdxFilesFromI18n, ...mdxFilesFromPageDir]),
+    ];
     const mdxSet = new Set(existingMdxLocales);
     const missingLocales = locales.filter((l) => !mdxSet.has(l));
 
@@ -142,7 +145,9 @@ async function run() {
     } else {
       mdxIssues++;
       logger.warn(`❌ ${relativePath}: Missing locales`);
-      logger.warn(`   - Missing MDX (${missingLocales.length}): ${missingLocales.join(', ')}`);
+      logger.warn(
+        `   - Missing MDX (${missingLocales.length}): ${missingLocales.join(', ')}`,
+      );
     }
   }
 
@@ -153,13 +158,7 @@ async function run() {
   }
 }
 
-const isMain =
-  process.argv[1] &&
-  fileURLToPath(import.meta.url).endsWith(process.argv[1]);
-
-if (isMain) {
-  run().catch((err) => {
-    logger.error(err);
-    process.exit(1);
-  });
-}
+main().catch((err) => {
+  logger.error(err);
+  process.exit(1);
+});
