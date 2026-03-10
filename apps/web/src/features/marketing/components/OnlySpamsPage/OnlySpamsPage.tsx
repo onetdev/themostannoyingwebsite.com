@@ -22,7 +22,6 @@ export function OnlySpamsPage() {
         <div className="flex flex-col gap-4">
           <EmailSampleCarousel />
         </div>
-
       </div>
 
       <div className="lg:w-1/2">

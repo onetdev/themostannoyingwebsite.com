@@ -22,7 +22,7 @@ export function EmailSampleCarousel() {
   const [current, setCurrent] = useState(0);
   const [count, setCount] = useState(0);
   const messages = useMessages() as AppTranslationShape;
-    const samples = messages.marketing.onlySpams.samples.items;
+  const samples = messages.marketing.onlySpams.samples.items;
 
   useEffect(() => {
     if (!api) return;

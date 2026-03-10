@@ -54,7 +54,10 @@ export function TestimonialCarousel() {
               >
                 <Card className="h-full">
                   <CardHeader>
-                    <CardTitle><Badge>Verified</Badge></CardTitle></CardHeader>
+                    <CardTitle>
+                      <Badge>Verified</Badge>
+                    </CardTitle>
+                  </CardHeader>
                   <CardContent className="px-6 space-y-4">
                     <p className="text-muted-foreground">"{t.comment}"</p>
 

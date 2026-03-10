@@ -125,6 +125,7 @@ function Carousel({
         canScrollNext,
       }}
     >
+      {/* biome-ignore lint/a11y/useSemanticElements: <div> with role="region" is used to satisfy carousel structure while providing accessibility */}
       <div
         onKeyDownCapture={handleKeyDown}
         className={cn('relative', className)}
@@ -164,6 +165,7 @@ function CarouselItem({ className, ...props }: ComponentProps<'div'>) {
   const { orientation } = useCarousel();
 
   return (
+    /* biome-ignore lint/a11y/useSemanticElements: <div> with role="group" is used for carousel slides to provide necessary accessibility context */
     <div
       role="group"
       aria-roledescription="slide"
