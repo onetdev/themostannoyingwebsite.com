@@ -69,7 +69,7 @@ export default {
       flaps:
         'Muestra solapas de anuncios en los lados de la página en las que se puede hacer clic y llevan a diferentes páginas.',
       oneByOne:
-        'Cubrió principalmente un anuncio animado en la página de inicio.',
+        'Muestra bloques de anuncios uno por uno, principalmente un anuncio animado en la página de inicio.',
     },
     achievementNotifications:
       'Muestra una notificación cada vez que desbloqueas un nuevo logro. El progreso siempre se rastrea en segundo plano.',
