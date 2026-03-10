@@ -20,8 +20,6 @@ export function SearchPage() {
 
   const hasResults = data?.items && data?.items.length > 0;
 
-  console.log({ hasResults, isError, isReady, data });
-
   return (
     <>
       <PageHeadline>{tNavigation('search')}</PageHeadline>
