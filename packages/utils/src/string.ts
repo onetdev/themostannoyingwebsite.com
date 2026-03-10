@@ -222,7 +222,7 @@ export const fuzzy_search = ({
   };
 };
 
-const flattenSameTagNesting = (raw: string, tag: string) => {
+export const flattenSameTagNesting = (raw: string, tag: string) => {
   let depth = 0;
   const matcher = new RegExp(`(<${tag}>|</${tag}>)`, 'g');
   return raw.replaceAll(matcher, (match) => {

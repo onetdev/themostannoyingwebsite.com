@@ -1,5 +1,5 @@
 import { getDependencyContainer } from '@/core/di';
-import { getAppArticleService } from '@/features/content/services';
+import { getArticleService } from '@/features/content/services';
 import { HomePage } from './_components/HomePage';
 import { PageLayout } from './_components/PageLayout';
 
@@ -10,7 +10,7 @@ export const revalidate = 1800;
 export default async function Page({ params }: NextPageProps) {
   const { locale } = await params;
   const container = getDependencyContainer();
-  const articleService = getAppArticleService(container);
+  const articleService = await getArticleService(container);
 
   const coverArticle = await articleService.getFirst({
     params: { isOnCover: true, locale },

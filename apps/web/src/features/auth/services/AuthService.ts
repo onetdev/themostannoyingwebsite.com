@@ -1,4 +1,4 @@
-import type { PromiseResult } from '@maw/utils/result';
+import type { Result } from '@maw/utils/result';
 import { inject, injectable } from 'inversify';
 import type { AuthError, User } from '../schemas';
 import {
@@ -20,17 +20,17 @@ export class AuthService implements IAuthService {
   @inject(DI.AuthRepository)
   private authRepo!: AuthRepository;
 
-  login(data: LoginUseCaseParams): PromiseResult<User, AuthError> {
+  login(data: LoginUseCaseParams): Promise<Result<User, AuthError>> {
     return loginUseCase(this.authRepo, data);
   }
 
   passwordReminder(
     data: PasswordReminderUseCaseParams,
-  ): PromiseResult<void, AuthError> {
+  ): Promise<Result<void, AuthError>> {
     return passwordReminderUseCase(this.authRepo, data);
   }
 
-  register(data: RegisterUseCaseParams): PromiseResult<User, AuthError> {
+  register(data: RegisterUseCaseParams): Promise<Result<User, AuthError>> {
     return registerUseCase(this.authRepo, data);
   }
 }

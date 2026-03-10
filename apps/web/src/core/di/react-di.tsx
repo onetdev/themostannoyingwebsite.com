@@ -1,7 +1,12 @@
 'use client';
 
-import type { Container } from 'inversify';
-import { createContext, type PropsWithChildren, useContext } from 'react';
+import type { Container, ServiceIdentifier } from 'inversify';
+import {
+  createContext,
+  type PropsWithChildren,
+  useContext,
+  useMemo,
+} from 'react';
 
 export interface DiContextType {
   container: Container;
@@ -23,3 +28,8 @@ export const useDiContext = (): DiContextType => {
   }
   return context;
 };
+
+export function useInjection<T>(identifier: ServiceIdentifier<T>): T {
+  const { container } = useDiContext();
+  return useMemo(() => container.get<T>(identifier), [container, identifier]);
+}

@@ -46,7 +46,7 @@ export default {
       'Privatsphäre zuerst: Wir speichern keine sensiblen Formulareingaben oder Benutzeranmeldedaten.',
     noWarranties:
       'Bereitgestellt "wie besehen" ohne Gewährleistung. Wir sind nicht verantwortlich für Ihre verlorene Zeit oder Frustration.',
-    privacyPolicyDisclaimer:
+    translationDisclaimer:
       'Dieses Dokument ist eine Übersetzung der offiziellen englischen Version. Im Falle von Unstimmigkeiten ist die englische Version maßgebend. Die offizielle Version finden Sie <linkTag>hier</linkTag>.',
     cookieConsent:
       'Diese Website verwendet Cookies, um sicherzustellen, dass Sie das beste Erlebnis auf unserer Website haben. Es ist auch ein Witz, daher sind viele Funktionen fehlerhaft oder funktionieren absichtlich nicht. Sie können Ihr Erlebnis und Ihre Cookie-Einstellungen im Einstellungsmenü anpassen.',
@@ -94,10 +94,13 @@ export default {
     plans: 'KI-Pläne',
     personal: 'Persönlich',
     achievements: 'Errungenschaften',
+    admin: 'Admin',
+    termsOfUse: 'Nutzungsbedingungen',
   },
   userField: {
     consentNewsletter: 'Ich möchte den Newsletter erhalten',
     consentPrivacyPolicy: 'Datenschutzerklärung akzeptieren',
+    consentTermsOfUse: 'Nutzungsbedingungen akzeptieren',
     consentChildSoul: 'Die Seele meines erstgeborenen Kindes',
     countryCode: 'Land',
     dateOfBirth: 'Geburtsdatum',
@@ -148,27 +151,10 @@ export default {
   },
   language: {
     label: 'Sprache',
-    option: {
-      ar: 'Arabisch',
-      de: 'Deutsch',
-      en: 'Englisch',
-      es: 'Spanisch',
-      fr: 'Französisch',
-      hi: 'Hindi',
-      hu: 'Ungarisch',
-      it: 'Italienisch',
-      ja: 'Japanisch',
-      ko: 'Koreanisch',
-      pl: 'Polnisch',
-      pt: 'Portugiesisch',
-      ru: 'Russisch',
-      tr: 'Türkisch',
-      zh: 'Chinesisch',
-    },
   },
   themeSwitch: {
     label: 'Thema wechseln',
     darkMode: 'Dunkelmodus',
     lightMode: 'Hellmodus',
   },
-};
+} satisfies DeepPartial<AppTranslationShape>;

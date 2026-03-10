@@ -20,6 +20,7 @@ export default {
     resultMeta:
       'Wyszukiwanie "{query}" zajęło {time}ms i zwróciło {count} wyników',
     searching: 'Szukanie',
+    error: 'Wyszukiwanie nie powiodło się, spróbuj ponownie później',
     peopleAlsoSearched: 'Ludzie szukali również:',
     topSearchVariants: {
       variant_001: 'czy ryby chcą pić',

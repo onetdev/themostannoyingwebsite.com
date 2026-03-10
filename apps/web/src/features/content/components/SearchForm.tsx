@@ -64,6 +64,7 @@ export function SearchForm({
             placeholder={t('content.search.placeholder')}
             autoComplete="off"
             className={cn(searchFormVariants({ size }))}
+            minLength={2}
           />
           <InputGroupAddon align="inline-end">
             <InputGroupButton

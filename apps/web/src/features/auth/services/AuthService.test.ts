@@ -59,6 +59,7 @@ describe('AuthService', () => {
         countryCode: 'US',
         consentPrivacyPolicy: true,
         consentNewsletter: true,
+        consentTermsOfUse: true,
       };
       await authService.register(data);
       expect(useCases.register).toHaveBeenCalledWith(mockRepo, data);

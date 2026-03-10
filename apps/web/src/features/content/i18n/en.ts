@@ -19,6 +19,7 @@ export default {
     noResults: 'No results found',
     resultMeta: 'Search for "{query}" took {time}ms and found {count} results',
     searching: 'Searching',
+    error: 'Search failed, please try again later',
     peopleAlsoSearched: 'People also searched for:',
     topSearchVariants: {
       variant_001: 'do fish get thirsty',

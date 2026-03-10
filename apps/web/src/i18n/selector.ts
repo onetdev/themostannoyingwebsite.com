@@ -2,6 +2,24 @@
 // Easy: To avoid bundling large translation files with each page.
 // This serves as the bare minimum to allow prompting users to change locale.
 
+export const LANGUAGES_IN_OWN_LANGUAGE: Record<AppSupportedLocale, string> = {
+  ar: 'العربية',
+  de: 'Deutsch',
+  en: 'English',
+  es: 'Español',
+  fr: 'Français',
+  hi: 'हिन्दी',
+  hu: 'Magyar',
+  it: 'Italiano',
+  ja: '日本語',
+  ko: '한국어',
+  pl: 'Polski',
+  pt: 'Português',
+  ru: 'Русский',
+  tr: 'Türkçe',
+  zh: '中文',
+};
+
 export const COUNTRY_TO_LOCALE: Record<string, AppLocale> = {
   // Hungarian
   HU: 'hu',
@@ -24,28 +42,28 @@ export const COUNTRY_TO_LOCALE: Record<string, AppLocale> = {
   PH: 'en',
 
   // Arabic
-  // AE: 'ar',
-  // SA: 'ar',
-  // EG: 'ar',
-  // DZ: 'ar',
-  // MA: 'ar',
-  // IQ: 'ar',
-  // JO: 'ar',
-  // KW: 'ar',
-  // LB: 'ar',
-  // OM: 'ar',
-  // QA: 'ar',
-  // SY: 'ar',
-  // YE: 'ar',
-  // BH: 'ar',
-  // LY: 'ar',
-  // TN: 'ar',
-  // SD: 'ar',
+  AE: 'ar',
+  SA: 'ar',
+  EG: 'ar',
+  DZ: 'ar',
+  MA: 'ar',
+  IQ: 'ar',
+  JO: 'ar',
+  KW: 'ar',
+  LB: 'ar',
+  OM: 'ar',
+  QA: 'ar',
+  SY: 'ar',
+  YE: 'ar',
+  BH: 'ar',
+  LY: 'ar',
+  TN: 'ar',
+  SD: 'ar',
 
   // German
-  // DE: 'de',
-  // AT: 'de',
-  // LI: 'de',
+  DE: 'de',
+  AT: 'de',
+  LI: 'de',
 
   // Spanish
   // ES: 'es',
@@ -69,48 +87,48 @@ export const COUNTRY_TO_LOCALE: Record<string, AppLocale> = {
   // UY: 'es',
 
   // French
-  // FR: 'fr',
-  // BE: 'fr',
-  // CH: 'fr',
-  // LU: 'fr',
-  // MC: 'fr',
+  FR: 'fr',
+  BE: 'fr',
+  CH: 'fr',
+  LU: 'fr',
+  MC: 'fr',
 
   // Hindi
-  // IN: 'hi',
+  IN: 'hi',
 
   // Italian
-  // IT: 'it',
-  // SM: 'it',
-  // VA: 'it',
+  IT: 'it',
+  SM: 'it',
+  VA: 'it',
 
   // Japanese
-  // JP: 'ja',
+  JP: 'ja',
 
   // Korean
-  // KR: 'ko',
+  KR: 'ko',
 
   // Polish
-  // PL: 'pl',
+  PL: 'pl',
 
   // Portuguese
-  // PT: 'pt',
-  // BR: 'pt',
-  // AO: 'pt',
-  // MZ: 'pt',
-  // CV: 'pt',
-  // GW: 'pt',
-  // ST: 'pt',
-  // TL: 'pt',
+  PT: 'pt',
+  BR: 'pt',
+  AO: 'pt',
+  MZ: 'pt',
+  CV: 'pt',
+  GW: 'pt',
+  ST: 'pt',
+  TL: 'pt',
 
   // Russian
-  // RU: 'ru',
-  // BY: 'ru',
-  // KZ: 'ru',
-  // KG: 'ru',
+  RU: 'ru',
+  BY: 'ru',
+  KZ: 'ru',
+  KG: 'ru',
 
   // Turkish
-  // TR: 'tr',
-  // CY: 'tr',
+  TR: 'tr',
+  CY: 'tr',
 };
 
 type DetectorMessages = {

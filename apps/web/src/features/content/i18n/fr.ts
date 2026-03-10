@@ -20,6 +20,7 @@ export default {
     resultMeta:
       'La recherche pour "{query}" a pris {time} ms et a trouvé {count} résultats',
     searching: 'Recherche en cours',
+    error: 'La recherche a échoué, veuillez réessayer plus tard',
     peopleAlsoSearched: 'Les gens ont aussi cherché :',
     topSearchVariants: {
       variant_001: 'les poissons ont-ils soif',

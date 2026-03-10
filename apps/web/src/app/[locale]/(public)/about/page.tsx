@@ -3,8 +3,9 @@ import styles from '@maw/ui-lib/content.module.css';
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import { getTranslations } from 'next-intl/server';
-
+import { loadLocaleMdx } from '@/i18n/load-locale-mdx';
 import { PageLayout } from '../_components/PageLayout';
+import { TranslationDisclaimer } from '../_components/TranslationDisclaimer';
 
 export { generateStaticParams } from '@/i18n/routing';
 
@@ -27,13 +28,17 @@ export default async function Page({ params }: NextPageProps) {
   const t = await getTranslations();
 
   try {
-    const Content = (await import(`./${locale}.mdx`)).default;
+    const Content = await loadLocaleMdx(
+      locale,
+      (l) => import(`./_i18n/${l}.mdx`),
+    );
     return (
       <PageLayout activeItem="about" role="main">
         <PageHeadline className="mx-auto w-full max-w-screen-md">
           {t('navigation.about')}
         </PageHeadline>
         <div className={styles.content}>
+          <TranslationDisclaimer currentLocale={locale} href="/about" />
           <Content />
         </div>
       </PageLayout>

@@ -1,5 +1,6 @@
 import {
   first_letter_capitalize,
+  flattenSameTagNesting,
   fuzzy_search,
   mb_string_slice,
   mb_string_to_char_array,
@@ -62,6 +63,11 @@ describe('string_closeness', () => {
     expect(result).toEqual(0);
   });
 
+  test('should return 0 if one string is empty', () => {
+    expect(string_closeness('', 'a')).toBe(0);
+    expect(string_closeness('a', '')).toBe(0);
+  });
+
   test('should return 0.83333 if only one char is different in a len 4 string', () => {
     const result = string_closeness('alma', 'elma');
     expect(result).toEqual(5 / 6);
@@ -106,6 +112,42 @@ describe('fuzzy_search', () => {
     expect(result).toBeInstanceOf(Object);
     expect(result?.result).toStrictEqual(
       'Lorem ipsum dolor sit amet, <mark>consectetur</mark> adipiscing elit. <mark>Pellentesque</mark> in justo a ipsum <mark>sollicitudin</mark> faucibus. Donec in la',
+    );
+  });
+});
+
+describe('flattenSameTagNesting', () => {
+  test('should flatten nested tags', () => {
+    const input = '<mark>hello <mark>world</mark></mark>';
+    expect(flattenSameTagNesting(input, 'mark')).toBe(
+      '<mark>hello world</mark>',
+    );
+  });
+
+  test('should handle non-nested tags', () => {
+    const input = '<mark>hello</mark> <mark>world</mark>';
+    expect(flattenSameTagNesting(input, 'mark')).toBe(
+      '<mark>hello</mark> <mark>world</mark>',
+    );
+  });
+
+  test('should handle deep nesting', () => {
+    const input = '<mark><mark><mark>deep</mark></mark></mark>';
+    expect(flattenSameTagNesting(input, 'mark')).toBe('<mark>deep</mark>');
+  });
+
+  test('should return the same string if no tags are present', () => {
+    const input = 'hello world';
+    expect(flattenSameTagNesting(input, 'mark')).toBe('hello world');
+  });
+
+  test('should handle edge cases for the matcher', () => {
+    // This is to try and trigger the return '' branch if somehow it matches something else (unlikely with this regex)
+    // Actually, line 243 `return '';` is a fallback that might be hard to reach if the regex only matches `<tag>` or `</tag>`.
+    // But we can try to pass something that might confuse it if the regex was broader.
+    // Given the current regex `(<${tag}>|</${tag}>)`, it really should only match those two.
+    expect(flattenSameTagNesting('<other>tag</other>', 'mark')).toBe(
+      '<other>tag</other>',
     );
   });
 });

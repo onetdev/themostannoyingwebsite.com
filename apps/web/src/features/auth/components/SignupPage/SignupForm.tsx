@@ -10,6 +10,7 @@ import {
   ConsentChildSoulField,
   ConsentNewsletterField,
   ConsentPrivacyPolicyField,
+  ConsentTermsOfUseField,
   CountryField,
   DateOfBirthField,
   EmailField,
@@ -70,6 +71,7 @@ export function SignupForm() {
           <CountryField required />
           <ConsentNewsletterField />
           <ConsentPrivacyPolicyField required />
+          <ConsentTermsOfUseField required />
           <ConsentChildSoulField required />
           <CaptchaField />
 

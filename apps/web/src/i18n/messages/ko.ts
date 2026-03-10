@@ -46,7 +46,7 @@ export default {
       '개인정보 우선: 우리는 민감한 양식 입력값이나 사용자 자격 증명을 저장하지 않습니다.',
     noWarranties:
       '"있는 그대로" 제공되며 보증은 없습니다. 시간 낭비나 좌절감에 대해 우리는 책임지지 않습니다.',
-    privacyPolicyDisclaimer:
+    translationDisclaimer:
       '이 문서는 공식 영문 버전의 번역본입니다. 불일치가 있는 경우 영문 버전이 우선합니다. 공식 버전은 <linkTag>여기</linkTag>에서 찾을 수 있습니다.',
     cookieConsent:
       '이 웹사이트는 최상의 경험을 제공하기 위해 쿠키를 사용합니다. 또한 이 사이트는 농담이므로 많은 기능이 버그가 있거나 의도적으로 작동하지 않습니다. 설정 메뉴에서 경험과 쿠키 설정을 맞춤 설정할 수 있습니다.',
@@ -94,10 +94,13 @@ export default {
     plans: 'AI 플랜',
     personal: '개인',
     achievements: '업적',
+    admin: '관리자',
+    termsOfUse: '이용약관',
   },
   userField: {
     consentNewsletter: '뉴스레터 수신에 동의합니다',
     consentPrivacyPolicy: '개인정보 처리방침에 동의합니다',
+    consentTermsOfUse: '이용약관에 동의합니다',
     consentChildSoul: '첫째 아이의 영혼을 바칩니다',
     countryCode: '국가',
     dateOfBirth: '생년월일',
@@ -149,27 +152,10 @@ export default {
   },
   language: {
     label: '언어',
-    option: {
-      ar: '아랍어',
-      de: '독일어',
-      en: '영어',
-      es: '스페인어',
-      fr: '프랑스어',
-      hi: '힌디어',
-      hu: '헝가리어',
-      it: '이탈리아어',
-      ja: '일본어',
-      ko: '한국어',
-      pl: '폴란드어',
-      pt: '포르투갈어',
-      ru: '러시아어',
-      tr: '터키어',
-      zh: '중국어',
-    },
   },
   themeSwitch: {
     label: '테마 변경',
     darkMode: '다크 모드',
     lightMode: '라이트 모드',
   },
-};
+} satisfies DeepPartial<AppTranslationShape>;

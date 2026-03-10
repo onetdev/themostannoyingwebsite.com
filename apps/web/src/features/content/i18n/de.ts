@@ -20,6 +20,7 @@ export default {
     resultMeta:
       'Suche nach "{query}" dauerte {time} ms und lieferte {count} Ergebnisse',
     searching: 'Suche läuft',
+    error: 'Suche fehlgeschlagen, bitte versuchen Sie es später noch einmal',
     peopleAlsoSearched: 'Andere suchten auch nach:',
     topSearchVariants: {
       variant_001: 'haben fische durst',

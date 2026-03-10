@@ -53,6 +53,17 @@ describe('mergeIntervals', () => {
     expect(result).toStrictEqual([[0, 0]]);
   });
 
+  test('should handle undefined start or end in intervals', () => {
+    // Testing the branches on lines 12-13
+    const intervals: any[] = [
+      [undefined, 10],
+      [5, undefined],
+    ];
+    const result = mergeIntervals(intervals);
+    // [-Infinity, 10] and [5, Infinity] should merge into [-Infinity, Infinity]
+    expect(result).toStrictEqual([[-Infinity, Infinity]]);
+  });
+
   test('should merge overlapping intervals', () => {
     const result = mergeIntervals([
       [0, 1],
