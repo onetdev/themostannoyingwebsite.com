@@ -47,6 +47,8 @@ export default {
     description:
       "Our premium newsletter brings an insane amount of value right to your inbox. Don't miss out on insights that make a real difference!",
     placeholder: 'Enter your email',
+    onlySpamsLabel: 'I also want to receive OnlySpams™ (Recommended)',
+    onlySpamsDetails: '(details)',
     initialConfirm: 'Subscribe',
     initialCancel: "Don't Subscribe",
     useFormActions: 'Please use the relevant button instead',

@@ -1,3 +1,5 @@
+import type { MarketingI18nShape } from '../types';
+import onlySpamsVariants from './only-spams-variants/en';
 import questionVariants from './quiz-variants/ru';
 
 export default {
@@ -46,6 +48,8 @@ export default {
     description:
       'Наша премиальная рассылка приносит безумное количество пользы прямо в ваш почтовый ящик. Не упустите инсайты, которые действительно имеют значение!',
     placeholder: 'Введите ваш email',
+    onlySpamsLabel: 'Я также хочу получать OnlySpams™ (Рекомендуется)',
+    onlySpamsDetails: '(подробности)',
     initialConfirm: 'Подписаться',
     initialCancel: 'Не подписываться',
     useFormActions:
@@ -86,4 +90,19 @@ export default {
     },
     wheelTitle: 'Колесо фортуны',
   },
-};
+  onlySpams: {
+    title: 'OnlySpams™ — Премиальная рассылка',
+    description:
+      'Присоединяйтесь к самому эксклюзивному в мире кругу любителей входящих сообщений. Мы не просто отправляем электронные письма; мы отправляем эмоции, возможности и очень специфические медицинские советы.',
+    testimonials: {
+      title: 'Что говорят наши «подписчики»',
+      items: onlySpamsVariants.testimonials,
+    },
+    samples: {
+      title: 'Примеры ценности',
+      subject: 'Тема:',
+      items: onlySpamsVariants.samples,
+    },
+    subscribe: 'Подписаться сейчас',
+  },
+} satisfies MarketingI18nShape;

@@ -1,3 +1,5 @@
+import type { MarketingI18nShape } from '../types';
+import onlySpamsVariants from './only-spams-variants/en';
 import questionVariants from './quiz-variants/es';
 
 export default {
@@ -46,6 +48,8 @@ export default {
     description:
       'Nuestro boletín premium trae una cantidad insana de valor directamente a tu bandeja de entrada. ¡No te pierdas las ideas que marcan una diferencia real!',
     placeholder: 'Ingresa tu correo electrónico',
+    onlySpamsLabel: 'También quiero recibir OnlySpams™ (Recomendado)',
+    onlySpamsDetails: '(detalles)',
     initialConfirm: 'Suscribirse',
     initialCancel: 'No suscribirse',
     useFormActions: 'Por favor usa el botón relevante en su lugar',
@@ -85,4 +89,19 @@ export default {
     },
     wheelTitle: 'Rueda de la fortuna',
   },
-};
+  onlySpams: {
+    title: 'OnlySpams™ - Boletín Premium',
+    description:
+      'Únete al círculo más exclusivo del mundo de entusiastas de la bandeja de entrada. No solo enviamos correos electrónicos; enviamos emociones, oportunidades y consejos médicos muy específicos.',
+    testimonials: {
+      title: 'Lo que dicen nuestros "suscriptores"',
+      items: onlySpamsVariants.testimonials,
+    },
+    samples: {
+      title: 'Ejemplos de valor añadido',
+      subject: 'Asunto:',
+      items: onlySpamsVariants.samples,
+    },
+    subscribe: 'Suscríbete ahora',
+  },
+} satisfies MarketingI18nShape;

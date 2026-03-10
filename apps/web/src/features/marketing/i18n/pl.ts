@@ -1,3 +1,5 @@
+import type { MarketingI18nShape } from '../types';
+import onlySpamsVariants from './only-spams-variants/en';
 import questionVariants from './quiz-variants/pl';
 
 export default {
@@ -46,6 +48,8 @@ export default {
     description:
       'Nasz newsletter premium wnosi niesamowitą wartość prosto do Twojej skrzynki odbiorczej. Nie przegap spostrzeżeń, które robią prawdziwą różnicę!',
     placeholder: 'Wpisz swój e-mail',
+    onlySpamsLabel: 'Chcę również otrzymywać OnlySpams™ (Zalecane)',
+    onlySpamsDetails: '(szczegóły)',
     initialConfirm: 'Subskrybuj',
     initialCancel: 'Nie subskrybuj',
     useFormActions: 'Proszę zamiast tego użyć odpowiedniego przycisku',
@@ -85,4 +89,19 @@ export default {
     },
     wheelTitle: 'Koło fortuny',
   },
-};
+  onlySpams: {
+    title: 'OnlySpams™ - Newsletter Premium',
+    description:
+      'Dołącz do najbardziej ekskluzywnego kręgu entuzjastów skrzynek odbiorczych na świecie. Nie wysyłamy tylko e-maili; wysyłamy emocje, możliwości i bardzo konkretne porady medyczne.',
+    testimonials: {
+      title: 'Co mówią nasi „subskrybenci”',
+      items: onlySpamsVariants.testimonials,
+    },
+    samples: {
+      title: 'Przykładowe wartości dodane',
+      subject: 'Temat:',
+      items: onlySpamsVariants.samples,
+    },
+    subscribe: 'Subskrybuj teraz',
+  },
+} satisfies MarketingI18nShape;

@@ -1,3 +1,5 @@
+import type { MarketingI18nShape } from '../types';
+import onlySpamsVariants from './only-spams-variants/en';
 import questionVariants from './quiz-variants/fr';
 
 export default {
@@ -48,6 +50,8 @@ export default {
     description:
       'Notre newsletter premium apporte une valeur folle directement dans votre boîte de réception. Ne manquez pas les informations qui font une vraie différence !',
     placeholder: 'Entrez votre email',
+    onlySpamsLabel: 'Je souhaite également recevoir OnlySpams™ (Recommandé)',
+    onlySpamsDetails: '(détails)',
     initialConfirm: "S'abonner",
     initialCancel: "Ne pas s'abonner",
     useFormActions: 'Veuillez utiliser le bouton approprié à la place',
@@ -87,4 +91,19 @@ export default {
     },
     wheelTitle: 'Roue de la fortune',
   },
-};
+  onlySpams: {
+    title: 'OnlySpams™ - Newsletter Premium',
+    description:
+      "Rejoignez le cercle le plus exclusif d'amateurs de boîtes de réception au monde. Nous n'envoyons pas seulement des e-mails ; nous envoyons des émotions, des opportunités et des conseils médicaux très spécifiques.",
+    testimonials: {
+      title: 'Ce que disent nos "abonnés"',
+      items: onlySpamsVariants.testimonials,
+    },
+    samples: {
+      title: 'Exemples de valeur ajoutée',
+      subject: 'Sujet :',
+      items: onlySpamsVariants.samples,
+    },
+    subscribe: "S'abonner maintenant",
+  },
+} satisfies MarketingI18nShape;

@@ -1,3 +1,5 @@
+import type { MarketingI18nShape } from '../types';
+import onlySpamsVariants from './only-spams-variants/en';
 import questionVariants from './quiz-variants/de';
 
 export default {
@@ -47,6 +49,8 @@ export default {
     description:
       'Unser Premium-Newsletter bringt eine wahnsinnige Menge an Mehrwert direkt in Ihren Posteingang. Verpassen Sie keine Erkenntnisse, die einen echten Unterschied machen!',
     placeholder: 'Geben Sie Ihre E-Mail ein',
+    onlySpamsLabel: 'Ich möchte auch OnlySpams™ erhalten (empfohlen)',
+    onlySpamsDetails: '(Details)',
     initialConfirm: 'Abonnieren',
     initialCancel: 'Nicht abonnieren',
     useFormActions: 'Bitte verwenden Sie stattdessen den entsprechenden Button',
@@ -86,4 +90,19 @@ export default {
     },
     wheelTitle: 'Glücksrad',
   },
-};
+  onlySpams: {
+    title: 'OnlySpams™ - Premium-Newsletter',
+    description:
+      'Treten Sie dem exklusivsten Kreis von Posteingangs-Enthusiasten der Welt bei. Wir verschicken nicht nur E-Mails; wir verschicken Emotionen, Gelegenheiten und sehr spezifische medizinische Ratschläge.',
+    testimonials: {
+      title: 'Was unsere „Abonnenten“ sagen',
+      items: onlySpamsVariants.testimonials,
+    },
+    samples: {
+      title: 'Beispielhafte Mehrwerte',
+      subject: 'Betreff:',
+      items: onlySpamsVariants.samples,
+    },
+    subscribe: 'Jetzt abonnieren',
+  },
+} satisfies MarketingI18nShape;

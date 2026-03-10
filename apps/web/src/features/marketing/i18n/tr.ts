@@ -1,3 +1,5 @@
+import type { MarketingI18nShape } from '../types';
+import onlySpamsVariants from './only-spams-variants/en';
 import questionVariants from './quiz-variants/tr';
 
 export default {
@@ -47,6 +49,8 @@ export default {
     description:
       'Premium bültenimiz, gelen kutunuza inanılmaz miktarda değer getirir. Gerçek fark yaratan içgörüleri kaçırmayın!',
     placeholder: 'E-postanızı girin',
+    onlySpamsLabel: 'Ayrıca OnlySpams™ almak istiyorum (Önerilir)',
+    onlySpamsDetails: '(detaylar)',
     initialConfirm: 'Abone Ol',
     initialCancel: 'Abone Olma',
     useFormActions: 'Lütfen bunun yerine ilgili butonu kullanın',
@@ -86,4 +90,19 @@ export default {
     },
     wheelTitle: 'Şans çarkı',
   },
-};
+  onlySpams: {
+    title: 'OnlySpams™ - Premium Bülten',
+    description:
+      'Dünyanın en seçkin gelen kutusu meraklıları çevresine katılın. Sadece e-posta göndermiyoruz; duygular, fırsatlar ve çok özel tıbbi tavsiyeler gönderiyoruz.',
+    testimonials: {
+      title: '"Abonelerimiz" ne diyor?',
+      items: onlySpamsVariants.testimonials,
+    },
+    samples: {
+      title: 'Örnek Değer Katımları',
+      subject: 'Konu:',
+      items: onlySpamsVariants.samples,
+    },
+    subscribe: 'Şimdi Abone Ol',
+  },
+} satisfies MarketingI18nShape;

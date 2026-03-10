@@ -1,3 +1,5 @@
+import type { MarketingI18nShape } from '../types';
+import onlySpamsVariants from './only-spams-variants/en';
 import questionVariants from './quiz-variants/hi';
 
 export default {
@@ -46,6 +48,8 @@ export default {
     description:
       'हमारा प्रीमियम न्यूज़लेटर आपके इनबॉक्स में पागलपन की हद तक वैल्यू लाता है। उन अंतर्दृष्टि (insights) को न चूकें जो वास्तविक बदलाव लाती हैं!',
     placeholder: 'अपना ईमेल दर्ज करें',
+    onlySpamsLabel: 'मैं OnlySpams™ भी प्राप्त करना चाहता हूँ (अनुशंसित)',
+    onlySpamsDetails: '(विवरण)',
     initialConfirm: 'सब्सक्राइब करें',
     initialCancel: 'सब्सक्राइब न करें',
     useFormActions: 'कृपया इसके बजाय प्रासंगिक बटन का उपयोग करें',
@@ -85,4 +89,19 @@ export default {
     },
     wheelTitle: 'भाग्य का पहिया',
   },
-};
+  onlySpams: {
+    title: 'OnlySpams™ - प्रीमियम न्यूज़लेटर',
+    description:
+      'इनबॉक्स के शौकीनों के दुनिया के सबसे विशिष्ट दायरे में शामिल हों। हम केवल ईमेल नहीं भेजते; हम भावनाएं, अवसर और बहुत विशिष्ट चिकित्सा सलाह भेजते हैं।',
+    testimonials: {
+      title: 'हमारे "सदस्य" क्या कहते हैं',
+      items: onlySpamsVariants.testimonials,
+    },
+    samples: {
+      title: 'नमूना मूल्य-वर्धन',
+      subject: 'विषय:',
+      items: onlySpamsVariants.samples,
+    },
+    subscribe: 'अभी सब्सक्राइब करें',
+  },
+} satisfies MarketingI18nShape;
