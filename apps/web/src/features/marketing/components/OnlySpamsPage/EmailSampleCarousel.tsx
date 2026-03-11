@@ -10,16 +10,18 @@ import {
   CarouselPrevious,
 } from '@maw/ui-lib';
 import { motion } from 'framer-motion';
-import { useMessages } from 'next-intl';
 import { useEffect, useState } from 'react';
+import type { EmailSample } from '../../types';
 import { EmailSampleCard } from './EmailSampleCard';
 
-export function EmailSampleCarousel() {
+export interface EmailSampleCarouselProps {
+  items: EmailSample[];
+}
+
+export function EmailSampleCarousel({ items }: EmailSampleCarouselProps) {
   const [api, setApi] = useState<CarouselApi>();
   const [current, setCurrent] = useState(0);
   const [count, setCount] = useState(0);
-  const messages = useMessages() as AppTranslationShape;
-  const samples = messages.marketing.onlySpams.samples.items;
 
   useEffect(() => {
     if (!api) return;
@@ -47,7 +49,7 @@ export function EmailSampleCarousel() {
         }}
       >
         <CarouselContent className="-ml-4" fade>
-          {samples.map((email, i) => (
+          {items.map((email, i) => (
             <CarouselItem
               key={`${email.subject}${email.body}`}
               className="pl-4 basis-[70%] md:basis-[55%] lg:basis-[45%] pb-4"

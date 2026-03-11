@@ -12,6 +12,8 @@ import { ArticleService } from '@/features/content/services';
 import { DI as DIContent } from '@/features/content/types';
 import { DonationService } from '@/features/funding/services';
 import { DI as DIDonation } from '@/features/funding/types';
+import { OnlySpamsService } from '@/features/marketing/services';
+import { DI as DIMarketing } from '@/features/marketing/types';
 import { SubscriptionPlansService } from '@/features/subscription/services';
 import { DI as DISubscription } from '@/features/subscription/types';
 import { StaticCountryRepository } from '@/repositories';
@@ -24,6 +26,7 @@ export const Symbols = {
   ...DIComments,
   ...DIContent,
   ...DIDonation,
+  ...DIMarketing,
   ...DISubscription,
 };
 
@@ -58,4 +61,8 @@ export function configureContainer(container: Container) {
     .inSingletonScope();
   container.bind(Symbols.CommentService).to(CommentService).inSingletonScope();
   container.bind(Symbols.ArticleService).to(ArticleService).inSingletonScope();
+  container
+    .bind(Symbols.OnlySpamsService)
+    .to(OnlySpamsService)
+    .inSingletonScope();
 }

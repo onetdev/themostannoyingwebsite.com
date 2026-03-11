@@ -13,13 +13,16 @@ import {
   CarouselPrevious,
 } from '@maw/ui-lib';
 import { motion } from 'framer-motion';
-import { useMessages, useTranslations } from 'next-intl';
+import { useTranslations } from 'next-intl';
 import { useEffect, useState } from 'react';
+import type { Testimonial } from '../../types';
 
-export function TestimonialCarousel() {
+export interface TestimonialCarouselProps {
+  items: Testimonial[];
+}
+
+export function TestimonialCarousel({ items }: TestimonialCarouselProps) {
   const t = useTranslations();
-  const messages = useMessages() as AppTranslationShape;
-  const testimonials = messages.marketing.onlySpams.testimonials.items;
   const [api, setApi] = useState<CarouselApi>();
   const [current, setCurrent] = useState(0);
   const [count, setCount] = useState(0);
@@ -50,7 +53,7 @@ export function TestimonialCarousel() {
         }}
       >
         <CarouselContent className="-ml-4" fade>
-          {testimonials.map((testimonial, i) => (
+          {items.map((testimonial, i) => (
             <CarouselItem
               key={`${testimonial.comment}`}
               className="pl-4 basis-[70%] md:basis-[60%]"
@@ -75,9 +78,7 @@ export function TestimonialCarousel() {
                       "{testimonial.comment}"
                     </p>
 
-                    <p className="font-semibold">
-                      — {messages.variants.names[i]}
-                    </p>
+                    <p className="font-semibold">— {testimonial.name}</p>
                   </CardContent>
                 </Card>
               </motion.div>

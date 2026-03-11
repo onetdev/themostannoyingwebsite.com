@@ -4,11 +4,17 @@ import { Button } from '@maw/ui-lib';
 import Image from 'next/image';
 import { useTranslations } from 'next-intl';
 import { emit } from '@/core/events/event-bus';
+import type { EmailSample, Testimonial } from '../../types';
 import { EmailSampleCarousel } from './EmailSampleCarousel';
 import { ParallaxDecorationBlocks } from './ParallaxDecorationBlocks';
 import { TestimonialCarousel } from './TestimonialCarousel';
 
-export function OnlySpamsPage() {
+export interface OnlySpamsPageProps {
+  testimonials: Testimonial[];
+  samples: EmailSample[];
+}
+
+export function OnlySpamsPage({ testimonials, samples }: OnlySpamsPageProps) {
   const t = useTranslations();
 
   const handleSubscribe = () => {
@@ -39,14 +45,14 @@ export function OnlySpamsPage() {
         <h3 className="text-xl md:text-3xl font-bold text-center px-5">
           {t('marketing.onlySpams.samples.title')}
         </h3>
-        <EmailSampleCarousel />
+        <EmailSampleCarousel items={samples} />
       </div>
 
       <div className="w-full relative z-10 flex flex-col gap-12 md:gap-15">
         <h3 className="text-xl md:text-3xl font-bold text-center px-5">
           {t('marketing.onlySpams.testimonials.title')}
         </h3>
-        <TestimonialCarousel />
+        <TestimonialCarousel items={testimonials} />
       </div>
 
       <div className="flex justify-center mt-4 md:mt-8 relative z-10">
