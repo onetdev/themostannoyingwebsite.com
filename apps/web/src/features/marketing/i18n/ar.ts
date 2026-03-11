@@ -1,4 +1,5 @@
 import type { MarketingI18nShape } from '../types';
+import onlySpamsVariants from './only-spams-variants/ar';
 import questionVariants from './quiz-variants/ar';
 
 export default {
@@ -47,6 +48,8 @@ export default {
     description:
       'نشرتنا الإخبارية المتميزة تجلب قدراً هائلاً من القيمة مباشرة إلى بريدك الوارد. لا تفوت الأفكار التي تحدث فرقاً حقيقياً!',
     placeholder: 'أدخل بريدك الإلكتروني',
+    onlySpamsLabel: 'أريد أيضًا استلام OnlySpams (موصى به)',
+    onlySpamsDetails: '(التفاصيل)',
     initialConfirm: 'اشتراك',
     initialCancel: 'عدم الاشتراك',
     useFormActions: 'يرجى استخدام الزر المناسب بدلاً من ذلك',
@@ -85,5 +88,25 @@ export default {
       fake70Discount: 'خصم وهمي 70%',
     },
     wheelTitle: 'عجلة الحظ',
+  },
+  onlySpams: {
+    title: 'OnlySpams - النشرة الإخبارية المتميزة',
+    description:
+      'انضم إلى الدائرة الأكثر حصرية من عشاق صناديق الوارد في العالم. نحن لا نرسل رسائل بريد إلكتروني فقط؛ بل نرسل مشاعر، وفرصاً، ونصائح طبية محددة للغاية.',
+    testimonials: {
+      title: 'ماذا يقول "مشتركونا"',
+      verified: 'مُوثّق',
+      items: onlySpamsVariants.testimonials,
+    },
+    samples: {
+      title: 'أمثلة على القيمة المضافة',
+      sender: 'المرسل:',
+      subject: 'الموضوع:',
+      folder: 'المجلد:',
+      spam: 'بريد مزعج',
+      cta: 'أنا مهتم',
+      items: onlySpamsVariants.samples,
+    },
+    subscribe: 'اشترك الآن',
   },
 } satisfies MarketingI18nShape;

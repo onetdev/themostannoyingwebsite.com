@@ -1,8 +1,8 @@
 import achievements from '@/features/achievements/i18n/hi';
 import auth from '@/features/auth/i18n/hi';
 import humanVerification from '@/features/captcha/i18n/hi';
-import commentVariants from '@/features/comments/i18n/generator/hi';
 import comments from '@/features/comments/i18n/hi';
+import commentVariants from '@/features/comments/i18n/variants/hi';
 import content from '@/features/content/i18n/hi';
 import disruptions from '@/features/disruptions/i18n/hi';
 import funding from '@/features/funding/i18n/hi';
@@ -13,6 +13,7 @@ import support from '@/features/support/i18n/hi';
 import user from '@/features/user/i18n/hi';
 import common from './common/hi';
 import metadata from './metadata/hi';
+import variants from './variants/hi';
 
 export default {
   // Feature or externals
@@ -31,6 +32,7 @@ export default {
   subscription,
   support,
   user,
+  variants,
 
   // App level, shared translations
   app: {
@@ -96,6 +98,9 @@ export default {
     achievements: 'उपलब्धियां',
     admin: 'एडमिन',
     termsOfUse: 'उपयोग की शर्तें',
+    onlySpams: 'OnlySpams',
+    virgin: 'वर्जिन',
+    flaimAPhone: 'एक फोन फ्लेम करें!',
   },
   userField: {
     consentNewsletter: 'मैं न्यूज़लेटर प्राप्त करना चाहता हूँ',

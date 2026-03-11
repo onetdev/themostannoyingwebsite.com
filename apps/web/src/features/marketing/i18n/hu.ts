@@ -1,4 +1,5 @@
 import type { MarketingI18nShape } from '../types';
+import onlySpamsVariants from './only-spams-variants/hu';
 import questionVariants from './quiz-variants/hu';
 
 export default {
@@ -47,6 +48,8 @@ export default {
     description:
       'Prémium hírlevelünk őrült mennyiségű értéket visz egyenesen a postaládádba. Ne maradj le a felismerésekről, amik valódi változást hoznak!',
     placeholder: 'Add meg az e-mail címed',
+    onlySpamsLabel: 'Én is szeretnék OnlySpams-et kapni (ajánlott)',
+    onlySpamsDetails: '(részletek)',
     initialConfirm: 'Feliratkozás',
     initialCancel: 'Mégse iratkozom fel',
     useFormActions: 'Kérlek, használd helyette a megfelelő gombot',
@@ -85,5 +88,25 @@ export default {
       fake70Discount: 'Kamuzott 70%-os kedvezmény',
     },
     wheelTitle: 'Szerencsekerék',
+  },
+  onlySpams: {
+    title: 'OnlySpams - Prémium hírlevél',
+    description:
+      'Csatlakozz a világ legexkluzívabb postaláda-rajongói köréhez. Mi nem csak e-maileket küldünk; érzelmeket, lehetőségeket és nagyon specifikus orvosi tanácsokat küldünk.',
+    testimonials: {
+      title: 'Mit mondanak a „Feliratkozóink”',
+      verified: 'Ellenőrzött',
+      items: onlySpamsVariants.testimonials,
+    },
+    samples: {
+      title: 'Példák az értékteremtésre',
+      sender: 'Feladó:',
+      subject: 'Tárgy:',
+      folder: 'Mappa:',
+      spam: 'SPAM',
+      cta: 'ÉRDEKEL',
+      items: onlySpamsVariants.samples,
+    },
+    subscribe: 'Feliratkozás most',
   },
 } satisfies MarketingI18nShape;

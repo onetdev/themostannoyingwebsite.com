@@ -84,6 +84,11 @@ export default {
     description:
       "Choisissez parmi notre sélection de forfaits IA premium, 100 % faux. Découvrez le futur de l'agacement dès aujourd'hui !",
   },
+  onlySpams: {
+    title: 'OnlySpams',
+    description:
+      "La newsletter la plus exclusive pour votre boîte de réception. Découvrez la joie du spam sans fin et des e-mails d'arnaque de haute qualité.",
+  },
   admin: {
     title: 'Terminal Admin',
     description:

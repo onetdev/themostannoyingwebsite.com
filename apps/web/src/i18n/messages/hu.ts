@@ -1,8 +1,8 @@
 import achievements from '@/features/achievements/i18n/hu';
 import auth from '@/features/auth/i18n/hu';
 import humanVerification from '@/features/captcha/i18n/hu';
-import commentVariants from '@/features/comments/i18n/generator/hu';
 import comments from '@/features/comments/i18n/hu';
+import commentVariants from '@/features/comments/i18n/variants/hu';
 import content from '@/features/content/i18n/hu';
 import disruptions from '@/features/disruptions/i18n/hu';
 import funding from '@/features/funding/i18n/hu';
@@ -13,6 +13,7 @@ import support from '@/features/support/i18n/hu';
 import user from '@/features/user/i18n/hu';
 import common from './common/hu';
 import metadata from './metadata/hu';
+import variants from './variants/hu';
 
 export default {
   // Feature or externals
@@ -31,6 +32,7 @@ export default {
   subscription,
   support,
   user,
+  variants,
 
   // App level, shared translations
   app: {
@@ -98,6 +100,9 @@ export default {
     achievements: 'Eredmények',
     admin: 'Adminisztráció',
     termsOfUse: 'Felhasználási feltételek',
+    onlySpams: 'OnlySpams',
+    virgin: 'Szűz',
+    flaimAPhone: 'Kérj egy telefont!',
   },
   userField: {
     consentNewsletter: 'Szeretnék hírlevelet kapni',

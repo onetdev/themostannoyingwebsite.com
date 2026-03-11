@@ -1,4 +1,5 @@
 import type { MarketingI18nShape } from '../types';
+import onlySpamsVariants from './only-spams-variants/zh';
 import questionVariants from './quiz-variants/zh';
 
 export default {
@@ -47,6 +48,8 @@ export default {
     description:
       '我们的高级新闻通讯将疯狂的价值直接送到你的收件箱。不要错过那些能产生真正影响的见解！',
     placeholder: '输入你的电子邮件',
+    onlySpamsLabel: '我也想接收 OnlySpams（推荐）',
+    onlySpamsDetails: '（详情）',
     initialConfirm: '订阅',
     initialCancel: '不订阅',
     useFormActions: '请使用相关的按钮代替',
@@ -85,5 +88,25 @@ export default {
       fake70Discount: '虚假的 7 成折扣',
     },
     wheelTitle: '幸运大转盘',
+  },
+  onlySpams: {
+    title: 'OnlySpams - 高级新闻通讯',
+    description:
+      '加入全球最专属的收件箱爱好者圈子。我们不只是发送电子邮件；我们还发送情感、机会和非常具体的医疗建议。',
+    testimonials: {
+      title: '我们的“订阅者”怎么说',
+      verified: '已验证',
+      items: onlySpamsVariants.testimonials,
+    },
+    samples: {
+      title: '增值示例',
+      sender: '发件人：',
+      subject: '主题：',
+      folder: '文件夹：',
+      spam: '垃圾邮件',
+      cta: '我感兴趣',
+      items: onlySpamsVariants.samples,
+    },
+    subscribe: '立即订阅',
   },
 } satisfies MarketingI18nShape;

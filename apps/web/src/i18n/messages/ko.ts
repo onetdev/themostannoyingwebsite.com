@@ -1,8 +1,8 @@
 import achievements from '@/features/achievements/i18n/ko';
 import auth from '@/features/auth/i18n/ko';
 import humanVerification from '@/features/captcha/i18n/ko';
-import commentVariants from '@/features/comments/i18n/generator/ko';
 import comments from '@/features/comments/i18n/ko';
+import commentVariants from '@/features/comments/i18n/variants/ko';
 import content from '@/features/content/i18n/ko';
 import disruptions from '@/features/disruptions/i18n/ko';
 import funding from '@/features/funding/i18n/ko';
@@ -13,6 +13,7 @@ import support from '@/features/support/i18n/ko';
 import user from '@/features/user/i18n/ko';
 import common from './common/ko';
 import metadata from './metadata/ko';
+import variants from './variants/ko';
 
 export default {
   // Feature or externals
@@ -31,6 +32,7 @@ export default {
   subscription,
   support,
   user,
+  variants,
 
   // App level, shared translations
   app: {
@@ -96,6 +98,9 @@ export default {
     achievements: '업적',
     admin: '관리자',
     termsOfUse: '이용약관',
+    onlySpams: 'OnlySpams',
+    virgin: '버진',
+    flaimAPhone: '휴대폰을 플레임하세요!',
   },
   userField: {
     consentNewsletter: '뉴스레터 수신에 동의합니다',

@@ -1,3 +1,5 @@
+import type { MarketingI18nShape } from '../types';
+import onlySpamsVariants from './only-spams-variants/pt';
 import questionVariants from './quiz-variants/pt';
 
 export default {
@@ -47,6 +49,8 @@ export default {
     description:
       'A nossa newsletter premium traz uma quantidade insana de valor diretamente para a sua caixa de entrada. Não perca informações que fazem uma diferença real!',
     placeholder: 'Introduza o seu email',
+    onlySpamsLabel: 'Também quero receber OnlySpams (Recomendado)',
+    onlySpamsDetails: '(detalhes)',
     initialConfirm: 'Subscrever',
     initialCancel: 'Não Subscrever',
     useFormActions: 'Por favor, use o botão relevante em vez disso',
@@ -86,4 +90,24 @@ export default {
     },
     wheelTitle: 'Roda da Fortuna',
   },
-};
+  onlySpams: {
+    title: 'OnlySpams - Newsletter Premium',
+    description:
+      'Junte-se ao círculo mais exclusivo do mundo de entusiastas da caixa de entrada. Não enviamos apenas e-mails; enviamos emoções, oportunidades e conselhos médicos muito específicos.',
+    testimonials: {
+      title: 'O que dizem os nossos "assinantes"',
+      verified: 'Verificado',
+      items: onlySpamsVariants.testimonials,
+    },
+    samples: {
+      title: 'Exemplos de valor acrescentado',
+      sender: 'Remetente:',
+      subject: 'Assunto:',
+      folder: 'Pasta:',
+      spam: 'SPAM',
+      cta: 'ESTOU INTERESSADO',
+      items: onlySpamsVariants.samples,
+    },
+    subscribe: 'Subscrever agora',
+  },
+} satisfies MarketingI18nShape;

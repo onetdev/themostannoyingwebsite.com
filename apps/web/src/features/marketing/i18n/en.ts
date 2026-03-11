@@ -1,3 +1,4 @@
+import onlySpamsVariants from './only-spams-variants/en';
 import questionVariants from './quiz-variants/en';
 
 export default {
@@ -46,6 +47,8 @@ export default {
     description:
       "Our premium newsletter brings an insane amount of value right to your inbox. Don't miss out on insights that make a real difference!",
     placeholder: 'Enter your email',
+    onlySpamsLabel: 'I also want to receive OnlySpams (Recommended)',
+    onlySpamsDetails: '(details)',
     initialConfirm: 'Subscribe',
     initialCancel: "Don't Subscribe",
     useFormActions: 'Please use the relevant button instead',
@@ -84,5 +87,25 @@ export default {
       fake70Discount: 'Fake 70% discount',
     },
     wheelTitle: 'Wheel of fortune',
+  },
+  onlySpams: {
+    title: 'OnlySpams - Premium Newsletter',
+    description:
+      "Join the world's most exclusive circle of inbox enthusiasts. We don't just send emails; we send emotions, opportunities, and very specific medical advice.",
+    testimonials: {
+      title: 'What our "Subscribers" say',
+      verified: 'Verified',
+      items: onlySpamsVariants.testimonials,
+    },
+    samples: {
+      title: 'Sample Value-Adds',
+      sender: 'Sender:',
+      subject: 'Subject:',
+      folder: 'Folder:',
+      spam: 'SPAM',
+      cta: "I'M INTERESTED",
+      items: onlySpamsVariants.samples,
+    },
+    subscribe: 'Subscribe Now',
   },
 };

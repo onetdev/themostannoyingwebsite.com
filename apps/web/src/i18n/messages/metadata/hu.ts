@@ -84,6 +84,11 @@ export default {
     description:
       'Válasszon prémium, 100%-ban hamis MI csomagjaink közül. Tapasztalja meg a bosszúság jövőjét még ma!',
   },
+  onlySpams: {
+    title: 'OnlySpams',
+    description:
+      'A legexkluzívabb hírlevél az Ön postaládájába. Tapasztalja meg a végtelen spam és a kiváló minőségű átverő e-mailek örömét.',
+  },
   admin: {
     title: 'Admin terminál',
     description:

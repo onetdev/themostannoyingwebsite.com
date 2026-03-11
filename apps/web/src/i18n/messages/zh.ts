@@ -1,7 +1,7 @@
 import achievements from '@/features/achievements/i18n/zh';
 import auth from '@/features/auth/i18n/zh';
 import humanVerification from '@/features/captcha/i18n/zh';
-import commentVariants from '@/features/comments/i18n/generator/zh';
+import commentVariants from '@/features/comments/i18n/variants/zh';
 import comments from '@/features/comments/i18n/zh';
 import content from '@/features/content/i18n/zh';
 import disruptions from '@/features/disruptions/i18n/zh';
@@ -13,6 +13,7 @@ import support from '@/features/support/i18n/zh';
 import user from '@/features/user/i18n/zh';
 import common from './common/zh';
 import metadata from './metadata/zh';
+import variants from './variants/zh';
 
 export default {
   // Feature or externals
@@ -31,6 +32,7 @@ export default {
   subscription,
   support,
   user,
+  variants,
 
   // App level, shared translations
   app: {
@@ -94,6 +96,9 @@ export default {
     achievements: '成就',
     admin: '管理',
     termsOfUse: '使用条款',
+    onlySpams: 'OnlySpams',
+    virgin: 'Virgin',
+    flaimAPhone: '飞领一部手机！',
   },
   userField: {
     consentNewsletter: '我想接收新闻通讯',

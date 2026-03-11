@@ -1,8 +1,8 @@
 import achievements from '@/features/achievements/i18n/ru';
 import auth from '@/features/auth/i18n/ru';
 import humanVerification from '@/features/captcha/i18n/ru';
-import commentVariants from '@/features/comments/i18n/generator/ru';
 import comments from '@/features/comments/i18n/ru';
+import commentVariants from '@/features/comments/i18n/variants/ru';
 import content from '@/features/content/i18n/ru';
 import disruptions from '@/features/disruptions/i18n/ru';
 import funding from '@/features/funding/i18n/ru';
@@ -13,6 +13,7 @@ import support from '@/features/support/i18n/ru';
 import user from '@/features/user/i18n/ru';
 import common from './common/ru';
 import metadata from './metadata/ru';
+import variants from './variants/ru';
 
 export default {
   // Feature or externals
@@ -31,6 +32,7 @@ export default {
   subscription,
   support,
   user,
+  variants,
 
   // App level, shared translations
   app: {
@@ -97,6 +99,9 @@ export default {
     achievements: 'Достижения',
     admin: 'Админ',
     termsOfUse: 'Условия использования',
+    onlySpams: 'OnlySpams',
+    virgin: 'Девственный',
+    flaimAPhone: 'Зафлейми телефон!',
   },
   userField: {
     consentNewsletter: 'Я хочу получать рассылку',

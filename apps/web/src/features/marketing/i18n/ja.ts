@@ -1,3 +1,5 @@
+import type { MarketingI18nShape } from '../types';
+import onlySpamsVariants from './only-spams-variants/ja';
 import questionVariants from './quiz-variants/ja';
 
 export default {
@@ -46,6 +48,8 @@ export default {
     description:
       '私たちのプレミアムニュースレターは、あなたの受信トレイに計り知れない価値をもたらします。真の変化をもたらす洞察をお見逃しなく！',
     placeholder: 'メールアドレスを入力',
+    onlySpamsLabel: 'OnlySpamsも受け取りたい（推奨）',
+    onlySpamsDetails: '（詳細）',
     initialConfirm: '購読する',
     initialCancel: '購読しない',
     useFormActions: '代わりに適切なボタンを使用してください',
@@ -85,4 +89,24 @@ export default {
     },
     wheelTitle: 'ホイール・オブ・フォーチュン',
   },
-};
+  onlySpams: {
+    title: 'OnlySpams - プレミアムニュースレター',
+    description:
+      '世界で最も独占的な受信トレイ愛好家のサークルに参加しましょう。私たちは単にメールを送るだけではありません。感情、機会、そして非常に具体的な医学的アドバイスを送信します。',
+    testimonials: {
+      title: '「購読者」の声',
+      verified: '認証済み',
+      items: onlySpamsVariants.testimonials,
+    },
+    samples: {
+      title: '付加価値の例',
+      sender: '送信者:',
+      subject: '件名:',
+      folder: 'フォルダ:',
+      spam: 'スパム',
+      cta: '興味があります',
+      items: onlySpamsVariants.samples,
+    },
+    subscribe: '今すぐ購読',
+  },
+} satisfies MarketingI18nShape;

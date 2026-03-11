@@ -1,3 +1,5 @@
+import type { MarketingI18nShape } from '../types';
+import onlySpamsVariants from './only-spams-variants/it';
 import questionVariants from './quiz-variants/it';
 
 export default {
@@ -46,6 +48,8 @@ export default {
     description:
       'La nostra newsletter premium porta un valore pazzesco direttamente nella tua casella di posta. Non perderti approfondimenti che fanno davvero la differenza!',
     placeholder: 'Inserisci la tua email',
+    onlySpamsLabel: 'Voglio ricevere anche OnlySpams (Consigliato)',
+    onlySpamsDetails: '(dettagli)',
     initialConfirm: 'Iscriviti',
     initialCancel: 'Non iscrivermi',
     useFormActions: 'Per favore usa il pulsante pertinente invece',
@@ -85,4 +89,24 @@ export default {
     },
     wheelTitle: 'Ruota della fortuna',
   },
-};
+  onlySpams: {
+    title: 'OnlySpams - Newsletter Premium',
+    description:
+      'Unisciti alla cerchia più esclusiva al mondo di entusiasti della posta in arrivo. Non inviamo solo e-mail; inviamo emozioni, opportunità e consigli medici molto specifici.',
+    testimonials: {
+      title: 'Cosa dicono i nostri "abbonati"',
+      verified: 'Verificato',
+      items: onlySpamsVariants.testimonials,
+    },
+    samples: {
+      title: 'Esempi di valore aggiunto',
+      sender: 'Mittente:',
+      subject: 'Oggetto:',
+      folder: 'Cartella:',
+      spam: 'SPAM',
+      cta: 'SONO INTERESSATO',
+      items: onlySpamsVariants.samples,
+    },
+    subscribe: 'Iscriviti ora',
+  },
+} satisfies MarketingI18nShape;

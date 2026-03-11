@@ -1,3 +1,5 @@
+import type { MarketingI18nShape } from '../types';
+import onlySpamsVariants from './only-spams-variants/ko';
 import questionVariants from './quiz-variants/ko';
 
 export default {
@@ -46,6 +48,8 @@ export default {
     description:
       '저희 프리미엄 뉴스레터는 엄청난 가치를 여러분의 편지함으로 직접 전달해 드립니다. 실질적인 차이를 만드는 인사이트를 놓치지 마세요!',
     placeholder: '이메일을 입력하세요',
+    onlySpamsLabel: 'OnlySpams도 받고 싶습니다 (권장)',
+    onlySpamsDetails: '(상세)',
     initialConfirm: '구독하기',
     initialCancel: '구독하지 않기',
     useFormActions: '대신 해당 버튼을 사용해 주세요',
@@ -85,4 +89,24 @@ export default {
     },
     wheelTitle: '행운의 바퀴',
   },
-};
+  onlySpams: {
+    title: 'OnlySpams - 프리미엄 뉴스레터',
+    description:
+      '세계에서 가장 독점적인 인박스 애호가들의 모임에 참여하세요. 우리는 단순히 이메일을 보내는 것이 아니라 감정, 기회, 그리고 매우 구체적인 의학적 조언을 보냅니다.',
+    testimonials: {
+      title: '우리 "구독자"들의 한마디',
+      verified: '인증됨',
+      items: onlySpamsVariants.testimonials,
+    },
+    samples: {
+      title: '가치 증대 샘플',
+      sender: '보낸 사람:',
+      subject: '제목:',
+      folder: '폴더:',
+      spam: '스팸',
+      cta: '관심 있습니다',
+      items: onlySpamsVariants.samples,
+    },
+    subscribe: '지금 구독하기',
+  },
+} satisfies MarketingI18nShape;

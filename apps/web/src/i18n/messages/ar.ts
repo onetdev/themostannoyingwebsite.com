@@ -2,7 +2,7 @@ import achievements from '@/features/achievements/i18n/ar';
 import auth from '@/features/auth/i18n/ar';
 import humanVerification from '@/features/captcha/i18n/ar';
 import comments from '@/features/comments/i18n/ar';
-import commentVariants from '@/features/comments/i18n/generator/ar';
+import commentVariants from '@/features/comments/i18n/variants/ar';
 import content from '@/features/content/i18n/ar';
 import disruptions from '@/features/disruptions/i18n/ar';
 import funding from '@/features/funding/i18n/ar';
@@ -13,6 +13,7 @@ import support from '@/features/support/i18n/ar';
 import user from '@/features/user/i18n/ar';
 import common from './common/ar';
 import metadata from './metadata/ar';
+import variants from './variants/ar';
 
 export default {
   // Feature or externals
@@ -31,6 +32,7 @@ export default {
   subscription,
   support,
   user,
+  variants,
 
   // App level, shared translations
   app: {
@@ -96,6 +98,9 @@ export default {
     achievements: 'الإنجازات',
     admin: 'مسؤول',
     termsOfUse: 'شروط الاستخدام',
+    onlySpams: 'OnlySpams',
+    virgin: 'فيرجن',
+    flaimAPhone: 'افلم بهاتفك!',
   },
   userField: {
     consentNewsletter: 'أريد تلقي النشرة الإخبارية',

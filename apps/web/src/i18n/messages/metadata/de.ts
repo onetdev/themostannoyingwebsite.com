@@ -84,6 +84,11 @@ export default {
     description:
       'Wählen Sie aus unserer Auswahl an erstklassigen, 100% gefälschten KI-Paketen. Erleben Sie die Zukunft der Belästigung noch heute!',
   },
+  onlySpams: {
+    title: 'OnlySpams',
+    description:
+      'Der exklusivste Newsletter für Ihren Posteingang. Erleben Sie die Freude an endlosem Spam und hochwertigen Scam-E-Mails.',
+  },
   admin: {
     title: 'Admin-Terminal',
     description:

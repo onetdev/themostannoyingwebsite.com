@@ -1,8 +1,8 @@
 import achievements from '@/features/achievements/i18n/tr';
 import auth from '@/features/auth/i18n/tr';
 import humanVerification from '@/features/captcha/i18n/tr';
-import commentVariants from '@/features/comments/i18n/generator/tr';
 import comments from '@/features/comments/i18n/tr';
+import commentVariants from '@/features/comments/i18n/variants/tr';
 import content from '@/features/content/i18n/tr';
 import disruptions from '@/features/disruptions/i18n/tr';
 import funding from '@/features/funding/i18n/tr';
@@ -13,6 +13,7 @@ import support from '@/features/support/i18n/tr';
 import user from '@/features/user/i18n/tr';
 import common from './common/tr';
 import metadata from './metadata/tr';
+import variants from './variants/tr';
 
 export default {
   // Feature or externals
@@ -31,6 +32,7 @@ export default {
   subscription,
   support,
   user,
+  variants,
 
   // App level, shared translations
   app: {
@@ -97,6 +99,9 @@ export default {
     achievements: 'Başarımlar',
     admin: 'Yönetici',
     termsOfUse: 'Kullanım Koşulları',
+    onlySpams: 'OnlySpams',
+    virgin: 'Virgin',
+    flaimAPhone: 'Telefon flaimle!',
   },
   userField: {
     consentNewsletter: 'Bülten almak istiyorum',

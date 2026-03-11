@@ -49,6 +49,7 @@ declare global {
     'global-text:copied': never;
     'exit-prompt:shown': never;
     'ui:modal:dismiss-signaled': never;
+    'ui:newsletter-modal:show': never;
   }
 
   interface Window {

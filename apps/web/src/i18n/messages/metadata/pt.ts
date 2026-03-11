@@ -84,6 +84,11 @@ export default {
     description:
       'Escolha entre a nossa seleção de pacotes de IA premium, 100% falsos. Experimente o futuro da irritação hoje!',
   },
+  onlySpams: {
+    title: 'OnlySpams',
+    description:
+      'A newsletter mais exclusiva para a sua caixa de entrada. Experimente a alegria do spam infinito e dos e-mails de fraude de alta qualidade.',
+  },
   admin: {
     title: 'Terminal Admin',
     description:

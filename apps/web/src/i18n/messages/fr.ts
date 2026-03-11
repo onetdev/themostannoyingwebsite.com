@@ -2,7 +2,7 @@ import achievements from '@/features/achievements/i18n/fr';
 import auth from '@/features/auth/i18n/fr';
 import humanVerification from '@/features/captcha/i18n/fr';
 import comments from '@/features/comments/i18n/fr';
-import commentVariants from '@/features/comments/i18n/generator/fr';
+import commentVariants from '@/features/comments/i18n/variants/fr';
 import content from '@/features/content/i18n/fr';
 import disruptions from '@/features/disruptions/i18n/fr';
 import funding from '@/features/funding/i18n/fr';
@@ -13,6 +13,7 @@ import support from '@/features/support/i18n/fr';
 import user from '@/features/user/i18n/fr';
 import common from './common/fr';
 import metadata from './metadata/fr';
+import variants from './variants/fr';
 
 export default {
   // Feature or externals
@@ -31,6 +32,7 @@ export default {
   subscription,
   support,
   user,
+  variants,
 
   // App level, shared translations
   app: {
@@ -97,6 +99,9 @@ export default {
     achievements: 'Hauts faits',
     admin: 'Admin',
     termsOfUse: 'Conditions d’utilisation',
+    onlySpams: 'OnlySpams',
+    virgin: 'Vierge',
+    flaimAPhone: 'Gagner un téléphone !',
   },
   userField: {
     consentNewsletter: 'Je souhaite recevoir la newsletter',

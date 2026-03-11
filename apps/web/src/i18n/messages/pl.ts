@@ -1,8 +1,8 @@
 import achievements from '@/features/achievements/i18n/pl';
 import auth from '@/features/auth/i18n/pl';
 import humanVerification from '@/features/captcha/i18n/pl';
-import commentVariants from '@/features/comments/i18n/generator/pl';
 import comments from '@/features/comments/i18n/pl';
+import commentVariants from '@/features/comments/i18n/variants/pl';
 import content from '@/features/content/i18n/pl';
 import disruptions from '@/features/disruptions/i18n/pl';
 import funding from '@/features/funding/i18n/pl';
@@ -13,6 +13,7 @@ import support from '@/features/support/i18n/pl';
 import user from '@/features/user/i18n/pl';
 import common from './common/pl';
 import metadata from './metadata/pl';
+import variants from './variants/pl';
 
 export default {
   // Feature or externals
@@ -31,6 +32,7 @@ export default {
   subscription,
   support,
   user,
+  variants,
 
   // App level, shared translations
   app: {
@@ -98,6 +100,9 @@ export default {
     achievements: 'Osiągnięcia',
     admin: 'Admin',
     termsOfUse: 'Regulamin',
+    onlySpams: 'OnlySpams',
+    virgin: 'Virgin',
+    flaimAPhone: 'Flaimnij telefon!',
   },
   userField: {
     consentNewsletter: 'Chcę otrzymywać newsletter',

@@ -1,8 +1,8 @@
 import achievements from '@/features/achievements/i18n/ja';
 import auth from '@/features/auth/i18n/ja';
 import humanVerification from '@/features/captcha/i18n/ja';
-import commentVariants from '@/features/comments/i18n/generator/ja';
 import comments from '@/features/comments/i18n/ja';
+import commentVariants from '@/features/comments/i18n/variants/ja';
 import content from '@/features/content/i18n/ja';
 import disruptions from '@/features/disruptions/i18n/ja';
 import funding from '@/features/funding/i18n/ja';
@@ -13,6 +13,7 @@ import support from '@/features/support/i18n/ja';
 import user from '@/features/user/i18n/ja';
 import common from './common/ja';
 import metadata from './metadata/ja';
+import variants from './variants/ja';
 
 export default {
   // Feature or externals
@@ -31,6 +32,7 @@ export default {
   subscription,
   support,
   user,
+  variants,
 
   // App level, shared translations
   app: {
@@ -97,6 +99,9 @@ export default {
     achievements: '実績',
     admin: '管理者',
     termsOfUse: '利用規約',
+    onlySpams: 'OnlySpams',
+    virgin: 'バージン',
+    flaimAPhone: '電話をフレイム！',
   },
   userField: {
     consentNewsletter: 'ニュースレターを受け取る（後悔しますよ）',
