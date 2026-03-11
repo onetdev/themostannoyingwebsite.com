@@ -1,9 +1,12 @@
 import { mulberry32, stringToSeed } from '@maw/utils/random';
-import { injectable } from 'inversify';
+import { type Container, injectable } from 'inversify';
+import enVariants from '@/i18n/messages/variants/en';
 import i18nConfig from '@/root/i18n.config';
-import type {
-  OnlySpamsService as IOnlySpamsService,
-  OnlySpamsData,
+import enSpamVariants from '../i18n/only-spams-variants/en';
+import {
+  DI,
+  type OnlySpamsService as IOnlySpamsService,
+  type OnlySpamsData,
 } from '../types';
 
 @injectable()
@@ -16,8 +19,10 @@ export class OnlySpamsService implements IOnlySpamsService {
       : i18nConfig.defaultLocale;
 
     const [variantsModule, namesModule] = await Promise.all([
-      import(`../i18n/only-spams-variants/${safeLocale}`),
-      import(`@/i18n/messages/variants/${safeLocale}`),
+      import(`../i18n/only-spams-variants/${safeLocale}`).catch(
+        () => enSpamVariants,
+      ),
+      import(`@/i18n/messages/variants/${safeLocale}`).catch(() => enVariants),
     ]);
 
     const { testimonials: testimonialsRaw, samples } = variantsModule.default;
@@ -38,4 +43,8 @@ export class OnlySpamsService implements IOnlySpamsService {
       samples,
     };
   }
+}
+
+export async function getOnlySpamsService(container: Container) {
+  return container.get<IOnlySpamsService>(DI.OnlySpamsService);
 }

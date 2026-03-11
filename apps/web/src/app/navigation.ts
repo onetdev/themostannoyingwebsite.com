@@ -105,7 +105,7 @@ export const FOOTER_NAVIGATION_LINKS: NavItem[] = [
   },
   { key: 'settings', labelKey: 'navigation.settings', path: '/settings' },
 
-  // And some manadatory stuff
+  // And some mandatory stuff
   {
     key: 'privacy-policy',
     labelKey: 'navigation.privacyPolicy',

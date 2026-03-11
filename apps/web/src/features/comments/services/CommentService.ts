@@ -1,5 +1,7 @@
 import type { ArticleDatum } from '@maw/content-api';
 import { injectable } from 'inversify';
+import enComments from '@/features/comments/i18n/generator/en';
+import enVariants from '@/i18n/messages/variants/en';
 import i18nConfig from '@/root/i18n.config';
 import type { CommentService as ICommentService } from '../types';
 import { filterByDate } from './use-cases/filterByDate';
@@ -23,10 +25,10 @@ export class CommentService implements ICommentService {
       : i18nConfig.defaultLocale;
 
     const [poolModule, variantsModule] = await Promise.all([
-      import(`@/features/comments/i18n/generator/${safeLocale}`),
-      import(`@/i18n/messages/variants/${safeLocale}`).catch(() => ({
-        default: { names: [] },
-      })),
+      import(`@/features/comments/i18n/generator/${safeLocale}`).catch(
+        () => enComments,
+      ),
+      import(`@/i18n/messages/variants/${safeLocale}`).catch(() => enVariants),
     ]);
 
     const pool = poolModule.default;

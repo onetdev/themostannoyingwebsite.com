@@ -1,7 +1,8 @@
 import type { Metadata } from 'next';
 import { getTranslations } from 'next-intl/server';
+import { getDependencyContainer } from '@/core/di';
 import { OnlySpamsPage } from '@/features/marketing/components';
-import { OnlySpamsService } from '@/features/marketing/services';
+import { getOnlySpamsService } from '@/features/marketing/services';
 import { PageLayout } from '../_components/PageLayout';
 
 export { generateStaticParams } from '@/i18n/routing';
@@ -22,9 +23,9 @@ export async function generateMetadata({
 
 export default async function Page({ params }: NextPageProps) {
   const { locale } = await params;
-  const { testimonials, samples } = await new OnlySpamsService().getData(
-    locale,
-  );
+  const container = getDependencyContainer();
+  const service = await getOnlySpamsService(container);
+  const { testimonials, samples } = await service.getData(locale);
 
   return (
     <PageLayout activeItem="only-spams" role="main" autoPadding={false}>
