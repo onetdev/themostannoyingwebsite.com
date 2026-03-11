@@ -51,6 +51,10 @@ export default {
       name: 'Łowca martwych pikseli',
       description: 'Spróbuj kliknąć w martwy piksel.',
     },
+    rainbowHunter: {
+      name: 'Łowca tęczy',
+      description: 'Kliknąłeś w tęczowy martwy piksel!',
+    },
     wheelOfFortuneSpin: {
       name: 'Optymistyczny hazardzista',
       description:

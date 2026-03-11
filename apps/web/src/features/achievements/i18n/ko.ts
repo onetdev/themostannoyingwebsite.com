@@ -50,6 +50,10 @@ export default {
       name: '데드 픽셀 헌터',
       description: '데드 픽셀을 클릭하려고 시도했습니다.',
     },
+    rainbowHunter: {
+      name: '무지개 사냥꾼',
+      description: '무지개색 데드 픽셀을 클릭했습니다!',
+    },
     wheelOfFortuneSpin: {
       name: '낙관적인 도박꾼',
       description:

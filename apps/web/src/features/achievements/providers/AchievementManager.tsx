@@ -82,7 +82,12 @@ export const AchievementManager = () => {
 
   useEvent('exit-prompt:shown', () => handleSingleUnlock('escape-artist'));
 
-  useEvent('dead-pixel:clicked', () => handleSingleUnlock('dead-pixel-hunter'));
+  useEvent('dead-pixel:clicked', ({ isRainbow }) => {
+    handleSingleUnlock('dead-pixel-hunter');
+    if (isRainbow) {
+      handleSingleUnlock('rainbow-hunter');
+    }
+  });
 
   useEvent('navigation:changed', () => handleSingleUnlock('first-visit'));
 

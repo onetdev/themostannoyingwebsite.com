@@ -51,6 +51,10 @@ export default {
       name: 'Pixelfehler-Jäger',
       description: 'Versuche, auf einen toten Pixel zu klicken.',
     },
+    rainbowHunter: {
+      name: 'Regenbogenjäger',
+      description: 'Du hast auf einen Regenbogen-Pixelfehler geklickt!',
+    },
     wheelOfFortuneSpin: {
       name: 'Optimistischer Glücksspieler',
       description:

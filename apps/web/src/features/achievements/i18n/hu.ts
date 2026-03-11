@@ -51,6 +51,10 @@ export default {
       name: 'Halott pixel vadász',
       description: 'Próbálj meg rákattintani egy halott pixelre.',
     },
+    rainbowHunter: {
+      name: 'Szivárványvadász',
+      description: 'Egy szivárványos döglött pixelre kattintottál!',
+    },
     wheelOfFortuneSpin: {
       name: 'Optimista szerencsejátékos',
       description:

@@ -13,7 +13,16 @@ export const eventPresets: EventPreset[] = [
   },
   { type: 'context-menu:triggered', payload: {} },
   { type: 'global-text:copied', payload: {} },
-  { type: 'dead-pixel:clicked', payload: {} },
+  {
+    type: 'dead-pixel:clicked',
+    name: 'dead-pixel:clicked (normal)',
+    payload: { isRainbow: false },
+  },
+  {
+    type: 'dead-pixel:clicked',
+    name: 'dead-pixel:clicked (rainbow)',
+    payload: { isRainbow: true },
+  },
   { type: 'exit-prompt:shown', payload: {} },
   {
     type: 'wof:spin-completed',
