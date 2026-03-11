@@ -49,6 +49,10 @@ export default {
       name: 'صياد البيكسل الميت',
       description: 'حاول النقر على بيكسل ميت.',
     },
+    rainbowHunter: {
+      name: 'صياد قوس قزح',
+      description: 'لقد نقرت على بكسل تالف بألوان قوس قزح!',
+    },
     wheelOfFortuneSpin: {
       name: 'المقامر المتفائل',
       description: 'قم بتدوير "عجلة الحظ" واربح جائزة عديمة الفائدة تماماً.',

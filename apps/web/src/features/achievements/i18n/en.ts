@@ -51,6 +51,10 @@ export default {
       name: 'Dead Pixel Hunter',
       description: 'Try to click on a dead pixel.',
     },
+    rainbowHunter: {
+      name: 'Rainbow Hunter',
+      description: 'You clicked on a rainbow dead pixel!',
+    },
     wheelOfFortuneSpin: {
       name: 'Optimistic Gambler',
       description:

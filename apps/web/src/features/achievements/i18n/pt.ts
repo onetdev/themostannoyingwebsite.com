@@ -51,6 +51,10 @@ export default {
       name: 'Caçador de Pixéis Mortos',
       description: 'Tente clicar num píxel morto.',
     },
+    rainbowHunter: {
+      name: 'Caçador de Arco-íris',
+      description: 'Clicaste num pixel morto de arco-íris!',
+    },
     wheelOfFortuneSpin: {
       name: 'Jogador Otimista',
       description:

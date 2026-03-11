@@ -51,6 +51,10 @@ export default {
       name: 'Охотник на битые пиксели',
       description: 'Попробуйте кликнуть на битый пиксель.',
     },
+    rainbowHunter: {
+      name: 'Охотник за радугой',
+      description: 'Вы нажали на радужный битый пиксель!',
+    },
     wheelOfFortuneSpin: {
       name: 'Оптимистичный игрок',
       description:

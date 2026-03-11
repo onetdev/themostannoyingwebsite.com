@@ -46,6 +46,13 @@ const ACHIEVEMENT_REGISTRY: AchievementDefinition[] = [
     type: 'boolean',
   },
   {
+    id: 'rainbow-hunter',
+    nameKey: 'achievements.registry.rainbowHunter.name',
+    descriptionKey: 'achievements.registry.rainbowHunter.description',
+    type: 'boolean',
+    secret: true,
+  },
+  {
     id: 'wheel-of-fortune-spin',
     nameKey: 'achievements.registry.wheelOfFortuneSpin.name',
     descriptionKey: 'achievements.registry.wheelOfFortuneSpin.description',

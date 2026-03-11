@@ -51,6 +51,10 @@ export default {
       name: 'Ölü Piksel Avcısı',
       description: 'Ölü bir piksele tıklamaya çalışın.',
     },
+    rainbowHunter: {
+      name: 'Gökkuşağı Avcısı',
+      description: 'Gökkuşağı renginde bir ölü piksele tıkladın!',
+    },
     wheelOfFortuneSpin: {
       name: 'İyimser Kumarbaz',
       description:

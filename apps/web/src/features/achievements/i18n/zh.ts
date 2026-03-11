@@ -49,6 +49,10 @@ export default {
       name: '坏点猎人',
       description: '尝试点击屏幕上的坏点。',
     },
+    rainbowHunter: {
+      name: '彩虹猎人',
+      description: '您点击了一个彩虹色死点！',
+    },
     wheelOfFortuneSpin: {
       name: '乐观的赌徒',
       description: '旋转“幸运大转盘”并赢得一个绝对没用的奖品。',

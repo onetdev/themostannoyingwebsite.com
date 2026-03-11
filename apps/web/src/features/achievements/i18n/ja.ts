@@ -50,6 +50,10 @@ export default {
       name: 'ドット抜けハンター',
       description: 'ドット抜け（死んだピクセル）をクリックしようとする。',
     },
+    rainbowHunter: {
+      name: 'レインボーハンター',
+      description: 'レインボーカラーのドット抜けをクリックしました！',
+    },
     wheelOfFortuneSpin: {
       name: '楽観的なギャンブラー',
       description:
