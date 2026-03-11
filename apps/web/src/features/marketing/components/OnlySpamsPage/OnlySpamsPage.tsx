@@ -5,6 +5,7 @@ import Image from 'next/image';
 import { useTranslations } from 'next-intl';
 import { emit } from '@/core/events/event-bus';
 import { EmailSampleCarousel } from './EmailSampleCarousel';
+import { ParallaxDecorationBlocks } from './ParallaxDecorationBlocks';
 import { TestimonialCarousel } from './TestimonialCarousel';
 
 export function OnlySpamsPage() {
@@ -15,8 +16,10 @@ export function OnlySpamsPage() {
   };
 
   return (
-    <div className="flex flex-col gap-16 py-10">
-      <div className="max-w-3xl text-center mx-auto">
+    <div className="flex flex-col gap-16 py-10 relative overflow-hidden">
+      <ParallaxDecorationBlocks />
+
+      <div className="max-w-3xl text-center mx-auto relative z-10">
         <div className="flex justify-center mb-8">
           <Image
             src="/assets/images/only-spams.svg"
@@ -32,21 +35,21 @@ export function OnlySpamsPage() {
         </p>
       </div>
 
-      <div className="w-full">
+      <div className="w-full relative z-10">
         <h3 className="text-3xl font-bold mb-8 text-center">
           {t('marketing.onlySpams.samples.title')}
         </h3>
         <EmailSampleCarousel />
       </div>
 
-      <div className="w-full">
+      <div className="w-full relative z-10">
         <h3 className="text-3xl font-bold mb-8 text-center">
           {t('marketing.onlySpams.testimonials.title')}
         </h3>
         <TestimonialCarousel />
       </div>
 
-      <div className="flex justify-center mt-8">
+      <div className="flex justify-center mt-8 relative z-10">
         <Button
           size="lg"
           className="px-12 py-8 text-xl font-bold"
