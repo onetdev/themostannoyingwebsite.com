@@ -2,7 +2,7 @@ import achievements from '@/features/achievements/i18n/es';
 import auth from '@/features/auth/i18n/es';
 import humanVerification from '@/features/captcha/i18n/es';
 import comments from '@/features/comments/i18n/es';
-import commentVariants from '@/features/comments/i18n/generator/es';
+import commentVariants from '@/features/comments/i18n/variants/es';
 import content from '@/features/content/i18n/es';
 import disruptions from '@/features/disruptions/i18n/es';
 import funding from '@/features/funding/i18n/es';
