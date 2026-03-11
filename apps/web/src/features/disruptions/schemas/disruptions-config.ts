@@ -17,7 +17,9 @@ export const DisruptionsConfigSchema = z.object({
     videoUrl: z.url(),
   }),
   deadPixel: z.object({
-    rainbowChance: z.number().describe('Floating point value meaning percentage of chance'),
+    rainbowChance: z
+      .number()
+      .describe('Floating point value meaning percentage of chance'),
   }),
 });
 

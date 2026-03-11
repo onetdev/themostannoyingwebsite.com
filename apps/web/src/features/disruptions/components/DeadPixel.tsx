@@ -35,8 +35,8 @@ export function DeadPixel() {
 
   useEffect(() => seed(), [seed]);
 
-  const onClick = () => {
-    emit('dead-pixel:clicked');
+  const onClick = (isRainbow: boolean) => {
+    emit('dead-pixel:clicked', { isRainbow });
     seed();
   };
 
@@ -48,7 +48,7 @@ export function DeadPixel() {
           aria-hidden
           data-testid="dead-pixel"
           key={`${point.x}-${point.y}`}
-          onClick={onClick}
+          onClick={() => onClick(point.isRainbow)}
           style={{
             top: point.y,
             left: point.x,
