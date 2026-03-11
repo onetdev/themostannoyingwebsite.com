@@ -35,14 +35,14 @@ export function OnlySpamsPage() {
         </p>
       </div>
 
-      <div className="w-full relative z-10 flex flex-col gap-12 md:gap-16">
+      <div className="w-full relative z-10 flex flex-col gap-12 md:gap-15 mb-6">
         <h3 className="text-xl md:text-3xl font-bold text-center px-5">
           {t('marketing.onlySpams.samples.title')}
         </h3>
         <EmailSampleCarousel />
       </div>
 
-      <div className="w-full relative z-10 flex flex-col gap-12 md:gap-16">
+      <div className="w-full relative z-10 flex flex-col gap-12 md:gap-15">
         <h3 className="text-xl md:text-3xl font-bold text-center px-5">
           {t('marketing.onlySpams.testimonials.title')}
         </h3>

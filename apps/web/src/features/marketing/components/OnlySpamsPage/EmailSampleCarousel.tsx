@@ -1,11 +1,6 @@
 'use client';
 
 import {
-  Badge,
-  Button,
-  Card,
-  CardContent,
-  CardHeader,
   Carousel,
   type CarouselApi,
   CarouselContent,
@@ -17,6 +12,7 @@ import {
 import { motion } from 'framer-motion';
 import { useMessages } from 'next-intl';
 import { useEffect, useState } from 'react';
+import { EmailSampleCard } from './EmailSampleCard';
 
 export function EmailSampleCarousel() {
   const [api, setApi] = useState<CarouselApi>();
@@ -54,7 +50,7 @@ export function EmailSampleCarousel() {
           {samples.map((email, i) => (
             <CarouselItem
               key={`${i}${email.subject}`}
-              className="pl-4 basis-[70%] md:basis-[55%] lg:basis-[45%]"
+              className="pl-4 basis-[70%] md:basis-[55%] lg:basis-[45%] pb-4"
             >
               <motion.div
                 animate={{
@@ -63,25 +59,7 @@ export function EmailSampleCarousel() {
                 }}
                 transition={{ duration: 0.3 }}
               >
-                <Card className="hover:shadow-md transition">
-                  <CardHeader className="flex flex-row items-center justify-between">
-                    <p className="font-semibold text-sm">SENDER</p>
-
-                    <Badge variant="destructive">SPAM</Badge>
-                  </CardHeader>
-
-                  <CardContent className="space-y-3">
-                    <p className="font-medium">{email.subject}</p>
-
-                    <p className="text-sm text-muted-foreground">
-                      {email.body}
-                    </p>
-
-                    <Button variant="destructive" size="sm">
-                      CLICK HERE
-                    </Button>
-                  </CardContent>
-                </Card>
+                <EmailSampleCard {...email} />
               </motion.div>
             </CarouselItem>
           ))}
