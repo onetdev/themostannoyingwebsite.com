@@ -22,7 +22,7 @@ export function DeadPixel() {
     const pixels = randomInt(1, 3);
 
     for (let i = 0; i < pixels; i++) {
-      const isRainbow = randomInt(1, rainbowChance * 100) === 1;
+      const isRainbow = Math.random() < rainbowChance;
 
       newPoints.push({
         x: randomNumber(0, window.innerWidth),
