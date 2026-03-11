@@ -40,7 +40,7 @@ export function TestimonialCarousel() {
   }, [api]);
 
   return (
-    <div className="w-full max-w-4xl mx-auto py-16">
+    <div className="w-full max-w-4xl mx-auto">
       <Carousel
         setApi={setApi}
         opts={{

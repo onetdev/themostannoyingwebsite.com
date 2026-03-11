@@ -7,10 +7,9 @@ interface DecorationBlockProps {
   top: string;
   left: string;
   size: number;
-  color: string;
+  emoji: string;
   speed: number;
   rotate?: number;
-  borderRadius?: string;
   opacity?: number;
 }
 
@@ -18,11 +17,10 @@ function DecorationBlock({
   top,
   left,
   size,
-  color,
+  emoji,
   speed,
   rotate = 0,
-  borderRadius = '0px',
-  opacity = 0.1,
+  opacity = 0.2,
 }: DecorationBlockProps) {
   const ref = useRef(null);
   const { scrollYProgress } = useScroll({
@@ -35,98 +33,132 @@ function DecorationBlock({
   return (
     <motion.div
       ref={ref}
+      className="flex items-center justify-center select-none"
       style={{
         position: 'absolute',
         top,
         left,
-        width: size,
-        height: size,
-        backgroundColor: color,
+        fontSize: size,
         rotate,
-        borderRadius,
         opacity,
         y,
         zIndex: 0,
         pointerEvents: 'none',
       }}
-    />
+    >
+      {emoji}
+    </motion.div>
   );
 }
 
 const BLOCKS: DecorationBlockProps[] = [
   {
-    top: '10%',
-    left: '5%',
-    size: 80,
-    color: 'var(--primary)',
-    speed: -0.5,
-    rotate: 45,
-    opacity: 0.15,
-  },
-  {
-    top: '25%',
-    left: '85%',
-    size: 120,
-    color: 'var(--secondary)',
-    speed: 0.3,
-    rotate: -15,
-    borderRadius: '20px',
-    opacity: 0.1,
-  },
-  {
-    top: '40%',
-    left: '15%',
+    top: '5%',
+    left: '8%',
     size: 60,
-    color: 'var(--tertiary)',
-    speed: -0.8,
-    borderRadius: '50%',
-    opacity: 0.12,
-  },
-  {
-    top: '60%',
-    left: '80%',
-    size: 100,
-    color: 'var(--primary)',
-    speed: 0.6,
-    rotate: 30,
-    opacity: 0.08,
-  },
-  {
-    top: '80%',
-    left: '10%',
-    size: 150,
-    color: 'var(--secondary)',
+    emoji: '✉️',
     speed: -0.4,
-    rotate: -45,
-    borderRadius: '40px',
-    opacity: 0.05,
+    rotate: -15,
+    opacity: 0.15,
   },
   {
     top: '15%',
-    left: '70%',
-    size: 40,
-    color: 'var(--tertiary)',
-    speed: 1.2,
-    borderRadius: '10px',
-    opacity: 0.2,
+    left: '82%',
+    size: 80,
+    emoji: '💰',
+    speed: 0.3,
+    rotate: 15,
+    opacity: 0.12,
   },
   {
-    top: '75%',
-    left: '45%',
-    size: 30,
-    color: 'var(--primary)',
-    speed: -1.5,
-    borderRadius: '50%',
+    top: '30%',
+    left: '12%',
+    size: 70,
+    emoji: '👑',
+    speed: -0.6,
+    rotate: -10,
     opacity: 0.15,
   },
   {
-    top: '55%',
-    left: '5%',
+    top: '45%',
+    left: '88%',
     size: 90,
-    color: 'var(--secondary)',
-    speed: 0.9,
-    rotate: 60,
+    emoji: '💎',
+    speed: 0.5,
+    rotate: 20,
+    opacity: 0.1,
+  },
+  {
+    top: '60%',
+    left: '5%',
+    size: 100,
+    emoji: '🤑',
+    speed: -0.3,
+    rotate: -25,
+    opacity: 0.08,
+  },
+  {
+    top: '75%',
+    left: '85%',
+    size: 65,
+    emoji: '📧',
+    speed: 0.8,
+    rotate: 10,
+    opacity: 0.18,
+  },
+  {
+    top: '85%',
+    left: '15%',
+    size: 110,
+    emoji: '💸',
+    speed: -0.5,
+    rotate: -30,
     opacity: 0.07,
+  },
+  {
+    top: '20%',
+    left: '70%',
+    size: 50,
+    emoji: '📬',
+    speed: 1.1,
+    rotate: 5,
+    opacity: 0.2,
+  },
+  {
+    top: '50%',
+    left: '10%',
+    size: 40,
+    emoji: '✨',
+    speed: -1.2,
+    rotate: 45,
+    opacity: 0.25,
+  },
+  {
+    top: '70%',
+    left: '75%',
+    size: 55,
+    emoji: '💵',
+    speed: 0.9,
+    rotate: -15,
+    opacity: 0.15,
+  },
+  {
+    top: '35%',
+    left: '75%',
+    size: 65,
+    emoji: '💦',
+    speed: 0.7,
+    rotate: -20,
+    opacity: 0.12,
+  },
+  {
+    top: '65%',
+    left: '20%',
+    size: 75,
+    emoji: '🍆',
+    speed: -0.8,
+    rotate: 35,
+    opacity: 0.1,
   },
 ];
 

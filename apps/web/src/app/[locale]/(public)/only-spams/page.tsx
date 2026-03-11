@@ -21,7 +21,7 @@ export async function generateMetadata({
 
 export default async function Page() {
   return (
-    <PageLayout activeItem="only-spams" role="main">
+    <PageLayout activeItem="only-spams" role="main" autoPadding={false}>
       <OnlySpamsPage />
     </PageLayout>
   );

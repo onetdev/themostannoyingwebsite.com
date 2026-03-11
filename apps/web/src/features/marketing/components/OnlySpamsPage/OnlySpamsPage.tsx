@@ -19,7 +19,7 @@ export function OnlySpamsPage() {
     <div className="flex flex-col gap-16 py-10 relative overflow-hidden">
       <ParallaxDecorationBlocks />
 
-      <div className="max-w-3xl text-center mx-auto relative z-10">
+      <div className="max-w-3xl text-center mx-auto relative z-10 px-5">
         <div className="flex justify-center mb-8">
           <Image
             src="/assets/images/only-spams.svg"
@@ -35,21 +35,21 @@ export function OnlySpamsPage() {
         </p>
       </div>
 
-      <div className="w-full relative z-10">
-        <h3 className="text-3xl font-bold mb-8 text-center">
+      <div className="w-full relative z-10 flex flex-col gap-12 md:gap-16">
+        <h3 className="text-xl md:text-3xl font-bold text-center px-5">
           {t('marketing.onlySpams.samples.title')}
         </h3>
         <EmailSampleCarousel />
       </div>
 
-      <div className="w-full relative z-10">
-        <h3 className="text-3xl font-bold mb-8 text-center">
+      <div className="w-full relative z-10 flex flex-col gap-12 md:gap-16">
+        <h3 className="text-xl md:text-3xl font-bold text-center px-5">
           {t('marketing.onlySpams.testimonials.title')}
         </h3>
         <TestimonialCarousel />
       </div>
 
-      <div className="flex justify-center mt-8 relative z-10">
+      <div className="flex justify-center mt-4 md:mt-8 relative z-10">
         <Button
           size="lg"
           className="px-12 py-8 text-xl font-bold"

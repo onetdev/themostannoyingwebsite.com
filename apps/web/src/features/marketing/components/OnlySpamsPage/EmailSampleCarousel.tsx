@@ -42,7 +42,7 @@ export function EmailSampleCarousel() {
   }, [api]);
 
   return (
-    <div className="w-full max-w-5xl mx-auto py-16">
+    <div className="w-full max-w-5xl mx-auto">
       <Carousel
         setApi={setApi}
         opts={{
