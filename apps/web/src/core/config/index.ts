@@ -131,7 +131,7 @@ const config: AppConfig = {
         ru: '/ads/wan-a-fone/ad-wan-a-fone-ru.webp',
         tr: '/ads/wan-a-fone/ad-wan-a-fone-tr.webp',
       },
-      dilfFullImage: '/assets/dilf-full.webp',
+      dilfFullImage: '/assets/images/dilf-full.webp',
     },
   },
   support: {

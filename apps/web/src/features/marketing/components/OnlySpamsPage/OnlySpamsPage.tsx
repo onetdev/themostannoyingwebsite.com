@@ -1,6 +1,7 @@
 'use client';
 
 import { Button } from '@maw/ui-lib';
+import Image from 'next/image';
 import { useTranslations } from 'next-intl';
 import { emit } from '@/core/events/event-bus';
 import { EmailSampleCarousel } from './EmailSampleCarousel';
@@ -16,9 +17,16 @@ export function OnlySpamsPage() {
   return (
     <div className="flex flex-col gap-16 py-10">
       <div className="max-w-3xl text-center mx-auto">
-        <h2 className="text-4xl md:text-5xl font-extrabold mb-6">
-          {t('marketing.onlySpams.title')}
-        </h2>
+        <div className="flex justify-center mb-8">
+          <Image
+            src="/assets/images/only-spams.svg"
+            alt={t('marketing.onlySpams.title')}
+            width={600}
+            height={168}
+            priority
+            className="w-full max-w-lg h-auto"
+          />
+        </div>
         <p className="text-xl text-muted-foreground leading-relaxed">
           {t('marketing.onlySpams.description')}
         </p>
