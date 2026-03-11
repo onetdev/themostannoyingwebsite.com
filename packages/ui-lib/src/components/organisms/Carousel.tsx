@@ -140,13 +140,25 @@ function Carousel({
   );
 }
 
-function CarouselContent({ className, ...props }: ComponentProps<'div'>) {
+function CarouselContent({
+  className,
+  fade = false,
+  ...props
+}: ComponentProps<'div'> & { fade?: boolean }) {
   const { carouselRef, orientation } = useCarousel();
 
   return (
     <div
       ref={carouselRef}
-      className="overflow-hidden"
+      className={cn(
+        'overflow-hidden',
+        fade &&
+          orientation === 'horizontal' &&
+          'mask-[linear-gradient(to_right,transparent,black_15%,black_85%,transparent)]',
+        fade &&
+          orientation === 'vertical' &&
+          'mask-[linear-gradient(to_bottom,transparent,black_15%,black_85%,transparent)]',
+      )}
       data-slot="carousel-content"
     >
       <div

@@ -25,7 +25,7 @@ export function PeekCarousel({
       }}
       className="w-full"
     >
-      <CarouselContent className="-ml-4">
+      <CarouselContent className="-ml-4" fade>
         {[1, 2, 3, 4, 5].map((i) => (
           <CarouselItem
             key={i}

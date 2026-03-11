@@ -50,7 +50,7 @@ export function EmailSampleCarousel() {
           loop: true,
         }}
       >
-        <CarouselContent className="-ml-4">
+        <CarouselContent className="-ml-4" fade>
           {samples.map((email, i) => (
             <CarouselItem
               key={`${i}${email.subject}`}
@@ -63,7 +63,7 @@ export function EmailSampleCarousel() {
                 }}
                 transition={{ duration: 0.3 }}
               >
-                <Card className="hover:shadow-xl transition">
+                <Card className="hover:shadow-md transition">
                   <CardHeader className="flex flex-row items-center justify-between">
                     <p className="font-semibold text-sm">SENDER</p>
 

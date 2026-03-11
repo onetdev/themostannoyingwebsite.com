@@ -48,7 +48,7 @@ export function TestimonialCarousel() {
           loop: true,
         }}
       >
-        <CarouselContent className="-ml-4">
+        <CarouselContent className="-ml-4" fade>
           {testimonials.map((t, i) => (
             <CarouselItem
               key={`${i}${t.comment}`}
