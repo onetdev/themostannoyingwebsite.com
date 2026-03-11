@@ -41,7 +41,7 @@
     "typescript": "catalog:"
   },
   "engines": {
-    "node": ">=22"
+    "node": ">=24"
   },
   "funding": {
     "type": "individual",
