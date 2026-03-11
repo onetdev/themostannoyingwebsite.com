@@ -9,32 +9,32 @@ export function OnlySpamsPage() {
   const t = useTranslations();
 
   return (
-    <div className="lg:flex lg:flex-row lg:gap-10">
-      <div className="lg:w-1/2">
-        <h2 className="py-5">{t('marketing.onlySpams.title')}</h2>
-        <p className="my-5 max-w-screen-md">
+    <div className="flex flex-col gap-16 py-10">
+      <div className="max-w-3xl text-center mx-auto">
+        <h2 className="text-4xl md:text-5xl font-extrabold mb-6">
+          {t('marketing.onlySpams.title')}
+        </h2>
+        <p className="text-xl text-muted-foreground leading-relaxed">
           {t('marketing.onlySpams.description')}
         </p>
+      </div>
 
-        <h3 className="py-5 text-xl font-bold">
+      <div className="w-full">
+        <h3 className="text-3xl font-bold mb-8 text-center">
           {t('marketing.onlySpams.samples.title')}
         </h3>
-        <div className="flex flex-col gap-4">
-          <EmailSampleCarousel />
-        </div>
+        <EmailSampleCarousel />
       </div>
 
-      <div className="lg:w-1/2">
-        <h3 className="py-5 text-xl font-bold">
+      <div className="w-full">
+        <h3 className="text-3xl font-bold mb-8 text-center">
           {t('marketing.onlySpams.testimonials.title')}
         </h3>
-        <div className="flex flex-col gap-6">
-          <TestimonialCarousel />
-        </div>
+        <TestimonialCarousel />
       </div>
 
-      <div className="mt-10">
-        <Button size="lg" className="w-full">
+      <div className="flex justify-center mt-8">
+        <Button size="lg" className="px-12 py-8 text-xl font-bold">
           {t('marketing.onlySpams.subscribe')}
         </Button>
       </div>
