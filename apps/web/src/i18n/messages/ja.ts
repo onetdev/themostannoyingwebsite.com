@@ -97,6 +97,9 @@ export default {
     achievements: '実績',
     admin: '管理者',
     termsOfUse: '利用規約',
+    onlySpams: 'OnlySpams',
+    virgin: 'バージン',
+    flaimAPhone: '電話をフレイム！',
   },
   userField: {
     consentNewsletter: 'ニュースレターを受け取る（後悔しますよ）',

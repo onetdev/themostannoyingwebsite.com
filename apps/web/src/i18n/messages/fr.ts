@@ -97,6 +97,9 @@ export default {
     achievements: 'Hauts faits',
     admin: 'Admin',
     termsOfUse: 'Conditions d’utilisation',
+    onlySpams: 'OnlySpams',
+    virgin: 'Vierge',
+    flaimAPhone: 'Gagner un téléphone !',
   },
   userField: {
     consentNewsletter: 'Je souhaite recevoir la newsletter',

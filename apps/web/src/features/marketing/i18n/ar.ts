@@ -48,7 +48,7 @@ export default {
     description:
       'نشرتنا الإخبارية المتميزة تجلب قدراً هائلاً من القيمة مباشرة إلى بريدك الوارد. لا تفوت الأفكار التي تحدث فرقاً حقيقياً!',
     placeholder: 'أدخل بريدك الإلكتروني',
-    onlySpamsLabel: 'أريد أيضًا استلام OnlySpams™ (موصى به)',
+    onlySpamsLabel: 'أريد أيضًا استلام OnlySpams (موصى به)',
     onlySpamsDetails: '(التفاصيل)',
     initialConfirm: 'اشتراك',
     initialCancel: 'عدم الاشتراك',
@@ -90,7 +90,7 @@ export default {
     wheelTitle: 'عجلة الحظ',
   },
   onlySpams: {
-    title: 'OnlySpams™ - النشرة الإخبارية المتميزة',
+    title: 'OnlySpams - النشرة الإخبارية المتميزة',
     description:
       'انضم إلى الدائرة الأكثر حصرية من عشاق صناديق الوارد في العالم. نحن لا نرسل رسائل بريد إلكتروني فقط؛ بل نرسل مشاعر، وفرصاً، ونصائح طبية محددة للغاية.',
     testimonials: {

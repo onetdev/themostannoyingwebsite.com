@@ -48,7 +48,7 @@ export default {
     description:
       '我们的高级新闻通讯将疯狂的价值直接送到你的收件箱。不要错过那些能产生真正影响的见解！',
     placeholder: '输入你的电子邮件',
-    onlySpamsLabel: '我也想接收 OnlySpams™（推荐）',
+    onlySpamsLabel: '我也想接收 OnlySpams（推荐）',
     onlySpamsDetails: '（详情）',
     initialConfirm: '订阅',
     initialCancel: '不订阅',
@@ -90,7 +90,7 @@ export default {
     wheelTitle: '幸运大转盘',
   },
   onlySpams: {
-    title: 'OnlySpams™ - 高级新闻通讯',
+    title: 'OnlySpams - 高级新闻通讯',
     description:
       '加入全球最专属的收件箱爱好者圈子。我们不只是发送电子邮件；我们还发送情感、机会和非常具体的医疗建议。',
     testimonials: {

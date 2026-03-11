@@ -96,6 +96,9 @@ export default {
     achievements: '업적',
     admin: '관리자',
     termsOfUse: '이용약관',
+    onlySpams: 'OnlySpams',
+    virgin: '버진',
+    flaimAPhone: '휴대폰을 플레임하세요!',
   },
   userField: {
     consentNewsletter: '뉴스레터 수신에 동의합니다',

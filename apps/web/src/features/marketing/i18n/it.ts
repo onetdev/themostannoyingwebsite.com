@@ -48,7 +48,7 @@ export default {
     description:
       'La nostra newsletter premium porta un valore pazzesco direttamente nella tua casella di posta. Non perderti approfondimenti che fanno davvero la differenza!',
     placeholder: 'Inserisci la tua email',
-    onlySpamsLabel: 'Voglio ricevere anche OnlySpams™ (Consigliato)',
+    onlySpamsLabel: 'Voglio ricevere anche OnlySpams (Consigliato)',
     onlySpamsDetails: '(dettagli)',
     initialConfirm: 'Iscriviti',
     initialCancel: 'Non iscrivermi',
@@ -90,7 +90,7 @@ export default {
     wheelTitle: 'Ruota della fortuna',
   },
   onlySpams: {
-    title: 'OnlySpams™ - Newsletter Premium',
+    title: 'OnlySpams - Newsletter Premium',
     description:
       'Unisciti alla cerchia più esclusiva al mondo di entusiasti della posta in arrivo. Non inviamo solo e-mail; inviamo emozioni, opportunità e consigli medici molto specifici.',
     testimonials: {

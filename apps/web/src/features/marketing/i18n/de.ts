@@ -49,7 +49,7 @@ export default {
     description:
       'Unser Premium-Newsletter bringt eine wahnsinnige Menge an Mehrwert direkt in Ihren Posteingang. Verpassen Sie keine Erkenntnisse, die einen echten Unterschied machen!',
     placeholder: 'Geben Sie Ihre E-Mail ein',
-    onlySpamsLabel: 'Ich möchte auch OnlySpams™ erhalten (empfohlen)',
+    onlySpamsLabel: 'Ich möchte auch OnlySpams erhalten (empfohlen)',
     onlySpamsDetails: '(Details)',
     initialConfirm: 'Abonnieren',
     initialCancel: 'Nicht abonnieren',
@@ -91,7 +91,7 @@ export default {
     wheelTitle: 'Glücksrad',
   },
   onlySpams: {
-    title: 'OnlySpams™ - Premium-Newsletter',
+    title: 'OnlySpams - Premium-Newsletter',
     description:
       'Treten Sie dem exklusivsten Kreis von Posteingangs-Enthusiasten der Welt bei. Wir verschicken nicht nur E-Mails; wir verschicken Emotionen, Gelegenheiten und sehr spezifische medizinische Ratschläge.',
     testimonials: {

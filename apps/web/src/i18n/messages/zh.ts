@@ -94,6 +94,9 @@ export default {
     achievements: '成就',
     admin: '管理',
     termsOfUse: '使用条款',
+    onlySpams: 'OnlySpams',
+    virgin: 'Virgin',
+    flaimAPhone: '飞领一部手机！',
   },
   userField: {
     consentNewsletter: '我想接收新闻通讯',

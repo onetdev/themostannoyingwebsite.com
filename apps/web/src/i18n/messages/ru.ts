@@ -97,6 +97,9 @@ export default {
     achievements: 'Достижения',
     admin: 'Админ',
     termsOfUse: 'Условия использования',
+    onlySpams: 'OnlySpams',
+    virgin: 'Девственный',
+    flaimAPhone: 'Зафлейми телефон!',
   },
   userField: {
     consentNewsletter: 'Я хочу получать рассылку',

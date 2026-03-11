@@ -48,7 +48,7 @@ export default {
     description:
       '私たちのプレミアムニュースレターは、あなたの受信トレイに計り知れない価値をもたらします。真の変化をもたらす洞察をお見逃しなく！',
     placeholder: 'メールアドレスを入力',
-    onlySpamsLabel: 'OnlySpams™も受け取りたい（推奨）',
+    onlySpamsLabel: 'OnlySpamsも受け取りたい（推奨）',
     onlySpamsDetails: '（詳細）',
     initialConfirm: '購読する',
     initialCancel: '購読しない',
@@ -90,7 +90,7 @@ export default {
     wheelTitle: 'ホイール・オブ・フォーチュン',
   },
   onlySpams: {
-    title: 'OnlySpams™ - プレミアムニュースレター',
+    title: 'OnlySpams - プレミアムニュースレター',
     description:
       '世界で最も独占的な受信トレイ愛好家のサークルに参加しましょう。私たちは単にメールを送るだけではありません。感情、機会、そして非常に具体的な医学的アドバイスを送信します。',
     testimonials: {

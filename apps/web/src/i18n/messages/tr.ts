@@ -97,6 +97,9 @@ export default {
     achievements: 'Başarımlar',
     admin: 'Yönetici',
     termsOfUse: 'Kullanım Koşulları',
+    onlySpams: 'OnlySpams',
+    virgin: 'Virgin',
+    flaimAPhone: 'Telefon flaimle!',
   },
   userField: {
     consentNewsletter: 'Bülten almak istiyorum',

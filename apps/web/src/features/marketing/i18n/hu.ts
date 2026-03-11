@@ -48,7 +48,7 @@ export default {
     description:
       'Prémium hírlevelünk őrült mennyiségű értéket visz egyenesen a postaládádba. Ne maradj le a felismerésekről, amik valódi változást hoznak!',
     placeholder: 'Add meg az e-mail címed',
-    onlySpamsLabel: 'Én is szeretnék OnlySpams™-et kapni (ajánlott)',
+    onlySpamsLabel: 'Én is szeretnék OnlySpams-et kapni (ajánlott)',
     onlySpamsDetails: '(részletek)',
     initialConfirm: 'Feliratkozás',
     initialCancel: 'Mégse iratkozom fel',
@@ -90,7 +90,7 @@ export default {
     wheelTitle: 'Szerencsekerék',
   },
   onlySpams: {
-    title: 'OnlySpams™ - Prémium hírlevél',
+    title: 'OnlySpams - Prémium hírlevél',
     description:
       'Csatlakozz a világ legexkluzívabb postaláda-rajongói köréhez. Mi nem csak e-maileket küldünk; érzelmeket, lehetőségeket és nagyon specifikus orvosi tanácsokat küldünk.',
     testimonials: {

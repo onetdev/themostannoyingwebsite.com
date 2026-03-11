@@ -98,6 +98,9 @@ export default {
     achievements: 'Eredmények',
     admin: 'Adminisztráció',
     termsOfUse: 'Felhasználási feltételek',
+    onlySpams: 'OnlySpams',
+    virgin: 'Szűz',
+    flaimAPhone: 'Kérj egy telefont!',
   },
   userField: {
     consentNewsletter: 'Szeretnék hírlevelet kapni',

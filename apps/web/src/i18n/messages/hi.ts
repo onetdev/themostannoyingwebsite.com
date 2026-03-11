@@ -96,6 +96,9 @@ export default {
     achievements: 'उपलब्धियां',
     admin: 'एडमिन',
     termsOfUse: 'उपयोग की शर्तें',
+    onlySpams: 'OnlySpams',
+    virgin: 'वर्जिन',
+    flaimAPhone: 'एक फोन फ्लेम करें!',
   },
   userField: {
     consentNewsletter: 'मैं न्यूज़लेटर प्राप्त करना चाहता हूँ',

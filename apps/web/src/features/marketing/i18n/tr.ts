@@ -49,7 +49,7 @@ export default {
     description:
       'Premium bültenimiz, gelen kutunuza inanılmaz miktarda değer getirir. Gerçek fark yaratan içgörüleri kaçırmayın!',
     placeholder: 'E-postanızı girin',
-    onlySpamsLabel: 'Ayrıca OnlySpams™ almak istiyorum (Önerilir)',
+    onlySpamsLabel: 'Ayrıca OnlySpams almak istiyorum (Önerilir)',
     onlySpamsDetails: '(detaylar)',
     initialConfirm: 'Abone Ol',
     initialCancel: 'Abone Olma',
@@ -91,7 +91,7 @@ export default {
     wheelTitle: 'Şans çarkı',
   },
   onlySpams: {
-    title: 'OnlySpams™ - Premium Bülten',
+    title: 'OnlySpams - Premium Bülten',
     description:
       'Dünyanın en seçkin gelen kutusu meraklıları çevresine katılın. Sadece e-posta göndermiyoruz; duygular, fırsatlar ve çok özel tıbbi tavsiyeler gönderiyoruz.',
     testimonials: {

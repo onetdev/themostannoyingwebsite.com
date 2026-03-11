@@ -85,7 +85,7 @@ export default {
       'Choose from our selection of premium, 100% fake AI packages. Experience the future of annoyance today!',
   },
   onlySpams: {
-    title: 'OnlySpams™',
+    title: 'OnlySpams',
     description:
       'The most exclusive newsletter for your inbox. Experience the joy of endless spam and high-quality scam emails.',
   },

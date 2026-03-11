@@ -98,6 +98,9 @@ export default {
     achievements: 'Logros',
     admin: 'Administración',
     termsOfUse: 'Términos de uso',
+    onlySpams: 'OnlySpams',
+    virgin: 'Virgin',
+    flaimAPhone: '¡Feclama un teléfono!',
   },
   userField: {
     consentNewsletter: 'Quiero recibir boletín',

@@ -48,7 +48,7 @@ export default {
     description:
       '저희 프리미엄 뉴스레터는 엄청난 가치를 여러분의 편지함으로 직접 전달해 드립니다. 실질적인 차이를 만드는 인사이트를 놓치지 마세요!',
     placeholder: '이메일을 입력하세요',
-    onlySpamsLabel: 'OnlySpams™도 받고 싶습니다 (권장)',
+    onlySpamsLabel: 'OnlySpams도 받고 싶습니다 (권장)',
     onlySpamsDetails: '(상세)',
     initialConfirm: '구독하기',
     initialCancel: '구독하지 않기',
@@ -90,7 +90,7 @@ export default {
     wheelTitle: '행운의 바퀴',
   },
   onlySpams: {
-    title: 'OnlySpams™ - 프리미엄 뉴스레터',
+    title: 'OnlySpams - 프리미엄 뉴스레터',
     description:
       '세계에서 가장 독점적인 인박스 애호가들의 모임에 참여하세요. 우리는 단순히 이메일을 보내는 것이 아니라 감정, 기회, 그리고 매우 구체적인 의학적 조언을 보냅니다.',
     testimonials: {

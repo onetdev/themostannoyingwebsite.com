@@ -50,7 +50,7 @@ export default {
     description:
       'Notre newsletter premium apporte une valeur folle directement dans votre boîte de réception. Ne manquez pas les informations qui font une vraie différence !',
     placeholder: 'Entrez votre email',
-    onlySpamsLabel: 'Je souhaite également recevoir OnlySpams™ (Recommandé)',
+    onlySpamsLabel: 'Je souhaite également recevoir OnlySpams (Recommandé)',
     onlySpamsDetails: '(détails)',
     initialConfirm: "S'abonner",
     initialCancel: "Ne pas s'abonner",
@@ -92,7 +92,7 @@ export default {
     wheelTitle: 'Roue de la fortune',
   },
   onlySpams: {
-    title: 'OnlySpams™ - Newsletter Premium',
+    title: 'OnlySpams - Newsletter Premium',
     description:
       "Rejoignez le cercle le plus exclusif d'amateurs de boîtes de réception au monde. Nous n'envoyons pas seulement des e-mails ; nous envoyons des émotions, des opportunités et des conseils médicaux très spécifiques.",
     testimonials: {

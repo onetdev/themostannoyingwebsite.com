@@ -48,7 +48,7 @@ export default {
     description:
       'हमारा प्रीमियम न्यूज़लेटर आपके इनबॉक्स में पागलपन की हद तक वैल्यू लाता है। उन अंतर्दृष्टि (insights) को न चूकें जो वास्तविक बदलाव लाती हैं!',
     placeholder: 'अपना ईमेल दर्ज करें',
-    onlySpamsLabel: 'मैं OnlySpams™ भी प्राप्त करना चाहता हूँ (अनुशंसित)',
+    onlySpamsLabel: 'मैं OnlySpams भी प्राप्त करना चाहता हूँ (अनुशंसित)',
     onlySpamsDetails: '(विवरण)',
     initialConfirm: 'सब्सक्राइब करें',
     initialCancel: 'सब्सक्राइब न करें',
@@ -90,7 +90,7 @@ export default {
     wheelTitle: 'भाग्य का पहिया',
   },
   onlySpams: {
-    title: 'OnlySpams™ - प्रीमियम न्यूज़लेटर',
+    title: 'OnlySpams - प्रीमियम न्यूज़लेटर',
     description:
       'इनबॉक्स के शौकीनों के दुनिया के सबसे विशिष्ट दायरे में शामिल हों। हम केवल ईमेल नहीं भेजते; हम भावनाएं, अवसर और बहुत विशिष्ट चिकित्सा सलाह भेजते हैं।',
     testimonials: {

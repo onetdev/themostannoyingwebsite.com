@@ -96,6 +96,9 @@ export default {
     achievements: 'الإنجازات',
     admin: 'مسؤول',
     termsOfUse: 'شروط الاستخدام',
+    onlySpams: 'OnlySpams',
+    virgin: 'فيرجن',
+    flaimAPhone: 'افلم بهاتفك!',
   },
   userField: {
     consentNewsletter: 'أريد تلقي النشرة الإخبارية',

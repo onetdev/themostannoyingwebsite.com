@@ -71,7 +71,27 @@ export const PERSONAL_NAVIGATION_LINKS: NavItem[] = [
 ];
 
 export const FOOTER_NAVIGATION_LINKS: NavItem[] = [
-  ...SITE_NAVIGATION_LINKS,
+  // Main website links
+  { key: 'home', labelKey: 'navigation.home', path: '/' },
+  { key: 'plans', labelKey: 'navigation.plans', path: '/plans' },
+  { key: 'donate', labelKey: 'navigation.donate', path: '/donate' },
+  { key: 'about', labelKey: 'navigation.about', path: '/about' },
+  { key: 'search', labelKey: 'navigation.search', path: '/search' },
+  { key: 'contact', labelKey: 'navigation.contact', path: '/contact' },
+
+  // Marketing related pages
+  {
+    key: 'flaim-a-fone',
+    labelKey: 'navigation.flaimAPhone',
+    path: '/flaim-a-phone',
+  },
+  { key: 'dilf', labelKey: 'navigation.dilf', path: '/dilf' },
+  { key: 'hot-things', labelKey: 'navigation.hotThings', path: '/hot-things' },
+  { key: 'only-spams', labelKey: 'navigation.onlySpams', path: '/only-spams' },
+  { key: 'virgin', labelKey: 'navigation.virgin', path: '/virgin' },
+
+  // User Management
+  { key: 'admin', labelKey: 'navigation.admin', path: '/admin' },
   { key: 'signup', labelKey: 'navigation.signup', path: '/user/signup' },
   {
     key: 'password-reminder',
@@ -84,6 +104,8 @@ export const FOOTER_NAVIGATION_LINKS: NavItem[] = [
     path: '/achievements',
   },
   { key: 'settings', labelKey: 'navigation.settings', path: '/settings' },
+
+  // And some manadatory stuff
   {
     key: 'privacy-policy',
     labelKey: 'navigation.privacyPolicy',
