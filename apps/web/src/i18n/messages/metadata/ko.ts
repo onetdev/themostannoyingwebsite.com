@@ -84,6 +84,11 @@ export default {
     description:
       '우리가 엄선한 100% 가짜 프리미엄 AI 패키지 중에서 선택하세요. 오늘 미래의 짜증을 경험해 보세요!',
   },
+  onlySpams: {
+    title: 'OnlySpams',
+    description:
+      '받은 편지함을 위한 가장 독점적인 뉴스레터. 끝없는 스팸과 고품질 사기 이메일의 즐거움을 경험해 보세요.',
+  },
   admin: {
     title: '관리자 터미널',
     description: '시스템 관리 인터페이스에 대한 보안 터미널 접근입니다.',

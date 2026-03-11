@@ -49,7 +49,7 @@ export function EmailSampleCarousel() {
         <CarouselContent className="-ml-4" fade>
           {samples.map((email, i) => (
             <CarouselItem
-              key={`${i}${email.subject}`}
+              key={`${email.subject}${email.body}`}
               className="pl-4 basis-[70%] md:basis-[55%] lg:basis-[45%] pb-4"
             >
               <motion.div

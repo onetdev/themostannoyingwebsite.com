@@ -1,6 +1,7 @@
 'use client';
 
 import { Badge, Button, Separator } from '@maw/ui-lib';
+import { useTranslations } from 'next-intl';
 import { emit } from '@/core/events/event-bus';
 
 interface EmailSampleCardProps {
@@ -9,12 +10,14 @@ interface EmailSampleCardProps {
 }
 
 export function EmailSampleCard(email: EmailSampleCardProps) {
+  const t = useTranslations();
+
   return (
     <div className="bg-card text-card-foreground border border-border rounded-xl shadow-sm overflow-hidden flex flex-col transition-all hover:shadow-lg h-full">
       <div className="bg-muted/30 p-4 space-y-2 text-sm">
         <div className="flex gap-2">
           <span className="font-semibold text-muted-foreground min-w-16">
-            Sender:
+            {t('marketing.onlySpams.samples.sender')}
           </span>
           <span className="font-medium">
             OnlySpams &lt;spam@themostannoyingwebsite.com&gt;
@@ -22,16 +25,16 @@ export function EmailSampleCard(email: EmailSampleCardProps) {
         </div>
         <div className="flex gap-2">
           <span className="font-semibold text-muted-foreground min-w-16">
-            Subject:
+            {t('marketing.onlySpams.samples.subject')}
           </span>
           <span className="font-medium">{email.subject}</span>
         </div>
         <div className="flex gap-2 items-center">
           <span className="font-semibold text-muted-foreground min-w-16">
-            Folder:
+            {t('marketing.onlySpams.samples.folder')}
           </span>
           <Badge variant="destructive" className="font-bold">
-            SPAM
+            {t('marketing.onlySpams.samples.spam')}
           </Badge>
         </div>
       </div>
@@ -49,7 +52,7 @@ export function EmailSampleCard(email: EmailSampleCardProps) {
             className="font-bold"
             onClick={() => emit('ui:newsletter-modal:show')}
           >
-            I'M INTERESTED
+            {t('marketing.onlySpams.samples.cta')}
           </Button>
         </div>
       </div>

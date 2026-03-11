@@ -84,6 +84,11 @@ export default {
     description:
       '100%偽物のAIパッケージセレクションからお選びください。最先端の「ウザさ」を今すぐ体験！',
   },
+  onlySpams: {
+    title: 'OnlySpams',
+    description:
+      'あなたのインボックスに届く、最も特別なニュースレター。終わりのないスパムと高品質な詐欺メールの喜びを体験してください。',
+  },
   admin: {
     title: '管理ターミナル',
     description:

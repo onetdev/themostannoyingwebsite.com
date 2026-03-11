@@ -1,5 +1,5 @@
 import type { MarketingI18nShape } from '../types';
-import onlySpamsVariants from './only-spams-variants/en';
+import onlySpamsVariants from './only-spams-variants/tr';
 import questionVariants from './quiz-variants/tr';
 
 export default {
@@ -96,11 +96,16 @@ export default {
       'Dünyanın en seçkin gelen kutusu meraklıları çevresine katılın. Sadece e-posta göndermiyoruz; duygular, fırsatlar ve çok özel tıbbi tavsiyeler gönderiyoruz.',
     testimonials: {
       title: '"Abonelerimiz" ne diyor?',
+      verified: 'Doğrulandı',
       items: onlySpamsVariants.testimonials,
     },
     samples: {
       title: 'Örnek Değer Katımları',
+      sender: 'Gönderen:',
       subject: 'Konu:',
+      folder: 'Klasör:',
+      spam: 'SPAM',
+      cta: 'İLGİLENİYORUM',
       items: onlySpamsVariants.samples,
     },
     subscribe: 'Şimdi Abone Ol',

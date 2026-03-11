@@ -81,6 +81,11 @@ export default {
     description:
       '从我们精选的 100% 虚假 AI 套餐中进行选择。今天就体验未来的烦恼！',
   },
+  onlySpams: {
+    title: 'OnlySpams',
+    description:
+      '收件箱中最独家的时事通讯。体验无穷无尽的垃圾邮件和高质量诈骗邮件的乐趣。',
+  },
   admin: {
     title: '管理员终端',
     description: '安全访问系统管理界面的终端。',

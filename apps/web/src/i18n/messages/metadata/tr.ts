@@ -84,6 +84,11 @@ export default {
     description:
       ' %100 sahte premium yapay zeka paketleri seçkimizden seçiminizi yapın. Sinir bozuculuğun geleceğini bugün deneyimleyin!',
   },
+  onlySpams: {
+    title: 'OnlySpams',
+    description:
+      'Gelen kutunuz için en özel bülten. Sonsuz spam ve yüksek kaliteli dolandırıcılık e-postalarının keyfini yaşayın.',
+  },
   admin: {
     title: 'Admin Terminali',
     description: 'Sistem yönetimi arayüzüne güvenli terminal erişimi.',

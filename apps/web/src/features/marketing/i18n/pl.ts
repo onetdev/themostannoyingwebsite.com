@@ -1,5 +1,5 @@
 import type { MarketingI18nShape } from '../types';
-import onlySpamsVariants from './only-spams-variants/en';
+import onlySpamsVariants from './only-spams-variants/pl';
 import questionVariants from './quiz-variants/pl';
 
 export default {
@@ -95,11 +95,16 @@ export default {
       'Dołącz do najbardziej ekskluzywnego kręgu entuzjastów skrzynek odbiorczych na świecie. Nie wysyłamy tylko e-maili; wysyłamy emocje, możliwości i bardzo konkretne porady medyczne.',
     testimonials: {
       title: 'Co mówią nasi „subskrybenci”',
+      verified: 'Zweryfikowano',
       items: onlySpamsVariants.testimonials,
     },
     samples: {
       title: 'Przykładowe wartości dodane',
+      sender: 'Nadawca:',
       subject: 'Temat:',
+      folder: 'Folder:',
+      spam: 'SPAM',
+      cta: 'JESTEM ZAINTERESOWANY',
       items: onlySpamsVariants.samples,
     },
     subscribe: 'Subskrybuj teraz',

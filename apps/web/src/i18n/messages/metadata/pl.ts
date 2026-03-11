@@ -84,6 +84,11 @@ export default {
     description:
       'Wybieraj spośród naszej oferty premium, 100% fałszywych pakietów AI. Doświadcz przyszłości irytacji już dziś!',
   },
+  onlySpams: {
+    title: 'OnlySpams',
+    description:
+      'Najbardziej ekskluzywny newsletter do Twojej skrzynki odbiorczej. Poczuj radość z niekończącego się spamu i wysokiej jakości e-maili typu scam.',
+  },
   admin: {
     title: 'Terminal administratora',
     description:

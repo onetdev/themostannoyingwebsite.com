@@ -13,10 +13,11 @@ import {
   CarouselPrevious,
 } from '@maw/ui-lib';
 import { motion } from 'framer-motion';
-import { useMessages } from 'next-intl';
+import { useMessages, useTranslations } from 'next-intl';
 import { useEffect, useState } from 'react';
 
 export function TestimonialCarousel() {
+  const t = useTranslations();
   const messages = useMessages() as AppTranslationShape;
   const testimonials = messages.marketing.onlySpams.testimonials.items;
   const [api, setApi] = useState<CarouselApi>();
@@ -49,9 +50,9 @@ export function TestimonialCarousel() {
         }}
       >
         <CarouselContent className="-ml-4" fade>
-          {testimonials.map((t, i) => (
+          {testimonials.map((testimonial, i) => (
             <CarouselItem
-              key={`${i}${t.comment}`}
+              key={`${testimonial.comment}`}
               className="pl-4 basis-[70%] md:basis-[60%]"
             >
               <motion.div
@@ -64,11 +65,15 @@ export function TestimonialCarousel() {
                 <Card className="h-full">
                   <CardHeader>
                     <CardTitle>
-                      <Badge>Verified</Badge>
+                      <Badge>
+                        {t('marketing.onlySpams.testimonials.verified')}
+                      </Badge>
                     </CardTitle>
                   </CardHeader>
                   <CardContent className="px-6 space-y-4">
-                    <p className="text-muted-foreground">"{t.comment}"</p>
+                    <p className="text-muted-foreground">
+                      "{testimonial.comment}"
+                    </p>
 
                     <p className="font-semibold">
                       — {messages.variants.names[i]}

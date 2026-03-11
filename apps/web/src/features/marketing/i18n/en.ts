@@ -94,11 +94,16 @@ export default {
       "Join the world's most exclusive circle of inbox enthusiasts. We don't just send emails; we send emotions, opportunities, and very specific medical advice.",
     testimonials: {
       title: 'What our "Subscribers" say',
+      verified: 'Verified',
       items: onlySpamsVariants.testimonials,
     },
     samples: {
       title: 'Sample Value-Adds',
+      sender: 'Sender:',
       subject: 'Subject:',
+      folder: 'Folder:',
+      spam: 'SPAM',
+      cta: "I'M INTERESTED",
       items: onlySpamsVariants.samples,
     },
     subscribe: 'Subscribe Now',

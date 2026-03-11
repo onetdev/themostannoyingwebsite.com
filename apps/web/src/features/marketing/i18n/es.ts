@@ -1,5 +1,5 @@
 import type { MarketingI18nShape } from '../types';
-import onlySpamsVariants from './only-spams-variants/en';
+import onlySpamsVariants from './only-spams-variants/es';
 import questionVariants from './quiz-variants/es';
 
 export default {
@@ -95,11 +95,16 @@ export default {
       'Únete al círculo más exclusivo del mundo de entusiastas de la bandeja de entrada. No solo enviamos correos electrónicos; enviamos emociones, oportunidades y consejos médicos muy específicos.',
     testimonials: {
       title: 'Lo que dicen nuestros "suscriptores"',
+      verified: 'Verificado',
       items: onlySpamsVariants.testimonials,
     },
     samples: {
       title: 'Ejemplos de valor añadido',
+      sender: 'Remitente:',
       subject: 'Asunto:',
+      folder: 'Carpeta:',
+      spam: 'SPAM',
+      cta: 'ESTOY INTERESADO',
       items: onlySpamsVariants.samples,
     },
     subscribe: 'Suscríbete ahora',

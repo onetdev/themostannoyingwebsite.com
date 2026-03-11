@@ -1,5 +1,5 @@
 import type { MarketingI18nShape } from '../types';
-import onlySpamsVariants from './only-spams-variants/en';
+import onlySpamsVariants from './only-spams-variants/ja';
 import questionVariants from './quiz-variants/ja';
 
 export default {
@@ -95,11 +95,16 @@ export default {
       '世界で最も独占的な受信トレイ愛好家のサークルに参加しましょう。私たちは単にメールを送るだけではありません。感情、機会、そして非常に具体的な医学的アドバイスを送信します。',
     testimonials: {
       title: '「購読者」の声',
+      verified: '認証済み',
       items: onlySpamsVariants.testimonials,
     },
     samples: {
       title: '付加価値の例',
+      sender: '送信者:',
       subject: '件名:',
+      folder: 'フォルダ:',
+      spam: 'スパム',
+      cta: '興味があります',
       items: onlySpamsVariants.samples,
     },
     subscribe: '今すぐ購読',

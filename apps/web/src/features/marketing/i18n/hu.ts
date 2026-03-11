@@ -1,5 +1,5 @@
 import type { MarketingI18nShape } from '../types';
-import onlySpamsVariants from './only-spams-variants/en';
+import onlySpamsVariants from './only-spams-variants/hu';
 import questionVariants from './quiz-variants/hu';
 
 export default {
@@ -95,11 +95,16 @@ export default {
       'Csatlakozz a világ legexkluzívabb postaláda-rajongói köréhez. Mi nem csak e-maileket küldünk; érzelmeket, lehetőségeket és nagyon specifikus orvosi tanácsokat küldünk.',
     testimonials: {
       title: 'Mit mondanak a „Feliratkozóink”',
+      verified: 'Ellenőrzött',
       items: onlySpamsVariants.testimonials,
     },
     samples: {
       title: 'Példák az értékteremtésre',
+      sender: 'Feladó:',
       subject: 'Tárgy:',
+      folder: 'Mappa:',
+      spam: 'SPAM',
+      cta: 'ÉRDEKEL',
       items: onlySpamsVariants.samples,
     },
     subscribe: 'Feliratkozás most',

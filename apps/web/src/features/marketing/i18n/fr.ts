@@ -1,5 +1,5 @@
 import type { MarketingI18nShape } from '../types';
-import onlySpamsVariants from './only-spams-variants/en';
+import onlySpamsVariants from './only-spams-variants/fr';
 import questionVariants from './quiz-variants/fr';
 
 export default {
@@ -97,11 +97,16 @@ export default {
       "Rejoignez le cercle le plus exclusif d'amateurs de boîtes de réception au monde. Nous n'envoyons pas seulement des e-mails ; nous envoyons des émotions, des opportunités et des conseils médicaux très spécifiques.",
     testimonials: {
       title: 'Ce que disent nos "abonnés"',
+      verified: 'Vérifié',
       items: onlySpamsVariants.testimonials,
     },
     samples: {
       title: 'Exemples de valeur ajoutée',
+      sender: 'Expéditeur :',
       subject: 'Sujet :',
+      folder: 'Dossier :',
+      spam: 'SPAM',
+      cta: "ÇA M'INTÉRESSE",
       items: onlySpamsVariants.samples,
     },
     subscribe: "S'abonner maintenant",

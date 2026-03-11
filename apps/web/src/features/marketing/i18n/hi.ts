@@ -1,5 +1,5 @@
 import type { MarketingI18nShape } from '../types';
-import onlySpamsVariants from './only-spams-variants/en';
+import onlySpamsVariants from './only-spams-variants/hi';
 import questionVariants from './quiz-variants/hi';
 
 export default {
@@ -95,11 +95,16 @@ export default {
       'इनबॉक्स के शौकीनों के दुनिया के सबसे विशिष्ट दायरे में शामिल हों। हम केवल ईमेल नहीं भेजते; हम भावनाएं, अवसर और बहुत विशिष्ट चिकित्सा सलाह भेजते हैं।',
     testimonials: {
       title: 'हमारे "सदस्य" क्या कहते हैं',
+      verified: 'सत्यापित',
       items: onlySpamsVariants.testimonials,
     },
     samples: {
       title: 'नमूना मूल्य-वर्धन',
+      sender: 'प्रेषक:',
       subject: 'विषय:',
+      folder: 'फ़ोल्डर:',
+      spam: 'स्पैम',
+      cta: 'मुझे दिलचस्पी है',
       items: onlySpamsVariants.samples,
     },
     subscribe: 'अभी सब्सक्राइब करें',

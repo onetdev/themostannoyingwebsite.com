@@ -1,5 +1,5 @@
 import type { MarketingI18nShape } from '../types';
-import onlySpamsVariants from './only-spams-variants/en';
+import onlySpamsVariants from './only-spams-variants/ar';
 import questionVariants from './quiz-variants/ar';
 
 export default {
@@ -95,11 +95,16 @@ export default {
       'انضم إلى الدائرة الأكثر حصرية من عشاق صناديق الوارد في العالم. نحن لا نرسل رسائل بريد إلكتروني فقط؛ بل نرسل مشاعر، وفرصاً، ونصائح طبية محددة للغاية.',
     testimonials: {
       title: 'ماذا يقول "مشتركونا"',
+      verified: 'مُوثّق',
       items: onlySpamsVariants.testimonials,
     },
     samples: {
       title: 'أمثلة على القيمة المضافة',
+      sender: 'المرسل:',
       subject: 'الموضوع:',
+      folder: 'المجلد:',
+      spam: 'بريد مزعج',
+      cta: 'أنا مهتم',
       items: onlySpamsVariants.samples,
     },
     subscribe: 'اشترك الآن',

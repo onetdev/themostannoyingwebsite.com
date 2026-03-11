@@ -1,5 +1,5 @@
 import type { MarketingI18nShape } from '../types';
-import onlySpamsVariants from './only-spams-variants/en';
+import onlySpamsVariants from './only-spams-variants/ru';
 import questionVariants from './quiz-variants/ru';
 
 export default {
@@ -96,11 +96,16 @@ export default {
       'Присоединяйтесь к самому эксклюзивному в мире кругу любителей входящих сообщений. Мы не просто отправляем электронные письма; мы отправляем эмоции, возможности и очень специфические медицинские советы.',
     testimonials: {
       title: 'Что говорят наши «подписчики»',
+      verified: 'Подтверждено',
       items: onlySpamsVariants.testimonials,
     },
     samples: {
       title: 'Примеры ценности',
+      sender: 'Отправитель:',
       subject: 'Тема:',
+      folder: 'Папка:',
+      spam: 'СПАМ',
+      cta: 'МНЕ ИНТЕРЕСНО',
       items: onlySpamsVariants.samples,
     },
     subscribe: 'Подписаться сейчас',
