@@ -16,6 +16,9 @@ export const DisruptionsConfigSchema = z.object({
   stickyVideoPlayer: z.object({
     videoUrl: z.url(),
   }),
+  deadPixel: z.object({
+    rainbowChance: z.number().describe('Floating point value meaning percentage of chance'),
+  }),
 });
 
 export type DisruptionsConfig = z.infer<typeof DisruptionsConfigSchema>;
