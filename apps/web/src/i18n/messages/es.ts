@@ -13,6 +13,7 @@ import support from '@/features/support/i18n/es';
 import user from '@/features/user/i18n/es';
 import common from './common/es';
 import metadata from './metadata/es';
+import variants from './variants/es';
 
 export default {
   // Feature or externals
@@ -31,6 +32,7 @@ export default {
   subscription,
   support,
   user,
+  variants,
 
   // App level, shared translations
   app: {

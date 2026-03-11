@@ -70,7 +70,9 @@ export function TestimonialCarousel() {
                   <CardContent className="px-6 space-y-4">
                     <p className="text-muted-foreground">"{t.comment}"</p>
 
-                    <p className="font-semibold">— {t.name}</p>
+                    <p className="font-semibold">
+                      — {messages.variants.names[i]}
+                    </p>
                   </CardContent>
                 </Card>
               </motion.div>

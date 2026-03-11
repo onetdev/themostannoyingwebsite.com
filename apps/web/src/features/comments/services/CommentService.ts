@@ -1,20 +1,5 @@
 import type { ArticleDatum } from '@maw/content-api';
 import { injectable } from 'inversify';
-import poolAr from '@/features/comments/i18n/generator/ar';
-import poolDe from '@/features/comments/i18n/generator/de';
-import poolEn from '@/features/comments/i18n/generator/en';
-import poolEs from '@/features/comments/i18n/generator/es';
-import poolFr from '@/features/comments/i18n/generator/fr';
-import poolHi from '@/features/comments/i18n/generator/hi';
-import poolHu from '@/features/comments/i18n/generator/hu';
-import poolIt from '@/features/comments/i18n/generator/it';
-import poolJa from '@/features/comments/i18n/generator/ja';
-import poolKo from '@/features/comments/i18n/generator/ko';
-import poolPl from '@/features/comments/i18n/generator/pl';
-import poolPt from '@/features/comments/i18n/generator/pt';
-import poolRu from '@/features/comments/i18n/generator/ru';
-import poolTr from '@/features/comments/i18n/generator/tr';
-import poolZh from '@/features/comments/i18n/generator/zh';
 import i18nConfig from '@/root/i18n.config';
 import type { CommentService as ICommentService } from '../types';
 import { filterByDate } from './use-cases/filterByDate';
@@ -23,29 +8,41 @@ import {
   type SeededCommentsOptions,
 } from './use-cases/generateTree';
 
-const pools: Record<AppLocale, typeof poolEn> = {
-  ar: poolAr,
-  de: poolDe,
-  en: poolEn,
-  es: poolEs,
-  fr: poolFr,
-  hi: poolHi,
-  hu: poolHu,
-  it: poolIt,
-  ja: poolJa,
-  ko: poolKo,
-  pl: poolPl,
-  pt: poolPt,
-  ru: poolRu,
-  tr: poolTr,
-  zh: poolZh,
-};
+interface CommentPool {
+  names: string[];
+  comments: string[];
+}
 
 @injectable()
 export class CommentService implements ICommentService {
+  private async getPool(locale: string): Promise<CommentPool> {
+    const safeLocale = (i18nConfig.locales as readonly string[]).includes(
+      locale,
+    )
+      ? locale
+      : i18nConfig.defaultLocale;
+
+    const [poolModule, variantsModule] = await Promise.all([
+      import(`@/features/comments/i18n/generator/${safeLocale}`),
+      import(`@/i18n/messages/variants/${safeLocale}`).catch(() => ({
+        default: { names: [] },
+      })),
+    ]);
+
+    const pool = poolModule.default;
+    const names =
+      variantsModule.default.names.length > 0
+        ? variantsModule.default.names
+        : pool.names;
+
+    return {
+      ...pool,
+      names,
+    };
+  }
+
   async getByArticle(item: ArticleDatum, options?: SeededCommentsOptions) {
-    const pool =
-      pools[item.locale as AppLocale] ?? pools[i18nConfig.defaultLocale];
+    const pool = await this.getPool(item.locale);
 
     const data = generateTree(item.slug, item.publishedAt, {
       pool,

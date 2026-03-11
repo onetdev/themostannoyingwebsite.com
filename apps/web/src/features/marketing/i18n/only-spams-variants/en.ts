@@ -1,36 +1,31 @@
 export default {
   testimonials: [
     {
-      name: 'John Doe',
       comment:
         "I used to have only 5 unread emails. After joining OnlySpams, I have 5,432! My life feels so much more 'full' now.",
     },
     {
-      name: 'Sarah Smith',
       comment:
         'The Nigerian Prince actually replied! He just needs another $500 for the administrative fees. So exciting!',
     },
     {
-      name: 'Barry B.',
       comment:
         "I've never seen such amazing deals on blue pills. My doctor is confused, but my inbox is happy!",
     },
     {
-      name: 'Karen W.',
       comment:
         "I finally managed to extend my car's warranty! I don't even own a car, but it's good to have that peace of mind.",
     },
     {
-      name: 'Lonely Larry',
       comment:
         "I found a hot single DILF (Donut I'd Like to Feast On) just two blocks away! Best 'dating' site ever.",
     },
     {
-      name: 'Lucky Lucy',
       comment:
         "I wan a phone! Well, I filled out the survey, and although I didn't actually get the phone, the experience was truly flaiming!",
     },
   ],
+
   samples: [
     {
       subject: 'URGENT: Business Proposal from Dr. Bakare Tunde',
