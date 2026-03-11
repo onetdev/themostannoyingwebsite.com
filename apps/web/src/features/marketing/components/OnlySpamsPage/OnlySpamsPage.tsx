@@ -2,11 +2,16 @@
 
 import { Button } from '@maw/ui-lib';
 import { useTranslations } from 'next-intl';
+import { emit } from '@/core/events/event-bus';
 import { EmailSampleCarousel } from './EmailSampleCarousel';
 import { TestimonialCarousel } from './TestimonialCarousel';
 
 export function OnlySpamsPage() {
   const t = useTranslations();
+
+  const handleSubscribe = () => {
+    emit('ui:newsletter-modal:show');
+  };
 
   return (
     <div className="flex flex-col gap-16 py-10">
@@ -34,7 +39,11 @@ export function OnlySpamsPage() {
       </div>
 
       <div className="flex justify-center mt-8">
-        <Button size="lg" className="px-12 py-8 text-xl font-bold">
+        <Button
+          size="lg"
+          className="px-12 py-8 text-xl font-bold"
+          onClick={handleSubscribe}
+        >
           {t('marketing.onlySpams.subscribe')}
         </Button>
       </div>
