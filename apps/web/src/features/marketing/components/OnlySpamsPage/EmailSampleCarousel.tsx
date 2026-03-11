@@ -9,6 +9,7 @@ import {
   Carousel,
   type CarouselApi,
   CarouselContent,
+  CarouselDotIndicator,
   CarouselItem,
   CarouselNext,
   CarouselPrevious,
@@ -30,9 +31,14 @@ export function EmailSampleCarousel() {
     setCount(api.scrollSnapList().length);
     setCurrent(api.selectedScrollSnap());
 
-    api.on('select', () => {
+    const onSelect = () => {
       setCurrent(api.selectedScrollSnap());
-    });
+    };
+
+    api.on('select', onSelect);
+    return () => {
+      api.off('select', onSelect);
+    };
   }, [api]);
 
   return (
@@ -47,7 +53,7 @@ export function EmailSampleCarousel() {
         <CarouselContent className="-ml-4">
           {samples.map((email, i) => (
             <CarouselItem
-              key={i}
+              key={`${i}${email.subject}`}
               className="pl-4 basis-[70%] md:basis-[55%] lg:basis-[45%]"
             >
               <motion.div
@@ -85,20 +91,12 @@ export function EmailSampleCarousel() {
         <CarouselNext />
       </Carousel>
 
-      {/* pagination dots */}
-
-      <div className="flex justify-center gap-2 mt-6">
-        {Array.from({ length: count }).map((_, i) => (
-          <button
-            type="button"
-            key={i}
-            onClick={() => api?.scrollTo(i)}
-            className={`h-2 rounded-full transition-all ${
-              current === i ? 'bg-primary w-6' : 'bg-muted w-2'
-            }`}
-          />
-        ))}
-      </div>
+      <CarouselDotIndicator
+        api={api}
+        current={current}
+        count={count}
+        className="mt-6"
+      />
     </div>
   );
 }

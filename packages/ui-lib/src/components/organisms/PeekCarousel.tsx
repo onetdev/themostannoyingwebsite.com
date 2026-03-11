@@ -1,13 +1,22 @@
+import clsx from 'clsx';
+import type { ComponentProps } from 'react';
 import { Card, CardContent } from './Card';
 import {
   Carousel,
+  type CarouselApi,
   CarouselContent,
   CarouselItem,
   CarouselNext,
   CarouselPrevious,
 } from './Carousel';
 
-export function PeekCarousel() {
+export interface PeekCarouselProps {
+  labelTemplate: string;
+}
+
+export function PeekCarousel({
+  labelTemplate = 'Card {index}',
+}: PeekCarouselProps) {
   return (
     <Carousel
       opts={{
@@ -24,7 +33,7 @@ export function PeekCarousel() {
           >
             <Card>
               <CardContent className="h-40 flex items-center justify-center">
-                Card {i}
+                {labelTemplate.replace('{index}', i.toString())}
               </CardContent>
             </Card>
           </CarouselItem>
@@ -34,5 +43,34 @@ export function PeekCarousel() {
       <CarouselPrevious />
       <CarouselNext />
     </Carousel>
+  );
+}
+
+export interface CarouselDotIndicatorProps extends ComponentProps<'div'> {
+  api: CarouselApi;
+  current: number;
+  count: number;
+}
+
+export function CarouselDotIndicator({
+  className,
+  api,
+  current,
+  count,
+}: CarouselDotIndicatorProps) {
+  return (
+    <div className={clsx('flex justify-center gap-2', className)}>
+      {Array.from({ length: count }).map((_, i) => (
+        <button
+          type="button"
+          key={i}
+          onClick={() => api?.scrollTo(i)}
+          className={clsx(
+            `h-2 w-2 rounded-full transition-all`,
+            current === i ? 'bg-primary w-6' : 'bg-muted',
+          )}
+        />
+      ))}
+    </div>
   );
 }

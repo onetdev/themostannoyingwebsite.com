@@ -7,6 +7,7 @@ import {
   Carousel,
   type CarouselApi,
   CarouselContent,
+  CarouselDotIndicator,
   CarouselItem,
   CarouselNext,
   CarouselPrevious,
@@ -28,9 +29,14 @@ export function TestimonialCarousel() {
     setCount(api.scrollSnapList().length);
     setCurrent(api.selectedScrollSnap());
 
-    api.on('select', () => {
+    const onSelect = () => {
       setCurrent(api.selectedScrollSnap());
-    });
+    };
+
+    api.on('select', onSelect);
+    return () => {
+      api.off('select', onSelect);
+    };
   }, [api]);
 
   return (
@@ -44,7 +50,10 @@ export function TestimonialCarousel() {
       >
         <CarouselContent className="-ml-4">
           {testimonials.map((t, i) => (
-            <CarouselItem key={i} className="pl-4 basis-[70%] md:basis-[60%]">
+            <CarouselItem
+              key={`${i}${t.comment}`}
+              className="pl-4 basis-[70%] md:basis-[60%]"
+            >
               <motion.div
                 animate={{
                   scale: current === i ? 1 : 0.92,
@@ -73,20 +82,12 @@ export function TestimonialCarousel() {
         <CarouselNext />
       </Carousel>
 
-      {/* Pagination dots */}
-
-      <div className="flex justify-center gap-2 mt-6">
-        {Array.from({ length: count }).map((_, i) => (
-          <button
-            type="button"
-            key={i}
-            onClick={() => api?.scrollTo(i)}
-            className={`h-2 w-2 rounded-full transition-all ${
-              current === i ? 'bg-primary w-6' : 'bg-muted'
-            }`}
-          />
-        ))}
-      </div>
+      <CarouselDotIndicator
+        api={api}
+        current={current}
+        count={count}
+        className="mt-6"
+      />
     </div>
   );
 }
