@@ -1,6 +1,6 @@
 import type Emittery from 'emittery';
 import type { MessageKeys, NestedKeyOf } from 'next-intl';
-import type englishShape from '@/i18n/messages/en.ts';
+import type englishShape from '@/i18n/messages/en';
 import type i18nConfig from '@/root/i18n.config';
 
 declare global {
