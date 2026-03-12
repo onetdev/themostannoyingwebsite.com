@@ -1,5 +1,6 @@
 'use client';
 
+import { useLogger } from '@maw/logger';
 import { useCallback, useEffect } from 'react';
 
 /**
@@ -7,25 +8,34 @@ import { useCallback, useEffect } from 'react';
  * from og:title and restoring it when disabled or unmounted.
  */
 export function useDynamicPageTitle(enabled: boolean) {
+  const logger = useLogger().getSubLogger({ name: 'useDynamicPageTitle' });
+
   const setTitle = useCallback(
     (newTitle: string) => {
       if (!enabled) {
         return;
       }
 
+      logger.info(`setting page title to new title: ${newTitle}`);
       document.title = newTitle;
     },
-    [enabled],
+    [enabled, logger.info],
   );
 
   const resetTitle = useCallback(() => {
     const originalTitle = document
       .querySelector(`meta[property="og:title"]`)
       ?.getAttribute('content');
+
     if (originalTitle) {
-      setTitle(originalTitle);
+      logger.info('resetting page title to original');
+      document.title = originalTitle;
+    } else {
+      logger.warn(
+        `og:title content is missing, can't reset page title to iginal`,
+      );
     }
-  }, [setTitle]);
+  }, [logger.warn, logger.info]);
 
   useEffect(() => {
     return () => {

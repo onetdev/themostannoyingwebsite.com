@@ -33,6 +33,9 @@ export function useArrayPagedTitle({
       }
     }, speedMs);
 
-    return () => clearInterval(timer);
+    return () => {
+      resetTitle();
+      clearInterval(timer);
+    };
   }, [enabled, speedMs, texts, setTitle, resetTitle]);
 }
