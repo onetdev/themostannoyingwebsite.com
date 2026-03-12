@@ -1,8 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { useEvent } from '@/core/events/react/useEvent';
-import { useScrollDistanceTrigger } from '@/hooks';
+import { useEvent, useScrollDistanceTrigger } from '@/hooks';
 import { usePainPreferencesStore, useRuntimeStore } from '@/stores';
 import { NewsletterModal } from './NewsletterModal';
 

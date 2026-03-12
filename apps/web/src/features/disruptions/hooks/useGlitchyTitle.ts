@@ -2,7 +2,7 @@
 
 import { randomNumber } from '@maw/utils/random';
 import { useCallback, useEffect, useState } from 'react';
-import { useDynamicTitle } from './useDynamicTitle';
+import { useDynamicPageTitle } from './useDynamicPageTitle';
 
 export type UseGlitchyTitleOptions = {
   duration?: number;
@@ -18,7 +18,7 @@ export function useGlitchyTitle({
   text = DEFAULT_GLITCHY_TEXT,
 }: UseGlitchyTitleOptions) {
   const [runCount, setRunCount] = useState(0);
-  const { setTitle, originalTitle } = useDynamicTitle(enabled);
+  const { setTitle, resetTitle } = useDynamicPageTitle(enabled);
 
   const schedule = useCallback(
     (onComplete: () => void) => {
@@ -32,9 +32,7 @@ export function useGlitchyTitle({
       }, rnd);
 
       const outTimer = setTimeout(() => {
-        if (originalTitle) {
-          setTitle(originalTitle);
-        }
+        resetTitle();
         onComplete();
       }, rnd + duration);
 
@@ -43,7 +41,7 @@ export function useGlitchyTitle({
         clearTimeout(outTimer);
       };
     },
-    [duration, randomRange, text, setTitle, originalTitle],
+    [duration, randomRange, text, setTitle, resetTitle],
   );
 
   // biome-ignore lint/correctness/useExhaustiveDependencies: runCount is crucial for iterative process
@@ -57,4 +55,5 @@ export function useGlitchyTitle({
   }, [enabled, schedule, runCount]);
 }
 
+// This is inentionally moved down here because it is so ugly
 const DEFAULT_GLITCHY_TEXT = 'Ţ̸̳̦̰̦̝͕͐̒̉̉̈́̉͛̃͆ͅh̵̛̜̲̉̋̀̐̒͒͆̕ë̸̦̝̀́̓ ̸̡̯͕̈́̈́͋͂͗M̴͔̘͙̣̞̈́̏͗̈́̾͊̊̇ͅo̵̢̤͚̯̣͕̾̿̑̓͐͝s̶̫͙̳̼̲̔̄͑̒́̓̃̎̕t̵̛̫̅͌̌̓̒͘̕ ̸͓́́̃͠A̵̲͑̅̚ṅ̸̦̗̱͈̳̰̣̿̽͋͊̚ͅn̵͙̭͆o̵̢͎͙̊̓y̷̡̛̯͙͕̞͕̱̖̾̂́͝i̴̤̠͚̯̲̣͛ṅ̸̛̖̗̟͙̻͂̏̉͒ǵ̶̡͈̒͛̌͐̄͘ ̶̢̦͉̩̗̮̬̺̂̑̆̄͆͐Ẃ̶̡̭̪͖̼̟͕̊̊́̾̕e̴͓̱͐̈͌̈̔̑̕͠b̸̡̘͍͍̹̹̦͑̒̓s̷͎̥̠̦͕͋́̉̔̏i̸̱̗̻̳̦̓̓̓̍͌̓t̷̤̦̳̯̉̿̉̂̌̚ę̷̣͔͇̇͊͑';

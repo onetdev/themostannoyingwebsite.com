@@ -1,10 +1,10 @@
 'use client';
 
-import { useLogger } from '@maw/logger';
 import { toast } from '@maw/ui-lib';
 import { randomArrayEntry, randomNumber } from '@maw/utils/random';
 import { useMessages, useTranslations } from 'next-intl';
 import { useCallback, useEffect, useMemo, useState } from 'react';
+import { useLogger } from '@/core/observability/react-logger';
 import type { SubscriptionPackage } from '../../schemas';
 
 export interface PurchaseProofToastProps {
@@ -18,7 +18,7 @@ export function PurchaseProofToast({
   minDelayMs,
   maxDelayMs,
 }: PurchaseProofToastProps) {
-  const logger = useLogger().getSubLogger({ name: 'PurchaseProofToast' });
+  const logger = useLogger('PurchaseProofToast');
   const t = useTranslations();
   const messages = useMessages() as AppTranslationShape;
   const [iterator, setIterator] = useState(0);
