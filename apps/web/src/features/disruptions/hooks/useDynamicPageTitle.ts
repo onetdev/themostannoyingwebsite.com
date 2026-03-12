@@ -19,7 +19,7 @@ export function useDynamicPageTitle(enabled: boolean) {
       logger.info(`setting page title to new title: ${newTitle}`);
       document.title = newTitle;
     },
-    [enabled, logger.info],
+    [enabled, logger],
   );
 
   const resetTitle = useCallback(() => {
@@ -35,7 +35,7 @@ export function useDynamicPageTitle(enabled: boolean) {
         `og:title content is missing, can't reset page title to original`,
       );
     }
-  }, [logger.warn, logger.info]);
+  }, [logger]);
 
   useEffect(() => {
     return () => {
