@@ -3,9 +3,11 @@
 import { useMessages } from 'next-intl';
 import { useMemo } from 'react';
 import { usePainPreferencesStore, useRuntimeStore } from '@/stores';
-import { useArrayPagedTitle } from '../../hooks/useArrayPagedTitle';
-import { useGlitchyTitle } from '../../hooks/useGlitchyTitle';
-import { useMarqueeTitle } from '../../hooks/useMarqueeTitle';
+import {
+  useArrayPagedTitle,
+  useGlitchyTitle,
+  useMarqueeTitle,
+} from '../../hooks';
 
 /**
  * Pain point of manipulating the page title. Unfortunatelly the refresh rate

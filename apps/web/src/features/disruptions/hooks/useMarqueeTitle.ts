@@ -2,7 +2,7 @@
 
 import { useEffect } from 'react';
 import { string_marquee } from '../utils';
-import { useDynamicTitle } from './useDynamicTitle';
+import { useDynamicPageTitle } from './useDynamicPageTitle';
 
 export type UseMarqueeTitleOptions = {
   enabled: boolean;
@@ -15,7 +15,7 @@ export function useMarqueeTitle({
   speedMs = 1000,
   text,
 }: UseMarqueeTitleOptions) {
-  const { setTitle } = useDynamicTitle(enabled);
+  const { setTitle, resetTitle } = useDynamicPageTitle(enabled);
 
   useEffect(() => {
     if (!enabled) return;
@@ -26,6 +26,9 @@ export function useMarqueeTitle({
       setTitle(string_marquee(text, time));
     }, speedMs);
 
-    return () => clearInterval(timer);
-  }, [enabled, speedMs, text, setTitle]);
+    return () => {
+      clearInterval(timer);
+      resetTitle();
+    };
+  }, [enabled, speedMs, text, setTitle, resetTitle]);
 }
