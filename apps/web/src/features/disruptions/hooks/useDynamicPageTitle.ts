@@ -1,14 +1,14 @@
 'use client';
 
-import { useLogger } from '@maw/logger';
 import { useCallback, useEffect } from 'react';
+import { useLogger } from '@/hooks';
 
 /**
  * Manages the page title dynamically, capturing the base title
  * from og:title and restoring it when disabled or unmounted.
  */
 export function useDynamicPageTitle(enabled: boolean) {
-  const logger = useLogger().getSubLogger({ name: 'useDynamicPageTitle' });
+  const logger = useLogger('useDynamicPageTitle');
 
   const setTitle = useCallback(
     (newTitle: string) => {
@@ -32,7 +32,7 @@ export function useDynamicPageTitle(enabled: boolean) {
       document.title = originalTitle;
     } else {
       logger.warn(
-        `og:title content is missing, can't reset page title to iginal`,
+        `og:title content is missing, can't reset page title to original`,
       );
     }
   }, [logger.warn, logger.info]);

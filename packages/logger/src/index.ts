@@ -7,11 +7,3 @@ export const getLogger = () => {
 
   return logger;
 };
-
-export const useLogger = () => {
-  const logger = new Logger({
-    type: 'pretty',
-  });
-
-  return logger;
-};
