@@ -56,11 +56,11 @@ async function main() {
   const MESSAGES_DIR = options.messagesDir;
   const APP_DIR = options.appDir;
 
-  const files = fs.readdirSync(MESSAGES_DIR).filter((f) => f.endsWith('.ts'));
-  const locales = files.map((f) => f.replace('.ts', ''));
+  const entries = fs.readdirSync(MESSAGES_DIR, { withFileTypes: true });
+  const locales = entries.filter((e) => e.isDirectory()).map((e) => e.name);
 
   if (!locales.includes('en')) {
-    logger.error(`Error: en.ts not found in ${MESSAGES_DIR}`);
+    logger.error(`Error: 'en' directory not found in ${MESSAGES_DIR}`);
     process.exit(1);
   }
 
@@ -69,7 +69,7 @@ async function main() {
   logger.info(`PHASE 1: Locale Messages Comparison`);
   logger.info(`===================================`);
 
-  const enPath = path.join(MESSAGES_DIR, 'en.ts');
+  const enPath = path.join(MESSAGES_DIR, 'en/index.ts');
   const enModule = await import(enPath);
   const enFlattened = flatten(enModule.default);
   const enKeys = Object.keys(enFlattened);
@@ -83,7 +83,7 @@ async function main() {
     if (locale === 'en') continue;
 
     try {
-      const localePath = path.join(MESSAGES_DIR, `${locale}.ts`);
+      const localePath = path.join(MESSAGES_DIR, locale, 'index.ts');
       const localeModule = await import(localePath);
       const localeFlattened = flatten(localeModule.default);
       const localeKeys = Object.keys(localeFlattened);

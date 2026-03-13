@@ -20,93 +20,112 @@ export default {
   optionalPainPoints: {
     title: 'Optionale Schmerzpunkte',
     categories: {
-      browser: 'Browser & Tab',
-      visual: 'Visuelle Hindernisse',
-      ads: 'Werbung & Monetarisierung',
-      interactivity: 'Popups & Interaktivität',
+      visualChaos: 'Visuelles Chaos',
+      uiSabotage: 'UI-Sabotage',
+      interruptions: 'Unterbrechungen',
+      browserHijacking: 'Browser-Hijacking',
     },
-    screensaverTimeout: 'Zeitüberschreitung',
-    screensaverVariant: 'Variante',
-    screensaverVariantOptions: {
-      bouncingLogo: 'Springendes Logo',
-      maze: '3D-Labyrinth 95',
+    achievementNotifications: {
+      label: 'Erfolgsbenachrichtigungen',
+      hint: 'Zeigt eine Benachrichtigung an, wenn Sie einen neuen Erfolg freischalten. Der Fortschritt wird im Hintergrund immer mitverfolgt.',
     },
-    screensaverTimeoutOptions: {
-      '15': '15 Sekunden',
-      '30': '30 Sekunden',
-      '60': '1 Minute',
-      '300': '5 Minuten',
-      '900': '15 Minuten',
+    backgroundAdflaps: {
+      label: 'Hintergrund-Werbeflaps',
+      hint: 'Zeigt Werbeflattern an den Seiten der Seite an, die angeklickt werden können und zu Marketingseiten führen.',
     },
-    gifts: {
-      detectAdblocker: 'Adblocker erkennen',
-      flaps: 'Hintergrund-Werbeflaps',
-      oneByOne: 'Einzelne Werbeblöcke',
+    clipboardBrandingMark: {
+      label: 'Zwischenablage-Branding-Markierung',
+      hint: 'Fügt einen Link „Mehr lesen unter...“ hinzu, wenn Sie Text von der Website kopieren.',
     },
-    achievementNotifications: 'Erfolgsbenachrichtigungen',
-    clipboardMarker: 'Zwischenablage-Markierung',
-    contentPaywall: 'Content-Paywall',
-    deadPixel: 'Pixelfehler',
-    disableContextMenu: 'Kontextmenü (Rechtsklick) deaktivieren',
-    exitPrompt: 'Beenden-Aufforderung',
-    historySpam: 'Verlauf-Spam',
-    mockChat: 'Bubble-Chat',
-    newsletterModal: 'Newsletter-Popup-Modal',
-    notifications: 'Benachrichtigungen',
-    screensaver: 'Bildschirmschoner',
-    pageTitleInactiveArrayPaged: 'Alternativer Titel, wenn der Tab inaktiv ist',
-    searchDelay: 'Gefälschte Suchverzögerung',
-    wheelOfFortune: 'Glücksrad',
-    stickyVideo: 'Sticky-Video',
-  },
-  optionalPainPointsHints: {
-    screensaver:
-      'Löst nach dem angegebenen Zeitraum totaler Inaktivität einen vom Benutzer ausgewählten Bildschirmschoner aus.',
-    gifts: {
-      detectAdblocker:
-        'Zeigt ein großes rotes Banner an, wenn ein Adblocker erkannt wird.',
-      flaps:
-        'Zeigt Werbeflaps an den Seiten der Seite an, die angeklickt werden können und zu verschiedenen Seiten führen.',
-      oneByOne:
-        'Hauptsächlich eine animierte Anzeige auf der Startseite abgedeckt.',
+    contentPaywall: {
+      label: 'Content-Paywall',
+      hint: 'Zeigt ein gefälschtes Paywall-Overlay über einigen Inhalten an, Sie können den Inhalt weiterhin kostenlos freischalten.',
     },
-    achievementNotifications:
-      'Zeigt eine Benachrichtigung an, wenn Sie einen neuen Erfolg freischalten. Der Fortschritt wird im Hintergrund immer mitverfolgt.',
-    clipboardMarker:
-      'Fügt einen Link „Mehr lesen unter...“ hinzu, wenn Sie Text von der Website kopieren.',
-    contentPaywall:
-      'Zeigt eine gefälschte Paywall-Überlagerung für einige Inhalte an, Sie können den Inhalt jedoch weiterhin enthüllen.',
-    deadPixel:
-      'Platziert ein paar gefälschte „tote“ Pixel auf Ihrem Bildschirm, um Sie zu ärgern.',
-    disableContextMenu:
-      'Verhindert, dass Sie das Rechtsklick-Menü verwenden, und zeigt stattdessen eine Warnung an.',
-    exitPrompt:
-      'Zeigt eine Aufforderung „Sind Sie sicher, dass Sie gehen wollen?“ an, wenn Sie versuchen, den Tab zu schließen oder die Seite zu verlassen.',
-    historySpam:
-      'Füllt Ihren Browserverlauf mit gefälschten Einträgen, sodass Sie nicht einfach zurückgehen können. Dies kann es unpraktisch machen, zu den Ergebnissen der Suchmaschine zurückzukehren.',
-    mockChat:
-      'Zeigt eine nervige „menschliche“ Chat-Blase an, die Ihnen nur Nachrichten sendet, wenn Sie sie schließen, und in der Zwischenzeit ständig „Agent schreibt“ anzeigt.',
-    newsletterModal:
-      'Zeigt periodisch ein Newsletter-Abonnement-Modal an, insbesondere wenn die Seite aus der Inaktivität zurückkehrt (Wechseln der Tabs).',
-    notifications:
-      'Fragt nach Benachrichtigungsberechtigungen und zeigt gefälschte Benachrichtigungen an.',
-    pageTitleInactiveArrayPaged:
-      'Ändert den Tab-Titel in etwas Aufmerksamkeitsstarkes, wenn der Tab inaktiv ist.',
-    searchDelay:
-      'Fügt allen Suchvorgängen eine gefälschte, lange Ladeverzögerung hinzu.',
-    wheelOfFortune:
-      'Zeigt ein gefälschtes „Glücksrad“-Modal an, das Ihnen absolut nutzlose Preise gibt.',
-    stickyVideo:
-      'Zeigt einen Sticky-Videoplayer an, der Ihnen beim Scrollen folgt.',
+    deadPixel: {
+      label: 'Pixelfehler',
+      hint: 'Platziert ein paar gefälschte „tote“ Pixel auf Ihrem Bildschirm, um Sie zu ärgern.',
+    },
+    detectAdblocker: {
+      label: 'Adblocker erkennen',
+      hint: 'Zeigt ein großes rotes Banner an, wenn ein Adblocker erkannt wird.',
+    },
+    disableContextMenu: {
+      label: 'Kontextmenü (Rechtsklick) deaktivieren',
+      hint: 'Verhindert, dass Sie das Rechtsklick-Menü verwenden, und zeigt stattdessen eine Warnung an.',
+    },
+    exitPrompt: {
+      label: 'Beenden-Aufforderung',
+      hint: 'Zeigt eine Aufforderung „Sind Sie sicher, dass Sie gehen wollen?“ an, wenn Sie versuchen, den Tab zu schließen oder die Seite zu verlassen.',
+    },
+    flaimAPHoneAd: {
+      label: 'Flaim-Telefonumfrage-Kampagne',
+      hint: 'Zeigt eine funky animierte Anzeige auf der Startseite an, die zu Flaim a Phone führt.',
+    },
+    historySpam: {
+      label: 'Verlauf-Spam',
+      hint: 'Füllt Ihren Browserverlauf mit gefälschten Einträgen, sodass Sie nicht einfach zurückgehen können. Dies kann es unpraktisch machen, zu den Ergebnissen der Suchmaschine zurückzukehren.',
+    },
+    mockSupportChat: {
+      label: 'Simulierter Support-Chat',
+      hint: 'Zeigt eine nervige "menschliche" Support-Chat-Blase an, die Ihnen nur Nachrichten sendet, wenn Sie sie schließen.',
+    },
+    newsletterModal: {
+      label: 'Newsletter-Popup-Modal',
+      hint: 'Zeigt periodisch ein Newsletter-Abonnement-Modal an, insbesondere wenn die Seite aus der Inaktivität zurückkehrt (Wechseln der Tabs).',
+    },
+    notifications: {
+      label: 'Benachrichtigungen',
+      hint: 'Fragt nach Benachrichtigungsberechtigungen und zeigt gefälschte Benachrichtigungen an.',
+    },
+    pageTitleInactiveArrayPaged: {
+      label: 'Abwechselnder Titel bei inaktivem Tab',
+      hint: 'Ändert den Tab-Titel in etwas Aufmerksamkeitsstarkes, wenn der Tab inaktiv ist.',
+    },
+    searchDelay: {
+      label: 'Künstliche Suchverzögerung',
+      hint: 'Fügt allen Suchvorgängen eine gefälschte, lange Ladeverzögerung hinzu.',
+    },
+    stickyVideoPlayer: {
+      label: 'Sticky-Videoplayer',
+      hint: 'Zeigt einen Sticky-Videoplayer an, der Ihnen beim Scrollen folgt.',
+    },
+    wheelOfFortune: {
+      label: 'Glücksrad',
+      hint: 'Zeigt ein gefälschtes „Glücksrad“-Modal an, das Ihnen absolut nutzlose Preise gibt.',
+    },
+    screensaver: {
+      label: 'Bildschirmschoner',
+      hint: 'Löst nach dem angegebenen Zeitraum totaler Inaktivität einen vom Benutzer ausgewählten Bildschirmschoner aus.',
+      variant: {
+        label: 'Variante',
+        options: {
+          bouncingLogo: 'Springendes Logo',
+          maze: '3D-Labyrinth 95',
+        },
+      },
+      timer: {
+        label: 'Zeitüberschreitung',
+        options: {
+          15: '15 Sekunden',
+          30: '30 Sekunden',
+          60: '1 Minute',
+          300: '5 Minuten',
+          900: '15 Minuten',
+        },
+      },
+    },
   },
   mandatoryExperienceFlags: {
     title: 'Zwingende Erfahrung',
-    impossibleLogin: 'Unmöglicher Login',
-    impossibleSignup: 'Unmögliche Registrierung',
-    impossiblePasswordReminder: 'Unmögliche Passworterinnerung',
-    unreasonableContent: 'Unangemessener Inhalt',
-    flaimYourPhone: 'Flaim dein Telefon',
+    dilf: 'Donut, den ich gerne essen würde',
     fakeAiSubscription: 'Gefälschte KI-Abonnementpläne',
+    fakeComments: 'Gefälschte Kommentare',
+    flaimYourPhone: 'Flaim dein Telefon',
+    impossibleLogin: 'Unmöglicher Login',
+    impossiblePasswordReminder: 'Unmögliche Passworterinnerung',
+    impossibleSignup: 'Unmögliche Registrierung',
+    madeUpNewsletter: 'Erfundene Premium-Newsletter-Aktion',
+    unreasonableContent: 'Unangemessener Inhalt',
   },
   runtimeInfo: {
     title: 'Über diese Sitzung',

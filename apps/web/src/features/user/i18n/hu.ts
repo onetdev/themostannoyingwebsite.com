@@ -22,92 +22,112 @@ export default {
   optionalPainPoints: {
     title: 'Választható fájópontok',
     categories: {
-      browser: 'Böngésző és lapfül',
-      visual: 'Vizuális akadályok',
-      ads: 'Hirdetések és monetizáció',
-      interactivity: 'Felugró ablakok és interakció',
+      visualChaos: 'Vizuális káosz',
+      uiSabotage: 'UI szabotázs',
+      interruptions: 'Megszakítások',
+      browserHijacking: 'Böngészőeltérítés',
     },
-    screensaverTimeout: 'Időtúllépés',
-    screensaverVariant: 'Változat',
-    screensaverVariantOptions: {
-      bouncingLogo: 'Pattogó logó',
-      maze: '3D Labirintus 95',
+    achievementNotifications: {
+      label: 'Eredmény értesítések',
+      hint: 'Értesítést küld, ha új eredményt érsz el. A haladást a háttérben mindig követjük.',
     },
-    screensaverTimeoutOptions: {
-      '15': '15 másodperc',
-      '30': '30 másodperc',
-      '60': '1 perc',
-      '300': '5 perc',
-      '900': '15 perc',
+    backgroundAdflaps: {
+      label: 'Háttérben lebegő reklámfülek',
+      hint: 'Hirdetési szárnyakat jelenít meg az oldal szélén, amelyekre kattintva marketing oldalakra juthatsz.',
     },
-    gifts: {
-      detectAdblocker: 'Reklámblokkoló észlelése',
-      flaps: 'Háttérben lebegő reklámfülek',
-      oneByOne: 'Egyenkénti reklámblokkok',
+    clipboardBrandingMark: {
+      label: 'Vágólap márkajelzés',
+      hint: 'Egy "Olvass tovább itt..." linket fűz a vágólapra másolt szöveg végére.',
     },
-    achievementNotifications: 'Eredmény értesítések',
-    clipboardMarker: 'Vágólap jelölő',
-    contentPaywall: 'Tartalmi fizetőfal',
-    deadPixel: 'Halott pixel',
-    disableContextMenu: 'Jobb klikk menü letiltása',
-    exitPrompt: 'Kilépési megerősítés',
-    historySpam: 'Előzmény spam',
-    mockChat: 'Chat buborék',
-    newsletterModal: 'Hírlevél felugró ablak',
-    notifications: 'Értesítések',
-    screensaver: 'Képernyővédő',
-    pageTitleInactiveArrayPaged: 'Alternatív cím, ha a lapfül inaktív',
-    searchDelay: 'Kamuzott keresési késleltetés',
-    wheelOfFortune: 'Szerencsekerék',
-    stickyVideo: 'Tapadós videó',
-  },
-  optionalPainPointsHints: {
-    screensaver:
-      'A kiválasztott képernyővédőt indítja el a megadott inaktivitási idő után.',
-    gifts: {
-      detectAdblocker:
-        'Egy nagy piros sávot jelenít meg, ha reklámblokkolót észlel.',
-      flaps:
-        'Reklámfüleket jelenít meg az oldal szélén, amikre kattintva különböző oldalakra jutsz.',
-      oneByOne: 'Főleg a főoldalon lévő animált hirdetésekre vonatkozik.',
+    contentPaywall: {
+      label: 'Tartalmi fizetőfal',
+      hint: 'Hamis fizetési falat jelenít meg bizonyos tartalom felett, a tartalom továbbra is ingyenesen felfedhető.',
     },
-    achievementNotifications:
-      'Értesítést küld, ha új eredményt érsz el. A haladást a háttérben mindig követjük.',
-    clipboardMarker:
-      'Egy "Olvass tovább itt..." linket fűz a vágólapra másolt szöveg végére.',
-    contentPaywall:
-      'Egy hamis fizetőfalat jelenít meg bizonyos tartalmak felett, de a tartalom továbbra is felfedhető marad.',
-    deadPixel:
-      'Néhány hamis "halott" pixelt helyez el a képernyőn, hogy idegesítsen.',
-    disableContextMenu:
-      'Megakadályozza a jobb egérgombos menü használatát, és helyette egy figyelmeztetést jelenít meg.',
-    exitPrompt:
-      'Megkérdezi, hogy "Biztosan el akarsz menni?", amikor be akarod zárni a lapot vagy elnavigálnál.',
-    historySpam:
-      'Teleírja a böngészési előzményeidet hamis bejegyzésekkel, hogy ne tudj könnyen visszalépni. Ez megnehezítheti a keresőmotor találataihoz való visszatérést.',
-    mockChat:
-      'Megjelenít egy idegesítő "emberi" chat buborékot, ami csak akkor üzen neked, amikor bezárod, és közben folyamatosan azt mutatja, hogy "az ügyintéző gépel".',
-    newsletterModal:
-      'Rendszeresen megjelenít egy hírlevél-feliratkozási ablakot, különösen akkor, ha a lapfül inaktivitás után (lapfülváltás) újra fókuszba kerül.',
-    notifications:
-      'Engedélyt kér az értesítésekhez, és hamis értesítéseket jelenít meg.',
-    pageTitleInactiveArrayPaged:
-      'Figyelemfelkeltőre változtatja a lapfül címét, amikor az inaktív.',
-    searchDelay:
-      'Egy hamis, hosszú betöltési késleltetést ad minden kereséshez.',
-    wheelOfFortune:
-      'Egy hamis "Szerencsekerék" ablakot jelenít meg, ami teljesen haszontalan nyereményeket ad.',
-    stickyVideo:
-      'Egy tapadós videólejátszót jelenít meg, ami követ téged görgetés közben.',
+    deadPixel: {
+      label: 'Halott pixel',
+      hint: 'Néhány hamis "halott" pixelt helyez el a képernyőn, hogy idegesítsen.',
+    },
+    detectAdblocker: {
+      label: 'Reklámblokkoló észlelése',
+      hint: 'Egy nagy piros sávot jelenít meg, ha reklámblokkolót észlel.',
+    },
+    disableContextMenu: {
+      label: 'Jobb klikk menü letiltása',
+      hint: 'Megakadályozza a jobb egérgombos menü használatát, és helyette egy figyelmeztetést jelenít meg.',
+    },
+    exitPrompt: {
+      label: 'Kilépési megerősítés',
+      hint: 'Megkérdezi, hogy "Biztosan el akarsz menni?", amikor be akarod zárni a lapot vagy elnavigálnál.',
+    },
+    flaimAPHoneAd: {
+      label: 'Flaim telefonos felmérési kampány',
+      hint: 'Egy jópofa animált hirdetést jelenít meg a kezdőlapon, amely a Flaim a Phone oldalra vezet.',
+    },
+    historySpam: {
+      label: 'Előzmény spam',
+      hint: 'Teleírja a böngészési előzményeidet hamis bejegyzésekkel, hogy ne tudj könnyen visszalépni. Ez megnehezítheti a keresőmotor találataihoz való visszatérést.',
+    },
+    mockSupportChat: {
+      label: 'Szimulált ügyfélszolgálati chat',
+      hint: 'Egy idegesítő "emberi" ügyfélszolgálati chatbuborékot mutat, amely csak akkor küld üzenetet, ha bezárod.',
+    },
+    newsletterModal: {
+      label: 'Hírlevél felugró ablak',
+      hint: 'Rendszeresen megjelenít egy hírlevél-feliratkozási ablakot, különösen akkor, ha a lapfül inaktivitás után (lapfülváltás) újra fókuszba kerül.',
+    },
+    notifications: {
+      label: 'Értesítések',
+      hint: 'Engedélyt kér az értesítésekhez, és hamis értesítéseket jelenít meg.',
+    },
+    pageTitleInactiveArrayPaged: {
+      label: 'Váltakozó cím, ha a lap inaktív',
+      hint: 'Figyelemfelkeltőre változtatja a lapfül címét, amikor az inaktív.',
+    },
+    searchDelay: {
+      label: 'Mesterséges keresési késleltetés',
+      hint: 'Egy hamis, hosszú betöltési késleltetést ad minden kereséshez.',
+    },
+    stickyVideoPlayer: {
+      label: 'Ragadós videólejátszó',
+      hint: 'Egy tapadós videólejátszót jelenít meg, ami követ téged görgetés közben.',
+    },
+    wheelOfFortune: {
+      label: 'Szerencsekerék',
+      hint: 'Egy hamis "Szerencsekerék" ablakot jelenít meg, ami teljesen haszontalan nyereményeket ad.',
+    },
+    screensaver: {
+      label: 'Képernyővédő',
+      hint: 'A kiválasztott képernyővédőt indítja el a megadott inaktivitási idő után.',
+      variant: {
+        label: 'Változat',
+        options: {
+          bouncingLogo: 'Pattogó logó',
+          maze: '3D Labirintus 95',
+        },
+      },
+      timer: {
+        label: 'Időtúllépés',
+        options: {
+          15: '15 másodperc',
+          30: '30 másodperc',
+          60: '1 perc',
+          300: '5 perc',
+          900: '15 perc',
+        },
+      },
+    },
   },
   mandatoryExperienceFlags: {
     title: 'Kötelező élmény',
-    impossibleLogin: 'Lehetetlen belépés',
-    impossibleSignup: 'Lehetetlen regisztráció',
-    impossiblePasswordReminder: 'Lehetetlen jelszó emlékeztető',
-    unreasonableContent: 'Ésszerűtlen tartalom',
-    flaimYourPhone: 'Flaim your phone',
+    dilf: 'Fánk, amit szívesen megkóstolnék',
     fakeAiSubscription: 'Hamis MI előfizetési tervek',
+    fakeComments: 'Hamis hozzászólások',
+    flaimYourPhone: 'Flaim your phone',
+    impossibleLogin: 'Lehetetlen belépés',
+    impossiblePasswordReminder: 'Lehetetlen jelszó emlékeztető',
+    impossibleSignup: 'Lehetetlen regisztráció',
+    madeUpNewsletter: 'Kitalált prémium hírlevél promóció',
+    unreasonableContent: 'Ésszerűtlen tartalom',
   },
   runtimeInfo: {
     title: 'A munkamenetről',
