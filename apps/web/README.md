@@ -6,11 +6,11 @@ For project details, please see the [`README.md`](https://github.com/onetdev/the
 
 The application is organized into several distinct layers to ensure maintainability and testability:
 
-- `src/app/`: Next.js App Router structure, handling global layouts, routing, and server-side metadata generation. **Lean Page Pattern**: Keep `page.tsx` files minimal; they should fetch data and define metadata, then delegate UI to dedicated "Page" components located in `src/features/*/components/` or a local `_components/` folder.
-- `src/features/`: Domain-specific modules (e.g., `auth`, `donation`, `disruptions`). Each feature encapsulates its own components (including full-page UI), hooks, and utility logic. _See feature-specific READMEs for details on their responsibilities._
-- `src/services/`: Business logic layer. Includes `KernelService`, which acts as a central hub for application logic, managed via Dependency Injection.
-- `src/repositories/`: Data access layer, abstracting data fetching and persistence (e.g., `StaticCountryRepository`).
-- `src/providers/` & `src/contexts/`: Global React providers for themes, i18n, and dependency injection containers.
+- `src/app/`: Next.js App Router structure, handling global layouts, routing, and server-side metadata generation. It includes `src/app/bootstrap/` for global providers (DI, QueryClient, Themes) and initialization logic.
+- `src/core/`: Application-wide infrastructure (HTTP client, config, events, navigation, DI primitives).
+- `src/features/`: Domain-specific modules (e.g., `auth`, `donation`, `disruptions`). Each feature encapsulates its own components (including full-page UI), hooks, services, repositories, and translation data.
+- `src/services/`: Global business logic layer (e.g., `AppService`, `AppConfigService`), managed via Dependency Injection.
+- `src/i18n/`: Global translations and metadata labels.
 - `src/stores/`: Lightweight state stores using Zustand for shared client-side state.
 
 ## How to Structure a Feature
@@ -21,9 +21,11 @@ When adding a new feature to `src/features/`, follow this standardized structure
 src/features/[feature-name]/
 ├── components/    # Feature-specific UI components
 ├── hooks/         # Custom React hooks for local feature logic
-├── services/      # Business logic, often using Inversify for DI
+├── services/      # Business logic (using Inversify for DI)
+├── repositories/  # (Optional) Data access layer (mocked/static)
+├── i18n/          # Feature-specific translations (Hybrid pattern)
 ├── schemas/       # Zod validation schemas for forms or data
-├── types.ts       # TypeScript interfaces and types
+├── types.ts       # TypeScript interfaces, DI symbols, and types
 └── README.md      # A concise overview of the feature
 ```
 

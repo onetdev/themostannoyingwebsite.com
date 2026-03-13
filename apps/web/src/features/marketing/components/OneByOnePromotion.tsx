@@ -2,9 +2,9 @@
 
 import Image from 'next/image';
 import { useTranslations } from 'next-intl';
-import { useAppConfigContext } from '@/core/config/react-app-config';
+import { useAppConfigContext } from '@/core/config/react/AppConfig';
+import { Link } from '@/core/i18n/navigation';
 import { useLocaleResource, useLogger } from '@/hooks';
-import { Link } from '@/i18n/navigation';
 import { usePainPreferencesStore, useRuntimeStore } from '@/stores';
 
 export type OneByOnePromotionProps = {

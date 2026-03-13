@@ -45,7 +45,9 @@ const withBundleAnalyzer = analyzer({
   enabled: process.env.ANALYZE === 'true',
 });
 
-const withNextIntl = createNextIntlPlugin({});
+const withNextIntl = createNextIntlPlugin({
+  requestConfig: './src/core/i18n/request.ts',
+});
 
 /** @type {import('@next/mdx').NextMDXOptions} **/
 const mdxConfig = {

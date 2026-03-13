@@ -1,8 +1,8 @@
 import { Button, Icon } from '@maw/ui-lib';
 import type { ComponentProps } from 'react';
 import type { ActiveNavigationItem } from '@/app/navigation';
+import { Link } from '@/core/i18n/navigation';
 import { SearchForm } from '@/features/content/components';
-import { Link } from '@/i18n/navigation';
 import { AppLanguageSwitcher } from '../AppLanguageSwitcher';
 import { AppDarkModeToggle } from './AppDarkModeToggle';
 import { AppNavigationDesktop } from './AppNavigationDesktop';

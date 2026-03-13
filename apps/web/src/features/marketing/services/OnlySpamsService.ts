@@ -1,8 +1,8 @@
 import { mulberry32, stringToSeed } from '@maw/utils/random';
 import { type Container, injectable } from 'inversify';
-import enVariants from '@/i18n/messages/variants/en';
+import enVariants from '@/i18n/messages/en/variants';
 import i18nConfig from '@/root/i18n.config';
-import enSpamVariants from '../i18n/only-spams-variants/en';
+import enSpamVariants from '../i18n/en/only-spams-variants';
 import {
   DI,
   type OnlySpamsService as IOnlySpamsService,
@@ -19,10 +19,10 @@ export class OnlySpamsService implements IOnlySpamsService {
       : i18nConfig.defaultLocale;
 
     const [variantsModule, namesModule] = await Promise.all([
-      import(`../i18n/only-spams-variants/${safeLocale}`).catch(
+      import(`../i18n/${safeLocale}/only-spams-variants`).catch(
         () => enSpamVariants,
       ),
-      import(`@/i18n/messages/variants/${safeLocale}`).catch(() => enVariants),
+      import(`@/i18n/messages/${safeLocale}/variants`).catch(() => enVariants),
     ]);
 
     const { testimonials: testimonialsRaw, samples } = variantsModule.default;

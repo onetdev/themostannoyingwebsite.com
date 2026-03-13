@@ -3,7 +3,8 @@
 import * as ct from 'countries-and-timezones';
 import { useLocale } from 'next-intl';
 import { useEffect, useMemo, useState } from 'react';
-import { COUNTRY_TO_LOCALE, LOCALE_DETECTOR_MESSAGES } from '@/i18n/selector';
+import { COUNTRY_LANGUAGE_MAP } from '@/i18n/country-language-map';
+import { LANGUAGE_DETECTOR_MESSAGE_MAP } from '@/i18n/language-detector-message-map';
 import i18nConfig from '@/root/i18n.config';
 import { useUserPreferencesStore } from '@/stores';
 import { useLanguageSwitcher } from './useLanguageSwitcher';
@@ -26,10 +27,14 @@ export function useLocaleSuggestion() {
       const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
       const country = ct.getCountryForTimezone(timezone);
 
-      if (country?.id && COUNTRY_TO_LOCALE[country.id]) {
-        const matchedTimezoneLocale = COUNTRY_TO_LOCALE[country.id];
+      if (country?.id && COUNTRY_LANGUAGE_MAP[country.id]) {
+        const matchedTimezoneLocale = COUNTRY_LANGUAGE_MAP[country.id];
         if (matchedTimezoneLocale !== currentLocale) {
           setSuggestion(matchedTimezoneLocale);
+          return;
+        } else {
+          // In case the locale is the same as the timezone, we should be fine.
+          setSuggestion(null);
           return;
         }
       }
@@ -63,9 +68,9 @@ export function useLocaleSuggestion() {
 
   const content = useMemo(() => {
     const suggestedPayload = suggestedLocale
-      ? LOCALE_DETECTOR_MESSAGES[suggestedLocale]
+      ? LANGUAGE_DETECTOR_MESSAGE_MAP[suggestedLocale]
       : null;
-    const currentPayload = LOCALE_DETECTOR_MESSAGES[currentLocale];
+    const currentPayload = LANGUAGE_DETECTOR_MESSAGE_MAP[currentLocale];
     return suggestedLocale
       ? {
           changeAction: suggestedPayload?.switch,

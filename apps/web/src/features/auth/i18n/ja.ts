@@ -1,3 +1,5 @@
+import type { AuthI18nShape } from '../types';
+
 export default {
   common: {
     lookingForSignup: 'アカウントをお持ちでないですか？こちらからサインアップ',
@@ -32,4 +34,4 @@ export default {
       redirectingSafety: '安全な場所に戻しています...',
     },
   },
-};
+} satisfies AuthI18nShape;

@@ -1,3 +1,5 @@
+import type { AuthI18nShape } from '../types';
+
 export default {
   common: {
     lookingForSignup: 'Serve un account? Registrati qui',
@@ -32,4 +34,4 @@ export default {
       redirectingSafety: 'Ti riporto al sicuro...',
     },
   },
-};
+} satisfies AuthI18nShape;

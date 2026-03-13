@@ -16,7 +16,6 @@ import { OnlySpamsService } from '@/features/marketing/services';
 import { DI as DIMarketing } from '@/features/marketing/types';
 import { SubscriptionPlansService } from '@/features/subscription/services';
 import { DI as DISubscription } from '@/features/subscription/types';
-import { StaticCountryRepository } from '@/repositories';
 import { AppConfigService, AppService } from '@/services';
 
 export const Symbols = {
@@ -37,11 +36,7 @@ export function configureContainer(container: Container) {
     .to(AppConfigService)
     .inSingletonScope();
   container.bind(Symbols.HttpClient).to(HttpClient).inSingletonScope();
-  container
-    .bind(Symbols.CountryRepository)
-    .to(StaticCountryRepository)
-    .inSingletonScope();
-  container.bind(Symbols.KernelService).to(AppService).inSingletonScope();
+  container.bind(Symbols.AppService).to(AppService).inSingletonScope();
   container
     .bind(Symbols.SubscriptionPlansService)
     .to(SubscriptionPlansService)

@@ -2,7 +2,7 @@ import { getTranslations } from 'next-intl/server';
 import type { ComponentProps } from 'react';
 
 import { FOOTER_NAVIGATION_LINKS } from '@/app/navigation';
-import { Link } from '@/i18n/navigation';
+import { Link } from '@/core/i18n/navigation';
 import { getAppConfigService } from '@/services';
 import { AppLanguageSwitcher } from './AppLanguageSwitcher';
 

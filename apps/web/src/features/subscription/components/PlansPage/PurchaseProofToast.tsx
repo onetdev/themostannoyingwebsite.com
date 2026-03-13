@@ -4,7 +4,7 @@ import { toast } from '@maw/ui-lib';
 import { randomArrayEntry, randomNumber } from '@maw/utils/random';
 import { useMessages, useTranslations } from 'next-intl';
 import { useCallback, useEffect, useMemo, useState } from 'react';
-import { useLogger } from '@/core/observability/react-logger';
+import { useLogger } from '@/core/observability/react/useLogger';
 import type { SubscriptionPackage } from '../../schemas';
 
 export interface PurchaseProofToastProps {

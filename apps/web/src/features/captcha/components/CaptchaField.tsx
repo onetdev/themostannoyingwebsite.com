@@ -4,7 +4,7 @@ import { Field, FieldContent, FieldError, FieldLabel } from '@maw/ui-lib';
 import { useTranslations } from 'next-intl';
 import { useCallback, useRef, useState } from 'react';
 import { useFormContext } from 'react-hook-form';
-import { useAppConfigContext } from '@/core/config/react-app-config';
+import { useAppConfigContext } from '@/core/config/react/AppConfig';
 import type { ChallengeStatus } from '../types';
 import { CaptchaDialog } from './CaptchaDialog';
 import { CaptchaTrigger } from './CaptchaTrigger';
