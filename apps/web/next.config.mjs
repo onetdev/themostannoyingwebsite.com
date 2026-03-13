@@ -14,27 +14,35 @@ const nextConfig = {
   },
   pageExtensions: ['js', 'jsx', 'md', 'mdx', 'ts', 'tsx'],
   async headers() {
-    const oneHourCache = {
+    const oneDayCache = {
       key: 'Cache-Control',
-      value: 'public, max-age=3600, immutable',
+      value: 'public, max-age=86400, stale-while-revalidate=600',
+    };
+    const oneYearCache = {
+      key: 'Cache-Control',
+      value: 'public, max-age=31536000, immutable',
     };
 
     return [
       {
+        source: '/ads/:all*',
+        headers: [oneYearCache],
+      },
+      {
         source: '/assets/:all*',
-        headers: [oneHourCache],
+        headers: [oneYearCache],
       },
       {
         source: '/manifest/:all*',
-        headers: [oneHourCache],
+        headers: [oneYearCache],
       },
       {
-        source: '/locales/:all*',
-        headers: [oneHourCache],
+        source: '/deployment-meta.json',
+        headers: [oneDayCache],
       },
       {
         source: '/favicon.ico',
-        headers: [oneHourCache],
+        headers: [oneYearCache],
       },
     ];
   },
