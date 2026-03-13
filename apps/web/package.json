@@ -99,5 +99,9 @@
     "ts-node": "catalog:",
     "tsx": "catalog:",
     "typescript": "catalog:"
-  }
+  },
+  "browserslist": [
+    ">0.5%",
+    "not dead"
+  ]
 }
