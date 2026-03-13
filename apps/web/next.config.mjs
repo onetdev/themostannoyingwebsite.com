@@ -1,4 +1,3 @@
-import analyzer from '@next/bundle-analyzer';
 import createMDX from '@next/mdx';
 import { withSentryConfig } from '@sentry/nextjs';
 import createNextIntlPlugin from 'next-intl/plugin';
@@ -49,10 +48,6 @@ const nextConfig = {
   poweredByHeader: false,
 };
 
-const withBundleAnalyzer = analyzer({
-  enabled: process.env.ANALYZE === 'true',
-});
-
 const withNextIntl = createNextIntlPlugin({
   requestConfig: './src/core/i18n/request.ts',
 });
@@ -68,6 +63,6 @@ const mdxConfig = {
 const withMDX = createMDX(mdxConfig);
 
 export default withSentryConfig(
-  withNextIntl(withBundleAnalyzer(withMDX(nextConfig))),
+  withNextIntl(withMDX(nextConfig)),
   sentryConfig,
 );
