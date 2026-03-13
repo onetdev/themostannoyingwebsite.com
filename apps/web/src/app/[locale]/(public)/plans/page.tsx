@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import { getTranslations } from 'next-intl/server';
 
-export { generateStaticParams } from '@/i18n/routing';
+export { generateStaticParams } from '@/core/i18n/routing';
 
 import config from '@/core/config';
 import { getDependencyContainer } from '@/core/di';

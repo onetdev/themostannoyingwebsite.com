@@ -1,7 +1,7 @@
 'use client';
 
 import { useLocale } from 'next-intl';
-import { routing } from '@/i18n/routing';
+import { routing } from '@/core/i18n/routing';
 import type { LocaleResource } from '@/schemas';
 
 export function useLocaleResource() {

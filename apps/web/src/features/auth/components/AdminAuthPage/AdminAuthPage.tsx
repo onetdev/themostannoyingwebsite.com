@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { useRouter } from '@/i18n/navigation';
+import { useRouter } from '@/core/i18n/navigation';
 import styles from './AdminAuthPage.module.css';
 import { useAdminTerminal } from './useAdminTerminal';
 import { useAdminTerminalAuthFlow } from './useAdminTerminalAuthFlow';

@@ -10,8 +10,8 @@ import {
   DialogTitle,
 } from '@maw/ui-lib';
 import { useTranslations } from 'next-intl';
+import { useNavigationProvider } from '@/core/navigation/react/NavigationContext';
 import { useEvent } from '@/hooks';
-import { useNavigationProvider } from '@/navigation/NavigationContext';
 
 interface LoginRequiredModalProps {
   show: boolean;

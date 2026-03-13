@@ -1,5 +1,5 @@
 import type { ComponentProps } from 'react';
-import { Link } from '@/i18n/navigation';
+import { Link } from '@/core/i18n/navigation';
 import type { ArticleDatum } from '../schemas';
 
 export type TextListItemProps = ComponentProps<'article'> & {

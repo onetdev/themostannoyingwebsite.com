@@ -1,22 +1,17 @@
 import 'reflect-metadata';
 import { Container } from 'inversify';
-import { CoreSymbols } from '@/core/di/symbols';
-import type { CountryRepository } from '@/repositories';
 import { AppService } from './AppService';
+import { getAllCountries } from './use-cases/get-all-countries';
+
+jest.mock('./use-cases/get-all-countries');
 
 describe('AppService', () => {
   let container: Container;
   let appService: AppService;
-  let mockCountryRepository: jest.Mocked<CountryRepository>;
 
   beforeEach(() => {
+    jest.clearAllMocks();
     container = new Container();
-    mockCountryRepository = {
-      findAll: jest.fn(),
-    };
-    container
-      .bind<CountryRepository>(CoreSymbols.CountryRepository)
-      .toConstantValue(mockCountryRepository);
     container.bind<AppService>(AppService).toSelf();
     appService = container.get<AppService>(AppService);
   });
@@ -30,10 +25,10 @@ describe('AppService', () => {
         phone: '+12',
       },
     ];
-    mockCountryRepository.findAll.mockResolvedValue(mockCountries);
+
+    (getAllCountries as jest.Mock).mockResolvedValue(mockCountries);
 
     const countries = await appService.getAllCountries();
     expect(countries).toEqual(mockCountries);
-    expect(mockCountryRepository.findAll).toHaveBeenCalled();
   });
 });

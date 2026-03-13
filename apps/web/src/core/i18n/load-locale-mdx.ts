@@ -1,4 +1,4 @@
-import { routing } from '@/i18n/routing';
+import { routing } from '@/core/i18n/routing';
 
 /**
  * Dynamically loads MDX content for a given locale with a fallback mechanism.

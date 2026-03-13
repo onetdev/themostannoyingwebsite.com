@@ -2,7 +2,7 @@ import { Input } from '@maw/ui-lib';
 import { clsx } from '@maw/ui-lib/utils';
 import { useTranslations } from 'next-intl';
 import type { ChangeEvent } from 'react';
-import { useAppConfigContext } from '@/core/config/react-app-config';
+import { useAppConfigContext } from '@/core/config/react/AppConfig';
 import { useEmojiCountChallengeData } from '../../hooks';
 import { EmojiCanvas } from './EmojiCanvas';
 

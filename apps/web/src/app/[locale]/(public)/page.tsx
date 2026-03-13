@@ -3,7 +3,7 @@ import { getArticleService } from '@/features/content/services';
 import { HomePage } from './_components/HomePage';
 import { PageLayout } from './_components/PageLayout';
 
-export { generateStaticParams } from '@/i18n/routing';
+export { generateStaticParams } from '@/core/i18n/routing';
 
 export const revalidate = 1800;
 

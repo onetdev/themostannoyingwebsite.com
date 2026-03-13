@@ -1,6 +1,6 @@
 'use client';
 
-import { useInjection } from '@/core/di/react-di';
+import { useInjection } from '@/core/di/react/ReactDi';
 import { CoreSymbols } from '@/core/di/symbols';
 import type { HttpClient } from '../HttpClient';
 

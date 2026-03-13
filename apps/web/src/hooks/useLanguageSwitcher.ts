@@ -1,8 +1,8 @@
 'use client';
 
 import { useLocale } from 'next-intl';
+import { usePathname, useRouter } from '@/core/i18n/navigation';
 import { useAppService } from '@/hooks';
-import { usePathname, useRouter } from '@/i18n/navigation';
 
 export function useLanguageSwitcher() {
   const appService = useAppService();
