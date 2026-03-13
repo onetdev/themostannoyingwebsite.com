@@ -132,6 +132,7 @@ export default {
   painPreferences: {
     levelSettings: {
       label: 'ウザさレベル',
+      rating: '痛み評価',
       railTitle: 'ウザさレベルスライダー',
       clamps: {
         from_0: 'ピュア',

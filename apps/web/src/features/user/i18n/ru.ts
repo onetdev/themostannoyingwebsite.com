@@ -136,6 +136,7 @@ export default {
   painPreferences: {
     levelSettings: {
       label: 'Уровень боли',
+      rating: 'Оценка боли',
       railTitle: 'Ползунок уровня боли',
       clamps: {
         from_0: 'Невинный',

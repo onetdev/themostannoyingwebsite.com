@@ -135,6 +135,7 @@ export default {
   painPreferences: {
     levelSettings: {
       label: 'Poziom bólu',
+      rating: 'Ocena bólu',
       railTitle: 'Suwak poziomu bólu',
       clamps: {
         from_0: 'Niewinny',

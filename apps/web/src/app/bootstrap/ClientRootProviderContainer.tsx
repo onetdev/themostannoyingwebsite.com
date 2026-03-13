@@ -5,7 +5,7 @@ import { QueryClientProvider } from '@tanstack/react-query';
 import { ThemeProvider } from 'next-themes';
 import { type PropsWithChildren, useState } from 'react';
 import { AppConfigProvider } from '@/core/config/react/AppConfig';
-import { getDependencyContainer } from '@/core/di';
+import { getClientDependencyContainer } from '@/core/di/client';
 import { DiContextProvider } from '@/core/di/react/ReactDi';
 import { getQueryClient } from '@/core/http/react/query-client';
 import { AchievementManager } from '@/features/achievements/providers';
@@ -22,7 +22,7 @@ export function ClientRootProviderContainer({
   appConfig,
   children,
 }: ClientRootProviderContainerProps) {
-  const DiContainer = getDependencyContainer();
+  const DiContainer = getClientDependencyContainer();
   const [queryClient] = useState(() => getQueryClient());
 
   return (

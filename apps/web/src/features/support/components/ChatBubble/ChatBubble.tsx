@@ -27,7 +27,11 @@ export function ChatBubble() {
       ref={$ref}
     >
       {state.audio}
-      <ChatBubbleTrigger onClick={toggleHistory} counter={state.badgeCounter} />
+      <ChatBubbleTrigger
+        onClick={toggleHistory}
+        counter={state.badgeCounter}
+        isOpen={state.isForeground}
+      />
       <AnimatePresence>
         {state.isForeground && (
           <motion.div

@@ -130,6 +130,7 @@ export default {
   painPreferences: {
     levelSettings: {
       label: 'दर्द का स्तर',
+      rating: 'दर्द रेटिंग',
       railTitle: 'दर्द स्तर स्लाइडर रेल',
       clamps: {
         from_0: 'मासूम',

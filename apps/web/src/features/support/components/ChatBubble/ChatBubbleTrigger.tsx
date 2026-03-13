@@ -1,16 +1,22 @@
 'use client';
 
 import { Badge, Button, Icon } from '@maw/ui-lib';
+import { useTranslations } from 'next-intl';
 
 export interface ChatBubbleTriggerProps {
   onClick: () => void;
   counter: number;
+  isOpen?: boolean;
 }
 
 export function ChatBubbleTrigger({
   onClick,
   counter,
+  isOpen = false,
 }: ChatBubbleTriggerProps) {
+  const t = useTranslations('support.chatBubble');
+  const label = isOpen ? t('triggerClose') : t('trigger');
+
   return (
     <div className="relative inline-block">
       <Button
@@ -18,8 +24,10 @@ export function ChatBubbleTrigger({
         variant="secondary"
         className="size-14 rounded-full shadow-lg"
         onClick={onClick}
+        aria-label={label}
+        title={label}
       >
-        <Icon icon="commentDots" className="text-md block md:text-2xl" />
+        <Icon icon="commentDots" className="text-xl block md:text-2xl" />
       </Button>
 
       {counter > 0 && (

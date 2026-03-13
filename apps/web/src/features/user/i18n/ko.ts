@@ -129,6 +129,7 @@ export default {
   painPreferences: {
     levelSettings: {
       label: '고통 레벨',
+      rating: '통증 등급',
       railTitle: '고통 레벨 슬라이더 레일',
       clamps: {
         from_0: '순진함',

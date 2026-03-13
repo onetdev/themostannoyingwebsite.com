@@ -42,6 +42,7 @@ pnpm test      – run unit tests
 pnpm test:e2e  – run end-to-end tests
 pnpm lint      – run Biome
 pnpm lint:fix  - run Biome and apply safe fixes
+pnpm next experimental-analyze - analyze bundle size (in apps/web)
 ```
 
 ## Storybook

@@ -63,5 +63,6 @@ declare global {
 declare module 'next-intl' {
   interface AppConfig {
     Messages: typeof englishShape;
+    Locale: AppLocale;
   }
 }

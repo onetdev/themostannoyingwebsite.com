@@ -130,6 +130,7 @@ export default {
   painPreferences: {
     levelSettings: {
       label: 'مستوى الألم',
+      rating: 'تقييم الألم',
       railTitle: 'شريط تمرير مستوى الألم',
       clamps: {
         from_0: 'بريء',

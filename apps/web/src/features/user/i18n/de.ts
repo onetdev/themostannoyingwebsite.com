@@ -135,6 +135,7 @@ export default {
   painPreferences: {
     levelSettings: {
       label: 'Schmerzniveau',
+      rating: 'Schmerzbewertung',
       railTitle: 'Schmerzniveau-Schieberegler',
       clamps: {
         from_0: 'Unschuldig',
