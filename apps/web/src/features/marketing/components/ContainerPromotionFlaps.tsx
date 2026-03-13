@@ -22,7 +22,7 @@ export function ContainerPromotionFlaps() {
             alt={t('marketing.dilf.title')}
             width={1900}
             height={1000}
-            priority={false}
+            priority
           />
           <PromotionFlapText
             theme={resolvedTheme as AppTheme}
