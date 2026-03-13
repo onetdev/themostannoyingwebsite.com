@@ -158,6 +158,7 @@ export default {
   },
   language: {
     label: 'Nyelv',
+    select: 'Válaszd ki a nyelvedet',
   },
   themeSwitch: {
     label: 'Téma váltása',

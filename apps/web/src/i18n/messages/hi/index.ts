@@ -156,6 +156,7 @@ export default {
   },
   language: {
     label: 'भाषा',
+    select: 'अपनी भाषा चुनें',
   },
   themeSwitch: {
     label: 'थीम बदलें',

@@ -157,6 +157,7 @@ export default {
   },
   language: {
     label: 'Язык',
+    select: 'Выберите ваш язык',
   },
   themeSwitch: {
     label: 'Переключить тему',

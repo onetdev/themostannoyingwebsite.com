@@ -157,6 +157,7 @@ export default {
   },
   language: {
     label: 'Dil',
+    select: 'Dilinizi seçin',
   },
   themeSwitch: {
     label: 'Temayı değiştir',

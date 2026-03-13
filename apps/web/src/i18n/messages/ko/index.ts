@@ -157,6 +157,7 @@ export default {
   },
   language: {
     label: '언어',
+    select: '언어 선택',
   },
   themeSwitch: {
     label: '테마 변경',
