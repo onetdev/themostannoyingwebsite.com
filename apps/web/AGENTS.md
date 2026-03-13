@@ -20,7 +20,6 @@ This document provides specific instructions and context for AI agents working o
 - `src/i18n/`: Internationalization.
   - `messages/`: Global translation bundles.
 - `src/navigation/`: Localization-aware routing and navigation logic.
-- `src/repositories/`: Shared data access layer (e.g., `StaticCountryRepository`).
 - `src/schemas/`: Shared Zod validation schemas.
 - `src/services/`: Global business logic (e.g., `AppService`).
 - `src/stores/`: Global state management (Zustand).

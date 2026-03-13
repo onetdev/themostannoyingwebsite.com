@@ -26,7 +26,7 @@ describe('AppService', () => {
       },
     ];
 
-    (getAllCountries as jest.Mock).mockResolvedValue(mockCountries);
+    (getAllCountries as jest.Mock).mockReturnValue(mockCountries);
 
     const countries = await appService.getAllCountries();
     expect(countries).toEqual(mockCountries);

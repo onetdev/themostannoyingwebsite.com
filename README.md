@@ -2,7 +2,7 @@
 
 A satirical web project that gathers the worst UX patterns from modern websites and concentrates them into one gloriously frustrating experience.
 
-Everything is intentionally broken. Buttons lie, forms misbehave, notifications never stop, and progress bars cheat. Easter eggs and internet culture references in every single segments of the project.
+Everything is intentionally broken. Buttons lie, forms misbehave, notifications never stop, and progress bars cheat. Easter eggs and internet culture references in every single segment of the project.
 
 🌐 **Live site:** https://themostannoyingwebsite.com
 
