@@ -40,7 +40,7 @@ export function PainPreferences({
           <PopupAndInteractivity />
           <VisualObstructions />
         </div>
-        <CardFooter className="flex gap-3">
+        <CardFooter className="flex gap-3 flex-wrap">
           <Button onClick={painPreferences.allEnable}>
             {t('common.action.enableAll')}
           </Button>
