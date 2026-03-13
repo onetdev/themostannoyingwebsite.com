@@ -63,7 +63,7 @@ export default {
     },
     historySpam: {
       label: "Spam d'historique",
-      hint: "Remplit l'historique de votre navigateur with de fausses entrées pour que vous ne puissiez pas revenir facilement en arrière. Cela peut être gênant pour revenir aux résultats des moteurs de recherche.",
+      hint: "Remplit l'historique de votre navigateur avec de fausses entrées pour que vous ne puissiez pas revenir facilement en arrière. Cela peut être gênant pour revenir aux résultats des moteurs de recherche.",
     },
     mockSupportChat: {
       label: 'Chat de support simulé',

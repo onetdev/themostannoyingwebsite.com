@@ -67,7 +67,7 @@ export default {
     },
     mockSupportChat: {
       label: 'Chat de soporte simulado',
-      hint: 'Muestra una molesta burbuja de chat de soporte "humano" que solo te envía mensajes when la cierras.',
+      hint: 'Muestra una molesta burbuja de chat de soporte "humano" que solo te envía mensajes cuando la cierras.',
     },
     newsletterModal: {
       label: 'Modal emergente de boletín',

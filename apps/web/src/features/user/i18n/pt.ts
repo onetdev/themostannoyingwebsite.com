@@ -47,7 +47,7 @@ export default {
     },
     detectAdblocker: {
       label: 'Detetar adblocker',
-      hint: 'Mostra un grande banner vermelho se for detetado um adblocker.',
+      hint: 'Mostra um grande banner vermelho se for detetado um adblocker.',
     },
     disableContextMenu: {
       label: 'Desativar menu de contexto (clique direito)',
@@ -63,7 +63,7 @@ export default {
     },
     historySpam: {
       label: 'Spam no histórico',
-      hint: 'Enche o histórico do seu navegador com entradas falsas para que não possa voltar atrás facilmente. Isto pode tornar inconveniente o regresso aos resultados των κινητήρων αναζήτησης.',
+      hint: 'Enche o histórico do seu navegador com entradas falsas para que não possa voltar atrás facilmente. Isto pode tornar inconveniente o regresso aos resultados dos motores de busca.',
     },
     mockSupportChat: {
       label: 'Chat de suporte simulado',

@@ -59,11 +59,11 @@ export default {
     },
     flaimAPHoneAd: {
       label: 'Flaim a phone survey campaign',
-      hint: 'Displays a funky animated advertisement on the hoome page leading to Flaim a Phone.',
+      hint: 'Displays a funky animated advertisement on the home page leading to Flaim a Phone.',
     },
     historySpam: {
       label: 'Browser History spam',
-      hint: "Fills your browser history with fake entries so you can't easily go back. This can make it inconvinient to get back to search engine results.",
+      hint: "Fills your browser history with fake entries so you can't easily go back. This can make it inconvenient to get back to search engine results.",
     },
     mockSupportChat: {
       label: 'Mock support chat',
