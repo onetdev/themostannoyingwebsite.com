@@ -82,8 +82,9 @@ export default {
       description: 'Erlebe, wie das Logo 420 Mal abprallt.',
     },
     loveLettersFromMedic: {
-      name: 'Love letters from a medic',
-      description: 'Receive 5 messages from our helpful support agents.',
+      name: 'Liebesbriefe von einem Sanitäter',
+      description:
+        'Erhalten Sie 5 Nachrichten von unseren hilfreichen Support-Mitarbeitern.',
     },
   },
 };

@@ -78,8 +78,8 @@ export default {
       description: 'लोगो को 420 बार बाउंस होते हुए देखें।',
     },
     loveLettersFromMedic: {
-      name: 'Love letters from a medic',
-      description: 'Receive 5 messages from our helpful support agents.',
+      name: 'एक चिकित्सक के प्रेम पत्र',
+      description: 'हमारे सहायक सहायता एजेंटों से 5 संदेश प्राप्त करें।',
     },
   },
 };

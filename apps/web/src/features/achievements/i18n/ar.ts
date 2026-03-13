@@ -78,8 +78,8 @@ export default {
       description: 'شاهد الشعار وهو يرتد 420 مرة.',
     },
     loveLettersFromMedic: {
-      name: 'Love letters from a medic',
-      description: 'Receive 5 messages from our helpful support agents.',
+      name: 'رسائل حب من مسعف',
+      description: 'استلم 5 رسائل من وكلاء الدعم المتعاونين لدينا.',
     },
   },
 };

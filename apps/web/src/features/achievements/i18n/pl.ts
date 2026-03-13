@@ -83,8 +83,9 @@ export default {
       description: 'Bądź świadkiem, jak logo odbija się 420 razy.',
     },
     loveLettersFromMedic: {
-      name: 'Love letters from a medic',
-      description: 'Receive 5 messages from our helpful support agents.',
+      name: 'Listy miłosne od medyka',
+      description:
+        'Odbierz 5 wiadomości od naszych pomocnych agentów wsparcia.',
     },
   },
 };

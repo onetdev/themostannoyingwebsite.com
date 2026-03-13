@@ -82,8 +82,9 @@ export default {
       description: 'Testemunhe o logótipo a saltar 420 vezes.',
     },
     loveLettersFromMedic: {
-      name: 'Love letters from a medic',
-      description: 'Receive 5 messages from our helpful support agents.',
+      name: 'Cartas de amor de um médico',
+      description:
+        'Receba 5 mensagens dos nossos prestáveis agentes de suporte.',
     },
   },
 };

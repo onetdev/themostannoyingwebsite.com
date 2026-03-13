@@ -80,8 +80,8 @@ export default {
       description: '로고가 420번 튕기는 것을 목격했습니다.',
     },
     loveLettersFromMedic: {
-      name: 'Love letters from a medic',
-      description: 'Receive 5 messages from our helpful support agents.',
+      name: '의무병으로부터 온 연애 편지',
+      description: '친절한 지원 상담원으로부터 5개의 메시지를 받으세요.',
     },
   },
 };

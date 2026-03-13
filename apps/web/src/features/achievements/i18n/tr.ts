@@ -82,8 +82,8 @@ export default {
       description: 'Logonun 420 kez sekmesine tanık olun.',
     },
     loveLettersFromMedic: {
-      name: 'Love letters from a medic',
-      description: 'Receive 5 messages from our helpful support agents.',
+      name: 'Bir sıhhiyeciden aşk mektupları',
+      description: 'Yardımsever destek temsilcilerimizden 5 mesaj alın.',
     },
   },
 };

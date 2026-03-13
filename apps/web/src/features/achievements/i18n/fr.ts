@@ -82,8 +82,8 @@ export default {
       description: 'Soyez témoin de 420 rebonds du logo.',
     },
     loveLettersFromMedic: {
-      name: 'Love letters from a medic',
-      description: 'Receive 5 messages from our helpful support agents.',
+      name: "Lettres d'amour d'un médecin",
+      description: "Recevez 5 messages de nos agents d'assistance dévoués.",
     },
   },
 };

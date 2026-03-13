@@ -83,8 +83,9 @@ export default {
       description: 'Assisti al rimbalzo del logo per 420 volte.',
     },
     loveLettersFromMedic: {
-      name: 'Love letters from a medic',
-      description: 'Receive 5 messages from our helpful support agents.',
+      name: "Lettere d'amore da un medico",
+      description:
+        'Ricevi 5 messaggi dai nostri disponibili agenti di supporto.',
     },
   },
 };

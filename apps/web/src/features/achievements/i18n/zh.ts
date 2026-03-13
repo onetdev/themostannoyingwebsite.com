@@ -78,8 +78,8 @@ export default {
       description: '见证 Logo 反弹 420 次。',
     },
     loveLettersFromMedic: {
-      name: 'Love letters from a medic',
-      description: 'Receive 5 messages from our helpful support agents.',
+      name: '来自医护人员的情书',
+      description: '接收来自我们热心支持代理的 5 条消息。',
     },
   },
 };

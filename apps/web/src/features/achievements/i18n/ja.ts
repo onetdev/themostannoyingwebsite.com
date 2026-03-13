@@ -80,8 +80,9 @@ export default {
       description: 'ロゴが跳ね返るのを420回見届ける。',
     },
     loveLettersFromMedic: {
-      name: 'Love letters from a medic',
-      description: 'Receive 5 messages from our helpful support agents.',
+      name: '衛生兵からの恋文',
+      description:
+        '弊社の親切なサポート担当者から5通のメッセージを受け取ります。',
     },
   },
 };

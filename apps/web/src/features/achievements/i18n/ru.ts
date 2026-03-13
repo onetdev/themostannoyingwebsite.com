@@ -83,8 +83,9 @@ export default {
       description: 'Посмотрите, как логотип отскочит 420 раз.',
     },
     loveLettersFromMedic: {
-      name: 'Love letters from a medic',
-      description: 'Receive 5 messages from our helpful support agents.',
+      name: 'Любовные письма от медика',
+      description:
+        'Получите 5 сообщений от наших отзывчивых агентов поддержки.',
     },
   },
 };

@@ -84,8 +84,8 @@ export default {
       description: 'Presencia cómo el logotipo rebota 420 veces.',
     },
     loveLettersFromMedic: {
-      name: 'Love letters from a medic',
-      description: 'Receive 5 messages from our helpful support agents.',
+      name: 'Cartas de amor de un médico',
+      description: 'Recibe 5 mensajes de nuestros amables agentes de soporte.',
     },
   },
 };
