@@ -44,6 +44,7 @@ export function DeadPixel() {
     <>
       {points?.map((point) => (
         <button
+          tabIndex={-1}
           type="button"
           aria-hidden
           data-testid="dead-pixel"
