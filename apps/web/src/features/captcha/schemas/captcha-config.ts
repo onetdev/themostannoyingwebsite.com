@@ -1,4 +1,4 @@
-import { z } from 'zod';
+import * as z from 'zod';
 import { ChallengeTypeSchema } from './challenge-type';
 import { SpriteConfigSchema } from './sprite-config';
 

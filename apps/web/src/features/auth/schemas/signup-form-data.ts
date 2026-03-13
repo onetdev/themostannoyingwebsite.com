@@ -1,4 +1,4 @@
-import { z } from 'zod';
+import * as z from 'zod';
 import { GenderSchema } from '.';
 
 const validatePassword = (value: string, t: ZodTranslator) => {

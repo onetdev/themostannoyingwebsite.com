@@ -1,4 +1,4 @@
-import { z } from 'zod';
+import * as z from 'zod';
 
 export function getNewsletterFormDataSchema(t: ZodTranslator) {
   return z.object({

@@ -1,4 +1,4 @@
-import { z } from 'zod';
+import * as z from 'zod';
 import i18nConfig from '@/root/i18n.config';
 
 type LocaleKey = (typeof i18nConfig.allLocales)[number];
