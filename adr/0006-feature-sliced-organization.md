@@ -11,10 +11,12 @@ We will follow a **Feature-Sliced Design** approach. All domain-specific logic m
 
 Each feature folder should ideally contain:
 - `components/`: UI specific to the feature.
+- `hooks/`: Feature-specific React hooks.
 - `services/`: Business logic and use cases.
 - `i18n/`: Feature-specific translations.
 - `schemas/`: Zod schemas (single source of truth).
 - `types.ts`: DI symbols and internal types.
+- `README.md`: Concise documentation of the feature's scope.
 
 Features must communicate via defined Services or shared Core/Global layers. Deep imports into the internals of another feature are discouraged.
 

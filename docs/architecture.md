@@ -33,25 +33,31 @@ Typical structure inside the app:
 
 ```
 src/
+app/
 core/
 features/
 services/
 hooks/
+i18n/
 schemas/
+stores/
 ```
+
+### `app`
+
+The Next.js App Router directory. It handles routing, layouts, and global styles. It also contains the `bootstrap` folder, which initializes the application's runtime (DI container, global providers).
 
 ### `core`
 
 System-level infrastructure used across the application.
 
-Examples:
-
-- HTTP client
-- navigation helpers
-- event system
-- dependency injection
-- logging / observability
-- i18n engine
+- `config`: Environment and application configuration.
+- `di`: Dependency Injection primitives and React integration.
+- `events`: Global event emitter for cross-feature communication.
+- `http`: HTTP client (Ky) and React Query setup.
+- `i18n`: Internationalization routing and engine.
+- `navigation`: Type-safe navigation helpers.
+- `observability`: Logging and error tracking (Sentry).
 
 Core code should remain **framework-agnostic where possible**.
 
@@ -69,31 +75,39 @@ comments
 achievements
 ```
 
-Features may contain:
+Features are self-contained and typically include:
 
-- UI components
-- hooks
-- services
-- schemas
-- i18n files
+- `components/`: Feature-specific UI.
+- `hooks/`: React hooks for local logic.
+- `services/`: Business logic (injectable).
+- `i18n/`: Feature-specific translations (Hybrid pattern).
+- `schemas/`: Zod schemas.
+- `types.ts`: Internal types and DI symbols.
+- `README.md`: Feature documentation.
 
 ### `services`
 
-Domain logic that may be reused across multiple features.
-
-Examples:
-
-- comment generation
-- notification scheduling
-- UX anti-pattern logic
+Global business logic that is not tied to a single feature (e.g., `AppService`).
 
 ### `hooks`
 
 Reusable React hooks that are not tied to a single feature.
 
+### `i18n`
+
+Global translation messages (`index.ts`, `metadata.ts`, `variants.ts`).
+
 ### `schemas`
 
 Shared schemas and type definitions (typically defined with Zod).
+
+### `stores`
+
+Global client-side state management using Zustand.
+
+## Instrumentation & Observability
+
+The app uses `instrumentation.ts` and `instrumentation-client.ts` to initialize Sentry and other monitoring tools at the earliest possible moment in the lifecycle.
 
 ## Shared Packages
 

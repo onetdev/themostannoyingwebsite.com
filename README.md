@@ -77,9 +77,16 @@ pnpm install
 
 ### Run development server
 
-```
+```bash
 pnpm dev
 # then open: https://localhost:3000
+```
+
+### Run Storybook (UI Documentation)
+
+```bash
+pnpm dev --filter ui-docs
+# then open: http://localhost:6006
 ```
 
 *Some browser APIs require HTTPS during development.*

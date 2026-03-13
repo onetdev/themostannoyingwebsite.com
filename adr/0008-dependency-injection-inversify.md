@@ -9,8 +9,7 @@ The application contains complex business logic that needs to be testable and de
 ## Decision
 We will use **InversifyJS** as our Dependency Injection (DI) framework.
 
-- **Registry**: All bindings are centralized in `src/app/bootstrap/di.ts`.
-- **Feature Modules**: Each feature provides an `init.ts` to register its own services.
+- **Registry**: All bindings are centralized in `src/app/bootstrap/di.ts`. This file aggregates DI symbols and registers services from across the core and feature layers.
 - **Consumption**: React components should consume services via the `useService(DI.Symbol)` hook or dedicated feature-level hooks (e.g., `useAuthService()`).
 - **Standard**: Classes must be marked with `@injectable()`, and dependencies must be injected via `@inject(DI.Symbol)`.
 
