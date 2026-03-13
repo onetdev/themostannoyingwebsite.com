@@ -20,85 +20,100 @@ export default {
   optionalPainPoints: {
     title: 'Puntos de dolor opcionales',
     categories: {
-      browser: 'Navegador y Pestaña',
-      visual: 'Obstrucciones Visuales',
-      ads: 'Publicidad y Monetización',
-      interactivity: 'Popups e Interactividad',
+      visualChaos: 'Caos visual',
+      uiSabotage: 'Sabotaje de la interfaz',
+      interruptions: 'Interrupciones',
+      browserHijacking: 'Secuestro del navegador',
     },
-    screensaverTimeout: 'Tiempo de espera',
-    screensaverVariant: 'Variante',
-    screensaverVariantOptions: {
-      bouncingLogo: 'Logotipo Rebotante',
-      maze: 'Laberinto 3D 95',
+    achievementNotifications: {
+      label: 'Notificaciones de logros',
+      hint: 'Muestra una notificación cada vez que desbloqueas un nuevo logro. El progreso siempre se rastrea en segundo plano.',
     },
-    screensaverTimeoutOptions: {
-      '15': '15 segundos',
-      '30': '30 segundos',
-      '60': '1 minuto',
-      '300': '5 minutos',
-      '900': '15 minutos',
+    backgroundAdflaps: {
+      label: 'Solapas de anuncios de fondo',
+      hint: 'Muestra solapas publicitarias en los laterales de la página que se pueden hacer clic y conducen a páginas de marketing.',
     },
-    gifts: {
-      detectAdblocker: 'Detectar bloqueador de anuncios',
-      flaps: 'Solapas de anuncios de fondo',
-      oneByOne: 'Bloques de anuncios uno por uno',
+    clipboardBrandingMark: {
+      label: 'Marca de branding en el portapapeles',
+      hint: 'Agrega un enlace "Leer más en..." cuando copias texto del sitio web.',
     },
-    achievementNotifications: 'Notificaciones de logros',
-    clipboardMarker: 'Marcador de portapapeles',
-    contentPaywall: 'Muro de pago de contenido',
-    deadPixel: 'Píxel muerto',
-    disableContextMenu: 'Deshabilitar menú contextual (clic derecho)',
-    exitPrompt: 'Aviso de salida',
-    historySpam: 'Spam de historial',
-    mockChat: 'Chat de burbuja',
-    newsletterModal: 'Modal emergente de boletín',
-    notifications: 'Notificaciones',
-    screensaver: 'Protector de pantalla',
-    pageTitleInactiveArrayPaged:
-      'Título alternativo cuando la pestaña está inactiva',
-    searchDelay: 'Retraso de búsqueda falso',
-    wheelOfFortune: 'Rueda de la fortuna',
-    stickyVideo: 'Video pegajoso',
-  },
-  optionalPainPointsHints: {
-    screensaver:
-      'Activa un protector de pantalla seleccionado por el usuario después del período especificado de inactividad total.',
-    gifts: {
-      detectAdblocker:
-        'Muestra un gran banner rojo si se detecta un bloqueador de anuncios.',
-      flaps:
-        'Muestra solapas de anuncios en los lados de la página en las que se puede hacer clic y llevan a diferentes páginas.',
-      oneByOne:
-        'Muestra bloques de anuncios uno por uno, principalmente un anuncio animado en la página de inicio.',
+    contentPaywall: {
+      label: 'Muro de pago de contenido',
+      hint: 'Muestra una superposición de muro de pago falso en algunos contenidos, aún puedes revelar el contenido de forma gratuita.',
     },
-    achievementNotifications:
-      'Muestra una notificación cada vez que desbloqueas un nuevo logro. El progreso siempre se rastrea en segundo plano.',
-    clipboardMarker:
-      'Agrega un enlace "Leer más en..." cuando copias texto del sitio web.',
-    contentPaywall:
-      'Muestra una superposición de muro de pago falso en algún contenido, aún puedes revelar el contenido.',
-    deadPixel:
-      'Coloca algunos píxeles "muertos" falsos en tu pantalla para molestarte.',
-    disableContextMenu:
-      'Te impide usar el menú de clic derecho y muestra una alerta en su lugar.',
-    exitPrompt:
-      'Muestra un aviso "¿Estás seguro de que quieres irte?" al intentar cerrar la pestaña o navegar fuera.',
-    historySpam:
-      'Llena el historial de tu navegador con entradas falsas para que no puedas volver atrás fácilmente. Esto puede hacer que sea inconveniente volver a los resultados del motor de búsqueda.',
-    mockChat:
-      'Muestra una molesta burbuja de chat "humana" que solo te envía mensajes cuando la cierras y constantemente muestra "el agente está escribiendo" mientras tanto.',
-    newsletterModal:
-      'Muestra periódicamente un modal de suscripción al boletín, especialmente cuando la página vuelve de la inactividad (cambio de pestañas).',
-    notifications:
-      'Solicita permisos de notificación y muestra notificaciones falsas.',
-    pageTitleInactiveArrayPaged:
-      'Cambia el título de la pestaña a algo llamativo cuando la pestaña está inactiva.',
-    searchDelay:
-      'Agrega un retraso de carga falso y largo a todas las búsquedas.',
-    wheelOfFortune:
-      'Muestra un modal falso de "Rueda de la Fortuna" que te da premios absolutamente inútiles.',
-    stickyVideo:
-      'Muestra un reproductor de video pegajoso que te sigue mientras te desplazas.',
+    deadPixel: {
+      label: 'Píxel muerto',
+      hint: 'Coloca algunos píxeles "muertos" falsos en tu pantalla para molestarte.',
+    },
+    detectAdblocker: {
+      label: 'Detectar bloqueador de anuncios',
+      hint: 'Muestra un gran banner rojo si se detecta un bloqueador de anuncios.',
+    },
+    disableContextMenu: {
+      label: 'Deshabilitar menú contextual (clic derecho)',
+      hint: 'Te impide usar el menú de clic derecho y muestra una alerta en su lugar.',
+    },
+    exitPrompt: {
+      label: 'Aviso de salida',
+      hint: 'Muestra un aviso "¿Estás seguro de que quieres irte?" al intentar cerrar la pestaña o navegar fuera.',
+    },
+    flaimAPHoneAd: {
+      label: 'Campaña de encuesta telefónica Flaim',
+      hint: 'Muestra un anuncio animado funky en la página de inicio que conduce a Flaim a Phone.',
+    },
+    historySpam: {
+      label: 'Spam de historial',
+      hint: 'Llena el historial de tu navegador con entradas falsas para que no puedas volver atrás fácilmente. Esto puede hacer que sea inconveniente volver a los resultados del motor de búsqueda.',
+    },
+    mockSupportChat: {
+      label: 'Chat de soporte simulado',
+      hint: 'Muestra una molesta burbuja de chat de soporte "humano" que solo te envía mensajes when la cierras.',
+    },
+    newsletterModal: {
+      label: 'Modal emergente de boletín',
+      hint: 'Muestra periódicamente un modal de suscripción al boletín, especialmente cuando la página vuelve de la inactividad (cambio de pestañas).',
+    },
+    notifications: {
+      label: 'Notificaciones',
+      hint: 'Solicita permisos de notificación y muestra notificaciones falsas.',
+    },
+    pageTitleInactiveArrayPaged: {
+      label: 'Título alterno cuando la pestaña está inactiva',
+      hint: 'Cambia el título de la pestaña a algo llamativo cuando la pestaña está inactiva.',
+    },
+    searchDelay: {
+      label: 'Retraso de búsqueda artificial',
+      hint: 'Agrega un retraso de carga falso y largo a todas las búsquedas.',
+    },
+    stickyVideoPlayer: {
+      label: 'Reproductor de video flotante',
+      hint: 'Muestra un reproductor de video pegajoso que te sigue mientras te desplazas.',
+    },
+    wheelOfFortune: {
+      label: 'Rueda de la fortuna',
+      hint: 'Muestra un modal falso de "Rueda de la Fortuna" que te da premios absolutamente inútiles.',
+    },
+    screensaver: {
+      label: 'Protector de pantalla',
+      hint: 'Activa un protector de pantalla seleccionado por el usuario después del período especificado de inactividad total.',
+      variant: {
+        label: 'Variante',
+        options: {
+          bouncingLogo: 'Logotipo Rebotante',
+          maze: 'Laberinto 3D 95',
+        },
+      },
+      timer: {
+        label: 'Tiempo de espera',
+        options: {
+          15: '15 segundos',
+          30: '30 segundos',
+          60: '1 minuto',
+          300: '5 minutos',
+          900: '15 minutos',
+        },
+      },
+    },
   },
   mandatoryExperienceFlags: {
     title: 'Experiencia obligatoria',

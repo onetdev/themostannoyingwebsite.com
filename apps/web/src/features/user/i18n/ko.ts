@@ -20,78 +20,100 @@ export default {
   optionalPainPoints: {
     title: '선택적 고통 요소',
     categories: {
-      browser: '브라우저 및 탭',
-      visual: '시각적 방해물',
-      ads: '광고 및 수익화',
-      interactivity: '팝업 및 상호작용',
+      visualChaos: '시각적 혼란',
+      uiSabotage: 'UI 사보타주',
+      interruptions: '중단 및 방해',
+      browserHijacking: '브라우저 하이재킹',
     },
-    screensaverTimeout: '대기 시간',
-    screensaverVariant: '유형',
-    screensaverVariantOptions: {
-      bouncingLogo: '바운싱 로고',
-      maze: '3D 미로 95',
+    achievementNotifications: {
+      label: '업적 알림',
+      hint: '새로운 업적을 달성할 때마다 알림을 표시합니다. 진행 상황은 항상 백그라운드에서 추적됩니다.',
     },
-    screensaverTimeoutOptions: {
-      '15': '15초',
-      '30': '30초',
-      '60': '1분',
-      '300': '5분',
-      '900': '15분',
+    backgroundAdflaps: {
+      label: '배경 광고 플랩',
+      hint: '페이지 측면에 클릭하면 마케팅 페이지로 이동하는 광고 플랩을 표시합니다.',
     },
-    gifts: {
-      detectAdblocker: '광고 차단기 감지',
-      flaps: '배경 광고 플랩',
-      oneByOne: '일대일 광고 차단',
+    clipboardBrandingMark: {
+      label: '클립보드 브랜딩 마크',
+      hint: '웹사이트에서 텍스트를 복사할 때 "더 보기..." 링크를 추가합니다.',
     },
-    achievementNotifications: '업적 알림',
-    clipboardMarker: '클립보드 마커',
-    contentPaywall: '콘텐츠 페이월',
-    deadPixel: '데드 픽셀',
-    disableContextMenu: '컨텍스트(우클릭) 메뉴 비활성화',
-    exitPrompt: '종료 프롬프트',
-    historySpam: '기록 스팸',
-    mockChat: '버블 채팅',
-    newsletterModal: '뉴스레터 팝업 모달',
-    notifications: '알림',
-    screensaver: '화면 보호기',
-    pageTitleInactiveArrayPaged: '탭 비활성 시 대안 제목',
-    searchDelay: '가짜 검색 지연',
-    wheelOfFortune: '운명의 돌림판',
-    stickyVideo: '고정 비디오',
-  },
-  optionalPainPointsHints: {
-    screensaver:
-      '지정된 기간 동안 활동이 없을 경우 사용자가 선택한 화면 보호기를 트리거합니다.',
-    gifts: {
-      detectAdblocker: '광고 차단기가 감지되면 커다란 빨간 배너를 표시합니다.',
-      flaps:
-        '페이지 측면에 클릭하면 다른 페이지로 이동하는 광고 플랩을 표시합니다.',
-      oneByOne: '주로 홈 페이지의 애니메이션 광고를 담당합니다.',
+    contentPaywall: {
+      label: '콘텐츠 페이월',
+      hint: '일부 콘텐츠에 가짜 페이월 오버레이를 표시합니다. 콘텐츠는 여전히 무료로 볼 수 있습니다.',
     },
-    achievementNotifications:
-      '새로운 업적을 달성할 때마다 알림을 표시합니다. 진행 상황은 항상 백그라운드에서 추적됩니다.',
-    clipboardMarker:
-      '웹사이트에서 텍스트를 복사할 때 "더 보기..." 링크를 추가합니다.',
-    contentPaywall:
-      '일부 콘텐츠에 가짜 페이월 오버레이를 표시합니다. 여전히 콘텐츠를 볼 수는 있습니다.',
-    deadPixel:
-      '당신을 짜증 나게 하기 위해 화면에 몇 개의 가짜 "데드" 픽셀을 배치합니다.',
-    disableContextMenu: '우클릭 메뉴 사용을 방지하고 대신 경고창을 표시합니다.',
-    exitPrompt:
-      '탭을 닫거나 다른 곳으로 이동하려고 할 때 "정말 떠나시겠습니까?" 프롬프트를 표시합니다.',
-    historySpam:
-      '브라우저 기록을 가짜 항목으로 채워 쉽게 뒤로 갈 수 없게 만듭니다. 검색 엔진 결과로 돌아가는 것이 불편해질 수 있습니다.',
-    mockChat:
-      '닫을 때만 메시지를 보내고, 그동안 끊임없이 "상담원이 입력 중입니다"라고 표시하는 짜증 나는 "인간" 채팅 버블을 표시합니다.',
-    newsletterModal:
-      '주기적으로 뉴스레터 구독 모달을 표시합니다. 특히 비활성 상태에서 페이지로 돌아올 때(탭 전환) 표시됩니다.',
-    notifications: '알림 권한을 요청하고 가짜 알림을 표시합니다.',
-    pageTitleInactiveArrayPaged:
-      '탭이 비활성 상태일 때 탭 제목을 주의를 끄는 것으로 변경합니다.',
-    searchDelay: '모든 검색에 가짜로 긴 로딩 지연을 추가합니다.',
-    wheelOfFortune:
-      '당신에게 완전히 쓸모없는 경품을 주는 가짜 "운명의 돌림판" 모달을 표시합니다.',
-    stickyVideo: '스크롤을 따라다니는 고정 비디오 플레이어를 표시합니다.',
+    deadPixel: {
+      label: '데드 픽셀',
+      hint: '당신을 짜증 나게 하기 위해 화면에 몇 개의 가짜 "데드" 픽셀을 배치합니다.',
+    },
+    detectAdblocker: {
+      label: '광고 차단기 감지',
+      hint: '광고 차단기가 감지되면 커다란 빨간 배너를 표시합니다.',
+    },
+    disableContextMenu: {
+      label: '컨텍스트(우클릭) 메뉴 비활성화',
+      hint: '우클릭 메뉴 사용을 방지하고 대신 경고창을 표시합니다.',
+    },
+    exitPrompt: {
+      label: '종료 프롬프트',
+      hint: '탭을 닫거나 다른 곳으로 이동하려고 할 때 "정말 떠나시겠습니까?" 프롬프트를 표시합니다.',
+    },
+    flaimAPHoneAd: {
+      label: 'Flaim 휴대폰 설문 조사 캠페인',
+      hint: '홈 페이지에 Flaim a Phone으로 이어지는 펑키한 애니메이션 광고를 표시합니다.',
+    },
+    historySpam: {
+      label: '기록 스팸',
+      hint: '브라우저 기록을 가짜 항목으로 채워 쉽게 뒤로 갈 수 없게 만듭니다. 검색 엔진 결과로 돌아가는 것이 불편해질 수 있습니다.',
+    },
+    mockSupportChat: {
+      label: '모의 고객 지원 채팅',
+      hint: '닫을 때만 메시지를 보내는 짜증 나는 "인간" 고객 지원 채팅 버블을 표시합니다.',
+    },
+    newsletterModal: {
+      label: '뉴스레터 팝업 모달',
+      hint: '주기적으로 뉴스레터 구독 모달을 표시합니다. 특히 비활성 상태에서 페이지로 돌아올 때(탭 전환) 표시됩니다.',
+    },
+    notifications: {
+      label: '알림',
+      hint: '알림 권한을 요청하고 가짜 알림을 표시합니다.',
+    },
+    pageTitleInactiveArrayPaged: {
+      label: '탭 비활성 시 교대 제목',
+      hint: '탭이 비활성 상태일 때 탭 제목을 주의를 끄는 것으로 변경합니다.',
+    },
+    searchDelay: {
+      label: '인위적인 검색 지연',
+      hint: '모든 검색에 가짜로 긴 로딩 지연을 추가합니다.',
+    },
+    stickyVideoPlayer: {
+      label: '고정 비디오 플레이어',
+      hint: '스크롤을 따라다니는 고정 비디오 플레이어를 표시합니다.',
+    },
+    wheelOfFortune: {
+      label: '운명의 돌림판',
+      hint: '당신에게 완전히 쓸모없는 경품을 주는 가짜 "운명의 돌림판" 모달을 표시합니다.',
+    },
+    screensaver: {
+      label: '화면 보호기',
+      hint: '지정된 기간 동안 활동이 없을 경우 사용자가 선택한 화면 보호기를 트리거합니다.',
+      variant: {
+        label: '유형',
+        options: {
+          bouncingLogo: '바운싱 로고',
+          maze: '3D 미로 95',
+        },
+      },
+      timer: {
+        label: '대기 시간',
+        options: {
+          15: '15초',
+          30: '30초',
+          60: '1분',
+          300: '5분',
+          900: '15분',
+        },
+      },
+    },
   },
   mandatoryExperienceFlags: {
     title: '필수 환경',

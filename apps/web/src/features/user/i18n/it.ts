@@ -20,84 +20,100 @@ export default {
   optionalPainPoints: {
     title: 'Punti di dolore opzionali',
     categories: {
-      browser: 'Browser e Schede',
-      visual: 'Ostruzioni visive',
-      ads: 'Pubblicità e Monetizzazione',
-      interactivity: 'Popup e Interattività',
+      visualChaos: 'Caos visivo',
+      uiSabotage: "Sabotaggio dell'interfaccia",
+      interruptions: 'Interruzioni',
+      browserHijacking: 'Hijacking del browser',
     },
-    screensaverTimeout: 'Timeout',
-    screensaverVariant: 'Variante',
-    screensaverVariantOptions: {
-      bouncingLogo: 'Logo rimbalzante',
-      maze: 'Labirinto 3D 95',
+    achievementNotifications: {
+      label: 'Notifiche obiettivi',
+      hint: 'Visualizza una notifica ogni volta che sblocchi un nuovo obiettivo. Il progresso è sempre tracciato in background.',
     },
-    screensaverTimeoutOptions: {
-      '15': '15 secondi',
-      '30': '30 secondi',
-      '60': '1 minuto',
-      '300': '5 minuti',
-      '900': '15 minuti',
+    backgroundAdflaps: {
+      label: 'Banner pubblicitari laterali',
+      hint: 'Mostra alette pubblicitarie ai lati della pagina che possono essere cliccate e portano a pagine di marketing.',
     },
-    gifts: {
-      detectAdblocker: 'Rileva adblocker',
-      flaps: 'Banner pubblicitari laterali',
-      oneByOne: 'Blocchi pubblicitari uno alla volta',
+    clipboardBrandingMark: {
+      label: 'Marchio di branding negli appunti',
+      hint: 'Aggiunge un link "Leggi di più su..." quando copi del testo dal sito web.',
     },
-    achievementNotifications: 'Notifiche obiettivi',
-    clipboardMarker: 'Marcatore appunti',
-    contentPaywall: 'Paywall dei contenuti',
-    deadPixel: 'Pixel morto',
-    disableContextMenu: 'Disabilita menu contestuale (tasto destro)',
-    exitPrompt: 'Avviso di uscita',
-    historySpam: 'Spam della cronologia',
-    mockChat: 'Bolla di chat',
-    newsletterModal: 'Popup iscrizione newsletter',
-    notifications: 'Notifiche',
-    screensaver: 'Screensaver',
-    pageTitleInactiveArrayPaged:
-      'Titolo alternativo quando la scheda è inattiva',
-    searchDelay: 'Finto ritardo di ricerca',
-    wheelOfFortune: 'Ruota della fortuna',
-    stickyVideo: 'Video appiccicoso',
-  },
-  optionalPainPointsHints: {
-    screensaver:
-      "Attiva uno screensaver selezionato dall'utente dopo il periodo specificato di inattività totale.",
-    gifts: {
-      detectAdblocker:
-        'Mostra un grande banner rosso se viene rilevato un adblocker.',
-      flaps:
-        'Mostra banner pubblicitari ai lati della pagina che possono essere cliccati e portano a pagine diverse.',
-      oneByOne: 'Copre principalmente un annuncio animato sulla home page.',
+    contentPaywall: {
+      label: 'Paywall dei contenuti',
+      hint: 'Mostra una sovrapposizione di paywall falso su alcuni contenuti, puoi comunque rivelare il contenuto gratuitamente.',
     },
-    achievementNotifications:
-      'Visualizza una notifica ogni volta che sblocchi un nuovo obiettivo. Il progresso è sempre tracciato in background.',
-    clipboardMarker:
-      'Aggiunge un link "Leggi di più su..." quando copi del testo dal sito web.',
-    contentPaywall:
-      'Mostra un finto paywall su alcuni contenuti; puoi comunque rivelare il contenuto.',
-    deadPixel:
-      'Posiziona alcuni finti pixel "morti" sullo schermo per infastidirti.',
-    disableContextMenu:
-      'Ti impedisce di usare il menu del tasto destro e visualizza un avviso al suo posto.',
-    exitPrompt:
-      'Mostra un avviso "Sei sicuro di voler uscire?" quando provi a chiudere la scheda o ad allontanarti.',
-    historySpam:
-      'Riempie la cronologia del browser con voci fittizie in modo da non poter tornare indietro facilmente. Questo può rendere scomodo tornare ai risultati del motore di ricerca.',
-    mockChat:
-      'Mostra una fastidiosa bolla di chat "umana" che ti invia messaggi solo quando la chiudi e visualizza costantemente "l\'agente sta scrivendo" nel frattempo.',
-    newsletterModal:
-      "Mostra periodicamente un modulo di iscrizione alla newsletter, specialmente quando la pagina torna dall'inattività (cambio di scheda).",
-    notifications:
-      'Chiede i permessi per le notifiche e mostra fante notifiche.',
-    pageTitleInactiveArrayPaged:
-      "Cambia il titolo della scheda con qualcosa che attiri l'attenzione quando la scheda è inattiva.",
-    searchDelay:
-      'Aggiunge un finto e lungo ritardo di caricamento a tutte le ricerche.',
-    wheelOfFortune:
-      'Mostra una finta "Ruota della Fortuna" che ti assegna premi assolutamente inutili.',
-    stickyVideo:
-      'Mostra un video player appiccicoso che ti segue mentre scorri la pagina.',
+    deadPixel: {
+      label: 'Pixel morto',
+      hint: 'Posiziona alcuni finti pixel "morti" sullo schermo per infastidirti.',
+    },
+    detectAdblocker: {
+      label: 'Rileva adblocker',
+      hint: 'Mostra un grande banner rosso se viene rilevato un adblocker.',
+    },
+    disableContextMenu: {
+      label: 'Disabilita menu contestuale (tasto destro)',
+      hint: 'Ti impedisce di usare il menu del tasto destro e visualizza un avviso al suo posto.',
+    },
+    exitPrompt: {
+      label: 'Avviso di uscita',
+      hint: 'Mostra un avviso "Sei sicuro di voler uscire?" quando provi a chiudere la scheda o ad allontanarti.',
+    },
+    flaimAPHoneAd: {
+      label: 'Campagna di sondaggio telefonico Flaim',
+      hint: 'Mostra un annuncio animado funky sulla home page che porta a Flaim a Phone.',
+    },
+    historySpam: {
+      label: 'Spam della cronologia',
+      hint: 'Riempie la cronologia del browser con voci fittizie in modo da non poter tornare indietro facilmente. Questo può rendere scomodo tornare ai risultati del motore di ricerca.',
+    },
+    mockSupportChat: {
+      label: 'Chat di supporto simulata',
+      hint: 'Mostra una fastidiosa bolla di chat di supporto "umana" che ti invia messaggi solo quando la chiudi.',
+    },
+    newsletterModal: {
+      label: 'Popup iscrizione newsletter',
+      hint: "Mostra periodicamente un modulo di iscrizione alla newsletter, specialmente quando la pagina torna dall'inattività (cambio di scheda).",
+    },
+    notifications: {
+      label: 'Notifiche',
+      hint: 'Chiede i permessi per le notifiche e mostra fante notifiche.',
+    },
+    pageTitleInactiveArrayPaged: {
+      label: 'Titolo alternato quando la scheda è inattiva',
+      hint: "Cambia il titolo della scheda con qualcosa che attiri l'attenzione quando la scheda è inattiva.",
+    },
+    searchDelay: {
+      label: 'Ritardo di ricerca artificiale',
+      hint: 'Aggiunge un finto e lungo ritardo di caricamento a tutte le ricerche.',
+    },
+    stickyVideoPlayer: {
+      label: 'Video player appiccicoso',
+      hint: 'Mostra un video player appiccicoso che ti segue mentre scorri la pagina.',
+    },
+    wheelOfFortune: {
+      label: 'Ruota della fortuna',
+      hint: 'Mostra una finta "Ruota della Fortuna" che ti assegna premi assolutamente inutili.',
+    },
+    screensaver: {
+      label: 'Screensaver',
+      hint: "Attiva uno screensaver selezionato dall'utente dopo il periodo specificato di inattività totale.",
+      variant: {
+        label: 'Variante',
+        options: {
+          bouncingLogo: 'Logo rimbalzante',
+          maze: 'Labirinto 3D 95',
+        },
+      },
+      timer: {
+        label: 'Timeout',
+        options: {
+          15: '15 secondi',
+          30: '30 secondi',
+          60: '1 minuto',
+          300: '5 minuti',
+          900: '15 minuti',
+        },
+      },
+    },
   },
   mandatoryExperienceFlags: {
     title: 'Esperienza obbligatoria',

@@ -20,84 +20,100 @@ export default {
   optionalPainPoints: {
     title: 'Pontos de dor opcionais',
     categories: {
-      browser: 'Navegador e Separador',
-      visual: 'Obstruções Visuais',
-      ads: 'Publicidade e Monetização',
-      interactivity: 'Popups e Interatividade',
+      visualChaos: 'Caos visual',
+      uiSabotage: 'Sabotagem da interface',
+      interruptions: 'Interrupções',
+      browserHijacking: 'Sequestro do navegador',
     },
-    screensaverTimeout: 'Tempo de espera',
-    screensaverVariant: 'Variante',
-    screensaverVariantOptions: {
-      bouncingLogo: 'Logótipo Saltitante',
-      maze: 'Labirinto 3D 95',
+    achievementNotifications: {
+      label: 'Notificações de conquistas',
+      hint: 'Exibe uma notícia sempre que desbloqueia uma nova conquista. O progresso é sempre acompanhado em segundo plano.',
     },
-    screensaverTimeoutOptions: {
-      '15': '15 segundos',
-      '30': '30 segundos',
-      '60': '1 minuto',
-      '300': '5 minutos',
-      '900': '15 minutos',
+    backgroundAdflaps: {
+      label: 'Abas laterais de anúncios',
+      hint: 'Mostra abas publicitárias nas laterais da página que podem ser clicadas e levam a páginas de marketing.',
     },
-    gifts: {
-      detectAdblocker: 'Detetar adblocker',
-      flaps: 'Abas laterais de anúncios',
-      oneByOne: 'Anúncios um por um',
+    clipboardBrandingMark: {
+      label: 'Marca de branding na área de transferência',
+      hint: 'Adiciona um link "Ler mais em..." quando copia texto do website.',
     },
-    achievementNotifications: 'Notificações de conquistas',
-    clipboardMarker: 'Marcador de área de transferência',
-    contentPaywall: 'Paywall de conteúdo',
-    deadPixel: 'Píxel morto',
-    disableContextMenu: 'Desativar menu de contexto (clique direito)',
-    exitPrompt: 'Aviso de saída',
-    historySpam: 'Spam no histórico',
-    mockChat: 'Chat de bolha',
-    newsletterModal: 'Popup de newsletter',
-    notifications: 'Notificações',
-    screensaver: 'Protetor de ecrã',
-    pageTitleInactiveArrayPaged:
-      'Título alternativo quando o separador está inativo',
-    searchDelay: 'Atraso falso na pesquisa',
-    wheelOfFortune: 'Roda da fortuna',
-    stickyVideo: 'Vídeo flutuante',
-  },
-  optionalPainPointsHints: {
-    screensaver:
-      'Ativa um protetor de ecrã selecionado após o período especificado de inatividade total.',
-    gifts: {
-      detectAdblocker:
-        'Mostra um grande banner vermelho se for detetado um adblocker.',
-      flaps:
-        'Mostra abas de anúncios nas laterais da página que podem ser clicadas e levam a páginas diferentes.',
-      oneByOne: 'Cobre principalmente um anúncio animado na página inicial.',
+    contentPaywall: {
+      label: 'Paywall de conteúdo',
+      hint: 'Mostra uma sobreposição de paywall falso em algum conteúdo, ainda pode revelar o conteúdo gratuitamente.',
     },
-    achievementNotifications:
-      'Exibe uma notícia sempre que desbloqueia uma nova conquista. O progresso é sempre acompanhado em segundo plano.',
-    clipboardMarker:
-      'Adiciona um link "Ler mais em..." quando copia texto do website.',
-    contentPaywall:
-      'Mostra uma sobreposição de paywall falsa em alguns conteúdos; ainda pode revelar o conteúdo.',
-    deadPixel:
-      'Coloca alguns píxeis "mortos" falsos no seu ecrã para o irritar.',
-    disableContextMenu:
-      'Impede-o de usar o menu do botão direito e exibe um alerta em vez disso.',
-    exitPrompt:
-      'Mostra um aviso "Tem a certeza que quer sair?" ao tentar fechar o separador ou navegar para fora.',
-    historySpam:
-      'Enche o histórico do seu navegador com entradas falsas para que não possa voltar atrás facilmente. Isto pode tornar inconveniente o regresso aos resultados dos motores de busca.',
-    mockChat:
-      'Mostra uma bolha de chat "humana" irritante que só lhe envia mensagens quando a fecha e que exibe constantemente "agente está a escrever" entretanto.',
-    newsletterModal:
-      'Mostra periodicamente um popup de subscrição de newsletter, especialmente quando a página regressa da inatividade (troca de separadores).',
-    notifications:
-      'Pede permissões de notificação e mostra notificações falsas.',
-    pageTitleInactiveArrayPaged:
-      'Altera o título do separador para algo que chame a atenção quando o separador está inativo.',
-    searchDelay:
-      'Adiciona um atraso de carregamento falso e longo a todas as pesquisas.',
-    wheelOfFortune:
-      'Mostra um modal de "Roda da Fortuna" falso que lhe dá prémios absolutamente inúteis.',
-    stickyVideo:
-      'Mostra um reprodutor de vídeo flutuante que o segue enquanto faz scroll.',
+    deadPixel: {
+      label: 'Píxel morto',
+      hint: 'Coloca alguns píxeis "mortos" falsos no seu ecrã para o irritar.',
+    },
+    detectAdblocker: {
+      label: 'Detetar adblocker',
+      hint: 'Mostra un grande banner vermelho se for detetado um adblocker.',
+    },
+    disableContextMenu: {
+      label: 'Desativar menu de contexto (clique direito)',
+      hint: 'Impede-o de usar o menu do botão direito e exibe um alerta em vez disso.',
+    },
+    exitPrompt: {
+      label: 'Aviso de saída',
+      hint: 'Mostra um aviso "Tem a certeza que quer sair?" ao tentar fechar o separador ou navegar para fora.',
+    },
+    flaimAPHoneAd: {
+      label: 'Campanha de inquérito telefónico Flaim',
+      hint: 'Exibe um anúncio animado funky na página inicial que leva ao Flaim a Phone.',
+    },
+    historySpam: {
+      label: 'Spam no histórico',
+      hint: 'Enche o histórico do seu navegador com entradas falsas para que não possa voltar atrás facilmente. Isto pode tornar inconveniente o regresso aos resultados των κινητήρων αναζήτησης.',
+    },
+    mockSupportChat: {
+      label: 'Chat de suporte simulado',
+      hint: 'Mostra uma bolha de chat de suporte "humano" irritante que só envia mensagens quando a fecha.',
+    },
+    newsletterModal: {
+      label: 'Popup de newsletter',
+      hint: 'Mostra periodicamente um popup de subscrição de newsletter, especialmente quando a página regressa da inatividade (troca de separadores).',
+    },
+    notifications: {
+      label: 'Notificações',
+      hint: 'Pede permissões de notificação e mostra notificações falsas.',
+    },
+    pageTitleInactiveArrayPaged: {
+      label: 'Título alternado quando o separador está inativo',
+      hint: 'Altera o título do separador para algo que chame a atenção quando o separador está inativo.',
+    },
+    searchDelay: {
+      label: 'Atraso de pesquisa artificial',
+      hint: 'Adiciona um atraso de carregamento falso e longo a todas as pesquisas.',
+    },
+    stickyVideoPlayer: {
+      label: 'Reprodutor de vídeo fixo',
+      hint: 'Mostra um reprodutor de vídeo flutuante que o segue enquanto faz scroll.',
+    },
+    wheelOfFortune: {
+      label: 'Roda da fortuna',
+      hint: 'Mostra um modal de "Roda da Fortuna" falso que lhe dá prémios absolutamente inúteis.',
+    },
+    screensaver: {
+      label: 'Protetor de ecrã',
+      hint: 'Ativa um protetor de ecrã selecionado após o período especificado de inatividade total.',
+      variant: {
+        label: 'Variante',
+        options: {
+          bouncingLogo: 'Logótipo Saltitante',
+          maze: 'Labirinto 3D 95',
+        },
+      },
+      timer: {
+        label: 'Tempo de espera',
+        options: {
+          15: '15 segundos',
+          30: '30 segundos',
+          60: '1 minuto',
+          300: '5 minutos',
+          900: '15 minutos',
+        },
+      },
+    },
   },
   mandatoryExperienceFlags: {
     title: 'Experiência obrigatória',

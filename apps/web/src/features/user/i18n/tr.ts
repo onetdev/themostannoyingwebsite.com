@@ -20,81 +20,100 @@ export default {
   optionalPainPoints: {
     title: 'İsteğe bağlı acı noktaları',
     categories: {
-      browser: 'Tarayıcı ve Sekme',
-      visual: 'Görsel Engeller',
-      ads: 'Reklam ve Paraya Dönüştürme',
-      interactivity: "Pop-up'lar ve Etkileşim",
+      visualChaos: 'Görsel Kaos',
+      uiSabotage: 'Arayüz Sabotajı',
+      interruptions: 'Kesintiler',
+      browserHijacking: 'Tarayıcı Ele Geçirme',
     },
-    screensaverTimeout: 'Zaman aşımı',
-    screensaverVariant: 'Varyant',
-    screensaverVariantOptions: {
-      bouncingLogo: 'Zıplayan Logo',
-      maze: '3D Labirent 95',
+    achievementNotifications: {
+      label: 'Başarım bildirimleri',
+      hint: 'Yeni bir başarımı her açtığınızda bir bildirim görüntüler. İlerleme her zaman arka planda takip edilir.',
     },
-    screensaverTimeoutOptions: {
-      '15': '15 saniye',
-      '30': '30 saniye',
-      '60': '1 dakika',
-      '300': '5 dakika',
-      '900': '15 dakika',
+    backgroundAdflaps: {
+      label: 'Arka plan reklam kanatları',
+      hint: 'Sayfanın yanlarında tıklanabilen ve pazarlama sayfalarına yönlendiren reklam kanatları gösterir.',
     },
-    gifts: {
-      detectAdblocker: 'Reklam engelleyiciyi algıla',
-      flaps: 'Arka plan reklam kanatları',
-      oneByOne: 'Teke tek reklam blokları',
+    clipboardBrandingMark: {
+      label: 'Pano işareti',
+      hint: 'Web sitesinden metin kopyaladığınızda sonuna bir "Daha fazlası için..." bağlantısı ekler.',
     },
-    achievementNotifications: 'Başarım bildirimleri',
-    clipboardMarker: 'Pano işareti',
-    contentPaywall: 'İçerik ödeme duvarı',
-    deadPixel: 'Ölü piksel',
-    disableContextMenu: 'Sağ tık menüsünü devre dışı bırak',
-    exitPrompt: 'Çıkış uyarısı',
-    historySpam: "Geçmiş spam'i",
-    mockChat: 'Balon sohbet',
-    newsletterModal: 'Bülten pop-up penceresi',
-    notifications: 'Bildirimler',
-    screensaver: 'Ekran koruyucu',
-    pageTitleInactiveArrayPaged: 'Sekme aktif değilken alternatif başlık',
-    searchDelay: 'Sahte arama gecikmesi',
-    wheelOfFortune: 'Çarkıfelek',
-    stickyVideo: 'Yapışkan video',
-  },
-  optionalPainPointsHints: {
-    screensaver:
-      'Belirli bir süre tam hareketsizlikten sonra kullanıcı tarafından seçilen bir ekran koruyucuyu tetikler.',
-    gifts: {
-      detectAdblocker:
-        'Reklam engelleyici algılanırsa büyük kırmızı bir başlık gösterir.',
-      flaps:
-        'Sayfanın yanlarında tıklanabilen ve farklı sayfalara yönlendiren reklam kanatları gösterir.',
-      oneByOne: 'Genellikle ana sayfadaki animasyonlu bir reklamı kapsar.',
+    contentPaywall: {
+      label: 'İçerik ödeme duvarı',
+      hint: 'Bazı içeriklerde sahte bir ödeme duvarı katmanı gösterir, içeriği yine de ücretsiz olarak görebilirsiniz.',
     },
-    achievementNotifications:
-      'Yeni bir başarımı her açtığınızda bir bildirim görüntüler. İlerleme her zaman arka planda takip edilir.',
-    clipboardMarker:
-      'Web sitesinden metin kopyaladığınızda sonuna bir "Daha fazlası için..." bağlantısı ekler.',
-    contentPaywall:
-      'Bazı içeriklerde sahte bir ödeme duvarı katmanı gösterir, yine de içeriği görebilirsiniz.',
-    deadPixel:
-      'Sizi sinir etmek için ekranınıza birkaç sahte "ölü" piksel yerleştirir.',
-    disableContextMenu:
-      'Sağ tık menüsünü kullanmanızı engeller ve bunun yerine bir uyarı görüntüler.',
-    exitPrompt:
-      'Sekmeyi kapatmaya veya sayfadan ayrılmaya çalışırken "Ayrılmak istediğinizden emin misiniz?" uyarısı gösterir.',
-    historySpam:
-      'Tarayıcı geçmişinizi sahte girişlerle doldurur, böylece kolayca geri dönemezsiniz. Bu, arama motoru sonuçlarına dönmeyi zahmetli hale getirebilir.',
-    mockChat:
-      'Yalnızca kapattığınızda size mesaj gönderen ve bu sırada sürekli "temsilci yazıyor" uyarısı veren sinir bozucu bir "insan" sohbet balonu gösterir.',
-    newsletterModal:
-      'Özellikle sayfa hareketsizlikten (sekme değiştirme) geri geldiğinde periyodik olarak bir bülten abonelik penceresi gösterir.',
-    notifications: 'Bildirim izinleri ister ve sahte bildirimler gösterir.',
-    pageTitleInactiveArrayPaged:
-      'Sekme aktif olmadığında sekme başlığını dikkat çekici bir şeye dönüştürür.',
-    searchDelay: 'Tüm aramalara sahte ve uzun bir yükleme gecikmesi ekler.',
-    wheelOfFortune:
-      'Size kesinlikle işe yaramaz ödüller veren sahte bir "Çarkıfelek" penceresi gösterir.',
-    stickyVideo:
-      'Siz sayfayı kaydırdıkça sizi takip eden yapışkan bir video oynatıcı gösterir.',
+    deadPixel: {
+      label: 'Ölü piksel',
+      hint: 'Sizi sinir etmek için ekranınıza birkaç sahte "ölü" piksel yerleştirir.',
+    },
+    detectAdblocker: {
+      label: 'Reklam engelleyiciyi algıla',
+      hint: 'Reklam engelleyici algılanırsa büyük kırmızı bir başlık gösterir.',
+    },
+    disableContextMenu: {
+      label: 'Sağ tık menüsünü devre dışı bırak',
+      hint: 'Sağ tık menüsünü kullanmanızı engeller ve bunun yerine bir uyarı görüntüler.',
+    },
+    exitPrompt: {
+      label: 'Çıkış uyarısı',
+      hint: 'Sekmeyi kapatmaya veya sayfadan ayrılmaya çalışırken "Ayrılmak istediğinizden emin misiniz?" uyarısı gösterir.',
+    },
+    flaimAPHoneAd: {
+      label: 'Flaim telefon anketi kampanyası',
+      hint: "Ana sayfada Flaim a Phone'a yönlendiren eğlenceli animasyonlu bir reklam görüntüler.",
+    },
+    historySpam: {
+      label: 'Tarayıcı Geçmişi spam',
+      hint: 'Kolayca geri gidememeniz için tarayıcı geçmişinizi sahte girişlerle doldurur. Bu, arama motoru sonuçlarına geri dönmeyi elverişsiz hale getirebilir.',
+    },
+    mockSupportChat: {
+      label: 'Simüle edilmiş destek sohbeti',
+      hint: 'Yalnızca kapattığınızda size mesaj gönderen sinir bozucu "insan" bir destek sohbet balonu gösterir.',
+    },
+    newsletterModal: {
+      label: 'Bülten açılır pencere modalı',
+      hint: 'Özellikle sayfa inaktiflikten (sekme değiştirme) geri döndüğünde periyodik olarak bir bülten abonelik modalı gösterir.',
+    },
+    notifications: {
+      label: 'Bildirimler',
+      hint: 'Bildirim izinleri ister ve sahte bildirimler gösterir.',
+    },
+    pageTitleInactiveArrayPaged: {
+      label: 'Sekme inaktifken değişen başlık',
+      hint: 'Sekme inaktifken sekme başlığını dikkat çekici bir şeye dönüştürür.',
+    },
+    searchDelay: {
+      label: 'Yapay arama gecikmesi',
+      hint: 'Tüm aramalara sahte, uzun bir yükleme gecikmesi ekler.',
+    },
+    stickyVideoPlayer: {
+      label: 'Yapışkan video oynatıcı',
+      hint: 'Siz kaydırdıkça sizi takip eden yapışkan bir video oynatıcı gösterir.',
+    },
+    wheelOfFortune: {
+      label: 'Çarkıfelek',
+      hint: 'Size kesinlikle işe yaramaz ödüller veren sahte bir "Çarkıfelek" modalı gösterir.',
+    },
+    screensaver: {
+      label: 'Ekran koruyucu',
+      hint: 'Belirtilen toplam inaktiflik süresinden sonra kullanıcı tarafından seçilen bir ekran koruyucuyu tetikler.',
+      variant: {
+        label: 'Varyant',
+        options: {
+          bouncingLogo: 'Zıplayan Logo',
+          maze: '3D Labirent 95',
+        },
+      },
+      timer: {
+        label: 'Ekran koruyucuyu şu süreden sonra göster',
+        options: {
+          15: '15 saniye',
+          30: '30 saniye',
+          60: '1 dakika',
+          300: '5 dakika',
+          900: '15 dakika',
+        },
+      },
+    },
   },
   mandatoryExperienceFlags: {
     title: 'Zorunlu deneyim',

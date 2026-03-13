@@ -20,84 +20,100 @@ export default {
   optionalPainPoints: {
     title: 'Points de douleur optionnels',
     categories: {
-      browser: 'Navigateur & Onglet',
-      visual: 'Obstructions Visuelles',
-      ads: 'Publicité & Monétisation',
-      interactivity: 'Popups & Interactivité',
+      visualChaos: 'Chaos visuel',
+      uiSabotage: "Sabotage de l'interface",
+      interruptions: 'Interruptions',
+      browserHijacking: 'Détournement du navigateur',
     },
-    screensaverTimeout: "Délai d'expiration",
-    screensaverVariant: 'Variante',
-    screensaverVariantOptions: {
-      bouncingLogo: 'Logo Rebondissant',
-      maze: 'Labyrinthe 3D 95',
+    achievementNotifications: {
+      label: 'Notifications de succès',
+      hint: 'Affiche une notification chaque fois que vous débloquez un nouveau succès. La progression est toujours suivie en arrière-plan.',
     },
-    screensaverTimeoutOptions: {
-      '15': '15 secondes',
-      '30': '30 secondes',
-      '60': '1 minute',
-      '300': '5 minutes',
-      '900': '15 minutes',
+    backgroundAdflaps: {
+      label: 'Bannières publicitaires latérales',
+      hint: 'Affiche des volets publicitaires sur les côtés de la page qui peuvent être cliqués et mènent à des pages de marketing.',
     },
-    gifts: {
-      detectAdblocker: 'Détecter le bloqueur de pub',
-      flaps: 'Bannières publicitaires latérales',
-      oneByOne: 'Blocs de pub un par un',
+    clipboardBrandingMark: {
+      label: 'Marque de branding du presse-papiers',
+      hint: 'Ajoute un lien "En savoir plus sur..." lorsque vous copiez du texte du site.',
     },
-    achievementNotifications: 'Notifications de succès',
-    clipboardMarker: 'Marqueur de presse-papier',
-    contentPaywall: 'Paywall de contenu',
-    deadPixel: 'Pixel mort',
-    disableContextMenu: 'Désactiver le menu contextuel (clic droit)',
-    exitPrompt: 'Invite de sortie',
-    historySpam: "Spam d'historique",
-    mockChat: 'Bulle de discussion',
-    newsletterModal: 'Fenêtre surgissante newsletter',
-    notifications: 'Notifications',
-    screensaver: "Économiseur d'écran",
-    pageTitleInactiveArrayPaged: "Titre alternatif quand l'onglet est inactif",
-    searchDelay: 'Faux délai de recherche',
-    wheelOfFortune: 'Roue de la fortune',
-    stickyVideo: 'Vidéo collante',
-  },
-  optionalPainPointsHints: {
-    screensaver:
-      "Déclenche un économiseur d'écran sélectionné par l'utilisateur après la période spécifiée d'inactivité totale.",
-    gifts: {
-      detectAdblocker:
-        'Affiche une large bannière rouge si un bloqueur de pub est détecté.',
-      flaps:
-        'Affiche des bannières de pub sur les côtés de la page qui peuvent être cliquées et mènent à différentes pages.',
-      oneByOne:
-        "Couvre principalement une publicité animée sur la page d'accueil.",
+    contentPaywall: {
+      label: 'Paywall de contenu',
+      hint: 'Affiche une superposition de mur de paiement fictif sur certains contenus, vous pouvez toujours révéler le contenu gratuitement.',
     },
-    achievementNotifications:
-      'Affiche une notification chaque fois que vous débloquez un nouveau succès. La progression est toujours suivie en arrière-plan.',
-    clipboardMarker:
-      'Ajoute un lien "Lire la suite sur..." lorsque vous copiez du texte du site.',
-    contentPaywall:
-      'Affiche un faux paywall sur certains contenus, vous pouvez toujours révéler le contenu.',
-    deadPixel:
-      'Place quelques faux pixels "morts" sur votre écran pour vous agacer.',
-    disableContextMenu:
-      "Vous empêche d'utiliser le menu clic droit et affiche une alerte à la place.",
-    exitPrompt:
-      'Affiche une invite "Êtes-vous sûr de vouloir quitter ?" en essayant de fermer l\'onglet ou de naviguer ailleurs.',
-    historySpam:
-      "Remplit l'historique de votre navigateur avec de fausses entrées pour que vous ne puissiez pas revenir facilement en arrière. Cela peut être gênant pour revenir aux résultats des moteurs de recherche.",
-    mockChat:
-      'Affiche une bulle de discussion "humaine" agaçante qui ne vous envoie de messages que lorsque vous la fermez et affiche constamment "l\'agent écrit" entre-temps.',
-    newsletterModal:
-      "Affiche périodiquement une fenêtre d'abonnement à la newsletter, surtout quand la page revient de l'inactivité (changement d'onglets).",
-    notifications:
-      'Demande des autorisations de notification et affiche de fausses notifications.',
-    pageTitleInactiveArrayPaged:
-      "Change le titre de l'onglet par quelque chose qui attire l'attention quand l'onglet est inactif.",
-    searchDelay:
-      'Ajoute un faux et long délai de chargement à toutes les recherches.',
-    wheelOfFortune:
-      'Affiche une fausse fenêtre de "Roue de la fortune" qui vous donne des prix absolument inutiles.',
-    stickyVideo:
-      'Affiche un lecteur vidéo collant qui vous suit pendant que vous faites défiler.',
+    deadPixel: {
+      label: 'Pixel mort',
+      hint: 'Place quelques faux pixels "morts" sur votre écran pour vous agacer.',
+    },
+    detectAdblocker: {
+      label: 'Détecter le bloqueur de pub',
+      hint: 'Affiche une large bannière rouge si un bloqueur de pub est détecté.',
+    },
+    disableContextMenu: {
+      label: 'Désactiver le menu contextuel (clic droit)',
+      hint: "Vous empêche d'utiliser le menu clic droit et affiche une alerte à la place.",
+    },
+    exitPrompt: {
+      label: 'Invite de sortie',
+      hint: 'Affiche une invite "Êtes-vous sûr de vouloir quitter ?" en essayant de fermer l\'onglet ou de naviguer ailleurs.',
+    },
+    flaimAPHoneAd: {
+      label: 'Campagne de sondage téléphonique Flaim',
+      hint: "Affiche une publicité animée funky sur la page d'accueil menant à Flaim a Phone.",
+    },
+    historySpam: {
+      label: "Spam d'historique",
+      hint: "Remplit l'historique de votre navigateur with de fausses entrées pour que vous ne puissiez pas revenir facilement en arrière. Cela peut être gênant pour revenir aux résultats des moteurs de recherche.",
+    },
+    mockSupportChat: {
+      label: 'Chat de support simulé',
+      hint: 'Affiche une bulle de chat de support "humain" agaçante qui ne vous envoie des messages que lorsque vous la fermez.',
+    },
+    newsletterModal: {
+      label: 'Fenêtre surgissante newsletter',
+      hint: "Affiche périodiquement une fenêtre d'abonnement à la newsletter, surtout quand la page revient de l'inactivité (changement d'onglets).",
+    },
+    notifications: {
+      label: 'Notifications',
+      hint: 'Demande des autorisations de notification et affiche de fausses notifications.',
+    },
+    pageTitleInactiveArrayPaged: {
+      label: "Titre alterné lorsque l'onglet est inactif",
+      hint: "Change le titre de l'onglet par quelque chose qui attire l'attention quand l'onglet est inactif.",
+    },
+    searchDelay: {
+      label: 'Délai de recherche artificiel',
+      hint: 'Ajoute un faux et long délai de chargement à toutes les recherches.',
+    },
+    stickyVideoPlayer: {
+      label: 'Lecteur vidéo collant',
+      hint: 'Affiche un lecteur vidéo collant qui vous suit pendant que vous faites défiler.',
+    },
+    wheelOfFortune: {
+      label: 'Roue de la fortune',
+      hint: 'Affiche une fausse fenêtre de "Roue de la fortune" qui vous donne des prix absolument inutiles.',
+    },
+    screensaver: {
+      label: "Économiseur d'écran",
+      hint: "Déclenche un économiseur d'écran sélectionné par l'utilisateur après la période spécifiée d'inactivité totale.",
+      variant: {
+        label: 'Variante',
+        options: {
+          bouncingLogo: 'Logo Rebondissant',
+          maze: 'Labyrinthe 3D 95',
+        },
+      },
+      timer: {
+        label: "Délai d'expiration",
+        options: {
+          15: '15 secondes',
+          30: '30 secondes',
+          60: '1 minute',
+          300: '5 minutes',
+          900: '15 minutes',
+        },
+      },
+    },
   },
   mandatoryExperienceFlags: {
     title: 'Expérience obligatoire',

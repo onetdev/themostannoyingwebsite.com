@@ -16,9 +16,9 @@ import type { ScreensaverVariant } from '@/features/disruptions/schemas';
 import { usePainPreferencesStore } from '@/stores';
 import { SettingsField } from '../SettingsField';
 
-export function VisualObstructions() {
+export function VisualChaos() {
   const painPreferences = usePainPreferencesStore();
-  const t = useTranslations();
+  const t = useTranslations('user.optionalPainPoints');
 
   const timeoutOptions = ['15', '30', '60', '300', '900'] as const;
   const variantOptions = ['bouncingLogo', 'maze'] as const;
@@ -26,11 +26,11 @@ export function VisualObstructions() {
   return (
     <section className="flex flex-col gap-3">
       <h3 className="text-muted-foreground text-xs font-bold tracking-wider uppercase">
-        {t('user.optionalPainPoints.categories.visual')}
+        {t('categories.visualChaos')}
       </h3>
       <SettingsField
-        label={t('user.optionalPainPoints.screensaver')}
-        info={t('user.optionalPainPointsHints.screensaver')}
+        label={t('screensaver.label')}
+        info={t('screensaver.hint')}
       >
         <FormCheckbox
           name="screensaver"
@@ -44,7 +44,7 @@ export function VisualObstructions() {
         <div className="ml-8 flex flex-col gap-4">
           <Field orientation="vertical" className="gap-2">
             <FieldLabel className="text-sm font-normal">
-              {t('user.optionalPainPoints.screensaverVariant')}
+              {t('screensaver.variant.label')}
             </FieldLabel>
             <FieldContent>
               <Select
@@ -62,9 +62,7 @@ export function VisualObstructions() {
                 <SelectContent>
                   {variantOptions.map((value) => (
                     <SelectItem key={value} value={value}>
-                      {t(
-                        `user.optionalPainPoints.screensaverVariantOptions.${value}`,
-                      )}
+                      {t(`screensaver.variant.options.${value}`)}
                     </SelectItem>
                   ))}
                 </SelectContent>
@@ -74,7 +72,7 @@ export function VisualObstructions() {
 
           <Field orientation="vertical" className="gap-2">
             <FieldLabel className="text-sm font-normal">
-              {t('user.optionalPainPoints.screensaverTimeout')}
+              {t('screensaver.timer.label')}
             </FieldLabel>
             <FieldContent>
               <Select
@@ -92,9 +90,7 @@ export function VisualObstructions() {
                 <SelectContent>
                   {timeoutOptions.map((value) => (
                     <SelectItem key={value} value={value}>
-                      {t(
-                        `user.optionalPainPoints.screensaverTimeoutOptions.${value}`,
-                      )}
+                      {t(`screensaver.timer.options.${value}`)}
                     </SelectItem>
                   ))}
                 </SelectContent>
@@ -103,10 +99,7 @@ export function VisualObstructions() {
           </Field>
         </div>
       )}
-      <SettingsField
-        label={t('user.optionalPainPoints.deadPixel')}
-        info={t('user.optionalPainPointsHints.deadPixel')}
-      >
+      <SettingsField label={t('deadPixel.label')} info={t('deadPixel.hint')}>
         <FormCheckbox
           name="dead_pixel"
           checked={painPreferences.flags.deadPixel}
@@ -116,14 +109,38 @@ export function VisualObstructions() {
         />
       </SettingsField>
       <SettingsField
-        label={t('user.optionalPainPoints.stickyVideo')}
-        info={t('user.optionalPainPointsHints.stickyVideo')}
+        label={t('stickyVideoPlayer.label')}
+        info={t('stickyVideoPlayer.hint')}
       >
         <FormCheckbox
           name="sticky_video"
           checked={painPreferences.flags.stickyVideo}
           onCheckedChange={(value) =>
             painPreferences.setFlagIndeterminate('stickyVideo', value)
+          }
+        />
+      </SettingsField>
+      <SettingsField
+        label={t('backgroundAdflaps.label')}
+        info={t('backgroundAdflaps.hint')}
+      >
+        <FormCheckbox
+          name="promotions_flaps"
+          checked={painPreferences.flags['promotions.flaps']}
+          onCheckedChange={(value) =>
+            painPreferences.setFlagIndeterminate('promotions.flaps', value)
+          }
+        />
+      </SettingsField>
+      <SettingsField
+        label={t('flaimAPHoneAd.label')}
+        info={t('flaimAPHoneAd.hint')}
+      >
+        <FormCheckbox
+          name="one_by_one"
+          checked={painPreferences.flags['promotions.oneByOne']}
+          onCheckedChange={(value) =>
+            painPreferences.setFlagIndeterminate('promotions.oneByOne', value)
           }
         />
       </SettingsField>
