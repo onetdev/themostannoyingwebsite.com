@@ -1,3 +1,4 @@
+import 'server-only';
 import type { ArticleDatum } from '@maw/content-api';
 import { injectable } from 'inversify';
 import enCommentVariants from '@/features/comments/i18n/en/variants';

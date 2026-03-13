@@ -9,7 +9,7 @@ export default getRequestConfig(async ({ requestLocale }) => {
   const requested = await requestLocale;
   const locale = hasLocale(routing.locales, requested)
     ? requested
-    : (routing.defaultLocale as string);
+    : routing.defaultLocale;
 
   Sentry.setTag('locale', locale);
 

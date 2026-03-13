@@ -1,3 +1,5 @@
+import 'server-only';
+
 import { mulberry32, stringToSeed } from '@maw/utils/random';
 import { type Container, injectable } from 'inversify';
 import enVariants from '@/i18n/messages/en/variants';

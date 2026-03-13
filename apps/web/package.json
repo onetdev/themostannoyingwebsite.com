@@ -65,6 +65,7 @@
     "remark-gfm": "^4.0.1",
     "rtl-detect": "^1.1.2",
     "sanitize-html": "catalog:",
+    "server-only": "^0.0.1",
     "zod": "catalog:",
     "zustand": "^5.0.11"
   },
