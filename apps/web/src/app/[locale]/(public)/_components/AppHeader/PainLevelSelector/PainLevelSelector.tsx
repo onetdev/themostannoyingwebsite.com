@@ -57,7 +57,12 @@ export function PainLevelSelector({ className }: PainLevelSelectorProps) {
           <TooltipProvider>
             <Tooltip>
               <TooltipTrigger asChild>
-                <button type="button" className="md:hidden">
+                <button
+                  type="button"
+                  className="md:hidden"
+                  aria-label={t('levelSettings.rating')}
+                  title={t('levelSettings.rating')}
+                >
                   <Icon icon="infoCircle" className="size-3.5" />
                 </button>
               </TooltipTrigger>
@@ -80,6 +85,7 @@ export function PainLevelSelector({ className }: PainLevelSelectorProps) {
           max={publicLevel.max}
           value={publicLevel.current}
           onChange={handleChange}
+          aria-label={t('levelSettings.rating')}
           className="accent-primary absolute top-1/2 inset-s-0 z-20 w-full -translate-y-1/2 cursor-pointer appearance-none bg-transparent"
         />
       </div>

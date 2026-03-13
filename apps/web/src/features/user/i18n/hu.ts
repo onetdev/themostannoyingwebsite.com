@@ -136,6 +136,7 @@ export default {
   painPreferences: {
     levelSettings: {
       label: 'Fájdalomküszöb',
+      rating: 'Fájdalom értékelése',
       railTitle: 'Fájdalomküszöb csúszka sínje',
       clamps: {
         from_0: 'Ártatlan',

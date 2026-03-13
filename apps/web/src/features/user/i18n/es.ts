@@ -136,6 +136,7 @@ export default {
   painPreferences: {
     levelSettings: {
       label: 'Nivel de dolor',
+      rating: 'Evaluación del dolor',
       railTitle: 'Riel deslizante de nivel de dolor',
       clamps: {
         from_0: 'Inocente',

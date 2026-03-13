@@ -132,6 +132,7 @@ export default {
   painPreferences: {
     levelSettings: {
       label: 'Acı seviyesi',
+      rating: 'Ağrı derecesi',
       railTitle: 'Acı seviyesi kaydırıcı rayı',
       clamps: {
         from_0: 'Masum',

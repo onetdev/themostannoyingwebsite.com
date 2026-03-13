@@ -124,6 +124,7 @@ export default {
   painPreferences: {
     levelSettings: {
       label: '痛苦指数',
+      rating: '疼痛评分',
       railTitle: '痛苦指数滑块轨道',
       clamps: {
         from_0: '纯真无邪',

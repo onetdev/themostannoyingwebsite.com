@@ -130,6 +130,7 @@ export default {
   painPreferences: {
     levelSettings: {
       label: 'Pain level',
+      rating: 'Pain rating',
       railTitle: 'Pain level slider rail',
       clamps: {
         from_0: 'Innocent',

@@ -135,6 +135,7 @@ export default {
   painPreferences: {
     levelSettings: {
       label: 'Niveau de douleur',
+      rating: 'Évaluation de la douleur',
       railTitle: 'Curseur de niveau de douleur',
       clamps: {
         from_0: 'Innocent',
