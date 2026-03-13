@@ -1,5 +1,7 @@
 export default {
   chatBubble: {
+    trigger: 'Sohbeti aç',
+    triggerClose: 'Sohbeti kapat',
     messageInitial:
       'Merhaba! Ben bir sohbet balonuyum. Size yardım etmek için buradayım. 🤓',
     messageVariants: {
