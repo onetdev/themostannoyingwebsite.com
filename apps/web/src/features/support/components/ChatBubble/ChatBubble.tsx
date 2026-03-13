@@ -2,7 +2,7 @@
 
 import { AnimatePresence, motion } from 'framer-motion';
 import { useCallback, useRef } from 'react';
-import { useInteractOutside } from '@/hooks';
+import { useFaviconBadge, useInteractOutside } from '@/hooks';
 import { useChatBubbleHistory } from '../../hooks';
 import { ChatBubbleTrigger } from './ChatBubbleTrigger';
 import { HistoryOverlay } from './HistoryOverlay';
@@ -16,6 +16,8 @@ import { HistoryOverlay } from './HistoryOverlay';
 export function ChatBubble() {
   const state = useChatBubbleHistory();
   const $ref = useRef<HTMLDivElement>(null);
+
+  useFaviconBadge(state.badgeCounter > 0);
 
   const closeHistory = useCallback(() => state.setForeground(false), [state]);
   const toggleHistory = () => state.setForeground((prev) => !prev);

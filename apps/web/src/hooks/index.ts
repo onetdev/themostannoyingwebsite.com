@@ -4,6 +4,7 @@ export * from '../core/observability/react/useLogger';
 export * from './useAppService';
 export * from './useAudio';
 export * from './useDocumentVisibilityListener';
+export * from './useFaviconBadge';
 export * from './useInteractOutside';
 export * from './useLangDir';
 export * from './useLanguageSwitcher';

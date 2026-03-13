@@ -21,7 +21,9 @@ export function ChatBubbleTrigger({
   const controls = useAnimation();
 
   useEffect(() => {
-    if (counter <= 0) { return }
+    if (counter <= 0) {
+      return;
+    }
 
     controls.start({
       x: [0, -10, 10, -10, 10, -10, 10, 0],
