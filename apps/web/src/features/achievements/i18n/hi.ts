@@ -77,5 +77,9 @@ export default {
       name: 'बाउंसिंग लोगो कट्टरपंथी',
       description: 'लोगो को 420 बार बाउंस होते हुए देखें।',
     },
+    loveLettersFromMedic: {
+      name: 'Love letters from a medic',
+      description: 'Receive 5 messages from our helpful support agents.',
+    },
   },
 };

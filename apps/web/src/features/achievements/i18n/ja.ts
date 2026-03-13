@@ -79,5 +79,9 @@ export default {
       name: 'ロゴの跳ね返り狂い',
       description: 'ロゴが跳ね返るのを420回見届ける。',
     },
+    loveLettersFromMedic: {
+      name: 'Love letters from a medic',
+      description: 'Receive 5 messages from our helpful support agents.',
+    },
   },
 };

@@ -82,5 +82,9 @@ export default {
       name: 'Фанат прыгающего логотипа',
       description: 'Посмотрите, как логотип отскочит 420 раз.',
     },
+    loveLettersFromMedic: {
+      name: 'Love letters from a medic',
+      description: 'Receive 5 messages from our helpful support agents.',
+    },
   },
 };

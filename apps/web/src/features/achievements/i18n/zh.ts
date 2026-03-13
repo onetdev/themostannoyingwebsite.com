@@ -77,5 +77,9 @@ export default {
       name: '反弹 Logo 狂热者',
       description: '见证 Logo 反弹 420 次。',
     },
+    loveLettersFromMedic: {
+      name: 'Love letters from a medic',
+      description: 'Receive 5 messages from our helpful support agents.',
+    },
   },
 };

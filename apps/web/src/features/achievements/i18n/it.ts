@@ -82,5 +82,9 @@ export default {
       name: 'Fanatico del logo rimbalzante',
       description: 'Assisti al rimbalzo del logo per 420 volte.',
     },
+    loveLettersFromMedic: {
+      name: 'Love letters from a medic',
+      description: 'Receive 5 messages from our helpful support agents.',
+    },
   },
 };

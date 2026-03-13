@@ -79,5 +79,9 @@ export default {
       name: '바운싱 로고 광팬',
       description: '로고가 420번 튕기는 것을 목격했습니다.',
     },
+    loveLettersFromMedic: {
+      name: 'Love letters from a medic',
+      description: 'Receive 5 messages from our helpful support agents.',
+    },
   },
 };

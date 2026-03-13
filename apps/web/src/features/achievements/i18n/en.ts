@@ -81,5 +81,9 @@ export default {
       name: 'Bouncing Logo Fanatic',
       description: 'Witness the logo bounce 420 times.',
     },
+    loveLettersFromMedic: {
+      name: 'Love letters from a medic',
+      description: 'Receive 5 messages from our helpful support agents.',
+    },
   },
 };

@@ -77,5 +77,9 @@ export default {
       name: 'متعصب الشعار المرتد',
       description: 'شاهد الشعار وهو يرتد 420 مرة.',
     },
+    loveLettersFromMedic: {
+      name: 'Love letters from a medic',
+      description: 'Receive 5 messages from our helpful support agents.',
+    },
   },
 };
