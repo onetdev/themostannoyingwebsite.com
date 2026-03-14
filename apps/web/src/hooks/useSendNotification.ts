@@ -1,12 +1,12 @@
 'use client';
 
-import { useLogger } from '@maw/logger';
 import { isBrowser } from '@maw/ui-lib/utils';
 import {
   getNotificationPermissionState,
   requestNotificationPermission,
 } from '@maw/utils/browser';
 import { useCallback } from 'react';
+import { useLogger } from '@/core/observability/react/useLogger';
 
 export type UseSendNotificationProps = {
   autoRequest?: boolean;
@@ -15,9 +15,7 @@ export type UseSendNotificationProps = {
 export const useSendNotification = ({
   autoRequest = false,
 }: UseSendNotificationProps = {}) => {
-  const logger = useLogger().getSubLogger({
-    name: 'useSendNotification',
-  });
+  const logger = useLogger('useSendNotification');
 
   const send = useCallback(
     async (data: { title: string; body?: string; data?: unknown }) => {

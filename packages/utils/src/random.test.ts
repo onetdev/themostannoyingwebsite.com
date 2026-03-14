@@ -120,7 +120,7 @@ describe('Math random', () => {
   });
 
   test('should return an integer if requested', () => {
-    const result = randomNumber(1, 10, true);
+    const result = randomInt(1, 10);
     expect(Number.isInteger(result)).toBe(true);
   });
 });
@@ -159,7 +159,17 @@ describe('randomArrayEntry', () => {
     expect(arr).toContain(result);
   });
 
+  test('should never return undefined for a non-empty array (edge case)', () => {
+    const arr = ['a', 'b', 'c'];
+    // Math.random() = 0.99... should not return undefined
+    const mockRandom = jest.spyOn(Math, 'random').mockReturnValue(0.999999);
+    const result = randomArrayEntry(arr);
+    expect(result).not.toBeUndefined();
+    expect(arr).toContain(result);
+    mockRandom.mockRestore();
+  });
+
   test('should return undefined for empty array', () => {
-    expect(randomArrayEntry([])).toBeUndefined();
+    expect(randomArrayEntry([])).toBe(null);
   });
 });

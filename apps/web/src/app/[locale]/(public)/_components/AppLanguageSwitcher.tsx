@@ -8,7 +8,7 @@ import {
   SelectValue,
 } from '@maw/ui-lib';
 import { clsx } from '@maw/ui-lib/utils';
-import { useLocale } from 'next-intl';
+import { useLocale, useTranslations } from 'next-intl';
 import { useLanguageSwitcher } from '@/hooks';
 
 interface AppLanguageSwitcherProps {
@@ -23,10 +23,15 @@ export function AppLanguageSwitcher({
   const { onLanguageChange, languages, currentLanguage } =
     useLanguageSwitcher();
   const locale = useLocale();
+  const t = useTranslations('language');
 
   return (
     <Select value={locale} onValueChange={onLanguageChange}>
-      <SelectTrigger className={clsx(className)}>
+      <SelectTrigger
+        className={clsx(className)}
+        aria-label={t('select')}
+        title={t('select')}
+      >
         <SelectValue>
           {currentLanguage?.flag}{' '}
           {currentLanguage !== undefined &&

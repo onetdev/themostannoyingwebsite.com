@@ -1,4 +1,4 @@
-import { z } from 'zod';
+import * as z from 'zod';
 
 export const AuthErrorList = ['IMPOSSIBLE_PATH', 'UNKNOWN_ERROR'] as const;
 

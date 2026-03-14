@@ -1,18 +1,17 @@
 'use client';
 
-import { useLogger } from '@maw/logger';
 import { Icon, PageHeadline } from '@maw/ui-lib';
 import Image from 'next/image';
 import { useLocale, useTranslations } from 'next-intl';
 import { useEffect, useRef, useState } from 'react';
-import { useAppConfigContext } from '@/core/config/react-app-config';
-import { useLocaleResource } from '@/hooks';
-import { LANGUAGES_IN_OWN_LANGUAGE } from '@/i18n/selector';
+import { useAppConfigContext } from '@/core/config/react/AppConfig';
+import { useLocaleResource, useLogger } from '@/hooks';
+import { LANGUAGE_NATIVE_NAME_MAP } from '@/i18n/language-native-name-map';
 
 export function HotThingsPage() {
   const config = useAppConfigContext();
   const { resolve } = useLocaleResource();
-  const logger = useLogger().getSubLogger({ name: 'hot-things-page' });
+  const logger = useLogger('hot-things-page');
   const [isCapable, setIsCapable] = useState(false);
   const t = useTranslations();
   const locale = useLocale() as AppSupportedLocale;
@@ -94,7 +93,7 @@ export function HotThingsPage() {
             kind="captions"
             srcLang={locale}
             src={resolve(config.content.assets.hotThings.vtt)}
-            label={LANGUAGES_IN_OWN_LANGUAGE[locale]}
+            label={LANGUAGE_NATIVE_NAME_MAP[locale]}
           />
         </video>
         {!isDisallowed && isCapable && (

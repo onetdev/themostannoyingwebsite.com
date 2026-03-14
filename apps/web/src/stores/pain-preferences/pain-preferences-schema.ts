@@ -1,4 +1,4 @@
-import { z } from 'zod';
+import * as z from 'zod';
 import { ScreensaverVariantSchema } from '@/features/disruptions/schemas';
 
 export const PRIVATE_PAIN_POINT_LIST = [

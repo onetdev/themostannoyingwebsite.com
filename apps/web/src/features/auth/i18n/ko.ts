@@ -1,3 +1,5 @@
+import type { AuthI18nShape } from '../types';
+
 export default {
   common: {
     lookingForSignup: '계정이 필요하신가요? 여기서 회원가입하세요',
@@ -32,4 +34,4 @@ export default {
       redirectingSafety: '당신을 안전한 곳으로 돌려보내는 중입니다...',
     },
   },
-};
+} satisfies AuthI18nShape;

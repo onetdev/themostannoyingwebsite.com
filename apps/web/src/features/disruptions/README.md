@@ -15,7 +15,7 @@ A core collection of intrusive glitches and browser-behavior-altering experience
 - **Prevent Leaving**: Intercepts tab-close attempts and displays a persistent "Are you sure?" prompt.
 
 ### UI Glitches
-- **Dead Pixel**: A single, interactive pixel on the screen that looks like hardware failure. Clicking it triggers an achievement.
+- **Dead Pixel**: A single, interactive pixel on the screen that looks like hardware failure. Clicking it triggers an achievement. It has a rare chance to appear as a **Rainbow Dead Pixel**, which unlocks a special secret achievement.
 - **Global Sticky Video**: A non-dismissible, autoplaying video player that follows the user throughout the site.
 - **Screensaver**: A full-screen overlay that triggers after inactivity, featuring two variants:
   - **Maze**: A procedurally generated 90s-style maze.

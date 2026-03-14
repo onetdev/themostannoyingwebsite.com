@@ -2,6 +2,8 @@ import type { SupportI18nShape } from '../types';
 
 export default {
   chatBubble: {
+    trigger: 'Chat megnyitása',
+    triggerClose: 'Chat bezárása',
     messageInitial:
       'Szia! Én egy chat buborék vagyok. Azért vagyok itt, hogy segítsek neked. 🤓',
     messageVariants: {

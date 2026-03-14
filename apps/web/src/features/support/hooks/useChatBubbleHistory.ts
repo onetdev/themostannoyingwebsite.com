@@ -3,7 +3,8 @@
 import { useMessages, useTranslations } from 'next-intl';
 import { useCallback, useEffect, useMemo, useState } from 'react';
 import { useMount } from 'react-use';
-import { useAppConfigContext } from '@/core/config/react-app-config';
+import { useAppConfigContext } from '@/core/config/react/AppConfig';
+import { emit } from '@/core/events/event-bus';
 import { useAudio, useSendNotification } from '@/hooks';
 import { useRuntimeStore } from '@/stores';
 import type { ChatMessage, ChatMessageType } from '../schemas';
@@ -51,6 +52,7 @@ export function useChatBubbleHistory() {
       botMessageVariants[Math.floor(Math.random() * botMessageVariants.length)];
 
     add(randomMessage, 'bot');
+    emit('support:bot-message-received');
 
     if (!isForeground) {
       setBadgeCounter((prev) => prev + 1);
@@ -82,6 +84,7 @@ export function useChatBubbleHistory() {
         return prev;
       }
 
+      emit('support:bot-message-received');
       return [
         {
           text: t('messageInitial'),

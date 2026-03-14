@@ -51,6 +51,10 @@ export default {
       name: 'Ölü Piksel Avcısı',
       description: 'Ölü bir piksele tıklamaya çalışın.',
     },
+    rainbowHunter: {
+      name: 'Gökkuşağı Avcısı',
+      description: 'Gökkuşağı renginde bir ölü piksele tıkladın!',
+    },
     wheelOfFortuneSpin: {
       name: 'İyimser Kumarbaz',
       description:
@@ -76,6 +80,10 @@ export default {
     bouncingLogoFanatic: {
       name: 'Zıpzıp Logo Meraklısı',
       description: 'Logonun 420 kez sekmesine tanık olun.',
+    },
+    loveLettersFromMedic: {
+      name: 'Bir sıhhiyeciden aşk mektupları',
+      description: 'Yardımsever destek temsilcilerimizden 5 mesaj alın.',
     },
   },
 };

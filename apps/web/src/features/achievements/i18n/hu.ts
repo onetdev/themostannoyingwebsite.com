@@ -51,6 +51,10 @@ export default {
       name: 'Halott pixel vadász',
       description: 'Próbálj meg rákattintani egy halott pixelre.',
     },
+    rainbowHunter: {
+      name: 'Szivárványvadász',
+      description: 'Egy szivárványos döglött pixelre kattintottál!',
+    },
     wheelOfFortuneSpin: {
       name: 'Optimista szerencsejátékos',
       description:
@@ -77,6 +81,11 @@ export default {
     bouncingLogoFanatic: {
       name: 'Pattogó logó fanatikus',
       description: 'Légy tanúja a logó 420 pattanásának.',
+    },
+    loveLettersFromMedic: {
+      name: 'Szerelmes levelek egy mentőstől',
+      description:
+        'Kapj 5 üzenetet segítőkész ügyfélszolgálati munkatársainktól.',
     },
   },
 };

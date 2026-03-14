@@ -51,6 +51,10 @@ export default {
       name: 'Łowca martwych pikseli',
       description: 'Spróbuj kliknąć w martwy piksel.',
     },
+    rainbowHunter: {
+      name: 'Łowca tęczy',
+      description: 'Kliknąłeś w tęczowy martwy piksel!',
+    },
     wheelOfFortuneSpin: {
       name: 'Optymistyczny hazardzista',
       description:
@@ -77,6 +81,11 @@ export default {
     bouncingLogoFanatic: {
       name: 'Fanatyk odbijającego się logo',
       description: 'Bądź świadkiem, jak logo odbija się 420 razy.',
+    },
+    loveLettersFromMedic: {
+      name: 'Listy miłosne od medyka',
+      description:
+        'Odbierz 5 wiadomości od naszych pomocnych agentów wsparcia.',
     },
   },
 };

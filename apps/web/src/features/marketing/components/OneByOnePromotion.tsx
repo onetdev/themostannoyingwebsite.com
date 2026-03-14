@@ -1,11 +1,10 @@
 'use client';
 
-import { useLogger } from '@maw/logger';
 import Image from 'next/image';
 import { useTranslations } from 'next-intl';
-import { useAppConfigContext } from '@/core/config/react-app-config';
-import { useLocaleResource } from '@/hooks';
-import { Link } from '@/i18n/navigation';
+import { useAppConfigContext } from '@/core/config/react/AppConfig';
+import { Link } from '@/core/i18n/navigation';
+import { useLocaleResource, useLogger } from '@/hooks';
 import { usePainPreferencesStore, useRuntimeStore } from '@/stores';
 
 export type OneByOnePromotionProps = {
@@ -13,9 +12,7 @@ export type OneByOnePromotionProps = {
 };
 
 export function OneByOnePromotion({ size = 1024 }: OneByOnePromotionProps) {
-  const logger = useLogger().getSubLogger({
-    name: 'marketing.oneByOnePromotion',
-  });
+  const logger = useLogger('marketing.oneByOnePromotion');
   const config = useAppConfigContext();
   const { resolve, locale } = useLocaleResource();
   const t = useTranslations();

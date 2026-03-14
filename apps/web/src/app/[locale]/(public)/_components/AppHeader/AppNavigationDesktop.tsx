@@ -17,8 +17,8 @@ import {
   PERSONAL_NAVIGATION_LINKS,
   SITE_NAVIGATION_LINKS,
 } from '@/app/navigation';
+import { Link } from '@/core/i18n/navigation';
 import { useLangDir } from '@/hooks';
-import { Link } from '@/i18n/navigation';
 import { useRuntimeStore } from '@/stores';
 
 export type AppNavigationDesktopProps = {

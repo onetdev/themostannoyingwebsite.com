@@ -1,4 +1,3 @@
-import analyzer from '@next/bundle-analyzer';
 import createMDX from '@next/mdx';
 import { withSentryConfig } from '@sentry/nextjs';
 import createNextIntlPlugin from 'next-intl/plugin';
@@ -14,38 +13,44 @@ const nextConfig = {
   },
   pageExtensions: ['js', 'jsx', 'md', 'mdx', 'ts', 'tsx'],
   async headers() {
-    const oneHourCache = {
+    const oneDayCache = {
       key: 'Cache-Control',
-      value: 'public, max-age=3600, immutable',
+      value: 'public, max-age=86400, stale-while-revalidate=600',
+    };
+    const oneYearCache = {
+      key: 'Cache-Control',
+      value: 'public, max-age=31536000, immutable',
     };
 
     return [
       {
+        source: '/ads/:all*',
+        headers: [oneYearCache],
+      },
+      {
         source: '/assets/:all*',
-        headers: [oneHourCache],
+        headers: [oneYearCache],
       },
       {
         source: '/manifest/:all*',
-        headers: [oneHourCache],
+        headers: [oneYearCache],
       },
       {
-        source: '/locales/:all*',
-        headers: [oneHourCache],
+        source: '/deployment-meta.json',
+        headers: [oneDayCache],
       },
       {
         source: '/favicon.ico',
-        headers: [oneHourCache],
+        headers: [oneYearCache],
       },
     ];
   },
   poweredByHeader: false,
 };
 
-const withBundleAnalyzer = analyzer({
-  enabled: process.env.ANALYZE === 'true',
+const withNextIntl = createNextIntlPlugin({
+  requestConfig: './src/core/i18n/request.ts',
 });
-
-const withNextIntl = createNextIntlPlugin({});
 
 /** @type {import('@next/mdx').NextMDXOptions} **/
 const mdxConfig = {
@@ -58,6 +63,6 @@ const mdxConfig = {
 const withMDX = createMDX(mdxConfig);
 
 export default withSentryConfig(
-  withNextIntl(withBundleAnalyzer(withMDX(nextConfig))),
+  withNextIntl(withMDX(nextConfig)),
   sentryConfig,
 );

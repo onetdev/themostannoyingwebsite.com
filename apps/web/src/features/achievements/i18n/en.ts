@@ -51,6 +51,10 @@ export default {
       name: 'Dead Pixel Hunter',
       description: 'Try to click on a dead pixel.',
     },
+    rainbowHunter: {
+      name: 'Rainbow Hunter',
+      description: 'You clicked on a rainbow dead pixel!',
+    },
     wheelOfFortuneSpin: {
       name: 'Optimistic Gambler',
       description:
@@ -76,6 +80,10 @@ export default {
     bouncingLogoFanatic: {
       name: 'Bouncing Logo Fanatic',
       description: 'Witness the logo bounce 420 times.',
+    },
+    loveLettersFromMedic: {
+      name: 'Love letters from a medic',
+      description: 'Receive 5 messages from our helpful support agents.',
     },
   },
 };

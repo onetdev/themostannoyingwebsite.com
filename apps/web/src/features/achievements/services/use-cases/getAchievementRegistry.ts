@@ -46,6 +46,13 @@ const ACHIEVEMENT_REGISTRY: AchievementDefinition[] = [
     type: 'boolean',
   },
   {
+    id: 'rainbow-hunter',
+    nameKey: 'achievements.registry.rainbowHunter.name',
+    descriptionKey: 'achievements.registry.rainbowHunter.description',
+    type: 'boolean',
+    secret: true,
+  },
+  {
     id: 'wheel-of-fortune-spin',
     nameKey: 'achievements.registry.wheelOfFortuneSpin.name',
     descriptionKey: 'achievements.registry.wheelOfFortuneSpin.description',
@@ -84,6 +91,13 @@ const ACHIEVEMENT_REGISTRY: AchievementDefinition[] = [
     descriptionKey: 'achievements.registry.bouncingLogoFanatic.description',
     type: 'progression',
     targetProgress: 420,
+  },
+  {
+    id: 'love-letter-from-medic',
+    nameKey: 'achievements.registry.loveLettersFromMedic.name',
+    descriptionKey: 'achievements.registry.loveLettersFromMedic.description',
+    type: 'progression',
+    targetProgress: 5,
   },
 ];
 

@@ -1,4 +1,4 @@
-import { z } from 'zod';
+import * as z from 'zod';
 
 export function getCommentFormDataSchema(t: ZodTranslator) {
   return z.object({

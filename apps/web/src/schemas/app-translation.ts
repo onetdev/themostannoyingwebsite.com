@@ -1,4 +1,4 @@
-import z from 'zod';
+import * as z from 'zod';
 
 // IMPORTANT! This is just a static enforcement of dot notation type
 // During runtime it will be handled as a regular string.

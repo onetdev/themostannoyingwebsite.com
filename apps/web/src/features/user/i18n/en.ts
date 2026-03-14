@@ -20,88 +20,112 @@ export default {
   optionalPainPoints: {
     title: 'Optional pain points',
     categories: {
-      browser: 'Browser & Tab',
-      visual: 'Visual Obstructions',
-      ads: 'Advertising & Monetization',
-      interactivity: 'Popups & Interactivity',
+      visualChaos: 'Visual Chaos',
+      uiSabotage: 'UI Sabotage',
+      interruptions: 'Interruptions',
+      browserHijacking: 'Browser Hijacking',
     },
-    screensaverTimeout: 'Timeout',
-    screensaverVariant: 'Variant',
-    screensaverVariantOptions: {
-      bouncingLogo: 'Bouncing Logo',
-      maze: '3D Maze 95',
+    achievementNotifications: {
+      label: 'Achievement notifications',
+      hint: 'Displays a notification whenever you unlock a new achievement. Progress is always tracked in the background.',
     },
-    screensaverTimeoutOptions: {
-      '15': '15 seconds',
-      '30': '30 seconds',
-      '60': '1 minute',
-      '300': '5 minutes',
-      '900': '15 minutes',
+    backgroundAdflaps: {
+      label: 'Background ad flaps',
+      hint: 'Shows ad flaps on the sides of the page that can be clicked and leads to marketing pages.',
     },
-    gifts: {
-      detectAdblocker: 'Detect adblocker',
-      flaps: 'Background ad flaps',
-      oneByOne: 'One by one ad blocks',
+    clipboardBrandingMark: {
+      label: 'Clipboard branding mark',
+      hint: 'Adds a "Read more at..." link when you copy text from the website.',
     },
-    achievementNotifications: 'Achievement notifications',
-    clipboardMarker: 'Clipboard marker',
-    contentPaywall: 'Content paywall',
-    deadPixel: 'Dead pixel',
-    disableContextMenu: 'Disable context (right click) menu',
-    exitPrompt: 'Exit prompt',
-    historySpam: 'History spam',
-    mockChat: 'Bubble chat',
-    newsletterModal: 'Newsletter popup modal',
-    notifications: 'Notifications',
-    screensaver: 'Screensaver',
-    pageTitleInactiveArrayPaged: 'Alternative title when tab is inactive',
-    searchDelay: 'Fake search delay',
-    wheelOfFortune: 'Wheel of fortune',
-    stickyVideo: 'Sticky video',
-  },
-  optionalPainPointsHints: {
-    screensaver:
-      'Triggers a user selected screensaver after the specified period of total inactivity.',
-    gifts: {
-      detectAdblocker: 'Shows a large red banner if an adblocker is detected.',
-      flaps:
-        'Shows ad flaps on the sides of the page that can be clicked and leads to different pages.',
-      oneByOne: 'Mainly covered an animated advertisement on the home page.',
+    contentPaywall: {
+      label: 'Content paywall',
+      hint: 'Shows a fake paywall overlay on some content, you can still reveal the content for free.',
     },
-    achievementNotifications:
-      'Displays a notification whenever you unlock a new achievement. Progress is always tracked in the background.',
-    clipboardMarker:
-      'Adds a "Read more at..." link when you copy text from the website.',
-    contentPaywall:
-      'Shows a fake paywall overlay on some content, you can still reveal the content.',
-    deadPixel: 'Places a few fake "dead" pixels on your screen to annoy you.',
-    disableContextMenu:
-      'Prevents you from using the right-click menu and displays an alert instead.',
-    exitPrompt:
-      'Shows a "Are you sure you want to leave?" prompt when trying to close the tab or navigate away.',
-    historySpam:
-      "Fills your browser history with fake entries so you can't easily go back. This can make it inconvinient to get back to search engine results.",
-    mockChat:
-      'Shows an annoying "human" chat bubble that only messages you when you close it and it constantly displays "agent is writing" in the meantime.',
-    newsletterModal:
-      'Periodically shows a newsletter subscription modal, especially when page comes back from inactivity (switching tabs).',
-    notifications:
-      'Asks for notification permissions and shows fake notifications.',
-    pageTitleInactiveArrayPaged:
-      'Changes the tab title to something attention-grabbing when the tab is inactive.',
-    searchDelay: 'Adds a fake, long loading delay to all searches.',
-    wheelOfFortune:
-      'Shows a fake "Wheel of Fortune" modal that gives you absolute useless prizes.',
-    stickyVideo: 'Shows a sticky video player that follows you as you scroll.',
+    deadPixel: {
+      label: 'Dead pixels',
+      hint: 'Places a few fake "dead" pixels on your screen to annoy you.',
+    },
+    detectAdblocker: {
+      label: 'Detect adblocker',
+      hint: 'Shows a large red banner if an adblocker is detected.',
+    },
+    disableContextMenu: {
+      label: 'Disable context (right click) menu',
+      hint: 'Prevents you from using the right-click menu and displays an alert instead.',
+    },
+    exitPrompt: {
+      label: 'Exit prompt',
+      hint: 'Shows a "Are you sure you want to leave?" prompt when trying to close the tab or navigate away.',
+    },
+    flaimAPHoneAd: {
+      label: 'Flaim a phone survey campaign',
+      hint: 'Displays a funky animated advertisement on the home page leading to Flaim a Phone.',
+    },
+    historySpam: {
+      label: 'Browser History spam',
+      hint: "Fills your browser history with fake entries so you can't easily go back. This can make it inconvenient to get back to search engine results.",
+    },
+    mockSupportChat: {
+      label: 'Mock support chat',
+      hint: 'Shows an annoying "human" support chat bubble that only messages you when you close it.',
+    },
+    newsletterModal: {
+      label: 'Newsletter popup modal',
+      hint: 'Periodically shows a newsletter subscription modal, especially when page comes back from inactivity (switching tabs).',
+    },
+    notifications: {
+      label: 'Notifications',
+      hint: 'Asks for notification permissions and shows fake notifications.',
+    },
+    pageTitleInactiveArrayPaged: {
+      label: 'Alternating title when tab is inactive',
+      hint: 'Changes the tab title to something attention-grabbing when the tab is inactive.',
+    },
+    screensaver: {
+      label: 'Screensaver',
+      hint: 'Triggers a user selected screensaver after the specified period of total inactivity.',
+      variant: {
+        label: 'Variant',
+        options: {
+          bouncingLogo: 'Bouncing Logo',
+          maze: '3D Maze 95',
+        },
+      },
+      timer: {
+        label: 'Show screensaver after',
+        options: {
+          '15': '15 seconds',
+          '30': '30 seconds',
+          '60': '1 minute',
+          '300': '5 minutes',
+          '900': '15 minutes',
+        },
+      },
+    },
+    searchDelay: {
+      label: 'Artificial search delay',
+      hint: 'Adds a fake, long loading delay to all searches.',
+    },
+    stickyVideoPlayer: {
+      label: 'Sticky video player',
+      hint: 'Shows a sticky video player that follows you as you scroll.',
+    },
+    wheelOfFortune: {
+      label: 'Wheel of fortune',
+      hint: 'Shows a fake "Wheel of Fortune" modal that gives you absolute useless prizes.',
+    },
   },
   mandatoryExperienceFlags: {
     title: 'Mandatory experience',
-    impossibleLogin: 'Impossible login',
-    impossibleSignup: 'Impossible signup',
-    impossiblePasswordReminder: 'Impossible password reminder',
-    unreasonableContent: 'Unreasonable content',
-    flaimYourPhone: 'Flaim your phone',
+    dilf: "Donut I'd like to feast on",
     fakeAiSubscription: 'Fake AI subscription plans',
+    fakeComments: 'Fake comments',
+    flaimYourPhone: 'Flaim your phone',
+    impossibleLogin: 'Impossible login',
+    impossiblePasswordReminder: 'Impossible password reminder',
+    impossibleSignup: 'Impossible signup',
+    madeUpNewsletter: 'Made up premium newsletter promo',
+    unreasonableContent: 'Unreasonable content',
   },
   runtimeInfo: {
     title: 'About this session',
@@ -130,6 +154,7 @@ export default {
   painPreferences: {
     levelSettings: {
       label: 'Pain level',
+      rating: 'Pain rating',
       railTitle: 'Pain level slider rail',
       clamps: {
         from_0: 'Innocent',

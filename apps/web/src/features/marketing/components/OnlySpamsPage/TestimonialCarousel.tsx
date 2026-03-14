@@ -1,0 +1,101 @@
+import {
+  Badge,
+  Card,
+  CardContent,
+  CardHeader,
+  CardTitle,
+  Carousel,
+  type CarouselApi,
+  CarouselContent,
+  CarouselDotIndicator,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+} from '@maw/ui-lib';
+import { motion } from 'framer-motion';
+import { useTranslations } from 'next-intl';
+import { useEffect, useState } from 'react';
+import type { Testimonial } from '../../types';
+
+export interface TestimonialCarouselProps {
+  items: Testimonial[];
+}
+
+export function TestimonialCarousel({ items }: TestimonialCarouselProps) {
+  const t = useTranslations();
+  const [api, setApi] = useState<CarouselApi>();
+  const [current, setCurrent] = useState(0);
+  const [count, setCount] = useState(0);
+
+  useEffect(() => {
+    if (!api) return;
+
+    setCount(api.scrollSnapList().length);
+    setCurrent(api.selectedScrollSnap());
+
+    const onSelect = () => {
+      setCurrent(api.selectedScrollSnap());
+    };
+
+    api.on('select', onSelect);
+    return () => {
+      api.off('select', onSelect);
+    };
+  }, [api]);
+
+  return (
+    <div className="w-full max-w-4xl mx-auto">
+      <Carousel
+        setApi={setApi}
+        opts={{
+          align: 'center',
+          loop: true,
+        }}
+      >
+        <CarouselContent className="-ml-4" fade>
+          {items.map((testimonial, i) => (
+            <CarouselItem
+              key={`${testimonial.comment}`}
+              className="pl-4 basis-[70%] md:basis-[60%]"
+            >
+              <motion.div
+                animate={{
+                  scale: current === i ? 1 : 0.92,
+                  opacity: current === i ? 1 : 0.6,
+                }}
+                transition={{ duration: 0.3 }}
+              >
+                <Card className="h-full">
+                  <CardHeader>
+                    <CardTitle>
+                      <Badge>
+                        {t('marketing.onlySpams.testimonials.verified')}
+                      </Badge>
+                    </CardTitle>
+                  </CardHeader>
+                  <CardContent className="px-6 space-y-4">
+                    <p className="text-muted-foreground">
+                      "{testimonial.comment}"
+                    </p>
+
+                    <p className="font-semibold">— {testimonial.name}</p>
+                  </CardContent>
+                </Card>
+              </motion.div>
+            </CarouselItem>
+          ))}
+        </CarouselContent>
+
+        <CarouselPrevious />
+        <CarouselNext />
+      </Carousel>
+
+      <CarouselDotIndicator
+        api={api}
+        current={current}
+        count={count}
+        className="mt-6"
+      />
+    </div>
+  );
+}

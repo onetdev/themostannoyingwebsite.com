@@ -1,4 +1,4 @@
-import { z } from 'zod';
+import * as z from 'zod';
 
 export function getContactFormDataSchema(t: ZodTranslator) {
   return z.object({

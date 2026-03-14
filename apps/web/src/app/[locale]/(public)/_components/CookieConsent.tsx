@@ -2,7 +2,7 @@
 
 import { useTranslations } from 'next-intl';
 
-import { Link } from '@/i18n/navigation';
+import { Link } from '@/core/i18n/navigation';
 import { useUserGrantsStore } from '@/stores';
 
 export function CookieConsent() {

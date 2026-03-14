@@ -82,13 +82,22 @@ export const AchievementManager = () => {
 
   useEvent('exit-prompt:shown', () => handleSingleUnlock('escape-artist'));
 
-  useEvent('dead-pixel:clicked', () => handleSingleUnlock('dead-pixel-hunter'));
+  useEvent('dead-pixel:clicked', ({ isRainbow }) => {
+    handleSingleUnlock('dead-pixel-hunter');
+    if (isRainbow) {
+      handleSingleUnlock('rainbow-hunter');
+    }
+  });
 
   useEvent('navigation:changed', () => handleSingleUnlock('first-visit'));
 
   useEvent('wof:spin-completed', () =>
     handleSingleUnlock('wheel-of-fortune-spin'),
   );
+
+  useEvent('support:bot-message-received', () => {
+    handleProgression('love-letter-from-medic');
+  });
 
   useEvent('admin-auth:login', () => handleSingleUnlock('admin-login'));
 

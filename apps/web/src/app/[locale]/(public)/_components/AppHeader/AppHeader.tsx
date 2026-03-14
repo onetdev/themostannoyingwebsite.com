@@ -1,8 +1,9 @@
 import { Button, Icon } from '@maw/ui-lib';
+import { getTranslations } from 'next-intl/server';
 import type { ComponentProps } from 'react';
 import type { ActiveNavigationItem } from '@/app/navigation';
+import { Link } from '@/core/i18n/navigation';
 import { SearchForm } from '@/features/content/components';
-import { Link } from '@/i18n/navigation';
 import { AppLanguageSwitcher } from '../AppLanguageSwitcher';
 import { AppDarkModeToggle } from './AppDarkModeToggle';
 import { AppNavigationDesktop } from './AppNavigationDesktop';
@@ -16,6 +17,8 @@ type AppHeaderProps = {
 };
 
 export async function AppHeader({ activeItem, className }: AppHeaderProps) {
+  const t = await getTranslations();
+
   return (
     <header
       id="header"
@@ -32,7 +35,11 @@ export async function AppHeader({ activeItem, className }: AppHeaderProps) {
           className="md:hidden rounded-full p-0"
           variant="outline"
         >
-          <Link href="/search">
+          <Link
+            href="/search"
+            aria-label={t('common.action.search')}
+            title={t('common.action.search')}
+          >
             <Icon icon="search" />
           </Link>
         </Button>

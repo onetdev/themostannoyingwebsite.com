@@ -3,7 +3,7 @@
 import { Button, Icon } from '@maw/ui-lib';
 import { useLocale, useTranslations } from 'next-intl';
 import { useEffect, useRef, useState } from 'react';
-import { useAppConfigContext } from '@/core/config/react-app-config';
+import { useAppConfigContext } from '@/core/config/react/AppConfig';
 import { useUserGrantsStore } from '@/stores';
 
 export function GlobalStickyVideo() {

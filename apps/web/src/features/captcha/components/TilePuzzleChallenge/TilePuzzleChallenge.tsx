@@ -4,7 +4,7 @@ import { clsx } from '@maw/ui-lib/utils';
 import { randomInt } from '@maw/utils/random';
 import { useTranslations } from 'next-intl';
 import { useState } from 'react';
-import { useAppConfigContext } from '@/core/config/react-app-config';
+import { useAppConfigContext } from '@/core/config/react/AppConfig';
 import { useTilePuzzleChallengeData } from '../../hooks/useTilePuzzleData';
 import { TilePuzzle } from './TilePuzzle';
 

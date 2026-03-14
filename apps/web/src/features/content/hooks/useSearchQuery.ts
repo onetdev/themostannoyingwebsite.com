@@ -3,7 +3,7 @@
 import type { ArticleSearchQuery, ArticleSearchResult } from '@maw/content-api';
 import { randomNumber } from '@maw/utils/random';
 import { useQuery } from '@tanstack/react-query';
-import { useAppConfigContext } from '@/core/config/react-app-config';
+import { useAppConfigContext } from '@/core/config/react/AppConfig';
 import { useHttpClient } from '@/core/http';
 import { QueryError } from '@/core/http/react/QueryError';
 import { usePainPreferencesStore } from '@/stores';

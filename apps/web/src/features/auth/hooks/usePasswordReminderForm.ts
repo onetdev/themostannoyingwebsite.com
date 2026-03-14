@@ -1,8 +1,7 @@
 'use client';
 
-import { useLogger } from '@maw/logger';
 import { useForm } from 'react-hook-form';
-import { useZodFormValidator } from '@/hooks';
+import { useLogger, useZodFormValidator } from '@/hooks';
 import { useAuthService } from '../hooks';
 import {
   getPasswordReminderFormDataSchema,
@@ -17,7 +16,7 @@ interface PasswordReminderFormProps {
 export function usePasswordReminderForm({
   onSuccess,
 }: PasswordReminderFormProps) {
-  const logger = useLogger().getSubLogger({ name: 'usePasswordReminderForm' });
+  const logger = useLogger('use-password-reminder-form');
   const resolver = useZodFormValidator(getPasswordReminderFormDataSchema);
   const methods = useForm<PasswordReminderFormData>({
     resolver,

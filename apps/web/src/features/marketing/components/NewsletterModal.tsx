@@ -2,6 +2,7 @@
 
 import {
   Button,
+  Checkbox,
   Dialog,
   DialogContent,
   DialogDescription,
@@ -10,13 +11,15 @@ import {
   DialogTitle,
   FieldError,
   Input,
+  Label,
   Separator,
 } from '@maw/ui-lib';
 import { randomNumber } from '@maw/utils/random';
 import { useMessages, useTranslations } from 'next-intl';
 import { useMemo, useState } from 'react';
-
-import { useEvent } from '@/core/events/react/useEvent';
+import { Controller } from 'react-hook-form';
+import { Link } from '@/core/i18n/navigation';
+import { useEvent } from '@/hooks';
 import { useNewsletterForm } from '../hooks';
 
 export interface NewsletterModalProps {
@@ -38,6 +41,7 @@ export function NewsletterModal({
   const {
     register,
     handleSubmit,
+    control,
     formState: { errors, isValid },
     onSubmit,
   } = useNewsletterForm();
@@ -91,21 +95,48 @@ export function NewsletterModal({
         >
           {actions.text && <p className="mb-4">{actions.text}</p>}
           {!actions.text && (
-            <>
-              <p className="mb-4">{t('description')}</p>
-              <Input
-                placeholder={t('placeholder')}
-                type="email"
-                inputSize="large"
-                required
-                {...register('email')}
-              />
-              <FieldError errors={[errors.email]} />
-            </>
+            <div className="flex flex-col gap-4">
+              <p>{t('description')}</p>
+              <div>
+                <Input
+                  placeholder={t('placeholder')}
+                  type="email"
+                  inputSize="large"
+                  required
+                  {...register('email')}
+                />
+                <FieldError errors={[errors.email]} />
+              </div>
+
+              <div className="flex items-center gap-2">
+                <Controller
+                  name="onlySpams"
+                  control={control}
+                  render={({ field: { value, onChange, ...field } }) => (
+                    <Checkbox
+                      id="onlySpams"
+                      checked={value}
+                      onCheckedChange={onChange}
+                      {...field}
+                    />
+                  )}
+                />
+                <Label htmlFor="onlySpams">
+                  {t('onlySpamsLabel')}{' '}
+                  <Link
+                    href="/only-spams"
+                    className="text-primary hover:underline"
+                    onClick={onDismiss}
+                  >
+                    {t('onlySpamsDetails')}
+                  </Link>
+                </Label>
+              </div>
+            </div>
           )}
         </form>
 
-        <DialogFooter>
+        <DialogFooter className="border-t border-border pt-5">
           <div className="flex w-full gap-3">{renderActions()}</div>
         </DialogFooter>
       </DialogContent>

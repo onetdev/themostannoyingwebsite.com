@@ -1,4 +1,4 @@
-import { z } from 'zod';
+import * as z from 'zod';
 import { TranslationKeySchema } from '@/schemas';
 
 export const SubscriptionFeatureSchema = z.object({

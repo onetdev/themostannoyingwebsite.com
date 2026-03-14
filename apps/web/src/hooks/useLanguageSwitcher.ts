@@ -1,8 +1,8 @@
 'use client';
 
 import { useLocale } from 'next-intl';
+import { usePathname, useRouter } from '@/core/i18n/navigation';
 import { useAppService } from '@/hooks';
-import { usePathname, useRouter } from '@/i18n/navigation';
 
 export function useLanguageSwitcher() {
   const appService = useAppService();
@@ -10,7 +10,7 @@ export function useLanguageSwitcher() {
   const router = useRouter();
   const pathname = usePathname();
 
-  const onLanguageChange = (value: string) => {
+  const onLanguageChange = (value: AppLocale) => {
     // Might not look sexy, modern BUT it is what we need. And it works,
     // and it doesn't need a shitload of boilerplace throughout server and
     // client side components.

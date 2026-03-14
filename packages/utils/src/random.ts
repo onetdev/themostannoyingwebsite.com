@@ -51,23 +51,19 @@ export const getWeightedRandom = <T>(
   }
 };
 
-export const randomNumber = (
-  min: number,
-  max: number,
-  integerResult = false,
-): number => {
-  const result = Math.random() * (max - min) + min;
-  return integerResult ? Math.round(result) : result;
+export const randomNumber = (min: number, max: number): number => {
+  return Math.random() * (max - min) + min;
 };
 
 export const randomInt = (min: number, max: number): number => {
-  return randomNumber(min, max, true);
+  return Math.floor(Math.random() * (max - min + 1)) + min;
 };
 
 export const randomBool = (): boolean => {
   return Math.random() >= 0.5;
 };
 
-export const randomArrayEntry = <T>(array: T[]): T => {
-  return array[randomInt(0, array.length)];
+export const randomArrayEntry = <T>(array: T[]): T | null => {
+  if (array.length === 0) return null;
+  return array[randomInt(0, array.length - 1)];
 };

@@ -4,6 +4,7 @@ import { toast } from '@maw/ui-lib';
 import { randomArrayEntry, randomNumber } from '@maw/utils/random';
 import { useMessages, useTranslations } from 'next-intl';
 import { useCallback, useEffect, useMemo, useState } from 'react';
+import { useLogger } from '@/core/observability/react/useLogger';
 import type { SubscriptionPackage } from '../../schemas';
 
 export interface PurchaseProofToastProps {
@@ -17,6 +18,7 @@ export function PurchaseProofToast({
   minDelayMs,
   maxDelayMs,
 }: PurchaseProofToastProps) {
+  const logger = useLogger('PurchaseProofToast');
   const t = useTranslations();
   const messages = useMessages() as AppTranslationShape;
   const [iterator, setIterator] = useState(0);
@@ -35,18 +37,23 @@ export function PurchaseProofToast({
   ]);
 
   const showRandomNotification = useCallback(() => {
-    toast(
-      t('subscription.purchaseProofToast.justSubscribed', {
-        name: randomArrayEntry(pool.names),
-        location: randomArrayEntry(pool.locations),
-        plan: randomArrayEntry(pool.planNames),
-      }),
-      {
-        icon: '🚀',
-      },
-    );
+    const data = {
+      name: randomArrayEntry(pool.names) ?? '',
+      location: randomArrayEntry(pool.locations) ?? '',
+      plan: randomArrayEntry(pool.planNames) ?? '',
+    };
+
+    if (!data.name || !data.location || !data.plan) {
+      logger.warn('Critical random toast data is missing');
+      return;
+    }
+
+    toast(t('subscription.purchaseProofToast.justSubscribed', data), {
+      icon: '🚀',
+    });
+
     setIterator((i) => i + 1);
-  }, [pool, t]);
+  }, [pool, t, logger.warn]);
 
   // biome-ignore lint/correctness/useExhaustiveDependencies: We need the iterator for the scheduler and cleanup.
   useEffect(() => {

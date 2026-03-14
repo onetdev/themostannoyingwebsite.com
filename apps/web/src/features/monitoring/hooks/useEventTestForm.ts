@@ -1,8 +1,8 @@
 'use client';
 
-import { useLogger } from '@maw/logger';
 import { useForm } from 'react-hook-form';
 import { emit } from '@/core/events/event-bus';
+import { useLogger } from '@/core/observability/react/useLogger';
 import { useZodFormValidator } from '@/hooks';
 import { type EventTestFormData, getEventTestFormDataSchema } from '../schemas';
 
@@ -12,7 +12,7 @@ export const signupFormDefaultValues: EventTestFormData = {
 };
 
 export function useEventTestForm() {
-  const logger = useLogger().getSubLogger({ name: 'useEventTesterForm' });
+  const logger = useLogger('useEventTesterForm');
   const resolver = useZodFormValidator(getEventTestFormDataSchema);
   const methods = useForm<EventTestFormData>({
     resolver,

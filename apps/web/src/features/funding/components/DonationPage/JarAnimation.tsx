@@ -4,7 +4,7 @@ import {
   DotLottieReact,
   type DotLottieReactProps,
 } from '@lottiefiles/dotlottie-react';
-import { useAppConfigContext } from '@/core/config/react-app-config';
+import { useAppConfigContext } from '@/core/config/react/AppConfig';
 import { useDonationBalance } from '../../hooks';
 
 export type JarAnimationProps = Omit<

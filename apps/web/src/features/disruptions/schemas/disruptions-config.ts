@@ -1,4 +1,4 @@
-import { z } from 'zod';
+import * as z from 'zod';
 
 import { ScreensaverVariantSchema } from './screensaver-variant';
 
@@ -15,6 +15,11 @@ export const DisruptionsConfigSchema = z.object({
   }),
   stickyVideoPlayer: z.object({
     videoUrl: z.url(),
+  }),
+  deadPixel: z.object({
+    rainbowChance: z
+      .number()
+      .describe('Floating point value meaning percentage of chance'),
   }),
 });
 

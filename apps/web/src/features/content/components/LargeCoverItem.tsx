@@ -1,7 +1,7 @@
 import Image from 'next/image';
 import { useTranslations } from 'next-intl';
 import type { ComponentProps } from 'react';
-import { Link } from '@/i18n/navigation';
+import { Link } from '@/core/i18n/navigation';
 import type { ArticleDatum } from '../schemas';
 import { CoverPlaceholder } from './CoverPlaceholder';
 

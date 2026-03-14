@@ -2,7 +2,7 @@
 
 import { useTranslations } from 'next-intl';
 import type { ComponentProps } from 'react';
-import { useAppConfigContext } from '@/core/config/react-app-config';
+import { useAppConfigContext } from '@/core/config/react/AppConfig';
 import { CryptoWallet } from './CryptoWallet';
 
 export type CryptoWalletListProps = ComponentProps<'div'>;
