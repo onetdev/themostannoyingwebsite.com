@@ -1,6 +1,7 @@
 'use client';
 
-import { Button } from '@maw/ui-lib';
+import { Button, FadeIn } from '@maw/ui-lib';
+import { AnimatePresence } from 'framer-motion';
 import { useTranslations } from 'next-intl';
 import { useState } from 'react';
 import { useRuntimeStore, useUserGrantsStore } from '@/stores';
@@ -13,19 +14,22 @@ export function AdblockerSuspectBar() {
 
   const show = ppReviewed && suspected === true && isOpen;
 
-  if (!show) {
-    return;
-  }
-
   return (
-    <div className="border-tertiary bg-error text-on-error sticky -bottom-3 z-20 rounded-t-md border px-5 py-3 shadow-md">
-      <h4>{t('marketing.suspectBar.title')}</h4>
-      <p>{t('marketing.suspectBar.description')}</p>
-      <div className="my-2 flex items-center justify-end gap-3">
-        <Button variant="outline" onClick={() => setOpen(false)}>
-          {t('common.action.ok')}
-        </Button>
-      </div>
-    </div>
+    <AnimatePresence>
+      {show && (
+        <FadeIn
+          y={20}
+          className="border-tertiary bg-error text-on-error sticky -bottom-3 z-20 rounded-t-md border px-5 py-3 shadow-md"
+        >
+          <h4>{t('marketing.suspectBar.title')}</h4>
+          <p>{t('marketing.suspectBar.description')}</p>
+          <div className="my-2 flex items-center justify-end gap-3">
+            <Button variant="outline" onClick={() => setOpen(false)}>
+              {t('common.action.ok')}
+            </Button>
+          </div>
+        </FadeIn>
+      )}
+    </AnimatePresence>
   );
 }

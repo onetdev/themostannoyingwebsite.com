@@ -1,5 +1,6 @@
 'use client';
 
+import { FadeIn } from '@maw/ui-lib';
 import Image from 'next/image';
 import { useTranslations } from 'next-intl';
 import { useTheme } from 'next-themes';
@@ -13,7 +14,7 @@ export function ContainerPromotionFlaps() {
   const { resolvedTheme } = useTheme();
 
   return (
-    <div className="sticky top-0 hidden w-full justify-center md:flex">
+    <FadeIn className="sticky top-0 hidden w-full justify-center md:flex">
       <div className="absolute max-h-screen overflow-hidden">
         <Link href="/dilf" passHref prefetch={false}>
           <Image
@@ -38,7 +39,7 @@ export function ContainerPromotionFlaps() {
           </PromotionFlapText>
         </Link>
       </div>
-    </div>
+    </FadeIn>
   );
 }
 

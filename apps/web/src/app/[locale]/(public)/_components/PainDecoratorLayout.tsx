@@ -1,5 +1,6 @@
 'use client';
 
+import { AnimatePresence } from 'framer-motion';
 import { type ComponentProps, useEffect, useState } from 'react';
 import {
   DeadPixel,
@@ -62,12 +63,16 @@ export function PainDecoratorLayout({
   return (
     <div className={className} {...rest}>
       {/* Elements appearing underneath content container */}
-      {runtimeFlags.giftFlaps && <ContainerPromotionFlaps />}
+      <AnimatePresence>
+        {runtimeFlags.giftFlaps && <ContainerPromotionFlaps />}
+      </AnimatePresence>
 
       {/* Main container and container relative sticky elements */}
       <div className="bg-card relative container mx-auto my-0 min-h-screen">
         {children}
-        {runtimeFlags.wheelOfFortune && <WheelOfFortune />}
+        <AnimatePresence>
+          {runtimeFlags.wheelOfFortune && <WheelOfFortune />}
+        </AnimatePresence>
         {runtimeFlags.stickyVideo && <GlobalStickyVideo />}
         {runtimeFlags.showCookieConsent && <CookieConsent />}
         <AdblockerSuspectBar />
@@ -75,7 +80,9 @@ export function PainDecoratorLayout({
 
       {/* Global viewport elements */}
       {deadPixel && <DeadPixel />}
-      {runtimeFlags.mockChat && <ChatBubble />}
+      <AnimatePresence>
+        {runtimeFlags.mockChat && <ChatBubble />}
+      </AnimatePresence>
       <GlobalShareModal />
       <Screensaver />
     </div>

@@ -57,6 +57,9 @@ catalogs:
     '@types/sanitize-html':
       specifier: ^2.16.1
       version: 2.16.1
+    framer-motion:
+      specifier: ^12.35.1
+      version: 12.35.1
     jest:
       specifier: ^30.2.0
       version: 30.2.0
@@ -281,7 +284,7 @@ importers:
         specifier: ^5.2.1
         version: 5.2.1
       framer-motion:
-        specifier: ^12.35.1
+        specifier: 'catalog:'
         version: 12.35.1(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
       html-react-parser:
         specifier: ^5.2.17
@@ -544,6 +547,9 @@ importers:
       embla-carousel-react:
         specifier: ^8.6.0
         version: 8.6.0(react@19.2.4)
+      framer-motion:
+        specifier: 'catalog:'
+        version: 12.35.1(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
       marked:
         specifier: 'catalog:'
         version: 17.0.4
