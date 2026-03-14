@@ -4,7 +4,7 @@ export const ActiveNavigationItems = [
   'about',
   'achievements',
   'admin',
-  'article-item',
+  'article-single',
   'contact',
   'dilf',
   'donate',
@@ -13,6 +13,7 @@ export const ActiveNavigationItems = [
   'hot-things',
   'login',
   'only-spams',
+  'plan-cancellation',
   'plans',
   'privacy-policy',
   'search',
@@ -91,6 +92,11 @@ export const FOOTER_NAVIGATION_LINKS: NavItem[] = [
   { key: 'virgin', labelKey: 'navigation.virgin', path: '/virgin' },
 
   // User Management
+  {
+    key: 'plan-cancellation',
+    labelKey: 'navigation.planCancellation',
+    path: '/plans/cancel',
+  },
   { key: 'admin', labelKey: 'navigation.admin', path: '/admin' },
   { key: 'signup', labelKey: 'navigation.signup', path: '/user/signup' },
   {

@@ -2,7 +2,7 @@
 
 import { Icon, Progress } from '@maw/ui-lib';
 import { useTranslations } from 'next-intl';
-import { useNavigationProvider } from '@/core/navigation/react/NavigationContext';
+import { useNavigationProvider } from '@/core/react';
 
 export type AchievementToastProps = {
   name: string;

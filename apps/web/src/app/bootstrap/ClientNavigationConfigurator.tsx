@@ -6,26 +6,29 @@ import { Link, useRouter } from '@/core/i18n/navigation';
 import {
   type NavigationParams,
   NavigationProvider as NavigationProviderBase,
-} from '@/core/navigation/react/NavigationContext';
+} from '@/core/react';
 import type { RouteAlias } from '@/schemas';
 
 const routeAliasToPathMap: Record<RouteAlias, string> = {
-  about: '/about',
-  achievements: '/achievements',
   'article.single': '/articles/:slug',
-  contact: '/contact',
-  dilf: '/dilf',
-  donate: '/donate',
   'flaim-a-phone': '/flaim-a-phone',
-  home: '/',
   'hot-things': '/hot-things',
+  'plans.cancellation': '/plans/cancellation',
   'privacy-policy': '/privacy-policy',
-  search: '/search',
-  settings: '/settings',
   'user.login': '/user/login',
   'user.password-reminder': '/user/password-reminder',
   'user.profile': '/user/profile',
   'user.signup': '/user/signup',
+  about: '/about',
+  achievements: '/achievements',
+  admin: '/admin',
+  contact: '/contact',
+  dilf: '/dilf',
+  donate: '/donate',
+  home: '/',
+  plans: '/plans',
+  search: '/search',
+  settings: '/settings',
   virgin: '/virgin',
 };
 

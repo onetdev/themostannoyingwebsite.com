@@ -1,7 +1,8 @@
 'use client';
 
 import { useForm } from 'react-hook-form';
-import { useLogger, useZodFormValidator } from '@/hooks';
+import { useLogger } from '@/core/react';
+import { useZodFormValidator } from '@/hooks';
 import { type CommentFormData, getCommentFormDataSchema } from '../schemas';
 
 interface UseCommentFormProps {

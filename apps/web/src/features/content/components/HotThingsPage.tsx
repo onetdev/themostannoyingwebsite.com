@@ -4,8 +4,8 @@ import { Icon, PageHeadline } from '@maw/ui-lib';
 import Image from 'next/image';
 import { useLocale, useTranslations } from 'next-intl';
 import { useEffect, useRef, useState } from 'react';
-import { useAppConfigContext } from '@/core/config/react/AppConfig';
-import { useLocaleResource, useLogger } from '@/hooks';
+import { useAppConfigContext, useLogger } from '@/core/react';
+import { useLocaleResource } from '@/hooks';
 import { LANGUAGE_NATIVE_NAME_MAP } from '@/i18n/language-native-name-map';
 
 export function HotThingsPage() {

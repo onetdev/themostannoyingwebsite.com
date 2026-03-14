@@ -3,7 +3,7 @@
 import { mapToLogScale } from '@maw/utils/math';
 import { randomInt } from '@maw/utils/random';
 import { useCallback, useEffect, useReducer, useRef } from 'react';
-import { useAppConfigContext } from '@/core/config/react/AppConfig';
+import { useAppConfigContext } from '@/core/react';
 import type { ChallengeType } from '../schemas';
 
 export interface UseCaptchaChallengeProps {

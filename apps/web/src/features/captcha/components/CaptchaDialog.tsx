@@ -12,7 +12,7 @@ import {
 } from '@maw/ui-lib';
 import { useTranslations } from 'next-intl';
 import { useEffect } from 'react';
-import { useEvent } from '@/hooks';
+import { useEvent } from '@/core/react';
 import { useCaptchaChallenge } from '../hooks';
 import { EmojiCountChallenge } from './EmojiCountChallenge';
 import { TaxonomyChallenge } from './TaxonomyChallenge';

@@ -2,7 +2,7 @@
 
 import { randomBool, randomInt } from '@maw/utils/random';
 import { useCallback, useEffect, useMemo, useState } from 'react';
-import { useAppConfigContext } from '@/core/config/react/AppConfig';
+import { useAppConfigContext } from '@/core/react';
 import type { SpriteConfig } from '../schemas';
 import type { TaxonomyEntryMeta } from '../types';
 

@@ -6,7 +6,7 @@ import {
   requestNotificationPermission,
 } from '@maw/utils/browser';
 import { useCallback } from 'react';
-import { useLogger } from '@/core/observability/react/useLogger';
+import { useLogger } from '@/core/react';
 
 export type UseSendNotificationProps = {
   autoRequest?: boolean;

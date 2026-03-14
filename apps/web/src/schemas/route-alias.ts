@@ -3,6 +3,7 @@ import * as z from 'zod';
 const RouteAliasList = [
   'about',
   'achievements',
+  'admin',
   'article.single',
   'contact',
   'dilf',
@@ -10,6 +11,8 @@ const RouteAliasList = [
   'flaim-a-phone',
   'home',
   'hot-things',
+  'plans.cancellation',
+  'plans',
   'privacy-policy',
   'search',
   'settings',

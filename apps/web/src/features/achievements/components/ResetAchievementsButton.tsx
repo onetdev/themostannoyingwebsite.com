@@ -13,8 +13,7 @@ import {
 } from '@maw/ui-lib';
 import { useTranslations } from 'next-intl';
 import { useCallback, useState } from 'react';
-
-import { useEvent } from '@/hooks';
+import { useEvent } from '@/core/react';
 import { useAchievementsStore } from '../stores';
 
 export function ResetAchievementsButton() {

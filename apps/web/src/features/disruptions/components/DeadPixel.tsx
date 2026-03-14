@@ -4,8 +4,8 @@ import { clsx } from '@maw/ui-lib/utils';
 import type { Point2d } from '@maw/utils/math';
 import { randomInt, randomNumber } from '@maw/utils/random';
 import { useCallback, useEffect, useState } from 'react';
-import { useAppConfigContext } from '@/core/config/react/AppConfig';
 import { emit } from '@/core/events/event-bus';
+import { useAppConfigContext } from '@/core/react';
 
 interface DeadPixelPoint extends Point2d {
   isRainbow: boolean;

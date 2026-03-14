@@ -1,7 +1,7 @@
 'use client';
 
 import { useCallback, useEffect } from 'react';
-import { useLogger } from '@/hooks';
+import { useLogger } from '@/core/react';
 
 /**
  * Manages the page title dynamically, capturing the base title

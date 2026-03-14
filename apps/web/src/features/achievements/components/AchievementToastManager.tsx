@@ -3,7 +3,8 @@
 import { toast } from '@maw/ui-lib';
 import { useTranslations } from 'next-intl';
 import config from '@/core/config';
-import { useAudio, useEvent } from '@/hooks';
+import { useEvent } from '@/core/react';
+import { useAudio } from '@/hooks';
 import { usePainPreferencesStore } from '@/stores';
 import { useAchievementBankService } from '../hooks';
 import { useAchievementsStore } from '../stores';

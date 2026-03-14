@@ -1,7 +1,7 @@
 'use client';
 
-import { useDiContext } from '@/core/di/react/ReactDi';
 import { CoreSymbols } from '@/core/di/symbols';
+import { useDiContext } from '@/core/react';
 import type { AppService } from '../services/AppService';
 
 export const useAppService = () => {

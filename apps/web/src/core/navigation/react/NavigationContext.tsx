@@ -1,18 +1,16 @@
 'use client';
 
 import {
+  type ComponentProps,
   createContext,
   type PropsWithChildren,
   type ReactElement,
   useContext,
 } from 'react';
-
+import type { Link } from '@/core/i18n/navigation';
 import type { RouteAlias } from '@/schemas';
 
-export type LinkComponentType = PropsWithChildren<{
-  href: string;
-  prefetch?: boolean;
-}>;
+export type LinkComponentType = PropsWithChildren<ComponentProps<typeof Link>>;
 
 export type NavigationParams =
   | Exclude<RouteAlias, 'article.single'>
