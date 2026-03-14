@@ -92,6 +92,13 @@ const ACHIEVEMENT_REGISTRY: AchievementDefinition[] = [
     type: 'progression',
     targetProgress: 420,
   },
+  {
+    id: 'love-letter-from-medic',
+    nameKey: 'achievements.registry.loveLettersFromMedic.name',
+    descriptionKey: 'achievements.registry.loveLettersFromMedic.description',
+    type: 'progression',
+    targetProgress: 5,
+  },
 ];
 
 export function getAchievementsRegistry() {

@@ -77,5 +77,9 @@ export default {
       name: '反弹 Logo 狂热者',
       description: '见证 Logo 反弹 420 次。',
     },
+    loveLettersFromMedic: {
+      name: '来自医护人员的情书',
+      description: '接收来自我们热心支持代理的 5 条消息。',
+    },
   },
 };

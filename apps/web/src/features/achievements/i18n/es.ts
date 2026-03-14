@@ -83,5 +83,9 @@ export default {
       name: 'Fanático del logotipo rebotante',
       description: 'Presencia cómo el logotipo rebota 420 veces.',
     },
+    loveLettersFromMedic: {
+      name: 'Cartas de amor de un médico',
+      description: 'Recibe 5 mensajes de nuestros amables agentes de soporte.',
+    },
   },
 };

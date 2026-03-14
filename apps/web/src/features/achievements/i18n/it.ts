@@ -82,5 +82,10 @@ export default {
       name: 'Fanatico del logo rimbalzante',
       description: 'Assisti al rimbalzo del logo per 420 volte.',
     },
+    loveLettersFromMedic: {
+      name: "Lettere d'amore da un medico",
+      description:
+        'Ricevi 5 messaggi dai nostri disponibili agenti di supporto.',
+    },
   },
 };

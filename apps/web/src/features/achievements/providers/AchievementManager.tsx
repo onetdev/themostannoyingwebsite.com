@@ -95,6 +95,10 @@ export const AchievementManager = () => {
     handleSingleUnlock('wheel-of-fortune-spin'),
   );
 
+  useEvent('support:bot-message-received', () => {
+    handleProgression('love-letter-from-medic');
+  });
+
   useEvent('admin-auth:login', () => handleSingleUnlock('admin-login'));
 
   return <AchievementToastManager />;

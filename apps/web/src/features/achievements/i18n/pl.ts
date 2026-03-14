@@ -82,5 +82,10 @@ export default {
       name: 'Fanatyk odbijającego się logo',
       description: 'Bądź świadkiem, jak logo odbija się 420 razy.',
     },
+    loveLettersFromMedic: {
+      name: 'Listy miłosne od medyka',
+      description:
+        'Odbierz 5 wiadomości od naszych pomocnych agentów wsparcia.',
+    },
   },
 };

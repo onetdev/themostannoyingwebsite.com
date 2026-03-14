@@ -82,5 +82,10 @@ export default {
       name: 'Pattogó logó fanatikus',
       description: 'Légy tanúja a logó 420 pattanásának.',
     },
+    loveLettersFromMedic: {
+      name: 'Szerelmes levelek egy mentőstől',
+      description:
+        'Kapj 5 üzenetet segítőkész ügyfélszolgálati munkatársainktól.',
+    },
   },
 };

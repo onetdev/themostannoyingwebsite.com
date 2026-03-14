@@ -81,5 +81,10 @@ export default {
       name: 'Fanático pelo Logótipo Saltitante',
       description: 'Testemunhe o logótipo a saltar 420 vezes.',
     },
+    loveLettersFromMedic: {
+      name: 'Cartas de amor de um médico',
+      description:
+        'Receba 5 mensagens dos nossos prestáveis agentes de suporte.',
+    },
   },
 };

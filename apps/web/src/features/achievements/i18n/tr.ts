@@ -81,5 +81,9 @@ export default {
       name: 'Zıpzıp Logo Meraklısı',
       description: 'Logonun 420 kez sekmesine tanık olun.',
     },
+    loveLettersFromMedic: {
+      name: 'Bir sıhhiyeciden aşk mektupları',
+      description: 'Yardımsever destek temsilcilerimizden 5 mesaj alın.',
+    },
   },
 };

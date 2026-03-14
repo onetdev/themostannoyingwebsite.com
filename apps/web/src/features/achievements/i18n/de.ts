@@ -81,5 +81,10 @@ export default {
       name: 'Bouncing-Logo-Fanatiker',
       description: 'Erlebe, wie das Logo 420 Mal abprallt.',
     },
+    loveLettersFromMedic: {
+      name: 'Liebesbriefe von einem Sanitäter',
+      description:
+        'Erhalten Sie 5 Nachrichten von unseren hilfreichen Support-Mitarbeitern.',
+    },
   },
 };
