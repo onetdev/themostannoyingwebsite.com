@@ -12,6 +12,7 @@ const RouteAliasList = [
   'home',
   'hot-things',
   'plans.cancellation',
+  'plans.special-deal',
   'plans',
   'privacy-policy',
   'search',

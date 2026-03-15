@@ -64,6 +64,13 @@ export default {
       },
     },
   },
+  specialDeal: {
+    headline: "WAIT! DON'T GO! WE HAVE A GIFT! 🎁",
+    description:
+      "We noticed you were trying to leave. Is it something we said? Was it the judgmental ellipses? We can change! (Wait, no we can't).",
+    offer:
+      'The offer is out of stock due to popular demand! Stay on this page until restock!',
+  },
   purchaseProofToast: {
     justSubscribed: '{name} from {location} just subscribed to {plan}!',
     variants: socialProofVariants,

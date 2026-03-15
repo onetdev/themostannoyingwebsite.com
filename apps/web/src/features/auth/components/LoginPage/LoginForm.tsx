@@ -10,9 +10,9 @@ import { EmailField, PasswordField, RememberMeField } from '../_fields';
 
 export function LoginForm() {
   const t = useTranslations();
-  const { navigateReplace } = useNavigationProvider();
+  const { replace } = useNavigationProvider();
   const form = useLoginForm({
-    onSuccess: () => navigateReplace('user.profile'),
+    onSuccess: () => replace('user.profile'),
   });
   const {
     handleSubmit,

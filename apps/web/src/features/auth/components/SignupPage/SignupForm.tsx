@@ -26,9 +26,9 @@ import {
 
 export function SignupForm() {
   const t = useTranslations();
-  const { navigateReplace } = useNavigationProvider();
+  const { replace } = useNavigationProvider();
   const methods = useSignupForm({
-    onSuccess: () => navigateReplace('user.profile'),
+    onSuccess: () => replace('user.profile'),
   });
   const {
     formState: { errors, isSubmitting },

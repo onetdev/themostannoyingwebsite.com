@@ -19,13 +19,13 @@ interface LoginRequiredModalProps {
 
 export function LoginRequiredModal({ show, onClose }: LoginRequiredModalProps) {
   const t = useTranslations();
-  const { navigatePush } = useNavigationProvider();
+  const { push } = useNavigationProvider();
 
   useEvent('ui:modal:dismiss-signaled', onClose, show);
 
   const handleLogin = () => {
     onClose();
-    navigatePush('user.login');
+    push('user.login');
   };
 
   return (

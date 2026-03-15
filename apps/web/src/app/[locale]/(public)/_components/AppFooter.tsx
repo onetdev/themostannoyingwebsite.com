@@ -1,6 +1,6 @@
+import { clsx } from '@maw/ui-lib/utils';
 import { getTranslations } from 'next-intl/server';
 import type { ComponentProps } from 'react';
-
 import { FOOTER_NAVIGATION_LINKS } from '@/app/navigation';
 import { Link } from '@/core/i18n/navigation';
 import { getAppConfigService } from '@/services';
@@ -20,7 +20,10 @@ export async function AppFooter({ className }: AppFooterProps) {
   }));
 
   return (
-    <footer id="footer" className={`border-border border-t ${className}`}>
+    <footer
+      id="footer"
+      className={clsx(`border-border border-t print:hidden`, className)}
+    >
       <div className="flex flex-wrap items-center justify-center gap-x-5 gap-y-2 px-5 py-5">
         {links.map((link) => (
           <Link

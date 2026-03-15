@@ -18,13 +18,13 @@ export type NavigationParams =
 
 export interface NavigationProviderContextType {
   LinkComponent: (props: LinkComponentType) => ReactElement;
-  navigateBack: () => void;
-  navigateForward: () => void;
-  navigatePush: (param: NavigationParams) => void;
-  navigateReplace: (param: NavigationParams) => void;
+  back: () => void;
+  forward: () => void;
+  push: (param: NavigationParams) => void;
+  replace: (param: NavigationParams) => void;
   pathFor: (param: NavigationParams) => string;
-  unsafeNavigatePush: (url: string) => void;
-  unsafeNavigateReplace: (url: string) => void;
+  unsafePush: (url: string) => void;
+  unsafeReplace: (url: string) => void;
 }
 
 export const NavigationProviderContext = createContext<

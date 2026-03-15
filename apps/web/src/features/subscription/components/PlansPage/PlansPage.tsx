@@ -4,6 +4,7 @@ import { PageHeadline } from '@maw/ui-lib';
 import { useTranslations } from 'next-intl';
 import { useCallback, useState } from 'react';
 import { emit } from '@/core/events/event-bus';
+import { Link } from '@/core/react';
 import type {
   BillingCycle,
   SubscriptionFeature,
@@ -102,6 +103,15 @@ export function PlansPage({
       </div>
 
       <Disclaimer />
+
+      <div className="mt-12 flex justify-center pb-10">
+        <Link
+          hrefFor={'plans.cancellation'}
+          className="text-muted-foreground hover:text-foreground text-xs transition-colors underline decoration-dotted underline-offset-4"
+        >
+          Cancel Subscription
+        </Link>
+      </div>
     </>
   );
 }

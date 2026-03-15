@@ -2,7 +2,7 @@
 
 import { compile } from 'path-to-regexp';
 import type { ComponentProps, PropsWithChildren } from 'react';
-import { Link, useRouter } from '@/core/i18n/navigation';
+import { Link as LinkI18n, useRouter } from '@/core/i18n/navigation';
 import {
   type NavigationParams,
   NavigationProvider as NavigationProviderBase,
@@ -14,6 +14,7 @@ const routeAliasToPathMap: Record<RouteAlias, string> = {
   'flaim-a-phone': '/flaim-a-phone',
   'hot-things': '/hot-things',
   'plans.cancellation': '/plans/cancellation',
+  'plans.special-deal': '/plans/special-deal',
   'privacy-policy': '/privacy-policy',
   'user.login': '/user/login',
   'user.password-reminder': '/user/password-reminder',
@@ -32,10 +33,10 @@ const routeAliasToPathMap: Record<RouteAlias, string> = {
   virgin: '/virgin',
 };
 
-export type AppLinkProps = PropsWithChildren<ComponentProps<typeof Link>>;
+export type LinkProps = PropsWithChildren<ComponentProps<typeof LinkI18n>>;
 
-export function AppLink({ children, ...rest }: AppLinkProps) {
-  return <Link {...rest}>{children}</Link>;
+export function Link({ children, ...rest }: LinkProps) {
+  return <LinkI18n {...rest}>{children}</LinkI18n>;
 }
 
 export function ClientNavigationConfigurator({ children }: PropsWithChildren) {
@@ -53,16 +54,16 @@ export function ClientNavigationConfigurator({ children }: PropsWithChildren) {
   return (
     <NavigationProviderBase
       value={{
-        LinkComponent: AppLink,
-        navigateBack: navigation.back,
-        navigateForward: navigation.forward,
-        navigatePush: (param: NavigationParams) =>
+        LinkComponent: Link,
+        back: navigation.back,
+        forward: navigation.forward,
+        push: (param: NavigationParams) =>
           navigation.push(resolvePathForRouteAlias(param)),
-        navigateReplace: (param: NavigationParams) =>
+        replace: (param: NavigationParams) =>
           navigation.replace(resolvePathForRouteAlias(param)),
         pathFor: resolvePathForRouteAlias,
-        unsafeNavigatePush: navigation.push,
-        unsafeNavigateReplace: navigation.replace,
+        unsafePush: navigation.push,
+        unsafeReplace: navigation.replace,
       }}
     >
       {children}

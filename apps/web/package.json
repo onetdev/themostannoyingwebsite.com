@@ -3,6 +3,7 @@
   "name": "@maw/web",
   "version": "0.0.0",
   "type": "module",
+  "sideEffects": false,
   "scripts": {
     "build": "pnpm run build:deployment-meta && pnpm run publish:assets && next build",
     "build:metadata": "pnpm run build:deployment-meta && pnpm run build:web-manifest",
