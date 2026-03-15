@@ -1,6 +1,7 @@
 'use client';
 
 import { Alert, AlertDescription, AlertTitle, Button } from '@maw/ui-lib';
+import { useTranslations } from 'next-intl';
 import { ConfirmationPrint } from './ConfirmationPrint';
 
 interface ConfirmationStepProps {
@@ -14,6 +15,7 @@ export function ConfirmationStep({
   onSpecialDeal,
   onUpgrade,
 }: ConfirmationStepProps) {
+  const t = useTranslations('subscription.cancellation.confirmation');
   const handlePrint = () => {
     window.print();
   };
@@ -22,60 +24,55 @@ export function ConfirmationStep({
     <div className="space-y-6">
       <div className="print:hidden space-y-4">
         <h2 className="text-xl font-bold text-destructive underline">
-          FINAL VERIFICATION REQUIRED
+          {t('title')}
         </h2>
-        <p className="font-bold">
-          Your request has been prepared, but for security reasons and to
-          prevent accidental un-subscriptions, you must now complete the
-          physical verification process.
-        </p>
+        <p className="font-bold">{t('description')}</p>
 
         <Alert variant="info">
-          <AlertTitle>Instructions:</AlertTitle>
+          <AlertTitle>{t('alert.title')}</AlertTitle>
           <AlertDescription>
             <ol className="list-decimal list-inside space-y-1">
-              <li>Click the "Print for verification" button below.</li>
-              <li>Print the document on physical paper.</li>
-              <li>Sign the document in the presence of TWO (2) witnesses.</li>
-              <li>Have both witnesses sign.</li>
-              <li>Take a high-resolution photo of the signed document.</li>
+              <li>{t('alert.step1')}</li>
+              <li>{t('alert.step2')}</li>
+              <li>{t('alert.step3')}</li>
+              <li>{t('alert.step4')}</li>
+              <li>{t('alert.step5')}</li>
               <li>
-                Email the photo to{' '}
-                <a
-                  href="mailto:support@themostannoyingwebsite.com"
-                  className="text-blue-600 underline"
-                >
-                  support@themostannoyingwebsite.com
-                </a>
+                {t.rich('alert.step6', {
+                  email: (children) => (
+                    <a
+                      href="mailto:support@themostannoyingwebsite.com"
+                      className="text-blue-600 underline"
+                    >
+                      {children}
+                    </a>
+                  ),
+                })}
               </li>
             </ol>
-            <strong className="pt-5">
-              Please note that processing takes up to 10^15 business days.
-            </strong>
+            <strong className="pt-5">{t('alert.note')}</strong>
           </AlertDescription>
         </Alert>
 
         <div className="flex flex-col gap-2">
           <Button onClick={handlePrint} variant="outline" size="lg">
-            🖨️ PRINT FOR VERIFICATION 🖨️
+            {t('action.print')}
           </Button>
         </div>
 
         <div className="pt-4 border-t-2 border-dashed border-border">
-          <p className="text-xs text-gray-500 italic">
-            Alternatively, if you've changed your mind (highly recommended):
-          </p>
+          <p className="text-xs text-gray-500 italic">{t('alternative')}</p>
           <div className="grid grid-cols-2 gap-2 mt-2">
             <Button onClick={onAbort} variant="secondary">
-              Keep My Subscription
+              {t('action.abort')}
             </Button>
-            <Button onClick={onUpgrade}>Upgrade Now</Button>
+            <Button onClick={onUpgrade}>{t('action.upgrade')}</Button>
             <Button
               onClick={onSpecialDeal}
               variant="outline"
               className="col-span-2"
             >
-              Get the special deal
+              {t('action.specialDeal')}
             </Button>
           </div>
         </div>

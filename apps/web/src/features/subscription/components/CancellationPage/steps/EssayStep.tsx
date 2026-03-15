@@ -1,6 +1,7 @@
 'use client';
 
 import { Button, Textarea } from '@maw/ui-lib';
+import { useTranslations } from 'next-intl';
 import { useFormContext } from 'react-hook-form';
 import type { CancellationFormData } from '../../../schemas';
 
@@ -10,6 +11,7 @@ interface EssayStepProps {
 }
 
 export function EssayStep({ onNext, onAbort }: EssayStepProps) {
+  const t = useTranslations('subscription.cancellation.essay');
   const {
     register,
     watch,
@@ -29,15 +31,11 @@ export function EssayStep({ onNext, onAbort }: EssayStepProps) {
   return (
     <div className="space-y-4">
       <div className="space-y-2">
-        <h4 className="text-lg font-bold">Exit Interview Essay</h4>
-        <p className="text-sm">
-          To ensure your decision is final and well-considered, please write an
-          essay on your experience (min. 3000 characters). This will be
-          personally reviewed by our CEO before processing.
-        </p>
+        <h4 className="text-lg font-bold">{t('title')}</h4>
+        <p className="text-sm">{t('description')}</p>
         <Textarea
           {...register('feedback')}
-          placeholder="Start typing your 3000 character masterpiece here..."
+          placeholder={t('placeholder')}
           className="min-h-80"
           aria-invalid={!!errors.feedback}
         />
@@ -47,14 +45,14 @@ export function EssayStep({ onNext, onAbort }: EssayStepProps) {
               feedback.length < 3000 ? 'text-destructive' : 'text-success'
             }
           >
-            Characters: {feedback.length} / 3000
+            {t('characters', { count: feedback.length })}
           </span>
         </div>
       </div>
 
       <div className="flex flex-col items-center gap-4 pt-4">
         <Button onClick={onAbort} className="w-full text-lg h-14" size="lg">
-          Cancel cancellation
+          {t('action.abort')}
         </Button>
 
         <Button
@@ -63,8 +61,7 @@ export function EssayStep({ onNext, onAbort }: EssayStepProps) {
           onClick={handleNext}
           className="max-w-full whitespace-normal"
         >
-          I have completed my mandatory essay and wish to proceed with the next
-          verification step
+          {t('action.next')}
         </Button>
       </div>
     </div>

@@ -50,10 +50,7 @@ export function PlanCard({
 
   let label = t('common.action.select');
   if (isOutOfStock) {
-    label = 'Out of stock';
-  }
-  if (isSelected) {
-    t('common.action.select');
+    label = t('subscription.landing.status.outOfStock');
   }
 
   let variant: ButtonProps['variant'] = 'outline';

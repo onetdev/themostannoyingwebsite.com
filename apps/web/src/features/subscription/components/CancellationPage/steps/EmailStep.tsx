@@ -8,6 +8,7 @@ import {
   FieldLabel,
   Input,
 } from '@maw/ui-lib';
+import { useTranslations } from 'next-intl';
 import { useFormContext } from 'react-hook-form';
 import type { CancellationFormData } from '../../../schemas';
 
@@ -17,6 +18,7 @@ interface EmailStepProps {
 }
 
 export function EmailStep({ onNext, onSpecialDeal }: EmailStepProps) {
+  const t = useTranslations('subscription.cancellation.email');
   const {
     register,
     formState: { errors },
@@ -25,16 +27,16 @@ export function EmailStep({ onNext, onSpecialDeal }: EmailStepProps) {
   return (
     <div className="space-y-6">
       <div className="space-y-4">
-        <h4 className="text-lg font-bold">Who are you?</h4>
+        <h4 className="text-lg font-bold">{t('title')}</h4>
         <Field>
           <FieldLabel htmlFor="email" required>
-            Provide your email address for the cancellation process.
+            {t('label')}
           </FieldLabel>
           <FieldContent>
             <Input
               id="email"
               type="email"
-              placeholder="loyal-customer@themostannoyingwebsite.com"
+              placeholder={t('placeholder')}
               aria-invalid={!!errors.email}
               inputSize="large"
               {...register('email')}
@@ -45,7 +47,7 @@ export function EmailStep({ onNext, onSpecialDeal }: EmailStepProps) {
       </div>
       <div className="space-y-4">
         <Button onClick={onSpecialDeal} className="w-full" size="lg">
-          You know what, I changed my mind, I want the discount!
+          {t('action.discount')}
         </Button>
         <Button
           onClick={onNext}
@@ -53,7 +55,7 @@ export function EmailStep({ onNext, onSpecialDeal }: EmailStepProps) {
           disabled={!!errors.email}
           className="w-full text-xs"
         >
-          I'm sure, let's continue cancellation
+          {t('action.next')}
         </Button>
       </div>
     </div>

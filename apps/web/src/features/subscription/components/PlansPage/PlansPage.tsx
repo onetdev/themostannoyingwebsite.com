@@ -109,7 +109,7 @@ export function PlansPage({
           hrefFor={'plans.cancellation'}
           className="text-muted-foreground hover:text-foreground text-xs transition-colors underline decoration-dotted underline-offset-4"
         >
-          Cancel Subscription
+          {t('subscription.landing.cancellation.link')}
         </Link>
       </div>
     </>

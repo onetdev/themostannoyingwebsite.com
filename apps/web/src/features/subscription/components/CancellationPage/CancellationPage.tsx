@@ -1,6 +1,7 @@
 'use client';
 
 import { PageHeadline } from '@maw/ui-lib';
+import { useTranslations } from 'next-intl';
 import { useCallback, useState } from 'react';
 import { FormProvider } from 'react-hook-form';
 import { useNavigationProvider } from '@/core/react';
@@ -30,6 +31,7 @@ const STEP_ORDER: Step[] = [
 ];
 
 export function UnsubscribePage() {
+  const t = useTranslations('subscription.cancellation.page');
   const { push } = useNavigationProvider();
   const [step, setStep] = useState<Step>(STEP_ORDER[0]);
   const methods = useCancellationForm({
@@ -90,9 +92,7 @@ export function UnsubscribePage() {
   return (
     <FormProvider {...methods}>
       <div className="mx-auto mt-10 w-full max-w-2xl border-4 border-border py-8 px-8 print:p-0 print:border-0 print:max-w-full print:m-0">
-        <PageHeadline className="print:hidden">
-          Subscription cancellation
-        </PageHeadline>
+        <PageHeadline className="print:hidden">{t('title')}</PageHeadline>
         {renderStep()}
       </div>
     </FormProvider>

@@ -41,7 +41,7 @@ export function SpecialUnsubscriptionDeal() {
         className="w-full max-w-sm text-muted-foreground hover:text-destructive"
         onClick={handleReject}
       >
-        Hmm, get me back to the cancellation
+        {t('backToCancellation')}
       </Button>
     </div>
   );
