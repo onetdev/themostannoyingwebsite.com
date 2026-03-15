@@ -1,6 +1,12 @@
 'use client';
 
-import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@maw/ui-lib';
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  FadeIn,
+} from '@maw/ui-lib';
 import { useTranslations } from 'next-intl';
 import { useState } from 'react';
 
@@ -24,9 +30,9 @@ export function WheelOfFortune() {
           <ModalContent className="max-h-[600px] max-w-[600px] grow" />
         </DialogContent>
       </Dialog>
-      <div className="fixed top-1/2 ltr:left-0 z-30 rtl:right-0 rtl:-scale-x-100">
+      <FadeIn className="fixed top-1/2 ltr:left-0 z-30 rtl:right-0 rtl:-scale-x-100">
         <WheelOfFortuneTrigger onClick={() => setOpen(true)} />
-      </div>
+      </FadeIn>
     </>
   );
 }

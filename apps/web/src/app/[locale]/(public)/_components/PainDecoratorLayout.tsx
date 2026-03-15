@@ -1,5 +1,6 @@
 'use client';
 
+import { AnimatePresence } from 'framer-motion';
 import { type ComponentProps, useEffect, useState } from 'react';
 import {
   DeadPixel,
@@ -62,20 +63,34 @@ export function PainDecoratorLayout({
   return (
     <div className={className} {...rest}>
       {/* Elements appearing underneath content container */}
-      {runtimeFlags.giftFlaps && <ContainerPromotionFlaps />}
+      <AnimatePresence>
+        {runtimeFlags.giftFlaps && (
+          <ContainerPromotionFlaps key="container-promotion-flaps" />
+        )}
+      </AnimatePresence>
 
       {/* Main container and container relative sticky elements */}
       <div className="bg-card relative container mx-auto my-0 min-h-screen">
         {children}
-        {runtimeFlags.wheelOfFortune && <WheelOfFortune />}
-        {runtimeFlags.stickyVideo && <GlobalStickyVideo />}
-        {runtimeFlags.showCookieConsent && <CookieConsent />}
+        <AnimatePresence>
+          {runtimeFlags.wheelOfFortune && (
+            <WheelOfFortune key="wheel-of-fortune" />
+          )}
+        </AnimatePresence>
+        {runtimeFlags.stickyVideo && (
+          <GlobalStickyVideo key="global-sticky-video" />
+        )}
+        {runtimeFlags.showCookieConsent && (
+          <CookieConsent key="cookie-consent" />
+        )}
         <AdblockerSuspectBar />
       </div>
 
       {/* Global viewport elements */}
-      {deadPixel && <DeadPixel />}
-      {runtimeFlags.mockChat && <ChatBubble />}
+      {deadPixel && <DeadPixel key="dead-pixel" />}
+      <AnimatePresence>
+        {runtimeFlags.mockChat && <ChatBubble key="chat-bubble" />}
+      </AnimatePresence>
       <GlobalShareModal />
       <Screensaver />
     </div>

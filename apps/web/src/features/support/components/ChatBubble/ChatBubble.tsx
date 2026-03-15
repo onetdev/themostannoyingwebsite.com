@@ -1,5 +1,6 @@
 'use client';
 
+import { FadeIn } from '@maw/ui-lib';
 import { AnimatePresence, motion } from 'framer-motion';
 import { useCallback, useRef } from 'react';
 import { useFaviconBadge, useInteractOutside } from '@/hooks';
@@ -24,7 +25,8 @@ export function ChatBubble() {
   useInteractOutside({ $ref, onInteraction: closeHistory });
 
   return (
-    <div
+    <FadeIn
+      y={20}
       className="fixed bottom-2 inset-s-2 z-20 flex md:bottom-4 md:inset-s-4"
       ref={$ref}
     >
@@ -52,6 +54,6 @@ export function ChatBubble() {
           </motion.div>
         )}
       </AnimatePresence>
-    </div>
+    </FadeIn>
   );
 }

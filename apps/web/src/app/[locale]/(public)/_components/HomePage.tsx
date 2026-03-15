@@ -6,7 +6,7 @@ import {
   TextListItem,
 } from '@/features/content/components';
 import type { ArticleDatum } from '@/features/content/types';
-import { OneByOnePromotion } from '@/features/marketing/components';
+import { WanAPhoneCampaignAd } from '@/features/marketing/components';
 
 type HomePageProps = {
   coverArticle?: ArticleDatum;
@@ -44,7 +44,7 @@ export async function HomePage({
             </li>
           ))}
         </ul>
-        <OneByOnePromotion />
+        <WanAPhoneCampaignAd />
       </section>
       <div className="border-border col-span-1 border-t-5 border-b-5 border-double p-5 text-center text-xl font-light italic lg:col-span-4 lg:my-6">
         {t('content.article.moreContentScroll')}
