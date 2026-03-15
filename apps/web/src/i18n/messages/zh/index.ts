@@ -91,6 +91,7 @@ export default {
     onlySpams: 'OnlySpams',
     passwordReminder: '密码提醒',
     personal: '个人',
+    planCancellation: '取消计划',
     plans: 'AI 计划',
     privacyPolicy: '隐私政策',
     profile: '个人资料',

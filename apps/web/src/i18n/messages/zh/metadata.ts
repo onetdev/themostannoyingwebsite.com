@@ -81,6 +81,14 @@ export default {
     description:
       '从我们精选的 100% 虚假 AI 套餐中进行选择。今天就体验未来的烦恼！',
   },
+  planCancellation: {
+    title: '取消订阅',
+    description: '看到你留下来我们深表遗憾。你确定要错过所有这些烦人的乐趣吗？',
+  },
+  planSpecialDeal: {
+    title: '特别优惠',
+    description: '等一下！先别走！我们为你准备了特别优惠，让烦恼继续下去。',
+  },
   onlySpams: {
     title: 'OnlySpams',
     description:

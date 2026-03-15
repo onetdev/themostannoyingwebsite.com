@@ -15,7 +15,7 @@ export function UpsellStep({ onSpecialDeal, onNext }: UpsellStepProps) {
     <div className="space-y-4">
       <h4 className="text-2xl font-bold">{t('title')}</h4>
       <p>{t('description')}</p>
-      <p className="text-2xl font-bold py-10 px-5 rounded-2xl border-dotted border-2 border-destructive bg-destructive/10 mb-10">
+      <p className="text-2xl font-bold py-10 px-5 rounded-2xl border-dotted border-2 border-destructive bg-destructive/10 mb-10 whitespace-pre-wrap">
         {t('promo')}
       </p>
       <div className="flex gap-4">

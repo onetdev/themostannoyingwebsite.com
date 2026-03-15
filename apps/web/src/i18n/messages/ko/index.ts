@@ -93,6 +93,7 @@ export default {
     onlySpams: 'OnlySpams',
     passwordReminder: '비밀번호 찾기',
     personal: '개인',
+    planCancellation: '플랜 취소',
     plans: 'AI 플랜',
     privacyPolicy: '개인정보 처리방침',
     profile: '프로필',

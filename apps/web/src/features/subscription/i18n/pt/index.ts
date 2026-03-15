@@ -6,7 +6,7 @@ export default {
     disclaimer: {
       title: '* AVISO LEGAL!',
       description:
-        'Tudo nesta página é 100% falso. Estes pacotes não existem e comprá-los é impossível porque não temos um procesador de pagamentos, nem sequer um backend real.',
+        'Tudo nesta página é 100% falso. Estes pacotes não existem e comprá-los é impossível porque não temos um processador de pagamentos, nem sequer um backend real.',
     },
     urgency: {
       title: 'OFERTA POR TEMPO LIMITADO!',

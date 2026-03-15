@@ -84,6 +84,16 @@ export default {
     description:
       'Wählen Sie aus unserer Auswahl an erstklassigen, 100% gefälschten KI-Paketen. Erleben Sie die Zukunft der Belästigung noch heute!',
   },
+  planCancellation: {
+    title: 'Abonnement kündigen',
+    description:
+      'Es tut uns leid, dass du bleibst. Bist du sicher, dass du all den Ärger verpassen willst?',
+  },
+  planSpecialDeal: {
+    title: 'Besonderes Angebot',
+    description:
+      'Warte! Geh noch nicht! Wir haben ein spezielles Angebot nur für dich, um den Ärger am Leben zu erhalten.',
+  },
   onlySpams: {
     title: 'OnlySpams',
     description:

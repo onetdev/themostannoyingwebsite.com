@@ -93,6 +93,7 @@ export default {
     onlySpams: 'OnlySpams',
     passwordReminder: 'Passworterinnerung',
     personal: 'Persönlich',
+    planCancellation: 'Plan kündigen',
     plans: 'KI-Pläne',
     privacyPolicy: 'Datenschutzerklärung',
     profile: 'Profil',

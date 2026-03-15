@@ -2,9 +2,7 @@
 
 import type { PropsWithChildren } from 'react';
 import { useRouter } from '@/core/i18n/navigation';
-import {
-  NavigationProvider as NavigationProviderBase,
-} from '@/core/react';
+import { NavigationProvider as NavigationProviderBase } from '@/core/react';
 import { resolvePathForRouteAlias } from './navigation';
 
 export function ClientNavigationConfigurator({ children }: PropsWithChildren) {

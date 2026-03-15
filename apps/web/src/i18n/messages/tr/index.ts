@@ -94,6 +94,7 @@ export default {
     onlySpams: 'OnlySpams',
     passwordReminder: 'Şifre Hatırlatıcı',
     personal: 'Kişisel',
+    planCancellation: 'Plan iptali',
     plans: 'AI planları',
     privacyPolicy: 'Gizlilik Politikası',
     profile: 'Profil',

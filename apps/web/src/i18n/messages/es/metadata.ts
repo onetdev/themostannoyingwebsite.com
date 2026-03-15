@@ -80,14 +80,24 @@ export default {
       '¿Buscas una experiencia sin lujos? Deshabilita todas las características personalizadas aquí y disfruta de una versión simplificada y sin distracciones de nuestro sitio.',
   },
   plans: {
-    title: 'Paquetes y Planes de IA',
+    title: 'Paquetes y planes de IA',
     description:
-      'Elige de nuestra selección de paquetes de IA premium, 100% falsos. ¡Experimenta el futuro de la molestia hoy!',
+      'Elija entre nuestra selección de paquetes de IA premium, 100% falsos. ¡Experimente el futuro de la molestia hoy mismo!',
+  },
+  planCancellation: {
+    title: 'Cancelar suscripción',
+    description:
+      'Lamentamos que te quedes. ¿Estás seguro de que quieres perderte todas las molestias?',
+  },
+  planSpecialDeal: {
+    title: 'Oferta especial',
+    description:
+      '¡Espera! ¡No te vayas todavía! Tenemos una oferta especial solo para ti para mantener viva la molestia.',
   },
   onlySpams: {
     title: 'OnlySpams',
     description:
-      'El boletín más exclusivo para su bandeja de entrada. Experimente la alegría del spam infinito y de los correos electrónicos de estafa de alta calidad.',
+      'El boletín más exclusivo para su bandeja de entrada. Experimente la alegría del spam interminable y los correos electrónicos de estafa de alta calidad.',
   },
   admin: {
     title: 'Terminal de Administración',

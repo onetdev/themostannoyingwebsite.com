@@ -95,6 +95,7 @@ export default {
     onlySpams: 'OnlySpams',
     passwordReminder: 'Przypomnienie hasła',
     personal: 'Osobiste',
+    planCancellation: 'Anulowanie planu',
     plans: 'Plany AI',
     privacyPolicy: 'Polityka Prywatności',
     profile: 'Profil',

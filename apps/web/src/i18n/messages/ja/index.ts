@@ -94,6 +94,7 @@ export default {
     onlySpams: 'OnlySpams',
     passwordReminder: 'パスワードを忘れたら',
     personal: 'パーソナル',
+    planCancellation: 'プランのキャンセル',
     plans: 'AIプラン',
     privacyPolicy: 'プライバシーポリシー',
     profile: 'プロフィール',

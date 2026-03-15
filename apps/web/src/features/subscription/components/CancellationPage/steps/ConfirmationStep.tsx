@@ -50,7 +50,7 @@ export function ConfirmationStep({
                 })}
               </li>
             </ol>
-            <strong className="pt-5">{t('alert.note')}</strong>
+            <strong className="pt-5 block">{t('alert.note')}</strong>
           </AlertDescription>
         </Alert>
 

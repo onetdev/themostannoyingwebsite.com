@@ -94,6 +94,7 @@ export default {
     onlySpams: 'OnlySpams',
     passwordReminder: 'Напоминание пароля',
     personal: 'Личное',
+    planCancellation: 'Отмена плана',
     plans: 'AI тарифы',
     privacyPolicy: 'Политика конфиденциальности',
     profile: 'Профиль',

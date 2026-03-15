@@ -84,6 +84,16 @@ export default {
     description:
       '100%偽物のAIパッケージセレクションからお選びください。最先端の「ウザさ」を今すぐ体験！',
   },
+  planCancellation: {
+    title: 'サブスクリプションをキャンセル',
+    description:
+      'あなたが残るのが残念です。本当にこれらすべての迷惑を逃したいのですか？',
+  },
+  planSpecialDeal: {
+    title: '特別オファー',
+    description:
+      '待って！まだ行かないで！迷惑を存続させるために、あなただけの特別プランをご用意しました。',
+  },
   onlySpams: {
     title: 'OnlySpams',
     description:

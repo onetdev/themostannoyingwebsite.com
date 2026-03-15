@@ -95,6 +95,7 @@ export default {
     onlySpams: 'OnlySpams',
     passwordReminder: 'Elfelejtett jelszó',
     personal: 'Személyes',
+    planCancellation: 'Terv lemondása',
     plans: 'MI csomagok',
     privacyPolicy: 'Adatvédelmi irányelvek',
     profile: 'Profil',
