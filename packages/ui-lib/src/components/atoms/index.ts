@@ -5,6 +5,7 @@ export * from './Checkbox';
 export * from './CopyMarker';
 export * from './DarkModeToggle';
 export * from './DotDotDotText';
+export * from './FadeIn';
 export * from './Icon';
 export * from './Input';
 export * from './Label';

@@ -1,5 +1,7 @@
 'use client';
 
+import { FadeIn } from '@maw/ui-lib';
+import { AnimatePresence } from 'framer-motion';
 import Image from 'next/image';
 import { useTranslations } from 'next-intl';
 import { Link } from '@/core/i18n/navigation';
@@ -7,11 +9,11 @@ import { useAppConfigContext, useLogger } from '@/core/react';
 import { useLocaleResource } from '@/hooks';
 import { usePainPreferencesStore, useRuntimeStore } from '@/stores';
 
-export type OneByOnePromotionProps = {
+export type WanAPhoneCampaignAdProps = {
   size?: number;
 };
 
-export function OneByOnePromotion({ size = 1024 }: OneByOnePromotionProps) {
+export function WanAPhoneCampaignAd({ size = 1024 }: WanAPhoneCampaignAdProps) {
   const logger = useLogger('marketing.oneByOnePromotion');
   const config = useAppConfigContext();
   const { resolve, locale } = useLocaleResource();
@@ -29,18 +31,22 @@ export function OneByOnePromotion({ size = 1024 }: OneByOnePromotionProps) {
     return null;
   }
 
-  if (!enabled) return null;
-
   return (
-    <Link href="/flaim-a-phone" className="overflow-hidden">
-      <Image
-        src={resolvedAssetUri}
-        width={size}
-        height={size}
-        alt={t('marketing.wanPhone.title')}
-        data-reduced-motion={reducedMotion ? 'true' : 'false'}
-        className="data-[reduced-motion=false]:animate-gift-callout h-auto w-full object-cover"
-      />
-    </Link>
+    <AnimatePresence>
+      {enabled && (
+        <FadeIn className="overflow-clip" key="wan-a-phone-ad">
+          <Link href="/flaim-a-phone">
+            <Image
+              src={resolvedAssetUri}
+              width={size}
+              height={size}
+              alt={t('marketing.wanPhone.title')}
+              data-reduced-motion={reducedMotion ? 'true' : 'false'}
+              className="data-[reduced-motion=false]:animate-gift-callout h-auto w-full object-cover"
+            />
+          </Link>
+        </FadeIn>
+      )}
+    </AnimatePresence>
   );
 }
