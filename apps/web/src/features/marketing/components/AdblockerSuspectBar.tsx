@@ -20,6 +20,7 @@ export function AdblockerSuspectBar() {
         <FadeIn
           y={20}
           className="border-tertiary bg-error text-on-error sticky -bottom-3 z-20 rounded-t-md border px-5 py-3 shadow-md"
+          key="adblocker-suspect-bar"
         >
           <h4>{t('marketing.suspectBar.title')}</h4>
           <p>{t('marketing.suspectBar.description')}</p>

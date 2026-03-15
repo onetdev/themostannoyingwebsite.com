@@ -64,24 +64,32 @@ export function PainDecoratorLayout({
     <div className={className} {...rest}>
       {/* Elements appearing underneath content container */}
       <AnimatePresence>
-        {runtimeFlags.giftFlaps && <ContainerPromotionFlaps />}
+        {runtimeFlags.giftFlaps && (
+          <ContainerPromotionFlaps key="container-promotion-flaps" />
+        )}
       </AnimatePresence>
 
       {/* Main container and container relative sticky elements */}
       <div className="bg-card relative container mx-auto my-0 min-h-screen">
         {children}
         <AnimatePresence>
-          {runtimeFlags.wheelOfFortune && <WheelOfFortune />}
+          {runtimeFlags.wheelOfFortune && (
+            <WheelOfFortune key="wheel-of-fortune" />
+          )}
         </AnimatePresence>
-        {runtimeFlags.stickyVideo && <GlobalStickyVideo />}
-        {runtimeFlags.showCookieConsent && <CookieConsent />}
+        {runtimeFlags.stickyVideo && (
+          <GlobalStickyVideo key="global-sticky-video" />
+        )}
+        {runtimeFlags.showCookieConsent && (
+          <CookieConsent key="cookie-consent" />
+        )}
         <AdblockerSuspectBar />
       </div>
 
       {/* Global viewport elements */}
-      {deadPixel && <DeadPixel />}
+      {deadPixel && <DeadPixel key="dead-pixel" />}
       <AnimatePresence>
-        {runtimeFlags.mockChat && <ChatBubble />}
+        {runtimeFlags.mockChat && <ChatBubble key="chat-bubble" />}
       </AnimatePresence>
       <GlobalShareModal />
       <Screensaver />
