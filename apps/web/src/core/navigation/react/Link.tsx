@@ -2,11 +2,8 @@
 
 import type { UrlObject } from 'node:url';
 import type { ComponentProps } from 'react';
-import type { Link as TranslatedLink } from '@/core/i18n/navigation';
-import {
-  type NavigationParams,
-  useNavigationProvider,
-} from './NavigationContext';
+import { Link as TranslatedLink } from '@/core/i18n/navigation';
+import { useNavigationProvider } from './NavigationContext';
 
 export type LinkProps =
   | (Omit<ComponentProps<typeof TranslatedLink>, 'href'> & {
@@ -19,11 +16,11 @@ export type LinkProps =
     });
 
 export function Link({ children, href, hrefFor, ...rest }: LinkProps) {
-  const { LinkComponent, pathFor } = useNavigationProvider();
+  const { resolve } = useNavigationProvider();
 
   return (
-    <LinkComponent href={href ?? pathFor(hrefFor)} {...rest}>
+    <TranslatedLink href={href ?? resolve(hrefFor)} {...rest}>
       {children}
-    </LinkComponent>
+    </TranslatedLink>
   );
 }
