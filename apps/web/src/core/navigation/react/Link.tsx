@@ -11,7 +11,7 @@ export type LinkProps =
       hrefFor?: never;
     })
   | (Omit<ComponentProps<typeof TranslatedLink>, 'href'> & {
-      hrefFor: NavigationParams;
+      hrefFor: RouteAliasParams;
       href?: never;
     });
 

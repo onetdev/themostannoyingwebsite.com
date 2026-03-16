@@ -22,7 +22,7 @@ export async function generateMetadata({
 
 export default function SpecialDealPage() {
   return (
-    <PageLayout activeItem="plans" role="main">
+    <PageLayout route="plans" role="main">
       <SpecialUnsubscriptionDeal />
     </PageLayout>
   );

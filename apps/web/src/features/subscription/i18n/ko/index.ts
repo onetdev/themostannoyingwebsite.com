@@ -133,7 +133,7 @@ export default {
     email: {
       title: '당신은 누구인가요?',
       label: '취소 절차를 위해 이메일 주소를 입력해 주세요.',
-      placeholder: 'loyal-customer@themostannoyingwebsite.com',
+      placeholder: 'chungshil-han-gogaek@themostannoyingwebsite.com',
       action: {
         discount: '생각해 보니 마음이 바뀌었어요. 할인을 받을래요!',
         next: '확실합니다. 취소를 계속해 주세요',

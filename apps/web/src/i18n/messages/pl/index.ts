@@ -63,7 +63,8 @@ export default {
     },
     toggleMenu: 'Przełącz menu',
     logo: 'Logo MAW',
-    logoAlt: '<the>the</the> <most>Most</most> Annoying Website',
+    logoAlt:
+      '<most>Najbardziej</most> <the>irytująca</most> strona internetowa',
     dismissBanner: 'Zamknij baner',
     contactForm: {
       title: 'Oficjalny formularz kontaktowy',

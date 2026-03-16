@@ -24,7 +24,7 @@ export default async function Page() {
   const t = await getTranslations();
 
   return (
-    <PageLayout activeItem="donate" role="main">
+    <PageLayout route="donate" role="main">
       <PageHeadline className="mx-auto w-full">
         {t('navigation.donate')}
       </PageHeadline>

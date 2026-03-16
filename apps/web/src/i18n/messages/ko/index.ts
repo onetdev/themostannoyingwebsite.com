@@ -62,7 +62,7 @@ export default {
     },
     toggleMenu: '메뉴 토글',
     logo: 'MAW 로고',
-    logoAlt: '<the>the</the> <most>Most</most> Annoying Website',
+    logoAlt: '<the>세상에서</the> <most>가장</most> 짜증나는 웹사이트',
     dismissBanner: '배너 닫기',
     contactForm: {
       title: '공식 문의 양식',

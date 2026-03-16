@@ -133,7 +133,7 @@ export default {
     email: {
       title: 'あなたは誰？',
       label: 'キャンセル手続きのためにメールアドレスを入力してください。',
-      placeholder: 'loyal-customer@themostannoyingwebsite.com',
+      placeholder: 'chujitsuna-kokyaku@themostannoyingwebsite.com',
       action: {
         discount: 'やっぱり気が変わりました。割引が欲しいです！',
         next: '本気です。キャンセルを続行してください',

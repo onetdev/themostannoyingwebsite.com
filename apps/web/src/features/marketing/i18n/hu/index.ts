@@ -5,7 +5,7 @@ import questionVariants from './quiz-variants';
 export default {
   dilf: {
     title: 'DILF',
-    fullTitle: "DILF - Donut I'd Like to Feast On",
+    fullTitle: 'DILF - Fánk, amit szívesen megkóstolnék',
     description:
       'Ha a környéked legfinomabb, legforróbb, legszinglibb és legellenállhatatlanabb fánkjait keresed, a tökéletes helyen jársz. Készen állsz a kihívásra, hogy megtaláld az igazi szerelmet? Kattints az itt található fánkok bármelyikére, hogy megtudd, melyiket rendelte neked a sors.',
     flapLeft: 'DILF. Forró szingli fánkok a közeledben',

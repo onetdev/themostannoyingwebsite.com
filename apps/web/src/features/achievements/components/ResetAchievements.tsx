@@ -16,7 +16,7 @@ import { useCallback, useState } from 'react';
 import { useEvent } from '@/core/react';
 import { useAchievementsStore } from '../stores';
 
-export function ResetAchievementsButton() {
+export function ResetAchievements() {
   const t = useTranslations();
   const { achievements, resetAchievements } = useAchievementsStore();
   const [isOpen, setIsOpen] = useState(false);
@@ -54,11 +54,18 @@ export function ResetAchievementsButton() {
         </DialogHeader>
         <DialogFooter>
           <DialogClose asChild>
-            <Button variant="outline">
+            <Button
+              variant="outline"
+              className="whitespace-break-spaces max-w-1/2 h-auto"
+            >
               {t('achievements.reset.cancelAction')}
             </Button>
           </DialogClose>
-          <Button variant="destructive" onClick={onConfirm}>
+          <Button
+            variant="destructive"
+            onClick={onConfirm}
+            className="whitespace-break-spaces max-w-1/2 h-auto"
+          >
             {t('achievements.reset.confirmAction')}
           </Button>
         </DialogFooter>

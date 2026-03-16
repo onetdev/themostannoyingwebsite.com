@@ -63,7 +63,7 @@ export default {
     },
     toggleMenu: 'Menü váltása',
     logo: 'MAW Logó',
-    logoAlt: '<the>the</the> <most>Most</most> Annoying Website',
+    logoAlt: '<the>a</the> <most>legidegesítőbb</most> weboldal',
     dismissBanner: 'Banner elrejtése',
     contactForm: {
       title: 'Hivatalos kapcsolatfelvételi űrlap',

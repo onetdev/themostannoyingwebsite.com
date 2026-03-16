@@ -24,7 +24,8 @@ export default async function Page() {
   return (
     <PageLayout
       autoPadding={false}
-      activeItem="login"
+      route="user.profile"
+      navigationHighlightRoute="user.login"
       className="mx-auto max-w-md px-5 py-0 md:py-14"
       role="main"
     >

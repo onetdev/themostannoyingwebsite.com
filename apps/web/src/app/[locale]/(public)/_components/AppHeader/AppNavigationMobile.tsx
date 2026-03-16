@@ -14,18 +14,18 @@ import { useTranslations } from 'next-intl';
 import { useMemo } from 'react';
 
 import {
-  type ActiveNavigationItem,
   isNavigationItemActive,
   type NavItem,
   PERSONAL_NAVIGATION_LINKS,
   SITE_NAVIGATION_LINKS,
 } from '@/app/navigation';
 import { Link } from '@/core/react';
+import type { RouteAlias } from '@/schemas';
 import { useRuntimeStore } from '@/stores';
 import { AppLanguageSwitcher } from '../AppLanguageSwitcher';
 
 export type AppNavigationMobileProps = {
-  activeItem?: ActiveNavigationItem;
+  activeItem?: RouteAlias;
 };
 
 export function AppNavigationMobile({ activeItem }: AppNavigationMobileProps) {

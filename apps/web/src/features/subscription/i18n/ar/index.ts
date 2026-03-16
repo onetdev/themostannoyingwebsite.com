@@ -133,7 +133,7 @@ export default {
     email: {
       title: 'من أنت؟',
       label: 'قدم عنوان بريدك الإلكتروني لعملية الإلغاء.',
-      placeholder: 'loyal-customer@themostannoyingwebsite.com',
+      placeholder: 'amiel-mokhlis@themostannoyingwebsite.com',
       action: {
         discount: 'تعرف ماذا، لقد غيرت رأيي، أريد الخصم!',
         next: 'أنا متأكد، لنواصل الإلغاء',

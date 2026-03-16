@@ -22,7 +22,7 @@ export async function generateMetadata({
 
 export default async function Page() {
   return (
-    <PageLayout activeItem="plans" role="main">
+    <PageLayout route="plans.cancellation" role="main">
       <CancellationPage />
     </PageLayout>
   );

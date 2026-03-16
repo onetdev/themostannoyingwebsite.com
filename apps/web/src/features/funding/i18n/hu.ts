@@ -15,7 +15,7 @@ export default {
   topSupporterHeart: '🥉 Szív',
   totalSupportReceived: 'Összes kapott támogatás',
   classicMethods: 'Hagyományos módszerek',
-  buyMeACoffee: 'Buy Me A Coffee',
+  buyMeACoffee: 'Vegyél nekem egy kávét',
   payPal: 'PayPal',
   cryptoMethods: 'Kripto módszerek',
   alternativeOptionsLink: 'Kattints ide a támogatás egyéb módjaiért 😏',

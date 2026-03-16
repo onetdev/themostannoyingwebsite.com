@@ -13,9 +13,9 @@ export function ClientNavigationConfigurator({ children }: PropsWithChildren) {
       value={{
         back: navigation.back,
         forward: navigation.forward,
-        push: (param: NavigationParams) =>
+        push: (param: RouteAliasParams) =>
           navigation.push(resolvePathForRouteAlias(param)),
-        replace: (param: NavigationParams) =>
+        replace: (param: RouteAliasParams) =>
           navigation.replace(resolvePathForRouteAlias(param)),
         resolve: resolvePathForRouteAlias,
         unsafePush: navigation.push,

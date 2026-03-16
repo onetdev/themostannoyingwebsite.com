@@ -19,6 +19,7 @@ import {
   useUserPreferencesStore,
 } from '@/stores';
 import { useDebugAuth } from '../../hooks';
+import { ReportRouteVisit } from '../ReportRouteVisit';
 import { DebugAuthGate } from './DebugAuthGate';
 import { EventTester } from './EventTester';
 import { StoreInspector } from './StoreInspector';
@@ -35,6 +36,7 @@ export function DebugPage() {
 
   return (
     <DebugAuthGate>
+      <ReportRouteVisit route="debug" />
       <div className="container mx-auto space-y-8 py-10 px-4">
         <div className="flex items-center justify-between">
           <div className="flex items-baseline gap-4">

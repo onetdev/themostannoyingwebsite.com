@@ -11,7 +11,6 @@ import { cn } from '@maw/ui-lib/utils';
 import { useTranslations } from 'next-intl';
 
 import {
-  type ActiveNavigationItem,
   isNavigationItemActive,
   type NavItem,
   PERSONAL_NAVIGATION_LINKS,
@@ -19,11 +18,12 @@ import {
 } from '@/app/navigation';
 import { Link } from '@/core/react';
 import { useLangDir } from '@/hooks';
+import type { RouteAlias } from '@/schemas';
 import { useRuntimeStore } from '@/stores';
 
 export type AppNavigationDesktopProps = {
   className?: string;
-  activeItem?: ActiveNavigationItem;
+  activeItem?: RouteAlias;
 };
 
 export function AppNavigationDesktop({

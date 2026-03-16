@@ -1,9 +1,9 @@
 import { Button, Icon } from '@maw/ui-lib';
 import { getTranslations } from 'next-intl/server';
 import type { ComponentProps } from 'react';
-import type { ActiveNavigationItem } from '@/app/navigation';
 import { Link } from '@/core/i18n/navigation';
 import { SearchForm } from '@/features/content/components';
+import type { RouteAlias } from '@/schemas';
 import { AppLanguageSwitcher } from '../AppLanguageSwitcher';
 import { AppDarkModeToggle } from './AppDarkModeToggle';
 import { AppNavigationDesktop } from './AppNavigationDesktop';
@@ -12,7 +12,7 @@ import { PainLevelSelector } from './PainLevelSelector';
 import { TextLogo } from './TextLogo';
 
 type AppHeaderProps = {
-  activeItem?: ActiveNavigationItem;
+  activeItem?: RouteAlias;
   className?: ComponentProps<'header'>['className'];
 };
 

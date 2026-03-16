@@ -85,5 +85,10 @@ export default {
       name: 'Love letters from a medic',
       description: 'Receive 5 messages from our helpful support agents.',
     },
+    virginMojito: {
+      name: 'Virgin Mojito',
+      description:
+        "It's not quite the same. But sometimes you need to be responsible.",
+    },
   },
 };

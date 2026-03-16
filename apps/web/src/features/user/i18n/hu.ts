@@ -122,7 +122,7 @@ export default {
     dilf: 'Fánk, amit szívesen megkóstolnék',
     fakeAiSubscription: 'Hamis MI előfizetési tervek',
     fakeComments: 'Hamis hozzászólások',
-    flaimYourPhone: 'Flaim your phone',
+    flaimYourPhone: 'Flaimelj egy telefont',
     impossibleLogin: 'Lehetetlen belépés',
     impossiblePasswordReminder: 'Lehetetlen jelszó emlékeztető',
     impossibleSignup: 'Lehetetlen regisztráció',

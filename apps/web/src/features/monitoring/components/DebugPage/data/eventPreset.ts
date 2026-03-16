@@ -5,6 +5,7 @@ type EventPreset = {
 };
 
 export const eventPresets: EventPreset[] = [
+  { type: 'route:visit', payload: { route: 'home' } },
   { type: 'navigation:changed', payload: { path: '/debug' } },
   { type: 'global-search:query', payload: { query: 'annoying' } },
   {

@@ -60,12 +60,12 @@ export default {
   variant_006: {
     text: 'Fejezd be a következőt: Well, well, well...',
     options: {
-      option_001: 'How the turntables...',
+      option_001: 'Hogy megfordult a kocka!',
       option_002: 'Nem ütöttem meg!',
       option_003: 'Valahol ott lent van, hadd nézzem meg még egyszer',
       option_004: 'Itt nem parkolhatsz',
     },
-    solution: 'How the turntables...',
+    solution: 'Hogy megfordult a kocka!',
   },
   variant_007: {
     text: 'Melyik NEM egy telefonmárka?',

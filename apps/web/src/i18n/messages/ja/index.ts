@@ -63,7 +63,7 @@ export default {
     },
     toggleMenu: 'メニューを切り替える',
     logo: 'MAW ロゴ',
-    logoAlt: '<the>the</the> <most>Most</most> Annoying Website',
+    logoAlt: '<the>史上</the> <most>最も</most> 迷惑なウェブサイト',
     dismissBanner: 'バナーを閉じる',
     contactForm: {
       title: '公式お問い合わせフォーム',

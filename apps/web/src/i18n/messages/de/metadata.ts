@@ -30,7 +30,7 @@ export default {
       'Ihre Unterstützung macht einen riesigen Unterschied! Tragen Sie hier dazu bei, dass wir weiterhin erstaunliche Erlebnisse schaffen können.',
   },
   wanPhone: {
-    title: 'Flaim a phone',
+    title: 'Ein Telefon flaimen',
     description:
       'Bereit für feurigen Spaß? Beanspruchen Sie hier ein Telefon und sehen Sie, wie wir Ihrem mobilen Erlebnis einheizen.',
   },
