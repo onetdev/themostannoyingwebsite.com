@@ -43,7 +43,7 @@ export const PERSONAL_NAVIGATION_LINKS: NavItem[] = [
   },
   {
     icon: 'login' as const,
-    id: 'login',
+    id: 'user.login',
     labelKey: 'navigation.login',
     hrefFor: 'user.login',
   },
