@@ -22,11 +22,13 @@ export function ConfirmationStep({
 
   return (
     <div className="space-y-6">
-      <div className="print:hidden space-y-4">
-        <h2 className="text-xl font-bold text-destructive underline">
-          {t('title')}
-        </h2>
-        <p className="font-bold">{t('description')}</p>
+      <div className="print:hidden space-y-6">
+        <div className="space-y-2">
+          <h4 className="text-xl font-bold text-destructive underline">
+            {t('title')}
+          </h4>
+          <p className="font-bold">{t('description')}</p>
+        </div>
 
         <Alert variant="info">
           <AlertTitle>{t('alert.title')}</AlertTitle>
@@ -60,16 +62,19 @@ export function ConfirmationStep({
           </Button>
         </div>
 
-        <div className="pt-4 border-t-2 border-dashed border-border">
+        <div className="pt-4 border-t-2 border-dashed border-border space-y-4">
           <p className="text-xs text-gray-500 italic">{t('alternative')}</p>
           <div className="grid grid-cols-2 gap-2 mt-2">
-            <Button onClick={onAbort} variant="secondary">
+            <Button onClick={onAbort} variant="secondary" size="lg">
               {t('action.abort')}
             </Button>
-            <Button onClick={onUpgrade}>{t('action.upgrade')}</Button>
+            <Button onClick={onUpgrade} size="lg">
+              {t('action.upgrade')}
+            </Button>
             <Button
               onClick={onSpecialDeal}
               variant="outline"
+              size="lg"
               className="col-span-2"
             >
               {t('action.specialDeal')}

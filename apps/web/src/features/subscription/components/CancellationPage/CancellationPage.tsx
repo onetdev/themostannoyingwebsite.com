@@ -30,7 +30,7 @@ const STEP_ORDER: Step[] = [
   'confirmation',
 ];
 
-export function UnsubscribePage() {
+export function CancellationPage() {
   const t = useTranslations('subscription.cancellation.page');
   const { push } = useNavigationProvider();
   const [step, setStep] = useState<Step>(STEP_ORDER[0]);
@@ -91,7 +91,7 @@ export function UnsubscribePage() {
 
   return (
     <FormProvider {...methods}>
-      <div className="mx-auto mt-10 w-full max-w-2xl border-4 border-border py-8 px-8 print:p-0 print:border-0 print:max-w-full print:m-0">
+      <div className="mx-auto mt-10 w-full max-w-2xl border rounded-xl border-border p-6 print:p-0 print:border-0 print:max-w-full print:m-0">
         <PageHeadline className="print:hidden">{t('title')}</PageHeadline>
         {renderStep()}
       </div>

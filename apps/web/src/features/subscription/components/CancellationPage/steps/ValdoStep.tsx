@@ -47,13 +47,13 @@ export function ValdoStep({ onNext, rows = 10, cols = 9 }: ValdoStepProps) {
   );
 
   return (
-    <div className="relative w-full">
+    <div className="relative w-full space-y-6">
       <div className="space-y-2">
-        <h4 className="text-lg font-bold">{t('title')}</h4>
+        <h4 className="text-xl font-bold">{t('title')}</h4>
         <p className="text-sm">{t('description')}</p>
       </div>
       <div
-        className="flex flex-col gap-1 -mx-8 overflow-x-hidden pt-8 pb-12"
+        className="flex flex-col gap-1 -mx-8 overflow-x-hidden pb-12"
         style={{
           WebkitMaskImage:
             'linear-gradient(to right, transparent, black 5%, black 95%, transparent)',

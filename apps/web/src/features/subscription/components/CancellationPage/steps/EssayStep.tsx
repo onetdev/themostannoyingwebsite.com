@@ -29,29 +29,29 @@ export function EssayStep({ onNext, onAbort }: EssayStepProps) {
   };
 
   return (
-    <div className="space-y-4">
+    <div className="space-y-6">
       <div className="space-y-2">
-        <h4 className="text-lg font-bold">{t('title')}</h4>
+        <h4 className="text-xl font-bold">{t('title')}</h4>
         <p className="text-sm">{t('description')}</p>
-        <Textarea
-          {...register('feedback')}
-          placeholder={t('placeholder')}
-          className="min-h-80"
-          aria-invalid={!!errors.feedback}
-        />
-        <div className="flex justify-between text-xs">
-          <span
-            className={
-              feedback.length < 3000 ? 'text-destructive' : 'text-success'
-            }
-          >
-            {t('characters', { count: feedback.length })}
-          </span>
-        </div>
+      </div>
+      <Textarea
+        {...register('feedback')}
+        placeholder={t('placeholder')}
+        className="min-h-80"
+        aria-invalid={!!errors.feedback}
+      />
+      <div className="flex justify-between text-xs">
+        <span
+          className={
+            feedback.length < 3000 ? 'text-destructive' : 'text-success'
+          }
+        >
+          {t('characters', { count: feedback.length })}
+        </span>
       </div>
 
-      <div className="flex flex-col items-center gap-4 pt-4">
-        <Button onClick={onAbort} className="w-full text-lg h-14" size="lg">
+      <div className="flex flex-col items-center gap-4">
+        <Button onClick={onAbort} className="w-full" size="lg">
           {t('action.abort')}
         </Button>
 

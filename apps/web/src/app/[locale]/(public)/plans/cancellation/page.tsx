@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 import { getTranslations } from 'next-intl/server';
-import { UnsubscribePage } from '@/features/subscription/components';
+import { CancellationPage } from '@/features/subscription/components';
 import { PageLayout } from '../../_components/PageLayout';
 
 export { generateStaticParams } from '@/core/i18n/routing';
@@ -23,7 +23,7 @@ export async function generateMetadata({
 export default async function Page() {
   return (
     <PageLayout activeItem="plans" role="main">
-      <UnsubscribePage />
+      <CancellationPage />
     </PageLayout>
   );
 }

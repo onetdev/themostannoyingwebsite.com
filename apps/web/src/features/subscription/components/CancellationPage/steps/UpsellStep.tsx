@@ -12,10 +12,12 @@ export function UpsellStep({ onSpecialDeal, onNext }: UpsellStepProps) {
   const t = useTranslations('subscription.cancellation.upsell');
 
   return (
-    <div className="space-y-4">
-      <h4 className="text-2xl font-bold">{t('title')}</h4>
-      <p>{t('description')}</p>
-      <p className="text-2xl font-bold py-10 px-5 rounded-2xl border-dotted border-2 border-destructive bg-destructive/10 mb-10 whitespace-pre-wrap">
+    <div className="space-y-6">
+      <div className="space-y-2">
+        <h4 className="text-xl font-bold">{t('title')}</h4>
+        <p className="text-sm">{t('description')}</p>
+      </div>
+      <p className="text-2xl font-bold py-10 px-5 rounded-2xl border-dotted border-2 border-destructive bg-destructive/10 whitespace-pre-wrap">
         {t('promo')}
       </p>
       <div className="flex gap-4">
@@ -33,8 +35,9 @@ export function UpsellStep({ onSpecialDeal, onNext }: UpsellStepProps) {
       </div>
       <Button
         variant="link"
+        size="xs"
         onClick={onNext}
-        className="whitespace-break-spaces text-xs w-full text-center"
+        className="whitespace-break-spaces w-full text-center"
       >
         {t('action.next')}
       </Button>

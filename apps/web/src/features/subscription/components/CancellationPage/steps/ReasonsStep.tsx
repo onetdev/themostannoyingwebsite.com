@@ -20,16 +20,19 @@ export function ReasonsStep({ onNext }: ReasonsStepProps) {
   };
 
   return (
-    <div className="space-y-4">
-      <h4 className="text-lg font-bold">{t('title')}</h4>
-      <p className="text-sm">{t('description')}</p>
+    <div className="space-y-6">
+      <div className="space-y-2">
+        <h4 className="text-xl font-bold">{t('title')}</h4>
+        <p className="text-sm">{t('description')}</p>
+      </div>
       <div className="space-y-2">
         {reasons.map((reason) => (
           <Button
             key={reason}
             variant="outline"
+            size="lg"
             onClick={() => handleReasonClick(reason)}
-            className="w-full justify-start text-left"
+            className="w-full justify-start text-left whitespace-break-spaces h-auto py-4"
           >
             {reason}
           </Button>
