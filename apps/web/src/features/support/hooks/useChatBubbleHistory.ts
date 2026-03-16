@@ -3,8 +3,8 @@
 import { useMessages, useTranslations } from 'next-intl';
 import { useCallback, useEffect, useMemo, useState } from 'react';
 import { useMount } from 'react-use';
-import { useAppConfigContext } from '@/core/config/react/AppConfig';
 import { emit } from '@/core/events/event-bus';
+import { useAppConfigContext } from '@/core/react';
 import { useAudio, useSendNotification } from '@/hooks';
 import { useRuntimeStore } from '@/stores';
 import type { ChatMessage, ChatMessageType } from '../schemas';

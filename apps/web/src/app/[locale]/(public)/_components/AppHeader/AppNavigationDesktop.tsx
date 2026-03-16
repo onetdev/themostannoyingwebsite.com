@@ -17,7 +17,7 @@ import {
   PERSONAL_NAVIGATION_LINKS,
   SITE_NAVIGATION_LINKS,
 } from '@/app/navigation';
-import { Link } from '@/core/i18n/navigation';
+import { Link } from '@/core/react';
 import { useLangDir } from '@/hooks';
 import { useRuntimeStore } from '@/stores';
 
@@ -35,7 +35,7 @@ export function AppNavigationDesktop({
   const direction = useLangDir();
 
   const onClick = (item: NavItem) => {
-    if (item.key === 'global-share') {
+    if (item.id === 'global-share') {
       showShareModal();
       return false;
     }
@@ -45,7 +45,7 @@ export function AppNavigationDesktop({
     const active = isNavigationItemActive(item, activeItem);
 
     return (
-      <NavigationMenuItem key={item.key}>
+      <NavigationMenuItem key={item.id}>
         <NavigationMenuLink
           asChild
           data-active={active}
@@ -54,7 +54,7 @@ export function AppNavigationDesktop({
           title={t(item.labelKey)}
           className="flex-row items-center gap-2 data-[active=true]:font-bold"
         >
-          <Link href={item.path} onClick={() => onClick(item)} passHref>
+          <Link hrefFor={item.hrefFor} onClick={() => onClick(item)} passHref>
             {item.icon && <Icon icon={item.icon} className="text-primary" />}
             {item.hideLabel !== true && (
               <span

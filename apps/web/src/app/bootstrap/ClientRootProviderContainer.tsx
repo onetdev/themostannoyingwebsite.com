@@ -4,10 +4,12 @@ import { Toaster, TooltipProvider } from '@maw/ui-lib';
 import { QueryClientProvider } from '@tanstack/react-query';
 import { ThemeProvider } from 'next-themes';
 import { type PropsWithChildren, useState } from 'react';
-import { AppConfigProvider } from '@/core/config/react/AppConfig';
 import { getClientDependencyContainer } from '@/core/di/client';
-import { DiContextProvider } from '@/core/di/react/ReactDi';
-import { getQueryClient } from '@/core/http/react/query-client';
+import {
+  AppConfigProvider,
+  DiContextProvider,
+  getQueryClient,
+} from '@/core/react';
 import { AchievementManager } from '@/features/achievements/providers';
 import type { AppConfig } from '@/schemas/app-config';
 import { ClientNavigationConfigurator } from './ClientNavigationConfigurator';

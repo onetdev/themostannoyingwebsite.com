@@ -84,6 +84,16 @@ export default {
     description:
       'Wybieraj spośród naszej oferty premium, 100% fałszywych pakietów AI. Doświadcz przyszłości irytacji już dziś!',
   },
+  planCancellation: {
+    title: 'Anuluj subskrypcję',
+    description:
+      'Przykro nam, że zostajesz. Czy na pewno chcesz przegapić całą tę irytację?',
+  },
+  planSpecialDeal: {
+    title: 'Oferta specjalna',
+    description:
+      'Czekaj! Nie idź jeszcze! Mamy dla Ciebie specjalną ofertę, aby utrzymać irytację przy życiu.',
+  },
   onlySpams: {
     title: 'OnlySpams',
     description:

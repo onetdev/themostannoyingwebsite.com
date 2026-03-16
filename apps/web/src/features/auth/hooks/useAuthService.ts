@@ -1,6 +1,6 @@
 'use client';
 
-import { useDiContext } from '@/core/di/react/ReactDi';
+import { useDiContext } from '@/core/react';
 import type { AuthService } from '../services/AuthService';
 import { DI } from '../types';
 

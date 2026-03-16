@@ -9,8 +9,7 @@ import {
 } from '@maw/ui-lib';
 import { useTranslations } from 'next-intl';
 import { useState } from 'react';
-
-import { useEvent } from '@/hooks';
+import { useEvent } from '@/core/react';
 import { ModalContent } from './ModalContent';
 import { WheelOfFortuneTrigger } from './WheelOfFortuneTrigger';
 

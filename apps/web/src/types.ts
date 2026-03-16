@@ -2,6 +2,7 @@ import type Emittery from 'emittery';
 import type { MessageKeys, NestedKeyOf } from 'next-intl';
 import type englishShape from '@/i18n/messages/en';
 import type i18nConfig from '@/root/i18n.config';
+import type { RouteAlias } from './schemas';
 
 declare global {
   type AppTheme = 'light' | 'dark';
@@ -33,6 +34,11 @@ declare global {
     take: number;
     skip: number;
   };
+
+  type NavigationParams =
+    | Exclude<RouteAlias, 'article.single'>
+    | { alias: 'article.single'; params: { slug: string } }
+    | { raw: string };
 
   type NextPageParams = {
     locale: AppLocale;

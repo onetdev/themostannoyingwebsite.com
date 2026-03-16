@@ -4,9 +4,9 @@ import { FadeIn } from '@maw/ui-lib';
 import { AnimatePresence } from 'framer-motion';
 import Image from 'next/image';
 import { useTranslations } from 'next-intl';
-import { useAppConfigContext } from '@/core/config/react/AppConfig';
 import { Link } from '@/core/i18n/navigation';
-import { useLocaleResource, useLogger } from '@/hooks';
+import { useAppConfigContext, useLogger } from '@/core/react';
+import { useLocaleResource } from '@/hooks';
 import { usePainPreferencesStore, useRuntimeStore } from '@/stores';
 
 export type WanAPhoneCampaignAdProps = {

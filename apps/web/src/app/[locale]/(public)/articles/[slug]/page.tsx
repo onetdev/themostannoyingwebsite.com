@@ -94,7 +94,7 @@ export default async function Page({ params }: PageProps) {
 
   return (
     <PageLayout
-      activeItem="article-item"
+      activeItem="article-single"
       role="main"
       data-testid="article-item"
     >

@@ -3,7 +3,7 @@
 import { Button, FieldError, LoaderDots, PageHeadline } from '@maw/ui-lib';
 import { useTranslations } from 'next-intl';
 import { FormProvider } from 'react-hook-form';
-import { useNavigationProvider } from '@/core/navigation/react/NavigationContext';
+import { Link, useNavigationProvider } from '@/core/react';
 import { CaptchaField } from '@/features/captcha/components';
 import { useSignupForm } from '../../hooks';
 import {
@@ -26,10 +26,9 @@ import {
 
 export function SignupForm() {
   const t = useTranslations();
-  const { LinkComponent: Link, pathFor } = useNavigationProvider();
-  const { navigateReplace } = useNavigationProvider();
+  const { replace } = useNavigationProvider();
   const methods = useSignupForm({
-    onSuccess: () => navigateReplace('user.profile'),
+    onSuccess: () => replace('user.profile'),
   });
   const {
     formState: { errors, isSubmitting },
@@ -86,10 +85,10 @@ export function SignupForm() {
             {!isCtaLoading && t('auth.form.signup.callToAction')}
           </Button>
           <div className="flex justify-between">
-            <Link href={pathFor('user.password-reminder')} prefetch={false}>
+            <Link hrefFor="user.password-reminder" prefetch={false}>
               {t('auth.common.forgotPassword')}
             </Link>
-            <Link href={pathFor('user.login')} prefetch={false}>
+            <Link hrefFor="user.login" prefetch={false}>
               {t('auth.common.login')}
             </Link>
           </div>

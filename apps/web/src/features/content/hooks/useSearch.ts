@@ -2,8 +2,8 @@
 
 import { useLocale } from 'next-intl';
 import { useEffect, useState } from 'react';
+import { useEvent } from '@/core/react';
 import { useSearchQuery } from '@/features/content/hooks';
-import { useEvent } from '@/hooks';
 
 export function useSearch() {
   const locale = useLocale();

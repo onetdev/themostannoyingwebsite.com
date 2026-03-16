@@ -80,14 +80,24 @@ export default {
       "Cerchi un'esperienza senza fronzoli? Disabilita qui tutte le funzionalità personalizzate e goditi una versione snella e senza distrazioni del nostro sito.",
   },
   plans: {
-    title: 'Pacchetti e piani IA',
+    title: 'Pacchetti e piani AI',
     description:
-      'Scegli tra la nostra selezione di pacchetti IA premium, falsi al 100%. Vivi il futuro del fastidio oggi stesso!',
+      'Scegli tra la nostra selezione di pacchetti AI premium, 100% falsi. Sperimenta il futuro del fastidio oggi stesso!',
+  },
+  planCancellation: {
+    title: 'Annulla abbonamento',
+    description:
+      'Ci dispiace che tu rimanga. Sei sicuro di voler perdere tutto questo fastidio?',
+  },
+  planSpecialDeal: {
+    title: 'Offerta speciale',
+    description:
+      "Aspetta! Non andare ancora! Abbiamo un'offerta speciale solo per te per mantenere vivo il fastidio.",
   },
   onlySpams: {
     title: 'OnlySpams',
     description:
-      'La newsletter più esclusiva per la tua casella di posta. Prova la gioia dello spam infinito e delle e-mail truffaldine di alta qualità.',
+      'La newsletter più esclusiva per la tua casella di posta. Prova la gioia dello spam infinito e delle e-mail truffa di alta qualità.',
   },
   admin: {
     title: 'Terminale Admin',

@@ -2,7 +2,7 @@
 
 import { useForm } from 'react-hook-form';
 import { emit } from '@/core/events/event-bus';
-import { useLogger } from '@/core/observability/react/useLogger';
+import { useLogger } from '@/core/react';
 import { useZodFormValidator } from '@/hooks';
 import { type EventTestFormData, getEventTestFormDataSchema } from '../schemas';
 

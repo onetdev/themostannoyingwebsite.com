@@ -80,14 +80,24 @@ export default {
       'Sallangmentes élményre vágyik? Kapcsolja ki az összes személyre szabott funkciót itt, és élvezze oldalunk letisztult, zavaró tényezőktől mentes verzióját.',
   },
   plans: {
-    title: 'MI csomagok és tervek',
+    title: 'AI csomagok és tervek',
     description:
-      'Válasszon prémium, 100%-ban hamis MI csomagjaink közül. Tapasztalja meg a bosszúság jövőjét még ma!',
+      'Válasszon prémium, 100%-ban hamis AI csomagjainkból. Tapasztalja meg az idegesítés jövőjét még ma!',
+  },
+  planCancellation: {
+    title: 'Előfizetés lemondása',
+    description:
+      'Sajnáljuk, hogy maradsz. Biztosan le akarsz maradni erről a sok bosszúságról?',
+  },
+  planSpecialDeal: {
+    title: 'Különleges ajánlat',
+    description:
+      'Várj! Ne menj még! Van egy különleges ajánlatunk csak neked, hogy életben tartsuk a bosszúságot.',
   },
   onlySpams: {
     title: 'OnlySpams',
     description:
-      'A legexkluzívabb hírlevél az Ön postaládájába. Tapasztalja meg a végtelen spam és a kiváló minőségű átverő e-mailek örömét.',
+      'A legexkluzívabb hírlevél a postaládájához. Tapasztalja meg a végtelen spam és a kiváló minőségű átverő e-mailek örömét.',
   },
   admin: {
     title: 'Admin terminál',

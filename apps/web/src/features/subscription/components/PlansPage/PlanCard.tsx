@@ -1,6 +1,7 @@
 import {
   Badge,
   Button,
+  type ButtonProps,
   Card,
   CardContent,
   CardFooter,
@@ -23,6 +24,7 @@ export interface PlanCardProps {
   billingCycle: BillingCycle;
   extraDiscountPercentage?: number;
   isSelected?: boolean;
+  isOutOfStock?: boolean;
   onSelect?: () => void;
 }
 
@@ -31,6 +33,7 @@ export function PlanCard({
   billingCycle,
   extraDiscountPercentage: extraDiscount,
   isSelected,
+  isOutOfStock,
   onSelect,
 }: PlanCardProps) {
   const t = useTranslations();
@@ -44,6 +47,19 @@ export function PlanCard({
 
   const totalCharge =
     priceDiscountCorrected * BILLING_CYCLE_MONTH_MAP[billingCycle];
+
+  let label = t('common.action.select');
+  if (isOutOfStock) {
+    label = t('subscription.landing.status.outOfStock');
+  }
+
+  let variant: ButtonProps['variant'] = 'outline';
+  if (isSelected) {
+    variant = 'default';
+  }
+  if (isOutOfStock) {
+    variant = 'outline';
+  }
 
   return (
     <Card
@@ -126,10 +142,11 @@ export function PlanCard({
       <CardFooter>
         <Button
           className="w-full"
-          variant={isSelected ? 'default' : 'outline'}
+          variant={variant}
+          disabled={isOutOfStock}
           onClick={onSelect}
         >
-          {isSelected ? t('common.action.done') : t('common.action.select')}
+          {label}
         </Button>
       </CardFooter>
     </Card>

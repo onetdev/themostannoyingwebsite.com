@@ -84,6 +84,16 @@ export default {
     description:
       '우리가 엄선한 100% 가짜 프리미엄 AI 패키지 중에서 선택하세요. 오늘 미래의 짜증을 경험해 보세요!',
   },
+  planCancellation: {
+    title: '구독 취소',
+    description:
+      '남아 계신다니 정말 아쉽네요. 이 모든 짜증나는 즐거움을 정말로 놓치고 싶으신가요?',
+  },
+  planSpecialDeal: {
+    title: '특별 혜택',
+    description:
+      '잠깐만요! 아직 가지 마세요! 짜증을 계속 이어가실 수 있도록 당신만을 위한 특별한 혜택을 준비했습니다.',
+  },
   onlySpams: {
     title: 'OnlySpams',
     description:

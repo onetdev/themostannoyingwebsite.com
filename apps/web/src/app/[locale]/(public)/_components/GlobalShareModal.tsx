@@ -3,7 +3,7 @@
 import { ShareModal as ShareModalUI } from '@maw/ui-lib';
 import { useTranslations } from 'next-intl';
 
-import { useEvent } from '@/hooks';
+import { useEvent } from '@/core/react';
 import { useRuntimeStore } from '@/stores';
 
 export function GlobalShareModal() {

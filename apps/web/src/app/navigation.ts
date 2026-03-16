@@ -4,7 +4,7 @@ export const ActiveNavigationItems = [
   'about',
   'achievements',
   'admin',
-  'article-item',
+  'article-single',
   'contact',
   'dilf',
   'donate',
@@ -13,6 +13,7 @@ export const ActiveNavigationItems = [
   'hot-things',
   'login',
   'only-spams',
+  'plan-cancellation',
   'plans',
   'privacy-policy',
   'search',
@@ -25,96 +26,101 @@ export type ActiveNavigationItem = (typeof ActiveNavigationItems)[number];
 export type NavItem = {
   hideLabel?: boolean;
   icon?: IconAliaseKey;
-  key: string;
+  id: string;
   labelKey: AppTranslationKey;
-  path: string;
+  hrefFor: NavigationParams;
 };
 
 export const SITE_NAVIGATION_LINKS: NavItem[] = [
-  { key: 'home', labelKey: 'navigation.home', path: '/' },
-  { key: 'dilf', labelKey: 'navigation.dilf', path: '/dilf' },
-  { key: 'only-spams', labelKey: 'navigation.onlySpams', path: '/only-spams' },
-  { key: 'plans', labelKey: 'navigation.plans', path: '/plans' },
-  { key: 'donate', labelKey: 'navigation.donate', path: '/donate' },
-  { key: 'about', labelKey: 'navigation.about', path: '/about' },
-  { key: 'contact', labelKey: 'navigation.contact', path: '/contact' },
+  { id: 'home', labelKey: 'navigation.home', hrefFor: 'home' },
+  { id: 'dilf', labelKey: 'navigation.dilf', hrefFor: 'dilf' },
+  { id: 'only-spams', labelKey: 'navigation.onlySpams', hrefFor: 'only-spams' },
+  { id: 'plans', labelKey: 'navigation.plans', hrefFor: 'plans' },
+  { id: 'donate', labelKey: 'navigation.donate', hrefFor: 'donate' },
+  { id: 'about', labelKey: 'navigation.about', hrefFor: 'about' },
+  { id: 'contact', labelKey: 'navigation.contact', hrefFor: 'contact' },
 ];
 
 export const PERSONAL_NAVIGATION_LINKS: NavItem[] = [
   {
     hideLabel: true,
     icon: 'trophy' as const,
-    key: 'achievements',
+    id: 'achievements',
     labelKey: 'navigation.achievements',
-    path: '/achievements',
+    hrefFor: 'achievements',
   },
   {
     hideLabel: true,
     icon: 'share' as const,
-    key: 'global-share',
+    id: 'global-share',
     labelKey: 'common.action.share',
-    path: '#share',
+    hrefFor: { raw: '#share' },
   },
   {
     hideLabel: true,
     icon: 'settings' as const,
-    key: 'settings',
+    id: 'settings',
     labelKey: 'navigation.settings',
-    path: '/settings',
+    hrefFor: 'settings',
   },
   {
     icon: 'login' as const,
-    key: 'login',
+    id: 'login',
     labelKey: 'navigation.login',
-    path: '/user/login',
+    hrefFor: 'user.login',
   },
 ];
 
 export const FOOTER_NAVIGATION_LINKS: NavItem[] = [
   // Main website links
-  { key: 'home', labelKey: 'navigation.home', path: '/' },
-  { key: 'plans', labelKey: 'navigation.plans', path: '/plans' },
-  { key: 'donate', labelKey: 'navigation.donate', path: '/donate' },
-  { key: 'about', labelKey: 'navigation.about', path: '/about' },
-  { key: 'search', labelKey: 'navigation.search', path: '/search' },
-  { key: 'contact', labelKey: 'navigation.contact', path: '/contact' },
+  { id: 'home', labelKey: 'navigation.home', hrefFor: 'home' },
+  { id: 'plans', labelKey: 'navigation.plans', hrefFor: 'plans' },
+  { id: 'donate', labelKey: 'navigation.donate', hrefFor: 'donate' },
+  { id: 'about', labelKey: 'navigation.about', hrefFor: 'about' },
+  { id: 'search', labelKey: 'navigation.search', hrefFor: 'search' },
+  { id: 'contact', labelKey: 'navigation.contact', hrefFor: 'contact' },
 
   // Marketing related pages
   {
-    key: 'flaim-a-fone',
+    id: 'flaim-a-phone',
     labelKey: 'navigation.flaimAPhone',
-    path: '/flaim-a-phone',
+    hrefFor: 'flaim-a-phone',
   },
-  { key: 'dilf', labelKey: 'navigation.dilf', path: '/dilf' },
-  { key: 'hot-things', labelKey: 'navigation.hotThings', path: '/hot-things' },
-  { key: 'only-spams', labelKey: 'navigation.onlySpams', path: '/only-spams' },
-  { key: 'virgin', labelKey: 'navigation.virgin', path: '/virgin' },
+  { id: 'dilf', labelKey: 'navigation.dilf', hrefFor: 'dilf' },
+  { id: 'hot-things', labelKey: 'navigation.hotThings', hrefFor: 'hot-things' },
+  { id: 'only-spams', labelKey: 'navigation.onlySpams', hrefFor: 'only-spams' },
+  { id: 'virgin', labelKey: 'navigation.virgin', hrefFor: 'virgin' },
 
   // User Management
-  { key: 'admin', labelKey: 'navigation.admin', path: '/admin' },
-  { key: 'signup', labelKey: 'navigation.signup', path: '/user/signup' },
   {
-    key: 'password-reminder',
+    id: 'plan-cancellation',
+    labelKey: 'navigation.planCancellation',
+    hrefFor: 'plans.cancellation',
+  },
+  { id: 'admin', labelKey: 'navigation.admin', hrefFor: 'admin' },
+  { id: 'signup', labelKey: 'navigation.signup', hrefFor: 'user.signup' },
+  {
+    id: 'password-reminder',
     labelKey: 'navigation.passwordReminder',
-    path: '/user/password-reminder',
+    hrefFor: 'user.password-reminder',
   },
   {
-    key: 'achievements',
+    id: 'achievements',
     labelKey: 'navigation.achievements',
-    path: '/achievements',
+    hrefFor: 'achievements',
   },
-  { key: 'settings', labelKey: 'navigation.settings', path: '/settings' },
+  { id: 'settings', labelKey: 'navigation.settings', hrefFor: 'settings' },
 
   // And some mandatory stuff
   {
-    key: 'privacy-policy',
+    id: 'privacy-policy',
     labelKey: 'navigation.privacyPolicy',
-    path: '/privacy-policy',
+    hrefFor: 'privacy-policy',
   },
   {
-    key: 'terms-of-use',
+    id: 'terms-of-use',
     labelKey: 'navigation.termsOfUse',
-    path: '/terms-of-use',
+    hrefFor: 'terms-of-use',
   },
 ];
 
@@ -122,6 +128,6 @@ export const isNavigationItemActive = (
   item: NavItem,
   activeKey?: ActiveNavigationItem,
 ) => {
-  if (activeKey === item.key) return true;
+  if (activeKey === item.id) return true;
   return false;
 };

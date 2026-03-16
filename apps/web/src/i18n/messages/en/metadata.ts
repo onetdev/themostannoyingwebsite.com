@@ -84,6 +84,16 @@ export default {
     description:
       'Choose from our selection of premium, 100% fake AI packages. Experience the future of annoyance today!',
   },
+  planCancellation: {
+    title: 'Cancel Subscription',
+    description:
+      'We are sorry to see you stay. Are you sure you want to miss out on all the annoyance?',
+  },
+  planSpecialDeal: {
+    title: 'Special Offer',
+    description:
+      "Wait! Don't go yet! We have a special deal just for you to keep the annoyance alive.",
+  },
   onlySpams: {
     title: 'OnlySpams',
     description:

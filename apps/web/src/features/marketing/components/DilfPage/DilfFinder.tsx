@@ -2,7 +2,7 @@
 
 import Image from 'next/image';
 import { useTranslations } from 'next-intl';
-import { useAppConfigContext } from '@/core/config/react/AppConfig';
+import { useAppConfigContext } from '@/core/react';
 import { DilfClickOverlay } from './DilfClickOverlay';
 
 export function DilfFinder() {

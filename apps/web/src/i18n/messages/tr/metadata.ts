@@ -84,6 +84,16 @@ export default {
     description:
       ' %100 sahte premium yapay zeka paketleri seçkimizden seçiminizi yapın. Sinir bozuculuğun geleceğini bugün deneyimleyin!',
   },
+  planCancellation: {
+    title: 'Aboneliği İptal Et',
+    description:
+      'Kaldığınızı gördüğümüz için üzgünüz. Tüm bu sinir bozuculuğu kaçırmak istediğinizden emin misiniz?',
+  },
+  planSpecialDeal: {
+    title: 'Özel Teklif',
+    description:
+      'Bekleyin! Henüz gitmeyin! Sinir bozuculuğu canlı tutmak için sadece size özel bir teklifimiz var.',
+  },
   onlySpams: {
     title: 'OnlySpams',
     description:

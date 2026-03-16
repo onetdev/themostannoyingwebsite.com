@@ -80,14 +80,24 @@ export default {
       "Vous cherchez une expérience sans fioritures ? Désactivez toutes les fonctionnalités personnalisées ici et profitez d'une version simplifiée et sans distractions de notre site.",
   },
   plans: {
-    title: 'Forfaits & Plans IA',
+    title: 'Forfaits et plans d’IA',
     description:
-      "Choisissez parmi notre sélection de forfaits IA premium, 100 % faux. Découvrez le futur de l'agacement dès aujourd'hui !",
+      'Choisissez parmi notre sélection de forfaits d’IA premium, 100 % faux. Découvrez l’avenir de l’agacement dès aujourd’hui !',
+  },
+  planCancellation: {
+    title: "Résilier l'abonnement",
+    description:
+      'Nous sommes désolés de vous voir rester. Êtes-vous sûr de vouloir passer à côté de tous ces désagréments ?',
+  },
+  planSpecialDeal: {
+    title: 'Offre spéciale',
+    description:
+      'Attendez ! Ne partez pas tout de suite ! Nous avons une offre spéciale rien que pour vous pour faire durer le plaisir (ou l’agacement).',
   },
   onlySpams: {
     title: 'OnlySpams',
     description:
-      "La newsletter la plus exclusive pour votre boîte de réception. Découvrez la joie du spam sans fin et des e-mails d'arnaque de haute qualité.",
+      'La newsletter la plus exclusive pour votre boîte de réception. Découvrez la joie du spam sans fin et des e-mails frauduleux de haute qualité.',
   },
   admin: {
     title: 'Terminal Admin',

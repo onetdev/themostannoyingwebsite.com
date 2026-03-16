@@ -84,6 +84,16 @@ export default {
     description:
       'Escolha entre a nossa seleção de pacotes de IA premium, 100% falsos. Experimente o futuro da irritação hoje!',
   },
+  planCancellation: {
+    title: 'Cancelar Assinatura',
+    description:
+      'Lamentamos ver que você vai ficar. Tem certeza de que quer perder toda a irritação?',
+  },
+  planSpecialDeal: {
+    title: 'Oferta Especial',
+    description:
+      'Espere! Não vá ainda! Temos um acordo especial apenas para você manter a irritação viva.',
+  },
   onlySpams: {
     title: 'OnlySpams',
     description:

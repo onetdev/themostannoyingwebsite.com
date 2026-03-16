@@ -1,8 +1,8 @@
+import { clsx } from '@maw/ui-lib/utils';
 import { getTranslations } from 'next-intl/server';
 import type { ComponentProps } from 'react';
-
 import { FOOTER_NAVIGATION_LINKS } from '@/app/navigation';
-import { Link } from '@/core/i18n/navigation';
+import { Link } from '@/core/react';
 import { getAppConfigService } from '@/services';
 import { AppLanguageSwitcher } from './AppLanguageSwitcher';
 
@@ -15,17 +15,21 @@ export async function AppFooter({ className }: AppFooterProps) {
   const config = getAppConfigService().getAll();
 
   const links = FOOTER_NAVIGATION_LINKS.map((link) => ({
-    href: link.path,
+    id: link.id,
+    href: link.hrefFor,
     label: t(link.labelKey),
   }));
 
   return (
-    <footer id="footer" className={`border-border border-t ${className}`}>
+    <footer
+      id="footer"
+      className={clsx(`border-border border-t print:hidden`, className)}
+    >
       <div className="flex flex-wrap items-center justify-center gap-x-5 gap-y-2 px-5 py-5">
         {links.map((link) => (
           <Link
-            key={link.href}
-            href={link.href}
+            key={link.id}
+            hrefFor={link.href}
             className="text-xs hover:underline"
           >
             {link.label}

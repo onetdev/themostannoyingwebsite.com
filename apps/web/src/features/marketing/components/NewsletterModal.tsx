@@ -19,7 +19,7 @@ import { useMessages, useTranslations } from 'next-intl';
 import { useMemo, useState } from 'react';
 import { Controller } from 'react-hook-form';
 import { Link } from '@/core/i18n/navigation';
-import { useEvent } from '@/hooks';
+import { useEvent } from '@/core/react';
 import { useNewsletterForm } from '../hooks';
 
 export interface NewsletterModalProps {

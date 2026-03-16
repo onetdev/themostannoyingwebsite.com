@@ -5,8 +5,8 @@ import Image from 'next/image';
 import { useTranslations } from 'next-intl';
 import { useTheme } from 'next-themes';
 import type { PropsWithChildren } from 'react';
-import { useAppConfigContext } from '@/core/config/react/AppConfig';
 import { Link } from '@/core/i18n/navigation';
+import { useAppConfigContext } from '@/core/react';
 
 export function ContainerPromotionFlaps() {
   const config = useAppConfigContext();

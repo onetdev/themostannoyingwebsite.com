@@ -84,6 +84,16 @@ export default {
     description:
       'اختر من بين مجموعتنا المختارة من حزم الذكاء الاصطناعي الوهمية 100%. اختبر مستقبل الإزعاج اليوم!',
   },
+  planCancellation: {
+    title: 'إلغاء الاشتراك',
+    description:
+      'يؤسفنا رؤيتك تبقى. هل أنت متأكد أنك تريد تفويت كل هذا الإزعاج؟',
+  },
+  planSpecialDeal: {
+    title: 'عرض خاص',
+    description:
+      'انتظر! لا تذهب بعد! لدينا عرض خاص لك فقط لإبقاء الإزعاج مستمرًا.',
+  },
   onlySpams: {
     title: 'OnlySpams',
     description:
