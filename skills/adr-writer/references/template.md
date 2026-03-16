@@ -1,7 +1,7 @@
 # ADR [Number]: [Title]
 
 ## Status
-[Status: Proposed, Accepted, Superceded, etc.]
+[Status: Proposed, Accepted, Superseded, etc.]
 
 ## Context
 [The issue or context that prompted this decision.]
