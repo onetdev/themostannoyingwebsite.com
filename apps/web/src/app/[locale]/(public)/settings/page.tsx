@@ -21,7 +21,7 @@ export async function generateMetadata({
 
 export default async function Settings() {
   return (
-    <PageLayout activeItem="settings" role="main">
+    <PageLayout route="settings" role="main">
       <SettingsPage />
     </PageLayout>
   );

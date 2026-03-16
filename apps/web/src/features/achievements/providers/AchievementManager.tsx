@@ -89,7 +89,12 @@ export const AchievementManager = () => {
     }
   });
 
-  useEvent('navigation:changed', () => handleSingleUnlock('first-visit'));
+  useEvent('route:visit', ({ route }) => {
+    handleSingleUnlock('first-visit');
+    if (route === 'virgin') {
+      handleSingleUnlock('virgin-mojito');
+    }
+  });
 
   useEvent('wof:spin-completed', () =>
     handleSingleUnlock('wheel-of-fortune-spin'),

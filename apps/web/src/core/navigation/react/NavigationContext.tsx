@@ -5,9 +5,9 @@ import { createContext, type PropsWithChildren, useContext } from 'react';
 export interface NavigationProviderContextType {
   back: () => void;
   forward: () => void;
-  push: (param: NavigationParams) => void;
-  replace: (param: NavigationParams) => void;
-  resolve: (param: NavigationParams) => string;
+  push: (param: RouteAliasParams) => void;
+  replace: (param: RouteAliasParams) => void;
+  resolve: (param: RouteAliasParams) => string;
   unsafePush: (url: string) => void;
   unsafeReplace: (url: string) => void;
 }

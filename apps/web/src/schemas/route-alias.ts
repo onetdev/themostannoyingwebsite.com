@@ -6,6 +6,7 @@ const RouteAliasList = [
   'admin',
   'article.single',
   'contact',
+  'debug',
   'dilf',
   'donate',
   'flaim-a-phone',

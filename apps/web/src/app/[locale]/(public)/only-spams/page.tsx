@@ -28,7 +28,7 @@ export default async function Page({ params }: NextPageProps) {
   const { testimonials, samples } = await service.getData(locale);
 
   return (
-    <PageLayout activeItem="only-spams" role="main" autoPadding={false}>
+    <PageLayout route="only-spams" role="main" autoPadding={false}>
       <OnlySpamsPage testimonials={testimonials} samples={samples} />
     </PageLayout>
   );

@@ -26,7 +26,7 @@ export default function Page() {
   return (
     <PageLayout
       autoPadding={false}
-      activeItem="login"
+      route="user.signup"
       className="mx-auto max-w-[900px] px-5 py-0 md:py-14"
       role="main"
     >

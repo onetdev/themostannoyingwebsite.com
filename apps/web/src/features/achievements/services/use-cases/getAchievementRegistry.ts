@@ -99,6 +99,12 @@ const ACHIEVEMENT_REGISTRY: AchievementDefinition[] = [
     type: 'progression',
     targetProgress: 5,
   },
+  {
+    id: 'virgin-mojito',
+    nameKey: 'achievements.registry.virginMojito.name',
+    descriptionKey: 'achievements.registry.virginMojito.description',
+    type: 'boolean',
+  },
 ];
 
 export function getAchievementsRegistry() {

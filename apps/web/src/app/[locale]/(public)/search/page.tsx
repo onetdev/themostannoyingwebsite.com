@@ -21,7 +21,7 @@ export async function generateMetadata({
 
 export default function Page() {
   return (
-    <PageLayout activeItem="search" role="main">
+    <PageLayout route="search" role="main">
       <SearchPage />
     </PageLayout>
   );

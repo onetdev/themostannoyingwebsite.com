@@ -39,7 +39,7 @@ export default async function Page({ params }: NextPageProps) {
     );
 
     return (
-      <PageLayout activeItem="terms-of-use" role="main">
+      <PageLayout route="terms-of-use" role="main">
         <PageHeadline className="mx-auto w-full max-w-screen-md">
           {t('navigation.termsOfUse')}
         </PageHeadline>

@@ -32,7 +32,7 @@ export default async function Page() {
   ]);
 
   return (
-    <PageLayout activeItem="plans" role="main">
+    <PageLayout route="plans" role="main">
       <PlansPage
         plans={plansResult.success ? plansResult.data : []}
         features={featuresResult.success ? featuresResult.data : []}

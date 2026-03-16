@@ -3,6 +3,7 @@ import type { RouteAlias } from '@/schemas';
 
 const routeAliasToPathMap: Record<RouteAlias, string> = {
   'article.single': '/articles/:slug',
+  debug: '/debug',
   'flaim-a-phone': '/flaim-a-phone',
   'hot-things': '/hot-things',
   'only-spams': '/only-spams',
@@ -27,7 +28,7 @@ const routeAliasToPathMap: Record<RouteAlias, string> = {
   virgin: '/virgin',
 };
 
-export const resolvePathForRouteAlias = (param: NavigationParams) => {
+export const resolvePathForRouteAlias = (param: RouteAliasParams) => {
   if (typeof param === 'string') {
     return routeAliasToPathMap[param];
   }

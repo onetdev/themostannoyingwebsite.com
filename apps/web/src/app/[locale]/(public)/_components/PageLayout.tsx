@@ -1,10 +1,11 @@
 import type { ComponentProps, PropsWithChildren } from 'react';
-import type { ActiveNavigationItem } from '@/app/navigation';
+import { ReportRouteVisit } from '@/features/monitoring/components';
+import type { RouteAlias } from '@/schemas';
 import { AppFooter } from './AppFooter';
 import { AppHeader } from './AppHeader';
 
 type PageLayoutProps = PropsWithChildren<
-  { activeItem?: ActiveNavigationItem; autoPadding?: boolean } & Pick<
+  { route?: RouteAlias; autoPadding?: boolean } & Pick<
     ComponentProps<'main'>,
     'role' | 'className'
   >
@@ -12,7 +13,7 @@ type PageLayoutProps = PropsWithChildren<
 
 export function PageLayout({
   children,
-  activeItem,
+  route,
   autoPadding = true,
   className,
   ...rest
@@ -21,7 +22,8 @@ export function PageLayout({
 
   return (
     <>
-      <AppHeader activeItem={activeItem} className="mb-4" />
+      {route && <ReportRouteVisit route={route} />}
+      <AppHeader activeItem={route} className="mb-4" />
       <main className={`${className ?? ''} ${localClassName}`} {...rest}>
         {children}
       </main>

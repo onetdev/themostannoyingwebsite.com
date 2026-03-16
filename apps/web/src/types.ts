@@ -35,7 +35,7 @@ declare global {
     skip: number;
   };
 
-  type NavigationParams =
+  type RouteAliasParams =
     | Exclude<RouteAlias, 'article.single'>
     | { alias: 'article.single'; params: { slug: string } }
     | { raw: string };
@@ -51,6 +51,9 @@ declare global {
   interface AppEvents {
     'navigation:changed': {
       path: string;
+    };
+    'route:visit': {
+      route: RouteAlias;
     };
     'global-text:copied': never;
     'exit-prompt:shown': never;

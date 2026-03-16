@@ -1,34 +1,12 @@
 import type { IconAliaseKey } from '@maw/ui-lib';
-
-export const ActiveNavigationItems = [
-  'about',
-  'achievements',
-  'admin',
-  'article-single',
-  'contact',
-  'dilf',
-  'donate',
-  'flaim-a-phone',
-  'home',
-  'hot-things',
-  'login',
-  'only-spams',
-  'plan-cancellation',
-  'plans',
-  'privacy-policy',
-  'search',
-  'settings',
-  'terms-of-use',
-  'virgin',
-] as const;
-export type ActiveNavigationItem = (typeof ActiveNavigationItems)[number];
+import type { RouteAlias } from '@/schemas';
 
 export type NavItem = {
   hideLabel?: boolean;
   icon?: IconAliaseKey;
   id: string;
   labelKey: AppTranslationKey;
-  hrefFor: NavigationParams;
+  hrefFor: RouteAliasParams;
 };
 
 export const SITE_NAVIGATION_LINKS: NavItem[] = [
@@ -124,10 +102,7 @@ export const FOOTER_NAVIGATION_LINKS: NavItem[] = [
   },
 ];
 
-export const isNavigationItemActive = (
-  item: NavItem,
-  activeKey?: ActiveNavigationItem,
-) => {
-  if (activeKey === item.id) return true;
+export const isNavigationItemActive = (item: NavItem, route?: RouteAlias) => {
+  if (route === item.id) return true;
   return false;
 };

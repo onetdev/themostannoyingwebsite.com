@@ -28,7 +28,7 @@ export default async function Page({ params }: NextPageProps) {
 
   return (
     <PageLayout
-      activeItem="home"
+      route="home"
       className="grid grid-cols-1 gap-x-5 gap-y-5 px-5 lg:grid-cols-4 lg:gap-y-0 xl:px-8"
       autoPadding={false}
       role="main"

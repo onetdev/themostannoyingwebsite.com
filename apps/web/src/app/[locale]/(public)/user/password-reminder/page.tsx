@@ -26,7 +26,7 @@ export default function Page() {
   return (
     <PageLayout
       autoPadding={false}
-      activeItem="login"
+      route="user.password-reminder"
       className="mx-auto max-w-lg p-0 px-5 md:py-14"
       role="main"
     >

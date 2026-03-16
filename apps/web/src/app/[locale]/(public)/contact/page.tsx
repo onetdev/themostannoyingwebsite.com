@@ -21,7 +21,7 @@ export async function generateMetadata({
 
 export default async function Page() {
   return (
-    <PageLayout activeItem="contact" role="main">
+    <PageLayout route="contact" role="main">
       <ContactPage />
     </PageLayout>
   );
