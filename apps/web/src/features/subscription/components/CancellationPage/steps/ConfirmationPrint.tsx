@@ -1,12 +1,17 @@
 'use client';
 
 import { useTranslations } from 'next-intl';
+import { useMemo } from 'react';
 import { useFormContext } from 'react-hook-form';
 import type { CancellationFormData } from '../../../schemas';
 
 export function ConfirmationPrint() {
   const t = useTranslations('subscription.cancellation.print');
   const { getValues } = useFormContext<CancellationFormData>();
+  const documentId = useMemo(
+    () => Math.random().toString(36).substring(2, 15).toUpperCase(),
+    [],
+  );
   const values = getValues();
 
   // Print View - Only visible when printing
@@ -17,9 +22,7 @@ export function ConfirmationPrint() {
           {t('title')}
         </h1>
         <p className="text-sm font-bold">
-          {t('documentId', {
-            id: Math.random().toString(36).substring(2, 15).toUpperCase(),
-          })}
+          {t('documentId', { id: documentId })}
         </p>
       </div>
 

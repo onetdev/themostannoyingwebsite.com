@@ -15,6 +15,7 @@ export async function AppFooter({ className }: AppFooterProps) {
   const config = getAppConfigService().getAll();
 
   const links = FOOTER_NAVIGATION_LINKS.map((link) => ({
+    id: link.id,
     href: link.hrefFor,
     label: t(link.labelKey),
   }));
@@ -27,7 +28,7 @@ export async function AppFooter({ className }: AppFooterProps) {
       <div className="flex flex-wrap items-center justify-center gap-x-5 gap-y-2 px-5 py-5">
         {links.map((link) => (
           <Link
-            key={link.label}
+            key={link.id}
             hrefFor={link.href}
             className="text-xs hover:underline"
           >

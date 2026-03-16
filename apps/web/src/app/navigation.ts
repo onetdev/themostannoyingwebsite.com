@@ -82,7 +82,7 @@ export const FOOTER_NAVIGATION_LINKS: NavItem[] = [
 
   // Marketing related pages
   {
-    id: 'flaim-a-fone',
+    id: 'flaim-a-phone',
     labelKey: 'navigation.flaimAPhone',
     hrefFor: 'flaim-a-phone',
   },
