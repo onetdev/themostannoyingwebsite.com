@@ -36,3 +36,6 @@ yarn-error.log*
 # Claude Code local settings
 .claude/settings.local.json
 .claude/CLAUDE.local.md
+
+# Gemini CLI
+.gemini/
