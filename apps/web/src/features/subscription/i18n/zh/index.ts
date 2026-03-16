@@ -132,7 +132,7 @@ export default {
     email: {
       title: '你是谁？',
       label: '请提供你的电子邮件地址以进行取消流程。',
-      placeholder: 'loyal-customer@themostannoyingwebsite.com',
+      placeholder: 'zhongshi-kehu@themostannoyingwebsite.com',
       action: {
         discount: '你知道吗，我改变主意了，我想要折扣！',
         next: '我很确定，让我们继续取消',

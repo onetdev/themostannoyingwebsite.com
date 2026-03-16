@@ -128,7 +128,7 @@ export default {
       promo: 'RIESEN-DEAL!\nBIS ZU 99% RABATT!!!',
       action: {
         specialDeal: 'Ich möchte das Sonderangebot',
-        stay: 'Yes, I want to not leave',
+        stay: 'Ja, ich möchte nicht gehen',
         next: 'Trotz allem beabsichtige ich, mein Abonnement zu kündigen. Ich bin das Problem, nicht ihr.',
       },
     },

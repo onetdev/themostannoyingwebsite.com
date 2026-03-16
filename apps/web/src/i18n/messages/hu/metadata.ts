@@ -30,7 +30,7 @@ export default {
       'A támogatásod rengeteget számít! Járulj hozzá itt, hogy továbbra is csodálatos élményeket hozhassunk létre.',
   },
   wanPhone: {
-    title: 'Flaim-a-Phone',
+    title: 'Telefon flaimelése',
     description:
       'Készen állsz egy kis tüzes szórakozásra? Lobbants lángra egy telefont itt, és nézd meg, hogyan hevítjük fel a mobilélményedet.',
   },

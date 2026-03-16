@@ -133,7 +133,7 @@ export default {
     email: {
       title: 'Кто вы?',
       label: 'Укажите свой адрес электронной почты для процесса отмены.',
-      placeholder: 'loyal-customer@themostannoyingwebsite.com',
+      placeholder: 'loyalny-klient@themostannoyingwebsite.com',
       action: {
         discount: 'Знаете что, я передумал, я хочу скидку!',
         next: 'Я уверен, давайте продолжим отмену',

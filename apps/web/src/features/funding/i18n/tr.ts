@@ -13,7 +13,7 @@ export default {
   topSupporterHeart: '🥉 Kalp',
   totalSupportReceived: 'Alınan Toplam Destek',
   classicMethods: 'Klasik yöntemler',
-  buyMeACoffee: 'Buy Me A Coffee',
+  buyMeACoffee: 'Bana bir kahve ısmarla',
   payPal: 'PayPal',
   cryptoMethods: 'Kripto yöntemleri',
   alternativeOptionsLink: 'Diğer destekleme yolları için buraya tıklayın 😏',

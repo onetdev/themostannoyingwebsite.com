@@ -13,7 +13,7 @@ export default {
   topSupporterHeart: '🥉 Herz',
   totalSupportReceived: 'Insgesamt erhaltene Unterstützung',
   classicMethods: 'Klassische Methoden',
-  buyMeACoffee: 'Buy Me A Coffee',
+  buyMeACoffee: 'Kauf mir einen Kaffee',
   payPal: 'PayPal',
   cryptoMethods: 'Krypto-Methoden',
   alternativeOptionsLink:

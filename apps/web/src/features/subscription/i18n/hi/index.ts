@@ -132,7 +132,7 @@ export default {
     email: {
       title: 'आप कौन हैं?',
       label: 'कैंसिलेशन प्रक्रिया के लिए अपना ईमेल पता प्रदान करें।',
-      placeholder: 'loyal-customer@themostannoyingwebsite.com',
+      placeholder: 'vafadar-grahak@themostannoyingwebsite.com',
       action: {
         discount: 'आपको पता है क्या, मैंने अपना मन बदल लिया है, मुझे छूट चाहिए!',
         next: 'मुझे यकीन है, चलिए कैंसिलेशन जारी रखते हैं',

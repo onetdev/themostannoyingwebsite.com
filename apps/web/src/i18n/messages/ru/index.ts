@@ -62,7 +62,7 @@ export default {
     },
     toggleMenu: 'Переключить меню',
     logo: 'Логотип MAW',
-    logoAlt: '<the>the</the> <most>Most</most> Annoying Website',
+    logoAlt: '<most>Самый</most> <the>раздражающий</the> веб-сайт',
     dismissBanner: 'Закрыть баннер',
     contactForm: {
       title: 'Официальная контактная форма',

@@ -13,7 +13,7 @@ export default {
   topSupporterHeart: '🥉 心臓',
   totalSupportReceived: '受け取った支援総額',
   classicMethods: '古典的な方法',
-  buyMeACoffee: 'Buy Me A Coffee',
+  buyMeACoffee: 'コーヒーをおごる',
   payPal: 'PayPal',
   cryptoMethods: '暗号資産（クリプト）',
   alternativeOptionsLink: 'その他の支援方法はこちらをクリック 😏',
