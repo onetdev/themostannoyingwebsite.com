@@ -5,7 +5,17 @@ description: Summarizing the current branch's work compared to another branch (e
 
 # Branch Summarizer
 
+## Overview
+
 Use this skill to quickly understand the differences between the current branch and a target branch (e.g., `origin/develop`).
+
+## Guidelines
+
+- **Format**: Use markdown format
+  - Crucial information will be highlighted as bold (using asterisks)
+  - File names, symbols will be handled as inline code (using backtick)
+- **Tense**: Use the imperative, present tense ("add", not "added").
+- **Reference**: See [references/branch-summary-format.md](references/branch-summary-format.md) for the full specification and allowed types.
 
 ## Tools
 
