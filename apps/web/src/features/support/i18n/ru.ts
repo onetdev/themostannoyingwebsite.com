@@ -1,5 +1,7 @@
 export default {
   chatBubble: {
+    trigger: 'Открыть чат',
+    triggerClose: 'Закрыть чат',
     messageInitial: 'Привет! Я чат-пузырь. Я здесь, чтобы помочь тебе. 🤓',
     messageVariants: {
       variant_001: 'Да ладно тебе, дай мне помочь!',

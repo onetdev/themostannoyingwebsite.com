@@ -51,6 +51,10 @@ export default {
       name: 'Caçador de Pixéis Mortos',
       description: 'Tente clicar num píxel morto.',
     },
+    rainbowHunter: {
+      name: 'Caçador de Arco-íris',
+      description: 'Clicaste num pixel morto de arco-íris!',
+    },
     wheelOfFortuneSpin: {
       name: 'Jogador Otimista',
       description:
@@ -76,6 +80,11 @@ export default {
     bouncingLogoFanatic: {
       name: 'Fanático pelo Logótipo Saltitante',
       description: 'Testemunhe o logótipo a saltar 420 vezes.',
+    },
+    loveLettersFromMedic: {
+      name: 'Cartas de amor de um médico',
+      description:
+        'Receba 5 mensagens dos nossos prestáveis agentes de suporte.',
     },
   },
 };

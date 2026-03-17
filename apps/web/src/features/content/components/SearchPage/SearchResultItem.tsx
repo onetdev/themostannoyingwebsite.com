@@ -3,7 +3,7 @@
 import type { ArticleSearchResult } from '@maw/content-api';
 import HTMLReactParser from 'html-react-parser';
 import DOMPurify from 'isomorphic-dompurify';
-import { Link } from '@/i18n/navigation';
+import { Link } from '@/core/i18n/navigation';
 
 export interface SearchResultItemProps {
   item: ArticleSearchResult;

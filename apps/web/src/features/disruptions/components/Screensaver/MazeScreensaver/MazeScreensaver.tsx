@@ -10,8 +10,8 @@ import {
   Transform,
 } from 'ogl';
 import { useEffect, useRef } from 'react';
-import { useAppConfigContext } from '@/core/config/react-app-config';
 import { emit } from '@/core/events/event-bus';
+import { useAppConfigContext } from '@/core/react';
 import { MAZE_24 } from './data';
 import { texturedFragment, texturedVertex } from './shaders';
 import { getTextures } from './textures';

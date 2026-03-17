@@ -20,93 +20,112 @@ export default {
   optionalPainPoints: {
     title: 'Opcjonalne punkty zapalne',
     categories: {
-      browser: 'Przeglądarka i karty',
-      visual: 'Przeszkody wizualne',
-      ads: 'Reklamy i monetyzacja',
-      interactivity: 'Popupy i interaktywność',
+      visualChaos: 'Chaos wizualny',
+      uiSabotage: 'Sabotaż interfejsu',
+      interruptions: 'Przerwania',
+      browserHijacking: 'Przejęcie przeglądarki',
     },
-    screensaverTimeout: 'Limit czasu',
-    screensaverVariant: 'Wariant',
-    screensaverVariantOptions: {
-      bouncingLogo: 'Odbijające się logo',
-      maze: 'Labirynt 3D 95',
+    achievementNotifications: {
+      label: 'Powiadomienia o osiągnięciach',
+      hint: 'Wyświetla powiadomienie po odblokowaniu nowego osiągnięcia. Postęp jest zawsze śledzony w tle.',
     },
-    screensaverTimeoutOptions: {
-      '15': '15 sekund',
-      '30': '30 sekund',
-      '60': '1 minuta',
-      '300': '5 minut',
-      '900': '15 minut',
+    backgroundAdflaps: {
+      label: 'Boczne banery reklamowe',
+      hint: 'Wyświetla klapy reklamowe po bokach strony, które można kliknąć i które prowadzą do stron marketingowych.',
     },
-    gifts: {
-      detectAdblocker: 'Wykrywanie adblockera',
-      flaps: 'Boczne banery reklamowe',
-      oneByOne: 'Bloki reklamowe jeden po drugim',
+    clipboardBrandingMark: {
+      label: 'Znak brandingowy w schowku',
+      hint: 'Dodaje link „Czytaj więcej na...” podczas kopiowania tekstu ze strony.',
     },
-    achievementNotifications: 'Powiadomienia o osiągnięciach',
-    clipboardMarker: 'Znacznik schowka',
-    contentPaywall: 'Paywall treści',
-    deadPixel: 'Martwy piksel',
-    disableContextMenu: 'Wyłącz menu kontekstowe (prawy przycisk)',
-    exitPrompt: 'Monit przy wyjściu',
-    historySpam: 'Spam w historii',
-    mockChat: 'Bąbelek czatu',
-    newsletterModal: 'Modalny popup newslettera',
-    notifications: 'Powiadomienia',
-    screensaver: 'Wygaszacz ekranu',
-    pageTitleInactiveArrayPaged:
-      'Alternatywny tytuł, gdy karta jest nieaktywna',
-    searchDelay: 'Sztuczne opóźnienie wyszukiwania',
-    wheelOfFortune: 'Koło fortuny',
-    stickyVideo: 'Przyklejone wideo',
-  },
-  optionalPainPointsHints: {
-    screensaver:
-      'Uruchamia wybrany wygaszacz ekranu po określonym czasie całkowitej nieaktywności.',
-    gifts: {
-      detectAdblocker:
-        'Wyświetla duży czerwony baner w przypadku wykrycia adblockera.',
-      flaps:
-        'Wyświetla banery reklamowe po bokach strony, które można kliknąć i które prowadzą do różnych stron.',
-      oneByOne: 'Głównie dotyczy animowanej reklamy na stronie głównej.',
+    contentPaywall: {
+      label: 'Paywall treści',
+      hint: 'Pokazuje fałszywą nakładkę paywall na niektórych treściach, nadal możesz odkryć treść za darmo.',
     },
-    achievementNotifications:
-      'Wyświetla powiadomienie po odblokowaniu nowego osiągnięcia. Postęp jest zawsze śledzony w tle.',
-    clipboardMarker:
-      'Dodaje link „Czytaj więcej na...” podczas kopiowania tekstu ze strony.',
-    contentPaywall:
-      'Wyświetla nakładkę fałszywego paywalla na niektórych treściach; nadal możesz je odkryć.',
-    deadPixel:
-      'Umieszcza kilka fałszywych „martwych” pikseli na ekranie, aby Cię irytować.',
-    disableContextMenu:
-      'Uniemożliwia korzystanie z menu prawego przycisku myszy i zamiast tego wyświetla alert.',
-    exitPrompt:
-      'Wyświetla monit „Czy na pewno chcesz wyjść?” podczas próby zamknięcia karty lub przejścia na inną stronę.',
-    historySpam:
-      'Wypełnia historię przeglądarki fałszywymi wpisami, aby utrudnić powrót. Może to być uciążliwe przy próbie powrotu do wyników wyszukiwania.',
-    mockChat:
-      'Wyświetla irytujący dymek czatu z „człowiekiem”, który wysyła wiadomości tylko wtedy, gdy go zamkniesz, a w międzyczasie stale wyświetla „agent pisze”.',
-    newsletterModal:
-      'Okresowo wyświetla modal subskrypcji newslettera, zwłaszcza gdy strona wraca ze stanu nieaktywności (przełączanie kart).',
-    notifications:
-      'Prosi o uprawnienia do powiadomień i wyświetla fałszywe powiadomienia.',
-    pageTitleInactiveArrayPaged:
-      'Zmienia tytuł karty na coś przyciągającego uwagę, gdy karta jest nieaktywna.',
-    searchDelay:
-      'Dodaje sztuczne, długie opóźnienie ładowania do wszystkich wyszukiwań.',
-    wheelOfFortune:
-      'Wyświetla modal fałszywego „Koła Fortuny”, w którym wygrywasz całkowicie bezużyteczne nagrody.',
-    stickyVideo:
-      'Wyświetla przyklejony odtwarzacz wideo, który podąża za Tobą podczas przewijania.',
+    deadPixel: {
+      label: 'Martwy piksel',
+      hint: 'Umieszcza kilka fałszywych „martwych” pikseli na ekranie, aby Cię irytować.',
+    },
+    detectAdblocker: {
+      label: 'Wykrywanie adblockera',
+      hint: 'Wyświetla duży czerwony baner w przypadku wykrycia adblockera.',
+    },
+    disableContextMenu: {
+      label: 'Wyłącz menu kontekstowe (prawy przycisk)',
+      hint: 'Uniemożliwia korzystanie z menu prawego przycisku myszy i zamiast tego wyświetla alert.',
+    },
+    exitPrompt: {
+      label: 'Monit przy wyjściu',
+      hint: 'Wyświetla monit „Czy na pewno chcesz wyjść?” podczas próby zamknięcia karty lub przejścia na inną stronę.',
+    },
+    flaimAPHoneAd: {
+      label: 'Kampania ankietowa Flaim',
+      hint: 'Wyświetla funky animowaną reklamę na stronie głównej prowadzącą do Flaim a Phone.',
+    },
+    historySpam: {
+      label: 'Spam w historii',
+      hint: 'Wypełnia historię przeglądarki fałszywymi wpisami, aby utrudnić powrót. Może to być uciążliwe przy próbie powrotu do wyników wyszukiwania.',
+    },
+    mockSupportChat: {
+      label: 'Symulowany czat wsparcia',
+      hint: 'Pokazuje irytujący "ludzki" bąbelek czatu wsparcia, który wysyła wiadomości tylko po jego zamknięciu.',
+    },
+    newsletterModal: {
+      label: 'Modalny popup newslettera',
+      hint: 'Okresowo wyświetla modal subskrypcji newslettera, zwłaszcza gdy strona wraca ze stanu nieaktywności (przełączanie kart).',
+    },
+    notifications: {
+      label: 'Powiadomienia',
+      hint: 'Prosi o uprawnienia do powiadomień i wyświetla fałszywe powiadomienia.',
+    },
+    pageTitleInactiveArrayPaged: {
+      label: 'Naprzemienny tytuł, gdy karta jest nieaktywna',
+      hint: 'Zmienia tytuł karty na coś przyciągającego uwagę, gdy karta jest nieaktywna.',
+    },
+    searchDelay: {
+      label: 'Sztuczne opóźnienie wyszukiwania',
+      hint: 'Dodaje sztuczne, długie opóźnienie ładowania do wszystkich wyszukiwań.',
+    },
+    stickyVideoPlayer: {
+      label: 'Przyklejony odtwarzacz wideo',
+      hint: 'Wyświetla przyklejony odtwarzacz wideo, który podąża za Tobą podczas przewijania.',
+    },
+    wheelOfFortune: {
+      label: 'Koło fortuny',
+      hint: 'Wyświetla modal fałszywego „Koła Fortuny”, w którym wygrywasz całkowicie bezużyteczne nagrody.',
+    },
+    screensaver: {
+      label: 'Wygaszacz ekranu',
+      hint: 'Uruchamia wybrany wygaszacz ekranu po określonym czasie całkowitej nieaktywności.',
+      variant: {
+        label: 'Wariant',
+        options: {
+          bouncingLogo: 'Odbijające się logo',
+          maze: 'Labirynt 3D 95',
+        },
+      },
+      timer: {
+        label: 'Limit czasu',
+        options: {
+          15: '15 sekund',
+          30: '30 sekund',
+          60: '1 minuta',
+          300: '5 minut',
+          900: '15 minut',
+        },
+      },
+    },
   },
   mandatoryExperienceFlags: {
     title: 'Obowiązkowe doświadczenia',
-    impossibleLogin: 'Logowanie niemożliwe',
-    impossibleSignup: 'Rejestracja niemożliwa',
-    impossiblePasswordReminder: 'Przypomnienie hasła niemożliwe',
-    unreasonableContent: 'Niedorzeczne treści',
-    flaimYourPhone: 'Odbierz (flaim) telefon',
+    dilf: 'Pączek, którego chciałbym zjeść',
     fakeAiSubscription: 'Fałszywe plany subskrypcji AI',
+    fakeComments: 'Fałszywe komentarze',
+    flaimYourPhone: 'Odbierz (flaim) telefon',
+    impossibleLogin: 'Logowanie niemożliwe',
+    impossiblePasswordReminder: 'Przypomnienie hasła niemożliwe',
+    impossibleSignup: 'Rejestracja niemożliwa',
+    madeUpNewsletter: 'Wymyślona promocja newslettera premium',
+    unreasonableContent: 'Niedorzeczne treści',
   },
   runtimeInfo: {
     title: 'O tej sesji',
@@ -135,6 +154,7 @@ export default {
   painPreferences: {
     levelSettings: {
       label: 'Poziom bólu',
+      rating: 'Ocena bólu',
       railTitle: 'Suwak poziomu bólu',
       clamps: {
         from_0: 'Niewinny',

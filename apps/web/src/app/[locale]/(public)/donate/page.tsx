@@ -4,7 +4,7 @@ import { getTranslations } from 'next-intl/server';
 import { DonationPage } from '@/features/funding/components';
 import { PageLayout } from '../_components/PageLayout';
 
-export { generateStaticParams } from '@/i18n/routing';
+export { generateStaticParams } from '@/core/i18n/routing';
 
 export const revalidate = 1800;
 
@@ -24,7 +24,7 @@ export default async function Page() {
   const t = await getTranslations();
 
   return (
-    <PageLayout activeItem="donate" role="main">
+    <PageLayout route="donate" role="main">
       <PageHeadline className="mx-auto w-full">
         {t('navigation.donate')}
       </PageHeadline>

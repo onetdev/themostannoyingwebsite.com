@@ -1,4 +1,4 @@
-import { z } from 'zod';
+import * as z from 'zod';
 import { AchievementsConfigSchema } from '@/features/achievements/schemas';
 import { CaptchaConfigSchema } from '@/features/captcha/schemas';
 import { ContentConfigSchema } from '@/features/content/schemas';

@@ -1,4 +1,4 @@
-import { z } from 'zod';
+import * as z from 'zod';
 import { LocaleResourceSchema } from '@/schemas';
 
 export const ContentConfigSchema = z.object({

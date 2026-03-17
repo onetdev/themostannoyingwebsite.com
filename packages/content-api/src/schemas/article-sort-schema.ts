@@ -1,4 +1,4 @@
-import { z } from 'zod';
+import * as z from 'zod';
 
 export const ArticleSortSchema = z.object({
   date: z.enum(['asc', 'desc']).optional(),

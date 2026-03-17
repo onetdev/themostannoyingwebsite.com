@@ -1,5 +1,7 @@
 export default {
   chatBubble: {
+    trigger: 'Otwórz czat',
+    triggerClose: 'Zamknij czat',
     messageInitial: 'Cześć! Jestem dymkiem czatu. Jestem tu, by Ci pomóc. 🤓',
     messageVariants: {
       variant_001: 'No dalej, pozwól mi sobie pomóc!',

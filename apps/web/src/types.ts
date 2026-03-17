@@ -1,7 +1,8 @@
 import type Emittery from 'emittery';
 import type { MessageKeys, NestedKeyOf } from 'next-intl';
-import type englishShape from '@/i18n/messages/en.ts';
+import type englishShape from '@/i18n/messages/en';
 import type i18nConfig from '@/root/i18n.config';
+import type { RouteAlias } from './schemas';
 
 declare global {
   type AppTheme = 'light' | 'dark';
@@ -34,6 +35,11 @@ declare global {
     skip: number;
   };
 
+  type RouteAliasParams =
+    | Exclude<RouteAlias, 'article.single'>
+    | { alias: 'article.single'; params: { slug: string } }
+    | { raw: string };
+
   type NextPageParams = {
     locale: AppLocale;
   };
@@ -46,9 +52,13 @@ declare global {
     'navigation:changed': {
       path: string;
     };
+    'route:visit': {
+      route: RouteAlias;
+    };
     'global-text:copied': never;
     'exit-prompt:shown': never;
     'ui:modal:dismiss-signaled': never;
+    'ui:newsletter-modal:show': never;
   }
 
   interface Window {
@@ -62,5 +72,6 @@ declare global {
 declare module 'next-intl' {
   interface AppConfig {
     Messages: typeof englishShape;
+    Locale: AppLocale;
   }
 }

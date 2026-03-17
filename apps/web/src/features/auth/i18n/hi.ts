@@ -1,3 +1,5 @@
+import type { AuthI18nShape } from '../types';
+
 export default {
   common: {
     lookingForSignup: 'एक खाता चाहिए? यहाँ साइन अप करें',
@@ -32,4 +34,4 @@ export default {
       redirectingSafety: 'मैं आपको सुरक्षा की ओर वापस ले जा रहा हूँ...',
     },
   },
-};
+} satisfies AuthI18nShape;

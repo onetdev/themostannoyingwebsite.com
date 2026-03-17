@@ -3,7 +3,7 @@ import { getTranslations } from 'next-intl/server';
 import { SettingsPage } from '@/features/user/components';
 import { PageLayout } from '../_components/PageLayout';
 
-export { generateStaticParams } from '@/i18n/routing';
+export { generateStaticParams } from '@/core/i18n/routing';
 
 export const revalidate = 1800;
 
@@ -21,7 +21,7 @@ export async function generateMetadata({
 
 export default async function Settings() {
   return (
-    <PageLayout activeItem="settings" role="main">
+    <PageLayout route="settings" role="main">
       <SettingsPage />
     </PageLayout>
   );

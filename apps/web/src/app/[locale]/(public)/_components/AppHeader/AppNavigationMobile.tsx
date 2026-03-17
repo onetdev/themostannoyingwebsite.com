@@ -14,18 +14,18 @@ import { useTranslations } from 'next-intl';
 import { useMemo } from 'react';
 
 import {
-  type ActiveNavigationItem,
   isNavigationItemActive,
   type NavItem,
   PERSONAL_NAVIGATION_LINKS,
   SITE_NAVIGATION_LINKS,
 } from '@/app/navigation';
-import { Link } from '@/i18n/navigation';
+import { Link } from '@/core/react';
+import type { RouteAlias } from '@/schemas';
 import { useRuntimeStore } from '@/stores';
 import { AppLanguageSwitcher } from '../AppLanguageSwitcher';
 
 export type AppNavigationMobileProps = {
-  activeItem?: ActiveNavigationItem;
+  activeItem?: RouteAlias;
 };
 
 export function AppNavigationMobile({ activeItem }: AppNavigationMobileProps) {
@@ -47,7 +47,7 @@ export function AppNavigationMobile({ activeItem }: AppNavigationMobileProps) {
     }, []);
 
   const onClick = (item: NavItem) => {
-    if (item.key === 'global-share') {
+    if (item.id === 'global-share') {
       showShareModal();
       return false;
     }
@@ -89,8 +89,8 @@ export function AppNavigationMobile({ activeItem }: AppNavigationMobileProps) {
 
                 return (
                   <Link
-                    key={item.path}
-                    href={item.path}
+                    key={item.id}
+                    hrefFor={item.hrefFor}
                     onClick={() => onClick(item)}
                     data-active={active}
                     aria-current={active ? 'page' : undefined}

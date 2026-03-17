@@ -110,6 +110,9 @@ const config: AppConfig = {
       videoUrl:
         'https://www.youtube.com/embed/M7lc1UVf-VE?autoplay=1&controls=2&loop=1&mute=1',
     },
+    deadPixel: {
+      rainbowChance: 1 / 20,
+    },
   },
   marketing: {
     assets: {
@@ -131,7 +134,7 @@ const config: AppConfig = {
         ru: '/ads/wan-a-fone/ad-wan-a-fone-ru.webp',
         tr: '/ads/wan-a-fone/ad-wan-a-fone-tr.webp',
       },
-      dilfFullImage: '/assets/dilf-full.webp',
+      dilfFullImage: '/assets/images/dilf-full.webp',
     },
   },
   support: {

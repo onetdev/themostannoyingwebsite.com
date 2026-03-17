@@ -3,7 +3,7 @@ import { getArticleService } from '@/features/content/services';
 import { HomePage } from './_components/HomePage';
 import { PageLayout } from './_components/PageLayout';
 
-export { generateStaticParams } from '@/i18n/routing';
+export { generateStaticParams } from '@/core/i18n/routing';
 
 export const revalidate = 1800;
 
@@ -28,7 +28,7 @@ export default async function Page({ params }: NextPageProps) {
 
   return (
     <PageLayout
-      activeItem="home"
+      route="home"
       className="grid grid-cols-1 gap-x-5 gap-y-5 px-5 lg:grid-cols-4 lg:gap-y-0 xl:px-8"
       autoPadding={false}
       role="main"

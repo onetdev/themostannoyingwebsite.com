@@ -1,174 +1,164 @@
 # The Most Annoying Website
 
-Gathering and concentrating the most annoying features of modern websites in one place, on steroids. The entire website is a fake facade filled with fun little Easter eggs; no feature functions as it would in a normal scenario.
+A satirical web project that gathers the worst UX patterns from modern websites and concentrates them into one gloriously frustrating experience.
 
-## Mission
+Everything is intentionally broken. Buttons lie, forms misbehave, notifications never stop, and progress bars cheat. Easter eggs and internet culture references in every single segment of the project.
 
-- Collecting the most annoying practices from the web and mobile.
-- No personal data is transmitted or stored.
-- Accessibility in focus — despite being annoying.
-- Focus on static builds rather than dynamic server-side capabilities.
+🌐 **Live site:** https://themostannoyingwebsite.com
 
-## Development cycle
 
-Upcoming roadmap items on the [MAW GitHub project board](https://github.com/users/onetdev/projects/2)
+## What is this?
 
-Past releases and changelog items under [MAW releases](https://github.com/onetdev/themostannoyingwebsite.com/releases)
+The Most Annoying Website is an experiment in **anti-UX**.
 
-## Project tech
+It recreates frustrating interaction patterns commonly found on the web and exaggerates them for satire and experimentation.
+
+Examples include:
+
+- deceptive buttons
+- fake loading indicators
+- intrusive notifications
+- misleading forms
+- endless popups
+- dark patterns
+
+Nothing behaves as it would on a normal website.
+
+Despite the chaos:
+
+- No personal data is collected or stored.
+- Accessibility is still taken seriously.
+- The site is designed to run as a **static build** whenever possible.
+
+## Features
+
+- Collection of UX anti-patterns
+- Hidden easter eggs across the site
+- Static-first architecture
+- No user tracking or personal data storage
+- Accessible despite intentionally frustrating UX
+
+## Tech Stack
+
+### Core
+
+- [Next.js](https://nextjs.org/)
+- [TypeScript](https://www.typescriptlang.org/)
+- [Turborepo](https://turbo.build/repo/docs)
+
+### UI
+
+- [TailwindCSS](https://tailwindcss.com/docs)
+- [shadcn/ui](https://ui.shadcn.com/)
+- [Radix UI](https://www.radix-ui.com/)
 
 ### Tooling
 
-- [pnpm](https://pnpm.io/) - Node.js package manager
-- [TypeScript](https://www.typescriptlang.org/docs/) - JavaScript typed superset language.
-- [Turborepo](https://turbo.build/repo/docs) - Monorepo tooling
-- [Biome](https://biomejs.dev/) - Toolchain for web projects (linting, formatting)
-- [Playwright](https://playwright.dev/) - E2E testing framework
-- [Jest](https://jestjs.io/) - Unit testing framework
-
-### Framework and libraries
-
-- [Next.js](https://nextjs.org/) - Web application framework
-- [Storybook](https://storybook.js.org/) - Interactive showcase for components
-- [TailwindCSS](https://tailwindcss.com/docs) - Utility-first styling
-- [Shadcn](https://ui.shadcn.com/) + [Radix](https://www.radix-ui.com/) - UI framework
-- [Zustand](https://github.com/pmndrs/zustand) - Multi-store state management
-- [Zod](https://github.com/colinhacks/zod) - Validation & data structure description
-- [Sentry](https://docs.sentry.io/platforms/javascript/guides/nextjs/) + [Vercel Analytics](https://vercel.com/docs/analytics/package) - Monitoring
+- [pnpm](https://pnpm.io/)
+- [Biome](https://biomejs.dev/)
 
 ### Testing
 
-#### Unit Tests
+- [Jest](https://jestjs.io/)
+- [Playwright](https://playwright.dev/)
 
-The project mainly uses [Jest](https://jestjs.io/) for unit testing. To run the tests, use the following command:
+## Quick Start
 
-```bash
-pnpm test
-```
+### Requirements
 
-#### End-to-End Tests
+- Node.js (version defined in `mise.toml`)
+- pnpm
 
-We use [Playwright](https://playwright.dev/) for end-to-end testing. 
-
-**Prerequisites for E2E tests:**
-- Make sure you have a fresh build of the project (`pnpm run build`)
-- You might need to run `pnpm exec playwright install` for the first time to install the necessary browser binaries.
-
-**Running E2E tests:**
+### Install dependencies
 
 ```bash
-# Run all E2E tests
-pnpm test:e2e
-
-# Run E2E tests from the web app directory
-cd apps/web
-pnpm test:e2e
-
-# Run tests in headed mode (see browser)
-cd apps/web
-pnpm test:e2e --headed
-
-# Run tests in UI mode (interactive)
-cd apps/web
-pnpm exec playwright test --ui
+pnpm install
 ```
 
-**View test results:**
-After running tests, you can view the HTML report:
-```bash
-cd apps/web
-pnpm exec playwright show-report
-```
-
-For detailed information about our E2E testing strategy, see `apps/web/e2e/README.md`.
-
-### Project Structure
-
-This is a Turborepo monorepo. Here's a quick rundown of the main folders:
-
-- `apps/ui-docs`: Documentation for the UI components.
-- `apps/web`: The main Next.js frontend.
-- `packages/config-jest`: Shared Jest preset.
-- `packages/config-ts`: Shared TypeScript config.
-- `packages/content-api`: Content layer for articles and other dynamic content.
-- `packages/logger`: Shared logger.
-- `packages/ui-lib`: Shared UI components.
-- `packages/utils`: Shared utility functions.
-
-### Prerequisites
-
-Before you can run this project locally, make sure you have the following installed:
-
-- **Node.js** - Version specified in `mise.toml`
-- **pnpm** - Package manager for dependencies
-- **Version manager** (recommended) - Use mise, nvm, or similar
-
-#### Installing Node.js with mise (recommended)
-
-1. Install mise: `curl https://mise.run | sh`
-2. Activate mise in your shell (follow the installation instructions)
-3. Install Node.js: `mise install`
-
-#### Installing pnpm
+### Run development server
 
 ```bash
-npm install -g pnpm
+pnpm dev
+# then open: https://localhost:3000
 ```
 
-### Local development
+### Run Storybook (UI Documentation)
 
-1. Clone the repository and navigate to it
-2. Install dependencies:
-   ```bash
-   pnpm install
-   ```
-3. Run the development server:
-   ```bash
-   pnpm run dev
-   ```
+```bash
+pnpm dev --filter ui-docs
+# then open: http://localhost:6006
+```
 
-Open [https://localhost:3000](https://localhost:3000) in your browser to see the result. SSL must be enabled to use certain browser APIs that won't run on unencrypted connections.
+*Some browser APIs require HTTPS during development.*
 
-## Translation
+## Project structure
 
-Translation in this project happens on two fronts: content and UI.
+This repository uses a Turborepo monorepo.
 
-### UI translation
+```
+apps/
+  web        – main Next.js application
+  ui-docs    – Storybook component documentation
 
-This is handled using `next-intl`. It allows you to manage translations and provides a simple API for switching between languages.
+packages/
+  ui-lib     – shared UI components
+  utils      – shared utilities
+  logger     – shared logging
+  config-*   – shared configuration
+  content-api – content and article system
+```
 
-Note that the app currently uses a language prefix for all routes, and all application code resides within a localization folder. This approach is compatible with our static build strategy.
+Detailed architecture documentation can be found in:
 
-Feel free to contribute translations in the `apps/web/src/i18n/messages` folder. Translations are in JSON format; simply create a new file with the language code (e.g., `en.json`, `hu.json`, etc.) and add the keys. Remember to update the relevant configurations.
+docs/architecture.md
 
-See `apps/web/i18n.config.ts` for the list of planned and active translations.
+## Development Documentation
 
-### Content translation
+Additional development documentation:
+```
+docs/development.md
+docs/testing.md
+docs/i18n.md
+```
 
-Content translation is managed via the `packages/content-api` package. Currently, all content, images, and metadata are bundled within this package.
+Architecture decisions are documented in:
 
-**For detailed information, please see `packages/content-api/README.md`**
+```
+adr/*
+```
+
+## Roadmap
+
+Planned improvements and ideas are tracked on the GitHub project board:
+
+https://github.com/users/onetdev/projects/2
+
+## Contributing
+
+Ideas for new annoying UX patterns are welcome.
+
+Open an issue or submit a pull request if you have something particularly terrible in mind.
 
 ## Deployment
 
-Pull Requests are automatically published to Vercel as previews, and the `main` branch is deployed to our primary domain with every new commit.
+Pull requests automatically deploy preview builds on Vercel.
 
-## Contribution
+Commits to the main branch deploy to the production site.
 
-This project is open for contributions! If you have ideas, don’t hesitate — **start your PR today! The world needs you, ACT NOW!**
+## License
 
-## Support
+MIT
 
-Visit [onet.dev](https://onet.dev) or drop me an email.
 
-### 3rd party credits
+## Credits
 
-- **AI disclaimer**: Article covers and content are generated via AI (DALL-E, ChatGPT, Gemini) and curated by humans.
-- **New message notification sound**: [Universfield/New Notification 014](https://pixabay.com/sound-effects/film-special-effects-new-notification-014-363678/) under Pixabay Content license.
-- **Achievement sound**: [DenielCZ/Achievement Unlocked](https://pixabay.com/sound-effects/technology-achievement-unlocked-463070/) under Pixabay Content license.
-- **Cookie jar animation on donation page**: [Saving the Money](https://lottiefiles.com/free-animation/saving-the-money-C9plsMchxQ) on LottieFiles.
-- **Icons**: [FontAwesome](https://fontawesome.com).
-- **Lava photo on "Hot Things"** (by Tanya Grypachevskaya): [Unsplash](https://unsplash.com/photos/80x3QULJDN4).
+Various assets and sounds are used under permissive licenses.
+- Article covers and some content: generated with AI tools (DALL-E, ChatGPT, Gemini) and curated by humans
+- New message notification sound: https://pixabay.com/sound-effects/film-special-effects-new-notification-014-363678/
+- Achievement sound: https://pixabay.com/sound-effects/technology-achievement-unlocked-463070/
+- Cookie jar animation: https://lottiefiles.com/free-animation/saving-the-money-C9plsMchxQ
+- Icons: https://fontawesome.com
+- Lava photo (“Hot Things”): https://unsplash.com/photos/80x3QULJDN4
 
 ---
 

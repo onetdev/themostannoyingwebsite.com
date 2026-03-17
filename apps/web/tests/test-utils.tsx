@@ -36,7 +36,7 @@ export function renderWithProviders(
 ): RenderResult {
   function Wrapper({ children }: PropsWithChildren) {
     return (
-      <NextIntlClientProvider locale={locale} messages={messages}>
+      <NextIntlClientProvider locale={locale as AppLocale} messages={messages}>
         {children}
       </NextIntlClientProvider>
     );
@@ -58,7 +58,7 @@ export function renderHookWithProviders<TResult, TProps>(
 ) {
   function Wrapper({ children }: PropsWithChildren) {
     return (
-      <NextIntlClientProvider locale={locale} messages={messages}>
+      <NextIntlClientProvider locale={locale as AppLocale} messages={messages}>
         {children}
       </NextIntlClientProvider>
     );

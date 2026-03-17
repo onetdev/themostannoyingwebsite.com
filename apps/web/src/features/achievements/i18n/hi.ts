@@ -49,6 +49,10 @@ export default {
       name: 'डेड पिक्सेल हंटर',
       description: 'डेड पिक्सेल पर क्लिक करने का प्रयास करें।',
     },
+    rainbowHunter: {
+      name: 'इंद्रधनुष शिकारी',
+      description: 'आपने इंद्रधनुष के मृत पिक्सेल पर क्लिक किया!',
+    },
     wheelOfFortuneSpin: {
       name: 'आशावादी जुआरी',
       description: '"व्हील ऑफ फॉर्च्यून" घुमाएं और बिल्कुल बेकार इनाम जीतें।',
@@ -72,6 +76,10 @@ export default {
     bouncingLogoFanatic: {
       name: 'बाउंसिंग लोगो कट्टरपंथी',
       description: 'लोगो को 420 बार बाउंस होते हुए देखें।',
+    },
+    loveLettersFromMedic: {
+      name: 'एक चिकित्सक के प्रेम पत्र',
+      description: 'हमारे सहायक सहायता एजेंटों से 5 संदेश प्राप्त करें।',
     },
   },
 };

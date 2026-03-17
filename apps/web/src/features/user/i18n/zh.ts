@@ -22,80 +22,112 @@ export default {
   optionalPainPoints: {
     title: '可选烦点',
     categories: {
-      browser: '浏览器与标签页',
-      visual: '视觉障碍',
-      ads: '广告与变现',
-      interactivity: '弹窗与交互',
+      visualChaos: '视觉混乱',
+      uiSabotage: 'UI 破坏',
+      interruptions: '中断',
+      browserHijacking: '浏览器劫持',
     },
-    screensaverTimeout: '超时时间',
-    screensaverVariant: '变体',
-    screensaverVariantOptions: {
-      bouncingLogo: '反弹 Logo',
-      maze: '3D 迷宫 95',
+    achievementNotifications: {
+      label: '成就通知',
+      hint: '每当你解锁新成就时显示通知。进度始终在后台跟踪。',
     },
-    screensaverTimeoutOptions: {
-      '15': '15 秒',
-      '30': '30 秒',
-      '60': '1 分钟',
-      '300': '5 分钟',
-      '900': '15 分钟',
+    backgroundAdflaps: {
+      label: '背景广告页边',
+      hint: '在页面两侧显示广告页边，点击可跳转到营销页面。',
     },
-    gifts: {
-      detectAdblocker: '检测广告拦截器',
-      flaps: '背景广告页边',
-      oneByOne: '逐个显示的广告块',
+    clipboardBrandingMark: {
+      label: '剪贴板标记',
+      hint: '当你从网站复制文本时添加“阅读更多请访问...”链接。',
     },
-    achievementNotifications: '成就通知',
-    clipboardMarker: '剪贴板标记',
-    contentPaywall: '内容付费墙',
-    deadPixel: '坏点',
-    disableContextMenu: '禁用右键菜单',
-    exitPrompt: '退出提示',
-    historySpam: '历史记录垃圾邮件',
-    mockChat: '气泡聊天',
-    newsletterModal: '新闻通讯弹窗',
-    notifications: '通知',
-    screensaver: '屏幕保护程序',
-    pageTitleInactiveArrayPaged: '标签页不活跃时的备用标题',
-    searchDelay: '虚假搜索延迟',
-    wheelOfFortune: '幸运大转盘',
-    stickyVideo: '粘性视频',
-  },
-  optionalPainPointsHints: {
-    screensaver: '在指定的完全不活动时间后触发用户选择的屏幕保护程序。',
-    gifts: {
-      detectAdblocker: '如果检测到广告拦截器，显示一个巨大的红色横幅。',
-      flaps: '在页面两侧显示广告页边，点击可跳转到不同页面。',
-      oneByOne: '主要覆盖主页上的动画广告。',
+    contentPaywall: {
+      label: '内容付费墙',
+      hint: '在某些内容上显示虚假的付费墙覆盖层，你仍然可以免费查看内容。',
     },
-    achievementNotifications:
-      '每当你解锁新成就时显示通知。进度始终在后台跟踪。',
-    clipboardMarker: '当你从网站复制文本时添加“阅读更多请访问...”链接。',
-    contentPaywall: '在某些内容上显示虚假的付费墙覆盖层，你仍然可以揭开内容。',
-    deadPixel: '在屏幕上放置几个虚假的“坏点”来烦你。',
-    disableContextMenu: '阻止你使用右键菜单并显示警告。',
-    exitPrompt: '在尝试关闭标签页或离开时显示“你确定要离开吗？”提示。',
-    historySpam:
-      '在你的浏览器历史记录中填充虚假条目，让你无法轻易返回。这会让你很难回到搜索引擎结果页。',
-    mockChat:
-      '显示一个烦人的“人类”聊天气泡，只有在你关闭它时才会给你发消息，期间一直显示“对方正在输入”。',
-    newsletterModal:
-      '定期显示新闻通讯订阅弹窗，尤其是当页面从不活动状态恢复（切换标签页）时。',
-    notifications: '请求通知权限并显示虚假通知。',
-    pageTitleInactiveArrayPaged:
-      '当标签页不活跃时，将标题更改为吸引注意的内容。',
-    searchDelay: '为所有搜索添加虚长加载延迟。',
-    wheelOfFortune: '显示一个虚假的“幸运大转盘”弹窗，给你完全没用的奖品。',
-    stickyVideo: '显示一个在你滚动时跟随你的粘性视频播放器。',
+    deadPixel: {
+      label: '坏点',
+      hint: '在屏幕上放置几个虚假的“坏点”来烦你。',
+    },
+    detectAdblocker: {
+      label: '检测广告拦截器',
+      hint: '如果检测到广告拦截器，显示一个巨大的红色横幅。',
+    },
+    disableContextMenu: {
+      label: '禁用右键菜单',
+      hint: '阻止你使用右键菜单并显示警告。',
+    },
+    exitPrompt: {
+      label: '退出提示',
+      hint: '在尝试关闭标签页或离开时显示“你确定要离开吗？”提示。',
+    },
+    flaimAPHoneAd: {
+      label: 'Flaim 手机调查活动',
+      hint: '在主页上显示引导至 Flaim a Phone 的有趣动画广告。',
+    },
+    historySpam: {
+      label: '浏览器历史记录垃圾邮件',
+      hint: '在你的浏览器历史记录中填充虚假条目，让你无法轻易返回。这会让你很难回到搜索引擎结果页。',
+    },
+    mockSupportChat: {
+      label: '模拟支持聊天',
+      hint: '显示一个烦人的“人类”支持聊天气泡，只有在你关闭它时才会给你发消息。',
+    },
+    newsletterModal: {
+      label: '新闻通讯弹窗',
+      hint: '定期显示新闻通讯订阅弹窗，尤其是当页面从不活动状态恢复（切换标签页）时。',
+    },
+    notifications: {
+      label: '通知',
+      hint: '请求通知权限并显示虚假通知。',
+    },
+    pageTitleInactiveArrayPaged: {
+      label: '标签页不活跃时的交替标题',
+      hint: '当标签页不活跃时，将标题更改为吸引注意的内容。',
+    },
+    searchDelay: {
+      label: '人工搜索延迟',
+      hint: '为所有搜索添加虚长加载延迟。',
+    },
+    stickyVideoPlayer: {
+      label: '固定视频播放器',
+      hint: '显示一个在你滚动时跟随你的粘性视频播放器。',
+    },
+    wheelOfFortune: {
+      label: '幸运大转盘',
+      hint: '显示一个虚假的“幸运大转盘”弹窗，给你完全没用的奖品。',
+    },
+    screensaver: {
+      label: '屏幕保护程序',
+      hint: '在指定的完全不活动时间后触发用户选择的屏幕保护程序。',
+      variant: {
+        label: '变体',
+        options: {
+          bouncingLogo: '反弹 Logo',
+          maze: '3D 迷宫 95',
+        },
+      },
+      timer: {
+        label: '在以下时间后显示屏幕保护程序',
+        options: {
+          15: '15 秒',
+          30: '30 秒',
+          60: '1 分钟',
+          300: '5 分钟',
+          900: '15 分钟',
+        },
+      },
+    },
   },
   mandatoryExperienceFlags: {
     title: '强制体验',
-    impossibleLogin: '不可能完成的登录',
-    impossibleSignup: '不可能完成的注册',
-    impossiblePasswordReminder: '不可能完成的密码提醒',
-    unreasonableContent: '不合理的內容',
-    flaimYourPhone: 'Flaim 你的手机',
+    dilf: '想吃的甜甜圈',
     fakeAiSubscription: '虚假 AI 订阅计划',
+    fakeComments: '虚假评论',
+    flaimYourPhone: 'Flaim 你的手机',
+    impossibleLogin: '不可能完成的登录',
+    impossiblePasswordReminder: '不可能完成的密码提醒',
+    impossibleSignup: '不可能完成的注册',
+    madeUpNewsletter: '虚构的高级新闻通讯促销',
+    unreasonableContent: '不合理的內容',
   },
   runtimeInfo: {
     title: '关于本次会话',
@@ -124,6 +156,7 @@ export default {
   painPreferences: {
     levelSettings: {
       label: '痛苦指数',
+      rating: '疼痛评分',
       railTitle: '痛苦指数滑块轨道',
       clamps: {
         from_0: '纯真无邪',

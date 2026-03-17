@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import { emit } from '@/core/events/event-bus';
-import { usePathname } from '@/i18n/navigation';
+import { usePathname } from '@/core/i18n/navigation';
 import { useRuntimeStore } from '@/stores';
 
 export const useNavigationStats = () => {

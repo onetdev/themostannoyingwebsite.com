@@ -3,14 +3,13 @@
 import { Button, FieldError, LoaderDots, PageHeadline } from '@maw/ui-lib';
 import { useTranslations } from 'next-intl';
 import { FormProvider } from 'react-hook-form';
+import { Link } from '@/core/react';
 import { CaptchaField } from '@/features/captcha/components';
-import { useNavigationProvider } from '@/navigation/NavigationContext';
 import { usePasswordReminderForm } from '../../hooks';
 import { EmailField } from '../_fields';
 
 export function PasswordReminderForm() {
   const t = useTranslations();
-  const { LinkComponent: Link, pathFor } = useNavigationProvider();
   const methods = usePasswordReminderForm({
     onSuccess: () => {},
   });
@@ -46,10 +45,10 @@ export function PasswordReminderForm() {
           {!isCtaLoading && t('auth.form.passwordReminder.callToAction')}
         </Button>
         <div className="flex justify-between">
-          <Link href={pathFor('user.login')} prefetch={false}>
+          <Link hrefFor="user.login" prefetch={false}>
             {t('auth.common.login')}
           </Link>
-          <Link href={pathFor('user.signup')} prefetch={false}>
+          <Link hrefFor="user.signup" prefetch={false}>
             {t('auth.common.signup')}
           </Link>
         </div>

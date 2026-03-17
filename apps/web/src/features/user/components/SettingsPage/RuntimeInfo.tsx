@@ -12,7 +12,7 @@ import {
 } from '@maw/ui-lib';
 import { formatSecondsToHHMMSS } from '@maw/utils/formatter';
 import { useTranslations } from 'next-intl';
-import { useMemo } from 'react';
+import { type PropsWithChildren, useMemo } from 'react';
 import ReactTimeAgo from 'react-timeago';
 import { useTimeagoFormatter } from '@/hooks';
 import { useRuntimeStore } from '@/stores';
@@ -39,50 +39,50 @@ export function RuntimeInfo() {
         <Table>
           <TableBody>
             <TableRow>
-              <TableCell className="w-3/5 font-medium">
+              <TableCellLabel>
                 {t('user.runtimeInfo.startedAgo')}
-              </TableCell>
-              <TableCell>
+              </TableCellLabel>
+              <TableCellValue>
                 {startedAt ? (
                   <ReactTimeAgo date={startedAt} formatter={intlFormatter} />
                 ) : (
                   t('common.state.notAvailable')
                 )}
-              </TableCell>
+              </TableCellValue>
             </TableRow>
             <TableRow>
-              <TableCell className="w-3/5 font-medium">
+              <TableCellLabel>
                 {t('user.runtimeInfo.visibilitySeconds')}
-              </TableCell>
-              <TableCell>
+              </TableCellLabel>
+              <TableCellValue>
                 {formatSecondsToHHMMSS(runtime.document.visibilitySeconds)}
-              </TableCell>
+              </TableCellValue>
             </TableRow>
             <TableRow>
-              <TableCell className="w-3/5 font-medium">
+              <TableCellLabel>
                 {t('user.runtimeInfo.isDocumentVisible')}
-              </TableCell>
-              <TableCell>
+              </TableCellLabel>
+              <TableCellValue>
                 {runtime.document.isVisible
                   ? t('common.action.yes')
                   : t('common.action.no')}
-              </TableCell>
+              </TableCellValue>
             </TableRow>
             <TableRow>
-              <TableCell className="w-3/5 font-medium">
+              <TableCellLabel>
                 {t('user.runtimeInfo.userActivation')}
-              </TableCell>
-              <TableCell>
+              </TableCellLabel>
+              <TableCellValue>
                 {runtime.userActivation.unlocked
                   ? t('common.state.completed')
                   : t('common.state.pending')}
-              </TableCell>
+              </TableCellValue>
             </TableRow>
             <TableRow>
-              <TableCell className="w-3/5 font-medium">
+              <TableCellLabel>
                 {t('user.runtimeInfo.lastActivation')}
-              </TableCell>
-              <TableCell>
+              </TableCellLabel>
+              <TableCellValue>
                 {runtime.userActivation.lastEventAt > 0 ? (
                   <ReactTimeAgo
                     date={runtime.userActivation.lastEventAt}
@@ -91,37 +91,49 @@ export function RuntimeInfo() {
                 ) : (
                   t('common.state.notAvailable')
                 )}
-              </TableCell>
+              </TableCellValue>
             </TableRow>
             <TableRow>
-              <TableCell className="w-3/5 font-medium">
+              <TableCellLabel>
                 {t('user.runtimeInfo.navigationCount')}
-              </TableCell>
-              <TableCell>{runtime.navigationCount}</TableCell>
+              </TableCellLabel>
+              <TableCellValue>{runtime.navigationCount}</TableCellValue>
             </TableRow>
             {runtime.adblockerSuspected !== null && (
               <TableRow>
-                <TableCell className="w-3/5 font-medium">
+                <TableCellLabel>
                   {runtime.adblockerSuspected
                     ? t('user.runtimeInfo.adblockerSuspected')
                     : t('user.runtimeInfo.adblockerNotDetected')}
-                </TableCell>
-                <TableCell>✅</TableCell>
+                </TableCellLabel>
+                <TableCellValue>✅</TableCellValue>
               </TableRow>
             )}
             <TableRow>
-              <TableCell className="w-3/5 font-medium">
+              <TableCellLabel>
                 {t('user.runtimeInfo.flaimSurveyResult')}
-              </TableCell>
-              <TableCell>
+              </TableCellLabel>
+              <TableCellValue>
                 {runtime.flaimSurveyResult
                   ? t('common.state.done')
                   : t('common.state.pending')}
-              </TableCell>
+              </TableCellValue>
             </TableRow>
           </TableBody>
         </Table>
       </CardContent>
     </Card>
   );
+}
+
+function TableCellLabel({ children }: PropsWithChildren) {
+  return (
+    <TableCell className="w-3/5 font-medium block sm:table-cell pb-0 sm:py-2">
+      {children}
+    </TableCell>
+  );
+}
+
+function TableCellValue({ children }: PropsWithChildren) {
+  return <TableCell className="block sm:table-cell">{children}</TableCell>;
 }

@@ -11,7 +11,7 @@ test('settings page loads and its menu item is active', {
   const settingsPage = getSettingsPage(page);
   await settingsPage.goto();
 
-  await expect(settingsPage.activeMenuItem).toHaveText('Settings');
+  await expect(settingsPage.activeMenuItem).toHaveAccessibleName('Settings');
 });
 
 test('pain point flags can be toggled and persisted', async ({ page }) => {

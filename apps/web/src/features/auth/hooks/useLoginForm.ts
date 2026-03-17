@@ -1,7 +1,7 @@
 'use client';
 
-import { useLogger } from '@maw/logger';
 import { useForm } from 'react-hook-form';
+import { useLogger } from '@/core/react';
 import { useZodFormValidator } from '@/hooks';
 import { useAuthService } from '../hooks';
 import {
@@ -17,7 +17,7 @@ interface LoginFormProps {
 }
 
 export function useLoginForm({ onSuccess }: LoginFormProps) {
-  const logger = useLogger().getSubLogger({ name: 'useLoginForm' });
+  const logger = useLogger('use-login-form');
   const authService = useAuthService();
   const resolver = useZodFormValidator(getLoginFormDataSchema);
   const methods = useForm<LoginFormData>({ resolver });

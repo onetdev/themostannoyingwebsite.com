@@ -2,8 +2,8 @@
 
 import { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
+import { useRouter } from '@/core/i18n/navigation';
 import { useZodFormValidator } from '@/hooks';
-import { useRouter } from '@/i18n/navigation';
 import { type DebugAuthFormData, getDebugAuthFormDataSchema } from '../schemas';
 import { useMonitoringStore } from '../stores';
 

@@ -51,13 +51,18 @@ export function PainLevelSelector({ className }: PainLevelSelectorProps) {
       className={`flex flex-col gap-2 overflow-hidden px-5 py-2 pt-2 pb-4 xl:px-8 ${className}`}
     >
       <div className="text-card-foreground flex items-center justify-between text-xs font-bold tracking-wider uppercase opacity-60">
-        <span>{t('levelSettings.label')}</span>
+        <span id="pain-level-label">{t('levelSettings.label')}</span>
 
         <div className="flex items-center gap-1.5">
           <TooltipProvider>
             <Tooltip>
               <TooltipTrigger asChild>
-                <button type="button" className="md:hidden">
+                <button
+                  type="button"
+                  className="md:hidden"
+                  aria-label={t('levelSettings.rating')}
+                  title={t('levelSettings.rating')}
+                >
                   <Icon icon="infoCircle" className="size-3.5" />
                 </button>
               </TooltipTrigger>
@@ -80,6 +85,8 @@ export function PainLevelSelector({ className }: PainLevelSelectorProps) {
           max={publicLevel.max}
           value={publicLevel.current}
           onChange={handleChange}
+          aria-labelledby="pain-level-label"
+          aria-valuetext={percentageClamp.label}
           className="accent-primary absolute top-1/2 inset-s-0 z-20 w-full -translate-y-1/2 cursor-pointer appearance-none bg-transparent"
         />
       </div>

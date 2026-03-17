@@ -50,6 +50,10 @@ export default {
       name: 'ドット抜けハンター',
       description: 'ドット抜け（死んだピクセル）をクリックしようとする。',
     },
+    rainbowHunter: {
+      name: 'レインボーハンター',
+      description: 'レインボーカラーのドット抜けをクリックしました！',
+    },
     wheelOfFortuneSpin: {
       name: '楽観的なギャンブラー',
       description:
@@ -74,6 +78,11 @@ export default {
     bouncingLogoFanatic: {
       name: 'ロゴの跳ね返り狂い',
       description: 'ロゴが跳ね返るのを420回見届ける。',
+    },
+    loveLettersFromMedic: {
+      name: '衛生兵からの恋文',
+      description:
+        '弊社の親切なサポート担当者から5通のメッセージを受け取ります。',
     },
   },
 };

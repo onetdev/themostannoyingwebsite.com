@@ -1,5 +1,7 @@
 export default {
   chatBubble: {
+    trigger: 'Abrir chat',
+    triggerClose: 'Cerrar chat',
     messageInitial:
       '¡Hola! Soy una burbuja de chat. Estoy aquí para ayudarte. 🤓',
     messageVariants: {

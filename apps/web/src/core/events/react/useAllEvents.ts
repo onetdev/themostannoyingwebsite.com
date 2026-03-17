@@ -1,3 +1,5 @@
+'use client';
+
 import type { EventDataPair } from 'emittery';
 import { useEffect } from 'react';
 import { eventBus } from '@/core/events/event-bus';

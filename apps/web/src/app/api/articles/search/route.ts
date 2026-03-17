@@ -5,7 +5,7 @@ import {
 import { err, ok } from '@maw/utils/result';
 import { deepmerge } from 'deepmerge-ts';
 import { NextResponse } from 'next/server';
-import z from 'zod';
+import * as z from 'zod';
 import { getDependencyContainer } from '@/core/di';
 import { getArticleService } from '@/features/content/services';
 

@@ -1,3 +1,5 @@
+import 'server-only';
+
 import { ArticleApiService } from '@maw/content-api';
 import { type Container, injectable } from 'inversify';
 

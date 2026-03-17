@@ -5,7 +5,9 @@ export type DisruptionsI18nShape = typeof disruptionsEnLocale;
 declare global {
   interface AppEvents {
     'context-menu:triggered': never;
-    'dead-pixel:clicked': never;
+    'dead-pixel:clicked': {
+      isRainbow: boolean;
+    };
     'screensaver:maze:stepped': {
       passedSpecialCell: boolean;
     };

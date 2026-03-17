@@ -61,9 +61,6 @@ test('signup page field focusability and simple submission check', async ({
   await signupPage.consentNewsletterCheckbox.check();
   await signupPage.consentPivacyPolicyCheckbox.check();
 
-  await signupPage.captchaInput.click();
-  await signupPage.captchaInput.fill('invalid');
-
   await signupPage.createAccountButton.click();
 
   // And now looking for errors

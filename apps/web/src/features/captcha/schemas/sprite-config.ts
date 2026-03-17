@@ -1,4 +1,4 @@
-import { z } from 'zod';
+import * as z from 'zod';
 
 export const SpriteConfigSchema = z.object({
   width: z.number(),

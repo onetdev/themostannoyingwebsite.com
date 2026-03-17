@@ -51,8 +51,12 @@ export default {
       name: 'Chasseur de pixels morts',
       description: 'Essayez de cliquer sur un pixel mort.',
     },
+    rainbowHunter: {
+      name: "Chasseur d'arc-en-ciel",
+      description: 'Vous avez cliqué sur un pixel mort arc-en-ciel !',
+    },
     wheelOfFortuneSpin: {
-      name: 'Joueur optimiste',
+      name: 'Joueur optimista',
       description:
         'Faites tourner la "Roue de la Fortune" et gagnez un prix absolument inutile.',
     },
@@ -76,6 +80,10 @@ export default {
     bouncingLogoFanatic: {
       name: 'Fanatique du logo bondissant',
       description: 'Soyez témoin de 420 rebonds du logo.',
+    },
+    loveLettersFromMedic: {
+      name: "Lettres d'amour d'un médecin",
+      description: "Recevez 5 messages de nos agents d'assistance dévoués.",
     },
   },
 };

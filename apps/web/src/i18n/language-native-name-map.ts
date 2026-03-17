@@ -1,0 +1,17 @@
+export const LANGUAGE_NATIVE_NAME_MAP: Record<AppSupportedLocale, string> = {
+  ar: 'العربية',
+  de: 'Deutsch',
+  en: 'English',
+  es: 'Español',
+  fr: 'Français',
+  hi: 'हिन्दी',
+  hu: 'Magyar',
+  it: 'Italiano',
+  ja: '日本語',
+  ko: '한국어',
+  pl: 'Polski',
+  pt: 'Português',
+  ru: 'Русский',
+  tr: 'Türkçe',
+  zh: '中文',
+};

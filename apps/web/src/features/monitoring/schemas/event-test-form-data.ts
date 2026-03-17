@@ -1,4 +1,4 @@
-import { z } from 'zod';
+import * as z from 'zod';
 
 export function getEventTestFormDataSchema(t: ZodTranslator) {
   return z.object({

@@ -1,7 +1,8 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { useRouter } from '@/i18n/navigation';
+import { useRouter } from '@/core/i18n/navigation';
+import { ReportRouteVisit } from '@/features/monitoring/components';
 import styles from './AdminAuthPage.module.css';
 import { useAdminTerminal } from './useAdminTerminal';
 import { useAdminTerminalAuthFlow } from './useAdminTerminalAuthFlow';
@@ -26,6 +27,7 @@ export function AdminAuthPage() {
 
   return (
     <div className="flex min-h-screen items-center justify-center bg-black p-4">
+      <ReportRouteVisit route="admin" />
       <div className="h-screen max-h-[480px] w-full max-w-[640px]">
         <div
           className={`${styles.terminalContainer} h-full rounded-lg border-2 border-[#00ff00] bg-black p-8 shadow-[0_0_20px_rgba(0,255,0,0.3)]`}

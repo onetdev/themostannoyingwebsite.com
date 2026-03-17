@@ -1,5 +1,7 @@
 export default {
   chatBubble: {
+    trigger: 'Open chat',
+    triggerClose: 'Close chat',
     messageInitial: 'Hello! I am a chat bubble. I am here to help you. 🤓',
     messageVariants: {
       variant_001: 'Come on, let me help you!',

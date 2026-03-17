@@ -44,13 +44,15 @@ export const getSignupPage = (page: Page) => {
       name: 'Increase phone number',
     }),
 
-    captchaInput: page.getByRole('textbox', { name: 'Captcha' }),
+    captchaInput: page.getByRole('button', {
+      name: 'Prove that you are a robot!',
+    }),
     forgotPasswordLink: page.getByRole('main').getByText('Forgot password?'),
     loginLink: page.getByRole('main').getByText('Login'),
 
     requiredFieldErrors: page.locator('text="This field is required."'),
     sumError: page.getByText('Sum of numbers must be at'),
-    captchaError: page.getByText('Invalid captcha'),
+    captchaError: page.getByText('Captcha is required'),
 
     goto: async () => {
       await page.goto('/en/user/signup');

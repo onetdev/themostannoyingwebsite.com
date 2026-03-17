@@ -3,7 +3,7 @@ import { getTranslations } from 'next-intl/server';
 import { MyProfilePage } from '@/features/user/components';
 import { PageLayout } from '../../_components/PageLayout';
 
-export { generateStaticParams } from '@/i18n/routing';
+export { generateStaticParams } from '@/core/i18n/routing';
 
 export async function generateMetadata({
   params,
@@ -24,7 +24,8 @@ export default async function Page() {
   return (
     <PageLayout
       autoPadding={false}
-      activeItem="login"
+      route="user.profile"
+      navigationHighlightRoute="user.login"
       className="mx-auto max-w-md px-5 py-0 md:py-14"
       role="main"
     >

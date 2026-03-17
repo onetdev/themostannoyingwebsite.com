@@ -1,4 +1,4 @@
-import { z } from 'zod';
+import * as z from 'zod';
 
 export function getPasswordReminderFormDataSchema(t: ZodTranslator) {
   return z.object({

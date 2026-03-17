@@ -2,7 +2,7 @@
 
 import { Icon, Progress } from '@maw/ui-lib';
 import { useTranslations } from 'next-intl';
-import { useNavigationProvider } from '@/navigation/NavigationContext';
+import { useNavigationProvider } from '@/core/react';
 
 export type AchievementToastProps = {
   name: string;
@@ -18,7 +18,7 @@ export function AchievementToast({
   target,
 }: AchievementToastProps) {
   const t = useTranslations('achievements');
-  const { navigatePush } = useNavigationProvider();
+  const { push } = useNavigationProvider();
 
   const isProgress =
     type === 'progress' && progress !== undefined && target !== undefined;
@@ -27,7 +27,7 @@ export function AchievementToast({
   return (
     <button
       type="button"
-      onClick={() => navigatePush('achievements')}
+      onClick={() => push('achievements')}
       className="w-full bg-background p-3 rounded-lg border border-border cursor-pointer sm:w-[364px]"
     >
       <div className="flex items-center gap-4 w-full">

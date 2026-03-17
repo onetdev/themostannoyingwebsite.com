@@ -5,6 +5,7 @@ type EventPreset = {
 };
 
 export const eventPresets: EventPreset[] = [
+  { type: 'route:visit', payload: { route: 'home' } },
   { type: 'navigation:changed', payload: { path: '/debug' } },
   { type: 'global-search:query', payload: { query: 'annoying' } },
   {
@@ -13,7 +14,16 @@ export const eventPresets: EventPreset[] = [
   },
   { type: 'context-menu:triggered', payload: {} },
   { type: 'global-text:copied', payload: {} },
-  { type: 'dead-pixel:clicked', payload: {} },
+  {
+    type: 'dead-pixel:clicked',
+    name: 'dead-pixel:clicked (normal)',
+    payload: { isRainbow: false },
+  },
+  {
+    type: 'dead-pixel:clicked',
+    name: 'dead-pixel:clicked (rainbow)',
+    payload: { isRainbow: true },
+  },
   { type: 'exit-prompt:shown', payload: {} },
   {
     type: 'wof:spin-completed',

@@ -3,7 +3,7 @@
 import { useAchievementBankService } from '../hooks';
 import { useAchievementsStore } from '../stores';
 import { AchievementCard } from './AchievementCard';
-import { ResetAchievementsButton } from './ResetAchievementsButton';
+import { ResetAchievements } from './ResetAchievements';
 
 export function AchievementList() {
   const { achievements } = useAchievementsStore();
@@ -34,7 +34,7 @@ export function AchievementList() {
 
       {hasAnyAchievements && (
         <div className="flex justify-center border-border border-t pt-8">
-          <ResetAchievementsButton />
+          <ResetAchievements />
         </div>
       )}
     </div>

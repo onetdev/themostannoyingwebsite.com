@@ -3,7 +3,7 @@ import { getTranslations } from 'next-intl/server';
 import { PasswordReminderPage } from '@/features/auth/components';
 import { PageLayout } from '../../_components/PageLayout';
 
-export { generateStaticParams } from '@/i18n/routing';
+export { generateStaticParams } from '@/core/i18n/routing';
 
 export const revalidate = 1800;
 
@@ -26,7 +26,8 @@ export default function Page() {
   return (
     <PageLayout
       autoPadding={false}
-      activeItem="login"
+      route="user.password-reminder"
+      navigationHighlightRoute="user.login"
       className="mx-auto max-w-lg p-0 px-5 md:py-14"
       role="main"
     >

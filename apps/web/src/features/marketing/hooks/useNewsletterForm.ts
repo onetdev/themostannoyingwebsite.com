@@ -13,6 +13,9 @@ export function useNewsletterForm() {
   const t = useTranslations();
   const methods = useForm<NewsletterFormData>({
     resolver: zodResolver(getNewsletterFormDataSchema(t)),
+    defaultValues: {
+      onlySpams: true,
+    },
   });
 
   const onSubmit = async () => {

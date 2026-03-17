@@ -1,4 +1,4 @@
-import { z } from 'zod';
+import * as z from 'zod';
 
 export const CountrySchema = z.object({
   code: z.string().min(2).max(2),

@@ -93,11 +93,7 @@ export default async function Page({ params }: PageProps) {
   const comments = await new CommentService().getByArticle(datum);
 
   return (
-    <PageLayout
-      activeItem="article-item"
-      role="main"
-      data-testid="article-item"
-    >
+    <PageLayout route="article.single" role="main" data-testid="article-item">
       <ArticleItemPage article={datum} comments={comments} />
     </PageLayout>
   );

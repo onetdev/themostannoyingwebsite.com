@@ -1,5 +1,7 @@
 export default {
   chatBubble: {
+    trigger: 'चैट खोलें',
+    triggerClose: 'चैट बंद करें',
     messageInitial: 'नमस्ते! मैं एक चैट बबल हूँ। मैं आपकी मदद करने के लिए यहाँ हूँ। 🤓',
     messageVariants: {
       variant_001: 'चलो भी, मुझे आपकी मदद करने दो!',

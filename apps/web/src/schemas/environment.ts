@@ -1,4 +1,4 @@
-import { z } from 'zod';
+import * as z from 'zod';
 
 const EnvironmentList = ['production', 'preview', 'development'] as const;
 

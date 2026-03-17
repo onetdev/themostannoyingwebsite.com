@@ -3,7 +3,7 @@ import { getTranslations } from 'next-intl/server';
 import { SearchPage } from '@/features/content/components';
 import { PageLayout } from '../_components/PageLayout';
 
-export { generateStaticParams } from '@/i18n/routing';
+export { generateStaticParams } from '@/core/i18n/routing';
 
 export const revalidate = 1800;
 
@@ -21,7 +21,7 @@ export async function generateMetadata({
 
 export default function Page() {
   return (
-    <PageLayout activeItem="search" role="main">
+    <PageLayout route="search" role="main">
       <SearchPage />
     </PageLayout>
   );

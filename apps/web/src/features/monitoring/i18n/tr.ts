@@ -33,12 +33,12 @@ export default {
     disabled: 'Etkinlik geçmişi kaydı devre dışı.',
   },
   storeInspector: {
-    runtime: 'Runtime Store',
-    monitoring: 'Monitoring Store',
-    painPreferences: 'Pain Preferences Store',
-    achievements: 'Achievements Store',
-    userPreferences: 'User Preferences Store',
-    userGrants: 'User Grants Store',
+    runtime: 'Çalışma Zamanı (Runtime) Store',
+    monitoring: 'İzleme (Monitoring) Store',
+    painPreferences: 'Ağrı Tercihleri Store',
+    achievements: 'Başarımlar Store',
+    userPreferences: 'Kullanıcı Tercihleri Store',
+    userGrants: 'Kullanıcı İzinleri Store',
     appConfig: 'Uygulama Yapılandırması',
   },
 };

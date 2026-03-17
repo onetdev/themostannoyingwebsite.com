@@ -2,6 +2,8 @@ import type { SupportI18nShape } from '../types';
 
 export default {
   chatBubble: {
+    trigger: '打开聊天',
+    triggerClose: '关闭聊天',
     messageInitial: '你好！我是聊天气泡。我是来帮助你的。🤓',
     messageVariants: {
       variant_001: '快来，让我帮你！',

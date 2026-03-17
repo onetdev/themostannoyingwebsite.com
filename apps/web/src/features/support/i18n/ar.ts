@@ -2,6 +2,8 @@ import type { SupportI18nShape } from '../types';
 
 export default {
   chatBubble: {
+    trigger: 'فتح الدردشة',
+    triggerClose: 'إغلاق الدردشة',
     messageInitial: 'مرحباً! أنا فقاعة دردشة. أنا هنا لمساعدتك. 🤓',
     messageVariants: {
       variant_001: 'هيا، دعني أساعدك!',

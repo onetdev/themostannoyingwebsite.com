@@ -1,11 +1,12 @@
 'use client';
 
+import { FadeIn } from '@maw/ui-lib';
 import Image from 'next/image';
 import { useTranslations } from 'next-intl';
 import { useTheme } from 'next-themes';
 import type { PropsWithChildren } from 'react';
-import { useAppConfigContext } from '@/core/config/react-app-config';
-import { Link } from '@/i18n/navigation';
+import { Link } from '@/core/i18n/navigation';
+import { useAppConfigContext } from '@/core/react';
 
 export function ContainerPromotionFlaps() {
   const config = useAppConfigContext();
@@ -13,7 +14,7 @@ export function ContainerPromotionFlaps() {
   const { resolvedTheme } = useTheme();
 
   return (
-    <div className="sticky top-0 hidden w-full justify-center md:flex">
+    <FadeIn className="sticky top-0 hidden w-full justify-center md:flex">
       <div className="absolute max-h-screen overflow-hidden">
         <Link href="/dilf" passHref prefetch={false}>
           <Image
@@ -22,7 +23,7 @@ export function ContainerPromotionFlaps() {
             alt={t('marketing.dilf.title')}
             width={1900}
             height={1000}
-            priority={false}
+            priority
           />
           <PromotionFlapText
             theme={resolvedTheme as AppTheme}
@@ -38,7 +39,7 @@ export function ContainerPromotionFlaps() {
           </PromotionFlapText>
         </Link>
       </div>
-    </div>
+    </FadeIn>
   );
 }
 

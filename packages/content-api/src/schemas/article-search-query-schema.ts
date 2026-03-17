@@ -1,4 +1,4 @@
-import { z } from 'zod';
+import * as z from 'zod';
 import { ArticleLookupQuerySchema } from './article-lookup-query-schema';
 import { ArticleQuerySchema } from './article-query-schema';
 

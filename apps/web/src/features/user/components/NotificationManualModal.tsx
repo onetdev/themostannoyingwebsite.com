@@ -9,8 +9,7 @@ import {
   DialogTitle,
 } from '@maw/ui-lib';
 import { useTranslations } from 'next-intl';
-
-import { useEvent } from '@/hooks';
+import { useEvent } from '@/core/react';
 
 type ManualModalProps = {
   visible?: boolean;

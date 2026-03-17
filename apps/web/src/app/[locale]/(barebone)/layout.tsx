@@ -6,7 +6,7 @@ import { hasLocale, NextIntlClientProvider } from 'next-intl';
 import type { PropsWithChildren } from 'react';
 import { getLangDir } from 'rtl-detect';
 import { ClientRootProviderContainer } from '@/app/bootstrap/ClientRootProviderContainer';
-import { routing } from '@/i18n/routing';
+import { routing } from '@/core/i18n/routing';
 import { getAppConfigService } from '@/services';
 
 const config = getAppConfigService().getAll();

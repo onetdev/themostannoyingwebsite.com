@@ -3,7 +3,8 @@
 import { useMessages, useTranslations } from 'next-intl';
 import { useCallback, useEffect, useMemo, useState } from 'react';
 import { useMount } from 'react-use';
-import { useAppConfigContext } from '@/core/config/react-app-config';
+import { emit } from '@/core/events/event-bus';
+import { useAppConfigContext } from '@/core/react';
 import { useAudio, useSendNotification } from '@/hooks';
 import { useRuntimeStore } from '@/stores';
 import type { ChatMessage, ChatMessageType } from '../schemas';
@@ -18,6 +19,7 @@ export function useChatBubbleHistory() {
   const [history, setHistory] = useState<ChatMessage[]>([]);
   const [isForeground, setForeground] = useState(false);
   const [badgeCounter, setBadgeCounter] = useState(1);
+  const [hasOpenedChatBubble, setHasOpenedChatBubble] = useState(false);
   const notification = useSendNotification();
   const { play: playSound, audio } = useAudio(
     config.support.assets.newMessageSfx,
@@ -52,12 +54,24 @@ export function useChatBubbleHistory() {
 
     add(randomMessage, 'bot');
 
+    if (hasOpenedChatBubble) {
+      emit('support:bot-message-received');
+    }
+
     if (!isForeground) {
       setBadgeCounter((prev) => prev + 1);
       playSound();
       sendNotification(randomMessage);
     }
-  }, [add, isForeground, botMessageVariants, playSound, sendNotification, t]);
+  }, [
+    add,
+    isForeground,
+    botMessageVariants,
+    playSound,
+    sendNotification,
+    t,
+    hasOpenedChatBubble,
+  ]);
 
   useEffect(() => {
     if (isForeground || !hasInteracted || badgeCounter > 0) {
@@ -73,6 +87,7 @@ export function useChatBubbleHistory() {
     // moving into foreground it good enough.
     if (isForeground) {
       setBadgeCounter(0);
+      setHasOpenedChatBubble(true);
     }
   }, [isForeground]);
 

@@ -1,5 +1,7 @@
 export default {
   chatBubble: {
+    trigger: '채팅 열기',
+    triggerClose: '채팅 닫기',
     messageInitial:
       '안녕하세요! 저는 채팅 버블입니다. 당신을 도와주러 왔어요. 🤓',
     messageVariants: {

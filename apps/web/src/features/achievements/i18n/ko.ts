@@ -50,6 +50,10 @@ export default {
       name: '데드 픽셀 헌터',
       description: '데드 픽셀을 클릭하려고 시도했습니다.',
     },
+    rainbowHunter: {
+      name: '무지개 사냥꾼',
+      description: '무지개색 데드 픽셀을 클릭했습니다!',
+    },
     wheelOfFortuneSpin: {
       name: '낙관적인 도박꾼',
       description:
@@ -74,6 +78,10 @@ export default {
     bouncingLogoFanatic: {
       name: '바운싱 로고 광팬',
       description: '로고가 420번 튕기는 것을 목격했습니다.',
+    },
+    loveLettersFromMedic: {
+      name: '의무병으로부터 온 연애 편지',
+      description: '친절한 지원 상담원으로부터 5개의 메시지를 받으세요.',
     },
   },
 };

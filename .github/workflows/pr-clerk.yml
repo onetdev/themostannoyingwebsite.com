@@ -1,17 +1,21 @@
 name: PR clerk
 
 on:
-  merge_group:
   pull_request:
     types: [opened, edited, synchronize, reopened]
+  merge_group:
+
+concurrency:
+  group: pr-clerk-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
 
 jobs:
   author-as-assignee:
     name: Author as assignee
+    if: github.event_name == 'pull_request' && github.event.action == 'opened'
     runs-on: ubuntu-latest
     permissions:
       pull-requests: write
-    if: github.event_name == 'pull_request' && github.event.action == 'opened'
     steps:
       - uses: kentaro-m/auto-assign-action@v2.0.0
         with:
@@ -19,9 +23,10 @@ jobs:
 
   validate-pr-title:
     name: Validate PR title
+    if: github.event_name == 'pull_request'
+    runs-on: ubuntu-latest
     permissions:
       pull-requests: read
-    runs-on: ubuntu-latest
     steps:
       - uses: amannn/action-semantic-pull-request@v5
         env:
@@ -29,9 +34,11 @@ jobs:
 
   labeler:
     name: Labeling PR
+    if: github.event_name == 'pull_request'
+    runs-on: ubuntu-latest
     permissions:
       contents: read
       pull-requests: write
-    runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v4
       - uses: actions/labeler@v5

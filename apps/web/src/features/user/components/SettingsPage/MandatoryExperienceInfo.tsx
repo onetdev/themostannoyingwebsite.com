@@ -53,6 +53,17 @@ export function MandatoryExperienceInfo() {
         >
           <FormCheckbox name="fake_ai_subscription" checked={true} disabled />
         </SettingsField>
+        <SettingsField label={t('user.mandatoryExperienceFlags.fakeComments')}>
+          <FormCheckbox name="fake_comments" checked={true} disabled />
+        </SettingsField>
+        <SettingsField label={t('user.mandatoryExperienceFlags.dilf')}>
+          <FormCheckbox name="dilf" checked={true} disabled />
+        </SettingsField>
+        <SettingsField
+          label={t('user.mandatoryExperienceFlags.flaimYourPhone')}
+        >
+          <FormCheckbox name="flaim_your_phone" checked={true} disabled />
+        </SettingsField>
       </CardContent>
     </Card>
   );

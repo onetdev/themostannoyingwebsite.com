@@ -3,9 +3,11 @@
 import { useMessages } from 'next-intl';
 import { useMemo } from 'react';
 import { usePainPreferencesStore, useRuntimeStore } from '@/stores';
-import { ArrayPagedTitle } from './ArrayPagedTitle';
-import { GlitchyTitle } from './GlitchyTitle';
-import { MarqueeTitle } from './MarqueeTitle';
+import {
+  useArrayPagedTitle,
+  useGlitchyTitle,
+  useMarqueeTitle,
+} from '../../hooks';
 
 /**
  * Pain point of manipulating the page title. Unfortunatelly the refresh rate
@@ -13,6 +15,7 @@ import { MarqueeTitle } from './MarqueeTitle';
  */
 export function PageTitleGlitch() {
   const messages = useMessages() as AppTranslationShape;
+  const isVisible = useRuntimeStore((state) => state.document.isVisible);
   const inactiveMarquee = usePainPreferencesStore(
     (state) => state.flags['pageTitle.inactiveMarquee'],
   );
@@ -22,7 +25,6 @@ export function PageTitleGlitch() {
   const inactiveArrayPaged = usePainPreferencesStore(
     (state) => state.flags['pageTitle.inactiveArrayPaged'],
   );
-  const isVisible = useRuntimeStore((state) => state.document.isVisible);
   const hasInteracted = useRuntimeStore(
     (state) => state.userActivation.unlocked,
   );
@@ -38,21 +40,24 @@ export function PageTitleGlitch() {
     [messages.disruptions.titleExperience.arrayPagedVariants],
   );
 
-  return (
-    <>
-      {inactiveMarquee && marqueeVariants.length > 0 && (
-        <MarqueeTitle
-          enabled={hasInteracted && !isVisible}
-          text={marqueeVariants[0]}
-        />
-      )}
-      {randomGlitch && <GlitchyTitle enabled={hasInteracted && isVisible} />}
-      {inactiveArrayPaged && (
-        <ArrayPagedTitle
-          enabled={hasInteracted && !isVisible}
-          texts={arrayPagedVariants}
-        />
-      )}
-    </>
-  );
+  useMarqueeTitle({
+    enabled: !!(
+      inactiveMarquee &&
+      marqueeVariants.length > 0 &&
+      hasInteracted &&
+      !isVisible
+    ),
+    text: marqueeVariants[0],
+  });
+
+  useGlitchyTitle({
+    enabled: !!(randomGlitch && hasInteracted && isVisible),
+  });
+
+  useArrayPagedTitle({
+    enabled: !!(inactiveArrayPaged && hasInteracted && !isVisible),
+    texts: arrayPagedVariants,
+  });
+
+  return null;
 }

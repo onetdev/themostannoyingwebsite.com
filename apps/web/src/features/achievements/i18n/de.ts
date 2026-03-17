@@ -51,6 +51,10 @@ export default {
       name: 'Pixelfehler-Jäger',
       description: 'Versuche, auf einen toten Pixel zu klicken.',
     },
+    rainbowHunter: {
+      name: 'Regenbogenjäger',
+      description: 'Du hast auf einen Regenbogen-Pixelfehler geklickt!',
+    },
     wheelOfFortuneSpin: {
       name: 'Optimistischer Glücksspieler',
       description:
@@ -76,6 +80,11 @@ export default {
     bouncingLogoFanatic: {
       name: 'Bouncing-Logo-Fanatiker',
       description: 'Erlebe, wie das Logo 420 Mal abprallt.',
+    },
+    loveLettersFromMedic: {
+      name: 'Liebesbriefe von einem Sanitäter',
+      description:
+        'Erhalten Sie 5 Nachrichten von unseren hilfreichen Support-Mitarbeitern.',
     },
   },
 };

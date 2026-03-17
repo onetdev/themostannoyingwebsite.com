@@ -1,8 +1,9 @@
 import { Button, Icon } from '@maw/ui-lib';
+import { getTranslations } from 'next-intl/server';
 import type { ComponentProps } from 'react';
-import type { ActiveNavigationItem } from '@/app/navigation';
+import { Link } from '@/core/i18n/navigation';
 import { SearchForm } from '@/features/content/components';
-import { Link } from '@/i18n/navigation';
+import type { RouteAlias } from '@/schemas';
 import { AppLanguageSwitcher } from '../AppLanguageSwitcher';
 import { AppDarkModeToggle } from './AppDarkModeToggle';
 import { AppNavigationDesktop } from './AppNavigationDesktop';
@@ -11,15 +12,17 @@ import { PainLevelSelector } from './PainLevelSelector';
 import { TextLogo } from './TextLogo';
 
 type AppHeaderProps = {
-  activeItem?: ActiveNavigationItem;
+  activeItem?: RouteAlias;
   className?: ComponentProps<'header'>['className'];
 };
 
 export async function AppHeader({ activeItem, className }: AppHeaderProps) {
+  const t = await getTranslations();
+
   return (
     <header
       id="header"
-      className={`grid grid-cols-2 items-center gap-x-2 px-3 md:px-5 py-3 xl:px-8 ${className ?? ''}`}
+      className={`grid grid-cols-2 items-center gap-x-2 px-3 md:px-5 py-3 xl:px-8 print:hidden ${className ?? ''}`}
     >
       <div className="flex items-center gap-2">
         <AppNavigationMobile activeItem={activeItem} />
@@ -32,7 +35,11 @@ export async function AppHeader({ activeItem, className }: AppHeaderProps) {
           className="md:hidden rounded-full p-0"
           variant="outline"
         >
-          <Link href="/search">
+          <Link
+            href="/search"
+            aria-label={t('common.action.search')}
+            title={t('common.action.search')}
+          >
             <Icon icon="search" />
           </Link>
         </Button>
