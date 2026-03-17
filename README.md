@@ -89,6 +89,10 @@ pnpm dev --filter ui-docs
 # then open: http://localhost:6006
 ```
 
+### AI-Powered Development
+
+This project includes [agentic skills](docs/development.md#ai-powered-development) to automate branch summaries and commit message generation for AI-assisted workflows.
+
 *Some browser APIs require HTTPS during development.*
 
 ## Project structure

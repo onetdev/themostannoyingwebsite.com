@@ -67,6 +67,29 @@ The project uses:
 
 Before committing changes, ensure the code passes linting and tests.
 
+## AI-Powered Development
+
+This project includes **agentic skills** to streamline development workflows for AI-assisted environments.
+
+### Available Skills
+
+- **Branch Summarizer** – Generates a high-level overview of changes between the current branch and `main` or `develop`.
+  - **Trigger**: "Summarize branch"
+- **Staged Summarizer** – Generates high-quality Conventional Commit messages for currently staged work.
+  - **Trigger**: "Summarize staged for commit"
+- **i18n Assistant** – Extracts and manages translations for UI strings using `next-intl`.
+  - **Trigger**: "Translate/extract UI strings"
+- **ADR Writer** – Drafts and manages Architectural Decision Records (ADRs).
+  - **Trigger**: "Draft a new ADR"
+
+### Setup
+
+These skills are defined in `.gemini/skills` and are compatible with AI agents like [Gemini CLI](https://github.com/google/gemini-cli). To enable them in your session:
+
+```bash
+/skills reload
+```
+
 ## Pull Requests
 
 Pull requests automatically create preview deployments via Vercel.
