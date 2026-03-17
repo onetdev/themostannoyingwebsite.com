@@ -4,6 +4,15 @@ import { getSharedLocators } from './shared/Shared';
 export const getCancellationPage = (page: Page) => {
   const shared = getSharedLocators(page);
 
+  const essayTextarea = page.locator('textarea[name="feedback"]');
+  const valdoCorrectButton = page
+    .locator('button:has-text("Unsubscribe")')
+    .nth(1 * 9 + Math.floor(9 / 2)); // 1-4 index based on 10x9 grid
+  const reasonButtons = page.locator('button.w-full.justify-start');
+  const emailInput = page.getByPlaceholder(
+    'loyal-customer@themostannoyingwebsite.com',
+  );
+
   return {
     ...shared,
 
@@ -11,11 +20,11 @@ export const getCancellationPage = (page: Page) => {
 
     // Reasons Step
     reasonsTitle: page.getByRole('heading', { name: 'Reason' }),
-    reasonButtons: page.locator('button.w-full.justify-start'),
+    reasonButtons,
 
     // Essay Step
     essayTitle: page.getByRole('heading', { name: 'Exit Interview Essay' }),
-    essayTextarea: page.locator('textarea[name="feedback"]'),
+    essayTextarea,
     essayCharacterCount: page.locator(
       'span.text-destructive, span.text-success',
     ),
@@ -27,9 +36,7 @@ export const getCancellationPage = (page: Page) => {
     // Valdo Step
     valdoTitle: page.getByRole('heading', { name: 'Step 3: Lead by light' }),
     valdoButtons: page.getByRole('button', { name: 'Unsubscribe' }),
-    valdoCorrectButton: page
-      .locator('button:has-text("Unsubscribe")')
-      .nth(1 * 9 + Math.floor(9 / 2)), // 1-4 index based on 10x9 grid
+    valdoCorrectButton,
 
     // Upsell Step
     upsellTitle: page.getByRole('heading', {
@@ -47,9 +54,7 @@ export const getCancellationPage = (page: Page) => {
 
     // Email Step
     emailTitle: page.getByRole('heading', { name: 'Who are you?' }),
-    emailInput: page.getByPlaceholder(
-      'loyal-customer@themostannoyingwebsite.com',
-    ),
+    emailInput,
     emailNextButton: page.getByRole('button', {
       name: "I'm sure, let's continue cancellation",
     }),
@@ -77,26 +82,19 @@ export const getCancellationPage = (page: Page) => {
     },
 
     selectReason: async (reasonIndex: number = 0) => {
-      await page
-        .locator('button.w-full.justify-start')
-        .nth(reasonIndex)
-        .click();
+      await reasonButtons.nth(reasonIndex).click();
     },
 
     fillEssay: async (text: string) => {
-      await page.locator('textarea[name="feedback"]').fill(text);
+      await essayTextarea.fill(text);
     },
 
     clickValdoCorrectButton: async () => {
-      // The logic in ValdoStep.tsx uses lines 10, cols 9, solution "1-4"
-      // index = lineIdx * cols + btnIdx = 1 * 9 + 4 = 13
-      await page.getByRole('button', { name: 'Unsubscribe' }).nth(13).click();
+      await valdoCorrectButton.click();
     },
 
     fillEmail: async (email: string) => {
-      await page
-        .getByPlaceholder('loyal-customer@themostannoyingwebsite.com')
-        .fill(email);
+      await emailInput.fill(email);
     },
   };
 };
