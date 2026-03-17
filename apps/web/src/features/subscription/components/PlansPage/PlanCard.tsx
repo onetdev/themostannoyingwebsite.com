@@ -49,6 +49,9 @@ export function PlanCard({
     priceDiscountCorrected * BILLING_CYCLE_MONTH_MAP[billingCycle];
 
   let label = t('common.action.select');
+  if (isSelected) {
+    label = t('common.action.done');
+  }
   if (isOutOfStock) {
     label = t('subscription.landing.status.outOfStock');
   }
