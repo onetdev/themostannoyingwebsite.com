@@ -9,7 +9,7 @@ export interface RatingDialogTriggerProps {
 }
 
 export function RatingDialogTrigger({
-  pageViewsThreshold = 1,
+  pageViewsThreshold = 5,
 }: RatingDialogTriggerProps) {
   const isEnabled = usePainPreferencesStore(
     (state) => state.flags.ratingDialog,
