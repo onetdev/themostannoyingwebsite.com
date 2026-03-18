@@ -28,4 +28,12 @@ export default {
     yourMessage: 'رسالتك',
     yourMessagePlaceholder: 'اكتب هنا...',
   },
+  rating: {
+    title: 'قيم تجربتك',
+    description: 'كيف تقيم تجربتك معنا؟',
+    low: 'سيء',
+    high: 'ممتاز',
+    submit: 'إرسال',
+    thanks: 'شكراً لملاحظاتك!',
+  },
 } satisfies SupportI18nShape;

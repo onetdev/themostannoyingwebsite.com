@@ -29,4 +29,12 @@ export default {
     yourMessage: 'Il tuo messaggio',
     yourMessagePlaceholder: 'Scrivi qui...',
   },
+  rating: {
+    title: 'Valuta la tua esperienza',
+    description: 'Come valuteresti la tua esperienza con noi?',
+    low: 'Scarso',
+    high: 'Eccellente',
+    submit: 'Invia',
+    thanks: 'Grazie per il tuo feedback!',
+  },
 };

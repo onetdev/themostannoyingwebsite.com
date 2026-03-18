@@ -30,4 +30,12 @@ export default {
     yourMessage: 'あなたのメッセージ',
     yourMessagePlaceholder: 'ここに入力...',
   },
+  rating: {
+    title: '体験を評価する',
+    description: '私たちのサービスはいかがでしたか？',
+    low: '悪い',
+    high: '非常に良い',
+    submit: '送信',
+    thanks: 'フィードバックありがとうございます！',
+  },
 };

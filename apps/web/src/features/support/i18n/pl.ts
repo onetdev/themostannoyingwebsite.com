@@ -29,4 +29,12 @@ export default {
     yourMessage: 'Twoja wiadomość',
     yourMessagePlaceholder: 'Wpisz tutaj...',
   },
+  rating: {
+    title: 'Oceń swoje wrażenia',
+    description: 'Jak oceniasz swoje wrażenia z nami?',
+    low: 'Słabo',
+    high: 'Doskonale',
+    submit: 'Prześlij',
+    thanks: 'Dziękujemy za opinię!',
+  },
 };

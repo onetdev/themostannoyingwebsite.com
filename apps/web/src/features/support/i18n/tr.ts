@@ -29,4 +29,12 @@ export default {
     yourMessage: 'Mesajınız',
     yourMessagePlaceholder: 'Buraya yazın...',
   },
+  rating: {
+    title: 'Deneyiminizi oylayın',
+    description: 'Bizimle olan deneyiminizi nasıl oylarsınız?',
+    low: 'Kötü',
+    high: 'Mükemmel',
+    submit: 'Gönder',
+    thanks: 'Geri bildiriminiz için teşekkür ederiz!',
+  },
 };
