@@ -77,6 +77,10 @@ export default {
       label: 'Bildirimler',
       hint: 'Bildirim izinleri ister ve sahte bildirimler gösterir.',
     },
+    ratingDialog: {
+      label: 'Değerlendirme diyaloğu',
+      hint: 'Deneyimi "iyileştirmeye" yardımcı olmak için birkaç sayfa görüntülemesinden sonra bir değerlendirme diyaloğu gösterir.',
+    },
     pageTitleInactiveArrayPaged: {
       label: 'Sekme inaktifken değişen başlık',
       hint: 'Sekme inaktifken sekme başlığını dikkat çekici bir şeye dönüştürür.',

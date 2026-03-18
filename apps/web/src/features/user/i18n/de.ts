@@ -77,6 +77,10 @@ export default {
       label: 'Benachrichtigungen',
       hint: 'Fragt nach Benachrichtigungsberechtigungen und zeigt gefälschte Benachrichtigungen an.',
     },
+    ratingDialog: {
+      label: 'Bewertungsdialog',
+      hint: 'Zeigt nach ein paar Seitenaufrufen einen Bewertungsdialog an, um die Erfahrung zu „verbessern“.',
+    },
     pageTitleInactiveArrayPaged: {
       label: 'Abwechselnder Titel bei inaktivem Tab',
       hint: 'Ändert den Tab-Titel in etwas Aufmerksamkeitsstarkes, wenn der Tab inaktiv ist.',

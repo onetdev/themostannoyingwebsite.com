@@ -77,6 +77,10 @@ export default {
       label: 'Notificações',
       hint: 'Pede permissões de notificação e mostra notificações falsas.',
     },
+    ratingDialog: {
+      label: 'Diálogo de avaliação',
+      hint: 'Mostra um diálogo de avaliação após algumas visualizações de página para "ajudar" a melhorar a experiência.',
+    },
     pageTitleInactiveArrayPaged: {
       label: 'Título alternado quando o separador está inativo',
       hint: 'Altera o título do separador para algo que chame a atenção quando o separador está inativo.',

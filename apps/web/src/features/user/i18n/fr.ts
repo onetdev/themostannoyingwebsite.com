@@ -77,6 +77,10 @@ export default {
       label: 'Notifications',
       hint: 'Demande des autorisations de notification et affiche de fausses notifications.',
     },
+    ratingDialog: {
+      label: "Dialogue d'évaluation",
+      hint: "Affiche un dialogue d'évaluation après quelques pages vues pour « aider » à améliorer l'expérience.",
+    },
     pageTitleInactiveArrayPaged: {
       label: "Titre alterné lorsque l'onglet est inactif",
       hint: "Change le titre de l'onglet par quelque chose qui attire l'attention quand l'onglet est inactif.",

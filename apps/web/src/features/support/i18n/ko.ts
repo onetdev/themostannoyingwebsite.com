@@ -28,13 +28,13 @@ export default {
     agentIsTyping: '상담원이 입력 중입니다',
     yourMessage: '메시지',
     yourMessagePlaceholder: '여기 입력...',
-    },
-    rating: {
+  },
+  rating: {
     title: '경험 평가하기',
     description: '우리의 서비스에 대해 어떻게 생각하시나요?',
     low: '나쁨',
     high: '매우 좋음',
     submit: '제출',
     thanks: '의견을 보내주셔서 감사합니다!',
-    },
-    };
+  },
+};

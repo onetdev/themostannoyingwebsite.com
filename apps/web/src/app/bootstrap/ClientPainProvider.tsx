@@ -13,6 +13,7 @@ import {
 import { NewsletterModalTrigger } from '@/features/marketing/components';
 import { useAdblockerDetector } from '@/features/marketing/hooks';
 import { useEventHistoryListener } from '@/features/monitoring/hooks';
+import { RatingDialogTrigger } from '@/features/support/components';
 import { NotificationPromptTrigger } from '@/features/user/components';
 import { usePainPreferencesStore, useUserGrantsStore } from '@/stores';
 
@@ -43,6 +44,7 @@ export function ClientPainContainer({ children }: PropsWithChildren) {
       <PageTitleGlitch />
       <NewsletterModalTrigger />
       <NotificationPromptTrigger />
+      <RatingDialogTrigger />
       <CopyMarker
         enabled={clipboardMarker}
         text={copyMarkerText}

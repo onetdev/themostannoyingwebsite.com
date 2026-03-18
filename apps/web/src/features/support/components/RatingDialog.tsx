@@ -48,8 +48,9 @@ export function RatingDialog({ isOpen, onOpenChange }: RatingDialogProps) {
           <DialogTitle>{t('title')}</DialogTitle>
           <DialogDescription>{t('description')}</DialogDescription>
         </DialogHeader>
-        <div className="flex flex-col items-center justify-center py-4">
-          <div className="h-48 w-48 mb-4">
+        <div className="flex items-center justify-center py-4 gap-5">
+          {/* 230 x 380 */}
+          <div className="h-20 w-12 md:h-28 md:w-17 mb-4 shrink-0">
             <DotLottieReact
               src={config.support.assets.ratingAnimation}
               loop
@@ -61,18 +62,18 @@ export function RatingDialog({ isOpen, onOpenChange }: RatingDialogProps) {
               {t('thanks')}
             </p>
           ) : (
-            <div className="flex flex-col items-center gap-4 w-full">
+            <div className="flex flex-col items-center gap-4 w-full shrink">
               <div className="grid grid-cols-5 gap-2 w-full">
-                  {[1, 2, 3, 4, 5].map((num) => (
+                {[1, 2, 3, 4, 5].map((num) => (
                   <Button
                     key={num}
                     variant={rating === num ? 'default' : 'outline'}
                     className={clsx(
-                      'h-12 w-full p-0 text-lg font-bold transition-all',
+                      'md:h-12 w-full p-0 text-lg font-bold transition-all',
                       rating === num && 'scale-110 ring-2 ring-primary',
                     )}
                     onClick={() => setRating(num)}
-                      disabled={num < 4}
+                    disabled={num < 4}
                   >
                     {num}
                   </Button>
@@ -90,7 +91,7 @@ export function RatingDialog({ isOpen, onOpenChange }: RatingDialogProps) {
             <Button
               disabled={rating === null}
               onClick={handleSubmit}
-              className="w-full text-lg h-12"
+              className="w-full text-lg md:h-12"
             >
               {t('submit')}
             </Button>

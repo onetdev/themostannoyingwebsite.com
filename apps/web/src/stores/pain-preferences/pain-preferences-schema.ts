@@ -26,6 +26,7 @@ export const PUBLIC_PAIN_POINT_LIST = [
   'promotions.detectAdblocker',
   'promotions.flaps',
   'promotions.oneByOne',
+  'ratingDialog',
   'screensaver',
   'searchDelay',
   'stickyVideo',

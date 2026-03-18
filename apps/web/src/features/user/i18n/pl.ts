@@ -77,6 +77,10 @@ export default {
       label: 'Powiadomienia',
       hint: 'Prosi o uprawnienia do powiadomień i wyświetla fałszywe powiadomienia.',
     },
+    ratingDialog: {
+      label: 'Okno oceny',
+      hint: 'Pokazuje okno oceny po kilku wyświetleniach strony, aby „pomóc” w ulepszeniu doświadczenia.',
+    },
     pageTitleInactiveArrayPaged: {
       label: 'Naprzemienny tytuł, gdy karta jest nieaktywna',
       hint: 'Zmienia tytuł karty na coś przyciągającego uwagę, gdy karta jest nieaktywna.',

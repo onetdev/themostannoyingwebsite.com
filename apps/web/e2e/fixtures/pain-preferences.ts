@@ -20,6 +20,7 @@ const flags: PainPreferencesState['flags'] = {
   mockChat: false,
   newsletterModal: false,
   notifications: false,
+  ratingDialog: false,
   screensaver: false,
   searchDelay: false,
   stickyVideo: false,
