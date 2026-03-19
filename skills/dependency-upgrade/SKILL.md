@@ -26,9 +26,9 @@ This skill automates the process of upgrading dependencies across a monorepo, fo
 For each dependency group:
 
 #### 3.1 Fetch Latest Versions
-- Query the npm registry for the latest version matching the requested bump type.
+- Query the npm registry for the latest version matching the requested bump type, filtering by semver rules.
 - Use: `npm view {package-name} versions --json`
-- Compare with the current version and display the planned upgrade: `{package-name}: {current} → {latest}`.
+- Display the planned upgrade: `{package-name}: {current} → {latest}`, or note if the package is already at the latest version.
 
 #### 3.2 Update Files
 - Apply updates to:
@@ -67,3 +67,4 @@ For each dependency group:
 - **Iterate**: Never upgrade all groups at once. Verify each group before proceeding.
 - **Rollback**: If a group fails verification, revert the changes for that group's packages before moving to the next.
 - **Manual Fixes**: Be prepared for manual code changes, especially with `major` upgrades.
+- **Review Changes**: This skill modifies files but does not create git commits. Review all changes with `git diff` before committing them.
