@@ -1,3 +1,5 @@
+import type { CaptchaI18nShape } from '../types';
+
 export default {
   captcha: {
     field: 'キャプチャ',
@@ -36,4 +38,4 @@ export default {
     protected: '保護済み',
     emojiChallengePlaceholder: '最も多く出現する絵文字の数',
   },
-};
+} satisfies CaptchaI18nShape;

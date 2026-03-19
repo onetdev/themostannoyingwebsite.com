@@ -1,3 +1,5 @@
+import type { ArhievementsI18nShape } from '../types';
+
 export default {
   unlocked: '解锁成就：{name}',
   progress: '进度：{name} ({progress}/{target})',
@@ -81,5 +83,9 @@ export default {
       name: '来自医护人员的情书',
       description: '接收来自我们热心支持代理的 5 条消息。',
     },
+    virginMojito: {
+      name: '无酒精莫希托',
+      description: '虽然不太一样，但有时你也需要负起责任。',
+    },
   },
-};
+} satisfies ArhievementsI18nShape;

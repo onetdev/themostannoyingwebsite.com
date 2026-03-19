@@ -1,3 +1,5 @@
+import type { ArhievementsI18nShape } from '../types';
+
 export default {
   unlocked: 'Osiągnięcie odblokowane: {name}',
   progress: 'Postęp: {name} ({progress}/{target})',
@@ -87,5 +89,9 @@ export default {
       description:
         'Odbierz 5 wiadomości od naszych pomocnych agentów wsparcia.',
     },
+    virginMojito: {
+      name: 'Virgin Mojito',
+      description: 'To nie to samo. Ale czasem trzeba być odpowiedzialnym.',
+    },
   },
-};
+} satisfies ArhievementsI18nShape;

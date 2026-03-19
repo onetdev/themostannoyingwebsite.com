@@ -1,3 +1,5 @@
+import type { SupportI18nShape } from '../types';
+
 export default {
   chatBubble: {
     trigger: '채팅 열기',
@@ -27,6 +29,14 @@ export default {
       '면책 조항: 사실 이것은 실제 사람처럼 느껴지는(똑똑하진 않지만) 봇입니다. 그래도 그냥 봇이에요.',
     agentIsTyping: '상담원이 입력 중입니다',
     yourMessage: '메시지',
-    yourMessagePlaceholder: '여기에 입력하세요...',
+    yourMessagePlaceholder: '여기 입력...',
   },
-};
+  rating: {
+    title: '경험 평가하기',
+    description: '우리의 서비스에 대해 어떻게 생각하시나요?',
+    low: '나쁨',
+    high: '매우 좋음',
+    submit: '제출',
+    thanks: '의견을 보내주셔서 감사합니다!',
+  },
+} satisfies SupportI18nShape;

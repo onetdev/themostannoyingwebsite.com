@@ -3,6 +3,7 @@ import * as z from 'zod';
 export const SupportConfigSchema = z.object({
   assets: z.object({
     newMessageSfx: z.string(),
+    ratingAnimation: z.string(),
   }),
 });
 

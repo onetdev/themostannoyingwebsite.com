@@ -28,4 +28,12 @@ export default {
     yourMessage: 'Your message',
     yourMessagePlaceholder: 'Type here...',
   },
+  rating: {
+    title: 'Rate your experience',
+    description: 'How would you rate your experience with us?',
+    low: 'Poor',
+    high: 'Excellent',
+    submit: 'Submit',
+    thanks: 'Thank you for your feedback!',
+  },
 };

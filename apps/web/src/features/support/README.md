@@ -10,6 +10,7 @@ Implements intentionally difficult, high-friction, and misleading "help" and sup
   - Automatically appends "new" bot messages after a short delay.
   - Generates notifications and sounds to distract the user.
   - Deterministically generates chat history based on current session parameters.
+- **RatingDialog**: A "Rate your experience" modal with a 1-10 scale and a Lottie animation (`zichereisy.lottie`). It follows the theme of being annoying by potentially popping up at inconvenient times and having a very enthusiastic "Thank you" message.
 - **useChatBubbleHistory**: Custom hook that manages the simulated chat state, including history, unread badge counters, and automated bot responses.
 
 ## Interaction Patterns

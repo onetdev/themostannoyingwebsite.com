@@ -1,3 +1,5 @@
+import type { CaptchaI18nShape } from '../types';
+
 export default {
   captcha: {
     field: 'Captcha',
@@ -35,4 +37,4 @@ export default {
     protected: 'protegido',
     emojiChallengePlaceholder: 'Emoji con el mayor número de apariciones',
   },
-};
+} satisfies CaptchaI18nShape;

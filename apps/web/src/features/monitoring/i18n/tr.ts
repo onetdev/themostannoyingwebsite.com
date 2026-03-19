@@ -1,3 +1,5 @@
+import type { MonitoringI18nShape } from '../types';
+
 export default {
   auth: {
     title: 'Kısıtlı Erişim',
@@ -41,4 +43,4 @@ export default {
     userGrants: 'Kullanıcı İzinleri Store',
     appConfig: 'Uygulama Yapılandırması',
   },
-};
+} satisfies MonitoringI18nShape;

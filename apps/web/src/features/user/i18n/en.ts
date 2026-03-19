@@ -77,6 +77,10 @@ export default {
       label: 'Notifications',
       hint: 'Asks for notification permissions and shows fake notifications.',
     },
+    ratingDialog: {
+      label: 'Rating dialog',
+      hint: 'Shows a rating dialog after a few page views to "help" improve the experience.',
+    },
     pageTitleInactiveArrayPaged: {
       label: 'Alternating title when tab is inactive',
       hint: 'Changes the tab title to something attention-grabbing when the tab is inactive.',

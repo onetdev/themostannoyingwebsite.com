@@ -1,3 +1,5 @@
+import type { CaptchaI18nShape } from '../types';
+
 export default {
   captcha: {
     field: 'कैप्चा',
@@ -35,4 +37,4 @@ export default {
     protected: 'सुरक्षित',
     emojiChallengePlaceholder: 'सबसे अधिक बार आने वाला इमोजी',
   },
-};
+} satisfies CaptchaI18nShape;

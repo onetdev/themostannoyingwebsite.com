@@ -1,3 +1,4 @@
+import type { SubscriptionI18nShape } from '../../types';
 import socialProofVariants from './purchase-proof-variants';
 
 export default {
@@ -189,4 +190,4 @@ export default {
         'これは実際の書類ではなく、単なるトレンドの風刺的な反映です。詳細については themostannoyingwebsite.com/ja/terms-of-use および themostannoyingwebsite.com/ja/privacy-policy を参照してください。',
     },
   },
-};
+} satisfies SubscriptionI18nShape;

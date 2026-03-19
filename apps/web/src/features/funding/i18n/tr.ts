@@ -1,3 +1,5 @@
+import type { FundingI18nShape } from '../types';
+
 export default {
   description:
     'Bu projenin sponsoru, şeker babası (sugardaddy), şeker annesi (sugarmommy), kripto balinası yatırımcısı, sıkılmış milyoneri veya gizemli trençkotlu hayırseveri yoktur. Tamamen gönüllü çalışma, sunucu faturaları ve düzenli bir kebap + kahve gideri akışıyla yürütülmektedir — ki bunların hepsi finansal deliği daha da derinleştirmekten başka bir işe yaramıyor. Yine de bu uygulama bir aşk projesi olmaya devam ediyor.<br></br><br></br>Amacımıza destek olmak ve bu web sitesini daha da kötü hale getirmemize yardımcı olmak isterseniz, her türlü miktar BÜYÜK takdirle karşılanır. Ayıracak paranız yoksa — dürüst olalım, bu ekonomide kimin var ki? — uygulamayı paylaşarak ve bu sinir bozuculuğu daha da yayarak bize yine de yardımcı olabilirsiniz.',
@@ -47,4 +49,4 @@ export default {
         'Ramenimi yükseltmek istiyorum. "5 tanesi 100 TL" olandan "içinde sebze paketi olan lüks hazır erişteye". Mütevazı bir hayal. Erişte tabanlı bir hayal.',
     },
   },
-};
+} satisfies FundingI18nShape;

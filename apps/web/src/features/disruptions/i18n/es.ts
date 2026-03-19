@@ -1,3 +1,5 @@
+import type { DisruptionsI18nShape } from '../types';
+
 export default {
   screensaver: {
     exitClick:
@@ -17,4 +19,4 @@ export default {
   stickyVideoPlayer: {
     videoTitle: 'Reproductor de video pegajoso',
   },
-};
+} satisfies DisruptionsI18nShape;

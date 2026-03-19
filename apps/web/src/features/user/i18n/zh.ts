@@ -79,6 +79,10 @@ export default {
       label: '通知',
       hint: '请求通知权限并显示虚假通知。',
     },
+    ratingDialog: {
+      label: '评分对话框',
+      hint: '在浏览几个页面后显示评分对话框，以“帮助”改善体验。',
+    },
     pageTitleInactiveArrayPaged: {
       label: '标签页不活跃时的交替标题',
       hint: '当标签页不活跃时，将标题更改为吸引注意的内容。',

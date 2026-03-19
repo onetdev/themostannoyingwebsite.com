@@ -1,3 +1,5 @@
+import type { FundingI18nShape } from '../types';
+
 export default {
   description:
     'Este proyecto no tiene ningún patrocinador, sugar daddy, sugar mommy, inversor ballena de criptomonedas, millonario aburrido o filántropo misterioso en gabardina. Funciona puramente con trabajo voluntario, facturas de servidor y un flujo constante de gastos de kebab + café, todo lo cual solo profundiza el agujero financiero. Aún así, esta aplicación sigue siendo un proyecto de amor.<br></br><br></br>Si quieres apoyar nuestra causa y ayudar a hacer este sitio web aún peor, cualquier cantidad es MUY apreciada. Si no tienes dinero de sobra — honestamente, ¿quién lo tiene en esta economía? — aún puedes ayudar compartiendo esta aplicación y difundiendo la molestia.',
@@ -47,4 +49,4 @@ export default {
         'Quiero mejorar mi ramen. De "3 por 5€" a "instantáneo elegante con paquete de verduras incluido". Es un sueño modesto. Un sueño basado en fideos.',
     },
   },
-};
+} satisfies FundingI18nShape;

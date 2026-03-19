@@ -1,3 +1,5 @@
+import type { UserI18nShape } from '../types';
+
 export default {
   userPreferences: {
     title: 'Настройки',
@@ -76,6 +78,10 @@ export default {
     notifications: {
       label: 'Уведомления',
       hint: 'Запрашивает разрешение на уведомления и показывает фальшивые уведомления.',
+    },
+    ratingDialog: {
+      label: 'Диалог оценки',
+      hint: 'Показывает диалог оценки после нескольких просмотров страниц, чтобы «помочь» улучшить опыт.',
     },
     pageTitleInactiveArrayPaged: {
       label: 'Чередующийся заголовок при неактивной вкладке',
@@ -171,4 +177,4 @@ export default {
       },
     },
   },
-};
+} satisfies UserI18nShape;

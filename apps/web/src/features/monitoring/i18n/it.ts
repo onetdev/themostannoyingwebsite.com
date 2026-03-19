@@ -1,3 +1,5 @@
+import type { MonitoringI18nShape } from '../types';
+
 export default {
   auth: {
     title: 'Accesso limitato',
@@ -41,4 +43,4 @@ export default {
     userGrants: 'Store Autorizzazioni Utente',
     appConfig: 'Configurazione App',
   },
-};
+} satisfies MonitoringI18nShape;

@@ -1,3 +1,5 @@
+import type { SupportI18nShape } from '../types';
+
 export default {
   chatBubble: {
     trigger: 'चैट खोलें',
@@ -27,4 +29,12 @@ export default {
     yourMessage: 'आपका संदेश',
     yourMessagePlaceholder: 'यहाँ टाइप करें...',
   },
-};
+  rating: {
+    title: 'अपने अनुभव को रेट करें',
+    description: 'आप हमारे साथ अपने अनुभव को कैसे रेट करेंगे?',
+    low: 'खराब',
+    high: 'उत्कृष्ट',
+    submit: 'जमा करें',
+    thanks: 'आपकी प्रतिक्रिया के लिए धन्यवाद!',
+  },
+} satisfies SupportI18nShape;

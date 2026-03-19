@@ -1,3 +1,5 @@
+import type { ArhievementsI18nShape } from '../types';
+
 export default {
   unlocked: 'उपलब्धि अनलॉक हुई: {name}',
   progress: 'प्रगति: {name} ({progress}/{target})',
@@ -81,5 +83,10 @@ export default {
       name: 'एक चिकित्सक के प्रेम पत्र',
       description: 'हमारे सहायक सहायता एजेंटों से 5 संदेश प्राप्त करें।',
     },
+    virginMojito: {
+      name: 'वर्जिन मोजिटो',
+      description:
+        'यह बिल्कुल वैसा नहीं है। लेकिन कभी-कभी आपको जिम्मेदार होने की जरूरत होती है।',
+    },
   },
-};
+} satisfies ArhievementsI18nShape;

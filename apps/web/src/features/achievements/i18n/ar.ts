@@ -1,3 +1,5 @@
+import type { ArhievementsI18nShape } from '../types';
+
 export default {
   unlocked: 'تم فتح الإنجاز: {name}',
   progress: 'التقدم: {name} ({progress}/{target})',
@@ -81,5 +83,9 @@ export default {
       name: 'رسائل حب من مسعف',
       description: 'استلم 5 رسائل من وكلاء الدعم المتعاونين لدينا.',
     },
+    virginMojito: {
+      name: 'فيرجن موجيتو',
+      description: 'ليس الأمر نفسه تمامًا. لكن أحيانًا عليك أن تكون مسؤولاً.',
+    },
   },
-};
+} satisfies ArhievementsI18nShape;

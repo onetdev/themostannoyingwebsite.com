@@ -1,3 +1,5 @@
+import type { CaptchaI18nShape } from '../types';
+
 export default {
   captcha: {
     field: 'Капча',
@@ -35,4 +37,4 @@ export default {
     protected: 'защищено',
     emojiChallengePlaceholder: 'Эмодзи с наибольшим количеством вхождений',
   },
-};
+} satisfies CaptchaI18nShape;

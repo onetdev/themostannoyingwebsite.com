@@ -1,3 +1,5 @@
+import type { MonitoringI18nShape } from '../types';
+
 export default {
   auth: {
     title: 'Ограниченный доступ',
@@ -41,4 +43,4 @@ export default {
     userGrants: 'Хранилище разрешений пользователя',
     appConfig: 'Конфигурация приложения',
   },
-};
+} satisfies MonitoringI18nShape;

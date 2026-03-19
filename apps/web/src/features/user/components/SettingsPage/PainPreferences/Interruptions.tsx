@@ -86,6 +86,18 @@ export function Interruptions() {
           }
         />
       </SettingsField>
+      <SettingsField
+        label={t('ratingDialog.label')}
+        info={t('ratingDialog.hint')}
+      >
+        <FormCheckbox
+          name="rating_dialog"
+          checked={painPreferences.flags.ratingDialog}
+          onCheckedChange={(value) =>
+            painPreferences.setFlagIndeterminate('ratingDialog', value)
+          }
+        />
+      </SettingsField>
     </section>
   );
 }

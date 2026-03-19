@@ -1,3 +1,5 @@
+import type { SupportI18nShape } from '../types';
+
 export default {
   chatBubble: {
     trigger: 'Chat öffnen',
@@ -30,4 +32,12 @@ export default {
     yourMessage: 'Deine Nachricht',
     yourMessagePlaceholder: 'Hier tippen...',
   },
-};
+  rating: {
+    title: 'Bewerte deine Erfahrung',
+    description: 'Wie würdest du deine Erfahrung bei uns bewerten?',
+    low: 'Schlecht',
+    high: 'Ausgezeichnet',
+    submit: 'Absenden',
+    thanks: 'Danke für dein Feedback!',
+  },
+} satisfies SupportI18nShape;
