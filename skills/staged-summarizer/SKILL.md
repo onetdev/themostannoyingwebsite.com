@@ -15,7 +15,7 @@ This skill provides a standardized workflow for summarizing staged changes into 
 - **Line Limit**: Maximum 100 characters per line. Wrap the body as needed.
 - **Tense**: Use the imperative, present tense ("add", not "added").
 - **Case**: The subject line must be lowercase.
-- **Read-only**: Only already staged changes should be summarized, unstaged changes should not be added to staged even if there are no changes in staged.
+- **Read-only**: Only summarize changes that are already staged. Do not add unstaged files to the stage. If no changes are staged, report that and exit.
 - **Reference**: See [references/conventional-commits.md](references/conventional-commits.md) for the full specification and allowed types.
 
 ## Tools
