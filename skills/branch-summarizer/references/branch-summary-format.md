@@ -1,18 +1,20 @@
 ## Summary
-<1–2 sentence high-level overview>
+
+<1–2 sentence high-level overview of the branch>
 
 ## Key Changes
-### Features
-- **Added X** – short explanation
 
-### Fixes
-- **Fixed Y** – short explanation
+### 🚀 Features
+- <feature-level changes>
 
-### Chores / Refactors
-- **Refactored Z**
+### 🐛 Fixes
+- <bug fixes>
 
-## Notable Files
-- `path/to/file.ts` – why it matters
+### 🧹 Chores / Refactors
+- <internal or structural changes>
 
 ## Impact
-- User-facing / Dev-facing / Risk
+
+- **User-facing**: <visible changes>
+- **Developer-facing**: <codebase impact>
+- **Risk**: <potential issues or uncertainties>
