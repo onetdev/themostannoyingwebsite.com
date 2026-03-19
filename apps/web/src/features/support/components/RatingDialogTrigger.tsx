@@ -16,16 +16,19 @@ export function RatingDialogTrigger({
   );
   const navigationCount = useRuntimeStore((state) => state.navigationCount);
   const [isOpen, setIsOpen] = useState(false);
+  const [shownForCount, setShownForCount] = useState(0);
 
   useEffect(() => {
     if (
       isEnabled &&
       navigationCount > 0 &&
-      navigationCount % pageViewsThreshold === 0
+      navigationCount % pageViewsThreshold === 0 &&
+      navigationCount !== shownForCount
     ) {
       setIsOpen(true);
+      setShownForCount(navigationCount);
     }
-  }, [isEnabled, navigationCount, pageViewsThreshold]);
+  }, [isEnabled, navigationCount, pageViewsThreshold, shownForCount]);
 
   const handleOpenChange = (open: boolean) => {
     setIsOpen(open);
