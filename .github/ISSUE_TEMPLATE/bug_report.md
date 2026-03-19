@@ -1,38 +1,54 @@
 ---
-name: Bug report
-about: Create a report to help us improve
-title: ''
-labels: ''
-assignees: ''
-
+name: 🐛 Bug Report
+description: Report something that is broken or behaving incorrectly
+title: "[Bug]: "
+labels: ["bug"]
+assignees: []
 ---
 
-**Describe the bug**
-A clear and concise description of what the bug is.
+## Description
 
-**To Reproduce**
-Steps to reproduce the behavior:
-1. Go to '...'
-2. Click on '....'
-3. Scroll down to '....'
-4. See error
+<!-- What is happening? Keep it clear and specific -->
 
-**Expected behavior**
-A clear and concise description of what you expected to happen.
+## Steps to Reproduce
 
-**Screenshots**
-If applicable, add screenshots to help explain your problem.
+<!-- How can we reliably trigger the issue? -->
 
-**Desktop (please complete the following information):**
- - OS: [e.g. iOS]
- - Browser [e.g. chrome, safari]
- - Version [e.g. 22]
+1. 
+2. 
+3. 
 
-**Smartphone (please complete the following information):**
- - Device: [e.g. iPhone6]
- - OS: [e.g. iOS8.1]
- - Browser [e.g. stock browser, safari]
- - Version [e.g. 22]
+## Expected Behavior
 
-**Additional context**
-Add any other context about the problem here.
+<!-- What should have happened instead? -->
+
+## Actual Behavior
+
+<!-- What actually happened? Include errors if relevant -->
+
+## Environment
+
+- **Platform:**
+  <!-- e.g. web / mobile -->
+
+- **OS:**
+  <!-- e.g. macOS, Windows, iOS, Android -->
+
+- **Browser:**
+  <!-- if applicable -->
+
+- **Version:**
+  <!-- app or browser version -->
+
+## Scope & Impact
+
+<!-- Optional: how bad is it? -->
+
+- [ ] Blocks core functionality
+- [ ] Minor issue / cosmetic
+- [ ] Intermittent
+- [ ] Affects specific feature only
+
+## Additional Context
+
+<!-- Logs, screenshots, recordings, or anything else helpful -->
