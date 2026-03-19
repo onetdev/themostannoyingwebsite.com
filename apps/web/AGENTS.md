@@ -6,6 +6,12 @@ This document provides specific instructions and context for AI agents working o
 
 ## 🏗 Architecture & Key Locations
 
+### Core Stack
+- Builds on top of root core stack.
+- **State Management:** Zustand
+- **DI:** InversifyJS
+- **i18n:** next-intl
+
 ### Core Directories
 - `src/app/`: Next.js App Router.
   - `bootstrap/`: Application root providers and DI container initialization.
@@ -59,7 +65,6 @@ If a Service needs random data (e.g., `CommentService.ts` needs a list of names)
     - Call this init function in `src/app/bootstrap/di.ts`.
 4.  **Consumption**: Use `useService(DI.Symbol)` or create a dedicated hook `useMyService()`.
 
-
 ---
 
 ## 🛠 Common Tasks Workflow
@@ -76,7 +81,7 @@ If a Service needs random data (e.g., `CommentService.ts` needs a list of names)
 ### Adding a New Page
 1.  Create route in `src/app/`.
 2.  Implement `generateMetadata` using `getTranslations({ locale, namespace: 'metadata.xxx' })`.
-3.  Keep `page.tsx` lean; fetch data and pass to a Feature component.
+3.  Keep `page.tsx` lean; handle SEO metadata, fetch data, and pass to a Feature component.
 4.  Wrap content in `PageLayout`.
 
 ---
@@ -90,6 +95,7 @@ If a Service needs random data (e.g., `CommentService.ts` needs a list of names)
     - `camelCase` for hooks.
 - **CSS**: Use **TailwindCSS 4** semantic tokens (e.g., `text-primary`, `bg-background`). Avoid hex colors.
 - **Icons**: Use FontAwesome via our UI library wrappers.
+- **No `any` type**: If a type can't be inferred use an explicit intermediate named type with a todo comment.
 
 ---
 

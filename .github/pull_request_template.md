@@ -1,23 +1,36 @@
-## Description
+## Summary
 
-[Provide a brief description of the changes made in this pull request.]
+<!-- IMPORTANT! You can use branch-summarizer AI skill to generate this summary locally -->
+<!-- Briefly describe what this PR does and why -->
+<!-- Link related issue(s) if applicable -->
 
-## Related Issues
+## Key Changes
 
-[If applicable, mention any related issues or tickets.]
+<!-- Keep only relevant sections -->
+
+### 🚀 Features
+- <!-- Added feature -->
+
+### 🐛 Fixes
+- <!-- Fixed bug -->
+
+### 🧹 Chores / Refactors
+- <!-- Internal or structural changes -->
+
+## Impact
+
+- **User-facing**: <!-- Visible changes -->
+- **Developer-facing**: <!-- Codebase impact -->
+- **Risk**: <!-- Potential issues or uncertainties -->
 
 ## Checklist
 
-- [ ] I have tested these changes locally.
-- [ ] I have reviewed the code changes.
-- [ ] I have updated the documentation, if necessary.
-- [ ] I have added appropriate test cases, if applicable.
-- [ ] I have run the automated tests successfully.
+- [ ] Tests updated and passing locally
+- [ ] Documentation updated (if applicable)
+- [ ] Localization extracted (if applicable)
 
-## Screenshots
+## Screenshots & Videos
 
-[If applicable, include any relevant screenshots or images.]
+<!-- Include screenshots or recordings if relevant -->
 
-## Additional Notes
-
-[Add any additional notes or information that may be helpful for the reviewer.]
+<!-- ## Additional Comments -->
