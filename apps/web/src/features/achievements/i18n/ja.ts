@@ -1,3 +1,5 @@
+import type { ArhievementsI18nShape } from '../types';
+
 export default {
   unlocked: '実績解除: {name}',
   progress: '進捗: {name} ({progress}/{target})',
@@ -84,5 +86,10 @@ export default {
       description:
         '弊社の親切なサポート担当者から5通のメッセージを受け取ります。',
     },
+    virginMojito: {
+      name: 'バージン・モヒート',
+      description:
+        '全く同じというわけではありません。しかし、時には責任を持つことも必要です。',
+    },
   },
-};
+} satisfies ArhievementsI18nShape;

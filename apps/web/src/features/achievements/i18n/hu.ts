@@ -1,3 +1,5 @@
+import type { ArhievementsI18nShape } from '../types';
+
 export default {
   unlocked: 'Eredmény feloldva: {name}',
   progress: 'Haladás: {name} ({progress}/{target})',
@@ -87,5 +89,10 @@ export default {
       description:
         'Kapj 5 üzenetet segítőkész ügyfélszolgálati munkatársainktól.',
     },
+    virginMojito: {
+      name: 'Virgin Mojito',
+      description:
+        'Nem egészen ugyanaz. De néha felelősségteljesnek kell lenned.',
+    },
   },
-};
+} satisfies ArhievementsI18nShape;

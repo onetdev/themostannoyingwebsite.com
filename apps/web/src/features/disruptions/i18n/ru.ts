@@ -1,3 +1,5 @@
+import type { DisruptionsI18nShape } from '../types';
+
 export default {
   screensaver: {
     exitClick: 'Кликните в любом месте, чтобы выйти из экранной заставки',
@@ -16,4 +18,4 @@ export default {
   stickyVideoPlayer: {
     videoTitle: 'Липкий видеоплеер',
   },
-};
+} satisfies DisruptionsI18nShape;

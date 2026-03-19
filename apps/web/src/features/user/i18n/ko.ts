@@ -1,3 +1,5 @@
+import type { UserI18nShape } from '../types';
+
 export default {
   userPreferences: {
     title: '환경설정',
@@ -175,4 +177,4 @@ export default {
       },
     },
   },
-};
+} satisfies UserI18nShape;

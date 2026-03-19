@@ -1,3 +1,5 @@
+import type { MonitoringI18nShape } from '../types';
+
 export default {
   auth: {
     title: 'アクセス制限中（残念でした）',
@@ -42,4 +44,4 @@ export default {
     userGrants: 'ユーザー権限ストア',
     appConfig: 'アプリ設定',
   },
-};
+} satisfies MonitoringI18nShape;

@@ -1,3 +1,4 @@
+import type { SubscriptionI18nShape } from '../../types';
 import socialProofVariants from './purchase-proof-variants';
 
 export default {
@@ -188,4 +189,4 @@ export default {
         'यह एक वास्तविक दस्तावेज़ नहीं है, बस रुझानों का एक और व्यंग्यात्मक प्रतिबिंब है। अधिक जानकारी के लिए themostannoyingwebsite.com/hi/terms-of-use और themostannoyingwebsite.com/hi/privacy-policy देखें।',
     },
   },
-};
+} satisfies SubscriptionI18nShape;

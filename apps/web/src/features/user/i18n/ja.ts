@@ -1,3 +1,5 @@
+import type { UserI18nShape } from '../types';
+
 export default {
   userPreferences: {
     title: '設定',
@@ -75,7 +77,7 @@ export default {
     },
     notifications: {
       label: '通知',
-      hint: '通知의 許可を求め、偽の通知を表示します。',
+      hint: '通知の許可を求め、偽の通知を表示します。',
     },
     ratingDialog: {
       label: '評価ダイアログ',
@@ -175,4 +177,4 @@ export default {
       },
     },
   },
-};
+} satisfies UserI18nShape;

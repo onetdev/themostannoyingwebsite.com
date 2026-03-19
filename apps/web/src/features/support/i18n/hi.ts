@@ -1,3 +1,5 @@
+import type { SupportI18nShape } from '../types';
+
 export default {
   chatBubble: {
     trigger: 'चैट खोलें',
@@ -35,4 +37,4 @@ export default {
     submit: 'जमा करें',
     thanks: 'आपकी प्रतिक्रिया के लिए धन्यवाद!',
   },
-};
+} satisfies SupportI18nShape;

@@ -1,3 +1,5 @@
+import type { SupportI18nShape } from '../types';
+
 export default {
   chatBubble: {
     trigger: '채팅 열기',
@@ -37,4 +39,4 @@ export default {
     submit: '제출',
     thanks: '의견을 보내주셔서 감사합니다!',
   },
-};
+} satisfies SupportI18nShape;

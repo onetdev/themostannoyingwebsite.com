@@ -1,3 +1,5 @@
+import type { DisruptionsI18nShape } from '../types';
+
 export default {
   screensaver: {
     exitClick: 'どこかをクリックしてスクリーンセーバーを終了',
@@ -16,4 +18,4 @@ export default {
   stickyVideoPlayer: {
     videoTitle: '追従型ビデオプレーヤー',
   },
-};
+} satisfies DisruptionsI18nShape;

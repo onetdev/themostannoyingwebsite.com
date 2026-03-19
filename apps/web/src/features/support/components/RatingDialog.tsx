@@ -27,18 +27,11 @@ export function RatingDialog({ isOpen, onOpenChange }: RatingDialogProps) {
   const [submitted, setSubmitted] = useState(false);
 
   const handleSubmit = () => {
-    if (rating !== null) {
-      setSubmitted(true);
-      // In a real app, we'd send the rating to a server here.
-      setTimeout(() => {
-        onOpenChange(false);
-        // Reset state after closing
-        setTimeout(() => {
-          setSubmitted(false);
-          setRating(null);
-        }, 300);
-      }, 2000);
+    if (rating === null) {
+      return;
     }
+
+    setSubmitted(true);
   };
 
   return (

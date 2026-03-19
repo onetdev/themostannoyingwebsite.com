@@ -1,3 +1,5 @@
+import type { MonitoringI18nShape } from '../types';
+
 export default {
   auth: {
     title: 'Acceso Restringido',
@@ -41,4 +43,4 @@ export default {
     userGrants: 'Tienda de Permisos de Usuario',
     appConfig: 'Configuración de la Aplicación',
   },
-};
+} satisfies MonitoringI18nShape;

@@ -1,3 +1,5 @@
+import type { MonitoringI18nShape } from '../types';
+
 export default {
   auth: {
     title: 'प्रतिबंधित पहुंच',
@@ -41,4 +43,4 @@ export default {
     userGrants: 'उपयोगकर्ता अनुदान (Grants) स्टोर',
     appConfig: 'ऐप कॉन्फ़िगरेशन',
   },
-};
+} satisfies MonitoringI18nShape;

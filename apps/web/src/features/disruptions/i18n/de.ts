@@ -1,3 +1,5 @@
+import type { DisruptionsI18nShape } from '../types';
+
 export default {
   screensaver: {
     exitClick: 'Klicken Sie irgendwohin, um den Bildschirmschoner zu beenden',
@@ -16,4 +18,4 @@ export default {
   stickyVideoPlayer: {
     videoTitle: 'Sticky Video-Player',
   },
-};
+} satisfies DisruptionsI18nShape;

@@ -1,3 +1,5 @@
+import type { ArhievementsI18nShape } from '../types';
+
 export default {
   unlocked: 'Logro desbloqueado: {name}',
   progress: 'Progreso: {name} ({progress}/{target})',
@@ -87,5 +89,10 @@ export default {
       name: 'Cartas de amor de un médico',
       description: 'Recibe 5 mensajes de nuestros amables agentes de soporte.',
     },
+    virginMojito: {
+      name: 'Mojito Virgen',
+      description:
+        'No es exactamente lo mismo. Pero a veces hay que ser responsable.',
+    },
   },
-};
+} satisfies ArhievementsI18nShape;

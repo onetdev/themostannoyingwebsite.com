@@ -1,3 +1,5 @@
+import type { DisruptionsI18nShape } from '../types';
+
 export default {
   screensaver: {
     exitClick: '화면 보호기를 종료하려면 아무 데나 클릭하세요',
@@ -16,4 +18,4 @@ export default {
   stickyVideoPlayer: {
     videoTitle: '고정 비디오 플레이어',
   },
-};
+} satisfies DisruptionsI18nShape;

@@ -1,3 +1,5 @@
+import type { SupportI18nShape } from '../types';
+
 export default {
   chatBubble: {
     trigger: 'Ouvrir le chat',
@@ -36,4 +38,4 @@ export default {
     submit: 'Envoyer',
     thanks: 'Merci pour vos commentaires !',
   },
-};
+} satisfies SupportI18nShape;

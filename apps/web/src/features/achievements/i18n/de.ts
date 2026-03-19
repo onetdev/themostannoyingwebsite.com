@@ -1,3 +1,5 @@
+import type { ArhievementsI18nShape } from '../types';
+
 export default {
   unlocked: 'Errungenschaft freigeschaltet: {name}',
   progress: 'Fortschritt: {name} ({progress}/{target})',
@@ -86,5 +88,10 @@ export default {
       description:
         'Erhalten Sie 5 Nachrichten von unseren hilfreichen Support-Mitarbeitern.',
     },
+    virginMojito: {
+      name: 'Virgin Mojito',
+      description:
+        'Es ist nicht ganz dasselbe. Aber manchmal muss man verantwortungsbewusst sein.',
+    },
   },
-};
+} satisfies ArhievementsI18nShape;

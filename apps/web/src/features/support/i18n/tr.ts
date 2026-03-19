@@ -1,3 +1,5 @@
+import type { SupportI18nShape } from '../types';
+
 export default {
   chatBubble: {
     trigger: 'Sohbeti aç',
@@ -37,4 +39,4 @@ export default {
     submit: 'Gönder',
     thanks: 'Geri bildiriminiz için teşekkür ederiz!',
   },
-};
+} satisfies SupportI18nShape;

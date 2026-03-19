@@ -1,3 +1,5 @@
+import type { DisruptionsI18nShape } from '../types';
+
 export default {
   screensaver: {
     exitClick: 'Clica em qualquer lado para sair do protetor de ecrã',
@@ -16,4 +18,4 @@ export default {
   stickyVideoPlayer: {
     videoTitle: 'Reprodutor de vídeo flutuante',
   },
-};
+} satisfies DisruptionsI18nShape;
