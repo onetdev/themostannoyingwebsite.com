@@ -43,7 +43,7 @@ export function RatingDialog({ isOpen, onOpenChange }: RatingDialogProps) {
         </DialogHeader>
         <div className="flex items-center justify-center py-4 gap-5">
           {/* 230 x 380 */}
-          <div className="h-20 w-12 md:h-28 md:w-17 mb-4 shrink-0">
+          <div className="h-20 w-12 md:h-28 md:w-17 mb-4 shrink-0 dark:drop-shadow-green-500/50 dark:drop-shadow-lg">
             <DotLottieReact
               src={config.support.assets.ratingAnimation}
               loop
