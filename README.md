@@ -4,8 +4,11 @@ A satirical web project that gathers the worst UX patterns from modern websites 
 
 Everything is intentionally broken. Buttons lie, forms misbehave, notifications never stop, and progress bars cheat. Easter eggs and internet culture references in every single segment of the project.
 
+## Demo
+
 🌐 **Live site:** https://themostannoyingwebsite.com
 
+![Demo](./assets/demo.gif)
 
 ## What is this?
 
