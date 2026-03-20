@@ -1,3 +1,5 @@
+import type { DisruptionsI18nShape } from '../types';
+
 export default {
   screensaver: {
     exitClick: "Cliquez n'importe où pour quitter l'économiseur d'écran",
@@ -16,4 +18,4 @@ export default {
   stickyVideoPlayer: {
     videoTitle: 'Lecteur vidéo collant',
   },
-};
+} satisfies DisruptionsI18nShape;

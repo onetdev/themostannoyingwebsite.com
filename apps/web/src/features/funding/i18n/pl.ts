@@ -1,3 +1,5 @@
+import type { FundingI18nShape } from '../types';
+
 export default {
   description:
     'Ten projekt nie ma żadnego sponsora, sugardaddy, sugarmommy, inwestora krypto-wieloryba, znudzonego milionera ani tajemniczego filantropa w prochowcu. Działa wyłącznie dzięki pracy wolontariuszy, rachunkom za serwery i stałemu strumieniowi wydatków na kebab + kawę — co tylko pogłębia finansową dziurę. Mimo to ta aplikacja pozostaje projektem z pasji.<br></br><br></br>Jeśli chcesz wesprzeć naszą sprawę i pomóc uczynić tę stronę jeszcze gorszą, każda kwota jest BARDZO mile widziana. Jeśli nie masz wolnych pieniędzy — szczerze mówiąc, kto ma w tej gospodarce? — nadal możesz pomóc, udostępniając tę aplikację i szerząc irytację dalej.',
@@ -47,4 +49,4 @@ export default {
         'Chcę ulepszyć swój ramen. Z "3 za 5 €" na "luksusowy błyskawiczny z dołączoną paczką warzyw". To skromne marzenie. Marzenie oparte na kluskach.',
     },
   },
-};
+} satisfies FundingI18nShape;

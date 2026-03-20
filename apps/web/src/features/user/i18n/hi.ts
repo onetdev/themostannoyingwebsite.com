@@ -1,3 +1,5 @@
+import type { UserI18nShape } from '../types';
+
 export default {
   userPreferences: {
     title: 'वरीयताएँ (Preferences)',
@@ -76,6 +78,10 @@ export default {
     notifications: {
       label: 'नोटिफिकेशन',
       hint: 'नोटिफिकेशन की अनुमति मांगता है और नकली नोटिफिकेशन दिखाता है।',
+    },
+    ratingDialog: {
+      label: 'रेटिंग डायलॉग',
+      hint: 'अनुभव को "बेहतर बनाने" में मदद करने के लिए कुछ पेज देखने के बाद रेटिंग डायलॉग दिखाता है।',
     },
     pageTitleInactiveArrayPaged: {
       label: 'टैब निष्क्रिय होने पर वैकल्पिक शीर्षक',
@@ -171,4 +177,4 @@ export default {
       },
     },
   },
-};
+} satisfies UserI18nShape;

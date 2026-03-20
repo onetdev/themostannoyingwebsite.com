@@ -41,6 +41,8 @@
     --warning-foreground: #000000;
     --error: #e53935;
     --error-foreground: #ffffff;
+    --info: #2196f3;
+    --info-foreground: #ffffff;
 
     /* Borders & Inputs */
     --border: #4e4c66;

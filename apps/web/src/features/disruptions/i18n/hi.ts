@@ -1,3 +1,5 @@
+import type { DisruptionsI18nShape } from '../types';
+
 export default {
   screensaver: {
     exitClick: 'स्क्रीनसेवर से बाहर निकलने के लिए कहीं भी क्लिक करें',
@@ -16,4 +18,4 @@ export default {
   stickyVideoPlayer: {
     videoTitle: 'चिपचिपा वीडियो प्लेयर',
   },
-};
+} satisfies DisruptionsI18nShape;

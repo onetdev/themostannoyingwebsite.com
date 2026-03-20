@@ -1,3 +1,4 @@
+import type { SubscriptionI18nShape } from '../../types';
 import socialProofVariants from './purchase-proof-variants';
 
 export default {
@@ -191,4 +192,4 @@ export default {
         'Bu gerçek bir belge değildir, trendlerin bir başka satirik yansımasıdır. Daha fazla bilgi için themostannoyingwebsite.com/tr/terms-of-use ve themostannoyingwebsite.com/tr/privacy-policy adreslerini ziyaret edin.',
     },
   },
-};
+} satisfies SubscriptionI18nShape;

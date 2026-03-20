@@ -1,3 +1,5 @@
+import type { UserI18nShape } from '../types';
+
 export default {
   userPreferences: {
     title: 'Tercihler',
@@ -76,6 +78,10 @@ export default {
     notifications: {
       label: 'Bildirimler',
       hint: 'Bildirim izinleri ister ve sahte bildirimler gösterir.',
+    },
+    ratingDialog: {
+      label: 'Değerlendirme diyaloğu',
+      hint: 'Deneyimi "iyileştirmeye" yardımcı olmak için birkaç sayfa görüntülemesinden sonra bir değerlendirme diyaloğu gösterir.',
     },
     pageTitleInactiveArrayPaged: {
       label: 'Sekme inaktifken değişen başlık',
@@ -171,4 +177,4 @@ export default {
       },
     },
   },
-};
+} satisfies UserI18nShape;

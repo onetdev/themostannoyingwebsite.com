@@ -1,3 +1,4 @@
+import type { SubscriptionI18nShape } from '../../types';
 import socialProofVariants from './purchase-proof-variants';
 
 export default {
@@ -189,4 +190,4 @@ export default {
         '이 문서는 실제 문서가 아니며, 단지 트렌드에 대한 풍자적인 반영일 뿐입니다. 자세한 내용은 themostannoyingwebsite.com/ko/terms-of-use 및 themostannoyingwebsite.com/ko/privacy-policy를 참조하세요.',
     },
   },
-};
+} satisfies SubscriptionI18nShape;

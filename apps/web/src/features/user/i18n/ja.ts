@@ -1,3 +1,5 @@
+import type { UserI18nShape } from '../types';
+
 export default {
   userPreferences: {
     title: '設定',
@@ -76,6 +78,10 @@ export default {
     notifications: {
       label: '通知',
       hint: '通知の許可を求め、偽の通知を表示します。',
+    },
+    ratingDialog: {
+      label: '評価ダイアログ',
+      hint: 'エクスペリエンスを「改善」するために、数回のページビューの後に評価ダイアログを表示します。',
     },
     pageTitleInactiveArrayPaged: {
       label: 'タブ非アクティブ時の交互タイトル',
@@ -171,4 +177,4 @@ export default {
       },
     },
   },
-};
+} satisfies UserI18nShape;

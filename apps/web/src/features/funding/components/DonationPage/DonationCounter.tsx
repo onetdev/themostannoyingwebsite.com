@@ -41,7 +41,9 @@ export function DonationCounter({ className, ...rest }: DonationCounterProps) {
   }, [isNegative, digits.length]);
 
   // Color scheme based on whether we're showing negative
-  const digitColor = showNegative ? 'text-on-error' : 'text-on-success';
+  const digitColor = showNegative
+    ? 'text-error-foreground'
+    : 'text-success-foreground';
   const borderColor = showNegative ? 'border-error' : 'border-success';
   const bgGradient = showNegative ? 'bg-error' : 'bg-success';
 

@@ -140,6 +140,7 @@ const config: AppConfig = {
   support: {
     assets: {
       newMessageSfx: '/assets/sfx/new_message.mp3',
+      ratingAnimation: '/assets/animations/zichereisy.lottie',
     },
   },
   subscription: {

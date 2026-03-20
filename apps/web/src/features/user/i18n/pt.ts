@@ -1,3 +1,5 @@
+import type { UserI18nShape } from '../types';
+
 export default {
   userPreferences: {
     title: 'Preferências',
@@ -76,6 +78,10 @@ export default {
     notifications: {
       label: 'Notificações',
       hint: 'Pede permissões de notificação e mostra notificações falsas.',
+    },
+    ratingDialog: {
+      label: 'Diálogo de avaliação',
+      hint: 'Mostra um diálogo de avaliação após algumas visualizações de página para "ajudar" a melhorar a experiência.',
     },
     pageTitleInactiveArrayPaged: {
       label: 'Título alternado quando o separador está inativo',
@@ -171,4 +177,4 @@ export default {
       },
     },
   },
-};
+} satisfies UserI18nShape;

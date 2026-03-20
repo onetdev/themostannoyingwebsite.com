@@ -1,3 +1,5 @@
+import type { ArhievementsI18nShape } from '../types';
+
 export default {
   unlocked: '업적 달성: {name}',
   progress: '진행 상황: {name} ({progress}/{target})',
@@ -83,5 +85,10 @@ export default {
       name: '의무병으로부터 온 연애 편지',
       description: '친절한 지원 상담원으로부터 5개의 메시지를 받으세요.',
     },
+    virginMojito: {
+      name: '버진 모히토',
+      description:
+        '똑같지는 않습니다. 하지만 때로는 책임감이 필요할 때가 있습니다.',
+    },
   },
-};
+} satisfies ArhievementsI18nShape;

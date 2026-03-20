@@ -1,3 +1,5 @@
+import type { DisruptionsI18nShape } from '../types';
+
 export default {
   screensaver: {
     exitClick: 'Ekran koruyucudan çıkmak için herhangi bir yere tıklayın',
@@ -16,4 +18,4 @@ export default {
   stickyVideoPlayer: {
     videoTitle: 'Yapışkan video oynatıcı',
   },
-};
+} satisfies DisruptionsI18nShape;

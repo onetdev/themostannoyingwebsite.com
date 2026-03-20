@@ -1,3 +1,5 @@
+import type { FundingI18nShape } from '../types';
+
 export default {
   description:
     'Dieses Projekt hat keine Sponsoren, Sugar-Daddys, Sugar-Mommys, Krypto-Wal-Investoren, gelangweilte Millionäre oder mysteriöse Philanthropen im Trenchcoat. Es läuft rein auf Basis von Freiwilligenarbeit, Serverrechnungen und einem stetigen Strom an Ausgaben für Döner + Kaffee – was das finanzielle Loch nur noch tiefer gräbt. Dennoch bleibt diese App ein Herzensprojekt.<br></br><br></br>Wenn Sie unsere Sache unterstützen und helfen wollen, diese Website noch schlimmer zu machen, wird jeder Betrag SEHR geschätzt. Wenn Sie kein Geld übrig haben – ehrlich gesagt, wer hat das schon in dieser Wirtschaftslage? – können Sie trotzdem helfen, indem Sie diese App teilen und den Ärger weiter verbreiten.',
@@ -48,4 +50,4 @@ export default {
         'Ich möchte meine Ramen aufwerten. Von "3 für 5 €" zu "Luxus-Instant-Nudeln mit extra Gemüsebeutel." Es ist ein bescheidener Traum. Ein nudelbasierter Traum.',
     },
   },
-};
+} satisfies FundingI18nShape;

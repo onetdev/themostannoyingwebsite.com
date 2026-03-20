@@ -27,4 +27,12 @@ export default {
     yourMessage: '你的消息',
     yourMessagePlaceholder: '在这里输入...',
   },
+  rating: {
+    title: '评价您的体验',
+    description: '您对我们的体验评分是多少？',
+    low: '差',
+    high: '优秀',
+    submit: '提交',
+    thanks: '感谢您的反馈！',
+  },
 } satisfies SupportI18nShape;

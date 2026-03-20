@@ -4,8 +4,11 @@ A satirical web project that gathers the worst UX patterns from modern websites 
 
 Everything is intentionally broken. Buttons lie, forms misbehave, notifications never stop, and progress bars cheat. Easter eggs and internet culture references in every single segment of the project.
 
+## Demo
+
 🌐 **Live site:** https://themostannoyingwebsite.com
 
+![Demo](./assets/demo.gif)
 
 ## What is this?
 
@@ -88,6 +91,10 @@ pnpm dev
 pnpm dev --filter ui-docs
 # then open: http://localhost:6006
 ```
+
+### AI-Powered Development
+
+This project includes [agentic skills](docs/development.md#ai-powered-development) to automate branch summaries and commit message generation for AI-assisted workflows.
 
 *Some browser APIs require HTTPS during development.*
 

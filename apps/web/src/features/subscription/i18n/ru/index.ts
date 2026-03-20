@@ -1,3 +1,4 @@
+import type { SubscriptionI18nShape } from '../../types';
 import socialProofVariants from './purchase-proof-variants';
 
 export default {
@@ -191,4 +192,4 @@ export default {
         'Это не настоящий документ, а просто еще одно сатирическое отражение тенденций. См. themostannoyingwebsite.com/ru/terms-of-use и themostannoyingwebsite.com/ru/privacy-policy для получения дополнительной информации.',
     },
   },
-};
+} satisfies SubscriptionI18nShape;

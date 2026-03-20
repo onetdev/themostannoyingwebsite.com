@@ -1,3 +1,5 @@
+import type { SupportI18nShape } from '../types';
+
 export default {
   chatBubble: {
     trigger: 'Открыть чат',
@@ -28,4 +30,12 @@ export default {
     yourMessage: 'Ваше сообщение',
     yourMessagePlaceholder: 'Пишите здесь...',
   },
-};
+  rating: {
+    title: 'Оцените ваш опыт',
+    description: 'Как бы вы оценили работу с нами?',
+    low: 'Плохо',
+    high: 'Отлично',
+    submit: 'Отправить',
+    thanks: 'Спасибо за ваш отзыв!',
+  },
+} satisfies SupportI18nShape;

@@ -1,3 +1,5 @@
+import type { ArhievementsI18nShape } from '../types';
+
 export default {
   unlocked: 'Başarım Açıldı: {name}',
   progress: 'İlerleme: {name} ({progress}/{target})',
@@ -85,5 +87,9 @@ export default {
       name: 'Bir sıhhiyeciden aşk mektupları',
       description: 'Yardımsever destek temsilcilerimizden 5 mesaj alın.',
     },
+    virginMojito: {
+      name: 'Virgin Mojito',
+      description: 'Tam olarak aynı değil. Ama bazen sorumlu olmanız gerekir.',
+    },
   },
-};
+} satisfies ArhievementsI18nShape;

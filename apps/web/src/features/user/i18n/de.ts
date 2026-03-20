@@ -1,3 +1,5 @@
+import type { UserI18nShape } from '../types';
+
 export default {
   userPreferences: {
     title: 'Präferenzen',
@@ -76,6 +78,10 @@ export default {
     notifications: {
       label: 'Benachrichtigungen',
       hint: 'Fragt nach Benachrichtigungsberechtigungen und zeigt gefälschte Benachrichtigungen an.',
+    },
+    ratingDialog: {
+      label: 'Bewertungsdialog',
+      hint: 'Zeigt nach ein paar Seitenaufrufen einen Bewertungsdialog an, um die Erfahrung zu „verbessern“.',
     },
     pageTitleInactiveArrayPaged: {
       label: 'Abwechselnder Titel bei inaktivem Tab',
@@ -171,4 +177,4 @@ export default {
       },
     },
   },
-};
+} satisfies UserI18nShape;

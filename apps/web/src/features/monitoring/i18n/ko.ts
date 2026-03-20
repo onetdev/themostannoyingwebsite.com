@@ -1,3 +1,5 @@
+import type { MonitoringI18nShape } from '../types';
+
 export default {
   auth: {
     title: '접근 제한됨',
@@ -41,4 +43,4 @@ export default {
     userGrants: '사용자 권한 스토어',
     appConfig: '앱 설정',
   },
-};
+} satisfies MonitoringI18nShape;

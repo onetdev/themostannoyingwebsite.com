@@ -1,3 +1,5 @@
+import type { CaptchaI18nShape } from '../types';
+
 export default {
   captcha: {
     field: '캡차(Captcha)',
@@ -35,4 +37,4 @@ export default {
     protected: '보호됨',
     emojiChallengePlaceholder: '가장 많이 나타나는 이모지 개수',
   },
-};
+} satisfies CaptchaI18nShape;

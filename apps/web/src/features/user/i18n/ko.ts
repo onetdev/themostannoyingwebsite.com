@@ -1,3 +1,5 @@
+import type { UserI18nShape } from '../types';
+
 export default {
   userPreferences: {
     title: '환경설정',
@@ -76,6 +78,10 @@ export default {
     notifications: {
       label: '알림',
       hint: '알림 권한을 요청하고 가짜 알림을 표시합니다.',
+    },
+    ratingDialog: {
+      label: '평가 대화 상자',
+      hint: '몇 번의 페이지 뷰 후에 환경을 "개선"하는 데 도움을 주기 위해 평가 대화 상자를 표시합니다.',
     },
     pageTitleInactiveArrayPaged: {
       label: '탭 비활성 시 교대 제목',
@@ -171,4 +177,4 @@ export default {
       },
     },
   },
-};
+} satisfies UserI18nShape;

@@ -79,6 +79,10 @@ export default {
       label: 'Értesítések',
       hint: 'Engedélyt kér az értesítésekhez, és hamis értesítéseket jelenít meg.',
     },
+    ratingDialog: {
+      label: 'Értékelési párbeszédablak',
+      hint: 'Néhány oldalmegtekintés után egy értékelési párbeszédablakot jelenít meg, hogy „segítsen” javítani az élményt.',
+    },
     pageTitleInactiveArrayPaged: {
       label: 'Váltakozó cím, ha a lap inaktív',
       hint: 'Figyelemfelkeltőre változtatja a lapfül címét, amikor az inaktív.',

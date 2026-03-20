@@ -1,3 +1,5 @@
+import type { DisruptionsI18nShape } from '../types';
+
 export default {
   screensaver: {
     exitClick: 'Kliknij gdziekolwiek, aby zamknąć wygaszacz',
@@ -16,4 +18,4 @@ export default {
   stickyVideoPlayer: {
     videoTitle: 'Przyklejony odtwarzacz wideo',
   },
-};
+} satisfies DisruptionsI18nShape;

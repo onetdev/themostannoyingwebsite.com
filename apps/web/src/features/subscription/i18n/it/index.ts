@@ -1,3 +1,4 @@
+import type { SubscriptionI18nShape } from '../../types';
 import socialProofVariants from './purchase-proof-variants';
 
 export default {
@@ -192,4 +193,4 @@ export default {
         'Questo non è un documento reale, solo un altro riflesso satirico delle tendenze. Vedi themostannoyingwebsite.com/it/terms-of-use e themostannoyingwebsite.com/it/privacy-policy per ulteriori informazioni.',
     },
   },
-};
+} satisfies SubscriptionI18nShape;

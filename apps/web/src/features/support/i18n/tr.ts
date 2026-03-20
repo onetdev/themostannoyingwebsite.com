@@ -1,3 +1,5 @@
+import type { SupportI18nShape } from '../types';
+
 export default {
   chatBubble: {
     trigger: 'Sohbeti aç',
@@ -29,4 +31,12 @@ export default {
     yourMessage: 'Mesajınız',
     yourMessagePlaceholder: 'Buraya yazın...',
   },
-};
+  rating: {
+    title: 'Deneyiminizi oylayın',
+    description: 'Bizimle olan deneyiminizi nasıl oylarsınız?',
+    low: 'Kötü',
+    high: 'Mükemmel',
+    submit: 'Gönder',
+    thanks: 'Geri bildiriminiz için teşekkür ederiz!',
+  },
+} satisfies SupportI18nShape;

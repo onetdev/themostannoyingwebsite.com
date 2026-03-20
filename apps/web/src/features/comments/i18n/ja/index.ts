@@ -1,3 +1,5 @@
+import type { CommentsI18nShape } from '../../types';
+
 export default {
   sectionTitle: 'コメント',
   formTitle: 'コメントを追加',
@@ -18,4 +20,4 @@ export default {
     comment: 'コメント',
     submit: 'コメントを送信',
   },
-};
+} satisfies CommentsI18nShape;

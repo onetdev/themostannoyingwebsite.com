@@ -31,4 +31,12 @@ export default {
     yourMessage: 'Az üzeneted',
     yourMessagePlaceholder: 'Írj ide...',
   },
+  rating: {
+    title: 'Értékeld a tapasztalatodat',
+    description: 'Mennyire vagy elégedett velünk?',
+    low: 'Gyalázatos',
+    high: 'Kiváló',
+    submit: 'Beküldés',
+    thanks: 'Köszönjük a visszajelzést!',
+  },
 } satisfies SupportI18nShape;
