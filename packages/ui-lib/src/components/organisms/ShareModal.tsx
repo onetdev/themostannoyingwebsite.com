@@ -6,8 +6,8 @@ import {
   EmailShareButton,
   FacebookIcon,
   FacebookShareButton,
-  TwitterShareButton,
   XIcon,
+  XShareButton,
 } from 'react-share';
 
 import {
@@ -43,7 +43,8 @@ export function ShareModal({
     );
   }, [controlledShow]);
 
-  const buttonStyle = 'overflow-hidden hover:brightness-125 rounded-md outline';
+  const buttonClassName =
+    'overflow-hidden hover:brightness-125 !rounded-md outline outline-border';
   const url = controlledUrl ?? currentUrl;
 
   return (
@@ -58,13 +59,13 @@ export function ShareModal({
         {url && (
           <DialogFooter>
             <div className="flex w-full gap-3">
-              <FacebookShareButton url={url} className={buttonStyle}>
+              <FacebookShareButton url={url} className={buttonClassName}>
                 <FacebookIcon size={32} />
               </FacebookShareButton>
-              <TwitterShareButton url={url} className={buttonStyle}>
+              <XShareButton url={url} className={buttonClassName}>
                 <XIcon size={32} />
-              </TwitterShareButton>
-              <EmailShareButton url={url} className={buttonStyle}>
+              </XShareButton>
+              <EmailShareButton url={url} className={buttonClassName}>
                 <EmailIcon size={32} />
               </EmailShareButton>
             </div>

@@ -20,7 +20,7 @@ export function ModalContent({ className, ...rest }: ModalContentProps) {
 
   return (
     <div
-      className={`relative flex flex-col overflow-hidden border-t pt-5 ${className}`}
+      className={`relative flex flex-col overflow-hidden border-t border-border pt-5 ${className}`}
       {...rest}
     >
       <div className="grow">
