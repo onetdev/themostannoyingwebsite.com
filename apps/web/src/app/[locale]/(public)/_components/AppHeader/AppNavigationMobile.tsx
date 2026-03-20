@@ -78,7 +78,7 @@ export function AppNavigationMobile({ activeItem }: AppNavigationMobileProps) {
           />
         </div>
         {navigationTree.map(({ titleKey, items }) => (
-          <>
+          <div key={titleKey}>
             <Separator />
             <div className="flex flex-col gap-1 p-4">
               <div className="text-muted-foreground mb-2 px-3 text-xs font-semibold tracking-wider uppercase">
@@ -104,7 +104,7 @@ export function AppNavigationMobile({ activeItem }: AppNavigationMobileProps) {
                 );
               })}
             </div>
-          </>
+          </div>
         ))}
         <Separator className="mb-4" />
         <SheetFooter>
