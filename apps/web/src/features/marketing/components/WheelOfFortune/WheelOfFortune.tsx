@@ -23,7 +23,7 @@ export function WheelOfFortune() {
     <>
       <Dialog open={isOpen} onOpenChange={setOpen}>
         <DialogContent showCloseButton={true} className="overflow-hidden p-0">
-          <DialogHeader className="p-5 pb-2">
+          <DialogHeader className="p-5 pb-1">
             <DialogTitle>{t('marketing.wheelOfFortune.title')}</DialogTitle>
           </DialogHeader>
           <ModalContent className="max-h-[600px] max-w-[600px] grow" />

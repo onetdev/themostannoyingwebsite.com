@@ -61,11 +61,8 @@ export function CaptchaDialog({
 
   return (
     <Dialog open={isOpen} onOpenChange={handleOpenChange}>
-      <DialogContent
-        className="max-w-fit gap-0 overflow-hidden p-0 border-border"
-        showCloseButton={true}
-      >
-        <DialogHeader className="border-b border-border p-4">
+      <DialogContent className="max-w-fit gap-0" showCloseButton={true}>
+        <DialogHeader className="border-b border-border p-5 pb-4 -mx-5 -mt-5">
           <DialogTitle>
             {t('humanVerification.captcha.challengeTitle')}
           </DialogTitle>
@@ -98,7 +95,7 @@ export function CaptchaDialog({
           )}
         </div>
 
-        <DialogFooter className="flex-row items-center justify-between border-t border-border p-2">
+        <DialogFooter className="flex-row items-center justify-between">
           <div className="grow">
             <Button
               type="button"

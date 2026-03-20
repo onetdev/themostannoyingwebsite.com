@@ -56,7 +56,7 @@ export function ResetAchievements() {
           <DialogClose asChild>
             <Button
               variant="outline"
-              className="whitespace-break-spaces max-w-1/2 h-auto"
+              className="whitespace-break-spaces basis-1 h-auto grow"
             >
               {t('achievements.reset.cancelAction')}
             </Button>
@@ -64,7 +64,7 @@ export function ResetAchievements() {
           <Button
             variant="destructive"
             onClick={onConfirm}
-            className="whitespace-break-spaces max-w-1/2 h-auto"
+            className="whitespace-break-spaces basis-1 h-auto grow"
           >
             {t('achievements.reset.confirmAction')}
           </Button>
