@@ -44,7 +44,7 @@ export function ShareModal({
   }, [controlledShow]);
 
   const buttonClassName =
-    'overflow-hidden hover:brightness-125 rounded-md! outline outline-border';
+    'overflow-hidden hover:brightness-125 !rounded-md outline outline-border';
   const url = controlledUrl ?? currentUrl;
 
   return (
