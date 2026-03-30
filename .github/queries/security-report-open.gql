@@ -1,0 +1,24 @@
+# Retreives the list of Github
+# gh api graphql -F query=@security-report-open.gql
+{
+  repository(owner: "onetdev", name: "themostannoyingwebsite.com") {
+    vulnerabilityAlerts(first: 100, states: [OPEN]) {
+      nodes {
+        securityVulnerability {
+          advisory {
+            ghsaId
+            summary
+            identifiers {
+              type
+              value
+            }
+          }
+          package {
+            name
+          }
+          severity
+        }
+      }
+    }
+  }
+}
