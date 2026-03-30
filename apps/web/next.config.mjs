@@ -6,7 +6,16 @@ import sentryConfig from './next-sentry.config.mjs';
 
 /** @type {import('next').NextConfig} **/
 const nextConfig = {
-  transpilePackages: ['emittery'],
+  transpilePackages: [
+    'emittery',
+    'inversify',
+    '@inversifyjs/common',
+    '@inversifyjs/container',
+    '@inversifyjs/core',
+    '@inversifyjs/plugin',
+    '@inversifyjs/prototype-utils',
+    '@inversifyjs/reflect-metadata-utils',
+  ],
   trailingSlash: true,
   images: {
     unoptimized: true,
