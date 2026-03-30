@@ -1,7 +1,7 @@
 # Retreives the list of Github
-# gh api graphql -F query=@security-report-open.gql
-{
-  repository(owner: "onetdev", name: "themostannoyingwebsite.com") {
+# gh api graphql -f owner='onetdev' -f name='themostannoyingwebsite.com' -F query=@.github/queries/security-report-open.gql
+query RepositoryVulnerabilities($owner: String!, $name: String!) {
+  repository(owner: $owner, name: $name) {
     vulnerabilityAlerts(first: 100, states: [OPEN]) {
       nodes {
         securityVulnerability {
