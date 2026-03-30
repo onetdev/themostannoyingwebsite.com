@@ -37,5 +37,8 @@
     "jest-environment-jsdom": "catalog:",
     "ts-jest": "catalog:",
     "typescript": "catalog:"
+  },
+  "peerDependencies": {
+    "handlebars": "^4.7.9"
   }
 }
