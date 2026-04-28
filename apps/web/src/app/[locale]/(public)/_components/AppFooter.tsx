@@ -20,6 +20,14 @@ export async function AppFooter({ className }: AppFooterProps) {
     label: t(link.labelKey),
   }));
 
+  const socialLinks = [
+    { label: 'X (Twitter)', href: config.common.socialLinks.x },
+    { label: 'Facebook', href: config.common.socialLinks.facebook },
+    { label: 'Instagram', href: config.common.socialLinks.instagram },
+    { label: 'TikTok', href: config.common.socialLinks.tiktok },
+    { label: 'YouTube', href: config.common.socialLinks.youtube },
+  ];
+
   return (
     <footer
       id="footer"
@@ -38,6 +46,20 @@ export async function AppFooter({ className }: AppFooterProps) {
         <div className="w-full sm:w-auto">
           <AppLanguageSwitcher className="h-8 w-full sm:w-40" />
         </div>
+      </div>
+
+      <div className="border-border flex flex-wrap items-center justify-center gap-x-5 gap-y-2 border-t px-5 py-5">
+        {socialLinks.map((link) => (
+          <Link
+            key={link.label}
+            href={link.href}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-xs hover:underline"
+          >
+            {link.label}
+          </Link>
+        ))}
       </div>
 
       <div className="text-muted-foreground border-border border-t px-5 py-5 text-center text-xs">
