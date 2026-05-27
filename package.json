@@ -70,6 +70,6 @@
     }
   },
   "lint-staged": {
-    "*.{js,ts,tsx,jsx,json,css,md}": "biome check --write"
+    "*.{js,ts,tsx,jsx,json,css,md}": "biome check --write --no-errors-on-unmatched"
   }
 }
