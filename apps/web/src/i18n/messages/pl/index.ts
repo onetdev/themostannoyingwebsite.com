@@ -148,6 +148,14 @@ export default {
         'Szerz niedolę! Pamiętaj, aby uraczyć tą boleśnie irytującą stroną również swoich znajomych — po co cierpieć samemu, skoro możesz ich pociągnąć za sobą?',
     },
   },
+  social: {
+    facebook: 'Facebook',
+    instagram: 'Instagram',
+    tiktok: 'TikTok',
+    twitter: 'X (Twitter)',
+    youtube: 'YouTube',
+    github: 'GitHub',
+  },
   messages: {
     errors: {
       e404title: 'Błąd 404',

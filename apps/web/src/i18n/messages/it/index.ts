@@ -145,6 +145,14 @@ export default {
         'Diffondi la miseria! Assicurati di infliggere questo sito web dolorosamente odioso anche ai tuoi amici — perché soffrire da soli quando puoi trascinarli giù con te?',
     },
   },
+  social: {
+    facebook: 'Facebook',
+    instagram: 'Instagram',
+    tiktok: 'TikTok',
+    twitter: 'X (Twitter)',
+    youtube: 'YouTube',
+    github: 'GitHub',
+  },
   messages: {
     errors: {
       e404title: 'Errore 404',
