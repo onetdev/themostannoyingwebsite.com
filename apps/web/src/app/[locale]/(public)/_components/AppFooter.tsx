@@ -21,11 +21,11 @@ export async function AppFooter({ className }: AppFooterProps) {
   }));
 
   const socialLinks = [
-    { label: 'X (Twitter)', href: config.common.socialLinks.x },
-    { label: 'Facebook', href: config.common.socialLinks.facebook },
-    { label: 'Instagram', href: config.common.socialLinks.instagram },
-    { label: 'TikTok', href: config.common.socialLinks.tiktok },
-    { label: 'YouTube', href: config.common.socialLinks.youtube },
+    { label: t('social.twitter'), href: config.common.socialLinks.x },
+    { label: t('social.facebook'), href: config.common.socialLinks.facebook },
+    { label: t('social.instagram'), href: config.common.socialLinks.instagram },
+    { label: t('social.tiktok'), href: config.common.socialLinks.tiktok },
+    { label: t('social.youtube'), href: config.common.socialLinks.youtube },
   ];
 
   return (
