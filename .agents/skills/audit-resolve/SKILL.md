@@ -10,11 +10,11 @@ Systematic approach to resolve security vulnerabilities (CVEs) using GitHub repo
 ## Workflow
 
 ### 1. Discovery
-Compare GitHub alerts with local audit results. Store reports in `./artifacts`:
+Compare GitHub alerts with local audit results. Store reports in `.agents/artifacts`:
 ```bash
-mkdir -p artifacts
-gh api graphql -f owner='onetdev' -f name='themostannoyingwebsite.com' -F query=@.github/queries/security-report-open.gql > artifacts/open-vulnerabilities.json
-pnpm audit --json > artifacts/pnpm-audit.json
+mkdir -p .agents/artifacts
+gh api graphql -f owner='onetdev' -f name='themostannoyingwebsite.com' -F query=@.github/queries/security-report-open.gql > .agents/artifacts/open-vulnerabilities.json
+pnpm audit --json > .agents/artifacts/pnpm-audit.json
 ```
 
 ### 2. Analysis & Resolution
