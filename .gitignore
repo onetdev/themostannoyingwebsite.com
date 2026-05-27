@@ -39,5 +39,5 @@ yarn-error.log*
 
 # Gemini & Antigravity CLI
 .antigravitycli
+.agents/artifacts/
 .gemini/
-artifacts
