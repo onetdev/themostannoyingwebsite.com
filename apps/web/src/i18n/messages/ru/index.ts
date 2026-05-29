@@ -146,6 +146,14 @@ export default {
         'Распространяйте страдания! Обязательно навлеките этот мучительно неприятный сайт и на своих друзей — зачем страдать в одиночку, когда можно потянуть их за собой?',
     },
   },
+  social: {
+    facebook: 'Facebook',
+    instagram: 'Instagram',
+    tiktok: 'TikTok',
+    twitter: 'X (Twitter)',
+    youtube: 'YouTube',
+    github: 'GitHub',
+  },
   messages: {
     errors: {
       e404title: 'Ошибка 404',

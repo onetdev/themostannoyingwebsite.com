@@ -145,6 +145,14 @@ export default {
         '비참함을 널리 퍼뜨리세요! 이 고통스럽고 짜증나는 웹사이트를 친구들에게도 선사해 보세요. 혼자 고통받을 필요 없잖아요?',
     },
   },
+  social: {
+    facebook: 'Facebook',
+    instagram: 'Instagram',
+    tiktok: 'TikTok',
+    twitter: 'X (Twitter)',
+    youtube: 'YouTube',
+    github: 'GitHub',
+  },
   messages: {
     errors: {
       e404title: '오류 404',

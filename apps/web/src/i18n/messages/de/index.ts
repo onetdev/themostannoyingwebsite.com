@@ -145,6 +145,14 @@ export default {
         'Verbreiten Sie das Elend! Stellen Sie sicher, dass Sie diese quälend unausstehliche Website auch Ihren Freunden aufzwingen – warum alleine leiden, wenn Sie sie mit in den Abgrund reißen können?',
     },
   },
+  social: {
+    facebook: 'Facebook',
+    instagram: 'Instagram',
+    tiktok: 'TikTok',
+    twitter: 'X (Twitter)',
+    youtube: 'YouTube',
+    github: 'GitHub',
+  },
   messages: {
     errors: {
       e404title: 'Fehler 404',

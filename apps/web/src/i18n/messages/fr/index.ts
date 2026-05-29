@@ -146,6 +146,14 @@ export default {
         "Répandez la misère ! Assurez-vous d'infliger ce site web douloureusement odieux à vos amis aussi — pourquoi souffrir seul quand on peut les entraîner avec soi ?",
     },
   },
+  social: {
+    facebook: 'Facebook',
+    instagram: 'Instagram',
+    tiktok: 'TikTok',
+    twitter: 'X (Twitter)',
+    youtube: 'YouTube',
+    github: 'GitHub',
+  },
   messages: {
     errors: {
       e404title: 'Erreur 404',

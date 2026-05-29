@@ -37,5 +37,7 @@ yarn-error.log*
 .claude/settings.local.json
 .claude/CLAUDE.local.md
 
-# Gemini CLI
+# Gemini & Antigravity CLI
+.antigravitycli
+.agents/artifacts/
 .gemini/
