@@ -1,0 +1,35 @@
+{
+  "private": true,
+  "name": "@maw/content-sdk",
+  "version": "0.0.0",
+  "type": "module",
+  "exports": {
+    ".": "./src/index.ts",
+    "./schemas": "./src/schemas/index.ts",
+    "./types": "./src/types/index.ts"
+  },
+  "scripts": {
+    "generate": "tsx ./scripts/generate.ts",
+    "swagger:generate": "tsx ./scripts/generate.ts",
+    "check-types": "tsc --noEmit",
+    "lint": "biome check .",
+    "format": "biome format --write .",
+    "lint:fix": "biome check --write .",
+    "test": "jest"
+  },
+  "dependencies": {
+    "zod": "catalog:"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "catalog:",
+    "@maw/config-jest": "workspace:*",
+    "@maw/config-ts": "workspace:*",
+    "@types/jest": "catalog:",
+    "@types/node": "catalog:",
+    "jest": "catalog:",
+    "openapi-typescript": "^7.13.0",
+    "ts-jest": "catalog:",
+    "tsx": "catalog:",
+    "typescript": "catalog:"
+  }
+}

@@ -1,0 +1,1898 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "The Most Annoying Website - Headless Content API",
+    "description": "REST API serving multi-language YAML articles, static pages, tags, and transformed raster image assets from SQLite.",
+    "version": "1.0.0"
+  },
+  "tags": [
+    {
+      "name": "Health",
+      "description": "System health check & database status"
+    },
+    {
+      "name": "Articles",
+      "description": "Query localized articles"
+    },
+    {
+      "name": "Pages",
+      "description": "Query localized static pages (privacy policy, etc.)"
+    },
+    {
+      "name": "Tags",
+      "description": "Taxonomy and article tag counts"
+    },
+    {
+      "name": "Images",
+      "description": "Transformed raster image asset metadata"
+    }
+  ],
+  "paths": {
+    "/health": {
+      "get": {
+        "tags": ["Health"],
+        "summary": "System health check and database connection status",
+        "responses": {
+          "200": {
+            "description": "Successful health check response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "description": "Status indicator (e.g. ok)"
+                    },
+                    "version": {
+                      "type": "string",
+                      "description": "API version string (1.0.0)"
+                    },
+                    "database": {
+                      "type": "string",
+                      "description": "Database connection status (e.g. connected)"
+                    },
+                    "timestamp": {
+                      "type": "string",
+                      "description": "ISO timestamp of health response"
+                    }
+                  },
+                  "required": ["status", "version", "database", "timestamp"]
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "type": "string",
+                      "const": "INTERNAL_SERVER_ERROR",
+                      "description": "Standardized internal server error code"
+                    },
+                    "error": {
+                      "type": "string",
+                      "description": "Internal error explanation"
+                    },
+                    "message": {
+                      "description": "Optional error message",
+                      "type": "string"
+                    }
+                  },
+                  "required": ["code", "error"]
+                },
+                "example": {
+                  "code": "INTERNAL_SERVER_ERROR",
+                  "error": "Internal server error",
+                  "message": "Database query execution failed"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/health": {
+      "get": {
+        "tags": ["Health"],
+        "summary": "System health check and database connection status",
+        "responses": {
+          "200": {
+            "description": "Successful health check response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "description": "Status indicator (e.g. ok)"
+                    },
+                    "version": {
+                      "type": "string",
+                      "description": "API version string (1.0.0)"
+                    },
+                    "database": {
+                      "type": "string",
+                      "description": "Database connection status (e.g. connected)"
+                    },
+                    "timestamp": {
+                      "type": "string",
+                      "description": "ISO timestamp of health response"
+                    }
+                  },
+                  "required": ["status", "version", "database", "timestamp"]
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "type": "string",
+                      "const": "INTERNAL_SERVER_ERROR",
+                      "description": "Standardized internal server error code"
+                    },
+                    "error": {
+                      "type": "string",
+                      "description": "Internal error explanation"
+                    },
+                    "message": {
+                      "description": "Optional error message",
+                      "type": "string"
+                    }
+                  },
+                  "required": ["code", "error"]
+                },
+                "example": {
+                  "code": "INTERNAL_SERVER_ERROR",
+                  "error": "Internal server error",
+                  "message": "Database query execution failed"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/articles": {
+      "get": {
+        "tags": ["Articles"],
+        "summary": "Get localized articles list",
+        "parameters": [
+          {
+            "name": "lang",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "ar",
+                "de",
+                "en",
+                "es",
+                "fr",
+                "hi",
+                "hu",
+                "it",
+                "ja",
+                "ko",
+                "pl",
+                "pt",
+                "ru",
+                "tr",
+                "zh"
+              ]
+            },
+            "description": "ISO language code"
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "default": 20,
+              "type": "number",
+              "minimum": 1,
+              "maximum": 100
+            },
+            "description": "Max number of items (default 20, max 100)"
+          },
+          {
+            "name": "offset",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "default": 0,
+              "type": "number",
+              "minimum": 0
+            },
+            "description": "Pagination offset (default 0)"
+          },
+          {
+            "name": "q",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Search query string (matches title, summary, or content)"
+          },
+          {
+            "name": "tag",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Filter by tag"
+          },
+          {
+            "name": "is_featured",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "boolean"
+            },
+            "description": "Filter by cover/featured status (true or false)"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Paginated list of localized articles",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "total": {
+                      "type": "number",
+                      "description": "Total count of items matching the query"
+                    },
+                    "limit": {
+                      "type": "number",
+                      "description": "Max number of items per page"
+                    },
+                    "offset": {
+                      "type": "number",
+                      "description": "Offset number of items skipped"
+                    },
+                    "items": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "id": {
+                            "type": "string",
+                            "description": "Deterministic UUID v5 identifier"
+                          },
+                          "article_group": {
+                            "type": "string",
+                            "description": "Canonical article group identifier"
+                          },
+                          "slug": {
+                            "type": "string",
+                            "description": "Localized article slug identifier"
+                          },
+                          "lang": {
+                            "type": "string",
+                            "enum": [
+                              "ar",
+                              "de",
+                              "en",
+                              "es",
+                              "fr",
+                              "hi",
+                              "hu",
+                              "it",
+                              "ja",
+                              "ko",
+                              "pl",
+                              "pt",
+                              "ru",
+                              "tr",
+                              "zh"
+                            ],
+                            "description": "ISO language code"
+                          },
+                          "title": {
+                            "type": "string",
+                            "description": "Article title"
+                          },
+                          "summary": {
+                            "type": "string",
+                            "description": "Short article summary"
+                          },
+                          "content": {
+                            "type": "string",
+                            "description": "Full article Markdown content"
+                          },
+                          "author": {
+                            "type": "string",
+                            "description": "Article author"
+                          },
+                          "published_at": {
+                            "type": "string",
+                            "description": "ISO publication timestamp"
+                          },
+                          "reading_time_minutes": {
+                            "type": "number",
+                            "description": "Estimated reading time in minutes"
+                          },
+                          "is_featured": {
+                            "type": "boolean",
+                            "description": "Featured/cover article flag"
+                          },
+                          "featured_image": {
+                            "anyOf": [
+                              {
+                                "type": "object",
+                                "properties": {
+                                  "name": {
+                                    "type": "string",
+                                    "description": "Original image asset base name"
+                                  },
+                                  "variants": {
+                                    "type": "object",
+                                    "properties": {
+                                      "sm": {
+                                        "type": "object",
+                                        "properties": {
+                                          "url": {
+                                            "type": "string",
+                                            "description": "Publicly accessible URL to the image variant"
+                                          },
+                                          "width": {
+                                            "type": "number",
+                                            "description": "Width in pixels"
+                                          },
+                                          "height": {
+                                            "type": "number",
+                                            "description": "Height in pixels"
+                                          },
+                                          "format": {
+                                            "type": "string",
+                                            "description": "Image file format (e.g. webp)"
+                                          },
+                                          "file_size_bytes": {
+                                            "description": "File size in bytes",
+                                            "type": "number"
+                                          }
+                                        },
+                                        "required": [
+                                          "url",
+                                          "width",
+                                          "height",
+                                          "format"
+                                        ],
+                                        "additionalProperties": false
+                                      },
+                                      "lg": {
+                                        "type": "object",
+                                        "properties": {
+                                          "url": {
+                                            "type": "string",
+                                            "description": "Publicly accessible URL to the image variant"
+                                          },
+                                          "width": {
+                                            "type": "number",
+                                            "description": "Width in pixels"
+                                          },
+                                          "height": {
+                                            "type": "number",
+                                            "description": "Height in pixels"
+                                          },
+                                          "format": {
+                                            "type": "string",
+                                            "description": "Image file format (e.g. webp)"
+                                          },
+                                          "file_size_bytes": {
+                                            "description": "File size in bytes",
+                                            "type": "number"
+                                          }
+                                        },
+                                        "required": [
+                                          "url",
+                                          "width",
+                                          "height",
+                                          "format"
+                                        ],
+                                        "additionalProperties": false
+                                      }
+                                    },
+                                    "additionalProperties": {
+                                      "type": "object",
+                                      "properties": {
+                                        "url": {
+                                          "type": "string",
+                                          "description": "Publicly accessible URL to the image variant"
+                                        },
+                                        "width": {
+                                          "type": "number",
+                                          "description": "Width in pixels"
+                                        },
+                                        "height": {
+                                          "type": "number",
+                                          "description": "Height in pixels"
+                                        },
+                                        "format": {
+                                          "type": "string",
+                                          "description": "Image file format (e.g. webp)"
+                                        },
+                                        "file_size_bytes": {
+                                          "description": "File size in bytes",
+                                          "type": "number"
+                                        }
+                                      },
+                                      "required": [
+                                        "url",
+                                        "width",
+                                        "height",
+                                        "format"
+                                      ],
+                                      "additionalProperties": false
+                                    },
+                                    "description": "Responsive image variants map (e.g. sm, lg)"
+                                  }
+                                },
+                                "required": ["name", "variants"],
+                                "additionalProperties": false
+                              },
+                              {
+                                "type": "null"
+                              }
+                            ],
+                            "description": "Featured image asset with responsive variants"
+                          },
+                          "tags": {
+                            "type": "array",
+                            "items": {
+                              "type": "string"
+                            },
+                            "description": "List of article tags"
+                          },
+                          "keywords": {
+                            "type": "array",
+                            "items": {
+                              "type": "string"
+                            },
+                            "description": "List of article search keywords"
+                          }
+                        },
+                        "required": [
+                          "id",
+                          "article_group",
+                          "slug",
+                          "lang",
+                          "title",
+                          "summary",
+                          "content",
+                          "author",
+                          "published_at",
+                          "reading_time_minutes",
+                          "is_featured",
+                          "featured_image",
+                          "tags",
+                          "keywords"
+                        ],
+                        "additionalProperties": false
+                      },
+                      "description": "Paginated list of localized articles"
+                    }
+                  },
+                  "required": ["total", "limit", "offset", "items"]
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request / validation error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "type": "string",
+                      "const": "VALIDATION_ERROR",
+                      "description": "Standardized validation error code"
+                    },
+                    "error": {
+                      "type": "string",
+                      "description": "Validation error explanation"
+                    },
+                    "message": {
+                      "description": "Detailed validation error information",
+                      "type": "string"
+                    }
+                  },
+                  "required": ["code", "error"]
+                },
+                "example": {
+                  "code": "VALIDATION_ERROR",
+                  "error": "Invalid parameter 'lang': Expected 'en' | 'es' | ...",
+                  "message": "Validation failed"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "type": "string",
+                      "const": "INTERNAL_SERVER_ERROR",
+                      "description": "Standardized internal server error code"
+                    },
+                    "error": {
+                      "type": "string",
+                      "description": "Internal error explanation"
+                    },
+                    "message": {
+                      "description": "Optional error message",
+                      "type": "string"
+                    }
+                  },
+                  "required": ["code", "error"]
+                },
+                "example": {
+                  "code": "INTERNAL_SERVER_ERROR",
+                  "error": "Internal server error",
+                  "message": "Database query execution failed"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/articles/{slug}": {
+      "get": {
+        "tags": ["Articles"],
+        "summary": "Get article by slug with optional translation filter",
+        "parameters": [
+          {
+            "name": "slug",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Article slug identifier"
+          },
+          {
+            "name": "lang",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "ar",
+                "de",
+                "en",
+                "es",
+                "fr",
+                "hi",
+                "hu",
+                "it",
+                "ja",
+                "ko",
+                "pl",
+                "pt",
+                "ru",
+                "tr",
+                "zh"
+              ]
+            },
+            "description": "ISO language code"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Article item with available alternative translations",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string",
+                      "description": "Deterministic UUID v5 identifier"
+                    },
+                    "article_group": {
+                      "type": "string",
+                      "description": "Canonical article group identifier"
+                    },
+                    "slug": {
+                      "type": "string",
+                      "description": "Localized article slug identifier"
+                    },
+                    "lang": {
+                      "type": "string",
+                      "enum": [
+                        "ar",
+                        "de",
+                        "en",
+                        "es",
+                        "fr",
+                        "hi",
+                        "hu",
+                        "it",
+                        "ja",
+                        "ko",
+                        "pl",
+                        "pt",
+                        "ru",
+                        "tr",
+                        "zh"
+                      ],
+                      "description": "ISO language code"
+                    },
+                    "title": {
+                      "type": "string",
+                      "description": "Article title"
+                    },
+                    "summary": {
+                      "type": "string",
+                      "description": "Short article summary"
+                    },
+                    "content": {
+                      "type": "string",
+                      "description": "Full article Markdown content"
+                    },
+                    "author": {
+                      "type": "string",
+                      "description": "Article author"
+                    },
+                    "published_at": {
+                      "type": "string",
+                      "description": "ISO publication timestamp"
+                    },
+                    "reading_time_minutes": {
+                      "type": "number",
+                      "description": "Estimated reading time in minutes"
+                    },
+                    "is_featured": {
+                      "type": "boolean",
+                      "description": "Featured/cover article flag"
+                    },
+                    "featured_image": {
+                      "anyOf": [
+                        {
+                          "type": "object",
+                          "properties": {
+                            "name": {
+                              "type": "string",
+                              "description": "Original image asset base name"
+                            },
+                            "variants": {
+                              "type": "object",
+                              "properties": {
+                                "sm": {
+                                  "type": "object",
+                                  "properties": {
+                                    "url": {
+                                      "type": "string",
+                                      "description": "Publicly accessible URL to the image variant"
+                                    },
+                                    "width": {
+                                      "type": "number",
+                                      "description": "Width in pixels"
+                                    },
+                                    "height": {
+                                      "type": "number",
+                                      "description": "Height in pixels"
+                                    },
+                                    "format": {
+                                      "type": "string",
+                                      "description": "Image file format (e.g. webp)"
+                                    },
+                                    "file_size_bytes": {
+                                      "description": "File size in bytes",
+                                      "type": "number"
+                                    }
+                                  },
+                                  "required": [
+                                    "url",
+                                    "width",
+                                    "height",
+                                    "format"
+                                  ],
+                                  "additionalProperties": false
+                                },
+                                "lg": {
+                                  "type": "object",
+                                  "properties": {
+                                    "url": {
+                                      "type": "string",
+                                      "description": "Publicly accessible URL to the image variant"
+                                    },
+                                    "width": {
+                                      "type": "number",
+                                      "description": "Width in pixels"
+                                    },
+                                    "height": {
+                                      "type": "number",
+                                      "description": "Height in pixels"
+                                    },
+                                    "format": {
+                                      "type": "string",
+                                      "description": "Image file format (e.g. webp)"
+                                    },
+                                    "file_size_bytes": {
+                                      "description": "File size in bytes",
+                                      "type": "number"
+                                    }
+                                  },
+                                  "required": [
+                                    "url",
+                                    "width",
+                                    "height",
+                                    "format"
+                                  ],
+                                  "additionalProperties": false
+                                }
+                              },
+                              "additionalProperties": {
+                                "type": "object",
+                                "properties": {
+                                  "url": {
+                                    "type": "string",
+                                    "description": "Publicly accessible URL to the image variant"
+                                  },
+                                  "width": {
+                                    "type": "number",
+                                    "description": "Width in pixels"
+                                  },
+                                  "height": {
+                                    "type": "number",
+                                    "description": "Height in pixels"
+                                  },
+                                  "format": {
+                                    "type": "string",
+                                    "description": "Image file format (e.g. webp)"
+                                  },
+                                  "file_size_bytes": {
+                                    "description": "File size in bytes",
+                                    "type": "number"
+                                  }
+                                },
+                                "required": [
+                                  "url",
+                                  "width",
+                                  "height",
+                                  "format"
+                                ],
+                                "additionalProperties": false
+                              },
+                              "description": "Responsive image variants map (e.g. sm, lg)"
+                            }
+                          },
+                          "required": ["name", "variants"],
+                          "additionalProperties": false
+                        },
+                        {
+                          "type": "null"
+                        }
+                      ],
+                      "description": "Featured image asset with responsive variants"
+                    },
+                    "tags": {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      },
+                      "description": "List of article tags"
+                    },
+                    "keywords": {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      },
+                      "description": "List of article search keywords"
+                    },
+                    "translations": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "lang": {
+                            "type": "string",
+                            "enum": [
+                              "ar",
+                              "de",
+                              "en",
+                              "es",
+                              "fr",
+                              "hi",
+                              "hu",
+                              "it",
+                              "ja",
+                              "ko",
+                              "pl",
+                              "pt",
+                              "ru",
+                              "tr",
+                              "zh"
+                            ],
+                            "description": "ISO language code"
+                          },
+                          "slug": {
+                            "type": "string",
+                            "description": "Localized article slug identifier"
+                          },
+                          "title": {
+                            "type": "string",
+                            "description": "Article title"
+                          }
+                        },
+                        "required": ["lang", "slug", "title"],
+                        "additionalProperties": false
+                      },
+                      "description": "Available alternative translations for this article"
+                    }
+                  },
+                  "required": [
+                    "id",
+                    "article_group",
+                    "slug",
+                    "lang",
+                    "title",
+                    "summary",
+                    "content",
+                    "author",
+                    "published_at",
+                    "reading_time_minutes",
+                    "is_featured",
+                    "featured_image",
+                    "tags",
+                    "keywords",
+                    "translations"
+                  ]
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request / validation error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "type": "string",
+                      "const": "VALIDATION_ERROR",
+                      "description": "Standardized validation error code"
+                    },
+                    "error": {
+                      "type": "string",
+                      "description": "Validation error explanation"
+                    },
+                    "message": {
+                      "description": "Detailed validation error information",
+                      "type": "string"
+                    }
+                  },
+                  "required": ["code", "error"]
+                },
+                "example": {
+                  "code": "VALIDATION_ERROR",
+                  "error": "Invalid parameter 'lang': Expected 'en' | 'es' | ...",
+                  "message": "Validation failed"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Article not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "type": "string",
+                      "const": "NOT_FOUND",
+                      "description": "Standardized resource not found error code"
+                    },
+                    "error": {
+                      "type": "string",
+                      "description": "Not found error explanation"
+                    },
+                    "message": {
+                      "description": "Not found message",
+                      "type": "string"
+                    }
+                  },
+                  "required": ["code", "error"]
+                },
+                "example": {
+                  "code": "NOT_FOUND",
+                  "error": "Article 'slug' not found",
+                  "message": "Article 'slug' not found"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "type": "string",
+                      "const": "INTERNAL_SERVER_ERROR",
+                      "description": "Standardized internal server error code"
+                    },
+                    "error": {
+                      "type": "string",
+                      "description": "Internal error explanation"
+                    },
+                    "message": {
+                      "description": "Optional error message",
+                      "type": "string"
+                    }
+                  },
+                  "required": ["code", "error"]
+                },
+                "example": {
+                  "code": "INTERNAL_SERVER_ERROR",
+                  "error": "Internal server error",
+                  "message": "Database query execution failed"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/pages": {
+      "get": {
+        "tags": ["Pages"],
+        "summary": "Get localized static pages list",
+        "parameters": [
+          {
+            "name": "lang",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "ar",
+                "de",
+                "en",
+                "es",
+                "fr",
+                "hi",
+                "hu",
+                "it",
+                "ja",
+                "ko",
+                "pl",
+                "pt",
+                "ru",
+                "tr",
+                "zh"
+              ]
+            },
+            "description": "ISO language code"
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "default": 20,
+              "type": "number",
+              "minimum": 1,
+              "maximum": 100
+            },
+            "description": "Max number of items (default 20, max 100)"
+          },
+          {
+            "name": "offset",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "default": 0,
+              "type": "number",
+              "minimum": 0
+            },
+            "description": "Pagination offset (default 0)"
+          },
+          {
+            "name": "q",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Search query string (matches title, summary, or content)"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Paginated list of localized static pages",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "total": {
+                      "type": "number",
+                      "description": "Total count of items matching the query"
+                    },
+                    "limit": {
+                      "type": "number",
+                      "description": "Max number of items per page"
+                    },
+                    "offset": {
+                      "type": "number",
+                      "description": "Offset number of items skipped"
+                    },
+                    "items": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "id": {
+                            "type": "string",
+                            "description": "Deterministic UUID v5 identifier"
+                          },
+                          "page_group": {
+                            "type": "string",
+                            "description": "Canonical page group identifier"
+                          },
+                          "slug": {
+                            "type": "string",
+                            "description": "Localized page slug identifier"
+                          },
+                          "lang": {
+                            "type": "string",
+                            "enum": [
+                              "ar",
+                              "de",
+                              "en",
+                              "es",
+                              "fr",
+                              "hi",
+                              "hu",
+                              "it",
+                              "ja",
+                              "ko",
+                              "pl",
+                              "pt",
+                              "ru",
+                              "tr",
+                              "zh"
+                            ],
+                            "description": "ISO language code"
+                          },
+                          "title": {
+                            "type": "string",
+                            "description": "Page title"
+                          },
+                          "summary": {
+                            "description": "Short page summary or meta description",
+                            "type": ["string", "null"]
+                          },
+                          "content": {
+                            "type": "string",
+                            "description": "Full page Markdown content"
+                          },
+                          "author": {
+                            "description": "Page author",
+                            "type": ["string", "null"]
+                          },
+                          "published_at": {
+                            "description": "ISO publication timestamp",
+                            "type": ["string", "null"]
+                          },
+                          "reading_time_minutes": {
+                            "type": "number",
+                            "description": "Estimated reading time in minutes"
+                          },
+                          "created_at": {
+                            "type": "string",
+                            "description": "ISO creation timestamp"
+                          },
+                          "updated_at": {
+                            "type": "string",
+                            "description": "ISO update timestamp"
+                          }
+                        },
+                        "required": [
+                          "id",
+                          "page_group",
+                          "slug",
+                          "lang",
+                          "title",
+                          "summary",
+                          "content",
+                          "author",
+                          "published_at",
+                          "reading_time_minutes",
+                          "created_at",
+                          "updated_at"
+                        ],
+                        "additionalProperties": false
+                      },
+                      "description": "Paginated list of localized static pages"
+                    }
+                  },
+                  "required": ["total", "limit", "offset", "items"]
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request / validation error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "type": "string",
+                      "const": "VALIDATION_ERROR",
+                      "description": "Standardized validation error code"
+                    },
+                    "error": {
+                      "type": "string",
+                      "description": "Validation error explanation"
+                    },
+                    "message": {
+                      "description": "Detailed validation error information",
+                      "type": "string"
+                    }
+                  },
+                  "required": ["code", "error"]
+                },
+                "example": {
+                  "code": "VALIDATION_ERROR",
+                  "error": "Invalid parameter 'lang': Expected 'en' | 'es' | ...",
+                  "message": "Validation failed"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "type": "string",
+                      "const": "INTERNAL_SERVER_ERROR",
+                      "description": "Standardized internal server error code"
+                    },
+                    "error": {
+                      "type": "string",
+                      "description": "Internal error explanation"
+                    },
+                    "message": {
+                      "description": "Optional error message",
+                      "type": "string"
+                    }
+                  },
+                  "required": ["code", "error"]
+                },
+                "example": {
+                  "code": "INTERNAL_SERVER_ERROR",
+                  "error": "Internal server error",
+                  "message": "Database query execution failed"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/pages/{slug}": {
+      "get": {
+        "tags": ["Pages"],
+        "summary": "Get static page by slug with optional translation filter",
+        "parameters": [
+          {
+            "name": "slug",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Page slug identifier"
+          },
+          {
+            "name": "lang",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "ar",
+                "de",
+                "en",
+                "es",
+                "fr",
+                "hi",
+                "hu",
+                "it",
+                "ja",
+                "ko",
+                "pl",
+                "pt",
+                "ru",
+                "tr",
+                "zh"
+              ]
+            },
+            "description": "ISO language code"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Static page item with available alternative translations",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string",
+                      "description": "Deterministic UUID v5 identifier"
+                    },
+                    "page_group": {
+                      "type": "string",
+                      "description": "Canonical page group identifier"
+                    },
+                    "slug": {
+                      "type": "string",
+                      "description": "Localized page slug identifier"
+                    },
+                    "lang": {
+                      "type": "string",
+                      "enum": [
+                        "ar",
+                        "de",
+                        "en",
+                        "es",
+                        "fr",
+                        "hi",
+                        "hu",
+                        "it",
+                        "ja",
+                        "ko",
+                        "pl",
+                        "pt",
+                        "ru",
+                        "tr",
+                        "zh"
+                      ],
+                      "description": "ISO language code"
+                    },
+                    "title": {
+                      "type": "string",
+                      "description": "Page title"
+                    },
+                    "summary": {
+                      "description": "Short page summary or meta description",
+                      "type": ["string", "null"]
+                    },
+                    "content": {
+                      "type": "string",
+                      "description": "Full page Markdown content"
+                    },
+                    "author": {
+                      "description": "Page author",
+                      "type": ["string", "null"]
+                    },
+                    "published_at": {
+                      "description": "ISO publication timestamp",
+                      "type": ["string", "null"]
+                    },
+                    "reading_time_minutes": {
+                      "type": "number",
+                      "description": "Estimated reading time in minutes"
+                    },
+                    "created_at": {
+                      "type": "string",
+                      "description": "ISO creation timestamp"
+                    },
+                    "updated_at": {
+                      "type": "string",
+                      "description": "ISO update timestamp"
+                    },
+                    "translations": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "lang": {
+                            "type": "string",
+                            "enum": [
+                              "ar",
+                              "de",
+                              "en",
+                              "es",
+                              "fr",
+                              "hi",
+                              "hu",
+                              "it",
+                              "ja",
+                              "ko",
+                              "pl",
+                              "pt",
+                              "ru",
+                              "tr",
+                              "zh"
+                            ],
+                            "description": "ISO language code"
+                          },
+                          "slug": {
+                            "type": "string",
+                            "description": "Localized page slug identifier"
+                          },
+                          "title": {
+                            "type": "string",
+                            "description": "Page title"
+                          }
+                        },
+                        "required": ["lang", "slug", "title"],
+                        "additionalProperties": false
+                      },
+                      "description": "Available alternative translations for this page"
+                    }
+                  },
+                  "required": [
+                    "id",
+                    "page_group",
+                    "slug",
+                    "lang",
+                    "title",
+                    "summary",
+                    "content",
+                    "author",
+                    "published_at",
+                    "reading_time_minutes",
+                    "created_at",
+                    "updated_at",
+                    "translations"
+                  ]
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request / validation error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "type": "string",
+                      "const": "VALIDATION_ERROR",
+                      "description": "Standardized validation error code"
+                    },
+                    "error": {
+                      "type": "string",
+                      "description": "Validation error explanation"
+                    },
+                    "message": {
+                      "description": "Detailed validation error information",
+                      "type": "string"
+                    }
+                  },
+                  "required": ["code", "error"]
+                },
+                "example": {
+                  "code": "VALIDATION_ERROR",
+                  "error": "Invalid parameter 'lang': Expected 'en' | 'es' | ...",
+                  "message": "Validation failed"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Page not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "type": "string",
+                      "const": "NOT_FOUND",
+                      "description": "Standardized resource not found error code"
+                    },
+                    "error": {
+                      "type": "string",
+                      "description": "Not found error explanation"
+                    },
+                    "message": {
+                      "description": "Not found message",
+                      "type": "string"
+                    }
+                  },
+                  "required": ["code", "error"]
+                },
+                "example": {
+                  "code": "NOT_FOUND",
+                  "error": "Page 'slug' not found",
+                  "message": "Page 'slug' not found"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "type": "string",
+                      "const": "INTERNAL_SERVER_ERROR",
+                      "description": "Standardized internal server error code"
+                    },
+                    "error": {
+                      "type": "string",
+                      "description": "Internal error explanation"
+                    },
+                    "message": {
+                      "description": "Optional error message",
+                      "type": "string"
+                    }
+                  },
+                  "required": ["code", "error"]
+                },
+                "example": {
+                  "code": "INTERNAL_SERVER_ERROR",
+                  "error": "Internal server error",
+                  "message": "Database query execution failed"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/tags": {
+      "get": {
+        "tags": ["Tags"],
+        "summary": "Get paginated article tag taxonomy",
+        "parameters": [
+          {
+            "name": "lang",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "ar",
+                "de",
+                "en",
+                "es",
+                "fr",
+                "hi",
+                "hu",
+                "it",
+                "ja",
+                "ko",
+                "pl",
+                "pt",
+                "ru",
+                "tr",
+                "zh"
+              ]
+            },
+            "description": "ISO language code"
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "default": 20,
+              "type": "number",
+              "minimum": 1,
+              "maximum": 100
+            },
+            "description": "Max number of items (default 20, max 100)"
+          },
+          {
+            "name": "offset",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "default": 0,
+              "type": "number",
+              "minimum": 0
+            },
+            "description": "Pagination offset (default 0)"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Paginated list of tag taxonomy items",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "total": {
+                      "type": "number",
+                      "description": "Total count of items matching the query"
+                    },
+                    "limit": {
+                      "type": "number",
+                      "description": "Max number of items per page"
+                    },
+                    "offset": {
+                      "type": "number",
+                      "description": "Offset number of items skipped"
+                    },
+                    "items": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "tag": {
+                            "type": "string",
+                            "description": "Tag name"
+                          },
+                          "lang": {
+                            "type": "string",
+                            "enum": [
+                              "ar",
+                              "de",
+                              "en",
+                              "es",
+                              "fr",
+                              "hi",
+                              "hu",
+                              "it",
+                              "ja",
+                              "ko",
+                              "pl",
+                              "pt",
+                              "ru",
+                              "tr",
+                              "zh"
+                            ],
+                            "description": "ISO language code of tag"
+                          },
+                          "count": {
+                            "type": "number",
+                            "description": "Number of articles associated with this tag"
+                          }
+                        },
+                        "required": ["tag", "lang", "count"],
+                        "additionalProperties": false
+                      },
+                      "description": "Paginated list of tag taxonomy items"
+                    }
+                  },
+                  "required": ["total", "limit", "offset", "items"]
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request / validation error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "type": "string",
+                      "const": "VALIDATION_ERROR",
+                      "description": "Standardized validation error code"
+                    },
+                    "error": {
+                      "type": "string",
+                      "description": "Validation error explanation"
+                    },
+                    "message": {
+                      "description": "Detailed validation error information",
+                      "type": "string"
+                    }
+                  },
+                  "required": ["code", "error"]
+                },
+                "example": {
+                  "code": "VALIDATION_ERROR",
+                  "error": "Invalid parameter 'lang': Expected 'en' | 'es' | ...",
+                  "message": "Validation failed"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "type": "string",
+                      "const": "INTERNAL_SERVER_ERROR",
+                      "description": "Standardized internal server error code"
+                    },
+                    "error": {
+                      "type": "string",
+                      "description": "Internal error explanation"
+                    },
+                    "message": {
+                      "description": "Optional error message",
+                      "type": "string"
+                    }
+                  },
+                  "required": ["code", "error"]
+                },
+                "example": {
+                  "code": "INTERNAL_SERVER_ERROR",
+                  "error": "Internal server error",
+                  "message": "Database query execution failed"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/images": {
+      "get": {
+        "tags": ["Images"],
+        "summary": "Get paginated list of transformed raster image assets and metadata",
+        "parameters": [
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "default": 20,
+              "type": "number",
+              "minimum": 1,
+              "maximum": 100
+            },
+            "description": "Max number of items (default 20, max 100)"
+          },
+          {
+            "name": "offset",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "default": 0,
+              "type": "number",
+              "minimum": 0
+            },
+            "description": "Pagination offset (default 0)"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Paginated list of transformed raster image assets",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "total": {
+                      "type": "number",
+                      "description": "Total count of items matching the query"
+                    },
+                    "limit": {
+                      "type": "number",
+                      "description": "Max number of items per page"
+                    },
+                    "offset": {
+                      "type": "number",
+                      "description": "Offset number of items skipped"
+                    },
+                    "items": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "name": {
+                            "type": "string",
+                            "description": "Original image asset base name"
+                          },
+                          "variants": {
+                            "type": "object",
+                            "properties": {
+                              "sm": {
+                                "type": "object",
+                                "properties": {
+                                  "url": {
+                                    "type": "string",
+                                    "description": "Publicly accessible URL to the image variant"
+                                  },
+                                  "width": {
+                                    "type": "number",
+                                    "description": "Width in pixels"
+                                  },
+                                  "height": {
+                                    "type": "number",
+                                    "description": "Height in pixels"
+                                  },
+                                  "format": {
+                                    "type": "string",
+                                    "description": "Image file format (e.g. webp)"
+                                  },
+                                  "file_size_bytes": {
+                                    "description": "File size in bytes",
+                                    "type": "number"
+                                  }
+                                },
+                                "required": [
+                                  "url",
+                                  "width",
+                                  "height",
+                                  "format"
+                                ],
+                                "additionalProperties": false
+                              },
+                              "lg": {
+                                "type": "object",
+                                "properties": {
+                                  "url": {
+                                    "type": "string",
+                                    "description": "Publicly accessible URL to the image variant"
+                                  },
+                                  "width": {
+                                    "type": "number",
+                                    "description": "Width in pixels"
+                                  },
+                                  "height": {
+                                    "type": "number",
+                                    "description": "Height in pixels"
+                                  },
+                                  "format": {
+                                    "type": "string",
+                                    "description": "Image file format (e.g. webp)"
+                                  },
+                                  "file_size_bytes": {
+                                    "description": "File size in bytes",
+                                    "type": "number"
+                                  }
+                                },
+                                "required": [
+                                  "url",
+                                  "width",
+                                  "height",
+                                  "format"
+                                ],
+                                "additionalProperties": false
+                              }
+                            },
+                            "additionalProperties": {
+                              "type": "object",
+                              "properties": {
+                                "url": {
+                                  "type": "string",
+                                  "description": "Publicly accessible URL to the image variant"
+                                },
+                                "width": {
+                                  "type": "number",
+                                  "description": "Width in pixels"
+                                },
+                                "height": {
+                                  "type": "number",
+                                  "description": "Height in pixels"
+                                },
+                                "format": {
+                                  "type": "string",
+                                  "description": "Image file format (e.g. webp)"
+                                },
+                                "file_size_bytes": {
+                                  "description": "File size in bytes",
+                                  "type": "number"
+                                }
+                              },
+                              "required": ["url", "width", "height", "format"],
+                              "additionalProperties": false
+                            },
+                            "description": "Responsive image variants map (e.g. sm, lg)"
+                          }
+                        },
+                        "required": ["name", "variants"],
+                        "additionalProperties": false
+                      },
+                      "description": "Paginated list of transformed raster image assets and metadata"
+                    }
+                  },
+                  "required": ["total", "limit", "offset", "items"]
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request / validation error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "type": "string",
+                      "const": "VALIDATION_ERROR",
+                      "description": "Standardized validation error code"
+                    },
+                    "error": {
+                      "type": "string",
+                      "description": "Validation error explanation"
+                    },
+                    "message": {
+                      "description": "Detailed validation error information",
+                      "type": "string"
+                    }
+                  },
+                  "required": ["code", "error"]
+                },
+                "example": {
+                  "code": "VALIDATION_ERROR",
+                  "error": "Invalid parameter 'limit': Expected number, received nan",
+                  "message": "Validation failed"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "type": "string",
+                      "const": "INTERNAL_SERVER_ERROR",
+                      "description": "Standardized internal server error code"
+                    },
+                    "error": {
+                      "type": "string",
+                      "description": "Internal error explanation"
+                    },
+                    "message": {
+                      "description": "Optional error message",
+                      "type": "string"
+                    }
+                  },
+                  "required": ["code", "error"]
+                },
+                "example": {
+                  "code": "INTERNAL_SERVER_ERROR",
+                  "error": "Internal server error",
+                  "message": "Database query execution failed"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

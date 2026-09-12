@@ -6,6 +6,7 @@ node_modules/
 # misc
 .DS_Store
 *.pem
+coverage/
 
 # Turbo
 .turbo
