@@ -59,6 +59,23 @@ describe('ArticleService', () => {
         }),
         listAll: jest.fn().mockResolvedValue([mockArticleItem]),
       } as unknown as ContentApiClient['articles'],
+      search: {
+        query: jest.fn().mockResolvedValue({
+          total: 1,
+          limit: 20,
+          offset: 0,
+          items: [
+            {
+              id: 'uuid-1',
+              type: 'article',
+              slug: 'test-article',
+              lang: 'en',
+              title: 'Test Article',
+              excerpt: 'This is a **Hello** world snippet.',
+            },
+          ],
+        }),
+      } as unknown as ContentApiClient['search'],
     };
 
     service = new ArticleService(mockClient as ContentApiClient);
@@ -127,6 +144,16 @@ describe('ArticleService', () => {
       expect(results).toHaveLength(1);
       expect(results[0].title).toBe('Test Article');
       expect(results[0].contextHighlight).toContain('<mark>Hello</mark>');
+      expect(mockClient.search?.query).toHaveBeenCalledWith(
+        {
+          q: 'Hello',
+          lang: 'en',
+          limit: 20,
+          offset: 0,
+          type: 'article',
+        },
+        expect.anything(),
+      );
     });
   });
 

@@ -4,10 +4,11 @@ import {
   CONTENT_CACHE_TAGS,
   type ContentApiClient,
   createContentClient,
-  createSearchSnippet,
+  formatSearchHighlight,
   type LanguageCode,
   type ListArticlesQueryParams,
   type ListArticlesResponse,
+  stripMarkdown,
 } from '@maw/content-sdk';
 import { type Container, injectable } from 'inversify';
 
@@ -67,12 +68,13 @@ export class ArticleService implements IArticleService {
     const take = query.paginate?.take ?? 20;
     const skip = query.paginate?.skip ?? 0;
 
-    const response = await this.client.articles.list(
+    const response = await this.client.search.query(
       {
         q: query.params.query,
         lang: query.params.locale as LanguageCode | undefined,
         limit: take,
         offset: skip,
+        type: 'article',
       },
       {
         next: { revalidate: 600, tags: [CONTENT_CACHE_TAGS.articles] },
@@ -84,8 +86,8 @@ export class ArticleService implements IArticleService {
         slug: item.slug,
         locale: item.lang,
       },
-      title: item.title,
-      contextHighlight: createSearchSnippet(item.content, query.params.query),
+      title: stripMarkdown(item.title),
+      contextHighlight: formatSearchHighlight(item.excerpt),
     }));
   }
 }

@@ -2,8 +2,9 @@
 
 import {
   createContentClient,
-  createSearchSnippet,
+  formatSearchHighlight,
   type LanguageCode,
+  stripMarkdown,
 } from '@maw/content-sdk';
 import { randomNumber } from '@maw/utils/random';
 import { useQuery } from '@tanstack/react-query';
@@ -33,11 +34,12 @@ export function useSearchQuery(query: ArticleSearchQuery) {
         );
       }
 
-      const response = await contentClient.articles.list({
+      const response = await contentClient.search.query({
         q: query.params.query,
         lang: query.params.locale as LanguageCode,
         limit: query.paginate?.take ?? 20,
         offset: query.paginate?.skip ?? 0,
+        type: 'article',
       });
 
       const duration = performance.now() - start;
@@ -47,8 +49,8 @@ export function useSearchQuery(query: ArticleSearchQuery) {
           slug: item.slug,
           locale: item.lang,
         },
-        title: item.title,
-        contextHighlight: createSearchSnippet(item.content, query.params.query),
+        title: stripMarkdown(item.title),
+        contextHighlight: formatSearchHighlight(item.excerpt),
       }));
 
       return {
