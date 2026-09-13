@@ -1,3 +1,8 @@
+import {
+  type LanguageCode,
+  renderMarkdown,
+  toCoverImages,
+} from '@maw/content-sdk';
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import { getDependencyContainer } from '@/core/di';
@@ -20,47 +25,36 @@ export async function generateMetadata({
   params,
 }: PageProps): Promise<Metadata> {
   const { slug, locale } = await params;
-  const lookup = { slug, locale };
   const container = getDependencyContainer();
   const articleService = await getArticleService(container);
-  const data = await articleService.getByLookup(lookup);
+  const data = await articleService.getBySlug(slug, locale as LanguageCode);
 
   if (!data) {
     return {};
   }
 
-  const allTranslations =
-    data.translations && data.translations.length > 0
-      ? data.translations.map((t) => ({
-          locale: t.lang,
-          slug: t.slug,
-          title: t.title,
-        }))
-      : (
-          await articleService.getMany({
-            params: { id: data.id },
-            paginate: { take: -1 },
-          })
-        ).items;
-
-  const canonicalTranslation =
-    allTranslations.find((t) => t.locale === i18nConfig.defaultLocale) ||
-    allTranslations[0];
+  const allTranslations = data.translations ?? [];
+  const canonicalTranslation = allTranslations.find(
+    (t) => t.lang === i18nConfig.defaultLocale,
+  ) ||
+    allTranslations[0] || { lang: locale, slug };
 
   const languages = Object.fromEntries(
-    allTranslations.map((t) => [t.locale, `/${t.locale}/articles/${t.slug}`]),
+    allTranslations.map((t) => [t.lang, `/${t.lang}/articles/${t.slug}`]),
   );
+
+  const coverImages = toCoverImages(data.featured_image);
 
   return {
     title: data.title,
     alternates: {
-      canonical: `/${canonicalTranslation.locale}/articles/${canonicalTranslation.slug}`,
+      canonical: `/${canonicalTranslation.lang}/articles/${canonicalTranslation.slug}`,
       languages,
     },
     openGraph: {
       title: data.title,
-      description: data.intro,
-      images: data.coverImages?.original,
+      description: data.summary,
+      images: coverImages?.original,
     },
   };
 }
@@ -72,12 +66,11 @@ export const generateStaticParams = async () => {
   const container = getDependencyContainer();
   const articleService = await getArticleService(container);
   for (const locale of locales) {
-    const articles = await articleService.getMany({
-      params: { locale },
-      paginate: { take: -1 },
+    const articles = await articleService.listAll({
+      lang: locale as LanguageCode,
     });
 
-    articles.items.forEach((article) => {
+    articles.forEach((article) => {
       paths.push({ slug: article.slug, locale });
     });
   }
@@ -87,21 +80,25 @@ export const generateStaticParams = async () => {
 
 export default async function Page({ params }: PageProps) {
   const { slug, locale } = await params;
-  const lookup = { slug, locale };
 
   const container = getDependencyContainer();
   const articleService = await getArticleService(container);
-  const datum = await articleService.getByLookup(lookup);
+  const datum = await articleService.getBySlug(slug, locale as LanguageCode);
 
   if (!datum) {
     return notFound();
   }
 
   const comments = await new CommentService().getByArticle(datum);
+  const renderedContent = renderMarkdown(datum.content);
 
   return (
     <PageLayout route="article.single" role="main" data-testid="article-item">
-      <ArticleItemPage article={datum} comments={comments} />
+      <ArticleItemPage
+        article={datum}
+        comments={comments}
+        renderedContent={renderedContent}
+      />
     </PageLayout>
   );
 }

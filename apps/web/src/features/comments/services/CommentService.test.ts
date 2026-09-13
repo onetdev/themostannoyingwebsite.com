@@ -1,5 +1,5 @@
 import 'reflect-metadata';
-import type { ArticleDatum } from '@/features/content/types';
+import type { Article } from '@/features/content/types';
 import { CommentService } from './CommentService';
 import { filterByDate } from './use-cases/filterByDate';
 import { generateTree } from './use-cases/generateTree';
@@ -16,16 +16,15 @@ describe('CommentService', () => {
 
   describe('getByArticle', () => {
     it('should call generateTree and filterByDate with correct arguments', async () => {
-      const mockArticle: ArticleDatum = {
-        assetGroupId: 'test-group',
-        content: 'test content',
+      const mockArticle: Partial<Article> = {
         id: '1',
-        isOnCover: false,
-        locale: 'en',
-        publishedAt: new Date('2023-01-01'),
+        article_group: 'test-group',
+        content: 'test content',
+        is_featured: false,
+        lang: 'en',
+        published_at: '2023-01-01T00:00:00.000Z',
         slug: 'test-article',
         title: 'Test Article',
-        url: '/articles/test-article',
       };
 
       const mockTree = [
@@ -40,11 +39,11 @@ describe('CommentService', () => {
       (generateTree as jest.Mock).mockReturnValue(mockTree);
       (filterByDate as jest.Mock).mockReturnValue(mockTree);
 
-      const result = await service.getByArticle(mockArticle);
+      const result = await service.getByArticle(mockArticle as Article);
 
       expect(generateTree).toHaveBeenCalledWith(
         mockArticle.slug,
-        mockArticle.publishedAt,
+        new Date(mockArticle.published_at as string),
         expect.objectContaining({ pool: expect.any(Object) }),
       );
       expect(filterByDate).toHaveBeenCalledWith(mockTree, expect.any(Number));

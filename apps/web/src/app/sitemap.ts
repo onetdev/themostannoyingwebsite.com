@@ -1,6 +1,6 @@
 import type { MetadataRoute } from 'next';
 import type { Languages } from 'next/dist/lib/metadata/types/alternative-urls-types';
-import type { ArticleDatum } from '@/features/content/types';
+import type { ArticleListItem } from '@/features/content/types';
 
 import './bootstrap/di';
 import { getDependencyContainer } from '@/core/di';
@@ -40,23 +40,20 @@ const commonPageMeta = (
   };
 };
 
-const mapArticleToSitemapEntry = (item: ArticleDatum) => {
+const mapArticleToSitemapEntry = (item: ArticleListItem) => {
   return {
-    url: `${config.publicUrl}/${item.locale}/articles/${item.slug}/`,
-    lastModified: new Date(item.updatedAt || item.publishedAt),
+    url: `${config.publicUrl}/${item.lang}/articles/${item.slug}/`,
+    lastModified: new Date(item.published_at),
   } satisfies MetadataRoute.Sitemap[0];
 };
 
 async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const di = getDependencyContainer();
   const service = await getArticleService(di);
-  const articleResults = await service.getMany({
-    params: {},
-    paginate: { take: -1, skip: 0 },
-  });
-  const articles = articleResults.items
+  const articlesList = await service.listAll();
+  const articles = articlesList
     .filter((item) =>
-      (i18nConfig.locales as readonly string[]).includes(item.locale),
+      (i18nConfig.locales as readonly string[]).includes(item.lang),
     )
     .map(mapArticleToSitemapEntry);
 

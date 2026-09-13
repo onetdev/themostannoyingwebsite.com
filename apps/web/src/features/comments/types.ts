@@ -1,4 +1,4 @@
-import type { ArticleDatum } from '@/features/content/types';
+import type { Article, ArticleListItem } from '@/features/content/types';
 import type commentsEnLocale from './i18n/en';
 import type { Comment } from './schemas';
 import type { SeededCommentsOptions } from './services/use-cases/generateTree';
@@ -11,7 +11,7 @@ export type CommentsI18nShape = typeof commentsEnLocale;
 
 export interface CommentService {
   getByArticle(
-    item: ArticleDatum,
+    item: Article | ArticleListItem,
     options?: SeededCommentsOptions,
   ): Promise<Comment[]>;
 }
