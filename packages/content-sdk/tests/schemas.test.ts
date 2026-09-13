@@ -3,7 +3,7 @@ import {
   LanguageCode,
   ListArticlesQueryParams,
   ValidationErrorResponse,
-} from '../src/index.js';
+} from '../src/index';
 
 describe('Content SDK Zod Schemas', () => {
   describe('LanguageCode', () => {

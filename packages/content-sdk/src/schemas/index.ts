@@ -1,1 +1,1 @@
-export * from '../generated/endpoints.js';
+export * from '../generated/endpoints';

@@ -2,9 +2,9 @@ import {
   type ListImagesQueryParams,
   ListImagesResponse,
   type ListImagesResponse as ListImagesResponseType,
-} from '../../generated/endpoints.js';
-import type { HttpTransport } from '../http.js';
-import type { RequestOptions } from '../types.js';
+} from '../../generated/endpoints';
+import type { HttpTransport } from '../http';
+import type { RequestOptions } from '../types';
 
 export class ImagesResource {
   constructor(private readonly transport: HttpTransport) {}

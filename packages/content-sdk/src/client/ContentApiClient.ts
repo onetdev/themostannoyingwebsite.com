@@ -1,10 +1,10 @@
-import { HttpTransport } from './http.js';
-import { ArticlesResource } from './resources/articles.js';
-import { HealthResource } from './resources/health.js';
-import { ImagesResource } from './resources/images.js';
-import { PagesResource } from './resources/pages.js';
-import { TagsResource } from './resources/tags.js';
-import type { ContentClientOptions } from './types.js';
+import { HttpTransport } from './http';
+import { ArticlesResource } from './resources/articles';
+import { HealthResource } from './resources/health';
+import { ImagesResource } from './resources/images';
+import { PagesResource } from './resources/pages';
+import { TagsResource } from './resources/tags';
+import type { ContentClientOptions } from './types';
 
 export class ContentApiClient {
   readonly articles: ArticlesResource;

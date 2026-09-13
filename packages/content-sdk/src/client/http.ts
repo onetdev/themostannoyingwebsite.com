@@ -7,13 +7,13 @@ import {
   ContentApiNotFoundError,
   ContentApiServerError,
   ContentApiValidationError,
-} from './errors.js';
+} from './errors';
 import {
   type ContentClientOptions,
   DEFAULT_BASE_URL,
   DEFAULT_TIMEOUT_MS,
   type RequestOptions,
-} from './types.js';
+} from './types';
 
 export class HttpTransport {
   private readonly kyInstance: KyInstance;

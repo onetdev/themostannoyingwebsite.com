@@ -3,9 +3,9 @@ import {
   type GetApiHealthResponse as GetApiHealthResponseType,
   GetHealthResponse,
   type GetHealthResponse as GetHealthResponseType,
-} from '../../generated/endpoints.js';
-import type { HttpTransport } from '../http.js';
-import type { RequestOptions } from '../types.js';
+} from '../../generated/endpoints';
+import type { HttpTransport } from '../http';
+import type { RequestOptions } from '../types';
 
 export class HealthResource {
   constructor(private readonly transport: HttpTransport) {}

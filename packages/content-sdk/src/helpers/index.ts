@@ -3,4 +3,4 @@ export {
   getBestImageVariant,
   getDefaultImageVariant,
   getImageVariantUrl,
-} from './images.js';
+} from './images';

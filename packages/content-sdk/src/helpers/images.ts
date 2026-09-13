@@ -1,7 +1,4 @@
-import type {
-  ApiImageWrapper,
-  ImageVariantInfo,
-} from '../generated/endpoints.js';
+import type { ApiImageWrapper, ImageVariantInfo } from '../generated/endpoints';
 
 /**
  * Returns the default image variant from an image asset, or the first available variant.

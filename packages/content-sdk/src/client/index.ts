@@ -1,7 +1,7 @@
 export {
   ContentApiClient,
   createContentClient,
-} from './ContentApiClient.js';
+} from './ContentApiClient';
 export {
   ContentApiCorsError,
   ContentApiError,
@@ -9,16 +9,16 @@ export {
   ContentApiNotFoundError,
   ContentApiServerError,
   ContentApiValidationError,
-} from './errors.js';
-export { HttpTransport } from './http.js';
-export { ArticlesResource } from './resources/articles.js';
-export { HealthResource } from './resources/health.js';
-export { ImagesResource } from './resources/images.js';
-export { PagesResource } from './resources/pages.js';
-export { TagsResource } from './resources/tags.js';
+} from './errors';
+export { HttpTransport } from './http';
+export { ArticlesResource } from './resources/articles';
+export { HealthResource } from './resources/health';
+export { ImagesResource } from './resources/images';
+export { PagesResource } from './resources/pages';
+export { TagsResource } from './resources/tags';
 export {
   type ContentClientOptions,
   DEFAULT_BASE_URL,
   DEFAULT_TIMEOUT_MS,
   type RequestOptions,
-} from './types.js';
+} from './types';

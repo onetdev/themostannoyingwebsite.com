@@ -1,3 +1,3 @@
-export * from './client/index.js';
-export * from './generated/endpoints.js';
-export * from './helpers/index.js';
+export * from './client/index';
+export * from './generated/endpoints';
+export * from './helpers/index';

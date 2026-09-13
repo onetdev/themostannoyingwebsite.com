@@ -3,7 +3,7 @@ import {
   ContentApiClient,
   createContentClient,
   DEFAULT_BASE_URL,
-} from '../src/index.js';
+} from '../src/index';
 
 function getUrlString(input: string | URL | Request): string {
   if (typeof input === 'string') {

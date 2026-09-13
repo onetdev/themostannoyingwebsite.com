@@ -7,7 +7,7 @@ import {
   ContentApiNotFoundError,
   ContentApiServerError,
   ContentApiValidationError,
-} from '../src/index.js';
+} from '../src/index';
 
 describe('Content API Errors', () => {
   describe('Error Classes', () => {

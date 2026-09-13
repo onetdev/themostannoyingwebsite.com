@@ -2,9 +2,9 @@ import {
   type ListTagsQueryParams,
   ListTagsResponse,
   type ListTagsResponse as ListTagsResponseType,
-} from '../../generated/endpoints.js';
-import type { HttpTransport } from '../http.js';
-import type { RequestOptions } from '../types.js';
+} from '../../generated/endpoints';
+import type { HttpTransport } from '../http';
+import type { RequestOptions } from '../types';
 
 export class TagsResource {
   constructor(private readonly transport: HttpTransport) {}

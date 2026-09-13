@@ -5,9 +5,9 @@ import {
   type ListPagesQueryParams,
   ListPagesResponse,
   type ListPagesResponse as ListPagesResponseType,
-} from '../../generated/endpoints.js';
-import type { HttpTransport } from '../http.js';
-import type { RequestOptions } from '../types.js';
+} from '../../generated/endpoints';
+import type { HttpTransport } from '../http';
+import type { RequestOptions } from '../types';
 
 export class PagesResource {
   constructor(private readonly transport: HttpTransport) {}

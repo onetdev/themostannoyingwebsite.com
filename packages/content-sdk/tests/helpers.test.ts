@@ -1,9 +1,9 @@
-import type { ApiImageWrapper } from '../src/generated/endpoints.js';
+import type { ApiImageWrapper } from '../src/generated/endpoints';
 import {
   getBestImageVariant,
   getDefaultImageVariant,
   getImageVariantUrl,
-} from '../src/helpers/images.js';
+} from '../src/helpers/images';
 
 describe('Image Variant Helpers', () => {
   const mockImage: ApiImageWrapper = {
