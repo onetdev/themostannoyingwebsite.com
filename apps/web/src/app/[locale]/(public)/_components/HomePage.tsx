@@ -1,17 +1,16 @@
+import type { Article, ArticleListItem } from '@maw/content-sdk';
 import { getTranslations } from 'next-intl/server';
-
 import {
   LargeCoverItem,
   SmallCoverListItem,
   TextListItem,
 } from '@/features/content/components';
-import type { ArticleDatum } from '@/features/content/types';
 import { WanAPhoneCampaignAd } from '@/features/marketing/components';
 
 type HomePageProps = {
-  coverArticle?: ArticleDatum;
-  denseArticleList: ArticleDatum[];
-  smallCoverArticleList: ArticleDatum[];
+  coverArticle?: Article | ArticleListItem;
+  denseArticleList: (Article | ArticleListItem)[];
+  smallCoverArticleList: (Article | ArticleListItem)[];
 };
 
 export async function HomePage({

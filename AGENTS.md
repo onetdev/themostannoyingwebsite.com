@@ -18,7 +18,7 @@ This is a **Turborepo** monorepo managed with **pnpm**.
 - `apps/web`: The main Next.js application. (See `apps/web/AGENTS.md` for specific rules).
 - `apps/ui-docs`: Storybook for the design system.
 - `packages/ui-lib`: Shared UI components (shadcn-based).
-- `packages/content-api`: Static content management.
+- `packages/content-sdk`: Client SDK for the headless Content API.
 - `packages/logger`: Shared logging utility.
 - `packages/utils`: General helper functions.
 - `packages/config-*`: Shared configurations (Jest, TS).

@@ -1,12 +1,14 @@
-import type { ApiImageWrapper } from '../src/generated/endpoints';
+import type { ImageAsset } from '../src/generated/endpoints';
 import {
   getBestImageVariant,
   getDefaultImageVariant,
+  getImageSrcSet,
   getImageVariantUrl,
+  toCoverImages,
 } from '../src/helpers/images';
 
 describe('Image Variant Helpers', () => {
-  const mockImage: ApiImageWrapper = {
+  const mockImage: ImageAsset = {
     name: 'hero-banner.png',
     variants: {
       sm: {
@@ -49,7 +51,7 @@ describe('Image Variant Helpers', () => {
     });
 
     it('falls back to the first available variant if none is marked default', () => {
-      const noDefaultImage: ApiImageWrapper = {
+      const noDefaultImage: ImageAsset = {
         name: 'no-default.png',
         variants: {
           first: {
@@ -117,6 +119,34 @@ describe('Image Variant Helpers', () => {
 
     it('returns undefined if image is null/undefined', () => {
       expect(getImageVariantUrl(null)).toBeUndefined();
+    });
+  });
+
+  describe('toCoverImages', () => {
+    it('maps image variants to { original, thumbnail } correctly', () => {
+      const cover = toCoverImages(mockImage);
+      expect(cover?.original).toBe('https://cdn.example.com/hero-lg.avif');
+      expect(cover?.thumbnail).toBe('https://cdn.example.com/hero-sm.webp');
+    });
+
+    it('returns undefined if image has no variants', () => {
+      expect(toCoverImages(undefined)).toBeUndefined();
+      expect(toCoverImages(null)).toBeUndefined();
+      expect(toCoverImages({ name: 'test', variants: {} })).toBeUndefined();
+    });
+  });
+
+  describe('getImageSrcSet', () => {
+    it('generates a standard srcSet string', () => {
+      const srcSet = getImageSrcSet(mockImage);
+      expect(srcSet).toContain('https://cdn.example.com/hero-sm.webp 480w');
+      expect(srcSet).toContain('https://cdn.example.com/hero-md.webp 800w');
+      expect(srcSet).toContain('https://cdn.example.com/hero-lg.avif 1200w');
+    });
+
+    it('returns undefined if image has no variants', () => {
+      expect(getImageSrcSet(undefined)).toBeUndefined();
+      expect(getImageSrcSet({ name: 'empty', variants: {} })).toBeUndefined();
     });
   });
 });

@@ -40,7 +40,7 @@ src/features/[feature-name]/
 
 The web app leverages several internal packages to maintain a clean separation of concerns:
 - `@maw/ui-lib`: Shared design system containing Radix UI-based components and global styles.
-- `@maw/content-api`: Internal API/SDK for managing and retrieving application content.
+- `@maw/content-sdk`: Strongly-typed client SDK for retrieving application content from Headless CMS.
 - `@maw/logger` & `@maw/utils`: Cross-project logging infrastructure and common TypeScript helpers.
 
 ## Key Architectural Patterns

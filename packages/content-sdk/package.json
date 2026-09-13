@@ -22,6 +22,8 @@
   },
   "dependencies": {
     "ky": "catalog:",
+    "marked": "catalog:",
+    "sanitize-html": "catalog:",
     "zod": "catalog:"
   },
   "devDependencies": {
@@ -30,6 +32,7 @@
     "@maw/config-ts": "workspace:*",
     "@types/jest": "catalog:",
     "@types/node": "catalog:",
+    "@types/sanitize-html": "catalog:",
     "@jest/globals": "^30.3.0",
     "jest": "catalog:",
     "orval": "^8.31.0",

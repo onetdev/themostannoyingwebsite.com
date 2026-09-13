@@ -112,7 +112,7 @@ packages/
   utils      – shared utilities
   logger     – shared logging
   config-*   – shared configuration
-  content-api – content and article system
+  content-sdk – headless content API client SDK
 ```
 
 Detailed architecture documentation can be found in:

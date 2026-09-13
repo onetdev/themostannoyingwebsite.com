@@ -24,6 +24,7 @@ describe('ContentApiClient', () => {
     expect(client.tags).toBeDefined();
     expect(client.images).toBeDefined();
     expect(client.health).toBeDefined();
+    expect(client.search).toBeDefined();
   });
 
   describe('articles resource', () => {
@@ -435,6 +436,212 @@ describe('ContentApiClient', () => {
         }
       ).transport.get('///health');
       expect(capturedUrl).toBe('https://test-api.example.com/health');
+    });
+
+    it('resolves baseUrl from environment variables if not provided', () => {
+      const originalEnv = process.env.CONTENT_API_URL;
+      process.env.CONTENT_API_URL = 'https://custom-env-api.example.com';
+
+      const client = createContentClient();
+      expect(client).toBeInstanceOf(ContentApiClient);
+
+      if (originalEnv !== undefined) {
+        process.env.CONTENT_API_URL = originalEnv;
+      } else {
+        delete process.env.CONTENT_API_URL;
+      }
+    });
+
+    it('articles.listAll auto-paginates across pages', async () => {
+      let callCount = 0;
+      const mockFetch = jest.fn<typeof fetch>().mockImplementation(async () => {
+        callCount++;
+        if (callCount === 1) {
+          return new Response(
+            JSON.stringify({
+              total: 3,
+              limit: 100,
+              offset: 0,
+              items: [
+                {
+                  id: '00000000-0000-0000-0000-000000000001',
+                  article_group: 'g1',
+                  slug: 'art-1',
+                  lang: 'en',
+                  title: 'Art 1',
+                  summary: 'Sum 1',
+                  content: 'Cont 1',
+                  author: 'Author',
+                  published_at: '2026-09-01T00:00:00.000Z',
+                  reading_time_minutes: 1,
+                  is_featured: false,
+                  featured_image: {
+                    name: 'img.webp',
+                    variants: {
+                      def: {
+                        url: 'https://example.com/img.webp',
+                        width: 800,
+                        height: 600,
+                        format: 'webp',
+                        default: true,
+                      },
+                    },
+                  },
+                  tags: [],
+                  keywords: [],
+                },
+                {
+                  id: '00000000-0000-0000-0000-000000000002',
+                  article_group: 'g2',
+                  slug: 'art-2',
+                  lang: 'en',
+                  title: 'Art 2',
+                  summary: 'Sum 2',
+                  content: 'Cont 2',
+                  author: 'Author',
+                  published_at: '2026-09-01T00:00:00.000Z',
+                  reading_time_minutes: 1,
+                  is_featured: false,
+                  featured_image: {
+                    name: 'img2.webp',
+                    variants: {
+                      def: {
+                        url: 'https://example.com/img2.webp',
+                        width: 800,
+                        height: 600,
+                        format: 'webp',
+                        default: true,
+                      },
+                    },
+                  },
+                  tags: [],
+                  keywords: [],
+                },
+              ],
+            }),
+            { status: 200, headers: { 'Content-Type': 'application/json' } },
+          );
+        }
+        return new Response(
+          JSON.stringify({
+            total: 3,
+            limit: 100,
+            offset: 2,
+            items: [
+              {
+                id: '00000000-0000-0000-0000-000000000003',
+                article_group: 'g3',
+                slug: 'art-3',
+                lang: 'en',
+                title: 'Art 3',
+                summary: 'Sum 3',
+                content: 'Cont 3',
+                author: 'Author',
+                published_at: '2026-09-01T00:00:00.000Z',
+                reading_time_minutes: 1,
+                is_featured: false,
+                featured_image: {
+                  name: 'img3.webp',
+                  variants: {
+                    def: {
+                      url: 'https://example.com/img3.webp',
+                      width: 800,
+                      height: 600,
+                      format: 'webp',
+                      default: true,
+                    },
+                  },
+                },
+                tags: [],
+                keywords: [],
+              },
+            ],
+          }),
+          { status: 200, headers: { 'Content-Type': 'application/json' } },
+        );
+      });
+
+      const client = new ContentApiClient({
+        baseUrl: 'https://test-api.example.com/',
+        fetch: mockFetch,
+      });
+
+      const all = await client.articles.listAll({ lang: 'en' });
+      expect(all.length).toBe(3);
+      expect(callCount).toBe(2);
+    });
+
+    it('pages.listAll auto-paginates across pages', async () => {
+      const mockFetch = jest.fn<typeof fetch>().mockImplementation(async () => {
+        return new Response(
+          JSON.stringify({
+            total: 1,
+            limit: 100,
+            offset: 0,
+            items: [
+              {
+                id: '00000000-0000-0000-0000-000000000001',
+                page_group: 'pg-1',
+                slug: 'terms',
+                lang: 'en',
+                title: 'Terms',
+                summary: 'Summary',
+                content: 'Markdown content',
+                author: null,
+                published_at: null,
+                reading_time_minutes: 1,
+                created_at: '2026-09-01T00:00:00.000Z',
+                updated_at: '2026-09-01T00:00:00.000Z',
+              },
+            ],
+          }),
+          { status: 200, headers: { 'Content-Type': 'application/json' } },
+        );
+      });
+
+      const client = new ContentApiClient({
+        baseUrl: 'https://test-api.example.com/',
+        fetch: mockFetch,
+      });
+      const all = await client.pages.listAll({ lang: 'en' });
+      expect(all.length).toBe(1);
+    });
+  });
+
+  describe('search resource', () => {
+    it('calls GET api/v1/search with query parameters', async () => {
+      let capturedUrl = '';
+      const mockFetch = jest
+        .fn<typeof fetch>()
+        .mockImplementation(async (req) => {
+          capturedUrl = getUrlString(req);
+          return new Response(
+            JSON.stringify({
+              total: 1,
+              limit: 20,
+              offset: 0,
+              items: [
+                {
+                  id: '00000000-0000-0000-0000-000000000001',
+                  type: 'article',
+                  slug: 'sample-article',
+                  lang: 'en',
+                  title: 'Sample **Article**',
+                  excerpt: 'This is a sample **article** excerpt',
+                },
+              ],
+            }),
+            { status: 200, headers: { 'Content-Type': 'application/json' } },
+          );
+        });
+
+      const client = createContentClient({ fetch: mockFetch });
+      const result = await client.search.query({ q: 'Article', lang: 'en' });
+
+      expect(capturedUrl).toContain('/api/v1/search?q=Article&lang=en');
+      expect(result.items).toHaveLength(1);
+      expect(result.items[0].type).toBe('article');
+      expect(result.items[0].title).toBe('Sample **Article**');
     });
   });
 });

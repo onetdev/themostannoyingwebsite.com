@@ -1,16 +1,16 @@
+import type { Article, ArticleListItem } from '@maw/content-sdk';
 import type { ComponentProps } from 'react';
 import { Link } from '@/core/i18n/navigation';
-import type { ArticleDatum } from '../schemas';
 
 export type TextListItemProps = ComponentProps<'article'> & {
-  article: ArticleDatum;
+  article: Article | ArticleListItem;
 };
 
 export function TextListItem({ article, ...rest }: TextListItemProps) {
   return (
     <article {...rest}>
       <Link
-        href={article.url}
+        href={`/articles/${article.slug}`}
         passHref
         className="link-as-inherit hover-text-primary"
         prefetch={false}
@@ -20,9 +20,9 @@ export function TextListItem({ article, ...rest }: TextListItemProps) {
         </h4>
         <small
           className="text-card-foreground my-2 line-clamp-2"
-          title={article.intro}
+          title={article.summary}
         >
-          {article.intro}
+          {article.summary}
         </small>
       </Link>
     </article>

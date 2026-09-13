@@ -1,3 +1,4 @@
+import { createContentClient } from '@maw/content-sdk';
 import type { Container } from 'inversify';
 import { CoreSymbols } from '@/core/di/symbols';
 import { HttpClient } from '@/core/http/HttpClient';
@@ -33,6 +34,10 @@ export function configureCommonContainer(container: Container) {
     .to(AppConfigService)
     .inSingletonScope();
   container.bind(Symbols.HttpClient).to(HttpClient).inSingletonScope();
+  container
+    .bind(Symbols.ContentApiClient)
+    .toDynamicValue(() => createContentClient())
+    .inSingletonScope();
   container.bind(Symbols.AppService).to(AppService).inSingletonScope();
   container
     .bind(Symbols.SubscriptionPlansService)

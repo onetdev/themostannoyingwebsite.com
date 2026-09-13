@@ -16,7 +16,7 @@ ui-lib        – shared UI components
 utils         – shared utilities
 logger        – shared logging utilities
 config-*      – shared configuration presets
-content-api   – content system for articles and media
+content-sdk   – headless content API client SDK
 ```
 
 ## Application Architecture
@@ -129,16 +129,16 @@ Centralized logging abstraction.
 
 Shared configuration presets (TypeScript, Jest, etc).
 
-### `content-api`
+### `content-sdk`
 
-Content system used to store and retrieve:
+Strongly typed client SDK used to retrieve:
 
 - articles
-- metadata
-- images
-- other static content
+- static pages
+- taxonomy tags
+- responsive image variants
 
-Content is bundled at build time.
+Content is hosted externally by the headless Content API.
 
 ## Static-first philosophy
 

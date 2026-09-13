@@ -1,11 +1,14 @@
-import type { ApiImageWrapper, ImageVariantInfo } from '../generated/endpoints';
+import type { ImageAsset, ImageAssetVariant } from '../generated/endpoints';
+
+export type ApiImageWrapper = ImageAsset;
+export type ImageVariantInfo = ImageAssetVariant;
 
 /**
  * Returns the default image variant from an image asset, or the first available variant.
  */
 export function getDefaultImageVariant(
-  image?: ApiImageWrapper | null,
-): ImageVariantInfo | undefined {
+  image?: ImageAsset | null,
+): ImageAssetVariant | undefined {
   if (!image?.variants) {
     return undefined;
   }
@@ -31,9 +34,9 @@ export interface BestImageVariantOptions {
  * Selects the best image variant matching criteria such as min/max width and format.
  */
 export function getBestImageVariant(
-  image?: ApiImageWrapper | null,
+  image?: ImageAsset | null,
   options?: BestImageVariantOptions,
-): ImageVariantInfo | undefined {
+): ImageAssetVariant | undefined {
   if (!image?.variants) {
     return undefined;
   }
@@ -81,7 +84,7 @@ export function getBestImageVariant(
  * Convenience helper to get the URL for a specific image variant, or the default variant URL.
  */
 export function getImageVariantUrl(
-  image?: ApiImageWrapper | null,
+  image?: ImageAsset | null,
   variantKey?: string,
 ): string | undefined {
   if (!image?.variants) {
@@ -93,4 +96,54 @@ export function getImageVariantUrl(
   }
 
   return getDefaultImageVariant(image)?.url;
+}
+
+export interface CoverImages {
+  original: string;
+  thumbnail: string;
+}
+
+/**
+ * Convenience helper to map an ImageAsset to the cover images shape { original, thumbnail }.
+ */
+export function toCoverImages(
+  image?: ImageAsset | null,
+): CoverImages | undefined {
+  if (!image?.variants) {
+    return undefined;
+  }
+
+  const defaultOrLg =
+    image.variants.lg?.url ??
+    getDefaultImageVariant(image)?.url ??
+    getBestImageVariant(image, { minWidth: 1000 })?.url;
+
+  const thumbnailOrSm =
+    image.variants.sm?.url ??
+    getBestImageVariant(image, { maxWidth: 600 })?.url ??
+    defaultOrLg;
+
+  if (!defaultOrLg) {
+    return undefined;
+  }
+
+  return {
+    original: defaultOrLg,
+    thumbnail: thumbnailOrSm ?? defaultOrLg,
+  };
+}
+
+/**
+ * Builds a standard responsive HTML img srcSet string from all image variants.
+ */
+export function getImageSrcSet(image?: ImageAsset | null): string | undefined {
+  if (!image?.variants) {
+    return undefined;
+  }
+
+  const entries = Object.values(image.variants)
+    .filter((v) => v.url && v.width)
+    .map((v) => `${v.url} ${v.width}w`);
+
+  return entries.length > 0 ? entries.join(', ') : undefined;
 }
