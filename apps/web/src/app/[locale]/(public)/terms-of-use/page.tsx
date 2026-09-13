@@ -50,7 +50,7 @@ export default async function Page({ params }: NextPageProps) {
       </PageLayout>
     );
   } catch (_err) {
-    logger.debug(_err, 'Terms of use, redirecting to 404');
+    logger.debug('Terms of use, redirecting to 404', _err);
     notFound();
   }
 }

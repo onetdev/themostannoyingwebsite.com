@@ -28,14 +28,14 @@
   },
   "devDependencies": {
     "@biomejs/biome": "catalog:",
+    "@jest/globals": "^30.5.1",
     "@maw/config-jest": "workspace:*",
     "@maw/config-ts": "workspace:*",
     "@types/jest": "catalog:",
     "@types/node": "catalog:",
     "@types/sanitize-html": "catalog:",
-    "@jest/globals": "^30.3.0",
     "jest": "catalog:",
-    "orval": "^8.31.0",
+    "orval": "^8.33.0",
     "ts-jest": "catalog:",
     "tsx": "catalog:",
     "typescript": "catalog:"

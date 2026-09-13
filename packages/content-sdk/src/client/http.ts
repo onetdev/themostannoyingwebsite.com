@@ -27,7 +27,7 @@ export class HttpTransport {
     const prefixUrl = stripTrailingSlashes(rawBaseUrl);
 
     this.kyInstance = ky.create({
-      prefixUrl,
+      prefix: prefixUrl,
       timeout: options?.timeoutMs ?? DEFAULT_TIMEOUT_MS,
       retry: options?.retry ?? {
         limit: 2,
@@ -87,7 +87,13 @@ export class HttpTransport {
     if (error instanceof HTTPError) {
       const { response } = error;
       try {
-        const body = (await response.json()) as Record<string, unknown> | null;
+        let body: Record<string, unknown> | null = null;
+        if (error.data && typeof error.data === 'object') {
+          body = error.data as Record<string, unknown>;
+        } else if (!response.bodyUsed) {
+          body = (await response.json()) as Record<string, unknown> | null;
+        }
+
         const message =
           typeof body?.message === 'string' ? body.message : undefined;
         const errorText =

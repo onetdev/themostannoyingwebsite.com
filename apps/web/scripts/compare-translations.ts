@@ -6,7 +6,9 @@ import { flatten } from '@maw/utils/flatten';
 import { Command } from 'commander';
 
 const logger = getLogger().getSubLogger({
-  prettyLogTemplate: '{{dateIsoStr}} {{logLevelName}} ',
+  pretty: {
+    template: '{{dateIsoStr}} {{logLevelName}} ',
+  },
   name: 'compare-translations',
 });
 
@@ -107,7 +109,7 @@ async function main() {
         }
       }
     } catch (err) {
-      logger.error(err, `Error processing locale ${locale}`);
+      logger.error(`Error processing locale ${locale}`, err);
     }
   }
 

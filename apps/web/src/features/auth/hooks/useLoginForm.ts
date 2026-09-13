@@ -39,7 +39,7 @@ export function useLoginForm({ onSuccess }: LoginFormProps) {
         });
       }
     } catch (err: unknown) {
-      logger.warn(err, 'Login failed');
+      logger.warn('Login failed', err);
       methods.setError('root', { message: (err as Error).message });
     }
   };
