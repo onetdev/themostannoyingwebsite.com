@@ -1,5 +1,5 @@
 import createMDX from '@next/mdx';
-import { withSentryConfig } from '@sentry/nextjs';
+import { withSentryConfig } from '@sentry/nextjs/config';
 import createNextIntlPlugin from 'next-intl/plugin';
 
 import sentryConfig from './next-sentry.config.mjs';

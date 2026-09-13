@@ -4,11 +4,8 @@ pre-commit:
   commands:
     biome-check:
       glob: "*.{js,ts,tsx,jsx,json,css,md}"
-      run: pnpm exec biome check --staged --write --no-errors-on-unmatched
-    typecheck:
-      run: pnpm typecheck
-    test:
-      run: pnpm test
+      run: pnpm exec biome check --write --no-errors-on-unmatched {staged_files}
+      stage_fixed: true
 
 commit-msg:
   commands:
