@@ -12,10 +12,3 @@ export {
   type RenderMarkdownOptions,
   renderMarkdown,
 } from './markdown';
-
-export {
-  createSearchSnippet,
-  formatSearchHighlight,
-  type SearchSnippetOptions,
-  stripMarkdown,
-} from './search';

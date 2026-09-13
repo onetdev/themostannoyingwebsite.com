@@ -1,4 +1,9 @@
-import { parse as markedParse, Renderer, type Tokens } from 'marked';
+import {
+  parse as markedParse,
+  parseInline as markedParseInline,
+  Renderer,
+  type Tokens,
+} from 'marked';
 import sanitizeHtml from 'sanitize-html';
 
 export interface RenderMarkdownOptions {
@@ -11,6 +16,11 @@ export interface RenderMarkdownOptions {
    * Optional custom sanitize-html configuration options.
    */
   sanitizeOptions?: sanitizeHtml.IOptions;
+  /**
+   * Whether to render inline tokens only, without wrapping block elements like <p>.
+   * @default false
+   */
+  inline?: boolean;
 }
 
 const defaultSanitizeOptions: sanitizeHtml.IOptions = {
@@ -78,7 +88,11 @@ export function renderMarkdown(
     return `<div class="table-container">\n<table>\n<thead>\n${header}\n</thead>\n${body}\n</table></div>`;
   };
 
-  const html = markedParse(raw, { renderer, async: false }) as string;
+  const html = (
+    options?.inline
+      ? markedParseInline(raw, { async: false })
+      : markedParse(raw, { renderer, async: false })
+  ) as string;
 
   const shouldSanitize = options?.sanitize ?? true;
   if (shouldSanitize) {
