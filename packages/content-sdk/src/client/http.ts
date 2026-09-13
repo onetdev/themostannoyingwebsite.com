@@ -24,7 +24,7 @@ export class HttpTransport {
 
     const rawBaseUrl = options?.baseUrl ?? DEFAULT_BASE_URL;
     // Ensure baseUrl doesn't have trailing slash so prefixUrl behaves predictably
-    const prefixUrl = rawBaseUrl.replace(/\/+$/, '');
+    const prefixUrl = stripTrailingSlashes(rawBaseUrl);
 
     this.kyInstance = ky.create({
       prefixUrl,
@@ -48,7 +48,7 @@ export class HttpTransport {
     options?: RequestOptions,
   ): Promise<T> {
     // Ky prefixUrl disallows leading slashes in path
-    const cleanPath = path.replace(/^\/+/, '');
+    const cleanPath = stripLeadingSlashes(path);
     const searchParams = query ? cleanQueryParams(query) : undefined;
     const { timeoutMs, ...kyOptions } = options ?? {};
 
@@ -157,4 +157,20 @@ function cleanQueryParams(
   }
 
   return result;
+}
+
+function stripTrailingSlashes(str: string): string {
+  let end = str.length;
+  while (end > 0 && str.charCodeAt(end - 1) === 47 /* '/' */) {
+    end--;
+  }
+  return str.slice(0, end);
+}
+
+function stripLeadingSlashes(str: string): string {
+  let start = 0;
+  while (start < str.length && str.charCodeAt(start) === 47 /* '/' */) {
+    start++;
+  }
+  return str.slice(start);
 }

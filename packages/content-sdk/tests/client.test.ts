@@ -402,5 +402,39 @@ describe('ContentApiClient', () => {
       expect(capturedUrl).not.toContain('tag');
       expect(capturedUrl).toContain('q=%5Bobject+Object%5D');
     });
+
+    it('handles paths with leading slashes and baseUrls with trailing slashes safely without regex', async () => {
+      let capturedUrl = '';
+      const mockFetch = jest
+        .fn<typeof fetch>()
+        .mockImplementation(async (req) => {
+          capturedUrl = getUrlString(req);
+          return new Response(
+            JSON.stringify({
+              status: 'ok',
+              version: '1.0.0',
+              database: 'connected',
+              timestamp: '2026-09-01T00:00:00.000Z',
+            }),
+            { status: 200, headers: { 'Content-Type': 'application/json' } },
+          );
+        });
+
+      const client = new ContentApiClient({
+        baseUrl: 'https://test-api.example.com///',
+        fetch: mockFetch,
+      });
+
+      await client.health.check();
+      expect(capturedUrl).toBe('https://test-api.example.com/health');
+
+      // Test path with leading slashes
+      await (
+        client as unknown as {
+          transport: { get: (path: string) => Promise<unknown> };
+        }
+      ).transport.get('///health');
+      expect(capturedUrl).toBe('https://test-api.example.com/health');
+    });
   });
 });
