@@ -45,7 +45,6 @@
     "framer-motion": "catalog:",
     "html-react-parser": "^5.2.17",
     "inversify": "^8.1.0",
-    "isomorphic-dompurify": "^3.10.0",
     "ky": "catalog:",
     "next": "catalog:",
     "next-intl": "^4.9.2",
@@ -63,7 +62,6 @@
     "reflect-metadata": "^0.2.2",
     "remark-gfm": "^4.0.1",
     "rtl-detect": "^1.1.2",
-    "sanitize-html": "catalog:",
     "server-only": "^0.0.1",
     "zod": "catalog:",
     "zustand": "^5.0.12"
@@ -86,7 +84,6 @@
     "@types/react": "catalog:",
     "@types/react-dom": "catalog:",
     "@types/rtl-detect": "^1.0.3",
-    "@types/sanitize-html": "catalog:",
     "commander": "^14.0.3",
     "favicons": "^7.2.0",
     "jest": "catalog:",
