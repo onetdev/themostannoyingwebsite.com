@@ -6,16 +6,14 @@ import {
   createContentClient,
   createSearchSnippet,
   type LanguageCode,
-  renderMarkdown,
-  toCoverImages,
+  type ListArticlesQueryParams,
+  type ListArticlesResponse,
 } from '@maw/content-sdk';
 import { type Container, injectable } from 'inversify';
 
 import {
-  type ArticleData,
-  type ArticleDatum,
-  type ArticleLookupQuery,
-  type ArticleQuery,
+  type Article,
+  type ArticleListItem,
   type ArticleSearchQuery,
   type ArticleSearchResult,
   DI,
@@ -30,167 +28,37 @@ export class ArticleService implements IArticleService {
     this.client = args[0] ?? createContentClient();
   }
 
-  private mapToDatum(item: {
-    id: string;
-    article_group: string;
-    slug: string;
-    lang: string;
-    title: string;
-    summary: string;
-    content: string;
-    published_at: string;
-    is_featured: boolean;
-    reading_time_minutes?: number;
-    featured_image?: unknown;
-    tags?: string[];
-    keywords?: string[];
-    translations?: { lang: string; slug: string; title: string }[];
-  }): ArticleDatum {
-    return {
-      assetGroupId: item.article_group,
-      content: renderMarkdown(item.content),
-      coverImages: toCoverImages(item.featured_image as never),
-      id: item.id,
-      intro: item.summary,
-      isOnCover: item.is_featured,
-      locale: item.lang,
-      publishedAt: new Date(item.published_at),
-      slug: item.slug,
-      title: item.title,
-      url: `/articles/${item.slug}`,
-      readingTimeMinutes: item.reading_time_minutes,
-      tags: item.tags,
-      keywords: item.keywords,
-      translations: item.translations,
-    };
-  }
-
-  public async getByLookup(
-    filter: ArticleLookupQuery,
-  ): Promise<ArticleDatum | undefined> {
-    const requestOptions = {
-      next: { revalidate: 1800, tags: [CONTENT_CACHE_TAGS.articles] },
-    };
-
-    if (filter.slug) {
-      try {
-        const item = await this.client.articles.getBySlug(
-          filter.slug,
-          filter.locale ? { lang: filter.locale as LanguageCode } : undefined,
-          requestOptions,
-        );
-        const datum = this.mapToDatum(item);
-        if (
-          filter.isOnCover !== undefined &&
-          datum.isOnCover !== filter.isOnCover
-        ) {
-          return undefined;
-        }
-        return datum;
-      } catch (_err) {
-        // If not found by slug, fall back to querying
-      }
-    }
-
-    const listResponse = await this.getMany({
-      params: filter,
-      paginate: { take: 1, skip: 0 },
-    });
-
-    return listResponse.items[0];
-  }
-
-  public async getById(
-    id: string | number,
-    locale?: string,
-  ): Promise<ArticleDatum | undefined> {
-    return this.getByLookup({ id: id.toString(), locale });
-  }
-
-  public async getMany({
-    params,
-    sort = { date: 'desc' },
-    paginate,
-  }: ArticleQuery): Promise<ArticleData> {
-    const take = paginate?.take ?? 10;
-    const skip = paginate?.skip ?? 0;
-    const requestOptions = {
-      next: { revalidate: 1800, tags: [CONTENT_CACHE_TAGS.articles] },
-    };
-
-    if (take === -1) {
-      const items = await this.client.articles.listAll(
+  public async getBySlug(
+    slug: string,
+    lang?: LanguageCode,
+  ): Promise<Article | undefined> {
+    try {
+      return await this.client.articles.getBySlug(
+        slug,
+        lang ? { lang } : undefined,
         {
-          lang: params?.locale as LanguageCode | undefined,
-          is_featured: params?.isOnCover,
+          next: { revalidate: 1800, tags: [CONTENT_CACHE_TAGS.articles] },
         },
-        requestOptions,
       );
-
-      let results = items.map((i) => this.mapToDatum(i));
-
-      if (params?.id) {
-        results = results.filter(
-          (r) => r.id === params.id || r.assetGroupId === params.id,
-        );
-      }
-      if (params?.slug) {
-        results = results.filter((r) => r.slug === params.slug);
-      }
-
-      if (sort?.date) {
-        results.sort(
-          (a, b) =>
-            (a.publishedAt.getTime() - b.publishedAt.getTime()) *
-            (sort.date === 'asc' ? 1 : -1),
-        );
-      }
-
-      return {
-        items: results.slice(skip),
-        total: results.length,
-        take,
-        skip,
-      };
+    } catch (_err) {
+      return undefined;
     }
-
-    const response = await this.client.articles.list(
-      {
-        lang: params?.locale as LanguageCode | undefined,
-        is_featured: params?.isOnCover,
-        limit: take,
-        offset: skip,
-      },
-      requestOptions,
-    );
-
-    let items = response.items.map((i) => this.mapToDatum(i));
-
-    if (params?.id) {
-      items = items.filter(
-        (r) => r.id === params.id || r.assetGroupId === params.id,
-      );
-    }
-    if (params?.slug) {
-      items = items.filter((r) => r.slug === params.slug);
-    }
-
-    return {
-      items,
-      total: response.total,
-      take,
-      skip,
-    };
   }
 
-  public async getFirst(
-    query: ArticleQuery,
-  ): Promise<ArticleDatum | undefined> {
-    const results = await this.getMany({
-      ...query,
-      paginate: { take: 1, skip: 0 },
+  public async list(
+    params?: ListArticlesQueryParams,
+  ): Promise<ListArticlesResponse> {
+    return this.client.articles.list(params, {
+      next: { revalidate: 1800, tags: [CONTENT_CACHE_TAGS.articles] },
     });
-    return results.items[0];
+  }
+
+  public async listAll(
+    params?: Omit<ListArticlesQueryParams, 'limit' | 'offset'>,
+  ): Promise<ArticleListItem[]> {
+    return this.client.articles.listAll(params, {
+      next: { revalidate: 1800, tags: [CONTENT_CACHE_TAGS.articles] },
+    });
   }
 
   public async search(
@@ -219,19 +87,6 @@ export class ArticleService implements IArticleService {
       title: item.title,
       contextHighlight: createSearchSnippet(item.content, query.params.query),
     }));
-  }
-
-  public async getAll(locale?: string): Promise<ArticleDatum[]> {
-    const items = await this.client.articles.listAll(
-      {
-        lang: locale as LanguageCode | undefined,
-      },
-      {
-        next: { revalidate: 1800, tags: [CONTENT_CACHE_TAGS.articles] },
-      },
-    );
-
-    return items.map((i) => this.mapToDatum(i));
   }
 }
 

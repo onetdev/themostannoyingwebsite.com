@@ -1,38 +1,22 @@
+import type {
+  Article,
+  ArticleListItem,
+  LanguageCode,
+  ListArticlesQueryParams,
+  ListArticlesResponse,
+} from '@maw/content-sdk';
 import type contentEnLocale from './i18n/en';
 
-export interface ArticleLookupQuery {
-  id?: string;
-  slug?: string;
-  locale?: string;
-  isOnCover?: boolean;
-  includeFuture?: boolean;
-}
+export type {
+  Article,
+  ArticleListItem,
+  LanguageCode,
+  ListArticlesQueryParams,
+  ListArticlesResponse,
+};
 
-export interface ArticleQuery {
-  params?: ArticleLookupQuery;
-  sort?: {
-    date?: 'asc' | 'desc';
-    title?: 'asc' | 'desc';
-  };
-  paginate?: {
-    take?: number;
-    skip?: number;
-  };
-}
-
-export interface ArticleSearchQuery {
-  params: {
-    query: string;
-    locale?: string;
-    isOnCover?: boolean;
-    id?: string;
-    slug?: string;
-  };
-  paginate?: {
-    take?: number;
-    skip?: number;
-  };
-}
+// Backwards-compatible alias for smooth migration
+export type ArticleDatum = Article;
 
 export interface ArticleSearchResult {
   lookup: {
@@ -43,51 +27,24 @@ export interface ArticleSearchResult {
   contextHighlight: string;
 }
 
-export interface ArticleTranslation {
-  lang: string;
-  slug: string;
-  title: string;
-}
-
-export interface ArticleDatum {
-  assetGroupId: string;
-  content: string;
-  coverImages?: {
-    original: string;
-    thumbnail: string;
+export interface ArticleSearchQuery {
+  params: {
+    query: string;
+    locale?: string;
   };
-  intro?: string;
-  isOnCover: boolean;
-  id: string;
-  locale: string;
-  publishedAt: Date;
-  updatedAt?: Date;
-  slug: string;
-  title: string;
-  url: string;
-  readingTimeMinutes?: number;
-  tags?: string[];
-  keywords?: string[];
-  translations?: ArticleTranslation[];
+  paginate?: {
+    take?: number;
+    skip?: number;
+  };
 }
-
-export type ArticleData = {
-  items: ArticleDatum[];
-  total: number;
-  take: number;
-  skip: number;
-};
 
 export interface ArticleService {
-  getByLookup(filter: ArticleLookupQuery): Promise<ArticleDatum | undefined>;
-  getById(
-    id: string | number,
-    locale?: string,
-  ): Promise<ArticleDatum | undefined>;
-  getMany(query: ArticleQuery): Promise<ArticleData>;
-  getFirst(query: ArticleQuery): Promise<ArticleDatum | undefined>;
+  getBySlug(slug: string, lang?: LanguageCode): Promise<Article | undefined>;
+  list(params?: ListArticlesQueryParams): Promise<ListArticlesResponse>;
+  listAll(
+    params?: Omit<ListArticlesQueryParams, 'limit' | 'offset'>,
+  ): Promise<ArticleListItem[]>;
   search(query: ArticleSearchQuery): Promise<ArticleSearchResult[]>;
-  getAll(locale?: string): Promise<ArticleDatum[]>;
 }
 
 export const DI = {
