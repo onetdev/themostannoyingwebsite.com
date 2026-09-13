@@ -21,6 +21,7 @@ catalog:
   "@types/react-dom": "^19.2.3"
   "@types/sanitize-html": "^2.16.1"
   "framer-motion": "^12.38.0"
+  "ky": "^1.14.3"
   "jest": "^30.3.0"
   "jest-environment-jsdom": "^30.3.0"
   "marked": "^17.0.5"

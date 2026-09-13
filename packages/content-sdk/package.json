@@ -1,0 +1,40 @@
+{
+  "private": true,
+  "name": "@maw/content-sdk",
+  "version": "0.0.0",
+  "type": "module",
+  "exports": {
+    ".": "./src/index.ts",
+    "./client": "./src/client/index.ts",
+    "./helpers": "./src/helpers/index.ts",
+    "./schemas": "./src/schemas/index.ts",
+    "./types": "./src/types/index.ts"
+  },
+  "scripts": {
+    "generate": "orval",
+    "swagger:generate": "orval",
+    "orval": "orval",
+    "check-types": "tsc --noEmit",
+    "lint": "biome check .",
+    "format": "biome format --write .",
+    "lint:fix": "biome check --write .",
+    "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js"
+  },
+  "dependencies": {
+    "ky": "catalog:",
+    "zod": "catalog:"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "catalog:",
+    "@maw/config-jest": "workspace:*",
+    "@maw/config-ts": "workspace:*",
+    "@types/jest": "catalog:",
+    "@types/node": "catalog:",
+    "@jest/globals": "^30.3.0",
+    "jest": "catalog:",
+    "orval": "^8.31.0",
+    "ts-jest": "catalog:",
+    "tsx": "catalog:",
+    "typescript": "catalog:"
+  }
+}
