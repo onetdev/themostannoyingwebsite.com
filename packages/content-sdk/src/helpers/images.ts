@@ -7,8 +7,8 @@ export type ImageVariantInfo = ImageAssetVariant;
  * Returns the default image variant from an image asset, or the first available variant.
  */
 export function getDefaultImageVariant(
-  image?: ApiImageWrapper | null,
-): ImageVariantInfo | undefined {
+  image?: ImageAsset | null,
+): ImageAssetVariant | undefined {
   if (!image?.variants) {
     return undefined;
   }
@@ -34,9 +34,9 @@ export interface BestImageVariantOptions {
  * Selects the best image variant matching criteria such as min/max width and format.
  */
 export function getBestImageVariant(
-  image?: ApiImageWrapper | null,
+  image?: ImageAsset | null,
   options?: BestImageVariantOptions,
-): ImageVariantInfo | undefined {
+): ImageAssetVariant | undefined {
   if (!image?.variants) {
     return undefined;
   }
@@ -84,7 +84,7 @@ export function getBestImageVariant(
  * Convenience helper to get the URL for a specific image variant, or the default variant URL.
  */
 export function getImageVariantUrl(
-  image?: ApiImageWrapper | null,
+  image?: ImageAsset | null,
   variantKey?: string,
 ): string | undefined {
   if (!image?.variants) {
@@ -104,10 +104,10 @@ export interface CoverImages {
 }
 
 /**
- * Convenience helper to map an ApiImageWrapper to the cover images shape { original, thumbnail }.
+ * Convenience helper to map an ImageAsset to the cover images shape { original, thumbnail }.
  */
 export function toCoverImages(
-  image?: ApiImageWrapper | null,
+  image?: ImageAsset | null,
 ): CoverImages | undefined {
   if (!image?.variants) {
     return undefined;
@@ -136,9 +136,7 @@ export function toCoverImages(
 /**
  * Builds a standard responsive HTML img srcSet string from all image variants.
  */
-export function getImageSrcSet(
-  image?: ApiImageWrapper | null,
-): string | undefined {
+export function getImageSrcSet(image?: ImageAsset | null): string | undefined {
   if (!image?.variants) {
     return undefined;
   }

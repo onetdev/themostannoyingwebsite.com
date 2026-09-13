@@ -7,14 +7,6 @@ import type {
 } from '@maw/content-sdk';
 import type contentEnLocale from './i18n/en';
 
-export type {
-  Article,
-  ArticleListItem,
-  LanguageCode,
-  ListArticlesQueryParams,
-  ListArticlesResponse,
-};
-
 export interface ArticleService {
   getBySlug(slug: string, lang?: LanguageCode): Promise<Article | undefined>;
   list(params?: ListArticlesQueryParams): Promise<ListArticlesResponse>;

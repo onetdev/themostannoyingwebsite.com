@@ -1,6 +1,8 @@
 import 'server-only';
 
 import {
+  type Article,
+  type ArticleListItem,
   CONTENT_CACHE_TAGS,
   type ContentApiClient,
   createContentClient,
@@ -10,12 +12,7 @@ import {
 } from '@maw/content-sdk';
 import { type Container, injectable } from 'inversify';
 
-import {
-  type Article,
-  type ArticleListItem,
-  DI,
-  type ArticleService as IArticleService,
-} from '../types';
+import { DI, type ArticleService as IArticleService } from '../types';
 
 @injectable()
 export class ArticleService implements IArticleService {

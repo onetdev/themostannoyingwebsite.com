@@ -1,9 +1,12 @@
-import { toCoverImages } from '@maw/content-sdk';
+import {
+  type Article,
+  type ArticleListItem,
+  toCoverImages,
+} from '@maw/content-sdk';
 import Image from 'next/image';
 import { useTranslations } from 'next-intl';
 import type { ComponentProps } from 'react';
 import { Link } from '@/core/i18n/navigation';
-import type { Article, ArticleListItem } from '../schemas';
 import { CoverPlaceholder } from './CoverPlaceholder';
 
 export type LargeCoverItemProps = ComponentProps<'article'> & {

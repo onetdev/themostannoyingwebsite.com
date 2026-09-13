@@ -1,6 +1,6 @@
+import type { ArticleListItem } from '@maw/content-sdk';
 import type { MetadataRoute } from 'next';
 import type { Languages } from 'next/dist/lib/metadata/types/alternative-urls-types';
-import type { ArticleListItem } from '@/features/content/types';
 
 import './bootstrap/di';
 import { getDependencyContainer } from '@/core/di';

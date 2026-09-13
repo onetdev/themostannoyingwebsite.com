@@ -1,6 +1,6 @@
+import type { Article, ArticleListItem } from '@maw/content-sdk';
 import type { ComponentProps } from 'react';
 import { Link } from '@/core/i18n/navigation';
-import type { Article, ArticleListItem } from '../schemas';
 
 export type TextListItemProps = ComponentProps<'article'> & {
   article: Article | ArticleListItem;

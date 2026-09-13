@@ -1,4 +1,4 @@
-import type { Article, ArticleListItem } from '@/features/content/types';
+import type { Article, ArticleListItem } from '@maw/content-sdk';
 import type commentsEnLocale from './i18n/en';
 import type { Comment } from './schemas';
 import type { SeededCommentsOptions } from './services/use-cases/generateTree';

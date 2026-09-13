@@ -1,6 +1,6 @@
 'use client';
 
-import { toCoverImages } from '@maw/content-sdk';
+import { type Article, toCoverImages } from '@maw/content-sdk';
 import styles from '@maw/ui-lib/content.module.css';
 import HTMLReactParser from 'html-react-parser';
 import Image from 'next/image';
@@ -8,7 +8,6 @@ import { useFormatter, useTranslations } from 'next-intl';
 import { CommentSection } from '@/features/comments/components';
 import type { Comment } from '@/features/comments/schemas/comment';
 import { usePainPreferencesStore } from '@/stores';
-import type { Article } from '../schemas';
 import { PartitionalLockedContent } from './PartitionalLockedContent';
 
 export interface ArticleItemPageProps {
