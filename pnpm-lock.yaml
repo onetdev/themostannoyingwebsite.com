@@ -253,9 +253,9 @@ importers:
       '@lottiefiles/dotlottie-react':
         specifier: ^0.18.8
         version: 0.18.8(react@19.2.4)
-      '@maw/content-api':
+      '@maw/content-sdk':
         specifier: workspace:^
-        version: link:../../packages/content-api
+        version: link:../../packages/content-sdk
       '@maw/logger':
         specifier: workspace:^
         version: link:../../packages/logger
@@ -483,54 +483,17 @@ importers:
         specifier: ^5.2.0
         version: 5.2.0(ts-node@10.9.2(@swc/core@1.15.18)(@types/node@25.5.0)(typescript@5.9.3))(typescript@5.9.3)
 
-  packages/content-api:
+  packages/content-sdk:
     dependencies:
-      '@maw/logger':
-        specifier: workspace:^
-        version: link:../logger
+      ky:
+        specifier: 'catalog:'
+        version: 1.14.3
       marked:
         specifier: 'catalog:'
         version: 17.0.5
       sanitize-html:
         specifier: 'catalog:'
         version: 2.17.4
-      yaml:
-        specifier: ^2.8.3
-        version: 2.8.3
-      zod:
-        specifier: 'catalog:'
-        version: 4.3.6
-      zod-to-json-schema:
-        specifier: ^3.25.1
-        version: 3.25.1(zod@4.3.6)
-    devDependencies:
-      '@biomejs/biome':
-        specifier: 'catalog:'
-        version: 2.4.9
-      '@maw/config-ts':
-        specifier: workspace:*
-        version: link:../config-ts
-      '@maw/utils':
-        specifier: workspace:*
-        version: link:../utils
-      '@types/sanitize-html':
-        specifier: 'catalog:'
-        version: 2.16.1
-      sharp:
-        specifier: 'catalog:'
-        version: 0.34.5
-      tsx:
-        specifier: 'catalog:'
-        version: 4.21.0
-      typescript:
-        specifier: 'catalog:'
-        version: 5.9.3
-
-  packages/content-sdk:
-    dependencies:
-      ky:
-        specifier: 'catalog:'
-        version: 1.14.3
       zod:
         specifier: 'catalog:'
         version: 4.3.6
@@ -553,6 +516,9 @@ importers:
       '@types/node':
         specifier: 'catalog:'
         version: 25.5.0
+      '@types/sanitize-html':
+        specifier: 'catalog:'
+        version: 2.16.1
       jest:
         specifier: 'catalog:'
         version: 30.3.0(@types/node@25.5.0)(ts-node@10.9.2(@swc/core@1.15.18)(@types/node@25.5.0)(typescript@5.9.3))
@@ -9145,11 +9111,6 @@ packages:
   yoctocolors@2.2.0:
     resolution: {integrity: sha512-xYqdZFUK/VYazNl/oCDYN+3WloWQwMfZxBoiNt6qNyk+xfOdi598muWE42rNZFp1kNOiqW936q5RhUdnpqElSg==}
     engines: {node: '>=18'}
-
-  zod-to-json-schema@3.25.1:
-    resolution: {integrity: sha512-pM/SU9d3YAggzi6MtR4h7ruuQlqKtad8e9S0fmxcMi+ueAK5Korys/aWcV9LIIHTVbj01NdzxcnXSN+O74ZIVA==}
-    peerDependencies:
-      zod: ^3.25 || ^4
 
   zod@4.3.6:
     resolution: {integrity: sha512-rftlrkhHZOcjDwkGlnUtZZkvaPHCsDATp4pGpuOOMDaTdDDXF91wuVDJoWoPsKX/3YPQ5fHuF3STjcYyKr+Qhg==}
@@ -18972,10 +18933,6 @@ snapshots:
   yocto-queue@1.2.2: {}
 
   yoctocolors@2.2.0: {}
-
-  zod-to-json-schema@3.25.1(zod@4.3.6):
-    dependencies:
-      zod: 4.3.6
 
   zod@4.3.6: {}
 
