@@ -1,4 +1,4 @@
-import type { ArticleDatum } from '@maw/content-api';
+import type { ArticleDatum } from '@/features/content/types';
 import type commentsEnLocale from './i18n/en';
 import type { Comment } from './schemas';
 import type { SeededCommentsOptions } from './services/use-cases/generateTree';

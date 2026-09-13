@@ -1,5 +1,5 @@
 import 'reflect-metadata';
-import type { ArticleDatum } from '@maw/content-api';
+import type { ArticleDatum } from '@/features/content/types';
 import { CommentService } from './CommentService';
 import { filterByDate } from './use-cases/filterByDate';
 import { generateTree } from './use-cases/generateTree';

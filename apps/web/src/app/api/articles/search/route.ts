@@ -1,12 +1,12 @@
-import {
-  type ArticleSearchQuery,
-  ArticleSearchQuerySchema,
-} from '@maw/content-api/schemas';
 import { err, ok } from '@maw/utils/result';
 import { deepmerge } from 'deepmerge-ts';
 import { NextResponse } from 'next/server';
 import * as z from 'zod';
 import { getDependencyContainer } from '@/core/di';
+import {
+  type ArticleSearchQuery,
+  ArticleSearchQuerySchema,
+} from '@/features/content/schemas';
 import { getArticleService } from '@/features/content/services';
 
 const defaultParams: ArticleSearchQuery = {

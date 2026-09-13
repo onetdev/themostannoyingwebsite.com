@@ -29,12 +29,19 @@ export async function generateMetadata({
     return {};
   }
 
-  const allTranslations = (
-    await articleService.getMany({
-      params: { id: data.id },
-      paginate: { take: -1 },
-    })
-  ).items;
+  const allTranslations =
+    data.translations && data.translations.length > 0
+      ? data.translations.map((t) => ({
+          locale: t.lang,
+          slug: t.slug,
+          title: t.title,
+        }))
+      : (
+          await articleService.getMany({
+            params: { id: data.id },
+            paginate: { take: -1 },
+          })
+        ).items;
 
   const canonicalTranslation =
     allTranslations.find((t) => t.locale === i18nConfig.defaultLocale) ||

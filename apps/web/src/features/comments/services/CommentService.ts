@@ -1,8 +1,8 @@
 import 'server-only';
 
-import type { ArticleDatum } from '@maw/content-api';
 import { injectable } from 'inversify';
 import enCommentVariants from '@/features/comments/i18n/en/variants';
+import type { ArticleDatum } from '@/features/content/types';
 import enVariants from '@/i18n/messages/en/variants';
 import i18nConfig from '@/root/i18n.config';
 import type { CommentService as ICommentService } from '../types';

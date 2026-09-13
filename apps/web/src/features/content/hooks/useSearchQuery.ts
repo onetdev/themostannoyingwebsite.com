@@ -1,11 +1,11 @@
 'use client';
 
-import type { ArticleSearchQuery, ArticleSearchResult } from '@maw/content-api';
 import { randomNumber } from '@maw/utils/random';
 import { useQuery } from '@tanstack/react-query';
 import { useHttpClient } from '@/core/http';
 import { QueryError, useAppConfigContext } from '@/core/react';
 import { usePainPreferencesStore } from '@/stores';
+import type { ArticleSearchQuery, ArticleSearchResult } from '../types';
 
 type SearchResult = {
   items: ArticleSearchResult[];
