@@ -66,6 +66,9 @@ catalogs:
     jest-environment-jsdom:
       specifier: ^30.3.0
       version: 30.3.0
+    ky:
+      specifier: ^1.14.3
+      version: 1.14.3
     marked:
       specifier: ^17.0.5
       version: 17.0.5
@@ -311,7 +314,7 @@ importers:
         specifier: ^3.10.0
         version: 3.10.0
       ky:
-        specifier: ^1.14.3
+        specifier: 'catalog:'
         version: 1.14.3
       next:
         specifier: ^16.2.6
@@ -526,7 +529,7 @@ importers:
   packages/content-sdk:
     dependencies:
       ky:
-        specifier: ^1.14.3
+        specifier: 'catalog:'
         version: 1.14.3
       zod:
         specifier: 'catalog:'
