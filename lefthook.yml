@@ -1,0 +1,23 @@
+# Schema: https://json.schemastore.org/lefthook.json
+
+pre-commit:
+  commands:
+    biome-check:
+      glob: "*.{js,ts,tsx,jsx,json,css,md}"
+      run: pnpm exec biome check --staged --write --no-errors-on-unmatched
+    typecheck:
+      run: pnpm typecheck
+    test:
+      run: pnpm test
+
+commit-msg:
+  commands:
+    commitlint:
+      run: pnpm exec commitlint --edit {1}
+
+pre-push:
+  commands:
+    build:
+      run: pnpm build
+    test:
+      run: pnpm test
