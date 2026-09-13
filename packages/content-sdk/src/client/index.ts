@@ -17,6 +17,7 @@ export { ImagesResource } from './resources/images';
 export { PagesResource } from './resources/pages';
 export { TagsResource } from './resources/tags';
 export {
+  CONTENT_CACHE_TAGS,
   type ContentClientOptions,
   DEFAULT_BASE_URL,
   DEFAULT_TIMEOUT_MS,

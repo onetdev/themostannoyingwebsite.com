@@ -43,4 +43,37 @@ export class PagesResource {
       options,
     );
   }
+
+  /**
+   * Retrieves all localized informational pages matching the filters by automatically paginating through all available pages.
+   */
+  public async listAll(
+    params?: Omit<ListPagesQueryParams, 'limit' | 'offset'>,
+    options?: RequestOptions,
+  ): Promise<ListPagesResponseType['items']> {
+    const pageSize = 100;
+    let offset = 0;
+    const allItems: ListPagesResponseType['items'] = [];
+
+    while (true) {
+      const response = await this.list(
+        {
+          ...(params as ListPagesQueryParams),
+          limit: pageSize,
+          offset,
+        },
+        options,
+      );
+
+      allItems.push(...response.items);
+
+      if (allItems.length >= response.total || response.items.length === 0) {
+        break;
+      }
+
+      offset += response.items.length;
+    }
+
+    return allItems;
+  }
 }

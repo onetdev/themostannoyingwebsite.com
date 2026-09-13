@@ -6,6 +6,20 @@ import { PagesResource } from './resources/pages';
 import { TagsResource } from './resources/tags';
 import type { ContentClientOptions } from './types';
 
+function resolveBaseUrl(baseUrl?: string): string | undefined {
+  if (baseUrl) {
+    return baseUrl;
+  }
+  if (typeof process !== 'undefined' && process.env) {
+    return (
+      process.env.CONTENT_API_URL ||
+      process.env.NEXT_PUBLIC_CONTENT_API_URL ||
+      undefined
+    );
+  }
+  return undefined;
+}
+
 export class ContentApiClient {
   readonly articles: ArticlesResource;
   readonly pages: PagesResource;
@@ -16,7 +30,11 @@ export class ContentApiClient {
   private readonly transport: HttpTransport;
 
   constructor(options?: ContentClientOptions) {
-    this.transport = new HttpTransport(options);
+    const resolvedBaseUrl = resolveBaseUrl(options?.baseUrl);
+    this.transport = new HttpTransport({
+      ...options,
+      ...(resolvedBaseUrl ? { baseUrl: resolvedBaseUrl } : {}),
+    });
 
     this.articles = new ArticlesResource(this.transport);
     this.pages = new PagesResource(this.transport);

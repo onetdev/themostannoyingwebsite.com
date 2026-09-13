@@ -94,3 +94,55 @@ export function getImageVariantUrl(
 
   return getDefaultImageVariant(image)?.url;
 }
+
+export interface CoverImages {
+  original: string;
+  thumbnail: string;
+}
+
+/**
+ * Convenience helper to map an ApiImageWrapper to the cover images shape { original, thumbnail }.
+ */
+export function toCoverImages(
+  image?: ApiImageWrapper | null,
+): CoverImages | undefined {
+  if (!image?.variants) {
+    return undefined;
+  }
+
+  const defaultOrLg =
+    image.variants.lg?.url ??
+    getDefaultImageVariant(image)?.url ??
+    getBestImageVariant(image, { minWidth: 1000 })?.url;
+
+  const thumbnailOrSm =
+    image.variants.sm?.url ??
+    getBestImageVariant(image, { maxWidth: 600 })?.url ??
+    defaultOrLg;
+
+  if (!defaultOrLg) {
+    return undefined;
+  }
+
+  return {
+    original: defaultOrLg,
+    thumbnail: thumbnailOrSm ?? defaultOrLg,
+  };
+}
+
+/**
+ * Builds a standard responsive HTML img srcSet string from all image variants.
+ */
+export function getImageSrcSet(
+  image?: ApiImageWrapper | null,
+): string | undefined {
+  if (!image?.variants) {
+    return undefined;
+  }
+
+  const entries = Object.values(image.variants)
+    .filter((v) => v.url && v.width)
+    .map((v) => `${v.url} ${v.width}w`);
+
+  return entries.length > 0 ? entries.join(', ') : undefined;
+}

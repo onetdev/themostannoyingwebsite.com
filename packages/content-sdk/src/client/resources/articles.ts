@@ -43,4 +43,37 @@ export class ArticlesResource {
       options,
     );
   }
+
+  /**
+   * Retrieves all localized articles matching the filters by automatically paginating through all available pages.
+   */
+  public async listAll(
+    params?: Omit<ListArticlesQueryParams, 'limit' | 'offset'>,
+    options?: RequestOptions,
+  ): Promise<ListArticlesResponseType['items']> {
+    const pageSize = 100;
+    let offset = 0;
+    const allItems: ListArticlesResponseType['items'] = [];
+
+    while (true) {
+      const response = await this.list(
+        {
+          ...(params as ListArticlesQueryParams),
+          limit: pageSize,
+          offset,
+        },
+        options,
+      );
+
+      allItems.push(...response.items);
+
+      if (allItems.length >= response.total || response.items.length === 0) {
+        break;
+      }
+
+      offset += response.items.length;
+    }
+
+    return allItems;
+  }
 }

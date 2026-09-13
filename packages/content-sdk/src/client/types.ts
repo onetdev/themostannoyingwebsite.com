@@ -3,6 +3,14 @@ import type { Options as KyOptions } from 'ky';
 export const DEFAULT_BASE_URL = 'https://content.themostannoyingwebsite.com';
 export const DEFAULT_TIMEOUT_MS = 10_000;
 
+export const CONTENT_CACHE_TAGS = {
+  all: 'content:*',
+  articles: 'content:articles',
+  pages: 'content:pages',
+  tags: 'content:tags',
+  images: 'content:images',
+} as const;
+
 export interface ContentClientOptions {
   /**
    * Base URL for the headless Content API.
