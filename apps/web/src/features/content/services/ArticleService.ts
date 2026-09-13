@@ -13,8 +13,6 @@ import { type Container, injectable } from 'inversify';
 import {
   type Article,
   type ArticleListItem,
-  type ArticleSearchQuery,
-  type ArticleSearchResult,
   DI,
   type ArticleService as IArticleService,
 } from '../types';
@@ -58,35 +56,6 @@ export class ArticleService implements IArticleService {
     return this.client.articles.listAll(params, {
       next: { revalidate: 1800, tags: [CONTENT_CACHE_TAGS.articles] },
     });
-  }
-
-  public async search(
-    query: ArticleSearchQuery,
-  ): Promise<ArticleSearchResult[]> {
-    const take = query.paginate?.take ?? 20;
-    const skip = query.paginate?.skip ?? 0;
-
-    const response = await this.client.search.query(
-      {
-        q: query.params.query,
-        lang: query.params.locale as LanguageCode | undefined,
-        limit: take,
-        offset: skip,
-        type: 'article',
-      },
-      {
-        next: { revalidate: 600, tags: [CONTENT_CACHE_TAGS.articles] },
-      },
-    );
-
-    return response.items.map((item) => ({
-      lookup: {
-        slug: item.slug,
-        locale: item.lang,
-      },
-      title: item.title,
-      contextHighlight: item.excerpt,
-    }));
   }
 }
 

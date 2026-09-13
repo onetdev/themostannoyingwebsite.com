@@ -1,25 +1,28 @@
 'use client';
 
-import { createContentClient, type LanguageCode } from '@maw/content-sdk';
+import {
+  createContentClient,
+  type SearchContentQueryParams,
+  type SearchResultItem,
+} from '@maw/content-sdk';
 import { randomNumber } from '@maw/utils/random';
 import { useQuery } from '@tanstack/react-query';
 import { usePainPreferencesStore } from '@/stores';
-import type { ArticleSearchQuery, ArticleSearchResult } from '../types';
 
 type SearchResult = {
-  items: ArticleSearchResult[];
+  items: SearchResultItem[];
   duration: number;
 };
 
 const contentClient = createContentClient();
 
-export function useSearchQuery(query: ArticleSearchQuery) {
+export function useSearchQuery(params: SearchContentQueryParams) {
   const delayEnabled = usePainPreferencesStore(
     (state) => state.flags.searchDelay,
   );
 
   return useQuery<SearchResult, Error>({
-    queryKey: ['articles', 'search', query],
+    queryKey: ['articles', 'search', params],
     queryFn: async () => {
       const start = performance.now();
       const delaySeconds = delayEnabled ? randomNumber(1, 15) : 0;
@@ -30,29 +33,17 @@ export function useSearchQuery(query: ArticleSearchQuery) {
       }
 
       const response = await contentClient.search.query({
-        q: query.params.query,
-        lang: query.params.locale as LanguageCode,
-        limit: query.paginate?.take ?? 20,
-        offset: query.paginate?.skip ?? 0,
+        ...params,
         type: 'article',
       });
 
       const duration = performance.now() - start;
 
-      const items: ArticleSearchResult[] = response.items.map((item) => ({
-        lookup: {
-          slug: item.slug,
-          locale: item.lang,
-        },
-        title: item.title,
-        contextHighlight: item.excerpt,
-      }));
-
       return {
-        items,
+        items: response.items,
         duration,
       };
     },
-    enabled: !!query.params.query,
+    enabled: !!params.q,
   });
 }
