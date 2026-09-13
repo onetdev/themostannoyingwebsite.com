@@ -5,6 +5,8 @@
   "type": "module",
   "exports": {
     ".": "./src/index.ts",
+    "./client": "./src/client/index.ts",
+    "./helpers": "./src/helpers/index.ts",
     "./schemas": "./src/schemas/index.ts",
     "./types": "./src/types/index.ts"
   },
@@ -16,9 +18,10 @@
     "lint": "biome check .",
     "format": "biome format --write .",
     "lint:fix": "biome check --write .",
-    "test": "jest"
+    "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js"
   },
   "dependencies": {
+    "ky": "^1.14.3",
     "zod": "catalog:"
   },
   "devDependencies": {
@@ -27,6 +30,7 @@
     "@maw/config-ts": "workspace:*",
     "@types/jest": "catalog:",
     "@types/node": "catalog:",
+    "@jest/globals": "^30.3.0",
     "jest": "catalog:",
     "orval": "^8.31.0",
     "ts-jest": "catalog:",
