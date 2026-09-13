@@ -42,3 +42,7 @@ yarn-error.log*
 .antigravitycli
 .agents/artifacts/
 .gemini/
+
+# Lefthook local overrides
+lefthook-local.yml
+.lefthook-local.yml
