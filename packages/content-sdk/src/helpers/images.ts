@@ -1,4 +1,7 @@
-import type { ApiImageWrapper, ImageVariantInfo } from '../generated/endpoints';
+import type { ImageAsset, ImageAssetVariant } from '../generated/endpoints';
+
+export type ApiImageWrapper = ImageAsset;
+export type ImageVariantInfo = ImageAssetVariant;
 
 /**
  * Returns the default image variant from an image asset, or the first available variant.

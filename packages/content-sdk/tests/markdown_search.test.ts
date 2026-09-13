@@ -1,5 +1,9 @@
 import { renderMarkdown } from '../src/helpers/markdown';
-import { createSearchSnippet, stripMarkdown } from '../src/helpers/search';
+import {
+  createSearchSnippet,
+  formatSearchHighlight,
+  stripMarkdown,
+} from '../src/helpers/search';
 
 describe('Markdown Helper', () => {
   it('renders markdown to sanitized HTML', () => {
@@ -76,6 +80,27 @@ describe('Search & Text Helpers', () => {
       });
       expect(snippet).toContain('<mark>quantum</mark>');
       expect(snippet).toContain('...');
+    });
+  });
+
+  describe('formatSearchHighlight', () => {
+    it('converts markdown bold highlights to mark tags by default', () => {
+      const text =
+        'THE **INTERNET** IS BROKEN: 4 Brain-Melting Memes Driving the Entire **Internet** Insane';
+      expect(formatSearchHighlight(text)).toBe(
+        'THE <mark>INTERNET</mark> IS BROKEN: 4 Brain-Melting Memes Driving the Entire <mark>Internet</mark> Insane',
+      );
+    });
+
+    it('supports custom HTML tags', () => {
+      const text = 'Here is **highlighted** text';
+      expect(formatSearchHighlight(text, 'strong')).toBe(
+        'Here is <strong>highlighted</strong> text',
+      );
+    });
+
+    it('handles empty input gracefully', () => {
+      expect(formatSearchHighlight('')).toBe('');
     });
   });
 });

@@ -3,6 +3,7 @@ import { ArticlesResource } from './resources/articles';
 import { HealthResource } from './resources/health';
 import { ImagesResource } from './resources/images';
 import { PagesResource } from './resources/pages';
+import { SearchResource } from './resources/search';
 import { TagsResource } from './resources/tags';
 import type { ContentClientOptions } from './types';
 
@@ -23,6 +24,7 @@ function resolveBaseUrl(baseUrl?: string): string | undefined {
 export class ContentApiClient {
   readonly articles: ArticlesResource;
   readonly pages: PagesResource;
+  readonly search: SearchResource;
   readonly tags: TagsResource;
   readonly images: ImagesResource;
   readonly health: HealthResource;
@@ -38,6 +40,7 @@ export class ContentApiClient {
 
     this.articles = new ArticlesResource(this.transport);
     this.pages = new PagesResource(this.transport);
+    this.search = new SearchResource(this.transport);
     this.tags = new TagsResource(this.transport);
     this.images = new ImagesResource(this.transport);
     this.health = new HealthResource(this.transport);

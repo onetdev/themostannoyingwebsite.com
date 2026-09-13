@@ -124,7 +124,7 @@ export type CorsOriginDeniedResponseOutput = zod.output<
   typeof CorsOriginDeniedResponse
 >;
 
-export const ImageVariantInfo = zod
+export const ImageAssetVariant = zod
   .object({
     url: zod.string().describe('Publicly accessible URL to the image variant'),
     width: zod.number().describe('Width in pixels'),
@@ -137,22 +137,22 @@ export const ImageVariantInfo = zod
   })
   .describe('Metadata and public URL for a responsive image variant');
 
-export type ImageVariantInfo = zod.input<typeof ImageVariantInfo>;
-export type ImageVariantInfoOutput = zod.output<typeof ImageVariantInfo>;
+export type ImageAssetVariant = zod.input<typeof ImageAssetVariant>;
+export type ImageAssetVariantOutput = zod.output<typeof ImageAssetVariant>;
 
-export const ApiImageWrapper = zod
+export const ImageAsset = zod
   .object({
     name: zod.string().describe('Original image asset base name'),
     variants: zod
-      .record(zod.string(), ImageVariantInfo)
+      .record(zod.string(), ImageAssetVariant)
       .describe(
         'Responsive image variants map with flexible size variants (e.g. sm, lg)',
       ),
   })
-  .describe('Responsive image wrapper with size variants map');
+  .describe('Responsive image asset with size variants map');
 
-export type ApiImageWrapper = zod.input<typeof ApiImageWrapper>;
-export type ApiImageWrapperOutput = zod.output<typeof ApiImageWrapper>;
+export type ImageAsset = zod.input<typeof ImageAsset>;
+export type ImageAssetOutput = zod.output<typeof ImageAsset>;
 /**
  * Performs an application health check and verifies connectivity to the underlying SQLite database.
  * @summary System health check and database connection status
@@ -188,7 +188,7 @@ export type GetApiHealthResponseOutput = zod.output<
 >;
 
 /**
- * Retrieves a paginated list of localized articles with optional search filtering by keyword, language, or tag, as well as cover/featured article filtering.
+ * Retrieves a paginated list of localized articles with optional search filtering by keyword, language, or tag, cover/featured status, publication date filtering (after/before), and sort order (order=desc/asc).
  * @summary Get localized articles list
  */
 export const listArticlesQueryLimitDefault = 20;
@@ -196,6 +196,8 @@ export const listArticlesQueryLimitMax = 100;
 
 export const listArticlesQueryOffsetDefault = 0;
 export const listArticlesQueryOffsetMin = 0;
+
+export const listArticlesQueryOrderDefault = `desc`;
 
 export const ListArticlesQueryParams = zod.object({
   lang: zod
@@ -239,6 +241,36 @@ export const ListArticlesQueryParams = zod.object({
     .boolean()
     .optional()
     .describe('Filter by cover/featured status (true or false)'),
+  after: zod
+    .string()
+    .optional()
+    .describe(
+      'Filter articles published on or after this date (ISO 8601 or YYYY-MM-DD)',
+    ),
+  before: zod
+    .string()
+    .optional()
+    .describe(
+      'Filter articles published on or before this date (ISO 8601 or YYYY-MM-DD)',
+    ),
+  published_after: zod
+    .string()
+    .optional()
+    .describe(
+      'Alias for after: filter articles published on or after this date',
+    ),
+  published_before: zod
+    .string()
+    .optional()
+    .describe(
+      'Alias for before: filter articles published on or before this date',
+    ),
+  order: zod
+    .enum(['asc', 'desc'])
+    .default(listArticlesQueryOrderDefault)
+    .describe(
+      'Sort order by publication date: "desc" (newest first, default) or "asc" (oldest first)',
+    ),
 });
 
 export type ListArticlesQueryParams = zod.input<typeof ListArticlesQueryParams>;
@@ -268,7 +300,7 @@ export const ListArticlesResponse = zod.object({
           .number()
           .describe('Estimated reading time in minutes'),
         is_featured: zod.boolean().describe('Featured/cover article flag'),
-        featured_image: ApiImageWrapper.and(
+        featured_image: ImageAsset.and(
           zod
             .unknown()
             .nullable()
@@ -345,7 +377,7 @@ export const GetArticleBySlugResponse = zod.object({
     .number()
     .describe('Estimated reading time in minutes'),
   is_featured: zod.boolean().describe('Featured/cover article flag'),
-  featured_image: ApiImageWrapper.and(
+  featured_image: ImageAsset.and(
     zod
       .unknown()
       .nullable()
@@ -640,9 +672,104 @@ export const ListImagesResponse = zod.object({
   limit: zod.number().describe('Max number of items per page'),
   offset: zod.number().describe('Offset number of items skipped'),
   items: zod
-    .array(ApiImageWrapper)
+    .array(ImageAsset)
     .describe('Paginated list of transformed raster image assets and metadata'),
 });
 
 export type ListImagesResponse = zod.input<typeof ListImagesResponse>;
 export type ListImagesResponseOutput = zod.output<typeof ListImagesResponse>;
+
+/**
+ * Performs a full-text search across localized articles and pages, returning plain text titles and excerpts with matching terms highlighted in Markdown bold.
+ * @summary Search across articles and static pages
+ */
+export const searchContentQueryLimitDefault = 20;
+export const searchContentQueryLimitMax = 100;
+
+export const searchContentQueryOffsetDefault = 0;
+export const searchContentQueryOffsetMin = 0;
+
+export const SearchContentQueryParams = zod.object({
+  lang: zod
+    .enum([
+      'ar',
+      'de',
+      'en',
+      'es',
+      'fr',
+      'hi',
+      'hu',
+      'it',
+      'ja',
+      'ko',
+      'pl',
+      'pt',
+      'ru',
+      'tr',
+      'zh',
+    ])
+    .optional()
+    .describe('ISO language code'),
+  limit: zod
+    .number()
+    .min(1)
+    .max(searchContentQueryLimitMax)
+    .default(searchContentQueryLimitDefault)
+    .describe('Max number of items (default 20, max 100)'),
+  offset: zod
+    .number()
+    .min(searchContentQueryOffsetMin)
+    .nullish()
+    .default(searchContentQueryOffsetDefault)
+    .describe('Pagination offset (default 0)'),
+  q: zod
+    .string()
+    .optional()
+    .describe('Search query string (matches title, summary, or content)'),
+  type: zod
+    .enum(['article', 'page'])
+    .optional()
+    .describe('Filter by content type (article or page)'),
+});
+
+export type SearchContentQueryParams = zod.input<
+  typeof SearchContentQueryParams
+>;
+export type SearchContentQueryParamsOutput = zod.output<
+  typeof SearchContentQueryParams
+>;
+
+export const SearchContentResponse = zod.object({
+  total: zod.number().describe('Total count of items matching the query'),
+  limit: zod.number().describe('Max number of items per page'),
+  offset: zod.number().describe('Offset number of items skipped'),
+  items: zod
+    .array(
+      zod.object({
+        id: zod.string().describe('Deterministic UUID identifier'),
+        type: zod
+          .enum(['article', 'page'])
+          .describe('Content type (article or page)'),
+        slug: zod.string().describe('Localized slug identifier'),
+        lang: LanguageCode,
+        title: zod
+          .string()
+          .describe(
+            'Title with formatting stripped and matching terms highlighted in Markdown bold',
+          ),
+        excerpt: zod
+          .string()
+          .describe(
+            'Excerpt snippet with formatting stripped and matching terms highlighted in Markdown bold',
+          ),
+      }),
+    )
+    .describe(
+      'Paginated list of localized search results across articles and pages',
+    ),
+});
+
+export type SearchContentResponse = zod.input<typeof SearchContentResponse>;
+export type SearchContentResponseOutput = zod.output<
+  typeof SearchContentResponse
+>;

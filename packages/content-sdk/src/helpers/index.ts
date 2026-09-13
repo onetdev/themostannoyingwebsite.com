@@ -15,6 +15,7 @@ export {
 
 export {
   createSearchSnippet,
+  formatSearchHighlight,
   type SearchSnippetOptions,
   stripMarkdown,
 } from './search';

@@ -112,3 +112,13 @@ export function createSearchSnippet(
   );
   return snippet.replace(highlightRegex, `<${tag}>$1</${tag}>`);
 }
+
+/**
+ * Converts Markdown bold markers (**) returned by search API highlights into HTML tags (default: <mark>).
+ */
+export function formatSearchHighlight(text: string, tag = 'mark'): string {
+  if (!text) {
+    return '';
+  }
+  return text.replace(/\*\*(.*?)\*\*/g, `<${tag}>$1</${tag}>`);
+}

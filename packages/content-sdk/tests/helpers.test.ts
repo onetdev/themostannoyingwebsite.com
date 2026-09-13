@@ -1,4 +1,4 @@
-import type { ApiImageWrapper } from '../src/generated/endpoints';
+import type { ImageAsset } from '../src/generated/endpoints';
 import {
   getBestImageVariant,
   getDefaultImageVariant,
@@ -8,7 +8,7 @@ import {
 } from '../src/helpers/images';
 
 describe('Image Variant Helpers', () => {
-  const mockImage: ApiImageWrapper = {
+  const mockImage: ImageAsset = {
     name: 'hero-banner.png',
     variants: {
       sm: {
@@ -51,7 +51,7 @@ describe('Image Variant Helpers', () => {
     });
 
     it('falls back to the first available variant if none is marked default', () => {
-      const noDefaultImage: ApiImageWrapper = {
+      const noDefaultImage: ImageAsset = {
         name: 'no-default.png',
         variants: {
           first: {

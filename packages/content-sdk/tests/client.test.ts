@@ -24,6 +24,7 @@ describe('ContentApiClient', () => {
     expect(client.tags).toBeDefined();
     expect(client.images).toBeDefined();
     expect(client.health).toBeDefined();
+    expect(client.search).toBeDefined();
   });
 
   describe('articles resource', () => {
@@ -604,6 +605,43 @@ describe('ContentApiClient', () => {
       });
       const all = await client.pages.listAll({ lang: 'en' });
       expect(all.length).toBe(1);
+    });
+  });
+
+  describe('search resource', () => {
+    it('calls GET api/v1/search with query parameters', async () => {
+      let capturedUrl = '';
+      const mockFetch = jest
+        .fn<typeof fetch>()
+        .mockImplementation(async (req) => {
+          capturedUrl = getUrlString(req);
+          return new Response(
+            JSON.stringify({
+              total: 1,
+              limit: 20,
+              offset: 0,
+              items: [
+                {
+                  id: '00000000-0000-0000-0000-000000000001',
+                  type: 'article',
+                  slug: 'sample-article',
+                  lang: 'en',
+                  title: 'Sample **Article**',
+                  excerpt: 'This is a sample **article** excerpt',
+                },
+              ],
+            }),
+            { status: 200, headers: { 'Content-Type': 'application/json' } },
+          );
+        });
+
+      const client = createContentClient({ fetch: mockFetch });
+      const result = await client.search.query({ q: 'Article', lang: 'en' });
+
+      expect(capturedUrl).toContain('/api/v1/search?q=Article&lang=en');
+      expect(result.items).toHaveLength(1);
+      expect(result.items[0].type).toBe('article');
+      expect(result.items[0].title).toBe('Sample **Article**');
     });
   });
 });
