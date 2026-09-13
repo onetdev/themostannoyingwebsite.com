@@ -80,9 +80,12 @@ describe('ArticleService', () => {
     });
 
     it('returns undefined if client throws an error', async () => {
-      (mockClient.articles?.getBySlug as jest.Mock).mockRejectedValueOnce(
-        new Error('Not found'),
-      );
+      const articles = mockClient.articles;
+      if (articles) {
+        (articles.getBySlug as jest.Mock).mockRejectedValueOnce(
+          new Error('Not found'),
+        );
+      }
 
       const result = await service.getBySlug('missing');
       expect(result).toBeUndefined();

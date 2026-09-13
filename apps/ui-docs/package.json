@@ -13,7 +13,7 @@
   "dependencies": {
     "@maw/ui-lib": "workspace:*",
     "@storybook/addon-docs": "catalog:",
-    "next": "catalog:",
+    "next": "^16.3.5",
     "react": "catalog:",
     "react-dom": "catalog:"
   },
@@ -21,20 +21,20 @@
     "@biomejs/biome": "catalog:",
     "@maw/config-ts": "workspace:*",
     "@storybook/addon-links": "catalog:",
-    "@storybook/addon-styling-webpack": "^3.0.0",
+    "@storybook/addon-styling-webpack": "^3.0.2",
     "@storybook/addon-themes": "catalog:",
     "@storybook/nextjs": "catalog:",
     "@storybook/react": "catalog:",
     "@types/node": "catalog:",
     "@types/react": "catalog:",
     "@types/react-dom": "catalog:",
-    "postcss": "catalog:",
+    "postcss": "^8.5.28",
     "storybook": "catalog:",
     "tailwindcss": "catalog:",
     "typescript": "catalog:"
   },
   "peerDependencies": {
-    "pbkdf2": "^3.1.5",
-    "flatted": "^3.4.2"
+    "flatted": "^3.4.2",
+    "pbkdf2": "^3.1.5"
   }
 }
