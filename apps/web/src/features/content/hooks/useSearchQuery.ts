@@ -1,9 +1,12 @@
 'use client';
 
+import {
+  createContentClient,
+  createSearchSnippet,
+  type LanguageCode,
+} from '@maw/content-sdk';
 import { randomNumber } from '@maw/utils/random';
 import { useQuery } from '@tanstack/react-query';
-import { useHttpClient } from '@/core/http';
-import { QueryError, useAppConfigContext } from '@/core/react';
 import { usePainPreferencesStore } from '@/stores';
 import type { ArticleSearchQuery, ArticleSearchResult } from '../types';
 
@@ -12,40 +15,44 @@ type SearchResult = {
   duration: number;
 };
 
+const contentClient = createContentClient();
+
 export function useSearchQuery(query: ArticleSearchQuery) {
-  const config = useAppConfigContext();
-  const httpClient = useHttpClient();
   const delayEnabled = usePainPreferencesStore(
     (state) => state.flags.searchDelay,
   );
 
-  return useQuery<SearchResult, QueryError>({
+  return useQuery<SearchResult, Error>({
     queryKey: ['articles', 'search', query],
     queryFn: async () => {
       const start = performance.now();
       const delaySeconds = delayEnabled ? randomNumber(1, 15) : 0;
-      await new Promise((resolve) => setTimeout(resolve, delaySeconds * 1000));
-
-      const result = await httpClient.get<ArticleSearchResult[]>(
-        config.content.api.searchEndpoint,
-        {
-          params: {
-            query: query.params.query,
-            locale: query.params.locale,
-            take: query.paginate?.take,
-            skip: query.paginate?.skip,
-          },
-        },
-      );
-
-      // We need to throw for QueryClient to properly catch status.
-      if (!result.success) {
-        throw new QueryError(result.error.message, result);
+      if (delaySeconds > 0) {
+        await new Promise((resolve) =>
+          setTimeout(resolve, delaySeconds * 1000),
+        );
       }
 
+      const response = await contentClient.articles.list({
+        q: query.params.query,
+        lang: query.params.locale as LanguageCode,
+        limit: query.paginate?.take ?? 20,
+        offset: query.paginate?.skip ?? 0,
+      });
+
       const duration = performance.now() - start;
+
+      const items: ArticleSearchResult[] = response.items.map((item) => ({
+        lookup: {
+          slug: item.slug,
+          locale: item.lang,
+        },
+        title: item.title,
+        contextHighlight: createSearchSnippet(item.content, query.params.query),
+      }));
+
       return {
-        items: result.data || [],
+        items,
         duration,
       };
     },
