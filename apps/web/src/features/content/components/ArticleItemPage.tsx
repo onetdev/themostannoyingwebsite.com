@@ -53,6 +53,7 @@ export function ArticleItemPage({
             alt={t('content.article.coverImage')}
             width="1920"
             height="1200"
+            loading="eager"
           />
         </div>
       )}

@@ -32,6 +32,7 @@ export function LargeCoverItem({ article, ...rest }: LargeCoverItemProps) {
             alt={t('content.article.coverImage')}
             width="1920"
             height="1200"
+            loading="eager"
           />
         )}
         <div className="relative right-0 bottom-0 flex w-full flex-col items-start md:absolute md:p-2">
