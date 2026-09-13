@@ -1,11 +1,6 @@
 'use client';
 
-import {
-  createContentClient,
-  formatSearchHighlight,
-  type LanguageCode,
-  stripMarkdown,
-} from '@maw/content-sdk';
+import { createContentClient, type LanguageCode } from '@maw/content-sdk';
 import { randomNumber } from '@maw/utils/random';
 import { useQuery } from '@tanstack/react-query';
 import { usePainPreferencesStore } from '@/stores';
@@ -49,8 +44,8 @@ export function useSearchQuery(query: ArticleSearchQuery) {
           slug: item.slug,
           locale: item.lang,
         },
-        title: stripMarkdown(item.title),
-        contextHighlight: formatSearchHighlight(item.excerpt),
+        title: item.title,
+        contextHighlight: item.excerpt,
       }));
 
       return {

@@ -143,7 +143,9 @@ describe('ArticleService', () => {
 
       expect(results).toHaveLength(1);
       expect(results[0].title).toBe('Test Article');
-      expect(results[0].contextHighlight).toContain('<mark>Hello</mark>');
+      expect(results[0].contextHighlight).toBe(
+        'This is a **Hello** world snippet.',
+      );
       expect(mockClient.search?.query).toHaveBeenCalledWith(
         {
           q: 'Hello',

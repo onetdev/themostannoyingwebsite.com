@@ -1,7 +1,7 @@
 'use client';
 
+import { renderMarkdown } from '@maw/content-sdk';
 import HTMLReactParser from 'html-react-parser';
-import DOMPurify from 'isomorphic-dompurify';
 import { Link } from '@/core/i18n/navigation';
 import type { ArticleSearchResult } from '../../types';
 
@@ -14,11 +14,13 @@ export function SearchResultItem({ item }: SearchResultItemProps) {
     <div className="my-4" key={item.lookup.slug}>
       <h4>
         <Link href={`/articles/${item.lookup.slug}`} passHref prefetch={false}>
-          {item.title}
+          {HTMLReactParser(renderMarkdown(item.title, { inline: true }))}
         </Link>
       </h4>
       <p className="max-w-screen-md">
-        {HTMLReactParser(DOMPurify.sanitize(item.contextHighlight))}
+        {HTMLReactParser(
+          renderMarkdown(item.contextHighlight, { inline: true }),
+        )}
       </p>
     </div>
   );

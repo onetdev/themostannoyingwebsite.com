@@ -4,11 +4,9 @@ import {
   CONTENT_CACHE_TAGS,
   type ContentApiClient,
   createContentClient,
-  formatSearchHighlight,
   type LanguageCode,
   type ListArticlesQueryParams,
   type ListArticlesResponse,
-  stripMarkdown,
 } from '@maw/content-sdk';
 import { type Container, injectable } from 'inversify';
 
@@ -86,8 +84,8 @@ export class ArticleService implements IArticleService {
         slug: item.slug,
         locale: item.lang,
       },
-      title: stripMarkdown(item.title),
-      contextHighlight: formatSearchHighlight(item.excerpt),
+      title: item.title,
+      contextHighlight: item.excerpt,
     }));
   }
 }
