@@ -21,6 +21,7 @@
   "scripts": {
     "build": "turbo run build",
     "build:metadata": "turbo run build:metadata --filter=@maw/content-api --filter=@maw/web",
+    "orval": "pnpm --filter @maw/content-sdk orval",
     "check-types": "turbo run check-types",
     "dev": "turbo run dev",
     "format": "prettier --write \"**/*.{ts,tsx,md}\"",

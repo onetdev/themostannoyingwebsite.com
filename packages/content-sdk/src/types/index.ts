@@ -1,2 +1,1 @@
-export type * from '../generated/openapi.js';
-export * from '../generated/types.js';
+export * from '../generated/endpoints.js';

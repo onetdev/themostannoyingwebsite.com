@@ -9,8 +9,9 @@
     "./types": "./src/types/index.ts"
   },
   "scripts": {
-    "generate": "tsx ./scripts/generate.ts",
-    "swagger:generate": "tsx ./scripts/generate.ts",
+    "generate": "orval",
+    "swagger:generate": "orval",
+    "orval": "orval",
     "check-types": "tsc --noEmit",
     "lint": "biome check .",
     "format": "biome format --write .",
@@ -27,7 +28,7 @@
     "@types/jest": "catalog:",
     "@types/node": "catalog:",
     "jest": "catalog:",
-    "openapi-typescript": "^7.13.0",
+    "orval": "^8.31.0",
     "ts-jest": "catalog:",
     "tsx": "catalog:",
     "typescript": "catalog:"
