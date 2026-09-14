@@ -146,6 +146,14 @@ export default {
         'Sefaleti yayın! Bu acı verici derecede iğrenç web sitesini arkadaşlarınıza da çektirdiğinizden emin olun — onları da beraberinizde aşağı çekebilecekken neden tek başınıza acı çekesiniz ki?',
     },
   },
+  social: {
+    facebook: 'Facebook',
+    instagram: 'Instagram',
+    tiktok: 'TikTok',
+    twitter: 'X (Twitter)',
+    youtube: 'YouTube',
+    github: 'GitHub',
+  },
   messages: {
     errors: {
       e404title: 'Hata 404',

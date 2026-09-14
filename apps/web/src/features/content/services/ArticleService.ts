@@ -1,23 +1,61 @@
 import 'server-only';
 
-import { ArticleApiService } from '@maw/content-api';
+import {
+  type Article,
+  type ArticleListItem,
+  CONTENT_CACHE_TAGS,
+  type ContentApiClient,
+  createContentClient,
+  type LanguageCode,
+  type ListArticlesQueryParams,
+  type ListArticlesResponse,
+} from '@maw/content-sdk';
 import { type Container, injectable } from 'inversify';
 
-import { DI, type ArticleApiService as IArticleApiService } from '../types';
+import { DI, type ArticleService as IArticleService } from '../types';
 
 @injectable()
-export class ArticleService
-  extends ArticleApiService
-  implements IArticleApiService
-{
-  constructor() {
-    super({
-      getAssetUrl: (path: string) => `/assets/articles/${path}`,
-      getUrl: (item) => `/articles/${item.slug}`,
+export class ArticleService implements IArticleService {
+  private readonly client: ContentApiClient;
+
+  constructor(...args: [ContentApiClient?]) {
+    this.client = args[0] ?? createContentClient();
+  }
+
+  public async getBySlug(
+    slug: string,
+    lang?: LanguageCode,
+  ): Promise<Article | undefined> {
+    try {
+      return await this.client.articles.getBySlug(
+        slug,
+        lang ? { lang } : undefined,
+        {
+          next: { revalidate: 1800, tags: [CONTENT_CACHE_TAGS.articles] },
+        },
+      );
+    } catch (_err) {
+      return undefined;
+    }
+  }
+
+  public async list(
+    params?: ListArticlesQueryParams,
+  ): Promise<ListArticlesResponse> {
+    return this.client.articles.list(params, {
+      next: { revalidate: 1800, tags: [CONTENT_CACHE_TAGS.articles] },
+    });
+  }
+
+  public async listAll(
+    params?: Omit<ListArticlesQueryParams, 'limit' | 'offset'>,
+  ): Promise<ArticleListItem[]> {
+    return this.client.articles.listAll(params, {
+      next: { revalidate: 1800, tags: [CONTENT_CACHE_TAGS.articles] },
     });
   }
 }
 
 export async function getArticleService(container: Container) {
-  return container.get<IArticleApiService>(DI.ArticleService);
+  return container.get<IArticleService>(DI.ArticleService);
 }

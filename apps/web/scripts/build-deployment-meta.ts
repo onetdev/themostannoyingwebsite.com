@@ -5,7 +5,9 @@ import { Command } from 'commander';
 import deploymentMeta from '@/root/deployment-meta.mjs';
 
 const logger = getLogger().getSubLogger({
-  prettyLogTemplate: '{{dateIsoStr}} {{logLevelName}} ',
+  pretty: {
+    template: '{{dateIsoStr}} {{logLevelName}} ',
+  },
   name: 'build-deployment-meta',
 });
 

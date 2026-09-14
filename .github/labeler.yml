@@ -27,7 +27,6 @@ content:
     - any-glob-to-any-file:
       - apps/web/public/**/*.{png,jpg,jpeg,gif,svg,webp,ico}
       - assets/**/*.{png,jpg,jpeg,gif,svg,webp,ico}
-      - packages/content-api/data/**/*.{json,md,mdx}
 dependencies:
   - changed-files:
     - any-glob-to-any-file:
@@ -38,14 +37,17 @@ dependencies:
 documentation:
   - changed-files:
     - any-glob-to-any-file:
+      - ./**/AGENTS.md
       - ./**/CLAUDE.md
       - ./**/README.md
       - .github/ISSUE_TEMPLATE/*
       - .github/pull_request_template.md
+      - adr/**
       - CHANGELOG.md
       - CLAUDE.md
       - CODE_OF_CONDUCT.md
       - CONTRIBUTING.md
+      - docs/**
       - LICENSE
       - README.md
 i18n:
@@ -54,7 +56,6 @@ i18n:
       - ./**/*.mdx
       - ./apps/web/i18n/**
       - ./apps/web/src/app/[locale]/**
-      - ./packages/content-api/data/**
 storybook:
   - changed-files:
     - any-glob-to-any-file:
@@ -87,14 +88,10 @@ pkg/config-ts:
   - changed-files:
     - any-glob-to-any-file:
       - packages/config-ts/**
-pkg/content-api:
+pkg/content-sdk:
   - changed-files:
     - any-glob-to-any-file:
-      - packages/content-api/**
-pkg/jest-preset:
-  - changed-files:
-    - any-glob-to-any-file:
-      - packages/jest-preset/**
+      - packages/content-sdk/**
 pkg/logger:
   - changed-files:
     - any-glob-to-any-file:

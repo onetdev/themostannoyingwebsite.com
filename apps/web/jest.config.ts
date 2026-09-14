@@ -5,7 +5,15 @@ const createJestConfig = nextJest({
   dir: './',
 });
 
-export default createJestConfig({
+const jestConfig = createJestConfig({
   ...config,
-  transformIgnorePatterns: ['/node_modules/(?!emittery)/'],
 });
+
+export default async () => {
+  const resolved = await jestConfig();
+  resolved.transformIgnorePatterns = [
+    '/node_modules/(?!(\\.pnpm/)?(emittery|inversify|@inversifyjs|ky|marked|sanitize-html))',
+    '^.+\\.module\\.(css|sass|scss)$',
+  ];
+  return resolved;
+};

@@ -1,35 +1,41 @@
+import {
+  type Article,
+  type ArticleListItem,
+  toCoverImages,
+} from '@maw/content-sdk';
 import Image from 'next/image';
 import { useTranslations } from 'next-intl';
 import type { ComponentProps } from 'react';
 import { Link } from '@/core/i18n/navigation';
-import type { ArticleDatum } from '../schemas';
 import { CoverPlaceholder } from './CoverPlaceholder';
 
 export type LargeCoverItemProps = ComponentProps<'article'> & {
-  article: ArticleDatum;
+  article: Article | ArticleListItem;
 };
 
 export function LargeCoverItem({ article, ...rest }: LargeCoverItemProps) {
   const t = useTranslations();
+  const coverImages = toCoverImages(article.featured_image);
 
   return (
     <article {...rest}>
       <Link
         className="group relative block"
-        href={article.url}
+        href={`/articles/${article.slug}`}
         passHref
         prefetch={false}
       >
-        {!article.coverImages?.original && (
+        {!coverImages?.original && (
           <CoverPlaceholder width={1920} height={1200} />
         )}
-        {article.coverImages?.original && (
+        {coverImages?.original && (
           <Image
             className="h-auto w-full object-cover"
-            src={article.coverImages.original}
+            src={coverImages.original}
             alt={t('content.article.coverImage')}
             width="1920"
             height="1200"
+            loading="eager"
           />
         )}
         <div className="relative right-0 bottom-0 flex w-full flex-col items-start md:absolute md:p-2">
@@ -40,7 +46,7 @@ export function LargeCoverItem({ article, ...rest }: LargeCoverItemProps) {
           </h2>
           <p className="m-0 mb-2 hidden text-sm md:block">
             <span className="bg-card text-card-foreground box-decoration-clone px-2 py-1">
-              {article.intro}
+              {article.summary}
             </span>
           </p>
         </div>

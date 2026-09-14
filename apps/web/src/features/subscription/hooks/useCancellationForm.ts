@@ -33,7 +33,7 @@ export function useCancellationForm({
       logger.info(data, 'Cancellation submitted');
       onSuccess?.(data);
     } catch (err: unknown) {
-      logger.warn(err, 'Cancellation submission failed');
+      logger.warn('Cancellation submission failed', err);
       methods.setError('root', { message: (err as Error).message });
     }
   };

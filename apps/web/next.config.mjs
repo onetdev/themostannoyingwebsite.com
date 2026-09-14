@@ -1,15 +1,31 @@
 import createMDX from '@next/mdx';
-import { withSentryConfig } from '@sentry/nextjs';
+import { withSentryConfig } from '@sentry/nextjs/config';
 import createNextIntlPlugin from 'next-intl/plugin';
 
 import sentryConfig from './next-sentry.config.mjs';
 
 /** @type {import('next').NextConfig} **/
 const nextConfig = {
-  transpilePackages: ['emittery'],
+  transpilePackages: [
+    'emittery',
+    'inversify',
+    '@inversifyjs/common',
+    '@inversifyjs/container',
+    '@inversifyjs/core',
+    '@inversifyjs/plugin',
+    '@inversifyjs/prototype-utils',
+    '@inversifyjs/reflect-metadata-utils',
+  ],
   trailingSlash: true,
   images: {
     unoptimized: true,
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'content.themostannoyingwebsite.com',
+        pathname: '/assets/**',
+      },
+    ],
   },
   pageExtensions: ['js', 'jsx', 'md', 'mdx', 'ts', 'tsx'],
   async headers() {

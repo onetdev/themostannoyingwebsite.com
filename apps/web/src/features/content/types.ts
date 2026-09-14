@@ -1,21 +1,24 @@
-import type { ArticleApiService } from '@maw/content-api';
-import type { ArticleSearchQuery } from '@maw/content-api/schemas';
+import type {
+  Article,
+  ArticleListItem,
+  LanguageCode,
+  ListArticlesQueryParams,
+  ListArticlesResponse,
+} from '@maw/content-sdk';
 import type contentEnLocale from './i18n/en';
 
-export type { ArticleApiService, ArticleDatum } from '@maw/content-api';
+export interface ArticleService {
+  getBySlug(slug: string, lang?: LanguageCode): Promise<Article | undefined>;
+  list(params?: ListArticlesQueryParams): Promise<ListArticlesResponse>;
+  listAll(
+    params?: Omit<ListArticlesQueryParams, 'limit' | 'offset'>,
+  ): Promise<ArticleListItem[]>;
+}
 
 export const DI = {
   ArticleService: Symbol.for('ArticleService'),
+  ContentApiClient: Symbol.for('ContentApiClient'),
 };
-
-export type ArticleService = ArticleApiService;
-export type SearchFilter = ArticleSearchQuery;
-
-export interface SearchResult<T = unknown> {
-  item: T;
-  title: string;
-  contextHighlight: string;
-}
 
 export type ContentI18nShape = typeof contentEnLocale;
 

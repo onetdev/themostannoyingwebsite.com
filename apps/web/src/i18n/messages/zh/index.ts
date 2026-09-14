@@ -140,8 +140,16 @@ export default {
     modal: {
       title: '分享此页面',
       description:
-        '传播痛苦！务必把这个令人痛苦且讨厌的网站也强加给你的朋友——既然可以把他们也拉下水，为什么要独自受苦呢？',
+        '传播痛苦！一定要把这个令人痛苦的厌恶网站也强加给你的朋友——既然可以把他们也拖下水，为什么要独自受苦呢？',
     },
+  },
+  social: {
+    facebook: 'Facebook',
+    instagram: 'Instagram',
+    tiktok: 'TikTok',
+    twitter: 'X (Twitter)',
+    youtube: 'YouTube',
+    github: 'GitHub',
   },
   messages: {
     errors: {

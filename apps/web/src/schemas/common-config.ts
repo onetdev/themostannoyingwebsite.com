@@ -9,6 +9,13 @@ export const CommonConfigSchema = z.object({
     bannerGithub: z.string(),
     socialImage: z.string(),
   }),
+  socialLinks: z.object({
+    x: z.url(),
+    facebook: z.url(),
+    youtube: z.url(),
+    instagram: z.url(),
+    tiktok: z.url(),
+  }),
 });
 
 export type CommonConfig = z.infer<typeof CommonConfigSchema>;

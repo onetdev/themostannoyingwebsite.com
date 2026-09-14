@@ -24,7 +24,7 @@ export function useEventTestForm() {
       const parsedPayload = data.payload ? JSON.parse(data.payload) : undefined;
       emit(data.eventType as keyof AppEvents, parsedPayload);
     } catch (err: unknown) {
-      logger.error(err, 'Failed to emit message');
+      logger.error('Failed to emit message', err);
     }
   };
 

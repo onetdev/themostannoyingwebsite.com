@@ -7,7 +7,9 @@ import { type FaviconFile, type FaviconImage, favicons } from 'favicons';
 import manifestConfig from '@/root/manifest.config.mjs';
 
 const logger = getLogger().getSubLogger({
-  prettyLogTemplate: '{{dateIsoStr}} {{logLevelName}} ',
+  pretty: {
+    template: '{{dateIsoStr}} {{logLevelName}} ',
+  },
   name: 'build-web-manifest',
 });
 
@@ -95,6 +97,6 @@ const sanitizeContent = (filename: string, content: string | Buffer) => {
 main()
   .then(() => logger.info(`✅ Aaaaand it's done. New manifest created.`))
   .catch((err) => {
-    logger.error(err, `Ooopsie, something went wrong.`);
+    logger.error(`Ooopsie, something went wrong.`, err);
     process.exit(1);
   });

@@ -1,5 +1,6 @@
 'use client';
 
+import type { LanguageCode } from '@maw/content-sdk';
 import { useLocale } from 'next-intl';
 import { useEffect, useState } from 'react';
 import { useEvent } from '@/core/react';
@@ -16,10 +17,8 @@ export function useSearch() {
     error,
     isFetched: isReady,
   } = useSearchQuery({
-    params: {
-      query,
-      locale,
-    },
+    q: query,
+    lang: locale as LanguageCode,
   });
 
   useEvent('global-search:query', (event) => {

@@ -1,6 +1,6 @@
 import 'server-only';
 
-import type { ArticleDatum } from '@maw/content-api';
+import type { Article, ArticleListItem } from '@maw/content-sdk';
 import { injectable } from 'inversify';
 import enCommentVariants from '@/features/comments/i18n/en/variants';
 import enVariants from '@/i18n/messages/en/variants';
@@ -42,10 +42,13 @@ export class CommentService implements ICommentService {
     };
   }
 
-  async getByArticle(item: ArticleDatum, options?: SeededCommentsOptions) {
-    const pool = await this.getRangomGeneratorPool(item.locale);
+  async getByArticle(
+    item: Article | ArticleListItem,
+    options?: SeededCommentsOptions,
+  ) {
+    const pool = await this.getRangomGeneratorPool(item.lang);
 
-    const data = generateTree(item.slug, item.publishedAt, {
+    const data = generateTree(item.slug, new Date(item.published_at), {
       pool,
       ...(options ?? {}),
     });

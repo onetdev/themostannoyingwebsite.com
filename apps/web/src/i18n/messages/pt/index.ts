@@ -144,8 +144,16 @@ export default {
     modal: {
       title: 'Partilhar esta página',
       description:
-        'Espalhe a miséria! Certifique-se de infligir este website dolorosamente detestável nos seus amigos também — porquê sofrer sozinho quando pode arrastá-los consigo?',
+        'Espalhe a miséria! Certifique-se de infligir este site dolorosamente detestável aos seus amigos também — porquê sofrer sozinho quando pode arrastá-los consigo?',
     },
+  },
+  social: {
+    facebook: 'Facebook',
+    instagram: 'Instagram',
+    tiktok: 'TikTok',
+    twitter: 'X (Twitter)',
+    youtube: 'YouTube',
+    github: 'GitHub',
   },
   messages: {
     errors: {

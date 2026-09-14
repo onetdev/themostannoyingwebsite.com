@@ -145,6 +145,14 @@ export default {
         'पीड़ा फैलाएं! अपने दोस्तों पर भी इस कष्टदायक और घृणित वेबसाइट को थोपना सुनिश्चित करें - जब आप उन्हें भी अपने साथ नीचे खींच सकते हैं तो अकेले क्यों सहें?',
     },
   },
+  social: {
+    facebook: 'Facebook',
+    instagram: 'Instagram',
+    tiktok: 'TikTok',
+    twitter: 'X (Twitter)',
+    youtube: 'YouTube',
+    github: 'GitHub',
+  },
   messages: {
     errors: {
       e404title: 'त्रुटि 404',
