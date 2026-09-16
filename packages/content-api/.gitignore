@@ -1,4 +1,0 @@
-dist
-src/schemas/*.schema.json
-data/**/*.gen.webp
-data/index.json

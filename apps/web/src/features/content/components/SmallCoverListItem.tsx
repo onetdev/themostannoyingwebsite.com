@@ -1,12 +1,16 @@
+import {
+  type Article,
+  type ArticleListItem,
+  toCoverImages,
+} from '@maw/content-sdk';
 import Image from 'next/image';
 import { useTranslations } from 'next-intl';
 import type { ComponentProps } from 'react';
 import { Link } from '@/core/i18n/navigation';
-import type { ArticleDatum } from '../schemas';
 import { CoverPlaceholder } from './CoverPlaceholder';
 
 export type SmallCoverListItemProps = ComponentProps<'article'> & {
-  article: ArticleDatum;
+  article: Article | ArticleListItem;
 };
 
 export function SmallCoverListItem({
@@ -14,22 +18,23 @@ export function SmallCoverListItem({
   ...rest
 }: SmallCoverListItemProps) {
   const t = useTranslations();
+  const coverImages = toCoverImages(article.featured_image);
 
   return (
     <article {...rest}>
       <Link
-        href={article.url}
+        href={`/articles/${article.slug}`}
         passHref
         prefetch={false}
         className="link-as-inherit hover-text-primary"
       >
-        {!article.coverImages?.thumbnail && (
+        {!coverImages?.thumbnail && (
           <CoverPlaceholder width={1920} height={1200} />
         )}
-        {article.coverImages?.thumbnail && (
+        {coverImages?.thumbnail && (
           <Image
             className="h-auto w-full rounded-sm object-cover"
-            src={article.coverImages.thumbnail}
+            src={coverImages.thumbnail}
             alt={t('content.article.coverImage')}
             width="1920"
             height="1200"
@@ -40,9 +45,9 @@ export function SmallCoverListItem({
         </h5>
         <small
           className="text-card-foreground m-0 mb-1 line-clamp-2 leading-snug hover:no-underline"
-          title={article.intro}
+          title={article.summary}
         >
-          {article.intro}
+          {article.summary}
         </small>
       </Link>
     </article>

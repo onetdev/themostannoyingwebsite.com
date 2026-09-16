@@ -63,7 +63,7 @@ export function useSignupForm({ onSuccess }: SignupFormProps) {
         });
       }
     } catch (err: unknown) {
-      logger.warn(err, 'Signup failed');
+      logger.warn('Signup failed', err);
       methods.setError('root', { message: (err as Error).message });
     }
   };

@@ -32,7 +32,7 @@ export function usePasswordReminderForm({
       await authService.passwordReminder(payload);
       onSuccess?.();
     } catch (err: unknown) {
-      logger.warn(err, 'Password reminder failed');
+      logger.warn('Password reminder failed', err);
       methods.setError('root', { message: (err as Error).message });
     }
   };

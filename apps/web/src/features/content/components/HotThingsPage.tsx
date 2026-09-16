@@ -56,7 +56,7 @@ export function HotThingsPage() {
       setDevices((await navigator.mediaDevices.enumerateDevices()) || []);
       startStream({ video: videoConstraints });
     } catch (err) {
-      logger.warn(err, 'Error accessing media devices.');
+      logger.warn('Error accessing media devices.', err);
       setIsDisallowed(true);
     }
   };

@@ -45,7 +45,7 @@ export function SearchPage() {
       )}
       {hasResults &&
         data.items.map((item) => (
-          <SearchResultItem key={item.lookup.slug} item={item} />
+          <SearchResultItem key={item.slug} item={item} />
         ))}
       {!hasResults && !isError && isReady && (
         <NoSearchResults onClick={onRecommendedClick} />

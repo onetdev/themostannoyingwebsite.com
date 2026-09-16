@@ -62,9 +62,6 @@ const config: AppConfig = {
         },
       },
     },
-    api: {
-      searchEndpoint: '/api/articles/search/',
-    },
   },
   funding: {
     assets: {
@@ -161,6 +158,13 @@ const config: AppConfig = {
       bannerDefault: '/assets/banner-default.png',
       bannerGithub: '/assets/banner-github.png',
       socialImage: '/assets/social.png',
+    },
+    socialLinks: {
+      x: 'https://x.com/the_maw_og',
+      facebook: 'https://www.facebook.com/profile.php?id=61574371611758',
+      youtube: 'https://www.youtube.com/channel/UC2_0uDfCIIQia0XvJgoTqJw',
+      instagram: 'https://www.instagram.com/the.most.annoying.website',
+      tiktok: 'https://tiktok.com/@the.maw.og',
     },
   },
   deploymentMeta: {

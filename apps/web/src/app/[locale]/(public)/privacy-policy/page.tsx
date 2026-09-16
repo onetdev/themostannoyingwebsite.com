@@ -54,7 +54,7 @@ export default async function Page({ params }: NextPageProps) {
       </PageLayout>
     );
   } catch (_err) {
-    logger.debug(_err, 'Privacy policy not found, redirecting to 404');
+    logger.debug('Privacy policy not found, redirecting to 404', _err);
     notFound();
   }
 }

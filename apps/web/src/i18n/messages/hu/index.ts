@@ -147,6 +147,14 @@ export default {
         'Terjeszd a nyomorúságot! Mindenképpen kényszerítsd rá ezt a fájdalmasan ellenszenves weboldalt a barátaidra is — miért szenvednél egyedül, ha magaddal rántod őket is?',
     },
   },
+  social: {
+    facebook: 'Facebook',
+    instagram: 'Instagram',
+    tiktok: 'TikTok',
+    twitter: 'X (Twitter)',
+    youtube: 'YouTube',
+    github: 'GitHub',
+  },
   messages: {
     errors: {
       e404title: 'Hiba 404',

@@ -7,4 +7,6 @@ export * from './http/react/query-client';
 export * from './http/react/useHttpClient';
 export * from './navigation/react/Link';
 export * from './navigation/react/NavigationContext';
+export * from './observability/react/ErrorBoundary';
+export * from './observability/react/ErrorFallback';
 export * from './observability/react/useLogger';

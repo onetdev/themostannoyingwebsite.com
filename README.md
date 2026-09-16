@@ -1,8 +1,14 @@
 # The Most Annoying Website
 
-A satirical web project that gathers the worst UX patterns from modern websites and concentrates them into one gloriously frustrating experience.
+A satirical web project that gathers the worst UX patterns, scam mechanics, and clickbait rot from across the modern web—concentrated into one gloriously frustrating experience.
 
-Everything is intentionally broken. Buttons lie, forms misbehave, notifications never stop, and progress bars cheat. Easter eggs and internet culture references in every single segment of the project.
+Intrusive. Hyper-targeted. Frictionless. Instinctive. Addictive. Manipulative. Over-optimized. Algorithmic. Monopolized. Homogenized.
+
+It’s time to de-optimize. Time to frictionmaxx, betray intuition, and break the loop. Welcome to the interactive museum of modern digital misery.
+
+Remember when clicking a link was an adventure instead of a conversion funnel?
+
+I want you to feel like a kid again, ripping open an unmarked toy chest—where every gadget does something strange yet familiar, and the web is delightfully, unpredictably broken again. Step inside, poke around, and enjoy the mess.
 
 ## Demo
 
@@ -112,7 +118,7 @@ packages/
   utils      – shared utilities
   logger     – shared logging
   config-*   – shared configuration
-  content-api – content and article system
+  content-sdk – headless content API client SDK
 ```
 
 Detailed architecture documentation can be found in:

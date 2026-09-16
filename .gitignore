@@ -6,6 +6,7 @@ node_modules/
 # misc
 .DS_Store
 *.pem
+coverage/
 
 # Turbo
 .turbo
@@ -37,5 +38,11 @@ yarn-error.log*
 .claude/settings.local.json
 .claude/CLAUDE.local.md
 
-# Gemini CLI
+# Gemini & Antigravity CLI
+.antigravitycli
+.agents/artifacts/
 .gemini/
+
+# Lefthook local overrides
+lefthook-local.yml
+.lefthook-local.yml

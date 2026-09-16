@@ -145,6 +145,14 @@ export default {
         'انشر البؤس! تأكد من فرض هذا الموقع المزعج بشكل مؤلم على أصدقائك أيضاً — لماذا تعاني وحدك بينما يمكنك سحبهم معك؟',
     },
   },
+  social: {
+    facebook: 'Facebook',
+    instagram: 'Instagram',
+    tiktok: 'TikTok',
+    twitter: 'X (Twitter)',
+    youtube: 'YouTube',
+    github: 'GitHub',
+  },
   messages: {
     errors: {
       e404title: 'خطأ 404',

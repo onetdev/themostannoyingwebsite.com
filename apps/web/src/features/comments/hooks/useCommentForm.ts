@@ -29,7 +29,7 @@ export function useCommentForm({ onSuccess }: UseCommentFormProps) {
       onSuccess?.(data);
       methods.reset();
     } catch (err: unknown) {
-      logger.warn(err, 'Comment submission failed');
+      logger.warn('Comment submission failed', err);
       methods.setError('root', { message: (err as Error).message });
     }
   };

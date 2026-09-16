@@ -146,6 +146,14 @@ export default {
         '不幸を撒き散らしましょう！この苦痛で不快なウェブサイトを友達にも押し付けてください。自分だけが苦しむ必要はありません。道連れにしましょう。',
     },
   },
+  social: {
+    facebook: 'Facebook',
+    instagram: 'Instagram',
+    tiktok: 'TikTok',
+    twitter: 'X (Twitter)',
+    youtube: 'YouTube',
+    github: 'GitHub',
+  },
   messages: {
     errors: {
       e404title: 'エラー 404',
