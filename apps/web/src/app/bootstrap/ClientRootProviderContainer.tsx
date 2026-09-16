@@ -9,6 +9,7 @@ import {
   AppConfigProvider,
   DiContextProvider,
   getQueryClient,
+  SilentErrorBoundary,
 } from '@/core/react';
 import { AchievementManager } from '@/features/achievements/providers';
 import type { AppConfig } from '@/schemas/app-config';
@@ -36,7 +37,9 @@ export function ClientRootProviderContainer({
               <SentryLocaleConfigurator />
               <ClientNavigationConfigurator>
                 <Toaster />
-                <AchievementManager />
+                <SilentErrorBoundary name="achievements:manager">
+                  <AchievementManager />
+                </SilentErrorBoundary>
                 <ClientPainContainer>{children}</ClientPainContainer>
               </ClientNavigationConfigurator>
             </ThemeProvider>

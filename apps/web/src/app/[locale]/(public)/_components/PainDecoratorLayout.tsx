@@ -2,6 +2,7 @@
 
 import { AnimatePresence } from 'framer-motion';
 import { type ComponentProps, useEffect, useState } from 'react';
+import { SilentErrorBoundary } from '@/core/react';
 import {
   DeadPixel,
   GlobalStickyVideo,
@@ -65,7 +66,12 @@ export function PainDecoratorLayout({
       {/* Elements appearing underneath content container */}
       <AnimatePresence>
         {runtimeFlags.giftFlaps && (
-          <ContainerPromotionFlaps key="container-promotion-flaps" />
+          <SilentErrorBoundary
+            name="pain:flaps"
+            key="container-promotion-flaps"
+          >
+            <ContainerPromotionFlaps />
+          </SilentErrorBoundary>
         )}
       </AnimatePresence>
 
@@ -74,25 +80,51 @@ export function PainDecoratorLayout({
         {children}
         <AnimatePresence>
           {runtimeFlags.wheelOfFortune && (
-            <WheelOfFortune key="wheel-of-fortune" />
+            <SilentErrorBoundary
+              name="pain:wheel-of-fortune"
+              key="wheel-of-fortune"
+            >
+              <WheelOfFortune />
+            </SilentErrorBoundary>
           )}
         </AnimatePresence>
         {runtimeFlags.stickyVideo && (
-          <GlobalStickyVideo key="global-sticky-video" />
+          <SilentErrorBoundary
+            name="pain:sticky-video"
+            key="global-sticky-video"
+          >
+            <GlobalStickyVideo />
+          </SilentErrorBoundary>
         )}
         {runtimeFlags.showCookieConsent && (
-          <CookieConsent key="cookie-consent" />
+          <SilentErrorBoundary name="pain:cookie-consent" key="cookie-consent">
+            <CookieConsent />
+          </SilentErrorBoundary>
         )}
-        <AdblockerSuspectBar />
+        <SilentErrorBoundary name="pain:adblocker-suspect-bar">
+          <AdblockerSuspectBar />
+        </SilentErrorBoundary>
       </div>
 
       {/* Global viewport elements */}
-      {deadPixel && <DeadPixel key="dead-pixel" />}
+      {deadPixel && (
+        <SilentErrorBoundary name="pain:dead-pixel" key="dead-pixel">
+          <DeadPixel />
+        </SilentErrorBoundary>
+      )}
       <AnimatePresence>
-        {runtimeFlags.mockChat && <ChatBubble key="chat-bubble" />}
+        {runtimeFlags.mockChat && (
+          <SilentErrorBoundary name="pain:chat-bubble" key="chat-bubble">
+            <ChatBubble />
+          </SilentErrorBoundary>
+        )}
       </AnimatePresence>
-      <GlobalShareModal />
-      <Screensaver />
+      <SilentErrorBoundary name="pain:share-modal">
+        <GlobalShareModal />
+      </SilentErrorBoundary>
+      <SilentErrorBoundary name="pain:screensaver">
+        <Screensaver />
+      </SilentErrorBoundary>
     </div>
   );
 }
