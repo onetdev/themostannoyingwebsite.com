@@ -4,6 +4,7 @@ import { CopyMarker } from '@maw/ui-lib';
 import { useTranslations } from 'next-intl';
 import { type PropsWithChildren, useEffect } from 'react';
 import { emit } from '@/core/events/event-bus';
+import { SilentErrorBoundary } from '@/core/react';
 import { PageTitleGlitch } from '@/features/disruptions/components';
 import {
   useDisableContextMenu,
@@ -41,10 +42,18 @@ export function ClientPainContainer({ children }: PropsWithChildren) {
 
   return (
     <>
-      <PageTitleGlitch />
-      <NewsletterModalTrigger />
-      <NotificationPromptTrigger />
-      <RatingDialogTrigger />
+      <SilentErrorBoundary name="pain:page-title-glitch">
+        <PageTitleGlitch />
+      </SilentErrorBoundary>
+      <SilentErrorBoundary name="pain:newsletter-modal-trigger">
+        <NewsletterModalTrigger />
+      </SilentErrorBoundary>
+      <SilentErrorBoundary name="pain:notification-prompt-trigger">
+        <NotificationPromptTrigger />
+      </SilentErrorBoundary>
+      <SilentErrorBoundary name="pain:rating-dialog-trigger">
+        <RatingDialogTrigger />
+      </SilentErrorBoundary>
       <CopyMarker
         enabled={clipboardMarker}
         text={copyMarkerText}

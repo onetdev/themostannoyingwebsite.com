@@ -12,7 +12,7 @@ import {
 } from '@maw/ui-lib';
 import { useTranslations } from 'next-intl';
 import { useEffect } from 'react';
-import { useEvent } from '@/core/react';
+import { ErrorBoundary, ErrorFallback, useEvent } from '@/core/react';
 import { useCaptchaChallenge } from '../hooks';
 import { EmojiCountChallenge } from './EmojiCountChallenge';
 import { TaxonomyChallenge } from './TaxonomyChallenge';
@@ -75,24 +75,37 @@ export function CaptchaDialog({
           <Progress value={completion} className="h-1" />
         </div>
         <div className="p-4">
-          {challengeType === 'emoji' && (
-            <EmojiCountChallenge
-              onProgress={handleChallengeScoreUpdate}
-              className="mx-auto"
-            />
-          )}
-          {challengeType === 'tile' && (
-            <TilePuzzleChallenge
-              onProgress={handleChallengeScoreUpdate}
-              className="mx-auto"
-            />
-          )}
-          {challengeType === 'grid' && (
-            <TaxonomyChallenge
-              onProgress={handleChallengeScoreUpdate}
-              className="mx-auto"
-            />
-          )}
+          <ErrorBoundary
+            name="captcha:challenge"
+            fallback={({ reset }) => (
+              <ErrorFallback
+                size="sm"
+                onRetry={() => {
+                  handleSkip();
+                  reset();
+                }}
+              />
+            )}
+          >
+            {challengeType === 'emoji' && (
+              <EmojiCountChallenge
+                onProgress={handleChallengeScoreUpdate}
+                className="mx-auto"
+              />
+            )}
+            {challengeType === 'tile' && (
+              <TilePuzzleChallenge
+                onProgress={handleChallengeScoreUpdate}
+                className="mx-auto"
+              />
+            )}
+            {challengeType === 'grid' && (
+              <TaxonomyChallenge
+                onProgress={handleChallengeScoreUpdate}
+                className="mx-auto"
+              />
+            )}
+          </ErrorBoundary>
         </div>
 
         <DialogFooter className="flex-row items-center justify-between">
