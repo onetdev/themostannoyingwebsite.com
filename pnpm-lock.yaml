@@ -57,6 +57,9 @@ catalogs:
     '@types/sanitize-html':
       specifier: ^2.16.1
       version: 2.16.1
+    core-js:
+      specifier: ^3.50.0
+      version: 3.50.0
     framer-motion:
       specifier: ^13.2.0
       version: 13.2.0
@@ -255,19 +258,22 @@ importers:
         version: 16.3.5(@mdx-js/loader@3.1.1(webpack@5.110.3(@swc/core@1.16.2(@swc/helpers@0.5.23))(postcss@8.5.28)(sharp@0.35.4(@types/node@26.5.1))))(@mdx-js/react@3.1.1(@types/react@19.3.0)(react@19.3.0))
       '@sentry/nextjs':
         specifier: ^10.74.0
-        version: 10.74.0(@opentelemetry/core@2.11.0(@opentelemetry/api@1.9.1))(@opentelemetry/sdk-trace-base@2.11.0(@opentelemetry/api@1.9.1))(next@16.3.5(@babel/core@7.29.7)(@opentelemetry/api@1.9.1)(@playwright/test@1.63.0)(@types/node@26.5.1)(react-dom@19.3.0(react@19.3.0))(react@19.3.0)(sass@1.104.1))(react@19.3.0)(webpack@5.110.3(@swc/core@1.16.2(@swc/helpers@0.5.23))(postcss@8.5.28)(sharp@0.35.4(@types/node@26.5.1)))
+        version: 10.74.0(@opentelemetry/core@2.11.0(@opentelemetry/api@1.9.1))(@opentelemetry/sdk-trace-base@2.11.0(@opentelemetry/api@1.9.1))(next@16.3.5(@opentelemetry/api@1.9.1)(@playwright/test@1.63.0)(@types/node@26.5.1)(react-dom@19.3.0(react@19.3.0))(react@19.3.0)(sass@1.104.1))(react@19.3.0)(webpack@5.110.3(@swc/core@1.16.2(@swc/helpers@0.5.23))(postcss@8.5.28)(sharp@0.35.4(@types/node@26.5.1)))
       '@tanstack/react-query':
         specifier: ^5.102.8
         version: 5.102.8(react@19.3.0)
       '@vercel/analytics':
         specifier: ^2.0.1
-        version: 2.0.1(next@16.3.5(@babel/core@7.29.7)(@opentelemetry/api@1.9.1)(@playwright/test@1.63.0)(@types/node@26.5.1)(react-dom@19.3.0(react@19.3.0))(react@19.3.0)(sass@1.104.1))(react@19.3.0)
+        version: 2.0.1(next@16.3.5(@opentelemetry/api@1.9.1)(@playwright/test@1.63.0)(@types/node@26.5.1)(react-dom@19.3.0(react@19.3.0))(react@19.3.0)(sass@1.104.1))(react@19.3.0)
       classnames:
         specifier: ^2.5.1
         version: 2.5.1
       color:
         specifier: ^5.0.3
         version: 5.0.3
+      core-js:
+        specifier: 'catalog:'
+        version: 3.50.0
       countries-and-timezones:
         specifier: ^3.10.0
         version: 3.10.0
@@ -297,7 +303,7 @@ importers:
         version: 16.3.5(@babel/core@7.29.7)(@opentelemetry/api@1.9.1)(@playwright/test@1.63.0)(@types/node@26.5.1)(react-dom@19.3.0(react@19.3.0))(react@19.3.0)(sass@1.104.1)
       next-intl:
         specifier: ^4.14.4
-        version: 4.14.4(@swc/helpers@0.5.23)(next@16.3.5(@babel/core@7.29.7)(@opentelemetry/api@1.9.1)(@playwright/test@1.63.0)(@types/node@26.5.1)(react-dom@19.3.0(react@19.3.0))(react@19.3.0)(sass@1.104.1))(react@19.3.0)
+        version: 4.14.4(@swc/helpers@0.5.23)(next@16.3.5(@opentelemetry/api@1.9.1)(@playwright/test@1.63.0)(@types/node@26.5.1)(react-dom@19.3.0(react@19.3.0))(react@19.3.0)(sass@1.104.1))(react@19.3.0)
       next-themes:
         specifier: ^0.4.6
         version: 0.4.6(react-dom@19.3.0(react@19.3.0))(react@19.3.0)
@@ -497,7 +503,7 @@ importers:
         version: 8.33.0(@tanstack/react-query@5.102.8(react@19.3.0))(prettier@3.9.6)(typescript@5.9.3)(zod@4.6.4)
       ts-jest:
         specifier: 'catalog:'
-        version: 29.4.12(@babel/core@7.29.7)(@jest/transform@30.5.1)(@jest/types@30.5.1)(babel-jest@30.5.1(@babel/core@7.29.7))(jest-util@30.5.1)(jest@30.5.1(@types/node@26.5.1))(typescript@5.9.3)
+        version: 29.4.12(@babel/core@7.29.7)(@jest/transform@30.5.1)(@jest/types@30.5.1)(babel-jest@30.5.1(@babel/core@7.29.7))(jest-util@30.5.1)(jest@30.5.1(@types/node@26.5.1)(ts-node@10.9.2(@swc/core@1.16.2(@swc/helpers@0.5.23))(@types/node@26.5.1)(typescript@5.9.3)))(typescript@5.9.3)
       tsx:
         specifier: 'catalog:'
         version: 4.23.13
@@ -656,7 +662,7 @@ importers:
         version: 30.5.1
       ts-jest:
         specifier: 'catalog:'
-        version: 29.4.12(@babel/core@7.29.7)(@jest/transform@30.5.1)(@jest/types@30.5.1)(babel-jest@30.5.1(@babel/core@7.29.7))(jest-util@30.5.1)(jest@30.5.1(@types/node@26.5.1))(typescript@5.9.3)
+        version: 29.4.12(@babel/core@7.29.7)(@jest/transform@30.5.1)(@jest/types@30.5.1)(babel-jest@30.5.1(@babel/core@7.29.7))(jest-util@30.5.1)(jest@30.5.1(@types/node@26.5.1)(ts-node@10.9.2(@swc/core@1.16.2(@swc/helpers@0.5.23))(@types/node@26.5.1)(typescript@5.9.3)))(typescript@5.9.3)
       typescript:
         specifier: 'catalog:'
         version: 5.9.3
@@ -5100,6 +5106,9 @@ packages:
 
   core-js-pure@3.50.0:
     resolution: {integrity: sha512-6GP3Pxz4IKyWjAfa747vIu/jilB5z29JWROLqH/b+pXVcpgh6tM06ZIBwSuglgVqzDYURhOK6oEzTrG0bCHitA==}
+
+  core-js@3.50.0:
+    resolution: {integrity: sha512-BRWgOLKkFeCgRudR6zrs8p9XJZcE14grzKMMssoYrk6krtuEZ7MTKPIY5RzOnqsEKIR9kst7wNzphttraT+Yqw==}
 
   core-util-is@1.0.3:
     resolution: {integrity: sha512-ZQBvi1DcpJ4GDqanjucZ2Hj3wEO5pZDS89BWbkcrvdxksJorwUDDZamX9ldFkp9aw2lmBDLgkObEA4DWNJ9FYQ==}
@@ -11831,7 +11840,7 @@ snapshots:
     dependencies:
       '@sentry/core': 10.74.0
 
-  '@sentry/nextjs@10.74.0(@opentelemetry/core@2.11.0(@opentelemetry/api@1.9.1))(@opentelemetry/sdk-trace-base@2.11.0(@opentelemetry/api@1.9.1))(next@16.3.5(@babel/core@7.29.7)(@opentelemetry/api@1.9.1)(@playwright/test@1.63.0)(@types/node@26.5.1)(react-dom@19.3.0(react@19.3.0))(react@19.3.0)(sass@1.104.1))(react@19.3.0)(webpack@5.110.3(@swc/core@1.16.2(@swc/helpers@0.5.23))(postcss@8.5.28)(sharp@0.35.4(@types/node@26.5.1)))':
+  '@sentry/nextjs@10.74.0(@opentelemetry/core@2.11.0(@opentelemetry/api@1.9.1))(@opentelemetry/sdk-trace-base@2.11.0(@opentelemetry/api@1.9.1))(next@16.3.5(@opentelemetry/api@1.9.1)(@playwright/test@1.63.0)(@types/node@26.5.1)(react-dom@19.3.0(react@19.3.0))(react@19.3.0)(sass@1.104.1))(react@19.3.0)(webpack@5.110.3(@swc/core@1.16.2(@swc/helpers@0.5.23))(postcss@8.5.28)(sharp@0.35.4(@types/node@26.5.1)))':
     dependencies:
       '@opentelemetry/api': 1.9.1
       '@rollup/plugin-commonjs': 28.0.1(rollup@4.63.2)
@@ -12690,7 +12699,7 @@ snapshots:
   '@unrs/resolver-binding-win32-x64-msvc@1.12.2':
     optional: true
 
-  '@vercel/analytics@2.0.1(next@16.3.5(@babel/core@7.29.7)(@opentelemetry/api@1.9.1)(@playwright/test@1.63.0)(@types/node@26.5.1)(react-dom@19.3.0(react@19.3.0))(react@19.3.0)(sass@1.104.1))(react@19.3.0)':
+  '@vercel/analytics@2.0.1(next@16.3.5(@opentelemetry/api@1.9.1)(@playwright/test@1.63.0)(@types/node@26.5.1)(react-dom@19.3.0(react@19.3.0))(react@19.3.0)(sass@1.104.1))(react@19.3.0)':
     optionalDependencies:
       next: 16.3.5(@babel/core@7.29.7)(@opentelemetry/api@1.9.1)(@playwright/test@1.63.0)(@types/node@26.5.1)(react-dom@19.3.0(react@19.3.0))(react@19.3.0)(sass@1.104.1)
       react: 19.3.0
@@ -13362,6 +13371,8 @@ snapshots:
       browserslist: 4.28.9
 
   core-js-pure@3.50.0: {}
+
+  core-js@3.50.0: {}
 
   core-util-is@1.0.3: {}
 
@@ -15763,7 +15774,7 @@ snapshots:
 
   next-intl-swc-plugin-extractor@4.14.4: {}
 
-  next-intl@4.14.4(@swc/helpers@0.5.23)(next@16.3.5(@babel/core@7.29.7)(@opentelemetry/api@1.9.1)(@playwright/test@1.63.0)(@types/node@26.5.1)(react-dom@19.3.0(react@19.3.0))(react@19.3.0)(sass@1.104.1))(react@19.3.0):
+  next-intl@4.14.4(@swc/helpers@0.5.23)(next@16.3.5(@opentelemetry/api@1.9.1)(@playwright/test@1.63.0)(@types/node@26.5.1)(react-dom@19.3.0(react@19.3.0))(react@19.3.0)(sass@1.104.1))(react@19.3.0):
     dependencies:
       '@eloqnt/config': 0.1.0
       '@eloqnt/format-json': 0.1.0
@@ -17307,7 +17318,7 @@ snapshots:
 
   ts-easing@0.2.0: {}
 
-  ts-jest@29.4.12(@babel/core@7.29.7)(@jest/transform@30.5.1)(@jest/types@30.5.1)(babel-jest@30.5.1(@babel/core@7.29.7))(jest-util@30.5.1)(jest@30.5.1(@types/node@26.5.1))(typescript@5.9.3):
+  ts-jest@29.4.12(@babel/core@7.29.7)(@jest/transform@30.5.1)(@jest/types@30.5.1)(babel-jest@30.5.1(@babel/core@7.29.7))(jest-util@30.5.1)(jest@30.5.1(@types/node@26.5.1)(ts-node@10.9.2(@swc/core@1.16.2(@swc/helpers@0.5.23))(@types/node@26.5.1)(typescript@5.9.3)))(typescript@5.9.3):
     dependencies:
       bs-logger: 0.2.6
       fast-json-stable-stringify: 2.1.0
