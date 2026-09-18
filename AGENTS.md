@@ -30,7 +30,7 @@ This is a **Turborepo** monorepo managed with **pnpm**.
 The project includes specialized skills that you SHOULD use for specific tasks. Activate them via `activate_skill`.
 
 - **`i18n-assistant`**: Use for extracting, managing, and translating user-facing strings.
-- **`branch-summarizer`**: Use to generate a markdown summary of the current branch's changes compared to a target branch.
+- **`sync-pr`**: Use to review branch commits, compose PR documentation matching the template, and open or update a draft PR via GitHub CLI (`gh`).
 - **`git-commit-conventional`**: Use to review staged work, detect scope, and create a local Conventional Commit (never pushes).
 - **`adr-writer`**: Use to draft and manage Architectural Decision Records in the `adr/` folder.
 

@@ -1,36 +1,43 @@
 ## Summary
 
-<!-- IMPORTANT! You can use branch-summarizer AI skill to generate this summary locally -->
-<!-- Briefly describe what this PR does and why -->
-<!-- Link related issue(s) if applicable -->
+<!-- Tip: You can use the sync-pr AI skill to generate and sync this PR automatically -->
+<!-- Briefly describe what this PR does, the problem it solves, and why it is necessary -->
+<!-- Link related issue(s) if applicable (e.g., Closes #123, Fixes #456) -->
 
 ## Key Changes
 
-<!-- Keep only relevant sections -->
+<!-- Keep only the sections relevant to this PR, remove the rest -->
 
 ### 🚀 Features
-- <!-- Added feature -->
+- <!-- Added feature or user capability -->
 
 ### 🐛 Fixes
-- <!-- Fixed bug -->
+- <!-- Fixed bug, edge case, or regression -->
 
-### 🧹 Chores / Refactors
-- <!-- Internal or structural changes -->
+### 🧹 Chores & Refactors
+- <!-- Internal code cleanup, refactoring, dependencies, or tooling adjustments -->
+
+### 🧪 Tests
+- <!-- Added or updated unit, integration, or E2E tests -->
+
+### 📚 Documentation
+- <!-- Documentation, ADRs, or guides updated -->
 
 ## Impact
 
-- **User-facing**: <!-- Visible changes -->
-- **Developer-facing**: <!-- Codebase impact -->
-- **Risk**: <!-- Potential issues or uncertainties -->
+- **User-facing**: <!-- Visible UX/UI changes, interactions, or "None" -->
+- **Developer-facing**: <!-- Architecture, APIs, developer experience, or "None" -->
+- **Risk**: <!-- Low / Medium / High + rationale and potential blast radius -->
 
 ## Checklist
 
+<!-- Mark applicable items with [x] or [✓] -->
 - [ ] Tests updated and passing locally
 - [ ] Documentation updated (if applicable)
 - [ ] Localization extracted (if applicable)
 
 ## Screenshots & Videos
 
-<!-- Include screenshots or recordings if relevant -->
+<!-- Include screenshots or recordings for UI/visual changes, or omit section if not applicable -->
 
 <!-- ## Additional Comments -->
