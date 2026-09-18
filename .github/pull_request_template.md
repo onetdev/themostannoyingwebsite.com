@@ -1,6 +1,6 @@
 ## Summary
 
-<!-- Tip: You can use the sync-pr AI skill to generate and sync this PR automatically -->
+<!-- Tip: You can use the git-pr-sync AI skill to generate and sync this PR automatically -->
 <!-- Briefly describe what this PR does, the problem it solves, and why it is necessary -->
 <!-- Link related issue(s) if applicable (e.g., Closes #123, Fixes #456) -->
 

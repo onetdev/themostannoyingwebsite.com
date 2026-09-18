@@ -1,9 +1,9 @@
 ---
-name: git-commit-conventional
+name: git-commit
 description: Reviews staged work, writes a Conventional Commit message (with automatic scope detection and optional body for extra details), and creates a local git commit without pushing.
 ---
 
-# Git Commit Conventional
+# Git Commit
 
 ## Overview
 

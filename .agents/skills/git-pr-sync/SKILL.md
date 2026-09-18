@@ -1,9 +1,9 @@
 ---
-name: sync-pr
+name: git-pr-sync
 description: Reviews commits in the current branch against base (default: develop), pushes to origin, composes a comprehensive PR description matching the repository template, and creates a draft PR or updates an existing PR using the GitHub CLI (gh).
 ---
 
-# Sync PR
+# Git PR Sync
 
 ## Overview
 
@@ -40,7 +40,7 @@ This skill automates the creation and synchronization of Pull Requests using the
    command -v gh || echo "GH_MISSING"
    ```
    If missing, prompt the user:
-   > "GitHub CLI (`gh`) is not installed. Please install it (e.g. `brew install gh`) and run `gh auth login` to use the `sync-pr` skill."
+   > "GitHub CLI (`gh`) is not installed. Please install it (e.g. `brew install gh`) and run `gh auth login` to use the `git-pr-sync` skill."
 2. Check `gh` authentication:
    ```bash
    gh auth status
