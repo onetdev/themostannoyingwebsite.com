@@ -9,6 +9,12 @@ Always use the **Conventional Commits** format for the PR title:
 - Imperative tense, lowercase subject, no trailing period.
 - If the PR touches multiple scopes or repo-wide items, omit scope: `chore: upgrade project dependencies`.
 
+## Principles: High Signal & Conciseness
+
+- **Focus on Decisions & Implications**: Highlight the primary motivation, key architectural decisions, and broader system implications.
+- **Avoid Over-Explaining Trivialities**: Do not recount mechanical changes, trivial renames, import adjustments, or formatting fixes.
+- **Synthesize Information**: Group related changes logically under crisp, informative bullet points.
+
 ## PR Body Structure
 
 The body must follow the structure defined in [`.github/pull_request_template.md`](../../../../.github/pull_request_template.md):

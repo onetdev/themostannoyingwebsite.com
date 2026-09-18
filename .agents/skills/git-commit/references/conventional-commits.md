@@ -60,7 +60,8 @@ Scope should provide quick context regarding where the change occurred.
 
 ## Optional Body Guidelines
 
-- **When to Use**: Use a body when a single line is insufficient to explain *why* the change was made, or when multiple notable items were updated.
+- **When to Use**: Use a body when a single line is insufficient to explain *why* the change was made, or when notable architectural implications or trade-offs need to be captured.
+- **Conciseness**: Avoid micro-explaining small mechanical edits, formatting changes, or individual renames. Focus strictly on important aspects, design rationale, and broader implications.
 - **Separation**: Must be separated from the header by an empty line.
 - **Formatting**:
   - Can use bullet points (`- `) or concise paragraphs.

@@ -2,6 +2,7 @@
 
 <!-- Tip: You can use the git-pr-sync AI skill to generate and sync this PR automatically -->
 <!-- Briefly describe what this PR does, the problem it solves, and why it is necessary -->
+<!-- Keep descriptions concise and high-signal: focus on decisions, why choices were made, and broader implications rather than minor code edits -->
 <!-- Link related issue(s) if applicable (e.g., Closes #123, Fixes #456) -->
 
 ## Key Changes

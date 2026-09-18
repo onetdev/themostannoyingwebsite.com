@@ -27,9 +27,12 @@ This skill standardizes the creation of local Git commits from currently staged 
   - Automatically infer the scope by inspecting the paths of staged files.
   - Omit the scope if changes span multiple disparate packages or root project files.
 - **Optional Body**:
-  - Include an explanatory body when changes involve complex rationale ("why"), architectural considerations, or multiple specific sub-tasks.
+  - Include an explanatory body when changes involve complex rationale ("why"), architectural considerations, or notable implications.
   - Separate header and body by an empty line.
   - Wrap all lines in the body at 100 characters.
+- **Conciseness & High Signal**:
+  - Keep the message concise, focused on important aspects and systemic implications.
+  - Avoid over-explaining trivial details, formatting tweaks, or mechanical changes. Focus on the core purpose and impact.
 
 ## Scope Detection Rules
 
@@ -74,7 +77,7 @@ Inspect staged paths using `git diff --staged --name-only` or `git status --shor
    - Detect the appropriate type (`feat`, `fix`, `chore`, etc.) and optional scope using the Scope Detection Rules.
 3. **Draft Commit Message**:
    - Formulate a concise subject line ($\le 100$ characters).
-   - If extra details or context are needed, draft an optional body separated by an empty line, with all lines $\le 100$ characters.
+   - If extra details or context are needed, draft an optional body separated by an empty line, with all lines $\le 100$ characters. Focus on why and key implications rather than micro-explaining small changes.
 4. **Execute Local Commit**:
    - Create the commit using `git commit -m "<subject>"` or `git commit -m "<subject>" -m "<body>"`.
    - Ensure local Git hooks (Lefthook pre-commit Biome checks and commitlint validation) pass successfully.

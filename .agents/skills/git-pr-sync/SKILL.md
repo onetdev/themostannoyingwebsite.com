@@ -31,6 +31,9 @@ This skill automates the creation and synchronization of Pull Requests using the
 - **Draft Status**:
   - When opening a **new** PR, always create it in **Draft** mode (`--draft`).
   - When updating an **existing** PR, preserve its existing state and update its title and body.
+- **Conciseness & High Signal**:
+  - Aim for concise, high-signal descriptions; do not over-explain minor code edits, mechanical formatting, or trivial tweaks.
+  - Focus squarely on primary features, bug resolutions, design decisions, and architectural/user implications.
 
 ## Workflow
 
