@@ -1,7 +1,7 @@
 import {
-  type ListImagesQueryParams,
-  ListImagesResponse,
-  type ListImagesResponse as ListImagesResponseType,
+  type GetImageListQueryParams,
+  GetImageListResponse,
+  type GetImageListResponse as GetImageListResponseType,
 } from '../../generated/endpoints';
 import type { HttpTransport } from '../http';
 import type { RequestOptions } from '../types';
@@ -13,13 +13,13 @@ export class ImagesResource {
    * Retrieves a paginated list of raster image assets and their responsive dimensions and URLs.
    */
   public async list(
-    params?: ListImagesQueryParams,
+    params?: GetImageListQueryParams,
     options?: RequestOptions,
-  ): Promise<ListImagesResponseType> {
+  ): Promise<GetImageListResponseType> {
     return this.transport.get(
       'api/v1/images',
       params as Record<string, unknown> | undefined,
-      ListImagesResponse,
+      GetImageListResponse,
       options,
     );
   }

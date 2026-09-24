@@ -2,6 +2,16 @@ packages:
   - "apps/*"
   - "packages/*"
 
+allowBuilds:
+  '@parcel/watcher': true
+  '@sentry/cli': true
+  '@swc/core': true
+  core-js: true
+  core-js-pure: true
+  esbuild: true
+  lefthook: true
+  unrs-resolver: true
+
 catalog:
   "@biomejs/biome": "^2.5.13"
   "@fortawesome/fontawesome-svg-core": "^7.3.1"

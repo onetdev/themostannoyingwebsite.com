@@ -1,8 +1,8 @@
 import { injectable } from 'inversify';
-import i18nConfig from '@/root/i18n.config';
 import { getAllCountries } from './use-cases/get-all-countries';
 import {
-  getSupportedLocaleMeta,
+  fetchSupportedLanguages,
+  getSupportedLanguages,
   type LanguageInfo,
 } from './use-cases/get-supported-locales';
 
@@ -12,19 +12,19 @@ export class AppService {
     return getAllCountries();
   }
 
-  getSupportedLanguages(): LanguageInfo[] {
-    const languageMap = getSupportedLocaleMeta();
-    return i18nConfig.locales.map((locale) => {
-      const langInfo = languageMap[locale];
-      if (!langInfo) {
-        throw new Error(
-          `Language configuration is missing for locale: "${locale}"`,
-        );
-      }
-      return {
-        locale,
-        ...langInfo,
-      };
-    });
+  /**
+   * Fetches the supported languages from the Content API, falling back to the
+   * bundled metadata when unavailable.
+   */
+  async getSupportedLanguages(): Promise<LanguageInfo[]> {
+    return fetchSupportedLanguages();
+  }
+
+  /**
+   * Synchronously returns the bundled supported languages. Useful as initial
+   * data while the API-backed list is loading.
+   */
+  getFallbackSupportedLanguages(): LanguageInfo[] {
+    return getSupportedLanguages();
   }
 }

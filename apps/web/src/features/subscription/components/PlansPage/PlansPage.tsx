@@ -27,6 +27,7 @@ interface PlansPageProps {
   plans: SubscriptionPackage[];
   features: SubscriptionFeature[];
   socialProofConfig: Pick<PurchaseProofToastProps, 'minDelayMs' | 'maxDelayMs'>;
+  socialProofPool?: Pick<PurchaseProofToastProps, 'names' | 'locations'>;
   urgencyConfig?: Pick<
     UrgencyCountdownProps,
     'discountPercentage' | 'timeoutSeconds'
@@ -38,6 +39,7 @@ export function PlansPage({
   features,
   urgencyConfig,
   socialProofConfig,
+  socialProofPool,
 }: PlansPageProps) {
   const t = useTranslations();
   const [isDiscountActive, setIsDiscountActive] = useState(false);
@@ -60,7 +62,11 @@ export function PlansPage({
 
   return (
     <>
-      <PurchaseProofToast plans={plans} {...socialProofConfig} />
+      <PurchaseProofToast
+        plans={plans}
+        {...socialProofConfig}
+        {...socialProofPool}
+      />
       <div className="mb-6 flex flex-col items-center justify-between gap-4 sm:flex-row">
         <PageHeadline className="mb-0">
           {t('subscription.landing.headline')}

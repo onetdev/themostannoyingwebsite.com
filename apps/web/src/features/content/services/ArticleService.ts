@@ -6,9 +6,9 @@ import {
   CONTENT_CACHE_TAGS,
   type ContentApiClient,
   createContentClient,
+  type GetArticleListQueryParams,
+  type GetArticleListResponse,
   type LanguageCode,
-  type ListArticlesQueryParams,
-  type ListArticlesResponse,
 } from '@maw/content-sdk';
 import { type Container, injectable } from 'inversify';
 
@@ -40,15 +40,15 @@ export class ArticleService implements IArticleService {
   }
 
   public async list(
-    params?: ListArticlesQueryParams,
-  ): Promise<ListArticlesResponse> {
+    params?: GetArticleListQueryParams,
+  ): Promise<GetArticleListResponse> {
     return this.client.articles.list(params, {
       next: { revalidate: 1800, tags: [CONTENT_CACHE_TAGS.articles] },
     });
   }
 
   public async listAll(
-    params?: Omit<ListArticlesQueryParams, 'limit' | 'offset'>,
+    params?: Omit<GetArticleListQueryParams, 'limit' | 'offset'>,
   ): Promise<ArticleListItem[]> {
     return this.client.articles.listAll(params, {
       next: { revalidate: 1800, tags: [CONTENT_CACHE_TAGS.articles] },
