@@ -1,17 +1,17 @@
 import type {
   Article,
   ArticleListItem,
+  GetArticleListQueryParams,
+  GetArticleListResponse,
   LanguageCode,
-  ListArticlesQueryParams,
-  ListArticlesResponse,
 } from '@maw/content-sdk';
 import type contentEnLocale from './i18n/en';
 
 export interface ArticleService {
   getBySlug(slug: string, lang?: LanguageCode): Promise<Article | undefined>;
-  list(params?: ListArticlesQueryParams): Promise<ListArticlesResponse>;
+  list(params?: GetArticleListQueryParams): Promise<GetArticleListResponse>;
   listAll(
-    params?: Omit<ListArticlesQueryParams, 'limit' | 'offset'>,
+    params?: Omit<GetArticleListQueryParams, 'limit' | 'offset'>,
   ): Promise<ArticleListItem[]>;
 }
 

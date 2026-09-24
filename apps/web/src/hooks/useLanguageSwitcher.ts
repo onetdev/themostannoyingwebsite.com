@@ -1,5 +1,6 @@
 'use client';
 
+import { useQuery } from '@tanstack/react-query';
 import { useLocale } from 'next-intl';
 import { usePathname, useRouter } from '@/core/i18n/navigation';
 import { useAppService } from '@/hooks';
@@ -9,6 +10,18 @@ export function useLanguageSwitcher() {
   const locale = useLocale();
   const router = useRouter();
   const pathname = usePathname();
+
+  const fallbackLanguages = appService.getFallbackSupportedLanguages();
+  const { data } = useQuery({
+    queryKey: ['supported-languages'],
+    queryFn: () => appService.getSupportedLanguages(),
+    initialData: fallbackLanguages,
+    // Treat the bundled fallback as immediately stale so the API-backed list
+    // is fetched on mount, while still rendering a usable list right away.
+    initialDataUpdatedAt: 0,
+    staleTime: 1000 * 60 * 60,
+  });
+  const languages = data ?? fallbackLanguages;
 
   const onLanguageChange = (value: AppLocale) => {
     // Might not look sexy, modern BUT it is what we need. And it works,
@@ -30,7 +43,6 @@ export function useLanguageSwitcher() {
     router.push(pathname, { locale: value });
   };
 
-  const languages = appService.getSupportedLanguages();
   const currentLanguage = languages.find((l) => l.locale === locale);
 
   return {

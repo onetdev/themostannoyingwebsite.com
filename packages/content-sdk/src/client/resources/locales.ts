@@ -1,25 +1,25 @@
 import {
-  type GetTagListQueryParams,
-  GetTagListResponse,
-  type GetTagListResponse as GetTagListResponseType,
+  type GetLocaleListQueryParams,
+  GetLocaleListResponse,
+  type GetLocaleListResponse as GetLocaleListResponseType,
 } from '../../generated/endpoints';
 import type { HttpTransport } from '../http';
 import type { RequestOptions } from '../types';
 
-export class TagsResource {
+export class LocalesResource {
   constructor(private readonly transport: HttpTransport) {}
 
   /**
-   * Retrieves a paginated list of distinct tags across articles, including usage counts.
+   * Retrieves the supported locales with their English/native names and text direction.
    */
   public async list(
-    params?: GetTagListQueryParams,
+    params?: GetLocaleListQueryParams,
     options?: RequestOptions,
-  ): Promise<GetTagListResponseType> {
+  ): Promise<GetLocaleListResponseType> {
     return this.transport.get(
-      'api/v1/tags',
+      'api/v1/locales',
       params as Record<string, unknown> | undefined,
-      GetTagListResponse,
+      GetLocaleListResponse,
       options,
     );
   }

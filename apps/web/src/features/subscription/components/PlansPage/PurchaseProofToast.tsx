@@ -11,12 +11,18 @@ export interface PurchaseProofToastProps {
   plans: SubscriptionPackage[];
   minDelayMs: number;
   maxDelayMs: number;
+  /** Social proof name pool, sourced from the Content API when available. */
+  names?: string[];
+  /** Social proof location pool, sourced from the Content API when available. */
+  locations?: string[];
 }
 
 export function PurchaseProofToast({
   plans,
   minDelayMs,
   maxDelayMs,
+  names,
+  locations,
 }: PurchaseProofToastProps) {
   const logger = useLogger('PurchaseProofToast');
   const t = useTranslations();
@@ -25,13 +31,17 @@ export function PurchaseProofToast({
 
   const pool = useMemo(() => {
     return {
-      names: messages.subscription.purchaseProofToast.variants.names,
-      locations: messages.subscription.purchaseProofToast.variants.locations,
+      names: names ?? messages.subscription.purchaseProofToast.variants.names,
+      locations:
+        locations ??
+        messages.subscription.purchaseProofToast.variants.locations,
       planNames: plans.map((p) => t(p.titleKey)),
     };
   }, [
     plans,
     t,
+    names,
+    locations,
     messages.subscription.purchaseProofToast.variants.locations,
     messages.subscription.purchaseProofToast.variants.names,
   ]);

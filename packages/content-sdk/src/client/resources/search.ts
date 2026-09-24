@@ -1,7 +1,7 @@
 import {
-  type SearchContentQueryParams as SearchContentQueryParamsType,
-  SearchContentResponse,
-  type SearchContentResponse as SearchContentResponseType,
+  type GetSearchResultsQueryParams as GetSearchResultsQueryParamsType,
+  GetSearchResultsResponse,
+  type GetSearchResultsResponse as GetSearchResultsResponseType,
 } from '../../generated/endpoints';
 import type { HttpTransport } from '../http';
 import type { RequestOptions } from '../types';
@@ -14,13 +14,13 @@ export class SearchResource {
    * returning plain text titles and excerpts with matching terms highlighted in Markdown bold.
    */
   public async query(
-    params?: SearchContentQueryParamsType,
+    params?: GetSearchResultsQueryParamsType,
     options?: RequestOptions,
-  ): Promise<SearchContentResponseType> {
+  ): Promise<GetSearchResultsResponseType> {
     return this.transport.get(
       'api/v1/search',
       params as Record<string, unknown> | undefined,
-      SearchContentResponse,
+      GetSearchResultsResponse,
       options,
     );
   }

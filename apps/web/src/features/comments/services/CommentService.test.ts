@@ -1,16 +1,25 @@
 import 'reflect-metadata';
 import type { Article } from '@maw/content-sdk';
+import { getVariantPool } from '@/features/content/services/get-variant-pool';
 import { CommentService } from './CommentService';
 import { filterByDate } from './use-cases/filterByDate';
 import { generateTree } from './use-cases/generateTree';
 
+jest.mock('@/features/content/services/get-variant-pool');
 jest.mock('./use-cases/generateTree');
 jest.mock('./use-cases/filterByDate');
+
+const getVariantPoolMock = getVariantPool as jest.MockedFunction<
+  typeof getVariantPool
+>;
 
 describe('CommentService', () => {
   let service: CommentService;
 
   beforeEach(() => {
+    jest.clearAllMocks();
+    // Default to an unreachable API so the bundled translations are used.
+    getVariantPoolMock.mockResolvedValue(undefined);
     service = new CommentService();
   });
 
@@ -48,6 +57,41 @@ describe('CommentService', () => {
       );
       expect(filterByDate).toHaveBeenCalledWith(mockTree, expect.any(Number));
       expect(result).toEqual(mockTree);
+    });
+
+    it('prefers Content API variant pools over bundled translations', async () => {
+      getVariantPoolMock.mockImplementation(async (_client, _lang, type) => ({
+        items: type === 'names' ? ['API Name'] : ['API Comment'],
+        updatedAt: '2026-09-01T00:00:00.000Z',
+      }));
+
+      const mockArticle: Partial<Article> = {
+        lang: 'en',
+        published_at: '2023-01-01T00:00:00.000Z',
+        slug: 'test-article',
+      };
+      (generateTree as jest.Mock).mockReturnValue([]);
+      (filterByDate as jest.Mock).mockReturnValue([]);
+
+      await service.getByArticle(mockArticle as Article);
+
+      expect(generateTree).toHaveBeenCalledWith(
+        'test-article',
+        expect.any(Date),
+        expect.objectContaining({
+          pool: { names: ['API Name'], comments: ['API Comment'] },
+        }),
+      );
+      expect(getVariantPoolMock).toHaveBeenCalledWith(
+        expect.anything(),
+        'en',
+        'names',
+      );
+      expect(getVariantPoolMock).toHaveBeenCalledWith(
+        expect.anything(),
+        'en',
+        'comments',
+      );
     });
   });
 });

@@ -25,6 +25,9 @@ describe('ContentApiClient', () => {
     expect(client.images).toBeDefined();
     expect(client.health).toBeDefined();
     expect(client.search).toBeDefined();
+    expect(client.locales).toBeDefined();
+    expect(client.translations).toBeDefined();
+    expect(client.variants).toBeDefined();
   });
 
   describe('articles resource', () => {
@@ -642,6 +645,133 @@ describe('ContentApiClient', () => {
       expect(result.items).toHaveLength(1);
       expect(result.items[0].type).toBe('article');
       expect(result.items[0].title).toBe('Sample **Article**');
+    });
+  });
+
+  describe('locales resource', () => {
+    it('calls GET api/v1/locales', async () => {
+      let capturedUrl = '';
+      const mockFetch = jest
+        .fn<typeof fetch>()
+        .mockImplementation(async (req) => {
+          capturedUrl = getUrlString(req);
+          return new Response(
+            JSON.stringify({
+              total: 1,
+              limit: 20,
+              offset: 0,
+              items: [
+                {
+                  code: 'en',
+                  lang: 'en',
+                  name: 'English',
+                  native_name: 'English',
+                  dir: 'ltr',
+                },
+              ],
+            }),
+            { status: 200, headers: { 'Content-Type': 'application/json' } },
+          );
+        });
+
+      const client = createContentClient({ fetch: mockFetch });
+      const result = await client.locales.list({ limit: 20 });
+
+      expect(capturedUrl).toContain('/api/v1/locales?limit=20');
+      expect(result.items[0].native_name).toBe('English');
+      expect(result.items[0].dir).toBe('ltr');
+    });
+  });
+
+  describe('translations resource', () => {
+    it('calls GET api/v1/translations/{lang} with namespace', async () => {
+      let capturedUrl = '';
+      const mockFetch = jest
+        .fn<typeof fetch>()
+        .mockImplementation(async (req) => {
+          capturedUrl = getUrlString(req);
+          return new Response(
+            JSON.stringify({
+              lang: 'en',
+              namespace: 'common',
+              messages: { hello: 'Hello' },
+              updated_at: '2026-09-01T00:00:00.000Z',
+            }),
+            { status: 200, headers: { 'Content-Type': 'application/json' } },
+          );
+        });
+
+      const client = createContentClient({ fetch: mockFetch });
+      const result = await client.translations.getByLang('en', {
+        namespace: 'common',
+      });
+
+      expect(capturedUrl).toContain('/api/v1/translations/en?namespace=common');
+      expect(result.messages.hello).toBe('Hello');
+    });
+  });
+
+  describe('variants resource', () => {
+    it('calls GET api/v1/variants/{lang} catalog', async () => {
+      let capturedUrl = '';
+      const mockFetch = jest
+        .fn<typeof fetch>()
+        .mockImplementation(async (req) => {
+          capturedUrl = getUrlString(req);
+          return new Response(
+            JSON.stringify({
+              lang: 'en',
+              total_types: 1,
+              variants: {
+                names: {
+                  id: 'names',
+                  kind: 'string_array',
+                  total: 42,
+                  description: 'Fake names',
+                },
+              },
+              updated_at: '2026-09-01T00:00:00.000Z',
+            }),
+            { status: 200, headers: { 'Content-Type': 'application/json' } },
+          );
+        });
+
+      const client = createContentClient({ fetch: mockFetch });
+      const result = await client.variants.getCatalog('en');
+
+      expect(capturedUrl).toContain('/api/v1/variants/en');
+      expect(result.variants.names.total).toBe(42);
+    });
+
+    it('calls GET api/v1/variants/{lang}/{type} with slicing', async () => {
+      let capturedUrl = '';
+      const mockFetch = jest
+        .fn<typeof fetch>()
+        .mockImplementation(async (req) => {
+          capturedUrl = getUrlString(req);
+          return new Response(
+            JSON.stringify({
+              lang: 'en',
+              type: 'names',
+              kind: 'string_array',
+              total: 42,
+              count: 2,
+              limit: 2,
+              offset: 0,
+              items: ['John Doe', 'Jane Doe'],
+              updated_at: '2026-09-01T00:00:00.000Z',
+            }),
+            { status: 200, headers: { 'Content-Type': 'application/json' } },
+          );
+        });
+
+      const client = createContentClient({ fetch: mockFetch });
+      const result = await client.variants.getByType('en', 'names', {
+        limit: 2,
+      });
+
+      expect(capturedUrl).toContain('/api/v1/variants/en/names?limit=2');
+      expect(result.items).toEqual(['John Doe', 'Jane Doe']);
     });
   });
 });
