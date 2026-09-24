@@ -14,6 +14,8 @@ export type LanguageInfo = {
 
 export type SupportedLocaleMeta = Omit<LanguageInfo, 'locale'>;
 
+// The Content API provides native names but not flags, so flags stay bundled
+// here and are resolved by locale code for both API and fallback responses.
 const LANGUAGE_FLAG_MAP: Record<string, string> = {
   ar: '🇸🇦',
   de: '🇩🇪',
@@ -80,17 +82,11 @@ export async function fetchSupportedLocaleMeta(
 function buildSupportedLanguages(
   meta: Record<string, SupportedLocaleMeta>,
 ): LanguageInfo[] {
-  return i18nConfig.locales.map((locale) => {
+  return i18nConfig.locales.flatMap((locale) => {
     const langInfo = meta[locale];
-    if (!langInfo) {
-      throw new Error(
-        `Language configuration is missing for locale: "${locale}"`,
-      );
-    }
-    return {
-      locale,
-      ...langInfo,
-    };
+    // Locales without bundled metadata are provided by the Content API at
+    // runtime; the synchronous fallback only carries what the app bundles.
+    return langInfo ? [{ locale, ...langInfo }] : [];
   });
 }
 

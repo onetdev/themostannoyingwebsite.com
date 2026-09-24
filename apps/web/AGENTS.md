@@ -24,7 +24,7 @@ This document provides specific instructions and context for AI agents working o
 - `src/features/`: Domain-specific modules. **This is where most logic belongs.**
 - `src/hooks/`: Shared, app-wide React hooks.
 - `src/i18n/`: Internationalization.
-  - `messages/`: Global translation bundles.
+  - `messages/`: Bundled English translation reference (other locales are served by the Content API).
 - `src/navigation/`: Localization-aware routing and navigation logic.
 - `src/schemas/`: Shared Zod validation schemas.
 - `src/services/`: Global business logic (e.g., `AppService`).
@@ -36,23 +36,33 @@ This document provides specific instructions and context for AI agents working o
 
 We use `next-intl`. **NEVER hardcode user-facing strings.**
 
-### 1. Global Messages (`src/i18n/messages/`)
-Structured by language folders: `src/i18n/messages/{locale}/`
-- `index.ts`: Aggregates all feature and global translations.
+> ℹ️ Non-English translations are served by the headless Content API. Only the
+> English bundles are shipped with the app, as the reference shape and runtime
+> fallback. See `adr/0022-api-served-translations.md`.
+
+### 1. Global Messages (`src/i18n/messages/en/`)
+Only English is bundled: `src/i18n/messages/en/`
+- `index.ts`: Aggregates all feature and global translations. Defines `AppTranslationShape`.
 - `common.ts`: Shared UI strings (buttons, labels, common errors).
 - `metadata.ts`: SEO titles and descriptions.
 - `variants.ts`: Large arrays for shared UI elements (e.g., random names).
 
-### 2. Feature Translations (`src/features/{feature}/i18n/`)
-Two patterns allowed based on complexity:
-- **Single File**: `i18n/{locale}.ts` (if only simple keys exist).
-- **Directory**: `i18n/{locale}/` containing `index.ts` and `variants.ts` (if arrays/complex shapes are needed).
+### 2. Feature Translations (`src/features/{feature}/i18n/en*`)
+Two patterns allowed based on complexity (English only):
+- **Single File**: `i18n/en.ts` (if only simple keys exist).
+- **Directory**: `i18n/en/` containing `index.ts` and `variants.ts` (if arrays/complex shapes are needed).
 
-### 3. Usage in Services
+### 3. Runtime Message Loading
+- `src/core/i18n/request.ts` calls `loadMessages()` (`src/core/i18n/load-messages.ts`).
+- For `en`, the bundled bundle is returned directly.
+- For every other locale, `client.translations.getByLang(locale)` is fetched and
+  deep-merged over the English bundle; on failure the English bundle is returned.
+
+### 4. Usage in Services
 If a Service needs random data (e.g., `CommentService.ts` needs a list of names):
-- Put that data in `variants.ts`.
-- Dynamic import it in the Service: `import(\`@/i18n/messages/${locale}/variants\`)`.
-- **Why?** Keeps main bundles small and prevents loading all translations into the background service logic.
+- Prefer the API via `getVariantPool()` (`client.variants.getByType`).
+- Bundled English `variants.ts` files remain the fallback when the API is unavailable.
+- Add new English keys so the type shape and fallback cover the feature.
 
 ---
 

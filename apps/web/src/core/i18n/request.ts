@@ -2,6 +2,7 @@ import * as Sentry from '@sentry/nextjs';
 import { hasLocale } from 'next-intl';
 import { getRequestConfig } from 'next-intl/server';
 
+import { loadMessages } from './load-messages';
 import { routing } from './routing';
 
 export default getRequestConfig(async ({ requestLocale }) => {
@@ -15,6 +16,6 @@ export default getRequestConfig(async ({ requestLocale }) => {
 
   return {
     locale,
-    messages: (await import(`@/i18n/messages/${locale}`)).default,
+    messages: await loadMessages(locale),
   };
 });
