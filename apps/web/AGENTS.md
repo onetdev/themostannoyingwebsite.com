@@ -58,7 +58,16 @@ Two patterns allowed based on complexity (English only):
 - For every other locale, `client.translations.getByLang(locale)` is fetched and
   deep-merged over the English bundle; on failure the English bundle is returned.
 
-### 4. Usage in Services
+### 4. Supported Locale Catalog (build-time)
+- `scripts/build-locales.ts` fetches the locale list from the Content API at build
+  time and writes `public/locales.json` (gitignored).
+- `src/i18n/supported-locales.ts` exposes the generated `SUPPORTED_LANGUAGES`, read
+  synchronously by `useLanguageSwitcher` (no runtime browser fetch, no CORS).
+- Falls back to an English-only catalog when the API is unavailable at build time.
+- Regenerated via `build:metadata` (run by `build`, `lint`, `check-types`, and `dev`).
+- See `adr/0023-build-time-locale-catalog.md`.
+
+### 5. Usage in Services
 If a Service needs random data (e.g., `CommentService.ts` needs a list of names):
 - Prefer the API via `getVariantPool()` (`client.variants.getByType`).
 - Bundled English `variants.ts` files remain the fallback when the API is unavailable.
