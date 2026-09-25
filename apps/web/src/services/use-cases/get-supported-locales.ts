@@ -1,8 +1,5 @@
-import {
-  CONTENT_CACHE_TAGS,
-  type ContentApiClient,
-  createContentClient,
-} from '@maw/content-sdk';
+import { CONTENT_CACHE_TAGS, type ContentApiClient } from '@maw/content-sdk';
+import { createAppContentClient } from '@/core/content';
 import { LANGUAGE_NATIVE_NAME_MAP } from '@/i18n/language-native-name-map';
 import i18nConfig from '@/root/i18n.config';
 
@@ -57,7 +54,7 @@ export function getSupportedLocaleMeta(): Record<string, SupportedLocaleMeta> {
  * (e.g. the build-time locale catalog generation).
  */
 export async function fetchSupportedLocaleMetaStrict(
-  client: ContentApiClient = createContentClient(),
+  client: ContentApiClient = createAppContentClient(),
 ): Promise<Record<string, SupportedLocaleMeta>> {
   const response = await client.locales.list(undefined, {
     next: {
@@ -82,7 +79,7 @@ export async function fetchSupportedLocaleMetaStrict(
  * to the bundled map when the API is unavailable.
  */
 export async function fetchSupportedLocaleMeta(
-  client: ContentApiClient = createContentClient(),
+  client: ContentApiClient = createAppContentClient(),
 ): Promise<Record<string, SupportedLocaleMeta>> {
   try {
     return await fetchSupportedLocaleMetaStrict(client);

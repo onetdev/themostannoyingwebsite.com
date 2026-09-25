@@ -1,12 +1,9 @@
 import 'server-only';
 
-import {
-  type ContentApiClient,
-  createContentClient,
-  type LanguageCode,
-} from '@maw/content-sdk';
+import type { ContentApiClient, LanguageCode } from '@maw/content-sdk';
 import { mulberry32, stringToSeed } from '@maw/utils/random';
 import { type Container, injectable } from 'inversify';
+import { createAppContentClient } from '@/core/content';
 import { getVariantPool } from '@/features/content/services/get-variant-pool';
 import enVariants from '@/i18n/messages/en/variants';
 import i18nConfig from '@/root/i18n.config';
@@ -23,7 +20,7 @@ export class OnlySpamsService implements IOnlySpamsService {
   private readonly client: ContentApiClient;
 
   constructor(...args: [ContentApiClient?]) {
-    this.client = args[0] ?? createContentClient();
+    this.client = args[0] ?? createAppContentClient();
   }
 
   async getData(locale: string): Promise<OnlySpamsData> {

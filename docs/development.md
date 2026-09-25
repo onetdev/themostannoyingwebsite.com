@@ -31,6 +31,18 @@ https://localhost:3000
 
 HTTPS is required because some browser APIs used by the project only work in secure contexts.
 
+### Content API and CORS
+
+The headless Content API rejects `localhost` origins in production. During
+`pnpm dev`, browser-side Content API requests (article search, plus anything
+resolved through the client DI container) are therefore sent to the same-origin
+path `/api/content`, which the Next.js dev server proxies to the API without the
+browser's `Origin` header. The shared factory lives in `src/core/content`, and
+the development-only proxy route handler in
+`apps/web/src/app/api/content/[...path]/route.ts`; see
+`adr/0024-dev-content-api-proxy.md`. A local `next build && next start` does not
+use the proxy.
+
 ## Monorepo Scripts
 
 Common workspace scripts:

@@ -1,9 +1,9 @@
 import {
   CONTENT_CACHE_TAGS,
   type ContentApiClient,
-  createContentClient,
   type LanguageCode,
 } from '@maw/content-sdk';
+import { createAppContentClient } from '@/core/content';
 import enMessages from '@/i18n/messages/en';
 
 type MessageTree = Record<string, unknown>;
@@ -46,7 +46,7 @@ export function mergeMessages(
  */
 export async function loadMessages(
   locale: AppLocale,
-  client: ContentApiClient = createContentClient(),
+  client: ContentApiClient = createAppContentClient(),
 ): Promise<MessageTree> {
   if (locale === 'en') {
     return enMessages;

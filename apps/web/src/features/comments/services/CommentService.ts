@@ -1,13 +1,13 @@
 import 'server-only';
 
-import {
-  type Article,
-  type ArticleListItem,
-  type ContentApiClient,
-  createContentClient,
-  type LanguageCode,
+import type {
+  Article,
+  ArticleListItem,
+  ContentApiClient,
+  LanguageCode,
 } from '@maw/content-sdk';
 import { injectable } from 'inversify';
+import { createAppContentClient } from '@/core/content';
 import enCommentVariants from '@/features/comments/i18n/en/variants';
 import { getVariantPool } from '@/features/content/services/get-variant-pool';
 import enVariants from '@/i18n/messages/en/variants';
@@ -29,7 +29,7 @@ export class CommentService implements ICommentService {
   private readonly client: ContentApiClient;
 
   constructor(...args: [ContentApiClient?]) {
-    this.client = args[0] ?? createContentClient();
+    this.client = args[0] ?? createAppContentClient();
   }
 
   private async getRangomGeneratorPool(locale: string): Promise<CommentPool> {
