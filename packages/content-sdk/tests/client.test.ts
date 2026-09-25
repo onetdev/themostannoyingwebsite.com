@@ -441,17 +441,18 @@ describe('ContentApiClient', () => {
       expect(capturedUrl).toBe('https://test-api.example.com/health');
     });
 
-    it('resolves baseUrl from environment variables if not provided', () => {
-      const originalEnv = process.env.CONTENT_API_URL;
-      process.env.CONTENT_API_URL = 'https://custom-env-api.example.com';
+    it('resolves baseUrl from the NEXT_PUBLIC_CONTENT_API_URL environment variable', () => {
+      const originalEnv = process.env.NEXT_PUBLIC_CONTENT_API_URL;
+      process.env.NEXT_PUBLIC_CONTENT_API_URL =
+        'https://custom-env-api.example.com';
 
       const client = createContentClient();
       expect(client).toBeInstanceOf(ContentApiClient);
 
       if (originalEnv !== undefined) {
-        process.env.CONTENT_API_URL = originalEnv;
+        process.env.NEXT_PUBLIC_CONTENT_API_URL = originalEnv;
       } else {
-        delete process.env.CONTENT_API_URL;
+        delete process.env.NEXT_PUBLIC_CONTENT_API_URL;
       }
     });
 

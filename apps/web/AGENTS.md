@@ -63,7 +63,9 @@ Two patterns allowed based on complexity (English only):
   time and writes `public/locales.json` (gitignored).
 - `src/i18n/supported-locales.ts` exposes the generated `SUPPORTED_LANGUAGES`, read
   synchronously by `useLanguageSwitcher` (no runtime browser fetch, no CORS).
-- Falls back to an English-only catalog when the API is unavailable at build time.
+- **Fails the build** when the Content API is unreachable. Pass `--allow-fallback`
+  or set `ALLOW_LOCALES_FALLBACK=true` to write the bundled English-only list instead.
+- The API base URL is overridable via `NEXT_PUBLIC_CONTENT_API_URL`.
 - Regenerated via `build:metadata` (run by `build`, `lint`, `check-types`, and `dev`).
 - See `adr/0023-build-time-locale-catalog.md`.
 

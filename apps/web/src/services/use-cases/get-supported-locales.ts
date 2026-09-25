@@ -51,6 +51,33 @@ export function getSupportedLocaleMeta(): Record<string, SupportedLocaleMeta> {
 }
 
 /**
+ * Fetches supported locale metadata from the headless Content API, throwing if
+ * the request fails. Prefer `fetchSupportedLocaleMeta` in runtime code that
+ * must degrade gracefully; use this when the caller wants to fail loudly
+ * (e.g. the build-time locale catalog generation).
+ */
+export async function fetchSupportedLocaleMetaStrict(
+  client: ContentApiClient = createContentClient(),
+): Promise<Record<string, SupportedLocaleMeta>> {
+  const response = await client.locales.list(undefined, {
+    next: {
+      revalidate: 86400,
+      tags: [CONTENT_CACHE_TAGS.locales],
+    },
+  });
+
+  return Object.fromEntries(
+    response.items.map((item) => [
+      item.code,
+      {
+        flag: LANGUAGE_FLAG_MAP[item.code] ?? '',
+        label: item.native_name,
+      },
+    ]),
+  );
+}
+
+/**
  * Fetches supported locale metadata from the headless Content API, falling back
  * to the bundled map when the API is unavailable.
  */
@@ -58,28 +85,13 @@ export async function fetchSupportedLocaleMeta(
   client: ContentApiClient = createContentClient(),
 ): Promise<Record<string, SupportedLocaleMeta>> {
   try {
-    const response = await client.locales.list(undefined, {
-      next: {
-        revalidate: 86400,
-        tags: [CONTENT_CACHE_TAGS.locales],
-      },
-    });
-
-    return Object.fromEntries(
-      response.items.map((item) => [
-        item.code,
-        {
-          flag: LANGUAGE_FLAG_MAP[item.code] ?? '',
-          label: item.native_name,
-        },
-      ]),
-    );
+    return await fetchSupportedLocaleMetaStrict(client);
   } catch {
     return FALLBACK_LOCALE_META;
   }
 }
 
-function buildSupportedLanguages(
+export function buildSupportedLanguages(
   meta: Record<string, SupportedLocaleMeta>,
 ): LanguageInfo[] {
   return i18nConfig.locales.flatMap((locale) => {
