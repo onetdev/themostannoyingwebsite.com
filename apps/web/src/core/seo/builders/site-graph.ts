@@ -11,6 +11,12 @@ export interface SiteGraphInput {
   locale: string;
   siteName: string;
   description: string;
+  /**
+   * Locale-independent brand name for the `Organization`. Falls back to
+   * `siteName` when omitted. Keep this stable across locales because the
+   * organization shares one `@id` everywhere.
+   */
+  organizationName?: string;
   /** Absolute or root-relative URL of the organization logo. */
   logoUrl?: string;
   /** Social/profile URLs describing the organization. */
@@ -36,7 +42,7 @@ export function buildSiteGraph(input: SiteGraphInput): Graph {
   const organization: Organization = {
     '@type': 'Organization',
     '@id': organizationId,
-    name: input.siteName,
+    name: input.organizationName ?? input.siteName,
     url: normalizeBaseUrl(input.baseUrl),
     ...(input.logoUrl
       ? { logo: absoluteAssetUrl(input.baseUrl, input.logoUrl) }

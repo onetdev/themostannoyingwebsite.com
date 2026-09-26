@@ -37,10 +37,12 @@ export async function generateMetadata({
   }
 
   const allTranslations = data.translations ?? [];
-  const canonicalTranslation = allTranslations.find(
+  const xDefaultTranslation = allTranslations.find(
     (t) => t.lang === i18nConfig.defaultLocale,
-  ) ||
-    allTranslations[0] || { lang: locale, slug };
+  ) ?? {
+    lang: locale,
+    slug: data.slug,
+  };
 
   const languages = Object.fromEntries(
     allTranslations.map((t) => [t.lang, `/${t.lang}/articles/${t.slug}/`]),
@@ -51,8 +53,15 @@ export async function generateMetadata({
   return {
     title: data.title,
     alternates: {
-      canonical: `/${canonicalTranslation.lang}/articles/${canonicalTranslation.slug}/`,
-      languages,
+      // Self-canonical per locale: the localized URL is the canonical version,
+      // and `hreflang` (incl. x-default) links it to its siblings. This keeps
+      // the canonical aligned with the JSON-LD `@id`/`url`, which is also the
+      // localized URL.
+      canonical: `/${locale}/articles/${data.slug}/`,
+      languages: {
+        ...languages,
+        'x-default': `/${xDefaultTranslation.lang}/articles/${xDefaultTranslation.slug}/`,
+      },
     },
     openGraph: {
       title: data.title,

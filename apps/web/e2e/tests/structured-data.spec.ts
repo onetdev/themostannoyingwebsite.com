@@ -1,10 +1,13 @@
 import { expect, type Page, test } from '@playwright/test';
 
 import { getAboutPage } from '../pages/AboutPage';
+import { getAchievementsPage } from '../pages/AchievementsPage';
 import { getArticlePage } from '../pages/ArticlePage';
+import { getDonatePage } from '../pages/DonatePage';
 import { getHomePage } from '../pages/HomePage';
 import { getPlansPage } from '../pages/PlansPage';
 import { getSearchPage } from '../pages/SearchPage';
+import { getLoginPage } from '../pages/user/LoginPage';
 import { setupE2eTestState } from '../utils/setup';
 
 type JsonLdNode = Record<string, unknown>;
@@ -104,4 +107,57 @@ test('search page is marked noindex', async ({ page }) => {
 
   const robots = page.locator('meta[name="robots"]');
   await expect(robots).toHaveAttribute('content', /noindex/);
+});
+
+test('donate page exposes a DonateAction', async ({ page }) => {
+  await setupE2eTestState(page);
+  await getDonatePage(page).goto();
+
+  const donate = findByType(await getJsonLdNodes(page), 'DonateAction');
+
+  expect(donate).toBeDefined();
+  expect(donate?.recipient).toEqual({
+    '@id': 'https://www.themostannoyingwebsite.com/#organization',
+  });
+});
+
+test('achievements page exposes an ItemList', async ({ page }) => {
+  await setupE2eTestState(page);
+  await getAchievementsPage(page).goto();
+
+  const list = findByType(await getJsonLdNodes(page), 'ItemList');
+
+  expect(list).toBeDefined();
+  expect(typeof list?.numberOfItems).toBe('number');
+});
+
+test('site graph carries a stable organization name with localized website', async ({
+  page,
+}) => {
+  await setupE2eTestState(page);
+  await page.goto('/hu/');
+
+  const nodes = await getJsonLdNodes(page);
+  const organization = findByType(nodes, 'Organization');
+  const website = findByType(nodes, 'WebSite');
+
+  // Organization keeps the default-locale brand even on a localized page.
+  expect(organization?.name).toBe('The Most Annoying Website');
+  expect(website?.inLanguage).toBe('hu');
+});
+
+test('auth pages are noindex but followable', async ({ page }) => {
+  await setupE2eTestState(page);
+  await getLoginPage(page).goto();
+
+  const robots = page.locator('meta[name="robots"]');
+  await expect(robots).toHaveAttribute('content', /noindex/);
+  await expect(robots).toHaveAttribute('content', /follow/);
+});
+
+test('search form reflects the ?q= query parameter', async ({ page }) => {
+  await setupE2eTestState(page);
+  await page.goto('/en/search?q=banana');
+
+  await expect(page.getByPlaceholder('Search...')).toHaveValue('banana');
 });

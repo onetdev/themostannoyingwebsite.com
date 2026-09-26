@@ -23,13 +23,21 @@ export interface BlogInput {
 export function buildBlog(input: BlogInput): WithContext<Blog> {
   const homeUrl = absoluteUrl(input.baseUrl, input.locale);
 
-  const blogPost: BlogPosting[] = input.posts.map((post) => ({
-    '@type': 'BlogPosting',
-    url: absoluteUrl(input.baseUrl, input.locale, post.path),
-    headline: post.headline,
-    ...(post.description ? { description: post.description } : {}),
-    ...(post.datePublished ? { datePublished: post.datePublished } : {}),
-  }));
+  const blogPost: BlogPosting[] = input.posts.map((post) => {
+    const url = absoluteUrl(input.baseUrl, input.locale, post.path);
+
+    return {
+      '@type': 'BlogPosting',
+      // Share the article page's node id so the home graph merges with the
+      // richer BlogPosting emitted on the article route instead of producing an
+      // anonymous duplicate.
+      '@id': url,
+      url,
+      headline: post.headline,
+      ...(post.description ? { description: post.description } : {}),
+      ...(post.datePublished ? { datePublished: post.datePublished } : {}),
+    };
+  });
 
   return {
     '@context': 'https://schema.org',

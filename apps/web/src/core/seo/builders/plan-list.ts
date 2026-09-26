@@ -40,8 +40,11 @@ export function buildPlanList(input: PlanListInput): WithContext<ItemList> {
   const pageUrl = absoluteUrl(input.baseUrl, input.locale, input.path);
 
   const itemListElement: ListItem[] = input.plans.map((plan, index) => {
+    const productId = `${pageUrl}#plan-${plan.key}`;
+
     const product: Product = {
       '@type': 'Product',
+      '@id': productId,
       name: plan.name,
       description: plan.description,
       url: pageUrl,
@@ -50,6 +53,7 @@ export function buildPlanList(input: PlanListInput): WithContext<ItemList> {
         : {}),
       offers: plan.offers.map<Offer>((offer) => ({
         '@type': 'Offer',
+        '@id': `${productId}-${offer.billingCycle}`,
         price: offer.price,
         priceCurrency: offer.currency,
         url: pageUrl,

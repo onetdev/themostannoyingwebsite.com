@@ -32,7 +32,7 @@ describe('JsonLd', () => {
     expect(html).toContain('\\u003c');
   });
 
-  it('wraps arrays into a @graph', () => {
+  it('wraps arrays into a @graph with a single @context', () => {
     const html = renderToStaticMarkup(
       <JsonLd
         data={[
@@ -43,5 +43,7 @@ describe('JsonLd', () => {
     );
 
     expect(html).toContain('"@graph"');
+    // Nested `@context` keys are stripped so the graph carries exactly one.
+    expect(html.match(/"@context"/g)).toHaveLength(1);
   });
 });

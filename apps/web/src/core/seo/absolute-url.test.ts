@@ -32,6 +32,12 @@ describe('absoluteUrl', () => {
       'https://example.com/de/about/',
     );
   });
+
+  it('encodes path segments', () => {
+    expect(
+      absoluteUrl('https://example.com', 'en', 'articles/hello world'),
+    ).toBe('https://example.com/en/articles/hello%20world/');
+  });
 });
 
 describe('absoluteAssetUrl', () => {
@@ -39,6 +45,15 @@ describe('absoluteAssetUrl', () => {
     expect(
       absoluteAssetUrl('https://example.com', 'https://cdn.example.com/a.png'),
     ).toBe('https://cdn.example.com/a.png');
+  });
+
+  it('keeps protocol-relative and non-http scheme urls untouched', () => {
+    expect(
+      absoluteAssetUrl('https://example.com', '//cdn.example.com/a.png'),
+    ).toBe('//cdn.example.com/a.png');
+    expect(
+      absoluteAssetUrl('https://example.com', 'data:image/png;base64,AAA'),
+    ).toBe('data:image/png;base64,AAA');
   });
 
   it('joins root-relative asset paths', () => {

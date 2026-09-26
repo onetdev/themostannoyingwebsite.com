@@ -51,6 +51,22 @@ describe('buildSiteGraph', () => {
       'https://example.com/en/search/?q={search_term_string}',
     );
   });
+
+  it('keeps the organization name stable while localizing the website', () => {
+    const localized = buildSiteGraph({
+      baseUrl,
+      locale: 'hu',
+      siteName: 'A Legidegesítőbb Weboldal',
+      organizationName: 'The Most Annoying Website',
+      description: 'Leírás',
+    });
+
+    const organization = asRecord(localized['@graph'][0]);
+    const website = asRecord(localized['@graph'][1]);
+    expect(organization.name).toBe('The Most Annoying Website');
+    expect(organization['@id']).toBe('https://example.com/#organization');
+    expect(website.name).toBe('A Legidegesítőbb Weboldal');
+  });
 });
 
 describe('buildBreadcrumbList', () => {
@@ -168,6 +184,7 @@ describe('buildBlog', () => {
     expect(posts).toHaveLength(1);
     expect(posts[0]).toMatchObject({
       '@type': 'BlogPosting',
+      '@id': 'https://example.com/en/articles/one/',
       url: 'https://example.com/en/articles/one/',
       headline: 'One',
     });
@@ -201,10 +218,12 @@ describe('buildPlanList', () => {
     const product = asRecord(item.item);
     expect(product['@type']).toBe('Product');
     expect(product.name).toBe('Basic');
+    expect(product['@id']).toBe('https://example.com/en/plans/#plan-poorified');
     const offers = getArray(product.offers);
     expect(offers).toHaveLength(2);
     expect(offers[0]).toMatchObject({
       '@type': 'Offer',
+      '@id': 'https://example.com/en/plans/#plan-poorified-monthly',
       price: 99,
       priceCurrency: 'EUR',
     });

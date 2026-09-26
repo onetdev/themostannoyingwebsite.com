@@ -9,6 +9,8 @@ export const INDEX_ROBOTS: Metadata['robots'] = {
 };
 
 export const NOINDEX_ROBOTS: Metadata['robots'] = {
+  // Keep utility/auth pages out of the index, but still let crawlers follow
+  // their outbound links (typical recommendation for noindex surfaces).
   index: false,
-  follow: false,
+  follow: true,
 };

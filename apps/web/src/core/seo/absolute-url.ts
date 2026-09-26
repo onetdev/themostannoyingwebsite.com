@@ -21,17 +21,24 @@ export function absoluteUrl(
   path = '',
 ): string {
   const base = normalizeBaseUrl(baseUrl);
-  const normalizedPath = path.replace(/^\/+/, '').replace(/\/+$/, '');
+  const normalizedPath = path
+    .replace(/^\/+/, '')
+    .replace(/\/+$/, '')
+    .split('/')
+    .filter((segment) => segment.length > 0)
+    .map((segment) => encodeURIComponent(segment))
+    .join('/');
   const suffix = normalizedPath.length > 0 ? `/${normalizedPath}` : '';
-  return `${base}/${locale}${suffix}/`;
+  return `${base}/${encodeURIComponent(locale)}${suffix}/`;
 }
 
 /**
  * Resolves a local asset path against the deployment base URL while leaving
- * already-absolute URLs untouched.
+ * already-absolute URLs (including protocol-relative and non-http schemes such
+ * as `data:`) untouched.
  */
 export function absoluteAssetUrl(baseUrl: string, assetUrl: string): string {
-  if (/^https?:\/\//i.test(assetUrl)) {
+  if (/^[a-z][a-z0-9+.-]*:/i.test(assetUrl) || assetUrl.startsWith('//')) {
     return assetUrl;
   }
 

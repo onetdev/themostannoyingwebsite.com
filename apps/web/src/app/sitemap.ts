@@ -11,47 +11,85 @@ import { getAppConfigService } from '@/services';
 
 const config = getAppConfigService().getDeploymentMeta();
 
-const genLangAlternates = (
-  path: string,
-  currentLocale: string,
-): Languages<string> => {
-  const items = i18nConfig.locales
-    .filter((lang) => lang !== currentLocale)
-    .map((lang) => [lang, absoluteUrl(config.publicUrl, lang, path)]);
+/**
+ * Builds the `hreflang` alternates for a path that exists under every locale,
+ * including the self-referencing entry and `x-default`.
+ */
+const genLangAlternates = (path: string): Languages<string> => {
+  const alternates: Languages<string> = Object.fromEntries(
+    i18nConfig.locales.map((lang) => [
+      lang,
+      absoluteUrl(config.publicUrl, lang, path),
+    ]),
+  );
 
-  return Object.fromEntries(items);
+  alternates['x-default'] = absoluteUrl(
+    config.publicUrl,
+    i18nConfig.defaultLocale,
+    path,
+  );
+
+  return alternates;
 };
 
-const commonPageMeta = (
-  path: string,
-  locale: string,
-): MetadataRoute.Sitemap[0] => {
+const commonPageMeta = (path: string): MetadataRoute.Sitemap[0] => {
   return {
-    url: absoluteUrl(config.publicUrl, locale, path),
-    lastModified: new Date(),
+    url: absoluteUrl(config.publicUrl, i18nConfig.defaultLocale, path),
     changeFrequency: 'daily',
     alternates: {
-      languages: genLangAlternates(path, locale),
+      languages: genLangAlternates(path),
     },
   };
 };
 
-const mapArticleToSitemapEntry = (item: ArticleListItem) => {
-  return {
-    url: absoluteUrl(config.publicUrl, item.lang, `articles/${item.slug}`),
-    lastModified: new Date(item.published_at),
-  } satisfies MetadataRoute.Sitemap[0];
+/**
+ * Groups localized articles by their canonical `article_group` so each logical
+ * article is emitted once per locale with a complete `hreflang` alternates map
+ * (including `x-default`), instead of isolated per-locale entries.
+ */
+const mapArticlesToSitemapEntries = (
+  items: ArticleListItem[],
+): MetadataRoute.Sitemap => {
+  const groups = new Map<string, ArticleListItem[]>();
+
+  for (const item of items) {
+    if (!(i18nConfig.locales as readonly string[]).includes(item.lang)) {
+      continue;
+    }
+    const group = groups.get(item.article_group) ?? [];
+    group.push(item);
+    groups.set(item.article_group, group);
+  }
+
+  return [...groups.values()].flatMap((group) => {
+    const languages: Languages<string> = Object.fromEntries(
+      group.map((item) => [
+        item.lang,
+        absoluteUrl(config.publicUrl, item.lang, `articles/${item.slug}`),
+      ]),
+    );
+
+    const xDefault =
+      group.find((item) => item.lang === i18nConfig.defaultLocale) ?? group[0];
+    languages['x-default'] = absoluteUrl(
+      config.publicUrl,
+      xDefault.lang,
+      `articles/${xDefault.slug}`,
+    );
+
+    return group.map((item) => ({
+      url: absoluteUrl(config.publicUrl, item.lang, `articles/${item.slug}`),
+      lastModified: new Date(item.published_at),
+      alternates: { languages },
+    }));
+  });
 };
 
 async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const di = getDependencyContainer();
   const service = await getArticleService(di);
   const articlesList = await service.listAll();
-  const articles = articlesList
-    .filter((item) =>
-      (i18nConfig.locales as readonly string[]).includes(item.lang),
-    )
-    .map(mapArticleToSitemapEntry);
+  const articles = mapArticlesToSitemapEntries(articlesList);
 
   const commonPages = [
     '',
@@ -70,9 +108,7 @@ async function sitemap(): Promise<MetadataRoute.Sitemap> {
     'virgin',
   ];
 
-  const commonPagesEntries = i18nConfig.locales.flatMap((locale) =>
-    commonPages.map((path) => commonPageMeta(path, locale)),
-  );
+  const commonPagesEntries = commonPages.map((path) => commonPageMeta(path));
 
   return [...commonPagesEntries, ...articles];
 }
