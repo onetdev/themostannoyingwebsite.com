@@ -11,9 +11,10 @@ Use this skill to ensure all user-facing text is correctly localized according t
 
 1.  **Analyze String Location**: Determine if the string is global (shared UI), metadata (SEO), or specific to a feature in `src/features/`.
 2.  **English First**:
-    - Locate the correct `en.ts` or `en/index.ts` file.
+    - Locate the correct `en.ts` file.
     - If the feature doesn't have an `i18n` folder, create it: `src/features/{feature}/i18n/en.ts`.
     - Add the key/value pair. Use `camelCase` for keys.
+    - Do not add variant arrays here; those live in the Content API (see below).
 3.  **Cross-Locale Sync**:
     - Check if other locales in `src/i18n/messages/` need the same key.
     - Update them if requested.

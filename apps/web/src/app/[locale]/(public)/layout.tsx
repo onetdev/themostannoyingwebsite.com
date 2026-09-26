@@ -1,4 +1,5 @@
 import '@/app/global.css';
+import type { LanguageCode } from '@maw/content-sdk';
 import { Analytics } from '@vercel/analytics/react';
 import { Inter } from 'next/font/google';
 import { notFound } from 'next/navigation';
@@ -8,6 +9,7 @@ import { getLangDir } from 'rtl-detect';
 import { ClientObserverProvider } from '@/app/bootstrap/ClientObserverProvider';
 import { ClientRootProviderContainer } from '@/app/bootstrap/ClientRootProviderContainer';
 import { routing } from '@/core/i18n/routing';
+import { prefetchVariantPools } from '@/features/content/services/prefetch-variant-pools';
 import { BeggarBanner } from '@/features/funding/components';
 import { getAppConfigService } from '@/services';
 import { LocaleSuggestion } from './_components/LocaleSuggestion';
@@ -33,6 +35,15 @@ async function LocalePublicRootLayout({
     notFound();
   }
 
+  // Global pain widgets (page title glitch, newsletter modal, chat bubble)
+  // read their Content API variant pools from the hydrated React Query cache.
+  const dehydratedState = await prefetchVariantPools(locale as LanguageCode, [
+    'marquee-titles',
+    'paged-titles',
+    'newsletter-confirmations',
+    'chat-bubble-messages',
+  ]);
+
   return (
     <html
       lang={locale}
@@ -42,7 +53,10 @@ async function LocalePublicRootLayout({
     >
       <body>
         <NextIntlClientProvider>
-          <ClientRootProviderContainer appConfig={config}>
+          <ClientRootProviderContainer
+            appConfig={config}
+            dehydratedState={dehydratedState}
+          >
             <ClientObserverProvider />
             <LocaleSuggestion />
             <BeggarBanner />

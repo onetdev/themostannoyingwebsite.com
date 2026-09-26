@@ -15,12 +15,14 @@ import {
   Separator,
 } from '@maw/ui-lib';
 import { randomNumber } from '@maw/utils/random';
-import { useMessages, useTranslations } from 'next-intl';
-import { useMemo, useState } from 'react';
+import { useTranslations } from 'next-intl';
+import { useState } from 'react';
 import { Controller } from 'react-hook-form';
 import { Link } from '@/core/i18n/navigation';
 import { useEvent } from '@/core/react';
+import { useVariantPool } from '@/features/content/hooks';
 import { useNewsletterForm } from '../hooks';
+import type { NewsletterConfirmation } from '../types';
 
 export interface NewsletterModalProps {
   visible?: boolean;
@@ -32,9 +34,8 @@ export function NewsletterModal({
   onDismiss,
 }: NewsletterModalProps) {
   const t = useTranslations('marketing.newsletterModal');
-  const messages = useMessages() as AppTranslationShape;
   const [flipActions, setFlipActions] = useState(false);
-  const [actions, setActions] = useState<ConfirmItem>({
+  const [actions, setActions] = useState<NewsletterConfirmation>({
     confirm: t('initialConfirm'),
     cancel: t('initialCancel'),
   });
@@ -48,15 +49,9 @@ export function NewsletterModal({
 
   useEvent('ui:modal:dismiss-signaled', () => onDismiss?.(), visible);
 
-  const confirmPool = useMemo(() => {
-    return Object.entries(messages.marketing.newsletterModal.confirmations).map(
-      ([, value]) => ({
-        confirm: value.confirm,
-        cancel: value.cancel,
-        text: value.text,
-      }),
-    );
-  }, [messages.marketing.newsletterModal.confirmations]);
+  const confirmPool = useVariantPool<NewsletterConfirmation>(
+    'newsletter-confirmations',
+  );
 
   const renderActions = () => {
     const buttons = [
@@ -72,6 +67,10 @@ export function NewsletterModal({
   };
 
   const randomConfirmation = () => {
+    if (confirmPool.length === 0) {
+      return;
+    }
+
     const rnd = Math.floor(Math.random() * confirmPool.length);
     setActions(confirmPool[rnd]);
     setFlipActions(randomNumber(0, 1) === 0);
@@ -143,9 +142,3 @@ export function NewsletterModal({
     </Dialog>
   );
 }
-
-type ConfirmItem = {
-  text?: string;
-  confirm: string;
-  cancel: string;
-};

@@ -16,6 +16,20 @@ export interface EmailSample {
   body: string;
 }
 
+/** A single deceptive newsletter confirmation prompt from the Content API. */
+export interface NewsletterConfirmation {
+  text?: string;
+  confirm: string;
+  cancel: string;
+}
+
+/** A single quiz question variant from the Content API. */
+export interface QuizQuestionVariant {
+  text: string;
+  options: Record<string, string> | string[];
+  solution?: string;
+}
+
 export interface OnlySpamsData {
   testimonials: Testimonial[];
   samples: EmailSample[];

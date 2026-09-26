@@ -18,7 +18,7 @@ describe('CommentService', () => {
 
   beforeEach(() => {
     jest.clearAllMocks();
-    // Default to an unreachable API so the bundled translations are used.
+    // Default to an unreachable API; pools degrade to empty arrays.
     getVariantPoolMock.mockResolvedValue(undefined);
     service = new CommentService();
   });
@@ -57,6 +57,26 @@ describe('CommentService', () => {
       );
       expect(filterByDate).toHaveBeenCalledWith(mockTree, expect.any(Number));
       expect(result).toEqual(mockTree);
+    });
+
+    it('falls back to empty pools when the Content API is unreachable', async () => {
+      const mockArticle: Partial<Article> = {
+        lang: 'en',
+        published_at: '2023-01-01T00:00:00.000Z',
+        slug: 'test-article',
+      };
+      (generateTree as jest.Mock).mockReturnValue([]);
+      (filterByDate as jest.Mock).mockReturnValue([]);
+
+      await service.getByArticle(mockArticle as Article);
+
+      expect(generateTree).toHaveBeenCalledWith(
+        'test-article',
+        expect.any(Date),
+        expect.objectContaining({
+          pool: { names: [], comments: [] },
+        }),
+      );
     });
 
     it('prefers Content API variant pools over bundled translations', async () => {

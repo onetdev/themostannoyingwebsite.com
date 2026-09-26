@@ -1,5 +1,3 @@
-import socialProofVariants from './purchase-proof-variants';
-
 export default {
   landing: {
     headline: 'The Ultimate AI Upgrade *',
@@ -80,7 +78,6 @@ export default {
   },
   purchaseProofToast: {
     justSubscribed: '{name} from {location} just subscribed to {plan}!',
-    variants: socialProofVariants,
   },
   cancellation: {
     page: {
@@ -90,16 +87,6 @@ export default {
       title: 'Reason',
       description:
         'It is really difficult to believe that you want to cowardly cancel your subscription. Why???',
-      list: [
-        'MAW fixed all my problems in my life. However, I miss the sadness.',
-        'I have the financial discipline of a raccoon in a vending machine.',
-        'I’m cancelling before my friends discover how much I enjoyed this.',
-        'I am once again running from my problems like a cartoon character.',
-        'Too taxing on my PC',
-        'Commitment issues.',
-        'I simply cannot handle this much personal growth.',
-        'My mom figured out that I was using her credit card',
-      ],
     },
     essay: {
       title: 'Exit Interview Essay',

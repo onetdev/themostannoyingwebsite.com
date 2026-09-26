@@ -3,6 +3,7 @@
 import { Button } from '@maw/ui-lib';
 import { useTranslations } from 'next-intl';
 import { useFormContext } from 'react-hook-form';
+import { useVariantPool } from '@/features/content/hooks';
 import type { CancellationFormData } from '../../../schemas';
 
 interface ReasonsStepProps {
@@ -12,7 +13,7 @@ interface ReasonsStepProps {
 export function ReasonsStep({ onNext }: ReasonsStepProps) {
   const t = useTranslations('subscription.cancellation.reasons');
   const { setValue } = useFormContext<CancellationFormData>();
-  const reasons = t.raw('list') as string[];
+  const reasons = useVariantPool<string>('cancellation-reasons');
 
   const handleReasonClick = (reason: string) => {
     setValue('reason', reason);

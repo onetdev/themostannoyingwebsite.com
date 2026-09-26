@@ -39,19 +39,19 @@ We use `next-intl`. **NEVER hardcode user-facing strings.**
 
 > ℹ️ Non-English translations are served by the headless Content API. Only the
 > English bundles are shipped with the app, as the reference shape and runtime
-> fallback. See `adr/0022-api-served-translations.md`.
+> fallback. See `adr/0022-api-served-translations.md`. Variant pools (fake names,
+> comments, quiz data, etc.) are **not** bundled at all and are served by the API
+> for every locale — see `adr/0025-api-only-variant-pools-ssr-hydration.md`.
 
 ### 1. Global Messages (`src/i18n/messages/en/`)
 Only English is bundled: `src/i18n/messages/en/`
 - `index.ts`: Aggregates all feature and global translations. Defines `AppTranslationShape`.
 - `common.ts`: Shared UI strings (buttons, labels, common errors).
 - `metadata.ts`: SEO titles and descriptions.
-- `variants.ts`: Large arrays for shared UI elements (e.g., random names).
 
-### 2. Feature Translations (`src/features/{feature}/i18n/en*`)
-Two patterns allowed based on complexity (English only):
-- **Single File**: `i18n/en.ts` (if only simple keys exist).
-- **Directory**: `i18n/en/` containing `index.ts` and `variants.ts` (if arrays/complex shapes are needed).
+### 2. Feature Translations (`src/features/{feature}/i18n/en.ts`)
+English only, one file per feature: `i18n/en.ts`. Do not create `i18n/en/`
+directories or `variants.ts` files — variant data lives in the Content API.
 
 ### 3. Runtime Message Loading
 - `src/core/i18n/request.ts` calls `loadMessages()` (`src/core/i18n/load-messages.ts`).
@@ -70,11 +70,26 @@ Two patterns allowed based on complexity (English only):
 - Regenerated via `build:metadata` (run by `build`, `lint`, `check-types`, and `dev`).
 - See `adr/0023-build-time-locale-catalog.md`.
 
-### 5. Usage in Services
-If a Service needs random data (e.g., `CommentService.ts` needs a list of names):
-- Prefer the API via `getVariantPool()` (`client.variants.getByType`).
-- Bundled English `variants.ts` files remain the fallback when the API is unavailable.
-- Add new English keys so the type shape and fallback cover the feature.
+### 5. Variant Pools (API-only)
+Variant pools are served exclusively by the Content API
+(`client.variants.getByType(lang, type)`); nothing is bundled, not even English.
+
+- **Services** that need pool data call `getVariantPool()` (graceful, returns
+  `undefined`) or `fetchVariantPool()` (throws) from
+  `src/features/content/services/`. On failure pools degrade to empty arrays.
+- **Client components** read pools with `useVariantPool<T>(type)` and must be
+  covered by a server prefetch, otherwise they render empty:
+  - Shared pool wiring lives in `variant-pool-query.ts` (React Query options,
+    `staleTime`/`gcTime` infinity) and `prefetch-variant-pools.ts`.
+  - Global pain-widget pools are prefetched in the locale layouts and hydrated via
+    `ClientRootProviderContainer`.
+  - Page-scoped pools are wrapped in `VariantPoolsBoundary`
+    (`src/features/content/components/VariantPoolsBoundary.tsx`) so each route
+    ships only the pools it uses.
+- The query function refuses to run in the browser, keeping all Content API calls
+  server-side. Freshness comes from ISR revalidation (`revalidate: 3600`) and
+  proactive invalidation when the Content API releases new content.
+- See `adr/0025-api-only-variant-pools-ssr-hydration.md`.
 
 ---
 
@@ -134,6 +149,7 @@ If a Service needs random data (e.g., `CommentService.ts` needs a list of names)
 - ❌ Directly importing `en.ts` for types (Use `AppTranslationShape` from `src/types.ts`).
 - ❌ Using `any` (Define Zod schemas and infer types).
 - ❌ Manual `fetch` calls (Use repositories or services).
+- ❌ Bundling variant arrays in messages (Use Content API variant pools via `useVariantPool` + server prefetch).
 
 <!-- BEGIN:nextjs-agent-rules -->
 

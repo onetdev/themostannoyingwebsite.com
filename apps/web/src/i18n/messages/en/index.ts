@@ -2,7 +2,6 @@ import achievements from '@/features/achievements/i18n/en';
 import auth from '@/features/auth/i18n/en';
 import humanVerification from '@/features/captcha/i18n/en';
 import comments from '@/features/comments/i18n/en';
-import commentVariants from '@/features/comments/i18n/en/variants';
 import content from '@/features/content/i18n/en';
 import disruptions from '@/features/disruptions/i18n/en';
 import funding from '@/features/funding/i18n/en';
@@ -13,14 +12,12 @@ import support from '@/features/support/i18n/en';
 import user from '@/features/user/i18n/en';
 import common from './common';
 import metadata from './metadata';
-import variants from './variants';
 
 export default {
   // Feature or externals
   achievements,
   auth,
   comments,
-  commentVariants,
   common,
   content,
   disruptions,
@@ -32,7 +29,6 @@ export default {
   subscription,
   support,
   user,
-  variants,
 
   // App level, shared translations
   app: {
