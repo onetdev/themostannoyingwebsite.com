@@ -9,6 +9,11 @@ Always use the **Conventional Commits** format for the PR title:
 - Imperative tense, lowercase subject, no trailing period.
 - If the PR touches multiple scopes or repo-wide items, omit scope: `chore: upgrade project dependencies`.
 
+## Formatting
+
+- **No line-length limit and no hard wrapping.** Write one line per paragraph and one line per bullet, regardless of length. Markdown soft-wraps when rendered, and the repository's existing PRs are all written this way.
+- The 100-character wrap rule belongs to the **`git-commit`** skill (commit messages). Never apply it to PR bodies.
+
 ## Principles: High Signal & Conciseness
 
 - **Focus on Decisions & Implications**: Highlight the primary motivation, key architectural decisions, and broader system implications.

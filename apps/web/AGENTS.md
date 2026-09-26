@@ -110,7 +110,7 @@ All pages must describe themselves with JSON-LD. The machinery lives in `src/cor
 
 - **Builders** (`core/seo/builders/`) are pure functions returning `schema-dts` typed nodes; pass resolved strings/URLs in, never `next-intl` or config.
 - **Render** with the server component `JsonLd` (native `<script type="application/ld+json">`, escaped). Use arrays to emit several nodes; they are wrapped in `@graph`.
-- **Site-wide** `Organization` + `WebSite` are emitted once in `src/app/[locale]/layout.tsx`. Do not duplicate them per page.
+- **Site-wide** `Organization` + `WebSite` are emitted once per document by `SiteStructuredData`, mounted inside `<body>` by the document-bearing route-group layouts (`(public)`, `(barebone)`). The `[locale]` layout is a pass-through, so never render structured data (or any other document-level element) there. Do not duplicate them per page.
 - **Urls** must go through `core/seo/absolute-url.ts` (`absoluteUrl`, `absoluteAssetUrl`, `siteId`) so canonical, trailing-slashed, locale-prefixed URLs stay consistent with `trailingSlash: true`.
 - **Static pages**: render `<WebPageStructuredData locale path namespace type? />`.
 - **Content pages**: call the matching builder (`buildArticle`, `buildBlog`, `buildPlanList`, `buildDonateAction`, `buildSimpleItemList`) from the existing data fetch.

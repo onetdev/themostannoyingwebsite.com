@@ -37,6 +37,18 @@ test('home exposes website, organization and blog structured data', async ({
 
   const nodes = await getJsonLdNodes(page);
 
+  // Regression: document-level structured data must live inside the document.
+  // Rendering it from the pass-through locale layout placed it before <html>
+  // and triggered React's "Cannot render a sync or defer <script> outside the
+  // main document" warning.
+  const scriptsOutsideBody = await page.evaluate(
+    () =>
+      Array.from(
+        document.querySelectorAll('script[type="application/ld+json"]'),
+      ).filter((script) => !document.body.contains(script)).length,
+  );
+  expect(scriptsOutsideBody).toBe(0);
+
   expect(findByType(nodes, 'Organization')).toBeDefined();
   expect(findByType(nodes, 'WebSite')).toBeDefined();
 

@@ -4,15 +4,10 @@ import 'core-js/actual/iterator/map';
 import 'core-js/actual/iterator/to-array';
 
 import type { Metadata, Viewport } from 'next';
-import { getLocale, getTranslations } from 'next-intl/server';
+import { getTranslations } from 'next-intl/server';
 import type { PropsWithChildren } from 'react';
 
-import {
-  buildSiteGraph,
-  getSeoContext,
-  INDEX_ROBOTS,
-  JsonLd,
-} from '@/core/seo';
+import { INDEX_ROBOTS } from '@/core/seo';
 import { getAppConfigService } from '@/services';
 
 const config = getAppConfigService().getAll();
@@ -81,23 +76,9 @@ export function generateViewport(): Viewport {
   };
 }
 
-export default async function LocaleRootLayout({
-  children,
-}: PropsWithChildren) {
-  const locale = (await getLocale()) as AppLocale;
-  const seoContext = await getSeoContext(locale);
-
-  const siteGraph = buildSiteGraph({
-    ...seoContext,
-    logoUrl: config.common.assets.appIcon,
-    sameAs: Object.values(config.common.socialLinks),
-    contactEmail: config.deploymentMeta.contactEmail,
-  });
-
-  return (
-    <>
-      <JsonLd data={siteGraph} />
-      {children}
-    </>
-  );
+export default function LocaleRootLayout({ children }: PropsWithChildren) {
+  // This is a pass-through: the document (`<html>`/`<body>`) is owned by the
+  // route-group layouts below it. Do not render document-level elements here,
+  // or React will warn that they sit outside the main document.
+  return children;
 }
