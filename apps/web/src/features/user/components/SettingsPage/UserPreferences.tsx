@@ -16,8 +16,8 @@ import {
   SelectValue,
   Separator,
 } from '@maw/ui-lib';
+import { useTheme } from '@wrksz/themes/client';
 import { useLocale, useTranslations } from 'next-intl';
-import { useTheme } from 'next-themes';
 import { useLanguageSwitcher } from '@/hooks';
 import { useRuntimeStore, useUserPreferencesStore } from '@/stores';
 import { SettingsField } from './SettingsField';

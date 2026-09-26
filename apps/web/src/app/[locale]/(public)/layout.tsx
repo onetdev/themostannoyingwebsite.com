@@ -1,6 +1,7 @@
 import '@/app/global.css';
 import type { LanguageCode } from '@maw/content-sdk';
 import { Analytics } from '@vercel/analytics/react';
+import { ThemeProvider } from '@wrksz/themes/next';
 import { Inter } from 'next/font/google';
 import { notFound } from 'next/navigation';
 import { hasLocale, NextIntlClientProvider } from 'next-intl';
@@ -65,21 +66,28 @@ async function LocalePublicRootLayout({
       <body>
         <SiteStructuredData locale={locale as AppLocale} />
         <NextIntlClientProvider>
-          <ClientRootProviderContainer
-            appConfig={config}
-            dehydratedState={dehydratedState}
+          <ThemeProvider
+            attribute="data-theme"
+            defaultTheme={config.defaultColorScheme}
+            enableColorScheme
+            enableSystem
           >
-            <ClientObserverProvider />
-            <LanguageDetectorMessagesProvider value={detectorMessages}>
-              <LocaleSuggestion />
-            </LanguageDetectorMessagesProvider>
-            <BeggarBanner />
-            <PainDecoratorLayout className="font-primary">
-              {/* Please add AppHeader in your pages to have SSG/ISR/SSG support while also being able to select the active navigation item */}
-              <Analytics />
-              {children}
-            </PainDecoratorLayout>
-          </ClientRootProviderContainer>
+            <ClientRootProviderContainer
+              appConfig={config}
+              dehydratedState={dehydratedState}
+            >
+              <ClientObserverProvider />
+              <LanguageDetectorMessagesProvider value={detectorMessages}>
+                <LocaleSuggestion />
+              </LanguageDetectorMessagesProvider>
+              <BeggarBanner />
+              <PainDecoratorLayout className="font-primary">
+                {/* Please add AppHeader in your pages to have SSG/ISR/SSG support while also being able to select the active navigation item */}
+                <Analytics />
+                {children}
+              </PainDecoratorLayout>
+            </ClientRootProviderContainer>
+          </ThemeProvider>
         </NextIntlClientProvider>
       </body>
     </html>

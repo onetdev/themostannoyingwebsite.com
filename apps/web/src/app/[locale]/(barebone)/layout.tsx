@@ -1,6 +1,7 @@
 import '@/app/global.css';
 import type { LanguageCode } from '@maw/content-sdk';
 import { Analytics } from '@vercel/analytics/react';
+import { ThemeProvider } from '@wrksz/themes/next';
 import { Inter } from 'next/font/google';
 import { notFound } from 'next/navigation';
 import { hasLocale, NextIntlClientProvider } from 'next-intl';
@@ -50,13 +51,20 @@ async function LocaleBareboneRootLayout({
       <body>
         <SiteStructuredData locale={locale as AppLocale} />
         <NextIntlClientProvider>
-          <ClientRootProviderContainer
-            appConfig={config}
-            dehydratedState={dehydratedState}
+          <ThemeProvider
+            attribute="data-theme"
+            defaultTheme={config.defaultColorScheme}
+            enableColorScheme
+            enableSystem
           >
-            <Analytics />
-            {children}
-          </ClientRootProviderContainer>
+            <ClientRootProviderContainer
+              appConfig={config}
+              dehydratedState={dehydratedState}
+            >
+              <Analytics />
+              {children}
+            </ClientRootProviderContainer>
+          </ThemeProvider>
         </NextIntlClientProvider>
       </body>
     </html>
