@@ -27,7 +27,7 @@ This skill automates the creation and synchronization of Pull Requests using the
   - Strictly follows the structure in [`.github/pull_request_template.md`](../../../../.github/pull_request_template.md).
   - Keeps **only** the relevant subsections under `## Key Changes` (e.g. omit `Features` if the PR is a pure refactor or bug fix).
   - Includes explicit assessments for `User-facing`, `Developer-facing`, and `Risk` in the `## Impact` section.
-  - Marks completed checklist items with `[✓]`.
+  - Marks completed checklist items with `[x]`.
 - **Draft Status**:
   - When opening a **new** PR, always create it in **Draft** mode (`--draft`).
   - When updating an **existing** PR, preserve its existing state and update its title and body.
@@ -108,9 +108,9 @@ Follow [`.github/pull_request_template.md`](../../../../.github/pull_request_tem
 
   ## Checklist
 
-  - [✓] Tests updated and passing locally
-  - [✓] Documentation updated (if applicable)
-  - [✓] Localization extracted (if applicable)
+  - [x] Tests updated and passing locally
+  - [x] Documentation updated (if applicable)
+  - [x] Localization extracted (if applicable)
   ```
 
 ### 5. Create or Update PR via `gh`

@@ -1,10 +1,11 @@
 'use client';
 
-import { useMessages, useTranslations } from 'next-intl';
+import { useTranslations } from 'next-intl';
 import { useCallback, useEffect, useMemo, useState } from 'react';
 import { useMount } from 'react-use';
 import { emit } from '@/core/events/event-bus';
 import { useAppConfigContext } from '@/core/react';
+import { useVariantPool } from '@/features/content/hooks';
 import { useAudio, useSendNotification } from '@/hooks';
 import { useRuntimeStore } from '@/stores';
 import type { ChatMessage, ChatMessageType } from '../schemas';
@@ -12,7 +13,6 @@ import type { ChatMessage, ChatMessageType } from '../schemas';
 export function useChatBubbleHistory() {
   const t = useTranslations('support.chatBubble');
   const config = useAppConfigContext();
-  const messages = useMessages() as AppTranslationShape;
   const hasInteracted = useRuntimeStore(
     (state) => state.userActivation.unlocked,
   );
@@ -25,11 +25,13 @@ export function useChatBubbleHistory() {
     config.support.assets.newMessageSfx,
   );
 
+  const messagePool = useVariantPool('chat-bubble-messages');
+
   const botMessageVariants = useMemo(() => {
-    return Object.values(messages.support.chatBubble.messageVariants).filter(
+    return messagePool.filter(
       (message) => !history.some((item) => item.text === message),
     );
-  }, [history, messages]);
+  }, [history, messagePool]);
 
   const add = useCallback((message: string, owner: ChatMessageType) => {
     setHistory((prev) => [...prev, { text: message, owner, time: new Date() }]);

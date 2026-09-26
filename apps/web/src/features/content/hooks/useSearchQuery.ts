@@ -1,12 +1,12 @@
 'use client';
 
-import {
-  createContentClient,
-  type GetSearchResultsQueryParams,
-  type SearchResultItem,
+import type {
+  GetSearchResultsQueryParams,
+  SearchResultItem,
 } from '@maw/content-sdk';
 import { randomNumber } from '@maw/utils/random';
 import { useQuery } from '@tanstack/react-query';
+import { createAppContentClient } from '@/core/content';
 import { usePainPreferencesStore } from '@/stores';
 
 type SearchResult = {
@@ -14,7 +14,7 @@ type SearchResult = {
   duration: number;
 };
 
-const contentClient = createContentClient();
+const contentClient = createAppContentClient();
 
 export function useSearchQuery(params: GetSearchResultsQueryParams) {
   const delayEnabled = usePainPreferencesStore(

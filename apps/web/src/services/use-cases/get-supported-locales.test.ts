@@ -1,6 +1,8 @@
 import type { ContentApiClient } from '@maw/content-sdk';
 import {
+  fetchSupportedLanguages,
   fetchSupportedLocaleMeta,
+  fetchSupportedLocaleMetaStrict,
   getSupportedLanguages,
 } from './get-supported-locales';
 
@@ -51,5 +53,25 @@ describe('supported locales', () => {
     const meta = await fetchSupportedLocaleMeta(client);
 
     expect(meta.en).toEqual({ flag: '🇺🇸', label: 'English' });
+  });
+
+  it('generates the bundled English-only list when the API fails', async () => {
+    const client = createClient(async () => {
+      throw new Error('network down');
+    });
+
+    const languages = await fetchSupportedLanguages(client);
+
+    expect(languages).toEqual([{ locale: 'en', flag: '🇺🇸', label: 'English' }]);
+  });
+
+  it('throws from the strict fetch when the API fails', async () => {
+    const client = createClient(async () => {
+      throw new Error('network down');
+    });
+
+    await expect(fetchSupportedLocaleMetaStrict(client)).rejects.toThrow(
+      'network down',
+    );
   });
 });

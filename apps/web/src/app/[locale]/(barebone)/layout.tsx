@@ -1,4 +1,5 @@
 import '@/app/global.css';
+import type { LanguageCode } from '@maw/content-sdk';
 import { Analytics } from '@vercel/analytics/react';
 import { Inter } from 'next/font/google';
 import { notFound } from 'next/navigation';
@@ -7,6 +8,7 @@ import type { PropsWithChildren } from 'react';
 import { getLangDir } from 'rtl-detect';
 import { ClientRootProviderContainer } from '@/app/bootstrap/ClientRootProviderContainer';
 import { routing } from '@/core/i18n/routing';
+import { prefetchVariantPools } from '@/features/content/services/prefetch-variant-pools';
 import { getAppConfigService } from '@/services';
 
 const config = getAppConfigService().getAll();
@@ -29,6 +31,14 @@ async function LocaleBareboneRootLayout({
     notFound();
   }
 
+  // Global pain widgets (page title glitch, newsletter modal) read their
+  // Content API variant pools from the hydrated React Query cache.
+  const dehydratedState = await prefetchVariantPools(locale as LanguageCode, [
+    'marquee-titles',
+    'paged-titles',
+    'newsletter-confirmations',
+  ]);
+
   return (
     <html
       lang={locale}
@@ -38,7 +48,10 @@ async function LocaleBareboneRootLayout({
     >
       <body>
         <NextIntlClientProvider>
-          <ClientRootProviderContainer appConfig={config}>
+          <ClientRootProviderContainer
+            appConfig={config}
+            dehydratedState={dehydratedState}
+          >
             <Analytics />
             {children}
           </ClientRootProviderContainer>

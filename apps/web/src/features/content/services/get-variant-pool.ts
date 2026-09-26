@@ -12,11 +12,35 @@ export interface VariantPoolResult<T> {
 }
 
 /**
+ * Fetches a dynamic variant pool from the headless Content API, throwing when
+ * the request fails.
+ *
+ * Use this when the caller wants to fail loudly (e.g. React Query prefetching),
+ * otherwise prefer `getVariantPool`.
+ */
+export async function fetchVariantPool<T>(
+  client: ContentApiClient,
+  lang: LanguageCode,
+  type: VariantPoolType,
+): Promise<VariantPoolResult<T>> {
+  const response = await client.variants.getByType(lang, type, undefined, {
+    next: {
+      revalidate: 3600,
+      tags: [CONTENT_CACHE_TAGS.variants],
+    },
+  });
+
+  return {
+    items: response.items as T[],
+    updatedAt: response.updated_at,
+  };
+}
+
+/**
  * Fetches a dynamic variant pool from the headless Content API.
  *
  * Returns `undefined` when the pool cannot be fetched so that callers can
- * gracefully fall back to bundled translations (e.g. during local dev or when
- * the API is unreachable).
+ * degrade gracefully (e.g. during local dev or when the API is unreachable).
  */
 export async function getVariantPool<T>(
   client: ContentApiClient,
@@ -24,17 +48,7 @@ export async function getVariantPool<T>(
   type: VariantPoolType,
 ): Promise<VariantPoolResult<T> | undefined> {
   try {
-    const response = await client.variants.getByType(lang, type, undefined, {
-      next: {
-        revalidate: 3600,
-        tags: [CONTENT_CACHE_TAGS.variants],
-      },
-    });
-
-    return {
-      items: response.items as T[],
-      updatedAt: response.updated_at,
-    };
+    return await fetchVariantPool<T>(client, lang, type);
   } catch {
     return undefined;
   }

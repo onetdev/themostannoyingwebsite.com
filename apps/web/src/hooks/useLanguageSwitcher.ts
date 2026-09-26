@@ -1,29 +1,20 @@
 'use client';
 
-import { useQuery } from '@tanstack/react-query';
 import { useLocale } from 'next-intl';
+import { persistLocaleCookie } from '@/core/i18n/locale-cookie';
 import { usePathname, useRouter } from '@/core/i18n/navigation';
-import { useAppService } from '@/hooks';
+import { SUPPORTED_LANGUAGES } from '@/i18n/supported-locales';
 
 export function useLanguageSwitcher() {
-  const appService = useAppService();
   const locale = useLocale();
   const router = useRouter();
   const pathname = usePathname();
 
-  const fallbackLanguages = appService.getFallbackSupportedLanguages();
-  const { data } = useQuery({
-    queryKey: ['supported-languages'],
-    queryFn: () => appService.getSupportedLanguages(),
-    initialData: fallbackLanguages,
-    // Treat the bundled fallback as immediately stale so the API-backed list
-    // is fetched on mount, while still rendering a usable list right away.
-    initialDataUpdatedAt: 0,
-    staleTime: 1000 * 60 * 60,
-  });
-  const languages = data ?? fallbackLanguages;
+  const languages = SUPPORTED_LANGUAGES;
 
   const onLanguageChange = (value: AppLocale) => {
+    persistLocaleCookie(value);
+
     // Might not look sexy, modern BUT it is what we need. And it works,
     // and it doesn't need a shitload of boilerplace throughout server and
     // client side components.

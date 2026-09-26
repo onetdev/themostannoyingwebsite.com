@@ -2,7 +2,6 @@ import achievements from '@/features/achievements/i18n/en';
 import auth from '@/features/auth/i18n/en';
 import humanVerification from '@/features/captcha/i18n/en';
 import comments from '@/features/comments/i18n/en';
-import commentVariants from '@/features/comments/i18n/en/variants';
 import content from '@/features/content/i18n/en';
 import disruptions from '@/features/disruptions/i18n/en';
 import funding from '@/features/funding/i18n/en';
@@ -12,27 +11,26 @@ import subscription from '@/features/subscription/i18n/en';
 import support from '@/features/support/i18n/en';
 import user from '@/features/user/i18n/en';
 import common from './common';
+import languageDetector from './language-detector';
 import metadata from './metadata';
-import variants from './variants';
 
 export default {
   // Feature or externals
   achievements,
   auth,
   comments,
-  commentVariants,
   common,
   content,
   disruptions,
   funding,
   humanVerification,
+  languageDetector,
   marketing,
   metadata,
   monitoring,
   subscription,
   support,
   user,
-  variants,
 
   // App level, shared translations
   app: {
@@ -63,6 +61,7 @@ export default {
     toggleMenu: 'Toggle menu',
     logo: 'MAW Logo',
     logoAlt: '<the>the</the> <most>Most</most> Annoying Website',
+    logoShort: '<the>the</the> <most>MAW</most>',
     dismissBanner: 'Dismiss banner',
     contactForm: {
       title: 'Official contact form',

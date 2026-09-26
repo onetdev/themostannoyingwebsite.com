@@ -32,7 +32,7 @@
 
 ## Checklist
 
-<!-- Mark applicable items with [x] or [✓] -->
+<!-- Mark applicable items with [x] -->
 - [ ] Tests updated and passing locally
 - [ ] Documentation updated (if applicable)
 - [ ] Localization extracted (if applicable)

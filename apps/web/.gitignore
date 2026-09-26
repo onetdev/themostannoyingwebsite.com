@@ -42,3 +42,5 @@ next-env.d.ts
 certificates
 public/assets/articles
 public/deployment-meta.json
+public/locales.json
+public/.well-known/appspecific/com.chrome.devtools.json

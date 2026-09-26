@@ -5,12 +5,12 @@ import {
   type ArticleListItem,
   CONTENT_CACHE_TAGS,
   type ContentApiClient,
-  createContentClient,
   type GetArticleListQueryParams,
   type GetArticleListResponse,
   type LanguageCode,
 } from '@maw/content-sdk';
 import { type Container, injectable } from 'inversify';
+import { createAppContentClient } from '@/core/content';
 
 import { DI, type ArticleService as IArticleService } from '../types';
 
@@ -19,7 +19,7 @@ export class ArticleService implements IArticleService {
   private readonly client: ContentApiClient;
 
   constructor(...args: [ContentApiClient?]) {
-    this.client = args[0] ?? createContentClient();
+    this.client = args[0] ?? createAppContentClient();
   }
 
   public async getBySlug(

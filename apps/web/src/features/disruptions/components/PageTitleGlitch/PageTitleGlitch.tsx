@@ -1,7 +1,6 @@
 'use client';
 
-import { useMessages } from 'next-intl';
-import { useMemo } from 'react';
+import { useVariantPool } from '@/features/content/hooks';
 import { usePainPreferencesStore, useRuntimeStore } from '@/stores';
 import {
   useArrayPagedTitle,
@@ -14,7 +13,6 @@ import {
  * is quite low and the title is not updated as frequently as I would like.
  */
 export function PageTitleGlitch() {
-  const messages = useMessages() as AppTranslationShape;
   const isVisible = useRuntimeStore((state) => state.document.isVisible);
   const inactiveMarquee = usePainPreferencesStore(
     (state) => state.flags['pageTitle.inactiveMarquee'],
@@ -29,16 +27,8 @@ export function PageTitleGlitch() {
     (state) => state.userActivation.unlocked,
   );
 
-  const marqueeVariants = useMemo(
-    () => Object.values(messages.disruptions.titleExperience.marqueeVariants),
-    [messages.disruptions.titleExperience.marqueeVariants],
-  );
-
-  const arrayPagedVariants = useMemo(
-    () =>
-      Object.values(messages.disruptions.titleExperience.arrayPagedVariants),
-    [messages.disruptions.titleExperience.arrayPagedVariants],
-  );
+  const marqueeVariants = useVariantPool('marquee-titles');
+  const arrayPagedVariants = useVariantPool('paged-titles');
 
   useMarqueeTitle({
     enabled: !!(

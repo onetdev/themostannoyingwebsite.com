@@ -1,6 +1,8 @@
+import type { LanguageCode } from '@maw/content-sdk';
 import type { Metadata } from 'next';
-import { getTranslations } from 'next-intl/server';
+import { getLocale, getTranslations } from 'next-intl/server';
 import { SearchPage } from '@/features/content/components';
+import { VariantPoolsBoundary } from '@/features/content/components/VariantPoolsBoundary';
 import { PageLayout } from '../_components/PageLayout';
 
 export { generateStaticParams } from '@/core/i18n/routing';
@@ -19,10 +21,14 @@ export async function generateMetadata({
   };
 }
 
-export default function Page() {
+export default async function Page() {
+  const locale = (await getLocale()) as LanguageCode;
+
   return (
     <PageLayout route="search" role="main">
-      <SearchPage />
+      <VariantPoolsBoundary lang={locale} types={['top-searches']}>
+        <SearchPage />
+      </VariantPoolsBoundary>
     </PageLayout>
   );
 }

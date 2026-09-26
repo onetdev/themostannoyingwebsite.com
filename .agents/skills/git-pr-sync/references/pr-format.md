@@ -40,10 +40,10 @@ Must contain all three fields:
 - **Risk**: Qualitative risk assessment (`Low`, `Medium`, `High`) along with rationale and blast radius considerations.
 
 ### 4. `## Checklist`
-Mark applicable items completed (`[✓]` or `[x]`):
-- `[✓] Tests updated and passing locally`
-- `[✓] Documentation updated (if applicable)`
-- `[✓] Localization extracted (if applicable)`
+Mark applicable items completed with `[x]`:
+- `[x] Tests updated and passing locally`
+- `[x] Documentation updated (if applicable)`
+- `[x] Localization extracted (if applicable)`
 
 ### 5. `## Screenshots & Videos`
 - Include for UI changes when available.

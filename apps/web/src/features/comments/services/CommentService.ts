@@ -1,16 +1,14 @@
 import 'server-only';
 
-import {
-  type Article,
-  type ArticleListItem,
-  type ContentApiClient,
-  createContentClient,
-  type LanguageCode,
+import type {
+  Article,
+  ArticleListItem,
+  ContentApiClient,
+  LanguageCode,
 } from '@maw/content-sdk';
 import { injectable } from 'inversify';
-import enCommentVariants from '@/features/comments/i18n/en/variants';
+import { createAppContentClient } from '@/core/content';
 import { getVariantPool } from '@/features/content/services/get-variant-pool';
-import enVariants from '@/i18n/messages/en/variants';
 import i18nConfig from '@/root/i18n.config';
 import type { CommentService as ICommentService } from '../types';
 import { filterByDate } from './use-cases/filterByDate';
@@ -29,7 +27,7 @@ export class CommentService implements ICommentService {
   private readonly client: ContentApiClient;
 
   constructor(...args: [ContentApiClient?]) {
-    this.client = args[0] ?? createContentClient();
+    this.client = args[0] ?? createAppContentClient();
   }
 
   private async getRangomGeneratorPool(locale: string): Promise<CommentPool> {
@@ -45,27 +43,9 @@ export class CommentService implements ICommentService {
       getVariantPool<string>(this.client, lang, 'comments'),
     ]);
 
-    const names = namesPool?.items;
-    const comments = commentsPool?.items;
-
-    if (names?.length && comments?.length) {
-      return { names, comments };
-    }
-
-    // Fall back to bundled translations when the Content API is unavailable
-    // or a pool is empty.
-    const [commentVariantsModule, variantsModule] = await Promise.all([
-      import(`@/features/comments/i18n/${safeLocale}/variants`).catch(
-        () => enCommentVariants,
-      ),
-      import(`@/i18n/messages/${safeLocale}/variants`).catch(() => enVariants),
-    ]);
-
     return {
-      comments: comments?.length
-        ? comments
-        : commentVariantsModule.default.comments,
-      names: names?.length ? names : variantsModule.default.names,
+      names: namesPool?.items ?? [],
+      comments: commentsPool?.items ?? [],
     };
   }
 

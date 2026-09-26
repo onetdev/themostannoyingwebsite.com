@@ -66,8 +66,10 @@ export function AppNavigationMobile({ activeItem }: AppNavigationMobileProps) {
       <SheetContent side="left" className="w-[280px] gap-0 overflow-y-auto">
         <SheetHeader className="flex flex-row items-center justify-between pr-4 text-left">
           <SheetTitle className="pl-3 text-lg font-bold tracking-tighter">
-            <i className="font-light">the</i>{' '}
-            <span className="text-primary">MAW</span>
+            {t.rich('app.logoShort', {
+              the: (chunks) => <i className="font-light">{chunks}</i>,
+              most: (chunks) => <span className="text-primary">{chunks}</span>,
+            })}
           </SheetTitle>
         </SheetHeader>
         <Separator />

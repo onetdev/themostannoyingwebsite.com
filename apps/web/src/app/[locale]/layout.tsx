@@ -1,3 +1,8 @@
+import '@/reflect-metadata';
+import 'core-js/actual/iterator/filter';
+import 'core-js/actual/iterator/map';
+import 'core-js/actual/iterator/to-array';
+
 import type { Metadata, Viewport } from 'next';
 import { getTranslations } from 'next-intl/server';
 import type { PropsWithChildren } from 'react';
