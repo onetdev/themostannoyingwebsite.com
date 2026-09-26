@@ -1,8 +1,8 @@
 'use client';
 
 import { DarkModeToggle } from '@maw/ui-lib';
+import { useTheme } from '@wrksz/themes/client';
 import { useTranslations } from 'next-intl';
-import { useTheme } from 'next-themes';
 
 export function AppDarkModeToggle() {
   const t = useTranslations();
@@ -16,7 +16,7 @@ export function AppDarkModeToggle() {
   return (
     <DarkModeToggle
       className="self-center justify-self-end"
-      resolvedTheme={resolvedTheme as AppTheme}
+      resolvedTheme={resolvedTheme}
       setTheme={setTheme}
       size="lg"
       text={darkModeToggleText}

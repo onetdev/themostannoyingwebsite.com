@@ -1,12 +1,11 @@
 'use client';
 
-import { Toaster, TooltipProvider } from '@maw/ui-lib';
+import { TooltipProvider } from '@maw/ui-lib';
 import {
   type DehydratedState,
   HydrationBoundary,
   QueryClientProvider,
 } from '@tanstack/react-query';
-import { ThemeProvider } from 'next-themes';
 import { type PropsWithChildren, useState } from 'react';
 import { getClientDependencyContainer } from '@/core/di/client';
 import {
@@ -20,6 +19,7 @@ import type { AppConfig } from '@/schemas/app-config';
 import { ClientNavigationConfigurator } from './ClientNavigationConfigurator';
 import { ClientPainContainer } from './ClientPainProvider';
 import { SentryLocaleConfigurator } from './SentryLocaleConfigurator';
+import { ThemedToaster } from './ThemedToaster';
 
 export type ClientRootProviderContainerProps = PropsWithChildren<{
   appConfig: AppConfig;
@@ -43,16 +43,14 @@ export function ClientRootProviderContainer({
         <HydrationBoundary state={dehydratedState ?? EMPTY_DEHYDRATED_STATE}>
           <TooltipProvider>
             <DiContextProvider value={{ container: DiContainer }}>
-              <ThemeProvider defaultTheme="dark" enableColorScheme enableSystem>
-                <SentryLocaleConfigurator />
-                <ClientNavigationConfigurator>
-                  <Toaster />
-                  <SilentErrorBoundary name="achievements:manager">
-                    <AchievementManager />
-                  </SilentErrorBoundary>
-                  <ClientPainContainer>{children}</ClientPainContainer>
-                </ClientNavigationConfigurator>
-              </ThemeProvider>
+              <SentryLocaleConfigurator />
+              <ClientNavigationConfigurator>
+                <ThemedToaster />
+                <SilentErrorBoundary name="achievements:manager">
+                  <AchievementManager />
+                </SilentErrorBoundary>
+                <ClientPainContainer>{children}</ClientPainContainer>
+              </ClientNavigationConfigurator>
             </DiContextProvider>
           </TooltipProvider>
         </HydrationBoundary>

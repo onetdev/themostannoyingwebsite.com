@@ -10,7 +10,7 @@ test('dark mode toggle switches themes', { tag: '@smoke' }, async ({
   const homePage = getHomePage(page);
   await homePage.goto();
 
-  // Initial state: should be dark mode by default (or whatever `next-themes` sets)
+  // Initial state: should be dark mode by default (or whatever `@wrksz/themes` sets)
   // Check the html element for the 'dark' attribute
   const html = page.locator('html');
   await expect(html).toHaveAttribute('data-theme', 'dark');
