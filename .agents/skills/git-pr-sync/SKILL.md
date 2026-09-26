@@ -7,7 +7,7 @@ description: Reviews commits in the current branch against base (default: develo
 
 ## Overview
 
-This skill automates the creation and synchronization of Pull Requests using the GitHub CLI (`gh`). It reviews all commits on the current working branch against the base branch (default: `develop`), pushes the branch to remote, composes a detailed PR title and body adhering to [`.github/pull_request_template.md`](../../../../.github/pull_request_template.md), and opens a new **Draft PR** or updates an existing open PR.
+This skill automates the creation and synchronization of Pull Requests using the GitHub CLI (`gh`). It reviews all commits on the current working branch against the base branch (default: `develop`), pushes the branch to remote, composes a detailed PR title and body adhering to [`.github/pull_request_template.md`](../../../.github/pull_request_template.md), and opens a new **Draft PR** or updates an existing open PR.
 
 ## Guidelines
 
@@ -24,10 +24,12 @@ This skill automates the creation and synchronization of Pull Requests using the
   - Must follow the **Conventional Commits** specification: `<type>(<optional-scope>): <subject>`.
   - Derived from the primary branch commits or overarching purpose of the branch.
 - **PR Body**:
-  - Strictly follows the structure in [`.github/pull_request_template.md`](../../../../.github/pull_request_template.md).
+  - Strictly follows the structure in [`.github/pull_request_template.md`](../../../.github/pull_request_template.md).
   - Keeps **only** the relevant subsections under `## Key Changes` (e.g. omit `Features` if the PR is a pure refactor or bug fix).
   - Includes explicit assessments for `User-facing`, `Developer-facing`, and `Risk` in the `## Impact` section.
   - Marks completed checklist items with `[x]`.
+  - **Never hard-wrap body lines and never impose a line-length limit.** Write **one line per paragraph** and **one line per bullet**, no matter how long. Markdown soft-wraps when rendered, and the repo's existing PRs are written unwrapped.
+  - The 100-character line limit is a **Conventional Commit** rule and applies to commit messages only (see the `git-commit` skill) — do **not** carry it over to PR bodies.
 - **Draft Status**:
   - When opening a **new** PR, always create it in **Draft** mode (`--draft`).
   - When updating an **existing** PR, preserve its existing state and update its title and body.
@@ -74,8 +76,9 @@ git diff --stat origin/develop..HEAD
 - Inspect full commit details and code diffs as needed (`git log -n 10 origin/develop..HEAD` and `git diff origin/develop..HEAD`).
 
 ### 4. Compose PR Title and Body
-Follow [`.github/pull_request_template.md`](../../../../.github/pull_request_template.md) and [`references/pr-format.md`](references/pr-format.md):
+Follow [`.github/pull_request_template.md`](../../../.github/pull_request_template.md) and [`references/pr-format.md`](references/pr-format.md):
 - **Title**: `<type>(<optional-scope>): <subject>`
+- **Line width**: keep each paragraph and each bullet on a **single line**. Do not hard-wrap and do not target any column limit.
 - **Body**:
   ```markdown
   ## Summary

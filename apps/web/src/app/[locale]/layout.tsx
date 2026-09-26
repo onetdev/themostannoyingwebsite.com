@@ -7,6 +7,7 @@ import type { Metadata, Viewport } from 'next';
 import { getTranslations } from 'next-intl/server';
 import type { PropsWithChildren } from 'react';
 
+import { INDEX_ROBOTS } from '@/core/seo';
 import { getAppConfigService } from '@/services';
 
 const config = getAppConfigService().getAll();
@@ -15,10 +16,7 @@ export async function generateMetadata(): Promise<Metadata> {
   const t = await getTranslations('metadata.app');
 
   return {
-    robots: {
-      index: true,
-      follow: true,
-    },
+    robots: INDEX_ROBOTS,
     title: {
       default: t('title'),
       template: `%s | ${t('title')}`,
@@ -79,5 +77,8 @@ export function generateViewport(): Viewport {
 }
 
 export default function LocaleRootLayout({ children }: PropsWithChildren) {
+  // This is a pass-through: the document (`<html>`/`<body>`) is owned by the
+  // route-group layouts below it. Do not render document-level elements here,
+  // or React will warn that they sit outside the main document.
   return children;
 }

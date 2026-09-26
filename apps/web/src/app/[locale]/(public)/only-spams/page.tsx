@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import { getTranslations } from 'next-intl/server';
 import { getDependencyContainer } from '@/core/di';
+import { WebPageStructuredData } from '@/core/seo';
 import { OnlySpamsPage } from '@/features/marketing/components';
 import { getOnlySpamsService } from '@/features/marketing/services';
 import { PageLayout } from '../_components/PageLayout';
@@ -29,6 +30,11 @@ export default async function Page({ params }: NextPageProps) {
 
   return (
     <PageLayout route="only-spams" role="main" autoPadding={false}>
+      <WebPageStructuredData
+        locale={locale}
+        path="only-spams"
+        namespace="metadata.onlySpams"
+      />
       <OnlySpamsPage testimonials={testimonials} samples={samples} />
     </PageLayout>
   );

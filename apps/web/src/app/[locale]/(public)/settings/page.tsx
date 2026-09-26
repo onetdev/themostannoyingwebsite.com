@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
-import { getTranslations } from 'next-intl/server';
+import { getLocale, getTranslations } from 'next-intl/server';
+import { WebPageStructuredData } from '@/core/seo';
 import { SettingsPage } from '@/features/user/components';
 import { PageLayout } from '../_components/PageLayout';
 
@@ -20,8 +21,15 @@ export async function generateMetadata({
 }
 
 export default async function Settings() {
+  const locale = (await getLocale()) as AppLocale;
+
   return (
     <PageLayout route="settings" role="main">
+      <WebPageStructuredData
+        locale={locale}
+        path="settings"
+        namespace="metadata.settings"
+      />
       <SettingsPage />
     </PageLayout>
   );

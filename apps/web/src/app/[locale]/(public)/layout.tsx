@@ -11,6 +11,7 @@ import { ClientRootProviderContainer } from '@/app/bootstrap/ClientRootProviderC
 import { LanguageDetectorMessagesProvider } from '@/core/i18n/LanguageDetectorMessagesProvider';
 import { fetchAllLanguageDetectorMessages } from '@/core/i18n/language-detector-messages';
 import { routing } from '@/core/i18n/routing';
+import { SiteStructuredData } from '@/core/seo';
 import { prefetchVariantPools } from '@/features/content/services/prefetch-variant-pools';
 import { BeggarBanner } from '@/features/funding/components';
 import { SUPPORTED_LANGUAGES } from '@/i18n/supported-locales';
@@ -62,6 +63,7 @@ async function LocalePublicRootLayout({
       suppressHydrationWarning
     >
       <body>
+        <SiteStructuredData locale={locale as AppLocale} />
         <NextIntlClientProvider>
           <ClientRootProviderContainer
             appConfig={config}

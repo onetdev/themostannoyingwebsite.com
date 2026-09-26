@@ -8,6 +8,7 @@ import type { PropsWithChildren } from 'react';
 import { getLangDir } from 'rtl-detect';
 import { ClientRootProviderContainer } from '@/app/bootstrap/ClientRootProviderContainer';
 import { routing } from '@/core/i18n/routing';
+import { SiteStructuredData } from '@/core/seo';
 import { prefetchVariantPools } from '@/features/content/services/prefetch-variant-pools';
 import { getAppConfigService } from '@/services';
 
@@ -47,6 +48,7 @@ async function LocaleBareboneRootLayout({
       suppressHydrationWarning
     >
       <body>
+        <SiteStructuredData locale={locale as AppLocale} />
         <NextIntlClientProvider>
           <ClientRootProviderContainer
             appConfig={config}
