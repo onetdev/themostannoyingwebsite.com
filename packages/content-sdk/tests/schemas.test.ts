@@ -1,7 +1,7 @@
 import {
   ApiImageWrapper,
+  GetArticleListQueryParams,
   LanguageCode,
-  ListArticlesQueryParams,
   ValidationErrorResponse,
 } from '../src/index';
 
@@ -62,21 +62,28 @@ describe('Content SDK Zod Schemas', () => {
     it('validates error responses', () => {
       const error = {
         code: 'VALIDATION_ERROR',
-        error: 'Invalid query parameter',
         message: 'lang is invalid',
+        issues: [
+          {
+            code: 'invalid_value',
+            path: ['lang'],
+            message: 'Invalid language code',
+          },
+        ],
       };
       const parsed = ValidationErrorResponse.parse(error);
       expect(parsed.code).toBe('VALIDATION_ERROR');
+      expect(parsed.issues).toHaveLength(1);
     });
   });
 
-  describe('ListArticlesQueryParams', () => {
+  describe('GetArticleListQueryParams', () => {
     it('accepts valid query parameters with reusable LanguageCode', () => {
       const query = {
         lang: 'es',
         limit: 10,
       };
-      const parsed = ListArticlesQueryParams.parse(query);
+      const parsed = GetArticleListQueryParams.parse(query);
       expect(parsed.lang).toBe('es');
       expect(parsed.limit).toBe(10);
     });

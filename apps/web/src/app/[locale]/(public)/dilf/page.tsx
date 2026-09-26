@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
-import { getTranslations } from 'next-intl/server';
+import { getLocale, getTranslations } from 'next-intl/server';
+import { WebPageStructuredData } from '@/core/seo';
 import { DilfPage } from '@/features/marketing/components';
 import { PageLayout } from '../_components/PageLayout';
 
@@ -20,8 +21,15 @@ export async function generateMetadata({
 }
 
 export default async function Page() {
+  const locale = (await getLocale()) as AppLocale;
+
   return (
     <PageLayout route="dilf" role="main">
+      <WebPageStructuredData
+        locale={locale}
+        path="dilf"
+        namespace="metadata.dilf"
+      />
       <DilfPage />
     </PageLayout>
   );

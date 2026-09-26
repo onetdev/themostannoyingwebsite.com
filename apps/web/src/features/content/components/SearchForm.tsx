@@ -45,9 +45,10 @@ export function SearchForm({
     const searchInput = form.elements.namedItem('search') as HTMLInputElement;
     const query = searchInput.value;
 
-    // Sooo, we want to avoid edge requests thus using fragment instead
-    // The search doesn't work anyways
-    router.push(`/search#query=${query}`);
+    // Keep the query in the URL (`?q=`) so the page is shareable, SSR-friendly
+    // and compatible with the site-wide SearchAction. The search itself still
+    // runs client-side.
+    router.push(`/search?q=${encodeURIComponent(query)}`);
 
     // If we are already on the search page, we will also need to dispatch
     // the search event

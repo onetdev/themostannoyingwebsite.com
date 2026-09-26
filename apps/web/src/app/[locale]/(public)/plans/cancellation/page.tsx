@@ -1,5 +1,8 @@
+import type { LanguageCode } from '@maw/content-sdk';
 import type { Metadata } from 'next';
-import { getTranslations } from 'next-intl/server';
+import { getLocale, getTranslations } from 'next-intl/server';
+import { NOINDEX_ROBOTS } from '@/core/seo/robots';
+import { VariantPoolsBoundary } from '@/features/content/components/VariantPoolsBoundary';
 import { CancellationPage } from '@/features/subscription/components';
 import { PageLayout } from '../../_components/PageLayout';
 
@@ -17,13 +20,18 @@ export async function generateMetadata({
   return {
     title: t('title'),
     description: t('description'),
+    robots: NOINDEX_ROBOTS,
   };
 }
 
 export default async function Page() {
+  const locale = (await getLocale()) as LanguageCode;
+
   return (
     <PageLayout route="plans.cancellation" role="main">
-      <CancellationPage />
+      <VariantPoolsBoundary lang={locale} types={['cancellation-reasons']}>
+        <CancellationPage />
+      </VariantPoolsBoundary>
     </PageLayout>
   );
 }

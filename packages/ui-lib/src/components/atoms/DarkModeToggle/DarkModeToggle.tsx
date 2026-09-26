@@ -23,7 +23,7 @@ export type DarkModeToggleProps = VariantProps<
 > & {
   className?: string;
   resolvedTheme?: 'light' | 'dark' | string;
-  setTheme: (theme: string) => void;
+  setTheme: (theme: 'light' | 'dark') => void;
   text: {
     lightMode: string;
     darkMode: string;

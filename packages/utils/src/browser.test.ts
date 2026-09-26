@@ -4,6 +4,7 @@
 import {
   getLocationPermissionState,
   getNotificationPermissionState,
+  hasBrowserPermissionSupport,
   isBrowser,
   requestNotificationPermission,
 } from './browser';
@@ -17,10 +18,15 @@ describe('browser utils', () => {
   });
 
   afterEach(() => {
-    window.Notification = originalNotification;
+    Object.defineProperty(window, 'Notification', {
+      value: originalNotification,
+      configurable: true,
+      writable: true,
+    });
     Object.defineProperty(window, 'navigator', {
       value: originalNavigator,
       configurable: true,
+      writable: true,
     });
   });
 
@@ -32,8 +38,11 @@ describe('browser utils', () => {
 
   describe('getNotificationPermissionState', () => {
     it('should return permission if Notification is supported', () => {
-      // @ts-expect-error
-      window.Notification = { permission: 'granted' };
+      Object.defineProperty(window, 'Notification', {
+        value: { permission: 'granted' },
+        configurable: true,
+        writable: true,
+      });
       expect(getNotificationPermissionState()).toBe('granted');
     });
 
@@ -42,16 +51,32 @@ describe('browser utils', () => {
       delete window.Notification;
       expect(getNotificationPermissionState()).toBeUndefined();
     });
+
+    it('should return undefined if accessing Notification.permission throws', () => {
+      Object.defineProperty(window, 'Notification', {
+        value: {
+          get permission() {
+            throw new Error('Access denied');
+          },
+        },
+        configurable: true,
+        writable: true,
+      });
+      expect(getNotificationPermissionState()).toBeUndefined();
+    });
   });
 
   describe('requestNotificationPermission', () => {
     it('should return undefined if serviceWorker is not supported', async () => {
-      // @ts-expect-error
-      window.Notification = { requestPermission: jest.fn() };
-      // JSDOM has navigator but we can mock it
+      Object.defineProperty(window, 'Notification', {
+        value: { requestPermission: jest.fn() },
+        configurable: true,
+        writable: true,
+      });
       Object.defineProperty(window, 'navigator', {
         value: { serviceWorker: undefined },
         configurable: true,
+        writable: true,
       });
 
       const result = await requestNotificationPermission();
@@ -60,16 +85,66 @@ describe('browser utils', () => {
 
     it('should call requestPermission if supported', async () => {
       const mockRequestPermission = jest.fn().mockResolvedValue('granted');
-      // @ts-expect-error
-      window.Notification = { requestPermission: mockRequestPermission };
+      Object.defineProperty(window, 'Notification', {
+        value: { requestPermission: mockRequestPermission },
+        configurable: true,
+        writable: true,
+      });
       Object.defineProperty(window, 'navigator', {
         value: { serviceWorker: {} },
         configurable: true,
+        writable: true,
       });
 
       const result = await requestNotificationPermission();
       expect(mockRequestPermission).toHaveBeenCalled();
       expect(result).toBe('granted');
+    });
+
+    it('should return undefined if requestPermission throws or rejects', async () => {
+      const mockRequestPermission = jest
+        .fn()
+        .mockRejectedValue(new Error('Permission request blocked'));
+      Object.defineProperty(window, 'Notification', {
+        value: { requestPermission: mockRequestPermission },
+        configurable: true,
+        writable: true,
+      });
+      Object.defineProperty(window, 'navigator', {
+        value: { serviceWorker: {} },
+        configurable: true,
+        writable: true,
+      });
+
+      const result = await requestNotificationPermission();
+      expect(result).toBeUndefined();
+    });
+  });
+
+  describe('hasBrowserPermissionSupport', () => {
+    it('should return true when navigator.permissions.query is a function', () => {
+      Object.defineProperty(window, 'navigator', {
+        value: { permissions: { query: jest.fn() } },
+        configurable: true,
+        writable: true,
+      });
+      expect(hasBrowserPermissionSupport()).toBe(true);
+    });
+
+    it('should return false when permissions is missing or query is not a function', () => {
+      Object.defineProperty(window, 'navigator', {
+        value: { permissions: {} },
+        configurable: true,
+        writable: true,
+      });
+      expect(hasBrowserPermissionSupport()).toBe(false);
+
+      Object.defineProperty(window, 'navigator', {
+        value: {},
+        configurable: true,
+        writable: true,
+      });
+      expect(hasBrowserPermissionSupport()).toBe(false);
     });
   });
 
@@ -81,6 +156,7 @@ describe('browser utils', () => {
           permissions: { query: mockQuery },
         },
         configurable: true,
+        writable: true,
       });
 
       const result = await getLocationPermissionState();
@@ -92,7 +168,46 @@ describe('browser utils', () => {
       Object.defineProperty(window, 'navigator', {
         value: {},
         configurable: true,
+        writable: true,
       });
+      const result = await getLocationPermissionState();
+      expect(result).toBeUndefined();
+    });
+
+    it('should return undefined and catch Illegal invocation TypeError thrown synchronously', async () => {
+      const mockQuery = jest.fn().mockImplementation(() => {
+        throw new TypeError(
+          "Failed to execute 'query' on 'Permissions': Illegal invocation",
+        );
+      });
+      Object.defineProperty(window, 'navigator', {
+        value: {
+          permissions: { query: mockQuery },
+        },
+        configurable: true,
+        writable: true,
+      });
+
+      const result = await getLocationPermissionState();
+      expect(result).toBeUndefined();
+    });
+
+    it('should return undefined and catch Illegal invocation TypeError rejected asynchronously', async () => {
+      const mockQuery = jest
+        .fn()
+        .mockRejectedValue(
+          new TypeError(
+            "Failed to execute 'query' on 'Permissions': Illegal invocation",
+          ),
+        );
+      Object.defineProperty(window, 'navigator', {
+        value: {
+          permissions: { query: mockQuery },
+        },
+        configurable: true,
+        writable: true,
+      });
+
       const result = await getLocationPermissionState();
       expect(result).toBeUndefined();
     });

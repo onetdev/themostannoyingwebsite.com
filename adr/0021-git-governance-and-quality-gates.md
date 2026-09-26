@@ -20,7 +20,7 @@ We adopted **Lefthook** as our git hook manager, combined with **Commitlint** an
 3. **Pre-Push Hook**:
    - Runs `pnpm build` and `pnpm test` across the monorepo via Turborepo pipelines to ensure no breaking changes or failing tests are pushed to remotes.
 4. **Agent Skill Support**:
-   - Standardized via the `staged-summarizer` skill to ensure AI agents consistently craft high-quality Conventional Commit messages matching the commitlint specification.
+   - Standardized via the `git-commit` skill to ensure AI agents consistently craft high-quality Conventional Commit messages matching the commitlint specification and commit locally without pushing.
 
 ## Consequences
 - **Pros**: Catches errors immediately on the developer's machine before CI runs; ensures clean and uniform git history for automated changelog generation; fast execution thanks to Lefthook (Go-based) and Biome.

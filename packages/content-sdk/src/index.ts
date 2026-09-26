@@ -1,18 +1,18 @@
 import {
   type GetArticleBySlugResponse,
+  type GetArticleListResponse,
   type GetPageBySlugResponse,
+  type GetPageListResponse,
+  type GetSearchResultsResponse,
   ImageAsset,
   ImageAssetVariant,
-  type ListArticlesResponse,
-  type ListPagesResponse,
-  type SearchContentResponse,
 } from './generated/endpoints';
 
 export type Article = GetArticleBySlugResponse;
-export type ArticleListItem = ListArticlesResponse['items'][number];
+export type ArticleListItem = GetArticleListResponse['items'][number];
 export type Page = GetPageBySlugResponse;
-export type PageListItem = ListPagesResponse['items'][number];
-export type SearchResultItem = SearchContentResponse['items'][number];
+export type PageListItem = GetPageListResponse['items'][number];
+export type SearchResultItem = GetSearchResultsResponse['items'][number];
 
 // Backwards-compatible aliases
 export const ApiImageWrapper = ImageAsset;

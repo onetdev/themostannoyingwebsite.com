@@ -30,8 +30,8 @@ This is a **Turborepo** monorepo managed with **pnpm**.
 The project includes specialized skills that you SHOULD use for specific tasks. Activate them via `activate_skill`.
 
 - **`i18n-assistant`**: Use for extracting, managing, and translating user-facing strings.
-- **`branch-summarizer`**: Use to generate a markdown summary of the current branch's changes compared to a target branch.
-- **`staged-summarizer`**: Use to generate high-quality, Conventional Commit messages for staged work.
+- **`git-commit`**: Use to review staged work, detect scope, and create a local Conventional Commit (never pushes).
+- **`git-pr-sync`**: Use to review branch commits, compose PR documentation matching the template, and open or update a draft PR via GitHub CLI (`gh`).
 - **`adr-writer`**: Use to draft and manage Architectural Decision Records in the `adr/` folder.
 
 ---
@@ -59,6 +59,35 @@ pnpm lint:fix
 
 ---
 
+## 🔌 Third-Party Dependencies: Installed Docs Are the Source of Truth
+
+Do not rely on training-data memory for how a third-party library behaves. The
+installed version is the authority; training data is often stale, incomplete, or
+from a different major.
+
+Before using or modifying any third-party API, consult sources in this order:
+
+1.  **Installed package** — bundled docs, type definitions, and source under
+    `node_modules/<pkg>` (e.g. `node_modules/next/dist/docs/`, its `.d.ts`, and
+    JSDoc). In a monorepo the package may only be visible from the workspace
+    that depends on it.
+2.  **Pinned version** — the resolved version in `pnpm-workspace.yaml`
+    (catalog) and the consuming `package.json`.
+3.  **Upstream docs** — the official documentation, changelog, and migration
+    guide for that exact major version.
+
+Rules:
+
+- If the installed API differs from what you remember, follow the **installed**
+  API and say so.
+- Heed deprecation notices. Never reintroduce a deprecated API.
+- Do not hand-edit generated guidance or artifacts (the `next dev` agent block,
+  `src/generated/**`, `next-env.d.ts`); regenerate them instead.
+- When adding a project-level wrapper or substitution, record the upstream
+  reason and link the deprecation notice or issue.
+
+---
+
 ## ⚠️ Agent Directives & Safety
 
 1.  **Surgical Changes:** Minimize changes to only what is necessary for the task.
@@ -66,3 +95,4 @@ pnpm lint:fix
 3.  **No Secrets:** Never log or commit API keys, secrets, or sensitive info.
 4.  **Idiomatic Code:** Match the existing patterns (DI, feature-sliced, etc.) in the workspace.
 5.  **Documentation:** Keep ADRs and internal docs (`AGENTS.md`, `README.md`) updated.
+6.  **Dependencies:** Derive third-party API usage from the installed docs, not training data (see "Third-Party Dependencies" above).

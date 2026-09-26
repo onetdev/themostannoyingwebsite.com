@@ -1,9 +1,9 @@
 'use client';
 
 import { FadeIn } from '@maw/ui-lib';
+import { useTheme } from '@wrksz/themes/client';
 import Image from 'next/image';
 import { useTranslations } from 'next-intl';
-import { useTheme } from 'next-themes';
 import type { PropsWithChildren } from 'react';
 import { Link } from '@/core/i18n/navigation';
 import { useAppConfigContext } from '@/core/react';
@@ -26,13 +26,13 @@ export function ContainerPromotionFlaps() {
             priority
           />
           <PromotionFlapText
-            theme={resolvedTheme as AppTheme}
+            theme={resolvedTheme}
             className="bottom-16 left-16 origin-bottom-left -rotate-90"
           >
             {t('marketing.dilf.flapLeft')}
           </PromotionFlapText>
           <PromotionFlapText
-            theme={resolvedTheme as AppTheme}
+            theme={resolvedTheme}
             className="right-16 bottom-16 origin-bottom-right rotate-90"
           >
             {t('marketing.dilf.flapRight')}

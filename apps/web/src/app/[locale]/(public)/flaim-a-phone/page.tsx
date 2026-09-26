@@ -1,5 +1,8 @@
+import type { LanguageCode } from '@maw/content-sdk';
 import type { Metadata } from 'next';
-import { getTranslations } from 'next-intl/server';
+import { getLocale, getTranslations } from 'next-intl/server';
+import { WebPageStructuredData } from '@/core/seo';
+import { VariantPoolsBoundary } from '@/features/content/components/VariantPoolsBoundary';
 import { FlaimSurveyPage } from '@/features/marketing/components';
 import { PageLayout } from '../_components/PageLayout';
 
@@ -21,6 +24,7 @@ export async function generateMetadata({
 
 export default async function Page() {
   const t = await getTranslations();
+  const locale = (await getLocale()) as LanguageCode;
 
   return (
     <PageLayout
@@ -28,11 +32,18 @@ export default async function Page() {
       className="mx-auto max-w-screen-lg py-0 md:py-14"
       autoPadding={false}
     >
-      <h1>{t('marketing.wanPhone.title')}</h1>
-      <FlaimSurveyPage
-        className="my-5 w-full"
-        settings={{ timeLimitInSeconds: 8 }}
+      <WebPageStructuredData
+        locale={locale as AppLocale}
+        path="flaim-a-phone"
+        namespace="metadata.wanPhone"
       />
+      <h1>{t('marketing.wanPhone.title')}</h1>
+      <VariantPoolsBoundary lang={locale} types={['quiz-questions']}>
+        <FlaimSurveyPage
+          className="my-5 w-full"
+          settings={{ timeLimitInSeconds: 8 }}
+        />
+      </VariantPoolsBoundary>
     </PageLayout>
   );
 }

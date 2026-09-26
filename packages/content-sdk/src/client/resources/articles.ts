@@ -2,9 +2,9 @@ import {
   type GetArticleBySlugQueryParams,
   GetArticleBySlugResponse,
   type GetArticleBySlugResponse as GetArticleBySlugResponseType,
-  type ListArticlesQueryParams,
-  ListArticlesResponse,
-  type ListArticlesResponse as ListArticlesResponseType,
+  type GetArticleListQueryParams,
+  GetArticleListResponse,
+  type GetArticleListResponse as GetArticleListResponseType,
 } from '../../generated/endpoints';
 import type { HttpTransport } from '../http';
 import type { RequestOptions } from '../types';
@@ -16,13 +16,13 @@ export class ArticlesResource {
    * Retrieves a paginated list of localized articles with optional search, tag, and featured filters.
    */
   public async list(
-    params?: ListArticlesQueryParams,
+    params?: GetArticleListQueryParams,
     options?: RequestOptions,
-  ): Promise<ListArticlesResponseType> {
+  ): Promise<GetArticleListResponseType> {
     return this.transport.get(
       'api/v1/articles',
       params as Record<string, unknown> | undefined,
-      ListArticlesResponse,
+      GetArticleListResponse,
       options,
     );
   }
@@ -48,17 +48,17 @@ export class ArticlesResource {
    * Retrieves all localized articles matching the filters by automatically paginating through all available pages.
    */
   public async listAll(
-    params?: Omit<ListArticlesQueryParams, 'limit' | 'offset'>,
+    params?: Omit<GetArticleListQueryParams, 'limit' | 'offset'>,
     options?: RequestOptions,
-  ): Promise<ListArticlesResponseType['items']> {
+  ): Promise<GetArticleListResponseType['items']> {
     const pageSize = 100;
     let offset = 0;
-    const allItems: ListArticlesResponseType['items'] = [];
+    const allItems: GetArticleListResponseType['items'] = [];
 
     while (true) {
       const response = await this.list(
         {
-          ...(params as ListArticlesQueryParams),
+          ...(params as GetArticleListQueryParams),
           limit: pageSize,
           offset,
         },

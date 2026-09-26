@@ -39,6 +39,11 @@ const customClient = new ContentApiClient({
 });
 ```
 
+The base URL defaults to `https://content.themostannoyingwebsite.com` and can be
+overridden with the `NEXT_PUBLIC_CONTENT_API_URL` environment variable. This
+works in the browser, on the server, and in build scripts, since Next.js inlines
+`NEXT_PUBLIC_*` variables at build time.
+
 ---
 
 ## 📖 API Usage

@@ -1,8 +1,11 @@
 'use client';
 
-import { Toaster, TooltipProvider } from '@maw/ui-lib';
-import { QueryClientProvider } from '@tanstack/react-query';
-import { ThemeProvider } from 'next-themes';
+import { TooltipProvider } from '@maw/ui-lib';
+import {
+  type DehydratedState,
+  HydrationBoundary,
+  QueryClientProvider,
+} from '@tanstack/react-query';
 import { type PropsWithChildren, useState } from 'react';
 import { getClientDependencyContainer } from '@/core/di/client';
 import {
@@ -16,13 +19,19 @@ import type { AppConfig } from '@/schemas/app-config';
 import { ClientNavigationConfigurator } from './ClientNavigationConfigurator';
 import { ClientPainContainer } from './ClientPainProvider';
 import { SentryLocaleConfigurator } from './SentryLocaleConfigurator';
+import { ThemedToaster } from './ThemedToaster';
 
 export type ClientRootProviderContainerProps = PropsWithChildren<{
   appConfig: AppConfig;
+  /** Server-prefetched React Query state hydrated into the client cache. */
+  dehydratedState?: DehydratedState;
 }>;
+
+const EMPTY_DEHYDRATED_STATE: DehydratedState = { mutations: [], queries: [] };
 
 export function ClientRootProviderContainer({
   appConfig,
+  dehydratedState,
   children,
 }: ClientRootProviderContainerProps) {
   const DiContainer = getClientDependencyContainer();
@@ -31,20 +40,20 @@ export function ClientRootProviderContainer({
   return (
     <AppConfigProvider config={appConfig}>
       <QueryClientProvider client={queryClient}>
-        <TooltipProvider>
-          <DiContextProvider value={{ container: DiContainer }}>
-            <ThemeProvider defaultTheme="dark" enableColorScheme enableSystem>
+        <HydrationBoundary state={dehydratedState ?? EMPTY_DEHYDRATED_STATE}>
+          <TooltipProvider>
+            <DiContextProvider value={{ container: DiContainer }}>
               <SentryLocaleConfigurator />
               <ClientNavigationConfigurator>
-                <Toaster />
+                <ThemedToaster />
                 <SilentErrorBoundary name="achievements:manager">
                   <AchievementManager />
                 </SilentErrorBoundary>
                 <ClientPainContainer>{children}</ClientPainContainer>
               </ClientNavigationConfigurator>
-            </ThemeProvider>
-          </DiContextProvider>
-        </TooltipProvider>
+            </DiContextProvider>
+          </TooltipProvider>
+        </HydrationBoundary>
       </QueryClientProvider>
     </AppConfigProvider>
   );

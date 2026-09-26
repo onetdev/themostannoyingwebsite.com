@@ -12,7 +12,7 @@ Divide dependencies into logical groups to manage updates and testing iterativel
 - `@sentry/nextjs`
 - `@tanstack/react-query`
 - `@vercel/analytics`
-- `next-themes`
+- `@wrksz/themes`
 - `zod`
 - `zustand`
 - `inversify`

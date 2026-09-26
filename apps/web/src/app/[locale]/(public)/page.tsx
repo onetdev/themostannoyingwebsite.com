@@ -1,5 +1,6 @@
 import type { LanguageCode } from '@maw/content-sdk';
 import { getDependencyContainer } from '@/core/di';
+import { buildBlog, getSeoContext, JsonLd } from '@/core/seo';
 import { getArticleService } from '@/features/content/services';
 import { HomePage } from './_components/HomePage';
 import { PageLayout } from './_components/PageLayout';
@@ -30,6 +31,24 @@ export default async function Page({ params }: NextPageProps) {
   const denseArticleList = articlePool.items.slice(0, 2);
   const smallCoverArticleList = articlePool.items.slice(2, 14);
 
+  const appLocale = locale as AppLocale;
+  const seoContext = await getSeoContext(appLocale);
+  const blogSchema = buildBlog({
+    ...seoContext,
+    name: seoContext.siteName,
+    description: seoContext.description,
+    posts: [
+      ...(coverArticle ? [coverArticle] : []),
+      ...denseArticleList,
+      ...smallCoverArticleList,
+    ].map((article) => ({
+      path: `articles/${article.slug}`,
+      headline: article.title,
+      description: article.summary,
+      datePublished: article.published_at,
+    })),
+  });
+
   return (
     <PageLayout
       route="home"
@@ -37,6 +56,7 @@ export default async function Page({ params }: NextPageProps) {
       autoPadding={false}
       role="main"
     >
+      <JsonLd data={blogSchema} />
       <HomePage
         coverArticle={coverArticle}
         denseArticleList={denseArticleList}

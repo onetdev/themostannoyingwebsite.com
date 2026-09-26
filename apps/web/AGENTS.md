@@ -11,6 +11,8 @@ This document provides specific instructions and context for AI agents working o
 - **State Management:** Zustand
 - **DI:** InversifyJS
 - **i18n:** next-intl
+- **Dependencies:** Derive third-party API usage from the installed docs, not
+  training data — see root `AGENTS.md` → "Third-Party Dependencies".
 
 ### Core Directories
 - `src/app/`: Next.js App Router.
@@ -20,11 +22,13 @@ This document provides specific instructions and context for AI agents working o
   - `di/`: Dependency Injection core (InversifyJS setup, base symbols).
   - `events/`: Global event bus (Emittery).
   - `http/`: HTTP client and API abstractions.
+  - `seo/`: Structured data (JSON-LD) builders, `JsonLd` renderer, canonical URL helpers, and robots constants. See `adr/0026-structured-data-json-ld.md`.
+  - `content/`: Content API client factory (`createAppContentClient`) and dev proxy helpers. Use this factory instead of the raw SDK `createContentClient` so browser requests are proxied in local development.
   - `observability/`: Logging and monitoring (Sentry).
 - `src/features/`: Domain-specific modules. **This is where most logic belongs.**
 - `src/hooks/`: Shared, app-wide React hooks.
 - `src/i18n/`: Internationalization.
-  - `messages/`: Global translation bundles.
+  - `messages/`: Bundled English translation reference (other locales are served by the Content API).
 - `src/navigation/`: Localization-aware routing and navigation logic.
 - `src/schemas/`: Shared Zod validation schemas.
 - `src/services/`: Global business logic (e.g., `AppService`).
@@ -32,27 +36,99 @@ This document provides specific instructions and context for AI agents working o
 
 ---
 
+## 🎨 Theme Management
+
+We use `@wrksz/themes` (see `adr/0027-theme-management-wrksz-themes.md`).
+
+- **Provider**: `ThemeProvider` from `@wrksz/themes/next` lives in the document-bearing route-group layouts (`(public)`, `(barebone)`), above the other client providers. Do **not** render the provider, nor any theme `<script>`, inside a client component — the library injects its no-flash bootstrap via `useServerInsertedHTML` precisely so React 19 never client-renders a script tag.
+- **Hooks**: read `useTheme` from `@wrksz/themes/client`. `resolvedTheme` is `"light" | "dark" | undefined` (undefined before hydration), so gate theme-dependent markup with `useHydrated()` instead of feeding it into hydration-sensitive output.
+- **Contract**: the theme is applied to `<html data-theme>`, `localStorage` key `theme`, which the Tailwind variants and `packages/ui-lib/src/styles/themes/*.css` selectors depend on. `attribute="data-theme"` must stay explicit (the library defaults to `class`).
+- **Design system**: `packages/ui-lib` must not import a theme library. Components receive theme via props (e.g. `DarkModeToggle`, `Toaster`); the app bridges context in small adapters such as `src/app/bootstrap/ThemedToaster.tsx`.
+
+---
+
 ## 🌍 Internationalization (i18n)
 
 We use `next-intl`. **NEVER hardcode user-facing strings.**
 
-### 1. Global Messages (`src/i18n/messages/`)
-Structured by language folders: `src/i18n/messages/{locale}/`
-- `index.ts`: Aggregates all feature and global translations.
+> ℹ️ Non-English translations are served by the headless Content API. Only the
+> English bundles are shipped with the app, as the reference shape and runtime
+> fallback. See `adr/0022-api-served-translations.md`. Variant pools (fake names,
+> comments, quiz data, etc.) are **not** bundled at all and are served by the API
+> for every locale — see `adr/0025-api-only-variant-pools-ssr-hydration.md`.
+
+### 1. Global Messages (`src/i18n/messages/en/`)
+Only English is bundled: `src/i18n/messages/en/`
+- `index.ts`: Aggregates all feature and global translations. Defines `AppTranslationShape`.
 - `common.ts`: Shared UI strings (buttons, labels, common errors).
 - `metadata.ts`: SEO titles and descriptions.
-- `variants.ts`: Large arrays for shared UI elements (e.g., random names).
 
-### 2. Feature Translations (`src/features/{feature}/i18n/`)
-Two patterns allowed based on complexity:
-- **Single File**: `i18n/{locale}.ts` (if only simple keys exist).
-- **Directory**: `i18n/{locale}/` containing `index.ts` and `variants.ts` (if arrays/complex shapes are needed).
+### 2. Feature Translations (`src/features/{feature}/i18n/en.ts`)
+English only, one file per feature: `i18n/en.ts`. Do not create `i18n/en/`
+directories or `variants.ts` files — variant data lives in the Content API.
 
-### 3. Usage in Services
-If a Service needs random data (e.g., `CommentService.ts` needs a list of names):
-- Put that data in `variants.ts`.
-- Dynamic import it in the Service: `import(\`@/i18n/messages/${locale}/variants\`)`.
-- **Why?** Keeps main bundles small and prevents loading all translations into the background service logic.
+### 3. Runtime Message Loading
+- `src/core/i18n/request.ts` calls `loadMessages()` (`src/core/i18n/load-messages.ts`).
+- For `en`, the bundled bundle is returned directly.
+- For every other locale, `client.translations.getByLang(locale)` is fetched and
+  deep-merged over the English bundle; on failure the English bundle is returned
+  and the failure is logged/reported to Sentry.
+- Every layout/page reads the locale from the request config, which resolves the
+  `[locale]` segment through **`next/root-params`** in `src/core/i18n/request.ts`.
+  Do **not** add `setRequestLocale` — it is deprecated in the installed
+  next-intl and `next/root-params` supersedes it (verify in
+  `node_modules/next-intl`) — and do **not** add a pass-through
+  `app/layout.tsx` — the root layout must remain
+  `src/app/[locale]/layout.tsx` for root params to work.
+
+### 4. Supported Locale Catalog (build-time)
+- `scripts/build-locales.ts` fetches the locale list from the Content API at build
+  time and writes `public/locales.json` (gitignored).
+- `src/i18n/supported-locales.ts` exposes the generated `SUPPORTED_LANGUAGES`, read
+  synchronously by `useLanguageSwitcher` (no runtime browser fetch, no CORS).
+- **Fails the build** when the Content API is unreachable. Pass `--allow-fallback`
+  or set `ALLOW_LOCALES_FALLBACK=true` to write the bundled English-only list instead.
+- The API base URL is overridable via `NEXT_PUBLIC_CONTENT_API_URL`.
+- Regenerated via `build:metadata` (run by `build`, `lint`, `check-types`, and `dev`).
+- See `adr/0023-build-time-locale-catalog.md`.
+
+### 5. Variant Pools (API-only)
+Variant pools are served exclusively by the Content API
+(`client.variants.getByType(lang, type)`); nothing is bundled, not even English.
+
+- **Services** that need pool data call `getVariantPool()` (graceful, returns
+  `undefined`) or `fetchVariantPool()` (throws) from
+  `src/features/content/services/`. On failure pools degrade to empty arrays.
+- **Client components** read pools with `useVariantPool<T>(type)` and must be
+  covered by a server prefetch, otherwise they render empty:
+  - Shared pool wiring lives in `variant-pool-query.ts` (React Query options,
+    `staleTime`/`gcTime` infinity) and `prefetch-variant-pools.ts`.
+  - Global pain-widget pools are prefetched in the locale layouts and hydrated via
+    `ClientRootProviderContainer`.
+  - Page-scoped pools are wrapped in `VariantPoolsBoundary`
+    (`src/features/content/components/VariantPoolsBoundary.tsx`) so each route
+    ships only the pools it uses.
+- The query function refuses to run in the browser, keeping all Content API calls
+  server-side. Freshness comes from ISR revalidation (`revalidate: 3600`) and
+  proactive invalidation when the Content API releases new content.
+- See `adr/0025-api-only-variant-pools-ssr-hydration.md`.
+
+---
+
+## 🔎 Structured Data (JSON-LD)
+
+All pages must describe themselves with JSON-LD. The machinery lives in `src/core/seo/` (see `adr/0026-structured-data-json-ld.md`).
+
+- **Builders** (`core/seo/builders/`) are pure functions returning `schema-dts` typed nodes; pass resolved strings/URLs in, never `next-intl` or config.
+- **Render** with the server component `JsonLd` (native `<script type="application/ld+json">`, escaped). Use arrays to emit several nodes; they are wrapped in `@graph`.
+- **Site-wide** `Organization` + `WebSite` are emitted once per document by `SiteStructuredData`, mounted inside `<body>` by the document-bearing route-group layouts (`(public)`, `(barebone)`). The `[locale]` layout is a pass-through, so never render structured data (or any other document-level element) there. Do not duplicate them per page.
+- **Urls** must go through `core/seo/absolute-url.ts` (`absoluteUrl`, `absoluteAssetUrl`, `siteId`) so canonical, trailing-slashed, locale-prefixed URLs stay consistent with `trailingSlash: true`. Path segments are URL-encoded; already-absolute assets (incl. protocol-relative and `data:`/`blob:`) are left untouched.
+- **Canonical**: structured data `@id`/`url` must match the page's declared canonical. Articles are **self-canonical per locale** with `hreflang` alternates (including `x-default`); the `Organization` node keeps a locale-independent brand `name` (from the default locale) because it shares one `@id` across locales, while `WebSite` stays localized.
+- **Search**: the site-wide `SearchAction` targets `/search?q={search_term_string}`; keep `SearchForm`/`useSearch` on `?q=` (the `#query=` fragment is a legacy fallback).
+- **Static pages**: render `<WebPageStructuredData locale path namespace type? />`.
+- **Content pages**: call the matching builder (`buildArticle`, `buildBlog`, `buildPlanList`, `buildDonateAction`, `buildSimpleItemList`) from the existing data fetch.
+- **Indexability**: import `INDEX_ROBOTS` / `NOINDEX_ROBOTS` from `core/seo/robots`. Auth, profile, admin, search, and funnel pages are `noindex` (but `follow`) and must stay out of `sitemap.ts`; `/api/`, `/*/debug`, and `/*/admin` are also disallowed in `app/robots.ts`.
+- **Tests**: unit-test new builders (`*.test.ts`) and add/extend Playwright assertions in `e2e/tests/structured-data.spec.ts`.
 
 ---
 
@@ -83,6 +159,7 @@ If a Service needs random data (e.g., `CommentService.ts` needs a list of names)
 2.  Implement `generateMetadata` using `getTranslations({ locale, namespace: 'metadata.xxx' })`.
 3.  Keep `page.tsx` lean; handle SEO metadata, fetch data, and pass to a Feature component.
 4.  Wrap content in `PageLayout`.
+5.  Add structured data via `src/core/seo` (see below).
 
 ---
 
@@ -112,3 +189,14 @@ If a Service needs random data (e.g., `CommentService.ts` needs a list of names)
 - ❌ Directly importing `en.ts` for types (Use `AppTranslationShape` from `src/types.ts`).
 - ❌ Using `any` (Define Zod schemas and infer types).
 - ❌ Manual `fetch` calls (Use repositories or services).
+- ❌ Bundling variant arrays in messages (Use Content API variant pools via `useVariantPool` + server prefetch).
+
+<!-- BEGIN:nextjs-agent-rules -->
+
+# This is NOT the Next.js you know
+
+This version has breaking changes — APIs, conventions, and file structure may all differ from your training data. Read the relevant guide in `node_modules/next/dist/docs/` (resolved from this file's directory; in monorepos the `next` package may not be visible from the repo root) before writing any code. Heed deprecation notices.
+
+This block is written and re-added by `next dev` — verify at `node_modules/next/dist/server/lib/generate-agent-files.js`. Removing it from a diff only re-creates the uncommitted change; committing it with your work keeps the tree clean.
+
+<!-- END:nextjs-agent-rules -->

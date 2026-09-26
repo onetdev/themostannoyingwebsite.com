@@ -10,6 +10,9 @@ export default function robots(): MetadataRoute.Robots {
     rules: {
       userAgent: '*',
       crawlDelay: 10,
+      // Internal surfaces are excluded from crawling outright; public utility
+      // pages remain crawlable but are `noindex` via metadata.
+      disallow: ['/api/', '/*/debug', '/*/admin'],
     },
     sitemap: `${publicUrl}/sitemap.xml`,
   };

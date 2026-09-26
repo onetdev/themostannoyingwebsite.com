@@ -1,26 +1,28 @@
 'use client';
 
 import { arrayShuffle } from '@maw/utils/array';
-import { useMessages } from 'next-intl';
 import { useMemo } from 'react';
+import { useVariantPool } from '@/features/content/hooks';
 import type { FlaimSurveyQuestion } from '../schemas';
 
 export function useSurveyQuestions() {
-  const messages = useMessages() as AppTranslationShape;
+  const questionVariants = useVariantPool('quiz-questions');
 
   const pool = useMemo(() => {
-    const items = Object.entries(
-      messages.marketing.wanPhone.survey.questionVariants,
-    ).map(([, value]) => {
+    const items = questionVariants.map((value) => {
+      const options = Array.isArray(value.options)
+        ? value.options
+        : Object.values(value.options);
+
       return {
         text: value.text,
-        options: arrayShuffle(Object.values(value.options)),
+        options: arrayShuffle(options),
         solution: value.solution,
       } satisfies FlaimSurveyQuestion;
     });
 
     return arrayShuffle(items);
-  }, [messages]);
+  }, [questionVariants]);
 
   return pool;
 }

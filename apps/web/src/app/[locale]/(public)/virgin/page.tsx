@@ -1,7 +1,8 @@
 import { PageHeadline } from '@maw/ui-lib';
 import styles from '@maw/ui-lib/content.module.css';
 import type { Metadata } from 'next';
-import { getTranslations } from 'next-intl/server';
+import { getLocale, getTranslations } from 'next-intl/server';
+import { WebPageStructuredData } from '@/core/seo';
 import { PageLayout } from '../_components/PageLayout';
 import DisableAllOnMount from './disable-all-on-mount';
 
@@ -23,9 +24,15 @@ export async function generateMetadata({
 
 async function Page() {
   const t = await getTranslations();
+  const locale = (await getLocale()) as AppLocale;
 
   return (
     <PageLayout route="virgin" role="main">
+      <WebPageStructuredData
+        locale={locale}
+        path="virgin"
+        namespace="metadata.virgin"
+      />
       <DisableAllOnMount />
       <PageHeadline className="mx-auto w-full max-w-screen-md">
         {t('app.virgin.title')}

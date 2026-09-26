@@ -71,6 +71,10 @@ Despite the chaos:
 - [Jest](https://jestjs.io/)
 - [Playwright](https://playwright.dev/)
 
+The linked documentation is the authority for the installed version of each
+dependency. Prefer it — and the bundled docs in `node_modules` — over assumptions
+from an agent's training data.
+
 ## Quick Start
 
 ### Requirements
