@@ -5,6 +5,7 @@ import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import { getTranslations } from 'next-intl/server';
 import { loadLocaleMdx } from '@/core/i18n/load-locale-mdx';
+import { WebPageStructuredData } from '@/core/seo';
 import { PageLayout } from '../_components/PageLayout';
 import { TranslationDisclaimer } from '../_components/TranslationDisclaimer';
 
@@ -41,6 +42,11 @@ export default async function Page({ params }: NextPageProps) {
 
     return (
       <PageLayout route="privacy-policy" role="main">
+        <WebPageStructuredData
+          locale={locale}
+          path="privacy-policy"
+          namespace="metadata.privacyPolicy"
+        />
         <PageHeadline className="mx-auto w-full max-w-screen-md">
           {t('navigation.privacyPolicy')}
         </PageHeadline>

@@ -4,9 +4,15 @@ import 'core-js/actual/iterator/map';
 import 'core-js/actual/iterator/to-array';
 
 import type { Metadata, Viewport } from 'next';
-import { getTranslations } from 'next-intl/server';
+import { getLocale, getTranslations } from 'next-intl/server';
 import type { PropsWithChildren } from 'react';
 
+import {
+  buildSiteGraph,
+  getSeoContext,
+  INDEX_ROBOTS,
+  JsonLd,
+} from '@/core/seo';
 import { getAppConfigService } from '@/services';
 
 const config = getAppConfigService().getAll();
@@ -15,10 +21,7 @@ export async function generateMetadata(): Promise<Metadata> {
   const t = await getTranslations('metadata.app');
 
   return {
-    robots: {
-      index: true,
-      follow: true,
-    },
+    robots: INDEX_ROBOTS,
     title: {
       default: t('title'),
       template: `%s | ${t('title')}`,
@@ -78,6 +81,23 @@ export function generateViewport(): Viewport {
   };
 }
 
-export default function LocaleRootLayout({ children }: PropsWithChildren) {
-  return children;
+export default async function LocaleRootLayout({
+  children,
+}: PropsWithChildren) {
+  const locale = (await getLocale()) as AppLocale;
+  const seoContext = await getSeoContext(locale);
+
+  const siteGraph = buildSiteGraph({
+    ...seoContext,
+    logoUrl: config.common.assets.appIcon,
+    sameAs: Object.values(config.common.socialLinks),
+    contactEmail: config.deploymentMeta.contactEmail,
+  });
+
+  return (
+    <>
+      <JsonLd data={siteGraph} />
+      {children}
+    </>
+  );
 }

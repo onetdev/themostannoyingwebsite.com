@@ -1,6 +1,7 @@
 import type { LanguageCode } from '@maw/content-sdk';
 import type { Metadata } from 'next';
 import { getLocale, getTranslations } from 'next-intl/server';
+import { NOINDEX_ROBOTS } from '@/core/seo/robots';
 import { VariantPoolsBoundary } from '@/features/content/components/VariantPoolsBoundary';
 import { CancellationPage } from '@/features/subscription/components';
 import { PageLayout } from '../../_components/PageLayout';
@@ -19,6 +20,7 @@ export async function generateMetadata({
   return {
     title: t('title'),
     description: t('description'),
+    robots: NOINDEX_ROBOTS,
   };
 }
 

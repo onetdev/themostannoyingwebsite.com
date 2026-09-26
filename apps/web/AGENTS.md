@@ -22,6 +22,7 @@ This document provides specific instructions and context for AI agents working o
   - `di/`: Dependency Injection core (InversifyJS setup, base symbols).
   - `events/`: Global event bus (Emittery).
   - `http/`: HTTP client and API abstractions.
+  - `seo/`: Structured data (JSON-LD) builders, `JsonLd` renderer, canonical URL helpers, and robots constants. See `adr/0026-structured-data-json-ld.md`.
   - `content/`: Content API client factory (`createAppContentClient`) and dev proxy helpers. Use this factory instead of the raw SDK `createContentClient` so browser requests are proxied in local development.
   - `observability/`: Logging and monitoring (Sentry).
 - `src/features/`: Domain-specific modules. **This is where most logic belongs.**
@@ -103,6 +104,21 @@ Variant pools are served exclusively by the Content API
 
 ---
 
+## 🔎 Structured Data (JSON-LD)
+
+All pages must describe themselves with JSON-LD. The machinery lives in `src/core/seo/` (see `adr/0026-structured-data-json-ld.md`).
+
+- **Builders** (`core/seo/builders/`) are pure functions returning `schema-dts` typed nodes; pass resolved strings/URLs in, never `next-intl` or config.
+- **Render** with the server component `JsonLd` (native `<script type="application/ld+json">`, escaped). Use arrays to emit several nodes; they are wrapped in `@graph`.
+- **Site-wide** `Organization` + `WebSite` are emitted once in `src/app/[locale]/layout.tsx`. Do not duplicate them per page.
+- **Urls** must go through `core/seo/absolute-url.ts` (`absoluteUrl`, `absoluteAssetUrl`, `siteId`) so canonical, trailing-slashed, locale-prefixed URLs stay consistent with `trailingSlash: true`.
+- **Static pages**: render `<WebPageStructuredData locale path namespace type? />`.
+- **Content pages**: call the matching builder (`buildArticle`, `buildBlog`, `buildPlanList`, `buildDonateAction`, `buildSimpleItemList`) from the existing data fetch.
+- **Indexability**: import `INDEX_ROBOTS` / `NOINDEX_ROBOTS` from `core/seo/robots`. Auth, profile, admin, search, and funnel pages are `noindex` and must stay out of `sitemap.ts`.
+- **Tests**: unit-test new builders (`*.test.ts`) and add/extend Playwright assertions in `e2e/tests/structured-data.spec.ts`.
+
+---
+
 ## 💉 Dependency Injection (InversifyJS)
 
 1.  **Define Symbol**: In `features/{feature}/types.ts`, add to `DI` object.
@@ -130,6 +146,7 @@ Variant pools are served exclusively by the Content API
 2.  Implement `generateMetadata` using `getTranslations({ locale, namespace: 'metadata.xxx' })`.
 3.  Keep `page.tsx` lean; handle SEO metadata, fetch data, and pass to a Feature component.
 4.  Wrap content in `PageLayout`.
+5.  Add structured data via `src/core/seo` (see below).
 
 ---
 

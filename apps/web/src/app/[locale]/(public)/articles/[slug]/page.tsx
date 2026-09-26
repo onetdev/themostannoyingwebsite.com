@@ -5,7 +5,10 @@ import {
 } from '@maw/content-sdk';
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
+import { getTranslations } from 'next-intl/server';
+import config from '@/core/config';
 import { getDependencyContainer } from '@/core/di';
+import { buildArticle, buildBreadcrumbList, JsonLd } from '@/core/seo';
 import { CommentService } from '@/features/comments/services';
 import { ArticleItemPage } from '@/features/content/components';
 import { getArticleService } from '@/features/content/services';
@@ -40,7 +43,7 @@ export async function generateMetadata({
     allTranslations[0] || { lang: locale, slug };
 
   const languages = Object.fromEntries(
-    allTranslations.map((t) => [t.lang, `/${t.lang}/articles/${t.slug}`]),
+    allTranslations.map((t) => [t.lang, `/${t.lang}/articles/${t.slug}/`]),
   );
 
   const coverImages = toCoverImages(data.featured_image);
@@ -48,7 +51,7 @@ export async function generateMetadata({
   return {
     title: data.title,
     alternates: {
-      canonical: `/${canonicalTranslation.lang}/articles/${canonicalTranslation.slug}`,
+      canonical: `/${canonicalTranslation.lang}/articles/${canonicalTranslation.slug}/`,
       languages,
     },
     openGraph: {
@@ -91,9 +94,36 @@ export default async function Page({ params }: PageProps) {
 
   const comments = await new CommentService().getByArticle(datum);
   const renderedContent = renderMarkdown(datum.content);
+  const appLocale = locale as AppLocale;
+  const navigation = await getTranslations({ locale, namespace: 'navigation' });
+  const coverImages = toCoverImages(datum.featured_image);
+  const articlePath = `articles/${datum.slug}`;
+
+  const articleSchema = buildArticle({
+    baseUrl: config.deploymentMeta.publicUrl,
+    locale: appLocale,
+    path: articlePath,
+    headline: datum.title,
+    description: datum.summary,
+    image: coverImages?.original,
+    datePublished: datum.published_at,
+    authorName: datum.author,
+    keywords: datum.keywords,
+    articleSection: datum.tags?.[0],
+  });
+
+  const breadcrumbSchema = buildBreadcrumbList(
+    config.deploymentMeta.publicUrl,
+    appLocale,
+    [
+      { name: navigation('home'), path: '' },
+      { name: datum.title, path: articlePath },
+    ],
+  );
 
   return (
     <PageLayout route="article.single" role="main" data-testid="article-item">
+      <JsonLd data={[articleSchema, breadcrumbSchema]} />
       <ArticleItemPage
         article={datum}
         comments={comments}

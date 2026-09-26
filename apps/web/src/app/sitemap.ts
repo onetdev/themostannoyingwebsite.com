@@ -4,6 +4,7 @@ import type { Languages } from 'next/dist/lib/metadata/types/alternative-urls-ty
 
 import './bootstrap/di';
 import { getDependencyContainer } from '@/core/di';
+import { absoluteUrl } from '@/core/seo/absolute-url';
 import { getArticleService } from '@/features/content/services';
 import i18nConfig from '@/root/i18n.config';
 import { getAppConfigService } from '@/services';
@@ -16,10 +17,7 @@ const genLangAlternates = (
 ): Languages<string> => {
   const items = i18nConfig.locales
     .filter((lang) => lang !== currentLocale)
-    .map((lang) => {
-      const normalizedPath = path ? `/${path}` : '';
-      return [lang, `${config.publicUrl}/${lang}${normalizedPath}/`];
-    });
+    .map((lang) => [lang, absoluteUrl(config.publicUrl, lang, path)]);
 
   return Object.fromEntries(items);
 };
@@ -28,10 +26,8 @@ const commonPageMeta = (
   path: string,
   locale: string,
 ): MetadataRoute.Sitemap[0] => {
-  const normalizedPath = path ? `/${path}` : '';
-
   return {
-    url: `${config.publicUrl}/${locale}${normalizedPath}/`,
+    url: absoluteUrl(config.publicUrl, locale, path),
     lastModified: new Date(),
     changeFrequency: 'daily',
     alternates: {
@@ -42,7 +38,7 @@ const commonPageMeta = (
 
 const mapArticleToSitemapEntry = (item: ArticleListItem) => {
   return {
-    url: `${config.publicUrl}/${item.lang}/articles/${item.slug}/`,
+    url: absoluteUrl(config.publicUrl, item.lang, `articles/${item.slug}`),
     lastModified: new Date(item.published_at),
   } satisfies MetadataRoute.Sitemap[0];
 };
@@ -66,14 +62,12 @@ async function sitemap(): Promise<MetadataRoute.Sitemap> {
     'donate',
     'flaim-a-phone',
     'hot-things',
+    'only-spams',
     'plans',
     'privacy-policy',
-    'search',
     'settings',
+    'terms-of-use',
     'virgin',
-    'user/login',
-    'user/password-reminder',
-    'user/signup',
   ];
 
   const commonPagesEntries = i18nConfig.locales.flatMap((locale) =>
