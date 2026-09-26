@@ -47,6 +47,7 @@ export function mergeMessages(
 export async function loadMessages(
   locale: AppLocale,
   client: ContentApiClient = createAppContentClient(),
+  onFallback?: (error: unknown) => void,
 ): Promise<MessageTree> {
   if (locale === 'en') {
     return enMessages;
@@ -65,7 +66,8 @@ export async function loadMessages(
     );
 
     return mergeMessages(enMessages, response.messages as MessageTree);
-  } catch {
+  } catch (error) {
+    onFallback?.(error);
     return enMessages;
   }
 }

@@ -10,8 +10,10 @@ export function TextLogo() {
       <Link href="/" prefetch={false} title={t('app.title')}>
         {/* Mobile */}
         <span className="text-card-foreground text-2xl lg:hidden">
-          <i className="font-light">the</i>{' '}
-          <span className="text-primary">MAW</span>
+          {t.rich('app.logoShort', {
+            the: (chunks) => <i className="font-light">{chunks}</i>,
+            most: (chunks) => <span className="text-primary">{chunks}</span>,
+          })}
         </span>
         {/* Desktop logo logo */}
         <span className="hidden text-3xl lg:inline-block">

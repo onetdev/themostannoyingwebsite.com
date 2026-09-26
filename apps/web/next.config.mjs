@@ -28,6 +28,10 @@ const nextConfig = {
     ],
   },
   pageExtensions: ['js', 'jsx', 'md', 'mdx', 'ts', 'tsx'],
+  experimental: {
+    // Root layout lives at `[locale]`, so unmatched URLs need a global 404.
+    globalNotFound: true,
+  },
   async headers() {
     const oneDayCache = {
       key: 'Cache-Control',

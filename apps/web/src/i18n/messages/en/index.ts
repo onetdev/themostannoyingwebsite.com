@@ -11,6 +11,7 @@ import subscription from '@/features/subscription/i18n/en';
 import support from '@/features/support/i18n/en';
 import user from '@/features/user/i18n/en';
 import common from './common';
+import languageDetector from './language-detector';
 import metadata from './metadata';
 
 export default {
@@ -23,6 +24,7 @@ export default {
   disruptions,
   funding,
   humanVerification,
+  languageDetector,
   marketing,
   metadata,
   monitoring,
@@ -59,6 +61,7 @@ export default {
     toggleMenu: 'Toggle menu',
     logo: 'MAW Logo',
     logoAlt: '<the>the</the> <most>Most</most> Annoying Website',
+    logoShort: '<the>the</the> <most>MAW</most>',
     dismissBanner: 'Dismiss banner',
     contactForm: {
       title: 'Official contact form',

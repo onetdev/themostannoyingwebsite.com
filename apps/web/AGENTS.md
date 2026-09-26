@@ -11,6 +11,8 @@ This document provides specific instructions and context for AI agents working o
 - **State Management:** Zustand
 - **DI:** InversifyJS
 - **i18n:** next-intl
+- **Dependencies:** Derive third-party API usage from the installed docs, not
+  training data — see root `AGENTS.md` → "Third-Party Dependencies".
 
 ### Core Directories
 - `src/app/`: Next.js App Router.
@@ -57,7 +59,15 @@ directories or `variants.ts` files — variant data lives in the Content API.
 - `src/core/i18n/request.ts` calls `loadMessages()` (`src/core/i18n/load-messages.ts`).
 - For `en`, the bundled bundle is returned directly.
 - For every other locale, `client.translations.getByLang(locale)` is fetched and
-  deep-merged over the English bundle; on failure the English bundle is returned.
+  deep-merged over the English bundle; on failure the English bundle is returned
+  and the failure is logged/reported to Sentry.
+- Every layout/page reads the locale from the request config, which resolves the
+  `[locale]` segment through **`next/root-params`** in `src/core/i18n/request.ts`.
+  Do **not** add `setRequestLocale` — it is deprecated in the installed
+  next-intl and `next/root-params` supersedes it (verify in
+  `node_modules/next-intl`) — and do **not** add a pass-through
+  `app/layout.tsx` — the root layout must remain
+  `src/app/[locale]/layout.tsx` for root params to work.
 
 ### 4. Supported Locale Catalog (build-time)
 - `scripts/build-locales.ts` fetches the locale list from the Content API at build

@@ -79,6 +79,21 @@ The project uses:
 
 Before committing changes, ensure the code passes linting and tests.
 
+### Dependency Documentation
+
+Third-party API usage must come from the installed package, not from
+training-data memory. Consult sources in this order:
+
+1.  Bundled docs, types, and source under `node_modules/<pkg>` (e.g.
+    `node_modules/next/dist/docs/`).
+2.  The resolved version in `pnpm-workspace.yaml` (catalog) and the consuming
+    `package.json`.
+3.  The upstream official docs, changelog, and migration guide for that major.
+
+Follow the installed API, heed deprecation notices, and never hand-edit
+generated guidance or artifacts — regenerate them. See the root `AGENTS.md`
+section "Third-Party Dependencies" for the full rule.
+
 ## AI-Powered Development
 
 This project includes **agentic skills** to streamline development workflows for AI-assisted environments.

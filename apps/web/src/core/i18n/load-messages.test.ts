@@ -63,13 +63,16 @@ describe('loadMessages', () => {
     );
   });
 
-  it('falls back to the English bundle when the API fails', async () => {
+  it('falls back to the English bundle and reports when the API fails', async () => {
+    const onFallback = jest.fn();
     const client = createClient(async () => {
       throw new Error('network down');
     });
 
-    const messages = await loadMessages('de', client);
+    const messages = await loadMessages('de', client, onFallback);
 
     expect(messages).toEqual(enMessages);
+    expect(onFallback).toHaveBeenCalledTimes(1);
+    expect(onFallback.mock.calls[0][0]).toBeInstanceOf(Error);
   });
 });

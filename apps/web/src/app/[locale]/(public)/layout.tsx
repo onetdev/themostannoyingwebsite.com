@@ -8,9 +8,12 @@ import type { PropsWithChildren } from 'react';
 import { getLangDir } from 'rtl-detect';
 import { ClientObserverProvider } from '@/app/bootstrap/ClientObserverProvider';
 import { ClientRootProviderContainer } from '@/app/bootstrap/ClientRootProviderContainer';
+import { LanguageDetectorMessagesProvider } from '@/core/i18n/LanguageDetectorMessagesProvider';
+import { fetchAllLanguageDetectorMessages } from '@/core/i18n/language-detector-messages';
 import { routing } from '@/core/i18n/routing';
 import { prefetchVariantPools } from '@/features/content/services/prefetch-variant-pools';
 import { BeggarBanner } from '@/features/funding/components';
+import { SUPPORTED_LANGUAGES } from '@/i18n/supported-locales';
 import { getAppConfigService } from '@/services';
 import { LocaleSuggestion } from './_components/LocaleSuggestion';
 import { PainDecoratorLayout } from './_components/PainDecoratorLayout';
@@ -37,11 +40,18 @@ async function LocalePublicRootLayout({
 
   // Global pain widgets (page title glitch, newsletter modal, chat bubble)
   // read their Content API variant pools from the hydrated React Query cache.
-  const dehydratedState = await prefetchVariantPools(locale as LanguageCode, [
-    'marquee-titles',
-    'paged-titles',
-    'newsletter-confirmations',
-    'chat-bubble-messages',
+  // The language-suggestion toast needs the detector copy for every supported
+  // locale so it can render in the suggested language.
+  const [dehydratedState, detectorMessages] = await Promise.all([
+    prefetchVariantPools(locale as LanguageCode, [
+      'marquee-titles',
+      'paged-titles',
+      'newsletter-confirmations',
+      'chat-bubble-messages',
+    ]),
+    fetchAllLanguageDetectorMessages(
+      SUPPORTED_LANGUAGES.map((language) => language.locale),
+    ),
   ]);
 
   return (
@@ -58,7 +68,9 @@ async function LocalePublicRootLayout({
             dehydratedState={dehydratedState}
           >
             <ClientObserverProvider />
-            <LocaleSuggestion />
+            <LanguageDetectorMessagesProvider value={detectorMessages}>
+              <LocaleSuggestion />
+            </LanguageDetectorMessagesProvider>
             <BeggarBanner />
             <PainDecoratorLayout className="font-primary">
               {/* Please add AppHeader in your pages to have SSG/ISR/SSG support while also being able to select the active navigation item */}

@@ -1,6 +1,7 @@
 'use client';
 
 import { useLocale } from 'next-intl';
+import { persistLocaleCookie } from '@/core/i18n/locale-cookie';
 import { usePathname, useRouter } from '@/core/i18n/navigation';
 import { SUPPORTED_LANGUAGES } from '@/i18n/supported-locales';
 
@@ -12,6 +13,8 @@ export function useLanguageSwitcher() {
   const languages = SUPPORTED_LANGUAGES;
 
   const onLanguageChange = (value: AppLocale) => {
+    persistLocaleCookie(value);
+
     // Might not look sexy, modern BUT it is what we need. And it works,
     // and it doesn't need a shitload of boilerplace throughout server and
     // client side components.
