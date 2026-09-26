@@ -30,7 +30,7 @@ describe('variantPoolQuery', () => {
   });
 
   it('never marks the hydrated pool as stale', () => {
-    const options = variantPoolQueryOptions<string>('en', 'names');
+    const options = variantPoolQueryOptions('en', 'names');
 
     expect(options.staleTime).toBe(Number.POSITIVE_INFINITY);
     expect(options.gcTime).toBe(Number.POSITIVE_INFINITY);
@@ -45,7 +45,7 @@ describe('variantPoolQuery', () => {
     });
 
     try {
-      const options = variantPoolQueryOptions<string>('en', 'names');
+      const options = variantPoolQueryOptions('en', 'names');
 
       await expect(
         (options.queryFn as () => Promise<unknown>)(),
@@ -74,7 +74,7 @@ describe('variantPoolQuery', () => {
         updatedAt: '2026-09-01T00:00:00.000Z',
       });
 
-      const options = variantPoolQueryOptions<string>('en', 'names');
+      const options = variantPoolQueryOptions('en', 'names');
 
       await expect(
         (options.queryFn as () => Promise<unknown>)(),

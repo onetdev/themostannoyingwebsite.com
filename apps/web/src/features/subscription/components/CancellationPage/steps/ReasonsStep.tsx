@@ -13,7 +13,7 @@ interface ReasonsStepProps {
 export function ReasonsStep({ onNext }: ReasonsStepProps) {
   const t = useTranslations('subscription.cancellation.reasons');
   const { setValue } = useFormContext<CancellationFormData>();
-  const reasons = useVariantPool<string>('cancellation-reasons');
+  const reasons = useVariantPool('cancellation-reasons');
 
   const handleReasonClick = (reason: string) => {
     setValue('reason', reason);

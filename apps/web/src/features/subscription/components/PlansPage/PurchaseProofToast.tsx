@@ -21,8 +21,8 @@ export function PurchaseProofToast({
 }: PurchaseProofToastProps) {
   const logger = useLogger('PurchaseProofToast');
   const t = useTranslations();
-  const names = useVariantPool<string>('social-proof-names');
-  const locations = useVariantPool<string>('social-proof-locations');
+  const names = useVariantPool('social-proof-names');
+  const locations = useVariantPool('social-proof-locations');
   const [iterator, setIterator] = useState(0);
 
   const pool = useMemo(() => {

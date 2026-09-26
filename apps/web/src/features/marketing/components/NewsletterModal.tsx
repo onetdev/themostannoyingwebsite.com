@@ -49,9 +49,7 @@ export function NewsletterModal({
 
   useEvent('ui:modal:dismiss-signaled', () => onDismiss?.(), visible);
 
-  const confirmPool = useVariantPool<NewsletterConfirmation>(
-    'newsletter-confirmations',
-  );
+  const confirmPool = useVariantPool('newsletter-confirmations');
 
   const renderActions = () => {
     const buttons = [

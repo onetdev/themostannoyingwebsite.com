@@ -4,11 +4,9 @@ import { arrayShuffle } from '@maw/utils/array';
 import { useMemo } from 'react';
 import { useVariantPool } from '@/features/content/hooks';
 import type { FlaimSurveyQuestion } from '../schemas';
-import type { QuizQuestionVariant } from '../types';
 
 export function useSurveyQuestions() {
-  const questionVariants =
-    useVariantPool<QuizQuestionVariant>('quiz-questions');
+  const questionVariants = useVariantPool('quiz-questions');
 
   const pool = useMemo(() => {
     const items = questionVariants.map((value) => {

@@ -25,7 +25,7 @@ export function useChatBubbleHistory() {
     config.support.assets.newMessageSfx,
   );
 
-  const messagePool = useVariantPool<string>('chat-bubble-messages');
+  const messagePool = useVariantPool('chat-bubble-messages');
 
   const botMessageVariants = useMemo(() => {
     return messagePool.filter(

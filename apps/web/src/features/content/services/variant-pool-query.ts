@@ -1,6 +1,7 @@
 import type { LanguageCode, VariantPoolType } from '@maw/content-sdk';
 import { queryOptions } from '@tanstack/react-query';
 import { createAppContentClient } from '@/core/content';
+import type { VariantPoolItem } from '../types';
 import { fetchVariantPool } from './get-variant-pool';
 
 /**
@@ -21,13 +22,13 @@ export const variantPoolQueryKey = (
  * query function refuses to run in the browser, which keeps the Content API
  * calls on the server only (ISR revalidation refreshes the payload).
  */
-export function variantPoolQueryOptions<T>(
+export function variantPoolQueryOptions<T extends VariantPoolType>(
   lang: LanguageCode,
-  type: VariantPoolType,
+  type: T,
 ) {
   return queryOptions({
     queryKey: variantPoolQueryKey(lang, type),
-    queryFn: async (): Promise<T[]> => {
+    queryFn: async (): Promise<VariantPoolItem<T>[]> => {
       if (typeof window !== 'undefined') {
         throw new Error(
           `Variant pool "${type}" (${lang}) was requested in the browser. ` +
@@ -36,7 +37,11 @@ export function variantPoolQueryOptions<T>(
       }
 
       const client = createAppContentClient();
-      const pool = await fetchVariantPool<T>(client, lang, type);
+      const pool = await fetchVariantPool<VariantPoolItem<T>>(
+        client,
+        lang,
+        type,
+      );
       return pool.items;
     },
     staleTime: Number.POSITIVE_INFINITY,

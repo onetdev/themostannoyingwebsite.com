@@ -27,8 +27,8 @@ export function PageTitleGlitch() {
     (state) => state.userActivation.unlocked,
   );
 
-  const marqueeVariants = useVariantPool<string>('marquee-titles');
-  const arrayPagedVariants = useVariantPool<string>('paged-titles');
+  const marqueeVariants = useVariantPool('marquee-titles');
+  const arrayPagedVariants = useVariantPool('paged-titles');
 
   useMarqueeTitle({
     enabled: !!(

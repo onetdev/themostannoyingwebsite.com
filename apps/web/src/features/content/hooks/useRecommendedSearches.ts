@@ -5,7 +5,7 @@ import { useCallback, useState } from 'react';
 import { useVariantPool } from './useVariantPool';
 
 export function useRecommendedSearches() {
-  const topSearchesPool = useVariantPool<string>('top-searches');
+  const topSearchesPool = useVariantPool('top-searches');
   const [topSearches, setTopSearches] = useState<string[]>([]);
   const [query, setQuery] = useState('');
 
