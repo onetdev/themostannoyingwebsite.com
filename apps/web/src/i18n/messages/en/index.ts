@@ -11,7 +11,6 @@ import subscription from '@/features/subscription/i18n/en';
 import support from '@/features/support/i18n/en';
 import user from '@/features/user/i18n/en';
 import common from './common';
-import languageDetector from './language-detector';
 import metadata from './metadata';
 
 export default {
@@ -28,6 +27,5 @@ export default {
   support,
   user,
   common,
-  languageDetector,
   metadata,
 };

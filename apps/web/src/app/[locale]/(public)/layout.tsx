@@ -10,12 +10,11 @@ import { getLangDir } from 'rtl-detect';
 import { ClientObserverProvider } from '@/app/bootstrap/ClientObserverProvider';
 import { ClientRootProviderContainer } from '@/app/bootstrap/ClientRootProviderContainer';
 import { LanguageDetectorMessagesProvider } from '@/core/i18n/LanguageDetectorMessagesProvider';
-import { fetchAllLanguageDetectorMessages } from '@/core/i18n/language-detector-messages';
+import { LANGUAGE_DETECTOR_MESSAGES } from '@/core/i18n/language-detector-messages';
 import { routing } from '@/core/i18n/routing';
 import { SiteStructuredData } from '@/core/seo';
 import { prefetchVariantPools } from '@/features/content/services/prefetch-variant-pools';
 import { BeggarBanner } from '@/features/funding/components';
-import { SUPPORTED_LANGUAGES } from '@/i18n/supported-locales';
 import { getAppConfigService } from '@/services';
 import { LocaleSuggestion } from './_components/LocaleSuggestion';
 import { PainDecoratorLayout } from './_components/PainDecoratorLayout';
@@ -42,18 +41,13 @@ async function LocalePublicRootLayout({
 
   // Global pain widgets (page title glitch, newsletter modal, chat bubble)
   // read their Content API variant pools from the hydrated React Query cache.
-  // The language-suggestion toast needs the detector copy for every supported
-  // locale so it can render in the suggested language.
-  const [dehydratedState, detectorMessages] = await Promise.all([
-    prefetchVariantPools(locale as LanguageCode, [
-      'marquee-titles',
-      'paged-titles',
-      'newsletter-confirmations',
-      'chat-bubble-messages',
-    ]),
-    fetchAllLanguageDetectorMessages(
-      SUPPORTED_LANGUAGES.map((language) => language.locale),
-    ),
+  // The language-suggestion toast copy is bundled for every locale so it can
+  // render in the suggested language without an API round-trip.
+  const dehydratedState = await prefetchVariantPools(locale as LanguageCode, [
+    'marquee-titles',
+    'paged-titles',
+    'newsletter-confirmations',
+    'chat-bubble-messages',
   ]);
 
   return (
@@ -77,7 +71,9 @@ async function LocalePublicRootLayout({
               dehydratedState={dehydratedState}
             >
               <ClientObserverProvider />
-              <LanguageDetectorMessagesProvider value={detectorMessages}>
+              <LanguageDetectorMessagesProvider
+                value={LANGUAGE_DETECTOR_MESSAGES}
+              >
                 <LocaleSuggestion />
               </LanguageDetectorMessagesProvider>
               <BeggarBanner />
