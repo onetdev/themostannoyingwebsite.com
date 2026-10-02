@@ -1,89 +1,89 @@
-import {
-  CONTENT_CACHE_TAGS,
-  type ContentApiClient,
-  type LanguageCode,
-} from '@maw/content-sdk';
-import { createAppContentClient } from '@/core/content';
-import enMessages from '@/i18n/messages/en';
-import type {
-  LanguageDetectorMessageMap,
-  LanguageDetectorMessages,
-} from './language-detector-types';
-
-const FALLBACK: LanguageDetectorMessages = enMessages.languageDetector;
-
-const MESSAGE_KEYS = ['detected', 'switch', 'stay'] as const;
-
-const isRecord = (value: unknown): value is Record<string, unknown> =>
-  typeof value === 'object' && value !== null && !Array.isArray(value);
+import en from '@/i18n/messages/en/language-detector';
+import type { LanguageDetectorMessages } from './language-detector-types';
 
 /**
- * Keeps only the string entries we know how to render so a malformed Content
- * API payload degrades key-by-key to the English reference.
+ * Copy shown by the language-suggestion toast, keyed by locale.
+ *
+ * Unlike the rest of the UI, these strings are rendered in the *suggested*
+ * language rather than the page's active locale, so they ship with the app as a
+ * bundled cross-language object instead of being served by the Content API for
+ * the current locale. The `languageDetector` namespace is therefore
+ * intentionally excluded from the English bundle's namespace map (and from the
+ * Content API sync). See `adr/0028-english-translation-reference-sync.md`.
+ *
+ * `satisfies` keeps the key set exhaustive over the configured locales while
+ * retaining the literal types for consumers.
  */
-function sanitizeMessages(value: unknown): Partial<LanguageDetectorMessages> {
-  if (!isRecord(value)) {
-    return {};
-  }
-
-  const result: Partial<LanguageDetectorMessages> = {};
-  for (const key of MESSAGE_KEYS) {
-    const entry = value[key];
-    if (typeof entry === 'string' && entry.trim() !== '') {
-      result[key] = entry;
-    }
-  }
-  return result;
-}
-
-/**
- * Fetches the suggestion-toast copy for a locale from the Content API and
- * merges it over the bundled English reference. Falls back to English when the
- * API is unavailable or the namespace is missing.
- */
-export async function fetchLanguageDetectorMessages(
-  lang: LanguageCode,
-  client: ContentApiClient = createAppContentClient(),
-): Promise<LanguageDetectorMessages> {
-  if (lang === 'en') {
-    return FALLBACK;
-  }
-
-  try {
-    const response = await client.translations.getByLang(
-      lang,
-      { namespace: 'languageDetector' },
-      {
-        next: {
-          revalidate: 3600,
-          tags: [CONTENT_CACHE_TAGS.translations],
-        },
-      },
-    );
-
-    return { ...FALLBACK, ...sanitizeMessages(response.messages) };
-  } catch {
-    return FALLBACK;
-  }
-}
-
-/**
- * Fetches the suggestion-toast copy for every supported locale, keyed by
- * locale code, ready to hand to the client provider.
- */
-export async function fetchAllLanguageDetectorMessages(
-  langs: readonly string[],
-  client?: ContentApiClient,
-): Promise<LanguageDetectorMessageMap> {
-  const entries = await Promise.all(
-    langs.map(
-      async (lang) =>
-        [
-          lang,
-          await fetchLanguageDetectorMessages(lang as LanguageCode, client),
-        ] as const,
-    ),
-  );
-
-  return Object.fromEntries(entries);
-}
+export const LANGUAGE_DETECTOR_MESSAGES = {
+  ar: {
+    detected: 'هل تود قراءته ب{language}؟',
+    switch: 'التبديل إلى {language}',
+    stay: 'البقاء ب{language}',
+  },
+  de: {
+    detected: 'Möchten Sie es auf {language} lesen?',
+    switch: 'Zu {language} wechseln',
+    stay: 'Auf {language} bleiben',
+  },
+  en,
+  es: {
+    detected: '¿Quieres leerlo en {language}?',
+    switch: 'Cambiar a {language}',
+    stay: 'Seguir en {language}',
+  },
+  fr: {
+    detected: 'Voulez-vous le lire en {language} ?',
+    switch: 'Passer en {language}',
+    stay: 'Rester en {language}',
+  },
+  hi: {
+    detected: 'क्या आप इसे {language} में पढ़ना चाहेंगे?',
+    switch: '{language} में बदलें',
+    stay: '{language} में ही रहें',
+  },
+  hu: {
+    detected: '{language}ul olvasnád?',
+    switch: 'Váltás {language}ra',
+    stay: 'Maradok {language}ul',
+  },
+  it: {
+    detected: 'Vuoi leggerlo in {language}?',
+    switch: 'Passa all’{language}',
+    stay: 'Rimani in {language}',
+  },
+  ja: {
+    detected: '{language}で読みますか？',
+    switch: '{language}に切り替える',
+    stay: '{language}のまま',
+  },
+  ko: {
+    detected: '{language}로 읽으시겠습니까?',
+    switch: '{language}로 전환',
+    stay: '{language} 유지',
+  },
+  pl: {
+    detected: 'Chcesz czytać po {language}?',
+    switch: 'Przełącz na {language}',
+    stay: 'Pozostań przy {language}',
+  },
+  pt: {
+    detected: 'Quer ler em {language}?',
+    switch: 'Mudar para {language}',
+    stay: 'Continuar em {language}',
+  },
+  ru: {
+    detected: 'Хотите читать на {language}?',
+    switch: 'Переключиться на {language}',
+    stay: 'Остаться на {language}',
+  },
+  tr: {
+    detected: '{language} okumak ister misiniz?',
+    switch: '{language}ye geç',
+    stay: '{language} devam et',
+  },
+  zh: {
+    detected: '想用{language}阅读吗？',
+    switch: '切换到{language}',
+    stay: '保持{language}',
+  },
+} satisfies Record<AppLocale, LanguageDetectorMessages>;

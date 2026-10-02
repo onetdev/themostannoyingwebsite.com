@@ -104,7 +104,10 @@ export default async function Page({ params }: PageProps) {
   const comments = await new CommentService().getByArticle(datum);
   const renderedContent = renderMarkdown(datum.content);
   const appLocale = locale as AppLocale;
-  const navigation = await getTranslations({ locale, namespace: 'navigation' });
+  const navigation = await getTranslations({
+    locale,
+    namespace: 'common.navigation',
+  });
   const coverImages = toCoverImages(datum.featured_image);
   const articlePath = `articles/${datum.slug}`;
 

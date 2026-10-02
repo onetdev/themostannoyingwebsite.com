@@ -42,7 +42,7 @@ export function UserPreferences() {
       <CardContent className="flex flex-col justify-between gap-3">
         <Field orientation="vertical" className="gap-2 pb-2">
           <FieldLabel className="text-sm font-normal">
-            {t('language.label')}
+            {t('common.language.label')}
           </FieldLabel>
           <FieldContent>
             <Select value={locale} onValueChange={onLanguageChange}>

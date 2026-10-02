@@ -46,7 +46,7 @@ export async function WebPageStructuredData({
   const [context, t, navigation] = await Promise.all([
     getSeoContext(locale),
     getTranslations({ locale, namespace }),
-    getTranslations({ locale, namespace: 'navigation' }),
+    getTranslations({ locale, namespace: 'common.navigation' }),
   ]);
 
   const name = t('title');

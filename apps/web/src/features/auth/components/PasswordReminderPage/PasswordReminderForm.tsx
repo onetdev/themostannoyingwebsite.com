@@ -24,7 +24,7 @@ export function PasswordReminderForm() {
 
   return (
     <FormProvider {...methods}>
-      <PageHeadline>{t('navigation.passwordReminder')}</PageHeadline>
+      <PageHeadline>{t('common.navigation.passwordReminder')}</PageHeadline>
       <form
         className="flex flex-col gap-5"
         method="post"

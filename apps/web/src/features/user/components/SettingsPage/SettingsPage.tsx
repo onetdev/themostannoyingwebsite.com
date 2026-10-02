@@ -12,7 +12,7 @@ export async function SettingsPage() {
 
   return (
     <>
-      <PageHeadline>{t('navigation.settings')}</PageHeadline>
+      <PageHeadline>{t('common.navigation.settings')}</PageHeadline>
 
       <div className="grid gap-3 md:grid-cols-2">
         <UserPreferences />

@@ -63,6 +63,12 @@ Only English is bundled: `src/i18n/messages/en/`
 - `common.ts`: Shared UI strings (buttons, labels, common errors).
 - `metadata.ts`: SEO titles and descriptions.
 
+`languageDetector` is the deliberate exception to "English only": the
+language-suggestion toast must render in the *suggested* language, so every
+locale's copy is bundled as a special object in
+`src/core/i18n/language-detector-messages.ts` and excluded from the namespace map
+(and the Content API sync). See `adr/0028-english-translation-reference-sync.md`.
+
 ### 2. Feature Translations (`src/features/{feature}/i18n/en.ts`)
 English only, one file per feature: `i18n/en.ts`. Do not create `i18n/en/`
 directories or `variants.ts` files — variant data lives in the Content API.

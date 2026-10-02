@@ -7,10 +7,10 @@ export function TextLogo() {
 
   return (
     <div className="font-semibold tracking-tighter">
-      <Link href="/" prefetch={false} title={t('app.title')}>
+      <Link href="/" prefetch={false} title={t('common.app.title')}>
         {/* Mobile */}
         <span className="text-card-foreground text-2xl lg:hidden">
-          {t.rich('app.logoShort', {
+          {t.rich('common.app.logoShort', {
             the: (chunks) => <i className="font-light">{chunks}</i>,
             most: (chunks) => <span className="text-primary">{chunks}</span>,
           })}
@@ -18,7 +18,7 @@ export function TextLogo() {
         {/* Desktop logo logo */}
         <span className="hidden text-3xl lg:inline-block">
           <span className="text-card-foreground">
-            {t.rich('app.logoAlt', {
+            {t.rich('common.app.logoAlt', {
               the: (chunks) => (
                 <i className="text-3xl font-light opacity-80">{chunks}</i>
               ),

@@ -1,10 +1,9 @@
 /**
  * Copy shown by the language suggestion toast.
  *
- * The strings are rendered in the *suggested* language, so they are fetched per
- * locale from the Content API (`translations/{lang}?namespace=languageDetector`)
- * and delivered through `LanguageDetectorMessagesProvider`. The bundled English
- * version is the reference shape and the runtime fallback.
+ * The strings are rendered in the *suggested* language, so they are bundled in
+ * `LANGUAGE_DETECTOR_MESSAGES` and delivered through
+ * `LanguageDetectorMessagesProvider` rather than resolved for the active locale.
  */
 export type LanguageDetectorMessages = {
   detected: string;

@@ -31,7 +31,7 @@ export function ConsentPrivacyPolicyField({
         className="font-semibold"
         required={required}
       >
-        {t('userField.consentPrivacyPolicy')}
+        {t('common.userField.consentPrivacyPolicy')}
       </FieldLabel>
     </Field>
   );

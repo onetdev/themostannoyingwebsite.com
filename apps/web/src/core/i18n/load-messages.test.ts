@@ -51,15 +51,15 @@ describe('loadMessages', () => {
 
   it('merges API messages over the English bundle', async () => {
     const client = createClient(async () => ({
-      messages: { navigation: { about: 'Über' } },
+      messages: { common: { navigation: { about: 'Über' } } },
     }));
 
     const messages = await loadMessages('de', client);
 
-    expect(asTree(messages.navigation).about).toBe('Über');
+    expect(asTree(asTree(messages.common).navigation).about).toBe('Über');
     // Keys missing from the API response still fall back to English.
-    expect(asTree(messages.navigation).home).toBe(
-      asTree(enMessages.navigation).home,
+    expect(asTree(asTree(messages.common).navigation).home).toBe(
+      enMessages.common.navigation.home,
     );
   });
 

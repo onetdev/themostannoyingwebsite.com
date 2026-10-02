@@ -31,7 +31,7 @@ export function ConsentTermsOfUseField({
         className="font-semibold"
         required={required}
       >
-        {t('userField.consentTermsOfUse')}
+        {t('common.userField.consentTermsOfUse')}
       </FieldLabel>
     </Field>
   );

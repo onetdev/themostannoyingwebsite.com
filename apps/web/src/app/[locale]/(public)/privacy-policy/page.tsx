@@ -48,7 +48,7 @@ export default async function Page({ params }: NextPageProps) {
           namespace="metadata.privacyPolicy"
         />
         <PageHeadline className="mx-auto w-full max-w-screen-md">
-          {t('navigation.privacyPolicy')}
+          {t('common.navigation.privacyPolicy')}
         </PageHeadline>
         <div className={styles.content}>
           <TranslationDisclaimer

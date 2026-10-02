@@ -12,7 +12,7 @@ export function TranslationDisclaimer({
   currentLocale,
   fallbackLocale = 'en',
   href,
-  translationKey = 'app.translationDisclaimer',
+  translationKey = 'common.app.translationDisclaimer',
 }: TranslationDisclaimerProps) {
   const t = useTranslations();
 

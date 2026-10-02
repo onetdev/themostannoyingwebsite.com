@@ -10,7 +10,7 @@ export function usePreventLeaving() {
   const t = useTranslations();
   const exitPrompt = usePainPreferencesStore((state) => state.flags.exitPrompt);
 
-  useBeforeUnload(exitPrompt, t('app.exitPrompt'));
+  useBeforeUnload(exitPrompt, t('common.app.exitPrompt'));
 
   useEffect(() => {
     if (exitPrompt) {
