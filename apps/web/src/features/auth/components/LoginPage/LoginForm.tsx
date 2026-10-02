@@ -25,7 +25,7 @@ export function LoginForm() {
 
   return (
     <FormProvider {...form}>
-      <PageHeadline>{t('navigation.login')}</PageHeadline>
+      <PageHeadline>{t('common.navigation.login')}</PageHeadline>
       <form
         className="flex flex-col gap-5"
         method="post"

@@ -36,11 +36,11 @@ export function AppNavigationMobile({ activeItem }: AppNavigationMobileProps) {
     useMemo(() => {
       return [
         {
-          titleKey: 'navigation.home',
+          titleKey: 'common.navigation.home',
           items: SITE_NAVIGATION_LINKS,
         },
         {
-          titleKey: 'navigation.personal',
+          titleKey: 'common.navigation.personal',
           items: PERSONAL_NAVIGATION_LINKS,
         },
       ];
@@ -59,14 +59,14 @@ export function AppNavigationMobile({ activeItem }: AppNavigationMobileProps) {
     <Sheet>
       <SheetTrigger
         className="hover:bg-accent flex size-9 items-center justify-center rounded-md transition-colors md:hidden"
-        aria-label={t('app.toggleMenu')}
+        aria-label={t('common.app.toggleMenu')}
       >
         <Icon icon="menu" />
       </SheetTrigger>
       <SheetContent side="left" className="w-[280px] gap-0 overflow-y-auto">
         <SheetHeader className="flex flex-row items-center justify-between pr-4 text-left">
           <SheetTitle className="pl-3 text-lg font-bold tracking-tighter">
-            {t.rich('app.logoShort', {
+            {t.rich('common.app.logoShort', {
               the: (chunks) => <i className="font-light">{chunks}</i>,
               most: (chunks) => <span className="text-primary">{chunks}</span>,
             })}
@@ -111,7 +111,7 @@ export function AppNavigationMobile({ activeItem }: AppNavigationMobileProps) {
         <Separator className="mb-4" />
         <SheetFooter>
           <p className="text-muted-foreground px-3 text-xs italic">
-            {t('app.description')}
+            {t('common.app.description')}
           </p>
         </SheetFooter>
       </SheetContent>

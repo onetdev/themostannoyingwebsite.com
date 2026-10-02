@@ -48,7 +48,7 @@ export default async function Page() {
       />
       <JsonLd data={donateActionSchema} />
       <PageHeadline className="mx-auto w-full">
-        {t('navigation.donate')}
+        {t('common.navigation.donate')}
       </PageHeadline>
       <DonationPage />
     </PageLayout>

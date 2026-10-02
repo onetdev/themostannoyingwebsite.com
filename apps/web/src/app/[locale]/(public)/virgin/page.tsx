@@ -35,10 +35,10 @@ async function Page() {
       />
       <DisableAllOnMount />
       <PageHeadline className="mx-auto w-full max-w-screen-md">
-        {t('app.virgin.title')}
+        {t('common.app.virgin.title')}
       </PageHeadline>
       <div className={styles.content}>
-        <p>{t('app.virgin.description')}</p>
+        <p>{t('common.app.virgin.description')}</p>
       </div>
     </PageLayout>
   );

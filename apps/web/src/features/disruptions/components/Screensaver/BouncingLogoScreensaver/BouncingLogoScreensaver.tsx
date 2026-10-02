@@ -33,7 +33,7 @@ const COLORS = [
 ];
 
 export function BouncingLogoScreensaver() {
-  const t = useTranslations('app');
+  const t = useTranslations('common.app');
   const [position, setPosition] = useState({ x: 0, y: 0 });
   const [isHueRotating, setIsHueRotating] = useState(false);
   const [colors, setColors] = useState(() => {

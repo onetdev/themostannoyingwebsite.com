@@ -41,7 +41,7 @@ export function SignupForm() {
 
   return (
     <FormProvider {...methods}>
-      <PageHeadline>{t('navigation.signup')}</PageHeadline>
+      <PageHeadline>{t('common.navigation.signup')}</PageHeadline>
       <form
         className="flex flex-col gap-3 lg:flex-row lg:gap-10"
         method="post"

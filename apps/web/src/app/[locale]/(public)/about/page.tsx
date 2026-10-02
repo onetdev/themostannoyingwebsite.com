@@ -42,7 +42,7 @@ export default async function Page({ params }: NextPageProps) {
           type="AboutPage"
         />
         <PageHeadline className="mx-auto w-full max-w-screen-md">
-          {t('navigation.about')}
+          {t('common.navigation.about')}
         </PageHeadline>
         <div className={styles.content}>
           <TranslationDisclaimer currentLocale={locale} href="/about" />

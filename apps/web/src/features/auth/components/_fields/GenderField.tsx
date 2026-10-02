@@ -35,7 +35,7 @@ export function GenderField({
   const genderOptions = useMemo(() => {
     const pool = GenderList.reduce(
       (acc, gender) => {
-        acc[gender] = t(`gender.${gender}`);
+        acc[gender] = t(`common.gender.${gender}`);
         return acc;
       },
       {} as Record<string, string>,
@@ -49,7 +49,9 @@ export function GenderField({
 
   return (
     <Field>
-      <FieldLabel required={required}>{t('userField.gender')}</FieldLabel>
+      <FieldLabel required={required}>
+        {t('common.userField.gender')}
+      </FieldLabel>
       <FieldContent>
         <Controller
           control={control}
@@ -58,7 +60,7 @@ export function GenderField({
             <Select onValueChange={field.onChange} value={field.value}>
               <SelectTrigger
                 className="w-full"
-                aria-label={t('userField.gender')}
+                aria-label={t('common.userField.gender')}
                 aria-invalid={fieldState.invalid}
               >
                 <SelectValue placeholder="" />

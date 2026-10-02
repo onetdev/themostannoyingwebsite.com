@@ -30,7 +30,7 @@ export function PasswordCreateField({
   const password = watch(fieldName);
 
   const passwordStrengthText = {
-    label: t('userField.passwordStrength'),
+    label: t('common.userField.passwordStrength'),
     weak: t('common.validation.passwordStrength.weak'),
     okay: t('common.validation.passwordStrength.okay'),
     veryStrong: t('common.validation.passwordStrength.veryStrong'),
@@ -39,7 +39,7 @@ export function PasswordCreateField({
   return (
     <Field>
       <FieldLabel htmlFor={fieldName} required={required}>
-        {t('userField.password')}
+        {t('common.userField.password')}
       </FieldLabel>
       <FieldContent>
         <Input

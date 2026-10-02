@@ -47,7 +47,7 @@ export default async function Page({ params }: NextPageProps) {
           namespace="metadata.termsOfUse"
         />
         <PageHeadline className="mx-auto w-full max-w-screen-md">
-          {t('navigation.termsOfUse')}
+          {t('common.navigation.termsOfUse')}
         </PageHeadline>
         <div className={styles.content}>
           <TranslationDisclaimer currentLocale={locale} href="/terms-of-use" />

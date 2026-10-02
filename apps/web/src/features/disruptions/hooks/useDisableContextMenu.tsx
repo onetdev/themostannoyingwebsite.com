@@ -14,7 +14,7 @@ export function useDisableContextMenu() {
     (e: MouseEvent) => {
       e.preventDefault();
       emit('context-menu:triggered');
-      alert(t('contextMenu.disabled'));
+      alert(t('common.contextMenu.disabled'));
     },
     [t],
   );

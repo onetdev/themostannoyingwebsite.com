@@ -28,7 +28,7 @@ export function FirstNameField({
   return (
     <Field>
       <FieldLabel htmlFor={fieldName} required={required}>
-        {t('userField.firstName')}
+        {t('common.userField.firstName')}
       </FieldLabel>
       <FieldContent>
         <Input

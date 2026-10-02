@@ -21,11 +21,23 @@ export async function AppFooter({ className }: AppFooterProps) {
   }));
 
   const socialLinks = [
-    { label: t('social.twitter'), href: config.common.socialLinks.x },
-    { label: t('social.facebook'), href: config.common.socialLinks.facebook },
-    { label: t('social.instagram'), href: config.common.socialLinks.instagram },
-    { label: t('social.tiktok'), href: config.common.socialLinks.tiktok },
-    { label: t('social.youtube'), href: config.common.socialLinks.youtube },
+    { label: t('common.social.twitter'), href: config.common.socialLinks.x },
+    {
+      label: t('common.social.facebook'),
+      href: config.common.socialLinks.facebook,
+    },
+    {
+      label: t('common.social.instagram'),
+      href: config.common.socialLinks.instagram,
+    },
+    {
+      label: t('common.social.tiktok'),
+      href: config.common.socialLinks.tiktok,
+    },
+    {
+      label: t('common.social.youtube'),
+      href: config.common.socialLinks.youtube,
+    },
   ];
 
   return (
@@ -64,14 +76,14 @@ export async function AppFooter({ className }: AppFooterProps) {
 
       <div className="text-muted-foreground border-border border-t px-5 py-5 text-center text-xs">
         <span>
-          {t('app.copyright', { year: new Date().getFullYear() })}{' '}
+          {t('common.app.copyright', { year: new Date().getFullYear() })}{' '}
           <Link href="https://onet.dev" className="hover:underline">
             Konrád Koller
           </Link>
         </span>
         {' — '}
         <span>
-          {t.rich('app.recruiting', {
+          {t.rich('common.app.recruiting', {
             linkTag: (chunks) => (
               <Link
                 href={config.deploymentMeta.githubUrl}
@@ -86,11 +98,11 @@ export async function AppFooter({ className }: AppFooterProps) {
           })}
         </span>
         {' — '}
-        <span>{t('app.aiDisclose')}</span>
+        <span>{t('common.app.aiDisclose')}</span>
         {' — '}
-        <span>{t('app.dataStorageDisclaimer')}</span>
+        <span>{t('common.app.dataStorageDisclaimer')}</span>
         {' — '}
-        <span>{t('app.noWarranties')}</span>
+        <span>{t('common.app.noWarranties')}</span>
       </div>
     </footer>
   );
