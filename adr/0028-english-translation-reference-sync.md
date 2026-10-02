@@ -24,8 +24,15 @@ published artifact and no cross-repo write token.
     formerly inlined app-level keys (`app`, `navigation`, `userField`, `gender`,
     `share`, `social`, `messages`, `contextMenu`, `language`, `themeSwitch`) live
     inside the `common` namespace, so the entry point is a pure namespace map.
-    `metadata` and `languageDetector` are ordinary namespaces. Every namespace holds
-    only JSON-serializable data.
+    `metadata` is an ordinary namespace. Every namespace holds only
+    JSON-serializable data.
+
+    `languageDetector` is **not** a namespace. Its copy is rendered in the
+    *suggested* language rather than the active locale, so it is bundled in the web
+    app as a special cross-language object
+    (`apps/web/src/core/i18n/language-detector-messages.ts`) and excluded from the
+    bundle's namespace map. The Content API treats it as a reserved namespace and
+    never syncs it.
 
 2.  **The web repo publishes nothing.** There is no `translation-reference.json`, no
     export script, and no sync workflow in the web repo. A co-located contract test
@@ -37,7 +44,8 @@ published artifact and no cross-repo write token.
     the source tarball at that SHA (`codeload.github.com/.../tar.gz/<sha>`), bundles
     `apps/web/src/i18n/messages/en/index.ts` with `esbuild` (aliasing `@` to
     `apps/web/src`), and evaluates the default export into a
-    `{ hash, namespaces }` reference. It validates that the values are pure data.
+    `{ hash, namespaces }` reference. It validates that the values are pure data and
+    drops reserved namespaces (e.g. `languageDetector`) from the extracted set.
 
 4.  **Detection is content-hash based.** The Content API recomputes the hash with its
     own canonical hasher (`src/ui-translations/sync/canonical.ts`) and compares it to
@@ -77,8 +85,11 @@ published artifact and no cross-repo write token.
   and opens a PR against itself.
 - **Pros**: The consumer owns detection, extraction, and hashing, so the contract is a
   single entry module.
-- **Pros**: Folding `languageDetector` into the bundle fixes a latent 404 and unifies
-  the translation workflow.
+- **Pros**: Language-suggestion copy is bundled per locale, so the toast always
+  renders in the *suggested* language without a Content API round-trip.
+- **Cons**: `languageDetector` is a deliberate exception to the English-only bundle:
+  its copy for every locale ships with the web app, so changing it is a web change
+  rather than an API sync.
 - **Cons**: The Content API now depends on the web bundle's file layout and TypeScript
   syntax. The bundle must stay a pure namespace map of data; the web contract test
   guards this.
