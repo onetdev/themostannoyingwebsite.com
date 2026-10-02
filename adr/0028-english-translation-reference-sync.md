@@ -6,59 +6,64 @@ Accepted
 ## Context
 ADR 22 made the headless Content API the runtime source for non-English translations
 while keeping bundled English as the reference shape and fallback. The Content API
-also stores its own English copy so translators have a source of strings, but the two
-copies are maintained by hand and had already drifted: `languageDetector` was stored
-outside the bundle (so `translations/{lang}?namespace=languageDetector` returned 404),
-stale variant arrays (`disruptions.titleExperience.*`) lingered, and `app.logoShort`
-had gone missing.
+also stores its own English copy so translators have a source of strings. To keep the
+two from drifting silently, the web app needs to expose its English bundle in a form
+the Content API can consume.
 
-We need a deterministic, low-friction way to keep the Content API's English reference
-mirrored from the web bundle as the app evolves, without granting the Content API a
-cross-repository write token.
+An earlier revision of this decision had the web repo publish a generated
+`apps/web/translation-reference.json` snapshot that the Content API polled. That
+required committing a generated file, a bot commit to `main`, a cross-repo artifact
+contract, and a hand-maintained `schemaVersion` field. Instead, the Content API should
+own detection, pulling, and extraction, reading the web source directly with no
+published artifact and no cross-repo write token.
 
 ## Decision
 
 1.  **The web English bundle is the source of truth, organized by namespace.** Every
     top-level key in `apps/web/src/i18n/messages/en/index.ts` is a namespace. The
     formerly inlined app-level keys (`app`, `navigation`, `userField`, `gender`,
-    `share`, `social`, `messages`, `contextMenu`, `language`, `themeSwitch`) now live
+    `share`, `social`, `messages`, `contextMenu`, `language`, `themeSwitch`) live
     inside the `common` namespace, so the entry point is a pure namespace map.
-    `metadata` and `languageDetector` are ordinary namespaces.
+    `metadata` and `languageDetector` are ordinary namespaces. Every namespace holds
+    only JSON-serializable data.
 
-2.  **A canonical snapshot is published by the web repo.** A CI job writes
-    `apps/web/translation-reference.json` as
-    `{ schemaVersion, hash, namespaces }` on pushes to the tracked branch that touch
-    the English bundle. `hash = sha256(canonicalJson(namespaces))`, where
-    `canonicalJson` sorts object keys lexicographically (UTF-16), preserves array
-    order, drops `undefined`, and emits no whitespace. The string is built directly
-    rather than via `JSON.stringify(sortedObject)`, because JavaScript enumerates
-    integer-like keys (`"15"`, `"60"`, `"300"`) numerically, which would make the hash
-    language-dependent.
+2.  **The web repo publishes nothing.** There is no `translation-reference.json`, no
+    export script, and no sync workflow in the web repo. A co-located contract test
+    (`apps/web/src/i18n/messages/en/index.test.ts`) asserts the entry stays a pure
+    namespace map of JSON-serializable data.
 
-3.  **The Content API mirrors namespaces one directory per namespace per locale.**
-    `src/ui-translations/namespaces/<ns>/<lang>.ts` holds each namespace; the
-    `captcha` directory was renamed `humanVerification`; `languageDetector` became a
-    normal namespace whose strings use the `{language}` placeholder. Locale entry
-    points (`messages/<lang>/index.ts`) are generated from the namespace files so
-    adding or removing a namespace is a pure file operation.
+3.  **The Content API detects and extracts the reference itself.** On a schedule and
+    on `workflow_dispatch`, it resolves the head SHA of the web repo `main`, downloads
+    the source tarball at that SHA (`codeload.github.com/.../tar.gz/<sha>`), bundles
+    `apps/web/src/i18n/messages/en/index.ts` with `esbuild` (aliasing `@` to
+    `apps/web/src`), and evaluates the default export into a
+    `{ hash, namespaces }` reference. It validates that the values are pure data.
 
-4.  **Sync is a 30-minute poll, not a push.** A scheduled GitHub Action in the
-    Content API repo fetches the public snapshot, compares its `hash` to
-    `.sync/source.json`, and only then runs the differ. It opens or updates a PR with
-    the repo's own `GITHUB_TOKEN` (`contents: write`, `pull-requests: write`), so no
-    cross-repo PAT or GitHub App is required. Authenticity comes from polling a fixed
-    public ref; the hash provides integrity and idempotency.
+4.  **Detection is content-hash based.** The Content API recomputes the hash with its
+    own canonical hasher (`src/ui-translations/sync/canonical.ts`) and compares it to
+    the `hash` stored in `.sync/source.json`. When unchanged, it does nothing. On
+    change it diffs against the stored state and applies the result. Because hashing
+    has a single owner, no schema version crosses the repo boundary.
 
-5.  **Removals are auto-applied inside the sync PR.** Namespace and key removals
+5.  **Asymmetry is a warning, not an error.** If the recomputed hash differs from the
+    stored hash but the semantic diff is empty (canonicalization drift), the Content
+    API logs a warning instead of failing or opening a PR.
+
+6.  **`.sync/source.json` is the state.** It stores the last applied web `sourceSha`,
+    the bundle `hash`, and a `namespace -> key -> valueHash` map, which is what makes
+    the semantic diff possible; the bundle hash only signals *that* something changed.
+
+7.  **Sync is pull-based and needs no cross-repo credential.** The web repo is public,
+    so the Content API reads source with its own `GITHUB_TOKEN` and opens its sync PR
+    with the repo's own `GITHUB_TOKEN` (`contents: write`, `pull-requests: write`). No
+    cross-repo PAT or GitHub App is required.
+
+8.  **Removals are auto-applied inside the sync PR.** Namespace and key removals
     (including stale namespaces) are applied directly to every locale, and the PR
     review is the safety gate. A mass-removal guard aborts a sync that would delete
     more than a configurable threshold (or any namespace) unless `--force` is passed.
 
-6.  **`.sync/source.json` is the state.** It stores the last applied `hash` and a
-    `namespace -> key -> valueHash` map, which is what makes the semantic diff
-    possible; the single bundle hash only signals *that* something changed.
-
-7.  **Translation backlog is reported, auto-translation is deferred.** The PR body
+9.  **Translation backlog is reported, auto-translation is deferred.** The PR body
     lists added/changed keys and the per-locale untranslated keys. Automatic
     translation of new keys is out of scope for now; the differ already produces the
     data a future job would consume.
@@ -66,14 +71,17 @@ cross-repository write token.
 ## Consequences
 - **Pros**: One source of truth for UI translation shape and English copy; the API
   reference can no longer silently drift.
-- **Pros**: No long-lived cross-repo secret; the Content API only reads a public file
+- **Pros**: No generated artifact in the web repo, no bot commits to `main`, and no
+  `schemaVersion` field to maintain.
+- **Pros**: No long-lived cross-repo secret; the Content API only reads a public repo
   and opens a PR against itself.
-- **Pros**: Namespace add/remove is mechanical because locale entry points are
-  generated.
-- **Pros**: Auto-prune keeps stale keys and dead namespaces out of every locale, and
-  the mass-removal guard prevents a bad ref from wiping translations.
+- **Pros**: The consumer owns detection, extraction, and hashing, so the contract is a
+  single entry module.
 - **Pros**: Folding `languageDetector` into the bundle fixes a latent 404 and unifies
   the translation workflow.
+- **Cons**: The Content API now depends on the web bundle's file layout and TypeScript
+  syntax. The bundle must stay a pure namespace map of data; the web contract test
+  guards this.
 - **Cons**: The `common` consolidation changes runtime key paths
   (`navigation.home` -> `common.navigation.home`), a broad mechanical change that must
   land in the web and Content API repos together.
