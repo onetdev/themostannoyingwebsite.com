@@ -51,7 +51,7 @@ export const AchievementToastManager = () => {
     if (!shouldShowToast) return;
 
     const definition = achievementBank.getAchievementById(achievementId);
-    if (!definition || !definition.targetProgress) return;
+    if (!definition?.targetProgress) return;
 
     // Do not show progression toast if already completed (at or above target)
     if (progress >= definition.targetProgress) return;
