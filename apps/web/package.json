@@ -10,6 +10,7 @@
     "build:deployment-meta": "tsx ./scripts/build-deployment-meta.ts",
     "build:devtools-workspace": "tsx ./scripts/build-devtools-workspace.ts",
     "build:locales": "tsx ./scripts/build-locales.ts",
+    "build:translation-reference": "tsx ./scripts/export-translation-reference.ts",
     "build:web-manifest": "tsx ./scripts/build-web-manifest.ts",
     "check-types": "tsc --project tsconfig.json --pretty --noEmit",
     "clean:devtools-workspace": "tsx ./scripts/build-devtools-workspace.ts --remove",

@@ -1,0 +1,46 @@
+name: Translation reference
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'apps/web/src/i18n/messages/en/**'
+      - 'apps/web/src/features/*/i18n/en.ts'
+  workflow_dispatch:
+
+env:
+  NODE_VERSION: 24
+
+permissions:
+  contents: write
+
+concurrency:
+  group: translation-reference-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  export:
+    name: Export translation reference
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+      - uses: pnpm/action-setup@v4
+      - uses: actions/setup-node@v6
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      - name: Build translation reference
+        run: pnpm --filter @maw/web build:translation-reference
+      - name: Commit refreshed reference
+        run: |
+          if git diff --quiet -- apps/web/translation-reference.json; then
+            echo "Translation reference is already up to date."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add apps/web/translation-reference.json
+          git commit -m "chore(i18n): refresh translation reference [skip ci]"
+          git push
