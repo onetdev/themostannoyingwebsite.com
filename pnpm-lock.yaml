@@ -622,6 +622,9 @@ importers:
 
   packages/config-ts:
     devDependencies:
+      '@biomejs/biome':
+        specifier: 'catalog:'
+        version: 2.5.15
       typescript-plugin-css-modules:
         specifier: ^5.2.0
         version: 5.2.0(supports-color@8.1.1)(ts-node@10.9.2(@swc/core@1.16.13(@swc/helpers@0.5.23))(@types/node@26.6.4)(typescript@5.9.3))(typescript@5.9.3)

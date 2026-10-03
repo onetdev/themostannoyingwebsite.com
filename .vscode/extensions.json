@@ -1,7 +1,6 @@
 {
   "recommendations": [
     "bradlc.vscode-tailwindcss",
-    "esbenp.prettier-vscode",
     "redhat.vscode-yaml",
     "rubymaniac.vscode-direnv",
     "unifiedjs.vscode-mdx",

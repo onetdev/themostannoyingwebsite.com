@@ -15,18 +15,18 @@ Then add `tsconfig.json` to your package or project root.
 
 ```json
 {
-  "extends": "@maw/config-ts/base.json",
+  "extends": "@maw/config-ts/configs/base.json",
   "compilerOptions": {
     "baseUrl": "."
-  },
+  }
 }
 ```
 > **Important!** You might be enticed to remove `baseUrl` from `compilerOptions`, but it is actually required by the path aliasing that comes with the base config.
 
 ### 3. Set proper extend target
 
-Replace `base.json` in `tsconfig.json` with any of the following:
+Replace `configs/base.json` in `tsconfig.json` with any of the following:
 
-- `base.json`: Base configuration for TypeScript projects.
-- `next-js.json`: Configuration for Next.js projects.
-- `react-library.json`: Configuration for React projects.
+- `configs/base.json`: Base configuration for TypeScript projects.
+- `configs/next-js.json`: Configuration for Next.js projects.
+- `configs/react-library.json`: Configuration for React projects.
