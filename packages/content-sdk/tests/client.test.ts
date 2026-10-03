@@ -95,8 +95,6 @@ describe('ContentApiClient', () => {
         limit: 10,
         offset: 0,
         is_featured: true,
-        created_at: '2026-09-01T00:00:00.000Z',
-        updated_at: '2026-09-01T00:00:00.000Z',
         tag: 'tech',
         q: 'sample',
       });
