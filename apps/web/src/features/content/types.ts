@@ -52,6 +52,7 @@ export interface VariantPoolItemMap {
     options: Record<string, string> | string[];
     solution?: string;
   };
+  'wheel-prizes': { id: string; label: string };
 }
 
 /** Item type of a given Content API variant pool. */

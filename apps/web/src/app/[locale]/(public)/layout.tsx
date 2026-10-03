@@ -48,6 +48,7 @@ async function LocalePublicRootLayout({
     'paged-titles',
     'newsletter-confirmations',
     'chat-bubble-messages',
+    'wheel-prizes',
   ]);
 
   return (

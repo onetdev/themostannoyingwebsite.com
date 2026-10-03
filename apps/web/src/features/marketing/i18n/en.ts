@@ -53,13 +53,6 @@ export default {
     title: 'Wheel of fortune',
     spinStart: 'Click or Tap here!',
     spinWin: 'You won! {prize}',
-    prizeVariants: {
-      freeLifetimeBeer: 'Free lifetime beer',
-      worldPeace: 'World peace',
-      absolutelyNothing: 'Absolutelly nothing',
-      complimentaryOtter: 'Complimentary otter',
-      fake70Discount: 'Fake 70% discount',
-    },
     wheelTitle: 'Wheel of fortune',
   },
   onlySpams: {

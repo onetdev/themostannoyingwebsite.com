@@ -52,7 +52,7 @@ export const ErrorResponse = zod
       .optional()
       .describe('Human-readable error message or additional details'),
     issues: zod
-      .array(zod.record(zod.string(), zod.unknown().nullable()))
+      .array(zod.record(zod.string(), zod.unknown()))
       .optional()
       .describe('Validation error issues'),
   })
@@ -200,10 +200,7 @@ export const ArticleResponseItem = zod
       .describe('Estimated reading time in minutes'),
     is_featured: zod.boolean().describe('Featured/cover article flag'),
     featured_image: ImageAsset.and(
-      zod
-        .unknown()
-        .nullable()
-        .describe('Featured image asset with responsive variants'),
+      zod.unknown().describe('Featured image asset with responsive variants'),
     ),
     tags: zod.array(zod.string()).describe('List of article tags'),
     keywords: zod
@@ -425,7 +422,7 @@ export const TranslationDetailResponse = zod
       .optional()
       .describe('Filtered namespace name if query was provided'),
     messages: zod
-      .record(zod.string(), zod.unknown().nullable())
+      .record(zod.string(), zod.unknown())
       .describe('Nested translation key-value dictionary'),
     total_namespaces: zod
       .number()
@@ -477,6 +474,7 @@ export const VariantCatalogResponse = zod
               'spam-samples',
               'newsletter-confirmations',
               'quiz-questions',
+              'wheel-prizes',
             ])
             .describe('Variant pool type identifier'),
           kind: zod
@@ -526,6 +524,7 @@ export const VariantDetailResponse = zod
         'spam-samples',
         'newsletter-confirmations',
         'quiz-questions',
+        'wheel-prizes',
       ])
       .describe('Variant pool type identifier'),
     kind: zod
@@ -548,7 +547,7 @@ export const VariantDetailResponse = zod
       .optional()
       .describe('Applied offset constraint if requested'),
     items: zod
-      .array(zod.unknown().nullable())
+      .array(zod.unknown())
       .describe('Array of variant items (strings or structured objects)'),
     updated_at: zod
       .string()
@@ -1133,7 +1132,7 @@ export const GetTranslationByLangQueryParams = zod.object({
     .string()
     .optional()
     .describe(
-      'Optional namespace filter to return only a specific slice (e.g. "common", "app", "auth")',
+      'Optional namespace filter to return only a specific slice (e.g. "common", "humanVerification", "auth")',
     ),
 });
 
@@ -1175,7 +1174,7 @@ export const GetTranslationByLangAliasQueryParams = zod.object({
     .string()
     .optional()
     .describe(
-      'Optional namespace filter to return only a specific slice (e.g. "common", "app", "auth")',
+      'Optional namespace filter to return only a specific slice (e.g. "common", "humanVerification", "auth")',
     ),
 });
 
@@ -1243,6 +1242,7 @@ export const GetVariantByTypeParams = zod.object({
       'spam-samples',
       'newsletter-confirmations',
       'quiz-questions',
+      'wheel-prizes',
     ])
     .describe('Variant pool type identifier'),
 });
@@ -1340,6 +1340,7 @@ export const GetVariantByTypeAliasParams = zod.object({
       'spam-samples',
       'newsletter-confirmations',
       'quiz-questions',
+      'wheel-prizes',
     ])
     .describe('Variant pool type identifier'),
 });
