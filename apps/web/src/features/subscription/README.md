@@ -13,8 +13,8 @@ Provides a "fake facade" for a multi-tiered package comparison page, designed wi
 ## Page Details
 
 - `/plans`: The main comparison and subscription page.
-- `PackageCard`: Renders individual tiers with their fake features and prices.
-- `CycleSelector`: The toggle for monthly and yearly plans.
+- `PlanCard`: Renders individual tiers with their fake features and prices.
+- `BillingCycleSelector`: The toggle for monthly and yearly plans.
 
 ## Out of Scope
 
