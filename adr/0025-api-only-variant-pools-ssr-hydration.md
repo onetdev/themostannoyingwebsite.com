@@ -1,7 +1,12 @@
 # ADR 25: API-Only Variant Pools with SSR React Query Hydration
 
 ## Status
-Accepted
+Superseded by [ADR 29](0029-content-resource-model-pools-and-dedicated-endpoints.md).
+
+> The delivery architecture described here (API-only pools, server prefetch, React
+> Query hydration, server-only queries, per-route granularity) still applies. The
+> single generic `variants` endpoint and the `variantPoolQueryOptions` key namespace
+> it references were replaced by the pools + dedicated-endpoint model in ADR 29.
 
 ## Context
 ADR 22 moved non-English translations to the Content API but deliberately kept the bundled **English** variant arrays (fake names, comments, testimonials, quiz questions, social-proof data, etc.) as a runtime fallback. In practice this left variant data duplicated in two places:
