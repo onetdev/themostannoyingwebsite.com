@@ -2,9 +2,9 @@ import {
   type GetPageBySlugQueryParams,
   GetPageBySlugResponse,
   type GetPageBySlugResponse as GetPageBySlugResponseType,
-  type ListPagesQueryParams,
-  ListPagesResponse,
-  type ListPagesResponse as ListPagesResponseType,
+  type GetPageListQueryParams,
+  GetPageListResponse,
+  type GetPageListResponse as GetPageListResponseType,
 } from '../../generated/endpoints';
 import type { HttpTransport } from '../http';
 import type { RequestOptions } from '../types';
@@ -16,13 +16,13 @@ export class PagesResource {
    * Retrieves a paginated list of static localized informational pages.
    */
   public async list(
-    params?: ListPagesQueryParams,
+    params?: GetPageListQueryParams,
     options?: RequestOptions,
-  ): Promise<ListPagesResponseType> {
+  ): Promise<GetPageListResponseType> {
     return this.transport.get(
       'api/v1/pages',
       params as Record<string, unknown> | undefined,
-      ListPagesResponse,
+      GetPageListResponse,
       options,
     );
   }
@@ -48,17 +48,17 @@ export class PagesResource {
    * Retrieves all localized informational pages matching the filters by automatically paginating through all available pages.
    */
   public async listAll(
-    params?: Omit<ListPagesQueryParams, 'limit' | 'offset'>,
+    params?: Omit<GetPageListQueryParams, 'limit' | 'offset'>,
     options?: RequestOptions,
-  ): Promise<ListPagesResponseType['items']> {
+  ): Promise<GetPageListResponseType['items']> {
     const pageSize = 100;
     let offset = 0;
-    const allItems: ListPagesResponseType['items'] = [];
+    const allItems: GetPageListResponseType['items'] = [];
 
     while (true) {
       const response = await this.list(
         {
-          ...(params as ListPagesQueryParams),
+          ...(params as GetPageListQueryParams),
           limit: pageSize,
           offset,
         },

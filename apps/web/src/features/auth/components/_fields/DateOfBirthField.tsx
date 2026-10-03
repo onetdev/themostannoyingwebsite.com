@@ -75,13 +75,15 @@ export function DateOfBirthField({
 
   return (
     <Field>
-      <FieldLabel required={required}>{t('userField.dateOfBirth')}</FieldLabel>
+      <FieldLabel required={required}>
+        {t('common.userField.dateOfBirth')}
+      </FieldLabel>
       <FieldContent>
         <div className="flex gap-3">
           <Select onValueChange={onYearChange}>
             <SelectTrigger
               className="w-1/4"
-              aria-label={t('userField.dateOfBirthYear')}
+              aria-label={t('common.userField.dateOfBirthYear')}
               aria-invalid={!!errors[fieldName]}
             >
               <SelectValue placeholder="" />
@@ -97,7 +99,7 @@ export function DateOfBirthField({
           <Select onValueChange={onMonthChange}>
             <SelectTrigger
               className="w-2/4"
-              aria-label={t('userField.dateOfBirthMonth')}
+              aria-label={t('common.userField.dateOfBirthMonth')}
               aria-invalid={!!errors[fieldName]}
             >
               <SelectValue placeholder="" />
@@ -113,7 +115,7 @@ export function DateOfBirthField({
           <Select onValueChange={onDayChange}>
             <SelectTrigger
               className="w-1/4"
-              aria-label={t('userField.dateOfBirthDay')}
+              aria-label={t('common.userField.dateOfBirthDay')}
               aria-invalid={!!errors[fieldName]}
             >
               <SelectValue placeholder="" />

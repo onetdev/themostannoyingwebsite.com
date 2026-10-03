@@ -1,3 +1,6 @@
+import 'core-js/actual/iterator/filter';
+import 'core-js/actual/iterator/map';
+import 'core-js/actual/iterator/to-array';
 import Emittery from 'emittery';
 import { configureEvents } from '@/app/bootstrap/events';
 

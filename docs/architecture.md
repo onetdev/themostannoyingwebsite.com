@@ -95,7 +95,7 @@ Reusable React hooks that are not tied to a single feature.
 
 ### `i18n`
 
-Global translation messages (`index.ts`, `metadata.ts`, `variants.ts`).
+Global translation messages (`index.ts`, `common.ts`, `metadata.ts`).
 
 ### `schemas`
 

@@ -1,3 +1,4 @@
+import type { ContentPoolItem } from '@/features/content/types';
 import type marketingEnLocale from './i18n/en';
 
 export const DI = {
@@ -11,10 +12,10 @@ export interface Testimonial {
   comment: string;
 }
 
-export interface EmailSample {
-  subject: string;
-  body: string;
-}
+/** Item shapes for the Content API pools this feature consumes. */
+export type EmailSample = ContentPoolItem<'spam-sample'>;
+export type NewsletterConfirmation = ContentPoolItem<'newsletter'>;
+export type QuizQuestionVariant = ContentPoolItem<'survey'>;
 
 export interface OnlySpamsData {
   testimonials: Testimonial[];

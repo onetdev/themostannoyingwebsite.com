@@ -8,7 +8,7 @@ export function MyProfilePage() {
 
   return (
     <>
-      <PageHeadline>{t('navigation.profile')}</PageHeadline>
+      <PageHeadline>{t('common.navigation.profile')}</PageHeadline>
       <p>{t('user.myProfile.notSupposedToBeHere')}</p>
     </>
   );

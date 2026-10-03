@@ -31,6 +31,18 @@ https://localhost:3000
 
 HTTPS is required because some browser APIs used by the project only work in secure contexts.
 
+### Content API and CORS
+
+The headless Content API rejects `localhost` origins in production. During
+`pnpm dev`, browser-side Content API requests (article search, plus anything
+resolved through the client DI container) are therefore sent to the same-origin
+path `/api/content`, which the Next.js dev server proxies to the API without the
+browser's `Origin` header. The shared factory lives in `src/core/content`, and
+the development-only proxy route handler in
+`apps/web/src/app/api/content/[...path]/route.ts`; see
+`adr/0024-dev-content-api-proxy.md`. A local `next build && next start` does not
+use the proxy.
+
 ## Monorepo Scripts
 
 Common workspace scripts:
@@ -66,6 +78,21 @@ The project uses:
 - TypeScript for static typing
 
 Before committing changes, ensure the code passes linting and tests.
+
+### Dependency Documentation
+
+Third-party API usage must come from the installed package, not from
+training-data memory. Consult sources in this order:
+
+1.  Bundled docs, types, and source under `node_modules/<pkg>` (e.g.
+    `node_modules/next/dist/docs/`).
+2.  The resolved version in `pnpm-workspace.yaml` (catalog) and the consuming
+    `package.json`.
+3.  The upstream official docs, changelog, and migration guide for that major.
+
+Follow the installed API, heed deprecation notices, and never hand-edit
+generated guidance or artifacts — regenerate them. See the root `AGENTS.md`
+section "Third-Party Dependencies" for the full rule.
 
 ## AI-Powered Development
 

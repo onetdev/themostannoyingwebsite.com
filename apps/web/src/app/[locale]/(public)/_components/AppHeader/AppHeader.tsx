@@ -1,4 +1,5 @@
 import { Button, Icon } from '@maw/ui-lib';
+import { clsx } from '@maw/ui-lib/utils';
 import { getTranslations } from 'next-intl/server';
 import type { ComponentProps } from 'react';
 import { Link } from '@/core/i18n/navigation';
@@ -20,38 +21,43 @@ export async function AppHeader({ activeItem, className }: AppHeaderProps) {
   const t = await getTranslations();
 
   return (
-    <header
-      id="header"
-      className={`grid grid-cols-2 items-center gap-x-2 px-3 md:px-5 py-3 xl:px-8 print:hidden ${className ?? ''}`}
-    >
-      <div className="flex items-center gap-2">
-        <AppNavigationMobile activeItem={activeItem} />
-        <TextLogo />
-      </div>
-      <div className="flex items-center justify-end gap-3 md:gap-4">
-        <SearchForm className="hidden md:flex" size="md" />
-        <Button
-          asChild
-          className="md:hidden rounded-full p-0"
-          variant="outline"
-        >
-          <Link
-            href="/search"
-            aria-label={t('common.action.search')}
-            title={t('common.action.search')}
-          >
-            <Icon icon="search" />
-          </Link>
-        </Button>
-        <div className="hidden md:block">
-          <AppLanguageSwitcher />
+    <>
+      <header
+        id="header"
+        className={clsx(
+          'sticky top-0 z-40 bg-card/80 backdrop-blur-md',
+          'grid grid-cols-2 items-center gap-x-2 px-3 md:px-5 py-3 xl:px-8 print:hidden',
+        )}
+      >
+        <div className="flex items-center gap-2">
+          <AppNavigationMobile activeItem={activeItem} />
+          <TextLogo />
         </div>
-        <AppDarkModeToggle />
-      </div>
-      <div className="col-span-2 my-2 hidden items-center md:flex">
-        <AppNavigationDesktop activeItem={activeItem} />
-      </div>
-      <PainLevelSelector className="bg-muted col-span-2 -mx-3 md:-mx-5 mt-2 md:mt-0 xl:-mx-8" />
-    </header>
+        <div className="flex items-center justify-end gap-3 md:gap-4">
+          <SearchForm className="hidden md:flex" size="md" />
+          <Button
+            asChild
+            className="md:hidden rounded-full p-0"
+            variant="outline"
+          >
+            <Link
+              href="/search"
+              aria-label={t('common.action.search')}
+              title={t('common.action.search')}
+            >
+              <Icon icon="search" />
+            </Link>
+          </Button>
+          <div className="hidden md:block">
+            <AppLanguageSwitcher />
+          </div>
+          <AppDarkModeToggle />
+        </div>
+        <div className="col-span-2 mt-2 hidden items-center md:flex">
+          <AppNavigationDesktop activeItem={activeItem} />
+        </div>
+      </header>
+      <PainLevelSelector className={clsx('bg-muted print:hidden', className)} />
+    </>
   );
 }

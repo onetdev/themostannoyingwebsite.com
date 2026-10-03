@@ -28,7 +28,7 @@ export function PasswordField({
   return (
     <Field>
       <FieldLabel htmlFor={fieldName} required={required}>
-        {t('userField.password')}
+        {t('common.userField.password')}
       </FieldLabel>
       <FieldContent>
         <Input

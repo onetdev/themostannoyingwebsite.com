@@ -28,7 +28,7 @@ export function LastNameField({
   return (
     <Field>
       <FieldLabel htmlFor={fieldName} required={required}>
-        {t('userField.lastName')}
+        {t('common.userField.lastName')}
       </FieldLabel>
       <FieldContent>
         <Input

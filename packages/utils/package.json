@@ -14,7 +14,8 @@
     "./promise": "./src/promise.ts",
     "./random": "./src/random.ts",
     "./result": "./src/result.ts",
-    "./string": "./src/string.ts"
+    "./string": "./src/string.ts",
+    "./url": "./src/url.ts"
   },
   "scripts": {
     "check-types": "tsc --noEmit",

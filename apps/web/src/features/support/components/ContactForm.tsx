@@ -49,12 +49,12 @@ export function ContactForm({ contactEmail, className }: ContactFormProps) {
     <div className={`flex flex-col gap-4 ${className ?? ''}`}>
       <Field>
         <FieldLabel htmlFor="subject" required>
-          {t('app.contactForm.subject')}
+          {t('common.app.contactForm.subject')}
         </FieldLabel>
         <FieldContent>
           <Input
             id="subject"
-            placeholder={t('app.contactForm.placeholderSubject')}
+            placeholder={t('common.app.contactForm.placeholderSubject')}
             aria-invalid={!!errors.subject}
             {...register('subject')}
           />
@@ -64,12 +64,12 @@ export function ContactForm({ contactEmail, className }: ContactFormProps) {
 
       <Field>
         <FieldLabel htmlFor="message" required>
-          {t('app.contactForm.message')}
+          {t('common.app.contactForm.message')}
         </FieldLabel>
         <FieldContent>
           <Textarea
             id="message"
-            placeholder={t('app.contactForm.placeholderMessage')}
+            placeholder={t('common.app.contactForm.placeholderMessage')}
             rows={5}
             aria-invalid={!!errors.message}
             {...register('message')}
@@ -90,7 +90,7 @@ export function ContactForm({ contactEmail, className }: ContactFormProps) {
           rel="noopener noreferrer"
           onClick={(e) => !isValid && e.preventDefault()}
         >
-          {t('app.contactForm.send')}
+          {t('common.app.contactForm.send')}
         </a>
       </Button>
     </div>

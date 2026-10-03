@@ -1,10 +1,8 @@
 import { Field, FieldLabel, RadioGroup, RadioGroupItem } from '@maw/ui-lib';
+import type { FlaimSurveyQuestion } from '../../schemas';
 
 export type QuestionProps = {
-  data: {
-    text: string;
-    options: string[];
-  };
+  data: Pick<FlaimSurveyQuestion, 'text' | 'options'>;
   selectOption: (option: number) => void;
 };
 
@@ -20,7 +18,7 @@ export function Question({ data, selectOption }: QuestionProps) {
           const id = `flaim-survey-option-${index}`;
           return (
             <Field
-              key={`${index}-${option}`}
+              key={`${index}-${option.id}`}
               orientation="horizontal"
               className="items-center gap-2"
             >
@@ -30,7 +28,7 @@ export function Question({ data, selectOption }: QuestionProps) {
                 data-testid={id}
               />
               <FieldLabel htmlFor={id} className="font-normal">
-                {option}
+                {option.label}
               </FieldLabel>
             </Field>
           );

@@ -2,9 +2,16 @@ import { HttpTransport } from './http';
 import { ArticlesResource } from './resources/articles';
 import { HealthResource } from './resources/health';
 import { ImagesResource } from './resources/images';
+import { LocalesResource } from './resources/locales';
+import { NewsletterResource } from './resources/newsletter';
 import { PagesResource } from './resources/pages';
+import { PoolsResource } from './resources/pools';
+import { PrizeWheelResource } from './resources/prize-wheel';
 import { SearchResource } from './resources/search';
+import { SpamSampleResource } from './resources/spam-sample';
+import { SurveyResource } from './resources/survey';
 import { TagsResource } from './resources/tags';
+import { TranslationsResource } from './resources/translations';
 import type { ContentClientOptions } from './types';
 
 function resolveBaseUrl(baseUrl?: string): string | undefined {
@@ -12,11 +19,7 @@ function resolveBaseUrl(baseUrl?: string): string | undefined {
     return baseUrl;
   }
   if (typeof process !== 'undefined' && process.env) {
-    return (
-      process.env.CONTENT_API_URL ||
-      process.env.NEXT_PUBLIC_CONTENT_API_URL ||
-      undefined
-    );
+    return process.env.NEXT_PUBLIC_CONTENT_API_URL || undefined;
   }
   return undefined;
 }
@@ -28,6 +31,13 @@ export class ContentApiClient {
   readonly tags: TagsResource;
   readonly images: ImagesResource;
   readonly health: HealthResource;
+  readonly locales: LocalesResource;
+  readonly translations: TranslationsResource;
+  readonly pools: PoolsResource;
+  readonly survey: SurveyResource;
+  readonly prizeWheel: PrizeWheelResource;
+  readonly newsletter: NewsletterResource;
+  readonly spamSample: SpamSampleResource;
 
   private readonly transport: HttpTransport;
 
@@ -44,6 +54,13 @@ export class ContentApiClient {
     this.tags = new TagsResource(this.transport);
     this.images = new ImagesResource(this.transport);
     this.health = new HealthResource(this.transport);
+    this.locales = new LocalesResource(this.transport);
+    this.translations = new TranslationsResource(this.transport);
+    this.pools = new PoolsResource(this.transport);
+    this.survey = new SurveyResource(this.transport);
+    this.prizeWheel = new PrizeWheelResource(this.transport);
+    this.newsletter = new NewsletterResource(this.transport);
+    this.spamSample = new SpamSampleResource(this.transport);
   }
 }
 

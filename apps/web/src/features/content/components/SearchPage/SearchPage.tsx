@@ -14,7 +14,7 @@ import { SearchResultItem } from './SearchResultItem';
 
 export function SearchPage() {
   const t = useTranslations('content.search');
-  const tNavigation = useTranslations('navigation');
+  const tNavigation = useTranslations('common.navigation');
   const { onRecommendedClick, query, data, isLoading, isError, isReady } =
     useSearch();
 

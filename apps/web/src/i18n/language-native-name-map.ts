@@ -1,17 +1,11 @@
-export const LANGUAGE_NATIVE_NAME_MAP: Record<AppSupportedLocale, string> = {
-  ar: 'العربية',
-  de: 'Deutsch',
+/**
+ * Bundled fallback of native language names.
+ *
+ * Only English is kept in the app as a reference/fallback. Every other locale's
+ * native name is provided by the headless Content API (`client.locales.list`).
+ */
+export const LANGUAGE_NATIVE_NAME_MAP: Partial<
+  Record<AppSupportedLocale, string>
+> = {
   en: 'English',
-  es: 'Español',
-  fr: 'Français',
-  hi: 'हिन्दी',
-  hu: 'Magyar',
-  it: 'Italiano',
-  ja: '日本語',
-  ko: '한국어',
-  pl: 'Polski',
-  pt: 'Português',
-  ru: 'Русский',
-  tr: 'Türkçe',
-  zh: '中文',
 };

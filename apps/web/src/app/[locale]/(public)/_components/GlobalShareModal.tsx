@@ -17,8 +17,8 @@ export function GlobalShareModal() {
   );
 
   const texts = {
-    title: t('share.modal.title'),
-    description: t('share.modal.description'),
+    title: t('common.share.modal.title'),
+    description: t('common.share.modal.description'),
   };
 
   return (
