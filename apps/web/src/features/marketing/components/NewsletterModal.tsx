@@ -35,7 +35,9 @@ export function NewsletterModal({
 }: NewsletterModalProps) {
   const t = useTranslations('marketing.newsletterModal');
   const [flipActions, setFlipActions] = useState(false);
-  const [actions, setActions] = useState<NewsletterConfirmation>({
+  const [actions, setActions] = useState<
+    Pick<NewsletterConfirmation, 'confirm' | 'cancel'> & { text?: string }
+  >({
     confirm: t('initialConfirm'),
     cancel: t('initialCancel'),
   });

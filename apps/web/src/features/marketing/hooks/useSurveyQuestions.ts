@@ -9,17 +9,15 @@ export function useSurveyQuestions() {
   const questionVariants = usePool('survey');
 
   const pool = useMemo(() => {
-    const items = questionVariants.map((value) => {
-      const options = Array.isArray(value.options)
-        ? value.options
-        : Object.values(value.options);
-
-      return {
-        text: value.text,
-        options: arrayShuffle(options),
-        solution: value.solution,
-      } satisfies FlaimSurveyQuestion;
-    });
+    const items = questionVariants.map(
+      (value) =>
+        ({
+          id: value.id,
+          text: value.text,
+          options: arrayShuffle(value.options),
+          solution: value.solution,
+        }) satisfies FlaimSurveyQuestion,
+    );
 
     return arrayShuffle(items);
   }, [questionVariants]);
