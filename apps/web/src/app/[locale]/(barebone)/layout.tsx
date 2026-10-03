@@ -10,7 +10,7 @@ import { getLangDir } from 'rtl-detect';
 import { ClientRootProviderContainer } from '@/app/bootstrap/ClientRootProviderContainer';
 import { routing } from '@/core/i18n/routing';
 import { SiteStructuredData } from '@/core/seo';
-import { prefetchVariantPools } from '@/features/content/services/prefetch-variant-pools';
+import { prefetchContentPools } from '@/features/content/services/prefetch-content-pools';
 import { getAppConfigService } from '@/services';
 
 const config = getAppConfigService().getAll();
@@ -35,10 +35,10 @@ async function LocaleBareboneRootLayout({
 
   // Global pain widgets (page title glitch, newsletter modal) read their
   // Content API variant pools from the hydrated React Query cache.
-  const dehydratedState = await prefetchVariantPools(locale as LanguageCode, [
+  const dehydratedState = await prefetchContentPools(locale as LanguageCode, [
     'marquee-titles',
     'paged-titles',
-    'newsletter-confirmations',
+    'newsletter',
   ]);
 
   return (

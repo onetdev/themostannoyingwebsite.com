@@ -8,7 +8,7 @@ import type {
 } from '@maw/content-sdk';
 import { injectable } from 'inversify';
 import { createAppContentClient } from '@/core/content';
-import { getVariantPool } from '@/features/content/services/get-variant-pool';
+import { getContentPool } from '@/features/content/services/get-content-pool';
 import i18nConfig from '@/root/i18n.config';
 import type { CommentService as ICommentService } from '../types';
 import { filterByDate } from './use-cases/filterByDate';
@@ -39,8 +39,8 @@ export class CommentService implements ICommentService {
     const lang = safeLocale as LanguageCode;
 
     const [namesPool, commentsPool] = await Promise.all([
-      getVariantPool<string>(this.client, lang, 'names'),
-      getVariantPool<string>(this.client, lang, 'comments'),
+      getContentPool(this.client, lang, 'names'),
+      getContentPool(this.client, lang, 'comments'),
     ]);
 
     return {

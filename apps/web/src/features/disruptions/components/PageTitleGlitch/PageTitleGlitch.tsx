@@ -1,6 +1,6 @@
 'use client';
 
-import { useVariantPool } from '@/features/content/hooks';
+import { usePool } from '@/features/content/hooks';
 import { usePainPreferencesStore, useRuntimeStore } from '@/stores';
 import {
   useArrayPagedTitle,
@@ -27,8 +27,8 @@ export function PageTitleGlitch() {
     (state) => state.userActivation.unlocked,
   );
 
-  const marqueeVariants = useVariantPool('marquee-titles');
-  const arrayPagedVariants = useVariantPool('paged-titles');
+  const marqueeVariants = usePool('marquee-titles');
+  const arrayPagedVariants = usePool('paged-titles');
 
   useMarqueeTitle({
     enabled: !!(

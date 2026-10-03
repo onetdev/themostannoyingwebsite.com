@@ -20,7 +20,7 @@ import { useState } from 'react';
 import { Controller } from 'react-hook-form';
 import { Link } from '@/core/i18n/navigation';
 import { useEvent } from '@/core/react';
-import { useVariantPool } from '@/features/content/hooks';
+import { usePool } from '@/features/content/hooks';
 import { useNewsletterForm } from '../hooks';
 import type { NewsletterConfirmation } from '../types';
 
@@ -35,7 +35,9 @@ export function NewsletterModal({
 }: NewsletterModalProps) {
   const t = useTranslations('marketing.newsletterModal');
   const [flipActions, setFlipActions] = useState(false);
-  const [actions, setActions] = useState<NewsletterConfirmation>({
+  const [actions, setActions] = useState<
+    Pick<NewsletterConfirmation, 'confirm' | 'cancel'> & { text?: string }
+  >({
     confirm: t('initialConfirm'),
     cancel: t('initialCancel'),
   });
@@ -49,7 +51,7 @@ export function NewsletterModal({
 
   useEvent('ui:modal:dismiss-signaled', () => onDismiss?.(), visible);
 
-  const confirmPool = useVariantPool('newsletter-confirmations');
+  const confirmPool = usePool('newsletter');
 
   const renderActions = () => {
     const buttons = [

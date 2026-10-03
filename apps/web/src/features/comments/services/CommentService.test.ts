@@ -1,16 +1,16 @@
 import 'reflect-metadata';
 import type { Article } from '@maw/content-sdk';
-import { getVariantPool } from '@/features/content/services/get-variant-pool';
+import { getContentPool } from '@/features/content/services/get-content-pool';
 import { CommentService } from './CommentService';
 import { filterByDate } from './use-cases/filterByDate';
 import { generateTree } from './use-cases/generateTree';
 
-jest.mock('@/features/content/services/get-variant-pool');
+jest.mock('@/features/content/services/get-content-pool');
 jest.mock('./use-cases/generateTree');
 jest.mock('./use-cases/filterByDate');
 
-const getVariantPoolMock = getVariantPool as jest.MockedFunction<
-  typeof getVariantPool
+const getContentPoolMock = getContentPool as jest.MockedFunction<
+  typeof getContentPool
 >;
 
 describe('CommentService', () => {
@@ -19,7 +19,7 @@ describe('CommentService', () => {
   beforeEach(() => {
     jest.clearAllMocks();
     // Default to an unreachable API; pools degrade to empty arrays.
-    getVariantPoolMock.mockResolvedValue(undefined);
+    getContentPoolMock.mockResolvedValue(undefined);
     service = new CommentService();
   });
 
@@ -80,7 +80,7 @@ describe('CommentService', () => {
     });
 
     it('prefers Content API variant pools over bundled translations', async () => {
-      getVariantPoolMock.mockImplementation(async (_client, _lang, type) => ({
+      getContentPoolMock.mockImplementation(async (_client, _lang, type) => ({
         items: type === 'names' ? ['API Name'] : ['API Comment'],
         updatedAt: '2026-09-01T00:00:00.000Z',
       }));
@@ -102,12 +102,12 @@ describe('CommentService', () => {
           pool: { names: ['API Name'], comments: ['API Comment'] },
         }),
       );
-      expect(getVariantPoolMock).toHaveBeenCalledWith(
+      expect(getContentPoolMock).toHaveBeenCalledWith(
         expect.anything(),
         'en',
         'names',
       );
-      expect(getVariantPoolMock).toHaveBeenCalledWith(
+      expect(getContentPoolMock).toHaveBeenCalledWith(
         expect.anything(),
         'en',
         'comments',

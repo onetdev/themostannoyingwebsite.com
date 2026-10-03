@@ -5,44 +5,21 @@ import {
   randomInt,
   type WeightedRandomPoolItem,
 } from '@maw/utils/random';
-import { useTranslations } from 'next-intl';
 import { useCallback, useMemo, useState } from 'react';
 import { emit } from '@/core/events/event-bus';
+import { usePool } from '@/features/content/hooks';
 import type { Item } from '../components/WheelOfFortune/DynamicWheelSvg';
+import { buildPrizePool } from './wheel-prizes';
 
 export type AnimatedWheelState = 'ready' | 'spinning' | 'completed';
 
 export function useWheelOfFortune() {
-  const t = useTranslations('marketing.wheelOfFortune');
+  const prizes = usePool('prize-wheel');
   const hueStart = 300; // random(0,360);
   const [state, setState] = useState<AnimatedWheelState>('ready');
   const [prize, setPrize] = useState<(Item & { index: number }) | undefined>();
 
-  const prizeWithWeight = useMemo(
-    () => [
-      {
-        value: `${t('prizeVariants.freeLifetimeBeer')}*`,
-        weight: 10,
-      },
-      {
-        value: `${t('prizeVariants.worldPeace')}*`,
-        weight: 1,
-      },
-      {
-        value: t('prizeVariants.absolutelyNothing'),
-        weight: 100,
-      },
-      {
-        value: `${t('prizeVariants.complimentaryOtter')}*`,
-        weight: 2,
-      },
-      {
-        value: t('prizeVariants.fake70Discount'),
-        weight: 50,
-      },
-    ],
-    [t],
-  );
+  const prizeWithWeight = useMemo(() => buildPrizePool(prizes), [prizes]);
 
   const items = useMemo(
     () => getSlicesItems(prizeWithWeight, hueStart, hueStart + 120, 10),

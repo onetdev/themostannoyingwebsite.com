@@ -30,6 +30,17 @@ export const LanguageCode = zod
 export type LanguageCode = zod.input<typeof LanguageCode>;
 export type LanguageCodeOutput = zod.output<typeof LanguageCode>;
 
+export const TranslationItem = zod
+  .object({
+    lang: LanguageCode,
+    slug: zod.string().describe('Localized slug identifier'),
+    title: zod.string().describe('Title'),
+  })
+  .describe('Available alternative translation item');
+
+export type TranslationItem = zod.input<typeof TranslationItem>;
+export type TranslationItemOutput = zod.output<typeof TranslationItem>;
+
 export const ErrorResponse = zod
   .object({
     code: zod
@@ -46,17 +57,12 @@ export const ErrorResponse = zod
       .describe(
         'Standardized uppercase error code (e.g. NOT_FOUND, INTERNAL_SERVER_ERROR)',
       ),
-    error: zod.string().optional().describe('Error message explanation'),
+    error: zod.string().describe('Short error explanation'),
     message: zod
       .string()
-      .optional()
       .describe('Human-readable error message or additional details'),
-    issues: zod
-      .array(zod.record(zod.string(), zod.unknown().nullable()))
-      .optional()
-      .describe('Validation error issues'),
   })
-  .describe('Standard error response payload');
+  .describe('Generic error response payload');
 
 export type ErrorResponse = zod.input<typeof ErrorResponse>;
 export type ErrorResponseOutput = zod.output<typeof ErrorResponse>;
@@ -157,6 +163,21 @@ export const ImageAssetVariant = zod
 export type ImageAssetVariant = zod.input<typeof ImageAssetVariant>;
 export type ImageAssetVariantOutput = zod.output<typeof ImageAssetVariant>;
 
+export const DatabaseErrorResponse = zod
+  .object({
+    code: zod
+      .enum(['DATABASE_ERROR'])
+      .describe('Standardized database error code'),
+    error: zod.string().describe('Database error explanation'),
+    message: zod.string().describe('Database error details'),
+  })
+  .describe('Database error response payload');
+
+export type DatabaseErrorResponse = zod.input<typeof DatabaseErrorResponse>;
+export type DatabaseErrorResponseOutput = zod.output<
+  typeof DatabaseErrorResponse
+>;
+
 export const ImageAsset = zod
   .object({
     name: zod.string().describe('Original image asset base name'),
@@ -171,18 +192,21 @@ export const ImageAsset = zod
 export type ImageAsset = zod.input<typeof ImageAsset>;
 export type ImageAssetOutput = zod.output<typeof ImageAsset>;
 
-export const ArticleTranslationItem = zod
+export const ImagesListResponse = zod
   .object({
-    lang: LanguageCode,
-    slug: zod.string().describe('Localized article slug identifier'),
-    title: zod.string().describe('Article title'),
+    total: zod.int().describe('Total count of items matching the query'),
+    limit: zod.int().describe('Max number of items per page'),
+    offset: zod.int().describe('Offset number of items skipped'),
+    items: zod
+      .array(ImageAsset)
+      .describe(
+        'Paginated list of transformed raster image assets and metadata',
+      ),
   })
-  .describe('Available alternative article translation item');
+  .describe('Paginated list of transformed raster image assets and metadata');
 
-export type ArticleTranslationItem = zod.input<typeof ArticleTranslationItem>;
-export type ArticleTranslationItemOutput = zod.output<
-  typeof ArticleTranslationItem
->;
+export type ImagesListResponse = zod.input<typeof ImagesListResponse>;
+export type ImagesListResponseOutput = zod.output<typeof ImagesListResponse>;
 
 export const ArticleResponseItem = zod
   .object({
@@ -200,15 +224,18 @@ export const ArticleResponseItem = zod
       .describe('Estimated reading time in minutes'),
     is_featured: zod.boolean().describe('Featured/cover article flag'),
     featured_image: ImageAsset.and(
-      zod
-        .unknown()
-        .nullable()
-        .describe('Featured image asset with responsive variants'),
+      zod.unknown().describe('Featured image asset with responsive variants'),
     ),
     tags: zod.array(zod.string()).describe('List of article tags'),
     keywords: zod
       .array(zod.string())
       .describe('List of article search keywords'),
+    created_at: zod
+      .string()
+      .describe('ISO timestamp when the record was created'),
+    updated_at: zod
+      .string()
+      .describe('ISO timestamp when the record was last updated'),
   })
   .describe('Localized article response item');
 
@@ -218,7 +245,7 @@ export type ArticleResponseItemOutput = zod.output<typeof ArticleResponseItem>;
 export const ArticleDetailResponse = ArticleResponseItem.and(
   zod.object({
     translations: zod
-      .array(ArticleTranslationItem)
+      .array(TranslationItem)
       .describe('Available alternative translations for this article'),
   }),
 ).describe('Detailed localized article item with alternative translations');
@@ -247,7 +274,7 @@ export type ArticlesListResponseOutput = zod.output<
 export const HealthResponse = zod
   .object({
     status: zod.string().describe('Status indicator (e.g. ok)'),
-    version: zod.string().describe('API version string (1.0.0)'),
+    version: zod.string().describe('API version string (from package.json)'),
     database: zod
       .string()
       .describe('Database connection status (e.g. connected)'),
@@ -287,16 +314,33 @@ export const LocalesListResponse = zod
 export type LocalesListResponse = zod.input<typeof LocalesListResponse>;
 export type LocalesListResponseOutput = zod.output<typeof LocalesListResponse>;
 
-export const PageTranslationItem = zod
+export const newsletterResponseTotalMin = 0;
+
+export const NewsletterResponse = zod
   .object({
     lang: LanguageCode,
-    slug: zod.string().describe('Localized page slug identifier'),
-    title: zod.string().describe('Page title'),
+    total: zod
+      .int()
+      .min(newsletterResponseTotalMin)
+      .describe('Total confirmation steps'),
+    steps: zod
+      .array(
+        zod.object({
+          id: zod.string().describe('Stable step identifier'),
+          text: zod.string().describe('Localized step prompt'),
+          confirm: zod.string().describe('Localized confirm button label'),
+          cancel: zod.string().describe('Localized cancel button label'),
+        }),
+      )
+      .describe('Ordered confirmation steps'),
+    updated_at: zod
+      .string()
+      .describe('ISO timestamp of deployment/database creation'),
   })
-  .describe('Available alternative page translation item');
+  .describe('Ordered newsletter confirmation steps with button labels');
 
-export type PageTranslationItem = zod.input<typeof PageTranslationItem>;
-export type PageTranslationItemOutput = zod.output<typeof PageTranslationItem>;
+export type NewsletterResponse = zod.input<typeof NewsletterResponse>;
+export type NewsletterResponseOutput = zod.output<typeof NewsletterResponse>;
 
 export const PageResponseItem = zod
   .object({
@@ -326,7 +370,7 @@ export type PageResponseItemOutput = zod.output<typeof PageResponseItem>;
 export const PageDetailResponse = PageResponseItem.and(
   zod.object({
     translations: zod
-      .array(PageTranslationItem)
+      .array(TranslationItem)
       .describe('Available alternative translations for this page'),
   }),
 ).describe('Detailed localized static page item with alternative translations');
@@ -347,6 +391,122 @@ export const PagesListResponse = zod
 
 export type PagesListResponse = zod.input<typeof PagesListResponse>;
 export type PagesListResponseOutput = zod.output<typeof PagesListResponse>;
+
+export const poolCatalogResponseTotalPoolsExclusiveMin = 0;
+
+export const poolCatalogResponsePoolsTotalMin = 0;
+
+export const PoolCatalogResponse = zod
+  .object({
+    lang: LanguageCode,
+    total_pools: zod
+      .int()
+      .gt(poolCatalogResponseTotalPoolsExclusiveMin)
+      .describe('Total number of string pools available'),
+    pools: zod
+      .record(
+        zod.string(),
+        zod.object({
+          id: zod
+            .enum([
+              'names',
+              'comments',
+              'chat-bubble-messages',
+              'top-searches',
+              'marquee-titles',
+              'paged-titles',
+              'cancellation-reasons',
+              'social-proof-names',
+              'social-proof-locations',
+              'testimonials',
+            ])
+            .describe('String pool type identifier'),
+          total: zod
+            .int()
+            .min(poolCatalogResponsePoolsTotalMin)
+            .describe('Total available items in this pool'),
+          description: zod
+            .string()
+            .describe('Human-readable description of this pool'),
+        }),
+      )
+      .describe('Map of available string pools and their item counts'),
+    updated_at: zod
+      .string()
+      .describe('ISO timestamp of deployment/database creation'),
+  })
+  .describe('Catalog overview of available string pools for a language');
+
+export type PoolCatalogResponse = zod.input<typeof PoolCatalogResponse>;
+export type PoolCatalogResponseOutput = zod.output<typeof PoolCatalogResponse>;
+
+export const poolDetailResponseTotalMin = 0;
+
+export const PoolDetailResponse = zod
+  .object({
+    lang: LanguageCode,
+    type: zod
+      .enum([
+        'names',
+        'comments',
+        'chat-bubble-messages',
+        'top-searches',
+        'marquee-titles',
+        'paged-titles',
+        'cancellation-reasons',
+        'social-proof-names',
+        'social-proof-locations',
+        'testimonials',
+      ])
+      .describe('String pool type identifier'),
+    total: zod
+      .int()
+      .min(poolDetailResponseTotalMin)
+      .describe('Total items available in this pool'),
+    items: zod
+      .array(zod.string())
+      .describe('Complete list of localized strings in this pool'),
+    updated_at: zod
+      .string()
+      .describe('ISO timestamp of deployment/database creation'),
+  })
+  .describe('Single string pool response with the complete item list');
+
+export type PoolDetailResponse = zod.input<typeof PoolDetailResponse>;
+export type PoolDetailResponseOutput = zod.output<typeof PoolDetailResponse>;
+
+export const prizeWheelResponseTotalMin = 0;
+
+export const PrizeWheelResponse = zod
+  .object({
+    lang: LanguageCode,
+    total: zod
+      .int()
+      .min(prizeWheelResponseTotalMin)
+      .describe('Total segments on the wheel'),
+    segments: zod
+      .array(
+        zod.object({
+          id: zod.string().describe('Stable segment identifier'),
+          label: zod.string().describe('Localized segment label'),
+          weight: zod
+            .number()
+            .describe('Relative spin weight for this segment'),
+          starred: zod
+            .boolean()
+            .optional()
+            .describe('Whether the segment is highlighted in the UI'),
+        }),
+      )
+      .describe('Wheel segments with localized copy'),
+    updated_at: zod
+      .string()
+      .describe('ISO timestamp of deployment/database creation'),
+  })
+  .describe('Prize wheel segments with localized labels and behavior metadata');
+
+export type PrizeWheelResponse = zod.input<typeof PrizeWheelResponse>;
+export type PrizeWheelResponseOutput = zod.output<typeof PrizeWheelResponse>;
 
 export const SearchResponseItem = zod
   .object({
@@ -390,6 +550,73 @@ export type SearchResultsResponseOutput = zod.output<
   typeof SearchResultsResponse
 >;
 
+export const spamSampleResponseTotalMin = 0;
+
+export const SpamSampleResponse = zod
+  .object({
+    lang: LanguageCode,
+    total: zod
+      .int()
+      .min(spamSampleResponseTotalMin)
+      .describe('Total samples available'),
+    samples: zod
+      .array(
+        zod.object({
+          id: zod.string().describe('Stable sample identifier'),
+          subject: zod.string().describe('Localized email subject'),
+          body: zod.string().describe('Localized email body'),
+        }),
+      )
+      .describe('Complete list of spam samples'),
+    updated_at: zod
+      .string()
+      .describe('ISO timestamp of deployment/database creation'),
+  })
+  .describe('Satirical spam email samples with subject and body');
+
+export type SpamSampleResponse = zod.input<typeof SpamSampleResponse>;
+export type SpamSampleResponseOutput = zod.output<typeof SpamSampleResponse>;
+
+export const surveyResponseTotalMin = 0;
+
+export const SurveyResponse = zod
+  .object({
+    lang: LanguageCode,
+    total: zod
+      .int()
+      .min(surveyResponseTotalMin)
+      .describe('Total questions available'),
+    questions: zod
+      .array(
+        zod.object({
+          id: zod.string().describe('Stable question identifier'),
+          text: zod.string().describe('Localized question text'),
+          options: zod
+            .array(
+              zod.object({
+                id: zod.string().describe('Stable option identifier'),
+                label: zod.string().describe('Localized option label'),
+              }),
+            )
+            .describe('Selectable answer options'),
+          solution: zod
+            .string()
+            .optional()
+            .describe(
+              'ID of the correct option; omitted when the question has no correct answer',
+            ),
+        }),
+      )
+      .describe('Ordered survey questions'),
+    updated_at: zod
+      .string()
+      .describe('ISO timestamp of deployment/database creation'),
+  })
+  .describe('Ordered survey questions with options and correct answers');
+
+export type SurveyResponse = zod.input<typeof SurveyResponse>;
+export type SurveyResponseOutput = zod.output<typeof SurveyResponse>;
+
 export const TagTaxonomyItem = zod
   .object({
     tag: zod.string().describe('Tag name'),
@@ -425,7 +652,7 @@ export const TranslationDetailResponse = zod
       .optional()
       .describe('Filtered namespace name if query was provided'),
     messages: zod
-      .record(zod.string(), zod.unknown().nullable())
+      .record(zod.string(), zod.unknown())
       .describe('Nested translation key-value dictionary'),
     total_namespaces: zod
       .number()
@@ -444,121 +671,6 @@ export type TranslationDetailResponse = zod.input<
 >;
 export type TranslationDetailResponseOutput = zod.output<
   typeof TranslationDetailResponse
->;
-
-export const variantCatalogResponseTotalTypesExclusiveMin = 0;
-
-export const variantCatalogResponseVariantsTotalMin = 0;
-
-export const VariantCatalogResponse = zod
-  .object({
-    lang: LanguageCode,
-    total_types: zod
-      .int()
-      .gt(variantCatalogResponseTotalTypesExclusiveMin)
-      .describe('Total number of variant pools available'),
-    variants: zod
-      .record(
-        zod.string(),
-        zod.object({
-          id: zod
-            .enum([
-              'names',
-              'comments',
-              'chat-bubble-messages',
-              'top-searches',
-              'marquee-titles',
-              'paged-titles',
-              'cancellation-reasons',
-              'social-proof-names',
-              'social-proof-locations',
-              'social-proof',
-              'testimonials',
-              'spam-samples',
-              'newsletter-confirmations',
-              'quiz-questions',
-            ])
-            .describe('Variant pool type identifier'),
-          kind: zod
-            .enum(['string_array', 'object_array'])
-            .describe('Data kind: string_array or object_array'),
-          total: zod
-            .int()
-            .min(variantCatalogResponseVariantsTotalMin)
-            .describe('Total available variant items in this pool'),
-          description: zod
-            .string()
-            .describe('Human-readable description of this variant pool'),
-        }),
-      )
-      .describe('Map of available variant pools and their item counts'),
-    updated_at: zod
-      .string()
-      .describe('ISO timestamp of deployment/database creation'),
-  })
-  .describe('Catalog overview of available variant pools for a language');
-
-export type VariantCatalogResponse = zod.input<typeof VariantCatalogResponse>;
-export type VariantCatalogResponseOutput = zod.output<
-  typeof VariantCatalogResponse
->;
-
-export const variantDetailResponseTotalMin = 0;
-
-export const variantDetailResponseCountMin = 0;
-
-export const VariantDetailResponse = zod
-  .object({
-    lang: LanguageCode,
-    type: zod
-      .enum([
-        'names',
-        'comments',
-        'chat-bubble-messages',
-        'top-searches',
-        'marquee-titles',
-        'paged-titles',
-        'cancellation-reasons',
-        'social-proof-names',
-        'social-proof-locations',
-        'social-proof',
-        'testimonials',
-        'spam-samples',
-        'newsletter-confirmations',
-        'quiz-questions',
-      ])
-      .describe('Variant pool type identifier'),
-    kind: zod
-      .enum(['string_array', 'object_array'])
-      .describe('Data kind: string_array or object_array'),
-    total: zod
-      .int()
-      .min(variantDetailResponseTotalMin)
-      .describe('Total items available in this pool'),
-    count: zod
-      .int()
-      .min(variantDetailResponseCountMin)
-      .describe('Number of items returned in this response'),
-    limit: zod
-      .int()
-      .optional()
-      .describe('Applied limit constraint if requested'),
-    offset: zod
-      .int()
-      .optional()
-      .describe('Applied offset constraint if requested'),
-    items: zod
-      .array(zod.unknown().nullable())
-      .describe('Array of variant items (strings or structured objects)'),
-    updated_at: zod
-      .string()
-      .describe('ISO timestamp of deployment/database creation'),
-  })
-  .describe('Single variant pool response with items');
-
-export type VariantDetailResponse = zod.input<typeof VariantDetailResponse>;
-export type VariantDetailResponseOutput = zod.output<
-  typeof VariantDetailResponse
 >;
 /**
  * Performs an application health check and verifies connectivity to the underlying SQLite database.
@@ -924,14 +1036,7 @@ export type GetImageListQueryParamsOutput = zod.output<
   typeof GetImageListQueryParams
 >;
 
-export const GetImageListResponse = zod.object({
-  total: zod.int().describe('Total count of items matching the query'),
-  limit: zod.int().describe('Max number of items per page'),
-  offset: zod.int().describe('Offset number of items skipped'),
-  items: zod
-    .array(ImageAsset)
-    .describe('Paginated list of transformed raster image assets and metadata'),
-});
+export const GetImageListResponse = ImagesListResponse;
 
 export type GetImageListResponse = zod.input<typeof GetImageListResponse>;
 export type GetImageListResponseOutput = zod.output<
@@ -966,13 +1071,13 @@ export type GetAssetByPathResponseOutput = zod.output<
  * Performs a full-text search across localized articles and pages, returning plain text titles and excerpts with matching terms highlighted in Markdown bold.
  * @summary Search across articles and static pages
  */
-export const getSearchResultsQueryLimitDefault = 20;
-export const getSearchResultsQueryLimitMax = 100;
+export const getSearchResultListQueryLimitDefault = 20;
+export const getSearchResultListQueryLimitMax = 100;
 
-export const getSearchResultsQueryOffsetDefault = 0;
-export const getSearchResultsQueryOffsetMin = 0;
+export const getSearchResultListQueryOffsetDefault = 0;
+export const getSearchResultListQueryOffsetMin = 0;
 
-export const GetSearchResultsQueryParams = zod.object({
+export const GetSearchResultListQueryParams = zod.object({
   lang: zod
     .enum([
       'ar',
@@ -996,14 +1101,14 @@ export const GetSearchResultsQueryParams = zod.object({
   limit: zod
     .int()
     .min(1)
-    .max(getSearchResultsQueryLimitMax)
-    .default(getSearchResultsQueryLimitDefault)
+    .max(getSearchResultListQueryLimitMax)
+    .default(getSearchResultListQueryLimitDefault)
     .describe('Max number of items (default 20, max 100)'),
   offset: zod
     .int()
-    .min(getSearchResultsQueryOffsetMin)
+    .min(getSearchResultListQueryOffsetMin)
     .nullish()
-    .default(getSearchResultsQueryOffsetDefault)
+    .default(getSearchResultListQueryOffsetDefault)
     .describe('Pagination offset (default 0)'),
   q: zod
     .string()
@@ -1015,20 +1120,20 @@ export const GetSearchResultsQueryParams = zod.object({
     .describe('Filter by content type (article or page)'),
 });
 
-export type GetSearchResultsQueryParams = zod.input<
-  typeof GetSearchResultsQueryParams
+export type GetSearchResultListQueryParams = zod.input<
+  typeof GetSearchResultListQueryParams
 >;
-export type GetSearchResultsQueryParamsOutput = zod.output<
-  typeof GetSearchResultsQueryParams
+export type GetSearchResultListQueryParamsOutput = zod.output<
+  typeof GetSearchResultListQueryParams
 >;
 
-export const GetSearchResultsResponse = SearchResultsResponse;
+export const GetSearchResultListResponse = SearchResultsResponse;
 
-export type GetSearchResultsResponse = zod.input<
-  typeof GetSearchResultsResponse
+export type GetSearchResultListResponse = zod.input<
+  typeof GetSearchResultListResponse
 >;
-export type GetSearchResultsResponseOutput = zod.output<
-  typeof GetSearchResultsResponse
+export type GetSearchResultListResponseOutput = zod.output<
+  typeof GetSearchResultListResponse
 >;
 
 /**
@@ -1133,7 +1238,7 @@ export const GetTranslationByLangQueryParams = zod.object({
     .string()
     .optional()
     .describe(
-      'Optional namespace filter to return only a specific slice (e.g. "common", "app", "auth")',
+      'Optional namespace filter to return only a specific slice (e.g. "common", "humanVerification", "auth")',
     ),
 });
 
@@ -1175,7 +1280,7 @@ export const GetTranslationByLangAliasQueryParams = zod.object({
     .string()
     .optional()
     .describe(
-      'Optional namespace filter to return only a specific slice (e.g. "common", "app", "auth")',
+      'Optional namespace filter to return only a specific slice (e.g. "common", "humanVerification", "auth")',
     ),
 });
 
@@ -1196,37 +1301,37 @@ export type GetTranslationByLangAliasResponseOutput = zod.output<
 >;
 
 /**
- * Returns a catalog of all available dynamic variant pools (pools of names, comments, testimonials, quiz questions, etc.) with their item counts and metadata.
- * @summary Get variant catalog overview for a language
+ * Returns a catalog of all available generic string pools (names, comments, testimonials, etc.) with their item counts and metadata. Structured content is served by dedicated endpoints instead.
+ * @summary Get string pool catalog overview for a language
  */
-export const GetVariantCatalogParams = zod.object({
+export const GetPoolCatalogParams = zod.object({
   lang: LanguageCode.and(
-    zod.unknown().describe('ISO language code to retrieve variant catalog for'),
-  ).describe('ISO language code to retrieve variant catalog for'),
+    zod
+      .unknown()
+      .describe('ISO language code to retrieve the pool catalog for'),
+  ).describe('ISO language code to retrieve the pool catalog for'),
 });
 
-export type GetVariantCatalogParams = zod.input<typeof GetVariantCatalogParams>;
-export type GetVariantCatalogParamsOutput = zod.output<
-  typeof GetVariantCatalogParams
+export type GetPoolCatalogParams = zod.input<typeof GetPoolCatalogParams>;
+export type GetPoolCatalogParamsOutput = zod.output<
+  typeof GetPoolCatalogParams
 >;
 
-export const GetVariantCatalogResponse = VariantCatalogResponse;
+export const GetPoolCatalogResponse = PoolCatalogResponse;
 
-export type GetVariantCatalogResponse = zod.input<
-  typeof GetVariantCatalogResponse
->;
-export type GetVariantCatalogResponseOutput = zod.output<
-  typeof GetVariantCatalogResponse
+export type GetPoolCatalogResponse = zod.input<typeof GetPoolCatalogResponse>;
+export type GetPoolCatalogResponseOutput = zod.output<
+  typeof GetPoolCatalogResponse
 >;
 
 /**
- * Retrieves items for a specific dynamic variant pool (e.g. comments, names, quiz-questions) with support for pagination (limit, offset) and random sampling.
- * @summary Get a specific dynamic variant pool with optional slicing & random sampling
+ * Retrieves the complete string pool for a type (e.g. comments, names, testimonials). Responses are never paginated or randomized so they remain cacheable; slicing and shuffling are left to the client.
+ * @summary Get a complete string pool
  */
-export const GetVariantByTypeParams = zod.object({
+export const GetPoolByTypeParams = zod.object({
   lang: LanguageCode.and(
-    zod.unknown().describe('ISO language code to retrieve variant pool for'),
-  ).describe('ISO language code to retrieve variant pool for'),
+    zod.unknown().describe('ISO language code to retrieve the pool for'),
+  ).describe('ISO language code to retrieve the pool for'),
   type: zod
     .enum([
       'names',
@@ -1238,153 +1343,125 @@ export const GetVariantByTypeParams = zod.object({
       'cancellation-reasons',
       'social-proof-names',
       'social-proof-locations',
-      'social-proof',
       'testimonials',
-      'spam-samples',
-      'newsletter-confirmations',
-      'quiz-questions',
     ])
-    .describe('Variant pool type identifier'),
+    .describe('String pool type identifier'),
 });
 
-export type GetVariantByTypeParams = zod.input<typeof GetVariantByTypeParams>;
-export type GetVariantByTypeParamsOutput = zod.output<
-  typeof GetVariantByTypeParams
->;
+export type GetPoolByTypeParams = zod.input<typeof GetPoolByTypeParams>;
+export type GetPoolByTypeParamsOutput = zod.output<typeof GetPoolByTypeParams>;
 
-export const getVariantByTypeQueryLimitMax = 500;
+export const GetPoolByTypeResponse = PoolDetailResponse;
 
-export const getVariantByTypeQueryOffsetMin = 0;
-
-export const GetVariantByTypeQueryParams = zod.object({
-  limit: zod
-    .int()
-    .min(1)
-    .max(getVariantByTypeQueryLimitMax)
-    .optional()
-    .describe('Maximum number of items to return (default: all)'),
-  offset: zod
-    .int()
-    .min(getVariantByTypeQueryOffsetMin)
-    .nullish()
-    .describe('Starting offset index (default: 0)'),
-  random: zod
-    .boolean()
-    .nullish()
-    .describe('When true, randomly shuffles the variation pool before slicing'),
-});
-
-export type GetVariantByTypeQueryParams = zod.input<
-  typeof GetVariantByTypeQueryParams
->;
-export type GetVariantByTypeQueryParamsOutput = zod.output<
-  typeof GetVariantByTypeQueryParams
->;
-
-export const GetVariantByTypeResponse = VariantDetailResponse;
-
-export type GetVariantByTypeResponse = zod.input<
-  typeof GetVariantByTypeResponse
->;
-export type GetVariantByTypeResponseOutput = zod.output<
-  typeof GetVariantByTypeResponse
+export type GetPoolByTypeResponse = zod.input<typeof GetPoolByTypeResponse>;
+export type GetPoolByTypeResponseOutput = zod.output<
+  typeof GetPoolByTypeResponse
 >;
 
 /**
- * Root-prefix alias of /api/v1/variants/{lang}. Returns a catalog of all available dynamic variant pools (pools of names, comments, testimonials, quiz questions, etc.) with their item counts and metadata.
- * @summary Get variant catalog overview for a language (root alias)
+ * Returns the ordered survey questions with stable option IDs and the locale-independent correct answer merged in as `solution` (omitted for questions without a correct answer).
+ * @summary Get survey questions for a language
  */
-export const GetVariantCatalogAliasParams = zod.object({
+export const GetSurveyQuestionListParams = zod.object({
   lang: LanguageCode.and(
-    zod.unknown().describe('ISO language code to retrieve variant catalog for'),
-  ).describe('ISO language code to retrieve variant catalog for'),
+    zod
+      .unknown()
+      .describe('ISO language code to retrieve survey questions for'),
+  ).describe('ISO language code to retrieve survey questions for'),
 });
 
-export type GetVariantCatalogAliasParams = zod.input<
-  typeof GetVariantCatalogAliasParams
+export type GetSurveyQuestionListParams = zod.input<
+  typeof GetSurveyQuestionListParams
 >;
-export type GetVariantCatalogAliasParamsOutput = zod.output<
-  typeof GetVariantCatalogAliasParams
+export type GetSurveyQuestionListParamsOutput = zod.output<
+  typeof GetSurveyQuestionListParams
 >;
 
-export const GetVariantCatalogAliasResponse = VariantCatalogResponse;
+export const GetSurveyQuestionListResponse = SurveyResponse;
 
-export type GetVariantCatalogAliasResponse = zod.input<
-  typeof GetVariantCatalogAliasResponse
+export type GetSurveyQuestionListResponse = zod.input<
+  typeof GetSurveyQuestionListResponse
 >;
-export type GetVariantCatalogAliasResponseOutput = zod.output<
-  typeof GetVariantCatalogAliasResponse
+export type GetSurveyQuestionListResponseOutput = zod.output<
+  typeof GetSurveyQuestionListResponse
 >;
 
 /**
- * Root-prefix alias of /api/v1/variants/{lang}/{type}. Retrieves items for a specific dynamic variant pool (e.g. comments, names, quiz-questions) with support for pagination (limit, offset) and random sampling.
- * @summary Get a specific dynamic variant pool with optional slicing & random sampling (root alias)
+ * Returns the prize wheel segments with localized labels merged with locale-independent behavior (`weight` for spin probability, `starred` for UI highlighting).
+ * @summary Get prize wheel segments for a language
  */
-export const GetVariantByTypeAliasParams = zod.object({
+export const GetPrizeWheelSegmentListParams = zod.object({
   lang: LanguageCode.and(
-    zod.unknown().describe('ISO language code to retrieve variant pool for'),
-  ).describe('ISO language code to retrieve variant pool for'),
-  type: zod
-    .enum([
-      'names',
-      'comments',
-      'chat-bubble-messages',
-      'top-searches',
-      'marquee-titles',
-      'paged-titles',
-      'cancellation-reasons',
-      'social-proof-names',
-      'social-proof-locations',
-      'social-proof',
-      'testimonials',
-      'spam-samples',
-      'newsletter-confirmations',
-      'quiz-questions',
-    ])
-    .describe('Variant pool type identifier'),
+    zod
+      .unknown()
+      .describe('ISO language code to retrieve prize wheel segments for'),
+  ).describe('ISO language code to retrieve prize wheel segments for'),
 });
 
-export type GetVariantByTypeAliasParams = zod.input<
-  typeof GetVariantByTypeAliasParams
+export type GetPrizeWheelSegmentListParams = zod.input<
+  typeof GetPrizeWheelSegmentListParams
 >;
-export type GetVariantByTypeAliasParamsOutput = zod.output<
-  typeof GetVariantByTypeAliasParams
+export type GetPrizeWheelSegmentListParamsOutput = zod.output<
+  typeof GetPrizeWheelSegmentListParams
 >;
 
-export const getVariantByTypeAliasQueryLimitMax = 500;
+export const GetPrizeWheelSegmentListResponse = PrizeWheelResponse;
 
-export const getVariantByTypeAliasQueryOffsetMin = 0;
+export type GetPrizeWheelSegmentListResponse = zod.input<
+  typeof GetPrizeWheelSegmentListResponse
+>;
+export type GetPrizeWheelSegmentListResponseOutput = zod.output<
+  typeof GetPrizeWheelSegmentListResponse
+>;
 
-export const GetVariantByTypeAliasQueryParams = zod.object({
-  limit: zod
-    .int()
-    .min(1)
-    .max(getVariantByTypeAliasQueryLimitMax)
-    .optional()
-    .describe('Maximum number of items to return (default: all)'),
-  offset: zod
-    .int()
-    .min(getVariantByTypeAliasQueryOffsetMin)
-    .nullish()
-    .describe('Starting offset index (default: 0)'),
-  random: zod
-    .boolean()
-    .nullish()
-    .describe('When true, randomly shuffles the variation pool before slicing'),
+/**
+ * Returns the ordered newsletter confirmation steps. The sequence is intentional and is never randomized or paginated.
+ * @summary Get newsletter confirmation steps for a language
+ */
+export const GetNewsletterStepListParams = zod.object({
+  lang: LanguageCode.and(
+    zod
+      .unknown()
+      .describe('ISO language code to retrieve newsletter steps for'),
+  ).describe('ISO language code to retrieve newsletter steps for'),
 });
 
-export type GetVariantByTypeAliasQueryParams = zod.input<
-  typeof GetVariantByTypeAliasQueryParams
+export type GetNewsletterStepListParams = zod.input<
+  typeof GetNewsletterStepListParams
 >;
-export type GetVariantByTypeAliasQueryParamsOutput = zod.output<
-  typeof GetVariantByTypeAliasQueryParams
+export type GetNewsletterStepListParamsOutput = zod.output<
+  typeof GetNewsletterStepListParams
 >;
 
-export const GetVariantByTypeAliasResponse = VariantDetailResponse;
+export const GetNewsletterStepListResponse = NewsletterResponse;
 
-export type GetVariantByTypeAliasResponse = zod.input<
-  typeof GetVariantByTypeAliasResponse
+export type GetNewsletterStepListResponse = zod.input<
+  typeof GetNewsletterStepListResponse
 >;
-export type GetVariantByTypeAliasResponseOutput = zod.output<
-  typeof GetVariantByTypeAliasResponse
+export type GetNewsletterStepListResponseOutput = zod.output<
+  typeof GetNewsletterStepListResponse
+>;
+
+/**
+ * Returns the complete spam sample pool with localized subject and body. Responses are never paginated or randomized so they remain cacheable.
+ * @summary Get satirical spam samples for a language
+ */
+export const GetSpamSampleListParams = zod.object({
+  lang: LanguageCode.and(
+    zod.unknown().describe('ISO language code to retrieve spam samples for'),
+  ).describe('ISO language code to retrieve spam samples for'),
+});
+
+export type GetSpamSampleListParams = zod.input<typeof GetSpamSampleListParams>;
+export type GetSpamSampleListParamsOutput = zod.output<
+  typeof GetSpamSampleListParams
+>;
+
+export const GetSpamSampleListResponse = SpamSampleResponse;
+
+export type GetSpamSampleListResponse = zod.input<
+  typeof GetSpamSampleListResponse
+>;
+export type GetSpamSampleListResponseOutput = zod.output<
+  typeof GetSpamSampleListResponse
 >;

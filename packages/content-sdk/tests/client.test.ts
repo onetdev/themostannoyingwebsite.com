@@ -27,7 +27,11 @@ describe('ContentApiClient', () => {
     expect(client.search).toBeDefined();
     expect(client.locales).toBeDefined();
     expect(client.translations).toBeDefined();
-    expect(client.variants).toBeDefined();
+    expect(client.pools).toBeDefined();
+    expect(client.survey).toBeDefined();
+    expect(client.prizeWheel).toBeDefined();
+    expect(client.newsletter).toBeDefined();
+    expect(client.spamSample).toBeDefined();
   });
 
   describe('articles resource', () => {
@@ -55,6 +59,8 @@ describe('ContentApiClient', () => {
                   published_at: '2026-09-01T00:00:00.000Z',
                   reading_time_minutes: 3,
                   is_featured: true,
+                  created_at: '2026-09-01T00:00:00.000Z',
+                  updated_at: '2026-09-01T00:00:00.000Z',
                   featured_image: {
                     name: 'sample.png',
                     variants: {
@@ -126,6 +132,8 @@ describe('ContentApiClient', () => {
               published_at: '2026-09-01T00:00:00.000Z',
               reading_time_minutes: 2,
               is_featured: false,
+              created_at: '2026-09-01T00:00:00.000Z',
+              updated_at: '2026-09-01T00:00:00.000Z',
               featured_image: {
                 name: 'hello.png',
                 variants: {
@@ -479,6 +487,8 @@ describe('ContentApiClient', () => {
                   published_at: '2026-09-01T00:00:00.000Z',
                   reading_time_minutes: 1,
                   is_featured: false,
+                  created_at: '2026-09-01T00:00:00.000Z',
+                  updated_at: '2026-09-01T00:00:00.000Z',
                   featured_image: {
                     name: 'img.webp',
                     variants: {
@@ -506,6 +516,8 @@ describe('ContentApiClient', () => {
                   published_at: '2026-09-01T00:00:00.000Z',
                   reading_time_minutes: 1,
                   is_featured: false,
+                  created_at: '2026-09-01T00:00:00.000Z',
+                  updated_at: '2026-09-01T00:00:00.000Z',
                   featured_image: {
                     name: 'img2.webp',
                     variants: {
@@ -544,6 +556,8 @@ describe('ContentApiClient', () => {
                 published_at: '2026-09-01T00:00:00.000Z',
                 reading_time_minutes: 1,
                 is_featured: false,
+                created_at: '2026-09-01T00:00:00.000Z',
+                updated_at: '2026-09-01T00:00:00.000Z',
                 featured_image: {
                   name: 'img3.webp',
                   variants: {
@@ -712,8 +726,8 @@ describe('ContentApiClient', () => {
     });
   });
 
-  describe('variants resource', () => {
-    it('calls GET api/v1/variants/{lang} catalog', async () => {
+  describe('pools resource', () => {
+    it('calls GET api/v1/pool/catalog/{lang}', async () => {
       let capturedUrl = '';
       const mockFetch = jest
         .fn<typeof fetch>()
@@ -722,14 +736,9 @@ describe('ContentApiClient', () => {
           return new Response(
             JSON.stringify({
               lang: 'en',
-              total_types: 1,
-              variants: {
-                names: {
-                  id: 'names',
-                  kind: 'string_array',
-                  total: 42,
-                  description: 'Fake names',
-                },
+              total_pools: 1,
+              pools: {
+                names: { id: 'names', total: 42, description: 'Fake names' },
               },
               updated_at: '2026-09-01T00:00:00.000Z',
             }),
@@ -738,13 +747,13 @@ describe('ContentApiClient', () => {
         });
 
       const client = createContentClient({ fetch: mockFetch });
-      const result = await client.variants.getCatalog('en');
+      const result = await client.pools.getCatalog('en');
 
-      expect(capturedUrl).toContain('/api/v1/variants/en');
-      expect(result.variants.names.total).toBe(42);
+      expect(capturedUrl).toContain('/api/v1/pool/catalog/en');
+      expect(result.pools.names.total).toBe(42);
     });
 
-    it('calls GET api/v1/variants/{lang}/{type} with slicing', async () => {
+    it('calls GET api/v1/pool/{lang}/{type}', async () => {
       let capturedUrl = '';
       const mockFetch = jest
         .fn<typeof fetch>()
@@ -754,11 +763,7 @@ describe('ContentApiClient', () => {
             JSON.stringify({
               lang: 'en',
               type: 'names',
-              kind: 'string_array',
-              total: 42,
-              count: 2,
-              limit: 2,
-              offset: 0,
+              total: 2,
               items: ['John Doe', 'Jane Doe'],
               updated_at: '2026-09-01T00:00:00.000Z',
             }),
@@ -767,12 +772,141 @@ describe('ContentApiClient', () => {
         });
 
       const client = createContentClient({ fetch: mockFetch });
-      const result = await client.variants.getByType('en', 'names', {
-        limit: 2,
-      });
+      const result = await client.pools.getByType('en', 'names');
 
-      expect(capturedUrl).toContain('/api/v1/variants/en/names?limit=2');
+      expect(capturedUrl).toContain('/api/v1/pool/en/names');
       expect(result.items).toEqual(['John Doe', 'Jane Doe']);
+    });
+  });
+
+  describe('survey resource', () => {
+    it('calls GET api/v1/survey/{lang}/questions', async () => {
+      let capturedUrl = '';
+      const mockFetch = jest
+        .fn<typeof fetch>()
+        .mockImplementation(async (req) => {
+          capturedUrl = getUrlString(req);
+          return new Response(
+            JSON.stringify({
+              lang: 'en',
+              total: 1,
+              questions: [
+                {
+                  id: 'sqrt144',
+                  text: 'What is the square root of 144?',
+                  options: [
+                    { id: 'o1', label: '10' },
+                    { id: 'o3', label: '12' },
+                  ],
+                  solution: 'o3',
+                },
+              ],
+              updated_at: '2026-09-01T00:00:00.000Z',
+            }),
+            { status: 200, headers: { 'Content-Type': 'application/json' } },
+          );
+        });
+
+      const client = createContentClient({ fetch: mockFetch });
+      const result = await client.survey.getQuestions('en');
+
+      expect(capturedUrl).toContain('/api/v1/survey/en/questions');
+      expect(result.questions[0].solution).toBe('o3');
+    });
+  });
+
+  describe('prize wheel resource', () => {
+    it('calls GET api/v1/prize-wheel/{lang}/segments', async () => {
+      let capturedUrl = '';
+      const mockFetch = jest
+        .fn<typeof fetch>()
+        .mockImplementation(async (req) => {
+          capturedUrl = getUrlString(req);
+          return new Response(
+            JSON.stringify({
+              lang: 'en',
+              total: 1,
+              segments: [
+                {
+                  id: 'freeLifetimeBeer',
+                  label: 'Free lifetime beer',
+                  weight: 10,
+                  starred: true,
+                },
+              ],
+              updated_at: '2026-09-01T00:00:00.000Z',
+            }),
+            { status: 200, headers: { 'Content-Type': 'application/json' } },
+          );
+        });
+
+      const client = createContentClient({ fetch: mockFetch });
+      const result = await client.prizeWheel.getSegments('en');
+
+      expect(capturedUrl).toContain('/api/v1/prize-wheel/en/segments');
+      expect(result.segments[0].weight).toBe(10);
+      expect(result.segments[0].starred).toBe(true);
+    });
+  });
+
+  describe('newsletter resource', () => {
+    it('calls GET api/v1/newsletter/{lang}/steps', async () => {
+      let capturedUrl = '';
+      const mockFetch = jest
+        .fn<typeof fetch>()
+        .mockImplementation(async (req) => {
+          capturedUrl = getUrlString(req);
+          return new Response(
+            JSON.stringify({
+              lang: 'en',
+              total: 1,
+              steps: [
+                {
+                  id: 'regret',
+                  text: 'Are you sure?',
+                  confirm: 'Yes',
+                  cancel: 'No',
+                },
+              ],
+              updated_at: '2026-09-01T00:00:00.000Z',
+            }),
+            { status: 200, headers: { 'Content-Type': 'application/json' } },
+          );
+        });
+
+      const client = createContentClient({ fetch: mockFetch });
+      const result = await client.newsletter.getSteps('en');
+
+      expect(capturedUrl).toContain('/api/v1/newsletter/en/steps');
+      expect(result.steps[0].confirm).toBe('Yes');
+    });
+  });
+
+  describe('spam sample resource', () => {
+    it('calls GET api/v1/spam-sample/{lang}', async () => {
+      let capturedUrl = '';
+      const mockFetch = jest
+        .fn<typeof fetch>()
+        .mockImplementation(async (req) => {
+          capturedUrl = getUrlString(req);
+          return new Response(
+            JSON.stringify({
+              lang: 'en',
+              total: 1,
+              samples: [
+                { id: 'spacePrisoner', subject: 'URGENT', body: 'Body text' },
+              ],
+              updated_at: '2026-09-01T00:00:00.000Z',
+            }),
+            { status: 200, headers: { 'Content-Type': 'application/json' } },
+          );
+        });
+
+      const client = createContentClient({ fetch: mockFetch });
+      const result = await client.spamSample.list('en');
+
+      expect(capturedUrl).toContain('/api/v1/spam-sample/en');
+      expect(result.samples[0].subject).toBe('URGENT');
     });
   });
 });

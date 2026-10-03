@@ -5,7 +5,7 @@ import { useCallback, useEffect, useMemo, useState } from 'react';
 import { useMount } from 'react-use';
 import { emit } from '@/core/events/event-bus';
 import { useAppConfigContext } from '@/core/react';
-import { useVariantPool } from '@/features/content/hooks';
+import { usePool } from '@/features/content/hooks';
 import { useAudio, useSendNotification } from '@/hooks';
 import { useRuntimeStore } from '@/stores';
 import type { ChatMessage, ChatMessageType } from '../schemas';
@@ -25,7 +25,7 @@ export function useChatBubbleHistory() {
     config.support.assets.newMessageSfx,
   );
 
-  const messagePool = useVariantPool('chat-bubble-messages');
+  const messagePool = usePool('chat-bubble-messages');
 
   const botMessageVariants = useMemo(() => {
     return messagePool.filter(

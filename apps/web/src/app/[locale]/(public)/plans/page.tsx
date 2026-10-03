@@ -7,7 +7,7 @@ export { generateStaticParams } from '@/core/i18n/routing';
 import config from '@/core/config';
 import { getDependencyContainer } from '@/core/di';
 import { buildPlanList, JsonLd } from '@/core/seo';
-import { VariantPoolsBoundary } from '@/features/content/components/VariantPoolsBoundary';
+import { ContentPoolsBoundary } from '@/features/content/components/ContentPoolsBoundary';
 import { PlansPage } from '@/features/subscription/components';
 import { getSubscriptionPlansService } from '@/features/subscription/services';
 import { PageLayout } from '../_components/PageLayout';
@@ -61,7 +61,7 @@ export default async function Page() {
   return (
     <PageLayout route="plans" role="main">
       <JsonLd data={planListSchema} />
-      <VariantPoolsBoundary
+      <ContentPoolsBoundary
         lang={locale}
         types={['social-proof-names', 'social-proof-locations']}
       >
@@ -71,7 +71,7 @@ export default async function Page() {
           urgencyConfig={config.subscription.urgency}
           socialProofConfig={config.subscription.socialProof}
         />
-      </VariantPoolsBoundary>
+      </ContentPoolsBoundary>
     </PageLayout>
   );
 }

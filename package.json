@@ -35,15 +35,15 @@
     "clean:all": "pnpm recursive exec -- rm -rf node_modules dist .next .turbo storybook-static"
   },
   "dependencies": {
-    "import-in-the-middle": "^3.5.1",
+    "import-in-the-middle": "^3.5.2",
     "require-in-the-middle": "^8.0.1"
   },
   "devDependencies": {
     "@biomejs/biome": "catalog:",
     "@commitlint/cli": "^21.2.3",
     "@commitlint/config-conventional": "^21.2.3",
-    "lefthook": "^2.1.14",
-    "turbo": "^2.11.4",
+    "lefthook": "^2.1.16",
+    "turbo": "^2.11.7",
     "typescript": "catalog:"
   },
   "engines": {

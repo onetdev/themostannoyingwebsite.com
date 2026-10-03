@@ -13,7 +13,7 @@ import { LanguageDetectorMessagesProvider } from '@/core/i18n/LanguageDetectorMe
 import { LANGUAGE_DETECTOR_MESSAGES } from '@/core/i18n/language-detector-messages';
 import { routing } from '@/core/i18n/routing';
 import { SiteStructuredData } from '@/core/seo';
-import { prefetchVariantPools } from '@/features/content/services/prefetch-variant-pools';
+import { prefetchContentPools } from '@/features/content/services/prefetch-content-pools';
 import { BeggarBanner } from '@/features/funding/components';
 import { getAppConfigService } from '@/services';
 import { LocaleSuggestion } from './_components/LocaleSuggestion';
@@ -43,11 +43,12 @@ async function LocalePublicRootLayout({
   // read their Content API variant pools from the hydrated React Query cache.
   // The language-suggestion toast copy is bundled for every locale so it can
   // render in the suggested language without an API round-trip.
-  const dehydratedState = await prefetchVariantPools(locale as LanguageCode, [
+  const dehydratedState = await prefetchContentPools(locale as LanguageCode, [
     'marquee-titles',
     'paged-titles',
-    'newsletter-confirmations',
+    'newsletter',
     'chat-bubble-messages',
+    'prize-wheel',
   ]);
 
   return (

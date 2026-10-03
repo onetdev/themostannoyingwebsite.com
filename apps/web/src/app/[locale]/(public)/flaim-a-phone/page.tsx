@@ -2,7 +2,7 @@ import type { LanguageCode } from '@maw/content-sdk';
 import type { Metadata } from 'next';
 import { getLocale, getTranslations } from 'next-intl/server';
 import { WebPageStructuredData } from '@/core/seo';
-import { VariantPoolsBoundary } from '@/features/content/components/VariantPoolsBoundary';
+import { ContentPoolsBoundary } from '@/features/content/components/ContentPoolsBoundary';
 import { FlaimSurveyPage } from '@/features/marketing/components';
 import { PageLayout } from '../_components/PageLayout';
 
@@ -38,12 +38,12 @@ export default async function Page() {
         namespace="metadata.wanPhone"
       />
       <h1>{t('marketing.wanPhone.title')}</h1>
-      <VariantPoolsBoundary lang={locale} types={['quiz-questions']}>
+      <ContentPoolsBoundary lang={locale} types={['survey']}>
         <FlaimSurveyPage
           className="my-5 w-full"
           settings={{ timeLimitInSeconds: 8 }}
         />
-      </VariantPoolsBoundary>
+      </ContentPoolsBoundary>
     </PageLayout>
   );
 }

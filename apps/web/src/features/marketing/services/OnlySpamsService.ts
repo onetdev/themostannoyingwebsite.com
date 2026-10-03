@@ -4,11 +4,10 @@ import type { ContentApiClient, LanguageCode } from '@maw/content-sdk';
 import { mulberry32, stringToSeed } from '@maw/utils/random';
 import { type Container, injectable } from 'inversify';
 import { createAppContentClient } from '@/core/content';
-import { getVariantPool } from '@/features/content/services/get-variant-pool';
+import { getContentPool } from '@/features/content/services/get-content-pool';
 import i18nConfig from '@/root/i18n.config';
 import {
   DI,
-  type EmailSample,
   type OnlySpamsService as IOnlySpamsService,
   type OnlySpamsData,
 } from '../types';
@@ -30,9 +29,9 @@ export class OnlySpamsService implements IOnlySpamsService {
     const lang = safeLocale as LanguageCode;
 
     const [namesPool, testimonialsPool, samplesPool] = await Promise.all([
-      getVariantPool<string>(this.client, lang, 'names'),
-      getVariantPool<{ comment: string }>(this.client, lang, 'testimonials'),
-      getVariantPool<EmailSample>(this.client, lang, 'spam-samples'),
+      getContentPool(this.client, lang, 'names'),
+      getContentPool(this.client, lang, 'testimonials'),
+      getContentPool(this.client, lang, 'spam-sample'),
     ]);
 
     const names = namesPool?.items ?? [];
@@ -41,12 +40,10 @@ export class OnlySpamsService implements IOnlySpamsService {
 
     const seed = stringToSeed('only-spams-testimonials');
     const rand = mulberry32(seed);
-    const testimonials = testimonialsRaw.map((t: { comment: string }) => {
-      return {
-        ...t,
-        name: names.length ? names[Math.floor(rand() * names.length)] : '',
-      };
-    });
+    const testimonials = testimonialsRaw.map((comment) => ({
+      name: names.length ? names[Math.floor(rand() * names.length)] : '',
+      comment,
+    }));
 
     return {
       testimonials,

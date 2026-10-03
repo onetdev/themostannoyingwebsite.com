@@ -15,14 +15,15 @@ export { ArticlesResource } from './resources/articles';
 export { HealthResource } from './resources/health';
 export { ImagesResource } from './resources/images';
 export { LocalesResource } from './resources/locales';
+export { NewsletterResource } from './resources/newsletter';
 export { PagesResource } from './resources/pages';
+export { PoolsResource, type PoolType } from './resources/pools';
+export { PrizeWheelResource } from './resources/prize-wheel';
 export { SearchResource } from './resources/search';
+export { SpamSampleResource } from './resources/spam-sample';
+export { SurveyResource } from './resources/survey';
 export { TagsResource } from './resources/tags';
 export { TranslationsResource } from './resources/translations';
-export {
-  type VariantPoolType,
-  VariantsResource,
-} from './resources/variants';
 export {
   CONTENT_CACHE_TAGS,
   type ContentClientOptions,
