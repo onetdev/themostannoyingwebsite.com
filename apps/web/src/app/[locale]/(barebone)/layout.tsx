@@ -34,7 +34,7 @@ async function LocaleBareboneRootLayout({
   }
 
   // Global pain widgets (page title glitch, newsletter modal) read their
-  // Content API variant pools from the hydrated React Query cache.
+  // Content API content pools from the hydrated React Query cache.
   const dehydratedState = await prefetchContentPools(locale as LanguageCode, [
     'marquee-titles',
     'paged-titles',

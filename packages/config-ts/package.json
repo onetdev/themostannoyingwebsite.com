@@ -6,7 +6,13 @@
   "publishConfig": {
     "access": "public"
   },
+  "scripts": {
+    "lint": "biome check .",
+    "format": "biome format --write .",
+    "lint:fix": "biome check --write ."
+  },
   "devDependencies": {
+    "@biomejs/biome": "catalog:",
     "typescript-plugin-css-modules": "^5.2.0"
   }
 }

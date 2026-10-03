@@ -70,7 +70,7 @@ Examples:
 ```
 features/
 user
-settings
+funding
 comments
 achievements
 ```
@@ -95,7 +95,7 @@ Reusable React hooks that are not tied to a single feature.
 
 ### `i18n`
 
-Global translation messages (`index.ts`, `common.ts`, `metadata.ts`).
+Global translation messages (`src/i18n/messages/en/`: `index.ts`, `common.ts`, `metadata.ts`).
 
 ### `schemas`
 

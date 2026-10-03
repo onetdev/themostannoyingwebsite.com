@@ -6,9 +6,7 @@
   "exports": {
     ".": "./src/index.ts",
     "./client": "./src/client/index.ts",
-    "./helpers": "./src/helpers/index.ts",
-    "./schemas": "./src/schemas/index.ts",
-    "./types": "./src/types/index.ts"
+    "./helpers": "./src/helpers/index.ts"
   },
   "scripts": {
     "generate": "orval",

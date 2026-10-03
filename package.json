@@ -24,7 +24,7 @@
     "orval": "pnpm --filter @maw/content-sdk orval",
     "check-types": "turbo run check-types",
     "dev": "turbo run dev",
-    "format": "prettier --write \"**/*.{ts,tsx,md}\"",
+    "format": "turbo run format",
     "lint": "turbo run lint",
     "lint:fix": "turbo run lint:fix",
     "prepare": "lefthook install",

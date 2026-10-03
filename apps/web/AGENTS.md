@@ -53,9 +53,10 @@ We use `next-intl`. **NEVER hardcode user-facing strings.**
 
 > ℹ️ Non-English translations are served by the headless Content API. Only the
 > English bundles are shipped with the app, as the reference shape and runtime
-> fallback. See `adr/0022-api-served-translations.md`. Variant pools (fake names,
+> fallback. See `adr/0022-api-served-translations.md`. Content pools (fake names,
 > comments, quiz data, etc.) are **not** bundled at all and are served by the API
-> for every locale — see `adr/0025-api-only-variant-pools-ssr-hydration.md`.
+> for every locale — see
+> `adr/0029-content-resource-model-pools-and-dedicated-endpoints.md`.
 
 ### 1. Global Messages (`src/i18n/messages/en/`)
 Only English is bundled: `src/i18n/messages/en/`
@@ -98,26 +99,29 @@ directories or `variants.ts` files — variant data lives in the Content API.
 - Regenerated via `build:metadata` (run by `build`, `lint`, `check-types`, and `dev`).
 - See `adr/0023-build-time-locale-catalog.md`.
 
-### 5. Variant Pools (API-only)
-Variant pools are served exclusively by the Content API
-(`client.variants.getByType(lang, type)`); nothing is bundled, not even English.
+### 5. Content Pools (API-only)
+Content pools are served exclusively by the Content API; nothing is bundled, not
+even English. Generic string pools use `client.pools.getByType(lang, type)`;
+structured content (survey, prize wheel, newsletter, spam samples) has dedicated
+endpoints dispatched behind the same abstraction.
 
-- **Services** that need pool data call `getVariantPool()` (graceful, returns
-  `undefined`) or `fetchVariantPool()` (throws) from
-  `src/features/content/services/`. On failure pools degrade to empty arrays.
-- **Client components** read pools with `useVariantPool<T>(type)` and must be
-  covered by a server prefetch, otherwise they render empty:
-  - Shared pool wiring lives in `variant-pool-query.ts` (React Query options,
-    `staleTime`/`gcTime` infinity) and `prefetch-variant-pools.ts`.
+- **Services** that need pool data call `getContentPool()` (graceful, returns
+  `undefined`) or `fetchContentPool()` (throws) from
+  `src/features/content/services/get-content-pool.ts`. On failure pools degrade
+  to empty arrays.
+- **Client components** read pools with `usePool<T>(type)` and must be covered by
+  a server prefetch, otherwise they render empty:
+  - Shared pool wiring lives in `content-pool-query.ts` (React Query options,
+    `staleTime`/`gcTime` infinity) and `prefetch-content-pools.ts`.
   - Global pain-widget pools are prefetched in the locale layouts and hydrated via
     `ClientRootProviderContainer`.
-  - Page-scoped pools are wrapped in `VariantPoolsBoundary`
-    (`src/features/content/components/VariantPoolsBoundary.tsx`) so each route
+  - Page-scoped pools are wrapped in `ContentPoolsBoundary`
+    (`src/features/content/components/ContentPoolsBoundary.tsx`) so each route
     ships only the pools it uses.
 - The query function refuses to run in the browser, keeping all Content API calls
   server-side. Freshness comes from ISR revalidation (`revalidate: 3600`) and
   proactive invalidation when the Content API releases new content.
-- See `adr/0025-api-only-variant-pools-ssr-hydration.md`.
+- See `adr/0029-content-resource-model-pools-and-dedicated-endpoints.md`.
 
 ---
 
@@ -195,7 +199,7 @@ All pages must describe themselves with JSON-LD. The machinery lives in `src/cor
 - ❌ Directly importing `en.ts` for types (Use `AppTranslationShape` from `src/types.ts`).
 - ❌ Using `any` (Define Zod schemas and infer types).
 - ❌ Manual `fetch` calls (Use repositories or services).
-- ❌ Bundling variant arrays in messages (Use Content API variant pools via `useVariantPool` + server prefetch).
+- ❌ Bundling variant arrays in messages (Use Content API content pools via `usePool` + server prefetch).
 
 <!-- BEGIN:nextjs-agent-rules -->
 
