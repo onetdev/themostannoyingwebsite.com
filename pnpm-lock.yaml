@@ -323,15 +323,9 @@ importers:
       '@storybook/addon-docs':
         specifier: 'catalog:'
         version: 10.6.1(@types/react-dom@19.3.0(@types/react@19.3.0))(@types/react@19.3.0)(storybook@10.6.1(@types/react@19.3.0)(prettier@3.9.9)(react@19.3.0))
-      flatted:
-        specifier: ^3.4.2
-        version: 3.4.4
       next:
         specifier: ^16.3.5
         version: 16.3.8(@babel/core@7.29.7(supports-color@8.1.1))(@opentelemetry/api@1.9.1)(@playwright/test@1.63.0)(@types/node@26.6.4)(react-dom@19.3.0(react@19.3.0))(react@19.3.0)(sass@1.105.1)
-      pbkdf2:
-        specifier: ^3.1.5
-        version: 3.1.7
       react:
         specifier: 'catalog:'
         version: 19.3.0
@@ -720,9 +714,6 @@ importers:
       embla-carousel-react:
         specifier: ^8.6.0
         version: 8.6.0(react@19.3.0)
-      flatted:
-        specifier: ^3.4.2
-        version: 3.4.4
       framer-motion:
         specifier: 'catalog:'
         version: 13.5.1(react-dom@19.3.0(react@19.3.0))(react@19.3.0)
@@ -796,9 +787,6 @@ importers:
 
   packages/utils:
     dependencies:
-      handlebars:
-        specifier: ^4.7.9
-        version: 4.7.9
       sanitize-html:
         specifier: 'catalog:'
         version: 2.17.4
