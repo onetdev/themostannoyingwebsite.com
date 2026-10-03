@@ -11,7 +11,11 @@ export const CONTENT_CACHE_TAGS = {
   images: 'content:images',
   locales: 'content:locales',
   translations: 'content:translations',
-  variants: 'content:variants',
+  pools: 'content:pools',
+  survey: 'content:survey',
+  prizeWheel: 'content:prize-wheel',
+  newsletter: 'content:newsletter',
+  spamSample: 'content:spam-sample',
 } as const;
 
 export interface ContentClientOptions {
