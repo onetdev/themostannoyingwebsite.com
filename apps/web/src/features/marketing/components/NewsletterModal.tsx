@@ -20,7 +20,7 @@ import { useState } from 'react';
 import { Controller } from 'react-hook-form';
 import { Link } from '@/core/i18n/navigation';
 import { useEvent } from '@/core/react';
-import { useVariantPool } from '@/features/content/hooks';
+import { usePool } from '@/features/content/hooks';
 import { useNewsletterForm } from '../hooks';
 import type { NewsletterConfirmation } from '../types';
 
@@ -49,7 +49,7 @@ export function NewsletterModal({
 
   useEvent('ui:modal:dismiss-signaled', () => onDismiss?.(), visible);
 
-  const confirmPool = useVariantPool('newsletter-confirmations');
+  const confirmPool = usePool('newsletter');
 
   const renderActions = () => {
     const buttons = [

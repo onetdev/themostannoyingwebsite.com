@@ -7,14 +7,14 @@ import {
 } from '@maw/utils/random';
 import { useCallback, useMemo, useState } from 'react';
 import { emit } from '@/core/events/event-bus';
-import { useVariantPool } from '@/features/content/hooks';
+import { usePool } from '@/features/content/hooks';
 import type { Item } from '../components/WheelOfFortune/DynamicWheelSvg';
 import { buildPrizePool } from './wheel-prizes';
 
 export type AnimatedWheelState = 'ready' | 'spinning' | 'completed';
 
 export function useWheelOfFortune() {
-  const prizes = useVariantPool('wheel-prizes');
+  const prizes = usePool('prize-wheel');
   const hueStart = 300; // random(0,360);
   const [state, setState] = useState<AnimatedWheelState>('ready');
   const [prize, setPrize] = useState<(Item & { index: number }) | undefined>();

@@ -4,7 +4,11 @@ import type {
   GetArticleListQueryParams,
   GetArticleListResponse,
   LanguageCode,
-  VariantPoolType,
+  NewsletterStep,
+  PoolType,
+  PrizeWheelSegment,
+  SpamSample,
+  SurveyQuestion,
 } from '@maw/content-sdk';
 import type contentEnLocale from './i18n/en';
 
@@ -24,12 +28,20 @@ export const DI = {
 export type ContentI18nShape = typeof contentEnLocale;
 
 /**
- * Item shape for each Content API variant pool type.
+ * Content API resources consumed as pools.
  *
- * Must cover every value of `VariantPoolType`; pools that carry no structured
- * payload are plain strings. Keep it in sync with the API's pool enum.
+ * Covers every generic string pool plus the dedicated structured resources.
+ * Generic pools yield plain strings; dedicated resources yield structured
+ * items (with stable IDs and API-supplied behavior).
  */
-export interface VariantPoolItemMap {
+export type ContentPoolType =
+  | PoolType
+  | 'survey'
+  | 'prize-wheel'
+  | 'newsletter'
+  | 'spam-sample';
+
+export interface ContentPoolItemMap {
   names: string;
   comments: string;
   'chat-bubble-messages': string;
@@ -39,24 +51,15 @@ export interface VariantPoolItemMap {
   'cancellation-reasons': string;
   'social-proof-names': string;
   'social-proof-locations': string;
-  'social-proof': unknown;
-  testimonials: { comment: string };
-  'spam-samples': { subject: string; body: string };
-  'newsletter-confirmations': {
-    text?: string;
-    confirm: string;
-    cancel: string;
-  };
-  'quiz-questions': {
-    text: string;
-    options: Record<string, string> | string[];
-    solution?: string;
-  };
-  'wheel-prizes': { id: string; label: string };
+  testimonials: string;
+  survey: SurveyQuestion;
+  'prize-wheel': PrizeWheelSegment;
+  newsletter: NewsletterStep;
+  'spam-sample': SpamSample;
 }
 
-/** Item type of a given Content API variant pool. */
-export type VariantPoolItem<T extends VariantPoolType> = VariantPoolItemMap[T];
+/** Item type of a given Content API pool. */
+export type ContentPoolItem<T extends ContentPoolType> = ContentPoolItemMap[T];
 
 declare global {
   interface AppEvents {

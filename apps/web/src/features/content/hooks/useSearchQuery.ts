@@ -1,7 +1,7 @@
 'use client';
 
 import type {
-  GetSearchResultsQueryParams,
+  GetSearchResultListQueryParams,
   SearchResultItem,
 } from '@maw/content-sdk';
 import { randomNumber } from '@maw/utils/random';
@@ -16,7 +16,7 @@ type SearchResult = {
 
 const contentClient = createAppContentClient();
 
-export function useSearchQuery(params: GetSearchResultsQueryParams) {
+export function useSearchQuery(params: GetSearchResultListQueryParams) {
   const delayEnabled = usePainPreferencesStore(
     (state) => state.flags.searchDelay,
   );

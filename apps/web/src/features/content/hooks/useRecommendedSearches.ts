@@ -2,10 +2,10 @@
 
 import { arrayShuffle } from '@maw/utils/array';
 import { useCallback, useState } from 'react';
-import { useVariantPool } from './useVariantPool';
+import { usePool } from './usePool';
 
 export function useRecommendedSearches() {
-  const topSearchesPool = useVariantPool('top-searches');
+  const topSearchesPool = usePool('top-searches');
   const [topSearches, setTopSearches] = useState<string[]>([]);
   const [query, setQuery] = useState('');
 

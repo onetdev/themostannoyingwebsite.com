@@ -1,3 +1,4 @@
 export * from './ArticleService';
-export * from './get-variant-pool';
-export * from './variant-pool-query';
+export * from './content-pool-query';
+export * from './get-content-pool';
+export * from './prefetch-content-pools';

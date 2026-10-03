@@ -5,7 +5,7 @@ import { randomArrayEntry, randomNumber } from '@maw/utils/random';
 import { useTranslations } from 'next-intl';
 import { useCallback, useEffect, useMemo, useState } from 'react';
 import { useLogger } from '@/core/react';
-import { useVariantPool } from '@/features/content/hooks';
+import { usePool } from '@/features/content/hooks';
 import type { SubscriptionPackage } from '../../schemas';
 
 export interface PurchaseProofToastProps {
@@ -21,8 +21,8 @@ export function PurchaseProofToast({
 }: PurchaseProofToastProps) {
   const logger = useLogger('PurchaseProofToast');
   const t = useTranslations();
-  const names = useVariantPool('social-proof-names');
-  const locations = useVariantPool('social-proof-locations');
+  const names = usePool('social-proof-names');
+  const locations = usePool('social-proof-locations');
   const [iterator, setIterator] = useState(0);
 
   const pool = useMemo(() => {

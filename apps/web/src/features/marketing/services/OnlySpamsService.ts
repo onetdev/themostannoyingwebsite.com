@@ -4,7 +4,7 @@ import type { ContentApiClient, LanguageCode } from '@maw/content-sdk';
 import { mulberry32, stringToSeed } from '@maw/utils/random';
 import { type Container, injectable } from 'inversify';
 import { createAppContentClient } from '@/core/content';
-import { getVariantPool } from '@/features/content/services/get-variant-pool';
+import { getContentPool } from '@/features/content/services/get-content-pool';
 import i18nConfig from '@/root/i18n.config';
 import {
   DI,
@@ -30,9 +30,9 @@ export class OnlySpamsService implements IOnlySpamsService {
     const lang = safeLocale as LanguageCode;
 
     const [namesPool, testimonialsPool, samplesPool] = await Promise.all([
-      getVariantPool<string>(this.client, lang, 'names'),
-      getVariantPool<{ comment: string }>(this.client, lang, 'testimonials'),
-      getVariantPool<EmailSample>(this.client, lang, 'spam-samples'),
+      getContentPool<string>(this.client, lang, 'names'),
+      getContentPool<{ comment: string }>(this.client, lang, 'testimonials'),
+      getContentPool<EmailSample>(this.client, lang, 'spam-sample'),
     ]);
 
     const names = namesPool?.items ?? [];

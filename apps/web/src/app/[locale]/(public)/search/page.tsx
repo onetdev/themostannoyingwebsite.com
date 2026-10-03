@@ -3,7 +3,7 @@ import type { Metadata } from 'next';
 import { getLocale, getTranslations } from 'next-intl/server';
 import { NOINDEX_ROBOTS } from '@/core/seo/robots';
 import { SearchPage } from '@/features/content/components';
-import { VariantPoolsBoundary } from '@/features/content/components/VariantPoolsBoundary';
+import { ContentPoolsBoundary } from '@/features/content/components/ContentPoolsBoundary';
 import { PageLayout } from '../_components/PageLayout';
 
 export { generateStaticParams } from '@/core/i18n/routing';
@@ -28,9 +28,9 @@ export default async function Page() {
 
   return (
     <PageLayout route="search" role="main">
-      <VariantPoolsBoundary lang={locale} types={['top-searches']}>
+      <ContentPoolsBoundary lang={locale} types={['top-searches']}>
         <SearchPage />
-      </VariantPoolsBoundary>
+      </ContentPoolsBoundary>
     </PageLayout>
   );
 }

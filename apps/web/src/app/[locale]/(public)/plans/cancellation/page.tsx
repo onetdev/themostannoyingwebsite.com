@@ -2,7 +2,7 @@ import type { LanguageCode } from '@maw/content-sdk';
 import type { Metadata } from 'next';
 import { getLocale, getTranslations } from 'next-intl/server';
 import { NOINDEX_ROBOTS } from '@/core/seo/robots';
-import { VariantPoolsBoundary } from '@/features/content/components/VariantPoolsBoundary';
+import { ContentPoolsBoundary } from '@/features/content/components/ContentPoolsBoundary';
 import { CancellationPage } from '@/features/subscription/components';
 import { PageLayout } from '../../_components/PageLayout';
 
@@ -29,9 +29,9 @@ export default async function Page() {
 
   return (
     <PageLayout route="plans.cancellation" role="main">
-      <VariantPoolsBoundary lang={locale} types={['cancellation-reasons']}>
+      <ContentPoolsBoundary lang={locale} types={['cancellation-reasons']}>
         <CancellationPage />
-      </VariantPoolsBoundary>
+      </ContentPoolsBoundary>
     </PageLayout>
   );
 }

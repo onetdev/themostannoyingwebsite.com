@@ -1,8 +1,8 @@
 import type { WeightedRandomPoolItem } from '@maw/utils/random';
-import type { VariantPoolItem } from '@/features/content/types';
+import type { ContentPoolItem } from '@/features/content/types';
 
 /** A single localized wheel prize as served by the Content API. */
-export type WheelPrize = VariantPoolItem<'wheel-prizes'>;
+export type WheelPrize = ContentPoolItem<'prize-wheel'>;
 
 interface WheelPrizeSlot {
   id: string;
