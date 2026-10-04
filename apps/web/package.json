@@ -25,6 +25,7 @@
     "i18n:compare": "tsx ./scripts/compare-translations.ts"
   },
   "dependencies": {
+    "@formatjs/icu-messageformat-parser": "catalog:",
     "@fortawesome/fontawesome-svg-core": "catalog:",
     "@fortawesome/free-solid-svg-icons": "catalog:",
     "@fortawesome/react-fontawesome": "catalog:",

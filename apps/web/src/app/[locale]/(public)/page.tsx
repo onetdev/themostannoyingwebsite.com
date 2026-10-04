@@ -1,5 +1,5 @@
-import type { LanguageCode } from '@maw/content-sdk';
 import { getDependencyContainer } from '@/core/di';
+import { assertAppLocale } from '@/core/i18n/app-locale';
 import { buildBlog, getSeoContext, JsonLd } from '@/core/seo';
 import { getArticleService } from '@/features/content/services';
 import { HomePage } from './_components/HomePage';
@@ -11,18 +11,19 @@ export const revalidate = 1800;
 
 export default async function Page({ params }: NextPageProps) {
   const { locale } = await params;
+  const appLocale = assertAppLocale(locale);
   const container = getDependencyContainer();
   const articleService = await getArticleService(container);
 
   const [coverResponse, articlePool] = await Promise.all([
     articleService.list({
       is_featured: true,
-      lang: locale as LanguageCode,
+      lang: appLocale,
       limit: 1,
     }),
     articleService.list({
       is_featured: false,
-      lang: locale as LanguageCode,
+      lang: appLocale,
       limit: 14,
     }),
   ]);
@@ -31,7 +32,6 @@ export default async function Page({ params }: NextPageProps) {
   const denseArticleList = articlePool.items.slice(0, 2);
   const smallCoverArticleList = articlePool.items.slice(2, 14);
 
-  const appLocale = locale as AppLocale;
   const seoContext = await getSeoContext(appLocale);
   const blogSchema = buildBlog({
     ...seoContext,

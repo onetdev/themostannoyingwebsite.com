@@ -8,6 +8,7 @@ import { notFound } from 'next/navigation';
 import { getTranslations } from 'next-intl/server';
 import config from '@/core/config';
 import { getDependencyContainer } from '@/core/di';
+import { assertAppLocale } from '@/core/i18n/app-locale';
 import { buildArticle, buildBreadcrumbList, JsonLd } from '@/core/seo';
 import { CommentService } from '@/features/comments/services';
 import { ArticleItemPage } from '@/features/content/components';
@@ -28,9 +29,10 @@ export async function generateMetadata({
   params,
 }: PageProps): Promise<Metadata> {
   const { slug, locale } = await params;
+  const appLocale = assertAppLocale(locale);
   const container = getDependencyContainer();
   const articleService = await getArticleService(container);
-  const data = await articleService.getBySlug(slug, locale as LanguageCode);
+  const data = await articleService.getBySlug(slug, appLocale);
 
   if (!data) {
     return {};
@@ -40,7 +42,7 @@ export async function generateMetadata({
   const xDefaultTranslation = allTranslations.find(
     (t) => t.lang === i18nConfig.defaultLocale,
   ) ?? {
-    lang: locale,
+    lang: appLocale,
     slug: data.slug,
   };
 
@@ -57,7 +59,7 @@ export async function generateMetadata({
       // and `hreflang` (incl. x-default) links it to its siblings. This keeps
       // the canonical aligned with the JSON-LD `@id`/`url`, which is also the
       // localized URL.
-      canonical: `/${locale}/articles/${data.slug}/`,
+      canonical: `/${appLocale}/articles/${data.slug}/`,
       languages: {
         ...languages,
         'x-default': `/${xDefaultTranslation.lang}/articles/${xDefaultTranslation.slug}/`,
@@ -92,10 +94,11 @@ export const generateStaticParams = async () => {
 
 export default async function Page({ params }: PageProps) {
   const { slug, locale } = await params;
+  const appLocale = assertAppLocale(locale);
 
   const container = getDependencyContainer();
   const articleService = await getArticleService(container);
-  const datum = await articleService.getBySlug(slug, locale as LanguageCode);
+  const datum = await articleService.getBySlug(slug, appLocale);
 
   if (!datum) {
     return notFound();
@@ -103,9 +106,8 @@ export default async function Page({ params }: PageProps) {
 
   const comments = await new CommentService().getByArticle(datum);
   const renderedContent = renderMarkdown(datum.content);
-  const appLocale = locale as AppLocale;
   const navigation = await getTranslations({
-    locale,
+    locale: appLocale,
     namespace: 'common.navigation',
   });
   const coverImages = toCoverImages(datum.featured_image);
