@@ -21,12 +21,6 @@ describe('AuthorService', () => {
     mockClient = {
       authors: {
         getBySlug: jest.fn().mockResolvedValue(mockAuthorItem),
-        list: jest.fn().mockResolvedValue({
-          total: 1,
-          limit: 10,
-          offset: 0,
-          items: [mockAuthorItem],
-        }),
         listAll: jest.fn().mockResolvedValue([mockAuthorItem]),
       } as unknown as ContentApiClient['authors'],
     };
@@ -70,19 +64,6 @@ describe('AuthorService', () => {
 
       const result = await service.getBySlug('missing');
       expect(result).toBeUndefined();
-    });
-  });
-
-  describe('list', () => {
-    it('fetches a list of authors with query params', async () => {
-      const result = await service.list({ lang: 'hu', limit: 5, offset: 0 });
-
-      expect(result.items).toHaveLength(1);
-      expect(result.total).toBe(1);
-      expect(mockClient.authors?.list).toHaveBeenCalledWith(
-        { lang: 'hu', limit: 5, offset: 0 },
-        expect.anything(),
-      );
     });
   });
 

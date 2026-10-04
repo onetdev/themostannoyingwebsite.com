@@ -6,7 +6,6 @@ import {
   CONTENT_CACHE_TAGS,
   type ContentApiClient,
   type GetAuthorListQueryParams,
-  type GetAuthorListResponse,
   type LanguageCode,
 } from '@maw/content-sdk';
 import { type Container, injectable } from 'inversify';
@@ -37,14 +36,6 @@ export class AuthorService implements IAuthorService {
     } catch (_err) {
       return undefined;
     }
-  }
-
-  public async list(
-    params?: GetAuthorListQueryParams,
-  ): Promise<GetAuthorListResponse> {
-    return this.client.authors.list(params, {
-      next: { revalidate: 1800, tags: [CONTENT_CACHE_TAGS.authors] },
-    });
   }
 
   public async listAll(

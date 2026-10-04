@@ -6,7 +6,6 @@ import type {
   GetArticleListQueryParams,
   GetArticleListResponse,
   GetAuthorListQueryParams,
-  GetAuthorListResponse,
   LanguageCode,
   NewsletterStep,
   PoolType,
@@ -26,7 +25,6 @@ export interface ArticleService {
 
 export interface AuthorService {
   getBySlug(slug: string, lang?: LanguageCode): Promise<Author | undefined>;
-  list(params?: GetAuthorListQueryParams): Promise<GetAuthorListResponse>;
   listAll(
     params?: Omit<GetAuthorListQueryParams, 'limit' | 'offset'>,
   ): Promise<AuthorListItem[]>;
