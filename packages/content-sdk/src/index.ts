@@ -1,6 +1,8 @@
 import {
   type GetArticleBySlugResponse,
   type GetArticleListResponse,
+  type GetAuthorBySlugResponse,
+  type GetAuthorListResponse,
   type GetNewsletterStepListResponse,
   type GetPageBySlugResponse,
   type GetPageListResponse,
@@ -14,6 +16,8 @@ import {
 
 export type Article = GetArticleBySlugResponse;
 export type ArticleListItem = GetArticleListResponse['items'][number];
+export type Author = GetAuthorBySlugResponse;
+export type AuthorListItem = GetAuthorListResponse['items'][number];
 export type Page = GetPageBySlugResponse;
 export type PageListItem = GetPageListResponse['items'][number];
 export type SearchResultItem = GetSearchResultListResponse['items'][number];

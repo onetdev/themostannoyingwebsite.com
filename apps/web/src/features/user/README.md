@@ -15,8 +15,8 @@ Handles user personalization (or depersonalization) settings, notification trigg
 
 ## Configuration UI
 
-- `PainPointField`: A specialized checkbox field used in the Settings page to toggle specific annoying features.
-- `SettingsLayout`: A multi-tab interface for browsing different setting categories.
+- `SettingsField`: A specialized field used in the Settings page to toggle specific annoying features.
+- `SettingsPage`: The tabbed interface for browsing different setting categories.
 
 Looking for Admin login or terminal access? See the `auth` feature's `/admin` route.
 

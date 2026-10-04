@@ -22,21 +22,6 @@
     "listClassName",
     "localStyles.*"
   ],
-  "yaml.schemas": {
-    "packages/content-api/src/schemas/article-shared.schema.json": "packages/content-api/data/*/data.yml",
-    "packages/content-api/src/schemas/article-language.schema.json": [
-      "packages/content-api/data/*/ar.yml",
-      "packages/content-api/data/*/en.yml",
-      "packages/content-api/data/*/hu.yml",
-      "packages/content-api/data/*/zh.yml"
-    ]
-  },
-  "json.schemas": [
-    {
-      "fileMatch": ["packages/content-api/data/*-meta.json"],
-      "url": "./packages/content-api/src/schemas/article-locale-meta.schema.json"
-    }
-  ],
   "explorer.fileNesting.enabled": true,
   "explorer.fileNesting.patterns": {
     "tsconfig.json": "tsconfig.json, tsconfig.tsbuildinfo",

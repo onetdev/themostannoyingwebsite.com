@@ -5,21 +5,22 @@
 - **Global Strings**: `src/i18n/messages/en/common.ts` (buttons, generic labels).
 - **Metadata**: `src/i18n/messages/en/metadata.ts` (SEO tags).
 - **Feature Strings**: `src/features/{feature}/i18n/en.ts`.
-- **Variant Pools**: **not** bundled. Fake names, comments, testimonials, quiz
+- **Content Pools**: **not** bundled. Fake names, comments, testimonials, quiz
   questions, social-proof data, etc. come from the Content API and are consumed
-  via services (`getVariantPool`) or client components (`useVariantPool`). See
-  `adr/0025-api-only-variant-pools-ssr-hydration.md`.
+  via services (`getContentPool` / `fetchContentPool`) or client components
+  (`usePool`). See
+  `adr/0029-content-resource-model-pools-and-dedicated-endpoints.md`.
 
 ## Rules
 
 1.  **NEVER Hardcode**: User-facing strings must use `next-intl`.
 2.  **Naming Keys**: Use `camelCase` for keys.
-3.  **Variant Pools**: Never bundle variant arrays. Read them from the Content API and prefetch them on the server so the client reads the hydrated React Query cache:
+3.  **Content Pools**: Never bundle variant arrays. Read them from the Content API and prefetch them on the server so the client reads the hydrated React Query cache:
     ```tsx
     // client component
-    const items = useVariantPool<string>('names');
+    const items = usePool('names');
     ```
-    Wrap the route (or use `VariantPoolsBoundary`) so the pool is prefetched server-side.
+    Wrap the route (or use `ContentPoolsBoundary`) so the pool is prefetched server-side.
 4.  **English Only in the Repo**: Only English is bundled and acts as the
     reference shape plus runtime fallback. All other languages are served by the
     Content API and deep-merged over English. Do **not** create non-English

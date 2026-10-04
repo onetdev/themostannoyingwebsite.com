@@ -49,8 +49,5 @@
     "tailwindcss": "catalog:",
     "tsx": "catalog:",
     "typescript": "catalog:"
-  },
-  "peerDependencies": {
-    "flatted": "^3.4.2"
   }
 }

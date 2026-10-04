@@ -9,7 +9,7 @@ Displays intrusive advertisements, promotional content, and fake rewards designe
 - **Newsletter Subscription Loop**: A `NewsletterModal` that pops up based on scroll depth or tab-focus changes. The "Subscribe" and "Cancel" buttons are intentionally shuffled and use deceptive confirmation prompts.
 - **Adblocker Detection**: `AdblockerSuspectBar` monitors the presence of ad blockers and displays a massive, red, non-closable banner at the bottom of the screen.
 - **Wheel of Fortune**: A "spinning wheel" UI that always results in fake or nonsensical rewards.
-- **OneByOnePromotion**: An intrusive, floating advertisement component that appears on random articles.
+- **WanAPhoneCampaignAd**: An intrusive, floating advertisement component that appears on random articles.
 
 ## Interaction Patterns
 

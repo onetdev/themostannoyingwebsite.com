@@ -11,6 +11,9 @@ on:
         required: false
         default: ''
 
+env:
+  NODE_VERSION: 24
+
 jobs:
   web-test:
     name: Playwright Tests for Web
@@ -21,12 +24,14 @@ jobs:
       contents: read
       pull-requests: write
     steps:
-    - uses: actions/checkout@v4
-    - uses: actions/setup-node@v4
+    - uses: actions/checkout@v6
+    - uses: pnpm/action-setup@v4
+    - uses: actions/setup-node@v6
       with:
-        node-version: lts/*
+        node-version: ${{ env.NODE_VERSION }}
+        cache: pnpm
     - name: Install dependencies
-      run: npm install -g pnpm && pnpm install
+      run: pnpm install --frozen-lockfile
     - name: Build the project
       run: pnpm run build --filter='!@maw/ui-docs'
     - name: Install Playwright Browsers

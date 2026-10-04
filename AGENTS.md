@@ -33,6 +33,8 @@ The project includes specialized skills that you SHOULD use for specific tasks. 
 - **`git-commit`**: Use to review staged work, detect scope, and create a local Conventional Commit (never pushes).
 - **`git-pr-sync`**: Use to review branch commits, compose PR documentation matching the template, and open or update a draft PR via GitHub CLI (`gh`).
 - **`adr-writer`**: Use to draft and manage Architectural Decision Records in the `adr/` folder.
+- **`audit-resolve`**: Use to audit and upgrade dependencies that have known security vulnerabilities.
+- **`dependency-upgrade`**: Use to bump dependency versions across the monorepo and verify the repository still works.
 
 ---
 

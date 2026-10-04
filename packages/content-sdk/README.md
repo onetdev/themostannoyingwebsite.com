@@ -8,7 +8,7 @@ This package provides a strongly-typed HTTP client powered by **`ky`**, with ful
 
 ## 📦 Features
 
-- **Resource-Oriented Client**: Ergonomic namespaces: `client.articles`, `client.pages`, `client.tags`, `client.images`, `client.health`, `client.locales`, `client.translations`, `client.pools`, `client.survey`, `client.prizeWheel`, `client.newsletter`, `client.spamSample`.
+- **Resource-Oriented Client**: Ergonomic namespaces: `client.articles`, `client.authors`, `client.pages`, `client.tags`, `client.images`, `client.health`, `client.locales`, `client.translations`, `client.pools`, `client.survey`, `client.prizeWheel`, `client.newsletter`, `client.spamSample`.
 - **Ky HTTP Engine**: Built-in prefix URL handling, automatic query serialization, timeouts, and configurable exponential retry.
 - **Next.js App Router Compatible**: Pass Next.js fetch options (`next: { revalidate, tags }`, `cache`) directly in request options.
 - **Typed Error Hierarchy**: Automatic translation of OpenAPI error responses into `ContentApiNotFoundError`, `ContentApiValidationError`, `ContentApiCorsError`, `ContentApiServerError`.
@@ -67,7 +67,20 @@ const article = await client.articles.getBySlug('how-to-win-every-argument', {
 });
 
 console.log(article.title);
+console.log(article.author.name); // resolved author byline (AuthorRef)
 console.log(article.translations); // [{ lang: 'de', slug: '...', title: '...' }]
+```
+
+### Authors
+
+```typescript
+// List authors with their public byline, persona, and biography
+const { items } = await client.authors.list({ lang: 'en', limit: 20 });
+
+// Fetch a single author by slug
+const author = await client.authors.getBySlug('rage-farmer', { lang: 'en' });
+
+console.log(author.name, author.persona, author.about);
 ```
 
 ### Pages

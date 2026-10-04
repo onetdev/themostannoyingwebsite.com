@@ -40,7 +40,7 @@ async function LocalePublicRootLayout({
   }
 
   // Global pain widgets (page title glitch, newsletter modal, chat bubble)
-  // read their Content API variant pools from the hydrated React Query cache.
+  // read their Content API content pools from the hydrated React Query cache.
   // The language-suggestion toast copy is bundled for every locale so it can
   // render in the suggested language without an API round-trip.
   const dehydratedState = await prefetchContentPools(locale as LanguageCode, [

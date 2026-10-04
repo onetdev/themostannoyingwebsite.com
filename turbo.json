@@ -12,6 +12,9 @@
         "data/**"
       ]
     },
+    "format": {
+      "cache": false
+    },
     "lint:fix": {
       "dependsOn": ["^lint:fix"],
       "cache": false
@@ -30,6 +33,7 @@
       "cache": false
     },
     "test": {
+      "dependsOn": ["build:metadata"],
       "cache": false
     },
     "test:e2e": {
@@ -37,6 +41,7 @@
     }
   },
   "globalEnv": [
+    "ALLOW_LOCALES_FALLBACK",
     "ANALYZE",
     "CI",
     "GITHUB_TOKEN",
