@@ -5,7 +5,10 @@ import type { Languages } from 'next/dist/lib/metadata/types/alternative-urls-ty
 import './bootstrap/di';
 import { getDependencyContainer } from '@/core/di';
 import { absoluteUrl } from '@/core/seo/absolute-url';
-import { getArticleService } from '@/features/content/services';
+import {
+  getArticleService,
+  getAuthorService,
+} from '@/features/content/services';
 import i18nConfig from '@/root/i18n.config';
 import { getAppConfigService } from '@/services';
 
@@ -91,6 +94,14 @@ async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const articlesList = await service.listAll();
   const articles = mapArticlesToSitemapEntries(articlesList);
 
+  // Author slugs are locale-independent, so each author is emitted once with a
+  // complete `hreflang` alternates map (including `x-default`).
+  const authorService = await getAuthorService(di);
+  const authorsList = await authorService.listAll();
+  const authors = authorsList.map((author) =>
+    commonPageMeta(`authors/${author.slug}`),
+  );
+
   const commonPages = [
     '',
     'about',
@@ -110,7 +121,7 @@ async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
   const commonPagesEntries = commonPages.map((path) => commonPageMeta(path));
 
-  return [...commonPagesEntries, ...articles];
+  return [...commonPagesEntries, ...articles, ...authors];
 }
 
 export default sitemap;
