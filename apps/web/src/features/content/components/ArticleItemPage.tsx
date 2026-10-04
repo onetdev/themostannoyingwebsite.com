@@ -5,6 +5,7 @@ import styles from '@maw/ui-lib/content.module.css';
 import HTMLReactParser from 'html-react-parser';
 import Image from 'next/image';
 import { useFormatter, useTranslations } from 'next-intl';
+import { Link } from '@/core/i18n/navigation';
 import { CommentSection } from '@/features/comments/components';
 import type { Comment } from '@/features/comments/schemas/comment';
 import { usePainPreferencesStore } from '@/stores';
@@ -41,6 +42,21 @@ export function ArticleItemPage({
   return (
     <>
       <h1 className="mb-2 max-w-[900px]">{article.title}</h1>
+      <span className="mb-5 block italic">
+        {t.rich('content.author.byline', {
+          name: article.author.name,
+          linkTag: (chunks) => (
+            <Link
+              href={`/authors/${article.author.slug}`}
+              passHref
+              prefetch={false}
+              className="text-primary hover:underline"
+            >
+              {chunks}
+            </Link>
+          ),
+        })}
+      </span>
       <span className="mb-5 block italic">
         {t('content.article.published', { date: formatterPublishedAt })}
       </span>
