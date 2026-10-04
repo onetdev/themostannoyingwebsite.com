@@ -12,7 +12,7 @@ const jestConfig = createJestConfig({
 export default async () => {
   const resolved = await jestConfig();
   resolved.transformIgnorePatterns = [
-    '/node_modules/(?!(\\.pnpm/)?(emittery|inversify|@inversifyjs|ky|marked|sanitize-html))',
+    '/node_modules/(?!(\\.pnpm/)?(@formatjs|emittery|inversify|@inversifyjs|ky|marked|sanitize-html))',
     '^.+\\.module\\.(css|sass|scss)$',
   ];
   return resolved;
