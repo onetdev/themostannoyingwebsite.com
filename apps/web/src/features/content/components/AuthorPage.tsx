@@ -8,7 +8,7 @@ export interface AuthorPageProps {
 }
 
 export async function AuthorPage({ author, articles }: AuthorPageProps) {
-  const t = await getTranslations();
+  const t = await getTranslations('content');
 
   return (
     <>
@@ -28,11 +28,11 @@ export async function AuthorPage({ author, articles }: AuthorPageProps) {
       {articles.length > 0 && (
         <section data-testid="author-article-list">
           <h2 className="mb-5">
-            {t('content.author.articlesTitle', { name: author.name })}
+            {t('author.articlesTitle', { name: author.name })}
           </h2>
           <ul className="grid gap-5 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-            {articles.map((article, index) => (
-              <li key={index} className="basis-full md:basis-1/2">
+            {articles.map((article) => (
+              <li key={article.id} className="basis-full md:basis-1/2">
                 <SmallCoverListItem
                   article={article}
                   data-testid="author-article-item"
