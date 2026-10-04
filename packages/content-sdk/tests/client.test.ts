@@ -20,6 +20,7 @@ describe('ContentApiClient', () => {
     const client = createContentClient();
     expect(client).toBeInstanceOf(ContentApiClient);
     expect(client.articles).toBeDefined();
+    expect(client.authors).toBeDefined();
     expect(client.pages).toBeDefined();
     expect(client.tags).toBeDefined();
     expect(client.images).toBeDefined();
@@ -55,7 +56,12 @@ describe('ContentApiClient', () => {
                   title: 'Sample Article',
                   summary: 'A short summary',
                   content: '# Markdown Content',
-                  author: 'John Doe',
+                  author: {
+                    id: '00000000-0000-0000-0000-0000000000a1',
+                    slug: 'john-doe',
+                    name: 'John Doe',
+                    persona: 'The Everyman',
+                  },
                   published_at: '2026-09-01T00:00:00.000Z',
                   reading_time_minutes: 3,
                   is_featured: true,
@@ -128,7 +134,12 @@ describe('ContentApiClient', () => {
               title: 'Hello World',
               summary: 'Summary',
               content: 'Full body content',
-              author: 'Alice',
+              author: {
+                id: '00000000-0000-0000-0000-0000000000a2',
+                slug: 'alice',
+                name: 'Alice',
+                persona: 'The Narrator',
+              },
               published_at: '2026-09-01T00:00:00.000Z',
               reading_time_minutes: 2,
               is_featured: false,
@@ -175,6 +186,97 @@ describe('ContentApiClient', () => {
       expect(article.slug).toBe('hello-world');
       expect(article.translations).toHaveLength(1);
       expect(article.translations[0].lang).toBe('de');
+    });
+  });
+
+  describe('authors resource', () => {
+    it('calls GET api/v1/authors with query parameters', async () => {
+      let capturedUrl = '';
+      const mockFetch = jest
+        .fn<typeof fetch>()
+        .mockImplementation(async (req) => {
+          capturedUrl = getUrlString(req);
+          return new Response(
+            JSON.stringify({
+              total: 1,
+              limit: 20,
+              offset: 0,
+              items: [
+                {
+                  id: '00000000-0000-0000-0000-0000000000a1',
+                  slug: 'rage-farmer',
+                  name: 'Chuck Delaney',
+                  persona: 'The Rage Farmer',
+                  about: 'Perpetually furious.',
+                },
+              ],
+            }),
+            { status: 200, headers: { 'Content-Type': 'application/json' } },
+          );
+        });
+
+      const client = createContentClient({ fetch: mockFetch });
+      const result = await client.authors.list({ lang: 'en', limit: 20 });
+
+      expect(capturedUrl).toContain('/api/v1/authors?lang=en&limit=20');
+      expect(result.items[0].slug).toBe('rage-farmer');
+      expect(result.items[0].about).toBe('Perpetually furious.');
+    });
+
+    it('calls GET api/v1/authors/{slug} with an encoded slug', async () => {
+      let capturedUrl = '';
+      const mockFetch = jest
+        .fn<typeof fetch>()
+        .mockImplementation(async (req) => {
+          capturedUrl = getUrlString(req);
+          return new Response(
+            JSON.stringify({
+              id: '00000000-0000-0000-0000-0000000000a1',
+              slug: 'rage farmer',
+              name: 'Chuck Delaney',
+              persona: 'The Rage Farmer',
+              about: 'Perpetually furious.',
+            }),
+            { status: 200, headers: { 'Content-Type': 'application/json' } },
+          );
+        });
+
+      const client = createContentClient({ fetch: mockFetch });
+      const author = await client.authors.getBySlug('rage farmer', {
+        lang: 'en',
+      });
+
+      expect(capturedUrl).toContain('/api/v1/authors/rage%20farmer?lang=en');
+      expect(author.name).toBe('Chuck Delaney');
+    });
+
+    it('authors.listAll auto-paginates across pages', async () => {
+      let callCount = 0;
+      const mockFetch = jest.fn<typeof fetch>().mockImplementation(async () => {
+        callCount++;
+        const author = {
+          id: '00000000-0000-0000-0000-0000000000a1',
+          slug: 'rage-farmer',
+          name: 'Chuck Delaney',
+          persona: 'The Rage Farmer',
+          about: 'Perpetually furious.',
+        };
+
+        return new Response(
+          JSON.stringify(
+            callCount === 1
+              ? { total: 2, limit: 100, offset: 0, items: [author] }
+              : { total: 2, limit: 100, offset: 1, items: [author] },
+          ),
+          { status: 200, headers: { 'Content-Type': 'application/json' } },
+        );
+      });
+
+      const client = createContentClient({ fetch: mockFetch });
+      const all = await client.authors.listAll({ lang: 'en' });
+
+      expect(all).toHaveLength(2);
+      expect(callCount).toBe(2);
     });
   });
 
@@ -483,7 +585,12 @@ describe('ContentApiClient', () => {
                   title: 'Art 1',
                   summary: 'Sum 1',
                   content: 'Cont 1',
-                  author: 'Author',
+                  author: {
+                    id: '00000000-0000-0000-0000-0000000000a3',
+                    slug: 'author',
+                    name: 'Author',
+                    persona: 'The Author',
+                  },
                   published_at: '2026-09-01T00:00:00.000Z',
                   reading_time_minutes: 1,
                   is_featured: false,
@@ -512,7 +619,12 @@ describe('ContentApiClient', () => {
                   title: 'Art 2',
                   summary: 'Sum 2',
                   content: 'Cont 2',
-                  author: 'Author',
+                  author: {
+                    id: '00000000-0000-0000-0000-0000000000a3',
+                    slug: 'author',
+                    name: 'Author',
+                    persona: 'The Author',
+                  },
                   published_at: '2026-09-01T00:00:00.000Z',
                   reading_time_minutes: 1,
                   is_featured: false,
@@ -552,7 +664,12 @@ describe('ContentApiClient', () => {
                 title: 'Art 3',
                 summary: 'Sum 3',
                 content: 'Cont 3',
-                author: 'Author',
+                author: {
+                  id: '00000000-0000-0000-0000-0000000000a4',
+                  slug: 'author',
+                  name: 'Author',
+                  persona: 'The Author',
+                },
                 published_at: '2026-09-01T00:00:00.000Z',
                 reading_time_minutes: 1,
                 is_featured: false,

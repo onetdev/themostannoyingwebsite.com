@@ -134,6 +134,7 @@ Shared configuration presets (TypeScript, Jest, etc).
 Strongly typed client SDK used to retrieve:
 
 - articles
+- authors
 - static pages
 - taxonomy tags
 - responsive image variants

@@ -1,5 +1,6 @@
 import { HttpTransport } from './http';
 import { ArticlesResource } from './resources/articles';
+import { AuthorsResource } from './resources/authors';
 import { HealthResource } from './resources/health';
 import { ImagesResource } from './resources/images';
 import { LocalesResource } from './resources/locales';
@@ -26,6 +27,7 @@ function resolveBaseUrl(baseUrl?: string): string | undefined {
 
 export class ContentApiClient {
   readonly articles: ArticlesResource;
+  readonly authors: AuthorsResource;
   readonly pages: PagesResource;
   readonly search: SearchResource;
   readonly tags: TagsResource;
@@ -49,6 +51,7 @@ export class ContentApiClient {
     });
 
     this.articles = new ArticlesResource(this.transport);
+    this.authors = new AuthorsResource(this.transport);
     this.pages = new PagesResource(this.transport);
     this.search = new SearchResource(this.transport);
     this.tags = new TagsResource(this.transport);

@@ -119,7 +119,7 @@ export default async function Page({ params }: PageProps) {
     description: datum.summary,
     image: coverImages?.original,
     datePublished: datum.published_at,
-    authorName: datum.author,
+    authorName: datum.author.name,
     keywords: datum.keywords,
     articleSection: datum.tags?.[0],
   });
