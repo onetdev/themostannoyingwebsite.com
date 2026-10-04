@@ -4,10 +4,12 @@ Acts as the internal bridge for managing and displaying dynamic site content, su
 
 ## Key Highlights
 
-- **ArticleItemPage**: A layout for rendering individual articles with server-rendered markdown. It handles local formatting, cover images, and embeds the `CommentSection`.
+- **ArticleItemPage**: A layout for rendering individual articles with server-rendered markdown. It handles local formatting, cover images, and embeds the `CommentSection`. The byline links to the author's public profile.
+- **AuthorPage**: Renders an author's public profile (name, persona, biography) followed by a cover-thumbnail grid of their articles for the active locale. Authors with no articles in a locale render the profile with an empty list area.
 - **SearchPage & SearchForm**: Client-side search interface leveraging `@maw/content-sdk` to execute real-time queries against the headless Content API. Matching search terms are rendered via `renderMarkdown` with custom highlighting.
 - **HotThingsPage**: A visual showcase of "hot" (annoying) content, often used to test UI disruption features in a dense content environment.
 - **ArticleService**: Server-side service built on `@maw/content-sdk` providing article retrieval (`getBySlug`, `list`, `listAll`) with Next.js cache tags (`CONTENT_CACHE_TAGS`) and error resilience.
+- **AuthorService**: Server-side companion to `ArticleService` for author retrieval (`getBySlug`, `list`, `listAll`) with the `content:authors` cache tag and graceful `getBySlug` failure. Backs the `/{locale}/authors/{slug}/` route and the `ProfilePage` structured data.
 - **Content Formatting**: Uses CSS modules (`content.module.css` from `@maw/ui-lib`) and specialized typography rules to ensure content is readable but also visually consistent with the project's aesthetics.
 - **PartitionalLockedContent**: A "paywall" component that intentionally obscures parts of an article, forcing users through frustrating interaction cycles.
 

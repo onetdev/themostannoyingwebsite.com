@@ -1,4 +1,5 @@
 export * from './ArticleItemPage';
+export * from './AuthorPage';
 export * from './CoverPlaceholder';
 export * from './HotThingsPage';
 export * from './LargeCoverItem';

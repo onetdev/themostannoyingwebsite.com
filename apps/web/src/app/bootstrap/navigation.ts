@@ -3,6 +3,7 @@ import type { RouteAlias } from '@/schemas';
 
 const routeAliasToPathMap: Record<RouteAlias, string> = {
   'article.single': '/articles/:slug',
+  'author.single': '/authors/:slug',
   debug: '/debug',
   'flaim-a-phone': '/flaim-a-phone',
   'hot-things': '/hot-things',
