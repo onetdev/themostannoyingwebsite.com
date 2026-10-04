@@ -11,11 +11,10 @@ export default {
   },
   article: {
     coverImage: 'Cover image',
-    published: 'Published at {date}',
+    byline: 'By <linkTag>{name}</linkTag> · Published at {date}',
     moreContentScroll: "There's more from the past, scroll!",
   },
   author: {
-    byline: 'By <linkTag>{name}</linkTag>',
     articlesTitle: 'Articles by {name}',
   },
   search: {
