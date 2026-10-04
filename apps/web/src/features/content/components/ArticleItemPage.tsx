@@ -43,9 +43,8 @@ export function ArticleItemPage({
     <>
       <h1 className="mb-2 max-w-[900px]">{article.title}</h1>
       <span className="mb-5 block italic">
-        {t.rich('content.article.byline', {
+        {t.rich('content.author.byline', {
           name: article.author.name,
-          date: formatterPublishedAt,
           linkTag: (chunks) => (
             <Link
               href={`/authors/${article.author.slug}`}
@@ -57,6 +56,8 @@ export function ArticleItemPage({
             </Link>
           ),
         })}
+        {' · '}
+        {t('content.article.published', { date: formatterPublishedAt })}
       </span>
       {coverImages?.original && (
         <div className="-mx-5 xl:-mx-8">
