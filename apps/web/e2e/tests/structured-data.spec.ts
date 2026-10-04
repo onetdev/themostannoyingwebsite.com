@@ -3,6 +3,7 @@ import { expect, type Page, test } from '@playwright/test';
 import { getAboutPage } from '../pages/AboutPage';
 import { getAchievementsPage } from '../pages/AchievementsPage';
 import { getArticlePage } from '../pages/ArticlePage';
+import { getAuthorPage } from '../pages/AuthorPage';
 import { getDonatePage } from '../pages/DonatePage';
 import { getHomePage } from '../pages/HomePage';
 import { getPlansPage } from '../pages/PlansPage';
@@ -99,6 +100,32 @@ test('article page exposes BlogPosting structured data', async ({ page }) => {
   expect(posting?.publisher).toEqual({
     '@id': 'https://www.themostannoyingwebsite.com/#organization',
   });
+});
+
+test('author profile exposes ProfilePage and Person structured data', async ({
+  page,
+}) => {
+  await setupE2eTestState(page);
+  const homePage = getHomePage(page);
+  await homePage.goto();
+  await homePage.coverArticle.locator('a').click();
+
+  const articlePage = getArticlePage(page);
+  await expect(articlePage.articleItem).toBeVisible();
+  await articlePage.articleItem.locator('a[href*="/authors/"]').click();
+
+  const authorPage = getAuthorPage(page);
+  await expect(authorPage.authorItem).toBeVisible();
+
+  const profile = findByType(await getJsonLdNodes(page), 'ProfilePage');
+
+  expect(profile).toBeDefined();
+  expect(profile?.['@id']).toMatch(/\/en\/authors\/[^/]+\/$/);
+  expect(profile?.inLanguage).toBe('en');
+
+  const person = profile?.mainEntity as Record<string, unknown> | undefined;
+  expect(person?.['@type']).toBe('Person');
+  expect(typeof person?.name).toBe('string');
 });
 
 test('search page is marked noindex', async ({ page }) => {
