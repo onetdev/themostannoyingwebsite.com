@@ -33,6 +33,7 @@
       "cache": false
     },
     "test": {
+      "dependsOn": ["build:metadata"],
       "cache": false
     },
     "test:e2e": {
