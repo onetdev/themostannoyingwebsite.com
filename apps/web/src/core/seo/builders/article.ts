@@ -18,6 +18,8 @@ export interface ArticleSeoInput {
   datePublished?: string;
   dateModified?: string;
   authorName?: string;
+  /** Root-relative author profile path, e.g. `authors/jane-doe`. */
+  authorPath?: string;
   keywords?: string[];
   articleSection?: string;
 }
@@ -27,6 +29,9 @@ export interface ArticleSeoInput {
  */
 export function buildArticle(input: ArticleSeoInput): WithContext<BlogPosting> {
   const url = absoluteUrl(input.baseUrl, input.locale, input.path);
+  const authorUrl = input.authorPath
+    ? absoluteUrl(input.baseUrl, input.locale, input.authorPath)
+    : undefined;
 
   return {
     '@context': 'https://schema.org',
@@ -45,7 +50,15 @@ export function buildArticle(input: ArticleSeoInput): WithContext<BlogPosting> {
     ...(input.datePublished ? { datePublished: input.datePublished } : {}),
     ...(input.dateModified ? { dateModified: input.dateModified } : {}),
     ...(input.authorName
-      ? { author: { '@type': 'Person', name: input.authorName } }
+      ? {
+          author: {
+            '@type': 'Person',
+            name: input.authorName,
+            ...(authorUrl
+              ? { '@id': `${authorUrl}#person`, url: authorUrl }
+              : {}),
+          },
+        }
       : {}),
     ...(input.keywords && input.keywords.length > 0
       ? { keywords: input.keywords.join(', ') }

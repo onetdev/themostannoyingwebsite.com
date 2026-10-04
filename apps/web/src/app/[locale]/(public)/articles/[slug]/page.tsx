@@ -122,6 +122,7 @@ export default async function Page({ params }: PageProps) {
     image: coverImages?.original,
     datePublished: datum.published_at,
     authorName: datum.author.name,
+    authorPath: `authors/${datum.author.slug}`,
     keywords: datum.keywords,
     articleSection: datum.tags?.[0],
   });

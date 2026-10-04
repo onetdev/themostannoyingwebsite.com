@@ -14,6 +14,10 @@ export default {
     published: 'Published at {date}',
     moreContentScroll: "There's more from the past, scroll!",
   },
+  author: {
+    byline: 'By <linkTag>{name}</linkTag>',
+    articlesTitle: 'Articles by {name}',
+  },
   search: {
     placeholder: 'Search...',
     noResults: 'No results found',
