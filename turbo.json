@@ -12,6 +12,9 @@
         "data/**"
       ]
     },
+    "format": {
+      "cache": false
+    },
     "lint:fix": {
       "dependsOn": ["^lint:fix"],
       "cache": false
@@ -30,6 +33,7 @@
       "cache": false
     },
     "test": {
+      "dependsOn": ["build:metadata"],
       "cache": false
     },
     "test:e2e": {
@@ -37,10 +41,12 @@
     }
   },
   "globalEnv": [
+    "ALLOW_LOCALES_FALLBACK",
     "ANALYZE",
     "CI",
     "GITHUB_TOKEN",
     "NEXT_PUBLIC_IS_DEV",
+    "NEXT_PUBLIC_CONTENT_API_URL",
     "NEXT_PUBLIC_SENTRY_CLIENT_DSN",
     "NEXT_PUBLIC_SENTRY_ENABLED",
     "NEXT_PUBLIC_SITE_URL",

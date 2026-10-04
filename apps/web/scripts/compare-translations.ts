@@ -2,8 +2,8 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { getLogger } from '@maw/logger';
-import { flatten } from '@maw/utils/flatten';
 import { Command } from 'commander';
+import i18nConfig from '../i18n.config';
 
 const logger = getLogger().getSubLogger({
   pretty: {
@@ -13,19 +13,13 @@ const logger = getLogger().getSubLogger({
 });
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
-const DEFAULT_MESSAGES_DIR = path.resolve(__dirname, '../src/i18n/messages');
 const DEFAULT_APP_DIR = path.resolve(__dirname, '../src/app');
 
 const program = new Command();
 
 program
   .name('compare-translations')
-  .description('Compare translation messages and MDX pages across locales')
-  .option(
-    '-m, --messages-dir <path>',
-    'Messages directory',
-    DEFAULT_MESSAGES_DIR,
-  )
+  .description('Compare localized MDX pages across locales')
   .option(
     '-a, --app-dir <path>',
     'App directory for MDX pages',
@@ -55,67 +49,13 @@ function findMdxPages(dir: string, results: string[] = []) {
 }
 
 async function main() {
-  const MESSAGES_DIR = options.messagesDir;
   const APP_DIR = options.appDir;
+  const locales = [...i18nConfig.allLocales];
 
-  const entries = fs.readdirSync(MESSAGES_DIR, { withFileTypes: true });
-  const locales = entries.filter((e) => e.isDirectory()).map((e) => e.name);
-
-  if (!locales.includes('en')) {
-    logger.error(`Error: 'en' directory not found in ${MESSAGES_DIR}`);
-    process.exit(1);
-  }
-
-  // --- Phase 1: Locale Messages ---
-  logger.info(`===================================`);
-  logger.info(`PHASE 1: Locale Messages Comparison`);
-  logger.info(`===================================`);
-
-  const enPath = path.join(MESSAGES_DIR, 'en/index.ts');
-  const enModule = await import(enPath);
-  const enFlattened = flatten(enModule.default);
-  const enKeys = Object.keys(enFlattened);
-  const enKeySet = new Set(enKeys);
-
-  logger.info(`Base locale: en (${enKeys.length} keys)`);
-
-  let messageIssues = 0;
-
-  for (const locale of locales.sort()) {
-    if (locale === 'en') continue;
-
-    try {
-      const localePath = path.join(MESSAGES_DIR, locale, 'index.ts');
-      const localeModule = await import(localePath);
-      const localeFlattened = flatten(localeModule.default);
-      const localeKeys = Object.keys(localeFlattened);
-      const localeKeySet = new Set(localeKeys);
-
-      const missingInLocale = enKeys.filter((k) => !localeKeySet.has(k));
-      const extraInLocale = localeKeys.filter((k) => !enKeySet.has(k));
-
-      if (missingInLocale.length === 0 && extraInLocale.length === 0) {
-        logger.info(`✅ ${locale.toUpperCase()}: Perfect match!`);
-      } else {
-        messageIssues++;
-        logger.warn(`❌ ${locale.toUpperCase()}: Found asymmetry`);
-        if (missingInLocale.length > 0) {
-          logger.warn(`   - Missing (${missingInLocale.length}):`);
-          for (const k of missingInLocale) logger.warn(`      - ${k}`);
-        }
-        if (extraInLocale.length > 0) {
-          logger.warn(`   + Extra (${extraInLocale.length}, not in English):`);
-          for (const k of extraInLocale) logger.warn(`      + ${k}`);
-        }
-      }
-    } catch (err) {
-      logger.error(`Error processing locale ${locale}`, err);
-    }
-  }
-
-  // --- Phase 2: MDX Pages ---
+  // Message bundles for non-English locales are served by the Content API, so
+  // only localized MDX pages are still compared here.
   logger.info(`===============================`);
-  logger.info(`PHASE 2: MDX Pages Availability`);
+  logger.info(`MDX Pages Availability`);
   logger.info(`===============================`);
 
   const mdxPagePaths = findMdxPages(APP_DIR);
@@ -153,10 +93,10 @@ async function main() {
     }
   }
 
-  if (messageIssues === 0 && mdxIssues === 0) {
-    logger.info(`🎉 All translation assets are synchronized!`);
+  if (mdxIssues === 0) {
+    logger.info(`🎉 All localized MDX pages are synchronized!`);
   } else {
-    logger.warn(`⚠️ Found issues in translation assets.`);
+    logger.warn(`⚠️ Found issues in localized MDX pages.`);
   }
 }
 

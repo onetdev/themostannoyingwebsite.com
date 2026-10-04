@@ -1,19 +1,50 @@
 export const isBrowser = () => typeof window !== 'undefined';
 
-export const getNotificationPermissionState = () =>
-  isBrowser() && 'Notification' in window ? Notification.permission : undefined;
+export const getNotificationPermissionState = ():
+  | NotificationPermission
+  | undefined => {
+  if (!isBrowser() || !('Notification' in window)) {
+    return undefined;
+  }
 
-export const requestNotificationPermission = async () => {
-  if (!isBrowser() || !('Notification' in window) || !navigator.serviceWorker)
-    return;
-
-  return await Notification.requestPermission();
+  try {
+    return Notification.permission;
+  } catch {
+    return undefined;
+  }
 };
 
-const hasBrowserPermissionSupport = () =>
-  isBrowser() && 'permissions' in navigator;
+export const requestNotificationPermission = async (): Promise<
+  NotificationPermission | undefined
+> => {
+  if (!isBrowser() || !('Notification' in window) || !navigator.serviceWorker) {
+    return undefined;
+  }
 
-export const getLocationPermissionState = async () =>
-  hasBrowserPermissionSupport()
-    ? (await navigator.permissions.query({ name: 'geolocation' })).state
-    : undefined;
+  try {
+    return await Notification.requestPermission();
+  } catch {
+    return undefined;
+  }
+};
+
+export const hasBrowserPermissionSupport = () =>
+  isBrowser() &&
+  typeof navigator !== 'undefined' &&
+  'permissions' in navigator &&
+  typeof navigator.permissions?.query === 'function';
+
+export const getLocationPermissionState = async (): Promise<
+  PermissionState | undefined
+> => {
+  if (!hasBrowserPermissionSupport()) {
+    return undefined;
+  }
+
+  try {
+    const status = await navigator.permissions.query({ name: 'geolocation' });
+    return status?.state;
+  } catch {
+    return undefined;
+  }
+};

@@ -157,7 +157,7 @@ const config: AppConfig = {
       appIcon: '/assets/appicon.png',
       bannerDefault: '/assets/banner-default.png',
       bannerGithub: '/assets/banner-github.png',
-      socialImage: '/assets/social.png',
+      socialImage: '/assets/banner-default.png',
     },
     socialLinks: {
       x: 'https://x.com/the_maw_og',

@@ -23,7 +23,7 @@ export function EmailField({ fieldName = 'email', required }: EmailFieldProps) {
   return (
     <Field>
       <FieldLabel htmlFor={fieldName} required={required}>
-        {t('userField.email')}
+        {t('common.userField.email')}
       </FieldLabel>
       <FieldContent>
         <Input

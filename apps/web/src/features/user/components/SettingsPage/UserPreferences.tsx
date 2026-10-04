@@ -16,8 +16,8 @@ import {
   SelectValue,
   Separator,
 } from '@maw/ui-lib';
+import { useTheme } from '@wrksz/themes/client';
 import { useLocale, useTranslations } from 'next-intl';
-import { useTheme } from 'next-themes';
 import { useLanguageSwitcher } from '@/hooks';
 import { useRuntimeStore, useUserPreferencesStore } from '@/stores';
 import { SettingsField } from './SettingsField';
@@ -42,7 +42,7 @@ export function UserPreferences() {
       <CardContent className="flex flex-col justify-between gap-3">
         <Field orientation="vertical" className="gap-2 pb-2">
           <FieldLabel className="text-sm font-normal">
-            {t('language.label')}
+            {t('common.language.label')}
           </FieldLabel>
           <FieldContent>
             <Select value={locale} onValueChange={onLanguageChange}>

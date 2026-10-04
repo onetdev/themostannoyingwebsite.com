@@ -5,4 +5,12 @@ export SENTRY_EDGE_DSN=https://{ID1}@{ID2}.ingest.de.sentry.io/{ID3}
 
 export NEXT_PUBLIC_IS_DEV=true
 
+# Overrides the headless Content API base URL for the app and build scripts.
+# Defaults to https://content.themostannoyingwebsite.com when unset.
+export NEXT_PUBLIC_CONTENT_API_URL=https://content.themostannoyingwebsite.com
+
+# Uncomment to let `build:locales` write the bundled English-only list instead
+# of failing the build when the Content API is unreachable.
+# export ALLOW_LOCALES_FALLBACK=true
+
 export ASDF_NODEJS_AUTO_ENABLE_COREPACK=true

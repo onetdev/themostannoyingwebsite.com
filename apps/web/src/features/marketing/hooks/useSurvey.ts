@@ -38,9 +38,10 @@ export function useSurvey({ timeLimitInSeconds }: UseSurveryParams) {
   }, [storeComplete, timeLimitInSeconds, isCompleted]);
 
   const next = () => {
+    const selected = questionData.options[progression.selected];
     const isCorrect =
       typeof questionData.solution === 'undefined' ||
-      questionData.options[progression.selected] === questionData.solution;
+      selected?.id === questionData.solution;
 
     const updatedAnswers = [...progression.answers, isCorrect];
 

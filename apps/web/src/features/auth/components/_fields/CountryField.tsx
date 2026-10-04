@@ -51,7 +51,7 @@ export function CountryField({
   return (
     <Field>
       <FieldLabel htmlFor={fieldName} required={required}>
-        {t('userField.countryCode')}
+        {t('common.userField.countryCode')}
       </FieldLabel>
       <FieldContent>
         <Controller
@@ -62,7 +62,7 @@ export function CountryField({
               <SelectTrigger
                 className="w-full"
                 id={fieldName}
-                aria-label={t('userField.countryCode')}
+                aria-label={t('common.userField.countryCode')}
                 aria-invalid={fieldState.invalid}
               >
                 <SelectValue placeholder="" />

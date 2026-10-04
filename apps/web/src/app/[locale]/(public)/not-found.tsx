@@ -12,8 +12,8 @@ export default function NotFoundPage() {
   const t = useTranslations();
   return (
     <PageLayout role="main">
-      <h1>{t('messages.errors.e404title')}</h1>
-      <h3>{t('messages.errors.e404description')}</h3>
+      <h1>{t('common.messages.errors.e404title')}</h1>
+      <h3>{t('common.messages.errors.e404description')}</h3>
     </PageLayout>
   );
 }

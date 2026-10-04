@@ -31,7 +31,7 @@ export function ConsentChildSoulField({
         className="font-semibold"
         required={required}
       >
-        {t('userField.consentChildSoul')}
+        {t('common.userField.consentChildSoul')}
       </FieldLabel>
     </Field>
   );

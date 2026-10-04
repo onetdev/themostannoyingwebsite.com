@@ -73,7 +73,7 @@ export function HotThingsPage() {
 
   return (
     <>
-      <PageHeadline>{t('navigation.hotThings')}</PageHeadline>
+      <PageHeadline>{t('common.navigation.hotThings')}</PageHeadline>
       <div className="pb-16per9 relative overflow-hidden">
         <Image
           className="absolute h-auto w-full"

@@ -13,7 +13,12 @@ const mockArticleItem = {
   title: 'Test Article',
   summary: 'Test summary',
   content: '# Hello\n\nThis is content.',
-  author: 'Author',
+  author: {
+    id: '00000000-0000-0000-0000-0000000000a1',
+    slug: 'author',
+    name: 'Author',
+    persona: 'The Author',
+  },
   published_at: '2026-09-01T12:00:00.000Z',
   reading_time_minutes: 2,
   is_featured: true,

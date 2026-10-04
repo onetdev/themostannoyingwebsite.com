@@ -1,7 +1,7 @@
 import {
-  type ListTagsQueryParams,
-  ListTagsResponse,
-  type ListTagsResponse as ListTagsResponseType,
+  type GetTagListQueryParams,
+  GetTagListResponse,
+  type GetTagListResponse as GetTagListResponseType,
 } from '../../generated/endpoints';
 import type { HttpTransport } from '../http';
 import type { RequestOptions } from '../types';
@@ -13,13 +13,13 @@ export class TagsResource {
    * Retrieves a paginated list of distinct tags across articles, including usage counts.
    */
   public async list(
-    params?: ListTagsQueryParams,
+    params?: GetTagListQueryParams,
     options?: RequestOptions,
-  ): Promise<ListTagsResponseType> {
+  ): Promise<GetTagListResponseType> {
     return this.transport.get(
       'api/v1/tags',
       params as Record<string, unknown> | undefined,
-      ListTagsResponse,
+      GetTagListResponse,
       options,
     );
   }

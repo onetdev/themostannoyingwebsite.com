@@ -13,9 +13,9 @@ This will need quie a few deps but I guess it is what it is. Please keep the `@c
 ```bash
 pnpm i -D \
   @maw/config-jest \
-  @types/jest@catalog:
+  @types/jest@catalog: \
   jest@catalog: \
-  typescript@catalog: \
+  typescript@catalog:
 ```
 
 ### 2. Add config

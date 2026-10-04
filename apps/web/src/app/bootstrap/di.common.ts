@@ -1,5 +1,5 @@
-import { createContentClient } from '@maw/content-sdk';
 import type { Container } from 'inversify';
+import { createAppContentClient } from '@/core/content';
 import { CoreSymbols } from '@/core/di/symbols';
 import { HttpClient } from '@/core/http/HttpClient';
 import { AchievementBankService } from '@/features/achievements/services';
@@ -36,7 +36,7 @@ export function configureCommonContainer(container: Container) {
   container.bind(Symbols.HttpClient).to(HttpClient).inSingletonScope();
   container
     .bind(Symbols.ContentApiClient)
-    .toDynamicValue(() => createContentClient())
+    .toDynamicValue(() => createAppContentClient())
     .inSingletonScope();
   container.bind(Symbols.AppService).to(AppService).inSingletonScope();
   container

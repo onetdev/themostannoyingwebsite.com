@@ -28,7 +28,7 @@ export function ConsentNewsletterField({
         required={required}
         aria-invalid={!!errors[fieldName]}
       >
-        {t('userField.consentNewsletter')}
+        {t('common.userField.consentNewsletter')}
       </FieldLabel>
     </Field>
   );

@@ -28,7 +28,7 @@ export function NicknameField({
   return (
     <Field>
       <FieldLabel htmlFor={fieldName} required={required}>
-        {t('userField.nickname')}
+        {t('common.userField.nickname')}
       </FieldLabel>
       <FieldContent>
         <Input

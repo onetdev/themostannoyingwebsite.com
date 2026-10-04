@@ -27,18 +27,32 @@ export function useSearch() {
 
   const onRecommendedClick = (query: string) => {
     if (typeof window !== 'undefined') {
-      window.location.hash = `query=${query}`;
+      window.history.replaceState(null, '', `?q=${encodeURIComponent(query)}`);
     }
     setQuery(query);
   };
 
   useEffect(() => {
-    if (typeof window !== 'undefined') {
-      const queryParams = new URLSearchParams(
+    if (typeof window === 'undefined') {
+      return;
+    }
+
+    const readQueryFromUrl = () => {
+      const searchParams = new URLSearchParams(window.location.search);
+      const hashParams = new URLSearchParams(
         window.location.hash?.replace(/^#/, ''),
       );
-      setQuery(queryParams.get('query') ?? '');
-    }
+      // `?q=` is the canonical form (also used by the SearchAction); the
+      // `#query=` fragment stays supported for older links.
+      return searchParams.get('q') ?? hashParams.get('query') ?? '';
+    };
+
+    const handlePopState = () => setQuery(readQueryFromUrl());
+
+    setQuery(readQueryFromUrl());
+    window.addEventListener('popstate', handlePopState);
+
+    return () => window.removeEventListener('popstate', handlePopState);
   }, []);
 
   return {

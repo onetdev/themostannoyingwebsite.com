@@ -70,7 +70,7 @@ Examples:
 ```
 features/
 user
-settings
+funding
 comments
 achievements
 ```
@@ -95,7 +95,7 @@ Reusable React hooks that are not tied to a single feature.
 
 ### `i18n`
 
-Global translation messages (`index.ts`, `metadata.ts`, `variants.ts`).
+Global translation messages (`src/i18n/messages/en/`: `index.ts`, `common.ts`, `metadata.ts`).
 
 ### `schemas`
 
@@ -134,6 +134,7 @@ Shared configuration presets (TypeScript, Jest, etc).
 Strongly typed client SDK used to retrieve:
 
 - articles
+- authors
 - static pages
 - taxonomy tags
 - responsive image variants

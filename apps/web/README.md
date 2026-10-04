@@ -8,7 +8,7 @@ The application is organized into several distinct layers to ensure maintainabil
 
 - `src/app/`: Next.js App Router structure, handling global layouts, routing, and server-side metadata generation. It includes `src/app/bootstrap/` for global providers (DI, QueryClient, Themes) and initialization logic.
 - `src/core/`: Application-wide infrastructure (HTTP client, config, events, navigation, DI primitives).
-- `src/features/`: Domain-specific modules (e.g., `auth`, `donation`, `disruptions`). Each feature encapsulates its own components (including full-page UI), hooks, services, repositories, and translation data.
+- `src/features/`: Domain-specific modules (e.g., `auth`, `funding`, `disruptions`). Each feature encapsulates its own components (including full-page UI), hooks, services, repositories, and translation data.
 - `src/services/`: Global business logic layer (e.g., `AppService`, `AppConfigService`), managed via Dependency Injection.
 - `src/i18n/`: Global translations and metadata labels.
 - `src/stores/`: Lightweight state stores using Zustand for shared client-side state.
@@ -33,7 +33,7 @@ src/features/[feature-name]/
 - **Aggregation**: For multi-file components, compose them within a separate folder and expose only the non-internal parts.
 - **Encapsulation**: Keep feature-specific logic within its own directory to minimize coupling.
 - **Dependency Injection**: Implement business logic in `services/` and register them if they need to be injectable or mocked.
-- **Shared UI**: If a component is used by multiple features, move it to `src/app/_components/` or the `@maw/ui-lib` package.
+- **Shared UI**: If a component is used by multiple features, move it to `src/app/[locale]/(public)/_components/` or the `@maw/ui-lib` package.
 - **Documentation**: Every feature must include a `README.md` providing a brief overview of its responsibilities.
 
 ## Monorepo Integration

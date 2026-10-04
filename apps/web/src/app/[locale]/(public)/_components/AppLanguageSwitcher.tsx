@@ -23,7 +23,7 @@ export function AppLanguageSwitcher({
   const { onLanguageChange, languages, currentLanguage } =
     useLanguageSwitcher();
   const locale = useLocale();
-  const t = useTranslations('language');
+  const t = useTranslations('common.language');
 
   return (
     <Select value={locale} onValueChange={onLanguageChange}>

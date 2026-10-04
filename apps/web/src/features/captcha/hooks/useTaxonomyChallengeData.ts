@@ -1,14 +1,33 @@
 'use client';
 
-import { randomBool, randomInt } from '@maw/utils/random';
+import { randomArrayEntry, randomBool } from '@maw/utils/random';
 import { useCallback, useEffect, useMemo, useState } from 'react';
-import { useAppConfigContext } from '@/core/react';
+import { useAppConfigContext } from '@/core/config/react/AppConfig';
 import type { SpriteConfig } from '../schemas';
 import type { TaxonomyEntryMeta } from '../types';
 
 export interface TaxonomyChallengeProps {
   cols: number;
   rows: number;
+}
+
+export interface TileCoordinates {
+  asset: SpriteConfig;
+  row: number;
+  col: number;
+}
+
+/**
+ * Precomputes the full pool of cell coordinates across all sprite sheets.
+ */
+export function buildTilePool(sprites: SpriteConfig[]): TileCoordinates[] {
+  return sprites.flatMap((sprite) =>
+    Array.from({ length: sprite.rows * sprite.columns }, (_, i) => ({
+      asset: sprite,
+      row: Math.floor(i / sprite.columns),
+      col: i % sprite.columns,
+    })),
+  );
 }
 
 export function useTaxonomyChallengeData({
@@ -23,48 +42,56 @@ export function useTaxonomyChallengeData({
     },
   } = useAppConfigContext();
 
-  const poolLength = useMemo(
-    () =>
-      taxonomyChallengeSprites.reduce(
-        (acc, item) => acc + item.columns * item.rows,
-        0,
-      ),
+  const tilePool = useMemo(
+    () => buildTilePool(taxonomyChallengeSprites),
     [taxonomyChallengeSprites],
   );
 
-  const getRandomItem = useCallback(() => {
-    const globalIndex = randomInt(0, poolLength);
-    const details = resolveIndex(taxonomyChallengeSprites, globalIndex);
+  const getRandomItem = useCallback((): TaxonomyEntryMeta | null => {
+    const tile = randomArrayEntry(tilePool);
+    if (!tile) {
+      return null;
+    }
 
     return {
-      asset: taxonomyChallengeSprites[details.assetIndex],
-      col: details.col,
+      asset: tile.asset,
+      row: tile.row,
+      col: tile.col,
       isValid: randomBool(),
-      row: details.row,
       isSelected: false,
     };
-  }, [poolLength, taxonomyChallengeSprites]);
+  }, [tilePool]);
 
   useEffect(() => {
-    if (poolLength === 0) {
+    if (tilePool.length === 0) {
       return;
     }
 
     const initialTiles: TaxonomyEntryMeta[] = [];
     const itemsLimit = cols * rows;
     for (let i = 0; i < itemsLimit; i++) {
-      initialTiles.push(getRandomItem());
+      const item = getRandomItem();
+      if (item) {
+        initialTiles.push(item);
+      }
     }
     setItems(initialTiles);
-  }, [cols, poolLength, rows, getRandomItem]);
+  }, [cols, rows, tilePool.length, getRandomItem]);
 
   const handleSelect = (index: number) => {
     const item = items[index];
+    if (!item) {
+      return;
+    }
+
     const newSelected = !item.isSelected;
     const newTiles = [...items];
 
     if (item.isValid && newSelected) {
-      newTiles[index] = getRandomItem();
+      const nextItem = getRandomItem();
+      if (nextItem) {
+        newTiles[index] = nextItem;
+      }
       setValidCount((prev) => prev + 1);
     } else {
       newTiles[index] = { ...item, isSelected: newSelected };
@@ -79,31 +106,4 @@ export function useTaxonomyChallengeData({
     validCount,
     handleSelect,
   };
-}
-
-type IndexResult = {
-  assetIndex: number;
-  row: number;
-  col: number;
-};
-
-function resolveIndex(files: SpriteConfig[], globalIndex: number): IndexResult {
-  let accumulated = 0;
-
-  for (let i = 0; i < files.length; i++) {
-    const { rows, columns } = files[i];
-    const size = rows * columns;
-
-    if (globalIndex < accumulated + size) {
-      const localIndex = globalIndex - accumulated;
-      const row = Math.floor(localIndex / columns);
-      const col = localIndex % columns;
-
-      return { assetIndex: i, row, col };
-    }
-
-    accumulated += size;
-  }
-
-  throw new Error('Index out of bounds');
 }

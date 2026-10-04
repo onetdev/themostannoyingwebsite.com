@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
-import { getTranslations } from 'next-intl/server';
+import { getLocale, getTranslations } from 'next-intl/server';
+import { WebPageStructuredData } from '@/core/seo';
 import { HotThingsPage } from '@/features/content/components';
 import { PageLayout } from '../_components/PageLayout';
 
@@ -19,9 +20,16 @@ export async function generateMetadata({
   };
 }
 
-export default function Page() {
+export default async function Page() {
+  const locale = (await getLocale()) as AppLocale;
+
   return (
     <PageLayout route="hot-things" role="main">
+      <WebPageStructuredData
+        locale={locale}
+        path="hot-things"
+        namespace="metadata.hotThings"
+      />
       <HotThingsPage />
     </PageLayout>
   );

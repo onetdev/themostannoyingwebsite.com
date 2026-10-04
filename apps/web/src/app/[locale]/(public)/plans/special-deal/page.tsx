@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import { getTranslations } from 'next-intl/server';
+import { NOINDEX_ROBOTS } from '@/core/seo/robots';
 import { SpecialUnsubscriptionDeal } from '@/features/subscription/components';
 import { PageLayout } from '../../_components/PageLayout';
 
@@ -17,6 +18,7 @@ export async function generateMetadata({
   return {
     title: t('title'),
     description: t('description'),
+    robots: NOINDEX_ROBOTS,
   };
 }
 

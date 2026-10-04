@@ -6,9 +6,17 @@ export const DEFAULT_TIMEOUT_MS = 10_000;
 export const CONTENT_CACHE_TAGS = {
   all: 'content:*',
   articles: 'content:articles',
+  authors: 'content:authors',
   pages: 'content:pages',
   tags: 'content:tags',
   images: 'content:images',
+  locales: 'content:locales',
+  translations: 'content:translations',
+  pools: 'content:pools',
+  survey: 'content:survey',
+  prizeWheel: 'content:prize-wheel',
+  newsletter: 'content:newsletter',
+  spamSample: 'content:spam-sample',
 } as const;
 
 export interface ContentClientOptions {

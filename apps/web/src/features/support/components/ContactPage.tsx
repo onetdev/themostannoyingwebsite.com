@@ -17,16 +17,16 @@ export async function ContactPage() {
   return (
     <>
       <PageHeadline className="mx-auto w-full max-w-screen-lg">
-        {t('navigation.contact')}
+        {t('common.navigation.contact')}
       </PageHeadline>
 
       <div className="mx-auto mt-10 grid w-full max-w-screen-lg grid-cols-1 gap-10 lg:grid-cols-2 lg:gap-16">
         <div className="flex flex-col gap-6">
           <p className="text-xl leading-relaxed">
-            {t('app.contactForm.intro')}
+            {t('common.app.contactForm.intro')}
           </p>
           <p className="text-muted-foreground text-base">
-            {t.rich('app.contactForm.reportIssues', {
+            {t.rich('common.app.contactForm.reportIssues', {
               linkTag: (chunks) => (
                 <a
                   href={`${githubUrl}/issues`}
@@ -42,7 +42,7 @@ export async function ContactPage() {
           <div className="hidden lg:block">
             <Separator className="my-4" />
             <p className="text-muted-foreground text-sm italic">
-              {t.rich('app.contactForm.alternative', {
+              {t.rich('common.app.contactForm.alternative', {
                 email: contactEmail,
                 linkTag: (chunks) => (
                   <a
@@ -60,7 +60,7 @@ export async function ContactPage() {
         <div className="flex flex-col gap-6">
           <Card className="w-full">
             <CardHeader>
-              <CardTitle>{t('app.contactForm.title')}</CardTitle>
+              <CardTitle>{t('common.app.contactForm.title')}</CardTitle>
             </CardHeader>
             <CardContent>
               <ContactForm contactEmail={contactEmail} />
@@ -69,7 +69,7 @@ export async function ContactPage() {
 
           <div className="lg:hidden">
             <p className="text-muted-foreground text-center text-sm italic">
-              {t.rich('app.contactForm.alternative', {
+              {t.rich('common.app.contactForm.alternative', {
                 email: contactEmail,
                 linkTag: (chunks) => (
                   <a

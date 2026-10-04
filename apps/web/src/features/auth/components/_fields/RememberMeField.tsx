@@ -27,7 +27,7 @@ export function RememberMeField({
         aria-invalid={!!errors[fieldName]}
       />
       <FieldLabel htmlFor={fieldName} required={required}>
-        {t('userField.rememberMe')}
+        {t('common.userField.rememberMe')}
       </FieldLabel>
     </Field>
   );

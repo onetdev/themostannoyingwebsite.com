@@ -8,7 +8,7 @@ This package provides a strongly-typed HTTP client powered by **`ky`**, with ful
 
 ## 📦 Features
 
-- **Resource-Oriented Client**: Ergonomic namespaces: `client.articles`, `client.pages`, `client.tags`, `client.images`, `client.health`.
+- **Resource-Oriented Client**: Ergonomic namespaces: `client.articles`, `client.authors`, `client.pages`, `client.tags`, `client.images`, `client.health`, `client.locales`, `client.translations`, `client.pools`, `client.survey`, `client.prizeWheel`, `client.newsletter`, `client.spamSample`.
 - **Ky HTTP Engine**: Built-in prefix URL handling, automatic query serialization, timeouts, and configurable exponential retry.
 - **Next.js App Router Compatible**: Pass Next.js fetch options (`next: { revalidate, tags }`, `cache`) directly in request options.
 - **Typed Error Hierarchy**: Automatic translation of OpenAPI error responses into `ContentApiNotFoundError`, `ContentApiValidationError`, `ContentApiCorsError`, `ContentApiServerError`.
@@ -39,6 +39,11 @@ const customClient = new ContentApiClient({
 });
 ```
 
+The base URL defaults to `https://content.themostannoyingwebsite.com` and can be
+overridden with the `NEXT_PUBLIC_CONTENT_API_URL` environment variable. This
+works in the browser, on the server, and in build scripts, since Next.js inlines
+`NEXT_PUBLIC_*` variables at build time.
+
 ---
 
 ## 📖 API Usage
@@ -62,7 +67,20 @@ const article = await client.articles.getBySlug('how-to-win-every-argument', {
 });
 
 console.log(article.title);
+console.log(article.author.name); // resolved author byline (AuthorRef)
 console.log(article.translations); // [{ lang: 'de', slug: '...', title: '...' }]
+```
+
+### Authors
+
+```typescript
+// List authors with their public byline, persona, and biography
+const { items } = await client.authors.list({ lang: 'en', limit: 20 });
+
+// Fetch a single author by slug
+const author = await client.authors.getBySlug('rage-farmer', { lang: 'en' });
+
+console.log(author.name, author.persona, author.about);
 ```
 
 ### Pages
@@ -83,6 +101,23 @@ const tags = await client.tags.list({ lang: 'en' });
 
 // List image assets and responsive dimensions
 const images = await client.images.list({ limit: 20 });
+```
+
+### Pools & Dedicated Content
+
+Generic string pools are flat string arrays; structured content lives behind dedicated
+resources. Both are always complete and cacheable (no pagination or randomization).
+
+```typescript
+// Catalog of available string pools, then a single pool's items
+const catalog = await client.pools.getCatalog('en');
+const { items: names } = await client.pools.getByType('en', 'names');
+
+// Structured resources (stable IDs + API-supplied behavior)
+const { questions } = await client.survey.getQuestions('en');
+const { segments } = await client.prizeWheel.getSegments('en'); // weight + starred
+const { steps } = await client.newsletter.getSteps('en');
+const { samples } = await client.spamSample.list('en');
 ```
 
 ### Health Check
@@ -159,6 +194,14 @@ To fetch the latest OpenAPI JSON from the remote server and regenerate Zod schem
 
 ```bash
 pnpm --filter @maw/content-sdk generate
+```
+
+By default the spec is pulled from the deployed Content API. Point it at a local
+`pnpm dev` server (or any other spec) without editing the config:
+
+```bash
+CONTENT_OPENAPI_URL=http://localhost:3000/docs/json \
+  pnpm --filter @maw/content-sdk generate
 ```
 
 ---

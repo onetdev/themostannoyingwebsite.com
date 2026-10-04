@@ -28,7 +28,7 @@ export function PasswordConfirmationField({
   return (
     <Field>
       <FieldLabel htmlFor={fieldName} required={required}>
-        {t('userField.passwordConfirmation')}
+        {t('common.userField.passwordConfirmation')}
       </FieldLabel>
       <FieldContent>
         <Input
