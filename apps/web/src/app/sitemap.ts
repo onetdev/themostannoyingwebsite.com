@@ -46,6 +46,20 @@ const commonPageMeta = (path: string): MetadataRoute.Sitemap[0] => {
 };
 
 /**
+ * Sitemap entry for a locale-independent author profile. Unlike the daily
+ * landing pages, profiles change infrequently.
+ */
+const authorPageMeta = (path: string): MetadataRoute.Sitemap[0] => {
+  return {
+    url: absoluteUrl(config.publicUrl, i18nConfig.defaultLocale, path),
+    changeFrequency: 'weekly',
+    alternates: {
+      languages: genLangAlternates(path),
+    },
+  };
+};
+
+/**
  * Groups localized articles by their canonical `article_group` so each logical
  * article is emitted once per locale with a complete `hreflang` alternates map
  * (including `x-default`), instead of isolated per-locale entries.
@@ -99,7 +113,7 @@ async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const authorService = await getAuthorService(di);
   const authorsList = await authorService.listAll();
   const authors = authorsList.map((author) =>
-    commonPageMeta(`authors/${author.slug}`),
+    authorPageMeta(`authors/${author.slug}`),
   );
 
   const commonPages = [
