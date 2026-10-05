@@ -14,6 +14,10 @@ export const getDonatePage = (page: Page) => {
       name: 'Total Support Received',
     }),
     donationBalance: page.getByTestId('donation-balance'),
+    impactStatsHeading: page.getByRole('heading', {
+      name: 'Impact in numbers',
+    }),
+    impactStatsChart: page.getByTestId('impact-stats-chart'),
     buyMeACoffeeButton: page.getByRole('link', { name: 'Buy Me A Coffee' }),
     payPalButton: page.getByRole('link', { name: 'PayPal' }),
     cryptoWalletList: page.getByTestId('crypto-wallet-list'),

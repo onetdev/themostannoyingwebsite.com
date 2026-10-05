@@ -11,6 +11,27 @@ export default {
   topSupporterKidney: '🥇 Kidney',
   topSupporterLiver: '🥈 Liver',
   topSupporterHeart: '🥉 Heart',
+  impactStats: {
+    heading: 'Impact in numbers',
+    description:
+      'A completely made-up look at what your money (and lack thereof) has achieved. The bar chart is 100% real statistics from an imaginary accountant.',
+    chart: {
+      title: 'Support received vs. running costs',
+      description:
+        'The last six months, according to a spreadsheet I refuse to open. Watch the hole get deeper.',
+    },
+    series: {
+      received: 'Support received',
+      spent: 'Running costs',
+    },
+    items: {
+      burntThisMonth: 'Burnt this month',
+      kebabsFunded: 'Kebabs funded',
+      coffeesConsumed: 'Coffees consumed',
+      ductTapeUsed: 'Duct tape used',
+      bugsShippedAsFeatures: 'Bugs shipped as features',
+    },
+  },
   totalSupportReceived: 'Total Support Received',
   classicMethods: 'Classic methods',
   buyMeACoffee: 'Buy Me A Coffee',
