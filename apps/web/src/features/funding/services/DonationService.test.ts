@@ -1,6 +1,5 @@
 import 'reflect-metadata';
 import { Container } from 'inversify';
-import type { DonationBalanceConfig } from '../types';
 import { DI } from '../types';
 import { DonationService, getDonationService } from './DonationService';
 
@@ -110,115 +109,6 @@ describe('DonationService', () => {
       // This test just ensures the method doesn't throw without a date
       const result = service.shouldShowBeggingBanner();
       expect(typeof result).toBe('boolean');
-    });
-  });
-
-  describe('calculateBalance', () => {
-    const baseConfig: DonationBalanceConfig = {
-      costStartEpoch: 1704067200, // 2024-01-01 00:00:00 UTC
-      costDailyAvgInEuro: 10,
-      totalDonationInEuro: 500,
-    };
-
-    it('should return total donations when no time has elapsed', () => {
-      const balance = service.calculateBalance(
-        baseConfig,
-        baseConfig.costStartEpoch,
-      );
-
-      expect(balance).toBe(500);
-    });
-
-    it('should calculate balance after 1 day', () => {
-      const oneDayLater = baseConfig.costStartEpoch + 24 * 60 * 60;
-      const balance = service.calculateBalance(baseConfig, oneDayLater);
-
-      // 500 - 10 = 490 (floored)
-      expect(balance).toBe(490);
-    });
-
-    it('should calculate balance after 10 days', () => {
-      const tenDaysLater = baseConfig.costStartEpoch + 10 * 24 * 60 * 60;
-      const balance = service.calculateBalance(baseConfig, tenDaysLater);
-
-      // 500 - 100 = 400
-      expect(balance).toBe(400);
-    });
-
-    it('should calculate balance after 50 days (balance becomes zero)', () => {
-      const fiftyDaysLater = baseConfig.costStartEpoch + 50 * 24 * 60 * 60;
-      const balance = service.calculateBalance(baseConfig, fiftyDaysLater);
-
-      // 500 - 500 = 0
-      expect(balance).toBe(0);
-    });
-
-    it('should calculate negative balance when costs exceed donations', () => {
-      const sixtyDaysLater = baseConfig.costStartEpoch + 60 * 24 * 60 * 60;
-      const balance = service.calculateBalance(baseConfig, sixtyDaysLater);
-
-      // 500 - 600 = -100
-      expect(balance).toBe(-100);
-    });
-
-    it('should floor the cumulative cost', () => {
-      // 1.5 days elapsed
-      const oneAndHalfDaysLater =
-        baseConfig.costStartEpoch + 1.5 * 24 * 60 * 60;
-      const balance = service.calculateBalance(baseConfig, oneAndHalfDaysLater);
-
-      // Elapsed: 1.5 days
-      // Cost: 1.5 * 10 = 15 (as negative: -15)
-      // Floor(-15) = -15
-      // Balance: -15 + 500 = 485
-      expect(balance).toBe(485);
-    });
-
-    it('should use current time when no time is provided', () => {
-      const balanceNow = service.calculateBalance(baseConfig);
-
-      // Just verify it's a number and reasonable
-      expect(typeof balanceNow).toBe('number');
-      // Should be less than initial donation since time has passed
-      expect(balanceNow).toBeLessThanOrEqual(baseConfig.totalDonationInEuro);
-    });
-
-    it('should handle different daily costs', () => {
-      const configHighCost: DonationBalanceConfig = {
-        ...baseConfig,
-        costDailyAvgInEuro: 50,
-      };
-
-      const oneDayLater = baseConfig.costStartEpoch + 24 * 60 * 60;
-      const balance = service.calculateBalance(configHighCost, oneDayLater);
-
-      // 500 - 50 = 450
-      expect(balance).toBe(450);
-    });
-
-    it('should handle fractional days correctly', () => {
-      // 12 hours (0.5 days)
-      const halfDayLater = baseConfig.costStartEpoch + 12 * 60 * 60;
-      const balance = service.calculateBalance(baseConfig, halfDayLater);
-
-      // 0.5 days * 10 = 5 (as negative: -5)
-      // Floor(-5) = -5
-      // Balance: -5 + 500 = 495
-      expect(balance).toBe(495);
-    });
-
-    it('should calculate correctly with different start epochs', () => {
-      const configFutureStart: DonationBalanceConfig = {
-        costStartEpoch: 1735689600, // 2025-01-01 00:00:00 UTC
-        costDailyAvgInEuro: 10,
-        totalDonationInEuro: 1000,
-      };
-
-      const oneDayLater = configFutureStart.costStartEpoch + 24 * 60 * 60;
-      const balance = service.calculateBalance(configFutureStart, oneDayLater);
-
-      // 1000 - 10 = 990
-      expect(balance).toBe(990);
     });
   });
 });

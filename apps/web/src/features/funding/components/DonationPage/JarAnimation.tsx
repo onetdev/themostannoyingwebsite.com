@@ -5,16 +5,17 @@ import {
   type DotLottieReactProps,
 } from '@lottiefiles/dotlottie-react';
 import { useAppConfigContext } from '@/core/react';
-import { useDonationBalance } from '../../hooks';
 
-export type JarAnimationProps = Omit<
+export type JarAnimationProps = {
+  /** Current donation balance; negative reverses the animation. */
+  balance: number;
+} & Omit<
   DotLottieReactProps,
   'src' | 'loop' | 'autoplay' | 'mode' | 'className' | 'renderConfig'
 >;
 
-export function JarAnimation(props: JarAnimationProps) {
+export function JarAnimation({ balance, ...props }: JarAnimationProps) {
   const config = useAppConfigContext();
-  const balance = useDonationBalance();
 
   return (
     <DotLottieReact

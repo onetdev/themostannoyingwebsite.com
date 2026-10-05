@@ -1,13 +1,19 @@
 'use client';
 
 import { type ComponentProps, useEffect, useState } from 'react';
-import { useDonationBalance } from '../../hooks';
 import { SlotDigit } from './SlotDigit';
 
-export type DonationCounterProps = ComponentProps<'div'>;
+export type DonationCounterProps = {
+  /** Current donation balance in the response currency. */
+  balance: number;
+} & ComponentProps<'div'>;
 
-export function DonationCounter({ className, ...rest }: DonationCounterProps) {
-  const amount = useDonationBalance();
+export function DonationCounter({
+  balance,
+  className,
+  ...rest
+}: DonationCounterProps) {
+  const amount = balance;
   const currency = '$';
   const [showNegative, setShowNegative] = useState(false);
 

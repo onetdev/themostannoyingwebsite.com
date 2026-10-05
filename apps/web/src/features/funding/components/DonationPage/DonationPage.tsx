@@ -1,7 +1,9 @@
+import type { LanguageCode } from '@maw/content-sdk';
 import { Button } from '@maw/ui-lib';
-import { getTranslations } from 'next-intl/server';
+import { getLocale, getTranslations } from 'next-intl/server';
 import { Link } from '@/core/i18n/navigation';
 import { getAppConfigService } from '@/services';
+import { getDonationSummary } from '../../services';
 import { CryptoWalletList } from './CryptoWalletList';
 import { DonationCounter } from './DonationCounter';
 import { ImpactStats } from './ImpactStats';
@@ -11,7 +13,10 @@ export { generateStaticParams } from '@/core/i18n/routing';
 
 export async function DonationPage() {
   const { funding } = getAppConfigService().getAll();
+  const locale = (await getLocale()) as LanguageCode;
   const t = await getTranslations();
+  const donationSummary = await getDonationSummary(locale);
+  const balance = donationSummary?.totals.balance ?? 0;
 
   const tRich = (key: AppTranslationKey) =>
     t.rich(key, {
@@ -25,7 +30,7 @@ export async function DonationPage() {
           <p className="my-5 max-w-screen-md">{tRich('funding.description')}</p>
           <h2 className="py-5">{tRich('funding.moneyUsageHeading')}</h2>
           <p>{t('funding.moneyUsageDescription')}</p>
-          <JarAnimation data-testid="jar-animation" />
+          <JarAnimation balance={balance} data-testid="jar-animation" />
           <h2 className="py-5">{t('funding.topSupporters')}</h2>
           <p className="pb-5">{t('funding.topSupportersDescription')}</p>
           <h4>{t('funding.topSupporterKidney')}</h4>
@@ -34,7 +39,7 @@ export async function DonationPage() {
         </div>
         <div className="lg:w-1/2">
           <h2 className="py-5">{t('funding.totalSupportReceived')}</h2>
-          <DonationCounter data-testid="donation-balance" />
+          <DonationCounter balance={balance} data-testid="donation-balance" />
 
           <h2 className="pt-8">{t('funding.classicMethods')}</h2>
           <div className="my-5 flex w-full max-w-screen-md flex-col justify-center gap-3 md:flex-row">
