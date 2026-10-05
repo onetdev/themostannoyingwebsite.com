@@ -17,6 +17,7 @@ export const CONTENT_CACHE_TAGS = {
   prizeWheel: 'content:prize-wheel',
   newsletter: 'content:newsletter',
   spamSample: 'content:spam-sample',
+  donation: 'content:donation',
 } as const;
 
 export interface ContentClientOptions {

@@ -3,7 +3,7 @@
  * Do not edit manually.
  * The Most Annoying Website - Headless Content API
  * REST API serving multi-language YAML articles, authors, static pages, tags, UI translation bundles, dynamic content pools, and transformed raster image assets from SQLite.
- * OpenAPI spec version: 1.2.0
+ * OpenAPI spec version: 1.3.0
  */
 import * as zod from 'zod';
 
@@ -714,6 +714,104 @@ export type TranslationDetailResponse = zod.input<
 >;
 export type TranslationDetailResponseOutput = zod.output<
   typeof TranslationDetailResponse
+>;
+
+export const donationSummaryResponseMonthlyItemMonthRegExp =
+  /^\d{4}-(0[1-9]|1[0-2])$/;
+export const donationSummaryResponseMonthlyItemDonationsMin = 0;
+
+export const donationSummaryResponseMonthlyItemExpensesMin = 0;
+
+export const donationSummaryResponseStatsItemTrendPercentMin = 0;
+
+export const DonationSummaryResponse = zod
+  .object({
+    lang: LanguageCode.and(zod.unknown().describe('ISO language code')),
+    currency: zod
+      .string()
+      .describe('ISO 4217 currency code for monetary values'),
+    totals: zod
+      .object({
+        donations: zod.number().describe('All-time donations received'),
+        expenses: zod
+          .number()
+          .describe('All-time running costs, as a positive value'),
+        balance: zod
+          .number()
+          .describe('All-time balance (donations minus expenses)'),
+      })
+      .describe('All-time totals and balance'),
+    monthly: zod
+      .array(
+        zod.object({
+          month: zod
+            .string()
+            .regex(donationSummaryResponseMonthlyItemMonthRegExp)
+            .describe('Month in YYYY-MM format'),
+          donations: zod
+            .number()
+            .min(donationSummaryResponseMonthlyItemDonationsMin)
+            .describe('Donations received during the month'),
+          expenses: zod
+            .number()
+            .min(donationSummaryResponseMonthlyItemExpensesMin)
+            .describe(
+              'Running costs accrued during the month, as a positive value',
+            ),
+        }),
+      )
+      .describe('Monthly history, oldest first'),
+    stats: zod
+      .array(
+        zod.object({
+          id: zod.string().describe('Stable statistic identifier'),
+          labelKey: zod
+            .string()
+            .describe('Frontend i18n key for the statistic label'),
+          value: zod
+            .number()
+            .describe('Raw numeric value; the frontend owns formatting'),
+          format: zod
+            .enum(['currency', 'percent', 'integer', 'ratio', 'duration'])
+            .describe('How the frontend should format the value'),
+          trend: zod.object({
+            direction: zod
+              .enum(['up', 'down', 'stagnant'])
+              .describe(
+                'Direction the statistic moved compared to the previous period',
+              ),
+            percent: zod
+              .number()
+              .min(donationSummaryResponseStatsItemTrendPercentMin)
+              .describe('Magnitude of the change, as a percentage'),
+            sentiment: zod
+              .enum(['positive', 'negative', 'neutral'])
+              .describe('Whether the movement should read as good or bad'),
+          }),
+        }),
+      )
+      .describe('Trend cards rendered on the donation page'),
+    supporters: zod
+      .array(
+        zod.object({
+          id: zod.string().describe('Stable supporter identifier'),
+          tier: zod
+            .enum(['gold', 'silver', 'bronze'])
+            .describe('Joke supporter tier, drives the rendered medal'),
+        }),
+      )
+      .describe('Top supporters, by tier'),
+    updated_at: zod
+      .string()
+      .describe('ISO timestamp of deployment/database creation'),
+  })
+  .describe(
+    'Donation summary: all-time totals and balance, monthly history, trend-card statistics and top supporters',
+  );
+
+export type DonationSummaryResponse = zod.input<typeof DonationSummaryResponse>;
+export type DonationSummaryResponseOutput = zod.output<
+  typeof DonationSummaryResponse
 >;
 /**
  * Performs an application health check and verifies connectivity to the underlying SQLite database.
@@ -1633,4 +1731,30 @@ export type GetSpamSampleListResponse = zod.input<
 >;
 export type GetSpamSampleListResponseOutput = zod.output<
   typeof GetSpamSampleListResponse
+>;
+
+/**
+ * Returns all-time totals and balance, a monthly history of donations and running costs, trend-card statistics with i18n label keys, and the top supporters. The frontend owns value formatting and label resolution.
+ * @summary Get the donation summary for a language
+ */
+export const GetDonationSummaryParams = zod.object({
+  lang: LanguageCode.and(
+    zod.unknown().describe('ISO language code to retrieve donation data for'),
+  ).describe('ISO language code to retrieve donation data for'),
+});
+
+export type GetDonationSummaryParams = zod.input<
+  typeof GetDonationSummaryParams
+>;
+export type GetDonationSummaryParamsOutput = zod.output<
+  typeof GetDonationSummaryParams
+>;
+
+export const GetDonationSummaryResponse = DonationSummaryResponse;
+
+export type GetDonationSummaryResponse = zod.input<
+  typeof GetDonationSummaryResponse
+>;
+export type GetDonationSummaryResponseOutput = zod.output<
+  typeof GetDonationSummaryResponse
 >;
