@@ -3,7 +3,7 @@ import { Button } from '@maw/ui-lib';
 import { getLocale, getTranslations } from 'next-intl/server';
 import { Link } from '@/core/i18n/navigation';
 import { getAppConfigService } from '@/services';
-import { getDonationSummary } from '../../services';
+import { getDonationSummary } from '../../services/get-donation-summary';
 import { CryptoWalletList } from './CryptoWalletList';
 import { DonationCounter } from './DonationCounter';
 import { ImpactStats } from './ImpactStats';
@@ -31,11 +31,6 @@ export async function DonationPage() {
           <h2 className="py-5">{tRich('funding.moneyUsageHeading')}</h2>
           <p>{t('funding.moneyUsageDescription')}</p>
           <JarAnimation balance={balance} data-testid="jar-animation" />
-          <h2 className="py-5">{t('funding.topSupporters')}</h2>
-          <p className="pb-5">{t('funding.topSupportersDescription')}</p>
-          <h4>{t('funding.topSupporterKidney')}</h4>
-          <h5>{t('funding.topSupporterLiver')}</h5>
-          <h6>{t('funding.topSupporterHeart')}</h6>
         </div>
         <div className="lg:w-1/2">
           <h2 className="py-5">{t('funding.totalSupportReceived')}</h2>
@@ -65,7 +60,9 @@ export async function DonationPage() {
           </p>
         </div>
       </div>
-      <ImpactStats className="mt-10" />
+      {donationSummary && (
+        <ImpactStats summary={donationSummary} className="mt-10" />
+      )}
     </>
   );
 }

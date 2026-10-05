@@ -8,28 +8,41 @@ export default {
   topSupporters: 'Top supporters',
   topSupportersDescription:
     'Once this project actually starts getting donations, real people will appear here. So if you wish to be part of this list please contact me so that I can either manually upgrade this page or figure out some mechanism to do so.',
-  topSupporterKidney: '🥇 Kidney',
-  topSupporterLiver: '🥈 Liver',
-  topSupporterHeart: '🥉 Heart',
+  topSupporterKidney: 'Kidney',
+  topSupporterLiver: 'Liver',
+  topSupporterHeart: 'Heart',
+  stats: {
+    items: {
+      moneyBurnt: 'Money burnt',
+      coffeesConsumed: 'Coffees consumed',
+      bugsShippedAsFeatures: 'Bugs shipped as features',
+      kebabBudgetRemaining: 'Kebab budget left',
+      sanityRemaining: 'Sanity left',
+    },
+  },
   impactStats: {
     heading: 'Impact in numbers',
     description:
-      'A completely made-up look at what your money (and lack thereof) has achieved. The bar chart is 100% real statistics from an imaginary accountant.',
-    chart: {
+      'A completely made-up look at what your money (and lack thereof) has achieved. Every number below comes straight from an imaginary accountant.',
+    monthly: {
       title: 'Support received vs. running costs',
       description:
-        'The last six months, according to a spreadsheet I refuse to open. Watch the hole get deeper.',
+        'The last six months. Donations sit on the line; costs sink below it. Watch the hole get deeper.',
+    },
+    cumulative: {
+      title: 'Cumulative damage',
+      description:
+        'Everything the project has cost so far, stacked into one ever-growing pit.',
     },
     series: {
-      received: 'Support received',
-      spent: 'Running costs',
+      donations: 'Support received',
+      expenses: 'Running costs',
+      cumulativeExpenses: 'Cumulative running costs',
     },
-    items: {
-      burntThisMonth: 'Burnt this month',
-      kebabsFunded: 'Kebabs funded',
-      coffeesConsumed: 'Coffees consumed',
-      ductTapeUsed: 'Duct tape used',
-      bugsShippedAsFeatures: 'Bugs shipped as features',
+    trend: {
+      increased: 'increased',
+      decreased: 'decreased',
+      stagnant: 'unchanged',
     },
   },
   totalSupportReceived: 'Total Support Received',
