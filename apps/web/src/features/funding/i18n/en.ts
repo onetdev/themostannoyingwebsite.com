@@ -50,20 +50,9 @@ export default {
   balanceCaption:
     'Also known as the hole. It gets deeper every month — you are welcome to try to slow it down.',
   classicMethods: 'Classic methods',
-  methods: {
-    buyMeACoffee: {
-      description:
-        'Buy the developer a coffee. The only line item in the budget that never depreciates.',
-    },
-    payPal: {
-      description:
-        'Old-fashioned money. No blockchain, no gas fees, no awkward questions.',
-    },
-  },
   buyMeACoffee: 'Buy Me A Coffee',
   payPal: 'PayPal',
   cryptoMethods: 'Crypto methods',
-  alternativeOptionsHeading: 'Other ways to support',
   alternativeOptionsLink: 'Click here for other means of supporting 😏',
   disclaimer: 'Disclaimer',
   disclaimerDetails:

@@ -25,7 +25,8 @@ export const getDonatePage = (page: Page) => {
     kidneySupporter: page.getByTestId('impact-supporter-kidney'),
     buyMeACoffeeButton: page.getByRole('link', { name: 'Buy Me A Coffee' }),
     payPalButton: page.getByRole('link', { name: 'PayPal' }),
-    cryptoWalletList: page.getByTestId('crypto-wallet-list'),
+    cryptoWalletBtc: page.getByTestId('crypto-wallet-btc'),
+    cryptoWalletEth: page.getByTestId('crypto-wallet-eth'),
     alternativeOptionsLink: page.getByRole('link', {
       name: 'Click here for other means of supporting 😏',
     }),

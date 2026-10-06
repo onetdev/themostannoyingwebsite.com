@@ -11,10 +11,14 @@ export type JarAnimationProps = {
   balance: number;
 } & Omit<
   DotLottieReactProps,
-  'src' | 'loop' | 'autoplay' | 'mode' | 'className' | 'renderConfig'
+  'src' | 'loop' | 'autoplay' | 'mode' | 'renderConfig'
 >;
 
-export function JarAnimation({ balance, ...props }: JarAnimationProps) {
+export function JarAnimation({
+  balance,
+  className,
+  ...props
+}: JarAnimationProps) {
   const config = useAppConfigContext();
 
   return (
@@ -23,7 +27,7 @@ export function JarAnimation({ balance, ...props }: JarAnimationProps) {
       loop
       autoplay
       mode={balance < 0 ? 'reverse' : 'forward'}
-      className="h-64 w-auto md:h-124"
+      className={className ?? 'h-64 w-auto md:h-124'}
       renderConfig={{ autoResize: true }}
       {...props}
     />

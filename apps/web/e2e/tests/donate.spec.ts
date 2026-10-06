@@ -26,7 +26,8 @@ test('donation page displays essential interactive elements', async ({
   await expect(donatePage.alternativeOptionsLink).toBeVisible();
   await expect(donatePage.jarAnimation).toBeVisible();
   await expect(donatePage.donationBalance).toBeVisible();
-  await expect(donatePage.cryptoWalletList).toBeVisible();
+  await expect(donatePage.cryptoWalletBtc).toBeVisible();
+  await expect(donatePage.cryptoWalletEth).toBeVisible();
 });
 
 test('donation page renders the made-up impact stats chart', async ({
