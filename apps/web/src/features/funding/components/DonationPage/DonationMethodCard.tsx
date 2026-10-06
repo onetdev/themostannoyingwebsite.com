@@ -16,6 +16,7 @@ export type DonationMethodCardProps = {
   description: string;
   href: string;
   cta: string;
+  className?: string;
 };
 
 export function DonationMethodCard({
@@ -24,9 +25,12 @@ export function DonationMethodCard({
   description,
   href,
   cta,
+  className,
 }: DonationMethodCardProps) {
   return (
-    <Card className="hover:border-primary/50 transition-colors">
+    <Card
+      className={`hover:border-primary/50 transition-colors ${className ?? ''}`}
+    >
       <CardHeader className="flex flex-row items-center gap-3">
         <span className="bg-primary/10 text-primary flex size-10 shrink-0 items-center justify-center rounded-lg">
           <Icon icon={icon} aria-hidden />

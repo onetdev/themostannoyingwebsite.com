@@ -63,6 +63,7 @@ export default {
   buyMeACoffee: 'Buy Me A Coffee',
   payPal: 'PayPal',
   cryptoMethods: 'Crypto methods',
+  alternativeOptionsHeading: 'Other ways to support',
   alternativeOptionsLink: 'Click here for other means of supporting 😏',
   disclaimer: 'Disclaimer',
   disclaimerDetails:

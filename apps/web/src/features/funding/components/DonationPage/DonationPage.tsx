@@ -1,4 +1,5 @@
 import type { LanguageCode } from '@maw/content-sdk';
+import { Card, CardContent, CardHeader, CardTitle } from '@maw/ui-lib';
 import { getLocale, getTranslations } from 'next-intl/server';
 import { Link } from '@/core/i18n/navigation';
 import { getAppConfigService } from '@/services';
@@ -24,8 +25,8 @@ export async function DonationPage() {
     });
 
   return (
-    <>
-      <section className="mx-auto flex max-w-screen-md flex-col items-center gap-4 py-6 text-center">
+    <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-6">
+      <Card className="flex flex-col items-center justify-center gap-4 p-8 text-center md:col-span-2 lg:col-span-4">
         <p className="text-muted-foreground text-sm font-semibold tracking-[0.2em] uppercase">
           {t('funding.balanceEyebrow')}
         </p>
@@ -37,50 +38,70 @@ export async function DonationPage() {
         <p className="text-muted-foreground max-w-prose text-sm">
           {t('funding.balanceCaption')}
         </p>
-      </section>
+      </Card>
 
-      <div className="mt-10 lg:flex lg:flex-row lg:gap-10">
-        <div className="lg:w-1/2">
-          <p className="my-5 max-w-screen-md">{tRich('funding.description')}</p>
-          <h2 className="py-5">{tRich('funding.moneyUsageHeading')}</h2>
+      <Card className="flex items-center justify-center lg:col-span-2">
+        <JarAnimation balance={balance} data-testid="jar-animation" />
+      </Card>
+
+      <Card className="lg:col-span-3">
+        <CardHeader>
+          <CardTitle>{t('funding.moneyUsageHeading')}</CardTitle>
+        </CardHeader>
+        <CardContent className="flex flex-col gap-4 text-sm">
+          <p className="text-muted-foreground">
+            {tRich('funding.description')}
+          </p>
           <p>{t('funding.moneyUsageDescription')}</p>
-          <JarAnimation balance={balance} data-testid="jar-animation" />
-        </div>
-        <div className="lg:w-1/2">
-          <h2 className="pb-5">{t('funding.classicMethods')}</h2>
-          <div className="grid gap-4 sm:grid-cols-2">
-            <DonationMethodCard
-              icon="mugHot"
-              title={t('funding.buyMeACoffee')}
-              description={t('funding.methods.buyMeACoffee.description')}
-              href={funding.buyMeACoffeeUrl}
-              cta={t('funding.buyMeACoffee')}
-            />
-            <DonationMethodCard
-              icon="handHoldingDollar"
-              title={t('funding.payPal')}
-              description={t('funding.methods.payPal.description')}
-              href={funding.paypalUrl}
-              cta={t('funding.payPal')}
-            />
-          </div>
+        </CardContent>
+      </Card>
 
-          <h2 className="pt-8 pb-5">{t('funding.cryptoMethods')}</h2>
-          <CryptoWalletList data-testid="crypto-wallet-list" />
-          <p className="text-center">
-            <Link href={funding.alternativeOptionsUrl} target="_blank">
-              {t('funding.alternativeOptionsLink')}
-            </Link>
+      <DonationMethodCard
+        className="lg:col-span-3"
+        icon="mugHot"
+        title={t('funding.buyMeACoffee')}
+        description={t('funding.methods.buyMeACoffee.description')}
+        href={funding.buyMeACoffeeUrl}
+        cta={t('funding.buyMeACoffee')}
+      />
+
+      <DonationMethodCard
+        className="lg:col-span-3"
+        icon="handHoldingDollar"
+        title={t('funding.payPal')}
+        description={t('funding.methods.payPal.description')}
+        href={funding.paypalUrl}
+        cta={t('funding.payPal')}
+      />
+
+      <Card className="lg:col-span-3">
+        <CardContent className="flex h-full flex-col items-start justify-center gap-3">
+          <p className="font-semibold">
+            {t('funding.alternativeOptionsHeading')}
           </p>
-          <h2 className="py-5">{t('funding.disclaimer')}</h2>
-          <p>
-            <small>{tRich('funding.disclaimerDetails')}</small>
+          <Link href={funding.alternativeOptionsUrl} target="_blank">
+            {t('funding.alternativeOptionsLink')}
+          </Link>
+        </CardContent>
+      </Card>
+
+      <CryptoWalletList
+        className="md:col-span-2 lg:col-span-6"
+        data-testid="crypto-wallet-list"
+      />
+
+      <Card className="md:col-span-2 lg:col-span-6">
+        <CardHeader>
+          <CardTitle>{t('funding.disclaimer')}</CardTitle>
+        </CardHeader>
+        <CardContent>
+          <p className="text-muted-foreground text-sm">
+            {tRich('funding.disclaimerDetails')}
           </p>
-        </div>
-      </div>
-      {donationSummary && (
-        <ImpactStats summary={donationSummary} className="mt-10" />
-      )}
-    </>
+        </CardContent>
+      </Card>
+
+      {donationSummary && <ImpactStats summary={donationSummary} />}
+    </div>
   );
 }
