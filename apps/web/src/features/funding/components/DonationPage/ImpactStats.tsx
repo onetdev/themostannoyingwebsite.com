@@ -72,6 +72,26 @@ const TREND_DIRECTION_LABEL_KEYS: Record<
   stagnant: 'funding.impactStats.trend.stagnant',
 };
 
+const STAT_ICONS: Record<string, IconAliaseKey> = {
+  moneyBurnt: 'fire',
+  coffeesConsumed: 'mugHot',
+  bugsShippedAsFeatures: 'bug',
+  kebabBudgetRemaining: 'utensils',
+  sanityRemaining: 'brain',
+};
+
+const TIER_RANK: Record<DonationSupporter['tier'], number> = {
+  gold: 0,
+  silver: 1,
+  bronze: 2,
+};
+
+const SUPPORTER_TIER_BARS: Record<DonationSupporter['tier'], string> = {
+  gold: 'h-24 bg-warning',
+  silver: 'h-16 bg-muted-foreground/40',
+  bronze: 'h-12 bg-tertiary/50',
+};
+
 export function ImpactStats({ summary, className, ...rest }: ImpactStatsProps) {
   const t = useTranslations();
   const locale = useLocale();
@@ -159,33 +179,60 @@ export function ImpactStats({ summary, className, ...rest }: ImpactStatsProps) {
     },
   } satisfies ChartConfig;
 
+  const podiumOrder = useMemo(() => {
+    const sorted = [...supporters].sort(
+      (a, b) => TIER_RANK[a.tier] - TIER_RANK[b.tier],
+    );
+
+    // Put the winner on the middle step.
+    if (sorted.length === 3) {
+      return [sorted[1], sorted[0], sorted[2]];
+    }
+
+    return sorted;
+  }, [supporters]);
+
   return (
     <section className={className} {...rest}>
       <h2 className="py-5">{t('funding.impactStats.heading')}</h2>
       <p className="pb-5">{t('funding.impactStats.description')}</p>
 
       <div className="grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-5">
-        {stats.map((stat) => (
-          <Card key={stat.id} data-testid={`impact-stat-${stat.id}`}>
-            <CardContent className="flex flex-col gap-2">
-              <span className="text-muted-foreground text-sm">
-                {t(stat.labelKey as AppTranslationKey)}
-              </span>
-              <span className="text-2xl font-bold">
-                {formatStatValue(stat)}
-              </span>
-              <span
-                className={`flex items-center gap-1 text-sm ${TREND_SENTIMENT_CLASSES[stat.trend.sentiment]}`}
-              >
-                <Icon icon={TREND_ICONS[stat.trend.direction]} aria-hidden />
-                {formatPercent(stat.trend.percent)}
-                <span className="sr-only">
-                  {t(TREND_DIRECTION_LABEL_KEYS[stat.trend.direction])}
+        {stats.map((stat) => {
+          const sentimentClass = TREND_SENTIMENT_CLASSES[stat.trend.sentiment];
+
+          return (
+            <Card
+              key={stat.id}
+              className="hover:border-primary/40 transition-colors"
+              data-testid={`impact-stat-${stat.id}`}
+            >
+              <CardContent className="flex flex-col gap-3">
+                <span
+                  aria-hidden
+                  className={`bg-muted flex size-10 items-center justify-center rounded-lg ${sentimentClass}`}
+                >
+                  <Icon icon={STAT_ICONS[stat.id] ?? 'tags'} />
                 </span>
-              </span>
-            </CardContent>
-          </Card>
-        ))}
+                <span className="text-2xl font-bold tracking-tight">
+                  {formatStatValue(stat)}
+                </span>
+                <span className="text-muted-foreground text-sm">
+                  {t(stat.labelKey as AppTranslationKey)}
+                </span>
+                <span
+                  className={`flex items-center gap-1 text-sm font-medium ${sentimentClass}`}
+                >
+                  <Icon icon={TREND_ICONS[stat.trend.direction]} aria-hidden />
+                  {formatPercent(stat.trend.percent)}
+                  <span className="sr-only">
+                    {t(TREND_DIRECTION_LABEL_KEYS[stat.trend.direction])}
+                  </span>
+                </span>
+              </CardContent>
+            </Card>
+          );
+        })}
       </div>
 
       <div className="mt-8 grid gap-6 lg:grid-cols-2">
@@ -265,19 +312,25 @@ export function ImpactStats({ summary, className, ...rest }: ImpactStatsProps) {
 
       <h2 className="py-5">{t('funding.topSupporters')}</h2>
       <p className="pb-5">{t('funding.topSupportersDescription')}</p>
-      <ul className="flex flex-col gap-2">
-        {supporters.map((supporter) => (
+      <ul className="flex items-end justify-center gap-3">
+        {podiumOrder.map((supporter) => (
           <li
             key={supporter.id}
-            className="flex items-center gap-2"
+            className="flex w-28 flex-col items-center gap-2"
             data-testid={`impact-supporter-${supporter.id}`}
           >
-            <span aria-hidden>{SUPPORTER_MEDALS[supporter.tier]}</span>
-            <span>
+            <span aria-hidden className="text-4xl">
+              {SUPPORTER_MEDALS[supporter.tier]}
+            </span>
+            <span className="text-center font-semibold">
               {SUPPORTER_LABEL_KEYS[supporter.id]
                 ? t(SUPPORTER_LABEL_KEYS[supporter.id])
                 : supporter.id}
             </span>
+            <span
+              aria-hidden
+              className={`w-full rounded-t-lg ${SUPPORTER_TIER_BARS[supporter.tier]}`}
+            />
           </li>
         ))}
       </ul>
