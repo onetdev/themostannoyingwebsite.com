@@ -50,7 +50,7 @@ export function DialogContent({
       <DialogPrimitive.Popup
         data-slot="dialog-content"
         className={cn(
-          'bg-background fixed top-[50%] left-[50%] z-50 grid w-full max-w-[calc(100%-2rem)] translate-x-[-50%] translate-y-[-50%] gap-4 rounded-lg border border-border p-5 shadow-lg transition-[opacity,scale] duration-200 outline-none sm:max-w-lg data-ending-style:scale-95 data-ending-style:opacity-0 data-starting-style:scale-95 data-starting-style:opacity-0',
+          'bg-background fixed top-[50%] left-[50%] z-50 grid w-full max-w-[calc(100%-2rem)] translate-x-[-50%] translate-y-[-50%] gap-4 rounded-lg border border-border p-6 shadow-lg transition-[opacity,scale] duration-200 outline-none sm:max-w-lg data-ending-style:scale-95 data-ending-style:opacity-0 data-starting-style:scale-95 data-starting-style:opacity-0',
           className,
         )}
         {...props}
@@ -92,7 +92,7 @@ export function DialogFooter({
     <div
       data-slot="dialog-footer"
       className={cn(
-        'flex flex-col-reverse gap-2 sm:flex-row sm:justify-end border-t border-border px-5 py-4 -mx-5 -mb-5 bg-background rounded-b-lg',
+        'flex flex-col-reverse gap-2 sm:flex-row sm:justify-end -mx-6 -mb-6 rounded-b-lg border-t border-border bg-muted/50 px-6 py-4',
         className,
       )}
       {...props}
