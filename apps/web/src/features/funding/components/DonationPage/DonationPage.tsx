@@ -105,7 +105,10 @@ export async function DonationPage() {
       {donationSummary && <ImpactStats summary={donationSummary} />}
 
       <Card className="md:col-span-2 lg:col-span-6">
-        <CardContent className="py-4">
+        <CardHeader>
+          <CardTitle>{t('funding.disclaimer')}</CardTitle>
+        </CardHeader>
+        <CardContent>
           <p className="text-muted-foreground text-xs leading-relaxed">
             {tRich('funding.disclaimerDetails')}
           </p>
