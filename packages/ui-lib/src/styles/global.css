@@ -2,6 +2,17 @@
 @import "tw-animate-css";
 @import "./themes/index.css";
 
+/**
+ * Tailwind v4 defaults the border color to `currentColor`, which makes
+ * colour-less utilities like `border-b` inherit the foreground (near-black).
+ * Default them to the theme tokens instead, matching the shadcn base layer.
+ */
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+}
+
 html,
 body {
   @apply bg-background text-foreground;
