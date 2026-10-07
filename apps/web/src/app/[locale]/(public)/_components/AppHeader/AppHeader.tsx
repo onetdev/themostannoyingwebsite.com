@@ -23,12 +23,15 @@ export async function AppHeader({ activeItem, className }: AppHeaderProps) {
 
   return (
     <>
-      <FloatingHeader className="grid grid-cols-2 items-center gap-x-2 px-2 py-3 xl:px-4 print:hidden">
+      <FloatingHeader className="flex flex-wrap items-center gap-x-2 gap-y-1 px-2 py-2 xl:px-4 print:hidden">
         <div className="flex items-center gap-2">
           <AppNavigationMobile activeItem={activeItem} />
           <TextLogo />
         </div>
-        <div className="flex items-center justify-end gap-3 md:gap-4">
+        <div className="order-last hidden w-full min-w-0 md:flex xl:order-none xl:w-auto xl:flex-1">
+          <AppNavigationDesktop activeItem={activeItem} />
+        </div>
+        <div className="ml-auto flex items-center gap-3 md:gap-4">
           <SearchForm className="hidden md:flex" size="md" expandable />
           <Button
             render={
@@ -48,9 +51,6 @@ export async function AppHeader({ activeItem, className }: AppHeaderProps) {
             <AppLanguageSwitcher displayOnlyFlag />
           </div>
           <AppDarkModeToggle />
-        </div>
-        <div className="col-span-2 mt-2 hidden items-center md:flex">
-          <AppNavigationDesktop activeItem={activeItem} />
         </div>
       </FloatingHeader>
       <PainLevelSelector className={clsx('print:hidden', className)} />
