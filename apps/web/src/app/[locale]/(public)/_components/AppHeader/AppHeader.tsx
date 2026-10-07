@@ -9,6 +9,7 @@ import { AppLanguageSwitcher } from '../AppLanguageSwitcher';
 import { AppDarkModeToggle } from './AppDarkModeToggle';
 import { AppNavigationDesktop } from './AppNavigationDesktop';
 import { AppNavigationMobile } from './AppNavigationMobile';
+import { FloatingHeader } from './FloatingHeader';
 import { PainLevelSelector } from './PainLevelSelector';
 import { TextLogo } from './TextLogo';
 
@@ -22,19 +23,13 @@ export async function AppHeader({ activeItem, className }: AppHeaderProps) {
 
   return (
     <>
-      <header
-        id="header"
-        className={clsx(
-          'sticky top-0 z-40 bg-card/80 backdrop-blur-md',
-          'grid grid-cols-2 items-center gap-x-2 px-3 md:px-5 py-3 xl:px-8 print:hidden',
-        )}
-      >
+      <FloatingHeader className="grid grid-cols-2 items-center gap-x-2 px-2 py-3 xl:px-4 print:hidden">
         <div className="flex items-center gap-2">
           <AppNavigationMobile activeItem={activeItem} />
           <TextLogo />
         </div>
         <div className="flex items-center justify-end gap-3 md:gap-4">
-          <SearchForm className="hidden md:flex" size="md" />
+          <SearchForm className="hidden md:flex" size="md" expandable />
           <Button
             render={
               <Link
@@ -57,8 +52,8 @@ export async function AppHeader({ activeItem, className }: AppHeaderProps) {
         <div className="col-span-2 mt-2 hidden items-center md:flex">
           <AppNavigationDesktop activeItem={activeItem} />
         </div>
-      </header>
-      <PainLevelSelector className={clsx('bg-muted print:hidden', className)} />
+      </FloatingHeader>
+      <PainLevelSelector className={clsx('print:hidden', className)} />
     </>
   );
 }

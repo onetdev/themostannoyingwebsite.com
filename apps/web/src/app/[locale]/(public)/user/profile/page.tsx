@@ -28,7 +28,7 @@ export default async function Page() {
       autoPadding={false}
       route="user.profile"
       navigationHighlightRoute="user.login"
-      className="mx-auto max-w-md px-5 py-0 md:py-14"
+      className="mx-auto max-w-md px-gutter py-0 md:py-14"
       role="main"
     >
       <MyProfilePage />

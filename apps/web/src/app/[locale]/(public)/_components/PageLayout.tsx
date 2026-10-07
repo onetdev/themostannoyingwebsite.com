@@ -30,7 +30,7 @@ export function PageLayout({
   className,
   ...rest
 }: PageLayoutProps) {
-  const localClassName = autoPadding ? `mx-5 xl:mx-8` : '';
+  const localClassName = autoPadding ? `px-gutter` : '';
 
   return (
     <>

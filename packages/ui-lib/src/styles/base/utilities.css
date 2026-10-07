@@ -27,3 +27,18 @@
 :root {
   --radius: 0.625rem;
 }
+
+/**
+ * Page horizontal gutter.
+ *
+ * Single source of truth for the inline inset on section-level content so the
+ * header, page body, sticky bars and footer all line up. Resolves to 1.25rem
+ * below the xl breakpoint and 2rem at xl (the previous `px-5 xl:px-8` scale).
+ */
+@utility px-gutter {
+  padding-inline: calc(var(--spacing, 0.25rem) * 5);
+
+  @media (width >= 80rem) {
+    padding-inline: calc(var(--spacing, 0.25rem) * 8);
+  }
+}

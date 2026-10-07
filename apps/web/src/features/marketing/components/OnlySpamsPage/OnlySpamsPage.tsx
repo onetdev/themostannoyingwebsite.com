@@ -25,7 +25,7 @@ export function OnlySpamsPage({ testimonials, samples }: OnlySpamsPageProps) {
     <div className="flex flex-col gap-16 py-10 relative overflow-hidden">
       <ParallaxDecorationBlocks />
 
-      <div className="max-w-3xl text-center mx-auto relative z-10 px-5">
+      <div className="max-w-3xl text-center mx-auto relative z-10 px-gutter">
         <div className="flex justify-center mb-8">
           <Image
             src="/assets/images/only-spams.svg"
@@ -42,14 +42,14 @@ export function OnlySpamsPage({ testimonials, samples }: OnlySpamsPageProps) {
       </div>
 
       <div className="w-full relative z-10 flex flex-col gap-12 md:gap-15 mb-6">
-        <h3 className="text-xl md:text-3xl font-bold text-center px-5">
+        <h3 className="text-xl md:text-3xl font-bold text-center px-gutter">
           {t('marketing.onlySpams.samples.title')}
         </h3>
         <EmailSampleCarousel items={samples} />
       </div>
 
       <div className="w-full relative z-10 flex flex-col gap-12 md:gap-15">
-        <h3 className="text-xl md:text-3xl font-bold text-center px-5">
+        <h3 className="text-xl md:text-3xl font-bold text-center px-gutter">
           {t('marketing.onlySpams.testimonials.title')}
         </h3>
         <TestimonialCarousel items={testimonials} />

@@ -76,7 +76,7 @@ export function PainDecoratorLayout({
       </AnimatePresence>
 
       {/* Main container and container relative sticky elements */}
-      <div className="bg-card relative container mx-auto my-0 min-h-screen">
+      <div className="relative container mx-auto my-0 min-h-screen">
         {children}
         <AnimatePresence>
           {runtimeFlags.wheelOfFortune && (

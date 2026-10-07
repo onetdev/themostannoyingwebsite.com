@@ -15,7 +15,7 @@ export function BeggarBanner() {
 
   return (
     <div className="bg-error text-error-foreground relative z-50 w-full shadow-lg">
-      <div className="container mx-auto flex items-center justify-between gap-4 px-5 py-5 xl:px-8">
+      <div className="container mx-auto flex items-center justify-between gap-4 px-gutter py-5">
         <div className="flex-1">
           <p className="text-sm md:text-base">
             <span className="font-bold">{t(bannerData.prefixKey)}</span>{' '}
