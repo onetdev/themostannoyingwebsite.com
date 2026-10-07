@@ -13,6 +13,7 @@ import { getAppConfigService } from '@/services';
 import { getDonationSummary } from '../../services/get-donation-summary';
 import { CryptoWallet } from './CryptoWallet';
 import { DonationCounter } from './DonationCounter';
+import { DonationFaq } from './DonationFaq';
 import { ImpactStats } from './ImpactStats';
 import { JarAnimation } from './JarAnimation';
 
@@ -57,17 +58,7 @@ export async function DonationPage() {
         </p>
       </Card>
 
-      <Card className="lg:col-span-3">
-        <CardHeader>
-          <CardTitle>{t('funding.moneyUsageHeading')}</CardTitle>
-        </CardHeader>
-        <CardContent className="flex flex-col gap-4 text-sm">
-          <p className="text-muted-foreground">
-            {tRich('funding.description')}
-          </p>
-          <p>{t('funding.moneyUsageDescription')}</p>
-        </CardContent>
-      </Card>
+      <DonationFaq className="lg:col-span-3" />
 
       <Card className="lg:col-span-3">
         <CardHeader>

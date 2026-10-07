@@ -5,6 +5,32 @@ export default {
   moneyUsageHeading: 'What happens with the money?',
   moneyUsageDescription:
     "Your support helps compensate the time and effort I put into development, and it also contributes to covering infrastructure and tool costs (such as hosting, services, and development tools). Donations simply help keep the project alive and sustainable. Let's put money into the jar!",
+  faq: {
+    heading: 'Frequently unasked questions',
+    items: {
+      balance: {
+        question: 'Why is the balance negative?',
+        answer:
+          'Because the project costs money and donations are, statistically, a rounding error. The red number is the most honest thing on this page.',
+      },
+      money: {
+        question: 'Where does the money actually go?',
+      },
+      sponsors: {
+        question: 'Who is behind this?',
+      },
+      rights: {
+        question: 'What do I get for donating?',
+        answer:
+          'Warm feelings, a spot on a leaderboard populated by fictional organs, and absolutely no legally binding rights, services, or special access.',
+      },
+      donate: {
+        question: 'How do I donate?',
+        answer:
+          'Coffee, PayPal, or crypto — the cards above have you covered. Any amount is appreciated; zero is, historically, the most popular amount.',
+      },
+    },
+  },
   topSupporters: 'Top supporters',
   topSupportersDescription:
     'Once this project actually starts getting donations, real people will appear here. So if you wish to be part of this list please contact me so that I can either manually upgrade this page or figure out some mechanism to do so.',
