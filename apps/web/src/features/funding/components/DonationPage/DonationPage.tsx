@@ -102,6 +102,8 @@ export async function DonationPage() {
         network="Mainnet"
       />
 
+      {donationSummary && <ImpactStats summary={donationSummary} />}
+
       <Card className="md:col-span-2 lg:col-span-6">
         <CardContent className="py-4">
           <p className="text-muted-foreground text-xs leading-relaxed">
@@ -109,8 +111,6 @@ export async function DonationPage() {
           </p>
         </CardContent>
       </Card>
-
-      {donationSummary && <ImpactStats summary={donationSummary} />}
     </div>
   );
 }
