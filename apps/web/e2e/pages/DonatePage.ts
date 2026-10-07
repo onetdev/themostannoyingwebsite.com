@@ -14,9 +14,19 @@ export const getDonatePage = (page: Page) => {
       name: 'Total Support Received',
     }),
     donationBalance: page.getByTestId('donation-balance'),
+    impactStatsHeading: page.getByRole('heading', {
+      name: 'Impact in numbers',
+    }),
+    impactStatsMonthlyChart: page.getByTestId('impact-stats-monthly-chart'),
+    impactStatsCumulativeChart: page.getByTestId(
+      'impact-stats-cumulative-chart',
+    ),
+    impactStatMoneyBurnt: page.getByTestId('impact-stat-moneyBurnt'),
+    kidneySupporter: page.getByTestId('impact-supporter-kidney'),
     buyMeACoffeeButton: page.getByRole('link', { name: 'Buy Me A Coffee' }),
     payPalButton: page.getByRole('link', { name: 'PayPal' }),
-    cryptoWalletList: page.getByTestId('crypto-wallet-list'),
+    cryptoWalletBtc: page.getByTestId('crypto-wallet-btc'),
+    cryptoWalletEth: page.getByTestId('crypto-wallet-eth'),
     alternativeOptionsLink: page.getByRole('link', {
       name: 'Click here for other means of supporting 😏',
     }),

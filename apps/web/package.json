@@ -64,6 +64,7 @@
     "react-share": "catalog:",
     "react-timeago": "^8.3.0",
     "react-use": "^17.6.1",
+    "recharts": "catalog:",
     "reflect-metadata": "^0.2.2",
     "remark-gfm": "^4.0.1",
     "rtl-detect": "^1.1.2",

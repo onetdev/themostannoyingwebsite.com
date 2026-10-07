@@ -5,16 +5,21 @@ import {
   type DotLottieReactProps,
 } from '@lottiefiles/dotlottie-react';
 import { useAppConfigContext } from '@/core/react';
-import { useDonationBalance } from '../../hooks';
 
-export type JarAnimationProps = Omit<
+export type JarAnimationProps = {
+  /** Current donation balance; negative reverses the animation. */
+  balance: number;
+} & Omit<
   DotLottieReactProps,
-  'src' | 'loop' | 'autoplay' | 'mode' | 'className' | 'renderConfig'
+  'src' | 'loop' | 'autoplay' | 'mode' | 'renderConfig'
 >;
 
-export function JarAnimation(props: JarAnimationProps) {
+export function JarAnimation({
+  balance,
+  className,
+  ...props
+}: JarAnimationProps) {
   const config = useAppConfigContext();
-  const balance = useDonationBalance();
 
   return (
     <DotLottieReact
@@ -22,7 +27,7 @@ export function JarAnimation(props: JarAnimationProps) {
       loop
       autoplay
       mode={balance < 0 ? 'reverse' : 'forward'}
-      className="h-64 w-auto md:h-124"
+      className={className ?? 'h-64 w-auto md:h-124'}
       renderConfig={{ autoResize: true }}
       {...props}
     />

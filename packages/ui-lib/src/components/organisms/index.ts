@@ -1,5 +1,7 @@
+export * from './Accordion';
 export * from './Card';
 export * from './Carousel';
+export * from './Chart';
 export * from './DelayedMount';
 export * from './Dialog';
 export * from './Field';

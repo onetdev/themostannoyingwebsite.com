@@ -1,13 +1,22 @@
 'use client';
 
 import { type ComponentProps, useEffect, useState } from 'react';
-import { useDonationBalance } from '../../hooks';
 import { SlotDigit } from './SlotDigit';
 
-export type DonationCounterProps = ComponentProps<'div'>;
+export type DonationCounterProps = {
+  /** Current donation balance in the response currency. */
+  balance: number;
+  /** Visual weight of the counter. `hero` is used as the page's focal point. */
+  size?: 'default' | 'hero';
+} & ComponentProps<'div'>;
 
-export function DonationCounter({ className, ...rest }: DonationCounterProps) {
-  const amount = useDonationBalance();
+export function DonationCounter({
+  balance,
+  size = 'default',
+  className,
+  ...rest
+}: DonationCounterProps) {
+  const amount = balance;
   const currency = '$';
   const [showNegative, setShowNegative] = useState(false);
 
@@ -46,12 +55,16 @@ export function DonationCounter({ className, ...rest }: DonationCounterProps) {
     : 'text-success-foreground';
   const borderColor = showNegative ? 'border-error' : 'border-success';
   const bgGradient = showNegative ? 'bg-error' : 'bg-success';
+  const sizeClasses =
+    size === 'hero'
+      ? 'gap-3 rounded-xl border-4 p-8'
+      : 'gap-2 rounded-lg border-2 p-6';
 
   return (
     <div
       role="img"
       aria-label={`${currency}${amount}`}
-      className={`flex items-center justify-center gap-2 p-6 ${bgGradient} rounded-lg border-2 shadow-2xl ${borderColor} transition-all duration-500 ${className ?? ''}`}
+      className={`flex items-center justify-center shadow-2xl transition-all duration-500 ${sizeClasses} ${bgGradient} ${borderColor} ${className ?? ''}`}
       {...rest}
     >
       <span

@@ -1,6 +1,7 @@
 import { HttpTransport } from './http';
 import { ArticlesResource } from './resources/articles';
 import { AuthorsResource } from './resources/authors';
+import { DonationsResource } from './resources/donations';
 import { HealthResource } from './resources/health';
 import { ImagesResource } from './resources/images';
 import { LocalesResource } from './resources/locales';
@@ -40,6 +41,7 @@ export class ContentApiClient {
   readonly prizeWheel: PrizeWheelResource;
   readonly newsletter: NewsletterResource;
   readonly spamSample: SpamSampleResource;
+  readonly donations: DonationsResource;
 
   private readonly transport: HttpTransport;
 
@@ -64,6 +66,7 @@ export class ContentApiClient {
     this.prizeWheel = new PrizeWheelResource(this.transport);
     this.newsletter = new NewsletterResource(this.transport);
     this.spamSample = new SpamSampleResource(this.transport);
+    this.donations = new DonationsResource(this.transport);
   }
 }
 

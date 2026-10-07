@@ -3,6 +3,7 @@ import {
   type GetArticleListResponse,
   type GetAuthorBySlugResponse,
   type GetAuthorListResponse,
+  type GetDonationSummaryResponse,
   type GetNewsletterStepListResponse,
   type GetPageBySlugResponse,
   type GetPageListResponse,
@@ -28,6 +29,14 @@ export type PrizeWheelSegment =
   GetPrizeWheelSegmentListResponse['segments'][number];
 export type NewsletterStep = GetNewsletterStepListResponse['steps'][number];
 export type SpamSample = GetSpamSampleListResponse['samples'][number];
+
+// Donation summary
+export type DonationSummary = GetDonationSummaryResponse;
+export type DonationMonthlyEntry =
+  GetDonationSummaryResponse['monthly'][number];
+export type DonationStat = GetDonationSummaryResponse['stats'][number];
+export type DonationSupporter =
+  GetDonationSummaryResponse['supporters'][number];
 
 // Backwards-compatible aliases
 export const ApiImageWrapper = ImageAsset;

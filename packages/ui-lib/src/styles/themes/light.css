@@ -57,6 +57,13 @@
     --border-warning: #f57c00;
     --border-error: #c62828;
 
+    /* Chart */
+    --chart-1: #2563eb;
+    --chart-2: #16a34a;
+    --chart-3: #ea580c;
+    --chart-4: #9333ea;
+    --chart-5: #0891b2;
+
     /* Other Tokens */
     --disabled: #9e9e9e;
     --dimmer: #5a5a5a99;
