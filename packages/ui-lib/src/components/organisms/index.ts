@@ -1,3 +1,4 @@
+export * from './Accordion';
 export * from './Card';
 export * from './Carousel';
 export * from './Chart';
