@@ -36,17 +36,18 @@ export async function AppHeader({ activeItem, className }: AppHeaderProps) {
         <div className="flex items-center justify-end gap-3 md:gap-4">
           <SearchForm className="hidden md:flex" size="md" />
           <Button
-            asChild
+            render={
+              <Link
+                href="/search"
+                aria-label={t('common.action.search')}
+                title={t('common.action.search')}
+              />
+            }
+            nativeButton={false}
             className="md:hidden rounded-full p-0"
             variant="outline"
           >
-            <Link
-              href="/search"
-              aria-label={t('common.action.search')}
-              title={t('common.action.search')}
-            >
-              <Icon icon="search" />
-            </Link>
+            <Icon icon="search" />
           </Button>
           <div className="hidden md:block">
             <AppLanguageSwitcher />

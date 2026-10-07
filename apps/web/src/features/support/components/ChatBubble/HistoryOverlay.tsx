@@ -52,8 +52,10 @@ export function HistoryOverlay({
         <h4 className="flex items-center gap-1 text-base font-bold">
           {t('support.chatBubble.hudTitle')}
           <Tooltip>
-            <TooltipTrigger asChild>
-              <span className="cursor-help font-normal">*</span>
+            <TooltipTrigger
+              render={<span className="cursor-help font-normal" />}
+            >
+              *
             </TooltipTrigger>
             <TooltipContent side="top">
               {t('support.chatBubble.hudTitleDisclaimer')}

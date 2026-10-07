@@ -25,9 +25,9 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
-  args: { type: 'single', collapsible: true },
+  args: {},
   render: () => (
-    <Accordion type="single" collapsible className="w-full max-w-md">
+    <Accordion className="w-full max-w-md">
       <AccordionItem value="item-1">
         <AccordionTrigger>Is it accessible?</AccordionTrigger>
         <AccordionContent>

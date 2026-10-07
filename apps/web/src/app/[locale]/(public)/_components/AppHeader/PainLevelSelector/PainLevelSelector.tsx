@@ -56,15 +56,17 @@ export function PainLevelSelector({ className }: PainLevelSelectorProps) {
         <div className="flex items-center gap-1.5">
           <TooltipProvider>
             <Tooltip>
-              <TooltipTrigger asChild>
-                <button
-                  type="button"
-                  className="md:hidden"
-                  aria-label={t('levelSettings.rating')}
-                  title={t('levelSettings.rating')}
-                >
-                  <Icon icon="infoCircle" className="size-3.5" />
-                </button>
+              <TooltipTrigger
+                render={
+                  <button
+                    type="button"
+                    className="md:hidden"
+                    aria-label={t('levelSettings.rating')}
+                    title={t('levelSettings.rating')}
+                  />
+                }
+              >
+                <Icon icon="infoCircle" className="size-3.5" />
               </TooltipTrigger>
               <TooltipContent side="bottom" align="start">
                 {t('levelSettings.label')}

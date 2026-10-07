@@ -31,9 +31,9 @@ export function SettingsField({
         {label}
         {info && (
           <Tooltip>
-            <TooltipTrigger asChild>
-              <Icon icon="info" className="text-muted-foreground" />
-            </TooltipTrigger>
+            <TooltipTrigger
+              render={<Icon icon="info" className="text-muted-foreground" />}
+            />
             <TooltipContent>{info}</TooltipContent>
           </Tooltip>
         )}

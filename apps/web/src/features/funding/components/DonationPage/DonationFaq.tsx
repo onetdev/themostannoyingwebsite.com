@@ -59,7 +59,7 @@ export function DonationFaq({ className }: DonationFaqProps) {
         <CardTitle>{t('funding.faq.heading')}</CardTitle>
       </CardHeader>
       <CardContent className="pt-2">
-        <Accordion type="single" collapsible className="w-full">
+        <Accordion className="w-full">
           {FAQ_ITEMS.map((item) => (
             <AccordionItem key={item.id} value={item.id}>
               <AccordionTrigger>{t(item.questionKey)}</AccordionTrigger>

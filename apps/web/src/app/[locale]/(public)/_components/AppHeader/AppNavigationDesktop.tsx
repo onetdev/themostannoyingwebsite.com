@@ -47,26 +47,29 @@ export function AppNavigationDesktop({
     return (
       <NavigationMenuItem key={item.id}>
         <NavigationMenuLink
-          asChild
-          data-active={active}
-          aria-current={active ? 'page' : undefined}
+          render={
+            <Link
+              hrefFor={item.hrefFor}
+              onClick={() => onClick(item)}
+              passHref
+            />
+          }
+          active={active}
           aria-label={t(item.labelKey)}
           title={t(item.labelKey)}
-          className="flex-row items-center gap-2 data-[active=true]:font-bold"
+          className="flex-row items-center gap-2 data-active:font-bold"
         >
-          <Link hrefFor={item.hrefFor} onClick={() => onClick(item)} passHref>
-            {item.icon && <Icon icon={item.icon} className="text-primary" />}
-            {item.hideLabel !== true && (
-              <span
-                className={cn(
-                  !item.icon && 'lg:inline',
-                  item.icon && 'hidden lg:inline',
-                )}
-              >
-                {t(item.labelKey)}
-              </span>
-            )}
-          </Link>
+          {item.icon && <Icon icon={item.icon} className="text-primary" />}
+          {item.hideLabel !== true && (
+            <span
+              className={cn(
+                !item.icon && 'lg:inline',
+                item.icon && 'hidden lg:inline',
+              )}
+            >
+              {t(item.labelKey)}
+            </span>
+          )}
         </NavigationMenuLink>
       </NavigationMenuItem>
     );
@@ -79,7 +82,6 @@ export function AppNavigationDesktop({
         className,
       )}
       id="navigation-desktop"
-      viewport={false}
       dir={direction}
     >
       <NavigationMenuList className="justify-start gap-1">

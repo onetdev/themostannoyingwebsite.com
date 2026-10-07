@@ -49,8 +49,15 @@ export function VisualChaos() {
             <FieldContent>
               <Select
                 name="screensaver_variant"
+                items={variantOptions.map((value) => ({
+                  value,
+                  label: t(`screensaver.variant.options.${value}`),
+                }))}
                 value={painPreferences.screensaver.variant}
                 onValueChange={(value) => {
+                  if (value == null) {
+                    return;
+                  }
                   painPreferences.setScreensaverVariant(
                     value as ScreensaverVariant,
                   );
@@ -77,8 +84,15 @@ export function VisualChaos() {
             <FieldContent>
               <Select
                 name="screensaver_timeout"
+                items={timeoutOptions.map((value) => ({
+                  value,
+                  label: t(`screensaver.timer.options.${value}`),
+                }))}
                 value={painPreferences.screensaver.timeoutSeconds.toString()}
                 onValueChange={(value) => {
+                  if (value == null) {
+                    return;
+                  }
                   painPreferences.setScreensaverTimeoutSeconds(
                     parseInt(value, 10),
                   );

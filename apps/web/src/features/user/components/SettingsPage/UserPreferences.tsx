@@ -45,7 +45,14 @@ export function UserPreferences() {
             {t('common.language.label')}
           </FieldLabel>
           <FieldContent>
-            <Select value={locale} onValueChange={onLanguageChange}>
+            <Select
+              items={languages.map((lang) => ({
+                value: lang.locale,
+                label: `${lang.label}\u00A0${lang.flag}`,
+              }))}
+              value={locale}
+              onValueChange={onLanguageChange}
+            >
               <SelectTrigger className="w-full">
                 <SelectValue />
               </SelectTrigger>
