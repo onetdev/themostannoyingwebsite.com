@@ -16,6 +16,21 @@ function getUrlString(input: string | URL | Request): string {
 }
 
 describe('ContentApiClient', () => {
+  // The suite asserts against DEFAULT_BASE_URL, so an ambient
+  // NEXT_PUBLIC_CONTENT_API_URL (e.g. from a local .envrc) must not leak in.
+  // The env-resolution test sets its own value explicitly.
+  const originalBaseUrl = process.env.NEXT_PUBLIC_CONTENT_API_URL;
+
+  beforeEach(() => {
+    delete process.env.NEXT_PUBLIC_CONTENT_API_URL;
+  });
+
+  afterAll(() => {
+    if (originalBaseUrl !== undefined) {
+      process.env.NEXT_PUBLIC_CONTENT_API_URL = originalBaseUrl;
+    }
+  });
+
   it('instantiates with default options and resources', () => {
     const client = createContentClient();
     expect(client).toBeInstanceOf(ContentApiClient);
