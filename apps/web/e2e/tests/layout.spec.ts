@@ -54,3 +54,49 @@ test('page content should span the floating header width', async ({ page }) => {
     0,
   );
 });
+
+test('narrow pages center their column horizontally', async ({ page }) => {
+  await setupE2eTestState(page);
+  await page.goto('/en/user/login');
+
+  const column = page.locator('[data-narrow-content]');
+  await expect(column).toBeVisible();
+
+  const mainBox = await page.locator('main').boundingBox();
+  const columnBox = await column.boundingBox();
+
+  expect(mainBox).not.toBeNull();
+  expect(columnBox).not.toBeNull();
+
+  if (!mainBox || !columnBox) {
+    throw new Error('Unable to measure the narrow layout boxes');
+  }
+
+  const startGap = columnBox.x - mainBox.x;
+  const endGap = mainBox.x + mainBox.width - (columnBox.x + columnBox.width);
+
+  // `mx-auto` on the column must win over the page layout's `mx-gutter` inset,
+  // leaving equal free space on both sides instead of hugging the left edge.
+  expect(startGap).toBeGreaterThan(0);
+  expect(startGap).toBeCloseTo(endGap, 0);
+});
+
+test('narrow pages cap their column width on desktop', async ({ page }) => {
+  await setupE2eTestState(page);
+  await page.setViewportSize({ width: 1440, height: 900 });
+  await page.goto('/en/user/signup');
+
+  const column = page.locator('[data-narrow-content]');
+  await expect(column).toBeVisible();
+
+  const columnBox = await column.boundingBox();
+
+  expect(columnBox).not.toBeNull();
+  if (!columnBox) {
+    throw new Error('Unable to measure the narrow layout column');
+  }
+
+  // Signup uses a wider 900px column on desktop, but still well below the
+  // viewport width so it stays centered.
+  expect(columnBox.width).toBeCloseTo(900, 0);
+});

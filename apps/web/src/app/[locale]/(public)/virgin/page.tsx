@@ -1,10 +1,11 @@
 import { PageHeadline } from '@maw/ui-lib';
 import styles from '@maw/ui-lib/content.module.css';
+import { cn } from '@maw/ui-lib/utils';
 import type { Metadata } from 'next';
 import { getLocale, getTranslations } from 'next-intl/server';
 import { WebPageStructuredData } from '@/core/seo';
 import { ShareButton } from '@/features/share/components';
-import { PageLayout } from '../_components/PageLayout';
+import { NarrowPageLayout } from '../_components/NarrowPageLayout';
 import DisableAllOnMount from './disable-all-on-mount';
 
 export { generateStaticParams } from '@/core/i18n/routing';
@@ -28,23 +29,24 @@ async function Page() {
   const locale = (await getLocale()) as AppLocale;
 
   return (
-    <PageLayout route="virgin" role="main">
+    <NarrowPageLayout
+      route="virgin"
+      role="main"
+      maxWidthClassName="max-w-screen-md"
+    >
       <WebPageStructuredData
         locale={locale}
         path="virgin"
         namespace="metadata.virgin"
       />
       <DisableAllOnMount />
-      <PageHeadline
-        className="mx-auto w-full max-w-screen-md"
-        actions={<ShareButton />}
-      >
+      <PageHeadline className="w-full" actions={<ShareButton />}>
         {t('common.app.virgin.title')}
       </PageHeadline>
-      <div className={styles.content}>
+      <div className={cn(styles.content, styles.contentFlush)}>
         <p>{t('common.app.virgin.description')}</p>
       </div>
-    </PageLayout>
+    </NarrowPageLayout>
   );
 }
 export default Page;

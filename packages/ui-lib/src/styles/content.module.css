@@ -4,6 +4,17 @@
 .content {
   @apply py-5 px-0 md:px-10 flex flex-col items-center;
 }
+
+/**
+ * Removes the default vertical (block) padding so the content can sit flush
+ * inside a container that already provides its own spacing, e.g. a page layout
+ * with its own vertical rhythm. Horizontal padding is preserved.
+ *
+ * Apply it alongside `.content`: `cn(styles.content, styles.contentFlush)`.
+ */
+.contentFlush {
+  @apply px-0 md:px-0;
+}
 .content p {
   @apply py-2;
 }
