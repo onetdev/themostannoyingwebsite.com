@@ -49,6 +49,7 @@ export function ChatBubble() {
               history={state.history}
               onUserMessage={(message) => state.add(message, 'user')}
               onClose={closeHistory}
+              onReset={state.reset}
             />
           </motion.div>
         )}

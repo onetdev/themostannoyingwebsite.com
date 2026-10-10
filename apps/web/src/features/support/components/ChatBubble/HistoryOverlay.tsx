@@ -1,13 +1,11 @@
 'use client';
 
 import {
-  Bubble,
-  BubbleContent,
   Button,
   DotDotDotText,
   Icon,
-  Message,
-  MessageContent,
+  Marker,
+  MarkerContent,
   MessageScroller,
   MessageScrollerButton,
   MessageScrollerContent,
@@ -27,12 +25,14 @@ import { MessageForm } from './MessageForm';
 export type HistoryOverlayProps = {
   history: ChatMessage[];
   onClose: () => void;
+  onReset: () => void;
   onUserMessage: (message: string) => void;
 };
 
 export function HistoryOverlay({
   history,
   onClose,
+  onReset,
   onUserMessage,
 }: HistoryOverlayProps) {
   const [showTyping, setShowTyping] = useState(true);
@@ -49,30 +49,56 @@ export function HistoryOverlay({
     }));
   }, [history]);
 
+  const lastBotIndex = useMemo(() => {
+    for (let index = history.length - 1; index >= 0; index -= 1) {
+      if (history[index].owner === 'bot') {
+        return index;
+      }
+    }
+    return -1;
+  }, [history]);
+
   return (
     <div className="border-secondary bg-card flex flex-col rounded-lg border text-start">
-      <div className="flex flex-row justify-between p-3 ps-5 shadow-xs">
-        <h4 className="flex items-center gap-1 text-base font-bold">
-          {t('support.chatBubble.hudTitle')}
-          <Tooltip>
-            <TooltipTrigger
-              render={<span className="cursor-help font-normal" />}
-            >
-              *
-            </TooltipTrigger>
-            <TooltipContent side="top">
-              {t('support.chatBubble.hudTitleDisclaimer')}
-            </TooltipContent>
-          </Tooltip>
-        </h4>
-        <Button
-          variant="ghost"
-          size="icon-sm"
-          onClick={() => onClose()}
-          aria-label={t('common.action.close')}
-        >
-          <Icon icon="close" />
-        </Button>
+      <div className="flex items-start justify-between gap-2 p-3 ps-5 shadow-xs">
+        <div className="min-w-0">
+          <h4 className="flex items-center gap-1 text-base font-bold">
+            {t('support.chatBubble.hudTitle')}
+            <Tooltip>
+              <TooltipTrigger
+                render={<span className="cursor-help font-normal" />}
+              >
+                *
+              </TooltipTrigger>
+              <TooltipContent side="top">
+                {t('support.chatBubble.hudTitleDisclaimer')}
+              </TooltipContent>
+            </Tooltip>
+          </h4>
+          <p className="text-muted-foreground truncate text-xs">
+            {t('support.chatBubble.subtitle')}
+          </p>
+        </div>
+        <div className="flex shrink-0 items-center gap-1">
+          <Button
+            variant="ghost"
+            size="icon-sm"
+            onClick={() => onReset()}
+            aria-label={t('support.chatBubble.newChat')}
+            title={t('support.chatBubble.newChat')}
+          >
+            <Icon icon="rotate" />
+          </Button>
+          <Button
+            variant="ghost"
+            size="icon-sm"
+            onClick={() => onClose()}
+            aria-label={t('common.action.close')}
+            title={t('common.action.close')}
+          >
+            <Icon icon="close" />
+          </Button>
+        </div>
       </div>
 
       <MessageScrollerProvider defaultScrollPosition="end" autoScroll>
@@ -81,22 +107,22 @@ export function HistoryOverlay({
             <MessageScrollerContent className="gap-2">
               {historyViewData.map(({ item, showTime }, index) => (
                 <MessageScrollerItem key={index}>
-                  <MessageBubble item={item} showTime={showTime} />
+                  <MessageBubble
+                    item={item}
+                    showTime={showTime}
+                    reaction={index === lastBotIndex}
+                  />
                 </MessageScrollerItem>
               ))}
               {showTyping && (
                 <MessageScrollerItem key="typing">
-                  <Message align="start">
-                    <MessageContent>
-                      <Bubble variant="ghost">
-                        <BubbleContent className="text-muted-foreground italic">
-                          <DotDotDotText
-                            message={t('support.chatBubble.agentIsTyping')}
-                          />
-                        </BubbleContent>
-                      </Bubble>
-                    </MessageContent>
-                  </Message>
+                  <Marker>
+                    <MarkerContent>
+                      <DotDotDotText
+                        message={t('support.chatBubble.agentIsTyping')}
+                      />
+                    </MarkerContent>
+                  </Marker>
                 </MessageScrollerItem>
               )}
             </MessageScrollerContent>
@@ -110,10 +136,7 @@ export function HistoryOverlay({
         </MessageScroller>
       </MessageScrollerProvider>
 
-      <MessageForm
-        className="flex justify-between p-3 ps-5 shadow-xs"
-        onMessage={onUserMessage}
-      />
+      <MessageForm className="p-3 ps-5" onMessage={onUserMessage} />
     </div>
   );
 }
