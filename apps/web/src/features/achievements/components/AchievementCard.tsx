@@ -6,6 +6,7 @@ import {
   CardContent,
   CardHeader,
   CardTitle,
+  Icon,
   Progress,
 } from '@maw/ui-lib';
 import { cn } from '@maw/ui-lib/utils';
@@ -48,10 +49,14 @@ export function AchievementCard({ definition, state }: AchievementCardProps) {
               variant="default"
               className="bg-primary text-primary-foreground"
             >
+              <Icon icon="check" />
               {t('common.state.completed')}
             </Badge>
           ) : (
-            <Badge variant="outline">{t('common.state.pending')}</Badge>
+            <Badge variant="outline">
+              <Icon icon="lock" />
+              {t('common.state.pending')}
+            </Badge>
           )}
         </div>
       </CardHeader>
