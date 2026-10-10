@@ -1,0 +1,69 @@
+# shadcn Adoption Log
+
+This document tracks the incremental adoption of shadcn/ui components in
+`@maw/ui-lib` (see
+[ADR 31](../adr/0031-base-ui-shadcn-adoption.md)) and, crucially, the behavior that
+each replacement drops so we can deliberately reintroduce it.
+
+> **Why a log?** This site is *intentionally* annoying. Friction, jank and animation
+> are features, not bugs. Replacing hand-rolled UI with shadcn must not silently
+> delete them. Every dropped behavior lands here, and any that is intentional is
+> re-added on top of the shadcn component.
+
+## Registry conventions
+
+When adding a component to `packages/ui-lib`:
+
+1.  It is already configured for the **`base-vega`** style (Base UI). Verify with
+    `npx shadcn@latest info -c packages/ui-lib` → `links.ui` must be
+    `.../bases/base/ui/...`.
+2.  Add it, then normalize the generated file:
+    - `import { cn } from "cn"` → the package `utils` alias (e.g. `../../utils`);
+    - `IconPlaceholder` / `lucide-react` → the FontAwesome `Icon` wrapper
+      (`../atoms`);
+    - `@/registry/...` imports → relative package paths;
+    - hardcoded strings (e.g. `sr-only` labels) → `next-intl`.
+3.  Export it from the matching `components/{atoms,molecules,organisms}/index.ts`.
+4.  Add a Storybook story under `apps/ui-docs` if it is a reusable primitive.
+5.  Never `add` a name that already exists in `packages/ui-lib` — it would overwrite
+    a hand-tuned component.
+
+## Behavior-loss register
+
+Status legend: ⬜ pending · 🟡 reintroduced as a wrapper · ✅ intentionally dropped ·
+⛔ regression to fix.
+
+| Ref | Area | shadcn component | Behavior at risk | Intentional? | Reintroduction plan | Status |
+| --- | ---- | ---------------- | ---------------- | ------------ | ------------------- | ------ |
+| BEH-01 | Chat trigger (`support/…/ChatBubble/ChatBubbleTrigger`) | `Button` + `Badge` | Unread-counter shake animation (framer-motion) | Yes | Animation wrapper around `Button` | ⬜ |
+| BEH-02 | Chat panel (`support/…/ChatBubble/ChatBubble`) | `MessageScroller` / `Popover` | Spring open/close transition (`AnimatePresence`) | Yes | Animate the panel wrapper, keep primitives controlled | ⬜ |
+| BEH-03 | Chat history | `MessageScroller` | Force scroll-to-bottom whenever the panel opens | Yes | Drive `MessageScroller` to end on open | ⬜ |
+| BEH-04 | Chat messages | `Message` / `Bubble` / `Marker` | Timestamp shown only when owner changes or gap > 5 min | Yes | Keep the grouping predicate, feed `Marker` | ⬜ |
+| BEH-05 | Chat history | `Marker` | "Agent is typing" indicator shown until the next user message | Yes | Keep the derived `showTyping` state | ⬜ |
+| BEH-06 | Chat trigger | — | Favicon unread badge (`useFaviconBadge`) | Yes | Component-agnostic, keep as-is | ⬜ |
+| BEH-07 | Rating dialog (`support/RatingDialog`) | `ToggleGroup` | Buttons 1–3 disabled, forced choice ≥ 4 | Yes | Keep `disabled` per item | ⬜ |
+| BEH-08 | Rating dialog | `ToggleGroup` | Selected item `scale-110` + ring | Yes | Keep via `data-state` styling | ⬜ |
+| BEH-09 | Billing cycle (`PlansPage/BillingCycleSelector`) | `ToggleGroup` | Ghost/default pill inside a muted track | Maybe | Match with `ToggleGroup` variants | ⬜ |
+| BEH-10 | Comment replies (`comments/CommentItem`) | `Collapsible` | Replies render **instantly** (no height animation) | No | `Collapsible` animates; accept if fine, else disable animation | ⬜ |
+| BEH-11 | Paywall reveal (`content/PartitionalLockedContent`) | `Collapsible` | Deliberately janky incremental reveal | Yes | Keep the custom reveal; do not smooth it | ⬜ |
+| BEH-12 | Cancellation reasons (`CancellationPage/steps/ReasonsStep`) | `RadioGroup` + `Field` | Clicking a reason selects **and** advances the step | Yes | Keep the click-through handler | ⬜ |
+| BEH-13 | Survey bar (`FlaimSurveyPage/ProgressBar`) | `Progress` | Time-driven auto-shrink (not value-driven) | Yes | Keep the animation-driven bar if `Progress` cannot express it | ⬜ |
+| BEH-14 | Urgency countdown (`PlansPage/UrgencyCountdown`) | `Badge` | `animate-pulse` while active | Yes | Keep pulse class | ⬜ |
+| BEH-15 | Adblocker bar (`marketing/AdblockerSuspectBar`) | `Alert` | Sticky `-bottom-3`, `FadeIn` slide-in | Yes | Keep positioning/animation wrapper | ⬜ |
+| BEH-16 | Beggar banner (`funding/BeggarBanner`) | `Alert` | Sticky positioning + raw close button | Yes | Keep sticky wrapper + `Button` icon close | ⬜ |
+| BEH-17 | Cookie consent (`app/…/CookieConsent`) | `Alert` / `Button` | Always-on sticky banner, no dismiss control | Yes | Keep the grant-flag behavior | ⬜ |
+| BEH-18 | Pain slider (`AppHeader/…/PainLevelSelector`) | `Slider` | Custom `SliderRail` gradient + firefly particles + clamp labels | Yes | Keep rail/particles as an overlay layer | ⬜ |
+| BEH-19 | Debug store (`monitoring/…/StoreInspector`) | `Textarea` | `resize-none`, mono font, fixed min height | No | Re-apply via `className` | ⬜ |
+| BEH-20 | Context menu (`disruptions/useDisableContextMenu`) | `AlertDialog` or `toast` | Rude native `alert()` on right-click | Yes | Decide: keep native alert or restyle | ⬜ |
+
+## Phase checklist
+
+- [ ] **Phase 0** — Infra: `base-vega` style, registry conventions, this log, ADR 31.
+- [ ] **Phase 1** — Free wins with existing ui-lib components (Textarea, Separator,
+      Button, CopyMarker, Tooltip, Badge, Card, Alert).
+- [ ] **Phase 2** — Chat primitives (`Bubble`, `Message`, `MessageScroller`,
+      `Attachment`, `Marker`); retire `useInteractOutside`.
+- [ ] **Phase 3** — `Switch`; migrate settings toggles.
+- [ ] **Phase 4** — `Collapsible`, `Empty`, `Slider`, `ToggleGroup`, `ScrollArea`,
+      `Spinner`.
+- [ ] **Phase 5** — ui-lib export/sub-part cleanups.
