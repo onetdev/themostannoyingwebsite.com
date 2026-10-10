@@ -1,6 +1,6 @@
 'use client';
 
-import { Icon } from '@maw/ui-lib';
+import { Button, Icon } from '@maw/ui-lib';
 import { useTranslations } from 'next-intl';
 import { Link } from '@/core/i18n/navigation';
 import { useBeggarBanner } from '../hooks';
@@ -25,14 +25,16 @@ export function BeggarBanner() {
             </Link>
           </p>
         </div>
-        <button
+        <Button
           type="button"
+          variant="ghost"
+          size="icon"
           onClick={onDismiss}
-          className="shrink-0 cursor-pointer"
+          className="shrink-0 hover:bg-transparent hover:text-current"
           aria-label={t('common.app.dismissBanner')}
         >
           <Icon icon="close" />
-        </button>
+        </Button>
       </div>
     </div>
   );

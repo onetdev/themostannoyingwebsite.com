@@ -1,5 +1,6 @@
 'use client';
 
+import { Button } from '@maw/ui-lib';
 import { useTranslations } from 'next-intl';
 
 import { Link } from '@/core/i18n/navigation';
@@ -22,9 +23,9 @@ export function CookieConsent() {
           <Link href="/settings" passHref prefetch={false}>
             {t('common.navigation.settings')}
           </Link>
-          <button type="button" onClick={close}>
+          <Button variant="outline" size="sm" type="button" onClick={close}>
             {t('common.action.ok')}
-          </button>
+          </Button>
         </div>
       </div>
     )
