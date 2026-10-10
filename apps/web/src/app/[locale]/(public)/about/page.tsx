@@ -1,10 +1,9 @@
-import { PageHeadline } from '@maw/ui-lib';
-import styles from '@maw/ui-lib/content.module.css';
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import { getTranslations } from 'next-intl/server';
 import { loadLocaleMdx } from '@/core/i18n/load-locale-mdx';
 import { WebPageStructuredData } from '@/core/seo';
+import { DocumentPage } from '../_components/DocumentPage';
 import { PageLayout } from '../_components/PageLayout';
 import { TranslationDisclaimer } from '../_components/TranslationDisclaimer';
 
@@ -41,13 +40,10 @@ export default async function Page({ params }: NextPageProps) {
           namespace="metadata.about"
           type="AboutPage"
         />
-        <PageHeadline className="mx-auto w-full max-w-screen-md">
-          {t('common.navigation.about')}
-        </PageHeadline>
-        <div className={styles.content}>
+        <DocumentPage title={t('common.navigation.about')}>
           <TranslationDisclaimer currentLocale={locale} href="/about" />
           <Content />
-        </div>
+        </DocumentPage>
       </PageLayout>
     );
   } catch (_err) {

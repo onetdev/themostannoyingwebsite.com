@@ -26,7 +26,7 @@
 }
 
 .content hr {
-  @apply border-border w-full max-w-screen-md m-5;
+  @apply border-border w-full max-w-measure m-5;
 }
 
 .content > p,
@@ -39,7 +39,17 @@
 .content > h4,
 .content > h5,
 .content > h6 {
-  @apply w-full max-w-screen-md;
+  @apply w-full max-w-measure;
+}
+
+/* Keep anchored headings clear of the sticky floating header. */
+.content > h1,
+.content > h2,
+.content > h3,
+.content > h4,
+.content > h5,
+.content > h6 {
+  scroll-margin-top: 7rem;
 }
 
 .content > h1,

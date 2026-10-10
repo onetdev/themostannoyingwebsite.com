@@ -10,6 +10,8 @@ export const getAboutPage = (page: Page) => {
 
     headline: page.getByRole('heading', { name: 'About' }),
 
+    tableOfContents: page.getByRole('navigation', { name: 'On this page' }),
+
     goto: async () => {
       await page.goto('/en/about');
     },

@@ -156,6 +156,10 @@ export default {
         'If you encounter any technical issues or want to suggest new pain points, please <linkTag>report them on GitHub</linkTag>.',
     },
   },
+  document: {
+    lastUpdated: 'Last updated: {date}',
+    onThisPage: 'On this page',
+  },
   navigation: {
     about: 'About',
     achievements: 'Achievements',

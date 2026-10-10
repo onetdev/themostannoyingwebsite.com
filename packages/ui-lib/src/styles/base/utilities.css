@@ -6,6 +6,12 @@
  * These are static values that don't change with theme
  */
 @theme static {
+  /* Content width tokens (drive `max-w-measure` / `max-w-document`).
+   * `measure` is the single source of truth for the readable text column,
+   * `document` is the outer wrapper that adds room for a table of contents. */
+  --container-measure: 48rem;
+  --container-document: 72rem;
+
   /* Height utilities */
   --max-height-clamp-300-screen-half: min(300px, 50vh);
   --max-height-screen-3per4: 75vh;
