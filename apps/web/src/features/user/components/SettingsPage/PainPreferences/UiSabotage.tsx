@@ -1,6 +1,6 @@
 'use client';
 
-import { Checkbox as FormCheckbox } from '@maw/ui-lib';
+import { Switch as FormSwitch } from '@maw/ui-lib';
 import { useTranslations } from 'next-intl';
 import { usePainPreferencesStore } from '@/stores';
 import { SettingsField } from '../SettingsField';
@@ -18,7 +18,7 @@ export function UiSabotage() {
         label={t('disableContextMenu.label')}
         info={t('disableContextMenu.hint')}
       >
-        <FormCheckbox
+        <FormSwitch
           name="disable_context"
           checked={painPreferences.flags.disableContextMenu}
           onCheckedChange={(value) =>
@@ -30,7 +30,7 @@ export function UiSabotage() {
         label={t('clipboardBrandingMark.label')}
         info={t('clipboardBrandingMark.hint')}
       >
-        <FormCheckbox
+        <FormSwitch
           name="clipboard_marker"
           checked={painPreferences.flags.clipboardMarker}
           onCheckedChange={(value) =>
@@ -42,7 +42,7 @@ export function UiSabotage() {
         label={t('searchDelay.label')}
         info={t('searchDelay.hint')}
       >
-        <FormCheckbox
+        <FormSwitch
           name="search_delay"
           checked={painPreferences.flags.searchDelay}
           onCheckedChange={(value) =>
@@ -54,7 +54,7 @@ export function UiSabotage() {
         label={t('historySpam.label')}
         info={t('historySpam.hint')}
       >
-        <FormCheckbox
+        <FormSwitch
           name="history_spam"
           checked={painPreferences.flags.historySpam}
           onCheckedChange={(value) =>

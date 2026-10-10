@@ -1,6 +1,6 @@
 'use client';
 
-import { Checkbox as FormCheckbox } from '@maw/ui-lib';
+import { Switch as FormSwitch } from '@maw/ui-lib';
 import { useTranslations } from 'next-intl';
 import { usePainPreferencesStore } from '@/stores';
 import { SettingsField } from '../SettingsField';
@@ -18,7 +18,7 @@ export function BrowserHijacking() {
         label={t('pageTitleInactiveArrayPaged.label')}
         info={t('pageTitleInactiveArrayPaged.hint')}
       >
-        <FormCheckbox
+        <FormSwitch
           name="page_title_inactive_array_paged"
           checked={painPreferences.flags['pageTitle.inactiveArrayPaged']}
           onCheckedChange={(value) =>
@@ -33,7 +33,7 @@ export function BrowserHijacking() {
         label={t('notifications.label')}
         info={t('notifications.hint')}
       >
-        <FormCheckbox
+        <FormSwitch
           name="notifications"
           checked={painPreferences.flags.notifications}
           onCheckedChange={(value) =>
@@ -45,7 +45,7 @@ export function BrowserHijacking() {
         label={t('achievementNotifications.label')}
         info={t('achievementNotifications.hint')}
       >
-        <FormCheckbox
+        <FormSwitch
           name="achievementNotifications"
           checked={painPreferences.flags.achievementNotifications}
           onCheckedChange={(value) =>

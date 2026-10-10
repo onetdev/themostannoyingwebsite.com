@@ -1,6 +1,6 @@
 'use client';
 
-import { Checkbox as FormCheckbox } from '@maw/ui-lib';
+import { Switch as FormSwitch } from '@maw/ui-lib';
 import { useTranslations } from 'next-intl';
 import { usePainPreferencesStore } from '@/stores';
 import { SettingsField } from '../SettingsField';
@@ -18,7 +18,7 @@ export function Interruptions() {
         label={t('newsletterModal.label')}
         info={t('newsletterModal.hint')}
       >
-        <FormCheckbox
+        <FormSwitch
           name="newsletter"
           checked={painPreferences.flags.newsletterModal}
           onCheckedChange={(value) =>
@@ -30,7 +30,7 @@ export function Interruptions() {
         label={t('wheelOfFortune.label')}
         info={t('wheelOfFortune.hint')}
       >
-        <FormCheckbox
+        <FormSwitch
           name="wheel_of_fortune"
           checked={painPreferences.flags.wheelOfFortune}
           onCheckedChange={(value) =>
@@ -39,7 +39,7 @@ export function Interruptions() {
         />
       </SettingsField>
       <SettingsField label={t('exitPrompt.label')} info={t('exitPrompt.hint')}>
-        <FormCheckbox
+        <FormSwitch
           name="exit_prompt"
           checked={painPreferences.flags.exitPrompt}
           onCheckedChange={(value) =>
@@ -51,7 +51,7 @@ export function Interruptions() {
         label={t('contentPaywall.label')}
         info={t('contentPaywall.hint')}
       >
-        <FormCheckbox
+        <FormSwitch
           name="content_paywall"
           checked={painPreferences.flags.contentPaywall}
           onCheckedChange={(value) =>
@@ -63,7 +63,7 @@ export function Interruptions() {
         label={t('detectAdblocker.label')}
         info={t('detectAdblocker.hint')}
       >
-        <FormCheckbox
+        <FormSwitch
           name="detect_adblocker"
           checked={painPreferences.flags['promotions.detectAdblocker']}
           onCheckedChange={(value) =>
@@ -78,7 +78,7 @@ export function Interruptions() {
         label={t('mockSupportChat.label')}
         info={t('mockSupportChat.hint')}
       >
-        <FormCheckbox
+        <FormSwitch
           name="mock_chat"
           checked={painPreferences.flags.mockChat}
           onCheckedChange={(value) =>
@@ -90,7 +90,7 @@ export function Interruptions() {
         label={t('ratingDialog.label')}
         info={t('ratingDialog.hint')}
       >
-        <FormCheckbox
+        <FormSwitch
           name="rating_dialog"
           checked={painPreferences.flags.ratingDialog}
           onCheckedChange={(value) =>

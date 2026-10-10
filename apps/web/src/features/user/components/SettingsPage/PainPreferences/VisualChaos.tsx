@@ -4,7 +4,7 @@ import {
   Field,
   FieldContent,
   FieldLabel,
-  Checkbox as FormCheckbox,
+  Switch as FormSwitch,
   Select,
   SelectContent,
   SelectItem,
@@ -32,7 +32,7 @@ export function VisualChaos() {
         label={t('screensaver.label')}
         info={t('screensaver.hint')}
       >
-        <FormCheckbox
+        <FormSwitch
           name="screensaver"
           checked={painPreferences.flags.screensaver}
           onCheckedChange={(value) =>
@@ -114,7 +114,7 @@ export function VisualChaos() {
         </div>
       )}
       <SettingsField label={t('deadPixel.label')} info={t('deadPixel.hint')}>
-        <FormCheckbox
+        <FormSwitch
           name="dead_pixel"
           checked={painPreferences.flags.deadPixel}
           onCheckedChange={(value) =>
@@ -126,7 +126,7 @@ export function VisualChaos() {
         label={t('stickyVideoPlayer.label')}
         info={t('stickyVideoPlayer.hint')}
       >
-        <FormCheckbox
+        <FormSwitch
           name="sticky_video"
           checked={painPreferences.flags.stickyVideo}
           onCheckedChange={(value) =>
@@ -138,7 +138,7 @@ export function VisualChaos() {
         label={t('backgroundAdflaps.label')}
         info={t('backgroundAdflaps.hint')}
       >
-        <FormCheckbox
+        <FormSwitch
           name="promotions_flaps"
           checked={painPreferences.flags['promotions.flaps']}
           onCheckedChange={(value) =>
@@ -150,7 +150,7 @@ export function VisualChaos() {
         label={t('flaimAPHoneAd.label')}
         info={t('flaimAPHoneAd.hint')}
       >
-        <FormCheckbox
+        <FormSwitch
           name="one_by_one"
           checked={painPreferences.flags['promotions.oneByOne']}
           onCheckedChange={(value) =>
