@@ -19,5 +19,6 @@ export * from './PasswordStrengthBar';
 export * from './Progress';
 export * from './Select';
 export * from './Separator';
+export * from './Switch';
 export * from './Textarea';
 export * from './Tooltip';
