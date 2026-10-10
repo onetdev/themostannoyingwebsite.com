@@ -121,11 +121,10 @@ Deliberately deferred:
 - Exported `buttonVariants` and `navigationMenuTriggerStyle` so consumers can
   compose them.
 - Added the missing `checkbox-indicator` `data-slot`.
-- **Not done**: `Progress` sub-parts (`ProgressTrack`/`Indicator`/`Label`/`Value`)
-  were skipped because the current single-component `Progress` renders its own
-  track/indicator; splitting it would change its public shape for no current
-  consumer. `LoaderDots` is kept as-is alongside the new `Spinner` until a
-  consumer migrates.
+- **Progress** was initially left monolithic and later ported to the compound
+  `ProgressTrack`/`Indicator`/`Label`/`Value` — see "Registry drift audit".
+  `LoaderDots` is kept as-is alongside the new `Spinner` until a consumer
+  migrates.
 
 ## Phase 6 review notes
 
@@ -144,6 +143,25 @@ Restyled the chat popup to match the shadcn chat demo:
   send (↑) button. The demo's attach (+) button was dropped and the 👍
   `BubbleReactions` were removed for now.
 - **Icons**: `arrowUp` added to the ui-lib `Icon` map.
+
+## Registry drift audit
+
+`pnpm audit:registry` (`packages/ui-lib/scripts/audit-registry-drift.ts`) diffs
+every registry-backed component against the `base-vega` item for missing
+exports, `data-slot` parts and `sideOffset`/`alignOffset` defaults. It found and
+we fixed the following stale ports:
+
+- **Tooltip**: arrow missing `translate-y`, `sideOffset` 0, no max width.
+- **Select**: default `sideOffset` 0 (same class of bug as Tooltip).
+- **Checkbox**: missing root `data-slot`.
+- **Alert**: missing `AlertAction`.
+- **Accordion**: missing `accordion-trigger-icon` slot.
+- **Carousel**: `useCarousel` not exported.
+- **NavigationMenu**: missing `NavigationMenuIndicator`.
+- **Progress**: ported from monolithic to the compound component.
+
+The audit is not wired into `lint`/`test` (it needs network); run it on demand
+or in CI.
 
 ## Phase checklist
 
