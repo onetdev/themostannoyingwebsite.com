@@ -29,4 +29,17 @@ describe('DocumentPage', () => {
     expect(html).not.toContain('<time');
     expect(html).toContain('Body copy');
   });
+
+  it('renders header actions on the headline row', () => {
+    const html = renderToStaticMarkup(
+      <DocumentPage
+        title="About"
+        headerActions={<button type="button">Share</button>}
+      >
+        <p>Body copy</p>
+      </DocumentPage>,
+    );
+
+    expect(html).toContain('Share');
+  });
 });

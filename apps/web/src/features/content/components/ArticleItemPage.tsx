@@ -1,7 +1,7 @@
 'use client';
 
 import { type Article, toCoverImages } from '@maw/content-sdk';
-import { Separator } from '@maw/ui-lib';
+import { PageHeadline, Separator } from '@maw/ui-lib';
 import styles from '@maw/ui-lib/content.module.css';
 import HTMLReactParser from 'html-react-parser';
 import Image from 'next/image';
@@ -9,6 +9,7 @@ import { useFormatter, useTranslations } from 'next-intl';
 import { Link } from '@/core/i18n/navigation';
 import { CommentSection } from '@/features/comments/components';
 import type { Comment } from '@/features/comments/schemas/comment';
+import { ShareButton } from '@/features/share/components';
 import { usePainPreferencesStore } from '@/stores';
 import { PartitionalLockedContent } from './PartitionalLockedContent';
 
@@ -42,7 +43,9 @@ export function ArticleItemPage({
 
   return (
     <>
-      <h1 className="mb-2 max-w-[900px]">{article.title}</h1>
+      <PageHeadline className="mb-2 max-w-[900px]" actions={<ShareButton />}>
+        {article.title}
+      </PageHeadline>
       <span className="mb-5 block italic">
         {t.rich('content.author.byline', {
           name: article.author.name,

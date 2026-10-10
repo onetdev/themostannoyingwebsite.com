@@ -4,6 +4,7 @@ import { notFound } from 'next/navigation';
 import { getFormatter, getTranslations } from 'next-intl/server';
 import { loadLocaleMdx } from '@/core/i18n/load-locale-mdx';
 import { WebPageStructuredData } from '@/core/seo';
+import { ShareButton } from '@/features/share/components';
 import { DocumentPage } from '../_components/DocumentPage';
 import { PageLayout } from '../_components/PageLayout';
 import { TranslationDisclaimer } from '../_components/TranslationDisclaimer';
@@ -54,6 +55,7 @@ export default async function Page({ params }: NextPageProps) {
         />
         <DocumentPage
           title={t('common.navigation.termsOfUse')}
+          headerActions={<ShareButton />}
           meta={
             <time dateTime={TERMS_LAST_UPDATED}>
               {t('common.document.lastUpdated', {

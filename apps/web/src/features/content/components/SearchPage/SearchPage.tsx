@@ -9,6 +9,7 @@ import {
 import { useTranslations } from 'next-intl';
 import { SearchForm } from '@/features/content/components';
 import { useSearch } from '@/features/content/hooks';
+import { ShareButton } from '@/features/share/components';
 import { NoSearchResults } from './NoSearchResults';
 import { SearchResultItem } from './SearchResultItem';
 
@@ -22,7 +23,9 @@ export function SearchPage() {
 
   return (
     <>
-      <PageHeadline>{tNavigation('search')}</PageHeadline>
+      <PageHeadline actions={<ShareButton />}>
+        {tNavigation('search')}
+      </PageHeadline>
       <SearchForm size="lg" className="max-w-[400px]" initialValue={query} />
       {isLoading && (
         <h4 className="my-10 text-2xl">

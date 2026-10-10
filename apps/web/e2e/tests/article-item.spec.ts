@@ -30,6 +30,7 @@ test('article can be view from the home page', { tag: '@smoke' }, async ({
   const articlePage = getArticlePage(page);
   await expect(articlePage.articleItem).toBeVisible();
   await expect(articlePage.articleItemContent).toBeVisible();
+  await expect(page.getByRole('button', { name: 'Share' })).toBeVisible();
   await expect(articlePage.paywallOverlayConfirm).toBeVisible();
   await expect(articlePage.paywallOverlayCancel).toBeVisible();
 });

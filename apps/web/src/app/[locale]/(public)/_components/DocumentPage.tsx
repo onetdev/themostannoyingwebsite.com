@@ -12,6 +12,10 @@ export type DocumentPageProps = {
    * "last updated" timestamp.
    */
   meta?: ReactNode;
+  /**
+   * Optional actions rendered on the headline row, e.g. a share button.
+   */
+  headerActions?: ReactNode;
   /** Disable the sticky "On this page" navigation. */
   showTableOfContents?: boolean;
   className?: string;
@@ -28,6 +32,7 @@ export type DocumentPageProps = {
 export function DocumentPage({
   title,
   meta,
+  headerActions,
   showTableOfContents = true,
   className,
   children,
@@ -36,7 +41,10 @@ export function DocumentPage({
     <div className={clsx('mx-auto w-full max-w-document', className)}>
       <div className="xl:grid xl:grid-cols-[minmax(0,1fr)_14rem] xl:items-start xl:gap-12">
         <div className="min-w-0">
-          <PageHeadline className="mx-auto w-full max-w-measure">
+          <PageHeadline
+            className="mx-auto w-full max-w-measure"
+            actions={headerActions}
+          >
             {title}
           </PageHeadline>
           {meta && (

@@ -3,6 +3,7 @@ import styles from '@maw/ui-lib/content.module.css';
 import type { Metadata } from 'next';
 import { getLocale, getTranslations } from 'next-intl/server';
 import { WebPageStructuredData } from '@/core/seo';
+import { ShareButton } from '@/features/share/components';
 import { PageLayout } from '../_components/PageLayout';
 import DisableAllOnMount from './disable-all-on-mount';
 
@@ -34,7 +35,10 @@ async function Page() {
         namespace="metadata.virgin"
       />
       <DisableAllOnMount />
-      <PageHeadline className="mx-auto w-full max-w-screen-md">
+      <PageHeadline
+        className="mx-auto w-full max-w-screen-md"
+        actions={<ShareButton />}
+      >
         {t('common.app.virgin.title')}
       </PageHeadline>
       <div className={styles.content}>

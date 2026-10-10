@@ -1,9 +1,11 @@
 import type { LanguageCode } from '@maw/content-sdk';
+import { PageHeadline } from '@maw/ui-lib';
 import type { Metadata } from 'next';
 import { getLocale, getTranslations } from 'next-intl/server';
 import { WebPageStructuredData } from '@/core/seo';
 import { ContentPoolsBoundary } from '@/features/content/components/ContentPoolsBoundary';
 import { FlaimSurveyPage } from '@/features/marketing/components';
+import { ShareButton } from '@/features/share/components';
 import { PageLayout } from '../_components/PageLayout';
 
 export { generateStaticParams } from '@/core/i18n/routing';
@@ -37,7 +39,9 @@ export default async function Page() {
         path="flaim-a-phone"
         namespace="metadata.wanPhone"
       />
-      <h1>{t('marketing.wanPhone.title')}</h1>
+      <PageHeadline actions={<ShareButton />}>
+        {t('marketing.wanPhone.title')}
+      </PageHeadline>
       <ContentPoolsBoundary lang={locale} types={['survey']}>
         <FlaimSurveyPage
           className="my-5 w-full"

@@ -5,6 +5,7 @@ import { useTranslations } from 'next-intl';
 import { useCallback, useState } from 'react';
 import { emit } from '@/core/events/event-bus';
 import { Link } from '@/core/react';
+import { ShareButton } from '@/features/share/components';
 import type {
   BillingCycle,
   SubscriptionFeature,
@@ -61,11 +62,9 @@ export function PlansPage({
   return (
     <>
       <PurchaseProofToast plans={plans} {...socialProofConfig} />
-      <div className="mb-6 flex flex-col items-center justify-between gap-4 sm:flex-row">
-        <PageHeadline className="mb-0">
-          {t('subscription.landing.headline')}
-        </PageHeadline>
-      </div>
+      <PageHeadline className="mb-6" actions={<ShareButton />}>
+        {t('subscription.landing.headline')}
+      </PageHeadline>
 
       <div className="mb-8 flex flex-col items-center gap-5 md:flex-row md:items-baseline md:justify-between">
         <div>

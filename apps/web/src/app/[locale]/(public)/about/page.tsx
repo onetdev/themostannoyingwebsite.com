@@ -3,6 +3,7 @@ import { notFound } from 'next/navigation';
 import { getTranslations } from 'next-intl/server';
 import { loadLocaleMdx } from '@/core/i18n/load-locale-mdx';
 import { WebPageStructuredData } from '@/core/seo';
+import { ShareButton } from '@/features/share/components';
 import { DocumentPage } from '../_components/DocumentPage';
 import { PageLayout } from '../_components/PageLayout';
 import { TranslationDisclaimer } from '../_components/TranslationDisclaimer';
@@ -40,7 +41,10 @@ export default async function Page({ params }: NextPageProps) {
           namespace="metadata.about"
           type="AboutPage"
         />
-        <DocumentPage title={t('common.navigation.about')}>
+        <DocumentPage
+          title={t('common.navigation.about')}
+          headerActions={<ShareButton />}
+        >
           <TranslationDisclaimer currentLocale={locale} href="/about" />
           <Content />
         </DocumentPage>
