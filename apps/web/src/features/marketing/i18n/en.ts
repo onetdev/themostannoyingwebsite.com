@@ -54,6 +54,8 @@ export default {
     spinStart: 'Click or Tap here!',
     spinWin: 'You won! {prize}',
     wheelTitle: 'Wheel of fortune',
+    unavailable:
+      'The prize wheel is out of order right now. Please try again later.',
   },
   onlySpams: {
     title: 'OnlySpams - Premium Newsletter',
