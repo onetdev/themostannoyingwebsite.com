@@ -1,5 +1,6 @@
 'use client';
 
+import { Separator } from '@maw/ui-lib';
 import { useAchievementBankService } from '../hooks';
 import { useAchievementsStore } from '../stores';
 import { AchievementCard } from './AchievementCard';
@@ -33,8 +34,11 @@ export function AchievementList() {
       </div>
 
       {hasAnyAchievements && (
-        <div className="flex justify-center border-border border-t pt-8">
-          <ResetAchievements />
+        <div className="flex flex-col gap-8">
+          <Separator />
+          <div className="flex justify-center">
+            <ResetAchievements />
+          </div>
         </div>
       )}
     </div>

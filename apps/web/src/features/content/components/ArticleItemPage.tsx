@@ -1,6 +1,7 @@
 'use client';
 
 import { type Article, toCoverImages } from '@maw/content-sdk';
+import { Separator } from '@maw/ui-lib';
 import styles from '@maw/ui-lib/content.module.css';
 import HTMLReactParser from 'html-react-parser';
 import Image from 'next/image';
@@ -79,7 +80,10 @@ export function ArticleItemPage({
           {HTMLReactParser(renderedContent)}
         </div>
       </PartitionalLockedContent>
-      <CommentSection className="mt-10 border-t" items={comments} />
+      <div className="mx-auto mt-10 w-full max-w-3xl">
+        <Separator />
+      </div>
+      <CommentSection items={comments} />
     </>
   );
 }
