@@ -38,7 +38,7 @@ export function ChatBubbleTrigger({
       <Button
         size="icon"
         variant="secondary"
-        className="size-14 rounded-full shadow-lg"
+        className="size-14 rounded-full shadow-lg hover:scale-105 hover:bg-secondary active:scale-95"
         onClick={onClick}
         aria-label={label}
         title={label}

@@ -25,14 +25,12 @@ import { MessageForm } from './MessageForm';
 export type HistoryOverlayProps = {
   history: ChatMessage[];
   onClose: () => void;
-  onReset: () => void;
   onUserMessage: (message: string) => void;
 };
 
 export function HistoryOverlay({
   history,
   onClose,
-  onReset,
   onUserMessage,
 }: HistoryOverlayProps) {
   const [showTyping, setShowTyping] = useState(true);
@@ -50,7 +48,7 @@ export function HistoryOverlay({
   }, [history]);
 
   return (
-    <div className="border-secondary bg-card flex flex-col rounded-lg border text-start">
+    <div className="border-secondary bg-card flex flex-col rounded-lg border text-start shadow-xl">
       <div className="flex items-start justify-between gap-2 p-3 ps-5 shadow-xs">
         <div className="min-w-0">
           <h4 className="flex items-center gap-1 text-base font-bold">
@@ -71,15 +69,6 @@ export function HistoryOverlay({
           </p>
         </div>
         <div className="flex shrink-0 items-center gap-1">
-          <Button
-            variant="ghost"
-            size="icon-sm"
-            onClick={() => onReset()}
-            aria-label={t('support.chatBubble.newChat')}
-            title={t('support.chatBubble.newChat')}
-          >
-            <Icon icon="rotate" />
-          </Button>
           <Button
             variant="ghost"
             size="icon-sm"
