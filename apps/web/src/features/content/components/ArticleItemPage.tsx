@@ -11,6 +11,8 @@ import { CommentSection } from '@/features/comments/components';
 import type { Comment } from '@/features/comments/schemas/comment';
 import { ShareButton } from '@/features/share/components';
 import { usePainPreferencesStore } from '@/stores';
+import { ArticleKeywords } from './ArticleKeywords';
+import { ArticleTags } from './ArticleTags';
 import { PartitionalLockedContent } from './PartitionalLockedContent';
 
 export interface ArticleItemPageProps {
@@ -43,38 +45,42 @@ export function ArticleItemPage({
 
   return (
     <>
-      <PageHeadline className="mb-2 max-w-[900px]" actions={<ShareButton />}>
-        {article.title}
-      </PageHeadline>
-      <span className="mb-5 block italic">
-        {t.rich('content.author.byline', {
-          name: article.author.name,
-          linkTag: (chunks) => (
-            <Link
-              href={`/authors/${article.author.slug}`}
-              passHref
-              prefetch={false}
-              className="text-primary hover:underline"
-            >
-              {chunks}
-            </Link>
-          ),
-        })}
-        {' · '}
-        {t('content.article.published', { date: formatterPublishedAt })}
-      </span>
       {coverImages?.original && (
-        <div className="-mx-5 xl:-mx-8">
+        <div className="-mx-5 mb-6 xl:-mx-8">
           <Image
             className="h-auto w-full object-cover"
             src={coverImages.original}
-            alt={t('content.article.coverImage')}
+            alt={article.title}
             width="1920"
             height="1200"
             loading="eager"
           />
         </div>
       )}
+      <div className="mx-auto w-full max-w-measure">
+        <PageHeadline className="mb-2" actions={<ShareButton />}>
+          {article.title}
+        </PageHeadline>
+        <span className="mb-3 block italic">
+          {t.rich('content.author.byline', {
+            name: article.author.name,
+            linkTag: (chunks) => (
+              <Link
+                href={`/authors/${article.author.slug}`}
+                passHref
+                prefetch={false}
+                className="text-primary hover:underline"
+              >
+                {chunks}
+              </Link>
+            ),
+          })}
+          {' · '}
+          {t('content.article.published', { date: formatterPublishedAt })}
+        </span>
+        <ArticleTags article={article} className="mb-2 flex-wrap" />
+        <ArticleKeywords article={article} className="mb-5" />
+      </div>
       <PartitionalLockedContent
         initialMaxHeight={300}
         active={partitionEnabled}

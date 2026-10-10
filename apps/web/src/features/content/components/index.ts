@@ -1,4 +1,5 @@
 export * from './ArticleItemPage';
+export * from './ArticleKeywords';
 export * from './ArticleMeta';
 export * from './ArticleTags';
 export * from './AuthorPage';
