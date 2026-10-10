@@ -11,6 +11,7 @@
     "./utils": "./src/utils/index.ts"
   },
   "scripts": {
+    "audit:registry": "tsx ./scripts/audit-registry-drift.ts",
     "check-types": "tsc --noEmit",
     "lint": "biome check .",
     "format": "biome format --write .",
