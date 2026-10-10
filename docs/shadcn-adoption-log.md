@@ -116,6 +116,17 @@ Deliberately deferred:
 | Pain slider (`AppHeader/…/PainLevelSelector`) | `Slider` | BEH-18: the custom `SliderRail` gradient, clamp labels and firefly particles are the design. A `Slider` would have to be layered transparently over the rail; the native range input stays until that is designed on purpose. |
 | `monitoring/…/EventHistory` payload | `ScrollArea` | Debug-only; the chat scroll container is already owned by `MessageScroller`, so there is no meaningful second consumer yet. |
 
+## Phase 5 review notes
+
+- Exported `buttonVariants` and `navigationMenuTriggerStyle` so consumers can
+  compose them.
+- Added the missing `checkbox-indicator` `data-slot`.
+- **Not done**: `Progress` sub-parts (`ProgressTrack`/`Indicator`/`Label`/`Value`)
+  were skipped because the current single-component `Progress` renders its own
+  track/indicator; splitting it would change its public shape for no current
+  consumer. `LoaderDots` is kept as-is alongside the new `Spinner` until a
+  consumer migrates.
+
 ## Phase checklist
 
 - [x] **Phase 0** — Infra: `base-vega` style, registry conventions, this log, ADR 31.
@@ -127,4 +138,5 @@ Deliberately deferred:
 - [x] **Phase 3** — `Switch`; settings toggles migrated.
 - [x] **Phase 4** — `Collapsible`, `Empty`, `ToggleGroup`, `Spinner` adopted;
       `Slider` added but unused and `ScrollArea` deferred — see Phase 4 notes.
-- [ ] **Phase 5** — ui-lib export/sub-part cleanups.
+- [x] **Phase 5** — `buttonVariants` and `navigationMenuTriggerStyle` exported,
+      checkbox indicator slot added; Progress sub-parts deferred — see notes.
