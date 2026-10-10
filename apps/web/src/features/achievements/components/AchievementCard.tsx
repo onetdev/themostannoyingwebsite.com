@@ -70,7 +70,10 @@ export function AchievementCard({ definition, state }: AchievementCardProps) {
               </span>
               <span>{Math.round(progressValue)}%</span>
             </div>
-            <Progress value={progressValue} className="h-2" />
+            <Progress
+              value={progressValue}
+              className="[&>[data-slot=progress-track]]:h-2"
+            />
           </div>
         )}
 

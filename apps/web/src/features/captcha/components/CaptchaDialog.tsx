@@ -72,7 +72,10 @@ export function CaptchaDialog({
             <span>{t('humanVerification.captcha.verificationProgress')}</span>
             <span>{completion.toFixed(2)}%</span>
           </div>
-          <Progress value={completion} className="h-1" />
+          <Progress
+            value={completion}
+            className="[&>[data-slot=progress-track]]:h-1"
+          />
         </div>
         <div className="p-4">
           <ErrorBoundary
