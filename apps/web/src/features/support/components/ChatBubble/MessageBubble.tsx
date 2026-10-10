@@ -3,7 +3,6 @@ import {
   AvatarFallback,
   Bubble,
   BubbleContent,
-  BubbleReactions,
   Message,
   MessageAvatar,
   MessageContent,
@@ -17,14 +16,9 @@ import type { ChatMessage } from '../../schemas';
 type MessageBubbleProps = {
   item: ChatMessage;
   showTime?: boolean;
-  reaction?: boolean;
 };
 
-export function MessageBubble({
-  item,
-  showTime = true,
-  reaction = false,
-}: MessageBubbleProps) {
+export function MessageBubble({ item, showTime = true }: MessageBubbleProps) {
   const intlFormatter = useTimeagoFormatter();
   const t = useTranslations('support.chatBubble');
   const isUser = item.owner === 'user';
@@ -42,11 +36,6 @@ export function MessageBubble({
           align={isUser ? 'end' : 'start'}
         >
           <BubbleContent>{item.text}</BubbleContent>
-          {reaction && (
-            <BubbleReactions align={isUser ? 'end' : 'start'}>
-              <span aria-hidden="true">👍</span>
-            </BubbleReactions>
-          )}
         </Bubble>
         {showTime && (
           <MessageFooter>

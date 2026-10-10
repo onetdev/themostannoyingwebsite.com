@@ -39,18 +39,7 @@ export function MessageForm({ className, onMessage }: MessageFormProps) {
           ref={userMessage}
           className="max-h-32 min-h-0 resize-none border-0 bg-transparent p-0 text-sm shadow-none focus-visible:ring-0 dark:bg-transparent"
         />
-        <div className="flex items-center justify-between">
-          <Button
-            type="button"
-            variant="outline"
-            size="icon-sm"
-            className="rounded-full"
-            disabled
-            aria-label={t('support.chatBubble.attachFile')}
-            title={t('support.chatBubble.attachFile')}
-          >
-            <Icon icon="plus" />
-          </Button>
+        <div className="flex items-center justify-end">
           <Button
             type="submit"
             size="icon"

@@ -5,7 +5,6 @@ export default {
     subtitle: 'How can I help you today?',
     newChat: 'Start a new chat',
     delivered: 'Delivered',
-    attachFile: 'Attach a file',
     messageInitial: 'Hello! I am a chat bubble. I am here to help you. 🤓',
     messageFallback: "It's nothing, leave me alone. 😤",
     newAlert: 'New message from Chat Bubble! 🎉',

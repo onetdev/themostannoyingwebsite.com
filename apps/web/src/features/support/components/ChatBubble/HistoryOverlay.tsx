@@ -49,15 +49,6 @@ export function HistoryOverlay({
     }));
   }, [history]);
 
-  const lastBotIndex = useMemo(() => {
-    for (let index = history.length - 1; index >= 0; index -= 1) {
-      if (history[index].owner === 'bot') {
-        return index;
-      }
-    }
-    return -1;
-  }, [history]);
-
   return (
     <div className="border-secondary bg-card flex flex-col rounded-lg border text-start">
       <div className="flex items-start justify-between gap-2 p-3 ps-5 shadow-xs">
@@ -107,11 +98,7 @@ export function HistoryOverlay({
             <MessageScrollerContent className="gap-2">
               {historyViewData.map(({ item, showTime }, index) => (
                 <MessageScrollerItem key={index}>
-                  <MessageBubble
-                    item={item}
-                    showTime={showTime}
-                    reaction={index === lastBotIndex}
-                  />
+                  <MessageBubble item={item} showTime={showTime} />
                 </MessageScrollerItem>
               ))}
               {showTyping && (
