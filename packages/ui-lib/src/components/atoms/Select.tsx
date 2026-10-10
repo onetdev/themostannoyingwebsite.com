@@ -43,7 +43,7 @@ export function SelectContent({
   className,
   children,
   side = 'bottom',
-  sideOffset = 0,
+  sideOffset = 4,
   align = 'center',
   alignOffset = 0,
   alignItemWithTrigger = true,

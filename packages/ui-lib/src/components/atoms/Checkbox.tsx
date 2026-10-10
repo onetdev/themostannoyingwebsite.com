@@ -29,6 +29,7 @@ export function Checkbox({ className, ref, size, ...props }: CheckboxProps) {
   return (
     <CheckboxPrimitive.Root
       ref={ref}
+      data-slot="checkbox"
       className={cn(checkboxVariants({ size, className }))}
       {...props}
     >
