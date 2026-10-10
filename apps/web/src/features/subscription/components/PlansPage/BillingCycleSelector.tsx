@@ -18,6 +18,7 @@ export function BillingCycleSelector({
     <ToggleGroup
       className="bg-muted rounded-lg p-1"
       value={[billingCycle]}
+      aria-label={t('subscription.landing.billing.label')}
       onValueChange={(value) => {
         const next = value[0];
         if (next) {
@@ -29,6 +30,7 @@ export function BillingCycleSelector({
         <ToggleGroupItem
           key={cycle}
           value={cycle}
+          className="aria-pressed:bg-primary aria-pressed:text-primary-foreground"
           data-testid={`billing-cycle-${cycle}`}
           size="sm"
         >
