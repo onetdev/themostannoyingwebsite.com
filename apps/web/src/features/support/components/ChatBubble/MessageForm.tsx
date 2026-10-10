@@ -30,25 +30,23 @@ export function MessageForm({ className, onMessage }: MessageFormProps) {
       onSubmit={handleFormSubmit}
       ref={userForm}
     >
-      <div className="bg-muted/50 border-border focus-within:border-ring flex flex-col gap-2 rounded-2xl border p-3 transition-colors">
+      <div className="bg-muted/50 border-border focus-within:border-ring flex items-end gap-2 rounded-2xl border p-3 transition-colors">
         <Textarea
           name="message"
           rows={1}
           title={t('support.chatBubble.yourMessage')}
           placeholder={t('support.chatBubble.yourMessagePlaceholder')}
           ref={userMessage}
-          className="max-h-32 min-h-0 resize-none border-0 bg-transparent p-0 text-sm shadow-none focus-visible:ring-0 dark:bg-transparent"
+          className="max-h-32 min-h-0 flex-1 resize-none border-0 bg-transparent p-0 text-sm shadow-none focus-visible:ring-0 dark:bg-transparent"
         />
-        <div className="flex items-center justify-end">
-          <Button
-            type="submit"
-            size="icon"
-            className="rounded-full"
-            aria-label={t('common.action.send')}
-          >
-            <Icon icon="arrowUp" />
-          </Button>
-        </div>
+        <Button
+          type="submit"
+          size="icon"
+          className="shrink-0 rounded-full"
+          aria-label={t('common.action.send')}
+        >
+          <Icon icon="arrowUp" />
+        </Button>
       </div>
     </form>
   );
