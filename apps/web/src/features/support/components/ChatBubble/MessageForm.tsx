@@ -30,7 +30,7 @@ export function MessageForm({ className, onMessage }: MessageFormProps) {
       onSubmit={handleFormSubmit}
       ref={userForm}
     >
-      <div className="bg-muted/50 border-border focus-within:border-ring flex items-end gap-2 rounded-2xl border p-3 transition-colors">
+      <div className="bg-muted/50 border-border focus-within:border-ring flex items-center gap-2 rounded-2xl border p-3 transition-colors">
         <Textarea
           name="message"
           rows={1}
