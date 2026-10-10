@@ -7,7 +7,7 @@ Displays intrusive advertisements, promotional content, and fake rewards designe
 - **DilfPage & Promotion Flaps**: Displays a "donut-finder" promo (`DILF - Donuts I'd Like to Feast On`) as persistent side flaps that attempt to redirect the user away from their current content.
 - **FlaimSurveyPage**: A multi-step fake quiz that uses high-pressure tactics (timers, impossible questions) and an animated banner to trick the user into thinking they've won a reward.
 - **Newsletter Subscription Loop**: A `NewsletterModal` that pops up based on scroll depth or tab-focus changes. The "Subscribe" and "Cancel" buttons are intentionally shuffled and use deceptive confirmation prompts.
-- **Adblocker Detection**: `AdblockerSuspectBar` monitors the presence of ad blockers and displays a massive, red, non-closable banner at the bottom of the screen.
+- **Adblocker Detection**: `AdblockerSuspectBar` combines a self-hosted network bait (`/ads/ads.js`) with a cosmetic canary built from globally blocked ad and cookie-notice selectors, then shows a floating, red glass banner at the bottom of the screen (dismissible for the session).
 - **Wheel of Fortune**: A "spinning wheel" UI that always results in fake or nonsensical rewards.
 - **WanAPhoneCampaignAd**: An intrusive, floating advertisement component that appears on random articles.
 

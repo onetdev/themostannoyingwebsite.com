@@ -39,7 +39,7 @@ export function PageLayout({
         activeItem={navigationHighlightRoute ?? route}
         className="mb-4"
       />
-      <main className={`${className ?? ''} ${localClassName}`} {...rest}>
+      <main className={`${className ?? ''} ${localClassName} flex-1`} {...rest}>
         {children}
       </main>
       <AppFooter className="mt-12" />

@@ -7,7 +7,6 @@ import { cn } from '@maw/ui-lib/utils';
 import Image from 'next/image';
 import type { ComponentProps } from 'react';
 import { Link } from '@/core/i18n/navigation';
-import { ArticleMeta } from './ArticleMeta';
 import { ArticleTags } from './ArticleTags';
 import { CoverPlaceholder } from './CoverPlaceholder';
 
@@ -52,16 +51,6 @@ export function LargeCoverItem({
                 {article.title}
               </span>
             </h2>
-            <p className="m-0 hidden text-sm md:block">
-              <span className="bg-card text-card-foreground box-decoration-clone px-2 py-1">
-                {article.summary}
-              </span>
-            </p>
-            <ArticleMeta
-              article={article}
-              showAuthor={false}
-              className="text-foreground"
-            />
           </div>
         </div>
       </Link>

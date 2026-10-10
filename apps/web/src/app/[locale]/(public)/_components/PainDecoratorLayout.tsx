@@ -76,7 +76,10 @@ export function PainDecoratorLayout({
       </AnimatePresence>
 
       {/* Main container and container relative sticky elements */}
-      <div className="relative container mx-auto my-0 min-h-screen">
+      <div
+        className="relative container mx-auto my-0 flex min-h-dvh flex-col"
+        style={{ paddingBottom: 'var(--adblocker-suspect-bar-height, 0px)' }}
+      >
         {children}
         <AnimatePresence>
           {runtimeFlags.wheelOfFortune && (

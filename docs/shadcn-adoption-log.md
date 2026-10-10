@@ -49,7 +49,7 @@ Status legend: ⬜ pending · 🟡 reintroduced as a wrapper · 🟢 preserved (
 | BEH-12 | Cancellation reasons (`CancellationPage/steps/ReasonsStep`) | `RadioGroup` + `Field` | Clicking a reason selects **and** advances the step | Yes | Keep the click-through handler | ⬜ |
 | BEH-13 | Survey bar (`FlaimSurveyPage/ProgressBar`) | `Progress` | Time-driven auto-shrink (not value-driven) | Yes | Keep the animation-driven bar if `Progress` cannot express it | ⬜ |
 | BEH-14 | Urgency countdown (`PlansPage/UrgencyCountdown`) | `Badge` | `animate-pulse` while active | Yes | Kept the pulse class on `Badge` | 🟢 |
-| BEH-15 | Adblocker bar (`marketing/AdblockerSuspectBar`) | `Alert` | Sticky `-bottom-3`, `FadeIn` slide-in | Yes | Keep positioning/animation wrapper | ⬜ |
+| BEH-15 | Adblocker bar (`marketing/AdblockerSuspectBar`) | `Alert` | Floating glass card, `FadeIn` slide-in | Yes | Custom floating shell kept; `Alert` still does not express it | ⬜ |
 | BEH-16 | Beggar banner (`funding/BeggarBanner`) | `Alert` / `Button` | Sticky positioning + raw close button | Yes | Sticky kept; close is now `Button` | 🟢 |
 | BEH-17 | Cookie consent (`app/…/CookieConsent`) | `Alert` / `Button` | Always-on sticky banner, no dismiss control | Yes | Kept the grant-flag behavior; OK is now `Button` | 🟢 |
 | BEH-18 | Pain slider (`AppHeader/…/PainLevelSelector`) | `Slider` | Custom `SliderRail` gradient + firefly particles + clamp labels | Yes | Keep rail/particles as an overlay layer | ⬜ |
