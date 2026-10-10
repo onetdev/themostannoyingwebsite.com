@@ -35,12 +35,12 @@ Status legend: ⬜ pending · 🟡 reintroduced as a wrapper · 🟢 preserved (
 
 | Ref | Area | shadcn component | Behavior at risk | Intentional? | Reintroduction plan | Status |
 | --- | ---- | ---------------- | ---------------- | ------------ | ------------------- | ------ |
-| BEH-01 | Chat trigger (`support/…/ChatBubble/ChatBubbleTrigger`) | `Button` + `Badge` | Unread-counter shake animation (framer-motion) | Yes | Animation wrapper around `Button` | ⬜ |
-| BEH-02 | Chat panel (`support/…/ChatBubble/ChatBubble`) | `MessageScroller` / `Popover` | Spring open/close transition (`AnimatePresence`) | Yes | Animate the panel wrapper, keep primitives controlled | ⬜ |
-| BEH-03 | Chat history | `MessageScroller` | Force scroll-to-bottom whenever the panel opens | Yes | Drive `MessageScroller` to end on open | ⬜ |
-| BEH-04 | Chat messages | `Message` / `Bubble` / `Marker` | Timestamp shown only when owner changes or gap > 5 min | Yes | Keep the grouping predicate, feed `Marker` | ⬜ |
-| BEH-05 | Chat history | `Marker` | "Agent is typing" indicator shown until the next user message | Yes | Keep the derived `showTyping` state | ⬜ |
-| BEH-06 | Chat trigger | — | Favicon unread badge (`useFaviconBadge`) | Yes | Component-agnostic, keep as-is | ⬜ |
+| BEH-01 | Chat trigger (`support/…/ChatBubble/ChatBubbleTrigger`) | `Button` + `Badge` | Unread-counter shake animation (framer-motion) | Yes | Trigger kept as-is; shake preserved | 🟢 |
+| BEH-02 | Chat panel (`support/…/ChatBubble/ChatBubble`) | `MessageScroller` | Spring open/close transition (`AnimatePresence`) | Yes | Panel wrapper kept; animation preserved | 🟢 |
+| BEH-03 | Chat history | `MessageScroller` | Force scroll-to-bottom whenever the panel opens | Yes | `defaultScrollPosition="end"` + `autoScroll` | 🟢 |
+| BEH-04 | Chat messages | `Message` / `Bubble` / `Marker` | Timestamp shown only when owner changes or gap > 5 min | Yes | `shouldBubbleShowTime` kept, rendered via `MessageFooter` | 🟢 |
+| BEH-05 | Chat history | `Marker` | "Agent is typing" indicator shown until the next user message | Yes | `showTyping` kept, rendered as a ghost `Bubble` | 🟢 |
+| BEH-06 | Chat trigger | — | Favicon unread badge (`useFaviconBadge`) | Yes | Component-agnostic, kept as-is | 🟢 |
 | BEH-07 | Rating dialog (`support/RatingDialog`) | `ToggleGroup` | Buttons 1–3 disabled, forced choice ≥ 4 | Yes | Keep `disabled` per item | ⬜ |
 | BEH-08 | Rating dialog | `ToggleGroup` | Selected item `scale-110` + ring | Yes | Keep via `data-state` styling | ⬜ |
 | BEH-09 | Billing cycle (`PlansPage/BillingCycleSelector`) | `ToggleGroup` | Ghost/default pill inside a muted track | Maybe | Match with `ToggleGroup` variants | ⬜ |
@@ -75,14 +75,30 @@ applied**, to avoid degrading intentional design:
 | `HotThingsPage` play control | `Button` | Large centered video overlay affordance; `Button` base sizing conflicts. |
 | `CryptoWallet` copy action | `CopyMarker` | **Audit correction**: `CopyMarker` intercepts `copy` events to append attribution to a text selection — it is not a copy-to-clipboard button, so it cannot replace this action. |
 
+## Phase 2 review notes
+
+Adopted `Bubble`, `Message`, `Marker` and `MessageScroller` from the registry
+(base-vega) and rebuilt the support chat on them. `MessageScroller` now owns
+scroll follow and jump-to-latest, so the manual `scrollIntoView` effect is gone.
+
+- **`Attachment` not added**: the support chat is text-only, so there is no use
+  case yet. It stays available in the registry and can be added when attachments
+  land.
+- **`useInteractOutside` retained**: Base UI exposes no standalone dismissable
+  primitive, so the small document-click hook is kept for the panel instead of a
+  bespoke fork. Revisit if the panel moves onto `Popover`/`Sheet`.
+- **i18n**: `MessageScrollerButton`'s jump-to-latest label is supplied by the app
+  (`support.chatBubble.jumpToLatest`); the library keeps an English `sr-only`
+  fallback, matching other ui-lib defaults.
+
 ## Phase checklist
 
 - [x] **Phase 0** — Infra: `base-vega` style, registry conventions, this log, ADR 31.
 - [x] **Phase 1** — Free wins with existing ui-lib components (Textarea, Separator,
       Button, Badge, Card; Alert and remaining raw buttons consciously deferred — see
       review notes).
-- [ ] **Phase 2** — Chat primitives (`Bubble`, `Message`, `MessageScroller`,
-      `Attachment`, `Marker`); retire `useInteractOutside`.
+- [x] **Phase 2** — Chat primitives (`Bubble`, `Message`, `MessageScroller`,
+      `Marker`); `Attachment` and `useInteractOutside` retained — see Phase 2 notes.
 - [ ] **Phase 3** — `Switch`; migrate settings toggles.
 - [ ] **Phase 4** — `Collapsible`, `Empty`, `Slider`, `ToggleGroup`, `ScrollArea`,
       `Spinner`.
