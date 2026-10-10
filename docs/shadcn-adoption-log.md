@@ -41,10 +41,10 @@ Status legend: ⬜ pending · 🟡 reintroduced as a wrapper · 🟢 preserved (
 | BEH-04 | Chat messages | `Message` / `Bubble` / `Marker` | Timestamp shown only when owner changes or gap > 5 min | Yes | `shouldBubbleShowTime` kept, rendered via `MessageFooter` | 🟢 |
 | BEH-05 | Chat history | `Marker` | "Agent is typing" indicator shown until the next user message | Yes | `showTyping` kept, rendered as a ghost `Bubble` | 🟢 |
 | BEH-06 | Chat trigger | — | Favicon unread badge (`useFaviconBadge`) | Yes | Component-agnostic, kept as-is | 🟢 |
-| BEH-07 | Rating dialog (`support/RatingDialog`) | `ToggleGroup` | Buttons 1–3 disabled, forced choice ≥ 4 | Yes | Keep `disabled` per item | ⬜ |
-| BEH-08 | Rating dialog | `ToggleGroup` | Selected item `scale-110` + ring | Yes | Keep via `data-state` styling | ⬜ |
-| BEH-09 | Billing cycle (`PlansPage/BillingCycleSelector`) | `ToggleGroup` | Ghost/default pill inside a muted track | Maybe | Match with `ToggleGroup` variants | ⬜ |
-| BEH-10 | Comment replies (`comments/CommentItem`) | `Collapsible` | Replies render **instantly** (no height animation) | No | `Collapsible` animates; accept if fine, else disable animation | ⬜ |
+| BEH-07 | Rating dialog (`support/RatingDialog`) | `ToggleGroup` | Buttons 1–3 disabled, forced choice ≥ 4 | Yes | Kept `disabled` on low items | 🟢 |
+| BEH-08 | Rating dialog | `ToggleGroup` | Selected item `scale-110` + ring | Yes | Kept via `aria-pressed:*` classes | 🟢 |
+| BEH-09 | Billing cycle (`PlansPage/BillingCycleSelector`) | `ToggleGroup` | Ghost/default pill inside a muted track | Maybe | `ToggleGroup` in a muted track; selected uses `aria-pressed` (`bg-muted`) | 🟡 |
+| BEH-10 | Comment replies (`comments/CommentItem`) | `Collapsible` | Replies render **instantly** (no height animation) | No | `Collapsible` without transition classes stays instant | 🟢 |
 | BEH-11 | Paywall reveal (`content/PartitionalLockedContent`) | `Collapsible` | Deliberately janky incremental reveal | Yes | Keep the custom reveal; do not smooth it | ⬜ |
 | BEH-12 | Cancellation reasons (`CancellationPage/steps/ReasonsStep`) | `RadioGroup` + `Field` | Clicking a reason selects **and** advances the step | Yes | Keep the click-through handler | ⬜ |
 | BEH-13 | Survey bar (`FlaimSurveyPage/ProgressBar`) | `Progress` | Time-driven auto-shrink (not value-driven) | Yes | Keep the animation-driven bar if `Progress` cannot express it | ⬜ |
@@ -102,6 +102,20 @@ are informational checkmarks rather than toggles.
   boolean, so the `indeterminate` branch of `setFlagIndeterminate` was never
   reachable. The store API is untouched and still accepts `'indeterminate'`.
 
+## Phase 4 review notes
+
+Adopted `Collapsible` (comment replies), `Empty` (no-search-results state),
+`Spinner` (captcha loader) and `ToggleGroup` (billing-cycle selector, rating
+dialog). `Toggle` and `Slider` were added to the library; `Slider` has no
+consumer yet.
+
+Deliberately deferred:
+
+| Item | Suggested | Why |
+| ---- | --------- | --- |
+| Pain slider (`AppHeader/…/PainLevelSelector`) | `Slider` | BEH-18: the custom `SliderRail` gradient, clamp labels and firefly particles are the design. A `Slider` would have to be layered transparently over the rail; the native range input stays until that is designed on purpose. |
+| `monitoring/…/EventHistory` payload | `ScrollArea` | Debug-only; the chat scroll container is already owned by `MessageScroller`, so there is no meaningful second consumer yet. |
+
 ## Phase checklist
 
 - [x] **Phase 0** — Infra: `base-vega` style, registry conventions, this log, ADR 31.
@@ -111,6 +125,6 @@ are informational checkmarks rather than toggles.
 - [x] **Phase 2** — Chat primitives (`Bubble`, `Message`, `MessageScroller`,
       `Marker`); `Attachment` and `useInteractOutside` retained — see Phase 2 notes.
 - [x] **Phase 3** — `Switch`; settings toggles migrated.
-- [ ] **Phase 4** — `Collapsible`, `Empty`, `Slider`, `ToggleGroup`, `ScrollArea`,
-      `Spinner`.
+- [x] **Phase 4** — `Collapsible`, `Empty`, `ToggleGroup`, `Spinner` adopted;
+      `Slider` added but unused and `ScrollArea` deferred — see Phase 4 notes.
 - [ ] **Phase 5** — ui-lib export/sub-part cleanups.
