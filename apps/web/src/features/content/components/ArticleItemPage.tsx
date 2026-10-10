@@ -81,7 +81,7 @@ export function ArticleItemPage({
         </div>
       </PartitionalLockedContent>
       <div className="mx-auto mt-10 w-full max-w-3xl">
-        <Separator />
+        <Separator className="md:hidden" />
       </div>
       <CommentSection items={comments} />
     </>

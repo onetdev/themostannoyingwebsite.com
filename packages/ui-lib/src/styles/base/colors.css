@@ -75,11 +75,6 @@
   --color-dimmer: var(--dimmer);
 
   /* Computed gradients */
-  --background-image-bottom-fadeout: linear-gradient(
-    0deg,
-    var(--card) 60%,
-    transparent 100%
-  );
   --background-image-radial-primary: radial-gradient(
     transparent,
     var(--primary)

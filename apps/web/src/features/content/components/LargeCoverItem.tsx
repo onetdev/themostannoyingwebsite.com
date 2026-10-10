@@ -43,7 +43,7 @@ export function LargeCoverItem({
               loading="eager"
             />
           )}
-          <div className="from-background/95 via-background/40 pointer-events-none absolute inset-0 bg-linear-to-t to-transparent" />
+          <div className="from-background/50 via-transparent pointer-events-none absolute inset-0 bg-linear-to-t to-transparent" />
           <div className="absolute inset-x-0 bottom-0 flex flex-col items-start gap-2 p-4 md:p-6">
             <ArticleTags article={article} variant="default" />
             <h2 className="text-2xl transition duration-300 group-hover:brightness-110 md:text-3xl">

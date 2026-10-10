@@ -53,3 +53,17 @@
 @utility mx-gutter {
   margin-inline: var(--page-gutter);
 }
+
+/**
+ * Opacity-mask bottom fade.
+ *
+ * Fades the bottom edge to transparent with a plain alpha mask so the cut-off
+ * content dissolves into whatever surface sits behind it, instead of
+ * approximating the fade with a color-matched gradient. Used by the paywall
+ * content locker. The prefixed line keeps older WebKit/Blink working; every
+ * current browser also understands the unprefixed property.
+ */
+@utility mask-fade-bottom {
+  -webkit-mask-image: linear-gradient(black 45%, transparent);
+  mask-image: linear-gradient(black 45%, transparent);
+}
