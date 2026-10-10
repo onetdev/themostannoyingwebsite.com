@@ -52,7 +52,7 @@ export default async function Page({ params }: NextPageProps) {
   return (
     <PageLayout
       route="home"
-      className="grid grid-cols-1 gap-x-5 gap-y-5 px-gutter lg:grid-cols-4 lg:gap-y-0"
+      className="grid grid-cols-1 gap-x-5 gap-y-5 lg:grid-cols-4 lg:gap-y-0"
       autoPadding={false}
       role="main"
     >

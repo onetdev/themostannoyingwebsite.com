@@ -25,7 +25,7 @@ export function FloatingHeader({ className, ...props }: FloatingHeaderProps) {
     <header
       id="header"
       className={clsx(
-        'sticky top-3 z-40 mx-3 mt-3 rounded-xl border bg-card/80 backdrop-blur-md transition-shadow xl:mx-4',
+        'sticky top-3 z-40 mx-gutter mt-3 rounded-xl border bg-card/80 backdrop-blur-md transition-shadow',
         isScrolled && 'shadow-md',
         className,
       )}

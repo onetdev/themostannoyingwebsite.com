@@ -32,13 +32,24 @@
  * Page horizontal gutter.
  *
  * Single source of truth for the inline inset on section-level content so the
- * header, page body, sticky bars and footer all line up. Resolves to 1.25rem
- * below the xl breakpoint and 2rem at xl (the previous `px-5 xl:px-8` scale).
+ * floating header card, page body, sticky bars and footer share the same outer
+ * edge. Resolves to 1.25rem below the xl breakpoint and 1.5rem at xl, matching
+ * the header card's `mx-gutter` inset.
  */
-@utility px-gutter {
-  padding-inline: calc(var(--spacing, 0.25rem) * 5);
+:root {
+  --page-gutter: calc(var(--spacing, 0.25rem) * 3);
+}
 
-  @media (width >= 80rem) {
-    padding-inline: calc(var(--spacing, 0.25rem) * 8);
+@media (width >= 80rem) {
+  :root {
+    --page-gutter: calc(var(--spacing, 0.25rem) * 4);
   }
+}
+
+@utility px-gutter {
+  padding-inline: var(--page-gutter);
+}
+
+@utility mx-gutter {
+  margin-inline: var(--page-gutter);
 }

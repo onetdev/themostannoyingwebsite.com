@@ -1,3 +1,4 @@
+import { clsx } from '@maw/ui-lib/utils';
 import type { ComponentProps, PropsWithChildren } from 'react';
 import { ReportRouteVisit } from '@/features/monitoring/components';
 import type { RouteAlias } from '@/schemas';
@@ -30,7 +31,7 @@ export function PageLayout({
   className,
   ...rest
 }: PageLayoutProps) {
-  const localClassName = autoPadding ? `px-gutter` : '';
+  const localClassName = autoPadding ? `px-1` : '';
 
   return (
     <>
@@ -39,7 +40,10 @@ export function PageLayout({
         activeItem={navigationHighlightRoute ?? route}
         className="mb-4"
       />
-      <main className={`${className ?? ''} ${localClassName} flex-1`} {...rest}>
+      <main
+        className={clsx(className, localClassName, 'mx-gutter flex-1')}
+        {...rest}
+      >
         {children}
       </main>
       <AppFooter className="mt-12" />

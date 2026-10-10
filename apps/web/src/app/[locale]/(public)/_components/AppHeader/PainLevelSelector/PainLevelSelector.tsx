@@ -48,7 +48,7 @@ export function PainLevelSelector({ className }: PainLevelSelectorProps) {
 
   return (
     <div
-      className={`flex flex-col gap-2 overflow-x-clip overflow-y-visible px-gutter py-2 pt-2 pb-4 ${className}`}
+      className={`mx-gutter flex flex-col gap-2 overflow-x-clip overflow-y-visible px-2 py-2 pt-2 pb-4 xl:px-4 ${className}`}
     >
       <div className="text-card-foreground flex items-center justify-between text-xs font-bold tracking-wider uppercase opacity-60">
         <span id="pain-level-label">{t('levelSettings.label')}</span>
