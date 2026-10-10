@@ -91,6 +91,17 @@ scroll follow and jump-to-latest, so the manual `scrollIntoView` effect is gone.
   (`support.chatBubble.jumpToLatest`); the library keeps an English `sr-only`
   fallback, matching other ui-lib defaults.
 
+## Phase 3 review notes
+
+Adopted the `Switch` atom for every boolean preference (dark mode, reduced
+motion, sound, adult filter, and the four pain-preference sections). The
+`Checkbox` remains for the read-only grants and mandatory-experience rows, which
+are informational checkmarks rather than toggles.
+
+- **No behavior lost**: the preference checkboxes were always controlled with a
+  boolean, so the `indeterminate` branch of `setFlagIndeterminate` was never
+  reachable. The store API is untouched and still accepts `'indeterminate'`.
+
 ## Phase checklist
 
 - [x] **Phase 0** — Infra: `base-vega` style, registry conventions, this log, ADR 31.
@@ -99,7 +110,7 @@ scroll follow and jump-to-latest, so the manual `scrollIntoView` effect is gone.
       review notes).
 - [x] **Phase 2** — Chat primitives (`Bubble`, `Message`, `MessageScroller`,
       `Marker`); `Attachment` and `useInteractOutside` retained — see Phase 2 notes.
-- [ ] **Phase 3** — `Switch`; migrate settings toggles.
+- [x] **Phase 3** — `Switch`; settings toggles migrated.
 - [ ] **Phase 4** — `Collapsible`, `Empty`, `Slider`, `ToggleGroup`, `ScrollArea`,
       `Spinner`.
 - [ ] **Phase 5** — ui-lib export/sub-part cleanups.
