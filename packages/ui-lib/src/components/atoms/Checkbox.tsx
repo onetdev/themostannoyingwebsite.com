@@ -33,6 +33,7 @@ export function Checkbox({ className, ref, size, ...props }: CheckboxProps) {
       {...props}
     >
       <CheckboxPrimitive.Indicator
+        data-slot="checkbox-indicator"
         className={cn('flex items-center justify-center text-current')}
       >
         <Icon icon="check" />
