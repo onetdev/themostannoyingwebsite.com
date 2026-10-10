@@ -59,7 +59,7 @@ Despite the chaos:
 
 - [TailwindCSS](https://tailwindcss.com/docs)
 - [shadcn/ui](https://ui.shadcn.com/)
-- [Radix UI](https://www.radix-ui.com/)
+- [Base UI](https://base-ui.com/)
 
 ### Tooling
 
