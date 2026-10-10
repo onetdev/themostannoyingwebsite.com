@@ -1,13 +1,6 @@
-import { Container } from 'inversify';
-import { configureContainer } from '@/app/bootstrap/di';
+import { configureServerContainer } from './container.server';
+import { createLazyContainer } from './lazy-container';
 
-let container: Container;
-
-export function getDependencyContainer() {
-  if (!container) {
-    container = new Container();
-    configureContainer(container);
-  }
-
-  return container;
-}
+export const getDependencyContainer = createLazyContainer(
+  configureServerContainer,
+);

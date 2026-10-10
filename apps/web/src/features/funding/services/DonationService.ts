@@ -54,6 +54,6 @@ export class DonationService implements IDonationService {
   }
 }
 
-export function getDonationService(container: Container) {
+export function getDonationService(container: Container): IDonationService {
   return container.get<IDonationService>(DI.DonationService);
 }

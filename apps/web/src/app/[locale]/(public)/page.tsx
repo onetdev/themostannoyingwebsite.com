@@ -13,7 +13,7 @@ export default async function Page({ params }: NextPageProps) {
   const { locale } = await params;
   const appLocale = assertAppLocale(locale);
   const container = getDependencyContainer();
-  const articleService = await getArticleService(container);
+  const articleService = getArticleService(container);
 
   const [coverResponse, articlePool] = await Promise.all([
     articleService.list({

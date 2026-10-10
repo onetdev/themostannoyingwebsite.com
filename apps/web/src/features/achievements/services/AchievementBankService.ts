@@ -18,6 +18,8 @@ export class AchievementBankService implements IAchievementBankService {
   }
 }
 
-export function getAchievementBankService(container: Container) {
+export function getAchievementBankService(
+  container: Container,
+): IAchievementBankService {
   return container.get<IAchievementBankService>(DI.AchievementBankService);
 }

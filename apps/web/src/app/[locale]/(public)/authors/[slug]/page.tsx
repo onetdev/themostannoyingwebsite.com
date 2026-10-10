@@ -27,7 +27,7 @@ export async function generateMetadata({
 }: PageProps): Promise<Metadata> {
   const { slug, locale } = await params;
   const container = getDependencyContainer();
-  const authorService = await getAuthorService(container);
+  const authorService = getAuthorService(container);
   const author = await authorService.getBySlug(slug, locale as LanguageCode);
 
   if (!author) {
@@ -66,7 +66,7 @@ export const generateStaticParams = async () => {
   const paths: PageParams[] = [];
 
   const container = getDependencyContainer();
-  const authorService = await getAuthorService(container);
+  const authorService = getAuthorService(container);
   const authors = await authorService.listAll();
 
   for (const locale of locales) {
@@ -82,8 +82,8 @@ export default async function Page({ params }: PageProps) {
   const { slug, locale } = await params;
 
   const container = getDependencyContainer();
-  const authorService = await getAuthorService(container);
-  const articleService = await getArticleService(container);
+  const authorService = getAuthorService(container);
+  const articleService = getArticleService(container);
 
   const author = await authorService.getBySlug(slug, locale as LanguageCode);
 
