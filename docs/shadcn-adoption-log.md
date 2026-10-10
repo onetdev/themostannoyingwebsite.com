@@ -38,8 +38,8 @@ Status legend: ⬜ pending · 🟡 reintroduced as a wrapper · 🟢 preserved (
 | BEH-01 | Chat trigger (`support/…/ChatBubble/ChatBubbleTrigger`) | `Button` + `Badge` | Unread-counter shake animation (framer-motion) | Yes | Trigger kept as-is; shake preserved | 🟢 |
 | BEH-02 | Chat panel (`support/…/ChatBubble/ChatBubble`) | `MessageScroller` | Spring open/close transition (`AnimatePresence`) | Yes | Panel wrapper kept; animation preserved | 🟢 |
 | BEH-03 | Chat history | `MessageScroller` | Force scroll-to-bottom whenever the panel opens | Yes | `defaultScrollPosition="end"` + `autoScroll` | 🟢 |
-| BEH-04 | Chat messages | `Message` / `Bubble` / `Marker` | Timestamp shown only when owner changes or gap > 5 min | Yes | `shouldBubbleShowTime` kept, rendered via `MessageFooter` | 🟢 |
-| BEH-05 | Chat history | `Marker` | "Agent is typing" indicator shown until the next user message | Yes | `showTyping` kept, rendered as a ghost `Bubble` | 🟢 |
+| BEH-04 | Chat messages | `Message` / `Bubble` / `Marker` | Timestamp shown only when owner changes or gap > 5 min | Yes | Grouping kept for bot messages; user messages now show the demo's "Delivered" receipt | 🟡 |
+| BEH-05 | Chat history | `Marker` | "Agent is typing" indicator shown until the next user message | Yes | `showTyping` kept, now rendered via `Marker` | 🟢 |
 | BEH-06 | Chat trigger | — | Favicon unread badge (`useFaviconBadge`) | Yes | Component-agnostic, kept as-is | 🟢 |
 | BEH-07 | Rating dialog (`support/RatingDialog`) | `ToggleGroup` | Buttons 1–3 disabled, forced choice ≥ 4 | Yes | Kept `disabled` on low items | 🟢 |
 | BEH-08 | Rating dialog | `ToggleGroup` | Selected item `scale-110` + ring | Yes | Kept via `aria-pressed:*` classes | 🟢 |
@@ -127,6 +127,24 @@ Deliberately deferred:
   consumer. `LoaderDots` is kept as-is alongside the new `Spinner` until a
   consumer migrates.
 
+## Phase 6 review notes
+
+Restyled the chat popup to match the shadcn chat demo:
+
+- **Header**: added a subtitle line and a "new chat" reset button (`rotate`
+  icon) beside close. `useChatBubbleHistory` gained `reset()`, which reseeds the
+  initial bot message and clears the unread counter.
+- **Avatars**: `MessageAvatar` + `AvatarFallback` emoji (bot 🤖 / user 🙂); no new
+  assets.
+- **Bubbles**: user is `default` (primary), bot is `muted`; a static 👍
+  `BubbleReactions` is attached to the latest bot message.
+- **Status**: user messages show a "Delivered" receipt; bot messages keep the
+  relative timestamp.
+- **Typing**: the "agent is typing" note now uses `Marker`.
+- **Composer**: rounded container with an auto-growing `Textarea`, a disabled
+  attach (+) button (no attachments yet) and a circular send (↑) button.
+- **Icons**: `plus` and `arrowUp` added to the ui-lib `Icon` map.
+
 ## Phase checklist
 
 - [x] **Phase 0** — Infra: `base-vega` style, registry conventions, this log, ADR 31.
@@ -140,3 +158,5 @@ Deliberately deferred:
       `Slider` added but unused and `ScrollArea` deferred — see Phase 4 notes.
 - [x] **Phase 5** — `buttonVariants` and `navigationMenuTriggerStyle` exported,
       checkbox indicator slot added; Progress sub-parts deferred — see notes.
+- [x] **Phase 6** — Restyle the chat popup to the shadcn chat demo (avatars,
+      delivered status, reactions, Marker typing, composer).
