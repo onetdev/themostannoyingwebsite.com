@@ -1,7 +1,7 @@
 # ADR 14: Design System Architecture with Atomic Design, Radix UI, and Storybook
 
 ## Status
-Accepted
+Superseded by [ADR 31](0031-base-ui-shadcn-adoption.md)
 
 ## Context
 As the user interface grew, embedding reusable UI components directly inside application feature folders led to code duplication, inconsistent styling, and coupled design logic. We needed:

@@ -28,12 +28,18 @@ const searchFormVariants = cva('', {
 export type SearchFormProps = VariantProps<typeof searchFormVariants> & {
   className?: string;
   initialValue?: string;
+  /**
+   * Render as a narrow field that expands while focused. Intended for tight
+   * spots like the header; leave off for standalone search pages.
+   */
+  expandable?: boolean;
 };
 
 export function SearchForm({
   className,
   initialValue = '',
   size = 'md',
+  expandable = false,
 }: SearchFormProps) {
   const t = useTranslations();
   const router = useRouter();
@@ -56,8 +62,14 @@ export function SearchForm({
   };
 
   return (
-    <search className={className}>
-      <form method="post" onSubmit={onSubmit}>
+    <search
+      className={cn(
+        expandable &&
+          'w-40 transition-[width] duration-300 ease-out focus-within:w-64 motion-reduce:transition-none',
+        className,
+      )}
+    >
+      <form method="post" onSubmit={onSubmit} className="w-full">
         <InputGroup className={cn(searchFormVariants({ size }))}>
           <InputGroupInput
             defaultValue={initialValue}

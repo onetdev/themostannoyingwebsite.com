@@ -6,7 +6,7 @@ Tracks user progress and unlocks rewards for interacting with the website's anno
 
 - **AchievementManager**: A centralized provider that initializes early in the application lifecycle. It uses `useEvent` hooks to listen to global `EventBus` signals (e.g., `screensaver:maze:stepped`, `global-search:query`, `context-menu:triggered`) and dispatches updates to the store.
 - **AchievementToastManager**: Monitors the achievement store and displays real-time, non-dismissible notifications to the user when an achievement is unlocked or progress is made.
-- **AchievementList & AchievementCard**: UI components used on the Achievements page to browse the registry and visualize progress with custom iconography and status indicators.
+- **AchievementList & AchievementCard**: UI components used on the Achievements page to browse the registry and visualize progress with custom iconography and status indicators. The list can be filtered by completion state (all, completed, in progress, not started).
 - **useAchievementsStore**: A persistent Zustand store (via `persist` middleware) that maintains the state of all achievements, including completion status, current progress, and last notification timestamps.
 - **ResetAchievementsButton**: Provides a way for users to clear all persisted achievement data and restart their journey of misery.
 

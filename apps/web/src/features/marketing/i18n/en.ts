@@ -4,8 +4,6 @@ export default {
     fullTitle: "DILF - Donut I'd Like to Feast On",
     description:
       "If you're searching for the tastiest, hottest, singlest and most irresistible donuts in your area, you're in the perfect place. Are you ready to take on the challenge of finding your true love? Click on any of the donuts here to discover which one is meant for you.",
-    flapLeft: 'DILF. Hot single donuts in your area',
-    flapRight: 'DILF. Tastiest donuts in your proximity',
     finderOverlayTitle: 'Find you donut',
   },
   wanPhone: {
@@ -54,6 +52,8 @@ export default {
     spinStart: 'Click or Tap here!',
     spinWin: 'You won! {prize}',
     wheelTitle: 'Wheel of fortune',
+    unavailable:
+      'The prize wheel is out of order right now. Please try again later.',
   },
   onlySpams: {
     title: 'OnlySpams - Premium Newsletter',

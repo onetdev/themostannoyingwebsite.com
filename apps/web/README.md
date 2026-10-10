@@ -39,7 +39,7 @@ src/features/[feature-name]/
 ## Monorepo Integration
 
 The web app leverages several internal packages to maintain a clean separation of concerns:
-- `@maw/ui-lib`: Shared design system containing Radix UI-based components and global styles.
+- `@maw/ui-lib`: Shared design system containing Base UI-based components and global styles.
 - `@maw/content-sdk`: Strongly-typed client SDK for retrieving application content from Headless CMS.
 - `@maw/logger` & `@maw/utils`: Cross-project logging infrastructure and common TypeScript helpers.
 

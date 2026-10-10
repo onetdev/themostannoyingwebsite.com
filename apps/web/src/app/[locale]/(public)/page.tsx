@@ -13,7 +13,7 @@ export default async function Page({ params }: NextPageProps) {
   const { locale } = await params;
   const appLocale = assertAppLocale(locale);
   const container = getDependencyContainer();
-  const articleService = await getArticleService(container);
+  const articleService = getArticleService(container);
 
   const [coverResponse, articlePool] = await Promise.all([
     articleService.list({
@@ -52,7 +52,7 @@ export default async function Page({ params }: NextPageProps) {
   return (
     <PageLayout
       route="home"
-      className="grid grid-cols-1 gap-x-5 gap-y-5 px-5 lg:grid-cols-4 lg:gap-y-0 xl:px-8"
+      className="grid grid-cols-1 gap-x-5 gap-y-5 lg:grid-cols-4 lg:gap-y-0"
       autoPadding={false}
       role="main"
     >

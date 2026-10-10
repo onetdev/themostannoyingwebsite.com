@@ -65,17 +65,24 @@ export async function DonationPage() {
           <CardTitle>{t('funding.classicMethods')}</CardTitle>
         </CardHeader>
         <CardContent className="flex flex-col gap-3">
-          <Button asChild size="lg" className="w-full">
-            <Link href={funding.buyMeACoffeeUrl} target="_blank">
-              <Icon icon="mugHot" aria-hidden />
-              {t('funding.buyMeACoffee')}
-            </Link>
+          <Button
+            render={<Link href={funding.buyMeACoffeeUrl} target="_blank" />}
+            nativeButton={false}
+            size="lg"
+            className="w-full"
+          >
+            <Icon icon="mugHot" aria-hidden />
+            {t('funding.buyMeACoffee')}
           </Button>
-          <Button asChild size="lg" variant="secondary" className="w-full">
-            <Link href={funding.paypalUrl} target="_blank">
-              <Icon icon="handHoldingDollar" aria-hidden />
-              {t('funding.payPal')}
-            </Link>
+          <Button
+            render={<Link href={funding.paypalUrl} target="_blank" />}
+            nativeButton={false}
+            size="lg"
+            variant="secondary"
+            className="w-full"
+          >
+            <Icon icon="handHoldingDollar" aria-hidden />
+            {t('funding.payPal')}
           </Button>
           <Link
             href={funding.alternativeOptionsUrl}

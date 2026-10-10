@@ -1,5 +1,6 @@
 'use client';
 
+import { Button } from '@maw/ui-lib';
 import { useTranslations } from 'next-intl';
 
 import { Link } from '@/core/i18n/navigation';
@@ -16,15 +17,15 @@ export function CookieConsent() {
 
   return (
     !completed && (
-      <div className="border-tertiary bg-card sticky -bottom-3 z-20 rounded-md border px-5 py-3 shadow-md">
+      <div className="border-tertiary bg-card sticky -bottom-3 z-20 rounded-md border px-gutter py-3 shadow-md">
         <p>{t('common.app.cookieConsent')}</p>
         <div className="my-2 flex items-center justify-end gap-3">
           <Link href="/settings" passHref prefetch={false}>
             {t('common.navigation.settings')}
           </Link>
-          <button type="button" onClick={close}>
+          <Button variant="outline" size="sm" type="button" onClick={close}>
             {t('common.action.ok')}
-          </button>
+          </Button>
         </div>
       </div>
     )

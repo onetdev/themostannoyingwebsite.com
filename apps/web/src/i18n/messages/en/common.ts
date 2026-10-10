@@ -14,6 +14,7 @@ export default {
     enable: 'Enable',
     enableAll: 'Enable all',
     generate: 'Generate',
+    moreInformation: 'More information',
     next: 'Next',
     no: 'No',
     ok: 'OK',
@@ -162,6 +163,7 @@ export default {
     contact: 'Contact',
     dilf: 'DILF',
     donate: 'Donate',
+    explore: 'Explore',
     flaimAPhone: 'Flaim a Phone!',
     home: 'Home',
     hotThings: 'Hot things',
@@ -178,6 +180,7 @@ export default {
     settings: 'Settings',
     signup: 'Signup',
     termsOfUse: 'Terms of Use',
+    theProject: 'The project',
     virgin: 'Virgin',
   },
   userField: {

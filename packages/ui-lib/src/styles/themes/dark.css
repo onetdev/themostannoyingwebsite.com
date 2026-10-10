@@ -1,71 +1,93 @@
 @reference "tailwindcss";
 
+/**
+ * Dark theme — stock shadcn/ui `neutral` base color.
+ *
+ * Standard tokens match the default shadcn neutral theme
+ * (https://ui.shadcn.com/docs/theming). Extended tokens are project-specific
+ * and not part of stock shadcn; they are seeded with neutral defaults so the
+ * existing utilities keep resolving. Replace them with the project palette —
+ * see `legacy.css` for the previous custom values.
+ */
 @layer theme {
   :root:not([data-theme="light"]),
   [data-theme="dark"] {
     /* Main Layout */
-    --background: #0a0a14;
-    --foreground: #ebebeb;
+    --background: oklch(0.145 0 0);
+    --foreground: oklch(0.985 0 0);
 
     /* Surfaces */
-    --card: #1a192b;
-    --card-foreground: #ebebeb;
-    --popover: #1a192b;
-    --popover-foreground: #ebebeb;
+    --card: oklch(0.205 0 0);
+    --card-foreground: oklch(0.985 0 0);
+    --popover: oklch(0.205 0 0);
+    --popover-foreground: oklch(0.985 0 0);
 
     /* Brand Colors */
-    --primary: #3b82f6;
-    --primary-alt: #2563eb;
-    --primary-foreground: #ffffff;
+    --primary: oklch(0.922 0 0);
+    --primary-foreground: oklch(0.205 0 0);
 
-    --secondary: #22c55e;
-    --secondary-alt: #16a34a;
-    --secondary-foreground: #ffffff;
-
-    --tertiary: #f97316;
-    --tertiary-alt: #ea580c;
-    --tertiary-foreground: #ffffff;
+    --secondary: oklch(0.269 0 0);
+    --secondary-foreground: oklch(0.985 0 0);
 
     /* UI States & Action */
-    --muted: #2a283d;
-    --muted-foreground: #9e9e9e;
-    --accent: #2a283d;
-    --accent-foreground: #ebebeb;
-    --destructive: #e53935;
-    --destructive-foreground: #ffffff;
-
-    /* Status Colors */
-    --success: #2e7d32;
-    --success-foreground: #ffffff;
-    --warning: #ffeb3b;
-    --warning-foreground: #000000;
-    --error: #e53935;
-    --error-foreground: #ffffff;
-    --info: #2196f3;
-    --info-foreground: #ffffff;
+    --muted: oklch(0.269 0 0);
+    --muted-foreground: oklch(0.708 0 0);
+    --accent: oklch(0.269 0 0);
+    --accent-foreground: oklch(0.985 0 0);
+    --destructive: oklch(0.704 0.191 22.216);
 
     /* Borders & Inputs */
-    --border: #4e4c66;
-    --input: #4e4c66;
-    --ring: #42a5f5;
-
-    /* Semantic Borders */
-    --border-primary: #2563eb;
-    --border-secondary: #16a34a;
-    --border-tertiary: #ea580c;
-    --border-success: #1b5e20;
-    --border-warning: #e65100;
-    --border-error: #b71c1c;
+    --border: oklch(1 0 0 / 10%);
+    --input: oklch(1 0 0 / 15%);
+    --ring: oklch(0.556 0 0);
 
     /* Chart */
-    --chart-1: #3b82f6;
-    --chart-2: #22c55e;
-    --chart-3: #f97316;
-    --chart-4: #a855f7;
-    --chart-5: #06b6d4;
+    --chart-1: oklch(0.488 0.243 264.376);
+    --chart-2: oklch(0.696 0.17 162.48);
+    --chart-3: oklch(0.769 0.188 70.08);
+    --chart-4: oklch(0.627 0.265 303.9);
+    --chart-5: oklch(0.645 0.246 16.439);
 
-    /* Other Tokens */
-    --disabled: #616161;
-    --dimmer: #555555a0;
+    /* Sidebar */
+    --sidebar: oklch(0.205 0 0);
+    --sidebar-foreground: oklch(0.985 0 0);
+    --sidebar-primary: oklch(0.488 0.243 264.376);
+    --sidebar-primary-foreground: oklch(0.985 0 0);
+    --sidebar-accent: oklch(0.269 0 0);
+    --sidebar-accent-foreground: oklch(0.985 0 0);
+    --sidebar-border: oklch(1 0 0 / 10%);
+    --sidebar-ring: oklch(0.556 0 0);
+
+    /* ------------------------------------------------------------------
+     * Extended tokens (not part of stock shadcn) — placeholder defaults.
+     * Overwrite with the project palette; see `legacy.css` for prior values.
+     * ------------------------------------------------------------------ */
+    --primary-alt: oklch(0.87 0 0);
+    --secondary-alt: oklch(0.371 0 0);
+
+    --tertiary: oklch(0.269 0 0);
+    --tertiary-alt: oklch(0.371 0 0);
+    --tertiary-foreground: oklch(0.985 0 0);
+
+    --destructive-foreground: oklch(0.985 0 0);
+
+    --success: oklch(0.696 0.17 162.48);
+    --success-foreground: oklch(0.145 0 0);
+    --warning: oklch(0.828 0.189 84.429);
+    --warning-foreground: oklch(0.205 0 0);
+    --error: oklch(0.704 0.191 22.216);
+    --error-foreground: oklch(0.985 0 0);
+    --info: oklch(0.623 0.214 259.815);
+    --info-foreground: oklch(0.985 0 0);
+
+    --border-primary: var(--primary);
+    --border-secondary: var(--border);
+    --border-tertiary: var(--border);
+    --border-success: var(--success);
+    --border-warning: var(--warning);
+    --border-error: var(--error);
+
+    --disabled: oklch(0.556 0 0);
+    --dimmer: oklch(0.985 0 0 / 0.4);
   }
 }

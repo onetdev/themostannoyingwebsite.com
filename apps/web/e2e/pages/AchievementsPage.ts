@@ -9,6 +9,9 @@ export const getAchievementsPage = (page: Page) => {
     ...shared,
 
     achievementCard: page.getByTestId('achievement-card'),
+    achievementEmpty: page.getByTestId('achievement-empty'),
+    achievementFilter: (value: string) =>
+      page.getByTestId(`achievement-filter-${value}`),
 
     goto: async () => {
       await page.goto('/en/achievements');

@@ -12,6 +12,7 @@ export default {
   article: {
     coverImage: 'Cover image',
     published: 'Published at {date}',
+    readingTime: '{minutes} min read',
     moreContentScroll: "There's more from the past, scroll!",
   },
   author: {

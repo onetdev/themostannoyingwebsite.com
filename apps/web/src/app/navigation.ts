@@ -9,19 +9,67 @@ export type NavItem = {
   hrefFor: RouteAliasParams;
 };
 
-export const SITE_NAVIGATION_LINKS: NavItem[] = [
-  { id: 'home', labelKey: 'common.navigation.home', hrefFor: 'home' },
+/** A nav item that renders as a dropdown instead of a direct link. */
+export type NavGroup = {
+  icon?: IconAliaseKey;
+  id: string;
+  labelKey: AppTranslationKey;
+  items: NavItem[];
+};
+
+export type NavEntry = NavItem | NavGroup;
+
+export const isNavGroup = (entry: NavEntry): entry is NavGroup =>
+  'items' in entry;
+
+const EXPLORE_NAVIGATION_LINKS: NavItem[] = [
   { id: 'dilf', labelKey: 'common.navigation.dilf', hrefFor: 'dilf' },
   {
     id: 'only-spams',
     labelKey: 'common.navigation.onlySpams',
     hrefFor: 'only-spams',
   },
-  { id: 'plans', labelKey: 'common.navigation.plans', hrefFor: 'plans' },
-  { id: 'donate', labelKey: 'common.navigation.donate', hrefFor: 'donate' },
-  { id: 'about', labelKey: 'common.navigation.about', hrefFor: 'about' },
-  { id: 'contact', labelKey: 'common.navigation.contact', hrefFor: 'contact' },
+  {
+    id: 'hot-things',
+    labelKey: 'common.navigation.hotThings',
+    hrefFor: 'hot-things',
+  },
+  { id: 'virgin', labelKey: 'common.navigation.virgin', hrefFor: 'virgin' },
+  {
+    id: 'flaim-a-phone',
+    labelKey: 'common.navigation.flaimAPhone',
+    hrefFor: 'flaim-a-phone',
+  },
 ];
+
+export const SITE_NAVIGATION_LINKS: NavEntry[] = [
+  { id: 'home', labelKey: 'common.navigation.home', hrefFor: 'home' },
+  {
+    id: 'explore',
+    labelKey: 'common.navigation.explore',
+    items: EXPLORE_NAVIGATION_LINKS,
+  },
+  { id: 'plans', labelKey: 'common.navigation.plans', hrefFor: 'plans' },
+  {
+    id: 'project',
+    labelKey: 'common.navigation.theProject',
+    items: [
+      { id: 'donate', labelKey: 'common.navigation.donate', hrefFor: 'donate' },
+      { id: 'about', labelKey: 'common.navigation.about', hrefFor: 'about' },
+      {
+        id: 'contact',
+        labelKey: 'common.navigation.contact',
+        hrefFor: 'contact',
+      },
+    ],
+  },
+];
+
+/** Flattened site links (groups expanded) for flat renderers like the sheet. */
+export const SITE_NAVIGATION_FLAT_LINKS: NavItem[] =
+  SITE_NAVIGATION_LINKS.flatMap((entry) =>
+    isNavGroup(entry) ? entry.items : [entry],
+  );
 
 export const PERSONAL_NAVIGATION_LINKS: NavItem[] = [
   {

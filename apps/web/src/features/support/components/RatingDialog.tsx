@@ -9,8 +9,9 @@ import {
   DialogFooter,
   DialogHeader,
   DialogTitle,
+  ToggleGroup,
+  ToggleGroupItem,
 } from '@maw/ui-lib';
-import { clsx } from '@maw/ui-lib/utils';
 import { useTranslations } from 'next-intl';
 import { useState } from 'react';
 import { useAppConfigContext } from '@/core/react';
@@ -56,22 +57,29 @@ export function RatingDialog({ isOpen, onOpenChange }: RatingDialogProps) {
             </p>
           ) : (
             <div className="flex flex-col items-center gap-4 w-full shrink">
-              <div className="grid grid-cols-5 gap-2 w-full">
+              <ToggleGroup
+                value={rating !== null ? [String(rating)] : []}
+                onValueChange={(value) => {
+                  const next = value[0];
+                  if (next) {
+                    setRating(Number(next));
+                  }
+                }}
+                className="grid w-full grid-cols-5 gap-2"
+              >
                 {[1, 2, 3, 4, 5].map((num) => (
-                  <Button
+                  <ToggleGroupItem
                     key={num}
-                    variant={rating === num ? 'default' : 'outline'}
-                    className={clsx(
-                      'md:h-12 w-full p-0 text-lg font-bold transition-all',
-                      rating === num && 'scale-110 ring-2 ring-primary',
-                    )}
-                    onClick={() => setRating(num)}
+                    value={String(num)}
+                    variant="outline"
+                    size="lg"
+                    className="w-full p-0 text-lg font-bold transition-all aria-pressed:scale-110 aria-pressed:ring-2 aria-pressed:ring-primary md:h-12"
                     disabled={num < 4}
                   >
                     {num}
-                  </Button>
+                  </ToggleGroupItem>
                 ))}
-              </div>
+              </ToggleGroup>
               <div className="flex justify-between w-full text-xs text-muted-foreground px-1">
                 <span>{t('low')}</span>
                 <span>{t('high')}</span>

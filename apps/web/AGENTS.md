@@ -29,7 +29,7 @@ This document provides specific instructions and context for AI agents working o
 - `src/hooks/`: Shared, app-wide React hooks.
 - `src/i18n/`: Internationalization.
   - `messages/`: Bundled English translation reference (other locales are served by the Content API).
-- `src/navigation/`: Localization-aware routing and navigation logic.
+- `src/core/navigation/`: Localization-aware routing and navigation logic.
 - `src/schemas/`: Shared Zod validation schemas.
 - `src/services/`: Global business logic (e.g., `AppService`).
 - `src/stores/`: Global state management (Zustand).
@@ -144,12 +144,16 @@ All pages must describe themselves with JSON-LD. The machinery lives in `src/cor
 
 ## 💉 Dependency Injection (InversifyJS)
 
-1.  **Define Symbol**: In `features/{feature}/types.ts`, add to `DI` object.
-2.  **Implementation**: Create class in `services/`, mark with `@injectable()`.
-3.  **Registration**: 
-    - Create `features/{feature}/init.ts` to bind the symbol to implementation.
-    - Call this init function in `src/app/bootstrap/di.ts`.
-4.  **Consumption**: Use `useService(DI.Symbol)` or create a dedicated hook `useMyService()`.
+1.  **Define Symbol**: In `features/{feature}/types.ts`, add to the `DI` object. Cross-cutting infra symbols live in `core/di/symbols.ts` (`CoreSymbols`).
+2.  **Implementation**: Create the class in `services/`, mark with `@injectable()`.
+3.  **Registration**:
+    - Bind the symbol in `core/di/container.base.ts` when the service is client-safe and shared by both environments.
+    - Bind it in `core/di/container.server.ts` when the service `import 'server-only'`.
+4.  **Consumption**: In client components use `useInjection(DI.Symbol)` (from `core/di/react`) or a dedicated hook such as `useMyService()`. In server code resolve from `getDependencyContainer()`.
+
+> The client and server containers are intentionally distinct — the browser container
+> (`getClientDependencyContainer()`) must never register `server-only` services. See
+> `adr/0008-dependency-injection-inversify.md`.
 
 ---
 
@@ -162,7 +166,7 @@ All pages must describe themselves with JSON-LD. The machinery lives in `src/cor
 4.  Implement business logic in `services/`.
 5.  Create UI in `components/`.
 6.  Add translations in `i18n/`.
-7.  Register in `src/app/bootstrap/di.ts`.
+7.  Register its services in `src/core/di/container.base.ts` (client-safe) or `container.server.ts` (server-only).
 
 ### Adding a New Page
 1.  Create route in `src/app/`.

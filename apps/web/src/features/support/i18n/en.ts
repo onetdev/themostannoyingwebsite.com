@@ -2,6 +2,9 @@ export default {
   chatBubble: {
     trigger: 'Open chat',
     triggerClose: 'Close chat',
+    subtitle: 'How can I help you today?',
+    newChat: 'Start a new chat',
+    delivered: 'Delivered',
     messageInitial: 'Hello! I am a chat bubble. I am here to help you. 🤓',
     messageFallback: "It's nothing, leave me alone. 😤",
     newAlert: 'New message from Chat Bubble! 🎉',
@@ -9,6 +12,7 @@ export default {
     hudTitleDisclaimer:
       "Disclaimer: Actually, this is a bot that almost feels like a real human (not a smart one) but it's still just a bot",
     agentIsTyping: 'Agent is typing',
+    jumpToLatest: 'Jump to the latest messages',
     yourMessage: 'Your message',
     yourMessagePlaceholder: 'Type here...',
   },

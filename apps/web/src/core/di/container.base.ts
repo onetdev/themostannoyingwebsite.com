@@ -7,53 +7,43 @@ import { DI as DIAchievements } from '@/features/achievements/types';
 import { FakeAuthRepository } from '@/features/auth/repositories';
 import { AuthService } from '@/features/auth/services';
 import { DI as DIAuth } from '@/features/auth/types';
-import { DI as DIComments } from '@/features/comments/types';
 import { DI as DIContent } from '@/features/content/types';
 import { DonationService } from '@/features/funding/services';
 import { DI as DIDonation } from '@/features/funding/types';
-import { DI as DIMarketing } from '@/features/marketing/types';
 import { SubscriptionPlansService } from '@/features/subscription/services';
 import { DI as DISubscription } from '@/features/subscription/types';
-import { AppConfigService, AppService } from '@/services';
+import { AppService } from '@/services';
 
-export const Symbols = {
-  ...CoreSymbols,
-  ...DIAchievements,
-  ...DIAuth,
-  ...DIComments,
-  ...DIContent,
-  ...DIDonation,
-  ...DIMarketing,
-  ...DISubscription,
-};
-
-export function configureCommonContainer(container: Container) {
-  // Bing dependencies
+/**
+ * Registers the client-safe bindings shared by the browser and server
+ * containers.
+ *
+ * Every service registered here must be importable from the client bundle.
+ * Anything that `import 'server-only'` belongs in `container.server.ts`
+ * instead, so it never reaches the browser.
+ */
+export function configureBaseContainer(container: Container) {
+  container.bind(CoreSymbols.HttpClient).to(HttpClient).inSingletonScope();
   container
-    .bind(Symbols.AppConfigService)
-    .to(AppConfigService)
-    .inSingletonScope();
-  container.bind(Symbols.HttpClient).to(HttpClient).inSingletonScope();
-  container
-    .bind(Symbols.ContentApiClient)
+    .bind(DIContent.ContentApiClient)
     .toDynamicValue(() => createAppContentClient())
     .inSingletonScope();
-  container.bind(Symbols.AppService).to(AppService).inSingletonScope();
+  container.bind(CoreSymbols.AppService).to(AppService).inSingletonScope();
   container
-    .bind(Symbols.SubscriptionPlansService)
+    .bind(DISubscription.SubscriptionPlansService)
     .to(SubscriptionPlansService)
     .inSingletonScope();
   container
-    .bind(Symbols.AuthRepository)
+    .bind(DIAuth.AuthRepository)
     .to(FakeAuthRepository)
     .inSingletonScope();
-  container.bind(Symbols.AuthService).to(AuthService).inSingletonScope();
+  container.bind(DIAuth.AuthService).to(AuthService).inSingletonScope();
   container
-    .bind(Symbols.AchievementBankService)
+    .bind(DIAchievements.AchievementBankService)
     .to(AchievementBankService)
     .inSingletonScope();
   container
-    .bind(Symbols.DonationService)
+    .bind(DIDonation.DonationService)
     .to(DonationService)
     .inSingletonScope();
 }

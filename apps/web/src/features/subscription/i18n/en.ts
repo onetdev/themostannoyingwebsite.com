@@ -14,6 +14,7 @@ export default {
       expired: 'SORRY! You just missed the sale!',
     },
     billing: {
+      label: 'Select billing cycle',
       monthly: 'Monthly',
       yearly: 'Yearly',
       biyearly: '2 Years',

@@ -80,11 +80,11 @@ describe('AuthorService', () => {
   });
 
   describe('getAuthorService', () => {
-    it('resolves AuthorService from the inversify container', async () => {
+    it('resolves AuthorService from the inversify container', () => {
       const container = new Container();
       container.bind(DI.AuthorService).toConstantValue(service);
 
-      const resolved = await getAuthorService(container);
+      const resolved = getAuthorService(container);
       expect(resolved).toBe(service);
     });
   });

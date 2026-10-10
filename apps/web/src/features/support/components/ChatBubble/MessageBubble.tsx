@@ -1,3 +1,14 @@
+import {
+  Avatar,
+  AvatarFallback,
+  Bubble,
+  BubbleContent,
+  Message,
+  MessageAvatar,
+  MessageContent,
+  MessageFooter,
+} from '@maw/ui-lib';
+import { useTranslations } from 'next-intl';
 import ReactTimeAgo from 'react-timeago';
 import { useTimeagoFormatter } from '@/hooks';
 import type { ChatMessage } from '../../schemas';
@@ -9,17 +20,33 @@ type MessageBubbleProps = {
 
 export function MessageBubble({ item, showTime = true }: MessageBubbleProps) {
   const intlFormatter = useTimeagoFormatter();
+  const t = useTranslations('support.chatBubble');
+  const isUser = item.owner === 'user';
 
   return (
-    <div className="group" data-owner={item.owner}>
-      <div className="bg-secondary text-secondary-foreground group-data-[owner=bot]:bg-primary group-data-[owner=bot]:text-primary-foreground rounded-lg p-2 text-sm group-data-[owner=bot]:me-6 group-data-[owner=user]:ms-6 md:p-3 md:text-base">
-        {item.text}
-      </div>
-      {showTime && (
-        <small className="text-foreground block pt-1 text-xs opacity-50 group-data-[owner=user]:text-end md:text-sm">
-          <ReactTimeAgo date={item.time} formatter={intlFormatter} />
-        </small>
-      )}
-    </div>
+    <Message align={isUser ? 'end' : 'start'}>
+      <MessageAvatar>
+        <Avatar size="sm">
+          <AvatarFallback>{isUser ? '🙂' : '🤖'}</AvatarFallback>
+        </Avatar>
+      </MessageAvatar>
+      <MessageContent>
+        <Bubble
+          variant={isUser ? 'default' : 'muted'}
+          align={isUser ? 'end' : 'start'}
+        >
+          <BubbleContent>{item.text}</BubbleContent>
+        </Bubble>
+        {showTime && (
+          <MessageFooter>
+            {isUser ? (
+              t('delivered')
+            ) : (
+              <ReactTimeAgo date={item.time} formatter={intlFormatter} />
+            )}
+          </MessageFooter>
+        )}
+      </MessageContent>
+    </Message>
   );
 }

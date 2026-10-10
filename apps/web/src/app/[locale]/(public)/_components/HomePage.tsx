@@ -22,6 +22,7 @@ export async function HomePage({
 
   return (
     <>
+      <h1 className="sr-only">{t('common.app.title')}</h1>
       {coverArticle && (
         <LargeCoverItem
           className="col-span-1 lg:col-span-3"
@@ -30,7 +31,7 @@ export async function HomePage({
         />
       )}
       <section
-        className="col-span-1 flex flex-col justify-between"
+        className="col-span-1 flex flex-col justify-between gap-4"
         data-testid="dense-article-list"
       >
         <ul className="flex flex-col gap-3">
@@ -57,6 +58,7 @@ export async function HomePage({
             <li key={index} className="basis-full md:basis-1/2">
               <SmallCoverListItem
                 article={article}
+                headingLevel={2}
                 data-testid="small-cover-article-item"
               />
             </li>

@@ -1,4 +1,4 @@
-import { Button } from '@maw/ui-lib';
+import { ToggleGroup, ToggleGroupItem } from '@maw/ui-lib';
 import { useTranslations } from 'next-intl';
 
 import { type BillingCycle, BillingCycleList } from '../../schemas';
@@ -15,18 +15,28 @@ export function BillingCycleSelector({
   const t = useTranslations();
 
   return (
-    <div className="bg-muted inline-flex rounded-lg p-1">
+    <ToggleGroup
+      className="bg-muted rounded-lg p-1"
+      value={[billingCycle]}
+      aria-label={t('subscription.landing.billing.label')}
+      onValueChange={(value) => {
+        const next = value[0];
+        if (next) {
+          setBillingCycle(next as BillingCycle);
+        }
+      }}
+    >
       {BillingCycleList.map((cycle) => (
-        <Button
+        <ToggleGroupItem
           key={cycle}
+          value={cycle}
+          className="aria-pressed:bg-primary aria-pressed:text-primary-foreground"
           data-testid={`billing-cycle-${cycle}`}
-          variant={billingCycle === cycle ? 'default' : 'ghost'}
           size="sm"
-          onClick={() => setBillingCycle(cycle)}
         >
           {t(`subscription.landing.billing.${cycle}`)}
-        </Button>
+        </ToggleGroupItem>
       ))}
-    </div>
+    </ToggleGroup>
   );
 }

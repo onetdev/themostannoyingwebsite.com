@@ -15,11 +15,55 @@
   --padding-9per16: 177.78%; /* 9:16 aspect ratio */
 
   /* Shadcn-ui compatibility */
+  --radius-sm: calc(var(--radius) * 0.6);
+  --radius-md: calc(var(--radius) * 0.8);
   --radius-lg: var(--radius);
-  --radius-md: calc(var(--radius) - 2px);
-  --radius-sm: calc(var(--radius) - 4px);
+  --radius-xl: calc(var(--radius) * 1.4);
+  --radius-2xl: calc(var(--radius) * 1.8);
+  --radius-3xl: calc(var(--radius) * 2.2);
+  --radius-4xl: calc(var(--radius) * 2.6);
 }
 
 :root {
-  --radius: 0.5rem;
+  --radius: 0.625rem;
+}
+
+/**
+ * Page horizontal gutter.
+ *
+ * Single source of truth for the inline inset on section-level content so the
+ * floating header card, page body, sticky bars and footer share the same outer
+ * edge. Resolves to 1.25rem below the xl breakpoint and 1.5rem at xl, matching
+ * the header card's `mx-gutter` inset.
+ */
+:root {
+  --page-gutter: calc(var(--spacing, 0.25rem) * 3);
+}
+
+@media (width >= 80rem) {
+  :root {
+    --page-gutter: calc(var(--spacing, 0.25rem) * 4);
+  }
+}
+
+@utility px-gutter {
+  padding-inline: var(--page-gutter);
+}
+
+@utility mx-gutter {
+  margin-inline: var(--page-gutter);
+}
+
+/**
+ * Opacity-mask bottom fade.
+ *
+ * Fades the bottom edge to transparent with a plain alpha mask so the cut-off
+ * content dissolves into whatever surface sits behind it, instead of
+ * approximating the fade with a color-matched gradient. Used by the paywall
+ * content locker. The prefixed line keeps older WebKit/Blink working; every
+ * current browser also understands the unprefixed property.
+ */
+@utility mask-fade-bottom {
+  -webkit-mask-image: linear-gradient(black 45%, transparent);
+  mask-image: linear-gradient(black 45%, transparent);
 }

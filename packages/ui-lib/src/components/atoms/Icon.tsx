@@ -1,4 +1,5 @@
 import {
+  faArrowUp,
   faArrowUpRightFromSquare,
   faBars,
   faBrain,
@@ -45,6 +46,7 @@ import {
 
 const iconMap = {
   alertTriangle: faTriangleExclamation,
+  arrowUp: faArrowUp,
   brain: faBrain,
   bug: faBug,
   check: faCheck,

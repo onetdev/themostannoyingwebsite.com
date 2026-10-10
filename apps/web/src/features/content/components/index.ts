@@ -1,4 +1,6 @@
 export * from './ArticleItemPage';
+export * from './ArticleMeta';
+export * from './ArticleTags';
 export * from './AuthorPage';
 export * from './CoverPlaceholder';
 export * from './HotThingsPage';

@@ -200,8 +200,13 @@ export function ErrorFallback({
           )}
 
           {shouldShowHome && (
-            <Button asChild variant="outline" size={config.buttonSize}>
-              <Link href={homeHref}>{resolvedHomeLabel}</Link>
+            <Button
+              render={<Link href={homeHref} />}
+              nativeButton={false}
+              variant="outline"
+              size={config.buttonSize}
+            >
+              {resolvedHomeLabel}
             </Button>
           )}
         </div>

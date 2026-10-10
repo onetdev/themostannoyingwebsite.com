@@ -8,19 +8,19 @@ export function TextLogo() {
   return (
     <div className="font-semibold tracking-tighter">
       <Link href="/" prefetch={false} title={t('common.app.title')}>
-        {/* Mobile */}
-        <span className="text-card-foreground text-2xl lg:hidden">
+        {/* Short logo: mobile, and large desktop where the nav sits inline */}
+        <span className="text-card-foreground text-2xl lg:hidden xl:inline-block">
           {t.rich('common.app.logoShort', {
             the: (chunks) => <i className="font-light">{chunks}</i>,
             most: (chunks) => <span className="text-primary">{chunks}</span>,
           })}
         </span>
-        {/* Desktop logo logo */}
-        <span className="hidden text-3xl lg:inline-block">
+        {/* Full wordmark: medium desktop only */}
+        <span className="hidden text-2xl lg:inline-block xl:hidden">
           <span className="text-card-foreground">
             {t.rich('common.app.logoAlt', {
               the: (chunks) => (
-                <i className="text-3xl font-light opacity-80">{chunks}</i>
+                <i className="text-2xl font-light opacity-80">{chunks}</i>
               ),
               most: (chunks) => <span className="text-primary">{chunks}</span>,
             })}

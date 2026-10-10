@@ -31,7 +31,7 @@ export async function generateMetadata({
   const { slug, locale } = await params;
   const appLocale = assertAppLocale(locale);
   const container = getDependencyContainer();
-  const articleService = await getArticleService(container);
+  const articleService = getArticleService(container);
   const data = await articleService.getBySlug(slug, appLocale);
 
   if (!data) {
@@ -78,7 +78,7 @@ export const generateStaticParams = async () => {
   const paths: PageParams[] = [];
 
   const container = getDependencyContainer();
-  const articleService = await getArticleService(container);
+  const articleService = getArticleService(container);
   for (const locale of locales) {
     const articles = await articleService.listAll({
       lang: locale as LanguageCode,
@@ -97,7 +97,7 @@ export default async function Page({ params }: PageProps) {
   const appLocale = assertAppLocale(locale);
 
   const container = getDependencyContainer();
-  const articleService = await getArticleService(container);
+  const articleService = getArticleService(container);
   const datum = await articleService.getBySlug(slug, appLocale);
 
   if (!datum) {

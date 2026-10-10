@@ -47,6 +47,6 @@ export class AuthorService implements IAuthorService {
   }
 }
 
-export async function getAuthorService(container: Container) {
+export function getAuthorService(container: Container): IAuthorService {
   return container.get<IAuthorService>(DI.AuthorService);
 }

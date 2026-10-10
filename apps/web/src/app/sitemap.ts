@@ -2,7 +2,6 @@ import type { ArticleListItem } from '@maw/content-sdk';
 import type { MetadataRoute } from 'next';
 import type { Languages } from 'next/dist/lib/metadata/types/alternative-urls-types';
 
-import './bootstrap/di';
 import { getDependencyContainer } from '@/core/di';
 import { absoluteUrl } from '@/core/seo/absolute-url';
 import {
@@ -104,13 +103,13 @@ const mapArticlesToSitemapEntries = (
 
 async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const di = getDependencyContainer();
-  const service = await getArticleService(di);
+  const service = getArticleService(di);
   const articlesList = await service.listAll();
   const articles = mapArticlesToSitemapEntries(articlesList);
 
   // Author slugs are locale-independent, so each author is emitted once with a
   // complete `hreflang` alternates map (including `x-default`).
-  const authorService = await getAuthorService(di);
+  const authorService = getAuthorService(di);
   const authorsList = await authorService.listAll();
   const authors = authorsList.map((author) =>
     authorPageMeta(`authors/${author.slug}`),

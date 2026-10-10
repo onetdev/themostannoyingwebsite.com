@@ -1,6 +1,6 @@
 'use client';
 
-import { Button, Icon } from '@maw/ui-lib';
+import { Button, Icon, Spinner } from '@maw/ui-lib';
 import { clsx } from '@maw/ui-lib/utils';
 import { useTranslations } from 'next-intl';
 import type { ChallengeStatus } from '../types';
@@ -39,7 +39,7 @@ export function CaptchaTrigger({
             <Icon icon="checkCircle" className="text-success" />
           )}
           {(status === 'loading' || status === 'challenge') && (
-            <Icon icon="spinner" className="text-primary animate-spin" />
+            <Spinner className="text-primary" />
           )}
           {status === 'failed' && (
             <Icon icon="xmarkCircle" className="text-destructive" />

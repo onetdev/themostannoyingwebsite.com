@@ -1,6 +1,6 @@
 'use client';
 
-import { Icon } from '@maw/ui-lib';
+import { Button, Icon } from '@maw/ui-lib';
 import { useTranslations } from 'next-intl';
 import { Link } from '@/core/i18n/navigation';
 import { useBeggarBanner } from '../hooks';
@@ -15,7 +15,7 @@ export function BeggarBanner() {
 
   return (
     <div className="bg-error text-error-foreground relative z-50 w-full shadow-lg">
-      <div className="container mx-auto flex items-center justify-between gap-4 px-5 py-5 xl:px-8">
+      <div className="container mx-auto flex items-center justify-between gap-4 px-gutter py-5">
         <div className="flex-1">
           <p className="text-sm md:text-base">
             <span className="font-bold">{t(bannerData.prefixKey)}</span>{' '}
@@ -25,14 +25,16 @@ export function BeggarBanner() {
             </Link>
           </p>
         </div>
-        <button
+        <Button
           type="button"
+          variant="ghost"
+          size="icon"
           onClick={onDismiss}
-          className="shrink-0 cursor-pointer"
+          className="shrink-0 hover:bg-transparent hover:text-current"
           aria-label={t('common.app.dismissBanner')}
         >
           <Icon icon="close" />
-        </button>
+        </Button>
       </div>
     </div>
   );

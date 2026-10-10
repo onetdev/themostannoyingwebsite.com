@@ -12,7 +12,10 @@ export function useLanguageSwitcher() {
 
   const languages = SUPPORTED_LANGUAGES;
 
-  const onLanguageChange = (value: AppLocale) => {
+  const onLanguageChange = (value: AppLocale | null) => {
+    if (value == null) {
+      return;
+    }
     persistLocaleCookie(value);
 
     // Might not look sexy, modern BUT it is what we need. And it works,

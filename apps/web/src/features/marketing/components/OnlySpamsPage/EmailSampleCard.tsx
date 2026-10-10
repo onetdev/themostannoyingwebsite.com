@@ -1,6 +1,6 @@
 'use client';
 
-import { Badge, Button, Separator } from '@maw/ui-lib';
+import { Badge, Button, Card, Separator } from '@maw/ui-lib';
 import { useTranslations } from 'next-intl';
 import { emit } from '@/core/events/event-bus';
 
@@ -13,7 +13,7 @@ export function EmailSampleCard(email: EmailSampleCardProps) {
   const t = useTranslations();
 
   return (
-    <div className="bg-card text-card-foreground border border-border rounded-xl shadow-sm overflow-hidden flex flex-col transition-all hover:shadow-lg h-full">
+    <Card className="h-full gap-0 overflow-hidden py-0 transition-all hover:shadow-lg">
       <div className="bg-muted/30 p-4 space-y-2 text-sm">
         <div className="flex gap-2">
           <span className="font-semibold text-muted-foreground min-w-16">
@@ -56,6 +56,6 @@ export function EmailSampleCard(email: EmailSampleCardProps) {
           </Button>
         </div>
       </div>
-    </div>
+    </Card>
   );
 }

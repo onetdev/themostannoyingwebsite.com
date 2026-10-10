@@ -19,63 +19,64 @@ export const getSettingsPage = (page: Page) => {
       enableAllButton: painPreferencesSection.getByRole('button', {
         name: 'Enable all',
       }),
-      checkboxesAll: painPreferencesSection.getByRole('checkbox'),
-      checkboxesChecked: painPreferencesSection.getByRole('checkbox', {
+      togglesAll: painPreferencesSection.getByRole('switch'),
+      togglesChecked: painPreferencesSection.getByRole('switch', {
         checked: true,
       }),
-      checkboxesUnchecked: painPreferencesSection.getByRole('checkbox', {
+      togglesUnchecked: painPreferencesSection.getByRole('switch', {
         checked: false,
       }),
-      detectAdblocker: painPreferencesSection.getByRole('checkbox', {
+      detectAdblocker: painPreferencesSection.getByRole('switch', {
         name: 'Detect adblocker',
       }),
-      backgroundAdFlap: painPreferencesSection.getByRole('checkbox', {
+      backgroundAdFlap: painPreferencesSection.getByRole('switch', {
         name: 'Background ad flaps',
       }),
-      oneByOne: painPreferencesSection.getByRole('checkbox', {
-        name: 'One by one ad blocks',
+      oneByOne: painPreferencesSection.getByRole('switch', {
+        name: 'Flaim a phone survey campaign',
       }),
-      clipboardMarker: painPreferencesSection.getByRole('checkbox', {
-        name: 'Clipboard marker',
+      clipboardMarker: painPreferencesSection.getByRole('switch', {
+        name: 'Clipboard branding mark',
       }),
-      contentPaywall: painPreferencesSection.getByRole('checkbox', {
+      contentPaywall: painPreferencesSection.getByRole('switch', {
         name: 'Content paywall',
       }),
-      deadPixel: painPreferencesSection.getByRole('checkbox', {
-        name: 'Dead pixel',
+      deadPixel: painPreferencesSection.getByRole('switch', {
+        name: 'Dead pixels',
       }),
-      disableContextMenu: painPreferencesSection.getByRole('checkbox', {
+      disableContextMenu: painPreferencesSection.getByRole('switch', {
         name: 'Disable context (right click) menu',
       }),
-      exitPrompt: painPreferencesSection.getByRole('checkbox', {
+      exitPrompt: painPreferencesSection.getByRole('switch', {
         name: 'Exit prompt',
       }),
-      historySpam: painPreferencesSection.getByRole('checkbox', {
-        name: 'History spam',
+      historySpam: painPreferencesSection.getByRole('switch', {
+        name: 'Browser History spam',
       }),
-      mockChat: painPreferencesSection.getByRole('checkbox', {
-        name: 'Bubble chat',
+      mockChat: painPreferencesSection.getByRole('switch', {
+        name: 'Mock support chat',
       }),
-      newsletterModal: painPreferencesSection.getByRole('checkbox', {
+      newsletterModal: painPreferencesSection.getByRole('switch', {
         name: 'Newsletter popup modal',
       }),
-      notifications: painPreferencesSection.getByRole('checkbox', {
+      notifications: painPreferencesSection.getByRole('switch', {
         name: 'Notifications',
       }),
-      pageTitleInactiveArrayPaged: painPreferencesSection.getByRole(
-        'checkbox',
-        {
-          name: 'Alternative title when tab is inactive',
-        },
-      ),
-      searchDelay: painPreferencesSection.getByRole('checkbox', {
-        name: 'Fake search delay',
+      pageTitleInactiveArrayPaged: painPreferencesSection.getByRole('switch', {
+        name: 'Alternating title when tab is inactive',
       }),
-      wheelOfFortune: painPreferencesSection.getByRole('checkbox', {
+      searchDelay: painPreferencesSection.getByRole('switch', {
+        name: 'Artificial search delay',
+      }),
+      searchDelayLabel: painPreferencesSection.getByText(
+        'Artificial search delay',
+        { exact: true },
+      ),
+      wheelOfFortune: painPreferencesSection.getByRole('switch', {
         name: 'Wheel of fortune',
       }),
-      stickyVideo: painPreferencesSection.getByRole('checkbox', {
-        name: 'Sticky video',
+      stickyVideo: painPreferencesSection.getByRole('switch', {
+        name: 'Sticky video player',
       }),
     },
 
