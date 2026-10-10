@@ -49,7 +49,6 @@ export function ChatBubble() {
               history={state.history}
               onUserMessage={(message) => state.add(message, 'user')}
               onClose={closeHistory}
-              open={state.isForeground}
             />
           </motion.div>
         )}

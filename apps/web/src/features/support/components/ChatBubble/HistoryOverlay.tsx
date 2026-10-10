@@ -1,12 +1,25 @@
+'use client';
+
 import {
+  Bubble,
+  BubbleContent,
+  Button,
   DotDotDotText,
   Icon,
+  Message,
+  MessageContent,
+  MessageScroller,
+  MessageScrollerButton,
+  MessageScrollerContent,
+  MessageScrollerItem,
+  MessageScrollerProvider,
+  MessageScrollerViewport,
   Tooltip,
   TooltipContent,
   TooltipTrigger,
 } from '@maw/ui-lib';
 import { useTranslations } from 'next-intl';
-import { useEffect, useMemo, useRef, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import type { ChatMessage } from '../../schemas';
 import { MessageBubble } from './MessageBubble';
 import { MessageForm } from './MessageForm';
@@ -15,29 +28,19 @@ export type HistoryOverlayProps = {
   history: ChatMessage[];
   onClose: () => void;
   onUserMessage: (message: string) => void;
-  open?: boolean;
 };
 
 export function HistoryOverlay({
   history,
   onClose,
   onUserMessage,
-  open = false,
 }: HistoryOverlayProps) {
   const [showTyping, setShowTyping] = useState(true);
-  const pagerRef = useRef<HTMLDivElement>(null);
   const t = useTranslations();
 
   useEffect(() => {
     setShowTyping(history[history.length - 1]?.owner === 'user');
   }, [history]);
-
-  // biome-ignore lint/correctness/useExhaustiveDependencies: We don't care about the current scroll position, this will force the user to always see the most recent messages.
-  useEffect(() => {
-    (pagerRef.current?.lastChild as HTMLDivElement | undefined)?.scrollIntoView(
-      { behavior: 'smooth' },
-    );
-  }, [history, showTyping, open]);
 
   const historyViewData = useMemo(() => {
     return history.map((item, index) => ({
@@ -47,7 +50,7 @@ export function HistoryOverlay({
   }, [history]);
 
   return (
-    <div className="border-secondary bg-card rounded-lg border text-start">
+    <div className="border-secondary bg-card flex flex-col rounded-lg border text-start">
       <div className="flex flex-row justify-between p-3 ps-5 shadow-xs">
         <h4 className="flex items-center gap-1 text-base font-bold">
           {t('support.chatBubble.hudTitle')}
@@ -62,25 +65,51 @@ export function HistoryOverlay({
             </TooltipContent>
           </Tooltip>
         </h4>
-        <button type="button" onClick={() => onClose()}>
+        <Button
+          variant="ghost"
+          size="icon-sm"
+          onClick={() => onClose()}
+          aria-label={t('common.action.close')}
+        >
           <Icon icon="close" />
-        </button>
+        </Button>
       </div>
-      <div
-        className="max-h-clamp-300-screen-half flex flex-col gap-2 overflow-auto px-5 py-3"
-        ref={pagerRef}
-      >
-        {history.length > 0 &&
-          historyViewData.map(({ item, showTime }, index) => (
-            <MessageBubble key={index} item={item} showTime={showTime} />
-          ))}
-        {showTyping && (
-          <DotDotDotText
-            message={t('support.chatBubble.agentIsTyping')}
-            className="block text-sm italic md:text-base"
-          />
-        )}
-      </div>
+
+      <MessageScrollerProvider defaultScrollPosition="end" autoScroll>
+        <MessageScroller className="min-h-0 flex-1">
+          <MessageScrollerViewport className="max-h-clamp-300-screen-half flex flex-col px-5 py-3">
+            <MessageScrollerContent className="gap-2">
+              {historyViewData.map(({ item, showTime }, index) => (
+                <MessageScrollerItem key={index}>
+                  <MessageBubble item={item} showTime={showTime} />
+                </MessageScrollerItem>
+              ))}
+              {showTyping && (
+                <MessageScrollerItem key="typing">
+                  <Message align="start">
+                    <MessageContent>
+                      <Bubble variant="ghost">
+                        <BubbleContent className="text-muted-foreground italic">
+                          <DotDotDotText
+                            message={t('support.chatBubble.agentIsTyping')}
+                          />
+                        </BubbleContent>
+                      </Bubble>
+                    </MessageContent>
+                  </Message>
+                </MessageScrollerItem>
+              )}
+            </MessageScrollerContent>
+          </MessageScrollerViewport>
+          <MessageScrollerButton>
+            <Icon icon="chevronDown" />
+            <span className="sr-only">
+              {t('support.chatBubble.jumpToLatest')}
+            </span>
+          </MessageScrollerButton>
+        </MessageScroller>
+      </MessageScrollerProvider>
+
       <MessageForm
         className="flex justify-between p-3 ps-5 shadow-xs"
         onMessage={onUserMessage}

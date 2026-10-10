@@ -9,6 +9,7 @@ export default {
     hudTitleDisclaimer:
       "Disclaimer: Actually, this is a bot that almost feels like a real human (not a smart one) but it's still just a bot",
     agentIsTyping: 'Agent is typing',
+    jumpToLatest: 'Jump to the latest messages',
     yourMessage: 'Your message',
     yourMessagePlaceholder: 'Type here...',
   },
