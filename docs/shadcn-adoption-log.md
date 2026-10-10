@@ -136,14 +136,14 @@ Restyled the chat popup to match the shadcn chat demo:
   initial bot message and clears the unread counter.
 - **Avatars**: `MessageAvatar` + `AvatarFallback` emoji (bot 🤖 / user 🙂); no new
   assets.
-- **Bubbles**: user is `default` (primary), bot is `muted`; a static 👍
-  `BubbleReactions` is attached to the latest bot message.
+- **Bubbles**: user is `default` (primary), bot is `muted`.
 - **Status**: user messages show a "Delivered" receipt; bot messages keep the
   relative timestamp.
 - **Typing**: the "agent is typing" note now uses `Marker`.
-- **Composer**: rounded container with an auto-growing `Textarea`, a disabled
-  attach (+) button (no attachments yet) and a circular send (↑) button.
-- **Icons**: `plus` and `arrowUp` added to the ui-lib `Icon` map.
+- **Composer**: rounded container with an auto-growing `Textarea` and a circular
+  send (↑) button. The demo's attach (+) button was dropped and the 👍
+  `BubbleReactions` were removed for now.
+- **Icons**: `arrowUp` added to the ui-lib `Icon` map.
 
 ## Phase checklist
 
