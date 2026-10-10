@@ -717,6 +717,9 @@ importers:
       '@fortawesome/react-fontawesome':
         specifier: 'catalog:'
         version: 3.5.0(@fortawesome/fontawesome-svg-core@7.3.1)(react@19.3.0)
+      '@shadcn/react':
+        specifier: ^0.3.1
+        version: 0.3.1(@types/react@19.3.0)(react@19.3.0)
       class-variance-authority:
         specifier: ^0.7.1
         version: 0.7.1
@@ -3295,6 +3298,17 @@ packages:
     engines: {node: '>= 18'}
     peerDependencies:
       webpack: '>=5.0.0'
+
+  '@shadcn/react@0.3.1':
+    resolution: {integrity: sha512-2gOR0HDMtWeRsCZfNDaU0YDFdgH3zsDQ6lz67Fv/y/qjY9y+R8kJqAn6q56phqv7/zHi0wqURjntrNO9zL7vnQ==}
+    peerDependencies:
+      '@types/react': '>=19'
+      react: '>=19'
+    peerDependenciesMeta:
+      '@types/react':
+        optional: true
+      react:
+        optional: true
 
   '@simple-libs/child-process-utils@2.0.0':
     resolution: {integrity: sha512-dvNoRKLijXnD0XoJAz94pbNuB5GQgDr55UhpSPhffDkTT0Cmcqh9jSCOtwfT2d4H6MI9E7c4SgtMuJXZ6F3c6A==}
@@ -10714,6 +10728,11 @@ snapshots:
       - encoding
       - rollup
       - supports-color
+
+  '@shadcn/react@0.3.1(@types/react@19.3.0)(react@19.3.0)':
+    optionalDependencies:
+      '@types/react': 19.3.0
+      react: 19.3.0
 
   '@simple-libs/child-process-utils@2.0.0':
     dependencies:

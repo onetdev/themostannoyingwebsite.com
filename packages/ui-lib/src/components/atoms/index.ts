@@ -1,5 +1,6 @@
 export * from './Avatar';
 export * from './Badge';
+export * from './Bubble';
 export * from './Button';
 export * from './Checkbox';
 export * from './CopyMarker';
@@ -10,6 +11,9 @@ export * from './Icon';
 export * from './Input';
 export * from './Label';
 export * from './LoaderDots';
+export * from './Marker';
+export * from './Message';
+export * from './MessageScroller';
 export * from './PageHeadline';
 export * from './PasswordStrengthBar';
 export * from './Progress';
