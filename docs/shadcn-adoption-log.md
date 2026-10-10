@@ -30,8 +30,8 @@ When adding a component to `packages/ui-lib`:
 
 ## Behavior-loss register
 
-Status legend: ⬜ pending · 🟡 reintroduced as a wrapper · ✅ intentionally dropped ·
-⛔ regression to fix.
+Status legend: ⬜ pending · 🟡 reintroduced as a wrapper · 🟢 preserved (no behavior lost)
+· ✅ intentionally dropped · ⛔ regression to fix.
 
 | Ref | Area | shadcn component | Behavior at risk | Intentional? | Reintroduction plan | Status |
 | --- | ---- | ---------------- | ---------------- | ------------ | ------------------- | ------ |
@@ -48,19 +48,39 @@ Status legend: ⬜ pending · 🟡 reintroduced as a wrapper · ✅ intentionall
 | BEH-11 | Paywall reveal (`content/PartitionalLockedContent`) | `Collapsible` | Deliberately janky incremental reveal | Yes | Keep the custom reveal; do not smooth it | ⬜ |
 | BEH-12 | Cancellation reasons (`CancellationPage/steps/ReasonsStep`) | `RadioGroup` + `Field` | Clicking a reason selects **and** advances the step | Yes | Keep the click-through handler | ⬜ |
 | BEH-13 | Survey bar (`FlaimSurveyPage/ProgressBar`) | `Progress` | Time-driven auto-shrink (not value-driven) | Yes | Keep the animation-driven bar if `Progress` cannot express it | ⬜ |
-| BEH-14 | Urgency countdown (`PlansPage/UrgencyCountdown`) | `Badge` | `animate-pulse` while active | Yes | Keep pulse class | ⬜ |
+| BEH-14 | Urgency countdown (`PlansPage/UrgencyCountdown`) | `Badge` | `animate-pulse` while active | Yes | Kept the pulse class on `Badge` | 🟢 |
 | BEH-15 | Adblocker bar (`marketing/AdblockerSuspectBar`) | `Alert` | Sticky `-bottom-3`, `FadeIn` slide-in | Yes | Keep positioning/animation wrapper | ⬜ |
-| BEH-16 | Beggar banner (`funding/BeggarBanner`) | `Alert` | Sticky positioning + raw close button | Yes | Keep sticky wrapper + `Button` icon close | ⬜ |
-| BEH-17 | Cookie consent (`app/…/CookieConsent`) | `Alert` / `Button` | Always-on sticky banner, no dismiss control | Yes | Keep the grant-flag behavior | ⬜ |
+| BEH-16 | Beggar banner (`funding/BeggarBanner`) | `Alert` / `Button` | Sticky positioning + raw close button | Yes | Sticky kept; close is now `Button` | 🟢 |
+| BEH-17 | Cookie consent (`app/…/CookieConsent`) | `Alert` / `Button` | Always-on sticky banner, no dismiss control | Yes | Kept the grant-flag behavior; OK is now `Button` | 🟢 |
 | BEH-18 | Pain slider (`AppHeader/…/PainLevelSelector`) | `Slider` | Custom `SliderRail` gradient + firefly particles + clamp labels | Yes | Keep rail/particles as an overlay layer | ⬜ |
-| BEH-19 | Debug store (`monitoring/…/StoreInspector`) | `Textarea` | `resize-none`, mono font, fixed min height | No | Re-apply via `className` | ⬜ |
+| BEH-19 | Debug store (`monitoring/…/StoreInspector`) | `Textarea` | `resize-none`, mono font, fixed min height | No | Re-applied via `className` | 🟢 |
 | BEH-20 | Context menu (`disruptions/useDisableContextMenu`) | `AlertDialog` or `toast` | Rude native `alert()` on right-click | Yes | Decide: keep native alert or restyle | ⬜ |
+
+## Phase 1 review notes
+
+Adopted existing ui-lib primitives: `Textarea` (debug store), `Separator`
+(achievements reset, article comments), `Badge` (urgency countdown), `Card` (spam
+sample), `Button` (cookie consent, beggar banner close).
+
+The audit also proposed some swaps that were **reviewed and deliberately not
+applied**, to avoid degrading intentional design:
+
+| Item | Audit suggestion | Why kept custom |
+| ---- | ---------------- | --------------- |
+| `AdblockerSuspectBar` | `Alert` | Full-bleed sticky error bar; `Alert`'s card/compound-grid layout does not express it. Revisit if a dedicated `Banner` primitive lands. |
+| `BeggarBanner` | `Alert` | Same full-bleed sticky banner; only the close control was adopted as `Button`. |
+| `UpsellStep` promo box | `Alert` | Intentional loud, dotted-border promo; `role="alert"` is semantically wrong for static copy and the layout fights `text-2xl`. |
+| `AchievementToast` | `Button` | Bespoke notification surface (gradient trophy, progress overlay); `Button` base icon sizing/whitespace would fight it. |
+| `WheelOfFortuneTrigger` | `Button` | Decorative animated protruding tab; `Button` would override the wiggle/offset design. |
+| `HotThingsPage` play control | `Button` | Large centered video overlay affordance; `Button` base sizing conflicts. |
+| `CryptoWallet` copy action | `CopyMarker` | **Audit correction**: `CopyMarker` intercepts `copy` events to append attribution to a text selection — it is not a copy-to-clipboard button, so it cannot replace this action. |
 
 ## Phase checklist
 
-- [ ] **Phase 0** — Infra: `base-vega` style, registry conventions, this log, ADR 31.
-- [ ] **Phase 1** — Free wins with existing ui-lib components (Textarea, Separator,
-      Button, CopyMarker, Tooltip, Badge, Card, Alert).
+- [x] **Phase 0** — Infra: `base-vega` style, registry conventions, this log, ADR 31.
+- [x] **Phase 1** — Free wins with existing ui-lib components (Textarea, Separator,
+      Button, Badge, Card; Alert and remaining raw buttons consciously deferred — see
+      review notes).
 - [ ] **Phase 2** — Chat primitives (`Bubble`, `Message`, `MessageScroller`,
       `Attachment`, `Marker`); retire `useInteractOutside`.
 - [ ] **Phase 3** — `Switch`; migrate settings toggles.
