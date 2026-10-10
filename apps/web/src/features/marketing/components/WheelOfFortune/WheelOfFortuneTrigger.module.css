@@ -1,0 +1,17 @@
+.wavyRight {
+  /* Rounded ticket-stub edge with two waves scalloped into the inner (right)
+     vertical edge. `clip-path: polygon()` cannot draw curves, so the shape is
+     carried by an SVG mask stretched to the element box
+     (`preserveAspectRatio='none'`), keeping two waves at any rendered size.
+     Every peak and trough has a vertical tangent (control points share the
+     endpoint x), so the edge is fully rounded with no pointy corners. The wave
+     dips ~8% of the width inward so the `tags` icon (inside `pr-6`) is never
+     clipped. Mirrors to the inner edge in RTL via the wrapper's
+     `rtl:-scale-x-100`. */
+  -webkit-mask-image: url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20100%20100'%20preserveAspectRatio='none'%3E%3Cpath%20fill='%23fff'%20d='M0%200L100%200C100%2015%2092%2010%2092%2025C92%2040%20100%2035%20100%2050C100%2065%2092%2060%2092%2075C92%2090%20100%2085%20100%20100L0%20100Z'/%3E%3C/svg%3E");
+  mask-image: url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20100%20100'%20preserveAspectRatio='none'%3E%3Cpath%20fill='%23fff'%20d='M0%200L100%200C100%2015%2092%2010%2092%2025C92%2040%20100%2035%20100%2050C100%2065%2092%2060%2092%2075C92%2090%20100%2085%20100%20100L0%20100Z'/%3E%3C/svg%3E");
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  -webkit-mask-size: 100% 100%;
+  mask-size: 100% 100%;
+}
