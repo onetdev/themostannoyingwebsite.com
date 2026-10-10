@@ -1,4 +1,5 @@
 import {
+  faArrowUp,
   faArrowUpRightFromSquare,
   faBars,
   faBrain,
@@ -27,6 +28,7 @@ import {
   faMugHot,
   faPaperPlane,
   faPlayCircle,
+  faPlus,
   faRotateRight,
   faSpinner,
   faSun,
@@ -45,6 +47,7 @@ import {
 
 const iconMap = {
   alertTriangle: faTriangleExclamation,
+  arrowUp: faArrowUp,
   brain: faBrain,
   bug: faBug,
   check: faCheck,
@@ -71,6 +74,7 @@ const iconMap = {
   moon: faMoon,
   mugHot: faMugHot,
   play: faPlayCircle,
+  plus: faPlus,
   rotate: faRotateRight,
   search: faMagnifyingGlass,
   send: faPaperPlane,
