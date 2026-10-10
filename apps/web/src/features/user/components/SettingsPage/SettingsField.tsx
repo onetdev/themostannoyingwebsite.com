@@ -1,43 +1,61 @@
-import {
-  Field,
-  FieldLabel,
-  Icon,
-  Tooltip,
-  TooltipContent,
-  TooltipTrigger,
-} from '@maw/ui-lib';
-import { cn } from '@maw/ui-lib/utils';
-import type { PropsWithChildren } from 'react';
+'use client';
 
-export type SettingsFieldProps = PropsWithChildren<{
-  info?: string;
+import { Field, FieldLabel, FieldTitle, InfoTooltip } from '@maw/ui-lib';
+import { cn } from '@maw/ui-lib/utils';
+import { useTranslations } from 'next-intl';
+import { type ReactNode, useId } from 'react';
+
+export type SettingsFieldProps = {
   label: string;
-  reverse?: boolean;
-}>;
+  /** Help text revealed by the info tooltip. */
+  info?: string;
+  /** Static value variant; renders a title/value row with no control. */
+  value?: ReactNode;
+  /** Mirrors the control's disabled state for label styling. */
+  disabled?: boolean;
+  className?: string;
+  /** Control variant; receives the id to wire to the control. */
+  children?: (id: string) => ReactNode;
+};
 
 export function SettingsField({
   children,
+  className,
+  disabled = false,
   info,
   label,
-  reverse = false,
+  value,
 }: SettingsFieldProps) {
+  const t = useTranslations();
+  const id = useId();
+
+  if (children === undefined) {
+    return (
+      <Field
+        orientation="horizontal"
+        className={cn('justify-between gap-3', className)}
+      >
+        <FieldTitle>{label}</FieldTitle>
+        <span className="text-muted-foreground">{value}</span>
+      </Field>
+    );
+  }
+
   return (
     <Field
       orientation="horizontal"
-      className={cn(reverse && 'flex-row-reverse justify-between', 'gap-3')}
+      data-disabled={disabled || undefined}
+      className={cn('w-fit max-w-full gap-3', className)}
     >
-      {children}
-      <FieldLabel className="flex items-center gap-2">
+      {children(id)}
+      <FieldLabel htmlFor={id} className="font-normal">
         {label}
-        {info && (
-          <Tooltip>
-            <TooltipTrigger
-              render={<Icon icon="info" className="text-muted-foreground" />}
-            />
-            <TooltipContent>{info}</TooltipContent>
-          </Tooltip>
-        )}
       </FieldLabel>
+      {info && (
+        <InfoTooltip label={t('common.action.moreInformation')}>
+          {info}
+        </InfoTooltip>
+      )}
     </Field>
   );
 }

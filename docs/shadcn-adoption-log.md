@@ -144,6 +144,45 @@ Restyled the chat popup to match the shadcn chat demo:
   `BubbleReactions` were removed for now.
 - **Icons**: `arrowUp` added to the ui-lib `Icon` map.
 
+## Phase 7 review notes
+
+Reworked the settings page onto the shadcn `Field` composition:
+
+- **`SettingsField`** is now built from `Field`/`FieldLabel`/`FieldTitle` with a
+  `children(id)` render prop, so every control is wired to its label via
+  `id`/`htmlFor`. This restores the association the previous bespoke row had
+  dropped: clicking a row label toggles the control again, and Base UI derives
+  the control's accessible name from the label (`useAriaLabelledBy`).
+- **`InfoTooltip`** atom added: the help trigger is now a real, labelled
+  `<button>` instead of a bare info `<svg>`. Fixes the invalid `type="button"`
+  applied to an `<svg>` and the Base UI `nativeButton` dev warning, and gives
+  screen readers a name for the help control.
+- Read-only rows set `data-disabled` on `Field` (plus `disabled` on the control)
+  per the shadcn disabled demo; permission rows use the `value` variant (a
+  `FieldTitle`/value pair) instead of overloading the removed `reverse` prop.
+- The four `PainPreferences` categories now use `FieldSet`/`FieldLegend`/
+  `FieldGroup` in place of `<section>`/`<h3>`; the legend keeps the previous
+  uppercase category styling via `className`.
+- e2e: the settings POM's pain-preference locators were stale (still querying
+  `role="checkbox"` after the Phase 3 `Switch` migration, so the count was 0 and
+  the toggle test was vacuous). They now use `role="switch"` with the current
+  copy, plus a new test asserting a row label toggles its control.
+- **`Checkbox`** synced to the current `base-vega` item: 16px default (`size-4`
+  instead of the ui-lib 20px `md`), the `[&>svg]:size-3.5` check sizing, the
+  expanded `after:-inset-*` hit area, and the `Field` disabled/focus integration
+  (`group-has-disabled/field:opacity-50`, `group-has-[:focus-visible]/field-label:*`).
+  The unused custom `size` variant (`sm`/`md`/`lg`) was dropped to match upstream.
+  The check sizing uses `[&>svg]:size-3.5!`: FontAwesome injects `.svg-inline--fa`
+  (`width: 1.25em; height: 1em`) as an **unlayered** stylesheet at runtime, and
+  unlayered styles outrank Tailwind's `@layer utilities`, so without `!` the check
+  overflowed the 16px box. This affects any fixed-size FA icon inside a Tailwind
+  utility; revisit globally if more icons need the override.
+- **Checkbox check-in animation (deliberate deviation).** The registry indicator is
+  `transition-none`; we add a subtle scale/fade via Base UI's transition status —
+  `transition-[scale,opacity] duration-150 data-starting-style:scale-75
+  data-starting-style:opacity-0 data-ending-style:scale-75 data-ending-style:opacity-0`.
+  Base UI keeps the indicator mounted until the exit transition completes.
+
 ## Registry drift audit
 
 `pnpm audit:registry` (`packages/ui-lib/scripts/audit-registry-drift.ts`) diffs
@@ -178,3 +217,6 @@ or in CI.
       checkbox indicator slot added; Progress sub-parts deferred — see notes.
 - [x] **Phase 6** — Restyle the chat popup to the shadcn chat demo (avatars,
       delivered status, reactions, Marker typing, composer).
+- [x] **Phase 7** — Settings page onto the shadcn `Field` composition
+      (`SettingsField` id/`htmlFor` wiring, `InfoTooltip` atom, `FieldSet`/
+      `FieldLegend`/`FieldGroup`, stale e2e locators fixed) — see Phase 7 notes.

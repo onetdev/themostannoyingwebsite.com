@@ -10,6 +10,7 @@ export * from './DotDotDotText';
 export * from './Empty';
 export * from './FadeIn';
 export * from './Icon';
+export * from './InfoTooltip';
 export * from './Input';
 export * from './Label';
 export * from './LoaderDots';

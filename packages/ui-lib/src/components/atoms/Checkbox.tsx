@@ -1,41 +1,31 @@
 'use client';
 
 import { Checkbox as CheckboxPrimitive } from '@base-ui/react/checkbox';
-import { cva, type VariantProps } from 'class-variance-authority';
 import { cn } from '../../utils';
 import { Icon } from './Icon';
 
-const checkboxVariants = cva(
-  'peer border-input dark:bg-input/30 data-checked:bg-primary data-checked:text-primary-foreground dark:data-checked:bg-primary data-checked:border-primary focus-visible:border-ring focus-visible:ring-ring/50 aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive size-4 shrink-0 rounded-[4px] border shadow-xs transition-shadow outline-none focus-visible:ring-[3px] data-disabled:cursor-not-allowed data-disabled:opacity-50',
-  {
-    variants: {
-      size: {
-        sm: 'size-4',
-        md: 'size-5',
-        lg: 'size-7',
-      },
-    },
-    defaultVariants: {
-      size: 'md',
-    },
-  },
-);
+export type CheckboxProps = CheckboxPrimitive.Root.Props;
 
-export interface CheckboxProps
-  extends CheckboxPrimitive.Root.Props,
-    VariantProps<typeof checkboxVariants> {}
-
-export function Checkbox({ className, ref, size, ...props }: CheckboxProps) {
+export function Checkbox({ className, ref, ...props }: CheckboxProps) {
   return (
     <CheckboxPrimitive.Root
       ref={ref}
       data-slot="checkbox"
-      className={cn(checkboxVariants({ size, className }))}
+      className={cn(
+        'peer relative flex size-4 shrink-0 items-center justify-center rounded-[4px] border border-input shadow-xs transition-shadow outline-none group-has-disabled/field:opacity-50 group-has-[:focus-visible]/field-label:ring-0 group-has-[:focus-visible]/field-label:not-data-checked:border-input after:absolute after:-inset-x-3 after:-inset-y-2 focus-visible:border-ring focus-visible:ring-3 focus-visible:ring-ring/50 aria-invalid:border-destructive aria-invalid:ring-3 aria-invalid:ring-destructive/20 aria-invalid:aria-checked:border-primary dark:bg-input/30 dark:aria-invalid:border-destructive/50 dark:aria-invalid:ring-destructive/40 data-checked:border-primary data-checked:bg-primary data-checked:text-primary-foreground group-has-[:focus-visible]/field-label:data-checked:border-primary dark:data-checked:bg-primary data-disabled:cursor-not-allowed data-disabled:opacity-50',
+        className,
+      )}
       {...props}
     >
+      {/*
+        `[&>svg]:size-3.5!` is important on purpose: FontAwesome injects
+        `.svg-inline--fa` (width 1.25em, height 1em) as an *unlayered* stylesheet,
+        which outranks Tailwind's layered `[&>svg]:size-3.5`. Without `!` the
+        check overflows the 16px box.
+      */}
       <CheckboxPrimitive.Indicator
         data-slot="checkbox-indicator"
-        className={cn('flex items-center justify-center text-current')}
+        className="grid place-content-center text-current transition-[scale,opacity] duration-150 [&>svg]:size-3.5! data-starting-style:scale-75 data-starting-style:opacity-0 data-ending-style:scale-75 data-ending-style:opacity-0"
       >
         <Icon icon="check" />
       </CheckboxPrimitive.Indicator>

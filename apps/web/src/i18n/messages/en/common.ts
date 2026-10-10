@@ -14,6 +14,7 @@ export default {
     enable: 'Enable',
     enableAll: 'Enable all',
     generate: 'Generate',
+    moreInformation: 'More information',
     next: 'Next',
     no: 'No',
     ok: 'OK',

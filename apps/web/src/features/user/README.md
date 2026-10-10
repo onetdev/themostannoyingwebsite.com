@@ -15,7 +15,7 @@ Handles user personalization (or depersonalization) settings, notification trigg
 
 ## Configuration UI
 
-- `SettingsField`: A specialized field used in the Settings page to toggle specific annoying features.
+- `SettingsField`: A shadcn `Field`-based row used across the Settings page. It renders a control (via a `children(id)` render prop so the control's `id` is wired to `FieldLabel htmlFor`), a static `value` row for read-only permissions, and an optional `InfoTooltip` help affordance.
 - `SettingsPage`: The tabbed interface for browsing different setting categories.
 
 Looking for Admin login or terminal access? See the `auth` feature's `/admin` route.
