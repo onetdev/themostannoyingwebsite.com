@@ -9,8 +9,6 @@
     "./helpers": "./src/helpers/index.ts"
   },
   "scripts": {
-    "generate": "orval",
-    "swagger:generate": "orval",
     "orval": "orval",
     "check-types": "tsc --noEmit",
     "lint": "biome check .",

@@ -435,9 +435,6 @@ importers:
       '@wrksz/themes':
         specifier: 'catalog:'
         version: 2.0.2(next@16.3.8(@babel/core@7.29.7(supports-color@8.1.1))(@opentelemetry/api@1.9.1)(@playwright/test@1.63.0)(@types/node@26.6.4)(react-dom@19.3.0(react@19.3.0))(react@19.3.0)(sass@1.105.1))(react-dom@19.3.0(react@19.3.0))(react@19.3.0)(typescript@5.9.3)
-      classnames:
-        specifier: ^2.5.1
-        version: 2.5.1
       color:
         specifier: ^5.0.3
         version: 5.0.3
@@ -447,9 +444,6 @@ importers:
       countries-and-timezones:
         specifier: ^3.10.0
         version: 3.10.0
-      deepmerge-ts:
-        specifier: ^8.0.2
-        version: 8.0.2
       emittery:
         specifier: ^2.0.0
         version: 2.1.0
@@ -616,6 +610,9 @@ importers:
       '@maw/config-ts':
         specifier: workspace:*
         version: link:../config-ts
+      '@testing-library/jest-dom':
+        specifier: 'catalog:'
+        version: 7.0.1(@testing-library/dom@10.4.2)
       '@types/jest':
         specifier: 'catalog:'
         version: 30.0.0
@@ -732,9 +729,6 @@ importers:
       framer-motion:
         specifier: 'catalog:'
         version: 13.5.1(react-dom@19.3.0(react@19.3.0))(react@19.3.0)
-      marked:
-        specifier: 'catalog:'
-        version: 18.0.14
       react:
         specifier: 'catalog:'
         version: 19.3.0
@@ -4864,10 +4858,6 @@ packages:
   deep-eql@5.0.2:
     resolution: {integrity: sha512-h5k/5U50IJJFpzfL6nO9jaaumfjO/f2NjK/oYB2Djzm4p9L+3T9qWpZqZ2hAbLPuuYq9wrU08WQyBTL5GbPk5Q==}
     engines: {node: '>=6'}
-
-  deepmerge-ts@8.0.2:
-    resolution: {integrity: sha512-uqbvqLUMrc6p0MO+WBRtTxY55hmyh94WRwI5a++PZe54X+bfVh59FSN7uWCBCW1CCVjzjnrwzfI8zidE2obMMw==}
-    engines: {node: '>=16.9.0'}
 
   deepmerge@4.3.1:
     resolution: {integrity: sha512-3sUqbMEc77XqpdNO7FRyRog+eW3ph+GYCbj+rK+uYyRMuwsVy0rMiVtPn+QJlKFvWP/1PYpapqYn0Me2knFn+A==}
@@ -12302,8 +12292,6 @@ snapshots:
   dedent@1.7.2: {}
 
   deep-eql@5.0.2: {}
-
-  deepmerge-ts@8.0.2: {}
 
   deepmerge@4.3.1: {}
 
