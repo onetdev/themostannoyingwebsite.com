@@ -34,7 +34,6 @@ const EXPLORE_NAVIGATION_LINKS: NavItem[] = [
     labelKey: 'common.navigation.hotThings',
     hrefFor: 'hot-things',
   },
-  { id: 'virgin', labelKey: 'common.navigation.virgin', hrefFor: 'virgin' },
   {
     id: 'flaim-a-phone',
     labelKey: 'common.navigation.flaimAPhone',
@@ -44,12 +43,12 @@ const EXPLORE_NAVIGATION_LINKS: NavItem[] = [
 
 export const SITE_NAVIGATION_LINKS: NavEntry[] = [
   { id: 'home', labelKey: 'common.navigation.home', hrefFor: 'home' },
+  { id: 'plans', labelKey: 'common.navigation.plans', hrefFor: 'plans' },
   {
     id: 'explore',
     labelKey: 'common.navigation.explore',
     items: EXPLORE_NAVIGATION_LINKS,
   },
-  { id: 'plans', labelKey: 'common.navigation.plans', hrefFor: 'plans' },
   {
     id: 'project',
     labelKey: 'common.navigation.theProject',

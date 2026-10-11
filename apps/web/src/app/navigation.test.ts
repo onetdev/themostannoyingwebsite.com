@@ -28,4 +28,16 @@ describe('navigation', () => {
     expect(ids).not.toContain('explore');
     expect(ids).not.toContain('project');
   });
+
+  it('keeps retired pages out of the main navigation', () => {
+    const ids = SITE_NAVIGATION_FLAT_LINKS.map((item) => item.id);
+
+    expect(ids).not.toContain('virgin');
+  });
+
+  it('orders the Explore group after AI plans', () => {
+    const ids = SITE_NAVIGATION_LINKS.map((entry) => entry.id);
+
+    expect(ids.indexOf('explore')).toBeGreaterThan(ids.indexOf('plans'));
+  });
 });
