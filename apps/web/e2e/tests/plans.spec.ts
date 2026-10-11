@@ -31,6 +31,9 @@ test.describe('Plans Page', () => {
 
     // Verify default monthly billing
     await expect(poorifiedCard.originalPrice).toContainText('$99.00');
+    await expect(
+      poorifiedCard.originalPrice.locator('[data-rolling-digit]').first(),
+    ).toHaveAttribute('data-rolling-digit', '9');
     await expect(poorifiedCard.chargeDisclaimer).toContainText(
       'You will be charged $79.20 today — billed monthly*',
     );
@@ -48,6 +51,10 @@ test.describe('Plans Page', () => {
     // Switch to yearly billing
     await plansPage.billingCycleYearly.click();
     await expect(poorifiedCard.originalPrice).toContainText('$89.00');
+    // The wheel rolls to the new tens digit instead of re-rendering.
+    await expect(
+      poorifiedCard.originalPrice.locator('[data-rolling-digit]').first(),
+    ).toHaveAttribute('data-rolling-digit', '8');
     await expect(poorifiedCard.chargeDisclaimer).toContainText(
       'You will be charged $854.40 today — billed every year*',
     );
