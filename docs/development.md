@@ -112,6 +112,8 @@ This project includes **agentic skills** to streamline development workflows for
   - **Trigger**: "Fix dependency vulnerabilities"
 - **dependency-upgrade** – Bumps dependency versions across the monorepo and verifies the repository.
   - **Trigger**: "Upgrade dependencies"
+- **shadcn** – Adds, fixes, and composes shadcn/ui components in `@maw/ui-lib`.
+  - **Trigger**: "Add a shadcn component"
 
 ### Setup
 
