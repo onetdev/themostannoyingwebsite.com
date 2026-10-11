@@ -18,7 +18,7 @@ export function UiSabotage() {
     <FieldSet className="gap-3">
       <FieldLegend
         variant="label"
-        className="mb-0 text-muted-foreground text-xs font-bold tracking-wider uppercase"
+        className="mb-2 text-muted-foreground text-xs font-bold tracking-wider uppercase"
       >
         {t('categories.uiSabotage')}
       </FieldLegend>
