@@ -13,7 +13,7 @@ export class ArticlesResource {
   constructor(private readonly transport: HttpTransport) {}
 
   /**
-   * Retrieves a paginated list of localized articles with optional search, tag, and featured filters.
+   * Retrieves a paginated list of localized articles with optional search, category, and featured filters.
    */
   public async list(
     params?: GetArticleListQueryParams,
