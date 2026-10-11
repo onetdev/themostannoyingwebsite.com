@@ -23,6 +23,7 @@
 @import "../base/animations.css";
 @import "../base/utilities.css";
 @import "../base/shimmer.css";
+@import "../base/effects.css";
 
 @reference "tailwindcss";
 

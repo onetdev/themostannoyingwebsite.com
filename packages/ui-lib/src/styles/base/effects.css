@@ -1,0 +1,111 @@
+@reference "tailwindcss";
+
+/**
+ * Rotating conic-gradient ring with an outward glow.
+ *
+ * The classic "animated gradient border" trick: a custom property typed as an
+ * `<angle>` is registered with `@property` (so it can be interpolated at all),
+ * then spun with a keyframe while a `conic-gradient` reads it as its start
+ * angle.
+ *
+ * The element keeps a local stacking context (`isolation: isolate`) and both
+ * layers are pseudo-elements pushed behind the content:
+ *
+ * - `::before` paints the gradient blurred as the glow halo.
+ * - `::after` paints an opaque face plus the gradient as a 2px ring drawn with
+ *   the double-background trick (`content-box` fill over a `border-box`
+ *   gradient). The opaque face is what keeps the glow out of the interior —
+ *   negative-z layers paint above the element's *own* background, so the glow
+ *   cannot simply hide behind `bg-*`.
+ *
+ * Colors default to the semantic status tokens so the sweep adapts to the
+ * light/dark palettes and stays on-token.
+ *
+ * Tuning: every aspect is overridable per instance via `--border-spin-*`
+ * custom properties — `duration`, `width`, `blur`, `opacity`, `colors`, `fill` —
+ * or the Tailwind shorthand `spin-duration-*` (e.g. `spin-duration-2500` for a
+ * 2.5s spin). For an arbitrary time, set the property directly, e.g.
+ * `[--border-spin-duration:3s]`.
+ *
+ * The knob utilities deliberately do NOT use the `border-spin-*` prefix:
+ * `tailwind-merge` buckets any `border-spin-*` class into the same `border-color`
+ * group as `border-spin` and keeps only the last one, which would drop the base
+ * class and kill the whole effect.
+ */
+@property --border-spin-angle {
+  syntax: "<angle>";
+  inherits: false;
+  initial-value: 0deg;
+}
+
+@theme inline {
+  @keyframes border-spin {
+    to {
+      --border-spin-angle: 360deg;
+    }
+  }
+}
+
+@utility border-spin {
+  position: relative;
+  isolation: isolate;
+
+  --_width: var(--border-spin-width, 2px);
+  --_duration: var(--border-spin-duration, 8s);
+  --_blur: var(--border-spin-blur, 8px);
+  --_opacity: var(--border-spin-opacity, 0.45);
+  --_fill: var(--border-spin-fill, var(--secondary));
+  --_colors: var(
+    --border-spin-colors,
+    var(--success),
+    var(--warning),
+    var(--error),
+    var(--info),
+    var(--success)
+  );
+
+  &::before,
+  &::after {
+    content: "";
+    position: absolute;
+    border-radius: inherit;
+    animation: border-spin var(--_duration) linear infinite;
+    pointer-events: none;
+  }
+
+  /* Glow — blurred halo behind everything. */
+  &::before {
+    inset: calc(-1 * var(--_width) - 4px);
+    z-index: -2;
+    background: conic-gradient(from var(--border-spin-angle), var(--_colors));
+    filter: blur(var(--_blur));
+    opacity: var(--_opacity);
+  }
+
+  /* Face + ring — the opaque fill hides the glow interior. */
+  &::after {
+    inset: calc(-1 * var(--_width));
+    z-index: -1;
+    padding: var(--_width);
+    background:
+      linear-gradient(var(--_fill), var(--_fill)) content-box,
+      conic-gradient(from var(--border-spin-angle), var(--_colors)) border-box;
+  }
+
+  &:where([data-reduced-motion="true"])::before,
+  &:where([data-reduced-motion="true"])::after {
+    animation: none;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    &::before,
+    &::after {
+      animation: none;
+    }
+  }
+}
+
+/** Spin speed shorthand: `spin-duration-2500` → a 2500ms (2.5s) cycle. */
+@utility spin-duration-* {
+  --border-spin-duration: calc(--value(integer) * 1ms);
+}
