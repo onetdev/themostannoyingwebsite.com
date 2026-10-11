@@ -29,25 +29,23 @@ export default async function Page() {
   const locale = (await getLocale()) as LanguageCode;
 
   return (
-    <PageLayout
-      role="main"
-      className="mx-auto max-w-screen-lg py-0 md:py-14"
-      autoPadding={false}
-    >
-      <WebPageStructuredData
-        locale={locale as AppLocale}
-        path="flaim-a-phone"
-        namespace="metadata.wanPhone"
-      />
-      <PageHeadline actions={<ShareButton />}>
-        {t('marketing.wanPhone.title')}
-      </PageHeadline>
-      <ContentPoolsBoundary lang={locale} types={['survey']}>
-        <FlaimSurveyPage
-          className="my-5 w-full"
-          settings={{ timeLimitInSeconds: 8 }}
+    <PageLayout role="main" className="py-0 md:py-14" autoPadding={false}>
+      <div className="mx-auto w-full max-w-4xl">
+        <WebPageStructuredData
+          locale={locale as AppLocale}
+          path="flaim-a-phone"
+          namespace="metadata.wanPhone"
         />
-      </ContentPoolsBoundary>
+        <PageHeadline actions={<ShareButton />}>
+          {t('marketing.wanPhone.title')}
+        </PageHeadline>
+        <ContentPoolsBoundary lang={locale} types={['survey']}>
+          <FlaimSurveyPage
+            className="my-5 w-full"
+            settings={{ timeLimitInSeconds: 8 }}
+          />
+        </ContentPoolsBoundary>
+      </div>
     </PageLayout>
   );
 }
