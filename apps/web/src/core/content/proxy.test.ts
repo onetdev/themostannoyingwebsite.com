@@ -24,6 +24,13 @@ describe('resolveContentApiBaseUrl', () => {
     expect(resolveContentApiBaseUrl(undefined)).toBe(CONTENT_API_BASE_URL);
   });
 
+  it.each(['', '   '])(
+    'falls back to the production Content API for an empty value (%p)',
+    (configured) => {
+      expect(resolveContentApiBaseUrl(configured)).toBe(CONTENT_API_BASE_URL);
+    },
+  );
+
   it('strips trailing slashes from the configured URL', () => {
     expect(resolveContentApiBaseUrl('https://api.example.com//')).toBe(
       'https://api.example.com',

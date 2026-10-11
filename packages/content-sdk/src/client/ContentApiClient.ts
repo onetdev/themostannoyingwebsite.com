@@ -1,6 +1,7 @@
 import { HttpTransport } from './http';
 import { ArticlesResource } from './resources/articles';
 import { AuthorsResource } from './resources/authors';
+import { CategoriesResource } from './resources/categories';
 import { DonationsResource } from './resources/donations';
 import { HealthResource } from './resources/health';
 import { ImagesResource } from './resources/images';
@@ -12,7 +13,6 @@ import { PrizeWheelResource } from './resources/prize-wheel';
 import { SearchResource } from './resources/search';
 import { SpamSampleResource } from './resources/spam-sample';
 import { SurveyResource } from './resources/survey';
-import { TagsResource } from './resources/tags';
 import { TranslationsResource } from './resources/translations';
 import type { ContentClientOptions } from './types';
 
@@ -31,7 +31,7 @@ export class ContentApiClient {
   readonly authors: AuthorsResource;
   readonly pages: PagesResource;
   readonly search: SearchResource;
-  readonly tags: TagsResource;
+  readonly categories: CategoriesResource;
   readonly images: ImagesResource;
   readonly health: HealthResource;
   readonly locales: LocalesResource;
@@ -56,7 +56,7 @@ export class ContentApiClient {
     this.authors = new AuthorsResource(this.transport);
     this.pages = new PagesResource(this.transport);
     this.search = new SearchResource(this.transport);
-    this.tags = new TagsResource(this.transport);
+    this.categories = new CategoriesResource(this.transport);
     this.images = new ImagesResource(this.transport);
     this.health = new HealthResource(this.transport);
     this.locales = new LocalesResource(this.transport);

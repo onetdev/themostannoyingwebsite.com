@@ -8,7 +8,7 @@ export const CONTENT_CACHE_TAGS = {
   articles: 'content:articles',
   authors: 'content:authors',
   pages: 'content:pages',
-  tags: 'content:tags',
+  categories: 'content:categories',
   images: 'content:images',
   locales: 'content:locales',
   translations: 'content:translations',

@@ -3,36 +3,36 @@ import { Badge } from '@maw/ui-lib';
 import { cn } from '@maw/ui-lib/utils';
 import type { ComponentProps } from 'react';
 
-export type ArticleTagsProps = Omit<ComponentProps<'div'>, 'children'> & {
+export type ArticleCategoriesProps = Omit<ComponentProps<'div'>, 'children'> & {
   article: Article | ArticleListItem;
   variant?: ComponentProps<typeof Badge>['variant'];
 };
 
 /**
- * Renders an article's tags as a single, non-wrapping row of pills. Overflow is
- * clipped so the row never pushes into neighbouring cards.
+ * Renders an article's categories as a single, non-wrapping row of pills.
+ * Overflow is clipped so the row never pushes into neighbouring cards.
  */
-export function ArticleTags({
+export function ArticleCategories({
   article,
   variant = 'secondary',
   className,
   ...rest
-}: ArticleTagsProps) {
-  const tags = article.tags ?? [];
+}: ArticleCategoriesProps) {
+  const categories = article.categories ?? [];
 
-  if (tags.length === 0) {
+  if (categories.length === 0) {
     return null;
   }
 
   return (
     <div
       className={cn('flex w-full flex-nowrap gap-1 overflow-hidden', className)}
-      data-testid="article-tags"
+      data-testid="article-categories"
       {...rest}
     >
-      {tags.map((tag) => (
-        <Badge key={tag} variant={variant}>
-          {tag}
+      {categories.map((category) => (
+        <Badge key={category.id} variant={variant}>
+          {category.label}
         </Badge>
       ))}
     </div>

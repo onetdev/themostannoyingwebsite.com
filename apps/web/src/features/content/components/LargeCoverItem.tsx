@@ -7,7 +7,7 @@ import { cn } from '@maw/ui-lib/utils';
 import Image from 'next/image';
 import type { ComponentProps } from 'react';
 import { Link } from '@/core/i18n/navigation';
-import { ArticleTags } from './ArticleTags';
+import { ArticleCategories } from './ArticleCategories';
 import { CoverPlaceholder } from './CoverPlaceholder';
 
 export type LargeCoverItemProps = ComponentProps<'article'> & {
@@ -45,7 +45,7 @@ export function LargeCoverItem({
           )}
           <div className="from-background/50 via-transparent pointer-events-none absolute inset-0 bg-linear-to-t to-transparent" />
           <div className="absolute inset-x-0 bottom-0 flex flex-col items-start gap-2 p-4 md:p-6">
-            <ArticleTags article={article} variant="default" />
+            <ArticleCategories article={article} variant="default" />
             <h2 className="text-2xl transition duration-300 group-hover:brightness-110 md:text-3xl">
               <span className="bg-primary text-primary-foreground box-decoration-clone px-2 md:px-3">
                 {article.title}

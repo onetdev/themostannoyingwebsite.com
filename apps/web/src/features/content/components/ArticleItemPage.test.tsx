@@ -60,7 +60,7 @@ const article = {
   title: 'THE WORLD HAS ENDED',
   summary: 'A very serious report.',
   content: 'Body copy',
-  tags: ['news'],
+  categories: [{ id: 'news', label: 'News' }],
   keywords: ['climate', 'internet'],
   author: { name: 'Jane Doe', slug: 'jane-doe' },
   published_at: '2024-01-02T00:00:00.000Z',
@@ -102,7 +102,7 @@ describe('ArticleItemPage', () => {
     expect(html).toContain('alt="THE WORLD HAS ENDED"');
   });
 
-  it('renders tags and keywords pills in a single header list', () => {
+  it('renders categories and keywords pills in a single header list', () => {
     const html = renderToStaticMarkup(
       <ArticleItemPage
         article={article}
@@ -111,10 +111,10 @@ describe('ArticleItemPage', () => {
       />,
     );
 
-    expect(html).toContain('data-testid="article-tag-keywords"');
-    expect(html).toContain('data-testid="article-tags"');
+    expect(html).toContain('data-testid="article-category-keywords"');
+    expect(html).toContain('data-testid="article-categories"');
     expect(html).toContain('data-testid="article-keywords"');
-    expect(html).toContain('news');
+    expect(html).toContain('News');
     expect(html).toContain('climate');
   });
 

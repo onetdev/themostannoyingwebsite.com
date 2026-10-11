@@ -23,6 +23,10 @@ jobs:
     permissions:
       contents: read
       pull-requests: write
+    environment:
+      name: ${{ (github.base_ref == 'main' || github.ref_name == 'main') && 'Production' || 'Preview' }}
+    env:
+      NEXT_PUBLIC_CONTENT_API_URL: ${{ vars.NEXT_PUBLIC_CONTENT_API_URL }}
     steps:
     - uses: actions/checkout@v6
     - uses: pnpm/action-setup@v4

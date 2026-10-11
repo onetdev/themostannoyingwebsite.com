@@ -41,7 +41,7 @@ const mockArticleItem = {
       },
     },
   },
-  tags: ['tech'],
+  categories: [{ id: 'tech', label: 'Tech' }],
   keywords: ['test'],
   translations: [
     { lang: 'de' as const, slug: 'test-artikel', title: 'Test Artikel' },
