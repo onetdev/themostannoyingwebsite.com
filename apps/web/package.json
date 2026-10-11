@@ -70,9 +70,6 @@
     "zod": "catalog:",
     "zustand": "^5.0.15"
   },
-  "peerDependencies": {
-    "express": "^5.2.1"
-  },
   "devDependencies": {
     "@biomejs/biome": "catalog:",
     "@maw/config-jest": "workspace:^",
@@ -93,8 +90,6 @@
     "jest": "catalog:",
     "playwright": "catalog:",
     "postcss": "^8.5.28",
-    "prettier": "^3.9.6",
-    "prettier-plugin-tailwindcss": "catalog:",
     "schema-dts": "catalog:",
     "sharp": "catalog:",
     "tailwindcss": "catalog:",
