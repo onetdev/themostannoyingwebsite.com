@@ -3,6 +3,7 @@ import {
   type ArticleListItem,
   toCoverImages,
 } from '@maw/content-sdk';
+import { TiltCard } from '@maw/ui-lib';
 import { cn } from '@maw/ui-lib/utils';
 import Image from 'next/image';
 import type { ComponentProps, ElementType } from 'react';
@@ -30,27 +31,31 @@ export function SmallCoverListItem({
   const TitleTag: ElementType = `h${headingLevel}`;
 
   return (
-    <article {...rest} className={cn('group flex h-full flex-col', className)}>
+    <article {...rest} className={cn('flex h-full flex-col', className)}>
       <Link
         href={`/articles/${article.slug}`}
         passHref
         prefetch={false}
         className="link-as-inherit hover-text-primary flex h-full flex-col"
       >
-        <div className="bg-muted relative aspect-[16/10] w-full overflow-hidden rounded-sm">
+        <TiltCard
+          className="aspect-[16/10] w-full"
+          planeClassName="bg-muted overflow-hidden rounded-sm"
+          holographic
+        >
           {!coverImages?.thumbnail && (
             <CoverPlaceholder fill width={1920} height={1200} />
           )}
           {coverImages?.thumbnail && (
             <Image
-              className="object-cover transition-transform duration-500 group-hover:scale-105"
+              className="object-cover"
               src={coverImages.thumbnail}
               alt=""
               fill
               sizes="(min-width: 1280px) 25vw, (min-width: 1024px) 33vw, (min-width: 768px) 50vw, 100vw"
             />
           )}
-        </div>
+        </TiltCard>
         <div className="flex flex-1 flex-col pt-3">
           <ArticleCategories article={article} className="mb-2" />
           <TitleTag

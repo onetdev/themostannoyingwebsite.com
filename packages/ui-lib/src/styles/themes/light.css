@@ -98,7 +98,7 @@
     --aurora-2: oklch(0.7 0.19 305);
     --aurora-3: oklch(0.76 0.17 350);
     --aurora-4: oklch(0.78 0.13 195);
-    --aurora-opacity: 0.15;
+    --aurora-opacity: 0.1;
     --aurora-blur: 3rem;
   }
 }
