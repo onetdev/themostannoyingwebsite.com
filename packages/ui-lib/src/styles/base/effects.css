@@ -92,11 +92,6 @@
       conic-gradient(from var(--border-spin-angle), var(--_colors)) border-box;
   }
 
-  &:where([data-reduced-motion="true"])::before,
-  &:where([data-reduced-motion="true"])::after {
-    animation: none;
-  }
-
   @media (prefers-reduced-motion: reduce) {
     &::before,
     &::after {
