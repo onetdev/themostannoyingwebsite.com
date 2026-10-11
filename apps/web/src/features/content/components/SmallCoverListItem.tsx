@@ -7,8 +7,8 @@ import { cn } from '@maw/ui-lib/utils';
 import Image from 'next/image';
 import type { ComponentProps, ElementType } from 'react';
 import { Link } from '@/core/i18n/navigation';
+import { ArticleCategories } from './ArticleCategories';
 import { ArticleMeta } from './ArticleMeta';
-import { ArticleTags } from './ArticleTags';
 import { CoverPlaceholder } from './CoverPlaceholder';
 
 export type SmallCoverListItemProps = ComponentProps<'article'> & {
@@ -52,7 +52,7 @@ export function SmallCoverListItem({
           )}
         </div>
         <div className="flex flex-1 flex-col pt-3">
-          <ArticleTags article={article} className="mb-2" />
+          <ArticleCategories article={article} className="mb-2" />
           <TitleTag
             className="line-clamp-2 text-base leading-tight"
             title={article.title}

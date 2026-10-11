@@ -124,7 +124,7 @@ export default async function Page({ params }: PageProps) {
     authorName: datum.author.name,
     authorPath: `authors/${datum.author.slug}`,
     keywords: datum.keywords,
-    articleSection: datum.tags?.[0],
+    articleSection: datum.categories?.[0]?.label,
   });
 
   const breadcrumbSchema = buildBreadcrumbList(

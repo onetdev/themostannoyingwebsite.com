@@ -10,7 +10,7 @@ export type ArticleKeywordsProps = Omit<ComponentProps<'div'>, 'children'> & {
 
 /**
  * Renders an article's search keywords as a wrapping row of pills. Search
- * keywords are a distinct, non-navigable set from `ArticleTags`, so they use
+ * keywords are a distinct, non-navigable set from `ArticleCategories`, so they use
  * the `outline` variant by default to stay visually separate.
  */
 export function ArticleKeywords({
