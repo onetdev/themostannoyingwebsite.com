@@ -18,6 +18,9 @@ export default {
   author: {
     byline: 'By <linkTag>{name}</linkTag>',
     articlesTitle: 'Articles by {name}',
+    emptyTitle: 'No articles yet',
+    emptyDescription:
+      'This author has not published any articles in this language yet.',
   },
   search: {
     placeholder: 'Search...',
