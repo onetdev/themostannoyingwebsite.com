@@ -3,6 +3,7 @@ export * from './useAudio';
 export * from './useDocumentVisibilityListener';
 export * from './useFaviconBadge';
 export * from './useInteractOutside';
+export * from './useIsScrolled';
 export * from './useLangDir';
 export * from './useLanguageSwitcher';
 export * from './useLocaleResource';

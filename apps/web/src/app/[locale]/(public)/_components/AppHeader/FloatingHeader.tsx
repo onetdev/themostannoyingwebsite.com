@@ -1,7 +1,8 @@
 'use client';
 
 import { clsx } from '@maw/ui-lib/utils';
-import { type ComponentProps, useEffect, useState } from 'react';
+import type { ComponentProps } from 'react';
+import { useIsScrolled } from '@/hooks/useIsScrolled';
 
 export type FloatingHeaderProps = ComponentProps<'header'>;
 
@@ -12,20 +13,13 @@ export type FloatingHeaderProps = ComponentProps<'header'>;
  * server-side (translations, navigation).
  */
 export function FloatingHeader({ className, ...props }: FloatingHeaderProps) {
-  const [isScrolled, setIsScrolled] = useState(false);
-
-  useEffect(() => {
-    const onScroll = () => setIsScrolled(window.scrollY > 0);
-    onScroll();
-    window.addEventListener('scroll', onScroll, { passive: true });
-    return () => window.removeEventListener('scroll', onScroll);
-  }, []);
+  const isScrolled = useIsScrolled();
 
   return (
     <header
       id="header"
       className={clsx(
-        'sticky top-3 z-40 mx-gutter mt-3 rounded-xl border bg-card/80 backdrop-blur-md transition-shadow',
+        'sticky top-3 z-40 mx-gutter mt-3 rounded-xl border bg-card/80 backdrop-blur-md transition-shadow duration-500',
         isScrolled && 'shadow-md',
         className,
       )}
