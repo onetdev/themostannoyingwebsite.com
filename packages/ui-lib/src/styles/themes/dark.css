@@ -89,5 +89,17 @@
 
     --disabled: oklch(0.556 0 0);
     --dimmer: oklch(0.985 0 0 / 0.4);
+
+    /* ------------------------------------------------------------------
+     * Aurora backdrop — decorative animated blob layer on public pages.
+     * Richer saturation and higher opacity to glow over the near-black
+     * background.
+     * ------------------------------------------------------------------ */
+    --aurora-1: oklch(0.6 0.19 255);
+    --aurora-2: oklch(0.58 0.22 305);
+    --aurora-3: oklch(0.62 0.2 350);
+    --aurora-4: oklch(0.64 0.14 195);
+    --aurora-opacity: 0.15;
+    --aurora-blur: 4rem;
   }
 }

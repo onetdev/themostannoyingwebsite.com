@@ -89,5 +89,16 @@
 
     --disabled: oklch(0.708 0 0);
     --dimmer: oklch(0.556 0 0 / 0.6);
+
+    /* ------------------------------------------------------------------
+     * Aurora backdrop — decorative animated blob layer on public pages.
+     * Pastel, low opacity so foreground content stays readable on white.
+     * ------------------------------------------------------------------ */
+    --aurora-1: oklch(0.72 0.16 255);
+    --aurora-2: oklch(0.7 0.19 305);
+    --aurora-3: oklch(0.76 0.17 350);
+    --aurora-4: oklch(0.78 0.13 195);
+    --aurora-opacity: 0.15;
+    --aurora-blur: 3rem;
   }
 }

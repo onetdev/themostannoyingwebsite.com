@@ -104,3 +104,48 @@
 @utility spin-duration-* {
   --border-spin-duration: calc(--value(integer) * 1ms);
 }
+
+/**
+ * Continuously cycling hue for the aurora blobs.
+ *
+ * Registered with `@property` so it interpolates instead of snapping, letting
+ * the `aurora-drift-*` keyframes rotate it (same trick as `--border-spin-angle`
+ * above). Keeping the shift in a filter — rather than animating `color` or the
+ * gradient stops — keeps it on the compositor, so the big blurred gradients are
+ * not re-rasterized every frame.
+ */
+@property --aurora-hue {
+  syntax: "<angle>";
+  inherits: false;
+  initial-value: 0deg;
+}
+
+/**
+ * Decorative "aurora" blob for the public page backdrop.
+ *
+ * A soft, oversized circle painted as an alpha-fading radial gradient in
+ * `currentColor` (so callers pick the base hue with a `text-aurora-*` utility)
+ * and softened further with a token-driven blur. Position, size and base hue
+ * are supplied per instance by the consumer; drift and the `--aurora-hue` colour
+ * cycle come from the `animate-aurora-drift-*` keyframes, so no blob keeps a
+ * fixed colour in a fixed spot.
+ *
+ * Intensity (`--aurora-opacity`) and blur (`--aurora-blur`) are theme tokens so
+ * light/dark stay in step. `translate3d` drift and the `hue-rotate` filter are
+ * both composited, hence `will-change`; consumers pair their
+ * `animate-aurora-drift-*` class with `motion-reduce:animate-none` (the repo's
+ * idiom) so the blob stays visible but static when the user opts out of motion.
+ */
+@utility aurora-blob {
+  position: absolute;
+  border-radius: 100%;
+  background-image: radial-gradient(
+    circle,
+    currentColor 0%,
+    currentColor 35%,
+    transparent 75%
+  );
+  filter: blur(var(--aurora-blur, 3rem)) hue-rotate(var(--aurora-hue, 0deg));
+  opacity: var(--aurora-opacity, 0.45);
+  will-change: transform;
+}

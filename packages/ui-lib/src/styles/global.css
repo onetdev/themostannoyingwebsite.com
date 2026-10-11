@@ -19,9 +19,21 @@
   }
 }
 
-html,
-body {
+/**
+ * The page background lives on `html`, not `body`.
+ *
+ * Both share the foreground/transition, but only `html` paints the (opaque)
+ * page color. Painting it on `body` too would cover `-z-10` decorative layers
+ * (such as the public aurora backdrop), because a `body` background paints
+ * after negative-z-index descendants in the root stacking context.
+ */
+html {
   @apply bg-background text-foreground;
+  transition: background-color 0.3s ease-in-out;
+}
+
+body {
+  @apply text-foreground;
   transition: background-color 0.3s ease-in-out;
 }
 
