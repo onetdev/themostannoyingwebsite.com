@@ -10,7 +10,10 @@ export const CONTENT_API_BASE_URL =
 export function resolveContentApiBaseUrl(
   configured: string | undefined = process.env.NEXT_PUBLIC_CONTENT_API_URL,
 ): string {
-  return trimTrailingSlashes(configured ?? CONTENT_API_BASE_URL);
+  // Treat an empty/whitespace value (e.g. an unset Actions environment variable
+  // that expands to an empty string) as unconfigured so we still fall back to
+  // the production default instead of a relative, unusable URL.
+  return trimTrailingSlashes(configured?.trim() || CONTENT_API_BASE_URL);
 }
 
 /**
