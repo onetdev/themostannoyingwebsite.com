@@ -31,7 +31,7 @@ file-name convention; see the `adr-writer` skill for the authoring workflow.
 | [0019](0019-disruption-engine-and-controlled-dark-ux.md) | Disruption Engine and Controlled Dark UX Architecture | Accepted |
 | [0020](0020-type-safe-route-aliasing.md) | Type-Safe Route Aliasing and Navigation Layer | Accepted |
 | [0021](0021-git-governance-and-quality-gates.md) | Git Governance and Automated Quality Gates with Lefthook and Commitlint | Accepted |
-| [0022](0022-api-served-translations.md) | API-Served Translations with English-Only Bundled Reference | Accepted (partially superseded by [ADR 25](0025-api-only-variant-pools-ssr-hydration.md)) |
+| [0022](0022-api-served-translations.md) | API-Served Translations with English-Only Bundled Reference | Accepted (supersedes [ADR 7](0007-hybrid-i18n-structure.md); partially superseded by [ADR 25](0025-api-only-variant-pools-ssr-hydration.md)) |
 | [0023](0023-build-time-locale-catalog.md) | Build-Time Locale Catalog | Accepted |
 | [0024](0024-dev-content-api-proxy.md) | Dev-Only Same-Origin Proxy for Browser Content API Calls | Accepted |
 | [0025](0025-api-only-variant-pools-ssr-hydration.md) | API-Only Variant Pools with SSR React Query Hydration | Superseded by [ADR 29](0029-content-resource-model-pools-and-dedicated-endpoints.md) |

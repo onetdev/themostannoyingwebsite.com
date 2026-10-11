@@ -1,7 +1,7 @@
 # ADR 7: Hybrid Internationalization Structure
 
 ## Status
-Superseded by ADR 22 (multi-locale bundling and the variants policy moved to API-served translations). The single-file vs. directory file layout guidance still applies to the bundled English reference.
+Superseded by [ADR 22](0022-api-served-translations.md) (multi-locale bundling and the variants policy moved to API-served translations). The single-file vs. directory file layout guidance still applies to the bundled English reference.
 
 ## Context
 The application supports multiple languages and requires large amounts of "variant" data (e.g., hundreds of fake names or comment templates) for its annoying features. Loading these large arrays into the main UI translation bundle increases the initial load time and degrades performance.
