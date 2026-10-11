@@ -2,10 +2,6 @@
   "private": true,
   "name": "@maw/config-ts",
   "version": "0.0.0",
-  "license": "MIT",
-  "publishConfig": {
-    "access": "public"
-  },
   "scripts": {
     "lint": "biome check .",
     "format": "biome format --write .",
