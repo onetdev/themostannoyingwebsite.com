@@ -38,9 +38,11 @@ export function Screensaver() {
     return () => clearTimeout(timer);
   }, [lastEventAt, timeoutSeconds, isEnabled]);
 
+  const showScreensaver = isActive && isEnabled;
+
   return (
     <AnimatePresence>
-      {isActive && isEnabled && (
+      {showScreensaver && (
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}

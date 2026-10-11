@@ -72,6 +72,8 @@ export function HotThingsPage() {
       });
   }, [stream]);
 
+  const canPlayVideo = !isDisallowed && isCapable;
+
   return (
     <>
       <PageHeadline actions={<ShareButton />}>
@@ -99,7 +101,7 @@ export function HotThingsPage() {
             label={LANGUAGE_NATIVE_NAME_MAP[locale]}
           />
         </video>
-        {!isDisallowed && isCapable && (
+        {canPlayVideo && (
           <button
             type="button"
             className="absolute top-1/2 left-1/2 translate-[-50%] cursor-pointer text-7xl"

@@ -41,6 +41,8 @@ export function ArticleMeta({
   });
 
   const showReadingOrDate = showReadingTime || showDate;
+  const showAuthorSeparator = showAuthor && showReadingOrDate;
+  const showDateSeparator = showReadingTime && showDate;
 
   return (
     <div
@@ -52,7 +54,7 @@ export function ArticleMeta({
       {...rest}
     >
       {showAuthor && <span>{byline}</span>}
-      {showAuthor && showReadingOrDate && <MetaSeparator />}
+      {showAuthorSeparator && <MetaSeparator />}
       {showReadingTime && (
         <span>
           {t('content.article.readingTime', {
@@ -60,7 +62,7 @@ export function ArticleMeta({
           })}
         </span>
       )}
-      {showReadingTime && showDate && <MetaSeparator />}
+      {showDateSeparator && <MetaSeparator />}
       {showDate && <time dateTime={article.published_at}>{publishedAt}</time>}
     </div>
   );

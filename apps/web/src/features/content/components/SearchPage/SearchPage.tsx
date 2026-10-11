@@ -22,6 +22,12 @@ export function SearchPage() {
 
   const hasQuery = query.trim().length > 0;
   const hasResults = Boolean(data?.items && data.items.length > 0);
+  const showLoadingState = !isError && isLoading;
+  const showResultMeta = !isError && !isLoading && hasQuery && !!data;
+  const showResults = !isError && hasResults;
+  const showEmptyState = !isError && !isLoading && !hasQuery;
+  const showNoResults =
+    !isError && !isLoading && hasQuery && !hasResults && isReady;
 
   return (
     <div className="mx-auto w-full max-w-4xl">
@@ -34,10 +40,10 @@ export function SearchPage() {
           <AlertDescription>{t('error')}</AlertDescription>
         </Alert>
       )}
-      {!isError && isLoading && (
+      {showLoadingState && (
         <SearchLoadingState showSkeleton={searchDelayEnabled} />
       )}
-      {!isError && !isLoading && hasQuery && data && (
+      {showResultMeta && (
         <div className="my-4 text-sm">
           {t('resultMeta', {
             query,
@@ -46,15 +52,12 @@ export function SearchPage() {
           })}
         </div>
       )}
-      {!isError &&
-        hasResults &&
+      {showResults &&
         data?.items.map((item) => (
           <SearchResultItem key={item.slug} item={item} />
         ))}
-      {!isError && !isLoading && !hasQuery && <SearchEmptyState />}
-      {!isError && !isLoading && hasQuery && !hasResults && isReady && (
-        <NoSearchResults onClick={onRecommendedClick} />
-      )}
+      {showEmptyState && <SearchEmptyState />}
+      {showNoResults && <NoSearchResults onClick={onRecommendedClick} />}
     </div>
   );
 }

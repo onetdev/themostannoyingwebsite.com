@@ -17,6 +17,7 @@ export function CaptchaTrigger({
   label,
 }: CaptchaTriggerProps) {
   const t = useTranslations();
+  const isChallengePending = status === 'loading' || status === 'challenge';
 
   return (
     <Button
@@ -38,9 +39,7 @@ export function CaptchaTrigger({
           {status === 'resolved' && (
             <Icon icon="checkCircle" className="text-success" />
           )}
-          {(status === 'loading' || status === 'challenge') && (
-            <Spinner className="text-primary" />
-          )}
+          {isChallengePending && <Spinner className="text-primary" />}
           {status === 'failed' && (
             <Icon icon="xmarkCircle" className="text-destructive" />
           )}

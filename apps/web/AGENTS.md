@@ -204,6 +204,7 @@ All pages must describe themselves with JSON-LD. The machinery lives in `src/cor
 - ❌ Using `any` (Define Zod schemas and infer types).
 - ❌ Manual `fetch` calls (Use repositories or services).
 - ❌ Bundling variant arrays in messages (Use Content API content pools via `usePool` + server prefetch).
+- ❌ Inline JSX conditions combining 2+ boolean operators (e.g. `{a && b && !c && <X />}`). Hoist them into a named boolean const immediately before the `return` (e.g. `const showX = a && b && !c;`). Name facts with `is`/`has`/`can` and render gates with `show`.
 
 <!-- BEGIN:nextjs-agent-rules -->
 
