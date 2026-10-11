@@ -43,11 +43,15 @@ export function LargeCoverItem({
               loading="eager"
             />
           )}
-          <div className="from-background/50 via-transparent pointer-events-none absolute inset-0 bg-linear-to-t to-transparent" />
-          <div className="absolute inset-x-0 bottom-0 flex flex-col items-start gap-2 p-4 md:p-6">
-            <ArticleCategories article={article} variant="default" />
-            <h2 className="text-2xl transition duration-300 group-hover:brightness-110 md:text-3xl">
-              <span className="bg-primary text-primary-foreground box-decoration-clone px-2 md:px-3">
+          <div className="from-background/85 via-background/40 pointer-events-none absolute inset-0 bg-linear-to-t to-transparent" />
+          <div className="absolute inset-x-0 bottom-0 flex flex-col items-start gap-3 p-4 md:p-6">
+            <ArticleCategories
+              article={article}
+              variant="secondary"
+              className="w-fit max-w-full rounded-full bg-secondary/40 p-1 backdrop-blur-sm"
+            />
+            <h2 className="max-w-[26ch] text-2xl leading-tight text-balance transition duration-300 group-hover:brightness-110 md:max-w-[32ch] md:text-3xl">
+              <span className="bg-secondary/80 text-secondary-foreground box-decoration-clone px-2 md:px-3">
                 {article.title}
               </span>
             </h2>
