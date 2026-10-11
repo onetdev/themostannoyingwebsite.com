@@ -14,4 +14,4 @@ You can upgrade Storybook by running `pnpm dlx storybook@latest upgrade`
 
 ### Want to add new story sources?
 
-Check out `./storybook/main.ts > config.stories` for more info.
+Check out `./.storybook/main.ts > config.stories` for more info.

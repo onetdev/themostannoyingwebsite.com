@@ -85,7 +85,7 @@ Rules:
   API and say so.
 - Heed deprecation notices. Never reintroduce a deprecated API.
 - Do not hand-edit generated guidance or artifacts (the `next dev` agent block,
-  `src/generated/**`, `next-env.d.ts`); regenerate them instead.
+  `packages/content-sdk/src/generated/**`, `next-env.d.ts`); regenerate them instead.
 - When adding a project-level wrapper or substitution, record the upstream
   reason and link the deprecation notice or issue.
 
