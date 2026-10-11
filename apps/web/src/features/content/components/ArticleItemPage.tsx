@@ -11,8 +11,7 @@ import { CommentSection } from '@/features/comments/components';
 import type { Comment } from '@/features/comments/schemas/comment';
 import { ShareButton } from '@/features/share/components';
 import { usePainPreferencesStore } from '@/stores';
-import { ArticleKeywords } from './ArticleKeywords';
-import { ArticleTags } from './ArticleTags';
+import { ArticleTagKeywords } from './ArticleTagKeywords';
 import { PartitionalLockedContent } from './PartitionalLockedContent';
 
 export interface ArticleItemPageProps {
@@ -78,8 +77,7 @@ export function ArticleItemPage({
           {' · '}
           {t('content.article.published', { date: formatterPublishedAt })}
         </span>
-        <ArticleTags article={article} className="mb-2 flex-wrap" />
-        <ArticleKeywords article={article} className="mb-5" />
+        <ArticleTagKeywords article={article} className="mb-5" />
       </div>
       <PartitionalLockedContent
         initialMaxHeight={300}

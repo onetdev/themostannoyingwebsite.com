@@ -102,7 +102,7 @@ describe('ArticleItemPage', () => {
     expect(html).toContain('alt="THE WORLD HAS ENDED"');
   });
 
-  it('renders tags and keywords pills in the header block', () => {
+  it('renders tags and keywords pills in a single header list', () => {
     const html = renderToStaticMarkup(
       <ArticleItemPage
         article={article}
@@ -111,6 +111,7 @@ describe('ArticleItemPage', () => {
       />,
     );
 
+    expect(html).toContain('data-testid="article-tag-keywords"');
     expect(html).toContain('data-testid="article-tags"');
     expect(html).toContain('data-testid="article-keywords"');
     expect(html).toContain('news');
