@@ -1,8 +1,8 @@
 'use client';
 
-import { isBrowser } from '@maw/ui-lib/utils';
 import {
   getNotificationPermissionState,
+  isBrowser,
   requestNotificationPermission,
 } from '@maw/utils/browser';
 import { useCallback } from 'react';
