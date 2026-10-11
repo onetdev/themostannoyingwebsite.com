@@ -27,6 +27,7 @@ export * from './Slider';
 export * from './Spinner';
 export * from './Switch';
 export * from './Textarea';
+export * from './TiltCard';
 export * from './Toggle';
 export * from './ToggleGroup';
 export * from './Tooltip';

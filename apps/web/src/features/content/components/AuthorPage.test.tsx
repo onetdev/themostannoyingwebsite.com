@@ -40,12 +40,13 @@ describe('AuthorPage', () => {
     expect(html.match(/data-testid="author-article-item"/g)).toHaveLength(2);
   });
 
-  it('renders the profile with empty space when the locale has no articles', async () => {
+  it('renders the profile with an empty state when the locale has no articles', async () => {
     const html = renderToStaticMarkup(
       await AuthorPage({ author, articles: [] }),
     );
 
     expect(html).toContain('data-testid="author-about"');
     expect(html).not.toContain('data-testid="author-article-list"');
+    expect(html).toContain('data-testid="author-articles-empty"');
   });
 });

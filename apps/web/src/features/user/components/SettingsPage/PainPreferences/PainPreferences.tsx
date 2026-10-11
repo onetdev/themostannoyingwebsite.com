@@ -33,22 +33,22 @@ export function PainPreferences({
       <CardHeader>
         <CardTitle>{t('user.optionalPainPoints.title')}</CardTitle>
       </CardHeader>
-      <CardContent className="flex flex-col gap-8">
+      <CardContent>
         <div className={cn('flex flex-col gap-4', listClassName)}>
           <VisualChaos />
           <UiSabotage />
           <Interruptions />
           <BrowserHijacking />
         </div>
-        <CardFooter className="flex gap-3 flex-wrap">
-          <Button onClick={painPreferences.allEnable}>
-            {t('common.action.enableAll')}
-          </Button>
-          <Button variant="secondary" onClick={painPreferences.allDisable}>
-            {t('common.action.disableAll')}
-          </Button>
-        </CardFooter>
       </CardContent>
+      <CardFooter className="flex flex-wrap items-center gap-3 border-t">
+        <Button onClick={painPreferences.allEnable}>
+          {t('common.action.enableAll')}
+        </Button>
+        <Button variant="secondary" onClick={painPreferences.allDisable}>
+          {t('common.action.disableAll')}
+        </Button>
+      </CardFooter>
     </Card>
   );
 }

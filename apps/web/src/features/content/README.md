@@ -5,7 +5,7 @@ Acts as the internal bridge for managing and displaying dynamic site content, su
 ## Key Highlights
 
 - **ArticleItemPage**: A layout for rendering individual articles with server-rendered markdown. It handles local formatting, cover images, and embeds the `CommentSection`. The byline links to the author's public profile.
-- **AuthorPage**: Renders an author's public profile (name, persona, biography) followed by a cover-thumbnail grid of their articles for the active locale. Authors with no articles in a locale render the profile with an empty list area.
+- **AuthorPage**: Renders an author's public profile in a two-column desktop layout — a sticky column with the name, persona, and biography, beside a cover-thumbnail grid of the author's articles that grows to three across on wide desktops; the columns stack on small screens. Authors with no articles in a locale render an empty-state placeholder in the article column.
 - **SearchPage & SearchForm**: Client-side search interface leveraging `@maw/content-sdk` to execute real-time queries against the headless Content API. Matching search terms are rendered via `renderMarkdown` with custom highlighting.
 - **HotThingsPage**: A visual showcase of "hot" (annoying) content, often used to test UI disruption features in a dense content environment.
 - **ArticleService**: Server-side service built on `@maw/content-sdk` providing article retrieval (`getBySlug`, `list`, `listAll`) with Next.js cache tags (`CONTENT_CACHE_TAGS`) and error resilience.

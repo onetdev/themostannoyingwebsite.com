@@ -48,7 +48,10 @@ export function HistoryOverlay({
   }, [history]);
 
   return (
-    <div className="border-secondary bg-card flex flex-col rounded-lg border text-start shadow-xl">
+    <div
+      className="border-spin [--border-spin-fill:var(--card)] bg-card flex flex-col rounded-lg text-start shadow-xl"
+      data-testid="chat-bubble-panel"
+    >
       <div className="flex items-start justify-between gap-2 p-3 ps-5 shadow-xs">
         <div className="min-w-0">
           <h4 className="flex items-center gap-1 text-base font-bold">

@@ -101,7 +101,7 @@ export function AppNavigationDesktop({
 
   const renderGroup = (group: NavGroup) => (
     <NavigationMenuItem key={group.id}>
-      <NavigationMenuTrigger>
+      <NavigationMenuTrigger className="px-2">
         {group.icon && <Icon icon={group.icon} />}
         {t(group.labelKey)}
       </NavigationMenuTrigger>
@@ -128,7 +128,7 @@ export function AppNavigationDesktop({
       <NavigationMenuList className="justify-start gap-1">
         {SITE_NAVIGATION_LINKS.map(renderEntry)}
       </NavigationMenuList>
-      <NavigationMenuList className="flex-none justify-end gap-1">
+      <NavigationMenuList className="flex-none justify-end">
         <NavigationMenuItem>
           <NavigationMenuTrigger
             aria-label={t('common.navigation.personal')}

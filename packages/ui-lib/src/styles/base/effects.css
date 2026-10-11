@@ -1,0 +1,257 @@
+@reference "tailwindcss";
+
+/**
+ * Rotating conic-gradient ring with an outward glow.
+ *
+ * The classic "animated gradient border" trick: a custom property typed as an
+ * `<angle>` is registered with `@property` (so it can be interpolated at all),
+ * then spun with a keyframe while a `conic-gradient` reads it as its start
+ * angle.
+ *
+ * The element keeps a local stacking context (`isolation: isolate`) and both
+ * layers are pseudo-elements pushed behind the content:
+ *
+ * - `::before` paints the gradient blurred as the glow halo.
+ * - `::after` paints an opaque face plus the gradient as a 2px ring drawn with
+ *   the double-background trick (`content-box` fill over a `border-box`
+ *   gradient). The opaque face is what keeps the glow out of the interior —
+ *   negative-z layers paint above the element's *own* background, so the glow
+ *   cannot simply hide behind `bg-*`.
+ *
+ * Colors default to the semantic status tokens so the sweep adapts to the
+ * light/dark palettes and stays on-token.
+ *
+ * Tuning: every aspect is overridable per instance via `--border-spin-*`
+ * custom properties — `duration`, `width`, `blur`, `opacity`, `colors`, `fill` —
+ * or the Tailwind shorthand `spin-duration-*` (e.g. `spin-duration-2500` for a
+ * 2.5s spin). For an arbitrary time, set the property directly, e.g.
+ * `[--border-spin-duration:3s]`.
+ *
+ * The knob utilities deliberately do NOT use the `border-spin-*` prefix:
+ * `tailwind-merge` buckets any `border-spin-*` class into the same `border-color`
+ * group as `border-spin` and keeps only the last one, which would drop the base
+ * class and kill the whole effect.
+ */
+@property --border-spin-angle {
+  syntax: "<angle>";
+  inherits: false;
+  initial-value: 0deg;
+}
+
+@theme inline {
+  @keyframes border-spin {
+    to {
+      --border-spin-angle: 360deg;
+    }
+  }
+}
+
+@utility border-spin {
+  position: relative;
+  isolation: isolate;
+
+  --_width: var(--border-spin-width, 2px);
+  --_duration: var(--border-spin-duration, 8s);
+  --_blur: var(--border-spin-blur, 8px);
+  --_opacity: var(--border-spin-opacity, 0.45);
+  --_fill: var(--border-spin-fill, var(--secondary));
+  --_colors: var(
+    --border-spin-colors,
+    var(--success),
+    var(--warning),
+    var(--error),
+    var(--info),
+    var(--success)
+  );
+
+  &::before,
+  &::after {
+    content: "";
+    position: absolute;
+    border-radius: inherit;
+    animation: border-spin var(--_duration) linear infinite;
+    pointer-events: none;
+  }
+
+  /* Glow — blurred halo behind everything. */
+  &::before {
+    inset: calc(-1 * var(--_width) - 4px);
+    z-index: -2;
+    background: conic-gradient(from var(--border-spin-angle), var(--_colors));
+    filter: blur(var(--_blur));
+    opacity: var(--_opacity);
+  }
+
+  /* Face + ring — the opaque fill hides the glow interior. */
+  &::after {
+    inset: calc(-1 * var(--_width));
+    z-index: -1;
+    padding: var(--_width);
+    background:
+      linear-gradient(var(--_fill), var(--_fill)) content-box,
+      conic-gradient(from var(--border-spin-angle), var(--_colors)) border-box;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    &::before,
+    &::after {
+      animation: none;
+    }
+  }
+}
+
+/** Spin speed shorthand: `spin-duration-2500` → a 2500ms (2.5s) cycle. */
+@utility spin-duration-* {
+  --border-spin-duration: calc(--value(integer) * 1ms);
+}
+
+/**
+ * Continuously cycling hue for the aurora blobs.
+ *
+ * Registered with `@property` so it interpolates instead of snapping, letting
+ * the `aurora-drift-*` keyframes rotate it (same trick as `--border-spin-angle`
+ * above). Keeping the shift in a filter — rather than animating `color` or the
+ * gradient stops — keeps it on the compositor, so the big blurred gradients are
+ * not re-rasterized every frame.
+ */
+@property --aurora-hue {
+  syntax: "<angle>";
+  inherits: false;
+  initial-value: 0deg;
+}
+
+/**
+ * Decorative "aurora" blob for the public page backdrop.
+ *
+ * A soft, oversized circle painted as an alpha-fading radial gradient in
+ * `currentColor` (so callers pick the base hue with a `text-aurora-*` utility)
+ * and softened further with a token-driven blur. Position, size and base hue
+ * are supplied per instance by the consumer; drift and the `--aurora-hue` colour
+ * cycle come from the `animate-aurora-drift-*` keyframes, so no blob keeps a
+ * fixed colour in a fixed spot.
+ *
+ * Intensity (`--aurora-opacity`) and blur (`--aurora-blur`) are theme tokens so
+ * light/dark stay in step. `translate3d` drift and the `hue-rotate` filter are
+ * both composited, hence `will-change`; consumers pair their
+ * `animate-aurora-drift-*` class with `motion-reduce:animate-none` (the repo's
+ * idiom) so the blob stays visible but static when the user opts out of motion.
+ */
+@utility aurora-blob {
+  position: absolute;
+  border-radius: 100%;
+  background-image: radial-gradient(
+    circle,
+    currentColor 0%,
+    currentColor 35%,
+    transparent 75%
+  );
+  filter: blur(var(--aurora-blur, 3rem)) hue-rotate(var(--aurora-hue, 0deg));
+  opacity: var(--aurora-opacity, 0.45);
+  will-change: transform;
+}
+
+/**
+ * Mouse-reactive 3D tilt.
+ *
+ * `TiltCard` writes the pointer's normalized position into `--tilt-rx` /
+ * `--tilt-ry` on `pointermove`; this utility turns those into a single
+ * `transform` and smooths it with a CSS transition, so the easing stays off the
+ * JS main thread.
+ *
+ * The custom properties are registered as typed values so browsers can
+ * interpolate the rotation (and reject invalid values) instead of snapping.
+ * `perspective` is folded into the transform, so a tilt card needs no separate
+ * 3D parent.
+ *
+ * Accessibility: the tilt is pure decoration, so it is neutralised for
+ * reduced-motion users and on devices without a real hover pointer.
+ */
+@property --tilt-rx {
+  syntax: "<angle>";
+  inherits: false;
+  initial-value: 0deg;
+}
+
+@property --tilt-ry {
+  syntax: "<angle>";
+  inherits: false;
+  initial-value: 0deg;
+}
+
+@property --tilt-scale {
+  syntax: "<number>";
+  inherits: false;
+  initial-value: 1;
+}
+
+@utility tilt-card {
+  isolation: isolate;
+  transform: perspective(var(--tilt-perspective, 800px)) rotateX(var(--tilt-rx))
+    rotateY(var(--tilt-ry)) scale(var(--tilt-scale));
+  transform-style: preserve-3d;
+  transition: transform var(--tilt-duration, 200ms) ease-out;
+
+  /* Only promote the layer while the pointer is actually over the card. */
+  &[data-tilt-active] {
+    will-change: transform;
+  }
+
+  @media (prefers-reduced-motion: reduce), (hover: none) {
+    transform: none;
+    transition: none;
+  }
+}
+
+/**
+ * Holographic foil for tilt cards.
+ *
+ * A spectral layer that sweeps across, blended over the artwork. The gradient
+ * runs at a slight diagonal (`66deg`) and `TiltCard` slides the visible window
+ * with `--holo-x` (the pointer's horizontal position), so moving the cursor
+ * across the card walks through the spectrum. Decorative only: it fades in while
+ * the plane is tilting (`[data-tilt-active]`) and is suppressed for
+ * reduced-motion users and devices without a hover pointer.
+ *
+ * The blend mode decides which pixels of the artwork the foil reacts to (see
+ * below), and both the blend mode and intensity are overridable per instance
+ * with `--holo-blend` and `--holo-opacity`.
+ *
+ * - `color-dodge` (default) and `screen` lighten; dodge only shows on already
+ *   bright pixels while screen mostly lifts dark ones;
+ * - `color-burn` and `multiply` darken;
+ * - `overlay` / `soft-light` / `hard-light` scale with local contrast;
+ * - `hue` / `saturation` work in HSL and are gated by the backdrop's own
+ *   saturation, so greys stay grey.
+ */
+@utility tilt-holo-layer {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  mix-blend-mode: var(--holo-blend, color-dodge);
+  opacity: 0;
+  transition: opacity var(--tilt-duration, 200ms) ease-out;
+  background-image: linear-gradient(
+    66deg,
+    #ff4da6,
+    #ffc14d,
+    #7de08a,
+    #4dc3ff,
+    #9b6bff,
+    #ff4da6
+  );
+  background-size: 200% 100%;
+  background-position: var(--holo-x, 50%) 50%;
+}
+
+/* Reveal the foil only while the plane is tilting. */
+[data-slot="tilt-card-plane"][data-tilt-active] .tilt-holo-layer {
+  opacity: var(--holo-opacity, 0.12);
+}
+
+@media (prefers-reduced-motion: reduce), (hover: none) {
+  .tilt-holo-layer {
+    opacity: 0;
+    transition: none;
+  }
+}

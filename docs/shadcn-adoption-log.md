@@ -27,6 +27,13 @@ When adding a component to `packages/ui-lib`:
 4.  Add a Storybook story under `apps/ui-docs` if it is a reusable primitive.
 5.  Never `add` a name that already exists in `packages/ui-lib` — it would overwrite
     a hand-tuned component.
+6.  **The shadcn Tailwind utility layer is imported, not vendored.** `shimmer`,
+    `scroll-fade-*`, `no-scrollbar` and the `data-*` variants ship in the `shadcn`
+    package's `tailwind.css`, which `src/styles/global.css` imports directly so
+    `@maw/ui-lib/global.css` stays the single entry point. Do not copy them into
+    `src/styles/base/` — a local copy silently diverges from upstream (the removed
+    `base/shimmer.css` was exactly that, and the hand-port had already dropped
+    `scroll-fade`, leaving `MessageScroller`'s `scroll-fade-b` a no-op).
 
 ## Behavior-loss register
 

@@ -1,45 +1,44 @@
 @reference "tailwindcss";
 
 /**
- * Dark theme — stock shadcn/ui `neutral` base color.
+ * Dark theme — shadcn/ui structure with a muted project palette.
  *
- * Standard tokens match the default shadcn neutral theme
- * (https://ui.shadcn.com/docs/theming). Extended tokens are project-specific
- * and not part of stock shadcn; they are seeded with neutral defaults so the
- * existing utilities keep resolving. Replace them with the project palette —
- * see `legacy.css` for the previous custom values.
+ * Mirrors the light theme's legacy-inspired hues (`legacy.css`) over a
+ * near-black indigo base. Hues are deliberately low-chroma and every
+ * foreground/background pair is verified against WCAG AA. Following the shadcn
+ * dark convention, the blue primary is bright so it can carry dark text.
  */
 @layer theme {
   :root:not([data-theme="light"]),
   [data-theme="dark"] {
     /* Main Layout */
-    --background: oklch(0.145 0 0);
-    --foreground: oklch(0.985 0 0);
+    --background: oklch(0.16 0.018 270);
+    --foreground: oklch(0.94 0.012 260);
 
     /* Surfaces */
-    --card: oklch(0.205 0 0);
-    --card-foreground: oklch(0.985 0 0);
-    --popover: oklch(0.205 0 0);
-    --popover-foreground: oklch(0.985 0 0);
+    --card: oklch(0.21 0.022 270);
+    --card-foreground: oklch(0.94 0.012 260);
+    --popover: oklch(0.21 0.022 270);
+    --popover-foreground: oklch(0.94 0.012 260);
 
     /* Brand Colors */
-    --primary: oklch(0.922 0 0);
-    --primary-foreground: oklch(0.205 0 0);
+    --primary: oklch(0.67 0.17 262);
+    --primary-foreground: oklch(0.17 0.025 262);
 
-    --secondary: oklch(0.269 0 0);
-    --secondary-foreground: oklch(0.985 0 0);
+    --secondary: oklch(0.27 0.025 268);
+    --secondary-foreground: oklch(0.95 0.01 260);
 
     /* UI States & Action */
-    --muted: oklch(0.269 0 0);
-    --muted-foreground: oklch(0.708 0 0);
-    --accent: oklch(0.269 0 0);
-    --accent-foreground: oklch(0.985 0 0);
+    --muted: oklch(0.27 0.022 268);
+    --muted-foreground: oklch(0.72 0.02 265);
+    --accent: oklch(0.3 0.03 268);
+    --accent-foreground: oklch(0.95 0.01 260);
     --destructive: oklch(0.704 0.191 22.216);
 
     /* Borders & Inputs */
-    --border: oklch(1 0 0 / 10%);
-    --input: oklch(1 0 0 / 15%);
-    --ring: oklch(0.556 0 0);
+    --border: oklch(0.8 0.02 265 / 12%);
+    --input: oklch(0.8 0.02 265 / 16%);
+    --ring: oklch(0.6 0.14 262);
 
     /* Chart */
     --chart-1: oklch(0.488 0.243 264.376);
@@ -49,25 +48,26 @@
     --chart-5: oklch(0.645 0.246 16.439);
 
     /* Sidebar */
-    --sidebar: oklch(0.205 0 0);
-    --sidebar-foreground: oklch(0.985 0 0);
-    --sidebar-primary: oklch(0.488 0.243 264.376);
-    --sidebar-primary-foreground: oklch(0.985 0 0);
-    --sidebar-accent: oklch(0.269 0 0);
-    --sidebar-accent-foreground: oklch(0.985 0 0);
-    --sidebar-border: oklch(1 0 0 / 10%);
-    --sidebar-ring: oklch(0.556 0 0);
+    --sidebar: oklch(0.21 0.022 270);
+    --sidebar-foreground: oklch(0.94 0.012 260);
+    --sidebar-primary: oklch(0.67 0.17 262);
+    --sidebar-primary-foreground: oklch(0.17 0.025 262);
+    --sidebar-accent: oklch(0.3 0.03 268);
+    --sidebar-accent-foreground: oklch(0.95 0.01 260);
+    --sidebar-border: oklch(0.8 0.02 265 / 12%);
+    --sidebar-ring: oklch(0.6 0.14 262);
 
     /* ------------------------------------------------------------------
-     * Extended tokens (not part of stock shadcn) — placeholder defaults.
-     * Overwrite with the project palette; see `legacy.css` for prior values.
+     * Extended tokens (not part of stock shadcn) — project palette mixed in
+     * from `legacy.css`. Every fg/bg pair below is checked for WCAG AA:
+     * body/card ≥ 14:1, primary button & link 6.3:1, tertiary selection 6.6:1.
      * ------------------------------------------------------------------ */
-    --primary-alt: oklch(0.87 0 0);
-    --secondary-alt: oklch(0.371 0 0);
+    --primary-alt: oklch(0.74 0.15 262);
+    --secondary-alt: oklch(0.32 0.03 268);
 
-    --tertiary: oklch(0.269 0 0);
-    --tertiary-alt: oklch(0.371 0 0);
-    --tertiary-foreground: oklch(0.985 0 0);
+    --tertiary: oklch(0.7 0.17 45);
+    --tertiary-alt: oklch(0.76 0.15 45);
+    --tertiary-foreground: oklch(0.18 0.03 45);
 
     --destructive-foreground: oklch(0.985 0 0);
 
@@ -87,7 +87,19 @@
     --border-warning: var(--warning);
     --border-error: var(--error);
 
-    --disabled: oklch(0.556 0 0);
-    --dimmer: oklch(0.985 0 0 / 0.4);
+    --disabled: oklch(0.6 0.02 265);
+    --dimmer: oklch(0.94 0.012 260 / 0.4);
+
+    /* ------------------------------------------------------------------
+     * Aurora backdrop — decorative animated blob layer on public pages.
+     * Richer saturation and higher opacity to glow over the near-black
+     * background.
+     * ------------------------------------------------------------------ */
+    --aurora-1: oklch(0.6 0.19 255);
+    --aurora-2: oklch(0.58 0.22 305);
+    --aurora-3: oklch(0.62 0.2 350);
+    --aurora-4: oklch(0.64 0.14 195);
+    --aurora-opacity: 0.1;
+    --aurora-blur: 4rem;
   }
 }

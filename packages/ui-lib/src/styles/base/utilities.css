@@ -63,13 +63,23 @@
 /**
  * Opacity-mask bottom fade.
  *
- * Fades the bottom edge to transparent with a plain alpha mask so the cut-off
- * content dissolves into whatever surface sits behind it, instead of
- * approximating the fade with a color-matched gradient. Used by the paywall
- * content locker. The prefixed line keeps older WebKit/Blink working; every
- * current browser also understands the unprefixed property.
+ * Fades only the bottom `--mask-fade-bottom-size` (150px by default) to
+ * transparent with a plain alpha mask so the cut-off content dissolves into
+ * whatever surface sits behind it, instead of approximating the fade with a
+ * color-matched gradient. Used by the paywall content locker. The fallback in
+ * the `var()` keeps the 150px default while allowing a consumer to retune the
+ * fade distance locally. The prefixed line keeps older WebKit/Blink working;
+ * every current browser also understands the unprefixed property.
  */
 @utility mask-fade-bottom {
-  -webkit-mask-image: linear-gradient(black 45%, transparent);
-  mask-image: linear-gradient(black 45%, transparent);
+  -webkit-mask-image: linear-gradient(
+    to bottom,
+    black calc(100% - var(--mask-fade-bottom-size, 150px)),
+    transparent
+  );
+  mask-image: linear-gradient(
+    to bottom,
+    black calc(100% - var(--mask-fade-bottom-size, 150px)),
+    transparent
+  );
 }

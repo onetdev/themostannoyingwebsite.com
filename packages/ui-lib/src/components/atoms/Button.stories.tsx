@@ -87,3 +87,19 @@ export const Link: Story = {
     variant: 'link',
   },
 };
+
+export const GradientRing: Story = {
+  args: {
+    children: 'Same trick on a button',
+    variant: 'secondary',
+    className: 'border-spin rounded-full',
+  },
+};
+
+export const GradientRingUnread: Story = {
+  args: {
+    children: 'Unread',
+    variant: 'secondary',
+    className: 'border-spin spin-duration-2500 rounded-full',
+  },
+};
