@@ -1,4 +1,10 @@
 @import "tailwindcss";
+/**
+ * Upstream shadcn Tailwind utilities (`shimmer`, `scroll-fade`, `no-scrollbar`,
+ * the `data-*` variants, …). Imported from the package rather than vendored so
+ * they track upstream; ADR 31 keeps `@maw/ui-lib` the single install point.
+ */
+@import "shadcn/tailwind.css";
 @import "tw-animate-css";
 @import "./themes/index.css";
 
