@@ -21,11 +21,16 @@ export default {
   },
   search: {
     placeholder: 'Search...',
+    emptyTitle: 'Search the site',
+    emptyDescription:
+      'Type a keyword above to find articles, authors, and more.',
     noResults: 'No results found',
     resultMeta: 'Search for "{query}" took {time}ms and found {count} results',
-    searching: 'Searching',
     error: 'Search failed, please try again later',
     peopleAlsoSearched: 'People also searched for:',
+  },
+  loading: {
+    fallback: 'Loading…',
   },
   hotThings: {
     playVideo: 'Play video',

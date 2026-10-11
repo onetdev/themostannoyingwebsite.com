@@ -9,6 +9,7 @@ export * from './useLocaleResource';
 export * from './useLocaleSuggestion';
 export * from './useNavigationStats';
 export * from './useReducedMotionListener';
+export * from './useRotatingMessage';
 export * from './useScrollDistanceTrigger';
 export * from './useSendNotification';
 export * from './useServiceWorker';
