@@ -33,4 +33,12 @@ test('article can be view from the home page', { tag: '@smoke' }, async ({
   await expect(page.getByRole('button', { name: 'Share' })).toBeVisible();
   await expect(articlePage.paywallOverlayConfirm).toBeVisible();
   await expect(articlePage.paywallOverlayCancel).toBeVisible();
+
+  // The locked content fades only across its last 150px (bottom-anchored alpha
+  // mask) instead of the whole bottom 45%.
+  const maskImage = await articlePage.paywallMaskedContent.evaluate(
+    (element) => getComputedStyle(element).maskImage,
+  );
+  expect(maskImage).toContain('calc(100% - 150px)');
+  expect(maskImage).not.toContain('45%');
 });
