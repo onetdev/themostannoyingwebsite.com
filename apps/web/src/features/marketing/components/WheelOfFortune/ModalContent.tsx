@@ -17,6 +17,8 @@ export function ModalContent({ className, ...rest }: ModalContentProps) {
     wof.state === 'completed' && wof.prize
       ? t('marketing.wheelOfFortune.spinWin', { prize: wof.prize.text })
       : null;
+  const canSpin = !resultDisplay && wof.state === 'ready';
+  const isSpinning = !resultDisplay && wof.state === 'spinning';
 
   return (
     <div
@@ -60,7 +62,7 @@ export function ModalContent({ className, ...rest }: ModalContentProps) {
                     {resultDisplay}
                   </span>
                 )}
-                {!resultDisplay && wof.state === 'ready' && (
+                {canSpin && (
                   <Button
                     variant="ghost"
                     className="text-xl"
@@ -71,7 +73,7 @@ export function ModalContent({ className, ...rest }: ModalContentProps) {
                     <Icon icon="chevronLeft" className="text-sm" />
                   </Button>
                 )}
-                {!resultDisplay && wof.state === 'spinning' && (
+                {isSpinning && (
                   <span className="text-xl font-bold leading-9">
                     🚨😱⋆˚꩜｡😱🚨
                   </span>

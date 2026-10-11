@@ -1,5 +1,7 @@
 import type { ArticleListItem, Author } from '@maw/content-sdk';
+import { PageHeadline } from '@maw/ui-lib';
 import { getTranslations } from 'next-intl/server';
+import { ShareButton } from '@/features/share/components';
 import { SmallCoverListItem } from './SmallCoverListItem';
 
 export interface AuthorPageProps {
@@ -12,7 +14,9 @@ export async function AuthorPage({ author, articles }: AuthorPageProps) {
 
   return (
     <>
-      <h1 className="mb-2 max-w-[900px]">{author.name}</h1>
+      <PageHeadline className="mb-2 max-w-[900px]" actions={<ShareButton />}>
+        {author.name}
+      </PageHeadline>
       <p
         className="text-muted-foreground mb-5 text-xl italic"
         data-testid="author-persona"

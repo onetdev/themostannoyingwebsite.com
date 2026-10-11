@@ -4,6 +4,7 @@ import { getLocale, getTranslations } from 'next-intl/server';
 import config from '@/core/config';
 import { buildDonateAction, JsonLd, WebPageStructuredData } from '@/core/seo';
 import { DonationPage } from '@/features/funding/components';
+import { ShareButton } from '@/features/share/components';
 import { PageLayout } from '../_components/PageLayout';
 
 export { generateStaticParams } from '@/core/i18n/routing';
@@ -47,7 +48,7 @@ export default async function Page() {
         namespace="metadata.donate"
       />
       <JsonLd data={donateActionSchema} />
-      <PageHeadline className="mx-auto w-full">
+      <PageHeadline className="mx-auto w-full" actions={<ShareButton />}>
         {t('common.navigation.donate')}
       </PageHeadline>
       <DonationPage />

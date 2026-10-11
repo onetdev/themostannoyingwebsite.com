@@ -22,6 +22,7 @@ export * from './PasswordStrengthBar';
 export * from './Progress';
 export * from './Select';
 export * from './Separator';
+export * from './Skeleton';
 export * from './Slider';
 export * from './Spinner';
 export * from './Switch';

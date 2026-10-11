@@ -35,6 +35,7 @@ const COMPONENTS: Record<string, string> = {
   'atoms/Progress.tsx': 'progress',
   'atoms/Select.tsx': 'select',
   'atoms/Separator.tsx': 'separator',
+  'atoms/Skeleton.tsx': 'skeleton',
   'atoms/Slider.tsx': 'slider',
   'atoms/Spinner.tsx': 'spinner',
   'atoms/Switch.tsx': 'switch',

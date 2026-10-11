@@ -7,6 +7,10 @@ jest.mock('next-intl/server', () => ({
     values?.name ? `${key}:${values.name}` : key,
 }));
 
+jest.mock('@/features/share/components', () => ({
+  ShareButton: () => null,
+}));
+
 jest.mock('./SmallCoverListItem', () => ({
   SmallCoverListItem: ({ article }: { article: { slug: string } }) => (
     <div data-testid="author-article-item">{article.slug}</div>

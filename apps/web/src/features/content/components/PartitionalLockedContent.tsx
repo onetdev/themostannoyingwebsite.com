@@ -34,6 +34,7 @@ export function PartitionalLockedContent({
   const [isRevealed, setRevealed] = useState(false);
   const [flipActions, setFlipActions] = useState(false);
   const contentRef = useRef<HTMLDivElement>(null);
+  const showOverlay = active && !isRevealed;
 
   // Extends the max-height of the content until there's content to reveal
   const handleRevealClick = () => {
@@ -90,13 +91,13 @@ export function PartitionalLockedContent({
       */}
       <div
         className={`overflow-hidden transition-all duration-300 ease-in-out ${
-          active && !isRevealed ? 'mask-fade-bottom' : ''
+          showOverlay ? 'mask-fade-bottom' : ''
         }`}
         style={wrapperStyles}
       >
         <div ref={contentRef}>{children}</div>
       </div>
-      {active && !isRevealed && (
+      {showOverlay && (
         <div className="mx-auto w-full max-w-screen-md pt-16">
           <h3 className="mb-4">
             {t('content.paywall.overlay.title', {

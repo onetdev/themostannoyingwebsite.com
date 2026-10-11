@@ -1,17 +1,23 @@
 import { getLogger } from '@maw/logger';
-import { PageHeadline } from '@maw/ui-lib';
-import styles from '@maw/ui-lib/content.module.css';
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
-import { getTranslations } from 'next-intl/server';
+import { getFormatter, getTranslations } from 'next-intl/server';
 import { loadLocaleMdx } from '@/core/i18n/load-locale-mdx';
 import { WebPageStructuredData } from '@/core/seo';
+import { ShareButton } from '@/features/share/components';
+import { DocumentPage } from '../_components/DocumentPage';
 import { PageLayout } from '../_components/PageLayout';
 import { TranslationDisclaimer } from '../_components/TranslationDisclaimer';
 
 export { generateStaticParams } from '@/core/i18n/routing';
 
 export const revalidate = 1800;
+
+/**
+ * Canonical revision date of the terms. Kept in code (rather than the MDX) so
+ * the value is locale-independent and can be formatted per locale.
+ */
+const TERMS_LAST_UPDATED = '2026-03-09T07:23:39Z';
 
 export async function generateMetadata({
   params,
@@ -31,6 +37,7 @@ export async function generateMetadata({
 export default async function Page({ params }: NextPageProps) {
   const { locale } = await params;
   const t = await getTranslations();
+  const formatter = await getFormatter();
   const logger = getLogger();
 
   try {
@@ -46,13 +53,22 @@ export default async function Page({ params }: NextPageProps) {
           path="terms-of-use"
           namespace="metadata.termsOfUse"
         />
-        <PageHeadline className="mx-auto w-full max-w-screen-md">
-          {t('common.navigation.termsOfUse')}
-        </PageHeadline>
-        <div className={styles.content}>
+        <DocumentPage
+          title={t('common.navigation.termsOfUse')}
+          headerActions={<ShareButton />}
+          meta={
+            <time dateTime={TERMS_LAST_UPDATED}>
+              {t('common.document.lastUpdated', {
+                date: formatter.dateTime(new Date(TERMS_LAST_UPDATED), {
+                  dateStyle: 'long',
+                }),
+              })}
+            </time>
+          }
+        >
           <TranslationDisclaimer currentLocale={locale} href="/terms-of-use" />
           <Content />
-        </div>
+        </DocumentPage>
       </PageLayout>
     );
   } catch (_err) {

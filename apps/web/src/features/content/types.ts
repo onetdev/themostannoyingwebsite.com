@@ -56,6 +56,7 @@ export interface ContentPoolItemMap {
   names: string;
   comments: string;
   'chat-bubble-messages': string;
+  'loading-messages': string;
   'top-searches': string;
   'marquee-titles': string;
   'paged-titles': string;

@@ -17,6 +17,7 @@ import { ChatBubble } from '@/features/support/components';
 import { usePainPreferencesStore, useUserGrantsStore } from '@/stores';
 import { CookieConsent } from './CookieConsent';
 import { GlobalShareModal } from './GlobalShareModal';
+import { HeaderScrollFade } from './HeaderScrollFade';
 
 type PainDecoratorLayoutProps = ComponentProps<'div'>;
 
@@ -63,6 +64,7 @@ export function PainDecoratorLayout({
 
   return (
     <div className={className} {...rest}>
+      <HeaderScrollFade />
       {/* Elements appearing underneath content container */}
       <AnimatePresence>
         {runtimeFlags.giftFlaps && (

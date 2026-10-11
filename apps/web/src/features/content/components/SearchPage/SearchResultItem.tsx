@@ -15,6 +15,7 @@ export function SearchResultItem({ item }: SearchResultItemProps) {
   return (
     <div
       className="my-4 [&_strong]:bg-tertiary [&_strong]:text-tertiary-foreground [&_strong]:px-0.5 [&_strong]:rounded-xs"
+      data-testid="search-result-item"
       key={item.slug}
     >
       <h4>
