@@ -64,11 +64,13 @@ export const SITE_NAVIGATION_LINKS: NavEntry[] = [
   },
 ];
 
+/** Expands a navigation group into its items; leaves a plain link as-is. */
+export const flattenNavigationGroup = (entry: NavEntry): NavItem[] =>
+  isNavGroup(entry) ? entry.items : [entry];
+
 /** Flattened site links (groups expanded) for flat renderers like the sheet. */
 export const SITE_NAVIGATION_FLAT_LINKS: NavItem[] =
-  SITE_NAVIGATION_LINKS.flatMap((entry) =>
-    isNavGroup(entry) ? entry.items : [entry],
-  );
+  SITE_NAVIGATION_LINKS.flatMap(flattenNavigationGroup);
 
 export const PERSONAL_NAVIGATION_LINKS: NavItem[] = [
   {

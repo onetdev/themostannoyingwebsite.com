@@ -88,15 +88,25 @@ export async function fetchSupportedLocaleMeta(
   }
 }
 
+/**
+ * Maps a locale code to its language info when metadata exists, or `null` so
+ * callers can skip locales absent from the API response. Extracted so the
+ * flattening iteration is independently testable.
+ */
+export function toLanguageInfo(
+  locale: string,
+  meta: Record<string, SupportedLocaleMeta>,
+): LanguageInfo | null {
+  const langInfo = meta[locale];
+  return langInfo ? { locale, ...langInfo } : null;
+}
+
 export function buildSupportedLanguages(
   meta: Record<string, SupportedLocaleMeta>,
 ): LanguageInfo[] {
-  return i18nConfig.locales.flatMap((locale) => {
-    const langInfo = meta[locale];
-    // Locales without bundled metadata are provided by the Content API at
-    // runtime; the synchronous fallback only carries what the app bundles.
-    return langInfo ? [{ locale, ...langInfo }] : [];
-  });
+  return i18nConfig.locales.flatMap(
+    (locale) => toLanguageInfo(locale, meta) ?? [],
+  );
 }
 
 /**

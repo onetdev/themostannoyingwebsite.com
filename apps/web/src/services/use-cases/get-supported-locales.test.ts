@@ -4,6 +4,7 @@ import {
   fetchSupportedLocaleMeta,
   fetchSupportedLocaleMetaStrict,
   getSupportedLanguages,
+  toLanguageInfo,
 } from './get-supported-locales';
 
 function createClient(
@@ -73,5 +74,17 @@ describe('supported locales', () => {
     await expect(fetchSupportedLocaleMetaStrict(client)).rejects.toThrow(
       'network down',
     );
+  });
+});
+
+describe('toLanguageInfo', () => {
+  it('combines a locale with its metadata', () => {
+    expect(
+      toLanguageInfo('en', { en: { flag: '🇺🇸', label: 'English' } }),
+    ).toEqual({ locale: 'en', flag: '🇺🇸', label: 'English' });
+  });
+
+  it('returns null for a locale without metadata', () => {
+    expect(toLanguageInfo('xx', {})).toBeNull();
   });
 });

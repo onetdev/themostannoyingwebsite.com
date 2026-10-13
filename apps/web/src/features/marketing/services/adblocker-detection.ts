@@ -15,7 +15,7 @@ const NETWORK_BAIT_URL = '/ads/ads.js';
 const CANARY_STYLE =
   'position:fixed;left:-9999px;top:0;width:1px;height:1px;pointer-events:none;';
 
-interface CanarySpec {
+export interface CanarySpec {
   attributes?: string[];
   classes: string[];
   id?: string;
@@ -72,6 +72,31 @@ const CANARIES: CanarySpec[] = [
 ];
 
 /**
+ * Creates an offscreen canary element carrying a well-known, globally blocked
+ * selector. Extracted so canary construction is independently testable.
+ */
+export function createCanary(doc: Document, spec: CanarySpec): HTMLDivElement {
+  const canary = doc.createElement('div');
+  if (spec.id) {
+    canary.id = spec.id;
+  }
+  canary.className = spec.classes.join(' ');
+  for (const attribute of spec.attributes ?? []) {
+    canary.setAttribute(attribute, '');
+  }
+  canary.setAttribute('aria-hidden', 'true');
+  canary.style.cssText = CANARY_STYLE;
+  return canary;
+}
+
+/** Removes canaries that were appended for a probe. */
+export function removeCanaries(canaries: HTMLElement[]): void {
+  for (const canary of canaries) {
+    canary.remove();
+  }
+}
+
+/**
  * Probes the self hosted bait to detect network level ad blocking.
  *
  * A rejected request (blocked, aborted, offline) or a non-OK response is
@@ -110,16 +135,7 @@ export const detectCosmeticBlocking = (doc?: Document): boolean => {
   }
 
   const canaries = CANARIES.map((spec) => {
-    const canary = target.createElement('div');
-    if (spec.id) {
-      canary.id = spec.id;
-    }
-    canary.className = spec.classes.join(' ');
-    for (const attribute of spec.attributes ?? []) {
-      canary.setAttribute(attribute, '');
-    }
-    canary.setAttribute('aria-hidden', 'true');
-    canary.style.cssText = CANARY_STYLE;
+    const canary = createCanary(target, spec);
     target.body.appendChild(canary);
     return canary;
   });
@@ -134,9 +150,7 @@ export const detectCosmeticBlocking = (doc?: Document): boolean => {
     );
   });
 
-  for (const canary of canaries) {
-    canary.remove();
-  }
+  removeCanaries(canaries);
 
   return hidden;
 };

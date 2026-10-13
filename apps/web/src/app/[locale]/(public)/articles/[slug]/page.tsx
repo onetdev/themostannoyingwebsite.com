@@ -1,8 +1,4 @@
-import {
-  type LanguageCode,
-  renderMarkdown,
-  toCoverImages,
-} from '@maw/content-sdk';
+import { renderMarkdown, toCoverImages } from '@maw/content-sdk';
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import { getTranslations } from 'next-intl/server';
@@ -15,6 +11,7 @@ import { ArticleItemPage } from '@/features/content/components';
 import { getArticleService } from '@/features/content/services';
 import i18nConfig from '@/root/i18n.config';
 import { PageLayout } from '../../_components/PageLayout';
+import { buildArticleStaticParams } from './_lib/build-article-static-params';
 
 type PageParams = {
   slug: string;
@@ -74,22 +71,10 @@ export async function generateMetadata({
 }
 
 export const generateStaticParams = async () => {
-  const locales = i18nConfig.locales;
-  const paths: PageParams[] = [];
-
   const container = getDependencyContainer();
   const articleService = getArticleService(container);
-  for (const locale of locales) {
-    const articles = await articleService.listAll({
-      lang: locale as LanguageCode,
-    });
 
-    articles.forEach((article) => {
-      paths.push({ slug: article.slug, locale });
-    });
-  }
-
-  return paths;
+  return buildArticleStaticParams(i18nConfig.locales, articleService);
 };
 
 export default async function Page({ params }: PageProps) {

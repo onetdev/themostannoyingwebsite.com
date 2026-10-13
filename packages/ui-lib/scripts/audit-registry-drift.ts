@@ -62,22 +62,37 @@ const COMPONENTS: Record<string, string> = {
 const here = dirname(fileURLToPath(import.meta.url));
 const componentsDir = join(here, '..', 'src', 'components');
 
+/**
+ * Parses the body of a single `export { ... }` clause into the exported names,
+ * resolving `X as Y` aliases to `Y`. Extracted so the name parsing is a pure,
+ * independently testable unit.
+ */
+export function parseExportList(body: string): string[] {
+  return body
+    .split(',')
+    .map((part) =>
+      part
+        .trim()
+        .split(/\s+as\s+/)
+        .pop()
+        ?.trim(),
+    )
+    .filter((token): token is string => Boolean(token));
+}
+
 function extractExports(src: string): Set<string> {
   const names = new Set<string>();
+
   for (const m of src.matchAll(/export\s+(?:async\s+)?function\s+(\w+)/g))
     names.add(m[1]);
   for (const m of src.matchAll(/export\s+const\s+(\w+)/g)) names.add(m[1]);
   for (const m of src.matchAll(/export\s+class\s+(\w+)/g)) names.add(m[1]);
-  for (const m of src.matchAll(/export\s*\{([^}]*)\}/g)) {
-    for (const part of m[1].split(',')) {
-      const token = part
-        .trim()
-        .split(/\s+as\s+/)
-        .pop()
-        ?.trim();
-      if (token) names.add(token);
-    }
-  }
+
+  const namedExports = [...src.matchAll(/export\s*\{([^}]*)\}/g)].flatMap((m) =>
+    parseExportList(m[1]),
+  );
+  for (const token of namedExports) names.add(token);
+
   return names;
 }
 

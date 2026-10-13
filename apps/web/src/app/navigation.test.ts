@@ -1,5 +1,7 @@
 import {
+  flattenNavigationGroup,
   isNavGroup,
+  type NavGroup,
   type NavItem,
   SITE_NAVIGATION_FLAT_LINKS,
   SITE_NAVIGATION_LINKS,
@@ -39,5 +41,21 @@ describe('navigation', () => {
     const ids = SITE_NAVIGATION_LINKS.map((entry) => entry.id);
 
     expect(ids.indexOf('explore')).toBeGreaterThan(ids.indexOf('plans'));
+  });
+});
+
+describe('flattenNavigationGroup', () => {
+  it('expands a group into its child links', () => {
+    const group: NavGroup = {
+      id: 'group',
+      labelKey: 'common.navigation.explore',
+      items: [leaf],
+    };
+
+    expect(flattenNavigationGroup(group)).toEqual([leaf]);
+  });
+
+  it('wraps a plain link in a single-item array', () => {
+    expect(flattenNavigationGroup(leaf)).toEqual([leaf]);
   });
 });

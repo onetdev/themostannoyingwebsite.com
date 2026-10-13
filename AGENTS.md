@@ -60,6 +60,14 @@ pnpm lint:fix
 ### Internationalization (i18n)
 **NEVER** hardcode user-facing strings. Use the `i18n-assistant` skill or refer to `apps/web/AGENTS.md` for the localization workflow.
 
+### Function Shape & Iteration
+- Keep functions small and single-purpose; prefer extraction over deep nesting.
+- Do not nest iteration more than two levels. When a loop or iterator callback contains another loop, extract the enclosing iteration into a named helper at its natural boundary.
+- Extract at the level with a small, natural input → output — never the innermost loop whose body captures many outer locals.
+- Parameter budget: **≤ 4 positional parameters** (Biome's `useMaxParams` default). If a helper needs more context, pass a single options/context object instead of threading captured locals.
+- Extracted iteration helpers should be pure where possible and must have co-located `*.test.ts` coverage.
+- Before configuring lint rules, confirm the rule and its options exist in the **installed** Biome (e.g. `grep` the `configuration_schema.json` resolved from `node_modules/@biomejs/biome`), per the "Third-Party Dependencies" section.
+
 ---
 
 ## 🔌 Third-Party Dependencies: Installed Docs Are the Source of Truth
