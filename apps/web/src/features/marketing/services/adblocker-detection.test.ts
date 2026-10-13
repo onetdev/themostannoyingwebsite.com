@@ -2,9 +2,11 @@
  * @jest-environment jsdom
  */
 import {
+  createCanary,
   detectAdblocker,
   detectCosmeticBlocking,
   detectNetworkBlocking,
+  removeCanaries,
 } from './adblocker-detection';
 
 describe('detectNetworkBlocking', () => {
@@ -94,5 +96,39 @@ describe('detectAdblocker', () => {
     (global.fetch as jest.Mock).mockResolvedValue({ ok: false });
 
     await expect(detectAdblocker()).resolves.toBe(true);
+  });
+});
+
+describe('canary helpers', () => {
+  it('creates an offscreen, aria-hidden element carrying the spec selectors', () => {
+    const canary = createCanary(document, {
+      id: 'ad-slot',
+      classes: ['ad-slot', 'ad-wrapper'],
+      attributes: ['data-ad-cls'],
+    });
+
+    expect(canary.tagName).toBe('DIV');
+    expect(canary.id).toBe('ad-slot');
+    expect(canary.className).toBe('ad-slot ad-wrapper');
+    expect(canary.getAttribute('data-ad-cls')).toBe('');
+    expect(canary.getAttribute('aria-hidden')).toBe('true');
+    expect(canary.style.position).toBe('fixed');
+  });
+
+  it('omits the id when the spec has none', () => {
+    const canary = createCanary(document, { classes: ['x'] });
+
+    expect(canary.id).toBe('');
+  });
+
+  it('removes every canary from the document', () => {
+    const first = createCanary(document, { id: 'a', classes: ['a'] });
+    const second = createCanary(document, { id: 'b', classes: ['b'] });
+    document.body.append(first, second);
+
+    removeCanaries([first, second]);
+
+    expect(document.getElementById('a')).toBeNull();
+    expect(document.getElementById('b')).toBeNull();
   });
 });
