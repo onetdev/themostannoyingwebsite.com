@@ -32,10 +32,10 @@
  * two soft layers and the flicker range is pulled down.
  */
 :global([data-theme="light"]) .arrow {
-  --neon-bright: 0.55;
-  --neon-dim: 0.12;
-  filter: drop-shadow(0 0 1.5px var(--neon-glow))
-    drop-shadow(0 0 5px var(--neon-glow));
+  --neon-bright: 0.35;
+  --neon-dim: 0.08;
+  filter: drop-shadow(0 0 1px var(--neon-glow))
+    drop-shadow(0 0 4px var(--neon-glow));
 }
 
 /* A stuttering, broken-neon blink interspersed with steady stretches. */
