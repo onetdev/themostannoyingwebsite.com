@@ -30,6 +30,23 @@ test('donation page displays essential interactive elements', async ({
   await expect(donatePage.cryptoWalletEth).toBeVisible();
 });
 
+test('crypto donation reveals its QR code in a popover', async ({ page }) => {
+  await setupE2eTestState(page);
+  const donatePage = getDonatePage(page);
+  await donatePage.goto();
+
+  await expect(donatePage.cryptoQr).toBeHidden();
+
+  await donatePage.bitcoinButton.click();
+  await expect(donatePage.cryptoQr).toBeVisible();
+
+  await page.keyboard.press('Escape');
+  await expect(donatePage.cryptoQr).toBeHidden();
+
+  await donatePage.ethereumButton.click();
+  await expect(donatePage.cryptoQr).toBeVisible();
+});
+
 test('donation page renders the made-up impact stats chart', async ({
   page,
 }) => {

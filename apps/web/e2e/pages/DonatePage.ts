@@ -27,6 +27,9 @@ export const getDonatePage = (page: Page) => {
     payPalButton: page.getByRole('link', { name: 'PayPal' }),
     cryptoWalletBtc: page.getByTestId('crypto-wallet-btc'),
     cryptoWalletEth: page.getByTestId('crypto-wallet-eth'),
+    bitcoinButton: page.getByRole('button', { name: 'Bitcoin (BTC)' }),
+    ethereumButton: page.getByRole('button', { name: 'Ethereum (ETH)' }),
+    cryptoQr: page.getByTestId('crypto-qr'),
     alternativeOptionsLink: page.getByRole('link', {
       name: 'Click here for other means of supporting 😏',
     }),
