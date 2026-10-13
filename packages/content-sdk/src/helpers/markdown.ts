@@ -44,6 +44,20 @@ const defaultSanitizeOptions: sanitizeHtml.IOptions = {
   },
 };
 
+/** Cells of a single Markdown table row (header row or body row). */
+type TableCells = Tokens.Table['header'];
+
+/**
+ * Renders a single row of table cells to HTML through the supplied renderer.
+ * Extracted so the per-cell iteration is independently testable.
+ */
+export function renderTableCells(
+  cells: TableCells,
+  renderer: Renderer,
+): string {
+  return cells.reduce((acc, cell) => acc + renderer.tablecell(cell), '');
+}
+
 /**
  * Renders raw Markdown into sanitized HTML, with custom responsive table wrapper.
  */
@@ -58,34 +72,21 @@ export function renderMarkdown(
   const renderer = new Renderer();
 
   renderer.table = (token: Tokens.Table): string => {
-    let header = '';
-    let cell = '';
+    const header = renderer.tablerow({
+      text: renderTableCells(token.header, renderer),
+    });
 
-    for (let j = 0; j < token.header.length; j++) {
-      cell += renderer.tablecell(token.header[j]);
-    }
-    header += renderer.tablerow({ text: cell });
+    const body = token.rows
+      .map((row) =>
+        renderer.tablerow({
+          text: row ? renderTableCells(row, renderer) : '',
+        }),
+      )
+      .join('');
 
-    let body = '';
-    for (let j = 0; j < token.rows.length; j++) {
-      const row = token.rows[j];
-      if (!row) {
-        body += renderer.tablerow({ text: '' });
-        continue;
-      }
+    const bodyHtml = body ? `<tbody>${body}</tbody>` : '';
 
-      cell = '';
-      for (let k = 0; k < row.length; k++) {
-        cell += renderer.tablecell(row[k]);
-      }
-      body += renderer.tablerow({ text: cell });
-    }
-
-    if (body) {
-      body = `<tbody>${body}</tbody>`;
-    }
-
-    return `<div class="table-container">\n<table>\n<thead>\n${header}\n</thead>\n${body}\n</table></div>`;
+    return `<div class="table-container">\n<table>\n<thead>\n${header}\n</thead>\n${bodyHtml}\n</table></div>`;
   };
 
   const html = (
