@@ -1,4 +1,9 @@
 import {
+  faBitcoin,
+  faEthereum,
+  faPaypal,
+} from '@fortawesome/free-brands-svg-icons';
+import {
   faArrowUp,
   faArrowUpRightFromSquare,
   faBars,
@@ -47,6 +52,7 @@ import {
 const iconMap = {
   alertTriangle: faTriangleExclamation,
   arrowUp: faArrowUp,
+  bitcoin: faBitcoin,
   brain: faBrain,
   bug: faBug,
   check: faCheck,
@@ -60,6 +66,7 @@ const iconMap = {
   coins: faCoins,
   colorPicker: faEyeDropper,
   commentDots: faCommentDots,
+  ethereum: faEthereum,
   failed: faCircleExclamation,
   fire: faFire,
   handHoldingDollar: faHandHoldingDollar,
@@ -72,6 +79,7 @@ const iconMap = {
   menu: faBars,
   moon: faMoon,
   mugHot: faMugHot,
+  paypal: faPaypal,
   play: faPlayCircle,
   rotate: faRotateRight,
   search: faMagnifyingGlass,
