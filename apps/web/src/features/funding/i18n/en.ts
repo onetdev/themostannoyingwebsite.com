@@ -5,13 +5,76 @@ export default {
   moneyUsageHeading: 'What happens with the money?',
   moneyUsageDescription:
     "Your support helps compensate the time and effort I put into development, and it also contributes to covering infrastructure and tool costs (such as hosting, services, and development tools). Donations simply help keep the project alive and sustainable. Let's put money into the jar!",
+  faq: {
+    heading: 'Frequently unasked questions',
+    items: {
+      balance: {
+        question: 'Why is the balance negative?',
+        answer:
+          'Because the project costs money and donations are, statistically, a rounding error. The red number is the most honest thing on this page.',
+      },
+      money: {
+        question: 'Where does the money actually go?',
+      },
+      sponsors: {
+        question: 'Who is behind this?',
+      },
+      rights: {
+        question: 'What do I get for donating?',
+        answer:
+          'Warm feelings, a spot on a leaderboard populated by fictional organs, and absolutely no legally binding rights, services, or special access.',
+      },
+      donate: {
+        question: 'How do I donate?',
+        answer:
+          'Coffee, PayPal, or crypto — the cards above have you covered. Any amount is appreciated; zero is, historically, the most popular amount.',
+      },
+    },
+  },
   topSupporters: 'Top supporters',
   topSupportersDescription:
     'Once this project actually starts getting donations, real people will appear here. So if you wish to be part of this list please contact me so that I can either manually upgrade this page or figure out some mechanism to do so.',
-  topSupporterKidney: '🥇 Kidney',
-  topSupporterLiver: '🥈 Liver',
-  topSupporterHeart: '🥉 Heart',
+  topSupporterKidney: 'Kidney',
+  topSupporterLiver: 'Liver',
+  topSupporterHeart: 'Heart',
+  stats: {
+    items: {
+      moneyBurnt: 'Money burnt',
+      coffeesConsumed: 'Coffees consumed',
+      bugsShippedAsFeatures: 'Bugs shipped as features',
+      kebabBudgetRemaining: 'Kebab budget left',
+      sanityRemaining: 'Sanity left',
+    },
+  },
+  impactStats: {
+    heading: 'Impact in numbers',
+    description:
+      'A completely made-up look at what your money (and lack thereof) has achieved. Every number below comes straight from an imaginary accountant.',
+    monthly: {
+      title: 'Support received vs. running costs',
+      description:
+        'The last six months. Donations sit on the line; costs sink below it. Watch the hole get deeper.',
+    },
+    cumulative: {
+      title: 'Cumulative damage',
+      description:
+        'Everything the project has cost so far, stacked into one ever-growing pit.',
+    },
+    series: {
+      donations: 'Support received',
+      expenses: 'Running costs',
+      cumulativeExpenses: 'Cumulative running costs',
+    },
+    trend: {
+      increased: 'increased',
+      decreased: 'decreased',
+      stagnant: 'unchanged',
+    },
+  },
   totalSupportReceived: 'Total Support Received',
+  balanceEyebrow: 'Current balance',
+  balanceCaption:
+    'Also known as the hole. It gets deeper every month — you are welcome to try to slow it down.',
   classicMethods: 'Classic methods',
   buyMeACoffee: 'Buy Me A Coffee',
   payPal: 'PayPal',

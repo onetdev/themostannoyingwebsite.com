@@ -13,6 +13,7 @@ import { useEffect, useRef } from 'react';
 import { emit } from '@/core/events/event-bus';
 import { useAppConfigContext } from '@/core/react';
 import { MAZE_24 } from './data';
+import { forEachCell } from './grid';
 import { texturedFragment, texturedVertex } from './shaders';
 import { getTextures } from './textures';
 
@@ -196,28 +197,26 @@ export function MazeScreensaver() {
       camera.rotation.y = DIRS[moveState.dir].yaw;
     }
 
-    MAZE_24.forEach((row, z) => {
-      row.forEach((cell, x) => {
-        const worldX = x - OFFSET_X + 0.5;
-        const worldZ = z - OFFSET_Z + 0.5;
+    forEachCell(MAZE_24, (cell, x, z) => {
+      const worldX = x - OFFSET_X + 0.5;
+      const worldZ = z - OFFSET_Z + 0.5;
 
-        // We only need floor and ceiling for empty places.
-        if (cell === 0) {
-          createFloorTile(worldX, worldZ);
-          createCeilingTile(worldX, worldZ);
-        } else if (cell === 1 || cell === 2) {
-          const program = wallProgram[cell];
-          const north = MAZE_24[z - 1]?.[x];
-          const south = MAZE_24[z + 1]?.[x];
-          const east = MAZE_24[z]?.[x + 1];
-          const west = MAZE_24[z]?.[x - 1];
+      // We only need floor and ceiling for empty places.
+      if (cell === 0) {
+        createFloorTile(worldX, worldZ);
+        createCeilingTile(worldX, worldZ);
+      } else if (cell === 1 || cell === 2) {
+        const program = wallProgram[cell];
+        const north = MAZE_24[z - 1]?.[x];
+        const south = MAZE_24[z + 1]?.[x];
+        const east = MAZE_24[z]?.[x + 1];
+        const west = MAZE_24[z]?.[x - 1];
 
-          if (north === 0) createWallTile(worldX, worldZ, 'N', program);
-          if (south === 0) createWallTile(worldX, worldZ, 'S', program);
-          if (east === 0) createWallTile(worldX, worldZ, 'E', program);
-          if (west === 0) createWallTile(worldX, worldZ, 'W', program);
-        }
-      });
+        if (north === 0) createWallTile(worldX, worldZ, 'N', program);
+        if (south === 0) createWallTile(worldX, worldZ, 'S', program);
+        if (east === 0) createWallTile(worldX, worldZ, 'E', program);
+        if (west === 0) createWallTile(worldX, worldZ, 'W', program);
+      }
     });
 
     function resize() {

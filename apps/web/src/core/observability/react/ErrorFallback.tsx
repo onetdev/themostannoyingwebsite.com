@@ -142,6 +142,7 @@ export function ErrorFallback({
   const resolvedRetryLabel = retryLabel ?? t('common.action.reset');
   const resolvedHomeLabel = homeLabel ?? t('common.action.backHome');
   const shouldShowHome = showHome ?? (size === 'lg' || size === 'full');
+  const showActions = Boolean(onRetry) || shouldShowHome;
 
   const renderIcon = () => {
     if (icon === false) {
@@ -184,7 +185,7 @@ export function ErrorFallback({
         </p>
       )}
 
-      {(onRetry || shouldShowHome) && (
+      {showActions && (
         <div
           className={`flex flex-wrap items-center justify-center ${config.actions}`}
         >
@@ -200,8 +201,13 @@ export function ErrorFallback({
           )}
 
           {shouldShowHome && (
-            <Button asChild variant="outline" size={config.buttonSize}>
-              <Link href={homeHref}>{resolvedHomeLabel}</Link>
+            <Button
+              render={<Link href={homeHref} />}
+              nativeButton={false}
+              variant="outline"
+              size={config.buttonSize}
+            >
+              {resolvedHomeLabel}
             </Button>
           )}
         </div>

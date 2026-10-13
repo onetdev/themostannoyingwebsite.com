@@ -41,7 +41,7 @@ const mockArticleItem = {
       },
     },
   },
-  tags: ['tech'],
+  categories: [{ id: 'tech', label: 'Tech' }],
   keywords: ['test'],
   translations: [
     { lang: 'de' as const, slug: 'test-artikel', title: 'Test Artikel' },
@@ -127,11 +127,11 @@ describe('ArticleService', () => {
   });
 
   describe('getArticleService', () => {
-    it('resolves ArticleService from inversify container', async () => {
+    it('resolves ArticleService from inversify container', () => {
       const container = new Container();
       container.bind(DI.ArticleService).toConstantValue(service);
 
-      const resolved = await getArticleService(container);
+      const resolved = getArticleService(container);
       expect(resolved).toBe(service);
     });
   });

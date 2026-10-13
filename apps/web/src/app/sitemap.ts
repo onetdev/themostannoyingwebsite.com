@@ -2,10 +2,12 @@ import type { ArticleListItem } from '@maw/content-sdk';
 import type { MetadataRoute } from 'next';
 import type { Languages } from 'next/dist/lib/metadata/types/alternative-urls-types';
 
-import './bootstrap/di';
 import { getDependencyContainer } from '@/core/di';
 import { absoluteUrl } from '@/core/seo/absolute-url';
-import { getArticleService } from '@/features/content/services';
+import {
+  getArticleService,
+  getAuthorService,
+} from '@/features/content/services';
 import i18nConfig from '@/root/i18n.config';
 import { getAppConfigService } from '@/services';
 
@@ -43,6 +45,56 @@ const commonPageMeta = (path: string): MetadataRoute.Sitemap[0] => {
 };
 
 /**
+ * Sitemap entry for a locale-independent author profile. Unlike the daily
+ * landing pages, profiles change infrequently.
+ */
+const authorPageMeta = (path: string): MetadataRoute.Sitemap[0] => {
+  return {
+    url: absoluteUrl(config.publicUrl, i18nConfig.defaultLocale, path),
+    changeFrequency: 'weekly',
+    alternates: {
+      languages: genLangAlternates(path),
+    },
+  };
+};
+
+/**
+ * Builds the `hreflang` alternates map for one article group, including
+ * `x-default`. Extracted so the per-locale iteration is independently testable.
+ */
+const buildGroupLanguages = (group: ArticleListItem[]): Languages<string> => {
+  const languages: Languages<string> = Object.fromEntries(
+    group.map((item) => [
+      item.lang,
+      absoluteUrl(config.publicUrl, item.lang, `articles/${item.slug}`),
+    ]),
+  );
+
+  const xDefault =
+    group.find((item) => item.lang === i18nConfig.defaultLocale) ?? group[0];
+  languages['x-default'] = absoluteUrl(
+    config.publicUrl,
+    xDefault.lang,
+    `articles/${xDefault.slug}`,
+  );
+
+  return languages;
+};
+
+/** Maps one article group to its per-locale sitemap entries. */
+const groupToSitemapEntries = (
+  group: ArticleListItem[],
+): MetadataRoute.Sitemap => {
+  const languages = buildGroupLanguages(group);
+
+  return group.map((item) => ({
+    url: absoluteUrl(config.publicUrl, item.lang, `articles/${item.slug}`),
+    lastModified: new Date(item.published_at),
+    alternates: { languages },
+  }));
+};
+
+/**
  * Groups localized articles by their canonical `article_group` so each logical
  * article is emitted once per locale with a complete `hreflang` alternates map
  * (including `x-default`), instead of isolated per-locale entries.
@@ -61,35 +113,22 @@ const mapArticlesToSitemapEntries = (
     groups.set(item.article_group, group);
   }
 
-  return [...groups.values()].flatMap((group) => {
-    const languages: Languages<string> = Object.fromEntries(
-      group.map((item) => [
-        item.lang,
-        absoluteUrl(config.publicUrl, item.lang, `articles/${item.slug}`),
-      ]),
-    );
-
-    const xDefault =
-      group.find((item) => item.lang === i18nConfig.defaultLocale) ?? group[0];
-    languages['x-default'] = absoluteUrl(
-      config.publicUrl,
-      xDefault.lang,
-      `articles/${xDefault.slug}`,
-    );
-
-    return group.map((item) => ({
-      url: absoluteUrl(config.publicUrl, item.lang, `articles/${item.slug}`),
-      lastModified: new Date(item.published_at),
-      alternates: { languages },
-    }));
-  });
+  return [...groups.values()].flatMap(groupToSitemapEntries);
 };
 
 async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const di = getDependencyContainer();
-  const service = await getArticleService(di);
+  const service = getArticleService(di);
   const articlesList = await service.listAll();
   const articles = mapArticlesToSitemapEntries(articlesList);
+
+  // Author slugs are locale-independent, so each author is emitted once with a
+  // complete `hreflang` alternates map (including `x-default`).
+  const authorService = getAuthorService(di);
+  const authorsList = await authorService.listAll();
+  const authors = authorsList.map((author) =>
+    authorPageMeta(`authors/${author.slug}`),
+  );
 
   const commonPages = [
     '',
@@ -110,7 +149,7 @@ async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
   const commonPagesEntries = commonPages.map((path) => commonPageMeta(path));
 
-  return [...commonPagesEntries, ...articles];
+  return [...commonPagesEntries, ...articles, ...authors];
 }
 
 export default sitemap;

@@ -1,6 +1,7 @@
 import fs from 'node:fs';
 import { getLogger } from '@maw/logger';
 import { Command } from 'commander';
+import { resolveContentApiBaseUrl } from '@/core/content';
 import i18nConfig from '@/root/i18n.config';
 import {
   buildSupportedLanguages,
@@ -63,6 +64,7 @@ async function resolveLocales(): Promise<LanguageInfo[]> {
 
 async function main() {
   logger.info(`🔄 Generating supported locales into '${outputPath}'...`);
+  logger.info(`🌐 Content API backend: ${resolveContentApiBaseUrl()}`);
 
   const items = await resolveLocales();
 
@@ -76,7 +78,8 @@ async function main() {
 
 main().catch((error) => {
   logger.error(
-    'Failed to generate the supported locale list. The Content API must be reachable at build time. ' +
+    `Failed to generate the supported locale list from ${resolveContentApiBaseUrl()}. ` +
+      'The Content API must be reachable and serve a compatible schema at build time. ' +
       'Pass --allow-fallback or set ALLOW_LOCALES_FALLBACK=true to write the bundled English-only list instead.',
   );
   logger.error(error instanceof Error ? error.message : 'Unknown error');

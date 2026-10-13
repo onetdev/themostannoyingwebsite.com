@@ -16,13 +16,28 @@ function getUrlString(input: string | URL | Request): string {
 }
 
 describe('ContentApiClient', () => {
+  // The suite asserts against DEFAULT_BASE_URL, so an ambient
+  // NEXT_PUBLIC_CONTENT_API_URL (e.g. from a local .envrc) must not leak in.
+  // The env-resolution test sets its own value explicitly.
+  const originalBaseUrl = process.env.NEXT_PUBLIC_CONTENT_API_URL;
+
+  beforeEach(() => {
+    delete process.env.NEXT_PUBLIC_CONTENT_API_URL;
+  });
+
+  afterAll(() => {
+    if (originalBaseUrl !== undefined) {
+      process.env.NEXT_PUBLIC_CONTENT_API_URL = originalBaseUrl;
+    }
+  });
+
   it('instantiates with default options and resources', () => {
     const client = createContentClient();
     expect(client).toBeInstanceOf(ContentApiClient);
     expect(client.articles).toBeDefined();
     expect(client.authors).toBeDefined();
     expect(client.pages).toBeDefined();
-    expect(client.tags).toBeDefined();
+    expect(client.categories).toBeDefined();
     expect(client.images).toBeDefined();
     expect(client.health).toBeDefined();
     expect(client.search).toBeDefined();
@@ -79,7 +94,10 @@ describe('ContentApiClient', () => {
                       },
                     },
                   },
-                  tags: ['tech', 'fun'],
+                  categories: [
+                    { id: 'tech', label: 'Tech' },
+                    { id: 'fun', label: 'Fun' },
+                  ],
                   keywords: ['sample'],
                 },
               ],
@@ -101,7 +119,7 @@ describe('ContentApiClient', () => {
         limit: 10,
         offset: 0,
         is_featured: true,
-        tag: 'tech',
+        category: 'tech',
         q: 'sample',
       });
 
@@ -112,7 +130,7 @@ describe('ContentApiClient', () => {
       expect(capturedUrl).toContain('limit=10');
       expect(capturedUrl).toContain('offset=0');
       expect(capturedUrl).toContain('is_featured=true');
-      expect(capturedUrl).toContain('tag=tech');
+      expect(capturedUrl).toContain('category=tech');
       expect(capturedUrl).toContain('q=sample');
 
       expect(response.total).toBe(1);
@@ -157,7 +175,7 @@ describe('ContentApiClient', () => {
                   },
                 },
               },
-              tags: ['intro'],
+              categories: [{ id: 'intro', label: 'Intro' }],
               keywords: ['hello'],
               translations: [
                 {
@@ -347,8 +365,8 @@ describe('ContentApiClient', () => {
     });
   });
 
-  describe('tags resource', () => {
-    it('calls GET api/v1/tags', async () => {
+  describe('categories resource', () => {
+    it('calls GET api/v1/categories', async () => {
       let capturedUrl = '';
       const mockFetch = jest
         .fn<typeof fetch>()
@@ -361,7 +379,8 @@ describe('ContentApiClient', () => {
               offset: 0,
               items: [
                 {
-                  tag: 'funny',
+                  id: 'funny',
+                  label: 'Funny',
                   lang: 'en',
                   count: 12,
                 },
@@ -375,10 +394,10 @@ describe('ContentApiClient', () => {
         });
 
       const client = new ContentApiClient({ fetch: mockFetch });
-      const tags = await client.tags.list({ lang: 'en' });
+      const categories = await client.categories.list({ lang: 'en' });
 
-      expect(capturedUrl).toContain('/api/v1/tags?lang=en');
-      expect(tags.items[0].tag).toBe('funny');
+      expect(capturedUrl).toContain('/api/v1/categories?lang=en');
+      expect(categories.items[0].label).toBe('Funny');
     });
   });
 
@@ -507,13 +526,13 @@ describe('ContentApiClient', () => {
       await client.articles.list({
         limit: 10,
         offset: undefined,
-        tag: null as unknown as string,
+        category: null as unknown as string,
         q: { nested: 'val' } as unknown as string,
       });
 
       expect(capturedUrl).toContain('limit=10');
       expect(capturedUrl).not.toContain('offset');
-      expect(capturedUrl).not.toContain('tag');
+      expect(capturedUrl).not.toContain('category');
       expect(capturedUrl).toContain('q=%5Bobject+Object%5D');
     });
 
@@ -608,7 +627,7 @@ describe('ContentApiClient', () => {
                       },
                     },
                   },
-                  tags: [],
+                  categories: [],
                   keywords: [],
                 },
                 {
@@ -642,7 +661,7 @@ describe('ContentApiClient', () => {
                       },
                     },
                   },
-                  tags: [],
+                  categories: [],
                   keywords: [],
                 },
               ],
@@ -687,7 +706,7 @@ describe('ContentApiClient', () => {
                     },
                   },
                 },
-                tags: [],
+                categories: [],
                 keywords: [],
               },
             ],
@@ -799,6 +818,7 @@ describe('ContentApiClient', () => {
                   name: 'English',
                   native_name: 'English',
                   dir: 'ltr',
+                  flag_emoji: '🇬🇧',
                 },
               ],
             }),

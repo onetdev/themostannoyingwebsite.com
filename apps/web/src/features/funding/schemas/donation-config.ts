@@ -14,9 +14,6 @@ export const FundingConfigSchema = z.object({
     address: z.string(),
   }),
   alternativeOptionsUrl: z.string(),
-  costStartEpoch: z.number(),
-  costDailyAvgInEuro: z.number().min(0),
-  totalDonationInEuro: z.number(),
 });
 
 export type FundingConfig = z.infer<typeof FundingConfigSchema>;

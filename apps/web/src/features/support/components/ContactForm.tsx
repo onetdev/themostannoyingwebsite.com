@@ -79,19 +79,20 @@ export function ContactForm({ contactEmail, className }: ContactFormProps) {
       </Field>
 
       <Button
-        asChild
+        render={
+          <a
+            href={isValid ? mailtoUrl : undefined}
+            target="_blank"
+            rel="noopener noreferrer"
+            onClick={(e) => !isValid && e.preventDefault()}
+          />
+        }
+        nativeButton={false}
         className="mt-2"
         variant={isValid ? 'default' : 'outline'}
         disabled={!isValid}
       >
-        <a
-          href={isValid ? mailtoUrl : undefined}
-          target="_blank"
-          rel="noopener noreferrer"
-          onClick={(e) => !isValid && e.preventDefault()}
-        >
-          {t('common.app.contactForm.send')}
-        </a>
+        {t('common.app.contactForm.send')}
       </Button>
     </div>
   );

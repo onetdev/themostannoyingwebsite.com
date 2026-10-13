@@ -19,20 +19,40 @@ export function useWheelOfFortune() {
   const [state, setState] = useState<AnimatedWheelState>('ready');
   const [prize, setPrize] = useState<(Item & { index: number }) | undefined>();
 
-  const prizeWithWeight = useMemo(() => buildPrizePool(prizes), [prizes]);
+  // The wheel can only offer real prizes when the Content API pool actually
+  // returned usable segments. An empty (or malformed) pool would otherwise fill
+  // every slice with the `'~'` sentinel and render a meaningless wheel, so
+  // consumers should show an error view instead.
+  const usablePrizes = useMemo(
+    () =>
+      prizes.filter(
+        (prize) => prize.weight > 0 && prize.label.trim().length > 0,
+      ),
+    [prizes],
+  );
+
+  const hasPrizes = usablePrizes.length > 0;
+
+  const prizeWithWeight = useMemo(
+    () => buildPrizePool(usablePrizes),
+    [usablePrizes],
+  );
 
   const items = useMemo(
-    () => getSlicesItems(prizeWithWeight, hueStart, hueStart + 120, 10),
-    [prizeWithWeight],
+    () =>
+      hasPrizes
+        ? getSlicesItems(prizeWithWeight, hueStart, hueStart + 120, 10)
+        : [],
+    [hasPrizes, prizeWithWeight],
   );
 
   const spin = useCallback(() => {
-    if (state !== 'ready') return;
+    if (!hasPrizes || state !== 'ready' || items.length === 0) return;
 
     const resultIndex = randomInt(0, items.length - 1);
     setState('spinning');
     setPrize({ index: resultIndex, ...items[resultIndex] });
-  }, [items, state]);
+  }, [hasPrizes, items, state]);
 
   const complete = useCallback(() => {
     if (state !== 'spinning') return;
@@ -52,6 +72,7 @@ export function useWheelOfFortune() {
     setState,
     spin,
     complete,
+    isUnavailable: !hasPrizes,
   };
 }
 

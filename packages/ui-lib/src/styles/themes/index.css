@@ -22,6 +22,7 @@
 @import "../base/typography.css";
 @import "../base/animations.css";
 @import "../base/utilities.css";
+@import "../base/effects.css";
 
 @reference "tailwindcss";
 

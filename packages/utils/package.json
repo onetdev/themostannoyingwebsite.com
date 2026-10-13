@@ -7,7 +7,6 @@
     "./array": "./src/array.ts",
     "./browser": "./src/browser.ts",
     "./color": "./src/color.ts",
-    "./flatten": "./src/flatten.ts",
     "./formatter": "./src/formatter.ts",
     "./math": "./src/math.ts",
     "./network": "./src/network.ts",
@@ -24,16 +23,12 @@
     "lint:fix": "biome check --write .",
     "test": "jest"
   },
-  "dependencies": {
-    "sanitize-html": "catalog:"
-  },
   "devDependencies": {
     "@biomejs/biome": "catalog:",
     "@maw/config-jest": "workspace:*",
     "@maw/config-ts": "workspace:*",
     "@types/jest": "catalog:",
     "@types/node": "catalog:",
-    "@types/sanitize-html": "catalog:",
     "jest": "catalog:",
     "jest-environment-jsdom": "catalog:",
     "ts-jest": "catalog:",

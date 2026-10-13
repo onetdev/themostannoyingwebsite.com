@@ -7,6 +7,7 @@ import {
   Separator,
 } from '@maw/ui-lib';
 import { getTranslations } from 'next-intl/server';
+import { ShareButton } from '@/features/share/components';
 import { getAppConfigService } from '@/services';
 import { ContactForm } from './ContactForm';
 
@@ -16,7 +17,10 @@ export async function ContactPage() {
 
   return (
     <>
-      <PageHeadline className="mx-auto w-full max-w-screen-lg">
+      <PageHeadline
+        className="mx-auto w-full max-w-screen-lg"
+        actions={<ShareButton />}
+      >
         {t('common.navigation.contact')}
       </PageHeadline>
 

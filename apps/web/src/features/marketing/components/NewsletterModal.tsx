@@ -12,7 +12,6 @@ import {
   FieldError,
   Input,
   Label,
-  Separator,
 } from '@maw/ui-lib';
 import { randomNumber } from '@maw/utils/random';
 import { useTranslations } from 'next-intl';
@@ -55,7 +54,7 @@ export function NewsletterModal({
 
   const renderActions = () => {
     const buttons = [
-      <Button key="cancel" variant="secondary" onClick={onDismiss}>
+      <Button key="cancel" variant="outline" onClick={onDismiss}>
         {actions.cancel}
       </Button>,
       <Button key="confirm" onClick={randomConfirmation} disabled={!isValid}>
@@ -81,12 +80,9 @@ export function NewsletterModal({
       <DialogContent>
         <DialogHeader>
           <DialogTitle>{t('title')}</DialogTitle>
-          <DialogDescription className="sr-only">
-            {t('description')}
-          </DialogDescription>
+          <DialogDescription>{t('description')}</DialogDescription>
         </DialogHeader>
 
-        <Separator />
         <form
           className="max-w-screen-sm"
           method="post"
@@ -95,7 +91,6 @@ export function NewsletterModal({
           {actions.text && <p className="mb-4">{actions.text}</p>}
           {!actions.text && (
             <div className="flex flex-col gap-4">
-              <p>{t('description')}</p>
               <div>
                 <Input
                   placeholder={t('placeholder')}
@@ -135,9 +130,7 @@ export function NewsletterModal({
           )}
         </form>
 
-        <DialogFooter className="border-t border-border pt-5">
-          <div className="flex w-full gap-3">{renderActions()}</div>
-        </DialogFooter>
+        <DialogFooter>{renderActions()}</DialogFooter>
       </DialogContent>
     </Dialog>
   );

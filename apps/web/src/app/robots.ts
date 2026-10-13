@@ -1,6 +1,5 @@
 import type { MetadataRoute } from 'next';
 
-import './bootstrap/di';
 import { getAppConfigService } from '@/services';
 
 export default function robots(): MetadataRoute.Robots {

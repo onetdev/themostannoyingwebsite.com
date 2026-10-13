@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import { getTranslations } from 'next-intl/server';
 import { NOINDEX_ROBOTS } from '@/core/seo/robots';
 import { MyProfilePage } from '@/features/user/components';
-import { PageLayout } from '../../_components/PageLayout';
+import { NarrowPageLayout } from '../../_components/NarrowPageLayout';
 
 export { generateStaticParams } from '@/core/i18n/routing';
 
@@ -24,14 +24,13 @@ export async function generateMetadata({
 
 export default async function Page() {
   return (
-    <PageLayout
-      autoPadding={false}
+    <NarrowPageLayout
       route="user.profile"
       navigationHighlightRoute="user.login"
-      className="mx-auto max-w-md px-5 py-0 md:py-14"
+      maxWidthClassName="max-w-md"
       role="main"
     >
       <MyProfilePage />
-    </PageLayout>
+    </NarrowPageLayout>
   );
 }

@@ -1,6 +1,12 @@
 'use client';
 
-import { Card, CardContent, CardHeader, CardTitle } from '@maw/ui-lib';
+import {
+  Card,
+  CardContent,
+  CardHeader,
+  CardTitle,
+  Textarea,
+} from '@maw/ui-lib';
 
 interface StoreInspectorProps {
   title: string;
@@ -14,9 +20,9 @@ export function StoreInspector({ title, data }: StoreInspectorProps) {
         <CardTitle className="text-lg font-mono">{title}</CardTitle>
       </CardHeader>
       <CardContent>
-        <textarea
+        <Textarea
           readOnly
-          className="w-full min-h-[300px] p-4 rounded-md border bg-muted font-mono text-xs resize-none border-border"
+          className="min-h-[300px] resize-none bg-muted p-4 font-mono text-xs"
           value={JSON.stringify(data, null, 2)}
         />
       </CardContent>

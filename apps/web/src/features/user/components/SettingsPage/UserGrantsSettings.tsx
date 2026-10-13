@@ -5,6 +5,8 @@ import {
   CardContent,
   CardHeader,
   CardTitle,
+  FieldDescription,
+  FieldGroup,
   Checkbox as FormCheckbox,
 } from '@maw/ui-lib';
 import { useTranslations } from 'next-intl';
@@ -20,30 +22,40 @@ export function UserGrantsSettings() {
       <CardHeader>
         <CardTitle>{t('user.userGrants.title')}</CardTitle>
       </CardHeader>
-      <CardContent className="flex flex-col gap-1">
-        <SettingsField label={t('user.userGrants.essentialCookies')}>
-          <FormCheckbox
-            name="essential_cookies"
-            checked={grant.cookies.essential}
-            disabled
-          />
-        </SettingsField>
-        <small className="text-muted-foreground py-5">
+      <CardContent className="flex flex-col gap-3">
+        <FieldGroup className="gap-3">
+          <SettingsField label={t('user.userGrants.essentialCookies')} disabled>
+            {(id) => (
+              <FormCheckbox
+                id={id}
+                name="essential_cookies"
+                checked={grant.cookies.essential}
+                disabled
+              />
+            )}
+          </SettingsField>
+        </FieldGroup>
+        <FieldDescription className="py-2">
           <i>{t('user.userGrants.permissionDisclaimer')}</i>
-        </small>
-        <SettingsField
-          label={t('user.userGrants.notificationPermission')}
-          reverse
-        >
-          {grant.permission.notification
-            ? t(`common.state.${grant.permission.notification}`)
-            : t('common.state.notSet')}
-        </SettingsField>
-        <SettingsField label={t('user.userGrants.locationPermission')} reverse>
-          {grant.permission.location
-            ? t(`common.state.${grant.permission.location}`)
-            : t('common.state.notSet')}
-        </SettingsField>
+        </FieldDescription>
+        <FieldGroup className="gap-3">
+          <SettingsField
+            label={t('user.userGrants.notificationPermission')}
+            value={
+              grant.permission.notification
+                ? t(`common.state.${grant.permission.notification}`)
+                : t('common.state.notSet')
+            }
+          />
+          <SettingsField
+            label={t('user.userGrants.locationPermission')}
+            value={
+              grant.permission.location
+                ? t(`common.state.${grant.permission.location}`)
+                : t('common.state.notSet')
+            }
+          />
+        </FieldGroup>
       </CardContent>
     </Card>
   );

@@ -7,8 +7,9 @@ import {
   CardTitle,
   Field,
   FieldContent,
+  FieldGroup,
   FieldLabel,
-  Checkbox as FormCheckbox,
+  Switch as FormSwitch,
   Select,
   SelectContent,
   SelectItem,
@@ -45,7 +46,14 @@ export function UserPreferences() {
             {t('common.language.label')}
           </FieldLabel>
           <FieldContent>
-            <Select value={locale} onValueChange={onLanguageChange}>
+            <Select
+              items={languages.map((lang) => ({
+                value: lang.locale,
+                label: `${lang.label}\u00A0${lang.flag}`,
+              }))}
+              value={locale}
+              onValueChange={onLanguageChange}
+            >
               <SelectTrigger className="w-full">
                 <SelectValue />
               </SelectTrigger>
@@ -62,41 +70,56 @@ export function UserPreferences() {
 
         <Separator className="mb-2" />
 
-        <SettingsField label={t('user.userPreferences.darkMode')}>
-          <FormCheckbox
-            name="dark_mode"
-            checked={resolvedTheme === 'dark'}
-            onCheckedChange={setDarkMode}
-          />
-        </SettingsField>
-        <SettingsField
-          label={t('user.userPreferences.reducedMotion')}
-          info={t('user.userPreferences.reducedMotionHelp')}
-        >
-          <FormCheckbox
-            name="reduced_motion"
-            disabled={true}
-            checked={runtime.systemReducedMotion}
-          />
-        </SettingsField>
-        <SettingsField label={t('user.userPreferences.enableSound')}>
-          <FormCheckbox
-            name="enable_sound"
-            checked={preference.enableSound}
-            onCheckedChange={(value) =>
-              preference.setEnableSound(value !== false)
-            }
-          />
-        </SettingsField>
-        <SettingsField label={t('user.userPreferences.adultFilter')}>
-          <FormCheckbox
-            name="adult_filter"
-            checked={preference.adultFilter}
-            onCheckedChange={(value) =>
-              preference.setAdultFilter(value === true)
-            }
-          />
-        </SettingsField>
+        <FieldGroup className="gap-3">
+          <SettingsField label={t('user.userPreferences.darkMode')}>
+            {(id) => (
+              <FormSwitch
+                id={id}
+                name="dark_mode"
+                checked={resolvedTheme === 'dark'}
+                onCheckedChange={setDarkMode}
+              />
+            )}
+          </SettingsField>
+          <SettingsField
+            label={t('user.userPreferences.reducedMotion')}
+            info={t('user.userPreferences.reducedMotionHelp')}
+            disabled
+          >
+            {(id) => (
+              <FormSwitch
+                id={id}
+                name="reduced_motion"
+                disabled={true}
+                checked={runtime.systemReducedMotion}
+              />
+            )}
+          </SettingsField>
+          <SettingsField label={t('user.userPreferences.enableSound')}>
+            {(id) => (
+              <FormSwitch
+                id={id}
+                name="enable_sound"
+                checked={preference.enableSound}
+                onCheckedChange={(value) =>
+                  preference.setEnableSound(value !== false)
+                }
+              />
+            )}
+          </SettingsField>
+          <SettingsField label={t('user.userPreferences.adultFilter')}>
+            {(id) => (
+              <FormSwitch
+                id={id}
+                name="adult_filter"
+                checked={preference.adultFilter}
+                onCheckedChange={(value) =>
+                  preference.setAdultFilter(value === true)
+                }
+              />
+            )}
+          </SettingsField>
+        </FieldGroup>
       </CardContent>
     </Card>
   );

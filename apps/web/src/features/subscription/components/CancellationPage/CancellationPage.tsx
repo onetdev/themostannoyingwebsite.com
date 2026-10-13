@@ -1,10 +1,11 @@
 'use client';
 
-import { PageHeadline } from '@maw/ui-lib';
+import { Card, PageHeadline } from '@maw/ui-lib';
 import { useTranslations } from 'next-intl';
 import { useCallback, useState } from 'react';
 import { FormProvider } from 'react-hook-form';
 import { useNavigationProvider } from '@/core/react';
+import { ShareButton } from '@/features/share/components';
 import { useCancellationForm } from '../../hooks';
 import { ConfirmationStep } from './steps/ConfirmationStep';
 import { EmailStep } from './steps/EmailStep';
@@ -91,9 +92,13 @@ export function CancellationPage() {
 
   return (
     <FormProvider {...methods}>
-      <div className="mx-auto mt-10 w-full max-w-2xl border rounded-xl border-border p-6 print:p-0 print:border-0 print:max-w-full print:m-0">
-        <PageHeadline className="print:hidden">{t('title')}</PageHeadline>
-        {renderStep()}
+      <div className="mx-auto mt-10 w-full max-w-2xl print:m-0 print:max-w-full">
+        <PageHeadline className="print:hidden" actions={<ShareButton />}>
+          {t('title')}
+        </PageHeadline>
+        <Card className="p-6 print:border-0 print:bg-transparent print:p-0 print:shadow-none">
+          {renderStep()}
+        </Card>
       </div>
     </FormProvider>
   );

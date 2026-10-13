@@ -1,7 +1,7 @@
 # ADR 22: API-Served Translations with English-Only Bundled Reference
 
 ## Status
-Accepted. Partially superseded by ADR 25 (bundled variant fallbacks removed; variant pools are now API-only and SSR-hydrated).
+Accepted. Supersedes [ADR 7](0007-hybrid-i18n-structure.md) (multi-locale bundling and the variants policy moved to API-served translations). Partially superseded by [ADR 25](0025-api-only-variant-pools-ssr-hydration.md) (bundled variant fallbacks removed; variant pools are now API-only and SSR-hydrated).
 
 ## Context
 The web app supports 15 locales and previously bundled a complete `next-intl` message tree for every locale (`src/i18n/messages/{locale}/` plus `src/features/*/i18n/{locale}`), including large "variant" arrays of fake names, comments, testimonials, and quiz data.

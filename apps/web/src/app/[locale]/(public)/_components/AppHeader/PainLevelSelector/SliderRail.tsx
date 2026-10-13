@@ -29,6 +29,8 @@ export function SliderRail({
         x: Math.random() ** 0.5 * 100,
         size: Math.random() * 3 + 1,
         duration: Math.random() * 2 + 1.5,
+        // Emit both upwards and downwards from the rail
+        drift: (Math.random() < 0.5 ? -1 : 1) * (30 + Math.random() * 20),
         color:
           FIREFLY_PARTICLE_COLORS[
             Math.floor(Math.random() * FIREFLY_PARTICLE_COLORS.length)
@@ -49,7 +51,7 @@ export function SliderRail({
 
   return (
     <div className="relative w-full rtl:-scale-x-100">
-      <div className="pointer-events-none absolute inset-x-0 bottom-0 h-0 overflow-visible">
+      <div className="pointer-events-none absolute inset-x-0 top-1/2 h-0 overflow-visible">
         {particles.map((particle) => (
           <FireflyParticle
             key={`particle-${particle.createdAt}`}

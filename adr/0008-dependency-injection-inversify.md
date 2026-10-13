@@ -3,6 +3,15 @@
 ## Status
 Accepted
 
+> **Update (2026-10-10):** The registry moved out of `src/app/bootstrap/`. Composition
+> now lives in `src/core/di/`: `container.base.ts` (client-safe bindings shared by both
+> environments), `container.server.ts` (the base plus services that `import 'server-only'`),
+> and the lazy singletons `index.ts` / `client.ts`. The client and server containers are
+> intentionally distinct — the server-only services must never enter the browser bundle.
+> Symbols are declared next to their owner (`DI` in `features/*/types.ts`, cross-cutting
+> infra in `core/di/symbols.ts`); the former aggregate `Symbols` object was removed.
+> The `useService(...)` hook referenced below is `useInjection(...)` from `core/di/react`.
+
 ## Context
 The application contains complex business logic that needs to be testable and decoupled from React's rendering lifecycle. We need a way to manage service instances, handle shared state, and allow for easy mocking in unit tests.
 

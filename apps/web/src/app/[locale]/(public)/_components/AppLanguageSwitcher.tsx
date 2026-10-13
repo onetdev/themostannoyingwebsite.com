@@ -39,7 +39,10 @@ export function AppLanguageSwitcher({
             currentLanguage?.label}
         </SelectValue>
       </SelectTrigger>
-      <SelectContent align="end">
+      <SelectContent
+        align="end"
+        className={displayOnlyFlag ? 'w-56' : undefined}
+      >
         {languages.map((lang) => (
           <SelectItem key={lang.locale} value={lang.locale}>
             <span className="mr-2">{lang.flag}</span>

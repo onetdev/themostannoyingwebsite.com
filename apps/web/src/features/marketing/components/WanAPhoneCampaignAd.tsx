@@ -7,7 +7,7 @@ import { useTranslations } from 'next-intl';
 import { Link } from '@/core/i18n/navigation';
 import { useAppConfigContext, useLogger } from '@/core/react';
 import { useLocaleResource } from '@/hooks';
-import { usePainPreferencesStore, useRuntimeStore } from '@/stores';
+import { usePainPreferencesStore } from '@/stores';
 
 export type WanAPhoneCampaignAdProps = {
   size?: number;
@@ -21,7 +21,6 @@ export function WanAPhoneCampaignAd({ size = 1024 }: WanAPhoneCampaignAdProps) {
   const enabled = usePainPreferencesStore(
     (state) => state.flags['promotions.oneByOne'],
   );
-  const reducedMotion = useRuntimeStore((state) => state.systemReducedMotion);
   const resolvedAssetUri = resolve(config.marketing.assets.wanAPhoneAd);
 
   if (!resolvedAssetUri) {
@@ -41,8 +40,7 @@ export function WanAPhoneCampaignAd({ size = 1024 }: WanAPhoneCampaignAdProps) {
               width={size}
               height={size}
               alt={t('marketing.wanPhone.title')}
-              data-reduced-motion={reducedMotion ? 'true' : 'false'}
-              className="data-[reduced-motion=false]:animate-gift-callout h-auto w-full object-cover"
+              className="animate-gift-callout motion-reduce:animate-none h-auto w-full object-cover"
             />
           </Link>
         </FadeIn>

@@ -27,7 +27,7 @@ All types of contributions are encouraged and valued. See the [Table of Contents
 ## Code of Conduct
 
 This project and everyone participating in it is governed by the
-[The Most Annoying Website Code of Conduct](https://github.com/onetdev/themostannoyingwebsite.com/blob/master/CODE_OF_CONDUCT.md).
+[The Most Annoying Website Code of Conduct](https://github.com/onetdev/themostannoyingwebsite.com/blob/main/CODE_OF_CONDUCT.md).
 By participating, you are expected to uphold this code. Please report unacceptable behavior
 to <info@themostannoyingwebsite.com>.
 
@@ -120,7 +120,7 @@ Enhancement suggestions are tracked as [GitHub issues](https://github.com/onetde
 
 Things you'll need to work with the project effectively:
 - Aim to follow [git-flow](https://www.atlassian.com/git/tutorials/comparing-workflows/gitflow-workflow) during branching.
-- Node.js, recommended version number can be found in `.tool-versions`. You can use mise, nvm, or simple node installs too.
+- Node.js; the recommended version is pinned in `mise.toml` (mirrored in `.tool-versions`). You can use mise, nvm, or a plain Node install too.
 - The latest Visual Studio Code, it's also recommended to install all the recommended packages too.
 
 1. Clone the repo on develop branch `git clone -b develop https://github.com/onetdev/themostannoyingwebsite.com.git`

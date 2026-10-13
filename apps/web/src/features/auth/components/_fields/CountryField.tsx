@@ -58,7 +58,11 @@ export function CountryField({
           control={control}
           name={fieldName}
           render={({ field, fieldState }) => (
-            <Select onValueChange={field.onChange} value={field.value}>
+            <Select
+              items={countryOptions}
+              onValueChange={field.onChange}
+              value={field.value}
+            >
               <SelectTrigger
                 className="w-full"
                 id={fieldName}

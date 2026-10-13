@@ -149,7 +149,11 @@ export function PhoneNumberField({
             control={control}
             name={countryCodeFieldName}
             render={({ field, fieldState: { invalid } }) => (
-              <Select onValueChange={field.onChange} value={field.value}>
+              <Select
+                items={phoneCountryOptions}
+                onValueChange={field.onChange}
+                value={field.value}
+              >
                 <SelectTrigger
                   className="w-1/4"
                   aria-label={t('common.userField.phoneNumberCountryCode')}

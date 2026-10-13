@@ -17,7 +17,7 @@ import {
   isNavigationItemActive,
   type NavItem,
   PERSONAL_NAVIGATION_LINKS,
-  SITE_NAVIGATION_LINKS,
+  SITE_NAVIGATION_FLAT_LINKS,
 } from '@/app/navigation';
 import { Link } from '@/core/react';
 import type { RouteAlias } from '@/schemas';
@@ -37,7 +37,7 @@ export function AppNavigationMobile({ activeItem }: AppNavigationMobileProps) {
       return [
         {
           titleKey: 'common.navigation.home',
-          items: SITE_NAVIGATION_LINKS,
+          items: SITE_NAVIGATION_FLAT_LINKS,
         },
         {
           titleKey: 'common.navigation.personal',

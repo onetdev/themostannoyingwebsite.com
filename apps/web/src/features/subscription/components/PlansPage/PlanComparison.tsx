@@ -54,9 +54,9 @@ export function PlanComparison({ className, features, plans }: PlansPageProps) {
               return (
                 <TableCell key={plan.key} className="px-4 py-4 text-center">
                   {isSupported ? (
-                    <Icon icon="check" className="text-success mx-auto" />
+                    <Icon icon="checkCircle" className="text-success mx-auto" />
                   ) : (
-                    <Icon icon="close" className="text-muted mx-auto" />
+                    <Icon icon="close" className="text-error mx-auto" />
                   )}
                 </TableCell>
               );

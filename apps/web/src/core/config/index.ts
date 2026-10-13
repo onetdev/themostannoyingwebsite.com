@@ -77,20 +77,6 @@ const config: AppConfig = {
       address: 'bc1qe0mr42jg6lwhhcxkdkj7fpjdwn6g0fh4pmva3t',
     },
     alternativeOptionsUrl: 'http://onet.dev/donate',
-
-    // Early rough estimate for the project start — we'll use this to calculate
-    // costs since the inception of development.
-    costStartEpoch: 1630469166,
-
-    // Calculation: I estimate that I worked on this project for ~16 hours each
-    // month, even though the sessions happened in occasional longer bursts
-    // rather than being evenly spread out. My Vercel plan is still on "Hobby".
-    // Using an hourly rate of 45 EUR/hour, the math is: 16 × 45 / 30 = 24.
-    costDailyAvgInEuro: 24,
-
-    // Once I get ANY donation, I'll figure out a way to track this dynamically.
-    // Not a priority at the moment 😅
-    totalDonationInEuro: 0,
   },
   disruptions: {
     assets: {

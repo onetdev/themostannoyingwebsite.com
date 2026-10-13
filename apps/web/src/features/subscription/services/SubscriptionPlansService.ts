@@ -18,6 +18,8 @@ export class SubscriptionPlansService implements ISubscriptionPlansService {
   }
 }
 
-export function getSubscriptionPlansService(container: Container) {
+export function getSubscriptionPlansService(
+  container: Container,
+): ISubscriptionPlansService {
   return container.get<ISubscriptionPlansService>(DI.SubscriptionPlansService);
 }

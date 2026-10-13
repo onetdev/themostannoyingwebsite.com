@@ -36,14 +36,16 @@ export function ResetAchievements() {
 
   return (
     <Dialog open={isOpen} onOpenChange={setIsOpen}>
-      <DialogTrigger asChild>
-        <Button
-          variant="outline"
-          size="sm"
-          className="border-destructive text-destructive hover:bg-destructive hover:text-destructive-foreground"
-        >
-          {t('achievements.reset.button')}
-        </Button>
+      <DialogTrigger
+        render={
+          <Button
+            variant="outline"
+            size="sm"
+            className="border-destructive text-destructive hover:bg-destructive hover:text-destructive-foreground"
+          />
+        }
+      >
+        {t('achievements.reset.button')}
       </DialogTrigger>
       <DialogContent>
         <DialogHeader>
@@ -53,13 +55,15 @@ export function ResetAchievements() {
           </DialogDescription>
         </DialogHeader>
         <DialogFooter>
-          <DialogClose asChild>
-            <Button
-              variant="outline"
-              className="whitespace-break-spaces basis-1 h-auto grow"
-            >
-              {t('achievements.reset.cancelAction')}
-            </Button>
+          <DialogClose
+            render={
+              <Button
+                variant="outline"
+                className="whitespace-break-spaces basis-1 h-auto grow"
+              />
+            }
+          >
+            {t('achievements.reset.cancelAction')}
           </DialogClose>
           <Button
             variant="destructive"

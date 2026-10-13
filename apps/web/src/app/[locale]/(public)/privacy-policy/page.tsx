@@ -1,11 +1,11 @@
 import { getLogger } from '@maw/logger';
-import { PageHeadline } from '@maw/ui-lib';
-import styles from '@maw/ui-lib/content.module.css';
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import { getTranslations } from 'next-intl/server';
 import { loadLocaleMdx } from '@/core/i18n/load-locale-mdx';
 import { WebPageStructuredData } from '@/core/seo';
+import { ShareButton } from '@/features/share/components';
+import { DocumentPage } from '../_components/DocumentPage';
 import { PageLayout } from '../_components/PageLayout';
 import { TranslationDisclaimer } from '../_components/TranslationDisclaimer';
 
@@ -47,16 +47,16 @@ export default async function Page({ params }: NextPageProps) {
           path="privacy-policy"
           namespace="metadata.privacyPolicy"
         />
-        <PageHeadline className="mx-auto w-full max-w-screen-md">
-          {t('common.navigation.privacyPolicy')}
-        </PageHeadline>
-        <div className={styles.content}>
+        <DocumentPage
+          title={t('common.navigation.privacyPolicy')}
+          headerActions={<ShareButton />}
+        >
           <TranslationDisclaimer
             currentLocale={locale}
             href="/privacy-policy"
           />
           <Content />
-        </div>
+        </DocumentPage>
       </PageLayout>
     );
   } catch (_err) {

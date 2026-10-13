@@ -28,7 +28,10 @@ export default async function Page() {
 
   return (
     <PageLayout route="search" role="main">
-      <ContentPoolsBoundary lang={locale} types={['top-searches']}>
+      <ContentPoolsBoundary
+        lang={locale}
+        types={['top-searches', 'loading-messages']}
+      >
         <SearchPage />
       </ContentPoolsBoundary>
     </PageLayout>

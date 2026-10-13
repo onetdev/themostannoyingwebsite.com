@@ -163,4 +163,43 @@ test.describe('Achievements', () => {
     await expect(toast).toBeVisible({ timeout: 20000 });
     await expect(toast).toContainText('Optimistic Gambler');
   });
+
+  test('filters achievements by completion state', async ({ page }) => {
+    await setAchievements(page, {
+      achievements: {
+        'first-visit': {
+          id: 'first-visit',
+          achieved: true,
+          progress: 1,
+        },
+        'copy-paste-criminal': {
+          id: 'copy-paste-criminal',
+          achieved: false,
+          progress: 2,
+        },
+      },
+    });
+
+    const achievementsPage = getAchievementsPage(page);
+    await achievementsPage.goto();
+
+    const cards = achievementsPage.achievementCard;
+    await expect(cards.first()).toBeVisible();
+    const total = await cards.count();
+
+    await achievementsPage.achievementFilter('completed').click();
+    await expect(cards).toHaveCount(1);
+    await expect(cards.first().locator('svg[data-icon="check"]')).toBeVisible();
+
+    await achievementsPage.achievementFilter('inProgress').click();
+    await expect(cards).toHaveCount(1);
+    await expect(cards.first()).toContainText('Copy-Paste Criminal');
+
+    await achievementsPage.achievementFilter('notStarted').click();
+    await expect(cards).toHaveCount(total - 2);
+    await expect(cards.first().locator('svg[data-icon="lock"]')).toBeVisible();
+
+    await achievementsPage.achievementFilter('all').click();
+    await expect(cards).toHaveCount(total);
+  });
 });

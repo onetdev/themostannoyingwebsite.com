@@ -17,6 +17,8 @@ export interface FireflyParticleProps {
   duration: number;
   color: string;
   percentage?: number;
+  /** Signed vertical travel in px: negative rises, positive falls. */
+  drift?: number;
 }
 
 export function FireflyParticle(particle: FireflyParticleProps) {
@@ -30,27 +32,23 @@ export function FireflyParticle(particle: FireflyParticleProps) {
         left: `${particle.x}%`,
         opacity: 0,
         scale: 0,
-        x: 0,
       }}
       animate={{
-        y: -40,
+        y: particle.drift ?? -40,
         opacity: [0, 0.8, 0],
         scale: [0, 1, 0.5],
-        x: [0, 4, -4, 4, 0],
       }}
       exit={{ opacity: 0 }}
       transition={{
         duration: particle.duration,
         ease: 'linear',
-        x: {
-          duration: particle.duration,
-          ease: 'easeInOut',
-        },
       }}
       className="absolute rounded-full"
       style={{
         width: particle.size,
         height: particle.size,
+        // Anchor each particle by its centre on the emitter line.
+        marginTop: -particle.size / 2,
         backgroundColor: particle.color,
         filter: isGrayscale ? 'grayscale(100%)' : 'none',
         opacity: isGrayscale ? 0.2 : 1,

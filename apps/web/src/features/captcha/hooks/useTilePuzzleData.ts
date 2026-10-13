@@ -11,6 +11,27 @@ interface UseTilePuzzleChallengeDataProps {
   onProgress: (score: number) => void;
 }
 
+/**
+ * Builds the coordinate and resolution series for a `cols × rows` grid, both
+ * starting at (1, 1). Extracted so the grid iteration is independently testable.
+ */
+export function buildGridSeries(
+  cols: number,
+  rows: number,
+): { coords: Point2d[]; resolutions: Point2d[] } {
+  const coords: Point2d[] = [];
+  const resolutions: Point2d[] = [];
+
+  for (let x = 1; x <= cols; x++) {
+    for (let y = 1; y <= rows; y++) {
+      coords.push({ x, y });
+      resolutions.push({ x, y });
+    }
+  }
+
+  return { coords, resolutions };
+}
+
 export function useTilePuzzleChallengeData({
   cols,
   rows,
@@ -20,15 +41,8 @@ export function useTilePuzzleChallengeData({
 
   // Generating the puzzle
   useEffect(() => {
-    const coordSeries: Point2d[] = [];
-    const resolutionSeries: Point2d[] = [];
-
-    for (let x = 1; x <= cols; x++) {
-      for (let y = 1; y <= rows; y++) {
-        coordSeries.push({ x, y });
-        resolutionSeries.push({ x, y });
-      }
-    }
+    const { coords: coordSeries, resolutions: resolutionSeries } =
+      buildGridSeries(cols, rows);
 
     const coordShuffle = arrayShuffle(coordSeries);
     const valueShuffle = arrayShuffle(resolutionSeries);

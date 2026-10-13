@@ -1,5 +1,6 @@
 'use client';
 
+import { Badge } from '@maw/ui-lib';
 import { cn } from '@maw/ui-lib/utils';
 import { useTranslations } from 'next-intl';
 import { useEffect, useState } from 'react';
@@ -55,10 +56,11 @@ export function UrgencyCountdown({
   const isExpired = timeLeft <= 0;
 
   return (
-    <div
+    <Badge
       data-testid="urgency-countdown"
+      variant="destructive"
       className={cn(
-        'bg-destructive text-destructive-foreground rounded-full px-4 py-1.5 text-sm font-bold shadow-lg',
+        'px-4 py-1.5 text-sm font-bold shadow-lg text-destructive-foreground',
         !isExpired && 'animate-pulse',
         className,
       )}
@@ -69,6 +71,6 @@ export function UrgencyCountdown({
             timer: formatTime(timeLeft),
             discount: discount ?? 0,
           })}
-    </div>
+    </Badge>
   );
 }

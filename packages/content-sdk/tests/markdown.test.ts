@@ -1,4 +1,5 @@
-import { renderMarkdown } from '../src/helpers/markdown';
+import type { Renderer } from 'marked';
+import { renderMarkdown, renderTableCells } from '../src/helpers/markdown';
 
 describe('Markdown Helper', () => {
   it('renders markdown to sanitized HTML', () => {
@@ -43,5 +44,29 @@ describe('Markdown Helper', () => {
       'THE <strong>INTERNET</strong> IS BROKEN: 4 Brain-Melting Memes',
     );
     expect(html).not.toContain('<p>');
+  });
+});
+
+describe('renderTableCells', () => {
+  it('concatenates every cell through renderer.tablecell', () => {
+    const rendered: string[] = [];
+    const renderer = {
+      tablecell: (cell: { text: string }) => {
+        rendered.push(cell.text);
+        return `<td>${cell.text}</td>`;
+      },
+    } as unknown as Renderer;
+    const cells = [{ text: 'A' }, { text: 'B' }] as unknown as Parameters<
+      typeof renderTableCells
+    >[0];
+
+    expect(renderTableCells(cells, renderer)).toBe('<td>A</td><td>B</td>');
+    expect(rendered).toEqual(['A', 'B']);
+  });
+
+  it('returns an empty string for an empty row', () => {
+    const renderer = { tablecell: () => '' } as unknown as Renderer;
+
+    expect(renderTableCells([], renderer)).toBe('');
   });
 });
