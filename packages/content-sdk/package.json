@@ -33,7 +33,6 @@
     "jest": "catalog:",
     "orval": "^8.33.0",
     "ts-jest": "catalog:",
-    "tsx": "catalog:",
     "typescript": "catalog:"
   }
 }

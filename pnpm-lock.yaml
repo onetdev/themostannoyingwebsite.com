@@ -242,9 +242,6 @@ catalogs:
     playwright:
       specifier: ^1.63.0
       version: 1.63.0
-    prettier-plugin-tailwindcss:
-      specifier: ^0.8.1
-      version: 0.8.1
     react:
       specifier: ^19.3.0
       version: 19.3.0
@@ -447,9 +444,6 @@ importers:
       emittery:
         specifier: ^2.0.0
         version: 2.1.0
-      express:
-        specifier: ^5.2.1
-        version: 5.2.1(supports-color@8.1.1)
       framer-motion:
         specifier: 'catalog:'
         version: 13.5.1(react-dom@19.3.0(react@19.3.0))(react@19.3.0)
@@ -577,12 +571,6 @@ importers:
       postcss:
         specifier: ^8.5.28
         version: 8.5.28
-      prettier:
-        specifier: ^3.9.6
-        version: 3.9.9
-      prettier-plugin-tailwindcss:
-        specifier: 'catalog:'
-        version: 0.8.1(prettier@3.9.9)
       schema-dts:
         specifier: 'catalog:'
         version: 2.0.0(typescript@5.9.3)
@@ -677,9 +665,6 @@ importers:
       ts-jest:
         specifier: 'catalog:'
         version: 29.4.14(@babel/core@7.29.7(supports-color@8.1.1))(@jest/transform@30.5.2(supports-color@8.1.1))(@jest/types@30.5.1)(babel-jest@30.5.2(@babel/core@7.29.7(supports-color@8.1.1))(supports-color@8.1.1))(esbuild@0.28.2)(jest-util@30.5.1)(jest@30.5.2(@types/node@26.6.4)(supports-color@8.1.1)(ts-node@10.9.2(@swc/core@1.16.13(@swc/helpers@0.5.23))(@types/node@26.6.4)(typescript@5.9.3)))(typescript@5.9.3)
-      tsx:
-        specifier: 'catalog:'
-        version: 4.23.15
       typescript:
         specifier: 'catalog:'
         version: 5.9.3
@@ -714,6 +699,9 @@ importers:
       '@fortawesome/react-fontawesome':
         specifier: 'catalog:'
         version: 3.5.0(@fortawesome/fontawesome-svg-core@7.3.1)(react@19.3.0)
+      '@maw/utils':
+        specifier: workspace:*
+        version: link:../utils
       '@shadcn/react':
         specifier: ^0.3.1
         version: 0.3.1(@types/react@19.3.0)(react@19.3.0)
@@ -735,9 +723,6 @@ importers:
       react-dom:
         specifier: 'catalog:'
         version: 19.3.0(react@19.3.0)
-      react-hook-form:
-        specifier: 'catalog:'
-        version: 7.88.0(react@19.3.0)
       react-share:
         specifier: 'catalog:'
         version: 5.3.0(react@19.3.0)(supports-color@8.1.1)
@@ -763,9 +748,6 @@ importers:
       '@maw/config-ts':
         specifier: workspace:*
         version: link:../config-ts
-      '@maw/utils':
-        specifier: workspace:*
-        version: link:../utils
       '@storybook/nextjs':
         specifier: 'catalog:'
         version: 10.6.1(@swc/core@1.16.13)(@types/react-dom@19.3.0(@types/react@19.3.0))(@types/react@19.3.0)(clean-css@5.3.3)(esbuild@0.28.2)(html-minifier-terser@6.1.0)(lightningcss@1.32.0)(next@16.3.8(@babel/core@7.29.7(supports-color@8.1.1))(@opentelemetry/api@1.9.1)(@playwright/test@1.63.0)(@types/node@26.6.4)(react-dom@19.3.0(react@19.3.0))(react@19.3.0)(sass@1.105.1))(react-dom@19.3.0(react@19.3.0))(react@19.3.0)(sass@1.105.1)(sharp@0.35.5(@types/node@26.6.4))(storybook@10.6.1(@types/react@19.3.0)(prettier@3.9.9)(react@19.3.0))(supports-color@8.1.1)(type-fest@4.41.0)(typescript@5.9.3)(uglify-js@3.19.3)(webpack-hot-middleware@2.26.1)(webpack@5.111.1(@swc/core@1.16.13)(clean-css@5.3.3)(esbuild@0.28.2)(html-minifier-terser@6.1.0)(lightningcss@1.32.0)(sharp@0.35.5(@types/node@26.6.4))(uglify-js@3.19.3))
@@ -781,9 +763,6 @@ importers:
       '@types/react-dom':
         specifier: 'catalog:'
         version: 19.3.0(@types/react@19.3.0)
-      prettier-plugin-tailwindcss:
-        specifier: 'catalog:'
-        version: 0.8.1(prettier@3.9.9)
       storybook:
         specifier: 'catalog:'
         version: 10.6.1(@types/react@19.3.0)(prettier@3.9.9)(react@19.3.0)
@@ -7206,61 +7185,6 @@ packages:
   powershell-utils@0.2.1:
     resolution: {integrity: sha512-C+y9x90UElAddDZmV4qOx9W53B61PO7cIqWz2dQsWlwswuq4mr8NEwytdGKboYbQlGZ3awrkTeNvcZiZNHnQ8A==}
     engines: {node: '>=20'}
-
-  prettier-plugin-tailwindcss@0.8.1:
-    resolution: {integrity: sha512-iaFMYqDsE4ffdDkn5qup0j5f2aCEBFZrdrZnvu9QKTlWx/iGPeQ4HHu7b7fCPMxeo9nwQBiOAh2nSypdFYWJkw==}
-    engines: {node: '>=20.19'}
-    peerDependencies:
-      '@ianvs/prettier-plugin-sort-imports': '*'
-      '@prettier/plugin-hermes': '*'
-      '@prettier/plugin-oxc': '*'
-      '@prettier/plugin-pug': '*'
-      '@shopify/prettier-plugin-liquid': '*'
-      '@trivago/prettier-plugin-sort-imports': '*'
-      '@zackad/prettier-plugin-twig': '*'
-      prettier: ^3.0
-      prettier-plugin-astro: '*'
-      prettier-plugin-css-order: '*'
-      prettier-plugin-jsdoc: '*'
-      prettier-plugin-marko: '*'
-      prettier-plugin-multiline-arrays: '*'
-      prettier-plugin-organize-attributes: '*'
-      prettier-plugin-organize-imports: '*'
-      prettier-plugin-sort-imports: '*'
-      prettier-plugin-svelte: '*'
-    peerDependenciesMeta:
-      '@ianvs/prettier-plugin-sort-imports':
-        optional: true
-      '@prettier/plugin-hermes':
-        optional: true
-      '@prettier/plugin-oxc':
-        optional: true
-      '@prettier/plugin-pug':
-        optional: true
-      '@shopify/prettier-plugin-liquid':
-        optional: true
-      '@trivago/prettier-plugin-sort-imports':
-        optional: true
-      '@zackad/prettier-plugin-twig':
-        optional: true
-      prettier-plugin-astro:
-        optional: true
-      prettier-plugin-css-order:
-        optional: true
-      prettier-plugin-jsdoc:
-        optional: true
-      prettier-plugin-marko:
-        optional: true
-      prettier-plugin-multiline-arrays:
-        optional: true
-      prettier-plugin-organize-attributes:
-        optional: true
-      prettier-plugin-organize-imports:
-        optional: true
-      prettier-plugin-sort-imports:
-        optional: true
-      prettier-plugin-svelte:
-        optional: true
 
   prettier@3.9.9:
     resolution: {integrity: sha512-Z/CJHIkdujO/OtN7nXUii0Rf3VT5SRuhjBA82Xvu2XhBUgX3nhP67T0LHceBdQLex7OOFGTox+Q5Yg8Jk2Qivg==}
@@ -15640,11 +15564,8 @@ snapshots:
 
   powershell-utils@0.2.1: {}
 
-  prettier-plugin-tailwindcss@0.8.1(prettier@3.9.9):
-    dependencies:
-      prettier: 3.9.9
-
-  prettier@3.9.9: {}
+  prettier@3.9.9:
+    optional: true
 
   pretty-error@4.0.0:
     dependencies:

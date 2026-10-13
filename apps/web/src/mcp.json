@@ -1,8 +1,0 @@
-{
-  "mcpServers": {
-    "next-devtools": {
-      "command": "pnpx",
-      "args": ["-y", "next-devtools-mcp@latest"]
-    }
-  }
-}

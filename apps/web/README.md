@@ -23,7 +23,7 @@ src/features/[feature-name]/
 ├── hooks/         # Custom React hooks for local feature logic
 ├── services/      # Business logic (using Inversify for DI)
 ├── repositories/  # (Optional) Data access layer (mocked/static)
-├── i18n/          # Feature-specific translations (Hybrid pattern)
+├── i18n/          # Feature-specific English translation reference (API-served locales are merged over it at runtime)
 ├── schemas/       # Zod validation schemas for forms or data
 ├── types.ts       # TypeScript interfaces, DI symbols, and types
 └── README.md      # A concise overview of the feature

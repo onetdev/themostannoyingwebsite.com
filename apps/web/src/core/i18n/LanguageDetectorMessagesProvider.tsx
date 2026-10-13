@@ -7,9 +7,9 @@ const LanguageDetectorMessagesContext =
   createContext<LanguageDetectorMessageMap>({});
 
 /**
- * Provides the per-locale language-suggestion copy fetched on the server so the
- * client-side suggestion toast can render in the suggested language without a
- * runtime Content API call.
+ * Provides the bundled per-locale language-suggestion copy so the client-side
+ * suggestion toast can render in the suggested language without a runtime
+ * Content API call. See `adr/0028-english-translation-reference-sync.md`.
  */
 export function LanguageDetectorMessagesProvider({
   value,

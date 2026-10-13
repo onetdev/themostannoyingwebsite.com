@@ -1,6 +1,6 @@
 # Typescript Config
 
-This package provides a set of TypeScript configuration files for various environments, including Node.js, React, and Next.js. It is designed to be used with the `tsconfig` package to simplify the process of setting up TypeScript projects.
+This package provides a set of TypeScript configuration files for various environments, including React and Next.js. It is designed to be used with the `tsconfig` package to simplify the process of setting up TypeScript projects.
 
 ## Installation
 
