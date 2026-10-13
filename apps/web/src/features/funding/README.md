@@ -4,11 +4,12 @@ Manages the site's donation information and funneling user traffic towards vario
 
 ## Key Highlights
 
-- **DonationPage**: A centralized layout that displays current project goals, cost/donation balance, and links to various crypto and donation platforms.
+- **DonationPage**: A centralized layout pairing a borderless balance hero and a compact support grid on the left with the FAQ (backed by a faint jar animation) on the right, followed by a before/after comparison sample and the "impact in numbers" charts.
+- **BeforeAfterSlider**: Standalone draggable comparison component (`inset()` clip over two layers) placed above the impact stats; imagery is passed in so it can be swapped without touching the component.
 - **BeggarBanner**: A prominent, non-dismissible alert at the top of the site that encourages users to donate. Its visibility is often linked to the first 10 days of each month to simulate "real-world" funding urgency.
 - **DonationService**: An injectable service that provides calculated estimates for the project's financial status and determines if the `BeggarBanner` should be displayed.
-- **QR Code Generation**: Displays dynamically generated QR codes for multiple cryptocurrency addresses to facilitate easy (simulated) contributions.
-- **Crypto Donation Hooks**: Manages the copy-to-clipboard functionality for crypto addresses, often triggering global events for achievements.
+- **Crypto Donations**: `SupportOptions` lists classic and crypto methods; the BTC/ETH buttons reveal a dynamically generated QR code, network and copy-to-clipboard address inside a `Popover` (see `docs/shadcn-adoption-log.md`, BEH-21).
+- **Neon Arrows**: A decorative `NeonArrow` SVG (theme-primary drop-shadow glow, reduced-motion aware) points from the balance hero at the support buttons.
 
 ## Service Details
 

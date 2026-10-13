@@ -73,9 +73,16 @@ export default {
   },
   totalSupportReceived: 'Total Support Received',
   balanceEyebrow: 'Current balance',
-  balanceCaption:
-    'Also known as the hole. It gets deeper every month — you are welcome to try to slow it down.',
+  beforeAfter: {
+    heading: 'Before / after',
+    before: 'Before',
+    after: 'After',
+    sliderLabel: 'Comparison position',
+    caption:
+      'Drag the handle — or anywhere across the image — to compare. Nothing here is real; the numbers are just as imaginary as the receipts.',
+  },
   classicMethods: 'Classic methods',
+  supportMethods: 'Ways to support',
   buyMeACoffee: 'Buy Me A Coffee',
   payPal: 'PayPal',
   cryptoMethods: 'Crypto methods',
@@ -87,6 +94,7 @@ export default {
     network: 'Network: {network}',
     copyAction: 'Copy Address',
     copyFeedback: 'Copied!',
+    qrHint: 'Scan the code or copy the address to send crypto directly.',
     bitcoin: 'Bitcoin (BTC)',
     ethereum: 'Ethereum (ETH)',
   },

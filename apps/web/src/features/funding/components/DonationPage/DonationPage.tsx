@@ -1,21 +1,15 @@
 import type { LanguageCode } from '@maw/content-sdk';
-import {
-  Button,
-  Card,
-  CardContent,
-  CardHeader,
-  CardTitle,
-  Icon,
-} from '@maw/ui-lib';
+import { Card, CardContent, CardHeader, CardTitle } from '@maw/ui-lib';
 import { getLocale, getTranslations } from 'next-intl/server';
-import { Link } from '@/core/i18n/navigation';
 import { getAppConfigService } from '@/services';
 import { getDonationSummary } from '../../services/get-donation-summary';
-import { CryptoWallet } from './CryptoWallet';
+import { BeforeAfterSlider } from './BeforeAfterSlider';
 import { DonationCounter } from './DonationCounter';
 import { DonationFaq } from './DonationFaq';
 import { ImpactStats } from './ImpactStats';
 import { JarAnimation } from './JarAnimation';
+import { NeonArrow } from './NeonArrow';
+import { SupportOptions } from './SupportOptions';
 
 export { generateStaticParams } from '@/core/i18n/routing';
 
@@ -32,82 +26,56 @@ export async function DonationPage() {
     });
 
   return (
-    <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-6">
-      <Card className="relative flex flex-col items-center justify-center gap-4 overflow-hidden p-10 py-14 text-center md:col-span-2 lg:col-span-6">
+    <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-6">
+      <div className="flex flex-col md:col-span-1 lg:col-span-3">
+        <section className="relative flex flex-col items-center justify-center gap-4 text-center">
+          <p className="text-muted-foreground relative z-10 text-sm font-semibold tracking-[0.2em] uppercase">
+            {t('funding.balanceEyebrow')}
+          </p>
+          <DonationCounter
+            balance={balance}
+            size="hero"
+            className="relative z-10"
+            data-testid="donation-balance"
+          />
+        </section>
+
+        <NeonArrow
+          tone={balance < 0 ? 'negative' : 'positive'}
+          className="mx-auto w-full max-w-2xl"
+        />
+
+        <SupportOptions funding={funding} className="mt-6" />
+      </div>
+
+      <div className="relative flex flex-col md:col-span-1 lg:col-span-3">
         <div
           aria-hidden
-          className="pointer-events-none absolute top-1/2 -right-6 -translate-y-1/2 opacity-20 select-none"
+          className="pointer-events-none absolute inset-0 flex items-center justify-center opacity-10 select-none"
         >
           <JarAnimation
             balance={balance}
-            className="h-72 w-auto md:h-[22rem]"
+            className="h-96 w-auto"
             data-testid="jar-animation"
           />
         </div>
-        <p className="text-muted-foreground relative z-10 text-sm font-semibold tracking-[0.2em] uppercase">
-          {t('funding.balanceEyebrow')}
-        </p>
-        <DonationCounter
-          balance={balance}
-          size="hero"
-          className="relative z-10"
-          data-testid="donation-balance"
+        <DonationFaq className="relative z-10" />
+      </div>
+
+      <section className="mt-8 flex flex-col gap-4 md:col-span-2 lg:col-span-6">
+        <h2>{t('funding.beforeAfter.heading')}</h2>
+        <BeforeAfterSlider
+          beforeSrc={funding.assets.beforeImage}
+          afterSrc={funding.assets.afterImage}
+          beforeLabel={t('funding.beforeAfter.before')}
+          afterLabel={t('funding.beforeAfter.after')}
+          sliderLabel={t('funding.beforeAfter.sliderLabel')}
+          data-testid="before-after-slider"
         />
-        <p className="text-muted-foreground relative z-10 max-w-prose text-sm">
-          {t('funding.balanceCaption')}
+        <p className="text-muted-foreground text-center text-sm">
+          {t('funding.beforeAfter.caption')}
         </p>
-      </Card>
-
-      <DonationFaq className="lg:col-span-3" />
-
-      <Card className="lg:col-span-3">
-        <CardHeader>
-          <CardTitle>{t('funding.classicMethods')}</CardTitle>
-        </CardHeader>
-        <CardContent className="flex flex-col gap-3">
-          <Button
-            render={<Link href={funding.buyMeACoffeeUrl} target="_blank" />}
-            nativeButton={false}
-            size="lg"
-            className="w-full"
-          >
-            <Icon icon="mugHot" aria-hidden />
-            {t('funding.buyMeACoffee')}
-          </Button>
-          <Button
-            render={<Link href={funding.paypalUrl} target="_blank" />}
-            nativeButton={false}
-            size="lg"
-            variant="secondary"
-            className="w-full"
-          >
-            <Icon icon="handHoldingDollar" aria-hidden />
-            {t('funding.payPal')}
-          </Button>
-          <Link
-            href={funding.alternativeOptionsUrl}
-            target="_blank"
-            className="text-center text-sm"
-          >
-            {t('funding.alternativeOptionsLink')}
-          </Link>
-        </CardContent>
-      </Card>
-
-      <CryptoWallet
-        className="lg:col-span-3"
-        data-testid="crypto-wallet-btc"
-        title={t('funding.crypto.bitcoin')}
-        address={funding.btcWallet.address}
-        network={funding.btcWallet.network}
-      />
-      <CryptoWallet
-        className="lg:col-span-3"
-        data-testid="crypto-wallet-eth"
-        title={t('funding.crypto.ethereum')}
-        address={funding.ethWallet.address}
-        network="Mainnet"
-      />
+      </section>
 
       {donationSummary && <ImpactStats summary={donationSummary} />}
 

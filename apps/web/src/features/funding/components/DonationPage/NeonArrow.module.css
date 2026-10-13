@@ -1,0 +1,66 @@
+/**
+ * Neon "tube" glow for the decorative arrows pointing at the support buttons.
+ *
+ * The tube is white while the halo takes its colour from the balance state
+ * (`--neon-glow`), so a healthy balance glows green and a negative one glows red.
+ * The glow is built from stacked `drop-shadow` layers. `--neon-bright` /
+ * `--neon-dim` drive the broken-sign flicker, so light mode can dim the whole
+ * effect without flattening the animation.
+ */
+.arrow {
+  --neon-bright: 1;
+  --neon-dim: 0.4;
+  color: white;
+  opacity: var(--neon-bright);
+  filter: drop-shadow(0 0 3px var(--neon-glow))
+    drop-shadow(0 0 10px var(--neon-glow))
+    drop-shadow(0 0 24px var(--neon-glow))
+    drop-shadow(0 0 48px var(--neon-glow));
+  animation: neon-flicker 4s infinite;
+}
+
+.positive {
+  --neon-glow: var(--success);
+}
+
+.negative {
+  --neon-glow: var(--error);
+}
+
+/**
+ * Against a light background the full bloom is overwhelming, so it is trimmed to
+ * two soft layers and the flicker range is pulled down.
+ */
+:global([data-theme="light"]) .arrow {
+  --neon-bright: 0.55;
+  --neon-dim: 0.12;
+  filter: drop-shadow(0 0 1.5px var(--neon-glow))
+    drop-shadow(0 0 5px var(--neon-glow));
+}
+
+/* A stuttering, broken-neon blink interspersed with steady stretches. */
+@keyframes neon-flicker {
+  0%,
+  19%,
+  21%,
+  23%,
+  25%,
+  54%,
+  56%,
+  100% {
+    opacity: var(--neon-bright);
+  }
+
+  20%,
+  22%,
+  24%,
+  55% {
+    opacity: var(--neon-dim);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .arrow {
+    animation: none;
+  }
+}
