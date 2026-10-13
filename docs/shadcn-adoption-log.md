@@ -62,6 +62,7 @@ Status legend: ⬜ pending · 🟡 reintroduced as a wrapper · 🟢 preserved (
 | BEH-18 | Pain slider (`AppHeader/…/PainLevelSelector`) | `Slider` | Custom `SliderRail` gradient + firefly particles + clamp labels | Yes | Keep rail/particles as an overlay layer | ⬜ |
 | BEH-19 | Debug store (`monitoring/…/StoreInspector`) | `Textarea` | `resize-none`, mono font, fixed min height | No | Re-applied via `className` | 🟢 |
 | BEH-20 | Context menu (`disruptions/useDisableContextMenu`) | `AlertDialog` or `toast` | Rude native `alert()` on right-click | Yes | Decide: keep native alert or restyle | ⬜ |
+| BEH-21 | Crypto donation (`funding/DonationPage/CryptoDonationButton`) | `Popover` | Permanent wallet QR cards replaced by on-demand popovers | Yes | Trigger buttons; QR, network and copy action live inside the popover | 🟢 |
 
 ## Phase 1 review notes
 
@@ -190,6 +191,30 @@ Reworked the settings page onto the shadcn `Field` composition:
   data-starting-style:opacity-0 data-ending-style:scale-75 data-ending-style:opacity-0`.
   Base UI keeps the indicator mounted until the exit transition completes.
 
+## Phase 8 review notes
+
+Reworked the donation page and added the `Popover` atom to `@maw/ui-lib`
+(`base-vega` port; `cn` import normalized, exported from `components/atoms`,
+covered by a Storybook story).
+
+- **Balance hero is borderless**: the counter sits in a plain `<section>` (no
+  `Card`); the jar animation is a very faint backdrop (`opacity-5`) behind the FAQ
+  in the right column.
+- **Support grid**: a compact 2×2 grid of small secondary buttons below the
+  balance hero — classic links plus `CryptoDonationButton`s whose QR codes,
+  network and copy action open in a `Popover` (the always-visible `CryptoWallet`
+  cards were removed — see BEH-21). The "other means" link sits underneath.
+- **FAQ on the right**: the de-boxed `DonationFaq` occupies the second column
+  beside the balance/support stack.
+- **Neon arrow**: a decorative SVG (`NeonArrow`) points down from the balance
+  hero at the support grid, with a stacked `drop-shadow` glow tinted by the theme
+  primary token. It flickers (intentionally janky) and respects
+  `prefers-reduced-motion`.
+- **FAQ de-boxed**: `DonationFaq` lost its `Card` chrome and now renders a plain
+  heading + `Accordion`.
+- **Icons**: `@fortawesome/free-brands-svg-icons` added to the catalog and the
+  `bitcoin`, `ethereum` and `paypal` marks exposed through the ui-lib `Icon` map.
+
 ## Registry drift audit
 
 `pnpm audit:registry` (`packages/ui-lib/scripts/audit-registry-drift.ts`) diffs
@@ -204,6 +229,10 @@ we fixed the following stale ports:
 - **Accordion**: missing `accordion-trigger-icon` slot.
 - **Carousel**: `useCarousel` not exported.
 - **NavigationMenu**: missing `NavigationMenuIndicator`.
+- **Accordion**: the open/close height transition was on the inner wrapper while
+  `data-starting-style`/`data-ending-style` are set on the `Panel`, so the height
+  never animated. Moved the height/transition/variant classes onto the `Panel`
+  (Base UI's documented pattern; `duration-200 ease-out`).
 - **Progress**: ported from monolithic to the compound component.
 
 The audit is not wired into `lint`/`test` (it needs network); run it on demand
@@ -227,3 +256,6 @@ or in CI.
 - [x] **Phase 7** — Settings page onto the shadcn `Field` composition
       (`SettingsField` id/`htmlFor` wiring, `InfoTooltip` atom, `FieldSet`/
       `FieldLegend`/`FieldGroup`, stale e2e locators fixed) — see Phase 7 notes.
+- [x] **Phase 8** — Donation page rework + `Popover` atom (borderless balance
+      hero, crypto QR popovers, neon arrows, de-boxed FAQ, brand icons) — see
+      Phase 8 notes.
