@@ -79,6 +79,28 @@ The project uses:
 
 Before committing changes, ensure the code passes linting and tests.
 
+### Function Shape & Iteration
+
+Prefer small, single-purpose functions and extract nested iteration into named
+helpers at their natural boundary rather than lifting the innermost loop. Keep
+helpers to **≤ 4 positional parameters** (pass one options object when more
+context is needed) and give every extracted iteration helper a co-located test.
+
+```ts
+// Before: nested loops inside a larger function.
+for (const locale of locales) {
+  for (const author of authors) paths.push({ slug: author.slug, locale });
+}
+
+// After: the enclosing iteration is a named, testable builder.
+const buildAuthorStaticParams = (locales, authors) =>
+  locales.flatMap((locale) =>
+    authors.map((author) => ({ slug: author.slug, locale })),
+  );
+```
+
+See the root `AGENTS.md` → "Function Shape & Iteration" for the full rule.
+
 ### Dependency Documentation
 
 Third-party API usage must come from the installed package, not from

@@ -205,6 +205,8 @@ All pages must describe themselves with JSON-LD. The machinery lives in `src/cor
 - ❌ Manual `fetch` calls (Use repositories or services).
 - ❌ Bundling variant arrays in messages (Use Content API content pools via `usePool` + server prefetch).
 - ❌ Inline JSX conditions combining 2+ boolean operators (e.g. `{a && b && !c && <X />}`). Hoist them into a named boolean const immediately before the `return` (e.g. `const showX = a && b && !c;`). Name facts with `is`/`has`/`can` and render gates with `show`.
+- ❌ Nesting loops/iterators more than two levels. Extract the enclosing iteration into a named helper (see root `AGENTS.md` → "Function Shape & Iteration").
+- ❌ Hoisting an inner loop into a function that then needs 5+ parameters. Extract the outer phase, or pass one options object.
 
 <!-- BEGIN:nextjs-agent-rules -->
 
