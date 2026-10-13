@@ -1,4 +1,4 @@
-import { arrayShuffle, mergeIntervals } from './array';
+import { arrayShuffle } from './array';
 
 describe('arrayShuffle', () => {
   test('should return an empty array if an empty array is provided', () => {
@@ -36,60 +36,5 @@ describe('arrayShuffle', () => {
 
     // Restore Math
     jest.spyOn(global.Math, 'random').mockRestore();
-  });
-});
-
-describe('mergeIntervals', () => {
-  test('should return an empty array if no intervals are provided', () => {
-    const result = mergeIntervals([]);
-    expect(result).toStrictEqual([]);
-  });
-
-  test('should return an empty array if all intervals are empty', () => {
-    const result = mergeIntervals([
-      [0, 0],
-      [0, 0],
-    ]);
-    expect(result).toStrictEqual([[0, 0]]);
-  });
-
-  test('should handle undefined start or end in intervals', () => {
-    // Testing the branches on lines 12-13
-    const intervals: any[] = [
-      [undefined, 10],
-      [5, undefined],
-    ];
-    const result = mergeIntervals(intervals);
-    // [-Infinity, 10] and [5, Infinity] should merge into [-Infinity, Infinity]
-    expect(result).toStrictEqual([[-Infinity, Infinity]]);
-  });
-
-  test('should merge overlapping intervals', () => {
-    const result = mergeIntervals([
-      [0, 1],
-      [2, 3],
-      [3, 4],
-      [5, 6],
-    ]);
-    expect(result).toStrictEqual([
-      [0, 1],
-      [2, 4],
-      [5, 6],
-    ]);
-  });
-
-  test('should merge non-overlapping intervals', () => {
-    const result = mergeIntervals([
-      [0, 1],
-      [2, 3],
-      [4, 5],
-      [6, 7],
-    ]);
-    expect(result).toStrictEqual([
-      [0, 1],
-      [2, 3],
-      [4, 5],
-      [6, 7],
-    ]);
   });
 });

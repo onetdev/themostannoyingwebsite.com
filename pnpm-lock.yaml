@@ -777,10 +777,6 @@ importers:
         version: 5.9.3
 
   packages/utils:
-    dependencies:
-      sanitize-html:
-        specifier: 'catalog:'
-        version: 2.17.4
     devDependencies:
       '@biomejs/biome':
         specifier: 'catalog:'
@@ -797,9 +793,6 @@ importers:
       '@types/node':
         specifier: 'catalog:'
         version: 26.6.4
-      '@types/sanitize-html':
-        specifier: 'catalog:'
-        version: 2.16.2
       jest:
         specifier: 'catalog:'
         version: 30.5.2(@types/node@26.6.4)(supports-color@8.1.1)(ts-node@10.9.2(@swc/core@1.16.13(@swc/helpers@0.5.23))(@types/node@26.6.4)(typescript@5.9.3))
