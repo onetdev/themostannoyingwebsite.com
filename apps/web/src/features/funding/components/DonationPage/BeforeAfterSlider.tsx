@@ -38,7 +38,7 @@ export function BeforeAfterSlider({
   return (
     <div
       className={cn(
-        'relative aspect-[16/9] w-full overflow-hidden rounded-xl select-none',
+        'group relative aspect-[16/9] w-full overflow-hidden rounded-xl select-none',
         className,
       )}
       {...rest}
@@ -80,7 +80,7 @@ export function BeforeAfterSlider({
       />
       <div
         aria-hidden
-        className="absolute top-1/2 flex size-10 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full border-2 border-white bg-black/20 text-white backdrop-blur-sm"
+        className="absolute top-1/2 flex size-10 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full border-2 border-white bg-black/20 text-white backdrop-blur-sm group-focus-within:ring-2 group-focus-within:ring-white group-focus-within:ring-offset-2 group-focus-within:ring-offset-black/20"
         style={{ left: `${position}%` }}
       >
         <Icon icon="chevronLeft" />

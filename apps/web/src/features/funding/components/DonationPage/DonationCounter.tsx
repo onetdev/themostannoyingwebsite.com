@@ -1,30 +1,45 @@
 'use client';
 
+import { useLocale } from 'next-intl';
 import { type ComponentProps, useEffect, useState } from 'react';
+import { DONATION_BASE_CURRENCY, type DonationRate } from '../../types';
+import { getCurrencySymbol, toDisplayAmount } from '../../utils/currency';
 import { SlotDigit } from './SlotDigit';
 
 export type DonationCounterProps = {
-  /** Current donation balance in the response currency. */
+  /** Current donation balance in the base currency. */
   balance: number;
   /** Visual weight of the counter. `hero` is used as the page's focal point. */
   size?: 'default' | 'hero';
+  /** Display currency code. */
+  currency?: string;
+  /** Static rates for converting the base amount to `currency`. */
+  rates?: readonly DonationRate[];
 } & ComponentProps<'div'>;
 
 export function DonationCounter({
   balance,
   size = 'default',
+  currency = DONATION_BASE_CURRENCY,
+  rates,
   className,
   ...rest
 }: DonationCounterProps) {
-  const amount = balance;
-  const currency = '$';
+  const locale = useLocale();
   const [showNegative, setShowNegative] = useState(false);
 
-  const isNegative = amount < 0;
-  const absoluteAmount = Math.abs(amount);
+  const isNegative = balance < 0;
+  const displayAmount = Math.round(
+    toDisplayAmount(
+      Math.abs(balance),
+      { locale, currency, rates },
+      { fractionDigits: 0 },
+    ),
+  );
+  const symbol = getCurrencySymbol(locale, currency);
 
   // Convert amount to digits array
-  const digits = absoluteAmount
+  const digits = displayAmount
     .toString()
     .padStart(6, '0')
     .split('')
@@ -63,7 +78,7 @@ export function DonationCounter({
   return (
     <div
       role="img"
-      aria-label={`${currency}${amount}`}
+      aria-label={`${symbol}${displayAmount}`}
       className={`flex items-center justify-center shadow-2xl transition-all duration-500 ${sizeClasses} ${bgGradient} ${borderColor} ${className ?? ''}`}
       {...rest}
     >
@@ -83,7 +98,7 @@ export function DonationCounter({
         aria-hidden
         className={`text-3xl font-bold ${digitColor} transition-colors duration-500`}
       >
-        {currency}
+        {symbol}
       </span>
       <div aria-hidden className="flex gap-1">
         {digits.map((digit, idx) => (

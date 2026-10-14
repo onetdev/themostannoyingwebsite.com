@@ -86,6 +86,15 @@ export function CryptoDonationButton({
               ? t('funding.crypto.copyFeedback')
               : t('funding.crypto.copyAction')}
           </Button>
+
+          {/*
+            The visible button swaps its label, which screen readers do not
+            reliably announce. This persistent polite live region conveys the
+            same result as an audible status message.
+          */}
+          <span role="status" aria-live="polite" className="sr-only">
+            {copied ? t('funding.crypto.copyFeedback') : ''}
+          </span>
         </PopoverContent>
       </Popover>
     </div>

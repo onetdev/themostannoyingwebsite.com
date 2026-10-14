@@ -3,10 +3,10 @@ import 'server-only';
 import {
   CONTENT_CACHE_TAGS,
   type ContentApiClient,
-  type DonationSummary,
   type LanguageCode,
 } from '@maw/content-sdk';
 import { createAppContentClient } from '@/core/content';
+import type { FundingDonationSummary } from '../types';
 
 const DONATION_REVALIDATE_SECONDS = 1800;
 
@@ -18,7 +18,7 @@ const DONATION_REVALIDATE_SECONDS = 1800;
 export async function fetchDonationSummary(
   client: ContentApiClient,
   lang: LanguageCode,
-): Promise<DonationSummary> {
+): Promise<FundingDonationSummary> {
   return client.donations.getSummary(lang, {
     next: {
       revalidate: DONATION_REVALIDATE_SECONDS,
@@ -34,7 +34,7 @@ export async function fetchDonationSummary(
  */
 export async function getDonationSummary(
   lang: LanguageCode,
-): Promise<DonationSummary | undefined> {
+): Promise<FundingDonationSummary | undefined> {
   try {
     return await fetchDonationSummary(createAppContentClient(), lang);
   } catch {

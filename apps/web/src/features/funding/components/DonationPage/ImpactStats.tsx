@@ -1,10 +1,6 @@
 'use client';
 
-import type {
-  DonationStat,
-  DonationSummary,
-  DonationSupporter,
-} from '@maw/content-sdk';
+import type { DonationStat, DonationSupporter } from '@maw/content-sdk';
 import {
   Card,
   CardContent,
@@ -28,6 +24,8 @@ import {
   ReferenceLine,
   XAxis,
 } from 'recharts';
+import type { DonationRate, FundingDonationSummary } from '../../types';
+import { toDisplayAmount } from '../../utils/currency';
 
 const SUPPORTER_MEDALS: Record<DonationSupporter['tier'], string> = {
   gold: '🥇',
@@ -109,18 +107,31 @@ function createFormatters(locale: string, currency: string) {
 function formatStatValue(
   formatters: ReturnType<typeof createFormatters>,
   stat: DonationStat,
+  displayValue: number,
 ) {
   const formatter = formatters[stat.format] ?? formatters.integer;
   return formatter.format(
-    stat.format === 'percent' ? stat.value / 100 : stat.value,
+    stat.format === 'percent' ? displayValue / 100 : displayValue,
   );
 }
 
-function buildChartData(summary: DonationSummary, locale: string) {
+function buildChartData(
+  summary: FundingDonationSummary,
+  locale: string,
+  currency: string,
+  rates?: readonly DonationRate[],
+) {
   const monthFormatter = new Intl.DateTimeFormat(locale, {
     month: 'short',
     timeZone: 'UTC',
   });
+
+  const toDisplay = (value: number) =>
+    toDisplayAmount(
+      value,
+      { locale, currency, rates, base: summary.currency },
+      { fractionDigits: 0 },
+    );
 
   const monthlyData = summary.monthly.map((entry) => {
     const [year, month] = entry.month.split('-').map(Number);
@@ -129,8 +140,8 @@ function buildChartData(summary: DonationSummary, locale: string) {
     return {
       label: monthFormatter.format(date),
       // Expenses are plotted below zero so the bars drop into the minus.
-      expenses: -entry.expenses,
-      donations: entry.donations,
+      expenses: -toDisplay(entry.expenses),
+      donations: toDisplay(entry.donations),
     };
   });
 
@@ -150,18 +161,34 @@ function buildChartData(summary: DonationSummary, locale: string) {
 function ImpactStatCard({
   stat,
   currency,
+  rates,
+  baseCurrency,
 }: {
   stat: DonationStat;
   currency: string;
+  rates?: readonly DonationRate[];
+  baseCurrency: string;
 }) {
   const t = useTranslations();
   const locale = useLocale();
   const sentimentClass = TREND_SENTIMENT_CLASSES[stat.trend.sentiment];
 
-  const formatted = useMemo(
-    () => formatStatValue(createFormatters(locale, currency), stat),
-    [locale, currency, stat],
-  );
+  const formatted = useMemo(() => {
+    const displayValue =
+      stat.format === 'currency'
+        ? toDisplayAmount(
+            stat.value,
+            { locale, currency, rates, base: baseCurrency },
+            { fractionDigits: 0 },
+          )
+        : stat.value;
+
+    return formatStatValue(
+      createFormatters(locale, currency),
+      stat,
+      displayValue,
+    );
+  }, [locale, currency, rates, baseCurrency, stat]);
 
   const formattedTrend = useMemo(
     () =>
@@ -250,12 +277,20 @@ function SupportersPodium({ supporters }: { supporters: DonationSupporter[] }) {
   );
 }
 
-function MonthlyChartCard({ summary }: { summary: DonationSummary }) {
+function MonthlyChartCard({
+  summary,
+  currency,
+  rates,
+}: {
+  summary: FundingDonationSummary;
+  currency: string;
+  rates?: readonly DonationRate[];
+}) {
   const t = useTranslations();
   const locale = useLocale();
   const { monthlyData } = useMemo(
-    () => buildChartData(summary, locale),
-    [summary, locale],
+    () => buildChartData(summary, locale, currency, rates),
+    [summary, locale, currency, rates],
   );
 
   const config = {
@@ -305,12 +340,20 @@ function MonthlyChartCard({ summary }: { summary: DonationSummary }) {
   );
 }
 
-function CumulativeChartCard({ summary }: { summary: DonationSummary }) {
+function CumulativeChartCard({
+  summary,
+  currency,
+  rates,
+}: {
+  summary: FundingDonationSummary;
+  currency: string;
+  rates?: readonly DonationRate[];
+}) {
   const t = useTranslations();
   const locale = useLocale();
   const { cumulativeData } = useMemo(
-    () => buildChartData(summary, locale),
-    [summary, locale],
+    () => buildChartData(summary, locale, currency, rates),
+    [summary, locale, currency, rates],
   );
 
   const config = {
@@ -360,14 +403,16 @@ function CumulativeChartCard({ summary }: { summary: DonationSummary }) {
 }
 
 export type ImpactStatsProps = {
-  summary: DonationSummary;
+  summary: FundingDonationSummary;
+  currency: string;
+  rates?: readonly DonationRate[];
 };
 
 /**
  * Returns a fragment of grid cells so the impact cards can participate in the
  * donation page's bento grid instead of being boxed into their own section.
  */
-export function ImpactStats({ summary }: ImpactStatsProps) {
+export function ImpactStats({ summary, currency, rates }: ImpactStatsProps) {
   const t = useTranslations();
 
   return (
@@ -379,11 +424,21 @@ export function ImpactStats({ summary }: ImpactStatsProps) {
         {t('funding.impactStats.description')}
       </p>
       {summary.stats.map((stat) => (
-        <ImpactStatCard key={stat.id} stat={stat} currency={summary.currency} />
+        <ImpactStatCard
+          key={stat.id}
+          stat={stat}
+          currency={currency}
+          rates={rates}
+          baseCurrency={summary.currency}
+        />
       ))}
       <SupportersPodium supporters={summary.supporters} />
-      <MonthlyChartCard summary={summary} />
-      <CumulativeChartCard summary={summary} />
+      <MonthlyChartCard summary={summary} currency={currency} rates={rates} />
+      <CumulativeChartCard
+        summary={summary}
+        currency={currency}
+        rates={rates}
+      />
     </>
   );
 }

@@ -3,10 +3,13 @@
 import { buttonVariants, Icon, type IconAliaseKey } from '@maw/ui-lib';
 import { cn } from '@maw/ui-lib/utils';
 import { useTranslations } from 'next-intl';
-import type { ComponentProps } from 'react';
+import { type ComponentProps, useState } from 'react';
 import { Link } from '@/core/i18n/navigation';
 import type { FundingConfig } from '../../schemas';
+import type { DonationRate, DonationTier } from '../../types';
+import { toDisplayAmount } from '../../utils/currency';
 import { CryptoDonationButton } from './CryptoDonationButton';
+import { SupportTiers } from './SupportTiers';
 
 type SupportLinkProps = {
   href: string;
@@ -35,24 +38,52 @@ function SupportLink({ href, icon, label }: SupportLinkProps) {
 
 export type SupportOptionsProps = {
   funding: FundingConfig;
+  tiers: readonly DonationTier[];
+  currency: string;
+  rates?: readonly DonationRate[];
+  locale: string;
 } & ComponentProps<'section'>;
 
 /**
- * Compact grid of support options (classic links + crypto popover buttons) with
- * an "other means" link underneath. Sits below the balance hero.
+ * The offer: preset tiers (or a custom amount) plus the provider buttons. The
+ * selected amount is carried into providers that accept one (PayPal); crypto
+ * methods reveal their QR codes in a popover.
  */
 export function SupportOptions({
   funding,
+  tiers,
+  currency,
+  rates,
+  locale,
   className,
   ...rest
 }: SupportOptionsProps) {
   const t = useTranslations();
+  const [amount, setAmount] = useState(() => tiers[0]?.amount ?? 0);
+
+  const paypalHref =
+    amount > 0
+      ? `${funding.paypalUrl}/${toDisplayAmount(
+          amount,
+          { locale, currency, rates },
+          { charm: true },
+        )}${currency}`
+      : funding.paypalUrl;
 
   return (
-    <section className={cn('flex flex-col gap-3', className)} {...rest}>
-      <h3 className="text-muted-foreground text-xs font-semibold tracking-[0.2em] uppercase">
-        {t('funding.supportMethods')}
-      </h3>
+    <section
+      id="support"
+      className={cn('flex scroll-mt-24 flex-col gap-4', className)}
+      {...rest}
+    >
+      <SupportTiers
+        tiers={tiers}
+        currency={currency}
+        rates={rates}
+        locale={locale}
+        selection={amount}
+        onSelectionChange={setAmount}
+      />
 
       <div className="grid grid-cols-2 gap-3">
         <SupportLink
@@ -61,7 +92,7 @@ export function SupportOptions({
           label={t('funding.buyMeACoffee')}
         />
         <SupportLink
-          href={funding.paypalUrl}
+          href={paypalHref}
           icon="paypal"
           label={t('funding.payPal')}
         />

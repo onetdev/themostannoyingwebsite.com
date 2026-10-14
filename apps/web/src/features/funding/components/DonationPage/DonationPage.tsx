@@ -3,9 +3,11 @@ import { Card, CardContent, CardHeader, CardTitle } from '@maw/ui-lib';
 import { getLocale, getTranslations } from 'next-intl/server';
 import { getAppConfigService } from '@/services';
 import { getDonationSummary } from '../../services/get-donation-summary';
+import { resolveDisplayCurrency } from '../../utils/currency';
 import { BeforeAfterSlider } from './BeforeAfterSlider';
 import { DonationCounter } from './DonationCounter';
 import { DonationFaq } from './DonationFaq';
+import { DonationHero } from './DonationHero';
 import { ImpactStats } from './ImpactStats';
 import { JarAnimation } from './JarAnimation';
 import { NeonArrow } from './NeonArrow';
@@ -20,6 +22,8 @@ export async function DonationPage() {
   const donationSummary = await getDonationSummary(locale);
   const balance = donationSummary?.totals.balance ?? 0;
 
+  const currency = resolveDisplayCurrency(locale, donationSummary?.rates);
+
   const tRich = (key: AppTranslationKey) =>
     t.rich(key, {
       br: () => <br />,
@@ -28,7 +32,13 @@ export async function DonationPage() {
   return (
     <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-6">
       <div className="flex flex-col md:col-span-1 lg:col-span-3">
-        <section className="relative flex flex-col items-center justify-center gap-4 text-center">
+        <DonationHero
+          summary={donationSummary}
+          locale={locale}
+          currency={currency}
+        />
+
+        <section className="mt-6 flex flex-col items-center justify-center gap-4 text-center">
           <p className="text-muted-foreground relative z-10 text-sm font-semibold tracking-[0.2em] uppercase">
             {t('funding.balanceEyebrow')}
           </p>
@@ -37,6 +47,8 @@ export async function DonationPage() {
             size="hero"
             className="relative z-10"
             data-testid="donation-balance"
+            currency={currency}
+            rates={donationSummary?.rates}
           />
         </section>
 
@@ -45,7 +57,14 @@ export async function DonationPage() {
           className="mx-auto w-full max-w-2xl"
         />
 
-        <SupportOptions funding={funding} className="mt-6" />
+        <SupportOptions
+          funding={funding}
+          tiers={donationSummary?.tiers ?? []}
+          rates={donationSummary?.rates}
+          currency={currency}
+          locale={locale}
+          className="mt-6"
+        />
       </div>
 
       <div className="relative flex flex-col md:col-span-1 lg:col-span-3">
@@ -77,7 +96,13 @@ export async function DonationPage() {
         </p>
       </section>
 
-      {donationSummary && <ImpactStats summary={donationSummary} />}
+      {donationSummary && (
+        <ImpactStats
+          summary={donationSummary}
+          currency={currency}
+          rates={donationSummary.rates}
+        />
+      )}
 
       <Card className="md:col-span-2 lg:col-span-6">
         <CardHeader>

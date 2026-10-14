@@ -2,14 +2,38 @@
 
 Manages the site's donation information and funneling user traffic towards various support mechanisms.
 
+## Data (Content API)
+
+Donation data is served by the Content API's dedicated endpoint
+(`GET /api/v1/donation/:lang`) and fetched server-side, per
+`adr/0030-donation-data-served-by-the-content-api.md` and
+`adr/0032-donation-tiers-goal-and-currency-display.md`.
+
+- **Live balance**: `totals.balance` is computed at serve time from the accrual formula
+  (`floor(-elapsedDays * costDailyAvgInEuro) + totalDonationInEuro`), so it grows with
+  time. `totals.donations`/`totals.expenses` remain the sums of the monthly rows; the
+  monthly chart is unchanged and the balance is intentionally independent of
+  `donations - expenses`.
+- **Tiers + goal**: the response also carries `tiers` (base EUR amounts with i18n
+  label/blurb keys), a `goal` (`{ amount, period, labelKey }`) and `supporterCount`.
+- **Currency display**: the API stays in base EUR and returns a static `rates` table
+  (approximate, vs EUR). The frontend resolves the display currency from the locale
+  region server-side (so SSR and hydration agree), converts base amounts, and applies
+  **charm rounding** to tier presets — a `.99` ladder for 2-decimal currencies and an
+  integer ladder (…1999/5999) for zero-decimal currencies (HUF, JPY). Big figures
+  convert without charm rounding. Labels stay i18n keys resolved by the frontend, and
+  one shared `formatCurrency` helper is used everywhere.
+
 ## Key Highlights
 
-- **DonationPage**: A centralized layout pairing a borderless balance hero and a compact support grid on the left with the FAQ (backed by a faint jar animation) on the right, followed by a before/after comparison sample and the "impact in numbers" charts.
-- **BeforeAfterSlider**: Standalone draggable comparison component (`inset()` clip over two layers) placed above the impact stats; imagery is passed in so it can be swapped without touching the component.
+- **DonationPage**: A centralized layout pairing a product-style hero and a compact tier selector on the left with the FAQ (backed by a faint jar animation) on the right, followed by a before/after comparison sample and the "impact in numbers" charts.
+- **Hero**: The value proposition, the primary "Support the project" CTA, a secondary "Share instead" action, goal progress, a trust row and social proof.
+- **Tier selector**: A compact preset tier list plus a custom amount input, feeding the existing support options; a light satirical layer (fake urgency, a "€0 · most popular" tier, tip upsell) is composed on top and kept deliberately thin.
+- **BeforeAfterSlider**: Standalone draggable comparison component (`inset()` clip over two layers) placed above the impact stats; imagery is passed in so it can be swapped without touching the component, and the copy is contextualized rather than generic.
 - **BeggarBanner**: A prominent, non-dismissible alert at the top of the site that encourages users to donate. Its visibility is often linked to the first 10 days of each month to simulate "real-world" funding urgency.
 - **DonationService**: An injectable service that provides calculated estimates for the project's financial status and determines if the `BeggarBanner` should be displayed.
 - **Crypto Donations**: `SupportOptions` lists classic and crypto methods; the BTC/ETH buttons reveal a dynamically generated QR code, network and copy-to-clipboard address inside a `Popover` (see `docs/shadcn-adoption-log.md`, BEH-21).
-- **Neon Arrows**: A decorative `NeonArrow` SVG (theme-primary drop-shadow glow, reduced-motion aware) points from the balance hero at the support buttons.
+- **Neon Arrows**: A decorative `NeonArrow` SVG (theme-primary drop-shadow glow, reduced-motion aware) points from the hero at the support buttons.
 
 ## Service Details
 
