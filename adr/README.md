@@ -41,3 +41,4 @@ file-name convention; see the `adr-writer` skill for the authoring workflow.
 | [0029](0029-content-resource-model-pools-and-dedicated-endpoints.md) | Content Resource Model — String Pools and Dedicated Endpoints | Accepted |
 | [0030](0030-donation-data-served-by-the-content-api.md) | Donation Data Served by the Content API | Accepted |
 | [0031](0031-base-ui-shadcn-adoption.md) | Base UI shadcn Adoption and Behavior-Preserving Migration | Accepted |
+| [0032](0032-donation-tiers-goal-and-currency-display.md) | Donation Tiers, Goal, and Currency as a Display Concern | Accepted (amends [ADR 30](0030-donation-data-served-by-the-content-api.md)) |
