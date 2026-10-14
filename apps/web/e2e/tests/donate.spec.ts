@@ -47,6 +47,25 @@ test('crypto donation reveals its QR code in a popover', async ({ page }) => {
   await expect(donatePage.cryptoQr).toBeVisible();
 });
 
+test('donation hero and tier picker are interactive', async ({ page }) => {
+  await setupE2eTestState(page);
+  const donatePage = getDonatePage(page);
+  await donatePage.goto();
+
+  await expect(donatePage.heroHeadline).toBeVisible();
+  await expect(donatePage.primaryCta).toBeVisible();
+  await expect(donatePage.shareCta).toBeVisible();
+  await expect(donatePage.tiersHeading).toBeVisible();
+
+  await donatePage.tierHosting.click();
+  await expect(donatePage.tierHosting).toHaveAttribute('aria-pressed', 'true');
+
+  await donatePage.tierCustom.click();
+  await expect(donatePage.customAmountInput).toBeVisible();
+  await donatePage.customAmountInput.fill('42');
+  await expect(donatePage.customAmountInput).toHaveValue('42');
+});
+
 test('donation page renders the made-up impact stats chart', async ({
   page,
 }) => {

@@ -9,6 +9,16 @@ export const getDonatePage = (page: Page) => {
     ...shared,
 
     headline: page.getByRole('heading', { name: 'Donate' }),
+    heroHeadline: page.getByRole('heading', {
+      name: /Keep the internet/i,
+    }),
+    primaryCta: page.getByRole('link', { name: 'Support the project' }),
+    shareCta: page.getByRole('button', { name: 'Share instead' }),
+    tiersHeading: page.getByRole('heading', { name: 'Pick your poison' }),
+    tierCoffee: page.getByTestId('tier-coffee'),
+    tierHosting: page.getByTestId('tier-hosting'),
+    tierCustom: page.getByTestId('tier-custom'),
+    customAmountInput: page.getByTestId('tier-custom-input'),
     jarAnimation: page.getByTestId('jar-animation'),
     totalSupportReceivedHeading: page.getByRole('heading', {
       name: 'Total Support Received',
