@@ -1,5 +1,4 @@
 import type { LanguageCode } from '@maw/content-sdk';
-import { Card, CardContent, CardHeader, CardTitle } from '@maw/ui-lib';
 import { getLocale, getTranslations } from 'next-intl/server';
 import { getAppConfigService } from '@/services';
 import { getDonationSummary } from '../../services/get-donation-summary';
@@ -80,16 +79,12 @@ export async function DonationPage() {
         />
       )}
 
-      <Card className="md:col-span-2 lg:col-span-6">
-        <CardHeader>
-          <CardTitle>{t('funding.disclaimer')}</CardTitle>
-        </CardHeader>
-        <CardContent>
-          <p className="text-muted-foreground text-xs leading-relaxed">
-            {tRich('funding.disclaimerDetails')}
-          </p>
-        </CardContent>
-      </Card>
+      <section className="md:col-span-2 lg:col-span-6">
+        <h2 className="text-base font-semibold">{t('funding.disclaimer')}</h2>
+        <p className="text-muted-foreground mt-2 text-xs leading-relaxed">
+          {tRich('funding.disclaimerDetails')}
+        </p>
+      </section>
     </div>
   );
 }
