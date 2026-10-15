@@ -80,6 +80,9 @@ export function DonationHero({ summary, className }: DonationHeroProps) {
           <Icon icon="share" aria-hidden />
           {t('funding.hero.shareCta')}
         </button>
+        <a href="#impact" className="text-sm font-medium">
+          {t('funding.hero.impactCta')}
+        </a>
       </div>
 
       <p className="text-muted-foreground text-xs">{t('funding.hero.trust')}</p>
@@ -88,9 +91,6 @@ export function DonationHero({ summary, className }: DonationHeroProps) {
           {t('funding.hero.supporters', { count: supporterCount })}
         </p>
       )}
-      <a href="#impact" className="text-sm font-medium">
-        {t('funding.hero.impactCta')}
-      </a>
     </section>
   );
 }
