@@ -220,7 +220,7 @@ covered by a Storybook story).
 Revised the donation page after review:
 
 - **Tier selector to the top right**: `SupportOptions` (the "Pick your poison" tiers plus the provider buttons) moved beside the hero instead of below the balance block.
-- **FAQ above the comparison**: the de-boxed FAQ now sits above the before/after slider, and both are centered and width-capped (`max-w-2xl`) for readability.
+- **Comparison above the FAQ**: the centered, width-capped before/after slider now sits above the de-boxed FAQ.
 - **Neon arrows removed**: the decorative `NeonArrow` SVG and its flicker stylesheet (Phase 8) were dropped as too distracting.
 - **Jar animation removed**: the `JarAnimation` component, its `moneyJarAnimation` config and the `money-jar.lottie` asset were dropped along with the FAQ backdrop.
 - **Impact stats tightened**: shorter charts (`h-[190px]`) and denser stat cards.
