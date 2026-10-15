@@ -215,6 +215,16 @@ covered by a Storybook story).
 - **Icons**: `@fortawesome/free-brands-svg-icons` added to the catalog and the
   `bitcoin`, `ethereum` and `paypal` marks exposed through the ui-lib `Icon` map.
 
+## Phase 9 review notes
+
+Revised the donation page after review:
+
+- **Tier selector to the top right**: `SupportOptions` (the "Pick your poison" tiers plus the provider buttons) moved beside the hero instead of below the balance block.
+- **FAQ above the comparison**: the de-boxed FAQ now sits above the before/after slider, and both are centered and width-capped (`max-w-2xl`) for readability.
+- **Neon arrows removed**: the decorative `NeonArrow` SVG and its flicker stylesheet (Phase 8) were dropped as too distracting.
+- **Impact stats tightened**: shorter charts (`h-[190px]`) and denser stat cards.
+- **Native share**: the hero's "Share instead" now goes through the shared `useShareAction` hook (native sheet first, modal fallback).
+
 ## Registry drift audit
 
 `pnpm audit:registry` (`packages/ui-lib/scripts/audit-registry-drift.ts`) diffs
@@ -259,3 +269,6 @@ or in CI.
 - [x] **Phase 8** — Donation page rework + `Popover` atom (borderless balance
       hero, crypto QR popovers, neon arrows, de-boxed FAQ, brand icons) — see
       Phase 8 notes.
+- [x] **Phase 9** — Donation page layout revision (tier selector top-right, FAQ
+      above the comparison, arrows removed, impact stats tightened, native share)
+      — see Phase 9 notes.
