@@ -27,7 +27,7 @@ export async function DonationPage() {
     });
 
   return (
-    <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-6">
+    <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-6 lg:gap-y-12">
       <div className="flex flex-col gap-6 md:col-span-1 lg:col-span-3">
         <section className="flex flex-col items-start gap-4 text-left">
           <p className="text-muted-foreground text-sm font-semibold tracking-[0.2em] uppercase">
@@ -54,7 +54,7 @@ export async function DonationPage() {
         className="md:col-span-1 lg:col-span-3"
       />
 
-      <section className="mx-auto flex w-full max-w-2xl flex-col gap-4 md:col-span-1 lg:col-span-3">
+      <section className="flex w-full flex-col gap-4 md:col-span-1 lg:col-span-3">
         <h2>{t('funding.beforeAfter.heading')}</h2>
         <BeforeAfterSlider
           beforeSrc={funding.assets.beforeImage}
@@ -69,7 +69,7 @@ export async function DonationPage() {
         </p>
       </section>
 
-      <DonationFaq className="mx-auto w-full max-w-2xl md:col-span-1 lg:col-span-3" />
+      <DonationFaq className="w-full md:col-span-1 lg:col-span-3" />
 
       {donationSummary && (
         <ImpactStats
