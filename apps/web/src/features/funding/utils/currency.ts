@@ -23,6 +23,9 @@ export const FALLBACK_RATES: Readonly<Record<string, number>> = {
   HUF: 395,
   TRY: 37,
   JPY: 168,
+  // Crypto, as approximate units per 1 EUR (used for payment URIs only).
+  BTC: 0.0000105,
+  ETH: 0.000323,
 };
 
 /** Curated region → currency map for the common cases. */

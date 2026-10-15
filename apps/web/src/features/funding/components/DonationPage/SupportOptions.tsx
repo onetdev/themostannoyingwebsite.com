@@ -7,7 +7,8 @@ import { type ComponentProps, useState } from 'react';
 import { Link } from '@/core/i18n/navigation';
 import type { FundingConfig } from '../../schemas';
 import type { DonationRate, DonationTier } from '../../types';
-import { toDisplayAmount } from '../../utils/currency';
+import { buildBitcoinUri, buildEthereumUri } from '../../utils/crypto-uri';
+import { convertAmount, toDisplayAmount } from '../../utils/currency';
 import { CryptoDonationButton } from './CryptoDonationButton';
 import { SupportTiers } from './SupportTiers';
 
@@ -72,6 +73,16 @@ export function SupportOptions({
         )}${currency}`
       : funding.paypalUrl;
 
+  const btcAmount = convertAmount(amount, 'BTC', rates);
+  const ethAmount = convertAmount(amount, 'ETH', rates);
+  const cryptoAmountLabel = (value: number, symbol: string) =>
+    value > 0
+      ? t('funding.crypto.amountLabel', {
+          amount: value.toFixed(8),
+          symbol,
+        })
+      : undefined;
+
   return (
     <section
       id="support"
@@ -103,6 +114,8 @@ export function SupportOptions({
           label={t('funding.crypto.bitcoin')}
           icon="bitcoin"
           address={funding.btcWallet.address}
+          qrValue={buildBitcoinUri(funding.btcWallet.address, btcAmount)}
+          amountLabel={cryptoAmountLabel(btcAmount, 'BTC')}
           network={funding.btcWallet.network}
         />
         <CryptoDonationButton
@@ -110,6 +123,8 @@ export function SupportOptions({
           label={t('funding.crypto.ethereum')}
           icon="ethereum"
           address={funding.ethWallet.address}
+          qrValue={buildEthereumUri(funding.ethWallet.address, ethAmount)}
+          amountLabel={cryptoAmountLabel(ethAmount, 'ETH')}
         />
       </div>
 

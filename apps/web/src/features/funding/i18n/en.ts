@@ -123,6 +123,7 @@ export default {
     copyAction: 'Copy Address',
     copyFeedback: 'Copied!',
     qrHint: 'Scan the code or copy the address to send crypto directly.',
+    amountLabel: '≈ {amount} {symbol}',
     bitcoin: 'Bitcoin (BTC)',
     ethereum: 'Ethereum (ETH)',
   },

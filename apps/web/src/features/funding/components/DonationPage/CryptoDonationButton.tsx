@@ -20,8 +20,12 @@ export type CryptoDonationButtonProps = {
   label: string;
   /** Brand/donation icon shown in the trigger. */
   icon: IconAliaseKey;
-  /** Wallet address encoded into the QR code. */
+  /** Wallet address encoded into the QR code (and copied to the clipboard). */
   address: string;
+  /** Value encoded into the QR code; defaults to the raw `address`. */
+  qrValue?: string;
+  /** Optional pre-formatted amount shown above the address (e.g. "≈ 0.00005250 BTC"). */
+  amountLabel?: string;
   /** Optional chain/network name shown above the address. */
   network?: string;
 } & ComponentProps<'div'>;
@@ -34,6 +38,8 @@ export function CryptoDonationButton({
   label,
   icon,
   address,
+  qrValue,
+  amountLabel,
   network,
   className,
   ...rest
@@ -63,8 +69,12 @@ export function CryptoDonationButton({
           </PopoverDescription>
 
           <div className="rounded-2xl bg-white p-4" data-testid="crypto-qr">
-            <QRCodeSVG value={address} size={180} level="H" />
+            <QRCodeSVG value={qrValue ?? address} size={180} level="H" />
           </div>
+
+          {amountLabel && (
+            <p className="font-semibold text-sm">{amountLabel}</p>
+          )}
 
           {network && (
             <p className="text-muted-foreground text-sm">
