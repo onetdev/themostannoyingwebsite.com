@@ -2,7 +2,6 @@ import * as z from 'zod';
 
 export const FundingConfigSchema = z.object({
   assets: z.object({
-    moneyJarAnimation: z.string(),
     beforeImage: z.string(),
     afterImage: z.string(),
   }),

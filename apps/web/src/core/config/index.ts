@@ -65,7 +65,6 @@ const config: AppConfig = {
   },
   funding: {
     assets: {
-      moneyJarAnimation: '/assets/animations/money-jar.lottie',
       beforeImage: '/assets/donation/before.webp',
       afterImage: '/assets/donation/after.webp',
     },
