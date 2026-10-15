@@ -15,15 +15,7 @@ import {
 } from '@maw/ui-lib';
 import { useLocale, useTranslations } from 'next-intl';
 import { useMemo } from 'react';
-import {
-  Area,
-  AreaChart,
-  Bar,
-  BarChart,
-  CartesianGrid,
-  ReferenceLine,
-  XAxis,
-} from 'recharts';
+import { Bar, BarChart, CartesianGrid, ReferenceLine, XAxis } from 'recharts';
 import type { DonationRate, FundingDonationSummary } from '../../types';
 import { toDisplayAmount } from '../../utils/currency';
 
@@ -145,17 +137,7 @@ function buildChartData(
     };
   });
 
-  let runningExpenses = 0;
-  const cumulativeData = monthlyData.map((entry) => {
-    runningExpenses += entry.expenses;
-
-    return {
-      label: entry.label,
-      cumulativeExpenses: runningExpenses,
-    };
-  });
-
-  return { monthlyData, cumulativeData };
+  return { monthlyData };
 }
 
 function ImpactStatCard({
@@ -305,7 +287,7 @@ function MonthlyChartCard({
   } satisfies ChartConfig;
 
   return (
-    <Card className="md:col-span-2 lg:col-span-3">
+    <Card className="md:col-span-2 lg:col-span-2">
       <CardContent className="flex flex-col gap-4">
         <div>
           <p className="font-semibold">
@@ -334,68 +316,6 @@ function MonthlyChartCard({
             <Bar dataKey="donations" fill="var(--color-donations)" radius={4} />
             <Bar dataKey="expenses" fill="var(--color-expenses)" radius={4} />
           </BarChart>
-        </ChartContainer>
-      </CardContent>
-    </Card>
-  );
-}
-
-function CumulativeChartCard({
-  summary,
-  currency,
-  rates,
-}: {
-  summary: FundingDonationSummary;
-  currency: string;
-  rates?: readonly DonationRate[];
-}) {
-  const t = useTranslations();
-  const locale = useLocale();
-  const { cumulativeData } = useMemo(
-    () => buildChartData(summary, locale, currency, rates),
-    [summary, locale, currency, rates],
-  );
-
-  const config = {
-    cumulativeExpenses: {
-      label: t('funding.impactStats.series.cumulativeExpenses'),
-      color: 'var(--chart-3)',
-    },
-  } satisfies ChartConfig;
-
-  return (
-    <Card className="md:col-span-2 lg:col-span-3">
-      <CardContent className="flex flex-col gap-4">
-        <div>
-          <p className="font-semibold">
-            {t('funding.impactStats.cumulative.title')}
-          </p>
-          <p className="text-muted-foreground text-sm">
-            {t('funding.impactStats.cumulative.description')}
-          </p>
-        </div>
-        <ChartContainer
-          config={config}
-          className="h-[190px] w-full"
-          data-testid="impact-stats-cumulative-chart"
-        >
-          <AreaChart accessibilityLayer data={cumulativeData}>
-            <CartesianGrid vertical={false} />
-            <XAxis
-              dataKey="label"
-              tickLine={false}
-              tickMargin={10}
-              axisLine={false}
-            />
-            <ReferenceLine y={0} stroke="var(--border)" />
-            <ChartTooltip content={<ChartTooltipContent />} />
-            <Area
-              dataKey="cumulativeExpenses"
-              fill="var(--color-cumulativeExpenses)"
-              fillOpacity={0.3}
-              stroke="var(--color-cumulativeExpenses)"
-            />
-          </AreaChart>
         </ChartContainer>
       </CardContent>
     </Card>
@@ -434,11 +354,6 @@ export function ImpactStats({ summary, currency, rates }: ImpactStatsProps) {
       ))}
       <SupportersPodium supporters={summary.supporters} />
       <MonthlyChartCard summary={summary} currency={currency} rates={rates} />
-      <CumulativeChartCard
-        summary={summary}
-        currency={currency}
-        rates={rates}
-      />
     </>
   );
 }

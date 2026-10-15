@@ -26,7 +26,7 @@ Donation data is served by the Content API's dedicated endpoint
 
 ## Key Highlights
 
-- **DonationPage**: A product-style hero and balance block on the left, the tier selector at the top right, then a centered, width-capped before/after comparison sample followed by the FAQ, then the "impact in numbers" charts.
+- **DonationPage**: A product-style hero and balance block on the left, the tier selector at the top right, then a centered, width-capped before/after comparison sample followed by the FAQ, then the "impact in numbers" chart, supporters podium and the coffees-consumed stat.
 - **Hero**: The value proposition, the primary "Support the project" CTA (shown only when the support options sit below the hero), a secondary "Share instead" action (native share sheet first), a trust row and social proof.
 - **Tier selector**: A compact preset tier list plus a custom amount input, feeding the existing support options.
 - **BeforeAfterSlider**: Standalone draggable comparison component (`inset()` clip over two layers) placed below the FAQ; imagery is passed in so it can be swapped without touching the component.
