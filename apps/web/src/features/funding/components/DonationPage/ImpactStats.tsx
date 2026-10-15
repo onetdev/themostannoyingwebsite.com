@@ -337,7 +337,7 @@ export function ImpactStats({ summary, currency, rates }: ImpactStatsProps) {
 
   return (
     <>
-      <h2 className="mt-2 md:col-span-2 lg:col-span-6">
+      <h2 id="impact" className="mt-2 scroll-mt-24 md:col-span-2 lg:col-span-6">
         {t('funding.impactStats.heading')}
       </h2>
       <p className="text-muted-foreground md:col-span-2 lg:col-span-6">

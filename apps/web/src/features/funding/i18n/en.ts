@@ -81,6 +81,7 @@ export default {
       'No sponsors, no ads, no plan — just server bills, kebabs, and your questionable generosity.',
     primaryCta: 'Support the project',
     shareCta: 'Share instead',
+    impactCta: 'See the impact in numbers',
     trust: 'No account needed · PayPal, coffee or crypto',
     supporters: 'Join {count} supporters',
   },

@@ -88,6 +88,9 @@ export function DonationHero({ summary, className }: DonationHeroProps) {
           {t('funding.hero.supporters', { count: supporterCount })}
         </p>
       )}
+      <a href="#impact" className="text-sm font-medium">
+        {t('funding.hero.impactCta')}
+      </a>
     </section>
   );
 }
