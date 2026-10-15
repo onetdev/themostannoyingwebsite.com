@@ -60,8 +60,6 @@ export async function DonationPage() {
         className="md:col-span-1 lg:col-span-3"
       />
 
-      <DonationFaq className="mx-auto w-full max-w-2xl md:col-span-2 lg:col-span-6" />
-
       <section className="mx-auto flex w-full max-w-2xl flex-col gap-4 md:col-span-2 lg:col-span-6">
         <h2>{t('funding.beforeAfter.heading')}</h2>
         <BeforeAfterSlider
@@ -76,6 +74,8 @@ export async function DonationPage() {
           {t('funding.beforeAfter.caption')}
         </p>
       </section>
+
+      <DonationFaq className="mx-auto w-full max-w-2xl md:col-span-2 lg:col-span-6" />
 
       {donationSummary && (
         <ImpactStats
