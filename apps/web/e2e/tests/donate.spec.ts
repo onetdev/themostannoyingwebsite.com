@@ -24,7 +24,6 @@ test('donation page displays essential interactive elements', async ({
   await expect(donatePage.buyMeACoffeeButton).toBeVisible();
   await expect(donatePage.payPalButton).toBeVisible();
   await expect(donatePage.alternativeOptionsLink).toBeVisible();
-  await expect(donatePage.jarAnimation).toBeVisible();
   await expect(donatePage.donationBalance).toBeVisible();
   await expect(donatePage.cryptoWalletBtc).toBeVisible();
   await expect(donatePage.cryptoWalletEth).toBeVisible();

@@ -19,7 +19,6 @@ export const getDonatePage = (page: Page) => {
     tierHosting: page.getByTestId('tier-hosting'),
     tierCustom: page.getByTestId('tier-custom'),
     customAmountInput: page.getByTestId('tier-custom-input'),
-    jarAnimation: page.getByTestId('jar-animation'),
     totalSupportReceivedHeading: page.getByRole('heading', {
       name: 'Total Support Received',
     }),
