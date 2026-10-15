@@ -4,6 +4,7 @@ import type { DonationStat, DonationSupporter } from '@maw/content-sdk';
 import {
   Card,
   CardContent,
+  CardHeader,
   type ChartConfig,
   ChartContainer,
   ChartLegend,
@@ -140,7 +141,7 @@ function buildChartData(
   return { monthlyData };
 }
 
-function ImpactStatCard({
+function ImpactStat({
   stat,
   currency,
   rates,
@@ -181,32 +182,27 @@ function ImpactStatCard({
   );
 
   return (
-    <Card
-      className="hover:border-primary/40 transition-colors lg:col-span-2"
-      data-testid={`impact-stat-${stat.id}`}
-    >
-      <CardContent className="flex flex-col gap-2">
-        <span
-          aria-hidden
-          className={`bg-muted flex size-9 items-center justify-center rounded-lg ${sentimentClass}`}
-        >
-          <Icon icon={STAT_ICONS[stat.id] ?? 'tags'} />
+    <div className="flex flex-col gap-2" data-testid={`impact-stat-${stat.id}`}>
+      <span
+        aria-hidden
+        className={`bg-muted flex size-9 items-center justify-center rounded-lg ${sentimentClass}`}
+      >
+        <Icon icon={STAT_ICONS[stat.id] ?? 'tags'} />
+      </span>
+      <span className="text-xl font-bold tracking-tight">{formatted}</span>
+      <span className="text-muted-foreground text-sm">
+        {t(stat.labelKey as AppTranslationKey)}
+      </span>
+      <span
+        className={`flex items-center gap-1 text-sm font-medium ${sentimentClass}`}
+      >
+        <Icon icon={TREND_ICONS[stat.trend.direction]} aria-hidden />
+        {formattedTrend}
+        <span className="sr-only">
+          {t(TREND_DIRECTION_LABEL_KEYS[stat.trend.direction])}
         </span>
-        <span className="text-xl font-bold tracking-tight">{formatted}</span>
-        <span className="text-muted-foreground text-sm">
-          {t(stat.labelKey as AppTranslationKey)}
-        </span>
-        <span
-          className={`flex items-center gap-1 text-sm font-medium ${sentimentClass}`}
-        >
-          <Icon icon={TREND_ICONS[stat.trend.direction]} aria-hidden />
-          {formattedTrend}
-          <span className="sr-only">
-            {t(TREND_DIRECTION_LABEL_KEYS[stat.trend.direction])}
-          </span>
-        </span>
-      </CardContent>
-    </Card>
+      </span>
+    </div>
   );
 }
 
@@ -227,39 +223,37 @@ function SupportersPodium({ supporters }: { supporters: DonationSupporter[] }) {
   }, [supporters]);
 
   return (
-    <Card className="flex flex-col justify-end lg:col-span-2">
-      <CardContent className="flex flex-col gap-4">
-        <span className="text-muted-foreground text-sm">
-          {t('funding.topSupporters')}
-        </span>
-        <ul className="flex items-end justify-center gap-3">
-          {podiumOrder.map((supporter) => (
-            <li
-              key={supporter.id}
-              className="flex w-full flex-col items-center gap-2"
-              data-testid={`impact-supporter-${supporter.id}`}
-            >
-              <span aria-hidden className="text-3xl">
-                {SUPPORTER_MEDALS[supporter.tier]}
-              </span>
-              <span className="text-center text-sm font-semibold">
-                {SUPPORTER_LABEL_KEYS[supporter.id]
-                  ? t(SUPPORTER_LABEL_KEYS[supporter.id])
-                  : supporter.id}
-              </span>
-              <span
-                aria-hidden
-                className={`w-full rounded-t-lg ${SUPPORTER_TIER_BARS[supporter.tier]}`}
-              />
-            </li>
-          ))}
-        </ul>
-      </CardContent>
-    </Card>
+    <div className="flex flex-col gap-4">
+      <span className="text-muted-foreground text-sm">
+        {t('funding.topSupporters')}
+      </span>
+      <ul className="flex items-end justify-center gap-3">
+        {podiumOrder.map((supporter) => (
+          <li
+            key={supporter.id}
+            className="flex w-full flex-col items-center gap-2"
+            data-testid={`impact-supporter-${supporter.id}`}
+          >
+            <span aria-hidden className="text-3xl">
+              {SUPPORTER_MEDALS[supporter.tier]}
+            </span>
+            <span className="text-center text-sm font-semibold">
+              {SUPPORTER_LABEL_KEYS[supporter.id]
+                ? t(SUPPORTER_LABEL_KEYS[supporter.id])
+                : supporter.id}
+            </span>
+            <span
+              aria-hidden
+              className={`w-full rounded-t-lg ${SUPPORTER_TIER_BARS[supporter.tier]}`}
+            />
+          </li>
+        ))}
+      </ul>
+    </div>
   );
 }
 
-function MonthlyChartCard({
+function MonthlyChart({
   summary,
   currency,
   rates,
@@ -287,38 +281,36 @@ function MonthlyChartCard({
   } satisfies ChartConfig;
 
   return (
-    <Card className="md:col-span-2 lg:col-span-2">
-      <CardContent className="flex flex-col gap-4">
-        <div>
-          <p className="font-semibold">
-            {t('funding.impactStats.monthly.title')}
-          </p>
-          <p className="text-muted-foreground text-sm">
-            {t('funding.impactStats.monthly.description')}
-          </p>
-        </div>
-        <ChartContainer
-          config={config}
-          className="h-[190px] w-full"
-          data-testid="impact-stats-monthly-chart"
-        >
-          <BarChart accessibilityLayer data={monthlyData}>
-            <CartesianGrid vertical={false} />
-            <XAxis
-              dataKey="label"
-              tickLine={false}
-              tickMargin={10}
-              axisLine={false}
-            />
-            <ReferenceLine y={0} stroke="var(--border)" />
-            <ChartTooltip content={<ChartTooltipContent />} />
-            <ChartLegend content={<ChartLegendContent />} />
-            <Bar dataKey="donations" fill="var(--color-donations)" radius={4} />
-            <Bar dataKey="expenses" fill="var(--color-expenses)" radius={4} />
-          </BarChart>
-        </ChartContainer>
-      </CardContent>
-    </Card>
+    <div className="flex flex-col gap-4">
+      <div>
+        <p className="font-semibold">
+          {t('funding.impactStats.monthly.title')}
+        </p>
+        <p className="text-muted-foreground text-sm">
+          {t('funding.impactStats.monthly.description')}
+        </p>
+      </div>
+      <ChartContainer
+        config={config}
+        className="h-[190px] w-full"
+        data-testid="impact-stats-monthly-chart"
+      >
+        <BarChart accessibilityLayer data={monthlyData}>
+          <CartesianGrid vertical={false} />
+          <XAxis
+            dataKey="label"
+            tickLine={false}
+            tickMargin={10}
+            axisLine={false}
+          />
+          <ReferenceLine y={0} stroke="var(--border)" />
+          <ChartTooltip content={<ChartTooltipContent />} />
+          <ChartLegend content={<ChartLegendContent />} />
+          <Bar dataKey="donations" fill="var(--color-donations)" radius={4} />
+          <Bar dataKey="expenses" fill="var(--color-expenses)" radius={4} />
+        </BarChart>
+      </ChartContainer>
+    </div>
   );
 }
 
@@ -329,31 +321,33 @@ export type ImpactStatsProps = {
 };
 
 /**
- * Returns a fragment of grid cells so the impact cards can participate in the
- * donation page's bento grid instead of being boxed into their own section.
+ * The "Impact in numbers" section, rendered as a single container so it reads as
+ * one block instead of a cluster of separate cards.
  */
 export function ImpactStats({ summary, currency, rates }: ImpactStatsProps) {
   const t = useTranslations();
 
   return (
-    <>
-      <h2 id="impact" className="mt-2 scroll-mt-24 md:col-span-2 lg:col-span-6">
-        {t('funding.impactStats.heading')}
-      </h2>
-      <p className="text-muted-foreground md:col-span-2 lg:col-span-6">
-        {t('funding.impactStats.description')}
-      </p>
-      {summary.stats.map((stat) => (
-        <ImpactStatCard
-          key={stat.id}
-          stat={stat}
-          currency={currency}
-          rates={rates}
-          baseCurrency={summary.currency}
-        />
-      ))}
-      <SupportersPodium supporters={summary.supporters} />
-      <MonthlyChartCard summary={summary} currency={currency} rates={rates} />
-    </>
+    <Card id="impact" className="scroll-mt-24 md:col-span-2 lg:col-span-6">
+      <CardHeader>
+        <h2 className="text-2xl">{t('funding.impactStats.heading')}</h2>
+        <p className="text-muted-foreground text-sm">
+          {t('funding.impactStats.description')}
+        </p>
+      </CardHeader>
+      <CardContent className="grid grid-cols-1 gap-8 md:grid-cols-3">
+        {summary.stats.map((stat) => (
+          <ImpactStat
+            key={stat.id}
+            stat={stat}
+            currency={currency}
+            rates={rates}
+            baseCurrency={summary.currency}
+          />
+        ))}
+        <SupportersPodium supporters={summary.supporters} />
+        <MonthlyChart summary={summary} currency={currency} rates={rates} />
+      </CardContent>
+    </Card>
   );
 }
