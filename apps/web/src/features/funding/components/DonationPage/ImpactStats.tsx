@@ -203,14 +203,14 @@ function ImpactStatCard({
       className="hover:border-primary/40 transition-colors lg:col-span-2"
       data-testid={`impact-stat-${stat.id}`}
     >
-      <CardContent className="flex flex-col gap-3">
+      <CardContent className="flex flex-col gap-2">
         <span
           aria-hidden
-          className={`bg-muted flex size-10 items-center justify-center rounded-lg ${sentimentClass}`}
+          className={`bg-muted flex size-9 items-center justify-center rounded-lg ${sentimentClass}`}
         >
           <Icon icon={STAT_ICONS[stat.id] ?? 'tags'} />
         </span>
-        <span className="text-2xl font-bold tracking-tight">{formatted}</span>
+        <span className="text-xl font-bold tracking-tight">{formatted}</span>
         <span className="text-muted-foreground text-sm">
           {t(stat.labelKey as AppTranslationKey)}
         </span>
@@ -317,7 +317,7 @@ function MonthlyChartCard({
         </div>
         <ChartContainer
           config={config}
-          className="h-[240px] w-full"
+          className="h-[190px] w-full"
           data-testid="impact-stats-monthly-chart"
         >
           <BarChart accessibilityLayer data={monthlyData}>
@@ -376,7 +376,7 @@ function CumulativeChartCard({
         </div>
         <ChartContainer
           config={config}
-          className="h-[240px] w-full"
+          className="h-[190px] w-full"
           data-testid="impact-stats-cumulative-chart"
         >
           <AreaChart accessibilityLayer data={cumulativeData}>
@@ -417,7 +417,7 @@ export function ImpactStats({ summary, currency, rates }: ImpactStatsProps) {
 
   return (
     <>
-      <h2 className="mt-6 md:col-span-2 lg:col-span-6">
+      <h2 className="mt-2 md:col-span-2 lg:col-span-6">
         {t('funding.impactStats.heading')}
       </h2>
       <p className="text-muted-foreground md:col-span-2 lg:col-span-6">

@@ -10,7 +10,6 @@ import { DonationFaq } from './DonationFaq';
 import { DonationHero } from './DonationHero';
 import { ImpactStats } from './ImpactStats';
 import { JarAnimation } from './JarAnimation';
-import { NeonArrow } from './NeonArrow';
 import { SupportOptions } from './SupportOptions';
 
 export { generateStaticParams } from '@/core/i18n/routing';
@@ -51,37 +50,32 @@ export async function DonationPage() {
             rates={donationSummary?.rates}
           />
         </section>
-
-        <NeonArrow
-          tone={balance < 0 ? 'negative' : 'positive'}
-          className="mx-auto w-full max-w-2xl"
-        />
-
-        <SupportOptions
-          funding={funding}
-          tiers={donationSummary?.tiers ?? []}
-          rates={donationSummary?.rates}
-          currency={currency}
-          locale={locale}
-          className="mt-6"
-        />
       </div>
 
-      <div className="relative flex flex-col md:col-span-1 lg:col-span-3">
+      <SupportOptions
+        funding={funding}
+        tiers={donationSummary?.tiers ?? []}
+        rates={donationSummary?.rates}
+        currency={currency}
+        locale={locale}
+        className="md:col-span-1 lg:col-span-3"
+      />
+
+      <div className="relative mx-auto flex w-full max-w-2xl flex-col md:col-span-2 lg:col-span-6">
         <div
           aria-hidden
           className="pointer-events-none absolute inset-0 flex items-center justify-center opacity-10 select-none"
         >
           <JarAnimation
             balance={balance}
-            className="h-96 w-auto"
+            className="h-80 w-auto"
             data-testid="jar-animation"
           />
         </div>
         <DonationFaq className="relative z-10" />
       </div>
 
-      <section className="mt-8 flex flex-col gap-4 md:col-span-2 lg:col-span-6">
+      <section className="mx-auto flex w-full max-w-2xl flex-col gap-4 md:col-span-2 lg:col-span-6">
         <h2>{t('funding.beforeAfter.heading')}</h2>
         <BeforeAfterSlider
           beforeSrc={funding.assets.beforeImage}
