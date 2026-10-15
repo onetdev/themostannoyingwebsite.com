@@ -79,8 +79,7 @@ test('donation page renders the made-up impact stats chart', async ({
 
   await expect(donatePage.impactStatsHeading).toBeVisible();
   await expect(donatePage.impactStatsMonthlyChart).toBeVisible();
-  await expect(donatePage.impactStatsCumulativeChart).toBeVisible();
-  await expect(donatePage.impactStatMoneyBurnt).toBeVisible();
-  await expect(page.getByText('Bugs shipped as features')).toBeVisible();
+  await expect(donatePage.impactStatCoffeesConsumed).toBeVisible();
+  await expect(page.getByText('Coffees consumed')).toBeVisible();
   await expect(donatePage.kidneySupporter).toBeVisible();
 });

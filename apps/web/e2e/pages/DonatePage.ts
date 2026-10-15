@@ -27,10 +27,7 @@ export const getDonatePage = (page: Page) => {
       name: 'Impact in numbers',
     }),
     impactStatsMonthlyChart: page.getByTestId('impact-stats-monthly-chart'),
-    impactStatsCumulativeChart: page.getByTestId(
-      'impact-stats-cumulative-chart',
-    ),
-    impactStatMoneyBurnt: page.getByTestId('impact-stat-moneyBurnt'),
+    impactStatCoffeesConsumed: page.getByTestId('impact-stat-coffeesConsumed'),
     kidneySupporter: page.getByTestId('impact-supporter-kidney'),
     buyMeACoffeeButton: page.getByRole('link', { name: 'Buy Me A Coffee' }),
     payPalButton: page.getByRole('link', { name: 'PayPal' }),
