@@ -19,11 +19,13 @@ type SupportLinkProps = {
 
 function SupportLink({ href, icon, label }: SupportLinkProps) {
   // Base UI `Button` enforces button semantics and must not wrap links, so the
-  // anchor is styled directly with `buttonVariants` (see the Base UI Button docs).
+  // anchor is styled directly with `buttonVariants`. `data-slot="button"` opts
+  // out of the global `a` link styles that would clobber the button colors.
   return (
     <Link
       href={href}
       target="_blank"
+      data-slot="button"
       className={buttonVariants({
         variant: 'secondary',
         size: 'default',

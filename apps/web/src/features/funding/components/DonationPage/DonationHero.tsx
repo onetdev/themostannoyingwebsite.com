@@ -104,7 +104,13 @@ export function DonationHero({
       )}
 
       <div className="flex flex-wrap items-center justify-center gap-3">
-        <a href="#support" className={buttonVariants({ size: 'lg' })}>
+        <a
+          href="#support"
+          // `data-slot="button"` opts out of the global `a` link styles, which
+          // would otherwise paint the label `text-primary` on `bg-primary`.
+          data-slot="button"
+          className={buttonVariants({ size: 'lg' })}
+        >
           <Icon icon="handHoldingDollar" aria-hidden />
           {t('funding.hero.primaryCta')}
         </a>
