@@ -3,7 +3,7 @@
 import { buttonVariants, Icon } from '@maw/ui-lib';
 import { cn } from '@maw/ui-lib/utils';
 import { useTranslations } from 'next-intl';
-import { useRuntimeStore } from '@/stores';
+import { useShareAction } from '@/features/share/hooks';
 import type { FundingDonationSummary } from '../../types';
 import { formatMoney, type MoneyContext } from '../../utils/currency';
 
@@ -26,7 +26,7 @@ export function DonationHero({
   className,
 }: DonationHeroProps) {
   const t = useTranslations();
-  const { showShareModal } = useRuntimeStore();
+  const share = useShareAction();
 
   const balance = summary?.totals.balance ?? 0;
   const isNegative = balance < 0;
@@ -110,7 +110,7 @@ export function DonationHero({
         </a>
         <button
           type="button"
-          onClick={() => showShareModal()}
+          onClick={() => share()}
           className={buttonVariants({ variant: 'outline', size: 'lg' })}
         >
           <Icon icon="share" aria-hidden />
