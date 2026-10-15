@@ -14,6 +14,9 @@ export const getDonatePage = (page: Page) => {
     }),
     primaryCta: page.getByRole('link', { name: 'Support the project' }),
     shareCta: page.getByRole('button', { name: 'Share instead' }),
+    impactCta: page.getByRole('link', {
+      name: 'See the impact in numbers',
+    }),
     tiersHeading: page.getByRole('heading', { name: 'Pick your poison' }),
     tierCoffee: page.getByTestId('tier-coffee'),
     tierHosting: page.getByTestId('tier-hosting'),
