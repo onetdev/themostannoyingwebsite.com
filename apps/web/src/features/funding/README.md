@@ -16,8 +16,10 @@ Donation data is served by the Content API's dedicated endpoint
   `donations - expenses`.
 - **Tiers + goal**: the response also carries `tiers` (base EUR amounts with i18n
   label/blurb keys), a `goal` (`{ amount, period, labelKey }`) and `supporterCount`.
-- **Currency display**: the API stays in base EUR and returns a static `rates` table
-  (approximate, vs EUR). The frontend resolves the display currency from the locale
+- **Currency display**: the API stays in base EUR and returns a `rates` table (units
+  per 1 EUR) refreshed daily from Frankfurter/ECB (fiat) and CoinGecko (crypto), with
+  a static seed as the fallback — see `adr/0033-donation-exchange-rates.md`. The
+  frontend resolves the display currency from the locale
   region server-side (so SSR and hydration agree), converts base amounts, and applies
   **charm rounding** to tier presets — a `.99` ladder for 2-decimal currencies and an
   integer ladder (…1999/5999) for zero-decimal currencies (HUF, JPY). Big figures
