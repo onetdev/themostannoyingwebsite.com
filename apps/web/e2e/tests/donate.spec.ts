@@ -52,9 +52,14 @@ test('donation hero and tier picker are interactive', async ({ page }) => {
   await donatePage.goto();
 
   await expect(donatePage.heroHeadline).toBeVisible();
-  await expect(donatePage.primaryCta).toBeVisible();
   await expect(donatePage.shareCta).toBeVisible();
   await expect(donatePage.tiersHeading).toBeVisible();
+
+  // The primary CTA is only shown when the support options sit below the hero
+  // (mobile). At the desktop viewport they are beside it, so it is hidden.
+  await expect(donatePage.primaryCta).toBeHidden();
+  await page.setViewportSize({ width: 480, height: 900 });
+  await expect(donatePage.primaryCta).toBeVisible();
 
   await donatePage.tierHosting.click();
   await expect(donatePage.tierHosting).toHaveAttribute('aria-pressed', 'true');
