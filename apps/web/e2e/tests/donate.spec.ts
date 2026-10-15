@@ -38,6 +38,7 @@ test('crypto donation reveals its QR code in a popover', async ({ page }) => {
 
   await donatePage.bitcoinButton.click();
   await expect(donatePage.cryptoQr).toBeVisible();
+  await expect(page.getByText(/≈ .* BTC/)).toBeVisible();
 
   await page.keyboard.press('Escape');
   await expect(donatePage.cryptoQr).toBeHidden();
