@@ -29,26 +29,21 @@ export async function DonationPage() {
 
   return (
     <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-6">
-      <div className="flex flex-col md:col-span-1 lg:col-span-3">
-        <DonationHero
-          summary={donationSummary}
-          locale={locale}
-          currency={currency}
-        />
-
-        <section className="mt-6 flex flex-col items-center justify-center gap-4 text-center">
-          <p className="text-muted-foreground relative z-10 text-sm font-semibold tracking-[0.2em] uppercase">
+      <div className="flex flex-col gap-6 md:col-span-1 lg:col-span-3">
+        <section className="flex flex-col items-start gap-4 text-left">
+          <p className="text-muted-foreground text-sm font-semibold tracking-[0.2em] uppercase">
             {t('funding.balanceEyebrow')}
           </p>
           <DonationCounter
             balance={balance}
             size="hero"
-            className="relative z-10"
             data-testid="donation-balance"
             currency={currency}
             rates={donationSummary?.rates}
           />
         </section>
+
+        <DonationHero summary={donationSummary} />
       </div>
 
       <SupportOptions
