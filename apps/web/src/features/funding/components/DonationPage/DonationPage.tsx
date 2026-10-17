@@ -2,6 +2,7 @@ import type { LanguageCode } from '@maw/content-sdk';
 import { Separator } from '@maw/ui-lib';
 import { getLocale, getTranslations } from 'next-intl/server';
 import { getAppConfigService } from '@/services';
+import { getCurrencyRates } from '../../services/get-currency-rates';
 import { getDonationSummary } from '../../services/get-donation-summary';
 import { BeforeAfterSlider } from './BeforeAfterSlider';
 import { DonationCounter } from './DonationCounter';
@@ -16,7 +17,10 @@ export async function DonationPage() {
   const { funding } = getAppConfigService().getAll();
   const locale = (await getLocale()) as LanguageCode;
   const t = await getTranslations();
-  const donationSummary = await getDonationSummary(locale);
+  const [donationSummary, currencyRates] = await Promise.all([
+    getDonationSummary(locale),
+    getCurrencyRates(),
+  ]);
   const balance = donationSummary?.totals.balance ?? 0;
 
   const tRich = (key: AppTranslationKey) =>
@@ -46,7 +50,7 @@ export async function DonationPage() {
       <SupportOptions
         funding={funding}
         tiers={donationSummary?.tiers ?? []}
-        rates={donationSummary?.rates}
+        rates={currencyRates?.rates}
         locale={locale}
       />
 

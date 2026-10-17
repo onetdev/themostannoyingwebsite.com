@@ -16,9 +16,11 @@ Donation data is served by the Content API's dedicated endpoint
   `donations - expenses`.
 - **Tiers + goal**: the response also carries `tiers` (base EUR amounts with i18n
   label/key blurb keys), a `goal` (`{ amount, period, labelKey }`) and `supporterCount`.
-- **Currency display**: the API stays in base EUR and returns a `rates` table (units
-  per 1 EUR) refreshed daily from Frankfurter/ECB (fiat) and CoinGecko (crypto), with
-  a static seed as the fallback — see `adr/0033-donation-exchange-rates.md`. The
+- **Currency display**: the API stays in base EUR and serves exchange rates (units
+  per 1 EUR) from its dedicated currency endpoint (`GET /api/v1/currency/rates`),
+  refreshed daily from Frankfurter/ECB (fiat) and CoinGecko (crypto), with a static
+  seed as the fallback — see `adr/0033-donation-exchange-rates.md` and
+  `adr/0035-dedicated-currency-rates-endpoint.md`. The
   balance and the "Impact in numbers" figures are **always shown in EUR**; they no
   longer follow the visitor's locale. Only the donation options expose a currency
   picker (EUR plus the fiat currencies offered by the API) rendered as a compact

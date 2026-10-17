@@ -44,8 +44,12 @@ export type DonationTier = DonationSummary['tiers'][number];
 /** A funding goal shown as progress on the hero (amount in the base currency). */
 export type DonationGoal = DonationSummary['goal'];
 
-/** A static, approximate conversion rate from the base currency. */
-export type DonationRate = DonationSummary['rates'][number];
+/**
+ * A conversion rate relative to the donation base currency, served by the
+ * currency endpoint (`client.currency.getRates()`). Structurally identical to the
+ * shared `@/core/currency` rate, which is what the conversion helpers consume.
+ */
+export type DonationRate = CurrencyRate;
 
 export interface BeggingBannerData {
   messageKey: AppTranslationKey;
