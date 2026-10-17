@@ -6,6 +6,10 @@ Accepted
 Amends [ADR 32](0032-donation-tiers-goal-and-currency-display.md) (locale-driven
 display currency) and [ADR 33](0033-donation-exchange-rates.md) (offered rate list).
 
+> **Amendment ([ADR 35](0035-dedicated-currency-rates-endpoint.md)):** the offered
+> rate list is now served by `GET /api/v1/currency/rates`, not inside the donation
+> summary; the frontend derives the picker from that endpoint instead.
+
 ## Context
 ADR 32 made the display currency a frontend display concern resolved from the
 visitor's locale region, and applied it to every donation figure: the live balance,

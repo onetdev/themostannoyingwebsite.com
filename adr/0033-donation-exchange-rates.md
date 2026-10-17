@@ -5,6 +5,11 @@ Accepted
 
 Extends [ADR 32](0032-donation-tiers-goal-and-currency-display.md).
 
+> **Amendment ([ADR 35](0035-dedicated-currency-rates-endpoint.md)):** rates now
+> have their own endpoint (`GET /api/v1/currency/rates`) and are no longer part of
+> the donation summary response, so decision 2's "response shape is unchanged" no
+> longer holds.
+
 ## Context
 ADR 32 introduced a static `rates` table in the content repo (approximate,
 hand-maintained values) purely as a frontend display concern: fiat amounts are
