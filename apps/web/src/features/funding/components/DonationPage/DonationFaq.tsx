@@ -5,11 +5,8 @@ import {
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
-  Card,
-  CardContent,
-  CardHeader,
-  CardTitle,
 } from '@maw/ui-lib';
+import { cn } from '@maw/ui-lib/utils';
 import { useTranslations } from 'next-intl';
 
 type FaqItem = {
@@ -40,9 +37,19 @@ const FAQ_ITEMS: FaqItem[] = [
     answerKey: 'funding.faq.items.rights.answer',
   },
   {
+    id: 'soul',
+    questionKey: 'funding.faq.items.soul.question',
+    answerKey: 'funding.faq.items.soul.answer',
+  },
+  {
     id: 'donate',
     questionKey: 'funding.faq.items.donate.question',
     answerKey: 'funding.faq.items.donate.answer',
+  },
+  {
+    id: 'account',
+    questionKey: 'funding.faq.items.account.question',
+    answerKey: 'funding.faq.items.account.answer',
   },
 ];
 
@@ -54,22 +61,18 @@ export function DonationFaq({ className }: DonationFaqProps) {
   const t = useTranslations();
 
   return (
-    <Card className={className}>
-      <CardHeader>
-        <CardTitle>{t('funding.faq.heading')}</CardTitle>
-      </CardHeader>
-      <CardContent className="pt-2">
-        <Accordion className="w-full">
-          {FAQ_ITEMS.map((item) => (
-            <AccordionItem key={item.id} value={item.id}>
-              <AccordionTrigger>{t(item.questionKey)}</AccordionTrigger>
-              <AccordionContent className="text-muted-foreground">
-                {t.rich(item.answerKey, { br: () => <br /> })}
-              </AccordionContent>
-            </AccordionItem>
-          ))}
-        </Accordion>
-      </CardContent>
-    </Card>
+    <section className={cn('flex flex-col gap-2', className)}>
+      <h2>{t('funding.faq.heading')}</h2>
+      <Accordion className="w-full">
+        {FAQ_ITEMS.map((item) => (
+          <AccordionItem key={item.id} value={item.id}>
+            <AccordionTrigger>{t(item.questionKey)}</AccordionTrigger>
+            <AccordionContent className="text-muted-foreground">
+              {t.rich(item.answerKey, { br: () => <br /> })}
+            </AccordionContent>
+          </AccordionItem>
+        ))}
+      </Accordion>
+    </section>
   );
 }

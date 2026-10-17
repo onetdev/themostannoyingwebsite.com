@@ -14,6 +14,7 @@ export { HttpTransport } from './http';
 export { ArticlesResource } from './resources/articles';
 export { AuthorsResource } from './resources/authors';
 export { CategoriesResource } from './resources/categories';
+export { CurrencyResource } from './resources/currency';
 export { DonationsResource } from './resources/donations';
 export { HealthResource } from './resources/health';
 export { ImagesResource } from './resources/images';

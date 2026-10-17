@@ -48,6 +48,8 @@ describe('ContentApiClient', () => {
     expect(client.prizeWheel).toBeDefined();
     expect(client.newsletter).toBeDefined();
     expect(client.spamSample).toBeDefined();
+    expect(client.donations).toBeDefined();
+    expect(client.currency).toBeDefined();
   });
 
   describe('articles resource', () => {
@@ -1044,6 +1046,35 @@ describe('ContentApiClient', () => {
 
       expect(capturedUrl).toContain('/api/v1/spam-sample/en');
       expect(result.samples[0].subject).toBe('URGENT');
+    });
+  });
+
+  describe('currency resource', () => {
+    it('calls GET api/v1/currency/rates', async () => {
+      let capturedUrl = '';
+      const mockFetch = jest
+        .fn<typeof fetch>()
+        .mockImplementation(async (req) => {
+          capturedUrl = getUrlString(req);
+          return new Response(
+            JSON.stringify({
+              base: 'EUR',
+              rates: [
+                { code: 'USD', rate: 1.08 },
+                { code: 'BTC', rate: 0.0000105 },
+              ],
+              updated_at: '2026-09-01T00:00:00.000Z',
+            }),
+            { status: 200, headers: { 'Content-Type': 'application/json' } },
+          );
+        });
+
+      const client = createContentClient({ fetch: mockFetch });
+      const result = await client.currency.getRates();
+
+      expect(capturedUrl).toContain('/api/v1/currency/rates');
+      expect(result.base).toBe('EUR');
+      expect(result.rates[1].code).toBe('BTC');
     });
   });
 });

@@ -1,13 +1,11 @@
 'use client';
 
-import type {
-  DonationStat,
-  DonationSummary,
-  DonationSupporter,
-} from '@maw/content-sdk';
+import type { DonationStat, DonationSupporter } from '@maw/content-sdk';
 import {
+  Badge,
   Card,
   CardContent,
+  CardHeader,
   type ChartConfig,
   ChartContainer,
   ChartLegend,
@@ -16,18 +14,14 @@ import {
   ChartTooltipContent,
   Icon,
   type IconAliaseKey,
+  Separator,
 } from '@maw/ui-lib';
+import { cn } from '@maw/ui-lib/utils';
 import { useLocale, useTranslations } from 'next-intl';
+import type { ComponentProps } from 'react';
 import { useMemo } from 'react';
-import {
-  Area,
-  AreaChart,
-  Bar,
-  BarChart,
-  CartesianGrid,
-  ReferenceLine,
-  XAxis,
-} from 'recharts';
+import { Bar, BarChart, CartesianGrid, ReferenceLine, XAxis } from 'recharts';
+import type { FundingDonationSummary } from '../../types';
 
 const SUPPORTER_MEDALS: Record<DonationSupporter['tier'], string> = {
   gold: '🥇',
@@ -56,6 +50,15 @@ const TREND_SENTIMENT_CLASSES: Record<
   neutral: 'text-muted-foreground',
 };
 
+const TREND_SENTIMENT_VARIANTS: Record<
+  DonationStat['trend']['sentiment'],
+  ComponentProps<typeof Badge>['variant']
+> = {
+  positive: 'success',
+  negative: 'error',
+  neutral: 'secondary',
+};
+
 const TREND_DIRECTION_LABEL_KEYS: Record<
   DonationStat['trend']['direction'],
   AppTranslationKey
@@ -71,6 +74,9 @@ const STAT_ICONS: Record<string, IconAliaseKey> = {
   bugsShippedAsFeatures: 'bug',
   kebabBudgetRemaining: 'utensils',
   sanityRemaining: 'brain',
+  technicalDebtInterest: 'coins',
+  monthlyVisitors: 'login',
+  captchasCompleted: 'lock',
 };
 
 const TIER_RANK: Record<DonationSupporter['tier'], number> = {
@@ -109,14 +115,15 @@ function createFormatters(locale: string, currency: string) {
 function formatStatValue(
   formatters: ReturnType<typeof createFormatters>,
   stat: DonationStat,
+  displayValue: number,
 ) {
   const formatter = formatters[stat.format] ?? formatters.integer;
   return formatter.format(
-    stat.format === 'percent' ? stat.value / 100 : stat.value,
+    stat.format === 'percent' ? displayValue / 100 : displayValue,
   );
 }
 
-function buildChartData(summary: DonationSummary, locale: string) {
+function buildChartData(summary: FundingDonationSummary, locale: string) {
   const monthFormatter = new Intl.DateTimeFormat(locale, {
     month: 'short',
     timeZone: 'UTC',
@@ -134,20 +141,10 @@ function buildChartData(summary: DonationSummary, locale: string) {
     };
   });
 
-  let runningExpenses = 0;
-  const cumulativeData = monthlyData.map((entry) => {
-    runningExpenses += entry.expenses;
-
-    return {
-      label: entry.label,
-      cumulativeExpenses: runningExpenses,
-    };
-  });
-
-  return { monthlyData, cumulativeData };
+  return { monthlyData };
 }
 
-function ImpactStatCard({
+function ImpactStat({
   stat,
   currency,
 }: {
@@ -159,7 +156,7 @@ function ImpactStatCard({
   const sentimentClass = TREND_SENTIMENT_CLASSES[stat.trend.sentiment];
 
   const formatted = useMemo(
-    () => formatStatValue(createFormatters(locale, currency), stat),
+    () => formatStatValue(createFormatters(locale, currency), stat, stat.value),
     [locale, currency, stat],
   );
 
@@ -172,36 +169,58 @@ function ImpactStatCard({
   );
 
   return (
-    <Card
-      className="hover:border-primary/40 transition-colors lg:col-span-2"
-      data-testid={`impact-stat-${stat.id}`}
-    >
-      <CardContent className="flex flex-col gap-3">
-        <span
-          aria-hidden
-          className={`bg-muted flex size-10 items-center justify-center rounded-lg ${sentimentClass}`}
-        >
-          <Icon icon={STAT_ICONS[stat.id] ?? 'tags'} />
+    <div className="flex flex-col gap-2" data-testid={`impact-stat-${stat.id}`}>
+      <span
+        aria-hidden
+        className={`bg-muted flex size-9 items-center justify-center rounded-lg ${sentimentClass}`}
+      >
+        <Icon icon={STAT_ICONS[stat.id] ?? 'tags'} />
+      </span>
+      <span className="text-xl font-bold tracking-tight">{formatted}</span>
+      <span className="text-muted-foreground text-sm">
+        {t(stat.labelKey as AppTranslationKey)}
+      </span>
+      <Badge variant={TREND_SENTIMENT_VARIANTS[stat.trend.sentiment]}>
+        <Icon icon={TREND_ICONS[stat.trend.direction]} aria-hidden />
+        {formattedTrend}
+        <span className="sr-only">
+          {t(TREND_DIRECTION_LABEL_KEYS[stat.trend.direction])}
         </span>
-        <span className="text-2xl font-bold tracking-tight">{formatted}</span>
-        <span className="text-muted-foreground text-sm">
-          {t(stat.labelKey as AppTranslationKey)}
-        </span>
-        <span
-          className={`flex items-center gap-1 text-sm font-medium ${sentimentClass}`}
-        >
-          <Icon icon={TREND_ICONS[stat.trend.direction]} aria-hidden />
-          {formattedTrend}
-          <span className="sr-only">
-            {t(TREND_DIRECTION_LABEL_KEYS[stat.trend.direction])}
-          </span>
-        </span>
-      </CardContent>
-    </Card>
+      </Badge>
+    </div>
   );
 }
 
-function SupportersPodium({ supporters }: { supporters: DonationSupporter[] }) {
+/**
+ * Groups the trend cards into a single block so the section's first cell holds
+ * every statistic together instead of scattering them across the grid.
+ */
+function ImpactStatGroup({
+  stats,
+  currency,
+}: {
+  stats: readonly DonationStat[];
+  currency: string;
+}) {
+  return (
+    <div
+      className="grid grid-cols-2 gap-6 sm:grid-cols-3 lg:grid-cols-2"
+      data-testid="impact-stats-group"
+    >
+      {stats.map((stat) => (
+        <ImpactStat key={stat.id} stat={stat} currency={currency} />
+      ))}
+    </div>
+  );
+}
+
+function SupportersPodium({
+  supporters,
+  supporterCount,
+}: {
+  supporters: DonationSupporter[];
+  supporterCount: number;
+}) {
   const t = useTranslations();
 
   const podiumOrder = useMemo(() => {
@@ -218,39 +237,45 @@ function SupportersPodium({ supporters }: { supporters: DonationSupporter[] }) {
   }, [supporters]);
 
   return (
-    <Card className="flex flex-col justify-end lg:col-span-2">
-      <CardContent className="flex flex-col gap-4">
-        <span className="text-muted-foreground text-sm">
-          {t('funding.topSupporters')}
-        </span>
-        <ul className="flex items-end justify-center gap-3">
-          {podiumOrder.map((supporter) => (
-            <li
-              key={supporter.id}
-              className="flex w-full flex-col items-center gap-2"
-              data-testid={`impact-supporter-${supporter.id}`}
-            >
-              <span aria-hidden className="text-3xl">
-                {SUPPORTER_MEDALS[supporter.tier]}
-              </span>
-              <span className="text-center text-sm font-semibold">
-                {SUPPORTER_LABEL_KEYS[supporter.id]
-                  ? t(SUPPORTER_LABEL_KEYS[supporter.id])
-                  : supporter.id}
-              </span>
-              <span
-                aria-hidden
-                className={`w-full rounded-t-lg ${SUPPORTER_TIER_BARS[supporter.tier]}`}
-              />
-            </li>
-          ))}
-        </ul>
-      </CardContent>
-    </Card>
+    <div className="flex flex-col gap-4">
+      <div>
+        <p className="font-semibold">{t('funding.topSupporters')}</p>
+        <p
+          className="text-muted-foreground text-sm"
+          data-testid="impact-supporters-description"
+        >
+          {t('funding.impactStats.supporters.description', {
+            count: supporterCount,
+          })}
+        </p>
+      </div>
+      <ul className="flex items-end justify-center gap-3">
+        {podiumOrder.map((supporter) => (
+          <li
+            key={supporter.id}
+            className="flex w-full flex-col items-center gap-2"
+            data-testid={`impact-supporter-${supporter.id}`}
+          >
+            <span aria-hidden className="text-3xl">
+              {SUPPORTER_MEDALS[supporter.tier]}
+            </span>
+            <span className="text-center text-sm font-semibold">
+              {SUPPORTER_LABEL_KEYS[supporter.id]
+                ? t(SUPPORTER_LABEL_KEYS[supporter.id])
+                : supporter.id}
+            </span>
+            <span
+              aria-hidden
+              className={`w-full rounded-lg ${SUPPORTER_TIER_BARS[supporter.tier]}`}
+            />
+          </li>
+        ))}
+      </ul>
+    </div>
   );
 }
 
-function MonthlyChartCard({ summary }: { summary: DonationSummary }) {
+function MonthlyChart({ summary }: { summary: FundingDonationSummary }) {
   const t = useTranslations();
   const locale = useLocale();
   const { monthlyData } = useMemo(
@@ -270,120 +295,78 @@ function MonthlyChartCard({ summary }: { summary: DonationSummary }) {
   } satisfies ChartConfig;
 
   return (
-    <Card className="md:col-span-2 lg:col-span-3">
-      <CardContent className="flex flex-col gap-4">
-        <div>
-          <p className="font-semibold">
-            {t('funding.impactStats.monthly.title')}
-          </p>
-          <p className="text-muted-foreground text-sm">
-            {t('funding.impactStats.monthly.description')}
-          </p>
-        </div>
-        <ChartContainer
-          config={config}
-          className="h-[240px] w-full"
-          data-testid="impact-stats-monthly-chart"
-        >
-          <BarChart accessibilityLayer data={monthlyData}>
-            <CartesianGrid vertical={false} />
-            <XAxis
-              dataKey="label"
-              tickLine={false}
-              tickMargin={10}
-              axisLine={false}
-            />
-            <ReferenceLine y={0} stroke="var(--border)" />
-            <ChartTooltip content={<ChartTooltipContent />} />
-            <ChartLegend content={<ChartLegendContent />} />
-            <Bar dataKey="donations" fill="var(--color-donations)" radius={4} />
-            <Bar dataKey="expenses" fill="var(--color-expenses)" radius={4} />
-          </BarChart>
-        </ChartContainer>
-      </CardContent>
-    </Card>
-  );
-}
-
-function CumulativeChartCard({ summary }: { summary: DonationSummary }) {
-  const t = useTranslations();
-  const locale = useLocale();
-  const { cumulativeData } = useMemo(
-    () => buildChartData(summary, locale),
-    [summary, locale],
-  );
-
-  const config = {
-    cumulativeExpenses: {
-      label: t('funding.impactStats.series.cumulativeExpenses'),
-      color: 'var(--chart-3)',
-    },
-  } satisfies ChartConfig;
-
-  return (
-    <Card className="md:col-span-2 lg:col-span-3">
-      <CardContent className="flex flex-col gap-4">
-        <div>
-          <p className="font-semibold">
-            {t('funding.impactStats.cumulative.title')}
-          </p>
-          <p className="text-muted-foreground text-sm">
-            {t('funding.impactStats.cumulative.description')}
-          </p>
-        </div>
-        <ChartContainer
-          config={config}
-          className="h-[240px] w-full"
-          data-testid="impact-stats-cumulative-chart"
-        >
-          <AreaChart accessibilityLayer data={cumulativeData}>
-            <CartesianGrid vertical={false} />
-            <XAxis
-              dataKey="label"
-              tickLine={false}
-              tickMargin={10}
-              axisLine={false}
-            />
-            <ReferenceLine y={0} stroke="var(--border)" />
-            <ChartTooltip content={<ChartTooltipContent />} />
-            <Area
-              dataKey="cumulativeExpenses"
-              fill="var(--color-cumulativeExpenses)"
-              fillOpacity={0.3}
-              stroke="var(--color-cumulativeExpenses)"
-            />
-          </AreaChart>
-        </ChartContainer>
-      </CardContent>
-    </Card>
+    <div className="flex flex-col gap-4">
+      <div>
+        <p className="font-semibold">
+          {t('funding.impactStats.monthly.title')}
+        </p>
+        <p className="text-muted-foreground text-sm">
+          {t('funding.impactStats.monthly.description')}
+        </p>
+      </div>
+      <ChartContainer
+        config={config}
+        className="h-[190px] w-full"
+        data-testid="impact-stats-monthly-chart"
+      >
+        <BarChart accessibilityLayer data={monthlyData}>
+          <CartesianGrid vertical={false} />
+          <XAxis
+            dataKey="label"
+            tickLine={false}
+            tickMargin={10}
+            axisLine={false}
+          />
+          <ReferenceLine y={0} stroke="var(--border)" />
+          <ChartTooltip content={<ChartTooltipContent />} />
+          <ChartLegend content={<ChartLegendContent />} />
+          <Bar dataKey="donations" fill="var(--color-donations)" radius={4} />
+          <Bar dataKey="expenses" fill="var(--color-expenses)" radius={4} />
+        </BarChart>
+      </ChartContainer>
+    </div>
   );
 }
 
 export type ImpactStatsProps = {
-  summary: DonationSummary;
+  className?: string;
+  summary: FundingDonationSummary;
 };
 
 /**
- * Returns a fragment of grid cells so the impact cards can participate in the
- * donation page's bento grid instead of being boxed into their own section.
+ * The "Impact in numbers" section, rendered as a single container so it reads as
+ * one block instead of a cluster of separate cards. Figures always use the
+ * summary's base currency (EUR).
  */
-export function ImpactStats({ summary }: ImpactStatsProps) {
+export function ImpactStats({ className, summary }: ImpactStatsProps) {
   const t = useTranslations();
 
   return (
-    <>
-      <h2 className="mt-6 md:col-span-2 lg:col-span-6">
-        {t('funding.impactStats.heading')}
-      </h2>
-      <p className="text-muted-foreground md:col-span-2 lg:col-span-6">
-        {t('funding.impactStats.description')}
-      </p>
-      {summary.stats.map((stat) => (
-        <ImpactStatCard key={stat.id} stat={stat} currency={summary.currency} />
-      ))}
-      <SupportersPodium supporters={summary.supporters} />
-      <MonthlyChartCard summary={summary} />
-      <CumulativeChartCard summary={summary} />
-    </>
+    <Card id="impact" className={cn(className, 'scroll-mt-24')}>
+      <CardHeader>
+        <h2 className="text-2xl">{t('funding.impactStats.heading')}</h2>
+        <p className="text-muted-foreground text-sm">
+          {t('funding.impactStats.description')}
+        </p>
+      </CardHeader>
+      <CardContent className="grid grid-cols-1 gap-8 lg:grid-cols-[1fr_auto_1fr_auto_1fr] md:gap-6">
+        <ImpactStatGroup stats={summary.stats} currency={summary.currency} />
+        <Separator
+          orientation="vertical"
+          className="hidden md:block"
+          data-testid="impact-stats-separator"
+        />
+        <SupportersPodium
+          supporters={summary.supporters}
+          supporterCount={summary.supporterCount}
+        />
+        <Separator
+          orientation="vertical"
+          className="hidden md:block"
+          data-testid="impact-stats-separator"
+        />
+        <MonthlyChart summary={summary} />
+      </CardContent>
+    </Card>
   );
 }

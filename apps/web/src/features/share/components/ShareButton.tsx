@@ -3,7 +3,7 @@
 import { Button, Icon } from '@maw/ui-lib';
 import { useTranslations } from 'next-intl';
 
-import { useRuntimeStore } from '@/stores';
+import { useShareAction } from '../hooks';
 
 export type ShareButtonProps = {
   /**
@@ -23,29 +23,8 @@ export type ShareButtonProps = {
  */
 export function ShareButton({ url, title, className }: ShareButtonProps) {
   const t = useTranslations();
-  const showShareModal = useRuntimeStore((state) => state.showShareModal);
+  const share = useShareAction();
   const label = t('common.action.share');
-
-  const onShare = async () => {
-    const shareUrl = url ?? window.location.href;
-
-    if (typeof navigator.share === 'function') {
-      try {
-        await navigator.share({
-          title: title ?? document.title,
-          url: shareUrl,
-        });
-        return;
-      } catch (error) {
-        // The user dismissed the native sheet; do not force the fallback modal.
-        if (error instanceof DOMException && error.name === 'AbortError') {
-          return;
-        }
-      }
-    }
-
-    showShareModal(url);
-  };
 
   return (
     <Button
@@ -53,7 +32,7 @@ export function ShareButton({ url, title, className }: ShareButtonProps) {
       variant="ghost"
       size="icon"
       className={className}
-      onClick={onShare}
+      onClick={() => share({ url, title })}
       aria-label={label}
       title={label}
     >

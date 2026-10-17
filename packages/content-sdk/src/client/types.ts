@@ -18,6 +18,7 @@ export const CONTENT_CACHE_TAGS = {
   newsletter: 'content:newsletter',
   spamSample: 'content:spam-sample',
   donation: 'content:donation',
+  currency: 'content:currency',
 } as const;
 
 export interface ContentClientOptions {

@@ -22,6 +22,8 @@ const meta = {
         'secondary',
         'destructive',
         'outline',
+        'success',
+        'error',
         'ghost',
         'link',
       ],
@@ -57,5 +59,19 @@ export const Outline: Story = {
   args: {
     children: 'Outline',
     variant: 'outline',
+  },
+};
+
+export const SuccessSentiment: Story = {
+  args: {
+    children: 'Success',
+    variant: 'success',
+  },
+};
+
+export const ErrorSentiment: Story = {
+  args: {
+    children: 'Error',
+    variant: 'error',
   },
 };
