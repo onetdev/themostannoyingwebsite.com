@@ -13,6 +13,7 @@ export const getDonatePage = (page: Page) => {
       name: /Keep the internet/i,
     }),
     primaryCta: page.getByRole('link', { name: 'Support the project' }),
+    heroStatusPulse: page.getByTestId('hero-status-pulse'),
     shareCta: page.getByRole('button', { name: 'Share instead' }),
     impactCta: page.getByRole('link', {
       name: 'See the impact in numbers',

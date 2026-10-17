@@ -55,6 +55,7 @@ test('donation hero and tier picker are interactive', async ({ page }) => {
   await donatePage.goto();
 
   await expect(donatePage.heroHeadline).toBeVisible();
+  await expect(donatePage.heroStatusPulse).toBeVisible();
   await expect(donatePage.shareCta).toBeVisible();
   await expect(donatePage.impactCta).toBeVisible();
   await expect(donatePage.tiersHeading).toBeVisible();

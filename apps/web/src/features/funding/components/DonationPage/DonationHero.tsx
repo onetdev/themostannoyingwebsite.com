@@ -21,6 +21,7 @@ export function DonationHero({ summary, className }: DonationHeroProps) {
 
   const balance = summary?.totals.balance ?? 0;
   const isNegative = balance < 0;
+  const statusColor = isNegative ? 'bg-error' : 'bg-success';
 
   return (
     <section
@@ -34,13 +35,26 @@ export function DonationHero({ summary, className }: DonationHeroProps) {
             : 'border-success text-success',
         )}
       >
-        <span
-          aria-hidden
-          className={cn(
-            'size-2 rounded-full',
-            isNegative ? 'bg-error' : 'bg-success',
-          )}
-        />
+        <span aria-hidden className="relative inline-flex size-2 shrink-0">
+          {/*
+            Decorative sonar ping: the same dot scaled up and faded out behind
+            the solid one. Purely ornamental, hence hidden under reduced motion
+            (the solid dot alone still reads as the status indicator).
+          */}
+          <span
+            data-testid="hero-status-pulse"
+            className={cn(
+              'absolute inset-0 animate-sonar rounded-full motion-reduce:hidden',
+              statusColor,
+            )}
+          />
+          <span
+            className={cn(
+              'relative inline-flex size-2 rounded-full',
+              statusColor,
+            )}
+          />
+        </span>
         {t(
           isNegative
             ? 'funding.hero.statusNegative'
