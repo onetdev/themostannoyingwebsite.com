@@ -224,7 +224,19 @@ Revised the donation page after review:
 - **Neon arrows removed**: the decorative `NeonArrow` SVG and its flicker stylesheet (Phase 8) were dropped as too distracting.
 - **Jar animation removed**: the `JarAnimation` component, its `moneyJarAnimation` config and the `money-jar.lottie` asset were dropped along with the FAQ backdrop.
 - **Impact stats tightened**: shorter charts (`h-[190px]`) and denser stat cards.
+- **Impact columns divided**: on `md`+ the three impact columns (stats, supporters, chart)
+  are split by vertical `Separator` atoms — the grid gains `auto` separator tracks
+  (`md:grid-cols-[1fr_auto_1fr_auto_1fr]`); the dividers are `hidden` below `md`, where
+  the columns stack.
+- **Trend badge on `Badge`**: the trend/change indicator in `ImpactStats` moved from a
+  hand-rolled `<span>` onto the `Badge` atom. `Badge` gained two sentiment variants
+  beyond upstream `base-vega` — `success` and `error` (soft-tinted:
+  `border-*/20 bg-*/10 text-*`) — mirroring `Alert`'s existing `success`/`info`
+  pattern and the `--color-success` / `--color-error` tokens; `stagnant` reuses
+  `secondary`. Both variants are covered by `Badge.stories.tsx`.
 - **Native share**: the hero's "Share instead" now goes through the shared `useShareAction` hook (native sheet first, modal fallback).
+- **Before/after framed**: the comparison block is bookended by horizontal `Separator`
+  atoms (above the heading and below the caption).
 
 ## Registry drift audit
 

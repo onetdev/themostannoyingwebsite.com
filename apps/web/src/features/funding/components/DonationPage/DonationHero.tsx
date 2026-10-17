@@ -65,7 +65,7 @@ export function DonationHero({ summary, className }: DonationHeroProps) {
           // `data-slot="button"` opts out of the global `a` link styles, which
           // would otherwise paint the label `text-primary` on `bg-primary`.
           data-slot="button"
-          className={buttonVariants({ size: 'lg', className: 'md:hidden' })}
+          className={buttonVariants({ size: 'lg', className: 'lg:hidden' })}
         >
           <Icon icon="handHoldingDollar" aria-hidden />
           {t('funding.hero.primaryCta')}

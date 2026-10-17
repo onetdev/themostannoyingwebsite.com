@@ -1,4 +1,5 @@
 import type { LanguageCode } from '@maw/content-sdk';
+import { Separator } from '@maw/ui-lib';
 import { getLocale, getTranslations } from 'next-intl/server';
 import { getAppConfigService } from '@/services';
 import { getDonationSummary } from '../../services/get-donation-summary';
@@ -27,8 +28,8 @@ export async function DonationPage() {
     });
 
   return (
-    <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-6 lg:gap-y-12">
-      <div className="flex flex-col gap-6 md:col-span-1 lg:col-span-3">
+    <div className="grid grid-cols-1 gap-8 lg:grid-cols-2 lg:gap-y-12">
+      <div className="flex flex-col gap-6">
         <section className="flex flex-col items-start gap-4 text-left">
           <p className="text-muted-foreground text-sm font-semibold tracking-[0.2em] uppercase">
             {t('funding.balanceEyebrow')}
@@ -45,16 +46,19 @@ export async function DonationPage() {
         <DonationHero summary={donationSummary} />
       </div>
 
+      <Separator className="flex w-full flex-col lg:hidden" />
+
       <SupportOptions
         funding={funding}
         tiers={donationSummary?.tiers ?? []}
         rates={donationSummary?.rates}
         currency={currency}
         locale={locale}
-        className="md:col-span-1 lg:col-span-3"
       />
 
-      <section className="flex w-full flex-col gap-4 md:col-span-1 lg:col-span-3">
+      <Separator className="md:flex w-full flex-col lg:col-span-2" />
+
+      <section className="flex w-full flex-col gap-4">
         <h2>{t('funding.beforeAfter.heading')}</h2>
         <BeforeAfterSlider
           beforeSrc={funding.assets.beforeImage}
@@ -69,17 +73,18 @@ export async function DonationPage() {
         </p>
       </section>
 
-      <DonationFaq className="w-full md:col-span-1 lg:col-span-3" />
+      <DonationFaq className="w-full" />
 
       {donationSummary && (
         <ImpactStats
           summary={donationSummary}
           currency={currency}
           rates={donationSummary.rates}
+          className="lg:col-span-2"
         />
       )}
 
-      <section className="md:col-span-2 lg:col-span-6">
+      <section className="lg:col-span-2">
         <h2 className="text-base font-semibold">{t('funding.disclaimer')}</h2>
         <p className="text-muted-foreground mt-2 text-xs leading-relaxed">
           {tRich('funding.disclaimerDetails')}

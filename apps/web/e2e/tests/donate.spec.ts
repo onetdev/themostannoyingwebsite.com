@@ -73,6 +73,16 @@ test('donation hero and tier picker are interactive', async ({ page }) => {
   await expect(donatePage.customAmountInput).toHaveValue('42');
 });
 
+test('before/after block is framed by separators', async ({ page }) => {
+  await setupE2eTestState(page);
+  const donatePage = getDonatePage(page);
+  await donatePage.goto();
+
+  await expect(donatePage.beforeAfterSlider).toBeVisible();
+  await expect(donatePage.beforeAfterSeparator).toHaveCount(2);
+  await expect(donatePage.beforeAfterSeparator.first()).toBeVisible();
+});
+
 test('donation page renders the made-up impact stats chart', async ({
   page,
 }) => {
@@ -83,6 +93,8 @@ test('donation page renders the made-up impact stats chart', async ({
   await expect(donatePage.impactStatsHeading).toBeVisible();
   await expect(donatePage.impactStatsGroup).toBeVisible();
   await expect(donatePage.impactStatsMonthlyChart).toBeVisible();
+  await expect(donatePage.impactStatsSeparator).toHaveCount(2);
+  await expect(donatePage.impactStatsSeparator.first()).toBeVisible();
   await expect(donatePage.impactStatCoffeesConsumed).toBeVisible();
   await expect(page.getByText('Coffees consumed')).toBeVisible();
   await expect(donatePage.impactStatTechnicalDebtInterest).toBeVisible();

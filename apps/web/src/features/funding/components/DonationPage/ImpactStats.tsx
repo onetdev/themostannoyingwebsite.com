@@ -2,6 +2,7 @@
 
 import type { DonationStat, DonationSupporter } from '@maw/content-sdk';
 import {
+  Badge,
   Card,
   CardContent,
   CardHeader,
@@ -13,8 +14,11 @@ import {
   ChartTooltipContent,
   Icon,
   type IconAliaseKey,
+  Separator,
 } from '@maw/ui-lib';
+import { cn } from '@maw/ui-lib/utils';
 import { useLocale, useTranslations } from 'next-intl';
+import type { ComponentProps } from 'react';
 import { useMemo } from 'react';
 import { Bar, BarChart, CartesianGrid, ReferenceLine, XAxis } from 'recharts';
 import type { DonationRate, FundingDonationSummary } from '../../types';
@@ -45,6 +49,15 @@ const TREND_SENTIMENT_CLASSES: Record<
   positive: 'text-success',
   negative: 'text-error',
   neutral: 'text-muted-foreground',
+};
+
+const TREND_SENTIMENT_VARIANTS: Record<
+  DonationStat['trend']['sentiment'],
+  ComponentProps<typeof Badge>['variant']
+> = {
+  positive: 'success',
+  negative: 'error',
+  neutral: 'secondary',
 };
 
 const TREND_DIRECTION_LABEL_KEYS: Record<
@@ -196,15 +209,13 @@ function ImpactStat({
       <span className="text-muted-foreground text-sm">
         {t(stat.labelKey as AppTranslationKey)}
       </span>
-      <span
-        className={`flex items-center gap-1 text-sm font-medium ${sentimentClass}`}
-      >
+      <Badge variant={TREND_SENTIMENT_VARIANTS[stat.trend.sentiment]}>
         <Icon icon={TREND_ICONS[stat.trend.direction]} aria-hidden />
         {formattedTrend}
         <span className="sr-only">
           {t(TREND_DIRECTION_LABEL_KEYS[stat.trend.direction])}
         </span>
-      </span>
+      </Badge>
     </div>
   );
 }
@@ -226,7 +237,7 @@ function ImpactStatGroup({
 }) {
   return (
     <div
-      className="grid grid-cols-1 gap-6 sm:grid-cols-2"
+      className="grid grid-cols-2 gap-6 sm:grid-cols-3 lg:grid-cols-2"
       data-testid="impact-stats-group"
     >
       {stats.map((stat) => (
@@ -365,6 +376,7 @@ function MonthlyChart({
 }
 
 export type ImpactStatsProps = {
+  className?: string;
   summary: FundingDonationSummary;
   currency: string;
   rates?: readonly DonationRate[];
@@ -374,27 +386,42 @@ export type ImpactStatsProps = {
  * The "Impact in numbers" section, rendered as a single container so it reads as
  * one block instead of a cluster of separate cards.
  */
-export function ImpactStats({ summary, currency, rates }: ImpactStatsProps) {
+export function ImpactStats({
+  className,
+  summary,
+  currency,
+  rates,
+}: ImpactStatsProps) {
   const t = useTranslations();
 
   return (
-    <Card id="impact" className="scroll-mt-24 md:col-span-2 lg:col-span-6">
+    <Card id="impact" className={cn(className, 'scroll-mt-24')}>
       <CardHeader>
         <h2 className="text-2xl">{t('funding.impactStats.heading')}</h2>
         <p className="text-muted-foreground text-sm">
           {t('funding.impactStats.description')}
         </p>
       </CardHeader>
-      <CardContent className="grid grid-cols-1 gap-8 md:grid-cols-3">
+      <CardContent className="grid grid-cols-1 gap-8 lg:grid-cols-[1fr_auto_1fr_auto_1fr] md:gap-6">
         <ImpactStatGroup
           stats={summary.stats}
           currency={currency}
           rates={rates}
           baseCurrency={summary.currency}
         />
+        <Separator
+          orientation="vertical"
+          className="hidden md:block"
+          data-testid="impact-stats-separator"
+        />
         <SupportersPodium
           supporters={summary.supporters}
           supporterCount={summary.supporterCount}
+        />
+        <Separator
+          orientation="vertical"
+          className="hidden md:block"
+          data-testid="impact-stats-separator"
         />
         <MonthlyChart summary={summary} currency={currency} rates={rates} />
       </CardContent>

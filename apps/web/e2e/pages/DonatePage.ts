@@ -31,9 +31,12 @@ export const getDonatePage = (page: Page) => {
     }),
     impactStatsMonthlyChart: page.getByTestId('impact-stats-monthly-chart'),
     impactStatsGroup: page.getByTestId('impact-stats-group'),
+    impactStatsSeparator: page.getByTestId('impact-stats-separator'),
     impactSupportersDescription: page.getByTestId(
       'impact-supporters-description',
     ),
+    beforeAfterSlider: page.getByTestId('before-after-slider'),
+    beforeAfterSeparator: page.getByTestId('before-after-separator'),
     faqAccountQuestion: page.getByRole('button', {
       name: 'Do I need an account to donate?',
     }),
