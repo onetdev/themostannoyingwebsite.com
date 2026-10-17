@@ -40,6 +40,9 @@ export const getDonatePage = (page: Page) => {
     faqAccountQuestion: page.getByRole('button', {
       name: 'Do I need an account to donate?',
     }),
+    faqSoulQuestion: page.getByRole('button', {
+      name: 'I have already promised my soul to the devil. What can I do?',
+    }),
     impactStatCoffeesConsumed: page.getByTestId('impact-stat-coffeesConsumed'),
     impactStatTechnicalDebtInterest: page.getByTestId(
       'impact-stat-technicalDebtInterest',

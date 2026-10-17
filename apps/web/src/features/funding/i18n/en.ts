@@ -24,6 +24,12 @@ export default {
         answer:
           'Warm feelings, a spot on a leaderboard populated by fictional organs, and absolutely no legally binding rights, services, or special access.',
       },
+      soul: {
+        question:
+          'I have already promised my soul to the devil. What can I do?',
+        answer:
+          'Sadly, that is a binding contract that cannot be undone. The good news is that donating to this project does not come with strings attached — no rights, no services, no soul required.',
+      },
       donate: {
         question: 'How do I donate?',
         answer:

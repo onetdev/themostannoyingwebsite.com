@@ -37,6 +37,11 @@ const FAQ_ITEMS: FaqItem[] = [
     answerKey: 'funding.faq.items.rights.answer',
   },
   {
+    id: 'soul',
+    questionKey: 'funding.faq.items.soul.question',
+    answerKey: 'funding.faq.items.soul.answer',
+  },
+  {
     id: 'donate',
     questionKey: 'funding.faq.items.donate.question',
     answerKey: 'funding.faq.items.donate.answer',
