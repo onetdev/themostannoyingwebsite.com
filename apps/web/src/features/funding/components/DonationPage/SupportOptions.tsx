@@ -4,13 +4,26 @@ import { buttonVariants, Icon, type IconAliaseKey } from '@maw/ui-lib';
 import { cn } from '@maw/ui-lib/utils';
 import { useTranslations } from 'next-intl';
 import { type ComponentProps, useState } from 'react';
+import {
+  convertAmount,
+  getCurrencyDecimals,
+  getDisplayCurrencies,
+  toBaseAmount,
+  toDisplayAmount,
+} from '@/core/currency';
 import { Link } from '@/core/i18n/navigation';
 import type { FundingConfig } from '../../schemas';
-import type { DonationRate, DonationTier } from '../../types';
+import {
+  DONATION_BASE_CURRENCY,
+  DONATION_CRYPTO_CODES,
+  DONATION_FALLBACK_RATES,
+  type DonationRate,
+  type DonationTier,
+} from '../../types';
 import { buildBitcoinUri, buildEthereumUri } from '../../utils/crypto-uri';
-import { convertAmount, toDisplayAmount } from '../../utils/currency';
 import { CryptoDonationButton } from './CryptoDonationButton';
-import { SupportTiers } from './SupportTiers';
+import { CurrencySelector } from './CurrencySelector';
+import { type SupportSelection, SupportTiers } from './SupportTiers';
 
 type SupportLinkProps = {
   href: string;
@@ -42,39 +55,97 @@ function SupportLink({ href, icon, label }: SupportLinkProps) {
 export type SupportOptionsProps = {
   funding: FundingConfig;
   tiers: readonly DonationTier[];
-  currency: string;
   rates?: readonly DonationRate[];
   locale: string;
 } & ComponentProps<'section'>;
 
+function roundToCurrency(
+  value: number,
+  locale: string,
+  currency: string,
+): number {
+  return Number(value.toFixed(getCurrencyDecimals(locale, currency)));
+}
+
 /**
  * The offer: preset tiers (or a custom amount) plus the provider buttons. The
- * selected amount is carried into providers that accept one (PayPal); crypto
- * methods reveal their QR codes in a popover.
+ * visitor picks the display currency for the offer; the balance and impact
+ * figures stay in EUR. The selected amount is carried into providers that accept
+ * one (PayPal), and crypto methods reveal their QR codes in a popover with an
+ * estimate derived from the EUR base amount.
  */
 export function SupportOptions({
   funding,
   tiers,
-  currency,
   rates,
   locale,
   className,
   ...rest
 }: SupportOptionsProps) {
   const t = useTranslations();
-  const [amount, setAmount] = useState(() => tiers[0]?.amount ?? 0);
+  const [currency, setCurrency] = useState<string>(DONATION_BASE_CURRENCY);
+  const [selection, setSelection] = useState<SupportSelection>(() =>
+    tiers[0]
+      ? { kind: 'tier', tierId: tiers[0].id }
+      : { kind: 'custom', amount: 0 },
+  );
+
+  const selectedTier =
+    selection.kind === 'tier'
+      ? tiers.find((tier) => tier.id === selection.tierId)
+      : undefined;
+
+  // The API normally supplies the rates; the seed keeps the page usable when it
+  // is unreachable (the content client degrades to an empty summary).
+  const effectiveRates = rates ?? DONATION_FALLBACK_RATES;
+
+  // What the visitor will pay in the selected currency. Presets are charm
+  // rounded; custom amounts keep exactly what was typed.
+  const displayAmount = selectedTier
+    ? toDisplayAmount(
+        selectedTier.amount,
+        {
+          locale,
+          currency,
+          base: DONATION_BASE_CURRENCY,
+          rates: effectiveRates,
+        },
+        { charm: true },
+      )
+    : selection.kind === 'custom'
+      ? selection.amount
+      : 0;
+
+  // Crypto estimates and provider links are always derived from the EUR base.
+  const baseAmount = selectedTier
+    ? selectedTier.amount
+    : selection.kind === 'custom'
+      ? toBaseAmount(selection.amount, {
+          currency,
+          base: DONATION_BASE_CURRENCY,
+          rates: effectiveRates,
+        })
+      : 0;
+
+  const currencies = getDisplayCurrencies(effectiveRates, {
+    base: DONATION_BASE_CURRENCY,
+    exclude: DONATION_CRYPTO_CODES,
+  });
+  const showCurrencySelector = currencies.length > 1;
 
   const paypalHref =
-    amount > 0
-      ? `${funding.paypalUrl}/${toDisplayAmount(
-          amount,
-          { locale, currency, rates },
-          { charm: true },
-        )}${currency}`
+    displayAmount > 0
+      ? `${funding.paypalUrl}/${displayAmount}${currency}`
       : funding.paypalUrl;
 
-  const btcAmount = convertAmount(amount, 'BTC', rates);
-  const ethAmount = convertAmount(amount, 'ETH', rates);
+  const btcAmount = convertAmount(baseAmount, 'BTC', {
+    base: DONATION_BASE_CURRENCY,
+    rates: effectiveRates,
+  });
+  const ethAmount = convertAmount(baseAmount, 'ETH', {
+    base: DONATION_BASE_CURRENCY,
+    rates: effectiveRates,
+  });
   const cryptoAmountLabel = (value: number, symbol: string) =>
     value > 0
       ? t('funding.crypto.amountLabel', {
@@ -83,19 +154,58 @@ export function SupportOptions({
         })
       : undefined;
 
+  const changeCurrency = (nextCurrency: string) => {
+    if (nextCurrency === currency) {
+      return;
+    }
+
+    // Preserve the underlying value when switching display currencies.
+    if (selection.kind === 'custom') {
+      const base = toBaseAmount(selection.amount, {
+        currency,
+        base: DONATION_BASE_CURRENCY,
+        rates: effectiveRates,
+      });
+      const converted = convertAmount(base, nextCurrency, {
+        base: DONATION_BASE_CURRENCY,
+        rates: effectiveRates,
+      });
+
+      setSelection({
+        kind: 'custom',
+        amount: roundToCurrency(converted, locale, nextCurrency),
+      });
+    }
+
+    setCurrency(nextCurrency);
+  };
+
   return (
     <section
       id="support"
       className={cn('flex scroll-mt-24 flex-col gap-4', className)}
       {...rest}
     >
+      <div className="flex flex-wrap items-center justify-between gap-2">
+        <h3 className="text-muted-foreground text-xs font-semibold tracking-[0.2em] uppercase">
+          {t('funding.tiers.heading')}
+        </h3>
+        {showCurrencySelector && (
+          <CurrencySelector
+            currencies={currencies}
+            currency={currency}
+            onCurrencyChange={changeCurrency}
+          />
+        )}
+      </div>
+
       <SupportTiers
         tiers={tiers}
         currency={currency}
-        rates={rates}
+        rates={effectiveRates}
         locale={locale}
-        selection={amount}
-        onSelectionChange={setAmount}
+        selection={selection}
+        onSelectionChange={setSelection}
       />
 
       <div className="grid grid-cols-2 gap-3">

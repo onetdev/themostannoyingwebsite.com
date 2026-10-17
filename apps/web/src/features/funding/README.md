@@ -15,22 +15,33 @@ Donation data is served by the Content API's dedicated endpoint
   monthly chart is unchanged and the balance is intentionally independent of
   `donations - expenses`.
 - **Tiers + goal**: the response also carries `tiers` (base EUR amounts with i18n
-  label/blurb keys), a `goal` (`{ amount, period, labelKey }`) and `supporterCount`.
+  label/key blurb keys), a `goal` (`{ amount, period, labelKey }`) and `supporterCount`.
 - **Currency display**: the API stays in base EUR and returns a `rates` table (units
   per 1 EUR) refreshed daily from Frankfurter/ECB (fiat) and CoinGecko (crypto), with
   a static seed as the fallback — see `adr/0033-donation-exchange-rates.md`. The
-  frontend resolves the display currency from the locale
-  region server-side (so SSR and hydration agree), converts base amounts, and applies
-  **charm rounding** to tier presets — a `.99` ladder for 2-decimal currencies and an
-  integer ladder (…1999/5999) for zero-decimal currencies (HUF, JPY). Big figures
-  convert without charm rounding. Labels stay i18n keys resolved by the frontend, and
-  one shared `formatMoney` helper is used everywhere.
+  balance and the "Impact in numbers" figures are **always shown in EUR**; they no
+  longer follow the visitor's locale. Only the donation options expose a currency
+  picker (EUR plus the fiat currencies offered by the API) rendered as a compact
+  segmented button group and defaulting to EUR.
+  - Preset tiers are charm-rounded in the selected currency — a `.99` ladder for
+    2-decimal currencies and an integer ladder (…1999/5999) for zero-decimal
+    currencies (JPY).
+  - The custom amount is entered in the selected currency and converted back to the
+    EUR base, so PayPal receives exactly the displayed amount.
+  - BTC/ETH estimates always derive from the EUR base amount, so changing the display
+    currency never moves the crypto estimate.
+  - Labels stay i18n keys resolved by the frontend, and one shared `formatMoney`
+    helper is used everywhere. The conversion/formatting helpers live in the
+    donation-independent `@/core/currency` module (explicit base currency + rate
+    table), so other features can reuse them for their own monetary figures.
 
 ## Key Highlights
 
 - **DonationPage**: A product-style hero and balance block on the left, the tier selector at the top right, then the before/after comparison sample and the FAQ side by side, then the "impact in numbers" section (a single container whose first block groups the trend statistic cards, followed by the supporters podium and the support-vs-costs chart).
 - **Hero**: The value proposition, the primary "Support the project" CTA (shown only when the support options sit below the hero), and a secondary "Share instead" action (native share sheet first).
-- **Tier selector**: A compact preset tier list plus a custom amount input, feeding the existing support options.
+- **Tier selector**: A compact preset tier list plus a custom amount input, with a
+  segmented currency picker (EUR default) that reprices the presets and the
+  amount-aware provider links.
 - **BeforeAfterSlider**: Standalone draggable comparison component (`inset()` clip over two layers) placed below the FAQ; imagery is passed in so it can be swapped without touching the component.
 - **BeggarBanner**: A prominent, non-dismissible alert at the top of the site that encourages users to donate. Its visibility is often linked to the first 10 days of each month to simulate "real-world" funding urgency.
 - **DonationService**: An injectable service that provides calculated estimates for the project's financial status and determines if the `BeggarBanner` should be displayed.

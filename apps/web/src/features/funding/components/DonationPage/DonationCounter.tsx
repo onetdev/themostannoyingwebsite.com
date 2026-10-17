@@ -2,26 +2,24 @@
 
 import { useLocale } from 'next-intl';
 import { type ComponentProps, useEffect, useState } from 'react';
-import { DONATION_BASE_CURRENCY, type DonationRate } from '../../types';
-import { getCurrencySymbol, toDisplayAmount } from '../../utils/currency';
+import { getCurrencySymbol } from '@/core/currency';
+import { DONATION_BASE_CURRENCY } from '../../types';
 import { SlotDigit } from './SlotDigit';
 
 export type DonationCounterProps = {
-  /** Current donation balance in the base currency. */
+  /** Current donation balance in the base currency (EUR). */
   balance: number;
   /** Visual weight of the counter. `hero` is used as the page's focal point. */
   size?: 'default' | 'hero';
-  /** Display currency code. */
-  currency?: string;
-  /** Static rates for converting the base amount to `currency`. */
-  rates?: readonly DonationRate[];
 } & ComponentProps<'div'>;
 
+/**
+ * The balance counter. Figures are always shown in the base currency (EUR):
+ * only the support options are currency-selectable.
+ */
 export function DonationCounter({
   balance,
   size = 'default',
-  currency = DONATION_BASE_CURRENCY,
-  rates,
   className,
   ...rest
 }: DonationCounterProps) {
@@ -29,14 +27,8 @@ export function DonationCounter({
   const [showNegative, setShowNegative] = useState(false);
 
   const isNegative = balance < 0;
-  const displayAmount = Math.round(
-    toDisplayAmount(
-      Math.abs(balance),
-      { locale, currency, rates },
-      { fractionDigits: 0 },
-    ),
-  );
-  const symbol = getCurrencySymbol(locale, currency);
+  const displayAmount = Math.round(Math.abs(balance));
+  const symbol = getCurrencySymbol(locale, DONATION_BASE_CURRENCY);
 
   // Convert amount to digits array
   const digits = displayAmount

@@ -107,7 +107,6 @@ export default {
   },
   tiers: {
     heading: 'Pick your poison',
-    custom: 'Custom',
     amountPlaceholder: 'Amount',
     coffee: 'Coffee',
     coffeeBlurb: 'A small caffeine tax.',
@@ -117,6 +116,9 @@ export default {
     hostingBlurb: 'Keeps the server humming for a month.',
     whale: 'Whale',
     whaleBlurb: 'The trench-coat philanthropist tier.',
+  },
+  currency: {
+    label: 'Currency',
   },
   beforeAfter: {
     heading: 'Before / after',

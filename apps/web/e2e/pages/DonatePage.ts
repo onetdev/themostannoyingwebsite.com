@@ -21,8 +21,12 @@ export const getDonatePage = (page: Page) => {
     tiersHeading: page.getByRole('heading', { name: 'Pick your poison' }),
     tierCoffee: page.getByTestId('tier-coffee'),
     tierHosting: page.getByTestId('tier-hosting'),
-    tierCustom: page.getByTestId('tier-custom'),
     customAmountInput: page.getByTestId('tier-custom-input'),
+    currencyGroup: page.getByRole('group', { name: 'Currency' }),
+    currencyEur: page.getByTestId('currency-EUR'),
+    currencyUsd: page.getByTestId('currency-USD'),
+    currencyGbp: page.getByTestId('currency-GBP'),
+    currencyJpy: page.getByTestId('currency-JPY'),
     totalSupportReceivedHeading: page.getByRole('heading', {
       name: 'Total Support Received',
     }),

@@ -21,8 +21,7 @@ import { useLocale, useTranslations } from 'next-intl';
 import type { ComponentProps } from 'react';
 import { useMemo } from 'react';
 import { Bar, BarChart, CartesianGrid, ReferenceLine, XAxis } from 'recharts';
-import type { DonationRate, FundingDonationSummary } from '../../types';
-import { toDisplayAmount } from '../../utils/currency';
+import type { FundingDonationSummary } from '../../types';
 
 const SUPPORTER_MEDALS: Record<DonationSupporter['tier'], string> = {
   gold: '🥇',
@@ -124,23 +123,11 @@ function formatStatValue(
   );
 }
 
-function buildChartData(
-  summary: FundingDonationSummary,
-  locale: string,
-  currency: string,
-  rates?: readonly DonationRate[],
-) {
+function buildChartData(summary: FundingDonationSummary, locale: string) {
   const monthFormatter = new Intl.DateTimeFormat(locale, {
     month: 'short',
     timeZone: 'UTC',
   });
-
-  const toDisplay = (value: number) =>
-    toDisplayAmount(
-      value,
-      { locale, currency, rates, base: summary.currency },
-      { fractionDigits: 0 },
-    );
 
   const monthlyData = summary.monthly.map((entry) => {
     const [year, month] = entry.month.split('-').map(Number);
@@ -149,8 +136,8 @@ function buildChartData(
     return {
       label: monthFormatter.format(date),
       // Expenses are plotted below zero so the bars drop into the minus.
-      expenses: -toDisplay(entry.expenses),
-      donations: toDisplay(entry.donations),
+      expenses: -entry.expenses,
+      donations: entry.donations,
     };
   });
 
@@ -160,34 +147,18 @@ function buildChartData(
 function ImpactStat({
   stat,
   currency,
-  rates,
-  baseCurrency,
 }: {
   stat: DonationStat;
   currency: string;
-  rates?: readonly DonationRate[];
-  baseCurrency: string;
 }) {
   const t = useTranslations();
   const locale = useLocale();
   const sentimentClass = TREND_SENTIMENT_CLASSES[stat.trend.sentiment];
 
-  const formatted = useMemo(() => {
-    const displayValue =
-      stat.format === 'currency'
-        ? toDisplayAmount(
-            stat.value,
-            { locale, currency, rates, base: baseCurrency },
-            { fractionDigits: 0 },
-          )
-        : stat.value;
-
-    return formatStatValue(
-      createFormatters(locale, currency),
-      stat,
-      displayValue,
-    );
-  }, [locale, currency, rates, baseCurrency, stat]);
+  const formatted = useMemo(
+    () => formatStatValue(createFormatters(locale, currency), stat, stat.value),
+    [locale, currency, stat],
+  );
 
   const formattedTrend = useMemo(
     () =>
@@ -227,13 +198,9 @@ function ImpactStat({
 function ImpactStatGroup({
   stats,
   currency,
-  rates,
-  baseCurrency,
 }: {
   stats: readonly DonationStat[];
   currency: string;
-  rates?: readonly DonationRate[];
-  baseCurrency: string;
 }) {
   return (
     <div
@@ -241,13 +208,7 @@ function ImpactStatGroup({
       data-testid="impact-stats-group"
     >
       {stats.map((stat) => (
-        <ImpactStat
-          key={stat.id}
-          stat={stat}
-          currency={currency}
-          rates={rates}
-          baseCurrency={baseCurrency}
-        />
+        <ImpactStat key={stat.id} stat={stat} currency={currency} />
       ))}
     </div>
   );
@@ -314,20 +275,12 @@ function SupportersPodium({
   );
 }
 
-function MonthlyChart({
-  summary,
-  currency,
-  rates,
-}: {
-  summary: FundingDonationSummary;
-  currency: string;
-  rates?: readonly DonationRate[];
-}) {
+function MonthlyChart({ summary }: { summary: FundingDonationSummary }) {
   const t = useTranslations();
   const locale = useLocale();
   const { monthlyData } = useMemo(
-    () => buildChartData(summary, locale, currency, rates),
-    [summary, locale, currency, rates],
+    () => buildChartData(summary, locale),
+    [summary, locale],
   );
 
   const config = {
@@ -378,20 +331,14 @@ function MonthlyChart({
 export type ImpactStatsProps = {
   className?: string;
   summary: FundingDonationSummary;
-  currency: string;
-  rates?: readonly DonationRate[];
 };
 
 /**
  * The "Impact in numbers" section, rendered as a single container so it reads as
- * one block instead of a cluster of separate cards.
+ * one block instead of a cluster of separate cards. Figures always use the
+ * summary's base currency (EUR).
  */
-export function ImpactStats({
-  className,
-  summary,
-  currency,
-  rates,
-}: ImpactStatsProps) {
+export function ImpactStats({ className, summary }: ImpactStatsProps) {
   const t = useTranslations();
 
   return (
@@ -403,12 +350,7 @@ export function ImpactStats({
         </p>
       </CardHeader>
       <CardContent className="grid grid-cols-1 gap-8 lg:grid-cols-[1fr_auto_1fr_auto_1fr] md:gap-6">
-        <ImpactStatGroup
-          stats={summary.stats}
-          currency={currency}
-          rates={rates}
-          baseCurrency={summary.currency}
-        />
+        <ImpactStatGroup stats={summary.stats} currency={summary.currency} />
         <Separator
           orientation="vertical"
           className="hidden md:block"
@@ -423,7 +365,7 @@ export function ImpactStats({
           className="hidden md:block"
           data-testid="impact-stats-separator"
         />
-        <MonthlyChart summary={summary} currency={currency} rates={rates} />
+        <MonthlyChart summary={summary} />
       </CardContent>
     </Card>
   );

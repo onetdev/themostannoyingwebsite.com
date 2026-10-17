@@ -3,7 +3,6 @@ import { Separator } from '@maw/ui-lib';
 import { getLocale, getTranslations } from 'next-intl/server';
 import { getAppConfigService } from '@/services';
 import { getDonationSummary } from '../../services/get-donation-summary';
-import { resolveDisplayCurrency } from '../../utils/currency';
 import { BeforeAfterSlider } from './BeforeAfterSlider';
 import { DonationCounter } from './DonationCounter';
 import { DonationFaq } from './DonationFaq';
@@ -19,8 +18,6 @@ export async function DonationPage() {
   const t = await getTranslations();
   const donationSummary = await getDonationSummary(locale);
   const balance = donationSummary?.totals.balance ?? 0;
-
-  const currency = resolveDisplayCurrency(locale, donationSummary?.rates);
 
   const tRich = (key: AppTranslationKey) =>
     t.rich(key, {
@@ -38,8 +35,6 @@ export async function DonationPage() {
             balance={balance}
             size="hero"
             data-testid="donation-balance"
-            currency={currency}
-            rates={donationSummary?.rates}
           />
         </section>
 
@@ -52,7 +47,6 @@ export async function DonationPage() {
         funding={funding}
         tiers={donationSummary?.tiers ?? []}
         rates={donationSummary?.rates}
-        currency={currency}
         locale={locale}
       />
 
@@ -76,12 +70,7 @@ export async function DonationPage() {
       <DonationFaq className="w-full" />
 
       {donationSummary && (
-        <ImpactStats
-          summary={donationSummary}
-          currency={currency}
-          rates={donationSummary.rates}
-          className="lg:col-span-2"
-        />
+        <ImpactStats summary={donationSummary} className="lg:col-span-2" />
       )}
 
       <section className="lg:col-span-2">
