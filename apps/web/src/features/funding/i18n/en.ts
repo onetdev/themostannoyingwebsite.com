@@ -29,6 +29,11 @@ export default {
         answer:
           'Coffee, PayPal, or crypto — the cards above have you covered. Any amount is appreciated; zero is, historically, the most popular amount.',
       },
+      account: {
+        question: 'Do I need an account to donate?',
+        answer:
+          'No account is needed. Support the project with coffee, PayPal, or crypto — the sign-up form is the one annoyance we left out on purpose.',
+      },
     },
   },
   topSupporters: 'Top supporters',
@@ -44,6 +49,9 @@ export default {
       bugsShippedAsFeatures: 'Bugs shipped as features',
       kebabBudgetRemaining: 'Kebab budget left',
       sanityRemaining: 'Sanity left',
+      technicalDebtInterest: 'Technical debt interest',
+      monthlyVisitors: 'Monthly visitors',
+      captchasCompleted: 'Captchas completed',
     },
   },
   impactStats: {
@@ -70,6 +78,10 @@ export default {
       decreased: 'decreased',
       stagnant: 'unchanged',
     },
+    supporters: {
+      description:
+        'All {count} of our supporters are fictional organs. Join them and claim your own medal.',
+    },
   },
   totalSupportReceived: 'Total Support Received',
   balanceEyebrow: 'Current balance',
@@ -82,8 +94,6 @@ export default {
     primaryCta: 'Support the project',
     shareCta: 'Share instead',
     impactCta: 'See the impact in numbers',
-    trust: 'No account needed · PayPal, coffee or crypto',
-    supporters: 'Join {count} supporters',
   },
   goal: {
     label: "This month's goal",

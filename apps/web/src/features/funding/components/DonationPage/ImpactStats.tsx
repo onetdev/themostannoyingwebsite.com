@@ -62,6 +62,9 @@ const STAT_ICONS: Record<string, IconAliaseKey> = {
   bugsShippedAsFeatures: 'bug',
   kebabBudgetRemaining: 'utensils',
   sanityRemaining: 'brain',
+  technicalDebtInterest: 'coins',
+  monthlyVisitors: 'login',
+  captchasCompleted: 'lock',
 };
 
 const TIER_RANK: Record<DonationSupporter['tier'], number> = {
@@ -206,7 +209,46 @@ function ImpactStat({
   );
 }
 
-function SupportersPodium({ supporters }: { supporters: DonationSupporter[] }) {
+/**
+ * Groups the trend cards into a single block so the section's first cell holds
+ * every statistic together instead of scattering them across the grid.
+ */
+function ImpactStatGroup({
+  stats,
+  currency,
+  rates,
+  baseCurrency,
+}: {
+  stats: readonly DonationStat[];
+  currency: string;
+  rates?: readonly DonationRate[];
+  baseCurrency: string;
+}) {
+  return (
+    <div
+      className="grid grid-cols-1 gap-6 sm:grid-cols-2"
+      data-testid="impact-stats-group"
+    >
+      {stats.map((stat) => (
+        <ImpactStat
+          key={stat.id}
+          stat={stat}
+          currency={currency}
+          rates={rates}
+          baseCurrency={baseCurrency}
+        />
+      ))}
+    </div>
+  );
+}
+
+function SupportersPodium({
+  supporters,
+  supporterCount,
+}: {
+  supporters: DonationSupporter[];
+  supporterCount: number;
+}) {
   const t = useTranslations();
 
   const podiumOrder = useMemo(() => {
@@ -224,9 +266,17 @@ function SupportersPodium({ supporters }: { supporters: DonationSupporter[] }) {
 
   return (
     <div className="flex flex-col gap-4">
-      <span className="text-muted-foreground text-sm">
-        {t('funding.topSupporters')}
-      </span>
+      <div>
+        <p className="font-semibold">{t('funding.topSupporters')}</p>
+        <p
+          className="text-muted-foreground text-sm"
+          data-testid="impact-supporters-description"
+        >
+          {t('funding.impactStats.supporters.description', {
+            count: supporterCount,
+          })}
+        </p>
+      </div>
       <ul className="flex items-end justify-center gap-3">
         {podiumOrder.map((supporter) => (
           <li
@@ -244,7 +294,7 @@ function SupportersPodium({ supporters }: { supporters: DonationSupporter[] }) {
             </span>
             <span
               aria-hidden
-              className={`w-full rounded-t-lg ${SUPPORTER_TIER_BARS[supporter.tier]}`}
+              className={`w-full rounded-lg ${SUPPORTER_TIER_BARS[supporter.tier]}`}
             />
           </li>
         ))}
@@ -336,16 +386,16 @@ export function ImpactStats({ summary, currency, rates }: ImpactStatsProps) {
         </p>
       </CardHeader>
       <CardContent className="grid grid-cols-1 gap-8 md:grid-cols-3">
-        {summary.stats.map((stat) => (
-          <ImpactStat
-            key={stat.id}
-            stat={stat}
-            currency={currency}
-            rates={rates}
-            baseCurrency={summary.currency}
-          />
-        ))}
-        <SupportersPodium supporters={summary.supporters} />
+        <ImpactStatGroup
+          stats={summary.stats}
+          currency={currency}
+          rates={rates}
+          baseCurrency={summary.currency}
+        />
+        <SupportersPodium
+          supporters={summary.supporters}
+          supporterCount={summary.supporterCount}
+        />
         <MonthlyChart summary={summary} currency={currency} rates={rates} />
       </CardContent>
     </Card>

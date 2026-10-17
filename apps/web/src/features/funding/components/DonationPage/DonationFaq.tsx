@@ -41,6 +41,11 @@ const FAQ_ITEMS: FaqItem[] = [
     questionKey: 'funding.faq.items.donate.question',
     answerKey: 'funding.faq.items.donate.answer',
   },
+  {
+    id: 'account',
+    questionKey: 'funding.faq.items.account.question',
+    answerKey: 'funding.faq.items.account.answer',
+  },
 ];
 
 export type DonationFaqProps = {

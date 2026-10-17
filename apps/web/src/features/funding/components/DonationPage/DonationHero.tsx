@@ -21,8 +21,6 @@ export function DonationHero({ summary, className }: DonationHeroProps) {
 
   const balance = summary?.totals.balance ?? 0;
   const isNegative = balance < 0;
-  const supporterCount = summary?.supporterCount ?? 0;
-  const showSupporters = supporterCount > 0;
 
   return (
     <section
@@ -84,13 +82,6 @@ export function DonationHero({ summary, className }: DonationHeroProps) {
           {t('funding.hero.impactCta')}
         </a>
       </div>
-
-      <p className="text-muted-foreground text-xs">{t('funding.hero.trust')}</p>
-      {showSupporters && (
-        <p className="text-muted-foreground text-xs">
-          {t('funding.hero.supporters', { count: supporterCount })}
-        </p>
-      )}
     </section>
   );
 }

@@ -30,7 +30,21 @@ export const getDonatePage = (page: Page) => {
       name: 'Impact in numbers',
     }),
     impactStatsMonthlyChart: page.getByTestId('impact-stats-monthly-chart'),
+    impactStatsGroup: page.getByTestId('impact-stats-group'),
+    impactSupportersDescription: page.getByTestId(
+      'impact-supporters-description',
+    ),
+    faqAccountQuestion: page.getByRole('button', {
+      name: 'Do I need an account to donate?',
+    }),
     impactStatCoffeesConsumed: page.getByTestId('impact-stat-coffeesConsumed'),
+    impactStatTechnicalDebtInterest: page.getByTestId(
+      'impact-stat-technicalDebtInterest',
+    ),
+    impactStatMonthlyVisitors: page.getByTestId('impact-stat-monthlyVisitors'),
+    impactStatCaptchasCompleted: page.getByTestId(
+      'impact-stat-captchasCompleted',
+    ),
     kidneySupporter: page.getByTestId('impact-supporter-kidney'),
     buyMeACoffeeButton: page.getByRole('link', { name: 'Buy Me A Coffee' }),
     payPalButton: page.getByRole('link', { name: 'PayPal' }),

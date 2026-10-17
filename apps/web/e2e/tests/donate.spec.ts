@@ -25,6 +25,7 @@ test('donation page displays essential interactive elements', async ({
   await expect(donatePage.payPalButton).toBeVisible();
   await expect(donatePage.alternativeOptionsLink).toBeVisible();
   await expect(donatePage.donationBalance).toBeVisible();
+  await expect(donatePage.faqAccountQuestion).toBeVisible();
   await expect(donatePage.cryptoWalletBtc).toBeVisible();
   await expect(donatePage.cryptoWalletEth).toBeVisible();
 });
@@ -80,8 +81,18 @@ test('donation page renders the made-up impact stats chart', async ({
   await donatePage.goto();
 
   await expect(donatePage.impactStatsHeading).toBeVisible();
+  await expect(donatePage.impactStatsGroup).toBeVisible();
   await expect(donatePage.impactStatsMonthlyChart).toBeVisible();
   await expect(donatePage.impactStatCoffeesConsumed).toBeVisible();
   await expect(page.getByText('Coffees consumed')).toBeVisible();
+  await expect(donatePage.impactStatTechnicalDebtInterest).toBeVisible();
+  await expect(page.getByText('Technical debt interest')).toBeVisible();
+  await expect(donatePage.impactStatMonthlyVisitors).toBeVisible();
+  await expect(page.getByText('Monthly visitors')).toBeVisible();
+  await expect(donatePage.impactStatCaptchasCompleted).toBeVisible();
+  await expect(page.getByText('Captchas completed')).toBeVisible();
   await expect(donatePage.kidneySupporter).toBeVisible();
+  await expect(donatePage.impactSupportersDescription).toHaveText(
+    'All 3 of our supporters are fictional organs. Join them and claim your own medal.',
+  );
 });
