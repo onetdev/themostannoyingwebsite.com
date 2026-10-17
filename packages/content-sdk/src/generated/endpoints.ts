@@ -360,6 +360,46 @@ export type ArticlesListResponseOutput = zod.output<
   typeof ArticlesListResponse
 >;
 
+export const currencyRateRateExclusiveMin = 0;
+
+export const CurrencyRate = zod
+  .object({
+    code: zod
+      .string()
+      .describe('ISO 4217 currency code (or crypto unit such as BTC/ETH)'),
+    rate: zod
+      .number()
+      .gt(currencyRateRateExclusiveMin)
+      .describe(
+        'Approximate units of this currency per 1 unit of the base currency',
+      ),
+  })
+  .describe('Exchange rate relative to the response base currency');
+
+export type CurrencyRate = zod.input<typeof CurrencyRate>;
+export type CurrencyRateOutput = zod.output<typeof CurrencyRate>;
+
+export const CurrencyRatesResponse = zod
+  .object({
+    base: zod.string().describe('ISO 4217 code every rate is quoted against'),
+    rates: zod
+      .array(CurrencyRate)
+      .describe(
+        'Exchange rates relative to the base currency for the offered display currencies plus BTC/ETH crypto estimates',
+      ),
+    updated_at: zod
+      .string()
+      .describe('ISO timestamp of deployment/database creation'),
+  })
+  .describe(
+    'Exchange rates relative to a base currency for the offered display currencies plus BTC/ETH crypto estimates',
+  );
+
+export type CurrencyRatesResponse = zod.input<typeof CurrencyRatesResponse>;
+export type CurrencyRatesResponseOutput = zod.output<
+  typeof CurrencyRatesResponse
+>;
+
 export const donationSummaryResponseMonthlyItemMonthRegExp =
   /^\d{4}-(0[1-9]|1[0-2])$/;
 export const donationSummaryResponseMonthlyItemDonationsMin = 0;
@@ -373,8 +413,6 @@ export const donationSummaryResponseSupporterCountMin = 0;
 export const donationSummaryResponseTiersItemAmountExclusiveMin = 0;
 
 export const donationSummaryResponseGoalAmountExclusiveMin = 0;
-
-export const donationSummaryResponseRatesItemRateExclusiveMin = 0;
 
 export const DonationSummaryResponse = zod
   .object({
@@ -493,27 +531,12 @@ export const DonationSummaryResponse = zod
         labelKey: zod.string().describe('Frontend i18n key for the goal label'),
       })
       .describe('Recurring funding target'),
-    rates: zod
-      .array(
-        zod.object({
-          code: zod.string().describe('ISO 4217 currency code'),
-          rate: zod
-            .number()
-            .gt(donationSummaryResponseRatesItemRateExclusiveMin)
-            .describe(
-              'Approximate units of this currency per 1 EUR (fiat display currency or crypto unit)',
-            ),
-        }),
-      )
-      .describe(
-        'Exchange rates relative to EUR for the offered display currencies plus BTC/ETH crypto estimates',
-      ),
     updated_at: zod
       .string()
       .describe('ISO timestamp of deployment/database creation'),
   })
   .describe(
-    'Donation summary: all-time totals and a live balance projection, monthly history, trend-card statistics, top supporters, preset tiers, funding goal and display-currency rates',
+    'Donation summary: all-time totals and a live balance projection, monthly history, trend-card statistics, top supporters, preset tiers and funding goal. Display-currency exchange rates are served by the currency rates endpoint.',
   );
 
 export type DonationSummaryResponse = zod.input<typeof DonationSummaryResponse>;
@@ -1736,7 +1759,7 @@ export type GetSpamSampleListResponseOutput = zod.output<
 >;
 
 /**
- * Returns all-time totals and a live balance projection, a monthly history of donations and running costs, trend-card statistics with i18n label keys, the top supporters, preset donation tiers, the recurring funding goal, and exchange rates for the offered display currencies plus BTC/ETH crypto estimates. The frontend owns value formatting and label resolution.
+ * Returns all-time totals and a live balance projection, a monthly history of donations and running costs, trend-card statistics with i18n label keys, the top supporters, preset donation tiers and the recurring funding goal. The frontend owns value formatting and label resolution. Display-currency exchange rates are served by the currency rates endpoint.
  * @summary Get the donation summary for a language
  */
 export const GetDonationSummaryParams = zod.object({
@@ -1759,4 +1782,17 @@ export type GetDonationSummaryResponse = zod.input<
 >;
 export type GetDonationSummaryResponseOutput = zod.output<
   typeof GetDonationSummaryResponse
+>;
+
+/**
+ * Returns exchange rates relative to the base currency for the fiat currencies the donation picker offers, plus BTC/ETH crypto estimates used for payment amounts. Rates are locale-independent; the frontend owns value formatting.
+ * @summary Get exchange rates for the offered display currencies
+ */
+export const GetCurrencyRateListResponse = CurrencyRatesResponse;
+
+export type GetCurrencyRateListResponse = zod.input<
+  typeof GetCurrencyRateListResponse
+>;
+export type GetCurrencyRateListResponseOutput = zod.output<
+  typeof GetCurrencyRateListResponse
 >;

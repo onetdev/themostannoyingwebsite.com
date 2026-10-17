@@ -2,6 +2,7 @@ import { HttpTransport } from './http';
 import { ArticlesResource } from './resources/articles';
 import { AuthorsResource } from './resources/authors';
 import { CategoriesResource } from './resources/categories';
+import { CurrencyResource } from './resources/currency';
 import { DonationsResource } from './resources/donations';
 import { HealthResource } from './resources/health';
 import { ImagesResource } from './resources/images';
@@ -42,6 +43,7 @@ export class ContentApiClient {
   readonly newsletter: NewsletterResource;
   readonly spamSample: SpamSampleResource;
   readonly donations: DonationsResource;
+  readonly currency: CurrencyResource;
 
   private readonly transport: HttpTransport;
 
@@ -67,6 +69,7 @@ export class ContentApiClient {
     this.newsletter = new NewsletterResource(this.transport);
     this.spamSample = new SpamSampleResource(this.transport);
     this.donations = new DonationsResource(this.transport);
+    this.currency = new CurrencyResource(this.transport);
   }
 }
 
