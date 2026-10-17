@@ -500,10 +500,14 @@ export const DonationSummaryResponse = zod
           rate: zod
             .number()
             .gt(donationSummaryResponseRatesItemRateExclusiveMin)
-            .describe('Approximate units of this currency per 1 EUR'),
+            .describe(
+              'Approximate units of this currency per 1 EUR (fiat display currency or crypto unit)',
+            ),
         }),
       )
-      .describe('Display-currency exchange rates relative to EUR'),
+      .describe(
+        'Exchange rates relative to EUR for the offered display currencies plus BTC/ETH crypto estimates',
+      ),
     updated_at: zod
       .string()
       .describe('ISO timestamp of deployment/database creation'),
@@ -1732,7 +1736,7 @@ export type GetSpamSampleListResponseOutput = zod.output<
 >;
 
 /**
- * Returns all-time totals and a live balance projection, a monthly history of donations and running costs, trend-card statistics with i18n label keys, the top supporters, preset donation tiers, the recurring funding goal, and display-currency rates. The frontend owns value formatting and label resolution.
+ * Returns all-time totals and a live balance projection, a monthly history of donations and running costs, trend-card statistics with i18n label keys, the top supporters, preset donation tiers, the recurring funding goal, and exchange rates for the offered display currencies plus BTC/ETH crypto estimates. The frontend owns value formatting and label resolution.
  * @summary Get the donation summary for a language
  */
 export const GetDonationSummaryParams = zod.object({
