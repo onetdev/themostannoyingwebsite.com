@@ -12,6 +12,10 @@
   --animate-gift-callout: gift-callout 5s infinite;
   --animate-hue-full-rotate: hue-full-rotate 2s infinite;
 
+  /* Decorative status "sonar": a slower, wider sibling of Tailwind's `ping`
+   * (which is locked to 1s / 2x). Used for the funding status dot. */
+  --animate-sonar: sonar 2s cubic-bezier(0, 0, 0.2, 1) infinite;
+
   /* Aurora backdrop — slow, deliberately out-of-phase drifts (see
    * `aurora-blob` in effects.css). Durations differ per blob so the loops
    * never resynchronise. */
@@ -117,6 +121,19 @@
     }
     100% {
       filter: hue-rotate(360deg);
+    }
+  }
+
+  /* Grows from the dot's own footprint (scale 1, still hidden behind the solid
+   * dot of the same colour) out past the pill's padding, fading as it goes. */
+  @keyframes sonar {
+    0% {
+      transform: scale(1);
+    }
+    75%,
+    100% {
+      transform: scale(3.5);
+      opacity: 0;
     }
   }
 

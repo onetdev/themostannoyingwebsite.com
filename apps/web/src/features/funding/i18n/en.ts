@@ -24,10 +24,21 @@ export default {
         answer:
           'Warm feelings, a spot on a leaderboard populated by fictional organs, and absolutely no legally binding rights, services, or special access.',
       },
+      soul: {
+        question:
+          'I have already promised my soul to the devil. What can I do?',
+        answer:
+          'Sadly, that is a binding contract that cannot be undone. The good news is that donating to this project does not come with strings attached — no rights, no services, no soul required.',
+      },
       donate: {
         question: 'How do I donate?',
         answer:
           'Coffee, PayPal, or crypto — the cards above have you covered. Any amount is appreciated; zero is, historically, the most popular amount.',
+      },
+      account: {
+        question: 'Do I need an account to donate?',
+        answer:
+          'No account is needed. Support the project with coffee, PayPal, or crypto — the sign-up form is the one annoyance we left out on purpose.',
       },
     },
   },
@@ -44,6 +55,9 @@ export default {
       bugsShippedAsFeatures: 'Bugs shipped as features',
       kebabBudgetRemaining: 'Kebab budget left',
       sanityRemaining: 'Sanity left',
+      technicalDebtInterest: 'Technical debt interest',
+      monthlyVisitors: 'Monthly visitors',
+      captchasCompleted: 'Captchas completed',
     },
   },
   impactStats: {
@@ -70,12 +84,52 @@ export default {
       decreased: 'decreased',
       stagnant: 'unchanged',
     },
+    supporters: {
+      description:
+        'All {count} of our supporters are fictional organs. Join them and claim your own medal.',
+    },
   },
   totalSupportReceived: 'Total Support Received',
   balanceEyebrow: 'Current balance',
-  balanceCaption:
-    'Also known as the hole. It gets deeper every month — you are welcome to try to slow it down.',
+  hero: {
+    statusPositive: 'Barely alive',
+    statusNegative: 'Financially deceased',
+    headline: "Keep the internet's most annoying website online.",
+    subhead:
+      'No sponsors, no ads, no plan — just server bills, kebabs, and your questionable generosity.',
+    primaryCta: 'Support the project',
+    shareCta: 'Share instead',
+    impactCta: 'See the impact in numbers',
+  },
+  goal: {
+    label: "This month's goal",
+    progress: '{current} of {target}',
+  },
+  tiers: {
+    heading: 'Pick your poison',
+    amountPlaceholder: 'Amount',
+    coffee: 'Coffee',
+    coffeeBlurb: 'A small caffeine tax.',
+    kebab: 'Kebab',
+    kebabBlurb: 'One kebab closer to happiness.',
+    hosting: 'Hosting',
+    hostingBlurb: 'Keeps the server humming for a month.',
+    whale: 'Whale',
+    whaleBlurb: 'The trench-coat philanthropist tier.',
+  },
+  currency: {
+    label: 'Currency',
+  },
+  beforeAfter: {
+    heading: 'Before / after',
+    before: 'Before',
+    after: 'After',
+    sliderLabel: 'Comparison position',
+    caption:
+      'Drag the handle — or anywhere across the image — to compare. Nothing here is real; the numbers are just as imaginary as the receipts.',
+  },
   classicMethods: 'Classic methods',
+  supportMethods: 'Ways to support',
   buyMeACoffee: 'Buy Me A Coffee',
   payPal: 'PayPal',
   cryptoMethods: 'Crypto methods',
@@ -87,6 +141,8 @@ export default {
     network: 'Network: {network}',
     copyAction: 'Copy Address',
     copyFeedback: 'Copied!',
+    qrHint: 'Scan the code or copy the address to send crypto directly.',
+    amountLabel: '≈ {amount} {symbol}',
     bitcoin: 'Bitcoin (BTC)',
     ethereum: 'Ethereum (ETH)',
   },

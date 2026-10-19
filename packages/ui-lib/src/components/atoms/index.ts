@@ -19,6 +19,7 @@ export * from './Message';
 export * from './MessageScroller';
 export * from './PageHeadline';
 export * from './PasswordStrengthBar';
+export * from './Popover';
 export * from './Progress';
 export * from './Select';
 export * from './Separator';

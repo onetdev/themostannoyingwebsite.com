@@ -8,7 +8,7 @@ This package provides a strongly-typed HTTP client powered by **`ky`**, with ful
 
 ## 📦 Features
 
-- **Resource-Oriented Client**: Ergonomic namespaces: `client.articles`, `client.authors`, `client.pages`, `client.categories`, `client.images`, `client.health`, `client.locales`, `client.translations`, `client.pools`, `client.survey`, `client.prizeWheel`, `client.newsletter`, `client.spamSample`, `client.donations`.
+- **Resource-Oriented Client**: Ergonomic namespaces: `client.articles`, `client.authors`, `client.pages`, `client.categories`, `client.images`, `client.health`, `client.locales`, `client.translations`, `client.pools`, `client.survey`, `client.prizeWheel`, `client.newsletter`, `client.spamSample`, `client.donations`, `client.currency`.
 - **Ky HTTP Engine**: Built-in prefix URL handling, automatic query serialization, timeouts, and configurable exponential retry.
 - **Next.js App Router Compatible**: Pass Next.js fetch options (`next: { revalidate, tags }`, `cache`) directly in request options.
 - **Typed Error Hierarchy**: Automatic translation of OpenAPI error responses into `ContentApiNotFoundError`, `ContentApiValidationError`, `ContentApiCorsError`, `ContentApiServerError`.
@@ -121,6 +121,9 @@ const { samples } = await client.spamSample.list('en');
 
 // Donation summary (totals, monthly history, trend stats, supporters)
 const summary = await client.donations.getSummary('en');
+
+// Exchange rates for the offered display currencies (their own endpoint)
+const { base, rates } = await client.currency.getRates();
 ```
 
 ### Health Check

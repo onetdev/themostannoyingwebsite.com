@@ -5,6 +5,15 @@ Accepted
 
 Extends [ADR 29](0029-content-resource-model-pools-and-dedicated-endpoints.md).
 
+> **Amendment ([ADR 32](0032-donation-tiers-goal-and-currency-display.md)):** the
+> balance is **live again**. Decision 2's static derivation of `totals.balance` from
+> the monthly rows is reversed; the Content API now computes the balance at serve time
+> with the original accrual algorithm (base constants owned by the content repo), so
+> the balance is intentionally independent of `donations - expenses`. ADR 32 also
+> establishes that currency is a frontend display concern layered on the EUR base:
+> the API additionally serves a static `rates` table, and the frontend converts base
+> amounts and applies charm rounding for tier presets.
+
 ## Context
 The donation page mixed three sources of truth:
 

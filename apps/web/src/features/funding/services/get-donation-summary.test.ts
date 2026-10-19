@@ -3,7 +3,9 @@ import { fetchDonationSummary } from './get-donation-summary';
 
 describe('fetchDonationSummary', () => {
   it('requests the summary with the donation language and cache tag', async () => {
-    const summary = { currency: 'EUR' };
+    const summary = {
+      totals: { balance: { value: 0, currency: 'EUR' } },
+    };
     const getSummary = jest.fn().mockResolvedValue(summary);
     const client = {
       donations: { getSummary },
