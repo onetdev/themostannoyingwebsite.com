@@ -53,10 +53,10 @@ erase those behaviors.
 
 5.  **Preserve intentionally annoying behavior, but reintroduce it explicitly.** The
     project's whole point is to be annoying, so deliberate friction is a feature.
-    When a swap changes behavior, the lost behavior is recorded in
-    [`docs/shadcn-adoption-log.md`](../docs/shadcn-adoption-log.md) and, if intentional,
-    re-added *on top of* the shadcn component (an animation wrapper, a controlled
-    handler) rather than by forking the component.
+    When a swap changes behavior, the change is reviewed for lost intentional
+    friction and, if that friction is deliberate, re-added *on top of* the shadcn
+    component (an animation wrapper, a controlled handler) rather than by forking
+    the component.
 
 6.  **`@shadcn/react` is the source of headless chat primitives.** The
     `message-scroller` registry item depends on the `@shadcn/react` package; it is
@@ -67,9 +67,7 @@ erase those behaviors.
   duplicating primitive libraries.
 - **Pros**: Far less bespoke UI to maintain — messages, overlays, toggles, sliders and
   empty states come from a maintained source and stay themable via semantic tokens.
-- **Pros**: The behavior log makes every intentional regression an explicit,
-  reviewable decision instead of an accidental omission.
-- **Cons**: Registry items require manual normalization on add (icons, `cn` alias,
+- **Cons**: Registry items require manual normalization on add (icons, `cn` import,
   imports, i18n); there is no fully automated `shadcn add`.
 - **Cons**: Re-introducing intentional behavior adds a thin wrapper layer over some
   primitives.

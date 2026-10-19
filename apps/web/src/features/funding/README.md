@@ -51,7 +51,7 @@ Donation data is served by the Content API's dedicated endpoint
 - **BeforeAfterSlider**: Standalone draggable comparison component (`inset()` clip over two layers) placed below the FAQ; imagery is passed in so it can be swapped without touching the component.
 - **BeggarBanner**: A prominent, non-dismissible alert at the top of the site that encourages users to donate. Its visibility is often linked to the first 10 days of each month to simulate "real-world" funding urgency.
 - **DonationService**: An injectable service that provides calculated estimates for the project's financial status and determines if the `BeggarBanner` should be displayed.
-- **Crypto Donations**: `SupportOptions` lists classic and crypto methods; the BTC/ETH buttons reveal a dynamically generated QR code, network and copy-to-clipboard address inside a `Popover` (see `docs/shadcn-adoption-log.md`, BEH-21).
+- **Crypto Donations**: `SupportOptions` lists classic and crypto methods; the BTC/ETH buttons reveal a dynamically generated QR code, network and copy-to-clipboard address inside a `Popover`.
 
 ## Service Details
 

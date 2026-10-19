@@ -35,7 +35,7 @@ The project includes specialized skills that you SHOULD use for specific tasks. 
 - **`adr-writer`**: Use to draft and manage Architectural Decision Records in the `adr/` folder.
 - **`audit-resolve`**: Use to audit and upgrade dependencies that have known security vulnerabilities.
 - **`dependency-upgrade`**: Use to bump dependency versions across the monorepo and verify the repository still works.
-- **`shadcn`**: Use when adding, searching, fixing, debugging, styling, or composing shadcn/ui components in `packages/ui-lib` (see `adr/0031-base-ui-shadcn-adoption.md` and `docs/shadcn-adoption-log.md`).
+- **`shadcn`**: Use when adding, searching, fixing, debugging, styling, or composing shadcn/ui components in `packages/ui-lib` (see `adr/0031-base-ui-shadcn-adoption.md`).
 
 ---
 
