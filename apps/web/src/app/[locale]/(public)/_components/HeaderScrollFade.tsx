@@ -1,6 +1,6 @@
 'use client';
 
-import { clsx } from '@maw/ui-lib/utils';
+import { clsx } from 'cn';
 import { useIsScrolled } from '@/hooks/useIsScrolled';
 
 export type HeaderScrollFadeProps = {

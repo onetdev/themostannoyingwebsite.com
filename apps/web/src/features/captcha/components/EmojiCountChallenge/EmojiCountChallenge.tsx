@@ -1,5 +1,5 @@
 import { Input } from '@maw/ui-lib';
-import { clsx } from '@maw/ui-lib/utils';
+import { clsx } from 'cn';
 import { useTranslations } from 'next-intl';
 import type { ChangeEvent } from 'react';
 import { useAppConfigContext } from '@/core/react';

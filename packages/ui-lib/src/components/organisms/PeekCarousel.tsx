@@ -1,4 +1,4 @@
-import clsx from 'clsx';
+import { cn } from 'cn';
 import type { ComponentProps } from 'react';
 import { Card, CardContent } from './Card';
 import {
@@ -59,13 +59,13 @@ export function CarouselDotIndicator({
   count,
 }: CarouselDotIndicatorProps) {
   return (
-    <div className={clsx('flex justify-center gap-2', className)}>
+    <div className={cn('flex justify-center gap-2', className)}>
       {Array.from({ length: count }).map((_, i) => (
         <button
           type="button"
           key={i}
           onClick={() => api?.scrollTo(i)}
-          className={clsx(
+          className={cn(
             `h-2 w-2 rounded-full transition-all`,
             current === i ? 'bg-primary w-6' : 'bg-muted',
           )}

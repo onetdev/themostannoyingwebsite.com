@@ -1,7 +1,7 @@
 'use client';
 
 import { Button, Icon, Spinner } from '@maw/ui-lib';
-import { clsx } from '@maw/ui-lib/utils';
+import { clsx } from 'cn';
 import { useTranslations } from 'next-intl';
 import type { ChallengeStatus } from '../types';
 

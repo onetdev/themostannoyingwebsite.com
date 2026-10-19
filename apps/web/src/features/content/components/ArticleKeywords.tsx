@@ -1,6 +1,6 @@
 import type { Article, ArticleListItem } from '@maw/content-sdk';
 import { Badge } from '@maw/ui-lib';
-import { cn } from '@maw/ui-lib/utils';
+import { cn } from 'cn';
 import type { ComponentProps } from 'react';
 
 export type ArticleKeywordsProps = Omit<ComponentProps<'div'>, 'children'> & {

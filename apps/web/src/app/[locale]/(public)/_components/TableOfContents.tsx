@@ -1,6 +1,6 @@
 'use client';
 
-import { clsx } from '@maw/ui-lib/utils';
+import { clsx } from 'cn';
 import { useTranslations } from 'next-intl';
 import { useEffect, useId, useState } from 'react';
 

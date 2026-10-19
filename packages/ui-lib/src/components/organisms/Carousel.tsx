@@ -1,5 +1,6 @@
 'use client';
 
+import { cn } from 'cn';
 import useEmblaCarousel, {
   type UseEmblaCarouselType,
 } from 'embla-carousel-react';
@@ -12,7 +13,6 @@ import {
   useEffect,
   useState,
 } from 'react';
-import { cn } from '../../utils';
 import { Button } from '../atoms/Button';
 import { Icon } from '../atoms/Icon';
 

@@ -4,7 +4,7 @@ import {
   toCoverImages,
 } from '@maw/content-sdk';
 import { TiltCard } from '@maw/ui-lib';
-import { cn } from '@maw/ui-lib/utils';
+import { cn } from 'cn';
 import Image from 'next/image';
 import type { ComponentProps, ElementType } from 'react';
 import { Link } from '@/core/i18n/navigation';

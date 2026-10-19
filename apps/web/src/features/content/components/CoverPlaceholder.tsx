@@ -1,4 +1,4 @@
-import { cn } from '@maw/ui-lib/utils';
+import { cn } from 'cn';
 import config from '@/core/config';
 
 export type CoverPlaceholderProps = {

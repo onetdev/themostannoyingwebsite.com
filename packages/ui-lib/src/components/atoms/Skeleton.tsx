@@ -1,6 +1,5 @@
+import { cn } from 'cn';
 import type { ComponentProps } from 'react';
-
-import { cn } from '../../utils';
 
 function Skeleton({ className, ...props }: ComponentProps<'div'>) {
   return (

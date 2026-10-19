@@ -1,4 +1,4 @@
-import { clsx } from '@maw/ui-lib/utils';
+import { clsx } from 'cn';
 import type { ComponentProps, PropsWithChildren } from 'react';
 import { ReportRouteVisit } from '@/features/monitoring/components';
 import type { RouteAlias } from '@/schemas';

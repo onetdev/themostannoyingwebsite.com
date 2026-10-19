@@ -1,7 +1,7 @@
 'use client';
 
 import { Button } from '@maw/ui-lib';
-import { cn } from '@maw/ui-lib/utils';
+import { cn } from 'cn';
 import { useTranslations } from 'next-intl';
 import { useCallback, useMemo, useState } from 'react';
 

@@ -1,7 +1,7 @@
 'use client';
 
 import { ToggleGroup, ToggleGroupItem } from '@maw/ui-lib';
-import { cn } from '@maw/ui-lib/utils';
+import { cn } from 'cn';
 import { useLocale, useTranslations } from 'next-intl';
 import { useMemo } from 'react';
 

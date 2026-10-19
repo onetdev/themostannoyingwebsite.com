@@ -1,4 +1,4 @@
-import { cn } from '../../utils';
+import { cn } from 'cn';
 import { Icon, type IconProps } from './Icon';
 
 export type SpinnerProps = Omit<IconProps, 'icon'>;

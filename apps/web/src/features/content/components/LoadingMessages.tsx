@@ -1,7 +1,7 @@
 'use client';
 
 import { Marker, MarkerContent, MarkerIcon, Spinner } from '@maw/ui-lib';
-import { cn } from '@maw/ui-lib/utils';
+import { cn } from 'cn';
 import { useTranslations } from 'next-intl';
 import { usePool } from '@/features/content/hooks';
 import { useRotatingMessage } from '@/hooks/useRotatingMessage';

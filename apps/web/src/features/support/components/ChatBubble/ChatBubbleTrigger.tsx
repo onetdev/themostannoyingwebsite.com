@@ -1,7 +1,7 @@
 'use client';
 
 import { Badge, Button, Icon } from '@maw/ui-lib';
-import { cn } from '@maw/ui-lib/utils';
+import { cn } from 'cn';
 import { AnimatePresence, motion, useAnimation } from 'framer-motion';
 import { useTranslations } from 'next-intl';
 import { useEffect } from 'react';

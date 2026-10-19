@@ -1,4 +1,4 @@
-import { clsx } from '@maw/ui-lib/utils';
+import { clsx } from 'cn';
 import { getTranslations } from 'next-intl/server';
 import type { ComponentProps } from 'react';
 import { FOOTER_NAVIGATION_LINKS } from '@/app/navigation';

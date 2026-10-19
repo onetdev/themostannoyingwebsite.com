@@ -1,7 +1,7 @@
 'use client';
 
 import { Icon } from '@maw/ui-lib';
-import { cn } from '@maw/ui-lib/utils';
+import { cn } from 'cn';
 import Image from 'next/image';
 import { type ComponentProps, useState } from 'react';
 

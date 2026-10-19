@@ -1,5 +1,5 @@
 import type { Article, ArticleListItem } from '@maw/content-sdk';
-import { cn } from '@maw/ui-lib/utils';
+import { cn } from 'cn';
 import type { ComponentProps } from 'react';
 import { Link } from '@/core/i18n/navigation';
 import { ArticleMeta } from './ArticleMeta';

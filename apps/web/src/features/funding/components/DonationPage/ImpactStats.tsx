@@ -16,7 +16,7 @@ import {
   type IconAliaseKey,
   Separator,
 } from '@maw/ui-lib';
-import { cn } from '@maw/ui-lib/utils';
+import { cn } from 'cn';
 import { useLocale, useTranslations } from 'next-intl';
 import type { ComponentProps } from 'react';
 import { useMemo } from 'react';

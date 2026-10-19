@@ -7,7 +7,8 @@ import {
   InputGroupButton,
   InputGroupInput,
 } from '@maw/ui-lib';
-import { cn, cva, type VariantProps } from '@maw/ui-lib/utils';
+import { cva, type VariantProps } from 'class-variance-authority';
+import { cn } from 'cn';
 import { useTranslations } from 'next-intl';
 import type { SubmitEventHandler } from 'react';
 import { emit } from '@/core/events/event-bus';

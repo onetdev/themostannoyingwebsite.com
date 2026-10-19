@@ -1,6 +1,6 @@
 import { PageHeadline } from '@maw/ui-lib';
 import styles from '@maw/ui-lib/content.module.css';
-import { cn } from '@maw/ui-lib/utils';
+import { cn } from 'cn';
 import type { Metadata } from 'next';
 import { getLocale, getTranslations } from 'next-intl/server';
 import { WebPageStructuredData } from '@/core/seo';

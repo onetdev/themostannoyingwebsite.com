@@ -8,7 +8,7 @@ import {
   CardTitle,
   Separator,
 } from '@maw/ui-lib';
-import { clsx } from '@maw/ui-lib/utils';
+import { clsx } from 'cn';
 import { useTranslations } from 'next-intl';
 import { useState } from 'react';
 import type { Comment } from '../../schemas';

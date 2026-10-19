@@ -1,5 +1,5 @@
 import type { Article, ArticleListItem } from '@maw/content-sdk';
-import { cn } from '@maw/ui-lib/utils';
+import { cn } from 'cn';
 import { useFormatter, useTranslations } from 'next-intl';
 import type { ComponentProps } from 'react';
 
