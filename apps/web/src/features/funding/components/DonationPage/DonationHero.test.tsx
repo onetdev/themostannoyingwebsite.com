@@ -16,7 +16,9 @@ jest.mock('@/features/share/hooks', () => ({
 }));
 
 const summaryWithBalance = (balance: number) =>
-  ({ totals: { balance } }) as unknown as FundingDonationSummary;
+  ({
+    totals: { balance: { value: balance, currency: 'EUR' } },
+  }) as unknown as FundingDonationSummary;
 
 describe('DonationHero', () => {
   it('renders a decorative sonar pulse on the status dot', () => {

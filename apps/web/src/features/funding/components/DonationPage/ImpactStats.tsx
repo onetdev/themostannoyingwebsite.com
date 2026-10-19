@@ -91,13 +91,8 @@ const SUPPORTER_TIER_BARS: Record<DonationSupporter['tier'], string> = {
   bronze: 'h-12 bg-tertiary/50',
 };
 
-function createFormatters(locale: string, currency: string) {
+function createFormatters(locale: string) {
   return {
-    currency: new Intl.NumberFormat(locale, {
-      style: 'currency',
-      currency,
-      maximumFractionDigits: 0,
-    }),
     integer: new Intl.NumberFormat(locale, { maximumFractionDigits: 0 }),
     percent: new Intl.NumberFormat(locale, {
       style: 'percent',
@@ -112,14 +107,21 @@ function createFormatters(locale: string, currency: string) {
   };
 }
 
-function formatStatValue(
-  formatters: ReturnType<typeof createFormatters>,
-  stat: DonationStat,
-  displayValue: number,
-) {
+/** Formats a currency-tagged stat without conversion and a scalar stat directly. */
+function formatStatValue(locale: string, stat: DonationStat): string {
+  if (stat.format === 'currency') {
+    return new Intl.NumberFormat(locale, {
+      style: 'currency',
+      currency: stat.value.currency,
+      maximumFractionDigits: 0,
+    }).format(stat.value.value);
+  }
+
+  const formatters = createFormatters(locale);
   const formatter = formatters[stat.format] ?? formatters.integer;
+
   return formatter.format(
-    stat.format === 'percent' ? displayValue / 100 : displayValue,
+    stat.format === 'percent' ? stat.value / 100 : stat.value,
   );
 }
 
@@ -136,36 +138,27 @@ function buildChartData(summary: FundingDonationSummary, locale: string) {
     return {
       label: monthFormatter.format(date),
       // Expenses are plotted below zero so the bars drop into the minus.
-      expenses: -entry.expenses,
-      donations: entry.donations,
+      expenses: -entry.expenses.value,
+      donations: entry.donations.value,
     };
   });
 
   return { monthlyData };
 }
 
-function ImpactStat({
-  stat,
-  currency,
-}: {
-  stat: DonationStat;
-  currency: string;
-}) {
+function ImpactStat({ stat }: { stat: DonationStat }) {
   const t = useTranslations();
   const locale = useLocale();
   const sentimentClass = TREND_SENTIMENT_CLASSES[stat.trend.sentiment];
 
   const formatted = useMemo(
-    () => formatStatValue(createFormatters(locale, currency), stat, stat.value),
-    [locale, currency, stat],
+    () => formatStatValue(locale, stat),
+    [locale, stat],
   );
 
   const formattedTrend = useMemo(
-    () =>
-      createFormatters(locale, currency).percent.format(
-        stat.trend.percent / 100,
-      ),
-    [locale, currency, stat.trend.percent],
+    () => createFormatters(locale).percent.format(stat.trend.percent / 100),
+    [locale, stat.trend.percent],
   );
 
   return (
@@ -195,20 +188,14 @@ function ImpactStat({
  * Groups the trend cards into a single block so the section's first cell holds
  * every statistic together instead of scattering them across the grid.
  */
-function ImpactStatGroup({
-  stats,
-  currency,
-}: {
-  stats: readonly DonationStat[];
-  currency: string;
-}) {
+function ImpactStatGroup({ stats }: { stats: readonly DonationStat[] }) {
   return (
     <div
       className="grid grid-cols-2 gap-6 sm:grid-cols-3 lg:grid-cols-2"
       data-testid="impact-stats-group"
     >
       {stats.map((stat) => (
-        <ImpactStat key={stat.id} stat={stat} currency={currency} />
+        <ImpactStat key={stat.id} stat={stat} />
       ))}
     </div>
   );
@@ -335,8 +322,8 @@ export type ImpactStatsProps = {
 
 /**
  * The "Impact in numbers" section, rendered as a single container so it reads as
- * one block instead of a cluster of separate cards. Figures always use the
- * summary's base currency (EUR).
+ * one block instead of a cluster of separate cards. Currency values render in
+ * the currency the API tagged them with.
  */
 export function ImpactStats({ className, summary }: ImpactStatsProps) {
   const t = useTranslations();
@@ -350,7 +337,7 @@ export function ImpactStats({ className, summary }: ImpactStatsProps) {
         </p>
       </CardHeader>
       <CardContent className="grid grid-cols-1 gap-8 lg:grid-cols-[1fr_auto_1fr_auto_1fr] md:gap-6">
-        <ImpactStatGroup stats={summary.stats} currency={summary.currency} />
+        <ImpactStatGroup stats={summary.stats} />
         <Separator
           orientation="vertical"
           className="hidden md:block"

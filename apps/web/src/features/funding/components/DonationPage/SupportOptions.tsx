@@ -56,6 +56,8 @@ export type SupportOptionsProps = {
   funding: FundingConfig;
   tiers: readonly DonationTier[];
   rates?: readonly DonationRate[];
+  /** Base currency the rates are relative to; falls back to the bundled EUR base. */
+  baseCurrency?: string;
   locale: string;
 } & ComponentProps<'section'>;
 
@@ -70,24 +72,25 @@ function roundToCurrency(
 /**
  * The offer: preset tiers (or a custom amount) plus the provider buttons. The
  * visitor picks the display currency for the offer; the balance and impact
- * figures stay in EUR. The selected amount is carried into providers that accept
- * one (PayPal), and crypto methods reveal their QR codes in a popover with an
- * estimate derived from the EUR base amount.
+ * figures render in the currency the API tagged them with. The selected amount is
+ * carried into providers that accept one (PayPal), and crypto methods reveal
+ * their QR codes in a popover with an estimate derived from the base amount.
  */
 export function SupportOptions({
   funding,
   tiers,
   rates,
+  baseCurrency = DONATION_BASE_CURRENCY,
   locale,
   className,
   ...rest
 }: SupportOptionsProps) {
   const t = useTranslations();
-  const [currency, setCurrency] = useState<string>(DONATION_BASE_CURRENCY);
+  const [currency, setCurrency] = useState<string>(baseCurrency);
   const [selection, setSelection] = useState<SupportSelection>(() =>
     tiers[0]
       ? { kind: 'tier', tierId: tiers[0].id }
-      : { kind: 'custom', amount: 0 },
+      : { kind: 'custom', amount: { value: 0, currency: baseCurrency } },
   );
 
   const selectedTier =
@@ -103,32 +106,38 @@ export function SupportOptions({
   // rounded; custom amounts keep exactly what was typed.
   const displayAmount = selectedTier
     ? toDisplayAmount(
-        selectedTier.amount,
+        selectedTier.amount.value,
         {
           locale,
           currency,
-          base: DONATION_BASE_CURRENCY,
+          base: selectedTier.amount.currency,
           rates: effectiveRates,
         },
         { charm: true },
       )
     : selection.kind === 'custom'
-      ? selection.amount
+      ? selection.amount.value
       : 0;
 
-  // Crypto estimates and provider links are always derived from the EUR base.
-  const baseAmount = selectedTier
-    ? selectedTier.amount
-    : selection.kind === 'custom'
-      ? toBaseAmount(selection.amount, {
-          currency,
-          base: DONATION_BASE_CURRENCY,
+  // Crypto estimates and provider links are always derived from the base
+  // currency, so convert whichever currency-tagged amount is selected.
+  const baseAmount =
+    selectedTier && selection.kind === 'tier'
+      ? toBaseAmount(selectedTier.amount.value, {
+          currency: selectedTier.amount.currency,
+          base: baseCurrency,
           rates: effectiveRates,
         })
-      : 0;
+      : selection.kind === 'custom'
+        ? toBaseAmount(selection.amount.value, {
+            currency: selection.amount.currency,
+            base: baseCurrency,
+            rates: effectiveRates,
+          })
+        : 0;
 
   const currencies = getDisplayCurrencies(effectiveRates, {
-    base: DONATION_BASE_CURRENCY,
+    base: baseCurrency,
     exclude: DONATION_CRYPTO_CODES,
   });
   const showCurrencySelector = currencies.length > 1;
@@ -139,11 +148,11 @@ export function SupportOptions({
       : funding.paypalUrl;
 
   const btcAmount = convertAmount(baseAmount, 'BTC', {
-    base: DONATION_BASE_CURRENCY,
+    base: baseCurrency,
     rates: effectiveRates,
   });
   const ethAmount = convertAmount(baseAmount, 'ETH', {
-    base: DONATION_BASE_CURRENCY,
+    base: baseCurrency,
     rates: effectiveRates,
   });
   const cryptoAmountLabel = (value: number, symbol: string) =>
@@ -161,19 +170,22 @@ export function SupportOptions({
 
     // Preserve the underlying value when switching display currencies.
     if (selection.kind === 'custom') {
-      const base = toBaseAmount(selection.amount, {
-        currency,
-        base: DONATION_BASE_CURRENCY,
+      const base = toBaseAmount(selection.amount.value, {
+        currency: selection.amount.currency,
+        base: baseCurrency,
         rates: effectiveRates,
       });
       const converted = convertAmount(base, nextCurrency, {
-        base: DONATION_BASE_CURRENCY,
+        base: baseCurrency,
         rates: effectiveRates,
       });
 
       setSelection({
         kind: 'custom',
-        amount: roundToCurrency(converted, locale, nextCurrency),
+        amount: {
+          value: roundToCurrency(converted, locale, nextCurrency),
+          currency: nextCurrency,
+        },
       });
     }
 

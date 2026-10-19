@@ -47,14 +47,14 @@ const funding: FundingConfig = {
 const tiers: DonationTier[] = [
   {
     id: 'coffee',
-    amount: 5,
+    amount: { value: 5, currency: 'EUR' },
     emoji: '☕',
     labelKey: 'funding.tiers.coffee',
     blurbKey: 'funding.tiers.coffeeBlurb',
   },
   {
     id: 'kebab',
-    amount: 15,
+    amount: { value: 15, currency: 'EUR' },
     emoji: '🥙',
     labelKey: 'funding.tiers.kebab',
     blurbKey: 'funding.tiers.kebabBlurb',

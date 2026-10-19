@@ -14,23 +14,27 @@ Donation data is served by the Content API's dedicated endpoint
   time. `totals.donations`/`totals.expenses` remain the sums of the monthly rows; the
   monthly chart is unchanged and the balance is intentionally independent of
   `donations - expenses`.
-- **Tiers + goal**: the response also carries `tiers` (base EUR amounts with i18n
-  label/key blurb keys), a `goal` (`{ amount, period, labelKey }`) and `supporterCount`.
-- **Currency display**: the API stays in base EUR and serves exchange rates (units
-  per 1 EUR) from its dedicated currency endpoint (`GET /api/v1/currency/rates`),
-  refreshed daily from Frankfurter/ECB (fiat) and CoinGecko (crypto), with a static
-  seed as the fallback — see `adr/0033-donation-exchange-rates.md` and
-  `adr/0035-dedicated-currency-rates-endpoint.md`. The
-  balance and the "Impact in numbers" figures are **always shown in EUR**; they no
-  longer follow the visitor's locale. Only the donation options expose a currency
-  picker (EUR plus the fiat currencies offered by the API) rendered as a compact
-  segmented button group and defaulting to EUR.
+- **Currency-tagged amounts**: every monetary value in the response is a
+  `{ value, currency }` amount — totals, each monthly entry, currency-formatted stats,
+  preset tiers and the goal. There is no response-level currency field. See
+  `adr/0036-currency-tagged-donation-amounts.md`.
+- **Tiers + goal**: the response also carries `tiers` (currency-tagged amounts with i18n
+  label/blurb keys), a `goal` (`{ amount, period, labelKey }`) and `supporterCount`.
+- **Currency display**: the API tags amounts with their base currency and serves exchange
+  rates (units per 1 base unit) from its dedicated currency endpoint
+  (`GET /api/v1/currency/rates`), refreshed daily from Frankfurter/ECB (fiat) and
+  CoinGecko (crypto), with a static seed as the fallback — see
+  `adr/0033-donation-exchange-rates.md` and `adr/0035-dedicated-currency-rates-endpoint.md`.
+  The balance and the "Impact in numbers" figures render in the currency they were
+  tagged with (EUR today); they no longer follow the visitor's locale. Only the
+  donation options expose a currency picker (base plus the fiat currencies offered by
+  the API) rendered as a compact segmented button group and defaulting to the base.
   - Preset tiers are charm-rounded in the selected currency — a `.99` ladder for
     2-decimal currencies and an integer ladder (…1999/5999) for zero-decimal
     currencies (JPY).
   - The custom amount is entered in the selected currency and converted back to the
-    EUR base, so PayPal receives exactly the displayed amount.
-  - BTC/ETH estimates always derive from the EUR base amount, so changing the display
+    base currency, so PayPal receives exactly the displayed amount.
+  - BTC/ETH estimates always derive from the base amount, so changing the display
     currency never moves the crypto estimate.
   - Labels stay i18n keys resolved by the frontend, and one shared `formatMoney`
     helper is used everywhere. The conversion/formatting helpers live in the

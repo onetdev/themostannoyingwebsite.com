@@ -19,7 +19,7 @@ export function DonationHero({ summary, className }: DonationHeroProps) {
   const t = useTranslations();
   const share = useShareAction();
 
-  const balance = summary?.totals.balance ?? 0;
+  const balance = summary?.totals.balance.value ?? 0;
   const isNegative = balance < 0;
   const statusColor = isNegative ? 'bg-error' : 'bg-success';
 

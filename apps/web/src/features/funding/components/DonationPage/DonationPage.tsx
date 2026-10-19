@@ -4,6 +4,7 @@ import { getLocale, getTranslations } from 'next-intl/server';
 import { getAppConfigService } from '@/services';
 import { getCurrencyRates } from '../../services/get-currency-rates';
 import { getDonationSummary } from '../../services/get-donation-summary';
+import { DONATION_BASE_CURRENCY } from '../../types';
 import { BeforeAfterSlider } from './BeforeAfterSlider';
 import { DonationCounter } from './DonationCounter';
 import { DonationFaq } from './DonationFaq';
@@ -21,7 +22,10 @@ export async function DonationPage() {
     getDonationSummary(locale),
     getCurrencyRates(),
   ]);
-  const balance = donationSummary?.totals.balance ?? 0;
+  const balance = donationSummary?.totals.balance ?? {
+    value: 0,
+    currency: currencyRates?.base ?? DONATION_BASE_CURRENCY,
+  };
 
   const tRich = (key: AppTranslationKey) =>
     t.rich(key, {
@@ -51,6 +55,7 @@ export async function DonationPage() {
         funding={funding}
         tiers={donationSummary?.tiers ?? []}
         rates={currencyRates?.rates}
+        baseCurrency={currencyRates?.base ?? DONATION_BASE_CURRENCY}
         locale={locale}
       />
 

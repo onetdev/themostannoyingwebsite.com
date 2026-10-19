@@ -3,7 +3,7 @@
  * Do not edit manually.
  * The Most Annoying Website - Headless Content API
  * REST API serving multi-language YAML articles, authors, static pages, categories, UI translation bundles, dynamic content pools, survey questions, prize wheel segments, newsletter steps, spam samples, donation data, full-text search, and transformed raster image assets from SQLite.
- * OpenAPI spec version: 1.3.0
+ * OpenAPI spec version: 2.0.0
  */
 import * as zod from 'zod';
 
@@ -400,41 +400,32 @@ export type CurrencyRatesResponseOutput = zod.output<
   typeof CurrencyRatesResponse
 >;
 
+export const CurrencyAmount = zod
+  .object({
+    value: zod.number().describe('Numeric amount'),
+    currency: zod.string().describe('ISO 4217 currency code (or crypto unit)'),
+  })
+  .describe('A numeric amount together with the currency it is denominated in');
+
+export type CurrencyAmount = zod.input<typeof CurrencyAmount>;
+export type CurrencyAmountOutput = zod.output<typeof CurrencyAmount>;
+
 export const donationSummaryResponseMonthlyItemMonthRegExp =
   /^\d{4}-(0[1-9]|1[0-2])$/;
-export const donationSummaryResponseMonthlyItemDonationsMin = 0;
+export const donationSummaryResponseStatsItemOneTrendPercentMin = 0;
 
-export const donationSummaryResponseMonthlyItemExpensesMin = 0;
-
-export const donationSummaryResponseStatsItemTrendPercentMin = 0;
+export const donationSummaryResponseStatsItemTwoTrendPercentMin = 0;
 
 export const donationSummaryResponseSupporterCountMin = 0;
-
-export const donationSummaryResponseTiersItemAmountExclusiveMin = 0;
-
-export const donationSummaryResponseGoalAmountExclusiveMin = 0;
 
 export const DonationSummaryResponse = zod
   .object({
     lang: LanguageCode.and(zod.unknown().describe('ISO language code')),
-    currency: zod
-      .string()
-      .describe('ISO 4217 currency code for monetary values'),
     totals: zod
       .object({
-        donations: zod
-          .number()
-          .describe('All-time donations received (sum of the monthly history)'),
-        expenses: zod
-          .number()
-          .describe(
-            'All-time running costs, as a positive value (sum of the monthly history)',
-          ),
-        balance: zod
-          .number()
-          .describe(
-            'Live accrual projection of the current balance (time-based running costs minus donations); intentionally independent of the monthly history',
-          ),
+        donations: CurrencyAmount,
+        expenses: CurrencyAmount,
+        balance: CurrencyAmount,
       })
       .describe('All-time totals and live balance projection'),
     monthly: zod
@@ -444,47 +435,69 @@ export const DonationSummaryResponse = zod
             .string()
             .regex(donationSummaryResponseMonthlyItemMonthRegExp)
             .describe('Month in YYYY-MM format'),
-          donations: zod
-            .number()
-            .min(donationSummaryResponseMonthlyItemDonationsMin)
-            .describe('Donations received during the month'),
-          expenses: zod
-            .number()
-            .min(donationSummaryResponseMonthlyItemExpensesMin)
-            .describe(
-              'Running costs accrued during the month, as a positive value',
-            ),
+          donations: CurrencyAmount,
+          expenses: CurrencyAmount,
         }),
       )
       .describe('Monthly history, oldest first'),
     stats: zod
       .array(
-        zod.object({
-          id: zod.string().describe('Stable statistic identifier'),
-          labelKey: zod
-            .string()
-            .describe('Frontend i18n key for the statistic label'),
-          value: zod
-            .number()
-            .describe('Raw numeric value; the frontend owns formatting'),
-          format: zod
-            .enum(['currency', 'percent', 'integer', 'ratio', 'duration'])
-            .describe('How the frontend should format the value'),
-          trend: zod.object({
-            direction: zod
-              .enum(['up', 'down', 'stagnant'])
-              .describe(
-                'Direction the statistic moved compared to the previous period',
-              ),
-            percent: zod
-              .number()
-              .min(donationSummaryResponseStatsItemTrendPercentMin)
-              .describe('Magnitude of the change, as a percentage'),
-            sentiment: zod
-              .enum(['positive', 'negative', 'neutral'])
-              .describe('Whether the movement should read as good or bad'),
-          }),
-        }),
+        zod
+          .union([
+            zod.object({
+              id: zod.string().describe('Stable statistic identifier'),
+              labelKey: zod
+                .string()
+                .describe('Frontend i18n key for the statistic label'),
+              trend: zod.object({
+                direction: zod
+                  .enum(['up', 'down', 'stagnant'])
+                  .describe(
+                    'Direction the statistic moved compared to the previous period',
+                  ),
+                percent: zod
+                  .number()
+                  .min(donationSummaryResponseStatsItemOneTrendPercentMin)
+                  .describe('Magnitude of the change, as a percentage'),
+                sentiment: zod
+                  .enum(['positive', 'negative', 'neutral'])
+                  .describe('Whether the movement should read as good or bad'),
+              }),
+              format: zod
+                .enum(['currency'])
+                .describe('How the frontend should format the value'),
+              value: CurrencyAmount,
+            }),
+            zod.object({
+              id: zod.string().describe('Stable statistic identifier'),
+              labelKey: zod
+                .string()
+                .describe('Frontend i18n key for the statistic label'),
+              trend: zod.object({
+                direction: zod
+                  .enum(['up', 'down', 'stagnant'])
+                  .describe(
+                    'Direction the statistic moved compared to the previous period',
+                  ),
+                percent: zod
+                  .number()
+                  .min(donationSummaryResponseStatsItemTwoTrendPercentMin)
+                  .describe('Magnitude of the change, as a percentage'),
+                sentiment: zod
+                  .enum(['positive', 'negative', 'neutral'])
+                  .describe('Whether the movement should read as good or bad'),
+              }),
+              format: zod
+                .enum(['percent', 'integer', 'ratio', 'duration'])
+                .describe('How the frontend should format the value'),
+              value: zod
+                .number()
+                .describe('Raw numeric value; the frontend owns formatting'),
+            }),
+          ])
+          .describe(
+            'Trend-card statistic: currency values are currency-tagged, the rest are scalars',
+          ),
       )
       .describe('Trend cards rendered on the donation page'),
     supporters: zod
@@ -505,10 +518,7 @@ export const DonationSummaryResponse = zod
       .array(
         zod.object({
           id: zod.string().describe('Stable tier identifier'),
-          amount: zod
-            .number()
-            .gt(donationSummaryResponseTiersItemAmountExclusiveMin)
-            .describe('Preset amount in EUR'),
+          amount: CurrencyAmount,
           emoji: zod.string().describe('Emoji shown alongside the tier'),
           labelKey: zod
             .string()
@@ -521,10 +531,7 @@ export const DonationSummaryResponse = zod
       .describe('Preset donation amounts'),
     goal: zod
       .object({
-        amount: zod
-          .number()
-          .gt(donationSummaryResponseGoalAmountExclusiveMin)
-          .describe('Target amount in EUR'),
+        amount: CurrencyAmount,
         period: zod
           .enum(['monthly', 'total'])
           .describe('Cadence the target is measured over'),
@@ -536,7 +543,7 @@ export const DonationSummaryResponse = zod
       .describe('ISO timestamp of deployment/database creation'),
   })
   .describe(
-    'Donation summary: all-time totals and a live balance projection, monthly history, trend-card statistics, top supporters, preset tiers and funding goal. Display-currency exchange rates are served by the currency rates endpoint.',
+    'Donation summary: every monetary value is a currency-tagged amount ({ value, currency }), covering all-time totals and a live balance projection, monthly history, trend-card statistics, preset tiers and the funding goal. Display-currency exchange rates are served by the currency rates endpoint.',
   );
 
 export type DonationSummaryResponse = zod.input<typeof DonationSummaryResponse>;
@@ -1759,7 +1766,7 @@ export type GetSpamSampleListResponseOutput = zod.output<
 >;
 
 /**
- * Returns all-time totals and a live balance projection, a monthly history of donations and running costs, trend-card statistics with i18n label keys, the top supporters, preset donation tiers and the recurring funding goal. The frontend owns value formatting and label resolution. Display-currency exchange rates are served by the currency rates endpoint.
+ * Returns all-time totals and a live balance projection, a monthly history of donations and running costs, trend-card statistics with i18n label keys, the top supporters, preset donation tiers and the recurring funding goal. Every monetary value is a currency-tagged { value, currency } amount; the frontend owns conversion, value formatting and label resolution. Display-currency exchange rates are served by the currency rates endpoint.
  * @summary Get the donation summary for a language
  */
 export const GetDonationSummaryParams = zod.object({

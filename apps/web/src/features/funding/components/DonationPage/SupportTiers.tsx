@@ -6,22 +6,21 @@ import { type ComponentProps, useState } from 'react';
 import {
   formatMoney,
   getCurrencyDecimals,
-  type MoneyContext,
   toDisplayAmount,
 } from '@/core/currency';
-import {
-  DONATION_BASE_CURRENCY,
-  type DonationRate,
-  type DonationTier,
+import type {
+  DonationCurrencyAmount,
+  DonationRate,
+  DonationTier,
 } from '../../types';
 
 /**
- * What the visitor picked: a preset tier or a custom amount. Custom amounts are
- * denominated in the currently selected display currency.
+ * What the visitor picked: a preset tier or a custom amount. The custom amount
+ * carries the currently selected display currency.
  */
 export type SupportSelection =
   | { kind: 'tier'; tierId: string }
-  | { kind: 'custom'; amount: number };
+  | { kind: 'custom'; amount: DonationCurrencyAmount };
 
 export type SupportTiersProps = {
   tiers: readonly DonationTier[];
@@ -151,12 +150,6 @@ export function SupportTiers({
 }: SupportTiersProps) {
   const t = useTranslations();
 
-  const money: MoneyContext = {
-    locale,
-    currency,
-    base: DONATION_BASE_CURRENCY,
-    rates,
-  };
   const selectedTier =
     selection.kind === 'tier'
       ? tiers.find((tier) => tier.id === selection.tierId)
@@ -164,13 +157,22 @@ export function SupportTiers({
   const isCustom = selection.kind === 'custom';
 
   const currentDisplayAmount = selectedTier
-    ? toDisplayAmount(selectedTier.amount, money, { charm: true })
-    : selection.kind === 'custom'
-      ? selection.amount
+    ? toDisplayAmount(
+        selectedTier.amount.value,
+        {
+          locale,
+          currency,
+          base: selectedTier.amount.currency,
+          rates,
+        },
+        { charm: true },
+      )
+    : isCustom
+      ? selection.amount.value
       : 0;
 
-  const selectAmount = (amount: number) => {
-    onSelectionChange({ kind: 'custom', amount });
+  const selectAmount = (value: number) => {
+    onSelectionChange({ kind: 'custom', amount: { value, currency } });
   };
 
   return (
@@ -200,7 +202,16 @@ export function SupportTiers({
                 <span aria-hidden>{tier.emoji}</span>
                 {t(tier.labelKey as AppTranslationKey)}
                 <span className="ml-auto">
-                  {formatMoney(tier.amount, money, { charm: true })}
+                  {formatMoney(
+                    tier.amount.value,
+                    {
+                      locale,
+                      currency,
+                      base: tier.amount.currency,
+                      rates,
+                    },
+                    { charm: true },
+                  )}
                 </span>
               </span>
               {tier.blurbKey && (
@@ -214,7 +225,7 @@ export function SupportTiers({
 
         <CustomAmountInput
           key={currency}
-          amount={isCustom ? selection.amount : 0}
+          amount={isCustom ? selection.amount.value : 0}
           seedAmount={currentDisplayAmount}
           currency={currency}
           locale={locale}

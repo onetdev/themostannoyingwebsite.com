@@ -8,7 +8,11 @@ export const DI = {
 
 export type FundingI18nShape = typeof fundingEnLocale;
 
-/** Base currency every content-API donation figure is denominated in. */
+/**
+ * Fallback base currency used when the currency endpoint's `base` is
+ * unavailable (e.g. the Content API is unreachable and seed rates are used).
+ * Amounts served by the Content API carry their own currency.
+ */
 export const DONATION_BASE_CURRENCY = 'EUR';
 
 /**
@@ -32,17 +36,20 @@ export const DONATION_FALLBACK_RATES: readonly CurrencyRate[] = [
 ];
 
 /**
- * The content-API donation summary consumed by the donation page. Every figure
- * is denominated in `DONATION_BASE_CURRENCY`; currency conversion is a frontend
+ * The content-API donation summary consumed by the donation page. Every
+ * monetary value is a currency-tagged amount, so conversion is a frontend
  * display concern handled by `@/core/currency`.
  */
 export type FundingDonationSummary = DonationSummary;
 
-/** A preset support tier (amount in the base currency). */
+/** A preset support tier (its `amount` carries its own currency). */
 export type DonationTier = DonationSummary['tiers'][number];
 
-/** A funding goal shown as progress on the hero (amount in the base currency). */
+/** A funding goal shown as progress on the hero (its amount carries its own currency). */
 export type DonationGoal = DonationSummary['goal'];
+
+/** A currency-tagged amount as served by the Content API. */
+export type DonationCurrencyAmount = DonationTier['amount'];
 
 /**
  * A conversion rate relative to the donation base currency, served by the
