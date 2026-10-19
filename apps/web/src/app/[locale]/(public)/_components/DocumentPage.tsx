@@ -1,6 +1,6 @@
 import { PageHeadline } from '@maw/ui-lib';
 import styles from '@maw/ui-lib/content.module.css';
-import { clsx } from '@maw/ui-lib/utils';
+import { clsx } from 'cn';
 import type { ReactNode } from 'react';
 import { TableOfContents } from './TableOfContents';
 

@@ -1,4 +1,4 @@
-import { clsx } from '@maw/ui-lib/utils';
+import { clsx } from 'cn';
 
 /**
  * Decorative full-screen backdrop for the public route group.

@@ -1,13 +1,12 @@
 'use client';
 
+import { cn } from 'cn';
 import type {
   ComponentProps,
   CSSProperties,
   PointerEvent as ReactPointerEvent,
 } from 'react';
 import { useRef } from 'react';
-
-import { cn } from '../../utils';
 
 export interface TiltCardProps extends ComponentProps<'div'> {
   /**

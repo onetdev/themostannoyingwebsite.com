@@ -1,7 +1,7 @@
 'use client';
 
 import { Badge } from '@maw/ui-lib';
-import { cn } from '@maw/ui-lib/utils';
+import { cn } from 'cn';
 import { useTranslations } from 'next-intl';
 import { useEffect, useState } from 'react';
 

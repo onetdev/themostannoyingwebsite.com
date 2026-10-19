@@ -1,7 +1,6 @@
 import { Dialog as SheetPrimitive } from '@base-ui/react/dialog';
+import { cn } from 'cn';
 import type { ComponentProps } from 'react';
-
-import { cn } from '../../utils';
 import { Icon } from '../atoms';
 
 export function Sheet({ ...props }: SheetPrimitive.Root.Props) {

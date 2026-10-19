@@ -1,7 +1,6 @@
 import { cva, type VariantProps } from 'class-variance-authority';
+import { cn } from 'cn';
 import type { ComponentProps } from 'react';
-
-import { cn } from '../../utils';
 import { Button } from '../atoms/Button';
 import { Input } from '../atoms/Input';
 import { Textarea } from '../atoms/Textarea';

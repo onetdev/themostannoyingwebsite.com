@@ -9,8 +9,8 @@ import {
   CardTitle,
   Separator,
 } from '@maw/ui-lib';
-import { cn } from '@maw/ui-lib/utils';
 import { formatCurrency } from '@maw/utils/formatter';
+import { cn } from 'cn';
 import { useTranslations } from 'next-intl';
 
 import {

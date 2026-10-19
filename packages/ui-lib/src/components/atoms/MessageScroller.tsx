@@ -6,9 +6,8 @@ import {
   useMessageScrollerScrollable,
   useMessageScrollerVisibility,
 } from '@shadcn/react/message-scroller';
+import { cn } from 'cn';
 import type * as React from 'react';
-
-import { cn } from '../../utils';
 import { Button } from './Button';
 import { Icon } from './Icon';
 

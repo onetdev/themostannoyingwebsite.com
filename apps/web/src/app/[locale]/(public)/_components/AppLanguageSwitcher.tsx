@@ -7,7 +7,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@maw/ui-lib';
-import { clsx } from '@maw/ui-lib/utils';
+import { clsx } from 'cn';
 import { useLocale, useTranslations } from 'next-intl';
 import { useLanguageSwitcher } from '@/hooks';
 

@@ -1,5 +1,5 @@
 import { Alert, AlertDescription, AlertTitle, Icon } from '@maw/ui-lib';
-import { cn } from '@maw/ui-lib/utils';
+import { cn } from 'cn';
 import { useTranslations } from 'next-intl';
 import type { ComponentProps } from 'react';
 

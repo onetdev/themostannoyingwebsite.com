@@ -1,7 +1,7 @@
 'use client';
 
 import { buttonVariants, Icon, type IconAliaseKey } from '@maw/ui-lib';
-import { cn } from '@maw/ui-lib/utils';
+import { cn } from 'cn';
 import { useTranslations } from 'next-intl';
 import { type ComponentProps, useState } from 'react';
 import {

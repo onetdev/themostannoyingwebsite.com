@@ -1,8 +1,7 @@
 'use client';
 
+import { cn } from 'cn';
 import type { PropsWithChildren } from 'react';
-
-import { cn } from '../../utils';
 import { Icon, type IconAliaseKey } from './Icon';
 import { Tooltip, TooltipContent, TooltipTrigger } from './Tooltip';
 

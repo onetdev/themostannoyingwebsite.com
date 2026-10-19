@@ -1,7 +1,6 @@
 import { Dialog as DialogPrimitive } from '@base-ui/react/dialog';
+import { cn } from 'cn';
 import type { ComponentProps } from 'react';
-
-import { cn } from '../../utils';
 import { Button, Icon } from '../atoms';
 
 export function Dialog({ ...props }: DialogPrimitive.Root.Props) {

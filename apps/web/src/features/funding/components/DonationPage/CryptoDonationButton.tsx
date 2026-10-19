@@ -10,7 +10,7 @@ import {
   PopoverTitle,
   PopoverTrigger,
 } from '@maw/ui-lib';
-import { cn } from '@maw/ui-lib/utils';
+import { cn } from 'cn';
 import { useTranslations } from 'next-intl';
 import { QRCodeSVG } from 'qrcode.react';
 import { type ComponentProps, useState } from 'react';

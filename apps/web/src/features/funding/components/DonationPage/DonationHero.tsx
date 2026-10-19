@@ -1,7 +1,7 @@
 'use client';
 
 import { buttonVariants, Icon } from '@maw/ui-lib';
-import { cn } from '@maw/ui-lib/utils';
+import { cn } from 'cn';
 import { useTranslations } from 'next-intl';
 import { useShareAction } from '@/features/share/hooks';
 import type { FundingDonationSummary } from '../../types';

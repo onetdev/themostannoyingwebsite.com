@@ -9,7 +9,7 @@ import {
   Icon,
   Progress,
 } from '@maw/ui-lib';
-import { cn } from '@maw/ui-lib/utils';
+import { cn } from 'cn';
 import { useLocale, useTranslations } from 'next-intl';
 import type { AchievementState } from '../stores';
 import type { AchievementDefinition } from '../types';

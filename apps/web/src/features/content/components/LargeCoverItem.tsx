@@ -3,7 +3,7 @@ import {
   type ArticleListItem,
   toCoverImages,
 } from '@maw/content-sdk';
-import { cn } from '@maw/ui-lib/utils';
+import { cn } from 'cn';
 import Image from 'next/image';
 import type { ComponentProps } from 'react';
 import { Link } from '@/core/i18n/navigation';
