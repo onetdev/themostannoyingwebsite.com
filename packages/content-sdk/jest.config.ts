@@ -11,9 +11,14 @@ const config: Config = {
   },
   transform: {
     '^.+\\.tsx?$': [
-      'ts-jest',
+      '@swc/jest',
       {
-        useESM: true,
+        jsc: {
+          parser: { syntax: 'typescript', tsx: true },
+          target: 'es2022',
+          transform: { react: { runtime: 'automatic' } },
+        },
+        module: { type: 'es6' },
       },
     ],
   },

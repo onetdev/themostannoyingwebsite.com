@@ -5,7 +5,18 @@
 import type { Config } from 'jest';
 
 const config: Config = {
-  preset: 'ts-jest',
+  transform: {
+    '^.+\\.(t|j)sx?$': [
+      '@swc/jest',
+      {
+        jsc: {
+          parser: { syntax: 'typescript', tsx: true },
+          target: 'es2022',
+          transform: { react: { runtime: 'automatic' } },
+        },
+      },
+    ],
+  },
   bail: 0,
   clearMocks: true,
   collectCoverage: true,
