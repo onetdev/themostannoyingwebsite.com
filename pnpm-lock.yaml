@@ -227,9 +227,6 @@ catalogs:
     '@wrksz/themes':
       specifier: ^2.1.1
       version: 2.1.1
-    core-js:
-      specifier: ^3.50.0
-      version: 3.50.0
     framer-motion:
       specifier: ^14.3.0
       version: 14.3.0
@@ -432,9 +429,6 @@ importers:
       colord:
         specifier: ^2.10.0
         version: 2.10.0
-      core-js:
-        specifier: 'catalog:'
-        version: 3.50.0
       countries-and-timezones:
         specifier: ^3.11.0
         version: 3.11.0
@@ -4845,9 +4839,6 @@ packages:
 
   core-js-pure@3.50.0:
     resolution: {integrity: sha512-6GP3Pxz4IKyWjAfa747vIu/jilB5z29JWROLqH/b+pXVcpgh6tM06ZIBwSuglgVqzDYURhOK6oEzTrG0bCHitA==}
-
-  core-js@3.50.0:
-    resolution: {integrity: sha512-BRWgOLKkFeCgRudR6zrs8p9XJZcE14grzKMMssoYrk6krtuEZ7MTKPIY5RzOnqsEKIR9kst7wNzphttraT+Yqw==}
 
   core-util-is@1.0.3:
     resolution: {integrity: sha512-ZQBvi1DcpJ4GDqanjucZ2Hj3wEO5pZDS89BWbkcrvdxksJorwUDDZamX9ldFkp9aw2lmBDLgkObEA4DWNJ9FYQ==}
@@ -12540,8 +12531,6 @@ snapshots:
       browserslist: 4.29.3
 
   core-js-pure@3.50.0: {}
-
-  core-js@3.50.0: {}
 
   core-util-is@1.0.3: {}
 
