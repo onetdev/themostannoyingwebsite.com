@@ -9,8 +9,7 @@ import {
   MessageFooter,
 } from '@maw/ui-lib';
 import { useTranslations } from 'next-intl';
-import ReactTimeAgo from 'react-timeago';
-import { useTimeagoFormatter } from '@/hooks';
+import { RelativeTime } from '@/components/RelativeTime';
 import type { ChatMessage } from '../../schemas';
 
 type MessageBubbleProps = {
@@ -19,7 +18,6 @@ type MessageBubbleProps = {
 };
 
 export function MessageBubble({ item, showTime = true }: MessageBubbleProps) {
-  const intlFormatter = useTimeagoFormatter();
   const t = useTranslations('support.chatBubble');
   const isUser = item.owner === 'user';
 
@@ -39,11 +37,7 @@ export function MessageBubble({ item, showTime = true }: MessageBubbleProps) {
         </Bubble>
         {showTime && (
           <MessageFooter>
-            {isUser ? (
-              t('delivered')
-            ) : (
-              <ReactTimeAgo date={item.time} formatter={intlFormatter} />
-            )}
+            {isUser ? t('delivered') : <RelativeTime date={item.time} />}
           </MessageFooter>
         )}
       </MessageContent>

@@ -486,9 +486,6 @@ importers:
       react-share:
         specifier: 'catalog:'
         version: 6.1.0(react@19.3.1)
-      react-timeago:
-        specifier: ^8.3.0
-        version: 8.3.0(react@19.3.1)
       react-use:
         specifier: ^17.6.1
         version: 17.6.1(react-dom@19.3.1(react@19.3.1))(react@19.3.1)
@@ -7422,11 +7419,6 @@ packages:
     resolution: {integrity: sha512-5+do0CzuHxMTplqBLPFsnN8SQT+2Jf2AdLK0OJDXdd+/dSjzn0/a5CYVpxK3PI1HInspkLtreVGYlp2W8X9SjA==}
     peerDependencies:
       react: ^18 || ^19
-
-  react-timeago@8.3.0:
-    resolution: {integrity: sha512-BeR0hj/5qqTc2+zxzBSQZMky6MmqwOtKseU3CSmcjKR5uXerej2QY34v2d+cdz11PoeVfAdWLX+qjM/UdZkUUg==}
-    peerDependencies:
-      react: ^16.0.0 || ^17.0.0 || ^18.0.0 || ^19.0.0
 
   react-universal-interface@0.6.2:
     resolution: {integrity: sha512-dg8yXdcQmvgR13RIlZbTRQOoUrDciFVoSBZILwjE2LFISxZZ8loVJKAkuzswl5js8BHda79bIb2b84ehU8IjXw==}
@@ -15786,10 +15778,6 @@ snapshots:
   react-share@6.1.0(react@19.3.1):
     dependencies:
       classnames: 2.5.1
-      react: 19.3.1
-
-  react-timeago@8.3.0(react@19.3.1):
-    dependencies:
       react: 19.3.1
 
   react-universal-interface@0.6.2(react@19.3.1)(tslib@2.8.1):

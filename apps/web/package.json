@@ -62,7 +62,6 @@
     "react-dom": "catalog:",
     "react-hook-form": "catalog:",
     "react-share": "catalog:",
-    "react-timeago": "^8.3.0",
     "react-use": "^17.6.1",
     "recharts": "catalog:",
     "reflect-metadata": "^0.2.2",
