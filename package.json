@@ -41,10 +41,11 @@
   },
   "devDependencies": {
     "@biomejs/biome": "catalog:",
-    "@commitlint/cli": "^21.2.3",
-    "@commitlint/config-conventional": "^21.2.3",
-    "lefthook": "^2.1.16",
-    "turbo": "^2.11.7",
+    "@commitlint/cli": "^21.2.4",
+    "@commitlint/config-conventional": "^21.2.4",
+    "@typescript/native": "catalog:",
+    "lefthook": "^2.2.2",
+    "turbo": "^2.11.9",
     "typescript": "catalog:"
   },
   "engines": {
