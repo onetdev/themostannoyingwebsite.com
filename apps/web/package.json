@@ -88,7 +88,6 @@
     "jest": "catalog:",
     "postcss": "^8.5.31",
     "schema-dts": "catalog:",
-    "sharp": "catalog:",
     "tailwindcss": "catalog:",
     "tsx": "catalog:",
     "typescript": "catalog:"

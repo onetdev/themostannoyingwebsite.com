@@ -44,7 +44,6 @@ catalog:
   "recharts": ^3.10.1
   "sanitize-html": 2.18.1
   "schema-dts": ^2.1.0
-  "sharp": ^0.35.5
   "storybook": ^10.6.2
   "tailwindcss": "^4.3.3"
   "tsx": ^4.23.15
