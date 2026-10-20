@@ -13,6 +13,9 @@ export {
 export { HttpTransport } from './http';
 export { ArticlesResource } from './resources/articles';
 export { AuthorsResource } from './resources/authors';
+export { CategoriesResource } from './resources/categories';
+export { CurrencyResource } from './resources/currency';
+export { DonationsResource } from './resources/donations';
 export { HealthResource } from './resources/health';
 export { ImagesResource } from './resources/images';
 export { LocalesResource } from './resources/locales';
@@ -23,7 +26,6 @@ export { PrizeWheelResource } from './resources/prize-wheel';
 export { SearchResource } from './resources/search';
 export { SpamSampleResource } from './resources/spam-sample';
 export { SurveyResource } from './resources/survey';
-export { TagsResource } from './resources/tags';
 export { TranslationsResource } from './resources/translations';
 export {
   CONTENT_CACHE_TAGS,

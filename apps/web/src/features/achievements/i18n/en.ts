@@ -9,6 +9,14 @@ export default {
     'The journey of a thousand miles begins with a single, highly annoying step. Track your "achievements" and showcase your questionable persistence in navigating this digital nightmare.',
   lockedDescription:
     'You will only see the description of this achievement once you unlocked it.',
+  filter: {
+    label: 'Filter achievements',
+    all: 'All',
+    completed: 'Completed',
+    inProgress: 'In Progress',
+    notStarted: 'Not Started',
+    empty: 'No achievements match this filter.',
+  },
   reset: {
     button: 'Reset All Achievements',
     confirmTitle: 'Are you absolutely sure?',

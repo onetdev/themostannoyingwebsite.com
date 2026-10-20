@@ -8,7 +8,7 @@ import {
   CardTitle,
   Separator,
 } from '@maw/ui-lib';
-import { clsx } from '@maw/ui-lib/utils';
+import { clsx } from 'cn';
 import { useTranslations } from 'next-intl';
 import { useState } from 'react';
 import type { Comment } from '../../schemas';
@@ -42,8 +42,8 @@ export function CommentSection({ className, items }: CommentSectionProps) {
       <CardHeader className="px-0 sm:px-6">
         <CardTitle>{t('comments.sectionTitle')}</CardTitle>
         <CardAction>
-          <Button asChild>
-            <a href="#create-comment">{t('common.action.reply')}</a>
+          <Button render={<a href="#create-comment" />} nativeButton={false}>
+            {t('common.action.reply')}
           </Button>
         </CardAction>
       </CardHeader>

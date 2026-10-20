@@ -8,7 +8,7 @@ export const CONTENT_CACHE_TAGS = {
   articles: 'content:articles',
   authors: 'content:authors',
   pages: 'content:pages',
-  tags: 'content:tags',
+  categories: 'content:categories',
   images: 'content:images',
   locales: 'content:locales',
   translations: 'content:translations',
@@ -17,6 +17,8 @@ export const CONTENT_CACHE_TAGS = {
   prizeWheel: 'content:prize-wheel',
   newsletter: 'content:newsletter',
   spamSample: 'content:spam-sample',
+  donation: 'content:donation',
+  currency: 'content:currency',
 } as const;
 
 export interface ContentClientOptions {

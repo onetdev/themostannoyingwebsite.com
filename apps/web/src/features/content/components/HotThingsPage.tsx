@@ -5,6 +5,7 @@ import Image from 'next/image';
 import { useLocale, useTranslations } from 'next-intl';
 import { useEffect, useRef, useState } from 'react';
 import { useAppConfigContext, useLogger } from '@/core/react';
+import { ShareButton } from '@/features/share/components';
 import { useLocaleResource } from '@/hooks';
 import { LANGUAGE_NATIVE_NAME_MAP } from '@/i18n/language-native-name-map';
 
@@ -71,9 +72,13 @@ export function HotThingsPage() {
       });
   }, [stream]);
 
+  const canPlayVideo = !isDisallowed && isCapable;
+
   return (
     <>
-      <PageHeadline>{t('common.navigation.hotThings')}</PageHeadline>
+      <PageHeadline actions={<ShareButton />}>
+        {t('common.navigation.hotThings')}
+      </PageHeadline>
       <div className="pb-16per9 relative overflow-hidden">
         <Image
           className="absolute h-auto w-full"
@@ -96,7 +101,7 @@ export function HotThingsPage() {
             label={LANGUAGE_NATIVE_NAME_MAP[locale]}
           />
         </video>
-        {!isDisallowed && isCapable && (
+        {canPlayVideo && (
           <button
             type="button"
             className="absolute top-1/2 left-1/2 translate-[-50%] cursor-pointer text-7xl"

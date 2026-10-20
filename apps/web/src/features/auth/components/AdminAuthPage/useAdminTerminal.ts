@@ -73,40 +73,102 @@ export function useAdminTerminal(charDelay = 40) {
     }
   });
 
-  // 🖨 Typed output
-  const printLine = useCallback(
-    async (text: string) => {
+  // 🖨 Animate text into the current (uncommitted) line.
+  const typeText = useCallback(
+    async (text: string, signal?: AbortSignal) => {
       abortRef.current?.abort();
       const controller = new AbortController();
       abortRef.current = controller;
 
-      setInputMode({ type: 'disabled' });
-      setCurrentLine('');
-
-      let out = '';
-      for (const ch of text) {
-        if (controller.signal.aborted) return;
-        out += ch;
-        setCurrentLine(out);
-        await sleep(charDelay);
+      const onAbort = () => controller.abort();
+      if (signal?.aborted) {
+        controller.abort();
+      } else {
+        signal?.addEventListener('abort', onAbort, { once: true });
       }
 
-      setLines((prev) => [...prev, { id: ++idRef.current, text }]);
-      setCurrentLine('');
+      try {
+        setCurrentLine('');
+
+        let out = '';
+        for (const ch of text) {
+          if (controller.signal.aborted) break;
+          out += ch;
+          setCurrentLine(out);
+          await sleep(charDelay);
+        }
+
+        if (controller.signal.aborted) {
+          // Only clear the partial line when no newer typeText has taken over,
+          // otherwise a superseded run would wipe the active one's output.
+          if (abortRef.current === controller) setCurrentLine('');
+          return false;
+        }
+
+        return true;
+      } finally {
+        signal?.removeEventListener('abort', onAbort);
+      }
     },
     [charDelay],
   );
 
+  // 🖨 Typed output
+  const printLine = useCallback(
+    async (text: string, signal?: AbortSignal) => {
+      setInputMode({ type: 'disabled' });
+      const completed = await typeText(text, signal);
+      if (!completed) return;
+
+      setLines((prev) => [...prev, { id: ++idRef.current, text }]);
+      setCurrentLine('');
+    },
+    [typeText],
+  );
+
   // 🔐 Request user input
   const requestInput = useCallback(
-    (mode: Exclude<InputMode, { type: 'disabled' }>) =>
-      new Promise<string>((resolve) => {
-        setInput('');
-        setMasked('');
-        resolverRef.current = resolve;
-        setInputMode(mode);
+    (mode: Exclude<InputMode, { type: 'disabled' }>, signal?: AbortSignal) =>
+      new Promise<string>((resolve, reject) => {
+        let settled = false;
+
+        const abort = () => {
+          if (settled) return;
+          settled = true;
+          if (resolverRef.current === settle) resolverRef.current = null;
+          setInputMode({ type: 'disabled' });
+          reject(new DOMException('Aborted', 'AbortError'));
+        };
+
+        const settle = (value: string) => {
+          if (settled) return;
+          settled = true;
+          signal?.removeEventListener('abort', abort);
+          if (resolverRef.current === settle) resolverRef.current = null;
+          resolve(value);
+        };
+
+        if (signal?.aborted) {
+          abort();
+          return;
+        }
+
+        signal?.addEventListener('abort', abort, { once: true });
+
+        // Type the prompt out, then hand control over to the user.
+        void (async () => {
+          setInputMode({ type: 'disabled' });
+          const completed = await typeText(mode.prompt, signal);
+          if (!completed || settled) return;
+
+          setInput('');
+          setMasked('');
+          resolverRef.current = settle;
+          setCurrentLine('');
+          setInputMode(mode);
+        })();
       }),
-    [],
+    [typeText],
   );
 
   const reset = useCallback(() => {

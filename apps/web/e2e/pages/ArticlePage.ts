@@ -10,6 +10,7 @@ export const getArticlePage = (page: Page) => {
 
     articleItem: page.getByTestId('article-item'),
     articleItemContent: page.getByTestId('article-item-content'),
+    paywallMaskedContent: page.locator('.mask-fade-bottom'),
     paywallOverlayConfirm: page.getByTestId('paywall-overlay-confirm'),
     paywallOverlayCancel: page.getByTestId('paywall-overlay-cancel'),
   };

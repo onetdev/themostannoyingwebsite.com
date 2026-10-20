@@ -22,6 +22,15 @@
     "enabled": true,
     "rules": {
       "preset": "recommended",
+      "complexity": {
+        "noExcessiveCognitiveComplexity": "warn",
+        "useMaxParams": {
+          "level": "warn",
+          "options": {
+            "max": 4
+          }
+        }
+      },
       "correctness": {
         "noUnknownPseudoClass": {
           "level": "error",

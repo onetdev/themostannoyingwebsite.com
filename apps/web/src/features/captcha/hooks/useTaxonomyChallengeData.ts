@@ -18,16 +18,22 @@ export interface TileCoordinates {
 }
 
 /**
+ * Expands a single sprite sheet into its full grid of cell coordinates.
+ * Extracted so the per-sprite iteration is independently testable.
+ */
+export function expandSprite(sprite: SpriteConfig): TileCoordinates[] {
+  return Array.from({ length: sprite.rows * sprite.columns }, (_, i) => ({
+    asset: sprite,
+    row: Math.floor(i / sprite.columns),
+    col: i % sprite.columns,
+  }));
+}
+
+/**
  * Precomputes the full pool of cell coordinates across all sprite sheets.
  */
 export function buildTilePool(sprites: SpriteConfig[]): TileCoordinates[] {
-  return sprites.flatMap((sprite) =>
-    Array.from({ length: sprite.rows * sprite.columns }, (_, i) => ({
-      asset: sprite,
-      row: Math.floor(i / sprite.columns),
-      col: i % sprite.columns,
-    })),
-  );
+  return sprites.flatMap(expandSprite);
 }
 
 export function useTaxonomyChallengeData({

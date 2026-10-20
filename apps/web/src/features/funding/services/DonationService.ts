@@ -3,7 +3,6 @@ import { type Container, injectable } from 'inversify';
 import {
   type BeggingBannerData,
   DI,
-  type DonationBalanceConfig,
   type DonationService as IDonationService,
 } from '../types';
 
@@ -53,28 +52,8 @@ export class DonationService implements IDonationService {
     const dayOfMonth = now.getDate();
     return dayOfMonth >= 1 && dayOfMonth <= 10;
   }
-
-  /**
-   * Calculate the current donation balance
-   * Balance = Total donations - Cumulative costs
-   *
-   * @param config - Donation balance configuration
-   * @param currentTime - Current timestamp (defaults to now), in seconds
-   * @returns The current balance in euros
-   */
-  calculateBalance(
-    config: DonationBalanceConfig,
-    currentTime?: number,
-  ): number {
-    const now = currentTime ?? Date.now() / 1000;
-    const elapsedDays = (now - config.costStartEpoch) / (24 * 60 * 60);
-    const cumulativeCost = elapsedDays * config.costDailyAvgInEuro * -1;
-    const balance = Math.floor(cumulativeCost) + config.totalDonationInEuro;
-
-    return balance;
-  }
 }
 
-export function getDonationService(container: Container) {
+export function getDonationService(container: Container): IDonationService {
   return container.get<IDonationService>(DI.DonationService);
 }

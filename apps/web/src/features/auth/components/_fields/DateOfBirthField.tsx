@@ -57,11 +57,11 @@ export function DateOfBirthField({
     }));
   }, []);
 
-  const onYearChange = (value?: string) =>
+  const onYearChange = (value: string | null) =>
     setParts({ ...parts, year: value ?? '' });
-  const onMonthChange = (value?: string) =>
+  const onMonthChange = (value: string | null) =>
     setParts({ ...parts, month: value ?? '' });
-  const onDayChange = (value?: string) =>
+  const onDayChange = (value: string | null) =>
     setParts({ ...parts, day: value ?? '' });
 
   useEffect(() => {
@@ -96,7 +96,7 @@ export function DateOfBirthField({
               ))}
             </SelectContent>
           </Select>
-          <Select onValueChange={onMonthChange}>
+          <Select items={dateOfBirthMonth} onValueChange={onMonthChange}>
             <SelectTrigger
               className="w-2/4"
               aria-label={t('common.userField.dateOfBirthMonth')}

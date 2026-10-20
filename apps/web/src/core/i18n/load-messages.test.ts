@@ -1,6 +1,10 @@
 import type { ContentApiClient } from '@maw/content-sdk';
 import enMessages from '@/i18n/messages/en';
-import { loadMessages, mergeMessages } from './load-messages';
+import {
+  isParseableMessage,
+  loadMessages,
+  mergeMessages,
+} from './load-messages';
 
 function createClient(
   getByLang: (...args: unknown[]) => Promise<unknown>,
@@ -35,6 +39,46 @@ describe('mergeMessages', () => {
     );
 
     expect(result).toEqual({ a: 'base', list: ['de'] });
+  });
+});
+
+describe('isParseableMessage', () => {
+  it('accepts tag-free and well-formed ICU messages', () => {
+    expect(isParseableMessage('plain text')).toBe(true);
+    expect(isParseableMessage('<the>the</the> <most>Most</most>')).toBe(true);
+    expect(isParseableMessage('<br></br>')).toBe(true);
+    expect(isParseableMessage('reach us at <linkTag>{email}</linkTag>')).toBe(
+      true,
+    );
+  });
+
+  it('rejects malformed ICU messages', () => {
+    expect(isParseableMessage('<the>irritating</most>')).toBe(false);
+    expect(isParseableMessage('<linkTag>GitHub')).toBe(false);
+    expect(isParseableMessage('{count, plural, one {# item}')).toBe(false);
+  });
+});
+
+describe('mergeMessages validation', () => {
+  it('drops unparseable remote messages and reports their key paths', () => {
+    const dropped: string[] = [];
+    const result = mergeMessages(
+      { common: { app: { logoAlt: 'base alt', logoShort: 'base short' } } },
+      {
+        common: {
+          app: {
+            logoAlt: '<the>irritating</most>',
+            logoShort: '<the>MAW</the>',
+          },
+        },
+      },
+      dropped,
+    );
+
+    expect(dropped).toEqual(['common.app.logoAlt']);
+    expect(result).toEqual({
+      common: { app: { logoAlt: 'base alt', logoShort: '<the>MAW</the>' } },
+    });
   });
 });
 
@@ -74,5 +118,24 @@ describe('loadMessages', () => {
     expect(messages).toEqual(enMessages);
     expect(onFallback).toHaveBeenCalledTimes(1);
     expect(onFallback.mock.calls[0][0]).toBeInstanceOf(Error);
+  });
+
+  it('drops malformed remote rich-text messages and falls back to English', async () => {
+    const onInvalidMessages = jest.fn();
+    const client = createClient(async () => ({
+      messages: { common: { app: { logoAlt: '<the>irytująca</most>' } } },
+    }));
+
+    const messages = await loadMessages(
+      'pl',
+      client,
+      undefined,
+      onInvalidMessages,
+    );
+
+    expect(onInvalidMessages).toHaveBeenCalledWith(['common.app.logoAlt']);
+    expect(asTree(asTree(messages.common).app).logoAlt).toBe(
+      enMessages.common.app.logoAlt,
+    );
   });
 });

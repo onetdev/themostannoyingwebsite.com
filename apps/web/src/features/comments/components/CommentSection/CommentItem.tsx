@@ -1,6 +1,13 @@
 'use client';
 
-import { Avatar, AvatarFallback, Button } from '@maw/ui-lib';
+import {
+  Avatar,
+  AvatarFallback,
+  Button,
+  Collapsible,
+  CollapsibleContent,
+  CollapsibleTrigger,
+} from '@maw/ui-lib';
 import { useTranslations } from 'next-intl';
 import { useState } from 'react';
 import ReactTimeAgo from 'react-timeago';
@@ -21,7 +28,11 @@ export function CommentItem({ comment, onReply, onLike }: CommentItemProps) {
   const hasReplies = comment.replies && comment.replies.length > 0;
 
   return (
-    <div className="space-y-3">
+    <Collapsible
+      className="space-y-3"
+      open={showReplies}
+      onOpenChange={setShowReplies}
+    >
       <div className="flex flex-col gap-1">
         <div className="flex items-center gap-2">
           <Avatar className="size-7">
@@ -56,35 +67,40 @@ export function CommentItem({ comment, onReply, onLike }: CommentItemProps) {
               {t('comments.reply')}
             </Button>
             {hasReplies && (
-              <Button
-                variant="ghost"
-                size="sm"
-                className="text-primary h-8 px-2 text-xs font-medium"
-                onClick={() => setShowReplies(!showReplies)}
+              <CollapsibleTrigger
+                render={
+                  <Button
+                    variant="ghost"
+                    size="sm"
+                    className="text-primary h-8 px-2 text-xs font-medium"
+                  />
+                }
               >
                 {showReplies
                   ? t('comments.hideReplies')
                   : t('comments.showReplies', {
                       count: comment.replies?.length ?? 0,
                     })}
-              </Button>
+              </CollapsibleTrigger>
             )}
           </div>
         </div>
       </div>
 
-      {hasReplies && showReplies && (
-        <div className="border-border ml-4 space-y-3 border-l pl-4 sm:ml-4">
-          {comment.replies?.map((reply) => (
-            <CommentItem
-              key={reply.id}
-              comment={reply}
-              onReply={onReply}
-              onLike={onLike}
-            />
-          ))}
-        </div>
+      {hasReplies && (
+        <CollapsibleContent>
+          <div className="border-border ml-4 space-y-3 border-l pl-4 sm:ml-4">
+            {comment.replies?.map((reply) => (
+              <CommentItem
+                key={reply.id}
+                comment={reply}
+                onReply={onReply}
+                onLike={onLike}
+              />
+            ))}
+          </div>
+        </CollapsibleContent>
       )}
-    </div>
+    </Collapsible>
   );
 }

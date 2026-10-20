@@ -1,8 +1,11 @@
 import type {
   Article,
   ArticleListItem,
+  Author,
+  AuthorListItem,
   GetArticleListQueryParams,
   GetArticleListResponse,
+  GetAuthorListQueryParams,
   LanguageCode,
   NewsletterStep,
   PoolType,
@@ -20,8 +23,16 @@ export interface ArticleService {
   ): Promise<ArticleListItem[]>;
 }
 
+export interface AuthorService {
+  getBySlug(slug: string, lang?: LanguageCode): Promise<Author | undefined>;
+  listAll(
+    params?: Omit<GetAuthorListQueryParams, 'limit' | 'offset'>,
+  ): Promise<AuthorListItem[]>;
+}
+
 export const DI = {
   ArticleService: Symbol.for('ArticleService'),
+  AuthorService: Symbol.for('AuthorService'),
   ContentApiClient: Symbol.for('ContentApiClient'),
 };
 
@@ -45,6 +56,7 @@ export interface ContentPoolItemMap {
   names: string;
   comments: string;
   'chat-bubble-messages': string;
+  'loading-messages': string;
   'top-searches': string;
   'marquee-titles': string;
   'paged-titles': string;

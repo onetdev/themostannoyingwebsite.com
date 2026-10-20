@@ -57,7 +57,11 @@ export function GenderField({
           control={control}
           name={fieldName}
           render={({ field, fieldState }) => (
-            <Select onValueChange={field.onChange} value={field.value}>
+            <Select
+              items={genderOptions}
+              onValueChange={field.onChange}
+              value={field.value}
+            >
               <SelectTrigger
                 className="w-full"
                 aria-label={t('common.userField.gender')}

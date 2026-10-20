@@ -93,6 +93,13 @@ export function useChatBubbleHistory() {
     }
   }, [isForeground]);
 
+  const reset = useCallback(() => {
+    setHistory([
+      { text: t('messageInitial'), owner: 'bot' as const, time: new Date() },
+    ]);
+    setBadgeCounter(0);
+  }, [t]);
+
   useMount(() => {
     setHistory((prev) => {
       if (prev.length > 0) {
@@ -114,6 +121,7 @@ export function useChatBubbleHistory() {
     badgeCounter,
     history,
     isForeground,
+    reset,
     setForeground,
     audio,
   };

@@ -1,6 +1,5 @@
+import { cn } from 'cn';
 import type { ComponentProps } from 'react';
-
-import { cn } from '../../utils';
 
 export type TextareaProps = ComponentProps<'textarea'>;
 

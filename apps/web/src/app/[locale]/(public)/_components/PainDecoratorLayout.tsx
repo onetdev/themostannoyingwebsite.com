@@ -17,6 +17,7 @@ import { ChatBubble } from '@/features/support/components';
 import { usePainPreferencesStore, useUserGrantsStore } from '@/stores';
 import { CookieConsent } from './CookieConsent';
 import { GlobalShareModal } from './GlobalShareModal';
+import { HeaderScrollFade } from './HeaderScrollFade';
 
 type PainDecoratorLayoutProps = ComponentProps<'div'>;
 
@@ -63,6 +64,7 @@ export function PainDecoratorLayout({
 
   return (
     <div className={className} {...rest}>
+      <HeaderScrollFade />
       {/* Elements appearing underneath content container */}
       <AnimatePresence>
         {runtimeFlags.giftFlaps && (
@@ -76,7 +78,10 @@ export function PainDecoratorLayout({
       </AnimatePresence>
 
       {/* Main container and container relative sticky elements */}
-      <div className="bg-card relative container mx-auto my-0 min-h-screen">
+      <div
+        className="relative container mx-auto my-0 flex min-h-dvh flex-col"
+        style={{ paddingBottom: 'var(--adblocker-suspect-bar-height, 0px)' }}
+      >
         {children}
         <AnimatePresence>
           {runtimeFlags.wheelOfFortune && (

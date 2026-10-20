@@ -12,15 +12,28 @@ export default {
   article: {
     coverImage: 'Cover image',
     published: 'Published at {date}',
+    readingTime: '{minutes} min read',
     moreContentScroll: "There's more from the past, scroll!",
+  },
+  author: {
+    byline: 'By <linkTag>{name}</linkTag>',
+    articlesTitle: 'Articles by {name}',
+    emptyTitle: 'No articles yet',
+    emptyDescription:
+      'This author has not published any articles in this language yet.',
   },
   search: {
     placeholder: 'Search...',
+    emptyTitle: 'Search the site',
+    emptyDescription:
+      'Type a keyword above to find articles, authors, and more.',
     noResults: 'No results found',
     resultMeta: 'Search for "{query}" took {time}ms and found {count} results',
-    searching: 'Searching',
     error: 'Search failed, please try again later',
     peopleAlsoSearched: 'People also searched for:',
+  },
+  loading: {
+    fallback: 'Loading…',
   },
   hotThings: {
     playVideo: 'Play video',

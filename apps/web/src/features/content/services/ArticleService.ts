@@ -56,6 +56,6 @@ export class ArticleService implements IArticleService {
   }
 }
 
-export async function getArticleService(container: Container) {
+export function getArticleService(container: Container): IArticleService {
   return container.get<IArticleService>(DI.ArticleService);
 }

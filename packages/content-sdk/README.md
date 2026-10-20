@@ -8,13 +8,13 @@ This package provides a strongly-typed HTTP client powered by **`ky`**, with ful
 
 ## 📦 Features
 
-- **Resource-Oriented Client**: Ergonomic namespaces: `client.articles`, `client.authors`, `client.pages`, `client.tags`, `client.images`, `client.health`, `client.locales`, `client.translations`, `client.pools`, `client.survey`, `client.prizeWheel`, `client.newsletter`, `client.spamSample`.
+- **Resource-Oriented Client**: Ergonomic namespaces: `client.articles`, `client.authors`, `client.pages`, `client.categories`, `client.images`, `client.health`, `client.locales`, `client.translations`, `client.pools`, `client.survey`, `client.prizeWheel`, `client.newsletter`, `client.spamSample`, `client.donations`, `client.currency`.
 - **Ky HTTP Engine**: Built-in prefix URL handling, automatic query serialization, timeouts, and configurable exponential retry.
 - **Next.js App Router Compatible**: Pass Next.js fetch options (`next: { revalidate, tags }`, `cache`) directly in request options.
 - **Typed Error Hierarchy**: Automatic translation of OpenAPI error responses into `ContentApiNotFoundError`, `ContentApiValidationError`, `ContentApiCorsError`, `ContentApiServerError`.
 - **Runtime Zod Validation**: Responses are validated at runtime against generated Zod schemas.
 - **Image Variant Helpers**: Utilities to select default or best resolution/format image variants (`getDefaultImageVariant`, `getBestImageVariant`, `getImageVariantUrl`).
-- **Swagger Code Generation**: Powered by **Orval** (`pnpm generate`).
+- **Swagger Code Generation**: Powered by **Orval** (`pnpm orval`).
 
 ---
 
@@ -93,11 +93,11 @@ const pages = await client.pages.list({ lang: 'en' });
 const page = await client.pages.getBySlug('privacy-policy', { lang: 'en' });
 ```
 
-### Tags & Images
+### Categories & Images
 
 ```typescript
-// List tag taxonomy with counts
-const tags = await client.tags.list({ lang: 'en' });
+// List the localized article category taxonomy with usage counts
+const categories = await client.categories.list({ lang: 'en' });
 
 // List image assets and responsive dimensions
 const images = await client.images.list({ limit: 20 });
@@ -118,6 +118,12 @@ const { questions } = await client.survey.getQuestions('en');
 const { segments } = await client.prizeWheel.getSegments('en'); // weight + starred
 const { steps } = await client.newsletter.getSteps('en');
 const { samples } = await client.spamSample.list('en');
+
+// Donation summary (totals, monthly history, trend stats, supporters)
+const summary = await client.donations.getSummary('en');
+
+// Exchange rates for the offered display currencies (their own endpoint)
+const { base, rates } = await client.currency.getRates();
 ```
 
 ### Health Check
@@ -193,7 +199,7 @@ try {
 To fetch the latest OpenAPI JSON from the remote server and regenerate Zod schemas:
 
 ```bash
-pnpm --filter @maw/content-sdk generate
+pnpm --filter @maw/content-sdk orval
 ```
 
 By default the spec is pulled from the deployed Content API. Point it at a local
@@ -201,7 +207,7 @@ By default the spec is pulled from the deployed Content API. Point it at a local
 
 ```bash
 CONTENT_OPENAPI_URL=http://localhost:3000/docs/json \
-  pnpm --filter @maw/content-sdk generate
+  pnpm --filter @maw/content-sdk orval
 ```
 
 ---

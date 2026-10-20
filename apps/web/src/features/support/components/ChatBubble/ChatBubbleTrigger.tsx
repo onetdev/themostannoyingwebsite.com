@@ -1,6 +1,7 @@
 'use client';
 
 import { Badge, Button, Icon } from '@maw/ui-lib';
+import { cn } from 'cn';
 import { AnimatePresence, motion, useAnimation } from 'framer-motion';
 import { useTranslations } from 'next-intl';
 import { useEffect } from 'react';
@@ -19,6 +20,7 @@ export function ChatBubbleTrigger({
   const t = useTranslations('support.chatBubble');
   const label = isOpen ? t('triggerClose') : t('trigger');
   const controls = useAnimation();
+  const hasUnread = counter > 0;
 
   useEffect(() => {
     if (counter <= 0) {
@@ -38,7 +40,11 @@ export function ChatBubbleTrigger({
       <Button
         size="icon"
         variant="secondary"
-        className="size-14 rounded-full shadow-lg"
+        className={cn(
+          'border-spin size-14 rounded-full shadow-lg hover:scale-105 hover:bg-secondary active:scale-95',
+          hasUnread && 'spin-duration-2500',
+        )}
+        data-testid="chat-bubble-trigger"
         onClick={onClick}
         aria-label={label}
         title={label}
@@ -47,7 +53,7 @@ export function ChatBubbleTrigger({
       </Button>
 
       <AnimatePresence>
-        {counter > 0 && (
+        {hasUnread && (
           <motion.div
             key={counter}
             initial={{ scale: 0.5, opacity: 0 }}

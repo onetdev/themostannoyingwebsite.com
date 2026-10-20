@@ -19,6 +19,7 @@
     "url": "https://www.onet.dev/donate"
   },
   "scripts": {
+    "audit:registry": "pnpm --filter @maw/ui-lib audit:registry",
     "build": "turbo run build",
     "build:metadata": "turbo run build:metadata --filter=@maw/web",
     "orval": "pnpm --filter @maw/content-sdk orval",

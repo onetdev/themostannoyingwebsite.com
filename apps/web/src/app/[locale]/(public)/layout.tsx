@@ -18,6 +18,7 @@ import { BeggarBanner } from '@/features/funding/components';
 import { getAppConfigService } from '@/services';
 import { LocaleSuggestion } from './_components/LocaleSuggestion';
 import { PainDecoratorLayout } from './_components/PainDecoratorLayout';
+import { PublicBackdrop } from './_components/PublicBackdrop';
 
 const config = getAppConfigService().getAll();
 
@@ -59,6 +60,7 @@ async function LocalePublicRootLayout({
       suppressHydrationWarning
     >
       <body>
+        <PublicBackdrop />
         <SiteStructuredData locale={locale as AppLocale} />
         <NextIntlClientProvider>
           <ThemeProvider

@@ -1,6 +1,6 @@
 import { cva, type VariantProps } from 'class-variance-authority';
 
-import { cn } from '../../../utils';
+import { cn } from 'cn';
 import { Icon } from '../Icon';
 
 const darkModeToggleVariants = cva(

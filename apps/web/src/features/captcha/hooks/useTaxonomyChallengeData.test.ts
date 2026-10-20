@@ -1,5 +1,25 @@
 import type { SpriteConfig } from '../schemas';
-import { buildTilePool } from './useTaxonomyChallengeData';
+import { buildTilePool, expandSprite } from './useTaxonomyChallengeData';
+
+describe('expandSprite', () => {
+  const sprite: SpriteConfig = {
+    rows: 2,
+    columns: 3,
+    width: 300,
+    height: 200,
+    uri: 'sprite.png',
+  };
+
+  it('produces rows * columns tiles with row-major coordinates', () => {
+    const tiles = expandSprite(sprite);
+
+    expect(tiles).toHaveLength(6);
+    expect(tiles[0]).toEqual({ asset: sprite, row: 0, col: 0 });
+    expect(tiles[2]).toEqual({ asset: sprite, row: 0, col: 2 });
+    expect(tiles[3]).toEqual({ asset: sprite, row: 1, col: 0 });
+    expect(tiles[5]).toEqual({ asset: sprite, row: 1, col: 2 });
+  });
+});
 
 describe('buildTilePool', () => {
   const mockSprites: SpriteConfig[] = [

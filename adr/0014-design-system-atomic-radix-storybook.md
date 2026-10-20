@@ -1,7 +1,7 @@
 # ADR 14: Design System Architecture with Atomic Design, Radix UI, and Storybook
 
 ## Status
-Accepted
+Superseded by [ADR 31](0031-base-ui-shadcn-adoption.md)
 
 ## Context
 As the user interface grew, embedding reusable UI components directly inside application feature folders led to code duplication, inconsistent styling, and coupled design logic. We needed:
@@ -17,7 +17,7 @@ We separated the presentation system into a dedicated shared package, **`@maw/ui
    - `molecules/`: Simple functional units (Search inputs, Tooltips, Dialog triggers).
    - `organisms/`: Complex composite UI (Footers, Navigation bars, Modals).
    - `ui/`: Raw shadcn-based primitives built on top of **Radix UI**.
-2. **Styling & Variance**: Styled with TailwindCSS 4, using `class-variance-authority` (CVA) for variant management and `tailwind-merge` (`cn` utility) for conflict-free class overrides.
+2. **Styling & Variance**: Styled with TailwindCSS 4, using `class-variance-authority` (CVA) for variant management and the `cn` package (drop-in replacement for `clsx` + `tailwind-merge`) for conflict-free class overrides. Components and apps import `cn` (and `clsx`) directly from `cn`; `@maw/ui-lib/utils` only exposes the non-class helpers.
 3. **Isolated Documentation**: `apps/ui-docs` runs Storybook 10 with TailwindCSS and theme switching, providing visual isolation and documentation for every reusable component.
 
 ## Consequences

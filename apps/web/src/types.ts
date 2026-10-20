@@ -36,8 +36,9 @@ declare global {
   };
 
   type RouteAliasParams =
-    | Exclude<RouteAlias, 'article.single'>
+    | Exclude<RouteAlias, 'article.single' | 'author.single'>
     | { alias: 'article.single'; params: { slug: string } }
+    | { alias: 'author.single'; params: { slug: string } }
     | { raw: string };
 
   type NextPageParams = {

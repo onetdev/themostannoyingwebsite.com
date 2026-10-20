@@ -80,7 +80,7 @@ Features are self-contained and typically include:
 - `components/`: Feature-specific UI.
 - `hooks/`: React hooks for local logic.
 - `services/`: Business logic (injectable).
-- `i18n/`: Feature-specific translations (Hybrid pattern).
+- `i18n/`: Feature-specific English translation reference (API-served locales are merged over it at runtime).
 - `schemas/`: Zod schemas.
 - `types.ts`: Internal types and DI symbols.
 - `README.md`: Feature documentation.
@@ -95,7 +95,7 @@ Reusable React hooks that are not tied to a single feature.
 
 ### `i18n`
 
-Global translation messages (`src/i18n/messages/en/`: `index.ts`, `common.ts`, `metadata.ts`).
+Global translation messages (`src/i18n/messages/en/`: `index.ts`, `common.ts`, `metadata.ts`). The `languageDetector` copy is the deliberate exception: it is bundled as a cross-language object in `src/core/i18n/language-detector-messages.ts` and excluded from the namespace map (see `adr/0028-english-translation-reference-sync.md`).
 
 ### `schemas`
 

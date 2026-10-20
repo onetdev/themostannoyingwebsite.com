@@ -12,6 +12,18 @@
   --animate-gift-callout: gift-callout 5s infinite;
   --animate-hue-full-rotate: hue-full-rotate 2s infinite;
 
+  /* Decorative status "sonar": a slower, wider sibling of Tailwind's `ping`
+   * (which is locked to 1s / 2x). Used for the funding status dot. */
+  --animate-sonar: sonar 2s cubic-bezier(0, 0, 0.2, 1) infinite;
+
+  /* Aurora backdrop — slow, deliberately out-of-phase drifts (see
+   * `aurora-blob` in effects.css). Durations differ per blob so the loops
+   * never resynchronise. */
+  --animate-aurora-drift-a: aurora-drift-a 34s ease-in-out infinite;
+  --animate-aurora-drift-b: aurora-drift-b 44s ease-in-out infinite;
+  --animate-aurora-drift-c: aurora-drift-c 39s ease-in-out infinite;
+  --animate-aurora-drift-d: aurora-drift-d 52s ease-in-out infinite;
+
   @keyframes flashing-invert-half {
     0% {
       filter: invert(0);
@@ -109,6 +121,87 @@
     }
     100% {
       filter: hue-rotate(360deg);
+    }
+  }
+
+  /* Grows from the dot's own footprint (scale 1, still hidden behind the solid
+   * dot of the same colour) out past the pill's padding, fading as it goes. */
+  @keyframes sonar {
+    0% {
+      transform: scale(1);
+    }
+    75%,
+    100% {
+      transform: scale(3.5);
+      opacity: 0;
+    }
+  }
+
+  /* Aurora drifts. `translate3d` keeps each blob on the compositor and the
+   * viewport-relative units let the motion scale with the screen. The vertical
+   * component is deliberately small: the blobs are anchored along the top edge
+   * and should stay clustered there rather than wandering down the page.
+   *
+   * Each cycle also sweeps the registered `--aurora-hue` a full turn (0 → 360°)
+   * so a spot never keeps a fixed colour. The durations differ per blob, so the
+   * colour wash continually drifts out of phase and never resynchronises. */
+  @keyframes aurora-drift-a {
+    0% {
+      transform: translate3d(0, 0, 0) scale(1);
+      --aurora-hue: 0deg;
+    }
+    50% {
+      transform: translate3d(8vw, 3vh, 0) scale(1.18);
+      --aurora-hue: 180deg;
+    }
+    100% {
+      transform: translate3d(0, 0, 0) scale(1);
+      --aurora-hue: 360deg;
+    }
+  }
+
+  @keyframes aurora-drift-b {
+    0% {
+      transform: translate3d(0, 0, 0) scale(1.1);
+      --aurora-hue: 0deg;
+    }
+    50% {
+      transform: translate3d(-9vw, 4vh, 0) scale(0.92);
+      --aurora-hue: 180deg;
+    }
+    100% {
+      transform: translate3d(0, 0, 0) scale(1.1);
+      --aurora-hue: 360deg;
+    }
+  }
+
+  @keyframes aurora-drift-c {
+    0% {
+      transform: translate3d(0, 0, 0) scale(0.95);
+      --aurora-hue: 0deg;
+    }
+    50% {
+      transform: translate3d(6vw, -3vh, 0) scale(1.15);
+      --aurora-hue: 180deg;
+    }
+    100% {
+      transform: translate3d(0, 0, 0) scale(0.95);
+      --aurora-hue: 360deg;
+    }
+  }
+
+  @keyframes aurora-drift-d {
+    0% {
+      transform: translate3d(0, 0, 0) scale(1);
+      --aurora-hue: 0deg;
+    }
+    50% {
+      transform: translate3d(-7vw, 3vh, 0) scale(1.22);
+      --aurora-hue: 180deg;
+    }
+    100% {
+      transform: translate3d(0, 0, 0) scale(1);
+      --aurora-hue: 360deg;
     }
   }
 }

@@ -31,13 +31,30 @@ test.describe('Plans Page', () => {
 
     // Verify default monthly billing
     await expect(poorifiedCard.originalPrice).toContainText('$99.00');
+    await expect(
+      poorifiedCard.originalPrice.locator('[data-rolling-digit]').first(),
+    ).toHaveAttribute('data-rolling-digit', '9');
     await expect(poorifiedCard.chargeDisclaimer).toContainText(
       'You will be charged $79.20 today — billed monthly*',
+    );
+
+    // Monthly is the active billing cycle
+    await expect(plansPage.billingCycleMonthly).toHaveAttribute(
+      'aria-pressed',
+      'true',
+    );
+    await expect(plansPage.billingCycleYearly).toHaveAttribute(
+      'aria-pressed',
+      'false',
     );
 
     // Switch to yearly billing
     await plansPage.billingCycleYearly.click();
     await expect(poorifiedCard.originalPrice).toContainText('$89.00');
+    // The wheel rolls to the new tens digit instead of re-rendering.
+    await expect(
+      poorifiedCard.originalPrice.locator('[data-rolling-digit]').first(),
+    ).toHaveAttribute('data-rolling-digit', '8');
     await expect(poorifiedCard.chargeDisclaimer).toContainText(
       'You will be charged $854.40 today — billed every year*',
     );
@@ -45,11 +62,31 @@ test.describe('Plans Page', () => {
       'billed every year',
     );
 
+    // Yearly is now the active billing cycle
+    await expect(plansPage.billingCycleYearly).toHaveAttribute(
+      'aria-pressed',
+      'true',
+    );
+    await expect(plansPage.billingCycleMonthly).toHaveAttribute(
+      'aria-pressed',
+      'false',
+    );
+
     // Switch to biyearly billing
     await plansPage.billingCycleBiyearly.click();
     await expect(poorifiedCard.originalPrice).toContainText('$67.00');
     await expect(poorifiedCard.chargeDisclaimer).toContainText(
       'You will be charged $1,286.40 today — billed every 2 years*',
+    );
+
+    // Biyearly is now the active billing cycle
+    await expect(plansPage.billingCycleBiyearly).toHaveAttribute(
+      'aria-pressed',
+      'true',
+    );
+    await expect(plansPage.billingCycleYearly).toHaveAttribute(
+      'aria-pressed',
+      'false',
     );
   });
 

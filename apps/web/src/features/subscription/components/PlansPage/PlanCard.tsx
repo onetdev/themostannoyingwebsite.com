@@ -9,8 +9,8 @@ import {
   CardTitle,
   Separator,
 } from '@maw/ui-lib';
-import { cn } from '@maw/ui-lib/utils';
 import { formatCurrency } from '@maw/utils/formatter';
+import { cn } from 'cn';
 import { useTranslations } from 'next-intl';
 
 import {
@@ -18,6 +18,7 @@ import {
   type BillingCycle,
   type SubscriptionPackage,
 } from '../../schemas';
+import { RollingNumber } from './RollingNumber';
 
 export interface PlanCardProps {
   plan: SubscriptionPackage;
@@ -99,19 +100,21 @@ export function PlanCard({
                 className="text-muted-foreground text-sm line-through"
                 data-testid="original-price"
               >
-                {t('subscription.landing.pricePerMonth', {
-                  price: formatCurrency(priceBase),
-                })}
+                <RollingNumber
+                  value={t('subscription.landing.pricePerMonth', {
+                    price: formatCurrency(priceBase),
+                  })}
+                />
               </div>
               <div
                 className="text-primary flex items-center text-2xl font-bold"
                 data-testid="discounted-price"
               >
-                <span>
-                  {t('subscription.landing.pricePerMonth', {
+                <RollingNumber
+                  value={t('subscription.landing.pricePerMonth', {
                     price: formatCurrency(priceDiscountCorrected),
                   })}
-                </span>
+                />
                 <Badge className="ml-2">
                   {t('subscription.landing.discount', {
                     amount: Math.round(cumulativeDiscountPercentage * 100),
@@ -124,9 +127,11 @@ export function PlanCard({
               className="text-primary text-2xl font-bold"
               data-testid="original-price"
             >
-              {t('subscription.landing.pricePerMonth', {
-                price: formatCurrency(priceBase),
-              })}
+              <RollingNumber
+                value={t('subscription.landing.pricePerMonth', {
+                  price: formatCurrency(priceBase),
+                })}
+              />
             </div>
           )}
         </div>

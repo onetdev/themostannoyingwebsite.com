@@ -27,7 +27,9 @@ export function ChatBubble() {
   return (
     <FadeIn
       y={20}
-      className="fixed bottom-2 inset-s-2 z-20 flex md:bottom-4 md:inset-s-4"
+      className={`fixed bottom-2 inset-s-2 flex md:bottom-4 md:inset-s-4 ${
+        state.isForeground ? 'z-40' : 'z-20'
+      }`}
       ref={$ref}
     >
       {state.audio}
@@ -43,13 +45,12 @@ export function ChatBubble() {
             animate={{ opacity: 1, scale: 1, y: 0, x: 0 }}
             exit={{ opacity: 0, scale: 0.9, y: 20, x: 0 }}
             transition={{ type: 'spring', damping: 25, stiffness: 300 }}
-            className="max-h-screen-3per4 absolute bottom-14 inset-s-0 z-20 w-[95vw] md:bottom-16 md:inset-s-4 md:w-96"
+            className="max-h-screen-3per4 absolute bottom-0 inset-s-0 z-20 w-[95vw] md:inset-s-0 md:w-96"
           >
             <HistoryOverlay
               history={state.history}
               onUserMessage={(message) => state.add(message, 'user')}
               onClose={closeHistory}
-              open={state.isForeground}
             />
           </motion.div>
         )}

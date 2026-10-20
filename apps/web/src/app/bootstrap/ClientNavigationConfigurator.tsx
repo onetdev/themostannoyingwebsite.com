@@ -11,15 +11,11 @@ export function ClientNavigationConfigurator({ children }: PropsWithChildren) {
   return (
     <NavigationProviderBase
       value={{
-        back: navigation.back,
-        forward: navigation.forward,
         push: (param: RouteAliasParams) =>
           navigation.push(resolvePathForRouteAlias(param)),
         replace: (param: RouteAliasParams) =>
           navigation.replace(resolvePathForRouteAlias(param)),
         resolve: resolvePathForRouteAlias,
-        unsafePush: navigation.push,
-        unsafeReplace: navigation.replace,
       }}
     >
       {children}

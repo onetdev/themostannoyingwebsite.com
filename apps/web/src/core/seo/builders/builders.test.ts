@@ -159,6 +159,24 @@ describe('buildArticle', () => {
     expect(article.keywords).toBe('a, b');
     expect(article.articleSection).toBe('news');
   });
+
+  it('links the author to their profile node when a path is given', () => {
+    const article = buildArticle({
+      baseUrl,
+      locale: 'en',
+      path: 'articles/hello',
+      headline: 'Hello',
+      authorName: 'Jane',
+      authorPath: 'authors/jane',
+    });
+
+    expect(article.author).toEqual({
+      '@type': 'Person',
+      name: 'Jane',
+      '@id': 'https://example.com/en/authors/jane/#person',
+      url: 'https://example.com/en/authors/jane/',
+    });
+  });
 });
 
 describe('buildBlog', () => {

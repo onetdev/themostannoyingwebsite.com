@@ -1,6 +1,9 @@
 import { HttpTransport } from './http';
 import { ArticlesResource } from './resources/articles';
 import { AuthorsResource } from './resources/authors';
+import { CategoriesResource } from './resources/categories';
+import { CurrencyResource } from './resources/currency';
+import { DonationsResource } from './resources/donations';
 import { HealthResource } from './resources/health';
 import { ImagesResource } from './resources/images';
 import { LocalesResource } from './resources/locales';
@@ -11,7 +14,6 @@ import { PrizeWheelResource } from './resources/prize-wheel';
 import { SearchResource } from './resources/search';
 import { SpamSampleResource } from './resources/spam-sample';
 import { SurveyResource } from './resources/survey';
-import { TagsResource } from './resources/tags';
 import { TranslationsResource } from './resources/translations';
 import type { ContentClientOptions } from './types';
 
@@ -30,7 +32,7 @@ export class ContentApiClient {
   readonly authors: AuthorsResource;
   readonly pages: PagesResource;
   readonly search: SearchResource;
-  readonly tags: TagsResource;
+  readonly categories: CategoriesResource;
   readonly images: ImagesResource;
   readonly health: HealthResource;
   readonly locales: LocalesResource;
@@ -40,6 +42,8 @@ export class ContentApiClient {
   readonly prizeWheel: PrizeWheelResource;
   readonly newsletter: NewsletterResource;
   readonly spamSample: SpamSampleResource;
+  readonly donations: DonationsResource;
+  readonly currency: CurrencyResource;
 
   private readonly transport: HttpTransport;
 
@@ -54,7 +58,7 @@ export class ContentApiClient {
     this.authors = new AuthorsResource(this.transport);
     this.pages = new PagesResource(this.transport);
     this.search = new SearchResource(this.transport);
-    this.tags = new TagsResource(this.transport);
+    this.categories = new CategoriesResource(this.transport);
     this.images = new ImagesResource(this.transport);
     this.health = new HealthResource(this.transport);
     this.locales = new LocalesResource(this.transport);
@@ -64,6 +68,8 @@ export class ContentApiClient {
     this.prizeWheel = new PrizeWheelResource(this.transport);
     this.newsletter = new NewsletterResource(this.transport);
     this.spamSample = new SpamSampleResource(this.transport);
+    this.donations = new DonationsResource(this.transport);
+    this.currency = new CurrencyResource(this.transport);
   }
 }
 

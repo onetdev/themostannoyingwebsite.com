@@ -1,7 +1,7 @@
 'use client';
 
-import { clsx } from '@maw/ui-lib/utils';
 import { randomInt } from '@maw/utils/random';
+import { clsx } from 'cn';
 import { useTranslations } from 'next-intl';
 import { useState } from 'react';
 import { useAppConfigContext } from '@/core/react';

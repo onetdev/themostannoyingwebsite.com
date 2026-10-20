@@ -1,21 +1,37 @@
 'use client';
 
+import { useLocale } from 'next-intl';
 import { type ComponentProps, useEffect, useState } from 'react';
-import { useDonationBalance } from '../../hooks';
+import { getCurrencySymbol } from '@/core/currency';
+import type { DonationCurrencyAmount } from '../../types';
 import { SlotDigit } from './SlotDigit';
 
-export type DonationCounterProps = ComponentProps<'div'>;
+export type DonationCounterProps = {
+  /** Current donation balance with its own currency. */
+  balance: DonationCurrencyAmount;
+  /** Visual weight of the counter. `hero` is used as the page's focal point. */
+  size?: 'default' | 'hero';
+} & ComponentProps<'div'>;
 
-export function DonationCounter({ className, ...rest }: DonationCounterProps) {
-  const amount = useDonationBalance();
-  const currency = '$';
+/**
+ * The balance counter. Figures are always shown in the currency the API tagged
+ * the balance with: only the support options are currency-selectable.
+ */
+export function DonationCounter({
+  balance,
+  size = 'default',
+  className,
+  ...rest
+}: DonationCounterProps) {
+  const locale = useLocale();
   const [showNegative, setShowNegative] = useState(false);
 
-  const isNegative = amount < 0;
-  const absoluteAmount = Math.abs(amount);
+  const isNegative = balance.value < 0;
+  const displayAmount = Math.round(Math.abs(balance.value));
+  const symbol = getCurrencySymbol(locale, balance.currency);
 
   // Convert amount to digits array
-  const digits = absoluteAmount
+  const digits = displayAmount
     .toString()
     .padStart(6, '0')
     .split('')
@@ -46,12 +62,16 @@ export function DonationCounter({ className, ...rest }: DonationCounterProps) {
     : 'text-success-foreground';
   const borderColor = showNegative ? 'border-error' : 'border-success';
   const bgGradient = showNegative ? 'bg-error' : 'bg-success';
+  const sizeClasses =
+    size === 'hero'
+      ? 'gap-3 rounded-xl border-4 p-8'
+      : 'gap-2 rounded-lg border-2 p-6';
 
   return (
     <div
       role="img"
-      aria-label={`${currency}${amount}`}
-      className={`flex items-center justify-center gap-2 p-6 ${bgGradient} rounded-lg border-2 shadow-2xl ${borderColor} transition-all duration-500 ${className ?? ''}`}
+      aria-label={`${symbol}${displayAmount}`}
+      className={`flex items-center justify-center shadow-2xl transition-all duration-500 ${sizeClasses} ${bgGradient} ${borderColor} ${className ?? ''}`}
       {...rest}
     >
       <span
@@ -70,7 +90,7 @@ export function DonationCounter({ className, ...rest }: DonationCounterProps) {
         aria-hidden
         className={`text-3xl font-bold ${digitColor} transition-colors duration-500`}
       >
-        {currency}
+        {symbol}
       </span>
       <div aria-hidden className="flex gap-1">
         {digits.map((digit, idx) => (

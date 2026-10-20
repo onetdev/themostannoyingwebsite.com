@@ -20,6 +20,10 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: read
+    environment:
+      name: ${{ (github.base_ref == 'main' || github.ref_name == 'main') && 'Production' || 'Preview' }}
+    env:
+      NEXT_PUBLIC_CONTENT_API_URL: ${{ vars.NEXT_PUBLIC_CONTENT_API_URL }}
     steps:
       - uses: actions/checkout@v6
       - uses: pnpm/action-setup@v4
@@ -35,6 +39,10 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: read
+    environment:
+      name: ${{ (github.base_ref == 'main' || github.ref_name == 'main') && 'Production' || 'Preview' }}
+    env:
+      NEXT_PUBLIC_CONTENT_API_URL: ${{ vars.NEXT_PUBLIC_CONTENT_API_URL }}
     steps:
       - uses: actions/checkout@v6
       - uses: pnpm/action-setup@v4
@@ -50,6 +58,10 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: read
+    environment:
+      name: ${{ (github.base_ref == 'main' || github.ref_name == 'main') && 'Production' || 'Preview' }}
+    env:
+      NEXT_PUBLIC_CONTENT_API_URL: ${{ vars.NEXT_PUBLIC_CONTENT_API_URL }}
     steps:
       - uses: actions/checkout@v6
       - uses: pnpm/action-setup@v4
@@ -59,3 +71,22 @@ jobs:
           cache: pnpm
       - run: pnpm install --frozen-lockfile
       - run: pnpm run test
+
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    environment:
+      name: ${{ (github.base_ref == 'main' || github.ref_name == 'main') && 'Production' || 'Preview' }}
+    env:
+      NEXT_PUBLIC_CONTENT_API_URL: ${{ vars.NEXT_PUBLIC_CONTENT_API_URL }}
+    steps:
+      - uses: actions/checkout@v6
+      - uses: pnpm/action-setup@v4
+      - uses: actions/setup-node@v6
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm run build --filter='!@maw/ui-docs'

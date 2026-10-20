@@ -34,6 +34,7 @@ export function PartitionalLockedContent({
   const [isRevealed, setRevealed] = useState(false);
   const [flipActions, setFlipActions] = useState(false);
   const contentRef = useRef<HTMLDivElement>(null);
+  const showOverlay = active && !isRevealed;
 
   // Extends the max-height of the content until there's content to reveal
   const handleRevealClick = () => {
@@ -81,16 +82,22 @@ export function PartitionalLockedContent({
   };
 
   return (
-    <div
-      className={`relative overflow-hidden transition-all duration-300 ease-in-out ${className}`}
-      style={wrapperStyles}
-      {...rest}
-    >
-      <div ref={contentRef}>{children}</div>
+    <div className={className} {...rest}>
+      {/*
+        The locked content is masked with an alpha fade at its bottom edge
+        (same approach as the OnlySpams carousel fade) so the cut-off content
+        dissolves into whatever sits behind it, instead of painting a
+        color-matched gradient over it.
+      */}
       <div
-        data-hidden={!active || isRevealed ? 'true' : 'false'}
-        className="bg-bottom-fadeout absolute left-0 w-full opacity-0 transition-all duration-300 ease-in-out data-[hidden=false]:bottom-0 data-[hidden=false]:opacity-100"
+        className={`overflow-hidden transition-all duration-300 ease-in-out ${
+          showOverlay ? 'mask-fade-bottom' : ''
+        }`}
+        style={wrapperStyles}
       >
+        <div ref={contentRef}>{children}</div>
+      </div>
+      {showOverlay && (
         <div className="mx-auto w-full max-w-screen-md pt-16">
           <h3 className="mb-4">
             {t('content.paywall.overlay.title', {
@@ -102,7 +109,7 @@ export function PartitionalLockedContent({
             * {t('content.paywall.overlay.disclaimer')}
           </div>
         </div>
-      </div>
+      )}
     </div>
   );
 }
