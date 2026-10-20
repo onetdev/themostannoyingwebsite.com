@@ -40,7 +40,7 @@
   "devDependencies": {
     "@biomejs/biome": "catalog:",
     "@maw/config-ts": "workspace:*",
-    "@storybook/nextjs": "catalog:",
+    "@storybook/addon-docs": "catalog:",
     "@storybook/react": "catalog:",
     "@types/node": "catalog:",
     "@types/react": "catalog:",

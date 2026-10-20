@@ -2,6 +2,10 @@ packages:
   - "apps/*"
   - "packages/*"
 
+peerDependencyRules:
+  allowedVersions:
+    "tsconfck>typescript": "7"
+
 allowBuilds:
   '@parcel/watcher': true
   '@sentry/cli': true
@@ -21,7 +25,7 @@ catalog:
   "@playwright/test": 1.64.1
   "@storybook/addon-docs": ^10.6.2
   "@storybook/addon-themes": ^10.6.2
-  "@storybook/nextjs": ^10.6.2
+  "@storybook/nextjs-vite": ^10.6.2
   "@storybook/react": ^10.6.2
   "@swc/core": ^1.16.18
   "@swc/jest": ^0.2.39
@@ -48,4 +52,5 @@ catalog:
   "tailwindcss": "^4.3.3"
   "tsx": ^4.23.15
   "typescript": 7.0.2
+  "vite": ^8.3.4
   "zod": ^4.6.7

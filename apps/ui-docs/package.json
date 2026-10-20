@@ -21,7 +21,7 @@
     "@maw/config-ts": "workspace:*",
     "@storybook/addon-docs": "catalog:",
     "@storybook/addon-themes": "catalog:",
-    "@storybook/nextjs": "catalog:",
+    "@storybook/nextjs-vite": "catalog:",
     "@storybook/react": "catalog:",
     "@types/node": "catalog:",
     "@types/react": "catalog:",
@@ -29,6 +29,7 @@
     "postcss": "^8.5.31",
     "storybook": "catalog:",
     "tailwindcss": "catalog:",
-    "typescript": "catalog:"
+    "typescript": "catalog:",
+    "vite": "catalog:"
   }
 }
