@@ -90,12 +90,10 @@
     "commander": "^15.0.0",
     "favicons": "^7.3.1",
     "jest": "catalog:",
-    "playwright": "catalog:",
     "postcss": "^8.5.31",
     "schema-dts": "catalog:",
     "sharp": "catalog:",
     "tailwindcss": "catalog:",
-    "ts-node": "catalog:",
     "tsx": "catalog:",
     "typescript": "catalog:"
   },
