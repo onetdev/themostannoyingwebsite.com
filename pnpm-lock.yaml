@@ -188,9 +188,6 @@ catalogs:
     '@storybook/addon-docs':
       specifier: ^10.6.2
       version: 10.6.2
-    '@storybook/addon-links':
-      specifier: ^10.6.2
-      version: 10.6.2
     '@storybook/addon-themes':
       specifier: ^10.6.2
       version: 10.6.2
@@ -326,9 +323,6 @@ importers:
       '@maw/ui-lib':
         specifier: workspace:*
         version: link:../../packages/ui-lib
-      '@storybook/addon-docs':
-        specifier: 'catalog:'
-        version: 10.6.2(@types/react-dom@19.3.0(@types/react@19.3.0))(@types/react@19.3.0)(storybook@10.6.2(@types/react@19.3.0)(react@19.3.1))
       next:
         specifier: ^16.4.2
         version: 16.4.2(@babel/core@7.29.7(supports-color@8.1.1))(@opentelemetry/api@1.9.1)(@playwright/test@1.64.1)(@types/node@26.6.5)(react-dom@19.3.1(react@19.3.1))(react@19.3.1)(sass@1.105.2)
@@ -345,12 +339,9 @@ importers:
       '@maw/config-ts':
         specifier: workspace:*
         version: link:../../packages/config-ts
-      '@storybook/addon-links':
+      '@storybook/addon-docs':
         specifier: 'catalog:'
-        version: 10.6.2(@types/react@19.3.0)(react@19.3.1)(storybook@10.6.2(@types/react@19.3.0)(react@19.3.1))
-      '@storybook/addon-styling-webpack':
-        specifier: ^3.0.2
-        version: 3.0.2(storybook@10.6.2(@types/react@19.3.0)(react@19.3.1))(webpack@5.112.0(@swc/core@1.16.18(@swc/helpers@0.5.23))(clean-css@5.3.3)(esbuild@0.28.2)(html-minifier-terser@6.1.0)(lightningcss@1.32.0)(postcss@8.5.31)(sharp@0.35.5(@types/node@26.6.5))(uglify-js@3.19.3))
+        version: 10.6.2(@types/react-dom@19.3.0(@types/react@19.3.0))(@types/react@19.3.0)(storybook@10.6.2(@types/react@19.3.0)(react@19.3.1))
       '@storybook/addon-themes':
         specifier: 'catalog:'
         version: 10.6.2(storybook@10.6.2(@types/react@19.3.0)(react@19.3.1))
@@ -3402,24 +3393,6 @@ packages:
     peerDependenciesMeta:
       '@types/react':
         optional: true
-
-  '@storybook/addon-links@10.6.2':
-    resolution: {integrity: sha512-pWwWp+KAcqdX9Cg5i3yGaKcD3+7OEDhHkaiYv8GHv1JIOl7Ao/CaoY07or8BdM785akOqxk5Z+UrY7zNKZJ6Gw==}
-    peerDependencies:
-      '@types/react': ^16.8.0 || ^17.0.0 || ^18.0.0 || ^19.0.0
-      react: ^16.8.0 || ^17.0.0 || ^18.0.0 || ^19.0.0
-      storybook: ^10.6.2
-    peerDependenciesMeta:
-      '@types/react':
-        optional: true
-      react:
-        optional: true
-
-  '@storybook/addon-styling-webpack@3.0.2':
-    resolution: {integrity: sha512-u7d5ur+It6XWSwd5yxHN6dTzIfj23as3zHJBf1IfDvi/GWmsW7zrmfsWpRIyBkIhBmdL+oSsTtLLTjuC9HeL8Q==}
-    peerDependencies:
-      storybook: ^10.0.0 || ^10.0.0-0 || ^10.1.0-0 || ^10.2.0-0 || ^10.3.0-0 || ^10.4.0-0
-      webpack: ^5.0.0
 
   '@storybook/addon-themes@10.6.2':
     resolution: {integrity: sha512-NGvoAPnWH+WnCNVUAzbDzDQHz2dJNEM5CR0KLGjjDUhHjIvCoAzhD4+SMwnZQqznwm5sgYUdyyKqzrHMeSInog==}
@@ -11243,19 +11216,6 @@ snapshots:
     transitivePeerDependencies:
       - '@types/react-dom'
 
-  '@storybook/addon-links@10.6.2(@types/react@19.3.0)(react@19.3.1)(storybook@10.6.2(@types/react@19.3.0)(react@19.3.1))':
-    dependencies:
-      '@storybook/global': 5.0.0
-      storybook: 10.6.2(@types/react@19.3.0)(react@19.3.1)
-    optionalDependencies:
-      '@types/react': 19.3.0
-      react: 19.3.1
-
-  '@storybook/addon-styling-webpack@3.0.2(storybook@10.6.2(@types/react@19.3.0)(react@19.3.1))(webpack@5.112.0(@swc/core@1.16.18(@swc/helpers@0.5.23))(clean-css@5.3.3)(esbuild@0.28.2)(html-minifier-terser@6.1.0)(lightningcss@1.32.0)(postcss@8.5.31)(sharp@0.35.5(@types/node@26.6.5))(uglify-js@3.19.3))':
-    dependencies:
-      storybook: 10.6.2(@types/react@19.3.0)(react@19.3.1)
-      webpack: 5.112.0(@swc/core@1.16.18(@swc/helpers@0.5.23))(clean-css@5.3.3)(esbuild@0.28.2)(html-minifier-terser@6.1.0)(lightningcss@1.32.0)(postcss@8.5.31)(sharp@0.35.5(@types/node@26.6.5))(uglify-js@3.19.3)
-
   '@storybook/addon-themes@10.6.2(storybook@10.6.2(@types/react@19.3.0)(react@19.3.1))':
     dependencies:
       storybook: 10.6.2(@types/react@19.3.0)(react@19.3.1)
@@ -15084,6 +15044,7 @@ snapshots:
       postcss: 8.5.31
       sharp: 0.35.5(@types/node@26.6.5)
       uglify-js: 3.19.3
+    optional: true
 
   minimizer-webpack-plugin@5.13.1(@swc/core@1.16.18)(clean-css@5.3.3)(esbuild@0.28.2)(html-minifier-terser@6.1.0)(lightningcss@1.32.0)(postcss@8.5.31)(sharp@0.35.5(@types/node@26.6.5))(uglify-js@3.19.3)(webpack@5.112.0(@swc/core@1.16.18)(clean-css@5.3.3)(esbuild@0.28.2)(html-minifier-terser@6.1.0)(lightningcss@1.32.0)(sharp@0.35.5(@types/node@26.6.5))(uglify-js@3.19.3)):
     dependencies:
@@ -17137,6 +17098,7 @@ snapshots:
       - sharp
       - svgo
       - uglify-js
+    optional: true
 
   webpack@5.112.0(@swc/core@1.16.18)(clean-css@5.3.3)(esbuild@0.28.2)(html-minifier-terser@6.1.0)(lightningcss@1.32.0)(postcss@8.5.31)(sharp@0.35.5(@types/node@26.6.5))(uglify-js@3.19.3):
     dependencies:

@@ -12,7 +12,6 @@
   },
   "dependencies": {
     "@maw/ui-lib": "workspace:*",
-    "@storybook/addon-docs": "catalog:",
     "next": "^16.4.2",
     "react": "catalog:",
     "react-dom": "catalog:"
@@ -20,8 +19,7 @@
   "devDependencies": {
     "@biomejs/biome": "catalog:",
     "@maw/config-ts": "workspace:*",
-    "@storybook/addon-links": "catalog:",
-    "@storybook/addon-styling-webpack": "^3.0.2",
+    "@storybook/addon-docs": "catalog:",
     "@storybook/addon-themes": "catalog:",
     "@storybook/nextjs": "catalog:",
     "@storybook/react": "catalog:",
