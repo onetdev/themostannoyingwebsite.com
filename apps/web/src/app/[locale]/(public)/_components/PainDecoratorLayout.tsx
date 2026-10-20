@@ -1,6 +1,6 @@
 'use client';
 
-import { AnimatePresence } from 'framer-motion';
+import { AnimatePresence } from 'motion/react';
 import { type ComponentProps, useEffect, useState } from 'react';
 import { SilentErrorBoundary } from '@/core/react';
 import {

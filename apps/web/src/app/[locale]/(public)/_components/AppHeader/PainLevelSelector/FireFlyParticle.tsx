@@ -1,6 +1,6 @@
 'use client';
 
-import { motion } from 'framer-motion';
+import { motion } from 'motion/react';
 
 export const FIREFLY_PARTICLE_COLORS = [
   '#3b82f6',

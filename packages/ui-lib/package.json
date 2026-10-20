@@ -27,7 +27,7 @@
     "class-variance-authority": "^0.7.1",
     "cn": "^0.5.0",
     "embla-carousel-react": "^8.6.0",
-    "framer-motion": "catalog:",
+    "motion": "catalog:",
     "react": "catalog:",
     "recharts": "catalog:",
     "shadcn": "^4.22.1",

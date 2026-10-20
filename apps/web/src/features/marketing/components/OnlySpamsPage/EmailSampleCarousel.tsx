@@ -9,7 +9,7 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from '@maw/ui-lib';
-import { motion } from 'framer-motion';
+import { motion } from 'motion/react';
 import { useEffect, useState } from 'react';
 import type { EmailSample } from '../../types';
 import { EmailSampleCard } from './EmailSampleCard';

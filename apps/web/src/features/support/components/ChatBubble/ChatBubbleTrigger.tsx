@@ -2,7 +2,7 @@
 
 import { Badge, Button, Icon } from '@maw/ui-lib';
 import { cn } from 'cn';
-import { AnimatePresence, motion, useAnimation } from 'framer-motion';
+import { AnimatePresence, motion, useAnimation } from 'motion/react';
 import { useTranslations } from 'next-intl';
 import { useEffect } from 'react';
 

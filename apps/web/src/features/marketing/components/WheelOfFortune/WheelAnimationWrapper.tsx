@@ -2,7 +2,7 @@
 
 import { Icon } from '@maw/ui-lib';
 import { randomInt } from '@maw/utils/random';
-import { motion } from 'framer-motion';
+import { motion } from 'motion/react';
 import { useTranslations } from 'next-intl';
 import { useEffect, useState } from 'react';
 import type { AnimatedWheelState } from '../../hooks';

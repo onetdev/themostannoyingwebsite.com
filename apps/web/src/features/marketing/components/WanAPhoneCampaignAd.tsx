@@ -1,7 +1,7 @@
 'use client';
 
 import { FadeIn } from '@maw/ui-lib';
-import { AnimatePresence } from 'framer-motion';
+import { AnimatePresence } from 'motion/react';
 import Image from 'next/image';
 import { useTranslations } from 'next-intl';
 import { Link } from '@/core/i18n/navigation';
