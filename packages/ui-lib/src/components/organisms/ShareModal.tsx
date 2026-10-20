@@ -1,15 +1,8 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import {
-  EmailIcon,
-  EmailShareButton,
-  FacebookIcon,
-  FacebookShareButton,
-  XIcon,
-  XShareButton,
-} from 'react-share';
-
+import { buttonVariants } from '../atoms/Button';
+import { Icon, type IconAliaseKey } from '../atoms/Icon';
 import {
   Dialog,
   DialogContent,
@@ -19,6 +12,12 @@ import {
   DialogTitle,
 } from './Dialog';
 
+type ShareTarget = {
+  href: string;
+  icon: IconAliaseKey;
+  label: string;
+};
+
 export type ShareModalProps = {
   show: boolean;
   onClose: () => void;
@@ -26,8 +25,38 @@ export type ShareModalProps = {
   texts: {
     title: string;
     description: string;
+    labels: {
+      email: string;
+      facebook: string;
+      x: string;
+    };
   };
 };
+
+function buildShareTargets(
+  url: string,
+  labels: ShareModalProps['texts']['labels'],
+): ShareTarget[] {
+  const encodedUrl = encodeURIComponent(url);
+
+  return [
+    {
+      href: `https://www.facebook.com/sharer/sharer.php?u=${encodedUrl}`,
+      icon: 'facebook',
+      label: labels.facebook,
+    },
+    {
+      href: `https://twitter.com/intent/tweet?url=${encodedUrl}`,
+      icon: 'xTwitter',
+      label: labels.x,
+    },
+    {
+      href: `mailto:?body=${encodedUrl}`,
+      icon: 'email',
+      label: labels.email,
+    },
+  ];
+}
 
 export function ShareModal({
   show: controlledShow,
@@ -43,8 +72,6 @@ export function ShareModal({
     );
   }, [controlledShow]);
 
-  const buttonClassName =
-    'overflow-hidden hover:brightness-125 !rounded-md outline outline-border';
   const url = controlledUrl ?? currentUrl;
 
   return (
@@ -59,15 +86,26 @@ export function ShareModal({
         {url && (
           <DialogFooter>
             <div className="flex w-full gap-3">
-              <FacebookShareButton url={url} className={buttonClassName}>
-                <FacebookIcon size={32} />
-              </FacebookShareButton>
-              <XShareButton url={url} className={buttonClassName}>
-                <XIcon size={32} />
-              </XShareButton>
-              <EmailShareButton url={url} className={buttonClassName}>
-                <EmailIcon size={32} />
-              </EmailShareButton>
+              {buildShareTargets(url, texts.labels).map((target) => {
+                const isExternal = target.href.startsWith('https://');
+
+                return (
+                  <a
+                    key={target.icon}
+                    aria-label={target.label}
+                    className={buttonVariants({
+                      size: 'icon',
+                      variant: 'outline',
+                    })}
+                    href={target.href}
+                    rel={isExternal ? 'noopener noreferrer' : undefined}
+                    target={isExternal ? '_blank' : undefined}
+                    title={target.label}
+                  >
+                    <Icon icon={target.icon} />
+                  </a>
+                );
+              })}
             </div>
           </DialogFooter>
         )}

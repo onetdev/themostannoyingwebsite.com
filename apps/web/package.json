@@ -61,7 +61,6 @@
     "react-confetti": "^6.4.0",
     "react-dom": "catalog:",
     "react-hook-form": "catalog:",
-    "react-share": "catalog:",
     "react-use": "^17.6.1",
     "recharts": "catalog:",
     "reflect-metadata": "^0.2.2",

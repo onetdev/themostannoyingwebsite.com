@@ -42,7 +42,6 @@ catalog:
   "react": ^19.3.1
   "react-dom": ^19.3.1
   "react-hook-form": 7.90.0
-  "react-share": ^6.1.0
   "recharts": ^3.10.1
   "sanitize-html": 2.18.1
   "schema-dts": ^2.1.0
