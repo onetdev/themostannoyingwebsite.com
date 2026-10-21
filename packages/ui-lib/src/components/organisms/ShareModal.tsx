@@ -38,6 +38,8 @@ function buildShareTargets(
   texts: ShareModalProps['texts'],
 ): ShareTarget[] {
   const encodedUrl = encodeURIComponent(url);
+  const emailSubject = encodeURIComponent(texts.title);
+  const emailBody = encodeURIComponent(`${texts.description}\r\n\r\n${url}`);
 
   return [
     {
@@ -51,7 +53,7 @@ function buildShareTargets(
       label: texts.labels.x,
     },
     {
-      href: `mailto:?body=${encodedUrl}`,
+      href: `mailto:?subject=${emailSubject}&body=${emailBody}`,
       icon: 'email',
       label: texts.labels.email,
     },
