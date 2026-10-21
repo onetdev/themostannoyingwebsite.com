@@ -13,12 +13,10 @@ import {
 import { formatSecondsToHHMMSS } from '@maw/utils/formatter';
 import { useTranslations } from 'next-intl';
 import { type PropsWithChildren, useMemo } from 'react';
-import ReactTimeAgo from 'react-timeago';
-import { useTimeagoFormatter } from '@/hooks';
+import { RelativeTime } from '@/components/RelativeTime';
 import { useRuntimeStore } from '@/stores';
 
 export function RuntimeInfo() {
-  const intlFormatter = useTimeagoFormatter();
   const runtime = useRuntimeStore();
   const t = useTranslations();
 
@@ -44,7 +42,7 @@ export function RuntimeInfo() {
               </TableCellLabel>
               <TableCellValue>
                 {startedAt ? (
-                  <ReactTimeAgo date={startedAt} formatter={intlFormatter} />
+                  <RelativeTime date={startedAt} />
                 ) : (
                   t('common.state.notAvailable')
                 )}
@@ -84,10 +82,7 @@ export function RuntimeInfo() {
               </TableCellLabel>
               <TableCellValue>
                 {runtime.userActivation.lastEventAt > 0 ? (
-                  <ReactTimeAgo
-                    date={runtime.userActivation.lastEventAt}
-                    formatter={intlFormatter}
-                  />
+                  <RelativeTime date={runtime.userActivation.lastEventAt} />
                 ) : (
                   t('common.state.notAvailable')
                 )}

@@ -79,7 +79,7 @@ export const ValidationErrorResponse = zod
       .describe('Human-readable validation error explanation'),
     issues: zod
       .array(
-        zod.object({
+        zod.looseObject({
           code: zod
             .string()
             .describe(
@@ -427,7 +427,7 @@ export const DonationSummaryResponse = zod
         expenses: CurrencyAmount,
         balance: CurrencyAmount,
       })
-      .describe('All-time totals and live balance projection'),
+      .describe('Totals and live balance projection'),
     monthly: zod
       .array(
         zod.object({
@@ -439,7 +439,9 @@ export const DonationSummaryResponse = zod
           expenses: CurrencyAmount,
         }),
       )
-      .describe('Monthly history, oldest first'),
+      .describe(
+        'Rolling monthly burn history, oldest first; the current month is partial',
+      ),
     stats: zod
       .array(
         zod
@@ -543,7 +545,7 @@ export const DonationSummaryResponse = zod
       .describe('ISO timestamp of deployment/database creation'),
   })
   .describe(
-    'Donation summary: every monetary value is a currency-tagged amount ({ value, currency }), covering all-time totals and a live balance projection, monthly history, trend-card statistics, preset tiers and the funding goal. Display-currency exchange rates are served by the currency rates endpoint.',
+    'Donation summary: every monetary value is a currency-tagged amount ({ value, currency }), covering totals and a live balance projection, a rolling monthly burn history (current month partial), trend-card statistics, preset tiers and the funding goal. Display-currency exchange rates are served by the currency rates endpoint.',
   );
 
 export type DonationSummaryResponse = zod.input<typeof DonationSummaryResponse>;
@@ -1766,7 +1768,7 @@ export type GetSpamSampleListResponseOutput = zod.output<
 >;
 
 /**
- * Returns all-time totals and a live balance projection, a monthly history of donations and running costs, trend-card statistics with i18n label keys, the top supporters, preset donation tiers and the recurring funding goal. Every monetary value is a currency-tagged { value, currency } amount; the frontend owns conversion, value formatting and label resolution. Display-currency exchange rates are served by the currency rates endpoint.
+ * Returns donation totals and a live balance projection, a rolling monthly burn history (oldest first, current month partial), trend-card statistics with i18n label keys, the top supporters, preset donation tiers and the recurring funding goal. Every monetary value is a currency-tagged { value, currency } amount; the frontend owns conversion, value formatting and label resolution. Display-currency exchange rates are served by the currency rates endpoint.
  * @summary Get the donation summary for a language
  */
 export const GetDonationSummaryParams = zod.object({

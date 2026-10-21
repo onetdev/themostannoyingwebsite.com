@@ -10,8 +10,7 @@ import {
 } from '@maw/ui-lib';
 import { useTranslations } from 'next-intl';
 import { useState } from 'react';
-import ReactTimeAgo from 'react-timeago';
-import { useTimeagoFormatter } from '@/hooks';
+import { RelativeTime } from '@/components/RelativeTime';
 import type { Comment } from '../../schemas';
 
 export interface CommentItemProps {
@@ -22,7 +21,6 @@ export interface CommentItemProps {
 
 export function CommentItem({ comment, onReply, onLike }: CommentItemProps) {
   const t = useTranslations();
-  const intlFormatter = useTimeagoFormatter();
   const [showReplies, setShowReplies] = useState(false);
 
   const hasReplies = comment.replies && comment.replies.length > 0;
@@ -42,7 +40,7 @@ export function CommentItem({ comment, onReply, onLike }: CommentItemProps) {
           </Avatar>
           <span className="text-sm font-medium">{comment.name}</span>
           <span className="text-muted-foreground text-sm">
-            <ReactTimeAgo date={comment.time} formatter={intlFormatter} />
+            <RelativeTime date={comment.time} />
           </span>
         </div>
 

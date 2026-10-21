@@ -29,9 +29,8 @@ jest.mock('./WheelAnimationWrapper', () => ({
   WheelAnimationWrapper: () => <div data-testid="wheel-animation" />,
 }));
 
-jest.mock('react-confetti', () => ({
-  __esModule: true,
-  default: () => null,
+jest.mock('./Confetti', () => ({
+  Confetti: () => null,
 }));
 
 const baseWheel = (): Omit<MockWheel, 'isUnavailable'> => ({

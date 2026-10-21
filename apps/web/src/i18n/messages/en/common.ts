@@ -230,6 +230,7 @@ export default {
     },
   },
   social: {
+    email: 'Email',
     facebook: 'Facebook',
     instagram: 'Instagram',
     tiktok: 'TikTok',

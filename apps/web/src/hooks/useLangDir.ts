@@ -1,5 +1,5 @@
 import { useLocale } from 'next-intl';
-import { getLangDir } from 'rtl-detect';
+import { getLangDir } from '@/core/i18n/get-lang-dir';
 
 export function useLangDir() {
   const locale = useLocale();

@@ -1,7 +1,7 @@
 'use client';
 
 import { Button, FadeIn } from '@maw/ui-lib';
-import { AnimatePresence } from 'framer-motion';
+import { AnimatePresence } from 'motion/react';
 import { useTranslations } from 'next-intl';
 import { useEffect, useRef, useState } from 'react';
 import { useRuntimeStore, useUserGrantsStore } from '@/stores';

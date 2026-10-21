@@ -1,7 +1,9 @@
 import {
   faBitcoin,
   faEthereum,
+  faFacebook,
   faPaypal,
+  faXTwitter,
 } from '@fortawesome/free-brands-svg-icons';
 import {
   faArrowUp,
@@ -20,6 +22,7 @@ import {
   faCircleInfo,
   faCoins,
   faCommentDots,
+  faEnvelope,
   faEyeDropper,
   faFire,
   faGear,
@@ -66,7 +69,9 @@ const iconMap = {
   coins: faCoins,
   colorPicker: faEyeDropper,
   commentDots: faCommentDots,
+  email: faEnvelope,
   ethereum: faEthereum,
+  facebook: faFacebook,
   failed: faCircleExclamation,
   fire: faFire,
   handHoldingDollar: faHandHoldingDollar,
@@ -91,6 +96,7 @@ const iconMap = {
   tags: faTags,
   trophy: faTrophy,
   utensils: faUtensils,
+  xTwitter: faXTwitter,
   xmarkCircle: faXmarkCircle,
 };
 export type IconAliaseKey = keyof typeof iconMap;

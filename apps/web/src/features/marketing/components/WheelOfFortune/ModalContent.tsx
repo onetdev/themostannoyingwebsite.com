@@ -3,8 +3,8 @@
 import { Button, Icon } from '@maw/ui-lib';
 import { useTranslations } from 'next-intl';
 import type { ComponentProps } from 'react';
-import Confetti from 'react-confetti';
 import { useWheelOfFortune } from '../../hooks';
+import { Confetti } from './Confetti';
 import { WheelAnimationWrapper } from './WheelAnimationWrapper';
 
 type ModalContentProps = ComponentProps<'div'>;
@@ -38,14 +38,7 @@ export function ModalContent({ className, ...rest }: ModalContentProps) {
           </div>
         ) : (
           <>
-            {wof.state === 'completed' && (
-              <Confetti
-                className="absolute z-0 size-full"
-                height={600}
-                numberOfPieces={100}
-                width={600}
-              />
-            )}
+            {wof.state === 'completed' && <Confetti />}
 
             <WheelAnimationWrapper
               highlightIndex={wof.prize?.index}
