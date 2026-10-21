@@ -6,7 +6,24 @@ const WEEK = 7 * DAY;
 const MONTH = 30 * DAY;
 const YEAR = 365 * DAY;
 
-type RelativeTimeUnit = Intl.RelativeTimeFormatUnit;
+type RelativeTimeUnit =
+  | 'second'
+  | 'minute'
+  | 'hour'
+  | 'day'
+  | 'week'
+  | 'month'
+  | 'year';
+
+const UNIT_DURATION_MS: Record<RelativeTimeUnit, number> = {
+  second: SECOND,
+  minute: MINUTE,
+  hour: HOUR,
+  day: DAY,
+  week: WEEK,
+  month: MONTH,
+  year: YEAR,
+};
 
 type RelativeTimeValue = {
   unit: RelativeTimeUnit;
@@ -58,4 +75,22 @@ export function formatRelativeTime(
     value,
     unit,
   );
+}
+
+/**
+ * Picks how often a relative timestamp must be re-rendered so its label stays
+ * accurate. The cadence follows the unit currently displayed: seconds tick
+ * every second, minutes every minute, and so on.
+ */
+export function getRelativeTimeRefreshIntervalMs(
+  date: Date | number | string,
+  now: number,
+): number {
+  const timestamp = new Date(date).getTime();
+
+  if (Number.isNaN(timestamp)) {
+    return YEAR;
+  }
+
+  return UNIT_DURATION_MS[pickRelativeTimeUnit(timestamp - now).unit];
 }

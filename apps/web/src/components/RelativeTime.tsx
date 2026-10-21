@@ -2,14 +2,19 @@
 
 import { useLocale } from 'next-intl';
 import { useEffect, useState } from 'react';
-import { formatRelativeTime } from '@/core/i18n/format-relative-time';
-
-const REFRESH_INTERVAL_MS = 60_000;
+import {
+  formatRelativeTime,
+  getRelativeTimeRefreshIntervalMs,
+} from '@/core/i18n/format-relative-time';
 
 export type RelativeTimeProps = {
   className?: string;
   date: Date | number | string;
 };
+
+// Browsers clamp `setTimeout` delays above `2^31 - 1` ms to zero, which would
+// fire immediately. Long cadences (months, years) are capped and re-scheduled.
+const MAX_TIMEOUT_MS = 2_147_483_647;
 
 export function RelativeTime({ className, date }: RelativeTimeProps) {
   const locale = useLocale();
@@ -18,12 +23,24 @@ export function RelativeTime({ className, date }: RelativeTimeProps) {
   useEffect(() => {
     setNow(Date.now());
 
-    const interval = setInterval(() => {
-      setNow(Date.now());
-    }, REFRESH_INTERVAL_MS);
+    let timeoutId: ReturnType<typeof setTimeout> | undefined;
+
+    const scheduleNextTick = () => {
+      const interval = Math.min(
+        getRelativeTimeRefreshIntervalMs(date, Date.now()),
+        MAX_TIMEOUT_MS,
+      );
+
+      timeoutId = setTimeout(() => {
+        setNow(Date.now());
+        scheduleNextTick();
+      }, interval);
+    };
+
+    scheduleNextTick();
 
     return () => {
-      clearInterval(interval);
+      clearTimeout(timeoutId);
     };
   }, [date]);
 

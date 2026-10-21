@@ -1,4 +1,7 @@
-import { formatRelativeTime } from './format-relative-time';
+import {
+  formatRelativeTime,
+  getRelativeTimeRefreshIntervalMs,
+} from './format-relative-time';
 
 const NOW = new Date('2026-10-20T12:00:00.000Z').getTime();
 const SECOND = 1_000;
@@ -43,5 +46,41 @@ describe('formatRelativeTime', () => {
 
   it('returns an empty string for invalid dates', () => {
     expect(formatRelativeTime('not-a-date', NOW, 'en')).toBe('');
+  });
+});
+
+describe('getRelativeTimeRefreshIntervalMs', () => {
+  it('refreshes on the scale of the displayed unit', () => {
+    expect(getRelativeTimeRefreshIntervalMs(NOW - 30 * SECOND, NOW)).toBe(
+      SECOND,
+    );
+    expect(getRelativeTimeRefreshIntervalMs(NOW - 5 * MINUTE, NOW)).toBe(
+      MINUTE,
+    );
+    expect(getRelativeTimeRefreshIntervalMs(NOW - 3 * HOUR, NOW)).toBe(HOUR);
+    expect(getRelativeTimeRefreshIntervalMs(NOW - 2 * DAY, NOW)).toBe(DAY);
+    expect(getRelativeTimeRefreshIntervalMs(NOW - 2 * WEEK, NOW)).toBe(WEEK);
+    expect(getRelativeTimeRefreshIntervalMs(NOW - 2 * MONTH, NOW)).toBe(MONTH);
+    expect(getRelativeTimeRefreshIntervalMs(NOW - 2 * YEAR, NOW)).toBe(YEAR);
+  });
+
+  it('switches cadence at the unit boundaries', () => {
+    expect(getRelativeTimeRefreshIntervalMs(NOW - MINUTE + 1, NOW)).toBe(
+      SECOND,
+    );
+    expect(getRelativeTimeRefreshIntervalMs(NOW - MINUTE, NOW)).toBe(MINUTE);
+    expect(getRelativeTimeRefreshIntervalMs(NOW - HOUR + 1, NOW)).toBe(MINUTE);
+    expect(getRelativeTimeRefreshIntervalMs(NOW - HOUR, NOW)).toBe(HOUR);
+  });
+
+  it('handles future timestamps', () => {
+    expect(getRelativeTimeRefreshIntervalMs(NOW + 30 * SECOND, NOW)).toBe(
+      SECOND,
+    );
+    expect(getRelativeTimeRefreshIntervalMs(NOW + 2 * DAY, NOW)).toBe(DAY);
+  });
+
+  it('falls back to a rare refresh for invalid dates', () => {
+    expect(getRelativeTimeRefreshIntervalMs('not-a-date', NOW)).toBe(YEAR);
   });
 });
