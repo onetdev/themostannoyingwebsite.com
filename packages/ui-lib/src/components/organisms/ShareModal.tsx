@@ -1,8 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { buttonVariants } from '../atoms/Button';
-import { Icon, type IconAliaseKey } from '../atoms/Icon';
+import type { IconAliaseKey } from '../atoms/Icon';
 import {
   Dialog,
   DialogContent,
@@ -11,6 +10,7 @@ import {
   DialogHeader,
   DialogTitle,
 } from './Dialog';
+import { ShareOption } from './ShareOption';
 
 type ShareTarget = {
   href: string;
@@ -35,7 +35,7 @@ export type ShareModalProps = {
 
 function buildShareTargets(
   url: string,
-  labels: ShareModalProps['texts']['labels'],
+  texts: ShareModalProps['texts'],
 ): ShareTarget[] {
   const encodedUrl = encodeURIComponent(url);
 
@@ -43,17 +43,17 @@ function buildShareTargets(
     {
       href: `https://www.facebook.com/sharer/sharer.php?u=${encodedUrl}`,
       icon: 'facebook',
-      label: labels.facebook,
+      label: texts.labels.facebook,
     },
     {
       href: `https://twitter.com/intent/tweet?url=${encodedUrl}`,
       icon: 'xTwitter',
-      label: labels.x,
+      label: texts.labels.x,
     },
     {
       href: `mailto:?body=${encodedUrl}`,
       icon: 'email',
-      label: labels.email,
+      label: texts.labels.email,
     },
   ];
 }
@@ -86,26 +86,9 @@ export function ShareModal({
         {url && (
           <DialogFooter>
             <div className="flex w-full gap-3">
-              {buildShareTargets(url, texts.labels).map((target) => {
-                const isExternal = target.href.startsWith('https://');
-
-                return (
-                  <a
-                    key={target.icon}
-                    aria-label={target.label}
-                    className={buttonVariants({
-                      size: 'icon',
-                      variant: 'outline',
-                    })}
-                    href={target.href}
-                    rel={isExternal ? 'noopener noreferrer' : undefined}
-                    target={isExternal ? '_blank' : undefined}
-                    title={target.label}
-                  >
-                    <Icon icon={target.icon} />
-                  </a>
-                );
-              })}
+              {buildShareTargets(url, texts).map((target) => (
+                <ShareOption key={target.icon} {...target} />
+              ))}
             </div>
           </DialogFooter>
         )}
