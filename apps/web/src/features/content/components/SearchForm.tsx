@@ -70,11 +70,18 @@ export function SearchForm({
         className,
       )}
     >
-      <form method="post" onSubmit={onSubmit} className="w-full">
+      <form
+        method="post"
+        onSubmit={onSubmit}
+        className="w-full"
+        data-track-form="content:search"
+        data-track-section="content:search"
+      >
         <InputGroup className={cn(searchFormVariants({ size }))}>
           <InputGroupInput
             defaultValue={initialValue}
             name="search"
+            data-track-input
             placeholder={t('content.search.placeholder')}
             autoComplete="off"
             className={cn(searchFormVariants({ size }))}

@@ -27,6 +27,8 @@ export function MessageForm({ className, onMessage }: MessageFormProps) {
     <form
       method="post"
       className={className}
+      data-track-form="support:chat"
+      data-track-section="support:chat"
       onSubmit={handleFormSubmit}
       ref={userForm}
     >

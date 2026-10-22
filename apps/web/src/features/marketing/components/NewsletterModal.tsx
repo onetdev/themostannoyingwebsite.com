@@ -86,6 +86,8 @@ export function NewsletterModal({
         <form
           className="max-w-screen-sm"
           method="post"
+          data-track-form="newsletter"
+          data-track-section="marketing:newsletter"
           onSubmit={handleSubmit(onSubmit)}
         >
           {actions.text && <p className="mb-4">{actions.text}</p>}

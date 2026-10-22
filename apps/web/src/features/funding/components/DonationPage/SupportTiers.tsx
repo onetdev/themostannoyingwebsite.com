@@ -176,7 +176,10 @@ export function SupportTiers({
   };
 
   return (
-    <div className={cn('flex flex-col gap-3', className)}>
+    <div
+      className={cn('flex flex-col gap-3', className)}
+      data-track-section="funding:donation"
+    >
       <div className="grid grid-cols-2 gap-3">
         {tiers.map((tier) => {
           const active =
@@ -188,6 +191,8 @@ export function SupportTiers({
               type="button"
               aria-pressed={active}
               data-testid={`tier-${tier.id}`}
+              data-track="donation:tier"
+              data-track-key={tier.id}
               onClick={() =>
                 onSelectionChange({ kind: 'tier', tierId: tier.id })
               }

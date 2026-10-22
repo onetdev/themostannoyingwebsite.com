@@ -36,6 +36,8 @@ export function CommentForm() {
         id="create-comment"
         className="flex flex-col gap-5"
         method="post"
+        data-track-form="comment:create"
+        data-track-section="comments:form"
         onSubmit={handleSubmit(onSubmit)}
       >
         <FieldError errors={[errors.root]} />

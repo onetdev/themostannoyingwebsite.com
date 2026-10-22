@@ -28,6 +28,8 @@ export function PasswordReminderForm() {
       <form
         className="flex flex-col gap-5"
         method="post"
+        data-track-form="auth:password-reminder"
+        data-track-section="auth:password-reminder"
         onSubmit={handleSubmit(onSubmit)}
       >
         <FieldError errors={[errors.root]} />

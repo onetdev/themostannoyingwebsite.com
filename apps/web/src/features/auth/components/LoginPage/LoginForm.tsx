@@ -29,6 +29,8 @@ export function LoginForm() {
       <form
         className="flex flex-col gap-5"
         method="post"
+        data-track-form="auth:login"
+        data-track-section="auth:login"
         onSubmit={handleSubmit(onSubmit)}
       >
         <FieldError errors={[errors.root]} />
