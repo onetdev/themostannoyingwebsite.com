@@ -3,6 +3,11 @@ import type { LinkKind } from '../types';
 export const TRACK_IGNORE_SELECTOR = '[data-track-ignore]';
 export const TRACK_SECTION_SELECTOR = '[data-track-section]';
 
+const SEGMENTED_ITEM_SELECTOR =
+  '[data-slot="toggle-group-item"],[data-slot="radio-group-item"],[role="radio"]';
+const SEGMENTED_GROUP_SELECTOR =
+  '[data-slot="toggle-group"],[data-slot="radio-group"],[role="radiogroup"]';
+
 const ACTION_SELECTOR = [
   '[data-track]',
   'button',
@@ -218,4 +223,60 @@ export function resolveImpressionKey(element: Element): string {
   }
   const index = resolveImpressionIndex(element);
   return index === undefined ? label : `${label}:${index}`;
+}
+
+export interface SegmentedSelection {
+  item: Element;
+  group: Element;
+  control: string;
+  index: number;
+  count: number;
+  value?: string;
+}
+
+/**
+ * Resolves a clicked segmented-control option (toggle group, radio group) to
+ * its group, position and stable value. `data-value` is rendered by
+ * `ToggleGroupItem`/`RadioGroupItem` from their `value` prop.
+ */
+export function resolveSegmentedSelection(
+  target: Element,
+): SegmentedSelection | null {
+  const item = target.closest(SEGMENTED_ITEM_SELECTOR);
+  if (!item) {
+    return null;
+  }
+
+  const group = item.closest(SEGMENTED_GROUP_SELECTOR);
+  if (!group) {
+    return null;
+  }
+
+  const items = Array.from(group.querySelectorAll(SEGMENTED_ITEM_SELECTOR));
+  const index = items.indexOf(item);
+  if (index < 0) {
+    return null;
+  }
+
+  return {
+    item,
+    group,
+    control:
+      group.getAttribute('data-track-control') ??
+      group.getAttribute('data-slot') ??
+      'segmented',
+    index,
+    count: items.length,
+    value: item.getAttribute('data-value') ?? undefined,
+  };
+}
+
+/** Reads the post-update pressed/checked state of a toggle or radio option. */
+export function readPressedState(item: Element): boolean {
+  return (
+    item.getAttribute('aria-pressed') === 'true' ||
+    item.getAttribute('aria-checked') === 'true' ||
+    item.getAttribute('data-pressed') !== null ||
+    item.getAttribute('data-state') === 'on'
+  );
 }

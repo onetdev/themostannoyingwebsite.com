@@ -192,7 +192,7 @@ export function SupportTiers({
               aria-pressed={active}
               data-testid={`tier-${tier.id}`}
               data-track="donation:tier"
-              data-track-key={tier.id}
+              data-value={tier.id}
               onClick={() =>
                 onSelectionChange({ kind: 'tier', tierId: tier.id })
               }

@@ -59,6 +59,8 @@ export function RatingDialog({ isOpen, onOpenChange }: RatingDialogProps) {
             <div className="flex flex-col items-center gap-4 w-full shrink">
               <ToggleGroup
                 value={rating !== null ? [String(rating)] : []}
+                data-track-control="support:rating"
+                data-track-section="support:rating"
                 onValueChange={(value) => {
                   const next = value[0];
                   if (next) {

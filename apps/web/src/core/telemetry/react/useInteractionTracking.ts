@@ -11,6 +11,7 @@ import {
   getLinkKind,
   isTextInput,
   isTrackingSuppressed,
+  readPressedState,
   readReferrerKind,
   readViewportBucket,
   resolveActionElement,
@@ -19,6 +20,8 @@ import {
   resolveFormKey,
   resolveResourceKind,
   resolveSection,
+  resolveSegmentedSelection,
+  type SegmentedSelection,
   TRACK_IGNORE_SELECTOR,
 } from './capture';
 
@@ -161,6 +164,33 @@ function trackLinkAction(
   return true;
 }
 
+function trackSegmentedSelection(selection: SegmentedSelection): void {
+  // Base UI updates `aria-pressed`/`aria-checked` in the same tick as the
+  // click, so read the settled state on the next macrotask.
+  setTimeout(() => {
+    track('ui.select', {
+      control: selection.control,
+      optionIndex: selection.index,
+      optionCount: selection.count,
+      value: selection.value,
+      checked: readPressedState(selection.item),
+      section: resolveSection(selection.group),
+    });
+  }, 0);
+}
+
+function trackSegmentedClick(target: Element): boolean {
+  const selection = resolveSegmentedSelection(target);
+  if (!selection) {
+    return false;
+  }
+  if (selection.item.matches('[disabled],[aria-disabled="true"]')) {
+    return true;
+  }
+  trackSegmentedSelection(selection);
+  return true;
+}
+
 function handleClick(event: MouseEvent): void {
   if (isTrackingSuppressed()) {
     return;
@@ -171,6 +201,10 @@ function handleClick(event: MouseEvent): void {
     return;
   }
   if (rawTarget.closest(TRACK_IGNORE_SELECTOR)) {
+    return;
+  }
+
+  if (trackSegmentedClick(rawTarget)) {
     return;
   }
 
@@ -203,6 +237,8 @@ function handleClick(event: MouseEvent): void {
     variant: action.getAttribute('data-variant') ?? undefined,
     role: action.getAttribute('role') ?? undefined,
     trackKey,
+    key: action.getAttribute('data-track-key') ?? undefined,
+    value: action.getAttribute('data-value') ?? undefined,
   });
 }
 

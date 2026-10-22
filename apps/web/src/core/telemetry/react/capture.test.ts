@@ -4,12 +4,14 @@
 import {
   collectInvalidFields,
   getLinkKind,
+  readPressedState,
   readReferrerKind,
   readViewportBucket,
   resolveFormKey,
   resolveImpressionKey,
   resolveResourceKind,
   resolveSection,
+  resolveSegmentedSelection,
 } from './capture';
 
 describe('capture helpers', () => {
@@ -61,6 +63,49 @@ describe('capture helpers', () => {
     expect(collectInvalidFields(form as HTMLFormElement)).toEqual([
       { field: 'body', code: 'invalid' },
     ]);
+  });
+
+  it('resolves segmented control selections', () => {
+    document.body.innerHTML = `
+      <section data-track-section="subscription:plans">
+        <div data-slot="toggle-group" data-track-control="subscription:billing-cycle">
+          <button data-slot="toggle-group-item" data-value="monthly"
+            aria-pressed="false">Monthly</button>
+          <button data-slot="toggle-group-item" data-value="yearly"
+            aria-pressed="true">Yearly</button>
+        </div>
+        <div data-slot="radio-group">
+          <button data-slot="radio-group-item" value="a" aria-checked="true">A</button>
+        </div>
+      </section>
+    `;
+
+    const yearly = document.querySelector('[data-value="yearly"]') as Element;
+    const monthly = document.querySelector('[data-value="monthly"]') as Element;
+    const radio = document.querySelector('[data-slot="radio-group-item"]');
+
+    expect(resolveSegmentedSelection(yearly)).toMatchObject({
+      control: 'subscription:billing-cycle',
+      index: 1,
+      count: 2,
+      value: 'yearly',
+    });
+    expect(resolveSegmentedSelection(monthly)).toMatchObject({
+      index: 0,
+      value: 'monthly',
+    });
+    expect(readPressedState(yearly)).toBe(true);
+    expect(readPressedState(monthly)).toBe(false);
+
+    // Radio items fall back to the group slot when no control name is set.
+    expect(resolveSegmentedSelection(radio as Element)).toMatchObject({
+      control: 'radio-group',
+      index: 0,
+      count: 1,
+    });
+    expect(readPressedState(radio as Element)).toBe(true);
+
+    expect(resolveSegmentedSelection(document.body)).toBeNull();
   });
 
   it('maps resource kinds', () => {

@@ -76,7 +76,12 @@ export interface TelemetryEventPropsMap {
     section?: string;
     variant?: string;
     role?: string;
+    /** Semantic label from `data-track` (e.g. `donation:tier`). */
     trackKey?: string;
+    /** Stable identity from `data-track-key`. */
+    key?: string;
+    /** Stable option value from `data-value` (e.g. a tier id). */
+    value?: string;
   };
   'ui.dialog-open': { name: string; section?: string };
   'ui.dialog-close': { name: string; section?: string };
@@ -90,6 +95,10 @@ export interface TelemetryEventPropsMap {
     control: string;
     optionIndex: number;
     optionCount: number;
+    /** Stable option value (e.g. `yearly`), never free-form user input. */
+    value?: string;
+    /** Post-update pressed/checked state for multi-select controls. */
+    checked?: boolean;
     section?: string;
   };
   'ui.slider': { control: string; valueBucket: number; section?: string };

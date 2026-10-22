@@ -63,6 +63,8 @@ export function AchievementList() {
           className="bg-muted rounded-lg p-1"
           value={[filter]}
           aria-label={t('filter.label')}
+          data-track-control="achievements:filter"
+          data-track-section="achievements:list"
           onValueChange={(value) => {
             const next = value[0] as AchievementFilter | undefined;
             if (next) {

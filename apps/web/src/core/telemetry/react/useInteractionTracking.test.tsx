@@ -104,6 +104,75 @@ describe('useInteractionTracking', () => {
     expect(findCall('ui.click')).toBeUndefined();
   });
 
+  it('records the chosen segmented-control value', () => {
+    jest.useFakeTimers();
+    render(
+      <>
+        <Harness />
+        <div data-track-section="subscription:plans">
+          <div
+            data-slot="toggle-group"
+            data-track-control="subscription:billing-cycle"
+          >
+            <button
+              type="button"
+              data-slot="toggle-group-item"
+              data-value="monthly"
+              aria-pressed="false"
+            >
+              Monthly
+            </button>
+            <button
+              type="button"
+              data-slot="toggle-group-item"
+              data-value="yearly"
+              aria-pressed="true"
+            >
+              Yearly
+            </button>
+          </div>
+        </div>
+      </>,
+    );
+
+    fireEvent.click(screen.getByText('Yearly'));
+
+    act(() => {
+      jest.advanceTimersByTime(1);
+    });
+
+    expect(findCall('ui.select')?.[1]).toEqual({
+      control: 'subscription:billing-cycle',
+      optionIndex: 1,
+      optionCount: 2,
+      value: 'yearly',
+      checked: true,
+      section: 'subscription:plans',
+    });
+    expect(findCall('ui.click')).toBeUndefined();
+  });
+
+  it('includes the item identity in ui.click', () => {
+    render(
+      <>
+        <Harness />
+        <div data-track-section="funding:donation">
+          <button type="button" data-track="donation:tier" data-value="premium">
+            Premium
+          </button>
+        </div>
+      </>,
+    );
+
+    fireEvent.click(screen.getByText('Premium'));
+
+    expect(findCall('ui.click')?.[1]).toMatchObject({
+      trackKey: 'donation:tier',
+      value: 'premium',
+      section: 'funding:donation',
+    });
+  });
+
   it('classifies link clicks', () => {
     render(
       <>
