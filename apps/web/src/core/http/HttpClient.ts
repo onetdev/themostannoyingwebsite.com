@@ -1,6 +1,7 @@
 import { err, ok, type Result, type ResultOk } from '@maw/utils/result';
 import { injectable } from 'inversify';
 import ky, { HTTPError, type Options } from 'ky';
+import { safePath, track } from '@/core/telemetry';
 
 export type RequestOptions = {
   headers?: Record<string, string>;
@@ -58,6 +59,7 @@ export class HttpClient {
     method: string,
     options?: RequestOptions,
   ): Promise<Result<T>> {
+    const startedAt = Date.now();
     try {
       const fullUrl = this.buildUrl(url);
 
@@ -76,6 +78,8 @@ export class HttpClient {
 
       return ok(data.data, data.metadata);
     } catch (error) {
+      const latencyMs = Date.now() - startedAt;
+
       if (error instanceof HTTPError) {
         let errorMessage = `HTTP error! status: ${error.response.status}`;
         let details: Record<string, unknown> = {};
@@ -88,6 +92,14 @@ export class HttpClient {
           // Fallback if response is not JSON
         }
 
+        track('error.http', {
+          resource: safePath(url),
+          status: error.response.status,
+          code: `HTTP_${error.response.status}`,
+          method,
+          latencyMs,
+        });
+
         return err({
           message: errorMessage,
           code: `HTTP_${error.response.status}`,
@@ -97,6 +109,15 @@ export class HttpClient {
 
       const message =
         error instanceof Error ? error.message : 'Unknown network error';
+
+      track('error.http', {
+        resource: safePath(url),
+        status: 0,
+        code: 'NETWORK_ERROR',
+        method,
+        latencyMs,
+      });
+
       return err({
         message,
         code: 'NETWORK_ERROR',
