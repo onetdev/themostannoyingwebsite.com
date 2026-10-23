@@ -88,7 +88,7 @@ export function DonationHero({ summary, className }: DonationHeroProps) {
         </a>
         <button
           type="button"
-          onClick={() => share()}
+          onClick={() => share({ surface: 'funding:hero' })}
           className={buttonVariants({ variant: 'outline', size: 'lg' })}
           data-track="donation:hero-share"
         >

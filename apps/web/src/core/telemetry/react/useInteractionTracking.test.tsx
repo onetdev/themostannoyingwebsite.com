@@ -145,7 +145,7 @@ describe('useInteractionTracking', () => {
       control: 'subscription:billing-cycle',
       optionIndex: 1,
       optionCount: 2,
-      value: 'yearly',
+      optionValue: 'yearly',
       checked: true,
       section: 'subscription:plans',
     });
@@ -178,7 +178,7 @@ describe('useInteractionTracking', () => {
     fireEvent.click(screen.getByText('Premium'));
     expect(findCall('ui.click')?.[1]).toMatchObject({
       trackKey: 'donation:tier',
-      value: 'premium',
+      optionValue: 'premium',
       section: 'funding:donation',
       label: 'Select premium tier',
     });
@@ -296,6 +296,116 @@ describe('useInteractionTracking', () => {
     });
   });
 
+  it('records a page view for every route', () => {
+    render(<Harness />);
+
+    expect(findCall('nav.route-view')?.[1]).toEqual({ route: '/' });
+  });
+
+  it('attributes link clicks without forwarding mailto addresses', () => {
+    render(
+      <>
+        <Harness />
+        <div data-track-section="support:contact">
+          <a
+            href="mailto:info@example.test"
+            data-track="contact:email"
+            aria-label="Email us"
+          >
+            Email
+          </a>
+        </div>
+        <div data-track-section="navigation:toc">
+          <a
+            href="/en/articles/#intro"
+            data-track="navigation:toc"
+            data-track-key="intro"
+          >
+            Intro
+          </a>
+        </div>
+      </>,
+    );
+
+    fireEvent.click(screen.getByText('Email'));
+
+    const mail = findCall('nav.link-click')?.[1] as Record<string, unknown>;
+    expect(mail).toMatchObject({
+      kind: 'mailto',
+      trackKey: 'contact:email',
+      label: 'Email us',
+      section: 'support:contact',
+    });
+    expect(mail).not.toHaveProperty('path');
+
+    trackMock.mockClear();
+    fireEvent.click(screen.getByText('Intro'));
+
+    expect(findCall('nav.link-click')?.[1]).toMatchObject({
+      kind: 'internal',
+      path: '/en/articles/',
+      trackKey: 'navigation:toc',
+      key: 'intro',
+      section: 'navigation:toc',
+    });
+  });
+
+  it('never reports credential fields on opted-in forms', () => {
+    render(
+      <>
+        <Harness />
+        <form data-track-form="auth:login">
+          <input name="email" type="email" data-track-input />
+          <input name="password" type="password" defaultValue="hunter2" />
+          <input name="cardNumber" type="text" defaultValue="4242" />
+        </form>
+      </>,
+    );
+
+    const inputs = document.querySelectorAll('input');
+    fireEvent.focusOut(inputs[1] as Element);
+    fireEvent.focusOut(inputs[2] as Element);
+    expect(findCall('input.change')).toBeUndefined();
+
+    fireEvent.focusOut(inputs[0] as Element);
+    expect(findCall('input.change')?.[1]).toMatchObject({ field: 'email' });
+  });
+
+  it('reports standalone Base UI controls but not grouped radio mirrors', () => {
+    render(
+      <>
+        <Harness />
+        <div data-track-section="marketing:survey">
+          <div data-slot="radio-group" data-track-control="survey:answer">
+            <input
+              type="radio"
+              name="answer"
+              aria-hidden="true"
+              tabIndex={-1}
+              readOnly
+            />
+          </div>
+          <input
+            type="checkbox"
+            name="chaos"
+            aria-hidden="true"
+            tabIndex={-1}
+            readOnly
+          />
+        </div>
+      </>,
+    );
+
+    fireEvent.change(screen.getByRole('radio', { hidden: true }));
+    expect(findCall('ui.toggle')).toBeUndefined();
+
+    fireEvent.change(screen.getByRole('checkbox', { hidden: true }));
+    expect(findCall('ui.toggle')?.[1]).toMatchObject({
+      control: 'chaos',
+      source: 'checkbox',
+    });
+  });
+
   it('does not capture while on the debug route', () => {
     window.history.replaceState({}, '', '/en/debug/');
     render(
@@ -308,5 +418,6 @@ describe('useInteractionTracking', () => {
     fireEvent.click(screen.getByText('Hidden'));
 
     expect(findCall('ui.click')).toBeUndefined();
+    expect(findCall('nav.route-view')).toBeUndefined();
   });
 });

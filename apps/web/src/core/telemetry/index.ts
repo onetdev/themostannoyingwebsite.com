@@ -6,9 +6,10 @@ const isProduction = process.env.NODE_ENV === 'production';
 const isDisabled = process.env.NEXT_PUBLIC_TELEMETRY_DISABLED === 'true';
 
 /**
- * Application-wide tracker. Sinks are keyed by environment:
- * development prints every event to the console, production keeps Sentry
- * breadcrumbs (and an opt-in first-party beacon).
+ * Application-wide tracker. Sinks are keyed by environment: development prints
+ * every event to the console, production keeps Sentry breadcrumbs.
+ *
+ * There is intentionally no network transport yet — see ADR 37, "Transport".
  */
 export const telemetry = new TelemetryTracker({
   sinks: createDefaultSinks(),
@@ -18,6 +19,7 @@ export const telemetry = new TelemetryTracker({
 
 export const { track, trackDynamic, trackOnce } = telemetry;
 
+export { TELEMETRY_SECTIONS, type TelemetrySection } from './catalog';
 export { bucketLength, safePath, scrubMessage } from './redact';
 export type { TrackOptions } from './tracker';
 export { TelemetryTracker } from './tracker';

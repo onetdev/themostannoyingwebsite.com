@@ -9,6 +9,8 @@ import {
   countFilledFields,
   countFormFields,
   getLinkKind,
+  isGroupedChoiceMirror,
+  isSensitiveField,
   isTextInput,
   isTrackingSuppressed,
   readPressedState,
@@ -93,6 +95,11 @@ function trackCheckboxToggle(target: Element, section?: string): boolean {
   if (type !== 'checkbox' && type !== 'radio') {
     return false;
   }
+  // Grouped radios already emit `ui.select` from the segmented-control path;
+  // their Base UI mirror input would otherwise double every answer.
+  if (isGroupedChoiceMirror(target)) {
+    return true;
+  }
   track('ui.toggle', {
     control: resolveControlName(target),
     checked: target.checked,
@@ -164,7 +171,17 @@ function trackLinkAction(
   if (kind === 'hash' || kind === 'other') {
     return false;
   }
-  track('nav.link-click', { kind, path: safePath(href), section, slot });
+
+  track('nav.link-click', {
+    kind,
+    // `mailto:`/`tel:` pathnames *are* the address and the phone number.
+    ...(kind === 'mailto' || kind === 'tel' ? {} : { path: safePath(href) }),
+    section,
+    slot,
+    trackKey: action.getAttribute('data-track') ?? undefined,
+    key: action.getAttribute('data-track-key') ?? undefined,
+    label: resolveActionLabel(action),
+  });
   return true;
 }
 
@@ -176,7 +193,7 @@ function trackSegmentedSelection(selection: SegmentedSelection): void {
       control: selection.control,
       optionIndex: selection.index,
       optionCount: selection.count,
-      value: selection.value,
+      optionValue: selection.value,
       checked: readPressedState(selection.item),
       section: resolveSection(selection.group),
     });
@@ -271,7 +288,7 @@ function handleClick(event: MouseEvent): void {
     role: action.getAttribute('role') ?? undefined,
     trackKey,
     key: action.getAttribute('data-track-key') ?? undefined,
-    value: action.getAttribute('data-value') ?? undefined,
+    optionValue: action.getAttribute('data-value') ?? undefined,
     label: resolveActionLabel(action),
   });
 }
@@ -352,6 +369,10 @@ function handleChange(event: Event): void {
 function handleFocusOut(event: FocusEvent): void {
   const target = event.target;
   if (!(target instanceof Element) || !isTextInput(target)) {
+    return;
+  }
+  // Credential and payment fields stay invisible even on opted-in forms.
+  if (isSensitiveField(target)) {
     return;
   }
 
@@ -473,7 +494,14 @@ export function useInteractionTracking(): void {
 
   useEffect(() => {
     telemetry.notifyRouteChange();
+    if (isTrackingSuppressed()) {
+      return;
+    }
+
     startSession();
+    // Universal page view: emitted for every route, not only the pages that
+    // remember to render `ReportRouteVisit`.
+    track('nav.route-view', { route: pathname });
     routeVisits += 1;
 
     const session = createSession();

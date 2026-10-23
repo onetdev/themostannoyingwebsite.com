@@ -13,6 +13,7 @@ import { useTranslations } from 'next-intl';
 import type { SubmitEventHandler } from 'react';
 import { emit } from '@/core/events/event-bus';
 import { useRouter } from '@/core/i18n/navigation';
+import type { TelemetrySection } from '@/core/telemetry';
 
 const searchFormVariants = cva('', {
   variants: {
@@ -39,7 +40,7 @@ export type SearchFormProps = VariantProps<typeof searchFormVariants> & {
    * scope; the header passes `navigation:search` so the same form can be
    * attributed to the surface the visitor actually used.
    */
-  section?: string;
+  section?: TelemetrySection;
 };
 
 export function SearchForm({

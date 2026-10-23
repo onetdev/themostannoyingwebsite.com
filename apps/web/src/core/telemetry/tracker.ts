@@ -174,7 +174,10 @@ export class TelemetryTracker {
     props: Record<string, unknown>,
     options: TrackOptions,
   ): InteractionEvent | undefined => {
-    if (!this.enabled) {
+    // The tracker is imported by shared modules (e.g. `HttpClient`) that also
+    // run on the server. Server emissions have no session, no route and no
+    // sinks worth writing to, so they are dropped instead of pretending.
+    if (!this.enabled || typeof window === 'undefined') {
       return undefined;
     }
 
@@ -190,7 +193,7 @@ export class TelemetryTracker {
 
     if (
       !options.skipDedupe &&
-      this.isDuplicate(category, name, props, timestamp)
+      this.isDuplicate(category, name, sanitized, timestamp)
     ) {
       return undefined;
     }
@@ -231,7 +234,7 @@ export class TelemetryTracker {
   private isDuplicate = (
     category: TelemetryCategory,
     name: TelemetryEventName,
-    props: Record<string, unknown>,
+    sanitizedProps: TelemetryProps,
     timestamp: number,
   ): boolean => {
     const windowMs = this.dedupeWindows[category];
@@ -239,7 +242,7 @@ export class TelemetryTracker {
       return false;
     }
 
-    const key = `${name}|${readRoute()}|${JSON.stringify(sanitizeProps(props))}`;
+    const key = `${name}|${readRoute()}|${JSON.stringify(sanitizedProps)}`;
     const previous = this.dedupeTimestamps.get(key);
 
     if (previous !== undefined && timestamp - previous < windowMs) {

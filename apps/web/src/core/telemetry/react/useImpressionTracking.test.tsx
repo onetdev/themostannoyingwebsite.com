@@ -110,6 +110,67 @@ describe('useImpressionTracking', () => {
     expect(trackMock).toHaveBeenCalledTimes(1);
   });
 
+  it('impresses tall elements once half the viewport is covered', () => {
+    const { container } = render(<Harness />);
+    const target = container.firstElementChild as Element;
+    const originalHeight = window.innerHeight;
+
+    jest
+      .spyOn(target, 'getBoundingClientRect')
+      .mockReturnValue({ height: 3000 } as DOMRect);
+    Object.defineProperty(window, 'innerHeight', {
+      configurable: true,
+      value: 1000,
+    });
+
+    try {
+      // 20 % of the element is 600px, i.e. more than half of the viewport.
+      emitIntersection(target, 0.2);
+      act(() => {
+        jest.advanceTimersByTime(500);
+      });
+
+      expect(trackMock).toHaveBeenCalledWith(
+        'impression.element',
+        expect.objectContaining({ key: 'article:cover:hello' }),
+      );
+    } finally {
+      Object.defineProperty(window, 'innerHeight', {
+        configurable: true,
+        value: originalHeight,
+      });
+    }
+  });
+
+  it('keeps tall elements unimpressed below half a viewport', () => {
+    const { container } = render(<Harness />);
+    const target = container.firstElementChild as Element;
+    const originalHeight = window.innerHeight;
+
+    jest
+      .spyOn(target, 'getBoundingClientRect')
+      .mockReturnValue({ height: 3000 } as DOMRect);
+    Object.defineProperty(window, 'innerHeight', {
+      configurable: true,
+      value: 1000,
+    });
+
+    try {
+      // 10 % of the element is 300px, i.e. less than half of the viewport.
+      emitIntersection(target, 0.1);
+      act(() => {
+        jest.advanceTimersByTime(500);
+      });
+
+      expect(trackMock).not.toHaveBeenCalled();
+    } finally {
+      Object.defineProperty(window, 'innerHeight', {
+        configurable: true,
+        value: originalHeight,
+      });
+    }
+  });
+
   it('cancels the dwell when the element leaves the viewport', () => {
     const { container } = render(<Harness />);
     const target = container.firstElementChild as Element;

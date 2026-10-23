@@ -4,6 +4,7 @@ import { useReportWebVitals } from 'next/web-vitals';
 import { track } from '..';
 import { safePath } from '../redact';
 import type { WebVitalName, WebVitalRating } from '../types';
+import { isTrackingSuppressed } from './capture';
 
 /**
  * Next 16 extends the base `web-vitals` metric with navigation metadata. The
@@ -36,7 +37,7 @@ const VITAL_RATINGS: ReadonlySet<string> = new Set([
 type ReportWebVitalsCallback = Parameters<typeof useReportWebVitals>[0];
 
 function reportWebVital(metric: ReportedMetric): void {
-  if (!VITAL_NAMES.has(metric.name)) {
+  if (!VITAL_NAMES.has(metric.name) || isTrackingSuppressed()) {
     return;
   }
 

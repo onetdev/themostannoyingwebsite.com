@@ -3,12 +3,17 @@
  */
 import {
   collectInvalidFields,
+  countFilledFields,
+  countFormFields,
   findUnscopedActions,
   getLinkKind,
+  isSensitiveField,
+  isTrackingSuppressed,
   readPressedState,
   readRangeBucket,
   readReferrerKind,
   readViewportBucket,
+  requiredImpressionRatio,
   resolveActionLabel,
   resolveFormKey,
   resolveImpressionKey,
@@ -192,5 +197,87 @@ describe('capture helpers', () => {
       'role-button',
       'text-field',
     ]);
+  });
+});
+
+describe('capture privacy guards', () => {
+  it('identifies credential and payment fields', () => {
+    const password = document.createElement('input');
+    password.type = 'password';
+    expect(isSensitiveField(password)).toBe(true);
+
+    const card = document.createElement('input');
+    card.name = 'cardNumber';
+    expect(isSensitiveField(card)).toBe(true);
+
+    const otp = document.createElement('input');
+    otp.name = 'one-time-code';
+    expect(isSensitiveField(otp)).toBe(true);
+
+    const email = document.createElement('input');
+    email.name = 'email';
+    expect(isSensitiveField(email)).toBe(false);
+  });
+
+  it('ignores Base UI mirror inputs when counting form state', () => {
+    document.body.innerHTML = `
+      <form>
+        <input name="email" value="jane@example.test" />
+        <input type="checkbox" name="consent" />
+        <input type="checkbox" name="newsletter" checked />
+        <input type="checkbox" aria-hidden="true" tabindex="-1" />
+        <input type="hidden" name="csrf" value="x" />
+        <textarea name="message"></textarea>
+      </form>
+    `;
+
+    const form = document.querySelector('form') as HTMLFormElement;
+
+    expect(countFormFields(form)).toBe(4);
+    // email + checked newsletter; the unchecked box and the mirror/hidden
+    // inputs must not count as filled.
+    expect(countFilledFields(form)).toBe(2);
+  });
+
+  it('never audits aria-hidden mirror controls', () => {
+    document.body.innerHTML = `
+      <div>
+        <input type="checkbox" aria-hidden="true" tabindex="-1" />
+        <button type="button">Visible</button>
+      </div>
+    `;
+
+    expect(findUnscopedActions(document).map((el) => el.tagName)).toEqual([
+      'BUTTON',
+    ]);
+  });
+
+  it('detects only the debug route', () => {
+    window.history.replaceState({}, '', '/en/debug/');
+    expect(isTrackingSuppressed()).toBe(true);
+
+    window.history.replaceState({}, '', '/en/debugging/');
+    expect(isTrackingSuppressed()).toBe(false);
+
+    window.history.replaceState({}, '', '/en/articles/');
+    expect(isTrackingSuppressed()).toBe(false);
+  });
+});
+
+describe('impression ratio', () => {
+  it('requires half the element for viewport-sized content', () => {
+    expect(requiredImpressionRatio(400, 800)).toBe(0.5);
+  });
+
+  it('scales down for elements taller than the viewport', () => {
+    // 3000px element in a 1000px viewport: 0.5 * 1000 / 3000 ≈ 0.167.
+    expect(requiredImpressionRatio(3000, 1000)).toBeCloseTo(1 / 6, 5);
+    expect(requiredImpressionRatio(6000, 1000)).toBeCloseTo(1 / 12, 5);
+  });
+
+  it('falls back to the plain threshold without layout information', () => {
+    expect(requiredImpressionRatio(0, 800)).toBe(0.5);
+    expect(requiredImpressionRatio(Number.NaN, 800)).toBe(0.5);
+    expect(requiredImpressionRatio(400, 0)).toBe(0.5);
   });
 });

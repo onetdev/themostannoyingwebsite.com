@@ -2,6 +2,7 @@
 
 import { Button, Icon } from '@maw/ui-lib';
 import { useTranslations } from 'next-intl';
+import type { TelemetrySection } from '@/core/telemetry';
 
 import { useShareAction } from '../hooks';
 
@@ -16,7 +17,7 @@ export type ShareButtonProps = {
   title?: string;
   className?: string;
   /** Telemetry surface the share action belongs to. */
-  section?: string;
+  section?: TelemetrySection;
 };
 
 /**
@@ -39,7 +40,7 @@ export function ShareButton({
       variant="ghost"
       size="icon"
       className={className}
-      onClick={() => share({ url, title })}
+      onClick={() => share({ url, title, surface: section })}
       aria-label={label}
       title={label}
       data-track="common:share"

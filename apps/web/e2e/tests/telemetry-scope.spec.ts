@@ -184,3 +184,43 @@ test.describe('telemetry scopes', () => {
     await expectScoped(page);
   });
 });
+
+test.describe('telemetry events', () => {
+  test.beforeEach(async ({ page }) => {
+    await setupE2eTestState(page);
+  });
+
+  test('records a semantic link click in the tracker history', async ({
+    page,
+  }) => {
+    await page.goto('/en');
+
+    await page.locator('[data-track="navigation:logo"]').first().click();
+
+    const hasLogoClick = () =>
+      page.evaluate(() => {
+        const history = (
+          window as unknown as {
+            maw?: {
+              tracker?: {
+                history: () => Array<{
+                  name: string;
+                  props?: Record<string, unknown>;
+                }>;
+              };
+            };
+          }
+        ).maw?.tracker?.history();
+
+        return Boolean(
+          history?.some(
+            (event) =>
+              event.name === 'nav.link-click' &&
+              event.props?.trackKey === 'navigation:logo',
+          ),
+        );
+      });
+
+    await expect.poll(hasLogoClick).toBe(true);
+  });
+});

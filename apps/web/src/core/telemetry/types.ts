@@ -49,13 +49,25 @@ export type WebVitalRating = 'good' | 'needs-improvement' | 'poor';
 
 export interface TelemetryEventPropsMap {
   // Navigation
-  'nav.route-view': { route: string };
+  'nav.route-view': {
+    /** Locale-relative pathname (the envelope carries the localized path). */
+    route: string;
+  };
+  /** Alias-based visit reported by `ReportRouteVisit` (e.g. `home`, `debug`). */
+  'nav.route-alias': { alias: string };
   'nav.page-leave': { path: string };
   'nav.link-click': {
     kind: LinkKind;
-    path: string;
+    /** Omitted for `mailto:`/`tel:`, whose path would carry the address. */
+    path?: string;
     section?: string;
     slot?: string;
+    /** Semantic label from `data-track` (e.g. `navigation:toc`). */
+    trackKey?: string;
+    /** Stable identity from `data-track-key`. */
+    key?: string;
+    /** Accessible label (`data-track-label` > `aria-label` > `title`). */
+    label?: string;
   };
   'nav.locale-change': {
     /** Locale the user switched to. */
@@ -86,8 +98,12 @@ export interface TelemetryEventPropsMap {
     trackKey?: string;
     /** Stable identity from `data-track-key`. */
     key?: string;
-    /** Stable option value from `data-value` (e.g. a tier id). */
-    value?: string;
+    /**
+     * Stable option value from `data-value` (e.g. a tier id). Named
+     * `optionValue` so it cannot be confused with — or leak as — free-form
+     * user input, which redaction strips.
+     */
+    optionValue?: string;
     /** Accessible label (`data-track-label` > `aria-label` > `title`). */
     label?: string;
   };
@@ -104,7 +120,7 @@ export interface TelemetryEventPropsMap {
     optionIndex: number;
     optionCount: number;
     /** Stable option value (e.g. `yearly`), never free-form user input. */
-    value?: string;
+    optionValue?: string;
     /** Post-update pressed/checked state for multi-select controls. */
     checked?: boolean;
     section?: string;
@@ -115,7 +131,7 @@ export interface TelemetryEventPropsMap {
   'ui.slider': { control: string; valueBucket: number; section?: string };
   'ui.modal-dismiss': Record<string, never>;
   'ui.copy': Record<string, never>;
-  'ui.share': { channel: string; surface?: string };
+  'ui.share': { channel: 'native' | 'modal'; surface?: string };
 
   // Forms & inputs
   'form.start': { form: string; fieldCount: number };
@@ -152,7 +168,6 @@ export interface TelemetryEventPropsMap {
     status: number;
     code: string;
     method: string;
-    latencyMs: number;
   };
   'error.query': { queryKey: string; code: string; message: string };
   'error.media': { kind: string; path: string };
@@ -218,7 +233,11 @@ export interface InteractionEvent<
   locale: string;
   source: TelemetrySource;
   props: TelemetryEventPropsMap[TName];
-  /** Optional measured duration, e.g. a form submission round trip. */
+  /**
+   * Canonical place for a measured duration (form round trip, HTTP latency).
+   * Prefer this over a per-event `*Ms` prop so sinks and collectors can treat
+   * timings uniformly.
+   */
   durationMs?: number;
 }
 

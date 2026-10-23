@@ -40,6 +40,81 @@ export const CATEGORY_DEDUPE_WINDOW_MS: Partial<
 };
 
 /**
+ * Every telemetry surface in the app, as rendered by `data-track-section` and
+ * the `section` props of shared actions. Keeping them in one union catches
+ * typos at compile time; `telemetry-sections.test.ts` asserts that no markup
+ * invents a surface that is missing here.
+ */
+export const TELEMETRY_SECTIONS = [
+  'achievements:list',
+  'achievements:reset',
+  'achievements:toast',
+  'auth:login',
+  'auth:password-reminder',
+  'auth:signup',
+  'captcha:challenge',
+  'captcha:trigger',
+  'comments:form',
+  'comments:item',
+  'comments:login-required',
+  'comments:section',
+  'common:cookie-consent',
+  'common:locale-suggestion',
+  'common:share',
+  'content:article',
+  'content:author',
+  'content:document',
+  'content:home:cover',
+  'content:home:latest',
+  'content:home:more',
+  'content:hot-things',
+  'content:paywall',
+  'content:search',
+  'content:virgin',
+  'disruptions:sticky-video',
+  'error:fallback',
+  'funding:before-after',
+  'funding:beggar-banner',
+  'funding:donation',
+  'funding:faq',
+  'funding:hero',
+  'funding:providers',
+  'marketing:adblocker',
+  'marketing:dilf',
+  'marketing:newsletter',
+  'marketing:only-spams',
+  'marketing:promotions',
+  'marketing:survey',
+  'marketing:wheel',
+  'navigation:footer',
+  'navigation:header',
+  'navigation:legal',
+  'navigation:logo',
+  'navigation:main',
+  'navigation:mobile-menu',
+  'navigation:pain-level',
+  'navigation:search',
+  'navigation:social',
+  'navigation:theme',
+  'navigation:toc',
+  'settings:grants',
+  'settings:mandatory',
+  'settings:pain-preferences',
+  'settings:preferences',
+  'settings:runtime',
+  'share:modal',
+  'subscription:cancellation',
+  'subscription:plans',
+  'subscription:special-deal',
+  'support:chat',
+  'support:contact',
+  'support:rating',
+  'user:notification-prompt',
+] as const;
+
+export type TelemetrySection = (typeof TELEMETRY_SECTIONS)[number];
+
+/**
  * Categories that are safe and useful to attach to Sentry error reports.
  * High-volume/aggregate data (impressions, inputs, vitals) is intentionally
  * excluded so the 100-breadcrumb buffer keeps the interesting trail.
@@ -57,10 +132,6 @@ export const SENTRY_BREADCRUMB_CATEGORIES: ReadonlySet<TelemetryCategory> =
     'support',
     'admin',
   ]);
-
-/** Categories forwarded to the optional first-party beacon. */
-export const BEACON_CATEGORIES: ReadonlySet<TelemetryCategory> =
-  new Set<TelemetryCategory>(['nav', 'session', 'form', 'error', 'perf']);
 
 export function isTelemetryCategory(value: string): value is TelemetryCategory {
   return (TELEMETRY_CATEGORIES as readonly string[]).includes(value);

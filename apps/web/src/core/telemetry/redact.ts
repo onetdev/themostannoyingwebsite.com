@@ -11,6 +11,10 @@ const SECRET_PATTERN = /(bearer|token|secret|password|api[_-]?key)[=:\s]+\S+/gi;
 /**
  * Prop keys that must never leave the client. Extend this list rather than
  * relying on call sites to behave.
+ *
+ * Note: `value` stays denied on purpose. Semantic option identities must be
+ * sent as `optionValue`, so a careless call site cannot smuggle input values
+ * into the stream by naming its prop `value`.
  */
 export const SENSITIVE_PROP_KEYS: ReadonlySet<string> = new Set([
   'password',
@@ -71,13 +75,6 @@ export function bucketLength(length: number): string {
   return '26+';
 }
 
-function sanitizeString(key: string, value: string): string {
-  if (SENSITIVE_PROP_KEYS.has(key.toLowerCase())) {
-    return '[redacted]';
-  }
-  return scrubMessage(value);
-}
-
 /**
  * Normalises arbitrary props into the primitive, size-limited shape sinks
  * accept. Unknown/sensitive keys are dropped instead of being trusted.
@@ -92,7 +89,7 @@ export function sanitizeProps(input: Record<string, unknown>): TelemetryProps {
     }
 
     if (typeof value === 'string') {
-      output[key] = sanitizeString(key, value);
+      output[key] = scrubMessage(value);
       continue;
     }
 

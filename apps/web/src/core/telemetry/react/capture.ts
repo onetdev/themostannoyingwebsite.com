@@ -35,14 +35,32 @@ const TEXT_INPUT_TYPES = new Set([
   'week',
 ]);
 
+/** Input types that must never contribute telemetry, even when opted in. */
+const SENSITIVE_INPUT_TYPES = new Set([
+  'password',
+  'hidden',
+  'file',
+  'cc-number',
+  'cc-csc',
+  'cc-exp',
+  'one-time-code',
+]);
+
+/** Field names that identify a credential or payment value. */
+const SENSITIVE_FIELD_PATTERN =
+  /pass|card|cvv|cvc|ssn|secret|token|otp|one-time/i;
+
 /** Invalid-fields limit keeps a broken form from producing a huge payload. */
 const MAX_REPORTED_FIELDS = 5;
+
+/** `/debug`, `/en/debug`, `/debug/…` — never the middle of another segment. */
+const DEBUG_ROUTE_PATTERN = /(^|\/)debug(\/|$)/;
 
 export function isTrackingSuppressed(): boolean {
   if (typeof window === 'undefined') {
     return true;
   }
-  return window.location.pathname.includes('/debug');
+  return DEBUG_ROUTE_PATTERN.test(window.location.pathname);
 }
 
 export function resolveActionElement(target: Element): Element | null {
@@ -69,7 +87,8 @@ export function findUnscopedActions(root: ParentNode = document): Element[] {
   return Array.from(root.querySelectorAll(INTERACTIVE_SELECTOR)).filter(
     (element) =>
       !element.closest(TRACK_IGNORE_SELECTOR) &&
-      !element.closest(TRACK_SECTION_SELECTOR),
+      !element.closest(TRACK_SECTION_SELECTOR) &&
+      element.getAttribute('aria-hidden') !== 'true',
   );
 }
 
@@ -128,6 +147,60 @@ export function isTextInput(element: Element): element is HTMLElement {
     return false;
   }
   return TEXT_INPUT_TYPES.has(element.type);
+}
+
+/**
+ * Fields whose *value* must never reach telemetry. The tracker only reports a
+ * length bucket, but a password length is still a credential attribute, and
+ * form-level opt-in (`data-track-form`) would otherwise opt these in too.
+ */
+export function isSensitiveField(element: Element): boolean {
+  if (
+    element instanceof HTMLInputElement &&
+    SENSITIVE_INPUT_TYPES.has(element.type)
+  ) {
+    return true;
+  }
+
+  const identifier =
+    element.getAttribute('name') ??
+    element.getAttribute('data-track-field') ??
+    element.id ??
+    '';
+  return SENSITIVE_FIELD_PATTERN.test(identifier);
+}
+
+/**
+ * Base UI renders an `aria-hidden` mirror `<input>` next to every checkbox,
+ * switch and radio. For grouped radios the click already produces `ui.select`
+ * (the segmented-control path), so the mirror must not report a second time;
+ * for standalone checkboxes/switches the mirror *is* the only signal.
+ */
+export function isGroupedChoiceMirror(element: Element): boolean {
+  if (
+    !(element instanceof HTMLInputElement) ||
+    element.getAttribute('aria-hidden') !== 'true'
+  ) {
+    return false;
+  }
+  return (
+    element.closest('[data-slot="radio-group"],[role="radiogroup"]') !== null
+  );
+}
+
+/**
+ * Visible, user-facing form controls only. Base UI renders an `aria-hidden`
+ * mirror `<input>` next to its `<span role="checkbox">`; counting those would
+ * double every field and keep hidden inputs in the form funnel.
+ */
+export function isCountableControl(element: Element): boolean {
+  if (element.getAttribute('aria-hidden') === 'true') {
+    return false;
+  }
+  if (element.closest('[hidden],[inert]')) {
+    return false;
+  }
+  return !(element instanceof HTMLInputElement && element.type === 'hidden');
 }
 
 export function getLinkKind(href: string, currentOrigin: string): LinkKind {
@@ -202,24 +275,35 @@ export function readRangeBucket(
 }
 
 export function countFormFields(form: HTMLFormElement): number {
-  return form.querySelectorAll('input:not([type="hidden"]),select,textarea')
-    .length;
+  return Array.from(form.elements).filter(
+    (field) =>
+      (field instanceof HTMLInputElement ||
+        field instanceof HTMLTextAreaElement ||
+        field instanceof HTMLSelectElement) &&
+      isCountableControl(field),
+  ).length;
+}
+
+/** A control counts as filled when it would contribute to a submission. */
+function isFilledControl(field: Element): boolean {
+  if (field instanceof HTMLTextAreaElement) {
+    return field.value.length > 0;
+  }
+  if (field instanceof HTMLSelectElement) {
+    return field.value.length > 0;
+  }
+  if (!(field instanceof HTMLInputElement) || !isCountableControl(field)) {
+    return false;
+  }
+  if (field.type === 'checkbox' || field.type === 'radio') {
+    // An unchecked box still reports `value === 'on'`.
+    return field.checked;
+  }
+  return field.value.length > 0;
 }
 
 export function countFilledFields(form: HTMLFormElement): number {
-  let filled = 0;
-  for (const field of Array.from(form.elements)) {
-    if (
-      field instanceof HTMLInputElement ||
-      field instanceof HTMLTextAreaElement ||
-      field instanceof HTMLSelectElement
-    ) {
-      if (field.type !== 'hidden' && String(field.value).length > 0) {
-        filled += 1;
-      }
-    }
-  }
-  return filled;
+  return Array.from(form.elements).filter(isFilledControl).length;
 }
 
 export interface InvalidField {
@@ -284,6 +368,42 @@ export function resolveImpressionKey(element: Element): string {
   }
   const index = resolveImpressionIndex(element);
   return index === undefined ? label : `${label}:${index}`;
+}
+
+/** Fraction of an element that must be visible before it counts as impressed. */
+export const MIN_IMPRESSION_RATIO = 0.5;
+
+/**
+ * Thresholds handed to the single `IntersectionObserver`. The low entries exist
+ * for tall elements: a body taller than two viewports can never expose 50 % of
+ * its own area, so it would otherwise never be observed as visible.
+ */
+export const IMPRESSION_THRESHOLDS = [0, 0.01, 0.05, 0.1, 0.25, 0.5] as const;
+
+const MIN_TALL_ELEMENT_RATIO = 0.01;
+
+/**
+ * Scales the visibility requirement for elements taller than the viewport:
+ * "half the viewport is covered by the element" instead of "half the element is
+ * on screen". `intersectionRatio` is intersection area ÷ element area, so the
+ * naive 50 % rule silently drops every article body and long list.
+ */
+export function requiredImpressionRatio(
+  elementHeight: number,
+  viewportHeight: number,
+): number {
+  if (
+    !Number.isFinite(elementHeight) ||
+    !Number.isFinite(viewportHeight) ||
+    elementHeight <= 0 ||
+    viewportHeight <= 0 ||
+    elementHeight <= viewportHeight
+  ) {
+    return MIN_IMPRESSION_RATIO;
+  }
+
+  const ratio = (MIN_IMPRESSION_RATIO * viewportHeight) / elementHeight;
+  return Math.max(MIN_TALL_ELEMENT_RATIO, ratio);
 }
 
 export interface SegmentedSelection {

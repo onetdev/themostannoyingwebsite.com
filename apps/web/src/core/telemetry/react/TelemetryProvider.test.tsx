@@ -51,6 +51,8 @@ describe('TelemetryProvider', () => {
 
     expect(window.maw?.tracker).toBeDefined();
     expect(window.maw?.tracker?.isEnabled()).toBe(true);
-    expect(window.maw?.tracker?.history()).toEqual([]);
+    expect(window.maw?.tracker?.history().map((event) => event.name)).toEqual([
+      'nav.route-view',
+    ]);
   });
 });

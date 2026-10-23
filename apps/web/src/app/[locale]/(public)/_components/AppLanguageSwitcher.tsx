@@ -9,13 +9,14 @@ import {
 } from '@maw/ui-lib';
 import { clsx } from 'cn';
 import { useLocale, useTranslations } from 'next-intl';
+import type { TelemetrySection } from '@/core/telemetry';
 import { useLanguageSwitcher } from '@/hooks';
 
 interface AppLanguageSwitcherProps {
   className?: string;
   displayOnlyFlag?: boolean;
   /** Telemetry surface, e.g. `navigation:header`. */
-  section?: string;
+  section?: TelemetrySection;
 }
 
 export function AppLanguageSwitcher({

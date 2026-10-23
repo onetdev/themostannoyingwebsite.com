@@ -1,5 +1,7 @@
+import { useCallback } from 'react';
 import { useAllEvents } from '@/core/events/react/useAllEvents';
 import { trackDynamic } from './index';
+import { isTrackingSuppressed } from './react/capture';
 import { safePath } from './redact';
 import type { TelemetryEventName, TelemetryProps } from './types';
 
@@ -23,8 +25,8 @@ export const EVENT_BRIDGE: {
     props: { path: safePath(data.path) },
   }),
   'route:visit': (data) => ({
-    name: 'nav.route-view',
-    props: { route: String(data.route) },
+    name: 'nav.route-alias',
+    props: { alias: String(data.route) },
   }),
   'global-text:copied': () => ({ name: 'ui.copy', props: {} }),
   'exit-prompt:shown': () => ({
@@ -94,19 +96,21 @@ export const EVENT_BRIDGE: {
  * while a plain object lookup cannot express that correlation.
  */
 export function useTelemetryBusBridge(): void {
-  useAllEvents(({ name, data }) => {
-    if (name === 'telemetry:event') {
-      return;
-    }
+  useAllEvents(
+    useCallback(({ name, data }) => {
+      if (name === 'telemetry:event' || isTrackingSuppressed()) {
+        return;
+      }
 
-    const mapper = EVENT_BRIDGE[name] as
-      | ((payload: never) => BridgeTarget | null)
-      | undefined;
-    const target = mapper?.(data as never);
-    if (!target) {
-      return;
-    }
+      const mapper = EVENT_BRIDGE[name] as
+        | ((payload: never) => BridgeTarget | null)
+        | undefined;
+      const target = mapper?.(data as never);
+      if (!target) {
+        return;
+      }
 
-    trackDynamic(target.name, target.props, { source: 'bridge' });
-  });
+      trackDynamic(target.name, target.props, { source: 'bridge' });
+    }, []),
+  );
 }

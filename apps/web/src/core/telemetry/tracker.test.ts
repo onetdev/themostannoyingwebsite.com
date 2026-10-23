@@ -86,6 +86,31 @@ describe('TelemetryTracker', () => {
     });
   });
 
+  it('keeps semantic option identities but still drops raw values', () => {
+    const sink = createMemorySink();
+    const tracker = createTracker({ sinks: [sink] });
+
+    tracker.track('ui.select', {
+      control: 'subscription:billing-cycle',
+      optionIndex: 1,
+      optionCount: 2,
+      optionValue: 'yearly',
+    });
+    tracker.trackDynamic('ui.click', {
+      slot: 'button',
+      tag: 'button',
+      value: 'jane@example.test',
+    });
+
+    expect(sink.events[0]?.props).toEqual({
+      control: 'subscription:billing-cycle',
+      optionIndex: 1,
+      optionCount: 2,
+      optionValue: 'yearly',
+    });
+    expect(sink.events[1]?.props).toEqual({ slot: 'button', tag: 'button' });
+  });
+
   it('drops duplicate ui clicks inside the dedupe window', () => {
     const sink = createMemorySink();
     const tracker = createTracker({ sinks: [sink] });
@@ -198,9 +223,9 @@ describe('TelemetryTracker', () => {
     // The broken sink must not prevent dispatch or history.
     expect(() => tracker.track('ui.copy', {})).not.toThrow();
     tracker.track('ui.share', { channel: 'native' });
-    tracker.track('ui.share', { channel: 'email' });
+    tracker.track('ui.share', { channel: 'modal' });
 
     expect(tracker.getHistory()).toHaveLength(2);
-    expect(tracker.getHistory()[0]?.props).toEqual({ channel: 'email' });
+    expect(tracker.getHistory()[0]?.props).toEqual({ channel: 'modal' });
   });
 });

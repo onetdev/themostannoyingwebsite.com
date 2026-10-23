@@ -12,7 +12,10 @@ export function createBusSink(): TelemetrySink {
   return {
     name: 'bus',
     handle(event: InteractionEvent) {
-      emit('telemetry:event', event);
+      // Emittery returns a promise; a rejecting listener must not surface as an
+      // unhandled rejection (which the tracker would then report back into the
+      // bus).
+      void Promise.resolve(emit('telemetry:event', event)).catch(() => {});
     },
   };
 }

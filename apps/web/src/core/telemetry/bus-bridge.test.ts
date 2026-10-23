@@ -1,6 +1,25 @@
-import { EVENT_BRIDGE } from './bus-bridge';
+/**
+ * @jest-environment jsdom
+ */
+import { renderHook } from '@testing-library/react';
+import { EVENT_BRIDGE, useTelemetryBusBridge } from './bus-bridge';
+import { trackDynamic } from './index';
 
 jest.mock('./index', () => ({ trackDynamic: jest.fn() }));
+
+jest.mock('@/core/events/react/useAllEvents', () => {
+  const state: {
+    handler?: (event: { name: string; data?: unknown }) => void;
+  } = {};
+  return {
+    __state: state,
+    useAllEvents: (
+      handler: (event: { name: string; data?: unknown }) => void,
+    ) => {
+      state.handler = handler;
+    },
+  };
+});
 
 type BridgeMapper = (data: unknown) => { name: string } | null;
 
@@ -16,7 +35,7 @@ describe('telemetry bus bridge', () => {
 
   it.each([
     ['navigation:changed', { path: '/en/articles/?q=1' }, 'nav.page-leave'],
-    ['route:visit', { route: 'home' }, 'nav.route-view'],
+    ['route:visit', { route: 'home' }, 'nav.route-alias'],
     ['global-text:copied', undefined, 'ui.copy'],
     ['exit-prompt:shown', undefined, 'disruption.exit-prompt'],
     ['ui:modal:dismiss-signaled', undefined, 'ui.modal-dismiss'],
@@ -65,5 +84,52 @@ describe('telemetry bus bridge', () => {
       name: 'nav.search-submit',
       props: { queryLength: 4 },
     });
+  });
+});
+
+describe('useTelemetryBusBridge', () => {
+  type Handler = (event: { name: string; data?: unknown }) => void;
+
+  const bridgeHook = () => {
+    const state = (
+      jest.requireMock('@/core/events/react/useAllEvents') as {
+        __state: { handler?: Handler };
+      }
+    ).__state;
+    return state;
+  };
+
+  beforeEach(() => {
+    jest.clearAllMocks();
+    window.history.replaceState({}, '', '/en/');
+    bridgeHook().handler = undefined;
+  });
+
+  it('forwards a mapped event with the bridge source', () => {
+    renderHook(() => useTelemetryBusBridge());
+
+    bridgeHook().handler?.({
+      name: 'dead-pixel:clicked',
+      data: { isRainbow: true },
+    });
+
+    expect(trackDynamic).toHaveBeenCalledWith(
+      'disruption.dead-pixel',
+      { isRainbow: true },
+      { source: 'bridge' },
+    );
+  });
+
+  it('ignores telemetry echoes and the debug route', () => {
+    renderHook(() => useTelemetryBusBridge());
+
+    bridgeHook().handler?.({ name: 'telemetry:event', data: {} });
+    window.history.replaceState({}, '', '/en/debug/');
+    bridgeHook().handler?.({
+      name: 'dead-pixel:clicked',
+      data: { isRainbow: true },
+    });
+
+    expect(trackDynamic).not.toHaveBeenCalled();
   });
 });

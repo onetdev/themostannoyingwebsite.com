@@ -3,7 +3,7 @@
 import { useLocale } from 'next-intl';
 import { persistLocaleCookie } from '@/core/i18n/locale-cookie';
 import { usePathname, useRouter } from '@/core/i18n/navigation';
-import { track } from '@/core/telemetry';
+import { type TelemetrySection, track } from '@/core/telemetry';
 import { SUPPORTED_LANGUAGES } from '@/i18n/supported-locales';
 
 const LANGUAGE_CONTROL = 'navigation:language';
@@ -13,7 +13,7 @@ const LANGUAGE_CONTROL = 'navigation:language';
  * and a locale actually changing. `section` attributes the switcher surface
  * (`navigation:header`, `navigation:footer`, `settings:preferences`, …).
  */
-export function useLanguageSwitcher(section?: string) {
+export function useLanguageSwitcher(section?: TelemetrySection) {
   const locale = useLocale();
   const router = useRouter();
   const pathname = usePathname();

@@ -75,6 +75,26 @@ describe('useWebVitalsTracking', () => {
     );
   });
 
+  it('does not report on the debug route', () => {
+    window.history.replaceState({}, '', '/en/debug/');
+    render(<Harness />);
+
+    act(() => {
+      report?.({
+        name: 'LCP',
+        value: 2500,
+        id: 'v4',
+        rating: 'good',
+        navigationType: 'navigate',
+        navigationURL: '/en/debug/',
+      });
+    });
+
+    expect(trackMock).not.toHaveBeenCalled();
+
+    window.history.replaceState({}, '', '/');
+  });
+
   it('ignores non-vital metrics', () => {
     render(<Harness />);
 
