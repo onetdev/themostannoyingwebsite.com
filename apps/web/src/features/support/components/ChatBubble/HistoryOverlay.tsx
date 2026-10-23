@@ -51,6 +51,7 @@ export function HistoryOverlay({
     <div
       className="border-spin [--border-spin-fill:var(--card)] bg-card flex flex-col rounded-lg text-start shadow-xl"
       data-testid="chat-bubble-panel"
+      data-track-section="support:chat"
     >
       <div className="flex items-start justify-between gap-2 p-3 ps-5 shadow-xs">
         <div className="min-w-0">
@@ -78,6 +79,7 @@ export function HistoryOverlay({
             onClick={() => onClose()}
             aria-label={t('common.action.close')}
             title={t('common.action.close')}
+            data-track="chat:close"
           >
             <Icon icon="close" />
           </Button>
@@ -106,7 +108,7 @@ export function HistoryOverlay({
               )}
             </MessageScrollerContent>
           </MessageScrollerViewport>
-          <MessageScrollerButton>
+          <MessageScrollerButton data-track="chat:jump-to-latest">
             <Icon icon="chevronDown" />
             <span className="sr-only">
               {t('support.chatBubble.jumpToLatest')}

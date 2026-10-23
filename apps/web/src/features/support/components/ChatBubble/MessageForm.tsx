@@ -46,6 +46,7 @@ export function MessageForm({ className, onMessage }: MessageFormProps) {
           size="icon"
           className="shrink-0 rounded-full"
           aria-label={t('common.action.send')}
+          data-track="chat:send"
         >
           <Icon icon="arrowUp" />
         </Button>

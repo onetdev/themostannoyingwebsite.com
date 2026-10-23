@@ -37,7 +37,10 @@ export function RatingDialog({ isOpen, onOpenChange }: RatingDialogProps) {
 
   return (
     <Dialog open={isOpen} onOpenChange={onOpenChange}>
-      <DialogContent className="sm:max-w-[425px]">
+      <DialogContent
+        className="sm:max-w-[425px]"
+        data-track-section="support:rating"
+      >
         <DialogHeader>
           <DialogTitle>{t('title')}</DialogTitle>
           <DialogDescription>{t('description')}</DialogDescription>
@@ -95,6 +98,7 @@ export function RatingDialog({ isOpen, onOpenChange }: RatingDialogProps) {
               disabled={rating === null}
               onClick={handleSubmit}
               className="w-full text-lg md:h-12"
+              data-track="rating:submit"
             >
               {t('submit')}
             </Button>
