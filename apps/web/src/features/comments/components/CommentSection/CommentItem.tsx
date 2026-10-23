@@ -31,7 +31,7 @@ export function CommentItem({ comment, onReply, onLike }: CommentItemProps) {
       open={showReplies}
       onOpenChange={setShowReplies}
     >
-      <div className="flex flex-col gap-1">
+      <div className="flex flex-col gap-1" data-track-section="comments:item">
         <div className="flex items-center gap-2">
           <Avatar className="size-7">
             <AvatarFallback className="text-sm">
@@ -52,6 +52,8 @@ export function CommentItem({ comment, onReply, onLike }: CommentItemProps) {
               variant="ghost"
               size="sm"
               className="h-8 px-2 text-xs"
+              data-track="comments:like"
+              data-track-key={comment.id}
               onClick={() => onLike(comment)}
             >
               👍 {comment.likes}
@@ -60,6 +62,8 @@ export function CommentItem({ comment, onReply, onLike }: CommentItemProps) {
               variant="ghost"
               size="sm"
               className="h-8 px-2 text-xs"
+              data-track="comments:reply"
+              data-track-key={comment.id}
               onClick={() => onReply(comment)}
             >
               {t('comments.reply')}
@@ -71,6 +75,8 @@ export function CommentItem({ comment, onReply, onLike }: CommentItemProps) {
                     variant="ghost"
                     size="sm"
                     className="text-primary h-8 px-2 text-xs font-medium"
+                    data-track="comments:toggle-replies"
+                    data-track-key={comment.id}
                   />
                 }
               >

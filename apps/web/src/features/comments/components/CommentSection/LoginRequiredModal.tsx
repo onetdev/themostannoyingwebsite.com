@@ -30,7 +30,7 @@ export function LoginRequiredModal({ show, onClose }: LoginRequiredModalProps) {
 
   return (
     <Dialog open={show} onOpenChange={onClose}>
-      <DialogContent>
+      <DialogContent data-track-section="comments:login-required">
         <DialogHeader>
           <DialogTitle>{t('comments.loginRequired.title')}</DialogTitle>
           <DialogDescription>
@@ -38,10 +38,17 @@ export function LoginRequiredModal({ show, onClose }: LoginRequiredModalProps) {
           </DialogDescription>
         </DialogHeader>
         <DialogFooter>
-          <Button variant="outline" onClick={onClose}>
+          <Button
+            variant="outline"
+            data-track="comments:login-required:cancel"
+            onClick={onClose}
+          >
             {t('comments.loginRequired.cancel')}
           </Button>
-          <Button onClick={handleLogin}>
+          <Button
+            data-track="comments:login-required:login"
+            onClick={handleLogin}
+          >
             {t('comments.loginRequired.login')}
           </Button>
         </DialogFooter>

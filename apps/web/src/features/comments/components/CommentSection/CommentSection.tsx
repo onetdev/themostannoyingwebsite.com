@@ -38,11 +38,16 @@ export function CommentSection({ className, items }: CommentSectionProps) {
         'md:bg-card mx-auto w-full max-w-3xl rounded-none border-0 bg-transparent shadow-none md:rounded-xl md:border md:shadow-sm',
         className,
       )}
+      data-track-section="comments:section"
     >
       <CardHeader className="px-0 sm:px-6">
         <CardTitle>{t('comments.sectionTitle')}</CardTitle>
         <CardAction>
-          <Button render={<a href="#create-comment" />} nativeButton={false}>
+          <Button
+            render={<a href="#create-comment" />}
+            nativeButton={false}
+            data-track="comments:create"
+          >
             {t('common.action.reply')}
           </Button>
         </CardAction>
