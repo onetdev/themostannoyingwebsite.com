@@ -26,12 +26,34 @@ export interface TrackOptions {
   skipDedupe?: boolean;
 }
 
-function createDefaultSessionId(): string {
+let fallbackSequence = 0;
+
+/**
+ * Ids never carry meaning and are not security tokens, but they must not use
+ * `Math.random` either (CodeQL flags it as insecure randomness). Prefer a
+ * UUID and fall back to a monotonic counter when Web Crypto is unavailable.
+ */
+function createDefaultId(): string {
   const cryptoApi = globalThis.crypto;
   if (cryptoApi && typeof cryptoApi.randomUUID === 'function') {
     return cryptoApi.randomUUID();
   }
-  return `${Date.now().toString(36)}-${Math.random().toString(36).slice(2)}`;
+  fallbackSequence += 1;
+  return `${Date.now().toString(36)}-${fallbackSequence.toString(36)}`;
+}
+
+/**
+ * Cryptographic RNG for sampling. Without Web Crypto the tracker keeps every
+ * event instead of falling back to a predictable source.
+ */
+function readRandom(): number {
+  const cryptoApi = globalThis.crypto;
+  if (cryptoApi && typeof cryptoApi.getRandomValues === 'function') {
+    const buffer = new Uint32Array(1);
+    cryptoApi.getRandomValues(buffer);
+    return (buffer[0] ?? 0) / 0x1_0000_0000;
+  }
+  return 0;
 }
 
 function readRoute(): string {
@@ -78,12 +100,9 @@ export class TelemetryTracker {
     this.sampling = options.sampling ?? CATEGORY_SAMPLING;
     this.dedupeWindows = options.dedupeWindowMs ?? CATEGORY_DEDUPE_WINDOW_MS;
     this.now = options.now ?? Date.now;
-    this.random = options.random ?? Math.random;
-    this.createId =
-      options.createId ??
-      (() =>
-        `${Date.now().toString(36)}-${Math.random().toString(36).slice(2)}`);
-    this.sessionId = (options.createSessionId ?? createDefaultSessionId)();
+    this.random = options.random ?? readRandom;
+    this.createId = options.createId ?? createDefaultId;
+    this.sessionId = (options.createSessionId ?? createDefaultId)();
     this.history = [];
   }
 

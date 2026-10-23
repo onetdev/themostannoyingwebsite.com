@@ -154,6 +154,34 @@ describe('TelemetryTracker', () => {
     expect(tracker.getHistory()).toHaveLength(0);
   });
 
+  it('does not rely on Math.random for ids or sampling', () => {
+    const randomSpy = jest.spyOn(Math, 'random').mockImplementation(() => {
+      throw new Error('Math.random is not allowed in telemetry');
+    });
+
+    try {
+      const tracker = new TelemetryTracker({ sinks: [] });
+      // Exercises the sampling RNG (may legitimately drop the event).
+      tracker.track('perf.web-vital', {
+        metric: 'LCP',
+        value: 1000,
+        rating: 'good',
+        navigationType: 'navigate',
+        metricId: 'v1',
+        route: '/en/',
+      });
+      tracker.track('ui.copy', {});
+
+      expect(tracker.getSessionId().length).toBeGreaterThan(0);
+      const event = tracker
+        .getHistory()
+        .find((item) => item.name === 'ui.copy');
+      expect(event?.id.length).toBeGreaterThan(0);
+    } finally {
+      randomSpy.mockRestore();
+    }
+  });
+
   it('keeps a bounded history and survives throwing sinks', () => {
     const tracker = new TelemetryTracker({
       sinks: [
