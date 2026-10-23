@@ -31,21 +31,28 @@ but it must not fingerprint, persist, or collect content.
 
 ## Decision
 
-1.  **One typed catalog is the contract.** `src/core/telemetry/types.ts` declares an
+1.  **One typed catalog is the contract.** `src/core/telemetry/types.ts` declares a
     `TelemetryEventPropsMap` of ~45 event names grouped by namespace (`nav.*`,
     `impression.*`, `ui.*`, `form.*`, `input.*`, `error.*`, `session.*`, `perf.*`,
-    `disruption.*`, plus bridged domain events). Emitting an undeclared event is a
-    compile error, and every event carries the same envelope (`id`, `name`,
-    `category`, `timestamp`, `sessionId`, `route`, `locale`, `source`, `props`,
-    optional `durationMs`).
+    `disruption.*`, `commerce.*`, `marketing.*`, `achievement.*`, `support.*`,
+    `admin.*`). Emitting an undeclared event is a compile error, and every event
+    carries the same envelope (`id`, `name`, `category`, `timestamp`, `sessionId`,
+    `route`, `locale`, `source`, `props`, optional `durationMs`).
+
+    Surfaces are typed too: `catalog.ts` holds the `TELEMETRY_SECTIONS` registry
+    behind `data-track-section` and the `section` props of shared actions, so a
+    typo cannot silently orphan a funnel. Semantic option identities travel as
+    `optionValue`, never `value` — the redactor drops `value` unconditionally.
 
 2.  **Capture is generic first, semantic second.** A single `TelemetryProvider`
     mounted in `ClientRootProviderContainer` installs:
     - document-level delegation for clicks, submits, toggles, selects, sliders and
       text-field blur, deriving names from the existing `data-slot` attributes,
       `data-track-section`, and a small number of `data-track*` annotations;
-    - one `IntersectionObserver` for `[data-track-impression]` nodes
-      (≥50 % visible for 500 ms, once per key per route);
+    - one `IntersectionObserver` for `[data-track-impression]` nodes (once per key
+      per route). An element counts as visible at ≥50 % of its own area for
+      500 ms, or — for elements taller than the viewport, such as article bodies
+      — once it covers half of the viewport;
     - `useReportWebVitals` from `next/web-vitals` for TTFB/FCP/LCP/INP/CLS,
       including soft navigations;
     - `error`/`unhandledrejection` listeners for faults that never reach a boundary.
@@ -56,28 +63,51 @@ but it must not fingerprint, persist, or collect content.
 3.  **No personal data, ever.** The tracker never reads input values (only type,
     field name, presence, and a coarse length bucket), never stores URLs with query
     strings, and scrubs emails/phones/URLs/secrets out of free-form messages.
+    Credential and payment fields are excluded even when their form opts into
+    tracking, `mailto:`/`tel:` links report their kind but never their address, and
     `sanitizeProps` drops sensitive keys regardless of what a call site passes.
     `sessionId` is an in-memory UUID that dies with the tab; there are no cookies
     and no storage.
 
 4.  **Sinks are composed per environment.** Events always go to the app event bus
-    (`telemetry:event`) and Sentry breadcrumbs, but Sentry only receives fault and
-    funnel categories — impressions, inputs and vitals would otherwise flood its
-    100-breadcrumb buffer. Development additionally prints every event to a tslog
-    sub-logger (`[interaction] …`), which is the local review surface. A first-party
-    `sendBeacon` sink exists but stays inert unless
-    `NEXT_PUBLIC_TELEMETRY_BEACON_URL` is configured.
+    (`telemetry:event`) and Sentry breadcrumbs. Sentry receives the interaction and
+    funnel categories — impressions, inputs, sessions and vitals are excluded so the
+    100-breadcrumb buffer keeps the interesting trail. Development additionally
+    prints every event to a tslog sub-logger (`[interaction] …`), which is the local
+    review surface.
+
+    There is deliberately **no network transport yet**. A first-party collector
+    needs an ingest endpoint, a consent grant, retention, and a privacy-policy
+    update in every locale; shipping the browser half alone would leave a silent
+    dead end. See "Transport" below.
 
 5.  **High-volume data is sampled and deduped.** Web vitals sample at 25 % in
     production; duplicate UI events inside 300 ms (inputs: 500 ms) are dropped; a
-    bounded 200-event in-memory history backs `window.maw.tracker`. The `/debug`
-    route is excluded from capture to avoid feedback loops.
+    bounded 200-event in-memory history backs `window.maw.tracker`. Every capture
+    path — delegation, impressions, vitals and the bus bridge — is suppressed on
+    the `/debug` route to avoid feedback loops.
 
-6.  **Vercel Analytics becomes optional.** Web vitals are captured first-party, so
-    removing `@vercel/analytics` no longer removes performance visibility. Page
-    views are already derivable from `nav.route-view`/`session.*`; the remaining
-    blocker for full removal is first-party visitor counting, which is deliberately
-    out of scope until a consent-aware collector exists.
+6.  **Vercel Analytics stays until a collector exists.** The tracker already
+    produces universal `nav.route-view` events, so page views and vitals are
+    available *in the browser*; nothing is aggregated or retained yet. Removing
+    `@vercel/analytics` therefore still removes the only production page-view and
+    web-vitals reporting we have, and is deferred to the transport decision.
+
+## Transport
+
+Deferred, tracked by a follow-up ADR. The options considered were:
+
+- a same-origin route handler writing to Postgres (typed end-to-end, but needs a
+  database, pooling and a retention job);
+- a same-origin route handler writing NDJSON to object storage (cheapest, but all
+  queries become batch jobs);
+- OTLP to an existing observability backend (best tooling, extra vendor and a
+  payload mapping);
+- no transport at all (this decision).
+
+Whatever lands must ship with an analytics consent grant, a `globalPrivacyControl`
+/ `doNotTrack` check, server-side re-validation, and a privacy-policy revision in
+every locale.
 
 ## Consequences
 
@@ -88,9 +118,12 @@ but it must not fingerprint, persist, or collect content.
 - Adding a new tracked interaction is usually zero component edits (annotate with
   `data-track-impression` / `data-track-section`, or emit an existing app event);
   only genuinely new semantics require adding a catalog entry and calling `track`.
-- Enabling the beacon or removing Vercel Analytics still requires a privacy-policy
-  update in every locale, because that is when data starts leaving the browser
-  beyond Sentry.
+  A new surface must also join `TELEMETRY_SECTIONS`, which the section drift test
+  enforces.
+- Nothing is retained: the layer is a local review surface plus Sentry breadcrumbs
+  until the transport ADR lands. Do not remove `@vercel/analytics` before then.
+- Enabling a transport will require a privacy-policy update in every locale,
+  because that is when data starts leaving the browser beyond Sentry.
 - The layer deliberately couples to Next's built-in `web-vitals` and the Base UI
   `data-slot` convention; if either changes, the catalog and the delegation
   selectors are the only places to update.

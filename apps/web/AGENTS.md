@@ -22,7 +22,7 @@ This document provides specific instructions and context for AI agents working o
   - `di/`: Dependency Injection core (InversifyJS setup, base symbols).
   - `events/`: Global event bus (Emittery).
   - `http/`: HTTP client and API abstractions.
-  - `telemetry/`: Typed interaction telemetry (catalog, tracker, sinks, auto-capture). See `adr/0037-user-interaction-telemetry.md`.
+  - `telemetry/`: Typed interaction telemetry (catalog, tracker, sinks, auto-capture). New surfaces must be registered in `TELEMETRY_SECTIONS` and annotated with `data-track-section`. See `adr/0037-user-interaction-telemetry.md`.
   - `seo/`: Structured data (JSON-LD) builders, `JsonLd` renderer, canonical URL helpers, and robots constants. See `adr/0026-structured-data-json-ld.md`.
   - `content/`: Content API client factory (`createAppContentClient`) and dev proxy helpers. Use this factory instead of the raw SDK `createContentClient` so browser requests are proxied in local development.
   - `observability/`: Logging and monitoring (Sentry).

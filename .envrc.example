@@ -15,10 +15,9 @@ export NEXT_PUBLIC_CONTENT_API_URL=https://content.themostannoyingwebsite.com
 
 # Interaction telemetry (see adr/0037-user-interaction-telemetry.md).
 # `NEXT_PUBLIC_TELEMETRY_CONSOLE` forces the console sink in production builds;
-# `NEXT_PUBLIC_TELEMETRY_DISABLED` mutes the tracker entirely. The beacon stays
-# off unless a first-party collector URL is configured.
+# `NEXT_PUBLIC_TELEMETRY_DISABLED` mutes the tracker entirely. There is no
+# network transport yet — a first-party collector is a follow-up decision.
 # export NEXT_PUBLIC_TELEMETRY_CONSOLE=true
 # export NEXT_PUBLIC_TELEMETRY_DISABLED=true
-# export NEXT_PUBLIC_TELEMETRY_BEACON_URL=https://content.themostannoyingwebsite.com/api/v1/vitals
 
 export ASDF_NODEJS_AUTO_ENABLE_COREPACK=true
