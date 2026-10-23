@@ -38,6 +38,8 @@ export function AppLanguageSwitcher({
         className={clsx(className)}
         aria-label={t('select')}
         title={t('select')}
+        data-track="navigation:language"
+        data-track-section={section}
       >
         <SelectValue>
           {currentLanguage?.flag}{' '}
@@ -49,6 +51,7 @@ export function AppLanguageSwitcher({
       <SelectContent
         align="end"
         className={displayOnlyFlag ? 'w-56' : undefined}
+        data-track-section={section}
       >
         {languages.map((lang) => (
           <SelectItem key={lang.locale} value={lang.locale}>

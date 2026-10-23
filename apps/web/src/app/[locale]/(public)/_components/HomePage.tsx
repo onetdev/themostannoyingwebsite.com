@@ -28,11 +28,13 @@ export async function HomePage({
           className="col-span-1 lg:col-span-3"
           article={coverArticle}
           data-testid="cover-article"
+          data-track-section="content:home:cover"
         />
       )}
       <section
         className="col-span-1 flex flex-col justify-between gap-4"
         data-testid="dense-article-list"
+        data-track-section="content:home:latest"
       >
         <ul className="flex flex-col gap-3">
           {denseArticleList.map((item, index) => (
@@ -52,6 +54,7 @@ export async function HomePage({
       <section
         className="col-span-1 lg:col-span-4"
         data-testid="small-cover-article-list"
+        data-track-section="content:home:more"
       >
         <ul className="grid gap-5 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
           {smallCoverArticleList.map((article, index) => (

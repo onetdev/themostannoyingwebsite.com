@@ -36,7 +36,7 @@ export default async function Page() {
           path="flaim-a-phone"
           namespace="metadata.wanPhone"
         />
-        <PageHeadline actions={<ShareButton />}>
+        <PageHeadline actions={<ShareButton section="marketing:survey" />}>
           {t('marketing.wanPhone.title')}
         </PageHeadline>
         <ContentPoolsBoundary lang={locale} types={['survey']}>

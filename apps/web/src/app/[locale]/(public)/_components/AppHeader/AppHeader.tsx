@@ -23,7 +23,10 @@ export async function AppHeader({ activeItem, className }: AppHeaderProps) {
 
   return (
     <>
-      <FloatingHeader className="flex flex-wrap items-center gap-x-2 gap-y-1 px-2 py-2 xl:px-4 print:hidden">
+      <FloatingHeader
+        className="flex flex-wrap items-center gap-x-2 gap-y-1 px-2 py-2 xl:px-4 print:hidden"
+        data-track-section="navigation:header"
+      >
         <div className="flex items-center gap-2">
           <AppNavigationMobile activeItem={activeItem} />
           <TextLogo />
@@ -32,13 +35,20 @@ export async function AppHeader({ activeItem, className }: AppHeaderProps) {
           <AppNavigationDesktop activeItem={activeItem} />
         </div>
         <div className="ml-auto flex items-center gap-3 md:gap-4">
-          <SearchForm className="hidden md:flex" size="md" expandable />
+          <SearchForm
+            className="hidden md:flex"
+            size="md"
+            expandable
+            section="navigation:search"
+          />
           <Button
             render={
               <Link
                 href="/search"
                 aria-label={t('common.action.search')}
                 title={t('common.action.search')}
+                data-track="navigation:search"
+                data-track-section="navigation:search"
               />
             }
             nativeButton={false}

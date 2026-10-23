@@ -48,7 +48,10 @@ export default async function Page() {
         namespace="metadata.donate"
       />
       <JsonLd data={donateActionSchema} />
-      <PageHeadline className="mx-auto w-full" actions={<ShareButton />}>
+      <PageHeadline
+        className="mx-auto w-full"
+        actions={<ShareButton section="funding:donation" />}
+      >
         {t('common.navigation.donate')}
       </PageHeadline>
       <DonationPage />

@@ -44,6 +44,7 @@ export async function AppFooter({ className }: AppFooterProps) {
     <footer
       id="footer"
       className={clsx(`border-border border-t print:hidden`, className)}
+      data-track-section="navigation:footer"
     >
       <div className="flex flex-wrap items-center justify-center gap-x-5 gap-y-2 px-gutter py-5">
         {links.map((link) => (
@@ -63,7 +64,10 @@ export async function AppFooter({ className }: AppFooterProps) {
         </div>
       </div>
 
-      <div className="border-border flex flex-wrap items-center justify-center gap-x-5 gap-y-2 border-t px-gutter py-5">
+      <div
+        className="border-border flex flex-wrap items-center justify-center gap-x-5 gap-y-2 border-t px-gutter py-5"
+        data-track-section="navigation:social"
+      >
         {socialLinks.map((link) => (
           <Link
             key={link.label}
@@ -77,7 +81,10 @@ export async function AppFooter({ className }: AppFooterProps) {
         ))}
       </div>
 
-      <div className="text-muted-foreground border-border border-t px-gutter py-5 text-center text-xs">
+      <div
+        className="text-muted-foreground border-border border-t px-gutter py-5 text-center text-xs"
+        data-track-section="navigation:legal"
+      >
         <span>
           {t('common.app.copyright', { year: new Date().getFullYear() })}{' '}
           <Link href="https://onet.dev" className="hover:underline">

@@ -49,7 +49,7 @@ export default async function Page({ params }: NextPageProps) {
         />
         <DocumentPage
           title={t('common.navigation.privacyPolicy')}
-          headerActions={<ShareButton />}
+          headerActions={<ShareButton section="content:document" />}
         >
           <TranslationDisclaimer
             currentLocale={locale}
