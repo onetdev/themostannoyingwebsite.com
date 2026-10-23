@@ -61,7 +61,11 @@ export function CaptchaDialog({
 
   return (
     <Dialog open={isOpen} onOpenChange={handleOpenChange}>
-      <DialogContent className="max-w-fit gap-0" showCloseButton={true}>
+      <DialogContent
+        className="max-w-fit gap-0"
+        showCloseButton={true}
+        data-track-section="captcha:challenge"
+      >
         <DialogHeader className="border-b border-border p-5 pb-4 -mx-5 -mt-5">
           <DialogTitle>
             {t('humanVerification.captcha.challengeTitle')}
@@ -118,17 +122,28 @@ export function CaptchaDialog({
               onClick={handleReset}
               title={t('humanVerification.captcha.resetChallenge')}
               variant="ghost"
+              data-track="captcha:reset"
             >
               <Icon icon="rotate" className="size-5" />
             </Button>
           </div>
           {currentChallengeScore < 1 && (
-            <Button onClick={handleSkip} size="sm" className="px-6 uppercase">
+            <Button
+              onClick={handleSkip}
+              size="sm"
+              className="px-6 uppercase"
+              data-track="captcha:skip"
+            >
               {t('common.action.skip')}
             </Button>
           )}
           {currentChallengeScore >= 1 && (
-            <Button onClick={handleVerify} size="sm" className="px-6 uppercase">
+            <Button
+              onClick={handleVerify}
+              size="sm"
+              className="px-6 uppercase"
+              data-track="captcha:verify"
+            >
               {t('common.action.verify')}
             </Button>
           )}
