@@ -57,7 +57,13 @@ export interface TelemetryEventPropsMap {
     section?: string;
     slot?: string;
   };
-  'nav.locale-change': { locale: string };
+  'nav.locale-change': {
+    /** Locale the user switched to. */
+    locale: string;
+    /** Locale that was active before the switch. */
+    from?: string;
+    section?: string;
+  };
   'nav.search-submit': { queryLength: number };
 
   // Impressions
@@ -103,6 +109,8 @@ export interface TelemetryEventPropsMap {
     checked?: boolean;
     section?: string;
   };
+  /** A select popup was opened, e.g. the language menu. */
+  'ui.select-open': { control: string; section?: string };
   /** A range input changed. `valueBucket` is the filled range in 10 % steps. */
   'ui.slider': { control: string; valueBucket: number; section?: string };
   'ui.modal-dismiss': Record<string, never>;

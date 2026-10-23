@@ -77,6 +77,7 @@ export function AppNavigationMobile({ activeItem }: AppNavigationMobileProps) {
           <AppLanguageSwitcher
             className="w-full"
             key="language-switcher-mobile"
+            section="navigation:mobile-menu"
           />
         </div>
         {navigationTree.map(({ titleKey, items }) => (

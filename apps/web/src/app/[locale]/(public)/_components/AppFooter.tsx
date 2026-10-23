@@ -56,7 +56,10 @@ export async function AppFooter({ className }: AppFooterProps) {
           </Link>
         ))}
         <div className="w-full sm:w-auto">
-          <AppLanguageSwitcher className="h-8 w-full sm:w-40" />
+          <AppLanguageSwitcher
+            className="h-8 w-full sm:w-40"
+            section="navigation:footer"
+          />
         </div>
       </div>
 

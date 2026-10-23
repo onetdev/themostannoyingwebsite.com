@@ -48,7 +48,7 @@ export async function AppHeader({ activeItem, className }: AppHeaderProps) {
             <Icon icon="search" />
           </Button>
           <div className="hidden md:block">
-            <AppLanguageSwitcher displayOnlyFlag />
+            <AppLanguageSwitcher displayOnlyFlag section="navigation:header" />
           </div>
           <AppDarkModeToggle />
         </div>

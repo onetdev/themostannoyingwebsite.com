@@ -25,7 +25,9 @@ import { SettingsField } from './SettingsField';
 
 export function UserPreferences() {
   const preference = useUserPreferencesStore();
-  const { onLanguageChange, languages } = useLanguageSwitcher();
+  const { onLanguageChange, onOpenChange, languages } = useLanguageSwitcher(
+    'settings:preferences',
+  );
   const runtime = useRuntimeStore();
   const t = useTranslations();
   const locale = useLocale();
@@ -56,6 +58,7 @@ export function UserPreferences() {
               }))}
               value={locale}
               onValueChange={onLanguageChange}
+              onOpenChange={onOpenChange}
             >
               <SelectTrigger className="w-full">
                 <SelectValue />

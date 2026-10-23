@@ -14,19 +14,26 @@ import { useLanguageSwitcher } from '@/hooks';
 interface AppLanguageSwitcherProps {
   className?: string;
   displayOnlyFlag?: boolean;
+  /** Telemetry surface, e.g. `navigation:header`. */
+  section?: string;
 }
 
 export function AppLanguageSwitcher({
   className,
   displayOnlyFlag = false,
+  section,
 }: AppLanguageSwitcherProps) {
-  const { onLanguageChange, languages, currentLanguage } =
-    useLanguageSwitcher();
+  const { onLanguageChange, onOpenChange, languages, currentLanguage } =
+    useLanguageSwitcher(section);
   const locale = useLocale();
   const t = useTranslations('common.language');
 
   return (
-    <Select value={locale} onValueChange={onLanguageChange}>
+    <Select
+      value={locale}
+      onValueChange={onLanguageChange}
+      onOpenChange={onOpenChange}
+    >
       <SelectTrigger
         className={clsx(className)}
         aria-label={t('select')}

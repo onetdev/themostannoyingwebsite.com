@@ -66,6 +66,19 @@ for the event-bus bridge, which validates its mapping separately.
 - `data-track-input` opts a single text field in.
 - `data-track-ignore` suppresses capture for a subtree.
 
+### Select popups and language changes
+
+A Base UI `Select` fires no native `change` event, and its popup items are not
+action elements, so the language funnel is emitted explicitly by
+`useLanguageSwitcher`:
+
+- `ui.select-open` (`control: 'navigation:language'`) when the menu opens.
+- `nav.locale-change` (`locale` + `from`) when a different locale is picked;
+  re-selecting the current locale is not reported.
+
+Both carry the switcher `section` passed to the hook (`navigation:header`,
+`navigation:mobile-menu`, `navigation:footer`, `settings:preferences`).
+
 ## Privacy rules
 
 - Never send input values. `input.change` carries `hasValue` + `lengthBucket` only.

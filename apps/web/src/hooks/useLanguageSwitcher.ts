@@ -3,9 +3,17 @@
 import { useLocale } from 'next-intl';
 import { persistLocaleCookie } from '@/core/i18n/locale-cookie';
 import { usePathname, useRouter } from '@/core/i18n/navigation';
+import { track } from '@/core/telemetry';
 import { SUPPORTED_LANGUAGES } from '@/i18n/supported-locales';
 
-export function useLanguageSwitcher() {
+const LANGUAGE_CONTROL = 'navigation:language';
+
+/**
+ * Locale switching plus its two telemetry signals: the language menu opening
+ * and a locale actually changing. `section` attributes the switcher surface
+ * (`navigation:header`, `navigation:footer`, `settings:preferences`, …).
+ */
+export function useLanguageSwitcher(section?: string) {
   const locale = useLocale();
   const router = useRouter();
   const pathname = usePathname();
@@ -16,6 +24,11 @@ export function useLanguageSwitcher() {
     if (value == null) {
       return;
     }
+
+    if (value !== locale) {
+      track('nav.locale-change', { locale: value, from: locale, section });
+    }
+
     persistLocaleCookie(value);
 
     // Might not look sexy, modern BUT it is what we need. And it works,
@@ -37,11 +50,19 @@ export function useLanguageSwitcher() {
     router.push(pathname, { locale: value });
   };
 
+  const onOpenChange = (open: boolean) => {
+    if (!open) {
+      return;
+    }
+    track('ui.select-open', { control: LANGUAGE_CONTROL, section });
+  };
+
   const currentLanguage = languages.find((l) => l.locale === locale);
 
   return {
     languages,
     currentLanguage,
     onLanguageChange,
+    onOpenChange,
   };
 }
