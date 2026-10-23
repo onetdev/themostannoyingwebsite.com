@@ -33,7 +33,10 @@ export async function DonationPage() {
     });
 
   return (
-    <div className="grid grid-cols-1 gap-8 lg:grid-cols-2 lg:gap-y-12">
+    <div
+      className="grid grid-cols-1 gap-8 lg:grid-cols-2 lg:gap-y-12"
+      data-track-section="funding:donation"
+    >
       <div className="flex flex-col gap-6">
         <section className="flex flex-col items-start gap-4 text-left">
           <p className="text-muted-foreground text-sm font-semibold tracking-[0.2em] uppercase">
