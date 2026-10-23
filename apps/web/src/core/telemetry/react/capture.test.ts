@@ -7,6 +7,7 @@ import {
   readPressedState,
   readReferrerKind,
   readViewportBucket,
+  resolveActionLabel,
   resolveFormKey,
   resolveImpressionKey,
   resolveResourceKind,
@@ -106,6 +107,28 @@ describe('capture helpers', () => {
     expect(readPressedState(radio as Element)).toBe(true);
 
     expect(resolveSegmentedSelection(document.body)).toBeNull();
+  });
+
+  it('resolves accessible labels without reading text', () => {
+    document.body.innerHTML = `
+      <button id="a" data-track-label="settings:reset" aria-label="Reset" title="Tooltip">Text</button>
+      <button id="b" aria-label="Share article">Icon</button>
+      <button id="c" title="Tooltip only">Icon</button>
+      <button id="d">Text only</button>
+    `;
+
+    expect(resolveActionLabel(document.getElementById('a') as Element)).toBe(
+      'settings:reset',
+    );
+    expect(resolveActionLabel(document.getElementById('b') as Element)).toBe(
+      'Share article',
+    );
+    expect(resolveActionLabel(document.getElementById('c') as Element)).toBe(
+      'Tooltip only',
+    );
+    expect(
+      resolveActionLabel(document.getElementById('d') as Element),
+    ).toBeUndefined();
   });
 
   it('maps resource kinds', () => {

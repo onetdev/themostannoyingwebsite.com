@@ -152,23 +152,41 @@ describe('useInteractionTracking', () => {
     expect(findCall('ui.click')).toBeUndefined();
   });
 
-  it('includes the item identity in ui.click', () => {
+  it('includes the item identity and accessible label in ui.click', () => {
     render(
       <>
         <Harness />
         <div data-track-section="funding:donation">
-          <button type="button" data-track="donation:tier" data-value="premium">
+          <button
+            type="button"
+            data-track="donation:tier"
+            data-value="premium"
+            aria-label="Select premium tier"
+          >
             Premium
+          </button>
+          <button
+            type="button"
+            data-track="settings:pain-preferences:disable-all"
+          >
+            Disable all
           </button>
         </div>
       </>,
     );
 
     fireEvent.click(screen.getByText('Premium'));
-
     expect(findCall('ui.click')?.[1]).toMatchObject({
       trackKey: 'donation:tier',
       value: 'premium',
+      section: 'funding:donation',
+      label: 'Select premium tier',
+    });
+
+    trackMock.mockClear();
+    fireEvent.click(screen.getByText('Disable all'));
+    expect(findCall('ui.click')?.[1]).toMatchObject({
+      trackKey: 'settings:pain-preferences:disable-all',
       section: 'funding:donation',
     });
   });

@@ -50,7 +50,8 @@ for the event-bus bridge, which validates its mapping separately.
 - `data-track-section` labels the feature area shown in every child event.
 - `data-track` adds a semantic `trackKey` (and names dialog opens/closes).
 - `data-track-key` / `data-value` add the stable identity of the clicked item to
-  `ui.click` (e.g. a donation tier id).
+  `ui.click` (e.g. a donation tier id). `data-track-label` (or an existing
+  `aria-label`/`title`) adds an accessible `label` without reading visible copy.
 - `data-track-control` names a toggle group / radio group. Option values are
   rendered as `data-value` by `ToggleGroupItem` and `RadioGroupItem`, so clicking
   one emits `ui.select` with `{ control, optionIndex, optionCount, value, checked }`

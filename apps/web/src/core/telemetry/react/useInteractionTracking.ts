@@ -15,6 +15,7 @@ import {
   readReferrerKind,
   readViewportBucket,
   resolveActionElement,
+  resolveActionLabel,
   resolveControlName,
   resolveFieldName,
   resolveFormKey,
@@ -191,6 +192,13 @@ function trackSegmentedClick(target: Element): boolean {
   return true;
 }
 
+function isDisabledAction(action: Element): boolean {
+  return (
+    action.matches('[disabled],[aria-disabled="true"]') ||
+    Boolean(action.closest('[disabled]'))
+  );
+}
+
 function handleClick(event: MouseEvent): void {
   if (isTrackingSuppressed()) {
     return;
@@ -212,10 +220,7 @@ function handleClick(event: MouseEvent): void {
   if (!action) {
     return;
   }
-  if (
-    action.matches('[disabled],[aria-disabled="true"]') ||
-    action.closest('[disabled]')
-  ) {
+  if (isDisabledAction(action)) {
     return;
   }
 
@@ -239,6 +244,7 @@ function handleClick(event: MouseEvent): void {
     trackKey,
     key: action.getAttribute('data-track-key') ?? undefined,
     value: action.getAttribute('data-value') ?? undefined,
+    label: resolveActionLabel(action),
   });
 }
 

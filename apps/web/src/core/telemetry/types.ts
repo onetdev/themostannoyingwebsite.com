@@ -82,6 +82,8 @@ export interface TelemetryEventPropsMap {
     key?: string;
     /** Stable option value from `data-value` (e.g. a tier id). */
     value?: string;
+    /** Accessible label (`data-track-label` > `aria-label` > `title`). */
+    label?: string;
   };
   'ui.dialog-open': { name: string; section?: string };
   'ui.dialog-close': { name: string; section?: string };

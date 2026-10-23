@@ -54,6 +54,20 @@ export function resolveSection(element: Element): string | undefined {
   );
 }
 
+/**
+ * Accessible name of the action. Prefers an explicit telemetry label, then the
+ * ARIA label, then the tooltip title. Never reads `textContent`, so dynamic or
+ * user-generated copy cannot leak into the stream.
+ */
+export function resolveActionLabel(element: Element): string | undefined {
+  const label =
+    element.getAttribute('data-track-label') ||
+    element.getAttribute('aria-label') ||
+    element.getAttribute('title');
+  const trimmed = label?.trim();
+  return trimmed && trimmed.length > 0 ? trimmed : undefined;
+}
+
 export function resolveFormKey(form: HTMLFormElement): string {
   return (
     form.getAttribute('data-track-form') ||

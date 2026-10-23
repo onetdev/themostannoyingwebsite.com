@@ -36,7 +36,10 @@ export function UserPreferences() {
   };
 
   return (
-    <Card data-testid="preferences-settings">
+    <Card
+      data-testid="preferences-settings"
+      data-track-section="settings:preferences"
+    >
       <CardHeader>
         <CardTitle>{t('user.userPreferences.title')}</CardTitle>
       </CardHeader>
