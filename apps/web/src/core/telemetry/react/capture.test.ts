@@ -3,6 +3,7 @@
  */
 import {
   collectInvalidFields,
+  findUnscopedActions,
   getLinkKind,
   readPressedState,
   readRangeBucket,
@@ -148,5 +149,48 @@ describe('capture helpers', () => {
     expect(resolveResourceKind('IMG')).toBe('image');
     expect(resolveResourceKind('script')).toBe('script');
     expect(resolveResourceKind('DIV')).toBe('other');
+  });
+
+  it('finds action elements that would emit without a section', () => {
+    document.body.innerHTML = `
+      <header data-track-section="navigation:header">
+        <button id="scoped">Scoped</button>
+        <div data-track-ignore>
+          <button id="ignored">Ignored</button>
+        </div>
+      </header>
+      <main>
+        <button id="unscoped">Unscoped</button>
+        <a id="link" href="/x">Link</a>
+        <div role="button" id="role-button">Role</div>
+        <input id="text-field" />
+        <input id="hidden-field" type="hidden" />
+        <span>Not an action</span>
+      </main>
+      <div id="portal">
+        <button id="portaled">Portaled</button>
+      </div>
+    `;
+
+    const unscoped = findUnscopedActions(document).map((element) => element.id);
+
+    expect(unscoped).toEqual([
+      'unscoped',
+      'link',
+      'role-button',
+      'text-field',
+      'portaled',
+    ]);
+
+    // Scoping the portaled container is what a dialog/sheet/popover needs.
+    document
+      .getElementById('portal')
+      ?.setAttribute('data-track-section', 'share:modal');
+    expect(findUnscopedActions(document).map((element) => element.id)).toEqual([
+      'unscoped',
+      'link',
+      'role-button',
+      'text-field',
+    ]);
   });
 });

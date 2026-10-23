@@ -3,6 +3,7 @@
 import { useEffect } from 'react';
 import { telemetry } from '..';
 import { useTelemetryBusBridge } from '../bus-bridge';
+import { findUnscopedActions } from './capture';
 import { useImpressionTracking } from './useImpressionTracking';
 import { useInteractionTracking } from './useInteractionTracking';
 import { useWebVitalsTracking } from './useWebVitalsTracking';
@@ -19,6 +20,7 @@ function installDebugHandle(): void {
     setEnabled: telemetry.setEnabled,
     isEnabled: telemetry.isEnabled,
     flush: telemetry.flush,
+    auditScopes: () => findUnscopedActions(document),
   };
 }
 

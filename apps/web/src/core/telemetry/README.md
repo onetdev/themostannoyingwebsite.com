@@ -47,7 +47,17 @@ for the event-bus bridge, which validates its mapping separately.
 />
 ```
 
-- `data-track-section` labels the feature area shown in every child event.
+- `data-track-section` labels the feature area shown in every child event. It
+  applies to the nearest DOM ancestor only, so put it on the surface wrapper
+  (page region, card, form) rather than on individual buttons.
+- Overlays are portaled to `document.body`: a section on the trigger or page
+  wrapper does **not** cover the overlay. Put the section on the overlay content
+  itself (`<DialogContent data-track-section="…">`, `SheetContent`,
+  `PopoverContent`, `SelectContent`, `NavigationMenuContent`) or on a custom
+  toast wrapper.
+- In development an unscoped click logs a warning; `window.maw.tracker.auditScopes()`
+  returns every action/control under the current document that would emit
+  without a section.
 - `data-track` adds a semantic `trackKey` (and names dialog opens/closes).
 - `data-track-key` / `data-value` add the stable identity of the clicked item to
   `ui.click` (e.g. a donation tier id). `data-track-label` (or an existing
@@ -118,9 +128,10 @@ every locale first.
 ## Local debugging
 
 ```js
-window.maw.tracker.history();   // newest-first, last 200 events
+window.maw.tracker.history();       // newest-first, last 200 events
 window.maw.tracker.setEnabled(false);
 window.maw.tracker.flush();
+window.maw.tracker.auditScopes();   // actions/controls missing a section
 ```
 
 Events also appear in `/debug` → Event history as `telemetry:event` entries once

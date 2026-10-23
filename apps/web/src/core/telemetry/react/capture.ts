@@ -8,7 +8,7 @@ const SEGMENTED_ITEM_SELECTOR =
 const SEGMENTED_GROUP_SELECTOR =
   '[data-slot="toggle-group"],[data-slot="radio-group"],[role="radiogroup"]';
 
-const ACTION_SELECTOR = [
+export const ACTION_SELECTOR = [
   '[data-track]',
   'button',
   'a',
@@ -16,6 +16,9 @@ const ACTION_SELECTOR = [
   '[data-slot$="-trigger"]',
   '[data-slot$="-close"]',
 ].join(',');
+
+/** Everything that can emit an interaction, including change-only controls. */
+const INTERACTIVE_SELECTOR = `${ACTION_SELECTOR},input:not([type="hidden"]),select,textarea`;
 
 const TEXT_INPUT_TYPES = new Set([
   'text',
@@ -51,6 +54,22 @@ export function resolveSection(element: Element): string | undefined {
     element
       .closest(TRACK_SECTION_SELECTOR)
       ?.getAttribute('data-track-section') ?? undefined
+  );
+}
+
+/**
+ * Action elements that would emit an event without a `section`. Used by the
+ * dev console warning and `window.maw.tracker.auditScopes()`.
+ *
+ * Overlays rendered in a portal (dialog, sheet, popover, toast) are separate
+ * DOM trees, so their `data-track-section` must live inside the portal, not on
+ * the trigger or page wrapper.
+ */
+export function findUnscopedActions(root: ParentNode = document): Element[] {
+  return Array.from(root.querySelectorAll(INTERACTIVE_SELECTOR)).filter(
+    (element) =>
+      !element.closest(TRACK_IGNORE_SELECTOR) &&
+      !element.closest(TRACK_SECTION_SELECTOR),
   );
 }
 

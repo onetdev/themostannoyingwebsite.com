@@ -202,6 +202,30 @@ function isDisabledAction(action: Element): boolean {
   );
 }
 
+/** Warn once per element so a repeated click does not flood the console. */
+const warnedUnscopedActions = new WeakSet<Element>();
+
+/**
+ * Surfaces missing scopes during development. A section is required so events
+ * answer "where on the page?"; without it the payload collapses to slot/tag.
+ */
+function warnUnscopedAction(
+  action: Element,
+  section: string | undefined,
+): void {
+  if (section || process.env.NODE_ENV !== 'development') {
+    return;
+  }
+  if (warnedUnscopedActions.has(action)) {
+    return;
+  }
+  warnedUnscopedActions.add(action);
+  console.warn(
+    '[telemetry] Click captured without a data-track-section scope.',
+    action,
+  );
+}
+
 function handleClick(event: MouseEvent): void {
   if (isTrackingSuppressed()) {
     return;
@@ -228,6 +252,7 @@ function handleClick(event: MouseEvent): void {
   }
 
   const section = resolveSection(action);
+  warnUnscopedAction(action, section);
   const slot = action.getAttribute('data-slot') ?? undefined;
   const trackKey = action.getAttribute('data-track') ?? undefined;
 

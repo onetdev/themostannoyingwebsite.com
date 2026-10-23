@@ -74,6 +74,8 @@ declare global {
         setEnabled: (enabled: boolean) => void;
         isEnabled: () => boolean;
         flush: () => void;
+        /** Action elements that would emit without a `data-track-section`. */
+        auditScopes: () => Element[];
       };
     };
   }
