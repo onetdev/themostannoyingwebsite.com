@@ -34,6 +34,12 @@ export type SearchFormProps = VariantProps<typeof searchFormVariants> & {
    * spots like the header; leave off for standalone search pages.
    */
   expandable?: boolean;
+  /**
+   * Telemetry surface for the form and its fields. Defaults to the search page
+   * scope; the header passes `navigation:search` so the same form can be
+   * attributed to the surface the visitor actually used.
+   */
+  section?: string;
 };
 
 export function SearchForm({
@@ -41,6 +47,7 @@ export function SearchForm({
   initialValue = '',
   size = 'md',
   expandable = false,
+  section = 'content:search',
 }: SearchFormProps) {
   const t = useTranslations();
   const router = useRouter();
@@ -74,8 +81,8 @@ export function SearchForm({
         method="post"
         onSubmit={onSubmit}
         className="w-full"
-        data-track-form="content:search"
-        data-track-section="content:search"
+        data-track-form={section}
+        data-track-section={section}
       >
         <InputGroup className={cn(searchFormVariants({ size }))}>
           <InputGroupInput
@@ -90,6 +97,7 @@ export function SearchForm({
           <InputGroupAddon align="inline-end">
             <InputGroupButton
               aria-label={t('common.action.search')}
+              data-track="search:submit"
               type="submit"
               className={cn(searchFormVariants({ size }))}
             >
