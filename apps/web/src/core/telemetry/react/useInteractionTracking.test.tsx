@@ -269,6 +269,33 @@ describe('useInteractionTracking', () => {
     });
   });
 
+  it('captures named range sliders by their usable range', () => {
+    render(
+      <>
+        <Harness />
+        <div data-track-section="navigation:pain-level">
+          <input
+            type="range"
+            min="0"
+            max="19"
+            defaultValue="10"
+            data-track-field="pain-level"
+          />
+        </div>
+      </>,
+    );
+
+    fireEvent.change(screen.getByRole('slider'), {
+      target: { value: '10' },
+    });
+
+    expect(findCall('ui.slider')?.[1]).toEqual({
+      control: 'pain-level',
+      valueBucket: 50,
+      section: 'navigation:pain-level',
+    });
+  });
+
   it('does not capture while on the debug route', () => {
     window.history.replaceState({}, '', '/en/debug/');
     render(

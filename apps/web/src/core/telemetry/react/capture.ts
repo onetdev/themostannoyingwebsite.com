@@ -154,6 +154,34 @@ export function readViewportBucket(width: number): string {
   return 'xl';
 }
 
+/** Slider buckets land on multiples of 10 % of the control's usable range. */
+const SLIDER_BUCKET_STEP = 10;
+
+/**
+ * Coarse position of a range value, expressed as a percentage of its own
+ * usable range and rounded to the nearest 10 %. Scaling by the range keeps
+ * small sliders meaningful: a 0–19 pain level still reports 50 rather than
+ * collapsing every mid-range value to 10.
+ */
+export function readRangeBucket(
+  value: number,
+  min: number,
+  max: number,
+): number {
+  if (
+    !Number.isFinite(value) ||
+    !Number.isFinite(min) ||
+    !Number.isFinite(max)
+  ) {
+    return 0;
+  }
+  if (max <= min) {
+    return 0;
+  }
+  const ratio = Math.min(1, Math.max(0, (value - min) / (max - min)));
+  return Math.round((ratio * 100) / SLIDER_BUCKET_STEP) * SLIDER_BUCKET_STEP;
+}
+
 export function countFormFields(form: HTMLFormElement): number {
   return form.querySelectorAll('input:not([type="hidden"]),select,textarea')
     .length;

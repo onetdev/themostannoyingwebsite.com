@@ -5,6 +5,7 @@ import {
   collectInvalidFields,
   getLinkKind,
   readPressedState,
+  readRangeBucket,
   readReferrerKind,
   readViewportBucket,
   resolveActionLabel,
@@ -41,6 +42,18 @@ describe('capture helpers', () => {
     expect(readViewportBucket(900)).toBe('md');
     expect(readViewportBucket(1100)).toBe('lg');
     expect(readViewportBucket(1600)).toBe('xl');
+  });
+
+  it('buckets slider values by their usable range', () => {
+    expect(readRangeBucket(0, 0, 100)).toBe(0);
+    expect(readRangeBucket(54, 0, 100)).toBe(50);
+    expect(readRangeBucket(96, 0, 100)).toBe(100);
+    expect(readRangeBucket(10, 0, 19)).toBe(50);
+    expect(readRangeBucket(19, 0, 19)).toBe(100);
+    expect(readRangeBucket(-5, 0, 100)).toBe(0);
+    expect(readRangeBucket(150, 0, 100)).toBe(100);
+    expect(readRangeBucket(5, 0, 0)).toBe(0);
+    expect(readRangeBucket(Number.NaN, 0, 100)).toBe(0);
   });
 
   it('resolves sections, forms and impression keys', () => {

@@ -12,6 +12,7 @@ import {
   isTextInput,
   isTrackingSuppressed,
   readPressedState,
+  readRangeBucket,
   readReferrerKind,
   readViewportBucket,
   resolveActionElement,
@@ -124,9 +125,11 @@ function trackRange(target: Element, section?: string): boolean {
   if (!(target instanceof HTMLInputElement) || target.type !== 'range') {
     return false;
   }
+  const min = target.min === '' ? 0 : Number(target.min);
+  const max = target.max === '' ? 100 : Number(target.max);
   track('ui.slider', {
     control: resolveControlName(target),
-    valueBucket: Math.round(Number(target.value) / 10) * 10,
+    valueBucket: readRangeBucket(Number(target.value), min, max),
     section,
   });
   return true;

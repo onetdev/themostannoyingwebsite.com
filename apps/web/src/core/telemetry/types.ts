@@ -103,6 +103,7 @@ export interface TelemetryEventPropsMap {
     checked?: boolean;
     section?: string;
   };
+  /** A range input changed. `valueBucket` is the filled range in 10 % steps. */
   'ui.slider': { control: string; valueBucket: number; section?: string };
   'ui.modal-dismiss': Record<string, never>;
   'ui.copy': Record<string, never>;

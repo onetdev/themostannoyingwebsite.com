@@ -56,6 +56,10 @@ for the event-bus bridge, which validates its mapping separately.
   rendered as `data-value` by `ToggleGroupItem` and `RadioGroupItem`, so clicking
   one emits `ui.select` with `{ control, optionIndex, optionCount, value, checked }`
   instead of an anonymous `ui.click`.
+- `data-track-field` names a control that has no `name`, e.g. the header pain
+  level slider, so `ui.slider` reports `control: 'pain-level'` instead of
+  `control: 'input'`. Its `valueBucket` is the filled portion of the control's
+  own `min`–`max` range in 10 % steps, never the raw value.
 - `data-track-impression` opts an element into impression tracking; `data-track-key`
   makes it stable across reorders, `data-track-index` is the fallback identity.
 - `data-track-form` names a form and opts its text fields into `input.change`.

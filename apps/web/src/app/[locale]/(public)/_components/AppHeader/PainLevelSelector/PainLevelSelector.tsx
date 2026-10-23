@@ -49,6 +49,7 @@ export function PainLevelSelector({ className }: PainLevelSelectorProps) {
   return (
     <div
       className={`mx-gutter flex flex-col gap-2 overflow-x-clip overflow-y-visible px-2 py-2 pt-2 pb-4 xl:px-4 ${className}`}
+      data-track-section="navigation:pain-level"
     >
       <div className="text-card-foreground flex items-center justify-between text-xs font-bold tracking-wider uppercase opacity-60">
         <span id="pain-level-label">{t('levelSettings.label')}</span>
@@ -87,6 +88,7 @@ export function PainLevelSelector({ className }: PainLevelSelectorProps) {
           max={publicLevel.max}
           value={publicLevel.current}
           onChange={handleChange}
+          data-track-field="pain-level"
           aria-labelledby="pain-level-label"
           aria-valuetext={percentageClamp.label}
           className="accent-primary absolute top-1/2 inset-s-0 z-20 w-full -translate-y-1/2 cursor-pointer appearance-none bg-transparent"
