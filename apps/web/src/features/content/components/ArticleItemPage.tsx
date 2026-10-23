@@ -65,7 +65,10 @@ export function ArticleItemPage({
         className="mx-auto w-full max-w-measure"
         data-track-section="content:article"
       >
-        <PageHeadline className="mb-2" actions={<ShareButton />}>
+        <PageHeadline
+          className="mb-2"
+          actions={<ShareButton section="content:article" />}
+        >
           {article.title}
         </PageHeadline>
         <span className="mb-3 block italic">

@@ -30,8 +30,11 @@ export function SearchPage() {
     !isError && !isLoading && hasQuery && !hasResults && isReady;
 
   return (
-    <div className="mx-auto w-full max-w-4xl">
-      <PageHeadline actions={<ShareButton />}>
+    <div
+      className="mx-auto w-full max-w-4xl"
+      data-track-section="content:search"
+    >
+      <PageHeadline actions={<ShareButton section="content:search" />}>
         {tNavigation('search')}
       </PageHeadline>
       <SearchForm size="lg" className="w-full" initialValue={query} />
