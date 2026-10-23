@@ -18,6 +18,8 @@ export function ShareOption({ href, icon, label }: ShareOptionProps) {
       rel={isExternal ? 'noopener noreferrer' : undefined}
       target={isExternal ? '_blank' : undefined}
       title={label}
+      data-track="share:option"
+      data-track-key={icon}
     >
       <Icon icon={icon} />
     </a>
