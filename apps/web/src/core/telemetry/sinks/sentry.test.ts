@@ -44,6 +44,16 @@ describe('sentry sink', () => {
     });
   });
 
+  it('includes the page route alias in the breadcrumb data', () => {
+    createSentrySink().handle(event({ routeAlias: 'home' }));
+
+    expect(addBreadcrumb).toHaveBeenCalledWith(
+      expect.objectContaining({
+        data: expect.objectContaining({ routeAlias: 'home' }),
+      }),
+    );
+  });
+
   it('drops aggregate categories to protect the breadcrumb buffer', () => {
     const sink = createSentrySink();
 

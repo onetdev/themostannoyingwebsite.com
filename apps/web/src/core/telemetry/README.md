@@ -37,6 +37,14 @@ for the event-bus bridge, which validates its mapping separately.
 | Global handlers | `window.error`, `unhandledrejection`, resource load failures | `useInteractionTracking.ts` |
 | Call sites | `HttpClient`, `ErrorBoundary`, React Query cache | those modules |
 
+### Page identity
+
+`PageLayout` renders `<main data-route-alias={route}>`. The tracker reads that
+committed attribute (like `location.pathname` and `document.lang`) and copies it
+onto every envelope as `routeAlias`, so delegated capture, impressions, vitals
+and explicit `track()` calls share one stable page identity — including dynamic
+routes such as `article.single`. Pages without a `route` simply omit the field.
+
 ### Annotating a surface
 
 ```tsx
@@ -172,4 +180,6 @@ history recording is enabled.
 - `react/useImpressionTracking.test.tsx` — dwell timing, tall elements, dedupe,
   cancel.
 - `react/useWebVitalsTracking.test.tsx` — metric mapping, CLS units, suppression.
-- `sinks/*.test.ts` — Sentry allowlist and bus delivery.
+- `sinks/*.test.ts` — Sentry allowlist, route alias and bus delivery.
+- `app/[locale]/(public)/_components/PageLayout.test.tsx` — the page alias
+  attribute is published only when a route is declared.

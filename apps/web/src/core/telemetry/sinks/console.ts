@@ -13,7 +13,12 @@ export function createConsoleSink(): TelemetrySink {
     handle(event: InteractionEvent) {
       const duration =
         event.durationMs === undefined ? '' : ` ${event.durationMs}ms`;
-      logger.info(`[interaction] ${event.name}${duration}`, event.props);
+      const alias =
+        event.routeAlias === undefined ? '' : ` @${event.routeAlias}`;
+      logger.info(
+        `[interaction] ${event.name}${duration}${alias}`,
+        event.props,
+      );
     },
   };
 }

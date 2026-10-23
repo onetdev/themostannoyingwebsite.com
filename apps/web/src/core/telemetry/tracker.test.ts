@@ -35,6 +35,7 @@ describe('TelemetryTracker', () => {
   beforeEach(() => {
     window.history.replaceState({}, '', '/en/articles/test/');
     document.documentElement.lang = 'en';
+    document.body.replaceChildren();
   });
 
   it('builds a complete envelope and sanitises props', () => {
@@ -64,6 +65,49 @@ describe('TelemetryTracker', () => {
         section: 'article',
         variant: 'default',
       },
+    });
+  });
+
+  describe('route alias', () => {
+    const appendRouteAlias = (alias: string) => {
+      const page = document.createElement('main');
+      page.setAttribute('data-route-alias', alias);
+      document.body.append(page);
+      return page;
+    };
+
+    it('includes the alias declared by the current page', () => {
+      appendRouteAlias('home');
+      const sink = createMemorySink();
+      const tracker = createTracker({ sinks: [sink] });
+
+      tracker.track('ui.copy', {});
+
+      expect(sink.events[0]?.routeAlias).toBe('home');
+    });
+
+    it('omits the alias when the page does not declare one', () => {
+      const sink = createMemorySink();
+      const tracker = createTracker({ sinks: [sink] });
+
+      tracker.track('ui.copy', {});
+
+      expect(sink.events[0]).not.toHaveProperty('routeAlias');
+    });
+
+    it('follows the alias of the page currently committed', () => {
+      const page = appendRouteAlias('home');
+      const sink = createMemorySink();
+      const tracker = createTracker({ sinks: [sink] });
+
+      tracker.track('ui.copy', {});
+      page.setAttribute('data-route-alias', 'plans');
+      tracker.track('ui.share', { channel: 'native' });
+
+      expect(sink.events.map((event) => event.routeAlias)).toEqual([
+        'home',
+        'plans',
+      ]);
     });
   });
 

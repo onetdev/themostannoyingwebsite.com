@@ -37,7 +37,10 @@ but it must not fingerprint, persist, or collect content.
     `disruption.*`, `commerce.*`, `marketing.*`, `achievement.*`, `support.*`,
     `admin.*`). Emitting an undeclared event is a compile error, and every event
     carries the same envelope (`id`, `name`, `category`, `timestamp`, `sessionId`,
-    `route`, `locale`, `source`, `props`, optional `durationMs`).
+    `route`, `routeAlias`, `locale`, `source`, `props`, optional `durationMs`).
+    `routeAlias` is the page identity declared by `PageLayout`; the tracker reads
+    it from the committed `data-route-alias` attribute, so every capture path and
+    explicit `track()` call shares one stable value without effect-ordering races.
 
     Surfaces are typed too: `catalog.ts` holds the `TELEMETRY_SECTIONS` registry
     behind `data-track-section` and the `section` props of shared actions, so a
@@ -113,8 +116,8 @@ every locale.
 
 - Developers see a live, filterable interaction stream in the browser console and
   in `/debug` → Event history without extra tooling.
-- Sentry error reports now arrive with breadcrumbs describing the route, recent
-  clicks, form attempts and HTTP failures.
+- Sentry error reports now arrive with breadcrumbs describing the route, page
+  alias, recent clicks, form attempts and HTTP failures.
 - Adding a new tracked interaction is usually zero component edits (annotate with
   `data-track-impression` / `data-track-section`, or emit an existing app event);
   only genuinely new semantics require adding a catalog entry and calling `track`.

@@ -195,6 +195,8 @@ test.describe('telemetry events', () => {
   }) => {
     await page.goto('/en');
 
+    await expect(page.locator('main[data-route-alias="home"]')).toBeVisible();
+
     await page.locator('[data-track="navigation:logo"]').first().click();
 
     const hasLogoClick = () =>
@@ -205,6 +207,7 @@ test.describe('telemetry events', () => {
               tracker?: {
                 history: () => Array<{
                   name: string;
+                  routeAlias?: string;
                   props?: Record<string, unknown>;
                 }>;
               };
@@ -216,7 +219,8 @@ test.describe('telemetry events', () => {
           history?.some(
             (event) =>
               event.name === 'nav.link-click' &&
-              event.props?.trackKey === 'navigation:logo',
+              event.props?.trackKey === 'navigation:logo' &&
+              event.routeAlias === 'home',
           ),
         );
       });

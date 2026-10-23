@@ -24,6 +24,9 @@ export function createSentrySink(): TelemetrySink {
         data: {
           ...event.props,
           route: event.route,
+          ...(event.routeAlias === undefined
+            ? {}
+            : { routeAlias: event.routeAlias }),
           ...(event.durationMs === undefined
             ? {}
             : { durationMs: event.durationMs }),

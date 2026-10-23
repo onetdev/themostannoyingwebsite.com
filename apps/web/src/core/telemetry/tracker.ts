@@ -1,3 +1,4 @@
+import type { RouteAlias } from '@/schemas/route-alias';
 import {
   CATEGORY_DEDUPE_WINDOW_MS,
   CATEGORY_SAMPLING,
@@ -68,6 +69,24 @@ function readLocale(): string {
     return 'unknown';
   }
   return document.documentElement.lang || 'unknown';
+}
+
+/**
+ * Page identity published by `PageLayout` as `data-route-alias`. Reading the
+ * committed DOM (rather than keeping mutable tracker state) means `track()`
+ * calls, delegated capture and portalled overlays all see the same page, with
+ * no effect-ordering race against the route-change listener.
+ */
+function readRouteAlias(): RouteAlias | undefined {
+  if (typeof document === 'undefined') {
+    return undefined;
+  }
+
+  const alias = document
+    .querySelector('[data-route-alias]')
+    ?.getAttribute('data-route-alias');
+  // `PageLayout` is the only writer and types the value as `RouteAlias`.
+  return alias ? (alias as RouteAlias) : undefined;
 }
 
 /**
@@ -189,6 +208,7 @@ export class TelemetryTracker {
     }
 
     const route = readRoute();
+    const routeAlias = readRouteAlias();
     const timestamp = this.now();
 
     if (
@@ -205,6 +225,7 @@ export class TelemetryTracker {
       timestamp,
       sessionId: this.sessionId,
       route,
+      ...(routeAlias === undefined ? {} : { routeAlias }),
       locale: readLocale(),
       source: options.source ?? 'auto',
       props: sanitized,

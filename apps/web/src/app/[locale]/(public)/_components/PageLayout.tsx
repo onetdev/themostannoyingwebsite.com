@@ -41,6 +41,9 @@ export function PageLayout({
         className="mb-4"
       />
       <main
+        // Every telemetry envelope on the page inherits the alias, so route
+        // identity does not depend on each surface reporting it separately.
+        data-route-alias={route}
         className={clsx(className, localClassName, 'mx-gutter flex-1')}
         {...rest}
       >

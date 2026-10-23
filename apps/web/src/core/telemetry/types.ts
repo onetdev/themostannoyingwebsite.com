@@ -11,6 +11,8 @@
  * - Names are dot-namespaced and stable; the first segment is the category.
  */
 
+import type { RouteAlias } from '@/schemas/route-alias';
+
 export type TelemetryCategory =
   | 'nav'
   | 'impression'
@@ -230,6 +232,11 @@ export interface InteractionEvent<
   sessionId: string;
   /** Locale-prefixed pathname without query string or hash. */
   route: string;
+  /**
+   * Stable page identity declared by `PageLayout` (`home`, `article.single`,
+   * …). Omitted on pages that do not declare a route alias.
+   */
+  routeAlias?: RouteAlias;
   locale: string;
   source: TelemetrySource;
   props: TelemetryEventPropsMap[TName];

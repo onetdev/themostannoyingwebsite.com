@@ -68,6 +68,7 @@ export const eventPresets: EventPreset[] = [
       timestamp: Date.now(),
       sessionId: 'debug',
       route: '/en/',
+      routeAlias: 'home',
       locale: 'en',
       source: 'explicit',
       props: { slot: 'button', tag: 'button' },
