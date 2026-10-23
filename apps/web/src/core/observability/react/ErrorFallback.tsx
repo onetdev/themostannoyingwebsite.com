@@ -168,6 +168,7 @@ export function ErrorFallback({
       className={`flex flex-col items-center justify-center text-center ${config.container} ${className ?? ''}`}
       role="alert"
       aria-live="assertive"
+      data-track-section="error:fallback"
     >
       {renderIcon()}
 
@@ -194,6 +195,7 @@ export function ErrorFallback({
               type="button"
               variant="default"
               size={config.buttonSize}
+              data-track="error:retry"
               onClick={onRetry}
             >
               {resolvedRetryLabel}
@@ -206,6 +208,7 @@ export function ErrorFallback({
               nativeButton={false}
               variant="outline"
               size={config.buttonSize}
+              data-track="error:home"
             >
               {resolvedHomeLabel}
             </Button>

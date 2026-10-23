@@ -57,7 +57,7 @@ export function AchievementList() {
   const hasAnyAchievements = Object.keys(achievements).length > 0;
 
   return (
-    <div className="space-y-12">
+    <div className="space-y-12" data-track-section="achievements:list">
       <div className="flex justify-center">
         <ToggleGroup
           className="bg-muted rounded-lg p-1"
