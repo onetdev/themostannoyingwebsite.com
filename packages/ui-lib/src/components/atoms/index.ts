@@ -18,6 +18,7 @@ export * from './Marker';
 export * from './Message';
 export * from './MessageScroller';
 export * from './PageHeadline';
+export * from './Pagination';
 export * from './PasswordStrengthBar';
 export * from './Popover';
 export * from './Progress';
