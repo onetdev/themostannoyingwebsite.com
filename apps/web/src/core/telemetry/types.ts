@@ -12,6 +12,7 @@
  */
 
 import type { RouteAlias } from '@/schemas/route-alias';
+import type { TelemetrySection } from './catalog';
 
 export type TelemetryCategory =
   | 'nav'
@@ -43,8 +44,6 @@ export type LinkKind =
   | 'tel'
   | 'other';
 
-export type FormFailureReason = 'validation' | 'network' | 'server';
-
 export type WebVitalName = 'TTFB' | 'FCP' | 'LCP' | 'INP' | 'CLS';
 
 export type WebVitalRating = 'good' | 'needs-improvement' | 'poor';
@@ -55,14 +54,11 @@ export interface TelemetryEventPropsMap {
     /** Locale-relative pathname (the envelope carries the localized path). */
     route: string;
   };
-  /** Alias-based visit reported by `ReportRouteVisit` (e.g. `home`, `debug`). */
-  'nav.route-alias': { alias: string };
-  'nav.page-leave': { path: string };
   'nav.link-click': {
     kind: LinkKind;
     /** Omitted for `mailto:`/`tel:`, whose path would carry the address. */
     path?: string;
-    section?: string;
+    section?: TelemetrySection;
     slot?: string;
     /** Semantic label from `data-track` (e.g. `navigation:toc`). */
     trackKey?: string;
@@ -76,24 +72,24 @@ export interface TelemetryEventPropsMap {
     locale: string;
     /** Locale that was active before the switch. */
     from?: string;
-    section?: string;
+    section?: TelemetrySection;
   };
   'nav.search-submit': { queryLength: number };
 
   // Impressions
+  /** Emitted once an annotated element has been visible for 500 ms. */
   'impression.element': {
     key: string;
-    section?: string;
+    section?: TelemetrySection;
     index?: number;
     ratio: number;
-    visibleMs: number;
   };
 
   // UI interactions
   'ui.click': {
     slot: string;
     tag: string;
-    section?: string;
+    section?: TelemetrySection;
     variant?: string;
     role?: string;
     /** Semantic label from `data-track` (e.g. `donation:tier`). */
@@ -109,12 +105,12 @@ export interface TelemetryEventPropsMap {
     /** Accessible label (`data-track-label` > `aria-label` > `title`). */
     label?: string;
   };
-  'ui.dialog-open': { name: string; section?: string };
-  'ui.dialog-close': { name: string; section?: string };
+  'ui.dialog-open': { name: string; section?: TelemetrySection };
+  'ui.dialog-close': { name: string; section?: TelemetrySection };
   'ui.toggle': {
     control: string;
     checked: boolean;
-    section?: string;
+    section?: TelemetrySection;
     source?: string;
   };
   'ui.select': {
@@ -125,24 +121,27 @@ export interface TelemetryEventPropsMap {
     optionValue?: string;
     /** Post-update pressed/checked state for multi-select controls. */
     checked?: boolean;
-    section?: string;
+    section?: TelemetrySection;
   };
   /** A select popup was opened, e.g. the language menu. */
-  'ui.select-open': { control: string; section?: string };
+  'ui.select-open': { control: string; section?: TelemetrySection };
   /** A range input changed. `valueBucket` is the filled range in 10 % steps. */
-  'ui.slider': { control: string; valueBucket: number; section?: string };
+  'ui.slider': {
+    control: string;
+    valueBucket: number;
+    section?: TelemetrySection;
+  };
   'ui.modal-dismiss': Record<string, never>;
   'ui.copy': Record<string, never>;
-  'ui.share': { channel: 'native' | 'modal'; surface?: string };
+  'ui.share': { channel: 'native' | 'modal'; surface?: TelemetrySection };
 
   // Forms & inputs
   'form.start': { form: string; fieldCount: number };
   'form.submit': { form: string; fieldCount: number };
   'form.submit-failed': {
     form: string;
-    reason: FormFailureReason;
+    /** Comma-joined field names, capped by the capture layer. */
     invalidFields?: string;
-    code?: string;
   };
   'form.abandoned': { form: string; fieldCount: number; filledFields: number };
   'input.change': {
@@ -151,15 +150,14 @@ export interface TelemetryEventPropsMap {
     hasValue: boolean;
     lengthBucket: string;
     form?: string;
-    section?: string;
+    section?: TelemetrySection;
   };
-  'input.validation-failed': { field: string; code: string; form?: string };
+  'input.validation-failed': { field: string; form?: string };
 
   // Errors
   'error.unhandled': {
     message: string;
     source: string;
-    route: string;
     line?: number;
     column?: number;
   };
@@ -184,7 +182,7 @@ export interface TelemetryEventPropsMap {
     state: 'visible' | 'hidden';
     visibleMs: number;
   };
-  'session.scroll-depth': { pct: number; route: string };
+  'session.scroll-depth': { pct: number };
   'session.end': {
     durationMs: number;
     interactionCount: number;

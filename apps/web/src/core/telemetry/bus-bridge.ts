@@ -2,7 +2,6 @@ import { useCallback } from 'react';
 import { useAllEvents } from '@/core/events/react/useAllEvents';
 import { trackDynamic } from './index';
 import { isTrackingSuppressed } from './react/capture';
-import { safePath } from './redact';
 import type { TelemetryEventName, TelemetryProps } from './types';
 
 interface BridgeTarget {
@@ -14,20 +13,16 @@ interface BridgeTarget {
  * Everything the app already announces on its event bus, mapped onto the
  * telemetry catalog. Bridging here means features stay untouched: any existing
  * or future `AppEvents` emission is tracked as soon as it is added below.
+ *
+ * Route-level events (`navigation:changed`, `route:visit`) are intentionally not
+ * bridged: page identity is already on every envelope (`route` + `routeAlias`),
+ * and `nav.route-view` is emitted per route by the interaction hook.
  */
 type BridgeSource = Omit<AppEvents, 'telemetry:event'>;
 
-export const EVENT_BRIDGE: {
-  [K in keyof BridgeSource]: (data: BridgeSource[K]) => BridgeTarget | null;
-} = {
-  'navigation:changed': (data) => ({
-    name: 'nav.page-leave',
-    props: { path: safePath(data.path) },
-  }),
-  'route:visit': (data) => ({
-    name: 'nav.route-alias',
-    props: { alias: String(data.route) },
-  }),
+export const EVENT_BRIDGE: Partial<{
+  [K in keyof BridgeSource]: (data: BridgeSource[K]) => BridgeTarget;
+}> = {
   'global-text:copied': () => ({ name: 'ui.copy', props: {} }),
   'exit-prompt:shown': () => ({
     name: 'disruption.exit-prompt',
@@ -102,14 +97,12 @@ export function useTelemetryBusBridge(): void {
         return;
       }
 
-      const mapper = EVENT_BRIDGE[name] as
-        | ((payload: never) => BridgeTarget | null)
-        | undefined;
-      const target = mapper?.(data as never);
-      if (!target) {
+      const mapper = EVENT_BRIDGE[name];
+      if (!mapper) {
         return;
       }
 
+      const target = mapper(data as never);
       trackDynamic(target.name, target.props, { source: 'bridge' });
     }, []),
   );

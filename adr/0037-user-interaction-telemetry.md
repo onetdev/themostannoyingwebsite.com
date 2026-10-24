@@ -32,7 +32,7 @@ but it must not fingerprint, persist, or collect content.
 ## Decision
 
 1.  **One typed catalog is the contract.** `src/core/telemetry/types.ts` declares a
-    `TelemetryEventPropsMap` of ~45 event names grouped by namespace (`nav.*`,
+    `TelemetryEventPropsMap` of ~44 event names grouped by namespace (`nav.*`,
     `impression.*`, `ui.*`, `form.*`, `input.*`, `error.*`, `session.*`, `perf.*`,
     `disruption.*`, `commerce.*`, `marketing.*`, `achievement.*`, `support.*`,
     `admin.*`). Emitting an undeclared event is a compile error, and every event
@@ -43,9 +43,11 @@ but it must not fingerprint, persist, or collect content.
     explicit `track()` call shares one stable value without effect-ordering races.
 
     Surfaces are typed too: `catalog.ts` holds the `TELEMETRY_SECTIONS` registry
-    behind `data-track-section` and the `section` props of shared actions, so a
-    typo cannot silently orphan a funnel. Semantic option identities travel as
-    `optionValue`, never `value` — the redactor drops `value` unconditionally.
+    behind `data-track-section` and the `section` props of shared actions, first
+    as a compile-time union and then as a runtime guard, so neither a typo nor a
+    stale attribute can silently orphan a funnel. Semantic option identities
+    travel as `optionValue`, never `value` — the redactor drops `value`
+    unconditionally.
 
 2.  **Capture is generic first, semantic second.** A single `TelemetryProvider`
     mounted in `ClientRootProviderContainer` installs:
@@ -55,13 +57,21 @@ but it must not fingerprint, persist, or collect content.
     - one `IntersectionObserver` for `[data-track-impression]` nodes (once per key
       per route). An element counts as visible at ≥50 % of its own area for
       500 ms, or — for elements taller than the viewport, such as article bodies
-      — once it covers half of the viewport;
+      — once it covers half of the viewport, at which point the impression is
+      emitted with that ratio;
     - `useReportWebVitals` from `next/web-vitals` for TTFB/FCP/LCP/INP/CLS,
       including soft navigations;
     - `error`/`unhandledrejection` listeners for faults that never reach a boundary.
 
-    A bus bridge maps all 17 existing `AppEvents` onto the catalog, so features
-    needed no instrumentation at all.
+    Page identity is locale-aware: `locale + pathname` re-arms page views, dedupe
+    and impressions, because a language switch keeps the locale-relative pathname.
+
+    A bus bridge maps the 15 behavioural `AppEvents` onto the catalog, so features
+    needed no instrumentation at all. Route-level bus events (`navigation:changed`,
+    `route:visit`) are deliberately not bridged: `nav.route-view` reports every
+    route and the envelope already carries `routeAlias`. Base UI `Select` popups
+    are portaled options that fire no `change`, so an annotated `SelectContent`
+    emits `ui.select` from the delegated click instead.
 
 3.  **No personal data, ever.** The tracker never reads input values (only type,
     field name, presence, and a coarse length bucket), never stores URLs with query
@@ -79,16 +89,19 @@ but it must not fingerprint, persist, or collect content.
     prints every event to a tslog sub-logger (`[interaction] …`), which is the local
     review surface.
 
-    There is deliberately **no network transport yet**. A first-party collector
-    needs an ingest endpoint, a consent grant, retention, and a privacy-policy
-    update in every locale; shipping the browser half alone would leave a silent
-    dead end. See "Transport" below.
+    Sentry breadcrumbs are the only data that leaves the browser today; they travel
+    with the next captured error. There is deliberately **no first-party network
+    transport yet**: a collector needs an ingest endpoint, a consent grant,
+    retention, and a privacy-policy update in every locale. Shipping the browser
+    half alone would leave a silent dead end. See "Transport" below.
 
 5.  **High-volume data is sampled and deduped.** Web vitals sample at 25 % in
     production; duplicate UI events inside 300 ms (inputs: 500 ms) are dropped; a
-    bounded 200-event in-memory history backs `window.maw.tracker`. Every capture
-    path — delegation, impressions, vitals and the bus bridge — is suppressed on
-    the `/debug` route to avoid feedback loops.
+    bounded 200-event in-memory history backs `window.maw.tracker`. Delegation,
+    impressions, vitals and the bus bridge are suppressed on the `/debug` route to
+    avoid feedback loops; explicit `track()` calls from shared modules are not.
+    Form abandonment is reported while the form is still connected (page hide) or
+    from the route-level book, so a soft navigation does not lose it.
 
 6.  **Vercel Analytics stays until a collector exists.** The tracker already
     produces universal `nav.route-view` events, so page views and vitals are
@@ -122,9 +135,10 @@ every locale.
   `data-track-impression` / `data-track-section`, or emit an existing app event);
   only genuinely new semantics require adding a catalog entry and calling `track`.
   A new surface must also join `TELEMETRY_SECTIONS`, which the section drift test
-  enforces.
-- Nothing is retained: the layer is a local review surface plus Sentry breadcrumbs
-  until the transport ADR lands. Do not remove `@vercel/analytics` before then.
+  enforces for both the attribute and the prop path.
+- Nothing is retained beyond Sentry breadcrumbs: the layer is a local review
+  surface until the transport ADR lands. Do not remove `@vercel/analytics` before
+  then.
 - Enabling a transport will require a privacy-policy update in every locale,
   because that is when data starts leaving the browser beyond Sentry.
 - The layer deliberately couples to Next's built-in `web-vitals` and the Base UI

@@ -1,3 +1,4 @@
+import { isTelemetrySection, type TelemetrySection } from '../catalog';
 import type { LinkKind } from '../types';
 
 export const TRACK_IGNORE_SELECTOR = '[data-track-ignore]';
@@ -7,6 +8,16 @@ const SEGMENTED_ITEM_SELECTOR =
   '[data-slot="toggle-group-item"],[data-slot="radio-group-item"],[role="radio"]';
 const SEGMENTED_GROUP_SELECTOR =
   '[data-slot="toggle-group"],[data-slot="radio-group"],[role="radiogroup"]';
+
+/**
+ * Base UI `Select` renders its options into a portal as `role="option"` nodes,
+ * so option picks never reach the click or change handlers on their own. A
+ * `SelectContent` opts in with `data-track-control` and this selector picks the
+ * chosen item back up.
+ */
+export const SELECT_ITEM_SELECTOR = '[data-slot="select-item"],[role="option"]';
+const SELECT_POPUP_SELECTOR = '[data-slot="select-content"]';
+const SELECT_LISTBOX_SELECTOR = '[role="listbox"]';
 
 export const ACTION_SELECTOR = [
   '[data-track]',
@@ -67,12 +78,12 @@ export function resolveActionElement(target: Element): Element | null {
   return target.closest(ACTION_SELECTOR);
 }
 
-export function resolveSection(element: Element): string | undefined {
-  return (
-    element
-      .closest(TRACK_SECTION_SELECTOR)
-      ?.getAttribute('data-track-section') ?? undefined
-  );
+export function resolveSection(element: Element): TelemetrySection | undefined {
+  const section = element
+    .closest(TRACK_SECTION_SELECTOR)
+    ?.getAttribute('data-track-section');
+
+  return section && isTelemetrySection(section) ? section : undefined;
 }
 
 /**
@@ -87,7 +98,9 @@ export function findUnscopedActions(root: ParentNode = document): Element[] {
   return Array.from(root.querySelectorAll(INTERACTIVE_SELECTOR)).filter(
     (element) =>
       !element.closest(TRACK_IGNORE_SELECTOR) &&
-      !element.closest(TRACK_SECTION_SELECTOR) &&
+      // Uses the registry guard, so an unknown `data-track-section` counts as
+      // unscoped instead of silently passing the audit.
+      resolveSection(element) === undefined &&
       element.getAttribute('aria-hidden') !== 'true',
   );
 }
@@ -139,7 +152,9 @@ export function resolveControlName(element: Element): string {
   );
 }
 
-export function isTextInput(element: Element): element is HTMLElement {
+export function isTextInput(
+  element: Element,
+): element is HTMLInputElement | HTMLTextAreaElement {
   if (element instanceof HTMLTextAreaElement) {
     return true;
   }
@@ -306,27 +321,19 @@ export function countFilledFields(form: HTMLFormElement): number {
   return Array.from(form.elements).filter(isFilledControl).length;
 }
 
-export interface InvalidField {
-  field: string;
-  code: string;
-}
-
 /**
  * Reads validation state through `aria-invalid`, which Base UI / react-hook-form
  * already set on invalid controls. This keeps form tracking free of per-form
  * wiring.
  */
-export function collectInvalidFields(form: HTMLFormElement): InvalidField[] {
-  const invalid = Array.from(
+export function collectInvalidFields(form: HTMLFormElement): string[] {
+  return Array.from(
     form.querySelectorAll<HTMLElement>(
       '[aria-invalid="true"],[data-invalid="true"]',
     ),
-  ).slice(0, MAX_REPORTED_FIELDS);
-
-  return invalid.map((element, index) => ({
-    field: resolveFieldName(element, index),
-    code: element.getAttribute('data-error-code') || 'invalid',
-  }));
+  )
+    .slice(0, MAX_REPORTED_FIELDS)
+    .map((element, index) => resolveFieldName(element, index));
 }
 
 export function resolveResourceKind(tagName: string): string {
@@ -460,4 +467,50 @@ export function readPressedState(item: Element): boolean {
     item.getAttribute('data-pressed') !== null ||
     item.getAttribute('data-state') === 'on'
   );
+}
+
+export interface SelectSelection {
+  popup: Element;
+  control: string;
+  index: number;
+  count: number;
+  value?: string;
+}
+
+/**
+ * Resolves a picked option in a Base UI `Select` popup. Only annotated popups
+ * (`data-track-control`) are captured: the language switcher keeps emitting its
+ * explicit locale event instead of a generic `ui.select`.
+ */
+export function resolveSelectSelection(
+  target: Element,
+): SelectSelection | null {
+  const item = target.closest(SELECT_ITEM_SELECTOR);
+  if (!item) {
+    return null;
+  }
+
+  // Prefer the annotated popup; the listbox inside it matches only as a
+  // fallback and never carries the control name.
+  const popup =
+    item.closest(SELECT_POPUP_SELECTOR) ??
+    item.closest(SELECT_LISTBOX_SELECTOR);
+  const control = popup?.getAttribute('data-track-control');
+  if (!popup || !control) {
+    return null;
+  }
+
+  const items = Array.from(popup.querySelectorAll(SELECT_ITEM_SELECTOR));
+  const index = items.indexOf(item);
+  if (index < 0) {
+    return null;
+  }
+
+  return {
+    popup,
+    control,
+    index,
+    count: items.length,
+    value: item.getAttribute('data-value') ?? undefined,
+  };
 }

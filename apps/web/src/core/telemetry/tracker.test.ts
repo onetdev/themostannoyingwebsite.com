@@ -45,7 +45,7 @@ describe('TelemetryTracker', () => {
     tracker.track('ui.click', {
       slot: 'button',
       tag: 'button',
-      section: 'article',
+      section: 'content:article',
       variant: 'default',
     });
 
@@ -62,7 +62,7 @@ describe('TelemetryTracker', () => {
       props: {
         slot: 'button',
         tag: 'button',
-        section: 'article',
+        section: 'content:article',
         variant: 'default',
       },
     });
@@ -118,7 +118,6 @@ describe('TelemetryTracker', () => {
     tracker.trackDynamic('error.unhandled', {
       message: 'Failed for user@example.com from https://x.test/?t=1',
       source: '/app.js',
-      route: '/en/',
       password: 'hunter2',
       nested: { secret: true },
     });
@@ -126,7 +125,6 @@ describe('TelemetryTracker', () => {
     expect(sink.events[0]?.props).toEqual({
       message: 'Failed for [email] from [url]',
       source: '/app.js',
-      route: '/en/',
     });
   });
 
@@ -155,39 +153,17 @@ describe('TelemetryTracker', () => {
     expect(sink.events[1]?.props).toEqual({ slot: 'button', tag: 'button' });
   });
 
-  it('drops duplicate ui clicks inside the dedupe window', () => {
+  it('drops duplicate ui clicks until the route changes', () => {
     const sink = createMemorySink();
     const tracker = createTracker({ sinks: [sink] });
 
     tracker.track('ui.click', { slot: 'button', tag: 'button' });
     tracker.track('ui.click', { slot: 'button', tag: 'button' });
-
-    expect(sink.events).toHaveLength(1);
-  });
-
-  it('emits at most once per key until the route changes', () => {
-    const sink = createMemorySink();
-    const tracker = createTracker({ sinks: [sink] });
-
-    tracker.trackOnce('hero', 'impression.element', {
-      key: 'hero',
-      ratio: 1,
-      visibleMs: 500,
-    });
-    tracker.trackOnce('hero', 'impression.element', {
-      key: 'hero',
-      ratio: 1,
-      visibleMs: 500,
-    });
 
     expect(sink.events).toHaveLength(1);
 
     tracker.notifyRouteChange();
-    tracker.trackOnce('hero', 'impression.element', {
-      key: 'hero',
-      ratio: 1,
-      visibleMs: 500,
-    });
+    tracker.track('ui.click', { slot: 'button', tag: 'button' });
 
     expect(sink.events).toHaveLength(2);
   });
@@ -207,7 +183,6 @@ describe('TelemetryTracker', () => {
     tracker.track('error.unhandled', {
       message: 'boom',
       source: '/app.js',
-      route: '/en/',
     });
 
     expect(sink.events.map((event) => event.name)).toEqual(['error.unhandled']);
@@ -241,11 +216,11 @@ describe('TelemetryTracker', () => {
       });
       tracker.track('ui.copy', {});
 
-      expect(tracker.getSessionId().length).toBeGreaterThan(0);
       const event = tracker
         .getHistory()
         .find((item) => item.name === 'ui.copy');
       expect(event?.id.length).toBeGreaterThan(0);
+      expect(event?.sessionId.length).toBeGreaterThan(0);
     } finally {
       randomSpy.mockRestore();
     }

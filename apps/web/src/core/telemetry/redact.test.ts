@@ -9,6 +9,15 @@ describe('redact', () => {
     ).toBe('Login failed for [email] via [url] with password=[redacted]');
   });
 
+  it('scrubs phone numbers without mangling date-like identifiers', () => {
+    expect(scrubMessage('Call +36 30 123 4567 now')).toBe('Call [number] now');
+    expect(scrubMessage('Call 555-123-4567 now')).toBe('Call [number] now');
+    // Slugs and ids must survive: they are identities, not phone numbers.
+    expect(scrubMessage('article-2024-10-23')).toBe('article-2024-10-23');
+    expect(scrubMessage('2024-10-23')).toBe('2024-10-23');
+    expect(scrubMessage('version-1234-5678')).toBe('version-1234-5678');
+  });
+
   it('reduces urls and paths to their pathname', () => {
     expect(safePath('https://site.test/en/search/?q=secret#x')).toBe(
       '/en/search/',

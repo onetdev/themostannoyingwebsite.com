@@ -14,6 +14,10 @@ jest.mock('next/web-vitals', () => ({
   useReportWebVitals: jest.fn(),
 }));
 
+jest.mock('next-intl', () => ({
+  useLocale: () => 'en',
+}));
+
 jest.mock('@/core/i18n/navigation', () => ({
   usePathname: () => '/',
 }));
@@ -43,7 +47,7 @@ describe('TelemetryProvider', () => {
       .find((item) => item.name === 'ui.click');
     expect(event).toBeDefined();
     expect(event?.route).toBe('/en/articles/test/');
-    expect(event?.sessionId).toBe(telemetry.getSessionId());
+    expect(event?.sessionId).toEqual(expect.any(String));
   });
 
   it('exposes the local debugging handle', () => {

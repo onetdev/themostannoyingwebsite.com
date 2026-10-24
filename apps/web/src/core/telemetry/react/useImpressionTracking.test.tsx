@@ -5,6 +5,10 @@ import { act, render } from '@testing-library/react';
 import { track } from '@/core/telemetry';
 import { useImpressionTracking } from './useImpressionTracking';
 
+jest.mock('next-intl', () => ({
+  useLocale: () => 'en',
+}));
+
 jest.mock('@/core/i18n/navigation', () => ({
   usePathname: () => '/',
 }));
@@ -100,7 +104,6 @@ describe('useImpressionTracking', () => {
       section: 'content:article',
       index: 0,
       ratio: 0.8,
-      visibleMs: 500,
     });
 
     emitIntersection(target, 0.9);

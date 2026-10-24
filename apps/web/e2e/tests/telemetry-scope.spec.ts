@@ -227,4 +227,38 @@ test.describe('telemetry events', () => {
 
     await expect.poll(hasLogoClick).toBe(true);
   });
+
+  test('records a Base UI select pick', async ({ page }) => {
+    await page.goto('/en/user/signup');
+
+    await page.getByRole('combobox', { name: 'Gender' }).click();
+    await page.getByRole('option', { name: 'Male', exact: true }).click();
+
+    const hasGenderPick = () =>
+      page.evaluate(() => {
+        const history = (
+          window as unknown as {
+            maw?: {
+              tracker?: {
+                history: () => Array<{
+                  name: string;
+                  props?: Record<string, unknown>;
+                }>;
+              };
+            };
+          }
+        ).maw?.tracker?.history();
+
+        return Boolean(
+          history?.some(
+            (event) =>
+              event.name === 'ui.select' &&
+              event.props?.control === 'auth:gender' &&
+              event.props?.optionValue === 'male',
+          ),
+        );
+      });
+
+    await expect.poll(hasGenderPick).toBe(true);
+  });
 });

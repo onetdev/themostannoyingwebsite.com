@@ -21,7 +21,7 @@ jest.mock('@/core/events/react/useAllEvents', () => {
   };
 });
 
-type BridgeMapper = (data: unknown) => { name: string } | null;
+type BridgeMapper = (data: unknown) => { name: string };
 
 function map(eventName: keyof typeof EVENT_BRIDGE, payload: unknown) {
   const mapper = EVENT_BRIDGE[eventName] as unknown as BridgeMapper;
@@ -29,13 +29,13 @@ function map(eventName: keyof typeof EVENT_BRIDGE, payload: unknown) {
 }
 
 describe('telemetry bus bridge', () => {
-  it('covers every non-telemetry app event', () => {
-    expect(Object.keys(EVENT_BRIDGE)).toHaveLength(17);
+  it('maps the behavioural app events that are not already on the envelope', () => {
+    expect(Object.keys(EVENT_BRIDGE)).toHaveLength(15);
+    expect(EVENT_BRIDGE['navigation:changed']).toBeUndefined();
+    expect(EVENT_BRIDGE['route:visit']).toBeUndefined();
   });
 
   it.each([
-    ['navigation:changed', { path: '/en/articles/?q=1' }, 'nav.page-leave'],
-    ['route:visit', { route: 'home' }, 'nav.route-alias'],
     ['global-text:copied', undefined, 'ui.copy'],
     ['exit-prompt:shown', undefined, 'disruption.exit-prompt'],
     ['ui:modal:dismiss-signaled', undefined, 'ui.modal-dismiss'],
@@ -86,7 +86,6 @@ describe('telemetry bus bridge', () => {
     });
   });
 });
-
 describe('useTelemetryBusBridge', () => {
   type Handler = (event: { name: string; data?: unknown }) => void;
 

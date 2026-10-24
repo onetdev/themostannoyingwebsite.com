@@ -1,8 +1,10 @@
 'use client';
 
+import { useLocale } from 'next-intl';
 import { useEffect } from 'react';
 import { usePathname } from '@/core/i18n/navigation';
-import { telemetry, track, trackOnce } from '..';
+import { telemetry, track } from '..';
+import type { TelemetrySection } from '../catalog';
 import { bucketLength, safePath, scrubMessage } from '../redact';
 import {
   collectInvalidFields,
@@ -25,6 +27,7 @@ import {
   resolveResourceKind,
   resolveSection,
   resolveSegmentedSelection,
+  resolveSelectSelection,
   type SegmentedSelection,
   TRACK_IGNORE_SELECTOR,
 } from './capture';
@@ -67,14 +70,14 @@ function startSession(): void {
   hasStartedSession = true;
   sessionStartedAt = Date.now();
 
-  trackOnce('session:start', 'session.start', {
+  track('session.start', {
     entryRoute: safePath(window.location.pathname),
     referrerKind: readReferrerKind(document.referrer, window.location.origin),
     viewport: readViewportBucket(window.innerWidth),
   });
 }
 
-function trackSelect(target: Element, section?: string): boolean {
+function trackSelect(target: Element, section?: TelemetrySection): boolean {
   if (!(target instanceof HTMLSelectElement)) {
     return false;
   }
@@ -87,7 +90,10 @@ function trackSelect(target: Element, section?: string): boolean {
   return true;
 }
 
-function trackCheckboxToggle(target: Element, section?: string): boolean {
+function trackCheckboxToggle(
+  target: Element,
+  section?: TelemetrySection,
+): boolean {
   if (!(target instanceof HTMLInputElement)) {
     return false;
   }
@@ -109,7 +115,7 @@ function trackCheckboxToggle(target: Element, section?: string): boolean {
   return true;
 }
 
-function trackRoleToggle(target: Element, section?: string): boolean {
+function trackRoleToggle(target: Element, section?: TelemetrySection): boolean {
   if (target instanceof HTMLInputElement) {
     return false;
   }
@@ -128,7 +134,7 @@ function trackRoleToggle(target: Element, section?: string): boolean {
   return true;
 }
 
-function trackRange(target: Element, section?: string): boolean {
+function trackRange(target: Element, section?: TelemetrySection): boolean {
   if (!(target instanceof HTMLInputElement) || target.type !== 'range') {
     return false;
   }
@@ -145,7 +151,7 @@ function trackRange(target: Element, section?: string): boolean {
 function trackDialogAction(
   slot: string | undefined,
   trackKey: string | undefined,
-  section: string | undefined,
+  section: TelemetrySection | undefined,
 ): boolean {
   if (slot === 'dialog-trigger' || slot === 'sheet-trigger') {
     track('ui.dialog-open', { name: trackKey ?? slot, section });
@@ -161,7 +167,7 @@ function trackDialogAction(
 function trackLinkAction(
   action: Element,
   slot: string | undefined,
-  section: string | undefined,
+  section: TelemetrySection | undefined,
 ): boolean {
   const href = action.getAttribute('href');
   if (action.tagName !== 'A' || !href) {
@@ -212,6 +218,26 @@ function trackSegmentedClick(target: Element): boolean {
   return true;
 }
 
+/**
+ * A picked option in an annotated Base UI `Select` popup. These never fire a
+ * native `change`, so the click is the only signal.
+ */
+function trackSelectClick(target: Element): boolean {
+  const selection = resolveSelectSelection(target);
+  if (!selection) {
+    return false;
+  }
+
+  track('ui.select', {
+    control: selection.control,
+    optionIndex: selection.index,
+    optionCount: selection.count,
+    optionValue: selection.value,
+    section: resolveSection(selection.popup),
+  });
+  return true;
+}
+
 function isDisabledAction(action: Element): boolean {
   return (
     action.matches('[disabled],[aria-disabled="true"]') ||
@@ -228,7 +254,7 @@ const warnedUnscopedActions = new WeakSet<Element>();
  */
 function warnUnscopedAction(
   action: Element,
-  section: string | undefined,
+  section: TelemetrySection | undefined,
 ): void {
   if (section || process.env.NODE_ENV !== 'development') {
     return;
@@ -243,33 +269,10 @@ function warnUnscopedAction(
   );
 }
 
-function handleClick(event: MouseEvent): void {
-  if (isTrackingSuppressed()) {
-    return;
-  }
-
-  const rawTarget = event.target;
-  if (!(rawTarget instanceof Element)) {
-    return;
-  }
-  if (rawTarget.closest(TRACK_IGNORE_SELECTOR)) {
-    return;
-  }
-
-  if (trackSegmentedClick(rawTarget)) {
-    return;
-  }
-
-  const action = resolveActionElement(rawTarget);
-  if (!action) {
-    return;
-  }
-  if (isDisabledAction(action)) {
-    return;
-  }
-
+function trackAction(action: Element): void {
   const section = resolveSection(action);
   warnUnscopedAction(action, section);
+
   const slot = action.getAttribute('data-slot') ?? undefined;
   const trackKey = action.getAttribute('data-track') ?? undefined;
 
@@ -291,6 +294,32 @@ function handleClick(event: MouseEvent): void {
     optionValue: action.getAttribute('data-value') ?? undefined,
     label: resolveActionLabel(action),
   });
+}
+
+function handleClick(event: MouseEvent): void {
+  if (isTrackingSuppressed()) {
+    return;
+  }
+
+  const rawTarget = event.target;
+  if (!(rawTarget instanceof Element)) {
+    return;
+  }
+  if (rawTarget.closest(TRACK_IGNORE_SELECTOR)) {
+    return;
+  }
+
+  // Options and segmented controls resolve to a group, not an action element.
+  if (trackSegmentedClick(rawTarget) || trackSelectClick(rawTarget)) {
+    return;
+  }
+
+  const action = resolveActionElement(rawTarget);
+  if (!action || isDisabledAction(action)) {
+    return;
+  }
+
+  trackAction(action);
 }
 
 function handleFocusIn(event: FocusEvent, session: CaptureSession): void {
@@ -339,13 +368,11 @@ function handleSubmit(event: Event, session: CaptureSession): void {
 
     track('form.submit-failed', {
       form: key,
-      reason: 'validation',
-      invalidFields: invalid.map((item) => item.field).join(','),
+      invalidFields: invalid.join(','),
     });
-    for (const item of invalid) {
+    for (const field of invalid) {
       track('input.validation-failed', {
-        field: item.field,
-        code: item.code,
+        field,
         form: key,
       });
     }
@@ -384,7 +411,7 @@ function handleFocusOut(event: FocusEvent): void {
     return;
   }
 
-  const value = (target as HTMLInputElement).value ?? '';
+  const value = target.value ?? '';
   track('input.change', {
     field: resolveFieldName(target),
     kind: target.getAttribute('type') ?? target.tagName.toLowerCase(),
@@ -409,7 +436,6 @@ function handleWindowError(event: ErrorEvent): void {
   track('error.unhandled', {
     message: scrubMessage(event.message || 'unknown'),
     source: safePath(event.filename || ''),
-    route: safePath(window.location.pathname),
     line: event.lineno,
     column: event.colno,
   });
@@ -437,7 +463,6 @@ function handleScroll(session: CaptureSession): void {
         session.reachedScrollThresholds.add(threshold);
         track('session.scroll-depth', {
           pct: threshold,
-          route: safePath(window.location.pathname),
         });
       }
     }
@@ -456,7 +481,17 @@ function handleVisibility(session: CaptureSession): void {
   session.visibleSince = Date.now();
 }
 
-function handlePageHide(): void {
+function handlePageHide(
+  event: PageTransitionEvent,
+  session: CaptureSession,
+): void {
+  // A bfcache-restored document keeps its session; ending it here would report
+  // a duration and an abandonment that never happened.
+  if (event.persisted) {
+    return;
+  }
+
+  flushAbandonedForms(session);
   track('session.end', {
     durationMs: Date.now() - sessionStartedAt,
     interactionCount: telemetry.getInteractionCount(),
@@ -465,16 +500,16 @@ function handlePageHide(): void {
   telemetry.flush();
 }
 
-function disposeSession(session: CaptureSession): void {
-  for (const timer of session.validationTimers) {
-    clearTimeout(timer);
-  }
-  session.validationTimers.clear();
-
+/**
+ * Forms still open when the page is left were never submitted. Their elements
+ * may already be detached by React, but the book still knows the field count.
+ */
+function flushAbandonedForms(session: CaptureSession): void {
   for (const [key, state] of session.formBook) {
-    if (state.submitted || !state.form.isConnected) {
+    if (state.submitted) {
       continue;
     }
+    state.submitted = true;
     track('form.abandoned', {
       form: key,
       fieldCount: state.fieldCount,
@@ -484,6 +519,15 @@ function disposeSession(session: CaptureSession): void {
   session.formBook.clear();
 }
 
+function disposeSession(session: CaptureSession): void {
+  for (const timer of session.validationTimers) {
+    clearTimeout(timer);
+  }
+  session.validationTimers.clear();
+
+  flushAbandonedForms(session);
+}
+
 /**
  * Installs one delegated listener set for the whole app. Every handler is
  * module-level and reads from a per-route `CaptureSession`, keeping the hook
@@ -491,7 +535,11 @@ function disposeSession(session: CaptureSession): void {
  */
 export function useInteractionTracking(): void {
   const pathname = usePathname();
+  const locale = useLocale();
 
+  // The locale is part of the page identity: switching language keeps the
+  // locale-relative pathname but is a new page view.
+  // biome-ignore lint/correctness/useExhaustiveDependencies: the locale intentionally re-runs the effect.
   useEffect(() => {
     telemetry.notifyRouteChange();
     if (isTrackingSuppressed()) {
@@ -510,6 +558,8 @@ export function useInteractionTracking(): void {
     const onSubmit = (event: Event) => handleSubmit(event, session);
     const onScroll = () => handleScroll(session);
     const onVisibility = () => handleVisibility(session);
+    const onPageHide = (event: PageTransitionEvent) =>
+      handlePageHide(event, session);
 
     document.addEventListener('click', onClick, true);
     document.addEventListener('focusin', onFocusIn, true);
@@ -520,7 +570,7 @@ export function useInteractionTracking(): void {
     window.addEventListener('unhandledrejection', handleRejection);
     window.addEventListener('scroll', onScroll, { passive: true });
     document.addEventListener('visibilitychange', onVisibility);
-    window.addEventListener('pagehide', handlePageHide);
+    window.addEventListener('pagehide', onPageHide);
 
     return () => {
       document.removeEventListener('click', onClick, true);
@@ -532,8 +582,8 @@ export function useInteractionTracking(): void {
       window.removeEventListener('unhandledrejection', handleRejection);
       window.removeEventListener('scroll', onScroll);
       document.removeEventListener('visibilitychange', onVisibility);
-      window.removeEventListener('pagehide', handlePageHide);
+      window.removeEventListener('pagehide', onPageHide);
       disposeSession(session);
     };
-  }, [pathname]);
+  }, [pathname, locale]);
 }

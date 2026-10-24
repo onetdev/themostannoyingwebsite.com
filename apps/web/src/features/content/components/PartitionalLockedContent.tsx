@@ -103,6 +103,7 @@ export function PartitionalLockedContent({
         <div
           className="mx-auto w-full max-w-screen-md pt-16"
           data-track-section="content:paywall"
+          data-track-impression="paywall:overlay"
         >
           <h3 className="mb-4">
             {t('content.paywall.overlay.title', {

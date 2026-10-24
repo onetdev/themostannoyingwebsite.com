@@ -161,7 +161,10 @@ export function PhoneNumberField({
                 >
                   <SelectValue />
                 </SelectTrigger>
-                <SelectContent>
+                <SelectContent
+                  data-track-control="auth:phone-country"
+                  data-track-section="auth:signup"
+                >
                   {phoneCountryOptions.map((option) => (
                     <SelectItem key={option.value} value={option.value}>
                       {option.label}

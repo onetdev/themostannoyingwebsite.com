@@ -21,10 +21,6 @@ const DEFAULT_HISTORY_SIZE = 200;
 export interface TrackOptions {
   source?: TelemetrySource;
   durationMs?: number;
-  /** Explicit key for `trackOnce`; defaults to the event name. */
-  onceKey?: string;
-  skipSampling?: boolean;
-  skipDedupe?: boolean;
 }
 
 let fallbackSequence = 0;
@@ -83,7 +79,7 @@ function readRouteAlias(): RouteAlias | undefined {
   }
 
   const alias = document
-    .querySelector('[data-route-alias]')
+    .querySelector('main[data-route-alias]')
     ?.getAttribute('data-route-alias');
   // `PageLayout` is the only writer and types the value as `RouteAlias`.
   return alias ? (alias as RouteAlias) : undefined;
@@ -106,7 +102,6 @@ export class TelemetryTracker {
   private readonly random: () => number;
   private readonly createId: () => string;
   private readonly sessionId: string;
-  private readonly onceKeys = new Set<string>();
   private readonly dedupeTimestamps = new Map<string, number>();
 
   private enabled: boolean;
@@ -143,23 +138,7 @@ export class TelemetryTracker {
     options: TrackOptions = {},
   ): InteractionEvent | undefined => this.emitEvent(name, props, options);
 
-  /** Emits at most once per key until the next route change. */
-  public trackOnce = <TName extends TelemetryEventName>(
-    onceKey: string,
-    name: TName,
-    props: TelemetryEventPropsMap[TName],
-    options: TrackOptions = {},
-  ): InteractionEvent | undefined => {
-    if (this.onceKeys.has(onceKey)) {
-      return undefined;
-    }
-    this.onceKeys.add(onceKey);
-    return this.emitEvent(name, props as TelemetryProps, options);
-  };
-
   public getHistory = (): readonly InteractionEvent[] => [...this.history];
-
-  public getSessionId = (): string => this.sessionId;
 
   public getInteractionCount = (): number => this.interactionCount;
 
@@ -169,9 +148,8 @@ export class TelemetryTracker {
 
   public isEnabled = (): boolean => this.enabled;
 
-  /** Clears per-route dedupe/once state (called on navigation). */
+  /** Clears dedupe state so the next route can report the same events again. */
   public notifyRouteChange = (): void => {
-    this.onceKeys.clear();
     this.dedupeTimestamps.clear();
   };
 
@@ -181,10 +159,10 @@ export class TelemetryTracker {
     }
   };
 
+  /** Test/debug helper: clears history and per-route state, keeps the session. */
   public reset = (): void => {
     this.history.length = 0;
     this.interactionCount = 0;
-    this.onceKeys.clear();
     this.dedupeTimestamps.clear();
   };
 
@@ -203,18 +181,16 @@ export class TelemetryTracker {
     const category = getCategory(name);
     const sanitized = sanitizeProps(props);
 
-    if (!options.skipSampling && !this.passesSampling(category)) {
+    if (!this.passesSampling(category)) {
       return undefined;
     }
 
     const route = readRoute();
     const routeAlias = readRouteAlias();
     const timestamp = this.now();
+    const dedupeKey = `${name}|${route}|${JSON.stringify(sanitized)}`;
 
-    if (
-      !options.skipDedupe &&
-      this.isDuplicate(category, name, sanitized, timestamp)
-    ) {
+    if (this.isDuplicate(category, dedupeKey, timestamp)) {
       return undefined;
     }
 
@@ -254,8 +230,7 @@ export class TelemetryTracker {
 
   private isDuplicate = (
     category: TelemetryCategory,
-    name: TelemetryEventName,
-    sanitizedProps: TelemetryProps,
+    key: string,
     timestamp: number,
   ): boolean => {
     const windowMs = this.dedupeWindows[category];
@@ -263,7 +238,6 @@ export class TelemetryTracker {
       return false;
     }
 
-    const key = `${name}|${readRoute()}|${JSON.stringify(sanitizedProps)}`;
     const previous = this.dedupeTimestamps.get(key);
 
     if (previous !== undefined && timestamp - previous < windowMs) {

@@ -1,5 +1,6 @@
 'use client';
 
+import { useLocale } from 'next-intl';
 import { useEffect } from 'react';
 import { usePathname } from '@/core/i18n/navigation';
 import { track } from '..';
@@ -17,7 +18,6 @@ const RESCAN_DEBOUNCE_MS = 250;
 
 interface Dwell {
   timer: ReturnType<typeof setTimeout>;
-  startedAt: number;
   /** Latest measured intersection ratio while dwelling. */
   ratio: number;
   /** Ratio this element has to reach, scaled down for very tall elements. */
@@ -30,18 +30,12 @@ interface DwellContext {
   clearDwell: (element: Element) => void;
 }
 
-function emitImpression(
-  element: Element,
-  key: string,
-  ratio: number,
-  visibleMs: number,
-): void {
+function emitImpression(element: Element, key: string, ratio: number): void {
   track('impression.element', {
     key,
     section: resolveSection(element),
     index: resolveImpressionIndex(element),
     ratio,
-    visibleMs,
   });
 }
 
@@ -88,17 +82,11 @@ function startDwell(
     }
 
     context.seen.add(key);
-    emitImpression(
-      element,
-      key,
-      Number(current.ratio.toFixed(2)),
-      Date.now() - current.startedAt,
-    );
+    emitImpression(element, key, Number(current.ratio.toFixed(2)));
   }, MIN_VISIBLE_MS);
 
   context.dwells.set(element, {
     timer,
-    startedAt: Date.now(),
     ratio: entry.intersectionRatio,
     required,
   });
@@ -129,8 +117,9 @@ function handleEntries(
  */
 export function useImpressionTracking(): void {
   const pathname = usePathname();
+  const locale = useLocale();
 
-  // Re-arms per route: `seen` is route-scoped by design.
+  // Re-arms per route (and per locale): `seen` is route-scoped by design.
   // biome-ignore lint/correctness/useExhaustiveDependencies: re-running the effect is the point.
   useEffect(() => {
     if (typeof IntersectionObserver === 'undefined' || isTrackingSuppressed()) {
@@ -170,12 +159,18 @@ export function useImpressionTracking(): void {
     scan();
 
     let rescanTimer: ReturnType<typeof setTimeout> | undefined;
-    const mutations = new MutationObserver(() => {
+    // Coalesce bursts without letting a continuously mutating page starve the
+    // scan: the timer is only scheduled when none is pending.
+    const scheduleScan = () => {
       if (rescanTimer !== undefined) {
-        clearTimeout(rescanTimer);
+        return;
       }
-      rescanTimer = setTimeout(scan, RESCAN_DEBOUNCE_MS);
-    });
+      rescanTimer = setTimeout(() => {
+        rescanTimer = undefined;
+        scan();
+      }, RESCAN_DEBOUNCE_MS);
+    };
+    const mutations = new MutationObserver(scheduleScan);
 
     if (document.body) {
       mutations.observe(document.body, { childList: true, subtree: true });
@@ -192,5 +187,5 @@ export function useImpressionTracking(): void {
       }
       context.dwells.clear();
     };
-  }, [pathname]);
+  }, [pathname, locale]);
 }

@@ -20,6 +20,7 @@ import {
   resolveResourceKind,
   resolveSection,
   resolveSegmentedSelection,
+  resolveSelectSelection,
 } from './capture';
 
 describe('capture helpers', () => {
@@ -64,7 +65,7 @@ describe('capture helpers', () => {
 
   it('resolves sections, forms and impression keys', () => {
     document.body.innerHTML = `
-      <section data-track-section="article">
+      <section data-track-section="content:article">
         <form id="comment-form"><input name="body" aria-invalid="true" /></form>
         <div data-track-impression="carousel:card" data-track-index="3"></div>
         <div data-track-impression="hero" data-track-key="front"></div>
@@ -76,13 +77,11 @@ describe('capture helpers', () => {
     const indexed = document.querySelector('[data-track-index]');
     const keyed = document.querySelector('[data-track-key]');
 
-    expect(resolveSection(input as Element)).toBe('article');
+    expect(resolveSection(input as Element)).toBe('content:article');
     expect(resolveFormKey(form as HTMLFormElement)).toBe('comment-form');
     expect(resolveImpressionKey(indexed as Element)).toBe('carousel:card:3');
     expect(resolveImpressionKey(keyed as Element)).toBe('hero:front');
-    expect(collectInvalidFields(form as HTMLFormElement)).toEqual([
-      { field: 'body', code: 'invalid' },
-    ]);
+    expect(collectInvalidFields(form as HTMLFormElement)).toEqual(['body']);
   });
 
   it('resolves segmented control selections', () => {
@@ -126,6 +125,38 @@ describe('capture helpers', () => {
     expect(readPressedState(radio as Element)).toBe(true);
 
     expect(resolveSegmentedSelection(document.body)).toBeNull();
+  });
+
+  it('resolves annotated Base UI select options', () => {
+    document.body.innerHTML = `
+      <div data-slot="select-content" data-track-control="auth:gender"
+        data-track-section="auth:signup">
+        <div role="listbox">
+          <div data-slot="select-item" data-value="female">Female</div>
+          <div data-slot="select-item" data-value="male">Male</div>
+        </div>
+      </div>
+      <div data-slot="select-content">
+        <div role="listbox">
+          <div data-slot="select-item" data-value="en">English</div>
+        </div>
+      </div>
+    `;
+
+    const male = document.querySelector('[data-value="male"]') as Element;
+    const female = document.querySelector('[data-value="female"]') as Element;
+    const language = document.querySelector('[data-value="en"]') as Element;
+
+    expect(resolveSelectSelection(male)).toMatchObject({
+      control: 'auth:gender',
+      index: 1,
+      count: 2,
+      value: 'male',
+    });
+    expect(resolveSelectSelection(female)).toMatchObject({ index: 0 });
+    // Unannotated popups (the language switcher) keep their explicit event.
+    expect(resolveSelectSelection(language)).toBeNull();
+    expect(resolveSelectSelection(document.body)).toBeNull();
   });
 
   it('resolves accessible labels without reading text', () => {
@@ -175,6 +206,9 @@ describe('capture helpers', () => {
       <div id="portal">
         <button id="portaled">Portaled</button>
       </div>
+      <footer data-track-section="not:a:section">
+        <button id="unknown-section">Unknown section</button>
+      </footer>
     `;
 
     const unscoped = findUnscopedActions(document).map((element) => element.id);
@@ -185,6 +219,7 @@ describe('capture helpers', () => {
       'role-button',
       'text-field',
       'portaled',
+      'unknown-section',
     ]);
 
     // Scoping the portaled container is what a dialog/sheet/popover needs.
@@ -196,6 +231,7 @@ describe('capture helpers', () => {
       'link',
       'role-button',
       'text-field',
+      'unknown-section',
     ]);
   });
 });

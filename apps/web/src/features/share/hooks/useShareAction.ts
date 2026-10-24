@@ -1,5 +1,6 @@
 'use client';
 
+import type { TelemetrySection } from '@/core/telemetry';
 import { track } from '@/core/telemetry';
 import { useRuntimeStore } from '@/stores';
 
@@ -11,7 +12,7 @@ export type ShareActionInput = {
   /** Optional share text. */
   text?: string;
   /** Telemetry surface that triggered the share, e.g. `content:article`. */
-  surface?: string;
+  surface?: TelemetrySection;
 };
 
 export type ShareAction = (input?: ShareActionInput) => Promise<void>;

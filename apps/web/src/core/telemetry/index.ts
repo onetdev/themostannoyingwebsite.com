@@ -17,9 +17,13 @@ export const telemetry = new TelemetryTracker({
   sampling: isProduction ? CATEGORY_SAMPLING : {},
 });
 
-export const { track, trackDynamic, trackOnce } = telemetry;
+export const { track, trackDynamic } = telemetry;
 
-export { TELEMETRY_SECTIONS, type TelemetrySection } from './catalog';
+export {
+  isTelemetrySection,
+  TELEMETRY_SECTIONS,
+  type TelemetrySection,
+} from './catalog';
 export { bucketLength, safePath, scrubMessage } from './redact';
 export type { TrackOptions } from './tracker';
 export { TelemetryTracker } from './tracker';

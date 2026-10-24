@@ -5,7 +5,13 @@ const MAX_KEY_LENGTH = 40;
 
 const EMAIL_PATTERN = /[\w.+-]+@[\w-]+\.[\w.-]+/g;
 const URL_PATTERN = /https?:\/\/[^\s)]+/gi;
-const PHONE_PATTERN = /\+?\d[\d\s().-]{7,}\d/g;
+/**
+ * International numbers with an explicit `+`, or North-American-shaped
+ * `555-123-4567`. Deliberately narrower than "any digit run": dates, slugs and
+ * ids (`2024-10-23`) must survive redaction intact.
+ */
+const PHONE_PATTERN =
+  /(?:\+\d[\d\s().-]{6,}\d|\(?\b\d{3}\)?[\s.-]\d{3}[\s.-]\d{4}\b)/g;
 const SECRET_PATTERN = /(bearer|token|secret|password|api[_-]?key)[=:\s]+\S+/gi;
 
 /**

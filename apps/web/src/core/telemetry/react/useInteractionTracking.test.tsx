@@ -2,8 +2,12 @@
  * @jest-environment jsdom
  */
 import { act, fireEvent, render, screen } from '@testing-library/react';
-import { track, trackOnce } from '@/core/telemetry';
+import { track } from '@/core/telemetry';
 import { useInteractionTracking } from './useInteractionTracking';
+
+jest.mock('next-intl', () => ({
+  useLocale: () => 'en',
+}));
 
 jest.mock('@/core/i18n/navigation', () => ({
   usePathname: () => '/',
@@ -11,7 +15,6 @@ jest.mock('@/core/i18n/navigation', () => ({
 
 jest.mock('@/core/telemetry', () => ({
   track: jest.fn(),
-  trackOnce: jest.fn(),
   telemetry: {
     notifyRouteChange: jest.fn(),
     flush: jest.fn(),
@@ -20,7 +23,6 @@ jest.mock('@/core/telemetry', () => ({
 }));
 
 const trackMock = track as unknown as jest.Mock;
-const trackOnceMock = trackOnce as unknown as jest.Mock;
 
 function Harness() {
   useInteractionTracking();
@@ -44,8 +46,7 @@ describe('useInteractionTracking', () => {
 
   it('starts a session once', () => {
     render(<Harness />);
-    expect(trackOnceMock).toHaveBeenCalledWith(
-      'session:start',
+    expect(trackMock).toHaveBeenCalledWith(
       'session.start',
       expect.objectContaining({ entryRoute: '/en/articles/test/' }),
     );
@@ -55,7 +56,7 @@ describe('useInteractionTracking', () => {
     render(
       <>
         <Harness />
-        <div data-track-section="article">
+        <div data-track-section="content:article">
           <button type="button" data-slot="button" data-variant="outline">
             Read more
           </button>
@@ -68,7 +69,7 @@ describe('useInteractionTracking', () => {
     expect(findCall('ui.click')?.[1]).toMatchObject({
       slot: 'button',
       tag: 'button',
-      section: 'article',
+      section: 'content:article',
       variant: 'outline',
     });
   });
@@ -232,7 +233,6 @@ describe('useInteractionTracking', () => {
 
     expect(findCall('form.submit-failed')?.[1]).toMatchObject({
       form: 'auth:login',
-      reason: 'validation',
       invalidFields: 'email',
     });
     expect(findCall('input.validation-failed')?.[1]).toMatchObject({
@@ -294,6 +294,70 @@ describe('useInteractionTracking', () => {
       valueBucket: 50,
       section: 'navigation:pain-level',
     });
+  });
+
+  it('records a pick in an annotated select popup', () => {
+    render(
+      <>
+        <Harness />
+        <div
+          data-slot="select-content"
+          data-track-control="auth:gender"
+          data-track-section="auth:signup"
+        >
+          <div data-slot="select-item" data-value="female">
+            Female
+          </div>
+          <div data-slot="select-item" data-value="male">
+            Male
+          </div>
+        </div>
+      </>,
+    );
+
+    fireEvent.click(screen.getByText('Male'));
+
+    expect(findCall('ui.select')?.[1]).toMatchObject({
+      control: 'auth:gender',
+      optionIndex: 1,
+      optionCount: 2,
+      optionValue: 'male',
+      section: 'auth:signup',
+    });
+  });
+
+  it('reports an unsubmitted form as abandoned when the page is left', () => {
+    render(
+      <>
+        <Harness />
+        <form data-track-form="auth:login">
+          <input name="email" defaultValue="jane@example.test" />
+        </form>
+      </>,
+    );
+
+    fireEvent.focusIn(screen.getByRole('textbox'));
+    window.dispatchEvent(new Event('pagehide'));
+
+    const abandoned = trackMock.mock.calls.filter(
+      ([name]) => name === 'form.abandoned',
+    );
+    expect(abandoned).toHaveLength(1);
+    expect(abandoned[0]?.[1]).toMatchObject({
+      form: 'auth:login',
+      fieldCount: 1,
+      filledFields: 1,
+    });
+  });
+
+  it('keeps the session when the page goes into the back/forward cache', () => {
+    render(<Harness />);
+
+    const pageHide = new Event('pagehide');
+    Object.defineProperty(pageHide, 'persisted', { value: true });
+    window.dispatchEvent(pageHide);
+
+    expect(findCall('session.end')).toBeUndefined();
   });
 
   it('records a page view for every route', () => {

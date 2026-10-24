@@ -69,7 +69,10 @@ export function GenderField({
               >
                 <SelectValue placeholder="" />
               </SelectTrigger>
-              <SelectContent>
+              <SelectContent
+                data-track-control="auth:gender"
+                data-track-section="auth:signup"
+              >
                 {genderOptions.map((option) => (
                   <SelectItem key={option.value} value={option.value}>
                     {option.label}

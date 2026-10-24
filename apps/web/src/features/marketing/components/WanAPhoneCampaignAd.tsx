@@ -38,6 +38,7 @@ export function WanAPhoneCampaignAd({ size = 1024 }: WanAPhoneCampaignAdProps) {
             href="/flaim-a-phone"
             data-track="promotions:wan-a-phone"
             data-track-section="marketing:promotions"
+            data-track-impression="promotions:wan-a-phone"
           >
             <Image
               src={resolvedAssetUri}

@@ -4,27 +4,22 @@ A small, typed, privacy-first observability layer for user interactions. It
 answers "what was the user doing?" without turning the site into a tracking
 surface. Design rationale: [ADR 37](../../../../../adr/0037-user-interaction-telemetry.md).
 
-There is **no network transport yet**: events live in the browser (console +
-`/debug` + `window.maw.tracker`) and in Sentry breadcrumbs. See
-[Transport](#transport).
+There is **no first-party transport yet**: events stay in the browser (console +
+`/debug` + `window.maw.tracker`) and reach Sentry only as breadcrumbs attached to
+the next captured error. See [Transport](#transport).
 
 ## Quick reference
 
 ```ts
-import { track, trackOnce } from '@/core/telemetry';
+import { track } from '@/core/telemetry';
 
 track('ui.share', { channel: 'native', surface: 'content:article' });
-
-// Once per key until the next route change.
-trackOnce('hero', 'impression.element', {
-  key: 'hero',
-  ratio: 1,
-  visibleMs: 500,
-});
 ```
 
 `track()` is typed against the catalog in `types.ts`. `trackDynamic()` exists only
-for the event-bus bridge, which validates its mapping separately.
+for the event-bus bridge, which validates its mapping separately. Impressions and
+page views need no call: annotate the element or let the interaction hook emit
+them.
 
 ## Capture model
 
@@ -33,7 +28,7 @@ for the event-bus bridge, which validates its mapping separately.
 | Delegation | page views, clicks, form start/submit/abandon, validation failures, toggles, selects, sliders, text-field blur, link kinds, dialog open/close, scroll depth, visibility, session lifecycle | `react/useInteractionTracking.ts` |
 | IntersectionObserver | `[data-track-impression]` nodes (once per key per route) | `react/useImpressionTracking.ts` |
 | Web vitals | TTFB, FCP, LCP, INP, CLS with route + `navigationType` | `react/useWebVitalsTracking.ts` |
-| Event bus bridge | every `AppEvents` emission (17 today) | `bus-bridge.ts` |
+| Event bus bridge | the 15 behavioural `AppEvents` emissions | `bus-bridge.ts` |
 | Global handlers | `window.error`, `unhandledrejection`, resource load failures | `useInteractionTracking.ts` |
 | Call sites | `HttpClient`, `ErrorBoundary`, React Query cache | those modules |
 
@@ -44,6 +39,9 @@ committed attribute (like `location.pathname` and `document.lang`) and copies it
 onto every envelope as `routeAlias`, so delegated capture, impressions, vitals
 and explicit `track()` calls share one stable page identity — including dynamic
 routes such as `article.single`. Pages without a `route` simply omit the field.
+The locale is part of the page identity: `nav.route-view`, dedupe state and
+impression re-arming all key on `locale + pathname`, because switching language
+keeps the next-intl pathname unchanged.
 
 ### Annotating a surface
 
@@ -63,7 +61,10 @@ routes such as `article.single`. Pages without a `route` simply omit the field.
   applies to the nearest DOM ancestor only, so put it on the surface wrapper
   (page region, card, form) rather than on individual buttons.
 - Every section must be a member of `TELEMETRY_SECTIONS` in `catalog.ts`; the
-  drift test (`sections.test.ts`) fails when markup invents a new one.
+  drift tests (`sections.test.ts`) fail when markup invents a new one, when a
+  `section` prop carries an unknown value, or when a declared section is never
+  rendered. `resolveSection` also drops an unregistered value at runtime, so a
+  stale attribute cannot publish an orphan funnel.
 - Overlays are portaled to `document.body`: a section on the trigger or page
   wrapper does **not** cover the overlay. Put the section on the overlay content
   itself (`<DialogContent data-track-section="…">`, `SheetContent`,
@@ -82,30 +83,37 @@ routes such as `article.single`. Pages without a `route` simply omit the field.
   rendered as `data-value` by `ToggleGroupItem` and `RadioGroupItem`, so clicking
   one emits `ui.select` with `{ control, optionIndex, optionCount, optionValue, checked }`
   instead of an anonymous `ui.click`.
+- Base UI `Select` popups are portaled `role="option"` nodes and never fire a
+  native `change`. Annotate `SelectContent` with `data-track-control` (and its own
+  `data-track-section`) to emit `ui.select` for option picks; `SelectItem`
+  renders `data-value`. Unannotated popups — including the language switcher,
+  which emits `nav.locale-change` itself — stay silent.
 - `data-track-field` names a control that has no `name`, e.g. the header pain
   level slider, so `ui.slider` reports `control: 'pain-level'` instead of
   `control: 'input'`. Its `valueBucket` is the filled portion of the control's
   own `min`–`max` range in 10 % steps, never the raw value.
 - `data-track-impression` opts an element into impression tracking; `data-track-key`
   makes it stable across reorders, `data-track-index` is the fallback identity.
-  Elements taller than the viewport are impressed once they cover half of the
-  viewport, not half of their own (unreachable) area.
+  An impression is emitted once, after 500 ms of qualifying visibility: half of
+  the element's own area, or half the viewport for elements taller than the
+  viewport (article bodies, long carousels).
 - `data-track-form` names a form and opts its text fields into `input.change`.
 - `data-track-input` opts a single text field in.
 - `data-track-ignore` suppresses capture for a subtree.
 
 ### Select popups and language changes
 
-A Base UI `Select` fires no native `change` event, and its popup items are not
-action elements, so the language funnel is emitted explicitly by
-`useLanguageSwitcher`:
+A Base UI `Select` fires no native `change` event, so option picks are captured
+from the portaled popup (see `data-track-control` above). The language funnel
+needs the chosen locale as well, so `useLanguageSwitcher` emits it explicitly:
 
 - `ui.select-open` (`control: 'navigation:language'`) when the menu opens.
 - `nav.locale-change` (`locale` + `from`) when a different locale is picked;
   re-selecting the current locale is not reported.
 
 Both carry the switcher `section` passed to the hook (`navigation:header`,
-`navigation:mobile-menu`, `navigation:footer`, `settings:preferences`).
+`navigation:mobile-menu`, `navigation:footer`, `settings:preferences`). The
+switcher popup is left unannotated so it does not also emit a generic `ui.select`.
 
 ## Privacy rules
 
@@ -117,10 +125,14 @@ Both carry the switcher `section` passed to the hook (`navigation:header`,
   the address / phone number.
 - `route` is always a pathname; query strings and fragments are stripped.
 - `scrubMessage` redacts emails, phone numbers, URLs and `token=…`/`password=…`.
+  The phone pattern is narrow (`+` international or `555-123-4567`) so date-shaped
+  slugs and ids survive as identities.
 - `sanitizeProps` drops `password`, `value`, `email`, `query`, `token`, … before any
   sink sees the event. Semantic identities use `optionValue`, not `value`.
 - `sessionId` is an ephemeral in-memory UUID. No cookies, no `localStorage`.
-- The `/debug` route is excluded from every capture path, not only clicks.
+- The `/debug` route suppresses delegated capture, impressions, vitals and the bus
+  bridge. Explicit `track()` calls from shared modules (HTTP, query cache,
+  boundary) are not suppressed, so `/debug` still records its own query failures.
 
 ## Sinks
 
@@ -137,10 +149,13 @@ fault trail from the breadcrumb buffer.
 
 ### Transport
 
-None. A first-party collector needs an ingest endpoint, an analytics consent
-grant, retention rules and a privacy-policy update in every locale; shipping the
-browser half alone leaves a silent dead end. The options and their trade-offs are
-recorded in [ADR 37 § Transport](../../../../../adr/0037-user-interaction-telemetry.md#transport).
+No first-party collector. Sentry breadcrumbs are the only off-device sink today:
+they leave the browser attached to the next captured error, which is why the
+allowlist stays narrow. A first-party collector needs an ingest endpoint, an
+analytics consent grant, retention rules and a privacy-policy update in every
+locale; shipping the browser half alone leaves a silent dead end. The options and
+their trade-offs are recorded in
+[ADR 37 § Transport](../../../../../adr/0037-user-interaction-telemetry.md#transport).
 
 Do not remove `@vercel/analytics` until that lands: it is still the only
 production page-view and web-vitals reporting.
@@ -161,7 +176,7 @@ history recording is enabled.
 
 - `perf` is sampled at 25 % in production (`CATEGORY_SAMPLING`); the rest are kept.
 - Duplicate `ui`/`nav` events within 300 ms and `input` events within 500 ms are
-  dropped (`CATEGORY_DEDUPE_WINDOW_MS`).
+  dropped (`CATEGORY_DEDUPE_WINDOW_MS`); the window is cleared on navigation.
 - CLS is stored in thousandths (integer) so all vitals are integers.
 - `durationMs` on the envelope is the only place for measured timings (e.g.
   `error.http` latency); event props do not carry `*Ms` duplicates.
@@ -170,13 +185,14 @@ history recording is enabled.
 
 - `tracker.test.ts` — envelope, redaction (including `optionValue` vs `value`),
   sampling, dedupe, history, sink isolation.
-- `redact.test.ts` — scrubbing, path normalisation, length buckets.
-- `bus-bridge.test.ts` — exhaustive event mapping plus the subscribing hook.
-- `sections.test.ts` — every rendered `data-track-section` is declared.
+- `redact.test.ts` — scrubbing, date-safe ids, path normalisation, length buckets.
+- `bus-bridge.test.ts` — behavioural event mapping plus the subscribing hook.
+- `sections.test.ts` — every rendered or prop-passed section is declared, and every
+  declared section is rendered.
 - `react/capture.test.ts` — pure DOM/URL helpers, privacy guards, form counting,
-  impression ratios.
-- `react/useInteractionTracking.test.tsx` — delegation, links, forms, credential
-  fields, ignores, suppression.
+  segmented and select option resolution, impression ratios.
+- `react/useInteractionTracking.test.tsx` — delegation, links, forms, abandonment,
+  credential fields, ignores, bfcache, suppression.
 - `react/useImpressionTracking.test.tsx` — dwell timing, tall elements, dedupe,
   cancel.
 - `react/useWebVitalsTracking.test.tsx` — metric mapping, CLS units, suppression.

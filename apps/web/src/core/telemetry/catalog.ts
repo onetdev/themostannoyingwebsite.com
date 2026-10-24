@@ -114,6 +114,17 @@ export const TELEMETRY_SECTIONS = [
 
 export type TelemetrySection = (typeof TELEMETRY_SECTIONS)[number];
 
+const TELEMETRY_SECTION_SET: ReadonlySet<string> = new Set(TELEMETRY_SECTIONS);
+
+/**
+ * Runtime guard for values that reach the tracker from the DOM. Markup can
+ * still render an unknown value (e.g. a stale attribute), so the capture layer
+ * drops it instead of publishing an unregistered surface.
+ */
+export function isTelemetrySection(value: string): value is TelemetrySection {
+  return TELEMETRY_SECTION_SET.has(value);
+}
+
 /**
  * Categories that are safe and useful to attach to Sentry error reports.
  * High-volume/aggregate data (impressions, inputs, vitals) is intentionally

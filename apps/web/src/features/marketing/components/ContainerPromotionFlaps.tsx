@@ -19,6 +19,7 @@ export function ContainerPromotionFlaps() {
           prefetch={false}
           data-track="promotions:dilf-flaps"
           data-track-section="marketing:promotions"
+          data-track-impression="promotions:dilf-flaps"
         >
           <Image
             className="object-cover opacity-30 mix-blend-lighten"
