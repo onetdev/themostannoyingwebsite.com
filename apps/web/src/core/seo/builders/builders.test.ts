@@ -109,7 +109,7 @@ describe('buildWebPage', () => {
     expect(asRecord(page.breadcrumb)['@type']).toBe('BreadcrumbList');
   });
 
-  it('supports the AboutPage and ContactPage subtypes', () => {
+  it('supports the AboutPage, CollectionPage and ContactPage subtypes', () => {
     expect(
       buildWebPage({
         baseUrl,
@@ -119,6 +119,15 @@ describe('buildWebPage', () => {
         type: 'AboutPage',
       })['@type'],
     ).toBe('AboutPage');
+    expect(
+      buildWebPage({
+        baseUrl,
+        locale: 'en',
+        path: 'list',
+        name: 'List',
+        type: 'CollectionPage',
+      })['@type'],
+    ).toBe('CollectionPage');
     expect(
       buildWebPage({
         baseUrl,
@@ -288,5 +297,20 @@ describe('buildSimpleItemList', () => {
       position: 1,
       name: 'Welcome to Hell',
     });
+  });
+
+  it('continues positions from a page offset', () => {
+    const list = buildSimpleItemList({
+      baseUrl,
+      locale: 'en',
+      path: 'articles/page/2',
+      name: 'Articles',
+      startPosition: 16,
+      items: [{ name: 'Seventeen' }, { name: 'Eighteen' }],
+    });
+
+    expect(getArray(list.itemListElement).map((item) => item.position)).toEqual(
+      [17, 18],
+    );
   });
 });

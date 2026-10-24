@@ -12,6 +12,7 @@ export const getHeader = (page: Page) => {
     menuItem: {
       // Main menu
       home: header.getByRole('link', { name: 'Home' }),
+      articles: header.getByRole('link', { name: 'Articles' }),
       hotThings: header.getByRole('link', { name: 'Hot things' }),
       dilf: header.getByRole('link', { name: 'DILF' }),
       donate: header.getByRole('link', { name: 'Donate' }),

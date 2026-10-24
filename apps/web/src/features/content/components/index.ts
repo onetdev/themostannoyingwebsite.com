@@ -2,6 +2,7 @@ export * from './ArticleCategories';
 export * from './ArticleItemPage';
 export * from './ArticleKeywords';
 export * from './ArticleMeta';
+export * from './ArticlesPage';
 export * from './AuthorPage';
 export * from './CoverPlaceholder';
 export * from './HotThingsPage';

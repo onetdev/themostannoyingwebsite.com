@@ -4,6 +4,12 @@ export default {
     description:
       'Self-proclaimed most annoying website on the web with so many disgusting features of modern websites you might even vomit at some point.',
   },
+  articles: {
+    title: 'Articles',
+    pageTitle: 'Articles – Page {page}',
+    description:
+      'Browse every article we have ever published. The complete archive, sorted from newest to oldest, with nothing held back.',
+  },
   achievements: {
     title: 'Achievements',
     description:

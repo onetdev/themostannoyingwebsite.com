@@ -64,6 +64,8 @@ export const TELEMETRY_SECTIONS = [
   'common:locale-suggestion',
   'common:share',
   'content:article',
+  'content:articles',
+  'content:articles:pagination',
   'content:author',
   'content:document',
   'content:home:cover',

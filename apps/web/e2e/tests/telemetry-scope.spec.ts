@@ -23,6 +23,7 @@ const ROUTES = [
   '/en',
   '/en/about',
   '/en/achievements',
+  '/en/articles',
   '/en/contact',
   '/en/dilf',
   '/en/donate',
@@ -291,5 +292,47 @@ test.describe('telemetry events', () => {
       });
 
     await expect.poll(hasGenderPick).toBe(true);
+  });
+
+  test('records a semantic article pagination click', async ({ page }) => {
+    await page.goto('/en/articles');
+
+    const next = page.getByTestId('pagination-next');
+
+    if ((await next.count()) === 0) {
+      test.skip(true, 'The archive currently fits on a single page.');
+    }
+
+    await expect(next).not.toHaveAttribute('data-disabled', 'true');
+    await next.click();
+
+    const hasPaginationClick = () =>
+      page.evaluate(() => {
+        const history = (
+          window as unknown as {
+            maw?: {
+              tracker?: {
+                history: () => Array<{
+                  name: string;
+                  routeAlias?: string;
+                  props?: Record<string, unknown>;
+                }>;
+              };
+            };
+          }
+        ).maw?.tracker?.history();
+
+        return Boolean(
+          history?.some(
+            (event) =>
+              event.name === 'nav.link-click' &&
+              event.props?.trackKey === 'content:articles:pagination:next' &&
+              event.props?.section === 'content:articles:pagination' &&
+              event.routeAlias === 'articles',
+          ),
+        );
+      });
+
+    await expect.poll(hasPaginationClick).toBe(true);
   });
 });
