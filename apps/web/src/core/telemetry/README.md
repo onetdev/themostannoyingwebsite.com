@@ -105,7 +105,7 @@ keeps the next-intl pathname unchanged.
 - `data-track-ignore` suppresses capture for a subtree on every path: clicks,
   changes, focus, submit, media errors and impressions.
 
-### Select popups and language changes
+### Select popups, language and theme changes
 
 A Base UI `Select` fires no native `change` event, so option picks are captured
 from the portaled popup (see `data-track-control` above). The language funnel
@@ -118,6 +118,16 @@ needs the chosen locale as well, so `useLanguageSwitcher` emits it explicitly:
 Both carry the switcher `section` passed to the hook (`navigation:header`,
 `navigation:mobile-menu`, `navigation:footer`, `settings:preferences`). The
 switcher popup is left unannotated so it does not also emit a generic `ui.select`.
+
+The theme switcher uses the annotation instead, because the picked value is the
+payload:
+
+- `ui.select-open` (`control: 'navigation:theme'`) when the menu opens.
+- `ui.select` (`control: 'navigation:theme'`, `optionValue` `light | dark | system`)
+  when an option is picked, captured from the annotated popup.
+
+Both carry the hook `section` (`navigation:theme` in the header,
+`settings:preferences` on the settings page).
 
 ## Privacy rules
 

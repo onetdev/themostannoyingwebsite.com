@@ -16,10 +16,10 @@ import {
   SelectTrigger,
   SelectValue,
   Separator,
+  ThemeSelect,
 } from '@maw/ui-lib';
-import { useTheme } from '@wrksz/themes/client';
 import { useLocale, useTranslations } from 'next-intl';
-import { useLanguageSwitcher } from '@/hooks';
+import { useLanguageSwitcher, useThemeSwitcher } from '@/hooks';
 import { useRuntimeStore, useUserPreferencesStore } from '@/stores';
 import { SettingsField } from './SettingsField';
 
@@ -28,14 +28,10 @@ export function UserPreferences() {
   const { onLanguageChange, onOpenChange, languages } = useLanguageSwitcher(
     'settings:preferences',
   );
+  const themeSwitcher = useThemeSwitcher('settings:preferences');
   const runtime = useRuntimeStore();
   const t = useTranslations();
   const locale = useLocale();
-
-  const { resolvedTheme, setTheme } = useTheme();
-  const setDarkMode = (value: boolean | 'indeterminate') => {
-    setTheme(value !== false ? 'dark' : 'light');
-  };
 
   return (
     <Card
@@ -74,19 +70,23 @@ export function UserPreferences() {
           </FieldContent>
         </Field>
 
+        <Field orientation="vertical" className="gap-2 pb-2">
+          <FieldLabel className="text-sm font-normal">
+            {t('user.userPreferences.theme')}
+          </FieldLabel>
+          <FieldContent>
+            <ThemeSelect
+              className="w-full"
+              {...themeSwitcher}
+              data-track-control="navigation:theme"
+              data-track-section="settings:preferences"
+            />
+          </FieldContent>
+        </Field>
+
         <Separator className="mb-2" />
 
         <FieldGroup className="gap-3">
-          <SettingsField label={t('user.userPreferences.darkMode')}>
-            {(id) => (
-              <FormSwitch
-                id={id}
-                name="dark_mode"
-                checked={resolvedTheme === 'dark'}
-                onCheckedChange={setDarkMode}
-              />
-            )}
-          </SettingsField>
           <SettingsField
             label={t('user.userPreferences.reducedMotion')}
             info={t('user.userPreferences.reducedMotionHelp')}

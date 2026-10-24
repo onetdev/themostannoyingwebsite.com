@@ -262,8 +262,9 @@ export default {
     select: 'Select your language',
   },
   themeSwitch: {
-    label: 'Switch theme',
-    darkMode: 'Dark mode',
-    lightMode: 'Light mode',
+    label: 'Theme',
+    system: 'System (auto)',
+    light: 'Light',
+    dark: 'Dark',
   },
 };

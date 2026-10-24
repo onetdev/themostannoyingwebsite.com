@@ -4,7 +4,7 @@ import deploymentMeta from '@/root/public/deployment-meta.json' with {
 import type { AppConfig, Environment } from '@/schemas';
 
 const config: AppConfig = {
-  defaultColorScheme: 'dark' as AppTheme,
+  defaultColorScheme: 'system' as AppTheme,
   achievements: {
     assets: {
       achievementUnlockedSfx: '/assets/sfx/achievement.mp3',

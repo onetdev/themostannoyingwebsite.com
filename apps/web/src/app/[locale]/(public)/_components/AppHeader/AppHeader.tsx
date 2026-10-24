@@ -6,9 +6,9 @@ import { Link } from '@/core/i18n/navigation';
 import { SearchForm } from '@/features/content/components';
 import type { RouteAlias } from '@/schemas';
 import { AppLanguageSwitcher } from '../AppLanguageSwitcher';
-import { AppDarkModeToggle } from './AppDarkModeToggle';
 import { AppNavigationDesktop } from './AppNavigationDesktop';
 import { AppNavigationMobile } from './AppNavigationMobile';
+import { AppThemeSelect } from './AppThemeSelect';
 import { FloatingHeader } from './FloatingHeader';
 import { PainLevelSelector } from './PainLevelSelector';
 import { TextLogo } from './TextLogo';
@@ -60,7 +60,7 @@ export async function AppHeader({ activeItem, className }: AppHeaderProps) {
           <div className="hidden md:block">
             <AppLanguageSwitcher displayOnlyFlag section="navigation:header" />
           </div>
-          <AppDarkModeToggle />
+          <AppThemeSelect />
         </div>
       </FloatingHeader>
       <PainLevelSelector className={clsx('print:hidden', className)} />

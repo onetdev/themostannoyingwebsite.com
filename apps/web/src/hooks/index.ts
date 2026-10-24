@@ -14,6 +14,7 @@ export * from './useRotatingMessage';
 export * from './useScrollDistanceTrigger';
 export * from './useSendNotification';
 export * from './useServiceWorker';
+export * from './useThemeSwitcher';
 export * from './useTouchScreenListener';
 export * from './useUserActivationListener';
 export * from './useZodAutoConfigurator';

@@ -126,7 +126,7 @@ export interface TelemetryEventPropsMap {
     checked?: boolean;
     section?: TelemetrySection;
   };
-  /** A select popup was opened, e.g. the language menu. */
+  /** A select popup was opened, e.g. the language or theme menu. */
   'ui.select-open': { control: string; section?: TelemetrySection };
   /** A range input changed. `valueBucket` is the filled range in 10 % steps. */
   'ui.slider': {
