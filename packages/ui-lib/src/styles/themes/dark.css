@@ -101,5 +101,21 @@
     --aurora-4: oklch(0.64 0.14 195);
     --aurora-opacity: 0.1;
     --aurora-blur: 4rem;
+
+    /* ------------------------------------------------------------------
+     * Footer artwork — dichroic acrylic wall below the footer. The base is
+     * near-black so the additive planes glow like the night installation,
+     * and the tints lift the edge fade and glass seams off the dark.
+     * ------------------------------------------------------------------ */
+    --panel-base: oklch(0.13 0.035 300);
+    --panel-blend: screen;
+    --panel-mullion: oklch(0.95 0.02 300 / 28%);
+    --panel-sweep-blend: screen;
+    --panel-sweep-opacity: 0.34;
+    --panel-grain-opacity: 0.07;
+    --panel-glow: oklch(0.97 0.08 335 / 80%);
+    --panel-glow-blend: screen;
+    --panel-glow-opacity: 0.5;
+    --panel-vignette-opacity: 0.9;
   }
 }

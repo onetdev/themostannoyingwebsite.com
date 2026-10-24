@@ -101,5 +101,20 @@
     --aurora-4: oklch(0.78 0.13 195);
     --aurora-opacity: 0.1;
     --aurora-blur: 3rem;
+
+    /* ------------------------------------------------------------------
+     * Footer artwork — dichroic acrylic wall below the footer. Daylight read:
+     * a bright base with multiplying dyes, like the outdoor facade shots.
+     * ------------------------------------------------------------------ */
+    --panel-base: oklch(0.985 0.006 290);
+    --panel-blend: multiply;
+    --panel-mullion: oklch(0.2 0.02 290 / 14%);
+    --panel-sweep-blend: multiply;
+    --panel-sweep-opacity: 0.2;
+    --panel-grain-opacity: 0.05;
+    --panel-glow: oklch(1 0.03 320 / 90%);
+    --panel-glow-blend: soft-light;
+    --panel-glow-opacity: 0.26;
+    --panel-vignette-opacity: 0.72;
   }
 }
