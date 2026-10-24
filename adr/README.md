@@ -47,3 +47,4 @@ file-name convention; see the `adr-writer` skill for the authoring workflow.
 | [0035](0035-dedicated-currency-rates-endpoint.md) | Dedicated Currency Rates Endpoint | Accepted (amends [ADR 33](0033-donation-exchange-rates.md) and [ADR 34](0034-donation-currency-offer-and-fixed-eur-figures.md); amended by [ADR 36](0036-currency-tagged-donation-amounts.md)) |
 | [0036](0036-currency-tagged-donation-amounts.md) | Currency-Tagged Donation Amounts | Accepted (amends [ADR 34](0034-donation-currency-offer-and-fixed-eur-figures.md) and [ADR 35](0035-dedicated-currency-rates-endpoint.md)) |
 | [0037](0037-user-interaction-telemetry.md) | User Interaction Telemetry | Accepted |
+| [0038](0038-theme-preference-selector.md) | Three-State Theme Preference Selector with System Default | Accepted (supersedes the binary toggle from [ADR 27](0027-theme-management-wrksz-themes.md)) |

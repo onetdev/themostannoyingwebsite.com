@@ -39,12 +39,12 @@ This document provides specific instructions and context for AI agents working o
 
 ## 🎨 Theme Management
 
-We use `@wrksz/themes` (see `adr/0027-theme-management-wrksz-themes.md`).
+We use `@wrksz/themes` (see `adr/0027-theme-management-wrksz-themes.md` and `adr/0038-theme-preference-selector.md`).
 
 - **Provider**: `ThemeProvider` from `@wrksz/themes/next` lives in the document-bearing route-group layouts (`(public)`, `(barebone)`), above the other client providers. Do **not** render the provider, nor any theme `<script>`, inside a client component — the library injects its no-flash bootstrap via `useServerInsertedHTML` precisely so React 19 never client-renders a script tag.
-- **Hooks**: read `useTheme` from `@wrksz/themes/client`. `resolvedTheme` is `"light" | "dark" | undefined` (undefined before hydration), so gate theme-dependent markup with `useHydrated()` instead of feeding it into hydration-sensitive output.
-- **Contract**: the theme is applied to `<html data-theme>`, `localStorage` key `theme`, which the Tailwind variants and `packages/ui-lib/src/styles/themes/*.css` selectors depend on. `attribute="data-theme"` must stay explicit (the library defaults to `class`).
-- **Design system**: `packages/ui-lib` must not import a theme library. Components receive theme via props (e.g. `DarkModeToggle`, `Toaster`); the app bridges context in small adapters such as `src/app/bootstrap/ThemedToaster.tsx`.
+- **Preference**: the selection is `'light' | 'dark' | 'system'` (default `system`, configured by `config.defaultColorScheme`). Read the raw `theme` through `useThemeSwitcher(section)` for selectors; `resolvedTheme` is `"light" | "dark" | undefined` (undefined before hydration), so gate resolved-theme markup with `useHydrated()` instead of feeding it into hydration-sensitive output.
+- **Contract**: the theme is applied to `<html data-theme>`, `localStorage` key `theme`, which the Tailwind variants and `packages/ui-lib/src/styles/themes/*.css` selectors depend on. `attribute="data-theme"` must stay explicit (the library defaults to `class`). The attribute only ever holds a concrete scheme: `getInitialThemeAttribute()` omits it server-side when the default is `system` and lets the pre-paint script resolve it.
+- **Design system**: `packages/ui-lib` must not import a theme library. Components receive theme via props (`ThemeSelect`, `Toaster`); the app bridges context in small adapters such as `AppThemeSelect` and `src/app/bootstrap/ThemedToaster.tsx`.
 
 ---
 

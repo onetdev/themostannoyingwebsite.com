@@ -2,7 +2,7 @@ export default {
   userPreferences: {
     title: 'Preferences',
     colorScheme: 'Theme / Color scheme',
-    darkMode: 'Dark mode',
+    theme: 'Theme',
     reducedMotion: 'Reduced motion',
     reducedMotionHelp:
       'Can be changed in your OS/Browser settings, you might need to reload the page after changing it.',

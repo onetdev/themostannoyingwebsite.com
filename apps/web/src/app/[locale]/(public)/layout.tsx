@@ -13,6 +13,7 @@ import { LanguageDetectorMessagesProvider } from '@/core/i18n/LanguageDetectorMe
 import { LANGUAGE_DETECTOR_MESSAGES } from '@/core/i18n/language-detector-messages';
 import { routing } from '@/core/i18n/routing';
 import { SiteStructuredData } from '@/core/seo';
+import { getInitialThemeAttribute } from '@/core/theme';
 import { prefetchContentPools } from '@/features/content/services/prefetch-content-pools';
 import { BeggarBanner } from '@/features/funding/components';
 import { getAppConfigService } from '@/services';
@@ -56,7 +57,7 @@ async function LocalePublicRootLayout({
     <html
       lang={locale}
       dir={direction}
-      data-theme={config.defaultColorScheme}
+      data-theme={getInitialThemeAttribute(config.defaultColorScheme)}
       suppressHydrationWarning
     >
       <body>

@@ -6,7 +6,7 @@ import type i18nConfig from '@/root/i18n.config';
 import type { RouteAlias } from './schemas';
 
 declare global {
-  type AppTheme = 'light' | 'dark';
+  type AppTheme = 'light' | 'dark' | 'system';
   type AppLocale = (typeof i18nConfig)['locales'][number];
   type AppSupportedLocale = (typeof i18nConfig)['allLocales'][number];
   type AppTranslationShape = typeof englishShape;

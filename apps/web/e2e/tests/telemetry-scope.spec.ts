@@ -123,6 +123,14 @@ test.describe('telemetry scopes', () => {
     await expectScoped(page);
   });
 
+  test('theme switcher popup resolves a section', async ({ page }) => {
+    await page.goto('/en');
+
+    await page.getByTestId('theme-select').click();
+    await expect(page.locator('[data-slot="select-content"]')).toBeVisible();
+    await expectScoped(page);
+  });
+
   test('share modal resolves a section', async ({ page }) => {
     await page.goto('/en');
 
@@ -292,6 +300,47 @@ test.describe('telemetry events', () => {
       });
 
     await expect.poll(hasGenderPick).toBe(true);
+  });
+
+  test('records a theme preference pick with its surface', async ({ page }) => {
+    await page.goto('/en');
+
+    await page.getByTestId('theme-select').click();
+    await page.getByRole('option', { name: 'Dark' }).click();
+
+    const hasThemeEvents = () =>
+      page.evaluate(() => {
+        const history = (
+          window as unknown as {
+            maw?: {
+              tracker?: {
+                history: () => Array<{
+                  name: string;
+                  props?: Record<string, unknown>;
+                }>;
+              };
+            };
+          }
+        ).maw?.tracker?.history();
+
+        return Boolean(
+          history?.some(
+            (event) =>
+              event.name === 'ui.select-open' &&
+              event.props?.control === 'navigation:theme' &&
+              event.props?.section === 'navigation:theme',
+          ) &&
+            history?.some(
+              (event) =>
+                event.name === 'ui.select' &&
+                event.props?.control === 'navigation:theme' &&
+                event.props?.section === 'navigation:theme' &&
+                event.props?.optionValue === 'dark',
+            ),
+        );
+      });
+
+    await expect.poll(hasThemeEvents).toBe(true);
   });
 
   test('records a semantic article pagination click', async ({ page }) => {
