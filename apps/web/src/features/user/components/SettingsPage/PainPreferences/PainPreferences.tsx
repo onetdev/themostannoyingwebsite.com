@@ -29,7 +29,11 @@ export function PainPreferences({
   const t = useTranslations();
 
   return (
-    <Card className={className} data-testid="pain-preferences">
+    <Card
+      className={className}
+      data-testid="pain-preferences"
+      data-track-section="settings:pain-preferences"
+    >
       <CardHeader>
         <CardTitle>{t('user.optionalPainPoints.title')}</CardTitle>
       </CardHeader>
@@ -42,10 +46,17 @@ export function PainPreferences({
         </div>
       </CardContent>
       <CardFooter className="flex flex-wrap items-center gap-3 border-t">
-        <Button onClick={painPreferences.allEnable}>
+        <Button
+          data-track="settings:pain-preferences:enable-all"
+          onClick={painPreferences.allEnable}
+        >
           {t('common.action.enableAll')}
         </Button>
-        <Button variant="secondary" onClick={painPreferences.allDisable}>
+        <Button
+          variant="secondary"
+          data-track="settings:pain-preferences:disable-all"
+          onClick={painPreferences.allDisable}
+        >
           {t('common.action.disableAll')}
         </Button>
       </CardFooter>

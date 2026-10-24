@@ -76,7 +76,10 @@ export function VisualChaos() {
                   <SelectTrigger className="w-full">
                     <SelectValue />
                   </SelectTrigger>
-                  <SelectContent>
+                  <SelectContent
+                    data-track-control="settings:screensaver-variant"
+                    data-track-section="settings:pain-preferences"
+                  >
                     {variantOptions.map((value) => (
                       <SelectItem key={value} value={value}>
                         {t(`screensaver.variant.options.${value}`)}
@@ -111,7 +114,10 @@ export function VisualChaos() {
                   <SelectTrigger className="w-full">
                     <SelectValue />
                   </SelectTrigger>
-                  <SelectContent>
+                  <SelectContent
+                    data-track-control="settings:screensaver-timer"
+                    data-track-section="settings:pain-preferences"
+                  >
                     {timeoutOptions.map((value) => (
                       <SelectItem key={value} value={value}>
                         {t(`screensaver.timer.options.${value}`)}

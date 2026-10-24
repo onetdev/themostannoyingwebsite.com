@@ -1,5 +1,6 @@
 import type Emittery from 'emittery';
 import type { MessageKeys, NestedKeyOf } from 'next-intl';
+import type { InteractionEvent } from '@/core/telemetry/types';
 import type englishShape from '@/i18n/messages/en';
 import type i18nConfig from '@/root/i18n.config';
 import type { RouteAlias } from './schemas';
@@ -60,12 +61,22 @@ declare global {
     'exit-prompt:shown': never;
     'ui:modal:dismiss-signaled': never;
     'ui:newsletter-modal:show': never;
+    'telemetry:event': InteractionEvent;
   }
 
   interface Window {
     maw?: {
       _emit?: Emittery<AppEvents>['emit'];
       _on?: Emittery<AppEvents>['on'];
+      /** Local debugging handle for the interaction tracker (no network). */
+      tracker?: {
+        history: () => readonly InteractionEvent[];
+        setEnabled: (enabled: boolean) => void;
+        isEnabled: () => boolean;
+        flush: () => void;
+        /** Action elements that would emit without a `data-track-section`. */
+        auditScopes: () => Element[];
+      };
     };
   }
 }

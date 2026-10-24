@@ -40,7 +40,10 @@ async function Page() {
         namespace="metadata.virgin"
       />
       <DisableAllOnMount />
-      <PageHeadline className="w-full" actions={<ShareButton />}>
+      <PageHeadline
+        className="w-full"
+        actions={<ShareButton section="content:virgin" />}
+      >
         {t('common.app.virgin.title')}
       </PageHeadline>
       <div className={cn(styles.content, styles.contentFlush)}>

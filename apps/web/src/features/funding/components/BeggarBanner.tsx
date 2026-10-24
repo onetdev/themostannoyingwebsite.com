@@ -14,13 +14,20 @@ export function BeggarBanner() {
   }
 
   return (
-    <div className="bg-error text-error-foreground relative z-50 w-full shadow-lg">
+    <div
+      className="bg-error text-error-foreground relative z-50 w-full shadow-lg"
+      data-track-section="funding:beggar-banner"
+    >
       <div className="container mx-auto flex items-center justify-between gap-4 px-gutter py-5">
         <div className="flex-1">
           <p className="text-sm md:text-base">
             <span className="font-bold">{t(bannerData.prefixKey)}</span>{' '}
             {t(bannerData.messageKey)}{' '}
-            <Link href="/donate" className="link-as-inherit underline">
+            <Link
+              href="/donate"
+              className="link-as-inherit underline"
+              data-track="beggar-banner:donate"
+            >
               {t(bannerData.linkTextKey)}
             </Link>
           </p>
@@ -32,6 +39,7 @@ export function BeggarBanner() {
           onClick={onDismiss}
           className="shrink-0 hover:bg-transparent hover:text-current"
           aria-label={t('common.app.dismissBanner')}
+          data-track="beggar-banner:dismiss"
         >
           <Icon icon="close" />
         </Button>

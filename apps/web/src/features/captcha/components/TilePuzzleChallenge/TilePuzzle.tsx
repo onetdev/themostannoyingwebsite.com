@@ -55,6 +55,8 @@ export function TilePuzzle({
           key={tile.key}
           data-is-empty={tile.isEmpty.toString()}
           data-is-correct={tile.isCorrect.toString()}
+          data-track="captcha:tile"
+          data-track-key={`${tile.current.x}:${tile.current.y}`}
           className="group absolute p-1 transition-all duration-200"
           style={{
             left: (tile.current.x - 1) * size,

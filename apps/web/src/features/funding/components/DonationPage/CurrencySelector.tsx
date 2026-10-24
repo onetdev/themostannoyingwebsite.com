@@ -42,6 +42,8 @@ export function CurrencySelector({
       className={cn('bg-muted rounded-lg p-1', className)}
       value={[currency]}
       aria-label={t('funding.currency.label')}
+      data-track-control="donation:currency"
+      data-track-section="funding:donation"
       onValueChange={(value) => {
         const next = value[0];
         if (next) {

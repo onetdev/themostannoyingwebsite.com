@@ -26,7 +26,7 @@ export function RuntimeInfo() {
   );
 
   return (
-    <Card data-testid="runtime-settings">
+    <Card data-testid="runtime-settings" data-track-section="settings:runtime">
       <CardHeader>
         <CardTitle>{t('user.runtimeInfo.title')}</CardTitle>
       </CardHeader>

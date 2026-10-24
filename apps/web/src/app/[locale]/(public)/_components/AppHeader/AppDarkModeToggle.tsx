@@ -14,12 +14,14 @@ export function AppDarkModeToggle() {
   };
 
   return (
-    <DarkModeToggle
-      className="self-center justify-self-end"
-      resolvedTheme={resolvedTheme}
-      setTheme={setTheme}
-      size="lg"
-      text={darkModeToggleText}
-    />
+    <div className="contents" data-track-section="navigation:theme">
+      <DarkModeToggle
+        className="self-center justify-self-end"
+        resolvedTheme={resolvedTheme}
+        setTheme={setTheme}
+        size="lg"
+        text={darkModeToggleText}
+      />
+    </div>
   );
 }

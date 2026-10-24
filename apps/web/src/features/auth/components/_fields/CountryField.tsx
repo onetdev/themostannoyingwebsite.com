@@ -71,7 +71,10 @@ export function CountryField({
               >
                 <SelectValue placeholder="" />
               </SelectTrigger>
-              <SelectContent>
+              <SelectContent
+                data-track-control="auth:country"
+                data-track-section="auth:signup"
+              >
                 {countryOptions.map((option) => (
                   <SelectItem key={option.value} value={option.value}>
                     {option.label}

@@ -22,6 +22,7 @@ import {
   SITE_NAVIGATION_LINKS,
 } from '@/app/navigation';
 import { Link } from '@/core/react';
+import { track } from '@/core/telemetry';
 import { useLangDir } from '@/hooks';
 import type { RouteAlias } from '@/schemas';
 import { useRuntimeStore } from '@/stores';
@@ -41,6 +42,7 @@ export function AppNavigationDesktop({
 
   const onClick = (item: NavItem) => {
     if (item.id === 'global-share') {
+      track('ui.share', { channel: 'modal', surface: 'navigation:main' });
       showShareModal();
       return false;
     }
@@ -101,11 +103,14 @@ export function AppNavigationDesktop({
 
   const renderGroup = (group: NavGroup) => (
     <NavigationMenuItem key={group.id}>
-      <NavigationMenuTrigger className="px-2">
+      <NavigationMenuTrigger
+        className="px-2"
+        data-track={`navigation:group:${group.id}`}
+      >
         {group.icon && <Icon icon={group.icon} />}
         {t(group.labelKey)}
       </NavigationMenuTrigger>
-      <NavigationMenuContent>
+      <NavigationMenuContent data-track-section="navigation:main">
         <ul className="flex w-56 flex-col gap-0.5 p-0">
           {group.items.map(renderDropdownItem)}
         </ul>
@@ -124,6 +129,7 @@ export function AppNavigationDesktop({
       )}
       id="navigation-desktop"
       dir={direction}
+      data-track-section="navigation:main"
     >
       <NavigationMenuList className="justify-start gap-1">
         {SITE_NAVIGATION_LINKS.map(renderEntry)}
@@ -134,10 +140,11 @@ export function AppNavigationDesktop({
             aria-label={t('common.navigation.personal')}
             title={t('common.navigation.personal')}
             className="px-2"
+            data-track="navigation:personal"
           >
             <Icon icon="login" />
           </NavigationMenuTrigger>
-          <NavigationMenuContent>
+          <NavigationMenuContent data-track-section="navigation:main">
             <ul className="flex w-48 flex-col gap-0.5 p-0">
               {PERSONAL_NAVIGATION_LINKS.map(renderDropdownItem)}
             </ul>

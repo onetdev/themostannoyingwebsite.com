@@ -25,7 +25,9 @@ import { SettingsField } from './SettingsField';
 
 export function UserPreferences() {
   const preference = useUserPreferencesStore();
-  const { onLanguageChange, languages } = useLanguageSwitcher();
+  const { onLanguageChange, onOpenChange, languages } = useLanguageSwitcher(
+    'settings:preferences',
+  );
   const runtime = useRuntimeStore();
   const t = useTranslations();
   const locale = useLocale();
@@ -36,7 +38,10 @@ export function UserPreferences() {
   };
 
   return (
-    <Card data-testid="preferences-settings">
+    <Card
+      data-testid="preferences-settings"
+      data-track-section="settings:preferences"
+    >
       <CardHeader>
         <CardTitle>{t('user.userPreferences.title')}</CardTitle>
       </CardHeader>
@@ -53,11 +58,12 @@ export function UserPreferences() {
               }))}
               value={locale}
               onValueChange={onLanguageChange}
+              onOpenChange={onOpenChange}
             >
               <SelectTrigger className="w-full">
                 <SelectValue />
               </SelectTrigger>
-              <SelectContent>
+              <SelectContent data-track-section="settings:preferences">
                 {languages.map((lang) => (
                   <SelectItem key={lang.locale} value={lang.locale}>
                     {lang.label} &nbsp; {lang.flag}

@@ -34,7 +34,12 @@ export function WanAPhoneCampaignAd({ size = 1024 }: WanAPhoneCampaignAdProps) {
     <AnimatePresence>
       {enabled && (
         <FadeIn className="overflow-clip" key="wan-a-phone-ad">
-          <Link href="/flaim-a-phone">
+          <Link
+            href="/flaim-a-phone"
+            data-track="promotions:wan-a-phone"
+            data-track-section="marketing:promotions"
+            data-track-impression="promotions:wan-a-phone"
+          >
             <Image
               src={resolvedAssetUri}
               width={size}

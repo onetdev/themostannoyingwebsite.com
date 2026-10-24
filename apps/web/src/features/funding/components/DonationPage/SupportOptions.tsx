@@ -40,6 +40,8 @@ function SupportLink({ href, icon, label }: SupportLinkProps) {
       href={href}
       target="_blank"
       data-slot="button"
+      data-track="donation:provider"
+      data-track-key={icon}
       className={buttonVariants({
         variant: 'secondary',
         size: 'default',
@@ -196,6 +198,7 @@ export function SupportOptions({
     <section
       id="support"
       className={cn('flex scroll-mt-24 flex-col gap-4', className)}
+      data-track-section="funding:providers"
       {...rest}
     >
       <div className="flex flex-wrap items-center justify-between gap-2">
@@ -254,6 +257,7 @@ export function SupportOptions({
         href={funding.alternativeOptionsUrl}
         target="_blank"
         className="text-center text-sm"
+        data-track="donation:alternative-options"
       >
         {t('funding.alternativeOptionsLink')}
       </Link>

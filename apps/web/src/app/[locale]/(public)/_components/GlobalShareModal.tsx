@@ -31,6 +31,7 @@ export function GlobalShareModal() {
       show={shareModalData.visible}
       onClose={() => setShareModalData({ visible: false })}
       url={shareModalData.url}
+      section="share:modal"
       texts={texts}
     />
   );

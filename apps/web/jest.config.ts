@@ -9,10 +9,30 @@ const jestConfig = createJestConfig({
   ...config,
 });
 
+// ESM-only dependencies that Jest must transpile (they ship no CJS build).
+// `tslog` is pulled in through @maw/logger, used by the telemetry console sink.
+const ESM_PACKAGES = [
+  '@formatjs',
+  '@inversifyjs',
+  '@shadcn',
+  'dom-serializer',
+  'domelementtype',
+  'domhandler',
+  'domutils',
+  'emittery',
+  'entities',
+  'htmlparser2',
+  'inversify',
+  'ky',
+  'marked',
+  'sanitize-html',
+  'tslog',
+].join('|');
+
 export default async () => {
   const resolved = await jestConfig();
   resolved.transformIgnorePatterns = [
-    '/node_modules/(?!(\\.pnpm/)?(@formatjs|@shadcn|emittery|inversify|@inversifyjs|ky|marked|sanitize-html|htmlparser2|domhandler|domutils|domelementtype|dom-serializer|entities))',
+    `/node_modules/(?!(\\.pnpm/)?(${ESM_PACKAGES}))`,
     '^.+\\.module\\.(css|sass|scss)$',
   ];
   return resolved;

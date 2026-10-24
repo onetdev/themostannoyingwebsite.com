@@ -60,6 +60,7 @@ export function PartitionalLockedContent({
       <Button
         className="flex-1"
         data-testid="paywall-overlay-confirm"
+        data-track="paywall:subscribe"
         key="cta"
         onMouseEnter={() => setFlipActions((prev) => !prev)}
         size="sm"
@@ -69,6 +70,7 @@ export function PartitionalLockedContent({
       <Button
         className="flex-1"
         data-testid="paywall-overlay-cancel"
+        data-track="paywall:reveal"
         key="cancel"
         onClick={handleRevealClick}
         size="lg"
@@ -98,7 +100,11 @@ export function PartitionalLockedContent({
         <div ref={contentRef}>{children}</div>
       </div>
       {showOverlay && (
-        <div className="mx-auto w-full max-w-screen-md pt-16">
+        <div
+          className="mx-auto w-full max-w-screen-md pt-16"
+          data-track-section="content:paywall"
+          data-track-impression="paywall:overlay"
+        >
           <h3 className="mb-4">
             {t('content.paywall.overlay.title', {
               price: formatCurrency(0.69),

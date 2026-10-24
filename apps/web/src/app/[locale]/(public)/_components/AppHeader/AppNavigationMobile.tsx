@@ -20,6 +20,7 @@ import {
   SITE_NAVIGATION_FLAT_LINKS,
 } from '@/app/navigation';
 import { Link } from '@/core/react';
+import { track } from '@/core/telemetry';
 import type { RouteAlias } from '@/schemas';
 import { useRuntimeStore } from '@/stores';
 import { AppLanguageSwitcher } from '../AppLanguageSwitcher';
@@ -48,6 +49,10 @@ export function AppNavigationMobile({ activeItem }: AppNavigationMobileProps) {
 
   const onClick = (item: NavItem) => {
     if (item.id === 'global-share') {
+      track('ui.share', {
+        channel: 'modal',
+        surface: 'navigation:mobile-menu',
+      });
       showShareModal();
       return false;
     }
@@ -60,10 +65,16 @@ export function AppNavigationMobile({ activeItem }: AppNavigationMobileProps) {
       <SheetTrigger
         className="hover:bg-accent flex size-9 items-center justify-center rounded-md transition-colors md:hidden"
         aria-label={t('common.app.toggleMenu')}
+        data-track="navigation:menu-toggle"
+        data-track-section="navigation:mobile-menu"
       >
         <Icon icon="menu" />
       </SheetTrigger>
-      <SheetContent side="left" className="w-[280px] gap-0 overflow-y-auto">
+      <SheetContent
+        side="left"
+        className="w-[280px] gap-0 overflow-y-auto"
+        data-track-section="navigation:mobile-menu"
+      >
         <SheetHeader className="flex flex-row items-center justify-between pr-4 text-left">
           <SheetTitle className="pl-3 text-lg font-bold tracking-tighter">
             {t.rich('common.app.logoShort', {
@@ -77,6 +88,7 @@ export function AppNavigationMobile({ activeItem }: AppNavigationMobileProps) {
           <AppLanguageSwitcher
             className="w-full"
             key="language-switcher-mobile"
+            section="navigation:mobile-menu"
           />
         </div>
         {navigationTree.map(({ titleKey, items }) => (

@@ -1,0 +1,301 @@
+/**
+ * @jest-environment jsdom
+ */
+import { TelemetryTracker } from './tracker';
+import type { InteractionEvent, TelemetrySink } from './types';
+
+function createMemorySink(): TelemetrySink & { events: InteractionEvent[] } {
+  const events: InteractionEvent[] = [];
+  return {
+    name: 'memory',
+    events,
+    handle(event) {
+      events.push(event);
+    },
+  };
+}
+
+function createTracker(options?: {
+  sinks?: TelemetrySink[];
+  enabled?: boolean;
+  random?: () => number;
+}) {
+  let sequence = 0;
+  return new TelemetryTracker({
+    sinks: options?.sinks ?? [],
+    enabled: options?.enabled,
+    now: () => 1_000,
+    random: options?.random,
+    createId: () => `id-${++sequence}`,
+    createSessionId: () => 'session-1',
+  });
+}
+
+describe('TelemetryTracker', () => {
+  beforeEach(() => {
+    window.history.replaceState({}, '', '/en/articles/test/');
+    document.documentElement.lang = 'en';
+    document.body.replaceChildren();
+  });
+
+  it('builds a complete envelope and sanitises props', () => {
+    const sink = createMemorySink();
+    const tracker = createTracker({ sinks: [sink] });
+
+    tracker.track('ui.click', {
+      slot: 'button',
+      tag: 'button',
+      section: 'content:article',
+      variant: 'default',
+    });
+
+    expect(sink.events).toHaveLength(1);
+    expect(sink.events[0]).toEqual({
+      id: 'id-1',
+      name: 'ui.click',
+      category: 'ui',
+      timestamp: 1_000,
+      sessionId: 'session-1',
+      route: '/en/articles/test/',
+      locale: 'en',
+      source: 'auto',
+      props: {
+        slot: 'button',
+        tag: 'button',
+        section: 'content:article',
+        variant: 'default',
+      },
+    });
+  });
+
+  describe('route alias', () => {
+    const appendRouteAlias = (alias: string) => {
+      const page = document.createElement('main');
+      page.setAttribute('data-route-alias', alias);
+      document.body.append(page);
+      return page;
+    };
+
+    it('includes the alias declared by the current page', () => {
+      appendRouteAlias('home');
+      const sink = createMemorySink();
+      const tracker = createTracker({ sinks: [sink] });
+
+      tracker.track('ui.copy', {});
+
+      expect(sink.events[0]?.routeAlias).toBe('home');
+    });
+
+    it('omits the alias when the page does not declare one', () => {
+      const sink = createMemorySink();
+      const tracker = createTracker({ sinks: [sink] });
+
+      tracker.track('ui.copy', {});
+
+      expect(sink.events[0]).not.toHaveProperty('routeAlias');
+    });
+
+    it('follows the alias of the page currently committed', () => {
+      const page = appendRouteAlias('home');
+      const sink = createMemorySink();
+      const tracker = createTracker({ sinks: [sink] });
+
+      tracker.track('ui.copy', {});
+      page.setAttribute('data-route-alias', 'plans');
+      tracker.track('ui.share', { channel: 'native' });
+
+      expect(sink.events.map((event) => event.routeAlias)).toEqual([
+        'home',
+        'plans',
+      ]);
+    });
+  });
+
+  it('strips sensitive props and scrubs free-form values', () => {
+    const sink = createMemorySink();
+    const tracker = createTracker({ sinks: [sink] });
+
+    tracker.trackDynamic('error.unhandled', {
+      message: 'Failed for user@example.com from https://x.test/?t=1',
+      source: '/app.js',
+      password: 'hunter2',
+      nested: { secret: true },
+    });
+
+    expect(sink.events[0]?.props).toEqual({
+      message: 'Failed for [email] from [url]',
+      source: '/app.js',
+    });
+  });
+
+  it('keeps semantic option identities but still drops raw values', () => {
+    const sink = createMemorySink();
+    const tracker = createTracker({ sinks: [sink] });
+
+    tracker.track('ui.select', {
+      control: 'subscription:billing-cycle',
+      optionIndex: 1,
+      optionCount: 2,
+      optionValue: 'yearly',
+    });
+    tracker.trackDynamic('ui.click', {
+      slot: 'button',
+      tag: 'button',
+      value: 'jane@example.test',
+    });
+
+    expect(sink.events[0]?.props).toEqual({
+      control: 'subscription:billing-cycle',
+      optionIndex: 1,
+      optionCount: 2,
+      optionValue: 'yearly',
+    });
+    expect(sink.events[1]?.props).toEqual({ slot: 'button', tag: 'button' });
+  });
+
+  it('redacts choice values on sensitive surfaces before any sink', () => {
+    const sink = createMemorySink();
+    const tracker = createTracker({ sinks: [sink] });
+
+    tracker.track('ui.select', {
+      control: 'auth:gender',
+      optionIndex: 1,
+      optionCount: 3,
+      optionValue: 'male',
+      section: 'auth:signup',
+    });
+
+    expect(sink.events[0]?.props).toEqual({
+      control: 'auth:gender',
+      section: 'auth:signup',
+    });
+    expect(tracker.getHistory()[0]?.props).toEqual({
+      control: 'auth:gender',
+      section: 'auth:signup',
+    });
+  });
+
+  it('uses the control name when a sensitive section is missing', () => {
+    const sink = createMemorySink();
+    const tracker = createTracker({ sinks: [sink] });
+
+    tracker.track('ui.select', {
+      control: 'auth:gender',
+      optionIndex: 1,
+      optionCount: 3,
+      optionValue: 'male',
+    });
+
+    expect(sink.events[0]?.props).toEqual({ control: 'auth:gender' });
+  });
+
+  it('drops duplicate ui clicks until the route changes', () => {
+    const sink = createMemorySink();
+    const tracker = createTracker({ sinks: [sink] });
+
+    tracker.track('ui.click', { slot: 'button', tag: 'button' });
+    tracker.track('ui.click', { slot: 'button', tag: 'button' });
+
+    expect(sink.events).toHaveLength(1);
+
+    tracker.notifyRouteChange();
+    tracker.track('ui.click', { slot: 'button', tag: 'button' });
+
+    expect(sink.events).toHaveLength(2);
+  });
+
+  it('dedupes repeated fault and disruption events', () => {
+    const sink = createMemorySink();
+    const tracker = createTracker({ sinks: [sink] });
+
+    tracker.track('error.media', { kind: 'image', path: '/broken.png' });
+    tracker.track('error.media', { kind: 'image', path: '/broken.png' });
+    tracker.track('disruption.context-menu', {});
+    tracker.track('disruption.context-menu', {});
+
+    expect(sink.events.map((event) => event.name)).toEqual([
+      'error.media',
+      'disruption.context-menu',
+    ]);
+  });
+
+  it('applies category sampling', () => {
+    const sink = createMemorySink();
+    const tracker = createTracker({ sinks: [sink], random: () => 0.9 });
+
+    tracker.track('perf.web-vital', {
+      metric: 'LCP',
+      value: 1200,
+      rating: 'good',
+      navigationType: 'navigate',
+      metricId: 'v1',
+      route: '/en/',
+    });
+    tracker.track('error.unhandled', {
+      message: 'boom',
+      source: '/app.js',
+    });
+
+    expect(sink.events.map((event) => event.name)).toEqual(['error.unhandled']);
+  });
+
+  it('does nothing while disabled', () => {
+    const sink = createMemorySink();
+    const tracker = createTracker({ sinks: [sink], enabled: false });
+
+    tracker.track('ui.copy', {});
+
+    expect(sink.events).toHaveLength(0);
+    expect(tracker.getHistory()).toHaveLength(0);
+  });
+
+  it('does not rely on Math.random for ids or sampling', () => {
+    const randomSpy = jest.spyOn(Math, 'random').mockImplementation(() => {
+      throw new Error('Math.random is not allowed in telemetry');
+    });
+
+    try {
+      const tracker = new TelemetryTracker({ sinks: [] });
+      // Exercises the sampling RNG (may legitimately drop the event).
+      tracker.track('perf.web-vital', {
+        metric: 'LCP',
+        value: 1000,
+        rating: 'good',
+        navigationType: 'navigate',
+        metricId: 'v1',
+        route: '/en/',
+      });
+      tracker.track('ui.copy', {});
+
+      const event = tracker
+        .getHistory()
+        .find((item) => item.name === 'ui.copy');
+      expect(event?.id.length).toBeGreaterThan(0);
+      expect(event?.sessionId.length).toBeGreaterThan(0);
+    } finally {
+      randomSpy.mockRestore();
+    }
+  });
+
+  it('keeps a bounded history and survives throwing sinks', () => {
+    const tracker = new TelemetryTracker({
+      sinks: [
+        {
+          name: 'broken',
+          handle() {
+            throw new Error('sink exploded');
+          },
+        },
+        createMemorySink(),
+      ],
+      historySize: 2,
+    });
+    // The broken sink must not prevent dispatch or history.
+    expect(() => tracker.track('ui.copy', {})).not.toThrow();
+    tracker.track('ui.share', { channel: 'native' });
+    tracker.track('ui.share', { channel: 'modal' });
+
+    expect(tracker.getHistory()).toHaveLength(2);
+    expect(tracker.getHistory()[0]?.props).toEqual({ channel: 'modal' });
+  });
+});

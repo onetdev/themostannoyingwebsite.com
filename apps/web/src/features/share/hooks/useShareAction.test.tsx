@@ -7,6 +7,11 @@ import { act, renderHook } from '@testing-library/react';
 import { useShareAction } from './useShareAction';
 
 const showShareModal = jest.fn();
+const mockTrack = jest.fn();
+
+jest.mock('@/core/telemetry', () => ({
+  track: (...args: unknown[]) => mockTrack(...args),
+}));
 
 jest.mock('@/stores', () => ({
   useRuntimeStore: (
@@ -25,6 +30,7 @@ const setNativeShare = (value: unknown) => {
 describe('useShareAction', () => {
   beforeEach(() => {
     showShareModal.mockClear();
+    mockTrack.mockClear();
     setNativeShare(undefined);
   });
 
@@ -39,7 +45,11 @@ describe('useShareAction', () => {
 
     const { result } = renderHook(() => useShareAction());
     await act(async () => {
-      await result.current({ url: 'https://example.com/a', title: 'Hello' });
+      await result.current({
+        url: 'https://example.com/a',
+        title: 'Hello',
+        surface: 'content:article',
+      });
     });
 
     expect(share).toHaveBeenCalledWith({
@@ -48,15 +58,26 @@ describe('useShareAction', () => {
       url: 'https://example.com/a',
     });
     expect(showShareModal).not.toHaveBeenCalled();
+    expect(mockTrack).toHaveBeenCalledWith('ui.share', {
+      channel: 'native',
+      surface: 'content:article',
+    });
   });
 
   it('falls back to the modal when the native sheet is unavailable', async () => {
     const { result } = renderHook(() => useShareAction());
     await act(async () => {
-      await result.current({ url: 'https://example.com/a' });
+      await result.current({
+        url: 'https://example.com/a',
+        surface: 'content:article',
+      });
     });
 
     expect(showShareModal).toHaveBeenCalledWith('https://example.com/a');
+    expect(mockTrack).toHaveBeenCalledWith('ui.share', {
+      channel: 'modal',
+      surface: 'content:article',
+    });
   });
 
   it('does not open the modal when the user dismisses the native sheet', async () => {
@@ -70,6 +91,7 @@ describe('useShareAction', () => {
     });
 
     expect(showShareModal).not.toHaveBeenCalled();
+    expect(mockTrack).not.toHaveBeenCalled();
   });
 
   it('falls back to the modal when the native sheet fails', async () => {

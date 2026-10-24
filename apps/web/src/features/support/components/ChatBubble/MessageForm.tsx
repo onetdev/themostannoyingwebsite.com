@@ -27,6 +27,8 @@ export function MessageForm({ className, onMessage }: MessageFormProps) {
     <form
       method="post"
       className={className}
+      data-track-form="support:chat"
+      data-track-section="support:chat"
       onSubmit={handleFormSubmit}
       ref={userForm}
     >
@@ -44,6 +46,7 @@ export function MessageForm({ className, onMessage }: MessageFormProps) {
           size="icon"
           className="shrink-0 rounded-full"
           aria-label={t('common.action.send')}
+          data-track="chat:send"
         >
           <Icon icon="arrowUp" />
         </Button>

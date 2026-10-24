@@ -13,6 +13,7 @@ import { useTranslations } from 'next-intl';
 import type { SubmitEventHandler } from 'react';
 import { emit } from '@/core/events/event-bus';
 import { useRouter } from '@/core/i18n/navigation';
+import type { TelemetrySection } from '@/core/telemetry';
 
 const searchFormVariants = cva('', {
   variants: {
@@ -34,6 +35,12 @@ export type SearchFormProps = VariantProps<typeof searchFormVariants> & {
    * spots like the header; leave off for standalone search pages.
    */
   expandable?: boolean;
+  /**
+   * Telemetry surface for the form and its fields. Defaults to the search page
+   * scope; the header passes `navigation:search` so the same form can be
+   * attributed to the surface the visitor actually used.
+   */
+  section?: TelemetrySection;
 };
 
 export function SearchForm({
@@ -41,6 +48,7 @@ export function SearchForm({
   initialValue = '',
   size = 'md',
   expandable = false,
+  section = 'content:search',
 }: SearchFormProps) {
   const t = useTranslations();
   const router = useRouter();
@@ -70,11 +78,18 @@ export function SearchForm({
         className,
       )}
     >
-      <form method="post" onSubmit={onSubmit} className="w-full">
+      <form
+        method="post"
+        onSubmit={onSubmit}
+        className="w-full"
+        data-track-form={section}
+        data-track-section={section}
+      >
         <InputGroup className={cn(searchFormVariants({ size }))}>
           <InputGroupInput
             defaultValue={initialValue}
             name="search"
+            data-track-input
             placeholder={t('content.search.placeholder')}
             autoComplete="off"
             className={cn(searchFormVariants({ size }))}
@@ -83,6 +98,7 @@ export function SearchForm({
           <InputGroupAddon align="inline-end">
             <InputGroupButton
               aria-label={t('common.action.search')}
+              data-track="search:submit"
               type="submit"
               className={cn(searchFormVariants({ size }))}
             >

@@ -37,7 +37,10 @@ export function RatingDialog({ isOpen, onOpenChange }: RatingDialogProps) {
 
   return (
     <Dialog open={isOpen} onOpenChange={onOpenChange}>
-      <DialogContent className="sm:max-w-[425px]">
+      <DialogContent
+        className="sm:max-w-[425px]"
+        data-track-section="support:rating"
+      >
         <DialogHeader>
           <DialogTitle>{t('title')}</DialogTitle>
           <DialogDescription>{t('description')}</DialogDescription>
@@ -59,6 +62,8 @@ export function RatingDialog({ isOpen, onOpenChange }: RatingDialogProps) {
             <div className="flex flex-col items-center gap-4 w-full shrink">
               <ToggleGroup
                 value={rating !== null ? [String(rating)] : []}
+                data-track-control="support:rating"
+                data-track-section="support:rating"
                 onValueChange={(value) => {
                   const next = value[0];
                   if (next) {
@@ -93,6 +98,7 @@ export function RatingDialog({ isOpen, onOpenChange }: RatingDialogProps) {
               disabled={rating === null}
               onClick={handleSubmit}
               className="w-full text-lg md:h-12"
+              data-track="rating:submit"
             >
               {t('submit')}
             </Button>

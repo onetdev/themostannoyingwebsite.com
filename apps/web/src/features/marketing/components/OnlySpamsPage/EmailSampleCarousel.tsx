@@ -52,6 +52,9 @@ export function EmailSampleCarousel({ items }: EmailSampleCarouselProps) {
           {items.map((email, i) => (
             <CarouselItem
               key={`${email.subject}${email.body}`}
+              data-track-impression="carousel:email-sample"
+              data-track-index={i}
+              data-track-section="marketing:only-spams"
               className="pl-4 basis-[70%] md:basis-[55%] lg:basis-[45%] pb-4"
             >
               <motion.div

@@ -22,6 +22,8 @@ export type ShareModalProps = {
   show: boolean;
   onClose: () => void;
   url?: string;
+  /** Telemetry surface for the modal contents. */
+  section?: string;
   texts: {
     title: string;
     description: string;
@@ -64,6 +66,7 @@ export function ShareModal({
   show: controlledShow,
   url: controlledUrl,
   onClose,
+  section,
   texts,
 }: ShareModalProps) {
   const [currentUrl, setCurrentUrl] = useState<string>();
@@ -78,7 +81,7 @@ export function ShareModal({
 
   return (
     <Dialog open={controlledShow} onOpenChange={(open) => !open && onClose()}>
-      <DialogContent>
+      <DialogContent data-track-section={section}>
         <DialogHeader>
           <DialogTitle>{texts.title}</DialogTitle>
         </DialogHeader>

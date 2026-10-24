@@ -59,6 +59,7 @@ export function ModalContent({ className, ...rest }: ModalContentProps) {
                   <Button
                     variant="ghost"
                     className="text-xl"
+                    data-track="wheel:spin"
                     onClick={() => wof.spin()}
                   >
                     <Icon icon="chevronRight" className="text-sm" />{' '}

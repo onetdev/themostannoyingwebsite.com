@@ -26,6 +26,7 @@ export function DonationHero({ summary, className }: DonationHeroProps) {
   return (
     <section
       className={cn('flex flex-col items-start gap-4 text-left', className)}
+      data-track-section="funding:hero"
     >
       <span
         className={cn(
@@ -79,6 +80,7 @@ export function DonationHero({ summary, className }: DonationHeroProps) {
           // `data-slot="button"` opts out of the global `a` link styles, which
           // would otherwise paint the label `text-primary` on `bg-primary`.
           data-slot="button"
+          data-track="donation:hero-support"
           className={buttonVariants({ size: 'lg', className: 'lg:hidden' })}
         >
           <Icon icon="handHoldingDollar" aria-hidden />
@@ -86,13 +88,18 @@ export function DonationHero({ summary, className }: DonationHeroProps) {
         </a>
         <button
           type="button"
-          onClick={() => share()}
+          onClick={() => share({ surface: 'funding:hero' })}
           className={buttonVariants({ variant: 'outline', size: 'lg' })}
+          data-track="donation:hero-share"
         >
           <Icon icon="share" aria-hidden />
           {t('funding.hero.shareCta')}
         </button>
-        <a href="#impact" className="text-sm font-medium">
+        <a
+          href="#impact"
+          className="text-sm font-medium"
+          data-track="donation:hero-impact"
+        >
           {t('funding.hero.impactCta')}
         </a>
       </div>

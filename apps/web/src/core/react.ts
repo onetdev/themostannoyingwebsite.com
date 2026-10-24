@@ -10,3 +10,4 @@ export * from './navigation/react/NavigationContext';
 export * from './observability/react/ErrorBoundary';
 export * from './observability/react/ErrorFallback';
 export * from './observability/react/useLogger';
+export * from './telemetry/react';

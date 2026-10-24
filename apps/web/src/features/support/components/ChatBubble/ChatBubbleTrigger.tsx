@@ -45,6 +45,8 @@ export function ChatBubbleTrigger({
           hasUnread && 'spin-duration-2500',
         )}
         data-testid="chat-bubble-trigger"
+        data-track="chat:toggle"
+        data-track-section="support:chat"
         onClick={onClick}
         aria-label={label}
         title={label}
