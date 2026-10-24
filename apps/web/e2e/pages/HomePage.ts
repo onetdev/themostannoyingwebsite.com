@@ -11,6 +11,7 @@ export const getHomePage = (page: Page) => {
     coverArticle: page.getByTestId('cover-article'),
     denseArticleList: page.getByTestId('dense-article-list'),
     smallCoverArticleList: page.getByTestId('small-cover-article-list'),
+    articlesArchiveLink: page.getByTestId('articles-archive-link'),
 
     goto: async () => {
       await page.goto('/en');

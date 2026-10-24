@@ -5,6 +5,7 @@ const RouteAliasList = [
   'achievements',
   'admin',
   'article.single',
+  'articles',
   'author.single',
   'contact',
   'debug',

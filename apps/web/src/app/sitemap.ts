@@ -134,6 +134,7 @@ async function sitemap(): Promise<MetadataRoute.Sitemap> {
     '',
     'about',
     'achievements',
+    'articles',
     'contact',
     'dilf',
     'donate',

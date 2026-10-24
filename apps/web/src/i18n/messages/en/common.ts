@@ -164,6 +164,7 @@ export default {
     about: 'About',
     achievements: 'Achievements',
     admin: 'Admin',
+    articles: 'Articles',
     contact: 'Contact',
     dilf: 'DILF',
     donate: 'Donate',
@@ -186,6 +187,14 @@ export default {
     termsOfUse: 'Terms of Use',
     theProject: 'The project',
     virgin: 'Virgin',
+  },
+  pagination: {
+    previous: 'Previous',
+    previousLabel: 'Previous page',
+    next: 'Next',
+    nextLabel: 'Next page',
+    page: 'Page {page}',
+    ellipsis: 'More pages',
   },
   userField: {
     consentNewsletter: 'I want to receive newsletter',

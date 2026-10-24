@@ -1,5 +1,7 @@
 import type { Article, ArticleListItem } from '@maw/content-sdk';
+import { buttonVariants, Icon } from '@maw/ui-lib';
 import { getTranslations } from 'next-intl/server';
+import { Link } from '@/core/i18n/navigation';
 import {
   LargeCoverItem,
   SmallCoverListItem,
@@ -67,6 +69,18 @@ export async function HomePage({
             </li>
           ))}
         </ul>
+        <div className="mt-12 flex justify-center">
+          <Link
+            href="/articles"
+            prefetch={false}
+            className={buttonVariants({ variant: 'outline', size: 'sm' })}
+            data-testid="articles-archive-link"
+            data-track="content:home:more:view-all"
+          >
+            {t('content.article.viewAllArticles')}
+            <Icon icon="chevronRight" className="text-xs rtl:rotate-180" />
+          </Link>
+        </div>
       </section>
     </>
   );
