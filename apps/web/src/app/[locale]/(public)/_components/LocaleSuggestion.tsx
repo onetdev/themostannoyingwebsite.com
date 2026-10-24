@@ -6,7 +6,8 @@ import { useEffect, useRef } from 'react';
 import { useLocaleSuggestion } from '@/hooks';
 
 export function LocaleSuggestion() {
-  const { isReady, suggestedLocale, content, onAccept } = useLocaleSuggestion();
+  const { isReady, suggestedLocale, content, onAccept, onDismiss } =
+    useLocaleSuggestion();
   const hasShownToast = useRef(false);
   const t = useTranslations();
 
@@ -22,10 +23,10 @@ export function LocaleSuggestion() {
     toast.custom(
       (id) => (
         <div
-          className="flex w-full items-start gap-3"
+          className="toast-card"
           data-track-section="common:locale-suggestion"
         >
-          <p className="flex-1 text-sm">{content.message}</p>
+          <p className="min-w-0 flex-1 text-sm">{content.message}</p>
           <Button
             size="sm"
             variant="secondary"
@@ -42,7 +43,10 @@ export function LocaleSuggestion() {
             variant="ghost"
             aria-label={t('common.action.close')}
             data-track="locale-suggestion:dismiss"
-            onClick={() => toast.dismiss(id)}
+            onClick={() => {
+              onDismiss();
+              toast.dismiss(id);
+            }}
           >
             <Icon icon="close" />
           </Button>
@@ -50,7 +54,7 @@ export function LocaleSuggestion() {
       ),
       { duration: Infinity },
     );
-  }, [isReady, suggestedLocale, onAccept, content, t]);
+  }, [isReady, suggestedLocale, onAccept, onDismiss, content, t]);
 
   return null;
 }

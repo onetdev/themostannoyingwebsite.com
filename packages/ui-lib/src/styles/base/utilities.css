@@ -61,6 +61,30 @@
 }
 
 /**
+ * Custom Sonner toast card.
+ *
+ * `toast.custom` content renders unstyled (`data-styled="false"`), so custom
+ * toasts must reproduce the built-in card. Mirror it through the CSS variables
+ * our `Toaster` sets so custom and default toasts stay identical.
+ */
+@utility toast-card {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  gap: calc(var(--spacing, 0.25rem) * 1.5);
+  padding: calc(var(--spacing, 0.25rem) * 4);
+  border: 1px solid var(--normal-border);
+  border-radius: var(--border-radius);
+  background: var(--normal-bg);
+  color: var(--normal-text);
+  box-shadow: 0 4px 12px rgb(0 0 0 / 0.1);
+
+  @media (width >= 40rem) {
+    width: var(--width);
+  }
+}
+
+/**
  * Opacity-mask bottom fade.
  *
  * Fades only the bottom `--mask-fade-bottom-size` (150px by default) to
