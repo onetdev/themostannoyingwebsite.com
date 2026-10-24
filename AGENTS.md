@@ -32,6 +32,7 @@ The project includes specialized skills that you SHOULD use for specific tasks. 
 - **`i18n-assistant`**: Use for extracting, managing, and translating user-facing strings.
 - **`git-commit`**: Use to review staged work, detect scope, and create a local Conventional Commit (never pushes).
 - **`git-pr-sync`**: Use to review branch commits, compose PR documentation matching the template, and open or update a draft PR via GitHub CLI (`gh`).
+- **`pr-review`**: Use to rigorously review any PR/branch diff — UI, API, data, infrastructure, dependency, documentation, refactor, or instrumentation — for correctness, security, privacy, missing features, overengineering, performance, and test gaps, with prioritized `path:line` findings and a suggested fix order.
 - **`adr-writer`**: Use to draft and manage Architectural Decision Records in the `adr/` folder.
 - **`audit-resolve`**: Use to audit and upgrade dependencies that have known security vulnerabilities.
 - **`dependency-upgrade`**: Use to bump dependency versions across the monorepo and verify the repository still works.
