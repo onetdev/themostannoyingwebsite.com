@@ -108,7 +108,7 @@ export function AppNavigationMobile({ activeItem }: AppNavigationMobileProps) {
                     onClick={() => onClick(item)}
                     data-active={active}
                     aria-current={active ? 'page' : undefined}
-                    className="flex items-center px-3 py-2 text-sm transition-colors data-[active=true]:font-semibold"
+                    className="link-as-inherit flex items-center px-3 py-2 text-sm transition-colors data-[active=true]:font-semibold"
                   >
                     {item.icon && (
                       <Icon icon={item.icon} className="text-primary mr-2" />

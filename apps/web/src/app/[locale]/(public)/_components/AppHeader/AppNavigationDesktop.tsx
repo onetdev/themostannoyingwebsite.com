@@ -65,7 +65,7 @@ export function AppNavigationDesktop({
           aria-label={t(item.labelKey)}
           title={t(item.labelKey)}
           className={cn(
-            'flex-row items-center gap-2 whitespace-nowrap',
+            'link-as-inherit flex-row items-center gap-2 whitespace-nowrap',
             active && 'font-bold',
           )}
         >
@@ -92,7 +92,7 @@ export function AppNavigationDesktop({
           active={active}
           aria-label={t(item.labelKey)}
           title={t(item.labelKey)}
-          className="flex-row items-center gap-2 whitespace-nowrap data-active:font-bold"
+          className="link-as-inherit flex-row items-center gap-2 whitespace-nowrap data-active:font-bold"
         >
           {item.icon && <Icon icon={item.icon} className="text-primary" />}
           {item.hideLabel !== true && <span>{t(item.labelKey)}</span>}

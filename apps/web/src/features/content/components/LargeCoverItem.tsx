@@ -43,7 +43,7 @@ export function LargeCoverItem({
               loading="eager"
             />
           )}
-          <div className="from-background/85 via-background/40 pointer-events-none absolute inset-0 bg-linear-to-t to-transparent" />
+          <div className="from-background/60 via-background/15 pointer-events-none absolute inset-x-0 bottom-0 h-3/5 bg-linear-to-t to-transparent" />
           <div className="absolute inset-x-0 bottom-0 flex flex-col items-start gap-3 p-4 md:p-6">
             <ArticleCategories
               article={article}
