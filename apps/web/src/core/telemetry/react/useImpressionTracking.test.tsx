@@ -85,6 +85,19 @@ describe('useImpressionTracking', () => {
     expect(observeMock).toHaveBeenCalledTimes(1);
   });
 
+  it('does not observe impressions inside an ignored subtree', () => {
+    render(
+      <>
+        <Harness />
+        <div data-track-ignore>
+          <div data-track-impression="ignored:card" />
+        </div>
+      </>,
+    );
+
+    expect(observeMock).toHaveBeenCalledTimes(1);
+  });
+
   it('emits once after the dwell threshold', () => {
     const { container } = render(<Harness />);
     const target = container.firstElementChild as Element;
@@ -100,7 +113,7 @@ describe('useImpressionTracking', () => {
     });
     expect(trackMock).toHaveBeenCalledTimes(1);
     expect(trackMock).toHaveBeenCalledWith('impression.element', {
-      key: 'article:cover:hello',
+      key: 'content:article:article:cover:hello',
       section: 'content:article',
       index: 0,
       ratio: 0.8,
@@ -135,7 +148,9 @@ describe('useImpressionTracking', () => {
 
       expect(trackMock).toHaveBeenCalledWith(
         'impression.element',
-        expect.objectContaining({ key: 'article:cover:hello' }),
+        expect.objectContaining({
+          key: 'content:article:article:cover:hello',
+        }),
       );
     } finally {
       Object.defineProperty(window, 'innerHeight', {
@@ -188,5 +203,31 @@ describe('useImpressionTracking', () => {
     });
 
     expect(trackMock).not.toHaveBeenCalled();
+  });
+
+  it('does not emit while the document is hidden', () => {
+    const { container } = render(<Harness />);
+    const target = container.firstElementChild as Element;
+    const original = Object.getOwnPropertyDescriptor(
+      document,
+      'visibilityState',
+    );
+
+    Object.defineProperty(document, 'visibilityState', {
+      configurable: true,
+      value: 'hidden',
+    });
+
+    try {
+      emitIntersection(target, 0.8);
+      act(() => {
+        jest.advanceTimersByTime(1000);
+      });
+      expect(trackMock).not.toHaveBeenCalled();
+    } finally {
+      if (original) {
+        Object.defineProperty(document, 'visibilityState', original);
+      }
+    }
   });
 });

@@ -82,6 +82,33 @@ export function bucketLength(length: number): string {
 }
 
 /**
+ * Value-bearing props that must not survive on a sensitive surface, even in
+ * the local bus/history. The section/control identity is kept so a developer
+ * can still see that a field was touched, but not which answer was chosen.
+ */
+const SENSITIVE_CHOICE_PROP_KEYS: ReadonlySet<string> = new Set([
+  'checked',
+  'optionCount',
+  'optionIndex',
+  'optionValue',
+  'valueBucket',
+]);
+
+export function redactSensitiveChoiceProps(
+  input: TelemetryProps,
+): TelemetryProps {
+  const output: TelemetryProps = {};
+
+  for (const [key, value] of Object.entries(input)) {
+    if (!SENSITIVE_CHOICE_PROP_KEYS.has(key)) {
+      output[key] = value;
+    }
+  }
+
+  return output;
+}
+
+/**
  * Normalises arbitrary props into the primitive, size-limited shape sinks
  * accept. Unknown/sensitive keys are dropped instead of being trusted.
  */

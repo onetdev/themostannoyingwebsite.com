@@ -133,6 +133,33 @@ test.describe('telemetry scopes', () => {
 
     await expect(page.locator('[data-slot="dialog-content"]')).toBeVisible();
     await expectScoped(page);
+
+    const hasShareEvent = () =>
+      page.evaluate(() => {
+        const history = (
+          window as unknown as {
+            maw?: {
+              tracker?: {
+                history: () => Array<{
+                  name: string;
+                  props?: Record<string, unknown>;
+                }>;
+              };
+            };
+          }
+        ).maw?.tracker?.history();
+
+        return Boolean(
+          history?.some(
+            (event) =>
+              event.name === 'ui.share' &&
+              event.props?.channel === 'modal' &&
+              event.props?.surface === 'navigation:main',
+          ),
+        );
+      });
+
+    await expect.poll(hasShareEvent).toBe(true);
   });
 
   test('newsletter modal resolves a section', async ({ page }) => {
@@ -228,7 +255,9 @@ test.describe('telemetry events', () => {
     await expect.poll(hasLogoClick).toBe(true);
   });
 
-  test('records a Base UI select pick', async ({ page }) => {
+  test('records a Base UI select pick without exposing the value', async ({
+    page,
+  }) => {
     await page.goto('/en/user/signup');
 
     await page.getByRole('combobox', { name: 'Gender' }).click();
@@ -254,7 +283,9 @@ test.describe('telemetry events', () => {
             (event) =>
               event.name === 'ui.select' &&
               event.props?.control === 'auth:gender' &&
-              event.props?.optionValue === 'male',
+              event.props?.section === 'auth:signup' &&
+              event.props?.optionValue === undefined &&
+              event.props?.optionIndex === undefined,
           ),
         );
       });

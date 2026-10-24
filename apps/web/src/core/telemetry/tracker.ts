@@ -3,8 +3,10 @@ import {
   CATEGORY_DEDUPE_WINDOW_MS,
   CATEGORY_SAMPLING,
   getCategory,
+  isSensitiveTelemetryControl,
+  isSensitiveTelemetrySection,
 } from './catalog';
-import { safePath, sanitizeProps } from './redact';
+import { redactSensitiveChoiceProps, safePath, sanitizeProps } from './redact';
 import type {
   InteractionEvent,
   TelemetryCategory,
@@ -179,7 +181,13 @@ export class TelemetryTracker {
     }
 
     const category = getCategory(name);
-    const sanitized = sanitizeProps(props);
+    const sanitizedProps = sanitizeProps(props);
+    const isSensitive =
+      isSensitiveTelemetrySection(sanitizedProps.section) ||
+      isSensitiveTelemetryControl(sanitizedProps.control);
+    const sanitized = isSensitive
+      ? redactSensitiveChoiceProps(sanitizedProps)
+      : sanitizedProps;
 
     if (!this.passesSampling(category)) {
       return undefined;

@@ -10,6 +10,15 @@ const SEGMENTED_GROUP_SELECTOR =
   '[data-slot="toggle-group"],[data-slot="radio-group"],[role="radiogroup"]';
 
 /**
+ * Base UI renders checkboxes/switches/radios as `span[role]` roots plus an
+ * `aria-hidden` mirror input. The roots are interactive controls but are not
+ * part of `form.elements`, so both the form metrics and the scope audit need
+ * them explicitly.
+ */
+const CHOICE_CONTROL_SELECTOR =
+  '[role="checkbox"],[role="switch"],[role="radio"],[data-slot="checkbox"],[data-slot="switch"],[data-slot="radio-group-item"]';
+
+/**
  * Base UI `Select` renders its options into a portal as `role="option"` nodes,
  * so option picks never reach the click or change handlers on their own. A
  * `SelectContent` opts in with `data-track-control` and this selector picks the
@@ -30,6 +39,17 @@ export const ACTION_SELECTOR = [
 
 /** Everything that can emit an interaction, including change-only controls. */
 const INTERACTIVE_SELECTOR = `${ACTION_SELECTOR},input:not([type="hidden"]),select,textarea`;
+
+/**
+ * Capture and audit use the same set: actions, segmented items, select
+ * options, native form controls and Base UI role controls.
+ */
+export const EMITTING_CONTROL_SELECTOR = [
+  INTERACTIVE_SELECTOR,
+  SEGMENTED_ITEM_SELECTOR,
+  SELECT_ITEM_SELECTOR,
+  CHOICE_CONTROL_SELECTOR,
+].join(',');
 
 const TEXT_INPUT_TYPES = new Set([
   'text',
@@ -59,19 +79,32 @@ const SENSITIVE_INPUT_TYPES = new Set([
 
 /** Field names that identify a credential or payment value. */
 const SENSITIVE_FIELD_PATTERN =
-  /pass|card|cvv|cvc|ssn|secret|token|otp|one-time/i;
+  /pass|pwd|card|cvv|cvc|ssn|secret|token|otp|one-time/i;
 
 /** Invalid-fields limit keeps a broken form from producing a huge payload. */
 const MAX_REPORTED_FIELDS = 5;
 
-/** `/debug`, `/en/debug`, `/debug/…` — never the middle of another segment. */
-const DEBUG_ROUTE_PATTERN = /(^|\/)debug(\/|$)/;
+/** Locale segments are BCP-47-ish (`en`, `pt-BR`, `zh-Hant`). */
+const LOCALE_SEGMENT_PATTERN = /^[a-z]{2}(?:-[a-z0-9]{2,8})?$/i;
+
+/**
+ * `/debug` is suppressed, including its locale-prefixed form (`/en/debug/…`),
+ * but an article/author slug named `debug` (`/en/articles/debug/`) is not.
+ */
+function isDebugPath(pathname: string): boolean {
+  const segments = pathname.split('/').filter(Boolean);
+  const first = segments[0];
+  const routeSegments =
+    first && LOCALE_SEGMENT_PATTERN.test(first) ? segments.slice(1) : segments;
+
+  return routeSegments[0] === 'debug';
+}
 
 export function isTrackingSuppressed(): boolean {
   if (typeof window === 'undefined') {
     return true;
   }
-  return DEBUG_ROUTE_PATTERN.test(window.location.pathname);
+  return isDebugPath(window.location.pathname);
 }
 
 export function resolveActionElement(target: Element): Element | null {
@@ -95,9 +128,10 @@ export function resolveSection(element: Element): TelemetrySection | undefined {
  * the trigger or page wrapper.
  */
 export function findUnscopedActions(root: ParentNode = document): Element[] {
-  return Array.from(root.querySelectorAll(INTERACTIVE_SELECTOR)).filter(
+  return Array.from(root.querySelectorAll(EMITTING_CONTROL_SELECTOR)).filter(
     (element) =>
       !element.closest(TRACK_IGNORE_SELECTOR) &&
+      !element.closest('[hidden],[inert]') &&
       // Uses the registry guard, so an unknown `data-track-section` counts as
       // unscoped instead of silently passing the audit.
       resolveSection(element) === undefined &&
@@ -119,14 +153,28 @@ export function resolveActionLabel(element: Element): string | undefined {
   return trimmed && trimmed.length > 0 ? trimmed : undefined;
 }
 
+const anonymousFormIds = new WeakMap<HTMLFormElement, string>();
+let anonymousFormSequence = 0;
+
 export function resolveFormKey(form: HTMLFormElement): string {
-  return (
+  const explicit =
     form.getAttribute('data-track-form') ||
     form.id ||
     form.getAttribute('data-slot') ||
-    form.getAttribute('name') ||
-    'anonymous'
-  );
+    form.getAttribute('name');
+  if (explicit) {
+    return explicit;
+  }
+
+  const existing = anonymousFormIds.get(form);
+  if (existing) {
+    return existing;
+  }
+
+  anonymousFormSequence += 1;
+  const key = `anonymous-${anonymousFormSequence}`;
+  anonymousFormIds.set(form, key);
+  return key;
 }
 
 export function resolveFieldName(
@@ -178,18 +226,18 @@ export function isSensitiveField(element: Element): boolean {
   }
 
   const identifier =
-    element.getAttribute('name') ??
-    element.getAttribute('data-track-field') ??
-    element.id ??
+    element.getAttribute('name') ||
+    element.getAttribute('data-track-field') ||
+    element.id ||
     '';
   return SENSITIVE_FIELD_PATTERN.test(identifier);
 }
 
 /**
  * Base UI renders an `aria-hidden` mirror `<input>` next to every checkbox,
- * switch and radio. For grouped radios the click already produces `ui.select`
- * (the segmented-control path), so the mirror must not report a second time;
- * for standalone checkboxes/switches the mirror *is* the only signal.
+ * switch and radio. Standalone mirrors emit `ui.toggle`; grouped radio mirrors
+ * are handled by the radio-group change path so label and keyboard selection
+ * are captured too.
  */
 export function isGroupedChoiceMirror(element: Element): boolean {
   if (
@@ -290,13 +338,19 @@ export function readRangeBucket(
 }
 
 export function countFormFields(form: HTMLFormElement): number {
-  return Array.from(form.elements).filter(
+  const nativeControls = Array.from(form.elements).filter(
     (field) =>
       (field instanceof HTMLInputElement ||
         field instanceof HTMLTextAreaElement ||
         field instanceof HTMLSelectElement) &&
       isCountableControl(field),
   ).length;
+
+  const choiceControls = Array.from(
+    form.querySelectorAll(CHOICE_CONTROL_SELECTOR),
+  ).filter(isCountableControl);
+
+  return nativeControls + choiceControls.length;
 }
 
 /** A control counts as filled when it would contribute to a submission. */
@@ -317,8 +371,30 @@ function isFilledControl(field: Element): boolean {
   return field.value.length > 0;
 }
 
+/**
+ * Checked state of a Base UI choice root (`role="checkbox"|"switch"|"radio"`).
+ * The mirror input is excluded from counts, so the visible root is authoritative.
+ */
+function isCheckedChoice(element: Element): boolean {
+  const ariaChecked = element.getAttribute('aria-checked');
+  return (
+    ariaChecked === 'true' ||
+    ariaChecked === 'mixed' ||
+    element.getAttribute('aria-pressed') === 'true' ||
+    element.getAttribute('data-checked') !== null ||
+    element.getAttribute('data-state') === 'checked'
+  );
+}
+
 export function countFilledFields(form: HTMLFormElement): number {
-  return Array.from(form.elements).filter(isFilledControl).length;
+  const nativeFilled = Array.from(form.elements).filter(isFilledControl).length;
+  const choicesFilled = Array.from(
+    form.querySelectorAll(CHOICE_CONTROL_SELECTOR),
+  ).filter(
+    (element) => isCountableControl(element) && isCheckedChoice(element),
+  ).length;
+
+  return nativeFilled + choicesFilled;
 }
 
 /**
@@ -363,18 +439,21 @@ export function resolveImpressionIndex(element: Element): number | undefined {
 }
 
 /**
- * Stable identity for an impression: explicit `data-track-key` wins, then the
- * index. Without either, the label alone is used (one impression per label per
- * route).
+ * Stable identity for an impression: section + explicit `data-track-key`, then
+ * the index. Without either, the label alone is used (one impression per label
+ * per section per route).
  */
 export function resolveImpressionKey(element: Element): string {
+  const section = resolveSection(element) ?? 'unscoped';
   const label = element.getAttribute('data-track-impression') || 'element';
   const key = element.getAttribute('data-track-key');
   if (key) {
-    return `${label}:${key}`;
+    return `${section}:${label}:${key}`;
   }
   const index = resolveImpressionIndex(element);
-  return index === undefined ? label : `${label}:${index}`;
+  return index === undefined
+    ? `${section}:${label}`
+    : `${section}:${label}:${index}`;
 }
 
 /** Fraction of an element that must be visible before it counts as impressed. */
@@ -467,6 +546,44 @@ export function readPressedState(item: Element): boolean {
     item.getAttribute('data-pressed') !== null ||
     item.getAttribute('data-state') === 'on'
   );
+}
+
+/**
+ * Resolves a grouped Base UI radio change from its hidden mirror input. The
+ * mirror is the only stable signal for label clicks and keyboard arrow changes;
+ * the visible `role="radio"` root is an option of the same group in DOM order.
+ */
+export function resolveGroupedRadioChange(
+  target: Element,
+): SegmentedSelection | null {
+  if (!(target instanceof HTMLInputElement) || target.type !== 'radio') {
+    return null;
+  }
+
+  const group = target.closest(SEGMENTED_GROUP_SELECTOR);
+  if (!group) {
+    return null;
+  }
+
+  const inputs = Array.from(group.querySelectorAll('input[type="radio"]'));
+  const items = Array.from(group.querySelectorAll(SEGMENTED_ITEM_SELECTOR));
+  const index = inputs.indexOf(target);
+  const item = items[index];
+  if (index < 0 || !item) {
+    return null;
+  }
+
+  return {
+    item,
+    group,
+    control:
+      group.getAttribute('data-track-control') ??
+      group.getAttribute('data-slot') ??
+      'segmented',
+    index,
+    count: items.length,
+    value: item.getAttribute('data-value') ?? undefined,
+  };
 }
 
 export interface SelectSelection {

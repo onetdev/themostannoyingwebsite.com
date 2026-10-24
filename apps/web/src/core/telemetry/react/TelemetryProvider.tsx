@@ -27,16 +27,27 @@ function installDebugHandle(): void {
 /**
  * Mounts the whole interaction-observability layer once per app instance:
  * bus bridge, DOM capture, impressions, and web vitals.
+ *
+ * A disabled tracker still exposes the read-only debug handle (useful for the
+ * e2e scope audit), but installs no listeners or observers.
  */
 export function TelemetryProvider() {
+  useEffect(() => {
+    installDebugHandle();
+  }, []);
+
+  if (!telemetry.isEnabled()) {
+    return null;
+  }
+
+  return <TelemetryCapture />;
+}
+
+function TelemetryCapture() {
   useTelemetryBusBridge();
   useInteractionTracking();
   useImpressionTracking();
   useWebVitalsTracking();
-
-  useEffect(() => {
-    installDebugHandle();
-  }, []);
 
   return null;
 }

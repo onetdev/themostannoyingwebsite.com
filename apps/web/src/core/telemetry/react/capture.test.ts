@@ -79,9 +79,26 @@ describe('capture helpers', () => {
 
     expect(resolveSection(input as Element)).toBe('content:article');
     expect(resolveFormKey(form as HTMLFormElement)).toBe('comment-form');
-    expect(resolveImpressionKey(indexed as Element)).toBe('carousel:card:3');
-    expect(resolveImpressionKey(keyed as Element)).toBe('hero:front');
+    expect(resolveImpressionKey(indexed as Element)).toBe(
+      'content:article:carousel:card:3',
+    );
+    expect(resolveImpressionKey(keyed as Element)).toBe(
+      'content:article:hero:front',
+    );
     expect(collectInvalidFields(form as HTMLFormElement)).toEqual(['body']);
+  });
+
+  it('keeps anonymous forms distinct', () => {
+    document.body.innerHTML = '<form></form><form></form>';
+    const [first, second] = Array.from(document.querySelectorAll('form'));
+
+    expect(resolveFormKey(first as HTMLFormElement)).toMatch(/^anonymous-\d+$/);
+    expect(resolveFormKey(second as HTMLFormElement)).toMatch(
+      /^anonymous-\d+$/,
+    );
+    expect(resolveFormKey(first as HTMLFormElement)).not.toBe(
+      resolveFormKey(second as HTMLFormElement),
+    );
   });
 
   it('resolves segmented control selections', () => {
@@ -199,6 +216,10 @@ describe('capture helpers', () => {
         <button id="unscoped">Unscoped</button>
         <a id="link" href="/x">Link</a>
         <div role="button" id="role-button">Role</div>
+        <div role="switch" id="role-switch"></div>
+        <div role="checkbox" id="role-checkbox"></div>
+        <div role="radio" id="role-radio"></div>
+        <div role="option" id="role-option"></div>
         <input id="text-field" />
         <input id="hidden-field" type="hidden" />
         <span>Not an action</span>
@@ -209,6 +230,7 @@ describe('capture helpers', () => {
       <footer data-track-section="not:a:section">
         <button id="unknown-section">Unknown section</button>
       </footer>
+      <div hidden><button id="visually-hidden">Hidden</button></div>
     `;
 
     const unscoped = findUnscopedActions(document).map((element) => element.id);
@@ -217,6 +239,10 @@ describe('capture helpers', () => {
       'unscoped',
       'link',
       'role-button',
+      'role-switch',
+      'role-checkbox',
+      'role-radio',
+      'role-option',
       'text-field',
       'portaled',
       'unknown-section',
@@ -230,6 +256,10 @@ describe('capture helpers', () => {
       'unscoped',
       'link',
       'role-button',
+      'role-switch',
+      'role-checkbox',
+      'role-radio',
+      'role-option',
       'text-field',
       'unknown-section',
     ]);
@@ -253,6 +283,28 @@ describe('capture privacy guards', () => {
     const email = document.createElement('input');
     email.name = 'email';
     expect(isSensitiveField(email)).toBe(false);
+
+    const emptyName = document.createElement('input');
+    emptyName.name = '';
+    emptyName.id = 'password';
+    expect(isSensitiveField(emptyName)).toBe(true);
+  });
+
+  it('counts visible Base UI choice roots as form controls', () => {
+    document.body.innerHTML = `
+      <form>
+        <input name="email" value="jane@example.test" />
+        <div role="checkbox" aria-checked="true"></div>
+        <div role="switch" aria-checked="false"></div>
+        <div role="radio" aria-checked="true"></div>
+        <input type="radio" aria-hidden="true" tabindex="-1" />
+      </form>
+    `;
+
+    const form = document.querySelector('form') as HTMLFormElement;
+
+    expect(countFormFields(form)).toBe(4);
+    expect(countFilledFields(form)).toBe(3);
   });
 
   it('ignores Base UI mirror inputs when counting form state', () => {
@@ -292,7 +344,13 @@ describe('capture privacy guards', () => {
     window.history.replaceState({}, '', '/en/debug/');
     expect(isTrackingSuppressed()).toBe(true);
 
+    window.history.replaceState({}, '', '/debug');
+    expect(isTrackingSuppressed()).toBe(true);
+
     window.history.replaceState({}, '', '/en/debugging/');
+    expect(isTrackingSuppressed()).toBe(false);
+
+    window.history.replaceState({}, '', '/en/articles/debug/');
     expect(isTrackingSuppressed()).toBe(false);
 
     window.history.replaceState({}, '', '/en/articles/');

@@ -109,14 +109,17 @@ export interface TelemetryEventPropsMap {
   'ui.dialog-close': { name: string; section?: TelemetrySection };
   'ui.toggle': {
     control: string;
-    checked: boolean;
+    /** Omitted on sensitive sections, where the choice value is redacted. */
+    checked?: boolean;
     section?: TelemetrySection;
     source?: string;
   };
   'ui.select': {
     control: string;
-    optionIndex: number;
-    optionCount: number;
+    /** Omitted on sensitive sections, where the choice value is redacted. */
+    optionIndex?: number;
+    /** Omitted on sensitive sections, where the choice value is redacted. */
+    optionCount?: number;
     /** Stable option value (e.g. `yearly`), never free-form user input. */
     optionValue?: string;
     /** Post-update pressed/checked state for multi-select controls. */
@@ -128,7 +131,8 @@ export interface TelemetryEventPropsMap {
   /** A range input changed. `valueBucket` is the filled range in 10 % steps. */
   'ui.slider': {
     control: string;
-    valueBucket: number;
+    /** Omitted on sensitive sections, where the choice value is redacted. */
+    valueBucket?: number;
     section?: TelemetrySection;
   };
   'ui.modal-dismiss': Record<string, never>;
@@ -184,7 +188,6 @@ export interface TelemetryEventPropsMap {
   };
   'session.scroll-depth': { pct: number };
   'session.end': {
-    durationMs: number;
     interactionCount: number;
     routeCount: number;
   };

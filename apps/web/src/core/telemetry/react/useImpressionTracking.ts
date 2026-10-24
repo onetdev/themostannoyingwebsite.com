@@ -11,10 +11,10 @@ import {
   resolveImpressionIndex,
   resolveImpressionKey,
   resolveSection,
+  TRACK_IGNORE_SELECTOR,
 } from './capture';
 
 const MIN_VISIBLE_MS = 500;
-const RESCAN_DEBOUNCE_MS = 250;
 
 interface Dwell {
   timer: ReturnType<typeof setTimeout>;
@@ -58,6 +58,12 @@ function startDwell(
   context: DwellContext,
 ): void {
   const element = entry.target;
+  if (
+    document.visibilityState !== 'visible' ||
+    element.closest(TRACK_IGNORE_SELECTOR)
+  ) {
+    return;
+  }
   const key = resolveImpressionKey(element);
   if (context.seen.has(key)) {
     return;
@@ -77,7 +83,11 @@ function startDwell(
       return;
     }
     context.dwells.delete(element);
-    if (context.seen.has(key) || !element.isConnected) {
+    if (
+      document.visibilityState !== 'visible' ||
+      context.seen.has(key) ||
+      !element.isConnected
+    ) {
       return;
     }
 
@@ -106,14 +116,78 @@ function handleEntries(
   }
 }
 
+interface ImpressionRegistry {
+  observer: IntersectionObserver;
+  observed: Set<Element>;
+  context: DwellContext;
+}
+
+function observeElement(registry: ImpressionRegistry, element: Element): void {
+  if (
+    registry.observed.has(element) ||
+    element.closest(TRACK_IGNORE_SELECTOR)
+  ) {
+    return;
+  }
+  registry.observed.add(element);
+  registry.observer.observe(element);
+}
+
+function scanImpressions(
+  registry: ImpressionRegistry,
+  root: ParentNode = document,
+): void {
+  if (root instanceof Element && root.matches('[data-track-impression]')) {
+    observeElement(registry, root);
+  }
+  for (const element of Array.from(
+    root.querySelectorAll('[data-track-impression]'),
+  )) {
+    observeElement(registry, element);
+  }
+}
+
+function unobserveTree(registry: ImpressionRegistry, node: Node): void {
+  if (!(node instanceof Element)) {
+    return;
+  }
+
+  const targets = Array.from(node.querySelectorAll('[data-track-impression]'));
+  if (node.matches('[data-track-impression]')) {
+    targets.push(node);
+  }
+
+  for (const target of targets) {
+    registry.context.clearDwell(target);
+    registry.observer.unobserve(target);
+    registry.observed.delete(target);
+  }
+}
+
+function handleMutations(
+  registry: ImpressionRegistry,
+  records: MutationRecord[],
+): void {
+  for (const record of records) {
+    for (const node of Array.from(record.removedNodes)) {
+      unobserveTree(registry, node);
+    }
+    for (const node of Array.from(record.addedNodes)) {
+      if (node instanceof Element) {
+        scanImpressions(registry, node);
+      }
+    }
+  }
+}
+
 /**
  * Single IntersectionObserver for the whole app.
  *
  * An element is "impressed" once it has been sufficiently visible for 500 ms;
  * "sufficiently" is 50 % of its own area, or half the viewport for elements
- * taller than the viewport (article bodies, long carousels). A debounced
- * MutationObserver picks up dynamically mounted nodes (carousel cards,
- * portals), so no feature component needs its own observer.
+ * taller than the viewport (article bodies, long carousels). A MutationObserver
+ * scans only added/removed subtrees (carousel cards, portals), so no feature
+ * component needs its own observer.
  */
 export function useImpressionTracking(): void {
   const pathname = usePathname();
@@ -142,50 +216,47 @@ export function useImpressionTracking(): void {
       (entries) => handleEntries(entries, context),
       { threshold: [...IMPRESSION_THRESHOLDS] },
     );
-
-    const observed = new WeakSet<Element>();
-    const scan = () => {
-      for (const element of Array.from(
-        document.querySelectorAll('[data-track-impression]'),
-      )) {
-        if (observed.has(element)) {
-          continue;
-        }
-        observed.add(element);
-        observer.observe(element);
-      }
+    const registry: ImpressionRegistry = {
+      observer,
+      observed: new Set<Element>(),
+      context,
     };
 
-    scan();
+    scanImpressions(registry);
 
-    let rescanTimer: ReturnType<typeof setTimeout> | undefined;
-    // Coalesce bursts without letting a continuously mutating page starve the
-    // scan: the timer is only scheduled when none is pending.
-    const scheduleScan = () => {
-      if (rescanTimer !== undefined) {
-        return;
-      }
-      rescanTimer = setTimeout(() => {
-        rescanTimer = undefined;
-        scan();
-      }, RESCAN_DEBOUNCE_MS);
-    };
-    const mutations = new MutationObserver(scheduleScan);
+    const mutations = new MutationObserver((records) => {
+      handleMutations(registry, records);
+    });
 
     if (document.body) {
       mutations.observe(document.body, { childList: true, subtree: true });
     }
 
+    const onVisibility = () => {
+      if (document.visibilityState !== 'visible') {
+        for (const element of Array.from(context.dwells.keys())) {
+          context.clearDwell(element);
+        }
+        return;
+      }
+      // Re-observe the already known elements so an element that stayed in
+      // view across a hidden/visible cycle starts a fresh dwell.
+      for (const element of registry.observed) {
+        observer.unobserve(element);
+        observer.observe(element);
+      }
+    };
+    document.addEventListener('visibilitychange', onVisibility);
+
     return () => {
       observer.disconnect();
       mutations.disconnect();
-      if (rescanTimer !== undefined) {
-        clearTimeout(rescanTimer);
-      }
+      document.removeEventListener('visibilitychange', onVisibility);
       for (const dwell of context.dwells.values()) {
         clearTimeout(dwell.timer);
       }
       context.dwells.clear();
+      registry.observed.clear();
     };
   }, [pathname, locale]);
 }

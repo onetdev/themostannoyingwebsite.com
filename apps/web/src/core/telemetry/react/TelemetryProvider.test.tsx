@@ -59,4 +59,22 @@ describe('TelemetryProvider', () => {
       'nav.route-view',
     ]);
   });
+
+  it('installs no capture when the tracker is disabled', () => {
+    telemetry.setEnabled(false);
+
+    render(
+      <>
+        <TelemetryProvider />
+        <button type="button" data-slot="button">
+          Press me
+        </button>
+      </>,
+    );
+
+    fireEvent.click(screen.getByText('Press me'));
+
+    expect(window.maw?.tracker?.isEnabled()).toBe(false);
+    expect(telemetry.getHistory()).toHaveLength(0);
+  });
 });

@@ -26,7 +26,7 @@ them.
 | Source | What it captures | Where |
 | --- | --- | --- |
 | Delegation | page views, clicks, form start/submit/abandon, validation failures, toggles, selects, sliders, text-field blur, link kinds, dialog open/close, scroll depth, visibility, session lifecycle | `react/useInteractionTracking.ts` |
-| IntersectionObserver | `[data-track-impression]` nodes (once per key per route) | `react/useImpressionTracking.ts` |
+| IntersectionObserver | `[data-track-impression]` nodes (once per section + key per route) | `react/useImpressionTracking.ts` |
 | Web vitals | TTFB, FCP, LCP, INP, CLS with route + `navigationType` | `react/useWebVitalsTracking.ts` |
 | Event bus bridge | the 15 behavioural `AppEvents` emissions | `bus-bridge.ts` |
 | Global handlers | `window.error`, `unhandledrejection`, resource load failures | `useInteractionTracking.ts` |
@@ -82,7 +82,9 @@ keeps the next-intl pathname unchanged.
 - `data-track-control` names a toggle group / radio group. Option values are
   rendered as `data-value` by `ToggleGroupItem` and `RadioGroupItem`, so clicking
   one emits `ui.select` with `{ control, optionIndex, optionCount, optionValue, checked }`
-  instead of an anonymous `ui.click`.
+  instead of an anonymous `ui.click`. Grouped radios are emitted from their mirror
+  `change`, so clicking the label text and keyboard arrow selection are captured
+  too, not only the small radio circle.
 - Base UI `Select` popups are portaled `role="option"` nodes and never fire a
   native `change`. Annotate `SelectContent` with `data-track-control` (and its own
   `data-track-section`) to emit `ui.select` for option picks; `SelectItem`
@@ -94,12 +96,14 @@ keeps the next-intl pathname unchanged.
   own `min`–`max` range in 10 % steps, never the raw value.
 - `data-track-impression` opts an element into impression tracking; `data-track-key`
   makes it stable across reorders, `data-track-index` is the fallback identity.
-  An impression is emitted once, after 500 ms of qualifying visibility: half of
-  the element's own area, or half the viewport for elements taller than the
-  viewport (article bodies, long carousels).
+  The identity also includes the nearest section. An impression is emitted once,
+  after 500 ms of qualifying visibility: half of the element's own area, or half
+  the viewport for elements taller than the viewport (article bodies, long
+  carousels). Dwell timers are paused while the document is hidden.
 - `data-track-form` names a form and opts its text fields into `input.change`.
 - `data-track-input` opts a single text field in.
-- `data-track-ignore` suppresses capture for a subtree.
+- `data-track-ignore` suppresses capture for a subtree on every path: clicks,
+  changes, focus, submit, media errors and impressions.
 
 ### Select popups and language changes
 
@@ -129,6 +133,16 @@ switcher popup is left unannotated so it does not also emit a generic `ui.select
   slugs and ids survive as identities.
 - `sanitizeProps` drops `password`, `value`, `email`, `query`, `token`, … before any
   sink sees the event. Semantic identities use `optionValue`, not `value`.
+- Sensitive surfaces are classified in `SENSITIVE_TELEMETRY_SECTIONS` (`auth:*`,
+  survey, settings, ratings, pain level). Choice values (`optionValue`,
+  `optionIndex`, `optionCount`, `checked`, `valueBucket`) are stripped before the
+  event reaches any sink, and the Sentry sink drops those events entirely, so DOB,
+  gender, survey answers, consent and preferences never become off-device
+  breadcrumbs. The control-name prefixes (`auth:`, `survey:`, `settings:`,
+  `support:rating`, `navigation:pain-level`) provide the same guard when a stale
+  event arrives without its section.
+- The Sentry sink also honours `globalPrivacyControl` and `doNotTrack`, and drops
+  `nav.locale-change` and `ui.slider` because they are value-bearing/high-volume.
 - `sessionId` is an ephemeral in-memory UUID. No cookies, no `localStorage`.
 - The `/debug` route suppresses delegated capture, impressions, vitals and the bus
   bridge. Explicit `track()` calls from shared modules (HTTP, query cache,
@@ -145,7 +159,9 @@ switcher popup is left unannotated so it does not also emit a generic `ui.select
 Sentry receives `nav`, `ui`, `form`, `error`, `disruption`, `commerce`,
 `marketing`, `achievement`, `support`, `admin`. Impressions, inputs, sessions and
 web vitals are intentionally excluded: they are aggregate data and would evict the
-fault trail from the breadcrumb buffer.
+fault trail from the breadcrumb buffer. Events scoped to a sensitive section and
+the `nav.locale-change` / `ui.slider` events are also excluded, and the sink is
+disabled for `globalPrivacyControl` / `doNotTrack` visitors.
 
 ### Transport
 
@@ -178,8 +194,9 @@ history recording is enabled.
 - Duplicate `ui`/`nav` events within 300 ms and `input` events within 500 ms are
   dropped (`CATEGORY_DEDUPE_WINDOW_MS`); the window is cleared on navigation.
 - CLS is stored in thousandths (integer) so all vitals are integers.
-- `durationMs` on the envelope is the only place for measured timings (e.g.
-  `error.http` latency); event props do not carry `*Ms` duplicates.
+- `durationMs` on the envelope is the canonical place for an event's measured
+  duration (e.g. `error.http` latency, `session.end`). `session.visibility.visibleMs`
+  is a separate state interval, not a duplicate of the event duration.
 
 ## Tests
 

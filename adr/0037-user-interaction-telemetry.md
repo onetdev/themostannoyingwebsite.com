@@ -54,11 +54,12 @@ but it must not fingerprint, persist, or collect content.
     - document-level delegation for clicks, submits, toggles, selects, sliders and
       text-field blur, deriving names from the existing `data-slot` attributes,
       `data-track-section`, and a small number of `data-track*` annotations;
-    - one `IntersectionObserver` for `[data-track-impression]` nodes (once per key
-      per route). An element counts as visible at ≥50 % of its own area for
-      500 ms, or — for elements taller than the viewport, such as article bodies
-      — once it covers half of the viewport, at which point the impression is
-      emitted with that ratio;
+    - one `IntersectionObserver` for `[data-track-impression]` nodes (once per
+      section + key per route). An element counts as visible at ≥50 % of its own
+      area for 500 ms, or — for elements taller than the viewport, such as article
+      bodies — once it covers half of the viewport, at which point the impression
+      is emitted with that ratio. Dwell timers are paused while the document is
+      hidden;
     - `useReportWebVitals` from `next/web-vitals` for TTFB/FCP/LCP/INP/CLS,
       including soft navigations;
     - `error`/`unhandledrejection` listeners for faults that never reach a boundary.
@@ -71,7 +72,9 @@ but it must not fingerprint, persist, or collect content.
     `route:visit`) are deliberately not bridged: `nav.route-view` reports every
     route and the envelope already carries `routeAlias`. Base UI `Select` popups
     are portaled options that fire no `change`, so an annotated `SelectContent`
-    emits `ui.select` from the delegated click instead.
+    emits `ui.select` from the delegated click instead. Grouped radios are emitted
+    from their hidden mirror `change`, which is the only signal that also covers
+    label clicks and keyboard arrow selection.
 
 3.  **No personal data, ever.** The tracker never reads input values (only type,
     field name, presence, and a coarse length bucket), never stores URLs with query
@@ -79,15 +82,22 @@ but it must not fingerprint, persist, or collect content.
     Credential and payment fields are excluded even when their form opts into
     tracking, `mailto:`/`tel:` links report their kind but never their address, and
     `sanitizeProps` drops sensitive keys regardless of what a call site passes.
-    `sessionId` is an in-memory UUID that dies with the tab; there are no cookies
-    and no storage.
+    Sensitive surfaces (`auth:*`, survey, settings, ratings, pain level) are
+    classified in `SENSITIVE_TELEMETRY_SECTIONS`; their choice values
+    (`optionValue`, `optionIndex`, `optionCount`, `checked`, `valueBucket`) are
+    stripped before any sink and the events are dropped from the Sentry sink,
+    because semantic identifiers such as DOB, gender, consent and preferences are
+    still personal data. `sessionId` is an in-memory UUID that dies with the tab;
+    there are no cookies and no storage.
 
 4.  **Sinks are composed per environment.** Events always go to the app event bus
     (`telemetry:event`) and Sentry breadcrumbs. Sentry receives the interaction and
     funnel categories — impressions, inputs, sessions and vitals are excluded so the
-    100-breadcrumb buffer keeps the interesting trail. Development additionally
-    prints every event to a tslog sub-logger (`[interaction] …`), which is the local
-    review surface.
+    100-breadcrumb buffer keeps the interesting trail. Sensitive sections,
+    `nav.locale-change` and `ui.slider` are excluded, and the sink honours
+    `globalPrivacyControl` / `doNotTrack`. Development additionally prints every
+    event to a tslog sub-logger (`[interaction] …`), which is the local review
+    surface.
 
     Sentry breadcrumbs are the only data that leaves the browser today; they travel
     with the next captured error. There is deliberately **no first-party network
@@ -96,8 +106,9 @@ but it must not fingerprint, persist, or collect content.
     half alone would leave a silent dead end. See "Transport" below.
 
 5.  **High-volume data is sampled and deduped.** Web vitals sample at 25 % in
-    production; duplicate UI events inside 300 ms (inputs: 500 ms) are dropped; a
-    bounded 200-event in-memory history backs `window.maw.tracker`. Delegation,
+    production; duplicate UI events inside 300 ms (inputs: 500 ms) are dropped,
+    and repeated fault/disruption events inside 1 s are collapsed; a bounded
+    200-event in-memory history backs `window.maw.tracker`. Delegation,
     impressions, vitals and the bus bridge are suppressed on the `/debug` route to
     avoid feedback loops; explicit `track()` calls from shared modules are not.
     Form abandonment is reported while the form is still connected (page hide) or

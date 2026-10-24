@@ -1,4 +1,10 @@
-import { bucketLength, safePath, sanitizeProps, scrubMessage } from './redact';
+import {
+  bucketLength,
+  redactSensitiveChoiceProps,
+  safePath,
+  sanitizeProps,
+  scrubMessage,
+} from './redact';
 
 describe('redact', () => {
   it('scrubs emails, urls and secrets from free-form messages', () => {
@@ -55,5 +61,21 @@ describe('redact', () => {
     const result = sanitizeProps({ message: long }).message;
     expect(typeof result).toBe('string');
     expect((result as string).length).toBeLessThanOrEqual(120);
+  });
+
+  it('drops value-bearing props on sensitive surfaces', () => {
+    expect(
+      redactSensitiveChoiceProps({
+        control: 'auth:gender',
+        optionIndex: 1,
+        optionCount: 3,
+        optionValue: 'male',
+        checked: true,
+        section: 'auth:signup',
+      }),
+    ).toEqual({
+      control: 'auth:gender',
+      section: 'auth:signup',
+    });
   });
 });

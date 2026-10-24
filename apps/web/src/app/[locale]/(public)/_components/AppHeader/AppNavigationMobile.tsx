@@ -20,6 +20,7 @@ import {
   SITE_NAVIGATION_FLAT_LINKS,
 } from '@/app/navigation';
 import { Link } from '@/core/react';
+import { track } from '@/core/telemetry';
 import type { RouteAlias } from '@/schemas';
 import { useRuntimeStore } from '@/stores';
 import { AppLanguageSwitcher } from '../AppLanguageSwitcher';
@@ -48,6 +49,10 @@ export function AppNavigationMobile({ activeItem }: AppNavigationMobileProps) {
 
   const onClick = (item: NavItem) => {
     if (item.id === 'global-share') {
+      track('ui.share', {
+        channel: 'modal',
+        surface: 'navigation:mobile-menu',
+      });
       showShareModal();
       return false;
     }

@@ -68,4 +68,82 @@ describe('sentry sink', () => {
 
     expect(addBreadcrumb).not.toHaveBeenCalled();
   });
+
+  it('drops events scoped to a sensitive surface', () => {
+    const sink = createSentrySink();
+
+    sink.handle(
+      event({
+        props: {
+          control: 'auth:birth-year',
+          optionValue: '1990',
+          section: 'auth:signup',
+        },
+      }),
+    );
+    sink.handle(
+      event({
+        name: 'ui.select',
+        props: {
+          control: 'survey:answer',
+          optionValue: 'option-a',
+          section: 'marketing:survey',
+        },
+      }),
+    );
+    sink.handle(
+      event({
+        name: 'ui.toggle',
+        props: {
+          control: 'consentNewsletter',
+          checked: true,
+          section: 'settings:preferences',
+        },
+      }),
+    );
+    sink.handle(
+      event({
+        name: 'ui.select',
+        props: { control: 'auth:gender', optionValue: 'male' },
+      }),
+    );
+
+    expect(addBreadcrumb).not.toHaveBeenCalled();
+  });
+
+  it('drops excluded value-bearing events outside sensitive sections', () => {
+    const sink = createSentrySink();
+
+    sink.handle(
+      event({
+        name: 'nav.locale-change',
+        props: { locale: 'de', from: 'en' },
+      }),
+    );
+    sink.handle(
+      event({
+        name: 'ui.slider',
+        props: { control: 'donation:before-after', valueBucket: 50 },
+      }),
+    );
+
+    expect(addBreadcrumb).not.toHaveBeenCalled();
+  });
+
+  it('honours globalPrivacyControl', () => {
+    Object.defineProperty(navigator, 'globalPrivacyControl', {
+      configurable: true,
+      value: true,
+    });
+
+    try {
+      createSentrySink().handle(event());
+      expect(addBreadcrumb).not.toHaveBeenCalled();
+    } finally {
+      Object.defineProperty(navigator, 'globalPrivacyControl', {
+        configurable: true,
+        value: undefined,
+      });
+    }
+  });
 });

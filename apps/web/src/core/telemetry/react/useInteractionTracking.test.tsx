@@ -2,11 +2,12 @@
  * @jest-environment jsdom
  */
 import { act, fireEvent, render, screen } from '@testing-library/react';
+import { useLocale } from 'next-intl';
 import { track } from '@/core/telemetry';
 import { useInteractionTracking } from './useInteractionTracking';
 
 jest.mock('next-intl', () => ({
-  useLocale: () => 'en',
+  useLocale: jest.fn(() => 'en'),
 }));
 
 jest.mock('@/core/i18n/navigation', () => ({
@@ -23,6 +24,7 @@ jest.mock('@/core/telemetry', () => ({
 }));
 
 const trackMock = track as unknown as jest.Mock;
+const useLocaleMock = useLocale as unknown as jest.Mock;
 
 function Harness() {
   useInteractionTracking();
@@ -36,6 +38,7 @@ function findCall(name: string) {
 describe('useInteractionTracking', () => {
   beforeEach(() => {
     jest.clearAllMocks();
+    useLocaleMock.mockReturnValue('en');
     window.history.replaceState({}, '', '/en/articles/test/');
     document.documentElement.lang = 'en';
   });
@@ -50,6 +53,33 @@ describe('useInteractionTracking', () => {
       'session.start',
       expect.objectContaining({ entryRoute: '/en/articles/test/' }),
     );
+  });
+
+  it('does not abandon forms on a locale-only change', () => {
+    const { rerender } = render(
+      <>
+        <Harness />
+        <form data-track-form="auth:login">
+          <input name="email" />
+        </form>
+      </>,
+    );
+
+    fireEvent.focusIn(screen.getByRole('textbox'));
+    expect(findCall('form.start')?.[1]).toMatchObject({ form: 'auth:login' });
+
+    useLocaleMock.mockReturnValue('de');
+    rerender(
+      <>
+        <Harness />
+        <form data-track-form="auth:login">
+          <input name="email" />
+        </form>
+      </>,
+    );
+
+    expect(findCall('form.abandoned')).toBeUndefined();
+    expect(findCall('nav.route-view')).toBeDefined();
   });
 
   it('captures delegated clicks with slot and section', () => {
@@ -103,6 +133,38 @@ describe('useInteractionTracking', () => {
     fireEvent.click(screen.getByText('Secret'));
 
     expect(findCall('ui.click')).toBeUndefined();
+  });
+
+  it('respects data-track-ignore for change, focus and submit paths', () => {
+    render(
+      <>
+        <Harness />
+        <div data-track-ignore>
+          <form data-track-form="ignored">
+            <input name="message" data-track-input defaultValue="x" />
+            <input type="checkbox" name="consent" />
+          </form>
+        </div>
+      </>,
+    );
+
+    const form = document.querySelector('form') as HTMLFormElement;
+    const text = form.querySelector(
+      'input[name="message"]',
+    ) as HTMLInputElement;
+    const checkbox = form.querySelector(
+      'input[name="consent"]',
+    ) as HTMLInputElement;
+
+    fireEvent.focusIn(text);
+    fireEvent.focusOut(text);
+    fireEvent.change(checkbox);
+    fireEvent.submit(form);
+
+    expect(findCall('form.start')).toBeUndefined();
+    expect(findCall('form.submit')).toBeUndefined();
+    expect(findCall('input.change')).toBeUndefined();
+    expect(findCall('ui.toggle')).toBeUndefined();
   });
 
   it('records the chosen segmented-control value', () => {
@@ -435,7 +497,7 @@ describe('useInteractionTracking', () => {
     expect(findCall('input.change')?.[1]).toMatchObject({ field: 'email' });
   });
 
-  it('reports standalone Base UI controls but not grouped radio mirrors', () => {
+  it('reports standalone Base UI controls without double-reporting mirrors', () => {
     render(
       <>
         <Harness />
@@ -468,6 +530,68 @@ describe('useInteractionTracking', () => {
       control: 'chaos',
       source: 'checkbox',
     });
+  });
+
+  it('captures grouped radio selection from the mirror input', () => {
+    jest.useFakeTimers();
+    render(
+      <>
+        <Harness />
+        <div data-track-section="marketing:survey">
+          <div data-slot="radio-group" data-track-control="survey:answer">
+            {/* biome-ignore lint/a11y/useSemanticElements: mirrors Base UI's span role=radio markup */}
+            <span
+              role="radio"
+              data-slot="radio-group-item"
+              data-value="option-a"
+              aria-checked="false"
+              tabIndex={0}
+            />
+            <input
+              type="radio"
+              name="answer"
+              value="0"
+              aria-hidden="true"
+              tabIndex={-1}
+              readOnly
+            />
+            {/* biome-ignore lint/a11y/useSemanticElements: mirrors Base UI's span role=radio markup */}
+            <span
+              role="radio"
+              data-slot="radio-group-item"
+              data-value="option-b"
+              aria-checked="true"
+              tabIndex={0}
+            />
+            <input
+              type="radio"
+              name="answer"
+              value="1"
+              aria-hidden="true"
+              tabIndex={-1}
+              readOnly
+            />
+          </div>
+        </div>
+      </>,
+    );
+
+    const inputs = document.querySelectorAll('input[type="radio"]');
+    fireEvent.change(inputs[1] as Element, { target: { checked: true } });
+
+    act(() => {
+      jest.advanceTimersByTime(1);
+    });
+
+    expect(findCall('ui.select')?.[1]).toEqual({
+      control: 'survey:answer',
+      optionIndex: 1,
+      optionCount: 2,
+      optionValue: 'option-b',
+      checked: true,
+      section: 'marketing:survey',
+    });
+    expect(findCall('ui.toggle')).toBeUndefined();
   });
 
   it('does not capture while on the debug route', () => {

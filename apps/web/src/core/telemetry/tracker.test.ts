@@ -153,6 +153,42 @@ describe('TelemetryTracker', () => {
     expect(sink.events[1]?.props).toEqual({ slot: 'button', tag: 'button' });
   });
 
+  it('redacts choice values on sensitive surfaces before any sink', () => {
+    const sink = createMemorySink();
+    const tracker = createTracker({ sinks: [sink] });
+
+    tracker.track('ui.select', {
+      control: 'auth:gender',
+      optionIndex: 1,
+      optionCount: 3,
+      optionValue: 'male',
+      section: 'auth:signup',
+    });
+
+    expect(sink.events[0]?.props).toEqual({
+      control: 'auth:gender',
+      section: 'auth:signup',
+    });
+    expect(tracker.getHistory()[0]?.props).toEqual({
+      control: 'auth:gender',
+      section: 'auth:signup',
+    });
+  });
+
+  it('uses the control name when a sensitive section is missing', () => {
+    const sink = createMemorySink();
+    const tracker = createTracker({ sinks: [sink] });
+
+    tracker.track('ui.select', {
+      control: 'auth:gender',
+      optionIndex: 1,
+      optionCount: 3,
+      optionValue: 'male',
+    });
+
+    expect(sink.events[0]?.props).toEqual({ control: 'auth:gender' });
+  });
+
   it('drops duplicate ui clicks until the route changes', () => {
     const sink = createMemorySink();
     const tracker = createTracker({ sinks: [sink] });
@@ -166,6 +202,21 @@ describe('TelemetryTracker', () => {
     tracker.track('ui.click', { slot: 'button', tag: 'button' });
 
     expect(sink.events).toHaveLength(2);
+  });
+
+  it('dedupes repeated fault and disruption events', () => {
+    const sink = createMemorySink();
+    const tracker = createTracker({ sinks: [sink] });
+
+    tracker.track('error.media', { kind: 'image', path: '/broken.png' });
+    tracker.track('error.media', { kind: 'image', path: '/broken.png' });
+    tracker.track('disruption.context-menu', {});
+    tracker.track('disruption.context-menu', {});
+
+    expect(sink.events.map((event) => event.name)).toEqual([
+      'error.media',
+      'disruption.context-menu',
+    ]);
   });
 
   it('applies category sampling', () => {

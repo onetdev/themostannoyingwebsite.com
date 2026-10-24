@@ -63,7 +63,7 @@ export function UserPreferences() {
               <SelectTrigger className="w-full">
                 <SelectValue />
               </SelectTrigger>
-              <SelectContent>
+              <SelectContent data-track-section="settings:preferences">
                 {languages.map((lang) => (
                   <SelectItem key={lang.locale} value={lang.locale}>
                     {lang.label} &nbsp; {lang.flag}

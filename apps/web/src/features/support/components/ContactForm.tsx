@@ -46,9 +46,12 @@ export function ContactForm({ contactEmail, className }: ContactFormProps) {
   const mailtoUrl = `mailto:${contactEmail}?subject=${encodeURIComponent(subject || '')}&body=${encodeURIComponent(message || '')}`;
 
   return (
-    <div
+    <form
       className={`flex flex-col gap-4 ${className ?? ''}`}
+      data-track-form="support:contact"
       data-track-section="support:contact"
+      method="post"
+      onSubmit={(event) => event.preventDefault()}
     >
       <Field>
         <FieldLabel htmlFor="subject" required>
@@ -100,6 +103,6 @@ export function ContactForm({ contactEmail, className }: ContactFormProps) {
       >
         {t('common.app.contactForm.send')}
       </Button>
-    </div>
+    </form>
   );
 }

@@ -22,6 +22,7 @@ import {
   SITE_NAVIGATION_LINKS,
 } from '@/app/navigation';
 import { Link } from '@/core/react';
+import { track } from '@/core/telemetry';
 import { useLangDir } from '@/hooks';
 import type { RouteAlias } from '@/schemas';
 import { useRuntimeStore } from '@/stores';
@@ -41,6 +42,7 @@ export function AppNavigationDesktop({
 
   const onClick = (item: NavItem) => {
     if (item.id === 'global-share') {
+      track('ui.share', { channel: 'modal', surface: 'navigation:main' });
       showShareModal();
       return false;
     }

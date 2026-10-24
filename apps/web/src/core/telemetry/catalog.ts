@@ -37,6 +37,8 @@ export const CATEGORY_DEDUPE_WINDOW_MS: Partial<
   ui: 300,
   input: 500,
   nav: 300,
+  error: 1000,
+  disruption: 1000,
 };
 
 /**
@@ -117,6 +119,53 @@ export type TelemetrySection = (typeof TELEMETRY_SECTIONS)[number];
 const TELEMETRY_SECTION_SET: ReadonlySet<string> = new Set(TELEMETRY_SECTIONS);
 
 /**
+ * Surfaces whose interaction payload can contain a personal choice: birth
+ * date, gender, country, survey answers, consent, ratings or preferences.
+ * They stay available to the local bus/console/history, but must never become
+ * Sentry breadcrumbs.
+ */
+export const SENSITIVE_TELEMETRY_SECTIONS: ReadonlySet<TelemetrySection> =
+  new Set<TelemetrySection>([
+    'auth:login',
+    'auth:password-reminder',
+    'auth:signup',
+    'marketing:survey',
+    'navigation:pain-level',
+    'settings:grants',
+    'settings:pain-preferences',
+    'settings:preferences',
+    'support:rating',
+  ]);
+
+export function isSensitiveTelemetrySection(
+  value: unknown,
+): value is TelemetrySection {
+  return (
+    typeof value === 'string' &&
+    SENSITIVE_TELEMETRY_SECTIONS.has(value as TelemetrySection)
+  );
+}
+
+/**
+ * Fallback guard for events whose section is missing or stale. These control
+ * names identify the same sensitive surfaces as the section registry.
+ */
+const SENSITIVE_CONTROL_PREFIXES = [
+  'auth:',
+  'survey:',
+  'settings:',
+  'support:rating',
+  'navigation:pain-level',
+];
+
+export function isSensitiveTelemetryControl(value: unknown): boolean {
+  return (
+    typeof value === 'string' &&
+    SENSITIVE_CONTROL_PREFIXES.some((prefix) => value.startsWith(prefix))
+  );
+}
+
+/**
  * Runtime guard for values that reach the tracker from the DOM. Markup can
  * still render an unknown value (e.g. a stale attribute), so the capture layer
  * drops it instead of publishing an unregistered surface.
@@ -143,6 +192,15 @@ export const SENTRY_BREADCRUMB_CATEGORIES: ReadonlySet<TelemetryCategory> =
     'support',
     'admin',
   ]);
+
+/**
+ * Individual events that are too value-bearing or too noisy for the 100-entry
+ * breadcrumb buffer even when their category is otherwise allowed.
+ */
+export const SENTRY_EXCLUDED_EVENTS: ReadonlySet<TelemetryEventName> = new Set([
+  'nav.locale-change',
+  'ui.slider',
+]);
 
 export function isTelemetryCategory(value: string): value is TelemetryCategory {
   return (TELEMETRY_CATEGORIES as readonly string[]).includes(value);

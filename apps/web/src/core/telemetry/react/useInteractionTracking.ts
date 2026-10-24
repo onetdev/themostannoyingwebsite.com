@@ -24,6 +24,7 @@ import {
   resolveControlName,
   resolveFieldName,
   resolveFormKey,
+  resolveGroupedRadioChange,
   resolveResourceKind,
   resolveSection,
   resolveSegmentedSelection,
@@ -48,8 +49,10 @@ interface FormState {
 interface CaptureSession {
   formBook: Map<string, FormState>;
   validationTimers: Set<ReturnType<typeof setTimeout>>;
+  selectionTimers: Set<ReturnType<typeof setTimeout>>;
   reachedScrollThresholds: Set<number>;
   scrollTicking: boolean;
+  scrollFrame?: number;
   visibleSince: number;
 }
 
@@ -57,10 +60,24 @@ function createSession(): CaptureSession {
   return {
     formBook: new Map(),
     validationTimers: new Set(),
+    selectionTimers: new Set(),
     reachedScrollThresholds: new Set(),
     scrollTicking: false,
     visibleSince: Date.now(),
   };
+}
+
+function scheduleSelection(
+  session: CaptureSession,
+  callback: () => void,
+): void {
+  const timer = setTimeout(() => {
+    session.selectionTimers.delete(timer);
+    if (!isTrackingSuppressed()) {
+      callback();
+    }
+  }, 0);
+  session.selectionTimers.add(timer);
 }
 
 function startSession(): void {
@@ -101,8 +118,8 @@ function trackCheckboxToggle(
   if (type !== 'checkbox' && type !== 'radio') {
     return false;
   }
-  // Grouped radios already emit `ui.select` from the segmented-control path;
-  // their Base UI mirror input would otherwise double every answer.
+  // Standalone checkboxes/switches use the mirror input as their only signal.
+  // Grouped radios are handled by `trackGroupedRadioChange` before this runs.
   if (isGroupedChoiceMirror(target)) {
     return true;
   }
@@ -112,6 +129,36 @@ function trackCheckboxToggle(
     section,
     source: type,
   });
+  return true;
+}
+
+/**
+ * Captures a grouped Base UI radio from its hidden mirror input. The mirror
+ * fires for label clicks and keyboard arrow selection, where the visible
+ * `role="radio"` element is never the click target.
+ */
+function trackGroupedRadioChange(
+  target: Element,
+  session: CaptureSession,
+): boolean {
+  const selection = resolveGroupedRadioChange(target);
+  if (!selection) {
+    return false;
+  }
+
+  scheduleSelection(session, () => {
+    track('ui.select', {
+      control: selection.control,
+      optionIndex: selection.index,
+      optionCount: selection.count,
+      optionValue: selection.value,
+      checked:
+        readPressedState(selection.item) ||
+        (target instanceof HTMLInputElement && target.checked),
+      section: resolveSection(selection.group),
+    });
+  });
+
   return true;
 }
 
@@ -170,7 +217,7 @@ function trackLinkAction(
   section: TelemetrySection | undefined,
 ): boolean {
   const href = action.getAttribute('href');
-  if (action.tagName !== 'A' || !href) {
+  if (action.tagName.toUpperCase() !== 'A' || !href) {
     return false;
   }
   const kind = getLinkKind(href, window.location.origin);
@@ -191,10 +238,13 @@ function trackLinkAction(
   return true;
 }
 
-function trackSegmentedSelection(selection: SegmentedSelection): void {
+function trackSegmentedSelection(
+  selection: SegmentedSelection,
+  session: CaptureSession,
+): void {
   // Base UI updates `aria-pressed`/`aria-checked` in the same tick as the
   // click, so read the settled state on the next macrotask.
-  setTimeout(() => {
+  scheduleSelection(session, () => {
     track('ui.select', {
       control: selection.control,
       optionIndex: selection.index,
@@ -203,18 +253,26 @@ function trackSegmentedSelection(selection: SegmentedSelection): void {
       checked: readPressedState(selection.item),
       section: resolveSection(selection.group),
     });
-  }, 0);
+  });
 }
 
-function trackSegmentedClick(target: Element): boolean {
+function trackSegmentedClick(
+  target: Element,
+  session: CaptureSession,
+): boolean {
   const selection = resolveSegmentedSelection(target);
   if (!selection) {
     return false;
   }
+  // Grouped radios are captured from their mirror input change, which also
+  // covers label clicks and keyboard arrow navigation.
+  if (selection.item.matches('[data-slot="radio-group-item"],[role="radio"]')) {
+    return true;
+  }
   if (selection.item.matches('[disabled],[aria-disabled="true"]')) {
     return true;
   }
-  trackSegmentedSelection(selection);
+  trackSegmentedSelection(selection, session);
   return true;
 }
 
@@ -296,7 +354,7 @@ function trackAction(action: Element): void {
   });
 }
 
-function handleClick(event: MouseEvent): void {
+function handleClick(event: MouseEvent, session: CaptureSession): void {
   if (isTrackingSuppressed()) {
     return;
   }
@@ -310,7 +368,7 @@ function handleClick(event: MouseEvent): void {
   }
 
   // Options and segmented controls resolve to a group, not an action element.
-  if (trackSegmentedClick(rawTarget) || trackSelectClick(rawTarget)) {
+  if (trackSegmentedClick(rawTarget, session) || trackSelectClick(rawTarget)) {
     return;
   }
 
@@ -324,7 +382,7 @@ function handleClick(event: MouseEvent): void {
 
 function handleFocusIn(event: FocusEvent, session: CaptureSession): void {
   const target = event.target;
-  if (!(target instanceof Element)) {
+  if (!(target instanceof Element) || target.closest(TRACK_IGNORE_SELECTOR)) {
     return;
   }
   const form = target.closest('form');
@@ -340,7 +398,10 @@ function handleFocusIn(event: FocusEvent, session: CaptureSession): void {
 
 function handleSubmit(event: Event, session: CaptureSession): void {
   const form = event.target;
-  if (!(form instanceof HTMLFormElement)) {
+  if (
+    !(form instanceof HTMLFormElement) ||
+    form.closest(TRACK_IGNORE_SELECTOR)
+  ) {
     return;
   }
 
@@ -357,7 +418,7 @@ function handleSubmit(event: Event, session: CaptureSession): void {
 
   const timer = setTimeout(() => {
     session.validationTimers.delete(timer);
-    if (!form.isConnected) {
+    if (!form.isConnected || form.closest(TRACK_IGNORE_SELECTOR)) {
       return;
     }
 
@@ -380,9 +441,13 @@ function handleSubmit(event: Event, session: CaptureSession): void {
   session.validationTimers.add(timer);
 }
 
-function handleChange(event: Event): void {
+function handleChange(event: Event, session: CaptureSession): void {
   const target = event.target;
-  if (!(target instanceof Element)) {
+  if (!(target instanceof Element) || target.closest(TRACK_IGNORE_SELECTOR)) {
+    return;
+  }
+
+  if (trackGroupedRadioChange(target, session)) {
     return;
   }
 
@@ -395,7 +460,11 @@ function handleChange(event: Event): void {
 
 function handleFocusOut(event: FocusEvent): void {
   const target = event.target;
-  if (!(target instanceof Element) || !isTextInput(target)) {
+  if (
+    !(target instanceof Element) ||
+    target.closest(TRACK_IGNORE_SELECTOR) ||
+    !isTextInput(target)
+  ) {
     return;
   }
   // Credential and payment fields stay invisible even on opted-in forms.
@@ -425,6 +494,9 @@ function handleFocusOut(event: FocusEvent): void {
 function handleWindowError(event: ErrorEvent): void {
   const target = event.target;
   if (target instanceof Element) {
+    if (target.closest(TRACK_IGNORE_SELECTOR)) {
+      return;
+    }
     const src = target.getAttribute('src') ?? target.getAttribute('href') ?? '';
     track('error.media', {
       kind: resolveResourceKind(target.tagName),
@@ -448,12 +520,16 @@ function handleRejection(event: PromiseRejectionEvent): void {
 }
 
 function handleScroll(session: CaptureSession): void {
-  if (session.scrollTicking) {
+  if (
+    session.scrollTicking ||
+    session.reachedScrollThresholds.size === SCROLL_THRESHOLDS.length
+  ) {
     return;
   }
   session.scrollTicking = true;
 
-  requestAnimationFrame(() => {
+  session.scrollFrame = requestAnimationFrame(() => {
+    session.scrollFrame = undefined;
     session.scrollTicking = false;
     const max = document.documentElement.scrollHeight - window.innerHeight;
     const pct = max <= 0 ? 100 : Math.round((window.scrollY / max) * 100);
@@ -492,11 +568,14 @@ function handlePageHide(
   }
 
   flushAbandonedForms(session);
-  track('session.end', {
-    durationMs: Date.now() - sessionStartedAt,
-    interactionCount: telemetry.getInteractionCount(),
-    routeCount: routeVisits,
-  });
+  track(
+    'session.end',
+    {
+      interactionCount: telemetry.getInteractionCount(),
+      routeCount: routeVisits,
+    },
+    { durationMs: Date.now() - sessionStartedAt },
+  );
   telemetry.flush();
 }
 
@@ -506,7 +585,7 @@ function handlePageHide(
  */
 function flushAbandonedForms(session: CaptureSession): void {
   for (const [key, state] of session.formBook) {
-    if (state.submitted) {
+    if (state.submitted || state.form.closest(TRACK_IGNORE_SELECTOR)) {
       continue;
     }
     state.submitted = true;
@@ -525,6 +604,16 @@ function disposeSession(session: CaptureSession): void {
   }
   session.validationTimers.clear();
 
+  for (const timer of session.selectionTimers) {
+    clearTimeout(timer);
+  }
+  session.selectionTimers.clear();
+
+  if (session.scrollFrame !== undefined) {
+    cancelAnimationFrame(session.scrollFrame);
+    session.scrollFrame = undefined;
+  }
+
   flushAbandonedForms(session);
 }
 
@@ -537,25 +626,20 @@ export function useInteractionTracking(): void {
   const pathname = usePathname();
   const locale = useLocale();
 
-  // The locale is part of the page identity: switching language keeps the
-  // locale-relative pathname but is a new page view.
-  // biome-ignore lint/correctness/useExhaustiveDependencies: the locale intentionally re-runs the effect.
+  // Capture listeners live for the whole route. A locale switch keeps the
+  // locale-relative pathname, so it must not tear down the form book or emit
+  // `form.abandoned`; only a real route change does that.
+  // biome-ignore lint/correctness/useExhaustiveDependencies: pathname is the route boundary.
   useEffect(() => {
-    telemetry.notifyRouteChange();
     if (isTrackingSuppressed()) {
       return;
     }
 
-    startSession();
-    // Universal page view: emitted for every route, not only the pages that
-    // remember to render `ReportRouteVisit`.
-    track('nav.route-view', { route: pathname });
-    routeVisits += 1;
-
     const session = createSession();
-    const onClick = handleClick;
+    const onClick = (event: MouseEvent) => handleClick(event, session);
     const onFocusIn = (event: FocusEvent) => handleFocusIn(event, session);
     const onSubmit = (event: Event) => handleSubmit(event, session);
+    const onChange = (event: Event) => handleChange(event, session);
     const onScroll = () => handleScroll(session);
     const onVisibility = () => handleVisibility(session);
     const onPageHide = (event: PageTransitionEvent) =>
@@ -564,7 +648,7 @@ export function useInteractionTracking(): void {
     document.addEventListener('click', onClick, true);
     document.addEventListener('focusin', onFocusIn, true);
     document.addEventListener('submit', onSubmit, true);
-    document.addEventListener('change', handleChange, true);
+    document.addEventListener('change', onChange, true);
     document.addEventListener('focusout', handleFocusOut, true);
     window.addEventListener('error', handleWindowError, true);
     window.addEventListener('unhandledrejection', handleRejection);
@@ -576,7 +660,7 @@ export function useInteractionTracking(): void {
       document.removeEventListener('click', onClick, true);
       document.removeEventListener('focusin', onFocusIn, true);
       document.removeEventListener('submit', onSubmit, true);
-      document.removeEventListener('change', handleChange, true);
+      document.removeEventListener('change', onChange, true);
       document.removeEventListener('focusout', handleFocusOut, true);
       window.removeEventListener('error', handleWindowError, true);
       window.removeEventListener('unhandledrejection', handleRejection);
@@ -585,5 +669,21 @@ export function useInteractionTracking(): void {
       window.removeEventListener('pagehide', onPageHide);
       disposeSession(session);
     };
+  }, [pathname]);
+
+  // Page identity is locale-aware: switching language keeps the
+  // locale-relative pathname but is a new page view.
+  // biome-ignore lint/correctness/useExhaustiveDependencies: locale re-arms page identity.
+  useEffect(() => {
+    telemetry.notifyRouteChange();
+    if (isTrackingSuppressed()) {
+      return;
+    }
+
+    startSession();
+    // Universal page view: emitted for every route, not only the pages that
+    // remember to render `ReportRouteVisit`.
+    track('nav.route-view', { route: pathname });
+    routeVisits += 1;
   }, [pathname, locale]);
 }
