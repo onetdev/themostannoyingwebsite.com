@@ -20,17 +20,24 @@ describe('FooterArtwork', () => {
     expect(html.match(/class="panel-column"/g) ?? []).toHaveLength(8);
   });
 
-  it('samples the shared plate instead of inlining sheets', () => {
+  it('inlines the computed resting colours on every square', () => {
     const html = renderToStaticMarkup(<FooterArtwork />);
 
-    expect(html).toContain('/assets/images/footer-artwork-bg.webp');
-    expect(html).not.toContain('data:image/svg+xml');
+    expect(html.match(/--panel-c1:rgb\(/g) ?? []).toHaveLength(20);
+    expect(html.match(/--panel-c2:rgb\(/g) ?? []).toHaveLength(20);
   });
 
-  it('renders no mounting pins or blend layers', () => {
+  it('is deterministic across renders', () => {
+    expect(renderToStaticMarkup(<FooterArtwork />)).toBe(
+      renderToStaticMarkup(<FooterArtwork />),
+    );
+  });
+
+  it('carries no plate image or blend layers', () => {
     const html = renderToStaticMarkup(<FooterArtwork />);
 
-    expect(html).not.toContain('panel-pins');
+    expect(html).not.toContain('footer-artwork-bg');
+    expect(html).not.toContain('data:image/svg+xml');
     expect(html).not.toContain('panel-glow');
     expect(html).not.toContain('panel-vignette');
   });
