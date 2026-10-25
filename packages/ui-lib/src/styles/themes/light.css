@@ -103,18 +103,11 @@
     --aurora-blur: 3rem;
 
     /* ------------------------------------------------------------------
-     * Footer artwork — dichroic acrylic wall below the footer. Daylight read:
-     * a bright base with multiplying dyes, like the outdoor facade shots.
+     * Footer artwork — pile of dichroic squares below the footer. Daylight
+     * read: slightly lifted dyes and a dark rim, like acrylic on paper.
      * ------------------------------------------------------------------ */
-    --panel-base: oklch(0.985 0.006 290);
-    --panel-blend: multiply;
-    --panel-mullion: oklch(0.2 0.02 290 / 14%);
-    --panel-sweep-blend: multiply;
-    --panel-sweep-opacity: 0.2;
-    --panel-grain-opacity: 0.05;
-    --panel-glow: oklch(1 0.03 320 / 90%);
-    --panel-glow-blend: soft-light;
-    --panel-glow-opacity: 0.26;
-    --panel-vignette-opacity: 0.72;
+    --panel-lightness: 0.94;
+    --panel-chroma: 0.92;
+    --panel-rim-rgb: 0 0 0;
   }
 }
