@@ -259,153 +259,194 @@
 /* ==========================================================================
  * Dichroic footer artwork
  *
- * Recreates the movement of the reference footage: a wall of translucent
- * acrylic squares drifting past the "camera" on several depth planes, with the
- * colour of the composite shifting as the planes slide over one another.
+ * A wall of 1:1 acrylic squares: twenty of them, stacked in columns that grow
+ * toward the middle and taper at both ends. The squares touch, so the silhouette
+ * is the composition.
  *
- * Three planes stack inside an isolated band. Each plane paints one baked SVG
- * tile sheet (`panel-plane`) as a repeating background and is drifted with a
- * single composited transform; because the planes carry different colour
- * families and drift at different speeds, their `mix-blend-mode` overlap keeps
- * re-mixing — that is the "boiling" mosaic, produced by three transforms
- * instead of hundreds of animated cells.
+ * The pile is plain flow layout — no transform, no tilt, no parallax, no
+ * blending. Every square samples one shared blurred plate (`--panel-image`),
+ * offset and quarter-turned per panel. The only moving part is that sample: it
+ * drifts inside the square, driven by the page scroll through a CSS
+ * scroll-driven animation, so nothing moves while the page is at rest.
  *
- * `--scene-hue` is written by the scroll-coupling component and inherited by
- * every plane, so the same value rotates all three sheets together (the
- * angle-dependent colour shift of dichroic film).
+ * The plate is fetched only when the pile approaches the viewport:
+ * `content-visibility: auto` skips rendering — and therefore resource loading —
+ * of the off-screen subtree, so deferring it needs no JavaScript.
  * ========================================================================== */
 
-@property --scene-hue {
-  syntax: "<angle>";
-  inherits: true;
-  initial-value: 0deg;
+/**
+ * Query container for the pile. `cqw` units below resolve against this element,
+ * which is why it has to be a separate wrapper rather than the pile itself.
+ */
+@utility panel-stage {
+  container-type: inline-size;
 }
 
-@theme inline {
-  /* Linear and mirrored: a camera dolly that reverses instead of a loop seam. */
-  @keyframes panel-drift {
-    from {
-      transform: translate3d(calc(-1 * var(--panel-amplitude, 6%)), 0, 0);
-    }
-    to {
-      transform: translate3d(var(--panel-amplitude, 6%), 0, 0);
-    }
-  }
+/**
+ * The wall. Columns share one square size and touch edge to edge, so the
+ * silhouette is the whole composition: the tallest column is four squares, and
+ * `6.5cqw` keeps all eight columns inside the narrowest phone.
+ */
+@utility panel-pile {
+  --panel-square: clamp(2.25rem, 6.5cqw, 4rem);
+  display: flex;
+  flex-direction: row;
+  align-items: flex-end;
+  justify-content: center;
+  /* Sits on the horizon: the columns' bottom edges are the end of the page, so
+     the wall reads as resting on a line instead of floating in a box. */
+  padding-block: clamp(2rem, 6vh, 4rem) 0;
+  /* Skip the off-screen subtree — and its plate request — until the pile comes
+     into view. The intrinsic size is the exact height of the tallest column plus
+     the top padding, so the document never resizes (and the page never jumps)
+     when the real content replaces the placeholder. */
+  content-visibility: auto;
+  contain-intrinsic-size: auto
+    calc(4 * var(--panel-square) + clamp(2rem, 6vh, 4rem));
+}
 
-  @keyframes panel-sweep {
-    from {
-      transform: translate3d(-7%, 0, 0) rotate(-3deg);
-    }
-    to {
-      transform: translate3d(7%, 0, 0) rotate(3deg);
-    }
+/**
+ * One column of the wall. Squares stack flush and bottom-aligned, so the seams
+ * line up across the whole pile.
+ */
+@utility panel-column {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/**
+ * Interior drift. Each panel carries its own amplitude and direction in
+ * `--dye-x`, so the pile shimmers out of phase instead of pulsing in lockstep.
+ * The generated 5–11% is scaled 2.5× here so the sample visibly slides; the
+ * result still sits inside the overscan below. The travel is always horizontal
+ * in the page's coordinate space — it is applied *after* the quarter turn, so a
+ * rotated cell still slides left-right — and only `transform` is animated,
+ * which keeps it on the compositor.
+ */
+@keyframes panel-dye-drift {
+  from {
+    transform: translate3d(calc(var(--dye-x, 10%) * -2.5), 0, 0)
+      rotate(var(--panel-turn, 0deg));
+  }
+  to {
+    transform: translate3d(calc(var(--dye-x, 10%) * 2.5), 0, 0)
+      rotate(var(--panel-turn, 0deg));
   }
 }
 
 /**
- * One sheet of tiles. Oversized horizontally so the drift never exposes an
- * edge, and kept on `transform` only so the browser can composite it.
+ * One acrylic square. The base colour keeps the cell readable before (and
+ * without) the plate; the pseudo-element samples the shared plate and is the
+ * only thing that moves. It is oversized and clipped by the cell, so the sample
+ * drifts without ever exposing an edge, and the rounded corner crops both the
+ * plate and its drift.
  */
-@utility panel-plane {
-  position: absolute;
-  inset-block: 0;
-  inset-inline: -30%;
-  background-position: 50% 50%;
-  background-repeat: repeat-x;
-  background-size: auto 100%;
-  mix-blend-mode: var(--panel-blend, screen);
-  filter: hue-rotate(var(--scene-hue, 0deg)) blur(var(--panel-blur, 0px));
-  animation: panel-drift var(--panel-duration, 60s) linear infinite alternate;
-  will-change: transform;
+@utility panel-cell {
+  --panel-bevel: calc(var(--panel-square) * 0.1);
+  position: relative;
+  /* `clip`, not `hidden`: `hidden` turns each cell into a non-scrolling scroll
+     container, which pins its own view() timeline at 50%. */
+  overflow: clip;
+  width: var(--panel-square);
+  aspect-ratio: 1;
+  border-radius: clamp(0.25rem, 0.7cqw, 0.5rem);
+  opacity: var(--panel-alpha, 0.88);
+  background-color: oklch(
+    calc(var(--panel-l, 0.7) * var(--panel-lightness, 1))
+      calc(var(--panel-c, 0.12) * var(--panel-chroma, 1)) var(--panel-h1, 330)
+  );
+  box-shadow: inset 0 0 0 1px
+    rgb(var(--panel-rim-rgb, 255 255 255) / var(--panel-rim, 0.16));
+
+  /**
+   * Glass surface. The plate behind it drifts, while this layer stays put, so
+   * the square reads as a solid acrylic chip lit from above: a specular sheen
+   * across the top-left and a bevel cut into all four edges — bright where the
+   * light lands, shaded along the bottom lip.
+   *
+   * The layer is a pure light map (white and black only) composited with
+   * `overlay`, so it lifts and deepens the plate's own hue instead of washing
+   * it toward grey the way a plain white alpha layer does. The cell's own
+   * opacity keeps the blend inside the chip.
+   *
+   * The bevel is driven by `--panel-bevel` (10% of the square) rather than a
+   * fixed pixel size, so the falloff stays proportional at every breakpoint and
+   * the shading reads as thickness rather than as a drawn outline.
+   */
+  &::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    pointer-events: none;
+    mix-blend-mode: overlay;
+    background:
+      linear-gradient(
+        145deg,
+        rgb(255 255 255 / 0.5) 0%,
+        rgb(255 255 255 / 0.1) 30%,
+        transparent 52%
+      ),
+      radial-gradient(
+        95% 70% at 14% 0%,
+        rgb(255 255 255 / 0.62),
+        transparent 72%
+      );
+    box-shadow:
+      inset 0 calc(var(--panel-bevel) * 0.5) var(--panel-bevel)
+      rgb(255 255 255 / 0.6),
+      inset 0 calc(var(--panel-bevel) * -0.5) var(--panel-bevel)
+      rgb(0 0 0 / 0.55),
+      inset calc(var(--panel-bevel) * 0.35) 0 var(--panel-bevel)
+      rgb(255 255 255 / 0.28),
+      inset calc(var(--panel-bevel) * -0.35) 0 var(--panel-bevel)
+      rgb(0 0 0 / 0.3);
+  }
+
+  &::before {
+    content: "";
+    position: absolute;
+    /* 70% overscan covers the drift below (up to 27.5% of this box) with room
+       to spare, and still leaves the plate 94% of horizontal and 87% of
+       vertical travel to sample from. */
+    inset: -70%;
+    pointer-events: none;
+    will-change: transform;
+    /* The plate is pinned to 1200% of the cell height (2:1, so twenty-four
+       squares wide) — a 4.2% x 8.3% window of the source, fine enough that the
+       blur still reads as colour instead of as a plain gradient. Percentages
+       below are resolved against the oversized box, which is why the offset
+       stays scale independent. */
+    background-image: var(--panel-image);
+    background-repeat: no-repeat;
+    background-size: calc(var(--panel-square) * 24)
+      calc(var(--panel-square) * 12);
+    background-position: var(--panel-bg-x, 50%) var(--panel-bg-y, 50%);
+    /* The quarter turn also applies when the drift is disabled (reduced motion,
+       or a browser without scroll-driven animations). */
+    transform: rotate(var(--panel-turn, 0deg));
+  }
+
+  @supports (animation-timeline: view()) {
+    &::before {
+      animation-name: panel-dye-drift;
+      animation-duration: auto;
+      animation-timing-function: linear;
+      animation-fill-mode: both;
+      animation-timeline: view();
+      /* The pile rests exactly on the page's bottom edge, so it can only ever
+         be scrolled *into* view. `cover` keeps tracking while the squares
+         travel inside the viewport, which is what makes the dye respond to
+         small up/down scrolls at rest; the 0-30% window maps the whole
+         approach onto the animation instead of pinning it at the end. */
+      animation-range: cover 0% cover 30%;
+    }
+  }
 
   @media (prefers-reduced-motion: reduce) {
-    animation: none;
+    &::before {
+      animation: none;
+    }
   }
-}
-
-/** Vertical glass seam riding on the front plane. */
-@utility panel-mullion {
-  position: absolute;
-  inset-block: -10%;
-  width: 2px;
-  background-image: linear-gradient(
-    180deg,
-    transparent,
-    var(--panel-mullion),
-    var(--panel-mullion),
-    transparent
-  );
-  mix-blend-mode: var(--panel-blend, screen);
-  animation: panel-drift var(--panel-duration, 47s) linear infinite alternate;
-  pointer-events: none;
-
-  @media (prefers-reduced-motion: reduce) {
-    animation: none;
-  }
-}
-
-/** The diffraction smear: the spectral band that sweeps across the acrylics. */
-@utility panel-sweep {
-  position: absolute;
-  inset-block: -12%;
-  inset-inline: -18%;
-  background-image: linear-gradient(
-    100deg,
-    transparent 22%,
-    oklch(0.74 0.24 340 / 85%) 40%,
-    oklch(0.88 0.19 85 / 85%) 50%,
-    oklch(0.8 0.16 200 / 85%) 60%,
-    transparent 78%
-  );
-  filter: blur(2.5rem);
-  mix-blend-mode: var(--panel-sweep-blend, screen);
-  opacity: var(--panel-sweep-opacity, 0.35);
-  animation: panel-sweep 23s ease-in-out infinite alternate;
-  pointer-events: none;
-  will-change: transform;
-
-  @media (prefers-reduced-motion: reduce) {
-    animation: none;
-  }
-}
-
-/** Soft grain: hides gradient banding and reads as acrylic surface texture. */
-@utility panel-grain {
-  position: absolute;
-  inset: 0;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='120' height='120' filter='url(%23n)'/%3E%3C/svg%3E");
-  mix-blend-mode: overlay;
-  opacity: var(--panel-grain-opacity, 0.06);
-  pointer-events: none;
-}
-
-/** Fades the tile field into the band's own base colour at the edges. */
-@utility panel-vignette {
-  position: absolute;
-  inset: 0;
-  background-image: radial-gradient(
-    120% 120% at 50% 48%,
-    transparent 30%,
-    var(--panel-base) 100%
-  );
-  opacity: var(--panel-vignette-opacity, 0.85);
-  pointer-events: none;
-}
-
-/**
- * Backlight behind the planes. The acrylics in the reference are lit *through*
- * the wall, so the middle of the band blooms while the corners fall into the
- * vignette.
- */
-@utility panel-glow {
-  position: absolute;
-  inset: 0;
-  background-image: radial-gradient(
-    70% 90% at 50% 38%,
-    var(--panel-glow),
-    transparent 72%
-  );
-  mix-blend-mode: var(--panel-glow-blend, screen);
-  opacity: var(--panel-glow-opacity, 0.55);
-  pointer-events: none;
 }
