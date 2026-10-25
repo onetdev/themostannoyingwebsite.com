@@ -156,48 +156,39 @@ test('stacks twenty squares in centred bell-curve columns', async ({
   }
 });
 
-test('moves the dye when scrolling away from the horizon', async ({ page }) => {
+test('recolours the tiles as the pointer moves', async ({ page }) => {
   await setupE2eTestState(page);
   await getHomePage(page).goto();
 
   const artwork = page.getByTestId('footer-artwork');
   await artwork.scrollIntoViewIfNeeded();
 
-  const readProgress = () =>
-    page.evaluate(() => {
-      const cell = document.querySelector('.panel-cell');
+  const readColors = () =>
+    page.evaluate(() =>
+      [...document.querySelectorAll<HTMLElement>('.panel-cell')].map((cell) =>
+        cell.style.getPropertyValue('--panel-c1'),
+      ),
+    );
 
-      if (!cell) {
-        throw new Error('panel cell missing');
-      }
+  const before = await readColors();
 
-      const animation = document
-        .getAnimations()
-        .find(
-          (entry) => (entry.effect as KeyframeEffect | null)?.target === cell,
-        );
-
-      return animation?.effect?.getComputedTiming().progress ?? 0;
-    });
-
-  // Park at the bottom of the page, where the pile rests on the horizon.
-  await page.evaluate(() =>
-    window.scrollTo(0, document.documentElement.scrollHeight),
+  expect(before).toHaveLength(20);
+  expect(before.every((color) => /^rgb\(\d+ \d+ \d+\)$/.test(color))).toBe(
+    true,
   );
-  await page.waitForTimeout(400);
-  const atRest = await readProgress();
 
-  await page.evaluate(() => window.scrollBy(0, -200));
-  await page.waitForTimeout(400);
-  const scrolled = await readProgress();
+  await page.mouse.move(1279, 8);
+  await page.waitForTimeout(120);
+  const moved = await readColors();
 
-  // The view() timeline must still be live at rest, otherwise scrolling up
-  // leaves the dye frozen at the end of its range.
-  expect(atRest).toBeGreaterThan(0);
-  expect(scrolled).toBeLessThan(atRest);
+  // Tiles react by their own axis, so the wall changes unevenly: most squares
+  // move, but not necessarily all of them.
+  const changed = moved.filter((color, index) => color !== before[index]);
+
+  expect(changed.length).toBeGreaterThanOrEqual(10);
 });
 
-test('freezes the dye under reduced motion', async ({ page }) => {
+test('keeps the tiles static under reduced motion', async ({ page }) => {
   await setupE2eTestState(page);
   await page.emulateMedia({ reducedMotion: 'reduce' });
   await getHomePage(page).goto();
@@ -205,15 +196,17 @@ test('freezes the dye under reduced motion', async ({ page }) => {
   const artwork = page.getByTestId('footer-artwork');
   await artwork.scrollIntoViewIfNeeded();
 
-  const animationName = await page.evaluate(() => {
-    const cell = document.querySelector('.panel-cell');
+  const readColors = () =>
+    page.evaluate(() =>
+      [...document.querySelectorAll<HTMLElement>('.panel-cell')].map((cell) =>
+        cell.style.getPropertyValue('--panel-c1'),
+      ),
+    );
 
-    if (!cell) {
-      throw new Error('panel cell missing');
-    }
+  const before = await readColors();
 
-    return getComputedStyle(cell, '::before').animationName;
-  });
+  await page.mouse.move(1279, 8);
+  await page.waitForTimeout(120);
 
-  expect(animationName).toBe('none');
+  expect(await readColors()).toEqual(before);
 });

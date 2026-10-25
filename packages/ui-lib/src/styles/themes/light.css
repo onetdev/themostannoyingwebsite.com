@@ -103,11 +103,10 @@
     --aurora-blur: 3rem;
 
     /* ------------------------------------------------------------------
-     * Footer artwork — pile of dichroic squares below the footer. Daylight
-     * read: slightly lifted dyes and a dark rim, like acrylic on paper.
+     * Footer artwork — pile of dichroic squares below the footer. The model
+     * fixes the dyes; the light theme only swaps the rim to a dark edge, like
+     * acrylic resting on paper.
      * ------------------------------------------------------------------ */
-    --panel-lightness: 0.94;
-    --panel-chroma: 0.92;
     --panel-rim-rgb: 0 0 0;
   }
 }

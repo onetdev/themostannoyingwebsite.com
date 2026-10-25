@@ -103,11 +103,10 @@
     --aurora-blur: 4rem;
 
     /* ------------------------------------------------------------------
-     * Footer artwork — pile of dichroic squares below the footer. Full strength
-     * dye, lit from within, with a light rim so the edges catch the glow.
+     * Footer artwork — pile of dichroic squares below the footer. The colours
+     * come from the polariscope model; the theme only picks the rim so the
+     * tiles' edges catch the surrounding light.
      * ------------------------------------------------------------------ */
-    --panel-lightness: 1;
-    --panel-chroma: 1;
     --panel-rim-rgb: 255 255 255;
   }
 }
