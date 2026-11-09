@@ -4,6 +4,7 @@ import { ReportRouteVisit } from '@/features/monitoring/components';
 import type { RouteAlias } from '@/schemas';
 import { AppFooter } from './AppFooter';
 import { AppHeader } from './AppHeader';
+import { HueSwatchGridPoc } from './HueSwatchGridPoc/HueSwatchGridPoc';
 
 type PageLayoutProps = PropsWithChildren<
   {
@@ -50,6 +51,7 @@ export function PageLayout({
         {children}
       </main>
       <AppFooter className="mt-12" />
+      <HueSwatchGridPoc />
     </>
   );
 }
