@@ -1,24 +1,37 @@
-import { expect, test } from '@playwright/test';
+import { expect, type Page, test } from '@playwright/test';
 
 import { getHomePage } from '../pages/HomePage';
 import { setupE2eTestState } from '../utils/setup';
 
-/** Squares per column, left to right. */
-const COLUMN_COUNTS = [1, 2, 3, 4, 4, 3, 2, 1];
+const ARTWORK = 'footer-artwork';
+const ARTWORK_STATE = /ready|failed/;
 
-test('renders the artwork directly below the footer', {
-  tag: '@smoke',
-}, async ({ page }) => {
+const openArtwork = async (page: Page) => {
   await setupE2eTestState(page);
   await getHomePage(page).goto();
 
-  const artwork = page.getByTestId('footer-artwork');
-  await artwork.scrollIntoViewIfNeeded();
+  const footer = page.getByRole('contentinfo');
+  const artwork = page.getByTestId(ARTWORK);
 
+  await artwork.scrollIntoViewIfNeeded();
   await expect(artwork).toBeVisible();
+  await expect
+    .poll(() => artwork.getAttribute('data-artwork-state'), {
+      timeout: 15_000,
+    })
+    .toMatch(ARTWORK_STATE);
+
+  return { footer, artwork };
+};
+
+test('renders the animated wall below the footer', {
+  tag: '@smoke',
+}, async ({ page }) => {
+  const { footer, artwork } = await openArtwork(page);
+
   await expect(artwork).toHaveAttribute('aria-hidden', 'true');
 
-  const footerBox = await page.getByRole('contentinfo').boundingBox();
+  const footerBox = await footer.boundingBox();
   const artworkBox = await artwork.boundingBox();
 
   expect(footerBox).not.toBeNull();
@@ -28,7 +41,24 @@ test('renders the artwork directly below the footer', {
     throw new Error('Unable to measure the footer and artwork boxes');
   }
 
-  expect(artworkBox.y).toBeGreaterThanOrEqual(footerBox.y + footerBox.height);
+  expect(artworkBox.y).toBeGreaterThanOrEqual(
+    footerBox.y + footerBox.height - 1,
+  );
+  expect(artworkBox.width).toBeGreaterThanOrEqual(
+    (page.viewportSize()?.width ?? 0) - 1,
+  );
+});
+
+test('fits a whole-number tile grid', async ({ page }) => {
+  const { artwork } = await openArtwork(page);
+
+  const columns = Number(await artwork.getAttribute('data-artwork-columns'));
+  const rows = Number(await artwork.getAttribute('data-artwork-rows'));
+
+  expect(Number.isInteger(columns)).toBe(true);
+  expect(Number.isInteger(rows)).toBe(true);
+  expect(columns).toBeGreaterThan(20);
+  expect(rows).toBeGreaterThan(4);
 });
 
 test('keeps the page free of horizontal overflow', async ({ page }) => {
@@ -48,165 +78,128 @@ test('keeps the page free of horizontal overflow', async ({ page }) => {
   }
 });
 
-test('stacks twenty squares in centred bell-curve columns', async ({
+test('does not start the wall before it approaches the viewport', async ({
   page,
 }) => {
   await setupE2eTestState(page);
   await getHomePage(page).goto();
 
-  const artwork = page.getByTestId('footer-artwork');
+  const artwork = page.getByTestId(ARTWORK);
+
+  await expect(artwork).toBeAttached();
+  await expect(artwork).toHaveAttribute('data-artwork-state', 'idle');
+
+  const viewport = page.viewportSize();
+  const artworkBox = await artwork.boundingBox();
+
+  expect(viewport).not.toBeNull();
+  expect(artworkBox).not.toBeNull();
+
+  if (!viewport || !artworkBox) {
+    throw new Error('Unable to measure the artwork');
+  }
+
+  // The home page is long enough that the wall starts well below the fold.
+  expect(artworkBox.y).toBeGreaterThan(viewport.height + 300);
+
   await artwork.scrollIntoViewIfNeeded();
+  await expect
+    .poll(() => artwork.getAttribute('data-artwork-state'), {
+      timeout: 15_000,
+    })
+    .toMatch(ARTWORK_STATE);
+});
 
-  const pile = await page.evaluate(() => {
-    const stage = document.querySelector('#footer-artwork');
+test('keeps the footer controls interactive', async ({ page }) => {
+  const { footer } = await openArtwork(page);
+  const link = footer.getByRole('link').first();
 
-    if (!stage) {
-      throw new Error('artwork missing');
-    }
+  await expect(link).toBeVisible();
 
-    const stageBox = stage.getBoundingClientRect();
-    const columns = [...stage.querySelectorAll('.panel-column')].map(
-      (column) => {
-        const cells = [...column.querySelectorAll('.panel-cell')].map(
-          (cell) => {
-            const box = cell.getBoundingClientRect();
-
-            return {
-              top: Math.round(box.top),
-              left: Math.round(box.left),
-              width: Math.round(box.width),
-              height: Math.round(box.height),
-              radius: Number.parseFloat(
-                getComputedStyle(cell).borderTopLeftRadius,
-              ),
-            };
-          },
-        );
-
-        const box = column.getBoundingClientRect();
-
-        return {
-          count: cells.length,
-          top: Math.round(box.top),
-          left: Math.round(box.left),
-          right: Math.round(box.right),
-          cells,
-        };
-      },
+  const isClickable = await link.evaluate((element) => {
+    const rect = element.getBoundingClientRect();
+    const hit = document.elementFromPoint(
+      rect.left + rect.width / 2,
+      rect.top + rect.height / 2,
     );
 
-    return {
-      transform: getComputedStyle(stage).transform,
-      stageBottom: Math.round(stageBox.bottom),
-      stageLeft: Math.round(stageBox.left),
-      stageRight: Math.round(stageBox.right),
-      columns,
-    };
+    return hit === element || element.contains(hit);
   });
 
-  expect(pile.transform).toBe('none');
-  expect(pile.columns.map((column) => column.count)).toEqual(COLUMN_COUNTS);
-
-  // The pile rests on the horizon: every column ends on the stage's bottom.
-  for (const column of pile.columns) {
-    const lastCell = column.cells.at(-1);
-    expect(lastCell).toBeDefined();
-
-    if (!lastCell) {
-      throw new Error('column has no cells');
-    }
-
-    expect(
-      Math.abs(pile.stageBottom - (lastCell.top + lastCell.height)),
-    ).toBeLessThanOrEqual(1);
-  }
-
-  // The wall is centred on the stage: the outer columns leave equal gutters.
-  const firstColumn = pile.columns[0];
-  const lastColumn = pile.columns.at(-1);
-
-  if (!firstColumn || !lastColumn) {
-    throw new Error('artwork has no columns');
-  }
-
-  expect(firstColumn.left - pile.stageLeft).toBe(
-    pile.stageRight - lastColumn.right,
-  );
-
-  // Squares are 1:1, rounded, and stack flush inside their column.
-  for (const column of pile.columns) {
-    const head = column.cells[0];
-
-    if (!head) {
-      throw new Error('column has no cells');
-    }
-
-    column.cells.forEach((cell, index) => {
-      expect(Math.abs(cell.width - cell.height)).toBeLessThanOrEqual(1);
-      expect(cell.radius).toBeGreaterThan(0);
-      expect(cell.width).toBeLessThanOrEqual(64);
-      expect(cell.width).toBeGreaterThanOrEqual(24);
-      expect(cell.left).toBe(head.left);
-
-      if (index > 0) {
-        const previous = column.cells[index - 1];
-        expect(cell.top).toBe(previous.top + previous.height);
-      }
-    });
-  }
+  expect(isClickable).toBe(true);
 });
 
-test('recolours the tiles as the pointer moves', async ({ page }) => {
-  await setupE2eTestState(page);
-  await getHomePage(page).goto();
+test('morphs the wall colours over time', async ({ page }) => {
+  const { artwork } = await openArtwork(page);
+  const state = await artwork.getAttribute('data-artwork-state');
 
-  const artwork = page.getByTestId('footer-artwork');
-  await artwork.scrollIntoViewIfNeeded();
+  test.skip(state === 'failed', 'WebGL is unavailable in this browser');
 
-  const readColors = () =>
-    page.evaluate(() =>
-      [...document.querySelectorAll<HTMLElement>('.panel-cell')].map((cell) =>
-        cell.style.getPropertyValue('--panel-c1'),
-      ),
-    );
+  const before = await artwork.screenshot({ animations: 'allow' });
 
-  const before = await readColors();
+  await page.waitForTimeout(1300);
 
-  expect(before).toHaveLength(20);
-  expect(before.every((color) => /^rgb\(\d+ \d+ \d+\)$/.test(color))).toBe(
-    true,
-  );
+  const after = await artwork.screenshot({ animations: 'allow' });
 
-  await page.mouse.move(1279, 8);
-  await page.waitForTimeout(120);
-  const moved = await readColors();
-
-  // Tiles react by their own axis, so the wall changes unevenly: most squares
-  // move, but not necessarily all of them.
-  const changed = moved.filter((color, index) => color !== before[index]);
-
-  expect(changed.length).toBeGreaterThanOrEqual(10);
+  expect(Buffer.compare(before, after)).not.toBe(0);
 });
 
-test('keeps the tiles static under reduced motion', async ({ page }) => {
-  await setupE2eTestState(page);
+test('keeps a single still frame under reduced motion', async ({ page }) => {
   await page.emulateMedia({ reducedMotion: 'reduce' });
-  await getHomePage(page).goto();
 
-  const artwork = page.getByTestId('footer-artwork');
-  await artwork.scrollIntoViewIfNeeded();
+  const { artwork } = await openArtwork(page);
+  const state = await artwork.getAttribute('data-artwork-state');
 
-  const readColors = () =>
-    page.evaluate(() =>
-      [...document.querySelectorAll<HTMLElement>('.panel-cell')].map((cell) =>
-        cell.style.getPropertyValue('--panel-c1'),
-      ),
+  test.skip(state === 'failed', 'WebGL is unavailable in this browser');
+
+  await page.waitForTimeout(300);
+  const before = await artwork.screenshot();
+  await page.waitForTimeout(1200);
+  const after = await artwork.screenshot();
+
+  expect(Buffer.compare(before, after)).toBe(0);
+});
+
+test('falls back to the static wall when WebGL is unavailable', async ({
+  page,
+}) => {
+  await page.addInitScript(() => {
+    type GetContext = HTMLCanvasElement['getContext'];
+    const original = HTMLCanvasElement.prototype.getContext;
+
+    HTMLCanvasElement.prototype.getContext = function (
+      this: HTMLCanvasElement,
+      ...args: Parameters<GetContext>
+    ) {
+      const contextId = args[0];
+
+      if (
+        contextId === 'webgl' ||
+        contextId === 'webgl2' ||
+        contextId === 'experimental-webgl'
+      ) {
+        return null;
+      }
+
+      return original.call(this, ...args);
+    } as GetContext;
+  });
+
+  const { artwork } = await openArtwork(page);
+
+  await expect(artwork).toHaveAttribute('data-artwork-state', 'failed');
+
+  const fallbackOpacity = await page
+    .locator('.footer-artwork-fallback')
+    .evaluate((element) =>
+      Number.parseFloat(getComputedStyle(element).opacity),
+    );
+  const canvasOpacity = await page
+    .locator('.footer-artwork-canvas')
+    .evaluate((element) =>
+      Number.parseFloat(getComputedStyle(element).opacity),
     );
 
-  const before = await readColors();
-
-  await page.mouse.move(1279, 8);
-  await page.waitForTimeout(120);
-
-  expect(await readColors()).toEqual(before);
+  expect(fallbackOpacity).toBe(1);
+  expect(canvasOpacity).toBe(0);
 });

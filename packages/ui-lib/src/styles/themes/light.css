@@ -101,12 +101,5 @@
     --aurora-4: oklch(0.78 0.13 195);
     --aurora-opacity: 0.1;
     --aurora-blur: 3rem;
-
-    /* ------------------------------------------------------------------
-     * Footer artwork — pile of dichroic squares below the footer. The model
-     * fixes the dyes; the light theme only swaps the rim to a dark edge, like
-     * acrylic resting on paper.
-     * ------------------------------------------------------------------ */
-    --panel-rim-rgb: 0 0 0;
   }
 }

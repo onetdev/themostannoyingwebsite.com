@@ -257,104 +257,154 @@
 }
 
 /* ==========================================================================
- * Dichroic footer artwork
+ * CPG footer wall
  *
- * A wall of 1:1 acrylic squares: twenty of them, stacked in columns that grow
- * toward the middle and taper at both ends. The squares touch, so the silhouette
- * is the composition.
+ * A full-bleed mosaic below the footer. Solid cells pick one of 25 colour
+ * palette gradients with a PRNG and sample it at a per-cell phase; the tile
+ * surface is painted by a WebGL shader with a per-cell sheen, a narrow
+ * specular seam, a wide soft bloom and warm glints at the intersections. The
+ * band is only loaded and animated when it approaches the viewport; the CSS
+ * fallback is what renders before that and whenever WebGL is unavailable.
  *
- * The colours are not authored here. Each square carries two CSS variables,
- * `--panel-c1` and `--panel-c2`, computed in JavaScript from a polariscope model
- * of a film stack between crossed polarizers. CSS only lays the wall out and
- * softens each square into the smoky acrylic look: one oversized, blurred radial
- * gradient clipped by the tile.
- *
- * The pile is plain flow layout — no transform, no tilt, no parallax, no
- * blending, and nothing animates without input. The pointer only rewrites the
- * two colour variables, so the browser has no layout work to do per frame.
+ * The component writes whole `--footer-artwork-cols/rows` counts so the
+ * fallback grid and the shader grid always contain the same full tiles.
  * ========================================================================== */
 
-/**
- * Query container for the pile. `cqw` units below resolve against this element,
- * which is why it has to be a separate wrapper rather than the pile itself.
- */
-@utility panel-stage {
-  container-type: inline-size;
-}
+.footer-artwork {
+  /*
+   * Whole column/row counts. The renderer overwrites these with the exact
+   * viewport grid; the defaults keep the static fallback complete before JS.
+   */
+  --footer-artwork-cols: 32;
+  --footer-artwork-rows: 8;
 
-/**
- * The wall. Columns share one square size and touch edge to edge, so the
- * silhouette is the whole composition: the tallest column is four squares, and
- * `6.5cqw` keeps all eight columns inside the narrowest phone.
- */
-@utility panel-pile {
-  --panel-square: clamp(2.25rem, 6.5cqw, 4rem);
-  display: flex;
-  flex-direction: row;
-  align-items: flex-end;
-  justify-content: center;
-  /* Sits on the horizon: the columns' bottom edges are the end of the page, so
-     the wall reads as resting on a line instead of floating in a box. */
-  padding-block: clamp(2rem, 6vh, 4rem) 0;
-  /* Skip painting the off-screen subtree until the pile comes into view. The
-     intrinsic size is the exact height of the tallest column plus the top
-     padding, so nothing resizes when the content is painted. */
-  content-visibility: auto;
-  contain-intrinsic-size: auto
-    calc(4 * var(--panel-square) + clamp(2rem, 6vh, 4rem));
-}
-
-/**
- * One column of the wall. Squares stack flush and bottom-aligned, so the seams
- * line up across the whole pile.
- */
-@utility panel-column {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-/**
- * One acrylic square. The two-stop radial gradient is the dye; a single blur
- * softens it into the hazy, smoky look of a lit acrylic chip, and the tile's
- * `overflow: clip` keeps the softened edge inside the rounded corner.
- *
- * The gradient is oversized by three blur radii, so the blur never pulls the
- * tile's own transparent edge into view — the visible area always samples the
- * middle of the gradient.
- */
-@utility panel-cell {
-  --panel-blur: 2px;
   position: relative;
+  width: 100%;
+  height: clamp(18rem, 45vh, 30rem);
   overflow: clip;
-  width: var(--panel-square);
-  aspect-ratio: 1;
-  border-radius: clamp(0.25rem, 0.7cqw, 0.5rem);
-  opacity: var(--panel-alpha, 0.9);
-  background-color: var(--panel-c1, transparent);
+  isolation: isolate;
+  background: #1a0f24;
+  /* Skip painting the wall until it is near the viewport. */
+  content-visibility: auto;
+}
 
-  &::before {
-    content: "";
-    position: absolute;
-    inset: calc(-3 * var(--panel-blur));
-    border-radius: inherit;
-    pointer-events: none;
-    background-image: radial-gradient(
-      circle at 40% 40%,
-      var(--panel-c1, white),
-      var(--panel-c2, white) 75%
+/* The static approximation of the reference wall. */
+.footer-artwork-fallback {
+  position: absolute;
+  inset: 0;
+  opacity: 1;
+  background:
+    radial-gradient(
+      90% 130% at 12% 16%,
+      rgb(255 116 40 / 0.92) 0%,
+      transparent 55%
+    ),
+    radial-gradient(
+      80% 110% at 88% 72%,
+      rgb(32 128 240 / 0.88) 0%,
+      transparent 58%
+    ),
+    radial-gradient(
+      70% 90% at 58% 44%,
+      rgb(255 62 96 / 0.8) 0%,
+      transparent 62%
+    ),
+    radial-gradient(
+      90% 110% at 28% 88%,
+      rgb(255 190 96 / 0.82) 0%,
+      transparent 60%
+    ),
+    radial-gradient(
+      60% 80% at 78% 18%,
+      rgb(120 220 255 / 0.7) 0%,
+      transparent 58%
+    ),
+    #8a7a94;
+  transition: opacity 600ms ease-out;
+}
+
+/*
+ * Static edge-light approximation: a soft white bleed from every tile edge,
+ * strongest at the top/bottom, that fades out around 40% of the cell, plus a
+ * warm glint at each intersection. The shader replaces this once the canvas is
+ * ready.
+ */
+.footer-artwork-fallback::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image:
+    radial-gradient(
+      circle at 1px 1px,
+      rgb(255 248 238 / 0.95) 0 1.5px,
+      rgb(255 248 238 / 0.35) 2.5px,
+      transparent 5px
+    ),
+    linear-gradient(
+      90deg,
+      rgb(255 248 238 / 0.18) 0%,
+      transparent 40%,
+      transparent 60%,
+      rgb(255 248 238 / 0.18) 100%
+    ),
+    linear-gradient(
+      0deg,
+      rgb(255 248 238 / 0.22) 0%,
+      transparent 40%,
+      transparent 60%,
+      rgb(255 248 238 / 0.22) 100%
     );
-    filter: blur(var(--panel-blur));
-  }
+  background-size:
+    calc(100% / var(--footer-artwork-cols))
+    calc(100% / var(--footer-artwork-rows)),
+    calc(100% / var(--footer-artwork-cols)) 100%,
+    100% calc(100% / var(--footer-artwork-rows));
+  background-position: 0 0;
+  mix-blend-mode: screen;
+  transition: opacity 600ms ease-out;
+}
 
-  /* The rim is a separate layer so the blurred dye cannot paint over it. */
-  &::after {
-    content: "";
-    position: absolute;
-    inset: 0;
-    border-radius: inherit;
-    pointer-events: none;
-    box-shadow: inset 0 0 0 1px
-      rgb(var(--panel-rim-rgb, 255 255 255) / var(--panel-rim, 0.16));
+/* Dev-only display FPS chip; removed from production bundles at render time. */
+.footer-artwork-fps {
+  position: absolute;
+  z-index: 2;
+  top: 0.5rem;
+  left: 0.5rem;
+  padding: 0.125rem 0.375rem;
+  border-radius: 0.25rem;
+  color: rgb(255 255 255 / 0.85);
+  background: rgb(0 0 0 / 0.45);
+  font-family: ui-monospace, sfmono-regular, menlo, monospace;
+  font-size: 0.625rem;
+  letter-spacing: 0.04em;
+  line-height: 1.2;
+  pointer-events: none;
+  font-variant-numeric: tabular-nums;
+}
+
+.footer-artwork-canvas {
+  position: absolute;
+  inset: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  transition: opacity 600ms ease-out;
+}
+
+.footer-artwork[data-artwork-state="ready"] .footer-artwork-canvas {
+  opacity: 1;
+}
+
+.footer-artwork[data-artwork-state="ready"] .footer-artwork-fallback,
+.footer-artwork[data-artwork-state="ready"] .footer-artwork-fallback::after {
+  opacity: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .footer-artwork-fallback,
+  .footer-artwork-fallback::after,
+  .footer-artwork-canvas {
+    transition: none;
   }
 }

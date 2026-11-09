@@ -101,12 +101,5 @@
     --aurora-4: oklch(0.64 0.14 195);
     --aurora-opacity: 0.1;
     --aurora-blur: 4rem;
-
-    /* ------------------------------------------------------------------
-     * Footer artwork — pile of dichroic squares below the footer. The colours
-     * come from the polariscope model; the theme only picks the rim so the
-     * tiles' edges catch the surrounding light.
-     * ------------------------------------------------------------------ */
-    --panel-rim-rgb: 255 255 255;
   }
 }
