@@ -5,6 +5,7 @@ import type { RouteAlias } from '@/schemas';
 import { AppFooter } from './AppFooter';
 import { AppHeader } from './AppHeader';
 import { FooterArtwork } from './FooterArtwork/FooterArtwork';
+import { FooterArtworkPoc } from './FooterArtwork/FooterArtworkPoc';
 
 type PageLayoutProps = PropsWithChildren<
   {
@@ -52,6 +53,7 @@ export function PageLayout({
       </main>
       <AppFooter className="mt-12" />
       <FooterArtwork />
+      <FooterArtworkPoc />
     </>
   );
 }
