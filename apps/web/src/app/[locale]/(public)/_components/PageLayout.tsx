@@ -4,11 +4,6 @@ import { ReportRouteVisit } from '@/features/monitoring/components';
 import type { RouteAlias } from '@/schemas';
 import { AppFooter } from './AppFooter';
 import { AppHeader } from './AppHeader';
-import { FooterArtwork } from './FooterArtwork/FooterArtwork';
-import { FooterArtworkPoc } from './FooterArtwork/FooterArtworkPoc';
-import { FrostedGlassPoc } from './FrostedGlassPoc/FrostedGlassPoc';
-import { GradientPoc } from './GradientPoc/GradientPoc';
-import { HueEdgePoc } from './HueEdgePoc/HueEdgePoc';
 import { HueSwatchGridPoc } from './HueSwatchGridPoc/HueSwatchGridPoc';
 
 type PageLayoutProps = PropsWithChildren<
@@ -56,11 +51,6 @@ export function PageLayout({
         {children}
       </main>
       <AppFooter className="mt-12" />
-      <FooterArtwork />
-      <FooterArtworkPoc />
-      <GradientPoc />
-      <HueEdgePoc />
-      <FrostedGlassPoc />
       <HueSwatchGridPoc />
     </>
   );
