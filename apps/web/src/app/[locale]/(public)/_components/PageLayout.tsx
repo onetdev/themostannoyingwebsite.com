@@ -6,6 +6,7 @@ import { AppFooter } from './AppFooter';
 import { AppHeader } from './AppHeader';
 import { FooterArtwork } from './FooterArtwork/FooterArtwork';
 import { FooterArtworkPoc } from './FooterArtwork/FooterArtworkPoc';
+import { FrostedGlassPoc } from './FrostedGlassPoc/FrostedGlassPoc';
 import { GradientPoc } from './GradientPoc/GradientPoc';
 import { HueEdgePoc } from './HueEdgePoc/HueEdgePoc';
 
@@ -58,6 +59,7 @@ export function PageLayout({
       <FooterArtworkPoc />
       <GradientPoc />
       <HueEdgePoc />
+      <FrostedGlassPoc />
     </>
   );
 }
