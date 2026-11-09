@@ -9,6 +9,7 @@ import { FooterArtworkPoc } from './FooterArtwork/FooterArtworkPoc';
 import { FrostedGlassPoc } from './FrostedGlassPoc/FrostedGlassPoc';
 import { GradientPoc } from './GradientPoc/GradientPoc';
 import { HueEdgePoc } from './HueEdgePoc/HueEdgePoc';
+import { HueSwatchGridPoc } from './HueSwatchGridPoc/HueSwatchGridPoc';
 
 type PageLayoutProps = PropsWithChildren<
   {
@@ -60,6 +61,7 @@ export function PageLayout({
       <GradientPoc />
       <HueEdgePoc />
       <FrostedGlassPoc />
+      <HueSwatchGridPoc />
     </>
   );
 }
