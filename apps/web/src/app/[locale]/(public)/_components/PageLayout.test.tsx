@@ -8,34 +8,34 @@ jest.mock('./AppHeader', () => ({ AppHeader: () => null }));
 jest.mock('./AppFooter', () => ({
   AppFooter: () => <footer data-testid="app-footer" />,
 }));
-jest.mock('./FooterArtwork/FooterArtwork', () => ({
-  FooterArtwork: () => <div data-testid="footer-artwork" />,
+jest.mock('./HueSwatchGridPoc/HueSwatchGridPoc', () => ({
+  HueSwatchGridPoc: () => <div data-testid="hue-swatch-grid-poc" />,
 }));
 jest.mock('@/features/monitoring/components', () => ({
   ReportRouteVisit: () => null,
 }));
 
 describe('PageLayout', () => {
-  it('renders the footer artwork below the page content', () => {
+  it('renders the hue swatch grid below the page content', () => {
     const html = renderToStaticMarkup(
       <PageLayout route="home">
         <p>Body copy</p>
       </PageLayout>,
     );
 
-    expect(html.indexOf('data-testid="footer-artwork"')).toBeGreaterThan(
+    expect(html.indexOf('data-testid="hue-swatch-grid-poc"')).toBeGreaterThan(
       html.indexOf('</main>'),
     );
   });
 
-  it('renders the artwork below the footer content', () => {
+  it('renders the hue swatch grid below the footer content', () => {
     const html = renderToStaticMarkup(
       <PageLayout route="home">
         <p>Body copy</p>
       </PageLayout>,
     );
 
-    expect(html.indexOf('data-testid="footer-artwork"')).toBeGreaterThan(
+    expect(html.indexOf('data-testid="hue-swatch-grid-poc"')).toBeGreaterThan(
       html.indexOf('data-testid="app-footer"'),
     );
   });
