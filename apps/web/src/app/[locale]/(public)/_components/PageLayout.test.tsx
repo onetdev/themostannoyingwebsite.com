@@ -5,7 +5,9 @@ import { renderToStaticMarkup } from 'react-dom/server';
 import { PageLayout } from './PageLayout';
 
 jest.mock('./AppHeader', () => ({ AppHeader: () => null }));
-jest.mock('./AppFooter', () => ({ AppFooter: () => null }));
+jest.mock('./AppFooter', () => ({
+  AppFooter: () => <footer data-testid="app-footer" />,
+}));
 jest.mock('./FooterArtwork/FooterArtwork', () => ({
   FooterArtwork: () => <div data-testid="footer-artwork" />,
 }));
@@ -23,6 +25,18 @@ describe('PageLayout', () => {
 
     expect(html.indexOf('data-testid="footer-artwork"')).toBeGreaterThan(
       html.indexOf('</main>'),
+    );
+  });
+
+  it('renders the artwork below the footer content', () => {
+    const html = renderToStaticMarkup(
+      <PageLayout route="home">
+        <p>Body copy</p>
+      </PageLayout>,
+    );
+
+    expect(html.indexOf('data-testid="footer-artwork"')).toBeGreaterThan(
+      html.indexOf('data-testid="app-footer"'),
     );
   });
 
