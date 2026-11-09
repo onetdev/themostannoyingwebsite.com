@@ -6,6 +6,7 @@ import { AppFooter } from './AppFooter';
 import { AppHeader } from './AppHeader';
 import { FooterArtwork } from './FooterArtwork/FooterArtwork';
 import { FooterArtworkPoc } from './FooterArtwork/FooterArtworkPoc';
+import { GradientPoc } from './GradientPoc/GradientPoc';
 
 type PageLayoutProps = PropsWithChildren<
   {
@@ -54,6 +55,7 @@ export function PageLayout({
       <AppFooter className="mt-12" />
       <FooterArtwork />
       <FooterArtworkPoc />
+      <GradientPoc />
     </>
   );
 }
