@@ -7,6 +7,7 @@ import { AppHeader } from './AppHeader';
 import { FooterArtwork } from './FooterArtwork/FooterArtwork';
 import { FooterArtworkPoc } from './FooterArtwork/FooterArtworkPoc';
 import { GradientPoc } from './GradientPoc/GradientPoc';
+import { HueEdgePoc } from './HueEdgePoc/HueEdgePoc';
 
 type PageLayoutProps = PropsWithChildren<
   {
@@ -56,6 +57,7 @@ export function PageLayout({
       <FooterArtwork />
       <FooterArtworkPoc />
       <GradientPoc />
+      <HueEdgePoc />
     </>
   );
 }
