@@ -54,17 +54,23 @@ const PALETTE_NAMES = Object.keys(PALETTES) as PaletteName[];
 interface GlassSettings {
   readonly fps: number;
   readonly renderScale: number;
+  readonly opacity: number;
   readonly columns: number;
   readonly palette: PaletteName;
   readonly warpScale: number;
   readonly warpStrength: number;
   readonly blobSpread: number;
+  readonly detail: number;
   readonly speed: number;
+  readonly edgeSpeed: number;
   readonly paused: boolean;
   readonly refraction: number;
   readonly dispersion: number;
   readonly bevel: number;
-  readonly highlight: number;
+  readonly outline: number;
+  readonly outlineSize: number;
+  readonly streakLength: number;
+  readonly edgeGlow: number;
   readonly grain: number;
   readonly exposure: number;
 }
@@ -72,17 +78,23 @@ interface GlassSettings {
 const DEFAULT_SETTINGS: GlassSettings = {
   fps: 30,
   renderScale: 1,
+  opacity: 1,
   columns: 18,
   palette: 'Neon Flux',
   warpScale: 2.2,
   warpStrength: 0.5,
   blobSpread: 1,
+  detail: 0.9,
   speed: 1,
+  edgeSpeed: 1,
   paused: false,
   refraction: 2.3,
   dispersion: 0.6,
   bevel: 0.6,
-  highlight: 0.8,
+  outline: 0.6,
+  outlineSize: 1.5,
+  streakLength: 4,
+  edgeGlow: 0.9,
   grain: 0.02,
   exposure: 1.45,
 };
@@ -191,12 +203,18 @@ function ControlGroup({ title, children }: ControlGroupProps) {
 interface GlassUniforms {
   readonly time: WebGLUniformLocation | null;
   readonly grid: WebGLUniformLocation | null;
+  readonly resolution: WebGLUniformLocation | null;
   readonly refraction: WebGLUniformLocation | null;
   readonly exposure: WebGLUniformLocation | null;
   readonly grain: WebGLUniformLocation | null;
   readonly dispersion: WebGLUniformLocation | null;
   readonly bevel: WebGLUniformLocation | null;
-  readonly highlight: WebGLUniformLocation | null;
+  readonly outline: WebGLUniformLocation | null;
+  readonly outlineSize: WebGLUniformLocation | null;
+  readonly edgeSpeed: WebGLUniformLocation | null;
+  readonly edgeGlow: WebGLUniformLocation | null;
+  readonly streakLength: WebGLUniformLocation | null;
+  readonly detail: WebGLUniformLocation | null;
   readonly warpScale: WebGLUniformLocation | null;
   readonly warpStrength: WebGLUniformLocation | null;
   readonly blobSpread: WebGLUniformLocation | null;
@@ -274,12 +292,18 @@ const createRenderer = (canvas: HTMLCanvasElement): GlassRenderer | null => {
   const uniforms: GlassUniforms = {
     time: gl.getUniformLocation(program, 'uTime'),
     grid: gl.getUniformLocation(program, 'uGrid'),
+    resolution: gl.getUniformLocation(program, 'uResolution'),
     refraction: gl.getUniformLocation(program, 'uRefraction'),
     exposure: gl.getUniformLocation(program, 'uExposure'),
     grain: gl.getUniformLocation(program, 'uGrain'),
     dispersion: gl.getUniformLocation(program, 'uDispersion'),
     bevel: gl.getUniformLocation(program, 'uBevel'),
-    highlight: gl.getUniformLocation(program, 'uHighlight'),
+    outline: gl.getUniformLocation(program, 'uOutline'),
+    outlineSize: gl.getUniformLocation(program, 'uOutlineSize'),
+    edgeSpeed: gl.getUniformLocation(program, 'uEdgeSpeed'),
+    edgeGlow: gl.getUniformLocation(program, 'uEdgeGlow'),
+    streakLength: gl.getUniformLocation(program, 'uStreakLength'),
+    detail: gl.getUniformLocation(program, 'uDetail'),
     warpScale: gl.getUniformLocation(program, 'uWarpScale'),
     warpStrength: gl.getUniformLocation(program, 'uWarpStrength'),
     blobSpread: gl.getUniformLocation(program, 'uBlobSpread'),
@@ -314,14 +338,23 @@ const createRenderer = (canvas: HTMLCanvasElement): GlassRenderer | null => {
       }
     },
     paint: (settings, elapsed) => {
+      const deviceScale =
+        Math.min(window.devicePixelRatio || 1, DPR_CAP) * settings.renderScale;
+
       gl.uniform1f(uniforms.time, elapsed);
       gl.uniform2f(uniforms.grid, settings.columns, rowsFor(settings.columns));
+      gl.uniform2f(uniforms.resolution, canvas.width, canvas.height);
       gl.uniform1f(uniforms.refraction, settings.refraction);
       gl.uniform1f(uniforms.exposure, settings.exposure);
       gl.uniform1f(uniforms.grain, settings.grain);
       gl.uniform1f(uniforms.dispersion, settings.dispersion);
       gl.uniform1f(uniforms.bevel, settings.bevel);
-      gl.uniform1f(uniforms.highlight, settings.highlight);
+      gl.uniform1f(uniforms.outline, settings.outline);
+      gl.uniform1f(uniforms.outlineSize, settings.outlineSize * deviceScale);
+      gl.uniform1f(uniforms.edgeSpeed, settings.edgeSpeed);
+      gl.uniform1f(uniforms.edgeGlow, settings.edgeGlow);
+      gl.uniform1f(uniforms.streakLength, settings.streakLength);
+      gl.uniform1f(uniforms.detail, settings.detail);
       gl.uniform1f(uniforms.warpScale, settings.warpScale);
       gl.uniform1f(uniforms.warpStrength, settings.warpStrength);
       gl.uniform1f(uniforms.blobSpread, settings.blobSpread);
@@ -489,6 +522,7 @@ export function FractalGlassPoc() {
         <div className="relative aspect-[9/4] w-full overflow-hidden rounded-2xl ring-1 ring-white/10">
           <canvas
             ref={canvasRef}
+            style={{ opacity: settings.opacity }}
             className="absolute inset-0 block h-full w-full"
           />
           <span
@@ -519,6 +553,15 @@ export function FractalGlassPoc() {
               step={0.05}
               display={`${settings.renderScale.toFixed(2)}×`}
               onChange={(value) => update('renderScale', value)}
+            />
+            <RangeControl
+              label="Opacity"
+              value={settings.opacity}
+              min={0}
+              max={1}
+              step={0.01}
+              display={settings.opacity.toFixed(2)}
+              onChange={(value) => update('opacity', value)}
             />
           </ControlGroup>
 
@@ -575,6 +618,15 @@ export function FractalGlassPoc() {
               display={settings.blobSpread.toFixed(2)}
               onChange={(value) => update('blobSpread', value)}
             />
+            <RangeControl
+              label="Detail"
+              value={settings.detail}
+              min={0}
+              max={1.5}
+              step={0.01}
+              display={settings.detail.toFixed(2)}
+              onChange={(value) => update('detail', value)}
+            />
           </ControlGroup>
 
           <ControlGroup title="Animator">
@@ -586,6 +638,15 @@ export function FractalGlassPoc() {
               step={0.01}
               display={`${settings.speed.toFixed(2)}×`}
               onChange={(value) => update('speed', value)}
+            />
+            <RangeControl
+              label="Edge speed"
+              value={settings.edgeSpeed}
+              min={0}
+              max={2}
+              step={0.01}
+              display={`${settings.edgeSpeed.toFixed(2)}×`}
+              onChange={(value) => update('edgeSpeed', value)}
             />
             <button
               type="button"
@@ -626,13 +687,40 @@ export function FractalGlassPoc() {
               onChange={(value) => update('bevel', value)}
             />
             <RangeControl
-              label="Highlights"
-              value={settings.highlight}
+              label="Outline strength"
+              value={settings.outline}
               min={0}
               max={1}
               step={0.01}
-              display={settings.highlight.toFixed(2)}
-              onChange={(value) => update('highlight', value)}
+              display={settings.outline.toFixed(2)}
+              onChange={(value) => update('outline', value)}
+            />
+            <RangeControl
+              label="Outline size"
+              value={settings.outlineSize}
+              min={0.5}
+              max={3}
+              step={0.1}
+              display={`${settings.outlineSize.toFixed(1)} px`}
+              onChange={(value) => update('outlineSize', value)}
+            />
+            <RangeControl
+              label="Streak length"
+              value={settings.streakLength}
+              min={1}
+              max={6}
+              step={0.1}
+              display={`${settings.streakLength.toFixed(1)} cells`}
+              onChange={(value) => update('streakLength', value)}
+            />
+            <RangeControl
+              label="Edge glow"
+              value={settings.edgeGlow}
+              min={0}
+              max={1}
+              step={0.01}
+              display={settings.edgeGlow.toFixed(2)}
+              onChange={(value) => update('edgeGlow', value)}
             />
             <RangeControl
               label="Grain"
