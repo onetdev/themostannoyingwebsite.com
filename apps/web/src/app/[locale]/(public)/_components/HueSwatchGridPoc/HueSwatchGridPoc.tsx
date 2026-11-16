@@ -8,6 +8,7 @@ const GRID_COLUMNS = 23;
 const GRID_ROWS = 10;
 const HUE_DURATION_MS = 12_000;
 const EDGE_PERIOD_MS = 6_000;
+const EDGE_SPEED = 1;
 const EDGE_BAND_WIDTH = 0.16;
 const EDGE_ALPHA_MIN = 0.35;
 const EDGE_ALPHA_RANGE = 0.4;
@@ -17,6 +18,7 @@ const FRAME_INTERVAL_MS = 1000 / 20;
 const OVERLAY_REACH = 0.4;
 const SEAM = 1;
 
+const BELL_STEPS = 12;
 const EDGE_ARROW_LENGTH = 6;
 const EDGE_ARROW_WIDTH = 3;
 const EDGE_ARROW_ANGLES: Record<ArrowDirection, number> = {
@@ -30,8 +32,9 @@ type Hsl = readonly [number, number, number];
 type EdgeDirection = -1 | 1;
 type EdgeSide = 'top' | 'right' | 'bottom' | 'left';
 type ArrowDirection = 'up' | 'right' | 'down' | 'left';
+type BandAxis = 'horizontal' | 'vertical';
 
-const FALLBACK_EDGE: EdgeLine = { direction: 1, phase: 0, speed: 1 };
+const FALLBACK_EDGE: EdgeLine = { direction: 1, phase: 0 };
 
 /** Warm / cool / magenta palette, matching the hue swatch demo. */
 const PALETTE: readonly Hsl[] = [
@@ -65,7 +68,6 @@ const createRandom = (seed: number) => {
 interface EdgeLine {
   readonly direction: EdgeDirection;
   readonly phase: number;
-  readonly speed: number;
 }
 
 interface EdgeLines {
@@ -114,6 +116,19 @@ interface EdgeGlowOptions {
   readonly alpha: number;
 }
 
+interface BandRect {
+  readonly x: number;
+  readonly y: number;
+  readonly width: number;
+  readonly height: number;
+}
+
+interface RenderTargets {
+  readonly context: CanvasRenderingContext2D;
+  readonly edgeContext: CanvasRenderingContext2D;
+  readonly edgeMask: HTMLCanvasElement;
+}
+
 interface CellEdgeOptions {
   readonly context: CanvasRenderingContext2D;
   readonly cell: Cell;
@@ -129,7 +144,6 @@ const buildEdgeLines = (random: () => number, count: number): EdgeLine[] =>
   Array.from({ length: count }, () => ({
     direction: random() < 0.5 ? -1 : 1,
     phase: random(),
-    speed: 0.7 + random() * 0.6,
   }));
 
 const buildLines = (random: () => number): EdgeLines => ({
@@ -227,7 +241,7 @@ interface EdgeMotion {
 
 /** Shared clock for a line's fade pulse and travelling highlight. */
 const edgeMotion = (line: EdgeLine, elapsed: number): EdgeMotion => {
-  const cycle = (elapsed / EDGE_PERIOD_MS) * line.speed + line.phase;
+  const cycle = (elapsed / EDGE_PERIOD_MS) * EDGE_SPEED + line.phase;
   const travel = pingPong(cycle);
 
   return {
@@ -268,7 +282,7 @@ const edgeStrength = (
  * line (right/down) or back towards the start (left/up).
  */
 const isEdgeForward = (line: EdgeLine, elapsed: number) => {
-  const cycle = (elapsed / EDGE_PERIOD_MS) * line.speed + line.phase;
+  const cycle = (elapsed / EDGE_PERIOD_MS) * EDGE_SPEED + line.phase;
   const wrapped = ((cycle % 1) + 1) % 1;
   const rising = wrapped < 0.5;
 
@@ -483,19 +497,106 @@ const paintGutters = (
   }
 };
 
-const paintCell = (
+const paintBellBand = (
+  context: CanvasRenderingContext2D,
+  rect: BandRect,
+  axis: BandAxis,
+) => {
+  const { x, y, width, height } = rect;
+  const gradient =
+    axis === 'horizontal'
+      ? context.createLinearGradient(x, y, x + width, y)
+      : context.createLinearGradient(x, y, x, y + height);
+
+  for (let step = 0; step <= BELL_STEPS; step += 1) {
+    const t = step / BELL_STEPS;
+    const alpha = Math.sin(Math.PI * t) ** 2;
+
+    gradient.addColorStop(t, `rgba(255, 255, 255, ${alpha})`);
+  }
+
+  context.fillStyle = gradient;
+  context.fillRect(x, y, width, height);
+};
+
+/**
+ * Static bell mask over every cell edge: opacity is 0 at the cell corners and
+ * peaks at the middle of each edge, so perpendicular edges do not stack up.
+ */
+const buildEdgeMask = (context: CanvasRenderingContext2D) => {
+  context.clearRect(0, 0, STAGE_WIDTH, STAGE_HEIGHT);
+
+  const cellWidth = STAGE_WIDTH / GRID_COLUMNS;
+  const cellHeight = STAGE_HEIGHT / GRID_ROWS;
+  const reachX = (cellWidth - SEAM) * OVERLAY_REACH;
+  const reachY = (cellHeight - SEAM) * OVERLAY_REACH;
+
+  for (let row = 0; row < GRID_ROWS; row += 1) {
+    for (let column = 0; column < GRID_COLUMNS; column += 1) {
+      const x = column * cellWidth + SEAM / 2;
+      const y = row * cellHeight + SEAM / 2;
+      const width = cellWidth - SEAM;
+      const height = cellHeight - SEAM;
+
+      paintBellBand(context, { x, y, width, height: reachY }, 'horizontal');
+      paintBellBand(
+        context,
+        { x, y: y + height - reachY, width, height: reachY },
+        'horizontal',
+      );
+      paintBellBand(context, { x, y, width: reachX, height }, 'vertical');
+      paintBellBand(
+        context,
+        { x: x + width - reachX, y, width: reachX, height },
+        'vertical',
+      );
+    }
+  }
+};
+
+const applyEdgeMask = (
+  context: CanvasRenderingContext2D,
+  mask: HTMLCanvasElement,
+) => {
+  context.save();
+  context.setTransform(1, 0, 0, 1, 0, 0);
+  context.globalCompositeOperation = 'destination-in';
+  context.drawImage(mask, 0, 0);
+  context.restore();
+};
+
+const compositeLayer = (
+  context: CanvasRenderingContext2D,
+  layer: HTMLCanvasElement,
+) => {
+  context.save();
+  context.setTransform(1, 0, 0, 1, 0, 0);
+  context.drawImage(layer, 0, 0);
+  context.restore();
+};
+
+const paintCellBase = (
+  context: CanvasRenderingContext2D,
+  cell: Cell,
+  elapsed: number,
+) => {
+  const { x, y, width, height } = cell;
+  const baseHue = cellHue(cell, elapsed);
+
+  context.fillStyle = `hsla(${normaliseHue(baseHue)}, ${cell.saturation}%, ${cell.lightness}%, 1)`;
+  context.fillRect(x, y, width, height);
+};
+
+const paintCellEdges = (
   context: CanvasRenderingContext2D,
   cell: Cell,
   lines: EdgeLines,
   elapsed: number,
 ) => {
-  const { x, y, width, height, offsets } = cell;
+  const { offsets } = cell;
   const baseHue = cellHue(cell, elapsed);
   const alongRow = (cell.column + 0.5) / GRID_COLUMNS;
   const alongColumn = (cell.row + 0.5) / GRID_ROWS;
-
-  context.fillStyle = `hsla(${normaliseHue(baseHue)}, ${cell.saturation}%, ${cell.lightness}%, 1)`;
-  context.fillRect(x, y, width, height);
 
   const edges: readonly [EdgeSide, EdgeLine, number, number][] = [
     ['top', lines.horizontal[cell.row] ?? FALLBACK_EDGE, alongRow, offsets[0]],
@@ -588,11 +689,13 @@ const paintDirectionArrows = (
 };
 
 const paintFrame = (
-  context: CanvasRenderingContext2D,
+  targets: RenderTargets,
   scene: Scene,
   elapsed: number,
   showDebug: boolean,
 ) => {
+  const { context, edgeContext, edgeMask } = targets;
+
   context.fillStyle = '#0b0f19';
   context.fillRect(0, 0, STAGE_WIDTH, STAGE_HEIGHT);
 
@@ -601,8 +704,17 @@ const paintFrame = (
   paintGutters(context, scene.cells, baseHues);
 
   for (const cell of scene.cells) {
-    paintCell(context, cell, scene.lines, elapsed);
+    paintCellBase(context, cell, elapsed);
   }
+
+  edgeContext.clearRect(0, 0, STAGE_WIDTH, STAGE_HEIGHT);
+
+  for (const cell of scene.cells) {
+    paintCellEdges(edgeContext, cell, scene.lines, elapsed);
+  }
+
+  applyEdgeMask(edgeContext, edgeMask);
+  compositeLayer(context, edgeContext.canvas);
 
   if (showDebug) {
     paintDirectionArrows(context, scene.lines, elapsed);
@@ -649,6 +761,25 @@ export function HueSwatchGridPoc() {
     canvas.height = STAGE_HEIGHT * dpr;
     context.setTransform(dpr, 0, 0, dpr, 0, 0);
 
+    const edgeCanvas = document.createElement('canvas');
+    edgeCanvas.width = STAGE_WIDTH * dpr;
+    edgeCanvas.height = STAGE_HEIGHT * dpr;
+    const edgeContext = edgeCanvas.getContext('2d');
+
+    const edgeMask = document.createElement('canvas');
+    edgeMask.width = STAGE_WIDTH * dpr;
+    edgeMask.height = STAGE_HEIGHT * dpr;
+    const maskContext = edgeMask.getContext('2d');
+
+    if (!edgeContext || !maskContext) {
+      return;
+    }
+
+    edgeContext.setTransform(dpr, 0, 0, dpr, 0, 0);
+    maskContext.setTransform(dpr, 0, 0, dpr, 0, 0);
+    buildEdgeMask(maskContext);
+
+    const targets: RenderTargets = { context, edgeContext, edgeMask };
     const scene = buildScene(createRandom(20261109));
     const startedAt = performance.now();
     let lastPaint = 0;
@@ -659,7 +790,7 @@ export function HueSwatchGridPoc() {
     const draw = (now: number) => {
       if (now - lastPaint >= FRAME_INTERVAL_MS) {
         lastPaint = now;
-        paintFrame(context, scene, now - startedAt, showDebugRef.current);
+        paintFrame(targets, scene, now - startedAt, showDebugRef.current);
         paintedFrames += 1;
 
         const windowMs = now - fpsWindowStart;
