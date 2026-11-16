@@ -11,6 +11,9 @@ jest.mock('./AppFooter', () => ({
 jest.mock('./HueSwatchGridPoc/HueSwatchGridPoc', () => ({
   HueSwatchGridPoc: () => <div data-testid="hue-swatch-grid-poc" />,
 }));
+jest.mock('./FractalGlassPoc/FractalGlassPoc', () => ({
+  FractalGlassPoc: () => <div data-testid="fractal-glass-poc" />,
+}));
 jest.mock('@/features/monitoring/components', () => ({
   ReportRouteVisit: () => null,
 }));
@@ -36,6 +39,30 @@ describe('PageLayout', () => {
     );
 
     expect(html.indexOf('data-testid="hue-swatch-grid-poc"')).toBeGreaterThan(
+      html.indexOf('data-testid="app-footer"'),
+    );
+  });
+
+  it('renders the fractal glass below the hue swatch grid', () => {
+    const html = renderToStaticMarkup(
+      <PageLayout route="home">
+        <p>Body copy</p>
+      </PageLayout>,
+    );
+
+    expect(html.indexOf('data-testid="fractal-glass-poc"')).toBeGreaterThan(
+      html.indexOf('data-testid="hue-swatch-grid-poc"'),
+    );
+  });
+
+  it('renders the fractal glass below the footer content', () => {
+    const html = renderToStaticMarkup(
+      <PageLayout route="home">
+        <p>Body copy</p>
+      </PageLayout>,
+    );
+
+    expect(html.indexOf('data-testid="fractal-glass-poc"')).toBeGreaterThan(
       html.indexOf('data-testid="app-footer"'),
     );
   });
