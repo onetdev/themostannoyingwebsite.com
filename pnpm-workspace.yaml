@@ -29,7 +29,7 @@ catalog:
   "@storybook/react": ^10.6.8
   "@swc/core": ^1.16.22
   "@swc/jest": ^0.2.39
-  "@tailwindcss/postcss": "^4.3.3"
+  "@tailwindcss/postcss": "^4.3.5"
   "@testing-library/jest-dom": "^8.0.0"
   "@types/jest": "^30.0.0"
   "@types/node": ^26.6.6
@@ -41,15 +41,15 @@ catalog:
   "jest-environment-jsdom": ^30.5.2
   "ky": ^2.2.0
   "marked": ^18.1.1
-  "motion": ^14.4.0
+  "motion": ^14.14.0
   "react": ^19.3.1
   "react-dom": ^19.3.1
   "react-hook-form": 7.90.0
-  "recharts": ^3.10.1
+  "recharts": ^3.11.0
   "sanitize-html": 2.18.1
   "schema-dts": ^2.1.0
   "storybook": ^10.6.8
-  "tailwindcss": "^4.3.3"
+  "tailwindcss": "^4.3.5"
   "tsx": ^4.23.15
   "typescript": 7.0.2
   "vite": ^8.3.8
