@@ -195,17 +195,17 @@ catalogs:
       specifier: 1.64.1
       version: 1.64.1
     '@storybook/addon-docs':
-      specifier: ^10.6.3
-      version: 10.6.3
+      specifier: ^10.6.8
+      version: 10.6.8
     '@storybook/addon-themes':
-      specifier: ^10.6.3
-      version: 10.6.3
+      specifier: ^10.6.8
+      version: 10.6.8
     '@storybook/nextjs-vite':
-      specifier: ^10.6.3
-      version: 10.6.3
+      specifier: ^10.6.8
+      version: 10.6.8
     '@storybook/react':
-      specifier: ^10.6.3
-      version: 10.6.3
+      specifier: ^10.6.8
+      version: 10.6.8
     '@swc/core':
       specifier: ^1.16.22
       version: 1.16.22
@@ -270,8 +270,8 @@ catalogs:
       specifier: ^2.1.0
       version: 2.1.0
     storybook:
-      specifier: ^10.6.3
-      version: 10.6.3
+      specifier: ^10.6.8
+      version: 10.6.8
     tailwindcss:
       specifier: ^4.3.3
       version: 4.3.3
@@ -334,16 +334,16 @@ importers:
         version: link:../../packages/config-ts
       '@storybook/addon-docs':
         specifier: 'catalog:'
-        version: 10.6.3(@types/react-dom@19.3.0(@types/react@19.3.0))(@types/react@19.3.0)(storybook@10.6.3(@types/react@19.3.0)(react@19.3.1))
+        version: 10.6.8(@types/react-dom@19.3.0(@types/react@19.3.0))(@types/react@19.3.0)(storybook@10.6.8(@types/react@19.3.0)(react@19.3.1))
       '@storybook/addon-themes':
         specifier: 'catalog:'
-        version: 10.6.3(storybook@10.6.3(@types/react@19.3.0)(react@19.3.1))
+        version: 10.6.8(storybook@10.6.8(@types/react@19.3.0)(react@19.3.1))
       '@storybook/nextjs-vite':
         specifier: 'catalog:'
-        version: 10.6.3(@babel/core@7.29.7(supports-color@8.1.1))(@types/react-dom@19.3.0(@types/react@19.3.0))(@types/react@19.3.0)(next@16.4.2(@babel/core@7.29.7(supports-color@8.1.1))(@opentelemetry/api@1.9.1)(@playwright/test@1.64.1)(@types/node@26.6.6)(react-dom@19.3.1(react@19.3.1))(react@19.3.1)(sass@1.108.2))(react-dom@19.3.1(react@19.3.1))(react@19.3.1)(rollup@4.64.10)(storybook@10.6.3(@types/react@19.3.0)(react@19.3.1))(supports-color@8.1.1)(typescript@7.0.2)(vite@8.3.8(@types/node@26.6.6)(esbuild@0.28.2)(jiti@2.7.0)(less@4.9.1(supports-color@8.1.1))(sass@1.108.2)(stylus@0.62.0(supports-color@8.1.1))(terser@5.51.2)(tsx@4.23.15)(yaml@2.9.1))
+        version: 10.6.8(@babel/core@7.29.7(supports-color@8.1.1))(@types/react-dom@19.3.0(@types/react@19.3.0))(@types/react@19.3.0)(next@16.4.2(@babel/core@7.29.7(supports-color@8.1.1))(@opentelemetry/api@1.9.1)(@playwright/test@1.64.1)(@types/node@26.6.6)(react-dom@19.3.1(react@19.3.1))(react@19.3.1)(sass@1.108.2))(react-dom@19.3.1(react@19.3.1))(react@19.3.1)(rollup@4.64.10)(storybook@10.6.8(@types/react@19.3.0)(react@19.3.1))(supports-color@8.1.1)(typescript@7.0.2)(vite@8.3.8(@types/node@26.6.6)(esbuild@0.28.2)(jiti@2.7.0)(less@4.9.1(supports-color@8.1.1))(sass@1.108.2)(stylus@0.62.0(supports-color@8.1.1))(terser@5.51.2)(tsx@4.23.15)(yaml@2.9.1))
       '@storybook/react':
         specifier: 'catalog:'
-        version: 10.6.3(@types/react-dom@19.3.0(@types/react@19.3.0))(@types/react@19.3.0)(react-dom@19.3.1(react@19.3.1))(react@19.3.1)(storybook@10.6.3(@types/react@19.3.0)(react@19.3.1))(supports-color@8.1.1)(typescript@7.0.2)
+        version: 10.6.8(@types/react-dom@19.3.0(@types/react@19.3.0))(@types/react@19.3.0)(react-dom@19.3.1(react@19.3.1))(react@19.3.1)(storybook@10.6.8(@types/react@19.3.0)(react@19.3.1))(supports-color@8.1.1)(typescript@7.0.2)
       '@types/node':
         specifier: 'catalog:'
         version: 26.6.6
@@ -358,7 +358,7 @@ importers:
         version: 8.5.31
       storybook:
         specifier: 'catalog:'
-        version: 10.6.3(@types/react@19.3.0)(react@19.3.1)
+        version: 10.6.8(@types/react@19.3.0)(react@19.3.1)
       tailwindcss:
         specifier: 'catalog:'
         version: 4.3.3
@@ -725,10 +725,10 @@ importers:
         version: link:../config-ts
       '@storybook/addon-docs':
         specifier: 'catalog:'
-        version: 10.6.3(@types/react-dom@19.3.0(@types/react@19.3.0))(@types/react@19.3.0)(storybook@10.6.3(@types/react@19.3.0)(react@19.3.1))
+        version: 10.6.8(@types/react-dom@19.3.0(@types/react@19.3.0))(@types/react@19.3.0)(storybook@10.6.8(@types/react@19.3.0)(react@19.3.1))
       '@storybook/react':
         specifier: 'catalog:'
-        version: 10.6.3(@types/react-dom@19.3.0(@types/react@19.3.0))(@types/react@19.3.0)(react-dom@19.3.1(react@19.3.1))(react@19.3.1)(storybook@10.6.3(@types/react@19.3.0)(react@19.3.1))(supports-color@8.1.1)(typescript@7.0.2)
+        version: 10.6.8(@types/react-dom@19.3.0(@types/react@19.3.0))(@types/react@19.3.0)(react-dom@19.3.1(react@19.3.1))(react@19.3.1)(storybook@10.6.8(@types/react@19.3.0)(react@19.3.1))(supports-color@8.1.1)(typescript@7.0.2)
       '@types/node':
         specifier: 'catalog:'
         version: 26.6.6
@@ -740,7 +740,7 @@ importers:
         version: 19.3.0(@types/react@19.3.0)
       storybook:
         specifier: 'catalog:'
-        version: 10.6.3(@types/react@19.3.0)(react@19.3.1)
+        version: 10.6.8(@types/react@19.3.0)(react@19.3.1)
       tailwindcss:
         specifier: 'catalog:'
         version: 4.3.3
@@ -3064,24 +3064,24 @@ packages:
   '@standard-schema/utils@0.3.0':
     resolution: {integrity: sha512-e7Mew686owMaPJVNNLs55PUvgz371nKgwsc4vxE49zsODpJEnxgxRo2y/OKrqueavXgZNMDVj3DdHFlaSAeU8g==}
 
-  '@storybook/addon-docs@10.6.3':
-    resolution: {integrity: sha512-365f712au4w/xvFqEKY6TIvTeGGAY7FKRB8zP4CFa3VSv9oyxHaq/ublFg4YDbCeRagppwl1PZ6k4+PoUor3+A==}
+  '@storybook/addon-docs@10.6.8':
+    resolution: {integrity: sha512-5Xa3HX/OHDxFlMwCe5CBRjUbxntTyI6O1s4vo9crDiHqO3wZJY1zwdVLzNCbdZ58sh2pxAWrATk9rKi6MjWp/w==}
     peerDependencies:
       '@types/react': ^16.8.0 || ^17.0.0 || ^18.0.0 || ^19.0.0
-      storybook: ^10.6.3
+      storybook: ^10.6.8
     peerDependenciesMeta:
       '@types/react':
         optional: true
 
-  '@storybook/addon-themes@10.6.3':
-    resolution: {integrity: sha512-6LGpeMMg06qpynKhOiCR10l7tkLL/LpBdJxf+9JEjfMohbgGZj1ukR8hVDgMNJAx2RN45Ovz78/HlwMM5PCa4g==}
+  '@storybook/addon-themes@10.6.8':
+    resolution: {integrity: sha512-bD032gFYTq77lP5qtJ77UveDj86jz/CfRhLkIfO+eCk5Iy23BCOYKaSWeNg3kiUGWNcV09Hcrob3Gqi6JHOr4Q==}
     peerDependencies:
-      storybook: ^10.6.3
+      storybook: ^10.6.8
 
-  '@storybook/builder-vite@10.6.3':
-    resolution: {integrity: sha512-1+WCZZg/fPxxyHDB5sFKniFt9/4RFUIzoNqMujv+BLRROM+gQeyUHvdvoyZOZ51+P8ee+/PgnNKHjsTupV+nOA==}
+  '@storybook/builder-vite@10.6.8':
+    resolution: {integrity: sha512-prL9t88RSzN3uk8Kzx5LnkqIODhRbwKa0PMryTlIEcew1J1hAiXcCNCJTDM5uhKjTO8s4OSBsCozVozdd+C2TQ==}
     peerDependencies:
-      storybook: ^10.6.3
+      storybook: ^10.6.8
       vite: ^5.0.0 || ^6.0.0 || ^7.0.0 || ^8.0.0
 
   '@storybook/global@5.0.0':
@@ -3092,15 +3092,15 @@ packages:
     peerDependencies:
       react: ^16.8.0 || ^17.0.0 || ^18.0.0 || ^19.0.0
 
-  '@storybook/nextjs-vite@10.6.3':
-    resolution: {integrity: sha512-LsHMeWYZyJhXawQztiExaQS7DSzhlmHEYmmtcjFIXntdev7hXtMLbqCSHDzGkDl6RlmqxmWJs81Huhnjk7v2WQ==}
+  '@storybook/nextjs-vite@10.6.8':
+    resolution: {integrity: sha512-5ZFfwYyecT9aXxL0MJjL2P+DVB2X9hK6CIiVqaV9uB/yJpTpDrdlaCjh1/CzDHqXy0oDDio50jwZ+395jfVSUA==}
     peerDependencies:
       '@types/react': ^16.8.0 || ^17.0.0 || ^18.0.0 || ^19.0.0
       '@types/react-dom': ^16.8.0 || ^17.0.0 || ^18.0.0 || ^19.0.0
       next: ^14.1.0 || ^15.0.0 || ^16.0.0
       react: ^16.8.0 || ^17.0.0 || ^18.0.0 || ^19.0.0
       react-dom: ^16.8.0 || ^17.0.0 || ^18.0.0 || ^19.0.0
-      storybook: ^10.6.3
+      storybook: ^10.6.8
       typescript: '*'
       vite: ^5.0.0 || ^6.0.0 || ^7.0.0 || ^8.0.0
     peerDependenciesMeta:
@@ -3111,40 +3111,40 @@ packages:
       typescript:
         optional: true
 
-  '@storybook/react-dom-shim@10.6.3':
-    resolution: {integrity: sha512-cJUuPrieiTl06kzlgaU89iG+CtLAgUTt0Xdvm8qFT9yR2qwafSaswhwYWlZCNX4nWuOu7eK7uzWTwzKqyDBOWQ==}
+  '@storybook/react-dom-shim@10.6.8':
+    resolution: {integrity: sha512-5OI3IEdi0kZYvbi3sAvg7Z/UHGYm8Dr/kl9DPgv5PiK4vqnyRvIOaufypQMNc9gujz4gm2X1WKMwffEAWV1EMQ==}
     peerDependencies:
       '@types/react': ^16.8.0 || ^17.0.0 || ^18.0.0 || ^19.0.0
       '@types/react-dom': ^16.8.0 || ^17.0.0 || ^18.0.0 || ^19.0.0
       react: ^16.8.0 || ^17.0.0 || ^18.0.0 || ^19.0.0
       react-dom: ^16.8.0 || ^17.0.0 || ^18.0.0 || ^19.0.0
-      storybook: ^10.6.3
+      storybook: ^10.6.8
     peerDependenciesMeta:
       '@types/react':
         optional: true
       '@types/react-dom':
         optional: true
 
-  '@storybook/react-vite@10.6.3':
-    resolution: {integrity: sha512-geWwLi9JnaRG2t9bYBfz+94skARzzXNT1Toaf0lk7Oog13rtNK7ay2pWNm9SP6/L2S7mEjoWu9+zHLpwxXvfIw==}
+  '@storybook/react-vite@10.6.8':
+    resolution: {integrity: sha512-LD3twjlX5/LZ1NRY9uI1IxzsNHrNV7NuKABTG8RRsBdFF8gX+lUyF38GuNdASgBhmOQSGKGZIiREXrbs3ls3Ug==}
     peerDependencies:
       react: ^16.8.0 || ^17.0.0 || ^18.0.0 || ^19.0.0
       react-dom: ^16.8.0 || ^17.0.0 || ^18.0.0 || ^19.0.0
-      storybook: ^10.6.3
+      storybook: ^10.6.8
       typescript: '>= 4.9.x'
       vite: ^5.0.0 || ^6.0.0 || ^7.0.0 || ^8.0.0
     peerDependenciesMeta:
       typescript:
         optional: true
 
-  '@storybook/react@10.6.3':
-    resolution: {integrity: sha512-3tfAkZNdUyx3I4IjM8dgbNWg4k0gj89Hi1MPiawfTybRRWhvnX2YqV9Ut4mrud7YzRv0v+U7+ZYEvj+maUPaow==}
+  '@storybook/react@10.6.8':
+    resolution: {integrity: sha512-esvGyYhZp/c9REfTNg4ewcQugygWbRpff2iaJMZzez8KRchi+yW8mEdlG2SFQ2f4MDYzgPFHb7t+4+6OHxMA+A==}
     peerDependencies:
       '@types/react': ^16.8.0 || ^17.0.0 || ^18.0.0 || ^19.0.0
       '@types/react-dom': ^16.8.0 || ^17.0.0 || ^18.0.0 || ^19.0.0
       react: ^16.8.0 || ^17.0.0 || ^18.0.0 || ^19.0.0
       react-dom: ^16.8.0 || ^17.0.0 || ^18.0.0 || ^19.0.0
-      storybook: ^10.6.3
+      storybook: ^10.6.8
       typescript: '>= 4.9.x'
     peerDependenciesMeta:
       '@types/react':
@@ -6930,8 +6930,8 @@ packages:
     resolution: {integrity: sha512-UhDfHmA92YAlNnCfhmq0VeNL5bDbiZGg7sZ2IvPsXubGkiNa9EC+tUTsjBRsYUAz87btI6/1wf4XoVvQ3uRnmQ==}
     engines: {node: '>=18'}
 
-  storybook@10.6.3:
-    resolution: {integrity: sha512-lNBvcZFG44C98KvQHYzfq1O46m+sl94zY1+na5/9E3ihtNMbvpOgYyMFMIcWYUvOMo3OM4q9jzvB73KU20bU8w==}
+  storybook@10.6.8:
+    resolution: {integrity: sha512-evtpCo87LwamL5oMQJmtD0kaQNOBePOAbhW9WlM2zW5nItbtDHeXVBLJR4d3Wld9++XhPntaGJKE3RUw6c0VVg==}
     hasBin: true
     peerDependencies:
       '@types/react': ^16.8.0 || ^17.0.0 || ^18.0.0 || ^19.0.0
@@ -7348,11 +7348,11 @@ packages:
   victory-vendor@37.3.6:
     resolution: {integrity: sha512-SbPDPdDBYp+5MJHhBCAyI7wKM3d5ivekigc2Dk2s7pgbZ9wIgIBYGVw4zGHBml/qTFbexrofXW6Gu4noGxrOwQ==}
 
-  vite-plugin-storybook-nextjs@10.6.3:
-    resolution: {integrity: sha512-ntwvCUfwUJDvNPsCrLwxhlWwFhuCdJdnfiEGdw2NgtB9ubVxbEPuvwfWSVEM5SGR+gsZsOqYhKFEV+0gPHi6+w==}
+  vite-plugin-storybook-nextjs@10.6.8:
+    resolution: {integrity: sha512-ngkPLhx1T/+BAG8lT8nUhiKpqn9O0WTWgQP6oU5YQS2n4te5+Kgtt/EoqdGn9Kk6TNUQiriRsZbjLnZLcAhMpQ==}
     peerDependencies:
       next: ^14.1.0 || ^15.0.0 || ^16.0.0
-      storybook: ^10.6.3
+      storybook: ^10.6.8
       vite: ^5.0.0 || ^6.0.0 || ^7.0.0 || ^8.0.0
 
   vite-tsconfig-paths@5.1.4:
@@ -8801,14 +8801,14 @@ snapshots:
       '@tybys/wasm-util': 0.10.4
     optional: true
 
-  '@napi-rs/wasm-runtime@1.2.5(@emnapi/core@1.11.0)(@emnapi/runtime@1.11.0)':
+  '@napi-rs/wasm-runtime@1.2.6(@emnapi/core@1.11.0)(@emnapi/runtime@1.11.0)':
     dependencies:
       '@emnapi/core': 1.11.0
       '@emnapi/runtime': 1.11.0
       '@tybys/wasm-util': 0.10.4
     optional: true
 
-  '@napi-rs/wasm-runtime@1.2.5(@emnapi/core@1.9.2)(@emnapi/runtime@1.9.2)':
+  '@napi-rs/wasm-runtime@1.2.6(@emnapi/core@1.9.2)(@emnapi/runtime@1.9.2)':
     dependencies:
       '@emnapi/core': 1.9.2
       '@emnapi/runtime': 1.9.2
@@ -9078,7 +9078,7 @@ snapshots:
     dependencies:
       '@emnapi/core': 1.9.2
       '@emnapi/runtime': 1.9.2
-      '@napi-rs/wasm-runtime': 1.2.5(@emnapi/core@1.9.2)(@emnapi/runtime@1.9.2)
+      '@napi-rs/wasm-runtime': 1.2.6(@emnapi/core@1.9.2)(@emnapi/runtime@1.9.2)
     optional: true
 
   '@oxc-parser/binding-win32-arm64-msvc@0.127.0':
@@ -9157,7 +9157,7 @@ snapshots:
     dependencies:
       '@emnapi/core': 1.11.0
       '@emnapi/runtime': 1.11.0
-      '@napi-rs/wasm-runtime': 1.2.5(@emnapi/core@1.11.0)(@emnapi/runtime@1.11.0)
+      '@napi-rs/wasm-runtime': 1.2.6(@emnapi/core@1.11.0)(@emnapi/runtime@1.11.0)
     optional: true
 
   '@oxc-resolver/binding-win32-arm64-msvc@11.21.2':
@@ -9642,14 +9642,14 @@ snapshots:
 
   '@standard-schema/utils@0.3.0': {}
 
-  '@storybook/addon-docs@10.6.3(@types/react-dom@19.3.0(@types/react@19.3.0))(@types/react@19.3.0)(storybook@10.6.3(@types/react@19.3.0)(react@19.3.1))':
+  '@storybook/addon-docs@10.6.8(@types/react-dom@19.3.0(@types/react@19.3.0))(@types/react@19.3.0)(storybook@10.6.8(@types/react@19.3.0)(react@19.3.1))':
     dependencies:
       '@mdx-js/react': 3.1.1(@types/react@19.3.0)(react@19.3.1)
       '@storybook/icons': 2.2.0(react@19.3.1)
-      '@storybook/react-dom-shim': 10.6.3(@types/react-dom@19.3.0(@types/react@19.3.0))(@types/react@19.3.0)(react-dom@19.3.1(react@19.3.1))(react@19.3.1)(storybook@10.6.3(@types/react@19.3.0)(react@19.3.1))
+      '@storybook/react-dom-shim': 10.6.8(@types/react-dom@19.3.0(@types/react@19.3.0))(@types/react@19.3.0)(react-dom@19.3.1(react@19.3.1))(react@19.3.1)(storybook@10.6.8(@types/react@19.3.0)(react@19.3.1))
       react: 19.3.1
       react-dom: 19.3.1(react@19.3.1)
-      storybook: 10.6.3(@types/react@19.3.0)(react@19.3.1)
+      storybook: 10.6.8(@types/react@19.3.0)(react@19.3.1)
       ts-dedent: 2.3.0
       unplugin: 2.3.11
     optionalDependencies:
@@ -9657,14 +9657,14 @@ snapshots:
     transitivePeerDependencies:
       - '@types/react-dom'
 
-  '@storybook/addon-themes@10.6.3(storybook@10.6.3(@types/react@19.3.0)(react@19.3.1))':
+  '@storybook/addon-themes@10.6.8(storybook@10.6.8(@types/react@19.3.0)(react@19.3.1))':
     dependencies:
-      storybook: 10.6.3(@types/react@19.3.0)(react@19.3.1)
+      storybook: 10.6.8(@types/react@19.3.0)(react@19.3.1)
       ts-dedent: 2.3.0
 
-  '@storybook/builder-vite@10.6.3(storybook@10.6.3(@types/react@19.3.0)(react@19.3.1))(vite@8.3.8(@types/node@26.6.6)(esbuild@0.28.2)(jiti@2.7.0)(less@4.9.1(supports-color@8.1.1))(sass@1.108.2)(stylus@0.62.0(supports-color@8.1.1))(terser@5.51.2)(tsx@4.23.15)(yaml@2.9.1))':
+  '@storybook/builder-vite@10.6.8(storybook@10.6.8(@types/react@19.3.0)(react@19.3.1))(vite@8.3.8(@types/node@26.6.6)(esbuild@0.28.2)(jiti@2.7.0)(less@4.9.1(supports-color@8.1.1))(sass@1.108.2)(stylus@0.62.0(supports-color@8.1.1))(terser@5.51.2)(tsx@4.23.15)(yaml@2.9.1))':
     dependencies:
-      storybook: 10.6.3(@types/react@19.3.0)(react@19.3.1)
+      storybook: 10.6.8(@types/react@19.3.0)(react@19.3.1)
       ts-dedent: 2.3.0
       vite: 8.3.8(@types/node@26.6.6)(esbuild@0.28.2)(jiti@2.7.0)(less@4.9.1(supports-color@8.1.1))(sass@1.108.2)(stylus@0.62.0(supports-color@8.1.1))(terser@5.51.2)(tsx@4.23.15)(yaml@2.9.1)
 
@@ -9674,18 +9674,18 @@ snapshots:
     dependencies:
       react: 19.3.1
 
-  '@storybook/nextjs-vite@10.6.3(@babel/core@7.29.7(supports-color@8.1.1))(@types/react-dom@19.3.0(@types/react@19.3.0))(@types/react@19.3.0)(next@16.4.2(@babel/core@7.29.7(supports-color@8.1.1))(@opentelemetry/api@1.9.1)(@playwright/test@1.64.1)(@types/node@26.6.6)(react-dom@19.3.1(react@19.3.1))(react@19.3.1)(sass@1.108.2))(react-dom@19.3.1(react@19.3.1))(react@19.3.1)(rollup@4.64.10)(storybook@10.6.3(@types/react@19.3.0)(react@19.3.1))(supports-color@8.1.1)(typescript@7.0.2)(vite@8.3.8(@types/node@26.6.6)(esbuild@0.28.2)(jiti@2.7.0)(less@4.9.1(supports-color@8.1.1))(sass@1.108.2)(stylus@0.62.0(supports-color@8.1.1))(terser@5.51.2)(tsx@4.23.15)(yaml@2.9.1))':
+  '@storybook/nextjs-vite@10.6.8(@babel/core@7.29.7(supports-color@8.1.1))(@types/react-dom@19.3.0(@types/react@19.3.0))(@types/react@19.3.0)(next@16.4.2(@babel/core@7.29.7(supports-color@8.1.1))(@opentelemetry/api@1.9.1)(@playwright/test@1.64.1)(@types/node@26.6.6)(react-dom@19.3.1(react@19.3.1))(react@19.3.1)(sass@1.108.2))(react-dom@19.3.1(react@19.3.1))(react@19.3.1)(rollup@4.64.10)(storybook@10.6.8(@types/react@19.3.0)(react@19.3.1))(supports-color@8.1.1)(typescript@7.0.2)(vite@8.3.8(@types/node@26.6.6)(esbuild@0.28.2)(jiti@2.7.0)(less@4.9.1(supports-color@8.1.1))(sass@1.108.2)(stylus@0.62.0(supports-color@8.1.1))(terser@5.51.2)(tsx@4.23.15)(yaml@2.9.1))':
     dependencies:
-      '@storybook/builder-vite': 10.6.3(storybook@10.6.3(@types/react@19.3.0)(react@19.3.1))(vite@8.3.8(@types/node@26.6.6)(esbuild@0.28.2)(jiti@2.7.0)(less@4.9.1(supports-color@8.1.1))(sass@1.108.2)(stylus@0.62.0(supports-color@8.1.1))(terser@5.51.2)(tsx@4.23.15)(yaml@2.9.1))
-      '@storybook/react': 10.6.3(@types/react-dom@19.3.0(@types/react@19.3.0))(@types/react@19.3.0)(react-dom@19.3.1(react@19.3.1))(react@19.3.1)(storybook@10.6.3(@types/react@19.3.0)(react@19.3.1))(supports-color@8.1.1)(typescript@7.0.2)
-      '@storybook/react-vite': 10.6.3(@types/react-dom@19.3.0(@types/react@19.3.0))(@types/react@19.3.0)(react-dom@19.3.1(react@19.3.1))(react@19.3.1)(rollup@4.64.10)(storybook@10.6.3(@types/react@19.3.0)(react@19.3.1))(supports-color@8.1.1)(typescript@7.0.2)(vite@8.3.8(@types/node@26.6.6)(esbuild@0.28.2)(jiti@2.7.0)(less@4.9.1(supports-color@8.1.1))(sass@1.108.2)(stylus@0.62.0(supports-color@8.1.1))(terser@5.51.2)(tsx@4.23.15)(yaml@2.9.1))
+      '@storybook/builder-vite': 10.6.8(storybook@10.6.8(@types/react@19.3.0)(react@19.3.1))(vite@8.3.8(@types/node@26.6.6)(esbuild@0.28.2)(jiti@2.7.0)(less@4.9.1(supports-color@8.1.1))(sass@1.108.2)(stylus@0.62.0(supports-color@8.1.1))(terser@5.51.2)(tsx@4.23.15)(yaml@2.9.1))
+      '@storybook/react': 10.6.8(@types/react-dom@19.3.0(@types/react@19.3.0))(@types/react@19.3.0)(react-dom@19.3.1(react@19.3.1))(react@19.3.1)(storybook@10.6.8(@types/react@19.3.0)(react@19.3.1))(supports-color@8.1.1)(typescript@7.0.2)
+      '@storybook/react-vite': 10.6.8(@types/react-dom@19.3.0(@types/react@19.3.0))(@types/react@19.3.0)(react-dom@19.3.1(react@19.3.1))(react@19.3.1)(rollup@4.64.10)(storybook@10.6.8(@types/react@19.3.0)(react@19.3.1))(supports-color@8.1.1)(typescript@7.0.2)(vite@8.3.8(@types/node@26.6.6)(esbuild@0.28.2)(jiti@2.7.0)(less@4.9.1(supports-color@8.1.1))(sass@1.108.2)(stylus@0.62.0(supports-color@8.1.1))(terser@5.51.2)(tsx@4.23.15)(yaml@2.9.1))
       next: 16.4.2(@babel/core@7.29.7(supports-color@8.1.1))(@opentelemetry/api@1.9.1)(@playwright/test@1.64.1)(@types/node@26.6.6)(react-dom@19.3.1(react@19.3.1))(react@19.3.1)(sass@1.108.2)
       react: 19.3.1
       react-dom: 19.3.1(react@19.3.1)
-      storybook: 10.6.3(@types/react@19.3.0)(react@19.3.1)
+      storybook: 10.6.8(@types/react@19.3.0)(react@19.3.1)
       styled-jsx: 5.1.6(@babel/core@7.29.7(supports-color@8.1.1))(react@19.3.1)
       vite: 8.3.8(@types/node@26.6.6)(esbuild@0.28.2)(jiti@2.7.0)(less@4.9.1(supports-color@8.1.1))(sass@1.108.2)(stylus@0.62.0(supports-color@8.1.1))(terser@5.51.2)(tsx@4.23.15)(yaml@2.9.1)
-      vite-plugin-storybook-nextjs: 10.6.3(next@16.4.2(@babel/core@7.29.7(supports-color@8.1.1))(@opentelemetry/api@1.9.1)(@playwright/test@1.64.1)(@types/node@26.6.6)(react-dom@19.3.1(react@19.3.1))(react@19.3.1)(sass@1.108.2))(rollup@4.64.10)(storybook@10.6.3(@types/react@19.3.0)(react@19.3.1))(supports-color@8.1.1)(typescript@7.0.2)(vite@8.3.8(@types/node@26.6.6)(esbuild@0.28.2)(jiti@2.7.0)(less@4.9.1(supports-color@8.1.1))(sass@1.108.2)(stylus@0.62.0(supports-color@8.1.1))(terser@5.51.2)(tsx@4.23.15)(yaml@2.9.1))
+      vite-plugin-storybook-nextjs: 10.6.8(next@16.4.2(@babel/core@7.29.7(supports-color@8.1.1))(@opentelemetry/api@1.9.1)(@playwright/test@1.64.1)(@types/node@26.6.6)(react-dom@19.3.1(react@19.3.1))(react@19.3.1)(sass@1.108.2))(rollup@4.64.10)(storybook@10.6.8(@types/react@19.3.0)(react@19.3.1))(supports-color@8.1.1)(typescript@7.0.2)(vite@8.3.8(@types/node@26.6.6)(esbuild@0.28.2)(jiti@2.7.0)(less@4.9.1(supports-color@8.1.1))(sass@1.108.2)(stylus@0.62.0(supports-color@8.1.1))(terser@5.51.2)(tsx@4.23.15)(yaml@2.9.1))
     optionalDependencies:
       '@types/react': 19.3.0
       '@types/react-dom': 19.3.0(@types/react@19.3.0)
@@ -9696,28 +9696,28 @@ snapshots:
       - rollup
       - supports-color
 
-  '@storybook/react-dom-shim@10.6.3(@types/react-dom@19.3.0(@types/react@19.3.0))(@types/react@19.3.0)(react-dom@19.3.1(react@19.3.1))(react@19.3.1)(storybook@10.6.3(@types/react@19.3.0)(react@19.3.1))':
+  '@storybook/react-dom-shim@10.6.8(@types/react-dom@19.3.0(@types/react@19.3.0))(@types/react@19.3.0)(react-dom@19.3.1(react@19.3.1))(react@19.3.1)(storybook@10.6.8(@types/react@19.3.0)(react@19.3.1))':
     dependencies:
       react: 19.3.1
       react-dom: 19.3.1(react@19.3.1)
-      storybook: 10.6.3(@types/react@19.3.0)(react@19.3.1)
+      storybook: 10.6.8(@types/react@19.3.0)(react@19.3.1)
     optionalDependencies:
       '@types/react': 19.3.0
       '@types/react-dom': 19.3.0(@types/react@19.3.0)
 
-  '@storybook/react-vite@10.6.3(@types/react-dom@19.3.0(@types/react@19.3.0))(@types/react@19.3.0)(react-dom@19.3.1(react@19.3.1))(react@19.3.1)(rollup@4.64.10)(storybook@10.6.3(@types/react@19.3.0)(react@19.3.1))(supports-color@8.1.1)(typescript@7.0.2)(vite@8.3.8(@types/node@26.6.6)(esbuild@0.28.2)(jiti@2.7.0)(less@4.9.1(supports-color@8.1.1))(sass@1.108.2)(stylus@0.62.0(supports-color@8.1.1))(terser@5.51.2)(tsx@4.23.15)(yaml@2.9.1))':
+  '@storybook/react-vite@10.6.8(@types/react-dom@19.3.0(@types/react@19.3.0))(@types/react@19.3.0)(react-dom@19.3.1(react@19.3.1))(react@19.3.1)(rollup@4.64.10)(storybook@10.6.8(@types/react@19.3.0)(react@19.3.1))(supports-color@8.1.1)(typescript@7.0.2)(vite@8.3.8(@types/node@26.6.6)(esbuild@0.28.2)(jiti@2.7.0)(less@4.9.1(supports-color@8.1.1))(sass@1.108.2)(stylus@0.62.0(supports-color@8.1.1))(terser@5.51.2)(tsx@4.23.15)(yaml@2.9.1))':
     dependencies:
       '@joshwooding/vite-plugin-react-docgen-typescript': 0.7.0(typescript@7.0.2)(vite@8.3.8(@types/node@26.6.6)(esbuild@0.28.2)(jiti@2.7.0)(less@4.9.1(supports-color@8.1.1))(sass@1.108.2)(stylus@0.62.0(supports-color@8.1.1))(terser@5.51.2)(tsx@4.23.15)(yaml@2.9.1))
       '@rollup/pluginutils': 5.4.0(rollup@4.64.10)
-      '@storybook/builder-vite': 10.6.3(storybook@10.6.3(@types/react@19.3.0)(react@19.3.1))(vite@8.3.8(@types/node@26.6.6)(esbuild@0.28.2)(jiti@2.7.0)(less@4.9.1(supports-color@8.1.1))(sass@1.108.2)(stylus@0.62.0(supports-color@8.1.1))(terser@5.51.2)(tsx@4.23.15)(yaml@2.9.1))
-      '@storybook/react': 10.6.3(@types/react-dom@19.3.0(@types/react@19.3.0))(@types/react@19.3.0)(react-dom@19.3.1(react@19.3.1))(react@19.3.1)(storybook@10.6.3(@types/react@19.3.0)(react@19.3.1))(supports-color@8.1.1)(typescript@7.0.2)
+      '@storybook/builder-vite': 10.6.8(storybook@10.6.8(@types/react@19.3.0)(react@19.3.1))(vite@8.3.8(@types/node@26.6.6)(esbuild@0.28.2)(jiti@2.7.0)(less@4.9.1(supports-color@8.1.1))(sass@1.108.2)(stylus@0.62.0(supports-color@8.1.1))(terser@5.51.2)(tsx@4.23.15)(yaml@2.9.1))
+      '@storybook/react': 10.6.8(@types/react-dom@19.3.0(@types/react@19.3.0))(@types/react@19.3.0)(react-dom@19.3.1(react@19.3.1))(react@19.3.1)(storybook@10.6.8(@types/react@19.3.0)(react@19.3.1))(supports-color@8.1.1)(typescript@7.0.2)
       empathic: 2.1.0
       magic-string: 1.4.3
       react: 19.3.1
       react-docgen: 8.0.4(supports-color@8.1.1)
       react-dom: 19.3.1(react@19.3.1)
       resolve: 1.22.13
-      storybook: 10.6.3(@types/react@19.3.0)(react@19.3.1)
+      storybook: 10.6.8(@types/react@19.3.0)(react@19.3.1)
       tsconfig-paths: 4.2.0
       vite: 8.3.8(@types/node@26.6.6)(esbuild@0.28.2)(jiti@2.7.0)(less@4.9.1(supports-color@8.1.1))(sass@1.108.2)(stylus@0.62.0(supports-color@8.1.1))(terser@5.51.2)(tsx@4.23.15)(yaml@2.9.1)
     optionalDependencies:
@@ -9728,15 +9728,15 @@ snapshots:
       - rollup
       - supports-color
 
-  '@storybook/react@10.6.3(@types/react-dom@19.3.0(@types/react@19.3.0))(@types/react@19.3.0)(react-dom@19.3.1(react@19.3.1))(react@19.3.1)(storybook@10.6.3(@types/react@19.3.0)(react@19.3.1))(supports-color@8.1.1)(typescript@7.0.2)':
+  '@storybook/react@10.6.8(@types/react-dom@19.3.0(@types/react@19.3.0))(@types/react@19.3.0)(react-dom@19.3.1(react@19.3.1))(react@19.3.1)(storybook@10.6.8(@types/react@19.3.0)(react@19.3.1))(supports-color@8.1.1)(typescript@7.0.2)':
     dependencies:
       '@storybook/global': 5.0.0
-      '@storybook/react-dom-shim': 10.6.3(@types/react-dom@19.3.0(@types/react@19.3.0))(@types/react@19.3.0)(react-dom@19.3.1(react@19.3.1))(react@19.3.1)(storybook@10.6.3(@types/react@19.3.0)(react@19.3.1))
+      '@storybook/react-dom-shim': 10.6.8(@types/react-dom@19.3.0(@types/react@19.3.0))(@types/react@19.3.0)(react-dom@19.3.1(react@19.3.1))(react@19.3.1)(storybook@10.6.8(@types/react@19.3.0)(react@19.3.1))
       react: 19.3.1
       react-docgen: 8.0.4(supports-color@8.1.1)
       react-docgen-typescript: 2.4.0(typescript@7.0.2)
       react-dom: 19.3.1(react@19.3.1)
-      storybook: 10.6.3(@types/react@19.3.0)(react@19.3.1)
+      storybook: 10.6.8(@types/react@19.3.0)(react@19.3.1)
     optionalDependencies:
       '@types/react': 19.3.0
       '@types/react-dom': 19.3.0(@types/react@19.3.0)
@@ -13986,7 +13986,7 @@ snapshots:
 
   stdin-discarder@0.2.2: {}
 
-  storybook@10.6.3(@types/react@19.3.0)(react@19.3.1):
+  storybook@10.6.8(@types/react@19.3.0)(react@19.3.1):
     dependencies:
       '@storybook/global': 5.0.0
       '@storybook/icons': 2.2.0(react@19.3.1)
@@ -14474,7 +14474,7 @@ snapshots:
       d3-time: 3.1.0
       d3-timer: 3.0.1
 
-  vite-plugin-storybook-nextjs@10.6.3(next@16.4.2(@babel/core@7.29.7(supports-color@8.1.1))(@opentelemetry/api@1.9.1)(@playwright/test@1.64.1)(@types/node@26.6.6)(react-dom@19.3.1(react@19.3.1))(react@19.3.1)(sass@1.108.2))(rollup@4.64.10)(storybook@10.6.3(@types/react@19.3.0)(react@19.3.1))(supports-color@8.1.1)(typescript@7.0.2)(vite@8.3.8(@types/node@26.6.6)(esbuild@0.28.2)(jiti@2.7.0)(less@4.9.1(supports-color@8.1.1))(sass@1.108.2)(stylus@0.62.0(supports-color@8.1.1))(terser@5.51.2)(tsx@4.23.15)(yaml@2.9.1)):
+  vite-plugin-storybook-nextjs@10.6.8(next@16.4.2(@babel/core@7.29.7(supports-color@8.1.1))(@opentelemetry/api@1.9.1)(@playwright/test@1.64.1)(@types/node@26.6.6)(react-dom@19.3.1(react@19.3.1))(react@19.3.1)(sass@1.108.2))(rollup@4.64.10)(storybook@10.6.8(@types/react@19.3.0)(react@19.3.1))(supports-color@8.1.1)(typescript@7.0.2)(vite@8.3.8(@types/node@26.6.6)(esbuild@0.28.2)(jiti@2.7.0)(less@4.9.1(supports-color@8.1.1))(sass@1.108.2)(stylus@0.62.0(supports-color@8.1.1))(terser@5.51.2)(tsx@4.23.15)(yaml@2.9.1)):
     dependencies:
       '@next/env': 16.4.2
       '@rollup/pluginutils': 5.4.0(rollup@4.64.10)
@@ -14484,7 +14484,7 @@ snapshots:
       pathe: 2.0.3
       probe-image-size: 7.4.0(supports-color@8.1.1)
       semver: 7.8.5
-      storybook: 10.6.3(@types/react@19.3.0)(react@19.3.1)
+      storybook: 10.6.8(@types/react@19.3.0)(react@19.3.1)
       ts-dedent: 2.3.0
       vite: 8.3.8(@types/node@26.6.6)(esbuild@0.28.2)(jiti@2.7.0)(less@4.9.1(supports-color@8.1.1))(sass@1.108.2)(stylus@0.62.0(supports-color@8.1.1))(terser@5.51.2)(tsx@4.23.15)(yaml@2.9.1)
       vite-tsconfig-paths: 5.1.4(supports-color@8.1.1)(typescript@7.0.2)(vite@8.3.8(@types/node@26.6.6)(esbuild@0.28.2)(jiti@2.7.0)(less@4.9.1(supports-color@8.1.1))(sass@1.108.2)(stylus@0.62.0(supports-color@8.1.1))(terser@5.51.2)(tsx@4.23.15)(yaml@2.9.1))
