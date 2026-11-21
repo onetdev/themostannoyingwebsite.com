@@ -17,7 +17,9 @@ a failure is attributable to one batch instead of the whole tree.
 - **Activate the pinned toolchain.** The repo pins Node and pnpm in `mise.toml`.
   In non-interactive shells run `eval "$(mise env)"` before anything else, then
   confirm `node -v` and `pnpm -v` match `mise current`. Otherwise a stale version
-  from session start silently runs the whole upgrade.
+  from session start silently runs the whole upgrade. Git hooks inherit the same
+  `PATH`: lefthook's pre-push runs `build` + `test`, so a stale Node fails the
+  push (not the upgrade) — fix `PATH`, never `--no-verify`.
 - **Create the branch** `chore/dep-upgrade-<yymmdd>`. Untracked files are fine;
   note them so they are never staged accidentally.
 - **Capture a baseline.** Run the verification suite on the untouched tree and
