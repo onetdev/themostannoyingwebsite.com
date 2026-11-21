@@ -6,6 +6,13 @@ peerDependencyRules:
   allowedVersions:
     "tsconfck>typescript": "7"
 
+# No parent accepts the patched majors yet (test-exclude@8 still declares
+# glob ^13.0.6 / minimatch ^10.2.2). Remove once jest ships patched ranges.
+# Advisory: glob GHSA (AbortSignal bypass), minimatch GHSA (globparts DoS).
+overrides:
+  "glob@>=9.0.0 <14.0.2": "14.0.6"
+  "minimatch@>=7.0.0 <11.0.1": "11.0.9"
+
 allowBuilds:
   '@parcel/watcher': true
   '@sentry/cli': true
