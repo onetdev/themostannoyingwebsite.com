@@ -17,7 +17,7 @@ allowBuilds:
 
 catalog:
   "@biomejs/biome": ^2.6.8
-  "@formatjs/icu-messageformat-parser": ^3.5.22
+  "@formatjs/icu-messageformat-parser": ^3.5.23
   "@fortawesome/fontawesome-svg-core": "^7.3.1"
   "@fortawesome/free-brands-svg-icons": "^7.3.1"
   "@fortawesome/free-solid-svg-icons": "^7.3.1"
@@ -40,13 +40,13 @@ catalog:
   "jest": ^30.5.2
   "jest-environment-jsdom": ^30.5.2
   "ky": ^2.2.0
-  "marked": ^18.1.1
+  "marked": ^18.2.1
   "motion": ^14.14.0
   "react": ^19.3.1
   "react-dom": ^19.3.1
-  "react-hook-form": 7.90.0
+  "react-hook-form": 7.92.0
   "recharts": ^3.11.0
-  "sanitize-html": 2.18.1
+  "sanitize-html": 2.18.2
   "schema-dts": ^2.1.0
   "storybook": ^10.6.8
   "tailwindcss": "^4.3.5"
@@ -54,3 +54,6 @@ catalog:
   "typescript": 7.0.2
   "vite": ^8.3.8
   "zod": ^4.6.7
+
+minimumReleaseAgeExclude:
+  - "@hookform/resolvers@7.0.8"
