@@ -387,8 +387,8 @@ importers:
         specifier: ^7.0.8
         version: 7.0.8(@standard-schema/spec@1.1.0)(ajv-formats@3.0.1(ajv@8.20.0))(ajv@8.20.0)(react-hook-form@7.92.0(@types/react@19.3.0)(react@19.3.1))(zod@4.6.7)
       '@lottiefiles/dotlottie-react':
-        specifier: ^0.20.0
-        version: 0.20.0(react@19.3.1)
+        specifier: ^0.22.3
+        version: 0.22.3(react@19.3.1)
       '@maw/content-sdk':
         specifier: workspace:^
         version: link:../../packages/content-sdk
@@ -1907,14 +1907,14 @@ packages:
   '@jridgewell/trace-mapping@0.3.9':
     resolution: {integrity: sha512-3Belt6tdc8bPgAtbcmdtNJlirVoTmEb5e2gC94PnkwEW9jI6CAHUeoG85tjWP5WquqfavoMtMwiG4P926ZKKuQ==}
 
-  '@lottiefiles/dotlottie-react@0.20.0':
-    resolution: {integrity: sha512-M4HLo6RxNTbYwByZw7ns2zaGgPx0PpGZU1xfyMdj8VEoTasSJ1uhsJZjl+l55TPQ7g0soF7JVHEJLTOv1TIeMA==}
+  '@lottiefiles/dotlottie-react@0.22.3':
+    resolution: {integrity: sha512-TBcQsb7FqprGEKsn8D1w+HGINz9t8LAz1wgcYVej4I964SbwzDPxnuCoGV/c8WIdIxn/XAmDRzSXQljSRpOtsA==}
     engines: {node: '>=18.17.0', npm: '>=9.5.0'}
     peerDependencies:
       react: ^17 || ^18 || ^19
 
-  '@lottiefiles/dotlottie-web@0.81.0':
-    resolution: {integrity: sha512-BmX/+0eaK2unVexuB0VZLvBsax2BS8fLwwIdUqF4AO9C7tFw97eTi90C//20QVK4q08SDhnnszysCGX0Qt7XPA==}
+  '@lottiefiles/dotlottie-web@0.83.2':
+    resolution: {integrity: sha512-MMI4RVcFtB5Vjv9mwbP8oWsSqy4N7GO2P+jwHVLo4GjbYAdR4Z7seK3rR7YefpcfayWrsQogaORMBzv6YFWntQ==}
     engines: {node: '>=18.17.0', npm: '>=9.5.0'}
 
   '@mdx-js/loader@3.1.1':
@@ -8446,12 +8446,12 @@ snapshots:
       '@jridgewell/sourcemap-codec': 1.6.0
     optional: true
 
-  '@lottiefiles/dotlottie-react@0.20.0(react@19.3.1)':
+  '@lottiefiles/dotlottie-react@0.22.3(react@19.3.1)':
     dependencies:
-      '@lottiefiles/dotlottie-web': 0.81.0
+      '@lottiefiles/dotlottie-web': 0.83.2
       react: 19.3.1
 
-  '@lottiefiles/dotlottie-web@0.81.0': {}
+  '@lottiefiles/dotlottie-web@0.83.2': {}
 
   '@mdx-js/loader@3.1.1(supports-color@8.1.1)(webpack@5.112.0(@swc/core@1.16.22(@swc/helpers@0.5.23))(clean-css@5.3.3)(esbuild@0.28.2)(html-minifier-terser@6.1.0)(lightningcss@1.33.0)(postcss@8.5.33)(sharp@0.35.5(@types/node@26.6.6))(uglify-js@3.19.3))':
     dependencies:
