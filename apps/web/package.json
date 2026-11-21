@@ -29,7 +29,7 @@
     "@fortawesome/fontawesome-svg-core": "catalog:",
     "@fortawesome/free-solid-svg-icons": "catalog:",
     "@fortawesome/react-fontawesome": "catalog:",
-    "@hookform/resolvers": "^6.0.0",
+    "@hookform/resolvers": "^7.0.8",
     "@lottiefiles/dotlottie-react": "^0.20.0",
     "@maw/content-sdk": "workspace:^",
     "@maw/logger": "workspace:^",
