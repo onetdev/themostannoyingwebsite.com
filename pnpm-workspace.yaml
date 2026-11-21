@@ -14,53 +14,53 @@ overrides:
   "minimatch@>=7.0.0 <11.0.1": "11.0.9"
 
 allowBuilds:
-  '@parcel/watcher': true
-  '@sentry/cli': true
-  '@swc/core': true
-  core-js-pure: true
-  esbuild: true
-  lefthook: true
-  unrs-resolver: true
+  "@parcel/watcher": true
+  "@sentry/cli": true
+  "@swc/core": true
+  "core-js-pure": true
+  "esbuild": true
+  "lefthook": true
+  "unrs-resolver": true
 
 catalog:
-  "@biomejs/biome": ^2.6.8
-  "@formatjs/icu-messageformat-parser": ^3.5.23
+  "@biomejs/biome": "^2.6.8"
+  "@formatjs/icu-messageformat-parser": "^3.5.23"
   "@fortawesome/fontawesome-svg-core": "^7.3.1"
   "@fortawesome/free-brands-svg-icons": "^7.3.1"
   "@fortawesome/free-solid-svg-icons": "^7.3.1"
   "@fortawesome/react-fontawesome": "^3.5.0"
-  "@playwright/test": 1.65.1
-  "@storybook/addon-docs": ^10.6.8
-  "@storybook/addon-themes": ^10.6.8
-  "@storybook/nextjs-vite": ^10.6.8
-  "@storybook/react": ^10.6.8
-  "@swc/core": ^1.16.22
-  "@swc/jest": ^0.2.39
+  "@playwright/test": "1.65.1"
+  "@storybook/addon-docs": "^10.6.8"
+  "@storybook/addon-themes": "^10.6.8"
+  "@storybook/nextjs-vite": "^10.6.8"
+  "@storybook/react": "^10.6.8"
+  "@swc/core": "^1.16.22"
+  "@swc/jest": "^0.2.39"
   "@tailwindcss/postcss": "^4.3.5"
   "@testing-library/jest-dom": "^8.0.0"
   "@types/jest": "^30.0.0"
-  "@types/node": ^26.6.6
+  "@types/node": "^26.6.6"
   "@types/react": "^19.3.0"
   "@types/react-dom": "^19.3.0"
-  "@types/sanitize-html": ^2.16.2
-  "@wrksz/themes": ^2.1.1
-  "jest": ^30.5.2
-  "jest-environment-jsdom": ^30.5.2
-  "ky": ^2.2.0
-  "marked": ^18.2.1
-  "motion": ^14.14.0
-  "react": ^19.3.1
-  "react-dom": ^19.3.1
-  "react-hook-form": 7.92.0
-  "recharts": ^3.11.0
-  "sanitize-html": 2.18.2
-  "schema-dts": ^2.1.0
-  "storybook": ^10.6.8
+  "@types/sanitize-html": "^2.16.2"
+  "@wrksz/themes": "^2.1.1"
+  "jest": "^30.5.2"
+  "jest-environment-jsdom": "^30.5.2"
+  "ky": "^2.2.0"
+  "marked": "^18.2.1"
+  "motion": "^14.14.0"
+  "react": "^19.3.1"
+  "react-dom": "^19.3.1"
+  "react-hook-form": "7.92.0"
+  "recharts": "^3.11.0"
+  "sanitize-html": "2.18.2"
+  "schema-dts": "^2.1.0"
+  "storybook": "^10.6.8"
   "tailwindcss": "^4.3.5"
-  "tsx": ^4.23.15
-  "typescript": 7.0.2
-  "vite": ^8.3.8
-  "zod": ^4.6.7
+  "tsx": "^4.23.15"
+  "typescript": "7.0.2"
+  "vite": "^8.3.8"
+  "zod": "^4.6.7"
 
 minimumReleaseAgeExclude:
   - "@hookform/resolvers@7.0.8"
