@@ -66,6 +66,10 @@ editing anything.
 - Edit `pnpm-workspace.yaml` (catalog) and the owning `package.json` files.
 - Preserve pin style: an exact pin stays exact, a range stays a range, and
   `"catalog:"` references are never replaced with a version.
+- Quote every catalog key and specifier with double quotes; `true` / `false` in
+  `allowBuilds` stay literal booleans. Quoting is not cosmetic: an unquoted
+  two-segment version such as `1.20` parses as the float `1.2`, silently
+  changing the specifier.
 - A catalog entry only takes effect if its specifier text changes; editing the
   workspace `package.json` is rarely needed for catalogued packages.
 
