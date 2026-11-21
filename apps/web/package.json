@@ -55,7 +55,7 @@
     "next": "^16.4.2",
     "next-intl": "^4.14.9",
     "ogl": "^1.0.11",
-    "path-to-regexp": "^8.4.2",
+    "path-to-regexp": "^9.0.0",
     "qrcode.react": "^4.2.0",
     "react": "catalog:",
     "react-dom": "catalog:",
