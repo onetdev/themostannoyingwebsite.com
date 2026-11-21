@@ -441,8 +441,8 @@ importers:
         specifier: ^2.2.0
         version: 2.2.0
       html-react-parser:
-        specifier: ^6.1.9
-        version: 6.1.9(@types/react@19.3.0)(react@19.3.1)
+        specifier: ^6.1.10
+        version: 6.1.10(@types/react@19.3.0)(react@19.3.1)
       inversify:
         specifier: ^8.3.0
         version: 8.3.0(reflect-metadata@0.2.2)
@@ -4924,8 +4924,8 @@ packages:
     engines: {node: '>=12'}
     hasBin: true
 
-  html-react-parser@6.1.9:
-    resolution: {integrity: sha512-5lQzzUQXrFe1+OR7GOGkATsm/2h3UIIWQvPkl+84+A9vYG6zbGxhZJjrCDlGvmQs7qPMbffO3XYizVrHekLZbA==}
+  html-react-parser@6.1.10:
+    resolution: {integrity: sha512-MMsfO02B6eUl+Tvl5zR07nU8BgvBZwP6tcrjHOGjyzAy4/kQ6ltnVdplrCbJYj8LuxJ3NrgAvezlSJiNkiPa8A==}
     peerDependencies:
       '@types/react': 0.14 || 15 || 16 || 17 || 18 || 19
       react: 0.14 || 15 || 16 || 17 || 18 || 19
@@ -11090,7 +11090,7 @@ snapshots:
       terser: 5.51.2
     optional: true
 
-  html-react-parser@6.1.9(@types/react@19.3.0)(react@19.3.1):
+  html-react-parser@6.1.10(@types/react@19.3.0)(react@19.3.1):
     dependencies:
       domhandler: 6.0.1
       html-dom-parser: 8.0.2

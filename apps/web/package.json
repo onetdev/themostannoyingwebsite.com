@@ -48,7 +48,7 @@
     "colord": "^2.14.0",
     "countries-and-timezones": "^3.11.0",
     "emittery": "^2.2.0",
-    "html-react-parser": "^6.1.9",
+    "html-react-parser": "^6.1.10",
     "inversify": "^8.3.0",
     "ky": "catalog:",
     "motion": "catalog:",
