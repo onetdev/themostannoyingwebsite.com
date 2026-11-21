@@ -55,7 +55,7 @@ export default async function Page({ params }: NextPageProps) {
         />
         <DocumentPage
           title={t('common.navigation.termsOfUse')}
-          headerActions={<ShareButton />}
+          headerActions={<ShareButton section="content:document" />}
           meta={
             <time dateTime={TERMS_LAST_UPDATED}>
               {t('common.document.lastUpdated', {

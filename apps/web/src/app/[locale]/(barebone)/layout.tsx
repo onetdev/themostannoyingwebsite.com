@@ -6,10 +6,11 @@ import { Inter } from 'next/font/google';
 import { notFound } from 'next/navigation';
 import { hasLocale, NextIntlClientProvider } from 'next-intl';
 import type { PropsWithChildren } from 'react';
-import { getLangDir } from 'rtl-detect';
 import { ClientRootProviderContainer } from '@/app/bootstrap/ClientRootProviderContainer';
+import { getLangDir } from '@/core/i18n/get-lang-dir';
 import { routing } from '@/core/i18n/routing';
 import { SiteStructuredData } from '@/core/seo';
+import { getInitialThemeAttribute } from '@/core/theme';
 import { prefetchContentPools } from '@/features/content/services/prefetch-content-pools';
 import { getAppConfigService } from '@/services';
 
@@ -45,7 +46,7 @@ async function LocaleBareboneRootLayout({
     <html
       lang={locale}
       dir={direction}
-      data-theme={config.defaultColorScheme}
+      data-theme={getInitialThemeAttribute(config.defaultColorScheme)}
       suppressHydrationWarning
     >
       <body>

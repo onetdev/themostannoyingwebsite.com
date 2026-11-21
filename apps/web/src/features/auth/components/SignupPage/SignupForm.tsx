@@ -45,6 +45,8 @@ export function SignupForm() {
       <form
         className="flex flex-col gap-3 lg:flex-row lg:gap-10"
         method="post"
+        data-track-form="auth:signup"
+        data-track-section="auth:signup"
         onSubmit={handleSubmit(onSubmit)}
       >
         <FieldError errors={[errors.root]} />

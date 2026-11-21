@@ -152,6 +152,8 @@ export function PlanCard({
           className="w-full"
           variant={variant}
           disabled={isOutOfStock}
+          data-track="subscription:select-plan"
+          data-track-key={plan.key}
           onClick={onSelect}
         >
           {label}

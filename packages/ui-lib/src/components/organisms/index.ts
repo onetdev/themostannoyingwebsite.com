@@ -9,6 +9,7 @@ export * from './NavigationMenu';
 export * from './PeekCarousel';
 export * from './RadioGroup';
 export * from './ShareModal';
+export * from './ShareOption';
 export * from './Sheet';
 export * from './Sonner';
 export * from './Table';

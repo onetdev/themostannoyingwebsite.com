@@ -22,12 +22,16 @@ export function GlobalStickyVideo() {
   }
 
   return (
-    <div className="sticky inset-inline-end-2 bottom-2 flex justify-end md:fixed mx-3 my-1">
+    <div
+      className="sticky inset-inline-end-2 bottom-2 flex justify-end md:fixed mx-3 my-1"
+      data-track-section="disruptions:sticky-video"
+    >
       <Button
         type="button"
         variant="destructive"
         className="absolute top-1 inset-inline-end-2 cursor-pointer rounded-full m-2 text-xs p-1"
         aria-label={t('common.action.close')}
+        data-track="disruptions:sticky-video:close"
         onClick={() => setClosed(true)}
       >
         <Icon icon="close" />

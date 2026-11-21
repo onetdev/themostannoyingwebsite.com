@@ -19,12 +19,15 @@ export async function ContactPage() {
     <>
       <PageHeadline
         className="mx-auto w-full max-w-screen-lg"
-        actions={<ShareButton />}
+        actions={<ShareButton section="support:contact" />}
       >
         {t('common.navigation.contact')}
       </PageHeadline>
 
-      <div className="mx-auto mt-10 grid w-full max-w-screen-lg grid-cols-1 gap-10 lg:grid-cols-2 lg:gap-16">
+      <div
+        className="mx-auto mt-10 grid w-full max-w-screen-lg grid-cols-1 gap-10 lg:grid-cols-2 lg:gap-16"
+        data-track-section="support:contact"
+      >
         <div className="flex flex-col gap-6">
           <p className="text-xl leading-relaxed">
             {t('common.app.contactForm.intro')}
@@ -37,6 +40,7 @@ export async function ContactPage() {
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-primary hover:underline"
+                  data-track="contact:report-issues"
                 >
                   {chunks}
                 </a>
@@ -52,6 +56,7 @@ export async function ContactPage() {
                   <a
                     href={`mailto:${contactEmail}`}
                     className="text-primary hover:underline"
+                    data-track="contact:email"
                   >
                     {chunks}
                   </a>
@@ -79,6 +84,7 @@ export async function ContactPage() {
                   <a
                     href={`mailto:${contactEmail}`}
                     className="text-primary hover:underline"
+                    data-track="contact:email"
                   >
                     {chunks}
                   </a>

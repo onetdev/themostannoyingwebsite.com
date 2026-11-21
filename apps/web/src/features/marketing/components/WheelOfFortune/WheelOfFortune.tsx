@@ -22,7 +22,11 @@ export function WheelOfFortune() {
   return (
     <>
       <Dialog open={isOpen} onOpenChange={setOpen}>
-        <DialogContent showCloseButton={true} className="overflow-hidden p-0">
+        <DialogContent
+          showCloseButton={true}
+          className="overflow-hidden p-0"
+          data-track-section="marketing:wheel"
+        >
           <DialogHeader className="p-5 pb-1">
             <DialogTitle>{t('marketing.wheelOfFortune.title')}</DialogTitle>
           </DialogHeader>

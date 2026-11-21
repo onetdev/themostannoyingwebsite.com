@@ -10,8 +10,7 @@ import {
 } from '@maw/ui-lib';
 import { useTranslations } from 'next-intl';
 import { useState } from 'react';
-import ReactTimeAgo from 'react-timeago';
-import { useTimeagoFormatter } from '@/hooks';
+import { RelativeTime } from '@/components/RelativeTime';
 import type { Comment } from '../../schemas';
 
 export interface CommentItemProps {
@@ -22,7 +21,6 @@ export interface CommentItemProps {
 
 export function CommentItem({ comment, onReply, onLike }: CommentItemProps) {
   const t = useTranslations();
-  const intlFormatter = useTimeagoFormatter();
   const [showReplies, setShowReplies] = useState(false);
 
   const hasReplies = comment.replies && comment.replies.length > 0;
@@ -33,7 +31,7 @@ export function CommentItem({ comment, onReply, onLike }: CommentItemProps) {
       open={showReplies}
       onOpenChange={setShowReplies}
     >
-      <div className="flex flex-col gap-1">
+      <div className="flex flex-col gap-1" data-track-section="comments:item">
         <div className="flex items-center gap-2">
           <Avatar className="size-7">
             <AvatarFallback className="text-sm">
@@ -42,7 +40,7 @@ export function CommentItem({ comment, onReply, onLike }: CommentItemProps) {
           </Avatar>
           <span className="text-sm font-medium">{comment.name}</span>
           <span className="text-muted-foreground text-sm">
-            <ReactTimeAgo date={comment.time} formatter={intlFormatter} />
+            <RelativeTime date={comment.time} />
           </span>
         </div>
 
@@ -54,6 +52,8 @@ export function CommentItem({ comment, onReply, onLike }: CommentItemProps) {
               variant="ghost"
               size="sm"
               className="h-8 px-2 text-xs"
+              data-track="comments:like"
+              data-track-key={comment.id}
               onClick={() => onLike(comment)}
             >
               👍 {comment.likes}
@@ -62,6 +62,8 @@ export function CommentItem({ comment, onReply, onLike }: CommentItemProps) {
               variant="ghost"
               size="sm"
               className="h-8 px-2 text-xs"
+              data-track="comments:reply"
+              data-track-key={comment.id}
               onClick={() => onReply(comment)}
             >
               {t('comments.reply')}
@@ -73,6 +75,8 @@ export function CommentItem({ comment, onReply, onLike }: CommentItemProps) {
                     variant="ghost"
                     size="sm"
                     className="text-primary h-8 px-2 text-xs font-medium"
+                    data-track="comments:toggle-replies"
+                    data-track-key={comment.id}
                   />
                 }
               >

@@ -47,6 +47,7 @@ export function DeadPixel() {
           tabIndex={-1}
           type="button"
           aria-hidden
+          data-track-ignore
           data-testid="dead-pixel"
           key={`${point.x}-${point.y}`}
           onClick={() => onClick(point.isRainbow)}

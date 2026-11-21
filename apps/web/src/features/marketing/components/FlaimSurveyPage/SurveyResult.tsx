@@ -32,9 +32,12 @@ export function SurveyResult({ result, onClick }: SurveyResultProps) {
   const resultViewData = resultOptions[result];
 
   return (
-    <div className="flex flex-col items-center gap-3 py-10">
+    <div
+      className="flex flex-col items-center gap-3 py-10"
+      data-track-section="marketing:survey"
+    >
       <h3>{resultViewData.title}</h3>
-      <Button className="mt-5" onClick={onClick}>
+      <Button className="mt-5" data-track="survey:back-home" onClick={onClick}>
         {resultViewData.ctaLabel ?? t('common.action.backHome')}
       </Button>
     </div>

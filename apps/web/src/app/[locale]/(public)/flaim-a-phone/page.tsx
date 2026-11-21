@@ -29,14 +29,19 @@ export default async function Page() {
   const locale = (await getLocale()) as LanguageCode;
 
   return (
-    <PageLayout role="main" className="py-0 md:py-14" autoPadding={false}>
+    <PageLayout
+      route="flaim-a-phone"
+      role="main"
+      className="py-0 md:py-14"
+      autoPadding={false}
+    >
       <div className="mx-auto w-full max-w-4xl">
         <WebPageStructuredData
           locale={locale as AppLocale}
           path="flaim-a-phone"
           namespace="metadata.wanPhone"
         />
-        <PageHeadline actions={<ShareButton />}>
+        <PageHeadline actions={<ShareButton section="marketing:survey" />}>
           {t('marketing.wanPhone.title')}
         </PageHeadline>
         <ContentPoolsBoundary lang={locale} types={['survey']}>

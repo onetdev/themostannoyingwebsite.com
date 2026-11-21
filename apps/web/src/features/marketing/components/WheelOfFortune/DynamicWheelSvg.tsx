@@ -1,5 +1,5 @@
 import { radToDeg } from '@maw/utils/math';
-import Color from 'color';
+import { colord } from 'colord';
 import type { ReactNode } from 'react';
 import { useLangDir } from '@/hooks';
 
@@ -56,7 +56,7 @@ export function DynamicWheelSvg({
 
     // TODO: Slightly move the label toward the middle
     const labelAngle = radToDeg(startAngleRadians + sweepAngleRadians / 2);
-    const labelColor = Color(item.color).isDark() ? '#fff' : '#000';
+    const labelColor = colord(item.color).isDark() ? '#fff' : '#000';
 
     svgSlices.push(
       <g key={index}>

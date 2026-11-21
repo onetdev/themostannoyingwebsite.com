@@ -13,6 +13,7 @@ Tracks user progress and unlocks rewards for interacting with the website's anno
 ## Internal Events
 
 The feature emits the following events back to the `EventBus`:
+
 - `achievement:unlocked`: Triggered when an achievement's target progress is reached.
 - `achievement:progress-updated`: Triggered when progress is incremented but the target is not yet met.
 

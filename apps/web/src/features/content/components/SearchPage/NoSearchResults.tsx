@@ -38,7 +38,12 @@ export function NoSearchResults({ onClick }: NoResultsProps) {
           <ul className="flex flex-wrap justify-center gap-2">
             {items.map((item) => (
               <li key={item}>
-                <Button variant="ghost" onClick={() => onClick(item)}>
+                <Button
+                  variant="ghost"
+                  data-track="search:recommended"
+                  data-track-key={item}
+                  onClick={() => onClick(item)}
+                >
                   {item}
                 </Button>
               </li>

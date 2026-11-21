@@ -37,7 +37,11 @@ export function FlaimSurveyPage({
   const showResult = loaded && isCompleted !== false;
 
   return (
-    <Card className={`flex gap-3 p-5 ${className}`} {...rest}>
+    <Card
+      className={`flex gap-3 p-5 ${className}`}
+      data-track-section="marketing:survey"
+      {...rest}
+    >
       {!loaded && (
         <div className="flex h-60 items-center justify-center">
           <LoaderDots />
@@ -64,6 +68,7 @@ export function FlaimSurveyPage({
           <Button
             onClick={next}
             className="mt-5"
+            data-track="survey:next"
             disabled={typeof progression === 'undefined'}
           >
             {t('common.action.next')}

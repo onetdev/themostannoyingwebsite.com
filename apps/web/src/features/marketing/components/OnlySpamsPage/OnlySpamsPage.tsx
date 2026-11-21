@@ -22,7 +22,10 @@ export function OnlySpamsPage({ testimonials, samples }: OnlySpamsPageProps) {
   };
 
   return (
-    <div className="flex flex-col gap-16 py-10 relative overflow-hidden">
+    <div
+      className="flex flex-col gap-16 py-10 relative overflow-hidden"
+      data-track-section="marketing:only-spams"
+    >
       <ParallaxDecorationBlocks />
 
       <div className="max-w-3xl text-center mx-auto relative z-10 px-gutter">
@@ -59,6 +62,7 @@ export function OnlySpamsPage({ testimonials, samples }: OnlySpamsPageProps) {
         <Button
           size="lg"
           className="px-12 py-8 text-xl font-bold"
+          data-track="only-spams:subscribe"
           onClick={handleSubscribe}
         >
           {t('marketing.onlySpams.subscribe')}

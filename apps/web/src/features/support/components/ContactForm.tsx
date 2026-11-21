@@ -46,7 +46,13 @@ export function ContactForm({ contactEmail, className }: ContactFormProps) {
   const mailtoUrl = `mailto:${contactEmail}?subject=${encodeURIComponent(subject || '')}&body=${encodeURIComponent(message || '')}`;
 
   return (
-    <div className={`flex flex-col gap-4 ${className ?? ''}`}>
+    <form
+      className={`flex flex-col gap-4 ${className ?? ''}`}
+      data-track-form="support:contact"
+      data-track-section="support:contact"
+      method="post"
+      onSubmit={(event) => event.preventDefault()}
+    >
       <Field>
         <FieldLabel htmlFor="subject" required>
           {t('common.app.contactForm.subject')}
@@ -56,6 +62,7 @@ export function ContactForm({ contactEmail, className }: ContactFormProps) {
             id="subject"
             placeholder={t('common.app.contactForm.placeholderSubject')}
             aria-invalid={!!errors.subject}
+            data-track-input
             {...register('subject')}
           />
           <FieldError errors={[errors.subject]} />
@@ -72,6 +79,7 @@ export function ContactForm({ contactEmail, className }: ContactFormProps) {
             placeholder={t('common.app.contactForm.placeholderMessage')}
             rows={5}
             aria-invalid={!!errors.message}
+            data-track-input
             {...register('message')}
           />
           <FieldError errors={[errors.message]} />
@@ -90,10 +98,11 @@ export function ContactForm({ contactEmail, className }: ContactFormProps) {
         nativeButton={false}
         className="mt-2"
         variant={isValid ? 'default' : 'outline'}
+        data-track="contact:send"
         disabled={!isValid}
       >
         {t('common.app.contactForm.send')}
       </Button>
-    </div>
+    </form>
   );
 }

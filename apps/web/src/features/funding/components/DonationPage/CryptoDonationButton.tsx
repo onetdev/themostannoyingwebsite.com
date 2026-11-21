@@ -57,12 +57,22 @@ export function CryptoDonationButton({
     <div className={cn(className)} {...rest}>
       <Popover>
         <PopoverTrigger
-          render={<Button variant="secondary" className="w-full" />}
+          render={
+            <Button
+              variant="secondary"
+              className="w-full"
+              data-track="donation:crypto"
+              data-track-key={icon}
+            />
+          }
         >
           <Icon icon={icon} aria-hidden />
           {label}
         </PopoverTrigger>
-        <PopoverContent className="items-center gap-3 text-center">
+        <PopoverContent
+          className="items-center gap-3 text-center"
+          data-track-section="funding:providers"
+        >
           <PopoverTitle className="sr-only">{label}</PopoverTitle>
           <PopoverDescription className="sr-only">
             {t('funding.crypto.qrHint')}
@@ -91,6 +101,7 @@ export function CryptoDonationButton({
             size="sm"
             onClick={handleCopy}
             className="w-full"
+            data-track="donation:crypto-copy"
           >
             {copied
               ? t('funding.crypto.copyFeedback')

@@ -27,6 +27,8 @@ export function CaptchaTrigger({
         'flex h-20 w-full max-w-[300px] items-center justify-between p-3 shadow-sm select-none cursor-pointer',
         status === 'failed' && 'border-destructive ring-1 ring-destructive',
       )}
+      data-track="captcha:open"
+      data-track-section="captcha:trigger"
       onClick={onClick}
     >
       <div className="flex items-center gap-3 shrink">

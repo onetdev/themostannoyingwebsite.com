@@ -1,7 +1,7 @@
 'use client';
 
 import { Button, FadeIn } from '@maw/ui-lib';
-import { AnimatePresence } from 'framer-motion';
+import { AnimatePresence } from 'motion/react';
 import { useTranslations } from 'next-intl';
 import { useEffect, useRef, useState } from 'react';
 import { useRuntimeStore, useUserGrantsStore } from '@/stores';
@@ -63,11 +63,16 @@ export function AdblockerSuspectBar() {
           <div
             ref={barRef}
             className="border-tertiary bg-error/90 text-error-foreground container pointer-events-auto mx-auto rounded-xl border px-gutter py-3 shadow-lg backdrop-blur-md"
+            data-track-section="marketing:adblocker"
           >
             <h4>{t('marketing.suspectBar.title')}</h4>
             <p>{t('marketing.suspectBar.description')}</p>
             <div className="my-2 flex items-center justify-end gap-3">
-              <Button variant="outline" onClick={() => setOpen(false)}>
+              <Button
+                variant="outline"
+                data-track="adblocker:acknowledge"
+                onClick={() => setOpen(false)}
+              >
                 {t('common.action.ok')}
               </Button>
             </div>

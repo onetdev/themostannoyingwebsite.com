@@ -7,7 +7,13 @@ export function TextLogo() {
 
   return (
     <div className="font-semibold tracking-tighter">
-      <Link href="/" prefetch={false} title={t('common.app.title')}>
+      <Link
+        href="/"
+        prefetch={false}
+        title={t('common.app.title')}
+        data-track="navigation:logo"
+        data-track-section="navigation:logo"
+      >
         {/* Short logo: mobile, and large desktop where the nav sits inline */}
         <span className="text-card-foreground text-2xl lg:hidden xl:inline-block">
           {t.rich('common.app.logoShort', {

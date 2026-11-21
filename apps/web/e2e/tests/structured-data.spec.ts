@@ -3,6 +3,7 @@ import { expect, type Page, test } from '@playwright/test';
 import { getAboutPage } from '../pages/AboutPage';
 import { getAchievementsPage } from '../pages/AchievementsPage';
 import { getArticlePage } from '../pages/ArticlePage';
+import { getArticlesPage } from '../pages/ArticlesPage';
 import { getAuthorPage } from '../pages/AuthorPage';
 import { getDonatePage } from '../pages/DonatePage';
 import { getHomePage } from '../pages/HomePage';
@@ -59,6 +60,24 @@ test('home exposes website, organization and blog structured data', async ({
   const blog = findByType(nodes, 'Blog');
   expect(blog).toBeDefined();
   expect(Array.isArray(blog?.blogPost)).toBe(true);
+});
+
+test('articles archive exposes CollectionPage and ItemList structured data', async ({
+  page,
+}) => {
+  await setupE2eTestState(page);
+  await getArticlesPage(page).goto();
+
+  const nodes = await getJsonLdNodes(page);
+  const collection = findByType(nodes, 'CollectionPage');
+
+  expect(collection).toBeDefined();
+  expect(collection?.['@id']).toMatch(/\/en\/articles\/$/);
+  expect(collection?.inLanguage).toBe('en');
+
+  const list = findByType(nodes, 'ItemList');
+  expect(list).toBeDefined();
+  expect(Array.isArray(list?.itemListElement)).toBe(true);
 });
 
 test('about page exposes AboutPage structured data', async ({ page }) => {

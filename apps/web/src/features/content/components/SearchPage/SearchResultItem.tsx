@@ -19,7 +19,13 @@ export function SearchResultItem({ item }: SearchResultItemProps) {
       key={item.slug}
     >
       <h4>
-        <Link href={`/articles/${item.slug}`} passHref prefetch={false}>
+        <Link
+          href={`/articles/${item.slug}`}
+          passHref
+          prefetch={false}
+          data-track="search:result"
+          data-track-key={item.slug}
+        >
           {HTMLReactParser(renderMarkdown(item.title, { inline: true }))}
         </Link>
       </h4>

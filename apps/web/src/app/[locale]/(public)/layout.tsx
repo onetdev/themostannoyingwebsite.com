@@ -6,13 +6,14 @@ import { Inter } from 'next/font/google';
 import { notFound } from 'next/navigation';
 import { hasLocale, NextIntlClientProvider } from 'next-intl';
 import type { PropsWithChildren } from 'react';
-import { getLangDir } from 'rtl-detect';
 import { ClientObserverProvider } from '@/app/bootstrap/ClientObserverProvider';
 import { ClientRootProviderContainer } from '@/app/bootstrap/ClientRootProviderContainer';
+import { getLangDir } from '@/core/i18n/get-lang-dir';
 import { LanguageDetectorMessagesProvider } from '@/core/i18n/LanguageDetectorMessagesProvider';
 import { LANGUAGE_DETECTOR_MESSAGES } from '@/core/i18n/language-detector-messages';
 import { routing } from '@/core/i18n/routing';
 import { SiteStructuredData } from '@/core/seo';
+import { getInitialThemeAttribute } from '@/core/theme';
 import { prefetchContentPools } from '@/features/content/services/prefetch-content-pools';
 import { BeggarBanner } from '@/features/funding/components';
 import { getAppConfigService } from '@/services';
@@ -56,7 +57,7 @@ async function LocalePublicRootLayout({
     <html
       lang={locale}
       dir={direction}
-      data-theme={config.defaultColorScheme}
+      data-theme={getInitialThemeAttribute(config.defaultColorScheme)}
       suppressHydrationWarning
     >
       <body>

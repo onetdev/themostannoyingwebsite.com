@@ -45,7 +45,12 @@ export function ArticleItemPage({
   return (
     <>
       {coverImages?.original && (
-        <div className="-mx-5 mb-6 xl:-mx-8">
+        <div
+          className="-mx-5 mb-6 xl:-mx-8"
+          data-track-impression="article:cover"
+          data-track-key={article.slug}
+          data-track-section="content:article"
+        >
           <Image
             className="h-auto w-full object-cover"
             src={coverImages.original}
@@ -56,8 +61,14 @@ export function ArticleItemPage({
           />
         </div>
       )}
-      <div className="mx-auto w-full max-w-measure">
-        <PageHeadline className="mb-2" actions={<ShareButton />}>
+      <div
+        className="mx-auto w-full max-w-measure"
+        data-track-section="content:article"
+      >
+        <PageHeadline
+          className="mb-2"
+          actions={<ShareButton section="content:article" />}
+        >
           {article.title}
         </PageHeadline>
         <span className="mb-3 block italic">
@@ -83,7 +94,13 @@ export function ArticleItemPage({
         initialMaxHeight={300}
         active={partitionEnabled}
       >
-        <div className={styles.content} data-testid="article-item-content">
+        <div
+          className={styles.content}
+          data-testid="article-item-content"
+          data-track-impression="article:body"
+          data-track-key={article.slug}
+          data-track-section="content:article"
+        >
           {HTMLReactParser(renderedContent)}
         </div>
       </PartitionalLockedContent>

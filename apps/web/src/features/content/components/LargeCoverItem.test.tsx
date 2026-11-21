@@ -33,4 +33,15 @@ describe('LargeCoverItem', () => {
     expect(html).not.toContain(article.summary);
     expect(html).not.toContain('data-testid="article-meta"');
   });
+
+  it('keeps the cover scrim soft and confined to the bottom half', () => {
+    const html = renderToStaticMarkup(<LargeCoverItem article={article} />);
+
+    // Regression: the scrim used to cover the whole image at 85% opacity,
+    // which washed out the artwork in light mode.
+    expect(html).toContain('h-3/5');
+    expect(html).toContain('from-background/60');
+    expect(html).not.toContain('from-background/85');
+    expect(html).not.toContain('inset-0 bg-linear-to-t');
+  });
 });

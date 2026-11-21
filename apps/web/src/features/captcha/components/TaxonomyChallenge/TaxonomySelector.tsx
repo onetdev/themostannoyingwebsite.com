@@ -28,6 +28,7 @@ export function TaxonomySelector({
       {items.map((tile, index) => (
         <TaxonomySelectorCell
           key={index}
+          index={index}
           data={tile}
           onSelect={() => onSelect(index)}
         />
@@ -38,12 +39,14 @@ export function TaxonomySelector({
 
 interface TaxonomySelectorCell
   extends Pick<ComponentProps<'button'>, 'className'> {
+  index: number;
   data: TaxonomyEntryMeta;
   onSelect: () => void;
 }
 
 function TaxonomySelectorCell({
   className,
+  index,
   data,
   onSelect,
 }: TaxonomySelectorCell) {
@@ -56,6 +59,8 @@ function TaxonomySelectorCell({
     <button
       type="button"
       onClick={onSelect}
+      data-track="captcha:taxonomy"
+      data-track-key={index}
       className={clsx(
         'relative aspect-square overflow-hidden rounded-md bg-muted transition-transform duration-200',
         data.isSelected && 'ring-3 ring-primary',

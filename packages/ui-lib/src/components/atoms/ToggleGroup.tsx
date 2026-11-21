@@ -60,6 +60,7 @@ function ToggleGroupItem({
   children,
   variant = 'default',
   size = 'default',
+  value,
   ...props
 }: TogglePrimitive.Props & VariantProps<typeof toggleVariants>) {
   const context = React.useContext(ToggleGroupContext);
@@ -67,6 +68,8 @@ function ToggleGroupItem({
   return (
     <TogglePrimitive
       data-slot="toggle-group-item"
+      data-value={value}
+      value={value}
       data-variant={context.variant || variant}
       data-size={context.size || size}
       data-spacing={context.spacing}

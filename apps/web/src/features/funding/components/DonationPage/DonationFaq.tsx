@@ -61,12 +61,17 @@ export function DonationFaq({ className }: DonationFaqProps) {
   const t = useTranslations();
 
   return (
-    <section className={cn('flex flex-col gap-2', className)}>
+    <section
+      className={cn('flex flex-col gap-2', className)}
+      data-track-section="funding:faq"
+    >
       <h2>{t('funding.faq.heading')}</h2>
       <Accordion className="w-full">
         {FAQ_ITEMS.map((item) => (
           <AccordionItem key={item.id} value={item.id}>
-            <AccordionTrigger>{t(item.questionKey)}</AccordionTrigger>
+            <AccordionTrigger data-track="funding:faq" data-track-key={item.id}>
+              {t(item.questionKey)}
+            </AccordionTrigger>
             <AccordionContent className="text-muted-foreground">
               {t.rich(item.answerKey, { br: () => <br /> })}
             </AccordionContent>

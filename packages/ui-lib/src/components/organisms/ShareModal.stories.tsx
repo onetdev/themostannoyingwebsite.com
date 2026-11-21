@@ -1,4 +1,4 @@
-import type { Meta, StoryObj } from '@storybook/nextjs';
+import type { Meta, StoryObj } from '@storybook/react';
 
 import { ShareModal } from './ShareModal';
 
@@ -19,6 +19,11 @@ export const Default: Story = {
       title: 'Share this masterpiece',
       description:
         'Make your friends suffer too by sharing this incredibly annoying website.',
+      labels: {
+        email: 'Email',
+        facebook: 'Facebook',
+        x: 'X (Twitter)',
+      },
     },
     onClose: () => console.log('Close Modal'),
   },

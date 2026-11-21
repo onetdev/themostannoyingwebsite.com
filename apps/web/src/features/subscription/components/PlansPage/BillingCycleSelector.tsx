@@ -19,6 +19,8 @@ export function BillingCycleSelector({
       className="bg-muted rounded-lg p-1"
       value={[billingCycle]}
       aria-label={t('subscription.landing.billing.label')}
+      data-track-control="subscription:billing-cycle"
+      data-track-section="subscription:plans"
       onValueChange={(value) => {
         const next = value[0];
         if (next) {

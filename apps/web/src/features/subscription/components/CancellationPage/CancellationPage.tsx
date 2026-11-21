@@ -92,8 +92,14 @@ export function CancellationPage() {
 
   return (
     <FormProvider {...methods}>
-      <div className="mx-auto mt-10 w-full max-w-2xl print:m-0 print:max-w-full">
-        <PageHeadline className="print:hidden" actions={<ShareButton />}>
+      <div
+        className="mx-auto mt-10 w-full max-w-2xl print:m-0 print:max-w-full"
+        data-track-section="subscription:cancellation"
+      >
+        <PageHeadline
+          className="print:hidden"
+          actions={<ShareButton section="subscription:cancellation" />}
+        >
           {t('title')}
         </PageHeadline>
         <Card className="p-6 print:border-0 print:bg-transparent print:p-0 print:shadow-none">

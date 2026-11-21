@@ -7,11 +7,12 @@ export const getHeader = (page: Page) => {
     header,
     activeMenuItem: header.locator('[aria-current="page"]'),
     searchForm: header.getByRole('search'),
-    darkModeToggle: header.locator('button[data-dark]'),
+    themeSelect: header.getByTestId('theme-select'),
 
     menuItem: {
       // Main menu
       home: header.getByRole('link', { name: 'Home' }),
+      articles: header.getByRole('link', { name: 'Articles' }),
       hotThings: header.getByRole('link', { name: 'Hot things' }),
       dilf: header.getByRole('link', { name: 'DILF' }),
       donate: header.getByRole('link', { name: 'Donate' }),

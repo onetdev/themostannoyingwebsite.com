@@ -1,7 +1,7 @@
 'use client';
 
 import { FadeIn } from '@maw/ui-lib';
-import { AnimatePresence, motion } from 'framer-motion';
+import { AnimatePresence, motion } from 'motion/react';
 import { useCallback, useRef } from 'react';
 import { useFaviconBadge, useInteractOutside } from '@/hooks';
 import { useChatBubbleHistory } from '../../hooks';

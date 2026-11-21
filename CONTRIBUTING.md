@@ -23,14 +23,12 @@ All types of contributions are encouraged and valued. See the [Table of Contents
 - [Styleguides](#styleguides)
   - [Commit Messages](#commit-messages)
 
-
 ## Code of Conduct
 
 This project and everyone participating in it is governed by the
 [The Most Annoying Website Code of Conduct](https://github.com/onetdev/themostannoyingwebsite.com/blob/main/CODE_OF_CONDUCT.md).
 By participating, you are expected to uphold this code. Please report unacceptable behavior
 to <info@themostannoyingwebsite.com>.
-
 
 ## I Have a Question
 
@@ -79,7 +77,7 @@ We use GitHub issues to track bugs and errors. If you run into an issue with the
 
 - Open an [Issue](https://github.com/onetdev/themostannoyingwebsite.com/issues/new). (Since we can't be sure at this point whether it is a bug or not, we ask you not to talk about a bug yet and not to label the issue.)
 - Explain the behavior you would expect and the actual behavior.
-- Please provide as much context as possible and describe the *reproduction steps* that someone else can follow to recreate the issue on their own. This usually includes your code. For good bug reports you should isolate the problem and create a reduced test case.
+- Please provide as much context as possible and describe the _reproduction steps_ that someone else can follow to recreate the issue on their own. This usually includes your code. For good bug reports you should isolate the problem and create a reduced test case.
 - Provide the information you collected in the previous section.
 
 Once it's filed:
@@ -119,8 +117,9 @@ Enhancement suggestions are tracked as [GitHub issues](https://github.com/onetde
 ### Your First Code Contribution
 
 Things you'll need to work with the project effectively:
+
 - Aim to follow [git-flow](https://www.atlassian.com/git/tutorials/comparing-workflows/gitflow-workflow) during branching.
-- Node.js; the recommended version is pinned in `mise.toml` (mirrored in `.tool-versions`). You can use mise, nvm, or a plain Node install too.
+- Node.js and pnpm; both versions are pinned in `mise.toml` and provisioned with `mise install`. A plain Node install works too, but keep pnpm in sync with the `packageManager` field in `package.json`.
 - The latest Visual Studio Code, it's also recommended to install all the recommended packages too.
 
 1. Clone the repo on develop branch `git clone -b develop https://github.com/onetdev/themostannoyingwebsite.com.git`
@@ -149,4 +148,5 @@ Since commints from PRs are being squashed, PR titles also need to match convent
 
 <!-- omit in toc -->
 ## Attribution
+
 This guide is based on the **contributing-gen**. [Make your own](https://github.com/bttger/contributing-gen)!

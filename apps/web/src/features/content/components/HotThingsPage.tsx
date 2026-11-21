@@ -76,10 +76,13 @@ export function HotThingsPage() {
 
   return (
     <>
-      <PageHeadline actions={<ShareButton />}>
+      <PageHeadline actions={<ShareButton section="content:hot-things" />}>
         {t('common.navigation.hotThings')}
       </PageHeadline>
-      <div className="pb-16per9 relative overflow-hidden">
+      <div
+        className="pb-16per9 relative overflow-hidden"
+        data-track-section="content:hot-things"
+      >
         <Image
           className="absolute h-auto w-full"
           src={config.content.assets.hotThings.placeholder}
@@ -108,6 +111,7 @@ export function HotThingsPage() {
             onClick={onIntent}
             hidden={Boolean(stream)}
             aria-label={t('content.hotThings.playVideo')}
+            data-track="hot-things:play"
           >
             <Icon icon="play" />
           </button>

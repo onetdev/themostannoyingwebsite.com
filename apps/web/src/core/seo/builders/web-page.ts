@@ -6,7 +6,11 @@ import type {
 } from 'schema-dts';
 import { absoluteAssetUrl, absoluteUrl, localeSiteId } from '../absolute-url';
 
-export type WebPageSchemaType = 'WebPage' | 'AboutPage' | 'ContactPage';
+export type WebPageSchemaType =
+  | 'WebPage'
+  | 'AboutPage'
+  | 'CollectionPage'
+  | 'ContactPage';
 
 export interface BreadcrumbEntry {
   name: string;
@@ -80,6 +84,8 @@ export function buildWebPage(input: WebPageInput): WithContext<WebPage> {
   switch (input.type) {
     case 'AboutPage':
       return { ...base, '@type': 'AboutPage' };
+    case 'CollectionPage':
+      return { ...base, '@type': 'CollectionPage' };
     case 'ContactPage':
       return { ...base, '@type': 'ContactPage' };
     default:

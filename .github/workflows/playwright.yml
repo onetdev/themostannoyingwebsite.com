@@ -12,7 +12,7 @@ on:
         default: ''
 
 env:
-  NODE_VERSION: 24
+  NODE_VERSION: 26
 
 jobs:
   web-test:

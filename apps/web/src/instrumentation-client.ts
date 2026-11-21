@@ -17,6 +17,13 @@ Sentry.init({
 
   debug: false,
   enabled: process.env.NEXT_PUBLIC_SENTRY_ENABLED !== 'false',
+
+  // The telemetry layer adds semantic interaction breadcrumbs. Sentry's
+  // default DOM integration would add a second, less contextual click for the
+  // same action and evict the useful trail from the 100-entry buffer.
+  beforeBreadcrumb(breadcrumb) {
+    return breadcrumb.category === 'ui.click' ? null : breadcrumb;
+  },
 });
 
 export const onRouterTransitionStart = Sentry.captureRouterTransitionStart;

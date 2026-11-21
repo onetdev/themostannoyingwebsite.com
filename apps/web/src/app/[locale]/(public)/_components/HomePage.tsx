@@ -1,5 +1,7 @@
 import type { Article, ArticleListItem } from '@maw/content-sdk';
+import { buttonVariants, Icon } from '@maw/ui-lib';
 import { getTranslations } from 'next-intl/server';
+import { Link } from '@/core/i18n/navigation';
 import {
   LargeCoverItem,
   SmallCoverListItem,
@@ -28,11 +30,13 @@ export async function HomePage({
           className="col-span-1 lg:col-span-3"
           article={coverArticle}
           data-testid="cover-article"
+          data-track-section="content:home:cover"
         />
       )}
       <section
         className="col-span-1 flex flex-col justify-between gap-4"
         data-testid="dense-article-list"
+        data-track-section="content:home:latest"
       >
         <ul className="flex flex-col gap-3">
           {denseArticleList.map((item, index) => (
@@ -52,6 +56,7 @@ export async function HomePage({
       <section
         className="col-span-1 lg:col-span-4"
         data-testid="small-cover-article-list"
+        data-track-section="content:home:more"
       >
         <ul className="grid gap-5 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
           {smallCoverArticleList.map((article, index) => (
@@ -64,6 +69,18 @@ export async function HomePage({
             </li>
           ))}
         </ul>
+        <div className="mt-12 flex justify-center">
+          <Link
+            href="/articles"
+            prefetch={false}
+            className={buttonVariants({ variant: 'outline', size: 'sm' })}
+            data-testid="articles-archive-link"
+            data-track="content:home:more:view-all"
+          >
+            {t('content.article.viewAllArticles')}
+            <Icon icon="chevronRight" className="text-xs rtl:rotate-180" />
+          </Link>
+        </div>
       </section>
     </>
   );

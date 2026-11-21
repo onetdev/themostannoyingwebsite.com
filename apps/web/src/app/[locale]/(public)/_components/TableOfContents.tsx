@@ -122,7 +122,11 @@ export function TableOfContents({
   }
 
   return (
-    <nav aria-labelledby={headingId} className={clsx('text-sm', className)}>
+    <nav
+      aria-labelledby={headingId}
+      className={clsx('text-sm', className)}
+      data-track-section="navigation:toc"
+    >
       <p
         id={headingId}
         className="text-muted-foreground mb-2 text-xs font-semibold tracking-wide uppercase"
@@ -143,6 +147,8 @@ export function TableOfContents({
               <a
                 href={`#${item.id}`}
                 aria-current={isActive ? 'location' : undefined}
+                data-track="navigation:toc"
+                data-track-key={item.id}
                 className={clsx(
                   'link-as-inherit hover-text-primary -ms-px block border-s-2 py-1 leading-snug',
                   item.level === 3 ? 'ps-6' : 'ps-3',

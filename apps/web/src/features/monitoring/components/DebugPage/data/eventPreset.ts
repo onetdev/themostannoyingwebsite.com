@@ -58,4 +58,20 @@ export const eventPresets: EventPreset[] = [
     type: 'achievement:progress-updated',
     payload: { achievementId: 'maze-explorer', progress: 5 },
   },
+  {
+    type: 'telemetry:event',
+    name: 'telemetry:event (sample)',
+    payload: {
+      id: 'sample',
+      name: 'ui.click',
+      category: 'ui',
+      timestamp: Date.now(),
+      sessionId: 'debug',
+      route: '/en/',
+      routeAlias: 'home',
+      locale: 'en',
+      source: 'explicit',
+      props: { slot: 'button', tag: 'button' },
+    },
+  },
 ];

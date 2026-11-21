@@ -1,7 +1,7 @@
 # ADR 27: Theme Management with @wrksz/themes
 
 ## Status
-Accepted
+Accepted (the binary header toggle is superseded by [ADR 38](0038-theme-preference-selector.md))
 
 ## Context
 The app has always relied on `next-themes` for theme selection: a `ThemeProvider` rendered inside a client component tree, a dark/light toggle in the header and in user preferences, and an inline no-flash script that applies the persisted theme to `<html data-theme>` before paint.

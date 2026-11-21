@@ -19,6 +19,7 @@ jest.mock('@/hooks', () => ({
     ],
     currentLanguage: { locale: 'en', flag: '🇺🇸', label: 'English' },
     onLanguageChange: jest.fn(),
+    onOpenChange: jest.fn(),
   }),
 }));
 

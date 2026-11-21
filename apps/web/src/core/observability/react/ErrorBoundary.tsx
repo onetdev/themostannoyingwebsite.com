@@ -2,6 +2,7 @@
 
 import * as Sentry from '@sentry/nextjs';
 import { Component, type ErrorInfo, type ReactNode } from 'react';
+import { scrubMessage, track } from '@/core/telemetry';
 
 export interface ErrorBoundaryFallbackProps {
   error: Error;
@@ -46,6 +47,11 @@ export class ErrorBoundary extends Component<
         boundaryName: name ?? 'unnamed',
         componentStack: errorInfo.componentStack,
       },
+    });
+
+    track('error.boundary', {
+      boundary: name ?? 'unnamed',
+      message: scrubMessage(error.message),
     });
 
     onError?.(error, errorInfo);

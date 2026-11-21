@@ -42,12 +42,13 @@ export function ResetAchievements() {
             variant="outline"
             size="sm"
             className="border-destructive text-destructive hover:bg-destructive hover:text-destructive-foreground"
+            data-track="achievements:reset"
           />
         }
       >
         {t('achievements.reset.button')}
       </DialogTrigger>
-      <DialogContent>
+      <DialogContent data-track-section="achievements:reset">
         <DialogHeader>
           <DialogTitle>{t('achievements.reset.confirmTitle')}</DialogTitle>
           <DialogDescription>
@@ -60,6 +61,7 @@ export function ResetAchievements() {
               <Button
                 variant="outline"
                 className="whitespace-break-spaces basis-1 h-auto grow"
+                data-track="achievements:reset-cancel"
               />
             }
           >
@@ -69,6 +71,7 @@ export function ResetAchievements() {
             variant="destructive"
             onClick={onConfirm}
             className="whitespace-break-spaces basis-1 h-auto grow"
+            data-track="achievements:reset-confirm"
           >
             {t('achievements.reset.confirmAction')}
           </Button>

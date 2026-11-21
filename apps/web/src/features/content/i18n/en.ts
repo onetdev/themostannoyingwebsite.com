@@ -14,6 +14,19 @@ export default {
     published: 'Published at {date}',
     readingTime: '{minutes} min read',
     moreContentScroll: "There's more from the past, scroll!",
+    viewAllArticles: 'View all articles',
+  },
+  articles: {
+    headline: 'Articles',
+    description:
+      'Every single thing we have ever published, sorted from newest to oldest. Yes, there is more than what fits on the home page.',
+    pageInfo: 'Showing {from}–{to} of {total} articles',
+    emptyTitle: 'No articles yet',
+    emptyDescription:
+      'The archive is empty in this language. Check back later or switch to another language.',
+    pagination: {
+      navigation: 'Article pagination',
+    },
   },
   author: {
     byline: 'By <linkTag>{name}</linkTag>',

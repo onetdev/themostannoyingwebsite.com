@@ -36,6 +36,7 @@ export function DilfClickOverlay({
       clipRule="evenodd"
       strokeLinejoin="round"
       strokeMiterlimit="2"
+      data-track-section="marketing:dilf"
     >
       <title>{title}</title>
       {renderData.map(({ path, query }, index) => (
@@ -44,6 +45,8 @@ export function DilfClickOverlay({
           target="_blank"
           key={query}
           rel="noopener noreferrer"
+          data-track="dilf:hotspot"
+          data-track-key={query}
         >
           <path
             d={path}

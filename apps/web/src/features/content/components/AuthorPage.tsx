@@ -24,7 +24,10 @@ export async function AuthorPage({ author, articles }: AuthorPageProps) {
   return (
     <div className="grid grid-cols-1 gap-10 lg:grid-cols-3 lg:items-start">
       <header className="lg:sticky lg:top-24 lg:col-span-1">
-        <PageHeadline className="mb-2" actions={<ShareButton />}>
+        <PageHeadline
+          className="mb-2"
+          actions={<ShareButton section="content:author" />}
+        >
           {author.name}
         </PageHeadline>
         <p
@@ -37,7 +40,7 @@ export async function AuthorPage({ author, articles }: AuthorPageProps) {
           {author.about}
         </p>
       </header>
-      <section className="lg:col-span-2">
+      <section className="lg:col-span-2" data-track-section="content:author">
         <h2 className="mb-5">
           {t('author.articlesTitle', { name: author.name })}
         </h2>

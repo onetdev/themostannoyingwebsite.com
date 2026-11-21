@@ -41,6 +41,7 @@ export function BeforeAfterSlider({
         'group relative aspect-[16/9] w-full overflow-hidden rounded-xl select-none',
         className,
       )}
+      data-track-section="funding:before-after"
       {...rest}
     >
       <Image
@@ -94,6 +95,7 @@ export function BeforeAfterSlider({
         value={position}
         onChange={(event) => setPosition(Number(event.target.value))}
         aria-label={sliderLabel}
+        data-track-field="donation:before-after"
         className="absolute inset-0 h-full w-full cursor-ew-resize appearance-none opacity-0"
       />
     </div>

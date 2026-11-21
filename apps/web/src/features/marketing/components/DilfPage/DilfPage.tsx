@@ -9,7 +9,7 @@ export async function DilfPage() {
 
   return (
     <>
-      <PageHeadline actions={<ShareButton />}>
+      <PageHeadline actions={<ShareButton section="marketing:dilf" />}>
         {t('marketing.dilf.fullTitle')}
       </PageHeadline>
       <p className="my-5 max-w-screen-md">{t('marketing.dilf.description')}</p>

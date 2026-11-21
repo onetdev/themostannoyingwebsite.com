@@ -14,6 +14,7 @@ import {
   getQueryClient,
   SilentErrorBoundary,
 } from '@/core/react';
+import { TelemetryProvider } from '@/core/telemetry/react';
 import { AchievementManager } from '@/features/achievements/providers';
 import type { AppConfig } from '@/schemas/app-config';
 import { ClientNavigationConfigurator } from './ClientNavigationConfigurator';
@@ -44,6 +45,7 @@ export function ClientRootProviderContainer({
           <TooltipProvider>
             <DiContextProvider value={{ container: DiContainer }}>
               <SentryLocaleConfigurator />
+              <TelemetryProvider />
               <ClientNavigationConfigurator>
                 <ThemedToaster />
                 <SilentErrorBoundary name="achievements:manager">

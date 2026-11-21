@@ -13,7 +13,14 @@ export function ContainerPromotionFlaps() {
   return (
     <FadeIn className="sticky top-0 hidden w-full justify-center md:flex">
       <div className="absolute max-h-screen overflow-hidden">
-        <Link href="/dilf" passHref prefetch={false}>
+        <Link
+          href="/dilf"
+          passHref
+          prefetch={false}
+          data-track="promotions:dilf-flaps"
+          data-track-section="marketing:promotions"
+          data-track-impression="promotions:dilf-flaps"
+        >
           <Image
             className="object-cover opacity-30 mix-blend-lighten"
             src={config.marketing.assets.dilfFlapsAd}

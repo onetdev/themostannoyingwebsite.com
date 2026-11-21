@@ -88,7 +88,10 @@ export function DateOfBirthField({
             >
               <SelectValue placeholder="" />
             </SelectTrigger>
-            <SelectContent>
+            <SelectContent
+              data-track-control="auth:birth-year"
+              data-track-section="auth:signup"
+            >
               {dateOfBirthYear.map((option) => (
                 <SelectItem key={option.value} value={option.value.toString()}>
                   {option.label}
@@ -104,7 +107,10 @@ export function DateOfBirthField({
             >
               <SelectValue placeholder="" />
             </SelectTrigger>
-            <SelectContent>
+            <SelectContent
+              data-track-control="auth:birth-month"
+              data-track-section="auth:signup"
+            >
               {dateOfBirthMonth.map((option) => (
                 <SelectItem key={option.value} value={option.value.toString()}>
                   {option.label}
@@ -120,7 +126,10 @@ export function DateOfBirthField({
             >
               <SelectValue placeholder="" />
             </SelectTrigger>
-            <SelectContent>
+            <SelectContent
+              data-track-control="auth:birth-day"
+              data-track-section="auth:signup"
+            >
               {dateOfBirthDay.map((option) => (
                 <SelectItem key={option.value} value={option.value.toString()}>
                   {option.label}

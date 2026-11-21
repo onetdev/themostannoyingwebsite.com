@@ -13,6 +13,8 @@ export function Question({ data, selectOption }: QuestionProps) {
       <RadioGroup
         onValueChange={(value) => selectOption(parseInt(value, 10))}
         className="gap-4"
+        data-track-control="survey:answer"
+        data-track-section="marketing:survey"
       >
         {data.options.map((option, index) => {
           const id = `flaim-survey-option-${index}`;
@@ -24,6 +26,7 @@ export function Question({ data, selectOption }: QuestionProps) {
             >
               <RadioGroupItem
                 value={index.toString()}
+                data-value={option.id}
                 id={id}
                 data-testid={id}
               />

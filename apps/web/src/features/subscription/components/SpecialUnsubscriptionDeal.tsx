@@ -29,7 +29,10 @@ export function SpecialUnsubscriptionDeal() {
   };
 
   return (
-    <div className="flex min-h-[60vh] flex-col items-center justify-center gap-8 p-4">
+    <div
+      className="flex min-h-[60vh] flex-col items-center justify-center gap-8 p-4"
+      data-track-section="subscription:special-deal"
+    >
       <h2 className="text-2xl text-center font-black uppercase tracking-tighter text-destructive animate-bounce max-w-2xl">
         {t('offer')}
       </h2>
@@ -39,6 +42,7 @@ export function SpecialUnsubscriptionDeal() {
       <Button
         variant="ghost"
         className="w-full max-w-sm text-muted-foreground hover:text-destructive"
+        data-track="special-deal:reject"
         onClick={handleReject}
       >
         {t('backToCancellation')}

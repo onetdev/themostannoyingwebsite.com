@@ -2,7 +2,6 @@
   "$schema": "https://json.schemastore.org/tsconfig",
   "display": "Base TypeScript Config",
   "compilerOptions": {
-    "baseUrl": ".",
     "lib": ["dom", "dom.iterable", "esnext"],
     "declaration": true,
     "declarationMap": true,
@@ -16,10 +15,6 @@
     "resolveJsonModule": true,
     "skipLibCheck": true,
     "strict": true,
-    "target": "ES2022",
-    "paths": {
-      "@/*": ["./src/*"],
-      "@/root/*": ["./*"]
-    }
+    "target": "ES2022"
   }
 }

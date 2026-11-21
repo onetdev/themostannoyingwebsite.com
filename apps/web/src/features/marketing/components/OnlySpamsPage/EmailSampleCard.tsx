@@ -50,6 +50,7 @@ export function EmailSampleCard(email: EmailSampleCardProps) {
           <Button
             variant="default"
             className="font-bold"
+            data-track="only-spams:sample-cta"
             onClick={() => emit('ui:newsletter-modal:show')}
           >
             {t('marketing.onlySpams.samples.cta')}

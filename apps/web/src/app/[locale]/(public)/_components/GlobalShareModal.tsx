@@ -19,6 +19,11 @@ export function GlobalShareModal() {
   const texts = {
     title: t('common.share.modal.title'),
     description: t('common.share.modal.description'),
+    labels: {
+      email: t('common.social.email'),
+      facebook: t('common.social.facebook'),
+      x: t('common.social.twitter'),
+    },
   };
 
   return (
@@ -26,6 +31,7 @@ export function GlobalShareModal() {
       show={shareModalData.visible}
       onClose={() => setShareModalData({ visible: false })}
       url={shareModalData.url}
+      section="share:modal"
       texts={texts}
     />
   );

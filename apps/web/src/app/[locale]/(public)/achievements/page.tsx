@@ -54,7 +54,9 @@ export default async function AchievementsPage() {
         namespace="metadata.achievements"
       />
       <JsonLd data={itemListSchema} />
-      <PageHeadline actions={<ShareButton />}>{t('title')}</PageHeadline>
+      <PageHeadline actions={<ShareButton section="achievements:list" />}>
+        {t('title')}
+      </PageHeadline>
       <p className="text-muted-foreground mb-10 max-w-4xl text-lg">
         {t('description')}
       </p>

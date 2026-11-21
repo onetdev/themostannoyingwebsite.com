@@ -12,7 +12,7 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from '@maw/ui-lib';
-import { motion } from 'framer-motion';
+import { motion } from 'motion/react';
 import { useTranslations } from 'next-intl';
 import { useEffect, useState } from 'react';
 import type { Testimonial } from '../../types';
@@ -56,6 +56,9 @@ export function TestimonialCarousel({ items }: TestimonialCarouselProps) {
           {items.map((testimonial, i) => (
             <CarouselItem
               key={`${testimonial.comment}`}
+              data-track-impression="carousel:testimonial"
+              data-track-index={i}
+              data-track-section="marketing:only-spams"
               className="pl-4 basis-[70%] md:basis-[60%]"
             >
               <motion.div

@@ -1,7 +1,7 @@
 'use client';
 
 import { FadeIn } from '@maw/ui-lib';
-import { AnimatePresence } from 'framer-motion';
+import { AnimatePresence } from 'motion/react';
 import Image from 'next/image';
 import { useTranslations } from 'next-intl';
 import { Link } from '@/core/i18n/navigation';
@@ -34,7 +34,12 @@ export function WanAPhoneCampaignAd({ size = 1024 }: WanAPhoneCampaignAdProps) {
     <AnimatePresence>
       {enabled && (
         <FadeIn className="overflow-clip" key="wan-a-phone-ad">
-          <Link href="/flaim-a-phone">
+          <Link
+            href="/flaim-a-phone"
+            data-track="promotions:wan-a-phone"
+            data-track-section="marketing:promotions"
+            data-track-impression="promotions:wan-a-phone"
+          >
             <Image
               src={resolvedAssetUri}
               width={size}

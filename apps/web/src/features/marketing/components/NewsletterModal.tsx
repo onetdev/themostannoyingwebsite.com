@@ -54,10 +54,20 @@ export function NewsletterModal({
 
   const renderActions = () => {
     const buttons = [
-      <Button key="cancel" variant="outline" onClick={onDismiss}>
+      <Button
+        key="cancel"
+        variant="outline"
+        data-track="newsletter:dismiss"
+        onClick={onDismiss}
+      >
         {actions.cancel}
       </Button>,
-      <Button key="confirm" onClick={randomConfirmation} disabled={!isValid}>
+      <Button
+        key="confirm"
+        data-track="newsletter:confirm"
+        onClick={randomConfirmation}
+        disabled={!isValid}
+      >
         {actions.confirm}
       </Button>,
     ];
@@ -77,7 +87,7 @@ export function NewsletterModal({
 
   return (
     <Dialog open={visible} onOpenChange={(open) => !open && onDismiss?.()}>
-      <DialogContent>
+      <DialogContent data-track-section="marketing:newsletter">
         <DialogHeader>
           <DialogTitle>{t('title')}</DialogTitle>
           <DialogDescription>{t('description')}</DialogDescription>
@@ -86,6 +96,8 @@ export function NewsletterModal({
         <form
           className="max-w-screen-sm"
           method="post"
+          data-track-form="newsletter"
+          data-track-section="marketing:newsletter"
           onSubmit={handleSubmit(onSubmit)}
         >
           {actions.text && <p className="mb-4">{actions.text}</p>}

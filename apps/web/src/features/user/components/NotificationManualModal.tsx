@@ -26,14 +26,22 @@ export function NotificationManualModal({
 
   return (
     <Dialog open={visible} onOpenChange={(open) => !open && onDismiss()}>
-      <DialogContent showCloseButton={false} className="top-5 translate-y-0">
+      <DialogContent
+        showCloseButton={false}
+        className="top-5 translate-y-0"
+        data-track-section="user:notification-prompt"
+      >
         <DialogHeader>
           <DialogTitle>{t('user.notification.modal.title')}</DialogTitle>
           <DialogDescription>
             {t('user.notification.modal.description')}
           </DialogDescription>
         </DialogHeader>
-        <Button onClick={onDismiss} className="mt-3">
+        <Button
+          onClick={onDismiss}
+          className="mt-3"
+          data-track="notification-prompt:dismiss"
+        >
           {t('common.action.dismiss')}
         </Button>
       </DialogContent>

@@ -1,5 +1,7 @@
 'use client';
 
+import type { TelemetrySection } from '@/core/telemetry';
+import { track } from '@/core/telemetry';
 import { useRuntimeStore } from '@/stores';
 
 export type ShareActionInput = {
@@ -9,6 +11,8 @@ export type ShareActionInput = {
   title?: string;
   /** Optional share text. */
   text?: string;
+  /** Telemetry surface that triggered the share, e.g. `content:article`. */
+  surface?: TelemetrySection;
 };
 
 export type ShareAction = (input?: ShareActionInput) => Promise<void>;
@@ -21,7 +25,7 @@ export type ShareAction = (input?: ShareActionInput) => Promise<void>;
 export function useShareAction(): ShareAction {
   const showShareModal = useRuntimeStore((state) => state.showShareModal);
 
-  return async ({ url, title, text }: ShareActionInput = {}) => {
+  return async ({ url, title, text, surface }: ShareActionInput = {}) => {
     const shareUrl =
       url ?? (typeof window !== 'undefined' ? window.location.href : undefined);
 
@@ -35,6 +39,7 @@ export function useShareAction(): ShareAction {
           text,
           url: shareUrl,
         });
+        track('ui.share', { channel: 'native', surface });
         return;
       } catch (error) {
         if (error instanceof DOMException && error.name === 'AbortError') {
@@ -43,6 +48,7 @@ export function useShareAction(): ShareAction {
       }
     }
 
+    track('ui.share', { channel: 'modal', surface });
     showShareModal(shareUrl);
   };
 }

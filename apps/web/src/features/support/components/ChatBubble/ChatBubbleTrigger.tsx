@@ -2,7 +2,7 @@
 
 import { Badge, Button, Icon } from '@maw/ui-lib';
 import { cn } from 'cn';
-import { AnimatePresence, motion, useAnimation } from 'framer-motion';
+import { AnimatePresence, motion, useAnimation } from 'motion/react';
 import { useTranslations } from 'next-intl';
 import { useEffect } from 'react';
 
@@ -45,6 +45,8 @@ export function ChatBubbleTrigger({
           hasUnread && 'spin-duration-2500',
         )}
         data-testid="chat-bubble-trigger"
+        data-track="chat:toggle"
+        data-track-section="support:chat"
         onClick={onClick}
         aria-label={label}
         title={label}

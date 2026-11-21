@@ -14,6 +14,8 @@ export function WheelOfFortuneTrigger({ onClick }: WheelOfFortuneTriggerProps) {
   return (
     <button
       type="button"
+      data-track="wheel:trigger"
+      data-track-section="marketing:wheel"
       className={`${styles.wavyRight} animate-wiggle-8deg bg-error text-error-foreground -ml-8 cursor-pointer py-3 pr-6 pl-10 text-2xl opacity-80 transition-all duration-200 ease-in-out hover:-ml-4 hover:opacity-100`}
       onClick={onClick}
       aria-label={t('marketing.wheelOfFortune.title')}

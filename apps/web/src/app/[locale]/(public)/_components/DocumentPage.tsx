@@ -38,7 +38,10 @@ export function DocumentPage({
   children,
 }: DocumentPageProps) {
   return (
-    <div className={clsx('mx-auto w-full max-w-document', className)}>
+    <div
+      className={clsx('mx-auto w-full max-w-document', className)}
+      data-track-section="content:document"
+    >
       <div className="xl:grid xl:grid-cols-[minmax(0,1fr)_14rem] xl:items-start xl:gap-12">
         <div className="min-w-0">
           <PageHeadline

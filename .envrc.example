@@ -13,4 +13,11 @@ export NEXT_PUBLIC_CONTENT_API_URL=https://content.themostannoyingwebsite.com
 # of failing the build when the Content API is unreachable.
 # export ALLOW_LOCALES_FALLBACK=true
 
+# Interaction telemetry (see adr/0037-user-interaction-telemetry.md).
+# `NEXT_PUBLIC_TELEMETRY_CONSOLE` forces the console sink in production builds;
+# `NEXT_PUBLIC_TELEMETRY_DISABLED` mutes the tracker entirely. There is no
+# network transport yet — a first-party collector is a follow-up decision.
+# export NEXT_PUBLIC_TELEMETRY_CONSOLE=true
+# export NEXT_PUBLIC_TELEMETRY_DISABLED=true
+
 export ASDF_NODEJS_AUTO_ENABLE_COREPACK=true

@@ -18,7 +18,10 @@ export function UserGrantsSettings() {
   const t = useTranslations();
 
   return (
-    <Card data-testid="user-grants-settings">
+    <Card
+      data-testid="user-grants-settings"
+      data-track-section="settings:grants"
+    >
       <CardHeader>
         <CardTitle>{t('user.userGrants.title')}</CardTitle>
       </CardHeader>

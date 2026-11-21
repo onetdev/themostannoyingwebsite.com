@@ -62,7 +62,10 @@ export function PlansPage({
   return (
     <>
       <PurchaseProofToast plans={plans} {...socialProofConfig} />
-      <PageHeadline className="mb-6" actions={<ShareButton />}>
+      <PageHeadline
+        className="mb-6"
+        actions={<ShareButton section="subscription:plans" />}
+      >
         {t('subscription.landing.headline')}
       </PageHeadline>
 
@@ -78,7 +81,10 @@ export function PlansPage({
         />
       </div>
 
-      <div className="mb-12 flex flex-wrap justify-center gap-6 pb-6">
+      <div
+        className="mb-12 flex flex-wrap justify-center gap-6 pb-6"
+        data-track-section="subscription:plans"
+      >
         {plans.map((plan) => {
           return (
             <PlanCard
@@ -103,10 +109,14 @@ export function PlansPage({
 
       <Disclaimer />
 
-      <div className="mt-12 flex justify-center pb-10">
+      <div
+        className="mt-12 flex justify-center pb-10"
+        data-track-section="subscription:plans"
+      >
         <Link
           hrefFor={'plans.cancellation'}
           className="text-muted-foreground hover:text-foreground text-xs transition-colors underline decoration-dotted underline-offset-4"
+          data-track="subscription:cancellation-link"
         >
           {t('subscription.landing.cancellation.link')}
         </Link>

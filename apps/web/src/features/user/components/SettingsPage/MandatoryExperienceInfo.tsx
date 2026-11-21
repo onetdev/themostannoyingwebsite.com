@@ -15,7 +15,10 @@ import { SettingsField } from './SettingsField';
 export function MandatoryExperienceInfo() {
   const t = useTranslations();
   return (
-    <Card data-testid="mandatory-experience-settings">
+    <Card
+      data-testid="mandatory-experience-settings"
+      data-track-section="settings:mandatory"
+    >
       <CardHeader>
         <CardTitle>{t('user.mandatoryExperienceFlags.title')}</CardTitle>
       </CardHeader>
