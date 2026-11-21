@@ -83,7 +83,7 @@
     "@types/node": "catalog:",
     "@types/react": "catalog:",
     "@types/react-dom": "catalog:",
-    "commander": "^15.0.0",
+    "commander": "^15.1.0",
     "favicons": "^7.3.1",
     "jest": "catalog:",
     "postcss": "^8.5.33",

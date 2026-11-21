@@ -33,7 +33,7 @@
     "@types/node": "catalog:",
     "@types/sanitize-html": "catalog:",
     "jest": "catalog:",
-    "orval": "^8.43.0",
+    "orval": "^8.48.0",
     "typescript": "catalog:"
   }
 }
