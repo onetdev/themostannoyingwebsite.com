@@ -3,6 +3,7 @@
  */
 import '@testing-library/jest-dom';
 import { act, render, screen } from '@testing-library/react';
+import { renderToString } from 'react-dom/server';
 import { RelativeTime } from './RelativeTime';
 
 jest.mock('next-intl', () => ({
@@ -51,6 +52,18 @@ describe('RelativeTime', () => {
     });
 
     expect(screen.getByText('6 minutes ago')).toBeInTheDocument();
+  });
+
+  it('renders a stable absolute date before hydration', () => {
+    const date = NOW.getTime() - 2 * MONTH;
+    const expected = new Intl.DateTimeFormat('en', {
+      dateStyle: 'medium',
+    }).format(new Date(date));
+
+    const html = renderToString(<RelativeTime date={date} />);
+
+    expect(html).toContain(expected);
+    expect(html).not.toContain('ago');
   });
 
   it('caps long cadences to the maximum timer delay', () => {

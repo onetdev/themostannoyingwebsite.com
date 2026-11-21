@@ -3,6 +3,7 @@ import { type DehydratedState, dehydrate } from '@tanstack/react-query';
 import { getQueryClient } from '@/core/http/react/query-client';
 import type { ContentPoolType } from '../types';
 import { contentPoolQueryOptions } from './content-pool-query';
+import { normalizeDehydratedState } from './normalize-dehydrated-state';
 
 /**
  * Prefetches the given Content API resources into a fresh per-request React
@@ -21,5 +22,5 @@ export async function prefetchContentPools(
     ),
   );
 
-  return dehydrate(queryClient);
+  return normalizeDehydratedState(dehydrate(queryClient));
 }
