@@ -5,6 +5,7 @@ This package provides a set of TypeScript configuration files for various enviro
 ## Installation
 
 ### 1. Install dependencies
+
 ```bash
 pnpm i -D @maw/config-ts typescript
 ```
