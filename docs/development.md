@@ -4,10 +4,12 @@ This document describes how to work with the project locally.
 
 ## Requirements
 
-- Node.js (version defined in `mise.toml`)
-- pnpm
+- Node.js and pnpm (versions defined in `mise.toml`)
 
-A version manager such as **mise**, **nvm**, or similar is recommended.
+This project uses **mise** as its version manager. Run `mise install` from the
+repository root to provision the pinned Node.js and pnpm versions. A plain Node
+install works too, but keep pnpm in sync with the `packageManager` field in
+`package.json`.
 
 ## Installing Dependencies
 
@@ -74,6 +76,7 @@ pnpm dev --filter ui-docs
 ## Code Quality
 
 The project uses:
+
 - Biome for formatting and linting
 - TypeScript for static typing
 
