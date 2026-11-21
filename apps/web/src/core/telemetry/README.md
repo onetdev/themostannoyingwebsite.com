@@ -23,14 +23,14 @@ them.
 
 ## Capture model
 
-| Source | What it captures | Where |
-| --- | --- | --- |
-| Delegation | page views, clicks, form start/submit/abandon, validation failures, toggles, selects, sliders, text-field blur, link kinds, dialog open/close, scroll depth, visibility, session lifecycle | `react/useInteractionTracking.ts` |
-| IntersectionObserver | `[data-track-impression]` nodes (once per section + key per route) | `react/useImpressionTracking.ts` |
-| Web vitals | TTFB, FCP, LCP, INP, CLS with route + `navigationType` | `react/useWebVitalsTracking.ts` |
-| Event bus bridge | the 15 behavioural `AppEvents` emissions | `bus-bridge.ts` |
-| Global handlers | `window.error`, `unhandledrejection`, resource load failures | `useInteractionTracking.ts` |
-| Call sites | `HttpClient`, `ErrorBoundary`, React Query cache | those modules |
+| Source               | What it captures                                                                                                                                                                           | Where                             |
+| -------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | --------------------------------- |
+| Delegation           | page views, clicks, form start/submit/abandon, validation failures, toggles, selects, sliders, text-field blur, link kinds, dialog open/close, scroll depth, visibility, session lifecycle | `react/useInteractionTracking.ts` |
+| IntersectionObserver | `[data-track-impression]` nodes (once per section + key per route)                                                                                                                         | `react/useImpressionTracking.ts`  |
+| Web vitals           | TTFB, FCP, LCP, INP, CLS with route + `navigationType`                                                                                                                                     | `react/useWebVitalsTracking.ts`   |
+| Event bus bridge     | the 15 behavioural `AppEvents` emissions                                                                                                                                                   | `bus-bridge.ts`                   |
+| Global handlers      | `window.error`, `unhandledrejection`, resource load failures                                                                                                                               | `useInteractionTracking.ts`       |
+| Call sites           | `HttpClient`, `ErrorBoundary`, React Query cache                                                                                                                                           | those modules                     |
 
 ### Page identity
 
@@ -135,7 +135,7 @@ Both carry the hook `section` (`navigation:theme` in the header,
 - Credential and payment fields are skipped even on opted-in forms
   (`password`, `file`, `cc-*`, `one-time-code`, and names matching
   `pass|card|cvv|cvc|ssn|secret|token`).
-- `mailto:` and `tel:` links report `kind` but no `path`, because the pathname *is*
+- `mailto:` and `tel:` links report `kind` but no `path`, because the pathname _is_
   the address / phone number.
 - `route` is always a pathname; query strings and fragments are stripped.
 - `scrubMessage` redacts emails, phone numbers, URLs and `token=…`/`password=…`.
@@ -160,11 +160,11 @@ Both carry the hook `section` (`navigation:theme` in the header,
 
 ## Sinks
 
-| Sink | Development | Production |
-| --- | --- | --- |
-| `bus` (`telemetry:event`, feeds `/debug`) | ✅ | ✅ |
-| `sentry` (breadcrumbs, allowlisted categories) | ✅ | ✅ |
-| `console` (tslog `interaction` sub-logger) | ✅ | ❌ (unless `NEXT_PUBLIC_TELEMETRY_CONSOLE=true`) |
+| Sink                                           | Development | Production                                       |
+| ---------------------------------------------- | ----------- | ------------------------------------------------ |
+| `bus` (`telemetry:event`, feeds `/debug`)      | ✅          | ✅                                               |
+| `sentry` (breadcrumbs, allowlisted categories) | ✅          | ✅                                               |
+| `console` (tslog `interaction` sub-logger)     | ✅          | ❌ (unless `NEXT_PUBLIC_TELEMETRY_CONSOLE=true`) |
 
 Sentry receives `nav`, `ui`, `form`, `error`, `disruption`, `commerce`,
 `marketing`, `achievement`, `support`, `admin`. Impressions, inputs, sessions and
@@ -189,10 +189,10 @@ production page-view and web-vitals reporting.
 ## Local debugging
 
 ```js
-window.maw.tracker.history();       // newest-first, last 200 events
+window.maw.tracker.history(); // newest-first, last 200 events
 window.maw.tracker.setEnabled(false);
 window.maw.tracker.flush();
-window.maw.tracker.auditScopes();   // actions/controls missing a section
+window.maw.tracker.auditScopes(); // actions/controls missing a section
 ```
 
 Events also appear in `/debug` → Event history as `telemetry:event` entries once

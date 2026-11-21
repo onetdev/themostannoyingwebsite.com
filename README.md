@@ -79,8 +79,7 @@ from an agent's training data.
 
 ### Requirements
 
-- Node.js (version defined in `mise.toml`)
-- pnpm
+- Node.js and pnpm (versions defined in `mise.toml`, installed with `mise install`)
 
 ### Install dependencies
 
@@ -106,7 +105,7 @@ pnpm dev --filter ui-docs
 
 This project includes [agentic skills](docs/development.md#ai-powered-development) to automate branch summaries and commit message generation for AI-assisted workflows.
 
-*Some browser APIs require HTTPS during development.*
+_Some browser APIs require HTTPS during development._
 
 ## Project structure
 
@@ -132,6 +131,7 @@ docs/architecture.md
 ## Development Documentation
 
 Additional development documentation:
+
 ```
 docs/development.md
 docs/testing.md
@@ -166,10 +166,10 @@ Commits to the main branch deploy to the production site.
 
 MIT
 
-
 ## Credits
 
 Various assets and sounds are used under permissive licenses.
+
 - Article covers and some content: generated with AI tools (DALL-E, ChatGPT, Gemini) and curated by humans
 - New message notification sound: https://pixabay.com/sound-effects/film-special-effects-new-notification-014-363678/
 - Achievement sound: https://pixabay.com/sound-effects/technology-achievement-unlocked-463070/

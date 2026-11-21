@@ -39,6 +39,7 @@ src/features/[feature-name]/
 ## Monorepo Integration
 
 The web app leverages several internal packages to maintain a clean separation of concerns:
+
 - `@maw/ui-lib`: Shared design system containing Base UI-based components and global styles.
 - `@maw/content-sdk`: Strongly-typed client SDK for retrieving application content from Headless CMS.
 - `@maw/logger` & `@maw/utils`: Cross-project logging infrastructure and common TypeScript helpers.
@@ -47,6 +48,6 @@ The web app leverages several internal packages to maintain a clean separation o
 
 1. Dependency Injection: Services and repositories are decoupled from UI components using InversifyJS tokens, facilitating easier mocking and testing.
 2. Feature-Sliced Design: Logic is grouped by feature rather than type, reducing the cognitive load when working on specific domain areas like disruptions or
-  newsletter.
+   newsletter.
 3. Layered Data Flow: Components → Services → Repositories → Content API.
 4. Comprehensive Testing: A dual-layer testing strategy using Jest for unit/integration logic and Playwright for end-to-end browser verification.

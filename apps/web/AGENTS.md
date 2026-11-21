@@ -7,6 +7,7 @@ This document provides specific instructions and context for AI agents working o
 ## 🏗 Architecture & Key Locations
 
 ### Core Stack
+
 - Builds on top of root core stack.
 - **State Management:** Zustand
 - **DI:** InversifyJS
@@ -15,6 +16,7 @@ This document provides specific instructions and context for AI agents working o
   training data — see root `AGENTS.md` → "Third-Party Dependencies".
 
 ### Core Directories
+
 - `src/app/`: Next.js App Router.
   - `bootstrap/`: Application root providers and DI container initialization.
 - `src/core/`: Foundation logic.
@@ -60,22 +62,26 @@ We use `next-intl`. **NEVER hardcode user-facing strings.**
 > `adr/0029-content-resource-model-pools-and-dedicated-endpoints.md`.
 
 ### 1. Global Messages (`src/i18n/messages/en/`)
+
 Only English is bundled: `src/i18n/messages/en/`
+
 - `index.ts`: Aggregates all feature and global translations. Defines `AppTranslationShape`.
 - `common.ts`: Shared UI strings (buttons, labels, common errors).
 - `metadata.ts`: SEO titles and descriptions.
 
 `languageDetector` is the deliberate exception to "English only": the
-language-suggestion toast must render in the *suggested* language, so every
+language-suggestion toast must render in the _suggested_ language, so every
 locale's copy is bundled as a special object in
 `src/core/i18n/language-detector-messages.ts` and excluded from the namespace map
 (and the Content API sync). See `adr/0028-english-translation-reference-sync.md`.
 
 ### 2. Feature Translations (`src/features/{feature}/i18n/en.ts`)
+
 English only, one file per feature: `i18n/en.ts`. Do not create `i18n/en/`
 directories or `variants.ts` files — variant data lives in the Content API.
 
 ### 3. Runtime Message Loading
+
 - `src/core/i18n/request.ts` calls `loadMessages()` (`src/core/i18n/load-messages.ts`).
 - For `en`, the bundled bundle is returned directly.
 - For every other locale, `client.translations.getByLang(locale)` is fetched and
@@ -90,6 +96,7 @@ directories or `variants.ts` files — variant data lives in the Content API.
   `src/app/[locale]/layout.tsx` for root params to work.
 
 ### 4. Supported Locale Catalog (build-time)
+
 - `scripts/build-locales.ts` fetches the locale list from the Content API at build
   time and writes `public/locales.json` (gitignored).
 - `src/i18n/supported-locales.ts` exposes the generated `SUPPORTED_LANGUAGES`, read
@@ -101,6 +108,7 @@ directories or `variants.ts` files — variant data lives in the Content API.
 - See `adr/0023-build-time-locale-catalog.md`.
 
 ### 5. Content Pools (API-only)
+
 Content pools are served exclusively by the Content API; nothing is bundled, not
 even English. Generic string pools use `client.pools.getByType(lang, type)`;
 structured content (survey, prize wheel, newsletter, spam samples) has dedicated
@@ -161,6 +169,7 @@ All pages must describe themselves with JSON-LD. The machinery lives in `src/cor
 ## 🛠 Common Tasks Workflow
 
 ### Adding a New Feature
+
 1.  Create folder in `src/features/`.
 2.  Define types and DI symbols in `types.ts`.
 3.  Add Zod schemas in `schemas/`.
@@ -170,6 +179,7 @@ All pages must describe themselves with JSON-LD. The machinery lives in `src/cor
 7.  Register its services in `src/core/di/container.base.ts` (client-safe) or `container.server.ts` (server-only).
 
 ### Adding a New Page
+
 1.  Create route in `src/app/`.
 2.  Implement `generateMetadata` using `getTranslations({ locale, namespace: 'metadata.xxx' })`.
 3.  Keep `page.tsx` lean; handle SEO metadata, fetch data, and pass to a Feature component.
@@ -181,10 +191,10 @@ All pages must describe themselves with JSON-LD. The machinery lives in `src/cor
 ## 📏 Standards & Linting
 
 - **Formatting**: We use **Biome**. Run `pnpm lint:fix` before finishing.
-- **Naming**: 
-    - `PascalCase` for Components and Classes.
-    - `kebab-case` for folders and non-component files.
-    - `camelCase` for hooks.
+- **Naming**:
+  - `PascalCase` for Components and Classes.
+  - `kebab-case` for folders and non-component files.
+  - `camelCase` for hooks.
 - **CSS**: Use **TailwindCSS 4** semantic tokens (e.g., `text-primary`, `bg-background`). Avoid hex colors.
 - **Icons**: Use FontAwesome via our UI library wrappers.
 - **No `any` type**: If a type can't be inferred use an explicit intermediate named type with a todo comment.
@@ -200,6 +210,7 @@ All pages must describe themselves with JSON-LD. The machinery lives in `src/cor
 ---
 
 ## ⚠️ Anti-Patterns to Avoid
+
 - ❌ Putting UI logic in `page.tsx` (Move to `features/*/components/`).
 - ❌ Directly importing `en.ts` for types (Use `AppTranslationShape` from `src/types.ts`).
 - ❌ Using `any` (Define Zod schemas and infer types).

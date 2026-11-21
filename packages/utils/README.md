@@ -5,6 +5,7 @@ Central cross-package and app collection of non standard utility functions for s
 ## Installation
 
 Just run the following command and you should be good to go.
+
 ```bash
 pnpm i @maw/utils
 ```
