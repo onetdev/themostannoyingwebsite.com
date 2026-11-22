@@ -3,7 +3,7 @@
  */
 import '@testing-library/jest-dom';
 import type { ShortListItem } from '@maw/content-sdk';
-import { fireEvent, render, screen } from '@testing-library/react';
+import { act, fireEvent, render, screen } from '@testing-library/react';
 
 import { ShortPlayerSlide } from './ShortPlayerSlide';
 
@@ -69,6 +69,7 @@ function renderSlide(
   const handlers = {
     onVideoRef: jest.fn(),
     onTap: jest.fn(),
+    onLike: jest.fn(),
   };
 
   const result = render(
@@ -87,6 +88,14 @@ function renderSlide(
 }
 
 describe('ShortPlayerSlide', () => {
+  beforeEach(() => {
+    jest.useFakeTimers();
+  });
+
+  afterEach(() => {
+    jest.useRealTimers();
+  });
+
   it('mounts a looping inline video with its poster and registers the ref', () => {
     const { onVideoRef } = renderSlide();
 
@@ -134,6 +143,9 @@ describe('ShortPlayerSlide', () => {
       }),
     );
     fireEvent.click(tapLayer);
+    expect(onTap).not.toHaveBeenCalled();
+
+    act(() => jest.advanceTimersByTime(300));
     expect(onTap).toHaveBeenCalledTimes(1);
 
     fireEvent(
@@ -153,6 +165,22 @@ describe('ShortPlayerSlide', () => {
       }),
     );
     fireEvent.click(tapLayer);
+    act(() => jest.advanceTimersByTime(300));
     expect(onTap).toHaveBeenCalledTimes(1);
+  });
+
+  it('likes the clip on a double tap without toggling playback', () => {
+    const { onTap, onLike } = renderSlide();
+    const tapLayer = screen.getByTestId('short-player-tap-layer');
+
+    fireEvent.click(tapLayer);
+    fireEvent.click(tapLayer);
+
+    expect(onLike).toHaveBeenCalledTimes(1);
+    expect(onTap).not.toHaveBeenCalled();
+    expect(screen.getByTestId('short-like-burst')).toBeInTheDocument();
+
+    act(() => jest.advanceTimersByTime(800));
+    expect(screen.queryByTestId('short-like-burst')).not.toBeInTheDocument();
   });
 });

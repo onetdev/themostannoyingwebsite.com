@@ -65,6 +65,7 @@ function renderOverlay(
     onToggleMute: jest.fn(),
     onToggleCaptions: jest.fn(),
     onToggleFullscreen: jest.fn(),
+    onToggleLike: jest.fn(),
     onClose: jest.fn(),
   };
 
@@ -74,6 +75,7 @@ function renderOverlay(
       video={null}
       muted={false}
       showCaptions={false}
+      liked={false}
       isPlaying
       isFullscreen={false}
       autoplayBlocked={false}
@@ -116,12 +118,21 @@ describe('ShortPlayerOverlay', () => {
     fireEvent.click(screen.getByRole('button', { name: 'mute' }));
     fireEvent.click(screen.getByRole('button', { name: 'captionsOn' }));
     fireEvent.click(screen.getByRole('button', { name: 'enterFullscreen' }));
+    fireEvent.click(screen.getByRole('button', { name: 'like' }));
     fireEvent.click(screen.getByRole('button', { name: 'closePlayer' }));
 
     expect(handlers.onToggleMute).toHaveBeenCalledTimes(1);
     expect(handlers.onToggleCaptions).toHaveBeenCalledTimes(1);
     expect(handlers.onToggleFullscreen).toHaveBeenCalledTimes(1);
+    expect(handlers.onToggleLike).toHaveBeenCalledTimes(1);
     expect(handlers.onClose).toHaveBeenCalledTimes(1);
+  });
+
+  it('marks the heart as pressed when the clip is liked', () => {
+    renderOverlay({ liked: true });
+
+    const like = screen.getByRole('button', { name: 'unlike' });
+    expect(like).toHaveAttribute('aria-pressed', 'true');
   });
 
   it('shows the unmute prompt only after autoplay was blocked', () => {

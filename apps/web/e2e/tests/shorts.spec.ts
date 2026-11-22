@@ -49,7 +49,14 @@ test('shorts player plays a dedicated, full-screen vertical feed', async ({
   // The persistent controls stay mounted; only play/pause is transient.
   await expect(page.getByRole('button', { name: /Mute|Unmute/ })).toBeVisible();
   await expect(page.getByRole('button', { name: /Share/ })).toBeVisible();
+  await expect(page.getByRole('button', { name: 'Like' })).toBeVisible();
   await expect(page.getByRole('group', { name: 'Seek' })).toBeVisible();
+
+  await page
+    .getByTestId('short-player-tap-layer')
+    .first()
+    .dblclick({ position: { x: 30, y: 300 } });
+  await expect(page.getByRole('button', { name: 'Unlike' })).toBeVisible();
 
   if (short.ai_assisted) {
     await expect(page.getByTestId('short-ai-badge')).toBeVisible();
@@ -59,4 +66,7 @@ test('shorts player plays a dedicated, full-screen vertical feed', async ({
   await page.keyboard.press('ArrowDown');
   await expect.poll(() => new URL(page.url()).pathname).not.toBe(initialPath);
   await expect(page).toHaveURL(/\/en\/shorts\/[^/]+\/$/);
+
+  await page.getByRole('button', { name: 'Close player' }).click();
+  await expect(page).toHaveURL(/\/en\/$/);
 });

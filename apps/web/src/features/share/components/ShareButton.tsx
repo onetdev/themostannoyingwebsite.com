@@ -1,6 +1,6 @@
 'use client';
 
-import { Button, Icon } from '@maw/ui-lib';
+import { Button, type ButtonProps, Icon } from '@maw/ui-lib';
 import { useTranslations } from 'next-intl';
 import type { TelemetrySection } from '@/core/telemetry';
 
@@ -16,6 +16,10 @@ export type ShareButtonProps = {
    */
   title?: string;
   className?: string;
+  /** Extra classes for the share icon. */
+  iconClassName?: string;
+  /** Button size variant. Defaults to the standard icon size. */
+  size?: ButtonProps['size'];
   /** Telemetry surface the share action belongs to. */
   section?: TelemetrySection;
 };
@@ -28,6 +32,8 @@ export function ShareButton({
   url,
   title,
   className,
+  iconClassName,
+  size = 'icon',
   section = 'common:share',
 }: ShareButtonProps) {
   const t = useTranslations();
@@ -38,7 +44,7 @@ export function ShareButton({
     <Button
       type="button"
       variant="ghost"
-      size="icon"
+      size={size}
       className={className}
       onClick={() => share({ url, title, surface: section })}
       aria-label={label}
@@ -46,7 +52,7 @@ export function ShareButton({
       data-track="common:share"
       data-track-section={section}
     >
-      <Icon icon="share" aria-hidden />
+      <Icon icon="share" className={iconClassName} aria-hidden />
     </Button>
   );
 }

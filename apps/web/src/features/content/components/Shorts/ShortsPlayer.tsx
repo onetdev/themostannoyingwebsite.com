@@ -3,7 +3,7 @@
 import type { ShortListItem } from '@maw/content-sdk';
 import { Carousel, CarouselContent, CarouselItem } from '@maw/ui-lib';
 import { useTranslations } from 'next-intl';
-import { useEffect } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 
 import { ShortPlayerOverlay } from './ShortPlayerOverlay';
 import { ShortPlayerSlide } from './ShortPlayerSlide';
@@ -27,6 +27,9 @@ const isPlayerControl = (target: EventTarget | null) =>
 export function ShortsPlayer({ shorts, initialIndex }: ShortsPlayerProps) {
   const t = useTranslations('content.shorts');
   const player = useShortPlayer({ shorts, initialIndex });
+  const [likedShortIds, setLikedShortIds] = useState<ReadonlySet<string>>(
+    () => new Set(),
+  );
   const onWheel = useShortFeedWheel({
     onNext: player.next,
     onPrevious: player.previous,
@@ -35,6 +38,32 @@ export function ShortsPlayer({ shorts, initialIndex }: ShortsPlayerProps) {
     Math.max(initialIndex, 0),
     Math.max(shorts.length - 1, 0),
   );
+
+  const likeShort = useCallback((id: string) => {
+    setLikedShortIds((current) => {
+      if (current.has(id)) {
+        return current;
+      }
+
+      const next = new Set(current);
+      next.add(id);
+      return next;
+    });
+  }, []);
+
+  const toggleLike = useCallback((id: string) => {
+    setLikedShortIds((current) => {
+      const next = new Set(current);
+
+      if (next.has(id)) {
+        next.delete(id);
+      } else {
+        next.add(id);
+      }
+
+      return next;
+    });
+  }, []);
 
   useEffect(() => {
     const previousOverflow = document.body.style.overflow;
@@ -50,6 +79,8 @@ export function ShortsPlayer({ shorts, initialIndex }: ShortsPlayerProps) {
   if (!player.activeShort) {
     return null;
   }
+
+  const isLiked = likedShortIds.has(player.activeShort.id);
 
   return (
     <div
@@ -83,6 +114,7 @@ export function ShortsPlayer({ shorts, initialIndex }: ShortsPlayerProps) {
                 muted={player.muted}
                 onVideoRef={player.registerVideo}
                 onTap={player.togglePlay}
+                onLike={() => likeShort(short.id)}
               />
             </CarouselItem>
           ))}
@@ -94,6 +126,7 @@ export function ShortsPlayer({ shorts, initialIndex }: ShortsPlayerProps) {
         video={player.activeVideo}
         muted={player.muted}
         showCaptions={player.showCaptions}
+        liked={isLiked}
         isPlaying={player.isPlaying}
         isFullscreen={player.isFullscreen}
         autoplayBlocked={player.autoplayBlocked}
@@ -104,6 +137,7 @@ export function ShortsPlayer({ shorts, initialIndex }: ShortsPlayerProps) {
         onToggleMute={player.toggleMute}
         onToggleCaptions={player.toggleCaptions}
         onToggleFullscreen={player.toggleFullscreen}
+        onToggleLike={() => toggleLike(player.activeShort.id)}
         onClose={player.close}
       />
     </div>

@@ -15,8 +15,13 @@ jest.mock('next-intl', () => ({
   useLocale: () => 'en',
 }));
 
+const mockRouter = {
+  back: jest.fn(),
+  push: jest.fn(),
+};
+
 jest.mock('@/core/i18n/navigation', () => ({
-  useRouter: () => ({ back: jest.fn(), push: jest.fn() }),
+  useRouter: () => mockRouter,
 }));
 
 jest.mock('@/stores', () => ({
@@ -82,6 +87,9 @@ describe('useShortPlayer', () => {
     mockEnableSound = true;
     mockReducedMotion = false;
     mockDocumentVisible = true;
+    mockRouter.back.mockClear();
+    mockRouter.push.mockClear();
+    document.title = 'First | The Most Annoying Website';
     jest.spyOn(window.history, 'replaceState').mockImplementation(() => {});
   });
 
@@ -157,7 +165,18 @@ describe('useShortPlayer', () => {
         '/en/shorts/second/',
       ),
     );
+    expect(document.title).toBe('Second | The Most Annoying Website');
     expect(result.current.activeIndex).toBe(1);
+  });
+
+  it('closes the player by navigating to the site home', () => {
+    const { result } = renderHook(() =>
+      useShortPlayer({ shorts, initialIndex: 0 }),
+    );
+
+    act(() => result.current.close());
+
+    expect(mockRouter.push).toHaveBeenCalledWith('/');
   });
 
   it('toggles playback, mute and captions from the active clip', async () => {

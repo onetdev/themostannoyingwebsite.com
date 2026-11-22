@@ -5,7 +5,14 @@ import { Icon } from '@maw/ui-lib';
 import { cn } from 'cn';
 import Image from 'next/image';
 import { useTranslations } from 'next-intl';
-import { type PointerEvent, useCallback, useRef, useState } from 'react';
+import {
+  type MouseEvent,
+  type PointerEvent,
+  useCallback,
+  useEffect,
+  useRef,
+  useState,
+} from 'react';
 
 import { selectShortMedia } from './short-media';
 import { SHORT_PLAYER_SURFACE_CLASS } from './short-player-frame';
@@ -18,10 +25,14 @@ export interface ShortPlayerSlideProps {
   muted: boolean;
   onVideoRef: (index: number, video: HTMLVideoElement | null) => void;
   onTap: () => void;
+  onLike: () => void;
   className?: string;
 }
 
 const DRAG_THRESHOLD_PX = 8;
+const DOUBLE_TAP_WINDOW_MS = 280;
+const DOUBLE_TAP_DISTANCE_PX = 40;
+const LIKE_BURST_MS = 700;
 
 /**
  * One slide of the vertical feed.
@@ -39,13 +50,29 @@ export function ShortPlayerSlide({
   muted,
   onVideoRef,
   onTap,
+  onLike,
   className,
 }: ShortPlayerSlideProps) {
   const t = useTranslations('content.shorts');
   const { video, poster } = selectShortMedia(short);
   const [hasError, setHasError] = useState(false);
+  const [showLikeBurst, setShowLikeBurst] = useState(false);
   const pointerStart = useRef<{ x: number; y: number } | null>(null);
   const wasDragged = useRef(false);
+  const lastTap = useRef<{ x: number; y: number; at: number } | null>(null);
+  const tapTimeout = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const burstTimeout = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  useEffect(() => {
+    return () => {
+      if (tapTimeout.current) {
+        clearTimeout(tapTimeout.current);
+      }
+      if (burstTimeout.current) {
+        clearTimeout(burstTimeout.current);
+      }
+    };
+  }, []);
 
   const setVideoElement = useCallback(
     (element: HTMLVideoElement | null) => {
@@ -75,9 +102,60 @@ export function ShortPlayerSlide({
     }
   };
 
-  const onTapLayer = () => {
-    if (isActive && !wasDragged.current) {
-      onTap();
+  const showLike = () => {
+    setShowLikeBurst(true);
+
+    if (burstTimeout.current) {
+      clearTimeout(burstTimeout.current);
+    }
+
+    burstTimeout.current = setTimeout(() => {
+      setShowLikeBurst(false);
+    }, LIKE_BURST_MS);
+  };
+
+  const onTapLayer = (event: MouseEvent<HTMLDivElement>) => {
+    if (!isActive || wasDragged.current) {
+      pointerStart.current = null;
+      wasDragged.current = false;
+      return;
+    }
+
+    const now = Date.now();
+    const previousTap = lastTap.current;
+    const isDoubleTap =
+      previousTap !== null &&
+      now - previousTap.at <= DOUBLE_TAP_WINDOW_MS &&
+      Math.hypot(
+        event.clientX - previousTap.x,
+        event.clientY - previousTap.y,
+      ) <= DOUBLE_TAP_DISTANCE_PX;
+
+    if (isDoubleTap) {
+      if (tapTimeout.current) {
+        clearTimeout(tapTimeout.current);
+        tapTimeout.current = null;
+      }
+
+      lastTap.current = null;
+      onLike();
+      showLike();
+    } else {
+      lastTap.current = {
+        x: event.clientX,
+        y: event.clientY,
+        at: now,
+      };
+
+      if (tapTimeout.current) {
+        clearTimeout(tapTimeout.current);
+      }
+
+      tapTimeout.current = setTimeout(() => {
+        tapTimeout.current = null;
+        lastTap.current = null;
+        onTap();
+      }, DOUBLE_TAP_WINDOW_MS);
     }
 
     pointerStart.current = null;
@@ -132,8 +210,20 @@ export function ShortPlayerSlide({
             <p className="text-sm">{t('playbackFailed')}</p>
           </div>
         )}
+        {showLikeBurst && (
+          <div
+            className="pointer-events-none absolute inset-0 z-10 flex items-center justify-center"
+            data-testid="short-like-burst"
+          >
+            <Icon
+              icon="heart"
+              className="animate-pulse text-8xl text-red-500 drop-shadow-lg"
+              aria-hidden
+            />
+          </div>
+        )}
         <div
-          className="absolute inset-0 z-0 cursor-pointer"
+          className="absolute inset-0 z-0 cursor-pointer touch-manipulation"
           aria-hidden="true"
           data-testid="short-player-tap-layer"
           onPointerDown={onPointerDown}

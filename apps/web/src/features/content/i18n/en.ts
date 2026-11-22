@@ -61,6 +61,8 @@ export default {
     enterFullscreen: 'Enter fullscreen',
     exitFullscreen: 'Exit fullscreen',
     closePlayer: 'Close player',
+    like: 'Like',
+    unlike: 'Unlike',
     aiAssisted: 'AI-assisted',
     playbackFailed: 'Video playback failed',
     viewAuthor: 'View {name} profile',

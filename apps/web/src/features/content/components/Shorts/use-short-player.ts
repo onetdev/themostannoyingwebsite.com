@@ -77,6 +77,7 @@ export function useShortPlayer({
   const videoRefs = useRef(new Map<number, HTMLVideoElement>());
   const activeIndexRef = useRef(activeIndex);
   const playPauseTimeout = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const titleSuffixRef = useRef<string | null>(null);
 
   const activeShort = shorts[activeIndex] ?? shorts[0];
   const hasAudio = activeShort?.has_audio ?? false;
@@ -154,6 +155,15 @@ export function useShortPlayer({
       '',
       `/${locale}/shorts/${encodeURIComponent(nextShort.slug)}/`,
     );
+
+    if (titleSuffixRef.current === null) {
+      const separator = ' | ';
+      const separatorIndex = document.title.indexOf(separator);
+      titleSuffixRef.current =
+        separatorIndex === -1 ? '' : document.title.slice(separatorIndex);
+    }
+
+    document.title = `${nextShort.title}${titleSuffixRef.current}`;
   }, [activeIndex, locale, shorts]);
 
   useEffect(() => {
@@ -284,11 +294,7 @@ export function useShortPlayer({
   }, [activeVideo]);
 
   const close = useCallback(() => {
-    if (typeof window !== 'undefined' && window.history.length > 1) {
-      router.back();
-      return;
-    }
-
+    // The short has no listing route yet; closing returns to the site home.
     router.push('/');
   }, [router]);
 

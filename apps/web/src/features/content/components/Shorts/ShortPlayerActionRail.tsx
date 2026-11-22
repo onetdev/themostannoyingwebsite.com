@@ -1,57 +1,67 @@
 'use client';
 
 import type { ShortListItem } from '@maw/content-sdk';
-import { Avatar, AvatarFallback, Button, Icon } from '@maw/ui-lib';
+import { Button, Icon } from '@maw/ui-lib';
+import { cn } from 'cn';
 import { useTranslations } from 'next-intl';
-import { Link } from '@/core/i18n/navigation';
 import { ShareButton } from '@/features/share/components';
 
 export interface ShortPlayerActionRailProps {
   short: ShortListItem;
   hasCaptions: boolean;
   showCaptions: boolean;
+  liked: boolean;
   isFullscreen: boolean;
   onToggleCaptions: () => void;
   onToggleFullscreen: () => void;
+  onToggleLike: () => void;
 }
+
 const WHITE_CONTROL_CLASS =
   'text-white hover:bg-white/15 hover:text-white focus-visible:border-white focus-visible:ring-white/40';
+const CONTROL_ICON_CLASS = 'text-xl';
 
 /**
- * Vertical action rail, mirroring the TikTok layout: author avatar, share,
- * captions and fullscreen. Play/pause is intentionally not here — it is the
- * only transient control.
+ * Vertical action rail, mirroring the TikTok layout: like, share, captions and
+ * fullscreen. Play/pause is intentionally not here — it is the only transient
+ * control.
  */
 export function ShortPlayerActionRail({
   short,
   hasCaptions,
   showCaptions,
+  liked,
   isFullscreen,
   onToggleCaptions,
   onToggleFullscreen,
+  onToggleLike,
 }: ShortPlayerActionRailProps) {
   const t = useTranslations('content.shorts');
-  const initial = short.author.name.charAt(0).toUpperCase();
 
   return (
     <div
       className="pointer-events-auto absolute right-3 bottom-44 z-30 flex flex-col items-center gap-3"
       data-player-control
     >
-      <Link
-        href={`/authors/${short.author.slug}`}
-        aria-label={t('viewAuthor', { name: short.author.name })}
-        data-track="shorts:author-avatar"
-        data-track-key={short.author.slug}
+      <Button
+        type="button"
+        variant="ghost"
+        size="icon-lg"
+        className={cn(
+          WHITE_CONTROL_CLASS,
+          liked && 'text-red-500 hover:text-red-400',
+        )}
+        onClick={onToggleLike}
+        aria-pressed={liked}
+        aria-label={liked ? t('unlike') : t('like')}
+        data-track="shorts:like"
       >
-        <Avatar size="lg" className="ring-2 ring-white/80">
-          <AvatarFallback className="bg-secondary text-secondary-foreground text-sm font-semibold">
-            {initial}
-          </AvatarFallback>
-        </Avatar>
-      </Link>
+        <Icon icon="heart" className={CONTROL_ICON_CLASS} aria-hidden />
+      </Button>
       <ShareButton
         title={short.title}
+        size="icon-lg"
+        iconClassName={CONTROL_ICON_CLASS}
         section="content:shorts:player"
         className={WHITE_CONTROL_CLASS}
       />
@@ -66,7 +76,7 @@ export function ShortPlayerActionRail({
           aria-label={showCaptions ? t('captionsOff') : t('captionsOn')}
           data-track="shorts:captions"
         >
-          <Icon icon="captions" aria-hidden />
+          <Icon icon="captions" className={CONTROL_ICON_CLASS} aria-hidden />
         </Button>
       )}
       <Button
@@ -79,7 +89,11 @@ export function ShortPlayerActionRail({
         aria-label={isFullscreen ? t('exitFullscreen') : t('enterFullscreen')}
         data-track="shorts:fullscreen"
       >
-        <Icon icon={isFullscreen ? 'compress' : 'expand'} aria-hidden />
+        <Icon
+          icon={isFullscreen ? 'compress' : 'expand'}
+          className={CONTROL_ICON_CLASS}
+          aria-hidden
+        />
       </Button>
     </div>
   );

@@ -15,6 +15,7 @@ export interface ShortPlayerOverlayProps {
   video: HTMLVideoElement | null;
   muted: boolean;
   showCaptions: boolean;
+  liked: boolean;
   isPlaying: boolean;
   isFullscreen: boolean;
   autoplayBlocked: boolean;
@@ -25,6 +26,7 @@ export interface ShortPlayerOverlayProps {
   onToggleMute: () => void;
   onToggleCaptions: () => void;
   onToggleFullscreen: () => void;
+  onToggleLike: () => void;
   onClose: () => void;
 }
 
@@ -40,6 +42,7 @@ export function ShortPlayerOverlay({
   video,
   muted,
   showCaptions,
+  liked,
   isPlaying,
   isFullscreen,
   autoplayBlocked,
@@ -50,6 +53,7 @@ export function ShortPlayerOverlay({
   onToggleMute,
   onToggleCaptions,
   onToggleFullscreen,
+  onToggleLike,
   onClose,
 }: ShortPlayerOverlayProps) {
   const t = useTranslations('content.shorts');
@@ -82,7 +86,7 @@ export function ShortPlayerOverlay({
             aria-label={t('closePlayer')}
             data-track="shorts:close"
           >
-            <Icon icon="chevronDown" aria-hidden />
+            <Icon icon="close" className="text-xl" aria-hidden />
           </Button>
           {hasAudio && (
             <Button
@@ -95,7 +99,11 @@ export function ShortPlayerOverlay({
               aria-label={muted ? t('unmute') : t('mute')}
               data-track="shorts:mute"
             >
-              <Icon icon={muted ? 'volumeMute' : 'volumeHigh'} aria-hidden />
+              <Icon
+                icon={muted ? 'volumeMute' : 'volumeHigh'}
+                className="text-xl"
+                aria-hidden
+              />
             </Button>
           )}
         </div>
@@ -109,7 +117,7 @@ export function ShortPlayerOverlay({
             onClick={onToggleMute}
             data-track="shorts:unmute-prompt"
           >
-            <Icon icon="volumeMute" aria-hidden />
+            <Icon icon="volumeMute" className="size-4" aria-hidden />
             {t('tapToUnmute')}
           </Button>
         )}
@@ -118,9 +126,11 @@ export function ShortPlayerOverlay({
           short={short}
           hasCaptions={hasCaptions}
           showCaptions={showCaptions}
+          liked={liked}
           isFullscreen={isFullscreen}
           onToggleCaptions={onToggleCaptions}
           onToggleFullscreen={onToggleFullscreen}
+          onToggleLike={onToggleLike}
         />
 
         <ShortPlayerCaptions
@@ -144,7 +154,7 @@ export function ShortPlayerOverlay({
         >
           <Icon
             icon={isPlaying ? 'pause' : 'playSolid'}
-            className="text-2xl"
+            className="text-3xl"
             aria-hidden
           />
         </button>
