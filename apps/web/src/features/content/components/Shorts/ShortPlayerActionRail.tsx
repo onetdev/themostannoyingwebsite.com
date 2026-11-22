@@ -1,10 +1,11 @@
 'use client';
 
 import type { ShortListItem } from '@maw/content-sdk';
-import { Button, Icon } from '@maw/ui-lib';
 import { cn } from 'cn';
 import { useTranslations } from 'next-intl';
-import { ShareButton } from '@/features/share/components';
+import { useShareAction } from '@/features/share/hooks';
+
+import { ShortPlayerActionButton } from './ShortPlayerActionButton';
 
 export interface ShortPlayerActionRailProps {
   short: ShortListItem;
@@ -16,10 +17,6 @@ export interface ShortPlayerActionRailProps {
   onToggleFullscreen: () => void;
   onToggleLike: () => void;
 }
-
-const WHITE_CONTROL_CLASS =
-  'text-white hover:bg-white/15 hover:text-white focus-visible:border-white focus-visible:ring-white/40';
-const CONTROL_ICON_CLASS = 'text-xl';
 
 /**
  * Vertical action rail, mirroring the TikTok layout: like, share, captions and
@@ -37,64 +34,63 @@ export function ShortPlayerActionRail({
   onToggleLike,
 }: ShortPlayerActionRailProps) {
   const t = useTranslations('content.shorts');
+  const tCommon = useTranslations();
+  const share = useShareAction();
 
   return (
     <div
-      className="pointer-events-auto absolute right-3 bottom-44 z-30 flex flex-col items-center gap-3"
+      className="pointer-events-auto absolute right-3 bottom-20 z-30 flex flex-col items-center gap-2"
       data-player-control
     >
-      <Button
-        type="button"
-        variant="ghost"
-        size="icon-lg"
-        className={cn(
-          WHITE_CONTROL_CLASS,
-          liked && 'text-red-500 hover:text-red-400',
-        )}
-        onClick={onToggleLike}
-        aria-pressed={liked}
-        aria-label={liked ? t('unlike') : t('like')}
-        data-track="shorts:like"
-      >
-        <Icon icon="heart" className={CONTROL_ICON_CLASS} aria-hidden />
-      </Button>
-      <ShareButton
-        title={short.title}
-        size="icon-lg"
-        iconClassName={CONTROL_ICON_CLASS}
-        section="content:shorts:player"
-        className={WHITE_CONTROL_CLASS}
+      <div className="flex flex-col items-center gap-1">
+        <ShortPlayerActionButton
+          icon="heart"
+          label={liked ? t('unlike') : t('like')}
+          tooltip={liked ? t('unlike') : t('like')}
+          iconClassName={cn(liked && 'text-red-500')}
+          onClick={onToggleLike}
+          aria-pressed={liked}
+          data-track="shorts:like"
+        />
+        <span
+          className="text-xs font-semibold text-white/90 tabular-nums"
+          data-testid="short-like-count"
+          aria-hidden="true"
+        >
+          0
+        </span>
+      </div>
+      <ShortPlayerActionButton
+        icon="share"
+        label={tCommon('common.action.share')}
+        tooltip={tCommon('common.action.share')}
+        onClick={() =>
+          void share({
+            title: short.title,
+            surface: 'content:shorts:player',
+          })
+        }
+        data-track="common:share"
+        data-track-section="content:shorts:player"
       />
       {hasCaptions && (
-        <Button
-          type="button"
-          variant="ghost"
-          size="icon-lg"
-          className={WHITE_CONTROL_CLASS}
+        <ShortPlayerActionButton
+          icon="captions"
+          label={showCaptions ? t('captionsOff') : t('captionsOn')}
+          tooltip={showCaptions ? t('captionsOff') : t('captionsOn')}
           onClick={onToggleCaptions}
           aria-pressed={showCaptions}
-          aria-label={showCaptions ? t('captionsOff') : t('captionsOn')}
           data-track="shorts:captions"
-        >
-          <Icon icon="captions" className={CONTROL_ICON_CLASS} aria-hidden />
-        </Button>
+        />
       )}
-      <Button
-        type="button"
-        variant="ghost"
-        size="icon-lg"
-        className={WHITE_CONTROL_CLASS}
+      <ShortPlayerActionButton
+        icon={isFullscreen ? 'compress' : 'expand'}
+        label={isFullscreen ? t('exitFullscreen') : t('enterFullscreen')}
+        tooltip={isFullscreen ? t('exitFullscreen') : t('enterFullscreen')}
         onClick={onToggleFullscreen}
         aria-pressed={isFullscreen}
-        aria-label={isFullscreen ? t('exitFullscreen') : t('enterFullscreen')}
         data-track="shorts:fullscreen"
-      >
-        <Icon
-          icon={isFullscreen ? 'compress' : 'expand'}
-          className={CONTROL_ICON_CLASS}
-          aria-hidden
-        />
-      </Button>
+      />
     </div>
   );
 }

@@ -66,7 +66,7 @@ export function ShortPlayerCaptions({
       className="pointer-events-none absolute inset-x-0 top-32 z-20 flex justify-center px-6"
       data-testid="short-captions"
     >
-      <p className="max-w-[80%] rounded-md bg-black/70 px-3 py-1.5 text-center text-base font-medium whitespace-pre-line text-white shadow-sm backdrop-blur-xs">
+      <p className="max-w-[80%] rounded-md bg-black/45 px-3 py-1.5 text-center text-base font-medium whitespace-pre-line text-white shadow-md backdrop-blur-sm [text-shadow:0_1px_2px_rgba(0,0,0,0.9)]">
         {activeCue.text}
       </p>
     </div>

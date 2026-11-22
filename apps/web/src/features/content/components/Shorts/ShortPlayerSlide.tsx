@@ -169,7 +169,7 @@ export function ShortPlayerSlide({
   return (
     <div
       className={cn(
-        'flex h-full w-full items-center justify-center bg-black',
+        'relative flex h-full w-full items-center justify-center overflow-hidden',
         className,
       )}
       data-testid="short-player-slide"
@@ -178,7 +178,10 @@ export function ShortPlayerSlide({
       data-track-index={index}
       data-track-key={short.id}
     >
-      <div className={SHORT_PLAYER_SURFACE_CLASS} style={frameStyle}>
+      <div
+        className={cn(SHORT_PLAYER_SURFACE_CLASS, 'z-10')}
+        style={frameStyle}
+      >
         {poster && (
           <Image
             className="object-cover"

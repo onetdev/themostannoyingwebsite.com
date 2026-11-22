@@ -3,6 +3,7 @@
  */
 import '@testing-library/jest-dom';
 import type { ShortListItem } from '@maw/content-sdk';
+import { TooltipProvider } from '@maw/ui-lib';
 import { fireEvent, render, screen } from '@testing-library/react';
 
 import { ShortPlayerOverlay } from './ShortPlayerOverlay';
@@ -27,8 +28,8 @@ jest.mock('@/core/i18n/navigation', () => ({
   ),
 }));
 
-jest.mock('@/features/share/components', () => ({
-  ShareButton: () => <button type="button" aria-label="share" />,
+jest.mock('@/features/share/hooks', () => ({
+  useShareAction: () => jest.fn(),
 }));
 
 jest.mock('./ShortPlayerProgress', () => ({
@@ -70,21 +71,23 @@ function renderOverlay(
   };
 
   render(
-    <ShortPlayerOverlay
-      short={short}
-      video={null}
-      muted={false}
-      showCaptions={false}
-      liked={false}
-      isPlaying
-      isFullscreen={false}
-      autoplayBlocked={false}
-      showPlayPause
-      hasAudio
-      hasCaptions
-      {...handlers}
-      {...overrides}
-    />,
+    <TooltipProvider>
+      <ShortPlayerOverlay
+        short={short}
+        video={null}
+        muted={false}
+        showCaptions={false}
+        liked={false}
+        isPlaying
+        isFullscreen={false}
+        autoplayBlocked={false}
+        showPlayPause
+        hasAudio
+        hasCaptions
+        {...handlers}
+        {...overrides}
+      />
+    </TooltipProvider>,
   );
 
   return handlers;
@@ -102,6 +105,7 @@ describe('ShortPlayerOverlay', () => {
     );
     expect(screen.getByTestId('short-ai-badge')).toBeVisible();
     expect(screen.getByText('Humor')).toBeVisible();
+    expect(screen.getByTestId('short-like-count')).toHaveTextContent('0');
   });
 
   it('keeps the overlay frame transparent so the active clip stays visible', () => {

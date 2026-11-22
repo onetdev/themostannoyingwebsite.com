@@ -1,4 +1,6 @@
+export * from './ShortPlayerActionButton';
 export * from './ShortPlayerActionRail';
+export * from './ShortPlayerBackdrop';
 export * from './ShortPlayerCaptions';
 export * from './ShortPlayerInfo';
 export * from './ShortPlayerOverlay';
@@ -7,5 +9,6 @@ export * from './ShortPlayerSlide';
 export * from './ShortsPlayer';
 export * from './short-duration';
 export * from './short-media';
+export * from './short-player-controls';
 export * from './short-player-frame';
 export * from './use-short-feed-wheel';

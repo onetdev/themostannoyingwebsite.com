@@ -8,6 +8,10 @@ import { useTranslations } from 'next-intl';
 import { ShortPlayerActionRail } from './ShortPlayerActionRail';
 import { ShortPlayerCaptions } from './ShortPlayerCaptions';
 import { ShortPlayerInfo } from './ShortPlayerInfo';
+import {
+  WHITE_CONTROL_CLASS,
+  WHITE_CONTROL_ICON_CLASS,
+} from './short-player-controls';
 import { SHORT_PLAYER_FRAME_CLASS } from './short-player-frame';
 
 export interface ShortPlayerOverlayProps {
@@ -29,9 +33,6 @@ export interface ShortPlayerOverlayProps {
   onToggleLike: () => void;
   onClose: () => void;
 }
-
-const WHITE_CONTROL_CLASS =
-  'text-white hover:bg-white/15 hover:text-white focus-visible:border-white focus-visible:ring-white/40';
 
 /**
  * Fixed overlay for the active clip. Everything except the play/pause control
@@ -86,7 +87,11 @@ export function ShortPlayerOverlay({
             aria-label={t('closePlayer')}
             data-track="shorts:close"
           >
-            <Icon icon="close" className="text-xl" aria-hidden />
+            <Icon
+              icon="close"
+              className={WHITE_CONTROL_ICON_CLASS}
+              aria-hidden
+            />
           </Button>
           {hasAudio && (
             <Button
@@ -101,7 +106,7 @@ export function ShortPlayerOverlay({
             >
               <Icon
                 icon={muted ? 'volumeMute' : 'volumeHigh'}
-                className="text-xl"
+                className={WHITE_CONTROL_ICON_CLASS}
                 aria-hidden
               />
             </Button>

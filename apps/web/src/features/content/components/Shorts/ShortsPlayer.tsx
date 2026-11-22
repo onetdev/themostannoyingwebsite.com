@@ -5,6 +5,7 @@ import { Carousel, CarouselContent, CarouselItem } from '@maw/ui-lib';
 import { useTranslations } from 'next-intl';
 import { useCallback, useEffect, useState } from 'react';
 
+import { ShortPlayerBackdrop } from './ShortPlayerBackdrop';
 import { ShortPlayerOverlay } from './ShortPlayerOverlay';
 import { ShortPlayerSlide } from './ShortPlayerSlide';
 import { useShortFeedWheel } from './use-short-feed-wheel';
@@ -89,6 +90,7 @@ export function ShortsPlayer({ shorts, initialIndex }: ShortsPlayerProps) {
       data-testid="shorts-player"
       onWheel={onWheel}
     >
+      <ShortPlayerBackdrop short={player.activeShort} />
       <Carousel
         orientation="vertical"
         spacing={false}
@@ -100,7 +102,7 @@ export function ShortsPlayer({ shorts, initialIndex }: ShortsPlayerProps) {
           watchFocus: false,
           watchDrag: (_api, event) => !isPlayerControl(event.target),
         }}
-        className="h-full w-full"
+        className="relative z-10 h-full w-full"
         aria-label={t('playerLabel')}
       >
         <CarouselContent viewportClassName="h-full" className="h-full">
