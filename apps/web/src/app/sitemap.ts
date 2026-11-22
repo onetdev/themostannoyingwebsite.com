@@ -1,4 +1,4 @@
-import type { ArticleListItem } from '@maw/content-sdk';
+import type { ArticleListItem, ShortListItem } from '@maw/content-sdk';
 import type { MetadataRoute } from 'next';
 import type { Languages } from 'next/dist/lib/metadata/types/alternative-urls-types';
 
@@ -7,6 +7,7 @@ import { absoluteUrl } from '@/core/seo/absolute-url';
 import {
   getArticleService,
   getAuthorService,
+  getShortService,
 } from '@/features/content/services';
 import i18nConfig from '@/root/i18n.config';
 import { getAppConfigService } from '@/services';
@@ -116,6 +117,66 @@ const mapArticlesToSitemapEntries = (
   return [...groups.values()].flatMap(groupToSitemapEntries);
 };
 
+/**
+ * Builds the `hreflang` alternates map for one short group, including
+ * `x-default`. A group is the same clip across locales.
+ */
+const buildShortGroupLanguages = (
+  group: ShortListItem[],
+): Languages<string> => {
+  const languages: Languages<string> = Object.fromEntries(
+    group.map((item) => [
+      item.lang,
+      absoluteUrl(config.publicUrl, item.lang, `shorts/${item.slug}`),
+    ]),
+  );
+
+  const xDefault =
+    group.find((item) => item.lang === i18nConfig.defaultLocale) ?? group[0];
+  languages['x-default'] = absoluteUrl(
+    config.publicUrl,
+    xDefault.lang,
+    `shorts/${xDefault.slug}`,
+  );
+
+  return languages;
+};
+
+/** Maps one short group to its per-locale sitemap entries. */
+const shortsGroupToSitemapEntries = (
+  group: ShortListItem[],
+): MetadataRoute.Sitemap => {
+  const languages = buildShortGroupLanguages(group);
+
+  return group.map((item) => ({
+    url: absoluteUrl(config.publicUrl, item.lang, `shorts/${item.slug}`),
+    lastModified: new Date(item.published_at),
+    changeFrequency: 'monthly',
+    alternates: { languages },
+  }));
+};
+
+/**
+ * Groups localized shorts by their canonical `short_group` so each logical
+ * clip is emitted once per locale with a complete alternates map.
+ */
+const mapShortsToSitemapEntries = (
+  items: ShortListItem[],
+): MetadataRoute.Sitemap => {
+  const groups = new Map<string, ShortListItem[]>();
+
+  for (const item of items) {
+    if (!(i18nConfig.locales as readonly string[]).includes(item.lang)) {
+      continue;
+    }
+    const group = groups.get(item.short_group) ?? [];
+    group.push(item);
+    groups.set(item.short_group, group);
+  }
+
+  return [...groups.values()].flatMap(shortsGroupToSitemapEntries);
+};
+
 async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const di = getDependencyContainer();
   const service = getArticleService(di);
@@ -129,6 +190,10 @@ async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const authors = authorsList.map((author) =>
     authorPageMeta(`authors/${author.slug}`),
   );
+
+  const shortService = getShortService(di);
+  const shortsList = await shortService.listAll();
+  const shorts = mapShortsToSitemapEntries(shortsList);
 
   const commonPages = [
     '',
@@ -150,7 +215,7 @@ async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
   const commonPagesEntries = commonPages.map((path) => commonPageMeta(path));
 
-  return [...commonPagesEntries, ...articles, ...authors];
+  return [...commonPagesEntries, ...articles, ...authors, ...shorts];
 }
 
 export default sitemap;

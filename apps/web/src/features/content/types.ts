@@ -6,10 +6,14 @@ import type {
   GetArticleListQueryParams,
   GetArticleListResponse,
   GetAuthorListQueryParams,
+  GetShortListQueryParams,
+  GetShortListResponse,
   LanguageCode,
   NewsletterStep,
   PoolType,
   PrizeWheelSegment,
+  Short,
+  ShortListItem,
   SpamSample,
   SurveyQuestion,
 } from '@maw/content-sdk';
@@ -30,10 +34,19 @@ export interface AuthorService {
   ): Promise<AuthorListItem[]>;
 }
 
+export interface ShortService {
+  getBySlug(slug: string, lang?: LanguageCode): Promise<Short | undefined>;
+  list(params?: GetShortListQueryParams): Promise<GetShortListResponse>;
+  listAll(
+    params?: Omit<GetShortListQueryParams, 'limit' | 'offset'>,
+  ): Promise<ShortListItem[]>;
+}
+
 export const DI = {
   ArticleService: Symbol.for('ArticleService'),
   AuthorService: Symbol.for('AuthorService'),
   ContentApiClient: Symbol.for('ContentApiClient'),
+  ShortService: Symbol.for('ShortService'),
 };
 
 export type ContentI18nShape = typeof contentEnLocale;

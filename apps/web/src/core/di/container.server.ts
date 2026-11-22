@@ -1,7 +1,11 @@
 import type { Container } from 'inversify';
 import { CommentService } from '@/features/comments/services';
 import { DI as DIComments } from '@/features/comments/types';
-import { ArticleService, AuthorService } from '@/features/content/services';
+import {
+  ArticleService,
+  AuthorService,
+  ShortService,
+} from '@/features/content/services';
 import { DI as DIContent } from '@/features/content/types';
 import { OnlySpamsService } from '@/features/marketing/services';
 import { DI as DIMarketing } from '@/features/marketing/types';
@@ -22,6 +26,7 @@ export function configureServerContainer(container: Container) {
     .to(ArticleService)
     .inSingletonScope();
   container.bind(DIContent.AuthorService).to(AuthorService).inSingletonScope();
+  container.bind(DIContent.ShortService).to(ShortService).inSingletonScope();
   container
     .bind(DIMarketing.OnlySpamsService)
     .to(OnlySpamsService)

@@ -74,6 +74,7 @@ export const TELEMETRY_SECTIONS = [
   'content:hot-things',
   'content:paywall',
   'content:search',
+  'content:shorts:player',
   'content:virgin',
   'disruptions:sticky-video',
   'error:fallback',

@@ -11,5 +11,6 @@ export * from './LoadingMessages';
 export * from './PartitionalLockedContent';
 export * from './SearchForm';
 export * from './SearchPage';
+export * from './Shorts';
 export * from './SmallCoverListItem';
 export * from './TextListItem';

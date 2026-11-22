@@ -2,3 +2,9 @@
 
 @source "../../src";
 @source "../../node_modules/@maw/ui-lib/src";
+
+/* The full-screen short player owns the viewport; global toasts would cover
+   its persistent controls. The player restores the attribute on unmount. */
+body[data-shorts-player="true"] [data-sonner-toaster] {
+  display: none;
+}

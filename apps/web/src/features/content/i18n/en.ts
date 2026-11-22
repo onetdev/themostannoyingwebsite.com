@@ -48,6 +48,23 @@ export default {
   loading: {
     fallback: 'Loading…',
   },
+  shorts: {
+    playerLabel: 'Short video player',
+    play: 'Play',
+    pause: 'Pause',
+    seek: 'Seek',
+    mute: 'Mute',
+    unmute: 'Unmute',
+    tapToUnmute: 'Tap to hear sound',
+    captionsOn: 'Turn on captions',
+    captionsOff: 'Turn off captions',
+    enterFullscreen: 'Enter fullscreen',
+    exitFullscreen: 'Exit fullscreen',
+    closePlayer: 'Close player',
+    aiAssisted: 'AI-assisted',
+    playbackFailed: 'Video playback failed',
+    viewAuthor: 'View {name} profile',
+  },
   hotThings: {
     playVideo: 'Play video',
     videoPlaybackFailed: 'Video playback failed',
