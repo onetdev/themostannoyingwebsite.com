@@ -81,8 +81,6 @@ export function ShortsPlayer({ shorts, initialIndex }: ShortsPlayerProps) {
     return null;
   }
 
-  const isLiked = likedShortIds.has(player.activeShort.id);
-
   return (
     <div
       ref={player.playerRef}
@@ -107,7 +105,7 @@ export function ShortsPlayer({ shorts, initialIndex }: ShortsPlayerProps) {
       >
         <CarouselContent viewportClassName="h-full" className="h-full">
           {shorts.map((short, index) => (
-            <CarouselItem key={short.id} className="h-full">
+            <CarouselItem key={short.id} className="relative h-full">
               <ShortPlayerSlide
                 short={short}
                 index={index}
@@ -118,30 +116,31 @@ export function ShortsPlayer({ shorts, initialIndex }: ShortsPlayerProps) {
                 onTap={player.togglePlay}
                 onLike={() => likeShort(short.id)}
               />
+              {index === player.activeIndex && (
+                <ShortPlayerOverlay
+                  short={short}
+                  video={player.activeVideo}
+                  muted={player.muted}
+                  showCaptions={player.showCaptions}
+                  liked={likedShortIds.has(short.id)}
+                  isPlaying={player.isPlaying}
+                  isFullscreen={player.isFullscreen}
+                  autoplayBlocked={player.autoplayBlocked}
+                  showPlayPause={player.showPlayPause}
+                  hasAudio={short.has_audio}
+                  hasCaptions={(short.cues?.length ?? 0) > 0}
+                  onTogglePlay={player.togglePlay}
+                  onToggleMute={player.toggleMute}
+                  onToggleCaptions={player.toggleCaptions}
+                  onToggleFullscreen={player.toggleFullscreen}
+                  onToggleLike={() => toggleLike(short.id)}
+                  onClose={player.close}
+                />
+              )}
             </CarouselItem>
           ))}
         </CarouselContent>
       </Carousel>
-
-      <ShortPlayerOverlay
-        short={player.activeShort}
-        video={player.activeVideo}
-        muted={player.muted}
-        showCaptions={player.showCaptions}
-        liked={isLiked}
-        isPlaying={player.isPlaying}
-        isFullscreen={player.isFullscreen}
-        autoplayBlocked={player.autoplayBlocked}
-        showPlayPause={player.showPlayPause}
-        hasAudio={player.hasAudio}
-        hasCaptions={player.hasCaptions}
-        onTogglePlay={player.togglePlay}
-        onToggleMute={player.toggleMute}
-        onToggleCaptions={player.toggleCaptions}
-        onToggleFullscreen={player.toggleFullscreen}
-        onToggleLike={() => toggleLike(player.activeShort.id)}
-        onClose={player.close}
-      />
     </div>
   );
 }

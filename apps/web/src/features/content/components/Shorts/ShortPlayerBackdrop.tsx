@@ -42,14 +42,13 @@ export interface ShortPlayerBackdropProps {
 /**
  * Fixed, blurred backdrop behind the vertical feed.
  *
- * Keeping one backdrop outside the carousel means the background does not slide
- * with the clip, and switching clips crossfades instead of hard-cutting at the
- * slide boundary. The horizontal mask softens the outer edges.
+ * The backdrop lives outside the carousel, so it never slides with a clip. On a
+ * clip change the previous layer stays in place while the next layer fades in,
+ * producing a crossfade instead of a hard switch.
  */
 export function ShortPlayerBackdrop({ short }: ShortPlayerBackdropProps) {
   const [previous, setPrevious] = useState<ShortListItem>();
   const [current, setCurrent] = useState(short);
-  const [visible, setVisible] = useState(true);
   const currentRef = useRef(short);
 
   useEffect(() => {
@@ -60,10 +59,6 @@ export function ShortPlayerBackdrop({ short }: ShortPlayerBackdropProps) {
     setPrevious(currentRef.current);
     setCurrent(short);
     currentRef.current = short;
-    setVisible(false);
-
-    const frame = requestAnimationFrame(() => setVisible(true));
-    return () => cancelAnimationFrame(frame);
   }, [short]);
 
   return (
@@ -72,14 +67,13 @@ export function ShortPlayerBackdrop({ short }: ShortPlayerBackdropProps) {
       aria-hidden="true"
     >
       {previous && <BackdropLayer short={previous} className="opacity-40" />}
-      <BackdropLayer
+      <div
         key={current.id}
-        short={current}
-        className={cn(
-          'transition-opacity duration-500',
-          visible ? 'opacity-40' : 'opacity-0',
-        )}
-      />
+        className="absolute inset-0 animate-in fade-in duration-700"
+        data-testid="short-backdrop-current"
+      >
+        <BackdropLayer short={current} className="opacity-40" />
+      </div>
       <div className="absolute inset-0 bg-black/20" />
     </div>
   );
