@@ -66,6 +66,7 @@ export function ShortPlayerOverlay({
       <div
         className={cn(SHORT_PLAYER_FRAME_CLASS, 'pointer-events-none')}
         style={frameStyle}
+        data-testid="short-player-overlay-frame"
       >
         <div
           className="pointer-events-auto absolute inset-x-0 top-0 z-30 flex items-start justify-between p-3 pt-[max(0.75rem,env(safe-area-inset-top))]"

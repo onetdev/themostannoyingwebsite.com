@@ -8,7 +8,7 @@ import { useTranslations } from 'next-intl';
 import { type PointerEvent, useCallback, useRef, useState } from 'react';
 
 import { selectShortMedia } from './short-media';
-import { SHORT_PLAYER_FRAME_CLASS } from './short-player-frame';
+import { SHORT_PLAYER_SURFACE_CLASS } from './short-player-frame';
 
 export interface ShortPlayerSlideProps {
   short: ShortListItem;
@@ -100,7 +100,7 @@ export function ShortPlayerSlide({
       data-track-index={index}
       data-track-key={short.id}
     >
-      <div className={SHORT_PLAYER_FRAME_CLASS} style={frameStyle}>
+      <div className={SHORT_PLAYER_SURFACE_CLASS} style={frameStyle}>
         {poster && (
           <Image
             className="object-cover"

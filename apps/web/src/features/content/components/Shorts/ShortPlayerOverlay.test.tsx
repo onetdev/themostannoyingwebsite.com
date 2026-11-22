@@ -101,6 +101,14 @@ describe('ShortPlayerOverlay', () => {
     expect(screen.getByText('Humor')).toBeVisible();
   });
 
+  it('keeps the overlay frame transparent so the active clip stays visible', () => {
+    renderOverlay();
+
+    expect(screen.getByTestId('short-player-overlay-frame')).not.toHaveClass(
+      'bg-black',
+    );
+  });
+
   it('keeps the persistent controls mounted and wires their handlers', () => {
     const handlers = renderOverlay();
 
