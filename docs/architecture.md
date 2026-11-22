@@ -138,6 +138,7 @@ Strongly typed client SDK used to retrieve:
 - static pages
 - taxonomy tags
 - responsive image variants
+- short-form clips with media, cues, and subtitle tracks
 
 Content is hosted externally by the headless Content API.
 

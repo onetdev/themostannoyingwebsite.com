@@ -12,6 +12,7 @@ export const CONTENT_CACHE_TAGS = {
   images: 'content:images',
   locales: 'content:locales',
   translations: 'content:translations',
+  shorts: 'content:shorts',
   pools: 'content:pools',
   survey: 'content:survey',
   prizeWheel: 'content:prize-wheel',

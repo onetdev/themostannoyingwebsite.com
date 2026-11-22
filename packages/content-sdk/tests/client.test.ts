@@ -41,6 +41,7 @@ describe('ContentApiClient', () => {
     expect(client.images).toBeDefined();
     expect(client.health).toBeDefined();
     expect(client.search).toBeDefined();
+    expect(client.shorts).toBeDefined();
     expect(client.locales).toBeDefined();
     expect(client.translations).toBeDefined();
     expect(client.pools).toBeDefined();
@@ -82,6 +83,7 @@ describe('ContentApiClient', () => {
                   published_at: '2026-09-01T00:00:00.000Z',
                   reading_time_minutes: 3,
                   is_featured: true,
+                  ai_assisted: true,
                   created_at: '2026-09-01T00:00:00.000Z',
                   updated_at: '2026-09-01T00:00:00.000Z',
                   featured_image: {
@@ -163,6 +165,7 @@ describe('ContentApiClient', () => {
               published_at: '2026-09-01T00:00:00.000Z',
               reading_time_minutes: 2,
               is_featured: false,
+              ai_assisted: true,
               created_at: '2026-09-01T00:00:00.000Z',
               updated_at: '2026-09-01T00:00:00.000Z',
               featured_image: {
@@ -615,6 +618,7 @@ describe('ContentApiClient', () => {
                   published_at: '2026-09-01T00:00:00.000Z',
                   reading_time_minutes: 1,
                   is_featured: false,
+                  ai_assisted: true,
                   created_at: '2026-09-01T00:00:00.000Z',
                   updated_at: '2026-09-01T00:00:00.000Z',
                   featured_image: {
@@ -649,6 +653,7 @@ describe('ContentApiClient', () => {
                   published_at: '2026-09-01T00:00:00.000Z',
                   reading_time_minutes: 1,
                   is_featured: false,
+                  ai_assisted: true,
                   created_at: '2026-09-01T00:00:00.000Z',
                   updated_at: '2026-09-01T00:00:00.000Z',
                   featured_image: {
@@ -694,6 +699,7 @@ describe('ContentApiClient', () => {
                 published_at: '2026-09-01T00:00:00.000Z',
                 reading_time_minutes: 1,
                 is_featured: false,
+                ai_assisted: true,
                 created_at: '2026-09-01T00:00:00.000Z',
                 updated_at: '2026-09-01T00:00:00.000Z',
                 featured_image: {
@@ -798,6 +804,149 @@ describe('ContentApiClient', () => {
       expect(result.items).toHaveLength(1);
       expect(result.items[0].type).toBe('article');
       expect(result.items[0].title).toBe('Sample **Article**');
+    });
+  });
+
+  describe('shorts resource', () => {
+    it('calls GET api/v1/shorts with query parameters', async () => {
+      let capturedUrl = '';
+      const mockFetch = jest
+        .fn<typeof fetch>()
+        .mockImplementation(async (req) => {
+          capturedUrl = getUrlString(req);
+          return new Response(
+            JSON.stringify({
+              total: 1,
+              limit: 10,
+              offset: 0,
+              items: [
+                {
+                  id: '00000000-0000-0000-0000-000000000001',
+                  short_group: '001-caveman-dirtbike-vhs',
+                  slug: 'caveman-dirtbike-vhs',
+                  lang: 'en',
+                  title: '1995 Called',
+                  summary: 'Prehistoric man, modern dirt bike.',
+                  author: {
+                    id: '00000000-0000-0000-0000-0000000000a1',
+                    slug: 'silver-haired-nostalgist',
+                    name: 'Tomás Ferreira',
+                    persona: 'The Silver-Haired Nostalgist',
+                  },
+                  published_at: '2026-11-21',
+                  duration_ms: 8042,
+                  width: 720,
+                  height: 1280,
+                  has_audio: true,
+                  is_featured: true,
+                  ai_assisted: true,
+                  categories: [{ id: 'humor', label: 'Humor' }],
+                  cues: [
+                    {
+                      shot_id: 'shot-1',
+                      start_ms: 0,
+                      end_ms: 2200,
+                      text: 'Cue text',
+                    },
+                  ],
+                  media: [
+                    {
+                      kind: 'video',
+                      variant: '720p',
+                      format: 'mp4',
+                      width: 720,
+                      height: 1280,
+                      duration_ms: 8042,
+                      file_size_bytes: 3092995,
+                      default: true,
+                      url: 'https://media.example.com/720p.mp4',
+                    },
+                  ],
+                  subtitle_url: 'https://media.example.com/en.vtt',
+                  created_at: '2026-11-21T00:00:00.000Z',
+                  updated_at: '2026-11-21T00:00:00.000Z',
+                },
+              ],
+            }),
+            { status: 200, headers: { 'Content-Type': 'application/json' } },
+          );
+        });
+
+      const client = createContentClient({ fetch: mockFetch });
+      const result = await client.shorts.list({
+        lang: 'en',
+        limit: 10,
+        category: 'humor',
+        is_featured: true,
+        order: 'asc',
+      });
+
+      expect(capturedUrl).toContain('/api/v1/shorts?');
+      expect(capturedUrl).toContain('lang=en');
+      expect(capturedUrl).toContain('limit=10');
+      expect(capturedUrl).toContain('category=humor');
+      expect(capturedUrl).toContain('is_featured=true');
+      expect(capturedUrl).toContain('order=asc');
+      expect(result.items).toHaveLength(1);
+      expect(result.items[0].cues).toHaveLength(1);
+      expect(result.items[0].media[0].variant).toBe('720p');
+      expect(result.items[0].ai_assisted).toBe(true);
+    });
+
+    it('calls GET api/v1/shorts/{slug} with an encoded slug', async () => {
+      let capturedUrl = '';
+      const mockFetch = jest
+        .fn<typeof fetch>()
+        .mockImplementation(async (req) => {
+          capturedUrl = getUrlString(req);
+          return new Response(
+            JSON.stringify({
+              id: '00000000-0000-0000-0000-000000000001',
+              short_group: '001-caveman-dirtbike-vhs',
+              slug: 'caveman dirtbike/vhs',
+              lang: 'en',
+              title: '1995 Called',
+              summary: 'Prehistoric man, modern dirt bike.',
+              author: {
+                id: '00000000-0000-0000-0000-0000000000a1',
+                slug: 'silver-haired-nostalgist',
+                name: 'Tomás Ferreira',
+                persona: 'The Silver-Haired Nostalgist',
+              },
+              published_at: '2026-11-21',
+              duration_ms: 8042,
+              width: 720,
+              height: 1280,
+              has_audio: true,
+              is_featured: false,
+              ai_assisted: true,
+              categories: [],
+              cues: [],
+              media: [],
+              subtitle_url: 'https://media.example.com/en.vtt',
+              created_at: '2026-11-21T00:00:00.000Z',
+              updated_at: '2026-11-21T00:00:00.000Z',
+              translations: [
+                {
+                  lang: 'de',
+                  slug: 'caveman-dirtbike-vhs',
+                  title: '1995 hat angerufen',
+                },
+              ],
+            }),
+            { status: 200, headers: { 'Content-Type': 'application/json' } },
+          );
+        });
+
+      const client = createContentClient({ fetch: mockFetch });
+      const short = await client.shorts.getBySlug('caveman dirtbike/vhs', {
+        lang: 'en',
+      });
+
+      expect(capturedUrl).toContain('/api/v1/shorts/caveman%20dirtbike%2Fvhs');
+      expect(capturedUrl).toContain('lang=en');
+      expect(short.translations).toHaveLength(1);
+      expect(short.translations[0].lang).toBe('de');
     });
   });
 
