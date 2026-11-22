@@ -1,4 +1,5 @@
 export * from './ShortPlayerActionRail';
+export * from './ShortPlayerCaptions';
 export * from './ShortPlayerInfo';
 export * from './ShortPlayerOverlay';
 export * from './ShortPlayerProgress';
@@ -7,3 +8,4 @@ export * from './ShortsPlayer';
 export * from './short-duration';
 export * from './short-media';
 export * from './short-player-frame';
+export * from './use-short-feed-wheel';

@@ -124,16 +124,7 @@ export function ShortPlayerSlide({
             preload={isActive ? 'auto' : 'metadata'}
             onError={() => setHasError(true)}
             onLoadedData={() => setHasError(false)}
-          >
-            {short.subtitle_url && (
-              <track
-                kind="captions"
-                src={short.subtitle_url}
-                srcLang={short.lang}
-                label={short.lang}
-              />
-            )}
-          </video>
+          />
         )}
         {hasError && (
           <div className="absolute inset-0 flex flex-col items-center justify-center gap-2 bg-black/70 p-6 text-center text-white">

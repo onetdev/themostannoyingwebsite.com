@@ -6,6 +6,7 @@ import { cn } from 'cn';
 import { useTranslations } from 'next-intl';
 
 import { ShortPlayerActionRail } from './ShortPlayerActionRail';
+import { ShortPlayerCaptions } from './ShortPlayerCaptions';
 import { ShortPlayerInfo } from './ShortPlayerInfo';
 import { SHORT_PLAYER_FRAME_CLASS } from './short-player-frame';
 
@@ -120,6 +121,12 @@ export function ShortPlayerOverlay({
           isFullscreen={isFullscreen}
           onToggleCaptions={onToggleCaptions}
           onToggleFullscreen={onToggleFullscreen}
+        />
+
+        <ShortPlayerCaptions
+          cues={short.cues}
+          video={video}
+          visible={showCaptions}
         />
 
         <button

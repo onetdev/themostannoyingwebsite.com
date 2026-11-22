@@ -54,7 +54,8 @@ const short = {
   ai_assisted: true,
   categories: [{ id: 'humor', label: 'Humor' }],
   subtitle_url: 'https://media.example.com/en.vtt',
-} as ShortListItem;
+  cues: [],
+} as unknown as ShortListItem;
 
 function renderOverlay(
   overrides: Partial<Parameters<typeof ShortPlayerOverlay>[0]> = {},

@@ -7,6 +7,7 @@ import { useEffect } from 'react';
 
 import { ShortPlayerOverlay } from './ShortPlayerOverlay';
 import { ShortPlayerSlide } from './ShortPlayerSlide';
+import { useShortFeedWheel } from './use-short-feed-wheel';
 import { useShortPlayer } from './use-short-player';
 
 export interface ShortsPlayerProps {
@@ -26,6 +27,10 @@ const isPlayerControl = (target: EventTarget | null) =>
 export function ShortsPlayer({ shorts, initialIndex }: ShortsPlayerProps) {
   const t = useTranslations('content.shorts');
   const player = useShortPlayer({ shorts, initialIndex });
+  const onWheel = useShortFeedWheel({
+    onNext: player.next,
+    onPrevious: player.previous,
+  });
   const startIndex = Math.min(
     Math.max(initialIndex, 0),
     Math.max(shorts.length - 1, 0),
@@ -51,6 +56,7 @@ export function ShortsPlayer({ shorts, initialIndex }: ShortsPlayerProps) {
       ref={player.playerRef}
       className="relative h-dvh w-full overflow-hidden overscroll-none bg-black"
       data-testid="shorts-player"
+      onWheel={onWheel}
     >
       <Carousel
         orientation="vertical"

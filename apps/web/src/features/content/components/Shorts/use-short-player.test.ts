@@ -42,6 +42,7 @@ const makeShort = (id: string, slug: string, title: string, hasAudio = true) =>
     title,
     has_audio: hasAudio,
     subtitle_url: 'https://media.example.com/en.vtt',
+    cues: [{ shot_id: 'shot-1', start_ms: 0, end_ms: 4000, text: 'cue' }],
   }) as ShortListItem;
 
 const shorts = [
@@ -99,6 +100,14 @@ describe('useShortPlayer', () => {
     await waitFor(() => expect(video.play).toHaveBeenCalledTimes(1));
     expect(video.muted).toBe(false);
     expect(result.current.autoplayBlocked).toBe(false);
+  });
+
+  it('enables captions by default', () => {
+    const { result } = renderHook(() =>
+      useShortPlayer({ shorts, initialIndex: 0 }),
+    );
+
+    expect(result.current.showCaptions).toBe(true);
   });
 
   it('falls back to muted autoplay and exposes the unmute prompt when blocked', async () => {
@@ -167,7 +176,7 @@ describe('useShortPlayer', () => {
     expect(result.current.muted).toBe(true);
 
     act(() => result.current.toggleCaptions());
-    expect(result.current.showCaptions).toBe(true);
+    expect(result.current.showCaptions).toBe(false);
   });
 
   it('navigates the feed with arrow keys through the carousel api', () => {

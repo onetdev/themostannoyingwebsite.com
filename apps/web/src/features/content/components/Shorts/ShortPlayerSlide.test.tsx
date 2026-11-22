@@ -102,10 +102,6 @@ describe('ShortPlayerSlide', () => {
     expect(video).toHaveAttribute('loop');
     expect(video).toHaveAttribute('playsinline');
     expect(video).not.toHaveAttribute('muted');
-    expect(video?.querySelector('track')).toHaveAttribute(
-      'src',
-      'https://media.example.com/en.vtt',
-    );
     expect(onVideoRef).toHaveBeenCalledWith(0, video);
   });
 

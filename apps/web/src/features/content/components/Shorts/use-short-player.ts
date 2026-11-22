@@ -67,7 +67,7 @@ export function useShortPlayer({
   const [activeIndex, setActiveIndex] = useState(clampedInitialIndex);
   const [activeVideo, setActiveVideo] = useState<HTMLVideoElement | null>(null);
   const [muted, setMuted] = useState(!enableSound);
-  const [showCaptions, setShowCaptions] = useState(false);
+  const [showCaptions, setShowCaptions] = useState(true);
   const [isPlaying, setIsPlaying] = useState(false);
   const [isFullscreen, setIsFullscreen] = useState(false);
   const [autoplayBlocked, setAutoplayBlocked] = useState(false);
@@ -80,7 +80,7 @@ export function useShortPlayer({
 
   const activeShort = shorts[activeIndex] ?? shorts[0];
   const hasAudio = activeShort?.has_audio ?? false;
-  const hasCaptions = Boolean(activeShort?.subtitle_url);
+  const hasCaptions = (activeShort?.cues.length ?? 0) > 0;
 
   const flashPlayPause = useCallback(() => {
     setShowPlayPause(true);
@@ -201,27 +201,6 @@ export function useShortPlayer({
       activeVideo.muted = muted;
     }
   }, [activeVideo, muted]);
-
-  useEffect(() => {
-    if (!activeVideo) {
-      return;
-    }
-
-    const video = activeVideo;
-    const applyCaptionMode = () => {
-      const track = video.textTracks[0];
-      if (track) {
-        track.mode = showCaptions ? 'showing' : 'hidden';
-      }
-    };
-
-    applyCaptionMode();
-    video.addEventListener('loadedmetadata', applyCaptionMode);
-
-    return () => {
-      video.removeEventListener('loadedmetadata', applyCaptionMode);
-    };
-  }, [activeVideo, showCaptions]);
 
   useEffect(() => {
     const onChange = () => {
@@ -399,5 +378,7 @@ export function useShortPlayer({
     toggleCaptions,
     toggleFullscreen,
     close,
+    next,
+    previous,
   };
 }
