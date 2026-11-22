@@ -12,6 +12,7 @@ import { PagesResource } from './resources/pages';
 import { PoolsResource } from './resources/pools';
 import { PrizeWheelResource } from './resources/prize-wheel';
 import { SearchResource } from './resources/search';
+import { ShortsResource } from './resources/shorts';
 import { SpamSampleResource } from './resources/spam-sample';
 import { SurveyResource } from './resources/survey';
 import { TranslationsResource } from './resources/translations';
@@ -32,6 +33,7 @@ export class ContentApiClient {
   readonly authors: AuthorsResource;
   readonly pages: PagesResource;
   readonly search: SearchResource;
+  readonly shorts: ShortsResource;
   readonly categories: CategoriesResource;
   readonly images: ImagesResource;
   readonly health: HealthResource;
@@ -58,6 +60,7 @@ export class ContentApiClient {
     this.authors = new AuthorsResource(this.transport);
     this.pages = new PagesResource(this.transport);
     this.search = new SearchResource(this.transport);
+    this.shorts = new ShortsResource(this.transport);
     this.categories = new CategoriesResource(this.transport);
     this.images = new ImagesResource(this.transport);
     this.health = new HealthResource(this.transport);
