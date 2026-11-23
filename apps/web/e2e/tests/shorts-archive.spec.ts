@@ -1,28 +1,8 @@
-import type { APIRequestContext } from '@playwright/test';
 import { expect, test } from '@playwright/test';
 
 import { SHORTS_ENTRY_STORAGE_KEY } from '@/features/content/shorts-entry';
+import { fetchFirstShort } from '../utils/content-api';
 import { setupE2eTestState } from '../utils/setup';
-
-const contentApiBaseUrl =
-  process.env.NEXT_PUBLIC_CONTENT_API_URL ??
-  'https://content.themostannoyingwebsite.com';
-
-async function fetchFirstShort(request: APIRequestContext) {
-  const response = await request.get(
-    `${contentApiBaseUrl}/api/v1/shorts?lang=en&limit=1`,
-  );
-
-  if (!response.ok()) {
-    return undefined;
-  }
-
-  const data = (await response.json()) as {
-    items: Array<{ slug: string }>;
-  };
-
-  return data.items[0];
-}
 
 test('shorts archive lists clips and opens the player', async ({
   page,
