@@ -4,6 +4,7 @@ import type { ShortListItem } from '@maw/content-sdk';
 import type { CarouselApi } from '@maw/ui-lib';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { useRouter } from '@/core/i18n/navigation';
+import { takeShortsEntry } from '@/features/content/shorts-entry';
 import { useRuntimeStore, useUserPreferencesStore } from '@/stores';
 import { useShortUrlSync } from './use-short-url-sync';
 
@@ -280,7 +281,13 @@ export function useShortPlayer({
   }, [activeVideo]);
 
   const close = useCallback(() => {
-    // The short has no listing route yet; closing returns to the site home.
+    const entryPath = takeShortsEntry();
+
+    if (entryPath) {
+      router.push(entryPath);
+      return;
+    }
+
     router.push('/');
   }, [router]);
 

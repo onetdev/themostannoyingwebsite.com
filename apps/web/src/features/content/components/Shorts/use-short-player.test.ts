@@ -4,7 +4,7 @@
 import type { ShortListItem } from '@maw/content-sdk';
 import type { CarouselApi } from '@maw/ui-lib';
 import { act, renderHook, waitFor } from '@testing-library/react';
-
+import { SHORTS_ENTRY_STORAGE_KEY } from '@/features/content/shorts-entry';
 import { useShortPlayer } from './use-short-player';
 
 let mockEnableSound = true;
@@ -94,6 +94,7 @@ describe('useShortPlayer', () => {
     mockDocumentEverVisible = true;
     mockRouter.back.mockClear();
     mockRouter.push.mockClear();
+    window.sessionStorage.clear();
   });
 
   afterEach(() => {
@@ -210,6 +211,18 @@ describe('useShortPlayer', () => {
     act(() => result.current.close());
 
     expect(mockRouter.push).toHaveBeenCalledWith('/');
+  });
+
+  it('returns to the page the player was opened from', () => {
+    window.sessionStorage.setItem(SHORTS_ENTRY_STORAGE_KEY, '/shorts/');
+    const { result } = renderHook(() =>
+      useShortPlayer({ shorts, initialIndex: 0 }),
+    );
+
+    act(() => result.current.close());
+
+    expect(mockRouter.push).toHaveBeenCalledWith('/shorts/');
+    expect(window.sessionStorage.getItem(SHORTS_ENTRY_STORAGE_KEY)).toBeNull();
   });
 
   it('toggles playback, mute and captions from the active clip', async () => {

@@ -1,3 +1,5 @@
+export * from './ShortCard';
+export * from './ShortGrid';
 export * from './ShortPlayerActionButton';
 export * from './ShortPlayerActionRail';
 export * from './ShortPlayerBackdrop';
@@ -7,6 +9,7 @@ export * from './ShortPlayerInfo';
 export * from './ShortPlayerOverlay';
 export * from './ShortPlayerProgress';
 export * from './ShortPlayerSlide';
+export * from './ShortsPage';
 export * from './ShortsPlayer';
 export * from './short-duration';
 export * from './short-media';

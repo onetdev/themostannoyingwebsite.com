@@ -177,6 +177,7 @@ async function sitemap(): Promise<MetadataRoute.Sitemap> {
     'plans',
     'privacy-policy',
     'settings',
+    'shorts',
     'terms-of-use',
     'virgin',
   ];
