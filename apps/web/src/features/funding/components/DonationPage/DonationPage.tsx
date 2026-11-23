@@ -12,8 +12,6 @@ import { DonationHero } from './DonationHero';
 import { ImpactStats } from './ImpactStats';
 import { SupportOptions } from './SupportOptions';
 
-export { generateStaticParams } from '@/core/i18n/routing';
-
 export async function DonationPage() {
   const { funding } = getAppConfigService().getAll();
   const locale = (await getLocale()) as LanguageCode;

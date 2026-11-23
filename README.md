@@ -37,13 +37,15 @@ Despite the chaos:
 
 - No personal data is collected or stored.
 - Accessibility is still taken seriously.
-- The site is designed to run as a **static build** whenever possible.
+- The site uses build-time generation for localized home pages, featured
+  articles and build artifacts; other content and secondary pages render on
+  demand and are cached.
 
 ## Features
 
 - Collection of UX anti-patterns
 - Hidden easter eggs across the site
-- Static-first architecture
+- Static-first home and featured pages with on-demand content rendering
 - No user tracking or personal data storage
 - Accessible despite intentionally frustrating UX
 

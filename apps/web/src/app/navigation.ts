@@ -131,6 +131,11 @@ export const FOOTER_NAVIGATION_LINKS: NavItem[] = [
   },
   { id: 'dilf', labelKey: 'common.navigation.dilf', hrefFor: 'dilf' },
   {
+    id: 'games.egg-tower',
+    labelKey: 'common.navigation.eggTower',
+    hrefFor: 'games.egg-tower',
+  },
+  {
     id: 'hot-things',
     labelKey: 'common.navigation.hotThings',
     hrefFor: 'hot-things',

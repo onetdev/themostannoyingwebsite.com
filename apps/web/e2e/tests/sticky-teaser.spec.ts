@@ -17,6 +17,9 @@ test('sticky teaser links to the Egg Tower page', async ({ page }) => {
 
   const teaser = page.getByTestId('sticky-short');
   await expect(teaser).toBeVisible();
+  await expect(
+    page.getByRole('contentinfo').getByRole('link', { name: 'Egg Tower' }),
+  ).toBeVisible();
 
   const video = teaser.locator('video');
   await expect(video).toHaveAttribute(

@@ -96,9 +96,9 @@ for (const locale of locales) {
 }
 
 // After: the enclosing iteration is a named, testable builder.
-const buildAuthorStaticParams = (locales, authors) =>
+const buildLocalizedEntries = (locales, items) =>
   locales.flatMap((locale) =>
-    authors.map((author) => ({ slug: author.slug, locale })),
+    items.map((item) => ({ slug: item.slug, locale })),
   );
 ```
 
