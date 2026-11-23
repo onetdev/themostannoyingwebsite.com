@@ -5,10 +5,8 @@ import {
   AlertDescription,
   Button,
   PageHeadline,
-  Tabs,
-  TabsContent,
-  TabsList,
-  TabsTrigger,
+  ToggleGroup,
+  ToggleGroupItem,
 } from '@maw/ui-lib';
 import { useTranslations } from 'next-intl';
 import {
@@ -145,41 +143,38 @@ export function SearchPage() {
         {tNavigation('search')}
       </PageHeadline>
       <SearchForm size="lg" className="w-full" initialValue={search.query} />
-      <Tabs
-        value={type}
-        onValueChange={(value) => {
-          if (typeof value === 'string' && isSearchFilter(value)) {
-            setType(value);
+      <ToggleGroup
+        value={[type]}
+        onValueChange={(values) => {
+          const next = values[0];
+
+          if (isSearchFilter(next)) {
+            setType(next);
           }
         }}
-        className="mt-6"
+        variant="outline"
+        size="sm"
+        aria-label={t('filters.label')}
+        className="mt-6 flex-wrap"
       >
-        <TabsList
-          variant="line"
-          aria-label={t('filters.label')}
-          className="no-scrollbar flex h-auto w-full justify-start overflow-x-auto rounded-none border-b bg-transparent p-0 whitespace-nowrap"
-        >
-          {SEARCH_FILTERS.map((filter) => (
-            <TabsTrigger
-              key={filter}
-              value={filter}
-              className="px-4 py-2"
-              data-track="search:filter"
-              data-track-key={filter}
-            >
-              {filterLabels[filter]}
-            </TabsTrigger>
-          ))}
-        </TabsList>
         {SEARCH_FILTERS.map((filter) => (
-          <TabsContent key={filter} value={filter} className="mt-6">
-            <SearchResults
-              search={search}
-              searchDelayEnabled={searchDelayEnabled}
-            />
-          </TabsContent>
+          <ToggleGroupItem
+            key={filter}
+            value={filter}
+            className="rounded-full px-3"
+            data-track="search:filter"
+            data-track-key={filter}
+          >
+            {filterLabels[filter]}
+          </ToggleGroupItem>
         ))}
-      </Tabs>
+      </ToggleGroup>
+      <div className="mt-6">
+        <SearchResults
+          search={search}
+          searchDelayEnabled={searchDelayEnabled}
+        />
+      </div>
     </div>
   );
 }

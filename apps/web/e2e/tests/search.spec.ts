@@ -168,7 +168,7 @@ test('a new query resets the filter to all', async ({ page }) => {
 
   await searchPage.search('privacy');
   await expect(page).not.toHaveURL(/type=/);
-  await expect(searchPage.filterAll).toHaveAttribute('aria-selected', 'true');
+  await expect(searchPage.filterAll).toHaveAttribute('aria-pressed', 'true');
   await expect(searchPage.pageResults.first()).toBeVisible();
 });
 
