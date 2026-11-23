@@ -82,15 +82,12 @@ this order and resolve ambiguity before debugging code.
     allowlist accepts any `*.themostannoyingwebsite.com` origin (any scheme,
     any port) and rejects `localhost` / `127.0.0.1`. Run the app at
     `local.themostannoyingwebsite.com` (point it at `127.0.0.1` in
-    `/etc/hosts`) so browser-side Content API calls satisfy CORS without a
-    proxy or disabled web security.
-3.  **Know which transport the browser is using.** The same-origin dev proxy
-    at `/api/content` is active only when `NODE_ENV === 'development'`
-    (`core/content/proxy.ts`). A production build served by `next start`
-    bypasses it, so browser-side Content API calls go direct and are subject to
-    CORS. Empty feeds, searches, or comments there are an origin problem until
-    proven otherwise — check the failing request's origin before touching app
-    code.
+    `/etc/hosts`) so browser-side Content API calls satisfy CORS directly.
+3.  **Browser Content API calls are direct.** There is no dev proxy: the
+    browser calls `NEXT_PUBLIC_CONTENT_API_URL` itself. Empty feeds, searches,
+    or comments are an origin/CORS or base-URL problem until proven otherwise —
+    check the failing request's origin and the configured API URL before
+    touching app code.
 4.  **Ports are shared.** Check with
     `lsof -nP -iTCP:<port> -sTCP:LISTEN` before starting anything. Never kill a
     process you did not start; move to another port instead. Keep one origin

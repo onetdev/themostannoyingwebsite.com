@@ -1,6 +1,6 @@
 import type { APIRequestContext } from '@playwright/test';
 
-import { resolveContentApiBaseUrl } from '@/core/content/proxy';
+import { resolveContentApiBaseUrl } from '@/core/content';
 
 export interface FirstShort {
   slug: string;
