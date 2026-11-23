@@ -1,7 +1,8 @@
 'use client';
 
 import type { ShortCue } from '@maw/content-sdk';
-import { useEffect, useState } from 'react';
+
+import { useVideoTime } from './use-video-time';
 
 export interface ShortPlayerCaptionsProps {
   cues: ShortCue[];
@@ -23,41 +24,17 @@ function findActiveCue(
  *
  * The API already returns localized, shot-aligned cues, so the player renders
  * them directly instead of relying on the browser's bottom-anchored native
- * VTT captions.
+ * VTT captions (which would also require a CORS-enabled track).
  */
 export function ShortPlayerCaptions({
   cues,
   video,
   visible,
 }: ShortPlayerCaptionsProps) {
-  const [activeCue, setActiveCue] = useState<ShortCue>();
+  const currentTimeMs = useVideoTime(video);
+  const activeCue = visible ? findActiveCue(cues, currentTimeMs) : undefined;
 
-  useEffect(() => {
-    if (!visible || !video) {
-      setActiveCue(undefined);
-      return;
-    }
-
-    const sync = () => {
-      const next = findActiveCue(cues, video.currentTime * 1000);
-      setActiveCue((previous) =>
-        previous?.text === next?.text ? previous : next,
-      );
-    };
-
-    video.addEventListener('timeupdate', sync);
-    video.addEventListener('seeked', sync);
-    video.addEventListener('loadedmetadata', sync);
-    sync();
-
-    return () => {
-      video.removeEventListener('timeupdate', sync);
-      video.removeEventListener('seeked', sync);
-      video.removeEventListener('loadedmetadata', sync);
-    };
-  }, [cues, video, visible]);
-
-  if (!visible || !activeCue) {
+  if (!activeCue) {
     return null;
   }
 
