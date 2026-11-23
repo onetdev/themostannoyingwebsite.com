@@ -1,27 +1,8 @@
-import type { APIRequestContext } from '@playwright/test';
 import { expect, test } from '@playwright/test';
 
+import { getShortsPlayerPage } from '../pages/ShortsPlayerPage';
+import { fetchFirstShort } from '../utils/content-api';
 import { setupE2eTestState } from '../utils/setup';
-
-const contentApiBaseUrl =
-  process.env.NEXT_PUBLIC_CONTENT_API_URL ??
-  'https://content.themostannoyingwebsite.com';
-
-async function fetchFirstShort(request: APIRequestContext) {
-  const response = await request.get(
-    `${contentApiBaseUrl}/api/v1/shorts?lang=en&limit=1`,
-  );
-
-  if (!response.ok()) {
-    return undefined;
-  }
-
-  const data = (await response.json()) as {
-    items: Array<{ slug: string; title: string; ai_assisted: boolean }>;
-  };
-
-  return data.items[0];
-}
 
 test('shorts player plays a dedicated, full-screen vertical feed', async ({
   page,
@@ -35,16 +16,16 @@ test('shorts player plays a dedicated, full-screen vertical feed', async ({
   }
 
   await setupE2eTestState(page);
-  await page.goto(`/en/shorts/${short.slug}/`);
+  const shortsPage = getShortsPlayerPage(page);
+  await shortsPage.goto(short.slug);
 
-  await expect(page.getByTestId('short-player-page')).toBeVisible();
-  await expect(page.getByTestId('shorts-player')).toBeVisible();
-  await expect(page.getByTestId('short-player-overlay')).toBeVisible();
+  await expect(shortsPage.pageShell).toBeVisible();
+  await expect(shortsPage.player).toBeVisible();
+  await expect(shortsPage.overlay).toBeVisible();
   await expect(page.getByRole('heading', { name: short.title })).toBeVisible();
 
-  const video = page.locator('video').first();
-  await expect(video).toHaveAttribute('loop');
-  await expect(video).toHaveAttribute('playsinline');
+  await expect(shortsPage.video).toHaveAttribute('loop');
+  await expect(shortsPage.video).toHaveAttribute('playsinline');
 
   // The persistent controls stay mounted; only play/pause is transient.
   await expect(page.getByRole('button', { name: /Mute|Unmute/ })).toBeVisible();
@@ -52,10 +33,7 @@ test('shorts player plays a dedicated, full-screen vertical feed', async ({
   await expect(page.getByRole('button', { name: 'Like' })).toBeVisible();
   await expect(page.getByRole('group', { name: 'Seek' })).toBeVisible();
 
-  await page
-    .getByTestId('short-player-tap-layer')
-    .first()
-    .dblclick({ position: { x: 30, y: 300 } });
+  await shortsPage.tapLayer.dblclick({ position: { x: 30, y: 300 } });
   await expect(page.getByRole('button', { name: 'Unlike' })).toBeVisible();
 
   if (short.ai_assisted) {
