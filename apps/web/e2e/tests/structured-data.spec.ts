@@ -235,5 +235,7 @@ test('search form reflects the ?q= query parameter', async ({ page }) => {
   await setupE2eTestState(page);
   await page.goto('/en/search?q=banana');
 
-  await expect(page.getByPlaceholder('Search...')).toHaveValue('banana');
+  await expect(
+    page.getByRole('main').getByPlaceholder('Search...'),
+  ).toHaveValue('banana');
 });
