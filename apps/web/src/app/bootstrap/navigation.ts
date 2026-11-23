@@ -7,6 +7,7 @@ const routeAliasToPathMap: Record<RouteAlias, string> = {
   'author.single': '/authors/:slug',
   debug: '/debug',
   'flaim-a-phone': '/flaim-a-phone',
+  'games.egg-tower': '/games/egg-tower',
   'hot-things': '/hot-things',
   'only-spams': '/only-spams',
   'plans.cancellation': '/plans/cancellation',

@@ -31,6 +31,14 @@ export default {
       },
     },
   },
+  eggTower: {
+    title: 'Egg Tower',
+    description:
+      'Stack eggs, beat the conveyor belt, and try not to make the same steering choice.',
+    status: 'Coming soon',
+    comingSoon: 'The game is still on the conveyor belt. Check back soon.',
+    imageAlt: 'A wobbly tower of eggs on a conveyor belt.',
+  },
   suspectBar: {
     title: 'Adblocker suspected!',
     description:
