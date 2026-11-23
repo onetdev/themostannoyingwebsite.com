@@ -161,7 +161,7 @@ export function SearchPage() {
           <ToggleGroupItem
             key={filter}
             value={filter}
-            className="rounded-full px-3"
+            className="cursor-pointer rounded-full px-3 aria-pressed:bg-primary aria-pressed:text-primary-foreground"
             data-track="search:filter"
             data-track-key={filter}
           >
