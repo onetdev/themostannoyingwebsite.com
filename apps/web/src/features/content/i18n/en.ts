@@ -76,6 +76,10 @@ export default {
     aiBadge: 'AI',
     count: '{count, plural, one {# short} other {# shorts}}',
     playLabel: 'Play {title}',
+    viewAll: 'View all shorts',
+    browseAll: 'Browse all shorts',
+    scrollPrevious: 'Previous shorts',
+    scrollNext: 'Next shorts',
     pagination: {
       navigation: 'Shorts pagination',
     },

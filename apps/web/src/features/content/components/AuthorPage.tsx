@@ -10,7 +10,7 @@ import {
 } from '@maw/ui-lib';
 import { getTranslations } from 'next-intl/server';
 import { ShareButton } from '@/features/share/components';
-import { ShortCard } from './Shorts/ShortCard';
+import { ShortCarousel } from './Shorts/ShortCarousel';
 import { SmallCoverListItem } from './SmallCoverListItem';
 
 export interface AuthorPageProps {
@@ -56,13 +56,12 @@ export async function AuthorPage({
             <h2 className="mb-5">
               {t('author.shortsTitle', { name: author.name })}
             </h2>
-            <ul className="grid grid-cols-4 gap-1.5 sm:grid-cols-6 sm:gap-2">
-              {shorts.map((short) => (
-                <li key={short.id}>
-                  <ShortCard short={short} compact />
-                </li>
-              ))}
-            </ul>
+            <ShortCarousel
+              shorts={shorts}
+              compact
+              ctaLabel={t('shorts.browseAll')}
+              ctaTrack="content:author:shorts:view-all"
+            />
           </section>
         )}
         <section>

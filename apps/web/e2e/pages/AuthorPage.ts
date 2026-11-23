@@ -18,5 +18,8 @@ export const getAuthorPage = (page: Page) => {
     articleItems: page.getByTestId('author-article-item'),
     shortsSection: page.getByTestId('author-shorts'),
     shortItems: page.getByTestId('author-shorts').getByTestId('short-card'),
+    shortsArchiveLink: page
+      .getByTestId('author-shorts')
+      .getByTestId('shorts-archive-link'),
   };
 };

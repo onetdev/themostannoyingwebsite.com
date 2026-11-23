@@ -71,6 +71,7 @@ export const TELEMETRY_SECTIONS = [
   'content:home:cover',
   'content:home:latest',
   'content:home:more',
+  'content:home:shorts',
   'content:hot-things',
   'content:paywall',
   'content:search',
