@@ -65,7 +65,6 @@ export default {
     unlike: 'Unlike',
     aiAssisted: 'AI-assisted',
     playbackFailed: 'Video playback failed',
-    viewAuthor: 'View {name} profile',
   },
   hotThings: {
     playVideo: 'Play video',
