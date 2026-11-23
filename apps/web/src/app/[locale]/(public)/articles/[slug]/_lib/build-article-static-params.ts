@@ -1,35 +1,13 @@
-import type { LanguageCode } from '@maw/content-sdk';
+import {
+  buildLocalizedStaticParams,
+  type LocalizedStaticParam,
+} from '@/app/[locale]/(public)/_lib/build-localized-static-params';
 
-export type ArticleStaticParam = {
-  slug: string;
-  locale: string;
-};
-
-/** Minimal listing dependency needed to build article static params. */
-export interface ArticleListingService {
-  listAll(options: {
-    lang: LanguageCode;
-  }): Promise<ReadonlyArray<{ slug: string }>>;
-}
+export type ArticleStaticParam = LocalizedStaticParam;
 
 /**
- * Builds the `(slug, locale)` pairs for every localized article, fetching each
- * locale's listing in parallel. Extracted so the iteration is independently
- * testable (`generateStaticParams` is not exported for unit testing).
+ * Builds the `(slug, locale)` pairs for every localized article.
+ *
+ * @see buildLocalizedStaticParams for the shared iteration.
  */
-export async function buildArticleStaticParams(
-  locales: readonly string[],
-  articleService: ArticleListingService,
-): Promise<ArticleStaticParam[]> {
-  const perLocale = await Promise.all(
-    locales.map(async (locale) => {
-      const articles = await articleService.listAll({
-        lang: locale as LanguageCode,
-      });
-
-      return articles.map((article) => ({ slug: article.slug, locale }));
-    }),
-  );
-
-  return perLocale.flat();
-}
+export const buildArticleStaticParams = buildLocalizedStaticParams;

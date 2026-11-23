@@ -9,7 +9,9 @@ import { getDonatePage } from '../pages/DonatePage';
 import { getHomePage } from '../pages/HomePage';
 import { getPlansPage } from '../pages/PlansPage';
 import { getSearchPage } from '../pages/SearchPage';
+import { getShortsPlayerPage } from '../pages/ShortsPlayerPage';
 import { getLoginPage } from '../pages/user/LoginPage';
+import { fetchFirstShort } from '../utils/content-api';
 import { setupE2eTestState } from '../utils/setup';
 
 type JsonLdNode = Record<string, unknown>;
@@ -190,6 +192,34 @@ test('site graph carries a stable organization name with localized website', asy
   // Organization keeps the default-locale brand even on a localized page.
   expect(organization?.name).toBe('The Most Annoying Website');
   expect(website?.inLanguage).toBe('hu');
+});
+
+test('shorts player exposes VideoObject and breadcrumb structured data', async ({
+  page,
+  request,
+}) => {
+  const short = await fetchFirstShort(request);
+  test.skip(short === undefined, 'The Content API does not expose shorts yet.');
+
+  if (!short) {
+    return;
+  }
+
+  await setupE2eTestState(page);
+  await getShortsPlayerPage(page).goto(short.slug);
+
+  const nodes = await getJsonLdNodes(page);
+  const video = findByType(nodes, 'VideoObject');
+
+  expect(video).toBeDefined();
+  expect(video?.['@id']).toMatch(/\/en\/shorts\/[^/]+\/$/);
+  expect(video?.inLanguage).toBe('en');
+  // Search engines reject a VideoObject without a thumbnail; the node is only
+  // emitted when the clip has a poster.
+  expect(typeof video?.thumbnailUrl).toBe('string');
+  expect(typeof video?.uploadDate).toBe('string');
+
+  expect(findByType(nodes, 'BreadcrumbList')).toBeDefined();
 });
 
 test('auth pages are noindex but followable', async ({ page }) => {

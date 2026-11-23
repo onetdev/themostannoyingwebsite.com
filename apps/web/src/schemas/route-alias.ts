@@ -21,6 +21,7 @@ const RouteAliasList = [
   'privacy-policy',
   'search',
   'settings',
+  'short.single',
   'terms-of-use',
   'user.login',
   'user.password-reminder',

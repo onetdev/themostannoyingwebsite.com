@@ -26,6 +26,11 @@ type CarouselProps = {
   plugins?: CarouselPlugin;
   orientation?: 'horizontal' | 'vertical';
   setApi?: (api: CarouselApi) => void;
+  /**
+   * Adds the default gutters/padding between slides. Disable for full-bleed
+   * layouts such as a viewport-height vertical feed.
+   */
+  spacing?: boolean;
 };
 
 type CarouselContextProps = {
@@ -54,6 +59,7 @@ function Carousel({
   opts,
   setApi,
   plugins,
+  spacing = true,
   className,
   children,
   ...props
@@ -108,6 +114,7 @@ function Carousel({
 
     return () => {
       api?.off('select', onSelect);
+      api?.off('reInit', onSelect);
     };
   }, [api, onSelect]);
 
@@ -117,6 +124,7 @@ function Carousel({
         carouselRef,
         api: api,
         opts,
+        spacing,
         orientation:
           orientation || (opts?.axis === 'y' ? 'vertical' : 'horizontal'),
         scrollPrev,
@@ -142,16 +150,22 @@ function Carousel({
 
 function CarouselContent({
   className,
+  viewportClassName,
   fade = false,
   ...props
-}: ComponentProps<'div'> & { fade?: boolean }) {
-  const { carouselRef, orientation } = useCarousel();
+}: ComponentProps<'div'> & {
+  /** Classes for the clipped viewport element (height, masks, etc.). */
+  viewportClassName?: string;
+  fade?: boolean;
+}) {
+  const { carouselRef, orientation, spacing } = useCarousel();
 
   return (
     <div
       ref={carouselRef}
       className={cn(
         'overflow-hidden',
+        viewportClassName,
         fade &&
           orientation === 'horizontal' &&
           'mask-[linear-gradient(to_right,transparent,black_15%,black_85%,transparent)]',
@@ -164,7 +178,9 @@ function CarouselContent({
       <div
         className={cn(
           'flex',
-          orientation === 'horizontal' ? '-ml-4' : '-mt-4 flex-col',
+          orientation === 'horizontal'
+            ? spacing && '-ml-4'
+            : cn('flex-col', spacing && '-mt-4'),
           className,
         )}
         {...props}
@@ -174,7 +190,7 @@ function CarouselContent({
 }
 
 function CarouselItem({ className, ...props }: ComponentProps<'div'>) {
-  const { orientation } = useCarousel();
+  const { orientation, spacing } = useCarousel();
 
   return (
     /* biome-ignore lint/a11y/useSemanticElements: <div> with role="group" is used for carousel slides to provide necessary accessibility context */
@@ -184,7 +200,7 @@ function CarouselItem({ className, ...props }: ComponentProps<'div'>) {
       data-slot="carousel-item"
       className={cn(
         'min-w-0 shrink-0 grow-0 basis-full',
-        orientation === 'horizontal' ? 'pl-4' : 'pt-4',
+        spacing && (orientation === 'horizontal' ? 'pl-4' : 'pt-4'),
         className,
       )}
       {...props}
