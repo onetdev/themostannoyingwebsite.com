@@ -4,8 +4,6 @@ import { WebPageStructuredData } from '@/core/seo';
 import { ContactPage } from '@/features/support/components';
 import { PageLayout } from '../_components/PageLayout';
 
-export { generateStaticParams } from '@/core/i18n/routing';
-
 export const revalidate = 1800;
 
 export async function generateMetadata({

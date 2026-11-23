@@ -6,8 +6,6 @@ import { SearchPage } from '@/features/content/components';
 import { ContentPoolsBoundary } from '@/features/content/components/ContentPoolsBoundary';
 import { PageLayout } from '../_components/PageLayout';
 
-export { generateStaticParams } from '@/core/i18n/routing';
-
 export const revalidate = 1800;
 
 export async function generateMetadata({

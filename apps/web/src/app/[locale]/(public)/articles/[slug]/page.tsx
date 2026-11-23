@@ -11,7 +11,7 @@ import { ArticleItemPage } from '@/features/content/components';
 import { getArticleService } from '@/features/content/services';
 import i18nConfig from '@/root/i18n.config';
 import { PageLayout } from '../../_components/PageLayout';
-import { buildArticleStaticParams } from './_lib/build-article-static-params';
+import { buildFeaturedArticleStaticParams } from './_lib/build-featured-article-static-params';
 
 type PageParams = {
   slug: string;
@@ -71,10 +71,9 @@ export async function generateMetadata({
 }
 
 export const generateStaticParams = async () => {
-  const container = getDependencyContainer();
-  const articleService = getArticleService(container);
+  const articleService = getArticleService(getDependencyContainer());
 
-  return buildArticleStaticParams(i18nConfig.locales, articleService);
+  return buildFeaturedArticleStaticParams(i18nConfig.locales, articleService);
 };
 
 export default async function Page({ params }: PageProps) {

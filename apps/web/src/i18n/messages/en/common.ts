@@ -168,6 +168,7 @@ export default {
     contact: 'Contact',
     dilf: 'DILF',
     donate: 'Donate',
+    eggTower: 'Egg Tower',
     explore: 'Explore',
     flaimAPhone: 'Flaim a Phone!',
     home: 'Home',

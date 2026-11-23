@@ -74,7 +74,7 @@ describe('GlobalStickyVideo', () => {
 
     const widget = await screen.findByTestId('sticky-short');
 
-    expect(widget).toHaveClass('ms-20', 'md:ms-0', 'md:start-20');
+    expect(widget).toHaveClass('ms-20', 'md:ms-0', 'md:start-22');
   });
 
   it('keeps the teaser on the poster when reduced motion is requested', async () => {

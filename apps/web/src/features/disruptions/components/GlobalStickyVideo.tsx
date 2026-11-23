@@ -35,7 +35,7 @@ export function GlobalStickyVideo() {
     <div
       className={cn(
         'sticky start-2 bottom-2 mx-3 my-1 flex justify-start md:fixed md:m-0',
-        chatBubble && 'ms-20 md:ms-0 md:start-20',
+        chatBubble && 'ms-20 md:ms-0 md:start-22',
       )}
       data-testid="sticky-short"
       data-track-section="disruptions:sticky-video"

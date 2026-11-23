@@ -8,8 +8,6 @@ import { ShareButton } from '@/features/share/components';
 import { NarrowPageLayout } from '../_components/NarrowPageLayout';
 import DisableAllOnMount from './disable-all-on-mount';
 
-export { generateStaticParams } from '@/core/i18n/routing';
-
 export const revalidate = 1800;
 
 export async function generateMetadata({

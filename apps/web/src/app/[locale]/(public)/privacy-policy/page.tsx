@@ -9,8 +9,6 @@ import { DocumentPage } from '../_components/DocumentPage';
 import { PageLayout } from '../_components/PageLayout';
 import { TranslationDisclaimer } from '../_components/TranslationDisclaimer';
 
-export { generateStaticParams } from '@/core/i18n/routing';
-
 export const revalidate = 1800;
 
 export async function generateMetadata({

@@ -2,7 +2,7 @@
 
 ## Status
 
-Accepted
+Accepted (amended by [ADR 40](0040-on-demand-content-rendering.md)).
 
 Complements [ADR 31](0031-base-ui-shadcn-adoption.md) (Base UI primitives) and
 [ADR 37](0037-user-interaction-telemetry.md) (player interactions are tracked as a
@@ -34,9 +34,10 @@ A player has different constraints from an article page:
     and document-visibility providers. No `PageLayout` means no header or footer.
 
 2.  **The route is dark-launchable.** `ShortService` degrades to empty/undefined
-    results when the endpoint is unavailable, and `generateStaticParams` may
-    return nothing. The player still works on-demand when the API exists; listing
-    surfaces can add links in later PRs without breaking pages.
+    results when the endpoint is unavailable, and the route renders on demand
+    instead of being pre-generated. The player works whenever the API exposes
+    the endpoint; listing surfaces can add links in later PRs without breaking
+    pages.
 
 3.  **One vertical Embla carousel, one active video.** The feed uses the shared
     `Carousel` with `spacing={false}` and a full-height viewport. Only slides

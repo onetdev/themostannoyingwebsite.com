@@ -4,8 +4,6 @@ import { buildArticlesMetadata } from './_lib/build-articles-metadata';
 import { loadArticlesPage } from './_lib/load-articles-page';
 import { renderArticlesPage } from './_lib/render-articles-page';
 
-export { generateStaticParams } from '@/core/i18n/routing';
-
 export const revalidate = 1800;
 
 type PageProps = NextPageProps;

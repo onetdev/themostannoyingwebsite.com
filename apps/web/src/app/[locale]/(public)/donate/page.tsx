@@ -7,8 +7,6 @@ import { DonationPage } from '@/features/funding/components';
 import { ShareButton } from '@/features/share/components';
 import { PageLayout } from '../_components/PageLayout';
 
-export { generateStaticParams } from '@/core/i18n/routing';
-
 export const revalidate = 1800;
 
 export async function generateMetadata({
