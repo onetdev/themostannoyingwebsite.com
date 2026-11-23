@@ -64,7 +64,7 @@ const initialStateFlags: PainPreferencesState['flags'] = {
   ratingDialog: true,
   screensaver: true,
   searchDelay: true,
-  stickyVideo: false,
+  stickyVideo: true,
   wheelOfFortune: true,
 };
 
