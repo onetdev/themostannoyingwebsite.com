@@ -17,6 +17,12 @@ jest.mock('@/features/share/components', () => ({
   ShareButton: () => null,
 }));
 
+jest.mock('@/components/PaginationControls', () => ({
+  PaginationControls: ({ pageCount }: { pageCount: number }) => (
+    <div data-testid="pagination-mock">{pageCount}</div>
+  ),
+}));
+
 jest.mock('./ShortGrid', () => ({
   ShortGrid: ({ shorts }: { shorts: ShortListItem[] }) => (
     <div data-testid="short-grid-mock">{shorts.length}</div>
@@ -30,7 +36,15 @@ const shorts = [
 
 describe('ShortsPage', () => {
   it('renders the archive grid and count when shorts exist', async () => {
-    const html = renderToStaticMarkup(await ShortsPage({ shorts }));
+    const html = renderToStaticMarkup(
+      await ShortsPage({
+        shorts,
+        currentPage: 1,
+        pageCount: 1,
+        total: shorts.length,
+        hrefForPage: (page) => `/shorts/page/${page}`,
+      }),
+    );
 
     expect(html).toContain('data-testid="shorts-page"');
     expect(html).toContain('data-testid="short-grid-mock"');
@@ -38,8 +52,30 @@ describe('ShortsPage', () => {
     expect(html).not.toContain('data-testid="shorts-empty"');
   });
 
+  it('renders pagination when there are multiple pages', async () => {
+    const html = renderToStaticMarkup(
+      await ShortsPage({
+        shorts,
+        currentPage: 2,
+        pageCount: 3,
+        total: 50,
+        hrefForPage: (page) => `/shorts/page/${page}`,
+      }),
+    );
+
+    expect(html).toContain('data-testid="pagination-mock"');
+  });
+
   it('renders the empty state when no shorts are available', async () => {
-    const html = renderToStaticMarkup(await ShortsPage({ shorts: [] }));
+    const html = renderToStaticMarkup(
+      await ShortsPage({
+        shorts: [],
+        currentPage: 1,
+        pageCount: 1,
+        total: 0,
+        hrefForPage: (page) => `/shorts/page/${page}`,
+      }),
+    );
 
     expect(html).toContain('data-testid="shorts-empty"');
     expect(html).not.toContain('data-testid="short-grid-mock"');

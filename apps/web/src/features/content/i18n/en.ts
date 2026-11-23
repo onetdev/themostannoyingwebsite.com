@@ -67,7 +67,7 @@ export default {
     playbackFailed: 'Video playback failed',
     archiveTitle: 'Shorts',
     archiveDescription:
-      'The complete collection of short-form clips. Hover a tile to preview it, then click to watch the full vertical player.',
+      'A wall of short-form clips. Open a tile to watch the full vertical player; on desktop, hover for a muted preview.',
     emptyTitle: 'No shorts yet',
     emptyDescription:
       'There are no shorts in this language yet. Check back later or switch to another language.',
@@ -75,6 +75,9 @@ export default {
     aiBadge: 'AI',
     count: '{count, plural, one {# short} other {# shorts}}',
     playLabel: 'Play {title}',
+    pagination: {
+      navigation: 'Shorts pagination',
+    },
   },
   hotThings: {
     playVideo: 'Play video',

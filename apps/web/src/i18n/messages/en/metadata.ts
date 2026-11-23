@@ -12,6 +12,7 @@ export default {
   },
   shorts: {
     title: 'Shorts',
+    pageTitle: 'Shorts – Page {page}',
     description:
       'Watch every short-form clip in one place. Vertical, loud, and only a few seconds of your life each.',
   },

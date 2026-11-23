@@ -1,5 +1,6 @@
 export * from './useAppService';
 export * from './useAudio';
+export * from './useCanHover';
 export * from './useDocumentVisibilityListener';
 export * from './useFaviconBadge';
 export * from './useInteractOutside';

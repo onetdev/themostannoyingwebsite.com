@@ -5,8 +5,8 @@ jest.mock('next-intl/server', () => ({
 }));
 
 describe('buildShortsMetadata', () => {
-  it('builds localized archive metadata with a self-canonical and alternates', async () => {
-    const metadata = await buildShortsMetadata('en');
+  it('builds localized page-1 metadata with a self-canonical and alternates', async () => {
+    const metadata = await buildShortsMetadata({ locale: 'en', page: 1 });
 
     expect(metadata.title).toBe('title');
     expect(metadata.description).toBe('description');
@@ -22,6 +22,20 @@ describe('buildShortsMetadata', () => {
       title: 'title',
       description: 'description',
       type: 'website',
+      siteName: 'title',
+      url: '/en/shorts/',
     });
+    expect(metadata.openGraph?.images).toEqual([expect.any(String)]);
+  });
+
+  it('uses a page-specific canonical without archive hreflang for deeper pages', async () => {
+    const metadata = await buildShortsMetadata({ locale: 'en', page: 2 });
+
+    expect(metadata.title).toBe('pageTitle');
+    expect(metadata.alternates).toMatchObject({
+      canonical: '/en/shorts/page/2/',
+    });
+    expect(metadata.alternates).not.toHaveProperty('languages');
+    expect(metadata.openGraph?.url).toBe('/en/shorts/page/2/');
   });
 });

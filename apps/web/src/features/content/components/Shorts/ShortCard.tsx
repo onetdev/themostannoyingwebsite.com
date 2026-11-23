@@ -5,9 +5,11 @@ import { Badge, Icon } from '@maw/ui-lib';
 import { cn } from 'cn';
 import Image from 'next/image';
 import { useTranslations } from 'next-intl';
-import type { ComponentProps, ElementType } from 'react';
-import { useState } from 'react';
-import { Link } from '@/core/i18n/navigation';
+import type { ComponentProps } from 'react';
+import { useEffect, useRef, useState } from 'react';
+import { Link, usePathname } from '@/core/i18n/navigation';
+import { rememberShortsEntry } from '@/features/content/shorts-entry';
+import { useCanHover } from '@/hooks/useCanHover';
 import { useRuntimeStore } from '@/stores';
 
 import { formatShortDuration } from './short-duration';
@@ -15,54 +17,86 @@ import { selectShortMedia } from './short-media';
 
 export type ShortCardProps = Omit<ComponentProps<'article'>, 'children'> & {
   short: ShortListItem;
-  /** Heading level for the overlaid title. Defaults to `2`. */
-  headingLevel?: 2 | 3 | 4;
 };
 
 /**
  * Dense 9:16 archive tile.
  *
- * The poster stays in place and a muted, looping preview mounts only while the
- * pointer is over the card. Clicking still opens the dedicated player.
+ * The poster stays in place and a muted, looping preview mounts only for a
+ * mouse hover while the card is on screen. Touch users open the player
+ * directly; scrolling a hovered card out of view stops the preview.
  */
-export function ShortCard({
-  short,
-  headingLevel = 2,
-  className,
-  ...rest
-}: ShortCardProps) {
+export function ShortCard({ short, className, ...rest }: ShortCardProps) {
   const t = useTranslations('content.shorts');
+  const pathname = usePathname();
   const systemReducedMotion = useRuntimeStore(
     (state) => state.systemReducedMotion,
   );
   const { video, poster } = selectShortMedia(short);
-  const [isHovered, setIsHovered] = useState(false);
+  const cardRef = useRef<HTMLElement>(null);
+  const canHover = useCanHover();
+  const [isPointerOver, setIsPointerOver] = useState(false);
+  const [isInView, setIsInView] = useState(true);
   const [isVideoReady, setIsVideoReady] = useState(false);
-  const showVideo = isHovered && !systemReducedMotion && Boolean(video);
-  const TitleTag: ElementType = `h${headingLevel}`;
+  const showVideo =
+    isPointerOver && isInView && !systemReducedMotion && Boolean(video);
+  const aiDisclosure = short.ai_assisted ? `, ${t('aiAssisted')}` : '';
+  const accessibleLabel = `${t('playLabel', { title: short.title })} — ${t('shortLabel')}${aiDisclosure}`;
+
+  useEffect(() => {
+    const node = cardRef.current;
+
+    if (!node || typeof IntersectionObserver === 'undefined') {
+      return;
+    }
+
+    const observer = new IntersectionObserver(([entry]) => {
+      setIsInView(entry.isIntersecting);
+
+      if (!entry.isIntersecting) {
+        setIsVideoReady(false);
+      }
+    });
+
+    observer.observe(node);
+
+    return () => observer.disconnect();
+  }, []);
+
+  const onPointerMove = (event: React.PointerEvent<HTMLElement>) => {
+    if (event.pointerType === 'mouse' && canHover && !isPointerOver) {
+      setIsPointerOver(true);
+      setIsVideoReady(false);
+    }
+
+    rest.onPointerMove?.(event);
+  };
+
+  const onPointerLeave = (event: React.PointerEvent<HTMLElement>) => {
+    setIsPointerOver(false);
+    setIsVideoReady(false);
+    rest.onPointerLeave?.(event);
+  };
+
   return (
     <article
       {...rest}
+      ref={cardRef}
       className={cn('group relative', className)}
       data-testid="short-card"
       data-track-impression="shorts:card"
       data-track-key={short.id}
-      onMouseEnter={() => {
-        setIsHovered(true);
-        setIsVideoReady(false);
-      }}
-      onMouseLeave={() => {
-        setIsHovered(false);
-        setIsVideoReady(false);
-      }}
+      onPointerMove={onPointerMove}
+      onPointerLeave={onPointerLeave}
     >
       <Link
         href={`/shorts/${short.slug}`}
         prefetch={false}
         className="block overflow-hidden rounded-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
-        aria-label={t('playLabel', { title: short.title })}
+        aria-label={accessibleLabel}
         data-track="shorts:open"
         data-track-key={short.id}
+        onClick={() => rememberShortsEntry(pathname || '/')}
       >
         <div className="relative aspect-[9/16] w-full overflow-hidden rounded-md bg-black">
           {poster && (
@@ -77,19 +111,18 @@ export function ShortCard({
 
           {showVideo && video && (
             <video
-              key={video.url}
               className={cn(
                 'absolute inset-0 h-full w-full object-cover transition-opacity duration-300',
                 isVideoReady ? 'opacity-100' : 'opacity-0',
               )}
               src={video.url}
-              poster={poster?.url}
               autoPlay
               muted
               loop
               playsInline
               preload="auto"
               onCanPlay={() => setIsVideoReady(true)}
+              onError={() => setIsVideoReady(false)}
             />
           )}
 
@@ -98,8 +131,9 @@ export function ShortCard({
           <div
             className={cn(
               'pointer-events-none absolute inset-0 z-10 flex items-center justify-center transition-opacity duration-300',
-              showVideo ? 'opacity-0' : 'opacity-100',
+              isVideoReady ? 'opacity-0' : 'opacity-100',
             )}
+            data-testid="short-card-play-icon"
           >
             <span className="flex size-10 items-center justify-center rounded-full bg-black/50 text-white backdrop-blur-sm">
               <Icon icon="playSolid" className="size-4 ps-0.5" aria-hidden />
@@ -130,12 +164,12 @@ export function ShortCard({
                 {t('aiBadge')}
               </Badge>
             )}
-            <TitleTag
+            <h2
               className="line-clamp-2 text-sm font-semibold leading-tight text-balance text-white [text-shadow:0_1px_2px_rgba(0,0,0,0.8)]"
               title={short.title}
             >
               {short.title}
-            </TitleTag>
+            </h2>
           </div>
         </div>
       </Link>

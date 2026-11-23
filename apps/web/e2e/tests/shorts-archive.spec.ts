@@ -1,6 +1,7 @@
 import type { APIRequestContext } from '@playwright/test';
 import { expect, test } from '@playwright/test';
 
+import { SHORTS_ENTRY_STORAGE_KEY } from '@/features/content/shorts-entry';
 import { setupE2eTestState } from '../utils/setup';
 
 const contentApiBaseUrl =
@@ -49,4 +50,41 @@ test('shorts archive lists clips and opens the player', async ({
   await page.getByTestId('short-card').first().click();
   await expect(page).toHaveURL(/\/en\/shorts\/[^/]+\/$/);
   await expect(page.getByTestId('short-player-page')).toBeVisible();
+
+  await page.getByRole('button', { name: 'Close player' }).click();
+  await expect(page).toHaveURL(/\/en\/shorts\/$/);
+});
+
+test('keeps the player entry point scoped to the tab that opened it', async ({
+  page,
+  context,
+  request,
+}) => {
+  const short = await fetchFirstShort(request);
+  test.skip(short === undefined, 'The Content API does not expose shorts yet.');
+
+  await setupE2eTestState(page);
+  await page.goto('/en/shorts/');
+  await page.getByTestId('short-card').first().click();
+  await expect(page).toHaveURL(/\/en\/shorts\/[^/]+\/$/);
+
+  expect(
+    await page.evaluate(
+      (key) => window.sessionStorage.getItem(key),
+      SHORTS_ENTRY_STORAGE_KEY,
+    ),
+  ).toBe('/shorts/');
+
+  const otherTab = await context.newPage();
+  await setupE2eTestState(otherTab);
+  await otherTab.goto('/en/shorts/');
+
+  expect(
+    await otherTab.evaluate(
+      (key) => window.sessionStorage.getItem(key),
+      SHORTS_ENTRY_STORAGE_KEY,
+    ),
+  ).toBeNull();
+
+  await otherTab.close();
 });

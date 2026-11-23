@@ -9,20 +9,32 @@ import {
   PageHeadline,
 } from '@maw/ui-lib';
 import { getTranslations } from 'next-intl/server';
+import { PaginationControls } from '@/components/PaginationControls';
 import { ShareButton } from '@/features/share/components';
 
 import { ShortGrid } from './ShortGrid';
 
 export interface ShortsPageProps {
   shorts: ShortListItem[];
+  currentPage: number;
+  pageCount: number;
+  total: number;
+  hrefForPage: (page: number) => string;
 }
 
 /**
  * The full shorts archive as a dense portrait grid.
  */
-export async function ShortsPage({ shorts }: ShortsPageProps) {
+export async function ShortsPage({
+  shorts,
+  currentPage,
+  pageCount,
+  total,
+  hrefForPage,
+}: ShortsPageProps) {
   const t = await getTranslations('content.shorts');
   const hasShorts = shorts.length > 0;
+  const showPagination = pageCount > 1;
 
   return (
     <div
@@ -42,7 +54,7 @@ export async function ShortsPage({ shorts }: ShortsPageProps) {
             className="text-muted-foreground mb-4 text-sm"
             data-testid="shorts-page-count"
           >
-            {t('count', { count: shorts.length })}
+            {t('count', { count: total })}
           </p>
           <ShortGrid shorts={shorts} />
         </>
@@ -57,6 +69,16 @@ export async function ShortsPage({ shorts }: ShortsPageProps) {
             <EmptyDescription>{t('emptyDescription')}</EmptyDescription>
           </EmptyHeader>
         </Empty>
+      )}
+      {showPagination && (
+        <PaginationControls
+          currentPage={currentPage}
+          pageCount={pageCount}
+          hrefForPage={hrefForPage}
+          label={t('pagination.navigation')}
+          section="content:shorts"
+          className="mt-10"
+        />
       )}
     </div>
   );
