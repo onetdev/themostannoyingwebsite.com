@@ -35,6 +35,9 @@ describe('buildShortVideo', () => {
       '@type': 'VideoObject',
       '@id': 'https://example.com/en/shorts/gummy-bear-fork/',
       url: 'https://example.com/en/shorts/gummy-bear-fork/',
+      mainEntityOfPage: {
+        '@id': 'https://example.com/en/shorts/gummy-bear-fork/',
+      },
       name: input.name,
       description: input.description,
       contentUrl: input.contentUrl,
@@ -51,16 +54,15 @@ describe('buildShortVideo', () => {
     });
   });
 
-  it('omits optional media fields when they are unavailable', () => {
+  it('omits optional fields when they are unavailable', () => {
     const schema = buildShortVideo({
       ...input,
-      thumbnailUrl: undefined,
       contentUrl: undefined,
       authorName: undefined,
       authorPath: undefined,
     });
 
-    expect(schema).not.toHaveProperty('thumbnailUrl');
+    expect(schema.thumbnailUrl).toBe('https://example.com/assets/poster.webp');
     expect(schema).not.toHaveProperty('contentUrl');
     expect(schema).not.toHaveProperty('author');
   });

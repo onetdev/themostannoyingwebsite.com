@@ -9,6 +9,24 @@ export interface BuildShortMetadataInput {
 }
 
 /**
+ * Maps a media container format to the MIME type Open Graph expects.
+ *
+ * `video/${format}` is only correct for ISO base media formats, so non-standard
+ * containers are normalized explicitly.
+ */
+const VIDEO_MIME_TYPE_BY_FORMAT: Record<string, string> = {
+  m4v: 'video/mp4',
+  mov: 'video/quicktime',
+  mp4: 'video/mp4',
+  webm: 'video/webm',
+};
+
+function toVideoMimeType(format: string): string {
+  const normalized = format.toLowerCase();
+  return VIDEO_MIME_TYPE_BY_FORMAT[normalized] ?? `video/${normalized}`;
+}
+
+/**
  * Builds per-locale metadata for a short player page.
  *
  * Each localized player URL is self-canonical and linked to its available
@@ -58,7 +76,7 @@ export function buildShortMetadata({
             videos: [
               {
                 url: media.video.url,
-                type: `video/${media.video.format}`,
+                type: toVideoMimeType(media.video.format),
                 width: media.video.width,
                 height: media.video.height,
               },

@@ -66,6 +66,7 @@ export default async function Page({ params }: PageProps) {
     0,
   );
   const media = selectShortMedia(short);
+  const posterUrl = media.poster?.url;
 
   const navigation = await getTranslations({
     locale: appLocale,
@@ -73,19 +74,21 @@ export default async function Page({ params }: PageProps) {
   });
   const shortPath = `shorts/${short.slug}`;
 
-  const videoSchema = buildShortVideo({
-    baseUrl: config.deploymentMeta.publicUrl,
-    locale: appLocale,
-    path: shortPath,
-    name: short.title,
-    description: short.summary,
-    thumbnailUrl: media.poster?.url,
-    uploadDate: short.published_at,
-    durationMs: short.duration_ms,
-    contentUrl: media.video?.url,
-    authorName: short.author.name,
-    authorPath: `authors/${short.author.slug}`,
-  });
+  const videoSchema = posterUrl
+    ? buildShortVideo({
+        baseUrl: config.deploymentMeta.publicUrl,
+        locale: appLocale,
+        path: shortPath,
+        name: short.title,
+        description: short.summary,
+        thumbnailUrl: posterUrl,
+        uploadDate: short.published_at,
+        durationMs: short.duration_ms,
+        contentUrl: media.video?.url,
+        authorName: short.author.name,
+        authorPath: `authors/${short.author.slug}`,
+      })
+    : null;
 
   const breadcrumbSchema = buildBreadcrumbList(
     config.deploymentMeta.publicUrl,
@@ -96,10 +99,14 @@ export default async function Page({ params }: PageProps) {
     ],
   );
 
+  const structuredData = videoSchema
+    ? [videoSchema, breadcrumbSchema]
+    : [breadcrumbSchema];
+
   return (
     <>
       <ReportRouteVisit route="short.single" />
-      <JsonLd data={[videoSchema, breadcrumbSchema]} />
+      <JsonLd data={structuredData} />
       <main
         className="fixed inset-0 z-50 bg-black"
         data-route-alias="short.single"

@@ -13,8 +13,11 @@ export interface ShortVideoSeoInput {
   path: string;
   name: string;
   description?: string;
-  /** Absolute or root-relative poster URL. */
-  thumbnailUrl?: string;
+  /**
+   * Absolute or root-relative poster URL. Required: search engines reject a
+   * `VideoObject` without a thumbnail.
+   */
+  thumbnailUrl: string;
   /** ISO publication timestamp or date. */
   uploadDate: string;
   durationMs: number;
@@ -50,17 +53,16 @@ export function buildShortVideo(
     '@type': 'VideoObject',
     '@id': url,
     url,
+    mainEntityOfPage: { '@id': url },
     name: input.name,
     inLanguage: input.locale,
     isPartOf: { '@id': localeSiteId(input.baseUrl, input.locale) },
     publisher: { '@id': siteId(input.baseUrl, 'organization') },
     duration: toIsoDuration(input.durationMs),
     uploadDate: input.uploadDate,
+    thumbnailUrl: absoluteAssetUrl(input.baseUrl, input.thumbnailUrl),
     ...(input.contentUrl ? { contentUrl: input.contentUrl } : {}),
     ...(input.description ? { description: input.description } : {}),
-    ...(input.thumbnailUrl
-      ? { thumbnailUrl: absoluteAssetUrl(input.baseUrl, input.thumbnailUrl) }
-      : {}),
     ...(input.authorName
       ? {
           author: {

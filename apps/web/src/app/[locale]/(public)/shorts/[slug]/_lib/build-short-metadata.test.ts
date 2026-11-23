@@ -91,4 +91,19 @@ describe('buildShortMetadata', () => {
       ],
     });
   });
+
+  it('normalizes non-ISO container formats for the Open Graph video type', () => {
+    const movShort = {
+      ...short,
+      media: short.media.map((item) =>
+        item.kind === 'video' ? { ...item, format: 'mov' } : item,
+      ),
+    } as Short;
+
+    const metadata = buildShortMetadata({ short: movShort, locale: 'en' });
+
+    expect(metadata.openGraph).toMatchObject({
+      videos: [{ type: 'video/quicktime' }],
+    });
+  });
 });
