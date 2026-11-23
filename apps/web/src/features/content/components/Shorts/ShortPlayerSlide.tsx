@@ -1,6 +1,6 @@
 'use client';
 
-import type { ShortListItem } from '@maw/content-sdk';
+import type { ShortVideoListItem } from '@maw/content-sdk';
 import { Icon } from '@maw/ui-lib';
 import { cn } from 'cn';
 import Image from 'next/image';
@@ -21,7 +21,7 @@ import {
 } from './short-player-frame';
 
 export interface ShortPlayerSlideProps {
-  short: ShortListItem;
+  short: ShortVideoListItem;
   index: number;
   isActive: boolean;
   isNearby: boolean;

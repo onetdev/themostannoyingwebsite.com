@@ -1,6 +1,6 @@
 'use client';
 
-import type { ShortListItem } from '@maw/content-sdk';
+import type { ShortVideoListItem } from '@maw/content-sdk';
 import { Badge, Icon } from '@maw/ui-lib';
 import { cn } from 'cn';
 import Image from 'next/image';
@@ -17,7 +17,7 @@ import { formatShortDuration } from './short-duration';
 import { selectShortMedia } from './short-media';
 
 export type ShortCardProps = Omit<ComponentProps<'article'>, 'children'> & {
-  short: ShortListItem;
+  short: ShortVideoListItem;
   /** Smaller tile for dense surfaces such as author profiles. */
   compact?: boolean;
 };

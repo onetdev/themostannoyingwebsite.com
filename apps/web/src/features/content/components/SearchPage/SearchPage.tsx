@@ -121,7 +121,7 @@ export function SearchPage() {
   const filterLabels: Record<SearchFilter, string> = {
     all: t('filters.all'),
     article: t('filters.article'),
-    short: t('filters.short'),
+    'short-video': t('filters.short'),
     page: t('filters.page'),
   };
 

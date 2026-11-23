@@ -8,7 +8,7 @@ import { assertAppLocale } from '@/core/i18n/app-locale';
 import { buildBreadcrumbList, buildShortVideo, JsonLd } from '@/core/seo';
 import { ShortsPlayer } from '@/features/content/components';
 import { selectShortMedia } from '@/features/content/components/Shorts/short-media';
-import { getShortService } from '@/features/content/services';
+import { getShortVideoService } from '@/features/content/services';
 import { ReportRouteVisit } from '@/features/monitoring/components';
 import { buildShortMetadata } from './_lib/build-short-metadata';
 import { ensureShortInFeed } from './_lib/ensure-short-in-feed';
@@ -28,8 +28,8 @@ export async function generateMetadata({
   const { slug, locale } = await params;
   const appLocale = assertAppLocale(locale);
   const container = getDependencyContainer();
-  const shortService = getShortService(container);
-  const short = await shortService.getBySlug(slug, appLocale);
+  const shortVideoService = getShortVideoService(container);
+  const short = await shortVideoService.getBySlug(slug, appLocale);
 
   if (!short) {
     return {};
@@ -43,14 +43,16 @@ export default async function Page({ params }: PageProps) {
   const appLocale = assertAppLocale(locale);
 
   const container = getDependencyContainer();
-  const shortService = getShortService(container);
-  const short = await shortService.getBySlug(slug, appLocale);
+  const shortVideoService = getShortVideoService(container);
+  const short = await shortVideoService.getBySlug(slug, appLocale);
 
   if (!short) {
     return notFound();
   }
 
-  const feed = await shortService.listAll({ lang: appLocale as LanguageCode });
+  const feed = await shortVideoService.listAll({
+    lang: appLocale as LanguageCode,
+  });
   const shorts = ensureShortInFeed(feed, short);
   const initialIndex = Math.max(
     shorts.findIndex((item) => item.id === short.id),

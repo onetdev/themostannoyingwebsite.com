@@ -1,15 +1,19 @@
-import type { Short, ShortListItem, ShortMedia } from '@maw/content-sdk';
+import type {
+  ShortVideo,
+  ShortVideoListItem,
+  ShortVideoMedia,
+} from '@maw/content-sdk';
 
-type ShortWithMedia = Pick<Short | ShortListItem, 'media'>;
+type ShortWithMedia = Pick<ShortVideo | ShortVideoListItem, 'media'>;
 
 export interface ShortMediaSelection {
   /** Default video rendition, when the API exposes one. */
-  video?: ShortMedia;
+  video?: ShortVideoMedia;
   /** Default poster thumbnail, when the API exposes one. */
-  poster?: ShortMedia;
+  poster?: ShortVideoMedia;
 }
 
-function pickDefault(items: ShortMedia[]): ShortMedia | undefined {
+function pickDefault(items: ShortVideoMedia[]): ShortVideoMedia | undefined {
   return items.find((item) => item.default) ?? items[0];
 }
 

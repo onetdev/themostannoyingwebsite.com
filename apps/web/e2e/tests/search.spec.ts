@@ -140,7 +140,7 @@ test('short results open the player and return to the filtered search', async ({
 
   await page.getByRole('button', { name: 'Close player' }).click();
   await expect(page).toHaveURL(
-    new RegExp(`/en/search/\\?q=${query}&type=short$`),
+    new RegExp(`/en/search/\\?q=${query}&type=short-video$`),
   );
   await expect(searchPage.shortResults.first()).toBeVisible();
 });
@@ -164,7 +164,7 @@ test('a new query resets the filter to all', async ({ page }) => {
 
   await searchPage.search('the');
   await searchPage.filterShorts.click();
-  await expect(page).toHaveURL(/type=short/);
+  await expect(page).toHaveURL(/type=short-video/);
 
   await searchPage.search('privacy');
   await expect(page).not.toHaveURL(/type=/);

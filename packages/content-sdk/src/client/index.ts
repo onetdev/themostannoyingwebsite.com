@@ -24,7 +24,7 @@ export { PagesResource } from './resources/pages';
 export { PoolsResource, type PoolType } from './resources/pools';
 export { PrizeWheelResource } from './resources/prize-wheel';
 export { SearchResource } from './resources/search';
-export { ShortsResource } from './resources/shorts';
+export { ShortVideosResource } from './resources/short-videos';
 export { SpamSampleResource } from './resources/spam-sample';
 export { SurveyResource } from './resources/survey';
 export { TranslationsResource } from './resources/translations';

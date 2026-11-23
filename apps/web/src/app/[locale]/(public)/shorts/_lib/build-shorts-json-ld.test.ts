@@ -1,4 +1,4 @@
-import type { ShortListItem } from '@maw/content-sdk';
+import type { ShortVideoListItem } from '@maw/content-sdk';
 
 import { buildShortsJsonLd } from './build-shorts-json-ld';
 
@@ -10,7 +10,7 @@ jest.mock('next-intl/server', () => ({
 const shorts = [
   { title: 'First clip', slug: 'first-clip' },
   { title: 'Second clip', slug: 'second-clip' },
-] as unknown as ShortListItem[];
+] as unknown as ShortVideoListItem[];
 
 interface WebPageNode {
   url?: string;

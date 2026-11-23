@@ -1,6 +1,6 @@
 'use client';
 
-import type { ShortListItem } from '@maw/content-sdk';
+import type { ShortVideoListItem } from '@maw/content-sdk';
 import type { CarouselApi } from '@maw/ui-lib';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { useRouter } from '@/core/i18n/navigation';
@@ -41,7 +41,7 @@ function hasOpenDialog(): boolean {
 }
 
 interface UseShortPlayerOptions {
-  shorts: ShortListItem[];
+  shorts: ShortVideoListItem[];
   initialIndex: number;
 }
 

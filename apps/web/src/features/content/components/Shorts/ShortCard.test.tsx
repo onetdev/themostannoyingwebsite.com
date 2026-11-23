@@ -2,7 +2,7 @@
  * @jest-environment jsdom
  */
 import '@testing-library/jest-dom';
-import type { ShortListItem } from '@maw/content-sdk';
+import type { ShortVideoListItem } from '@maw/content-sdk';
 import { act, fireEvent, render, screen } from '@testing-library/react';
 import { SHORTS_ENTRY_STORAGE_KEY } from '@/features/content/shorts-entry';
 import { ShortCard } from './ShortCard';
@@ -105,7 +105,7 @@ const short = {
       url: 'https://media.example.com/video.mp4',
     },
   ],
-} as unknown as ShortListItem;
+} as unknown as ShortVideoListItem;
 
 function hoverCard(card: HTMLElement) {
   fireEvent.pointerMove(card, {

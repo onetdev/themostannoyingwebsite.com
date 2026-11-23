@@ -2,7 +2,7 @@
  * @jest-environment jsdom
  */
 import '@testing-library/jest-dom';
-import type { ShortListItem } from '@maw/content-sdk';
+import type { ShortVideoListItem } from '@maw/content-sdk';
 import { TooltipProvider } from '@maw/ui-lib';
 import { fireEvent, render, screen } from '@testing-library/react';
 
@@ -90,7 +90,7 @@ const makeShort = (id: string, slug: string, title: string) =>
     published_at: '2026-11-21',
     created_at: '2026-11-21',
     updated_at: '2026-11-21',
-  }) as unknown as ShortListItem;
+  }) as unknown as ShortVideoListItem;
 
 const shorts = [
   makeShort('a', 'first', 'First'),

@@ -1,7 +1,7 @@
 /**
  * @jest-environment jsdom
  */
-import type { ShortListItem } from '@maw/content-sdk';
+import type { ShortVideoListItem } from '@maw/content-sdk';
 import { renderHook } from '@testing-library/react';
 
 import { useShortUrlSync } from './use-short-url-sync';
@@ -11,7 +11,7 @@ jest.mock('next-intl', () => ({
 }));
 
 const makeShort = (slug: string, title: string) =>
-  ({ slug, title }) as ShortListItem;
+  ({ slug, title }) as ShortVideoListItem;
 
 describe('useShortUrlSync', () => {
   beforeEach(() => {
@@ -27,7 +27,7 @@ describe('useShortUrlSync', () => {
     const first = makeShort('first', 'First');
 
     const { rerender } = renderHook(
-      ({ short }: { short: ShortListItem }) => useShortUrlSync({ short }),
+      ({ short }: { short: ShortVideoListItem }) => useShortUrlSync({ short }),
       { initialProps: { short: first } },
     );
 

@@ -1,6 +1,6 @@
 'use client';
 
-import type { ShortListItem } from '@maw/content-sdk';
+import type { ShortVideoListItem } from '@maw/content-sdk';
 import { Carousel, CarouselContent, CarouselItem } from '@maw/ui-lib';
 import { useTranslations } from 'next-intl';
 import { useCallback, useEffect, useState, type WheelEvent } from 'react';
@@ -12,7 +12,7 @@ import { useShortFeedWheel } from './use-short-feed-wheel';
 import { useShortPlayer } from './use-short-player';
 
 export interface ShortsPlayerProps {
-  shorts: ShortListItem[];
+  shorts: ShortVideoListItem[];
   initialIndex: number;
 }
 

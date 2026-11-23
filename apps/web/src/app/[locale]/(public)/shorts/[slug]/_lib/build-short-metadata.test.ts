@@ -1,9 +1,9 @@
-import type { Short } from '@maw/content-sdk';
+import type { ShortVideo } from '@maw/content-sdk';
 import { buildShortMetadata } from './build-short-metadata';
 
 const short = {
   id: '01442b6f-2d4c-5d59-ab16-831cfb2957c8',
-  short_group: '012-gummy-bear-fork',
+  short_video_group: '012-gummy-bear-fork',
   slug: 'gummy-bear-fork',
   lang: 'en',
   title: 'The Gummy Bears Were Warned',
@@ -62,7 +62,7 @@ const short = {
       title: 'Die Gummibärchen wurden gewarnt',
     },
   ],
-} as Short;
+} as ShortVideo;
 
 describe('buildShortMetadata', () => {
   it('builds self-canonical localized metadata with hreflang and video data', () => {
@@ -98,7 +98,7 @@ describe('buildShortMetadata', () => {
       media: short.media.map((item) =>
         item.kind === 'video' ? { ...item, format: 'mov' } : item,
       ),
-    } as Short;
+    } as ShortVideo;
 
     const metadata = buildShortMetadata({ short: movShort, locale: 'en' });
 

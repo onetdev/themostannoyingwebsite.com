@@ -41,7 +41,7 @@ describe('ContentApiClient', () => {
     expect(client.images).toBeDefined();
     expect(client.health).toBeDefined();
     expect(client.search).toBeDefined();
-    expect(client.shorts).toBeDefined();
+    expect(client.shortVideos).toBeDefined();
     expect(client.locales).toBeDefined();
     expect(client.translations).toBeDefined();
     expect(client.pools).toBeDefined();
@@ -807,8 +807,8 @@ describe('ContentApiClient', () => {
     });
   });
 
-  describe('shorts resource', () => {
-    it('calls GET api/v1/shorts with query parameters', async () => {
+  describe('short videos resource', () => {
+    it('calls GET api/v1/short-videos with query parameters', async () => {
       let capturedUrl = '';
       const mockFetch = jest
         .fn<typeof fetch>()
@@ -822,7 +822,7 @@ describe('ContentApiClient', () => {
               items: [
                 {
                   id: '00000000-0000-0000-0000-000000000001',
-                  short_group: '001-caveman-dirtbike-vhs',
+                  short_video_group: '001-caveman-dirtbike-vhs',
                   slug: 'caveman-dirtbike-vhs',
                   lang: 'en',
                   title: '1995 Called',
@@ -873,7 +873,7 @@ describe('ContentApiClient', () => {
         });
 
       const client = createContentClient({ fetch: mockFetch });
-      const result = await client.shorts.list({
+      const result = await client.shortVideos.list({
         lang: 'en',
         limit: 10,
         category: 'humor',
@@ -881,7 +881,7 @@ describe('ContentApiClient', () => {
         order: 'asc',
       });
 
-      expect(capturedUrl).toContain('/api/v1/shorts?');
+      expect(capturedUrl).toContain('/api/v1/short-videos?');
       expect(capturedUrl).toContain('lang=en');
       expect(capturedUrl).toContain('limit=10');
       expect(capturedUrl).toContain('category=humor');
@@ -893,7 +893,7 @@ describe('ContentApiClient', () => {
       expect(result.items[0].ai_assisted).toBe(true);
     });
 
-    it('calls GET api/v1/shorts/{slug} with an encoded slug', async () => {
+    it('calls GET api/v1/short-videos/{slug} with an encoded slug', async () => {
       let capturedUrl = '';
       const mockFetch = jest
         .fn<typeof fetch>()
@@ -902,7 +902,7 @@ describe('ContentApiClient', () => {
           return new Response(
             JSON.stringify({
               id: '00000000-0000-0000-0000-000000000001',
-              short_group: '001-caveman-dirtbike-vhs',
+              short_video_group: '001-caveman-dirtbike-vhs',
               slug: 'caveman dirtbike/vhs',
               lang: 'en',
               title: '1995 Called',
@@ -939,11 +939,13 @@ describe('ContentApiClient', () => {
         });
 
       const client = createContentClient({ fetch: mockFetch });
-      const short = await client.shorts.getBySlug('caveman dirtbike/vhs', {
+      const short = await client.shortVideos.getBySlug('caveman dirtbike/vhs', {
         lang: 'en',
       });
 
-      expect(capturedUrl).toContain('/api/v1/shorts/caveman%20dirtbike%2Fvhs');
+      expect(capturedUrl).toContain(
+        '/api/v1/short-videos/caveman%20dirtbike%2Fvhs',
+      );
       expect(capturedUrl).toContain('lang=en');
       expect(short.translations).toHaveLength(1);
       expect(short.translations[0].lang).toBe('de');

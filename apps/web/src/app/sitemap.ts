@@ -6,7 +6,7 @@ import { absoluteUrl } from '@/core/seo/absolute-url';
 import {
   getArticleService,
   getAuthorService,
-  getShortService,
+  getShortVideoService,
 } from '@/features/content/services';
 import i18nConfig from '@/root/i18n.config';
 import { getAppConfigService } from '@/services';
@@ -153,10 +153,10 @@ async function sitemap(): Promise<MetadataRoute.Sitemap> {
     localizedPageMeta(`authors/${author.slug}`, 'weekly'),
   );
 
-  const shortService = getShortService(di);
+  const shortVideoService = getShortVideoService(di);
   const shorts = mapGroupedContentToSitemapEntries({
-    items: await shortService.listAll(),
-    groupKey: (item) => item.short_group,
+    items: await shortVideoService.listAll(),
+    groupKey: (item) => item.short_video_group,
     lang: (item) => item.lang,
     path: (item) => `shorts/${item.slug}`,
     lastModified: (item) => new Date(item.published_at),

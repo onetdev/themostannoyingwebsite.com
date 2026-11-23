@@ -4,8 +4,8 @@ import {
   GetArticleListQueryParams,
   LanguageCode,
   SearchResponseItem,
-  ShortDetailResponse,
-  ShortResponseItem,
+  ShortVideoDetailResponse,
+  ShortVideoResponseItem,
   ValidationErrorResponse,
 } from '../src/index';
 
@@ -47,7 +47,7 @@ const articlePayload = {
 
 const shortPayload = {
   id: '00000000-0000-0000-0000-000000000001',
-  short_group: '001-caveman-dirtbike-vhs',
+  short_video_group: '001-caveman-dirtbike-vhs',
   slug: 'caveman-dirtbike-vhs',
   lang: 'en',
   title: '1995 Called',
@@ -190,9 +190,9 @@ describe('Content SDK Zod Schemas', () => {
     });
   });
 
-  describe('ShortResponseItem', () => {
+  describe('ShortVideoResponseItem', () => {
     it('validates a localized short with cues and media renditions', () => {
-      const parsed = ShortResponseItem.parse(shortPayload);
+      const parsed = ShortVideoResponseItem.parse(shortPayload);
       expect(parsed.slug).toBe('caveman-dirtbike-vhs');
       expect(parsed.cues).toHaveLength(1);
       expect(parsed.media[0].variant).toBe('720p');
@@ -200,7 +200,7 @@ describe('Content SDK Zod Schemas', () => {
     });
 
     it('validates a short detail response with translations', () => {
-      const parsed = ShortDetailResponse.parse({
+      const parsed = ShortVideoDetailResponse.parse({
         ...shortPayload,
         translations: [
           {
@@ -219,7 +219,7 @@ describe('Content SDK Zod Schemas', () => {
       const withoutAiAssisted: Record<string, unknown> = { ...shortPayload };
       delete withoutAiAssisted.ai_assisted;
 
-      expect(() => ShortResponseItem.parse(withoutAiAssisted)).toThrow();
+      expect(() => ShortVideoResponseItem.parse(withoutAiAssisted)).toThrow();
     });
   });
 
@@ -227,14 +227,14 @@ describe('Content SDK Zod Schemas', () => {
     it('accepts shorts as a search result type', () => {
       const parsed = SearchResponseItem.parse({
         id: '00000000-0000-0000-0000-000000000002',
-        type: 'short',
+        type: 'short-video',
         slug: 'caveman-dirtbike-vhs',
         lang: 'en',
         title: '1995 Called',
         excerpt: 'Prehistoric man, modern dirt bike.',
       });
 
-      expect(parsed.type).toBe('short');
+      expect(parsed.type).toBe('short-video');
     });
   });
 });

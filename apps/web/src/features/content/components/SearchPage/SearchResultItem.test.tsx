@@ -73,8 +73,8 @@ describe('SearchResultItem', () => {
   });
 
   it('links shorts to the player and records the search entry point', () => {
-    window.history.replaceState(null, '', '/search?q=cats&type=short');
-    render(<SearchResultItem item={makeItem({ type: 'short' })} />);
+    window.history.replaceState(null, '', '/search?q=cats&type=short-video');
+    render(<SearchResultItem item={makeItem({ type: 'short-video' })} />);
 
     const link = screen.getByRole('link');
     expect(link).toHaveAttribute('href', '/shorts/example');
@@ -82,7 +82,7 @@ describe('SearchResultItem', () => {
     fireEvent.click(link);
 
     expect(mockRememberShortsEntry).toHaveBeenCalledWith(
-      '/search?q=cats&type=short',
+      '/search?q=cats&type=short-video',
     );
   });
 
@@ -100,7 +100,7 @@ describe('SearchResultItem', () => {
     expect(getSearchResultPath({ type: 'article', slug: 'hello world' })).toBe(
       '/articles/hello%20world',
     );
-    expect(getSearchResultPath({ type: 'short', slug: 'a clip' })).toBe(
+    expect(getSearchResultPath({ type: 'short-video', slug: 'a clip' })).toBe(
       '/shorts/a%20clip',
     );
     expect(getSearchResultPath({ type: 'page', slug: 'privacy policy' })).toBe(

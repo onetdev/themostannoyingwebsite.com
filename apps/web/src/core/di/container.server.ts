@@ -4,7 +4,7 @@ import { DI as DIComments } from '@/features/comments/types';
 import {
   ArticleService,
   AuthorService,
-  ShortService,
+  ShortVideoService,
 } from '@/features/content/services';
 import { DI as DIContent } from '@/features/content/types';
 import { OnlySpamsService } from '@/features/marketing/services';
@@ -26,7 +26,10 @@ export function configureServerContainer(container: Container) {
     .to(ArticleService)
     .inSingletonScope();
   container.bind(DIContent.AuthorService).to(AuthorService).inSingletonScope();
-  container.bind(DIContent.ShortService).to(ShortService).inSingletonScope();
+  container
+    .bind(DIContent.ShortVideoService)
+    .to(ShortVideoService)
+    .inSingletonScope();
   container
     .bind(DIMarketing.OnlySpamsService)
     .to(OnlySpamsService)

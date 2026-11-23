@@ -1,6 +1,6 @@
 'use client';
 
-import type { ShortListItem } from '@maw/content-sdk';
+import type { ShortVideoListItem } from '@maw/content-sdk';
 import { Button, Icon } from '@maw/ui-lib';
 import { cn } from 'cn';
 import { useTranslations } from 'next-intl';
@@ -15,7 +15,7 @@ import {
 } from './short-player-frame';
 
 export interface ShortPlayerOverlayProps {
-  short: ShortListItem;
+  short: ShortVideoListItem;
   video: HTMLVideoElement | null;
   muted: boolean;
   showCaptions: boolean;

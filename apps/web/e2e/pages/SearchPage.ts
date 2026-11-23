@@ -25,7 +25,7 @@ export const getSearchPage = (page: Page) => {
       '[data-testid="search-result-item"][data-type="article"]',
     ),
     shortResults: page.locator(
-      '[data-testid="search-result-item"][data-type="short"]',
+      '[data-testid="search-result-item"][data-type="short-video"]',
     ),
     pageResults: page.locator(
       '[data-testid="search-result-item"][data-type="page"]',

@@ -1,9 +1,9 @@
-import type { ShortListItem } from '@maw/content-sdk';
+import type { ShortVideoListItem } from '@maw/content-sdk';
 
 import { ShortCard } from './ShortCard';
 
 export interface ShortGridProps {
-  shorts: ShortListItem[];
+  shorts: ShortVideoListItem[];
 }
 
 /**

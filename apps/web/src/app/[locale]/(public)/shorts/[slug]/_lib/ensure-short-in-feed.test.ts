@@ -1,8 +1,8 @@
-import type { Short, ShortListItem } from '@maw/content-sdk';
+import type { ShortVideo, ShortVideoListItem } from '@maw/content-sdk';
 import { ensureShortInFeed } from './ensure-short-in-feed';
 
 const makeShort = (id: string, slug: string) =>
-  ({ id, slug }) as unknown as ShortListItem;
+  ({ id, slug }) as unknown as ShortVideoListItem;
 
 describe('ensureShortInFeed', () => {
   it('keeps the feed untouched when it already contains the short', () => {
@@ -10,7 +10,7 @@ describe('ensureShortInFeed', () => {
     const result = ensureShortInFeed(feed, {
       id: 'b',
       slug: 'b',
-    } as unknown as Short);
+    } as unknown as ShortVideo);
 
     expect(result).toBe(feed);
   });
@@ -20,7 +20,7 @@ describe('ensureShortInFeed', () => {
     const result = ensureShortInFeed(feed, {
       id: 'b',
       slug: 'b',
-    } as unknown as Short);
+    } as unknown as ShortVideo);
 
     expect(result.map((item) => item.id)).toEqual(['b', 'a']);
   });

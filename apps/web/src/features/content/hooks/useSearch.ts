@@ -16,7 +16,7 @@ export type SearchFilter =
 export const SEARCH_FILTERS: readonly SearchFilter[] = [
   'all',
   'article',
-  'short',
+  'short-video',
   'page',
 ];
 
@@ -28,6 +28,18 @@ interface SearchState {
 export const isSearchFilter = (value: unknown): value is SearchFilter =>
   typeof value === 'string' &&
   (SEARCH_FILTERS as readonly string[]).includes(value);
+
+/**
+ * Maps the pre-rename `type=short` search links to the API's `short-video`
+ * discriminator so bookmarks and shared URLs keep working.
+ */
+const normalizeSearchFilter = (value: unknown): SearchFilter => {
+  if (value === 'short') {
+    return 'short-video';
+  }
+
+  return isSearchFilter(value) ? value : 'all';
+};
 
 const buildSearchUrl = ({ query, type }: SearchState): string => {
   const params = new URLSearchParams();
@@ -60,7 +72,7 @@ const readSearchState = (): SearchState => {
     // `?q=` is the canonical form (also used by the SearchAction); the
     // `#query=` fragment stays supported for older links.
     query: searchParams.get('q') ?? hashParams.get('query') ?? '',
-    type: isSearchFilter(rawType) ? rawType : 'all',
+    type: normalizeSearchFilter(rawType),
   };
 };
 

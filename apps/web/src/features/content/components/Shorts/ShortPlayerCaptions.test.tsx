@@ -2,12 +2,12 @@
  * @jest-environment jsdom
  */
 import '@testing-library/jest-dom';
-import type { ShortCue } from '@maw/content-sdk';
+import type { ShortVideoCue } from '@maw/content-sdk';
 import { act, render, screen } from '@testing-library/react';
 
 import { ShortPlayerCaptions } from './ShortPlayerCaptions';
 
-const cues: ShortCue[] = [
+const cues: ShortVideoCue[] = [
   {
     shot_id: 'shot-1',
     start_ms: 0,

@@ -3,13 +3,15 @@ import { defineConfig } from 'orval';
 /**
  * OpenAPI spec the client is generated from.
  *
- * Defaults to the deployed Content API, but can be overridden (e.g. with a
- * local `pnpm dev` server at `http://localhost:3000/docs/json`) so generation
- * is reproducible and does not depend on production being reachable.
+ * Defaults to the deployed dev Content API, which is the source of truth for
+ * in-progress contract changes. Production lags behind it, so generating from
+ * production would silently drop endpoints and fields that the app already
+ * consumes. Override with `CONTENT_OPENAPI_URL` to target a local `pnpm dev`
+ * server (e.g. `http://localhost:3012/docs/json`) or production explicitly.
  */
 const openApiUrl =
   process.env.CONTENT_OPENAPI_URL ??
-  'https://content.themostannoyingwebsite.com/docs/json';
+  'https://dev.content.themostannoyingwebsite.com/docs/json';
 
 export default defineConfig({
   contentSdk: {

@@ -1,7 +1,7 @@
-import type { ShortMedia } from '@maw/content-sdk';
+import type { ShortVideoMedia } from '@maw/content-sdk';
 import { selectShortMedia } from './short-media';
 
-const videoDefault: ShortMedia = {
+const videoDefault: ShortVideoMedia = {
   kind: 'video',
   variant: '720p',
   format: 'mp4',
@@ -13,7 +13,7 @@ const videoDefault: ShortMedia = {
   url: 'https://media.example.com/video-720.mp4',
 };
 
-const videoFallback: ShortMedia = {
+const videoFallback: ShortVideoMedia = {
   ...videoDefault,
   variant: '480p',
   width: 480,
@@ -22,7 +22,7 @@ const videoFallback: ShortMedia = {
   url: 'https://media.example.com/video-480.mp4',
 };
 
-const posterDefault: ShortMedia = {
+const posterDefault: ShortVideoMedia = {
   kind: 'thumbnail',
   variant: 'lg',
   format: 'webp',

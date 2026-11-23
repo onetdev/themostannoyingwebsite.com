@@ -1,10 +1,10 @@
-import type { Short } from '@maw/content-sdk';
+import type { ShortVideo } from '@maw/content-sdk';
 import type { Metadata } from 'next';
 import { selectShortMedia } from '@/features/content/components/Shorts/short-media';
 import i18nConfig from '@/root/i18n.config';
 
 export interface BuildShortMetadataInput {
-  short: Short;
+  short: ShortVideo;
   locale: AppLocale;
 }
 

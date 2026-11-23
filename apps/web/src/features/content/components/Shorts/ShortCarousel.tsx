@@ -1,6 +1,6 @@
 'use client';
 
-import type { ShortListItem } from '@maw/content-sdk';
+import type { ShortVideoListItem } from '@maw/content-sdk';
 import { Icon } from '@maw/ui-lib';
 import { cn } from 'cn';
 import { useTranslations } from 'next-intl';
@@ -10,7 +10,7 @@ import { Link } from '@/core/i18n/navigation';
 import { ShortCard } from './ShortCard';
 
 export interface ShortCarouselProps {
-  shorts: ShortListItem[];
+  shorts: ShortVideoListItem[];
   /** Label for the trailing "view all" tile. */
   ctaLabel: string;
   /** Telemetry event name for the trailing tile. */
