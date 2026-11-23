@@ -13,9 +13,6 @@ export const DisruptionsConfigSchema = z.object({
     defaultTimeoutSeconds: z.number(),
     defaultVariant: ScreensaverVariantSchema,
   }),
-  stickyVideoPlayer: z.object({
-    videoUrl: z.url(),
-  }),
   deadPixel: z.object({
     rainbowChance: z
       .number()

@@ -46,6 +46,11 @@ export default {
     description:
       'Ready for some fiery fun? Flaim a phone here and see how we bring the heat to your mobile experience.',
   },
+  eggTower: {
+    title: 'Egg Tower',
+    description:
+      'Stack eggs, beat the conveyor belt, and try not to make the same steering choice.',
+  },
   hotThings: {
     title: 'Hot things',
     description:

@@ -12,6 +12,7 @@ const RouteAliasList = [
   'dilf',
   'donate',
   'flaim-a-phone',
+  'games.egg-tower',
   'home',
   'hot-things',
   'only-spams',

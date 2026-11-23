@@ -112,7 +112,7 @@ export default {
     },
     stickyVideoPlayer: {
       label: 'Sticky video player',
-      hint: 'Shows a sticky video player that follows you as you scroll.',
+      hint: 'Shows a sticky game teaser that follows you as you scroll.',
     },
     wheelOfFortune: {
       label: 'Wheel of fortune',

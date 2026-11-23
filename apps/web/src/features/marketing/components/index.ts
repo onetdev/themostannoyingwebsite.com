@@ -1,6 +1,7 @@
 export * from './AdblockerSuspectBar';
 export * from './ContainerPromotionFlaps';
 export * from './DilfPage';
+export * from './EggTowerPage';
 export * from './FlaimSurveyPage';
 export * from './NewsletterModalTrigger';
 export * from './OnlySpamsPage';
