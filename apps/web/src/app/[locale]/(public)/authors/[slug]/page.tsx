@@ -13,7 +13,6 @@ import {
 } from '@/features/content/services';
 import i18nConfig from '@/root/i18n.config';
 import { PageLayout } from '../../_components/PageLayout';
-import { buildAuthorStaticParams } from './_lib/build-author-static-params';
 
 type PageParams = {
   slug: string;
@@ -65,14 +64,6 @@ export async function generateMetadata({
     },
   };
 }
-
-export const generateStaticParams = async () => {
-  const container = getDependencyContainer();
-  const authorService = getAuthorService(container);
-  const authors = await authorService.listAll();
-
-  return buildAuthorStaticParams(i18nConfig.locales, authors);
-};
 
 export default async function Page({ params }: PageProps) {
   const { slug, locale } = await params;

@@ -10,9 +10,7 @@ import { ShortsPlayer } from '@/features/content/components';
 import { selectShortMedia } from '@/features/content/components/Shorts/short-media';
 import { getShortService } from '@/features/content/services';
 import { ReportRouteVisit } from '@/features/monitoring/components';
-import i18nConfig from '@/root/i18n.config';
 import { buildShortMetadata } from './_lib/build-short-metadata';
-import { buildShortStaticParams } from './_lib/build-short-static-params';
 import { ensureShortInFeed } from './_lib/ensure-short-in-feed';
 
 type PageParams = {
@@ -39,13 +37,6 @@ export async function generateMetadata({
 
   return buildShortMetadata({ short, locale: appLocale });
 }
-
-export const generateStaticParams = async () => {
-  const container = getDependencyContainer();
-  const shortService = getShortService(container);
-
-  return buildShortStaticParams(i18nConfig.locales, shortService);
-};
 
 export default async function Page({ params }: PageProps) {
   const { slug, locale } = await params;

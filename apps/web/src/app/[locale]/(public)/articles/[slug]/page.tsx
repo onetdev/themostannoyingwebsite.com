@@ -11,7 +11,6 @@ import { ArticleItemPage } from '@/features/content/components';
 import { getArticleService } from '@/features/content/services';
 import i18nConfig from '@/root/i18n.config';
 import { PageLayout } from '../../_components/PageLayout';
-import { buildArticleStaticParams } from './_lib/build-article-static-params';
 
 type PageParams = {
   slug: string;
@@ -69,13 +68,6 @@ export async function generateMetadata({
     },
   };
 }
-
-export const generateStaticParams = async () => {
-  const container = getDependencyContainer();
-  const articleService = getArticleService(container);
-
-  return buildArticleStaticParams(i18nConfig.locales, articleService);
-};
 
 export default async function Page({ params }: PageProps) {
   const { slug, locale } = await params;
