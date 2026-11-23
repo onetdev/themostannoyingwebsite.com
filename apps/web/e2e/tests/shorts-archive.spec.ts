@@ -15,6 +15,7 @@ test('shorts archive lists clips and opens the player', async ({
   await page.goto('/en/shorts/');
 
   await expect(page.getByTestId('shorts-page')).toBeVisible();
+  await expect(page.getByTestId('shorts-page-count')).toBeVisible();
   await expect(page.getByTestId('short-grid')).toBeVisible();
   await expect(page.getByTestId('short-card').first()).toBeVisible();
   await expect(page.getByTestId('short-type-badge').first()).toHaveText(

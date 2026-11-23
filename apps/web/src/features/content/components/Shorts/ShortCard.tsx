@@ -6,10 +6,11 @@ import { cn } from 'cn';
 import Image from 'next/image';
 import { useTranslations } from 'next-intl';
 import type { ComponentProps } from 'react';
-import { useEffect, useRef, useState } from 'react';
+import { useRef, useState } from 'react';
 import { Link, usePathname } from '@/core/i18n/navigation';
 import { rememberShortsEntry } from '@/features/content/shorts-entry';
 import { useCanHover } from '@/hooks/useCanHover';
+import { useIntersectionObserver } from '@/hooks/useIntersectionObserver';
 import { useRuntimeStore } from '@/stores';
 
 import { formatShortDuration } from './short-duration';
@@ -43,25 +44,16 @@ export function ShortCard({ short, className, ...rest }: ShortCardProps) {
   const aiDisclosure = short.ai_assisted ? `, ${t('aiAssisted')}` : '';
   const accessibleLabel = `${t('playLabel', { title: short.title })} — ${t('shortLabel')}${aiDisclosure}`;
 
-  useEffect(() => {
-    const node = cardRef.current;
-
-    if (!node || typeof IntersectionObserver === 'undefined') {
-      return;
-    }
-
-    const observer = new IntersectionObserver(([entry]) => {
+  useIntersectionObserver({
+    $ref: cardRef,
+    onIntersect: (entry) => {
       setIsInView(entry.isIntersecting);
 
       if (!entry.isIntersecting) {
         setIsVideoReady(false);
       }
-    });
-
-    observer.observe(node);
-
-    return () => observer.disconnect();
-  }, []);
+    },
+  });
 
   const onPointerMove = (event: React.PointerEvent<HTMLElement>) => {
     if (event.pointerType === 'mouse' && canHover && !isPointerOver) {

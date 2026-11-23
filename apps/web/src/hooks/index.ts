@@ -4,6 +4,7 @@ export * from './useCanHover';
 export * from './useDocumentVisibilityListener';
 export * from './useFaviconBadge';
 export * from './useInteractOutside';
+export * from './useIntersectionObserver';
 export * from './useIsScrolled';
 export * from './useLangDir';
 export * from './useLanguageSwitcher';
