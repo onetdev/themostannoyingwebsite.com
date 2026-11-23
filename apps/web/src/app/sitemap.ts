@@ -1,4 +1,3 @@
-import type { ArticleListItem, ShortListItem } from '@maw/content-sdk';
 import type { MetadataRoute } from 'next';
 import type { Languages } from 'next/dist/lib/metadata/types/alternative-urls-types';
 
@@ -13,6 +12,8 @@ import i18nConfig from '@/root/i18n.config';
 import { getAppConfigService } from '@/services';
 
 const config = getAppConfigService().getDeploymentMeta();
+
+type SitemapEntry = MetadataRoute.Sitemap[number];
 
 /**
  * Builds the `hreflang` alternates for a path that exists under every locale,
@@ -35,24 +36,17 @@ const genLangAlternates = (path: string): Languages<string> => {
   return alternates;
 };
 
-const commonPageMeta = (path: string): MetadataRoute.Sitemap[0] => {
-  return {
-    url: absoluteUrl(config.publicUrl, i18nConfig.defaultLocale, path),
-    changeFrequency: 'daily',
-    alternates: {
-      languages: genLangAlternates(path),
-    },
-  };
-};
-
 /**
- * Sitemap entry for a locale-independent author profile. Unlike the daily
- * landing pages, profiles change infrequently.
+ * Sitemap entry for a page whose path is identical across locales. The locale
+ * is only expressed through the `hreflang` alternates.
  */
-const authorPageMeta = (path: string): MetadataRoute.Sitemap[0] => {
+const localizedPageMeta = (
+  path: string,
+  changeFrequency: SitemapEntry['changeFrequency'],
+): SitemapEntry => {
   return {
     url: absoluteUrl(config.publicUrl, i18nConfig.defaultLocale, path),
-    changeFrequency: 'weekly',
+    changeFrequency,
     alternates: {
       languages: genLangAlternates(path),
     },
@@ -60,140 +54,114 @@ const authorPageMeta = (path: string): MetadataRoute.Sitemap[0] => {
 };
 
 /**
- * Builds the `hreflang` alternates map for one article group, including
+ * Describes a content type whose logical items exist once per locale (articles,
+ * shorts). Every localized variant carries a per-locale slug, so the canonical
+ * identity is the group and not the path.
+ */
+interface GroupedContentSpec<T> {
+  /** Every localized variant, across every locale. */
+  items: readonly T[];
+  /** Identity of the logical item shared by its localized variants. */
+  groupKey: (item: T) => string;
+  /** Locale of one localized variant. */
+  lang: (item: T) => string;
+  /** Root-relative, locale-less path of one localized variant. */
+  path: (item: T) => string;
+  lastModified?: (item: T) => Date;
+  changeFrequency?: SitemapEntry['changeFrequency'];
+}
+
+/**
+ * Builds the `hreflang` alternates map for one content group, including
  * `x-default`. Extracted so the per-locale iteration is independently testable.
  */
-const buildGroupLanguages = (group: ArticleListItem[]): Languages<string> => {
-  const languages: Languages<string> = Object.fromEntries(
-    group.map((item) => [
-      item.lang,
-      absoluteUrl(config.publicUrl, item.lang, `articles/${item.slug}`),
-    ]),
-  );
-
-  const xDefault =
-    group.find((item) => item.lang === i18nConfig.defaultLocale) ?? group[0];
-  languages['x-default'] = absoluteUrl(
-    config.publicUrl,
-    xDefault.lang,
-    `articles/${xDefault.slug}`,
-  );
-
-  return languages;
-};
-
-/** Maps one article group to its per-locale sitemap entries. */
-const groupToSitemapEntries = (
-  group: ArticleListItem[],
-): MetadataRoute.Sitemap => {
-  const languages = buildGroupLanguages(group);
-
-  return group.map((item) => ({
-    url: absoluteUrl(config.publicUrl, item.lang, `articles/${item.slug}`),
-    lastModified: new Date(item.published_at),
-    alternates: { languages },
-  }));
-};
-
-/**
- * Groups localized articles by their canonical `article_group` so each logical
- * article is emitted once per locale with a complete `hreflang` alternates map
- * (including `x-default`), instead of isolated per-locale entries.
- */
-const mapArticlesToSitemapEntries = (
-  items: ArticleListItem[],
-): MetadataRoute.Sitemap => {
-  const groups = new Map<string, ArticleListItem[]>();
-
-  for (const item of items) {
-    if (!(i18nConfig.locales as readonly string[]).includes(item.lang)) {
-      continue;
-    }
-    const group = groups.get(item.article_group) ?? [];
-    group.push(item);
-    groups.set(item.article_group, group);
-  }
-
-  return [...groups.values()].flatMap(groupToSitemapEntries);
-};
-
-/**
- * Builds the `hreflang` alternates map for one short group, including
- * `x-default`. A group is the same clip across locales.
- */
-const buildShortGroupLanguages = (
-  group: ShortListItem[],
+const buildGroupLanguages = <T>(
+  group: readonly T[],
+  spec: Pick<GroupedContentSpec<T>, 'lang' | 'path'>,
 ): Languages<string> => {
   const languages: Languages<string> = Object.fromEntries(
     group.map((item) => [
-      item.lang,
-      absoluteUrl(config.publicUrl, item.lang, `shorts/${item.slug}`),
+      spec.lang(item),
+      absoluteUrl(config.publicUrl, spec.lang(item), spec.path(item)),
     ]),
   );
 
   const xDefault =
-    group.find((item) => item.lang === i18nConfig.defaultLocale) ?? group[0];
+    group.find((item) => spec.lang(item) === i18nConfig.defaultLocale) ??
+    group[0];
   languages['x-default'] = absoluteUrl(
     config.publicUrl,
-    xDefault.lang,
-    `shorts/${xDefault.slug}`,
+    spec.lang(xDefault),
+    spec.path(xDefault),
   );
 
   return languages;
 };
 
-/** Maps one short group to its per-locale sitemap entries. */
-const shortsGroupToSitemapEntries = (
-  group: ShortListItem[],
-): MetadataRoute.Sitemap => {
-  const languages = buildShortGroupLanguages(group);
-
-  return group.map((item) => ({
-    url: absoluteUrl(config.publicUrl, item.lang, `shorts/${item.slug}`),
-    lastModified: new Date(item.published_at),
-    changeFrequency: 'monthly',
-    alternates: { languages },
-  }));
-};
-
 /**
- * Groups localized shorts by their canonical `short_group` so each logical
- * clip is emitted once per locale with a complete alternates map.
+ * Groups localized content by its canonical identity so each logical item is
+ * emitted once per locale with a complete `hreflang` alternates map (including
+ * `x-default`), instead of isolated per-locale entries.
  */
-const mapShortsToSitemapEntries = (
-  items: ShortListItem[],
+const mapGroupedContentToSitemapEntries = <T>(
+  spec: GroupedContentSpec<T>,
 ): MetadataRoute.Sitemap => {
-  const groups = new Map<string, ShortListItem[]>();
+  const groups = new Map<string, T[]>();
 
-  for (const item of items) {
-    if (!(i18nConfig.locales as readonly string[]).includes(item.lang)) {
+  for (const item of spec.items) {
+    if (!(i18nConfig.locales as readonly string[]).includes(spec.lang(item))) {
       continue;
     }
-    const group = groups.get(item.short_group) ?? [];
+
+    const key = spec.groupKey(item);
+    const group = groups.get(key) ?? [];
     group.push(item);
-    groups.set(item.short_group, group);
+    groups.set(key, group);
   }
 
-  return [...groups.values()].flatMap(shortsGroupToSitemapEntries);
+  return [...groups.values()].flatMap((group) => {
+    const languages = buildGroupLanguages(group, spec);
+
+    return group.map((item) => ({
+      url: absoluteUrl(config.publicUrl, spec.lang(item), spec.path(item)),
+      ...(spec.lastModified ? { lastModified: spec.lastModified(item) } : {}),
+      ...(spec.changeFrequency
+        ? { changeFrequency: spec.changeFrequency }
+        : {}),
+      alternates: { languages },
+    }));
+  });
 };
 
 async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const di = getDependencyContainer();
-  const service = getArticleService(di);
-  const articlesList = await service.listAll();
-  const articles = mapArticlesToSitemapEntries(articlesList);
+
+  const articleService = getArticleService(di);
+  const articles = mapGroupedContentToSitemapEntries({
+    items: await articleService.listAll(),
+    groupKey: (item) => item.article_group,
+    lang: (item) => item.lang,
+    path: (item) => `articles/${item.slug}`,
+    lastModified: (item) => new Date(item.published_at),
+  });
 
   // Author slugs are locale-independent, so each author is emitted once with a
   // complete `hreflang` alternates map (including `x-default`).
   const authorService = getAuthorService(di);
   const authorsList = await authorService.listAll();
   const authors = authorsList.map((author) =>
-    authorPageMeta(`authors/${author.slug}`),
+    localizedPageMeta(`authors/${author.slug}`, 'weekly'),
   );
 
   const shortService = getShortService(di);
-  const shortsList = await shortService.listAll();
-  const shorts = mapShortsToSitemapEntries(shortsList);
+  const shorts = mapGroupedContentToSitemapEntries({
+    items: await shortService.listAll(),
+    groupKey: (item) => item.short_group,
+    lang: (item) => item.lang,
+    path: (item) => `shorts/${item.slug}`,
+    lastModified: (item) => new Date(item.published_at),
+    changeFrequency: 'monthly',
+  });
 
   const commonPages = [
     '',
@@ -213,7 +181,9 @@ async function sitemap(): Promise<MetadataRoute.Sitemap> {
     'virgin',
   ];
 
-  const commonPagesEntries = commonPages.map((path) => commonPageMeta(path));
+  const commonPagesEntries = commonPages.map((path) =>
+    localizedPageMeta(path, 'daily'),
+  );
 
   return [...commonPagesEntries, ...articles, ...authors, ...shorts];
 }
