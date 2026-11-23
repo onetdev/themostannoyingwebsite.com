@@ -22,10 +22,9 @@ A player has different constraints from an article page:
   it cannot.
 - A vertical feed needs one viewport-height slide per clip, lazy media mounting,
   and a single active video so the browser is not asked to decode the whole feed.
-- The overlay controls must not slide away with a swipe, and the feed must remain
-  usable when the Content API does not expose the shorts endpoint yet.
-- The page must be shareable, crawlable, and describe itself with structured data
-  (the project rule for every public page).
+- The feed must remain usable when the Content API does not expose the shorts
+  endpoint yet, and the page must be shareable, crawlable, and describe itself
+  with structured data (the project rule for every public page).
 
 ## Decision
 
@@ -43,37 +42,50 @@ A player has different constraints from an article page:
     `Carousel` with `spacing={false}` and a full-height viewport. Only slides
     adjacent to the active index mount a `<video>`; the rest keep their poster.
     The active video plays, the previous one pauses, and the feed pauses when the
-    document is hidden.
+    document is hidden. A blurred poster backdrop lives outside the carousel and
+    crossfades between clips, so the surrounding color never hard-cuts.
 
 4.  **Sound-on first, muted fallback.** The active video starts unmuted. If
     `play()` rejects because of the autoplay policy, the player retries muted and
     shows an unmute prompt. `prefers-reduced-motion` starts paused with a play
     control. Clips loop (`loop`) instead of auto-advancing.
 
-5.  **TikTok-style persistent chrome.** The top bar (close, sound), right rail
-    (author, share, captions, fullscreen), lower third (author, title, summary,
-    categories, AI disclosure), and progress bar stay visible. Only play/pause is
-    transient; it stays visible while paused.
+5.  **TikTok-style chrome that travels with the clip.** The top bar (close,
+    sound), right rail (like, share, captions, fullscreen), lower third (author,
+    title, summary, categories, AI disclosure), and progress bar are rendered
+    inside the active slide, so they move with the clip during a swipe instead of
+    floating over content that has already left. Only play/pause is transient; it
+    stays visible while paused.
 
 6.  **The URL follows the active slide.** Slide changes use
     `history.replaceState`, not an RSC navigation, so sharing reflects the clip on
-    screen and the back button returns to the referring page.
+    screen and the back button returns to the referring page. The router is
+    intentionally not notified, which means `usePathname()` keeps reporting the
+    entry route for as long as the player is open.
 
 7.  **Structured data and caching match articles.** The page emits a `VideoObject`
-    plus a breadcrumb, declares self-canonical `hreflang` alternates from
-    `translations`, uses `content:shorts` with a 1800 s revalidate, and is included
-    in the sitemap grouped by `short_group`.
+    (only when a poster exists, since search engines reject a thumbnail-less
+    video node) plus a breadcrumb, declares self-canonical `hreflang` alternates
+    from `translations`, uses `content:shorts` with a 1800 s revalidate, and is
+    included in the sitemap grouped by `short_group`.
 
 ## Consequences
 
 - **Pros**: A single shareable player URL; predictable playback lifecycle; no
   page-level chrome around the video; graceful rollout before the production API
   exposes shorts.
-- **Pros**: The persistent chrome stays fixed during swipes because it is rendered
-  once outside the carousel.
+- **Pros**: The chrome belongs to the active slide, so swiping never leaves stale
+  controls hovering over a different clip.
 - **Cons**: Sound-on playback can still be downgraded to muted by the browser; the
   unmute prompt is part of the contract.
 - **Cons**: `history.replaceState` means the browser back button skips individual
-  swipes, which is the intended sharing behavior but not a full history stack.
+  swipes, and router-derived state (for example telemetry route scope) stays at
+  the entry route while the player is open.
+- **Cons**: Only the active slide renders the chrome, so a clip that is still
+  being dragged into view has no controls until it settles.
+- **Cons**: Each localized player page ships the whole locale feed as props, so
+  the payload grows with the number of clips; pagination is the follow-up if the
+  catalog outgrows a single payload.
+- **Cons**: Likes are local-only state today; there is no like API yet.
 - **Cons**: The shared `Carousel` needed a backwards-compatible `spacing` flag and
   a `viewportClassName` hook for the full-bleed vertical viewport.
