@@ -82,9 +82,11 @@ export class ShortService implements IShortService {
     const items: ShortListItem[] = [];
     let offset = 0;
 
-    try {
-      while (true) {
-        const response = await this.client.shorts.list(
+    while (true) {
+      let response: GetShortListResponse;
+
+      try {
+        response = await this.client.shorts.list(
           {
             ...(params as GetShortListQueryParams),
             limit: PAGE_SIZE,
@@ -92,23 +94,25 @@ export class ShortService implements IShortService {
           },
           CACHE_OPTIONS,
         );
-
-        items.push(...response.items);
-
-        const isComplete =
-          items.length >= response.total || response.items.length === 0;
-
-        if (isComplete) {
-          break;
-        }
-
-        offset += response.items.length;
+      } catch (_err) {
+        // A partially collected feed is still usable, so a failing page ends
+        // the pagination instead of discarding the pages already fetched.
+        break;
       }
 
-      return items;
-    } catch (_err) {
-      return [];
+      items.push(...response.items);
+
+      const isComplete =
+        items.length >= response.total || response.items.length === 0;
+
+      if (isComplete) {
+        break;
+      }
+
+      offset += response.items.length;
     }
+
+    return items;
   }
 }
 

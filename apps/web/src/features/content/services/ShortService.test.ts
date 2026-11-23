@@ -111,6 +111,21 @@ describe('ShortService', () => {
 
       await expect(service.listAll({ lang: 'en' })).resolves.toEqual([]);
     });
+
+    it('keeps the pages collected before a failure', async () => {
+      listMock
+        .mockResolvedValueOnce({
+          total: 3,
+          limit: 100,
+          offset: 0,
+          items: [makeShort('a'), makeShort('b')],
+        })
+        .mockRejectedValueOnce(new Error('Server unavailable'));
+
+      const result = await service.listAll({ lang: 'en' });
+
+      expect(result.map((item) => item.id)).toEqual(['a', 'b']);
+    });
   });
 
   describe('getShortService', () => {
