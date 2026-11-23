@@ -59,7 +59,7 @@ export async function AuthorPage({
             <ShortCarousel
               shorts={shorts}
               compact
-              ctaLabel={t('shorts.viewAll')}
+              ctaLabel={t('shorts.browseAll')}
               ctaTrack="content:author:shorts:view-all"
             />
           </section>

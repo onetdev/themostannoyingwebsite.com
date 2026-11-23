@@ -15,6 +15,8 @@ export const getHomePage = (page: Page) => {
     shortsSection: page.getByTestId('home-shorts'),
     shortsArchiveLink: page.getByTestId('shorts-archive-link'),
     shortItems: page.getByTestId('home-shorts').getByTestId('short-card'),
+    shortsPrevious: page.getByRole('button', { name: 'Previous shorts' }),
+    shortsNext: page.getByRole('button', { name: 'Next shorts' }),
 
     goto: async () => {
       await page.goto('/en');

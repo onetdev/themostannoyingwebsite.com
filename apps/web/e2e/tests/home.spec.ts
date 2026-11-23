@@ -59,6 +59,29 @@ test('home surfaces shorts and links to the player', async ({
   await expect(page).toHaveURL(/\/en\/shorts\/$/);
 });
 
+test('home shorts carousel scrolls to the archive tile', async ({
+  page,
+  request,
+}) => {
+  const short = await fetchFirstShort(request);
+  test.skip(short === undefined, 'The Content API does not expose shorts yet.');
+
+  if (!short) {
+    return;
+  }
+
+  await page.setViewportSize({ width: 900, height: 900 });
+  await setupE2eTestState(page);
+  const homePage = getHomePage(page);
+  await homePage.goto();
+
+  await expect(homePage.shortsNext).toBeVisible();
+  await homePage.shortsNext.click();
+
+  await expect(homePage.shortsPrevious).toBeVisible();
+  await expect(homePage.shortsArchiveLink).toBeInViewport();
+});
+
 test('home links to the full article archive below the list', async ({
   page,
 }) => {

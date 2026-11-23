@@ -4,11 +4,11 @@ import { getTranslations } from 'next-intl/server';
 import { Link } from '@/core/i18n/navigation';
 import {
   LargeCoverItem,
-  ShortCarousel,
   SmallCoverListItem,
   TextListItem,
 } from '@/features/content/components';
 import { WanAPhoneCampaignAd } from '@/features/marketing/components';
+import { HomeShorts } from './HomeShorts';
 
 type HomePageProps = {
   coverArticle?: Article | ArticleListItem;
@@ -24,7 +24,6 @@ export async function HomePage({
   shorts,
 }: HomePageProps) {
   const t = await getTranslations();
-  const hasShorts = shorts.length > 0;
 
   return (
     <>
@@ -54,24 +53,7 @@ export async function HomePage({
         </ul>
         <WanAPhoneCampaignAd />
       </section>
-      <div className="border-border col-span-1 my-4 border-t-5 border-b-5 border-double p-5 text-center lg:col-span-4 lg:my-6">
-        <h2 className="text-xl font-light">
-          {t('content.shorts.archiveTitle')}
-        </h2>
-      </div>
-      {hasShorts && (
-        <section
-          className="col-span-1 lg:col-span-4"
-          data-testid="home-shorts"
-          data-track-section="content:home:shorts"
-        >
-          <ShortCarousel
-            shorts={shorts}
-            ctaLabel={t('content.shorts.viewAll')}
-            ctaTrack="content:home:shorts:view-all"
-          />
-        </section>
-      )}
+      <HomeShorts shorts={shorts} />
       <div className="border-border col-span-1 border-t-5 border-b-5 border-double p-5 text-center text-xl font-light italic lg:col-span-4 lg:my-6">
         {t('content.article.moreContentScroll')}
       </div>

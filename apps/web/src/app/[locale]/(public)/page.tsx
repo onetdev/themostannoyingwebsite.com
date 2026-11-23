@@ -12,7 +12,7 @@ export { generateStaticParams } from '@/core/i18n/routing';
 
 export const revalidate = 1800;
 
-/** One row on the widest layout, matching the archive grid. */
+/** Maximum clips in the home shelf (one row at the widest layout). */
 const HOME_SHORTS_LIMIT = 5;
 
 export default async function Page({ params }: NextPageProps) {
@@ -50,8 +50,15 @@ export default async function Page({ params }: NextPageProps) {
   const coverArticle = coverResponse.items[0];
   const denseArticleList = articlePool.items.slice(0, 2);
   const smallCoverArticleList = articlePool.items.slice(2, 14);
-  const shorts =
-    featuredShorts.items.length > 0 ? featuredShorts.items : latestShorts.items;
+  // Featured clips lead the shelf; latest clips fill any remaining slots.
+  const shorts = [
+    ...new Map(
+      [...featuredShorts.items, ...latestShorts.items].map((short) => [
+        short.id,
+        short,
+      ]),
+    ).values(),
+  ].slice(0, HOME_SHORTS_LIMIT);
 
   const seoContext = await getSeoContext(appLocale);
   const blogSchema = buildBlog({
