@@ -40,11 +40,25 @@ export default {
     placeholder: 'Search...',
     emptyTitle: 'Search the site',
     emptyDescription:
-      'Type a keyword above to find articles, authors, and more.',
+      'Type a keyword above to find articles, pages, and shorts.',
     noResults: 'No results found',
     resultMeta: 'Search for "{query}" took {time}ms and found {count} results',
     error: 'Search failed, please try again later',
     peopleAlsoSearched: 'People also searched for:',
+    loadMore: 'Load more results',
+    loadingMore: 'Loading more…',
+    filters: {
+      label: 'Search result types',
+      all: 'All',
+      article: 'Articles',
+      short: 'Shorts',
+      page: 'Pages',
+    },
+    types: {
+      article: 'Article',
+      short: 'Short',
+      page: 'Page',
+    },
   },
   loading: {
     fallback: 'Loading…',

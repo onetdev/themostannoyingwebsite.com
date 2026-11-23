@@ -5,25 +5,33 @@ import type {
   SearchResultItem,
 } from '@maw/content-sdk';
 import { randomNumber } from '@maw/utils/random';
-import { useQuery } from '@tanstack/react-query';
+import { useInfiniteQuery } from '@tanstack/react-query';
 import { createAppContentClient } from '@/core/content';
 import { usePainPreferencesStore } from '@/stores';
 
-type SearchResult = {
+export const SEARCH_PAGE_SIZE = 10;
+
+export interface SearchPageResult {
   items: SearchResultItem[];
+  total: number;
   duration: number;
-};
+}
+
+export type SearchQueryParams = Omit<
+  GetSearchResultListQueryParams,
+  'limit' | 'offset'
+>;
 
 const contentClient = createAppContentClient();
 
-export function useSearchQuery(params: GetSearchResultListQueryParams) {
+export function useSearchQuery(params: SearchQueryParams) {
   const delayEnabled = usePainPreferencesStore(
     (state) => state.flags.searchDelay,
   );
 
-  return useQuery<SearchResult, Error>({
-    queryKey: ['articles', 'search', params],
-    queryFn: async () => {
+  return useInfiniteQuery<SearchPageResult, Error>({
+    queryKey: ['search', params],
+    queryFn: async ({ pageParam }) => {
       const start = performance.now();
       const delaySeconds = delayEnabled ? randomNumber(1, 15) : 0;
       if (delaySeconds > 0) {
@@ -34,15 +42,24 @@ export function useSearchQuery(params: GetSearchResultListQueryParams) {
 
       const response = await contentClient.search.query({
         ...params,
-        type: 'article',
+        limit: SEARCH_PAGE_SIZE,
+        offset: typeof pageParam === 'number' ? pageParam : 0,
       });
-
-      const duration = performance.now() - start;
 
       return {
         items: response.items,
-        duration,
+        total: response.total,
+        duration: performance.now() - start,
       };
+    },
+    initialPageParam: 0,
+    getNextPageParam: (lastPage, allPages) => {
+      const loaded = allPages.reduce(
+        (count, page) => count + page.items.length,
+        0,
+      );
+
+      return loaded < lastPage.total ? loaded : undefined;
     },
     enabled: !!params.q,
   });

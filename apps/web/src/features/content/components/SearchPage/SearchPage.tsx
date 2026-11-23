@@ -1,8 +1,22 @@
 'use client';
 
-import { Alert, AlertDescription, PageHeadline } from '@maw/ui-lib';
+import {
+  Alert,
+  AlertDescription,
+  Button,
+  PageHeadline,
+  Tabs,
+  TabsContent,
+  TabsList,
+  TabsTrigger,
+} from '@maw/ui-lib';
 import { useTranslations } from 'next-intl';
-import { useSearch } from '@/features/content/hooks';
+import {
+  isSearchFilter,
+  SEARCH_FILTERS,
+  type SearchFilter,
+  useSearch,
+} from '@/features/content/hooks';
 import { ShareButton } from '@/features/share/components';
 import { usePainPreferencesStore } from '@/stores';
 import { SearchForm } from '../SearchForm';
@@ -11,33 +25,25 @@ import { SearchEmptyState } from './SearchEmptyState';
 import { SearchLoadingState } from './SearchLoadingState';
 import { SearchResultItem } from './SearchResultItem';
 
-export function SearchPage() {
-  const t = useTranslations('content.search');
-  const tNavigation = useTranslations('common.navigation');
-  const { onRecommendedClick, query, data, isLoading, isError, isReady } =
-    useSearch();
-  const searchDelayEnabled = usePainPreferencesStore(
-    (state) => state.flags.searchDelay,
-  );
+type SearchState = ReturnType<typeof useSearch>;
 
+interface SearchResultsProps {
+  search: SearchState;
+  searchDelayEnabled: boolean;
+}
+
+function SearchResultsStatus({
+  search,
+  searchDelayEnabled,
+}: SearchResultsProps) {
+  const t = useTranslations('content.search');
+  const { query, data, isLoading, isError } = search;
   const hasQuery = query.trim().length > 0;
-  const hasResults = Boolean(data?.items && data.items.length > 0);
   const showLoadingState = !isError && isLoading;
   const showResultMeta = !isError && !isLoading && hasQuery && !!data;
-  const showResults = !isError && hasResults;
-  const showEmptyState = !isError && !isLoading && !hasQuery;
-  const showNoResults =
-    !isError && !isLoading && hasQuery && !hasResults && isReady;
 
   return (
-    <div
-      className="mx-auto w-full max-w-4xl"
-      data-track-section="content:search"
-    >
-      <PageHeadline actions={<ShareButton section="content:search" />}>
-        {tNavigation('search')}
-      </PageHeadline>
-      <SearchForm size="lg" className="w-full" initialValue={query} />
+    <>
       {isError && (
         <Alert variant="destructive" className="my-4">
           <AlertDescription>{t('error')}</AlertDescription>
@@ -50,17 +56,130 @@ export function SearchPage() {
         <div className="my-4 text-sm">
           {t('resultMeta', {
             query,
-            count: data.items.length,
+            count: data.total,
             time: data.duration?.toFixed(0) ?? '0',
           })}
         </div>
       )}
+    </>
+  );
+}
+
+function SearchResultsList({ search }: { search: SearchState }) {
+  const t = useTranslations('content.search');
+  const {
+    query,
+    data,
+    isLoading,
+    isError,
+    isReady,
+    hasMore,
+    isFetchingNextPage,
+    loadMore,
+    onRecommendedClick,
+  } = search;
+  const hasQuery = query.trim().length > 0;
+  const hasResults = Boolean(data?.items.length);
+  const isSettled = !isError && !isLoading;
+  const showResults = isSettled && hasResults;
+  const showLoadMore = showResults && hasMore;
+  const showEmptyState = isSettled && !hasQuery;
+  const showNoResults = isSettled && hasQuery && !hasResults && isReady;
+
+  return (
+    <>
       {showResults &&
         data?.items.map((item) => (
-          <SearchResultItem key={item.slug} item={item} />
+          <SearchResultItem key={item.id} item={item} />
         ))}
+      {showLoadMore && (
+        <div className="mt-6 flex justify-center">
+          <Button
+            type="button"
+            variant="outline"
+            onClick={loadMore}
+            disabled={isFetchingNextPage}
+            data-testid="search-load-more"
+            data-track="search:load-more"
+          >
+            {isFetchingNextPage ? t('loadingMore') : t('loadMore')}
+          </Button>
+        </div>
+      )}
       {showEmptyState && <SearchEmptyState />}
       {showNoResults && <NoSearchResults onClick={onRecommendedClick} />}
+    </>
+  );
+}
+
+function SearchResults(props: SearchResultsProps) {
+  return (
+    <>
+      <SearchResultsStatus {...props} />
+      <SearchResultsList search={props.search} />
+    </>
+  );
+}
+
+export function SearchPage() {
+  const t = useTranslations('content.search');
+  const tNavigation = useTranslations('common.navigation');
+  const search = useSearch();
+  const { type, setType } = search;
+  const searchDelayEnabled = usePainPreferencesStore(
+    (state) => state.flags.searchDelay,
+  );
+  const filterLabels: Record<SearchFilter, string> = {
+    all: t('filters.all'),
+    article: t('filters.article'),
+    short: t('filters.short'),
+    page: t('filters.page'),
+  };
+
+  return (
+    <div
+      className="mx-auto w-full max-w-4xl"
+      data-track-section="content:search"
+    >
+      <PageHeadline actions={<ShareButton section="content:search" />}>
+        {tNavigation('search')}
+      </PageHeadline>
+      <SearchForm size="lg" className="w-full" initialValue={search.query} />
+      <Tabs
+        value={type}
+        onValueChange={(value) => {
+          if (typeof value === 'string' && isSearchFilter(value)) {
+            setType(value);
+          }
+        }}
+        className="mt-6"
+      >
+        <TabsList
+          variant="line"
+          aria-label={t('filters.label')}
+          className="no-scrollbar flex h-auto w-full justify-start overflow-x-auto rounded-none border-b bg-transparent p-0 whitespace-nowrap"
+        >
+          {SEARCH_FILTERS.map((filter) => (
+            <TabsTrigger
+              key={filter}
+              value={filter}
+              className="px-4 py-2"
+              data-track="search:filter"
+              data-track-key={filter}
+            >
+              {filterLabels[filter]}
+            </TabsTrigger>
+          ))}
+        </TabsList>
+        {SEARCH_FILTERS.map((filter) => (
+          <TabsContent key={filter} value={filter} className="mt-6">
+            <SearchResults
+              search={search}
+              searchDelayEnabled={searchDelayEnabled}
+            />
+          </TabsContent>
+        ))}
+      </Tabs>
     </div>
   );
 }
