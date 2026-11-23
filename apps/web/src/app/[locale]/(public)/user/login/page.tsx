@@ -4,8 +4,6 @@ import { NOINDEX_ROBOTS } from '@/core/seo/robots';
 import { LoginPage } from '@/features/auth/components';
 import { NarrowPageLayout } from '../../_components/NarrowPageLayout';
 
-export { generateStaticParams } from '@/core/i18n/routing';
-
 export const revalidate = 1800;
 
 export async function generateMetadata({

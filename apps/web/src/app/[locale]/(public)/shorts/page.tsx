@@ -3,8 +3,6 @@ import { assertAppLocale } from '@/core/i18n/app-locale';
 import { buildShortsMetadata } from './_lib/build-shorts-metadata';
 import { renderShortsPage } from './_lib/render-shorts-page';
 
-export { generateStaticParams } from '@/core/i18n/routing';
-
 export const revalidate = 1800;
 
 type PageProps = NextPageProps;

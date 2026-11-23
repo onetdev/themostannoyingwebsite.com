@@ -4,8 +4,6 @@ import { NOINDEX_ROBOTS } from '@/core/seo/robots';
 import { SpecialUnsubscriptionDeal } from '@/features/subscription/components';
 import { PageLayout } from '../../_components/PageLayout';
 
-export { generateStaticParams } from '@/core/i18n/routing';
-
 export async function generateMetadata({
   params,
 }: NextPageProps): Promise<Metadata> {

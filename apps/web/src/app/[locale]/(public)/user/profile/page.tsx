@@ -4,8 +4,6 @@ import { NOINDEX_ROBOTS } from '@/core/seo/robots';
 import { MyProfilePage } from '@/features/user/components';
 import { NarrowPageLayout } from '../../_components/NarrowPageLayout';
 
-export { generateStaticParams } from '@/core/i18n/routing';
-
 export async function generateMetadata({
   params,
 }: NextPageProps): Promise<Metadata> {
