@@ -21,7 +21,22 @@ export const getSearchPage = (page: Page) => {
     skeleton: page.getByTestId('search-results-skeleton'),
     resultMeta: page.getByText(/took \d+ms and found \d+ results/),
     resultItems: page.getByTestId('search-result-item'),
+    articleResults: page.locator(
+      '[data-testid="search-result-item"][data-type="article"]',
+    ),
+    shortResults: page.locator(
+      '[data-testid="search-result-item"][data-type="short"]',
+    ),
+    pageResults: page.locator(
+      '[data-testid="search-result-item"][data-type="page"]',
+    ),
+    filterAll: page.getByRole('button', { name: 'All', exact: true }),
+    filterArticles: page.getByRole('button', { name: 'Articles', exact: true }),
+    filterShorts: page.getByRole('button', { name: 'Shorts', exact: true }),
+    filterPages: page.getByRole('button', { name: 'Pages', exact: true }),
+    loadMore: page.getByTestId('search-load-more'),
     noResults: page.getByText('No results found'),
+    errorAlert: main.getByRole('alert').filter({ hasText: 'Search failed' }),
 
     goto: async () => {
       await page.goto('/en/search');
