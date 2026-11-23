@@ -1,10 +1,9 @@
-import type { LanguageCode, ShortListItem } from '@maw/content-sdk';
-import type { ShortService } from '@/features/content/types';
+import {
+  buildLocalizedStaticParams,
+  type LocalizedStaticParam,
+} from '@/app/[locale]/(public)/_lib/build-localized-static-params';
 
-export interface ShortStaticParam {
-  slug: string;
-  locale: string;
-}
+export type ShortStaticParam = LocalizedStaticParam;
 
 /**
  * Builds the static params for every localized short.
@@ -12,20 +11,7 @@ export interface ShortStaticParam {
  * The shorts endpoint can legitimately be unavailable (older deployments), so
  * the service returns an empty list instead of throwing. The route then falls
  * back to on-demand rendering rather than failing the build.
+ *
+ * @see buildLocalizedStaticParams for the shared iteration.
  */
-export async function buildShortStaticParams(
-  locales: readonly string[],
-  shortService: Pick<ShortService, 'listAll'>,
-): Promise<ShortStaticParam[]> {
-  const perLocale = await Promise.all(
-    locales.map(async (locale) => {
-      const shorts: ShortListItem[] = await shortService.listAll({
-        lang: locale as LanguageCode,
-      });
-
-      return shorts.map((short) => ({ slug: short.slug, locale }));
-    }),
-  );
-
-  return perLocale.flat();
-}
+export const buildShortStaticParams = buildLocalizedStaticParams;
