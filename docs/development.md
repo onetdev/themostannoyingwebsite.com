@@ -37,20 +37,17 @@ HTTPS is required because some browser APIs used by the project only work in sec
 
 The headless Content API's CORS allowlist accepts any
 `*.themostannoyingwebsite.com` origin, on any scheme and port. It rejects
-`localhost` and `127.0.0.1`. There are two supported local setups:
+`localhost` and `127.0.0.1`. Browser requests go **directly** to
+`NEXT_PUBLIC_CONTENT_API_URL`; there is no same-origin proxy.
 
-- **`pnpm dev`** — open `https://localhost:3000`. Browser-side Content API
-  requests (article search, plus anything resolved through the client DI
-  container) go to the same-origin path `/api/content`, which the Next.js dev
-  server proxies to the API without the browser's `Origin` header. The shared
-  factory lives in `src/core/content`, and the development-only proxy route
-  handler in `apps/web/src/app/api/content/[...path]/route.ts`; see
-  `adr/0024-dev-content-api-proxy.md`.
-- **Production-build runs** (`next build && next start`, Playwright) — serve and
-  browse the app from `local.themostannoyingwebsite.com`, which is already
-  allowlisted, so browser calls go straight to the API without a proxy. The
-  proxy is inert outside `NODE_ENV=development`, so `localhost` and `127.0.0.1`
-  fail CORS here.
+For local development, point the app at the deployed dev API and serve it from
+the allowlisted local hostname:
+
+```bash
+export NEXT_PUBLIC_CONTENT_API_URL=https://dev.content.themostannoyingwebsite.com
+pnpm dev
+# open https://local.themostannoyingwebsite.com:3000
+```
 
 Point the local hostname at the loopback interface once:
 
@@ -59,12 +56,20 @@ Point the local hostname at the loopback interface once:
 127.0.0.1 local.themostannoyingwebsite.com
 ```
 
-Then use `http://local.themostannoyingwebsite.com:3000` for `next start`, or
-`https://local.themostannoyingwebsite.com:3000` for `pnpm dev` (which runs with
-`--experimental-https`; its self-signed certificate triggers a browser warning,
-which Playwright already tolerates via `ignoreHTTPSErrors`). Playwright reads the
-origin from `PLAYWRIGHT_BASE_URL`; without it, specs that trigger browser-side
-Content API calls will see CORS failures rather than app errors.
+`pnpm dev` runs with `--experimental-https`; its self-signed certificate triggers
+a browser warning, which Playwright already tolerates via `ignoreHTTPSErrors`.
+Production-build runs (`next build && next start`) use the same hostname with
+`http://local.themostannoyingwebsite.com:3000`.
+
+`localhost` and `127.0.0.1` cannot call the deployed APIs, so opening
+`https://localhost:3000` breaks browser-side search, comments, and feeds with
+`403 CORS_ORIGIN_DENIED`. To keep using the local Content API directly, set
+`NEXT_PUBLIC_CONTENT_API_URL=http://localhost:3012`; its development CORS policy
+accepts localhost, and Chromium permits the mixed-content localhost request.
+
+Playwright reads the origin from `PLAYWRIGHT_BASE_URL`; without it, specs that
+trigger browser-side Content API calls will see CORS failures rather than app
+errors.
 
 ## Monorepo Scripts
 

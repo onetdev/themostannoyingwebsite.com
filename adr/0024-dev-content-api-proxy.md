@@ -2,7 +2,9 @@
 
 ## Status
 
-Accepted
+Superseded by [ADR 41](0041-direct-content-api-browser-calls.md). The proxy was
+removed once the deployed Content API allowlist and CORS preflight made direct
+browser calls viable from `local.themostannoyingwebsite.com`.
 
 ## Context
 

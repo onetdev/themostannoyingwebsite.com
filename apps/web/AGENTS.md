@@ -26,7 +26,7 @@ This document provides specific instructions and context for AI agents working o
   - `http/`: HTTP client and API abstractions.
   - `telemetry/`: Typed interaction telemetry (catalog, tracker, sinks, auto-capture). New surfaces must be registered in `TELEMETRY_SECTIONS` and annotated with `data-track-section`. See `adr/0037-user-interaction-telemetry.md`.
   - `seo/`: Structured data (JSON-LD) builders, `JsonLd` renderer, canonical URL helpers, and robots constants. See `adr/0026-structured-data-json-ld.md`.
-  - `content/`: Content API client factory (`createAppContentClient`) and dev proxy helpers. Use this factory instead of the raw SDK `createContentClient` so browser requests are proxied in local development.
+  - `content/`: Content API client factory (`createAppContentClient`) and base-URL helpers. Use this factory instead of the raw SDK `createContentClient` so app-wide options stay centralized; browser and server calls go directly to the configured API.
   - `observability/`: Logging and monitoring (Sentry).
 - `src/features/`: Domain-specific modules. **This is where most logic belongs.**
 - `src/hooks/`: Shared, app-wide React hooks.
@@ -212,9 +212,8 @@ All pages must describe themselves with JSON-LD. The machinery lives in `src/cor
 - **E2E**: Place in `e2e/tests/`. Use `playwright`.
 - **Validation**: Every new feature or bug fix **MUST** have a corresponding test.
 - **Local origin**: `playwright.config.ts` uses `baseURL = http://127.0.0.1:3000`
-  by default. `pnpm start` serves a production build, where the `/api/content`
-  dev proxy is inert and browser-side Content API calls are subject to CORS —
-  `127.0.0.1` is rejected. Override with
+  by default. The deployed Content API rejects `127.0.0.1` and `localhost`, and
+  browser-side calls go directly to `NEXT_PUBLIC_CONTENT_API_URL`. Override with
   `PLAYWRIGHT_BASE_URL=http://local.themostannoyingwebsite.com:3000` for any spec
   that depends on a browser-side Content API call (search, comments, feeds).
 - **Sequencing**: type check → Biome → targeted Jest → production build → E2E.
