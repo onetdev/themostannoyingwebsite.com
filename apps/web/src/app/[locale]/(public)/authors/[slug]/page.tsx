@@ -9,6 +9,7 @@ import { AuthorPage } from '@/features/content/components';
 import {
   getArticleService,
   getAuthorService,
+  getShortService,
 } from '@/features/content/services';
 import i18nConfig from '@/root/i18n.config';
 import { PageLayout } from '../../_components/PageLayout';
@@ -22,6 +23,9 @@ type PageParams = {
 type PageProps = NextPageProps<PageParams>;
 
 export const revalidate = 1800;
+
+/** Enough to cover an author's clips without turning the profile into a feed. */
+const AUTHOR_SHORTS_LIMIT = 6;
 
 export async function generateMetadata({
   params,
@@ -76,6 +80,7 @@ export default async function Page({ params }: PageProps) {
   const container = getDependencyContainer();
   const authorService = getAuthorService(container);
   const articleService = getArticleService(container);
+  const shortService = getShortService(container);
 
   const author = await authorService.getBySlug(slug, locale as LanguageCode);
 
@@ -83,11 +88,19 @@ export default async function Page({ params }: PageProps) {
     return notFound();
   }
 
-  const articles = await articleService.listAll({
-    author: slug,
-    lang: locale as LanguageCode,
-    order: 'desc',
-  });
+  const [articles, shortsResponse] = await Promise.all([
+    articleService.listAll({
+      author: slug,
+      lang: locale as LanguageCode,
+      order: 'desc',
+    }),
+    shortService.list({
+      author: slug,
+      lang: locale as LanguageCode,
+      order: 'desc',
+      limit: AUTHOR_SHORTS_LIMIT,
+    }),
+  ]);
 
   const appLocale = locale as AppLocale;
   const navigation = await getTranslations({
@@ -123,7 +136,11 @@ export default async function Page({ params }: PageProps) {
   return (
     <PageLayout route="author.single" role="main" data-testid="author-item">
       <JsonLd data={[authorSchema, breadcrumbSchema]} />
-      <AuthorPage author={author} articles={articles} />
+      <AuthorPage
+        author={author}
+        articles={articles}
+        shorts={shortsResponse.items}
+      />
     </PageLayout>
   );
 }

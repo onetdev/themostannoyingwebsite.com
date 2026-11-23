@@ -16,5 +16,7 @@ export const getAuthorPage = (page: Page) => {
     about: page.getByTestId('author-about'),
     articleList: page.getByTestId('author-article-list'),
     articleItems: page.getByTestId('author-article-item'),
+    shortsSection: page.getByTestId('author-shorts'),
+    shortItems: page.getByTestId('author-shorts').getByTestId('short-card'),
   };
 };
