@@ -55,7 +55,7 @@ const short = {
   ai_assisted: true,
   categories: [{ id: 'humor', label: 'Humor' }],
   subtitle_url: 'https://media.example.com/en.vtt',
-  cues: [],
+  cues: [{ shot_id: 'shot-1', start_ms: 0, end_ms: 4000, text: 'cue' }],
 } as unknown as ShortListItem;
 
 function renderOverlay(
@@ -82,8 +82,6 @@ function renderOverlay(
         isFullscreen={false}
         autoplayBlocked={false}
         showPlayPause
-        hasAudio
-        hasCaptions
         {...handlers}
         {...overrides}
       />
@@ -105,7 +103,6 @@ describe('ShortPlayerOverlay', () => {
     );
     expect(screen.getByTestId('short-ai-badge')).toBeVisible();
     expect(screen.getByText('Humor')).toBeVisible();
-    expect(screen.getByTestId('short-like-count')).toHaveTextContent('0');
   });
 
   it('keeps the overlay frame transparent so the active clip stays visible', () => {

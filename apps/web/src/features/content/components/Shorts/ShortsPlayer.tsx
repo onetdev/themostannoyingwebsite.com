@@ -3,7 +3,7 @@
 import type { ShortListItem } from '@maw/content-sdk';
 import { Carousel, CarouselContent, CarouselItem } from '@maw/ui-lib';
 import { useTranslations } from 'next-intl';
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useEffect, useState, type WheelEvent } from 'react';
 
 import { ShortPlayerBackdrop } from './ShortPlayerBackdrop';
 import { ShortPlayerOverlay } from './ShortPlayerOverlay';
@@ -22,8 +22,9 @@ const isPlayerControl = (target: EventTarget | null) =>
 /**
  * Full-screen vertical short feed.
  *
- * Slides own their media elements; a single fixed overlay owns the controls so
- * the top bar, rail and caption block do not slide away during a swipe.
+ * Slides own their media elements; the active slide also owns the controls so
+ * they travel with it during a swipe. The blurred backdrop stays behind the
+ * carousel and crossfades between clips.
  */
 export function ShortsPlayer({ shorts, initialIndex }: ShortsPlayerProps) {
   const t = useTranslations('content.shorts');
@@ -31,13 +32,21 @@ export function ShortsPlayer({ shorts, initialIndex }: ShortsPlayerProps) {
   const [likedShortIds, setLikedShortIds] = useState<ReadonlySet<string>>(
     () => new Set(),
   );
-  const onWheel = useShortFeedWheel({
+  const scrollByWheel = useShortFeedWheel({
     onNext: player.next,
     onPrevious: player.previous,
   });
-  const startIndex = Math.min(
-    Math.max(initialIndex, 0),
-    Math.max(shorts.length - 1, 0),
+
+  // Scrubbing the seek bar or hovering a control must not advance the feed.
+  const onWheel = useCallback(
+    (event: WheelEvent<HTMLDivElement>) => {
+      if (isPlayerControl(event.target)) {
+        return;
+      }
+
+      scrollByWheel(event);
+    },
+    [scrollByWheel],
   );
 
   const likeShort = useCallback((id: string) => {
@@ -94,7 +103,7 @@ export function ShortsPlayer({ shorts, initialIndex }: ShortsPlayerProps) {
         spacing={false}
         setApi={player.setApi}
         opts={{
-          startIndex,
+          startIndex: player.startIndex,
           loop: false,
           align: 'start',
           watchFocus: false,
@@ -127,8 +136,6 @@ export function ShortsPlayer({ shorts, initialIndex }: ShortsPlayerProps) {
                   isFullscreen={player.isFullscreen}
                   autoplayBlocked={player.autoplayBlocked}
                   showPlayPause={player.showPlayPause}
-                  hasAudio={short.has_audio}
-                  hasCaptions={(short.cues?.length ?? 0) > 0}
                   onTogglePlay={player.togglePlay}
                   onToggleMute={player.toggleMute}
                   onToggleCaptions={player.toggleCaptions}

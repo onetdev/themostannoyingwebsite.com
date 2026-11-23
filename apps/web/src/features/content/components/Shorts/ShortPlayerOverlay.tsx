@@ -7,12 +7,12 @@ import { useTranslations } from 'next-intl';
 
 import { ShortPlayerActionRail } from './ShortPlayerActionRail';
 import { ShortPlayerCaptions } from './ShortPlayerCaptions';
+import { ShortPlayerIconButton } from './ShortPlayerIconButton';
 import { ShortPlayerInfo } from './ShortPlayerInfo';
 import {
-  WHITE_CONTROL_CLASS,
-  WHITE_CONTROL_ICON_CLASS,
-} from './short-player-controls';
-import { SHORT_PLAYER_FRAME_CLASS } from './short-player-frame';
+  buildShortFrameStyle,
+  SHORT_PLAYER_FRAME_CLASS,
+} from './short-player-frame';
 
 export interface ShortPlayerOverlayProps {
   short: ShortListItem;
@@ -24,8 +24,6 @@ export interface ShortPlayerOverlayProps {
   isFullscreen: boolean;
   autoplayBlocked: boolean;
   showPlayPause: boolean;
-  hasAudio: boolean;
-  hasCaptions: boolean;
   onTogglePlay: () => void;
   onToggleMute: () => void;
   onToggleCaptions: () => void;
@@ -35,8 +33,11 @@ export interface ShortPlayerOverlayProps {
 }
 
 /**
- * Fixed overlay for the active clip. Everything except the play/pause control
- * stays visible; play/pause flashes only after a tap.
+ * Controls for the active clip.
+ *
+ * Rendered inside the active slide so the chrome moves with the clip during a
+ * swipe. Everything except play/pause stays visible; play/pause only flashes
+ * after a tap and remains visible while paused.
  */
 export function ShortPlayerOverlay({
   short,
@@ -48,8 +49,6 @@ export function ShortPlayerOverlay({
   isFullscreen,
   autoplayBlocked,
   showPlayPause,
-  hasAudio,
-  hasCaptions,
   onTogglePlay,
   onToggleMute,
   onToggleCaptions,
@@ -58,9 +57,8 @@ export function ShortPlayerOverlay({
   onClose,
 }: ShortPlayerOverlayProps) {
   const t = useTranslations('content.shorts');
-  const frameStyle = {
-    aspectRatio: `${short.width} / ${short.height}`,
-  };
+  const hasAudio = short.has_audio;
+  const hasCaptions = short.cues.length > 0;
   const showPlayPauseButton = showPlayPause || !isPlaying;
   const showUnmutePrompt = autoplayBlocked && muted && hasAudio;
 
@@ -71,45 +69,27 @@ export function ShortPlayerOverlay({
     >
       <div
         className={cn(SHORT_PLAYER_FRAME_CLASS, 'pointer-events-none')}
-        style={frameStyle}
+        style={buildShortFrameStyle(short)}
         data-testid="short-player-overlay-frame"
       >
         <div
           className="pointer-events-auto absolute inset-x-0 top-0 z-30 flex items-start justify-between p-3 pt-[max(0.75rem,env(safe-area-inset-top))]"
           data-player-control
         >
-          <Button
-            type="button"
-            variant="ghost"
-            size="icon-lg"
-            className={WHITE_CONTROL_CLASS}
+          <ShortPlayerIconButton
+            icon="close"
             onClick={onClose}
             aria-label={t('closePlayer')}
             data-track="shorts:close"
-          >
-            <Icon
-              icon="close"
-              className={WHITE_CONTROL_ICON_CLASS}
-              aria-hidden
-            />
-          </Button>
+          />
           {hasAudio && (
-            <Button
-              type="button"
-              variant="ghost"
-              size="icon-lg"
-              className={WHITE_CONTROL_CLASS}
+            <ShortPlayerIconButton
+              icon={muted ? 'volumeMute' : 'volumeHigh'}
               onClick={onToggleMute}
               aria-pressed={!muted}
               aria-label={muted ? t('unmute') : t('mute')}
               data-track="shorts:mute"
-            >
-              <Icon
-                icon={muted ? 'volumeMute' : 'volumeHigh'}
-                className={WHITE_CONTROL_ICON_CLASS}
-                aria-hidden
-              />
-            </Button>
+            />
           )}
         </div>
 
@@ -120,6 +100,7 @@ export function ShortPlayerOverlay({
             size="sm"
             className="pointer-events-auto absolute inset-x-0 top-20 z-30 mx-auto w-fit shadow-lg"
             onClick={onToggleMute}
+            data-player-control
             data-track="shorts:unmute-prompt"
           >
             <Icon icon="volumeMute" className="size-4" aria-hidden />
@@ -144,16 +125,20 @@ export function ShortPlayerOverlay({
           visible={showCaptions}
         />
 
-        <button
+        <Button
           type="button"
+          variant="ghost"
+          size="icon-lg"
           className={cn(
-            'pointer-events-auto absolute top-1/2 left-1/2 z-30 flex size-16 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full bg-black/50 text-white transition-opacity duration-200 hover:bg-black/70 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/60',
+            'pointer-events-auto absolute top-1/2 left-1/2 z-30 size-16 -translate-x-1/2 -translate-y-1/2 rounded-full bg-black/50 text-white transition-opacity duration-200 hover:bg-black/70 hover:text-white focus-visible:ring-white/60',
             showPlayPauseButton
               ? 'opacity-100'
               : 'pointer-events-none opacity-0',
           )}
           onClick={onTogglePlay}
           aria-label={isPlaying ? t('pause') : t('play')}
+          aria-hidden={!showPlayPauseButton}
+          tabIndex={showPlayPauseButton ? 0 : -1}
           data-track={isPlaying ? 'shorts:pause' : 'shorts:play'}
           data-player-control
         >
@@ -162,7 +147,7 @@ export function ShortPlayerOverlay({
             className="text-3xl"
             aria-hidden
           />
-        </button>
+        </Button>
 
         <ShortPlayerInfo short={short} video={video} />
       </div>

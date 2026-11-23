@@ -42,24 +42,15 @@ export function ShortPlayerActionRail({
       className="pointer-events-auto absolute right-3 bottom-20 z-30 flex flex-col items-center gap-2"
       data-player-control
     >
-      <div className="flex flex-col items-center gap-1">
-        <ShortPlayerActionButton
-          icon="heart"
-          label={liked ? t('unlike') : t('like')}
-          tooltip={liked ? t('unlike') : t('like')}
-          iconClassName={cn(liked && 'text-red-500')}
-          onClick={onToggleLike}
-          aria-pressed={liked}
-          data-track="shorts:like"
-        />
-        <span
-          className="text-xs font-semibold text-white/90 tabular-nums"
-          data-testid="short-like-count"
-          aria-hidden="true"
-        >
-          0
-        </span>
-      </div>
+      <ShortPlayerActionButton
+        icon="heart"
+        label={liked ? t('unlike') : t('like')}
+        tooltip={liked ? t('unlike') : t('like')}
+        iconClassName={cn(liked && 'text-red-500')}
+        onClick={onToggleLike}
+        aria-pressed={liked}
+        data-track="shorts:like"
+      />
       <ShortPlayerActionButton
         icon="share"
         label={tCommon('common.action.share')}
