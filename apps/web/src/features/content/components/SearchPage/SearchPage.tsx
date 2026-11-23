@@ -5,6 +5,7 @@ import {
   AlertDescription,
   Button,
   PageHeadline,
+  Separator,
   ToggleGroup,
   ToggleGroupItem,
 } from '@maw/ui-lib';
@@ -35,10 +36,8 @@ function SearchResultsStatus({
   searchDelayEnabled,
 }: SearchResultsProps) {
   const t = useTranslations('content.search');
-  const { query, data, isLoading, isError } = search;
-  const hasQuery = query.trim().length > 0;
+  const { isLoading, isError } = search;
   const showLoadingState = !isError && isLoading;
-  const showResultMeta = !isError && !isLoading && hasQuery && !!data;
 
   return (
     <>
@@ -49,15 +48,6 @@ function SearchResultsStatus({
       )}
       {showLoadingState && (
         <SearchLoadingState showSkeleton={searchDelayEnabled} />
-      )}
-      {showResultMeta && (
-        <div className="my-4 text-sm">
-          {t('resultMeta', {
-            query,
-            count: data.total,
-            time: data.duration?.toFixed(0) ?? '0',
-          })}
-        </div>
       )}
     </>
   );
@@ -123,7 +113,8 @@ export function SearchPage() {
   const t = useTranslations('content.search');
   const tNavigation = useTranslations('common.navigation');
   const search = useSearch();
-  const { type, setType } = search;
+  const { type, setType, query, data, isLoading, isError } = search;
+  const showResultMeta = !isError && !isLoading && !!query.trim() && !!data;
   const searchDelayEnabled = usePainPreferencesStore(
     (state) => state.flags.searchDelay,
   );
@@ -143,38 +134,45 @@ export function SearchPage() {
         {tNavigation('search')}
       </PageHeadline>
       <SearchForm size="lg" className="w-full" initialValue={search.query} />
-      <ToggleGroup
-        value={[type]}
-        onValueChange={(values) => {
-          const next = values[0];
+      <div className="mt-6 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+        <ToggleGroup
+          value={[type]}
+          onValueChange={(values) => {
+            const next = values[0];
 
-          if (isSearchFilter(next)) {
-            setType(next);
-          }
-        }}
-        variant="outline"
-        size="sm"
-        aria-label={t('filters.label')}
-        className="mt-6 flex-wrap"
-      >
-        {SEARCH_FILTERS.map((filter) => (
-          <ToggleGroupItem
-            key={filter}
-            value={filter}
-            className="cursor-pointer rounded-full px-3 aria-pressed:bg-primary aria-pressed:text-primary-foreground"
-            data-track="search:filter"
-            data-track-key={filter}
-          >
-            {filterLabels[filter]}
-          </ToggleGroupItem>
-        ))}
-      </ToggleGroup>
-      <div className="mt-6">
-        <SearchResults
-          search={search}
-          searchDelayEnabled={searchDelayEnabled}
-        />
+            if (isSearchFilter(next)) {
+              setType(next);
+            }
+          }}
+          variant="outline"
+          size="sm"
+          aria-label={t('filters.label')}
+          className="flex-wrap"
+        >
+          {SEARCH_FILTERS.map((filter) => (
+            <ToggleGroupItem
+              key={filter}
+              value={filter}
+              className="cursor-pointer rounded-full px-3 aria-pressed:bg-primary aria-pressed:text-primary-foreground"
+              data-track="search:filter"
+              data-track-key={filter}
+            >
+              {filterLabels[filter]}
+            </ToggleGroupItem>
+          ))}
+        </ToggleGroup>
+        {showResultMeta && data && (
+          <p className="text-sm text-muted-foreground sm:text-right">
+            {t('resultMeta', {
+              query,
+              count: data.total,
+              time: data.duration?.toFixed(0) ?? '0',
+            })}
+          </p>
+        )}
       </div>
+      <Separator className="my-4" />
+      <SearchResults search={search} searchDelayEnabled={searchDelayEnabled} />
     </div>
   );
 }
