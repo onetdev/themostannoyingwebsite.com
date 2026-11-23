@@ -5,7 +5,10 @@ import '@testing-library/jest-dom';
 import type { ShortListItem } from '@maw/content-sdk';
 import { act, render, screen } from '@testing-library/react';
 
-import { ShortPlayerBackdrop } from './ShortPlayerBackdrop';
+import {
+  SHORT_BACKDROP_CROSSFADE_MS,
+  ShortPlayerBackdrop,
+} from './ShortPlayerBackdrop';
 
 jest.mock('next/image', () => ({
   __esModule: true,
@@ -37,6 +40,14 @@ const first = makeShort('a', 'https://media.example.com/a.webp');
 const second = makeShort('b', 'https://media.example.com/b.webp');
 
 describe('ShortPlayerBackdrop', () => {
+  beforeEach(() => {
+    jest.useFakeTimers();
+  });
+
+  afterEach(() => {
+    jest.useRealTimers();
+  });
+
   it('keeps the previous layer while the new layer fades in', () => {
     const { container, rerender } = render(
       <ShortPlayerBackdrop short={first} />,
@@ -54,5 +65,20 @@ describe('ShortPlayerBackdrop', () => {
       'src',
       'https://media.example.com/b.webp',
     );
+  });
+
+  it('drops the previous layer once the crossfade completes', () => {
+    const { container, rerender } = render(
+      <ShortPlayerBackdrop short={first} />,
+    );
+
+    act(() => rerender(<ShortPlayerBackdrop short={second} />));
+    expect(container.querySelectorAll('img')).toHaveLength(2);
+
+    act(() => {
+      jest.advanceTimersByTime(SHORT_BACKDROP_CROSSFADE_MS);
+    });
+
+    expect(container.querySelectorAll('img')).toHaveLength(1);
   });
 });
