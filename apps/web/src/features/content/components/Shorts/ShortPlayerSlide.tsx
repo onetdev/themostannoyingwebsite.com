@@ -15,7 +15,10 @@ import {
 } from 'react';
 
 import { selectShortMedia } from './short-media';
-import { SHORT_PLAYER_SURFACE_CLASS } from './short-player-frame';
+import {
+  buildShortFrameStyle,
+  SHORT_PLAYER_SURFACE_CLASS,
+} from './short-player-frame';
 
 export interface ShortPlayerSlideProps {
   short: ShortListItem;
@@ -162,9 +165,7 @@ export function ShortPlayerSlide({
     wasDragged.current = false;
   };
 
-  const frameStyle = {
-    aspectRatio: `${short.width} / ${short.height}`,
-  };
+  const frameStyle = buildShortFrameStyle(short);
 
   return (
     <div
@@ -201,14 +202,13 @@ export function ShortPlayerSlide({
             muted={muted}
             loop
             playsInline
-            crossOrigin="anonymous"
             preload={isActive ? 'auto' : 'metadata'}
             onError={() => setHasError(true)}
             onLoadedData={() => setHasError(false)}
           />
         )}
         {hasError && (
-          <div className="absolute inset-0 flex flex-col items-center justify-center gap-2 bg-black/70 p-6 text-center text-white">
+          <div className="pointer-events-none absolute inset-0 flex flex-col items-center justify-center gap-2 bg-black/70 p-6 text-center text-white">
             <Icon icon="failed" aria-hidden />
             <p className="text-sm">{t('playbackFailed')}</p>
           </div>

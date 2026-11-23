@@ -1,3 +1,6 @@
+import type { Short, ShortListItem } from '@maw/content-sdk';
+import type { CSSProperties } from 'react';
+
 /**
  * Shared viewport frame for the vertical feed.
  *
@@ -12,3 +15,17 @@ export const SHORT_PLAYER_FRAME_CLASS =
 
 /** The opaque media surface owned by a slide. */
 export const SHORT_PLAYER_SURFACE_CLASS = `${SHORT_PLAYER_FRAME_CLASS} bg-black`;
+
+type ShortFrameSource = Pick<Short | ShortListItem, 'width' | 'height'>;
+
+/**
+ * Aspect-ratio style for a clip frame.
+ *
+ * The slide surface and the player overlay must size their frames identically,
+ * otherwise the controls drift away from the clip on non-vertical renditions.
+ */
+export function buildShortFrameStyle(short: ShortFrameSource): CSSProperties {
+  return {
+    aspectRatio: `${short.width} / ${short.height}`,
+  };
+}
