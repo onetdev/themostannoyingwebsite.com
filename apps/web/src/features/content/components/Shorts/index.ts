@@ -1,4 +1,5 @@
 export * from './ShortCard';
+export * from './ShortCarousel';
 export * from './ShortGrid';
 export * from './ShortPlayerActionButton';
 export * from './ShortPlayerActionRail';

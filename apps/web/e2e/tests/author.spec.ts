@@ -45,10 +45,20 @@ test('author profile lists their shorts and opens the player', async ({
   await expect(authorPage.authorItem).toBeVisible();
   await expect(authorPage.shortsSection).toBeVisible();
   await expect(authorPage.shortItems.first()).toBeVisible();
+  await expect(authorPage.shortsArchiveLink).toHaveAttribute(
+    'href',
+    /\/en\/shorts\/$/,
+  );
 
   await authorPage.shortItems.first().click();
   await expect(page).toHaveURL(/\/en\/shorts\/[^/]+\/$/);
   await expect(page.getByTestId('short-player-page')).toBeVisible();
+
+  await page.getByRole('button', { name: 'Close player' }).click();
+  await expect(page).toHaveURL(/\/en\/authors\/[^/]+\/$/);
+
+  await authorPage.shortsArchiveLink.click();
+  await expect(page).toHaveURL(/\/en\/shorts\/$/);
 });
 
 test('sitemap includes author profiles with hreflang alternates', async ({
