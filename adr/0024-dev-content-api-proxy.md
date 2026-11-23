@@ -1,9 +1,11 @@
 # ADR 24: Dev-Only Same-Origin Proxy for Browser Content API Calls
 
 ## Status
+
 Accepted
 
 ## Context
+
 The headless Content API enforces a CORS allowlist in application middleware, not just in the browser. It allows `themostannoyingwebsite.com` subdomains and `onetdev.vercel.app` preview variants, plus `localhost` / `127.0.0.1` **only when `NODE_ENV !== 'production'`**. Because the deployed API always runs in production, `localhost` can never be trusted there.
 
 The web app serves local development from `https://localhost:3000`. Browser-side requests from that origin to the Content API therefore receive `403 CORS_ORIGIN_DENIED`. After ADR 23 moved the locale catalog to build time, the only browser-side Content API call is article search (`useSearchQuery`), but the same problem applies to any current or future browser-side Content API consumer, including anything resolved through the client DI container. Server-side (`server-only`), server-DI, and build-script calls send no `Origin` header and are unaffected.
@@ -18,6 +20,7 @@ We considered four ways to resolve this:
 Option 4 was chosen because it keeps dev origins out of production configuration and requires no local DNS or certificates.
 
 ## Decision
+
 Adopt a **dev-only, app-wide same-origin proxy** for browser-side Content API calls.
 
 1.  **Single client factory.** `createAppContentClient()` (`apps/web/src/core/content/client.ts`) is the app's canonical Content API client. It resolves a `/api/content` base URL only when running in the browser **and** `NODE_ENV === 'development'`; on the server, and in every other environment, it defers to the SDK default (`NEXT_PUBLIC_CONTENT_API_URL`). Server-side code therefore keeps working, since relative URLs do not resolve in Node.
@@ -27,6 +30,7 @@ Adopt a **dev-only, app-wide same-origin proxy** for browser-side Content API ca
 5.  **Trailing slash.** `trailingSlash: true` normalizes the browser request to a trailing slash; the handler filters empty path segments so the upstream URL never carries a trailing slash (which the Content API does not match).
 
 ## Consequences
+
 - **Pros**: No production allowlist changes and no dev origins in production configuration.
 - **Pros**: Covers the whole Content API and every in-app consumer, so new browser callers are proxied automatically as long as they use `createAppContentClient`.
 - **Pros**: Works for any local hostname or port; no `/etc/hosts` or local certificate setup.
@@ -36,3 +40,19 @@ Adopt a **dev-only, app-wide same-origin proxy** for browser-side Content API ca
 - **Cons**: Local development exercises a proxy path that production does not, so the request transport differs between environments.
 - **Cons**: Server-side code in development still targets the API directly; only browser requests are proxied.
 - **Cons**: Callers must use `createAppContentClient` rather than the raw SDK `createContentClient` to be proxied; the SDK factory remains a lower-level escape hatch.
+
+## Addendum
+
+Option 2 from the considered alternatives — developing under an already-allowed
+`themostannoyingwebsite.com` subdomain — is now used alongside the proxy, not
+instead of it.
+
+Verified against the deployed Content API: the CORS allowlist accepts any
+`*.themostannoyingwebsite.com` origin regardless of scheme or port, so
+`local.themostannoyingwebsite.com` needs no API or proxy change. `localhost` and
+`127.0.0.1` still receive no `Access-Control-Allow-Origin` header.
+
+The proxy remains the default for `pnpm dev`. The local hostname is used for
+runs where the proxy is inert — production builds served by `next start`, and
+Playwright, whose `baseURL` reads `PLAYWRIGHT_BASE_URL`. This keeps E2E on the
+same request transport as production without weakening the allowlist.
