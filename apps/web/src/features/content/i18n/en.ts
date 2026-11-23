@@ -65,6 +65,16 @@ export default {
     unlike: 'Unlike',
     aiAssisted: 'AI-assisted',
     playbackFailed: 'Video playback failed',
+    archiveTitle: 'Shorts',
+    archiveDescription:
+      'The complete collection of short-form clips. Hover a tile to preview it, then click to watch the full vertical player.',
+    emptyTitle: 'No shorts yet',
+    emptyDescription:
+      'There are no shorts in this language yet. Check back later or switch to another language.',
+    shortLabel: 'Short',
+    aiBadge: 'AI',
+    count: '{count, plural, one {# short} other {# shorts}}',
+    playLabel: 'Play {title}',
   },
   hotThings: {
     playVideo: 'Play video',

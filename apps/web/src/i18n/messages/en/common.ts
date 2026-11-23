@@ -183,6 +183,7 @@ export default {
     profile: 'Profile',
     search: 'Search',
     settings: 'Settings',
+    shorts: 'Shorts',
     signup: 'Signup',
     termsOfUse: 'Terms of Use',
     theProject: 'The project',

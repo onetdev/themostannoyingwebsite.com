@@ -10,6 +10,11 @@ export default {
     description:
       'Browse every article we have ever published. The complete archive, sorted from newest to oldest, with nothing held back.',
   },
+  shorts: {
+    title: 'Shorts',
+    description:
+      'Watch every short-form clip in one place. Vertical, loud, and only a few seconds of your life each.',
+  },
   achievements: {
     title: 'Achievements',
     description:

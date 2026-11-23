@@ -48,6 +48,7 @@ export const SITE_NAVIGATION_LINKS: NavEntry[] = [
     labelKey: 'common.navigation.articles',
     hrefFor: 'articles',
   },
+  { id: 'shorts', labelKey: 'common.navigation.shorts', hrefFor: 'shorts' },
   { id: 'plans', labelKey: 'common.navigation.plans', hrefFor: 'plans' },
   {
     id: 'explore',
@@ -115,6 +116,7 @@ export const FOOTER_NAVIGATION_LINKS: NavItem[] = [
     labelKey: 'common.navigation.articles',
     hrefFor: 'articles',
   },
+  { id: 'shorts', labelKey: 'common.navigation.shorts', hrefFor: 'shorts' },
   { id: 'plans', labelKey: 'common.navigation.plans', hrefFor: 'plans' },
   { id: 'donate', labelKey: 'common.navigation.donate', hrefFor: 'donate' },
   { id: 'about', labelKey: 'common.navigation.about', hrefFor: 'about' },

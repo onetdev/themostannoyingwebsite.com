@@ -13,6 +13,7 @@ const routeAliasToPathMap: Record<RouteAlias, string> = {
   'plans.special-deal': '/plans/special-deal',
   'privacy-policy': '/privacy-policy',
   'short.single': '/shorts/:slug',
+  shorts: '/shorts',
   'terms-of-use': '/terms-of-use',
   'user.login': '/user/login',
   'user.password-reminder': '/user/password-reminder',
