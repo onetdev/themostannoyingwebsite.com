@@ -1,4 +1,4 @@
-import type { ArticleListItem, Author } from '@maw/content-sdk';
+import type { ArticleListItem, Author, ShortListItem } from '@maw/content-sdk';
 import {
   Empty,
   EmptyDescription,
@@ -10,16 +10,23 @@ import {
 } from '@maw/ui-lib';
 import { getTranslations } from 'next-intl/server';
 import { ShareButton } from '@/features/share/components';
+import { ShortCard } from './Shorts/ShortCard';
 import { SmallCoverListItem } from './SmallCoverListItem';
 
 export interface AuthorPageProps {
   author: Author;
   articles: ArticleListItem[];
+  shorts: ShortListItem[];
 }
 
-export async function AuthorPage({ author, articles }: AuthorPageProps) {
+export async function AuthorPage({
+  author,
+  articles,
+  shorts,
+}: AuthorPageProps) {
   const t = await getTranslations('content');
   const hasArticles = articles.length > 0;
+  const hasShorts = shorts.length > 0;
 
   return (
     <div className="grid grid-cols-1 gap-10 lg:grid-cols-3 lg:items-start">
@@ -40,38 +47,57 @@ export async function AuthorPage({ author, articles }: AuthorPageProps) {
           {author.about}
         </p>
       </header>
-      <section className="lg:col-span-2" data-track-section="content:author">
-        <h2 className="mb-5">
-          {t('author.articlesTitle', { name: author.name })}
-        </h2>
-        {hasArticles ? (
-          <ul
-            className="grid gap-5 sm:grid-cols-2 xl:grid-cols-3"
-            data-testid="author-article-list"
-          >
-            {articles.map((article) => (
-              <li key={article.id}>
-                <SmallCoverListItem
-                  article={article}
-                  data-testid="author-article-item"
-                />
-              </li>
-            ))}
-          </ul>
-        ) : (
-          <Empty data-testid="author-articles-empty">
-            <EmptyHeader>
-              <EmptyMedia variant="icon">
-                <Icon icon="info" />
-              </EmptyMedia>
-              <EmptyTitle>{t('author.emptyTitle')}</EmptyTitle>
-              <EmptyDescription>
-                {t('author.emptyDescription')}
-              </EmptyDescription>
-            </EmptyHeader>
-          </Empty>
+      <div
+        className="lg:col-span-2 space-y-10"
+        data-track-section="content:author"
+      >
+        {hasShorts && (
+          <section data-testid="author-shorts">
+            <h2 className="mb-5">
+              {t('author.shortsTitle', { name: author.name })}
+            </h2>
+            <ul className="grid grid-cols-4 gap-1.5 sm:grid-cols-6 sm:gap-2">
+              {shorts.map((short) => (
+                <li key={short.id}>
+                  <ShortCard short={short} compact />
+                </li>
+              ))}
+            </ul>
+          </section>
         )}
-      </section>
+        <section>
+          <h2 className="mb-5">
+            {t('author.articlesTitle', { name: author.name })}
+          </h2>
+          {hasArticles ? (
+            <ul
+              className="grid gap-5 sm:grid-cols-2 xl:grid-cols-3"
+              data-testid="author-article-list"
+            >
+              {articles.map((article) => (
+                <li key={article.id}>
+                  <SmallCoverListItem
+                    article={article}
+                    data-testid="author-article-item"
+                  />
+                </li>
+              ))}
+            </ul>
+          ) : (
+            <Empty data-testid="author-articles-empty">
+              <EmptyHeader>
+                <EmptyMedia variant="icon">
+                  <Icon icon="info" />
+                </EmptyMedia>
+                <EmptyTitle>{t('author.emptyTitle')}</EmptyTitle>
+                <EmptyDescription>
+                  {t('author.emptyDescription')}
+                </EmptyDescription>
+              </EmptyHeader>
+            </Empty>
+          )}
+        </section>
+      </div>
     </div>
   );
 }

@@ -169,6 +169,13 @@ describe('ShortCard', () => {
     );
   });
 
+  it('renders a compact variant for dense listings', () => {
+    render(<ShortCard short={short} compact />);
+
+    expect(screen.getByRole('heading', { level: 2 })).toHaveClass('text-xs');
+    expect(screen.getByTestId('short-card-play-icon')).toBeInTheDocument();
+  });
+
   it('mounts a muted looping preview for mouse hover and removes it on leave', () => {
     const { container } = render(<ShortCard short={short} />);
     const card = screen.getByTestId('short-card');

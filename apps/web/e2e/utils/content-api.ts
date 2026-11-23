@@ -6,6 +6,10 @@ export interface FirstShort {
   slug: string;
   title: string;
   ai_assisted: boolean;
+  author: {
+    slug: string;
+    name: string;
+  };
 }
 
 /**
