@@ -1,6 +1,6 @@
 'use client';
 
-import type { ShortListItem } from '@maw/content-sdk';
+import type { ShortVideoListItem } from '@maw/content-sdk';
 import { cn } from 'cn';
 import { useTranslations } from 'next-intl';
 import { useShareAction } from '@/features/share/hooks';
@@ -8,7 +8,7 @@ import { useShareAction } from '@/features/share/hooks';
 import { ShortPlayerActionButton } from './ShortPlayerActionButton';
 
 export interface ShortPlayerActionRailProps {
-  short: ShortListItem;
+  short: ShortVideoListItem;
   hasCaptions: boolean;
   showCaptions: boolean;
   liked: boolean;

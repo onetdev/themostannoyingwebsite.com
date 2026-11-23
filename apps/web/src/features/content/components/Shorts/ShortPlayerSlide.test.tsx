@@ -2,7 +2,7 @@
  * @jest-environment jsdom
  */
 import '@testing-library/jest-dom';
-import type { ShortListItem } from '@maw/content-sdk';
+import type { ShortVideoListItem } from '@maw/content-sdk';
 import { act, fireEvent, render, screen } from '@testing-library/react';
 
 import { ShortPlayerSlide } from './ShortPlayerSlide';
@@ -61,7 +61,7 @@ const short = {
       url: 'https://media.example.com/video.mp4',
     },
   ],
-} as ShortListItem;
+} as ShortVideoListItem;
 
 function renderSlide(
   overrides: Partial<Parameters<typeof ShortPlayerSlide>[0]> = {},

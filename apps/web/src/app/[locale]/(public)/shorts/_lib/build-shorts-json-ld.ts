@@ -1,4 +1,4 @@
-import type { ShortListItem } from '@maw/content-sdk';
+import type { ShortVideoListItem } from '@maw/content-sdk';
 import { getTranslations } from 'next-intl/server';
 import {
   buildSimpleItemList,
@@ -11,7 +11,7 @@ import { shortsPagination } from './shorts-pagination';
 export interface BuildShortsJsonLdInput {
   locale: AppLocale;
   page: number;
-  shorts: ShortListItem[];
+  shorts: ShortVideoListItem[];
   offset: number;
 }
 

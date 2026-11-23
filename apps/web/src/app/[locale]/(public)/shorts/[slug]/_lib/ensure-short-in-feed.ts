@@ -1,4 +1,4 @@
-import type { Short, ShortListItem } from '@maw/content-sdk';
+import type { ShortVideo, ShortVideoListItem } from '@maw/content-sdk';
 
 /**
  * Ensures the requested short is part of the player feed.
@@ -8,9 +8,9 @@ import type { Short, ShortListItem } from '@maw/content-sdk';
  * makes the requested clip the initial slide.
  */
 export function ensureShortInFeed(
-  feed: ShortListItem[],
-  short: Short,
-): ShortListItem[] {
+  feed: ShortVideoListItem[],
+  short: ShortVideo,
+): ShortVideoListItem[] {
   if (feed.some((item) => item.id === short.id)) {
     return feed;
   }

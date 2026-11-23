@@ -1,10 +1,10 @@
-import type { ShortListItem } from '@maw/content-sdk';
+import type { ShortVideoListItem } from '@maw/content-sdk';
 import { getTranslations } from 'next-intl/server';
 
 import { ShortCarousel } from '@/features/content/components/Shorts/ShortCarousel';
 
 export interface HomeShortsProps {
-  shorts: ShortListItem[];
+  shorts: ShortVideoListItem[];
 }
 
 /**

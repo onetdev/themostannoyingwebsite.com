@@ -3,7 +3,7 @@ import { assertAppLocale } from '@/core/i18n/app-locale';
 import { buildBlog, getSeoContext, JsonLd } from '@/core/seo';
 import {
   getArticleService,
-  getShortService,
+  getShortVideoService,
 } from '@/features/content/services';
 import { HomePage } from './_components/HomePage';
 import { PageLayout } from './_components/PageLayout';
@@ -20,7 +20,7 @@ export default async function Page({ params }: NextPageProps) {
   const appLocale = assertAppLocale(locale);
   const container = getDependencyContainer();
   const articleService = getArticleService(container);
-  const shortService = getShortService(container);
+  const shortVideoService = getShortVideoService(container);
 
   const [coverResponse, articlePool, featuredShorts, latestShorts] =
     await Promise.all([
@@ -34,13 +34,13 @@ export default async function Page({ params }: NextPageProps) {
         lang: appLocale,
         limit: 14,
       }),
-      shortService.list({
+      shortVideoService.list({
         is_featured: true,
         lang: appLocale,
         limit: HOME_SHORTS_LIMIT,
         order: 'desc',
       }),
-      shortService.list({
+      shortVideoService.list({
         lang: appLocale,
         limit: HOME_SHORTS_LIMIT,
         order: 'desc',

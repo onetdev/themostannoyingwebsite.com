@@ -20,7 +20,7 @@ export function getSearchResultPath(
   switch (item.type) {
     case 'article':
       return `/articles/${encodeURIComponent(item.slug)}`;
-    case 'short':
+    case 'short-video':
       return `/shorts/${encodeURIComponent(item.slug)}`;
     case 'page':
       return `/${encodeURIComponent(item.slug)}`;
@@ -32,11 +32,11 @@ export function SearchResultItem({ item }: SearchResultItemProps) {
   const pathname = usePathname();
   const typeLabels = {
     article: t('types.article'),
-    short: t('types.short'),
+    'short-video': t('types.short'),
     page: t('types.page'),
   } as const;
   const onClick =
-    item.type === 'short'
+    item.type === 'short-video'
       ? () => {
           const search =
             typeof window === 'undefined' ? '' : window.location.search;

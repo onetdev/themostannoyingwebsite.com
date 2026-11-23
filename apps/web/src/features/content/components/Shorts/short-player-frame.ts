@@ -1,4 +1,4 @@
-import type { Short, ShortListItem } from '@maw/content-sdk';
+import type { ShortVideo, ShortVideoListItem } from '@maw/content-sdk';
 import type { CSSProperties } from 'react';
 
 /**
@@ -16,7 +16,10 @@ export const SHORT_PLAYER_FRAME_CLASS =
 /** The opaque media surface owned by a slide. */
 export const SHORT_PLAYER_SURFACE_CLASS = `${SHORT_PLAYER_FRAME_CLASS} bg-black`;
 
-type ShortFrameSource = Pick<Short | ShortListItem, 'width' | 'height'>;
+type ShortFrameSource = Pick<
+  ShortVideo | ShortVideoListItem,
+  'width' | 'height'
+>;
 
 /**
  * Aspect-ratio style for a clip frame.

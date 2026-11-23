@@ -1,6 +1,6 @@
 'use client';
 
-import type { ShortListItem } from '@maw/content-sdk';
+import type { ShortVideoListItem } from '@maw/content-sdk';
 import { Badge, Icon } from '@maw/ui-lib';
 import { useTranslations } from 'next-intl';
 import { Link } from '@/core/i18n/navigation';
@@ -8,7 +8,7 @@ import { ShortPlayerProgress } from './ShortPlayerProgress';
 import { formatShortDuration } from './short-duration';
 
 export interface ShortPlayerInfoProps {
-  short: ShortListItem;
+  short: ShortVideoListItem;
   video: HTMLVideoElement | null;
 }
 

@@ -68,7 +68,7 @@ A player has different constraints from an article page:
     (only when a poster exists, since search engines reject a thumbnail-less
     video node) plus a breadcrumb, declares self-canonical `hreflang` alternates
     from `translations`, uses `content:shorts` with a 1800 s revalidate, and is
-    included in the sitemap grouped by `short_group`.
+    included in the sitemap grouped by `short_video_group`.
 
 ## Consequences
 

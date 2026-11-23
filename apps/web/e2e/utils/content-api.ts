@@ -20,7 +20,7 @@ export async function fetchFirstShort(
   request: APIRequestContext,
 ): Promise<FirstShort | undefined> {
   const response = await request.get(
-    `${resolveContentApiBaseUrl()}/api/v1/shorts?lang=en&limit=1`,
+    `${resolveContentApiBaseUrl()}/api/v1/short-videos?lang=en&limit=1`,
   );
 
   if (!response.ok()) {

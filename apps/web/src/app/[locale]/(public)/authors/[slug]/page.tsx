@@ -9,7 +9,7 @@ import { AuthorPage } from '@/features/content/components';
 import {
   getArticleService,
   getAuthorService,
-  getShortService,
+  getShortVideoService,
 } from '@/features/content/services';
 import i18nConfig from '@/root/i18n.config';
 import { PageLayout } from '../../_components/PageLayout';
@@ -71,7 +71,7 @@ export default async function Page({ params }: PageProps) {
   const container = getDependencyContainer();
   const authorService = getAuthorService(container);
   const articleService = getArticleService(container);
-  const shortService = getShortService(container);
+  const shortVideoService = getShortVideoService(container);
 
   const author = await authorService.getBySlug(slug, locale as LanguageCode);
 
@@ -85,7 +85,7 @@ export default async function Page({ params }: PageProps) {
       lang: locale as LanguageCode,
       order: 'desc',
     }),
-    shortService.list({
+    shortVideoService.list({
       author: slug,
       lang: locale as LanguageCode,
       order: 'desc',

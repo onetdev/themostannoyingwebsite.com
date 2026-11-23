@@ -1,46 +1,50 @@
 import 'reflect-metadata';
 
-import type { ContentApiClient, Short, ShortListItem } from '@maw/content-sdk';
+import type {
+  ContentApiClient,
+  ShortVideo,
+  ShortVideoListItem,
+} from '@maw/content-sdk';
 import { Container } from 'inversify';
 import { DI } from '../types';
-import { getShortService, ShortService } from './ShortService';
+import { getShortVideoService, ShortVideoService } from './ShortVideoService';
 
-const makeShort = (id: string): ShortListItem =>
+const makeShortVideo = (id: string): ShortVideoListItem =>
   ({
     id,
     slug: id,
     media: [],
-  }) as unknown as ShortListItem;
+  }) as unknown as ShortVideoListItem;
 
-const makeShortDetail = (): Short =>
+const makeShortVideoDetail = (): ShortVideo =>
   ({
     id: 'short-1',
     slug: 'gummy-bear-fork',
     media: [],
     translations: [],
-  }) as unknown as Short;
+  }) as unknown as ShortVideo;
 
-describe('ShortService', () => {
+describe('ShortVideoService', () => {
   let getBySlugMock: jest.Mock;
   let listMock: jest.Mock;
-  let service: ShortService;
+  let service: ShortVideoService;
 
   beforeEach(() => {
-    getBySlugMock = jest.fn().mockResolvedValue(makeShortDetail());
+    getBySlugMock = jest.fn().mockResolvedValue(makeShortVideoDetail());
     listMock = jest.fn();
 
     const mockClient = {
-      shorts: {
+      shortVideos: {
         getBySlug: getBySlugMock,
         list: listMock,
       },
     } as unknown as ContentApiClient;
 
-    service = new ShortService(mockClient);
+    service = new ShortVideoService(mockClient);
   });
 
   describe('getBySlug', () => {
-    it('fetches a short with the short cache tag', async () => {
+    it('fetches a short video with the short video cache tag', async () => {
       const result = await service.getBySlug('gummy-bear-fork', 'en');
 
       expect(result?.slug).toBe('gummy-bear-fork');
@@ -82,13 +86,13 @@ describe('ShortService', () => {
           total: 3,
           limit: 100,
           offset: 0,
-          items: [makeShort('a'), makeShort('b')],
+          items: [makeShortVideo('a'), makeShortVideo('b')],
         })
         .mockResolvedValueOnce({
           total: 3,
           limit: 100,
           offset: 2,
-          items: [makeShort('c')],
+          items: [makeShortVideo('c')],
         });
 
       const result = await service.listAll({ lang: 'en' });
@@ -118,7 +122,7 @@ describe('ShortService', () => {
           total: 3,
           limit: 100,
           offset: 0,
-          items: [makeShort('a'), makeShort('b')],
+          items: [makeShortVideo('a'), makeShortVideo('b')],
         })
         .mockRejectedValueOnce(new Error('Server unavailable'));
 
@@ -128,12 +132,12 @@ describe('ShortService', () => {
     });
   });
 
-  describe('getShortService', () => {
+  describe('getShortVideoService', () => {
     it('resolves the service from the container', () => {
       const container = new Container();
-      container.bind(DI.ShortService).toConstantValue(service);
+      container.bind(DI.ShortVideoService).toConstantValue(service);
 
-      expect(getShortService(container)).toBe(service);
+      expect(getShortVideoService(container)).toBe(service);
     });
   });
 });

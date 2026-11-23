@@ -1,4 +1,4 @@
-import type { ShortListItem } from '@maw/content-sdk';
+import type { ShortVideoListItem } from '@maw/content-sdk';
 import {
   Empty,
   EmptyDescription,
@@ -15,7 +15,7 @@ import { ShareButton } from '@/features/share/components';
 import { ShortGrid } from './ShortGrid';
 
 export interface ShortsPageProps {
-  shorts: ShortListItem[];
+  shorts: ShortVideoListItem[];
   currentPage: number;
   pageCount: number;
   total: number;

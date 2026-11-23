@@ -1,11 +1,11 @@
-import type { ShortListItem } from '@maw/content-sdk';
+import type { ShortVideoListItem } from '@maw/content-sdk';
 import { cache } from 'react';
 import { getDependencyContainer } from '@/core/di';
-import { getShortService } from '@/features/content/services';
+import { getShortVideoService } from '@/features/content/services';
 import { shortsPagination } from './shorts-pagination';
 
 export interface ShortsPageData {
-  items: ShortListItem[];
+  items: ShortVideoListItem[];
   total: number;
   pageCount: number;
   offset: number;
@@ -24,9 +24,9 @@ export const loadShortsPage = cache(
     locale: AppLocale,
     page: number,
   ): Promise<ShortsPageData | undefined> => {
-    const shortService = getShortService(getDependencyContainer());
+    const shortVideoService = getShortVideoService(getDependencyContainer());
     const offset = shortsPagination.getOffset(page);
-    const response = await shortService.list({
+    const response = await shortVideoService.list({
       lang: locale,
       limit: shortsPagination.pageSize,
       offset,

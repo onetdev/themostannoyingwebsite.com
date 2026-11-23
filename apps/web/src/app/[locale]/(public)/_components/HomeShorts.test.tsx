@@ -1,4 +1,4 @@
-import type { ShortListItem } from '@maw/content-sdk';
+import type { ShortVideoListItem } from '@maw/content-sdk';
 import { renderToStaticMarkup } from 'react-dom/server';
 
 import { HomeShorts } from './HomeShorts';
@@ -13,7 +13,7 @@ jest.mock('@/features/content/components/Shorts/ShortCarousel', () => ({
 
 const shorts = [
   { id: 'short-1', slug: 'first-clip' },
-] as unknown as ShortListItem[];
+] as unknown as ShortVideoListItem[];
 
 describe('HomeShorts', () => {
   it('renders nothing when there are no shorts', async () => {

@@ -1,4 +1,8 @@
-import type { Article, ArticleListItem, ShortListItem } from '@maw/content-sdk';
+import type {
+  Article,
+  ArticleListItem,
+  ShortVideoListItem,
+} from '@maw/content-sdk';
 import { buttonVariants, Icon } from '@maw/ui-lib';
 import { getTranslations } from 'next-intl/server';
 import { Link } from '@/core/i18n/navigation';
@@ -14,7 +18,7 @@ type HomePageProps = {
   coverArticle?: Article | ArticleListItem;
   denseArticleList: (Article | ArticleListItem)[];
   smallCoverArticleList: (Article | ArticleListItem)[];
-  shorts: ShortListItem[];
+  shorts: ShortVideoListItem[];
 };
 
 export async function HomePage({

@@ -2,7 +2,7 @@
  * @jest-environment jsdom
  */
 import '@testing-library/jest-dom';
-import type { ShortListItem } from '@maw/content-sdk';
+import type { ShortVideoListItem } from '@maw/content-sdk';
 import { act, render, screen } from '@testing-library/react';
 
 import {
@@ -34,7 +34,7 @@ const makeShort = (id: string, url: string) =>
         url,
       },
     ],
-  }) as unknown as ShortListItem;
+  }) as unknown as ShortVideoListItem;
 
 const first = makeShort('a', 'https://media.example.com/a.webp');
 const second = makeShort('b', 'https://media.example.com/b.webp');

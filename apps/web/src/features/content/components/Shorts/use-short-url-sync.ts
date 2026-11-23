@@ -1,12 +1,12 @@
 'use client';
 
-import type { ShortListItem } from '@maw/content-sdk';
+import type { ShortVideoListItem } from '@maw/content-sdk';
 import { useLocale } from 'next-intl';
 import { useEffect, useRef } from 'react';
 
 export interface UseShortUrlSyncOptions {
   /** Clip currently on screen; the URL and title follow it. */
-  short?: ShortListItem;
+  short?: ShortVideoListItem;
 }
 
 /** Separator of the layout's `%s | <site name>` document title template. */

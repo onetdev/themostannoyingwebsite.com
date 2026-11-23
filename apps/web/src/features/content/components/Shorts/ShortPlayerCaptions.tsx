@@ -1,19 +1,19 @@
 'use client';
 
-import type { ShortCue } from '@maw/content-sdk';
+import type { ShortVideoCue } from '@maw/content-sdk';
 
 import { useVideoTime } from './use-video-time';
 
 export interface ShortPlayerCaptionsProps {
-  cues: ShortCue[];
+  cues: ShortVideoCue[];
   video: HTMLVideoElement | null;
   visible: boolean;
 }
 
 function findActiveCue(
-  cues: ShortCue[],
+  cues: ShortVideoCue[],
   currentTimeMs: number,
-): ShortCue | undefined {
+): ShortVideoCue | undefined {
   return cues.find(
     (cue) => currentTimeMs >= cue.start_ms && currentTimeMs < cue.end_ms,
   );

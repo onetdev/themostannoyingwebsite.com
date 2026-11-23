@@ -12,7 +12,7 @@ Acts as the internal bridge for managing and displaying dynamic site content, su
 - **HotThingsPage**: A visual showcase of "hot" (annoying) content, often used to test UI disruption features in a dense content environment.
 - **ArticleService**: Server-side service built on `@maw/content-sdk` providing article retrieval (`getBySlug`, `list`, `listAll`) with Next.js cache tags (`CONTENT_CACHE_TAGS`) and error resilience.
 - **AuthorService**: Server-side companion to `ArticleService` for author retrieval (`getBySlug`, `list`, `listAll`) with the `content:authors` cache tag and graceful `getBySlug` failure. Backs the `/{locale}/authors/{slug}/` route and the `ProfilePage` structured data.
-- **ShortService**: Server-side short retrieval (`getBySlug`, `list`, `listAll`) using the `content:shorts` cache tag. Reads degrade to empty results so surfaces that merely offer shorts cannot take down a page while the endpoint is unavailable; the player route still renders its own 404.
+- **ShortVideoService**: Server-side short video retrieval (`getBySlug`, `list`, `listAll`) using the `content:shorts` cache tag. Reads degrade to empty results so surfaces that merely offer shorts cannot take down a page while the endpoint is unavailable; the player route still renders its own 404.
 - **Content Formatting**: Uses CSS modules (`content.module.css` from `@maw/ui-lib`) and specialized typography rules to ensure content is readable but also visually consistent with the project's aesthetics.
 - **PartitionalLockedContent**: A "paywall" component that intentionally obscures parts of an article, forcing users through frustrating interaction cycles.
 

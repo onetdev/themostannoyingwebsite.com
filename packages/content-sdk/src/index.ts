@@ -9,8 +9,8 @@ import {
   type GetPageListResponse,
   type GetPrizeWheelSegmentListResponse,
   type GetSearchResultListResponse,
-  type GetShortBySlugResponse,
-  type GetShortListResponse,
+  type GetShortVideoBySlugResponse,
+  type GetShortVideoListResponse,
   type GetSpamSampleListResponse,
   type GetSurveyQuestionListResponse,
   ImageAsset,
@@ -24,8 +24,8 @@ export type AuthorListItem = GetAuthorListResponse['items'][number];
 export type Page = GetPageBySlugResponse;
 export type PageListItem = GetPageListResponse['items'][number];
 export type SearchResultItem = GetSearchResultListResponse['items'][number];
-export type Short = GetShortBySlugResponse;
-export type ShortListItem = GetShortListResponse['items'][number];
+export type ShortVideo = GetShortVideoBySlugResponse;
+export type ShortVideoListItem = GetShortVideoListResponse['items'][number];
 
 // Dedicated content resource item shapes
 export type SurveyQuestion = GetSurveyQuestionListResponse['questions'][number];

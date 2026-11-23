@@ -1,4 +1,8 @@
-import type { ArticleListItem, Author, ShortListItem } from '@maw/content-sdk';
+import type {
+  ArticleListItem,
+  Author,
+  ShortVideoListItem,
+} from '@maw/content-sdk';
 import {
   Empty,
   EmptyDescription,
@@ -16,7 +20,7 @@ import { SmallCoverListItem } from './SmallCoverListItem';
 export interface AuthorPageProps {
   author: Author;
   articles: ArticleListItem[];
-  shorts: ShortListItem[];
+  shorts: ShortVideoListItem[];
 }
 
 export async function AuthorPage({

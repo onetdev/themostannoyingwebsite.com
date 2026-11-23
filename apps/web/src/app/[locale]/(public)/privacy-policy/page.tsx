@@ -1,13 +1,15 @@
-import { getLogger } from '@maw/logger';
+import { renderMarkdown } from '@maw/content-sdk';
+import HTMLReactParser from 'html-react-parser';
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
-import { getTranslations } from 'next-intl/server';
-import { loadLocaleMdx } from '@/core/i18n/load-locale-mdx';
+import { getFormatter, getTranslations } from 'next-intl/server';
+import { assertAppLocale } from '@/core/i18n/app-locale';
 import { WebPageStructuredData } from '@/core/seo';
 import { ShareButton } from '@/features/share/components';
 import { DocumentPage } from '../_components/DocumentPage';
 import { PageLayout } from '../_components/PageLayout';
 import { TranslationDisclaimer } from '../_components/TranslationDisclaimer';
+import { loadPrivacyPolicyPage } from './_lib/load-privacy-policy';
 
 export const revalidate = 1800;
 
@@ -26,39 +28,44 @@ export async function generateMetadata({
   };
 }
 
-// Privacy policy inspired by https://matomo.org/privacy-policy/
+// Privacy policy content is served by the Content API pages endpoint.
 export default async function Page({ params }: NextPageProps) {
   const { locale } = await params;
+  const appLocale = assertAppLocale(locale);
   const t = await getTranslations();
-  const logger = getLogger();
+  const formatter = await getFormatter();
+  const page = await loadPrivacyPolicyPage(appLocale);
 
-  try {
-    const Content = await loadLocaleMdx(
-      locale,
-      (l) => import(`./_i18n/${l}.mdx`),
-    );
-
-    return (
-      <PageLayout route="privacy-policy" role="main">
-        <WebPageStructuredData
-          locale={locale}
-          path="privacy-policy"
-          namespace="metadata.privacyPolicy"
-        />
-        <DocumentPage
-          title={t('common.navigation.privacyPolicy')}
-          headerActions={<ShareButton section="content:document" />}
-        >
-          <TranslationDisclaimer
-            currentLocale={locale}
-            href="/privacy-policy"
-          />
-          <Content />
-        </DocumentPage>
-      </PageLayout>
-    );
-  } catch (_err) {
-    logger.debug('Privacy policy not found, redirecting to 404', _err);
+  if (!page) {
     notFound();
   }
+
+  return (
+    <PageLayout route="privacy-policy" role="main">
+      <WebPageStructuredData
+        locale={appLocale}
+        path="privacy-policy"
+        namespace="metadata.privacyPolicy"
+      />
+      <DocumentPage
+        title={page.title}
+        headerActions={<ShareButton section="content:document" />}
+        meta={
+          <time dateTime={page.updated_at}>
+            {t('common.document.lastUpdated', {
+              date: formatter.dateTime(new Date(page.updated_at), {
+                dateStyle: 'long',
+              }),
+            })}
+          </time>
+        }
+      >
+        <TranslationDisclaimer
+          currentLocale={appLocale}
+          href="/privacy-policy"
+        />
+        {HTMLReactParser(renderMarkdown(page.content))}
+      </DocumentPage>
+    </PageLayout>
+  );
 }

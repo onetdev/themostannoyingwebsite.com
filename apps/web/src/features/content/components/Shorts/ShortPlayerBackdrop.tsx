@@ -1,6 +1,6 @@
 'use client';
 
-import type { Short, ShortListItem } from '@maw/content-sdk';
+import type { ShortVideo, ShortVideoListItem } from '@maw/content-sdk';
 import Image from 'next/image';
 import { useEffect, useRef, useState } from 'react';
 
@@ -9,7 +9,7 @@ import { selectShortMedia } from './short-media';
 /** Must match the `duration-700` fade of the incoming backdrop layer. */
 export const SHORT_BACKDROP_CROSSFADE_MS = 700;
 
-type BackdropShort = Pick<Short | ShortListItem, 'media'>;
+type BackdropShort = Pick<ShortVideo | ShortVideoListItem, 'media'>;
 
 function BackdropLayer({ short }: { short: BackdropShort }) {
   const poster = selectShortMedia(short).poster;
@@ -31,7 +31,7 @@ function BackdropLayer({ short }: { short: BackdropShort }) {
 }
 
 export interface ShortPlayerBackdropProps {
-  short: ShortListItem;
+  short: ShortVideoListItem;
 }
 
 /**
@@ -43,7 +43,7 @@ export interface ShortPlayerBackdropProps {
  * once the fade completes so it cannot keep tinting later clips.
  */
 export function ShortPlayerBackdrop({ short }: ShortPlayerBackdropProps) {
-  const [previous, setPrevious] = useState<ShortListItem>();
+  const [previous, setPrevious] = useState<ShortVideoListItem>();
   const [current, setCurrent] = useState(short);
   const currentRef = useRef(short);
 

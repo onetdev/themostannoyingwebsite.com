@@ -2,7 +2,7 @@
  * @jest-environment jsdom
  */
 import '@testing-library/jest-dom';
-import type { ShortListItem } from '@maw/content-sdk';
+import type { ShortVideoListItem } from '@maw/content-sdk';
 import { TooltipProvider } from '@maw/ui-lib';
 import { fireEvent, render, screen } from '@testing-library/react';
 
@@ -56,7 +56,7 @@ const short = {
   categories: [{ id: 'humor', label: 'Humor' }],
   subtitle_url: 'https://media.example.com/en.vtt',
   cues: [{ shot_id: 'shot-1', start_ms: 0, end_ms: 4000, text: 'cue' }],
-} as unknown as ShortListItem;
+} as unknown as ShortVideoListItem;
 
 function renderOverlay(
   overrides: Partial<Parameters<typeof ShortPlayerOverlay>[0]> = {},

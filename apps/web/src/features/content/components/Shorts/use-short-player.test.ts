@@ -1,7 +1,7 @@
 /**
  * @jest-environment jsdom
  */
-import type { ShortListItem } from '@maw/content-sdk';
+import type { ShortVideoListItem } from '@maw/content-sdk';
 import type { CarouselApi } from '@maw/ui-lib';
 import { act, renderHook, waitFor } from '@testing-library/react';
 import { SHORTS_ENTRY_STORAGE_KEY } from '@/features/content/shorts-entry';
@@ -52,7 +52,7 @@ const makeShort = (id: string, slug: string, title: string, hasAudio = true) =>
     has_audio: hasAudio,
     subtitle_url: 'https://media.example.com/en.vtt',
     cues: [{ shot_id: 'shot-1', start_ms: 0, end_ms: 4000, text: 'cue' }],
-  }) as ShortListItem;
+  }) as ShortVideoListItem;
 
 const shorts = [
   makeShort('a', 'first', 'First'),
