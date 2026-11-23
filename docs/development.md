@@ -35,15 +35,36 @@ HTTPS is required because some browser APIs used by the project only work in sec
 
 ### Content API and CORS
 
-The headless Content API rejects `localhost` origins in production. During
-`pnpm dev`, browser-side Content API requests (article search, plus anything
-resolved through the client DI container) are therefore sent to the same-origin
-path `/api/content`, which the Next.js dev server proxies to the API without the
-browser's `Origin` header. The shared factory lives in `src/core/content`, and
-the development-only proxy route handler in
-`apps/web/src/app/api/content/[...path]/route.ts`; see
-`adr/0024-dev-content-api-proxy.md`. A local `next build && next start` does not
-use the proxy.
+The headless Content API's CORS allowlist accepts any
+`*.themostannoyingwebsite.com` origin, on any scheme and port. It rejects
+`localhost` and `127.0.0.1`. There are two supported local setups:
+
+- **`pnpm dev`** — open `https://localhost:3000`. Browser-side Content API
+  requests (article search, plus anything resolved through the client DI
+  container) go to the same-origin path `/api/content`, which the Next.js dev
+  server proxies to the API without the browser's `Origin` header. The shared
+  factory lives in `src/core/content`, and the development-only proxy route
+  handler in `apps/web/src/app/api/content/[...path]/route.ts`; see
+  `adr/0024-dev-content-api-proxy.md`.
+- **Production-build runs** (`next build && next start`, Playwright) — serve and
+  browse the app from `local.themostannoyingwebsite.com`, which is already
+  allowlisted, so browser calls go straight to the API without a proxy. The
+  proxy is inert outside `NODE_ENV=development`, so `localhost` and `127.0.0.1`
+  fail CORS here.
+
+Point the local hostname at the loopback interface once:
+
+```
+# /etc/hosts
+127.0.0.1 local.themostannoyingwebsite.com
+```
+
+Then use `http://local.themostannoyingwebsite.com:3000` for `next start`, or
+`https://local.themostannoyingwebsite.com:3000` for `pnpm dev` (which runs with
+`--experimental-https`; its self-signed certificate triggers a browser warning,
+which Playwright already tolerates via `ignoreHTTPSErrors`). Playwright reads the
+origin from `PLAYWRIGHT_BASE_URL`; without it, specs that trigger browser-side
+Content API calls will see CORS failures rather than app errors.
 
 ## Monorepo Scripts
 
@@ -53,7 +74,7 @@ Common workspace scripts:
 pnpm dev       – run development server
 pnpm build     – build all packages
 pnpm test      – run unit tests
-pnpm test:e2e  – run end-to-end tests
+pnpm test:e2e  – run end-to-end tests (set PLAYWRIGHT_BASE_URL to the local hostname)
 pnpm lint      – run Biome
 pnpm lint:fix  - run Biome and apply safe fixes
 pnpm next experimental-analyze - analyze bundle size (in apps/web)
@@ -139,6 +160,8 @@ This project includes **agentic skills** to streamline development workflows for
   - **Trigger**: "Upgrade dependencies"
 - **shadcn** – Adds, fixes, and composes shadcn/ui components in `@maw/ui-lib`.
   - **Trigger**: "Add a shadcn component"
+- **quick-iterator** – Keeps the loop on runnable output while requirements are still moving, deferring docs, ADRs, tests, and E2E to a freeze checklist.
+  - **Trigger**: "Just build it", "iterate first", or requirements changing between exchanges
 
 ### Setup
 

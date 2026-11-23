@@ -94,6 +94,11 @@ directories or `variants.ts` files — variant data lives in the Content API.
   `node_modules/next-intl`) — and do **not** add a pass-through
   `app/layout.tsx` — the root layout must remain
   `src/app/[locale]/layout.tsx` for root params to work.
+- **Raw key paths are expected, not a bug.** A non-English locale renders a
+  literal key path (e.g. `marketing.eggTower.title`) whenever the Content API has
+  not shipped that key yet. Only English ships in the repo, so new copy is
+  correct locally in `en` and pending elsewhere. Verify English, then note the
+  Content API sync as a follow-up instead of debugging the merge.
 
 ### 4. Supported Locale Catalog (build-time)
 
@@ -206,6 +211,14 @@ All pages must describe themselves with JSON-LD. The machinery lives in `src/cor
 - **Unit**: Co-locate `*.test.ts` with logic. Use `jest`.
 - **E2E**: Place in `e2e/tests/`. Use `playwright`.
 - **Validation**: Every new feature or bug fix **MUST** have a corresponding test.
+- **Local origin**: `playwright.config.ts` uses `baseURL = http://127.0.0.1:3000`
+  by default. `pnpm start` serves a production build, where the `/api/content`
+  dev proxy is inert and browser-side Content API calls are subject to CORS —
+  `127.0.0.1` is rejected. Override with
+  `PLAYWRIGHT_BASE_URL=http://local.themostannoyingwebsite.com:3000` for any spec
+  that depends on a browser-side Content API call (search, comments, feeds).
+- **Sequencing**: type check → Biome → targeted Jest → production build → E2E.
+  See root `AGENTS.md` → "Local Verification Playbook".
 
 ---
 
