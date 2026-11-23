@@ -2,10 +2,10 @@
 
 import type { ShortListItem } from '@maw/content-sdk';
 import type { CarouselApi } from '@maw/ui-lib';
-import { useLocale } from 'next-intl';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { useRouter } from '@/core/i18n/navigation';
 import { useRuntimeStore, useUserPreferencesStore } from '@/stores';
+import { useShortUrlSync } from './use-short-url-sync';
 
 const PLAY_PAUSE_FLASH_MS = 900;
 
@@ -34,7 +34,9 @@ function isFormControlTarget(target: EventTarget | null): boolean {
 }
 
 function hasOpenDialog(): boolean {
-  return Boolean(document.querySelector('[data-slot="dialog-content"]'));
+  return Boolean(
+    document.querySelector('[data-slot="dialog-content"], [role="dialog"]'),
+  );
 }
 
 interface UseShortPlayerOptions {
@@ -52,13 +54,18 @@ export function useShortPlayer({
   shorts,
   initialIndex,
 }: UseShortPlayerOptions) {
-  const locale = useLocale();
   const router = useRouter();
   const enableSound = useUserPreferencesStore((state) => state.enableSound);
   const systemReducedMotion = useRuntimeStore(
     (state) => state.systemReducedMotion,
   );
   const documentVisible = useRuntimeStore((state) => state.document.isVisible);
+  const documentEverVisible = useRuntimeStore(
+    (state) => state.document.hasEverBeenVisible,
+  );
+  // The store reports `isVisible: false` until the visibility observer runs, so
+  // only treat the document as hidden once it has actually been visible.
+  const documentHidden = documentEverVisible && !documentVisible;
 
   const lastIndex = Math.max(shorts.length - 1, 0);
   const clampedInitialIndex = Math.min(Math.max(initialIndex, 0), lastIndex);
@@ -77,11 +84,10 @@ export function useShortPlayer({
   const videoRefs = useRef(new Map<number, HTMLVideoElement>());
   const activeIndexRef = useRef(activeIndex);
   const playPauseTimeout = useRef<ReturnType<typeof setTimeout> | null>(null);
-  const titleSuffixRef = useRef<string | null>(null);
 
   const activeShort = shorts[activeIndex] ?? shorts[0];
-  const hasAudio = activeShort?.has_audio ?? false;
-  const hasCaptions = (activeShort?.cues.length ?? 0) > 0;
+
+  useShortUrlSync({ short: activeShort });
 
   const flashPlayPause = useCallback(() => {
     setShowPlayPause(true);
@@ -144,27 +150,7 @@ export function useShortPlayer({
     setActiveVideo(nextVideo);
     setAutoplayBlocked(false);
     setShowPlayPause(false);
-
-    const nextShort = shorts[activeIndex];
-    if (!nextShort || typeof window === 'undefined') {
-      return;
-    }
-
-    window.history.replaceState(
-      window.history.state,
-      '',
-      `/${locale}/shorts/${encodeURIComponent(nextShort.slug)}/`,
-    );
-
-    if (titleSuffixRef.current === null) {
-      const separator = ' | ';
-      const separatorIndex = document.title.indexOf(separator);
-      titleSuffixRef.current =
-        separatorIndex === -1 ? '' : document.title.slice(separatorIndex);
-    }
-
-    document.title = `${nextShort.title}${titleSuffixRef.current}`;
-  }, [activeIndex, locale, shorts]);
+  }, [activeIndex]);
 
   useEffect(() => {
     if (!enableSound) {
@@ -198,13 +184,13 @@ export function useShortPlayer({
       return;
     }
 
-    if (systemReducedMotion || !documentVisible) {
+    if (systemReducedMotion || documentHidden) {
       activeVideo.pause();
       return;
     }
 
     void playVideo(activeVideo);
-  }, [activeVideo, documentVisible, playVideo, systemReducedMotion]);
+  }, [activeVideo, documentHidden, playVideo, systemReducedMotion]);
 
   useEffect(() => {
     if (activeVideo) {
@@ -368,14 +354,14 @@ export function useShortPlayer({
     activeIndex,
     activeShort,
     activeVideo,
-    hasAudio,
-    hasCaptions,
     muted,
     showCaptions,
     isPlaying,
     isFullscreen,
     autoplayBlocked,
     showPlayPause,
+    /** Clamped slide index the carousel starts on. */
+    startIndex: clampedInitialIndex,
     playerRef,
     setApi,
     registerVideo,

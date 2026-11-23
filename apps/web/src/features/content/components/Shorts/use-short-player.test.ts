@@ -10,6 +10,7 @@ import { useShortPlayer } from './use-short-player';
 let mockEnableSound = true;
 let mockReducedMotion = false;
 let mockDocumentVisible = true;
+let mockDocumentEverVisible = true;
 
 jest.mock('next-intl', () => ({
   useLocale: () => 'en',
@@ -31,12 +32,15 @@ jest.mock('@/stores', () => ({
   useRuntimeStore: (
     selector: (state: {
       systemReducedMotion: boolean;
-      document: { isVisible: boolean };
+      document: { isVisible: boolean; hasEverBeenVisible: boolean };
     }) => unknown,
   ) =>
     selector({
       systemReducedMotion: mockReducedMotion,
-      document: { isVisible: mockDocumentVisible },
+      document: {
+        isVisible: mockDocumentVisible,
+        hasEverBeenVisible: mockDocumentEverVisible,
+      },
     }),
 }));
 
@@ -87,10 +91,9 @@ describe('useShortPlayer', () => {
     mockEnableSound = true;
     mockReducedMotion = false;
     mockDocumentVisible = true;
+    mockDocumentEverVisible = true;
     mockRouter.back.mockClear();
     mockRouter.push.mockClear();
-    document.title = 'First | The Most Annoying Website';
-    jest.spyOn(window.history, 'replaceState').mockImplementation(() => {});
   });
 
   afterEach(() => {
@@ -149,7 +152,45 @@ describe('useShortPlayer', () => {
     expect(video.play).not.toHaveBeenCalled();
   });
 
-  it('syncs the localized URL and document title when the slide changes', async () => {
+  it('does not pause before the visibility observer reports the document', async () => {
+    // The runtime store starts with `isVisible: false` until the observer runs.
+    mockDocumentVisible = false;
+    mockDocumentEverVisible = false;
+    const { result } = renderHook(() =>
+      useShortPlayer({ shorts, initialIndex: 0 }),
+    );
+    const video = makeVideo();
+
+    act(() => result.current.registerVideo(0, video));
+
+    await waitFor(() => expect(video.play).toHaveBeenCalled());
+    expect(video.pause).not.toHaveBeenCalled();
+  });
+
+  it('pauses playback when the document becomes hidden', async () => {
+    const { result, rerender } = renderHook(() =>
+      useShortPlayer({ shorts, initialIndex: 0 }),
+    );
+    const video = makeVideo();
+
+    act(() => result.current.registerVideo(0, video));
+    await waitFor(() => expect(video.play).toHaveBeenCalled());
+
+    mockDocumentVisible = false;
+    rerender();
+
+    await waitFor(() => expect(video.pause).toHaveBeenCalled());
+  });
+
+  it('exposes the clamped start index for the carousel', () => {
+    const { result } = renderHook(() =>
+      useShortPlayer({ shorts, initialIndex: 99 }),
+    );
+
+    expect(result.current.startIndex).toBe(shorts.length - 1);
+  });
+
+  it('follows the carousel selection', () => {
     const { result } = renderHook(() =>
       useShortPlayer({ shorts, initialIndex: 0 }),
     );
@@ -158,14 +199,6 @@ describe('useShortPlayer', () => {
     act(() => result.current.setApi(api));
     act(() => api.emit('select'));
 
-    await waitFor(() =>
-      expect(window.history.replaceState).toHaveBeenLastCalledWith(
-        null,
-        '',
-        '/en/shorts/second/',
-      ),
-    );
-    expect(document.title).toBe('Second | The Most Annoying Website');
     expect(result.current.activeIndex).toBe(1);
   });
 
