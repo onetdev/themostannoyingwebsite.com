@@ -71,6 +71,11 @@ test('shorts comments open beside the video on desktop', async ({
   await expect(shortsPage.player).toBeVisible();
   await expect(shortsPage.commentComposer).toBeVisible();
   await expect(shortsPage.commentItems.first()).toBeVisible();
+  await expect(
+    page
+      .locator('[data-track-section="comments:item"][data-depth="1"]')
+      .first(),
+  ).toBeVisible();
   await expect(shortsPage.commentsToggle).toHaveAttribute(
     'aria-expanded',
     'true',
