@@ -12,8 +12,11 @@ export { generateStaticParams } from '@/core/i18n/routing';
 
 export const revalidate = 1800;
 
-/** Maximum clips in the home shelf (one row at the widest layout). */
-const HOME_SHORTS_LIMIT = 5;
+/**
+ * Maximum clips in the home shelf. The shelf is a single scrollable row, so
+ * extra clips extend the scroll track instead of adding a second row.
+ */
+const HOME_SHORTS_LIMIT = 7;
 
 export default async function Page({ params }: NextPageProps) {
   const { locale } = await params;
