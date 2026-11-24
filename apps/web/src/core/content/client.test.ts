@@ -1,9 +1,5 @@
 import { createContentClient } from '@maw/content-sdk';
-import {
-  CONTENT_API_DEV_PROXY_PATH,
-  createAppContentClient,
-  resolveAppContentApiBaseUrl,
-} from './client';
+import { createAppContentClient } from './client';
 
 jest.mock('@maw/content-sdk', () => ({
   createContentClient: jest.fn(() => ({})),
@@ -11,51 +7,25 @@ jest.mock('@maw/content-sdk', () => ({
 
 const createContentClientMock = jest.mocked(createContentClient);
 
-describe('resolveAppContentApiBaseUrl', () => {
-  it('returns the same-origin dev proxy path in the browser during development', () => {
-    expect(resolveAppContentApiBaseUrl('development', true)).toBe(
-      CONTENT_API_DEV_PROXY_PATH,
-    );
-  });
-
-  it('returns undefined on the server even during development', () => {
-    expect(resolveAppContentApiBaseUrl('development', false)).toBeUndefined();
-  });
-
-  it.each(['production', 'test', 'staging'])(
-    'returns undefined in the browser for the %s environment',
-    (environment) => {
-      expect(resolveAppContentApiBaseUrl(environment, true)).toBeUndefined();
-    },
-  );
-});
-
 describe('createAppContentClient', () => {
   beforeEach(() => {
     createContentClientMock.mockClear();
   });
 
-  it('targets the dev proxy in the browser during development', () => {
-    createAppContentClient('development', true);
+  it('delegates to the SDK factory without forcing a base URL', () => {
+    createAppContentClient();
 
-    expect(createContentClientMock).toHaveBeenCalledWith({
-      baseUrl: CONTENT_API_DEV_PROXY_PATH,
-    });
+    expect(createContentClientMock).toHaveBeenCalledWith(undefined);
   });
 
-  it('lets the SDK resolve the default base URL on the server', () => {
-    createAppContentClient('development', false);
+  it('passes client options through to the SDK factory', () => {
+    const options = {
+      baseUrl: 'https://dev.content.themostannoyingwebsite.com',
+      timeoutMs: 5_000,
+    };
 
-    expect(createContentClientMock).toHaveBeenCalledWith({
-      baseUrl: undefined,
-    });
-  });
+    createAppContentClient(options);
 
-  it('lets the SDK resolve the default base URL in production', () => {
-    createAppContentClient('production', true);
-
-    expect(createContentClientMock).toHaveBeenCalledWith({
-      baseUrl: undefined,
-    });
+    expect(createContentClientMock).toHaveBeenCalledWith(options);
   });
 });

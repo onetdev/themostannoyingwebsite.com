@@ -1,11 +1,13 @@
 # ADR 29: Content Resource Model — String Pools and Dedicated Endpoints
 
 ## Status
+
 Accepted
 
 Supersedes [ADR 25](0025-api-only-variant-pools-ssr-hydration.md).
 
 ## Context
+
 The Content API previously exposed a single `/api/v1/variants/:lang/:type` endpoint for
 every kind of dynamic content. That conflated two very different things:
 
@@ -44,7 +46,7 @@ still correct; only the resource model it was applied to has changed.
 3.  **Behavior is centralized in the Content API.** Wheel weights/starred flags and
     quiz correct answers are authored once, keyed by stable ID, and merged into the
     localized items at serve time. The client no longer maintains behavior maps; it may
-    only *decorate* (e.g. append the `*` suffix for a starred wheel segment).
+    only _decorate_ (e.g. append the `*` suffix for a starred wheel segment).
 
 4.  **The SDK exposes one resource per content area.** `client.pools` (catalog +
     `getByType`), plus `client.survey`, `client.prizeWheel`, `client.newsletter`, and
@@ -61,12 +63,14 @@ still correct; only the resource model it was applied to has changed.
     `content-pools`, with a cache tag per resource.
 
 6.  **Generation can target an overridable spec.** `CONTENT_OPENAPI_URL` lets Orval
-    regenerate the client against a local `pnpm dev` spec, defaulting to the deployed
-    Content API, so regeneration is reproducible and does not require production to be
-    reachable.
+    regenerate the client against a local `pnpm dev` spec. The default target is the
+    deployed dev Content API, which carries contract changes before production does;
+    pointing at production or a local server is an explicit override. Regeneration is
+    reproducible and does not require production to be reachable.
 
 ## Consequences
-- **Pros**: A single source of truth for both content *and* behavior; the client can no
+
+- **Pros**: A single source of truth for both content _and_ behavior; the client can no
   longer drift from the API's weights/answers.
 - **Pros**: Structured content is strongly typed end to end, and stable IDs make items
   addressable for future behavior.

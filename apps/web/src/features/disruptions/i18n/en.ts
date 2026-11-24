@@ -4,6 +4,7 @@ export default {
     exitTap: 'Tap anywhere to exit screensaver',
   },
   stickyVideoPlayer: {
-    videoTitle: 'Sticky video player',
+    promoLabel: 'Game teaser',
+    openLabel: 'See the Egg Tower game',
   },
 };

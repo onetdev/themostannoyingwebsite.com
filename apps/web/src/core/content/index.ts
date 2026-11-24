@@ -1,2 +1,2 @@
+export * from './base-url';
 export * from './client';
-export * from './proxy';

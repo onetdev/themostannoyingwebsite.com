@@ -26,10 +26,11 @@ a failure is attributable to one batch instead of the whole tree.
   record pass/fail plus warning counts. Pre-existing warnings must not be
   blamed on an upgrade.
 - **Know the verification prerequisites.** `@maw/web` `lint`, `check-types`, and
-  `build` all depend on `build:metadata`, which fetches locales from the Content
-  API at `localhost:3012` and fails the build when it is unreachable. Either
-  start the API or set `ALLOW_LOCALES_FALLBACK=true` (documented escape hatch,
-  see `adr/0023-build-time-locale-catalog.md`) and disclose that in the report.
+  `build` all depend on `build:metadata`, which fetches locales from the
+  configured Content API (`NEXT_PUBLIC_CONTENT_API_URL`, the deployed dev API by
+  default) and fails the build when it is unreachable. Either ensure the API is
+  reachable or set `ALLOW_LOCALES_FALLBACK=true` (documented escape hatch, see
+  `adr/0023-build-time-locale-catalog.md`) and disclose that in the report.
 
 ## 1. Inventory
 

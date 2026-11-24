@@ -2,3 +2,10 @@
 
 @source "../../src";
 @source "../../node_modules/@maw/ui-lib/src";
+
+/* The full-screen short player pins its controls to the viewport edges, so the
+   global toast stack would be drawn on top of them. The player sets
+   `data-shorts-player` on <body> for as long as it is mounted. */
+body[data-shorts-player="true"] [data-sonner-toaster] {
+  display: none;
+}

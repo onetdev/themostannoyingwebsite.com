@@ -9,12 +9,14 @@ Welcome! This document provides high-level context, architecture rules, and tool
 This is a **Turborepo** monorepo managed with **pnpm**.
 
 ### Core Stack
+
 - **Framework:** Next.js (App Router)
 - **Language:** TypeScript (Strict)
 - **Styling:** TailwindCSS 4 (Semantic Tokens)
 - **Linting/Formatting:** Biome
 
 ### Workspace Structure
+
 - `apps/web`: The main Next.js application. (See `apps/web/AGENTS.md` for specific rules).
 - `apps/ui-docs`: Storybook for the design system.
 - `packages/ui-lib`: Shared UI components (shadcn-based).
@@ -37,31 +39,76 @@ The project includes specialized skills that you SHOULD use for specific tasks. 
 - **`audit-resolve`**: Use to audit and upgrade dependencies that have known security vulnerabilities.
 - **`dependency-upgrade`**: Use to bump dependency versions across the monorepo and verify the repository still works.
 - **`shadcn`**: Use when adding, searching, fixing, debugging, styling, or composing shadcn/ui components in `packages/ui-lib` (see `adr/0031-base-ui-shadcn-adoption.md`).
+- **`quick-iterator`**: Use while requirements are still moving. Keeps the loop on runnable output and defers docs, ADRs, new tests and E2E to the freeze checklist.
+
+> **Load the skill before inventing a workflow.** Every repeated task above already
+> has a written procedure; re-deriving it from scratch is the main source of wasted
+> cycles. If a task feels repetitive and no skill covers it, propose one.
 
 ---
 
 ## 📏 Development Standards
 
 ### Conventional Commits
+
 All commits must follow the Conventional Commits specification.
+
 - **Format:** `<type>(<scope>): <subject>`
 - **Types:** `feat`, `fix`, `chore`, `refactor`, `docs`, `style`, `test`, `ci`, `perf`.
 - **Subject:** Lowercase, no period at the end.
 
 ### Formatting & Linting
+
 We use **Biome**. Before finishing any task, ensure the code is clean:
+
 ```bash
 pnpm lint:fix
 ```
 
 ### Testing
+
 - **Unit/Integration:** Using Jest. Run with `pnpm test`.
 - **E2E:** Using Playwright. Run with `pnpm test:e2e`.
 
+### Local Verification Playbook
+
+The expensive part of a task is usually proving it works, not writing it. Follow
+this order and resolve ambiguity before debugging code.
+
+1.  **Cheap gates first.** `check-types` → `biome check <changed files>` →
+    targeted Jest → production build → Playwright. Never start the slowest loop
+    before the cheapest one passes.
+2.  **Use the project hostname, not `localhost`.** The deployed Content API
+    allowlist accepts any `*.themostannoyingwebsite.com` origin (any scheme,
+    any port) and rejects `localhost` / `127.0.0.1`. Run the app at
+    `local.themostannoyingwebsite.com` (point it at `127.0.0.1` in
+    `/etc/hosts`) so browser-side Content API calls satisfy CORS directly.
+3.  **Browser Content API calls are direct.** There is no dev proxy: the
+    browser calls `NEXT_PUBLIC_CONTENT_API_URL` itself. Empty feeds, searches,
+    or comments are an origin/CORS or base-URL problem until proven otherwise —
+    check the failing request's origin and the configured API URL before
+    touching app code.
+4.  **Ports are shared.** Check with
+    `lsof -nP -iTCP:<port> -sTCP:LISTEN` before starting anything. Never kill a
+    process you did not start; move to another port instead. Keep one origin
+    (`127.0.0.1` or `localhost`) for the whole run — mixing them breaks dev
+    hydration.
+5.  **Attribute failures before fixing them.** If unrelated tests fail, stash,
+    rebuild untouched `develop`, and rerun to prove the failure predates the
+    branch. One baseline run on `develop` up front makes this cheap later.
+6.  **Separate the cache concepts.** `generateStaticParams` shapes the build
+    artifact; `revalidate` controls ISR freshness; `expireTime` only caps the
+    stale-while-revalidate fallback window; Vercel's "Build Cache" size is not
+    the deployment size. See `adr/0040-on-demand-content-rendering.md`.
+7.  **Report what was observed.** Quote the command and its output. "Verified"
+    without a log line is a claim, not evidence.
+
 ### Internationalization (i18n)
+
 **NEVER** hardcode user-facing strings. Use the `i18n-assistant` skill or refer to `apps/web/AGENTS.md` for the localization workflow.
 
 ### Function Shape & Iteration
+
 - Keep functions small and single-purpose; prefer extraction over deep nesting.
 - Do not nest iteration more than two levels. When a loop or iterator callback contains another loop, extract the enclosing iteration into a named helper at its natural boundary.
 - Extract at the level with a small, natural input → output — never the innermost loop whose body captures many outer locals.

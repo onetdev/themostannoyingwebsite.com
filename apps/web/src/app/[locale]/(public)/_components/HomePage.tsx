@@ -1,4 +1,8 @@
-import type { Article, ArticleListItem } from '@maw/content-sdk';
+import type {
+  Article,
+  ArticleListItem,
+  ShortVideoListItem,
+} from '@maw/content-sdk';
 import { buttonVariants, Icon } from '@maw/ui-lib';
 import { getTranslations } from 'next-intl/server';
 import { Link } from '@/core/i18n/navigation';
@@ -8,17 +12,20 @@ import {
   TextListItem,
 } from '@/features/content/components';
 import { WanAPhoneCampaignAd } from '@/features/marketing/components';
+import { HomeShorts } from './HomeShorts';
 
 type HomePageProps = {
   coverArticle?: Article | ArticleListItem;
   denseArticleList: (Article | ArticleListItem)[];
   smallCoverArticleList: (Article | ArticleListItem)[];
+  shorts: ShortVideoListItem[];
 };
 
 export async function HomePage({
   coverArticle,
   denseArticleList,
   smallCoverArticleList,
+  shorts,
 }: HomePageProps) {
   const t = await getTranslations();
 
@@ -50,6 +57,7 @@ export async function HomePage({
         </ul>
         <WanAPhoneCampaignAd />
       </section>
+      <HomeShorts shorts={shorts} />
       <div className="border-border col-span-1 border-t-5 border-b-5 border-double p-5 text-center text-xl font-light italic lg:col-span-4 lg:my-6">
         {t('content.article.moreContentScroll')}
       </div>

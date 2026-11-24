@@ -10,6 +10,12 @@ export default {
     description:
       'Browse every article we have ever published. The complete archive, sorted from newest to oldest, with nothing held back.',
   },
+  shorts: {
+    title: 'Shorts',
+    pageTitle: 'Shorts – Page {page}',
+    description:
+      'Watch every short-form clip in one place. Vertical, loud, and only a few seconds of your life each.',
+  },
   achievements: {
     title: 'Achievements',
     description:
@@ -39,6 +45,11 @@ export default {
     title: 'Flaim a phone',
     description:
       'Ready for some fiery fun? Flaim a phone here and see how we bring the heat to your mobile experience.',
+  },
+  eggTower: {
+    title: 'Egg Tower',
+    description:
+      'Stack eggs, beat the conveyor belt, and try not to make the same steering choice.',
   },
   hotThings: {
     title: 'Hot things',

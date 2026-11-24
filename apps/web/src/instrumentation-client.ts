@@ -4,6 +4,7 @@
 
 import * as Sentry from '@sentry/nextjs';
 
+import { logConsoleSignature } from '@/core/observability/console-signature';
 import deploymentMeta from '@/root/public/deployment-meta.json' with {
   type: 'json',
 };
@@ -25,5 +26,7 @@ Sentry.init({
     return breadcrumb.category === 'ui.click' ? null : breadcrumb;
   },
 });
+
+logConsoleSignature();
 
 export const onRouterTransitionStart = Sentry.captureRouterTransitionStart;

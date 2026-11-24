@@ -24,6 +24,7 @@ describe('navigation', () => {
 
     expect(ids).toContain('home');
     expect(ids).toContain('articles');
+    expect(ids).toContain('shorts');
     expect(ids).toContain('dilf');
     expect(ids).toContain('donate');
     expect(ids).toContain('about');
@@ -37,6 +38,13 @@ describe('navigation', () => {
 
     expect(ids.indexOf('articles')).toBeGreaterThan(ids.indexOf('home'));
     expect(ids.indexOf('articles')).toBeLessThan(ids.indexOf('plans'));
+  });
+
+  it('orders the shorts archive between Articles and AI plans', () => {
+    const ids = SITE_NAVIGATION_LINKS.map((entry) => entry.id);
+
+    expect(ids.indexOf('shorts')).toBeGreaterThan(ids.indexOf('articles'));
+    expect(ids.indexOf('shorts')).toBeLessThan(ids.indexOf('plans'));
   });
 
   it('keeps retired pages out of the main navigation', () => {

@@ -8,7 +8,7 @@ This package provides a strongly-typed HTTP client powered by **`ky`**, with ful
 
 ## 📦 Features
 
-- **Resource-Oriented Client**: Ergonomic namespaces: `client.articles`, `client.authors`, `client.pages`, `client.categories`, `client.images`, `client.health`, `client.locales`, `client.translations`, `client.pools`, `client.survey`, `client.prizeWheel`, `client.newsletter`, `client.spamSample`, `client.donations`, `client.currency`.
+- **Resource-Oriented Client**: Ergonomic namespaces: `client.articles`, `client.authors`, `client.pages`, `client.categories`, `client.images`, `client.health`, `client.locales`, `client.translations`, `client.pools`, `client.survey`, `client.prizeWheel`, `client.newsletter`, `client.spamSample`, `client.donations`, `client.currency`, `client.shortVideos`.
 - **Ky HTTP Engine**: Built-in prefix URL handling, automatic query serialization, timeouts, and configurable exponential retry.
 - **Next.js App Router Compatible**: Pass Next.js fetch options (`next: { revalidate, tags }`, `cache`) directly in request options.
 - **Typed Error Hierarchy**: Automatic translation of OpenAPI error responses into `ContentApiNotFoundError`, `ContentApiValidationError`, `ContentApiCorsError`, `ContentApiServerError`.
@@ -68,6 +68,7 @@ const article = await client.articles.getBySlug('how-to-win-every-argument', {
 
 console.log(article.title);
 console.log(article.author.name); // resolved author byline (AuthorRef)
+console.log(article.ai_assisted); // AI-assistance disclosure flag
 console.log(article.translations); // [{ lang: 'de', slug: '...', title: '...' }]
 ```
 
@@ -124,6 +125,26 @@ const summary = await client.donations.getSummary('en');
 
 // Exchange rates for the offered display currencies (their own endpoint)
 const { base, rates } = await client.currency.getRates();
+```
+
+### Short Videos
+
+```typescript
+// List vertical short videos with media renditions, cues, and metadata
+const { items } = await client.shortVideos.list({
+  lang: 'en',
+  is_featured: true,
+  order: 'desc',
+});
+
+// Fetch a single clip by slug (includes translation alternates and subtitle track)
+const short = await client.shortVideos.getBySlug('caveman-dirtbike-vhs', {
+  lang: 'en',
+});
+
+console.log(short.media); // [{ kind: 'video', variant: '720p', url: '...' }]
+console.log(short.subtitle_url); // absolute WebVTT track URL
+console.log(short.ai_assisted); // AI-assistance disclosure flag
 ```
 
 ### Health Check
@@ -202,11 +223,16 @@ To fetch the latest OpenAPI JSON from the remote server and regenerate Zod schem
 pnpm --filter @maw/content-sdk orval
 ```
 
-By default the spec is pulled from the deployed Content API. Point it at a local
-`pnpm dev` server (or any other spec) without editing the config:
+By default the spec is pulled from the deployed dev Content API
+(`https://dev.content.themostannoyingwebsite.com/docs/json`), which is the
+source of truth for contract changes. Production lags behind it, so generating
+from production would drop endpoints and fields the app already consumes.
+
+Point it at a local `pnpm dev` server, production, or any other spec without
+editing the config:
 
 ```bash
-CONTENT_OPENAPI_URL=http://localhost:3000/docs/json \
+CONTENT_OPENAPI_URL=http://localhost:3012/docs/json \
   pnpm --filter @maw/content-sdk orval
 ```
 

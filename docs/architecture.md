@@ -138,12 +138,18 @@ Strongly typed client SDK used to retrieve:
 - static pages
 - taxonomy tags
 - responsive image variants
+- short-form clips with media, cues, and subtitle tracks
 
 Content is hosted externally by the headless Content API.
 
 ## Static-first philosophy
 
 The project prefers **static builds whenever possible**. This is mainly due to cost and performance reasons.
+
+Since [ADR 40](../adr/0040-on-demand-content-rendering.md), build-time pregeneration is
+limited to localized home pages, featured article detail pages and build
+artifacts. Content detail pages,
+archives and secondary public pages render on demand and are cached with ISR.
 
 Reasons:
 

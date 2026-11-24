@@ -35,15 +35,41 @@ HTTPS is required because some browser APIs used by the project only work in sec
 
 ### Content API and CORS
 
-The headless Content API rejects `localhost` origins in production. During
-`pnpm dev`, browser-side Content API requests (article search, plus anything
-resolved through the client DI container) are therefore sent to the same-origin
-path `/api/content`, which the Next.js dev server proxies to the API without the
-browser's `Origin` header. The shared factory lives in `src/core/content`, and
-the development-only proxy route handler in
-`apps/web/src/app/api/content/[...path]/route.ts`; see
-`adr/0024-dev-content-api-proxy.md`. A local `next build && next start` does not
-use the proxy.
+The headless Content API's CORS allowlist accepts any
+`*.themostannoyingwebsite.com` origin, on any scheme and port. It rejects
+`localhost` and `127.0.0.1`. Browser requests go **directly** to
+`NEXT_PUBLIC_CONTENT_API_URL`; there is no same-origin proxy.
+
+For local development, point the app at the deployed dev API and serve it from
+the allowlisted local hostname:
+
+```bash
+export NEXT_PUBLIC_CONTENT_API_URL=https://dev.content.themostannoyingwebsite.com
+pnpm dev
+# open https://local.themostannoyingwebsite.com:3000
+```
+
+Point the local hostname at the loopback interface once:
+
+```
+# /etc/hosts
+127.0.0.1 local.themostannoyingwebsite.com
+```
+
+`pnpm dev` runs with `--experimental-https`; its self-signed certificate triggers
+a browser warning, which Playwright already tolerates via `ignoreHTTPSErrors`.
+Production-build runs (`next build && next start`) use the same hostname with
+`http://local.themostannoyingwebsite.com:3000`.
+
+`localhost` and `127.0.0.1` cannot call the deployed APIs, so opening
+`https://localhost:3000` breaks browser-side search, comments, and feeds with
+`403 CORS_ORIGIN_DENIED`. To keep using the local Content API directly, set
+`NEXT_PUBLIC_CONTENT_API_URL=http://localhost:3012`; its development CORS policy
+accepts localhost, and Chromium permits the mixed-content localhost request.
+
+Playwright reads the origin from `PLAYWRIGHT_BASE_URL`; without it, specs that
+trigger browser-side Content API calls will see CORS failures rather than app
+errors.
 
 ## Monorepo Scripts
 
@@ -53,7 +79,7 @@ Common workspace scripts:
 pnpm dev       – run development server
 pnpm build     – build all packages
 pnpm test      – run unit tests
-pnpm test:e2e  – run end-to-end tests
+pnpm test:e2e  – run end-to-end tests (set PLAYWRIGHT_BASE_URL to the local hostname)
 pnpm lint      – run Biome
 pnpm lint:fix  - run Biome and apply safe fixes
 pnpm next experimental-analyze - analyze bundle size (in apps/web)
@@ -96,9 +122,9 @@ for (const locale of locales) {
 }
 
 // After: the enclosing iteration is a named, testable builder.
-const buildAuthorStaticParams = (locales, authors) =>
+const buildLocalizedEntries = (locales, items) =>
   locales.flatMap((locale) =>
-    authors.map((author) => ({ slug: author.slug, locale })),
+    items.map((item) => ({ slug: item.slug, locale })),
   );
 ```
 
@@ -139,6 +165,8 @@ This project includes **agentic skills** to streamline development workflows for
   - **Trigger**: "Upgrade dependencies"
 - **shadcn** – Adds, fixes, and composes shadcn/ui components in `@maw/ui-lib`.
   - **Trigger**: "Add a shadcn component"
+- **quick-iterator** – Keeps the loop on runnable output while requirements are still moving, deferring docs, ADRs, tests, and E2E to a freeze checklist.
+  - **Trigger**: "Just build it", "iterate first", or requirements changing between exchanges
 
 ### Setup
 

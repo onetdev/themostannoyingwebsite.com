@@ -21,17 +21,16 @@ jobs:
     permissions:
       contents: read
     environment:
-      name: ${{ (github.base_ref == 'main' || github.ref_name == 'main') && 'Production' || 'Preview' }}
+      name: ${{ github.ref == 'refs/heads/main' && 'Production' || 'Preview' }}
     env:
       NEXT_PUBLIC_CONTENT_API_URL: ${{ vars.NEXT_PUBLIC_CONTENT_API_URL }}
     steps:
       - uses: actions/checkout@v6
-      - uses: pnpm/action-setup@v4
-      - uses: actions/setup-node@v6
+      - uses: pnpm/setup@v3
         with:
-          node-version: ${{ env.NODE_VERSION }}
-          cache: pnpm
-      - run: pnpm install --frozen-lockfile
+          runtime: node@${{ env.NODE_VERSION }}
+          cache: true
+          require-lockfile: true
       - run: pnpm run lint
 
   typecheck:
@@ -40,17 +39,16 @@ jobs:
     permissions:
       contents: read
     environment:
-      name: ${{ (github.base_ref == 'main' || github.ref_name == 'main') && 'Production' || 'Preview' }}
+      name: ${{ github.ref == 'refs/heads/main' && 'Production' || 'Preview' }}
     env:
       NEXT_PUBLIC_CONTENT_API_URL: ${{ vars.NEXT_PUBLIC_CONTENT_API_URL }}
     steps:
       - uses: actions/checkout@v6
-      - uses: pnpm/action-setup@v4
-      - uses: actions/setup-node@v6
+      - uses: pnpm/setup@v3
         with:
-          node-version: ${{ env.NODE_VERSION }}
-          cache: pnpm
-      - run: pnpm install --frozen-lockfile
+          runtime: node@${{ env.NODE_VERSION }}
+          cache: true
+          require-lockfile: true
       - run: pnpm run check-types
 
   test:
@@ -59,17 +57,16 @@ jobs:
     permissions:
       contents: read
     environment:
-      name: ${{ (github.base_ref == 'main' || github.ref_name == 'main') && 'Production' || 'Preview' }}
+      name: ${{ github.ref == 'refs/heads/main' && 'Production' || 'Preview' }}
     env:
       NEXT_PUBLIC_CONTENT_API_URL: ${{ vars.NEXT_PUBLIC_CONTENT_API_URL }}
     steps:
       - uses: actions/checkout@v6
-      - uses: pnpm/action-setup@v4
-      - uses: actions/setup-node@v6
+      - uses: pnpm/setup@v3
         with:
-          node-version: ${{ env.NODE_VERSION }}
-          cache: pnpm
-      - run: pnpm install --frozen-lockfile
+          runtime: node@${{ env.NODE_VERSION }}
+          cache: true
+          require-lockfile: true
       - run: pnpm run test
 
   build:
@@ -78,15 +75,14 @@ jobs:
     permissions:
       contents: read
     environment:
-      name: ${{ (github.base_ref == 'main' || github.ref_name == 'main') && 'Production' || 'Preview' }}
+      name: ${{ github.ref == 'refs/heads/main' && 'Production' || 'Preview' }}
     env:
       NEXT_PUBLIC_CONTENT_API_URL: ${{ vars.NEXT_PUBLIC_CONTENT_API_URL }}
     steps:
       - uses: actions/checkout@v6
-      - uses: pnpm/action-setup@v4
-      - uses: actions/setup-node@v6
+      - uses: pnpm/setup@v3
         with:
-          node-version: ${{ env.NODE_VERSION }}
-          cache: pnpm
-      - run: pnpm install --frozen-lockfile
+          runtime: node@${{ env.NODE_VERSION }}
+          cache: true
+          require-lockfile: true
       - run: pnpm run build --filter='!@maw/ui-docs'

@@ -2,8 +2,6 @@ import type { LanguageCode } from '@maw/content-sdk';
 import type { Metadata } from 'next';
 import { getLocale, getTranslations } from 'next-intl/server';
 
-export { generateStaticParams } from '@/core/i18n/routing';
-
 import config from '@/core/config';
 import { getDependencyContainer } from '@/core/di';
 import { buildPlanList, JsonLd } from '@/core/seo';

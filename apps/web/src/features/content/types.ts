@@ -6,10 +6,14 @@ import type {
   GetArticleListQueryParams,
   GetArticleListResponse,
   GetAuthorListQueryParams,
+  GetShortVideoListQueryParams,
+  GetShortVideoListResponse,
   LanguageCode,
   NewsletterStep,
   PoolType,
   PrizeWheelSegment,
+  ShortVideo,
+  ShortVideoListItem,
   SpamSample,
   SurveyQuestion,
 } from '@maw/content-sdk';
@@ -30,10 +34,21 @@ export interface AuthorService {
   ): Promise<AuthorListItem[]>;
 }
 
+export interface ShortVideoService {
+  getBySlug(slug: string, lang?: LanguageCode): Promise<ShortVideo | undefined>;
+  list(
+    params?: GetShortVideoListQueryParams,
+  ): Promise<GetShortVideoListResponse>;
+  listAll(
+    params?: Omit<GetShortVideoListQueryParams, 'limit' | 'offset'>,
+  ): Promise<ShortVideoListItem[]>;
+}
+
 export const DI = {
   ArticleService: Symbol.for('ArticleService'),
   AuthorService: Symbol.for('AuthorService'),
   ContentApiClient: Symbol.for('ContentApiClient'),
+  ShortVideoService: Symbol.for('ShortVideoService'),
 };
 
 export type ContentI18nShape = typeof contentEnLocale;

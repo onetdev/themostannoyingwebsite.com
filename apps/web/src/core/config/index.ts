@@ -90,10 +90,6 @@ const config: AppConfig = {
       defaultTimeoutSeconds: 30,
       defaultVariant: 'bouncingLogo',
     },
-    stickyVideoPlayer: {
-      videoUrl:
-        'https://www.youtube.com/embed/M7lc1UVf-VE?autoplay=1&controls=2&loop=1&mute=1',
-    },
     deadPixel: {
       rainbowChance: 1 / 20,
     },

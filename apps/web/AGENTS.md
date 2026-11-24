@@ -26,7 +26,7 @@ This document provides specific instructions and context for AI agents working o
   - `http/`: HTTP client and API abstractions.
   - `telemetry/`: Typed interaction telemetry (catalog, tracker, sinks, auto-capture). New surfaces must be registered in `TELEMETRY_SECTIONS` and annotated with `data-track-section`. See `adr/0037-user-interaction-telemetry.md`.
   - `seo/`: Structured data (JSON-LD) builders, `JsonLd` renderer, canonical URL helpers, and robots constants. See `adr/0026-structured-data-json-ld.md`.
-  - `content/`: Content API client factory (`createAppContentClient`) and dev proxy helpers. Use this factory instead of the raw SDK `createContentClient` so browser requests are proxied in local development.
+  - `content/`: Content API client factory (`createAppContentClient`) and base-URL helpers. Use this factory instead of the raw SDK `createContentClient` so app-wide options stay centralized; browser and server calls go directly to the configured API.
   - `observability/`: Logging and monitoring (Sentry).
 - `src/features/`: Domain-specific modules. **This is where most logic belongs.**
 - `src/hooks/`: Shared, app-wide React hooks.
@@ -94,6 +94,11 @@ directories or `variants.ts` files — variant data lives in the Content API.
   `node_modules/next-intl`) — and do **not** add a pass-through
   `app/layout.tsx` — the root layout must remain
   `src/app/[locale]/layout.tsx` for root params to work.
+- **Raw key paths are expected, not a bug.** A non-English locale renders a
+  literal key path (e.g. `marketing.eggTower.title`) whenever the Content API has
+  not shipped that key yet. Only English ships in the repo, so new copy is
+  correct locally in `en` and pending elsewhere. Verify English, then note the
+  Content API sync as a follow-up instead of debugging the merge.
 
 ### 4. Supported Locale Catalog (build-time)
 
@@ -206,6 +211,13 @@ All pages must describe themselves with JSON-LD. The machinery lives in `src/cor
 - **Unit**: Co-locate `*.test.ts` with logic. Use `jest`.
 - **E2E**: Place in `e2e/tests/`. Use `playwright`.
 - **Validation**: Every new feature or bug fix **MUST** have a corresponding test.
+- **Local origin**: `playwright.config.ts` uses `baseURL = http://127.0.0.1:3000`
+  by default. The deployed Content API rejects `127.0.0.1` and `localhost`, and
+  browser-side calls go directly to `NEXT_PUBLIC_CONTENT_API_URL`. Override with
+  `PLAYWRIGHT_BASE_URL=http://local.themostannoyingwebsite.com:3000` for any spec
+  that depends on a browser-side Content API call (search, comments, feeds).
+- **Sequencing**: type check → Biome → targeted Jest → production build → E2E.
+  See root `AGENTS.md` → "Local Verification Playbook".
 
 ---
 
@@ -222,7 +234,7 @@ All pages must describe themselves with JSON-LD. The machinery lives in `src/cor
 
 <!-- BEGIN:nextjs-agent-rules -->
 
-# This is NOT the Next.js you know
+## This is NOT the Next.js you know
 
 This version has breaking changes — APIs, conventions, and file structure may all differ from your training data. Read the relevant guide in `node_modules/next/dist/docs/` (resolved from this file's directory; in monorepos the `next` package may not be visible from the repo root) before writing any code. Heed deprecation notices.
 

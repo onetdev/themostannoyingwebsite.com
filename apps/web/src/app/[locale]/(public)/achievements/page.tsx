@@ -11,8 +11,6 @@ import { PageLayout } from '../_components/PageLayout';
 
 export const revalidate = 1800;
 
-export { generateStaticParams } from '@/core/i18n/routing';
-
 export async function generateMetadata({
   params,
 }: NextPageProps): Promise<Metadata> {
