@@ -6,6 +6,7 @@ import type { ShortVideoListItem } from '@maw/content-sdk';
 import { TooltipProvider } from '@maw/ui-lib';
 import { fireEvent, render, screen } from '@testing-library/react';
 
+import type { ShortsPlayerProps } from './ShortsPlayer';
 import { ShortsPlayer } from './ShortsPlayer';
 
 jest.mock('next-intl', () => ({
@@ -31,6 +32,12 @@ jest.mock('@/core/i18n/navigation', () => ({
 
 jest.mock('@/features/share/hooks', () => ({
   useShareAction: () => jest.fn(),
+}));
+
+jest.mock('@/features/comments/components', () => ({
+  ShortsCommentsPanel: ({ comments }: { comments: unknown[] }) => (
+    <div data-testid="shorts-comments-panel">{comments.length}</div>
+  ),
 }));
 
 jest.mock('@/stores', () => ({
@@ -98,18 +105,37 @@ const shorts = [
   makeShort('c', 'third', 'Third'),
 ];
 
-function renderPlayer() {
+function renderPlayer(props: Partial<ShortsPlayerProps> = {}) {
   return render(
     <TooltipProvider>
-      <ShortsPlayer shorts={shorts} initialIndex={0} />
+      <ShortsPlayer shorts={shorts} initialIndex={0} {...props} />
     </TooltipProvider>,
   );
 }
 
+const originalMatchMedia = window.matchMedia;
+
 describe('ShortsPlayer', () => {
+  beforeEach(() => {
+    window.matchMedia = jest.fn(() => ({
+      matches: true,
+      media: '(min-width: 1024px)',
+      onchange: null,
+      addEventListener: jest.fn(),
+      removeEventListener: jest.fn(),
+      addListener: jest.fn(),
+      removeListener: jest.fn(),
+      dispatchEvent: jest.fn(),
+    })) as unknown as typeof window.matchMedia;
+  });
+
   afterEach(() => {
     document.body.style.overflow = '';
     delete document.body.dataset.shortsPlayer;
+  });
+
+  afterAll(() => {
+    window.matchMedia = originalMatchMedia;
   });
 
   it('locks the document while the player is mounted', () => {
@@ -149,5 +175,17 @@ describe('ShortsPlayer', () => {
       'aria-pressed',
       'false',
     );
+  });
+
+  it('opens the desktop comments panel beside the feed', () => {
+    renderPlayer({ commentsByShortId: { a: [] } });
+
+    fireEvent.click(screen.getByRole('button', { name: 'comments.open' }));
+
+    expect(screen.getByTestId('shorts-comments-desktop')).toBeInTheDocument();
+    expect(screen.getByTestId('shorts-comments-panel')).toBeInTheDocument();
+    expect(
+      screen.getByRole('button', { name: 'comments.close' }),
+    ).toHaveAttribute('aria-expanded', 'true');
   });
 });

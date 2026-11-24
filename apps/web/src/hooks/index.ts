@@ -10,6 +10,7 @@ export * from './useLangDir';
 export * from './useLanguageSwitcher';
 export * from './useLocaleResource';
 export * from './useLocaleSuggestion';
+export * from './useMediaQuery';
 export * from './useNavigationStats';
 export * from './useReducedMotionListener';
 export * from './useRotatingMessage';

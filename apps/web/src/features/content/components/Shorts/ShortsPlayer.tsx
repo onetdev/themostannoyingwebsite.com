@@ -1,9 +1,20 @@
 'use client';
 
 import type { ShortVideoListItem } from '@maw/content-sdk';
-import { Carousel, CarouselContent, CarouselItem } from '@maw/ui-lib';
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  Drawer,
+  DrawerContent,
+  DrawerTitle,
+  DrawerVirtualKeyboardProvider,
+} from '@maw/ui-lib';
 import { useTranslations } from 'next-intl';
 import { useCallback, useEffect, useState, type WheelEvent } from 'react';
+import { ShortsCommentsPanel } from '@/features/comments/components';
+import type { Comment } from '@/features/comments/schemas';
+import { useMediaQuery } from '@/hooks/useMediaQuery';
 
 import { ShortPlayerBackdrop } from './ShortPlayerBackdrop';
 import { ShortPlayerOverlay } from './ShortPlayerOverlay';
@@ -14,7 +25,12 @@ import { useShortPlayer } from './use-short-player';
 export interface ShortsPlayerProps {
   shorts: ShortVideoListItem[];
   initialIndex: number;
+  commentsByShortId?: Record<string, Comment[]>;
 }
+
+const EMPTY_COMMENTS: Comment[] = [];
+const EMPTY_COMMENTS_BY_SHORT: Record<string, Comment[]> = {};
+const DESKTOP_QUERY = '(min-width: 1024px)';
 
 const isPlayerControl = (target: EventTarget | null) =>
   target instanceof Element && Boolean(target.closest('[data-player-control]'));
@@ -26,9 +42,16 @@ const isPlayerControl = (target: EventTarget | null) =>
  * they travel with it during a swipe. The blurred backdrop stays behind the
  * carousel and crossfades between clips.
  */
-export function ShortsPlayer({ shorts, initialIndex }: ShortsPlayerProps) {
+export function ShortsPlayer({
+  shorts,
+  initialIndex,
+  commentsByShortId = EMPTY_COMMENTS_BY_SHORT,
+}: ShortsPlayerProps) {
   const t = useTranslations('content.shorts');
+  const tComments = useTranslations('comments');
   const player = useShortPlayer({ shorts, initialIndex });
+  const isDesktop = useMediaQuery(DESKTOP_QUERY);
+  const [commentsOpen, setCommentsOpen] = useState(false);
   const [likedShortIds, setLikedShortIds] = useState<ReadonlySet<string>>(
     () => new Set(),
   );
@@ -36,6 +59,33 @@ export function ShortsPlayer({ shorts, initialIndex }: ShortsPlayerProps) {
     onNext: player.next,
     onPrevious: player.previous,
   });
+
+  const toggleComments = useCallback(() => {
+    setCommentsOpen((current) => !current);
+  }, []);
+  const closeComments = useCallback(() => setCommentsOpen(false), []);
+
+  // The desktop panel is not a dialog, so the player shortcut handler would
+  // otherwise close the player on Escape instead of the comments panel.
+  useEffect(() => {
+    if (!commentsOpen || !isDesktop) {
+      return;
+    }
+
+    const onKeyDown = (event: KeyboardEvent) => {
+      if (event.key !== 'Escape') {
+        return;
+      }
+
+      event.preventDefault();
+      event.stopPropagation();
+      setCommentsOpen(false);
+    };
+
+    window.addEventListener('keydown', onKeyDown, true);
+
+    return () => window.removeEventListener('keydown', onKeyDown, true);
+  }, [commentsOpen, isDesktop]);
 
   // Scrubbing the seek bar or hovering a control must not advance the feed.
   const onWheel = useCallback(
@@ -90,64 +140,106 @@ export function ShortsPlayer({ shorts, initialIndex }: ShortsPlayerProps) {
     return null;
   }
 
+  const activeComments =
+    commentsByShortId[player.activeShort.id] ?? EMPTY_COMMENTS;
+
   return (
-    <div
-      ref={player.playerRef}
-      className="relative h-dvh w-full overflow-hidden overscroll-none bg-black"
-      data-testid="shorts-player"
-      onWheel={onWheel}
-    >
-      <ShortPlayerBackdrop short={player.activeShort} />
-      <Carousel
-        orientation="vertical"
-        spacing={false}
-        setApi={player.setApi}
-        opts={{
-          startIndex: player.startIndex,
-          loop: false,
-          align: 'start',
-          watchFocus: false,
-          watchDrag: (_api, event) => !isPlayerControl(event.target),
-        }}
-        className="relative z-10 h-full w-full"
-        aria-label={t('playerLabel')}
+    <>
+      <div
+        ref={player.playerRef}
+        className="relative flex h-dvh w-full overflow-hidden overscroll-none bg-black"
+        data-testid="shorts-player"
+        onWheel={onWheel}
       >
-        <CarouselContent viewportClassName="h-full" className="h-full">
-          {shorts.map((short, index) => (
-            <CarouselItem key={short.id} className="relative h-full">
-              <ShortPlayerSlide
-                short={short}
-                index={index}
-                isActive={index === player.activeIndex}
-                isNearby={Math.abs(index - player.activeIndex) <= 1}
-                muted={player.muted}
-                onVideoRef={player.registerVideo}
-                onTap={player.togglePlay}
-                onLike={() => likeShort(short.id)}
-              />
-              {index === player.activeIndex && (
-                <ShortPlayerOverlay
-                  short={short}
-                  video={player.activeVideo}
-                  muted={player.muted}
-                  showCaptions={player.showCaptions}
-                  liked={likedShortIds.has(short.id)}
-                  isPlaying={player.isPlaying}
-                  isFullscreen={player.isFullscreen}
-                  autoplayBlocked={player.autoplayBlocked}
-                  showPlayPause={player.showPlayPause}
-                  onTogglePlay={player.togglePlay}
-                  onToggleMute={player.toggleMute}
-                  onToggleCaptions={player.toggleCaptions}
-                  onToggleFullscreen={player.toggleFullscreen}
-                  onToggleLike={() => toggleLike(short.id)}
-                  onClose={player.close}
-                />
-              )}
-            </CarouselItem>
-          ))}
-        </CarouselContent>
-      </Carousel>
-    </div>
+        <div className="relative h-full min-w-0 flex-1">
+          <ShortPlayerBackdrop short={player.activeShort} />
+          <Carousel
+            orientation="vertical"
+            spacing={false}
+            setApi={player.setApi}
+            opts={{
+              startIndex: player.startIndex,
+              loop: false,
+              align: 'start',
+              watchFocus: false,
+              watchDrag: (_api, event) => !isPlayerControl(event.target),
+            }}
+            className="relative z-10 h-full w-full"
+            aria-label={t('playerLabel')}
+          >
+            <CarouselContent viewportClassName="h-full" className="h-full">
+              {shorts.map((short, index) => (
+                <CarouselItem key={short.id} className="relative h-full">
+                  <ShortPlayerSlide
+                    short={short}
+                    index={index}
+                    isActive={index === player.activeIndex}
+                    isNearby={Math.abs(index - player.activeIndex) <= 1}
+                    muted={player.muted}
+                    onVideoRef={player.registerVideo}
+                    onTap={player.togglePlay}
+                    onLike={() => likeShort(short.id)}
+                  />
+                  {index === player.activeIndex && (
+                    <ShortPlayerOverlay
+                      short={short}
+                      video={player.activeVideo}
+                      muted={player.muted}
+                      showCaptions={player.showCaptions}
+                      liked={likedShortIds.has(short.id)}
+                      commentsOpen={commentsOpen}
+                      isPlaying={player.isPlaying}
+                      isFullscreen={player.isFullscreen}
+                      autoplayBlocked={player.autoplayBlocked}
+                      showPlayPause={player.showPlayPause}
+                      onTogglePlay={player.togglePlay}
+                      onToggleMute={player.toggleMute}
+                      onToggleComments={toggleComments}
+                      onToggleCaptions={player.toggleCaptions}
+                      onToggleFullscreen={player.toggleFullscreen}
+                      onToggleLike={() => toggleLike(short.id)}
+                      onClose={player.close}
+                    />
+                  )}
+                </CarouselItem>
+              ))}
+            </CarouselContent>
+          </Carousel>
+        </div>
+
+        {isDesktop && commentsOpen && (
+          <aside
+            className="border-border bg-background hidden h-full w-[380px] shrink-0 border-s lg:flex xl:w-[420px]"
+            aria-label={tComments('sectionTitle')}
+            data-player-control
+            data-testid="shorts-comments-desktop"
+          >
+            <ShortsCommentsPanel
+              key={player.activeShort.id}
+              comments={activeComments}
+              onClose={closeComments}
+            />
+          </aside>
+        )}
+      </div>
+
+      <Drawer open={!isDesktop && commentsOpen} onOpenChange={setCommentsOpen}>
+        <DrawerVirtualKeyboardProvider>
+          <DrawerContent
+            className="h-[80dvh]"
+            data-testid="shorts-comments-drawer"
+          >
+            <DrawerTitle className="sr-only">
+              {tComments('sectionTitle')}
+            </DrawerTitle>
+            <ShortsCommentsPanel
+              key={player.activeShort.id}
+              comments={activeComments}
+              onClose={closeComments}
+            />
+          </DrawerContent>
+        </DrawerVirtualKeyboardProvider>
+      </Drawer>
+    </>
   );
 }

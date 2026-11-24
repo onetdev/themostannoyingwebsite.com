@@ -6,6 +6,7 @@ import config from '@/core/config';
 import { getDependencyContainer } from '@/core/di';
 import { assertAppLocale } from '@/core/i18n/app-locale';
 import { buildBreadcrumbList, buildShortVideo, JsonLd } from '@/core/seo';
+import { CommentService } from '@/features/comments/services';
 import { ShortsPlayer } from '@/features/content/components';
 import { selectShortMedia } from '@/features/content/components/Shorts/short-media';
 import { getShortVideoService } from '@/features/content/services';
@@ -58,6 +59,7 @@ export default async function Page({ params }: PageProps) {
     shorts.findIndex((item) => item.id === short.id),
     0,
   );
+  const commentsByShortId = await new CommentService().getByShortVideos(shorts);
   const media = selectShortMedia(short);
   const posterUrl = media.poster?.url;
 
@@ -106,7 +108,11 @@ export default async function Page({ params }: PageProps) {
         data-track-section="content:shorts:player"
         data-testid="short-player-page"
       >
-        <ShortsPlayer shorts={shorts} initialIndex={initialIndex} />
+        <ShortsPlayer
+          shorts={shorts}
+          initialIndex={initialIndex}
+          commentsByShortId={commentsByShortId}
+        />
       </main>
     </>
   );

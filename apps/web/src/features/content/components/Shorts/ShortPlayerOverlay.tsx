@@ -20,12 +20,14 @@ export interface ShortPlayerOverlayProps {
   muted: boolean;
   showCaptions: boolean;
   liked: boolean;
+  commentsOpen: boolean;
   isPlaying: boolean;
   isFullscreen: boolean;
   autoplayBlocked: boolean;
   showPlayPause: boolean;
   onTogglePlay: () => void;
   onToggleMute: () => void;
+  onToggleComments: () => void;
   onToggleCaptions: () => void;
   onToggleFullscreen: () => void;
   onToggleLike: () => void;
@@ -45,12 +47,14 @@ export function ShortPlayerOverlay({
   muted,
   showCaptions,
   liked,
+  commentsOpen,
   isPlaying,
   isFullscreen,
   autoplayBlocked,
   showPlayPause,
   onTogglePlay,
   onToggleMute,
+  onToggleComments,
   onToggleCaptions,
   onToggleFullscreen,
   onToggleLike,
@@ -114,6 +118,8 @@ export function ShortPlayerOverlay({
           showCaptions={showCaptions}
           liked={liked}
           isFullscreen={isFullscreen}
+          commentsOpen={commentsOpen}
+          onToggleComments={onToggleComments}
           onToggleCaptions={onToggleCaptions}
           onToggleFullscreen={onToggleFullscreen}
           onToggleLike={onToggleLike}

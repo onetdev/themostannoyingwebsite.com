@@ -40,6 +40,31 @@ function hasOpenDialog(): boolean {
   );
 }
 
+function isCommentsPanelTarget(target: EventTarget | null): boolean {
+  return (
+    target instanceof Element &&
+    Boolean(target.closest('[data-comments-panel]'))
+  );
+}
+
+/**
+ * Shortcuts belong to the feed unless a dialog, the comments panel, or an
+ * interactive control is handling the key itself.
+ */
+function shouldIgnoreShortcut(event: KeyboardEvent): boolean {
+  if (hasOpenDialog() || isCommentsPanelTarget(event.target)) {
+    return true;
+  }
+
+  const isArrowKey = event.key === 'ArrowDown' || event.key === 'ArrowUp';
+
+  return (
+    isInteractiveTarget(event.target) &&
+    event.key !== 'Escape' &&
+    (!isArrowKey || isFormControlTarget(event.target))
+  );
+}
+
 interface UseShortPlayerOptions {
   shorts: ShortVideoListItem[];
   initialIndex: number;
@@ -319,17 +344,7 @@ export function useShortPlayer({
     };
 
     const onKeyDown = (event: KeyboardEvent) => {
-      if (hasOpenDialog()) {
-        return;
-      }
-
-      const isArrowKey = event.key === 'ArrowDown' || event.key === 'ArrowUp';
-
-      if (
-        isInteractiveTarget(event.target) &&
-        event.key !== 'Escape' &&
-        (!isArrowKey || isFormControlTarget(event.target))
-      ) {
+      if (shouldIgnoreShortcut(event)) {
         return;
       }
 

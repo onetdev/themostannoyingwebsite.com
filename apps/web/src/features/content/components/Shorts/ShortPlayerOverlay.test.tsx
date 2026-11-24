@@ -64,6 +64,7 @@ function renderOverlay(
   const handlers = {
     onTogglePlay: jest.fn(),
     onToggleMute: jest.fn(),
+    onToggleComments: jest.fn(),
     onToggleCaptions: jest.fn(),
     onToggleFullscreen: jest.fn(),
     onToggleLike: jest.fn(),
@@ -78,6 +79,7 @@ function renderOverlay(
         muted={false}
         showCaptions={false}
         liked={false}
+        commentsOpen={false}
         isPlaying
         isFullscreen={false}
         autoplayBlocked={false}
@@ -120,12 +122,14 @@ describe('ShortPlayerOverlay', () => {
     fireEvent.click(screen.getByRole('button', { name: 'captionsOn' }));
     fireEvent.click(screen.getByRole('button', { name: 'enterFullscreen' }));
     fireEvent.click(screen.getByRole('button', { name: 'like' }));
+    fireEvent.click(screen.getByRole('button', { name: 'comments.open' }));
     fireEvent.click(screen.getByRole('button', { name: 'closePlayer' }));
 
     expect(handlers.onToggleMute).toHaveBeenCalledTimes(1);
     expect(handlers.onToggleCaptions).toHaveBeenCalledTimes(1);
     expect(handlers.onToggleFullscreen).toHaveBeenCalledTimes(1);
     expect(handlers.onToggleLike).toHaveBeenCalledTimes(1);
+    expect(handlers.onToggleComments).toHaveBeenCalledTimes(1);
     expect(handlers.onClose).toHaveBeenCalledTimes(1);
   });
 
