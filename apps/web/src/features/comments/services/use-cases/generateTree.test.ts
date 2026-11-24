@@ -7,7 +7,7 @@ describe('generateTree', () => {
     comments: ['Nice post!', 'I disagree.', 'Interesting perspective.'],
   };
   const publishedAt = new Date('2023-01-01T00:00:00Z');
-  // ... (rest of existing imports and setup)
+  const now = publishedAt.getTime() + 365 * 24 * 60 * 60 * 1000;
 
   it('generates a tree with the specified root count', () => {
     const rootCount = 5;
@@ -20,17 +20,17 @@ describe('generateTree', () => {
     expect(tree).toHaveLength(rootCount);
   });
 
-  it('is deterministic for the same seed', () => {
+  it('is deterministic for the same seed and anchor time', () => {
     const seed = 'deterministic-seed';
-    const tree1 = generateTree(seed, publishedAt, { pool });
-    const tree2 = generateTree(seed, publishedAt, { pool });
+    const tree1 = generateTree(seed, publishedAt, { pool, now });
+    const tree2 = generateTree(seed, publishedAt, { pool, now });
 
     expect(tree1).toEqual(tree2);
   });
 
   it('produces different results for different seeds', () => {
-    const tree1 = generateTree('seed-1', publishedAt, { pool });
-    const tree2 = generateTree('seed-2', publishedAt, { pool });
+    const tree1 = generateTree('seed-1', publishedAt, { pool, now });
+    const tree2 = generateTree('seed-2', publishedAt, { pool, now });
 
     expect(tree1).not.toEqual(tree2);
   });
@@ -107,27 +107,54 @@ describe('generateTree', () => {
     expect(countedNodes).toBeLessThanOrEqual(maxTotalNodes);
   });
 
-  it('calculates time correctly for roots and replies', () => {
+  it('spreads roots and replies between publication and now', () => {
+    const now = publishedAt.getTime() + 30 * 24 * 60 * 60 * 1000;
     const tree = generateTree('time-seed', publishedAt, {
       pool,
       rootCount: 1,
       maxDepth: 1,
       maxReplies: 1,
+      now,
     });
 
     const root = tree[0];
-    const TWO_MONTHS_MS = 60 * 24 * 60 * 60 * 1000;
-    const ONE_MONTH_MS = 30 * 24 * 60 * 60 * 1000;
 
     expect(root.time).toBeGreaterThanOrEqual(publishedAt.getTime());
-    expect(root.time).toBeLessThanOrEqual(
-      publishedAt.getTime() + TWO_MONTHS_MS,
-    );
+    expect(root.time).toBeLessThanOrEqual(now);
 
     if (root.replies && root.replies.length > 0) {
       const reply = root.replies[0];
-      expect(reply.time).toBe(root.time + ONE_MONTH_MS);
+      expect(reply.time).toBeGreaterThanOrEqual(root.time);
+      expect(reply.time).toBeLessThanOrEqual(now);
     }
+  });
+
+  it('never generates comments after the anchor timestamp', () => {
+    const now = publishedAt.getTime() + 7 * 24 * 60 * 60 * 1000;
+    const tree = generateTree('future-seed', publishedAt, {
+      pool,
+      now,
+      maxDepth: 2,
+      maxReplies: 3,
+      rootCount: 8,
+    });
+
+    const assertNotAfterNow = (nodes: Comment[]) => {
+      for (const node of nodes) {
+        expect(node.time).toBeLessThanOrEqual(now);
+        assertNotAfterNow(node.replies ?? []);
+      }
+    };
+
+    assertNotAfterNow(tree);
+  });
+
+  it('returns an empty thread when a content pool is unavailable', () => {
+    const tree = generateTree('empty-pool-seed', publishedAt, {
+      pool: { names: [], comments: [] },
+    });
+
+    expect(tree).toEqual([]);
   });
 
   it('generates valid IDs and non-negative likes/time', () => {

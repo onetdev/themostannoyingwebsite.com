@@ -5,11 +5,13 @@ import type {
   ArticleListItem,
   ContentApiClient,
   LanguageCode,
+  ShortVideoListItem,
 } from '@maw/content-sdk';
 import { injectable } from 'inversify';
 import { createAppContentClient } from '@/core/content';
 import { getContentPool } from '@/features/content/services/get-content-pool';
 import i18nConfig from '@/root/i18n.config';
+import type { Comment } from '../schemas';
 import type { CommentService as ICommentService } from '../types';
 import { filterByDate } from './use-cases/filterByDate';
 import {
@@ -54,12 +56,52 @@ export class CommentService implements ICommentService {
     options?: SeededCommentsOptions,
   ) {
     const pool = await this.getRangomGeneratorPool(item.lang);
+    const now = Date.now();
 
     const data = generateTree(item.slug, new Date(item.published_at), {
       pool,
       ...(options ?? {}),
+      now,
     });
 
-    return filterByDate(data, Date.now());
+    return filterByDate(data, now);
+  }
+
+  /**
+   * Seeded comment threads for a short-video feed, keyed by short id.
+   *
+   * Short videos deliberately keep a single reply level: the player's comment
+   * sheet is compact, and deeper threads would not fit the surface.
+   */
+  async getByShortVideos(
+    items: ReadonlyArray<
+      Pick<ShortVideoListItem, 'id' | 'slug' | 'lang' | 'published_at'>
+    >,
+  ) {
+    const now = Date.now();
+    const pools = new Map<string, CommentPool>();
+    const result: Record<string, Comment[]> = {};
+
+    for (const item of items) {
+      let pool = pools.get(item.lang);
+
+      if (!pool) {
+        pool = await this.getRangomGeneratorPool(item.lang);
+        pools.set(item.lang, pool);
+      }
+
+      const data = generateTree(item.slug, new Date(item.published_at), {
+        pool,
+        now,
+        maxDepth: 1,
+        rootCount: 6,
+        maxReplies: 2,
+        maxTotalNodes: 18,
+      });
+
+      result[item.id] = filterByDate(data, now);
+    }
+
+    return result;
   }
 }

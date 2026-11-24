@@ -1,4 +1,8 @@
-import type { Article, ArticleListItem } from '@maw/content-sdk';
+import type {
+  Article,
+  ArticleListItem,
+  ShortVideoListItem,
+} from '@maw/content-sdk';
 import type commentsEnLocale from './i18n/en';
 import type { Comment } from './schemas';
 import type { SeededCommentsOptions } from './services/use-cases/generateTree';
@@ -14,4 +18,9 @@ export interface CommentService {
     item: Article | ArticleListItem,
     options?: SeededCommentsOptions,
   ): Promise<Comment[]>;
+  getByShortVideos(
+    items: ReadonlyArray<
+      Pick<ShortVideoListItem, 'id' | 'slug' | 'lang' | 'published_at'>
+    >,
+  ): Promise<Record<string, Comment[]>>;
 }
