@@ -97,7 +97,7 @@ export function ShortsCommentsPanel({
         )}
       </div>
 
-      <div className="border-border border-t p-3 pb-[max(0.75rem,env(safe-area-inset-bottom))]">
+      <div className="border-border touch-auto border-t p-3 pb-[max(0.75rem,env(safe-area-inset-bottom))]">
         <ShortsCommentComposer onSubmit={openLoginModal} />
       </div>
 
