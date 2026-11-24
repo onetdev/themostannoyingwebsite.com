@@ -2,6 +2,7 @@ import { expect, type Page, test } from '@playwright/test';
 import type { PainPreferencesState } from '@/stores/pain-preferences';
 import { allDisabledPainPreferencesState } from '../fixtures/pain-preferences';
 import { acceptedUserGrantsState } from '../fixtures/user-grants';
+import { fetchFirstShort } from '../utils/content-api';
 import { setupE2eTestState } from '../utils/setup';
 import { setPainPreferences, setUserGrants } from '../utils/zustand';
 
@@ -383,5 +384,22 @@ test.describe('telemetry events', () => {
       });
 
     await expect.poll(hasPaginationClick).toBe(true);
+  });
+
+  test('shorts comments resolve a section', async ({ page, request }) => {
+    const short = await fetchFirstShort(request);
+    test.skip(
+      short === undefined,
+      'The Content API does not expose shorts yet.',
+    );
+
+    if (!short) {
+      return;
+    }
+
+    await page.goto(`/en/shorts/${short.slug}/`);
+    await page.locator('[data-track="shorts:comments"]').click();
+    await expect(page.getByTestId('shorts-comments-panel')).toBeVisible();
+    await expectScoped(page);
   });
 });
