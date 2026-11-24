@@ -1,8 +1,9 @@
 ---
+
 name: 🚀 Feature Request
 description: Propose a new feature or enhancement
 title: "[Feature]: "
-labels: ["feature"]
+labels: ["enhancement"]
 assignees: []
 ---
 

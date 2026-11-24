@@ -11,34 +11,44 @@ ci/cd:
     - any-glob-to-any-file:
       - .github/auto-assign.yml
       - .github/CODEOWNERS
+      - .github/FUNDING.yml
       - .github/labeler.yml
+      - .github/queries/**
       - .github/workflows/**
 config:
   - changed-files:
     - any-glob-to-any-file:
-      - ./**/next.config.js
-      - ./**/next.config.mjs
-      - ./**/tsconfig.json
-      - ./apps/web/i18n.config.ts
-      - ./mise.toml
+      - "**/*.config.{js,cjs,mjs,ts,yml,yaml}"
+      - "**/tsconfig.json"
+      - .dockerignore
+      - .envrc.example
+      - .vscode/**
+      - apps/web/deployment-meta.mjs
+      - biome.json
+      - lefthook.yml
+      - turbo.json
 content:
   - changed-files:
     - any-glob-to-any-file:
-      - apps/web/public/**/*.{png,jpg,jpeg,gif,svg,webp,ico}
-      - assets/**/*.{png,jpg,jpeg,gif,svg,webp,ico}
+      - assets/**
+      - apps/web/public/ads/**
+      - apps/web/public/assets/**
+      - apps/web/public/favicon*
+      - apps/web/public/manifest/**
 dependencies:
   - changed-files:
     - any-glob-to-any-file:
-      - ./**/package.json
-      - ./**/pnpm-lock.yaml
+      - "**/package.json"
       - mise.toml
-      - package.json
+      - pnpm-lock.yaml
+      - pnpm-workspace.yaml
 documentation:
   - changed-files:
     - any-glob-to-any-file:
-      - ./**/AGENTS.md
-      - ./**/README.md
-      - .github/ISSUE_TEMPLATE/*
+      - "**/AGENTS.md"
+      - "**/README.md"
+      - .agents/**
+      - .github/ISSUE_TEMPLATE/**
       - .github/pull_request_template.md
       - adr/**
       - CHANGELOG.md
@@ -46,36 +56,41 @@ documentation:
       - CONTRIBUTING.md
       - docs/**
       - LICENSE
-      - README.md
+      - skills-lock.json
 i18n:
   - changed-files:
     - any-glob-to-any-file:
-      - ./**/*.mdx
-      - ./apps/web/src/i18n/**
-      - ./apps/web/src/features/**/i18n/**
-      - ./apps/web/src/app/[locale]/**
+      - "**/_i18n/**"
+      - "**/*.mdx"
+      - apps/web/i18n.config.ts
+      - apps/web/scripts/build-locales.ts
+      - apps/web/scripts/compare-translations.ts
+      - apps/web/src/core/i18n/**
+      - apps/web/src/features/**/i18n/**
+      - apps/web/src/i18n/**
 storybook:
   - changed-files:
     - any-glob-to-any-file:
-      - ./**.stories.ts
-      - ./**.stories.tsx
-      - ./apps/ui-docs/.storybook/**
+      - "**/*.stories.ts"
+      - "**/*.stories.tsx"
+      - apps/ui-docs/.storybook/**
 testing:
   - changed-files:
     - any-glob-to-any-file:
-      - ./**/*.spec.ts
-      - ./**/*.spec.tsx
-      - ./**/*.test.ts
-      - ./**/*.test.tsx
-      - ./apps/web/e2e/**
-      - ./apps/web/playwright.config.ts
-      - ./apps/web/tests/**
-      - ./packages/**/tests/**
+      - "**/*.spec.ts"
+      - "**/*.test.ts"
+      - "**/*.test.tsx"
+      - apps/web/e2e/**
+      - apps/web/jest.config.ts
+      - apps/web/playwright.config.ts
+      - apps/web/tests/**
+      - packages/config-jest/**
 ui:
   - changed-files:
     - any-glob-to-any-file:
-      - apps/web/src/features/**/components/**/*.tsx
       - apps/web/src/app/**/_components/**/*.tsx
+      - apps/web/src/components/**
+      - apps/web/src/features/**/components/**/*.tsx
       - packages/ui-lib/src/**
 pkg/config-jest:
   - changed-files:
