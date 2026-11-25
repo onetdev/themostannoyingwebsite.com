@@ -48,6 +48,27 @@ function isCommentsPanelTarget(target: EventTarget | null): boolean {
 }
 
 /**
+ * Stop the element and drop its media resource.
+ *
+ * Pausing alone leaves a resumable media session behind; macOS media keys can
+ * then restart the old short after client-side navigation.
+ */
+function releaseVideoElement(video: HTMLVideoElement) {
+  video.pause();
+  video.removeAttribute('src');
+  video.load();
+}
+
+function clearMediaSession() {
+  if (typeof navigator === 'undefined' || !('mediaSession' in navigator)) {
+    return;
+  }
+
+  navigator.mediaSession.playbackState = 'none';
+  navigator.mediaSession.metadata = null;
+}
+
+/**
  * Shortcuts belong to the feed unless a dialog, the comments panel, or an
  * interactive control is handling the key itself.
  */
@@ -109,7 +130,11 @@ export function useShortPlayer({
   const playerRef = useRef<HTMLDivElement>(null);
   const videoRefs = useRef(new Map<number, HTMLVideoElement>());
   const activeIndexRef = useRef(activeIndex);
+  const activeVideoRef = useRef<HTMLVideoElement | null>(null);
+  const isMountedRef = useRef(true);
+  const releasedRef = useRef(false);
   const playPauseTimeout = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const releaseTimeout = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   const activeShort = shorts[activeIndex] ?? shorts[0];
 
@@ -127,29 +152,72 @@ export function useShortPlayer({
     }, PLAY_PAUSE_FLASH_MS);
   }, []);
 
-  const playVideo = useCallback(async (video: HTMLVideoElement) => {
-    try {
-      await video.play();
-      setAutoplayBlocked(false);
-    } catch {
-      if (video.muted) {
-        setAutoplayBlocked(true);
-        return;
-      }
+  const releaseAllVideos = useCallback(() => {
+    for (const video of videoRefs.current.values()) {
+      releaseVideoElement(video);
+    }
+  }, []);
 
-      // Browser autoplay policy blocked sound. Retry muted and let the user
-      // restore sound with the unmute prompt.
+  const isPlaybackCurrent = useCallback(
+    (video: HTMLVideoElement) =>
+      isMountedRef.current &&
+      !releasedRef.current &&
+      activeVideoRef.current === video,
+    [],
+  );
+
+  const playMuted = useCallback(
+    async (video: HTMLVideoElement) => {
       video.muted = true;
       setMuted(true);
       setAutoplayBlocked(true);
 
       try {
         await video.play();
+
+        if (!isPlaybackCurrent(video)) {
+          video.pause();
+        }
       } catch {
         // Remains paused with the poster visible; the play control is shown.
       }
-    }
-  }, []);
+    },
+    [isPlaybackCurrent],
+  );
+
+  const playVideo = useCallback(
+    async (video: HTMLVideoElement) => {
+      if (releasedRef.current || !isMountedRef.current) {
+        return;
+      }
+
+      try {
+        await video.play();
+
+        if (!isPlaybackCurrent(video)) {
+          video.pause();
+          return;
+        }
+
+        setAutoplayBlocked(false);
+      } catch {
+        if (!isPlaybackCurrent(video)) {
+          video.pause();
+          return;
+        }
+
+        if (video.muted) {
+          setAutoplayBlocked(true);
+          return;
+        }
+
+        // Browser autoplay policy blocked sound. Retry muted and let the user
+        // restore sound with the unmute prompt.
+        await playMuted(video);
+      }
+    },
+    [isPlaybackCurrent, playMuted],
+  );
 
   useEffect(() => {
     activeIndexRef.current = activeIndex;
@@ -185,6 +253,8 @@ export function useShortPlayer({
   }, [enableSound]);
 
   useEffect(() => {
+    activeVideoRef.current = activeVideo;
+
     if (!activeVideo) {
       setIsPlaying(false);
       return;
@@ -241,6 +311,25 @@ export function useShortPlayer({
     };
   }, []);
 
+  useEffect(() => {
+    isMountedRef.current = true;
+
+    // Strict Mode simulates an unmount and immediately re-mounts. Defer the
+    // resource release so the dev-only cycle cannot strip the active source.
+    if (releaseTimeout.current) {
+      clearTimeout(releaseTimeout.current);
+      releaseTimeout.current = null;
+    }
+
+    return () => {
+      isMountedRef.current = false;
+      releaseTimeout.current = setTimeout(() => {
+        releaseTimeout.current = null;
+        releaseAllVideos();
+      }, 0);
+    };
+  }, [releaseAllVideos]);
+
   const registerVideo = useCallback(
     (index: number, video: HTMLVideoElement | null) => {
       if (video) {
@@ -277,9 +366,9 @@ export function useShortPlayer({
 
     if (!nextMuted && activeVideo) {
       activeVideo.muted = false;
-      void activeVideo.play().catch(() => setAutoplayBlocked(true));
+      void playVideo(activeVideo);
     }
-  }, [activeVideo, muted]);
+  }, [activeVideo, muted, playVideo]);
 
   const toggleCaptions = useCallback(() => {
     setShowCaptions((current) => !current);
@@ -306,6 +395,10 @@ export function useShortPlayer({
   }, [activeVideo]);
 
   const close = useCallback(() => {
+    releasedRef.current = true;
+    releaseAllVideos();
+    clearMediaSession();
+
     const entryPath = takeShortsEntry();
 
     if (entryPath) {
@@ -314,7 +407,7 @@ export function useShortPlayer({
     }
 
     router.push('/');
-  }, [router]);
+  }, [releaseAllVideos, router]);
 
   const next = useCallback(() => {
     api?.scrollNext();

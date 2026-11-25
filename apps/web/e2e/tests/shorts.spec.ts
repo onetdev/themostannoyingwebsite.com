@@ -49,6 +49,55 @@ test('shorts player plays a dedicated, full-screen vertical feed', async ({
   await expect(page).toHaveURL(/\/en\/$/);
 });
 
+test('closing the player releases the short media so it cannot resume', async ({
+  page,
+  request,
+}) => {
+  const short = await fetchFirstShort(request);
+  test.skip(short === undefined, 'The Content API does not expose shorts yet.');
+
+  if (!short) {
+    return;
+  }
+
+  await setupE2eTestState(page);
+  const shortsPage = getShortsPlayerPage(page);
+  await shortsPage.goto(short.slug);
+
+  await page.evaluate(() => {
+    const videos = Array.from(
+      document.querySelectorAll<HTMLVideoElement>(
+        '[data-testid="shorts-player"] video',
+      ),
+    );
+    (
+      window as Window & { __shortsVideos?: HTMLVideoElement[] }
+    ).__shortsVideos = videos;
+  });
+
+  await page.getByRole('button', { name: 'Close player' }).click();
+  await expect(page).not.toHaveURL(/\/en\/shorts\//);
+
+  const states = await page.evaluate(() => {
+    const videos =
+      (window as Window & { __shortsVideos?: HTMLVideoElement[] })
+        .__shortsVideos ?? [];
+
+    return videos.map((video) => ({
+      hasSrc: video.hasAttribute('src'),
+      paused: video.paused,
+      hasSrcObject: Boolean(video.srcObject),
+    }));
+  });
+
+  expect(states.length).toBeGreaterThan(0);
+  for (const state of states) {
+    expect(state.hasSrc).toBe(false);
+    expect(state.paused).toBe(true);
+    expect(state.hasSrcObject).toBe(false);
+  }
+});
+
 test('shorts comments open beside the video on desktop', async ({
   page,
   request,
