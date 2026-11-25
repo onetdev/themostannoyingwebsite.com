@@ -32,6 +32,16 @@ test('shorts player plays a dedicated, full-screen vertical feed', async ({
   await expect(page.getByRole('button', { name: /Share/ })).toBeVisible();
   await expect(page.getByRole('button', { name: 'Like' })).toBeVisible();
   await expect(page.getByRole('group', { name: 'Seek' })).toBeVisible();
+  await expect(shortsPage.logo).toBeVisible();
+  await expect(shortsPage.commentCount).toBeVisible();
+  await expect(shortsPage.commentCount).toHaveText(/^\d+$/);
+
+  const logoBox = await shortsPage.logo.boundingBox();
+  expect(logoBox).not.toBeNull();
+  if (logoBox) {
+    expect(logoBox.x).toBeLessThan(120);
+    expect(logoBox.y).toBeLessThan(120);
+  }
 
   await shortsPage.tapLayer.dblclick({ position: { x: 30, y: 300 } });
   await expect(page.getByRole('button', { name: 'Unlike' })).toBeVisible();
@@ -63,6 +73,12 @@ test('closing the player releases the short media so it cannot resume', async ({
   await setupE2eTestState(page);
   const shortsPage = getShortsPlayerPage(page);
   await shortsPage.goto(short.slug);
+
+  await expect
+    .poll(() =>
+      page.evaluate(() => document.body.dataset.shortsPlayer === 'true'),
+    )
+    .toBe(true);
 
   await page.evaluate(() => {
     const videos = Array.from(
@@ -146,6 +162,16 @@ test('shorts comments open as an 80dvh sheet on mobile', async ({
   await setupE2eTestState(page);
   const shortsPage = getShortsPlayerPage(page);
   await shortsPage.goto(short.slug);
+
+  await expect(shortsPage.logo).toBeVisible();
+  await expect(shortsPage.commentCount).toBeVisible();
+
+  const logoBox = await shortsPage.logo.boundingBox();
+  expect(logoBox).not.toBeNull();
+  if (logoBox) {
+    const logoCenter = logoBox.x + logoBox.width / 2;
+    expect(Math.abs(logoCenter - 195)).toBeLessThan(12);
+  }
 
   await shortsPage.commentsToggle.click();
 

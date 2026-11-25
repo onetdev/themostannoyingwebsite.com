@@ -80,6 +80,7 @@ function renderOverlay(
         showCaptions={false}
         liked={false}
         commentsOpen={false}
+        commentCount={12}
         isPlaying
         isFullscreen={false}
         autoplayBlocked={false}
@@ -131,6 +132,12 @@ describe('ShortPlayerOverlay', () => {
     expect(handlers.onToggleLike).toHaveBeenCalledTimes(1);
     expect(handlers.onToggleComments).toHaveBeenCalledTimes(1);
     expect(handlers.onClose).toHaveBeenCalledTimes(1);
+  });
+
+  it('shows the comment counter under the comments toggle', () => {
+    renderOverlay({ commentCount: 12 });
+
+    expect(screen.getByTestId('short-comments-count')).toHaveTextContent('12');
   });
 
   it('marks the heart as pressed when the clip is liked', () => {

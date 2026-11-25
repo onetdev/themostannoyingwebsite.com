@@ -21,6 +21,7 @@ export interface ShortPlayerOverlayProps {
   showCaptions: boolean;
   liked: boolean;
   commentsOpen: boolean;
+  commentCount: number;
   isPlaying: boolean;
   isFullscreen: boolean;
   autoplayBlocked: boolean;
@@ -48,6 +49,7 @@ export function ShortPlayerOverlay({
   showCaptions,
   liked,
   commentsOpen,
+  commentCount,
   isPlaying,
   isFullscreen,
   autoplayBlocked,
@@ -119,6 +121,7 @@ export function ShortPlayerOverlay({
           liked={liked}
           isFullscreen={isFullscreen}
           commentsOpen={commentsOpen}
+          commentCount={commentCount}
           onToggleComments={onToggleComments}
           onToggleCaptions={onToggleCaptions}
           onToggleFullscreen={onToggleFullscreen}

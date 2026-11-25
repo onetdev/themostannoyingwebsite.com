@@ -177,15 +177,55 @@ describe('ShortsPlayer', () => {
     );
   });
 
-  it('opens the desktop comments panel beside the feed', () => {
+  it('animates the desktop comments panel open beside the feed', () => {
     renderPlayer({ commentsByShortId: { a: [] } });
+
+    const desktopPanel = screen.getByTestId('shorts-comments-desktop');
+    expect(desktopPanel).toHaveClass('w-0');
 
     fireEvent.click(screen.getByRole('button', { name: 'comments.open' }));
 
-    expect(screen.getByTestId('shorts-comments-desktop')).toBeInTheDocument();
+    expect(desktopPanel).toHaveClass('w-[380px]');
     expect(screen.getByTestId('shorts-comments-panel')).toBeInTheDocument();
     expect(
       screen.getByRole('button', { name: 'comments.close' }),
     ).toHaveAttribute('aria-expanded', 'true');
+  });
+
+  it('shows the total comment count under the comments toggle', () => {
+    renderPlayer({
+      commentsByShortId: {
+        a: [
+          {
+            id: 'root',
+            name: 'Tester',
+            content: 'Root',
+            time: 0,
+            likes: 0,
+            replies: [
+              {
+                id: 'reply',
+                name: 'Tester',
+                content: 'Reply',
+                time: 0,
+                likes: 0,
+              },
+            ],
+          },
+        ],
+      },
+    });
+
+    expect(screen.getByTestId('short-comments-count')).toHaveTextContent('2');
+  });
+
+  it('renders the compact brand logo in the responsive slot', () => {
+    renderPlayer();
+
+    expect(screen.getByTestId('shorts-logo')).toHaveAttribute('href', '/');
+    expect(screen.getByTestId('shorts-logo-slot')).toHaveClass(
+      'justify-center',
+      'lg:justify-start',
+    );
   });
 });

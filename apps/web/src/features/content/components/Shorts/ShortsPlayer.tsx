@@ -10,10 +10,14 @@ import {
   DrawerTitle,
   DrawerVirtualKeyboardProvider,
 } from '@maw/ui-lib';
+import { cn } from 'cn';
 import { useTranslations } from 'next-intl';
 import { useCallback, useEffect, useState, type WheelEvent } from 'react';
+import { MawLogo } from '@/components/MawLogo';
+import { Link } from '@/core/i18n/navigation';
 import { ShortsCommentsPanel } from '@/features/comments/components';
 import type { Comment } from '@/features/comments/schemas';
+import { countComments } from '@/features/comments/utils';
 import { useMediaQuery } from '@/hooks/useMediaQuery';
 
 import { ShortPlayerBackdrop } from './ShortPlayerBackdrop';
@@ -49,6 +53,7 @@ export function ShortsPlayer({
 }: ShortsPlayerProps) {
   const t = useTranslations('content.shorts');
   const tComments = useTranslations('comments');
+  const tApp = useTranslations('common.app');
   const player = useShortPlayer({ shorts, initialIndex });
   const isDesktop = useMediaQuery(DESKTOP_QUERY);
   const [commentsOpen, setCommentsOpen] = useState(false);
@@ -142,6 +147,7 @@ export function ShortsPlayer({
 
   const activeComments =
     commentsByShortId[player.activeShort.id] ?? EMPTY_COMMENTS;
+  const commentCount = countComments(activeComments);
 
   return (
     <>
@@ -151,6 +157,27 @@ export function ShortsPlayer({
         data-testid="shorts-player"
         onWheel={onWheel}
       >
+        <div
+          className="pointer-events-none absolute inset-x-0 top-0 z-40 flex justify-center px-3 pt-[max(0.75rem,env(safe-area-inset-top))] lg:justify-start"
+          data-testid="shorts-logo-slot"
+        >
+          <Link
+            href="/"
+            prefetch={false}
+            aria-label={tApp('logo')}
+            title={tApp('logo')}
+            className="pointer-events-auto inline-flex text-white"
+            data-track="navigation:logo"
+            data-player-control
+            data-testid="shorts-logo"
+          >
+            <MawLogo
+              className="h-6 w-auto drop-shadow-md lg:h-7"
+              title={tApp('logo')}
+            />
+          </Link>
+        </div>
+
         <div className="relative h-full min-w-0 flex-1">
           <ShortPlayerBackdrop short={player.activeShort} />
           <Carousel
@@ -188,6 +215,7 @@ export function ShortsPlayer({
                       showCaptions={player.showCaptions}
                       liked={likedShortIds.has(short.id)}
                       commentsOpen={commentsOpen}
+                      commentCount={commentCount}
                       isPlaying={player.isPlaying}
                       isFullscreen={player.isFullscreen}
                       autoplayBlocked={player.autoplayBlocked}
@@ -207,18 +235,25 @@ export function ShortsPlayer({
           </Carousel>
         </div>
 
-        {isDesktop && commentsOpen && (
+        {isDesktop && (
           <aside
-            className="border-border bg-background hidden h-full w-[380px] shrink-0 border-s lg:flex xl:w-[420px]"
+            className={cn(
+              'bg-background relative h-full shrink-0 overflow-hidden transition-[width] duration-300 ease-out will-change-[width]',
+              commentsOpen ? 'w-[380px] xl:w-[420px]' : 'w-0',
+            )}
             aria-label={tComments('sectionTitle')}
+            aria-hidden={!commentsOpen}
+            inert={!commentsOpen}
             data-player-control
             data-testid="shorts-comments-desktop"
           >
-            <ShortsCommentsPanel
-              key={player.activeShort.id}
-              comments={activeComments}
-              onClose={closeComments}
-            />
+            <div className="border-border flex h-full w-[380px] border-s xl:w-[420px]">
+              <ShortsCommentsPanel
+                key={player.activeShort.id}
+                comments={activeComments}
+                onClose={closeComments}
+              />
+            </div>
           </aside>
         )}
       </div>

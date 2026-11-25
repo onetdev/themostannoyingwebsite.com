@@ -1,16 +1,20 @@
 import type { SVGProps } from 'react';
 
-type BouncyLogoProps = SVGProps<SVGSVGElement> & {
+type MawLogoProps = SVGProps<SVGSVGElement> & {
   arrowFill?: string;
   title: string;
 };
 
-export const BouncyLogo = ({
+/**
+ * Compact MAW wordmark used by the header-adjacent surfaces and the bouncing
+ * logo screensaver.
+ */
+export const MawLogo = ({
   fill = 'currentColor',
   arrowFill,
   title,
   ...props
-}: BouncyLogoProps) => {
+}: MawLogoProps) => {
   return (
     <svg
       width="100%"

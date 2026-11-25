@@ -14,6 +14,7 @@ export interface ShortPlayerActionRailProps {
   liked: boolean;
   isFullscreen: boolean;
   commentsOpen: boolean;
+  commentCount: number;
   onToggleComments: () => void;
   onToggleCaptions: () => void;
   onToggleFullscreen: () => void;
@@ -32,6 +33,7 @@ export function ShortPlayerActionRail({
   liked,
   isFullscreen,
   commentsOpen,
+  commentCount,
   onToggleComments,
   onToggleCaptions,
   onToggleFullscreen,
@@ -55,18 +57,26 @@ export function ShortPlayerActionRail({
         aria-pressed={liked}
         data-track="shorts:like"
       />
-      <ShortPlayerActionButton
-        icon="commentDots"
-        label={
-          commentsOpen ? tCommon('comments.close') : tCommon('comments.open')
-        }
-        tooltip={
-          commentsOpen ? tCommon('comments.close') : tCommon('comments.open')
-        }
-        onClick={onToggleComments}
-        aria-expanded={commentsOpen}
-        data-track="shorts:comments"
-      />
+      <div className="flex flex-col items-center gap-0.5">
+        <ShortPlayerActionButton
+          icon="commentDots"
+          label={
+            commentsOpen ? tCommon('comments.close') : tCommon('comments.open')
+          }
+          tooltip={
+            commentsOpen ? tCommon('comments.close') : tCommon('comments.open')
+          }
+          onClick={onToggleComments}
+          aria-expanded={commentsOpen}
+          data-track="shorts:comments"
+        />
+        <span
+          className="text-[11px] leading-none font-semibold text-white tabular-nums drop-shadow"
+          data-testid="short-comments-count"
+        >
+          {commentCount}
+        </span>
+      </div>
       <ShortPlayerActionButton
         icon="share"
         label={tCommon('common.action.share')}
