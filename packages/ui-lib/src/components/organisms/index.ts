@@ -4,7 +4,6 @@ export * from './Carousel';
 export * from './Chart';
 export * from './DelayedMount';
 export * from './Dialog';
-export * from './Drawer';
 export * from './Field';
 export * from './NavigationMenu';
 export * from './PeekCarousel';

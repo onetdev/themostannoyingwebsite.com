@@ -5,6 +5,7 @@ import type { CarouselApi } from '@maw/ui-lib';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { useRouter } from '@/core/i18n/navigation';
 import { takeShortsEntry } from '@/features/content/shorts-entry';
+import { useMediaTeardown } from '@/hooks/useMediaTeardown';
 import { useRuntimeStore, useUserPreferencesStore } from '@/stores';
 import { useShortUrlSync } from './use-short-url-sync';
 
@@ -45,27 +46,6 @@ function isCommentsPanelTarget(target: EventTarget | null): boolean {
     target instanceof Element &&
     Boolean(target.closest('[data-comments-panel]'))
   );
-}
-
-/**
- * Stop the element and drop its media resource.
- *
- * Pausing alone leaves a resumable media session behind; macOS media keys can
- * then restart the old short after client-side navigation.
- */
-function releaseVideoElement(video: HTMLVideoElement) {
-  video.pause();
-  video.removeAttribute('src');
-  video.load();
-}
-
-function clearMediaSession() {
-  if (typeof navigator === 'undefined' || !('mediaSession' in navigator)) {
-    return;
-  }
-
-  navigator.mediaSession.playbackState = 'none';
-  navigator.mediaSession.metadata = null;
 }
 
 /**
@@ -128,13 +108,16 @@ export function useShortPlayer({
   const [showPlayPause, setShowPlayPause] = useState(false);
 
   const playerRef = useRef<HTMLDivElement>(null);
-  const videoRefs = useRef(new Map<number, HTMLVideoElement>());
   const activeIndexRef = useRef(activeIndex);
   const activeVideoRef = useRef<HTMLVideoElement | null>(null);
   const isMountedRef = useRef(true);
   const releasedRef = useRef(false);
   const playPauseTimeout = useRef<ReturnType<typeof setTimeout> | null>(null);
-  const releaseTimeout = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const {
+    get: getMedia,
+    register: registerMedia,
+    releaseAll: releaseMedia,
+  } = useMediaTeardown<number, HTMLVideoElement>();
 
   const activeShort = shorts[activeIndex] ?? shorts[0];
 
@@ -150,12 +133,6 @@ export function useShortPlayer({
     playPauseTimeout.current = setTimeout(() => {
       setShowPlayPause(false);
     }, PLAY_PAUSE_FLASH_MS);
-  }, []);
-
-  const releaseAllVideos = useCallback(() => {
-    for (const video of videoRefs.current.values()) {
-      releaseVideoElement(video);
-    }
   }, []);
 
   const isPlaybackCurrent = useCallback(
@@ -240,11 +217,11 @@ export function useShortPlayer({
   }, [api]);
 
   useEffect(() => {
-    const nextVideo = videoRefs.current.get(activeIndex) ?? null;
+    const nextVideo = getMedia(activeIndex) ?? null;
     setActiveVideo(nextVideo);
     setAutoplayBlocked(false);
     setShowPlayPause(false);
-  }, [activeIndex]);
+  }, [activeIndex, getMedia]);
 
   useEffect(() => {
     if (!enableSound) {
@@ -314,35 +291,20 @@ export function useShortPlayer({
   useEffect(() => {
     isMountedRef.current = true;
 
-    // Strict Mode simulates an unmount and immediately re-mounts. Defer the
-    // resource release so the dev-only cycle cannot strip the active source.
-    if (releaseTimeout.current) {
-      clearTimeout(releaseTimeout.current);
-      releaseTimeout.current = null;
-    }
-
     return () => {
       isMountedRef.current = false;
-      releaseTimeout.current = setTimeout(() => {
-        releaseTimeout.current = null;
-        releaseAllVideos();
-      }, 0);
     };
-  }, [releaseAllVideos]);
+  }, []);
 
   const registerVideo = useCallback(
     (index: number, video: HTMLVideoElement | null) => {
-      if (video) {
-        videoRefs.current.set(index, video);
-      } else {
-        videoRefs.current.delete(index);
-      }
+      registerMedia(index, video);
 
       if (index === activeIndexRef.current) {
         setActiveVideo(video);
       }
     },
-    [],
+    [registerMedia],
   );
 
   const togglePlay = useCallback(() => {
@@ -396,8 +358,7 @@ export function useShortPlayer({
 
   const close = useCallback(() => {
     releasedRef.current = true;
-    releaseAllVideos();
-    clearMediaSession();
+    releaseMedia();
 
     const entryPath = takeShortsEntry();
 
@@ -407,7 +368,7 @@ export function useShortPlayer({
     }
 
     router.push('/');
-  }, [releaseAllVideos, router]);
+  }, [releaseMedia, router]);
 
   const next = useCallback(() => {
     api?.scrollNext();

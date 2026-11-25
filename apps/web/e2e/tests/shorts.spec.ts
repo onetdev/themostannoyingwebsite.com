@@ -131,7 +131,7 @@ test('shorts comments open beside the video on desktop', async ({
 
   await shortsPage.commentsToggle.click();
 
-  await expect(shortsPage.commentsDesktop).toBeVisible();
+  await expect(shortsPage.commentsSheet).toBeVisible();
   await expect(shortsPage.commentsPanel).toBeVisible();
   await expect(shortsPage.player).toBeVisible();
   await expect(shortsPage.commentComposer).toBeVisible();
@@ -145,6 +145,19 @@ test('shorts comments open beside the video on desktop', async ({
     'aria-expanded',
     'true',
   );
+
+  await expect
+    .poll(
+      async () => (await shortsPage.commentsSheet.boundingBox())?.width ?? 0,
+    )
+    .toBeGreaterThan(300);
+
+  const sheetBox = await shortsPage.commentsSheet.boundingBox();
+  expect(sheetBox).not.toBeNull();
+  if (sheetBox) {
+    expect(sheetBox.width).toBeLessThan(500);
+    expect(sheetBox.x).toBeGreaterThan(700);
+  }
 });
 
 test('shorts comments open as an 80dvh sheet on mobile', async ({
@@ -175,13 +188,14 @@ test('shorts comments open as an 80dvh sheet on mobile', async ({
 
   await shortsPage.commentsToggle.click();
 
-  await expect(shortsPage.commentsDrawer).toBeVisible();
+  await expect(shortsPage.commentsSheet).toBeInViewport();
   await expect(shortsPage.commentsPanel).toBeVisible();
+  await expect(shortsPage.commentsBackdrop).toBeVisible();
   await expect
-    .poll(async () => (await shortsPage.commentsDrawer.boundingBox())?.height)
+    .poll(async () => (await shortsPage.commentsSheet.boundingBox())?.height)
     .toBeGreaterThan(844 * 0.75);
   await expect
-    .poll(async () => (await shortsPage.commentsDrawer.boundingBox())?.height)
+    .poll(async () => (await shortsPage.commentsSheet.boundingBox())?.height)
     .toBeLessThan(844 * 0.85);
 
   await shortsPage.commentComposer.fill('Nice clip');
@@ -189,6 +203,17 @@ test('shorts comments open as an 80dvh sheet on mobile', async ({
   await expect(page.getByText('Login Required')).toBeVisible();
   await page.getByRole('button', { name: 'Cancel' }).click();
 
-  await shortsPage.commentsClose.click();
-  await expect(shortsPage.commentsDrawer).not.toBeVisible();
+  const handleBox = await shortsPage.commentsHandle.boundingBox();
+  expect(handleBox).not.toBeNull();
+  if (handleBox) {
+    const x = handleBox.x + handleBox.width / 2;
+    const y = handleBox.y + handleBox.height / 2;
+    await page.mouse.move(x, y);
+    await page.mouse.down();
+    await page.mouse.move(x, y + 240, { steps: 8 });
+    await page.mouse.up();
+  }
+
+  await expect(shortsPage.commentsSheet).not.toBeInViewport();
+  await expect(shortsPage.commentsSheet).toHaveAttribute('aria-hidden', 'true');
 });

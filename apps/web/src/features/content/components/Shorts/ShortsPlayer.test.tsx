@@ -113,29 +113,10 @@ function renderPlayer(props: Partial<ShortsPlayerProps> = {}) {
   );
 }
 
-const originalMatchMedia = window.matchMedia;
-
 describe('ShortsPlayer', () => {
-  beforeEach(() => {
-    window.matchMedia = jest.fn(() => ({
-      matches: true,
-      media: '(min-width: 1024px)',
-      onchange: null,
-      addEventListener: jest.fn(),
-      removeEventListener: jest.fn(),
-      addListener: jest.fn(),
-      removeListener: jest.fn(),
-      dispatchEvent: jest.fn(),
-    })) as unknown as typeof window.matchMedia;
-  });
-
   afterEach(() => {
     document.body.style.overflow = '';
     delete document.body.dataset.shortsPlayer;
-  });
-
-  afterAll(() => {
-    window.matchMedia = originalMatchMedia;
   });
 
   it('locks the document while the player is mounted', () => {
@@ -177,15 +158,19 @@ describe('ShortsPlayer', () => {
     );
   });
 
-  it('animates the desktop comments panel open beside the feed', () => {
+  it('animates the comments surface open beside the feed', () => {
     renderPlayer({ commentsByShortId: { a: [] } });
 
-    const desktopPanel = screen.getByTestId('shorts-comments-desktop');
-    expect(desktopPanel).toHaveClass('w-0');
+    const sheet = screen.getByTestId('shorts-comments-sheet');
+    expect(sheet).toHaveClass('lg:w-0');
+    expect(sheet).toHaveClass('[transform:translateY(calc(100%+1rem))]');
 
     fireEvent.click(screen.getByRole('button', { name: 'comments.open' }));
 
-    expect(desktopPanel).toHaveClass('w-[380px]');
+    expect(sheet).toHaveClass('lg:w-[380px]');
+    expect(sheet).toHaveClass(
+      '[transform:translateY(var(--shorts-sheet-drag,0px))]',
+    );
     expect(screen.getByTestId('shorts-comments-panel')).toBeInTheDocument();
     expect(
       screen.getByRole('button', { name: 'comments.close' }),
