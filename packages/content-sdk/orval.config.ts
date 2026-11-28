@@ -11,7 +11,7 @@ import { defineConfig } from 'orval';
  */
 const openApiUrl =
   process.env.CONTENT_OPENAPI_URL ??
-  'https://dev.content.themostannoyingwebsite.com/docs/json';
+  'https://dev.api.themostannoyingwebsite.com/docs/json';
 
 export default defineConfig({
   contentSdk: {
