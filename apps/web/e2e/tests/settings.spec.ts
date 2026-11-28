@@ -55,3 +55,33 @@ test('setting row label toggles its control', async ({ page }) => {
 
   await expect(toggle).toBeChecked({ checked: !wasChecked });
 });
+
+test('possessed cursor applies and restores the custom cursor', async ({
+  page,
+}) => {
+  await setupE2eTestState(page);
+  const settingsPage = getSettingsPage(page);
+  await settingsPage.goto();
+
+  const toggle = settingsPage.painPreferenceFlags.possessedCursor;
+  await expect(toggle).not.toBeChecked();
+
+  await toggle.click();
+
+  const html = page.locator('html');
+  await expect(html).toHaveAttribute('data-possessed-cursor', 'true');
+
+  const cursor = await page.evaluate(
+    () => getComputedStyle(document.body).cursor,
+  );
+  expect(cursor).toContain('/assets/cursors/');
+
+  const toggleCursor = await toggle.evaluate(
+    (element) => getComputedStyle(element).cursor,
+  );
+  expect(toggleCursor).toContain('/assets/cursors/');
+
+  await toggle.click();
+
+  await expect(html).not.toHaveAttribute('data-possessed-cursor');
+});
