@@ -20,7 +20,6 @@ import { GhostCursor } from './GhostCursor';
 
 interface ActiveGhost {
   id: number;
-  cursorId: string;
   preset: CursorPreset;
   points: NormalizedPoint[];
   lifetimeSeconds: number;
@@ -57,7 +56,6 @@ export function PossessedCursor() {
   const hasSwappedRef = useRef(false);
   const ghostIdRef = useRef(0);
   const puffIdRef = useRef(0);
-  const layerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     if (!isEnabled) {
@@ -115,7 +113,6 @@ export function PossessedCursor() {
       };
       const ghost: ActiveGhost = {
         id: ghostIdRef.current++,
-        cursorId: current.id,
         preset: current,
         points: smoothGhostPath(
           buildGhostPath({
@@ -170,74 +167,26 @@ export function PossessedCursor() {
     setPuffs((previous) => previous.filter((puff) => puff.id !== id));
   }, []);
 
-  useEffect(() => {
-    if (!isEnabled || ghosts.length === 0) {
-      return;
-    }
-
-    const handlePointerDown = (event: PointerEvent) => {
-      const elements =
-        layerRef.current?.querySelectorAll<HTMLElement>('[data-ghost-id]');
-
-      if (!elements) {
-        return;
-      }
-
-      for (const element of elements) {
-        const bounds = element.getBoundingClientRect();
-        const isInside =
-          event.clientX >= bounds.left &&
-          event.clientX <= bounds.right &&
-          event.clientY >= bounds.top &&
-          event.clientY <= bounds.bottom;
-
-        if (!isInside) {
-          continue;
-        }
-
-        const ghostId = Number(element.dataset.ghostId);
-        const caughtGhost = ghosts.find((ghost) => ghost.id === ghostId);
-
-        if (!caughtGhost) {
-          continue;
-        }
-
-        emit('possessed-cursor:caught', {
-          cursorId: caughtGhost.cursorId,
-        });
-
-        const centerX = bounds.left + bounds.width / 2;
-        const centerY = bounds.top + bounds.height / 2;
-        setPuffs((previous) => [
-          ...previous,
-          {
-            id: puffIdRef.current++,
-            point: {
-              x: clampNormalized(centerX / window.innerWidth),
-              y: clampNormalized(centerY / window.innerHeight),
-            },
+  const handleGhostCaught = useCallback(
+    (id: number, cursorId: string, point: NormalizedPoint) => {
+      emit('possessed-cursor:caught', { cursorId });
+      setPuffs((previous) => [
+        ...previous,
+        {
+          id: puffIdRef.current++,
+          point: {
+            x: clampNormalized(point.x),
+            y: clampNormalized(point.y),
           },
-        ]);
-
-        setGhosts((previous) =>
-          previous.filter((ghost) => ghost.id !== caughtGhost.id),
-        );
-        break;
-      }
-    };
-
-    document.addEventListener('pointerdown', handlePointerDown, {
-      capture: true,
-    });
-    return () =>
-      document.removeEventListener('pointerdown', handlePointerDown, {
-        capture: true,
-      });
-  }, [ghosts, isEnabled]);
+        },
+      ]);
+      setGhosts((previous) => previous.filter((ghost) => ghost.id !== id));
+    },
+    [],
+  );
 
   return (
     <div
-      ref={layerRef}
       data-testid="possessed-cursor-layer"
       className="pointer-events-none fixed inset-0 z-9998 overflow-hidden"
       aria-hidden
@@ -251,6 +200,7 @@ export function PossessedCursor() {
             points={ghost.points}
             lifetimeSeconds={ghost.lifetimeSeconds}
             onExpire={handleGhostExpire}
+            onCaught={handleGhostCaught}
           />
         ))}
       </AnimatePresence>

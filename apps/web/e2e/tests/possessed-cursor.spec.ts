@@ -66,6 +66,7 @@ test('catching a rogue cursor unlocks "Cursor Wrangler"', async ({ page }) => {
   await expect(ghost).toBeVisible();
   const bounds = await ghost.boundingBox();
   expect(bounds).not.toBeNull();
+  const urlBeforeClick = page.url();
 
   await page.mouse.click(
     (bounds?.x ?? 0) + (bounds?.width ?? 0) / 2,
@@ -73,5 +74,6 @@ test('catching a rogue cursor unlocks "Cursor Wrangler"', async ({ page }) => {
   );
 
   await expect(page.getByTestId('possessed-cursor-puff')).toBeVisible();
+  await expect(page).toHaveURL(urlBeforeClick);
   await expect(page.getByText('Cursor Wrangler')).toBeVisible();
 });

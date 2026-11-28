@@ -1,7 +1,11 @@
 'use client';
 
 import { motion } from 'motion/react';
-import { useEffect, useRef } from 'react';
+import {
+  type PointerEvent as ReactPointerEvent,
+  useEffect,
+  useRef,
+} from 'react';
 import type { CursorPreset } from '../../schemas';
 import type { NormalizedPoint } from '../../utils';
 
@@ -11,6 +15,7 @@ export interface GhostCursorProps {
   points: NormalizedPoint[];
   lifetimeSeconds: number;
   onExpire: (id: number) => void;
+  onCaught: (id: number, cursorId: string, point: NormalizedPoint) => void;
 }
 
 const toPercent = (value: number): string => `${value * 100}%`;
@@ -21,6 +26,7 @@ export function GhostCursor({
   points,
   lifetimeSeconds,
   onExpire,
+  onCaught,
 }: GhostCursorProps) {
   const onExpireRef = useRef(onExpire);
   onExpireRef.current = onExpire;
@@ -46,6 +52,17 @@ export function GhostCursor({
     repeatType: 'mirror' as const,
   };
 
+  const handlePointerDown = (event: ReactPointerEvent<HTMLImageElement>) => {
+    event.preventDefault();
+    event.stopPropagation();
+
+    const bounds = event.currentTarget.getBoundingClientRect();
+    onCaught(id, preset.id, {
+      x: (bounds.left + bounds.width / 2) / window.innerWidth,
+      y: (bounds.top + bounds.height / 2) / window.innerHeight,
+    });
+  };
+
   return (
     // biome-ignore lint/performance/noImgElement: tiny fixed-size SVG cursor that must render at its natural size
     <motion.img
@@ -57,6 +74,7 @@ export function GhostCursor({
       data-testid="possessed-ghost-cursor"
       data-ghost-id={id}
       data-cursor-id={preset.id}
+      onPointerDown={handlePointerDown}
       initial={{
         left: toPercent(firstPoint.x),
         top: toPercent(firstPoint.y),
@@ -82,7 +100,7 @@ export function GhostCursor({
         height: 32,
         marginLeft: -preset.hotspot.x,
         marginTop: -preset.hotspot.y,
-        pointerEvents: 'none',
+        pointerEvents: 'auto',
         userSelect: 'none',
       }}
     />

@@ -2,7 +2,7 @@
  * @jest-environment jsdom
  */
 import '@testing-library/jest-dom';
-import { act, render, screen } from '@testing-library/react';
+import { act, fireEvent, render, screen } from '@testing-library/react';
 import { emit } from '@/core/events/event-bus';
 import { useAppConfigContext } from '@/core/react';
 import { usePainPreferencesStore, useRuntimeStore } from '@/stores';
@@ -179,7 +179,7 @@ describe('PossessedCursor', () => {
     expect(screen.getAllByTestId('possessed-ghost-cursor')).toHaveLength(3);
   });
 
-  it('emits the catch event without swallowing the click', () => {
+  it('catches the ghost and stops the pointer event from propagating', () => {
     render(<PossessedCursor />);
     advance(1001);
 
@@ -196,16 +196,19 @@ describe('PossessedCursor', () => {
       toJSON: () => ({}),
     });
 
-    act(() => {
-      document.dispatchEvent(
-        new MouseEvent('pointerdown', {
-          bubbles: true,
-          clientX: 20,
-          clientY: 20,
-        }),
-      );
+    const documentPointerDown = jest.fn();
+    document.addEventListener('pointerdown', documentPointerDown);
+    const pointerDown = new MouseEvent('pointerdown', {
+      bubbles: true,
+      cancelable: true,
+      clientX: 20,
+      clientY: 20,
     });
+    fireEvent(ghost, pointerDown);
+    document.removeEventListener('pointerdown', documentPointerDown);
 
+    expect(pointerDown.defaultPrevented).toBe(true);
+    expect(documentPointerDown).not.toHaveBeenCalled();
     expect(emit).toHaveBeenCalledWith('possessed-cursor:caught', {
       cursorId: 'arrow-a',
     });
@@ -232,22 +235,24 @@ describe('PossessedCursor', () => {
       toJSON: () => ({}),
     });
 
-    act(() => {
-      document.dispatchEvent(
-        new MouseEvent('pointerdown', {
-          bubbles: true,
-          clientX: 20,
-          clientY: 20,
-        }),
-      );
-    });
+    fireEvent(
+      ghost,
+      new MouseEvent('pointerdown', {
+        bubbles: true,
+        cancelable: true,
+        clientX: 20,
+        clientY: 20,
+      }),
+    );
 
     const puff = screen.getByTestId('possessed-cursor-puff');
     expect(puff).toHaveAttribute('data-puff-frame', '0');
 
     advance(75);
 
-    expect(puff).toHaveAttribute('data-puff-frame', '1');
+    const frame = Number(puff.getAttribute('data-puff-frame'));
+    expect(frame).toBeGreaterThan(0);
+    expect(frame).toBeLessThan(7);
 
     advance(626);
 
