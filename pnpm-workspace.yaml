@@ -6,8 +6,10 @@ peerDependencyRules:
   allowedVersions:
     "tsconfck>typescript": "7"
 
-# No parent accepts the patched majors yet (test-exclude@8 still declares
-# glob ^13.0.6 / minimatch ^10.2.2). Remove once jest ships patched ranges.
+# No parent accepts the patched majors yet: jest-config and jest-runtime declare
+# glob ^13.0.6, and test-exclude (also via jest) declares glob ^10.4.1 /
+# minimatch ^10.2.2. Jest 30.5.2 is the latest release and still ships these
+# ranges. Remove once jest accepts glob >=14.0.2 / minimatch >=11.0.1.
 # Advisory: glob GHSA (AbortSignal bypass), minimatch GHSA (globparts DoS).
 overrides:
   "glob@>=9.0.0 <14.0.2": "14.0.6"
