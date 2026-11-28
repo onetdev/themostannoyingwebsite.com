@@ -1,4 +1,8 @@
-import { buildGhostPath, type NormalizedPoint } from './ghost-path';
+import {
+  buildGhostPath,
+  type NormalizedPoint,
+  smoothGhostPath,
+} from './ghost-path';
 
 const distance = (a: NormalizedPoint, b: NormalizedPoint): number =>
   Math.hypot(a.x - b.x, a.y - b.y);
@@ -55,5 +59,45 @@ describe('buildGhostPath', () => {
         ),
       ).toBeGreaterThan(0.01);
     }
+  });
+});
+
+describe('smoothGhostPath', () => {
+  const waypoints: NormalizedPoint[] = [
+    { x: 0.1, y: 0.2 },
+    { x: 0.4, y: 0.7 },
+    { x: 0.8, y: 0.3 },
+    { x: 0.9, y: 0.8 },
+  ];
+
+  it('keeps the original start and end points', () => {
+    const path = smoothGhostPath(waypoints, 6);
+
+    expect(path[0]).toEqual(waypoints[0]);
+    expect(path[path.length - 1]).toEqual(waypoints[waypoints.length - 1]);
+  });
+
+  it('densely samples every segment for a curved motion path', () => {
+    const path = smoothGhostPath(waypoints, 6);
+
+    expect(path).toHaveLength((waypoints.length - 1) * 6 + 1);
+  });
+
+  it('stays inside the normalized viewport', () => {
+    const path = smoothGhostPath(waypoints, 20);
+
+    for (const point of path) {
+      expect(point.x).toBeGreaterThanOrEqual(0);
+      expect(point.x).toBeLessThanOrEqual(1);
+      expect(point.y).toBeGreaterThanOrEqual(0);
+      expect(point.y).toBeLessThanOrEqual(1);
+    }
+  });
+
+  it('handles short paths defensively', () => {
+    expect(smoothGhostPath([])).toEqual([]);
+    expect(smoothGhostPath([waypoints[0] as NormalizedPoint])).toEqual([
+      waypoints[0],
+    ]);
   });
 });

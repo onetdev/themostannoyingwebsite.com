@@ -41,7 +41,7 @@ export function GhostCursor({
   const positionTransition = {
     duration,
     times,
-    ease: 'easeInOut' as const,
+    ease: 'linear' as const,
     repeat: Number.POSITIVE_INFINITY,
     repeatType: 'mirror' as const,
   };

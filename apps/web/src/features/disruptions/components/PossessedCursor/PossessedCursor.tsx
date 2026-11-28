@@ -13,6 +13,7 @@ import {
   type NormalizedPoint,
   pickInitialCursor,
   pickNextCursor,
+  smoothGhostPath,
 } from '../../utils';
 import { GhostCursor } from './GhostCursor';
 
@@ -106,10 +107,12 @@ export function PossessedCursor() {
         id: ghostIdRef.current++,
         cursorId: current.id,
         preset: current,
-        points: buildGhostPath({
-          start,
-          steps: randomInt(ghostPathSteps.min, ghostPathSteps.max),
-        }),
+        points: smoothGhostPath(
+          buildGhostPath({
+            start,
+            steps: randomInt(ghostPathSteps.min, ghostPathSteps.max),
+          }),
+        ),
         lifetimeSeconds: randomNumber(
           ghostLifetimeSeconds.min,
           ghostLifetimeSeconds.max,
