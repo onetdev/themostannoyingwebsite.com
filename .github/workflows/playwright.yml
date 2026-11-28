@@ -28,7 +28,7 @@ jobs:
     env:
       NEXT_PUBLIC_API_URL: ${{ vars.NEXT_PUBLIC_API_URL }}
     steps:
-    - uses: actions/checkout@v6
+    - uses: actions/checkout@v7
     - uses: pnpm/setup@v3
       with:
         runtime: node@${{ env.NODE_VERSION }}
@@ -46,7 +46,7 @@ jobs:
           else
             pnpm --filter '@maw/web' run test:e2e
           fi
-    - uses: actions/upload-artifact@v4
+    - uses: actions/upload-artifact@v7
       if: ${{ !cancelled() }}
       with:
         name: playwright-report
