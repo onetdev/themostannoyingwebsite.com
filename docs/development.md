@@ -38,13 +38,13 @@ HTTPS is required because some browser APIs used by the project only work in sec
 The headless Content API's CORS allowlist accepts any
 `*.themostannoyingwebsite.com` origin, on any scheme and port. It rejects
 `localhost` and `127.0.0.1`. Browser requests go **directly** to
-`NEXT_PUBLIC_CONTENT_API_URL`; there is no same-origin proxy.
+`NEXT_PUBLIC_API_URL`; there is no same-origin proxy.
 
 For local development, point the app at the deployed dev API and serve it from
 the allowlisted local hostname:
 
 ```bash
-export NEXT_PUBLIC_CONTENT_API_URL=https://dev.api.themostannoyingwebsite.com
+export NEXT_PUBLIC_API_URL=https://dev.api.themostannoyingwebsite.com
 pnpm dev
 # open https://local.themostannoyingwebsite.com:3000
 ```
@@ -64,7 +64,7 @@ Production-build runs (`next build && next start`) use the same hostname with
 `localhost` and `127.0.0.1` cannot call the deployed APIs, so opening
 `https://localhost:3000` breaks browser-side search, comments, and feeds with
 `403 CORS_ORIGIN_DENIED`. To keep using the local Content API directly, set
-`NEXT_PUBLIC_CONTENT_API_URL=http://localhost:3012`; its development CORS policy
+`NEXT_PUBLIC_API_URL=http://localhost:3012`; its development CORS policy
 accepts localhost, and Chromium permits the mixed-content localhost request.
 
 Playwright reads the origin from `PLAYWRIGHT_BASE_URL`; without it, specs that

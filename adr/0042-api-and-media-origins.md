@@ -31,7 +31,7 @@ moved to `2.3.x`.
 1. **The API origins are `api` and `dev.api`.** The SDK `DEFAULT_BASE_URL` and
    the app's `CONTENT_API_BASE_URL` fallback point at
    `https://api.themostannoyingwebsite.com`; local development and preview
-   deployments point `NEXT_PUBLIC_CONTENT_API_URL` at
+   deployments point `NEXT_PUBLIC_API_URL` at
    `https://dev.api.themostannoyingwebsite.com`.
 2. **The generator reads the dev API.** Orval's default OpenAPI source becomes
    `https://dev.api.themostannoyingwebsite.com/docs/json`; the dev API remains
@@ -41,7 +41,7 @@ moved to `2.3.x`.
    and `dev.media.themostannoyingwebsite.com` as remote image hosts. It does not
    construct asset URLs from the API base URL.
 4. **The old edge stays supported but is no longer the default.** Environments
-   that still pin `NEXT_PUBLIC_CONTENT_API_URL` to `content.themostannoyingwebsite.com`
+   that still pin `NEXT_PUBLIC_API_URL` to `content.themostannoyingwebsite.com`
    keep working until that variable is updated; the repository no longer names
    it in code or documentation except as historical context.
 

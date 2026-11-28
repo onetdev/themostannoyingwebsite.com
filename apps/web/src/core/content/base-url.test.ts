@@ -1,16 +1,16 @@
 import { CONTENT_API_BASE_URL, resolveContentApiBaseUrl } from './base-url';
 
 // The default-resolution assertions expect CONTENT_API_BASE_URL, so an ambient
-// NEXT_PUBLIC_CONTENT_API_URL (e.g. from a local .envrc) must not leak in.
-const originalContentApiUrl = process.env.NEXT_PUBLIC_CONTENT_API_URL;
+// NEXT_PUBLIC_API_URL (e.g. from a local .envrc) must not leak in.
+const originalContentApiUrl = process.env.NEXT_PUBLIC_API_URL;
 
 beforeEach(() => {
-  delete process.env.NEXT_PUBLIC_CONTENT_API_URL;
+  delete process.env.NEXT_PUBLIC_API_URL;
 });
 
 afterAll(() => {
   if (originalContentApiUrl !== undefined) {
-    process.env.NEXT_PUBLIC_CONTENT_API_URL = originalContentApiUrl;
+    process.env.NEXT_PUBLIC_API_URL = originalContentApiUrl;
   }
 });
 

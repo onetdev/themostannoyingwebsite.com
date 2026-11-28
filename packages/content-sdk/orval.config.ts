@@ -6,11 +6,11 @@ import { defineConfig } from 'orval';
  * Defaults to the deployed dev Content API, which is the source of truth for
  * in-progress contract changes. Production lags behind it, so generating from
  * production would silently drop endpoints and fields that the app already
- * consumes. Override with `CONTENT_OPENAPI_URL` to target a local `pnpm dev`
+ * consumes. Override with `API_OPENAPI_URL` to target a local `pnpm dev`
  * server (e.g. `http://localhost:3012/docs/json`) or production explicitly.
  */
 const openApiUrl =
-  process.env.CONTENT_OPENAPI_URL ??
+  process.env.API_OPENAPI_URL ??
   'https://dev.api.themostannoyingwebsite.com/docs/json';
 
 export default defineConfig({
