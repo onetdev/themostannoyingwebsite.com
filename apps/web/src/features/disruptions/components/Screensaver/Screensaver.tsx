@@ -48,7 +48,6 @@ export function Screensaver() {
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
           transition={{ duration: 0.2 }}
-          data-cursor-ignore
           className="fixed inset-0 z-1000 cursor-none overflow-hidden bg-black"
         >
           {variant === 'maze' ? (

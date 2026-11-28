@@ -79,7 +79,23 @@ test('possessed cursor applies and restores the custom cursor', async ({
   const toggleCursor = await toggle.evaluate(
     (element) => getComputedStyle(element).cursor,
   );
-  expect(toggleCursor).toContain('/assets/cursors/');
+  expect(toggleCursor).not.toContain('/assets/cursors/');
+
+  const linkCursor = await settingsPage.menuItem.home.evaluate(
+    (element) => getComputedStyle(element).cursor,
+  );
+  expect(linkCursor).not.toContain('/assets/cursors/');
+
+  const inputCursor = await page
+    .getByRole('textbox')
+    .first()
+    .evaluate((element) => getComputedStyle(element).cursor);
+  expect(inputCursor).not.toContain('/assets/cursors/');
+
+  const sliderCursor = await page
+    .getByRole('slider')
+    .evaluate((element) => getComputedStyle(element).cursor);
+  expect(sliderCursor).toBe('pointer');
 
   await toggle.click();
 

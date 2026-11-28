@@ -10,11 +10,34 @@ body[data-shorts-player="true"] [data-sonner-toaster] {
   display: none;
 }
 
-/* Possessed cursor experiment. No `!important`: the selector is specific
-   enough to beat Tailwind utilities, and anything that must keep its own
-   cursor can opt out with `data-cursor-ignore`. */
-html[data-possessed-cursor],
-html[data-possessed-cursor]
-  :not([data-cursor-ignore]):not([data-cursor-ignore] *) {
-  cursor: var(--possessed-cursor);
+/* Possessed cursor experiment. The base layer lets explicit Tailwind cursor
+   utilities keep winning, while the reset gives interactive controls the
+   browser's context cursor (`auto` -> pointer/text/default). */
+@layer base {
+  html[data-possessed-cursor] {
+    cursor: var(--possessed-cursor);
+  }
+
+  :where(html[data-possessed-cursor])
+    :where(
+      a,
+      button,
+      input,
+      textarea,
+      select,
+      label,
+      summary,
+      [role="button"],
+      [role="switch"],
+      [role="checkbox"],
+      [role="radio"],
+      [role="tab"],
+      [role="link"],
+      [role="menuitem"],
+      [role="option"],
+      [contenteditable]:not([contenteditable="false"]),
+      [tabindex]:not([tabindex="-1"])
+    ) {
+    cursor: auto;
+  }
 }
