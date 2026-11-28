@@ -61,6 +61,7 @@ const initialStateFlags: PainPreferencesState['flags'] = {
   mockChat: true,
   newsletterModal: true,
   notifications: false,
+  possessedCursor: false,
   ratingDialog: true,
   screensaver: true,
   searchDelay: true,
@@ -163,7 +164,7 @@ export const usePainPreferencesStore = create<PainPreferencesStore>()(
     {
       name: PAIN_PREFERENCES_STORAGE_KEY,
       storage: createJSONStorage(() => localStorage),
-      version: 4,
+      version: 5,
       migrate: (persistedState, _version) => {
         const sanitizedSchema =
           PainPreferencesStateSchema.strip().parse(persistedState);

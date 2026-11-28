@@ -9,3 +9,9 @@
 body[data-shorts-player="true"] [data-sonner-toaster] {
   display: none;
 }
+
+/* Possessed cursor experiment. Only the document root gets the custom cursor;
+   links, buttons, inputs and other controls keep their own native cursor. */
+html[data-possessed-cursor] {
+  cursor: var(--possessed-cursor);
+}

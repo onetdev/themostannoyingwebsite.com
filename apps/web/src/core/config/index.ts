@@ -93,6 +93,51 @@ const config: AppConfig = {
     deadPixel: {
       rainbowChance: 1 / 20,
     },
+    possessedCursor: {
+      cursors: [
+        {
+          id: 'win31-arrow',
+          src: '/assets/cursors/win31-arrow.svg',
+          hotspot: { x: 1, y: 1 },
+          kind: 'arrow',
+        },
+        {
+          id: 'win95-arrow',
+          src: '/assets/cursors/win95-arrow.svg',
+          hotspot: { x: 1, y: 1 },
+          kind: 'arrow',
+        },
+        {
+          id: 'winxp-arrow',
+          src: '/assets/cursors/winxp-arrow.svg',
+          hotspot: { x: 2, y: 2 },
+          kind: 'arrow',
+        },
+        {
+          id: 'macclassic-arrow',
+          src: '/assets/cursors/macclassic-arrow.svg',
+          hotspot: { x: 2, y: 2 },
+          kind: 'arrow',
+        },
+        {
+          id: 'macosx-arrow',
+          src: '/assets/cursors/macosx-arrow.svg',
+          hotspot: { x: 3, y: 3 },
+          kind: 'arrow',
+        },
+        {
+          id: 'amiga-pointer',
+          src: '/assets/cursors/amiga-pointer.svg',
+          hotspot: { x: 1, y: 1 },
+          kind: 'arrow',
+        },
+      ],
+      firstSwapDelaySeconds: { min: 20, max: 40 },
+      swapDelaySeconds: { min: 60, max: 120 },
+      ghostLifetimeSeconds: { min: 20, max: 45 },
+      maxGhosts: 3,
+      ghostPathSteps: { min: 5, max: 8 },
+    },
   },
   marketing: {
     assets: {

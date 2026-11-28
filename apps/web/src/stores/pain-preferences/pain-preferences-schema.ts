@@ -31,6 +31,7 @@ export const PUBLIC_PAIN_POINT_LIST = [
   'searchDelay',
   'stickyVideo',
   'wheelOfFortune',
+  'possessedCursor',
 ] as const;
 
 export const PublicPainPointSchema = z.enum(PUBLIC_PAIN_POINT_LIST);

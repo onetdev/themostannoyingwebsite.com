@@ -8,6 +8,9 @@ declare global {
     'dead-pixel:clicked': {
       isRainbow: boolean;
     };
+    'possessed-cursor:caught': {
+      cursorId: string;
+    };
     'screensaver:maze:stepped': {
       passedSpecialCell: boolean;
     };

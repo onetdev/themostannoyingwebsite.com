@@ -11,6 +11,12 @@ This folder contains some of the assets used in the project.
 - `merch-sticker-1.af` -> This project file doesn't have any export in the project but it is being used for an offline project.
 - `only-spams.af` -> `apps/web/public/assets/images/only-spams.svg`: Internal branding asset for a specific newsletter
 
+### Hand-authored SVG assets
+
+The following assets are written directly as SVG (no Affinity source file):
+
+- `apps/web/public/assets/cursors/*.svg`: 32x32 vintage OS cursor tributes used by the [possessed cursor experiment](../apps/web/src/features/disruptions/components/PossessedCursor). They are stylized recreations, not copies of original OS cursor files. Keep the root `width`/`height`/`viewBox` at 32x32 so browsers accept them as CSS cursors.
+
 ### How to open asset project files?
 
 We are using Affinity (by Canva) for our assets, free version is more than enough: https://www.affinity.studio/

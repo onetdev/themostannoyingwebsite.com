@@ -62,6 +62,9 @@ export const getSettingsPage = (page: Page) => {
       notifications: painPreferencesSection.getByRole('switch', {
         name: 'Notifications',
       }),
+      possessedCursor: painPreferencesSection.getByRole('switch', {
+        name: 'Possessed cursor',
+      }),
       pageTitleInactiveArrayPaged: painPreferencesSection.getByRole('switch', {
         name: 'Alternating title when tab is inactive',
       }),

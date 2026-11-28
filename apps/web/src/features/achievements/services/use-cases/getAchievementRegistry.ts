@@ -46,6 +46,12 @@ const ACHIEVEMENT_REGISTRY: AchievementDefinition[] = [
     type: 'boolean',
   },
   {
+    id: 'possessed-cursor-caught',
+    nameKey: 'achievements.registry.possessedCursorCaught.name',
+    descriptionKey: 'achievements.registry.possessedCursorCaught.description',
+    type: 'boolean',
+  },
+  {
     id: 'rainbow-hunter',
     nameKey: 'achievements.registry.rainbowHunter.name',
     descriptionKey: 'achievements.registry.rainbowHunter.description',

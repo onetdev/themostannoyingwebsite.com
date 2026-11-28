@@ -56,6 +56,7 @@ test('visiting virgin page should turn off all pain points', async ({
       mockChat: false,
       newsletterModal: false,
       notifications: false,
+      possessedCursor: false,
       screensaver: false,
       searchDelay: false,
       stickyVideo: false,

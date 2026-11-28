@@ -45,6 +45,10 @@ export default {
       label: 'Dead pixels',
       hint: 'Places a few fake "dead" pixels on your screen to annoy you.',
     },
+    possessedCursor: {
+      label: 'Possessed cursor',
+      hint: 'Replaces your pointer with old-school OS cursors. Every so often it changes shape, and the old cursor wanders off on its own.',
+    },
     detectAdblocker: {
       label: 'Detect adblocker',
       hint: 'Shows a large red banner if an adblocker is detected.',

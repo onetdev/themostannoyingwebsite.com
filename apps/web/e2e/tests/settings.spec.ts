@@ -55,3 +55,49 @@ test('setting row label toggles its control', async ({ page }) => {
 
   await expect(toggle).toBeChecked({ checked: !wasChecked });
 });
+
+test('possessed cursor applies and restores the custom cursor', async ({
+  page,
+}) => {
+  await setupE2eTestState(page);
+  const settingsPage = getSettingsPage(page);
+  await settingsPage.goto();
+
+  const toggle = settingsPage.painPreferenceFlags.possessedCursor;
+  await expect(toggle).not.toBeChecked();
+
+  await toggle.click();
+
+  const html = page.locator('html');
+  await expect(html).toHaveAttribute('data-possessed-cursor', 'true');
+
+  const cursor = await page.evaluate(
+    () => getComputedStyle(document.body).cursor,
+  );
+  expect(cursor).toContain('/assets/cursors/');
+
+  const toggleCursor = await toggle.evaluate(
+    (element) => getComputedStyle(element).cursor,
+  );
+  expect(toggleCursor).toBe('pointer');
+
+  const linkCursor = await settingsPage.menuItem.home.evaluate(
+    (element) => getComputedStyle(element).cursor,
+  );
+  expect(linkCursor).toBe('pointer');
+
+  const inputCursor = await page
+    .getByRole('textbox')
+    .first()
+    .evaluate((element) => getComputedStyle(element).cursor);
+  expect(inputCursor).toBe('text');
+
+  const sliderCursor = await page
+    .getByRole('slider')
+    .evaluate((element) => getComputedStyle(element).cursor);
+  expect(sliderCursor).toBe('pointer');
+
+  await toggle.click();
+
+  await expect(html).not.toHaveAttribute('data-possessed-cursor');
+});
