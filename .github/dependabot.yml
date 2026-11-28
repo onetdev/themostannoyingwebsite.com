@@ -1,0 +1,54 @@
+version: 2
+
+# Dependency updates, native to GitHub — no app install, no token.
+#
+# The default branch is `develop`, so every PR targets it. Routine minor and
+# patch bumps are grouped into one PR; majors arrive individually so a breaking
+# bump is never bundled with safe ones. GitHub Actions are grouped separately.
+#
+# Commit messages must satisfy commitlint (`@commitlint/config-conventional`),
+# which Dependabot's default `Bump x from a to b` does not. The `commit-message`
+# block below is what keeps these commits conventional. Because the generated
+# PR title still starts its subject with a capitalised `Bump`, `pr-clerk.yml`
+# skips its lowercase-subject rule for `dependabot[bot]`.
+updates:
+  - package-ecosystem: npm
+    directory: /
+    schedule:
+      interval: weekly
+      day: monday
+      time: '06:00'
+      timezone: Europe/Berlin
+    open-pull-requests-limit: 10
+    labels:
+      - dependencies
+    commit-message:
+      prefix: chore
+      include: scope
+    cooldown:
+      default-days: 3
+    groups:
+      npm-minor-patch:
+        patterns:
+          - '*'
+        update-types:
+          - minor
+          - patch
+
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: weekly
+      day: monday
+      time: '06:00'
+      timezone: Europe/Berlin
+    open-pull-requests-limit: 5
+    labels:
+      - dependencies
+    commit-message:
+      prefix: chore
+      include: scope
+    groups:
+      github-actions:
+        patterns:
+          - '*'
