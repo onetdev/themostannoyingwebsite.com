@@ -90,7 +90,7 @@ export function PossessedCursor() {
   }, []);
 
   useEffect(() => {
-    if (!isEnabled || !current || !isVisible) {
+    if (!isEnabled || !current || !isVisible || ghosts.length >= maxGhosts) {
       return;
     }
 
@@ -126,7 +126,9 @@ export function PossessedCursor() {
         ),
       };
 
-      setGhosts((previous) => [...previous, ghost].slice(-maxGhosts));
+      setGhosts((previous) =>
+        previous.length >= maxGhosts ? previous : [...previous, ghost],
+      );
       setCurrent(next);
     }, delaySeconds * 1000);
 
@@ -138,6 +140,7 @@ export function PossessedCursor() {
     ghostLifetimeSeconds,
     ghostPathSteps.max,
     ghostPathSteps.min,
+    ghosts.length,
     isEnabled,
     isVisible,
     maxGhosts,

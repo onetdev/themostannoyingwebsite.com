@@ -168,15 +168,50 @@ describe('PossessedCursor', () => {
     expect(ghost).toHaveAttribute('data-cursor-id', 'arrow-a');
   });
 
-  it('keeps at most three ghosts alive', () => {
+  it('keeps at most three ghosts alive and never despawns them early', () => {
     render(<PossessedCursor />);
 
     advance(1001);
     advance(1001);
     advance(1001);
+
+    const idsAtCap = screen
+      .getAllByTestId('possessed-ghost-cursor')
+      .map((ghost) => ghost.getAttribute('data-ghost-id'));
+    expect(idsAtCap).toHaveLength(3);
+
+    advance(1001);
+    advance(1001);
+
+    const idsAfterWaiting = screen
+      .getAllByTestId('possessed-ghost-cursor')
+      .map((ghost) => ghost.getAttribute('data-ghost-id'));
+    expect(idsAfterWaiting).toEqual(idsAtCap);
+  });
+
+  it('resumes spawning after a ghost expires', () => {
+    render(<PossessedCursor />);
+
+    advance(1001);
+    advance(1001);
     advance(1001);
 
     expect(screen.getAllByTestId('possessed-ghost-cursor')).toHaveLength(3);
+
+    // The first ghost has a 10s lifetime in this fixture.
+    advance(8001);
+    const idsAfterExpiry = screen
+      .getAllByTestId('possessed-ghost-cursor')
+      .map((ghost) => ghost.getAttribute('data-ghost-id'));
+
+    advance(1001);
+
+    const idsAfterRespawn = screen
+      .getAllByTestId('possessed-ghost-cursor')
+      .map((ghost) => ghost.getAttribute('data-ghost-id'));
+    expect(idsAfterRespawn.some((id) => !idsAfterExpiry.includes(id))).toBe(
+      true,
+    );
   });
 
   it('catches the ghost and stops the pointer event from propagating', () => {
