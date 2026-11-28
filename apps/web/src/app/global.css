@@ -9,3 +9,12 @@
 body[data-shorts-player="true"] [data-sonner-toaster] {
   display: none;
 }
+
+/* Possessed cursor experiment. No `!important`: the selector is specific
+   enough to beat Tailwind utilities, and anything that must keep its own
+   cursor can opt out with `data-cursor-ignore`. */
+html[data-possessed-cursor],
+html[data-possessed-cursor]
+  :not([data-cursor-ignore]):not([data-cursor-ignore] *) {
+  cursor: var(--possessed-cursor);
+}

@@ -6,6 +6,7 @@ import { SilentErrorBoundary } from '@/core/react';
 import {
   DeadPixel,
   GlobalStickyVideo,
+  PossessedCursor,
   Screensaver,
 } from '@/features/disruptions/components';
 import {
@@ -28,6 +29,9 @@ export function PainDecoratorLayout({
 }: PainDecoratorLayoutProps) {
   const cookieConsent = useUserGrantsStore((state) => state.reviewCompleted);
   const deadPixel = usePainPreferencesStore((state) => state.flags.deadPixel);
+  const possessedCursor = usePainPreferencesStore(
+    (state) => state.flags.possessedCursor,
+  );
   const mockChat = usePainPreferencesStore((state) => state.flags.mockChat);
   const giftFlaps = usePainPreferencesStore(
     (state) => state.flags['promotions.flaps'],
@@ -115,6 +119,14 @@ export function PainDecoratorLayout({
       {deadPixel && (
         <SilentErrorBoundary name="pain:dead-pixel" key="dead-pixel">
           <DeadPixel />
+        </SilentErrorBoundary>
+      )}
+      {possessedCursor && (
+        <SilentErrorBoundary
+          name="pain:possessed-cursor"
+          key="possessed-cursor"
+        >
+          <PossessedCursor />
         </SilentErrorBoundary>
       )}
       <AnimatePresence>
