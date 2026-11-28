@@ -2,7 +2,7 @@
 
 The official Content SDK for **The Most Annoying Website**.
 
-This package provides a strongly-typed HTTP client powered by **`ky`**, with full runtime Zod validation and companion TypeScript types generated from the remote Headless Content API OpenAPI/Swagger specification (`https://content.themostannoyingwebsite.com/docs/json`).
+This package provides a strongly-typed HTTP client powered by **`ky`**, with full runtime Zod validation and companion TypeScript types generated from the remote Headless Content API OpenAPI/Swagger specification (`https://api.themostannoyingwebsite.com/docs/json`).
 
 ---
 
@@ -25,12 +25,12 @@ This package provides a strongly-typed HTTP client powered by **`ky`**, with ful
 ```typescript
 import { ContentApiClient, createContentClient } from '@maw/content-sdk';
 
-// Default configuration (points to https://content.themostannoyingwebsite.com)
+// Default configuration (points to https://api.themostannoyingwebsite.com)
 const client = createContentClient();
 
 // Or with custom options
 const customClient = new ContentApiClient({
-  baseUrl: 'https://content.themostannoyingwebsite.com',
+  baseUrl: 'https://api.themostannoyingwebsite.com',
   timeoutMs: 10_000,
   retry: 2,
   headers: {
@@ -39,7 +39,7 @@ const customClient = new ContentApiClient({
 });
 ```
 
-The base URL defaults to `https://content.themostannoyingwebsite.com` and can be
+The base URL defaults to `https://api.themostannoyingwebsite.com` and can be
 overridden with the `NEXT_PUBLIC_CONTENT_API_URL` environment variable. This
 works in the browser, on the server, and in build scripts, since Next.js inlines
 `NEXT_PUBLIC_*` variables at build time.
@@ -224,7 +224,7 @@ pnpm --filter @maw/content-sdk orval
 ```
 
 By default the spec is pulled from the deployed dev Content API
-(`https://dev.content.themostannoyingwebsite.com/docs/json`), which is the
+(`https://dev.api.themostannoyingwebsite.com/docs/json`), which is the
 source of truth for contract changes. Production lags behind it, so generating
 from production would drop endpoints and fields the app already consumes.
 

@@ -18,7 +18,7 @@ Acts as the internal bridge for managing and displaying dynamic site content, su
 
 ## Remote Headless Content
 
-Content is hosted externally by the headless Content API (`content.themostannoyingwebsite.com`) and fetched via `@maw/content-sdk`.
+Content is hosted externally by the headless Content API (`api.themostannoyingwebsite.com`) and fetched via `@maw/content-sdk`.
 
 ## Out of Scope
 

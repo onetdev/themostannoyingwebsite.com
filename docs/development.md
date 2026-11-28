@@ -44,7 +44,7 @@ For local development, point the app at the deployed dev API and serve it from
 the allowlisted local hostname:
 
 ```bash
-export NEXT_PUBLIC_CONTENT_API_URL=https://dev.content.themostannoyingwebsite.com
+export NEXT_PUBLIC_CONTENT_API_URL=https://dev.api.themostannoyingwebsite.com
 pnpm dev
 # open https://local.themostannoyingwebsite.com:3000
 ```

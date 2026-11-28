@@ -1,7 +1,6 @@
 import { trimTrailingSlashes } from '@maw/utils/url';
 
-export const CONTENT_API_BASE_URL =
-  'https://content.themostannoyingwebsite.com';
+export const CONTENT_API_BASE_URL = 'https://api.themostannoyingwebsite.com';
 
 /**
  * Resolves the absolute Content API base URL used by build scripts and E2E
