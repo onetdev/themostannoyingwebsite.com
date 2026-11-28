@@ -23,7 +23,7 @@ function resolveBaseUrl(baseUrl?: string): string | undefined {
     return baseUrl;
   }
   if (typeof process !== 'undefined' && process.env) {
-    return process.env.NEXT_PUBLIC_CONTENT_API_URL || undefined;
+    return process.env.NEXT_PUBLIC_API_URL || undefined;
   }
   return undefined;
 }

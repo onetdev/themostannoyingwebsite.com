@@ -40,7 +40,7 @@ const customClient = new ContentApiClient({
 ```
 
 The base URL defaults to `https://api.themostannoyingwebsite.com` and can be
-overridden with the `NEXT_PUBLIC_CONTENT_API_URL` environment variable. This
+overridden with the `NEXT_PUBLIC_API_URL` environment variable. This
 works in the browser, on the server, and in build scripts, since Next.js inlines
 `NEXT_PUBLIC_*` variables at build time.
 
@@ -232,7 +232,7 @@ Point it at a local `pnpm dev` server, production, or any other spec without
 editing the config:
 
 ```bash
-CONTENT_OPENAPI_URL=http://localhost:3012/docs/json \
+API_OPENAPI_URL=http://localhost:3012/docs/json \
   pnpm --filter @maw/content-sdk orval
 ```
 

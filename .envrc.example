@@ -10,10 +10,10 @@ export NEXT_PUBLIC_IS_DEV=true
 # Local development uses the deployed dev API; browser requests go to it
 # directly, so the app must run at an allowlisted origin such as
 # https://local.themostannoyingwebsite.com:3000 (not localhost).
-export NEXT_PUBLIC_CONTENT_API_URL=https://dev.api.themostannoyingwebsite.com
+export NEXT_PUBLIC_API_URL=https://dev.api.themostannoyingwebsite.com
 # Escape hatch: target the local Content API directly instead. The local API
 # accepts localhost and local.themostannoyingwebsite.com origins.
-# export NEXT_PUBLIC_CONTENT_API_URL=http://localhost:3012
+# export NEXT_PUBLIC_API_URL=http://localhost:3012
 
 # Uncomment to let `build:locales` write the bundled English-only list instead
 # of failing the build when the Content API is unreachable.

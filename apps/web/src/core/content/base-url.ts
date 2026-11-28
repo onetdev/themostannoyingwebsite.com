@@ -10,7 +10,7 @@ export const CONTENT_API_BASE_URL = 'https://api.themostannoyingwebsite.com';
  * values fall back to the production Content API.
  */
 export function resolveContentApiBaseUrl(
-  configured: string | undefined = process.env.NEXT_PUBLIC_CONTENT_API_URL,
+  configured: string | undefined = process.env.NEXT_PUBLIC_API_URL,
 ): string {
   // Treat an empty/whitespace value (e.g. an unset Actions environment variable
   // that expands to an empty string) as unconfigured so we still fall back to

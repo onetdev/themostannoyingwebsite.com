@@ -84,7 +84,7 @@ this order and resolve ambiguity before debugging code.
     `local.themostannoyingwebsite.com` (point it at `127.0.0.1` in
     `/etc/hosts`) so browser-side Content API calls satisfy CORS directly.
 3.  **Browser Content API calls are direct.** There is no dev proxy: the
-    browser calls `NEXT_PUBLIC_CONTENT_API_URL` itself. Empty feeds, searches,
+    browser calls `NEXT_PUBLIC_API_URL` itself. Empty feeds, searches,
     or comments are an origin/CORS or base-URL problem until proven otherwise —
     check the failing request's origin and the configured API URL before
     touching app code.

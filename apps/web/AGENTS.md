@@ -108,7 +108,7 @@ directories or `variants.ts` files — variant data lives in the Content API.
   synchronously by `useLanguageSwitcher` (no runtime browser fetch, no CORS).
 - **Fails the build** when the Content API is unreachable. Pass `--allow-fallback`
   or set `ALLOW_LOCALES_FALLBACK=true` to write the bundled English-only list instead.
-- The API base URL is overridable via `NEXT_PUBLIC_CONTENT_API_URL`.
+- The API base URL is overridable via `NEXT_PUBLIC_API_URL`.
 - Regenerated via `build:metadata` (run by `build`, `lint`, `check-types`, and `dev`).
 - See `adr/0023-build-time-locale-catalog.md`.
 
@@ -213,7 +213,7 @@ All pages must describe themselves with JSON-LD. The machinery lives in `src/cor
 - **Validation**: Every new feature or bug fix **MUST** have a corresponding test.
 - **Local origin**: `playwright.config.ts` uses `baseURL = http://127.0.0.1:3000`
   by default. The deployed Content API rejects `127.0.0.1` and `localhost`, and
-  browser-side calls go directly to `NEXT_PUBLIC_CONTENT_API_URL`. Override with
+  browser-side calls go directly to `NEXT_PUBLIC_API_URL`. Override with
   `PLAYWRIGHT_BASE_URL=http://local.themostannoyingwebsite.com:3000` for any spec
   that depends on a browser-side Content API call (search, comments, feeds).
 - **Sequencing**: type check → Biome → targeted Jest → production build → E2E.

@@ -17,17 +17,17 @@ function getUrlString(input: string | URL | Request): string {
 
 describe('ContentApiClient', () => {
   // The suite asserts against DEFAULT_BASE_URL, so an ambient
-  // NEXT_PUBLIC_CONTENT_API_URL (e.g. from a local .envrc) must not leak in.
+  // NEXT_PUBLIC_API_URL (e.g. from a local .envrc) must not leak in.
   // The env-resolution test sets its own value explicitly.
-  const originalBaseUrl = process.env.NEXT_PUBLIC_CONTENT_API_URL;
+  const originalBaseUrl = process.env.NEXT_PUBLIC_API_URL;
 
   beforeEach(() => {
-    delete process.env.NEXT_PUBLIC_CONTENT_API_URL;
+    delete process.env.NEXT_PUBLIC_API_URL;
   });
 
   afterAll(() => {
     if (originalBaseUrl !== undefined) {
-      process.env.NEXT_PUBLIC_CONTENT_API_URL = originalBaseUrl;
+      process.env.NEXT_PUBLIC_API_URL = originalBaseUrl;
     }
   });
 
@@ -580,18 +580,17 @@ describe('ContentApiClient', () => {
       expect(capturedUrl).toBe('https://test-api.example.com/health');
     });
 
-    it('resolves baseUrl from the NEXT_PUBLIC_CONTENT_API_URL environment variable', () => {
-      const originalEnv = process.env.NEXT_PUBLIC_CONTENT_API_URL;
-      process.env.NEXT_PUBLIC_CONTENT_API_URL =
-        'https://custom-env-api.example.com';
+    it('resolves baseUrl from the NEXT_PUBLIC_API_URL environment variable', () => {
+      const originalEnv = process.env.NEXT_PUBLIC_API_URL;
+      process.env.NEXT_PUBLIC_API_URL = 'https://custom-env-api.example.com';
 
       const client = createContentClient();
       expect(client).toBeInstanceOf(ContentApiClient);
 
       if (originalEnv !== undefined) {
-        process.env.NEXT_PUBLIC_CONTENT_API_URL = originalEnv;
+        process.env.NEXT_PUBLIC_API_URL = originalEnv;
       } else {
-        delete process.env.NEXT_PUBLIC_CONTENT_API_URL;
+        delete process.env.NEXT_PUBLIC_API_URL;
       }
     });
 
