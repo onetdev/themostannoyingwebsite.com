@@ -40,7 +40,7 @@ test('spawns a rogue cursor without introducing scrollbars', async ({
     'data-possessed-cursor',
     'true',
   );
-  await page.clock.fastForward(40_000);
+  await page.clock.fastForward(45_000);
 
   const ghost = page.getByTestId('possessed-ghost-cursor').first();
   await expect(ghost).toBeVisible();
@@ -60,7 +60,7 @@ test('catching a rogue cursor unlocks "Cursor Wrangler"', async ({ page }) => {
     'data-possessed-cursor',
     'true',
   );
-  await page.clock.fastForward(40_000);
+  await page.clock.fastForward(45_000);
 
   const ghost = page.getByTestId('possessed-ghost-cursor').first();
   await expect(ghost).toBeVisible();
