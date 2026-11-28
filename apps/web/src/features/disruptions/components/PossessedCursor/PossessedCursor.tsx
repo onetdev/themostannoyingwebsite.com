@@ -15,6 +15,7 @@ import {
   pickNextCursor,
   smoothGhostPath,
 } from '../../utils';
+import { CaughtPuff } from './CaughtPuff';
 import { GhostCursor } from './GhostCursor';
 
 interface ActiveGhost {
@@ -23,6 +24,11 @@ interface ActiveGhost {
   preset: CursorPreset;
   points: NormalizedPoint[];
   lifetimeSeconds: number;
+}
+
+interface ActivePuff {
+  id: number;
+  point: NormalizedPoint;
 }
 
 const clampNormalized = (value: number): number =>
@@ -46,21 +52,25 @@ export function PossessedCursor() {
 
   const [current, setCurrent] = useState<CursorPreset | null>(null);
   const [ghosts, setGhosts] = useState<ActiveGhost[]>([]);
+  const [puffs, setPuffs] = useState<ActivePuff[]>([]);
   const pointerRef = useRef<NormalizedPoint | undefined>(undefined);
   const hasSwappedRef = useRef(false);
   const ghostIdRef = useRef(0);
+  const puffIdRef = useRef(0);
   const layerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     if (!isEnabled) {
       setCurrent(null);
       setGhosts([]);
+      setPuffs([]);
       hasSwappedRef.current = false;
       return;
     }
 
     setCurrent(pickInitialCursor(cursors));
     setGhosts([]);
+    setPuffs([]);
     hasSwappedRef.current = false;
   }, [isEnabled, cursors]);
 
@@ -156,6 +166,10 @@ export function PossessedCursor() {
     setGhosts((previous) => previous.filter((ghost) => ghost.id !== id));
   }, []);
 
+  const handlePuffDone = useCallback((id: number) => {
+    setPuffs((previous) => previous.filter((puff) => puff.id !== id));
+  }, []);
+
   useEffect(() => {
     if (!isEnabled || ghosts.length === 0) {
       return;
@@ -191,6 +205,20 @@ export function PossessedCursor() {
         emit('possessed-cursor:caught', {
           cursorId: caughtGhost.cursorId,
         });
+
+        const centerX = bounds.left + bounds.width / 2;
+        const centerY = bounds.top + bounds.height / 2;
+        setPuffs((previous) => [
+          ...previous,
+          {
+            id: puffIdRef.current++,
+            point: {
+              x: clampNormalized(centerX / window.innerWidth),
+              y: clampNormalized(centerY / window.innerHeight),
+            },
+          },
+        ]);
+
         setGhosts((previous) =>
           previous.filter((ghost) => ghost.id !== caughtGhost.id),
         );
@@ -226,6 +254,14 @@ export function PossessedCursor() {
           />
         ))}
       </AnimatePresence>
+      {puffs.map((puff) => (
+        <CaughtPuff
+          key={puff.id}
+          id={puff.id}
+          point={puff.point}
+          onDone={handlePuffDone}
+        />
+      ))}
     </div>
   );
 }

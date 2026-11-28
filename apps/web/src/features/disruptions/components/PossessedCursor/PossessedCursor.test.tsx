@@ -11,25 +11,51 @@ import { PossessedCursor } from './PossessedCursor';
 jest.mock('motion/react', () => {
   const React = jest.requireActual('react') as typeof import('react');
 
-  const MockMotionImage = React.forwardRef<
-    HTMLImageElement,
-    Record<string, unknown>
-  >(({ initial, animate, exit, transition, ...props }, ref) => {
+  type MotionMockProps = Record<string, unknown> & {
+    children?: React.ReactNode;
+  };
+
+  const stripMotionProps = ({
+    initial,
+    animate,
+    exit,
+    transition,
+    children,
+    ...props
+  }: MotionMockProps) => {
     void initial;
     void animate;
     void exit;
     void transition;
 
-    // biome-ignore lint/performance/noImgElement: test double for motion.img
-    return <img ref={ref} alt="" {...props} />;
-  });
+    return { children, props };
+  };
+
+  const MockMotionImage = React.forwardRef<HTMLImageElement, MotionMockProps>(
+    (props, ref) => {
+      const { props: rest } = stripMotionProps(props);
+      return React.createElement('img', { ...rest, ref, alt: '' });
+    },
+  );
   MockMotionImage.displayName = 'MockMotionImage';
+
+  const MockMotionDiv = (props: MotionMockProps) =>
+    React.createElement('div', stripMotionProps(props).props);
+  MockMotionDiv.displayName = 'MockMotionDiv';
+
+  const MockMotionSpan = (props: MotionMockProps) =>
+    React.createElement('span', stripMotionProps(props).props);
+  MockMotionSpan.displayName = 'MockMotionSpan';
 
   return {
     AnimatePresence: ({ children }: { children: React.ReactNode }) => (
       <>{children}</>
     ),
-    motion: { img: MockMotionImage },
+    motion: {
+      img: MockMotionImage,
+      div: MockMotionDiv,
+      span: MockMotionSpan,
+    },
   };
 });
 
@@ -183,7 +209,42 @@ describe('PossessedCursor', () => {
     expect(emit).toHaveBeenCalledWith('possessed-cursor:caught', {
       cursorId: 'arrow-a',
     });
+    expect(screen.getByTestId('possessed-cursor-puff')).toBeInTheDocument();
     expect(screen.queryByTestId('possessed-ghost-cursor')).toBeNull();
+  });
+
+  it('removes a puff after its burst animation', () => {
+    render(<PossessedCursor />);
+    advance(1001);
+
+    const ghost = screen.getByTestId('possessed-ghost-cursor');
+    jest.spyOn(ghost, 'getBoundingClientRect').mockReturnValue({
+      x: 10,
+      y: 10,
+      left: 10,
+      top: 10,
+      right: 42,
+      bottom: 42,
+      width: 32,
+      height: 32,
+      toJSON: () => ({}),
+    });
+
+    act(() => {
+      document.dispatchEvent(
+        new MouseEvent('pointerdown', {
+          bubbles: true,
+          clientX: 20,
+          clientY: 20,
+        }),
+      );
+    });
+
+    expect(screen.getByTestId('possessed-cursor-puff')).toBeInTheDocument();
+
+    advance(701);
+
+    expect(screen.queryByTestId('possessed-cursor-puff')).toBeNull();
   });
 
   it('spawns ghosts on touch devices without a CSS cursor', () => {
