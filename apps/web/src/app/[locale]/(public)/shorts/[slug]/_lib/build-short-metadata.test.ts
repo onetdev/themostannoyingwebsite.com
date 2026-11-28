@@ -13,6 +13,7 @@ const short = {
     slug: 'old-world-connoisseur',
     name: 'Countess Beatrix von Harten',
     persona: 'The old-world connaisseur',
+    avatar: null,
   },
   published_at: '2026-11-21',
   duration_ms: 8042,

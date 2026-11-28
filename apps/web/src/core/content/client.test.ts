@@ -20,7 +20,7 @@ describe('createAppContentClient', () => {
 
   it('passes client options through to the SDK factory', () => {
     const options = {
-      baseUrl: 'https://dev.content.themostannoyingwebsite.com',
+      baseUrl: 'https://dev.api.themostannoyingwebsite.com',
       timeoutMs: 5_000,
     };
 

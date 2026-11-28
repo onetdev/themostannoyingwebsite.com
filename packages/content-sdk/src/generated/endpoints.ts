@@ -3,7 +3,7 @@
  * Do not edit manually.
  * The Most Annoying Website - Headless Content API
  * REST API serving multi-language YAML articles, authors, short videos, static pages, categories, UI translation bundles, dynamic content pools, survey questions, prize wheel segments, newsletter steps, spam samples, donation data, full-text search, and transformed raster image assets from SQLite.
- * OpenAPI spec version: 2.1.0
+ * OpenAPI spec version: 2.3.2
  */
 import * as zod from 'zod';
 
@@ -186,6 +186,32 @@ export const AuthorRef = zod
     slug: zod.string().describe('Stable author slug'),
     name: zod.string().describe('Public byline'),
     persona: zod.string().describe('Human-readable writing persona label'),
+    avatar: zod
+      .object({
+        url: zod
+          .string()
+          .describe('Absolute URL of the default avatar variant'),
+        width: zod.int().describe('Default variant width in pixels'),
+        height: zod.int().describe('Default variant height in pixels'),
+        variants: zod
+          .record(
+            zod.string(),
+            zod.object({
+              url: zod.string().describe('Absolute URL of this variant'),
+              width: zod.int().describe('Variant width in pixels'),
+              height: zod.int().describe('Variant height in pixels'),
+              format: zod.string().describe('Variant file format, e.g. `webp`'),
+              default: zod
+                .boolean()
+                .describe('Whether this is the default variant'),
+            }),
+          )
+          .describe('Avatar variants keyed by size (`sm`, `lg`)'),
+      })
+      .nullable()
+      .describe(
+        'Author avatar with square size variants, or null when the author has none',
+      ),
   })
   .describe('Author reference embedded in article responses');
 
@@ -198,6 +224,32 @@ export const AuthorResponseItem = zod
     slug: zod.string().describe('Stable author slug'),
     name: zod.string().describe('Public byline'),
     persona: zod.string().describe('Human-readable writing persona label'),
+    avatar: zod
+      .object({
+        url: zod
+          .string()
+          .describe('Absolute URL of the default avatar variant'),
+        width: zod.int().describe('Default variant width in pixels'),
+        height: zod.int().describe('Default variant height in pixels'),
+        variants: zod
+          .record(
+            zod.string(),
+            zod.object({
+              url: zod.string().describe('Absolute URL of this variant'),
+              width: zod.int().describe('Variant width in pixels'),
+              height: zod.int().describe('Variant height in pixels'),
+              format: zod.string().describe('Variant file format, e.g. `webp`'),
+              default: zod
+                .boolean()
+                .describe('Whether this is the default variant'),
+            }),
+          )
+          .describe('Avatar variants keyed by size (`sm`, `lg`)'),
+      })
+      .nullable()
+      .describe(
+        'Author avatar with square size variants, or null when the author has none',
+      ),
     about: zod.string().describe('Brief public biography'),
   })
   .describe('Public author identity');
@@ -887,7 +939,7 @@ export const ShortVideoMedia = zod
     width: zod.int().gt(shortVideoMediaWidthExclusiveMin),
     height: zod.int().gt(shortVideoMediaHeightExclusiveMin),
     duration_ms: zod.int().gt(shortVideoMediaDurationMsExclusiveMin).nullish(),
-    file_size_bytes: zod.int().min(shortVideoMediaFileSizeBytesMin),
+    file_size_bytes: zod.int().min(shortVideoMediaFileSizeBytesMin).optional(),
     default: zod.boolean().describe('Default variant flag'),
     url: zod.string().describe('Absolute public URL'),
   })
@@ -1240,7 +1292,7 @@ export type GetArticleBySlugResponseOutput = zod.output<
 >;
 
 /**
- * Retrieves a paginated list of article authors with their public byline, persona label, and brief biography.
+ * Retrieves a paginated list of article authors with their public byline, persona label, brief biography, and square avatar variants.
  * @summary Get paginated authors list
  */
 export const getAuthorListQueryLimitDefault = 20;
@@ -1301,7 +1353,7 @@ export type GetAuthorListResponseOutput = zod.output<
 >;
 
 /**
- * Fetches a single author by their stable slug, including the public byline, persona label, and brief biography.
+ * Fetches a single author by their stable slug, including the public byline, persona label, brief biography, and square avatar variants.
  * @summary Get author by slug
  */
 export const GetAuthorBySlugParams = zod.object({

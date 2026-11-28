@@ -22,7 +22,12 @@ const nextConfig = {
     remotePatterns: [
       {
         protocol: 'https',
-        hostname: 'content.themostannoyingwebsite.com',
+        hostname: 'media.themostannoyingwebsite.com',
+        pathname: '/assets/**',
+      },
+      {
+        protocol: 'https',
+        hostname: 'dev.media.themostannoyingwebsite.com',
         pathname: '/assets/**',
       },
     ],
