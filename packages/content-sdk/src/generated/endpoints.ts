@@ -1151,6 +1151,7 @@ export type GetApiHealthResponseOutput = zod.output<
  * @summary Get localized articles list
  */
 export const getArticleListQueryLimitDefault = 20;
+export const getArticleListQueryLimitMin = 1;
 export const getArticleListQueryLimitMax = 100;
 
 export const getArticleListQueryOffsetDefault = 0;
@@ -1183,7 +1184,7 @@ export const GetArticleListQueryParams = zod.object({
     ),
   limit: zod
     .int()
-    .min(1)
+    .min(getArticleListQueryLimitMin)
     .max(getArticleListQueryLimitMax)
     .default(getArticleListQueryLimitDefault)
     .describe('Max number of items (default 20, max 100)'),
@@ -1296,6 +1297,7 @@ export type GetArticleBySlugResponseOutput = zod.output<
  * @summary Get paginated authors list
  */
 export const getAuthorListQueryLimitDefault = 20;
+export const getAuthorListQueryLimitMin = 1;
 export const getAuthorListQueryLimitMax = 100;
 
 export const getAuthorListQueryOffsetDefault = 0;
@@ -1326,7 +1328,7 @@ export const GetAuthorListQueryParams = zod.object({
     ),
   limit: zod
     .int()
-    .min(1)
+    .min(getAuthorListQueryLimitMin)
     .max(getAuthorListQueryLimitMax)
     .default(getAuthorListQueryLimitDefault)
     .describe('Max number of items (default 20, max 100)'),
@@ -1409,6 +1411,7 @@ export type GetAuthorBySlugResponseOutput = zod.output<
  * @summary Get localized static pages list
  */
 export const getPageListQueryLimitDefault = 20;
+export const getPageListQueryLimitMin = 1;
 export const getPageListQueryLimitMax = 100;
 
 export const getPageListQueryOffsetDefault = 0;
@@ -1439,7 +1442,7 @@ export const GetPageListQueryParams = zod.object({
     ),
   limit: zod
     .int()
-    .min(1)
+    .min(getPageListQueryLimitMin)
     .max(getPageListQueryLimitMax)
     .default(getPageListQueryLimitDefault)
     .describe('Max number of items (default 20, max 100)'),
@@ -1520,6 +1523,7 @@ export type GetPageBySlugResponseOutput = zod.output<
  * @summary Get paginated article category taxonomy
  */
 export const getCategoryListQueryLimitDefault = 20;
+export const getCategoryListQueryLimitMin = 1;
 export const getCategoryListQueryLimitMax = 100;
 
 export const getCategoryListQueryOffsetDefault = 0;
@@ -1550,7 +1554,7 @@ export const GetCategoryListQueryParams = zod.object({
     ),
   limit: zod
     .int()
-    .min(1)
+    .min(getCategoryListQueryLimitMin)
     .max(getCategoryListQueryLimitMax)
     .default(getCategoryListQueryLimitDefault)
     .describe('Max number of items (default 20, max 100)'),
@@ -1581,6 +1585,7 @@ export type GetCategoryListResponseOutput = zod.output<
  * @summary Get paginated list of transformed raster image assets and metadata
  */
 export const getImageListQueryLimitDefault = 20;
+export const getImageListQueryLimitMin = 1;
 export const getImageListQueryLimitMax = 100;
 
 export const getImageListQueryOffsetDefault = 0;
@@ -1589,7 +1594,7 @@ export const getImageListQueryOffsetMin = 0;
 export const GetImageListQueryParams = zod.object({
   limit: zod
     .int()
-    .min(1)
+    .min(getImageListQueryLimitMin)
     .max(getImageListQueryLimitMax)
     .default(getImageListQueryLimitDefault)
     .describe('Max number of items (default 20, max 100)'),
@@ -1642,6 +1647,7 @@ export type GetAssetByPathResponseOutput = zod.output<
  * @summary Search across articles, static pages, and short videos
  */
 export const getSearchResultListQueryLimitDefault = 20;
+export const getSearchResultListQueryLimitMin = 1;
 export const getSearchResultListQueryLimitMax = 100;
 
 export const getSearchResultListQueryOffsetDefault = 0;
@@ -1672,7 +1678,7 @@ export const GetSearchResultListQueryParams = zod.object({
     ),
   limit: zod
     .int()
-    .min(1)
+    .min(getSearchResultListQueryLimitMin)
     .max(getSearchResultListQueryLimitMax)
     .default(getSearchResultListQueryLimitDefault)
     .describe('Max number of items (default 20, max 100)'),
@@ -1715,6 +1721,7 @@ export type GetSearchResultListResponseOutput = zod.output<
  * @summary Get supported locales and language metadata
  */
 export const getLocaleListQueryLimitDefault = 20;
+export const getLocaleListQueryLimitMin = 1;
 export const getLocaleListQueryLimitMax = 100;
 
 export const getLocaleListQueryOffsetDefault = 0;
@@ -1723,7 +1730,7 @@ export const getLocaleListQueryOffsetMin = 0;
 export const GetLocaleListQueryParams = zod.object({
   limit: zod
     .int()
-    .min(1)
+    .min(getLocaleListQueryLimitMin)
     .max(getLocaleListQueryLimitMax)
     .default(getLocaleListQueryLimitDefault)
     .describe('Max number of items (default 20, max 100)'),
@@ -2002,6 +2009,7 @@ export type GetCurrencyRateListResponseOutput = zod.output<
  * @summary Get paginated short videos list
  */
 export const getShortVideoListQueryLimitDefault = 20;
+export const getShortVideoListQueryLimitMin = 1;
 export const getShortVideoListQueryLimitMax = 100;
 
 export const getShortVideoListQueryOffsetDefault = 0;
@@ -2034,7 +2042,7 @@ export const GetShortVideoListQueryParams = zod.object({
     ),
   limit: zod
     .int()
-    .min(1)
+    .min(getShortVideoListQueryLimitMin)
     .max(getShortVideoListQueryLimitMax)
     .default(getShortVideoListQueryLimitDefault)
     .describe('Max number of items (default 20, max 100)'),

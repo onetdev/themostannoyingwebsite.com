@@ -6,8 +6,10 @@ peerDependencyRules:
   allowedVersions:
     "tsconfck>typescript": "7"
 
-# No parent accepts the patched majors yet (test-exclude@8 still declares
-# glob ^13.0.6 / minimatch ^10.2.2). Remove once jest ships patched ranges.
+# No parent accepts the patched majors yet: jest-config and jest-runtime declare
+# glob ^13.0.6, and test-exclude (also via jest) declares glob ^10.4.1 /
+# minimatch ^10.2.2. Jest 30.5.2 is the latest release and still ships these
+# ranges. Remove once jest accepts glob >=14.0.2 / minimatch >=11.0.1.
 # Advisory: glob GHSA (AbortSignal bypass), minimatch GHSA (globparts DoS).
 overrides:
   "glob@>=9.0.0 <14.0.2": "14.0.6"
@@ -23,44 +25,49 @@ allowBuilds:
   "unrs-resolver": true
 
 catalog:
-  "@biomejs/biome": "^2.6.8"
+  "@biomejs/biome": "^2.6.9"
   "@formatjs/icu-messageformat-parser": "^3.5.23"
   "@fortawesome/fontawesome-svg-core": "^7.3.1"
   "@fortawesome/free-brands-svg-icons": "^7.3.1"
   "@fortawesome/free-solid-svg-icons": "^7.3.1"
   "@fortawesome/react-fontawesome": "^3.5.0"
   "@playwright/test": "1.65.1"
-  "@storybook/addon-docs": "^10.6.8"
-  "@storybook/addon-themes": "^10.6.8"
-  "@storybook/nextjs-vite": "^10.6.8"
-  "@storybook/react": "^10.6.8"
+  "@storybook/addon-docs": "^10.6.9"
+  "@storybook/addon-themes": "^10.6.9"
+  "@storybook/nextjs-vite": "^10.6.9"
+  "@storybook/react": "^10.6.9"
   "@swc/core": "^1.16.22"
   "@swc/jest": "^0.2.39"
   "@tailwindcss/postcss": "^4.3.5"
   "@testing-library/jest-dom": "^8.0.0"
   "@types/jest": "^30.0.0"
-  "@types/node": "^26.6.6"
-  "@types/react": "^19.3.0"
+  "@types/node": "^26.6.10"
+  "@types/react": "^19.3.2"
   "@types/react-dom": "^19.3.0"
   "@types/sanitize-html": "^2.16.2"
-  "@wrksz/themes": "^2.1.1"
+  "@wrksz/themes": "^2.1.2"
   "jest": "^30.5.2"
   "jest-environment-jsdom": "^30.5.2"
   "ky": "^2.2.0"
-  "marked": "^18.2.1"
+  "marked": "^18.3.0"
   "motion": "^14.14.0"
   "react": "^19.3.1"
   "react-dom": "^19.3.1"
   "react-hook-form": "7.92.0"
-  "recharts": "^3.11.0"
+  "recharts": "^3.11.1"
   "sanitize-html": "2.18.2"
   "schema-dts": "^2.1.0"
-  "storybook": "^10.6.8"
+  "storybook": "^10.6.9"
   "tailwindcss": "^4.3.5"
   "tsx": "^4.23.15"
   "typescript": "7.0.2"
   "vite": "^8.3.8"
   "zod": "^4.6.7"
 
-minimumReleaseAgeExclude:
-  - "@hookform/resolvers@7.0.8"
+# Hold a newly published version back for a day, so a compromised release has a
+# chance to be reported and yanked before resolution can pull it in. This gates
+# `pnpm install`/`pnpm update`; the Dependabot cooldown in `.github/dependabot.yml`
+# only gates when update PRs are opened. Add an entry to
+# `minimumReleaseAgeExclude` (name or name@version) only to take a specific
+# version deliberately, and remove it once the version has matured.
+minimumReleaseAge: 1440
