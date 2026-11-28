@@ -19,7 +19,7 @@ A core collection of intrusive glitches and browser-behavior-altering experience
 ### UI Glitches
 
 - **Dead Pixel**: A single, interactive pixel on the screen that looks like hardware failure. Clicking it triggers an achievement. It has a rare chance to appear as a **Rainbow Dead Pixel**, which unlocks a special secret achievement.
-- **Possessed Cursor**: Replaces the pointer with hand-drawn vintage OS cursors. Every so often it swaps to another cursor and the previous one detaches as a rogue cursor that wanders across the viewport. Catching a rogue cursor unlocks an achievement; on touch devices only the rogue cursors appear.
+- **Possessed Cursor**: Replaces the pointer with hand-drawn vintage OS cursors. Every so often it swaps to another cursor and the previous one detaches as a rogue cursor that glides along smooth spline paths. Clicking one bursts it into a puff and unlocks an achievement; on touch devices only the rogue cursors appear.
 - **Global Sticky Video**: A non-dismissible, autoplaying video player that follows the user throughout the site.
 - **Screensaver**: A full-screen overlay that triggers after inactivity, featuring two variants:
   - **Maze**: A procedurally generated 90s-style maze.
