@@ -142,6 +142,21 @@ export function VisualChaos() {
           )}
         </SettingsField>
         <SettingsField
+          label={t('possessedCursor.label')}
+          info={t('possessedCursor.hint')}
+        >
+          {(id) => (
+            <FormSwitch
+              id={id}
+              name="possessed_cursor"
+              checked={painPreferences.flags.possessedCursor}
+              onCheckedChange={(value) =>
+                painPreferences.setFlagIndeterminate('possessedCursor', value)
+              }
+            />
+          )}
+        </SettingsField>
+        <SettingsField
           label={t('stickyVideoPlayer.label')}
           info={t('stickyVideoPlayer.hint')}
         >
