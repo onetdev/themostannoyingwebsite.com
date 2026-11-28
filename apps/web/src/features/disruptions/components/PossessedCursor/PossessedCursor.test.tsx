@@ -209,11 +209,13 @@ describe('PossessedCursor', () => {
     expect(emit).toHaveBeenCalledWith('possessed-cursor:caught', {
       cursorId: 'arrow-a',
     });
-    expect(screen.getByTestId('possessed-cursor-puff')).toBeInTheDocument();
+    const puff = screen.getByTestId('possessed-cursor-puff');
+    expect(puff).toBeInTheDocument();
+    expect(puff).toHaveAttribute('data-puff-frame', '0');
     expect(screen.queryByTestId('possessed-ghost-cursor')).toBeNull();
   });
 
-  it('removes a puff after its burst animation', () => {
+  it('advances through the SVG puff sequence and then removes it', () => {
     render(<PossessedCursor />);
     advance(1001);
 
@@ -240,9 +242,14 @@ describe('PossessedCursor', () => {
       );
     });
 
-    expect(screen.getByTestId('possessed-cursor-puff')).toBeInTheDocument();
+    const puff = screen.getByTestId('possessed-cursor-puff');
+    expect(puff).toHaveAttribute('data-puff-frame', '0');
 
-    advance(701);
+    advance(75);
+
+    expect(puff).toHaveAttribute('data-puff-frame', '1');
+
+    advance(626);
 
     expect(screen.queryByTestId('possessed-cursor-puff')).toBeNull();
   });
