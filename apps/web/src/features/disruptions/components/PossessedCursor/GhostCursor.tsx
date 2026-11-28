@@ -41,9 +41,13 @@ export function GhostCursor({
 
   const firstPoint = points[0] ?? { x: 0.5, y: 0.5 };
   const duration = Math.max(6, lifetimeSeconds * 0.8);
-  const times = points.map((_, index) =>
-    points.length === 1 ? 0 : index / (points.length - 1),
-  );
+  // The spline is densely sampled, so segment interpolation stays linear (no
+  // micro-easing between samples). Smoothstep on the keyframe times gives the
+  // whole loop a natural ease-in/ease-out instead.
+  const times = points.map((_, index) => {
+    const progress = points.length === 1 ? 0 : index / (points.length - 1);
+    return progress * progress * (3 - 2 * progress);
+  });
   const positionTransition = {
     duration,
     times,
