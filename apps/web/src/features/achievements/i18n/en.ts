@@ -59,6 +59,10 @@ export default {
       name: 'Dead Pixel Hunter',
       description: 'Try to click on a dead pixel.',
     },
+    possessedCursorCaught: {
+      name: 'Cursor Wrangler',
+      description: 'Catch a cursor that wandered off on its own.',
+    },
     rainbowHunter: {
       name: 'Rainbow Hunter',
       description: 'You clicked on a rainbow dead pixel!',

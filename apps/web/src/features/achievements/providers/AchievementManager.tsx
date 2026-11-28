@@ -89,6 +89,10 @@ export const AchievementManager = () => {
     }
   });
 
+  useEvent('possessed-cursor:caught', () => {
+    handleSingleUnlock('possessed-cursor-caught');
+  });
+
   useEvent('route:visit', ({ route }) => {
     handleSingleUnlock('first-visit');
     if (route === 'virgin') {
