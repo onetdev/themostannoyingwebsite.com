@@ -132,34 +132,10 @@ const config: AppConfig = {
           kind: 'arrow',
         },
         {
-          id: 'win95-hand',
-          src: '/assets/cursors/win95-hand.svg',
-          hotspot: { x: 13, y: 3 },
-          kind: 'pointer',
-        },
-        {
-          id: 'win95-ibeam',
-          src: '/assets/cursors/win95-ibeam.svg',
-          hotspot: { x: 16, y: 16 },
-          kind: 'text',
-        },
-        {
-          id: 'win95-hourglass',
-          src: '/assets/cursors/win95-hourglass.svg',
-          hotspot: { x: 16, y: 16 },
-          kind: 'busy',
-        },
-        {
           id: 'win95-help',
           src: '/assets/cursors/win95-help.svg',
           hotspot: { x: 1, y: 1 },
           kind: 'help',
-        },
-        {
-          id: 'win95-unavailable',
-          src: '/assets/cursors/win95-unavailable.svg',
-          hotspot: { x: 16, y: 16 },
-          kind: 'unavailable',
         },
         {
           id: 'macosx-beachball',
