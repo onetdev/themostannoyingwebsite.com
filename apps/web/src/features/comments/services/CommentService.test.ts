@@ -114,4 +114,49 @@ describe('CommentService', () => {
       );
     });
   });
+
+  describe('getByShortVideos', () => {
+    it('generates a single-level thread per short, keyed by id', async () => {
+      (generateTree as jest.Mock).mockReturnValue([]);
+      (filterByDate as jest.Mock).mockReturnValue([]);
+
+      const items = [
+        {
+          id: 'short-a',
+          slug: 'short-a',
+          lang: 'en' as const,
+          published_at: '2026-11-20T10:00:00.000Z',
+        },
+        {
+          id: 'short-b',
+          slug: 'short-b',
+          lang: 'en' as const,
+          published_at: '2026-11-21T10:00:00.000Z',
+        },
+      ];
+
+      const result = await service.getByShortVideos(items);
+
+      expect(result).toEqual({ 'short-a': [], 'short-b': [] });
+      expect(generateTree).toHaveBeenCalledTimes(2);
+      expect(generateTree).toHaveBeenCalledWith(
+        'short-a',
+        new Date(items[0].published_at),
+        expect.objectContaining({
+          maxDepth: 1,
+          rootCount: 6,
+          maxReplies: 2,
+          maxTotalNodes: 18,
+          now: expect.any(Number),
+        }),
+      );
+      // The pool is fetched once per language (names + comments), not per short.
+      expect(getContentPoolMock).toHaveBeenCalledTimes(2);
+    });
+
+    it('returns an empty record for an empty feed', async () => {
+      await expect(service.getByShortVideos([])).resolves.toEqual({});
+      expect(getContentPoolMock).not.toHaveBeenCalled();
+    });
+  });
 });

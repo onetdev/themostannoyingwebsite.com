@@ -11,6 +11,11 @@ export interface SeededCommentsOptions {
   maxReplies?: number;
   rootCount?: number;
   maxTotalNodes?: number;
+  /**
+   * Timestamp the generated conversation is anchored to. Defaults to the
+   * current time so comments never land in the future and get filtered out.
+   */
+  now?: number;
 }
 
 export function generateTree(
@@ -22,8 +27,15 @@ export function generateTree(
     maxReplies = 4,
     rootCount = 10,
     maxTotalNodes = 15,
+    now = Date.now(),
   }: SeededCommentsOptions,
 ) {
+  // The Content API can be unreachable; callers degrade to an empty thread
+  // instead of failing schema validation on undefined pool entries.
+  if (pool.names.length === 0 || pool.comments.length === 0) {
+    return [];
+  }
+
   const seed = stringToSeed(identifier);
   const rand = mulberry32(seed);
 
@@ -34,7 +46,6 @@ export function generateTree(
   }
 
   const ONE_MONTH_MS = 30 * 24 * 60 * 60 * 1000;
-  const TWO_MONTHS_MS = 60 * 24 * 60 * 60 * 1000;
   const ONE_YEAR_MS = 12 * ONE_MONTH_MS;
 
   function randomLikes(commentTime: number) {
@@ -43,11 +54,16 @@ export function generateTree(
     return Math.floor(300 * factor * rand() ** 2);
   }
 
+  function randomTimeBetween(from: number, to: number) {
+    const span = Math.max(0, to - from);
+    return from + Math.floor(rand() * span);
+  }
+
   function generateNode(depth: number, parentTime?: number): Comment {
     const time =
       parentTime === undefined
-        ? publishedAt.getTime() + Math.floor(TWO_MONTHS_MS * rand() ** 2)
-        : parentTime + ONE_MONTH_MS;
+        ? randomTimeBetween(publishedAt.getTime(), now)
+        : randomTimeBetween(parentTime, now);
 
     if (nodeCount >= maxTotalNodes) {
       return {
@@ -71,7 +87,7 @@ export function generateTree(
       replies: [],
     };
 
-    if (depth < maxDepth) {
+    if (depth < maxDepth && time < now) {
       const replyCount = Math.floor(rand() * maxReplies);
 
       node.replies = Array.from({ length: replyCount }, () =>

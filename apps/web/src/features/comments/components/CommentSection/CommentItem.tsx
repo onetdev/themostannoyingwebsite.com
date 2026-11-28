@@ -17,11 +17,21 @@ export interface CommentItemProps {
   comment: Comment;
   onReply: (comment: Comment) => void;
   onLike: (comment: Comment) => void;
+  /** Expand the first reply level on mount. */
+  defaultShowReplies?: boolean;
+  /** Nesting level, used by tests and future indentation rules. */
+  depth?: number;
 }
 
-export function CommentItem({ comment, onReply, onLike }: CommentItemProps) {
+export function CommentItem({
+  comment,
+  onReply,
+  onLike,
+  defaultShowReplies = false,
+  depth = 0,
+}: CommentItemProps) {
   const t = useTranslations();
-  const [showReplies, setShowReplies] = useState(false);
+  const [showReplies, setShowReplies] = useState(defaultShowReplies);
 
   const hasReplies = comment.replies && comment.replies.length > 0;
 
@@ -31,7 +41,11 @@ export function CommentItem({ comment, onReply, onLike }: CommentItemProps) {
       open={showReplies}
       onOpenChange={setShowReplies}
     >
-      <div className="flex flex-col gap-1" data-track-section="comments:item">
+      <div
+        className="flex flex-col gap-1"
+        data-track-section="comments:item"
+        data-depth={depth}
+      >
         <div className="flex items-center gap-2">
           <Avatar className="size-7">
             <AvatarFallback className="text-sm">
@@ -100,6 +114,8 @@ export function CommentItem({ comment, onReply, onLike }: CommentItemProps) {
                 comment={reply}
                 onReply={onReply}
                 onLike={onLike}
+                defaultShowReplies={defaultShowReplies}
+                depth={depth + 1}
               />
             ))}
           </div>

@@ -6,6 +6,7 @@ import type { ShortVideoListItem } from '@maw/content-sdk';
 import { TooltipProvider } from '@maw/ui-lib';
 import { fireEvent, render, screen } from '@testing-library/react';
 
+import type { ShortsPlayerProps } from './ShortsPlayer';
 import { ShortsPlayer } from './ShortsPlayer';
 
 jest.mock('next-intl', () => ({
@@ -31,6 +32,12 @@ jest.mock('@/core/i18n/navigation', () => ({
 
 jest.mock('@/features/share/hooks', () => ({
   useShareAction: () => jest.fn(),
+}));
+
+jest.mock('@/features/comments/components', () => ({
+  ShortsCommentsPanel: ({ comments }: { comments: unknown[] }) => (
+    <div data-testid="shorts-comments-panel">{comments.length}</div>
+  ),
 }));
 
 jest.mock('@/stores', () => ({
@@ -98,10 +105,10 @@ const shorts = [
   makeShort('c', 'third', 'Third'),
 ];
 
-function renderPlayer() {
+function renderPlayer(props: Partial<ShortsPlayerProps> = {}) {
   return render(
     <TooltipProvider>
-      <ShortsPlayer shorts={shorts} initialIndex={0} />
+      <ShortsPlayer shorts={shorts} initialIndex={0} {...props} />
     </TooltipProvider>,
   );
 }
@@ -148,6 +155,62 @@ describe('ShortsPlayer', () => {
     expect(screen.getByRole('button', { name: 'like' })).toHaveAttribute(
       'aria-pressed',
       'false',
+    );
+  });
+
+  it('animates the comments surface open beside the feed', () => {
+    renderPlayer({ commentsByShortId: { a: [] } });
+
+    const sheet = screen.getByTestId('shorts-comments-sheet');
+    expect(sheet).toHaveClass('lg:w-0');
+    expect(sheet).toHaveClass('[transform:translateY(calc(100%+1rem))]');
+
+    fireEvent.click(screen.getByRole('button', { name: 'comments.open' }));
+
+    expect(sheet).toHaveClass('lg:w-[380px]');
+    expect(sheet).toHaveClass(
+      '[transform:translateY(var(--shorts-sheet-drag,0px))]',
+    );
+    expect(screen.getByTestId('shorts-comments-panel')).toBeInTheDocument();
+    expect(
+      screen.getByRole('button', { name: 'comments.close' }),
+    ).toHaveAttribute('aria-expanded', 'true');
+  });
+
+  it('shows the total comment count under the comments toggle', () => {
+    renderPlayer({
+      commentsByShortId: {
+        a: [
+          {
+            id: 'root',
+            name: 'Tester',
+            content: 'Root',
+            time: 0,
+            likes: 0,
+            replies: [
+              {
+                id: 'reply',
+                name: 'Tester',
+                content: 'Reply',
+                time: 0,
+                likes: 0,
+              },
+            ],
+          },
+        ],
+      },
+    });
+
+    expect(screen.getByTestId('short-comments-count')).toHaveTextContent('2');
+  });
+
+  it('renders the compact brand logo in the responsive slot', () => {
+    renderPlayer();
+
+    expect(screen.getByTestId('shorts-logo')).toHaveAttribute('href', '/');
+    expect(screen.getByTestId('shorts-logo-slot')).toHaveClass(
+      'justify-center',
+      'lg:justify-start',
     );
   });
 });

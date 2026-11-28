@@ -13,15 +13,18 @@ export interface ShortPlayerActionRailProps {
   showCaptions: boolean;
   liked: boolean;
   isFullscreen: boolean;
+  commentsOpen: boolean;
+  commentCount: number;
+  onToggleComments: () => void;
   onToggleCaptions: () => void;
   onToggleFullscreen: () => void;
   onToggleLike: () => void;
 }
 
 /**
- * Vertical action rail, mirroring the TikTok layout: like, share, captions and
- * fullscreen. Play/pause is intentionally not here — it is the only transient
- * control.
+ * Vertical action rail, mirroring the TikTok layout: like, comments, share,
+ * captions and fullscreen. Play/pause is intentionally not here — it is the
+ * only transient control.
  */
 export function ShortPlayerActionRail({
   short,
@@ -29,6 +32,9 @@ export function ShortPlayerActionRail({
   showCaptions,
   liked,
   isFullscreen,
+  commentsOpen,
+  commentCount,
+  onToggleComments,
   onToggleCaptions,
   onToggleFullscreen,
   onToggleLike,
@@ -51,6 +57,26 @@ export function ShortPlayerActionRail({
         aria-pressed={liked}
         data-track="shorts:like"
       />
+      <div className="flex flex-col items-center gap-0.5">
+        <ShortPlayerActionButton
+          icon="commentDots"
+          label={
+            commentsOpen ? tCommon('comments.close') : tCommon('comments.open')
+          }
+          tooltip={
+            commentsOpen ? tCommon('comments.close') : tCommon('comments.open')
+          }
+          onClick={onToggleComments}
+          aria-expanded={commentsOpen}
+          data-track="shorts:comments"
+        />
+        <span
+          className="text-[11px] leading-none font-semibold text-white tabular-nums drop-shadow"
+          data-testid="short-comments-count"
+        >
+          {commentCount}
+        </span>
+      </div>
       <ShortPlayerActionButton
         icon="share"
         label={tCommon('common.action.share')}

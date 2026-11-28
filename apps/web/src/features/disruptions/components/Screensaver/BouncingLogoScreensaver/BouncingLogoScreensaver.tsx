@@ -4,8 +4,8 @@ import { randomInt } from '@maw/utils/random';
 import { clsx } from 'cn';
 import { useTranslations } from 'next-intl';
 import { useEffect, useRef, useState } from 'react';
+import { MawLogo } from '@/components/MawLogo';
 import { emit } from '@/core/events/event-bus';
-import { BouncyLogo } from './BouncyLogo';
 
 const HUE_ROTATION_CHANCE = 0.1;
 const VELOCITY = 3;
@@ -118,7 +118,7 @@ export function BouncingLogoScreensaver() {
         isHueRotating && 'animate-hue-full-rotate duration-100',
       )}
     >
-      <BouncyLogo
+      <MawLogo
         fill={colors.logo}
         arrowFill={colors.arrow}
         className="w-50 lg:w-75"

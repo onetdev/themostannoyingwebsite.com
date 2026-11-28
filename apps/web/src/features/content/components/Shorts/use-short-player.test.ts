@@ -63,12 +63,27 @@ function makeVideo() {
   const video = document.createElement('video');
   video.play = jest.fn().mockResolvedValue(undefined);
   video.pause = jest.fn();
+  video.load = jest.fn();
   Object.defineProperty(video, 'textTracks', { value: [] });
   Object.defineProperty(video, 'paused', {
     value: false,
     writable: true,
   });
   return video;
+}
+
+function mockMediaSession() {
+  const mediaSession = {
+    playbackState: 'playing',
+    metadata: { title: 'Short' },
+  };
+
+  Object.defineProperty(navigator, 'mediaSession', {
+    configurable: true,
+    value: mediaSession,
+  });
+
+  return mediaSession;
 }
 
 function makeApi() {
@@ -98,7 +113,9 @@ describe('useShortPlayer', () => {
   });
 
   afterEach(() => {
+    jest.useRealTimers();
     jest.restoreAllMocks();
+    Reflect.deleteProperty(navigator, 'mediaSession');
   });
 
   it('attempts sound-on autoplay for the active clip', async () => {
@@ -223,6 +240,92 @@ describe('useShortPlayer', () => {
 
     expect(mockRouter.push).toHaveBeenCalledWith('/shorts/');
     expect(window.sessionStorage.getItem(SHORTS_ENTRY_STORAGE_KEY)).toBeNull();
+  });
+
+  it('releases every registered video and clears the media session on close', () => {
+    const mediaSession = mockMediaSession();
+    const { result } = renderHook(() =>
+      useShortPlayer({ shorts, initialIndex: 0 }),
+    );
+    const first = makeVideo();
+    const second = makeVideo();
+    first.setAttribute('src', 'first.mp4');
+    second.setAttribute('src', 'second.mp4');
+
+    act(() => {
+      result.current.registerVideo(0, first);
+      result.current.registerVideo(1, second);
+    });
+    act(() => result.current.close());
+
+    for (const video of [first, second]) {
+      expect(video.pause).toHaveBeenCalled();
+      expect(video.hasAttribute('src')).toBe(false);
+      expect(video.load).toHaveBeenCalled();
+    }
+
+    expect(mediaSession.playbackState).toBe('none');
+    expect(mediaSession.metadata).toBeNull();
+    expect(mockRouter.push).toHaveBeenCalledWith('/');
+  });
+
+  it('does not resume a released video when unmuting after close', async () => {
+    mockEnableSound = false;
+    const { result } = renderHook(() =>
+      useShortPlayer({ shorts, initialIndex: 0 }),
+    );
+    const video = makeVideo();
+
+    act(() => result.current.registerVideo(0, video));
+    await waitFor(() => expect(video.play).toHaveBeenCalledTimes(1));
+
+    act(() => result.current.close());
+    (video.play as jest.Mock).mockClear();
+    act(() => result.current.toggleMute());
+
+    expect(video.play).not.toHaveBeenCalled();
+  });
+
+  it('releases registered videos after unmount', () => {
+    jest.useFakeTimers();
+    const { result, unmount } = renderHook(() =>
+      useShortPlayer({ shorts, initialIndex: 0 }),
+    );
+    const video = makeVideo();
+    video.setAttribute('src', 'first.mp4');
+
+    act(() => result.current.registerVideo(0, video));
+    unmount();
+    act(() => jest.runOnlyPendingTimers());
+
+    expect(video.pause).toHaveBeenCalled();
+    expect(video.hasAttribute('src')).toBe(false);
+    expect(video.load).toHaveBeenCalled();
+  });
+
+  it('does not retry playback when a pending play rejects after close', async () => {
+    const { result } = renderHook(() =>
+      useShortPlayer({ shorts, initialIndex: 0 }),
+    );
+    const video = makeVideo();
+    let rejectPlay: (reason?: unknown) => void = () => undefined;
+    video.play = jest.fn(
+      () =>
+        new Promise((_resolve, reject) => {
+          rejectPlay = reject;
+        }),
+    );
+
+    act(() => result.current.registerVideo(0, video));
+    act(() => result.current.close());
+
+    await act(async () => {
+      rejectPlay(new DOMException('blocked', 'NotAllowedError'));
+      await Promise.resolve();
+    });
+
+    expect(video.play).toHaveBeenCalledTimes(1);
+    expect(video.pause).toHaveBeenCalled();
   });
 
   it('toggles playback, mute and captions from the active clip', async () => {

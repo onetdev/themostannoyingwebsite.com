@@ -5,6 +5,7 @@ import type { CarouselApi } from '@maw/ui-lib';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { useRouter } from '@/core/i18n/navigation';
 import { takeShortsEntry } from '@/features/content/shorts-entry';
+import { useMediaTeardown } from '@/hooks/useMediaTeardown';
 import { useRuntimeStore, useUserPreferencesStore } from '@/stores';
 import { useShortUrlSync } from './use-short-url-sync';
 
@@ -37,6 +38,31 @@ function isFormControlTarget(target: EventTarget | null): boolean {
 function hasOpenDialog(): boolean {
   return Boolean(
     document.querySelector('[data-slot="dialog-content"], [role="dialog"]'),
+  );
+}
+
+function isCommentsPanelTarget(target: EventTarget | null): boolean {
+  return (
+    target instanceof Element &&
+    Boolean(target.closest('[data-comments-panel]'))
+  );
+}
+
+/**
+ * Shortcuts belong to the feed unless a dialog, the comments panel, or an
+ * interactive control is handling the key itself.
+ */
+function shouldIgnoreShortcut(event: KeyboardEvent): boolean {
+  if (hasOpenDialog() || isCommentsPanelTarget(event.target)) {
+    return true;
+  }
+
+  const isArrowKey = event.key === 'ArrowDown' || event.key === 'ArrowUp';
+
+  return (
+    isInteractiveTarget(event.target) &&
+    event.key !== 'Escape' &&
+    (!isArrowKey || isFormControlTarget(event.target))
   );
 }
 
@@ -82,9 +108,16 @@ export function useShortPlayer({
   const [showPlayPause, setShowPlayPause] = useState(false);
 
   const playerRef = useRef<HTMLDivElement>(null);
-  const videoRefs = useRef(new Map<number, HTMLVideoElement>());
   const activeIndexRef = useRef(activeIndex);
+  const activeVideoRef = useRef<HTMLVideoElement | null>(null);
+  const isMountedRef = useRef(true);
+  const releasedRef = useRef(false);
   const playPauseTimeout = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const {
+    get: getMedia,
+    register: registerMedia,
+    releaseAll: releaseMedia,
+  } = useMediaTeardown<number, HTMLVideoElement>();
 
   const activeShort = shorts[activeIndex] ?? shorts[0];
 
@@ -102,29 +135,66 @@ export function useShortPlayer({
     }, PLAY_PAUSE_FLASH_MS);
   }, []);
 
-  const playVideo = useCallback(async (video: HTMLVideoElement) => {
-    try {
-      await video.play();
-      setAutoplayBlocked(false);
-    } catch {
-      if (video.muted) {
-        setAutoplayBlocked(true);
-        return;
-      }
+  const isPlaybackCurrent = useCallback(
+    (video: HTMLVideoElement) =>
+      isMountedRef.current &&
+      !releasedRef.current &&
+      activeVideoRef.current === video,
+    [],
+  );
 
-      // Browser autoplay policy blocked sound. Retry muted and let the user
-      // restore sound with the unmute prompt.
+  const playMuted = useCallback(
+    async (video: HTMLVideoElement) => {
       video.muted = true;
       setMuted(true);
       setAutoplayBlocked(true);
 
       try {
         await video.play();
+
+        if (!isPlaybackCurrent(video)) {
+          video.pause();
+        }
       } catch {
         // Remains paused with the poster visible; the play control is shown.
       }
-    }
-  }, []);
+    },
+    [isPlaybackCurrent],
+  );
+
+  const playVideo = useCallback(
+    async (video: HTMLVideoElement) => {
+      if (releasedRef.current || !isMountedRef.current) {
+        return;
+      }
+
+      try {
+        await video.play();
+
+        if (!isPlaybackCurrent(video)) {
+          video.pause();
+          return;
+        }
+
+        setAutoplayBlocked(false);
+      } catch {
+        if (!isPlaybackCurrent(video)) {
+          video.pause();
+          return;
+        }
+
+        if (video.muted) {
+          setAutoplayBlocked(true);
+          return;
+        }
+
+        // Browser autoplay policy blocked sound. Retry muted and let the user
+        // restore sound with the unmute prompt.
+        await playMuted(video);
+      }
+    },
+    [isPlaybackCurrent, playMuted],
+  );
 
   useEffect(() => {
     activeIndexRef.current = activeIndex;
@@ -147,11 +217,11 @@ export function useShortPlayer({
   }, [api]);
 
   useEffect(() => {
-    const nextVideo = videoRefs.current.get(activeIndex) ?? null;
+    const nextVideo = getMedia(activeIndex) ?? null;
     setActiveVideo(nextVideo);
     setAutoplayBlocked(false);
     setShowPlayPause(false);
-  }, [activeIndex]);
+  }, [activeIndex, getMedia]);
 
   useEffect(() => {
     if (!enableSound) {
@@ -160,6 +230,8 @@ export function useShortPlayer({
   }, [enableSound]);
 
   useEffect(() => {
+    activeVideoRef.current = activeVideo;
+
     if (!activeVideo) {
       setIsPlaying(false);
       return;
@@ -216,19 +288,23 @@ export function useShortPlayer({
     };
   }, []);
 
+  useEffect(() => {
+    isMountedRef.current = true;
+
+    return () => {
+      isMountedRef.current = false;
+    };
+  }, []);
+
   const registerVideo = useCallback(
     (index: number, video: HTMLVideoElement | null) => {
-      if (video) {
-        videoRefs.current.set(index, video);
-      } else {
-        videoRefs.current.delete(index);
-      }
+      registerMedia(index, video);
 
       if (index === activeIndexRef.current) {
         setActiveVideo(video);
       }
     },
-    [],
+    [registerMedia],
   );
 
   const togglePlay = useCallback(() => {
@@ -252,9 +328,9 @@ export function useShortPlayer({
 
     if (!nextMuted && activeVideo) {
       activeVideo.muted = false;
-      void activeVideo.play().catch(() => setAutoplayBlocked(true));
+      void playVideo(activeVideo);
     }
-  }, [activeVideo, muted]);
+  }, [activeVideo, muted, playVideo]);
 
   const toggleCaptions = useCallback(() => {
     setShowCaptions((current) => !current);
@@ -281,6 +357,9 @@ export function useShortPlayer({
   }, [activeVideo]);
 
   const close = useCallback(() => {
+    releasedRef.current = true;
+    releaseMedia();
+
     const entryPath = takeShortsEntry();
 
     if (entryPath) {
@@ -289,7 +368,7 @@ export function useShortPlayer({
     }
 
     router.push('/');
-  }, [router]);
+  }, [releaseMedia, router]);
 
   const next = useCallback(() => {
     api?.scrollNext();
@@ -319,17 +398,7 @@ export function useShortPlayer({
     };
 
     const onKeyDown = (event: KeyboardEvent) => {
-      if (hasOpenDialog()) {
-        return;
-      }
-
-      const isArrowKey = event.key === 'ArrowDown' || event.key === 'ArrowUp';
-
-      if (
-        isInteractiveTarget(event.target) &&
-        event.key !== 'Escape' &&
-        (!isArrowKey || isFormControlTarget(event.target))
-      ) {
+      if (shouldIgnoreShortcut(event)) {
         return;
       }
 

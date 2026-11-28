@@ -12,6 +12,18 @@ export const getShortsPlayerPage = (page: Page) => {
     slides: page.getByTestId('short-player-slide'),
     tapLayer: page.getByTestId('short-player-tap-layer').first(),
     video: page.locator('video').first(),
+    logo: page.getByTestId('shorts-logo'),
+    logoSlot: page.getByTestId('shorts-logo-slot'),
+    commentCount: page.getByTestId('short-comments-count'),
+    commentsToggle: page.locator('[data-track="shorts:comments"]'),
+    commentsPanel: page.getByTestId('shorts-comments-panel'),
+    commentsSheet: page.getByTestId('shorts-comments-sheet'),
+    commentsBackdrop: page.getByTestId('shorts-comments-backdrop'),
+    commentsHandle: page.getByTestId('shorts-comments-handle'),
+    commentsBody: page.getByTestId('shorts-comments-body'),
+    commentsClose: page.locator('[data-track="shorts:comments:close"]'),
+    commentItems: page.locator('[data-track-section="comments:item"]'),
+    commentComposer: page.getByPlaceholder('Add a comment...'),
 
     goto: async (slug: string) => {
       await page.goto(`/en/shorts/${slug}/`);
